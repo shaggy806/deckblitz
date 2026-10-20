@@ -976,9 +976,18 @@ function evalStaticCondition(
       // the X a permanent was cast with, which its own enters trigger knows
       // (rule 107.3m) and passes in. Anywhere else there is no X to read.
       return opts.x !== undefined && compareNum(opts.x, condition.compare);
+    case "trigger-object": {
+      // A triggered ability's intervening-if (rule 603.4), asked about the
+      // object whose event fired it — passed in as it triggers and as it
+      // resolves, read as it last existed if it has left (608.2h). A static
+      // ability has none, and this is false there.
+      const id = opts.triggerObject;
+      if (id === undefined) return false;
+      // A spell on the stack (a cast trigger's) is read as it is.
+      return matchesFilter(state, registry, id, condition.filter, { you, lastKnown: state.objects[id]?.zone !== "stack" });
+    }
     case "target":
     case "target-chosen":
-    case "trigger-object":
     case "sacrificed":
     case "resolved-this-turn":
     case "this-way":

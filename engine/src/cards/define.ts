@@ -890,9 +890,11 @@ export type StaticCondition =
    * matches `filter` — Akoum Hellkite's "Whenever a land you control enters,
    * … If that land is a Mountain, [it] deals 2 damage instead".
    *
-   * Only meaningful inside a `conditional` effect of a triggered ability,
-   * where `ResolutionContext.triggerObject` is set; a *static* ability has no
-   * triggering object and this is always false there. A triggering
+   * Meaningful in a triggered ability: inside a `conditional` effect, or as
+   * the ability's own intervening-if `condition` ("whenever a creature you
+   * control dies, if it was a Bear, …" — rule 603.4, asked as it triggers
+   * and again as it resolves about the same object). A *static* ability has
+   * no triggering object and this is always false there. A triggering
    * permanent that has left the battlefield since is matched as it last
    * existed there (rule 608.2h — "if it was a Saproling").
    */

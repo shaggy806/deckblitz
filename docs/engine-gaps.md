@@ -210,9 +210,6 @@ that needs it is authored.
   which ends with the turn anyway, keeping the lasting counter — the better choice unless being
   tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
   on purpose (found 2026-10-19, building shield counters).
-- **A trigger's top-level `trigger-object` condition is always false.** `characteristics.ts`
-  answers it only inside a `conditional` effect, so a card that puts it on the trigger never
-  triggers. Obscura Ascendancy uses a trigger `filter` plus a resolution `conditional`.
 - **`cast-now`'s `play` plays a land only from exile.** `whyCannotPlayLandNow` refuses a card
   not in exile, so "you may play a land from the top of your library" (Ziatora's Envoy) can't
   be written though the doc says any offered land.

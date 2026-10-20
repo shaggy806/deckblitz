@@ -17216,68 +17216,7 @@ export class Game {
           // damage a creature just dealt a player (Old Gnawbone). ROADMAP P4b.
           // The object whose entering / attacking / etc. fired this trigger —
           // for `create-token-copy` `of: "trigger-object"` (Miirym). P5b.
-          const triggerObject =
-            // A damage trigger's object: the permanent dealt it, for the
-            // receiving end; the source that dealt it ("it deals that much
-            // damage"), for the dealing end.
-            event.type === "damage-dealt"
-              ? ability.trigger.on === "dealt-damage"
-                ? event.target.kind === "object"
-                  ? event.target.object
-                  : undefined
-                : event.source
-              : event.type === "permanent-entered-battlefield" ||
-            event.type === "permanent-destroyed" ||
-            event.type === "permanent-left-battlefield" ||
-            event.type === "permanent-sacrificed" ||
-            event.type === "permanent-transformed" ||
-            event.type === "became-monstrous" ||
-            event.type === "became-saddled" ||
-            event.type === "permanent-exerted" ||
-            // "Whenever a creature you control explores, … it" — the explorer.
-            event.type === "explored" ||
-            // "Whenever a permanent you control is turned face up … it"
-            // (Trail of Mystery).
-            event.type === "permanent-turned-face-up"
-              ? event.object
-              : event.type === "chapter-resolved"
-                ? event.saga
-              : event.type === "ring-tempted"
-                ? (event.chosen ?? undefined)
-              : event.type === "attacker-declared" ||
-                  event.type === "attacked-alone" ||
-                  event.type === "attacker-blocked"
-                ? event.attacker
-                : // The blocker: "whenever a creature you control blocks, it
-                  // gets +X/+X" (Doran, Besieged by Time).
-                  event.type === "blocker-declared"
-                  ? event.blocker
-                  : event.type === "object-targeted"
-                  ? event.object
-                  : // The ability just activated: "copy that ability".
-                    event.type === "ability-activated"
-                    ? event.ability
-                  : // The spell that was cast, so a cast trigger can read it —
-                    // "damage equal to **that spell's** mana value" is a
-                    // `{ manaValueOf: "trigger-object" }`, which read 0 without
-                    // this.
-                    event.type === "spell-cast"
-                    ? event.object
-                    : // Magecraft's copy: the copy is "that spell".
-                      event.type === "spell-copied"
-                      ? event.copy
-                      : // The card drawn: its controller is who drew it, the
-                        // "that player" of a `draws` trigger.
-                        event.type === "card-drawn" || event.type === "counter-added"
-                        ? event.object
-                        : // The permanent that untapped or became tapped:
-                          // "that permanent's controller" (Mesmeric Orb), "it
-                          // deals 1 damage" (Hawkeye's Bow).
-                          event.type === "permanent-untapped" ||
-                            event.type === "permanent-tapped" ||
-                            event.type === "creature-fought"
-                          ? event.object
-                          : undefined;
+          const triggerObject = this.eventTriggerObject(ability.trigger, event);
           const powerOfId =
             event.type === "permanent-entered-battlefield"
               ? event.object
@@ -18732,14 +18671,83 @@ export class Game {
     });
   }
 
+  /** The object whose event fired a trigger — the permanent entering, attacking,
+   * dying…, the spell cast, the source of the damage (or the permanent dealt it,
+   * for `dealt-damage`). What `ResolutionContext.triggerObject` names, and what
+   * an intervening-if is asked about as the ability triggers (rule 603.4) —
+   * the same object it's asked about again on resolution. */
+  private eventTriggerObject(trigger: TriggerSpec, event: GameEvent): ObjectId | undefined {
+    return (
+      // A damage trigger's object: the permanent dealt it, for the
+      // receiving end; the source that dealt it ("it deals that much
+      // damage"), for the dealing end.
+      event.type === "damage-dealt"
+        ? trigger.on === "dealt-damage"
+          ? event.target.kind === "object"
+            ? event.target.object
+            : undefined
+          : event.source
+        : event.type === "permanent-entered-battlefield" ||
+      event.type === "permanent-destroyed" ||
+      event.type === "permanent-left-battlefield" ||
+      event.type === "permanent-sacrificed" ||
+      event.type === "permanent-transformed" ||
+      event.type === "became-monstrous" ||
+      event.type === "became-saddled" ||
+      event.type === "permanent-exerted" ||
+      // "Whenever a creature you control explores, … it" — the explorer.
+      event.type === "explored" ||
+      // "Whenever a permanent you control is turned face up … it"
+      // (Trail of Mystery).
+      event.type === "permanent-turned-face-up"
+        ? event.object
+        : event.type === "chapter-resolved"
+          ? event.saga
+        : event.type === "ring-tempted"
+          ? (event.chosen ?? undefined)
+        : event.type === "attacker-declared" ||
+            event.type === "attacked-alone" ||
+            event.type === "attacker-blocked"
+          ? event.attacker
+          : // The blocker: "whenever a creature you control blocks, it
+            // gets +X/+X" (Doran, Besieged by Time).
+            event.type === "blocker-declared"
+            ? event.blocker
+            : event.type === "object-targeted"
+            ? event.object
+            : // The ability just activated: "copy that ability".
+              event.type === "ability-activated"
+              ? event.ability
+            : // The spell that was cast, so a cast trigger can read it —
+              // "damage equal to **that spell's** mana value" is a
+              // `{ manaValueOf: "trigger-object" }`, which read 0 without
+              // this.
+              event.type === "spell-cast"
+              ? event.object
+              : // Magecraft's copy: the copy is "that spell".
+                event.type === "spell-copied"
+                ? event.copy
+                : // The card drawn: its controller is who drew it, the
+                  // "that player" of a `draws` trigger.
+                  event.type === "card-drawn" || event.type === "counter-added"
+                  ? event.object
+                  : // The permanent that untapped or became tapped:
+                    // "that permanent's controller" (Mesmeric Orb), "it
+                    // deals 1 damage" (Hawkeye's Bow).
+                    event.type === "permanent-untapped" ||
+                      event.type === "permanent-tapped" ||
+                      event.type === "creature-fought"
+                    ? event.object
+                    : undefined
+    );
+  }
+
   /** The object an intervening-if asks about as the ability triggers (see
    * `ConditionOptions.triggerObject`): the permanent entering, or the spell
    * whose casting fired a cast trigger. What it is on resolution is the
    * ability's own `triggerObject`, the same object. */
   private conditionTriggerObject(trigger: TriggerSpec, event: GameEvent): ObjectId | undefined {
-    if (event.type === "permanent-entered-battlefield") return event.object;
-    if (trigger.on === "cast-spell" && event.type === "spell-cast") return event.object;
-    return undefined;
+    return this.eventTriggerObject(trigger, event);
   }
 
   /**
