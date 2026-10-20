@@ -266,6 +266,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **A multi-target flicker's leaves aren't one batch** (603.2c): `flickerByEffect` exiles inside `withLeaveBatch`, snapshotting every target first, so each leaves trigger reads the board as it stood (Brago, Ghostly Flicker, Eerie Interlude) — ready for Aang's batched leave trigger (2026-10-20).
 - **A mass effect's filter can't read a dynamic amount** — logged by mistake: `bindDynamicCompares` already binds every `{ amount }` operand as an effect applies. Pinned by `mass-effect-dynamic-filter.test.ts`; Zar Ojanen, Scion of Efrava authored (2026-10-20).
 - **End-step token removal resolves without the stack** (603.7): `sacrificeAtEndStep` / `exileAtEndStep` (and encore) now set up one delayed triggered ability over the tokens made — on the stack at the next end step, respondable, counterable, copyable; the tokens are separate objects so it reaches each (2026-10-20).
 - **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): `died`, `exiled` and `sacrificed` entries now carry the stint they left, and `excludeSelf` leaves out only the source's current stint — White Glove Gourmand counts its own death from before it came back (2026-10-20).

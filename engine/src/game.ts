@@ -28349,32 +28349,38 @@ export class Game {
       delayed === undefined ? undefined : (link ??= `flicker-${this.state.nextObjectSeq++}`);
     const exiled: ObjectId[] = [];
     const seen = new Set<ObjectId>();
-    for (const target of targets) {
-      if (target.kind !== "object" || seen.has(target.object)) continue;
-      seen.add(target.object);
-      // "Exile Norin": the permanent that put this ability on the stack, not
-      // a new object that has the same id because it left and came back.
-      if (
-        options.fromSource === true &&
-        target.object === source &&
-        this.resolvingSourceTimestamp !== null &&
-        this.state.objects[source]?.timestamp !== this.resolvingSourceTimestamp
-      ) {
-        continue;
+    // Exiling them all is one event (rule 603.2c — Brago, Eerie Interlude):
+    // each one's leaves trigger sees the rest go, read as the board stood
+    // before any moved.
+    this.withLeaveBatch(() => {
+      this.snapshotLeaving(targets.flatMap((t) => (t.kind === "object" ? [t.object] : [])));
+      for (const target of targets) {
+        if (target.kind !== "object" || seen.has(target.object)) continue;
+        seen.add(target.object);
+        // "Exile Norin": the permanent that put this ability on the stack, not
+        // a new object that has the same id because it left and came back.
+        if (
+          options.fromSource === true &&
+          target.object === source &&
+          this.resolvingSourceTimestamp !== null &&
+          this.state.objects[source]?.timestamp !== this.resolvingSourceTimestamp
+        ) {
+          continue;
+        }
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        if (object === undefined || object.zone !== "battlefield") continue;
+        const isToken = object.isToken;
+        if (!this.moveObject(id, "exile")) continue;
+        if (this.state.objects[id]?.zone !== "exile") continue;
+        this.emit({ type: "permanent-exiled", object: id });
+        if (isToken) continue;
+        // After the move: `moveObject` clears the link on the way.
+        const exileLink = linkNow();
+        if (exileLink !== undefined) this.state.objects[id].flickerLink = exileLink;
+        exiled.push(id);
       }
-      const id = this.splitOneFromStack(target.object);
-      const object = this.state.objects[id];
-      if (object === undefined || object.zone !== "battlefield") continue;
-      const isToken = object.isToken;
-      if (!this.moveObject(id, "exile")) continue;
-      if (this.state.objects[id]?.zone !== "exile") continue;
-      this.emit({ type: "permanent-exiled", object: id });
-      if (isToken) continue;
-      // After the move: `moveObject` clears the link on the way.
-      const exileLink = linkNow();
-      if (exileLink !== undefined) this.state.objects[id].flickerLink = exileLink;
-      exiled.push(id);
-    }
+    });
     if (delayed === undefined) {
       // One coming back has an "as this enters" choice to make first (rule
       // 614.12 — a blinked Clone copies afresh): it's asked now, and the

@@ -175,7 +175,6 @@ there and move this line to `COMPLETED.md`.
 - **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.
 - **A reflexive trigger's target filter reads the creating ability's `triggerValue`** (603.12): `{ amount: { triggerValue: true } }` inside it sees the parent's value, not the reflexive one (found authoring Argentum Masticore).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
-- **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
 - **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `exileIfItWouldLeave` survives ability loss (Geth, Thane of Contracts; Llanowar Greenwidow waits).
