@@ -99,15 +99,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   boxes, 612.5, is built). ROADMAP's Phase 10 deferred these as large or niche. None of them
   blocks ordinary Commander play. The alt-cast long tail left by Phase 6 (retrace, Warp,
   Bestow, Prototype, …) is in AUTHORING §15 and the limitation ledger.
-- **End-step token removal resolves without the stack.** "Exile it (sacrifice it) at the
-  beginning of the next end step" is a delayed triggered ability (rule 603.7), but
-  `create-token` / `create-token-copy`'s `exileAtEndStep` and `sacrificeAtEndStep` (Flameshadow
-  Conjuring, Molten Echoes, Twinflame, Kiki-Jiki, mobilize, encore …) are a flag on the token
-  that `Game.endStepActions` acts on as the step begins. So nobody can respond to it, counter it
-  (Sublime Epiphany — Flameshadow Conjuring's ruling: a countered one leaves the token for good)
-  or copy it (Strionic Resonator). `exileAtEndOfCombat` (myriad) already sets up a real delayed
-  trigger over the tokens it made; these need the same, kept out of token stacks, and the
-  sacrifice made by the token's controller then (rule 701.21a).
 - **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
   affected player (or the controller of the affected object) order the replacement and
   prevention effects that apply to one event. The engine picks the order best for them, as

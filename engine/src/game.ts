@@ -21944,13 +21944,18 @@ export class Game {
             sacrificeAtEndStep,
             gainUntilEndOfTurn,
             goadedBy,
-            thenCounters !== undefined || separate === true,
+            thenCounters !== undefined || separate === true || sacrificeAtEndStep === true || exileAtEndStep === true,
             basePt,
             exileAtEndStep === true,
             attacksThisCombat === true,
             gainKeywords,
             attachTo,
           );
+          // "Sacrifice / exile them at the beginning of the next end step":
+          // a delayed triggered ability over these tokens (rule 603.7).
+          if (sacrificeAtEndStep === true || exileAtEndStep === true) {
+            this.endStepTokenRemoval(source, controller, made, sacrificeAtEndStep === true ? "sacrifice" : "exile");
+          }
           if (thenCounters !== undefined && thenCounters.amount > 0) {
             for (const id of made) {
               this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, controller);
@@ -23479,6 +23484,7 @@ export class Game {
    * controller is meaningless.
    */
   private encore(controller: PlayerId, source: ObjectId): void {
+    const made: ObjectId[] = [];
     for (const opponent of this.scopedPlayers(controller, "each-opponent")) {
       const before = new Set(this.state.zones.shared.battlefield);
       // "The tokens gain haste" (rule 702.141a): an effect on them, not a
@@ -23495,12 +23501,14 @@ export class Game {
         if (before.has(id)) continue;
         const token = this.state.objects[id];
         if (token === undefined) continue;
-        // "…that attacks that opponent this turn if able", and is sacrificed
-        // — not exiled — at the beginning of the next end step.
+        // "…that attacks that opponent this turn if able".
         token.mustAttackPlayer = opponent;
-        token.sacrificeAtEndStep = true;
+        made.push(id);
       }
     }
+    // "Sacrifice them at the beginning of the next end step" — sacrificed,
+    // not exiled (rule 702.141a): one delayed trigger over them all.
+    this.endStepTokenRemoval(source, controller, made, "sacrifice");
   }
 
   /** Untapped permanents `player` controls that could pay an
@@ -24138,6 +24146,9 @@ export class Game {
       if (m.addTypes !== undefined) copiedTypes = [...copiedTypes, ...m.addTypes];
     }
     const instead = copiedTypes.includes("creature") ? this.creatureTokenSubstitute(controller) : undefined;
+    // Tokens removed at the end step are each their own object, so the
+    // delayed trigger over them reaches every one (`endStepTokenRemoval`).
+    const removedAtEnd = opts.exileAtEndStep || opts.sacrificeAtEndStep === true;
     const made = this.withEnterBatch(() => [
       ...(instead !== undefined
         ? this.mintTokenBatch(
@@ -24151,6 +24162,8 @@ export class Game {
             false,
             opts.tapped === true,
             opts.sacrificeAtEndStep === true,
+            undefined,
+            removedAtEnd,
           )
         : this.mintTokenBatch(
             controller,
@@ -24163,6 +24176,8 @@ export class Game {
             true,
             opts.tapped === true,
             opts.sacrificeAtEndStep === true,
+            undefined,
+            removedAtEnd,
           )),
       // Chatterfang's Squirrels: nothing of what was copied, only what the
       // effect does to the tokens (the ruling).
@@ -24178,9 +24193,21 @@ export class Game {
           false,
           opts.tapped === true,
           opts.sacrificeAtEndStep === true,
+          undefined,
+          removedAtEnd,
         ),
       ),
     ]);
+    // "Exile / sacrifice them at the beginning of the next end step": one
+    // delayed triggered ability over every copy made (rule 603.7).
+    if (removedAtEnd && opts.source !== undefined) {
+      this.endStepTokenRemoval(
+        opts.source,
+        opts.effectController ?? controller,
+        made,
+        opts.sacrificeAtEndStep === true ? "sacrifice" : "exile",
+      );
+    }
     // "…that's tapped and attacking" (rule 508.4).
     if (opts.attacking !== undefined) this.putIntoAttack(made, controller, opts.attacking);
     // "Exile the tokens at end of combat": one delayed triggered ability over
@@ -28555,6 +28582,45 @@ export class Game {
   /** Record a delayed triggered ability — see the `delayed-trigger` effect.
    * A leave-keyed one watches the permanent's current battlefield stint, and
    * isn't made at all for something that isn't on the battlefield. */
+  /**
+   * "Sacrifice (exile) it at the beginning of the next end step" for tokens
+   * just made (Kiki-Jiki, Flameshadow Conjuring, encore, mobilize): one
+   * delayed triggered ability over them (rule 603.7) — it uses the stack, so
+   * it can be responded to, countered (the token stays for good) or copied.
+   * The sacrifice is by the ability's controller, only while they control the
+   * token (701.21a); one that has left the battlefield is left alone (400.7).
+   * The tokens' end-step flags go — the trigger is what removes them now.
+   */
+  private endStepTokenRemoval(
+    source: ObjectId,
+    controller: PlayerId,
+    made: readonly ObjectId[],
+    how: "sacrifice" | "exile",
+  ): void {
+    if (made.length === 0) return;
+    for (const id of made) {
+      const token = this.state.objects[id];
+      if (token === undefined) continue;
+      token.exileAtEndStep = false;
+      delete token.sacrificeAtEndStep;
+    }
+    this.createDelayedTrigger(
+      source,
+      controller,
+      "next-end-step",
+      {
+        kind: "for-each-target",
+        from: 0,
+        effect: how === "sacrifice" ? { kind: "sacrifice-target", target: 0 } : { kind: "exile", target: 0 },
+        simultaneous: true,
+      },
+      how === "sacrifice"
+        ? "Sacrifice the tokens at the beginning of the next end step."
+        : "Exile the tokens at the beginning of the next end step.",
+      made.map((id) => ({ kind: "object", object: id })),
+    );
+  }
+
   private createDelayedTrigger(
     source: ObjectId,
     controller: PlayerId,

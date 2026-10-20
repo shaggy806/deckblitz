@@ -187,7 +187,6 @@ there and move this line to `COMPLETED.md`.
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
 - **Not modeled**: battles, dungeons/Initiative, banding, Companion, snow sources, word-replacing text change (612.2).
-- **End-step token removal resolves without the stack** (603.7, 701.21a).
 - **Replacement order is chosen for the affected player, never asked** (616.1).
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**
 - **Toxic's last two shapes** (Skrelv, Defector Mite; Skrelv's Hive).

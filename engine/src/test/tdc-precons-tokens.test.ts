@@ -1467,7 +1467,11 @@ describe("Divine Visitation", () => {
     expect(copy).toBeDefined();
     expect(game.characteristics(copy).keywords.has("haste")).toBe(true);
     expect(game.state.objects[copy].mustAttackPlayer).toBe(B);
-    expect(game.state.objects[copy].sacrificeAtEndStep).toBe(true);
+    expect(
+      game.state.delayedTriggers.some(
+        (t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === copy),
+      ),
+    ).toBe(true);
   });
 
   it("amass: the Angel made instead isn't an Army, so it gets no counters", () => {

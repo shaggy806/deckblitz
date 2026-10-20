@@ -1042,7 +1042,11 @@ For the common "create a token, then get rid of it at end of turn" shape, use
 `create-token` / `create-token-copy`'s `sacrificeAtEndStep` (Kiki-Jiki,
 Chandra, Acolyte of Flame) or `exileAtEndStep` (Miirym) instead — the delayed
 ability would have no way to name a token that didn't exist when it was set up.
-Neither goes on the stack yet (§15, "Partial").
+Each sets up that delayed trigger over the tokens it made (rule 603.7 —
+`endStepTokenRemoval`): it goes on the stack as the next end step begins, can be
+responded to, countered (the tokens stay) or copied, and a sacrifice is by its
+controller while they control the token (701.21a). The tokens are each their
+own object, so it reaches every one.
 
 ### P/T, counters, keywords
 
@@ -4531,15 +4535,6 @@ Delete an entry in the same commit as the feature that retires it.
   spree spell) cast that way has no modes and does nothing, and kicker or a
   gift is never offered (BACKLOG, "Engine rules gaps"). Cast any other way —
   from a hand, a graveyard permission, a `cast-now` — they're whole.
-- **End-step token removal doesn't use the stack.** "Exile it (sacrifice
-  it) at the beginning of the next end step" is a delayed triggered ability
-  (rule 603.7), but `exileAtEndStep` and `sacrificeAtEndStep` (§6 — Flameshadow
-  Conjuring, Molten Echoes, Kiki-Jiki, mobilize, encore) are a flag on the
-  token that `Game.endStepActions` acts on as the step begins. Nothing can
-  respond to it, counter it (Sublime Epiphany; Flameshadow Conjuring's ruling
-  "perhaps because the delayed triggered ability is countered" can't happen)
-  or copy it (Strionic Resonator). `exileAtEndOfCombat` is a real delayed
-  trigger already.
 - **Text-change** (rule 612): exchanging text boxes is built (612.5 —
   `exchangeTextOnEnter`, Deadpool, Trading Card; `GameObject.textFrom`, and
   every ability read goes through `rulesTextName`). Word replacement isn't
