@@ -129,6 +129,7 @@ import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
 import _poolDiveDown from "../pool/dive-down.js";
 import _poolDiverSkaab from "../pool/diver-skaab.js";
+import _poolDormantGrove from "../pool/dormant-grove.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
@@ -437,6 +438,7 @@ import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
+import _poolToxicScorpion from "../pool/toxic-scorpion.js";
 import _poolTraverseEternity from "../pool/traverse-eternity.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
@@ -468,6 +470,7 @@ import _poolWellwisher from "../pool/wellwisher.js";
 import _poolWestfoldRider from "../pool/westfold-rider.js";
 import _poolWhispererOfTheWilds from "../pool/whisperer-of-the-wilds.js";
 import _poolWhiteLotusReinforcements from "../pool/white-lotus-reinforcements.js";
+import _poolWildsongHowler from "../pool/wildsong-howler.js";
 import _poolWilt from "../pool/wilt.js";
 import _poolWindriderPatrol from "../pool/windrider-patrol.js";
 import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
@@ -492,6 +495,7 @@ import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
 import _tokensSorcererRoleToken from "../tokens/sorcerer-role-token.js";
 import _tokensSpiritTokenPhantomInterference from "../tokens/spirit-token-phantom-interference.js";
+import _tokensWolfTokenKessigWolfrider from "../tokens/wolf-token-kessig-wolfrider.js";
 import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
 
@@ -623,6 +627,7 @@ const shard: CardShard = {
     _poolDismember,
     _poolDiveDown,
     _poolDiverSkaab,
+    _poolDormantGrove,
     _poolDragonclawStrike,
     _poolDragonkinBerserker,
     _poolDragonsPresence,
@@ -931,6 +936,7 @@ const shard: CardShard = {
     _poolTokkaRahzarTerribleTwos,
     _poolTomeRaider,
     _poolTopiaryLecturer,
+    _poolToxicScorpion,
     _poolTraverseEternity,
     _poolTraxosAcademyGuardian,
     _poolTriskelion,
@@ -962,6 +968,7 @@ const shard: CardShard = {
     _poolWestfoldRider,
     _poolWhispererOfTheWilds,
     _poolWhiteLotusReinforcements,
+    _poolWildsongHowler,
     _poolWilt,
     _poolWindriderPatrol,
     _poolWinterMisanthropicGuide,
@@ -988,6 +995,7 @@ const shard: CardShard = {
     _tokensRobotVillainToken,
     _tokensSorcererRoleToken,
     _tokensSpiritTokenPhantomInterference,
+    _tokensWolfTokenKessigWolfrider,
     _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,
   ],

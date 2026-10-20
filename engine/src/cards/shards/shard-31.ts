@@ -48,6 +48,7 @@ import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBloodCrypt from "../pool/blood-crypt.js";
+import _poolBloodswornKnight from "../pool/bloodsworn-knight.js";
 import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
 import _poolBloodthroneVampire from "../pool/bloodthrone-vampire.js";
 import _poolBogRaiders from "../pool/bog-raiders.js";
@@ -67,11 +68,13 @@ import _poolCarefulCultivation from "../pool/careful-cultivation.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
+import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
+import _poolCipherboundSpirit from "../pool/cipherbound-spirit.js";
 import _poolClearwaterPathway from "../pool/clearwater-pathway.js";
 import _poolClinquantSkymage from "../pool/clinquant-skymage.js";
 import _poolCloudElemental from "../pool/cloud-elemental.js";
@@ -115,6 +118,7 @@ import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
 import _poolDisturbedSlumber from "../pool/disturbed-slumber.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
 import _poolDizzySpell from "../pool/dizzy-spell.js";
+import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
 import _poolDragonMoose from "../pool/dragon-moose.js";
 import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
@@ -169,6 +173,7 @@ import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
+import _poolGiftOfFangs from "../pool/gift-of-fangs.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
 import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
@@ -202,12 +207,14 @@ import _poolHerosResolve from "../pool/heros-resolve.js";
 import _poolHideousVisage from "../pool/hideous-visage.js";
 import _poolHighwayRobbery from "../pool/highway-robbery.js";
 import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
+import _poolHoneymoonHearse from "../pool/honeymoon-hearse.js";
 import _poolHonoredDreyleader from "../pool/honored-dreyleader.js";
 import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
 import _poolHorizonExplorer from "../pool/horizon-explorer.js";
 import _poolHornedStoneseeker from "../pool/horned-stoneseeker.js";
 import _poolHouseCartographer from "../pool/house-cartographer.js";
 import _poolHulkingDevil from "../pool/hulking-devil.js";
+import _poolHungryRidgewolf from "../pool/hungry-ridgewolf.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
@@ -238,6 +245,7 @@ import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
 import _poolKellansLightblades from "../pool/kellans-lightblades.js";
+import _poolKessigWolfrider from "../pool/kessig-wolfrider.js";
 import _poolKiteShield from "../pool/kite-shield.js";
 import _poolKitesail from "../pool/kitesail.js";
 import _poolKithkinDaggerdare from "../pool/kithkin-daggerdare.js";
@@ -250,6 +258,7 @@ import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
 import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
+import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
@@ -463,6 +472,7 @@ import _poolWaveGoodbye from "../pool/wave-goodbye.js";
 import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
 import _poolWearyPrisoner from "../pool/weary-prisoner.js";
 import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
+import _poolWeddingCrasher from "../pool/wedding-crasher.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
@@ -480,6 +490,7 @@ import _tokensFoxToken from "../tokens/fox-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
 import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
+import _tokensHumanSoldierTokenTorensFistOfTheAngels from "../tokens/human-soldier-token-torens-fist-of-the-angels.js";
 import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
 import _tokensInsectTokenOverlordOfTheMistmoors from "../tokens/insect-token-overlord-of-the-mistmoors.js";
 import _tokensMoonfolkToken from "../tokens/moonfolk-token.js";
@@ -538,6 +549,7 @@ const shard: CardShard = {
     _poolBlightedAgent,
     _poolBlinkmothWell,
     _poolBloodCrypt,
+    _poolBloodswornKnight,
     _poolBloodthornTaunter,
     _poolBloodthroneVampire,
     _poolBogRaiders,
@@ -557,11 +569,13 @@ const shard: CardShard = {
     _poolCargoShip,
     _poolCastleSengir,
     _poolCatalystElemental,
+    _poolCatapultFodder,
     _poolChaosTerminatorLord,
     _poolChargeOfTheMites,
     _poolCharityExtractor,
     _poolChitteringDispatcher,
     _poolChromaticStar,
+    _poolCipherboundSpirit,
     _poolClearwaterPathway,
     _poolClinquantSkymage,
     _poolCloudElemental,
@@ -605,6 +619,7 @@ const shard: CardShard = {
     _poolDisturbedSlumber,
     _poolDivineArrow,
     _poolDizzySpell,
+    _poolDorotheaVengefulVictim,
     _poolDrMadisonLi,
     _poolDragonMoose,
     _poolDragonlairSpider,
@@ -659,6 +674,7 @@ const shard: CardShard = {
     _poolGenesisChamber,
     _poolGhostlyFlicker,
     _poolGideonsLawkeeper,
+    _poolGiftOfFangs,
     _poolGimlisFury,
     _poolGixianSkullflayer,
     _poolGlisteningDawn,
@@ -692,12 +708,14 @@ const shard: CardShard = {
     _poolHideousVisage,
     _poolHighwayRobbery,
     _poolHoldoutSettlement,
+    _poolHoneymoonHearse,
     _poolHonoredDreyleader,
     _poolHopelessNightmare,
     _poolHorizonExplorer,
     _poolHornedStoneseeker,
     _poolHouseCartographer,
     _poolHulkingDevil,
+    _poolHungryRidgewolf,
     _poolHuntedHorror,
     _poolHydroelectricLaboratory,
     _poolIcewindElemental,
@@ -728,6 +746,7 @@ const shard: CardShard = {
     _poolKathariScreecher,
     _poolKazanduRefuge,
     _poolKellansLightblades,
+    _poolKessigWolfrider,
     _poolKiteShield,
     _poolKitesail,
     _poolKithkinDaggerdare,
@@ -740,6 +759,7 @@ const shard: CardShard = {
     _poolKrosanGrip,
     _poolLagomosHandOfHatred,
     _poolLakeTownToymaker,
+    _poolLanternOfTheLost,
     _poolLeoninLightbringer,
     _poolLilysplashMentor,
     _poolLithomanticBarrage,
@@ -953,6 +973,7 @@ const shard: CardShard = {
     _poolWayOfTheDeathbringer,
     _poolWearyPrisoner,
     _poolWeatherseedFaeries,
+    _poolWeddingCrasher,
     _poolWickTheWhorledMind,
     _poolWipeClean,
     _poolWoodlandLiege,
@@ -972,6 +993,7 @@ const shard: CardShard = {
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
     _tokensHumanCitizenToken,
+    _tokensHumanSoldierTokenTorensFistOfTheAngels,
     _tokensIllusionTokenPlain,
     _tokensInsectTokenOverlordOfTheMistmoors,
     _tokensMoonfolkToken,

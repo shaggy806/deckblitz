@@ -43,6 +43,7 @@ import _poolBlaringRecruiter from "../pool/blaring-recruiter.js";
 import _poolBlightedBat from "../pool/blighted-bat.js";
 import _poolBlisterBeetle from "../pool/blister-beetle.js";
 import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
+import _poolBloodswornSquire from "../pool/bloodsworn-squire.js";
 import _poolBlossomingBogbeast from "../pool/blossoming-bogbeast.js";
 import _poolBoneSplinters from "../pool/bone-splinters.js";
 import _poolBookOfMazarbul from "../pool/book-of-mazarbul.js";
@@ -60,6 +61,7 @@ import _poolCadaverImp from "../pool/cadaver-imp.js";
 import _poolCaldaiaStrongarm from "../pool/caldaia-strongarm.js";
 import _poolCanyonCrawler from "../pool/canyon-crawler.js";
 import _poolCaretakersTalent from "../pool/caretakers-talent.js";
+import _poolCartographersSurvey from "../pool/cartographers-survey.js";
 import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
 import _poolCausticHound from "../pool/caustic-hound.js";
 import _poolCavernThoctar from "../pool/cavern-thoctar.js";
@@ -76,6 +78,7 @@ import _poolCodieVociferousCodex from "../pool/codie-vociferous-codex.js";
 import _poolColorfulFeiyiSparrow from "../pool/colorful-feiyi-sparrow.js";
 import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
 import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
+import _poolConcealingCurtains from "../pool/concealing-curtains.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
@@ -136,6 +139,7 @@ import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
 import _poolFairgroundsPatrol from "../pool/fairgrounds-patrol.js";
 import _poolFalconWingedWonder from "../pool/falcon-winged-wonder.js";
+import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
@@ -185,6 +189,7 @@ import _poolHavocDevils from "../pool/havoc-devils.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
 import _poolHellcatUndyingVigilante from "../pool/hellcat-undying-vigilante.js";
+import _poolHenrikaInfernalSeer from "../pool/henrika-infernal-seer.js";
 import _poolHenzieToolboxTorre from "../pool/henzie-toolbox-torre.js";
 import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
 import _poolHiddenHideout from "../pool/hidden-hideout.js";
@@ -314,12 +319,14 @@ import _poolReconnaissance from "../pool/reconnaissance.js";
 import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
+import _poolRendingFlame from "../pool/rending-flame.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
 import _poolRepurposingBay from "../pool/repurposing-bay.js";
 import _poolRescueLeopard from "../pool/rescue-leopard.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
+import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRisonaAsariCommander from "../pool/risona-asari-commander.js";
@@ -376,6 +383,7 @@ import _poolSnoopingPage from "../pool/snooping-page.js";
 import _poolSnortingGahr from "../pool/snorting-gahr.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
+import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
@@ -539,6 +547,7 @@ const shard: CardShard = {
     _poolBlightedBat,
     _poolBlisterBeetle,
     _poolBloodcrusherOfKhorne,
+    _poolBloodswornSquire,
     _poolBlossomingBogbeast,
     _poolBoneSplinters,
     _poolBookOfMazarbul,
@@ -556,6 +565,7 @@ const shard: CardShard = {
     _poolCaldaiaStrongarm,
     _poolCanyonCrawler,
     _poolCaretakersTalent,
+    _poolCartographersSurvey,
     _poolCaseOfTheCrimsonPulse,
     _poolCausticHound,
     _poolCavernThoctar,
@@ -572,6 +582,7 @@ const shard: CardShard = {
     _poolColorfulFeiyiSparrow,
     _poolColossalDreadmask,
     _poolCompleatedConjurer,
+    _poolConcealingCurtains,
     _poolContractHero,
     _poolCoralBarrier,
     _poolCoriMountainMonastery,
@@ -632,6 +643,7 @@ const shard: CardShard = {
     _poolFadeIntoAntiquity,
     _poolFairgroundsPatrol,
     _poolFalconWingedWonder,
+    _poolFalkenrathForebear,
     _poolFalkenrathMarauders,
     _poolFangrenMarauder,
     _poolFertileGround,
@@ -681,6 +693,7 @@ const shard: CardShard = {
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,
     _poolHellcatUndyingVigilante,
+    _poolHenrikaInfernalSeer,
     _poolHenzieToolboxTorre,
     _poolHeraldOfSecretStreams,
     _poolHiddenHideout,
@@ -810,12 +823,14 @@ const shard: CardShard = {
     _poolRedshiftRocketeerChief,
     _poolReignOfThePit,
     _poolRelicOfSauron,
+    _poolRendingFlame,
     _poolRenegadeDemon,
     _poolReprieve,
     _poolRepurposingBay,
     _poolRescueLeopard,
     _poolRestlessVinestalk,
     _poolRetchedWretch,
+    _poolRevealingEye,
     _poolRevivingMelody,
     _poolRingwraiths,
     _poolRisonaAsariCommander,
@@ -872,6 +887,7 @@ const shard: CardShard = {
     _poolSnortingGahr,
     _poolSolarTransformer,
     _poolSonicScrewdriver,
+    _poolSoulcipherBoard,
     _poolSoulcoilViper,
     _poolSoulknifeSpy,
     _poolSpiketailHatchling,

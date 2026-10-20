@@ -39,6 +39,7 @@ import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlanchwoodProwler from "../pool/blanchwood-prowler.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
+import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
@@ -87,10 +88,12 @@ import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDejaVu from "../pool/deja-vu.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
+import _poolDesperateFarmer from "../pool/desperate-farmer.js";
 import _poolDiamondWeapon from "../pool/diamond-weapon.js";
 import _poolDismalBackwater from "../pool/dismal-backwater.js";
 import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDogWalker from "../pool/dog-walker.js";
+import _poolDominatingVampire from "../pool/dominating-vampire.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
@@ -517,6 +520,7 @@ const shard: CardShard = {
     _poolBlackMagesRod,
     _poolBlanchwoodProwler,
     _poolBlightTitan,
+    _poolBloodHypnotist,
     _poolBloodtracker,
     _poolBloomwielderDryads,
     _poolBorosStrikeCaptain,
@@ -565,10 +569,12 @@ const shard: CardShard = {
     _poolDefiantSalvager,
     _poolDejaVu,
     _poolDerangedAssistant,
+    _poolDesperateFarmer,
     _poolDiamondWeapon,
     _poolDismalBackwater,
     _poolDisruptiveStormbrood,
     _poolDogWalker,
+    _poolDominatingVampire,
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,

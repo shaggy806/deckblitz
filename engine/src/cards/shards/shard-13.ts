@@ -76,6 +76,7 @@ import _poolCaregiver from "../pool/caregiver.js";
 import _poolCarrionAnts from "../pool/carrion-ants.js";
 import _poolCaseOfTheFilchedFalcon from "../pool/case-of-the-filched-falcon.js";
 import _poolCastleEmbereth from "../pool/castle-embereth.js";
+import _poolCatapultCaptain from "../pool/catapult-captain.js";
 import _poolCatharsShield from "../pool/cathars-shield.js";
 import _poolCaughtRedHanded from "../pool/caught-red-handed.js";
 import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
@@ -229,6 +230,7 @@ import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
 import _poolKiboUktabiPrince from "../pool/kibo-uktabi-prince.js";
+import _poolKindlyAncestor from "../pool/kindly-ancestor.js";
 import _poolKiorasFollower from "../pool/kioras-follower.js";
 import _poolKishlaTrawlers from "../pool/kishla-trawlers.js";
 import _poolKishlaVillage from "../pool/kishla-village.js";
@@ -272,6 +274,7 @@ import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMorphling from "../pool/morphling.js";
 import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
+import _poolNaturesEmbrace from "../pool/natures-embrace.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
 import _poolNervousGardener from "../pool/nervous-gardener.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
@@ -294,6 +297,7 @@ import _poolOverflowingInsight from "../pool/overflowing-insight.js";
 import _poolOverloadedMageRing from "../pool/overloaded-mage-ring.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPaladinElizabethTaggerdy from "../pool/paladin-elizabeth-taggerdy.js";
+import _poolPathOfPeril from "../pool/path-of-peril.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
@@ -314,6 +318,7 @@ import _poolRavagedHighlands from "../pool/ravaged-highlands.js";
 import _poolRavenousSquirrel from "../pool/ravenous-squirrel.js";
 import _poolRazorgrassAmbush from "../pool/razorgrass-ambush.js";
 import _poolRearingEmbermare from "../pool/rearing-embermare.js";
+import _poolReclusiveTaxidermist from "../pool/reclusive-taxidermist.js";
 import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
@@ -333,6 +338,7 @@ import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
+import _poolRuneboundWolf from "../pool/runebound-wolf.js";
 import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
@@ -389,6 +395,7 @@ import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
 import _poolSteadfastSentry from "../pool/steadfast-sentry.js";
 import _poolStirge from "../pool/stirge.js";
+import _poolStitchedAssistant from "../pool/stitched-assistant.js";
 import _poolStompingGround from "../pool/stomping-ground.js";
 import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
@@ -442,6 +449,7 @@ import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
+import _poolVampiresVengeance from "../pool/vampires-vengeance.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
@@ -566,6 +574,7 @@ const shard: CardShard = {
     _poolCarrionAnts,
     _poolCaseOfTheFilchedFalcon,
     _poolCastleEmbereth,
+    _poolCatapultCaptain,
     _poolCatharsShield,
     _poolCaughtRedHanded,
     _poolCavalierOfDawn,
@@ -719,6 +728,7 @@ const shard: CardShard = {
     _poolKeenGlidemaster,
     _poolKeeperOfSecrets,
     _poolKiboUktabiPrince,
+    _poolKindlyAncestor,
     _poolKiorasFollower,
     _poolKishlaTrawlers,
     _poolKishlaVillage,
@@ -762,6 +772,7 @@ const shard: CardShard = {
     _poolMorphling,
     _poolMutantSurveyor,
     _poolNarsetEnlightenedMaster,
+    _poolNaturesEmbrace,
     _poolNeedletoothPack,
     _poolNervousGardener,
     _poolNewGenerationsTechnique,
@@ -784,6 +795,7 @@ const shard: CardShard = {
     _poolOverloadedMageRing,
     _poolOwlinSpiralmancer,
     _poolPaladinElizabethTaggerdy,
+    _poolPathOfPeril,
     _poolPersonalTutor,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
@@ -804,6 +816,7 @@ const shard: CardShard = {
     _poolRavenousSquirrel,
     _poolRazorgrassAmbush,
     _poolRearingEmbermare,
+    _poolReclusiveTaxidermist,
     _poolReconstruction,
     _poolRedGhostIntangibleGenius,
     _poolResurgentBelief,
@@ -823,6 +836,7 @@ const shard: CardShard = {
     _poolRoyalFalcon,
     _poolRulikMonsWarrenChief,
     _poolRunThePlay,
+    _poolRuneboundWolf,
     _poolRuralRecruit,
     _poolRussetWolves,
     _poolSageOfDays,
@@ -879,6 +893,7 @@ const shard: CardShard = {
     _poolStampedingRhino,
     _poolSteadfastSentry,
     _poolStirge,
+    _poolStitchedAssistant,
     _poolStompingGround,
     _poolStormFleetArsonist,
     _poolStrandsOfNight,
@@ -932,6 +947,7 @@ const shard: CardShard = {
     _poolUnswervingSloth,
     _poolUtromScientists,
     _poolValiantGuard,
+    _poolVampiresVengeance,
     _poolVengeance,
     _poolVengefulRebel,
     _poolViashinoSandsprinter,

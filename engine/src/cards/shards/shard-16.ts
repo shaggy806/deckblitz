@@ -217,6 +217,7 @@ import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
 import _poolItThatHeraldsTheEnd from "../pool/it-that-heralds-the-end.js";
 import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
+import _poolJennyFlint from "../pool/jenny-flint.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
@@ -241,6 +242,7 @@ import _poolLivingHistory from "../pool/living-history.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
+import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
 import _poolMaalfeldTwins from "../pool/maalfeld-twins.js";
 import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
@@ -486,6 +488,7 @@ import _poolWallOfLava from "../pool/wall-of-lava.js";
 import _poolWarlordsAxe from "../pool/warlords-axe.js";
 import _poolWarpedTusker from "../pool/warped-tusker.js";
 import _poolWarstormSurge from "../pool/warstorm-surge.js";
+import _poolWashAway from "../pool/wash-away.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
@@ -495,6 +498,7 @@ import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
 import _poolWingCommando from "../pool/wing-commando.js";
+import _poolWitchsWeb from "../pool/witchs-web.js";
 import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
 import _poolWizenedMentor from "../pool/wizened-mentor.js";
@@ -742,6 +746,7 @@ const shard: CardShard = {
     _poolItThatHeraldsTheEnd,
     _poolJaceWielderOfMysteries,
     _poolJennikaBadAppleBigSister,
+    _poolJennyFlint,
     _poolJungleWeaver,
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
@@ -766,6 +771,7 @@ const shard: CardShard = {
     _poolLokisScepter,
     _poolLongtuskCub,
     _poolLoxodonLineBreaker,
+    _poolLunarRejection,
     _poolLynx,
     _poolMaalfeldTwins,
     _poolMachineGodsEffigy,
@@ -1011,6 +1017,7 @@ const shard: CardShard = {
     _poolWarlordsAxe,
     _poolWarpedTusker,
     _poolWarstormSurge,
+    _poolWashAway,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
     _poolWhenWeWereYoung,
@@ -1020,6 +1027,7 @@ const shard: CardShard = {
     _poolWillOTheWisp,
     _poolWillOfTheTemur,
     _poolWingCommando,
+    _poolWitchsWeb,
     _poolWitheringBoon,
     _poolWizardsSchool,
     _poolWizenedMentor,

@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Innistrad: Crimson Vow, whole** (batch 107): its last 167 cards, 118 authored, with training
+  (702.149), exploit (702.110) and cleave (702.148) built and 31 cards on them — 23 in the set and 8
+  older ones (Torens, Fist of the Angels, Warrior's Resolve, Colonel Autumn, Fell Stinger…) plus Dig
+  Up and Wash Away — and 49 blocked; "dies" triggers filtered by subtype alone fixed to need a
+  creature (rule 700.4, 30 cards) (2026-10-19).
 - **Kamigawa: Neon Dynasty, Neon Dynasty Commander and Crimson Vow Commander, all whole** (batch
   106): their last 196 cards, 133 authored, with reconfigure built (rule 702.151) and 13 cards on
   it — 8 in the set and 5 older ones (Lion Sash, Komainu Battle Armor, Tanuki Transplanter,

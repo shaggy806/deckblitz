@@ -43,6 +43,7 @@ import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
+import _poolByInvitationOnly from "../pool/by-invitation-only.js";
 import _poolBygoneMarvels from "../pool/bygone-marvels.js";
 import _poolCaitSithFortuneTeller from "../pool/cait-sith-fortune-teller.js";
 import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js";
@@ -127,6 +128,7 @@ import _poolFlamewaveInvoker from "../pool/flamewave-invoker.js";
 import _poolFlayerHusk from "../pool/flayer-husk.js";
 import _poolFlight from "../pool/flight.js";
 import _poolFlockImpostor from "../pool/flock-impostor.js";
+import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
@@ -351,6 +353,7 @@ import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
 import _poolSteamVents from "../pool/steam-vents.js";
+import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
@@ -492,6 +495,7 @@ const shard: CardShard = {
     _poolBranchblightStalker,
     _poolBrotherhoodPatriarch,
     _poolBuzzardWaspColony,
+    _poolByInvitationOnly,
     _poolBygoneMarvels,
     _poolCaitSithFortuneTeller,
     _poolCalamityGallopingInferno,
@@ -576,6 +580,7 @@ const shard: CardShard = {
     _poolFlayerHusk,
     _poolFlight,
     _poolFlockImpostor,
+    _poolFlourishingHunter,
     _poolForsakenMonument,
     _poolFrogmyrEnforcer,
     _poolFyndhornBow,
@@ -800,6 +805,7 @@ const shard: CardShard = {
     _poolStarlitAngel,
     _poolStaunchCrewmate,
     _poolSteamVents,
+    _poolSteelcladSpirit,
     _poolSterlingHound,
     _poolStoneKavu,
     _poolStoneSeederHierophant,

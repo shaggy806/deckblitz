@@ -120,7 +120,9 @@ import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
+import _poolDepravedHarvester from "../pool/depraved-harvester.js";
 import _poolDepressurize from "../pool/depressurize.js";
+import _poolDigUp from "../pool/dig-up.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
@@ -254,6 +256,7 @@ import _poolLostLeonin from "../pool/lost-leonin.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
 import _poolManaDrain from "../pool/mana-drain.js";
 import _poolManagorgerHydra from "../pool/managorger-hydra.js";
+import _poolMarkovWaltzer from "../pool/markov-waltzer.js";
 import _poolMarshFlats from "../pool/marsh-flats.js";
 import _poolMassProduction from "../pool/mass-production.js";
 import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
@@ -645,7 +648,9 @@ const shard: CardShard = {
     _poolDeathreapRitual,
     _poolDeathsPresence,
     _poolDelayedBlastFireball,
+    _poolDepravedHarvester,
     _poolDepressurize,
+    _poolDigUp,
     _poolDimirLocket,
     _poolDispel,
     _poolDistortionStrike,
@@ -779,6 +784,7 @@ const shard: CardShard = {
     _poolLushOasis,
     _poolManaDrain,
     _poolManagorgerHydra,
+    _poolMarkovWaltzer,
     _poolMarshFlats,
     _poolMassProduction,
     _poolMassacreGirlMostWanted,

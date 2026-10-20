@@ -46,6 +46,7 @@ import _poolBladeSplicer from "../pool/blade-splicer.js";
 import _poolBlaze from "../pool/blaze.js";
 import _poolBlitzballShot from "../pool/blitzball-shot.js";
 import _poolBloodVassal from "../pool/blood-vassal.js";
+import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
 import _poolBonehoard from "../pool/bonehoard.js";
 import _poolBoomerang from "../pool/boomerang.js";
@@ -82,6 +83,7 @@ import _poolCivicStalwart from "../pool/civic-stalwart.js";
 import _poolClamavus from "../pool/clamavus.js";
 import _poolClayRevenant from "../pool/clay-revenant.js";
 import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
+import _poolCloakedCadet from "../pool/cloaked-cadet.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
@@ -193,6 +195,7 @@ import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
 import _poolHeatedDebate from "../pool/heated-debate.js";
 import _poolHedronScrabbler from "../pool/hedron-scrabbler.js";
 import _poolHelmOfAwakening from "../pool/helm-of-awakening.js";
+import _poolHenrikaDomnathi from "../pool/henrika-domnathi.js";
 import _poolHeraldOfSlaanesh from "../pool/herald-of-slaanesh.js";
 import _poolHeraldicBanner from "../pool/heraldic-banner.js";
 import _poolHeroicCharge from "../pool/heroic-charge.js";
@@ -468,6 +471,7 @@ import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
+import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
 import _poolTwoHeadedHunter from "../pool/two-headed-hunter.js";
 import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
 import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
@@ -495,6 +499,7 @@ import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
 import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
 import _poolWaywardGiant from "../pool/wayward-giant.js";
+import _poolWeddingSecurity from "../pool/wedding-security.js";
 import _poolWedgelightRammer from "../pool/wedgelight-rammer.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
 import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
@@ -570,6 +575,7 @@ const shard: CardShard = {
     _poolBlaze,
     _poolBlitzballShot,
     _poolBloodVassal,
+    _poolBloodsoakedReveler,
     _poolBlueSunsZenith,
     _poolBonehoard,
     _poolBoomerang,
@@ -606,6 +612,7 @@ const shard: CardShard = {
     _poolClamavus,
     _poolClayRevenant,
     _poolClifftopRetreat,
+    _poolCloakedCadet,
     _poolClockworkDrawbridge,
     _poolCoatWithVenom,
     _poolCodecrackerHound,
@@ -717,6 +724,7 @@ const shard: CardShard = {
     _poolHeatedDebate,
     _poolHedronScrabbler,
     _poolHelmOfAwakening,
+    _poolHenrikaDomnathi,
     _poolHeraldOfSlaanesh,
     _poolHeraldicBanner,
     _poolHeroicCharge,
@@ -992,6 +1000,7 @@ const shard: CardShard = {
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,
     _poolTundraWall,
+    _poolTwinbladeInvocation,
     _poolTwoHeadedHunter,
     _poolTyroxSauridTyrant,
     _poolUltimateAlliance,
@@ -1019,6 +1028,7 @@ const shard: CardShard = {
     _poolWaterfallAerialist,
     _poolWayOfTheMentor,
     _poolWaywardGiant,
+    _poolWeddingSecurity,
     _poolWedgelightRammer,
     _poolWhiptongueHydra,
     _poolWhirlwindTechnique,

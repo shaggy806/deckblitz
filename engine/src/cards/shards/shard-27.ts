@@ -31,6 +31,8 @@ import _poolAutomatedAssemblyLine from "../pool/automated-assembly-line.js";
 import _poolAvatarRoku from "../pool/avatar-roku.js";
 import _poolBahamutWardenOfLight from "../pool/bahamut-warden-of-light.js";
 import _poolBakersbaneDuo from "../pool/bakersbane-duo.js";
+import _poolBallistaWatcher from "../pool/ballista-watcher.js";
+import _poolBallistaWielder from "../pool/ballista-wielder.js";
 import _poolBarbtoothWurm from "../pool/barbtooth-wurm.js";
 import _poolBattleHurda from "../pool/battle-hurda.js";
 import _poolBattlefieldImprovisation from "../pool/battlefield-improvisation.js";
@@ -44,6 +46,7 @@ import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js
 import _poolBlightMamba from "../pool/blight-mamba.js";
 import _poolBlightwidow from "../pool/blightwidow.js";
 import _poolBloodBairn from "../pool/blood-bairn.js";
+import _poolBloodPetalCelebrant from "../pool/blood-petal-celebrant.js";
 import _poolBloodResearcher from "../pool/blood-researcher.js";
 import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
 import _poolBogstomper from "../pool/bogstomper.js";
@@ -461,6 +464,7 @@ import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
+import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
@@ -525,6 +529,8 @@ const shard: CardShard = {
     _poolAvatarRoku,
     _poolBahamutWardenOfLight,
     _poolBakersbaneDuo,
+    _poolBallistaWatcher,
+    _poolBallistaWielder,
     _poolBarbtoothWurm,
     _poolBattleHurda,
     _poolBattlefieldImprovisation,
@@ -538,6 +544,7 @@ const shard: CardShard = {
     _poolBlightMamba,
     _poolBlightwidow,
     _poolBloodBairn,
+    _poolBloodPetalCelebrant,
     _poolBloodResearcher,
     _poolBloodchiefAscension,
     _poolBogstomper,
@@ -955,6 +962,7 @@ const shard: CardShard = {
     _poolVelaTheNightClad,
     _poolVesselOfVolatility,
     _poolVigorbloomVanguard,
+    _poolVilespawnSpider,
     _poolVirulentEmissary,
     _poolVisceraSeer,
     _poolVodalianMerchant,

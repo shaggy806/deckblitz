@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3703 already implemented / 1297 missing (marks refreshed 2026-10-20)
+3706 already implemented / 1294 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2889,7 +2889,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2896  Phyresis                                 {1}{B}           Enchantment — Aura
 [x]  2897  Oswald Fiddlebender                      {1}{W}           Legendary Creature — Gnome Artificer
 [x]  2898  Flumph                                   {1}{W}           Creature — Jellyfish
-[ ]  2899  Wash Away                                {U}              Instant
+[x]  2899  Wash Away                                {U}              Instant
 [x]  2900  Arbor Adherent                           {3}{G}           Creature — Dog Druid
 [x]  2901  Kefka, Court Mage // Kefka, Ruler of Ruin {5}              Legendary Creature — Human Wizard // Legendary Creature — Avatar Wizard
 [ ]  2902  Magewright's Stone                       {2}              Artifact
@@ -4454,7 +4454,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4461  Fevered Visions                          {1}{U}{R}        Enchantment
 [ ]  4462  Wizard's Staff                           {1}{U}           Artifact — Equipment
 [x]  4463  Urza's Factory                           {0}              Land — Urza's
-[ ]  4464  Torens, Fist of the Angels               {1}{G}{W}        Legendary Creature — Human Cleric
+[x]  4464  Torens, Fist of the Angels               {1}{G}{W}        Legendary Creature — Human Cleric
 [ ]  4465  Phyrexian Censor                         {2}{W}           Creature — Phyrexian Wizard
 [x]  4466  Tivit, Seller of Secrets                 {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
 [ ]  4467  Waterbending Lesson                      {3}{U}           Sorcery — Lesson
@@ -4871,7 +4871,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4878  Zara, Renegade Recruiter                 {3}{U}{R}        Legendary Creature — Human Pirate
 [ ]  4879  Izzet Generatorium                       {U}{R}           Artifact
 [x]  4880  Biomass Mutation                         {X}{G/U}{G/U}    Instant
-[ ]  4881  Overcharged Amalgam                      {2}{U}{U}        Creature — Zombie Horror
+[x]  4881  Overcharged Amalgam                      {2}{U}{U}        Creature — Zombie Horror
 [ ]  4882  Wall of Frost                            {1}{U}{U}        Creature — Wall
 [x]  4883  Sunset Strikemaster                      {1}{R}           Creature — Human Monk
 [x]  4884  Endless Foot Assault                     {2}{W}           Enchantment

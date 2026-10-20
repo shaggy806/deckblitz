@@ -55,6 +55,7 @@ import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
 import _poolBlindingSpray from "../pool/blinding-spray.js";
 import _poolBlisteringBarrier from "../pool/blistering-barrier.js";
 import _poolBloodbriar from "../pool/bloodbriar.js";
+import _poolBloodcrazedSocialite from "../pool/bloodcrazed-socialite.js";
 import _poolBloodrageBrawler from "../pool/bloodrage-brawler.js";
 import _poolBloodrootApothecary from "../pool/bloodroot-apothecary.js";
 import _poolBlossomingSands from "../pool/blossoming-sands.js";
@@ -77,6 +78,7 @@ import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
+import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
@@ -104,11 +106,13 @@ import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
+import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
 import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
+import _poolDreadfeastDemon from "../pool/dreadfeast-demon.js";
 import _poolDreamTrawler from "../pool/dream-trawler.js";
 import _poolDrossclaw from "../pool/drossclaw.js";
 import _poolDrumbellower from "../pool/drumbellower.js";
@@ -333,6 +337,7 @@ import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js"
 import _poolRepel from "../pool/repel.js";
 import _poolReplenish from "../pool/replenish.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
+import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
@@ -441,6 +446,7 @@ import _poolUnleashShell from "../pool/unleash-shell.js";
 import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolValleyDasher from "../pool/valley-dasher.js";
 import _poolValleyFloodcaller from "../pool/valley-floodcaller.js";
+import _poolVampireSlayer from "../pool/vampire-slayer.js";
 import _poolVampireSovereign from "../pool/vampire-sovereign.js";
 import _poolVanquishTheWeak from "../pool/vanquish-the-weak.js";
 import _poolVanquishersAxe from "../pool/vanquishers-axe.js";
@@ -550,6 +556,7 @@ const shard: CardShard = {
     _poolBlindingSpray,
     _poolBlisteringBarrier,
     _poolBloodbriar,
+    _poolBloodcrazedSocialite,
     _poolBloodrageBrawler,
     _poolBloodrootApothecary,
     _poolBlossomingSands,
@@ -572,6 +579,7 @@ const shard: CardShard = {
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
+    _poolCatlikeCuriosity,
     _poolChargeTheSanctum,
     _poolCharmingPrince,
     _poolChromeCompanion,
@@ -599,11 +607,13 @@ const shard: CardShard = {
     _poolDefiantKhenra,
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
+    _poolDiregrafScavenger,
     _poolDisownedAncestor,
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragonRoost,
     _poolDreadedBatCloud,
+    _poolDreadfeastDemon,
     _poolDreamTrawler,
     _poolDrossclaw,
     _poolDrumbellower,
@@ -828,6 +838,7 @@ const shard: CardShard = {
     _poolRepel,
     _poolReplenish,
     _poolRestorationGearsmith,
+    _poolRetrieve,
     _poolRetrofittedTransmogrant,
     _poolRidgetopRaptor,
     _poolRiteOfTheDragoncaller,
@@ -936,6 +947,7 @@ const shard: CardShard = {
     _poolUnrulyKrasis,
     _poolValleyDasher,
     _poolValleyFloodcaller,
+    _poolVampireSlayer,
     _poolVampireSovereign,
     _poolVanquishTheWeak,
     _poolVanquishersAxe,

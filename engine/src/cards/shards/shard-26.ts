@@ -74,6 +74,7 @@ import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
 import _poolClaimThePrecious from "../pool/claim-the-precious.js";
+import _poolCleverDistraction from "../pool/clever-distraction.js";
 import _poolClockworkDroid from "../pool/clockwork-droid.js";
 import _poolCoastalPiracy from "../pool/coastal-piracy.js";
 import _poolCoerciveImpetus from "../pool/coercive-impetus.js";
@@ -104,6 +105,7 @@ import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
 import _poolDrakewingKrasis from "../pool/drakewing-krasis.js";
+import _poolDrogskolArmaments from "../pool/drogskol-armaments.js";
 import _poolDrownerOfSecrets from "../pool/drowner-of-secrets.js";
 import _poolDuskshellCrawler from "../pool/duskshell-crawler.js";
 import _poolEagleOfDeliverance from "../pool/eagle-of-deliverance.js";
@@ -127,6 +129,7 @@ import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
+import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
@@ -330,6 +333,7 @@ import _poolSaviorOfTheSleeping from "../pool/savior-of-the-sleeping.js";
 import _poolScaldingViper from "../pool/scalding-viper.js";
 import _poolScareTactics from "../pool/scare-tactics.js";
 import _poolScatheZombies from "../pool/scathe-zombies.js";
+import _poolScatteredThoughts from "../pool/scattered-thoughts.js";
 import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolScornfulEgotist from "../pool/scornful-egotist.js";
 import _poolScrapCompactor from "../pool/scrap-compactor.js";
@@ -340,6 +344,7 @@ import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
+import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
@@ -557,6 +562,7 @@ const shard: CardShard = {
     _poolChromaticOrrery,
     _poolCityOfBrass,
     _poolClaimThePrecious,
+    _poolCleverDistraction,
     _poolClockworkDroid,
     _poolCoastalPiracy,
     _poolCoerciveImpetus,
@@ -587,6 +593,7 @@ const shard: CardShard = {
     _poolDragonFodder,
     _poolDragonlordDromoka,
     _poolDrakewingKrasis,
+    _poolDrogskolArmaments,
     _poolDrownerOfSecrets,
     _poolDuskshellCrawler,
     _poolEagleOfDeliverance,
@@ -610,6 +617,7 @@ const shard: CardShard = {
     _poolExpressiveFiredancer,
     _poolExtinguishTheLight,
     _poolFblthpImpossiblyLost,
+    _poolFearOfDeath,
     _poolFeloniousRage,
     _poolFertilid,
     _poolFetidPools,
@@ -813,6 +821,7 @@ const shard: CardShard = {
     _poolScaldingViper,
     _poolScareTactics,
     _poolScatheZombies,
+    _poolScatteredThoughts,
     _poolScepterOfDominance,
     _poolScornfulEgotist,
     _poolScrapCompactor,
@@ -823,6 +832,7 @@ const shard: CardShard = {
     _poolSelesnyaCharm,
     _poolSenateGuildmage,
     _poolSeraphSanctuary,
+    _poolSerpentineAmbush,
     _poolShackleSlinger,
     _poolShangChiMartialMentor,
     _poolShanodinDryads,

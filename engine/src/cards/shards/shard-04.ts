@@ -61,6 +61,7 @@ import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
+import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolContradict from "../pool/contradict.js";
@@ -165,6 +166,7 @@ import _poolGrislyTransformation from "../pool/grisly-transformation.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
 import _poolGuildswornProwler from "../pool/guildsworn-prowler.js";
 import _poolGurglingAnointer from "../pool/gurgling-anointer.js";
+import _poolHamletVanguard from "../pool/hamlet-vanguard.js";
 import _poolHammerheadMaggiaBoss from "../pool/hammerhead-maggia-boss.js";
 import _poolHarabazDruid from "../pool/harabaz-druid.js";
 import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
@@ -183,6 +185,7 @@ import _poolHornOfGreed from "../pool/horn-of-greed.js";
 import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
 import _poolHornetCobra from "../pool/hornet-cobra.js";
 import _poolHorsesOfTheBruinen from "../pool/horses-of-the-bruinen.js";
+import _poolHowlpackPiper from "../pool/howlpack-piper.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
@@ -240,6 +243,7 @@ import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
 import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.js";
 import _poolManaConfluence from "../pool/mana-confluence.js";
+import _poolMarkovRetribution from "../pool/markov-retribution.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMasterHealer from "../pool/master-healer.js";
 import _poolMawcor from "../pool/mawcor.js";
@@ -272,8 +276,10 @@ import _poolOtterPenguin from "../pool/otter-penguin.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
 import _poolOverpoweringAttack from "../pool/overpowering-attack.js";
 import _poolOxiddaFinisher from "../pool/oxidda-finisher.js";
+import _poolPacksongPup from "../pool/packsong-pup.js";
 import _poolPaintersStudio from "../pool/painters-studio.js";
 import _poolPastInFlames from "../pool/past-in-flames.js";
+import _poolPatchworkCrawler from "../pool/patchwork-crawler.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPestilenceDemon from "../pool/pestilence-demon.js";
@@ -360,6 +366,7 @@ import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSonicShrieker from "../pool/sonic-shrieker.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
+import _poolSpectralBinding from "../pool/spectral-binding.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSpicyOatmealPizza from "../pool/spicy-oatmeal-pizza.js";
@@ -540,6 +547,7 @@ const shard: CardShard = {
     _poolChakramRetriever,
     _poolChardalynDragon,
     _poolChasmDrake,
+    _poolChillOfTheGrave,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
     _poolContradict,
@@ -644,6 +652,7 @@ const shard: CardShard = {
     _poolGruffTriplets,
     _poolGuildswornProwler,
     _poolGurglingAnointer,
+    _poolHamletVanguard,
     _poolHammerheadMaggiaBoss,
     _poolHarabazDruid,
     _poolHardHittingQuestion,
@@ -662,6 +671,7 @@ const shard: CardShard = {
     _poolHornOfValhalla,
     _poolHornetCobra,
     _poolHorsesOfTheBruinen,
+    _poolHowlpackPiper,
     _poolHulkingGoblin,
     _poolHumongulus,
     _poolHydraInfiltration,
@@ -719,6 +729,7 @@ const shard: CardShard = {
     _poolMagnifyingGlass,
     _poolMalcolmKeenEyedNavigator,
     _poolManaConfluence,
+    _poolMarkovRetribution,
     _poolMarneusCalgar,
     _poolMasterHealer,
     _poolMawcor,
@@ -751,8 +762,10 @@ const shard: CardShard = {
     _poolOvergrownTomb,
     _poolOverpoweringAttack,
     _poolOxiddaFinisher,
+    _poolPacksongPup,
     _poolPaintersStudio,
     _poolPastInFlames,
+    _poolPatchworkCrawler,
     _poolPathOfAncestry,
     _poolPestMascot,
     _poolPestilenceDemon,
@@ -839,6 +852,7 @@ const shard: CardShard = {
     _poolSongMadTreachery,
     _poolSonicShrieker,
     _poolSparringMummy,
+    _poolSpectralBinding,
     _poolSpectralDenial,
     _poolSpellweaverEternal,
     _poolSpicyOatmealPizza,

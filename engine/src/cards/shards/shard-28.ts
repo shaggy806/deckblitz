@@ -67,6 +67,7 @@ import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
+import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
@@ -151,6 +152,7 @@ import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFontOfProgress from "../pool/font-of-progress.js";
+import _poolForebodingStatue from "../pool/foreboding-statue.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
 import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
@@ -162,6 +164,7 @@ import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
 import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
 import _poolGlorifierOfSuffering from "../pool/glorifier-of-suffering.js";
+import _poolGnarledGrovestrider from "../pool/gnarled-grovestrider.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
@@ -285,6 +288,7 @@ import _poolPalaceFamiliar from "../pool/palace-familiar.js";
 import _poolPalaceSentinels from "../pool/palace-sentinels.js";
 import _poolPaladinClass from "../pool/paladin-class.js";
 import _poolPaladinEnVec from "../pool/paladin-en-vec.js";
+import _poolPanickedBystander from "../pool/panicked-bystander.js";
 import _poolParadoxEngine from "../pool/paradox-engine.js";
 import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPeterParker from "../pool/peter-parker.js";
@@ -360,6 +364,7 @@ import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSelflessSamurai from "../pool/selfless-samurai.js";
+import _poolSelhoffEntomber from "../pool/selhoff-entomber.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
 import _poolSetessanGriffin from "../pool/setessan-griffin.js";
 import _poolShadowSummoning from "../pool/shadow-summoning.js";
@@ -431,6 +436,7 @@ import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
 import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
 import _poolTitanicGrowth from "../pool/titanic-growth.js";
+import _poolTorensFistOfTheAngels from "../pool/torens-fist-of-the-angels.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
@@ -562,6 +568,7 @@ const shard: CardShard = {
     _poolBrushstrider,
     _poolBullCerodon,
     _poolBurningSunsFury,
+    _poolCacklingCulprit,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
@@ -646,6 +653,7 @@ const shard: CardShard = {
     _poolFlubsTheFool,
     _poolFollowTheLumarets,
     _poolFontOfProgress,
+    _poolForebodingStatue,
     _poolFriendlyTeddy,
     _poolFrilledSparkshooter,
     _poolFusionElemental,
@@ -657,6 +665,7 @@ const shard: CardShard = {
     _poolGlasswingGrace,
     _poolGlidediveDuo,
     _poolGlorifierOfSuffering,
+    _poolGnarledGrovestrider,
     _poolGoblinArtillery,
     _poolGoblinWarPaint,
     _poolGodEternalRhonas,
@@ -780,6 +789,7 @@ const shard: CardShard = {
     _poolPalaceSentinels,
     _poolPaladinClass,
     _poolPaladinEnVec,
+    _poolPanickedBystander,
     _poolParadoxEngine,
     _poolPestRescuer,
     _poolPeterParker,
@@ -855,6 +865,7 @@ const shard: CardShard = {
     _poolSecuritronSquadron,
     _poolSelesnyaSentry,
     _poolSelflessSamurai,
+    _poolSelhoffEntomber,
     _poolSentinelSliver,
     _poolSetessanGriffin,
     _poolShadowSummoning,
@@ -926,6 +937,7 @@ const shard: CardShard = {
     _poolTickedOff,
     _poolTillerOfFlesh,
     _poolTitanicGrowth,
+    _poolTorensFistOfTheAngels,
     _poolTraceOfAbundance,
     _poolTrainedArmodon,
     _poolTramwayStation,

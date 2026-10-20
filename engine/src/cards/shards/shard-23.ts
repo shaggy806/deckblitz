@@ -10,6 +10,7 @@ import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
 import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
 import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
+import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
 import _poolAngelOfLight from "../pool/angel-of-light.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
@@ -151,6 +152,7 @@ import _poolFleetSwallower from "../pool/fleet-swallower.js";
 import _poolFlensermite from "../pool/flensermite.js";
 import _poolFomoriVault from "../pool/fomori-vault.js";
 import _poolFoolishFate from "../pool/foolish-fate.js";
+import _poolForsakenThresher from "../pool/forsaken-thresher.js";
 import _poolFoulPlay from "../pool/foul-play.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
@@ -202,6 +204,7 @@ import _poolImmolatingGlare from "../pool/immolating-glare.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
+import _poolInfernalCaptor from "../pool/infernal-captor.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
@@ -393,6 +396,7 @@ import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
+import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolAlienInvasion,
     _poolAmbitionsCost,
     _poolAnaxHardenedInTheForge,
+    _poolAncestorsEmbrace,
     _poolAndurilFlameOfTheWest,
     _poolAngelOfLight,
     _poolAngrathsRampage,
@@ -646,6 +651,7 @@ const shard: CardShard = {
     _poolFlensermite,
     _poolFomoriVault,
     _poolFoolishFate,
+    _poolForsakenThresher,
     _poolFoulPlay,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
@@ -697,6 +703,7 @@ const shard: CardShard = {
     _poolIncandescentAria,
     _poolIncitedRabble,
     _poolIncurableOgre,
+    _poolInfernalCaptor,
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
     _poolItzquinthFirstbornOfGishath,
@@ -888,6 +895,7 @@ const shard: CardShard = {
     _poolSpiderwigBoggart,
     _poolSporecapSpider,
     _poolSpringbloomDruid,
+    _poolStensiaUprising,
     _poolStormHerd,
     _poolStrawSoldiers,
     _poolStripedRiverwinder,

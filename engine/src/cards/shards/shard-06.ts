@@ -225,6 +225,7 @@ import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
+import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
@@ -247,6 +248,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
+import _poolMischievousCatgeist from "../pool/mischievous-catgeist.js";
 import _poolMistbreathElder from "../pool/mistbreath-elder.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
 import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
@@ -280,6 +282,7 @@ import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
+import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
 import _poolPhyrexianArena from "../pool/phyrexian-arena.js";
@@ -336,6 +339,7 @@ import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
 import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
 import _poolSawInHalf from "../pool/saw-in-half.js";
+import _poolSawbladeSlinger from "../pool/sawblade-slinger.js";
 import _poolScaledNurturer from "../pool/scaled-nurturer.js";
 import _poolScalestormSummoner from "../pool/scalestorm-summoner.js";
 import _poolScepterOfCelebration from "../pool/scepter-of-celebration.js";
@@ -465,6 +469,7 @@ import _poolWinterSoldierRebornAvenger from "../pool/winter-soldier-reborn-aveng
 import _poolWitchstalkerFrenzy from "../pool/witchstalker-frenzy.js";
 import _poolWizardReplica from "../pool/wizard-replica.js";
 import _poolWolfkinBond from "../pool/wolfkin-bond.js";
+import _poolWolfkinOutcast from "../pool/wolfkin-outcast.js";
 import _poolWoodlandMystic from "../pool/woodland-mystic.js";
 import _poolWreakHavoc from "../pool/wreak-havoc.js";
 import _poolWreckingBallArm from "../pool/wrecking-ball-arm.js";
@@ -717,6 +722,7 @@ const shard: CardShard = {
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
     _poolLagoonBreach,
+    _poolLaidToRest,
     _poolLathlissDragonQueen,
     _poolLayDownArms,
     _poolLegionsLanding,
@@ -739,6 +745,7 @@ const shard: CardShard = {
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMirkoObsessiveTheorist,
+    _poolMischievousCatgeist,
     _poolMistbreathElder,
     _poolMisterFantastic,
     _poolMockingbirdBobbiMorse,
@@ -772,6 +779,7 @@ const shard: CardShard = {
     _poolPaladinOfTheBloodstained,
     _poolPardicWanderer,
     _poolPeerIntoTheAbyss,
+    _poolPersistentSpecimen,
     _poolPharikasMender,
     _poolPhenomenonInvestigators,
     _poolPhyrexianArena,
@@ -828,6 +836,7 @@ const shard: CardShard = {
     _poolSandbarMerfolk,
     _poolSavageGorilla,
     _poolSawInHalf,
+    _poolSawbladeSlinger,
     _poolScaledNurturer,
     _poolScalestormSummoner,
     _poolScepterOfCelebration,
@@ -957,6 +966,7 @@ const shard: CardShard = {
     _poolWitchstalkerFrenzy,
     _poolWizardReplica,
     _poolWolfkinBond,
+    _poolWolfkinOutcast,
     _poolWoodlandMystic,
     _poolWreakHavoc,
     _poolWreckingBallArm,

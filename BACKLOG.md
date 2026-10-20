@@ -101,7 +101,8 @@ section keeps only what to do next.
   Commander set; batch 104 the rest of Commander Legends: Battle for Baldur's Gate, on the
   initiative, dungeons and venturing — `docs/plans/initiative-dungeons.md`; batch 105 Streets of
   New Capenna and its Commander set, on shield counters; batch 106 Kamigawa: Neon Dynasty, its
-  Commander set and Crimson Vow Commander, on reconfigure); **next, Innistrad: Crimson Vow** (VOW
+  Commander set and Crimson Vow Commander, on reconfigure; batch 107 Innistrad: Crimson Vow, on
+  training, exploit and cleave); **next, Innistrad: Midnight Hunt and its Commander set** (MID, MIC
   — `npm run cards:sets -w engine -- --next 60`). The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
   the Oubliette's three distinct sacrifices) still hold the cards that "venture into the dungeon"
   (Nadaar, Acererak, Sefris, Radiant Solar — `mechanic:dungeon`).

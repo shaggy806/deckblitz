@@ -193,6 +193,7 @@ import _poolHeadsplitter from "../pool/headsplitter.js";
 import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
+import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolInfernalIdol from "../pool/infernal-idol.js";
@@ -271,6 +272,7 @@ import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
+import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
@@ -444,6 +446,7 @@ import _poolVizzerdrix from "../pool/vizzerdrix.js";
 import _poolVoltaicConstruct from "../pool/voltaic-construct.js";
 import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
+import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
 import _poolWaterwindScout from "../pool/waterwind-scout.js";
@@ -474,6 +477,7 @@ import _tokensPhyrexianMyrTokenMyrSire from "../tokens/phyrexian-myr-token-myr-s
 import _tokensRobotTokenFlying from "../tokens/robot-token-flying.js";
 import _tokensRogueToken from "../tokens/rogue-token.js";
 import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-glory.js";
+import _tokensVampireTokenSorinTheMirthless from "../tokens/vampire-token-sorin-the-mirthless.js";
 import _tokensVampireToken from "../tokens/vampire-token.js";
 import _tokensWurmToken66 from "../tokens/wurm-token-6-6.js";
 import _tokensXXDinosaurTokenTrample from "../tokens/x-x-dinosaur-token-trample.js";
@@ -671,6 +675,7 @@ const shard: CardShard = {
     _poolHearthhullTheWorldseed,
     _poolHonorboundPage,
     _poolHornetSting,
+    _poolHowlpackAvenger,
     _poolHulkBruceBanner,
     _poolIncreasingDevotion,
     _poolInfernalIdol,
@@ -749,6 +754,7 @@ const shard: CardShard = {
     _poolNorthernAirTemple,
     _poolNyxbornMarauder,
     _poolOathOfNissa,
+    _poolOllenbockEscort,
     _poolOmenHawker,
     _poolOozeSpill,
     _poolOphidianEye,
@@ -922,6 +928,7 @@ const shard: CardShard = {
     _poolVoltaicConstruct,
     _poolVorstclaw,
     _poolVowOfDuty,
+    _poolWanderingMind,
     _poolWarMammoth,
     _poolWasteland,
     _poolWaterwindScout,
@@ -954,6 +961,7 @@ const shard: CardShard = {
     _tokensRobotTokenFlying,
     _tokensRogueToken,
     _tokensSoldierTokenFinaleOfGlory,
+    _tokensVampireTokenSorinTheMirthless,
     _tokensVampireToken,
     _tokensWurmToken66,
     _tokensXXDinosaurTokenTrample,

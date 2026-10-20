@@ -78,6 +78,7 @@ import _poolConsumingSepulcher from "../pool/consuming-sepulcher.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
+import _poolCourierBat from "../pool/courier-bat.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
@@ -301,6 +302,7 @@ import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
+import _poolOverchargedAmalgam from "../pool/overcharged-amalgam.js";
 import _poolPackAPunch from "../pool/pack-a-punch.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
@@ -380,6 +382,7 @@ import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
+import _poolStormchaserDrake from "../pool/stormchaser-drake.js";
 import _poolStormriderSpirit from "../pool/stormrider-spirit.js";
 import _poolStrengthOfWill from "../pool/strength-of-will.js";
 import _poolStripedBears from "../pool/striped-bears.js";
@@ -423,6 +426,7 @@ import _poolTreasureCruise from "../pool/treasure-cruise.js";
 import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
+import _poolTwinbladeGeist from "../pool/twinblade-geist.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
 import _poolTyrsBlessing from "../pool/tyrs-blessing.js";
 import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
@@ -446,10 +450,12 @@ import _poolVoraciousVermin from "../pool/voracious-vermin.js";
 import _poolVorapede from "../pool/vorapede.js";
 import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
+import _poolWarriorsResolve from "../pool/warriors-resolve.js";
 import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
 import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWidespreadThieving from "../pool/widespread-thieving.js";
+import _poolWingedPortent from "../pool/winged-portent.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
@@ -551,6 +557,7 @@ const shard: CardShard = {
     _poolContingencyPlan,
     _poolCopperLonglegs,
     _poolCormelaGlamourThief,
+    _poolCourierBat,
     _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrowdFavorites,
@@ -774,6 +781,7 @@ const shard: CardShard = {
     _poolOmenOfTheSea,
     _poolOrdinaryBear,
     _poolOstrichHorse,
+    _poolOverchargedAmalgam,
     _poolPackAPunch,
     _poolPantherRobot,
     _poolPashalikMons,
@@ -853,6 +861,7 @@ const shard: CardShard = {
     _poolSproutingGoblin,
     _poolStatureYoungAvenger,
     _poolStingingVitriol,
+    _poolStormchaserDrake,
     _poolStormriderSpirit,
     _poolStrengthOfWill,
     _poolStripedBears,
@@ -896,6 +905,7 @@ const shard: CardShard = {
     _poolTruckToss,
     _poolTundraWolves,
     _poolTurbulentCrater,
+    _poolTwinbladeGeist,
     _poolTymorasInvoker,
     _poolTyrsBlessing,
     _poolUnderwaterTunnelSlimyAquarium,
@@ -919,10 +929,12 @@ const shard: CardShard = {
     _poolVorapede,
     _poolVraskasFinalMercy,
     _poolWardenOfTheEye,
+    _poolWarriorsResolve,
     _poolWayOfTheHealer,
     _poolWeatherseedElf,
     _poolWebOfLifeAndDestiny,
     _poolWidespreadThieving,
+    _poolWingedPortent,
     _poolWorthyKnight,
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,

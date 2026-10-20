@@ -46,6 +46,7 @@ import _poolBlightedBlackthorn from "../pool/blighted-blackthorn.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
 import _poolBloodboilSorcerer from "../pool/bloodboil-sorcerer.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
+import _poolBloodyBetrayal from "../pool/bloody-betrayal.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
 import _poolBoostedSloop from "../pool/boosted-sloop.js";
@@ -318,6 +319,7 @@ import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolResistanceReunited from "../pool/resistance-reunited.js";
+import _poolResistanceSquad from "../pool/resistance-squad.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
 import _poolReverberate from "../pool/reverberate.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
@@ -365,6 +367,7 @@ import _poolSmileAtDeath from "../pool/smile-at-death.js";
 import _poolSnowCoveredIsland from "../pool/snow-covered-island.js";
 import _poolSoldierOfTheGreyHost from "../pool/soldier-of-the-grey-host.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
+import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
 import _poolSoulRead from "../pool/soul-read.js";
 import _poolSpectralLynx from "../pool/spectral-lynx.js";
 import _poolSpidersilkNet from "../pool/spidersilk-net.js";
@@ -512,6 +515,7 @@ const shard: CardShard = {
     _poolBloodBurglar,
     _poolBloodboilSorcerer,
     _poolBloodhunterBat,
+    _poolBloodyBetrayal,
     _poolBogWraith,
     _poolBoonOfTheWishGiver,
     _poolBoostedSloop,
@@ -784,6 +788,7 @@ const shard: CardShard = {
     _poolRefute,
     _poolReitoLantern,
     _poolResistanceReunited,
+    _poolResistanceSquad,
     _poolRestorationAngel,
     _poolReverberate,
     _poolRigoStreetwiseMentor,
@@ -831,6 +836,7 @@ const shard: CardShard = {
     _poolSnowCoveredIsland,
     _poolSoldierOfTheGreyHost,
     _poolSongOfTotentanz,
+    _poolSorinTheMirthless,
     _poolSoulRead,
     _poolSpectralLynx,
     _poolSpidersilkNet,

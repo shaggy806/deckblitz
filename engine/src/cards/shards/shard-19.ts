@@ -120,6 +120,7 @@ import _poolDissectionPractice from "../pool/dissection-practice.js";
 import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
+import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
@@ -273,6 +274,7 @@ import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
+import _poolMarkovPurifier from "../pool/markov-purifier.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
@@ -416,6 +418,7 @@ import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
+import _poolSporebackWolf from "../pool/sporeback-wolf.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
 import _poolSramsExpertise from "../pool/srams-expertise.js";
@@ -639,6 +642,7 @@ const shard: CardShard = {
     _poolDiversionSpecialist,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
+    _poolDreadFugue,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,
@@ -792,6 +796,7 @@ const shard: CardShard = {
     _poolManicVandal,
     _poolMarcusMutantMayor,
     _poolMarduHeartPiercer,
+    _poolMarkovPurifier,
     _poolMaskedMeower,
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
@@ -935,6 +940,7 @@ const shard: CardShard = {
     _poolSpaceMarineScout,
     _poolSpellPierce,
     _poolSpiderWomanStunningSavior,
+    _poolSporebackWolf,
     _poolSquirmingEmergence,
     _poolSramSeniorEdificer,
     _poolSramsExpertise,

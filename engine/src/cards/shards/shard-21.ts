@@ -45,6 +45,7 @@ import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
+import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
@@ -108,6 +109,7 @@ import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
 import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
+import _poolDrogskolInfantry from "../pool/drogskol-infantry.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
@@ -124,6 +126,7 @@ import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
+import _poolEstwaldShieldbasher from "../pool/estwald-shieldbasher.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
@@ -351,6 +354,7 @@ import _poolSontaranGeneral from "../pool/sontaran-general.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
+import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
 import _poolStalkingAssassin from "../pool/stalking-assassin.js";
 import _poolStampedingScurryfoot from "../pool/stampeding-scurryfoot.js";
@@ -509,6 +513,7 @@ const shard: CardShard = {
     _poolBlackMarketConnections,
     _poolBlightGrenade,
     _poolBloatedContaminator,
+    _poolBloodFountain,
     _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBonebindOrator,
@@ -572,6 +577,7 @@ const shard: CardShard = {
     _poolDocOckSinisterScientist,
     _poolDragonsparkReactor,
     _poolDranasChosen,
+    _poolDrogskolInfantry,
     _poolDuress,
     _poolDuskLegionZealot,
     _poolDwarvenCastleGuard,
@@ -588,6 +594,7 @@ const shard: CardShard = {
     _poolErase,
     _poolEriettesTemptingApple,
     _poolEscapedExperiment,
+    _poolEstwaldShieldbasher,
     _poolExperimentalSynthesizer,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
@@ -815,6 +822,7 @@ const shard: CardShard = {
     _poolSouthWindAvatar,
     _poolSpectacularTactics,
     _poolSpikedBaloth,
+    _poolSpikedRipsaw,
     _poolSpringleafParade,
     _poolStalkingAssassin,
     _poolStampedingScurryfoot,

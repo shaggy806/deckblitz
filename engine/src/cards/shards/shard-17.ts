@@ -73,6 +73,7 @@ import _poolCloudKey from "../pool/cloud-key.js";
 import _poolCloudspireCaptain from "../pool/cloudspire-captain.js";
 import _poolCogworkWrestler from "../pool/cogwork-wrestler.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
+import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
@@ -100,6 +101,7 @@ import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
+import _poolDistractingGeist from "../pool/distracting-geist.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
@@ -119,6 +121,7 @@ import _poolEasyPrey from "../pool/easy-prey.js";
 import _poolEatToExtinction from "../pool/eat-to-extinction.js";
 import _poolEerieGravestone from "../pool/eerie-gravestone.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
+import _poolElderArthurMaxson from "../pool/elder-arthur-maxson.js";
 import _poolElectrolyze from "../pool/electrolyze.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
@@ -192,6 +195,7 @@ import _poolHornedTurtle from "../pool/horned-turtle.js";
 import _poolHornetNest from "../pool/hornet-nest.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
+import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
@@ -313,6 +317,7 @@ import _poolRecuperate from "../pool/recuperate.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
+import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
@@ -555,6 +560,7 @@ const shard: CardShard = {
     _poolCloudspireCaptain,
     _poolCogworkWrestler,
     _poolCollateralDamage,
+    _poolColonelAutumn,
     _poolColossalCollision,
     _poolComposerOfSpring,
     _poolConcordiaPegasus,
@@ -582,6 +588,7 @@ const shard: CardShard = {
     _poolDeepfathomSkulker,
     _poolDiregrafCaptain,
     _poolDisposalMummy,
+    _poolDistractingGeist,
     _poolDiversionaryTactics,
     _poolDoctorSpectrum,
     _poolDoomwakeGiant,
@@ -601,6 +608,7 @@ const shard: CardShard = {
     _poolEatToExtinction,
     _poolEerieGravestone,
     _poolEfficientConstruction,
+    _poolElderArthurMaxson,
     _poolElectrolyze,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
@@ -674,6 +682,7 @@ const shard: CardShard = {
     _poolHornetNest,
     _poolHushwoodVerge,
     _poolHydroidKrasis,
+    _poolIllTemperedLoner,
     _poolImodaneThePyrohammer,
     _poolImodanesRecruiter,
     _poolImpsMischief,
@@ -795,6 +804,7 @@ const shard: CardShard = {
     _poolRedMagesRapier,
     _poolRelmsSketching,
     _poolResoluteWatchdog,
+    _poolRestlessBloodseeker,
     _poolRestlessBones,
     _poolReturnToTheLightRealms,
     _poolRimekinRecluse,

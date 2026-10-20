@@ -98,6 +98,7 @@ import _poolDisempower from "../pool/disempower.js";
 import _poolDistrictMascot from "../pool/district-mascot.js";
 import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
+import _poolDorotheasRetribution from "../pool/dorotheas-retribution.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
@@ -171,6 +172,7 @@ import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
+import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
 import _poolHideOnTheCeiling from "../pool/hide-on-the-ceiling.js";
 import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
@@ -216,6 +218,7 @@ import _poolKrenkoBaronOfTinStreet from "../pool/krenko-baron-of-tin-street.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
 import _poolKroxaAndKunoros from "../pool/kroxa-and-kunoros.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
+import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
 import _poolLawRuneEnforcer from "../pool/law-rune-enforcer.js";
@@ -616,6 +619,7 @@ const shard: CardShard = {
     _poolDistrictMascot,
     _poolDoesMachines,
     _poolDoomedNecromancer,
+    _poolDorotheasRetribution,
     _poolDragonBlood,
     _poolDragonlordsServant,
     _poolDragonwingGlider,
@@ -689,6 +693,7 @@ const shard: CardShard = {
     _poolHellkiteOverlord,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
+    _poolHeronBlessedGeist,
     _poolHideOnTheCeiling,
     _poolHighStride,
     _poolHillGiantHerdgorger,
@@ -734,6 +739,7 @@ const shard: CardShard = {
     _poolKrenkoMobBoss,
     _poolKroxaAndKunoros,
     _poolKynaiosAndTiroOfMeletis,
+    _poolLacerateFlesh,
     _poolLakeTownMariners,
     _poolLavafumeInvoker,
     _poolLawRuneEnforcer,

@@ -337,6 +337,7 @@ import _poolRonasVortex from "../pool/ronas-vortex.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
+import _poolRunoStromkirk from "../pool/runo-stromkirk.js";
 import _poolSHIELDDeploymentDrone from "../pool/s-h-i-e-l-d-deployment-drone.js";
 import _poolSacellumArchers from "../pool/sacellum-archers.js";
 import _poolSacredWolf from "../pool/sacred-wolf.js";
@@ -848,6 +849,7 @@ const shard: CardShard = {
     _poolRootbornDefenses,
     _poolRosemaneCentaur,
     _poolRoyalTrooper,
+    _poolRunoStromkirk,
     _poolSHIELDDeploymentDrone,
     _poolSacellumArchers,
     _poolSacredWolf,

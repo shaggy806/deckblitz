@@ -8231,6 +8231,74 @@
   "effect:token-copy-of-revealed-cards": {
    "family": "effect:token-copy-options",
    "example": "Haunting Imitation"
+  },
+  "condition:is-night": {
+   "family": "mechanic:day-night",
+   "example": "Wolf Strike"
+  },
+  "replacement:prevent-damage-remove-counters": {
+   "family": "replacement:damage-modification",
+   "example": "Magma Pummeler"
+  },
+  "condition:named-equipment-attached-to-your-creature": {
+   "family": "condition:filter-attachments",
+   "example": "Bride's Gown"
+  },
+  "filter:shares-land-type-with-controlled": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Hiveheart Shaman"
+  },
+  "filter:attacking-you": {
+   "family": "condition:creature-attacking-you",
+   "example": "Boarded Window"
+  },
+  "trigger:combat-damage-to-enchanted-player": {
+   "family": "trigger:combat-damage-to-you-trigger",
+   "example": "Curse of Hospitality"
+  },
+  "filter:same-name-as-exiled-with-source": {
+   "family": "condition:filter-same-name-as-source",
+   "example": "Circle of Confinement"
+  },
+  "trigger:this-and-or-others-enter-once": {
+   "family": "bug:self-or-another-trigger",
+   "example": "Anje, Maid of Dishonor"
+  },
+  "trigger:discard-this-card": {
+   "family": "trigger:discards-extensions",
+   "example": "Edgar's Awakening"
+  },
+  "condition:target-controller-controls-no-other-creatures": {
+   "family": "condition:that-player-controls-more",
+   "example": "Skulking Killer"
+  },
+  "trigger:plays-card-exiled-with-source": {
+   "family": "zone:impulse-permission-options",
+   "example": "Voltaic Visionary // Volt-Charged Berserker"
+  },
+  "effect:amount-greatest-count-among-players": {
+   "family": "effect:aggregate-of-target-players-permanents",
+   "example": "Investigator's Journal"
+  },
+  "effect:copy-exception-static-ability": {
+   "family": "effect:copy-exceptions",
+   "example": "Dollhouse of Horrors"
+  },
+  "trigger:becomes-target-by-aura-spell": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Brine Comber // Brinebound Gift"
+  },
+  "static:cant-attack-alone": {
+   "family": "static:attack-limit",
+   "example": "Militia Rallier"
+  },
+  "effect:extra-turn-scoped-effects": {
+   "family": "condition:extra-turn",
+   "example": "Alchemist's Gambit"
+  },
+  "effect:player-max-hand-size-adjust-for-game": {
+   "family": "effect:player-no-max-hand-size-for-game",
+   "example": "Inspired Idea"
   }
  }
 }

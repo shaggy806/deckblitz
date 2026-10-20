@@ -46,6 +46,7 @@ import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
+import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
 import _poolBodyLaunderer from "../pool/body-launderer.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
 import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
@@ -225,6 +226,7 @@ import _poolKitsuneAce from "../pool/kitsune-ace.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
+import _poolKrothussLordOfTheDeep from "../pool/krothuss-lord-of-the-deep.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
 import _poolLakeshoreApothecary from "../pool/lakeshore-apothecary.js";
 import _poolLasydProwler from "../pool/lasyd-prowler.js";
@@ -279,6 +281,7 @@ import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
+import _poolOdricBloodCursed from "../pool/odric-blood-cursed.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
 import _poolOnduKnotmaster from "../pool/ondu-knotmaster.js";
@@ -464,6 +467,7 @@ import _poolWinterEladrin from "../pool/winter-eladrin.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
+import _poolWretchedThrong from "../pool/wretched-throng.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
 import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
 import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
@@ -483,6 +487,7 @@ import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-toke
 import _tokensSheepToken from "../tokens/sheep-token.js";
 import _tokensSoldierTokenWhite22 from "../tokens/soldier-token-white-2-2.js";
 import _tokensSpiritClericToken from "../tokens/spirit-cleric-token.js";
+import _tokensSpiritTokenDorotheasRetribution from "../tokens/spirit-token-dorotheas-retribution.js";
 import _tokensWizardTokenKuja from "../tokens/wizard-token-kuja.js";
 import _tokensWurmToken from "../tokens/wurm-token.js";
 
@@ -531,6 +536,7 @@ const shard: CardShard = {
     _poolBlisteringDieflyn,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
+    _poolBloodtitheHarvester,
     _poolBodyLaunderer,
     _poolBrambleWurm,
     _poolBrambleguardCaptain,
@@ -710,6 +716,7 @@ const shard: CardShard = {
     _poolKnightOfNewBenalia,
     _poolKraulWhipcracker,
     _poolKrileBaldesion,
+    _poolKrothussLordOfTheDeep,
     _poolKydeleChosenOfKruphix,
     _poolLakeshoreApothecary,
     _poolLasydProwler,
@@ -764,6 +771,7 @@ const shard: CardShard = {
     _poolNorwoodArchers,
     _poolNyxbornSeaguard,
     _poolObscuraAscendancy,
+    _poolOdricBloodCursed,
     _poolOldGrowthGrove,
     _poolOmashuCity,
     _poolOnduKnotmaster,
@@ -949,6 +957,7 @@ const shard: CardShard = {
     _poolWintersGrasp,
     _poolWondrousRevival,
     _poolWoodedBastion,
+    _poolWretchedThrong,
     _poolWurmcoilLarva,
     _poolZephyrSentinel,
     _poolZoeticGlyph,
@@ -970,6 +979,7 @@ const shard: CardShard = {
     _tokensSheepToken,
     _tokensSoldierTokenWhite22,
     _tokensSpiritClericToken,
+    _tokensSpiritTokenDorotheasRetribution,
     _tokensWizardTokenKuja,
     _tokensWurmToken,
   ],

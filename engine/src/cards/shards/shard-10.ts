@@ -20,6 +20,7 @@ import _poolAnointedProcession from "../pool/anointed-procession.js";
 import _poolAppendageAmalgam from "../pool/appendage-amalgam.js";
 import _poolArahboRoarOfTheWorld from "../pool/arahbo-roar-of-the-world.js";
 import _poolArchenemysCharm from "../pool/archenemys-charm.js";
+import _poolArmTheCathars from "../pool/arm-the-cathars.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
@@ -182,6 +183,7 @@ import _poolGreyHostReinforcements from "../pool/grey-host-reinforcements.js";
 import _poolGrimMonolith from "../pool/grim-monolith.js";
 import _poolGrimPhysician from "../pool/grim-physician.js";
 import _poolGrowingDread from "../pool/growing-dread.js";
+import _poolGryffwingCavalry from "../pool/gryffwing-cavalry.js";
 import _poolGuardianAugmenter from "../pool/guardian-augmenter.js";
 import _poolHammerOfNazahn from "../pool/hammer-of-nazahn.js";
 import _poolHardenedEscort from "../pool/hardened-escort.js";
@@ -516,6 +518,7 @@ const shard: CardShard = {
     _poolAppendageAmalgam,
     _poolArahboRoarOfTheWorld,
     _poolArchenemysCharm,
+    _poolArmTheCathars,
     _poolArmyAnts,
     _poolAsceticism,
     _poolAuroraShifter,
@@ -678,6 +681,7 @@ const shard: CardShard = {
     _poolGrimMonolith,
     _poolGrimPhysician,
     _poolGrowingDread,
+    _poolGryffwingCavalry,
     _poolGuardianAugmenter,
     _poolHammerOfNazahn,
     _poolHardenedEscort,

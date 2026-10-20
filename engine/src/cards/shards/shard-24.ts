@@ -188,6 +188,7 @@ import _poolHellsKitchen from "../pool/hells-kitchen.js";
 import _poolHerdBaloth from "../pool/herd-baloth.js";
 import _poolHeritageDruid from "../pool/heritage-druid.js";
 import _poolHermesOverseerOfElpis from "../pool/hermes-overseer-of-elpis.js";
+import _poolHeronOfHope from "../pool/heron-of-hope.js";
 import _poolHerosHeirloom from "../pool/heros-heirloom.js";
 import _poolHexhavenInvigorator from "../pool/hexhaven-invigorator.js";
 import _poolHexingSquelcher from "../pool/hexing-squelcher.js";
@@ -262,6 +263,7 @@ import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
+import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
@@ -276,6 +278,7 @@ import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
+import _poolPointedDiscussion from "../pool/pointed-discussion.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
@@ -322,6 +325,7 @@ import _poolScorpionSentinel from "../pool/scorpion-sentinel.js";
 import _poolScourgeOfValkas from "../pool/scourge-of-valkas.js";
 import _poolScrapworkCohort from "../pool/scrapwork-cohort.js";
 import _poolScreamingFury from "../pool/screaming-fury.js";
+import _poolScreamingSwarm from "../pool/screaming-swarm.js";
 import _poolScrivener from "../pool/scrivener.js";
 import _poolScytheLeopard from "../pool/scythe-leopard.js";
 import _poolSeachromeCoast from "../pool/seachrome-coast.js";
@@ -654,6 +658,7 @@ const shard: CardShard = {
     _poolHerdBaloth,
     _poolHeritageDruid,
     _poolHermesOverseerOfElpis,
+    _poolHeronOfHope,
     _poolHerosHeirloom,
     _poolHexhavenInvigorator,
     _poolHexingSquelcher,
@@ -728,6 +733,7 @@ const shard: CardShard = {
     _poolNicolBolasTheRavager,
     _poolNinjaOfTheHand,
     _poolNovaFlame,
+    _poolNurturingPresence,
     _poolOakhameAdversary,
     _poolObscuraStorefront,
     _poolOgreSlumlord,
@@ -742,6 +748,7 @@ const shard: CardShard = {
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
     _poolPitilessGorgon,
+    _poolPointedDiscussion,
     _poolPoisonArrow,
     _poolPolliwallop,
     _poolPramikonSkyRampart,
@@ -788,6 +795,7 @@ const shard: CardShard = {
     _poolScourgeOfValkas,
     _poolScrapworkCohort,
     _poolScreamingFury,
+    _poolScreamingSwarm,
     _poolScrivener,
     _poolScytheLeopard,
     _poolSeachromeCoast,

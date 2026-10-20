@@ -161,6 +161,7 @@ import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
 import _poolFlamekinGildweaver from "../pool/flamekin-gildweaver.js";
 import _poolFledglingDjinn from "../pool/fledgling-djinn.js";
 import _poolFleetfeatherSandals from "../pool/fleetfeather-sandals.js";
+import _poolFleetingSpirit from "../pool/fleeting-spirit.js";
 import _poolFleshToDust from "../pool/flesh-to-dust.js";
 import _poolFloraColossus from "../pool/flora-colossus.js";
 import _poolFlowstoneCrusher from "../pool/flowstone-crusher.js";
@@ -284,6 +285,7 @@ import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
 import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
 import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
+import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
 import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
 import _poolMonstrousRage from "../pool/monstrous-rage.js";
@@ -310,6 +312,7 @@ import _poolOxDrover from "../pool/ox-drover.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
 import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick.js";
 import _poolPanacea from "../pool/panacea.js";
+import _poolParasiticGrasp from "../pool/parasitic-grasp.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
@@ -449,6 +452,7 @@ import _poolWalkingBallista from "../pool/walking-ballista.js";
 import _poolWargRider from "../pool/warg-rider.js";
 import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
+import _poolWeddingInvitation from "../pool/wedding-invitation.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
 import _poolWhisperingWizard from "../pool/whispering-wizard.js";
 import _poolWhitesunsPassage from "../pool/whitesuns-passage.js";
@@ -638,6 +642,7 @@ const shard: CardShard = {
     _poolFlamekinGildweaver,
     _poolFledglingDjinn,
     _poolFleetfeatherSandals,
+    _poolFleetingSpirit,
     _poolFleshToDust,
     _poolFloraColossus,
     _poolFlowstoneCrusher,
@@ -761,6 +766,7 @@ const shard: CardShard = {
     _poolMischievousSneakling,
     _poolMistwalker,
     _poolMnemonicSphere,
+    _poolMoldgrafMillipede,
     _poolMoltenDuplication,
     _poolMonkRealist,
     _poolMonstrousRage,
@@ -787,6 +793,7 @@ const shard: CardShard = {
     _poolPactdollTerror,
     _poolPaladinDanseSteelMaverick,
     _poolPanacea,
+    _poolParasiticGrasp,
     _poolParasiticImpetus,
     _poolPearledUnicorn,
     _poolPegasusGuardian,
@@ -926,6 +933,7 @@ const shard: CardShard = {
     _poolWargRider,
     _poolWarleadersHelix,
     _poolWeakness,
+    _poolWeddingInvitation,
     _poolWhirlerRogue,
     _poolWhisperingWizard,
     _poolWhitesunsPassage,

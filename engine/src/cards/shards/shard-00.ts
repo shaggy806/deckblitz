@@ -24,6 +24,7 @@ import _poolApocalypseRunner from "../pool/apocalypse-runner.js";
 import _poolArcaneSanctum from "../pool/arcane-sanctum.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
+import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
 import _poolAwakeningZone from "../pool/awakening-zone.js";
@@ -126,6 +127,7 @@ import _poolDoubleVision from "../pool/double-vision.js";
 import _poolDowsingDagger from "../pool/dowsing-dagger.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
 import _poolDreadfulAsTheStorm from "../pool/dreadful-as-the-storm.js";
+import _poolDreadlightMonstrosity from "../pool/dreadlight-monstrosity.js";
 import _poolDreamSeizer from "../pool/dream-seizer.js";
 import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
 import _poolDusyutEarthcarver from "../pool/dusyut-earthcarver.js";
@@ -540,6 +542,7 @@ const shard: CardShard = {
     _poolArcaneSanctum,
     _poolArchiveArbiter,
     _poolArvadTheCursed,
+    _poolAscendantPackleader,
     _poolAvenCloudchaser,
     _poolAvenSentry,
     _poolAwakeningZone,
@@ -642,6 +645,7 @@ const shard: CardShard = {
     _poolDowsingDagger,
     _poolDragonEngine,
     _poolDreadfulAsTheStorm,
+    _poolDreadlightMonstrosity,
     _poolDreamSeizer,
     _poolDrogskolShieldmate,
     _poolDusyutEarthcarver,

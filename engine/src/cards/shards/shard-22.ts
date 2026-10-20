@@ -27,6 +27,7 @@ import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
 import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
+import _poolAvabruckCaretaker from "../pool/avabruck-caretaker.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
 import _poolBarrageOgre from "../pool/barrage-ogre.js";
@@ -36,6 +37,7 @@ import _poolBeaconOfTomorrows from "../pool/beacon-of-tomorrows.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
+import _poolBindingGeist from "../pool/binding-geist.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
@@ -97,6 +99,7 @@ import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
+import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
 import _poolDisplace from "../pool/displace.js";
@@ -138,6 +141,7 @@ import _poolFarseek from "../pool/farseek.js";
 import _poolFarsightRitual from "../pool/farsight-ritual.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
 import _poolFelidarSavior from "../pool/felidar-savior.js";
+import _poolFellStinger from "../pool/fell-stinger.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
@@ -206,6 +210,7 @@ import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
+import _poolLanternsLift from "../pool/lanterns-lift.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
@@ -327,6 +332,7 @@ import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
 import _poolSakashimasStudent from "../pool/sakashimas-student.js";
 import _poolSamwiseGamgee from "../pool/samwise-gamgee.js";
+import _poolSanguineStatuette from "../pool/sanguine-statuette.js";
 import _poolSavvyHunter from "../pool/savvy-hunter.js";
 import _poolSawItComing from "../pool/saw-it-coming.js";
 import _poolScaleTheHeights from "../pool/scale-the-heights.js";
@@ -393,6 +399,7 @@ import _poolSurlyBadgersaur from "../pool/surly-badgersaur.js";
 import _poolSurveillanceMonitor from "../pool/surveillance-monitor.js";
 import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
+import _poolSyphonEssence from "../pool/syphon-essence.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
@@ -518,6 +525,7 @@ const shard: CardShard = {
     _poolAtlanteanSkirmisher,
     _poolAtmosphereSurgeon,
     _poolAugerSpree,
+    _poolAvabruckCaretaker,
     _poolAvenFleetwing,
     _poolBaronAirshipKingdom,
     _poolBarrageOgre,
@@ -527,6 +535,7 @@ const shard: CardShard = {
     _poolBeeSting,
     _poolBenalishHeralds,
     _poolBespokeBattlegarb,
+    _poolBindingGeist,
     _poolBlackWidowIntelExpert,
     _poolBlindingDrone,
     _poolBloomTender,
@@ -588,6 +597,7 @@ const shard: CardShard = {
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
     _poolDelugeVirtuoso,
+    _poolDireStrainAnarchist,
     _poolDireWolfProwler,
     _poolDispellersCapsule,
     _poolDisplace,
@@ -629,6 +639,7 @@ const shard: CardShard = {
     _poolFarsightRitual,
     _poolFearOfImpostors,
     _poolFelidarSavior,
+    _poolFellStinger,
     _poolFightingDrake,
     _poolFirebirdBlazingRanger,
     _poolFlickerOfFate,
@@ -697,6 +708,7 @@ const shard: CardShard = {
     _poolKnightOfTheWhiteOrchid,
     _poolKonstrariAnnex,
     _poolKrotiqNestguard,
+    _poolLanternsLift,
     _poolLaserScrewdriver,
     _poolLashOfTheBalrog,
     _poolLashwhipPredator,
@@ -818,6 +830,7 @@ const shard: CardShard = {
     _poolSacrifice,
     _poolSakashimasStudent,
     _poolSamwiseGamgee,
+    _poolSanguineStatuette,
     _poolSavvyHunter,
     _poolSawItComing,
     _poolScaleTheHeights,
@@ -884,6 +897,7 @@ const shard: CardShard = {
     _poolSurveillanceMonitor,
     _poolSwashbuckling,
     _poolSwordOfWarAndPeace,
+    _poolSyphonEssence,
     _poolTaigamsScheming,
     _poolTaintedField,
     _poolTalesOfMasterSeshiro,

@@ -109,6 +109,7 @@ import _poolDefendTheRider from "../pool/defend-the-rider.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
 import _poolDeliberate from "../pool/deliberate.js";
 import _poolDemolish from "../pool/demolish.js";
+import _poolDemonicBargain from "../pool/demonic-bargain.js";
 import _poolDerangedOutcast from "../pool/deranged-outcast.js";
 import _poolDesolationProwler from "../pool/desolation-prowler.js";
 import _poolDiminisherWitch from "../pool/diminisher-witch.js";
@@ -386,6 +387,7 @@ import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
+import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
@@ -608,6 +610,7 @@ const shard: CardShard = {
     _poolDeftDuelist,
     _poolDeliberate,
     _poolDemolish,
+    _poolDemonicBargain,
     _poolDerangedOutcast,
     _poolDesolationProwler,
     _poolDiminisherWitch,
@@ -885,6 +888,7 @@ const shard: CardShard = {
     _poolSkitteringCicada,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
+    _poolSkywarpSkaab,
     _poolSmaugTheMagnificent,
     _poolSmugglersSurprise,
     _poolSneeringShadewriter,

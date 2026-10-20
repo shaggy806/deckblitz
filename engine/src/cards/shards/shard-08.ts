@@ -24,6 +24,7 @@ import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
+import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolAquaticIngress from "../pool/aquatic-ingress.js";
@@ -201,6 +202,7 @@ import _poolHighspireMantis from "../pool/highspire-mantis.js";
 import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
 import _poolHinterlandSanctifier from "../pool/hinterland-sanctifier.js";
 import _poolHitMonkey from "../pool/hit-monkey.js";
+import _poolHollowhengeHuntmaster from "../pool/hollowhenge-huntmaster.js";
 import _poolHolyCow from "../pool/holy-cow.js";
 import _poolHolyStrength from "../pool/holy-strength.js";
 import _poolHondenOfSeeingWinds from "../pool/honden-of-seeing-winds.js";
@@ -245,6 +247,7 @@ import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
+import _poolLanternBearer from "../pool/lantern-bearer.js";
 import _poolLastCaress from "../pool/last-caress.js";
 import _poolLavabellySliver from "../pool/lavabelly-sliver.js";
 import _poolLaylaHassan from "../pool/layla-hassan.js";
@@ -482,6 +485,7 @@ import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVitosInquisitor from "../pool/vitos-inquisitor.js";
 import _poolVividMarsh from "../pool/vivid-marsh.js";
 import _poolVivisectionEvangelist from "../pool/vivisection-evangelist.js";
+import _poolVolatileArsonist from "../pool/volatile-arsonist.js";
 import _poolVolatileWanderglyph from "../pool/volatile-wanderglyph.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
@@ -548,6 +552,7 @@ const shard: CardShard = {
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
     _poolAnaraWolvidFamiliar,
+    _poolAngelicQuartermaster,
     _poolAnnieFlashTheVeteran,
     _poolAnzragTheQuakeMole,
     _poolAquaticIngress,
@@ -725,6 +730,7 @@ const shard: CardShard = {
     _poolHinterlandHarbor,
     _poolHinterlandSanctifier,
     _poolHitMonkey,
+    _poolHollowhengeHuntmaster,
     _poolHolyCow,
     _poolHolyStrength,
     _poolHondenOfSeeingWinds,
@@ -769,6 +775,7 @@ const shard: CardShard = {
     _poolKomodoRhino,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
+    _poolLanternBearer,
     _poolLastCaress,
     _poolLavabellySliver,
     _poolLaylaHassan,
@@ -1006,6 +1013,7 @@ const shard: CardShard = {
     _poolVitosInquisitor,
     _poolVividMarsh,
     _poolVivisectionEvangelist,
+    _poolVolatileArsonist,
     _poolVolatileWanderglyph,
     _poolVronosMaskedInquisitor,
     _poolVulshokSplitter,
