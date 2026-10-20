@@ -266,6 +266,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `put-onto-battlefield { exileIfItWouldLeave: "ability" }` grants it on a modifier (`grantsExileIfLeaves`, read in timestamp order by `hasExileIfLeavesAbility`), so a later loss of all abilities strips it; Geth fixed, Llanowar Greenwidow authored (2026-10-20).
 - **`cast-now`'s `play` plays a land only from exile**: `whyCannotPlayLandNow` takes the land from wherever the offer found it (exile, a library's top, a hand, a graveyard); Ziatora's Envoy authored (2026-10-20).
 - **A reflexive trigger's target filter reads the creating ability's `triggerValue`** (603.12): `bindDynamicCompares` binds a reflexive ability's targets with its own `value`, so `{ triggerValue: true }` there is the reflexive one's (2026-10-20).
 - **A multi-target flicker's leaves aren't one batch** (603.2c): `flickerByEffect` exiles inside `withLeaveBatch`, snapshotting every target first, so each leaves trigger reads the board as it stood (Brago, Ghostly Flicker, Eerie Interlude) — ready for Aang's batched leave trigger (2026-10-20).

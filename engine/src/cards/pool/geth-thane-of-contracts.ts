@@ -2,8 +2,9 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 20647.
 //
-// The returned creature's "if this creature would leave the battlefield, exile it instead" is
-// Whip of Erebos's `put-onto-battlefield { exileIfItWouldLeave }`.
+// The returned creature *gains* "if this creature would leave the battlefield, exile it
+// instead": an ability (`exileIfItWouldLeave: "ability"`), so losing all abilities later strips
+// it (rule 613.1f) — unlike Whip of Erebos's effect.
 
 const ANTHEM_TEXT = "Other creatures you control get -1/-1.";
 const RETURN_TEXT =
@@ -23,7 +24,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{B}{B}", tap: true },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }],
-      effect: { kind: "put-onto-battlefield", target: 0, exileIfItWouldLeave: true },
+      effect: { kind: "put-onto-battlefield", target: 0, exileIfItWouldLeave: "ability" },
       resolve: null,
       text: RETURN_TEXT,
       sorcerySpeed: true,

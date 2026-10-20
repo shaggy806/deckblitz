@@ -100,6 +100,7 @@ import {
   exemptFromLegendRule,
   hasAnyAbility,
   hasLostAbilities,
+  hasExileIfLeavesAbility,
   hasLayerFourPart,
   abilitiesLostAt,
   grantOutlastsLoss,
@@ -20767,7 +20768,7 @@ export class Game {
           false,
           enterTapped,
           withCounters,
-          exileIfLeaves === true,
+          exileIfLeaves ?? false,
           transformed === true,
           under,
           types,
@@ -28107,7 +28108,7 @@ export class Game {
     underYourControl: boolean,
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    exileIfItWouldLeave = false,
+    exileIfItWouldLeave: boolean | "ability" = false,
     transformed = false,
     underPlayer?: PlayerId,
     types?: EnterTypes,
@@ -28148,7 +28149,20 @@ export class Game {
       entered.summoningSick = true;
     }
     // Set after the move, which clears it: this is the permanent it follows.
-    if (exileIfItWouldLeave) entered.exileIfItWouldLeave = true;
+    if (exileIfItWouldLeave === true) entered.exileIfItWouldLeave = true;
+    // "It gains 'If this creature would leave …'": an ability, on a modifier
+    // that layer 6 reads in timestamp order (613.1f).
+    if (exileIfItWouldLeave === "ability") {
+      entered.modifiers.push({
+        timestamp: this.freshTimestamp(),
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        untilEndOfTurn: false,
+        grantsExileIfLeaves: true,
+      });
+      invalidateComputedCache();
+    }
     if (withCounters !== undefined) {
       // Put there, counters and all, by whoever puts it onto the battlefield.
       this.addCounter(target, withCounters.kind, withCounters.amount, true, under ?? controller);
@@ -33371,7 +33385,7 @@ export class Game {
     if (
       leavingBattlefield &&
       (to === "graveyard" || to === "hand" || to === "library") &&
-      object.exileIfItWouldLeave === true
+      (object.exileIfItWouldLeave === true || hasExileIfLeavesAbility(object))
     ) {
       this.emit({ type: "leave-replaced-with-exile", object: id, intendedZone: to });
       to = "exile";

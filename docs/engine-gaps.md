@@ -14,12 +14,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
   to pay with life), honoured by the planner first, offered by the client beside the convoke
   picker.
-- **"It gains 'if this would leave the battlefield, exile it instead'" is a flag, not an
-  ability.** `GameObject.exileIfItWouldLeave` is set by effects whose text grants a replacement
-  ability (Geth, Thane of Contracts' returned creature; Llanowar Greenwidow), so an effect that
-  removes all abilities (Humility, rule 613.1f) doesn't remove it. Greenwidow waits; Geth is
-  inaccurate in that corner. **Fix (outline):** grant it as a static on a modifier, as granted
-  triggers ride one, so ability loss in timestamp order applies.
 - **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
   with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
   (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the

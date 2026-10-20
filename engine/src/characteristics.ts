@@ -1515,6 +1515,16 @@ export function modifierGrantApplies(modifier: PtModifier, lostAt: number | null
   return modifier.loseAbilities === true && (modifier.timestamp ?? Infinity) === lostAt;
 }
 
+/** Whether `object` has the granted ability "If this creature would leave the
+ * battlefield, exile it instead of putting it anywhere else" (see
+ * `PtModifier.grantsExileIfLeaves`) — not lost to a later loss of all
+ * abilities (rule 613.1f). */
+export function hasExileIfLeavesAbility(object: GameObject): boolean {
+  if (!object.modifiers.some((m) => m.grantsExileIfLeaves === true)) return false;
+  const lostAt = abilitiesLostAt(object);
+  return object.modifiers.some((m) => m.grantsExileIfLeaves === true && modifierGrantApplies(m, lostAt));
+}
+
 /** The timestamp of `object`'s keyword counters of kind `keyword` (rule
  * 613.7c — every counter of a kind takes the newest one's), or the
  * permanent's own for one it entered with. */

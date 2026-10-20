@@ -4051,7 +4051,11 @@ clause (section 9):
 - "If it would leave the battlefield, exile it instead of putting it anywhere
   else" follows one object, not a static — `put-onto-battlefield
   { exileIfItWouldLeave: true }` (Whip of Erebos). It catches a bounce or a
-  tuck as well as a death, and ends when the permanent leaves.
+  tuck as well as a death, and ends when the permanent leaves. That's a
+  replacement effect, which losing all abilities doesn't touch; a card that says
+  the permanent **gains** it as an ability (Geth, Thane of Contracts; Llanowar
+  Greenwidow) is `exileIfItWouldLeave: "ability"` — granted in layer 6, so a later
+  Humility or Turn to Frog strips it (rule 613.1f).
 - `{ event: "would-draw", who: "opponent", instead: "you-draw",
   exceptFirstInDrawStep: true }` — Notion Thief's "if an opponent would draw a
   card except the first one they draw in each of their draw steps, instead

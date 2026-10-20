@@ -7637,6 +7637,7 @@ import _poolLlanowarCavalry from "./pool/llanowar-cavalry.js";
 import _poolLlanowarDead from "./pool/llanowar-dead.js";
 import _poolLlanowarElves from "./pool/llanowar-elves.js";
 import _poolLlanowarEnvoy from "./pool/llanowar-envoy.js";
+import _poolLlanowarGreenwidow from "./pool/llanowar-greenwidow.js";
 import _poolLlanowarKnight from "./pool/llanowar-knight.js";
 import _poolLlanowarLoamspeaker from "./pool/llanowar-loamspeaker.js";
 import _poolLlanowarReborn from "./pool/llanowar-reborn.js";
@@ -23623,6 +23624,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLlanowarDead,
   _poolLlanowarElves,
   _poolLlanowarEnvoy,
+  _poolLlanowarGreenwidow,
   _poolLlanowarKnight,
   _poolLlanowarLoamspeaker,
   _poolLlanowarReborn,

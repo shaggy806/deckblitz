@@ -175,7 +175,6 @@ there and move this line to `COMPLETED.md`.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
-- **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `exileIfItWouldLeave` survives ability loss (Geth, Thane of Contracts; Llanowar Greenwidow waits).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
 - **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).

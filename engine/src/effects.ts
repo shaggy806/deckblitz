@@ -1937,8 +1937,13 @@ export type EffectSpec =
       readonly withCounters?: { readonly kind: string; readonly amount: number };
       /** "If it would leave the battlefield, exile it instead of putting it
        * anywhere else" (Whip of Erebos) — sets
-       * `GameObject.exileIfItWouldLeave` on the permanent it becomes. */
-      readonly exileIfItWouldLeave?: boolean;
+       * `GameObject.exileIfItWouldLeave` on the permanent it becomes: a
+       * replacement effect of this resolution, which nothing that removes
+       * abilities touches. `"ability"` is "it **gains** 'If this creature
+       * would leave the battlefield, exile it …'" (Geth, Thane of Contracts):
+       * an ability, granted in layer 6 on a modifier, so losing all
+       * abilities afterwards takes it away (rule 613.1f, Humility). */
+      readonly exileIfItWouldLeave?: boolean | "ability";
       /** "…onto the battlefield **transformed**" (Ojer Axonil's "return it
        * to the battlefield tapped and transformed") — a transforming
        * double-faced card enters with its back face up. */
@@ -6511,7 +6516,7 @@ export interface EffectApi {
     under: PlayerId | undefined,
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    exileIfItWouldLeave?: boolean,
+    exileIfItWouldLeave?: boolean | "ability",
     transformed?: boolean,
     /** The types it enters with — see the effect's `setTypes` and
      * `addSubtypes`. */
@@ -8599,7 +8604,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           under,
           spec.enterTapped === true,
           spec.withCounters,
-          spec.exileIfItWouldLeave === true,
+          spec.exileIfItWouldLeave,
           spec.transformed === true,
           spec.setTypes !== undefined || spec.addSubtypes !== undefined
             ? {

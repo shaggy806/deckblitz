@@ -754,6 +754,13 @@
     "engine/src/cards/pool/temporary-lockdown.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "Llanowar Greenwidow",
+   "files": [
+    "engine/src/cards/pool/llanowar-greenwidow.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [
@@ -1027,13 +1034,6 @@
     "effect:player-spell-tax-this-turn"
    ],
    "why": "\"Spells they cast this turn cost {2} more\" on whichever player drew — you included."
-  },
-  {
-   "name": "Llanowar Greenwidow",
-   "needs": [
-    "effect:grant-static-to-permanent"
-   ],
-   "why": "It gains a replacement ability (\"if this permanent would leave, exile it\") that ability loss can strip."
   },
   {
    "name": "Karn's Sylex",

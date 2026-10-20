@@ -1237,6 +1237,13 @@ export interface PtModifier {
    * Insight). The ongoing, static equivalent is
    * `StaticAbility.grantsTriggered`. */
   grantsTriggered?: TriggeredAbility[];
+  /** Layer 6 — the ability "If this creature would leave the battlefield,
+   * exile it instead of putting it anywhere else", granted by an effect that
+   * says it **gains** it (Geth, Thane of Contracts — `put-onto-battlefield
+   * { exileIfItWouldLeave: "ability" }`). Unlike the replacement effect
+   * `GameObject.exileIfItWouldLeave`, losing all abilities later in
+   * timestamp order removes it (rule 613.1f) — `hasExileIfLeavesAbility`. */
+  grantsExileIfLeaves?: true;
   /** Layer 6 — activated abilities this modifier grants: a copy exception's
    * "and it has '{2}, {T}, Sacrifice this token: You gain 3 life.'"
    * (Brenard, Ginger Sculptor). Seen by `legalActions`, activation and the
