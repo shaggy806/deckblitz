@@ -139,3 +139,18 @@ describe("Sleep", () => {
     expect(game.state.objects[giant].tapped).toBe(false);
   });
 });
+
+describe("Mogg Infestation", () => {
+  it("that player gets two Goblins for each creature that died this way", () => {
+    const { game } = table();
+    lands(game, "Mountain", 5);
+    spawn(game, "Grizzly Bears", B);
+    spawn(game, "Hill Giant", B);
+    spawn(game, "Darksteel Colossus", B);
+    cast(game, toHand(game, "Mogg Infestation"), { targets: [ref(B)] });
+    const goblins = game.state.zones.shared.battlefield.filter(
+      (id) => game.state.objects[id].cardName === "Goblin Token" && game.state.objects[id].controller === B,
+    );
+    expect(goblins.reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0)).toBe(4);
+  });
+});

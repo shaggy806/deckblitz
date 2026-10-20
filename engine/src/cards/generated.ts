@@ -8476,6 +8476,7 @@ import _poolMockingbirdBobbiMorse from "./pool/mockingbird-bobbi-morse.js";
 import _poolMockingbird from "./pool/mockingbird.js";
 import _poolModelOfUnity from "./pool/model-of-unity.js";
 import _poolMogMoogleWarrior from "./pool/mog-moogle-warrior.js";
+import _poolMoggInfestation from "./pool/mogg-infestation.js";
 import _poolMoggMob from "./pool/mogg-mob.js";
 import _poolMoggRaider from "./pool/mogg-raider.js";
 import _poolMoggSalvage from "./pool/mogg-salvage.js";
@@ -24505,6 +24506,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMockingbird,
   _poolModelOfUnity,
   _poolMogMoogleWarrior,
+  _poolMoggInfestation,
   _poolMoggMob,
   _poolMoggRaider,
   _poolMoggSalvage,

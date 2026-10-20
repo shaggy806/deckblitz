@@ -262,6 +262,7 @@ import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
 import _poolMistveilPlains from "../pool/mistveil-plains.js";
+import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
@@ -758,6 +759,7 @@ const shard: CardShard = {
     _poolMiscalculation,
     _poolMistralSinger,
     _poolMistveilPlains,
+    _poolMoggInfestation,
     _poolMoggcatcher,
     _poolMoltenCollapse,
     _poolMorbidOpportunist,
