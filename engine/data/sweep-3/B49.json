@@ -349,6 +349,13 @@
         "engine/src/cards/pool/constricting-sliver.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Surge of Brilliance",
+      "files": [
+        "engine/src/cards/pool/surge-of-brilliance.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -465,13 +472,6 @@
         "mechanic:mutate"
       ],
       "why": "Mutate isn't built."
-    },
-    {
-      "name": "Surge of Brilliance",
-      "needs": [
-        "stat:spells-cast-not-from-hand-this-turn"
-      ],
-      "why": "castThisTurn's records are LKI snapshots without castFrom (castRecordOf runs before object.castFrom is set and takeLastKnown doesn't copy it), so 'spells cast this turn from anywhere other than your hand' can't be counted."
     },
     {
       "name": "Goblin Cratermaker",

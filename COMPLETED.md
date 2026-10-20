@@ -266,6 +266,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **A spell cast this turn forgets where it was cast from** — already fixed: `castRecordOf` writes the cast's zone into the record's `entry.cast`; pinned by `cast-record-from.test.ts`, and Surge of Brilliance authored (2026-10-20).
 - **Suspend's time-counter triggers don't use the stack** (702.62a): the upkeep's "remove a time counter" and "when the last is removed, you may play it" are the owner's triggers on the stack (`suspendTrigger`), however the last counter came off (time travel too), so players can respond to each; `pendingSuspendedCasts` is gone. Cards whose own triggers work while suspended (Deep-Sea Kraken) still wait on `trigger:functions-while-suspended` (2026-10-20).
 - **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `put-onto-battlefield { exileIfItWouldLeave: "ability" }` grants it on a modifier (`grantsExileIfLeaves`, read in timestamp order by `hasExileIfLeavesAbility`), so a later loss of all abilities strips it; Geth fixed, Llanowar Greenwidow authored (2026-10-20).
 - **`cast-now`'s `play` plays a land only from exile**: `whyCannotPlayLandNow` takes the land from wherever the offer found it (exile, a library's top, a hand, a graveyard); Ziatora's Envoy authored (2026-10-20).

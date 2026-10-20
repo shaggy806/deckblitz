@@ -395,6 +395,7 @@ import _poolSultaiBanner from "../pool/sultai-banner.js";
 import _poolSunhomeGuildmage from "../pool/sunhome-guildmage.js";
 import _poolSuperMutantScavenger from "../pool/super-mutant-scavenger.js";
 import _poolSupplyDrop from "../pool/supply-drop.js";
+import _poolSurgeOfBrilliance from "../pool/surge-of-brilliance.js";
 import _poolSurgicalSuite from "../pool/surgical-suite.js";
 import _poolSwabGoblin from "../pool/swab-goblin.js";
 import _poolSwamp from "../pool/swamp.js";
@@ -879,6 +880,7 @@ const shard: CardShard = {
     _poolSunhomeGuildmage,
     _poolSuperMutantScavenger,
     _poolSupplyDrop,
+    _poolSurgeOfBrilliance,
     _poolSurgicalSuite,
     _poolSwabGoblin,
     _poolSwamp,

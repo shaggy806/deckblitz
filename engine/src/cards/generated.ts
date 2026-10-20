@@ -12874,6 +12874,7 @@ import _poolSureStrike from "./pool/sure-strike.js";
 import _poolSureshotSower from "./pool/sureshot-sower.js";
 import _poolSurgeConductor from "./pool/surge-conductor.js";
 import _poolSurgeEngine from "./pool/surge-engine.js";
+import _poolSurgeOfBrilliance from "./pool/surge-of-brilliance.js";
 import _poolSurgehackerMech from "./pool/surgehacker-mech.js";
 import _poolSurgicalPrecision from "./pool/surgical-precision.js";
 import _poolSurgicalSkullbomb from "./pool/surgical-skullbomb.js";
@@ -28861,6 +28862,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSureshotSower,
   _poolSurgeConductor,
   _poolSurgeEngine,
+  _poolSurgeOfBrilliance,
   _poolSurgehackerMech,
   _poolSurgicalPrecision,
   _poolSurgicalSkullbomb,

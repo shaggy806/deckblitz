@@ -191,7 +191,6 @@ there and move this line to `COMPLETED.md`.
 - **A token copy isn't asked its "as this enters" choice.**
 - **Proliferate over a token stack** gives every member a counter.
 - **Distinct targets in one token stack** can't take two tokens of one stack.
-- **A spell cast this turn forgets where it was cast from** (latent; Surge of Brilliance waits on it): `cast-this-turn` with a `castFrom` filter matches nothing.
 - **A source's chosen colour or number isn't read from last-known information** (latent).
 
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each

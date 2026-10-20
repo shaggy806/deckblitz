@@ -127,12 +127,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
 that needs it is authored.
 
-- **A spell cast this turn forgets where it was cast from** — `Game.castRecordOf` snapshots the
-  spell for `PlayerState.spellsCastThisTurnAs` a few lines before `object.castFrom` is set (and
-  `takeLastKnown` doesn't copy `castFrom` anyway), so a `cast-this-turn` condition whose filter
-  has `castFrom` matches no record. No pool card asks yet; Surge of Brilliance ("spells you've cast
-  this turn from anywhere other than your hand") waits on it (`stat:spells-cast-not-from-hand-this-turn`,
-  batch 49). Fix: record after `castFrom` is set, and carry it in the snapshot.
 
 
 - **A source's chosen colour or number isn't read from last-known information** (latent). Since
