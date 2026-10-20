@@ -176,6 +176,7 @@ import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGoliathPaladin from "../pool/goliath-paladin.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
+import _poolGravenLore from "../pool/graven-lore.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
 import _poolGruulLocket from "../pool/gruul-locket.js";
 import _poolGuidestoneCompass from "../pool/guidestone-compass.js";
@@ -659,6 +660,7 @@ const shard: CardShard = {
     _poolGoliathPaladin,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
+    _poolGravenLore,
     _poolGreatUglyLookingGoblin,
     _poolGruulLocket,
     _poolGuidestoneCompass,

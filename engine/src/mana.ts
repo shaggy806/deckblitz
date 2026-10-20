@@ -183,6 +183,10 @@ export interface ManaCost {
   readonly colored: Record<Color, number>;
   /** `{C}` pips — must be paid with colorless mana specifically (rule 107.4c). */
   readonly colorless: number;
+  /** `{S}` pips — each paid with one mana of any type made by a snow source
+   * (rule 107.4h; `ManaUnit.from`'s supertypes). A generic cost reduction
+   * doesn't touch them (107.4h). Each counts 1 toward mana value. */
+  readonly snow: number;
   /** Number of `{X}` symbols in the cost (0 for most cards, 1 for an X spell).
    * The chosen value of X is multiplied by this and added to `generic` when
    * the cost is actually paid — see `Game.effectiveCost`. */
@@ -221,15 +225,15 @@ function parseHybridPip(body: string): HybridPip {
 /**
  * Parse a cost string like `"{2}{G}{G}"`, `"{X}{R}"`, `"{C}{C}"`, `"{2/W}{2/W}"`,
  * or `"{R/P}"`. Supports generic (`{N}`), the five colored symbols, `{C}`
- * (colorless), `{X}`, `{S}` (snow — modeled as generic, since no snow permanent
- * exists to distinguish it), and hybrid / twobrid / Phyrexian pips (`{W/U}`,
- * `{2/W}`, `{W/P}`).
+ * (colorless), `{X}`, `{S}` (snow — `ManaCost.snow`), and hybrid / twobrid /
+ * Phyrexian pips (`{W/U}`, `{2/W}`, `{W/P}`).
  */
 export function parseManaCost(text: string | null): ManaCost {
   const colored: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
   const hybrid: HybridPip[] = [];
   let generic = 0;
   let colorless = 0;
+  let snow = 0;
   let x = 0;
   for (const token of text?.match(/\{[^}]+\}/g) ?? []) {
     const symbol = token.slice(1, -1);
@@ -240,7 +244,7 @@ export function parseManaCost(text: string | null): ManaCost {
     } else if (symbol === "C") {
       colorless += 1;
     } else if (symbol === "S") {
-      generic += 1;
+      snow += 1;
     } else if (isColor(symbol)) {
       colored[symbol] += 1;
     } else if (symbol.includes("/")) {
@@ -249,7 +253,7 @@ export function parseManaCost(text: string | null): ManaCost {
       throw new Error(`unsupported mana symbol: ${token}`);
     }
   }
-  return { generic, colored, colorless, x, hybrid };
+  return { generic, colored, colorless, snow, x, hybrid };
 }
 
 /** Mana value of one hybrid pip (rule 202.3f): the greatest among its
@@ -266,6 +270,7 @@ export function manaValue(cost: ManaCost): number {
   return (
     COLORS.reduce((sum, color) => sum + cost.colored[color], cost.generic) +
     cost.colorless +
+    cost.snow +
     cost.hybrid.reduce((sum, pip) => sum + hybridPipValue(pip), 0)
   );
 }
@@ -346,6 +351,7 @@ export function reduceManaCost(
     generic,
     colored: nextColored,
     colorless: cost.colorless,
+    snow: cost.snow,
     x: cost.x,
     hybrid,
     ...(twobridReduction > 0 ? { twobridReduction } : {}),
@@ -358,6 +364,7 @@ export function cheapestManaAmount(cost: ManaCost): number {
   return (
     COLORS.reduce((sum, color) => sum + cost.colored[color], cost.generic) +
     cost.colorless +
+    cost.snow +
     cost.hybrid.reduce(
       (sum, pip) =>
         sum + Math.min(...pip.map((option) => (option.kind === "generic" ? option.amount : 1))),

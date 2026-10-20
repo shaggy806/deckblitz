@@ -156,6 +156,7 @@ import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
+import _poolFrostAugur from "../pool/frost-augur.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
@@ -658,6 +659,7 @@ const shard: CardShard = {
     _poolFowlStrike,
     _poolFriendlyGhost,
     _poolFromTheCatacombs,
+    _poolFrostAugur,
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
     _poolGavonyTrapper,

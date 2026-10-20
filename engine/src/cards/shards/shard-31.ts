@@ -229,6 +229,7 @@ import _poolHulkingDevil from "../pool/hulking-devil.js";
 import _poolHungryRidgewolf from "../pool/hungry-ridgewolf.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
+import _poolIcehideTroll from "../pool/icehide-troll.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
@@ -752,6 +753,7 @@ const shard: CardShard = {
     _poolHungryRidgewolf,
     _poolHuntedHorror,
     _poolHydroelectricLaboratory,
+    _poolIcehideTroll,
     _poolIcewindElemental,
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,

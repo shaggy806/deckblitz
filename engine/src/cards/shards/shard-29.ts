@@ -141,6 +141,7 @@ import _poolExpandedAnatomy from "../pool/expanded-anatomy.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
+import _poolFacelessHaven from "../pool/faceless-haven.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
 import _poolFairgroundsPatrol from "../pool/fairgrounds-patrol.js";
 import _poolFalconAbomination from "../pool/falcon-abomination.js";
@@ -663,6 +664,7 @@ const shard: CardShard = {
     _poolExploreTheUnderdark,
     _poolExtractFromDarkness,
     _poolEyeOfRamos,
+    _poolFacelessHaven,
     _poolFadeIntoAntiquity,
     _poolFairgroundsPatrol,
     _poolFalconAbomination,

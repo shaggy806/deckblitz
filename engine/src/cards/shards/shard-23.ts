@@ -183,6 +183,7 @@ import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
+import _poolGrimDraugr from "../pool/grim-draugr.js";
 import _poolGuma from "../pool/guma.js";
 import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
@@ -704,6 +705,7 @@ const shard: CardShard = {
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,
     _poolGreenwoodSentinel,
+    _poolGrimDraugr,
     _poolGuma,
     _poolGustSkimmer,
     _poolHalanaAndAlenaPartners,

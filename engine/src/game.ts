@@ -251,6 +251,7 @@ import type {
   SpendAs,
 } from "./mana.js";
 import {
+  isSnowMana,
   manaCombinations,
   multipliedManaOption,
   planPayment,
@@ -9419,8 +9420,13 @@ export class Game {
     let genericShown = false;
     for (const token of printed.match(/\{[^}]+\}/g) ?? []) {
       const symbol = token.slice(1, -1);
-      // The generic part, snow ({S}) included, is shown once as one number.
-      if (/^\d+$/.test(symbol) || symbol === "S") {
+      // A snow pip stays as printed: nothing reduces it (rule 107.4h).
+      if (symbol === "S") {
+        out.push(token);
+        continue;
+      }
+      // The generic part is shown once as one number.
+      if (/^\d+$/.test(symbol)) {
         if (!genericShown && generic > 0) out.push(`{${generic}}`);
         genericShown = true;
         continue;
@@ -13048,7 +13054,7 @@ export class Game {
     // to pay, which the payer is free to choose.
     if (mod.reduceGenericLeavingOne > 0) {
       const otherSymbols =
-        COLORS.reduce((n, c) => n + parsed.colored[c], 0) + parsed.colorless + parsed.hybrid.length;
+        COLORS.reduce((n, c) => n + parsed.colored[c], 0) + parsed.colorless + parsed.snow + parsed.hybrid.length;
       const floor = Math.max(0, 1 - otherSymbols);
       generic = Math.max(Math.min(generic, floor), generic - mod.reduceGenericLeavingOne);
     }
@@ -13075,6 +13081,7 @@ export class Game {
     const cost: ManaCost = {
       colored: parsed.colored,
       colorless: parsed.colorless,
+      snow: parsed.snow,
       generic: Math.max(0, generic),
       x: 0,
       hybrid: parsed.hybrid,
@@ -14370,7 +14377,9 @@ export class Game {
           const twoColour = parsed.hybrid.every(
             (pip) => pip.length === 2 && pip.every((half) => half.kind === "color"),
           );
-          if (parsed.x > 0 || !twoColour) return;
+          // A converter's cost names mana by type; an `{S}` (rule 107.4h)
+          // names where it came from, which this can't plan for.
+          if (parsed.x > 0 || parsed.snow > 0 || !twoColour) return;
           hybridCost = [
             ...COLORS.flatMap((c) => Array.from({ length: parsed.colored[c] }, (): ManaType[] => [c])),
             ...Array.from({ length: parsed.colorless }, (): ManaType[] => ["C"]),
@@ -14567,6 +14576,9 @@ export class Game {
         isCreature: effectiveTypes(this.state, this.registry, object).includes("creature"),
         options,
         sacrificeSelf,
+        // Its mana is snow mana (rule 107.4h), the supertype `manaOriginOf`
+        // stamps on what it makes.
+        ...(supertypesOf(this.registry, object).includes("snow") ? { snow: true } : {}),
         ...(this.holdsFreeSpell(id) ? { reserved: true } : {}),
       });
     }
@@ -15329,19 +15341,26 @@ export class Game {
     /** Index of a unit of `type` this payment may spend, restricted first, or
      * `-1`. Restricted mana that can't pay for `purpose` is not a candidate
      * at all — it is simply not available to this payment. */
-    const indexOf = (type: ManaType): number => {
+    const indexOfAmong = (type: ManaType, ok: (unit: ManaUnit) => boolean): number => {
       const restricted = pool.findIndex(
         (unit) =>
           unit.type === type &&
+          ok(unit) &&
           unit.restriction !== undefined &&
           this.manaUnitCanPay(player, unit, purpose),
       );
       if (restricted >= 0) return restricted;
-      return pool.findIndex((unit) => unit.type === type && unit.restriction === undefined);
+      return pool.findIndex((unit) => unit.type === type && ok(unit) && unit.restriction === undefined);
     };
+    const indexOf = (type: ManaType): number => indexOfAmong(type, () => true);
 
+    // With `{S}` pips to pay (rule 107.4h), a typed pip takes a non-snow unit
+    // where there is one, leaving the snow mana for them: a unit's type and
+    // whether it's snow are the only two things that matter, so taking the
+    // non-snow one first never strands a payment another order would make.
     const take = (type: ManaType, what: string): void => {
-      const index = indexOf(type);
+      const nonSnow = cost.snow > 0 ? indexOfAmong(type, (unit) => !isSnowMana(unit)) : -1;
+      const index = nonSnow >= 0 ? nonSnow : indexOf(type);
       if (index < 0) throw new Error(`mana pool underflow paying ${what}`);
       spent.push(pool[index]);
       pool.splice(index, 1);
@@ -15350,6 +15369,13 @@ export class Game {
     for (let i = 0; i < cost.colorless; i += 1) take("C", "a {C} cost");
     for (const color of COLORS) {
       for (let i = 0; i < cost.colored[color]; i += 1) take(color, "a colored cost");
+    }
+    for (let i = 0; i < cost.snow; i += 1) {
+      const type = GENERIC_SPEND_ORDER.find((t) => indexOfAmong(t, isSnowMana) >= 0);
+      if (type === undefined) throw new Error("mana pool underflow paying a {S} cost");
+      const index = indexOfAmong(type, isSnowMana);
+      spent.push(pool[index]);
+      pool.splice(index, 1);
     }
     for (let i = 0; i < cost.generic; i += 1) {
       // Generic is the flexible half, so it's where a restricted unit is most
@@ -20184,6 +20210,11 @@ export class Game {
         return lki !== undefined
           ? (lki.manaSpent ?? 0)
           : (this.state.objects[target.object]?.manaSpent ?? 0);
+      },
+      manaSpentFromOf: (target) => {
+        if (target.kind !== "object") return [];
+        const lki = lastKnownOf(target);
+        return (lki !== undefined ? lki.manaSpentFrom : this.state.objects[target.object]?.manaSpentFrom) ?? [];
       },
       colorsSpentOf: (target) => {
         if (target.kind !== "object") return 0;

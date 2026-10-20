@@ -19,6 +19,7 @@ describe("parseManaCost", () => {
       generic: 0,
       colored: { W: 0, U: 0, B: 0, R: 0, G: 0 },
       colorless: 0,
+      snow: 0,
       x: 0,
       hybrid: [],
     });
@@ -79,7 +80,10 @@ describe("parseManaCost", () => {
     expect(manaValue(parseManaCost("{2}{G/W}{G/W}"))).toBe(4);
   });
 
-  it("parses {S} (snow) as a generic pip", () => {
-    expect(parseManaCost("{S}{S}{1}").generic).toBe(3);
+  it("parses {S} (snow) as its own pip, not generic (rule 107.4h)", () => {
+    const cost = parseManaCost("{S}{S}{1}");
+    expect(cost.snow).toBe(2);
+    expect(cost.generic).toBe(1);
+    expect(manaValue(cost)).toBe(3);
   });
 });

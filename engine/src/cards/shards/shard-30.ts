@@ -345,6 +345,7 @@ import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
+import _poolPilferingHawk from "../pool/pilfering-hawk.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPlasmaJockey from "../pool/plasma-jockey.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
@@ -860,6 +861,7 @@ const shard: CardShard = {
     _poolPantherWarriors,
     _poolPhantasmalShieldback,
     _poolPiaDeterminedRebuilder,
+    _poolPilferingHawk,
     _poolPiousWayfarer,
     _poolPlasmaJockey,
     _poolPlazaOfHeroes,

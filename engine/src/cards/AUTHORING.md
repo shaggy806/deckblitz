@@ -402,7 +402,7 @@ Parsed by `parseManaCost` (`mana.ts`). Symbols, in `{…}`:
 | `{W/U}` | hybrid — either half |
 | `{2/W}` | twobrid — `{2}` or `{W}` |
 | `{W/P}` | Phyrexian — `{W}` or 2 life |
-| `{S}` | snow — treated as generic (no snow sources exist yet) |
+| `{S}` | snow (rule 107.4h) — one mana of any type made by a snow source (a permanent with the `snow` supertype); no generic reduction touches it; counts 1 toward mana value. "The amount of {S} spent to cast this spell" is `{ manaSpentOf: "source", from: { supertype: "snow" } }` (Graven Lore, Tundra Fumarole); "if {S} was spent" is a `source` condition on `{ manaFrom: { supertype: "snow" } }` (Berg Strider). |
 
 `{X}` in a **spell's** cost: the caster chooses X as the spell is cast
 (`cast-spell.xValue`), it's folded into generic, and effects read it via
@@ -4605,8 +4605,10 @@ Delete an entry in the same commit as the feature that retires it.
   (`announced`), and its modes may bring targets of their own. A modal
   activated ability's modes can't.
   A modal *spell* has neither problem: it uses `castModal`.
-- **Snow** mana is treated as generic — no snow permanents / snow-mana
-  requirements.
+- **Snow mana of a spell's colours** — Boreal Outrider's "if {S} of any of
+  that spell's colors was spent": a spell records where its mana came from
+  (`manaSpentFrom`), not which unit was which colour. Snow mana itself
+  (`{S}`) is built — see §4.
 - **A static can't pick what it affects by power or toughness.** Tetsuko
   Umezawa's "creatures you control with power or toughness 1 or less can't
   be blocked" needs P/T read inside the layer fold that computes them, and

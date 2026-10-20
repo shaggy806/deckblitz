@@ -48,6 +48,7 @@ import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
+import _poolBloodOnTheSnow from "../pool/blood-on-the-snow.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
 import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
@@ -561,6 +562,7 @@ const shard: CardShard = {
     _poolBlessedOrator,
     _poolBlightRot,
     _poolBlindCreeper,
+    _poolBloodOnTheSnow,
     _poolBloodlineBidding,
     _poolBloomingStinger,
     _poolBoilerbilgesRipper,

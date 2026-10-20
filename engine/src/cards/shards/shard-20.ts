@@ -294,6 +294,7 @@ import _poolMoroii from "../pool/moroii.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
+import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
 import _poolNarwhal from "../pool/narwhal.js";
 import _poolNaturesRhythm from "../pool/natures-rhythm.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
@@ -845,6 +846,7 @@ const shard: CardShard = {
     _poolMoxJasper,
     _poolMysticSnake,
     _poolNantukoTracer,
+    _poolNarfiBetrayerKing,
     _poolNarwhal,
     _poolNaturesRhythm,
     _poolNecroskitter,

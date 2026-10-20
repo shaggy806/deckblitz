@@ -158,6 +158,7 @@ import _poolForebodingRuins from "../pool/foreboding-ruins.js";
 import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js";
 import _poolFortressCrab from "../pool/fortress-crab.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
+import _poolFrostpeakYeti from "../pool/frostpeak-yeti.js";
 import _poolFuneralRoom from "../pool/funeral-room.js";
 import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
 import _poolFuriousResistance from "../pool/furious-resistance.js";
@@ -661,6 +662,7 @@ const shard: CardShard = {
     _poolForecastingFortuneTeller,
     _poolFortressCrab,
     _poolFreeFromFlesh,
+    _poolFrostpeakYeti,
     _poolFuneralRoom,
     _poolFunnelWebRecluse,
     _poolFuriousResistance,

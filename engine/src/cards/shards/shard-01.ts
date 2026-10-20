@@ -22,6 +22,7 @@ import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
 import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
+import _poolAscendantSpirit from "../pool/ascendant-spirit.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
@@ -181,6 +182,7 @@ import _poolHuntersAxe from "../pool/hunters-axe.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
 import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
+import _poolIcebindPillar from "../pool/icebind-pillar.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
@@ -516,6 +518,7 @@ const shard: CardShard = {
     _poolArchweaver,
     _poolArmsOfHadar,
     _poolArtisansSorrow,
+    _poolAscendantSpirit,
     _poolAshioksReaper,
     _poolAstelliReclaimer,
     _poolAwakenTheBear,
@@ -675,6 +678,7 @@ const shard: CardShard = {
     _poolHuntersTalent,
     _poolHylderblade,
     _poolHypnoticSpecter,
+    _poolIcebindPillar,
     _poolIconicShield,
     _poolIgnobleHierarch,
     _poolIllustriousHistorian,

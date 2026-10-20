@@ -448,6 +448,7 @@ import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
 import _poolTrostaniThreeWhispers from "../pool/trostani-three-whispers.js";
 import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
+import _poolTundraFumarole from "../pool/tundra-fumarole.js";
 import _poolTwilightMire from "../pool/twilight-mire.js";
 import _poolUlamogTheCeaselessHunger from "../pool/ulamog-the-ceaseless-hunger.js";
 import _poolUlvenwaldAbomination from "../pool/ulvenwald-abomination.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolTrostaniThreeWhispers,
     _poolTrumpetingCarnosaur,
     _poolTrustyPackbeast,
+    _poolTundraFumarole,
     _poolTwilightMire,
     _poolUlamogTheCeaselessHunger,
     _poolUlvenwaldAbomination,

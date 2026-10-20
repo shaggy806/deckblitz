@@ -209,6 +209,7 @@ import _poolGrimclimbPathway from "../pool/grimclimb-pathway.js";
 import _poolGrowFromTheAshes from "../pool/grow-from-the-ashes.js";
 import _poolGuardedHeir from "../pool/guarded-heir.js";
 import _poolGuardianLions from "../pool/guardian-lions.js";
+import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
@@ -732,6 +733,7 @@ const shard: CardShard = {
     _poolGrowFromTheAshes,
     _poolGuardedHeir,
     _poolGuardianLions,
+    _poolHailstormValkyrie,
     _poolHallwayHeckler,
     _poolHangarbackWalker,
     _poolHauntedMire,

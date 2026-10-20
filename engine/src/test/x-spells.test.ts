@@ -92,6 +92,7 @@ describe("parseManaCost with {X}", () => {
       generic: 0,
       colored: { W: 0, U: 0, B: 0, R: 1, G: 0 },
       colorless: 0,
+      snow: 0,
       x: 1,
       hybrid: [],
     });

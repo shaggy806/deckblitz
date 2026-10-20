@@ -20,7 +20,7 @@ import type {
   TurnStat,
 } from "./cards.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
-import type { Color, ManaType, SpendAs } from "./mana.js";
+import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, isCreatureType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
@@ -280,8 +280,12 @@ export type EffectAmount =
    * {X} and additional mana costs count; a free cast is 0, and so is mana a
    * creature paid for by convoke, which isn't mana (rule 702.51a). `0` for
    * anything that wasn't cast.
+   *
+   * `from` counts only the mana made by matching sources: "the amount of {S}
+   * spent to cast this spell" (Graven Lore — rule 107.4h, mana from a snow
+   * source) is `{ manaSpentOf: "source", from: { supertype: "snow" } }`.
    */
-  | { readonly manaSpentOf: AmountRef }
+  | { readonly manaSpentOf: AmountRef; readonly from?: ManaFromSpec }
   /**
    * How many **colours** of mana were spent to cast the object — converge
    * (an ability word, rule 207.2c: Painful Truths' "where X is the number of
@@ -5475,6 +5479,9 @@ export interface EffectApi {
   manaValueOf(target: TargetRef): number;
   /** See the `{ manaSpentOf }` {@link EffectAmount}. */
   manaSpentOf(target: TargetRef): number;
+  /** Where the mana spent to cast `target` came from, one entry per unit
+   * (`GameObject.manaSpentFrom`) — `manaSpentOf`'s `from`. */
+  manaSpentFromOf(target: TargetRef): readonly ManaOrigin[];
   /** See the `{ colorsSpentOf }` {@link EffectAmount}. */
   colorsSpentOf(target: TargetRef): number;
   /** See the `{ commanderCastsOf }` {@link EffectAmount}. */
@@ -7614,7 +7621,10 @@ function signedAmountValue(
   }
   if ("manaSpentOf" in amount) {
     const ref = resolveAmountRef(amount.manaSpentOf, ctx);
-    return ref === undefined ? 0 : ctx.manaSpentOf(ref);
+    if (ref === undefined) return 0;
+    const from = amount.from;
+    if (from === undefined) return ctx.manaSpentOf(ref);
+    return ctx.manaSpentFromOf(ref).filter((origin) => manaOriginMatches(origin, from)).length;
   }
   if ("colorsSpentOf" in amount) {
     const ref = resolveAmountRef(amount.colorsSpentOf, ctx);

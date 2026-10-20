@@ -141,6 +141,9 @@ export interface ManaSource {
   readonly isCreature?: boolean;
   readonly options: readonly ManaOption[];
   readonly sacrificeSelf: boolean;
+  /** A snow permanent: the mana it makes can pay an `{S}` pip (rule
+   * 107.4h). Absent reads as not one. */
+  readonly snow?: boolean;
   /** Tapping it for mana gives up a better use this turn — a hideaway land
    * with its card waiting (`Game.holdsFreeSpell`): reached for after every
    * other source, the last resorts included, and still taken if nothing
@@ -531,6 +534,7 @@ export function resolveHybridCost(
     generic: cost.generic,
     colored: { ...cost.colored },
     colorless: cost.colorless,
+    snow: cost.snow,
     x: 0,
     hybrid: [],
   };
@@ -591,6 +595,7 @@ export function planManaPayment(
   avoid?: ObjectId,
   exclude?: ObjectId,
 ): ManaPlanStep[] | null {
+  if (rawCost.snow > 0) return planSnowPayment(view, rawCost, avoid, exclude);
   // Mana that may be spent as though it were any colour (or type) pays a
   // coloured pip as freely as a generic one (rule 609.4b).
   const cost = costAsSpendable(rawCost, view.spendAs);
@@ -612,6 +617,144 @@ export function planManaPayment(
     // ahead of it, so no payment that worked then fails now.
     planManaPaymentOrdered(view, cost, avoid, exclude, "last-resort-early")
   );
+}
+
+/** Whether `unit` is snow mana: made by a snow source (rule 107.4h), as
+ * `ManaUnit.from` recorded when it was made. */
+export const isSnowMana = (unit: ManaUnit): boolean => unit.from?.supertypes.includes("snow") === true;
+
+/** The most snow-source combinations {@link planSnowPayment} tries before
+ * giving up — far more than any real board has (a few snow lands choose `{S}`
+ * pips' worth, and most costs have one to three). */
+const SNOW_COMBINATIONS_TRIED = 400;
+
+/**
+ * Plans a cost with `{S}` pips (rule 107.4h): each is one mana of any type
+ * from a snow source. The rest of the planner chooses by mana *type*, which
+ * snow isn't, so the pips are paid first and the rest of the cost is planned
+ * as ever with what's left:
+ *
+ * - floating snow mana this payment may spend, the types the rest of the
+ *   cost wants least first;
+ * - then one activation per remaining pip of an untapped snow source, every
+ *   combination tried in turn (the sources the rest of the cost needs least
+ *   first) until the rest can be paid too. Whatever such an activation makes
+ *   beyond the one unit — Icy Manalith's is exactly one — floats for the rest.
+ *
+ * `spendFromPool` matches the same way when the mana is spent: coloured and
+ * `{C}` pips take non-snow units where they can, `{S}` pips take snow ones.
+ * Only an option that costs no mana pays a pip (a converter's cost would
+ * need planning of its own).
+ */
+function planSnowPayment(
+  view: ManaPlanningView,
+  cost: ManaCost,
+  avoid: ObjectId | undefined,
+  exclude: ObjectId | undefined,
+): ManaPlanStep[] | null {
+  const rest: ManaCost = { ...cost, snow: 0 };
+  const wants = (m: ManaType): number => (m === "C" ? rest.colorless : rest.colored[m]);
+  const floating = view.pool
+    .filter((unit) => view.canPay(unit) && isSnowMana(unit))
+    .sort((a, b) => wants(a.type) - wants(b.type));
+  const fromPool = floating.slice(0, cost.snow);
+  const pool = [...view.pool];
+  for (const unit of fromPool) pool.splice(pool.indexOf(unit), 1);
+  const pips = cost.snow - fromPool.length;
+  if (pips === 0) return planManaPayment({ ...view, pool }, rest, avoid, exclude);
+
+  // Each snow source's best free activation: no pain or life where one is
+  // free of it, the type the rest of the cost wants least.
+  const free = (o: ManaOption): boolean =>
+    o.genericCost === 0 &&
+    (o.hybridCost?.length ?? 0) === 0 &&
+    !(o.lifeCost > 0 && view.cantPayLife === true) &&
+    (o.pain + o.lifeCost === 0 || o.pain + o.lifeCost < view.life) &&
+    (o.tag?.restriction === undefined || view.canPay({ type: "C", ...o.tag }));
+  const ownUnits = (o: ManaOption): ManaType[] => {
+    const typedExtras = (o.extras ?? []).filter((e) => e.type !== undefined).length;
+    const anyExtras = (o.extras ?? []).length - typedExtras;
+    return [
+      ...o.fixed.slice(0, o.fixed.length - typedExtras),
+      ...Array.from({ length: o.anyColor - anyExtras }, () => defaultUnitOf(o, view.preferred)),
+    ];
+  };
+  const wanted = (o: ManaOption): number => ownUnits(o).reduce((n, m) => n + wants(m), 0);
+  const candidates = view.sources
+    .filter((s) => s.snow === true && s.id !== exclude)
+    .flatMap((s) => {
+      const best = s.options
+        .filter((o) => free(o) && ownUnits(o).length > 0)
+        .sort((a, b) => a.pain + a.lifeCost - (b.pain + b.lifeCost) || wanted(a) - wanted(b))[0];
+      return best === undefined ? [] : [{ src: s, option: best }];
+    })
+    // The activated permanent last (`avoid`), then the sacrificed ones
+    // (a Treasure), then the rest of the cost's least-wanted sources first.
+    .sort(
+      (a, b) =>
+        Number(a.src.id === avoid) - Number(b.src.id === avoid) ||
+        Number(a.src.sacrificeSelf) - Number(b.src.sacrificeSelf) ||
+        wanted(a.option) - wanted(b.option),
+    );
+  if (candidates.length < pips) return null;
+
+  const stepOf = ({ src, option: o }: (typeof candidates)[number]): ManaPlanStep => {
+    const extras = o.extras ?? [];
+    const extraUnits = extras.map((e) => e.type ?? defaultUnitOf(o, view.preferred));
+    return {
+      source: src.id,
+      mana: [...ownUnits(o), ...extraUnits],
+      sacrifice: src.sacrificeSelf,
+      pain: o.pain,
+      lifeCost: o.lifeCost,
+      spends: [],
+      ...(o.tag !== undefined ? { tag: o.tag } : {}),
+      ...(o.untapped !== undefined ? { untapped: o.untapped } : {}),
+      ...(o.oncePerTurn !== undefined ? { oncePerTurn: o.oncePerTurn } : {}),
+      ...(o.rider !== undefined ? { rider: o.rider } : {}),
+      ...(extras.length > 0 ? { extraFrom: extras.map((e) => e.from) } : {}),
+      ...(o.counterCost !== undefined ? { counterCost: o.counterCost } : {}),
+    };
+  };
+  // What a chosen activation leaves floating once its one unit pays a pip:
+  // the rest of its own units (snow mana) and any extra units (not).
+  const SNOW_ORIGIN = { types: [], subtypes: [], supertypes: ["snow" as const] };
+  const leftover = (step: ManaPlanStep): ManaUnit[] => {
+    const own = step.mana.length - (step.extraFrom?.length ?? 0);
+    return step.mana.slice(1).map((type, i) =>
+      i + 1 < own ? { type, ...step.tag, from: SNOW_ORIGIN } : { type },
+    );
+  };
+
+  let tried = 0;
+  const chosen: number[] = [];
+  const search = (start: number): ManaPlanStep[] | null => {
+    if (chosen.length === pips) {
+      if ((tried += 1) > SNOW_COMBINATIONS_TRIED) return null;
+      const steps = chosen.map((i) => stepOf(candidates[i]));
+      const used = new Set(steps.map((s) => s.source));
+      const plan = planManaPayment(
+        {
+          ...view,
+          pool: [...pool, ...steps.flatMap(leftover)],
+          sources: view.sources.filter((s) => !used.has(s.id)),
+        },
+        rest,
+        avoid,
+        exclude,
+      );
+      return plan === null ? null : [...steps, ...plan];
+    }
+    for (let i = start; i <= candidates.length - (pips - chosen.length); i += 1) {
+      chosen.push(i);
+      const plan = search(i + 1);
+      chosen.pop();
+      if (plan !== null) return plan;
+      if (tried > SNOW_COMBINATIONS_TRIED) return null;
+    }
+    return null;
+  };
+  return search(0);
 }
 
 /** Whether `o` costs mana to activate: a converter's option. */
