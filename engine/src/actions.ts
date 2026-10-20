@@ -916,6 +916,9 @@ export type LegalAction =
         readonly sacrifice?: true;
         readonly maxXByTargetCount?: readonly number[];
         readonly minXByTargetCount?: readonly number[];
+        /** See `XCostOffer.maxXUnreduced`. */
+        readonly maxXUnreduced?: number;
+        readonly reducingTargets?: readonly ObjectId[];
       };
       /** Set when what the spell costs depends on how many targets it has — a
        * "for each target" cost modification reaches it (Hinata,

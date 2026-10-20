@@ -60,7 +60,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 29 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 28 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
@@ -168,7 +168,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **`canDispatch` passes a cast `dispatch` refuses** (601.2f): a spell with a target-based cost reduction (Whack, Torch Breath) checks as payable when *another* target would earn the reduction.
 - **`{ powerOf: n }` reads a target that just left in its new zone** (608.2h): a `choose-permanents` `then` target returned to hand reads the card, not last-known (First Responder used `thisWay` + `sumOf`).
 - **A trigger's top-level `trigger-object` condition is always false**: it only works inside a `conditional` (Obscura Ascendancy used a filter plus a resolution check).
 - **`cast-now`'s `play` plays a land only from exile**: "play a land from the top of your library" (Ziatora's Envoy) is refused.

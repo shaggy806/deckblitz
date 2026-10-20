@@ -216,12 +216,6 @@ that needs it is authored.
   which ends with the turn anyway, keeping the lasting counter — the better choice unless being
   tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
   on purpose (found 2026-10-19, building shield counters).
-- **`canDispatch` passes a cast `dispatch` refuses.** For a spell with `targetCostReduction`
-  (Whack, Torch Breath, Knockout Blow, Out of the Way), `canDispatch` accepts a cast whose chosen
-  target doesn't earn the reduction when some other legal target would, and `dispatch` then
-  throws "cannot pay the cost" (rule 601.2f: the cost is locked in with the targets chosen).
-  `legalActions` offers the right targets, so only callers that trust `canDispatch` (the server's
-  pre-check, the harness's `castable`) are misled. Found by two SNC agents, 2026-10-19.
 - **`{ powerOf: n }` reads a target that just left in its new zone.** In a `choose-permanents`
   `then`, a target returned to hand reads the card's printed power, not as it last existed on
   the battlefield (608.2h) — First Responder got 3 counters from a Hill Giant with a +1/+1

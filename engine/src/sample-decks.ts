@@ -1399,7 +1399,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Worldsoul's Rage", 1],
     ],
     substitutions: [
-      sub("Augur of Autumn", "Courser of Kruphix", "Three-mana green creature: play lands from the top of the library."),
       sub("Eumidian Wastewaker", "Icetill Explorer", "Four-mana green creature that plays lands from the graveyard."),
       sub("Formless Genesis", "Awaken the Woods", "Green spell that turns mana into land creatures."),
       sub("Loamcrafter Faun", "Ramunap Excavator", "Three-mana green creature: play lands from the graveyard."),

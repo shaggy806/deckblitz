@@ -11,6 +11,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
+import { maxXForTargets } from "../target-count.js";
 import { A, B, cast, lands, ref, spawn, table, toHand, zone } from "./harness.js";
 
 /** The objects offered for `card`'s target slot `slot`, or null when it isn't offered at all. */
@@ -96,5 +97,26 @@ describe("targetCostReduction", () => {
     spawn(game, "Grizzly Bears", B);
     lands(game, "Swamp", 2);
     expect(offeredTargets(game, toHand(game, "Price of Fame"))).toBeNull();
+  });
+
+  it("Torch Breath: an X paid for by the reduction is capped for a target that doesn't earn it", () => {
+    const { game } = table();
+    const drake = spawn(game, "Cloud Elemental", B); // blue
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Mountain", 3);
+    const torch = toHand(game, "Torch Breath");
+    const offer = game
+      .legalActions(A)
+      .find((l): l is Extract<typeof l, { kind: "cast-spell" }> => l.kind === "cast-spell" && l.card === torch);
+    // {X}{R} with three Mountains: X up to 4 at a blue target, 2 at any other.
+    expect(offer?.xCost).toMatchObject({ maxX: 4, maxXUnreduced: 2, reducingTargets: [drake] });
+    expect(maxXForTargets(offer!.xCost!, offer!.targetCount, [ref(bears)])).toBe(2);
+    expect(maxXForTargets(offer!.xCost!, offer!.targetCount, [ref(drake)])).toBe(4);
+    // canDispatch prices the cast from its targets, as the cast does (601.2f).
+    const action = { type: "cast-spell", player: A, card: torch, xValue: 4 } as const;
+    expect(game.canDispatch({ ...action, targets: [ref(bears)] })).toMatch(/cannot pay/);
+    expect(game.canDispatch({ ...action, targets: [ref(drake)] })).toBeNull();
+    cast(game, torch, { targets: [ref(drake)], x: 4 });
+    expect(zone(game, drake)).toBe("graveyard");
   });
 });

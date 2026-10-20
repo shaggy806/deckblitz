@@ -3,6 +3,7 @@
 // the engine, the controllers and the bot can all ask the same questions.
 
 import { anyNumberSlot, isOptionalSpec } from "./target.js";
+import type { ObjectId } from "./primitives.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 
 /** The range of distinct-target counts a spell may be cast with and afford,
@@ -194,6 +195,14 @@ export interface XCostOffer {
   readonly sacrifice?: true;
   readonly maxXByTargetCount?: readonly number[];
   readonly minXByTargetCount?: readonly number[];
+  /** A spell that costs less if it targets something (`targetCostReduction`
+   * — Torch Breath's "{2} less if it targets a blue permanent"): `maxX`
+   * counts on that reduction, `maxXUnreduced` is the largest X without it,
+   * and `reducingTargets` are the targets that earn it. Targets that earn
+   * none cap X at `maxXUnreduced` — the cost is locked in with the targets
+   * (rule 601.2f), so more would be refused. */
+  readonly maxXUnreduced?: number;
+  readonly reducingTargets?: readonly ObjectId[];
 }
 
 /** The largest X payable with `targets` chosen, when the cost depends on how
@@ -204,8 +213,14 @@ export function maxXForTargets(
   targets: readonly (TargetRef | null)[],
 ): number {
   const byCount = xCost.maxXByTargetCount;
-  if (byCount === undefined || range === undefined) return xCost.maxX;
-  return byCount[distinctTargetCount(targets, range.copies) - range.min] ?? 0;
+  const max =
+    byCount === undefined || range === undefined
+      ? xCost.maxX
+      : (byCount[distinctTargetCount(targets, range.copies) - range.min] ?? 0);
+  const reducing = xCost.reducingTargets;
+  if (xCost.maxXUnreduced === undefined || reducing === undefined) return max;
+  const earns = targets.some((t) => t?.kind === "object" && reducing.includes(t.object));
+  return earns ? max : Math.min(max, xCost.maxXUnreduced);
 }
 
 /** The least X allowed with `targets` chosen: a target count tied to X

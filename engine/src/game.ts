@@ -1697,6 +1697,7 @@ export class Game {
               action.offspring === true,
               action.evoke === true ? (action.evokeCost ?? "") : null,
               action.delve,
+              action.targets,
             ),
           ) ?? this.whyCastTargetsInvalid(action)
         );
@@ -3352,7 +3353,13 @@ export class Game {
                       minXByTargetCount: xGroup.minXByTargetCount,
                     }
                   : maxXByTargetCount === undefined
-                  ? { maxX: xPlan.maxX, ...(xFloor > 0 ? { minX: xFloor } : {}) }
+                  ? {
+                      maxX: xPlan.maxX,
+                      ...(xFloor > 0 ? { minX: xFloor } : {}),
+                      ...(def.targetCostReduction !== null
+                        ? this.unreducedXOffer(player, card, def, cost, face ?? 0, pricedAt, options, xPlan.maxX)
+                        : {}),
+                    }
                   : // Each count on offer was found castable at `xFloor`
                     // (`castableAt`), so its largest X is at least that.
                     { maxX: Math.max(...maxXByTargetCount), maxXByTargetCount, ...(xFloor > 0 ? { minX: xFloor } : {}) },
@@ -9093,6 +9100,34 @@ export class Game {
    * `targetCostReduction` — whether the full price is affordable. */
   private targetCostReductionOff = false;
 
+  /** A `targetCostReduction` spell's X offer without the reduction (see
+   * `XCostOffer.maxXUnreduced`): the largest X at full price, and the
+   * offered targets that earn the reduction — nothing when X doesn't
+   * depend on which target is chosen. */
+  private unreducedXOffer(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    costString: string | null,
+    face: number,
+    targetCount: number,
+    options: readonly (readonly TargetRef[])[],
+    maxX: number,
+  ): { maxXUnreduced: number; reducingTargets: ObjectId[] } | Record<string, never> {
+    const reducing = options
+      .flat()
+      .flatMap((ref) => (ref.kind === "object" && this.targetsEarnReduction(def, player, cardId, [ref]) ? [ref.object] : []));
+    if (reducing.length === 0) return {};
+    this.targetCostReductionOff = true;
+    let unreduced: number;
+    try {
+      unreduced = Math.max(0, this.xPlanFor(player, cardId, def, costString, face, targetCount).maxX);
+    } finally {
+      this.targetCostReductionOff = false;
+    }
+    return unreduced >= maxX ? {} : { maxXUnreduced: unreduced, reducingTargets: reducing };
+  }
+
   /** Whether `targets` earn `def`'s `targetCostReduction`: one of them an
    * object (a permanent, or a spell on the stack) matching its filter from
    * the caster's side. */
@@ -10170,6 +10205,9 @@ export class Game {
     offspring = false,
     evoke: string | null = null,
     delve?: readonly ObjectId[],
+    /** The targets chosen, once they are: a `targetCostReduction` is priced
+     * from them (rule 601.2f), as the cast itself will be. */
+    targets?: readonly (TargetRef | null | undefined)[],
   ): string | null {
     // Prototyped (rule 718): judged as the prototyped spell it would be —
     // its prototype cost, colors and size (the rulings) — so asked again
@@ -10694,7 +10732,7 @@ export class Game {
     // At the X being cast for: convoking creatures can pay for X (Chord of
     // Calling), so a convoke can't be judged against the cost at X=0.
     const baseCost = this.withFace(cardId, face, () =>
-      this.castingCostOf(player, cardId, def, Math.max(0, Math.floor(xValue)), costString, targetCount),
+      this.castingCostOf(player, cardId, def, Math.max(0, Math.floor(xValue)), costString, targetCount, targets),
     );
     // Delve (rule 702.66): each card exiled pays {1} of the total cost.
     if (delve !== undefined && delve.length > 0) {
@@ -11573,6 +11611,7 @@ export class Game {
       offspring,
       evoke,
       delve,
+      targets,
     );
     if (why !== null) throw new Error(why);
 
