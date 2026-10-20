@@ -8781,6 +8781,8 @@ export class Game {
     const object = this.state.objects[sagaId];
     if (object === undefined || amount <= 0) return;
     if (this.registry.get(rulesTextName(object)).chapters === null) return;
+    // A Saga under Solemnity gets none, so no chapter triggers.
+    if (this.countersPrevented({ object: sagaId }, "lore")) return;
     const before = object.counters.lore ?? 0;
     object.counters.lore = before + amount;
     this.emit({ type: "lore-counter-added", object: sagaId, lore: before + amount });
@@ -13356,6 +13358,11 @@ export class Game {
         return `${def.name} does not have ${count} ${kind} counter(s) to remove`;
       }
     }
+    // A cost of putting counters that can't be put can't be paid (Devoted
+    // Druid under Solemnity — its ruling).
+    if (ability.cost.addCounter !== undefined && this.countersPrevented({ object: source.id }, ability.cost.addCounter.kind)) {
+      return `counters can't be put on ${def.name}`;
+    }
     if (
       ability.cost.payEnergy !== undefined &&
       this.state.players[player].energy < ability.cost.payEnergy
@@ -14818,6 +14825,7 @@ export class Game {
   private putCostCounters(id: ObjectId, kind: string, amount: number, by: PlayerId): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield" || amount <= 0) return;
+    if (this.countersPrevented({ object: id }, kind)) return;
     // Counter replacements reach a cost's counters too, unless worded "if an
     // effect would put" (Doubling Season): Vizier of Remedies leaves Devoted
     // Druid's untap costing no -1/-1 counter at all (its ruling).
@@ -26305,6 +26313,9 @@ export class Game {
     // Zero counters is no counters (a "for each" that came to none): nothing
     // is put, nothing is announced, and no token is split off a stack for it.
     if (target.kind !== "object" || amount <= 0) return;
+    // "Counters can't be put on" it (Solemnity): none are, and nothing else
+    // happens for them.
+    if (this.countersPrevented({ object: target.object }, counter)) return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
@@ -26347,6 +26358,8 @@ export class Game {
     const source = this.state.objects[from.object];
     const dest = this.state.objects[to.object];
     if (source?.zone !== "battlefield" || dest?.zone !== "battlefield") return 0;
+    // One that can't be put there can't be moved there (rule 122.5).
+    if (this.countersPrevented({ object: to.object }, counter)) return 0;
     const have = source.counters[counter] ?? 0;
     if (have <= 0) return 0;
     const n = Math.min(amount, have);
@@ -29390,6 +29403,38 @@ export class Game {
   /** The active statics of the permanents `controller` controls that `pick`
    * selects, with their sources — none once they have left the game, and
    * none of a permanent that has lost its abilities. */
+  /** Whether a `preventsCounters` static (Solemnity, Melira) stops counters
+   * of `kind` going on `on` — a permanent, as it is or as it enters, or a
+   * player. */
+  private countersPrevented(
+    on: { readonly object: ObjectId } | { readonly player: PlayerId },
+    kind: string,
+    /** Permanents entering along with it, whose statics don't stop the
+     * counters it enters with (Solemnity's ruling). */
+    enteringWith?: ReadonlySet<ObjectId>,
+  ): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(source) || enteringWith?.has(id) === true) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const prevents = ability.preventsCounters;
+        if (prevents === undefined || (prevents.kind !== undefined && prevents.kind !== kind)) continue;
+        if (!this.staticActive(source, ability)) continue;
+        if ("player" in on) {
+          if (prevents.players === "each" || (prevents.players === "you" && on.player === source.controller)) {
+            return true;
+          }
+        } else if (
+          prevents.permanents !== undefined &&
+          matchesFilter(this.state, this.registry, on.object, prevents.permanents, { you: source.controller, source: id })
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   private activeStaticsOf(
     controller: PlayerId,
     pick: (ability: StaticAbility) => boolean,
@@ -31260,6 +31305,7 @@ export class Game {
   private changePlayerCounters(player: PlayerId, counter: PlayerCounterKind, delta: number): void {
     const ps = this.state.players[player];
     if (ps === undefined || ps.hasLost || delta === 0) return;
+    if (delta > 0 && this.countersPrevented({ player }, counter)) return;
     const before = ps.counters[counter] ?? 0;
     const total = Math.max(0, before + delta);
     if (total === before) return;
@@ -31282,6 +31328,7 @@ export class Game {
   /** Add (or spend, when negative) energy counters for `player` — rule 122. */
   private changeEnergy(player: PlayerId, delta: number): void {
     if (delta === 0) return;
+    if (delta > 0 && this.countersPrevented({ player }, "energy")) return;
     const ps = this.state.players[player];
     ps.energy = Math.max(0, ps.energy + delta);
     this.emit({ type: "energy-changed", player, delta, energy: ps.energy });
@@ -32609,6 +32656,12 @@ export class Game {
       this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured),
     );
     this.enterBatch?.add(id);
+    // "Counters can't be put on" it (Solemnity): it enters without them —
+    // unless what says so is entering with it (the ruling).
+    const batch = this.enterBatch ?? new Set([id]);
+    if (entering.counters.some((c) => this.countersPrevented({ object: id }, c.kind, batch))) {
+      return { ...entering, counters: entering.counters.filter((c) => !this.countersPrevented({ object: id }, c.kind, batch)) };
+    }
     return entering;
   }
 

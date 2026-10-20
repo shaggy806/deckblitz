@@ -195,7 +195,6 @@ there and move this line to `COMPLETED.md`.
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
 
-- **Counters put as a cost skip counter prohibitions** (latent): "counters can't be put on" (Solemnity) should make the cost unpayable.
 - **Convoke with a target-dependent cost.**
 - **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
 - **A `{T}` ability granted to a token stack taps the whole stack** without splitting one off.

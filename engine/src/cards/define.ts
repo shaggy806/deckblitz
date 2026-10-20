@@ -1588,6 +1588,27 @@ export interface StaticAbility {
    * or greater has blitz"): offered as the `via: "blitz"` cast a printed
    * blitz is, from the hand. */
   readonly grantsBlitzInHand?: { readonly filter: CardFilter };
+  /**
+   * "Counters can't be put on …" and "players can't get counters" (rule
+   * 122 — Solemnity; Melira, Sylvok Outcast's "you can't get poison
+   * counters" and "creatures you control can't have -1/-1 counters put on
+   * them"). Nothing replaces the counters: they just aren't put (an effect
+   * does what else it can), a cost that would put them can't be paid, a
+   * permanent that would enter with them enters without them, and a counter
+   * that can't be put can't be moved there either (122.5).
+   */
+  readonly preventsCounters?: {
+    /** The permanents no counters can be put on, matched from this
+     * permanent's controller's side — Solemnity's "artifacts, creatures,
+     * enchantments, or lands" (a permanent, rule 109.2: a card with suspend
+     * in exile still gets its time counters). */
+    readonly permanents?: CardFilter;
+    /** The players who can't get counters — `"each"` (Solemnity's "players
+     * can't get counters") or `"you"` (Melira) — energy as well. */
+    readonly players?: "each" | "you";
+    /** Only counters of this kind — Melira's `"poison"`, `"-1/-1"`. */
+    readonly kind?: string;
+  };
   /** "Blitz costs you pay cost {1} less for each time you've cast your
    * commander from the command zone this game" (Henzie): every blitz cost
    * this permanent's controller pays, printed or granted, less that much

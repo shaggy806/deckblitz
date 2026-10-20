@@ -648,6 +648,13 @@
         "engine/src/cards/pool/obelisk-of-urd.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Solemnity",
+      "files": [
+        "engine/src/cards/pool/solemnity.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1069,13 +1076,6 @@
         "new:exile-player-hand-play-exiled"
       ],
       "why": "no exile-a-player's-hand-then-draw-that-many with play permission and spend-as-any-color"
-    },
-    {
-      "name": "Solemnity",
-      "needs": [
-        "new:counters-cant-be-put"
-      ],
-      "why": "no 'players can't get counters' / 'counters can't be put on' static"
     },
     {
       "name": "Slippery Bogbonder",

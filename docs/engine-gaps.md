@@ -129,11 +129,6 @@ that needs it is authored.
 
 
 
-- **Counters put as a cost skip counter prohibitions.** `putCostCounters` (Wall of Roots'
-  -0/-1, Devoted Druid's -1/-1) runs the counter replacements since 2026-10-20 (Vizier of
-  Remedies; not Doubling Season's "if an effect would put", `byEffectOnly`), but nothing yet
-  says "counters can't be put on" (Solemnity, top 5000, `static:counters-cant-be-put`), which
-  should make such a cost unpayable (Devoted Druid's rulings).
 - **Convoke with a target-dependent cost.** The offered `proof` is priced at the dearer end of
   the target-count range.
 

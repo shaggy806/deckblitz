@@ -384,6 +384,7 @@ import _poolSlimyPiper from "../pool/slimy-piper.js";
 import _poolSlingshotGoblin from "../pool/slingshot-goblin.js";
 import _poolSlithBloodletter from "../pool/slith-bloodletter.js";
 import _poolSmotheringTithe from "../pool/smothering-tithe.js";
+import _poolSolemnity from "../pool/solemnity.js";
 import _poolSolidarity from "../pool/solidarity.js";
 import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulmender from "../pool/soulmender.js";
@@ -878,6 +879,7 @@ const shard: CardShard = {
     _poolSlingshotGoblin,
     _poolSlithBloodletter,
     _poolSmotheringTithe,
+    _poolSolemnity,
     _poolSolidarity,
     _poolSoulEnervation,
     _poolSoulmender,

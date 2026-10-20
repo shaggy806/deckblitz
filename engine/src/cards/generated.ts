@@ -8154,6 +8154,7 @@ import _poolMeldedMoxite from "./pool/melded-moxite.js";
 import _poolMeldwebCurator from "./pool/meldweb-curator.js";
 import _poolMeldwebStrider from "./pool/meldweb-strider.js";
 import _poolMelesseSpirit from "./pool/melesse-spirit.js";
+import _poolMeliraSylvokOutcast from "./pool/melira-sylvok-outcast.js";
 import _poolMelokuTheCloudedMirror from "./pool/meloku-the-clouded-mirror.js";
 import _poolMeltstriderEulogist from "./pool/meltstrider-eulogist.js";
 import _poolMeltstridersGear from "./pool/meltstriders-gear.js";
@@ -12108,6 +12109,7 @@ import _poolSoldierOn from "./pool/soldier-on.js";
 import _poolSolemnOffering from "./pool/solemn-offering.js";
 import _poolSolemnRecruit from "./pool/solemn-recruit.js";
 import _poolSolemnSimulacrum from "./pool/solemn-simulacrum.js";
+import _poolSolemnity from "./pool/solemnity.js";
 import _poolSolidGround from "./pool/solid-ground.js";
 import _poolSolidarityOfHeroes from "./pool/solidarity-of-heroes.js";
 import _poolSolidarity from "./pool/solidarity.js";
@@ -24143,6 +24145,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeldwebCurator,
   _poolMeldwebStrider,
   _poolMelesseSpirit,
+  _poolMeliraSylvokOutcast,
   _poolMelokuTheCloudedMirror,
   _poolMeltstriderEulogist,
   _poolMeltstridersGear,
@@ -28097,6 +28100,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSolemnOffering,
   _poolSolemnRecruit,
   _poolSolemnSimulacrum,
+  _poolSolemnity,
   _poolSolidGround,
   _poolSolidarityOfHeroes,
   _poolSolidarity,

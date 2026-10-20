@@ -247,6 +247,7 @@ import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMayhemPatrol from "../pool/mayhem-patrol.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
+import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
@@ -746,6 +747,7 @@ const shard: CardShard = {
     _poolMarkedByHonor,
     _poolMayhemPatrol,
     _poolMeetingOfMinds,
+    _poolMeliraSylvokOutcast,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMirkoObsessiveTheorist,

@@ -4024,6 +4024,14 @@ clause (section 9):
   none. They reach counters put as a **cost** too (Devoted Druid's -1/-1, Wall of
   Roots' -0/-1), except one worded "if **an effect** would put" (Doubling
   Season): `byEffectOnly: true`.
+- A static's `preventsCounters: { permanents?, players?, kind? }` is "counters can't be put on …"
+  / "players can't get counters" (Solemnity: `{ players: "each" }` and `{ permanents: {
+  typesAnyOf: ["artifact", "creature", "enchantment", "land"] } }`; Melira, Sylvok Outcast:
+  `{ players: "you", kind: "poison" }` and `{ permanents: { type: "creature", controlledBy:
+  "you" }, kind: "-1/-1" }`). Not a replacement: the counters just aren't put — by an effect,
+  infect or wither damage, a move (122.5), a Saga's lore counter — a cost that would put them
+  can't be paid, and a permanent enters without them unless the static enters with it.
+  Energy counts as a player counter; a card in exile isn't a permanent and still gets them.
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets
