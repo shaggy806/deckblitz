@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3722 already implemented / 1278 missing (marks refreshed 2026-10-20)
+3725 already implemented / 1275 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3099,7 +3099,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3106  Overgrowth                               {2}{G}           Enchantment — Aura
 [x]  3107  Zombie Apocalypse                        {3}{B}{B}{B}     Sorcery
 [x]  3108  Nesting Dovehawk                         {3}{W}           Creature — Bird
-[ ]  3109  Necrogoyf                                {3}{B}{B}        Creature — Lhurgoyf
+[x]  3109  Necrogoyf                                {3}{B}{B}        Creature — Lhurgoyf
 [x]  3110  Light-Paws, Emperor's Voice              {1}{W}           Legendary Creature — Fox Advisor
 [x]  3111  Ziatora, the Incinerator                 {3}{B}{R}{G}     Legendary Creature — Demon Dragon
 [ ]  3112  Iron Spider, Stark Upgrade               {3}              Legendary Artifact Creature — Spider Hero
@@ -3651,7 +3651,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3658  Bumi, Unleashed                          {3}{R}{G}        Legendary Creature — Human Noble Ally
 [ ]  3659  Maelstrom Pulse                          {1}{B}{G}        Sorcery
 [x]  3660  Saruman, the White Hand                  {1}{U}{B}{R}     Legendary Creature — Avatar Wizard
-[ ]  3661  Markov Baron                             {2}{B}           Creature — Vampire Noble
+[x]  3661  Markov Baron                             {2}{B}           Creature — Vampire Noble
 [x]  3662  Sakashima's Student                      {2}{U}{U}        Creature — Human Ninja
 [ ]  3663  Hobgoblin Bandit Lord                    {1}{R}{R}        Creature — Goblin Rogue
 [x]  3664  Prizefight                               {1}{G}           Instant
@@ -4103,7 +4103,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4110  Ajani, the Greathearted                  {2}{G}{W}        Legendary Planeswalker — Ajani
 [x]  4111  Mask of Avacyn                           {2}              Artifact — Equipment
 [x]  4112  Artificer Class                          {1}{U}           Enchantment — Class
-[ ]  4113  Big Game Hunter                          {1}{B}{B}        Creature — Human Rebel Assassin
+[x]  4113  Big Game Hunter                          {1}{B}{B}        Creature — Human Rebel Assassin
 [x]  4114  Smell Fear                               {1}{G}           Sorcery
 [x]  4115  Maul of the Skyclaves                    {2}{W}           Artifact — Equipment
 [x]  4116  Sam's Desperate Rescue                   {B}              Sorcery
