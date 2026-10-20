@@ -167,6 +167,7 @@ import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
 import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
+import _poolHeikoYamazakiTheGeneral from "../pool/heiko-yamazaki-the-general.js";
 import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
 import _poolHerculesPrinceOfPower from "../pool/hercules-prince-of-power.js";
 import _poolHermiticNautilus from "../pool/hermitic-nautilus.js";
@@ -674,6 +675,7 @@ const shard: CardShard = {
     _poolHavocEater,
     _poolHeartlessSummoning,
     _poolHeartwoodGiant,
+    _poolHeikoYamazakiTheGeneral,
     _poolHeliodSunCrowned,
     _poolHerculesPrinceOfPower,
     _poolHermiticNautilus,

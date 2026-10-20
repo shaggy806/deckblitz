@@ -19,6 +19,7 @@ import _poolAkromaAngelOfWrath from "../pool/akroma-angel-of-wrath.js";
 import _poolAlquistProftMasterSleuth from "../pool/alquist-proft-master-sleuth.js";
 import _poolAmbrosiaWhiteheart from "../pool/ambrosia-whiteheart.js";
 import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
+import _poolAncestralKatana from "../pool/ancestral-katana.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
@@ -501,6 +502,7 @@ const shard: CardShard = {
     _poolAlquistProftMasterSleuth,
     _poolAmbrosiaWhiteheart,
     _poolAnalyzeThePollen,
+    _poolAncestralKatana,
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
     _poolAntManElusiveAvenger,

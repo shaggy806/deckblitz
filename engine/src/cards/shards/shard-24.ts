@@ -124,6 +124,7 @@ import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
 import _poolEarthKingdomSoldier from "../pool/earth-kingdom-soldier.js";
 import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
 import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
+import _poolEiganjoExemplar from "../pool/eiganjo-exemplar.js";
 import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
@@ -588,6 +589,7 @@ const shard: CardShard = {
     _poolEarthKingdomSoldier,
     _poolEarthbendingLesson,
     _poolEclipsedBoggart,
+    _poolEiganjoExemplar,
     _poolElementalSpectacle,
     _poolEleshNornGrandCenobite,
     _poolElvishVisionary,

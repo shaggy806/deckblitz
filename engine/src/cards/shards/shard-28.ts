@@ -359,6 +359,7 @@ import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
+import _poolSelflessSamurai from "../pool/selfless-samurai.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
 import _poolSetessanGriffin from "../pool/setessan-griffin.js";
 import _poolShadowSummoning from "../pool/shadow-summoning.js";
@@ -853,6 +854,7 @@ const shard: CardShard = {
     _poolScuttlingButler,
     _poolSecuritronSquadron,
     _poolSelesnyaSentry,
+    _poolSelflessSamurai,
     _poolSentinelSliver,
     _poolSetessanGriffin,
     _poolShadowSummoning,

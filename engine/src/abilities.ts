@@ -1033,9 +1033,13 @@ export type TriggerSpec =
        * player — the one it attacks, or the controller of the planeswalker
        * it attacks (rule 506.2) — is `"trigger-player"`: Strategic
        * Intervention's "tap up to one target creature defending player
-       * controls" (`whose: "trigger-player"`). */
+       * controls" (`whose: "trigger-player"`). `filter` narrows the lone
+       * attacker, checked as it triggers: "whenever a Samurai or Warrior you
+       * control attacks alone" (Neon Dynasty's Samurai) is `who: "you-control"`
+       * with `{ subtypes: ["Samurai", "Warrior"] }`. */
       readonly on: "attacks-alone";
       readonly who: TriggerWho;
+      readonly filter?: CardFilter;
     }
   | {
       /** A player sacrificed a permanent (Korvold, Mayhem Devil — rule 701.21).

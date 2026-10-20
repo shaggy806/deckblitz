@@ -14,6 +14,7 @@ import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
+import _poolAkkiRonin from "../pool/akki-ronin.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
@@ -273,6 +274,7 @@ import _poolNightsquadCommando from "../pool/nightsquad-commando.js";
 import _poolNinjaPizza from "../pool/ninja-pizza.js";
 import _poolNissaStewardOfElements from "../pool/nissa-steward-of-elements.js";
 import _poolNobleSteeds from "../pool/noble-steeds.js";
+import _poolNorikaYamazakiThePoet from "../pool/norika-yamazaki-the-poet.js";
 import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
 import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets.js";
 import _poolNullmageShepherd from "../pool/nullmage-shepherd.js";
@@ -507,6 +509,7 @@ const shard: CardShard = {
     _poolAgateInstigator,
     _poolAgrusKosSpiritOfJustice,
     _poolAjaniSleeperAgent,
+    _poolAkkiRonin,
     _poolAlleyEvasion,
     _poolAmethystDragon,
     _poolAnUnexpectedParty,
@@ -766,6 +769,7 @@ const shard: CardShard = {
     _poolNinjaPizza,
     _poolNissaStewardOfElements,
     _poolNobleSteeds,
+    _poolNorikaYamazakiThePoet,
     _poolNornsChoirmaster,
     _poolNullGroupBiologicalAssets,
     _poolNullmageShepherd,

@@ -329,6 +329,7 @@ import _poolRagefireHellkite from "../pool/ragefire-hellkite.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
+import _poolRaiyuuStormsEdge from "../pool/raiyuu-storms-edge.js";
 import _poolRalsReinforcements from "../pool/rals-reinforcements.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
@@ -853,6 +854,7 @@ const shard: CardShard = {
     _poolRagingCougar,
     _poolRainOfEmbers,
     _poolRaiseThePast,
+    _poolRaiyuuStormsEdge,
     _poolRalsReinforcements,
     _poolRancorousArchaic,
     _poolRatcatcherTrainee,

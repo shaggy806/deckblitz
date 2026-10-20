@@ -237,6 +237,7 @@ import _poolAkkiBlizzardHerder from "./pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "./pool/akki-drillmaster.js";
 import _poolAkkiEmberKeeper from "./pool/akki-ember-keeper.js";
 import _poolAkkiRockspeaker from "./pool/akki-rockspeaker.js";
+import _poolAkkiRonin from "./pool/akki-ronin.js";
 import _poolAkkiScrapchomper from "./pool/akki-scrapchomper.js";
 import _poolAkkiWarPaint from "./pool/akki-war-paint.js";
 import _poolAkoumBoulderfoot from "./pool/akoum-boulderfoot.js";
@@ -377,6 +378,7 @@ import _poolAncestorsProphet from "./pool/ancestors-prophet.js";
 import _poolAncestralAnger from "./pool/ancestral-anger.js";
 import _poolAncestralCommunion from "./pool/ancestral-communion.js";
 import _poolAncestralCraving from "./pool/ancestral-craving.js";
+import _poolAncestralKatana from "./pool/ancestral-katana.js";
 import _poolAncestralMask from "./pool/ancestral-mask.js";
 import _poolAncestralRecall from "./pool/ancestral-recall.js";
 import _poolAncestralReminiscence from "./pool/ancestral-reminiscence.js";
@@ -683,6 +685,7 @@ import _poolArwenMortalQueen from "./pool/arwen-mortal-queen.js";
 import _poolArwenUndomiel from "./pool/arwen-undomiel.js";
 import _poolArwenWeaverOfHope from "./pool/arwen-weaver-of-hope.js";
 import _poolArwensGift from "./pool/arwens-gift.js";
+import _poolAsariCaptain from "./pool/asari-captain.js";
 import _poolAscendantAcolyte from "./pool/ascendant-acolyte.js";
 import _poolAscendantDustspeaker from "./pool/ascendant-dustspeaker.js";
 import _poolAscendedLawmage from "./pool/ascended-lawmage.js";
@@ -3734,6 +3737,7 @@ import _poolEidolonOfInspiration from "./pool/eidolon-of-inspiration.js";
 import _poolEidolonOfPhilosophy from "./pool/eidolon-of-philosophy.js";
 import _poolEiganjoCastle from "./pool/eiganjo-castle.js";
 import _poolEiganjoDynastorian from "./pool/eiganjo-dynastorian.js";
+import _poolEiganjoExemplar from "./pool/eiganjo-exemplar.js";
 import _poolEiganjoSeatOfTheEmpire from "./pool/eiganjo-seat-of-the-empire.js";
 import _poolEiganjoUprising from "./pool/eiganjo-uprising.js";
 import _poolEivorBattleReady from "./pool/eivor-battle-ready.js";
@@ -5862,6 +5866,7 @@ import _poolHedronRover from "./pool/hedron-rover.js";
 import _poolHedronScrabbler from "./pool/hedron-scrabbler.js";
 import _poolHeiBaiForestGuardian from "./pool/hei-bai-forest-guardian.js";
 import _poolHeiBaiSpiritOfBalance from "./pool/hei-bai-spirit-of-balance.js";
+import _poolHeikoYamazakiTheGeneral from "./pool/heiko-yamazaki-the-general.js";
 import _poolHeirOfTheAncientFang from "./pool/heir-of-the-ancient-fang.js";
 import _poolHeirloomAuntie from "./pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "./pool/heirloom-blade.js";
@@ -6305,6 +6310,7 @@ import _poolImperialOutrider from "./pool/imperial-outrider.js";
 import _poolImperialRecoveryUnit from "./pool/imperial-recovery-unit.js";
 import _poolImperialRecruiter from "./pool/imperial-recruiter.js";
 import _poolImperialSeal from "./pool/imperial-seal.js";
+import _poolImperialSubduer from "./pool/imperial-subduer.js";
 import _poolImperiousInkmage from "./pool/imperious-inkmage.js";
 import _poolImperiousPerfect from "./pool/imperious-perfect.js";
 import _poolImperviousGreatwurm from "./pool/impervious-greatwurm.js";
@@ -6566,6 +6572,7 @@ import _poolIronhoofBoar from "./pool/ironhoof-boar.js";
 import _poolIronpawAspirant from "./pool/ironpaw-aspirant.js";
 import _poolIronrootTreefolk from "./pool/ironroot-treefolk.js";
 import _poolIronshellBeetle from "./pool/ironshell-beetle.js";
+import _poolIronsoulEnforcer from "./pool/ironsoul-enforcer.js";
 import _poolIrontreadCrusher from "./pool/irontread-crusher.js";
 import _poolIronwillForger from "./pool/ironwill-forger.js";
 import _poolIronwrightsCleansing from "./pool/ironwrights-cleansing.js";
@@ -8771,6 +8778,7 @@ import _poolNoiseMarine from "./pool/noise-marine.js";
 import _poolNomadOutpost from "./pool/nomad-outpost.js";
 import _poolNomadicElf from "./pool/nomadic-elf.js";
 import _poolNoriTellerOfTales from "./pool/nori-teller-of-tales.js";
+import _poolNorikaYamazakiThePoet from "./pool/norika-yamazaki-the-poet.js";
 import _poolNorinTheWary from "./pool/norin-the-wary.js";
 import _poolNormanOsborn from "./pool/norman-osborn.js";
 import _poolNornsChoirmaster from "./pool/norns-choirmaster.js";
@@ -9897,6 +9905,7 @@ import _poolRaiseTheAlarm from "./pool/raise-the-alarm.js";
 import _poolRaiseThePalisade from "./pool/raise-the-palisade.js";
 import _poolRaiseThePast from "./pool/raise-the-past.js";
 import _poolRaisedByGiants from "./pool/raised-by-giants.js";
+import _poolRaiyuuStormsEdge from "./pool/raiyuu-storms-edge.js";
 import _poolRakaDisciple from "./pool/raka-disciple.js";
 import _poolRakdosCarnarium from "./pool/rakdos-carnarium.js";
 import _poolRakdosCharm from "./pool/rakdos-charm.js";
@@ -11140,6 +11149,7 @@ import _poolSelfcraftMechan from "./pool/selfcraft-mechan.js";
 import _poolSelflessCathar from "./pool/selfless-cathar.js";
 import _poolSelflessPoliceCaptain from "./pool/selfless-police-captain.js";
 import _poolSelflessSafewright from "./pool/selfless-safewright.js";
+import _poolSelflessSamurai from "./pool/selfless-samurai.js";
 import _poolSelflessSavior from "./pool/selfless-savior.js";
 import _poolSelflessSpirit from "./pool/selfless-spirit.js";
 import _poolSellerOfSongbirds from "./pool/seller-of-songbirds.js";
@@ -15890,6 +15900,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAkkiDrillmaster,
   _poolAkkiEmberKeeper,
   _poolAkkiRockspeaker,
+  _poolAkkiRonin,
   _poolAkkiScrapchomper,
   _poolAkkiWarPaint,
   _poolAkoumBoulderfoot,
@@ -16030,6 +16041,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAncestralAnger,
   _poolAncestralCommunion,
   _poolAncestralCraving,
+  _poolAncestralKatana,
   _poolAncestralMask,
   _poolAncestralRecall,
   _poolAncestralReminiscence,
@@ -16336,6 +16348,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArwenUndomiel,
   _poolArwenWeaverOfHope,
   _poolArwensGift,
+  _poolAsariCaptain,
   _poolAscendantAcolyte,
   _poolAscendantDustspeaker,
   _poolAscendedLawmage,
@@ -19387,6 +19400,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEidolonOfPhilosophy,
   _poolEiganjoCastle,
   _poolEiganjoDynastorian,
+  _poolEiganjoExemplar,
   _poolEiganjoSeatOfTheEmpire,
   _poolEiganjoUprising,
   _poolEivorBattleReady,
@@ -21515,6 +21529,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHedronScrabbler,
   _poolHeiBaiForestGuardian,
   _poolHeiBaiSpiritOfBalance,
+  _poolHeikoYamazakiTheGeneral,
   _poolHeirOfTheAncientFang,
   _poolHeirloomAuntie,
   _poolHeirloomBlade,
@@ -21958,6 +21973,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolImperialRecoveryUnit,
   _poolImperialRecruiter,
   _poolImperialSeal,
+  _poolImperialSubduer,
   _poolImperiousInkmage,
   _poolImperiousPerfect,
   _poolImperviousGreatwurm,
@@ -22219,6 +22235,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIronpawAspirant,
   _poolIronrootTreefolk,
   _poolIronshellBeetle,
+  _poolIronsoulEnforcer,
   _poolIrontreadCrusher,
   _poolIronwillForger,
   _poolIronwrightsCleansing,
@@ -24424,6 +24441,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNomadOutpost,
   _poolNomadicElf,
   _poolNoriTellerOfTales,
+  _poolNorikaYamazakiThePoet,
   _poolNorinTheWary,
   _poolNormanOsborn,
   _poolNornsChoirmaster,
@@ -25550,6 +25568,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRaiseThePalisade,
   _poolRaiseThePast,
   _poolRaisedByGiants,
+  _poolRaiyuuStormsEdge,
   _poolRakaDisciple,
   _poolRakdosCarnarium,
   _poolRakdosCharm,
@@ -26793,6 +26812,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSelflessCathar,
   _poolSelflessPoliceCaptain,
   _poolSelflessSafewright,
+  _poolSelflessSamurai,
   _poolSelflessSavior,
   _poolSelflessSpirit,
   _poolSellerOfSongbirds,

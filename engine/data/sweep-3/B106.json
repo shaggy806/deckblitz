@@ -887,6 +887,62 @@
     "engine/src/cards/pool/laurine-the-diversion.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "Akki Ronin",
+   "files": [
+    "engine/src/cards/pool/akki-ronin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancestral Katana",
+   "files": [
+    "engine/src/cards/pool/ancestral-katana.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Asari Captain",
+   "files": [
+    "engine/src/cards/pool/asari-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eiganjo Exemplar",
+   "files": [
+    "engine/src/cards/pool/eiganjo-exemplar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heiko Yamazaki, the General",
+   "files": [
+    "engine/src/cards/pool/heiko-yamazaki-the-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imperial Subduer",
+   "files": [
+    "engine/src/cards/pool/imperial-subduer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Norika Yamazaki, the Poet",
+   "files": [
+    "engine/src/cards/pool/norika-yamazaki-the-poet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selfless Samurai",
+   "files": [
+    "engine/src/cards/pool/selfless-samurai.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [
@@ -919,13 +975,6 @@
     "effect:next-spell-cost-reduction"
    ],
    "why": "a Samurai or Warrior attacks alone; the next spell you cast this turn costs {1} less"
-  },
-  {
-   "name": "Ancestral Katana",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
   },
   {
    "name": "The Dragon-Kami Reborn",
@@ -1018,20 +1067,6 @@
     "effect:duration-while-you-control-source"
    ],
    "why": "for as long as you control Kyodai"
-  },
-  {
-   "name": "Akki Ronin",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
-  },
-  {
-   "name": "Eiganjo Exemplar",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
   },
   {
    "name": "Tamiyo's Compleation",
@@ -1141,34 +1176,6 @@
    "why": "soulbond"
   },
   {
-   "name": "Selfless Samurai",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
-  },
-  {
-   "name": "Norika Yamazaki, the Poet",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
-  },
-  {
-   "name": "Imperial Subduer",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
-  },
-  {
-   "name": "Asari Captain",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
-  },
-  {
    "name": "Tamiyo, Compleated Sage",
    "needs": [
     "cost:loyalty-x"
@@ -1245,13 +1252,6 @@
     "cost:exile-cards-from-hand-cost-reduction"
    ],
    "why": "exile black cards from hand for {2} less each"
-  },
-  {
-   "name": "Heiko Yamazaki, the General",
-   "needs": [
-    "trigger:attacks-alone-filter"
-   ],
-   "why": "a Samurai or Warrior you control attacks alone"
   },
   {
    "name": "Invoke Justice",

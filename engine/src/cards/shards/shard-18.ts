@@ -182,6 +182,7 @@ import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
+import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
@@ -698,6 +699,7 @@ const shard: CardShard = {
     _poolIcetillExplorer,
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
+    _poolImperialSubduer,
     _poolIndependentTroops,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,

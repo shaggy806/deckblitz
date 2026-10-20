@@ -18246,7 +18246,9 @@ export class Game {
         );
       case "attacks-alone":
         return (
-          event.type === "attacked-alone" && this.matchesWho(spec.who, event.attacker, self)
+          event.type === "attacked-alone" &&
+          this.matchesWho(spec.who, event.attacker, self) &&
+          this.triggerFilterOk(spec.filter, event.attacker, self)
         );
       case "sacrifice":
         // The permanent is read as it last existed on the battlefield: a
