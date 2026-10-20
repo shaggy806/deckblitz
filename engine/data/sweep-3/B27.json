@@ -614,6 +614,13 @@
         "engine/src/cards/pool/bloodsoaked-champion.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Abzan Charm",
+      "files": [
+        "engine/src/cards/pool/abzan-charm.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1030,13 +1037,6 @@
         "effect:reflexive-trigger"
       ],
       "why": "sacrifice any number of Treasures then 'up to that many' targets — no variable-count sacrifice with a reflexive target count"
-    },
-    {
-      "name": "Abzan Charm",
-      "needs": [
-        "new:distribute-counters"
-      ],
-      "why": "distributing two +1/+1 counters among one or two targets isn't built (AUTHORING §15)"
     },
     {
       "name": "Nanogene Conversion",

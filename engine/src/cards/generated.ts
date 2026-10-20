@@ -62,6 +62,7 @@ import _poolAbyssalHorror from "./pool/abyssal-horror.js";
 import _poolAbzanAscendancy from "./pool/abzan-ascendancy.js";
 import _poolAbzanBanner from "./pool/abzan-banner.js";
 import _poolAbzanBattlePriest from "./pool/abzan-battle-priest.js";
+import _poolAbzanCharm from "./pool/abzan-charm.js";
 import _poolAbzanDevotee from "./pool/abzan-devotee.js";
 import _poolAbzanFalconer from "./pool/abzan-falconer.js";
 import _poolAbzanGuide from "./pool/abzan-guide.js";
@@ -16063,6 +16064,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAbzanAscendancy,
   _poolAbzanBanner,
   _poolAbzanBattlePriest,
+  _poolAbzanCharm,
   _poolAbzanDevotee,
   _poolAbzanFalconer,
   _poolAbzanGuide,

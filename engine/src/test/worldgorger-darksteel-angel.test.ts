@@ -4,7 +4,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, destroy, enter, settle, spawn, table, zone } from "./harness.js";
+import { A, B, cast, destroy, enter, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 describe("Worldgorger Dragon", () => {
   it("exiles every other permanent you control, and returns them as it leaves", () => {
@@ -44,5 +44,28 @@ describe("Darksteel Angel", () => {
     game.debugApplyEffect(B, { kind: "lose-life", amount: 25, who: "each-opponent" });
     settle(game);
     expect(game.state.players[A].hasLost).toBe(false);
+  });
+});
+
+describe("Abzan Charm", () => {
+  it("distributes one counter to each of two targets, or both to one", () => {
+    const { game } = table();
+    for (const land of ["Plains", "Swamp", "Forest", "Plains", "Swamp", "Forest"]) spawn(game, land);
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    cast(game, toHand(game, "Abzan Charm"), { modes: [2], targets: [ref(bears), ref(elves)] });
+    expect(game.state.objects[bears].counters["+1/+1"]).toBe(1);
+    expect(game.state.objects[elves].counters["+1/+1"]).toBe(1);
+    cast(game, toHand(game, "Abzan Charm"), { modes: [2], targets: [ref(bears), null] });
+    expect(game.state.objects[bears].counters["+1/+1"]).toBe(3);
+  });
+
+  it("draw two and lose 2 life", () => {
+    const { game } = table();
+    for (const land of ["Plains", "Swamp", "Forest"]) spawn(game, land);
+    const before = game.state.zones.perPlayer[A].hand.length;
+    cast(game, toHand(game, "Abzan Charm"), { modes: [1] });
+    expect(game.state.zones.perPlayer[A].hand.length).toBe(before + 2);
+    expect(game.state.players[A].life).toBe(18);
   });
 });

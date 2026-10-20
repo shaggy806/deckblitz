@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbominationWorldRavager from "../pool/abomination-world-ravager.js";
+import _poolAbzanCharm from "../pool/abzan-charm.js";
 import _poolAccursedMarauder from "../pool/accursed-marauder.js";
 import _poolAdelbertSteiner from "../pool/adelbert-steiner.js";
 import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
@@ -524,6 +525,7 @@ import _tokensZombieTokenAshnodFleshMechanist from "../tokens/zombie-token-ashno
 const shard: CardShard = {
   pool: [
     _poolAbominationWorldRavager,
+    _poolAbzanCharm,
     _poolAccursedMarauder,
     _poolAdelbertSteiner,
     _poolAdornedCrocodile,
