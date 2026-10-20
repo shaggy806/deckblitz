@@ -837,9 +837,10 @@
     {
       "name": "Cloudsteel Kirin",
       "needs": [
-        "new:reconfigure"
+        "new:reconfigure",
+        "static:grant-static-ability"
       ],
-      "why": "reconfigure isn't modeled"
+      "why": "reconfigure isn't modeled Rechecked 2026-10-20: the equipped creature gains the static \"You can't lose the game and your opponents can't win the game\"; a static can't grant a static."
     },
     {
       "name": "Arcane Heist",

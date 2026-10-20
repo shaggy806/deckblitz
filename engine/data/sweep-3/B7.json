@@ -679,9 +679,10 @@
       "name": "Vigor",
       "needs": [
         "replacement:damage-modification",
-        "new:shuffle-self-into-library"
+        "new:shuffle-self-into-library",
+        "replacement:damage-prevented-to-filter"
       ],
-      "why": "Prevents damage to your other creatures and puts that many +1/+1 counters on each one; 'when Vigor is put into a graveyard from anywhere, shuffle it into its owner's library'."
+      "why": "Prevents damage to your other creatures and puts that many +1/+1 counters on each one; 'when Vigor is put into a graveyard from anywhere, shuffle it into its owner's library'. Rechecked 2026-10-20: 'prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented' — the counters go on the creature the damage was prevented to, not the replacement's source."
     },
     {
       "name": "Finale of Revelation",

@@ -154,3 +154,19 @@ describe("Mogg Infestation", () => {
     expect(goblins.reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0)).toBe(4);
   });
 });
+
+describe("Turnabout", () => {
+  it("chosen as it resolves: untap all lands target player controls", () => {
+    const { game, a } = table();
+    const islands = lands(game, "Island", 4);
+    const theirs = spawn(game, "Forest", B, { tapped: true });
+    const myForest = spawn(game, "Forest", A, { tapped: true });
+    // The six choices in order: tap/untap for artifact, creature, land.
+    a.chooseModesFn = () => [5];
+    cast(game, toHand(game, "Turnabout"), { targets: [ref(B)] });
+    expect(game.state.objects[theirs].tapped).toBe(false);
+    expect(game.state.objects[myForest].tapped).toBe(true);
+    // Its own Islands paid for it and stay tapped.
+    expect(islands.every((id) => game.state.objects[id].tapped)).toBe(true);
+  });
+});

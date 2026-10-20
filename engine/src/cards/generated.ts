@@ -14070,6 +14070,7 @@ import _poolTurnInsideOut from "./pool/turn-inside-out.js";
 import _poolTurnStones from "./pool/turn-stones.js";
 import _poolTurnTheTide from "./pool/turn-the-tide.js";
 import _poolTurnToFrog from "./pool/turn-to-frog.js";
+import _poolTurnabout from "./pool/turnabout.js";
 import _poolTurncoatKunoichi from "./pool/turncoat-kunoichi.js";
 import _poolTurntimberAscetic from "./pool/turntimber-ascetic.js";
 import _poolTurntimberGrove from "./pool/turntimber-grove.js";
@@ -30104,6 +30105,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTurnStones,
   _poolTurnTheTide,
   _poolTurnToFrog,
+  _poolTurnabout,
   _poolTurncoatKunoichi,
   _poolTurntimberAscetic,
   _poolTurntimberGrove,

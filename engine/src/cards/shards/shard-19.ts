@@ -466,6 +466,7 @@ import _poolTripUp from "../pool/trip-up.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolTumbleweedRising from "../pool/tumbleweed-rising.js";
 import _poolTundraTank from "../pool/tundra-tank.js";
+import _poolTurnabout from "../pool/turnabout.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
@@ -994,6 +995,7 @@ const shard: CardShard = {
     _poolTroyanGutsyExplorer,
     _poolTumbleweedRising,
     _poolTundraTank,
+    _poolTurnabout,
     _poolUlamogsDreadsire,
     _poolUltronTheAnnihilator,
     _poolUncoverTheMoonLetters,

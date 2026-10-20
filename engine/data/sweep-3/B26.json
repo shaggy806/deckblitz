@@ -636,6 +636,13 @@
         "engine/src/cards/pool/mirage-mesa.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Turnabout",
+      "files": [
+        "engine/src/cards/pool/turnabout.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1058,13 +1065,6 @@
         "new:sacrifice-x-effect"
       ],
       "why": "sacrifice count is a fixed number (§15); X land drops and lands-enter-tapped-this-turn too"
-    },
-    {
-      "name": "Turnabout",
-      "needs": [
-        "new:tap-all-target-player"
-      ],
-      "why": "tap-all/untap-all can't scope to a target player's permanents of a type chosen on resolution"
     },
     {
       "name": "Koth, Fire of Resistance",
