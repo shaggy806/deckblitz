@@ -13,6 +13,7 @@ import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
 import _poolAirElemental from "../pool/air-elemental.js";
 import _poolAirshipCrash from "../pool/airship-crash.js";
+import _poolAjaniVengeant from "../pool/ajani-vengeant.js";
 import _poolAkoumTeeth from "../pool/akoum-teeth.js";
 import _poolAkromaAngelOfFury from "../pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "../pool/akroma-angel-of-wrath.js";
@@ -509,6 +510,7 @@ const shard: CardShard = {
     _poolAetherfluxReservoir,
     _poolAirElemental,
     _poolAirshipCrash,
+    _poolAjaniVengeant,
     _poolAkoumTeeth,
     _poolAkromaAngelOfFury,
     _poolAkromaAngelOfWrath,

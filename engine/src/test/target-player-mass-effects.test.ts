@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, hand, lands, life, ref, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, cast, hand, lands, life, loyalty, ref, spawn, table, toHand, zone } from "./harness.js";
 
 describe("mass effects over a target player's permanents", () => {
   it("River's Rebuke returns only that player's nonland permanents", () => {
@@ -54,5 +54,17 @@ describe("mass effects over a target player's permanents", () => {
     cast(game, toHand(game, "Naya Charm"), { modes: [2], targets: [ref(B)] });
     expect(game.state.objects[theirs].tapped).toBe(true);
     expect(game.state.objects[mine].tapped).toBe(false);
+  });
+});
+
+describe("Ajani Vengeant", () => {
+  it("−7 destroys all lands target player controls", () => {
+    const { game } = table();
+    const ajani = spawn(game, "Ajani Vengeant");
+    const myLand = spawn(game, "Plains");
+    const theirLand = spawn(game, "Forest", B);
+    loyalty(game, ajani, -7, { atLeast: 7, targets: [ref(B)] });
+    expect(zone(game, theirLand)).toBe("graveyard");
+    expect(zone(game, myLand)).toBe("battlefield");
   });
 });

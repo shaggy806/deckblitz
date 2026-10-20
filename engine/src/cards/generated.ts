@@ -225,6 +225,7 @@ import _poolAjaniResolute from "./pool/ajani-resolute.js";
 import _poolAjaniSleeperAgent from "./pool/ajani-sleeper-agent.js";
 import _poolAjaniTheGreathearted from "./pool/ajani-the-greathearted.js";
 import _poolAjaniUnrelenting from "./pool/ajani-unrelenting.js";
+import _poolAjaniVengeant from "./pool/ajani-vengeant.js";
 import _poolAjanisAnguish from "./pool/ajanis-anguish.js";
 import _poolAjanisChosen from "./pool/ajanis-chosen.js";
 import _poolAjanisMantra from "./pool/ajanis-mantra.js";
@@ -16250,6 +16251,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAjaniSleeperAgent,
   _poolAjaniTheGreathearted,
   _poolAjaniUnrelenting,
+  _poolAjaniVengeant,
   _poolAjanisAnguish,
   _poolAjanisChosen,
   _poolAjanisMantra,
