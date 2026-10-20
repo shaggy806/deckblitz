@@ -2837,7 +2837,7 @@ export type AwaitingDecision =
        * `spell`, bound when it was raised. */
       readonly spell?: CardFilter;
       /** "If that spell would be put into your graveyard, exile it instead." */
-      readonly exileAfter: boolean;
+      readonly exileAfter: boolean | "instants-and-sorceries";
       /** Cascade's or suspend's own free cast — see `CastNowOptions`. */
       readonly freeCastOf?: "cascade" | "suspend";
     }

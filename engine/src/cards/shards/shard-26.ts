@@ -234,6 +234,7 @@ import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
+import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolKnife from "../pool/knife.js";
@@ -754,6 +755,7 @@ const shard: CardShard = {
     _poolKataraWaterTribesHope,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
+    _poolKelsFightFixer,
     _poolKhalniAmbush,
     _poolKinTreeSeverance,
     _poolKnife,

@@ -68,6 +68,7 @@ import _poolBoundaryLandsRanger from "../pool/boundary-lands-ranger.js";
 import _poolBrawlersPlate from "../pool/brawlers-plate.js";
 import _poolBrazenFreebooter from "../pool/brazen-freebooter.js";
 import _poolBreathOfLife from "../pool/breath-of-life.js";
+import _poolBrightmare from "../pool/brightmare.js";
 import _poolBrokersAscendancy from "../pool/brokers-ascendancy.js";
 import _poolBullRush from "../pool/bull-rush.js";
 import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
@@ -597,6 +598,7 @@ const shard: CardShard = {
     _poolBrawlersPlate,
     _poolBrazenFreebooter,
     _poolBreathOfLife,
+    _poolBrightmare,
     _poolBrokersAscendancy,
     _poolBullRush,
     _poolBurningShieldAskari,

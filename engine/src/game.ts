@@ -972,7 +972,7 @@ interface CastNowAsk {
   readonly byDiscarding?: true;
   /** The madness cost paid rather than the mana cost (rule 702.35a). */
   readonly madness?: string;
-  readonly exileAfter: boolean;
+  readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
 }
@@ -11955,7 +11955,14 @@ export class Game {
     if (graveyardPermission?.exileAfterwards === true) object.exileIfWouldGoToGraveyard = true;
     // Chandra, Acolyte of Flame's "if that spell would be put into your
     // graveyard, exile it instead", for the cast her −2 asked for.
-    if (via === "effect" && this.castNowProbe?.exileAfter === true) object.exileIfWouldGoToGraveyard = true;
+    const exileAfter = via === "effect" ? this.castNowProbe?.exileAfter : undefined;
+    if (
+      exileAfter === true ||
+      (exileAfter === "instants-and-sorceries" &&
+        effectiveTypes(this.state, this.registry, object).some((t) => t === "instant" || t === "sorcery"))
+    ) {
+      object.exileIfWouldGoToGraveyard = true;
+    }
     object.stormCount = stormCount;
     if (sortedModes !== undefined) object.chosenModes = sortedModes;
     if (chosenDivision !== undefined) object.division = chosenDivision;

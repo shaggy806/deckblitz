@@ -421,6 +421,7 @@ import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
 import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
+import _poolStoneHavenPilgrim from "../pool/stone-haven-pilgrim.js";
 import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
@@ -960,6 +961,7 @@ const shard: CardShard = {
     _poolStarkIndustries,
     _poolSterlingKeykeeper,
     _poolStitchInTime,
+    _poolStoneHavenPilgrim,
     _poolStoneriseSpirit,
     _poolStoneworkPuma,
     _poolStormbeaconBlade,

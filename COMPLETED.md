@@ -86,6 +86,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Jumpstart, whole** (batch 115): its last 12 cards, 10 authored by the lead, with `cast-now`'s
+  `exileAfter: "instants-and-sorceries"` built for Scholar of the Lost Trove (an artifact cast
+  this way isn't exiled, its ruling); Ormos and Inniaz blocked (2026-10-20).
 - **Zendikar Rising and Zendikar Rising Commander, whole** (batch 114): their 146 cards, 121
   authored, 25 blocked, with **party** built (rule 700.8 — the count, the cost reduction, the
   CDA, "if you have a full party"), "is also a Cleric, Rogue, Warrior, and Wizard" (a CDA in

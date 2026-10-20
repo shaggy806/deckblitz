@@ -515,6 +515,7 @@ import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-f
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
+import _tokensMinotaurToken from "../tokens/minotaur-token.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
@@ -1042,6 +1043,7 @@ const shard: CardShard = {
     _tokensGlimmerToken,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensKavuTokenJaredCarthalion,
+    _tokensMinotaurToken,
     _tokensNinjaTurtleSpiritToken,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,

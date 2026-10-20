@@ -77,6 +77,7 @@ import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolCavePeople from "../pool/cave-people.js";
 import _poolCensor from "../pool/censor.js";
 import _poolCerebralConfiscation from "../pool/cerebral-confiscation.js";
+import _poolChainedBrute from "../pool/chained-brute.js";
 import _poolChainsOfCustody from "../pool/chains-of-custody.js";
 import _poolChaosChanneler from "../pool/chaos-channeler.js";
 import _poolChaseSteinRunaway from "../pool/chase-stein-runaway.js";
@@ -632,6 +633,7 @@ const shard: CardShard = {
     _poolCavePeople,
     _poolCensor,
     _poolCerebralConfiscation,
+    _poolChainedBrute,
     _poolChainsOfCustody,
     _poolChaosChanneler,
     _poolChaseSteinRunaway,

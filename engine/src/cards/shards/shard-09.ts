@@ -217,6 +217,7 @@ import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolIceStorm from "../pool/ice-storm.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
+import _poolImmolatingGyre from "../pool/immolating-gyre.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
@@ -751,6 +752,7 @@ const shard: CardShard = {
     _poolIceStorm,
     _poolIcyReception,
     _poolIllegitimateBusiness,
+    _poolImmolatingGyre,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
     _poolInsatiableSouleater,

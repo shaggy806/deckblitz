@@ -255,6 +255,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Merfolk Token (Deeproot Waters)",
   "Merfolk Token (Silvergill Mentor)",
   "Meteorite Token",
+  "Minotaur Token",
   "Moloid",
   "Monk Token",
   "Monk Token (Crescent Island Temple)",

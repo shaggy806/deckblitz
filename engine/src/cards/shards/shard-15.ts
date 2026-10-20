@@ -379,6 +379,7 @@ import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
+import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolSeedbornMuse,
     _poolSelflessSpirit,
     _poolSerraRedeemer,
+    _poolSethronHurloonGeneral,
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,
     _poolSilvercoatLion,

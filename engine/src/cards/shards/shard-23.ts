@@ -377,6 +377,7 @@ import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
+import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
@@ -906,6 +907,7 @@ const shard: CardShard = {
     _poolSardianAvenger,
     _poolSarkhanFireblood,
     _poolScapeshift,
+    _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
     _poolScrollboost,
     _poolSeizedFromSlumber,

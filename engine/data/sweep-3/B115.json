@@ -1,0 +1,94 @@
+{
+ "batch": "B115",
+ "status": "complete",
+ "ranks": "Jumpstart (JMP, 2020-07-17): the rest of the set",
+ "authored": [
+  {
+   "name": "Scholar of the Lost Trove",
+   "files": [
+    "engine/src/cards/pool/scholar-of-the-lost-trove.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Immolating Gyre",
+   "files": [
+    "engine/src/cards/pool/immolating-gyre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brightmare",
+   "files": [
+    "engine/src/cards/pool/brightmare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trusty Retriever",
+   "files": [
+    "engine/src/cards/pool/trusty-retriever.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lightning Phoenix",
+   "files": [
+    "engine/src/cards/pool/lightning-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sethron, Hurloon General",
+   "files": [
+    "engine/src/cards/pool/sethron-hurloon-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kels, Fight Fixer",
+   "files": [
+    "engine/src/cards/pool/kels-fight-fixer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chained Brute",
+   "files": [
+    "engine/src/cards/pool/chained-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning-Core Excavator",
+   "files": [
+    "engine/src/cards/pool/lightning-core-excavator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stone Haven Pilgrim",
+   "files": [
+    "engine/src/cards/pool/stone-haven-pilgrim.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Inniaz, the Gale Force",
+   "needs": [
+    "effect:rotate-chosen-permanents"
+   ],
+   "why": "each player gains control of a nonland permanent of your choice controlled by the player to their right: rotate-control moves every matching permanent, not one chosen per player"
+  },
+  {
+   "name": "Ormos, Archive Keeper",
+   "needs": [
+    "replacement:draw-replacement-counters",
+    "cost:discard-different-names"
+   ],
+   "why": "\"if you would draw a card while your library has no cards in it, instead put five +1/+1 counters\" (would-draw replaces only with draws or a win), and a cost discarding three cards with different names"
+  }
+ ]
+}

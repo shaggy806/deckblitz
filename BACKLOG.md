@@ -107,8 +107,9 @@ section keeps only what to do next.
   Forgotten Realms dungeons and rule 101.4's "each player chooses, then all act"; batch 110 Modern
   Horizons 2 and Commander 2021, on madness; batch 111 Strixhaven, on learn as the rummage
   alone; batch 112 Kaldheim and its Commander set, on snow mana; batch 113 the rest of Commander
-  Legends, no engine change; batch 114 Zendikar Rising and its Commander set, on party);
-  **next, Jumpstart** (JMP — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
+  Legends, no engine change; batch 114 Zendikar Rising and its Commander set, on party; batch
+  115 the rest of Jumpstart); **next, Core Set 2021** (M21 — `npm run cards:sets -w engine --
+  --next 60`). The most shared blocks of the last three
   sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
   6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
   Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative

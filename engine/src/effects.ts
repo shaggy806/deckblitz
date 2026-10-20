@@ -1065,7 +1065,7 @@ export interface CastNowOptions {
   /** Paying the card's madness cost rather than its mana cost — see the
    * `cast-now` effect's `madness`. */
   readonly madness?: boolean;
-  readonly exileAfter: boolean;
+  readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   /** The library cards the player looks at to choose among, shown to them
    * castable or not. */
@@ -2502,8 +2502,12 @@ export type EffectSpec =
        * cost as an alternative cost (702.35b), the only way offered — the
        * madness trigger's cast (`cards/madness.ts`). */
       readonly madness?: boolean;
-      /** "If that spell would be put into your graveyard, exile it instead." */
-      readonly exileAfter?: boolean;
+      /** "If that spell would be put into your graveyard, exile it instead."
+       * `"instants-and-sorceries"` is Scholar of the Lost Trove's "if an
+       * instant or sorcery spell cast this way would be put into your
+       * graveyard": an artifact spell cast this way isn't exiled (its
+       * ruling). */
+      readonly exileAfter?: boolean | "instants-and-sorceries";
       /** "Cast it **transformed**" (rule 712.11a — a Siege's 310.12b): a
        * transforming double-faced card, cast with its back face up, which
        * enters the battlefield that way (712.13); a card without a back face
@@ -7308,7 +7312,7 @@ function offerCastNow(
       free: spec.free === true || spec.byDiscarding === true,
       ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
       ...(spec.madness === true ? { madness: true } : {}),
-      exileAfter: spec.exileAfter === true,
+      exileAfter: spec.exileAfter ?? false,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
       ...(spec.spell !== undefined ? { spell: spec.spell } : {}),

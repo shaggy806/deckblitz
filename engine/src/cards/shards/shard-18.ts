@@ -235,6 +235,7 @@ import _poolLevitation from "../pool/levitation.js";
 import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
+import _poolLightningPhoenix from "../pool/lightning-phoenix.js";
 import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
 import _poolLlanowarGreenwidow from "../pool/llanowar-greenwidow.js";
@@ -772,6 +773,7 @@ const shard: CardShard = {
     _poolLightbringer,
     _poolLightlessEvangel,
     _poolLightningGreaves,
+    _poolLightningPhoenix,
     _poolLightningStormkin,
     _poolLilianasShade,
     _poolLlanowarGreenwidow,

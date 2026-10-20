@@ -266,6 +266,7 @@ import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeveler from "../pool/leveler.js";
+import _poolLightningCoreExcavator from "../pool/lightning-core-excavator.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
 import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
@@ -448,6 +449,7 @@ import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
 import _poolTroveWarden from "../pool/trove-warden.js";
+import _poolTrustyRetriever from "../pool/trusty-retriever.js";
 import _poolTunnelSurveyor from "../pool/tunnel-surveyor.js";
 import _poolTwinflame from "../pool/twinflame.js";
 import _poolUmaraWizard from "../pool/umara-wizard.js";
@@ -773,6 +775,7 @@ const shard: CardShard = {
     _poolLassoedByTheLaw,
     _poolLawbringer,
     _poolLeveler,
+    _poolLightningCoreExcavator,
     _poolLimDulsHighGuard,
     _poolLingeringSouls,
     _poolLlanowarElves,
@@ -955,6 +958,7 @@ const shard: CardShard = {
     _poolTributaryVaulter,
     _poolTributeMage,
     _poolTroveWarden,
+    _poolTrustyRetriever,
     _poolTunnelSurveyor,
     _poolTwinflame,
     _poolUmaraWizard,

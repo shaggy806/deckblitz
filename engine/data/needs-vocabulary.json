@@ -8742,6 +8742,16 @@
   },
   "filter:kicked-spell": {
    "example": "Roost of Drakes (built 2026-10-20)"
+  },
+  "replacement:draw-replacement-counters": {
+   "example": "Ormos, Archive Keeper"
+  },
+  "cost:discard-different-names": {
+   "example": "Ormos, Archive Keeper"
+  },
+  "effect:rotate-chosen-permanents": {
+   "family": "effect:exchange-control",
+   "example": "Inniaz, the Gale Force"
   }
  }
 }
