@@ -168,7 +168,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **`{ powerOf: n }` reads a target that just left in its new zone** (608.2h): a `choose-permanents` `then` target returned to hand reads the card, not last-known (First Responder used `thisWay` + `sumOf`).
 - **A trigger's top-level `trigger-object` condition is always false**: it only works inside a `conditional` (Obscura Ascendancy used a filter plus a resolution check).
 - **`cast-now`'s `play` plays a land only from exile**: "play a land from the top of your library" (Ziatora's Envoy) is refused.
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.

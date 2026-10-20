@@ -27149,7 +27149,7 @@ export class Game {
       const id = chosen[0];
       if (id !== undefined && this.state.objects[id]?.zone === "battlefield") {
         const one = this.splitOneFromStack(id);
-        applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x));
+        applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x, 0, undefined, 1, 0, ["battlefield"]));
       }
       if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
       return;
@@ -27162,7 +27162,13 @@ export class Game {
         for (const id of chosen) {
           // Re-checked rather than trusted: something may have left since.
           if (this.state.objects[id]?.zone !== "battlefield") continue;
-          applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: id }], x));
+          // A chosen permanent is read as it last existed there once it
+          // has left (rule 608.2h) — "return it, then put counters equal to
+          // its power" reads the power it had (First Responder).
+          applyEffectSpec(
+            then,
+            this.makeResolutionContext(source, player, [{ kind: "object", object: id }], x, 0, undefined, 1, 0, ["battlefield"]),
+          );
         }
       }),
     );
