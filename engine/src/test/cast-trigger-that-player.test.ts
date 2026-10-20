@@ -15,7 +15,7 @@ describe("a cast trigger's \"that player\" is the caster", () => {
     lands(game, "Island", 2);
     // Bob's card in Alice's hand — as though she took it.
     const opt = toHand(game, "Opt");
-    game.state.objects[opt].owner = B;
+    Object.assign(game.state.objects[opt], { owner: B });
     cast(game, opt, { settle: false });
     // Countered in response, before Spellshock's trigger resolves.
     game.debugApplyEffect(B, { kind: "counter", target: 0 }, [ref(opt)]);

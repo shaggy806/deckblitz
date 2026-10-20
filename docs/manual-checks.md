@@ -3946,11 +3946,11 @@ stack count once per token)
 
 - **Setup:** Rift Bolt suspended in your exile with one time counter.
 - **Do:** Start your turn.
-- **Check:** At upkeep you're offered Rift Bolt's free cast, its target yours to choose; declining
-  leaves it in exile with no counters, no longer suspended. A suspended creature spell cast this way
-  has haste.
-- **Known limits:** Suspend's counter removal and cast happen as the upkeep begins rather than as
-  triggers on the stack (BACKLOG).
+- **Check:** At upkeep suspend's "remove a time counter" goes on the stack (the counter still on the
+  card while it waits, and you can respond), then "when the last is removed, you may play it" goes
+  on the stack in turn (fixed 2026-10-20, rule 702.62a); as that resolves you're offered Rift Bolt's
+  free cast, its target yours to choose. Declining leaves it in exile with no counters, no longer
+  suspended. A suspended creature spell cast this way has haste. Both stack items read sensibly.
 
 ### Maelstrom Wanderer, The First Sliver, Imoti, Celebrant of Bounty, Zhulodok, Void Gorger
 
@@ -5040,3 +5040,28 @@ as a second "Cast" beside the normal one
   permanent, and the Giant goes to its owner's hand for {1}{U}. Lantern Flare cleaved asks for X and
   deals and gains X; cast normally it deals and gains 2 (your two creatures) without asking. Check at
   ~768px tall, in a 2- and a 4-player room.
+
+## Engine-gap fixes (2026-10-20)
+
+### Solemnity, Devoted Druid and Kitchen Finks
+
+*Rules call* — "counters can't be put" (`preventsCounters`, rule 122)
+
+- **Setup:** Your precombat main. Your battlefield: Solemnity, Devoted Druid, Kitchen Finks, three
+  Forests. The opponent has Blighted Agent and a Swamp.
+- **Do:** Tap Devoted Druid for {G}, then look at its second ability. Sacrifice or kill Kitchen Finks
+  (block the Agent with it next turn, or any removal you add). Let the Agent hit you.
+- **Check:** Druid's "Put a -1/-1 counter on this creature: Untap this creature" isn't offered (its
+  cost can't be paid). Kitchen Finks persists back with no -1/-1 counter, so it persists again. The
+  Agent's infect damage gives you no poison and takes no life. Check at ~768px tall.
+
+### Grafted Exoskeleton
+
+*Rules call* — "whenever this Equipment becomes unattached from a permanent" (`becomes-unattached`)
+
+- **Setup:** Your precombat main. Your battlefield: Grafted Exoskeleton, Grizzly Bears, Hill Giant,
+  four Wastes.
+- **Do:** Equip the Exoskeleton to the Bears ({2}), then equip it to the Hill Giant ({2}).
+- **Check:** The Bears are a 4/4 with infect while equipped; when the Exoskeleton moves, its trigger
+  goes on the stack naming the Bears and, as it resolves, the Bears are sacrificed. The Giant is a 5/5
+  with infect. The log reads sensibly. Check at ~768px tall.

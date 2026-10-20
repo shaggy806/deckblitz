@@ -2996,4 +2996,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  // --- Engine-gap fixes (2026-10-20) ---------------------------------------
+  preset(
+    'Solemnity, Devoted Druid and Kitchen Finks',
+    board({
+      you: { bf: ['Solemnity', 'Devoted Druid', 'Kitchen Finks', 'Forest*3'] },
+      opp: { bf: ['Blighted Agent', 'Swamp'] },
+    }),
+  ),
+  preset(
+    'Grafted Exoskeleton',
+    board({ you: { bf: ['Grafted Exoskeleton', 'Grizzly Bears', 'Hill Giant', 'Wastes*4'] } }),
+  ),
 ]
