@@ -5804,7 +5804,7 @@ export class Game {
         this.promptNextSacrifice();
         continue;
       }
-      if (this.state.pendingSacrificeVictims.length > 0) {
+      if (this.state.pendingSacrificeVictims.length > 0 && this.state.heldChoices === undefined) {
         this.drainPendingSacrificeVictims();
         continue;
       }
@@ -5830,6 +5830,12 @@ export class Game {
       // carry on with the rest of it, before any trigger goes on the stack.
       if (this.state.suspendedResolutions.length > 0) {
         this.resumeSuspendedResolution();
+        continue;
+      }
+      // Choices held for an `each-player-may` whose resolution is gone (it
+      // releases them itself once its last player has chosen).
+      if (this.state.heldChoices !== undefined) {
+        this.releaseHeldChoices();
         continue;
       }
       if (!this.placePendingTriggers()) break;
@@ -6230,10 +6236,15 @@ export class Game {
     // (rule 117.3c), whoever's turn it is.
     const priorityTo = this.state.awaiting?.kind === "discard" ? this.state.awaiting.priorityTo : undefined;
 
-    this.withGraveyardEnterBatch(() => {
-      for (const id of cards) this.moveObject(id, "graveyard");
-    });
-    this.emit({ type: "cards-discarded", player, objects: [...cards] });
+    if (fromEffect && priorityTo === undefined && this.state.heldChoices !== undefined) {
+      // Chosen now, discarded once every player has chosen (rule 101.4).
+      this.holdDiscard(player, cards);
+    } else {
+      this.withGraveyardEnterBatch(() => {
+        for (const id of cards) this.moveObject(id, "graveyard");
+      });
+      this.emit({ type: "cards-discarded", player, objects: [...cards] });
+    }
     this.state.awaiting = null;
 
     if (fromEffect) {
@@ -15800,7 +15811,9 @@ export class Game {
       (s.pendingDraws?.length ?? 0) > 0 ||
       (s.pendingEnterAttacking?.length ?? 0) > 0 ||
       s.pendingSacrifices.length > 0 ||
-      s.pendingSacrificeVictims.length > 0 ||
+      // Victims held for the rest of an `each-player-may`'s players (rule
+      // 101.4) wait on nobody's answer.
+      (s.pendingSacrificeVictims.length > 0 && s.heldChoices === undefined) ||
       s.pendingDestruction.length > 0 ||
       s.deferredCommanderMove !== null ||
       s.pendingCommanderMoves.length > 0 ||
@@ -20488,18 +20501,18 @@ export class Game {
       },
       creaturesDamageControllers: (filter, amount) =>
         this.creaturesDamageControllersByEffect(controller, filter, amount),
-      sacrificePermanents: (who, filter, count, exceptId, exploit) => {
+      sacrificePermanents: (who, filter, count, exceptId, exploit, andEach) => {
         // An exploit ability's sacrifice: its source exploits what's
         // sacrificed (rule 702.110b).
         const exploitedBy = exploit === true ? source : undefined;
         // A scope that names players by the triggering event ("that player
         // sacrifices a creature") is resolved here, where the event is known.
         if (typeof who === "object" || who === "you" || who === "each-player" || who === "each-opponent") {
-          this.sacrificeByEffect(controller, who, filter, count, exceptId, exploitedBy);
+          this.sacrificeByEffect(controller, who, filter, count, exceptId, exploitedBy, andEach);
           return;
         }
         for (const player of scoped(who)) {
-          this.sacrificeByEffect(controller, { player }, filter, count, exceptId, exploitedBy);
+          this.sacrificeByEffect(controller, { player }, filter, count, exceptId, exploitedBy, andEach);
         }
       },
       // A source that's a new object since (a delayed trigger's "sacrifice
@@ -21344,6 +21357,10 @@ export class Game {
           refs,
           targetZones,
         ),
+      holdChoices: () => {
+        this.state.heldChoices ??= { discards: [] };
+      },
+      releaseHeldChoices: () => this.releaseHeldChoices(),
       tookEachPlayerMay: (player, since) => this.tookEachPlayerMay(source, player, since),
       sacrificedForEachPlayerMay: (player, since) => {
         let answered = false;
@@ -21694,6 +21711,19 @@ export class Game {
           .filter((e) => !e.departed)
           .map((e) => e.object)
           .filter((id) => this.state.objects[id]?.zone === "exile"),
+      cardsDrawnThisWay: () =>
+        thisWayEntries(this.state, "drawn", since)
+          .filter((e) => e.player === controller)
+          .map((e) => e.object)
+          .filter((id) => this.state.zones.perPlayer[controller]?.hand.includes(id) === true),
+      revealDrawn: () => {
+        const byPlayer = new Map<PlayerId, ObjectId[]>();
+        for (const e of thisWayEntries(this.state, "drawn", since)) {
+          if (this.state.zones.perPlayer[e.player]?.hand.includes(e.object) !== true) continue;
+          byPlayer.set(e.player, [...(byPlayer.get(e.player) ?? []), e.object]);
+        }
+        for (const [player, ids] of byPlayer) this.revealCards(player, ids, "hand");
+      },
       sourceExiledThisWay: () =>
         thisWayEntries(this.state, "exiled", since).some((e) => e.object === source) &&
         this.state.objects[source]?.zone === "exile"
@@ -27828,8 +27858,12 @@ export class Game {
     count: number,
     exceptId?: ObjectId,
     exploitedBy?: ObjectId,
+    andEach?: readonly CardFilter[],
   ): void {
     if (count <= 0) return;
+    // "A creature, an artifact, and a land": one part per filter, each asked
+    // in turn and each a different permanent (`promptNextSacrifice`).
+    const parts = [filter, ...(andEach ?? [])];
     let players: PlayerId[];
     if (typeof who === "object") {
       players = [who.player];
@@ -27854,17 +27888,59 @@ export class Game {
     // being asked can still be told why (see `GameState.decisionSource`).
     const source = this.state.decisionSource;
     for (const player of players) {
-      if (this.eligibleSacrifices(player, filter, exceptId).length > 0) {
+      parts.forEach((part, i) => {
+        if (this.eligibleSacrifices(player, part, exceptId).length === 0) return;
+        const rest = parts.slice(i + 1);
         this.state.pendingSacrifices.push({
           player,
-          filter,
+          filter: part,
           count,
           ...(exceptId !== undefined ? { exceptId } : {}),
           ...(source !== null ? { source } : {}),
           ...(exploitedBy !== undefined ? { exploitedBy } : {}),
+          ...(rest.length > 0 ? { rest } : {}),
         });
-      }
+      });
     }
+  }
+
+  /**
+   * The permanents that may pay one part of a sacrifice of several ("a
+   * creature, an artifact, and a land" — the `sacrifice` effect's `andEach`):
+   * those in `eligible` whose choice leaves the parts after it, `rest`, as
+   * many of them still payable — each by a different permanent — as any
+   * choice would. So an artifact creature isn't offered as the creature
+   * when it's the only artifact and another creature could go instead.
+   */
+  private sacrificePartChoices(
+    player: PlayerId,
+    eligible: readonly ObjectId[],
+    rest: readonly CardFilter[],
+    except: ReadonlySet<ObjectId>,
+  ): ObjectId[] {
+    const restEligible = rest.map((f) => this.eligibleSacrifices(player, f).filter((id) => !except.has(id)));
+    const capacity = new Map<ObjectId, number>();
+    for (const id of [...eligible, ...restEligible.flat()]) capacity.set(id, this.state.objects[id].stackCount ?? 1);
+    // The most of `rest` payable at once with `left`: its largest subset
+    // whose parts can each take a different permanent.
+    const most = (left: ReadonlyMap<ObjectId, number>): number => {
+      let best = 0;
+      for (let mask = 1; mask < 1 << restEligible.length; mask += 1) {
+        const subset = restEligible.filter((_, i) => (mask & (1 << i)) !== 0);
+        if (subset.length > best && sacrificePartsFillable(subset.map((e) => ({ eligible: e, count: 1 })), left)) {
+          best = subset.length;
+        }
+      }
+      return best;
+    };
+    const after = (id: ObjectId): number => {
+      const left = new Map(capacity);
+      left.set(id, (left.get(id) ?? 1) - 1);
+      return most(left);
+    };
+    const scores = eligible.map((id) => after(id));
+    const top = Math.max(...scores);
+    return eligible.filter((_, i) => scores[i] === top);
   }
 
   /**
@@ -27919,7 +27995,18 @@ export class Game {
   private promptNextSacrifice(): void {
     while (this.state.pendingSacrifices.length > 0) {
       const next = this.state.pendingSacrifices[0];
-      const eligible = this.eligibleSacrifices(next.player, next.filter, next.exceptId);
+      // A permanent already chosen for an earlier part of the same sacrifice
+      // ("a creature, an artifact, and a land") can't pay this one too.
+      const chosen = new Set(
+        this.state.pendingSacrificeVictims.filter((v) => v.player === next.player).map((v) => v.object),
+      );
+      const matching = this.eligibleSacrifices(next.player, next.filter, next.exceptId).filter(
+        (id) => !chosen.has(id),
+      );
+      const eligible =
+        next.rest !== undefined && matching.length > 1
+          ? this.sacrificePartChoices(next.player, matching, next.rest, chosen)
+          : matching;
       if (eligible.length === 0) {
         this.state.pendingSacrifices = this.state.pendingSacrifices.slice(1);
         continue;
@@ -27965,7 +28052,7 @@ export class Game {
    * offered the command zone at the next state-based check (rule 903.9a).
    */
   private drainPendingSacrificeVictims(): void {
-    if (this.state.awaiting !== null) return;
+    if (this.state.awaiting !== null || this.state.heldChoices !== undefined) return;
     this.withLeaveBatch(() => {
       this.snapshotLeaving(this.state.pendingSacrificeVictims.map((v) => v.object));
       while (this.state.pendingSacrificeVictims.length > 0) {
@@ -30397,6 +30484,42 @@ export class Game {
     this.discardNow(player, amount, filter, unlessOne);
   }
 
+  /** A discard chosen while an `each-player-may` holds its players' actions
+   * (`GameState.heldChoices`): the cards stay in hand until the release. */
+  private holdDiscard(player: PlayerId, cards: readonly ObjectId[]): void {
+    const held = this.state.heldChoices;
+    if (held === undefined || cards.length === 0) return;
+    this.state.heldChoices = { discards: [...held.discards, { player, objects: [...cards] }] };
+  }
+
+  /**
+   * Rule 101.4: every player of an `each-player-may` has chosen, so what they
+   * chose happens now, at once — the held discards (one graveyard batch, each
+   * player's own event), then the held sacrifice victims (one leave batch, so
+   * each one's leaves trigger sees the others go — 603.10a). A card that has
+   * left its owner's hand since isn't discarded.
+   */
+  private releaseHeldChoices(): void {
+    const held = this.state.heldChoices;
+    if (held === undefined) return;
+    delete this.state.heldChoices;
+    const discards = held.discards
+      .map(({ player, objects }) => ({
+        player,
+        objects: objects.filter((id) => this.state.zones.perPlayer[player]?.hand.includes(id) === true),
+      }))
+      .filter((d) => d.objects.length > 0);
+    if (discards.length > 0) {
+      this.withGraveyardEnterBatch(() => {
+        for (const { objects } of discards) for (const id of objects) this.moveObject(id, "graveyard");
+      });
+      for (const { player, objects } of discards) this.emit({ type: "cards-discarded", player, objects });
+    }
+    if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
+      this.drainPendingSacrificeVictims();
+    }
+  }
+
   /** Whether discarding `amount` cards from `player`'s hand is a real
    * choice: more cards than that to choose among — or, with `unlessOne`, one
    * card of that kind that could go alone in a hand of two or more. */
@@ -30424,6 +30547,10 @@ export class Game {
     const hand = this.discardCandidates(player, filter);
     if (!this.discardHasChoice(player, amount, filter, unlessOne)) {
       const all = [...hand];
+      if (this.state.heldChoices !== undefined) {
+        this.holdDiscard(player, all);
+        return;
+      }
       this.withGraveyardEnterBatch(() => {
         for (const id of all) this.moveObject(id, "graveyard");
       });

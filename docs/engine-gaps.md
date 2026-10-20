@@ -83,9 +83,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   to wait for).
 - **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape.** Each reviewer
   flagged these while blocking a new card for the same reason; none was re-run, so check each:
-  - `each-player-may` asks one player at a time where the ruling has every player choose first,
-    then all act at once: Will of the Jeskai's wheel mode, Kwain, Itinerant Meddler. Perforating
-    Artist (batch 36) and Osseous Sticktwister (batch 68) are blocked on it.
+  - `each-player-may` holds only discards and sacrifices until every player has chosen (rule
+    101.4, `GameState.heldChoices` — batch 109); anything else a player chose is still done before
+    the next is asked: Will of the Jeskai's wheel mode, Kwain, Itinerant Meddler's draw. Snort,
+    Ruin Grinder (a whole-hand discard and draw), Tempt with Discovery (searches) and Innocent
+    Traveler ("if no one does") stay blocked on it.
   - `attach` to a "created" token picks one when a doubler makes two (Black Mage's Rod).
 - **Static-effect dependency ordering** (rule 613.8) is implemented only for layer 4's additive
   type grants (Kudo beside Mishra's Factory, `characteristics.ts`). Every other layer applies

@@ -15,14 +15,12 @@
  * `data/oracle/dungeons.json` and `test/dungeons.test.ts` pins every room's
  * name, text and arrows against it.
  *
- * Only Undercity is here so far — the one the initiative ventures into (rule
- * 726.2; 701.49d: "venture into Undercity"), and the one no plain "venture
- * into the dungeon" may enter (its own line: "You can't enter this dungeon
- * unless you 'venture into Undercity.'"). Lost Mine of Phandelver, Dungeon of
- * the Mad Mage and Tomb of Annihilation wait on two effects (`reveal` of the
- * drawn cards for the Mad Wizard's Lair, three distinct sacrifices for the
- * Oubliette); until all three are here a plain venture can't be offered
- * faithfully, since its player chooses among them (701.49a).
+ * Four: Lost Mine of Phandelver, Dungeon of the Mad Mage and Tomb of
+ * Annihilation, the three a plain "venture into the dungeon" chooses among
+ * (701.49a), and Undercity — the one the initiative ventures into (rule
+ * 726.2; 701.49d: "venture into Undercity"), and the one no plain venture may
+ * enter (its own line: "You can't enter this dungeon unless you 'venture into
+ * Undercity.'").
  */
 import { defineCard } from "./define.js";
 import type { CardDefinition } from "./define.js";
@@ -150,9 +148,219 @@ const UNDERCITY_DUNGEON: DungeonDefinition = {
   ],
 };
 
-/** Every dungeon the engine knows, by name. */
+const LOST_MINE_OF_PHANDELVER: DungeonDefinition = {
+  name: "Lost Mine of Phandelver",
+  rooms: [
+    {
+      name: "Cave Entrance",
+      text: "Scry 1.",
+      next: [1, 2],
+      targets: [],
+      effect: { kind: "scry", amount: 1 },
+    },
+    {
+      name: "Goblin Lair",
+      text: "Create a 1/1 red Goblin creature token.",
+      next: [3, 4],
+      targets: [],
+      effect: { kind: "create-token", token: "Goblin Token", count: 1 },
+    },
+    {
+      name: "Mine Tunnels",
+      text: "Create a Treasure token.",
+      next: [4, 5],
+      targets: [],
+      effect: { kind: "create-token", token: "Treasure Token", count: 1 },
+    },
+    {
+      name: "Storeroom",
+      text: "Put a +1/+1 counter on target creature.",
+      next: [6],
+      targets: ["creature"],
+      effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+    },
+    {
+      name: "Dark Pool",
+      text: "Each opponent loses 1 life and you gain 1 life.",
+      next: [6],
+      targets: [],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "lose-life", amount: 1, who: "each-opponent" },
+          { kind: "gain-life", amount: 1 },
+        ],
+      },
+    },
+    {
+      name: "Fungi Cavern",
+      text: "Target creature gets -4/-0 until your next turn.",
+      next: [6],
+      targets: ["creature"],
+      effect: { kind: "modify-pt", target: 0, power: -4, toughness: 0, duration: "until-your-next-turn" },
+    },
+    {
+      name: "Temple of Dumathoin",
+      text: "Draw a card.",
+      next: [],
+      targets: [],
+      effect: { kind: "draw", amount: 1 },
+    },
+  ],
+};
+
+const DUNGEON_OF_THE_MAD_MAGE: DungeonDefinition = {
+  name: "Dungeon of the Mad Mage",
+  rooms: [
+    {
+      name: "Yawning Portal",
+      text: "You gain 1 life.",
+      next: [1],
+      targets: [],
+      effect: { kind: "gain-life", amount: 1 },
+    },
+    {
+      name: "Dungeon Level",
+      text: "Scry 1.",
+      next: [2, 3],
+      targets: [],
+      effect: { kind: "scry", amount: 1 },
+    },
+    {
+      name: "Goblin Bazaar",
+      text: "Create a Treasure token.",
+      next: [4],
+      targets: [],
+      effect: { kind: "create-token", token: "Treasure Token", count: 1 },
+    },
+    {
+      name: "Twisted Caverns",
+      text: "Target creature can't attack until your next turn.",
+      next: [4],
+      targets: ["creature"],
+      effect: { kind: "restrict", target: 0, restrictions: ["cant-attack"], duration: "until-your-next-turn" },
+    },
+    {
+      name: "Lost Level",
+      text: "Scry 2.",
+      next: [5, 6],
+      targets: [],
+      effect: { kind: "scry", amount: 2 },
+    },
+    {
+      name: "Runestone Caverns",
+      text: "Exile the top two cards of your library. You may play them.",
+      next: [7],
+      targets: [],
+      // No end to the permission: for as long as they remain exiled.
+      effect: { kind: "impulse-exile", amount: 2, duration: "while-exiled" },
+    },
+    {
+      name: "Muiral's Graveyard",
+      text: "Create two 1/1 black Skeleton creature tokens.",
+      next: [7],
+      targets: [],
+      effect: { kind: "create-token", token: "Skeleton Token", count: 2 },
+    },
+    {
+      name: "Deep Mines",
+      text: "Scry 3.",
+      next: [8],
+      targets: [],
+      effect: { kind: "scry", amount: 3 },
+    },
+    {
+      name: "Mad Wizard's Lair",
+      text: "Draw three cards and reveal them. You may cast one of them without paying its mana cost.",
+      next: [],
+      targets: [],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "draw", amount: 3 },
+          { kind: "reveal-drawn" },
+          { kind: "cast-now", from: "drawn-this-way", free: true },
+        ],
+      },
+    },
+  ],
+};
+
+const TOMB_OF_ANNIHILATION: DungeonDefinition = {
+  name: "Tomb of Annihilation",
+  rooms: [
+    {
+      name: "Trapped Entry",
+      text: "Each player loses 1 life.",
+      next: [1, 3],
+      targets: [],
+      effect: { kind: "lose-life", amount: 1, who: "each-player" },
+    },
+    {
+      name: "Veils of Fear",
+      text: "Each player loses 2 life unless they discard a card.",
+      next: [2],
+      targets: [],
+      effect: {
+        kind: "each-player-may",
+        who: "each-player",
+        options: [{ discard: 1, text: "Discard a card" }],
+        ifDidnt: { kind: "lose-life", amount: 2, who: "that-player" },
+      },
+    },
+    {
+      name: "Sandfall Cell",
+      text: "Each player loses 2 life unless they sacrifice a creature, artifact, or land of their choice.",
+      next: [4],
+      targets: [],
+      effect: {
+        kind: "each-player-may",
+        who: "each-player",
+        options: [
+          {
+            sacrifice: { typesAnyOf: ["creature", "artifact", "land"] },
+            text: "Sacrifice a creature, artifact, or land",
+          },
+        ],
+        ifDidnt: { kind: "lose-life", amount: 2, who: "that-player" },
+      },
+    },
+    {
+      name: "Oubliette",
+      text: "Discard a card and sacrifice a creature, an artifact, and a land.",
+      next: [4],
+      targets: [],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "discard", target: "you", amount: 1 },
+          {
+            kind: "sacrifice",
+            who: "you",
+            filter: { type: "creature" },
+            count: 1,
+            andEach: [{ type: "artifact" }, { type: "land" }],
+          },
+        ],
+      },
+    },
+    {
+      name: "Cradle of the Death God",
+      text: "Create The Atropal, a legendary 4/4 black God Horror creature token with deathtouch.",
+      next: [],
+      targets: [],
+      effect: { kind: "create-token", token: "The Atropal", count: 1 },
+    },
+  ],
+};
+
+/** Every dungeon the engine knows, by name: the three a plain "venture into
+ * the dungeon" chooses among (701.49a), and Undercity. */
 export const DUNGEONS: ReadonlyMap<string, DungeonDefinition> = new Map(
-  [UNDERCITY_DUNGEON].map((d) => [d.name, d]),
+  [LOST_MINE_OF_PHANDELVER, DUNGEON_OF_THE_MAD_MAGE, TOMB_OF_ANNIHILATION, UNDERCITY_DUNGEON].map((d) => [
+    d.name,
+    d,
+  ]),
 );
 
 /** A dungeon as a driver draws it — see `DungeonMap`. */

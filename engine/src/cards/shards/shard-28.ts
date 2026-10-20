@@ -285,6 +285,7 @@ import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
 import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
 import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
+import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
 import _poolPaintedBluffs from "../pool/painted-bluffs.js";
@@ -306,6 +307,7 @@ import _poolPlains from "../pool/plains.js";
 import _poolPlanTheHeist from "../pool/plan-the-heist.js";
 import _poolPoisonDartFrog from "../pool/poison-dart-frog.js";
 import _poolPoisonTheBlade from "../pool/poison-the-blade.js";
+import _poolPolygraphOrb from "../pool/polygraph-orb.js";
 import _poolPondProphet from "../pool/pond-prophet.js";
 import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
@@ -790,6 +792,7 @@ const shard: CardShard = {
     _poolOonasBlackguard,
     _poolOozePatrol,
     _poolOrderOfTheEbonHand,
+    _poolOsseousSticktwister,
     _poolOvergrownBattlement,
     _poolPacificationArray,
     _poolPaintedBluffs,
@@ -811,6 +814,7 @@ const shard: CardShard = {
     _poolPlanTheHeist,
     _poolPoisonDartFrog,
     _poolPoisonTheBlade,
+    _poolPolygraphOrb,
     _poolPondProphet,
     _poolPortOfKarfell,
     _poolPowerDepot,

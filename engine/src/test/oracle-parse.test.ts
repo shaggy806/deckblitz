@@ -1063,6 +1063,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(scout.complete).toBe(true);
   });
 
+  it("venturing (rule 701.49): 'venture into the dungeon' and 'into Undercity'", () => {
+    expect(parseSentence("Venture into the dungeon.", ctx())).toEqual({ kind: "venture" });
+    expect(parseSentence("Venture into Undercity.", ctx())).toEqual({ kind: "venture", into: "undercity" });
+    const delver = face(
+      "When Test Card enters, venture into the dungeon. (Enter the first room or advance to the next room.)",
+      "Creature — Human Rogue",
+    );
+    expect(delver.triggered[0].effect).toEqual({ kind: "venture" });
+    expect(delver.complete).toBe(true);
+  });
+
   it("reconfigure (rule 702.151): the keyword line's two abilities", () => {
     const boar = face("Equipped creature gets +3/+2.\nReconfigure {5}", "Artifact Creature — Equipment Boar");
     expect([boar.activated[0].reconfigure, boar.activated[1].reconfigure]).toEqual(["attach", "unattach"]);

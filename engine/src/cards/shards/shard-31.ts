@@ -128,6 +128,7 @@ import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
+import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
 import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
 import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
@@ -506,6 +507,7 @@ import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensPhyrexianWurmToken from "../tokens/phyrexian-wurm-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
+import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
@@ -637,6 +639,7 @@ const shard: CardShard = {
     _poolDragonspeakerShaman,
     _poolDreadReturn,
     _poolDreamSpoilers,
+    _poolDungeonDescent,
     _poolDunlandCrebain,
     _poolEastWindAvatar,
     _poolEchoPerceptiveProdigy,
@@ -1017,6 +1020,7 @@ const shard: CardShard = {
     _tokensPhyrexianGermToken,
     _tokensPhyrexianWurmToken,
     _tokensRedWhiteSoldierHasteToken,
+    _tokensSkeletonToken,
     _tokensSliverToken,
     _tokensVirtuousRoleToken,
     _tokensWarriorTokenValorsReachTagTeam,

@@ -79,6 +79,7 @@ import _poolChimilTheInnerSun from "../pool/chimil-the-inner-sun.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
+import _poolClatteringSkeletons from "../pool/clattering-skeletons.js";
 import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
 import _poolCliffgate from "../pool/cliffgate.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
@@ -363,6 +364,7 @@ import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
+import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
 import _poolSiegecraft from "../pool/siegecraft.js";
@@ -579,6 +581,7 @@ const shard: CardShard = {
     _poolChimneyRabble,
     _poolChordOfCalling,
     _poolClanDefiance,
+    _poolClatteringSkeletons,
     _poolCleopatraExiledPharaoh,
     _poolCliffgate,
     _poolCloudchaserEagle,
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolSeymourFlux,
     _poolShambleshark,
     _poolSheriffOfSafePassage,
+    _poolShortcutSeeker,
     _poolShroudstomper,
     _poolSidarJabariOfZhalfir,
     _poolSiegecraft,

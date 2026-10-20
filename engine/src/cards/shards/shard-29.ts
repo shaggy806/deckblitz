@@ -317,6 +317,7 @@ import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
 import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
 import _poolQuietusSpike from "../pool/quietus-spike.js";
+import _poolRadiantSolar from "../pool/radiant-solar.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
@@ -443,6 +444,7 @@ import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
+import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
 import _poolTurtlePower from "../pool/turtle-power.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
@@ -828,6 +830,7 @@ const shard: CardShard = {
     _poolQuaketuskBoar,
     _poolQuickDrawKatana,
     _poolQuietusSpike,
+    _poolRadiantSolar,
     _poolRaffinesTower,
     _poolRagingPoltergeist,
     _poolRakishHeir,
@@ -954,6 +957,7 @@ const shard: CardShard = {
     _poolTorchBreath,
     _poolTormodTheDesecrator,
     _poolTorturePit,
+    _poolTriumphantAdventurer,
     _poolTuknirDeathlock,
     _poolTurtlePower,
     _poolTwinbladeAssassins,

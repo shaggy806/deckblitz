@@ -459,6 +459,7 @@ import _poolVampiricTutor from "../pool/vampiric-tutor.js";
 import _poolVedalkenOrrery from "../pool/vedalken-orrery.js";
 import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
+import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
 import _poolVincentsLimitBreak from "../pool/vincents-limit-break.js";
 import _poolVindicate from "../pool/vindicate.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolVedalkenOrrery,
     _poolVenomthrope,
     _poolVesselOfEndlessRest,
+    _poolVeteranDungeoneer,
     _poolVilisBrokerOfBlood,
     _poolVincentsLimitBreak,
     _poolVindicate,

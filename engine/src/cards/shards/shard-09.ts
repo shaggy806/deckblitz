@@ -298,6 +298,7 @@ import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolOverwhelmingEncounter from "../pool/overwhelming-encounter.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
+import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
@@ -430,6 +431,7 @@ import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
+import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
@@ -805,6 +807,7 @@ const shard: CardShard = {
     _poolOverwhelmingEncounter,
     _poolParapetWatchers,
     _poolPawnOfUlamog,
+    _poolPerforatingArtist,
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
@@ -937,6 +940,7 @@ const shard: CardShard = {
     _poolTheLunarWhale,
     _poolThermalNavigator,
     _poolThopterMechanic,
+    _poolThoroughInvestigation,
     _poolThoseWhoServe,
     _poolThrivingIsle,
     _poolThundermaneDragon,

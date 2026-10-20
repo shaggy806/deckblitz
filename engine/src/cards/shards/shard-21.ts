@@ -459,6 +459,7 @@ import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
+import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
@@ -934,6 +935,7 @@ const shard: CardShard = {
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
     _poolYavimayaIconoclast,
+    _poolYuanTiFangBlade,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,
   ],

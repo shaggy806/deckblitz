@@ -467,6 +467,7 @@ import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
+import _poolZaltoFireGiantDuke from "../pool/zalto-fire-giant-duke.js";
 import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolWurmwallSweeper,
     _poolYoungPyromancer,
     _poolYumaProudProtector,
+    _poolZaltoFireGiantDuke,
     _poolZimoneQuandrixProdigy,
     _poolZoyowaLavaTongue,
     _poolZuranSpellcaster,

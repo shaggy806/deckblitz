@@ -470,6 +470,7 @@ import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
+import _poolZombieOgre from "../pool/zombie-ogre.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
 import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
@@ -948,6 +949,7 @@ const shard: CardShard = {
     _poolWoollyThoctar,
     _poolZephidsEmbrace,
     _poolZiatorasEnvoy,
+    _poolZombieOgre,
   ],
   tokens: [
     _tokens22RedDwarfToken,

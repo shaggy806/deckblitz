@@ -133,6 +133,7 @@ import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
+import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
 import _poolFearOfSurveillance from "../pool/fear-of-surveillance.js";
@@ -625,6 +626,7 @@ const shard: CardShard = {
     _poolExpelTheInterlopers,
     _poolFaebloomTrick,
     _poolFaerieVandal,
+    _poolFandanielTelophoroiAscian,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
     _poolFearOfSurveillance,

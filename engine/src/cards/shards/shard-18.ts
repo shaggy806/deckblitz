@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
@@ -527,6 +528,7 @@ import _tokensZombieDruidToken from "../tokens/zombie-druid-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAcererakTheArchlich,
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAkalPakalFirstAmongEquals,

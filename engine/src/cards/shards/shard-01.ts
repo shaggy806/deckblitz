@@ -346,6 +346,7 @@ import _poolScreamingPhantom from "../pool/screaming-phantom.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
+import _poolSefrisOfTheHiddenWays from "../pool/sefris-of-the-hidden-ways.js";
 import _poolSeismicRupture from "../pool/seismic-rupture.js";
 import _poolSensoryDeprivation from "../pool/sensory-deprivation.js";
 import _poolSerrasGuardian from "../pool/serras-guardian.js";
@@ -830,6 +831,7 @@ const shard: CardShard = {
     _poolScurryOfGremlins,
     _poolSearchForTomorrow,
     _poolSeashellCameo,
+    _poolSefrisOfTheHiddenWays,
     _poolSeismicRupture,
     _poolSensoryDeprivation,
     _poolSerrasGuardian,

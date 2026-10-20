@@ -1700,6 +1700,24 @@ export type EffectSpec =
        * effect's source "exploits" what's sacrificed (702.110b), which an
        * `exploits` trigger watches (`permanent-sacrificed`'s `exploitedBy`). */
       readonly exploit?: true;
+      /** "Sacrifice a creature, **an artifact, and a land**" (Tomb of
+       * Annihilation's Oubliette): one more permanent for each filter here,
+       * each a different permanent from `filter`'s and the others' — one
+       * artifact creature never counts twice, as for a cost of several parts
+       * (`SacrificeCostPart`). Each is chosen in turn, offering only what
+       * leaves the most of the rest still sacrificeable, and then all of them
+       * are sacrificed at once (rule 603.10a). `count` stays 1 with these. */
+      readonly andEach?: readonly CardFilter[];
+    }
+  | {
+      /**
+       * "Draw three cards **and reveal them**" (Dungeon of the Mad Mage's
+       * Mad Wizard's Lair): every player is shown the cards this resolution
+       * has had each player draw, those still in their hand (rule 701.16).
+       * A step of its own after the `draw`, so a draw waiting behind a
+       * dredge question is drawn before anything is revealed.
+       */
+      readonly kind: "reveal-drawn";
     }
   | {
       /**
@@ -2385,6 +2403,10 @@ export type EffectSpec =
         | "graveyard"
         | "exiled-with-source"
         | "exiled-this-way"
+        /** The cards this resolution has had the effect's controller draw,
+         * still in their hand — the Mad Wizard's Lair's "draw three cards
+         * and reveal them. You may cast one of them". */
+        | "drawn-this-way"
         /** The ability's own source, if this resolution exiled it from the
          * battlefield and it's still in exile — a Siege's "exile it, then
          * you may cast it transformed" (rule 310.12b). */
@@ -5686,6 +5708,7 @@ export interface EffectApi {
     count: number,
     exceptId?: ObjectId,
     exploit?: boolean,
+    andEach?: readonly CardFilter[],
   ): void;
   /** Sacrifice this effect's own source. Returns whether it actually happened
    * (false if the source has already left the battlefield) — the "if you do"
@@ -5819,6 +5842,12 @@ export interface EffectApi {
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
   cardsExiledThisWay(): readonly ObjectId[];
+  /** The cards this resolution has had the effect's controller draw, still
+   * in their hand — a `cast-now`'s `"drawn-this-way"`. */
+  cardsDrawnThisWay(): readonly ObjectId[];
+  /** Show every player the cards this resolution has had each player draw,
+   * those still in their hand — the `reveal-drawn` effect. */
+  revealDrawn(): void;
   /** The source, if this resolution exiled it (from the battlefield too) and
    * it's still in exile — a `cast-now`'s `"source-exiled-this-way"`. */
   sourceExiledThisWay(): readonly ObjectId[];
@@ -6170,6 +6199,12 @@ export interface EffectApi {
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
   askEachPlayerMay(player: PlayerId, spec: Extract<EffectSpec, { kind: "each-player-may" }>): void;
+  /** Rule 101.4: hold the discards and sacrifices the players of an
+   * `"each-player-may"` choose until every one of them has chosen
+   * (`GameState.heldChoices`) — a no-op when already held. */
+  holdChoices(): void;
+  /** Every player has chosen: do what they chose, at once. */
+  releaseHeldChoices(): void;
   /** Whether `player` took what an `"each-player-may"` that began at event
    * `since` offered them — their first answer for this source since. */
   tookEachPlayerMay(player: PlayerId, since: number): boolean;
@@ -7010,8 +7045,11 @@ function applyEachPlayerMay(
   let toAsk = spec.progress?.toAsk ?? eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true);
   const park = (progress: EachPlayerMayProgress, below: number): void =>
     ctx.resumeAfterDecisions({ ...spec, progress }, below);
-  // One question at a time, each answered before the next is asked (rule
-  // 101.4). What a player chose is done before the next player is asked.
+  // One question at a time, each answered before the next is asked, and
+  // then what they chose happens at once (rule 101.4): a discard or a
+  // sacrifice a player chooses waits, the discarded cards hidden in hand
+  // (101.4a), until the last player has chosen.
+  if (toAsk.length > 0) ctx.holdChoices();
   while (toAsk.length > 0) {
     const player = toAsk[0];
     asked = [...asked, player];
@@ -7024,6 +7062,7 @@ function applyEachPlayerMay(
       return;
     }
   }
+  if (spec.progress?.results === undefined) ctx.releaseHeldChoices();
   if (spec.ifDid === undefined && spec.ifDidnt === undefined) return;
   let results =
     spec.progress?.results ??
@@ -7262,6 +7301,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.cardsExiledWithSource();
     } else if (from === "exiled-this-way") {
       cards = ctx.cardsExiledThisWay();
+    } else if (from === "drawn-this-way") {
+      cards = ctx.cardsDrawnThisWay();
     } else if (from === "source-exiled-this-way") {
       cards = ctx.sourceExiledThisWay();
     } else if (from === "targets") {
@@ -8530,13 +8571,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.who === "target") {
         const target = ctx.targets[0];
         if (target?.kind === "player") {
-          ctx.sacrificePermanents({ player: target.player }, spec.filter, spec.count, exceptId, spec.exploit === true);
+          ctx.sacrificePermanents(
+            { player: target.player },
+            spec.filter,
+            spec.count,
+            exceptId,
+            spec.exploit === true,
+            spec.andEach,
+          );
         }
       } else {
-        ctx.sacrificePermanents(spec.who, spec.filter, spec.count, exceptId, spec.exploit === true);
+        ctx.sacrificePermanents(spec.who, spec.filter, spec.count, exceptId, spec.exploit === true, spec.andEach);
       }
       return;
     }
+    case "reveal-drawn":
+      ctx.revealDrawn();
+      return;
     case "foraged":
       ctx.foraged();
       return;

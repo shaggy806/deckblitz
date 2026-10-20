@@ -933,7 +933,8 @@ target, so hexproof doesn't stop them.
 | `counter` | `target` (a spell slot, or `"trigger-object"` — a cast trigger's "counter that spell", Vexing Bauble), `into?: "hand" \| "exile"` | Counterspell. A spell that can't be countered stays on the stack and resolves (`counter-failed`); a countered copy of a spell ceases to exist (rule 707.10c). `into: "hand"` is Remand's "if that spell is countered this way, put it into its owner's hand instead" — still a counter, so it does nothing to a spell that can't be countered, unlike `return-to-hand` with `from: "stack"`. `into: "exile"` is "exile it instead of putting it into its owner's graveyard" (Transcendent Dragon, whose `cast-now` of the same slot then finds it in exile — one that wasn't countered is still on the stack, where nothing is cast from). |
 | `sacrifice-all-but` | `who`, `keep`, `filter` | "chooses up to N they control, then sacrifices the rest" (Archfiend of Depravity) — the inverse of `sacrifice`, which names how many to give up. Raised only when they're over the limit. |
 | `keep-total-power` | `who`, `filter`, `maxTotalPower`, `prompt` | "Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control" (Slaughter the Strong): each player in turn order from the active player, knowing the choices before theirs, picks which of their own to keep (a `choose-permanents` with `maxTotalPower`, a negative power subtracting — the ruling); then everything not kept goes at once (rule 603.10a). A token stack can be kept in part. |
-| `sacrifice` | `who`, `filter`, `count`, `exceptSource?` | Diabolic Edict (`who: "target"`), Fleshbag Marauder (`who: "each-player"`), Korvold (`who: "you"`, `exceptSource: true` = "another") |
+| `sacrifice` | `who`, `filter`, `count`, `exceptSource?`, `andEach?` | Diabolic Edict (`who: "target"`), Fleshbag Marauder (`who: "each-player"`), Korvold (`who: "you"`, `exceptSource: true` = "another"). `andEach: [filter, …]` is "sacrifice a creature, **an artifact, and a land**" (Tomb of Annihilation's Oubliette — `filter: { type: "creature" }, count: 1, andEach: [{ type: "artifact" }, { type: "land" }]`): one permanent per filter, each a different one (an artifact creature pays only one part), each part asked in turn offering only what leaves the most of the rest payable, then all sacrificed at once (603.10a). |
+| `reveal-drawn` | — | "Draw three cards **and reveal them**" (the Mad Wizard's Lair): a step after the `draw` that shows every player the cards this resolution drew, still in hand (701.16). Then `cast-now { from: "drawn-this-way" }` is "you may cast one of them". |
 | `sacrifice-source` | `then?` | Defense of the Heart — "Sacrifice ~. **If you do,** …"; no choice, and `then` only applies if the source was still there to sacrifice: the same object the ability refers to (rule 400.7), still controlled by the ability's controller (rule 701.21a — Colfenor's Urn's ruling: taken by another player, it isn't sacrificed and nothing returns) |
 | `sacrifice-target` | `target` | "Sacrifice **it**" — one named permanent (a target slot, `"source"`, `"trigger-object"`), no choice: Sneak Attack's delayed "sacrifice the creature at the beginning of the next end step", Come Back Wrong. Sacrificed by the effect's controller, so only while they control it (rule 701.21a): one someone else took meanwhile stays. "Its controller may sacrifice it" is an `each-player-may` with `who: { controllerOfTarget }` around it (Star Athlete), which makes it theirs |
 | `fight` | `a`, `b`, `oneSided?` | Prey Upon / Rabid Bite. With `oneSided`, `b` may be a planeswalker (Stump Stomp's "deals damage equal to its power to target creature or planeswalker you don't control"). A real fight (not `oneSided`) emits `creature-fought` for each creature in it (rule 701.14), which a `fights` trigger ("whenever a creature you control fights" — Foe-Razer Regent) reads; its trigger object is the creature that fought. |
@@ -1346,11 +1347,10 @@ abilities, `cards/initiative.ts`, then venture into Undercity at once and at eac
 upkeeps, and pass it to whoever deals it combat damage), `venture { into?: "undercity" }` ("venture
 into the dungeon" / "into Undercity"; a fork asks the `venture` decision, the bottommost room
 completes the dungeon). Triggers: `takes-initiative`, `ventures` (Nadaar's "whenever you venture
-into the dungeon"), `completes-dungeon` (Sefris), each with `who`. **Only Undercity is authored**
-(`cards/dungeons.ts`): a plain `venture` offers the three Forgotten Realms dungeons, which wait on
-two effects (the Mad Wizard's Lair's reveal of drawn cards, the Oubliette's three distinct
-sacrifices) — so a card that ventures into the dungeon (not Undercity) stays blocked on
-`mechanic:dungeon` until they're in. Conditions (anywhere a `StaticCondition` goes: a trigger's
+into the dungeon"), `completes-dungeon` (Sefris), each with `who`. All four dungeons are authored
+(`cards/dungeons.ts`, each room pinned against the printed card by `dungeons.test.ts`): a plain
+`venture` offers Lost Mine of Phandelver, Dungeon of the Mad Mage and Tomb of Annihilation
+(701.49a), `into: "undercity"` enters Undercity. Conditions (anywhere a `StaticCondition` goes: a trigger's
 intervening if, a `conditional`, an amount's `ifCondition`, an activation's "Activate only if"):
 `{ kind: "initiative", who: "you" | "opponent" }` ("if you have the initiative" — Feywild
 Caretaker, Sarevok's Tome's mana) and `{ kind: "completed-dungeon" }` ("if you've completed a
@@ -1723,8 +1723,14 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   "trigger-controller"` — Selvala, Heart of the Wilds), "the player whose
   turn it is may …" (`"active-player"` — Obeka). Everyone in `who` is asked
   **in turn**, from the active player (rule 101.4), with a `choose-modes`
-  decision of their own, and what one of them chose is done before the next
-  is asked. They may do `effect` (asked with `prompt` — Kwain, Itinerant
+  decision of their own — and then what they chose happens **at once**
+  (101.4): a discard or a sacrifice a player chooses is held
+  (`GameState.heldChoices`), the discarded card hidden in their hand while
+  the rest choose (101.4a), until the last player has chosen; then every
+  held discard and sacrifice happens together, before `ifDid` / `ifDidnt`
+  (Perforating Artist, Tomb of Annihilation's Sandfall Cell, Acererak's
+  attack). Anything else a player chose (a draw, a whole-hand discard, a
+  search) is still done before the next is asked. They may do `effect` (asked with `prompt` — Kwain, Itinerant
   Meddler's "each player may draw a card"), or one of `options`
   (`UnlessOption`s, as for `unless`, each offered only to a player who can
   take it — Kynaios and Tiro's `{ putFromHand: { type: "land" } }`; a

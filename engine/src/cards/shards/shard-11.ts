@@ -122,6 +122,7 @@ import _poolDiningRoom from "../pool/dining-room.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
 import _poolDiscipleOfLaw from "../pool/disciple-of-law.js";
 import _poolDispatch from "../pool/dispatch.js";
+import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
@@ -532,6 +533,7 @@ import _tokensNecronWarriorToken from "../tokens/necron-warrior-token.js";
 import _tokensOgreToken from "../tokens/ogre-token.js";
 import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
+import _tokensTheAtropal from "../tokens/the-atropal.js";
 import _tokensTiny from "../tokens/tiny.js";
 import _tokensTyranidGargoyleToken from "../tokens/tyranid-gargoyle-token.js";
 import _tokensWarriorTokenVigilance from "../tokens/warrior-token-vigilance.js";
@@ -658,6 +660,7 @@ const shard: CardShard = {
     _poolDiscipleOfGrace,
     _poolDiscipleOfLaw,
     _poolDispatch,
+    _poolDisplacerBeast,
     _poolDivineTransformation,
     _poolDivineVerdict,
     _poolDranaLiberatorOfMalakir,
@@ -1070,6 +1073,7 @@ const shard: CardShard = {
     _tokensOgreToken,
     _tokensSnailToken,
     _tokensSpiderToken22Reach,
+    _tokensTheAtropal,
     _tokensTiny,
     _tokensTyranidGargoyleToken,
     _tokensWarriorTokenVigilance,

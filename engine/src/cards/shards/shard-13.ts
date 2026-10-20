@@ -312,6 +312,7 @@ import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
 import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
+import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
@@ -817,6 +818,7 @@ const shard: CardShard = {
     _poolPillage,
     _poolPiousInterdiction,
     _poolPiranhaFly,
+    _poolPlanarAlly,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolProtectionMagic,

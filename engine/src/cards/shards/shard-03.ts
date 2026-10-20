@@ -37,6 +37,7 @@ import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
+import _poolBlinkDog from "../pool/blink-dog.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
@@ -312,6 +313,7 @@ import _poolSeaGate from "../pool/sea-gate.js";
 import _poolSeacoastDrake from "../pool/seacoast-drake.js";
 import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
+import _poolSecretDoor from "../pool/secret-door.js";
 import _poolSeekThrills from "../pool/seek-thrills.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
@@ -494,6 +496,7 @@ const shard: CardShard = {
     _poolBenalishCavalry,
     _poolBenevolentHydra,
     _poolBlightedCataract,
+    _poolBlinkDog,
     _poolBoggartPrankster,
     _poolBoroughBackup,
     _poolBovineIntervention,
@@ -769,6 +772,7 @@ const shard: CardShard = {
     _poolSeacoastDrake,
     _poolSeasideCitadel,
     _poolSeatOfTheSynod,
+    _poolSecretDoor,
     _poolSeekThrills,
     _poolSeleniaDarkAngel,
     _poolSendInThePest,

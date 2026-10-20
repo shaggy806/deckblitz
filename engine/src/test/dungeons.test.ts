@@ -11,10 +11,31 @@ import { describe, expect, it } from "vitest";
 
 import { DUNGEONS, UNDERCITY, dungeonMap } from "../cards/dungeons.js";
 import { HeuristicBotController } from "../controller.js";
+import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
-import type { PlayerId } from "../primitives.js";
+import type { ObjectId, PlayerId } from "../primitives.js";
 
-import { A, B, C, counters, hand, keywords, life, nextTurn, settle, spawn, table, toLibrary } from "./harness.js";
+import {
+  A,
+  B,
+  C,
+  counters,
+  hand,
+  keywords,
+  lands,
+  life,
+  named,
+  nextTurn,
+  pt,
+  settle,
+  spawn,
+  supertypes,
+  table,
+  toHand,
+  toLibrary,
+  tokensNamed,
+  zone,
+} from "./harness.js";
 
 const stackNames = (game: Game): string[] =>
   game.state.zones.shared.stack.map((id) => game.state.objects[id]?.cardName ?? "?");
@@ -23,14 +44,16 @@ const roomOf = (game: Game, player: PlayerId): string | undefined => {
   return d === undefined ? undefined : DUNGEONS.get(d.name)?.rooms[d.room]?.name;
 };
 
-describe("Undercity's rooms are the printed card's", () => {
-  it("every room's name, text and arrows match the Oracle text", () => {
-    const data = JSON.parse(
-      readFileSync(new URL("../../data/oracle/dungeons.json", import.meta.url), "utf8"),
-    ) as { cards: { name: string; faces: { name: string; oracle_text: string }[] }[] };
-    const face = data.cards.flatMap((c) => c.faces).find((f) => f.name === UNDERCITY)!;
+const FORGOTTEN_REALMS = ["Lost Mine of Phandelver", "Dungeon of the Mad Mage", "Tomb of Annihilation"];
+
+describe("every dungeon's rooms are the printed card's", () => {
+  const data = JSON.parse(
+    readFileSync(new URL("../../data/oracle/dungeons.json", import.meta.url), "utf8"),
+  ) as { cards: { name: string; faces: { name: string; oracle_text: string }[] }[] };
+  it.each([...FORGOTTEN_REALMS, UNDERCITY])("%s: every room's name, text and arrows match the Oracle text", (name) => {
+    const face = data.cards.flatMap((c) => c.faces).find((f) => f.name === name)!;
     const lines = face.oracle_text.split("\n").filter((l) => l.includes(" — "));
-    const dungeon = DUNGEONS.get(UNDERCITY)!;
+    const dungeon = DUNGEONS.get(name)!;
     expect(dungeon.rooms.map((r) => r.name)).toEqual(lines.map((l) => l.split(" — ")[0]));
     for (const [i, room] of dungeon.rooms.entries()) {
       const leads = room.next.map((n) => dungeon.rooms[n]!.name).join(", ");
@@ -165,5 +188,146 @@ describe("a bot's venture (rule 701.49)", () => {
   it("takes Lost Well when Forge would have no target", () => {
     const { game } = table();
     expect(choose(game, fork)).toEqual({ room: 2 });
+  });
+});
+
+/** Venture (into the dungeon, not Undercity) once, choosing `dungeon` if one
+ * is asked and the first room of `path` that a fork offers. */
+function ventureTo(game: Game, seat: ScriptedController, dungeon: string, path: readonly number[], times = 1): void {
+  seat.chooseVentureFn = (_view, offer) =>
+    offer.dungeons !== undefined
+      ? { dungeon }
+      : { room: path.find((r) => offer.rooms?.includes(r)) ?? offer.rooms![0]! };
+  for (let i = 0; i < times; i += 1) {
+    game.debugApplyEffect(A, { kind: "venture" });
+    settle(game);
+  }
+}
+
+describe("the Forgotten Realms dungeons (rule 701.49a)", () => {
+  it("a plain venture offers the three Forgotten Realms dungeons, never Undercity", () => {
+    const { game, a } = table();
+    const offered: (readonly string[])[] = [];
+    a.chooseVentureFn = (_view, offer) => {
+      offered.push(offer.dungeons ?? []);
+      return { dungeon: "Lost Mine of Phandelver" };
+    };
+    game.debugApplyEffect(A, { kind: "venture" });
+    settle(game);
+    expect(offered).toEqual([FORGOTTEN_REALMS]);
+    expect(roomOf(game, A)).toBe("Cave Entrance");
+  });
+
+  it("Lost Mine of Phandelver: Goblin Lair, Dark Pool and Temple of Dumathoin, then it's completed", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 6; i += 1) toLibrary(game, "Island");
+    const before = hand(game, A).length;
+    ventureTo(game, a, "Lost Mine of Phandelver", [1, 4], 4);
+    expect(tokensNamed(game, "Goblin Token", A)).toBe(1);
+    expect(life(game, B)).toBe(19);
+    expect(life(game, A)).toBe(21);
+    expect(hand(game, A)).toHaveLength(before + 1);
+    expect(game.state.players[A].completedDungeons).toEqual(["Lost Mine of Phandelver"]);
+  });
+
+  it("Mad Wizard's Lair: draws three, reveals them, and one may be cast without paying its mana cost", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 6; i += 1) toLibrary(game, "Island");
+    // Goblin Bazaar and Muiral's Graveyard on the way: no targets.
+    ventureTo(game, a, "Dungeon of the Mad Mage", [2, 6], 6);
+    expect(roomOf(game, A)).toBe("Deep Mines");
+    expect(tokensNamed(game, "Skeleton Token", A)).toBe(2);
+    const giant = toLibrary(game, "Hill Giant");
+    const bears = toLibrary(game, "Grizzly Bears");
+    const island = toLibrary(game, "Island");
+    const offered: (readonly ObjectId[])[] = [];
+    a.chooseCastNowFn = (_view, offer) => {
+      offered.push(offer.cards);
+      const way = offer.casts.find((c) => c.card === giant)!;
+      return { type: "cast-spell", player: A, card: giant, targets: [], via: way.via, ...(offer.free ? { free: true } : {}) };
+    };
+    a.chooseScryFn = () => [];
+    ventureTo(game, a, "Dungeon of the Mad Mage", []);
+    // All three revealed to everyone (rule 701.16); the land can't be cast,
+    // so it isn't offered.
+    expect(game.state.revealedThisTurn).toEqual(expect.arrayContaining([giant, bears, island]));
+    expect(offered).toHaveLength(1);
+    expect([...offered[0]!].sort()).toEqual([giant, bears].sort());
+    expect(zone(game, giant)).toBe("battlefield");
+    expect(hand(game, A)).toEqual(expect.arrayContaining([bears, island]));
+    expect(game.state.players[A].completedDungeons).toEqual(["Dungeon of the Mad Mage"]);
+  });
+
+  it("Runestone Caverns: the two exiled cards stay playable on a later turn", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 4; i += 1) toLibrary(game, "Island");
+    ventureTo(game, a, "Dungeon of the Mad Mage", [2, 5], 4);
+    const bears = toLibrary(game, "Grizzly Bears");
+    const forest = toLibrary(game, "Forest");
+    ventureTo(game, a, "Dungeon of the Mad Mage", [5]);
+    expect(roomOf(game, A)).toBe("Runestone Caverns");
+    expect(zone(game, bears)).toBe("exile");
+    expect(zone(game, forest)).toBe("exile");
+    nextTurn(game);
+    nextTurn(game);
+    expect(game.state.turn.number).toBe(3);
+    expect(game.legalActions(A).some((x) => x.kind === "play-land" && x.card === forest)).toBe(true);
+  });
+
+  it("Tomb of Annihilation: Trapped Entry, Oubliette, then The Atropal", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    const thopter = spawn(game, "Ornithopter");
+    const [island] = lands(game, "Island", 2);
+    const card = toHand(game, "Hill Giant");
+    a.chooseDiscardsFn = () => [card];
+    const asked: (readonly ObjectId[])[] = [];
+    const stillThere: string[] = [];
+    a.chooseSacrificesFn = (_view, eligible) => {
+      asked.push(eligible);
+      stillThere.push(zone(game, bears), zone(game, thopter));
+      return [eligible.includes(island!) ? island! : eligible[0]!];
+    };
+    ventureTo(game, a, "Tomb of Annihilation", [3], 2);
+    expect(life(game, A)).toBe(19);
+    expect(life(game, B)).toBe(19);
+    expect(roomOf(game, A)).toBe("Oubliette");
+    // The Ornithopter is the only artifact, so it isn't offered as the
+    // creature: the Bears go as the creature, it as the artifact, and only
+    // the land is a choice.
+    expect(asked).toHaveLength(1);
+    expect(asked[0]).toHaveLength(2);
+    expect(zone(game, card)).toBe("graveyard");
+    for (const id of [bears, thopter, island!]) expect(zone(game, id)).toBe("graveyard");
+    // Sacrificed at once (rule 603.10a): the creature and the artifact were
+    // still on the battlefield while the land was chosen.
+    expect(stillThere).toEqual(["battlefield", "battlefield"]);
+    expect(game.state.eventLog.filter((e) => e.type === "permanent-sacrificed")).toHaveLength(3);
+    ventureTo(game, a, "Tomb of Annihilation", []);
+    const [atropal] = named(game, "The Atropal", A);
+    expect(supertypes(game, atropal!)).toContain("legendary");
+    expect(pt(game, atropal!)).toEqual({ power: 4, toughness: 4 });
+    expect(keywords(game, atropal!).has("deathtouch")).toBe(true);
+  });
+
+  it("Oubliette: one artifact creature never counts as both the creature and the artifact", () => {
+    const { game, a } = table();
+    const thopter = spawn(game, "Ornithopter");
+    const island = lands(game, "Island", 1)[0]!;
+    ventureTo(game, a, "Tomb of Annihilation", [3], 2);
+    expect(zone(game, thopter)).toBe("graveyard");
+    expect(zone(game, island)).toBe("graveyard");
+    expect(game.state.eventLog.filter((e) => e.type === "permanent-sacrificed")).toHaveLength(2);
+  });
+
+  it("Veils of Fear: each player who doesn't discard a card loses 2 life", () => {
+    const { game, a } = table();
+    toHand(game, "Hill Giant", A);
+    // Alice discards; Bob declines (the scripted default).
+    a.chooseModesFn = () => [0];
+    ventureTo(game, a, "Tomb of Annihilation", [1], 2);
+    expect(roomOf(game, A)).toBe("Veils of Fear");
+    expect(life(game, A)).toBe(19);
+    expect(life(game, B)).toBe(17);
   });
 });

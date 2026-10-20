@@ -1,6 +1,6 @@
 # The initiative and dungeons
 
-**Status:** built (2026-10-19), but for the animation (section 6) and the three Forgotten Realms dungeons. Asked for by the user ("start looking into the
+**Status:** built (2026-10-19; the three Forgotten Realms dungeons 2026-10-20, batch 109), but for the animation (section 6). Asked for by the user ("start looking into the
 client design for the initiative style cards") while the set walk reached Commander Legends:
 Battle for Baldur's Gate. The user's answers to the open questions are at the end; building
 starts with step 1.

@@ -524,6 +524,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "impulse-exile": (n, v) => v.touch(n.whose, "harm", MINOR),
   scry: (n, v) => v.child(n.then),
   "reveal-top": none,
+  "reveal-drawn": none,
   surveil: (n, v) => v.child(n.then),
   // "Its controller may search their library for a basic land" (Path to
   // Exile) — a consolation, like the life of Swords to Plowshares.

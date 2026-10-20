@@ -122,6 +122,7 @@ import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
+import _poolDungeonMap from "../pool/dungeon-map.js";
 import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEarthRumbleWrestlers from "../pool/earth-rumble-wrestlers.js";
@@ -627,6 +628,7 @@ const shard: CardShard = {
     _poolDragonflySwarm,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
+    _poolDungeonMap,
     _poolDuskwatchHunter,
     _poolEarthOriginYak,
     _poolEarthRumbleWrestlers,

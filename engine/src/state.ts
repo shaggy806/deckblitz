@@ -3763,6 +3763,11 @@ export interface GameState {
      * exploit "exploits" what's sacrificed — `permanent-sacrificed`'s
      * `exploitedBy`, which an `exploits` trigger watches. */
     readonly exploitedBy?: ObjectId;
+    /** The parts of the same sacrifice still to come after this one — a
+     * `sacrifice` effect's `andEach` ("a creature, an artifact, and a
+     * land"): this part is offered only what leaves the most of them still
+     * sacrificeable, each by a different permanent. */
+    readonly rest?: readonly CardFilter[];
   }[];
   /**
    * Specific permanents (chosen, or auto-selected when there was no choice)
@@ -3772,6 +3777,15 @@ export interface GameState {
    * simultaneously; rule 603.10a) — `drainPendingSacrificeVictims`.
    */
   pendingSacrificeVictims: { readonly player: PlayerId; readonly object: ObjectId; readonly exploitedBy?: ObjectId }[];
+  /**
+   * Rule 101.4: set while an `each-player-may` asks its players in turn —
+   * every player makes their choices, *then* the actions happen at once.
+   * What a player chose to discard waits here, still in their hand and so
+   * still hidden from the players after them (101.4a); sacrifice victims
+   * wait in `pendingSacrificeVictims`, not drained. `Game.releaseHeldChoices`
+   * then discards and sacrifices all of it at once. Absent otherwise.
+   */
+  heldChoices?: { readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[] };
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b
    * — Sai, Master Thopterist's "Sacrifice two artifacts", Jarad, Golgari Lich
