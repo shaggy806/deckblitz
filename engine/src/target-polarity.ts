@@ -418,9 +418,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "harm", MINOR);
     v.touch(n.controlledByTarget, "harm", MINOR);
   },
-  // Turn to Frog is removal; animating a land is a man-land. Only the first
-  // says which.
-  animate: (n, v) => v.touch(n.target, n.loseAbilities === true ? "harm" : "either", MAJOR),
+  // Turn to Frog is removal; a man-land, Suit Up or Water Wings a boost. What
+  // says which: losing abilities or a tiny base (Multiply by Zero's 0/0) is
+  // harm; keywords, a big base or becoming a creature is help. A middling
+  // base on a creature (Fractalize's X+1) is still the board's call.
+  animate: (n, v) => v.touch(n.target, animatePolarity(n), MAJOR),
   "add-types": (n, v) => v.touch(n.target, "either", MINOR),
   "animate-all": none,
   // "Its controller creates a 3/3 Beast" rides on the removal it follows.
@@ -630,6 +632,29 @@ function slotTouches(
  * granted ability helps. A Curse enchants the player it punishes, and an Aura
  * that steals what it enchants (Mind Control) is theft.
  */
+/** Which way an `animate` points at its target — see the table's entry. */
+function animatePolarity(n: Extract<EffectSpec, { kind: "animate" }>): Polarity {
+  if (n.loseAbilities === true) return "harm";
+  const fixed = (a: unknown): number | null => (typeof a === "number" ? a : null);
+  const power = fixed(n.power);
+  const toughness = fixed(n.toughness);
+  const keywords = (n.keywords ?? []).filter((k) => k !== "defender");
+  if (power !== null && toughness !== null && power + toughness <= 2 && keywords.length === 0) return "harm";
+  if (keywords.length > 0) return "help";
+  if (power !== null && power >= 4) return "help";
+  if ((n.addTypes ?? []).includes("creature")) return "help";
+  return "either";
+}
+
+/** A granted triggered ability that costs the creature's controller — Clawing
+ * Torment's "at the beginning of your upkeep, you lose 1 life". */
+function grantedTriggerHarms(ability: { readonly effect: EffectSpec | null }): boolean {
+  const e = ability.effect;
+  if (e === null) return false;
+  if (e.kind === "lose-life") return !("target" in e) || e.target === undefined;
+  return e.kind === "damage" && (e as { who?: unknown }).who === "you";
+}
+
 export function auraPolarity(def: CardDefinition): Polarity {
   if (def.controlEnchanted) return "harm";
   if ((def.subtypes ?? []).includes("Curse")) return "harm";
@@ -654,7 +679,10 @@ export function auraPolarity(def: CardDefinition): Polarity {
       else help = true;
     }
     if ((ability.grantsActivated ?? []).length > 0) help = true;
-    if ((ability.grantsTriggered ?? []).length > 0) help = true;
+    for (const granted of ability.grantsTriggered ?? []) {
+      if (grantedTriggerHarms(granted)) harm = true;
+      else help = true;
+    }
     if (ability.grantPtPerCount !== undefined) help = true;
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
     if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
