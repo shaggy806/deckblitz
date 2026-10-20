@@ -23,6 +23,7 @@ import _poolArchenemysCharm from "../pool/archenemys-charm.js";
 import _poolArmTheCathars from "../pool/arm-the-cathars.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
+import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
@@ -529,6 +530,7 @@ const shard: CardShard = {
     _poolArmTheCathars,
     _poolArmyAnts,
     _poolAsceticism,
+    _poolAssassinGauntlet,
     _poolAuroraShifter,
     _poolAvengersQuinjet,
     _poolAysenAbbey,

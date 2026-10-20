@@ -738,6 +738,7 @@ import _poolAspirantsAscent from "./pool/aspirants-ascent.js";
 import _poolAspiringAeronaut from "./pool/aspiring-aeronaut.js";
 import _poolAspiringChampion from "./pool/aspiring-champion.js";
 import _poolAssassinDen from "./pool/assassin-den.js";
+import _poolAssassinGauntlet from "./pool/assassin-gauntlet.js";
 import _poolAssassinInitiate from "./pool/assassin-initiate.js";
 import _poolAssassinate from "./pool/assassinate.js";
 import _poolAssassinsTrophy from "./pool/assassins-trophy.js";
@@ -16765,6 +16766,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAspiringAeronaut,
   _poolAspiringChampion,
   _poolAssassinDen,
+  _poolAssassinGauntlet,
   _poolAssassinInitiate,
   _poolAssassinate,
   _poolAssassinsTrophy,

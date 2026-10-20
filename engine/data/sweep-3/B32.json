@@ -673,6 +673,13 @@
         "engine/src/cards/pool/sage-of-the-maze.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Assassin Gauntlet",
+      "files": [
+        "engine/src/cards/pool/assassin-gauntlet.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -790,13 +797,6 @@
         "cost:ability-cost-modification"
       ],
       "why": "An activated ability's costReduction has no condition ('costs {1} less during your turn')."
-    },
-    {
-      "name": "Assassin Gauntlet",
-      "needs": [
-        "new:tap-all-controlled-by-target"
-      ],
-      "why": "tap-all has no controlledByTarget for 'tap all creatures target opponent controls'."
     },
     {
       "name": "All-Fates Scroll",

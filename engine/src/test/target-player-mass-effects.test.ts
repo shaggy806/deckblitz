@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, hand, lands, life, loyalty, ref, spawn, table, toHand, toStep, zone } from "./harness.js";
+import { A, B, cast, enter, hand, lands, life, loyalty, ref, spawn, table, toHand, toStep, zone } from "./harness.js";
 
 describe("mass effects over a target player's permanents", () => {
   it("River's Rebuke returns only that player's nonland permanents", () => {
@@ -94,5 +94,18 @@ describe("Settle the Wreckage", () => {
     );
     expect(forests).toHaveLength(2);
     expect(forests.every((id) => game.state.objects[id].tapped)).toBe(true);
+  });
+});
+
+describe("Assassin Gauntlet", () => {
+  it("attaches to your creature and taps the target opponent's creatures", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Hill Giant", B);
+    a.chooseTargetsFn = () => [ref(bears), ref(B)];
+    const gauntlet = enter(game, "Assassin Gauntlet");
+    expect(game.state.objects[gauntlet].attachedTo).toBe(bears);
+    expect(game.state.objects[theirs].tapped).toBe(true);
+    expect(game.state.objects[bears].tapped).toBe(false);
   });
 });
