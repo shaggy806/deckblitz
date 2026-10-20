@@ -157,7 +157,14 @@ function renderBarrel(bySub) {
     " * deck-legal, and hidden from the card library by default. */\n" +
     `export const TOKEN_CARDS: readonly CardDefinition[] = [\n${list(bySub.get("tokens"))}\n];\n\n` +
     "/** The built-in card pool — every file under `pool/` and `tokens/`. */\n" +
-    "export const BUILTIN_CARDS: readonly CardDefinition[] = [...POOL_CARDS, ...TOKEN_CARDS];\n"
+    "export const BUILTIN_CARDS: readonly CardDefinition[] = [...POOL_CARDS, ...TOKEN_CARDS];\n\n" +
+    "/** Each card file's definition, by its path under `cards/` with no\n" +
+    " * extension (`pool/llanowar-elves`): what `pool.test.ts` holds against the\n" +
+    " * files on disk, and how the tests' card bundle hands a shard its cards\n" +
+    " * (`scripts/vitest-card-bundle.mjs`). */\n" +
+    "export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {\n" +
+    `${all.map((e) => `  ${JSON.stringify(`${e.sub}/${e.base}`)}: ${e.id},`).join("\n")}\n` +
+    "};\n"
   );
 }
 

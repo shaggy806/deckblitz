@@ -13,6 +13,10 @@
  * where a card file it misread fails.
  */
 
+import { readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { describe, expect, it } from "vitest";
 import { CARD_SHARD_COUNT, cardShardOf, loadCardShard } from "./card-shards.js";
 import { isCardFront, isDeckableCard, isTokenCard } from "./classify.js";
@@ -25,25 +29,32 @@ import { RAD_DEFINITIONS } from "./rad.js";
 import { MONARCH_DEFINITIONS } from "./monarch.js";
 import { INITIATIVE_DEFINITIONS } from "./initiative.js";
 import { DUNGEON_DEFINITIONS } from "./dungeons.js";
-import { POOL_CARDS, TOKEN_CARDS } from "./generated.js";
+import { CARD_FILES, POOL_CARDS, TOKEN_CARDS } from "./generated.js";
 import { PINNED_ART, TOKEN_NAMES } from "./generated-index.js";
 import { createDefaultRegistry } from "./registry.js";
 
-const modules = import.meta.glob<{ default: CardDefinition }>(
-  ["./pool/*.ts", "./tokens/*.ts"],
-  { eager: true },
+// The card files on disk, listed rather than imported: importing 16,000
+// modules one by one took this file two minutes. Each one's definition is
+// the barrel's import of it (`CARD_FILES`), so the barrel has to name exactly
+// these files for the tests below to see them.
+const cardsDir = fileURLToPath(new URL(".", import.meta.url));
+const onDisk = ["pool", "tokens"].flatMap((sub) =>
+  readdirSync(path.join(cardsDir, sub))
+    .filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts"))
+    .map((f) => `${sub}/${f.slice(0, -".ts".length)}`),
 );
-
-const files = Object.entries(modules).filter(([p]) => !p.endsWith(".test.ts"));
+const files = onDisk.map((file) => [`./${file}.ts`, { default: CARD_FILES[file] }] as const);
 
 // The source text of the same files, for the scaffold guard below.
-const sources = import.meta.glob<string>(["./pool/*.ts", "./tokens/*.ts"], {
-  eager: true,
-  query: "?raw",
-  import: "default",
-});
+const sources = Object.fromEntries(
+  onDisk.map((file) => [`./${file}.ts`, readFileSync(path.join(cardsDir, `${file}.ts`), "utf8")]),
+);
 
 describe("card pool layout", () => {
+  it("the barrel imports exactly the card files on disk", () => {
+    expect(Object.keys(CARD_FILES).sort(), "run `npm run gen:cards -w engine`").toEqual([...onDisk].sort());
+  });
+
   it("every file default-exports a uniquely-named CardDefinition", () => {
     const seen = new Set<string>();
     for (const [path, mod] of files) {

@@ -1,6 +1,7 @@
 /**
  * Runs after `tsc` (the engine's `build`): bundles each card shard in `dist/`
- * into one file, with its cards inlined.
+ * into one file, with its cards inlined — and the card barrel,
+ * `dist/cards/generated.js`, the same way.
  *
  * `tsc` emits `dist/cards/shards/shard-NN.js` as it was written — ~180 imports,
  * one per card file. A production bundle folds those into one chunk per shard
@@ -9,16 +10,23 @@
  * them) and took 39 s to open after the dev server started, then 4-5 s on
  * every load while the browser revalidated each file.
  *
- * Only the card files are inlined — `cards/pool/*` and `cards/tokens/*`, which
- * nothing else imports on the way to a shard. Everything they import (the
- * definitions' helpers, the effect vocabulary) stays an ordinary import of the
- * shared module, so a page still has one copy of each and the rest of `dist/`
- * is untouched. `pool/`, `tokens/` and `shards/` are all children of `cards/`,
- * so a card's own relative import ("../define.js", "../../effects.js") means
- * the same thing written in its shard.
+ * The barrel is the same story for everything that runs on Node: the server,
+ * its tests, the fuzzer, the bots' benches — each import of it was 16,000
+ * module loads (5 s natively, far more through vitest's module runner, once
+ * per server test file: 2026-10-20).
  *
- * Only the web client loads shards (`loadCardShard`); the engine's tests read
- * `src/`, and the server reaches cards through the barrel, never a shard.
+ * Only the card files are inlined — `cards/pool/*` and `cards/tokens/*`, which
+ * nothing else imports on the way to a shard or the barrel. Everything they
+ * import (the definitions' helpers, the effect vocabulary) stays an ordinary
+ * import of the shared module, so a page still has one copy of each and the
+ * rest of `dist/` is untouched. `pool/`, `tokens/` and `shards/` are all
+ * children of `cards/`, so a card's own relative import ("../define.js",
+ * "../../effects.js") means the same thing written in its shard.
+ *
+ * Only the web client loads shards (`loadCardShard`); the server reaches cards
+ * through the barrel, never a shard. A shard's cards and the barrel's are
+ * separate copies in `dist/` — nothing loads both and compares them (the
+ * engine's tests, which do, read `src/`).
  */
 
 import { readdirSync, renameSync, rmSync } from "node:fs";
@@ -27,20 +35,21 @@ import { fileURLToPath } from "node:url";
 import { rolldown } from "rolldown";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const cardsDir = path.resolve(here, "../dist/cards");
+const distDir = path.resolve(here, "../dist");
+const cardsDir = path.join(distDir, "cards");
 const shardsDir = path.join(cardsDir, "shards");
 const inlined = [path.join(cardsDir, "pool") + path.sep, path.join(cardsDir, "tokens") + path.sep];
-
-const stagingDir = path.join(cardsDir, ".shards-bundling");
-rmSync(stagingDir, { recursive: true, force: true });
 
 const shards = readdirSync(shardsDir).filter((f) => /^shard-\d+\.js$/.test(f));
 if (shards.length === 0) throw new Error(`no shards in ${shardsDir} — run tsc first`);
 
-const t0 = Date.now();
 let cards = 0;
-for (const file of shards) {
-  const input = path.join(shardsDir, file);
+
+/** Bundle `input` in place, its card files inlined. The staging directory
+ * sits beside the input's own, at the same depth, so the file name in its
+ * source-map comment and the map's relative source paths come out right. */
+async function bundleInPlace(input, stagingDir) {
+  const ownDir = path.dirname(input);
   const bundle = await rolldown({
     input,
     platform: "neutral",
@@ -57,20 +66,32 @@ for (const file of shards) {
             cards += 1;
             return resolved;
           }
-          // Shared: keep it an import, written as the shard sees it.
-          const fromShard = path.relative(shardsDir, resolved).split(path.sep).join("/");
-          return { id: fromShard.startsWith(".") ? fromShard : `./${fromShard}`, external: true };
+          // Shared: keep it an import, written as the input sees it.
+          const fromInput = path.relative(ownDir, resolved).split(path.sep).join("/");
+          return { id: fromInput.startsWith(".") ? fromInput : `./${fromInput}`, external: true };
         },
       },
     ],
   });
-  // Written beside `shards/` at the same depth, so the file name in its
-  // source-map comment and the map's relative source paths come out right.
-  const tmp = path.join(stagingDir, file);
+  const tmp = path.join(stagingDir, path.basename(input));
   await bundle.write({ file: tmp, format: "esm", sourcemap: true });
   await bundle.close();
   renameSync(tmp, input);
   renameSync(`${tmp}.map`, `${input}.map`);
 }
-rmSync(stagingDir, { recursive: true, force: true });
-console.log(`bundled ${shards.length} card shards (${cards} card modules inlined) in ${Date.now() - t0} ms`);
+
+const t0 = Date.now();
+const shardStaging = path.join(cardsDir, ".shards-bundling");
+rmSync(shardStaging, { recursive: true, force: true });
+for (const file of shards) await bundleInPlace(path.join(shardsDir, file), shardStaging);
+rmSync(shardStaging, { recursive: true, force: true });
+const shardCards = cards;
+
+const barrelStaging = path.join(distDir, ".barrel-bundling");
+rmSync(barrelStaging, { recursive: true, force: true });
+await bundleInPlace(path.join(cardsDir, "generated.js"), barrelStaging);
+rmSync(barrelStaging, { recursive: true, force: true });
+
+console.log(
+  `bundled ${shards.length} card shards (${shardCards} card modules inlined) and the card barrel (${cards - shardCards}) in ${Date.now() - t0} ms`,
+);

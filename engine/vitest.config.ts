@@ -1,5 +1,6 @@
 import { defineConfig } from "vitest/config";
 
+import { cardBarrelBundle } from "./scripts/vitest-card-bundle.mjs";
 import { ProgressReporter } from "./scripts/vitest-progress.mjs";
 
 /**
@@ -28,6 +29,8 @@ import { ProgressReporter } from "./scripts/vitest-progress.mjs";
  * cost. The two genuine long-runners keep their own larger overrides.
  */
 export default defineConfig({
+  // The card barrel as one bundled module, not 16,000 (scripts/vitest-card-bundle.mjs).
+  plugins: [cardBarrelBundle()],
   test: {
     testTimeout: 30_000,
     // One module graph per worker, not one per test file. Every test imports

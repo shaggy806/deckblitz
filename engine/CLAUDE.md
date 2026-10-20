@@ -83,12 +83,14 @@ Read a file's entry before changing that file; you don't need the rest.
 In `src/test/*.test.ts`, one level below the source (so relative imports need an extra `../`),
 except `cards/pool.test.ts`. Each major mechanic has its own test file; read it for a runnable
 example. `vitest.config.ts` turns off `isolate` (one card-barrel import per worker), which is
-safe only while **no engine test mocks, spies, stubs a global or fakes timers**. **A card's
+safe only while **no engine test mocks, spies, stubs a global or fakes timers**, and serves
+the barrel as one bundled module (`scripts/vitest-card-bundle.mjs`) — a card's definition must
+reach tests only through the barrel or a shard, never by importing its file directly. **A card's
 test starts from `src/test/harness.ts`** (`table`, `spawn`/`enter`, `cast` that throws the
 engine's refusal, `pick*` answers, reads); vitest doesn't type-check tests, so `npm run typecheck -w engine`
 does (`typecheck:tests` alone; `npm run verify` and CI run it). **While
 authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.test` from
-`engine/`, ~15s), and the whole suite once per batch before committing.
+`engine/`, ~10-20s), and the whole suite once per batch before committing (~1 min).
 
 ## Commands you'll use most
 
