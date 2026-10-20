@@ -2389,6 +2389,15 @@ export type EffectSpec =
        */
       readonly play?: boolean;
       /**
+       * Suspend's own "when the last time counter is removed from this card,
+       * if it's exiled, you may play it without paying its mana cost if
+       * able" (rule 702.62a) — the engine sets it on the trigger it makes
+       * (`Game.suspendTrigger`), with `target: "source"`, `free` and `play`:
+       * a creature cast this way has haste, and a card not cast stays
+       * exiled, no longer suspended. Not for card definitions.
+       */
+      readonly suspend?: true;
+      /**
        * What the spell cast must be — "an instant or sorcery spell with mana
        * value 4 or less", "if that spell's mana value is 8 or less" —
        * matched against the card as the spell it would be (rule 601.3e): the
@@ -7167,6 +7176,7 @@ function offerCastNow(
       ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
       exileAfter: spec.exileAfter === true,
       ...(spec.play === true ? { play: true } : {}),
+      ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
       ...(spec.spell !== undefined ? { spell: spec.spell } : {}),
       ...(looked.length > 0 ? { looked } : {}),
       ...(spec.transformed === true ? { transformed: true } : {}),

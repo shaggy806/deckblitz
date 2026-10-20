@@ -3662,9 +3662,6 @@ export interface GameState {
    * been countered in response (rule 707.10, as Rings of Brighthearth's
    * ruling has it). Emptied as each turn begins. Absent when empty. */
   departedAbilities?: Record<ObjectId, GameObject>;
-  /** Suspended cards still to be offered their free cast this upkeep, after
-   * one of them raised its `cast-now`. Drained as that is answered. */
-  pendingSuspendedCasts: ObjectId[];
   /**
    * Battlefield permanents a mass-destroy effect (Wrath of God) still has to
    * destroy. `drainPendingDestruction` destroys them all at once, as one leave

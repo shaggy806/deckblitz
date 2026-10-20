@@ -1287,7 +1287,6 @@ export class Game {
       pendingBlockerDeclarations: [],
       pendingTriggers: [],
       pendingTargetedTrigger: null,
-      pendingSuspendedCasts: [],
       deferredCommanderMove: null,
       pendingCommanderMoves: [],
       pendingPayLifeForUntapped: [],
@@ -5822,14 +5821,6 @@ export class Game {
         this.resumeSuspendedResolution();
         continue;
       }
-      // Suspended cards whose last time counter an effect removed (time
-      // travel, Amy Pond): "you may play it" once that effect is done
-      // (rule 702.62a) — off the stack, as at the upkeep (see
-      // `castSuspendedCard`).
-      if (this.state.pendingSuspendedCasts.length > 0) {
-        this.drainSuspendedCasts();
-        continue;
-      }
       if (!this.placePendingTriggers()) break;
     }
     // Nothing is waiting on anyone, so whatever resolved last is no longer
@@ -8713,29 +8704,52 @@ export class Game {
     this.afterPlayerAction(player);
   }
 
-  /** Beginning of the active player's upkeep (rule 702.62d/e): remove one time
-   * counter from each of their suspended cards; cast (for free) any that hit
-   * zero. */
+  /** Beginning of the active player's upkeep: each of their suspended cards
+   * triggers "remove a time counter from it" (rule 702.62a). */
   private upkeepStep(): void {
     const active = this.activePlayer;
-    const ready: ObjectId[] = [];
-    for (const id of [...this.state.zones.shared.exile]) {
+    for (const id of this.state.zones.shared.exile) {
       const object = this.state.objects[id];
-      if (object === undefined || !object.suspended || object.owner !== active) continue;
-      const remaining = Math.max(0, (object.counters.time ?? 0) - 1);
-      object.counters.time = remaining;
-      this.emit({ type: "time-counter-removed", object: id, remaining });
-      if (remaining === 0) ready.push(id);
+      if (object === undefined || object.suspended !== true || object.owner !== active) continue;
+      // "If this card is suspended" (702.62b): it has a time counter.
+      if ((object.counters.time ?? 0) > 0) this.suspendTrigger(id, "remove");
     }
-    for (let i = 0; i < ready.length; i += 1) {
-      this.castSuspendedCard(ready[i]);
-      if (this.state.awaiting !== null) {
-        // A suspended card's free cast is being offered — the rest are offered
-        // once that's answered (`applyCastNow` drains this queue).
-        this.state.pendingSuspendedCasts = ready.slice(i + 1);
-        return;
-      }
-    }
+  }
+
+  /**
+   * Suspend's two triggered abilities, which function in exile (rule
+   * 702.62a), as the owner's triggers on the stack: `"remove"` is "at the
+   * beginning of your upkeep, if this card is suspended, remove a time
+   * counter from it"; `"cast"` is "when the last time counter is removed from
+   * this card, if it's exiled, you may play it without paying its mana cost
+   * if able" — however the last one came off (time travel too, the rulings).
+   * Players can respond to each. Neither is an ability of the card's
+   * definition, so each carries its own effect, as a reflexive one does.
+   */
+  private suspendTrigger(cardId: ObjectId, step: "remove" | "cast"): void {
+    const object = this.state.objects[cardId];
+    if (object === undefined) return;
+    this.state.pendingTriggers.push({
+      sourceObjectId: cardId,
+      cardName: printedCardName(object),
+      abilityIndex: 0,
+      controller: object.owner,
+      reflexive:
+        step === "remove"
+          ? {
+              targets: [],
+              effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
+              text: "Suspend — At the beginning of your upkeep, if this card is suspended, remove a time counter from it.",
+            }
+          : {
+              targets: [],
+              // "Play": a modal double-faced card that gained suspend (The
+              // Eleventh Doctor, Sibylline Soothsayer) may be played as its
+              // land face, with a land play left on its owner's turn.
+              effect: { kind: "cast-now", target: "source", free: true, play: true, suspend: true },
+              text: "Suspend — When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able.",
+            },
+    });
   }
 
   /** Beginning of the active player's precombat main phase (rule 714.4): add a
@@ -8856,31 +8870,8 @@ export class Game {
     );
   }
 
-  /** A suspended card whose last time counter just came off: "you may play
-   * it without paying its mana cost if able" (rule 702.62a) — offered as a
-   * full free cast (`cast-now`: modes, kicker, targets, or decline). If it
-   * can't be cast it stays exiled, no longer suspended (702.62e). */
-  private castSuspendedCard(cardId: ObjectId): void {
-    const object = this.state.objects[cardId];
-    if (object === undefined || object.zone !== "exile") return;
-    // "Play": a modal double-faced card that gained suspend (The Eleventh
-    // Doctor, Sibylline Soothsayer) may be played as its land face, with a
-    // land play left on its owner's turn (rules 305.2–305.3).
-    this.raiseCastNow(object.owner, cardId, [cardId], { free: true, exileAfter: false, freeCastOf: "suspend", play: true });
-    if (this.state.awaiting === null) this.abandonSuspendedCast(cardId, "couldn't be cast");
-  }
-
-  /** Offer the next suspended card owed its free cast this upkeep, until one
-   * raises a decision (rule 702.62e). */
-  private drainSuspendedCasts(): void {
-    while (this.state.pendingSuspendedCasts.length > 0 && this.state.awaiting === null) {
-      const next = this.state.pendingSuspendedCasts.shift();
-      if (next !== undefined) this.castSuspendedCard(next);
-    }
-  }
-
   /** A suspended card whose free cast didn't happen stays exiled, no longer
-   * suspended (rule 702.62e). */
+   * suspended (rule 702.62a: "if you don't, it remains exiled"). */
   private abandonSuspendedCast(cardId: ObjectId, reason: string): void {
     const object = this.state.objects[cardId];
     if (object === undefined) return;
@@ -11467,7 +11458,6 @@ export class Game {
       // "If you don't, it remains exiled" (rule 702.62a), no longer suspended.
       if (freeCastOf === "suspend") {
         for (const id of awaiting.cards) this.abandonSuspendedCast(id, "not cast");
-        this.drainSuspendedCasts();
       }
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
@@ -11521,11 +11511,6 @@ export class Game {
       );
     } finally {
       this.castNowProbe = null;
-    }
-    // The other suspended cards owed their free cast this upkeep (702.62e).
-    if (freeCastOf === "suspend" && this.state.awaiting === null) {
-      this.drainSuspendedCasts();
-      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
     }
   }
 
@@ -20914,6 +20899,12 @@ export class Game {
       removeCounter: (target, counter, amount) => {
         if (target.kind !== "object" || amount <= 0) return;
         const before = this.state.objects[target.object];
+        // A suspended card's time counter (rule 702.62a — suspend's own
+        // upkeep trigger, or an effect): its last one triggers the cast.
+        if (before?.zone === "exile" && before.suspended === true && counter === "time") {
+          this.removeTimeCounter(target.object, amount);
+          return;
+        }
         if (before === undefined || before.zone !== "battlefield" || (before.counters[counter] ?? 0) <= 0) return;
         // One token of a stack loses it, not every token in it.
         const id = this.splitOneFromStack(target.object);
@@ -21609,7 +21600,16 @@ export class Game {
       finishCascade: (finish) => this.finishCascade(finish),
       discover: (amount) => this.discover(controller, amount),
       finishDiscover: (found) => this.finishDiscover(controller, found),
-      castNow: (cards, options) => this.raiseCastNow(options.by ?? controller, source, cards, options),
+      castNow: (cards, options) => {
+        this.raiseCastNow(options.by ?? controller, source, cards, options);
+        // Suspend's "if able": a card that can't be played now stays exiled,
+        // no longer suspended (rule 702.62a).
+        if (options.freeCastOf === "suspend" && this.state.awaiting === null) {
+          for (const id of cards) {
+            if (this.state.objects[id]?.zone === "exile") this.abandonSuspendedCast(id, "couldn't be cast");
+          }
+        }
+      },
       castSince: (cards, since, by) =>
         eventLogSince(this.state, since).some(
           (event) =>
@@ -26509,8 +26509,8 @@ export class Game {
    * go through `addCounter` (a counter doubler applies; Kate Stewart's
    * "whenever you put one or more time counters" sees them) and its removal
    * is a `counter-removed` — the last one fires vanishing's sacrifice. A
-   * suspended card's last one owes its owner the free cast (rule 702.62a),
-   * offered once the resolution is done (`pendingSuspendedCasts`).
+   * suspended card's last one triggers suspend's free cast (rule 702.62a,
+   * `suspendTrigger`), which goes on the stack once the resolution is done.
    */
   private applyTimeTravel(player: PlayerId, add: readonly ObjectId[], remove: readonly ObjectId[]): void {
     const why = timeTravel.whyCannot(this.decisionCtx, { type: "time-travel", player, add, remove }, player);
@@ -26530,14 +26530,6 @@ export class Game {
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
-  /**
-   * Take up to `amount` time counters off `id` — a permanent or a suspended
-   * card. A permanent's removal is a `counter-removed` (vanishing's "when
-   * the last is removed" reads its `after`); a suspended card whose last
-   * one comes off is queued for its free cast (rule 702.62a — "it doesn't
-   * matter why the last time counter was removed", the rulings), offered
-   * when the effect removing it is done.
-   */
   /** A shield counter used up (rule 122.1c): one, however many it has. */
   private removeShieldCounter(id: ObjectId): void {
     const object = this.state.objects[id];
@@ -26549,6 +26541,13 @@ export class Game {
     this.emit({ type: "counter-removed", object: id, counter: "shield", amount: 1, after });
   }
 
+  /**
+   * Take up to `amount` time counters off `id` — a permanent or a suspended
+   * card. A permanent's removal is a `counter-removed` (vanishing's "when
+   * the last is removed" reads its `after`); a suspended card whose last
+   * one comes off triggers suspend's cast (rule 702.62a — "it doesn't
+   * matter why the last time counter was removed", the rulings).
+   */
   private removeTimeCounter(id: ObjectId, amount: number): void {
     const object = this.state.objects[id];
     if (object === undefined || amount <= 0) return;
@@ -26562,7 +26561,7 @@ export class Game {
       this.emit({ type: "counter-removed", object: id, counter: "time", amount: n, after });
     } else if (object.zone === "exile" && object.suspended === true) {
       this.emit({ type: "time-counter-removed", object: id, remaining: after });
-      if (after === 0) this.state.pendingSuspendedCasts.push(id);
+      if (after === 0) this.suspendTrigger(id, "cast");
     }
   }
 
