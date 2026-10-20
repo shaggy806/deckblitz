@@ -201,6 +201,7 @@ import _poolGoldspanDragon from "../pool/goldspan-dragon.js";
 import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGoneMissing from "../pool/gone-missing.js";
 import _poolGracefulCat from "../pool/graceful-cat.js";
+import _poolGracefulRestoration from "../pool/graceful-restoration.js";
 import _poolGrandAbolisher from "../pool/grand-abolisher.js";
 import _poolGrandmotherRaviSengir from "../pool/grandmother-ravi-sengir.js";
 import _poolGraniteWitness from "../pool/granite-witness.js";
@@ -482,6 +483,7 @@ import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
+import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
 import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-token-dance-of-the-tumbleweeds.js";
 import _tokensFishToken from "../tokens/fish-token.js";
@@ -695,6 +697,7 @@ const shard: CardShard = {
     _poolGolosTirelessPilgrim,
     _poolGoneMissing,
     _poolGracefulCat,
+    _poolGracefulRestoration,
     _poolGrandAbolisher,
     _poolGrandmotherRaviSengir,
     _poolGraniteWitness,
@@ -978,6 +981,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensApeToken,
+    _tokensCrabToken,
     _tokensDeathtouchRatToken,
     _tokensElementalTokenDanceOfTheTumbleweeds,
     _tokensFishToken,

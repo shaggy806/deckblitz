@@ -22,7 +22,9 @@ import _poolAntMansAirForce from "../pool/ant-mans-air-force.js";
 import _poolApprenticeSharpshooter from "../pool/apprentice-sharpshooter.js";
 import _poolArabellaAbandonedDoll from "../pool/arabella-abandoned-doll.js";
 import _poolArborAdherent from "../pool/arbor-adherent.js";
+import _poolArcboundShikari from "../pool/arcbound-shikari.js";
 import _poolArchangel from "../pool/archangel.js";
+import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolAtog from "../pool/atog.js";
@@ -53,6 +55,7 @@ import _poolBombard from "../pool/bombard.js";
 import _poolBonepickerSkirge from "../pool/bonepicker-skirge.js";
 import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
+import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
@@ -343,6 +346,7 @@ import _poolRuinsOfOranRief from "../pool/ruins-of-oran-rief.js";
 import _poolRunAground from "../pool/run-aground.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
 import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
+import _poolSaidDone from "../pool/said-done.js";
 import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
 import _poolSawInHalf from "../pool/saw-in-half.js";
@@ -431,6 +435,7 @@ import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
 import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
+import _poolTormodsCryptkeeper from "../pool/tormods-cryptkeeper.js";
 import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
 import _poolTouchOfBrilliance from "../pool/touch-of-brilliance.js";
 import _poolTowashiGuideBot from "../pool/towashi-guide-bot.js";
@@ -528,7 +533,9 @@ const shard: CardShard = {
     _poolApprenticeSharpshooter,
     _poolArabellaAbandonedDoll,
     _poolArborAdherent,
+    _poolArcboundShikari,
     _poolArchangel,
+    _poolArcusAcolyte,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
     _poolAtog,
@@ -559,6 +566,7 @@ const shard: CardShard = {
     _poolBonepickerSkirge,
     _poolBoomerangBasics,
     _poolBoonBringerValkyrie,
+    _poolBottleGolems,
     _poolBottomlessPit,
     _poolBountifulPromenade,
     _poolBrazenUpstart,
@@ -849,6 +857,7 @@ const shard: CardShard = {
     _poolRunAground,
     _poolRushOfVitality,
     _poolSabertoothNishoba,
+    _poolSaidDone,
     _poolSandbarMerfolk,
     _poolSavageGorilla,
     _poolSawInHalf,
@@ -937,6 +946,7 @@ const shard: CardShard = {
     _poolTimeSieve,
     _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
+    _poolTormodsCryptkeeper,
     _poolTotentanzSwarmPiper,
     _poolTouchOfBrilliance,
     _poolTowashiGuideBot,

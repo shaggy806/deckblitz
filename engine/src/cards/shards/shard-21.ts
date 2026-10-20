@@ -64,6 +64,7 @@ import _poolBuyYourSilence from "../pool/buy-your-silence.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
+import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
@@ -141,6 +142,7 @@ import _poolFecundGreenshell from "../pool/fecund-greenshell.js";
 import _poolFelidarRetreat from "../pool/felidar-retreat.js";
 import _poolFestivalCrasher from "../pool/festival-crasher.js";
 import _poolFeywildVisitor from "../pool/feywild-visitor.js";
+import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
@@ -469,12 +471,14 @@ import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
+import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensBoarTokenRuralRecruit from "../tokens/boar-token-rural-recruit.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
+import _tokensFungusBeastToken from "../tokens/fungus-beast-token.js";
 import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
 import _tokensIncubatorToken from "../tokens/incubator-token.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
@@ -549,6 +553,7 @@ const shard: CardShard = {
     _poolCacklingFiend,
     _poolCadricSoulKindler,
     _poolCanonizedInBlood,
+    _poolCapturedByLagacs,
     _poolCarnivorousPlant,
     _poolCephalidFacetaker,
     _poolChainReaction,
@@ -626,6 +631,7 @@ const shard: CardShard = {
     _poolFelidarRetreat,
     _poolFestivalCrasher,
     _poolFeywildVisitor,
+    _poolFiligreeAttendant,
     _poolFireLitThicket,
     _poolFirebendingStudent,
     _poolFiveHundredYearDiary,
@@ -954,6 +960,7 @@ const shard: CardShard = {
     _poolYavimayaIconoclast,
     _poolYouComeToTheGnollCamp,
     _poolYuanTiFangBlade,
+    _poolZaffaiThunderConductor,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,
   ],
@@ -962,6 +969,7 @@ const shard: CardShard = {
     _tokensBoarTokenRuralRecruit,
     _tokensConstructTokenJanJansenChaosCrafter,
     _tokensElementalTokenPrismariPianist,
+    _tokensFungusBeastToken,
     _tokensHumanRogueToken,
     _tokensIncubatorToken,
     _tokensMoogleToken,

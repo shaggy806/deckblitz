@@ -161,6 +161,7 @@ import _poolFogOfWar from "../pool/fog-of-war.js";
 import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
 import _poolFortifiedBeachhead from "../pool/fortified-beachhead.js";
 import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
+import _poolFurious from "../pool/furious.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
@@ -313,6 +314,7 @@ import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
 import _poolPredatorFlagship from "../pool/predator-flagship.js";
 import _poolPreeningChampion from "../pool/preening-champion.js";
 import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
+import _poolPrismaticEnding from "../pool/prismatic-ending.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
@@ -672,6 +674,7 @@ const shard: CardShard = {
     _poolFoggyBottomSwamp,
     _poolFortifiedBeachhead,
     _poolFranciscoFowlMarauder,
+    _poolFurious,
     _poolGaeasSkyfolk,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolPredatorFlagship,
     _poolPreeningChampion,
     _poolPriestOfUrabrask,
+    _poolPrismaticEnding,
     _poolPrismaticOmen,
     _poolPropagatorDrone,
     _poolProwlersHelm,

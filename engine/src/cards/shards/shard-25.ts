@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbhorrentOverlord from "../pool/abhorrent-overlord.js";
+import _poolAbidingGrace from "../pool/abiding-grace.js";
 import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-titan.js";
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
@@ -143,6 +144,7 @@ import _poolEyeOfNowhere from "../pool/eye-of-nowhere.js";
 import _poolFaithbearerPaladin from "../pool/faithbearer-paladin.js";
 import _poolFanaticOfMogis from "../pool/fanatic-of-mogis.js";
 import _poolFarTraveler from "../pool/far-traveler.js";
+import _poolFeastOfSanity from "../pool/feast-of-sanity.js";
 import _poolFeiyiSnake from "../pool/feiyi-snake.js";
 import _poolFeldonRonomExcavator from "../pool/feldon-ronom-excavator.js";
 import _poolFellThePheasant from "../pool/fell-the-pheasant.js";
@@ -269,6 +271,7 @@ import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
+import _poolMonoskelion from "../pool/monoskelion.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
 import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
@@ -277,6 +280,7 @@ import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
+import _poolNecromancersFamiliar from "../pool/necromancers-familiar.js";
 import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
 import _poolNeonatesRush from "../pool/neonates-rush.js";
@@ -416,6 +420,7 @@ import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
+import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
@@ -507,6 +512,7 @@ import _tokensWurmToken from "../tokens/wurm-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbhorrentOverlord,
+    _poolAbidingGrace,
     _poolAbominationTerrifyingTitan,
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
@@ -646,6 +652,7 @@ const shard: CardShard = {
     _poolFaithbearerPaladin,
     _poolFanaticOfMogis,
     _poolFarTraveler,
+    _poolFeastOfSanity,
     _poolFeiyiSnake,
     _poolFeldonRonomExcavator,
     _poolFellThePheasant,
@@ -772,6 +779,7 @@ const shard: CardShard = {
     _poolMoggcatcher,
     _poolMoltenCollapse,
     _poolMonkOfTheOpenHand,
+    _poolMonoskelion,
     _poolMorbidOpportunist,
     _poolMorgueThrull,
     _poolMuYanlingWindRider,
@@ -780,6 +788,7 @@ const shard: CardShard = {
     _poolMycosynthGolem,
     _poolMyrkulsInvoker,
     _poolMysticArchaeologist,
+    _poolNecromancersFamiliar,
     _poolNeedForSpeed,
     _poolNeedlevergePathway,
     _poolNeonatesRush,
@@ -919,6 +928,7 @@ const shard: CardShard = {
     _poolSummonersSending,
     _poolSunderingVitae,
     _poolSuspiciousStowaway,
+    _poolSweepTheSkies,
     _poolTaintedPeak,
     _poolTameshiRealityArchitect,
     _poolTarSnare,

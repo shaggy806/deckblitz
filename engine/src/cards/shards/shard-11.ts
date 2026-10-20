@@ -151,6 +151,7 @@ import _poolFiendArtisan from "../pool/fiend-artisan.js";
 import _poolFiendishPanda from "../pool/fiendish-panda.js";
 import _poolFieryIslet from "../pool/fiery-islet.js";
 import _poolFissureVent from "../pool/fissure-vent.js";
+import _poolFlameBlitz from "../pool/flame-blitz.js";
 import _poolFlittingGuerrilla from "../pool/flitting-guerrilla.js";
 import _poolFloodPlain from "../pool/flood-plain.js";
 import _poolFontOfFertility from "../pool/font-of-fertility.js";
@@ -159,6 +160,7 @@ import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
 import _poolForktailSweep from "../pool/forktail-sweep.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
+import _poolFoulWatcher from "../pool/foul-watcher.js";
 import _poolFracture from "../pool/fracture.js";
 import _poolFranticStrength from "../pool/frantic-strength.js";
 import _poolFrenziedRage from "../pool/frenzied-rage.js";
@@ -690,6 +692,7 @@ const shard: CardShard = {
     _poolFiendishPanda,
     _poolFieryIslet,
     _poolFissureVent,
+    _poolFlameBlitz,
     _poolFlittingGuerrilla,
     _poolFloodPlain,
     _poolFontOfFertility,
@@ -698,6 +701,7 @@ const shard: CardShard = {
     _poolForatog,
     _poolForktailSweep,
     _poolForsakenDrifters,
+    _poolFoulWatcher,
     _poolFracture,
     _poolFranticStrength,
     _poolFrenziedRage,

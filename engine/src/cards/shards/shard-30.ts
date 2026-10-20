@@ -37,6 +37,7 @@ import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
+import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
@@ -155,6 +156,7 @@ import _poolFallowEarth from "../pool/fallow-earth.js";
 import _poolFalseFloor from "../pool/false-floor.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
+import _poolFastFurious from "../pool/fast-furious.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralGhoul from "../pool/feral-ghoul.js";
@@ -458,6 +460,7 @@ import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
 import _poolUnearth from "../pool/unearth.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
 import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
+import _poolUnholyHeat from "../pool/unholy-heat.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
@@ -547,6 +550,7 @@ const shard: CardShard = {
     _poolAzoriusGuildgate,
     _poolAzulaAlwaysLies,
     _poolBalothWoodcrasher,
+    _poolBannerhideKrushok,
     _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
     _poolBazaarTrader,
@@ -665,6 +669,7 @@ const shard: CardShard = {
     _poolFalseFloor,
     _poolFangGuardian,
     _poolFangOfShigeki,
+    _poolFastFurious,
     _poolFearsomeGoblinPair,
     _poolFencingAce,
     _poolFeralGhoul,
@@ -968,6 +973,7 @@ const shard: CardShard = {
     _poolUnearth,
     _poolUnexplainedDisappearance,
     _poolUnfulfilledDesires,
+    _poolUnholyHeat,
     _poolUniversityCampus,
     _poolValleyFlamecaller,
     _poolVaporSnag,

@@ -107,6 +107,7 @@ import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
+import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
@@ -340,6 +341,7 @@ import _poolRustMonster from "../pool/rust-monster.js";
 import _poolRuthlessPredation from "../pool/ruthless-predation.js";
 import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
 import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
+import _poolSanctifierEnVec from "../pool/sanctifier-en-vec.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
 import _poolScouredBarrens from "../pool/scoured-barrens.js";
@@ -437,6 +439,7 @@ import _poolUnderworldDreams from "../pool/underworld-dreams.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
+import _poolVedalkenInfiltrator from "../pool/vedalken-infiltrator.js";
 import _poolVeiledShade from "../pool/veiled-shade.js";
 import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
 import _poolVengefulTracker from "../pool/vengeful-tracker.js";
@@ -604,6 +607,7 @@ const shard: CardShard = {
     _poolDistractingGeist,
     _poolDiversionaryTactics,
     _poolDoctorSpectrum,
+    _poolDone,
     _poolDoomwakeGiant,
     _poolDraugrRecruiter,
     _poolDrogskolReaver,
@@ -837,6 +841,7 @@ const shard: CardShard = {
     _poolRuthlessPredation,
     _poolSabertoothWyvern,
     _poolSabretoothTiger,
+    _poolSanctifierEnVec,
     _poolSarkhanDragonAscendant,
     _poolScarwoodTreefolk,
     _poolScouredBarrens,
@@ -934,6 +939,7 @@ const shard: CardShard = {
     _poolUnholyOfficiant,
     _poolUnknownShores,
     _poolUnsummon,
+    _poolVedalkenInfiltrator,
     _poolVeiledShade,
     _poolVeinwitchCoven,
     _poolVengefulTracker,

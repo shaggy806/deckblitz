@@ -134,6 +134,7 @@ import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.
 import _poolEternalStudent from "../pool/eternal-student.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
 import _poolEttercap from "../pool/ettercap.js";
+import _poolExcavationTechnique from "../pool/excavation-technique.js";
 import _poolExcommunicate from "../pool/excommunicate.js";
 import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
@@ -271,6 +272,7 @@ import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
 import _poolMorkrutBehemoth from "../pool/morkrut-behemoth.js";
+import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
@@ -651,6 +653,7 @@ const shard: CardShard = {
     _poolEternalStudent,
     _poolEtheriumAstrolabe,
     _poolEttercap,
+    _poolExcavationTechnique,
     _poolExcommunicate,
     _poolExdeathVoidWarlock,
     _poolExploreTheUnderdark,
@@ -788,6 +791,7 @@ const shard: CardShard = {
     _poolMoongloveExtractor,
     _poolMorgueTheft,
     _poolMorkrutBehemoth,
+    _poolMountVelusManticore,
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMurdocksCrusade,

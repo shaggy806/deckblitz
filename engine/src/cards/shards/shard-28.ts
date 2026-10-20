@@ -359,6 +359,7 @@ import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabotender from "../pool/sabotender.js";
 import _poolSaguPummeler from "../pool/sagu-pummeler.js";
+import _poolSaid from "../pool/said.js";
 import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
@@ -407,6 +408,7 @@ import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
+import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
@@ -871,6 +873,7 @@ const shard: CardShard = {
     _poolRustedSlasher,
     _poolSabotender,
     _poolSaguPummeler,
+    _poolSaid,
     _poolSailIntoTheWest,
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
@@ -919,6 +922,7 @@ const shard: CardShard = {
     _poolSolTalisman,
     _poolSoulsFire,
     _poolSpDrPilotedByPeni,
+    _poolSpecimenCollector,
     _poolSpitefulSliver,
     _poolSplinterfright,
     _poolSplitUp,

@@ -49,6 +49,7 @@ import _poolBlightsoilDruid from "../pool/blightsoil-druid.js";
 import _poolBloodDivination from "../pool/blood-divination.js";
 import _poolBloodHustler from "../pool/blood-hustler.js";
 import _poolBloodMist from "../pool/blood-mist.js";
+import _poolBloodbraidMarauder from "../pool/bloodbraid-marauder.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBookOfRass from "../pool/book-of-rass.js";
@@ -62,6 +63,7 @@ import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
 import _poolBristlepackSentry from "../pool/bristlepack-sentry.js";
 import _poolBruteSuit from "../pool/brute-suit.js";
+import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
@@ -166,6 +168,7 @@ import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
 import _poolGhorClanBloodscale from "../pool/ghor-clan-bloodscale.js";
+import _poolGhostLitDrifter from "../pool/ghost-lit-drifter.js";
 import _poolGhostTown from "../pool/ghost-town.js";
 import _poolGhostlyVisit from "../pool/ghostly-visit.js";
 import _poolGiantSpectacle from "../pool/giant-spectacle.js";
@@ -215,6 +218,7 @@ import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
+import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
 import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
@@ -325,6 +329,7 @@ import _poolRagingBattleMouse from "../pool/raging-battle-mouse.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
 import _poolRatOut from "../pool/rat-out.js";
+import _poolRavingVisionary from "../pool/raving-visionary.js";
 import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
 import _poolRecklessHandling from "../pool/reckless-handling.js";
 import _poolReclaim from "../pool/reclaim.js";
@@ -541,6 +546,7 @@ const shard: CardShard = {
     _poolBloodDivination,
     _poolBloodHustler,
     _poolBloodMist,
+    _poolBloodbraidMarauder,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
     _poolBookOfRass,
@@ -554,6 +560,7 @@ const shard: CardShard = {
     _poolBristlebaneBattler,
     _poolBristlepackSentry,
     _poolBruteSuit,
+    _poolCalibratedBlast,
     _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
@@ -658,6 +665,7 @@ const shard: CardShard = {
     _poolGeralfsMindcrusher,
     _poolGhirapurAetherGrid,
     _poolGhorClanBloodscale,
+    _poolGhostLitDrifter,
     _poolGhostTown,
     _poolGhostlyVisit,
     _poolGiantSpectacle,
@@ -707,6 +715,7 @@ const shard: CardShard = {
     _poolJoinTheMaestros,
     _poolJolraelMwonvuliRecluse,
     _poolJuriMasterOfTheRevue,
+    _poolKaleidoscorch,
     _poolKappaTechWrecker,
     _poolKarlachFuryOfAvernus,
     _poolKayasGhostform,
@@ -817,6 +826,7 @@ const shard: CardShard = {
     _poolRaidersWake,
     _poolRamosDragonEngine,
     _poolRatOut,
+    _poolRavingVisionary,
     _poolRazorfootGriffin,
     _poolRecklessHandling,
     _poolReclaim,

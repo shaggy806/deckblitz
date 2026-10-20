@@ -46,6 +46,7 @@ import _poolBondBeetle from "../pool/bond-beetle.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
 import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
+import _poolBreakTies from "../pool/break-ties.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
 import _poolByForce from "../pool/by-force.js";
 import _poolCalamitousTide from "../pool/calamitous-tide.js";
@@ -132,8 +133,10 @@ import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
+import _poolEzzarootChanneler from "../pool/ezzaroot-channeler.js";
 import _poolFancyFootwork from "../pool/fancy-footwork.js";
 import _poolFangornTreeShepherd from "../pool/fangorn-tree-shepherd.js";
+import _poolFast from "../pool/fast.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
 import _poolFellBeastOfMordor from "../pool/fell-beast-of-mordor.js";
@@ -150,6 +153,7 @@ import _poolFlameJet from "../pool/flame-jet.js";
 import _poolFleshEaterImp from "../pool/flesh-eater-imp.js";
 import _poolFloodhound from "../pool/floodhound.js";
 import _poolFlowstoneGiant from "../pool/flowstone-giant.js";
+import _poolFodderTosser from "../pool/fodder-tosser.js";
 import _poolForebodingRuins from "../pool/foreboding-ruins.js";
 import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js";
 import _poolFortressCrab from "../pool/fortress-crab.js";
@@ -201,6 +205,7 @@ import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
 import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
+import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
@@ -537,6 +542,7 @@ const shard: CardShard = {
     _poolBoneMiser,
     _poolBorosReckoner,
     _poolBrainWeevil,
+    _poolBreakTies,
     _poolBrenardGingerSculptor,
     _poolByForce,
     _poolCalamitousTide,
@@ -623,8 +629,10 @@ const shard: CardShard = {
     _poolExpandTheSphere,
     _poolExtendedAbsence,
     _poolEzuriClawOfProgress,
+    _poolEzzarootChanneler,
     _poolFancyFootwork,
     _poolFangornTreeShepherd,
+    _poolFast,
     _poolFatefulEnd,
     _poolFelixFiveBoots,
     _poolFellBeastOfMordor,
@@ -641,6 +649,7 @@ const shard: CardShard = {
     _poolFleshEaterImp,
     _poolFloodhound,
     _poolFlowstoneGiant,
+    _poolFodderTosser,
     _poolForebodingRuins,
     _poolForecastingFortuneTeller,
     _poolFortressCrab,
@@ -692,6 +701,7 @@ const shard: CardShard = {
     _poolHavengulVampire,
     _poolHawkeyesBow,
     _poolHealersFlock,
+    _poolHealingTechnique,
     _poolHeirloomMirror,
     _poolHiddenFootblade,
     _poolHighlandWeald,

@@ -300,9 +300,9 @@
     {
       "name": "Curse of Fool's Wisdom",
       "needs": [
-        "keyword:madness"
+        "trigger:enchanted-player-draws"
       ],
-      "why": "Madness isn't modeled (the Curse and its enchanted-player draw trigger are otherwise expressible)."
+      "why": "Madness is built; no trigger fires on the enchanted player drawing a card."
     },
     {
       "name": "Spirit Loop",

@@ -80,6 +80,7 @@ import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
 import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
 import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
+import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
@@ -462,6 +463,7 @@ import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
 import _poolWorldShaper from "../pool/world-shaper.js";
 import _poolWorldgorgerDragon from "../pool/worldgorger-dragon.js";
 import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
+import _poolWrensRunHydra from "../pool/wrens-run-hydra.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
 import _poolZodiacGoat from "../pool/zodiac-goat.js";
@@ -558,6 +560,7 @@ const shard: CardShard = {
     _poolChanceEncounter,
     _poolChandraFlameshaper,
     _poolChitteringSkitterling,
+    _poolChromeCourier,
     _poolClandestineMeddler,
     _poolClawsOfGix,
     _poolClayStatue,
@@ -940,6 +943,7 @@ const shard: CardShard = {
     _poolWorldShaper,
     _poolWorldgorgerDragon,
     _poolWranglerOfTheDamned,
+    _poolWrensRunHydra,
     _poolYotianDissident,
     _poolZephyrSprite,
     _poolZodiacGoat,

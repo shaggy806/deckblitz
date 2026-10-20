@@ -146,6 +146,7 @@ import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
+import _poolGlintingCreeper from "../pool/glinting-creeper.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
@@ -212,6 +213,7 @@ import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
+import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
 import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
@@ -610,6 +612,7 @@ const shard: CardShard = {
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
     _poolGlimmerSeeker,
+    _poolGlintingCreeper,
     _poolGlissasCourier,
     _poolGloinTheMighty,
     _poolGnawingVermin,
@@ -676,6 +679,7 @@ const shard: CardShard = {
     _poolKravensCats,
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
+    _poolLazotepChancellor,
     _poolLiberatedDwarf,
     _poolLivingLibrary,
     _poolLizardConnorssCurse,

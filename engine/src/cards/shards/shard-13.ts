@@ -115,6 +115,7 @@ import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
 import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
+import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
 import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
@@ -278,6 +279,7 @@ import _poolMirkwood from "../pool/mirkwood.js";
 import _poolMirrorRoom from "../pool/mirror-room.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
+import _poolModeration from "../pool/moderation.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
@@ -323,6 +325,7 @@ import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
+import _poolRadiantEpicure from "../pool/radiant-epicure.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
 import _poolRangersPath from "../pool/rangers-path.js";
@@ -627,6 +630,7 @@ const shard: CardShard = {
     _poolDeathSpeakers,
     _poolDeathcapMarionette,
     _poolDebtToTheDeathless,
+    _poolDeepwoodDenizen,
     _poolDefyGravity,
     _poolDesertOfTheMindful,
     _poolDesperateLunge,
@@ -790,6 +794,7 @@ const shard: CardShard = {
     _poolMirrorRoom,
     _poolMishrasFactory,
     _poolMithrilCoat,
+    _poolModeration,
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
     _poolMoonrageBrute,
@@ -835,6 +840,7 @@ const shard: CardShard = {
     _poolPridemalkin,
     _poolProtectionMagic,
     _poolRabidAttack,
+    _poolRadiantEpicure,
     _poolRakdosGuildgate,
     _poolRampantGrowth,
     _poolRangersPath,

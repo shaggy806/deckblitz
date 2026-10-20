@@ -66,6 +66,7 @@ import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
+import _poolClatteringAugur from "../pool/clattering-augur.js";
 import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolCoilingStalker from "../pool/coiling-stalker.js";
@@ -238,6 +239,7 @@ import _poolLlanowarWastes from "../pool/llanowar-wastes.js";
 import _poolLocustSpray from "../pool/locust-spray.js";
 import _poolLostSoul from "../pool/lost-soul.js";
 import _poolLoxodonWarhammer from "../pool/loxodon-warhammer.js";
+import _poolLucidDreams from "../pool/lucid-dreams.js";
 import _poolLunarConvocation from "../pool/lunar-convocation.js";
 import _poolLunaticPandora from "../pool/lunatic-pandora.js";
 import _poolLupinflowerVillage from "../pool/lupinflower-village.js";
@@ -451,6 +453,7 @@ import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
 import _poolUndercoverButler from "../pool/undercover-butler.js";
+import _poolUnderworldHermit from "../pool/underworld-hermit.js";
 import _poolUnholyAnnex from "../pool/unholy-annex.js";
 import _poolUnnervingGrasp from "../pool/unnerving-grasp.js";
 import _poolUnquestionedAuthority from "../pool/unquestioned-authority.js";
@@ -593,6 +596,7 @@ const shard: CardShard = {
     _poolChangeOfPlans,
     _poolChillingScreech,
     _poolClamorousIronclad,
+    _poolClatteringAugur,
     _poolCloudspireSkycycle,
     _poolCodsworthHandyHelper,
     _poolCoilingStalker,
@@ -765,6 +769,7 @@ const shard: CardShard = {
     _poolLocustSpray,
     _poolLostSoul,
     _poolLoxodonWarhammer,
+    _poolLucidDreams,
     _poolLunarConvocation,
     _poolLunaticPandora,
     _poolLupinflowerVillage,
@@ -978,6 +983,7 @@ const shard: CardShard = {
     _poolUlcerate,
     _poolUndeadLeotau,
     _poolUndercoverButler,
+    _poolUnderworldHermit,
     _poolUnholyAnnex,
     _poolUnnervingGrasp,
     _poolUnquestionedAuthority,

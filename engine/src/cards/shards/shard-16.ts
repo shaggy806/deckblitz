@@ -124,6 +124,7 @@ import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolErrantAndGiada from "../pool/errant-and-giada.js";
 import _poolEssenceFlux from "../pool/essence-flux.js";
+import _poolEssencePulse from "../pool/essence-pulse.js";
 import _poolEtchedCornfield from "../pool/etched-cornfield.js";
 import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
@@ -307,6 +308,7 @@ import _poolOubliette from "../pool/oubliette.js";
 import _poolOvergrowth from "../pool/overgrowth.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
+import _poolParadoxZone from "../pool/paradox-zone.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
@@ -453,6 +455,7 @@ import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
 import _poolTorstenFounderOfBenalia from "../pool/torsten-founder-of-benalia.js";
 import _poolTradingPost from "../pool/trading-post.js";
+import _poolTragicFall from "../pool/tragic-fall.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
@@ -665,6 +668,7 @@ const shard: CardShard = {
     _poolErodedCanyon,
     _poolErrantAndGiada,
     _poolEssenceFlux,
+    _poolEssencePulse,
     _poolEtchedCornfield,
     _poolEternalWarrior,
     _poolEtherealInvestigator,
@@ -848,6 +852,7 @@ const shard: CardShard = {
     _poolOvergrowth,
     _poolPainDistributor,
     _poolPalladiumMyr,
+    _poolParadoxZone,
     _poolPardicCollaborator,
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
@@ -994,6 +999,7 @@ const shard: CardShard = {
     _poolTophHardheadedTeacher,
     _poolTorstenFounderOfBenalia,
     _poolTradingPost,
+    _poolTragicFall,
     _poolTreeOfPerdition,
     _poolTriplicateTitan,
     _poolTroopOfPonies,

@@ -99,6 +99,7 @@ import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
+import _poolDiscipleOfTheSun from "../pool/disciple-of-the-sun.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
@@ -150,6 +151,7 @@ import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolForTheEmperor from "../pool/for-the-emperor.js";
 import _poolFoundingTheThirdPath from "../pool/founding-the-third-path.js";
+import _poolFoundryHelix from "../pool/foundry-helix.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
@@ -160,6 +162,7 @@ import _poolGeistflame from "../pool/geistflame.js";
 import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.js";
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
+import _poolGeyadroneDihada from "../pool/geyadrone-dihada.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
 import _poolGitaxianRaptor from "../pool/gitaxian-raptor.js";
@@ -354,6 +357,7 @@ import _poolSear from "../pool/sear.js";
 import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
+import _poolSequenceEngine from "../pool/sequence-engine.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
@@ -599,6 +603,7 @@ const shard: CardShard = {
     _poolDecreeOfPain,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
+    _poolDiscipleOfTheSun,
     _poolDismissiveDenial,
     _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,
@@ -650,6 +655,7 @@ const shard: CardShard = {
     _poolFootMystic,
     _poolForTheEmperor,
     _poolFoundingTheThirdPath,
+    _poolFoundryHelix,
     _poolFracturedRealm,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
@@ -660,6 +666,7 @@ const shard: CardShard = {
     _poolGeneralTraagHeartOfStone,
     _poolGerrardsBattleCry,
     _poolGetThePoint,
+    _poolGeyadroneDihada,
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
     _poolGitaxianRaptor,
@@ -854,6 +861,7 @@ const shard: CardShard = {
     _poolSeedSuture,
     _poolSelesnyaCharm,
     _poolSenateGuildmage,
+    _poolSequenceEngine,
     _poolSeraphSanctuary,
     _poolSerpentineAmbush,
     _poolShackleSlinger,

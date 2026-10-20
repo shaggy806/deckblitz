@@ -130,6 +130,7 @@ import _poolFinFangFoom from "../pool/fin-fang-foom.js";
 import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
 import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
+import _poolFlayEssence from "../pool/flay-essence.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
 import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
@@ -290,6 +291,7 @@ import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
+import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
@@ -385,6 +387,7 @@ import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
 import _poolSoldOut from "../pool/sold-out.js";
 import _poolSoulGuideGryff from "../pool/soul-guide-gryff.js";
+import _poolSoulOfMigration from "../pool/soul-of-migration.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
 import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
@@ -652,6 +655,7 @@ const shard: CardShard = {
     _poolFinalWordPhantom,
     _poolFirstResponder,
     _poolFlamebornViron,
+    _poolFlayEssence,
     _poolFleshBurrower,
     _poolFlourishingBloomKin,
     _poolFloweringOfTheWhiteTree,
@@ -812,6 +816,7 @@ const shard: CardShard = {
     _poolOverzealousMuscle,
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
+    _poolPhantasmalDreadmaw,
     _poolPitilessCarnage,
     _poolPlagueWind,
     _poolPlunderTheTrollshaws,
@@ -907,6 +912,7 @@ const shard: CardShard = {
     _poolSokkasSwordTraining,
     _poolSoldOut,
     _poolSoulGuideGryff,
+    _poolSoulOfMigration,
     _poolSoulSnare,
     _poolSoulsOfTheLost,
     _poolSouredSprings,

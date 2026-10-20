@@ -104,11 +104,13 @@ section keeps only what to do next.
   Commander set and Crimson Vow Commander, on reconfigure; batch 107 Innistrad: Crimson Vow, on
   training, exploit and cleave; batch 108 Innistrad: Midnight Hunt and its Commander set, on coven
   and day/night; batch 109 Adventures in the Forgotten Realms and its Commander set, on the three
-  Forgotten Realms dungeons and rule 101.4's "each player chooses, then all act"); **next, Modern
-  Horizons 2 and Commander 2021** (MH2, C21 — `npm run cards:sets -w engine -- --next 60`).
-  Forgotten Realms' most shared blocks: pack tactics (`keyword:pack-tactics`, 6 — the attackers'
-  total power as declared) and "roll two dice and choose a result" (`decision:choose-roll-result`,
-  4 — the Endeavors).
+  Forgotten Realms dungeons and rule 101.4's "each player chooses, then all act"; batch 110 Modern
+  Horizons 2 and Commander 2021, on madness); **next, Strixhaven: School of Mages** (STX —
+  `npm run cards:sets -w engine -- --next 60`). Modern Horizons 2's most shared blocks: "you've
+  discarded a card this turn" (`stat:cards-discarded-this-turn`, 4 — Gilt-Blade Prowler,
+  Recalibrate, Dihada's Ploy, Asmoranomardicadaistinaculdacar), entwine (`keyword:entwine`, 2),
+  "remove X counters" as a cost (`cost:remove-x-counters-cost`, 2) and "a land that could produce
+  {C}" (`filter:land-could-produce-mana-type`, 2).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
   declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
   Aradesh.

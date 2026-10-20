@@ -23,6 +23,7 @@ import _poolAnabaBodyguard from "../pool/anaba-bodyguard.js";
 import _poolAnimistsMight from "../pool/animists-might.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
+import _poolArcboundTracker from "../pool/arcbound-tracker.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
@@ -139,6 +140,7 @@ import _poolDormantGrove from "../pool/dormant-grove.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
+import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
@@ -165,6 +167,7 @@ import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
 import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
+import _poolFlametongueYearling from "../pool/flametongue-yearling.js";
 import _poolFlamingFistOfficer from "../pool/flaming-fist-officer.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
@@ -251,6 +254,7 @@ import _poolKeepSafe from "../pool/keep-safe.js";
 import _poolKellanTheKid from "../pool/kellan-the-kid.js";
 import _poolKhenraEternal from "../pool/khenra-eternal.js";
 import _poolKioraSovereignOfTheDeep from "../pool/kiora-sovereign-of-the-deep.js";
+import _poolKnightedMyr from "../pool/knighted-myr.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
@@ -334,6 +338,7 @@ import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
+import _poolReinterpret from "../pool/reinterpret.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
@@ -416,6 +421,7 @@ import _poolStormFront from "../pool/storm-front.js";
 import _poolStorytellerPixie from "../pool/storyteller-pixie.js";
 import _poolStudyHall from "../pool/study-hall.js";
 import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
+import _poolSuddenEdict from "../pool/sudden-edict.js";
 import _poolSugarRush from "../pool/sugar-rush.js";
 import _poolSunscorchedDesert from "../pool/sunscorched-desert.js";
 import _poolSuperStrength from "../pool/super-strength.js";
@@ -538,6 +544,7 @@ const shard: CardShard = {
     _poolAnimistsMight,
     _poolAphettoGrifter,
     _poolArcboundCrusher,
+    _poolArcboundTracker,
     _poolArchangelOfThune,
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
@@ -654,6 +661,7 @@ const shard: CardShard = {
     _poolDragonclawStrike,
     _poolDragonkinBerserker,
     _poolDragonsPresence,
+    _poolDreyKeeper,
     _poolDryadsFavor,
     _poolDuskLegionSergeant,
     _poolDuskdaleWurm,
@@ -680,6 +688,7 @@ const shard: CardShard = {
     _poolFiligreeSages,
     _poolFinneasAceArcher,
     _poolFireNavyTrebuchet,
+    _poolFlametongueYearling,
     _poolFlamingFistOfficer,
     _poolFlawlessManeuver,
     _poolFleshlessGladiator,
@@ -766,6 +775,7 @@ const shard: CardShard = {
     _poolKellanTheKid,
     _poolKhenraEternal,
     _poolKioraSovereignOfTheDeep,
+    _poolKnightedMyr,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
     _poolLeapingMaster,
@@ -849,6 +859,7 @@ const shard: CardShard = {
     _poolRavenousIntruder,
     _poolRecklessPangolin,
     _poolRefurbishedFamiliar,
+    _poolReinterpret,
     _poolRememberTheFallen,
     _poolRepelCalamity,
     _poolReshape,
@@ -931,6 +942,7 @@ const shard: CardShard = {
     _poolStorytellerPixie,
     _poolStudyHall,
     _poolSuburbanSanctuary,
+    _poolSuddenEdict,
     _poolSugarRush,
     _poolSunscorchedDesert,
     _poolSuperStrength,

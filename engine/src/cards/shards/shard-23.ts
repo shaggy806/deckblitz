@@ -32,6 +32,7 @@ import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
 import _poolBalustradeWurm from "../pool/balustrade-wurm.js";
 import _poolBanishToAnotherUniverse from "../pool/banish-to-another-universe.js";
+import _poolBarbedSpike from "../pool/barbed-spike.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBasilicaStalker from "../pool/basilica-stalker.js";
@@ -66,11 +67,13 @@ import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBorrowing100000Arrows from "../pool/borrowing-100-000-arrows.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
 import _poolBreatheYourLast from "../pool/breathe-your-last.js";
+import _poolBreathlessKnight from "../pool/breathless-knight.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
 import _poolBroodheartEngine from "../pool/broodheart-engine.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
 import _poolButterburBreeInnkeeper from "../pool/butterbur-bree-innkeeper.js";
+import _poolCabalInitiate from "../pool/cabal-initiate.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
 import _poolCartographersCompanion from "../pool/cartographers-companion.js";
@@ -173,6 +176,7 @@ import _poolGlowingAnemone from "../pool/glowing-anemone.js";
 import _poolGoHogWild from "../pool/go-hog-wild.js";
 import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
+import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
@@ -356,6 +360,7 @@ import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
+import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -387,6 +392,7 @@ import _poolSkylineDespot from "../pool/skyline-despot.js";
 import _poolSlashOfLight from "../pool/slash-of-light.js";
 import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
+import _poolSlyInstigator from "../pool/sly-instigator.js";
 import _poolSmash from "../pool/smash.js";
 import _poolSnowmeltStag from "../pool/snowmelt-stag.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
@@ -403,6 +409,7 @@ import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
+import _poolSteelDromedary from "../pool/steel-dromedary.js";
 import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
 import _poolStormHerd from "../pool/storm-herd.js";
@@ -540,6 +547,7 @@ const shard: CardShard = {
     _poolBackInTown,
     _poolBalustradeWurm,
     _poolBanishToAnotherUniverse,
+    _poolBarbedSpike,
     _poolBarkformHarvester,
     _poolBarrelsOfBlastingJelly,
     _poolBasilicaStalker,
@@ -574,11 +582,13 @@ const shard: CardShard = {
     _poolBorrowing100000Arrows,
     _poolBrasssBounty,
     _poolBreatheYourLast,
+    _poolBreathlessKnight,
     _poolBreenaTheDemagogue,
     _poolBroodheartEngine,
     _poolBurstLightning,
     _poolBushyBodyguard,
     _poolButterburBreeInnkeeper,
+    _poolCabalInitiate,
     _poolCapashenStandard,
     _poolCarmenCruelSkymarcher,
     _poolCartographersCompanion,
@@ -681,6 +691,7 @@ const shard: CardShard = {
     _poolGoHogWild,
     _poolGoblinEngineer,
     _poolGoblinMatron,
+    _poolGoblinTraprunner,
     _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,
@@ -864,6 +875,7 @@ const shard: CardShard = {
     _poolRottedHulk,
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
+    _poolSanctuaryRaptor,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
@@ -895,6 +907,7 @@ const shard: CardShard = {
     _poolSlashOfLight,
     _poolSlipperyBogbonder,
     _poolSlobadGoblinTinkerer,
+    _poolSlyInstigator,
     _poolSmash,
     _poolSnowmeltStag,
     _poolSoddenVerdure,
@@ -911,6 +924,7 @@ const shard: CardShard = {
     _poolSpiderwigBoggart,
     _poolSporecapSpider,
     _poolSpringbloomDruid,
+    _poolSteelDromedary,
     _poolStensiaUprising,
     _poolStitchersGraft,
     _poolStormHerd,

@@ -145,6 +145,7 @@ import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
+import _poolFaeOffering from "../pool/fae-offering.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
 import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
 import _poolFamilysFavor from "../pool/familys-favor.js";
@@ -274,6 +275,7 @@ import _poolMabel from "../pool/mabel.js";
 import _poolMadcapSkills from "../pool/madcap-skills.js";
 import _poolMageSlayer from "../pool/mage-slayer.js";
 import _poolMagefireWings from "../pool/magefire-wings.js";
+import _poolMagusOfTheBridge from "../pool/magus-of-the-bridge.js";
 import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
@@ -486,6 +488,7 @@ import _poolVampiricSpirit from "../pool/vampiric-spirit.js";
 import _poolVaultguardTrooper from "../pool/vaultguard-trooper.js";
 import _poolVectorImperialCapital from "../pool/vector-imperial-capital.js";
 import _poolVengefulVampire from "../pool/vengeful-vampire.js";
+import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
 import _poolVigilance from "../pool/vigilance.js";
 import _poolVillageElder from "../pool/village-elder.js";
 import _poolViridianCorrupter from "../pool/viridian-corrupter.js";
@@ -679,6 +682,7 @@ const shard: CardShard = {
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
+    _poolFaeOffering,
     _poolFalkenrathNoble,
     _poolFallajiArchaeologist,
     _poolFamilysFavor,
@@ -808,6 +812,7 @@ const shard: CardShard = {
     _poolMadcapSkills,
     _poolMageSlayer,
     _poolMagefireWings,
+    _poolMagusOfTheBridge,
     _poolMagusOfTheCandelabra,
     _poolMakeYourMove,
     _poolMakindiSliderunner,
@@ -1020,6 +1025,7 @@ const shard: CardShard = {
     _poolVaultguardTrooper,
     _poolVectorImperialCapital,
     _poolVengefulVampire,
+    _poolViashinoLashclaw,
     _poolVigilance,
     _poolVillageElder,
     _poolViridianCorrupter,

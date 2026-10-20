@@ -100,6 +100,7 @@ import _poolCovertOperative from "../pool/covert-operative.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
 import _poolCrystalCarapace from "../pool/crystal-carapace.js";
 import _poolCrystalVein from "../pool/crystal-vein.js";
+import _poolDakkonShadowSlayer from "../pool/dakkon-shadow-slayer.js";
 import _poolDarkwatchElves from "../pool/darkwatch-elves.js";
 import _poolDauntlessCathar from "../pool/dauntless-cathar.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
@@ -129,6 +130,7 @@ import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
+import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
@@ -188,6 +190,7 @@ import _poolGriptide from "../pool/griptide.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
+import _poolHardEvidence from "../pool/hard-evidence.js";
 import _poolHardenedScales from "../pool/hardened-scales.js";
 import _poolHarmonicSliver from "../pool/harmonic-sliver.js";
 import _poolHarriedDronesmith from "../pool/harried-dronesmith.js";
@@ -271,6 +274,7 @@ import _poolMouserAttack from "../pool/mouser-attack.js";
 import _poolMudbuttonTorchrunner from "../pool/mudbutton-torchrunner.js";
 import _poolMyojinOfRoaringBlades from "../pool/myojin-of-roaring-blades.js";
 import _poolMysteryKey from "../pool/mystery-key.js";
+import _poolMysticRedaction from "../pool/mystic-redaction.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
@@ -365,9 +369,11 @@ import _poolScaleOfChissGoria from "../pool/scale-of-chiss-goria.js";
 import _poolScionOfStygia from "../pool/scion-of-stygia.js";
 import _poolScourForScrap from "../pool/scour-for-scrap.js";
 import _poolScourFromExistence from "../pool/scour-from-existence.js";
+import _poolScourTheDesert from "../pool/scour-the-desert.js";
 import _poolScouringSwarm from "../pool/scouring-swarm.js";
 import _poolScoutTheCity from "../pool/scout-the-city.js";
 import _poolScrybRanger from "../pool/scryb-ranger.js";
+import _poolScuttletide from "../pool/scuttletide.js";
 import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
@@ -428,6 +434,7 @@ import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
 import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
+import _poolTerritorialKavu from "../pool/territorial-kavu.js";
 import _poolTestamentBearer from "../pool/testament-bearer.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThaumatog from "../pool/thaumatog.js";
@@ -613,6 +620,7 @@ const shard: CardShard = {
     _poolCrudeRampart,
     _poolCrystalCarapace,
     _poolCrystalVein,
+    _poolDakkonShadowSlayer,
     _poolDarkwatchElves,
     _poolDauntlessCathar,
     _poolDeadlyRecluse,
@@ -642,6 +650,7 @@ const shard: CardShard = {
     _poolEntropicDecay,
     _poolErrantStreetArtist,
     _poolEshkiDragonclaw,
+    _poolEtheriumSpinner,
     _poolEvolutionCharm,
     _poolExclude,
     _poolExcoriate,
@@ -701,6 +710,7 @@ const shard: CardShard = {
     _poolGuardianGladewalker,
     _poolHamperingSnare,
     _poolHarbinVanguardAviator,
+    _poolHardEvidence,
     _poolHardenedScales,
     _poolHarmonicSliver,
     _poolHarriedDronesmith,
@@ -784,6 +794,7 @@ const shard: CardShard = {
     _poolMudbuttonTorchrunner,
     _poolMyojinOfRoaringBlades,
     _poolMysteryKey,
+    _poolMysticRedaction,
     _poolMysticalTutor,
     _poolMystifyingMaze,
     _poolNamoraTheSeaQueen,
@@ -878,9 +889,11 @@ const shard: CardShard = {
     _poolScionOfStygia,
     _poolScourForScrap,
     _poolScourFromExistence,
+    _poolScourTheDesert,
     _poolScouringSwarm,
     _poolScoutTheCity,
     _poolScrybRanger,
+    _poolScuttletide,
     _poolScuzzbackScrounger,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
@@ -941,6 +954,7 @@ const shard: CardShard = {
     _poolTaxiDriver,
     _poolTemurBattleRage,
     _poolTergridGodOfFright,
+    _poolTerritorialKavu,
     _poolTestamentBearer,
     _poolTezzeretArtificeMaster,
     _poolThaumatog,

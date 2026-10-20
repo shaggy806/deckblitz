@@ -11,6 +11,7 @@ import _poolAetherHelix from "../pool/aether-helix.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
 import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
 import _poolAlelaCunningConqueror from "../pool/alela-cunning-conqueror.js";
+import _poolAltarOfTheGoyf from "../pool/altar-of-the-goyf.js";
 import _poolAmazingSpiderMan from "../pool/amazing-spider-man.js";
 import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
@@ -56,6 +57,7 @@ import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
+import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
@@ -232,6 +234,7 @@ import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
+import _poolLandscaperColos from "../pool/landscaper-colos.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
@@ -367,6 +370,7 @@ import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
+import _poolSkybladesBoon from "../pool/skyblades-boon.js";
 import _poolSlashOfTalons from "../pool/slash-of-talons.js";
 import _poolSlaughterTheStrong from "../pool/slaughter-the-strong.js";
 import _poolSlimebind from "../pool/slimebind.js";
@@ -509,6 +513,7 @@ const shard: CardShard = {
     _poolAjanisChosen,
     _poolAlacrianJaguar,
     _poolAlelaCunningConqueror,
+    _poolAltarOfTheGoyf,
     _poolAmazingSpiderMan,
     _poolAngelicChorus,
     _poolAngelsGrace,
@@ -554,6 +559,7 @@ const shard: CardShard = {
     _poolBruteStrength,
     _poolBucolicRanch,
     _poolBurningSunCavalry,
+    _poolCaprichrome,
     _poolCarnageTyrant,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
@@ -730,6 +736,7 @@ const shard: CardShard = {
     _poolKuldothaCackler,
     _poolLampadOfDeathsVigil,
     _poolLance,
+    _poolLandscaperColos,
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,
     _poolLavaDart,
@@ -865,6 +872,7 @@ const shard: CardShard = {
     _poolSigiledSkink,
     _poolSisterHospitaller,
     _poolSkyTerror,
+    _poolSkybladesBoon,
     _poolSlashOfTalons,
     _poolSlaughterTheStrong,
     _poolSlimebind,

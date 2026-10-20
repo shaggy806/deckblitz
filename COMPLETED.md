@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Modern Horizons 2 and Commander 2021, whole** (batch 110): their last 157 cards, 109
+  authored, with madness built (rule 702.35 — every discard through one `discardCards`, a card
+  with madness exiled instead and its trigger a `cast-now` for the madness cost), plus 4 older
+  cards it unblocked (Necrogoyf, Markov Baron, Stensia Masquerade, Call to the Netherworld); 48
+  blocked. "Attacks you or a planeswalker you control" no longer fires on a battle you protect
+  (`attackingYou`; Kazuul's "if you're the defending player" is `youDefend`, rule 508.5)
+  (2026-10-20).
 - **Adventures in the Forgotten Realms and Forgotten Realms Commander, whole** (batch 109): their
   last 185 cards, 119 authored, with the three Forgotten Realms dungeons built (Lost Mine of
   Phandelver, Dungeon of the Mad Mage, Tomb of Annihilation — `sacrifice`'s `andEach`,

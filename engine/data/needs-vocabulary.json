@@ -8447,6 +8447,85 @@
   "effect:choose-half-of-permanents": {
    "family": "decision:choose-from-zone-extensions",
    "example": "Split the Party"
+  },
+  "effect:player-effect-play-lands-from-graveyard": {
+   "family": "effect:temporary-player-effect",
+   "example": "Gaea's Will"
+  },
+  "condition:you-more-life-than-an-opponent": {
+   "family": "condition:opponent-more-cards-in-hand",
+   "example": "Glorious Enforcer: the mirror of condition:opponent-more-life"
+  },
+  "mechanic:trample-over-planeswalkers": {
+   "example": "Thrasta, Tempest's Roar"
+  },
+  "effect:amount-graveyard-total-mana-value": {
+   "family": "effect:amount-aggregate",
+   "example": "Inferno Project: AggregateSpec sums only battlefield permanents"
+  },
+  "amount:cards-revealed-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Audacious Reshapers: reveal-until doesn't count what it revealed"
+  },
+  "zone:impulse-during-your-next-turn-only": {
+   "family": "zone:impulse-permission-options",
+   "example": "Galvanic Relay"
+  },
+  "replacement:counter-replacement-by-modular-ability": {
+   "family": "replacement:new-event-replacements",
+   "example": "Zabaz, the Glimmerwasp"
+  },
+  "amount:cards-exiled-with-delve": {
+   "family": "effect:this-way-results",
+   "example": "Murktide Regent: delve's exiled cards aren't linked to the spell"
+  },
+  "mechanic:forecast": {
+   "example": "Piercing Rays: no cost reveals the card from hand"
+  },
+  "filter:land-could-produce-mana-type": {
+   "example": "Obsidian Charmaw, Break the Ice: a land that could produce {C}"
+  },
+  "effect:player-hexproof-until-your-next-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Blossoming Calm"
+  },
+  "effect:conditional-exact-mode-count": {
+   "example": "Prophetic Titan: 'choose both instead' with delirium, not rechecked"
+  },
+  "effect:protection-from-player-for-permanent": {
+   "example": "Guardian Archon"
+  },
+  "static:escapes-with-counter-choice": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Tizerus Charger"
+  },
+  "effect:copy-spell-for-each-permanent-or-player-it-could-target": {
+   "family": "effect:copy-ability",
+   "example": "Radiant Performer"
+  },
+  "zone:cast-chosen-card-exiled-this-way": {
+   "family": "zone:impulse-permission-options",
+   "example": "Author of Shadows: choose one exiled card, cast it while exiled, spend mana as any color"
+  },
+  "trigger:counters-put-by-opponent": {
+   "family": "trigger:counters-put",
+   "example": "Bold Plagiarist"
+  },
+  "effect:put-same-counters-as-trigger": {
+   "family": "trigger:counters-put",
+   "example": "Bold Plagiarist"
+  },
+  "keyword:artifact-landwalk": {
+   "family": "keyword:landwalk",
+   "example": "Vectis Gloves"
+  },
+  "cost:madness-nonmana-cost": {
+   "family": "keyword:madness",
+   "example": "Shadowgrange Archfiend: Madness—Pay 8 life"
+  },
+  "trigger:enchanted-player-draws": {
+   "family": "mechanic:curses",
+   "example": "Curse of Fool's Wisdom"
   }
  }
 }

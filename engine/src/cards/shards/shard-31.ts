@@ -66,6 +66,7 @@ import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
+import _poolCaptainRipleyVance from "../pool/captain-ripley-vance.js";
 import _poolCaptainsCall from "../pool/captains-call.js";
 import _poolCarefulCultivation from "../pool/careful-cultivation.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
@@ -114,6 +115,7 @@ import _poolDesolateMire from "../pool/desolate-mire.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
+import _poolDiamondLion from "../pool/diamond-lion.js";
 import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
 import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
@@ -405,6 +407,7 @@ import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
+import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
@@ -454,6 +457,7 @@ import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
 import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
 import _poolTroublemakerOuphe from "../pool/troublemaker-ouphe.js";
+import _poolTrudgeGarden from "../pool/trudge-garden.js";
 import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
@@ -582,6 +586,7 @@ const shard: CardShard = {
     _poolBrotherhoodAmbushers,
     _poolCampusCrier,
     _poolCandelabraOfTawnos,
+    _poolCaptainRipleyVance,
     _poolCaptainsCall,
     _poolCarefulCultivation,
     _poolCargoShip,
@@ -630,6 +635,7 @@ const shard: CardShard = {
     _poolDevouringSugarmaw,
     _poolDewdropCure,
     _poolDiabolicMachine,
+    _poolDiamondLion,
     _poolDiffusionSliver,
     _poolDimirHouseGuard,
     _poolDinotomaton,
@@ -921,6 +927,7 @@ const shard: CardShard = {
     _poolSparringDummy,
     _poolSpelunking,
     _poolSpinelessThug,
+    _poolSpreadingInsurrection,
     _poolSpriteDragon,
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,
@@ -970,6 +977,7 @@ const shard: CardShard = {
     _poolTreasureDredger,
     _poolTreeOfRedemption,
     _poolTroublemakerOuphe,
+    _poolTrudgeGarden,
     _poolTurncoatKunoichi,
     _poolTuvasaTheSunlit,
     _poolTweeze,

@@ -845,9 +845,10 @@
     {
       "name": "Shadowgrange Archfiend",
       "needs": [
-        "new:madness"
+        "cost:madness-nonmana-cost",
+        "effect:sacrifice-greatest-among"
       ],
-      "why": "madness unmodeled; also greatest-power edict with lifegain from sacrificed power"
+      "why": "madness is built, but its cost here is 'Pay 8 life', not mana; also a greatest-power edict with lifegain from the sacrificed power"
     },
     {
       "name": "Thoughtseize",

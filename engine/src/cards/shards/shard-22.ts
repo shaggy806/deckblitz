@@ -147,6 +147,7 @@ import _poolFarsightRitual from "../pool/farsight-ritual.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
 import _poolFelidarSavior from "../pool/felidar-savior.js";
 import _poolFellStinger from "../pool/fell-stinger.js";
+import _poolFieryEncore from "../pool/fiery-encore.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
@@ -243,6 +244,7 @@ import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
+import _poolMasterOfDeath from "../pool/master-of-death.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
 import _poolMeldwebStrider from "../pool/meldweb-strider.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
@@ -300,6 +302,7 @@ import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
+import _poolPiruTheVolatile from "../pool/piru-the-volatile.js";
 import _poolPlatedWurm from "../pool/plated-wurm.js";
 import _poolPlumeveil from "../pool/plumeveil.js";
 import _poolPollutedDelta from "../pool/polluted-delta.js";
@@ -351,6 +354,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
+import _poolSearchThePremises from "../pool/search-the-premises.js";
 import _poolSeedpodSquire from "../pool/seedpod-squire.js";
 import _poolSeekTheHeart from "../pool/seek-the-heart.js";
 import _poolSeekersFolly from "../pool/seekers-folly.js";
@@ -656,6 +660,7 @@ const shard: CardShard = {
     _poolFearOfImpostors,
     _poolFelidarSavior,
     _poolFellStinger,
+    _poolFieryEncore,
     _poolFightingDrake,
     _poolFirebirdBlazingRanger,
     _poolFlickerOfFate,
@@ -752,6 +757,7 @@ const shard: CardShard = {
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,
     _poolMassManipulation,
+    _poolMasterOfDeath,
     _poolMazirekKraulDeathPriest,
     _poolMeldwebStrider,
     _poolMidnightMayhem,
@@ -809,6 +815,7 @@ const shard: CardShard = {
     _poolPhyrexianAtlas,
     _poolPillarOfLight,
     _poolPillarfieldOx,
+    _poolPiruTheVolatile,
     _poolPlatedWurm,
     _poolPlumeveil,
     _poolPollutedDelta,
@@ -860,6 +867,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScreechingHarpy,
     _poolSealOfStrength,
+    _poolSearchThePremises,
     _poolSeedpodSquire,
     _poolSeekTheHeart,
     _poolSeekersFolly,

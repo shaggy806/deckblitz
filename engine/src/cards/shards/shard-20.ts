@@ -257,6 +257,7 @@ import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
+import _poolLightningSpear from "../pool/lightning-spear.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
 import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
@@ -417,6 +418,7 @@ import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
+import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
 import _poolStargaze from "../pool/stargaze.js";
 import _poolStarnheimAspirant from "../pool/starnheim-aspirant.js";
@@ -482,6 +484,7 @@ import _poolTolarianGeyser from "../pool/tolarian-geyser.js";
 import _poolTollsOfWar from "../pool/tolls-of-war.js";
 import _poolTomeBlast from "../pool/tome-blast.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
+import _poolTourachsCanticle from "../pool/tourachs-canticle.js";
 import _poolTrailOfCrumbs from "../pool/trail-of-crumbs.js";
 import _poolTrainingCenter from "../pool/training-center.js";
 import _poolTraumaticVisions from "../pool/traumatic-visions.js";
@@ -527,6 +530,7 @@ import _poolWrench from "../pool/wrench.js";
 import _poolWretchedAnurid from "../pool/wretched-anurid.js";
 import _poolWrithingNecromass from "../pool/writhing-necromass.js";
 import _poolYargleGoliathOfOtaria from "../pool/yargle-goliath-of-otaria.js";
+import _poolYoungNecromancer from "../pool/young-necromancer.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
 import _poolZephyrNet from "../pool/zephyr-net.js";
@@ -799,6 +803,7 @@ const shard: CardShard = {
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,
     _poolLifesLegacy,
+    _poolLightningSpear,
     _poolLochKorrigan,
     _poolLongGoodbye,
     _poolLongLakeNuisance,
@@ -959,6 +964,7 @@ const shard: CardShard = {
     _poolSpearbreakerBehemoth,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,
+    _poolSquirrelSanctuary,
     _poolSquirrelanoids,
     _poolStargaze,
     _poolStarnheimAspirant,
@@ -1024,6 +1030,7 @@ const shard: CardShard = {
     _poolTollsOfWar,
     _poolTomeBlast,
     _poolTormodsCrypt,
+    _poolTourachsCanticle,
     _poolTrailOfCrumbs,
     _poolTrainingCenter,
     _poolTraumaticVisions,
@@ -1069,6 +1076,7 @@ const shard: CardShard = {
     _poolWretchedAnurid,
     _poolWrithingNecromass,
     _poolYargleGoliathOfOtaria,
+    _poolYoungNecromancer,
     _poolZagothCrystal,
     _poolZellDincht,
     _poolZephyrNet,

@@ -151,6 +151,7 @@ import _poolExplosion from "../pool/explosion.js";
 import _poolExposeToDaylight from "../pool/expose-to-daylight.js";
 import _poolExultantCultist from "../pool/exultant-cultist.js";
 import _poolFaithlessLooting from "../pool/faithless-looting.js";
+import _poolFaithlessSalvaging from "../pool/faithless-salvaging.js";
 import _poolFearfulVillager from "../pool/fearful-villager.js";
 import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
@@ -454,6 +455,8 @@ import _poolThunderousDebut from "../pool/thunderous-debut.js";
 import _poolTiamatsFanatics from "../pool/tiamats-fanatics.js";
 import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
+import _poolTimelessDragon from "../pool/timeless-dragon.js";
+import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
 import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
@@ -672,6 +675,7 @@ const shard: CardShard = {
     _poolExposeToDaylight,
     _poolExultantCultist,
     _poolFaithlessLooting,
+    _poolFaithlessSalvaging,
     _poolFearfulVillager,
     _poolFearlessHalberdier,
     _poolFearsomeWerewolf,
@@ -975,6 +979,8 @@ const shard: CardShard = {
     _poolTiamatsFanatics,
     _poolTidusBlitzballStar,
     _poolTimberlandRuins,
+    _poolTimelessDragon,
+    _poolTivashGloomSummoner,
     _poolTooGreedilyTooDeep,
     _poolToothOfRamos,
     _poolTorchDrake,
