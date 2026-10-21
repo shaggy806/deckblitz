@@ -20187,6 +20187,30 @@ export class Game {
         const host = this.state.objects[source]?.attachedTo;
         return host !== null && host !== undefined && this.state.objects[host]?.zone === "battlefield" ? host : undefined;
       },
+      attachedHost: () => {
+        // "Enchanted creature" as this resolves: what the source is attached
+        // to now — or, the source gone (or back as a new object), the one it
+        // was last attached to, if that's still here in the same stint
+        // (Starlit Mantle's and Wings of Hubris's rulings; rule 400.7).
+        const object = this.state.objects[source];
+        const here =
+          opts.sourceLost !== true &&
+          object?.zone === "battlefield" &&
+          (refs.source === undefined || object.zoneChangeCount === refs.source);
+        let host: ObjectId | null | undefined;
+        let stint: number | undefined;
+        if (here) {
+          host = object.attachedTo;
+        } else {
+          const departed = departedSource();
+          host = departed?.attachedTo;
+          stint = departed?.attachedToStint;
+        }
+        if (host === null || host === undefined) return undefined;
+        const on = this.state.objects[host];
+        if (on?.zone !== "battlefield" || (stint !== undefined && on.zoneChangeCount !== stint)) return undefined;
+        return host;
+      },
       lethalDamageTo: (target, from) => {
         const by = damageSource(from);
         const object = this.state.objects[target];
@@ -33632,7 +33656,12 @@ export class Game {
       ...(object.faceDown !== undefined ? { faceDown: true } : {}),
       enchantedByController: attached.enchantedByController,
       ...(attached.enchantedBy.length > 0 ? { enchantedBy: attached.enchantedBy } : {}),
-      ...(object.attachedTo !== null ? { attachedTo: object.attachedTo } : {}),
+      ...(object.attachedTo !== null
+        ? {
+            attachedTo: object.attachedTo,
+            attachedToStint: this.state.objects[object.attachedTo]?.zoneChangeCount ?? 0,
+          }
+        : {}),
       ...(object.attachedToPlayer !== undefined ? { attachedToPlayer: object.attachedToPlayer } : {}),
       ...(goaders.length > 0 ? { goaders: [...goaders] } : {}),
       ...(object.suspectedAt !== undefined ? { suspected: true } : {}),

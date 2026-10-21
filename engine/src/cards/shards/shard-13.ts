@@ -425,6 +425,7 @@ import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
 import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
+import _poolStarlitMantle from "../pool/starlit-mantle.js";
 import _poolSteadfastSentry from "../pool/steadfast-sentry.js";
 import _poolStirge from "../pool/stirge.js";
 import _poolStitchedAssistant from "../pool/stitched-assistant.js";
@@ -963,6 +964,7 @@ const shard: CardShard = {
     _poolStaggeringSize,
     _poolStallOut,
     _poolStampedingRhino,
+    _poolStarlitMantle,
     _poolSteadfastSentry,
     _poolStirge,
     _poolStitchedAssistant,

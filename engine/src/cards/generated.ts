@@ -772,6 +772,7 @@ import _poolAshnodsIntervention from "./pool/ashnods-intervention.js";
 import _poolAshrootAnimist from "./pool/ashroot-animist.js";
 import _poolAspectOfGorgon from "./pool/aspect-of-gorgon.js";
 import _poolAspectOfLamprey from "./pool/aspect-of-lamprey.js";
+import _poolAspectOfManticore from "./pool/aspect-of-manticore.js";
 import _poolAsphodelWanderer from "./pool/asphodel-wanderer.js";
 import _poolAsphyxiate from "./pool/asphyxiate.js";
 import _poolAspirantsAscent from "./pool/aspirants-ascent.js";
@@ -3817,6 +3818,7 @@ import _poolDreadSummons from "./pool/dread-summons.js";
 import _poolDreadbore from "./pool/dreadbore.js";
 import _poolDreadedBatCloud from "./pool/dreaded-bat-cloud.js";
 import _poolDreadfeastDemon from "./pool/dreadfeast-demon.js";
+import _poolDreadfulApathy from "./pool/dreadful-apathy.js";
 import _poolDreadfulAsTheStorm from "./pool/dreadful-as-the-storm.js";
 import _poolDreadhordeInvasion from "./pool/dreadhorde-invasion.js";
 import _poolDreadhound from "./pool/dreadhound.js";
@@ -13306,6 +13308,7 @@ import _poolStarkIndustries from "./pool/stark-industries.js";
 import _poolStarlightInvoker from "./pool/starlight-invoker.js";
 import _poolStarlingAerialAlly from "./pool/starling-aerial-ally.js";
 import _poolStarlitAngel from "./pool/starlit-angel.js";
+import _poolStarlitMantle from "./pool/starlit-mantle.js";
 import _poolStarlitSoothsayer from "./pool/starlit-soothsayer.js";
 import _poolStarnheimAspirant from "./pool/starnheim-aspirant.js";
 import _poolStarnheimCourser from "./pool/starnheim-courser.js";
@@ -15840,6 +15843,7 @@ import _poolWarSpikeChangeling from "./pool/war-spike-changeling.js";
 import _poolWarSqueak from "./pool/war-squeak.js";
 import _poolWarTrainedSlasher from "./pool/war-trained-slasher.js";
 import _poolWarbeastOfGorgoroth from "./pool/warbeast-of-gorgoroth.js";
+import _poolWarbriarBlessing from "./pool/warbriar-blessing.js";
 import _poolWarchanterSkald from "./pool/warchanter-skald.js";
 import _poolWarchiefGiant from "./pool/warchief-giant.js";
 import _poolWarclampMastiff from "./pool/warclamp-mastiff.js";
@@ -16186,6 +16190,7 @@ import _poolWingmantleChaplain from "./pool/wingmantle-chaplain.js";
 import _poolWingnutBatOnTheBelfry from "./pool/wingnut-bat-on-the-belfry.js";
 import _poolWingsOfAesthir from "./pool/wings-of-aesthir.js";
 import _poolWingsOfHope from "./pool/wings-of-hope.js";
+import _poolWingsOfHubris from "./pool/wings-of-hubris.js";
 import _poolWingsOfTheCosmos from "./pool/wings-of-the-cosmos.js";
 import _poolWingshieldAgent from "./pool/wingshield-agent.js";
 import _poolWingspanMentor from "./pool/wingspan-mentor.js";
@@ -17790,6 +17795,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAshrootAnimist,
   _poolAspectOfGorgon,
   _poolAspectOfLamprey,
+  _poolAspectOfManticore,
   _poolAsphodelWanderer,
   _poolAsphyxiate,
   _poolAspirantsAscent,
@@ -20835,6 +20841,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDreadbore,
   _poolDreadedBatCloud,
   _poolDreadfeastDemon,
+  _poolDreadfulApathy,
   _poolDreadfulAsTheStorm,
   _poolDreadhordeInvasion,
   _poolDreadhound,
@@ -30324,6 +30331,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStarlightInvoker,
   _poolStarlingAerialAlly,
   _poolStarlitAngel,
+  _poolStarlitMantle,
   _poolStarlitSoothsayer,
   _poolStarnheimAspirant,
   _poolStarnheimCourser,
@@ -32858,6 +32866,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWarSqueak,
   _poolWarTrainedSlasher,
   _poolWarbeastOfGorgoroth,
+  _poolWarbriarBlessing,
   _poolWarchanterSkald,
   _poolWarchiefGiant,
   _poolWarclampMastiff,
@@ -33204,6 +33213,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWingnutBatOnTheBelfry,
   _poolWingsOfAesthir,
   _poolWingsOfHope,
+  _poolWingsOfHubris,
   _poolWingsOfTheCosmos,
   _poolWingshieldAgent,
   _poolWingspanMentor,
@@ -34821,6 +34831,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ashroot-animist": _poolAshrootAnimist,
   "pool/aspect-of-gorgon": _poolAspectOfGorgon,
   "pool/aspect-of-lamprey": _poolAspectOfLamprey,
+  "pool/aspect-of-manticore": _poolAspectOfManticore,
   "pool/asphodel-wanderer": _poolAsphodelWanderer,
   "pool/asphyxiate": _poolAsphyxiate,
   "pool/aspirants-ascent": _poolAspirantsAscent,
@@ -37866,6 +37877,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dreadbore": _poolDreadbore,
   "pool/dreaded-bat-cloud": _poolDreadedBatCloud,
   "pool/dreadfeast-demon": _poolDreadfeastDemon,
+  "pool/dreadful-apathy": _poolDreadfulApathy,
   "pool/dreadful-as-the-storm": _poolDreadfulAsTheStorm,
   "pool/dreadhorde-invasion": _poolDreadhordeInvasion,
   "pool/dreadhound": _poolDreadhound,
@@ -47355,6 +47367,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/starlight-invoker": _poolStarlightInvoker,
   "pool/starling-aerial-ally": _poolStarlingAerialAlly,
   "pool/starlit-angel": _poolStarlitAngel,
+  "pool/starlit-mantle": _poolStarlitMantle,
   "pool/starlit-soothsayer": _poolStarlitSoothsayer,
   "pool/starnheim-aspirant": _poolStarnheimAspirant,
   "pool/starnheim-courser": _poolStarnheimCourser,
@@ -49889,6 +49902,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/war-squeak": _poolWarSqueak,
   "pool/war-trained-slasher": _poolWarTrainedSlasher,
   "pool/warbeast-of-gorgoroth": _poolWarbeastOfGorgoroth,
+  "pool/warbriar-blessing": _poolWarbriarBlessing,
   "pool/warchanter-skald": _poolWarchanterSkald,
   "pool/warchief-giant": _poolWarchiefGiant,
   "pool/warclamp-mastiff": _poolWarclampMastiff,
@@ -50235,6 +50249,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wingnut-bat-on-the-belfry": _poolWingnutBatOnTheBelfry,
   "pool/wings-of-aesthir": _poolWingsOfAesthir,
   "pool/wings-of-hope": _poolWingsOfHope,
+  "pool/wings-of-hubris": _poolWingsOfHubris,
   "pool/wings-of-the-cosmos": _poolWingsOfTheCosmos,
   "pool/wingshield-agent": _poolWingshieldAgent,
   "pool/wingspan-mentor": _poolWingspanMentor,

@@ -340,9 +340,23 @@
    "tested": true
   },
   {
+   "name": "Warbriar Blessing",
+   "files": [
+    "engine/src/cards/pool/warbriar-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Dreamshaper Shaman",
    "files": [
     "engine/src/cards/pool/dreamshaper-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wings of Hubris",
+   "files": [
+    "engine/src/cards/pool/wings-of-hubris.ts"
    ],
    "tested": true
   },
@@ -364,6 +378,13 @@
    "name": "Taranika, Akroan Veteran",
    "files": [
     "engine/src/cards/pool/taranika-akroan-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starlit Mantle",
+   "files": [
+    "engine/src/cards/pool/starlit-mantle.ts"
    ],
    "tested": true
   },
@@ -483,6 +504,13 @@
    "name": "Grasping Giant",
    "files": [
     "engine/src/cards/pool/grasping-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadful Apathy",
+   "files": [
+    "engine/src/cards/pool/dreadful-apathy.ts"
    ],
    "tested": true
   },
@@ -651,6 +679,13 @@
    "name": "Lagonna-Band Storyteller",
    "files": [
     "engine/src/cards/pool/lagonna-band-storyteller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aspect of Manticore",
+   "files": [
+    "engine/src/cards/pool/aspect-of-manticore.ts"
    ],
    "tested": true
   },
@@ -868,13 +903,6 @@
    "why": "opponents can't cast spells with the same name as the exiled card"
   },
   {
-   "name": "Aspect of Manticore",
-   "needs": [
-    "effect:effect-on-enchanted-permanent"
-   ],
-   "why": "when this enters, enchanted creature gains first strike"
-  },
-  {
    "name": "Atris, Oracle of Half-Truths",
    "needs": [
     "decision:separate-into-piles"
@@ -923,13 +951,6 @@
     "effect:unless-that-player"
    ],
    "why": "each opponent chooses in turn order, then you draw, then all chosen creatures return together"
-  },
-  {
-   "name": "Dreadful Apathy",
-   "needs": [
-    "effect:attached-effect-ref"
-   ],
-   "why": "{2}{W}: exile enchanted creature"
   },
   {
    "name": "Eidolon of Obstruction",
@@ -1100,13 +1121,6 @@
    "why": "if you cycled two or more cards this turn"
   },
   {
-   "name": "Starlit Mantle",
-   "needs": [
-    "effect:attached-effect-ref"
-   ],
-   "why": "when this enters, enchanted creature gains hexproof (last enchanted if the Aura has left)"
-  },
-  {
    "name": "Storm Herald",
    "needs": [
     "effect:return-auras-attached-to-chosen-creatures"
@@ -1147,20 +1161,6 @@
     "decision:x-targets"
    ],
    "why": "up to X target creatures on the becomes-monstrous trigger"
-  },
-  {
-   "name": "Warbriar Blessing",
-   "needs": [
-    "effect:attached-effect-ref"
-   ],
-   "why": "enchanted creature fights up to one target creature (last enchanted if the Aura has left)"
-  },
-  {
-   "name": "Wings of Hubris",
-   "needs": [
-    "effect:attached-effect-ref"
-   ],
-   "why": "the equipped creature (as it last was) becomes unblockable and is sacrificed at the next end step"
   },
   {
    "name": "Yannik, Scavenging Sentinel",

@@ -549,7 +549,17 @@ keyword string — it's a static or triggered ability. See §9–10.
 
 `EffectSpec` (`effects.ts`) is the declarative vocabulary for what a spell or
 ability does on resolution. A `target:` field is an **index into `targets[]`**
-(0-based), or the literal `"source"` where allowed. An `EffectAmount` is a
+(0-based), or the literal `"source"` where allowed. Where it's an
+`EffectTargetRef`, `"attached"` is **"enchanted creature" / "equipped
+creature"** — the permanent the source (an Aura or Equipment) is attached to
+as the effect resolves, or, the source gone, the one it was last attached to
+while that's still the same object (rule 400.7): Starlit Mantle's "enchanted
+creature gains hexproof", Warbriar Blessing's `fight` `a: "attached"`,
+Dreadful Apathy's "exile enchanted creature" (each one's ruling covers the
+Aura leaving first). Not a target. A `delayed-trigger` with `about:
+"attached"` carries that permanent as its one target (Wings of Hubris's
+"sacrifice it at the beginning of the next end step", `sacrifice-target`
+slot 0). `attached-ref.test.ts`. An `EffectAmount` is a
 number, `"x"` (the cast `{X}`), `{ countOf: CardFilter }` — a live count of
 battlefield permanents matching the filter, from the effect's controller's
 view (Scourge of Valkas: `{ countOf: { subtype: "Dragon", controlledBy: "you" } }`;

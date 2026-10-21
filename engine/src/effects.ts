@@ -39,8 +39,14 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 
 /** `"trigger-object"` reads `ResolutionContext.triggerObject` (needed-cards
  * P15 — Exalted's "that creature gets +1/+1", the lone attacker rather than
- * a target or the ability's own source). */
-export type EffectTargetRef = number | "source" | "trigger-object";
+ * a target or the ability's own source). `"attached"` is the permanent the
+ * effect's source — an Aura, Equipment or Fortification — is attached to as
+ * this resolves: "enchanted creature", "equipped creature". With the source
+ * gone from the battlefield, the permanent it was last attached to, if that
+ * one is still there as the same object (the rulings of Starlit Mantle and
+ * Wings of Hubris; rule 400.7); nothing once the host has left or the source
+ * was attached to nothing. Not a target. */
+export type EffectTargetRef = number | "source" | "trigger-object" | "attached";
 /** What a `search-library` searches — see its `zones`. */
 export type SearchZones = "library" | "graveyard" | "library-and-graveyard";
 /**
@@ -2364,8 +2370,11 @@ export type EffectSpec =
        * (Satya, Aetherflux Genius): the delayed ability's targets are what
        * this resolution did this to so far — the token it just created —
        * in place of the creating ability's own. With nothing done, no delayed
-       * ability is set up. */
-      readonly about?: ThisWayKind;
+       * ability is set up. `"attached"`: its one target is the permanent the
+       * source is attached to as this resolves (see {@link EffectTargetRef}) —
+       * Wings of Hubris's "sacrifice **it** at the beginning of the next end
+       * step", the creature it equipped. */
+      readonly about?: ThisWayKind | "attached";
     }
   | {
       /** "That creature enters with two additional +1/+1 counters on it"
@@ -5963,6 +5972,10 @@ export interface EffectApi {
   /** The creature this effect's source equips — see `create-token-copy`'s
    * `of: "equipped"`. */
   equippedCreature(): ObjectId | undefined;
+  /** The permanent an {@link EffectTargetRef} `"attached"` names: what the
+   * source is attached to now, or — the source gone — what it was last
+   * attached to, while that is still on the battlefield as the same object. */
+  attachedHost(): ObjectId | undefined;
   /** How much damage from the effect's damage source (`from`) is lethal to
    * the creature `target` now — see the `damage` effect's
    * `excessToController`. */
@@ -7765,6 +7778,10 @@ function resolveEffectTarget(
       ? { kind: "object", object: ctx.triggerObject }
       : undefined;
   }
+  if (ref === "attached") {
+    const host = ctx.attachedHost();
+    return host === undefined ? undefined : { kind: "object", object: host };
+  }
   return ctx.targets[ref];
 }
 
@@ -8994,6 +9011,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         );
         return;
       }
+      if (spec.about === "attached") {
+        const host = resolveEffectTarget("attached", ctx);
+        if (host !== undefined) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, [host]);
+        return;
+      }
       if (spec.about !== undefined) {
         const done = ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
         if (done.length > 0) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, done);
@@ -9086,7 +9108,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.triggerObject === undefined
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
-            : ctx.targets[spec.target];
+            : spec.target === "attached"
+              ? resolveEffectTarget("attached", ctx)
+              : ctx.targets[spec.target];
       if (target !== undefined) ctx.sacrificeTarget(target, spec.byItsController);
       return;
     }

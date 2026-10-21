@@ -1,0 +1,133 @@
+/**
+ * "Enchanted creature" / "equipped creature" in an effect — the
+ * `EffectTargetRef` `"attached"`: what the source is attached to as the
+ * effect resolves, or, the source gone, what it was last attached to while
+ * that is still the same object (rule 400.7). Theros Beyond Death's Auras and
+ * Wings of Hubris (batch 118).
+ */
+import { describe, expect, it } from "vitest";
+
+import type { Game } from "../game.js";
+import type { ObjectId } from "../primitives.js";
+import {
+  A,
+  B,
+  activate,
+  cast,
+  keywords,
+  lands,
+  pickTargets,
+  pt,
+  ref,
+  settle,
+  spawn,
+  table,
+  toHand,
+  toStep,
+  zone,
+} from "./harness.js";
+
+/** Cast `aura` onto `host`, and stop with its enters trigger on the stack. */
+function castToTrigger(game: Game, aura: ObjectId, host: ObjectId): void {
+  cast(game, aura, { targets: [ref(host)], settle: false });
+  game.advanceUntil(
+    (s) => s.objects[aura]?.zone === "battlefield" && s.zones.shared.stack.length > 0 && s.awaiting === null,
+  );
+}
+
+/** Take `id` off the battlefield without settling (a spell of bob's). */
+function destroyNow(game: Game, id: ObjectId): void {
+  game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [ref(id)]);
+}
+
+describe("enchanted creature in an Aura's enters trigger", () => {
+  it("Aspect of Manticore gives the creature it enchants first strike", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Aspect of Manticore"), { targets: [ref(bears)] });
+    expect(keywords(game, bears).has("first-strike")).toBe(true);
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 2 });
+  });
+
+  it("Starlit Mantle gone before its trigger resolves: the creature it last enchanted still gains hexproof", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Island", 2);
+    const mantle = toHand(game, "Starlit Mantle");
+    castToTrigger(game, mantle, bears);
+    destroyNow(game, mantle);
+    settle(game);
+    expect(zone(game, mantle)).toBe("graveyard");
+    expect(keywords(game, bears).has("hexproof")).toBe(true);
+  });
+
+  it("a creature that left and came back is a new object: nothing gains anything", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 3);
+    const aspect = toHand(game, "Aspect of Manticore");
+    castToTrigger(game, aspect, bears);
+    // The Aura leaves still enchanting the Bears, then the Bears are flickered:
+    // back as a new object, no longer the creature it last enchanted.
+    destroyNow(game, aspect);
+    game.debugApplyEffect(A, { kind: "flicker", target: 0 }, [ref(bears)]);
+    settle(game);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(keywords(game, bears).has("first-strike")).toBe(false);
+  });
+
+  it("Warbriar Blessing: the enchanted creature fights the target", () => {
+    const { game, a } = table();
+    const giant = spawn(game, "Hill Giant"); // 3/3, +0/+2 from the Blessing
+    const bears = spawn(game, "Grizzly Bears", B);
+    spawn(game, "Grizzly Bears", B); // two choices, so the target is asked
+    lands(game, "Forest", 2);
+    pickTargets(a, bears);
+    cast(game, toHand(game, "Warbriar Blessing"), { targets: [ref(giant)] });
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(game.state.objects[giant].damageMarked).toBe(2);
+  });
+});
+
+describe("an Aura's activated ability", () => {
+  it("Dreadful Apathy exiles the creature it enchants", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Plains", 6);
+    const apathy = toHand(game, "Dreadful Apathy");
+    cast(game, apathy, { targets: [ref(bears)] });
+    activate(game, apathy, 0);
+    expect(zone(game, bears)).toBe("exile");
+  });
+
+  it("Dreadful Apathy destroyed in response: the creature it enchanted is still exiled", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Plains", 6);
+    const apathy = toHand(game, "Dreadful Apathy");
+    cast(game, apathy, { targets: [ref(bears)] });
+    activate(game, apathy, 0, { settle: false });
+    destroyNow(game, apathy);
+    settle(game);
+    expect(zone(game, apathy)).toBe("graveyard");
+    expect(zone(game, bears)).toBe("exile");
+  });
+});
+
+describe("equipped creature after the Equipment is sacrificed", () => {
+  it("Wings of Hubris: the creature it equipped can't be blocked, and is sacrificed at the next end step", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Wastes", 3);
+    const wings = spawn(game, "Wings of Hubris");
+    activate(game, wings, 1, { targets: [ref(bears)] });
+    expect(keywords(game, bears).has("flying")).toBe(true);
+    activate(game, wings, 0);
+    expect(zone(game, wings)).toBe("graveyard");
+    expect(keywords(game, bears).has("unblockable")).toBe(true);
+    toStep(game, "end");
+    settle(game);
+    expect(zone(game, bears)).toBe("graveyard");
+  });
+});

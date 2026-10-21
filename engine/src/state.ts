@@ -1490,6 +1490,10 @@ export interface LastKnownInfo {
    * so an "equipped creature dies" trigger still knows its host when both
    * left together. */
   readonly attachedTo?: ObjectId;
+  /** Which battlefield stint of `attachedTo` it was on (its
+   * `zoneChangeCount` then): a host that has left and come back since is a
+   * new object (rule 400.7), so "enchanted creature" no longer finds it. */
+  readonly attachedToStint?: number;
   /** The player it was attached to, if it was a Curse on one — so an
    * "enchanted player" trigger still knows them once it has left. */
   readonly attachedToPlayer?: PlayerId;

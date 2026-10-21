@@ -145,6 +145,7 @@ import _poolDormantGrove from "../pool/dormant-grove.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
+import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
@@ -685,6 +686,7 @@ const shard: CardShard = {
     _poolDragonclawStrike,
     _poolDragonkinBerserker,
     _poolDragonsPresence,
+    _poolDreadfulApathy,
     _poolDreyKeeper,
     _poolDryadsFavor,
     _poolDuskLegionSergeant,

@@ -519,6 +519,7 @@ import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
 import _poolWallOfHeat from "../pool/wall-of-heat.js";
 import _poolWallOfLava from "../pool/wall-of-lava.js";
+import _poolWarbriarBlessing from "../pool/warbriar-blessing.js";
 import _poolWarlordsAxe from "../pool/warlords-axe.js";
 import _poolWarpedTusker from "../pool/warped-tusker.js";
 import _poolWarstormSurge from "../pool/warstorm-surge.js";
@@ -1084,6 +1085,7 @@ const shard: CardShard = {
     _poolWallOfGranite,
     _poolWallOfHeat,
     _poolWallOfLava,
+    _poolWarbriarBlessing,
     _poolWarlordsAxe,
     _poolWarpedTusker,
     _poolWarstormSurge,

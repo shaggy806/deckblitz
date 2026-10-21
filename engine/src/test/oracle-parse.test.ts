@@ -1057,6 +1057,20 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(brawler.complete).toBe(true);
   });
 
+  it("\"enchanted creature\" in an Aura's trigger is the attached permanent (Starlit Mantle)", () => {
+    const mantle = face(
+      "Enchant creature you control\nWhen this Aura enters, enchanted creature gains hexproof until end of turn.\nEnchanted creature gets +1/+1.",
+      "Enchantment — Aura",
+    );
+    expect(mantle.triggered[0].effect).toEqual({
+      kind: "grant-keyword",
+      target: "attached",
+      keyword: "hexproof",
+      duration: "end-of-turn",
+    });
+    expect(mantle.complete).toBe(true);
+  });
+
   it("party (rule 700.8): Archpriest of Iona's power, and {1} less for each creature in your party", () => {
     const reminder = "(Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)";
     const archpriest = face(`Test Card's power is equal to the number of creatures in your party. ${reminder}`, "Creature — Human Cleric");

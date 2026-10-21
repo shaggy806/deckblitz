@@ -25,6 +25,7 @@ import _poolArgivianPhalanx from "../pool/argivian-phalanx.js";
 import _poolArniHumbleScribe from "../pool/arni-humble-scribe.js";
 import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
+import _poolAspectOfManticore from "../pool/aspect-of-manticore.js";
 import _poolAureliaTheLawAbove from "../pool/aurelia-the-law-above.js";
 import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
@@ -548,6 +549,7 @@ const shard: CardShard = {
     _poolArniHumbleScribe,
     _poolArtistsTalent,
     _poolAshcoatOfTheShadowSwarm,
+    _poolAspectOfManticore,
     _poolAureliaTheLawAbove,
     _poolAvenOfEnduringHope,
     _poolAxebaneGuardian,

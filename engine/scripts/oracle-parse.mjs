@@ -1483,6 +1483,16 @@ export function parseSentence(sentence, ctx) {
     return { kind: "exile", target: ctx.target({ kind: "card-in-graveyard", whose: "any" }) };
   }
 
+  // "Enchanted creature gains hexproof until end of turn" (Starlit Mantle):
+  // the permanent this Aura or Equipment is attached to as the effect
+  // resolves — the `"attached"` reference — read as "it" is read, after every
+  // template above that names it itself. Anything no "it" template takes
+  // falls through to the rest.
+  if (ctx.it !== "attached" && ctx.targets.length === 0 && (m = /^(?:enchanted|equipped) (?:creature|permanent) (.+)$/i.exec(s))) {
+    const asIt = parseSentence(`it ${m[1]}`, { ...ctx, it: "attached" });
+    if (asIt !== null) return asIt;
+  }
+
   // "It": the object the ability is about — its source, or the object its
   // trigger names — and only while nothing has been targeted, which "it"
   // could mean instead.
