@@ -97,6 +97,7 @@ import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
 import _poolCeremonialGroundbreaker from "../pool/ceremonial-groundbreaker.js";
 import _poolCeruleanWyvern from "../pool/cerulean-wyvern.js";
 import _poolChampionOfTheParish from "../pool/champion-of-the-parish.js";
+import _poolChandraBoldPyromancer from "../pool/chandra-bold-pyromancer.js";
 import _poolChapelShieldgeist from "../pool/chapel-shieldgeist.js";
 import _poolChargingGriffin from "../pool/charging-griffin.js";
 import _poolCharismaticVanguard from "../pool/charismatic-vanguard.js";
@@ -662,6 +663,7 @@ const shard: CardShard = {
     _poolCeremonialGroundbreaker,
     _poolCeruleanWyvern,
     _poolChampionOfTheParish,
+    _poolChandraBoldPyromancer,
     _poolChapelShieldgeist,
     _poolChargingGriffin,
     _poolCharismaticVanguard,

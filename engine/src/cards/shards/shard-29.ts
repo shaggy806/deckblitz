@@ -35,6 +35,7 @@ import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
 import _poolAwakenedSkyclave from "../pool/awakened-skyclave.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
+import _poolBalothGorger from "../pool/baloth-gorger.js";
 import _poolBankruptInBlood from "../pool/bankrupt-in-blood.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
@@ -165,6 +166,7 @@ import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendlash from "../pool/fiendlash.js";
+import _poolFightWithFire from "../pool/fight-with-fire.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
@@ -254,6 +256,8 @@ import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
 import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
+import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
+import _poolKeldonOverseer from "../pool/keldon-overseer.js";
 import _poolKessigWolf from "../pool/kessig-wolf.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
@@ -283,6 +287,7 @@ import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
+import _poolMemorialToUnity from "../pool/memorial-to-unity.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
@@ -597,6 +602,7 @@ const shard: CardShard = {
     _poolAwakenedSkyclave,
     _poolBalefulForce,
     _poolBallistaCharger,
+    _poolBalothGorger,
     _poolBankruptInBlood,
     _poolBarbedBloodletter,
     _poolBargain,
@@ -727,6 +733,7 @@ const shard: CardShard = {
     _poolFangrenMarauder,
     _poolFertileGround,
     _poolFiendlash,
+    _poolFightWithFire,
     _poolFinalDeath,
     _poolFinalVengeance,
     _poolFlamebraider,
@@ -816,6 +823,8 @@ const shard: CardShard = {
     _poolJwariDisruption,
     _poolKamizObscuraOculus,
     _poolKazanduNectarpot,
+    _poolKazarovSengirPureblood,
+    _poolKeldonOverseer,
     _poolKessigWolf,
     _poolKnightLuminary,
     _poolKnightlyValor,
@@ -845,6 +854,7 @@ const shard: CardShard = {
     _poolMechanAssembler,
     _poolMeldwebCurator,
     _poolMemorialToGenius,
+    _poolMemorialToUnity,
     _poolMessengersSpeed,
     _poolMightstonesAnimation,
     _poolMishrasJuggernaut,

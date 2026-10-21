@@ -540,6 +540,7 @@ import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
 import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
 import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
+import _tokensClericToken01Black from "../tokens/cleric-token-0-1-black.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
@@ -1102,6 +1103,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensApeVillainToken,
+    _tokensClericToken01Black,
     _tokensConstructTokenAncientStoneIdol,
     _tokensConstructTokenRetrofitterFoundry,
     _tokensElfWarriorToken,

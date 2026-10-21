@@ -1,0 +1,843 @@
+{
+ "batch": "B128",
+ "status": "complete",
+ "ranks": "Dominaria (DOM, 2018-04-27): the rest of the set, whole",
+ "authored": [
+  {
+   "name": "Arbor Armament",
+   "files": [
+    "engine/src/cards/pool/arbor-armament.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blink of an Eye",
+   "files": [
+    "engine/src/cards/pool/blink-of-an-eye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Paladin",
+   "files": [
+    "engine/src/cards/pool/cabal-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fall of the Thran",
+   "files": [
+    "engine/src/cards/pool/fall-of-the-thran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hallar, the Firefletcher",
+   "files": [
+    "engine/src/cards/pool/hallar-the-firefletcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jousting Lance",
+   "files": [
+    "engine/src/cards/pool/jousting-lance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Keldon Overseer",
+   "files": [
+    "engine/src/cards/pool/keldon-overseer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Trickster",
+   "files": [
+    "engine/src/cards/pool/merfolk-trickster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Powerstone Shard",
+   "files": [
+    "engine/src/cards/pool/powerstone-shard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radiating Lightning",
+   "files": [
+    "engine/src/cards/pool/radiating-lightning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanctum Spirit",
+   "files": [
+    "engine/src/cards/pool/sanctum-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Settle the Score",
+   "files": [
+    "engine/src/cards/pool/settle-the-score.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stronghold Confessor",
+   "files": [
+    "engine/src/cards/pool/stronghold-confessor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Teferi's Sentinel",
+   "files": [
+    "engine/src/cards/pool/teferis-sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Territorial Allosaurus",
+   "files": [
+    "engine/src/cards/pool/territorial-allosaurus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Untamed Kavu",
+   "files": [
+    "engine/src/cards/pool/untamed-kavu.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urgoros, the Empty One",
+   "files": [
+    "engine/src/cards/pool/urgoros-the-empty-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warcry Phoenix",
+   "files": [
+    "engine/src/cards/pool/warcry-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Windgrace Acolyte",
+   "files": [
+    "engine/src/cards/pool/windgrace-acolyte.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wizard's Lightning",
+   "files": [
+    "engine/src/cards/pool/wizards-lightning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Adventurous Impulse",
+   "files": [
+    "engine/src/cards/pool/adventurous-impulse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Baloth Gorger",
+   "files": [
+    "engine/src/cards/pool/baloth-gorger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bloodstone Goblin",
+   "files": [
+    "engine/src/cards/pool/bloodstone-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cast Down",
+   "files": [
+    "engine/src/cards/pool/cast-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Outburst",
+   "files": [
+    "engine/src/cards/pool/chandras-outburst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Vigor",
+   "files": [
+    "engine/src/cards/pool/demonic-vigor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dub",
+   "files": [
+    "engine/src/cards/pool/dub.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fight with Fire",
+   "files": [
+    "engine/src/cards/pool/fight-with-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Protector",
+   "files": [
+    "engine/src/cards/pool/gaeas-protector.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grunn, the Lonely King",
+   "files": [
+    "engine/src/cards/pool/grunn-the-lonely-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kazarov, Sengir Pureblood",
+   "files": [
+    "engine/src/cards/pool/kazarov-sengir-pureblood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of Malice",
+   "files": [
+    "engine/src/cards/pool/knight-of-malice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kwende, Pride of Femeref",
+   "files": [
+    "engine/src/cards/pool/kwende-pride-of-femeref.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lingering Phantom",
+   "files": [
+    "engine/src/cards/pool/lingering-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pegasus Courser",
+   "files": [
+    "engine/src/cards/pool/pegasus-courser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Precognition Field",
+   "files": [
+    "engine/src/cards/pool/precognition-field.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rite of Belzenlok",
+   "files": [
+    "engine/src/cards/pool/rite-of-belzenlok.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seal Away",
+   "files": [
+    "engine/src/cards/pool/seal-away.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seismic Shift",
+   "files": [
+    "engine/src/cards/pool/seismic-shift.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sentinel of the Pearl Trident",
+   "files": [
+    "engine/src/cards/pool/sentinel-of-the-pearl-trident.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Antiquities War",
+   "files": [
+    "engine/src/cards/pool/the-antiquities-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triumph of Gerrard",
+   "files": [
+    "engine/src/cards/pool/triumph-of-gerrard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Academy Journeymage",
+   "files": [
+    "engine/src/cards/pool/academy-journeymage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Adeliz, the Cinder Wind",
+   "files": [
+    "engine/src/cards/pool/adeliz-the-cinder-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benalish Honor Guard",
+   "files": [
+    "engine/src/cards/pool/benalish-honor-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blessing of Belzenlok",
+   "files": [
+    "engine/src/cards/pool/blessing-of-belzenlok.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Bargain",
+   "files": [
+    "engine/src/cards/pool/dark-bargain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Divest",
+   "files": [
+    "engine/src/cards/pool/divest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drudge Sentinel",
+   "files": [
+    "engine/src/cards/pool/drudge-sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghitu Journeymage",
+   "files": [
+    "engine/src/cards/pool/ghitu-journeymage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gift of Growth",
+   "files": [
+    "engine/src/cards/pool/gift-of-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardians of Koilos",
+   "files": [
+    "engine/src/cards/pool/guardians-of-koilos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karplusan Hound",
+   "files": [
+    "engine/src/cards/pool/karplusan-hound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niambi, Faithful Healer",
+   "files": [
+    "engine/src/cards/pool/niambi-faithful-healer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Saproling Migration",
+   "files": [
+    "engine/src/cards/pool/saproling-migration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serra Disciple",
+   "files": [
+    "engine/src/cards/pool/serra-disciple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shivan Fire",
+   "files": [
+    "engine/src/cards/pool/shivan-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorcerer's Wand",
+   "files": [
+    "engine/src/cards/pool/sorcerers-wand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi, Timebender",
+   "files": [
+    "engine/src/cards/pool/teferi-timebender.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tiana, Ship's Caretaker",
+   "files": [
+    "engine/src/cards/pool/tiana-ships-caretaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza's Tome",
+   "files": [
+    "engine/src/cards/pool/urzas-tome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vodalian Arcanist",
+   "files": [
+    "engine/src/cards/pool/vodalian-arcanist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Academy Drake",
+   "files": [
+    "engine/src/cards/pool/academy-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Board the Weatherlight",
+   "files": [
+    "engine/src/cards/pool/board-the-weatherlight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chandra, Bold Pyromancer",
+   "files": [
+    "engine/src/cards/pool/chandra-bold-pyromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Archaeologist",
+   "files": [
+    "engine/src/cards/pool/daring-archaeologist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "D'Avenant Trapper",
+   "files": [
+    "engine/src/cards/pool/davenant-trapper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Diligent Excavator",
+   "files": [
+    "engine/src/cards/pool/diligent-excavator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Firefist Adept",
+   "files": [
+    "engine/src/cards/pool/firefist-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forebear's Blade",
+   "files": [
+    "engine/src/cards/pool/forebears-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghitu Lavarunner",
+   "files": [
+    "engine/src/cards/pool/ghitu-lavarunner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keldon Warcaller",
+   "files": [
+    "engine/src/cards/pool/keldon-warcaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of Grace",
+   "files": [
+    "engine/src/cards/pool/knight-of-grace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memorial to Unity",
+   "files": [
+    "engine/src/cards/pool/memorial-to-unity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mishra's Self-Replicator",
+   "files": [
+    "engine/src/cards/pool/mishras-self-replicator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Runner",
+   "files": [
+    "engine/src/cards/pool/relic-runner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soul Salvage",
+   "files": [
+    "engine/src/cards/pool/soul-salvage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempest Djinn",
+   "files": [
+    "engine/src/cards/pool/tempest-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Machinations",
+   "files": [
+    "engine/src/cards/pool/temporal-machinations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thallid Omnivore",
+   "files": [
+    "engine/src/cards/pool/thallid-omnivore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The First Eruption",
+   "files": [
+    "engine/src/cards/pool/the-first-eruption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Temporal Gateway",
+   "files": [
+    "engine/src/cards/pool/thran-temporal-gateway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Onslaught",
+   "files": [
+    "engine/src/cards/pool/wild-onslaught.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zahid, Djinn of the Lamp",
+   "files": [
+    "engine/src/cards/pool/zahid-djinn-of-the-lamp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caligo Skin-Witch",
+   "files": [
+    "engine/src/cards/pool/caligo-skin-witch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Excavation Elephant",
+   "files": [
+    "engine/src/cards/pool/excavation-elephant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghitu Chronicler",
+   "files": [
+    "engine/src/cards/pool/ghitu-chronicler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krosan Druid",
+   "files": [
+    "engine/src/cards/pool/krosan-druid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sergeant-at-Arms",
+   "files": [
+    "engine/src/cards/pool/sergeant-at-arms.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Demonlord Belzenlok",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "reveal until a nonland card, repeating while its mana value is 4 or greater"
+  },
+  {
+   "name": "Dauntless Bodyguard",
+   "needs": [
+    "decision:as-enters-choose-permanent"
+   ],
+   "why": "as it enters, choose another creature you control"
+  },
+  {
+   "name": "Firesong and Sunspeaker",
+   "needs": [
+    "trigger:gains-life-from-source-filter"
+   ],
+   "why": "whenever a white instant or sorcery spell causes you to gain life"
+  },
+  {
+   "name": "Time of Ice",
+   "needs": [
+    "effect:doesnt-untap-while-you-control-source"
+   ],
+   "why": "doesn't untap for as long as you control this Saga"
+  },
+  {
+   "name": "Corrosive Ooze",
+   "needs": [
+    "filter:attached-to-trigger-object"
+   ],
+   "why": "destroy each Equipment attached to that creature at end of combat"
+  },
+  {
+   "name": "Goblin Barrage",
+   "needs": [
+    "cost:kicker-nonmana-cost"
+   ],
+   "why": "kicker—sacrifice an artifact or Goblin"
+  },
+  {
+   "name": "Vicious Offering",
+   "needs": [
+    "cost:kicker-nonmana-cost"
+   ],
+   "why": "kicker—sacrifice a creature"
+  },
+  {
+   "name": "Shield of the Realm",
+   "needs": [
+    "replacement:prevent-n-of-damage"
+   ],
+   "why": "prevent 2 of any damage that would be dealt to equipped creature"
+  },
+  {
+   "name": "Rona, Disciple of Gix",
+   "needs": [
+    "zone:cast-from-linked-exile"
+   ],
+   "why": "cast spells from among cards exiled with Rona"
+  },
+  {
+   "name": "Garna, the Bloodflame",
+   "needs": [
+    "condition:put-into-graveyard-this-turn-filter"
+   ],
+   "why": "creature cards put into your graveyard from anywhere this turn"
+  },
+  {
+   "name": "Evra, Halcyon Witness",
+   "needs": [
+    "effect:exchange-life-power"
+   ],
+   "why": "exchange your life total with Evra's power"
+  },
+  {
+   "name": "In Bolas's Clutches",
+   "needs": [
+    "static:static-grant-supertype"
+   ],
+   "why": "the enchanted permanent is legendary"
+  },
+  {
+   "name": "The Flame of Keld",
+   "needs": [
+    "replacement:damage-plus-x-this-turn"
+   ],
+   "why": "chapter III: red sources you control deal that much damage plus 2 this turn"
+  },
+  {
+   "name": "Navigator's Compass",
+   "needs": [
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "target land becomes the basic land type of your choice"
+  },
+  {
+   "name": "Haphazard Bombardment",
+   "needs": [
+    "effect:random-permanent"
+   ],
+   "why": "destroy a nonenchantment permanent chosen at random"
+  },
+  {
+   "name": "Rampaging Cyclops",
+   "needs": [
+    "amount:creatures-blocking-it"
+   ],
+   "why": "gets −2/−0 as long as two or more creatures are blocking it"
+  },
+  {
+   "name": "Lich's Mastery",
+   "needs": [
+    "effect:exile-per-life-lost-mixed-zones"
+   ],
+   "why": "for each 1 life lost, exile a permanent you control or a card from your hand or graveyard"
+  },
+  {
+   "name": "Jaya Ballard",
+   "needs": [
+    "effect:emblem-static-abilities"
+   ],
+   "why": "an emblem with \"you may cast instant and sorcery spells from your graveyard\""
+  },
+  {
+   "name": "Champion of the Flame",
+   "needs": [
+    "static:count-attached-to-affected"
+   ],
+   "why": "+2/+2 for each Aura and Equipment attached to it"
+  },
+  {
+   "name": "Torgaar, Famine Incarnate",
+   "needs": [
+    "effect:life-total-becomes"
+   ],
+   "why": "a player's life total becomes half their starting life total"
+  },
+  {
+   "name": "The Mirari Conjecture",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "chapter III: copy each instant or sorcery spell you cast this turn"
+  },
+  {
+   "name": "Two-Headed Giant",
+   "needs": [
+    "mechanic:coin-flip-heads-tails"
+   ],
+   "why": "flip two coins: both heads or both tails"
+  },
+  {
+   "name": "Deep Freeze",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "enchanted creature is a 0/4 Wall with defender and loses all other abilities"
+  },
+  {
+   "name": "Chainer's Torment",
+   "needs": [
+    "effect:damage-from-created-token"
+   ],
+   "why": "chapter III's token deals damage equal to half your life"
+  },
+  {
+   "name": "Aryel, Knight of Windgrace",
+   "needs": [
+    "cost:tap-x-untapped-cost"
+   ],
+   "why": "tap X untapped Knights you control"
+  },
+  {
+   "name": "Valduk, Keeper of the Flame",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "a token for each Aura and Equipment attached to it"
+  },
+  {
+   "name": "Shanna, Sisay's Legacy",
+   "needs": [
+    "keyword:hexproof-from-abilities"
+   ],
+   "why": "can't be the target of abilities your opponents control"
+  },
+  {
+   "name": "Elfhame Druid",
+   "needs": [
+    "cost:spend-only-kicked-spell"
+   ],
+   "why": "spend this mana only on costs that include a kicker cost"
+  },
+  {
+   "name": "Darigaaz Reincarnated",
+   "needs": [
+    "replacement:die-exile-with-counter",
+    "trigger:trigger-from-exile"
+   ],
+   "why": "exiled with egg counters instead of dying, then returns from exile"
+  },
+  {
+   "name": "Healing Grace",
+   "needs": [
+    "replacement:prevent-damage-from-chosen-source"
+   ],
+   "why": "prevent the next 4 damage a source of your choice would deal"
+  }
+ ]
+}

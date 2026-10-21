@@ -183,6 +183,7 @@ import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
+import _poolGhituJourneymage from "../pool/ghitu-journeymage.js";
 import _poolGhorClanBloodscale from "../pool/ghor-clan-bloodscale.js";
 import _poolGhostLitDrifter from "../pool/ghost-lit-drifter.js";
 import _poolGhostTown from "../pool/ghost-town.js";
@@ -205,6 +206,7 @@ import _poolGremlinTamer from "../pool/gremlin-tamer.js";
 import _poolGrotagBugCatcher from "../pool/grotag-bug-catcher.js";
 import _poolGrowthCycle from "../pool/growth-cycle.js";
 import _poolGruesomeScourger from "../pool/gruesome-scourger.js";
+import _poolGrunnTheLonelyKing from "../pool/grunn-the-lonely-king.js";
 import _poolGuerrillaGorilla from "../pool/guerrilla-gorilla.js";
 import _poolGumdropPoisoner from "../pool/gumdrop-poisoner.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
@@ -243,6 +245,7 @@ import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
 import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
+import _poolKarplusanHound from "../pool/karplusan-hound.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
@@ -483,6 +486,7 @@ import _poolTravelTheOverworld from "../pool/travel-the-overworld.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTrickShot from "../pool/trick-shot.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
+import _poolTriumphOfGerrard from "../pool/triumph-of-gerrard.js";
 import _poolTuneUp from "../pool/tune-up.js";
 import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
@@ -733,6 +737,7 @@ const shard: CardShard = {
     _poolGeologicalAppraiser,
     _poolGeralfsMindcrusher,
     _poolGhirapurAetherGrid,
+    _poolGhituJourneymage,
     _poolGhorClanBloodscale,
     _poolGhostLitDrifter,
     _poolGhostTown,
@@ -755,6 +760,7 @@ const shard: CardShard = {
     _poolGrotagBugCatcher,
     _poolGrowthCycle,
     _poolGruesomeScourger,
+    _poolGrunnTheLonelyKing,
     _poolGuerrillaGorilla,
     _poolGumdropPoisoner,
     _poolGwaihirGreatestOfTheEagles,
@@ -793,6 +799,7 @@ const shard: CardShard = {
     _poolKaleidoscorch,
     _poolKappaTechWrecker,
     _poolKarlachFuryOfAvernus,
+    _poolKarplusanHound,
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,
     _poolKeensightMentor,
@@ -1033,6 +1040,7 @@ const shard: CardShard = {
     _poolTrevasAttendant,
     _poolTrickShot,
     _poolTriplicateSpirits,
+    _poolTriumphOfGerrard,
     _poolTuneUp,
     _poolTwincast,
     _poolTyrantGuard,

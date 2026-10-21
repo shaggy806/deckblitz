@@ -172,6 +172,7 @@ import _poolFlatten from "../pool/flatten.js";
 import _poolFling from "../pool/fling.js";
 import _poolFlourish from "../pool/flourish.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
+import _poolForebearsBlade from "../pool/forebears-blade.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolForsakenMiner from "../pool/forsaken-miner.js";
@@ -214,6 +215,7 @@ import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
+import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
 import _poolHardEvidence from "../pool/hard-evidence.js";
@@ -259,6 +261,7 @@ import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
+import _poolKeldonWarcaller from "../pool/keldon-warcaller.js";
 import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
 import _poolKeralKeepDisciples from "../pool/keral-keep-disciples.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
@@ -269,6 +272,7 @@ import _poolKnightErrantOfEos from "../pool/knight-errant-of-eos.js";
 import _poolKnightfisher from "../pool/knightfisher.js";
 import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
 import _poolKrenkosEnforcer from "../pool/krenkos-enforcer.js";
+import _poolKrosanDruid from "../pool/krosan-druid.js";
 import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
 import _poolLakeTown from "../pool/lake-town.js";
@@ -404,6 +408,7 @@ import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
+import _poolSanctumSpirit from "../pool/sanctum-spirit.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
 import _poolSanguineIndulgence from "../pool/sanguine-indulgence.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
@@ -751,6 +756,7 @@ const shard: CardShard = {
     _poolFling,
     _poolFlourish,
     _poolFoggyNelsonOnRetainer,
+    _poolForebearsBlade,
     _poolForebodingLandscape,
     _poolForgottenAncient,
     _poolForsakenMiner,
@@ -793,6 +799,7 @@ const shard: CardShard = {
     _poolGriptide,
     _poolGrismoldTheDreadsower,
     _poolGuardianGladewalker,
+    _poolGuardiansOfKoilos,
     _poolHamperingSnare,
     _poolHarbinVanguardAviator,
     _poolHardEvidence,
@@ -838,6 +845,7 @@ const shard: CardShard = {
     _poolKamisFlare,
     _poolKayasWrath,
     _poolKeeneyeAven,
+    _poolKeldonWarcaller,
     _poolKembaKhaEnduring,
     _poolKeralKeepDisciples,
     _poolKessigFlamebreather,
@@ -848,6 +856,7 @@ const shard: CardShard = {
     _poolKnightfisher,
     _poolKothOfTheHomestead,
     _poolKrenkosEnforcer,
+    _poolKrosanDruid,
     _poolKykarZephyrAwakener,
     _poolLagacLizard,
     _poolLakeTown,
@@ -983,6 +992,7 @@ const shard: CardShard = {
     _poolSacredPeaks,
     _poolSakashimaTheImpostor,
     _poolSamutHazoretsChampion,
+    _poolSanctumSpirit,
     _poolSandstalkerMoloch,
     _poolSanguineIndulgence,
     _poolSatyrRambler,

@@ -77,6 +77,7 @@ import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
 import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
+import _poolDarkBargain from "../pool/dark-bargain.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
 import _poolDeathBegetsLife from "../pool/death-begets-life.js";
@@ -124,6 +125,7 @@ import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
+import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
 import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
@@ -351,6 +353,7 @@ import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSerumSovereign from "../pool/serum-sovereign.js";
+import _poolSettleTheScore from "../pool/settle-the-score.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
 import _poolShatterTheOath from "../pool/shatter-the-oath.js";
@@ -580,6 +583,7 @@ const shard: CardShard = {
     _poolCruelSomnophage,
     _poolCystbearer,
     _poolDalekSquadron,
+    _poolDarkBargain,
     _poolDeadlyDerision,
     _poolDeadlyVisit,
     _poolDeathBegetsLife,
@@ -627,6 +631,7 @@ const shard: CardShard = {
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
     _poolFaerieDuelist,
+    _poolFallOfTheThran,
     _poolFanBearer,
     _poolFanaticalStrength,
     _poolFateOfTheSunCryst,
@@ -854,6 +859,7 @@ const shard: CardShard = {
     _poolSeraphicSteed,
     _poolSerrasEmbrace,
     _poolSerumSovereign,
+    _poolSettleTheScore,
     _poolSewerdreg,
     _poolShamblingGhoul,
     _poolShatterTheOath,

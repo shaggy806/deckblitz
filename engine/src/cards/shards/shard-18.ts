@@ -102,6 +102,7 @@ import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
+import _poolDiligentExcavator from "../pool/diligent-excavator.js";
 import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
@@ -336,6 +337,7 @@ import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
 import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
+import _poolPrecognitionField from "../pool/precognition-field.js";
 import _poolPredatoryWurm from "../pool/predatory-wurm.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
@@ -676,6 +678,7 @@ const shard: CardShard = {
     _poolDesperateCharge,
     _poolDevotedDruid,
     _poolDevoutChaplain,
+    _poolDiligentExcavator,
     _poolDirgurIslandDragon,
     _poolDiscipleOfBolas,
     _poolDisempower,
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _poolPlowThrough,
     _poolPossibilityTechnician,
     _poolPouncingCheetah,
+    _poolPrecognitionField,
     _poolPredatoryWurm,
     _poolPrimalAmulet,
     _poolProftsEideticMemory,

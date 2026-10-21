@@ -4,8 +4,10 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolATaleForTheAges from "../pool/a-tale-for-the-ages.js";
+import _poolAcademyDrake from "../pool/academy-drake.js";
 import _poolAccursedSpirit from "../pool/accursed-spirit.js";
 import _poolAcolyteHybrid from "../pool/acolyte-hybrid.js";
+import _poolAdelizTheCinderWind from "../pool/adeliz-the-cinder-wind.js";
 import _poolAerieBowmasters from "../pool/aerie-bowmasters.js";
 import _poolAgelessGuardian from "../pool/ageless-guardian.js";
 import _poolAgentsOfHydra from "../pool/agents-of-hydra.js";
@@ -394,6 +396,7 @@ import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
+import _poolSaprolingMigration from "../pool/saproling-migration.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
@@ -406,6 +409,7 @@ import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSelflessSamurai from "../pool/selfless-samurai.js";
 import _poolSelhoffEntomber from "../pool/selhoff-entomber.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
+import _poolSergeantAtArms from "../pool/sergeant-at-arms.js";
 import _poolSetessanGriffin from "../pool/setessan-griffin.js";
 import _poolSetessanPetitioner from "../pool/setessan-petitioner.js";
 import _poolShadowSummoning from "../pool/shadow-summoning.js";
@@ -562,8 +566,10 @@ import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeak
 const shard: CardShard = {
   pool: [
     _poolATaleForTheAges,
+    _poolAcademyDrake,
     _poolAccursedSpirit,
     _poolAcolyteHybrid,
+    _poolAdelizTheCinderWind,
     _poolAerieBowmasters,
     _poolAgelessGuardian,
     _poolAgentsOfHydra,
@@ -952,6 +958,7 @@ const shard: CardShard = {
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSandstormCrasher,
+    _poolSaprolingMigration,
     _poolSavedByTheShell,
     _poolSawbladeScamp,
     _poolScalebanesElite,
@@ -964,6 +971,7 @@ const shard: CardShard = {
     _poolSelflessSamurai,
     _poolSelhoffEntomber,
     _poolSentinelSliver,
+    _poolSergeantAtArms,
     _poolSetessanGriffin,
     _poolSetessanPetitioner,
     _poolShadowSummoning,

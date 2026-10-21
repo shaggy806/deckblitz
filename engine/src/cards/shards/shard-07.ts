@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonedCampground from "../pool/abandoned-campground.js";
+import _poolAcademyJourneymage from "../pool/academy-journeymage.js";
 import _poolActionNewsCrew from "../pool/action-news-crew.js";
 import _poolAdaptiveShimmerer from "../pool/adaptive-shimmerer.js";
 import _poolAdvanceScout from "../pool/advance-scout.js";
@@ -52,6 +53,7 @@ import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
+import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
@@ -163,6 +165,7 @@ import _poolGeneralKreatTheBoltbringer from "../pool/general-kreat-the-boltbring
 import _poolGeralfsMessenger from "../pool/geralfs-messenger.js";
 import _poolGeyserLeaper from "../pool/geyser-leaper.js";
 import _poolGhaltaStampedeTyrant from "../pool/ghalta-stampede-tyrant.js";
+import _poolGhituChronicler from "../pool/ghitu-chronicler.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
 import _poolGiantKoi from "../pool/giant-koi.js";
 import _poolGilaCourser from "../pool/gila-courser.js";
@@ -330,6 +333,7 @@ import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
 import _poolPollenbrightDruid from "../pool/pollenbright-druid.js";
 import _poolPowerPlantWorker from "../pool/power-plant-worker.js";
 import _poolPowerstoneFracture from "../pool/powerstone-fracture.js";
+import _poolPowerstoneShard from "../pool/powerstone-shard.js";
 import _poolPrecinctCaptain from "../pool/precinct-captain.js";
 import _poolPreciseRedaction from "../pool/precise-redaction.js";
 import _poolPresenceOfGond from "../pool/presence-of-gond.js";
@@ -459,6 +463,7 @@ import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
+import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
@@ -577,6 +582,7 @@ import _tokensZombieBerserkerToken from "../tokens/zombie-berserker-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbandonedCampground,
+    _poolAcademyJourneymage,
     _poolActionNewsCrew,
     _poolAdaptiveShimmerer,
     _poolAdvanceScout,
@@ -625,6 +631,7 @@ const shard: CardShard = {
     _poolBountyAgent,
     _poolBronzebeakMoa,
     _poolBullsStrength,
+    _poolCaligoSkinWitch,
     _poolCallousInspector,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,
@@ -736,6 +743,7 @@ const shard: CardShard = {
     _poolGeralfsMessenger,
     _poolGeyserLeaper,
     _poolGhaltaStampedeTyrant,
+    _poolGhituChronicler,
     _poolGhorClanWrecker,
     _poolGiantKoi,
     _poolGilaCourser,
@@ -903,6 +911,7 @@ const shard: CardShard = {
     _poolPollenbrightDruid,
     _poolPowerPlantWorker,
     _poolPowerstoneFracture,
+    _poolPowerstoneShard,
     _poolPrecinctCaptain,
     _poolPreciseRedaction,
     _poolPresenceOfGond,
@@ -1032,6 +1041,7 @@ const shard: CardShard = {
     _poolTchallaTheBlackPanther,
     _poolTempestHarvester,
     _poolTemporalAdept,
+    _poolTerritorialAllosaurus,
     _poolThaliasGeistcaller,
     _poolThassasOracle,
     _poolTheBlackBreath,

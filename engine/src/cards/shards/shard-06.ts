@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbjure from "../pool/abjure.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
+import _poolAdventurousImpulse from "../pool/adventurous-impulse.js";
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
 import _poolAetherize from "../pool/aetherize.js";
 import _poolAetherjacket from "../pool/aetherjacket.js";
@@ -196,6 +197,7 @@ import _poolGenerousPup from "../pool/generous-pup.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
 import _poolGhiredMirrorOfTheWilds from "../pool/ghired-mirror-of-the-wilds.js";
+import _poolGhituLavarunner from "../pool/ghitu-lavarunner.js";
 import _poolGhostfireSlice from "../pool/ghostfire-slice.js";
 import _poolGhostlyPrison from "../pool/ghostly-prison.js";
 import _poolGirdForBattle from "../pool/gird-for-battle.js";
@@ -320,6 +322,7 @@ import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
+import _poolPegasusCourser from "../pool/pegasus-courser.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
@@ -498,6 +501,7 @@ import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
+import _poolUrgorosTheEmptyOne from "../pool/urgoros-the-empty-one.js";
 import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
@@ -561,6 +565,7 @@ const shard: CardShard = {
   pool: [
     _poolAbjure,
     _poolAdelineResplendentCathar,
+    _poolAdventurousImpulse,
     _poolAegisSculptor,
     _poolAetherize,
     _poolAetherjacket,
@@ -752,6 +757,7 @@ const shard: CardShard = {
     _poolGeometersArthropod,
     _poolGhaltaTheUnstoppable,
     _poolGhiredMirrorOfTheWilds,
+    _poolGhituLavarunner,
     _poolGhostfireSlice,
     _poolGhostlyPrison,
     _poolGirdForBattle,
@@ -876,6 +882,7 @@ const shard: CardShard = {
     _poolPaladinOfTheBloodstained,
     _poolPardicWanderer,
     _poolPeerIntoTheAbyss,
+    _poolPegasusCourser,
     _poolPersistentSpecimen,
     _poolPharikasMender,
     _poolPhenomenonInvestigators,
@@ -1054,6 +1061,7 @@ const shard: CardShard = {
     _poolUnrulyMob,
     _poolUnyieldingGatekeeper,
     _poolUpdraftElemental,
+    _poolUrgorosTheEmptyOne,
     _poolVault11VotersDilemma,
     _poolVenomLethalProtector,
     _poolVenomcrawler,

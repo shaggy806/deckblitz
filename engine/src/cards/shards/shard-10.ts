@@ -21,6 +21,7 @@ import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
 import _poolAnointedProcession from "../pool/anointed-procession.js";
 import _poolAppendageAmalgam from "../pool/appendage-amalgam.js";
 import _poolArahboRoarOfTheWorld from "../pool/arahbo-roar-of-the-world.js";
+import _poolArborArmament from "../pool/arbor-armament.js";
 import _poolArchenemysCharm from "../pool/archenemys-charm.js";
 import _poolArmTheCathars from "../pool/arm-the-cathars.js";
 import _poolArmyAnts from "../pool/army-ants.js";
@@ -409,6 +410,7 @@ import _poolScrapshooter from "../pool/scrapshooter.js";
 import _poolScrapworkRager from "../pool/scrapwork-rager.js";
 import _poolScuttlegator from "../pool/scuttlegator.js";
 import _poolSeaGateBanneret from "../pool/sea-gate-banneret.js";
+import _poolSealAway from "../pool/seal-away.js";
 import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
 import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
@@ -419,6 +421,7 @@ import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
 import _poolShimmerwingChimera from "../pool/shimmerwing-chimera.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
+import _poolShivanFire from "../pool/shivan-fire.js";
 import _poolShowerOfArrows from "../pool/shower-of-arrows.js";
 import _poolShrivel from "../pool/shrivel.js";
 import _poolSiegeRhino from "../pool/siege-rhino.js";
@@ -601,6 +604,7 @@ const shard: CardShard = {
     _poolAnointedProcession,
     _poolAppendageAmalgam,
     _poolArahboRoarOfTheWorld,
+    _poolArborArmament,
     _poolArchenemysCharm,
     _poolArmTheCathars,
     _poolArmyAnts,
@@ -989,6 +993,7 @@ const shard: CardShard = {
     _poolScrapworkRager,
     _poolScuttlegator,
     _poolSeaGateBanneret,
+    _poolSealAway,
     _poolSearchForAzcanta,
     _poolSeasonedConsultant,
     _poolSeeTheTruth,
@@ -999,6 +1004,7 @@ const shard: CardShard = {
     _poolShamblingCieth,
     _poolShimmerwingChimera,
     _poolShineshadowSnarl,
+    _poolShivanFire,
     _poolShowerOfArrows,
     _poolShrivel,
     _poolSiegeRhino,

@@ -280,6 +280,7 @@ import _poolKingpinsPet from "../pool/kingpins-pet.js";
 import _poolKinsbaileCourier from "../pool/kinsbaile-courier.js";
 import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
 import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
+import _poolKnightOfMalice from "../pool/knight-of-malice.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
@@ -402,6 +403,7 @@ import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
+import _poolRiteOfBelzenlok from "../pool/rite-of-belzenlok.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRoaleskApexHybrid from "../pool/roalesk-apex-hybrid.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
@@ -514,6 +516,7 @@ import _poolViciousBattlerager from "../pool/vicious-battlerager.js";
 import _poolVineglimmerSnarl from "../pool/vineglimmer-snarl.js";
 import _poolVitoFanaticOfAclazotz from "../pool/vito-fanatic-of-aclazotz.js";
 import _poolVituGhaziTheCityTree from "../pool/vitu-ghazi-the-city-tree.js";
+import _poolVodalianArcanist from "../pool/vodalian-arcanist.js";
 import _poolVoiceOfReason from "../pool/voice-of-reason.js";
 import _poolVoidSnare from "../pool/void-snare.js";
 import _poolVoltCharge from "../pool/volt-charge.js";
@@ -543,6 +546,7 @@ import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
+import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
 import _poolZahurGlorysPast from "../pool/zahur-glorys-past.js";
 import _poolZephyrBoots from "../pool/zephyr-boots.js";
 import _poolZodiacTiger from "../pool/zodiac-tiger.js";
@@ -833,6 +837,7 @@ const shard: CardShard = {
     _poolKinsbaileCourier,
     _poolKitsunesTechnique,
     _poolKlothysGodOfDestiny,
+    _poolKnightOfMalice,
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
     _poolKnowledgeSeeker,
@@ -955,6 +960,7 @@ const shard: CardShard = {
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
     _poolRilsaRaelKingpin,
+    _poolRiteOfBelzenlok,
     _poolRiteOfReplication,
     _poolRoaleskApexHybrid,
     _poolRootwaterHunter,
@@ -1067,6 +1073,7 @@ const shard: CardShard = {
     _poolVineglimmerSnarl,
     _poolVitoFanaticOfAclazotz,
     _poolVituGhaziTheCityTree,
+    _poolVodalianArcanist,
     _poolVoiceOfReason,
     _poolVoidSnare,
     _poolVoltCharge,
@@ -1096,6 +1103,7 @@ const shard: CardShard = {
     _poolWkabiShieldOfTheNation,
     _poolWordsOfWisdom,
     _poolYathanRoadwatcher,
+    _poolZahidDjinnOfTheLamp,
     _poolZahurGlorysPast,
     _poolZephyrBoots,
     _poolZodiacTiger,

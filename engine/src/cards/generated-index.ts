@@ -5,6 +5,7 @@
  * `TOKEN_CARDS`, as bare names, so asking whether a definition is a token
  * (`isTokenCard`) doesn't import every token to find out. */
 export const TOKEN_NAMES: readonly string[] = [
+  "0/1 Black Cleric Token",
   "1/1 Blue Bird Token",
   "1/1 Green Cat Token",
   "1/1 Green Plant Token",
@@ -44,6 +45,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "5/5 Elemental Token",
   "5/5 Elephant Token",
   "5/5 Tyranid Token",
+  "6/6 Black Demon Token (Flying, Trample, Upkeep Sacrifice)",
   "6/6 Dragon Token",
   "6/6 Wurm Token",
   "Ajani's Pridemate Token",

@@ -71,6 +71,7 @@ import _poolBulkUp from "../pool/bulk-up.js";
 import _poolCabalCoffers from "../pool/cabal-coffers.js";
 import _poolCaptivatingCave from "../pool/captivating-cave.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
+import _poolCastDown from "../pool/cast-down.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
@@ -478,6 +479,7 @@ import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
+import _poolUntamedKavu from "../pool/untamed-kavu.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
@@ -599,6 +601,7 @@ const shard: CardShard = {
     _poolCabalCoffers,
     _poolCaptivatingCave,
     _poolCastAwayDoubt,
+    _poolCastDown,
     _poolCatBurglar,
     _poolCatacombSlug,
     _poolCausticBronco,
@@ -1006,6 +1009,7 @@ const shard: CardShard = {
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
     _poolUnscrupulousContractor,
+    _poolUntamedKavu,
     _poolUntimelyMalfunction,
     _poolUrbanEvolution,
     _poolUrbisProtector,

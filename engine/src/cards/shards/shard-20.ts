@@ -371,6 +371,7 @@ import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
 import _poolRabbitBattery from "../pool/rabbit-battery.js";
 import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
+import _poolRadiatingLightning from "../pool/radiating-lightning.js";
 import _poolRadicalIdea from "../pool/radical-idea.js";
 import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
 import _poolRagefireHellkite from "../pool/ragefire-hellkite.js";
@@ -422,6 +423,7 @@ import _poolScragnoth from "../pool/scragnoth.js";
 import _poolSearchForDagger from "../pool/search-for-dagger.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
 import _poolSecondHarvest from "../pool/second-harvest.js";
+import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
@@ -456,6 +458,7 @@ import _poolSnowCoveredMountain from "../pool/snow-covered-mountain.js";
 import _poolSocialClimber from "../pool/social-climber.js";
 import _poolSolveForDisappointment from "../pool/solve-for-disappointment.js";
 import _poolSorcererOfTheFang from "../pool/sorcerer-of-the-fang.js";
+import _poolSorcerersWand from "../pool/sorcerers-wand.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
@@ -548,6 +551,7 @@ import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
+import _poolUrzasTome from "../pool/urzas-tome.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
@@ -970,6 +974,7 @@ const shard: CardShard = {
     _poolRabbitBattery,
     _poolRabidGnaw,
     _poolRadhaHeirToKeld,
+    _poolRadiatingLightning,
     _poolRadicalIdea,
     _poolRageScarredBerserker,
     _poolRagefireHellkite,
@@ -1021,6 +1026,7 @@ const shard: CardShard = {
     _poolSearchForDagger,
     _poolSearingFlesh,
     _poolSecondHarvest,
+    _poolSeismicShift,
     _poolSelectForInspection,
     _poolSerendibEfreet,
     _poolSevinnesReclamation,
@@ -1055,6 +1061,7 @@ const shard: CardShard = {
     _poolSocialClimber,
     _poolSolveForDisappointment,
     _poolSorcererOfTheFang,
+    _poolSorcerersWand,
     _poolSoulcageFiend,
     _poolSourbreadAuntie,
     _poolSpaceTimeAnomaly,
@@ -1147,6 +1154,7 @@ const shard: CardShard = {
     _poolUndeadAugur,
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
+    _poolUrzasTome,
     _poolUtromMonitor,
     _poolValentinaAllegraDeFontaine,
     _poolVeloheartBike,

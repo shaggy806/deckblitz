@@ -104,6 +104,7 @@ import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
 import _poolDemonicGifts from "../pool/demonic-gifts.js";
+import _poolDemonicVigor from "../pool/demonic-vigor.js";
 import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
@@ -163,6 +164,7 @@ import _poolFilterOut from "../pool/filter-out.js";
 import _poolFireAmbush from "../pool/fire-ambush.js";
 import _poolFireTempest from "../pool/fire-tempest.js";
 import _poolFirebornKnight from "../pool/fireborn-knight.js";
+import _poolFirefistAdept from "../pool/firefist-adept.js";
 import _poolFirehoofCavalry from "../pool/firehoof-cavalry.js";
 import _poolFirstSphereGargantua from "../pool/first-sphere-gargantua.js";
 import _poolFlameJet from "../pool/flame-jet.js";
@@ -284,6 +286,7 @@ import _poolLifeInsurance from "../pool/life-insurance.js";
 import _poolLightningDiadem from "../pool/lightning-diadem.js";
 import _poolLightningRigCrew from "../pool/lightning-rig-crew.js";
 import _poolLilianasScrounger from "../pool/lilianas-scrounger.js";
+import _poolLingeringPhantom from "../pool/lingering-phantom.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
 import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
@@ -527,6 +530,7 @@ import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
+import _tokensDemonToken66FlyingTrampleUpkeepSacrifice from "../tokens/demon-token-6-6-flying-trample-upkeep-sacrifice.js";
 import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
 import _tokensForestTentacleToken from "../tokens/forest-tentacle-token.js";
 import _tokensGoatToken from "../tokens/goat-token.js";
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolDelugeOfDoom,
     _poolDemonicCounsel,
     _poolDemonicGifts,
+    _poolDemonicVigor,
     _poolDenyTheWitch,
     _poolDespark,
     _poolDiaryOfDreams,
@@ -707,6 +712,7 @@ const shard: CardShard = {
     _poolFireAmbush,
     _poolFireTempest,
     _poolFirebornKnight,
+    _poolFirefistAdept,
     _poolFirehoofCavalry,
     _poolFirstSphereGargantua,
     _poolFlameJet,
@@ -828,6 +834,7 @@ const shard: CardShard = {
     _poolLightningDiadem,
     _poolLightningRigCrew,
     _poolLilianasScrounger,
+    _poolLingeringPhantom,
     _poolLlanowarLoamspeaker,
     _poolLoranOfTheThirdPath,
     _poolLoreholdApprentice,
@@ -1073,6 +1080,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBadgerToken,
+    _tokensDemonToken66FlyingTrampleUpkeepSacrifice,
     _tokensDragonToken55,
     _tokensForestTentacleToken,
     _tokensGoatToken,

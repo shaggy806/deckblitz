@@ -112,6 +112,7 @@ import _poolCyberneticaDatasmith from "../pool/cybernetica-datasmith.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDaringWaverider from "../pool/daring-waverider.js";
+import _poolDavenantTrapper from "../pool/davenant-trapper.js";
 import _poolDawnEvangel from "../pool/dawn-evangel.js";
 import _poolDeceit from "../pool/deceit.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
@@ -205,6 +206,7 @@ import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
 import _poolGiftOfFangs from "../pool/gift-of-fangs.js";
+import _poolGiftOfGrowth from "../pool/gift-of-growth.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
 import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
@@ -227,6 +229,7 @@ import _poolGuildSummit from "../pool/guild-summit.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
 import _poolHalberdier from "../pool/halberdier.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
+import _poolHallarTheFirefletcher from "../pool/hallar-the-firefletcher.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
 import _poolHandOfEnlightenment from "../pool/hand-of-enlightenment.js";
@@ -472,6 +475,7 @@ import _poolT45PowerArmor from "../pool/t-45-power-armor.js";
 import _poolTalasLookout from "../pool/talas-lookout.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
+import _poolTeferiTimebender from "../pool/teferi-timebender.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
@@ -686,6 +690,7 @@ const shard: CardShard = {
     _poolDaiLiIndoctrination,
     _poolDamoclesBaseSwordOfKang,
     _poolDaringWaverider,
+    _poolDavenantTrapper,
     _poolDawnEvangel,
     _poolDeceit,
     _poolDeepwoodGhoul,
@@ -779,6 +784,7 @@ const shard: CardShard = {
     _poolGiantsGrasp,
     _poolGideonsLawkeeper,
     _poolGiftOfFangs,
+    _poolGiftOfGrowth,
     _poolGimlisFury,
     _poolGixianSkullflayer,
     _poolGlisteningDawn,
@@ -801,6 +807,7 @@ const shard: CardShard = {
     _poolGysahlGreens,
     _poolHalberdier,
     _poolHallOfTagsin,
+    _poolHallarTheFirefletcher,
     _poolHammerheadTyrant,
     _poolHanaKami,
     _poolHandOfEnlightenment,
@@ -1046,6 +1053,7 @@ const shard: CardShard = {
     _poolTalasLookout,
     _poolTatteredMummy,
     _poolTazriBeaconOfUnity,
+    _poolTeferiTimebender,
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,

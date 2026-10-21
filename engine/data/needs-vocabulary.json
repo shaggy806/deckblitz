@@ -9070,6 +9070,24 @@
   },
   "effect:damage-from-this-way": {
    "example": "Vivien's Invocation"
+  },
+  "trigger:gains-life-from-source-filter": {
+   "example": "Firesong and Sunspeaker"
+  },
+  "filter:attached-to-trigger-object": {
+   "example": "Corrosive Ooze"
+  },
+  "effect:exchange-life-power": {
+   "example": "Evra, Halcyon Witness"
+  },
+  "effect:exile-per-life-lost-mixed-zones": {
+   "example": "Lich's Mastery"
+  },
+  "mechanic:coin-flip-heads-tails": {
+   "example": "Two-Headed Giant"
+  },
+  "effect:damage-from-created-token": {
+   "example": "Chainer's Torment"
   }
  }
 }

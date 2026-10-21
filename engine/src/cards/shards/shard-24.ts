@@ -50,12 +50,14 @@ import _poolBattlegrowth from "../pool/battlegrowth.js";
 import _poolBeginTheInvasion from "../pool/begin-the-invasion.js";
 import _poolBelligerentGuest from "../pool/belligerent-guest.js";
 import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
+import _poolBenalishHonorGuard from "../pool/benalish-honor-guard.js";
 import _poolBesottedKnight from "../pool/besotted-knight.js";
 import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
+import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
@@ -250,6 +252,7 @@ import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
 import _poolKronchWrangler from "../pool/kronch-wrangler.js";
 import _poolKrosanVerge from "../pool/krosan-verge.js";
 import _poolKuldothaForgemaster from "../pool/kuldotha-forgemaster.js";
+import _poolKwendePrideOfFemeref from "../pool/kwende-pride-of-femeref.js";
 import _poolKyoshiVillage from "../pool/kyoshi-village.js";
 import _poolLaboratoryBrute from "../pool/laboratory-brute.js";
 import _poolLeadenMyr from "../pool/leaden-myr.js";
@@ -432,6 +435,7 @@ import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
+import _poolTempestDjinn from "../pool/tempest-djinn.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTemporalIntervention from "../pool/temporal-intervention.js";
 import _poolTemptWithTreats from "../pool/tempt-with-treats.js";
@@ -455,6 +459,7 @@ import _poolThrabenInspector from "../pool/thraben-inspector.js";
 import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
 import _poolThrunTheLastTroll from "../pool/thrun-the-last-troll.js";
 import _poolThud from "../pool/thud.js";
+import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonyStark from "../pool/tony-stark.js";
@@ -499,6 +504,7 @@ import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
 import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWarRoom from "../pool/war-room.js";
+import _poolWarcryPhoenix from "../pool/warcry-phoenix.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
 import _poolWatchfulBlisterzoa from "../pool/watchful-blisterzoa.js";
 import _poolWaterWings from "../pool/water-wings.js";
@@ -510,6 +516,7 @@ import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
+import _poolWindgraceAcolyte from "../pool/windgrace-acolyte.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
@@ -587,12 +594,14 @@ const shard: CardShard = {
     _poolBeginTheInvasion,
     _poolBelligerentGuest,
     _poolBelligerentWhiptail,
+    _poolBenalishHonorGuard,
     _poolBesottedKnight,
     _poolBetorAncestorsVoice,
     _poolBitterbowSharpshooters,
     _poolBlackBoltInhumanKing,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
+    _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
     _poolBlur,
     _poolBoggartShenanigans,
@@ -787,6 +796,7 @@ const shard: CardShard = {
     _poolKronchWrangler,
     _poolKrosanVerge,
     _poolKuldothaForgemaster,
+    _poolKwendePrideOfFemeref,
     _poolKyoshiVillage,
     _poolLaboratoryBrute,
     _poolLeadenMyr,
@@ -969,6 +979,7 @@ const shard: CardShard = {
     _poolTangledVale,
     _poolTavernBrawler,
     _poolTeferisProtege,
+    _poolTempestDjinn,
     _poolTemporalFissure,
     _poolTemporalIntervention,
     _poolTemptWithTreats,
@@ -992,6 +1003,7 @@ const shard: CardShard = {
     _poolThroneOfTheHighCity,
     _poolThrunTheLastTroll,
     _poolThud,
+    _poolTianaShipsCaretaker,
     _poolTibaltsRager,
     _poolTolariaWest,
     _poolTonyStark,
@@ -1036,6 +1048,7 @@ const shard: CardShard = {
     _poolWalkingBulwark,
     _poolWallOfSpears,
     _poolWarRoom,
+    _poolWarcryPhoenix,
     _poolWarlordsFury,
     _poolWatchfulBlisterzoa,
     _poolWaterWings,
@@ -1047,6 +1060,7 @@ const shard: CardShard = {
     _poolWildShape,
     _poolWillowWind,
     _poolWindbriskHeights,
+    _poolWindgraceAcolyte,
     _poolWirewoodElf,
     _poolWitchsOven,
     _poolWitherbloomPledgemage,

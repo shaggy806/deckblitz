@@ -70,6 +70,7 @@ import _poolBriarHydra from "../pool/briar-hydra.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
+import _poolCabalPaladin from "../pool/cabal-paladin.js";
 import _poolCabalRitual from "../pool/cabal-ritual.js";
 import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
@@ -179,6 +180,7 @@ import _poolFracture from "../pool/fracture.js";
 import _poolFranticStrength from "../pool/frantic-strength.js";
 import _poolFrenziedRage from "../pool/frenzied-rage.js";
 import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
+import _poolGaeasProtector from "../pool/gaeas-protector.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGandalfsSanction from "../pool/gandalfs-sanction.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
@@ -416,6 +418,7 @@ import _poolSearchlightGeist from "../pool/searchlight-geist.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
+import _poolSerraDisciple from "../pool/serra-disciple.js";
 import _poolShadowStinger from "../pool/shadow-stinger.js";
 import _poolShamblingStrider from "../pool/shambling-strider.js";
 import _poolShaoJun from "../pool/shao-jun.js";
@@ -647,6 +650,7 @@ const shard: CardShard = {
     _poolBrittleEffigy,
     _poolBroodWeaver,
     _poolBurningTreeVandal,
+    _poolCabalPaladin,
     _poolCabalRitual,
     _poolCabarettiCourtyard,
     _poolCallerOfGales,
@@ -756,6 +760,7 @@ const shard: CardShard = {
     _poolFranticStrength,
     _poolFrenziedRage,
     _poolFrontlineDevastator,
+    _poolGaeasProtector,
     _poolGaiusVanBaelsar,
     _poolGandalfsSanction,
     _poolGarruksGorehorn,
@@ -993,6 +998,7 @@ const shard: CardShard = {
     _poolSejiriRefuge,
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
+    _poolSerraDisciple,
     _poolShadowStinger,
     _poolShamblingStrider,
     _poolShaoJun,

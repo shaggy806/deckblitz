@@ -257,6 +257,7 @@ import _poolKiorasFollower from "../pool/kioras-follower.js";
 import _poolKishlaTrawlers from "../pool/kishla-trawlers.js";
 import _poolKishlaVillage from "../pool/kishla-village.js";
 import _poolKitesailScout from "../pool/kitesail-scout.js";
+import _poolKnightOfGrace from "../pool/knight-of-grace.js";
 import _poolKnightOfMeadowgrain from "../pool/knight-of-meadowgrain.js";
 import _poolKotisSibsigChampion from "../pool/kotis-sibsig-champion.js";
 import _poolKrakenHatchling from "../pool/kraken-hatchling.js";
@@ -455,6 +456,7 @@ import _poolStrandsOfNight from "../pool/strands-of-night.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
+import _poolStrongholdConfessor from "../pool/stronghold-confessor.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
@@ -823,6 +825,7 @@ const shard: CardShard = {
     _poolKishlaTrawlers,
     _poolKishlaVillage,
     _poolKitesailScout,
+    _poolKnightOfGrace,
     _poolKnightOfMeadowgrain,
     _poolKotisSibsigChampion,
     _poolKrakenHatchling,
@@ -1021,6 +1024,7 @@ const shard: CardShard = {
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,
     _poolStromkirkBloodthief,
+    _poolStrongholdConfessor,
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,

@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Dominaria, whole** (batch 128): its last 119 cards, 84 authored by four `card-author`
+  agents and 5 by the scaffolder (kicker on permanents and "if it was kicked," taught to it) —
+  Teferi, Timebender, Chandra, Bold Pyromancer, Hallar, the Firefletcher, Grunn, the Lonely King,
+  Kwende, Pride of Femeref, Zahid, Djinn of the Lamp; 30 blocked, one card a need but a kicker that
+  sacrifices (Goblin Barrage, Vicious Offering) (2026-10-21).
 - **Commander 2018 and Core Set 2019, whole** (batch 126): their last 109 cards, 76 authored by
   four `card-author` agents and 2 by the lead — the five Storms, Ajani, Adversary of Tyrants,
   Liliana, the Necromancer, Lena, Selfless Champion, Isareth the Awakener, Chromium, the Mutable;

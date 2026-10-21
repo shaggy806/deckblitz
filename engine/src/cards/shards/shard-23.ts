@@ -59,6 +59,7 @@ import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
 import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
+import _poolBlessingOfBelzenlok from "../pool/blessing-of-belzenlok.js";
 import _poolBloodForBones from "../pool/blood-for-bones.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
 import _poolBloodriteInvoker from "../pool/bloodrite-invoker.js";
@@ -622,6 +623,7 @@ const shard: CardShard = {
     _poolBladedBattleFan,
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
+    _poolBlessingOfBelzenlok,
     _poolBloodForBones,
     _poolBloodflowConnoisseur,
     _poolBloodriteInvoker,

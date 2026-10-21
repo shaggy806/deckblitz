@@ -466,6 +466,7 @@ import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
+import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolThunderingDjinn from "../pool/thundering-djinn.js";
@@ -1012,6 +1013,7 @@ const shard: CardShard = {
     _poolTheoreticalNecromancer,
     _poolThirstingShade,
     _poolThornhideWolves,
+    _poolThranTemporalGateway,
     _poolThrissNantukoPrimus,
     _poolThunderSalvo,
     _poolThunderingDjinn,

@@ -102,6 +102,7 @@ import _poolCursedFlesh from "../pool/cursed-flesh.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
 import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js";
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
+import _poolDaringArchaeologist from "../pool/daring-archaeologist.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
 import _poolDeadOfWinter from "../pool/dead-of-winter.js";
 import _poolDeadapult from "../pool/deadapult.js";
@@ -301,6 +302,7 @@ import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js
 import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNestRobber from "../pool/nest-robber.js";
+import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
@@ -384,6 +386,7 @@ import _poolSecondThoughts from "../pool/second-thoughts.js";
 import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSeismicWave from "../pool/seismic-wave.js";
+import _poolSentinelOfThePearlTrident from "../pool/sentinel-of-the-pearl-trident.js";
 import _poolSeraphOfNewPhyrexia from "../pool/seraph-of-new-phyrexia.js";
 import _poolSevinneTheChronoclasm from "../pool/sevinne-the-chronoclasm.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
@@ -646,6 +649,7 @@ const shard: CardShard = {
     _poolCutYourLosses,
     _poolDaredevilFearlessFighter,
     _poolDarigaazsCharm,
+    _poolDaringArchaeologist,
     _poolDarkthicketWolf,
     _poolDeadOfWinter,
     _poolDeadapult,
@@ -845,6 +849,7 @@ const shard: CardShard = {
     _poolNayaPanorama,
     _poolNemaSiltlurker,
     _poolNestRobber,
+    _poolNiambiFaithfulHealer,
     _poolNightOfTheSweetsRevenge,
     _poolNimanaSkydancer,
     _poolNornsInquisitor,
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolSeedshipAgrarian,
     _poolSeethingLandscape,
     _poolSeismicWave,
+    _poolSentinelOfThePearlTrident,
     _poolSeraphOfNewPhyrexia,
     _poolSevinneTheChronoclasm,
     _poolSewnEyeDrake,

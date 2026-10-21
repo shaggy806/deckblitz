@@ -51,6 +51,7 @@ import _poolBloodBairn from "../pool/blood-bairn.js";
 import _poolBloodPetalCelebrant from "../pool/blood-petal-celebrant.js";
 import _poolBloodResearcher from "../pool/blood-researcher.js";
 import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
+import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
@@ -289,6 +290,7 @@ import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
+import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
 import _poolMnemonicDeluge from "../pool/mnemonic-deluge.js";
 import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
@@ -417,6 +419,7 @@ import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
 import _poolSolsticeRevelations from "../pool/solstice-revelations.js";
+import _poolSoulSalvage from "../pool/soul-salvage.js";
 import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
@@ -606,6 +609,7 @@ const shard: CardShard = {
     _poolBloodPetalCelebrant,
     _poolBloodResearcher,
     _poolBloodchiefAscension,
+    _poolBloodstoneGoblin,
     _poolBogstomper,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
@@ -844,6 +848,7 @@ const shard: CardShard = {
     _poolMilitiaBugler,
     _poolMindsDilation,
     _poolMischievousPup,
+    _poolMishrasSelfReplicator,
     _poolMistDancer,
     _poolMnemonicDeluge,
     _poolMoltenGatekeeper,
@@ -972,6 +977,7 @@ const shard: CardShard = {
     _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
     _poolSolsticeRevelations,
+    _poolSoulSalvage,
     _poolSoulreaperOfMogis,
     _poolSoulsMajesty,
     _poolSoulswornJury,

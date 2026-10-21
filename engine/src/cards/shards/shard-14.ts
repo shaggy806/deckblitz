@@ -76,6 +76,7 @@ import _poolCauldronOfEssence from "../pool/cauldron-of-essence.js";
 import _poolCavalryDrillmaster from "../pool/cavalry-drillmaster.js";
 import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
 import _poolChalkOutline from "../pool/chalk-outline.js";
+import _poolChandrasOutburst from "../pool/chandras-outburst.js";
 import _poolChannelTheSuns from "../pool/channel-the-suns.js";
 import _poolCharforger from "../pool/charforger.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
@@ -141,6 +142,7 @@ import _poolDreadwurm from "../pool/dreadwurm.js";
 import _poolDrossCrocodile from "../pool/dross-crocodile.js";
 import _poolDrossforgeBridge from "../pool/drossforge-bridge.js";
 import _poolDrownedCatacomb from "../pool/drowned-catacomb.js";
+import _poolDrudgeSentinel from "../pool/drudge-sentinel.js";
 import _poolDrudgeSkeletons from "../pool/drudge-skeletons.js";
 import _poolDuergarCaveGuard from "../pool/duergar-cave-guard.js";
 import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
@@ -314,6 +316,7 @@ import _poolMentalModulation from "../pool/mental-modulation.js";
 import _poolMerchantScroll from "../pool/merchant-scroll.js";
 import _poolMerfolkLooter from "../pool/merfolk-looter.js";
 import _poolMerfolkMistbinder from "../pool/merfolk-mistbinder.js";
+import _poolMerfolkTrickster from "../pool/merfolk-trickster.js";
 import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
 import _poolMerryBards from "../pool/merry-bards.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
@@ -386,6 +389,7 @@ import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
 import _poolRegenesis from "../pool/regenesis.js";
 import _poolRegress from "../pool/regress.js";
+import _poolRelicRunner from "../pool/relic-runner.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
@@ -467,6 +471,7 @@ import _poolTeyoDiamondbladeMage from "../pool/teyo-diamondblade-mage.js";
 import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolTheAesirEscapeValhalla from "../pool/the-aesir-escape-valhalla.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
+import _poolTheFirstEruption from "../pool/the-first-eruption.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolTheTriumphOfAnax from "../pool/the-triumph-of-anax.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
@@ -526,6 +531,7 @@ import _poolWingedShepherd from "../pool/winged-shepherd.js";
 import _poolWitchHunter from "../pool/witch-hunter.js";
 import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
+import _poolWizardsLightning from "../pool/wizards-lightning.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
@@ -624,6 +630,7 @@ const shard: CardShard = {
     _poolCavalryDrillmaster,
     _poolCephalidPathmage,
     _poolChalkOutline,
+    _poolChandrasOutburst,
     _poolChannelTheSuns,
     _poolCharforger,
     _poolChiefOfTheScale,
@@ -689,6 +696,7 @@ const shard: CardShard = {
     _poolDrossCrocodile,
     _poolDrossforgeBridge,
     _poolDrownedCatacomb,
+    _poolDrudgeSentinel,
     _poolDrudgeSkeletons,
     _poolDuergarCaveGuard,
     _poolDukeUlderRavengard,
@@ -862,6 +870,7 @@ const shard: CardShard = {
     _poolMerchantScroll,
     _poolMerfolkLooter,
     _poolMerfolkMistbinder,
+    _poolMerfolkTrickster,
     _poolMerrowWitsniper,
     _poolMerryBards,
     _poolMidnightAssassin,
@@ -934,6 +943,7 @@ const shard: CardShard = {
     _poolRecklessAbandon,
     _poolRegenesis,
     _poolRegress,
+    _poolRelicRunner,
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,
     _poolRestlessPrairie,
@@ -1015,6 +1025,7 @@ const shard: CardShard = {
     _poolThalisseReverentMedium,
     _poolTheAesirEscapeValhalla,
     _poolTheEternityElevator,
+    _poolTheFirstEruption,
     _poolTheGitrogMonster,
     _poolTheTriumphOfAnax,
     _poolThickestInTheThicket,
@@ -1074,6 +1085,7 @@ const shard: CardShard = {
     _poolWitchHunter,
     _poolWitchsClinic,
     _poolWitherbloomCharm,
+    _poolWizardsLightning,
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
     _poolZealousLorecaster,

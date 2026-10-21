@@ -53,6 +53,7 @@ import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
 import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
 import _poolBlueDragon from "../pool/blue-dragon.js";
+import _poolBoardTheWeatherlight from "../pool/board-the-weatherlight.js";
 import _poolBofurReliableGuardian from "../pool/bofur-reliable-guardian.js";
 import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
@@ -116,6 +117,7 @@ import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
 import _poolDredgingClaw from "../pool/dredging-claw.js";
+import _poolDub from "../pool/dub.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
@@ -138,6 +140,7 @@ import _poolEssencePulse from "../pool/essence-pulse.js";
 import _poolEtchedCornfield from "../pool/etched-cornfield.js";
 import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
+import _poolExcavationElephant from "../pool/excavation-elephant.js";
 import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExpendableLackey from "../pool/expendable-lackey.js";
 import _poolExplosiveEntry from "../pool/explosive-entry.js";
@@ -558,6 +561,7 @@ import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
 import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
+import _poolWildOnslaught from "../pool/wild-onslaught.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
 import _poolWingCommando from "../pool/wing-commando.js";
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolBloodthirstyAerialist,
     _poolBlossomCladWerewolf,
     _poolBlueDragon,
+    _poolBoardTheWeatherlight,
     _poolBofurReliableGuardian,
     _poolBolracClanBasher,
     _poolBoltHound,
@@ -711,6 +716,7 @@ const shard: CardShard = {
     _poolDragonTurtle,
     _poolDragonsEyeSentry,
     _poolDredgingClaw,
+    _poolDub,
     _poolDuelForDominance,
     _poolDuskwielder,
     _poolDwarvenTrader,
@@ -733,6 +739,7 @@ const shard: CardShard = {
     _poolEtchedCornfield,
     _poolEternalWarrior,
     _poolEtherealInvestigator,
+    _poolExcavationElephant,
     _poolExosuitSavior,
     _poolExpendableLackey,
     _poolExplosiveEntry,
@@ -1153,6 +1160,7 @@ const shard: CardShard = {
     _poolWhiplashWordsmith,
     _poolWhiteMagesStaff,
     _poolWildGrowth,
+    _poolWildOnslaught,
     _poolWillOTheWisp,
     _poolWillOfTheTemur,
     _poolWingCommando,

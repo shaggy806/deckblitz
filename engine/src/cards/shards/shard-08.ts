@@ -125,6 +125,7 @@ import _poolDisciplesOfGix from "../pool/disciples-of-gix.js";
 import _poolDispersingOrb from "../pool/dispersing-orb.js";
 import _poolDisruptingScepter from "../pool/disrupting-scepter.js";
 import _poolDivertDisaster from "../pool/divert-disaster.js";
+import _poolDivest from "../pool/divest.js";
 import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
@@ -485,7 +486,9 @@ import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolTenuredConcocter from "../pool/tenured-concocter.js";
 import _poolThaliasLancers from "../pool/thalias-lancers.js";
+import _poolThallidOmnivore from "../pool/thallid-omnivore.js";
 import _poolThawbringer from "../pool/thawbringer.js";
+import _poolTheAntiquitiesWar from "../pool/the-antiquities-war.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolTheHauntOfHightower from "../pool/the-haunt-of-hightower.js";
@@ -715,6 +718,7 @@ const shard: CardShard = {
     _poolDispersingOrb,
     _poolDisruptingScepter,
     _poolDivertDisaster,
+    _poolDivest,
     _poolDocOcksHenchmen,
     _poolDowsingDevice,
     _poolDragonflySuit,
@@ -1075,7 +1079,9 @@ const shard: CardShard = {
     _poolTemurDevotee,
     _poolTenuredConcocter,
     _poolThaliasLancers,
+    _poolThallidOmnivore,
     _poolThawbringer,
+    _poolTheAntiquitiesWar,
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
     _poolTheHauntOfHightower,

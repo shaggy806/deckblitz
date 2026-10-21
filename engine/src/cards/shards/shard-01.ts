@@ -223,6 +223,7 @@ import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJadeAvenger from "../pool/jade-avenger.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
+import _poolJoustingLance from "../pool/jousting-lance.js";
 import _poolJunktroller from "../pool/junktroller.js";
 import _poolJuzamDjinn from "../pool/juzam-djinn.js";
 import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
@@ -444,6 +445,7 @@ import _poolTearsOfValakut from "../pool/tears-of-valakut.js";
 import _poolTeleportationCircle from "../pool/teleportation-circle.js";
 import _poolTelethopter from "../pool/telethopter.js";
 import _poolTempleOfEpiphany from "../pool/temple-of-epiphany.js";
+import _poolTemporalMachinations from "../pool/temporal-machinations.js";
 import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
@@ -766,6 +768,7 @@ const shard: CardShard = {
     _poolJadeAvenger,
     _poolJenaraAsuraOfWar,
     _poolJhessianLookout,
+    _poolJoustingLance,
     _poolJunktroller,
     _poolJuzamDjinn,
     _poolKaitosPursuit,
@@ -987,6 +990,7 @@ const shard: CardShard = {
     _poolTeleportationCircle,
     _poolTelethopter,
     _poolTempleOfEpiphany,
+    _poolTemporalMachinations,
     _poolTemptWithVengeance,
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
