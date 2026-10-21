@@ -104,6 +104,7 @@ import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
+import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
@@ -611,6 +612,7 @@ const shard: CardShard = {
     _poolDreadhound,
     _poolDreamTwist,
     _poolDustBowl,
+    _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
     _poolEdenSeatOfTheSanctum,
     _poolElementalSummoning,

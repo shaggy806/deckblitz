@@ -436,6 +436,7 @@ import _poolStarAthlete from "../pool/star-athlete.js";
 import _poolStarfallInvocation from "../pool/starfall-invocation.js";
 import _poolStarstorm from "../pool/starstorm.js";
 import _poolStaticPrison from "../pool/static-prison.js";
+import _poolStealArtifact from "../pool/steal-artifact.js";
 import _poolStealthMission from "../pool/stealth-mission.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
@@ -464,6 +465,7 @@ import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheElderspell from "../pool/the-elderspell.js";
+import _poolTheHive from "../pool/the-hive.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheOneRing from "../pool/the-one-ring.js";
 import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
@@ -1016,6 +1018,7 @@ const shard: CardShard = {
     _poolStarfallInvocation,
     _poolStarstorm,
     _poolStaticPrison,
+    _poolStealArtifact,
     _poolStealthMission,
     _poolStepThrough,
     _poolStewardOfTheHarvest,
@@ -1044,6 +1047,7 @@ const shard: CardShard = {
     _poolTheCrystalsChosen,
     _poolTheEarthCrystal,
     _poolTheElderspell,
+    _poolTheHive,
     _poolTheMechanistAerialArtisan,
     _poolTheOneRing,
     _poolTheTenthDoctor,

@@ -202,6 +202,7 @@ import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
+import _poolGauntletOfMight from "../pool/gauntlet-of-might.js";
 import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
@@ -461,6 +462,7 @@ import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
+import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
@@ -783,6 +785,7 @@ const shard: CardShard = {
     _poolGatewatchBeacon,
     _poolGatherTheWhiteLotus,
     _poolGatheringStone,
+    _poolGauntletOfMight,
     _poolGeneralKudroOfDrannith,
     _poolGenesisChamber,
     _poolGhostlyFlicker,
@@ -1042,6 +1045,7 @@ const shard: CardShard = {
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,
     _poolSternLesson,
+    _poolStoneGiant,
     _poolStoneskin,
     _poolStormTheFestival,
     _poolStranglerootGeist,

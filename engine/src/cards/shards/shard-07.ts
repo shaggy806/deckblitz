@@ -232,6 +232,7 @@ import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
 import _poolKabutoMoth from "../pool/kabuto-moth.js";
 import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
+import _poolKarma from "../pool/karma.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKindercatch from "../pool/kindercatch.js";
@@ -579,6 +580,7 @@ import _tokensShapeshifterTokenBlue from "../tokens/shapeshifter-token-blue.js";
 import _tokensSpiderToken21BlackMenaceReach from "../tokens/spider-token-2-1-black-menace-reach.js";
 import _tokensSpiritTokenQuintorius from "../tokens/spirit-token-quintorius.js";
 import _tokensVampireDemonToken from "../tokens/vampire-demon-token.js";
+import _tokensWaspToken from "../tokens/wasp-token.js";
 import _tokensWraithToken from "../tokens/wraith-token.js";
 import _tokensWurmTokenTrample from "../tokens/wurm-token-trample.js";
 import _tokensXXGolemTokenHaste from "../tokens/x-x-golem-token-haste.js";
@@ -815,6 +817,7 @@ const shard: CardShard = {
     _poolKabiraPlateau,
     _poolKabutoMoth,
     _poolKariZevSkyshipRaider,
+    _poolKarma,
     _poolKarvanistaLoyalLupari,
     _poolKeigaTheTideStar,
     _poolKindercatch,
@@ -1164,6 +1167,7 @@ const shard: CardShard = {
     _tokensSpiderToken21BlackMenaceReach,
     _tokensSpiritTokenQuintorius,
     _tokensVampireDemonToken,
+    _tokensWaspToken,
     _tokensWraithToken,
     _tokensWurmTokenTrample,
     _tokensXXGolemTokenHaste,

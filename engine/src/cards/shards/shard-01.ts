@@ -231,6 +231,7 @@ import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
+import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
@@ -456,6 +457,7 @@ import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
+import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
@@ -472,6 +474,7 @@ import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
+import _poolTranquility from "../pool/tranquility.js";
 import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
@@ -779,6 +782,7 @@ const shard: CardShard = {
     _poolKaradorGhostChieftain,
     _poolKarakas,
     _poolKavuGlider,
+    _poolKeldonWarlord,
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,
     _poolKitsaOtterballElite,
@@ -1004,6 +1008,7 @@ const shard: CardShard = {
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,
+    _poolThicketBasilisk,
     _poolThievesGuildEnforcer,
     _poolThoughtShucker,
     _poolThoughtcast,
@@ -1020,6 +1025,7 @@ const shard: CardShard = {
     _poolTookReaper,
     _poolToxicAbomination,
     _poolTragicPoet,
+    _poolTranquility,
     _poolTraumatize,
     _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,

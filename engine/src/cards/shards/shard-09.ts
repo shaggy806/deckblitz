@@ -108,6 +108,7 @@ import _poolCosmicRebirth from "../pool/cosmic-rebirth.js";
 import _poolCountersquall from "../pool/countersquall.js";
 import _poolCourtOfCunning from "../pool/court-of-cunning.js";
 import _poolCovertOperative from "../pool/covert-operative.js";
+import _poolCreatureBond from "../pool/creature-bond.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
 import _poolCrystalCarapace from "../pool/crystal-carapace.js";
 import _poolCrystalVein from "../pool/crystal-vein.js";
@@ -181,6 +182,7 @@ import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
 import _poolFreelanceMuscle from "../pool/freelance-muscle.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
+import _poolFungusaur from "../pool/fungusaur.js";
 import _poolFuriousAssault from "../pool/furious-assault.js";
 import _poolFuriousBellow from "../pool/furious-bellow.js";
 import _poolFurnaceHellkite from "../pool/furnace-hellkite.js";
@@ -697,6 +699,7 @@ const shard: CardShard = {
     _poolCountersquall,
     _poolCourtOfCunning,
     _poolCovertOperative,
+    _poolCreatureBond,
     _poolCrudeRampart,
     _poolCrystalCarapace,
     _poolCrystalVein,
@@ -770,6 +773,7 @@ const shard: CardShard = {
     _poolFreelanceMuscle,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
+    _poolFungusaur,
     _poolFuriousAssault,
     _poolFuriousBellow,
     _poolFurnaceHellkite,

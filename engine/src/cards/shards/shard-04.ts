@@ -16,6 +16,7 @@ import _poolAmazingSpiderMan from "../pool/amazing-spider-man.js";
 import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
 import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
+import _poolAnimateWall from "../pool/animate-wall.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
@@ -155,6 +156,7 @@ import _poolFlayedOne from "../pool/flayed-one.js";
 import _poolFleshformer from "../pool/fleshformer.js";
 import _poolFlowerFlourish from "../pool/flower-flourish.js";
 import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
+import _poolForceOfNature from "../pool/force-of-nature.js";
 import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
@@ -219,6 +221,7 @@ import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
 import _poolHungryForMore from "../pool/hungry-for-more.js";
 import _poolHuntForSpecimens from "../pool/hunt-for-specimens.js";
+import _poolHurricane from "../pool/hurricane.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
@@ -569,6 +572,7 @@ const shard: CardShard = {
     _poolAngelicChorus,
     _poolAngelsGrace,
     _poolAnheloThePainter,
+    _poolAnimateWall,
     _poolAnkleBiter,
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
@@ -708,6 +712,7 @@ const shard: CardShard = {
     _poolFleshformer,
     _poolFlowerFlourish,
     _poolFlowstoneCharger,
+    _poolForceOfNature,
     _poolForgingTheTyriteSword,
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
@@ -772,6 +777,7 @@ const shard: CardShard = {
     _poolHumongulus,
     _poolHungryForMore,
     _poolHuntForSpecimens,
+    _poolHurricane,
     _poolHydraInfiltration,
     _poolIceOut,
     _poolImposingVantasaur,

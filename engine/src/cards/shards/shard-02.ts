@@ -165,6 +165,7 @@ import _poolFangDruidSummoner from "../pool/fang-druid-summoner.js";
 import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
+import _poolFeedback from "../pool/feedback.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
 import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
@@ -294,6 +295,7 @@ import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
 import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
 import _poolMindSpring from "../pool/mind-spring.js";
+import _poolMindTwist from "../pool/mind-twist.js";
 import _poolMinwuWhiteMage from "../pool/minwu-white-mage.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
@@ -699,6 +701,7 @@ const shard: CardShard = {
     _poolFangkeepersFamiliar,
     _poolFarfinder,
     _poolFearOfBurningAlive,
+    _poolFeedback,
     _poolFelineSovereign,
     _poolFinchFormation,
     _poolFirebendingLesson,
@@ -828,6 +831,7 @@ const shard: CardShard = {
     _poolMidnightCharm,
     _poolMightyMutanimals,
     _poolMindSpring,
+    _poolMindTwist,
     _poolMinwuWhiteMage,
     _poolMishrasOnslaught,
     _poolMistbladeShinobi,

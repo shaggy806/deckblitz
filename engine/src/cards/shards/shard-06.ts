@@ -57,6 +57,7 @@ import _poolBloodOperative from "../pool/blood-operative.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloodmistInfiltrator from "../pool/bloodmist-infiltrator.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
+import _poolBlueElementalBlast from "../pool/blue-elemental-blast.js";
 import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
 import _poolBombard from "../pool/bombard.js";
 import _poolBonepickerSkirge from "../pool/bonepicker-skirge.js";
@@ -246,6 +247,7 @@ import _poolIntoTheRoil from "../pool/into-the-roil.js";
 import _poolInvasionOfBelenon from "../pool/invasion-of-belenon.js";
 import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
+import _poolIvoryCup from "../pool/ivory-cup.js";
 import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
@@ -622,6 +624,7 @@ const shard: CardShard = {
     _poolBloodlineBidding,
     _poolBloodmistInfiltrator,
     _poolBloomingStinger,
+    _poolBlueElementalBlast,
     _poolBoilerbilgesRipper,
     _poolBombard,
     _poolBonepickerSkirge,
@@ -811,6 +814,7 @@ const shard: CardShard = {
     _poolInvasionOfBelenon,
     _poolInvasiveManeuvers,
     _poolIronApprentice,
+    _poolIvoryCup,
     _poolJadeSeedstones,
     _poolJarvisEarthsMightiestButler,
     _poolJerrenCorruptedBishop,

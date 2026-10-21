@@ -96,8 +96,11 @@ section keeps only what to do next.
 - **Also: set by set, oldest first** (the `author-by-set-oldest` skill; the user's call
   2026-10-21): the same whole-set walk from Limited Edition Alpha forward in time
   (`npm run cards:sets -w engine -- --oldest --next 60`), until it meets the newest-first walk
-  below. **Next, Limited Edition Alpha** (137 left), then Beta (1), Arabian Nights (53),
-  Antiquities (53), Legends (219).
+  below. Batch 130 took Alpha whole and Beta's last card, building chosen-source prevention and
+  colour setting. **Next, Arabian Nights** (53 left), then Antiquities (53), Legends (219), The
+  Dark (82). Leads measured over the whole pool: setting a land's type with its rules text gone
+  (`static:land-type-setting`, rule 305.7 — 8), damage redirection
+  (`replacement:damage-redirection` — 7), banding (`keyword:banding` — 4).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
   ranked ones first. Every set from Reality Fracture back to Phyrexia: All Will Be One is whole

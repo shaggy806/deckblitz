@@ -90,6 +90,7 @@ import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
+import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
@@ -154,6 +155,7 @@ import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
 import _poolFanaticOfTheHarrowing from "../pool/fanatic-of-the-harrowing.js";
+import _poolFarmstead from "../pool/farmstead.js";
 import _poolFearOfInfinity from "../pool/fear-of-infinity.js";
 import _poolFeatherTheRedeemed from "../pool/feather-the-redeemed.js";
 import _poolFeignDeath from "../pool/feign-death.js";
@@ -647,6 +649,7 @@ const shard: CardShard = {
     _poolCloudcrownOak,
     _poolConciliatorsDuelist,
     _poolConsumingAetherborn,
+    _poolCopperTablet,
     _poolCreepingTarPit,
     _poolCrewCaptain,
     _poolCrossoverCollaboration,
@@ -711,6 +714,7 @@ const shard: CardShard = {
     _poolFalkenrathReaver,
     _poolFallenAskari,
     _poolFanaticOfTheHarrowing,
+    _poolFarmstead,
     _poolFearOfInfinity,
     _poolFeatherTheRedeemed,
     _poolFeignDeath,

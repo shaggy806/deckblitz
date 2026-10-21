@@ -104,6 +104,7 @@ import _poolCreepingTrailblazer from "../pool/creeping-trailblazer.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
+import _poolCrystalRod from "../pool/crystal-rod.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
@@ -236,6 +237,7 @@ import _poolHolyCow from "../pool/holy-cow.js";
 import _poolHolyStrength from "../pool/holy-strength.js";
 import _poolHondenOfSeeingWinds from "../pool/honden-of-seeing-winds.js";
 import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
+import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
@@ -512,6 +514,7 @@ import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
 import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
+import _poolTsunami from "../pool/tsunami.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
@@ -700,6 +703,7 @@ const shard: CardShard = {
     _poolCrookclawElder,
     _poolCrownOfSkemfar,
     _poolCrystalGrotto,
+    _poolCrystalRod,
     _poolCursebreak,
     _poolDainsCompany,
     _poolDanithaSpearOfAgony,
@@ -832,6 +836,7 @@ const shard: CardShard = {
     _poolHolyStrength,
     _poolHondenOfSeeingWinds,
     _poolHorridShadowspinner,
+    _poolHowlFromBeyond,
     _poolHyalopterousLemure,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
@@ -1108,6 +1113,7 @@ const shard: CardShard = {
     _poolTreeshakerChimera,
     _poolTributaryInstructor,
     _poolTrustworthyScout,
+    _poolTsunami,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
     _poolTwistReality,

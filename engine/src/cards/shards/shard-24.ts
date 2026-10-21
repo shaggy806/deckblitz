@@ -116,6 +116,7 @@ import _poolCullingTheWeak from "../pool/culling-the-weak.js";
 import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
 import _poolCurryFavor from "../pool/curry-favor.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
+import _poolCursedLand from "../pool/cursed-land.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
@@ -317,6 +318,7 @@ import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
+import _poolPhantasmalForces from "../pool/phantasmal-forces.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPlagueEngineer from "../pool/plague-engineer.js";
 import _poolPointedDiscussion from "../pool/pointed-discussion.js";
@@ -504,6 +506,7 @@ import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
 import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
 import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
+import _poolWanderlust from "../pool/wanderlust.js";
 import _poolWarRoom from "../pool/war-room.js";
 import _poolWarcryPhoenix from "../pool/warcry-phoenix.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
@@ -661,6 +664,7 @@ const shard: CardShard = {
     _poolCunningGeysermage,
     _poolCurryFavor,
     _poolCurseOfClingingWebs,
+    _poolCursedLand,
     _poolCylianElf,
     _poolDarkLeoShredder,
     _poolDarkRitual,
@@ -862,6 +866,7 @@ const shard: CardShard = {
     _poolPathToRedemption,
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
+    _poolPhantasmalForces,
     _poolPitilessGorgon,
     _poolPlagueEngineer,
     _poolPointedDiscussion,
@@ -1049,6 +1054,7 @@ const shard: CardShard = {
     _poolWakeningSunsAvatar,
     _poolWalkingBulwark,
     _poolWallOfSpears,
+    _poolWanderlust,
     _poolWarRoom,
     _poolWarcryPhoenix,
     _poolWarlordsFury,

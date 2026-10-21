@@ -551,6 +551,7 @@ import _poolTrenchWurm from "../pool/trench-wurm.js";
 import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
 import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
+import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
@@ -569,6 +570,7 @@ import _poolViridianZealot from "../pool/viridian-zealot.js";
 import _poolVisionarysDance from "../pool/visionarys-dance.js";
 import _poolVivisPersistence from "../pool/vivis-persistence.js";
 import _poolVodalianHexcatcher from "../pool/vodalian-hexcatcher.js";
+import _poolVolcanicEruption from "../pool/volcanic-eruption.js";
 import _poolVoraciousHydra from "../pool/voracious-hydra.js";
 import _poolVorpalSword from "../pool/vorpal-sword.js";
 import _poolVoyagingSatyr from "../pool/voyaging-satyr.js";
@@ -583,6 +585,7 @@ import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
+import _poolWoodenSphere from "../pool/wooden-sphere.js";
 import _poolWorldWeary from "../pool/world-weary.js";
 import _poolWreckingBall from "../pool/wrecking-ball.js";
 import _poolWrench from "../pool/wrench.js";
@@ -1159,6 +1162,7 @@ const shard: CardShard = {
     _poolTrollAscetic,
     _poolTrostaniDiscordant,
     _poolTrystanPenitentCuller,
+    _poolTwiddle,
     _poolTwinbladePaladin,
     _poolTwistedFealty,
     _poolUndeadAugur,
@@ -1177,6 +1181,7 @@ const shard: CardShard = {
     _poolVisionarysDance,
     _poolVivisPersistence,
     _poolVodalianHexcatcher,
+    _poolVolcanicEruption,
     _poolVoraciousHydra,
     _poolVorpalSword,
     _poolVoyagingSatyr,
@@ -1191,6 +1196,7 @@ const shard: CardShard = {
     _poolWillowrushVerge,
     _poolWirewoodGuardian,
     _poolWitchsVengeance,
+    _poolWoodenSphere,
     _poolWorldWeary,
     _poolWreckingBall,
     _poolWrench,

@@ -135,6 +135,7 @@ import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
 import _poolDauntlessDismantler from "../pool/dauntless-dismantler.js";
 import _poolDawnToDusk from "../pool/dawn-to-dusk.js";
 import _poolDealGoneBad from "../pool/deal-gone-bad.js";
+import _poolDeathgrip from "../pool/deathgrip.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
 import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
@@ -343,6 +344,7 @@ import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOliviasMidnightAmbush from "../pool/olivias-midnight-ambush.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
+import _poolOrcishOriflamme from "../pool/orcish-oriflamme.js";
 import _poolOverwhelmingRemorse from "../pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
@@ -704,6 +706,7 @@ const shard: CardShard = {
     _poolDauntlessDismantler,
     _poolDawnToDusk,
     _poolDealGoneBad,
+    _poolDeathgrip,
     _poolDeeprootWarrior,
     _poolDefiantElf,
     _poolDelugeOfTheDead,
@@ -912,6 +915,7 @@ const shard: CardShard = {
     _poolOliviasMidnightAmbush,
     _poolOperaLoveSong,
     _poolOraclesGift,
+    _poolOrcishOriflamme,
     _poolOverwhelmingRemorse,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,

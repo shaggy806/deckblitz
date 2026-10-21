@@ -211,6 +211,7 @@ import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
 import _poolHighbornVampire from "../pool/highborn-vampire.js";
 import _poolHighwayRobber from "../pool/highway-robber.js";
 import _poolHiredPoisoner from "../pool/hired-poisoner.js";
+import _poolHolyArmor from "../pool/holy-armor.js";
 import _poolHordewingSkaab from "../pool/hordewing-skaab.js";
 import _poolHorizonCanopy from "../pool/horizon-canopy.js";
 import _poolHorrificAssault from "../pool/horrific-assault.js";
@@ -218,6 +219,7 @@ import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
 import _poolIcebergCancrix from "../pool/iceberg-cancrix.js";
+import _poolIcyManipulator from "../pool/icy-manipulator.js";
 import _poolImpeccableTiming from "../pool/impeccable-timing.js";
 import _poolImperialOath from "../pool/imperial-oath.js";
 import _poolImpossibleMan from "../pool/impossible-man.js";
@@ -311,6 +313,7 @@ import _poolNightmareUnmaking from "../pool/nightmare-unmaking.js";
 import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
+import _poolNorthernPaladin from "../pool/northern-paladin.js";
 import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
 import _poolOakenSiren from "../pool/oaken-siren.js";
 import _poolOctomancer from "../pool/octomancer.js";
@@ -778,6 +781,7 @@ const shard: CardShard = {
     _poolHighbornVampire,
     _poolHighwayRobber,
     _poolHiredPoisoner,
+    _poolHolyArmor,
     _poolHordewingSkaab,
     _poolHorizonCanopy,
     _poolHorrificAssault,
@@ -785,6 +789,7 @@ const shard: CardShard = {
     _poolHungryGraffalon,
     _poolHyperionsAtomicVision,
     _poolIcebergCancrix,
+    _poolIcyManipulator,
     _poolImpeccableTiming,
     _poolImperialOath,
     _poolImpossibleMan,
@@ -878,6 +883,7 @@ const shard: CardShard = {
     _poolNightscapeApprentice,
     _poolNightwindGlider,
     _poolNissasPilgrimage,
+    _poolNorthernPaladin,
     _poolNyamiClassMotherShip,
     _poolOakenSiren,
     _poolOctomancer,

@@ -425,6 +425,7 @@ import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
 import _poolSparkElemental from "../pool/spark-elemental.js";
 import _poolSpectralSnatcher from "../pool/spectral-snatcher.js";
+import _poolSpellBlast from "../pool/spell-blast.js";
 import _poolSpellbookSeeker from "../pool/spellbook-seeker.js";
 import _poolSphinxMindbreaker from "../pool/sphinx-mindbreaker.js";
 import _poolSpiderSense from "../pool/spider-sense.js";
@@ -984,6 +985,7 @@ const shard: CardShard = {
     _poolSoulswornJury,
     _poolSparkElemental,
     _poolSpectralSnatcher,
+    _poolSpellBlast,
     _poolSpellbookSeeker,
     _poolSphinxMindbreaker,
     _poolSpiderSense,

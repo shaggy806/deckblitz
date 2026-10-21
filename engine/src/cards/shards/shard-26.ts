@@ -257,6 +257,7 @@ import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
 import _poolLionSash from "../pool/lion-sash.js";
 import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
+import _poolLivingLands from "../pool/living-lands.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
@@ -471,6 +472,7 @@ import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
+import _poolThroneOfBone from "../pool/throne-of-bone.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolThunderingDjinn from "../pool/thundering-djinn.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
@@ -807,6 +809,7 @@ const shard: CardShard = {
     _poolLinvalaKeeperOfSilence,
     _poolLionSash,
     _poolLiturgyOfBlood,
+    _poolLivingLands,
     _poolLivingLightning,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
@@ -1021,6 +1024,7 @@ const shard: CardShard = {
     _poolThornhideWolves,
     _poolThranTemporalGateway,
     _poolThrissNantukoPrimus,
+    _poolThroneOfBone,
     _poolThunderSalvo,
     _poolThunderingDjinn,
     _poolTimelessLotus,

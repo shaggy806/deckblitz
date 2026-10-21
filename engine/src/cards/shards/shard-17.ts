@@ -329,6 +329,7 @@ import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
+import _poolPlagueRats from "../pool/plague-rats.js";
 import _poolPleaForPower from "../pool/plea-for-power.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
 import _poolPricklyPair from "../pool/prickly-pair.js";
@@ -337,6 +338,7 @@ import _poolPrismariCommand from "../pool/prismari-command.js";
 import _poolProctorOfPotential from "../pool/proctor-of-potential.js";
 import _poolProftConsultingDetective from "../pool/proft-consulting-detective.js";
 import _poolProsperousThief from "../pool/prosperous-thief.js";
+import _poolPsychicVenom from "../pool/psychic-venom.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
 import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
@@ -879,6 +881,7 @@ const shard: CardShard = {
     _poolPhyrexianBloodstock,
     _poolPhyrexianPegasus,
     _poolPhyrexianVault,
+    _poolPlagueRats,
     _poolPleaForPower,
     _poolPouncingLynx,
     _poolPricklyPair,
@@ -887,6 +890,7 @@ const shard: CardShard = {
     _poolProctorOfPotential,
     _poolProftConsultingDetective,
     _poolProsperousThief,
+    _poolPsychicVenom,
     _poolPullFromTomorrow,
     _poolPurestrainGenestealer,
     _poolPyreCharger,

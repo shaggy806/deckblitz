@@ -198,6 +198,7 @@ import _poolGiftOfTheViper from "../pool/gift-of-the-viper.js";
 import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
+import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
 import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
 import _poolGoddricCloakedReveler from "../pool/goddric-cloaked-reveler.js";
@@ -258,6 +259,7 @@ import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
 import _poolInvasionOfKamigawa from "../pool/invasion-of-kamigawa.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
 import _poolIridianMaelstrom from "../pool/iridian-maelstrom.js";
+import _poolIronclawOrcs from "../pool/ironclaw-orcs.js";
 import _poolIrreverentRevelers from "../pool/irreverent-revelers.js";
 import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
@@ -498,6 +500,7 @@ import _poolTeferisProtection from "../pool/teferis-protection.js";
 import _poolTempestTechnique from "../pool/tempest-technique.js";
 import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
 import _poolTerrorOfThePeaks from "../pool/terror-of-the-peaks.js";
+import _poolTerror from "../pool/terror.js";
 import _poolTetsukoUmezawaFugitive from "../pool/tetsuko-umezawa-fugitive.js";
 import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
 import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
@@ -545,6 +548,7 @@ import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
+import _poolWarpArtifact from "../pool/warp-artifact.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
@@ -782,6 +786,7 @@ const shard: CardShard = {
     _poolGildedAssaultCart,
     _poolGildedGoose,
     _poolGimliCounterOfKills,
+    _poolGloom,
     _poolGoShintaiOfLifesOrigin,
     _poolGoblinChieftain,
     _poolGoddricCloakedReveler,
@@ -842,6 +847,7 @@ const shard: CardShard = {
     _poolInvasionOfKamigawa,
     _poolInvasionTactics,
     _poolIridianMaelstrom,
+    _poolIronclawOrcs,
     _poolIrreverentRevelers,
     _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,
@@ -1082,6 +1088,7 @@ const shard: CardShard = {
     _poolTempestTechnique,
     _poolTenzaGodosMaul,
     _poolTerrorOfThePeaks,
+    _poolTerror,
     _poolTetsukoUmezawaFugitive,
     _poolThaliaHereticCathar,
     _poolThatsRoughBuddy,
@@ -1129,6 +1136,7 @@ const shard: CardShard = {
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
     _poolVulshokFactory,
+    _poolWarpArtifact,
     _poolWastelandRaider,
     _poolWatcherOfTheWayside,
     _poolWaterfallAerialist,

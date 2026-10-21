@@ -46,6 +46,7 @@ import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
 import _poolBindingGeist from "../pool/binding-geist.js";
+import _poolBlackWard from "../pool/black-ward.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindblast from "../pool/blindblast.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
@@ -296,6 +297,7 @@ import _poolNestedShambler from "../pool/nested-shambler.js";
 import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
 import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
+import _poolNightmare from "../pool/nightmare.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
 import _poolNissaVoiceOfZendikar from "../pool/nissa-voice-of-zendikar.js";
 import _poolNivMizzetGhostCounsel from "../pool/niv-mizzet-ghost-counsel.js";
@@ -359,6 +361,7 @@ import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
 import _poolRealityHeist from "../pool/reality-heist.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
+import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
 import _poolReleaseToMemory from "../pool/release-to-memory.js";
@@ -614,6 +617,7 @@ const shard: CardShard = {
     _poolBenalishHeralds,
     _poolBespokeBattlegarb,
     _poolBindingGeist,
+    _poolBlackWard,
     _poolBlackWidowIntelExpert,
     _poolBlindblast,
     _poolBlindingDrone,
@@ -864,6 +868,7 @@ const shard: CardShard = {
     _poolNettlingNuisance,
     _poolNevThePracticalDean,
     _poolNexusWardens,
+    _poolNightmare,
     _poolNissaSageAnimist,
     _poolNissaVoiceOfZendikar,
     _poolNivMizzetGhostCounsel,
@@ -927,6 +932,7 @@ const shard: CardShard = {
     _poolRazortipWhip,
     _poolRealityHeist,
     _poolRecklessLackey,
+    _poolRegeneration,
     _poolReinforcedRonin,
     _poolRelearn,
     _poolReleaseToMemory,

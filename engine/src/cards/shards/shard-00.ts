@@ -128,6 +128,7 @@ import _poolDeluxeDragster from "../pool/deluxe-dragster.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
+import _poolDingusEgg from "../pool/dingus-egg.js";
 import _poolDireDowndraft from "../pool/dire-downdraft.js";
 import _poolDiresight from "../pool/diresight.js";
 import _poolDiscerningFinancier from "../pool/discerning-financier.js";
@@ -224,6 +225,7 @@ import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
+import _poolHealingSalve from "../pool/healing-salve.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
@@ -276,6 +278,7 @@ import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
+import _poolLifetap from "../pool/lifetap.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
@@ -713,6 +716,7 @@ const shard: CardShard = {
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDinaSoulSteeper,
+    _poolDingusEgg,
     _poolDireDowndraft,
     _poolDiresight,
     _poolDiscerningFinancier,
@@ -809,6 +813,7 @@ const shard: CardShard = {
     _poolHarmonizedCrescendo,
     _poolHaughtyDjinn,
     _poolHeadlessSpecter,
+    _poolHealingSalve,
     _poolHellkiteCourser,
     _poolHiredClaw,
     _poolHornetHarasser,
@@ -861,6 +866,7 @@ const shard: CardShard = {
     _poolLedevGuardian,
     _poolLeelaSevateemWarrior,
     _poolLetTheGalaxyBurn,
+    _poolLifetap,
     _poolLightningAngel,
     _poolLightningMare,
     _poolLluwenExchangeStudent,

@@ -170,6 +170,7 @@ import _poolFiendlash from "../pool/fiendlash.js";
 import _poolFightWithFire from "../pool/fight-with-fire.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
+import _poolFirebreathing from "../pool/firebreathing.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
 import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
@@ -328,6 +329,7 @@ import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPain101 from "../pool/pain-101.js";
+import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
 import _poolPatientInstructor from "../pool/patient-instructor.js";
@@ -398,6 +400,7 @@ import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js"
 import _poolScarlandThrinax from "../pool/scarland-thrinax.js";
 import _poolScatterArc from "../pool/scatter-arc.js";
 import _poolScatterRay from "../pool/scatter-ray.js";
+import _poolScavengingGhoul from "../pool/scavenging-ghoul.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
@@ -432,6 +435,7 @@ import _poolSnoopingPage from "../pool/snooping-page.js";
 import _poolSnortingGahr from "../pool/snorting-gahr.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
+import _poolSoulNet from "../pool/soul-net.js";
 import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
@@ -739,6 +743,7 @@ const shard: CardShard = {
     _poolFightWithFire,
     _poolFinalDeath,
     _poolFinalVengeance,
+    _poolFirebreathing,
     _poolFlamebraider,
     _poolFlamecacheGecko,
     _poolFlayerOfLoyalties,
@@ -897,6 +902,7 @@ const shard: CardShard = {
     _poolOutcasterTrailblazer,
     _poolOwlinHistorian,
     _poolPain101,
+    _poolParalyze,
     _poolParhelionIi,
     _poolPathOfAnnihilation,
     _poolPatientInstructor,
@@ -967,6 +973,7 @@ const shard: CardShard = {
     _poolScarlandThrinax,
     _poolScatterArc,
     _poolScatterRay,
+    _poolScavengingGhoul,
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,
     _poolSeaSpirit,
@@ -1001,6 +1008,7 @@ const shard: CardShard = {
     _poolSnortingGahr,
     _poolSolarTransformer,
     _poolSonicScrewdriver,
+    _poolSoulNet,
     _poolSoulcipherBoard,
     _poolSoulcoilViper,
     _poolSoulknifeSpy,

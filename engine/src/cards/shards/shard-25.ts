@@ -37,6 +37,7 @@ import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
 import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
+import _poolBadMoon from "../pool/bad-moon.js";
 import _poolBafflingEnd from "../pool/baffling-end.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
@@ -82,6 +83,7 @@ import _poolCacophodon from "../pool/cacophodon.js";
 import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
+import _poolCastle from "../pool/castle.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
@@ -271,6 +273,7 @@ import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
 import _poolLoomingAltisaur from "../pool/looming-altisaur.js";
 import _poolLootThePathfinder from "../pool/loot-the-pathfinder.js";
 import _poolLordOfTheNazgul from "../pool/lord-of-the-nazgul.js";
+import _poolLordOfThePit from "../pool/lord-of-the-pit.js";
 import _poolLoreholdCommand from "../pool/lorehold-command.js";
 import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
@@ -601,6 +604,7 @@ const shard: CardShard = {
     _poolAvianOddity,
     _poolAzraOddsmaker,
     _poolBaSingSe,
+    _poolBadMoon,
     _poolBafflingEnd,
     _poolBandage,
     _poolBasrisAegis,
@@ -646,6 +650,7 @@ const shard: CardShard = {
     _poolCanyonCrab,
     _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
+    _poolCastle,
     _poolCeaselessConflict,
     _poolChamberedNautilus,
     _poolChampionOfArashin,
@@ -835,6 +840,7 @@ const shard: CardShard = {
     _poolLoomingAltisaur,
     _poolLootThePathfinder,
     _poolLordOfTheNazgul,
+    _poolLordOfThePit,
     _poolLoreholdCommand,
     _poolLotusCobra,
     _poolLoyalApprentice,

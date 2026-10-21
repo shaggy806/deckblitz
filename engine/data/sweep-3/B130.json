@@ -1,0 +1,1010 @@
+{
+ "batch": "B130",
+ "status": "complete",
+ "ranks": "Limited Edition Alpha (LEA, 1993-08-05): whole set (oldest-first walk); and Circle of Protection: Black (LEB), Crimson and Cerulean Wisps, Healing Grace, which the features unblocked",
+ "authored": [
+  {
+   "name": "Cerulean Wisps",
+   "files": [
+    "engine/src/cards/pool/cerulean-wisps.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chaoslace",
+   "files": [
+    "engine/src/cards/pool/chaoslace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of Protection: Black",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-black.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of Protection: Blue",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-blue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of Protection: Green",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-green.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of Protection: Red",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-red.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Circle of Protection: White",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-white.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crimson Wisps",
+   "files": [
+    "engine/src/cards/pool/crimson-wisps.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathlace",
+   "files": [
+    "engine/src/cards/pool/deathlace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Healing Grace",
+   "files": [
+    "engine/src/cards/pool/healing-grace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifelace",
+   "files": [
+    "engine/src/cards/pool/lifelace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Purelace",
+   "files": [
+    "engine/src/cards/pool/purelace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reverse Damage",
+   "files": [
+    "engine/src/cards/pool/reverse-damage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thoughtlace",
+   "files": [
+    "engine/src/cards/pool/thoughtlace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Copper Tablet",
+   "files": [
+    "engine/src/cards/pool/copper-tablet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Green Ward",
+   "files": [
+    "engine/src/cards/pool/green-ward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invisibility",
+   "files": [
+    "engine/src/cards/pool/invisibility.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lifeforce",
+   "files": [
+    "engine/src/cards/pool/lifeforce.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Living Artifact",
+   "files": [
+    "engine/src/cards/pool/living-artifact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paralyze",
+   "files": [
+    "engine/src/cards/pool/paralyze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scavenging Ghoul",
+   "files": [
+    "engine/src/cards/pool/scavenging-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tranquility",
+   "files": [
+    "engine/src/cards/pool/tranquility.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Twiddle",
+   "files": [
+    "engine/src/cards/pool/twiddle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderlust",
+   "files": [
+    "engine/src/cards/pool/wanderlust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Animate Wall",
+   "files": [
+    "engine/src/cards/pool/animate-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Ward",
+   "files": [
+    "engine/src/cards/pool/black-ward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crystal Rod",
+   "files": [
+    "engine/src/cards/pool/crystal-rod.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathgrip",
+   "files": [
+    "engine/src/cards/pool/deathgrip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloom",
+   "files": [
+    "engine/src/cards/pool/gloom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Star",
+   "files": [
+    "engine/src/cards/pool/iron-star.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mind Twist",
+   "files": [
+    "engine/src/cards/pool/mind-twist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Ward",
+   "files": [
+    "engine/src/cards/pool/red-ward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stone Giant",
+   "files": [
+    "engine/src/cards/pool/stone-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Hive",
+   "files": [
+    "engine/src/cards/pool/the-hive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tunnel",
+   "files": [
+    "engine/src/cards/pool/tunnel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cursed Land",
+   "files": [
+    "engine/src/cards/pool/cursed-land.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dingus Egg",
+   "files": [
+    "engine/src/cards/pool/dingus-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Demolition Team",
+   "files": [
+    "engine/src/cards/pool/dwarven-demolition-team.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Feedback",
+   "files": [
+    "engine/src/cards/pool/feedback.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flashfires",
+   "files": [
+    "engine/src/cards/pool/flashfires.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Force of Nature",
+   "files": [
+    "engine/src/cards/pool/force-of-nature.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karma",
+   "files": [
+    "engine/src/cards/pool/karma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keldon Warlord",
+   "files": [
+    "engine/src/cards/pool/keldon-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightmare",
+   "files": [
+    "engine/src/cards/pool/nightmare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plague Rats",
+   "files": [
+    "engine/src/cards/pool/plague-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sedge Troll",
+   "files": [
+    "engine/src/cards/pool/sedge-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Simulacrum",
+   "files": [
+    "engine/src/cards/pool/simulacrum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steal Artifact",
+   "files": [
+    "engine/src/cards/pool/steal-artifact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blue Ward",
+   "files": [
+    "engine/src/cards/pool/blue-ward.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Castle",
+   "files": [
+    "engine/src/cards/pool/castle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creature Bond",
+   "files": [
+    "engine/src/cards/pool/creature-bond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fungusaur",
+   "files": [
+    "engine/src/cards/pool/fungusaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gauntlet of Might",
+   "files": [
+    "engine/src/cards/pool/gauntlet-of-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hurricane",
+   "files": [
+    "engine/src/cards/pool/hurricane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ivory Cup",
+   "files": [
+    "engine/src/cards/pool/ivory-cup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lord of the Pit",
+   "files": [
+    "engine/src/cards/pool/lord-of-the-pit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regeneration",
+   "files": [
+    "engine/src/cards/pool/regeneration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spell Blast",
+   "files": [
+    "engine/src/cards/pool/spell-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terror",
+   "files": [
+    "engine/src/cards/pool/terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thicket Basilisk",
+   "files": [
+    "engine/src/cards/pool/thicket-basilisk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volcanic Eruption",
+   "files": [
+    "engine/src/cards/pool/volcanic-eruption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wooden Sphere",
+   "files": [
+    "engine/src/cards/pool/wooden-sphere.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bad Moon",
+   "files": [
+    "engine/src/cards/pool/bad-moon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blue Elemental Blast",
+   "files": [
+    "engine/src/cards/pool/blue-elemental-blast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cockatrice",
+   "files": [
+    "engine/src/cards/pool/cockatrice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Farmstead",
+   "files": [
+    "engine/src/cards/pool/farmstead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Healing Salve",
+   "files": [
+    "engine/src/cards/pool/healing-salve.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howl from Beyond",
+   "files": [
+    "engine/src/cards/pool/howl-from-beyond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icy Manipulator",
+   "files": [
+    "engine/src/cards/pool/icy-manipulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ironclaw Orcs",
+   "files": [
+    "engine/src/cards/pool/ironclaw-orcs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifetap",
+   "files": [
+    "engine/src/cards/pool/lifetap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Lands",
+   "files": [
+    "engine/src/cards/pool/living-lands.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Northern Paladin",
+   "files": [
+    "engine/src/cards/pool/northern-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orcish Oriflamme",
+   "files": [
+    "engine/src/cards/pool/orcish-oriflamme.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phantasmal Forces",
+   "files": [
+    "engine/src/cards/pool/phantasmal-forces.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Venom",
+   "files": [
+    "engine/src/cards/pool/psychic-venom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Net",
+   "files": [
+    "engine/src/cards/pool/soul-net.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Throne of Bone",
+   "files": [
+    "engine/src/cards/pool/throne-of-bone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tsunami",
+   "files": [
+    "engine/src/cards/pool/tsunami.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warp Artifact",
+   "files": [
+    "engine/src/cards/pool/warp-artifact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firebreathing",
+   "files": [
+    "engine/src/cards/pool/firebreathing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blessing",
+   "files": [
+    "engine/src/cards/pool/blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Holy Armor",
+   "files": [
+    "engine/src/cards/pool/holy-armor.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Mana Short",
+   "needs": [
+    "effect:empty-mana-pool"
+   ],
+   "why": "that player loses all unspent mana"
+  },
+  {
+   "name": "Forcefield",
+   "needs": [
+    "replacement:prevent-all-but-n-damage"
+   ],
+   "why": "prevent all but 1 of the combat damage an unblocked creature of your choice would deal"
+  },
+  {
+   "name": "Helm of Chatzuk",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "target creature gains banding"
+  },
+  {
+   "name": "Demonic Hordes",
+   "needs": [
+    "effect:choices-by-other-players"
+   ],
+   "why": "sacrifice a land of an opponent's choice"
+  },
+  {
+   "name": "Conversion",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "all Mountains are Plains (losing their rules-text abilities, rule 305.7)"
+  },
+  {
+   "name": "Rock Hydra",
+   "needs": [
+    "replacement:prevent-damage-per-counter"
+   ],
+   "why": "prevent 1 damage for each +1/+1 counter removed"
+  },
+  {
+   "name": "Veteran Bodyguard",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "unblocked creatures' combat damage to you is dealt to it instead"
+  },
+  {
+   "name": "Fork",
+   "needs": [
+    "effect:copy-spell-set-color"
+   ],
+   "why": "copy target instant or sorcery spell, except that the copy is red"
+  },
+  {
+   "name": "Island Sanctuary",
+   "needs": [
+    "replacement:draw-replacement-optional-skip",
+    "effect:cant-be-attacked-except-by-filter"
+   ],
+   "why": "skip a draw; can't be attacked except by fliers and islandwalkers"
+  },
+  {
+   "name": "Black Vise",
+   "needs": [
+    "decision:choose-player-on-enter"
+   ],
+   "why": "as it enters, choose an opponent"
+  },
+  {
+   "name": "Vesuvan Doppelganger",
+   "needs": [
+    "effect:copy-exceptions"
+   ],
+   "why": "the copy keeps this ability, which re-copies at upkeep"
+  },
+  {
+   "name": "Benalish Hero",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Magical Hack",
+   "needs": [
+    "effect:text-change-color-or-land-words"
+   ],
+   "why": "change the text by replacing a basic land type word"
+  },
+  {
+   "name": "Earthbind",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "the Aura gains 'enchanted creature loses flying'"
+  },
+  {
+   "name": "False Orders",
+   "needs": [
+    "effect:remove-blocker-unblock-and-reblock"
+   ],
+   "why": "remove a blocker; the attacker becomes unblocked; it may block another"
+  },
+  {
+   "name": "Illusionary Mask",
+   "needs": [
+    "mechanic:face-down"
+   ],
+   "why": "cast a creature face down for X"
+  },
+  {
+   "name": "Gaea's Liege",
+   "needs": [
+    "effect:count-defending-player-controls",
+    "static:land-type-setting"
+   ],
+   "why": "Forests the defending player controls; a land becomes a Forest"
+  },
+  {
+   "name": "Cyclopean Tomb",
+   "needs": [
+    "static:land-type-setting",
+    "effect:delayed-trigger-rest-of-game"
+   ],
+   "why": "mire counters make Swamps; a rest-of-the-game upkeep trigger"
+  },
+  {
+   "name": "Two-Headed Giant of Foriys",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature each combat"
+  },
+  {
+   "name": "Power Sink",
+   "needs": [
+    "effect:empty-mana-pool"
+   ],
+   "why": "that player loses all unspent mana"
+  },
+  {
+   "name": "Power Surge",
+   "needs": [
+    "amount:untapped-lands-at-turn-start"
+   ],
+   "why": "the untapped lands the player controlled at the beginning of the turn"
+  },
+  {
+   "name": "Word of Command",
+   "needs": [
+    "mechanic:control-player"
+   ],
+   "why": "control target opponent while they cast a spell"
+  },
+  {
+   "name": "Jade Monolith",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "that source deals that damage to you instead"
+  },
+  {
+   "name": "Mesa Pegasus",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Nether Shadow",
+   "needs": [
+    "condition:creature-cards-above-in-graveyard"
+   ],
+   "why": "three or more creature cards above it in your graveyard"
+  },
+  {
+   "name": "Aspect of Wolf",
+   "needs": [
+    "static:pt-per-half-count"
+   ],
+   "why": "half the Forests you control, rounded down and up"
+  },
+  {
+   "name": "Blaze of Glory",
+   "needs": [
+    "static:block-additional-creature",
+    "effect:must-block-this-turn"
+   ],
+   "why": "can block any number of creatures; blocks each attacker if able"
+  },
+  {
+   "name": "Nettling Imp",
+   "needs": [
+    "filter:controlled-continuously-since-turn-start"
+   ],
+   "why": "a non-Wall creature the active player has controlled continuously since the turn began"
+  },
+  {
+   "name": "White Ward",
+   "needs": [
+    "static:protection-doesnt-remove-source"
+   ],
+   "why": "protection from white that doesn't remove this white Aura"
+  },
+  {
+   "name": "Consecrate Land",
+   "needs": [
+    "static:cant-be-enchanted-by-other-auras"
+   ],
+   "why": "can't be enchanted by other Auras"
+  },
+  {
+   "name": "Camouflage",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "attackers in face-down piles, blocked at random"
+  },
+  {
+   "name": "Power Leak",
+   "needs": [
+    "effect:pay-any-amount-of-mana"
+   ],
+   "why": "pay any amount of mana; prevent 1 damage for each 1 paid"
+  },
+  {
+   "name": "Clockwork Beast",
+   "needs": [
+    "condition:attacked-or-blocked-this-combat"
+   ],
+   "why": "at end of combat, if it attacked or blocked this combat; up to X counters, seven at most"
+  },
+  {
+   "name": "Conservator",
+   "needs": [
+    "effect:prevent-next-n-damage-to-you"
+   ],
+   "why": "prevent the next 2 damage that would be dealt to you this turn"
+  },
+  {
+   "name": "Stasis",
+   "needs": [
+    "static:skip-untap-step"
+   ],
+   "why": "players skip their untap steps"
+  },
+  {
+   "name": "Glasses of Urza",
+   "needs": [
+    "effect:look-at-target-player-hand"
+   ],
+   "why": "look at target player's hand"
+  },
+  {
+   "name": "Kormus Bell",
+   "needs": [
+    "static:static-set-characteristics"
+   ],
+   "why": "all Swamps are 1/1 black creatures"
+  },
+  {
+   "name": "Drain Life",
+   "needs": [
+    "cost:mana-spend-only-x-costs",
+    "amount:damage-dealt-capped"
+   ],
+   "why": "spend only black mana on X; gain life up to the damage it could take"
+  },
+  {
+   "name": "Drain Power",
+   "needs": [
+    "effect:force-mana-abilities-take-mana"
+   ],
+   "why": "target player activates their lands' mana abilities and you get the mana"
+  },
+  {
+   "name": "Sengir Vampire",
+   "needs": [
+    "filter:damaged-this-turn-by-source"
+   ],
+   "why": "a creature dealt damage by this creature this turn dies"
+  },
+  {
+   "name": "Dragon Whelp",
+   "needs": [
+    "condition:ability-activated-count-this-turn"
+   ],
+   "why": "if this ability has been activated four or more times this turn"
+  },
+  {
+   "name": "Raging River",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "defending creatures split into left and right piles"
+  },
+  {
+   "name": "Siren's Call",
+   "needs": [
+    "filter:controlled-continuously-since-turn-start",
+    "condition:cast-timing-condition"
+   ],
+   "why": "creatures the active player didn't control continuously since the turn began; before attackers"
+  },
+  {
+   "name": "Timber Wolves",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Kudzu",
+   "needs": [
+    "effect:attach-chosen-by-other-player"
+   ],
+   "why": "that land's controller may attach this Aura to a land of their choice"
+  },
+  {
+   "name": "Natural Selection",
+   "needs": [
+    "effect:look-and-choose-target-player",
+    "effect:shuffle-library"
+   ],
+   "why": "rearrange the top three of target player's library, then that player may shuffle"
+  },
+  {
+   "name": "Sea Serpent",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "trigger:state-trigger"
+   ],
+   "why": "can't attack unless defending player controls an Island; sacrifice when you control no Islands"
+  },
+  {
+   "name": "Jade Statue",
+   "needs": [
+    "effect:animate-until-end-of-combat"
+   ],
+   "why": "becomes a creature until end of combat"
+  },
+  {
+   "name": "Disintegrate",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn",
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "it can't be regenerated this turn, and is exiled if it would die this turn"
+  },
+  {
+   "name": "Sleight of Mind",
+   "needs": [
+    "effect:text-change-color-or-land-words"
+   ],
+   "why": "change the text by replacing a color word"
+  },
+  {
+   "name": "Lich",
+   "needs": [
+    "static:dont-lose-for-zero-life",
+    "replacement:gain-life-becomes-draw",
+    "effect:sacrifice-amount"
+   ],
+   "why": "life 0 doesn't lose; draw instead of gaining life; sacrifice that many"
+  },
+  {
+   "name": "Evil Presence",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "enchanted land is a Swamp (losing its rules-text abilities)"
+  },
+  {
+   "name": "Phantasmal Terrain",
+   "needs": [
+    "static:land-type-setting",
+    "static:choose-basic-land-type"
+   ],
+   "why": "as it enters choose a basic land type; enchanted land is that type"
+  },
+  {
+   "name": "Pirate Ship",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "trigger:state-trigger"
+   ],
+   "why": "can't attack unless defending player controls an Island; sacrifice when you control no Islands"
+  },
+  {
+   "name": "Sunglasses of Urza",
+   "needs": [
+    "cost:mana-spending-rules"
+   ],
+   "why": "spend white mana as though it were red"
+  },
+  {
+   "name": "Animate Artifact",
+   "needs": [
+    "static:animate-pt-equal-mana-value"
+   ],
+   "why": "an artifact creature with P/T equal to its mana value, while it isn't a creature"
+  },
+  {
+   "name": "Personal Incarnation",
+   "needs": [
+    "replacement:damage-redirection",
+    "cost:activate-only-owner"
+   ],
+   "why": "the next 1 damage to it is dealt to its owner; only its owner may activate"
+  },
+  {
+   "name": "Guardian Angel",
+   "needs": [
+    "effect:pay-any-time-prevent-until-end-of-turn"
+   ],
+   "why": "pay {1} any time this turn to prevent 1 more damage"
+  }
+ ]
+}

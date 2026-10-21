@@ -267,6 +267,7 @@ import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
 import _poolInvadeTheCity from "../pool/invade-the-city.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
+import _poolInvisibility from "../pool/invisibility.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronShieldElf from "../pool/iron-shield-elf.js";
 import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
@@ -825,6 +826,7 @@ const shard: CardShard = {
     _poolInsatiableSkittermaw,
     _poolInvadeTheCity,
     _poolInvasionOfIxalan,
+    _poolInvisibility,
     _poolInvokeTheFiremind,
     _poolIronShieldElf,
     _poolIronshellBeetle,

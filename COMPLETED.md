@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Limited Edition Alpha, whole** (batch 130 — the first of the oldest-first walk), and Beta's
+  last card: **a source of your choice** (rule 609.7 — the Circles of Protection, Reverse Damage,
+  Healing Grace) and **colour setting** (`become-color`, layer 5 — the Laces, the Wisps) built
+  and taught to the scaffolder; 79 Alpha cards authored by five `card-author` agents and the lead
+  — Mind Twist, Icy Manipulator, Terror, Lord of the Pit, Cockatrice, Force of Nature, Plague Rats;
+  58 blocked, banding (4) the most shared (2026-10-21).
 - **Rivals of Ixalan, whole** (batch 129): its last 99 cards, with **ascend** built (rule
   702.131 — the city's blessing on permanents, any time, and on spells as they resolve; a 🏛️
   badge on the player panel) and taught to the scaffolder; 73 RIX cards authored and 11 earlier

@@ -48,6 +48,7 @@ import _poolBlackWidowNatashaRomanoff from "../pool/black-widow-natasha-romanoff
 import _poolBladeOfSelves from "../pool/blade-of-selves.js";
 import _poolBladedAmbassador from "../pool/bladed-ambassador.js";
 import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
+import _poolBlessing from "../pool/blessing.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
@@ -401,6 +402,7 @@ import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
+import _poolSedgeTroll from "../pool/sedge-troll.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
@@ -649,6 +651,7 @@ const shard: CardShard = {
     _poolBladeOfSelves,
     _poolBladedAmbassador,
     _poolBlessedGhoul,
+    _poolBlessing,
     _poolBlindPhantasm,
     _poolBloodfellCaves,
     _poolBloodthirstyAerialist,
@@ -1002,6 +1005,7 @@ const shard: CardShard = {
     _poolScroungeForEternity,
     _poolScurryOak,
     _poolSealFromExistence,
+    _poolSedgeTroll,
     _poolSeizeOpportunity,
     _poolSelesnyaGuildmage,
     _poolSenateCourier,

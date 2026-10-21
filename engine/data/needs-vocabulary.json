@@ -9106,6 +9106,96 @@
   },
   "cost:put-self-on-library-bottom": {
    "example": "Timestream Navigator"
+  },
+  "keyword:banding": {
+   "example": "Benalish Hero"
+  },
+  "effect:text-change-color-or-land-words": {
+   "example": "Sleight of Mind"
+  },
+  "static:protection-doesnt-remove-source": {
+   "example": "White Ward"
+  },
+  "effect:empty-mana-pool": {
+   "example": "Mana Short"
+  },
+  "replacement:prevent-damage-per-counter": {
+   "example": "Rock Hydra"
+  },
+  "effect:copy-spell-set-color": {
+   "example": "Fork"
+  },
+  "replacement:draw-replacement-optional-skip": {
+   "example": "Island Sanctuary"
+  },
+  "effect:cant-be-attacked-except-by-filter": {
+   "example": "Island Sanctuary"
+  },
+  "effect:remove-blocker-unblock-and-reblock": {
+   "example": "False Orders"
+  },
+  "effect:delayed-trigger-rest-of-game": {
+   "example": "Cyclopean Tomb"
+  },
+  "amount:untapped-lands-at-turn-start": {
+   "example": "Power Surge"
+  },
+  "condition:creature-cards-above-in-graveyard": {
+   "example": "Nether Shadow"
+  },
+  "static:pt-per-half-count": {
+   "example": "Aspect of Wolf"
+  },
+  "filter:controlled-continuously-since-turn-start": {
+   "example": "Nettling Imp"
+  },
+  "static:cant-be-enchanted-by-other-auras": {
+   "example": "Consecrate Land"
+  },
+  "condition:attacked-or-blocked-this-combat": {
+   "example": "Clockwork Beast"
+  },
+  "effect:prevent-next-n-damage-to-you": {
+   "example": "Conservator"
+  },
+  "static:skip-untap-step": {
+   "example": "Stasis"
+  },
+  "effect:look-at-target-player-hand": {
+   "example": "Glasses of Urza"
+  },
+  "amount:damage-dealt-capped": {
+   "example": "Drain Life"
+  },
+  "effect:force-mana-abilities-take-mana": {
+   "example": "Drain Power"
+  },
+  "condition:ability-activated-count-this-turn": {
+   "example": "Dragon Whelp"
+  },
+  "effect:attach-chosen-by-other-player": {
+   "example": "Kudzu"
+  },
+  "static:attack-restriction-defending-player-condition": {
+   "example": "Sea Serpent"
+  },
+  "effect:animate-until-end-of-combat": {
+   "example": "Jade Statue"
+  },
+  "effect:cant-be-regenerated-this-turn": {
+   "example": "Disintegrate"
+  },
+  "replacement:gain-life-becomes-draw": {
+   "example": "Lich"
+  },
+  "static:animate-pt-equal-mana-value": {
+   "example": "Animate Artifact"
+  },
+  "cost:activate-only-owner": {
+   "example": "Personal Incarnation"
+  },
+  "effect:pay-any-time-prevent-until-end-of-turn": {
+   "example": "Guardian Angel"
   }
  }
 }

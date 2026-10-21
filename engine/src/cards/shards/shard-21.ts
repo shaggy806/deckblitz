@@ -52,6 +52,7 @@ import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
 import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBloodlineCulling from "../pool/bloodline-culling.js";
 import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
+import _poolBlueWard from "../pool/blue-ward.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
@@ -90,6 +91,7 @@ import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-bles
 import _poolCleavingReaper from "../pool/cleaving-reaper.js";
 import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolClockworkServant from "../pool/clockwork-servant.js";
+import _poolCockatrice from "../pool/cockatrice.js";
 import _poolCoercion from "../pool/coercion.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
@@ -234,6 +236,7 @@ import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
+import _poolIronStar from "../pool/iron-star.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolBloodFountain,
     _poolBloodlineCulling,
     _poolBloodskyBerserker,
+    _poolBlueWard,
     _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBonebindOrator,
@@ -633,6 +637,7 @@ const shard: CardShard = {
     _poolCleavingReaper,
     _poolCleavingSkyrider,
     _poolClockworkServant,
+    _poolCockatrice,
     _poolCoercion,
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
@@ -777,6 +782,7 @@ const shard: CardShard = {
     _poolInvasionOfKylem,
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
+    _poolIronStar,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
     _poolJeskaiShrinekeeper,

@@ -221,6 +221,7 @@ import _poolGravePact from "../pool/grave-pact.js";
 import _poolGreasewrenchGoblin from "../pool/greasewrench-goblin.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
+import _poolGreenWard from "../pool/green-ward.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
@@ -394,6 +395,7 @@ import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
+import _poolRedWard from "../pool/red-ward.js";
 import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
@@ -781,6 +783,7 @@ const shard: CardShard = {
     _poolGreasewrenchGoblin,
     _poolGreatIntelligencesPlan,
     _poolGreaterForgeling,
+    _poolGreenWard,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
     _poolGruesomeRealization,
@@ -954,6 +957,7 @@ const shard: CardShard = {
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,
     _poolReadyToRumble,
+    _poolRedWard,
     _poolRegnaTheRedeemer,
     _poolRejuvenate,
     _poolRelentlessAdvance,

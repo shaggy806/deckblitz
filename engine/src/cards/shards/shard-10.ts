@@ -178,6 +178,7 @@ import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
+import _poolFlashfires from "../pool/flashfires.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
 import _poolFogOfWar from "../pool/fog-of-war.js";
@@ -273,11 +274,13 @@ import _poolLavaspurBoots from "../pool/lavaspur-boots.js";
 import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
 import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
+import _poolLifeforce from "../pool/lifeforce.js";
 import _poolLightningTalons from "../pool/lightning-talons.js";
 import _poolLikenessLooter from "../pool/likeness-looter.js";
 import _poolLilahUndefeatedSlickshot from "../pool/lilah-undefeated-slickshot.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
+import _poolLivingArtifact from "../pool/living-artifact.js";
 import _poolLivingDeath from "../pool/living-death.js";
 import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
@@ -764,6 +767,7 @@ const shard: CardShard = {
     _poolFinCladeFugitives,
     _poolFinalReward,
     _poolFixerTechnoTerror,
+    _poolFlashfires,
     _poolFleshbagMarauder,
     _poolFloodedStrand,
     _poolFogOfWar,
@@ -859,11 +863,13 @@ const shard: CardShard = {
     _poolLayOfTheLand,
     _poolLazavDimirMastermind,
     _poolLeoninScimitar,
+    _poolLifeforce,
     _poolLightningTalons,
     _poolLikenessLooter,
     _poolLilahUndefeatedSlickshot,
     _poolLionheartGlimmer,
     _poolLiveOrDie,
+    _poolLivingArtifact,
     _poolLivingDeath,
     _poolLordOfExtinction,
     _poolLuminarchAspirant,

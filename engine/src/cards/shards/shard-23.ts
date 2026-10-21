@@ -427,6 +427,7 @@ import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
 import _poolSilentSubmersible from "../pool/silent-submersible.js";
 import _poolSilkNet from "../pool/silk-net.js";
 import _poolSilversmoteGhoul from "../pool/silversmote-ghoul.js";
+import _poolSimulacrum from "../pool/simulacrum.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
@@ -506,6 +507,7 @@ import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
+import _poolTunnel from "../pool/tunnel.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
 import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
@@ -994,6 +996,7 @@ const shard: CardShard = {
     _poolSilentSubmersible,
     _poolSilkNet,
     _poolSilversmoteGhoul,
+    _poolSimulacrum,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
     _poolSkeletonCrew,
@@ -1073,6 +1076,7 @@ const shard: CardShard = {
     _poolTravelingBotanist,
     _poolTreacherousBlessing,
     _poolTrokinHighGuard,
+    _poolTunnel,
     _poolTwiceUponATime,
     _poolTwilightDrover,
     _poolTwoHeadedZombie,
