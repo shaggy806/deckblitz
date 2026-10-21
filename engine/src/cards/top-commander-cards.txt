@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3752 already implemented / 1248 missing (marks refreshed 2026-10-21)
+3762 already implemented / 1238 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1039,7 +1039,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1043  Spellseeker                              {2}{U}           Creature — Human Wizard
 [x]  1044  Apex Devastator                          {8}{G}{G}        Creature — Chimera Hydra
 [ ]  1045  Charismatic Conqueror                    {1}{W}           Creature — Vampire Soldier
-[ ]  1046  Wayward Swordtooth                       {2}{G}           Creature — Dinosaur
+[x]  1046  Wayward Swordtooth                       {2}{G}           Creature — Dinosaur
 [x]  1047  Chatterfang, Squirrel General            {2}{G}           Legendary Creature — Squirrel Warrior
 [x]  1048  Willowrush Verge                         {0}              Land
 [x]  1049  Syphon Mind                              {3}{B}           Sorcery
@@ -1096,7 +1096,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1100  Ram Through                              {1}{G}           Instant
 [ ]  1101  Not Dead After All                       {B}              Instant
 [x]  1102  Restoration Magic                        {W}              Instant
-[ ]  1103  Ocelot Pride                             {W}              Creature — Cat
+[x]  1103  Ocelot Pride                             {W}              Creature — Cat
 [x]  1104  Cathartic Reunion                        {1}{R}           Sorcery
 [x]  1105  Wall of Omens                            {1}{W}           Creature — Wall
 [ ]  1106  Mishra's Bauble                          {0}              Artifact
@@ -1126,7 +1126,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1131  Well of Lost Dreams                      {4}              Artifact
 [x]  1132  Ravenous Chupacabra                      {2}{B}{B}        Creature — Beast Horror
 [ ]  1133  Flare of Duplication                     {1}{R}{R}        Instant
-[ ]  1134  Twilight Prophet                         {2}{B}{B}        Creature — Vampire Cleric
+[x]  1134  Twilight Prophet                         {2}{B}{B}        Creature — Vampire Cleric
 [x]  1135  Enduring Courage                         {2}{R}{R}        Enchantment Creature — Dog Glimmer
 [ ]  1136  Deflecting Palm                          {R}{W}           Instant
 [ ]  1137  Gisela, Blade of Goldnight               {4}{R}{W}{W}     Legendary Creature — Angel
@@ -1295,7 +1295,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1301  Defense of the Heart                     {3}{G}           Enchantment
 [ ]  1302  Valgavoth, Terror Eater                  {6}{B}{B}{B}     Legendary Creature — Elder Demon
 [x]  1303  Rune-Scarred Demon                       {5}{B}{B}        Creature — Demon
-[ ]  1304  Tendershoot Dryad                        {4}{G}           Creature — Dryad
+[x]  1304  Tendershoot Dryad                        {4}{G}           Creature — Dryad
 [x]  1305  Timeless Witness                         {2}{G}{G}        Creature — Human Shaman
 [x]  1306  Mirage Mirror                            {3}              Artifact
 [x]  1307  Guildless Commons                        {0}              Land
@@ -2096,7 +2096,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2103  Bruvac the Grandiloquent                 {2}{U}           Legendary Creature — Human Advisor
 [x]  2104  Mycoloth                                 {3}{G}{G}        Creature — Fungus
 [ ]  2105  Karn, the Great Creator                  {4}              Legendary Planeswalker — Karn
-[ ]  2106  Illustrious Wanderglyph                  {4}{W}           Artifact Creature — Golem
+[x]  2106  Illustrious Wanderglyph                  {4}{W}           Artifact Creature — Golem
 [x]  2107  Weaver of Harmony                        {1}{G}           Enchantment Creature — Snake Druid
 [x]  2108  Liesa, Forgotten Archangel               {2}{W}{W}{B}     Legendary Creature — Angel
 [ ]  2109  Semblance Anvil                          {3}              Artifact
@@ -2453,7 +2453,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2460  Atraxa, Praetors' Voice                  {G}{W}{U}{B}     Legendary Creature — Phyrexian Angel Horror
 [x]  2461  Mirrodin Besieged                        {2}{U}           Enchantment
 [x]  2462  Erebor Flamesmith                        {1}{R}           Creature — Dwarf Artificer
-[ ]  2463  Crimson Wisps                            {R}              Instant
+[x]  2463  Crimson Wisps                            {R}              Instant
 [ ]  2464  Agitator Ant                             {2}{R}           Creature — Insect
 [x]  2465  Blade of the Bloodchief                  {1}              Artifact — Equipment
 [x]  2466  Crib Swap                                {2}{W}           Kindred Instant — Shapeshifter
@@ -2574,7 +2574,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2581  Urabrask's Forge                         {2}{R}           Artifact
 [ ]  2582  Gauntlet of Power                        {5}              Artifact
 [ ]  2583  Yawgmoth's Will                          {2}{B}           Sorcery
-[ ]  2584  Andúril, Narsil Reforged                 {2}              Legendary Artifact — Equipment
+[x]  2584  Andúril, Narsil Reforged                 {2}              Legendary Artifact — Equipment
 [ ]  2585  Gogo, Mysterious Mime                    {3}{R}           Legendary Creature — Wizard
 [x]  2586  Momentous Fall                           {2}{G}{G}        Instant
 [x]  2587  Puppeteer Clique                         {3}{B}{B}        Creature — Faerie Wizard
@@ -2589,7 +2589,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2596  Echo of Eons                             {4}{U}{U}        Sorcery
 [x]  2597  Rakdos, Lord of Riots                    {B}{B}{R}{R}     Legendary Creature — Demon
 [x]  2598  Scene of the Crime                       {0}              Artifact Land — Clue
-[ ]  2599  Arch of Orazca                           {0}              Land
+[x]  2599  Arch of Orazca                           {0}              Land
 [x]  2600  Linvala, Keeper of Silence               {2}{W}{W}        Legendary Creature — Angel
 [x]  2601  Angelic Destiny                          {2}{W}{W}        Enchantment — Aura
 [x]  2602  Black Mage's Rod                         {1}{B}           Artifact — Equipment
@@ -3926,7 +3926,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3933  Commune with Lava                        {X}{R}{R}        Instant
 [ ]  3934  Unable to Scream                         {U}              Enchantment — Aura
 [x]  3935  Workshop Assistant                       {3}              Artifact Creature — Construct
-[ ]  3936  Roil Elemental                           {3}{U}{U}{U}     Creature — Elemental
+[x]  3936  Roil Elemental                           {3}{U}{U}{U}     Creature — Elemental
 [ ]  3937  White Lotus Tile                         {4}              Artifact
 [x]  3938  Hidden Volcano                           {0}              Land — Cave
 [ ]  3939  Reins of Power                           {2}{U}{U}        Instant
@@ -4501,7 +4501,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4508  Liliana, Heretical Healer // Liliana, Defiant Necromancer {3}              Legendary Creature — Human Cleric // Legendary Planeswalker — Liliana
 [ ]  4509  Archetype of Courage                     {1}{W}{W}        Enchantment Creature — Human Soldier
 [ ]  4510  Zodiark, Umbral God                      {B}{B}{B}{B}{B}  Legendary Creature — God
-[ ]  4511  Cerulean Wisps                           {U}              Instant
+[x]  4511  Cerulean Wisps                           {U}              Instant
 [x]  4512  Maelstrom Colossus                       {8}              Artifact Creature — Golem
 [x]  4513  Captain Sisay                            {2}{G}{W}        Legendary Creature — Human Soldier
 [x]  4514  Naya Panorama                            {0}              Land
