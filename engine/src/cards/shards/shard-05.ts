@@ -220,6 +220,7 @@ import _poolGodoBanditWarlord from "../pool/godo-bandit-warlord.js";
 import _poolGoldenHind from "../pool/golden-hind.js";
 import _poolGorgingVulture from "../pool/gorging-vulture.js";
 import _poolGoringWarplow from "../pool/goring-warplow.js";
+import _poolGostaDirk from "../pool/gosta-dirk.js";
 import _poolGrandCrescendo from "../pool/grand-crescendo.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
 import _poolGrasslands from "../pool/grasslands.js";
@@ -300,6 +301,7 @@ import _poolLlanowarVisionary from "../pool/llanowar-visionary.js";
 import _poolLocthwainPaladin from "../pool/locthwain-paladin.js";
 import _poolLocthwainScorn from "../pool/locthwain-scorn.js";
 import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
+import _poolLordMagnus from "../pool/lord-magnus.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
@@ -795,6 +797,7 @@ const shard: CardShard = {
     _poolGoldenHind,
     _poolGorgingVulture,
     _poolGoringWarplow,
+    _poolGostaDirk,
     _poolGrandCrescendo,
     _poolGrappleWithThePast,
     _poolGrasslands,
@@ -875,6 +878,7 @@ const shard: CardShard = {
     _poolLocthwainPaladin,
     _poolLocthwainScorn,
     _poolLokiLordOfMisrule,
+    _poolLordMagnus,
     _poolLordOfAtlantis,
     _poolLoreholdArchivist,
     _poolLoyalGuardian,

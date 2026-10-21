@@ -49,6 +49,24 @@ export const LANDWALK: ReadonlyArray<readonly [Keyword, string]> = [
   ["desertwalk", "Desert"],
 ];
 
+/** The landwalk keywords some permanent's static says creatures "can be
+ * blocked as though they didn't have" (Quagmire, Lord Magnus). */
+function landwalkIgnoredForBlocks(state: GameState, registry: CardRegistry): Set<Keyword> {
+  return computedCacheMemo("landwalk-ignored-for-blocks", () => {
+    const out = new Set<Keyword>();
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || hasLostAbilities(source)) continue;
+      for (const ability of registry.get(rulesTextName(source)).static) {
+        if (ability.blockableDespiteLandwalk === undefined) continue;
+        if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+        for (const keyword of ability.blockableDespiteLandwalk) out.add(keyword);
+      }
+    }
+    return out;
+  });
+}
+
 /** The land types among the lands `player` controls — what a landwalker
  * attacking them is checked against. */
 export function landTypesControlledBy(
@@ -367,8 +385,11 @@ function whyCannotBlockUncached(
   // the one declaring this block — controls a land of that type.
   const walked = LANDWALK.filter(([keyword]) => objHasKeyword(state, registry, attackerId, keyword));
   if (walked.length > 0) {
+    // "…can be blocked as though they didn't have swampwalk" (Quagmire).
+    const ignored = landwalkIgnoredForBlocks(state, registry);
+    const counted = walked.filter(([keyword]) => !ignored.has(keyword));
     const lands = landTypesControlledBy(state, registry, player);
-    const walk = walked.find(([, landType]) => lands.has(landType));
+    const walk = counted.find(([, landType]) => lands.has(landType));
     if (walk !== undefined) {
       const attackerDef = registry.get(printedCardName(attacker));
       return `${blockerDef.name} can't block ${attackerDef.name} (${walk[0]})`;

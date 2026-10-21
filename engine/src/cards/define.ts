@@ -1840,6 +1840,11 @@ export interface StaticAbility {
    * untap); no player gets priority (502.4). `affects` is ignored. Usually
    * beside an effect lasting `"while-source-tapped"`. */
   readonly mayChooseNotToUntap?: true;
+  /** "Creatures with swampwalk can be blocked as though they didn't have
+   * swampwalk" (Legends' Quagmire, Lord Magnus — rule 702.14): every
+   * creature's landwalk of these kinds is ignored when a block is declared,
+   * whoever controls the creature or this. `affects` is ignored. */
+  readonly blockableDespiteLandwalk?: readonly Keyword[];
   /** "You may activate loyalty abilities of [this] on any player's turn any
    * time you could cast an instant" (Teferi, Master of Time): its loyalty
    * abilities aren't held to sorcery timing (rule 606.3) — still one per

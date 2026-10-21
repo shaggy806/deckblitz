@@ -1458,6 +1458,8 @@ each damage would be dealt, rule 615.1),
 
 `supertypes: ["world"]` (rule 704.5k — Legends' Nether Void, Gravity Sphere): the world rule is a state-based action — with two or more world permanents, all but the newest go to their owners' graveyards, and a tie for newest sends them all. Nothing else to author. `world-rule.test.ts`.
 
+`blockableDespiteLandwalk: ["swampwalk"]` (a `StaticAbility`, rule 702.14 — Legends' Quagmire, Lord Magnus, Great Wall): "Creatures with swampwalk can be blocked as though they didn't have swampwalk" — every creature's landwalk of those kinds is ignored when blocks are declared (`whyCannotBlock`), whoever controls the static. One static per sentence; the scaffolder reads it. `blockable-despite-landwalk.test.ts`.
+
 **"Exile … until ~ leaves the battlefield"** (Banishing Light) is rule 610.3:
 the exile is a one-shot effect, and the return a second one created right after
 the source leaves — no triggered ability, so nothing to respond to, and it

@@ -132,6 +132,7 @@ import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
+import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
 import _poolDeepSight from "../pool/deep-sight.js";
 import _poolDeliveryMoogle from "../pool/delivery-moogle.js";
@@ -704,6 +705,7 @@ const shard: CardShard = {
     _poolDawnOfHope,
     _poolDawnhartGeist,
     _poolDawnwingMarshal,
+    _poolDeadfall,
     _poolDeadlyRiposte,
     _poolDeepSight,
     _poolDeliveryMoogle,

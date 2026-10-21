@@ -2598,6 +2598,11 @@ function parseStatic(line, text) {
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: w[2], amount } }, text };
     }
   }
+  // Rule 702.14 (Legends' Quagmire): a landwalk ignored for blocks.
+  {
+    const w = /^Creatures with (plainswalk|islandwalk|swampwalk|mountainwalk|forestwalk|desertwalk) can be blocked as though they didn't have \1\.$/.exec(line);
+    if (w !== null) return { affects: { scope: "self" }, blockableDespiteLandwalk: [w[1]], text };
+  }
   // Rule 502.3 (Antiquities): its controller's choice in the untap step.
   if (line === "You may choose not to untap ~ during your untap step.") {
     return { affects: { scope: "self" }, mayChooseNotToUntap: true, text };

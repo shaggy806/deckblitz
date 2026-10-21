@@ -263,6 +263,7 @@ import _poolLionSash from "../pool/lion-sash.js";
 import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLands from "../pool/living-lands.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
+import _poolLivingPlane from "../pool/living-plane.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
@@ -821,6 +822,7 @@ const shard: CardShard = {
     _poolLiturgyOfBlood,
     _poolLivingLands,
     _poolLivingLightning,
+    _poolLivingPlane,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
     _poolLoyalGryff,

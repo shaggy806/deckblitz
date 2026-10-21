@@ -9283,6 +9283,9 @@
   },
   "condition:trigger-object-not-sacrificed": {
    "example": "Urza's Miter"
+  },
+  "static:block-as-though-no-landwalk": {
+   "example": "Quagmire"
   }
  }
 }

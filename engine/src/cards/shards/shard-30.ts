@@ -470,6 +470,7 @@ import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
 import _poolSteamcoreScholar from "../pool/steamcore-scholar.js";
 import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
+import _poolStormWorld from "../pool/storm-world.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
@@ -1034,6 +1035,7 @@ const shard: CardShard = {
     _poolSteamcoreScholar,
     _poolSteampathCharger,
     _poolStockpilingCelebrant,
+    _poolStormWorld,
     _poolStridingShotcaller,
     _poolSunhomeStalwart,
     _poolSwarmCuller,

@@ -491,6 +491,7 @@ import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
 import _poolUndercellarMyconid from "../pool/undercellar-myconid.js";
 import _poolUndercityUprising from "../pool/undercity-uprising.js";
+import _poolUndertow from "../pool/undertow.js";
 import _poolUnderworldDreams from "../pool/underworld-dreams.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
@@ -1049,6 +1050,7 @@ const shard: CardShard = {
     _poolUlvenwaldBehemoth,
     _poolUndercellarMyconid,
     _poolUndercityUprising,
+    _poolUndertow,
     _poolUnderworldDreams,
     _poolUnholyOfficiant,
     _poolUnknownShores,
