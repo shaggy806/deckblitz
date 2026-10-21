@@ -132,6 +132,7 @@ import _poolElvenPalisade from "../pool/elven-palisade.js";
 import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
 import _poolEncroachingDragonstorm from "../pool/encroaching-dragonstorm.js";
 import _poolEndRazeForerunners from "../pool/end-raze-forerunners.js";
+import _poolEnergyTap from "../pool/energy-tap.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
@@ -737,6 +738,7 @@ const shard: CardShard = {
     _poolEmbraalGearSmasher,
     _poolEncroachingDragonstorm,
     _poolEndRazeForerunners,
+    _poolEnergyTap,
     _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
     _poolErodedCanyon,

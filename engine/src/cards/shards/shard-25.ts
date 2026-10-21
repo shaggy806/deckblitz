@@ -257,6 +257,7 @@ import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKitsuneAce from "../pool/kitsune-ace.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
+import _poolKoboldOverlord from "../pool/kobold-overlord.js";
 import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
 import _poolKrothussLordOfTheDeep from "../pool/krothuss-lord-of-the-deep.js";
@@ -828,6 +829,7 @@ const shard: CardShard = {
     _poolKindlesparkDuo,
     _poolKitsuneAce,
     _poolKnightOfNewBenalia,
+    _poolKoboldOverlord,
     _poolKraulWhipcracker,
     _poolKrileBaldesion,
     _poolKrothussLordOfTheDeep,

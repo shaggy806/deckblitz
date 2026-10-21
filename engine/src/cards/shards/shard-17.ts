@@ -73,6 +73,7 @@ import _poolCharge from "../pool/charge.js";
 import _poolCheckpointOfficer from "../pool/checkpoint-officer.js";
 import _poolChildrenOfKorlis from "../pool/children-of-korlis.js";
 import _poolChitinousCloak from "../pool/chitinous-cloak.js";
+import _poolChromium from "../pool/chromium.js";
 import _poolCityOnFire from "../pool/city-on-fire.js";
 import _poolCitywideBust from "../pool/citywide-bust.js";
 import _poolCleansingNova from "../pool/cleansing-nova.js";
@@ -630,6 +631,7 @@ const shard: CardShard = {
     _poolCheckpointOfficer,
     _poolChildrenOfKorlis,
     _poolChitinousCloak,
+    _poolChromium,
     _poolCityOnFire,
     _poolCitywideBust,
     _poolCleansingNova,

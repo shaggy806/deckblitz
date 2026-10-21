@@ -33005,6 +33005,20 @@ export class Game {
       }
     }
 
+    // The world rule (704.5k): with two or more world permanents, all but the
+    // one that has been a world permanent the shortest time go — the newest
+    // timestamp, no supertype ever being granted — and a tie for newest sends
+    // them all.
+    const worlds = battlefield.filter((id) => supertypesOf(this.registry, this.state.objects[id]).includes("world"));
+    if (worlds.length >= 2) {
+      const newest = Math.max(...worlds.map((id) => this.state.objects[id].timestamp));
+      const atNewest = worlds.filter((id) => this.state.objects[id].timestamp === newest);
+      for (const id of worlds) {
+        if (atNewest.length === 1 && id === atNewest[0]) continue;
+        add(id, { type: "permanent-destroyed", object: id, reason: "the world rule" });
+      }
+    }
+
     // The legend rule (704.5j): a player controlling 2+ legendary permanents
     // with the same name keeps the one of their choice — asked for before
     // anything moves (`legend`), one group at a time in APNAP order — and the

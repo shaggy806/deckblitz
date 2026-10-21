@@ -380,7 +380,8 @@
   "static:may-choose-not-to-untap",
   "effect:duration-while-source-tapped",
   "effect:doesnt-untap-while-source-tapped",
-  "keyword:rampage"
+  "keyword:rampage",
+  "mechanic:world-rule"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

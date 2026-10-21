@@ -350,6 +350,7 @@ import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
+import _poolNetherVoid from "../pool/nether-void.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,
     _poolNebelgastIntruder,
+    _poolNetherVoid,
     _poolNewHorizons,
     _poolNezumiBladeblesser,
     _poolNimReplica,

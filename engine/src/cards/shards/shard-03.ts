@@ -234,6 +234,7 @@ import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
+import _poolLifeChisel from "../pool/life-chisel.js";
 import _poolLilianaTheNecromancer from "../pool/liliana-the-necromancer.js";
 import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
@@ -289,6 +290,7 @@ import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
+import _poolPalladiaMors from "../pool/palladia-mors.js";
 import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
@@ -744,6 +746,7 @@ const shard: CardShard = {
     _poolLambholtRaconteur,
     _poolLazotepChancellor,
     _poolLiberatedDwarf,
+    _poolLifeChisel,
     _poolLilianaTheNecromancer,
     _poolLivingLibrary,
     _poolLizardConnorssCurse,
@@ -799,6 +802,7 @@ const shard: CardShard = {
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,
     _poolOrcristGoblinCleaver,
+    _poolPalladiaMors,
     _poolPenregonStrongbull,
     _poolPersist,
     _poolPiggyBank,

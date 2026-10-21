@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAangsJourney from "../pool/aangs-journey.js";
+import _poolAbomination from "../pool/abomination.js";
 import _poolAdrixAndNev from "../pool/adrix-and-nev.js";
 import _poolAdvancedHoverguard from "../pool/advanced-hoverguard.js";
 import _poolAerialManeuver from "../pool/aerial-maneuver.js";
@@ -157,6 +158,7 @@ import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEstridsInvocation from "../pool/estrids-invocation.js";
+import _poolEvilEyeOfOrmsByGore from "../pool/evil-eye-of-orms-by-gore.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
 import _poolExcaliburIi from "../pool/excalibur-ii.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
@@ -350,6 +352,7 @@ import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
 import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPsychicWhorl from "../pool/psychic-whorl.js";
 import _poolPulseTracker from "../pool/pulse-tracker.js";
+import _poolPyrotechnics from "../pool/pyrotechnics.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
@@ -544,6 +547,7 @@ import _tokensSalamanderWarriorToken from "../tokens/salamander-warrior-token.js
 const shard: CardShard = {
   pool: [
     _poolAangsJourney,
+    _poolAbomination,
     _poolAdrixAndNev,
     _poolAdvancedHoverguard,
     _poolAerialManeuver,
@@ -697,6 +701,7 @@ const shard: CardShard = {
     _poolEnatuGolem,
     _poolEphemeralShields,
     _poolEstridsInvocation,
+    _poolEvilEyeOfOrmsByGore,
     _poolEvisceratorsInsight,
     _poolExcaliburIi,
     _poolExiledBoggart,
@@ -890,6 +895,7 @@ const shard: CardShard = {
     _poolPsychicFrog,
     _poolPsychicWhorl,
     _poolPulseTracker,
+    _poolPyrotechnics,
     _poolQuantumEntanglement,
     _poolQuillBladeLaureate,
     _poolRacersScoreboard,

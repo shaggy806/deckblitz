@@ -1456,6 +1456,8 @@ each damage would be dealt, rule 615.1),
 
 `rampage(n)` (helpers.ts, rule 702.23 — Legends' Aerathi Berserker): the becomes-blocked trigger, +N/+N until end of turn for each creature blocking it beyond the first, counted as it resolves (702.23b) through the `{ blockersOf: "source" }` amount (each token of a blocking stack counting). The scaffolder reads "Rampage N". `rampage.test.ts`.
 
+`supertypes: ["world"]` (rule 704.5k — Legends' Nether Void, Gravity Sphere): the world rule is a state-based action — with two or more world permanents, all but the newest go to their owners' graveyards, and a tie for newest sends them all. Nothing else to author. `world-rule.test.ts`.
+
 **"Exile … until ~ leaves the battlefield"** (Banishing Light) is rule 610.3:
 the exile is a one-shot effect, and the return a second one created right after
 the source leaves — no triggered ability, so nothing to respond to, and it

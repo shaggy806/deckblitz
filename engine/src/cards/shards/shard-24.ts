@@ -118,6 +118,7 @@ import _poolCurryFavor from "../pool/curry-favor.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCursedLand from "../pool/cursed-land.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
+import _poolDakkonBlackblade from "../pool/dakkon-blackblade.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
 import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
@@ -669,6 +670,7 @@ const shard: CardShard = {
     _poolCurseOfClingingWebs,
     _poolCursedLand,
     _poolCylianElf,
+    _poolDakkonBlackblade,
     _poolDarkLeoShredder,
     _poolDarkRitual,
     _poolDarksteelJuggernaut,

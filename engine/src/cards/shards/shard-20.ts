@@ -138,6 +138,7 @@ import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
+import _poolDivineOffering from "../pool/divine-offering.js";
 import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.js";
 import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
@@ -751,6 +752,7 @@ const shard: CardShard = {
     _poolDinosaurHunter,
     _poolDispel,
     _poolDistortionStrike,
+    _poolDivineOffering,
     _poolDonatelloWayWithMachines,
     _poolDoraMilajeElite,
     _poolDoubleCleave,

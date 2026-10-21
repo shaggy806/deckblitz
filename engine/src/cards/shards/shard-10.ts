@@ -213,6 +213,7 @@ import _poolGoblinWarStrike from "../pool/goblin-war-strike.js";
 import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
 import _poolGraviticPunch from "../pool/gravitic-punch.js";
+import _poolGravitySphere from "../pool/gravity-sphere.js";
 import _poolGreaterGood from "../pool/greater-good.js";
 import _poolGreedsGambit from "../pool/greeds-gambit.js";
 import _poolGreyHostReinforcements from "../pool/grey-host-reinforcements.js";
@@ -803,6 +804,7 @@ const shard: CardShard = {
     _poolGolgariCluestone,
     _poolGracefulAdept,
     _poolGraviticPunch,
+    _poolGravitySphere,
     _poolGreaterGood,
     _poolGreedsGambit,
     _poolGreyHostReinforcements,
