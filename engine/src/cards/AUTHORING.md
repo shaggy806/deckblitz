@@ -1454,6 +1454,8 @@ each damage would be dealt, rule 615.1),
 
 `mayChooseNotToUntap: true` (a `StaticAbility`, rule 502.3 — "You may choose not to untap ~ during your untap step": Ashnod's Battle Gear, Phyrexian Gremlins, Entrancing Lyre). As its controller's untap step untaps their permanents, they pick which of these to leave tapped (the `choose-permanents` decision, asked only when one would untap; no priority, 502.4). Beside it, the `"while-source-tapped"` `PtDuration` — "for as long as ~ remains tapped" — on `modify-pt`, `restrict`, `animate`, `lose-abilities` and anything else taking a `PtDuration`, and `gain-control`'s `whileSourceTapped`: it ends as the source untaps or leaves, and does nothing if the source is already untapped (611.2b). The scaffolder reads the static line and "gets +N/+N for as long as ~ remains tapped". `choose-not-to-untap.test.ts`.
 
+`rampage(n)` (helpers.ts, rule 702.23 — Legends' Aerathi Berserker): the becomes-blocked trigger, +N/+N until end of turn for each creature blocking it beyond the first, counted as it resolves (702.23b) through the `{ blockersOf: "source" }` amount (each token of a blocking stack counting). The scaffolder reads "Rampage N". `rampage.test.ts`.
+
 **"Exile … until ~ leaves the battlefield"** (Banishing Light) is rule 610.3:
 the exile is a one-shot effect, and the return a second one created right after
 the source leaves — no triggered ability, so nothing to respond to, and it

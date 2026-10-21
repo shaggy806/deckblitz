@@ -270,6 +270,7 @@ import _poolMaggotCarrier from "../pool/maggot-carrier.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
+import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
@@ -841,6 +842,7 @@ const shard: CardShard = {
     _poolMajesticAuricorn,
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,
+    _poolMarhaultElsdragon,
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,
     _poolMassManipulation,

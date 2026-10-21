@@ -403,6 +403,23 @@ export const afterlife = (n: number): TriggeredAbility => ({
 });
 
 /**
+ * Rampage N (rule 702.23a): "Whenever this creature becomes blocked, it gets
+ * +N/+N until end of turn for each creature blocking it beyond the first" —
+ * counted once, as the trigger resolves (702.23b). Each instance triggers on
+ * its own (702.23c). Put "Rampage N" in `text` as well.
+ */
+export const rampage = (n: number): TriggeredAbility => {
+  const bonus = { product: [n, { difference: [{ blockersOf: "source" }, 1] }] } as const;
+  return {
+    trigger: { on: "becomes-blocked", who: "self" },
+    targets: [],
+    effect: { kind: "modify-pt", target: "source", power: bonus, toughness: bonus, duration: "end-of-turn" },
+    resolve: null,
+    text: `Rampage ${n} (Whenever this creature becomes blocked, it gets +${n}/+${n} until end of turn for each creature blocking it beyond the first.)`,
+  };
+};
+
+/**
  * Mentor (rule 702.134a): "Whenever this creature attacks, put a +1/+1
  * counter on target attacking creature with lesser power" — the power
  * compared as the target is chosen and again as it resolves (Legion

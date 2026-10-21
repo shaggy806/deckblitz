@@ -104,6 +104,7 @@ import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCrackInTime from "../pool/crack-in-time.js";
 import _poolCraftyPathmage from "../pool/crafty-pathmage.js";
+import _poolCrawGiant from "../pool/craw-giant.js";
 import _poolCrestedHerdcaller from "../pool/crested-herdcaller.js";
 import _poolCrudeBentBlade from "../pool/crude-bent-blade.js";
 import _poolCruelEdict from "../pool/cruel-edict.js";
@@ -539,6 +540,7 @@ import _poolWindcragSiege from "../pool/windcrag-siege.js";
 import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
 import _poolWinterEladrin from "../pool/winter-eladrin.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
+import _poolWolverinePack from "../pool/wolverine-pack.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
 import _poolWretchedThrong from "../pool/wretched-throng.js";
@@ -671,6 +673,7 @@ const shard: CardShard = {
     _poolContaminatedLandscape,
     _poolCrackInTime,
     _poolCraftyPathmage,
+    _poolCrawGiant,
     _poolCrestedHerdcaller,
     _poolCrudeBentBlade,
     _poolCruelEdict,
@@ -1106,6 +1109,7 @@ const shard: CardShard = {
     _poolWindgracesJudgment,
     _poolWinterEladrin,
     _poolWintersGrasp,
+    _poolWolverinePack,
     _poolWondrousRevival,
     _poolWoodedBastion,
     _poolWretchedThrong,

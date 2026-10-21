@@ -379,7 +379,8 @@
   "effect:set-color-effect",
   "static:may-choose-not-to-untap",
   "effect:duration-while-source-tapped",
-  "effect:doesnt-untap-while-source-tapped"
+  "effect:doesnt-untap-while-source-tapped",
+  "keyword:rampage"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

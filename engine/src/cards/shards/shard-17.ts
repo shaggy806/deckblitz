@@ -225,6 +225,7 @@ import _poolHomesteadCourage from "../pool/homestead-courage.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
 import _poolHornedTurtle from "../pool/horned-turtle.js";
 import _poolHornetNest from "../pool/hornet-nest.js";
+import _poolHundingGjornersen from "../pool/hunding-gjornersen.js";
 import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
@@ -777,6 +778,7 @@ const shard: CardShard = {
     _poolHondenOfNightsReach,
     _poolHornedTurtle,
     _poolHornetNest,
+    _poolHundingGjornersen,
     _poolHuntmasterLiger,
     _poolHushwoodVerge,
     _poolHydroidKrasis,

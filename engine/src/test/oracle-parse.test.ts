@@ -1218,6 +1218,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(lace.complete).toBe(true);
   });
 
+  it("rampage (rule 702.23): its becomes-blocked trigger, counted as it resolves", () => {
+    const berserker = face("Rampage 3 (Whenever this creature becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)", "Creature — Human Berserker");
+    expect(berserker.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "self" });
+    expect(berserker.triggered[0].effect).toMatchObject({ kind: "modify-pt", target: "source", power: { product: [3, { difference: [{ blockersOf: "source" }, 1] }] } });
+    expect(berserker.complete).toBe(true);
+  });
+
   it("'you may choose not to untap' (rule 502.3) and 'for as long as ~ remains tapped'", () => {
     const gear = face(
       "You may choose not to untap this artifact during your untap step.\n{2}, {T}: Target creature you control gets +2/-2 for as long as this artifact remains tapped.",

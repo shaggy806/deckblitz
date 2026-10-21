@@ -9196,6 +9196,9 @@
   },
   "effect:pay-any-time-prevent-until-end-of-turn": {
    "example": "Guardian Angel"
+  },
+  "keyword:rampage": {
+   "example": "Aerathi Berserker"
   }
  }
 }

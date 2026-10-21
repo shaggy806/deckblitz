@@ -141,6 +141,7 @@ import _poolAdventurousImpulse from "./pool/adventurous-impulse.js";
 import _poolAegisOfTheHeavens from "./pool/aegis-of-the-heavens.js";
 import _poolAegisSculptor from "./pool/aegis-sculptor.js";
 import _poolAegisTurtle from "./pool/aegis-turtle.js";
+import _poolAerathiBerserker from "./pool/aerathi-berserker.js";
 import _poolAerialAssault from "./pool/aerial-assault.js";
 import _poolAerialBoost from "./pool/aerial-boost.js";
 import _poolAerialDoombot from "./pool/aerial-doombot.js";
@@ -3098,6 +3099,7 @@ import _poolCraterhoofBehemoth from "./pool/craterhoof-behemoth.js";
 import _poolCraterize from "./pool/craterize.js";
 import _poolCravenGiant from "./pool/craven-giant.js";
 import _poolCravenKnight from "./pool/craven-knight.js";
+import _poolCrawGiant from "./pool/craw-giant.js";
 import _poolCrawWurm from "./pool/craw-wurm.js";
 import _poolCrawlFromTheCellar from "./pool/crawl-from-the-cellar.js";
 import _poolCrawlingBarrens from "./pool/crawling-barrens.js";
@@ -5617,6 +5619,7 @@ import _poolFrontlineWarRager from "./pool/frontline-war-rager.js";
 import _poolFrostAugur from "./pool/frost-augur.js";
 import _poolFrostBite from "./pool/frost-bite.js";
 import _poolFrostFairLureFish from "./pool/frost-fair-lure-fish.js";
+import _poolFrostGiant from "./pool/frost-giant.js";
 import _poolFrostMarsh from "./pool/frost-marsh.js";
 import _poolFrostOgre from "./pool/frost-ogre.js";
 import _poolFrostTrickster from "./pool/frost-trickster.js";
@@ -7213,6 +7216,7 @@ import _poolHumbleTheBrute from "./pool/humble-the-brute.js";
 import _poolHumblingElder from "./pool/humbling-elder.js";
 import _poolHumiliate from "./pool/humiliate.js";
 import _poolHumongulus from "./pool/humongulus.js";
+import _poolHundingGjornersen from "./pool/hunding-gjornersen.js";
 import _poolHundroog from "./pool/hundroog.js";
 import _poolHungeringPuppetbeast from "./pool/hungering-puppetbeast.js";
 import _poolHungryForMore from "./pool/hungry-for-more.js";
@@ -9123,6 +9127,7 @@ import _poolMarduMonument from "./pool/mardu-monument.js";
 import _poolMarduRoughrider from "./pool/mardu-roughrider.js";
 import _poolMarduSkullhunter from "./pool/mardu-skullhunter.js";
 import _poolMarduWarshrieker from "./pool/mardu-warshrieker.js";
+import _poolMarhaultElsdragon from "./pool/marhault-elsdragon.js";
 import _poolMarinaVendrell from "./pool/marina-vendrell.js";
 import _poolMarionetteApprentice from "./pool/marionette-apprentice.js";
 import _poolMarionetteMaster from "./pool/marionette-master.js";
@@ -17340,6 +17345,7 @@ import _poolWolfsQuarry from "./pool/wolfs-quarry.js";
 import _poolWolfsbaneHighlandHero from "./pool/wolfsbane-highland-hero.js";
 import _poolWolfwillowHaven from "./pool/wolfwillow-haven.js";
 import _poolWolverineBestThereIs from "./pool/wolverine-best-there-is.js";
+import _poolWolverinePack from "./pool/wolverine-pack.js";
 import _poolWolverineRiders from "./pool/wolverine-riders.js";
 import _poolWonder from "./pool/wonder.js";
 import _poolWondrousCrucible from "./pool/wondrous-crucible.js";
@@ -18259,6 +18265,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAegisOfTheHeavens,
   _poolAegisSculptor,
   _poolAegisTurtle,
+  _poolAerathiBerserker,
   _poolAerialAssault,
   _poolAerialBoost,
   _poolAerialDoombot,
@@ -21216,6 +21223,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCraterize,
   _poolCravenGiant,
   _poolCravenKnight,
+  _poolCrawGiant,
   _poolCrawWurm,
   _poolCrawlFromTheCellar,
   _poolCrawlingBarrens,
@@ -23735,6 +23743,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFrostAugur,
   _poolFrostBite,
   _poolFrostFairLureFish,
+  _poolFrostGiant,
   _poolFrostMarsh,
   _poolFrostOgre,
   _poolFrostTrickster,
@@ -25331,6 +25340,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHumblingElder,
   _poolHumiliate,
   _poolHumongulus,
+  _poolHundingGjornersen,
   _poolHundroog,
   _poolHungeringPuppetbeast,
   _poolHungryForMore,
@@ -27241,6 +27251,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarduRoughrider,
   _poolMarduSkullhunter,
   _poolMarduWarshrieker,
+  _poolMarhaultElsdragon,
   _poolMarinaVendrell,
   _poolMarionetteApprentice,
   _poolMarionetteMaster,
@@ -35458,6 +35469,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWolfsbaneHighlandHero,
   _poolWolfwillowHaven,
   _poolWolverineBestThereIs,
+  _poolWolverinePack,
   _poolWolverineRiders,
   _poolWonder,
   _poolWondrousCrucible,
@@ -36390,6 +36402,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aegis-of-the-heavens": _poolAegisOfTheHeavens,
   "pool/aegis-sculptor": _poolAegisSculptor,
   "pool/aegis-turtle": _poolAegisTurtle,
+  "pool/aerathi-berserker": _poolAerathiBerserker,
   "pool/aerial-assault": _poolAerialAssault,
   "pool/aerial-boost": _poolAerialBoost,
   "pool/aerial-doombot": _poolAerialDoombot,
@@ -39347,6 +39360,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/craterize": _poolCraterize,
   "pool/craven-giant": _poolCravenGiant,
   "pool/craven-knight": _poolCravenKnight,
+  "pool/craw-giant": _poolCrawGiant,
   "pool/craw-wurm": _poolCrawWurm,
   "pool/crawl-from-the-cellar": _poolCrawlFromTheCellar,
   "pool/crawling-barrens": _poolCrawlingBarrens,
@@ -41866,6 +41880,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/frost-augur": _poolFrostAugur,
   "pool/frost-bite": _poolFrostBite,
   "pool/frost-fair-lure-fish": _poolFrostFairLureFish,
+  "pool/frost-giant": _poolFrostGiant,
   "pool/frost-marsh": _poolFrostMarsh,
   "pool/frost-ogre": _poolFrostOgre,
   "pool/frost-trickster": _poolFrostTrickster,
@@ -43462,6 +43477,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/humbling-elder": _poolHumblingElder,
   "pool/humiliate": _poolHumiliate,
   "pool/humongulus": _poolHumongulus,
+  "pool/hunding-gjornersen": _poolHundingGjornersen,
   "pool/hundroog": _poolHundroog,
   "pool/hungering-puppetbeast": _poolHungeringPuppetbeast,
   "pool/hungry-for-more": _poolHungryForMore,
@@ -45372,6 +45388,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mardu-roughrider": _poolMarduRoughrider,
   "pool/mardu-skullhunter": _poolMarduSkullhunter,
   "pool/mardu-warshrieker": _poolMarduWarshrieker,
+  "pool/marhault-elsdragon": _poolMarhaultElsdragon,
   "pool/marina-vendrell": _poolMarinaVendrell,
   "pool/marionette-apprentice": _poolMarionetteApprentice,
   "pool/marionette-master": _poolMarionetteMaster,
@@ -53589,6 +53606,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wolfsbane-highland-hero": _poolWolfsbaneHighlandHero,
   "pool/wolfwillow-haven": _poolWolfwillowHaven,
   "pool/wolverine-best-there-is": _poolWolverineBestThereIs,
+  "pool/wolverine-pack": _poolWolverinePack,
   "pool/wolverine-riders": _poolWolverineRiders,
   "pool/wonder": _poolWonder,
   "pool/wondrous-crucible": _poolWondrousCrucible,

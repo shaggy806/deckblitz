@@ -178,6 +178,7 @@ import _poolFontOfProgress from "../pool/font-of-progress.js";
 import _poolForebodingStatue from "../pool/foreboding-statue.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
 import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
+import _poolFrostGiant from "../pool/frost-giant.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
@@ -748,6 +749,7 @@ const shard: CardShard = {
     _poolForebodingStatue,
     _poolFriendlyTeddy,
     _poolFrilledSparkshooter,
+    _poolFrostGiant,
     _poolFusionElemental,
     _poolGallantCavalry,
     _poolGalvanicArc,

@@ -27,6 +27,7 @@ import {
   affinity,
   afflict,
   afterlife,
+  rampage,
   annihilator,
   mentor,
   crew,
@@ -143,6 +144,8 @@ function keywordPart(part) {
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
   // Afterlife N (rule 702.135a): its dies trigger.
   if ((m = /^afterlife (\d+)$/i.exec(p))) return { triggered: [afterlife(Number(m[1]))] };
+  // Rampage N (rule 702.23a): its becomes-blocked trigger.
+  if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
   // Spectacle [cost] (rule 702.137a): an alternative cost.
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };

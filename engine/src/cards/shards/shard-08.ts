@@ -10,6 +10,7 @@ import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
 import _poolAdmiralBrassUnsinkable from "../pool/admiral-brass-unsinkable.js";
 import _poolAdornedPouncer from "../pool/adorned-pouncer.js";
 import _poolAdunOakenshield from "../pool/adun-oakenshield.js";
+import _poolAerathiBerserker from "../pool/aerathi-berserker.js";
 import _poolAerialBoost from "../pool/aerial-boost.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
@@ -609,6 +610,7 @@ const shard: CardShard = {
     _poolAdmiralBrassUnsinkable,
     _poolAdornedPouncer,
     _poolAdunOakenshield,
+    _poolAerathiBerserker,
     _poolAerialBoost,
     _poolAetherAdept,
     _poolAgentOfShauku,

@@ -438,6 +438,11 @@ export type EffectAmount =
    * since it became this object (`GameObject.merged.timesMutated`), 0 for
    * one that never mutated; as it last existed if it has left. */
   | { readonly timesMutated: "source" }
+  /** How many creatures are blocking the source now — each token of a
+   * blocking stack counting (rampage's "for each creature blocking it beyond
+   * the first", rule 702.23, read as the trigger resolves, 702.23b; Rampaging
+   * Cyclops). 0 when nothing blocks it. */
+  | { readonly blockersOf: "source" }
   /** How many creatures died under the effect controller's control this turn
    * — Liliana's Standard Bearer. Reads `PlayerState.creaturesDiedThisTurn`.
    * `anyController`: every creature that died this turn, whoever controlled
@@ -5722,6 +5727,8 @@ export interface EffectApi {
   partySize(): number;
   /** See the `{ timesMutated }` {@link EffectAmount}. */
   timesMutated(): number;
+  /** How many creatures are blocking the source — see `{ blockersOf }`. */
+  blockersOfSource(): number;
   /** See the `{ opponentsControllingFewer }` {@link EffectAmount}. */
   opponentsControllingFewer(filter: CardFilter): number;
   /** See the `{ creaturesDiedThisTurn }` {@link EffectAmount}. */
@@ -7722,6 +7729,7 @@ function signedAmountValue(
   if ("basicLandTypes" in amount) return ctx.basicLandTypes();
   if ("partySize" in amount) return ctx.partySize();
   if ("timesMutated" in amount) return ctx.timesMutated();
+  if ("blockersOf" in amount) return ctx.blockersOfSource();
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
     const ref = resolveAmountRef(amount.powerOf, ctx);

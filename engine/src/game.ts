@@ -22424,6 +22424,11 @@ export class Game {
         if (object?.zone === "battlefield") return object.merged?.timesMutated ?? 0;
         return object?.lastKnown?.timesMutated ?? 0;
       },
+      blockersOfSource: () =>
+        permanentCount(
+          this.state,
+          this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.blocking === source),
+        ),
       opponentsControllingFewer: (filter) => {
         // What each player *controls* (read from their own side), whether or
         // not the filter says so — Voice of Many's `{ type: "creature" }`
