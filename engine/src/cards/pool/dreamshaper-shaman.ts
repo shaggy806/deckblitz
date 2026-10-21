@@ -37,7 +37,7 @@ export default defineCard({
                 condition: { kind: "this-way", what: "sacrificed", atLeast: 1 },
                 then: {
                   kind: "reveal-until",
-                  filter: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker", "battle"] },
+                  filter: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker", "battle"], notTypes: ["land"] },
                   put: "battlefield",
                   rest: "bottom-random",
                 },

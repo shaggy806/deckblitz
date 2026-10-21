@@ -321,6 +321,12 @@ export type AffectSpec =
 export type CombatRestriction =
   | "cant-attack"
   | "cant-block"
+  /** "Can't be blocked": the `unblockable` keyword's rule as a restriction,
+   * so a `restrict` over a filter reaches creatures that match it later this
+   * turn — Jace, Arcane Strategist's "creatures you control can't be blocked
+   * this turn" (rule 611.2c: it changes no characteristic, so it isn't locked
+   * to the creatures there as it resolved). */
+  | "cant-be-blocked"
   | "must-attack"
   /** Lure: **every** creature able to block it must do so. */
   | "must-be-blocked"

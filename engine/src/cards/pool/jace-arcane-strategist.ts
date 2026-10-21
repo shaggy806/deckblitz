@@ -35,12 +35,9 @@ export default defineCard({
       loyaltyCost: -7,
       cost: { mana: null, tap: false },
       targets: [],
-      effect: {
-        kind: "grant-keyword-all",
-        filter: { type: "creature", controlledBy: "you" },
-        keyword: "unblockable",
-        duration: "end-of-turn",
-      },
+      // A rule for the rest of the turn, not a grant (rule 611.2c): a creature
+      // that comes under your control later this turn can't be blocked either.
+      effect: { kind: "restrict", filter: { type: "creature", controlledBy: "you" }, restrictions: ["cant-be-blocked"] },
       resolve: null,
       text: "−7: Creatures you control can't be blocked this turn.",
     },

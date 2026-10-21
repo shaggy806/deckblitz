@@ -3440,9 +3440,14 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   i.e. its owner off the battlefield. A filter may read computed
   characteristics (a `keyword`, `power`); if that asks about the CDA's own
   object, the nested read uses its printed P/T rather than recursing.
-- `restrictions: [...]` — `"cant-attack" \| "cant-block" \| "must-attack" \|
-  "must-be-blocked" \| "must-be-blocked-if-able" \| "cant-attack-owner"`
-  (Pacifism, Juggernaut, Lure). `"must-attack"` is "attacks each combat if
+- `restrictions: [...]` — `"cant-attack" \| "cant-block" \| "cant-be-blocked" \|
+  "must-attack" \| "must-be-blocked" \| "must-be-blocked-if-able" \|
+  "cant-attack-owner"` (Pacifism, Juggernaut, Lure). `"cant-be-blocked"` is
+  the `unblockable` keyword's rule as a restriction: for a one-shot "creatures
+  you control can't be blocked this turn", a `restrict` over a `filter` —
+  which, changing no characteristic, covers creatures that match later that
+  turn too (rule 611.2c — Jace, Arcane Strategist's −7); a `grant-keyword-all`
+  would reach only those there as it resolved. `"must-attack"` is "attacks each combat if
   able": the attack declaration has to include the creature whenever it can
   attack, at a defender its controller picks (rule 508.1d — the offer's
   `mustAttack`, checked by `combat/attacking.ts`). `"must-be-blocked"` is Lure's "all creatures

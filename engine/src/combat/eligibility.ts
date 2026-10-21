@@ -287,7 +287,10 @@ function whyCannotBlockUncached(
   if (attacker === undefined || attacker.attacking === null) {
     return `${attackerId} is not attacking`;
   }
-  if (objHasKeyword(state, registry, attackerId, "unblockable")) {
+  if (
+    objHasKeyword(state, registry, attackerId, "unblockable") ||
+    restrictionsOf(state, registry, attackerId).has("cant-be-blocked")
+  ) {
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} (can't be blocked)`;
   }

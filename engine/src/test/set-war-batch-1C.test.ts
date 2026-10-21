@@ -4,6 +4,8 @@
 import { describe, expect, it } from "vitest";
 import type { Action } from "../actions.js";
 import type { ObjectId } from "../primitives.js";
+import { restrictionsOf } from "../characteristics.js";
+import { whyCannotBlock } from "../combat/eligibility.js";
 import {
   A,
   B,
@@ -87,11 +89,23 @@ describe("Jace, Arcane Strategist", () => {
   });
 
   it("−7: creatures you control can't be blocked this turn", () => {
-    const { game } = table();
+    const { game, a } = table();
     const jace = spawn(game, "Jace, Arcane Strategist");
     const bears = spawn(game, "Grizzly Bears");
-    loyalty(game, jace, -7, { atLeast: 7 });
-    expect(keywords(game, bears).has("unblockable")).toBe(true);
+    loyalty(game, jace, -7, { atLeast: 7, settle: false });
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0);
+    expect(restrictionsOf(game.state, game.registry, bears).has("cant-be-blocked")).toBe(true);
+    // A rule for the turn (rule 611.2c): a creature arriving later is covered too.
+    const later = spawn(game, "Hill Giant");
+    expect(restrictionsOf(game.state, game.registry, later).has("cant-be-blocked")).toBe(true);
+    const blocker = spawn(game, "Hill Giant", B);
+    expect(restrictionsOf(game.state, game.registry, blocker).has("cant-be-blocked")).toBe(false);
+    // And it stops a block: once they attack, the Giant may block neither.
+    a.declareAttackersFn = () => [bears, later].map((attacker) => ({ attacker, defender: B }));
+    game.advanceUntil((s) => s.turn.step === "declare-blockers" || s.awaiting?.kind === "blockers");
+    expect(game.state.objects[bears].attacking).toBe(B);
+    expect(whyCannotBlock(game.state, game.registry, B, blocker, bears)).toMatch(/can't be blocked/);
+    expect(whyCannotBlock(game.state, game.registry, B, blocker, later)).toMatch(/can't be blocked/);
   });
 });
 
