@@ -3032,4 +3032,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  // --- Pitch costs (2026-10-21) -----------------------------------------------
+  preset(
+    'Force of Will and Solitude (exile a card from your hand instead)',
+    board({
+      you: {
+        bf: ['Forest*2'],
+        hand: ['Grizzly Bears', 'Force of Will', 'Opt', 'Counterspell', 'Solitude', 'Swords to Plowshares'],
+      },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]

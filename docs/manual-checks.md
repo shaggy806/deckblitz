@@ -5126,3 +5126,23 @@ merged permanent with the top card's characteristics and every card's abilities
   (the Recluse's trigger fires again). Its text shows all three cards' abilities. When it dies,
   Grizzly Bears, Glowstone Recluse and Dreamtail Heron all go to your graveyard. Check at ~768px
   tall.
+
+## Pitch costs (2026-10-21)
+
+### Force of Will and Solitude (exile a card from your hand instead)
+
+*New player decision* — a pitch cost (rule 118.9): "you may pay 1 life and exile a blue card from
+your hand rather than pay this spell's mana cost", and evoke paid by exiling a white card; which
+card is exiled is chosen once the spell is on the stack (601.2h)
+
+- **Setup:** Your precombat main. Your battlefield: two Forests; in hand Grizzly Bears, Force of
+  Will, Opt, Counterspell, Solitude and Swords to Plowshares. The opponent has Hill Giant.
+- **Do:** Cast Grizzly Bears, then — holding priority — cast Force of Will for its alternative cost
+  targeting the Bears, and exile Counterspell. Then cast Solitude for its evoke cost, exile Swords
+  to Plowshares, and target the Hill Giant with its enters trigger.
+- **Check:** Force of Will's second button reads "(pay 1 life, exile a blue card from your hand)"
+  and Solitude's "(evoke: exile a white card from your hand)". The exile choice reads "Choose a card
+  to exile" and offers only Opt and Counterspell (never Force of Will itself, never the Bears) —
+  then only Swords to Plowshares, picked without asking if it's the only one. No land taps, you
+  lose 1 life, the Bears are countered, the Giant is exiled and its controller gains 3 life, and
+  Solitude is sacrificed. Check at ~768px tall.
