@@ -93,6 +93,11 @@ section keeps only what to do next.
   Emrakul, the Aeons Torn, Erayo, Fastbond, Flash, Hullbreacher, Iona, Leovold, Limited
   Resources, Nadu, Sundering Titan, Sylvan Primordial, Time Vault, Trade Secrets and Yawgmoth's
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
+- **Also: set by set, oldest first** (the `author-by-set-oldest` skill; the user's call
+  2026-10-21): the same whole-set walk from Limited Edition Alpha forward in time
+  (`npm run cards:sets -w engine -- --oldest --next 60`), until it meets the newest-first walk
+  below. **Next, Limited Edition Alpha** (137 left), then Beta (1), Arabian Nights (53),
+  Antiquities (53), Legends (219).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
   ranked ones first. Every set from Reality Fracture back to Phyrexia: All Will Be One is whole

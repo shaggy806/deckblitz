@@ -60,7 +60,9 @@ for:
   **The current authoring priority is set by set, whole sets, newest set first** (the
   `author-by-set` skill since 2026-10-14; `npm run cards:sets -w engine -- --sets | --next 60`):
   every set's Commander-legal first printings, going back first over the sets whose top half was
-  walked before. The other order is EDHREC rank across all sets (the `author-top-cards` skill;
+  walked before; and the same walk the other way, oldest set first and forward in time (the
+  `author-by-set-oldest` skill since 2026-10-21; `cards:sets -- --oldest`), until the two meet.
+  The other order is EDHREC rank across all sets (the `author-top-cards` skill;
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
   what blocks the most triaged ones). The bots' decks' stand-ins (the
   substitution tables in `engine/src/sample-decks.ts`) go as their originals land. The pool is

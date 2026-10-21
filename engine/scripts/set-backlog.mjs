@@ -12,6 +12,8 @@
 //   … --top 50        keep only that share of each set's ranked new cards (percent, default 100)
 //   … --ranked-only   leave out the cards EDHREC hasn't ranked yet (kept by default, last)
 //   … --refresh       fetch Scryfall's set list and first printings again (cached 3 days)
+//   … --oldest        walk the other way: oldest set first (`--sets N` the oldest N; the
+//                     `author-by-set-oldest` skill's order)
 //
 // Which sets: Scryfall's paper expansions, core sets, Commander products,
 // draft-innovation sets, masters sets and starter products released by today;
@@ -45,6 +47,7 @@ const HEADERS = { "User-Agent": "MTG-Engine/1.0 (set backlog)", Accept: "applica
 const top = Number(option("--top", "100"));
 const withUnranked = !flag("--ranked-only");
 const refresh = flag("--refresh");
+const oldest = flag("--oldest");
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -60,22 +63,31 @@ async function cached(file, fetcher) {
   return data;
 }
 
-async function getJson(url) {
-  // Scryfall asks for 50–100 ms between requests.
-  await sleep(100);
+async function getJson(url, tries = 5) {
+  // Scryfall asks for 50–100 ms between requests, and holds card searches to
+  // a slower rate of their own.
+  await sleep(url.includes("/cards/search") ? 500 : 100);
   const res = await fetch(url, { headers: HEADERS });
+  // Too many requests — the oldest-first walk fetches dozens of uncached sets
+  // in a row: wait as long as Scryfall's Retry-After says, then try again.
+  if (res.status === 429 && tries > 1) {
+    const wait = Number(res.headers.get("retry-after") ?? "30");
+    console.error(`(Scryfall rate limit: waiting ${wait} s)`);
+    await sleep((Number.isFinite(wait) ? wait + 1 : 30) * 1000);
+    return getJson(url, tries - 1);
+  }
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   return res.json();
 }
 
-/** Every set worth walking, newest first. */
+/** Every set worth walking, newest first (oldest first with `--oldest`). */
 async function sets() {
   const all = await cached("sets.json", async () => (await getJson("https://api.scryfall.com/sets")).data);
   const today = new Date().toISOString().slice(0, 10);
   return all
     .filter((s) => !s.digital && SET_TYPES.has(s.set_type) && s.released_at !== undefined && s.released_at <= today)
-    .sort((a, b) => b.released_at.localeCompare(a.released_at) || a.code.localeCompare(b.code));
+    .sort((a, b) => (oldest ? -1 : 1) * b.released_at.localeCompare(a.released_at) || a.code.localeCompare(b.code));
 }
 
 /** A set's Commander-legal first printings: name, EDHREC rank (or null), type line. */
@@ -160,5 +172,5 @@ if (option("--set") !== undefined) {
       listed += 1;
     }
   }
-  console.log(`${listed} untriaged card(s), newest set first (top ${top}% of each set by EDHREC rank${withUnranked ? ", unranked kept" : ""}).`);
+  console.log(`${listed} untriaged card(s), ${oldest ? "oldest" : "newest"} set first (top ${top}% of each set by EDHREC rank${withUnranked ? ", unranked kept" : ""}).`);
 }

@@ -1,6 +1,6 @@
 ---
 name: card-author
-description: Authors Magic cards for the MTG-Engine set walk in its own worktree, from a brief file the lead stages (drafts, Oracle briefs, the vocabulary digest). Used by the author-by-set skill's parallel batches — not for engine features or anything outside engine/src/cards and its test file.
+description: Authors Magic cards for the MTG-Engine set walk in its own worktree, from a brief file the lead stages (drafts, Oracle briefs, the vocabulary digest). Used by the author-by-set and author-by-set-oldest skills' parallel batches — not for engine features or anything outside engine/src/cards and its test file.
 tools: Read, Write, Edit, Grep, Glob, Bash, PowerShell
 ---
 

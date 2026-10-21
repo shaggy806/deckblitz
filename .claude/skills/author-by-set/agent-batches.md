@@ -1,7 +1,7 @@
 # Authoring a batch with parallel agents
 
 The procedure every authoring skill uses once a batch has more cards than the
-lead should author alone — `author-by-set`, `author-top-cards` and
+lead should author alone — `author-by-set`, `author-by-set-oldest`, `author-top-cards` and
 `author-top-commanders` alike. The agents author **cards only**; the lead
 builds every engine feature the batch needs (and authors the cards that test
 it), then hands out the rest.
