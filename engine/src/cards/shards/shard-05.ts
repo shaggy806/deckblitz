@@ -170,6 +170,7 @@ import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
+import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
 import _poolFeralInstinct from "../pool/feral-instinct.js";
 import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
@@ -720,6 +721,7 @@ const shard: CardShard = {
     _poolEyeblightAssassin,
     _poolFakeYourOwnDeath,
     _poolFateUnraveler,
+    _poolFeasterOfFools,
     _poolFeralInstinct,
     _poolFightOn,
     _poolFiligreeSages,

@@ -2258,6 +2258,9 @@ export type AwaitingDecision =
         readonly x: number;
         readonly then?: EffectSpec;
         readonly enterOf?: ObjectId;
+        /** A pitch cost's "exile a blue card from your hand" (`BeholdSpec.fromHand`):
+         * hand cards only, nothing revealed, and asked as a plain exile. */
+        readonly fromHand?: true;
       };
       /** A collect evidence N (rule 701.59a — `Game.beginCollectEvidence`):
        * the chosen graveyard cards are exiled by `destination` and, if any

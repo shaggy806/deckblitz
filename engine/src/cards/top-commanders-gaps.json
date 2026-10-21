@@ -368,7 +368,9 @@
   "effect:distribute-counters",
   "decision:owner-chooses-top-or-bottom",
   "mechanic:shield-counters",
-  "keyword:reconfigure"
+  "keyword:reconfigure",
+  "cost:alt-cost-exile-from-hand",
+  "keyword:evoke-alternative-non-mana-cost"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -497,6 +497,7 @@ import _poolVorapede from "../pool/vorapede.js";
 import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWarriorsResolve from "../pool/warriors-resolve.js";
+import _poolWarteyeWitch from "../pool/warteye-witch.js";
 import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
 import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
@@ -1028,6 +1029,7 @@ const shard: CardShard = {
     _poolVraskasFinalMercy,
     _poolWardenOfTheEye,
     _poolWarriorsResolve,
+    _poolWarteyeWitch,
     _poolWayOfTheHealer,
     _poolWeatherseedElf,
     _poolWebOfLifeAndDestiny,

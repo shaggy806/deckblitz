@@ -716,6 +716,11 @@ export interface BeholdSpec {
   readonly text: string;
   readonly count?: number;
   readonly exile?: boolean;
+  /** Not a behold at all but the pitch spells' "exile a blue card from your
+   * hand" (`CardDefinition.alternativeCost.exileFromHand`, an evoke's): the
+   * same choice made as the cost is paid, from the hand alone and with no
+   * reveal — the card is simply exiled. Always with `exile`. */
+  readonly fromHand?: boolean;
 }
 
 /** A ward cost as printed after "Ward" — "{2}" or "—{2}, Pay 2 life." — so a

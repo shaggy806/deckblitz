@@ -117,6 +117,15 @@ export const KEYWORDS = {
 };
 
 const COST = "((?:\\{[^}]+\\})+)";
+
+/** "a blue card", "two red cards" — a pitch cost's exile from the hand
+ * (`alternativeCost.exileFromHand`, an evoke's). */
+function pitchExile(what) {
+  const [, n, color] = /^(an?|two|three) (white|blue|black|red|green) cards?$/.exec(what);
+  const count = { two: 2, three: 3 }[n];
+  const code = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[color];
+  return { filter: { colors: [code] }, ...(count !== undefined ? { count } : {}), text: what };
+}
 /**
  * A keyword the engine runs as an ability or a card field rather than a
  * `Keyword` — what it adds to the face, or `null`. Each shape is the one the
@@ -1818,6 +1827,25 @@ export function parseFace(face, ctx = {}) {
     // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8
     // life" isn't read).
     if ((m = /^Madness ((?:\{[^}]+\})+)$/.exec(line))) { out.madness = { cost: m[1] }; continue; }
+    // Evoke [cost] (rule 702.74a), and the Incarnations' "Evoke—Exile a white
+    // card from your hand." — an evoke whose cost is that exile.
+    if ((m = /^Evoke ((?:\{[^}]+\})+)$/.exec(line))) { out.evoke = { cost: m[1] }; continue; }
+    if ((m = /^Evoke—Exile (an? (?:white|blue|black|red|green) card) from your hand\.$/.exec(line))) {
+      out.evoke = { cost: "", exileFromHand: pitchExile(m[1]) };
+      continue;
+    }
+    // The pitch spells (rule 118.9): "[If it's not your turn, ]you may [pay 1
+    // life and ]exile a blue card from your hand rather than pay this spell's
+    // mana cost" — Force of Will, the MH1 Forces, Fury of the Horde.
+    if ((m = /^(If it's not your turn, y|Y)ou may (?:pay (\d+) life and )?exile ((?:an?|two|three) (?:white|blue|black|red|green) cards?) from your hand rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      out.alternativeCost = {
+        mana: "{0}",
+        ...(m[2] !== undefined ? { payLife: Number(m[2]) } : {}),
+        exileFromHand: pitchExile(m[3]),
+        ...(m[1] !== "Y" ? { condition: { kind: "not", of: { kind: "your-turn" } } } : {}),
+      };
+      continue;
+    }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Party (rule 700.8) and domain (207.2c) cost reductions: {1} less for

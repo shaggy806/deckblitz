@@ -29,6 +29,7 @@ import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
 import _poolArborealAlliance from "../pool/arboreal-alliance.js";
+import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
@@ -161,6 +162,7 @@ import _poolFlyingMen from "../pool/flying-men.js";
 import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolForTheEmperor from "../pool/for-the-emperor.js";
+import _poolForceOfVigor from "../pool/force-of-vigor.js";
 import _poolFoundingTheThirdPath from "../pool/founding-the-third-path.js";
 import _poolFoundryHelix from "../pool/foundry-helix.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
@@ -565,6 +567,7 @@ const shard: CardShard = {
     _poolApexDevastator,
     _poolAranaHeartOfTheSpider,
     _poolArborealAlliance,
+    _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
     _poolArtificerClass,
@@ -697,6 +700,7 @@ const shard: CardShard = {
     _poolFollowHim,
     _poolFootMystic,
     _poolForTheEmperor,
+    _poolForceOfVigor,
     _poolFoundingTheThirdPath,
     _poolFoundryHelix,
     _poolFracturedRealm,

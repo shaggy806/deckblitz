@@ -1007,6 +1007,11 @@ export type LegalAction =
        * variant, like `free`, whose mana cost is replaced and which taps
        * creatures as part of the cost. The driver echoes it back. */
       readonly altCost?: boolean;
+      /** A pitch cost's words, for the offer's label — the `altCost`
+       * variant's "pay 1 life, exile a blue card from your hand" (Force of
+       * Will) or an `evoke` variant's "exile a white card from your hand"
+       * (Solitude). Informational: nothing echoes it back. */
+      readonly pitchText?: string;
       /** What the `altCost` variant may tap, and how many — see
        * {@link TapCostOffer}. */
       readonly tapCost?: TapCostOffer;

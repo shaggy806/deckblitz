@@ -278,6 +278,7 @@ import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
+import _poolMisdirection from "../pool/misdirection.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
 import _poolMistsOfLittjara from "../pool/mists-of-littjara.js";
 import _poolMobileHomestead from "../pool/mobile-homestead.js";
@@ -326,6 +327,7 @@ import _poolProsperousThief from "../pool/prosperous-thief.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
 import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
+import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
@@ -524,6 +526,7 @@ import _tokensFungusTokenCantBlock from "../tokens/fungus-token-cant-block.js";
 import _tokensGriffinToken from "../tokens/griffin-token.js";
 import _tokensKnightToken from "../tokens/knight-token.js";
 import _tokensMoloidToken from "../tokens/moloid-token.js";
+import _tokensRedElementalToken31 from "../tokens/red-elemental-token-3-1.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
 import _tokensScarecrowToken from "../tokens/scarecrow-token.js";
 import _tokensSpiritTokenAnafenzaUnyieldingLineage from "../tokens/spirit-token-anafenza-unyielding-lineage.js";
@@ -806,6 +809,7 @@ const shard: CardShard = {
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
     _poolMirkwoodChanneler,
+    _poolMisdirection,
     _poolMistgatePathway,
     _poolMistsOfLittjara,
     _poolMobileHomestead,
@@ -854,6 +858,7 @@ const shard: CardShard = {
     _poolPullFromTomorrow,
     _poolPurestrainGenestealer,
     _poolPyreCharger,
+    _poolPyrokinesis,
     _poolPyromancersGoggles,
     _poolQueenMarchesa,
     _poolQuickStudy,
@@ -1054,6 +1059,7 @@ const shard: CardShard = {
     _tokensGriffinToken,
     _tokensKnightToken,
     _tokensMoloidToken,
+    _tokensRedElementalToken31,
     _tokensRedSpiritTokenMenace,
     _tokensScarecrowToken,
     _tokensSpiritTokenAnafenzaUnyieldingLineage,

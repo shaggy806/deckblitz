@@ -418,6 +418,7 @@ import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
 import _poolSocialSnub from "../pool/social-snub.js";
 import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
+import _poolSolitude from "../pool/solitude.js";
 import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
@@ -974,6 +975,7 @@ const shard: CardShard = {
     _poolSnappingDrake,
     _poolSocialSnub,
     _poolSoldierMilitaryProgram,
+    _poolSolitude,
     _poolSongOfStupefaction,
     _poolSoulherder,
     _poolSowerOfChaos,

@@ -2515,10 +2515,22 @@ export interface CardDefinition {
    * "one entry per playable variant" shape `kicked` / `overload` / `free`
    * use, whose `tapCost` offers the creatures to tap; the caster picks them
    * (`tap` on the action).
+   *
+   * The pitch spells' "you may [pay 1 life and] exile a blue card from your
+   * hand rather than pay this spell's mana cost" (Force of Will, Snapback,
+   * Fury of the Horde's two red cards): `mana` `"{0}"` with `exileFromHand`
+   * (a `fromHand` behold that exiles, chosen once the spell is on the stack,
+   * rule 601.2h — never the spell itself) and `payLife`. `condition` gates
+   * it on the card's controller's view as it's cast ("If it's not your turn"
+   * — Force of Negation, Force of Vigor). Offered only when all of it can be
+   * paid (rule 601.2h), so never with no other card to exile.
    */
   readonly alternativeCost: {
     readonly mana: string;
-    readonly tapCreatures: { readonly count: number; readonly filter: CardFilter };
+    readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
+    readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly payLife?: number;
+    readonly condition?: StaticCondition;
   } | null;
   /**
    * Convoke (rule 702.51 — Chord of Calling): "Your creatures can help cast
@@ -2823,8 +2835,17 @@ export interface CardDefinition {
    * alternative cost, offered as the cast's `evoke` variant wherever the
    * card may be cast for its mana cost; the sacrifice trigger is given to
    * the permanent as it enters. `null` for none.
+   *
+   * `exileFromHand` is the Incarnations' "Evoke—Exile a white card from
+   * your hand" (Solitude, Endurance): the evoke cost is that exile, with
+   * `cost` `""` — the card exiled chosen once the spell is on the stack
+   * (rule 601.2h), and the evoke offered only with another such card in
+   * hand.
    */
-  readonly evoke: { readonly cost: string } | null;
+  readonly evoke: {
+    readonly cost: string;
+    readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+  } | null;
   /**
    * Prototype (rule 718 — Combat Thresher: "Prototype {2}{W} — 1/1"): it may
    * be cast with this mana cost and power/toughness instead, and the colors
@@ -3246,10 +3267,7 @@ interface CardDraft {
    * creature spell (702.140b). */
   mutate?: string;
   freeCastIf?: { readonly condition: StaticCondition };
-  alternativeCost?: {
-    readonly mana: string;
-    readonly tapCreatures: { readonly count: number; readonly filter: CardFilter };
-  };
+  alternativeCost?: NonNullable<CardDefinition["alternativeCost"]>;
   convoke?: boolean;
   becomesDayAsEnters?: boolean;
   delve?: boolean;
@@ -3303,7 +3321,7 @@ interface CardDraft {
   blitz?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
   freerunning?: { readonly cost: string };
-  evoke?: { readonly cost: string };
+  evoke?: NonNullable<CardDefinition["evoke"]>;
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: { readonly keyword: "morph" | "megamorph" | "disguise"; readonly cost: string };
   asTurnedFaceUp?: { readonly counters: number };

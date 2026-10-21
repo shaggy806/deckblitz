@@ -183,6 +183,7 @@ import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFractalSummoning from "../pool/fractal-summoning.js";
 import _poolFugue from "../pool/fugue.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
+import _poolFuryOfTheHorde from "../pool/fury-of-the-horde.js";
 import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
@@ -750,6 +751,7 @@ const shard: CardShard = {
     _poolFractalSummoning,
     _poolFugue,
     _poolFurtiveCourier,
+    _poolFuryOfTheHorde,
     _poolGaladrielOfLothlorien,
     _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,

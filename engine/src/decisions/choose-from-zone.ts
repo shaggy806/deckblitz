@@ -53,8 +53,9 @@ export const chooseFromZone = defineDecision({
       ...(awaiting.together !== undefined ? { together: awaiting.together } : {}),
       ...(awaiting.order === true ? { order: true } : {}),
       ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
-      // A behold (rule 701.4a): hand cards and permanents at once.
-      ...(awaiting.behold !== undefined ? { behold: true as const } : {}),
+      // A behold (rule 701.4a): hand cards and permanents at once. A pitch
+      // cost's exile from the hand is asked as a plain exile.
+      ...(awaiting.behold !== undefined && awaiting.behold.fromHand !== true ? { behold: true as const } : {}),
     },
   ],
 

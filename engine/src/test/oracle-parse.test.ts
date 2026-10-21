@@ -1123,6 +1123,35 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(scout.complete).toBe(true);
   });
 
+  it("pitch costs (rule 118.9): exile a card of a colour from your hand rather than pay, and evoke", () => {
+    const will = face(
+      "You may pay 1 life and exile a blue card from your hand rather than pay this spell's mana cost.\nCounter target spell.",
+      "Instant",
+    );
+    expect(will.alternativeCost).toEqual({
+      mana: "{0}",
+      payLife: 1,
+      exileFromHand: { filter: { colors: ["U"] }, text: "a blue card" },
+    });
+    expect(will.complete).toBe(true);
+    const virtue = face(
+      "If it's not your turn, you may exile a white card from your hand rather than pay this spell's mana cost.",
+      "Enchantment",
+    );
+    expect(virtue.alternativeCost).toEqual({
+      mana: "{0}",
+      exileFromHand: { filter: { colors: ["W"] }, text: "a white card" },
+      condition: { kind: "not", of: { kind: "your-turn" } },
+    });
+    const horde = face("You may exile two red cards from your hand rather than pay this spell's mana cost.", "Sorcery");
+    expect(horde.alternativeCost?.exileFromHand).toEqual({ filter: { colors: ["R"] }, count: 2, text: "two red cards" });
+    expect(face("Evoke {2}{U}", "Creature — Elemental").evoke).toEqual({ cost: "{2}{U}" });
+    expect(face("Evoke—Exile a green card from your hand.", "Creature — Elemental Incarnation").evoke).toEqual({
+      cost: "",
+      exileFromHand: { filter: { colors: ["G"] }, text: "a green card" },
+    });
+  });
+
   it("madness (rule 702.35): the keyword line's cost, a mana cost only", () => {
     const imp = face(
       "Flying, haste\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)",

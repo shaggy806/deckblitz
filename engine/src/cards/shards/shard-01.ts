@@ -144,12 +144,14 @@ import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
+import _poolForceOfDespair from "../pool/force-of-despair.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
+import _poolFury from "../pool/fury.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
@@ -667,12 +669,14 @@ const shard: CardShard = {
     _poolFlametongueKavu,
     _poolFloodedGrove,
     _poolFootlightFiend,
+    _poolForceOfDespair,
     _poolForgingTheAnchor,
     _poolForumOfAmity,
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
     _poolFrillscareMentor,
     _poolFumingEffigy,
+    _poolFury,
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,

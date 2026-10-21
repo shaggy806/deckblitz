@@ -3215,6 +3215,17 @@ export class Game {
           : {}),
         ...(offspring === true && offspringCost !== null ? { offspring: true, offspringCost } : {}),
         ...(evoke !== undefined ? { evoke: true, evokeCost: evoke } : {}),
+        ...(evoke !== undefined && evoke === def.evoke?.cost && def.evoke.exileFromHand !== undefined
+          ? { pitchText: `exile ${def.evoke.exileFromHand.text} from your hand` }
+          : {}),
+        ...(altCost === true && def.alternativeCost?.exileFromHand !== undefined
+          ? {
+              pitchText: [
+                ...(def.alternativeCost.payLife !== undefined ? [`pay ${def.alternativeCost.payLife} life`] : []),
+                `exile ${def.alternativeCost.exileFromHand.text} from your hand`,
+              ].join(", "),
+            }
+          : {}),
         ...(free ? { free: true } : {}),
         ...(harmonizeTap !== undefined
           ? {
@@ -12109,6 +12120,11 @@ export class Game {
     if (def.additionalCost?.payLife !== undefined) {
       this.changeLife(player, -def.additionalCost.payLife);
     }
+    // A pitch spell's "pay 1 life" (Force of Will), part of its alternative
+    // cost, paid the same way.
+    if (altCost && def.alternativeCost?.payLife !== undefined) {
+      this.changeLife(player, -def.alternativeCost.payLife);
+    }
     if (targetingLife > 0) this.changeLife(player, -targetingLife);
     if (def.additionalCost?.payLifeX === true && chosenX > 0) {
       this.changeLife(player, -chosenX);
@@ -12177,7 +12193,17 @@ export class Game {
     // the cost is paid (601.2h). What a spell exiles this way is linked to
     // the permanent it becomes (607.2q) — the stint after this one on the
     // stack, which only resolving onto the battlefield reaches.
+    // A pitch cost's "exile a blue card from your hand" — an alternative
+    // cost's (Force of Will) or an evoke's (Solitude) — is chosen the same
+    // way, from the hand alone (`BeholdSpec.fromHand`).
+    const pitchExile =
+      altCost && def.alternativeCost?.exileFromHand !== undefined
+        ? def.alternativeCost.exileFromHand
+        : evoke !== null && def.evoke?.exileFromHand !== undefined && (evoke === "" || evoke === def.evoke.cost)
+          ? def.evoke.exileFromHand
+          : undefined;
     const beholdCost =
+      (pitchExile !== undefined ? Game.pitchSpec(pitchExile) : undefined) ??
       chosenOption?.behold ??
       (kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined) ??
       def.additionalCost?.behold ??
@@ -12188,7 +12214,7 @@ export class Game {
         this.beginBehold(player, cardId, beholdCost, {
           x: chosenX,
           priorityTo,
-          ...(beholdCost.exile === true && onStack !== undefined
+          ...(beholdCost.exile === true && beholdCost.fromHand !== true && onStack !== undefined
             ? { exileLink: { source: cardId, zoneChangeCount: (onStack.zoneChangeCount ?? 0) + 1 } }
             : {}),
         }),
@@ -27163,6 +27189,7 @@ export class Game {
         this.state.objects[id] !== undefined &&
         matchesFilter(this.state, this.registry, id, spec.filter, ctx),
     );
+    if (spec.fromHand === true) return cards;
     const permanents = this.state.zones.shared.battlefield.filter(
       (id) =>
         id !== except &&
@@ -27231,6 +27258,7 @@ export class Game {
       x: opts.x ?? 0,
       ...(opts.then !== undefined ? { then: opts.then } : {}),
       ...(opts.enterOf !== undefined ? { enterOf: opts.enterOf } : {}),
+      ...(spec.fromHand === true ? { fromHand: true as const } : {}),
     };
     if (opts.optional !== true && eligible.length === count) {
       this.carryOutBehold(player, eligible, spec.exile === true, opts.exileLink, behold);
@@ -27291,10 +27319,11 @@ export class Game {
     chosen: readonly ObjectId[],
     exile: boolean,
     exileLink: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined,
-    behold: { readonly source: ObjectId; readonly x: number; readonly then?: EffectSpec },
+    behold: { readonly source: ObjectId; readonly x: number; readonly then?: EffectSpec; readonly fromHand?: true },
   ): void {
     const fromHand = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
-    if (fromHand.length > 0) this.revealCards(player, fromHand, "hand");
+    // A pitch cost's exile reveals nothing first: it's no behold.
+    if (fromHand.length > 0 && behold.fromHand !== true) this.revealCards(player, fromHand, "hand");
     const beheld = chosen.map((id) =>
       this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id,
     );
@@ -29852,7 +29881,11 @@ export class Game {
     player: PlayerId | undefined,
   ): readonly string[] {
     if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" && via !== "prepared") return [];
-    const costs: string[] = def.evoke !== null ? [def.evoke.cost] : [];
+    // An evoke that exiles a card from the hand (Solitude) only with another
+    // such card there to exile (rule 601.2h).
+    const printedPayable = def.evoke !== null && (def.evoke.exileFromHand === undefined ||
+      (player !== undefined && this.canBehold(player, Game.pitchSpec(def.evoke.exileFromHand), cardId)));
+    const costs: string[] = def.evoke !== null && printedPayable ? [def.evoke.cost] : [];
     if (player === undefined) return costs;
     const fromHand = via === undefined && this.state.zones.perPlayer[player].hand.includes(cardId);
     for (const { ability } of this.activeStaticsOf(player, (a) => a.grantsEvokeToSpells !== undefined)) {
@@ -29864,6 +29897,16 @@ export class Game {
       }
     }
     return costs;
+  }
+
+  /** A pitch cost's "exile a blue card from your hand" (an alternative
+   * cost's or an evoke's `exileFromHand`) as the behold that pays it. */
+  private static pitchSpec(exile: {
+    readonly filter: CardFilter;
+    readonly count?: number;
+    readonly text: string;
+  }): BeholdSpec {
+    return { ...exile, exile: true, fromHand: true };
   }
 
   /** The evoke cost `wanted` if `cardId` has it — `""` asks for the first
@@ -29947,10 +29990,29 @@ export class Game {
   ): {
     readonly mana: string;
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
+    readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly payLife?: number;
   } | null {
     // Cast for airbend's {2}, an alternative cost already (118.9a).
     if (via === "airbend") return null;
-    if (def.alternativeCost !== null) return def.alternativeCost;
+    if (def.alternativeCost !== null) {
+      // The card's own: only while its condition holds ("If it's not your
+      // turn") and only when its life and its exiles can be paid (601.2h).
+      const own = def.alternativeCost;
+      if (own.condition !== undefined || own.payLife !== undefined || own.exileFromHand !== undefined) {
+        if (caster === undefined) return null;
+        const card = this.state.objects[cardId];
+        if (own.condition !== undefined &&
+          (card === undefined || !staticConditionMet(this.state, this.registry, card, own.condition))) {
+          return null;
+        }
+        if (own.payLife !== undefined && !this.canPayLife(caster, own.payLife)) return null;
+        if (own.exileFromHand !== undefined && !this.canBehold(caster, Game.pitchSpec(own.exileFromHand), cardId)) {
+          return null;
+        }
+      }
+      return own;
+    }
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
     if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" &&

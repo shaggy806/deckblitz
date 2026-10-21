@@ -166,6 +166,7 @@ import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
 import _poolFlywheelRacer from "../pool/flywheel-racer.js";
+import _poolForceOfNegation from "../pool/force-of-negation.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
@@ -214,6 +215,7 @@ import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
+import _poolIcehideGolem from "../pool/icehide-golem.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolInfernalIdol from "../pool/infernal-idol.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
@@ -702,6 +704,7 @@ const shard: CardShard = {
     _poolFlaxenIntruder,
     _poolFlayerOfTheHatebound,
     _poolFlywheelRacer,
+    _poolForceOfNegation,
     _poolForcedFruition,
     _poolForumsFavor,
     _poolFoulRoads,
@@ -750,6 +753,7 @@ const shard: CardShard = {
     _poolHornetSting,
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
+    _poolIcehideGolem,
     _poolIncreasingDevotion,
     _poolInfernalIdol,
     _poolInfernalRebirth,

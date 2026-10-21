@@ -216,7 +216,8 @@ function graveyardVariantLabel(
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
     if (a.prototype) parts.push(`prototype ${a.prototypeCost ?? ''}`.trim())
     if (a.offspring) parts.push(`offspring ${a.offspringCost ?? ''}`.trim())
-    if (a.evoke) parts.push(`evoke ${a.evokeCost ?? ''}`.trim())
+    if (a.evoke) parts.push(a.pitchText !== undefined ? `evoke: ${a.pitchText}` : `evoke ${a.evokeCost ?? ''}`.trim())
+    if (a.altCost && a.pitchText !== undefined) parts.push(a.pitchText)
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
     if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
@@ -5701,12 +5702,16 @@ function Table({
                         <> (offspring <Symbols text={a.offspringCost ?? ''} />)</>
                       ) : null}
                       {a.kind === 'cast-spell' && a.evoke ? (
-                        <> (evoke <Symbols text={a.evokeCost ?? ''} />)</>
+                        a.pitchText !== undefined ? (
+                          ` (evoke: ${a.pitchText})`
+                        ) : (
+                          <> (evoke <Symbols text={a.evokeCost ?? ''} />)</>
+                        )
                       ) : null}
                       {a.kind === 'cast-spell' && a.prototype ? (
                         <> (prototype <Symbols text={a.prototypeCost ?? ''} />)</>
                       ) : null}
-                      {a.kind === 'cast-spell' && a.altCost ? ' (alternative cost)' : ''}
+                      {a.kind === 'cast-spell' && a.altCost ? ` (${a.pitchText ?? 'alternative cost'})` : ''}
                       {a.kind === 'cast-spell' && a.via === 'harmonize'
                         ? a.harmonizeTap
                           ? ` (harmonize, tapping ${a.harmonizeTap.cardName}: −${a.harmonizeTap.power})`

@@ -179,6 +179,7 @@ import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
+import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFullyGrown from "../pool/fully-grown.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
@@ -762,6 +763,7 @@ const shard: CardShard = {
     _poolFoggySwampHunters,
     _poolFolkOfAnHavva,
     _poolFrodoDeterminedHero,
+    _poolFrostwalla,
     _poolFugitiveDroid,
     _poolFullyGrown,
     _poolFurnaceSpirit,
