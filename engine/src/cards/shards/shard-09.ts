@@ -89,6 +89,7 @@ import _poolCeruleanDrake from "../pool/cerulean-drake.js";
 import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
+import _poolChemistersInsight from "../pool/chemisters-insight.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
@@ -332,6 +333,7 @@ import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
 import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolOverwhelmingEncounter from "../pool/overwhelming-encounter.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
+import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
 import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
@@ -655,6 +657,7 @@ const shard: CardShard = {
     _poolChaplainOfAlms,
     _poolChargeTheSanctum,
     _poolCharmingPrince,
+    _poolChemistersInsight,
     _poolChromeCompanion,
     _poolChulane,
     _poolCitanulDruid,
@@ -898,6 +901,7 @@ const shard: CardShard = {
     _poolOverlordOfTheBalemurk,
     _poolOverwhelmingEncounter,
     _poolParapetWatchers,
+    _poolParhelionPatrol,
     _poolPawnOfUlamog,
     _poolPerforatingArtist,
     _poolPerplexingTest,

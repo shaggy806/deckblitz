@@ -110,6 +110,7 @@ import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
 import _poolDireFleetWarmonger from "../pool/dire-fleet-warmonger.js";
+import _poolDirectCurrent from "../pool/direct-current.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
@@ -179,6 +180,7 @@ import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
 import _poolGlistenerSeer from "../pool/glistener-seer.js";
 import _poolGlitteringMassif from "../pool/glittering-massif.js";
 import _poolGloomPangolin from "../pool/gloom-pangolin.js";
+import _poolGoblinBanneret from "../pool/goblin-banneret.js";
 import _poolGoblinRingleader from "../pool/goblin-ringleader.js";
 import _poolGoblinSurveyor from "../pool/goblin-surveyor.js";
 import _poolGoldmireBridge from "../pool/goldmire-bridge.js";
@@ -643,6 +645,7 @@ const shard: CardShard = {
     _poolDeepfathomSkulker,
     _poolDevotedPaladin,
     _poolDireFleetWarmonger,
+    _poolDirectCurrent,
     _poolDiregrafCaptain,
     _poolDisposalMummy,
     _poolDistractingGeist,
@@ -712,6 +715,7 @@ const shard: CardShard = {
     _poolGlistenerSeer,
     _poolGlitteringMassif,
     _poolGloomPangolin,
+    _poolGoblinBanneret,
     _poolGoblinRingleader,
     _poolGoblinSurveyor,
     _poolGoldmireBridge,

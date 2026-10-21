@@ -40,6 +40,7 @@ import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBandTogether from "../pool/band-together.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
 import _poolBannersRaised from "../pool/banners-raised.js";
+import _poolBargingSergeant from "../pool/barging-sergeant.js";
 import _poolBarkhideTroll from "../pool/barkhide-troll.js";
 import _poolBaronBertramGraywater from "../pool/baron-bertram-graywater.js";
 import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
@@ -559,6 +560,7 @@ const shard: CardShard = {
     _poolBandTogether,
     _poolBaneAlleyBlackguard,
     _poolBannersRaised,
+    _poolBargingSergeant,
     _poolBarkhideTroll,
     _poolBaronBertramGraywater,
     _poolBassaraTowerArcher,

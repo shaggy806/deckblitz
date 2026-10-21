@@ -2757,6 +2757,15 @@ export interface CardDefinition {
      * that way only with as many to behold; which ones is chosen as the cost
      * is paid, as `additionalCost.behold`'s are. */
     readonly behold?: BeholdSpec;
+    /** Cards discarded as part of the cost, chosen as it's paid. With
+     * `keyword: "jump-start"` it's **jump-start** (rule 702.133a — Radical
+     * Idea): "cast this card from your graveyard by discarding a card in
+     * addition to paying its other costs", so `cost` is the card's own mana
+     * cost and `discard` 1; exiled as it leaves the stack, like flashback. */
+    readonly discard?: number;
+    /** `"jump-start"`: the keyword this graveyard cast is printed as, for its
+     * label. */
+    readonly keyword?: "jump-start";
   } | null;
   /** Harmonize (rule 702.180a) — this card may be cast from its owner's
    * graveyard for `cost`, tapping up to one untapped creature they control,
@@ -3316,12 +3325,7 @@ interface CardDraft {
   rebound?: boolean;
   sneak?: { readonly cost: string };
   webSlinging?: { readonly cost: string };
-  flashback?: {
-    readonly cost: string;
-    readonly payLife?: number;
-    readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
-    readonly behold?: BeholdSpec;
-  };
+  flashback?: NonNullable<CardDefinition["flashback"]>;
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };
   madness?: { readonly cost: string };

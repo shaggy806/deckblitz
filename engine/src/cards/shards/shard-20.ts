@@ -368,6 +368,7 @@ import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
 import _poolRabbitBattery from "../pool/rabbit-battery.js";
 import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
+import _poolRadicalIdea from "../pool/radical-idea.js";
 import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
 import _poolRagefireHellkite from "../pool/ragefire-hellkite.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
@@ -961,6 +962,7 @@ const shard: CardShard = {
     _poolRabbitBattery,
     _poolRabidGnaw,
     _poolRadhaHeirToKeld,
+    _poolRadicalIdea,
     _poolRageScarredBerserker,
     _poolRagefireHellkite,
     _poolRagingCougar,

@@ -1171,6 +1171,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("jump-start and mentor (rules 702.133, 702.134)", () => {
+    const idea = face("Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)", "Instant", { mana_cost: "{1}{U}" });
+    expect(idea.flashback).toEqual({ cost: "{1}{U}", discard: 1, keyword: "jump-start" });
+    expect(idea.complete).toBe(true);
+    const stalwart = face("First strike\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)", "Creature — Human Soldier");
+    expect(stalwart.triggered[0].trigger).toEqual({ on: "attacks", who: "self" });
+    expect(stalwart.complete).toBe(true);
+  });
+
   it("entwine (rule 702.42): a kicker that chooses every mode", () => {
     const spell = face("Choose one —\n• You gain 4 life.\n• Draw a card.\nEntwine {2} (Choose both if you pay the entwine cost.)", "Sorcery");
     expect(spell.kicker).toEqual({ cost: "{2}", keyword: "entwine" });

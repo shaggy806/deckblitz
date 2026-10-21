@@ -40,6 +40,7 @@ import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBlinkDog from "../pool/blink-dog.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
+import _poolBorosChallenger from "../pool/boros-challenger.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
@@ -171,6 +172,7 @@ import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
+import _poolHammerDropper from "../pool/hammer-dropper.js";
 import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
 import _poolHarvestSeason from "../pool/harvest-season.js";
@@ -532,6 +534,7 @@ const shard: CardShard = {
     _poolBlightedCataract,
     _poolBlinkDog,
     _poolBoggartPrankster,
+    _poolBorosChallenger,
     _poolBoroughBackup,
     _poolBovineIntervention,
     _poolBranchblightStalker,
@@ -663,6 +666,7 @@ const shard: CardShard = {
     _poolGuardianSunmare,
     _poolGutsplitterGang,
     _poolHalimarDepths,
+    _poolHammerDropper,
     _poolHaplessResearcher,
     _poolHarrierNaga,
     _poolHarvestSeason,

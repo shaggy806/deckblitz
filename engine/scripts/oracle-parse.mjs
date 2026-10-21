@@ -28,6 +28,7 @@ import {
   afflict,
   afterlife,
   annihilator,
+  mentor,
   crew,
   dethrone,
   evolve,
@@ -242,6 +243,7 @@ function keywordPart(part) {
   const simple = {
     undying: () => ({ triggered: [undying()] }),
     persist: () => ({ triggered: [persist()] }),
+    mentor: () => ({ triggered: [mentor()] }),
     flanking: () => ({ keywords: ["flanking"], triggered: [flanking()] }),
     dethrone: () => ({ triggered: [dethrone()] }),
     myriad: () => ({ triggered: [myriad()] }),
@@ -1837,6 +1839,12 @@ export function parseFace(face, ctx = {}) {
     }
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
+    // Jump-start (rule 702.133a): the graveyard cast for the card's own mana
+    // cost, discarding a card.
+    if (line === "Jump-start" && face.mana_cost) {
+      out.flashback = { cost: face.mana_cost, discard: 1, keyword: "jump-start" };
+      continue;
+    }
     // Plot [cost] (rule 702.170a): a special action from the hand at sorcery speed.
     if ((m = /^Plot ((?:\{[^}]+\})+)$/.exec(line))) { out.plot = { cost: m[1] }; continue; }
     // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8

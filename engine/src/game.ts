@@ -941,6 +941,10 @@ type FlashbackOption = {
   /** What's beheld for it — only a printed flashback's (Kindle the Inner
    * Flame's "Behold three Elementals", rule 701.4a). */
   readonly behold?: BeholdSpec;
+  /** Cards discarded for it, and its keyword — only a printed one's
+   * (jump-start, rule 702.133a). */
+  readonly discard?: number;
+  readonly keyword?: "jump-start";
   /** What gave it: the effect's source (Past in Flames) or the permanent
    * whose static grants it. Absent for the card's own. */
   readonly grantor?: ObjectId;
@@ -3228,6 +3232,10 @@ export class Game {
           : altCost === true && def.alternativeCost?.keyword !== undefined
             ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
             : {}),
+        // Jump-start rides the flashback cast: label it as printed.
+        ...(via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "jump-start"
+          ? { altCostText: "jump-start, discarding a card" }
+          : {}),
         ...(free ? { free: true } : {}),
         ...(harmonizeTap !== undefined
           ? {
@@ -10381,6 +10389,10 @@ export class Game {
       if (life !== undefined && !this.canPayLife(player, life)) {
         return `${player} cannot pay ${life} life for ${def.name}'s flashback`;
       }
+      // Jump-start's "by discarding a card" (rule 702.133a): a card in hand.
+      if (flashback.discard !== undefined && this.state.zones.perPlayer[player].hand.length < flashback.discard) {
+        return `${player} has no card to discard for ${def.name}'s ${flashback.keyword ?? "flashback"}`;
+      }
     } else if (via === "escape") {
       const escape = this.escapeOf(cardId, face, graveyardGrant);
       if (escape === null) {
@@ -12154,6 +12166,14 @@ export class Game {
     if (chosenOption?.discard !== undefined) {
       this.withDecisionSource(cardId, () => {
         this.discardByEffect({ kind: "player", player }, chosenOption.discard as number);
+      });
+      this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
+    }
+    // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
+    const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
+    if (flashbackDiscard !== undefined) {
+      this.withDecisionSource(cardId, () => {
+        this.discardByEffect({ kind: "player", player }, flashbackDiscard);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
     }
@@ -29723,7 +29743,8 @@ export class Game {
             f.cost === option.cost &&
             f.payLife === option.payLife &&
             f.sacrifice === option.sacrifice &&
-            f.behold === option.behold,
+            f.behold === option.behold &&
+            f.discard === option.discard,
         )
       ) {
         return;
@@ -29733,7 +29754,8 @@ export class Game {
     const printed = this.registry.get(object.cardName).flashback;
     if (printed !== null) {
       add(
-        printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined
+        printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined &&
+          printed.discard === undefined && printed.keyword === undefined
           ? { cost: printed.cost }
           : { ...printed },
       );

@@ -297,6 +297,7 @@ import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMarvelousMelee from "../pool/marvelous-melee.js";
 import _poolMascotExhibition from "../pool/mascot-exhibition.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
+import _poolMaximizeAltitude from "../pool/maximize-altitude.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
@@ -833,6 +834,7 @@ const shard: CardShard = {
     _poolMarvelousMelee,
     _poolMascotExhibition,
     _poolMasterPiandao,
+    _poolMaximizeAltitude,
     _poolMeagerMeal,
     _poolMeanderingRiver,
     _poolMercilessHarlequin,

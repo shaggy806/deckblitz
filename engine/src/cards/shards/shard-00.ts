@@ -46,6 +46,7 @@ import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
+import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
@@ -612,6 +613,7 @@ const shard: CardShard = {
     _poolBiomechanEngineer,
     _poolBirthingBoughs,
     _poolBlackWidowAgileAvenger,
+    _poolBladeInstructor,
     _poolBladewingTheRisen,
     _poolBlindObedience,
     _poolBloodcrazedNeonate,

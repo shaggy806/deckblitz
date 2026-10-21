@@ -68,6 +68,7 @@ import _poolBuzzBots from "../pool/buzz-bots.js";
 import _poolCapashenUnicorn from "../pool/capashen-unicorn.js";
 import _poolCaptivatingCrew from "../pool/captivating-crew.js";
 import _poolCaptiveFlame from "../pool/captive-flame.js";
+import _poolCaptureSphere from "../pool/capture-sphere.js";
 import _poolCarefulStudy from "../pool/careful-study.js";
 import _poolCatWarriors from "../pool/cat-warriors.js";
 import _poolCatharsCompanion from "../pool/cathars-companion.js";
@@ -606,6 +607,7 @@ const shard: CardShard = {
     _poolCapashenUnicorn,
     _poolCaptivatingCrew,
     _poolCaptiveFlame,
+    _poolCaptureSphere,
     _poolCarefulStudy,
     _poolCatWarriors,
     _poolCatharsCompanion,

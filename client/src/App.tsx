@@ -211,7 +211,7 @@ function graveyardVariantLabel(
     if (source !== undefined) parts.push(`via ${source}`)
   }
   if (a.kind === 'cast-spell') {
-    if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push(a.via)
+    if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push(a.via === 'flashback' && a.altCostText !== undefined ? a.altCostText : a.via)
     if (a.kicked) parts.push(`${a.kickerKeyword ?? 'kicked'} ${a.kickerCost ?? ''}`.trim())
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
     if (a.prototype) parts.push(`prototype ${a.prototypeCost ?? ''}`.trim())
