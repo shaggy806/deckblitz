@@ -219,6 +219,17 @@ export interface CardFilter {
    * see `GameObject.manaSpentFrom`. Something that wasn't cast matches
    * nothing. */
   readonly manaFrom?: ManaFromSpec & { readonly atLeast?: number };
+  /** At least this much mana of each colour named was spent to cast it —
+   * adamant (Throne of Eldraine): "if at least three white mana was spent to
+   * cast this spell" is `{ W: 3 }`; the Mythos cycle's "if {U}{B} was spent
+   * to cast this spell" is `{ U: 1, B: 1 }`. See
+   * `GameObject.manaSpentByColor`. Something that wasn't cast matches
+   * nothing. */
+  readonly manaSpentOfColors?: { readonly [C in Color]?: number };
+  /** At least this much mana of one colour — any one — was spent to cast it
+   * (Henge Walker's "if at least three mana of the same color was spent to
+   * cast it"). */
+  readonly manaSpentOfOneColor?: number;
   /**
    * How many counters of a given kind are on the object — Rishkar's "each
    * creature you control **with a counter on it**", Undying's "if it had no
@@ -1113,6 +1124,14 @@ export function matchesFilter(
     if (origins.filter((origin) => manaOriginMatches(origin, spec)).length < (spec.atLeast ?? 1)) {
       return false;
     }
+  }
+  if (filter.manaSpentOfColors !== undefined || filter.manaSpentOfOneColor !== undefined) {
+    const byColor = (live !== undefined ? live.manaSpentByColor : lki!.manaSpentByColor) ?? {};
+    for (const [color, n] of Object.entries(filter.manaSpentOfColors ?? {})) {
+      if ((byColor[color as Color] ?? 0) < (n ?? 0)) return false;
+    }
+    const most = Math.max(0, ...Object.values(byColor).map((n) => n ?? 0));
+    if (filter.manaSpentOfOneColor !== undefined && most < filter.manaSpentOfOneColor) return false;
   }
   // Cheap, purely-positional clauses before the expensive fold below.
   const controller = live !== undefined ? live.controller : lki!.controller;

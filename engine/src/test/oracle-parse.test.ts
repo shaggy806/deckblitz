@@ -1061,6 +1061,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const grasp = face("Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.", "Enchantment — Aura");
     expect(grasp.static[0]).toMatchObject({ affects: { scope: "attached" }, restrictions: ["doesnt-untap"] });
     expect(grasp.complete).toBe(true);
+    const chill = face(
+      "Enchant creature\nWhen this Aura enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.",
+      "Enchantment — Aura",
+    );
+    expect(chill.triggered[0].effect).toEqual({ kind: "tap", target: "attached" });
+    expect(chill.complete).toBe(true);
   });
 
   it("\"enchanted creature\" in an Aura's trigger is the attached permanent (Starlit Mantle)", () => {

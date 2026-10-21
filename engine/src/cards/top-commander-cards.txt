@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3738 already implemented / 1262 missing (marks refreshed 2026-10-21)
+3739 already implemented / 1261 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1716,7 +1716,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1723  Impulsive Pilferer                       {R}              Creature — Goblin Pirate
 [ ]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
 [x]  1725  Nyx Weaver                               {1}{B}{G}        Enchantment Creature — Spider
-[ ]  1726  Intruder Alarm                           {2}{U}           Enchantment
+[x]  1726  Intruder Alarm                           {2}{U}           Enchantment
 [x]  1727  Slither Blade                            {U}              Creature — Snake Rogue
 [x]  1728  The Locust God                           {4}{U}{R}        Legendary Creature — God
 [x]  1729  Thermo-Alchemist                         {1}{R}           Creature — Human Shaman

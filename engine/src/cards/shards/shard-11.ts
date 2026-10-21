@@ -207,6 +207,7 @@ import _poolGuardianOfGhirapur from "../pool/guardian-of-ghirapur.js";
 import _poolGuildlessCommons from "../pool/guildless-commons.js";
 import _poolGustOfWind from "../pool/gust-of-wind.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
+import _poolHaggle from "../pool/haggle.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
 import _poolHauntingFigment from "../pool/haunting-figment.js";
 import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
@@ -297,6 +298,7 @@ import _poolMindDrain from "../pool/mind-drain.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMisterGutsy from "../pool/mister-gutsy.js";
+import _poolMistfordRiverTurtle from "../pool/mistford-river-turtle.js";
 import _poolMistyPalmsOasis from "../pool/misty-palms-oasis.js";
 import _poolMmmenonUthrosExile from "../pool/mmmenon-uthros-exile.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
@@ -772,6 +774,7 @@ const shard: CardShard = {
     _poolGuildlessCommons,
     _poolGustOfWind,
     _poolGutlessGhoul,
+    _poolHaggle,
     _poolHallowedHaunting,
     _poolHauntingFigment,
     _poolHearthfireHobgoblin,
@@ -862,6 +865,7 @@ const shard: CardShard = {
     _poolMirrorImage,
     _poolMistcutterHydra,
     _poolMisterGutsy,
+    _poolMistfordRiverTurtle,
     _poolMistyPalmsOasis,
     _poolMmmenonUthrosExile,
     _poolMondrakGloryDominus,

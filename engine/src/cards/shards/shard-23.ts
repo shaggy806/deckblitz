@@ -379,8 +379,10 @@ import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
 import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
+import _poolRowansStalwarts from "../pool/rowans-stalwarts.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
+import _poolSageOfTheFalls from "../pool/sage-of-the-falls.js";
 import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
@@ -422,6 +424,7 @@ import _poolSoddenVerdure from "../pool/sodden-verdure.js";
 import _poolSolemnSimulacrum from "../pool/solemn-simulacrum.js";
 import _poolSolveTheEquation from "../pool/solve-the-equation.js";
 import _poolSomethingWorthSaving from "../pool/something-worth-saving.js";
+import _poolSorcerersBroom from "../pool/sorcerers-broom.js";
 import _poolSorinOfHouseMarkov from "../pool/sorin-of-house-markov.js";
 import _poolSoulOfNewPhyrexia from "../pool/soul-of-new-phyrexia.js";
 import _poolSoulShatter from "../pool/soul-shatter.js";
@@ -922,8 +925,10 @@ const shard: CardShard = {
     _poolRoryWilliams,
     _poolRotFarmMortipede,
     _poolRottedHulk,
+    _poolRowansStalwarts,
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
+    _poolSageOfTheFalls,
     _poolSanctuaryRaptor,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
@@ -965,6 +970,7 @@ const shard: CardShard = {
     _poolSolemnSimulacrum,
     _poolSolveTheEquation,
     _poolSomethingWorthSaving,
+    _poolSorcerersBroom,
     _poolSorinOfHouseMarkov,
     _poolSoulOfNewPhyrexia,
     _poolSoulShatter,

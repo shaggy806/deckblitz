@@ -53,6 +53,8 @@ import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
+import _poolCastOff from "../pool/cast-off.js";
+import _poolCatharsis from "../pool/catharsis.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChargingHooligan from "../pool/charging-hooligan.js";
@@ -296,6 +298,7 @@ import _poolOrnithopterOfParadise from "../pool/ornithopter-of-paradise.js";
 import _poolOrzhovGuildgate from "../pool/orzhov-guildgate.js";
 import _poolOteclanLandmark from "../pool/oteclan-landmark.js";
 import _poolOteclanLevitator from "../pool/oteclan-levitator.js";
+import _poolOutflank from "../pool/outflank.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
@@ -471,6 +474,7 @@ import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
 import _poolVenomsHunger from "../pool/venoms-hunger.js";
 import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
 import _poolVexingRadgull from "../pool/vexing-radgull.js";
+import _poolVibrance from "../pool/vibrance.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
 import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
@@ -594,6 +598,8 @@ const shard: CardShard = {
     _poolBullsStrength,
     _poolCallousInspector,
     _poolCaseOfTheShatteredPact,
+    _poolCastOff,
+    _poolCatharsis,
     _poolChandrasEmberling,
     _poolChandrasFiremaw,
     _poolChargingHooligan,
@@ -837,6 +843,7 @@ const shard: CardShard = {
     _poolOrzhovGuildgate,
     _poolOteclanLandmark,
     _poolOteclanLevitator,
+    _poolOutflank,
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
     _poolOverzealousMuscle,
@@ -1012,6 +1019,7 @@ const shard: CardShard = {
     _poolVenomsHunger,
     _poolVenomsacLagac,
     _poolVexingRadgull,
+    _poolVibrance,
     _poolVigilantBaloth,
     _poolVindictiveTriumph,
     _poolViviOrnitier,

@@ -161,6 +161,7 @@ import _poolElvenChorus from "../pool/elven-chorus.js";
 import _poolElvishAberration from "../pool/elvish-aberration.js";
 import _poolEmbermouthSentinel from "../pool/embermouth-sentinel.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
+import _poolEmptiness from "../pool/emptiness.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
@@ -189,6 +190,7 @@ import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
+import _poolGiantsSkewer from "../pool/giants-skewer.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
@@ -276,6 +278,7 @@ import _poolLithatog from "../pool/lithatog.js";
 import _poolLlanowarCavalry from "../pool/llanowar-cavalry.js";
 import _poolLlanowarScout from "../pool/llanowar-scout.js";
 import _poolLlanowarVisionary from "../pool/llanowar-visionary.js";
+import _poolLocthwainPaladin from "../pool/locthwain-paladin.js";
 import _poolLocthwainScorn from "../pool/locthwain-scorn.js";
 import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
@@ -311,6 +314,7 @@ import _poolMossMonster from "../pool/moss-monster.js";
 import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
+import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
@@ -349,6 +353,7 @@ import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
 import _poolQuicksilverPietroMaximoff from "../pool/quicksilver-pietro-maximoff.js";
 import _poolRaccoonRallier from "../pool/raccoon-rallier.js";
 import _poolRakdosShredFreak from "../pool/rakdos-shred-freak.js";
+import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
@@ -510,10 +515,12 @@ import _poolWellwisher from "../pool/wellwisher.js";
 import _poolWestfoldRider from "../pool/westfold-rider.js";
 import _poolWhispererOfTheWilds from "../pool/whisperer-of-the-wilds.js";
 import _poolWhiteLotusReinforcements from "../pool/white-lotus-reinforcements.js";
+import _poolWickedGuardian from "../pool/wicked-guardian.js";
 import _poolWildsongHowler from "../pool/wildsong-howler.js";
 import _poolWilt from "../pool/wilt.js";
 import _poolWindriderPatrol from "../pool/windrider-patrol.js";
 import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
+import _poolWolfsQuarry from "../pool/wolfs-quarry.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
 import _poolYouthfulScholar from "../pool/youthful-scholar.js";
@@ -702,6 +709,7 @@ const shard: CardShard = {
     _poolElvishAberration,
     _poolEmbermouthSentinel,
     _poolEmeraldOryx,
+    _poolEmptiness,
     _poolEndbringer,
     _poolEnormousBaloth,
     _poolEpicDownfall,
@@ -730,6 +738,7 @@ const shard: CardShard = {
     _poolGhituAmplifier,
     _poolGhostlyChangeling,
     _poolGiantOx,
+    _poolGiantsSkewer,
     _poolGild,
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,
@@ -817,6 +826,7 @@ const shard: CardShard = {
     _poolLlanowarCavalry,
     _poolLlanowarScout,
     _poolLlanowarVisionary,
+    _poolLocthwainPaladin,
     _poolLocthwainScorn,
     _poolLokiLordOfMisrule,
     _poolLordOfAtlantis,
@@ -852,6 +862,7 @@ const shard: CardShard = {
     _poolMostWanted,
     _poolMyconidSporeTender,
     _poolMysticSkull,
+    _poolMythosOfIlluna,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
     _poolNicoMinoruRunaway,
@@ -890,6 +901,7 @@ const shard: CardShard = {
     _poolQuicksilverPietroMaximoff,
     _poolRaccoonRallier,
     _poolRakdosShredFreak,
+    _poolRampartSmasher,
     _poolRapidAugmenter,
     _poolRavenousIntruder,
     _poolRecklessPangolin,
@@ -1051,10 +1063,12 @@ const shard: CardShard = {
     _poolWestfoldRider,
     _poolWhispererOfTheWilds,
     _poolWhiteLotusReinforcements,
+    _poolWickedGuardian,
     _poolWildsongHowler,
     _poolWilt,
     _poolWindriderPatrol,
     _poolWinterMisanthropicGuide,
+    _poolWolfsQuarry,
     _poolWorldMap,
     _poolYoshimaru,
     _poolYouthfulScholar,

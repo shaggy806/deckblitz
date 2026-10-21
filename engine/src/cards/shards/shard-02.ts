@@ -60,6 +60,7 @@ import _poolBoundlessRealms from "../pool/boundless-realms.js";
 import _poolBountyOfSkemfar from "../pool/bounty-of-skemfar.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
+import _poolBringToLife from "../pool/bring-to-life.js";
 import _poolBrotherhoodVertibird from "../pool/brotherhood-vertibird.js";
 import _poolBruceBanner from "../pool/bruce-banner.js";
 import _poolBrushfireElemental from "../pool/brushfire-elemental.js";
@@ -374,6 +375,7 @@ import _poolSchemaThief from "../pool/schema-thief.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
 import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
+import _poolSearingBarrage from "../pool/searing-barrage.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
@@ -384,6 +386,7 @@ import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
+import _poolSilverflameSquire from "../pool/silverflame-squire.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
@@ -407,6 +410,7 @@ import _poolSpittingDrake from "../pool/spitting-drake.js";
 import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
 import _poolSproutbackTrudge from "../pool/sproutback-trudge.js";
 import _poolStarksIngenuity from "../pool/starks-ingenuity.js";
+import _poolStayHiddenStaySilent from "../pool/stay-hidden-stay-silent.js";
 import _poolSteadfastUnicorn from "../pool/steadfast-unicorn.js";
 import _poolSteadyProgress from "../pool/steady-progress.js";
 import _poolSteamClean from "../pool/steam-clean.js";
@@ -570,6 +574,7 @@ const shard: CardShard = {
     _poolBountyOfSkemfar,
     _poolBrambleCreeper,
     _poolBranchingEvolution,
+    _poolBringToLife,
     _poolBrotherhoodVertibird,
     _poolBruceBanner,
     _poolBrushfireElemental,
@@ -884,6 +889,7 @@ const shard: CardShard = {
     _poolScionOfGlaciers,
     _poolScouringSands,
     _poolScrybSprites,
+    _poolSearingBarrage,
     _poolSeedshipBroodtender,
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
@@ -894,6 +900,7 @@ const shard: CardShard = {
     _poolShepherdOfTheClouds,
     _poolSickleRipper,
     _poolSilkWebWeaver,
+    _poolSilverflameSquire,
     _poolSimianSimulacrum,
     _poolSinisterStarfish,
     _poolSkeletalSnake,
@@ -917,6 +924,7 @@ const shard: CardShard = {
     _poolSplinterHamatoYoshi,
     _poolSproutbackTrudge,
     _poolStarksIngenuity,
+    _poolStayHiddenStaySilent,
     _poolSteadfastUnicorn,
     _poolSteadyProgress,
     _poolSteamClean,

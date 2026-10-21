@@ -30,6 +30,7 @@ import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js"
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
+import _poolArcanistsOwl from "../pool/arcanists-owl.js";
 import _poolArcboundLancer from "../pool/arcbound-lancer.js";
 import _poolArcboundMouser from "../pool/arcbound-mouser.js";
 import _poolArchfiendOfTheDross from "../pool/archfiend-of-the-dross.js";
@@ -155,6 +156,7 @@ import _poolFanaticalFever from "../pool/fanatical-fever.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
+import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
@@ -296,6 +298,7 @@ import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
 import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
 import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
+import _poolOutmuscle from "../pool/outmuscle.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
 import _poolOxOfAgonas from "../pool/ox-of-agonas.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
@@ -413,6 +416,7 @@ import _poolSlaughterDrone from "../pool/slaughter-drone.js";
 import _poolSliptideSerpent from "../pool/sliptide-serpent.js";
 import _poolSliverHive from "../pool/sliver-hive.js";
 import _poolSliverQueen from "../pool/sliver-queen.js";
+import _poolSmittenSwordmaster from "../pool/smitten-swordmaster.js";
 import _poolSmugglersCopter from "../pool/smugglers-copter.js";
 import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
@@ -563,6 +567,7 @@ const shard: CardShard = {
     _poolAnnieJoinsUp,
     _poolArachnoid,
     _poolArbaazMir,
+    _poolArcanistsOwl,
     _poolArcboundLancer,
     _poolArcboundMouser,
     _poolArchfiendOfTheDross,
@@ -688,6 +693,7 @@ const shard: CardShard = {
     _poolFaunaShaman,
     _poolFearOfMissingOut,
     _poolFelidarCub,
+    _poolFestiveFuneral,
     _poolFeySteed,
     _poolFireNationWarship,
     _poolFlameChainMauler,
@@ -829,6 +835,7 @@ const shard: CardShard = {
     _poolOozePatrol,
     _poolOrderOfTheEbonHand,
     _poolOsseousSticktwister,
+    _poolOutmuscle,
     _poolOvergrownBattlement,
     _poolOxOfAgonas,
     _poolPacificationArray,
@@ -946,6 +953,7 @@ const shard: CardShard = {
     _poolSliptideSerpent,
     _poolSliverHive,
     _poolSliverQueen,
+    _poolSmittenSwordmaster,
     _poolSmugglersCopter,
     _poolSnareThopter,
     _poolSolTalisman,

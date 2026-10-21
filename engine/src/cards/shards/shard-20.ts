@@ -274,7 +274,9 @@ import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
 import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
 import _poolLostLeonin from "../pool/lost-leonin.js";
+import _poolLuckyClover from "../pool/lucky-clover.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
+import _poolMaceOfTheValiant from "../pool/mace-of-the-valiant.js";
 import _poolManaDrain from "../pool/mana-drain.js";
 import _poolManagorgerHydra from "../pool/managorger-hydra.js";
 import _poolMarkovWaltzer from "../pool/markov-waltzer.js";
@@ -425,9 +427,11 @@ import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
+import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
 import _poolSkyshroudTroll from "../pool/skyshroud-troll.js";
 import _poolSkysnareSpider from "../pool/skysnare-spider.js";
+import _poolSlayingFire from "../pool/slaying-fire.js";
 import _poolSlipThroughSpace from "../pool/slip-through-space.js";
 import _poolSmashingSpree from "../pool/smashing-spree.js";
 import _poolSmolderingButcher from "../pool/smoldering-butcher.js";
@@ -550,6 +554,7 @@ import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
+import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
 import _poolWorldWeary from "../pool/world-weary.js";
 import _poolWreckingBall from "../pool/wrecking-ball.js";
 import _poolWrench from "../pool/wrench.js";
@@ -847,7 +852,9 @@ const shard: CardShard = {
     _poolLongGoodbye,
     _poolLongLakeNuisance,
     _poolLostLeonin,
+    _poolLuckyClover,
     _poolLushOasis,
+    _poolMaceOfTheValiant,
     _poolManaDrain,
     _poolManagorgerHydra,
     _poolMarkovWaltzer,
@@ -998,9 +1005,11 @@ const shard: CardShard = {
     _poolSinisterSabotage,
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,
+    _poolSkullknockerOgre,
     _poolSkyshipStalker,
     _poolSkyshroudTroll,
     _poolSkysnareSpider,
+    _poolSlayingFire,
     _poolSlipThroughSpace,
     _poolSmashingSpree,
     _poolSmolderingButcher,
@@ -1123,6 +1132,7 @@ const shard: CardShard = {
     _poolWildCantor,
     _poolWillowrushVerge,
     _poolWirewoodGuardian,
+    _poolWitchsVengeance,
     _poolWorldWeary,
     _poolWreckingBall,
     _poolWrench,

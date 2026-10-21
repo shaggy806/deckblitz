@@ -58,6 +58,7 @@ import _poolBloodbondVampire from "../pool/bloodbond-vampire.js";
 import _poolBloodfireMentor from "../pool/bloodfire-mentor.js";
 import _poolBlossomBlessedAngel from "../pool/blossom-blessed-angel.js";
 import _poolBlowOffSteam from "../pool/blow-off-steam.js";
+import _poolBlowYourHouseDown from "../pool/blow-your-house-down.js";
 import _poolBombadilsSong from "../pool/bombadils-song.js";
 import _poolBonecallerCleric from "../pool/bonecaller-cleric.js";
 import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
@@ -135,6 +136,7 @@ import _poolElephantAmbush from "../pool/elephant-ambush.js";
 import _poolElfswornGiant from "../pool/elfsworn-giant.js";
 import _poolElvenkingsHalls from "../pool/elvenkings-halls.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
+import _poolEmberethSkyblazer from "../pool/embereth-skyblazer.js";
 import _poolEmbraceOblivion from "../pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEmeraldCharm from "../pool/emerald-charm.js";
@@ -324,6 +326,7 @@ import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolObstinateGargoyle from "../pool/obstinate-gargoyle.js";
 import _poolOgreChitterlord from "../pool/ogre-chitterlord.js";
+import _poolOkoTheTrickster from "../pool/oko-the-trickster.js";
 import _poolOldManWillow from "../pool/old-man-willow.js";
 import _poolOldThrush from "../pool/old-thrush.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
@@ -450,6 +453,7 @@ import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
+import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
 import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
 import _poolTamObservantSequencer from "../pool/tam-observant-sequencer.js";
@@ -616,6 +620,7 @@ const shard: CardShard = {
     _poolBloodfireMentor,
     _poolBlossomBlessedAngel,
     _poolBlowOffSteam,
+    _poolBlowYourHouseDown,
     _poolBombadilsSong,
     _poolBonecallerCleric,
     _poolBountifulLandscape,
@@ -693,6 +698,7 @@ const shard: CardShard = {
     _poolElfswornGiant,
     _poolElvenkingsHalls,
     _poolElvishVanguard,
+    _poolEmberethSkyblazer,
     _poolEmbraceOblivion,
     _poolEmbraceTheParadox,
     _poolEmeraldCharm,
@@ -882,6 +888,7 @@ const shard: CardShard = {
     _poolObeliskOfEsper,
     _poolObstinateGargoyle,
     _poolOgreChitterlord,
+    _poolOkoTheTrickster,
     _poolOldManWillow,
     _poolOldThrush,
     _poolOpenTheArmory,
@@ -1008,6 +1015,7 @@ const shard: CardShard = {
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,
     _poolSyphonFuel,
+    _poolSyrCarahTheBold,
     _poolTalasWarrior,
     _poolTalismanOfImpulse,
     _poolTamObservantSequencer,

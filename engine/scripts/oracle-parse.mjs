@@ -1488,6 +1488,11 @@ export function parseSentence(sentence, ctx) {
   // resolves — the `"attached"` reference — read as "it" is read, after every
   // template above that names it itself. Anything no "it" template takes
   // falls through to the rest.
+  // …and as the object: "tap enchanted creature" (Bitter Chill), "exile
+  // enchanted creature" (Dreadful Apathy).
+  if ((m = re("(tap|untap|exile|destroy) (?:enchanted|equipped) (?:creature|permanent)").exec(s))) {
+    return { kind: m[1].toLowerCase(), target: "attached" };
+  }
   if (ctx.it !== "attached" && ctx.targets.length === 0 && (m = /^(?:enchanted|equipped) (?:creature|permanent) (.+)$/i.exec(s))) {
     const asIt = parseSentence(`it ${m[1]}`, { ...ctx, it: "attached" });
     if (asIt !== null) return asIt;
@@ -1513,6 +1518,7 @@ export function parseSentence(sentence, ctx) {
       return { kind: "add-counter", target: it, counter: m[2].toLowerCase(), amount: amount(m[1]) };
     }
     if (re("untap it").test(s)) return { kind: "untap", target: it };
+    if (re("tap it").test(s)) return { kind: "tap", target: it };
     if (re("it becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: it };
     if (re("airbend (?:it|that creature|that permanent)").test(s)) return { kind: "exile", target: it, airbend: true };
     if (re("it connives").test(s)) return { kind: "connive", target: it };

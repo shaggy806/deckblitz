@@ -17,6 +17,7 @@ import _poolAlwaysWatching from "../pool/always-watching.js";
 import _poolAmberGristleOmaul from "../pool/amber-gristle-omaul.js";
 import _poolAmrouKithkin from "../pool/amrou-kithkin.js";
 import _poolAncientGrudge from "../pool/ancient-grudge.js";
+import _poolAnimatingFaerie from "../pool/animating-faerie.js";
 import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
 import _poolAquusSteed from "../pool/aquus-steed.js";
 import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
@@ -49,6 +50,7 @@ import _poolBetrayalAtTheVault from "../pool/betrayal-at-the-vault.js";
 import _poolBigGameHunter from "../pool/big-game-hunter.js";
 import _poolBindingMummy from "../pool/binding-mummy.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
+import _poolBitterChill from "../pool/bitter-chill.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
@@ -292,6 +294,7 @@ import _poolMurkySewer from "../pool/murky-sewer.js";
 import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
+import _poolMysteriousPathlighter from "../pool/mysterious-pathlighter.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
 import _poolNaiadOfHiddenCoves from "../pool/naiad-of-hidden-coves.js";
 import _poolNecromancersFamiliar from "../pool/necromancers-familiar.js";
@@ -399,6 +402,7 @@ import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
+import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
@@ -552,6 +556,7 @@ const shard: CardShard = {
     _poolAmberGristleOmaul,
     _poolAmrouKithkin,
     _poolAncientGrudge,
+    _poolAnimatingFaerie,
     _poolApprenticeNecromancer,
     _poolAquusSteed,
     _poolArcaneEncyclopedia,
@@ -584,6 +589,7 @@ const shard: CardShard = {
     _poolBigGameHunter,
     _poolBindingMummy,
     _poolBirthingPod,
+    _poolBitterChill,
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBloodlineKeeper,
@@ -827,6 +833,7 @@ const shard: CardShard = {
     _poolMutagenicGrowth,
     _poolMycosynthGolem,
     _poolMyrkulsInvoker,
+    _poolMysteriousPathlighter,
     _poolMysticArchaeologist,
     _poolNaiadOfHiddenCoves,
     _poolNecromancersFamiliar,
@@ -934,6 +941,7 @@ const shard: CardShard = {
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
     _poolShaperGuildmage,
+    _poolShepherdOfTheFlock,
     _poolShipwreckDowser,
     _poolShireShirriff,
     _poolShivanDragon,

@@ -104,6 +104,7 @@ import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
 import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
+import _poolCurryFavor from "../pool/curry-favor.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
@@ -313,6 +314,7 @@ import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRankRat from "../pool/rank-rat.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
+import _poolRedcapRaiders from "../pool/redcap-raiders.js";
 import _poolRedemptionArc from "../pool/redemption-arc.js";
 import _poolReknit from "../pool/reknit.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
@@ -358,6 +360,7 @@ import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
 import _poolShepherdOfTheCosmos from "../pool/shepherd-of-the-cosmos.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
+import _poolShinechaser from "../pool/shinechaser.js";
 import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
 import _poolSicken from "../pool/sicken.js";
@@ -375,6 +378,7 @@ import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
+import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
@@ -441,6 +445,7 @@ import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
 import _poolUmaraMystic from "../pool/umara-mystic.js";
 import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
+import _poolUnexplainedVision from "../pool/unexplained-vision.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUntamedPup from "../pool/untamed-pup.js";
@@ -605,6 +610,7 @@ const shard: CardShard = {
     _poolCrystacean,
     _poolCullingTheWeak,
     _poolCunningGeysermage,
+    _poolCurryFavor,
     _poolCurseOfClingingWebs,
     _poolCylianElf,
     _poolDarkLeoShredder,
@@ -814,6 +820,7 @@ const shard: CardShard = {
     _poolRampagingFerocidon,
     _poolRankRat,
     _poolRecklessDetective,
+    _poolRedcapRaiders,
     _poolRedemptionArc,
     _poolReknit,
     _poolRenegadeMap,
@@ -859,6 +866,7 @@ const shard: CardShard = {
     _poolShantottoTacticianMagician,
     _poolShepherdOfTheCosmos,
     _poolShepherdingSpirits,
+    _poolShinechaser,
     _poolShootTheSheriff,
     _poolShrikeForce,
     _poolSicken,
@@ -876,6 +884,7 @@ const shard: CardShard = {
     _poolSkyscytheEngulfer,
     _poolSlay,
     _poolSmashToDust,
+    _poolSoShiny,
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
     _poolSolsticeZealot,
@@ -942,6 +951,7 @@ const shard: CardShard = {
     _poolUmaraMystic,
     _poolUnchartedVoyage,
     _poolUnderdarkRift,
+    _poolUnexplainedVision,
     _poolUnnaturalSpeed,
     _poolUnrootedAncestor,
     _poolUntamedPup,

@@ -180,6 +180,7 @@ import _poolFurnaceHellkite from "../pool/furnace-hellkite.js";
 import _poolGaelicat from "../pool/gaelicat.js";
 import _poolGammaGrotesque from "../pool/gamma-grotesque.js";
 import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
+import _poolGarenbrigSquire from "../pool/garenbrig-squire.js";
 import _poolGarruksCompanion from "../pool/garruks-companion.js";
 import _poolGasGuzzler from "../pool/gas-guzzler.js";
 import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
@@ -225,6 +226,7 @@ import _poolIceStorm from "../pool/ice-storm.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolImmolatingGyre from "../pool/immolating-gyre.js";
+import _poolImprobableAlliance from "../pool/improbable-alliance.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
@@ -294,6 +296,7 @@ import _poolMudbuttonTorchrunner from "../pool/mudbutton-torchrunner.js";
 import _poolMyojinOfRoaringBlades from "../pool/myojin-of-roaring-blades.js";
 import _poolMysteryKey from "../pool/mystery-key.js";
 import _poolMysticRedaction from "../pool/mystic-redaction.js";
+import _poolMysticalDispute from "../pool/mystical-dispute.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
@@ -474,6 +477,7 @@ import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
+import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
 import _poolTimeStretch from "../pool/time-stretch.js";
 import _poolTitaniasBoon from "../pool/titanias-boon.js";
 import _poolTocasiasWelcome from "../pool/tocasias-welcome.js";
@@ -537,6 +541,7 @@ import _poolZofShade from "../pool/zof-shade.js";
 import _tokensArmyToken from "../tokens/army-token.js";
 import _tokensAssassinToken from "../tokens/assassin-token.js";
 import _tokensBirdTokenHermesOverseerOfElpis from "../tokens/bird-token-hermes-overseer-of-elpis.js";
+import _tokensBoarTokenWolfsQuarry from "../tokens/boar-token-wolfs-quarry.js";
 import _tokensDoombot from "../tokens/doombot.js";
 import _tokensElementalTokenAllColors from "../tokens/elemental-token-all-colors.js";
 import _tokensElephantToken from "../tokens/elephant-token.js";
@@ -732,6 +737,7 @@ const shard: CardShard = {
     _poolGaelicat,
     _poolGammaGrotesque,
     _poolGarenbrigCarver,
+    _poolGarenbrigSquire,
     _poolGarruksCompanion,
     _poolGasGuzzler,
     _poolGeistOfTheMoors,
@@ -777,6 +783,7 @@ const shard: CardShard = {
     _poolIcyReception,
     _poolIllegitimateBusiness,
     _poolImmolatingGyre,
+    _poolImprobableAlliance,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
     _poolInsatiableSouleater,
@@ -846,6 +853,7 @@ const shard: CardShard = {
     _poolMyojinOfRoaringBlades,
     _poolMysteryKey,
     _poolMysticRedaction,
+    _poolMysticalDispute,
     _poolMysticalTutor,
     _poolMystifyingMaze,
     _poolNamoraTheSeaQueen,
@@ -1026,6 +1034,7 @@ const shard: CardShard = {
     _poolThoseWhoServe,
     _poolThrivingIsle,
     _poolThundermaneDragon,
+    _poolThunderousSnapper,
     _poolTimeStretch,
     _poolTitaniasBoon,
     _poolTocasiasWelcome,
@@ -1091,6 +1100,7 @@ const shard: CardShard = {
     _tokensArmyToken,
     _tokensAssassinToken,
     _tokensBirdTokenHermesOverseerOfElpis,
+    _tokensBoarTokenWolfsQuarry,
     _tokensDoombot,
     _tokensElementalTokenAllColors,
     _tokensElephantToken,

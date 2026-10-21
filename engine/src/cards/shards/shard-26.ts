@@ -155,6 +155,7 @@ import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
 import _poolFlopsieBumisBuddy from "../pool/flopsie-bumis-buddy.js";
 import _poolFlowstoneMauler from "../pool/flowstone-mauler.js";
+import _poolFlutterfox from "../pool/flutterfox.js";
 import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
 import _poolFollowHim from "../pool/follow-him.js";
@@ -265,6 +266,7 @@ import _poolMagneticSnuffler from "../pool/magnetic-snuffler.js";
 import _poolMagneticTheft from "../pool/magnetic-theft.js";
 import _poolMahamotiDjinn from "../pool/mahamoti-djinn.js";
 import _poolMalametWarScribe from "../pool/malamet-war-scribe.js";
+import _poolMantleOfTides from "../pool/mantle-of-tides.js";
 import _poolMantleOfWebs from "../pool/mantle-of-webs.js";
 import _poolMaraudersAxe from "../pool/marauders-axe.js";
 import _poolMarisisTwinclaws from "../pool/marisis-twinclaws.js";
@@ -303,6 +305,7 @@ import _poolNorwoodRanger from "../pool/norwood-ranger.js";
 import _poolNothic from "../pool/nothic.js";
 import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
+import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
 import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
@@ -421,6 +424,7 @@ import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
 import _poolStaffOfDomination from "../pool/staff-of-domination.js";
 import _poolStaffOfTitania from "../pool/staff-of-titania.js";
+import _poolStarlightSnare from "../pool/starlight-snare.js";
 import _poolStartlingDevelopment from "../pool/startling-development.js";
 import _poolStaticSnare from "../pool/static-snare.js";
 import _poolStensiaMasquerade from "../pool/stensia-masquerade.js";
@@ -497,6 +501,7 @@ import _poolVivisurgeonsInsight from "../pool/vivisurgeons-insight.js";
 import _poolVodaSeaScavenger from "../pool/voda-sea-scavenger.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
 import _poolVoiceOfLaw from "../pool/voice-of-law.js";
+import _poolVoidMirror from "../pool/void-mirror.js";
 import _poolVolatileFjord from "../pool/volatile-fjord.js";
 import _poolVoltaicKey from "../pool/voltaic-key.js";
 import _poolVoraciousGreatshark from "../pool/voracious-greatshark.js";
@@ -507,6 +512,7 @@ import _poolWarSpikeChangeling from "../pool/war-spike-changeling.js";
 import _poolWarpingWail from "../pool/warping-wail.js";
 import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
 import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
+import _poolWelcomeHome from "../pool/welcome-home.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
@@ -685,6 +691,7 @@ const shard: CardShard = {
     _poolFleetfootDancer,
     _poolFlopsieBumisBuddy,
     _poolFlowstoneMauler,
+    _poolFlutterfox,
     _poolFluxChanneler,
     _poolFlyingMen,
     _poolFollowHim,
@@ -795,6 +802,7 @@ const shard: CardShard = {
     _poolMagneticTheft,
     _poolMahamotiDjinn,
     _poolMalametWarScribe,
+    _poolMantleOfTides,
     _poolMantleOfWebs,
     _poolMaraudersAxe,
     _poolMarisisTwinclaws,
@@ -833,6 +841,7 @@ const shard: CardShard = {
     _poolNothic,
     _poolNoxiousToad,
     _poolObyrasAttendants,
+    _poolOgreErrant,
     _poolOmnathLocusOfTheRoil,
     _poolOpportunity,
     _poolOpt,
@@ -951,6 +960,7 @@ const shard: CardShard = {
     _poolSquiresDevotion,
     _poolStaffOfDomination,
     _poolStaffOfTitania,
+    _poolStarlightSnare,
     _poolStartlingDevelopment,
     _poolStaticSnare,
     _poolStensiaMasquerade,
@@ -1027,6 +1037,7 @@ const shard: CardShard = {
     _poolVodaSeaScavenger,
     _poolVoiceOfGrace,
     _poolVoiceOfLaw,
+    _poolVoidMirror,
     _poolVolatileFjord,
     _poolVoltaicKey,
     _poolVoraciousGreatshark,
@@ -1037,6 +1048,7 @@ const shard: CardShard = {
     _poolWarpingWail,
     _poolWarriorsOfWakanda,
     _poolWebspinnerCuff,
+    _poolWelcomeHome,
     _poolWeldingJar,
     _poolWildRoads,
     _poolWingsOfHope,

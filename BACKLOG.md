@@ -110,9 +110,12 @@ section keeps only what to do next.
   Legends, no engine change; batch 114 Zendikar Rising and its Commander set, on party; batch
   115 the rest of Jumpstart; batch 116 the rest of Core Set 2021, on hexproof from a quality; batch 117 Ikoria,
   on mutate; batch 118 Commander 2020 and Theros Beyond Death, on devotion cost reductions and
-  "enchanted creature" in an effect; batch 119 the cards that unblocked, leaving "enchanted
-  creature doesn't untap" — `static:doesnt-untap-filter`, 7 — as the next lead);
-  **next, Throne of Eldraine** (ELD — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
+  "enchanted creature" in an effect; batch 119 the cards that unblocked; batch 120 Throne of
+  Eldraine, on "enchanted creature doesn't untap" and adamant, with the earlier cards both
+  unblocked); **next, Commander 2019** (C19 — `npm run cards:sets -w engine -- --next 60`).
+  Leading blockers after ELD: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4)
+  with "for as long as it stays tapped" (`effect:duration-while-source-tapped`, 3), and an Aura's
+  lasting "loses all abilities" (`static:static-lose-all-abilities`, 3). The most shared blocks of the last three
   sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
   6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
   Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative
@@ -183,6 +186,7 @@ there and move this line to `COMPLETED.md`.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A granted ability's dynamic filter is fixed when it's granted**: an `{ amount }` in its target filter reads the granter, not the creature that has it (Firja's Retribution).
 - **`deals-damage` fires once per recipient**, where an unqualified "whenever ~ deals damage" fires once per event (603.2c).
+- **A "prevent that damage and remove a counter" replacement runs once per source**, where several sources dealing damage at once is one event: Unbreathing Horde blocked by two creatures loses two counters (Oathsworn Knight's ruling says one).
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.

@@ -8853,6 +8853,29 @@
   },
   "cost:cost-reduction-devotion": {
    "example": "Drag to the Underworld (built 2026-10-20)"
+  },
+  "condition:card-types-among-permanents-and-graveyard": {
+   "example": "Happily Ever After"
+  },
+  "replacement:prevent-once-per-damage-event": {
+   "example": "Oathsworn Knight"
+  },
+  "condition:first-spell-cast-this-game": {
+   "example": "Once Upon a Time"
+  },
+  "cost:sacrifice-another-creature-or-an-artifact": {
+   "example": "Elite Headhunter"
+  },
+  "effect:put-exiled-card-into-graveyard": {
+   "example": "Memory Theft"
+  },
+  "cost:cost-reduction-cards-in-graveyard-times": {
+   "family": "cost:cost-reduction-devotion",
+   "example": "The Cauldron of Eternity"
+  },
+  "cost:sacrifice-other-only-in-one-branch": {
+   "family": "cost:sacrifice-another-creature-or-an-artifact",
+   "example": "Malevolent Noble"
   }
  }
 }

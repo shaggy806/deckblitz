@@ -110,6 +110,7 @@ import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDaringWaverider from "../pool/daring-waverider.js";
 import _poolDawnEvangel from "../pool/dawn-evangel.js";
+import _poolDeceit from "../pool/deceit.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
 import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
@@ -132,6 +133,7 @@ import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
 import _poolDisturbedSlumber from "../pool/disturbed-slumber.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
 import _poolDizzySpell from "../pool/dizzy-spell.js";
+import _poolDizzyingSwoop from "../pool/dizzying-swoop.js";
 import _poolDoomskarTitan from "../pool/doomskar-titan.js";
 import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
@@ -223,6 +225,7 @@ import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
 import _poolHandOfEnlightenment from "../pool/hand-of-enlightenment.js";
+import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
@@ -253,6 +256,7 @@ import _poolInheritedFiend from "../pool/inherited-fiend.js";
 import _poolInsatiableHemophage from "../pool/insatiable-hemophage.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
+import _poolIntruderAlarm from "../pool/intruder-alarm.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
 import _poolIronHills from "../pool/iron-hills.js";
@@ -364,6 +368,7 @@ import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
+import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
 import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
 import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
 import _poolRangerCaptainOfEos from "../pool/ranger-captain-of-eos.js";
@@ -423,6 +428,7 @@ import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
 import _poolSkyswimmerKoi from "../pool/skyswimmer-koi.js";
 import _poolSlaughterSpecialist from "../pool/slaughter-specialist.js";
+import _poolSleepWithTheFishes from "../pool/sleep-with-the-fishes.js";
 import _poolSliceInTwain from "../pool/slice-in-twain.js";
 import _poolSmokeSpiritsAid from "../pool/smoke-spirits-aid.js";
 import _poolSmokespewInvoker from "../pool/smokespew-invoker.js";
@@ -449,6 +455,8 @@ import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
+import _poolSyrFarenTheHengehammer from "../pool/syr-faren-the-hengehammer.js";
+import _poolT45PowerArmor from "../pool/t-45-power-armor.js";
 import _poolTalasLookout from "../pool/talas-lookout.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
@@ -523,6 +531,7 @@ import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
 import _poolWingsOfHubris from "../pool/wings-of-hubris.js";
+import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
@@ -536,6 +545,7 @@ import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensAngelo from "../tokens/angelo.js";
 import _tokensDalekToken from "../tokens/dalek-token.js";
 import _tokensFoxToken from "../tokens/fox-token.js";
+import _tokensGiantToken from "../tokens/giant-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
 import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
@@ -661,6 +671,7 @@ const shard: CardShard = {
     _poolDamoclesBaseSwordOfKang,
     _poolDaringWaverider,
     _poolDawnEvangel,
+    _poolDeceit,
     _poolDeepwoodGhoul,
     _poolDematerialize,
     _poolDependableQuinjet,
@@ -683,6 +694,7 @@ const shard: CardShard = {
     _poolDisturbedSlumber,
     _poolDivineArrow,
     _poolDizzySpell,
+    _poolDizzyingSwoop,
     _poolDoomskarTitan,
     _poolDorotheaVengefulVictim,
     _poolDrMadisonLi,
@@ -774,6 +786,7 @@ const shard: CardShard = {
     _poolHammerheadTyrant,
     _poolHanaKami,
     _poolHandOfEnlightenment,
+    _poolHarmoniousArchon,
     _poolHeartflameSlash,
     _poolHedronArchive,
     _poolHelicarrierStrike,
@@ -804,6 +817,7 @@ const shard: CardShard = {
     _poolInsatiableHemophage,
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
+    _poolIntruderAlarm,
     _poolIronBully,
     _poolIronCrawCrusher,
     _poolIronHills,
@@ -915,6 +929,7 @@ const shard: CardShard = {
     _poolPsychomancer,
     _poolRabidBite,
     _poolRaidingNightstalker,
+    _poolRallyForTheThrone,
     _poolRamirezDepietroPillager,
     _poolRamosianGreatsword,
     _poolRangerCaptainOfEos,
@@ -974,6 +989,7 @@ const shard: CardShard = {
     _poolSkyclavePlunder,
     _poolSkyswimmerKoi,
     _poolSlaughterSpecialist,
+    _poolSleepWithTheFishes,
     _poolSliceInTwain,
     _poolSmokeSpiritsAid,
     _poolSmokespewInvoker,
@@ -1000,6 +1016,8 @@ const shard: CardShard = {
     _poolSurrakDragonclaw,
     _poolSwarmyard,
     _poolSylvanSafekeeper,
+    _poolSyrFarenTheHengehammer,
+    _poolT45PowerArmor,
     _poolTalasLookout,
     _poolTatteredMummy,
     _poolTazriBeaconOfUnity,
@@ -1074,6 +1092,7 @@ const shard: CardShard = {
     _poolWeddingCrasher,
     _poolWickTheWhorledMind,
     _poolWingsOfHubris,
+    _poolWintermoorCommander,
     _poolWipeClean,
     _poolWoodlandLiege,
     _poolWreckRemover,
@@ -1089,6 +1108,7 @@ const shard: CardShard = {
     _tokensAngelo,
     _tokensDalekToken,
     _tokensFoxToken,
+    _tokensGiantToken,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
     _tokensHumanCitizenToken,

@@ -20,6 +20,7 @@ import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
 import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
+import _poolArdenvaleTactician from "../pool/ardenvale-tactician.js";
 import _poolArenaTrickster from "../pool/arena-trickster.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
 import _poolArgivianFind from "../pool/argivian-find.js";
@@ -109,6 +110,7 @@ import _poolDissipate from "../pool/dissipate.js";
 import _poolDivingGriffin from "../pool/diving-griffin.js";
 import _poolDoggedHunter from "../pool/dogged-hunter.js";
 import _poolDonatelloGadgetMaster from "../pool/donatello-gadget-master.js";
+import _poolDoomForetold from "../pool/doom-foretold.js";
 import _poolDoomskarWarrior from "../pool/doomskar-warrior.js";
 import _poolDoranBesiegedByTime from "../pool/doran-besieged-by-time.js";
 import _poolDragToTheUnderworld from "../pool/drag-to-the-underworld.js";
@@ -175,6 +177,7 @@ import _poolFyndhornElder from "../pool/fyndhorn-elder.js";
 import _poolGallantry from "../pool/gallantry.js";
 import _poolGallifreyStands from "../pool/gallifrey-stands.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
+import _poolGarrisonGriffin from "../pool/garrison-griffin.js";
 import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
@@ -544,6 +547,7 @@ const shard: CardShard = {
     _poolAnglerDrake,
     _poolAqueousAria,
     _poolArcboundWhelp,
+    _poolArdenvaleTactician,
     _poolArenaTrickster,
     _poolAresGodOfWar,
     _poolArgivianFind,
@@ -633,6 +637,7 @@ const shard: CardShard = {
     _poolDivingGriffin,
     _poolDoggedHunter,
     _poolDonatelloGadgetMaster,
+    _poolDoomForetold,
     _poolDoomskarWarrior,
     _poolDoranBesiegedByTime,
     _poolDragToTheUnderworld,
@@ -699,6 +704,7 @@ const shard: CardShard = {
     _poolGallantry,
     _poolGallifreyStands,
     _poolGanaxAstralHunter,
+    _poolGarrisonGriffin,
     _poolGastalBlockbuster,
     _poolGavonyTownship,
     _poolGazeOfGranite,

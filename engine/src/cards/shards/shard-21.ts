@@ -56,6 +56,7 @@ import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBother from "../pool/bother.js";
+import _poolBramblefortFink from "../pool/bramblefort-fink.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
@@ -70,6 +71,7 @@ import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
 import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
+import _poolCementShoes from "../pool/cement-shoes.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
 import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
@@ -84,6 +86,7 @@ import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
 import _poolCleavingReaper from "../pool/cleaving-reaper.js";
 import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
+import _poolClockworkServant from "../pool/clockwork-servant.js";
 import _poolCoercion from "../pool/coercion.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
@@ -202,6 +205,7 @@ import _poolHappyHoganDauntlessDriver from "../pool/happy-hogan-dauntless-driver
 import _poolHardWonJitte from "../pool/hard-won-jitte.js";
 import _poolHeadwaterSentries from "../pool/headwater-sentries.js";
 import _poolHeartbeatOfSpring from "../pool/heartbeat-of-spring.js";
+import _poolHeartsDesire from "../pool/hearts-desire.js";
 import _poolHellkitePunisher from "../pool/hellkite-punisher.js";
 import _poolHellspurPosseBoss from "../pool/hellspur-posse-boss.js";
 import _poolHelmOfTheHost from "../pool/helm-of-the-host.js";
@@ -573,6 +577,7 @@ const shard: CardShard = {
     _poolBonebindOrator,
     _poolBoonOfEmrakul,
     _poolBother,
+    _poolBramblefortFink,
     _poolBrawnAmadeusCho,
     _poolBrazenBlademaster,
     _poolBreathOfTheSleepless,
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolCanonizedInBlood,
     _poolCapturedByLagacs,
     _poolCarnivorousPlant,
+    _poolCementShoes,
     _poolCephalidFacetaker,
     _poolChainReaction,
     _poolChampionOfTheWeird,
@@ -601,6 +607,7 @@ const shard: CardShard = {
     _poolClavilenoFirstOfTheBlessed,
     _poolCleavingReaper,
     _poolCleavingSkyrider,
+    _poolClockworkServant,
     _poolCoercion,
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
@@ -719,6 +726,7 @@ const shard: CardShard = {
     _poolHardWonJitte,
     _poolHeadwaterSentries,
     _poolHeartbeatOfSpring,
+    _poolHeartsDesire,
     _poolHellkitePunisher,
     _poolHellspurPosseBoss,
     _poolHelmOfTheHost,

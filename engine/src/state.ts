@@ -996,6 +996,12 @@ export interface GameObject {
    * spell" (the `{ colorsSpentOf }` amount). Colourless isn't a colour. Kept
    * and cleared with `manaSpent`. */
   manaSpentColors?: Color[];
+  /** How many units of each colour were spent to cast this spell — adamant's
+   * "if at least three black mana was spent to cast this spell" (Throne of
+   * Eldraine), the Mythos cycle's "if {U}{B} was spent" (the filter's
+   * `manaSpentOfColors`). Colours with none are left out. Kept and cleared
+   * with `manaSpent`. */
+  manaSpentByColor?: Partial<Record<Color, number>>;
   /** For a triggered ability object: the target slots its triggering event
    * filled rather than its controller choosing — a saboteur's "that player"
    * (Hypnotic Specter's discard). Those aren't targets (rule 115.1), so
@@ -1455,6 +1461,8 @@ export interface LastKnownInfo {
   readonly manaSpentFrom?: readonly ManaOrigin[];
   /** Its colours (`GameObject.manaSpentColors`). */
   readonly manaSpentColors?: readonly Color[];
+  /** How much of each (`GameObject.manaSpentByColor`). */
+  readonly manaSpentByColor?: Partial<Record<Color, number>>;
   readonly isToken: boolean;
   readonly isCommander: boolean;
   readonly tapped: boolean;

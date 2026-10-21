@@ -18,6 +18,7 @@ import _poolAncientDen from "../pool/ancient-den.js";
 import _poolAnointedChorister from "../pool/anointed-chorister.js";
 import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
 import _poolArchonOfJustice from "../pool/archon-of-justice.js";
+import _poolArdenvalePaladin from "../pool/ardenvale-paladin.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
@@ -131,6 +132,7 @@ import _poolElectrify from "../pool/electrify.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
+import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
@@ -159,6 +161,7 @@ import _poolFirefluxSquad from "../pool/fireflux-squad.js";
 import _poolFireglassMentor from "../pool/fireglass-mentor.js";
 import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
+import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
 import _poolFlywheelRacer from "../pool/flywheel-racer.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
@@ -354,6 +357,7 @@ import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolRevitalize from "../pool/revitalize.js";
+import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
 import _poolRorixBladewing from "../pool/rorix-bladewing.js";
@@ -386,6 +390,7 @@ import _poolShaunFatherOfSynths from "../pool/shaun-father-of-synths.js";
 import _poolShelteredByGhosts from "../pool/sheltered-by-ghosts.js";
 import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShinestriker from "../pool/shinestriker.js";
+import _poolShiningArmor from "../pool/shining-armor.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
 import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
@@ -428,6 +433,7 @@ import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
 import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
 import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
+import _poolTallAsABeanstalk from "../pool/tall-as-a-beanstalk.js";
 import _poolTalonrend from "../pool/talonrend.js";
 import _poolTappingAtTheWindow from "../pool/tapping-at-the-window.js";
 import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
@@ -441,6 +447,7 @@ import _poolTheFifthDoctor from "../pool/the-fifth-doctor.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
 import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
+import _poolTheRoyalScions from "../pool/the-royal-scions.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
 import _poolThievingMagpie from "../pool/thieving-magpie.js";
 import _poolThirstForDiscovery from "../pool/thirst-for-discovery.js";
@@ -489,6 +496,7 @@ import _poolWasteland from "../pool/wasteland.js";
 import _poolWaterwindScout from "../pool/waterwind-scout.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
 import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
+import _poolWeaponRack from "../pool/weapon-rack.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
 import _poolWildIdea from "../pool/wild-idea.js";
@@ -539,6 +547,7 @@ const shard: CardShard = {
     _poolAnointedChorister,
     _poolAppliedBiomancy,
     _poolArchonOfJustice,
+    _poolArdenvalePaladin,
     _poolArgivianRestoration,
     _poolArmoryPaladin,
     _poolArtifistAcumen,
@@ -652,6 +661,7 @@ const shard: CardShard = {
     _poolElvishGuidance,
     _poolElvishHerder,
     _poolEmberShot,
+    _poolEmberethPaladin,
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
@@ -680,6 +690,7 @@ const shard: CardShard = {
     _poolFireglassMentor,
     _poolFistsOfIronwood,
     _poolFlamekinSpitfire,
+    _poolFlaxenIntruder,
     _poolFlayerOfTheHatebound,
     _poolFlywheelRacer,
     _poolForcedFruition,
@@ -875,6 +886,7 @@ const shard: CardShard = {
     _poolResearchThief,
     _poolRestlessDead,
     _poolRevitalize,
+    _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
     _poolRiseAgain,
     _poolRorixBladewing,
@@ -907,6 +919,7 @@ const shard: CardShard = {
     _poolShelteredByGhosts,
     _poolShelteringBoughs,
     _poolShinestriker,
+    _poolShiningArmor,
     _poolShockingGrasp,
     _poolSiblingRivalry,
     _poolSigilOfTheEmptyThrone,
@@ -949,6 +962,7 @@ const shard: CardShard = {
     _poolSurrakTheHuntCaller,
     _poolSusurianVoidborn,
     _poolSwordOfOnceAndFuture,
+    _poolTallAsABeanstalk,
     _poolTalonrend,
     _poolTappingAtTheWindow,
     _poolTeemingDragonstorm,
@@ -962,6 +976,7 @@ const shard: CardShard = {
     _poolTheGreyHavens,
     _poolTheLordOfPain,
     _poolTheMycosynthGardens,
+    _poolTheRoyalScions,
     _poolTheScarabGod,
     _poolThievingMagpie,
     _poolThirstForDiscovery,
@@ -1010,6 +1025,7 @@ const shard: CardShard = {
     _poolWaterwindScout,
     _poolWayOfThePyromancer,
     _poolWaywardGuideBeast,
+    _poolWeaponRack,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
     _poolWildIdea,

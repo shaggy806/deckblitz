@@ -61,6 +61,7 @@ import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreakAsunder from "../pool/break-asunder.js";
 import _poolBriarpackAlpha from "../pool/briarpack-alpha.js";
 import _poolBrushland from "../pool/brushland.js";
+import _poolBubbleSnare from "../pool/bubble-snare.js";
 import _poolBurnishedHart from "../pool/burnished-hart.js";
 import _poolBuzzBots from "../pool/buzz-bots.js";
 import _poolCapashenUnicorn from "../pool/capashen-unicorn.js";
@@ -181,8 +182,10 @@ import _poolFloraColossus from "../pool/flora-colossus.js";
 import _poolFlowstoneCrusher from "../pool/flowstone-crusher.js";
 import _poolFlowstoneWall from "../pool/flowstone-wall.js";
 import _poolFootElite from "../pool/foot-elite.js";
+import _poolForebodingFruit from "../pool/foreboding-fruit.js";
 import _poolForestBear from "../pool/forest-bear.js";
 import _poolFortifiedRampart from "../pool/fortified-rampart.js";
+import _poolFortifyingProvisions from "../pool/fortifying-provisions.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
 import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
@@ -333,6 +336,7 @@ import _poolNuclearFallout from "../pool/nuclear-fallout.js";
 import _poolOasis from "../pool/oasis.js";
 import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
+import _poolOnAlert from "../pool/on-alert.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
 import _poolOonasGatewarden from "../pool/oonas-gatewarden.js";
 import _poolOxDrover from "../pool/ox-drover.js";
@@ -458,6 +462,7 @@ import _poolTitaniumMan from "../pool/titanium-man.js";
 import _poolTonberry from "../pool/tonberry.js";
 import _poolTorporOrb from "../pool/torpor-orb.js";
 import _poolToucanPuffin from "../pool/toucan-puffin.js";
+import _poolTournamentGrounds from "../pool/tournament-grounds.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
 import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
@@ -588,6 +593,7 @@ const shard: CardShard = {
     _poolBreakAsunder,
     _poolBriarpackAlpha,
     _poolBrushland,
+    _poolBubbleSnare,
     _poolBurnishedHart,
     _poolBuzzBots,
     _poolCapashenUnicorn,
@@ -708,8 +714,10 @@ const shard: CardShard = {
     _poolFlowstoneCrusher,
     _poolFlowstoneWall,
     _poolFootElite,
+    _poolForebodingFruit,
     _poolForestBear,
     _poolFortifiedRampart,
+    _poolFortifyingProvisions,
     _poolFrenziedArynx,
     _poolFreshVolunteers,
     _poolFrogtosserBanneret,
@@ -860,6 +868,7 @@ const shard: CardShard = {
     _poolOasis,
     _poolObeliskOfNaya,
     _poolOldFlitterfang,
+    _poolOnAlert,
     _poolOnyxGoblet,
     _poolOonasGatewarden,
     _poolOxDrover,
@@ -985,6 +994,7 @@ const shard: CardShard = {
     _poolTonberry,
     _poolTorporOrb,
     _poolToucanPuffin,
+    _poolTournamentGrounds,
     _poolTrainedJackal,
     _poolTranceKujaFateDefied,
     _poolTreasureTrove,

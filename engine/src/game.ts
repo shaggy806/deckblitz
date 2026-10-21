@@ -15446,6 +15446,13 @@ export class Game {
         spell.manaSpentFrom = spent.flatMap((u) => (u.from === undefined ? [] : [u.from]));
         // Converge's "colors of mana spent" — colourless isn't one (rule 105.1).
         spell.manaSpentColors = COLORS.filter((c) => spent.some((u) => u.type === c));
+        // Adamant's "at least three black mana": how much of each.
+        const byColor: Partial<Record<Color, number>> = {};
+        for (const c of COLORS) {
+          const n = spent.filter((u) => u.type === c).length;
+          if (n > 0) byColor[c] = n;
+        }
+        spell.manaSpentByColor = byColor;
       }
     }
     for (const unit of spent) this.fireManaSpendRider(player, unit, purpose);
@@ -33638,6 +33645,7 @@ export class Game {
       ...(object.manaSpent !== undefined ? { manaSpent: object.manaSpent } : {}),
       ...(object.manaSpentFrom !== undefined ? { manaSpentFrom: [...object.manaSpentFrom] } : {}),
       ...(object.manaSpentColors !== undefined ? { manaSpentColors: [...object.manaSpentColors] } : {}),
+      ...(object.manaSpentByColor !== undefined ? { manaSpentByColor: { ...object.manaSpentByColor } } : {}),
       isToken: object.isToken,
       isCommander: object.isCommander,
       tapped: object.tapped,
@@ -34201,6 +34209,7 @@ export class Game {
       object.manaSpent = undefined;
       object.manaSpentFrom = undefined;
       object.manaSpentColors = undefined;
+      object.manaSpentByColor = undefined;
     }
 
     // Rule 400.7: wherever it goes, it arrives as a new object, and only a

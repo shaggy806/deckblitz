@@ -33,6 +33,7 @@ import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
 import _poolBaneLordOfDarkness from "../pool/bane-lord-of-darkness.js";
+import _poolBanishIntoFable from "../pool/banish-into-fable.js";
 import _poolBanishingCoils from "../pool/banishing-coils.js";
 import _poolBarretWallace from "../pool/barret-wallace.js";
 import _poolBarrowNaughty from "../pool/barrow-naughty.js";
@@ -55,6 +56,7 @@ import _poolBlizzardElemental from "../pool/blizzard-elemental.js";
 import _poolBloodPrice from "../pool/blood-price.js";
 import _poolBloodSeeker from "../pool/blood-seeker.js";
 import _poolBloodgiftDemon from "../pool/bloodgift-demon.js";
+import _poolBloodhazeWolverine from "../pool/bloodhaze-wolverine.js";
 import _poolBlossomingDefense from "../pool/blossoming-defense.js";
 import _poolBogTatters from "../pool/bog-tatters.js";
 import _poolBogardanRager from "../pool/bogardan-rager.js";
@@ -128,6 +130,7 @@ import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
+import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
@@ -186,6 +189,7 @@ import _poolGiantsAmulet from "../pool/giants-amulet.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
+import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinMorningstar from "../pool/goblin-morningstar.js";
@@ -226,6 +230,7 @@ import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
+import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
 import _poolIronVerdict from "../pool/iron-verdict.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
@@ -275,6 +280,7 @@ import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
+import _poolMesmerizingDose from "../pool/mesmerizing-dose.js";
 import _poolMetallurgeon from "../pool/metallurgeon.js";
 import _poolMichelangeloMutantBff from "../pool/michelangelo-mutant-bff.js";
 import _poolMigrationPath from "../pool/migration-path.js";
@@ -425,6 +431,7 @@ import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
 import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
 import _poolSteelPlumeMarshal from "../pool/steel-plume-marshal.js";
+import _poolSteelgazeGriffin from "../pool/steelgaze-griffin.js";
 import _poolStingingLionfish from "../pool/stinging-lionfish.js";
 import _poolStonefareCrocodile from "../pool/stonefare-crocodile.js";
 import _poolStormsurgeKraken from "../pool/stormsurge-kraken.js";
@@ -513,6 +520,7 @@ import _poolWhetwheel from "../pool/whetwheel.js";
 import _poolWhiskervaleForerunner from "../pool/whiskervale-forerunner.js";
 import _poolWhisperBloodLiturgist from "../pool/whisper-blood-liturgist.js";
 import _poolWiccanYoungAvenger from "../pool/wiccan-young-avenger.js";
+import _poolWickedWolf from "../pool/wicked-wolf.js";
 import _poolWildwoodRebirth from "../pool/wildwood-rebirth.js";
 import _poolWillowElf from "../pool/willow-elf.js";
 import _poolWindDancer from "../pool/wind-dancer.js";
@@ -575,6 +583,7 @@ const shard: CardShard = {
     _poolBalefireDragon,
     _poolBalmorBattlemageCaptain,
     _poolBaneLordOfDarkness,
+    _poolBanishIntoFable,
     _poolBanishingCoils,
     _poolBarretWallace,
     _poolBarrowNaughty,
@@ -597,6 +606,7 @@ const shard: CardShard = {
     _poolBloodPrice,
     _poolBloodSeeker,
     _poolBloodgiftDemon,
+    _poolBloodhazeWolverine,
     _poolBlossomingDefense,
     _poolBogTatters,
     _poolBogardanRager,
@@ -670,6 +680,7 @@ const shard: CardShard = {
     _poolDivinerOfMist,
     _poolDownInTheValley,
     _poolDragonbackAssault,
+    _poolDramaticAccusation,
     _poolDreadShade,
     _poolDryadsRevival,
     _poolDuelTactics,
@@ -728,6 +739,7 @@ const shard: CardShard = {
     _poolGiftOfGranite,
     _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
+    _poolGlassCasket,
     _poolGlittermonger,
     _poolGoblinHero,
     _poolGoblinMorningstar,
@@ -768,6 +780,7 @@ const shard: CardShard = {
     _poolIndathaCrystal,
     _poolInescapableBlaze,
     _poolInspiringRoar,
+    _poolIrencragPyromancer,
     _poolIronVerdict,
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
@@ -817,6 +830,7 @@ const shard: CardShard = {
     _poolMauhurUrukHaiCaptain,
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,
+    _poolMesmerizingDose,
     _poolMetallurgeon,
     _poolMichelangeloMutantBff,
     _poolMigrationPath,
@@ -967,6 +981,7 @@ const shard: CardShard = {
     _poolStadiumTidalmage,
     _poolStaunchThroneguard,
     _poolSteelPlumeMarshal,
+    _poolSteelgazeGriffin,
     _poolStingingLionfish,
     _poolStonefareCrocodile,
     _poolStormsurgeKraken,
@@ -1055,6 +1070,7 @@ const shard: CardShard = {
     _poolWhiskervaleForerunner,
     _poolWhisperBloodLiturgist,
     _poolWiccanYoungAvenger,
+    _poolWickedWolf,
     _poolWildwoodRebirth,
     _poolWillowElf,
     _poolWindDancer,

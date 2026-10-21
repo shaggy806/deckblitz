@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Throne of Eldraine, whole** (batch 120): its last 137 cards, 107 authored, 30 blocked, by
+  seven `card-author` agents and the lead, with **"doesn't untap during its controller's untap
+  step"** on what a static reaches (the `"doesnt-untap"` restriction, rule 502.3 — Tractor Beam,
+  Back to Basics) and **adamant** (mana spent by colour — `manaSpentOfColors`,
+  `manaSpentOfOneColor`); plus 28 earlier cards the two unblocked (Ikoria's Mythos, the Lorwyn
+  Incarnations Vibrance, Wistfulness, Emptiness, Catharsis and Deceit, Void Mirror, Intruder
+  Alarm, T-45 Power Armor and more) (2026-10-20).
 - **The cards "enchanted creature" in an effect unblocked** (batch 119): 51 earlier-triaged cards,
   39 authored by two `card-author` agents and the lead (Colossification, Pemmin's Aura, Tarrian's
   Soulcleaver, Blade of the Bloodchief, Adventuring Gear and 34 more), 12 still blocked — 7 on

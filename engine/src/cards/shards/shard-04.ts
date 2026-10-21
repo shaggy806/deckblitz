@@ -356,6 +356,7 @@ import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
 import _poolRootSliver from "../pool/root-sliver.js";
+import _poolRowanFearlessSparkmage from "../pool/rowan-fearless-sparkmage.js";
 import _poolRoyalTreatment from "../pool/royal-treatment.js";
 import _poolRubyDaringTracker from "../pool/ruby-daring-tracker.js";
 import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
@@ -500,6 +501,7 @@ import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
 import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
 import _poolWickedVisitor from "../pool/wicked-visitor.js";
+import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
@@ -880,6 +882,7 @@ const shard: CardShard = {
     _poolRitualOfSteel,
     _poolRohgahhKherKeepOverlord,
     _poolRootSliver,
+    _poolRowanFearlessSparkmage,
     _poolRoyalTreatment,
     _poolRubyDaringTracker,
     _poolRugOfSmothering,
@@ -1024,6 +1027,7 @@ const shard: CardShard = {
     _poolWhispersilkCloak,
     _poolWhiteGloveGourmand,
     _poolWickedVisitor,
+    _poolWildwoodTracker,
     _poolWistfulSelkie,
     _poolWitherAndBloom,
     _poolWolfirAvenger,

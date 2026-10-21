@@ -118,6 +118,7 @@ import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
 import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
+import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
@@ -225,6 +226,7 @@ import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
+import _poolInsatiableAppetite from "../pool/insatiable-appetite.js";
 import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
@@ -265,6 +267,7 @@ import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
+import _poolMadRatter from "../pool/mad-ratter.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
@@ -359,6 +362,7 @@ import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
 import _poolRoboticsMastery from "../pool/robotics-mastery.js";
 import _poolRope from "../pool/rope.js";
+import _poolRosethornHalberd from "../pool/rosethorn-halberd.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
@@ -483,6 +487,7 @@ import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
+import _poolUsherToSafety from "../pool/usher-to-safety.js";
 import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVampiresVengeance from "../pool/vampires-vengeance.js";
@@ -658,6 +663,7 @@ const shard: CardShard = {
     _poolDawnhartDisciple,
     _poolDeathSpeakers,
     _poolDeathcapMarionette,
+    _poolDeathlessKnight,
     _poolDebtToTheDeathless,
     _poolDeepwoodDenizen,
     _poolDefyGravity,
@@ -765,6 +771,7 @@ const shard: CardShard = {
     _poolImprovisedAct,
     _poolInfiltratorIlKor,
     _poolInnocuousRat,
+    _poolInsatiableAppetite,
     _poolInspiringBard,
     _poolInstantRamen,
     _poolInvasionSubmersible,
@@ -805,6 +812,7 @@ const shard: CardShard = {
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
     _poolLuminousBroodmoth,
+    _poolMadRatter,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
     _poolMalametBrawler,
@@ -899,6 +907,7 @@ const shard: CardShard = {
     _poolRobotDomination,
     _poolRoboticsMastery,
     _poolRope,
+    _poolRosethornHalberd,
     _poolRottingMastodon,
     _poolRoyalFalcon,
     _poolRulikMonsWarrenChief,
@@ -1023,6 +1032,7 @@ const shard: CardShard = {
     _poolUnexpectedFangs,
     _poolUnhinge,
     _poolUnswervingSloth,
+    _poolUsherToSafety,
     _poolUtromScientists,
     _poolValiantGuard,
     _poolVampiresVengeance,

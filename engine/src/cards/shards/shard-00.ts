@@ -301,8 +301,10 @@ import _poolNightshadeStinger from "../pool/nightshade-stinger.js";
 import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
 import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
+import _poolOkosHospitality from "../pool/okos-hospitality.js";
 import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
 import _poolOminousParcel from "../pool/ominous-parcel.js";
+import _poolOnceAndFuture from "../pool/once-and-future.js";
 import _poolOneWithTheKami from "../pool/one-with-the-kami.js";
 import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
@@ -313,6 +315,7 @@ import _poolOrmendahlTheCorrupter from "../pool/ormendahl-the-corrupter.js";
 import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
 import _poolOutOfTheWay from "../pool/out-of-the-way.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
+import _poolOverwhelmedApprentice from "../pool/overwhelmed-apprentice.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
@@ -352,6 +355,7 @@ import _poolRapturousMoment from "../pool/rapturous-moment.js";
 import _poolRebelliousCaptives from "../pool/rebellious-captives.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
 import _poolRecklessReveler from "../pool/reckless-reveler.js";
+import _poolRedcapMelee from "../pool/redcap-melee.js";
 import _poolReleaseTheDogs from "../pool/release-the-dogs.js";
 import _poolRelicAxe from "../pool/relic-axe.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
@@ -438,6 +442,7 @@ import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
 import _poolStuntDouble from "../pool/stunt-double.js";
 import _poolSultaiMonument from "../pool/sultai-monument.js";
 import _poolSummonGFCerberus from "../pool/summon-g-f-cerberus.js";
+import _poolSunderingStroke from "../pool/sundering-stroke.js";
 import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-legion.js";
 import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
@@ -517,6 +522,7 @@ import _poolWanderingTombshell from "../pool/wandering-tombshell.js";
 import _poolWarOfTheLastAlliance from "../pool/war-of-the-last-alliance.js";
 import _poolWarbeastOfGorgoroth from "../pool/warbeast-of-gorgoroth.js";
 import _poolWasteNot from "../pool/waste-not.js";
+import _poolWateryGrasp from "../pool/watery-grasp.js";
 import _poolWaveskimmerAven from "../pool/waveskimmer-aven.js";
 import _poolWeeDragonauts from "../pool/wee-dragonauts.js";
 import _poolWhipcorder from "../pool/whipcorder.js";
@@ -524,6 +530,7 @@ import _poolWhisperOfTheDross from "../pool/whisper-of-the-dross.js";
 import _poolWibblyWobblyTimeyWimey from "../pool/wibbly-wobbly-timey-wimey.js";
 import _poolWildCeratok from "../pool/wild-ceratok.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
+import _poolWildbornPreserver from "../pool/wildborn-preserver.js";
 import _poolWindriderWizard from "../pool/windrider-wizard.js";
 import _poolWitchingWell from "../pool/witching-well.js";
 import _poolWitchsCauldron from "../pool/witchs-cauldron.js";
@@ -850,8 +857,10 @@ const shard: CardShard = {
     _poolNimblewrightSchematic,
     _poolNyleasForerunner,
     _poolOinTheBrave,
+    _poolOkosHospitality,
     _poolOmegaHeartlessEvolution,
     _poolOminousParcel,
+    _poolOnceAndFuture,
     _poolOneWithTheKami,
     _poolOpenTheGraves,
     _poolOpulentPalace,
@@ -862,6 +871,7 @@ const shard: CardShard = {
     _poolOsgoodOperationDouble,
     _poolOutOfTheWay,
     _poolOutrageousRobbery,
+    _poolOverwhelmedApprentice,
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,
     _poolPakoArcaneRetriever,
@@ -901,6 +911,7 @@ const shard: CardShard = {
     _poolRebelliousCaptives,
     _poolRecklessRansacking,
     _poolRecklessReveler,
+    _poolRedcapMelee,
     _poolReleaseTheDogs,
     _poolRelicAxe,
     _poolReliquaryMonk,
@@ -987,6 +998,7 @@ const shard: CardShard = {
     _poolStuntDouble,
     _poolSultaiMonument,
     _poolSummonGFCerberus,
+    _poolSunderingStroke,
     _poolSunhomeFortressOfTheLegion,
     _poolSunlance,
     _poolSunpetalGrove,
@@ -1066,6 +1078,7 @@ const shard: CardShard = {
     _poolWarOfTheLastAlliance,
     _poolWarbeastOfGorgoroth,
     _poolWasteNot,
+    _poolWateryGrasp,
     _poolWaveskimmerAven,
     _poolWeeDragonauts,
     _poolWhipcorder,
@@ -1073,6 +1086,7 @@ const shard: CardShard = {
     _poolWibblyWobblyTimeyWimey,
     _poolWildCeratok,
     _poolWildUnraveling,
+    _poolWildbornPreserver,
     _poolWindriderWizard,
     _poolWitchingWell,
     _poolWitchsCauldron,

@@ -1940,7 +1940,14 @@ was spent to cast it", `{ subtype: "Treasure" }` "…from a Treasure", and
 type: "creature", atLeast: 2 }`). Each unit is read off its source as it made
 the mana — a Treasure sacrificed for it was still a Treasure — and extra mana a
 triggered mana ability added is that ability's permanent's, not the one tapped.
-Kept by the permanent the spell becomes, like `manaSpent`. `putIntoGraveyardFromLibraryThisTurn` is a
+Kept by the permanent the spell becomes, like `manaSpent`. `manaSpentOfColors`
+is **adamant** and its kin — at least that much of each colour named was spent
+to cast it: "if at least three white mana was spent to cast this spell" is `{
+W: 3 }` (Silverflame Ritual's resolving `source` condition; a Paladin's
+"enters with a +1/+1 counter" is an enters replacement gated on it), "if
+{U}{B} was spent" `{ U: 1, B: 1 }`; `manaSpentOfOneColor: 3` is "three mana
+of the same color" (Henge Walker). A copy of a spell had no mana spent
+(`adamant.test.ts`). `putIntoGraveyardFromLibraryThisTurn` is a
 graveyard card that got there from a library this turn — milled, surveilled,
 or any other library-to-graveyard move, never discarded or destroyed (Captain
 N'ghathrod's end-step target is `{ kind: "card-in-graveyard", whose:

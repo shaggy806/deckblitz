@@ -378,6 +378,7 @@ import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
 import _poolSanctuaryLockdown from "../pool/sanctuary-lockdown.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
+import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
@@ -422,6 +423,7 @@ import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
 import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
 import _poolSteelExemplar from "../pool/steel-exemplar.js";
+import _poolSteelclawLance from "../pool/steelclaw-lance.js";
 import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStolenVitality from "../pool/stolen-vitality.js";
@@ -946,6 +948,7 @@ const shard: CardShard = {
     _poolSamutTheDrivingForce,
     _poolSanctuaryLockdown,
     _poolSavagePackmate,
+    _poolScaldingCauldron,
     _poolScatterTheSeeds,
     _poolScroungeForEternity,
     _poolScurryOak,
@@ -990,6 +993,7 @@ const shard: CardShard = {
     _poolSprout,
     _poolStaffOfTheStoryteller,
     _poolSteelExemplar,
+    _poolSteelclawLance,
     _poolStiltzkinMoogleMerchant,
     _poolStoicRebuttal,
     _poolStolenVitality,

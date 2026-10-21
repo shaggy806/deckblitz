@@ -225,6 +225,7 @@ import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
 import _poolLoAndLiTwinTutors from "../pool/lo-and-li-twin-tutors.js";
+import _poolLockedInTheCemetery from "../pool/locked-in-the-cemetery.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
 import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
@@ -392,6 +393,7 @@ import _poolStrengthOfSolidarity from "../pool/strength-of-solidarity.js";
 import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
+import _poolStunningStrike from "../pool/stunning-strike.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
 import _poolSumalaSentry from "../pool/sumala-sentry.js";
 import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
@@ -450,6 +452,7 @@ import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWalltopSentries from "../pool/walltop-sentries.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
+import _poolWandermare from "../pool/wandermare.js";
 import _poolWardenOfTheInnerSky from "../pool/warden-of-the-inner-sky.js";
 import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
@@ -712,6 +715,7 @@ const shard: CardShard = {
     _poolLizardConnorssCurse,
     _poolLlanowarTribe,
     _poolLoAndLiTwinTutors,
+    _poolLockedInTheCemetery,
     _poolLokhustHeavyDestroyer,
     _poolLoxodonMystic,
     _poolLoyalDrake,
@@ -879,6 +883,7 @@ const shard: CardShard = {
     _poolStromgaldCrusader,
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
+    _poolStunningStrike,
     _poolSulfurVent,
     _poolSumalaSentry,
     _poolSunSpiderNimbleWebber,
@@ -937,6 +942,7 @@ const shard: CardShard = {
     _poolWallOfRoots,
     _poolWalltopSentries,
     _poolWanderingArchaic,
+    _poolWandermare,
     _poolWardenOfTheInnerSky,
     _poolWargTactics,
     _poolWaspShrinkingSavior,

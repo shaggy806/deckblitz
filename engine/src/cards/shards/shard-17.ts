@@ -164,6 +164,7 @@ import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
 import _poolFrostAugur from "../pool/frost-augur.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
+import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
@@ -351,6 +352,7 @@ import _poolRockshardElemental from "../pool/rockshard-elemental.js";
 import _poolRodolfDuskbringer from "../pool/rodolf-duskbringer.js";
 import _poolRollickOfAbandon from "../pool/rollick-of-abandon.js";
 import _poolRootOut from "../pool/root-out.js";
+import _poolRovingKeep from "../pool/roving-keep.js";
 import _poolRustMonster from "../pool/rust-monster.js";
 import _poolRuthlessPredation from "../pool/ruthless-predation.js";
 import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
@@ -686,6 +688,7 @@ const shard: CardShard = {
     _poolFrostAugur,
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
+    _poolGarenbrigPaladin,
     _poolGavonyTrapper,
     _poolGenesisHydra,
     _poolGhostLitWarder,
@@ -873,6 +876,7 @@ const shard: CardShard = {
     _poolRodolfDuskbringer,
     _poolRollickOfAbandon,
     _poolRootOut,
+    _poolRovingKeep,
     _poolRustMonster,
     _poolRuthlessPredation,
     _poolSabertoothWyvern,

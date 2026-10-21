@@ -53,6 +53,7 @@ import _poolBrimstoneTrebuchet from "../pool/brimstone-trebuchet.js";
 import _poolBrinelinTheMoonKraken from "../pool/brinelin-the-moon-kraken.js";
 import _poolBrotherhoodRegalia from "../pool/brotherhood-regalia.js";
 import _poolBurningTreeEmissary from "../pool/burning-tree-emissary.js";
+import _poolBurningYardTrainer from "../pool/burning-yard-trainer.js";
 import _poolCabalStronghold from "../pool/cabal-stronghold.js";
 import _poolCactarantula from "../pool/cactarantula.js";
 import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
@@ -163,6 +164,7 @@ import _poolGlamorousGrapplers from "../pool/glamorous-grapplers.js";
 import _poolGleamOfBattle from "../pool/gleam-of-battle.js";
 import _poolGleamingBarrier from "../pool/gleaming-barrier.js";
 import _poolGleamingOverseer from "../pool/gleaming-overseer.js";
+import _poolGluttonousTroll from "../pool/gluttonous-troll.js";
 import _poolGoblinFirebomb from "../pool/goblin-firebomb.js";
 import _poolGoblinSharpshooter from "../pool/goblin-sharpshooter.js";
 import _poolGoldenBear from "../pool/golden-bear.js";
@@ -180,6 +182,7 @@ import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
+import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
@@ -284,6 +287,7 @@ import _poolModelOfUnity from "../pool/model-of-unity.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
+import _poolMoonlitScavengers from "../pool/moonlit-scavengers.js";
 import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
 import _poolMossPitSkeleton from "../pool/moss-pit-skeleton.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
@@ -518,6 +522,7 @@ import _poolWillOfTheMardu from "../pool/will-of-the-mardu.js";
 import _poolWiltLeafCavaliers from "../pool/wilt-leaf-cavaliers.js";
 import _poolWingedSliver from "../pool/winged-sliver.js";
 import _poolWirewoodSavage from "../pool/wirewood-savage.js";
+import _poolWistfulness from "../pool/wistfulness.js";
 import _poolWrathOfGod from "../pool/wrath-of-god.js";
 import _poolXiraArien from "../pool/xira-arien.js";
 import _poolYiazmatUltimateMark from "../pool/yiazmat-ultimate-mark.js";
@@ -603,6 +608,7 @@ const shard: CardShard = {
     _poolBrinelinTheMoonKraken,
     _poolBrotherhoodRegalia,
     _poolBurningTreeEmissary,
+    _poolBurningYardTrainer,
     _poolCabalStronghold,
     _poolCactarantula,
     _poolCallOfTheHerd,
@@ -713,6 +719,7 @@ const shard: CardShard = {
     _poolGleamOfBattle,
     _poolGleamingBarrier,
     _poolGleamingOverseer,
+    _poolGluttonousTroll,
     _poolGoblinFirebomb,
     _poolGoblinSharpshooter,
     _poolGoldenBear,
@@ -730,6 +737,7 @@ const shard: CardShard = {
     _poolHauntedCloak,
     _poolHearthbornBattler,
     _poolHellkiteOverlord,
+    _poolHengeWalker,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
     _poolHeronBlessedGeist,
@@ -834,6 +842,7 @@ const shard: CardShard = {
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMoltenRebuke,
+    _poolMoonlitScavengers,
     _poolMordenkainensPolymorph,
     _poolMossPitSkeleton,
     _poolMostValuableSlayer,
@@ -1068,6 +1077,7 @@ const shard: CardShard = {
     _poolWiltLeafCavaliers,
     _poolWingedSliver,
     _poolWirewoodSavage,
+    _poolWistfulness,
     _poolWrathOfGod,
     _poolXiraArien,
     _poolYiazmatUltimateMark,

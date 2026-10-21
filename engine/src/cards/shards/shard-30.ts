@@ -262,6 +262,7 @@ import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
 import _poolJemLightfooteSkyExplorer from "../pool/jem-lightfoote-sky-explorer.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolJodahsCodex from "../pool/jodahs-codex.js";
+import _poolJoust from "../pool/joust.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
 import _poolKazuulsCliffs from "../pool/kazuuls-cliffs.js";
@@ -414,6 +415,7 @@ import _poolShivanHellkite from "../pool/shivan-hellkite.js";
 import _poolShreddingWinds from "../pool/shredding-winds.js";
 import _poolShrineOfTheForsakenGods from "../pool/shrine-of-the-forsaken-gods.js";
 import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
+import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
@@ -794,6 +796,7 @@ const shard: CardShard = {
     _poolJemLightfooteSkyExplorer,
     _poolJeongJeongsDeserters,
     _poolJodahsCodex,
+    _poolJoust,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,
     _poolKazuulsCliffs,
@@ -946,6 +949,7 @@ const shard: CardShard = {
     _poolShreddingWinds,
     _poolShrineOfTheForsakenGods,
     _poolShuSoldierFarmers,
+    _poolSilverflameRitual,
     _poolSkitteringCicada,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,

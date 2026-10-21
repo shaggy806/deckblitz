@@ -36,6 +36,7 @@ import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
+import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
@@ -127,6 +128,7 @@ import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
+import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenBow from "../pool/elven-bow.js";
@@ -146,6 +148,7 @@ import _poolExpeditionDiviner from "../pool/expedition-diviner.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolExuberantWolfbear from "../pool/exuberant-wolfbear.js";
+import _poolEyeCollector from "../pool/eye-collector.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFacelessHaven from "../pool/faceless-haven.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
@@ -503,6 +506,7 @@ import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
 import _poolVotaryOfTheConclave from "../pool/votary-of-the-conclave.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
 import _poolWaterServant from "../pool/water-servant.js";
+import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
 import _poolWeaponizeTheMonsters from "../pool/weaponize-the-monsters.js";
 import _poolWeatherlight from "../pool/weatherlight.js";
 import _poolWeightOfTheUnderworld from "../pool/weight-of-the-underworld.js";
@@ -577,6 +581,7 @@ const shard: CardShard = {
     _poolBallistaCharger,
     _poolBarbedBloodletter,
     _poolBargain,
+    _poolBargeIn,
     _poolBarkKnuckleBoxer,
     _poolBeatrixLoyalGeneral,
     _poolBetorKinToAll,
@@ -668,6 +673,7 @@ const shard: CardShard = {
     _poolDwarvenBloodboiler,
     _poolEarthKingdomProtectors,
     _poolEchoInspector,
+    _poolEdgewallInnkeeper,
     _poolElementalMascot,
     _poolEleshNornMotherOfMachines,
     _poolElvenBow,
@@ -687,6 +693,7 @@ const shard: CardShard = {
     _poolExploreTheUnderdark,
     _poolExtractFromDarkness,
     _poolExuberantWolfbear,
+    _poolEyeCollector,
     _poolEyeOfRamos,
     _poolFacelessHaven,
     _poolFadeIntoAntiquity,
@@ -1044,6 +1051,7 @@ const shard: CardShard = {
     _poolVotaryOfTheConclave,
     _poolWallOfIce,
     _poolWaterServant,
+    _poolWeakstonesSubjugation,
     _poolWeaponizeTheMonsters,
     _poolWeatherlight,
     _poolWeightOfTheUnderworld,

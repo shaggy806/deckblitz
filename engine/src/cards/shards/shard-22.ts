@@ -493,7 +493,9 @@ import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
 import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
+import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
+import _poolVenerableKnight from "../pool/venerable-knight.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
 import _poolVillagePillagers from "../pool/village-pillagers.js";
@@ -1037,7 +1039,9 @@ const shard: CardShard = {
     _poolUrabrasksAnointer,
     _poolUtvaraScalper,
     _poolValleyMightcaller,
+    _poolVantressPaladin,
     _poolVectorAsp,
+    _poolVenerableKnight,
     _poolViashinoRacketeer,
     _poolViciousKavu,
     _poolVillagePillagers,

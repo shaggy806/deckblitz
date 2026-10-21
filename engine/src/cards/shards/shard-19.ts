@@ -36,6 +36,7 @@ import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
+import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
 import _poolBenalishTrapper from "../pool/benalish-trapper.js";
 import _poolBewilder from "../pool/bewilder.js";
 import _poolBeyeenVeil from "../pool/beyeen-veil.js";
@@ -164,6 +165,7 @@ import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
 import _poolFeralIncarnation from "../pool/feral-incarnation.js";
 import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
+import _poolFerocityOfTheWilds from "../pool/ferocity-of-the-wilds.js";
 import _poolFerventCharge from "../pool/fervent-charge.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
@@ -189,6 +191,7 @@ import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGeyserDrake from "../pool/geyser-drake.js";
 import _poolGiantFly from "../pool/giant-fly.js";
+import _poolGiantOpportunity from "../pool/giant-opportunity.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
 import _poolGildedGhoda from "../pool/gilded-ghoda.js";
 import _poolGildedLotus from "../pool/gilded-lotus.js";
@@ -417,6 +420,7 @@ import _poolSerraZealot from "../pool/serra-zealot.js";
 import _poolShadowInTheWarp from "../pool/shadow-in-the-warp.js";
 import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
 import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
+import _poolShamblingSuit from "../pool/shambling-suit.js";
 import _poolShangChiAndTheTenRings from "../pool/shang-chi-and-the-ten-rings.js";
 import _poolShatteredWings from "../pool/shattered-wings.js";
 import _poolShefetDunes from "../pool/shefet-dunes.js";
@@ -475,6 +479,7 @@ import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
+import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
@@ -493,6 +498,7 @@ import _poolTriumphantReckoning from "../pool/triumphant-reckoning.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolTumbleweedRising from "../pool/tumbleweed-rising.js";
 import _poolTundraTank from "../pool/tundra-tank.js";
+import _poolTurnIntoAPumpkin from "../pool/turn-into-a-pumpkin.js";
 import _poolTurnabout from "../pool/turnabout.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
@@ -595,6 +601,7 @@ const shard: CardShard = {
     _poolBanishingSlash,
     _poolBarbarianHorde,
     _poolBedheadBeastie,
+    _poolBelleOfTheBrawl,
     _poolBenalishTrapper,
     _poolBewilder,
     _poolBeyeenVeil,
@@ -723,6 +730,7 @@ const shard: CardShard = {
     _poolFellTheMighty,
     _poolFeralIncarnation,
     _poolFerocityOfTheHunt,
+    _poolFerocityOfTheWilds,
     _poolFerventCharge,
     _poolFireLordZuko,
     _poolFireNationRaider,
@@ -748,6 +756,7 @@ const shard: CardShard = {
     _poolGenesisUltimatum,
     _poolGeyserDrake,
     _poolGiantFly,
+    _poolGiantOpportunity,
     _poolGiantSpider,
     _poolGildedGhoda,
     _poolGildedLotus,
@@ -976,6 +985,7 @@ const shard: CardShard = {
     _poolShadowInTheWarp,
     _poolShadowTheHedgehog,
     _poolShadowmageInfiltrator,
+    _poolShamblingSuit,
     _poolShangChiAndTheTenRings,
     _poolShatteredWings,
     _poolShefetDunes,
@@ -1034,6 +1044,7 @@ const shard: CardShard = {
     _poolTajuruSnarecaster,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
+    _poolTasteOfDeath,
     _poolTazeemRoilmage,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
@@ -1052,6 +1063,7 @@ const shard: CardShard = {
     _poolTroyanGutsyExplorer,
     _poolTumbleweedRising,
     _poolTundraTank,
+    _poolTurnIntoAPumpkin,
     _poolTurnabout,
     _poolUlamogsDreadsire,
     _poolUltronTheAnnihilator,

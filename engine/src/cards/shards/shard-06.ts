@@ -78,6 +78,7 @@ import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
+import _poolCharmedSleep from "../pool/charmed-sleep.js";
 import _poolChasmSkulker from "../pool/chasm-skulker.js";
 import _poolChillingChronicle from "../pool/chilling-chronicle.js";
 import _poolChillingTrap from "../pool/chilling-trap.js";
@@ -153,6 +154,7 @@ import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
+import _poolFeastingTrollKing from "../pool/feasting-troll-king.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
@@ -251,6 +253,7 @@ import _poolLongstalkBrawl from "../pool/longstalk-brawl.js";
 import _poolLoransEscape from "../pool/lorans-escape.js";
 import _poolLoreholdExcavation from "../pool/lorehold-excavation.js";
 import _poolLotlethGiant from "../pool/lotleth-giant.js";
+import _poolLovestruckBeast from "../pool/lovestruck-beast.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
@@ -605,6 +608,7 @@ const shard: CardShard = {
     _poolCazurRuthlessStalker,
     _poolCentaurHealer,
     _poolCharcoalDiamond,
+    _poolCharmedSleep,
     _poolChasmSkulker,
     _poolChillingChronicle,
     _poolChillingTrap,
@@ -680,6 +684,7 @@ const shard: CardShard = {
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
     _poolFateshaperAspirant,
+    _poolFeastingTrollKing,
     _poolFelidarSovereign,
     _poolFerociousWerefox,
     _poolFireNationCadets,
@@ -778,6 +783,7 @@ const shard: CardShard = {
     _poolLoransEscape,
     _poolLoreholdExcavation,
     _poolLotlethGiant,
+    _poolLovestruckBeast,
     _poolLuminousAngel,
     _poolLydiaFrye,
     _poolManaCrypt,
