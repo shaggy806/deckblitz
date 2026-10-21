@@ -1634,11 +1634,10 @@ export const filterLand = (
  * returns a land you control to your hand as it enters, and taps for two mana
  * of its two colours at once.
  *
- * Ten cards on one template. The bounce is a *choice* on the printed card and
- * a target here (`land-you-control`), because the engine has no "choose a
- * permanent you control" for a return; see that spec for why the difference
- * doesn't bite. The land may return itself, which is what the printed card
- * does when it is your only one.
+ * Ten cards on one template. The bounce is a choice made as the trigger
+ * resolves, not a target (`choose-permanents`): a shroud land can be
+ * returned, and nothing can make the trigger fizzle. The land may return
+ * itself, which is what the printed card does when it is your only one.
  */
 export const karooLand = (
   name: string,
@@ -1657,8 +1656,15 @@ export const karooLand = (
     triggered: [
       {
         trigger: { on: "enters-battlefield", who: "self" },
-        targets: ["land-you-control"],
-        effect: { kind: "return-to-hand", target: 0 },
+        targets: [],
+        effect: {
+          kind: "choose-permanents",
+          filter: { type: "land", controlledBy: "you" },
+          min: 1,
+          upTo: 1,
+          then: { kind: "return-to-hand", target: 0 },
+          prompt: "Return a land you control to its owner's hand",
+        },
         resolve: null,
         text: `When ${name} enters, return a land you control to its owner's hand.`,
       },

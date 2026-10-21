@@ -113,6 +113,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
+- **Losing loyalty never emits `counter-removed`.** Damage dealt to a planeswalker removes that
+  many loyalty counters from it (rule 306.8), and a loyalty ability's minus cost removes them too
+  (606.4), but both only emit `loyalty-changed` (`game.ts`, the planeswalker damage and the
+  loyalty-cost payment), never `counter-removed`. So a `counters-removed` trigger with `counter:
+  "loyalty"` can't fire: Chandra, Fire Artisan's "Whenever one or more loyalty counters are
+  removed from Chandra" (`trigger:loyalty-counters-removed`, B123). Emitting the removal on both
+  paths, batched per event, would close it.
 - **A merged permanent's token status is its own object's.** Rule 730.2d: a merged permanent is a
   token only if its topmost component is. `GameObject.isToken` stays the original object's, so a
   card mutated on top of a token still reads as a token ("nontoken creature" filters, token

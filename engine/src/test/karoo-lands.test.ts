@@ -14,6 +14,7 @@ import { Game } from "../game.js";
 import { isLegalTarget, legalTargets } from "../targeting.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
+import { pickPermanents, settle, table, toHand, zone } from "./harness.js";
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
@@ -95,5 +96,21 @@ describe("Karoo lands", () => {
 
     expect(game.state.objects[forest].zone).toBe("hand");
     expect(game.state.objects[karoo].tapped).toBe(true);
+  });
+});
+
+describe("the Karoo's bounce", () => {
+  it("is a choice made as the trigger resolves, not a target (the printed card)", () => {
+    const { game, a } = table();
+    const forest = game.debugSpawn("Forest", A);
+    const karoo = toHand(game, "Azorius Chancery");
+    const seen = pickPermanents(a, karoo);
+    game.dispatch({ type: "play-land", player: A, card: karoo });
+    game.advanceUntil((s) => s.zones.shared.stack.length === 1);
+    expect(game.state.zones.shared.stack.map((id) => game.state.objects[id]?.targets ?? []).flat()).toHaveLength(0);
+    settle(game);
+    expect(seen.offered.slice().sort()).toEqual([forest, karoo].sort());
+    expect(zone(game, karoo)).toBe("hand");
+    expect(zone(game, forest)).toBe("battlefield");
   });
 });
