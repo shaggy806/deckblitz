@@ -158,6 +158,17 @@ where the decision is raised); bots and the fuzzer answer it already.
   seeded decks and the real chapters, the in-game tour stops, raising the hand tray while a hand
   card is spotlit, pausing the opponent under a Next card mid-game.
 
+- **A local game can't be picked up without the room server** (a bug report, 2026-10-20). Since
+  then a server drop under a local game is ridden out (`local/localSocket.ts`'s `HybridSocket`
+  reopens only its server side, quietly), but a page *load* still needs the server: the page's
+  `onopen` — where `useNetworkGame` joins the URL's `?room=` — is the server socket's, so a
+  reload with the wifi down sits on "Reconnecting" though the worker restored the game from
+  IndexedDB. A blitz's pasted list also needs the server (`POST /import-deck`). Fix outline: when
+  the URL's room is one of the tab's local rooms (`isLocalRoom`), have `HybridSocket` raise its
+  `onopen` from the worker, not the server, and keep reopening the server half behind it; the
+  risk is a page that thinks it's connected sending a lobby message to a server that isn't there,
+  which `HybridSocket.send` already turns into a dropped socket.
+
 **The initiative and the venture marker have no animation**
 
 The plan (`docs/plans/initiative-dungeons.md`, section 6) asks for two small cues through

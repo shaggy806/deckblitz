@@ -39,7 +39,7 @@ import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
 import { localStart } from '../lobby/localStart.ts'
 import { listDecks } from '../deck-builder/decks.ts'
-import { HybridSocket } from '../local/localSocket.ts'
+import { HybridSocket, isLocalRoom } from '../local/localSocket.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
 
 const SERVER_URL =
@@ -499,8 +499,12 @@ export function useNetworkGame(): NetworkGame {
     // In local mode a blitz's and a lesson's rooms run in a worker in this
     // tab instead (`local/localSocket.ts`); the messages are the same either
     // way, and everything else still goes to the server.
-    const server = new WebSocket(SERVER_URL) as RoomSocket
-    const ws: RoomSocket = localMode() ? new HybridSocket(server) : server
+    const ws: RoomSocket = localMode()
+      ? new HybridSocket(
+          () => new WebSocket(SERVER_URL) as RoomSocket,
+          () => isLocalRoom(roomIdRef.current),
+        )
+      : (new WebSocket(SERVER_URL) as RoomSocket)
     wsRef.current = ws
     isPlayingRef.current = false
     const isCurrent = () => wsRef.current === ws

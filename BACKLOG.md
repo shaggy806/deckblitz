@@ -323,6 +323,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The site should default to slow bots and slow animations** (the user, 2026-10-14): so people getting used to the site aren't overwhelmed by the speed. The defaults behind Settings' bot speed (`client/src/ui/botSpeeds.ts`, the room's `botSpeed`) and animation speed (`client/src/ui/MotionControl.tsx`, `game/motionPrefs.ts`).
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15): the hovered hand card shrinks long text until it can't be read (The Dawning Archaic); no fix in mind yet.
+- **The reconnecting / lost-connection screen replaces the whole page** (the user, 2026-10-20): make it a dimming filter over the most recent screen with a popup in the middle, rather than an entirely different screen (`App.tsx`'s `game.status === 'disconnected'` branch).
+- **A local game can't be picked up without the room server** (a bug report, 2026-10-20): a drop mid-game no longer shows "Reconnecting", but a reload (or any page load into a local room) still waits for the server's socket to open before it rejoins the worker's game; detail in `docs/client-gaps.md`.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

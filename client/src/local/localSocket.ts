@@ -150,6 +150,18 @@ function remember(rooms: ReadonlySet<string>): void {
 /** The codes of the rooms this tab's worker made — what `HybridSocket` routes by. */
 const localRooms = rememberedRooms()
 
+/** Whether `roomId` is one of this tab's worker's rooms. */
+export function isLocalRoom(roomId: string | null): boolean {
+  return roomId !== null && localRooms.has(roomId)
+}
+
+/** The longest wait between attempts to reopen the server's connection under
+ * a game here: the page's own (`useNetworkGame`'s `MAX_RECONNECT_DELAY_MS`). */
+const MAX_REOPEN_DELAY_MS = 8000
+
+/** Where a `HybridSocket` that has given its server connection up sends. */
+const NO_SERVER: RoomSocket = { send: () => {}, close: () => {}, onopen: null, onmessage: null, onclose: null, onerror: null }
+
 /** The tab's one room worker, shared by every `HybridSocket` the page opens,
  * so a reconnect to the server doesn't end a game played here. */
 let tabWorker: LocalSocket | null = null
@@ -172,26 +184,99 @@ export class HybridSocket implements RoomSocket {
   onmessage: ((event: { readonly data: unknown }) => void) | null = null
   onclose: (() => void) | null = null
   onerror: (() => void) | null = null
-  private readonly server: RoomSocket
+  private server: RoomSocket
   private local: LocalSocket | null = null
   private closed = false
   /** Creates sent to the worker that it hasn't answered with a room yet:
    * what goes to the server instead if it fails first. */
   private unanswered: string[] = []
+  /** Set while the server's connection is down under a game played here,
+   * which needs nothing of it: it's opened again quietly meanwhile. */
+  private serverDown = false
+  private reopenAttempt = 0
+  private reopenTimer: ReturnType<typeof setTimeout> | null = null
 
-  constructor(server: RoomSocket) {
-    this.server = server
-    server.onopen = () => this.onopen?.()
-    server.onmessage = (event) => this.onmessage?.(event)
-    server.onclose = () => this.onclose?.()
-    server.onerror = () => this.onerror?.()
+  /**
+   * `openServer` opens a connection to the room server; `playingHere` says
+   * whether the page is in one of the worker's rooms. A drop of the server's
+   * connection mid-game here isn't the page's to see (a bug report,
+   * 2026-10-20: a local blitz went to "Reconnecting" with the wifi): only
+   * the server's side is opened again, with the page's own backoff, and
+   * the page hears of the drop only if it sends the server something before
+   * that's done — then as a dropped socket, and reconnects as ever.
+   */
+  constructor(openServer: () => RoomSocket, playingHere: () => boolean = () => false) {
+    this.openServer = openServer
+    this.playingHere = playingHere
+    this.server = this.attachServer(openServer(), false)
   }
 
-  /** To the worker when it's for a room the worker made, else to the server. */
+  private readonly openServer: () => RoomSocket
+  private readonly playingHere: () => boolean
+
+  /** Whether a game here (or one being made) needs this socket and not the
+   * server: the worker's up and the page is in one of its rooms. */
+  private holdingGame(): boolean {
+    return this.local !== null && !this.local.dead && (this.playingHere() || this.unanswered.length > 0)
+  }
+
+  /** Wires `server` to this socket. A reopened one (`quiet`) isn't news to
+   * the page: it's told it wants event slices, as the page tells a new one. */
+  private attachServer(server: RoomSocket, quiet: boolean): RoomSocket {
+    const current = () => this.server === server && !this.closed
+    server.onopen = () => {
+      if (!current()) return
+      if (!quiet) {
+        this.onopen?.()
+        return
+      }
+      this.serverDown = false
+      this.reopenAttempt = 0
+      server.send(JSON.stringify({ type: 'event-deltas' }))
+    }
+    server.onmessage = (event) => {
+      if (current()) this.onmessage?.(event)
+    }
+    server.onclose = () => {
+      if (!current()) return
+      if (this.holdingGame()) {
+        this.serverDown = true
+        const delay = Math.min(1000 * 2 ** this.reopenAttempt, MAX_REOPEN_DELAY_MS)
+        this.reopenAttempt += 1
+        this.reopenTimer = setTimeout(() => {
+          this.reopenTimer = null
+          if (!this.closed) this.server = this.attachServer(this.openServer(), true)
+        }, delay)
+        return
+      }
+      this.onclose?.()
+    }
+    server.onerror = () => {
+      if (current() && !this.holdingGame()) this.onerror?.()
+    }
+    return server
+  }
+
+  /** To the worker when it's for a room the worker made, else to the server
+   * — which, if it's down under a game here, the page now hears of. */
   send(data: string): void {
     const roomId = roomIdOf(data)
     if (roomId !== null && localRooms.has(roomId)) this.worker().send(data)
+    else if (this.serverDown) this.dropServer()
     else this.server.send(data)
+  }
+
+  /** The server's connection went down under a game here and is still down
+   * when the page wants it: the page hears of it now, as a dropped socket. */
+  private dropServer(): void {
+    if (this.reopenTimer !== null) clearTimeout(this.reopenTimer)
+    this.reopenTimer = null
+    this.serverDown = false
+    const server = this.server
+    // No longer this socket's: whatever it does next is nobody's news.
+    this.server = NO_SERVER
+    server.close()
+    this.onclose?.()
   }
 
   /** To the worker, whatever it is: a blitz's or a lesson's create — or, once
@@ -207,6 +292,8 @@ export class HybridSocket implements RoomSocket {
 
   close(): void {
     this.closed = true
+    if (this.reopenTimer !== null) clearTimeout(this.reopenTimer)
+    this.reopenTimer = null
     this.server.close()
     if (this.local !== null) {
       this.local.onmessage = null
