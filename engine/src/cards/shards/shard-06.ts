@@ -77,6 +77,7 @@ import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
+import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
 import _poolCharmedSleep from "../pool/charmed-sleep.js";
 import _poolChasmSkulker from "../pool/chasm-skulker.js";
@@ -452,6 +453,7 @@ import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
 import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
+import _poolTomeboundLich from "../pool/tomebound-lich.js";
 import _poolTormodsCryptkeeper from "../pool/tormods-cryptkeeper.js";
 import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
 import _poolTouchOfBrilliance from "../pool/touch-of-brilliance.js";
@@ -607,6 +609,7 @@ const shard: CardShard = {
     _poolCasualtiesOfWar,
     _poolCazurRuthlessStalker,
     _poolCentaurHealer,
+    _poolChandraNovicePyromancer,
     _poolCharcoalDiamond,
     _poolCharmedSleep,
     _poolChasmSkulker,
@@ -982,6 +985,7 @@ const shard: CardShard = {
     _poolTimeSieve,
     _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
+    _poolTomeboundLich,
     _poolTormodsCryptkeeper,
     _poolTotentanzSwarmPiper,
     _poolTouchOfBrilliance,

@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2019 and Core Set 2020, whole** (batch 121): C19's last 28 cards (11 authored)
+  and M20's last 89 (74 authored), by five `card-author` agents and the lead, no engine change —
+  Volrath, the Shapestealer, Sevinne, the Chronoclasm, Ghired, Conclave Exile, the M20
+  planeswalkers (Chandra, Flame's Fury and Novice Pyromancer, Ajani, Inspiring Leader, Sorin,
+  Vampire Lord, Mu Yanling, Celestial Wind, Vivien, Nature's Avenger) with their support cards,
+  and the Elementals; 32 blocked (2026-10-21).
 - **Throne of Eldraine, whole** (batch 120): its last 137 cards, 107 authored, 30 blocked, by
   seven `card-author` agents and the lead, with **"doesn't untap during its controller's untap
   step"** on what a static reaches (the `"doesnt-untap"` restriction, rule 502.3 — Tractor Beam,

@@ -339,6 +339,7 @@ import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
+import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
 import _poolOrganHoarder from "../pool/organ-hoarder.js";
 import _poolOrzhovLocket from "../pool/orzhov-locket.js";
@@ -405,6 +406,7 @@ import _poolSanguineSavior from "../pool/sanguine-savior.js";
 import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
 import _poolScaretiller from "../pool/scaretiller.js";
 import _poolScavengerGrounds from "../pool/scavenger-grounds.js";
+import _poolScholarOfTheAges from "../pool/scholar-of-the-ages.js";
 import _poolScionOfOona from "../pool/scion-of-oona.js";
 import _poolScorchedRusalka from "../pool/scorched-rusalka.js";
 import _poolScreamPuff from "../pool/scream-puff.js";
@@ -904,6 +906,7 @@ const shard: CardShard = {
     _poolNissaResurgentAnimist,
     _poolNorwoodWarrior,
     _poolOgreBerserker,
+    _poolOgreSiegebreaker,
     _poolOrderOfTheWhiteShield,
     _poolOrganHoarder,
     _poolOrzhovLocket,
@@ -970,6 +973,7 @@ const shard: CardShard = {
     _poolSaruliCaretaker,
     _poolScaretiller,
     _poolScavengerGrounds,
+    _poolScholarOfTheAges,
     _poolScionOfOona,
     _poolScorchedRusalka,
     _poolScreamPuff,

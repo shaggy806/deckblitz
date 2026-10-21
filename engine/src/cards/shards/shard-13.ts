@@ -87,6 +87,7 @@ import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
 import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
 import _poolCavernWhisperer from "../pool/cavern-whisperer.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
+import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
@@ -425,6 +426,7 @@ import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
 import _poolSpringjawTrap from "../pool/springjaw-trap.js";
 import _poolSpringmantleCleric from "../pool/springmantle-cleric.js";
+import _poolSquadCaptain from "../pool/squad-captain.js";
 import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
 import _poolStallOut from "../pool/stall-out.js";
@@ -523,6 +525,7 @@ import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
+import _poolYaroksFenlurker from "../pool/yaroks-fenlurker.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZenithFlare from "../pool/zenith-flare.js";
 import _poolZephid from "../pool/zephid.js";
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolCavernOfSouls,
     _poolCavernWhisperer,
     _poolCelestialUnicorn,
+    _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
     _poolClamorShaman,
     _poolCloakwoodHermit,
@@ -970,6 +974,7 @@ const shard: CardShard = {
     _poolSpontaneousCombustion,
     _poolSpringjawTrap,
     _poolSpringmantleCleric,
+    _poolSquadCaptain,
     _poolStagecoachSecurity,
     _poolStaggeringSize,
     _poolStallOut,
@@ -1068,6 +1073,7 @@ const shard: CardShard = {
     _poolWinotaJoinerOfForces,
     _poolWizardsRockets,
     _poolWoodlandPatrol,
+    _poolYaroksFenlurker,
     _poolYouSeeAPairOfGoblins,
     _poolZenithFlare,
     _poolZephid,

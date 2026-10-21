@@ -91,6 +91,7 @@ import _poolCorpseBlockade from "../pool/corpse-blockade.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCragplateBaloth from "../pool/cragplate-baloth.js";
+import _poolCreepingTrailblazer from "../pool/creeping-trailblazer.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
@@ -490,6 +491,7 @@ import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
 import _poolUnderdarkExplorer from "../pool/underdark-explorer.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
+import _poolUnholyIndenture from "../pool/unholy-indenture.js";
 import _poolUnlikelyAid from "../pool/unlikely-aid.js";
 import _poolUnquenchableFury from "../pool/unquenchable-fury.js";
 import _poolUnsealTheNecropolis from "../pool/unseal-the-necropolis.js";
@@ -517,16 +519,19 @@ import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVitosInquisitor from "../pool/vitos-inquisitor.js";
 import _poolVividMarsh from "../pool/vivid-marsh.js";
+import _poolViviensCrocodile from "../pool/viviens-crocodile.js";
 import _poolVivisectionEvangelist from "../pool/vivisection-evangelist.js";
 import _poolVolatileArsonist from "../pool/volatile-arsonist.js";
 import _poolVolatileWanderglyph from "../pool/volatile-wanderglyph.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
+import _poolWaterkinShaman from "../pool/waterkin-shaman.js";
 import _poolWaylayingPirates from "../pool/waylaying-pirates.js";
 import _poolWellWornSpatula from "../pool/well-worn-spatula.js";
 import _poolWhipSilk from "../pool/whip-silk.js";
 import _poolWildOx from "../pool/wild-ox.js";
+import _poolWildfireElemental from "../pool/wildfire-elemental.js";
 import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
 import _poolWildfireWickerfolk from "../pool/wildfire-wickerfolk.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
@@ -536,6 +541,7 @@ import _poolWitherbloomApprentice from "../pool/witherbloom-apprentice.js";
 import _poolWorldlyTutor from "../pool/worldly-tutor.js";
 import _poolWreckingCrew from "../pool/wrecking-crew.js";
 import _poolXerexStrobeKnight from "../pool/xerex-strobe-knight.js";
+import _poolYaroksWavecrasher from "../pool/yaroks-wavecrasher.js";
 import _poolYasminKhan from "../pool/yasmin-khan.js";
 import _poolYavimayaCoast from "../pool/yavimaya-coast.js";
 import _poolYouFindSomePrisoners from "../pool/you-find-some-prisoners.js";
@@ -653,6 +659,7 @@ const shard: CardShard = {
     _poolCorrodingDragonstorm,
     _poolCourtOfBounty,
     _poolCragplateBaloth,
+    _poolCreepingTrailblazer,
     _poolCrookclawElder,
     _poolCrownOfSkemfar,
     _poolCrystalGrotto,
@@ -1052,6 +1059,7 @@ const shard: CardShard = {
     _poolUnderdarkExplorer,
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
+    _poolUnholyIndenture,
     _poolUnlikelyAid,
     _poolUnquenchableFury,
     _poolUnsealTheNecropolis,
@@ -1079,16 +1087,19 @@ const shard: CardShard = {
     _poolVithianRenegades,
     _poolVitosInquisitor,
     _poolVividMarsh,
+    _poolViviensCrocodile,
     _poolVivisectionEvangelist,
     _poolVolatileArsonist,
     _poolVolatileWanderglyph,
     _poolVronosMaskedInquisitor,
     _poolVulshokSplitter,
     _poolWatchwolf,
+    _poolWaterkinShaman,
     _poolWaylayingPirates,
     _poolWellWornSpatula,
     _poolWhipSilk,
     _poolWildOx,
+    _poolWildfireElemental,
     _poolWildfireEmissary,
     _poolWildfireWickerfolk,
     _poolWindSpirit,
@@ -1098,6 +1109,7 @@ const shard: CardShard = {
     _poolWorldlyTutor,
     _poolWreckingCrew,
     _poolXerexStrobeKnight,
+    _poolYaroksWavecrasher,
     _poolYasminKhan,
     _poolYavimayaCoast,
     _poolYouFindSomePrisoners,

@@ -421,6 +421,7 @@ import _poolSlithBloodletter from "../pool/slith-bloodletter.js";
 import _poolSmotheringTithe from "../pool/smothering-tithe.js";
 import _poolSolemnity from "../pool/solemnity.js";
 import _poolSolidarity from "../pool/solidarity.js";
+import _poolSorinVampireLord from "../pool/sorin-vampire-lord.js";
 import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulSear from "../pool/soul-sear.js";
 import _poolSoulmender from "../pool/soulmender.js";
@@ -532,6 +533,7 @@ import _tokensMinotaurToken from "../tokens/minotaur-token.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
+import _tokensSculptureToken from "../tokens/sculpture-token.js";
 import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-token-irregular-cohort.js";
 import _tokensSheepToken from "../tokens/sheep-token.js";
 import _tokensSoldierTokenWhite22 from "../tokens/soldier-token-white-2-2.js";
@@ -960,6 +962,7 @@ const shard: CardShard = {
     _poolSmotheringTithe,
     _poolSolemnity,
     _poolSolidarity,
+    _poolSorinVampireLord,
     _poolSoulEnervation,
     _poolSoulSear,
     _poolSoulmender,
@@ -1073,6 +1076,7 @@ const shard: CardShard = {
     _tokensNinjaTurtleSpiritToken,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,
+    _tokensSculptureToken,
     _tokensShapeshifterTokenIrregularCohort,
     _tokensSheepToken,
     _tokensSoldierTokenWhite22,

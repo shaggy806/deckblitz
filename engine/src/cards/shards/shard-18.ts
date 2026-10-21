@@ -131,6 +131,7 @@ import _poolEntryDenied from "../pool/entry-denied.js";
 import _poolEscapeProtocol from "../pool/escape-protocol.js";
 import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
+import _poolEternalIsolation from "../pool/eternal-isolation.js";
 import _poolEvangelOfSynthesis from "../pool/evangel-of-synthesis.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
@@ -686,6 +687,7 @@ const shard: CardShard = {
     _poolEscapeProtocol,
     _poolEsikasChariot,
     _poolEssenceExtraction,
+    _poolEternalIsolation,
     _poolEvangelOfSynthesis,
     _poolExpandingOoze,
     _poolExpansion,

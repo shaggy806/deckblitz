@@ -39,6 +39,7 @@ import _poolBalefireLiege from "../pool/balefire-liege.js";
 import _poolBalinLoremaster from "../pool/balin-loremaster.js";
 import _poolBarrensteppeSiege from "../pool/barrensteppe-siege.js";
 import _poolBastionEnforcer from "../pool/bastion-enforcer.js";
+import _poolBattalionFootSoldier from "../pool/battalion-foot-soldier.js";
 import _poolBatterbone from "../pool/batterbone.js";
 import _poolBattleOfHooverDam from "../pool/battle-of-hoover-dam.js";
 import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
@@ -65,6 +66,7 @@ import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
 import _poolChainOfVapor from "../pool/chain-of-vapor.js";
+import _poolChandrasEmbercat from "../pool/chandras-embercat.js";
 import _poolCharge from "../pool/charge.js";
 import _poolCheckpointOfficer from "../pool/checkpoint-officer.js";
 import _poolChildrenOfKorlis from "../pool/children-of-korlis.js";
@@ -291,6 +293,7 @@ import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
+import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
@@ -369,6 +372,7 @@ import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSeismicWave from "../pool/seismic-wave.js";
 import _poolSeraphOfNewPhyrexia from "../pool/seraph-of-new-phyrexia.js";
+import _poolSevinneTheChronoclasm from "../pool/sevinne-the-chronoclasm.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
 import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
 import _poolShadowProphecy from "../pool/shadow-prophecy.js";
@@ -563,6 +567,7 @@ const shard: CardShard = {
     _poolBalinLoremaster,
     _poolBarrensteppeSiege,
     _poolBastionEnforcer,
+    _poolBattalionFootSoldier,
     _poolBatterbone,
     _poolBattleOfHooverDam,
     _poolBattleflightEagle,
@@ -589,6 +594,7 @@ const shard: CardShard = {
     _poolCarrionLocust,
     _poolCascadeBluffs,
     _poolChainOfVapor,
+    _poolChandrasEmbercat,
     _poolCharge,
     _poolCheckpointOfficer,
     _poolChildrenOfKorlis,
@@ -815,6 +821,7 @@ const shard: CardShard = {
     _poolNightOfTheSweetsRevenge,
     _poolNimanaSkydancer,
     _poolNornsInquisitor,
+    _poolNoxiousGrasp,
     _poolNyleasIntervention,
     _poolObyraDreamingDuelist,
     _poolOgreSentry,
@@ -893,6 +900,7 @@ const shard: CardShard = {
     _poolSeethingLandscape,
     _poolSeismicWave,
     _poolSeraphOfNewPhyrexia,
+    _poolSevinneTheChronoclasm,
     _poolSewnEyeDrake,
     _poolShabrazTheSkyshark,
     _poolShadowProphecy,

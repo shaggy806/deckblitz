@@ -201,6 +201,7 @@ import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
 import _poolGoblinMaskmaker from "../pool/goblin-maskmaker.js";
+import _poolGoblinSmuggler from "../pool/goblin-smuggler.js";
 import _poolGoblinSpymaster from "../pool/goblin-spymaster.js";
 import _poolGollumSilentSlinker from "../pool/gollum-silent-slinker.js";
 import _poolGoreSwine from "../pool/gore-swine.js";
@@ -400,6 +401,7 @@ import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
 import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
+import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
@@ -735,6 +737,7 @@ const shard: CardShard = {
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
     _poolGoblinMaskmaker,
+    _poolGoblinSmuggler,
     _poolGoblinSpymaster,
     _poolGollumSilentSlinker,
     _poolGoreSwine,
@@ -934,6 +937,7 @@ const shard: CardShard = {
     _poolSandstormCharger,
     _poolSanguinaryMage,
     _poolSaurianSymbiote,
+    _poolSavageGorger,
     _poolSavageLands,
     _poolSelflessSafewright,
     _poolSephirothsIntervention,

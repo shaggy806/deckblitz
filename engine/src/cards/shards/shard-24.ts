@@ -8,6 +8,7 @@ import _poolAcclaimedContender from "../pool/acclaimed-contender.js";
 import _poolAcidicSlime from "../pool/acidic-slime.js";
 import _poolAdantoTheFirstFort from "../pool/adanto-the-first-fort.js";
 import _poolAdventurousEater from "../pool/adventurous-eater.js";
+import _poolAerialAssault from "../pool/aerial-assault.js";
 import _poolAesthirGlider from "../pool/aesthir-glider.js";
 import _poolAgentOfAtlas from "../pool/agent-of-atlas.js";
 import _poolAgentOfStromgald from "../pool/agent-of-stromgald.js";
@@ -37,6 +38,7 @@ import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
 import _poolBannersRaised from "../pool/banners-raised.js";
+import _poolBarkhideTroll from "../pool/barkhide-troll.js";
 import _poolBaronBertramGraywater from "../pool/baron-bertram-graywater.js";
 import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
@@ -60,6 +62,7 @@ import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
 import _poolBreach from "../pool/breach.js";
 import _poolBrineGiant from "../pool/brine-giant.js";
+import _poolBrinebornCutthroat from "../pool/brineborn-cutthroat.js";
 import _poolBronzeSable from "../pool/bronze-sable.js";
 import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
 import _poolBubbleUp from "../pool/bubble-up.js";
@@ -162,9 +165,11 @@ import _poolFinalShowdown from "../pool/final-showdown.js";
 import _poolFireElemental from "../pool/fire-elemental.js";
 import _poolFireball from "../pool/fireball.js";
 import _poolFlameOn from "../pool/flame-on.js";
+import _poolFlameSweep from "../pool/flame-sweep.js";
 import _poolFlatline from "../pool/flatline.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
+import _poolFry from "../pool/fry.js";
 import _poolGadwickTheWizened from "../pool/gadwick-the-wizened.js";
 import _poolGanglyStompling from "../pool/gangly-stompling.js";
 import _poolGastalThrillroller from "../pool/gastal-thrillroller.js";
@@ -340,6 +345,7 @@ import _poolSarkhanTheDragonspeaker from "../pool/sarkhan-the-dragonspeaker.js";
 import _poolSatyrGrovedancer from "../pool/satyr-grovedancer.js";
 import _poolSavageLandDinosaur from "../pool/savage-land-dinosaur.js";
 import _poolSavageTwister from "../pool/savage-twister.js";
+import _poolScorchSpitter from "../pool/scorch-spitter.js";
 import _poolScorpionSentinel from "../pool/scorpion-sentinel.js";
 import _poolScourgeOfValkas from "../pool/scourge-of-valkas.js";
 import _poolScrapworkCohort from "../pool/scrapwork-cohort.js";
@@ -514,6 +520,7 @@ const shard: CardShard = {
     _poolAcidicSlime,
     _poolAdantoTheFirstFort,
     _poolAdventurousEater,
+    _poolAerialAssault,
     _poolAesthirGlider,
     _poolAgentOfAtlas,
     _poolAgentOfStromgald,
@@ -543,6 +550,7 @@ const shard: CardShard = {
     _poolBalefulStrix,
     _poolBaneAlleyBlackguard,
     _poolBannersRaised,
+    _poolBarkhideTroll,
     _poolBaronBertramGraywater,
     _poolBassaraTowerArcher,
     _poolBattershieldWarrior,
@@ -566,6 +574,7 @@ const shard: CardShard = {
     _poolBrashTaunter,
     _poolBreach,
     _poolBrineGiant,
+    _poolBrinebornCutthroat,
     _poolBronzeSable,
     _poolBroodmateTyrant,
     _poolBubbleUp,
@@ -668,9 +677,11 @@ const shard: CardShard = {
     _poolFireElemental,
     _poolFireball,
     _poolFlameOn,
+    _poolFlameSweep,
     _poolFlatline,
     _poolFootSoldiers,
     _poolFrontierGuide,
+    _poolFry,
     _poolGadwickTheWizened,
     _poolGanglyStompling,
     _poolGastalThrillroller,
@@ -846,6 +857,7 @@ const shard: CardShard = {
     _poolSatyrGrovedancer,
     _poolSavageLandDinosaur,
     _poolSavageTwister,
+    _poolScorchSpitter,
     _poolScorpionSentinel,
     _poolScourgeOfValkas,
     _poolScrapworkCohort,

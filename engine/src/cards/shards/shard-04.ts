@@ -440,6 +440,7 @@ import _poolTheSensationalSheHulk from "../pool/the-sensational-she-hulk.js";
 import _poolTheVision from "../pool/the-vision.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
+import _poolThirstingBloodlord from "../pool/thirsting-bloodlord.js";
 import _poolThorGuardianOfMidgard from "../pool/thor-guardian-of-midgard.js";
 import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
@@ -505,6 +506,7 @@ import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
+import _poolWoodlandChampion from "../pool/woodland-champion.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
@@ -966,6 +968,7 @@ const shard: CardShard = {
     _poolTheVision,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,
+    _poolThirstingBloodlord,
     _poolThorGuardianOfMidgard,
     _poolThorinOakenshield,
     _poolThrorsMap,
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolWistfulSelkie,
     _poolWitherAndBloom,
     _poolWolfirAvenger,
+    _poolWoodlandChampion,
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
     _poolYavimayaBarbarian,

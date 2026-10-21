@@ -61,6 +61,7 @@ import _poolBlossomingDefense from "../pool/blossoming-defense.js";
 import _poolBogTatters from "../pool/bog-tatters.js";
 import _poolBogardanRager from "../pool/bogardan-rager.js";
 import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
+import _poolBonecladNecromancer from "../pool/boneclad-necromancer.js";
 import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
 import _poolBorosGuildgate from "../pool/boros-guildgate.js";
@@ -79,7 +80,9 @@ import _poolBywayBarterer from "../pool/byway-barterer.js";
 import _poolCallASurpriseWitness from "../pool/call-a-surprise-witness.js";
 import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
+import _poolCaptivatingGyre from "../pool/captivating-gyre.js";
 import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
+import _poolCelestialMessenger from "../pool/celestial-messenger.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
@@ -232,6 +235,7 @@ import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
 import _poolIronVerdict from "../pool/iron-verdict.js";
+import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
@@ -416,6 +420,7 @@ import _poolSnarlSong from "../pool/snarl-song.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
+import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
@@ -611,6 +616,7 @@ const shard: CardShard = {
     _poolBogTatters,
     _poolBogardanRager,
     _poolBoggartBirthRite,
+    _poolBonecladNecromancer,
     _poolBoompile,
     _poolBorealDruid,
     _poolBorosGuildgate,
@@ -629,7 +635,9 @@ const shard: CardShard = {
     _poolCallASurpriseWitness,
     _poolCanyonMinotaur,
     _poolCapitalGuard,
+    _poolCaptivatingGyre,
     _poolCaseyJonesVigilante,
+    _poolCelestialMessenger,
     _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,
     _poolChangelingWayfinder,
@@ -782,6 +790,7 @@ const shard: CardShard = {
     _poolInspiringRoar,
     _poolIrencragPyromancer,
     _poolIronVerdict,
+    _poolIronrootWarlord,
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
     _poolJeskaiBanner,
@@ -966,6 +975,7 @@ const shard: CardShard = {
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
+    _poolSorinsGuide,
     _poolSoulSnuffers,
     _poolSozinsComet,
     _poolSpatialContortion,

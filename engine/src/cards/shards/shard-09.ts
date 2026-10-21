@@ -85,6 +85,7 @@ import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
+import _poolCeruleanDrake from "../pool/cerulean-drake.js";
 import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
@@ -202,6 +203,7 @@ import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGriptide from "../pool/griptide.js";
+import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
@@ -642,6 +644,7 @@ const shard: CardShard = {
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
     _poolCatlikeCuriosity,
+    _poolCeruleanDrake,
     _poolChaplainOfAlms,
     _poolChargeTheSanctum,
     _poolCharmingPrince,
@@ -759,6 +762,7 @@ const shard: CardShard = {
     _poolGrahamObrien,
     _poolGraspOfPhantoms,
     _poolGriptide,
+    _poolGrismoldTheDreadsower,
     _poolGuardianGladewalker,
     _poolHamperingSnare,
     _poolHarbinVanguardAviator,

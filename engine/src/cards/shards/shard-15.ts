@@ -18,6 +18,7 @@ import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
+import _poolAnjesRavager from "../pool/anjes-ravager.js";
 import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
 import _poolArdenvaleTactician from "../pool/ardenvale-tactician.js";
@@ -117,6 +118,7 @@ import _poolDragToTheUnderworld from "../pool/drag-to-the-underworld.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
 import _poolDrannithStinger from "../pool/drannith-stinger.js";
+import _poolDrawnFromDreams from "../pool/drawn-from-dreams.js";
 import _poolDreamstoneHedron from "../pool/dreamstone-hedron.js";
 import _poolDromarsAttendant from "../pool/dromars-attendant.js";
 import _poolDrownInShapelessness from "../pool/drown-in-shapelessness.js";
@@ -503,6 +505,7 @@ import _poolWingedPortent from "../pool/winged-portent.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
+import _poolYanlingsHarbinger from "../pool/yanlings-harbinger.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYuanTiMalison from "../pool/yuan-ti-malison.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
@@ -515,6 +518,7 @@ import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
 import _tokensForestTentacleToken from "../tokens/forest-tentacle-token.js";
 import _tokensGoatToken from "../tokens/goat-token.js";
 import _tokensGoblinToken from "../tokens/goblin-token.js";
+import _tokensGreenPlantToken11 from "../tokens/green-plant-token-1-1.js";
 import _tokensGuenhwyvar from "../tokens/guenhwyvar.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
@@ -545,6 +549,7 @@ const shard: CardShard = {
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
     _poolAnglerDrake,
+    _poolAnjesRavager,
     _poolAqueousAria,
     _poolArcboundWhelp,
     _poolArdenvaleTactician,
@@ -644,6 +649,7 @@ const shard: CardShard = {
     _poolDragonTrainer,
     _poolDragonmasterOutcast,
     _poolDrannithStinger,
+    _poolDrawnFromDreams,
     _poolDreamstoneHedron,
     _poolDromarsAttendant,
     _poolDrownInShapelessness,
@@ -1030,6 +1036,7 @@ const shard: CardShard = {
     _poolWorthyKnight,
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,
+    _poolYanlingsHarbinger,
     _poolYoungPyromancer,
     _poolYuanTiMalison,
     _poolYumaProudProtector,
@@ -1044,6 +1051,7 @@ const shard: CardShard = {
     _tokensForestTentacleToken,
     _tokensGoatToken,
     _tokensGoblinToken,
+    _tokensGreenPlantToken11,
     _tokensGuenhwyvar,
     _tokensHumanClericToken,
     _tokensMonkToken,

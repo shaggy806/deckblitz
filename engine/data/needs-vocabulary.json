@@ -8876,6 +8876,49 @@
   "cost:sacrifice-other-only-in-one-branch": {
    "family": "cost:sacrifice-another-creature-or-an-artifact",
    "example": "Malevolent Noble"
+  },
+  "effect:populate-x-times": {
+   "family": "effect:populate-created-token-ref",
+   "example": "Full Flowering"
+  },
+  "effect:counter-all-abilities": {
+   "family": "effect:counter-ability",
+   "example": "Kadena's Silencer"
+  },
+  "effect:reverse-turn-order": {
+   "example": "Aeon Engine"
+  },
+  "effect:grant-play-from-graveyard-snapshot": {
+   "family": "effect:player-effect-play-lands-from-graveyard",
+   "example": "Kethis, the Hidden Hand"
+  },
+  "amount:count-distinct-mana-costs": {
+   "family": "effect:count-distinct-mana-values",
+   "example": "Embodiment of Agonies"
+  },
+  "effect:end-the-combat-phase": {
+   "example": "Mandate of Peace"
+  },
+  "effect:delayed-trigger-dealt-damage-this-way-dies": {
+   "family": "replacement:dealt-damage-this-way-exile-if-dies",
+   "example": "Ghired's Belligerence"
+  },
+  "trigger:dealt-damage-by-opponent-source": {
+   "example": "Archfiend of Spite"
+  },
+  "static:keywords-from-exiled-with-counter": {
+   "family": "static:keywords-from-exiled-with-source",
+   "example": "Rayami, First of the Fallen"
+  },
+  "effect:exile-from-hand-by-filter": {
+   "example": "Thought Distortion"
+  },
+  "effect:return-commanders-to-command-zone": {
+   "example": "Leadership Vacuum"
+  },
+  "filter:has-madness": {
+   "family": "keyword:madness",
+   "example": "Anje Falkenrath"
   }
  }
 }

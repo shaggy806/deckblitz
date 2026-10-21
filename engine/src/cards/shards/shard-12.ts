@@ -72,6 +72,7 @@ import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
+import _poolChandrasFlameWave from "../pool/chandras-flame-wave.js";
 import _poolChargingSlateback from "../pool/charging-slateback.js";
 import _poolChargingStrifeknight from "../pool/charging-strifeknight.js";
 import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
@@ -104,6 +105,7 @@ import _poolDerelictAttic from "../pool/derelict-attic.js";
 import _poolDesertersDisciple from "../pool/deserters-disciple.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
 import _poolDetainedByLegionnaires from "../pool/detained-by-legionnaires.js";
+import _poolDevoutDecree from "../pool/devout-decree.js";
 import _poolDimirCluestone from "../pool/dimir-cluestone.js";
 import _poolDirgurFocusmage from "../pool/dirgur-focusmage.js";
 import _poolDisaTheRestless from "../pool/disa-the-restless.js";
@@ -195,6 +197,8 @@ import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
 import _poolGrotagBugCatcher from "../pool/grotag-bug-catcher.js";
+import _poolGrowthCycle from "../pool/growth-cycle.js";
+import _poolGruesomeScourger from "../pool/gruesome-scourger.js";
 import _poolGuerrillaGorilla from "../pool/guerrilla-gorilla.js";
 import _poolGumdropPoisoner from "../pool/gumdrop-poisoner.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
@@ -259,6 +263,7 @@ import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
+import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
@@ -490,6 +495,7 @@ import _poolVizzerdrix from "../pool/vizzerdrix.js";
 import _poolVoltaicConstruct from "../pool/voltaic-construct.js";
 import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
+import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
@@ -507,6 +513,7 @@ import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWolfbat from "../pool/wolfbat.js";
+import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
@@ -601,6 +608,7 @@ const shard: CardShard = {
     _poolCelebrateTheMountainKing,
     _poolChampionOfDusan,
     _poolChampionOfDusk,
+    _poolChandrasFlameWave,
     _poolChargingSlateback,
     _poolChargingStrifeknight,
     _poolChocoSeekerOfParadise,
@@ -633,6 +641,7 @@ const shard: CardShard = {
     _poolDesertersDisciple,
     _poolDestinySpinner,
     _poolDetainedByLegionnaires,
+    _poolDevoutDecree,
     _poolDimirCluestone,
     _poolDirgurFocusmage,
     _poolDisaTheRestless,
@@ -724,6 +733,8 @@ const shard: CardShard = {
     _poolGreaterAuramancy,
     _poolGremlinTamer,
     _poolGrotagBugCatcher,
+    _poolGrowthCycle,
+    _poolGruesomeScourger,
     _poolGuerrillaGorilla,
     _poolGumdropPoisoner,
     _poolGwaihirGreatestOfTheEagles,
@@ -788,6 +799,7 @@ const shard: CardShard = {
     _poolManifestDread,
     _poolMarbleDiamond,
     _poolMarwynThePreserver,
+    _poolMasterfulReplication,
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
     _poolMentorsGuidance,
@@ -1019,6 +1031,7 @@ const shard: CardShard = {
     _poolVoltaicConstruct,
     _poolVorstclaw,
     _poolVowOfDuty,
+    _poolWakerootElemental,
     _poolWanderingMind,
     _poolWarMammoth,
     _poolWasteland,
@@ -1036,6 +1049,7 @@ const shard: CardShard = {
     _poolWitherbloomCommand,
     _poolWitheringCurse,
     _poolWolfbat,
+    _poolWolfridersSaddle,
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,

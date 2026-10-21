@@ -51,6 +51,7 @@ import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingBomb from "../pool/blazing-bomb.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
 import _poolBloodletting from "../pool/bloodletting.js";
+import _poolBloodsoakedAltar from "../pool/bloodsoaked-altar.js";
 import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
 import _poolBloombrute from "../pool/bloombrute.js";
 import _poolBlurredMongoose from "../pool/blurred-mongoose.js";
@@ -70,6 +71,7 @@ import _poolBriaRiptideRogue from "../pool/bria-riptide-rogue.js";
 import _poolBridgeworksBattle from "../pool/bridgeworks-battle.js";
 import _poolBrightbladeStoat from "../pool/brightblade-stoat.js";
 import _poolBrightclimbPathway from "../pool/brightclimb-pathway.js";
+import _poolBrightwoodTracker from "../pool/brightwood-tracker.js";
 import _poolBrotherhoodsEnd from "../pool/brotherhoods-end.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
 import _poolBumiBash from "../pool/bumi-bash.js";
@@ -196,6 +198,7 @@ import _poolGlademuse from "../pool/glademuse.js";
 import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
+import _poolGnarlbackRhino from "../pool/gnarlback-rhino.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
 import _poolGoblinWizardry from "../pool/goblin-wizardry.js";
@@ -265,6 +268,7 @@ import _poolKyrenFlamewright from "../pool/kyren-flamewright.js";
 import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
+import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
@@ -525,6 +529,7 @@ import _poolTrenchWurm from "../pool/trench-wurm.js";
 import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
 import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
+import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
@@ -629,6 +634,7 @@ const shard: CardShard = {
     _poolBlazingBomb,
     _poolBlazingFiresinger,
     _poolBloodletting,
+    _poolBloodsoakedAltar,
     _poolBloodsoakedInsight,
     _poolBloombrute,
     _poolBlurredMongoose,
@@ -648,6 +654,7 @@ const shard: CardShard = {
     _poolBridgeworksBattle,
     _poolBrightbladeStoat,
     _poolBrightclimbPathway,
+    _poolBrightwoodTracker,
     _poolBrotherhoodsEnd,
     _poolBullHippo,
     _poolBumiBash,
@@ -774,6 +781,7 @@ const shard: CardShard = {
     _poolGlamerGifter,
     _poolGloriousAnthem,
     _poolGlowstoneRecluse,
+    _poolGnarlbackRhino,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
     _poolGoblinWizardry,
@@ -843,6 +851,7 @@ const shard: CardShard = {
     _poolLabyrinthOfSkophos,
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
+    _poolLavakinBrawler,
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,
@@ -1103,6 +1112,7 @@ const shard: CardShard = {
     _poolTrollAscetic,
     _poolTrostaniDiscordant,
     _poolTrystanPenitentCuller,
+    _poolTwinbladePaladin,
     _poolTwistedFealty,
     _poolUndeadAugur,
     _poolUrdnanDromokaWarrior,

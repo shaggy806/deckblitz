@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
+import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
@@ -131,6 +132,7 @@ import _poolDispatch from "../pool/dispatch.js";
 import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
+import _poolDoomedArtisan from "../pool/doomed-artisan.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
 import _poolDreadSummons from "../pool/dread-summons.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
@@ -572,6 +574,7 @@ const shard: CardShard = {
   pool: [
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
+    _poolAetherGust,
     _poolAetherHub,
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
@@ -698,6 +701,7 @@ const shard: CardShard = {
     _poolDisplacerBeast,
     _poolDivineTransformation,
     _poolDivineVerdict,
+    _poolDoomedArtisan,
     _poolDranaLiberatorOfMalakir,
     _poolDreadSummons,
     _poolDregscapeZombie,

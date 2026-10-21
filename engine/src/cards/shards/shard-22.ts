@@ -7,11 +7,13 @@ import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAcolyteOfAffliction from "../pool/acolyte-of-affliction.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
+import _poolAjaniInspiringLeader from "../pool/ajani-inspiring-leader.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
 import _poolAlenaKessigTrapper from "../pool/alena-kessig-trapper.js";
 import _poolAllOfHistoryAllAtOnce from "../pool/all-of-history-all-at-once.js";
 import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
+import _poolAncestralBlade from "../pool/ancestral-blade.js";
 import _poolAngelOfFlightAlabaster from "../pool/angel-of-flight-alabaster.js";
 import _poolAngelOfTheGodPharaoh from "../pool/angel-of-the-god-pharaoh.js";
 import _poolAngelicAccord from "../pool/angelic-accord.js";
@@ -553,11 +555,13 @@ const shard: CardShard = {
     _poolAcolyteOfAffliction,
     _poolAetherTunnel,
     _poolAjaniFellsTheGodsire,
+    _poolAjaniInspiringLeader,
     _poolAkoumWarrior,
     _poolAlenaKessigTrapper,
     _poolAllOfHistoryAllAtOnce,
     _poolAlmostPerfect,
     _poolAmateurHero,
+    _poolAncestralBlade,
     _poolAngelOfFlightAlabaster,
     _poolAngelOfTheGodPharaoh,
     _poolAngelicAccord,

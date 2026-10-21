@@ -138,6 +138,7 @@ import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
 import _poolEternalStudent from "../pool/eternal-student.js";
+import _poolEtherealElk from "../pool/ethereal-elk.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
 import _poolEttercap from "../pool/ettercap.js";
 import _poolExcavationTechnique from "../pool/excavation-technique.js";
@@ -178,6 +179,7 @@ import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.j
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
 import _poolGallantPieWielder from "../pool/gallant-pie-wielder.js";
 import _poolGalliaTheMerrymaker from "../pool/gallia-the-merrymaker.js";
+import _poolGauntletsOfLight from "../pool/gauntlets-of-light.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
 import _poolGetALegUp from "../pool/get-a-leg-up.js";
@@ -503,6 +505,7 @@ import _poolVivienOnTheHunt from "../pool/vivien-on-the-hunt.js";
 import _poolVizierOfRemedies from "../pool/vizier-of-remedies.js";
 import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
+import _poolVolrathTheShapestealer from "../pool/volrath-the-shapestealer.js";
 import _poolVotaryOfTheConclave from "../pool/votary-of-the-conclave.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
 import _poolWaterServant from "../pool/water-servant.js";
@@ -683,6 +686,7 @@ const shard: CardShard = {
     _poolEnduringInnocence,
     _poolErietteOfTheCharmedApple,
     _poolEternalStudent,
+    _poolEtherealElk,
     _poolEtheriumAstrolabe,
     _poolEttercap,
     _poolExcavationTechnique,
@@ -723,6 +727,7 @@ const shard: CardShard = {
     _poolFurtiveHomunculus,
     _poolGallantPieWielder,
     _poolGalliaTheMerrymaker,
+    _poolGauntletsOfLight,
     _poolGelectrode,
     _poolGenerousVisitor,
     _poolGetALegUp,
@@ -1048,6 +1053,7 @@ const shard: CardShard = {
     _poolVizierOfRemedies,
     _poolVoicelessSpirit,
     _poolVoloGuideToMonsters,
+    _poolVolrathTheShapestealer,
     _poolVotaryOfTheConclave,
     _poolWallOfIce,
     _poolWaterServant,

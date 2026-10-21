@@ -320,6 +320,7 @@ import _poolOrbOfDragonkind from "../pool/orb-of-dragonkind.js";
 import _poolOtrimiTheEverPlayful from "../pool/otrimi-the-ever-playful.js";
 import _poolOubliette from "../pool/oubliette.js";
 import _poolOvergrowth from "../pool/overgrowth.js";
+import _poolPackMastiff from "../pool/pack-mastiff.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
 import _poolParadoxZone from "../pool/paradox-zone.js";
@@ -362,6 +363,7 @@ import _poolRegalUnicorn from "../pool/regal-unicorn.js";
 import _poolRelicGolem from "../pool/relic-golem.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
+import _poolRetributiveWand from "../pool/retributive-wand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRidesEnd from "../pool/rides-end.js";
@@ -890,6 +892,7 @@ const shard: CardShard = {
     _poolOtrimiTheEverPlayful,
     _poolOubliette,
     _poolOvergrowth,
+    _poolPackMastiff,
     _poolPainDistributor,
     _poolPalladiumMyr,
     _poolParadoxZone,
@@ -932,6 +935,7 @@ const shard: CardShard = {
     _poolRelicGolem,
     _poolRelicSloth,
     _poolRemand,
+    _poolRetributiveWand,
     _poolReturnToDust,
     _poolRhysticStudy,
     _poolRidesEnd,

@@ -57,6 +57,7 @@ import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
 import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
+import _poolBloodForBones from "../pool/blood-for-bones.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
 import _poolBloodriteInvoker from "../pool/bloodrite-invoker.js";
 import _poolBloodrockCyclops from "../pool/bloodrock-cyclops.js";
@@ -184,6 +185,7 @@ import _poolGleefulDemolition from "../pool/gleeful-demolition.js";
 import _poolGlintHornBuccaneer from "../pool/glint-horn-buccaneer.js";
 import _poolGlowingAnemone from "../pool/glowing-anemone.js";
 import _poolGoHogWild from "../pool/go-hog-wild.js";
+import _poolGoblinBirdGrabber from "../pool/goblin-bird-grabber.js";
 import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
@@ -266,6 +268,7 @@ import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
+import _poolLoxodonLifechanter from "../pool/loxodon-lifechanter.js";
 import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
 import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
 import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
@@ -392,6 +395,7 @@ import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
+import _poolSelesnyaEulogist from "../pool/selesnya-eulogist.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
 import _poolSelfReflection from "../pool/self-reflection.js";
 import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
@@ -467,6 +471,7 @@ import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
 import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
+import _poolThicketCrasher from "../pool/thicket-crasher.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
@@ -603,6 +608,7 @@ const shard: CardShard = {
     _poolBladedBattleFan,
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
+    _poolBloodForBones,
     _poolBloodflowConnoisseur,
     _poolBloodriteInvoker,
     _poolBloodrockCyclops,
@@ -730,6 +736,7 @@ const shard: CardShard = {
     _poolGlintHornBuccaneer,
     _poolGlowingAnemone,
     _poolGoHogWild,
+    _poolGoblinBirdGrabber,
     _poolGoblinEngineer,
     _poolGoblinMatron,
     _poolGoblinTraprunner,
@@ -812,6 +819,7 @@ const shard: CardShard = {
     _poolLightningBlow,
     _poolLostLegion,
     _poolLotusGuardian,
+    _poolLoxodonLifechanter,
     _poolLuluLoyalHollyphant,
     _poolLumenClassFrigate,
     _poolMabelValleyHero,
@@ -938,6 +946,7 @@ const shard: CardShard = {
     _poolScorchedGeyser,
     _poolScrollboost,
     _poolSeizedFromSlumber,
+    _poolSelesnyaEulogist,
     _poolSelesnyaSignet,
     _poolSelfReflection,
     _poolSelfcraftMechan,
@@ -1013,6 +1022,7 @@ const shard: CardShard = {
     _poolTheFinalDays,
     _poolTheLordMasterOfHell,
     _poolThermoAlchemist,
+    _poolThicketCrasher,
     _poolThopterAssembly,
     _poolThopterShop,
     _poolThorin,

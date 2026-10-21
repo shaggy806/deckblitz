@@ -211,6 +211,7 @@ import _poolHellspurPosseBoss from "../pool/hellspur-posse-boss.js";
 import _poolHelmOfTheHost from "../pool/helm-of-the-host.js";
 import _poolHengegatePathway from "../pool/hengegate-pathway.js";
 import _poolHeraldOfIlharg from "../pool/herald-of-ilharg.js";
+import _poolHeraldOfTheSun from "../pool/herald-of-the-sun.js";
 import _poolHighPriestOfPenance from "../pool/high-priest-of-penance.js";
 import _poolHighlandForest from "../pool/highland-forest.js";
 import _poolHillcomberGiant from "../pool/hillcomber-giant.js";
@@ -264,6 +265,7 @@ import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
+import _poolMaskOfImmolation from "../pool/mask-of-immolation.js";
 import _poolMerfolkSecretkeeper from "../pool/merfolk-secretkeeper.js";
 import _poolMerfolkWindrobber from "../pool/merfolk-windrobber.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
@@ -311,6 +313,7 @@ import _poolOrneryTumblewagg from "../pool/ornery-tumblewagg.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
 import _poolOsseousExhale from "../pool/osseous-exhale.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
+import _poolOvergrowthElemental from "../pool/overgrowth-elemental.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
 import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
@@ -732,6 +735,7 @@ const shard: CardShard = {
     _poolHelmOfTheHost,
     _poolHengegatePathway,
     _poolHeraldOfIlharg,
+    _poolHeraldOfTheSun,
     _poolHighPriestOfPenance,
     _poolHighlandForest,
     _poolHillcomberGiant,
@@ -785,6 +789,7 @@ const shard: CardShard = {
     _poolMangaraTheDiplomat,
     _poolMarkovBaron,
     _poolMarwynTheNurturer,
+    _poolMaskOfImmolation,
     _poolMerfolkSecretkeeper,
     _poolMerfolkWindrobber,
     _poolMerryWardenOfIsengard,
@@ -832,6 +837,7 @@ const shard: CardShard = {
     _poolOrzhovSignet,
     _poolOsseousExhale,
     _poolOvalchaseDragster,
+    _poolOvergrowthElemental,
     _poolOverwriteTheMultiverse,
     _poolParadoxSurveyor,
     _poolParallelLives,

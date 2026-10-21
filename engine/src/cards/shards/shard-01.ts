@@ -477,6 +477,7 @@ import _poolVengefulPossession from "../pool/vengeful-possession.js";
 import _poolVeteranCavalier from "../pool/veteran-cavalier.js";
 import _poolVirusBeetle from "../pool/virus-beetle.js";
 import _poolVisaraTheDreadful from "../pool/visara-the-dreadful.js";
+import _poolVivienNaturesAvenger from "../pool/vivien-natures-avenger.js";
 import _poolVizkopaVampire from "../pool/vizkopa-vampire.js";
 import _poolVoidmageProdigy from "../pool/voidmage-prodigy.js";
 import _poolVolcanicSpite from "../pool/volcanic-spite.js";
@@ -999,6 +1000,7 @@ const shard: CardShard = {
     _poolVeteranCavalier,
     _poolVirusBeetle,
     _poolVisaraTheDreadful,
+    _poolVivienNaturesAvenger,
     _poolVizkopaVampire,
     _poolVoidmageProdigy,
     _poolVolcanicSpite,

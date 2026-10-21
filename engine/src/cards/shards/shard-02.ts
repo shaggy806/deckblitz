@@ -384,6 +384,7 @@ import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
+import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
 import _poolSilverflameSquire from "../pool/silverflame-squire.js";
@@ -898,6 +899,7 @@ const shard: CardShard = {
     _poolShalaiVoiceOfPlenty,
     _poolShatterskullGiant,
     _poolShepherdOfTheClouds,
+    _poolShiftingCeratops,
     _poolSickleRipper,
     _poolSilkWebWeaver,
     _poolSilverflameSquire,

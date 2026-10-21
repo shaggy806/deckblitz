@@ -203,6 +203,7 @@ import _poolGoblinRoughrider from "../pool/goblin-roughrider.js";
 import _poolGoblinSettler from "../pool/goblin-settler.js";
 import _poolGodoBanditWarlord from "../pool/godo-bandit-warlord.js";
 import _poolGoldenHind from "../pool/golden-hind.js";
+import _poolGorgingVulture from "../pool/gorging-vulture.js";
 import _poolGoringWarplow from "../pool/goring-warplow.js";
 import _poolGrandCrescendo from "../pool/grand-crescendo.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
@@ -417,6 +418,7 @@ import _poolSkeletonArcher from "../pool/skeleton-archer.js";
 import _poolSkorpekhLord from "../pool/skorpekh-lord.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
+import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
@@ -751,6 +753,7 @@ const shard: CardShard = {
     _poolGoblinSettler,
     _poolGodoBanditWarlord,
     _poolGoldenHind,
+    _poolGorgingVulture,
     _poolGoringWarplow,
     _poolGrandCrescendo,
     _poolGrappleWithThePast,
@@ -965,6 +968,7 @@ const shard: CardShard = {
     _poolSkorpekhLord,
     _poolSkyTheaterStrix,
     _poolSkycoachConductor,
+    _poolSkyfirePhoenix,
     _poolSlagdrillScrapper,
     _poolSnapcasterMage,
     _poolSolRing,

@@ -225,6 +225,7 @@ import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
 import _poolHandOfEnlightenment from "../pool/hand-of-enlightenment.js";
+import _poolHardCover from "../pool/hard-cover.js";
 import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
@@ -479,6 +480,7 @@ import _poolThievingOtter from "../pool/thieving-otter.js";
 import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
 import _poolThranSpider from "../pool/thran-spider.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
+import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
 import _poolTifaLockhart from "../pool/tifa-lockhart.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
@@ -786,6 +788,7 @@ const shard: CardShard = {
     _poolHammerheadTyrant,
     _poolHanaKami,
     _poolHandOfEnlightenment,
+    _poolHardCover,
     _poolHarmoniousArchon,
     _poolHeartflameSlash,
     _poolHedronArchive,
@@ -1040,6 +1043,7 @@ const shard: CardShard = {
     _poolThorinsLastStand,
     _poolThranSpider,
     _poolThunderingChariot,
+    _poolThunderkinAwakener,
     _poolTidecallerMentor,
     _poolTifaLockhart,
     _poolTimbercrownPathway,

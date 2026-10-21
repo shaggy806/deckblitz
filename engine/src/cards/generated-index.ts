@@ -7,6 +7,7 @@
 export const TOKEN_NAMES: readonly string[] = [
   "1/1 Blue Bird Token",
   "1/1 Green Cat Token",
+  "1/1 Green Plant Token",
   "1/1 Red Dinosaur Token (Haste)",
   "1/1 Red Elemental Token",
   "1/1 Robot Hero Token",
@@ -357,6 +358,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Scarecrow Token",
   "Scion of the Deep",
   "Scorpion Dragon Token",
+  "Sculpture Token",
   "Sculpture Treasure Token",
   "Servo Token",
   "Shapeshifter Token",

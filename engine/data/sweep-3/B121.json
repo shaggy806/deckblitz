@@ -1,0 +1,835 @@
+{
+ "batch": "B121",
+ "status": "complete",
+ "ranks": "Commander 2019 (C19, 2019-08-23) and Core Set 2020 (M20, 2019-07-12): the rest of each set, whole",
+ "authored": [
+  {
+   "name": "Grismold, the Dreadsower",
+   "files": [
+    "engine/src/cards/pool/grismold-the-dreadsower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shifting Ceratops",
+   "files": [
+    "engine/src/cards/pool/shifting-ceratops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brineborn Cutthroat",
+   "files": [
+    "engine/src/cards/pool/brineborn-cutthroat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gauntlets of Light",
+   "files": [
+    "engine/src/cards/pool/gauntlets-of-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scorch Spitter",
+   "files": [
+    "engine/src/cards/pool/scorch-spitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Embercat",
+   "files": [
+    "engine/src/cards/pool/chandras-embercat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra, Flame's Fury",
+   "files": [
+    "engine/src/cards/pool/chandra-flames-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnarlback Rhino",
+   "files": [
+    "engine/src/cards/pool/gnarlback-rhino.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien, Nature's Avenger",
+   "files": [
+    "engine/src/cards/pool/vivien-natures-avenger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wolfrider's Saddle",
+   "files": [
+    "engine/src/cards/pool/wolfriders-saddle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ironroot Warlord",
+   "files": [
+    "engine/src/cards/pool/ironroot-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mu Yanling, Celestial Wind",
+   "files": [
+    "engine/src/cards/pool/mu-yanling-celestial-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noxious Grasp",
+   "files": [
+    "engine/src/cards/pool/noxious-grasp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Growth Cycle",
+   "files": [
+    "engine/src/cards/pool/growth-cycle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien's Crocodile",
+   "files": [
+    "engine/src/cards/pool/viviens-crocodile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selesnya Eulogist",
+   "files": [
+    "engine/src/cards/pool/selesnya-eulogist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghired, Conclave Exile",
+   "files": [
+    "engine/src/cards/pool/ghired-conclave-exile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sevinne, the Chronoclasm",
+   "files": [
+    "engine/src/cards/pool/sevinne-the-chronoclasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drawn from Dreams",
+   "files": [
+    "engine/src/cards/pool/drawn-from-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Regulator",
+   "files": [
+    "engine/src/cards/pool/chandras-regulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani, Inspiring Leader",
+   "files": [
+    "engine/src/cards/pool/ajani-inspiring-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diamond Knight",
+   "files": [
+    "engine/src/cards/pool/diamond-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cerulean Drake",
+   "files": [
+    "engine/src/cards/pool/cerulean-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scampering Scorcher",
+   "files": [
+    "engine/src/cards/pool/scampering-scorcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wakeroot Elemental",
+   "files": [
+    "engine/src/cards/pool/wakeroot-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorin, Vampire Lord",
+   "files": [
+    "engine/src/cards/pool/sorin-vampire-lord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fry",
+   "files": [
+    "engine/src/cards/pool/fry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of the Sun",
+   "files": [
+    "engine/src/cards/pool/herald-of-the-sun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eternal Isolation",
+   "files": [
+    "engine/src/cards/pool/eternal-isolation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brightwood Tracker",
+   "files": [
+    "engine/src/cards/pool/brightwood-tracker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yarok's Wavecrasher",
+   "files": [
+    "engine/src/cards/pool/yaroks-wavecrasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ethereal Elk",
+   "files": [
+    "engine/src/cards/pool/ethereal-elk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Celestial Messenger",
+   "files": [
+    "engine/src/cards/pool/celestial-messenger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Battalion Foot Soldier",
+   "files": [
+    "engine/src/cards/pool/battalion-foot-soldier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ancestral Blade",
+   "files": [
+    "engine/src/cards/pool/ancestral-blade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Backdraft Hellkite",
+   "files": [
+    "engine/src/cards/pool/backdraft-hellkite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodsoaked Altar",
+   "files": [
+    "engine/src/cards/pool/bloodsoaked-altar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomed Artisan",
+   "files": [
+    "engine/src/cards/pool/doomed-artisan.ts",
+    "engine/src/cards/tokens/sculpture-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flame Sweep",
+   "files": [
+    "engine/src/cards/pool/flame-sweep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Smuggler",
+   "files": [
+    "engine/src/cards/pool/goblin-smuggler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goldmane Griffin",
+   "files": [
+    "engine/src/cards/pool/goldmane-griffin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gorging Vulture",
+   "files": [
+    "engine/src/cards/pool/gorging-vulture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavakin Brawler",
+   "files": [
+    "engine/src/cards/pool/lavakin-brawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Masterful Replication",
+   "files": [
+    "engine/src/cards/pool/masterful-replication.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savage Gorger",
+   "files": [
+    "engine/src/cards/pool/savage-gorger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scholar of the Ages",
+   "files": [
+    "engine/src/cards/pool/scholar-of-the-ages.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyfire Phoenix",
+   "files": [
+    "engine/src/cards/pool/skyfire-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thalia's Geistcaller",
+   "files": [
+    "engine/src/cards/pool/thalias-geistcaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thirsting Bloodlord",
+   "files": [
+    "engine/src/cards/pool/thirsting-bloodlord.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tomebound Lich",
+   "files": [
+    "engine/src/cards/pool/tomebound-lich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterkin Shaman",
+   "files": [
+    "engine/src/cards/pool/waterkin-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildfire Elemental",
+   "files": [
+    "engine/src/cards/pool/wildfire-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anje's Ravager",
+   "files": [
+    "engine/src/cards/pool/anjes-ravager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood for Bones",
+   "files": [
+    "engine/src/cards/pool/blood-for-bones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unholy Indenture",
+   "files": [
+    "engine/src/cards/pool/unholy-indenture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yarok's Fenlurker",
+   "files": [
+    "engine/src/cards/pool/yaroks-fenlurker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thicket Crasher",
+   "files": [
+    "engine/src/cards/pool/thicket-crasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aerial Assault",
+   "files": [
+    "engine/src/cards/pool/aerial-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Flame Wave",
+   "files": [
+    "engine/src/cards/pool/chandras-flame-wave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overgrowth Elemental",
+   "files": [
+    "engine/src/cards/pool/overgrowth-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squad Captain",
+   "files": [
+    "engine/src/cards/pool/squad-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderkin Awakener",
+   "files": [
+    "engine/src/cards/pool/thunderkin-awakener.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devout Decree",
+   "files": [
+    "engine/src/cards/pool/devout-decree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruesome Scourger",
+   "files": [
+    "engine/src/cards/pool/gruesome-scourger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorin's Guide",
+   "files": [
+    "engine/src/cards/pool/sorins-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yanling's Harbinger",
+   "files": [
+    "engine/src/cards/pool/yanlings-harbinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Captivating Gyre",
+   "files": [
+    "engine/src/cards/pool/captivating-gyre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ogre Siegebreaker",
+   "files": [
+    "engine/src/cards/pool/ogre-siegebreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volrath, the Shapestealer",
+   "files": [
+    "engine/src/cards/pool/volrath-the-shapestealer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightmare Unmaking",
+   "files": [
+    "engine/src/cards/pool/nightmare-unmaking.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blightbeetle",
+   "files": [
+    "engine/src/cards/pool/blightbeetle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twinblade Paladin",
+   "files": [
+    "engine/src/cards/pool/twinblade-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra, Novice Pyromancer",
+   "files": [
+    "engine/src/cards/pool/chandra-novice-pyromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woodland Champion",
+   "files": [
+    "engine/src/cards/pool/woodland-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creeping Trailblazer",
+   "files": [
+    "engine/src/cards/pool/creeping-trailblazer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loxodon Lifechanter",
+   "files": [
+    "engine/src/cards/pool/loxodon-lifechanter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mask of Immolation",
+   "files": [
+    "engine/src/cards/pool/mask-of-immolation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Gust",
+   "files": [
+    "engine/src/cards/pool/aether-gust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boneclad Necromancer",
+   "files": [
+    "engine/src/cards/pool/boneclad-necromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Bird-Grabber",
+   "files": [
+    "engine/src/cards/pool/goblin-bird-grabber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retributive Wand",
+   "files": [
+    "engine/src/cards/pool/retributive-wand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hard Cover",
+   "files": [
+    "engine/src/cards/pool/hard-cover.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pack Mastiff",
+   "files": [
+    "engine/src/cards/pool/pack-mastiff.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unchained Berserker",
+   "files": [
+    "engine/src/cards/pool/unchained-berserker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barkhide Troll",
+   "files": [
+    "engine/src/cards/pool/barkhide-troll.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Full Flowering",
+   "needs": [
+    "effect:populate-x-times"
+   ],
+   "why": "populate has no count, so \"populate X times\" can't be said"
+  },
+  {
+   "name": "Kadena's Silencer",
+   "needs": [
+    "effect:counter-all-abilities"
+   ],
+   "why": "no effect counters every ability opponents control on the stack"
+  },
+  {
+   "name": "Aeon Engine",
+   "needs": [
+    "effect:reverse-turn-order"
+   ],
+   "why": "the engine can't reverse turn order"
+  },
+  {
+   "name": "Greven, Predator Captain",
+   "needs": [
+    "static:pt-per-turn-stat"
+   ],
+   "why": "+X/+0 where X is the life you've lost this turn needs a static P/T bonus from a turn stat"
+  },
+  {
+   "name": "Kethis, the Hidden Hand",
+   "needs": [
+    "effect:player-effect-play-lands-from-graveyard",
+    "effect:grant-play-from-graveyard-snapshot"
+   ],
+   "why": "a play (lands too) permission for the legendary cards in your graveyard as it resolves"
+  },
+  {
+   "name": "Vivien, Arkbow Ranger",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "the -5 reveals a creature card from outside the game"
+  },
+  {
+   "name": "Embodiment of Agonies",
+   "needs": [
+    "amount:count-distinct-mana-costs"
+   ],
+   "why": "counting different mana costs (not mana values) among graveyard cards"
+  },
+  {
+   "name": "Mandate of Peace",
+   "needs": [
+    "effect:end-the-combat-phase"
+   ],
+   "why": "no effect ends the combat phase"
+  },
+  {
+   "name": "Ghired's Belligerence",
+   "needs": [
+    "effect:delayed-trigger-dealt-damage-this-way-dies"
+   ],
+   "why": "\"whenever a creature dealt damage this way dies this turn, populate\""
+  },
+  {
+   "name": "Tahngarth, First Mate",
+   "needs": [
+    "effect:control-change-extensions",
+    "effect:put-into-combat-attacking"
+   ],
+   "why": "control handed to the attacking opponent until end of combat, then put into combat attacking what they attack"
+  },
+  {
+   "name": "Repeated Reverberation",
+   "needs": [
+    "effect:copy-next-loyalty-ability"
+   ],
+   "why": "the next-spell copy can't also cover \"or activate a loyalty ability\""
+  },
+  {
+   "name": "Leyline of Combustion",
+   "needs": [
+    "mechanic:leyline-opening-hand",
+    "trigger:player-becomes-target"
+   ],
+   "why": "begin the game on the battlefield; becomes-target fires only for permanents"
+  },
+  {
+   "name": "Salvager of Ruin",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "only putIntoGraveyardFromLibraryThisTurn exists"
+  },
+  {
+   "name": "Pattern Matcher",
+   "needs": [
+    "condition:filter-same-name-as-permanent-you-control"
+   ],
+   "why": "a search for the same name as another creature you control"
+  },
+  {
+   "name": "Archfiend of Spite",
+   "needs": [
+    "effect:sacrifice-amount",
+    "trigger:dealt-damage-by-opponent-source"
+   ],
+   "why": "\"sacrifice that many permanents\" in an unless, and a dealt-damage trigger limited to opponents' sources"
+  },
+  {
+   "name": "Road of Return",
+   "needs": [
+    "keyword:entwine"
+   ],
+   "why": "no entwine"
+  },
+  {
+   "name": "Cliffside Rescuer",
+   "needs": [
+    "effect:protection-from-player-for-permanent"
+   ],
+   "why": "no one-shot protection from each of your opponents"
+  },
+  {
+   "name": "Thought Sponge",
+   "needs": [
+    "effect:amount-greatest-count-among-players"
+   ],
+   "why": "the greatest number of cards any one opponent drew this turn"
+  },
+  {
+   "name": "Rayami, First of the Fallen",
+   "needs": [
+    "replacement:die-exile-with-counter",
+    "static:keywords-from-exiled-with-counter"
+   ],
+   "why": "the death replacement can't add a blood counter; no keywords read from exiled cards with blood counters"
+  },
+  {
+   "name": "Portal of Sanctuary",
+   "needs": [
+    "condition:attached-to-target"
+   ],
+   "why": "\"and each Aura attached to it\" can't be selected"
+  },
+  {
+   "name": "Vengeful Warchief",
+   "needs": [
+    "trigger:loses-life-first-time-each-turn"
+   ],
+   "why": "loses-life has only firstDuringTheirTurn; the ruling rules out oncePerTurn"
+  },
+  {
+   "name": "Legion's End",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "exiling the target's same-name creatures and cards from hand and graveyard"
+  },
+  {
+   "name": "Mass Diminish",
+   "needs": [
+    "target:controlled-by-target-player"
+   ],
+   "why": "animate-all has no controlledByTarget"
+  },
+  {
+   "name": "Gerrard, Weatherlight Hero",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn",
+    "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "no filter for cards put into your graveyard from the battlefield this turn"
+  },
+  {
+   "name": "Thought Distortion",
+   "needs": [
+    "effect:exile-from-hand-by-filter"
+   ],
+   "why": "no way to exile every matching card from a player's hand"
+  },
+  {
+   "name": "Diviner's Lockbox",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "no choose-a-card-name decision"
+  },
+  {
+   "name": "Boreal Elemental",
+   "needs": [
+    "cost:targeted-by-spells-mana-tax"
+   ],
+   "why": "targetedBySpellsCost takes only payLife"
+  },
+  {
+   "name": "Leadership Vacuum",
+   "needs": [
+    "effect:return-commanders-to-command-zone"
+   ],
+   "why": "put-in-command-zone takes one target, not every commander a player controls"
+  },
+  {
+   "name": "Anje Falkenrath",
+   "needs": [
+    "filter:has-madness"
+   ],
+   "why": "no filter asks whether the discarded card has madness"
+  },
+  {
+   "name": "Tectonic Hellion",
+   "needs": [
+    "condition:player-controls-most"
+   ],
+   "why": "each player who controls the most lands sacrifices two, fixed as it resolves"
+  },
+  {
+   "name": "Atemsis, All-Seeing",
+   "needs": [
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "counting distinct mana values among revealed cards"
+  },
+  {
+   "name": "Mu Yanling, Sky Dancer",
+   "needs": [
+    "effect:emblem-grants-activated"
+   ],
+   "why": "an emblem can't grant Islands an activated ability"
+  }
+ ]
+}

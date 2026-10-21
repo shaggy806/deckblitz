@@ -52,6 +52,7 @@ import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBlackMarket from "../pool/black-market.js";
+import _poolBlightbeetle from "../pool/blightbeetle.js";
 import _poolBloatedProcessor from "../pool/bloated-processor.js";
 import _poolBlockadeRunner from "../pool/blockade-runner.js";
 import _poolBloodAgeGeneral from "../pool/blood-age-general.js";
@@ -118,6 +119,7 @@ import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
 import _poolDefossilize from "../pool/defossilize.js";
 import _poolDenryKlinEditorInChief from "../pool/denry-klin-editor-in-chief.js";
+import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
@@ -170,6 +172,7 @@ import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
+import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
 import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
@@ -286,6 +289,7 @@ import _poolNestingBot from "../pool/nesting-bot.js";
 import _poolNetherbornAltar from "../pool/netherborn-altar.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
+import _poolNightmareUnmaking from "../pool/nightmare-unmaking.js";
 import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
@@ -589,6 +593,7 @@ const shard: CardShard = {
     _poolBilbosDeadlySlice,
     _poolBiomassMutation,
     _poolBlackMarket,
+    _poolBlightbeetle,
     _poolBloatedProcessor,
     _poolBlockadeRunner,
     _poolBloodAgeGeneral,
@@ -655,6 +660,7 @@ const shard: CardShard = {
     _poolDefibrillatingCurrent,
     _poolDefossilize,
     _poolDenryKlinEditorInChief,
+    _poolDiamondKnight,
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
@@ -707,6 +713,7 @@ const shard: CardShard = {
     _poolFusionElemental,
     _poolGallantCavalry,
     _poolGalvanicArc,
+    _poolGhiredConclaveExile,
     _poolGhostLitStalker,
     _poolGildedPinions,
     _poolGlasspoolMimic,
@@ -823,6 +830,7 @@ const shard: CardShard = {
     _poolNetherbornAltar,
     _poolNezumiProwler,
     _poolNightguardPatrol,
+    _poolNightmareUnmaking,
     _poolNightscapeApprentice,
     _poolNightwindGlider,
     _poolNissasPilgrimage,
