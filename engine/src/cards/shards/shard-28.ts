@@ -205,6 +205,7 @@ import _poolHorrificAssault from "../pool/horrific-assault.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
+import _poolIcebergCancrix from "../pool/iceberg-cancrix.js";
 import _poolImpeccableTiming from "../pool/impeccable-timing.js";
 import _poolImperialOath from "../pool/imperial-oath.js";
 import _poolImpossibleMan from "../pool/impossible-man.js";
@@ -279,6 +280,7 @@ import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
 import _poolMotivatedPony from "../pool/motivated-pony.js";
+import _poolMurasaBehemoth from "../pool/murasa-behemoth.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
@@ -452,6 +454,7 @@ import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
+import _poolTemperedSliver from "../pool/tempered-sliver.js";
 import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
 import _poolTempleThief from "../pool/temple-thief.js";
 import _poolTerritorialRoc from "../pool/territorial-roc.js";
@@ -746,6 +749,7 @@ const shard: CardShard = {
     _poolHulkBrutalBrawler,
     _poolHungryGraffalon,
     _poolHyperionsAtomicVision,
+    _poolIcebergCancrix,
     _poolImpeccableTiming,
     _poolImperialOath,
     _poolImpossibleMan,
@@ -820,6 +824,7 @@ const shard: CardShard = {
     _poolMoriaMarauder,
     _poolMortalsArdor,
     _poolMotivatedPony,
+    _poolMurasaBehemoth,
     _poolMurderousRedcap,
     _poolMutableExplorer,
     _poolMutantTownMusicians,
@@ -993,6 +998,7 @@ const shard: CardShard = {
     _poolSyrVondamTheLucent,
     _poolTajuruPathwarden,
     _poolTelJiladLifebreather,
+    _poolTemperedSliver,
     _poolTempleOfMystery,
     _poolTempleThief,
     _poolTerritorialRoc,

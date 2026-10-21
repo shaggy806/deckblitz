@@ -219,6 +219,7 @@ import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
+import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
@@ -299,6 +300,7 @@ import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
+import _poolPlagueEngineer from "../pool/plague-engineer.js";
 import _poolPointedDiscussion from "../pool/pointed-discussion.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
@@ -496,6 +498,7 @@ import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
 import _poolWrensRunHydra from "../pool/wrens-run-hydra.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
+import _poolZhalfirinDecoy from "../pool/zhalfirin-decoy.js";
 import _poolZodiacGoat from "../pool/zodiac-goat.js";
 import _poolZurgosVanguard from "../pool/zurgos-vanguard.js";
 import _tokens32ShapeshifterToken from "../tokens/3-2-shapeshifter-token.js";
@@ -731,6 +734,7 @@ const shard: CardShard = {
     _poolHotDogCart,
     _poolHotfootGnome,
     _poolHuntersProwess,
+    _poolIceFangCoatl,
     _poolImpoliteEntrance,
     _poolIncubationSac,
     _poolInfernalVessel,
@@ -811,6 +815,7 @@ const shard: CardShard = {
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
     _poolPitilessGorgon,
+    _poolPlagueEngineer,
     _poolPointedDiscussion,
     _poolPoisonArrow,
     _poolPolliwallop,
@@ -1008,6 +1013,7 @@ const shard: CardShard = {
     _poolWrensRunHydra,
     _poolYotianDissident,
     _poolZephyrSprite,
+    _poolZhalfirinDecoy,
     _poolZodiacGoat,
     _poolZurgosVanguard,
   ],

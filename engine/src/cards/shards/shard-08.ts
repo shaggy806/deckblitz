@@ -169,6 +169,7 @@ import _poolFinalRevels from "../pool/final-revels.js";
 import _poolFindThePath from "../pool/find-the-path.js";
 import _poolFireDrake from "../pool/fire-drake.js";
 import _poolFireUrchin from "../pool/fire-urchin.js";
+import _poolFirstSliversChosen from "../pool/first-slivers-chosen.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
 import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
 import _poolFlickACoin from "../pool/flick-a-coin.js";
@@ -192,6 +193,7 @@ import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
+import _poolGoblinOriflamme from "../pool/goblin-oriflamme.js";
 import _poolGoblinPicker from "../pool/goblin-picker.js";
 import _poolGoldenTailDisciple from "../pool/golden-tail-disciple.js";
 import _poolGolgariRotwurm from "../pool/golgari-rotwurm.js";
@@ -378,6 +380,7 @@ import _poolReturnedCentaur from "../pool/returned-centaur.js";
 import _poolRevelRuiner from "../pool/revel-ruiner.js";
 import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
 import _poolRighteousAvengers from "../pool/righteous-avengers.js";
+import _poolRimeTender from "../pool/rime-tender.js";
 import _poolRisenNecroregent from "../pool/risen-necroregent.js";
 import _poolRishadanPort from "../pool/rishadan-port.js";
 import _poolRisingPopulace from "../pool/rising-populace.js";
@@ -485,6 +488,7 @@ import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
 import _poolTributaryInstructor from "../pool/tributary-instructor.js";
+import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
@@ -738,6 +742,7 @@ const shard: CardShard = {
     _poolFindThePath,
     _poolFireDrake,
     _poolFireUrchin,
+    _poolFirstSliversChosen,
     _poolFlawlessForgery,
     _poolFledglingMawcor,
     _poolFlickACoin,
@@ -761,6 +766,7 @@ const shard: CardShard = {
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
     _poolGlasspoolShore,
+    _poolGoblinOriflamme,
     _poolGoblinPicker,
     _poolGoldenTailDisciple,
     _poolGolgariRotwurm,
@@ -947,6 +953,7 @@ const shard: CardShard = {
     _poolRevelRuiner,
     _poolRicketyGazebo,
     _poolRighteousAvengers,
+    _poolRimeTender,
     _poolRisenNecroregent,
     _poolRishadanPort,
     _poolRisingPopulace,
@@ -1054,6 +1061,7 @@ const shard: CardShard = {
     _poolTragicTrajectory,
     _poolTreeshakerChimera,
     _poolTributaryInstructor,
+    _poolTrustworthyScout,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
     _poolTwistReality,

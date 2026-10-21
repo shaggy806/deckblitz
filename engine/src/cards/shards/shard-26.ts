@@ -56,6 +56,7 @@ import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative
 import _poolBladeOfTheBloodchief from "../pool/blade-of-the-bloodchief.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
+import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
@@ -463,6 +464,7 @@ import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
+import _poolThunderingDjinn from "../pool/thundering-djinn.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
@@ -517,6 +519,7 @@ import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
 import _poolWelcomeHome from "../pool/welcome-home.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWildRoads from "../pool/wild-roads.js";
+import _poolWindingWay from "../pool/winding-way.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
@@ -594,6 +597,7 @@ const shard: CardShard = {
     _poolBladeOfTheBloodchief,
     _poolBlessedWine,
     _poolBogSmugglers,
+    _poolBogardanDragonheart,
     _poolBoldImpaler,
     _poolBoneyardLurker,
     _poolBorealShelf,
@@ -1001,6 +1005,7 @@ const shard: CardShard = {
     _poolThornhideWolves,
     _poolThrissNantukoPrimus,
     _poolThunderSalvo,
+    _poolThunderingDjinn,
     _poolTimelessLotus,
     _poolTinker,
     _poolTirelessTracker,
@@ -1055,6 +1060,7 @@ const shard: CardShard = {
     _poolWelcomeHome,
     _poolWeldingJar,
     _poolWildRoads,
+    _poolWindingWay,
     _poolWingsOfHope,
     _poolWitchEnchanter,
     _poolWolfCoveVillager,

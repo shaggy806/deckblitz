@@ -133,6 +133,7 @@ import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
 import _poolEternalIsolation from "../pool/eternal-isolation.js";
 import _poolEvangelOfSynthesis from "../pool/evangel-of-synthesis.js";
+import _poolExcavatingAnurid from "../pool/excavating-anurid.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
@@ -245,6 +246,7 @@ import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
 import _poolLightningPhoenix from "../pool/lightning-phoenix.js";
+import _poolLightningSkelemental from "../pool/lightning-skelemental.js";
 import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
 import _poolLlanowarGreenwidow from "../pool/llanowar-greenwidow.js";
@@ -360,6 +362,7 @@ import _poolRootwireAmalgam from "../pool/rootwire-amalgam.js";
 import _poolRunewing from "../pool/runewing.js";
 import _poolRunicShot from "../pool/runic-shot.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
+import _poolSadisticObsession from "../pool/sadistic-obsession.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
 import _poolSamiteHerbalist from "../pool/samite-herbalist.js";
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolEssenceExtraction,
     _poolEternalIsolation,
     _poolEvangelOfSynthesis,
+    _poolExcavatingAnurid,
     _poolExpandingOoze,
     _poolExpansion,
     _poolExperimentalConfectioner,
@@ -801,6 +805,7 @@ const shard: CardShard = {
     _poolLightlessEvangel,
     _poolLightningGreaves,
     _poolLightningPhoenix,
+    _poolLightningSkelemental,
     _poolLightningStormkin,
     _poolLilianasShade,
     _poolLlanowarGreenwidow,
@@ -916,6 +921,7 @@ const shard: CardShard = {
     _poolRunewing,
     _poolRunicShot,
     _poolRuthlessWaterbender,
+    _poolSadisticObsession,
     _poolSalivatingGremlins,
     _poolSaltMarsh,
     _poolSamiteHerbalist,

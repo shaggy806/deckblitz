@@ -164,6 +164,7 @@ import _poolForceOfSavagery from "../pool/force-of-savagery.js";
 import _poolForcedRetreat from "../pool/forced-retreat.js";
 import _poolForgehammerCenturion from "../pool/forgehammer-centurion.js";
 import _poolForgottenSentinel from "../pool/forgotten-sentinel.js";
+import _poolFountainOfIchor from "../pool/fountain-of-ichor.js";
 import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
 import _poolFriendlyRivalry from "../pool/friendly-rivalry.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
@@ -288,6 +289,7 @@ import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
+import _poolMunitionsExpert from "../pool/munitions-expert.js";
 import _poolMyrCustodian from "../pool/myr-custodian.js";
 import _poolMythosOfBrokkos from "../pool/mythos-of-brokkos.js";
 import _poolMythosOfNethroi from "../pool/mythos-of-nethroi.js";
@@ -423,6 +425,7 @@ import _poolSteadfastGuard from "../pool/steadfast-guard.js";
 import _poolSteelLeafChampion from "../pool/steel-leaf-champion.js";
 import _poolSteepleRoc from "../pool/steeple-roc.js";
 import _poolStingingCaveCrawler from "../pool/stinging-cave-crawler.js";
+import _poolStirringAddress from "../pool/stirring-address.js";
 import _poolStitchersSupplier from "../pool/stitchers-supplier.js";
 import _poolStolenStrategy from "../pool/stolen-strategy.js";
 import _poolStonehoofChieftain from "../pool/stonehoof-chieftain.js";
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolForcedRetreat,
     _poolForgehammerCenturion,
     _poolForgottenSentinel,
+    _poolFountainOfIchor,
     _poolFrenziedTrapbreaker,
     _poolFriendlyRivalry,
     _poolFumeSpitter,
@@ -826,6 +830,7 @@ const shard: CardShard = {
     _poolMosscoatGoriak,
     _poolMouserFoundry,
     _poolMultiversalIncursion,
+    _poolMunitionsExpert,
     _poolMyrCustodian,
     _poolMythosOfBrokkos,
     _poolMythosOfNethroi,
@@ -961,6 +966,7 @@ const shard: CardShard = {
     _poolSteelLeafChampion,
     _poolSteepleRoc,
     _poolStingingCaveCrawler,
+    _poolStirringAddress,
     _poolStitchersSupplier,
     _poolStolenStrategy,
     _poolStonehoofChieftain,

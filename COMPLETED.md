@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Modern Horizons, whole, and pitch costs** (batch 122): MH1's last 112 cards, 86 authored by
+  four `card-author` agents and the lead, with **pitch costs** built — "[if it's not your turn,]
+  you may [pay 1 life and] exile a blue card from your hand rather than pay this spell's mana
+  cost" and the Incarnations' "Evoke—Exile a white card from your hand" (`alternativeCost.
+  exileFromHand`, `evoke.exileFromHand`), which also brought in Force of Will, Force of
+  Negation, Force of Despair, Force of Vigor, Solitude, Grief, Fury, Subtlety, Snapback,
+  Misdirection, Pyrokinesis and Fury of the Horde (2026-10-21).
 - **Commander 2019 and Core Set 2020, whole** (batch 121): C19's last 28 cards (11 authored)
   and M20's last 89 (74 authored), by five `card-author` agents and the lead, no engine change —
   Volrath, the Shapestealer, Sevinne, the Chronoclasm, Ghired, Conclave Exile, the M20

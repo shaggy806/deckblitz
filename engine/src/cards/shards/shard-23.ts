@@ -281,6 +281,7 @@ import _poolManticore from "../pool/manticore.js";
 import _poolMaraudingDreadship from "../pool/marauding-dreadship.js";
 import _poolMarchFromTheBlackGate from "../pool/march-from-the-black-gate.js";
 import _poolMarkOfFury from "../pool/mark-of-fury.js";
+import _poolMartyrsSoul from "../pool/martyrs-soul.js";
 import _poolMassiveRaid from "../pool/massive-raid.js";
 import _poolMastermindPlum from "../pool/mastermind-plum.js";
 import _poolMastersCall from "../pool/masters-call.js";
@@ -832,6 +833,7 @@ const shard: CardShard = {
     _poolMaraudingDreadship,
     _poolMarchFromTheBlackGate,
     _poolMarkOfFury,
+    _poolMartyrsSoul,
     _poolMassiveRaid,
     _poolMastermindPlum,
     _poolMastersCall,

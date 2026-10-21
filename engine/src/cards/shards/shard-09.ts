@@ -192,6 +192,7 @@ import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
+import _poolGoatnap from "../pool/goatnap.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
 import _poolGoblinWarDrums from "../pool/goblin-war-drums.js";
 import _poolGodEternalOketra from "../pool/god-eternal-oketra.js";
@@ -410,6 +411,7 @@ import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
 import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
+import _poolSettleBeyondReality from "../pool/settle-beyond-reality.js";
 import _poolShadowRider from "../pool/shadow-rider.js";
 import _poolShadowheartDarkJusticiar from "../pool/shadowheart-dark-justiciar.js";
 import _poolShardingSphinx from "../pool/sharding-sphinx.js";
@@ -751,6 +753,7 @@ const shard: CardShard = {
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
+    _poolGoatnap,
     _poolGoblinTown,
     _poolGoblinWarDrums,
     _poolGodEternalOketra,
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolSephirothPlanetsHeir,
     _poolSeraphOfDawn,
     _poolSerrasSanctum,
+    _poolSettleBeyondReality,
     _poolShadowRider,
     _poolShadowheartDarkJusticiar,
     _poolShardingSphinx,

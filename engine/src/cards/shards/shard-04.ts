@@ -69,6 +69,7 @@ import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
+import _poolConiferWurm from "../pool/conifer-wurm.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
 import _poolCoronationOfChaos from "../pool/coronation-of-chaos.js";
@@ -250,6 +251,7 @@ import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
 import _poolLeadersTalent from "../pool/leaders-talent.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
+import _poolLesserMasticore from "../pool/lesser-masticore.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLivingPhone from "../pool/living-phone.js";
@@ -293,6 +295,7 @@ import _poolOasisGardener from "../pool/oasis-gardener.js";
 import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
+import _poolOnThinIce from "../pool/on-thin-ice.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
@@ -597,6 +600,7 @@ const shard: CardShard = {
     _poolCleverConjurer,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
+    _poolConiferWurm,
     _poolContradict,
     _poolConverterBeast,
     _poolCoronationOfChaos,
@@ -778,6 +782,7 @@ const shard: CardShard = {
     _poolLavaDart,
     _poolLeadersTalent,
     _poolLeavesFromTheVine,
+    _poolLesserMasticore,
     _poolLichsRelic,
     _poolLightningElemental,
     _poolLivingPhone,
@@ -821,6 +826,7 @@ const shard: CardShard = {
     _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
     _poolOjutaiInterceptor,
+    _poolOnThinIce,
     _poolOrderOfMidnight,
     _poolOrimSamiteHealer,
     _poolOtterPenguin,

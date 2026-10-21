@@ -12,6 +12,7 @@ import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
 import _poolAirServant from "../pool/air-servant.js";
 import _poolAlexisCloak from "../pool/alexis-cloak.js";
 import _poolAngelicWall from "../pool/angelic-wall.js";
+import _poolAnsweredPrayers from "../pool/answered-prayers.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
@@ -298,6 +299,7 @@ import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
+import _poolNinjaOfTheNewMoon from "../pool/ninja-of-the-new-moon.js";
 import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
@@ -363,6 +365,7 @@ import _poolRunAmok from "../pool/run-amok.js";
 import _poolRunBehind from "../pool/run-behind.js";
 import _poolRustvineCultivator from "../pool/rustvine-cultivator.js";
 import _poolRuthlessTechnomancer from "../pool/ruthless-technomancer.js";
+import _poolSaddledRimestag from "../pool/saddled-rimestag.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
 import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
@@ -407,6 +410,7 @@ import _poolSoulRead from "../pool/soul-read.js";
 import _poolSpectralLynx from "../pool/spectral-lynx.js";
 import _poolSpidersilkNet from "../pool/spidersilk-net.js";
 import _poolSpikeJester from "../pool/spike-jester.js";
+import _poolSpinehornMinotaur from "../pool/spinehorn-minotaur.js";
 import _poolSpittingDrake from "../pool/spitting-drake.js";
 import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
 import _poolSproutbackTrudge from "../pool/sproutback-trudge.js";
@@ -527,6 +531,7 @@ const shard: CardShard = {
     _poolAirServant,
     _poolAlexisCloak,
     _poolAngelicWall,
+    _poolAnsweredPrayers,
     _poolApexAltisaur,
     _poolApexWitchstalker,
     _poolArcaneDenial,
@@ -813,6 +818,7 @@ const shard: CardShard = {
     _poolNeckSnap,
     _poolNicolBolasTheArisen,
     _poolNightmareSower,
+    _poolNinjaOfTheNewMoon,
     _poolNissaLeylineTamer,
     _poolNissaVitalForce,
     _poolNissasExpedition,
@@ -878,6 +884,7 @@ const shard: CardShard = {
     _poolRunBehind,
     _poolRustvineCultivator,
     _poolRuthlessTechnomancer,
+    _poolSaddledRimestag,
     _poolSagesRowSavant,
     _poolSalvationEngine,
     _poolSamutVizierOfNaktamun,
@@ -922,6 +929,7 @@ const shard: CardShard = {
     _poolSpectralLynx,
     _poolSpidersilkNet,
     _poolSpikeJester,
+    _poolSpinehornMinotaur,
     _poolSpittingDrake,
     _poolSplinterHamatoYoshi,
     _poolSproutbackTrudge,

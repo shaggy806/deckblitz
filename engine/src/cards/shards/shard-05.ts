@@ -195,6 +195,7 @@ import _poolGiantsSkewer from "../pool/giants-skewer.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
+import _poolGlacialRevelation from "../pool/glacial-revelation.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
@@ -273,6 +274,7 @@ import _poolKitesailCleric from "../pool/kitesail-cleric.js";
 import _poolKnightedMyr from "../pool/knighted-myr.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
+import _poolLancerSliver from "../pool/lancer-sliver.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
@@ -380,6 +382,7 @@ import _poolRoothaMasteringTheMoment from "../pool/rootha-mastering-the-moment.j
 import _poolRosnakhtHeirOfRohgahh from "../pool/rosnakht-heir-of-rohgahh.js";
 import _poolRottenReunion from "../pool/rotten-reunion.js";
 import _poolRuggedHighlands from "../pool/rugged-highlands.js";
+import _poolRuinationRioter from "../pool/ruination-rioter.js";
 import _poolRuinationWurm from "../pool/ruination-wurm.js";
 import _poolRuinsRecluse from "../pool/ruins-recluse.js";
 import _poolRumbleweed from "../pool/rumbleweed.js";
@@ -746,6 +749,7 @@ const shard: CardShard = {
     _poolGild,
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,
+    _poolGlacialRevelation,
     _poolGlimmerbell,
     _poolGlisterBairn,
     _poolGlorySeeker,
@@ -824,6 +828,7 @@ const shard: CardShard = {
     _poolKnightedMyr,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
+    _poolLancerSliver,
     _poolLeapingMaster,
     _poolLeyDruid,
     _poolLightningStrike,
@@ -931,6 +936,7 @@ const shard: CardShard = {
     _poolRosnakhtHeirOfRohgahh,
     _poolRottenReunion,
     _poolRuggedHighlands,
+    _poolRuinationRioter,
     _poolRuinationWurm,
     _poolRuinsRecluse,
     _poolRumbleweed,

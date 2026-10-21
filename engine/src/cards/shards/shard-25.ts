@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbhorrentOverlord from "../pool/abhorrent-overlord.js";
 import _poolAbidingGrace from "../pool/abiding-grace.js";
+import _poolAbominableTreefolk from "../pool/abominable-treefolk.js";
 import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-titan.js";
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
@@ -30,6 +31,7 @@ import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
 import _poolAssaultIntercessor from "../pool/assault-intercessor.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
+import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
@@ -53,6 +55,7 @@ import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBitterChill from "../pool/bitter-chill.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
+import _poolBlizzardStrix from "../pool/blizzard-strix.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
 import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
@@ -269,6 +272,7 @@ import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
+import _poolMaritLagesSlumber from "../pool/marit-lages-slumber.js";
 import _poolMarthaJones from "../pool/martha-jones.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
@@ -347,6 +351,7 @@ import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
+import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
@@ -394,6 +399,7 @@ import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
+import _poolScuttlingSliver from "../pool/scuttling-sliver.js";
 import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
 import _poolSearchPartyCaptain from "../pool/search-party-captain.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
@@ -546,6 +552,7 @@ const shard: CardShard = {
   pool: [
     _poolAbhorrentOverlord,
     _poolAbidingGrace,
+    _poolAbominableTreefolk,
     _poolAbominationTerrifyingTitan,
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
@@ -571,6 +578,7 @@ const shard: CardShard = {
     _poolAssaultIntercessor,
     _poolAssaultZeppelid,
     _poolAssimilateEssence,
+    _poolAstralDrift,
     _poolAstralSteel,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
@@ -594,6 +602,7 @@ const shard: CardShard = {
     _poolBitterChill,
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
+    _poolBlizzardStrix,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
     _poolBloodtitheHarvester,
@@ -810,6 +819,7 @@ const shard: CardShard = {
     _poolMaladyInvoker,
     _poolMalevolentChandelier,
     _poolMantisRider,
+    _poolMaritLagesSlumber,
     _poolMarthaJones,
     _poolMaryReadAndAnneBonny,
     _poolMasterOfEtherium,
@@ -888,6 +898,7 @@ const shard: CardShard = {
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
     _poolRampartArchitect,
+    _poolRankOfficer,
     _poolRaphaelToughTurtle,
     _poolRaucousAudience,
     _poolReachForTheSky,
@@ -935,6 +946,7 @@ const shard: CardShard = {
     _poolScorchRider,
     _poolScourgeOfFleets,
     _poolScuteSwarm,
+    _poolScuttlingSliver,
     _poolSeaGateStormcaller,
     _poolSearchPartyCaptain,
     _poolSeasonOfRenewal,

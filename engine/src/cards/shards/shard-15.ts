@@ -357,6 +357,7 @@ import _poolPrizefight from "../pool/prizefight.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
+import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
 import _poolQuench from "../pool/quench.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolPsionicSnoop,
     _poolPyreticRebirth,
     _poolPyrotechnicPerformer,
+    _poolQuakefootCyclops,
     _poolQuench,
     _poolRagingGoblinoids,
     _poolRakdosTrumpeter,

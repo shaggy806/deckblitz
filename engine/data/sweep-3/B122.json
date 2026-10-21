@@ -1,0 +1,817 @@
+{
+ "batch": "B122",
+ "status": "complete",
+ "ranks": "Modern Horizons (MH1, 2019-06-14): the rest of the set, whole; with pitch costs built, the earlier cards they unblocked are in the commit, not this record",
+ "authored": [
+  {
+   "name": "Arcum's Astrolabe",
+   "files": [
+    "engine/src/cards/pool/arcums-astrolabe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Icehide Golem",
+   "files": [
+    "engine/src/cards/pool/icehide-golem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warteye Witch",
+   "files": [
+    "engine/src/cards/pool/warteye-witch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Feaster of Fools",
+   "files": [
+    "engine/src/cards/pool/feaster-of-fools.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frostwalla",
+   "files": [
+    "engine/src/cards/pool/frostwalla.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Force of Rage",
+   "files": [
+    "engine/src/cards/pool/force-of-rage.ts",
+    "engine/src/cards/tokens/red-elemental-token-3-1.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Force of Virtue",
+   "files": [
+    "engine/src/cards/pool/force-of-virtue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cunning Evasion",
+   "files": [
+    "engine/src/cards/pool/cunning-evasion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mind Rake",
+   "files": [
+    "engine/src/cards/pool/mind-rake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marit Lage's Slumber",
+   "files": [
+    "engine/src/cards/pool/marit-lages-slumber.ts",
+    "engine/src/cards/tokens/marit-lage-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonblade Shinobi",
+   "files": [
+    "engine/src/cards/pool/moonblade-shinobi.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Azra Smokeshaper",
+   "files": [
+    "engine/src/cards/pool/azra-smokeshaper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ninja of the New Moon",
+   "files": [
+    "engine/src/cards/pool/ninja-of-the-new-moon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seasoned Pyromancer",
+   "files": [
+    "engine/src/cards/pool/seasoned-pyromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleaving Sliver",
+   "files": [
+    "engine/src/cards/pool/cleaving-sliver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hollowhead Sliver",
+   "files": [
+    "engine/src/cards/pool/hollowhead-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enduring Sliver",
+   "files": [
+    "engine/src/cards/pool/enduring-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Windcaller Aven",
+   "files": [
+    "engine/src/cards/pool/windcaller-aven.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Savage Swipe",
+   "files": [
+    "engine/src/cards/pool/savage-swipe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spell Snuff",
+   "files": [
+    "engine/src/cards/pool/spell-snuff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Devil",
+   "files": [
+    "engine/src/cards/pool/vengeful-devil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thundering Djinn",
+   "files": [
+    "engine/src/cards/pool/thundering-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul-Strike Technique",
+   "files": [
+    "engine/src/cards/pool/soul-strike-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruination Rioter",
+   "files": [
+    "engine/src/cards/pool/ruination-rioter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Igneous Elemental",
+   "files": [
+    "engine/src/cards/pool/igneous-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trustworthy Scout",
+   "files": [
+    "engine/src/cards/pool/trustworthy-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lesser Masticore",
+   "files": [
+    "engine/src/cards/pool/lesser-masticore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winding Way",
+   "files": [
+    "engine/src/cards/pool/winding-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astral Drift",
+   "files": [
+    "engine/src/cards/pool/astral-drift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "On Thin Ice",
+   "files": [
+    "engine/src/cards/pool/on-thin-ice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scour All Possibilities",
+   "files": [
+    "engine/src/cards/pool/scour-all-possibilities.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dead of Winter",
+   "files": [
+    "engine/src/cards/pool/dead-of-winter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ransack the Lab",
+   "files": [
+    "engine/src/cards/pool/ransack-the-lab.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Geomancer's Gambit",
+   "files": [
+    "engine/src/cards/pool/geomancers-gambit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conifer Wurm",
+   "files": [
+    "engine/src/cards/pool/conifer-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goatnap",
+   "files": [
+    "engine/src/cards/pool/goatnap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plague Engineer",
+   "files": [
+    "engine/src/cards/pool/plague-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vesperlark",
+   "files": [
+    "engine/src/cards/pool/vesperlark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "First Sliver's Chosen",
+   "files": [
+    "engine/src/cards/pool/first-slivers-chosen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alpine Guide",
+   "files": [
+    "engine/src/cards/pool/alpine-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "String of Disappearances",
+   "files": [
+    "engine/src/cards/pool/string-of-disappearances.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Excavating Anurid",
+   "files": [
+    "engine/src/cards/pool/excavating-anurid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saddled Rimestag",
+   "files": [
+    "engine/src/cards/pool/saddled-rimestag.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of One Thousand Cuts",
+   "files": [
+    "engine/src/cards/pool/wall-of-one-thousand-cuts.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rank Officer",
+   "files": [
+    "engine/src/cards/pool/rank-officer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ore-Scale Guardian",
+   "files": [
+    "engine/src/cards/pool/ore-scale-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Headless Specter",
+   "files": [
+    "engine/src/cards/pool/headless-specter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zhalfirin Decoy",
+   "files": [
+    "engine/src/cards/pool/zhalfirin-decoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ice-Fang Coatl",
+   "files": [
+    "engine/src/cards/pool/ice-fang-coatl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ayula's Influence",
+   "files": [
+    "engine/src/cards/pool/ayulas-influence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shenanigans",
+   "files": [
+    "engine/src/cards/pool/shenanigans.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Throatseeker",
+   "files": [
+    "engine/src/cards/pool/throatseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempered Sliver",
+   "files": [
+    "engine/src/cards/pool/tempered-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winter's Rest",
+   "files": [
+    "engine/src/cards/pool/winters-rest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lancer Sliver",
+   "files": [
+    "engine/src/cards/pool/lancer-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amorphous Axe",
+   "files": [
+    "engine/src/cards/pool/amorphous-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Webweaver Changeling",
+   "files": [
+    "engine/src/cards/pool/webweaver-changeling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Settle Beyond Reality",
+   "files": [
+    "engine/src/cards/pool/settle-beyond-reality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fountain of Ichor",
+   "files": [
+    "engine/src/cards/pool/fountain-of-ichor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scuttling Sliver",
+   "files": [
+    "engine/src/cards/pool/scuttling-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pondering Mage",
+   "files": [
+    "engine/src/cards/pool/pondering-mage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sadistic Obsession",
+   "files": [
+    "engine/src/cards/pool/sadistic-obsession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magmatic Sinkhole",
+   "files": [
+    "engine/src/cards/pool/magmatic-sinkhole.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pyrophobia",
+   "files": [
+    "engine/src/cards/pool/pyrophobia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quakefoot Cyclops",
+   "files": [
+    "engine/src/cards/pool/quakefoot-cyclops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martyr's Soul",
+   "files": [
+    "engine/src/cards/pool/martyrs-soul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinehorn Minotaur",
+   "files": [
+    "engine/src/cards/pool/spinehorn-minotaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stirring Address",
+   "files": [
+    "engine/src/cards/pool/stirring-address.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aria of Flame",
+   "files": [
+    "engine/src/cards/pool/aria-of-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rotwidow Pack",
+   "files": [
+    "engine/src/cards/pool/rotwidow-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Munitions Expert",
+   "files": [
+    "engine/src/cards/pool/munitions-expert.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Skelemental",
+   "files": [
+    "engine/src/cards/pool/lightning-skelemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rime Tender",
+   "files": [
+    "engine/src/cards/pool/rime-tender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abominable Treefolk",
+   "files": [
+    "engine/src/cards/pool/abominable-treefolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iceberg Cancrix",
+   "files": [
+    "engine/src/cards/pool/iceberg-cancrix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Oriflamme",
+   "files": [
+    "engine/src/cards/pool/goblin-oriflamme.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glacial Revelation",
+   "files": [
+    "engine/src/cards/pool/glacial-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Answered Prayers",
+   "files": [
+    "engine/src/cards/pool/answered-prayers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blizzard Strix",
+   "files": [
+    "engine/src/cards/pool/blizzard-strix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endling",
+   "files": [
+    "engine/src/cards/pool/endling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bladeback Sliver",
+   "files": [
+    "engine/src/cards/pool/bladeback-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bogardan Dragonheart",
+   "files": [
+    "engine/src/cards/pool/bogardan-dragonheart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planebound Accomplice",
+   "files": [
+    "engine/src/cards/pool/planebound-accomplice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bellowing Elk",
+   "files": [
+    "engine/src/cards/pool/bellowing-elk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eyekite",
+   "files": [
+    "engine/src/cards/pool/eyekite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Murasa Behemoth",
+   "files": [
+    "engine/src/cards/pool/murasa-behemoth.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Dregscape Sliver",
+   "needs": [
+    "static:grant-unearth-to-graveyard"
+   ],
+   "why": "grantsToGraveyard grants only dredge, not unearth to Sliver cards in your graveyard"
+  },
+  {
+   "name": "Return from Extinction",
+   "needs": [
+    "effect:targets-share-type"
+   ],
+   "why": "no constraint that two targets share a creature type"
+  },
+  {
+   "name": "Reap the Past",
+   "needs": [
+    "effect:return-random-cards-from-graveyard"
+   ],
+   "why": "choose-random-card picks one card, not X at random"
+  },
+  {
+   "name": "Stream of Thought",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "replicate isn't modeled"
+  },
+  {
+   "name": "Volatile Claws",
+   "needs": [
+    "effect:add-types-all"
+   ],
+   "why": "a mass \"gain all creature types\" without setting P/T"
+  },
+  {
+   "name": "Collected Conjuring",
+   "needs": [
+    "decision:cast-up-to-n-free"
+   ],
+   "why": "cast up to two of the exiled cards free, the rest on the bottom in a random order"
+  },
+  {
+   "name": "Shatter Assumptions",
+   "needs": [
+    "effect:discard-all-matching"
+   ],
+   "why": "nothing discards every card in a hand matching a filter"
+  },
+  {
+   "name": "Orcish Hellraiser",
+   "needs": [
+    "keyword:echo"
+   ],
+   "why": "echo isn't modeled"
+  },
+  {
+   "name": "Hexdrinker",
+   "needs": [
+    "keyword:level-up"
+   ],
+   "why": "level up and the leveler layout aren't modeled"
+  },
+  {
+   "name": "Face of Divinity",
+   "needs": [
+    "condition:attached-host-condition"
+   ],
+   "why": "\"as long as another Aura is attached to enchanted creature\""
+  },
+  {
+   "name": "Chillerpillar",
+   "needs": [
+    "keyword:monstrosity"
+   ],
+   "why": "monstrous is stored but no condition reads \"as long as this creature is monstrous\""
+  },
+  {
+   "name": "Phantasmal Form",
+   "needs": [
+    "effect:animate-add-colors"
+   ],
+   "why": "animate only sets colours; \"blue in addition to its other colors\""
+  },
+  {
+   "name": "Shark Typhoon",
+   "needs": [
+    "cost:cycling-x"
+   ],
+   "why": "cycling {X}{1}{U}: the cycle action carries no X"
+  },
+  {
+   "name": "Kaya's Guile",
+   "needs": [
+    "keyword:entwine"
+   ],
+   "why": "no entwine"
+  },
+  {
+   "name": "Frostwalk Bastion",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "\"tap that creature\" — the damaged creature as a target ref"
+  },
+  {
+   "name": "Valiant Changeling",
+   "needs": [
+    "effect:count-subtypes-among"
+   ],
+   "why": "a cost reduction per creature type among creatures you control, capped at {5}"
+  },
+  {
+   "name": "Farmstead Gleaner",
+   "needs": [
+    "cost:untap-symbol-cost"
+   ],
+   "why": "the {Q} cost"
+  },
+  {
+   "name": "Splicer's Skill",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "splice isn't modeled"
+  },
+  {
+   "name": "Treetop Ambusher",
+   "needs": [
+    "keyword:dash"
+   ],
+   "why": "dash isn't modeled"
+  },
+  {
+   "name": "Skrelv, Defector Mite",
+   "needs": [
+    "decision:choose-color-on-resolution"
+   ],
+   "why": "a colour chosen as the ability resolves, fed to hexproof from and can't be blocked by"
+  },
+  {
+   "name": "Goblin War Party",
+   "needs": [
+    "keyword:entwine"
+   ],
+   "why": "no entwine"
+  },
+  {
+   "name": "Twisted Reflection",
+   "needs": [
+    "keyword:entwine",
+    "effect:switch-pt"
+   ],
+   "why": "no entwine, and no switching power and toughness"
+  },
+  {
+   "name": "Treefolk Umbra",
+   "needs": [
+    "keyword:umbra-armor"
+   ],
+   "why": "no umbra armor replacement"
+  },
+  {
+   "name": "Recruit the Worthy",
+   "needs": [
+    "keyword:buyback"
+   ],
+   "why": "no buyback"
+  },
+  {
+   "name": "Everdream",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "no splice"
+  },
+  {
+   "name": "Cabal Therapist",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "naming a card, then discarding all cards with that name"
+  },
+  {
+   "name": "Hogaak, Arisen Necropolis",
+   "needs": [
+    "cost:cant-spend-mana-to-cast"
+   ],
+   "why": "\"You can't spend mana to cast this spell\" with convoke and delve"
+  },
+  {
+   "name": "Silumgar Scavenger",
+   "needs": [
+    "condition:exploited-that-creature"
+   ],
+   "why": "the dies trigger can't tell whether this creature exploited the creature that died"
+  },
+  {
+   "name": "Endurance",
+   "needs": [
+    "effect:graveyard-to-library-bottom-random"
+   ],
+   "why": "rechecked after pitch costs: its evoke is expressible now, but nothing puts a player's whole graveyard on the bottom of their library in a random order"
+  }
+ ]
+}

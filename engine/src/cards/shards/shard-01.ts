@@ -41,6 +41,7 @@ import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
+import _poolBladebackSliver from "../pool/bladeback-sliver.js";
 import _poolBlanchwoodProwler from "../pool/blanchwood-prowler.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
@@ -127,6 +128,7 @@ import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
 import _poolExpel from "../pool/expel.js";
+import _poolEyekite from "../pool/eyekite.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
 import _poolFaithfulWatchdog from "../pool/faithful-watchdog.js";
 import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
@@ -566,6 +568,7 @@ const shard: CardShard = {
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBlacklanceParagon,
+    _poolBladebackSliver,
     _poolBlanchwoodProwler,
     _poolBlightTitan,
     _poolBloodHypnotist,
@@ -652,6 +655,7 @@ const shard: CardShard = {
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,
     _poolExpel,
+    _poolEyekite,
     _poolEzekielSimsSpiderTotem,
     _poolFaithfulWatchdog,
     _poolFaldornDreadWolfHerald,

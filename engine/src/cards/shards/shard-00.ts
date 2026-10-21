@@ -30,6 +30,7 @@ import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
 import _poolAwakeningZone from "../pool/awakening-zone.js";
+import _poolAyulasInfluence from "../pool/ayulas-influence.js";
 import _poolAzcantaTheSunkenRuin from "../pool/azcanta-the-sunken-ruin.js";
 import _poolAzoriusCluestone from "../pool/azorius-cluestone.js";
 import _poolBalladOfTheBlackFlag from "../pool/ballad-of-the-black-flag.js";
@@ -212,6 +213,7 @@ import _poolHallOfStormGiants from "../pool/hall-of-storm-giants.js";
 import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
+import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
@@ -222,6 +224,7 @@ import _poolIAmIronMan from "../pool/i-am-iron-man.js";
 import _poolIcebergTitan from "../pool/iceberg-titan.js";
 import _poolIchorSynthesizer from "../pool/ichor-synthesizer.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
+import _poolIgneousElemental from "../pool/igneous-elemental.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js";
@@ -587,6 +590,7 @@ const shard: CardShard = {
     _poolAvenCloudchaser,
     _poolAvenSentry,
     _poolAwakeningZone,
+    _poolAyulasInfluence,
     _poolAzcantaTheSunkenRuin,
     _poolAzoriusCluestone,
     _poolBalladOfTheBlackFlag,
@@ -769,6 +773,7 @@ const shard: CardShard = {
     _poolHannaShipsNavigator,
     _poolHarmonizedCrescendo,
     _poolHaughtyDjinn,
+    _poolHeadlessSpecter,
     _poolHellkiteCourser,
     _poolHiredClaw,
     _poolHornetHarasser,
@@ -779,6 +784,7 @@ const shard: CardShard = {
     _poolIcebergTitan,
     _poolIchorSynthesizer,
     _poolIdentityEcho,
+    _poolIgneousElemental,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
     _poolImpostorOfTheSixthPride,

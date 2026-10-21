@@ -90,6 +90,7 @@ import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
+import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
@@ -414,8 +415,10 @@ import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
+import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
 import _poolSpawningPit from "../pool/spawning-pit.js";
+import _poolSpellSnuff from "../pool/spell-snuff.js";
 import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
 import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
 import _poolSpiderSlayerHatredHoned from "../pool/spider-slayer-hatred-honed.js";
@@ -638,6 +641,7 @@ const shard: CardShard = {
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
     _poolClamorShaman,
+    _poolCleavingSliver,
     _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
@@ -962,8 +966,10 @@ const shard: CardShard = {
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
+    _poolSoulStrikeTechnique,
     _poolSoulstoneSanctuary,
     _poolSpawningPit,
+    _poolSpellSnuff,
     _poolSphinxSummoner,
     _poolSpiderGwenFreeSpirit,
     _poolSpiderSlayerHatredHoned,

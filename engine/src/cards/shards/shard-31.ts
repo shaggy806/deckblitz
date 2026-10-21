@@ -35,6 +35,7 @@ import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
+import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
 import _poolBallroom from "../pool/ballroom.js";
@@ -363,6 +364,7 @@ import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
+import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolAtraxaPraetorsVoice,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
+    _poolAzraSmokeshaper,
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
     _poolBallroom,
@@ -926,6 +929,7 @@ const shard: CardShard = {
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
+    _poolPonderingMage,
     _poolPriestsOfNorn,
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,

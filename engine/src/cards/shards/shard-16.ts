@@ -174,6 +174,7 @@ import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
+import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGiantLadybug from "../pool/giant-ladybug.js";
@@ -354,6 +355,7 @@ import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
+import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
@@ -470,6 +472,7 @@ import _poolThrabenSentry from "../pool/thraben-sentry.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
 import _poolThrenodySinger from "../pool/threnody-singer.js";
 import _poolThrivingSkyclaw from "../pool/thriving-skyclaw.js";
+import _poolThroatseeker from "../pool/throatseeker.js";
 import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
@@ -505,6 +508,7 @@ import _poolUrzasMine from "../pool/urzas-mine.js";
 import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
 import _poolVenerableMonk from "../pool/venerable-monk.js";
 import _poolVerminGorger from "../pool/vermin-gorger.js";
+import _poolVesperlark from "../pool/vesperlark.js";
 import _poolVeteranSwordsmith from "../pool/veteran-swordsmith.js";
 import _poolViashinoBranchrider from "../pool/viashino-branchrider.js";
 import _poolViashinoFangtail from "../pool/viashino-fangtail.js";
@@ -539,6 +543,7 @@ import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
 import _poolWingCommando from "../pool/wing-commando.js";
+import _poolWintersRest from "../pool/winters-rest.js";
 import _poolWitchsWeb from "../pool/witchs-web.js";
 import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
@@ -746,6 +751,7 @@ const shard: CardShard = {
     _poolFutureFlight,
     _poolGalestrike,
     _poolGenghisFrog,
+    _poolGeomancersGambit,
     _poolGeosurge,
     _poolGhostlyPilferer,
     _poolGiantLadybug,
@@ -926,6 +932,7 @@ const shard: CardShard = {
     _poolRaffWeatherlightStalwart,
     _poolRagingBull,
     _poolRampartHunter,
+    _poolRansackTheLab,
     _poolRazeToTheGround,
     _poolRazorRings,
     _poolRazorkinNeedlehead,
@@ -1042,6 +1049,7 @@ const shard: CardShard = {
     _poolThraxodemon,
     _poolThrenodySinger,
     _poolThrivingSkyclaw,
+    _poolThroatseeker,
     _poolThunderhawkGunship,
     _poolThunderingTanadon,
     _poolTigerSharkAbyssalHunter,
@@ -1077,6 +1085,7 @@ const shard: CardShard = {
     _poolVaultbornTyrant,
     _poolVenerableMonk,
     _poolVerminGorger,
+    _poolVesperlark,
     _poolVeteranSwordsmith,
     _poolViashinoBranchrider,
     _poolViashinoFangtail,
@@ -1111,6 +1120,7 @@ const shard: CardShard = {
     _poolWillOTheWisp,
     _poolWillOfTheTemur,
     _poolWingCommando,
+    _poolWintersRest,
     _poolWitchsWeb,
     _poolWitheringBoon,
     _poolWizardsSchool,

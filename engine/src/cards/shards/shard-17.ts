@@ -101,6 +101,7 @@ import _poolCutYourLosses from "../pool/cut-your-losses.js";
 import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js";
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
+import _poolDeadOfWinter from "../pool/dead-of-winter.js";
 import _poolDeadapult from "../pool/deadapult.js";
 import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
@@ -632,6 +633,7 @@ const shard: CardShard = {
     _poolDaredevilFearlessFighter,
     _poolDarigaazsCharm,
     _poolDarkthicketWolf,
+    _poolDeadOfWinter,
     _poolDeadapult,
     _poolDeadlyEmbrace,
     _poolDeathBaron,

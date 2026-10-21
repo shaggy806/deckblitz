@@ -227,6 +227,7 @@ import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
 import _poolHighMarket from "../pool/high-market.js";
+import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
@@ -292,6 +293,7 @@ import _poolMabel from "../pool/mabel.js";
 import _poolMadcapSkills from "../pool/madcap-skills.js";
 import _poolMageSlayer from "../pool/mage-slayer.js";
 import _poolMagefireWings from "../pool/magefire-wings.js";
+import _poolMagmaticSinkhole from "../pool/magmatic-sinkhole.js";
 import _poolMagusOfTheBridge from "../pool/magus-of-the-bridge.js";
 import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
@@ -342,6 +344,7 @@ import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
+import _poolOreScaleGuardian from "../pool/ore-scale-guardian.js";
 import _poolOrganHoarder from "../pool/organ-hoarder.js";
 import _poolOrzhovLocket from "../pool/orzhov-locket.js";
 import _poolOscorpIndustries from "../pool/oscorp-industries.js";
@@ -517,6 +520,7 @@ import _poolUtopiaMycon from "../pool/utopia-mycon.js";
 import _poolVampiricSpirit from "../pool/vampiric-spirit.js";
 import _poolVaultguardTrooper from "../pool/vaultguard-trooper.js";
 import _poolVectorImperialCapital from "../pool/vector-imperial-capital.js";
+import _poolVengefulDevil from "../pool/vengeful-devil.js";
 import _poolVengefulVampire from "../pool/vengeful-vampire.js";
 import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
 import _poolVigilance from "../pool/vigilance.js";
@@ -795,6 +799,7 @@ const shard: CardShard = {
     _poolHiddenVolcano,
     _poolHieroglyphicIllumination,
     _poolHighMarket,
+    _poolHollowheadSliver,
     _poolHondenOfInfiniteRage,
     _poolHorrorOfTheDim,
     _poolHulklingYoungAvenger,
@@ -860,6 +865,7 @@ const shard: CardShard = {
     _poolMadcapSkills,
     _poolMageSlayer,
     _poolMagefireWings,
+    _poolMagmaticSinkhole,
     _poolMagusOfTheBridge,
     _poolMagusOfTheCandelabra,
     _poolMakeYourMove,
@@ -910,6 +916,7 @@ const shard: CardShard = {
     _poolOgreBerserker,
     _poolOgreSiegebreaker,
     _poolOrderOfTheWhiteShield,
+    _poolOreScaleGuardian,
     _poolOrganHoarder,
     _poolOrzhovLocket,
     _poolOscorpIndustries,
@@ -1085,6 +1092,7 @@ const shard: CardShard = {
     _poolVampiricSpirit,
     _poolVaultguardTrooper,
     _poolVectorImperialCapital,
+    _poolVengefulDevil,
     _poolVengefulVampire,
     _poolViashinoLashclaw,
     _poolVigilance,

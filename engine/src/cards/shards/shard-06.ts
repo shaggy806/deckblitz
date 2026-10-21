@@ -25,6 +25,7 @@ import _poolArborAdherent from "../pool/arbor-adherent.js";
 import _poolArcboundShikari from "../pool/arcbound-shikari.js";
 import _poolArchangel from "../pool/archangel.js";
 import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
+import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolAtog from "../pool/atog.js";
@@ -276,6 +277,7 @@ import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
 import _poolMoggSalvage from "../pool/mogg-salvage.js";
 import _poolMoggSentry from "../pool/mogg-sentry.js";
 import _poolMoltenLavamancer from "../pool/molten-lavamancer.js";
+import _poolMoonbladeShinobi from "../pool/moonblade-shinobi.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
 import _poolMyriadLandscape from "../pool/myriad-landscape.js";
@@ -386,6 +388,7 @@ import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
+import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
@@ -558,6 +561,7 @@ const shard: CardShard = {
     _poolArcboundShikari,
     _poolArchangel,
     _poolArcusAcolyte,
+    _poolAriaOfFlame,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
     _poolAtog,
@@ -809,6 +813,7 @@ const shard: CardShard = {
     _poolMoggSalvage,
     _poolMoggSentry,
     _poolMoltenLavamancer,
+    _poolMoonbladeShinobi,
     _poolMrFoxglove,
     _poolMuxusGoblinGrandee,
     _poolMyriadLandscape,
@@ -919,6 +924,7 @@ const shard: CardShard = {
     _poolSetessanChampion,
     _poolSeymourFlux,
     _poolShambleshark,
+    _poolShenanigans,
     _poolSheriffOfSafePassage,
     _poolShortcutSeeker,
     _poolShroudstomper,

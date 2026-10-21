@@ -11,6 +11,7 @@ import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
+import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
@@ -150,6 +151,7 @@ import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolEllivereOfTheWildCourt from "../pool/ellivere-of-the-wild-court.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
 import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
+import _poolEnduringSliver from "../pool/enduring-sliver.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
 import _poolEntropicCloud from "../pool/entropic-cloud.js";
 import _poolEssenceDepleter from "../pool/essence-depleter.js";
@@ -348,6 +350,7 @@ import _poolPrismaticOmen from "../pool/prismatic-omen.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
+import _poolPyrophobia from "../pool/pyrophobia.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRacersRing from "../pool/racers-ring.js";
 import _poolRampagingGrowth from "../pool/rampaging-growth.js";
@@ -567,6 +570,7 @@ const shard: CardShard = {
     _poolAgentPhilCoulson,
     _poolAjaniOutlandChaperone,
     _poolAlpharaelStonechosen,
+    _poolAlpineGuide,
     _poolAmazingSpiderGirl,
     _poolAmphinCutthroat,
     _poolAnafenzaUnyieldingLineage,
@@ -706,6 +710,7 @@ const shard: CardShard = {
     _poolEllivereOfTheWildCourt,
     _poolElvenkingsHarper,
     _poolEndlessFootAssault,
+    _poolEnduringSliver,
     _poolEnragedFlamecaster,
     _poolEntropicCloud,
     _poolEssenceDepleter,
@@ -904,6 +909,7 @@ const shard: CardShard = {
     _poolPropagatorDrone,
     _poolProwlersHelm,
     _poolPunkFrogs,
+    _poolPyrophobia,
     _poolQuantumMisalignment,
     _poolRacersRing,
     _poolRampagingGrowth,

@@ -374,6 +374,7 @@ import _poolSarumanTheWhiteHand from "../pool/saruman-the-white-hand.js";
 import _poolScamperingScorcher from "../pool/scampering-scorcher.js";
 import _poolScavengerFolk from "../pool/scavenger-folk.js";
 import _poolScorpionsSting from "../pool/scorpions-sting.js";
+import _poolScourAllPossibilities from "../pool/scour-all-possibilities.js";
 import _poolScrapworkMutt from "../pool/scrapwork-mutt.js";
 import _poolScurrilousSentry from "../pool/scurrilous-sentry.js";
 import _poolScuzzbackMarauders from "../pool/scuzzback-marauders.js";
@@ -504,6 +505,7 @@ import _poolWaryFarmer from "../pool/wary-farmer.js";
 import _poolWaryWatchdog from "../pool/wary-watchdog.js";
 import _poolWayOfTheWildspeaker from "../pool/way-of-the-wildspeaker.js";
 import _poolWeSayTheeNay from "../pool/we-say-thee-nay.js";
+import _poolWebweaverChangeling from "../pool/webweaver-changeling.js";
 import _poolWeiAmbushForce from "../pool/wei-ambush-force.js";
 import _poolWelkinGuide from "../pool/welkin-guide.js";
 import _poolWernogRidersChaplain from "../pool/wernog-riders-chaplain.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolScamperingScorcher,
     _poolScavengerFolk,
     _poolScorpionsSting,
+    _poolScourAllPossibilities,
     _poolScrapworkMutt,
     _poolScurrilousSentry,
     _poolScuzzbackMarauders,
@@ -1057,6 +1060,7 @@ const shard: CardShard = {
     _poolWaryWatchdog,
     _poolWayOfTheWildspeaker,
     _poolWeSayTheeNay,
+    _poolWebweaverChangeling,
     _poolWeiAmbushForce,
     _poolWelkinGuide,
     _poolWernogRidersChaplain,

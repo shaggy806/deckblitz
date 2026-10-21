@@ -89,6 +89,7 @@ import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
+import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
@@ -429,6 +430,7 @@ import _poolSternDismissal from "../pool/stern-dismissal.js";
 import _poolSternProctor from "../pool/stern-proctor.js";
 import _poolStewTheConeys from "../pool/stew-the-coneys.js";
 import _poolStormchaserMage from "../pool/stormchaser-mage.js";
+import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
@@ -511,6 +513,7 @@ import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildsize from "../pool/wildsize.js";
 import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
+import _poolWindcallerAven from "../pool/windcaller-aven.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
@@ -627,6 +630,7 @@ const shard: CardShard = {
     _poolCrewCaptain,
     _poolCrossoverCollaboration,
     _poolCrystalSlipper,
+    _poolCunningEvasion,
     _poolCutOfTheProfits,
     _poolDaringFiendbonder,
     _poolDarkmossBridge,
@@ -967,6 +971,7 @@ const shard: CardShard = {
     _poolSternProctor,
     _poolStewTheConeys,
     _poolStormchaserMage,
+    _poolStringOfDisappearances,
     _poolStrixLookout,
     _poolSubterraneanSpirit,
     _poolSummonAnima,
@@ -1049,6 +1054,7 @@ const shard: CardShard = {
     _poolWildernessReclamation,
     _poolWildsize,
     _poolWilheltTheRotcleaver,
+    _poolWindcallerAven,
     _poolWitchBlessedMeadow,
     _poolWitherbloomCommand,
     _poolWitheringCurse,

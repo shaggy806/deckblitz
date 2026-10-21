@@ -258,6 +258,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Lifelink Vampire Token",
   "Lotus",
   "Map Token",
+  "Marit Lage Token",
   "Mercenary Token",
   "Merfolk Token",
   "Merfolk Token (Deeproot Waters)",

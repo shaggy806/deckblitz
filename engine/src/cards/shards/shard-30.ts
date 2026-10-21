@@ -404,6 +404,7 @@ import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
 import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
+import _poolSavageSwipe from "../pool/savage-swipe.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
 import _poolSerpentWarrior from "../pool/serpent-warrior.js";
@@ -941,6 +942,7 @@ const shard: CardShard = {
     _poolSaurianSymbiote,
     _poolSavageGorger,
     _poolSavageLands,
+    _poolSavageSwipe,
     _poolSelflessSafewright,
     _poolSephirothsIntervention,
     _poolSerpentWarrior,

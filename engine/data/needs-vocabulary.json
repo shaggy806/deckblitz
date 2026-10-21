@@ -8919,6 +8919,22 @@
   "filter:has-madness": {
    "family": "keyword:madness",
    "example": "Anje Falkenrath"
+  },
+  "effect:return-random-cards-from-graveyard": {
+   "example": "Reap the Past"
+  },
+  "effect:discard-all-matching": {
+   "example": "Shatter Assumptions"
+  },
+  "cost:cant-spend-mana-to-cast": {
+   "example": "Hogaak, Arisen Necropolis"
+  },
+  "condition:exploited-that-creature": {
+   "family": "keyword:exploit",
+   "example": "Silumgar Scavenger"
+  },
+  "effect:graveyard-to-library-bottom-random": {
+   "example": "Endurance"
   }
  }
 }

@@ -14,6 +14,7 @@ import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sc
 import _poolAlignedHeart from "../pool/aligned-heart.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
+import _poolAmorphousAxe from "../pool/amorphous-axe.js";
 import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
 import _poolAngelOfDespair from "../pool/angel-of-despair.js";
@@ -584,6 +585,7 @@ const shard: CardShard = {
     _poolAlignedHeart,
     _poolAlloyAnimist,
     _poolAlpineMeadow,
+    _poolAmorphousAxe,
     _poolAncientCarp,
     _poolAncientCrab,
     _poolAngelOfDespair,

@@ -328,6 +328,7 @@ import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
+import _poolPlaneboundAccomplice from "../pool/planebound-accomplice.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
 import _poolPonder from "../pool/ponder.js";
 import _poolPortraitOfMichiko from "../pool/portrait-of-michiko.js";
@@ -367,6 +368,7 @@ import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRoguesGallery from "../pool/rogues-gallery.js";
 import _poolRomanaIi from "../pool/romana-ii.js";
+import _poolRotwidowPack from "../pool/rotwidow-pack.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
@@ -388,6 +390,7 @@ import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
+import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
 import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
@@ -508,6 +511,7 @@ import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
 import _poolVolrathTheShapestealer from "../pool/volrath-the-shapestealer.js";
 import _poolVotaryOfTheConclave from "../pool/votary-of-the-conclave.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
+import _poolWallOfOneThousandCuts from "../pool/wall-of-one-thousand-cuts.js";
 import _poolWaterServant from "../pool/water-servant.js";
 import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
 import _poolWeaponizeTheMonsters from "../pool/weaponize-the-monsters.js";
@@ -876,6 +880,7 @@ const shard: CardShard = {
     _poolPhalanxVanguard,
     _poolPileatedProvisioner,
     _poolPirateHat,
+    _poolPlaneboundAccomplice,
     _poolPlatedSlagwurm,
     _poolPonder,
     _poolPortraitOfMichiko,
@@ -915,6 +920,7 @@ const shard: CardShard = {
     _poolRobeOfStars,
     _poolRoguesGallery,
     _poolRomanaIi,
+    _poolRotwidowPack,
     _poolRuinsOfTrokair,
     _poolRunedServitor,
     _poolRustlerRampage,
@@ -936,6 +942,7 @@ const shard: CardShard = {
     _poolScorpionSeethingStriker,
     _poolSeaSpirit,
     _poolSeaSprite,
+    _poolSeasonedPyromancer,
     _poolSeedOfHope,
     _poolSeekTheBeast,
     _poolSegmentedKrotiq,
@@ -1056,6 +1063,7 @@ const shard: CardShard = {
     _poolVolrathTheShapestealer,
     _poolVotaryOfTheConclave,
     _poolWallOfIce,
+    _poolWallOfOneThousandCuts,
     _poolWaterServant,
     _poolWeakstonesSubjugation,
     _poolWeaponizeTheMonsters,

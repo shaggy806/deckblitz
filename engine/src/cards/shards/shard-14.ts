@@ -156,6 +156,7 @@ import _poolElvishScrapper from "../pool/elvish-scrapper.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
 import _poolEncumberedReejerey from "../pool/encumbered-reejerey.js";
+import _poolEndling from "../pool/endling.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
@@ -308,6 +309,7 @@ import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
 import _poolMerryBards from "../pool/merry-bards.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
 import _poolMimic from "../pool/mimic.js";
+import _poolMindRake from "../pool/mind-rake.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
 import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
@@ -688,6 +690,7 @@ const shard: CardShard = {
     _poolEmergencyPhytomedic,
     _poolEmissaryOfTheSleepless,
     _poolEncumberedReejerey,
+    _poolEndling,
     _poolEntityTracker,
     _poolEomerOfTheRiddermark,
     _poolErrantEphemeron,
@@ -840,6 +843,7 @@ const shard: CardShard = {
     _poolMerryBards,
     _poolMidnightAssassin,
     _poolMimic,
+    _poolMindRake,
     _poolMindSpiral,
     _poolMirranSpy,
     _poolMirrorOfGaladriel,
