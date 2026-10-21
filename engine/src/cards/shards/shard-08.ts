@@ -100,6 +100,7 @@ import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
 import _poolDeathPriestOfMyrkul from "../pool/death-priest-of-myrkul.js";
+import _poolDeathbellowWarCry from "../pool/deathbellow-war-cry.js";
 import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
@@ -259,6 +260,7 @@ import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
+import _poolLagonnaBandStoryteller from "../pool/lagonna-band-storyteller.js";
 import _poolLanternBearer from "../pool/lantern-bearer.js";
 import _poolLastCaress from "../pool/last-caress.js";
 import _poolLavabellySliver from "../pool/lavabelly-sliver.js";
@@ -282,6 +284,7 @@ import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
+import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
@@ -341,6 +344,7 @@ import _poolPicnicRuiner from "../pool/picnic-ruiner.js";
 import _poolPierceStrider from "../pool/pierce-strider.js";
 import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
+import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
 import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
@@ -399,6 +403,7 @@ import _poolShakeTheFoundations from "../pool/shake-the-foundations.js";
 import _poolShamblingShell from "../pool/shambling-shell.js";
 import _poolSharpEyedRookie from "../pool/sharp-eyed-rookie.js";
 import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
+import _poolShoalKraken from "../pool/shoal-kraken.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
@@ -471,6 +476,7 @@ import _poolTowerWorker from "../pool/tower-worker.js";
 import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
+import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
 import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
@@ -549,6 +555,7 @@ import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
 import _tokensWolfToken from "../tokens/wolf-token.js";
+import _tokensX1ElementalTokenTrampleHaste from "../tokens/x-1-elemental-token-trample-haste.js";
 import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-curse-of-the-restless-dead.js";
 
 const shard: CardShard = {
@@ -650,6 +657,7 @@ const shard: CardShard = {
     _poolDavenantArcher,
     _poolDawnhartWardens,
     _poolDeathPriestOfMyrkul,
+    _poolDeathbellowWarCry,
     _poolDeathcurseOgre,
     _poolDeathsprout,
     _poolDeception,
@@ -809,6 +817,7 @@ const shard: CardShard = {
     _poolKomodoRhino,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
+    _poolLagonnaBandStoryteller,
     _poolLanternBearer,
     _poolLastCaress,
     _poolLavabellySliver,
@@ -832,6 +841,7 @@ const shard: CardShard = {
     _poolMagesAttendant,
     _poolMagetasBoon,
     _poolMalakirCullblade,
+    _poolMantleOfTheWolf,
     _poolMartialCoup,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,
@@ -891,6 +901,7 @@ const shard: CardShard = {
     _poolPierceStrider,
     _poolPilgrimOfTheFires,
     _poolPlagonLordOfTheBeach,
+    _poolPolukranosUnchained,
     _poolPreemptiveStrike,
     _poolPrimalDruid,
     _poolProfessionalWrestler,
@@ -949,6 +960,7 @@ const shard: CardShard = {
     _poolShamblingShell,
     _poolSharpEyedRookie,
     _poolShieldmatesBlessing,
+    _poolShoalKraken,
     _poolShoreKeeper,
     _poolShreddersRevenge,
     _poolShriekOfDread,
@@ -1021,6 +1033,7 @@ const shard: CardShard = {
     _poolTownSentry,
     _poolToxicNim,
     _poolTragicTrajectory,
+    _poolTreeshakerChimera,
     _poolTributaryInstructor,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
@@ -1101,6 +1114,7 @@ const shard: CardShard = {
     _tokensThopterToken,
     _tokensWarriorToken,
     _tokensWolfToken,
+    _tokensX1ElementalTokenTrampleHaste,
     _tokensZombieTokenCurseOfTheRestlessDead,
   ],
 };

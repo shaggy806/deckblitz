@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAcademyRuins from "../pool/academy-ruins.js";
+import _poolAcolyteOfAffliction from "../pool/acolyte-of-affliction.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
@@ -205,6 +206,7 @@ import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
+import _poolInspireAwe from "../pool/inspire-awe.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
@@ -323,6 +325,7 @@ import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
+import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
@@ -542,6 +545,7 @@ import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 const shard: CardShard = {
   pool: [
     _poolAcademyRuins,
+    _poolAcolyteOfAffliction,
     _poolAetherTunnel,
     _poolAjaniFellsTheGodsire,
     _poolAkoumWarrior,
@@ -743,6 +747,7 @@ const shard: CardShard = {
     _poolImpulsivePilferer,
     _poolInexorableTide,
     _poolInfestedWerewolf,
+    _poolInspireAwe,
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
     _poolInvasionOfTolvada,
@@ -861,6 +866,7 @@ const shard: CardShard = {
     _poolPredatorsStrike,
     _poolPrimordialHydra,
     _poolProudMentor,
+    _poolPurphorossIntervention,
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
     _poolRadhaHeartOfKeld,

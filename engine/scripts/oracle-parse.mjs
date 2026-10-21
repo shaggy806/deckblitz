@@ -1814,6 +1814,13 @@ export function parseFace(face, ctx = {}) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };
       continue;
     }
+    // Devotion (rule 700.5): "~ costs {X} less to cast, where X is your
+    // devotion to black" — Drag to the Underworld.
+    if ((m = /^~ costs \{X\} less to cast, where X is your devotion to (white|blue|black|red|green)\.$/.exec(line))) {
+      const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1]];
+      out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { devotionTo: [color] } };
+      continue;
+    }
     // "~ is also a Cleric, Rogue, Warrior, and Wizard" — a CDA adding
     // creature types in every zone (rule 604.3), the card's `alsoSubtypes`.
     if ((m = /^~ is also an? ((?:[A-Z][a-z]+, )*[A-Z][a-z]+,? and [A-Z][a-z]+|[A-Z][a-z]+)\.$/.exec(line)) && /\bCreature\b/.test(face.type_line ?? "")) {

@@ -281,6 +281,7 @@ import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
+import _poolNetherbornAltar from "../pool/netherborn-altar.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
 import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
@@ -296,6 +297,7 @@ import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
 import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
+import _poolOxOfAgonas from "../pool/ox-of-agonas.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
 import _poolPaintedBluffs from "../pool/painted-bluffs.js";
 import _poolPalaceFamiliar from "../pool/palace-familiar.js";
@@ -384,6 +386,7 @@ import _poolSelflessSamurai from "../pool/selfless-samurai.js";
 import _poolSelhoffEntomber from "../pool/selhoff-entomber.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
 import _poolSetessanGriffin from "../pool/setessan-griffin.js";
+import _poolSetessanPetitioner from "../pool/setessan-petitioner.js";
 import _poolShadowSummoning from "../pool/shadow-summoning.js";
 import _poolShadowbloodRidge from "../pool/shadowblood-ridge.js";
 import _poolShambleBack from "../pool/shamble-back.js";
@@ -442,6 +445,7 @@ import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
 import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
+import _poolTempleThief from "../pool/temple-thief.js";
 import _poolTerritorialRoc from "../pool/territorial-roc.js";
 import _poolTeysaKarlov from "../pool/teysa-karlov.js";
 import _poolThanosDeathsConsort from "../pool/thanos-deaths-consort.js";
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolMysticMonastery,
     _poolNazarTheVelvetFang,
     _poolNestingBot,
+    _poolNetherbornAltar,
     _poolNezumiProwler,
     _poolNightguardPatrol,
     _poolNightscapeApprentice,
@@ -825,6 +830,7 @@ const shard: CardShard = {
     _poolOrderOfTheEbonHand,
     _poolOsseousSticktwister,
     _poolOvergrownBattlement,
+    _poolOxOfAgonas,
     _poolPacificationArray,
     _poolPaintedBluffs,
     _poolPalaceFamiliar,
@@ -913,6 +919,7 @@ const shard: CardShard = {
     _poolSelhoffEntomber,
     _poolSentinelSliver,
     _poolSetessanGriffin,
+    _poolSetessanPetitioner,
     _poolShadowSummoning,
     _poolShadowbloodRidge,
     _poolShambleBack,
@@ -971,6 +978,7 @@ const shard: CardShard = {
     _poolTajuruPathwarden,
     _poolTelJiladLifebreather,
     _poolTempleOfMystery,
+    _poolTempleThief,
     _poolTerritorialRoc,
     _poolTeysaKarlov,
     _poolThanosDeathsConsort,

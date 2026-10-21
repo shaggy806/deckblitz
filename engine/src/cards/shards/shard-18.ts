@@ -121,6 +121,7 @@ import _poolEldraziRavager from "../pool/eldrazi-ravager.js";
 import _poolElektraDaughterOfTheHand from "../pool/elektra-daughter-of-the-hand.js";
 import _poolElfReplica from "../pool/elf-replica.js";
 import _poolElgaudInquisitor from "../pool/elgaud-inquisitor.js";
+import _poolElspethSunsNemesis from "../pool/elspeth-suns-nemesis.js";
 import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
@@ -242,6 +243,7 @@ import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
 import _poolLlanowarGreenwidow from "../pool/llanowar-greenwidow.js";
 import _poolLlanowarWastes from "../pool/llanowar-wastes.js";
+import _poolLoathsomeChimera from "../pool/loathsome-chimera.js";
 import _poolLocustSpray from "../pool/locust-spray.js";
 import _poolLostSoul from "../pool/lost-soul.js";
 import _poolLoxodonWarhammer from "../pool/loxodon-warhammer.js";
@@ -463,6 +465,7 @@ import _poolTuneTheNarrative from "../pool/tune-the-narrative.js";
 import _poolTurbulentWetlands from "../pool/turbulent-wetlands.js";
 import _poolTurnInsideOut from "../pool/turn-inside-out.js";
 import _poolTyphoidRats from "../pool/typhoid-rats.js";
+import _poolUkkimaStalkingShadow from "../pool/ukkima-stalking-shadow.js";
 import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
@@ -665,6 +668,7 @@ const shard: CardShard = {
     _poolElektraDaughterOfTheHand,
     _poolElfReplica,
     _poolElgaudInquisitor,
+    _poolElspethSunsNemesis,
     _poolElturgardRanger,
     _poolElvishHydromancer,
     _poolEnragedRevolutionary,
@@ -786,6 +790,7 @@ const shard: CardShard = {
     _poolLilianasShade,
     _poolLlanowarGreenwidow,
     _poolLlanowarWastes,
+    _poolLoathsomeChimera,
     _poolLocustSpray,
     _poolLostSoul,
     _poolLoxodonWarhammer,
@@ -1007,6 +1012,7 @@ const shard: CardShard = {
     _poolTurbulentWetlands,
     _poolTurnInsideOut,
     _poolTyphoidRats,
+    _poolUkkimaStalkingShadow,
     _poolUlamogsCrusher,
     _poolUlcerate,
     _poolUndeadLeotau,

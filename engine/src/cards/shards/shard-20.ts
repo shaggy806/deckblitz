@@ -82,6 +82,7 @@ import _poolCaseOfTheRansackedLab from "../pool/case-of-the-ransacked-lab.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
 import _poolChainAssassination from "../pool/chain-assassination.js";
 import _poolChainDevil from "../pool/chain-devil.js";
+import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
 import _poolChocoComet from "../pool/choco-comet.js";
 import _poolCivicGuildmage from "../pool/civic-guildmage.js";
@@ -137,6 +138,7 @@ import _poolDraconicDestiny from "../pool/draconic-destiny.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
+import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
 import _poolDubiousDelicacy from "../pool/dubious-delicacy.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
 import _poolDurkwoodBaloth from "../pool/durkwood-baloth.js";
@@ -190,6 +192,7 @@ import _poolGimliOfTheGlitteringCaves from "../pool/gimli-of-the-glittering-cave
 import _poolGirderGoons from "../pool/girder-goons.js";
 import _poolGlacialFloodplain from "../pool/glacial-floodplain.js";
 import _poolGlacialStalker from "../pool/glacial-stalker.js";
+import _poolGlademuse from "../pool/glademuse.js";
 import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
@@ -384,6 +387,7 @@ import _poolRevelationOfPower from "../pool/revelation-of-power.js";
 import _poolReverentHowl from "../pool/reverent-howl.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
+import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
@@ -417,6 +421,7 @@ import _poolSiegeStriker from "../pool/siege-striker.js";
 import _poolSiegfriedFamedSwordsman from "../pool/siegfried-famed-swordsman.js";
 import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
+import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js";
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
@@ -650,6 +655,7 @@ const shard: CardShard = {
     _poolCemeteryGate,
     _poolChainAssassination,
     _poolChainDevil,
+    _poolChainwebAracnir,
     _poolChakramSlinger,
     _poolChocoComet,
     _poolCivicGuildmage,
@@ -705,6 +711,7 @@ const shard: CardShard = {
     _poolDragoonsLance,
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
+    _poolDreamstalkerManticore,
     _poolDubiousDelicacy,
     _poolDuelistsHeritage,
     _poolDurkwoodBaloth,
@@ -758,6 +765,7 @@ const shard: CardShard = {
     _poolGirderGoons,
     _poolGlacialFloodplain,
     _poolGlacialStalker,
+    _poolGlademuse,
     _poolGlamerGifter,
     _poolGloriousAnthem,
     _poolGlowstoneRecluse,
@@ -952,6 +960,7 @@ const shard: CardShard = {
     _poolReverentHowl,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
+    _poolRiseToGlory,
     _poolRishkarPeemaRenegade,
     _poolRottedHystrix,
     _poolRubyMedallion,
@@ -985,6 +994,7 @@ const shard: CardShard = {
     _poolSiegfriedFamedSwordsman,
     _poolSigiledBehemoth,
     _poolSilenceTheEcho,
+    _poolSilvarDevourerOfTheFree,
     _poolSinisterSabotage,
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,

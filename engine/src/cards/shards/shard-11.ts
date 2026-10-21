@@ -216,6 +216,7 @@ import _poolHelmOfAwakening from "../pool/helm-of-awakening.js";
 import _poolHenrikaDomnathi from "../pool/henrika-domnathi.js";
 import _poolHeraldOfSlaanesh from "../pool/herald-of-slaanesh.js";
 import _poolHeraldicBanner from "../pool/heraldic-banner.js";
+import _poolHeroOfThePride from "../pool/hero-of-the-pride.js";
 import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
@@ -245,6 +246,7 @@ import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
 import _poolInvasionOfKamigawa from "../pool/invasion-of-kamigawa.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
 import _poolIridianMaelstrom from "../pool/iridian-maelstrom.js";
+import _poolIrreverentRevelers from "../pool/irreverent-revelers.js";
 import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
@@ -314,6 +316,7 @@ import _poolMyPrecious from "../pool/my-precious.js";
 import _poolMysidianElder from "../pool/mysidian-elder.js";
 import _poolMysticForge from "../pool/mystic-forge.js";
 import _poolMysticGate from "../pool/mystic-gate.js";
+import _poolMysticRepeal from "../pool/mystic-repeal.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
@@ -356,6 +359,7 @@ import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
 import _poolPrismariCharm from "../pool/prismari-charm.js";
+import _poolProteanThaumaturge from "../pool/protean-thaumaturge.js";
 import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
@@ -398,6 +402,7 @@ import _poolScourgeOfTheThrone from "../pool/scourge-of-the-throne.js";
 import _poolScrawlingCrawler from "../pool/scrawling-crawler.js";
 import _poolScreechingSoulbreaker from "../pool/screeching-soulbreaker.js";
 import _poolScuteMob from "../pool/scute-mob.js";
+import _poolSeaGodsScorn from "../pool/sea-gods-scorn.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
@@ -776,6 +781,7 @@ const shard: CardShard = {
     _poolHenrikaDomnathi,
     _poolHeraldOfSlaanesh,
     _poolHeraldicBanner,
+    _poolHeroOfThePride,
     _poolHeroicCharge,
     _poolHexhavenDuelingArena,
     _poolHitchclawRecluse,
@@ -805,6 +811,7 @@ const shard: CardShard = {
     _poolInvasionOfKamigawa,
     _poolInvasionTactics,
     _poolIridianMaelstrom,
+    _poolIrreverentRevelers,
     _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,
     _poolJacesScrutiny,
@@ -874,6 +881,7 @@ const shard: CardShard = {
     _poolMysidianElder,
     _poolMysticForge,
     _poolMysticGate,
+    _poolMysticRepeal,
     _poolNearheathStalker,
     _poolNessianCourser,
     _poolNightdrinkerMoroii,
@@ -916,6 +924,7 @@ const shard: CardShard = {
     _poolPriestOfIroas,
     _poolPrimalMight,
     _poolPrismariCharm,
+    _poolProteanThaumaturge,
     _poolPsemillaMeletianPoet,
     _poolQuarrel,
     _poolQuilledSlagwurm,
@@ -958,6 +967,7 @@ const shard: CardShard = {
     _poolScrawlingCrawler,
     _poolScreechingSoulbreaker,
     _poolScuteMob,
+    _poolSeaGodsScorn,
     _poolSearchlightGeist,
     _poolSejiriRefuge,
     _poolSepulchralPrimordial,

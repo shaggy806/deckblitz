@@ -26171,6 +26171,7 @@ export class Game {
     if ("speed" in amount) return speedOf(this.state, player);
     if ("basicLandTypes" in amount) return basicLandTypesAmong(this.state, this.registry, player);
     if ("partySize" in amount) return partySizeOf(this.state, this.registry, player);
+    if ("devotionTo" in amount) return devotionOf(this.state, this.registry, player, amount.devotionTo);
     if ("turnHistory" in amount) {
       return (
         (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, [player], amount.turnHistory, amount.filter, player)

@@ -109,6 +109,7 @@ import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
 import _poolCreakwoodGhoul from "../pool/creakwood-ghoul.js";
 import _poolCryptolithRite from "../pool/cryptolith-rite.js";
 import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js";
+import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
 import _poolCuboidColony from "../pool/cuboid-colony.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
@@ -147,6 +148,7 @@ import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
+import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
@@ -190,6 +192,7 @@ import _poolGiantSpider from "../pool/giant-spider.js";
 import _poolGildedGhoda from "../pool/gilded-ghoda.js";
 import _poolGildedLotus from "../pool/gilded-lotus.js";
 import _poolGlassGolem from "../pool/glass-golem.js";
+import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
@@ -464,6 +467,7 @@ import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
 import _poolSupportiveParents from "../pool/supportive-parents.js";
 import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
+import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
 import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
@@ -662,6 +666,7 @@ const shard: CardShard = {
     _poolCreakwoodGhoul,
     _poolCryptolithRite,
     _poolCrystalSkullIsuSpyglass,
+    _poolCrystallineResonance,
     _poolCuboidColony,
     _poolDaringApprentice,
     _poolDarkRemedy,
@@ -700,6 +705,7 @@ const shard: CardShard = {
     _poolEsgarothGarrison,
     _poolEssenceknitScholar,
     _poolEusocialEngineering,
+    _poolEutropiaTheTwiceFavored,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
     _poolExsanguinate,
@@ -743,6 +749,7 @@ const shard: CardShard = {
     _poolGildedGhoda,
     _poolGildedLotus,
     _poolGlassGolem,
+    _poolGlimpseOfFreedom,
     _poolGlistenerElf,
     _poolGoblinGlider,
     _poolGoliathMassManipulator,
@@ -1017,6 +1024,7 @@ const shard: CardShard = {
     _poolSunbladeSamurai,
     _poolSupportiveParents,
     _poolSurrakarMarauder,
+    _poolSweetOblivion,
     _poolSwordOfSinewAndSteel,
     _poolSynapseSliver,
     _poolTajuruSnarecaster,

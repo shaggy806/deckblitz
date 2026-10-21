@@ -109,6 +109,7 @@ import _poolCyberneticaDatasmith from "../pool/cybernetica-datasmith.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDaringWaverider from "../pool/daring-waverider.js";
+import _poolDawnEvangel from "../pool/dawn-evangel.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
 import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
@@ -658,6 +659,7 @@ const shard: CardShard = {
     _poolDaiLiIndoctrination,
     _poolDamoclesBaseSwordOfKang,
     _poolDaringWaverider,
+    _poolDawnEvangel,
     _poolDeepwoodGhoul,
     _poolDematerialize,
     _poolDependableQuinjet,

@@ -147,6 +147,8 @@ import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
 import _poolElephantRat from "../pool/elephant-rat.js";
+import _poolElspethUndauntedHero from "../pool/elspeth-undaunted-hero.js";
+import _poolElspethsDevotee from "../pool/elspeths-devotee.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
@@ -232,6 +234,7 @@ import _poolHellsparkElemental from "../pool/hellspark-elemental.js";
 import _poolHellspurBrute from "../pool/hellspur-brute.js";
 import _poolHemosymbicMite from "../pool/hemosymbic-mite.js";
 import _poolHeraldOfThePantheon from "../pool/herald-of-the-pantheon.js";
+import _poolHeroOfTheGames from "../pool/hero-of-the-games.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHiddenCataract from "../pool/hidden-cataract.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
@@ -378,6 +381,7 @@ import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
+import _poolSatyrsCunning from "../pool/satyrs-cunning.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
 import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
@@ -442,6 +446,7 @@ import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolTheAesirEscapeValhalla from "../pool/the-aesir-escape-valhalla.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
+import _poolTheTriumphOfAnax from "../pool/the-triumph-of-anax.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
@@ -665,6 +670,8 @@ const shard: CardShard = {
     _poolEldraziLinebreaker,
     _poolElementalEruption,
     _poolElephantRat,
+    _poolElspethUndauntedHero,
+    _poolElspethsDevotee,
     _poolElvishScrapper,
     _poolEmergencyPhytomedic,
     _poolEmissaryOfTheSleepless,
@@ -750,6 +757,7 @@ const shard: CardShard = {
     _poolHellspurBrute,
     _poolHemosymbicMite,
     _poolHeraldOfThePantheon,
+    _poolHeroOfTheGames,
     _poolHexplateWallbreaker,
     _poolHiddenCataract,
     _poolHistoryOfBenalia,
@@ -896,6 +904,7 @@ const shard: CardShard = {
     _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
+    _poolSatyrsCunning,
     _poolSazacapsBrew,
     _poolScalesOfShale,
     _poolScavengerRegent,
@@ -960,6 +969,7 @@ const shard: CardShard = {
     _poolTheAesirEscapeValhalla,
     _poolTheEternityElevator,
     _poolTheGitrogMonster,
+    _poolTheTriumphOfAnax,
     _poolThickestInTheThicket,
     _poolThunderboltsConspiracy,
     _poolTitaniaProudPummeler,

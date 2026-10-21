@@ -1,0 +1,1173 @@
+{
+ "batch": "B118",
+ "status": "complete",
+ "ranks": "Commander 2020 (C20, 2020-04-17) and Theros Beyond Death (THB, 2020-01-24): whole sets",
+ "authored": [
+  {
+   "name": "Cazur, Ruthless Stalker",
+   "files": [
+    "engine/src/cards/pool/cazur-ruthless-stalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Souvenir Snatcher",
+   "files": [
+    "engine/src/cards/pool/souvenir-snatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Fiendbonder",
+   "files": [
+    "engine/src/cards/pool/daring-fiendbonder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ukkima, Stalking Shadow",
+   "files": [
+    "engine/src/cards/pool/ukkima-stalking-shadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Netherborn Altar",
+   "files": [
+    "engine/src/cards/pool/netherborn-altar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Otrimi, the Ever-Playful",
+   "files": [
+    "engine/src/cards/pool/otrimi-the-ever-playful.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindleecher",
+   "files": [
+    "engine/src/cards/pool/mindleecher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curious Herd",
+   "files": [
+    "engine/src/cards/pool/curious-herd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jirina Kudro",
+   "files": [
+    "engine/src/cards/pool/jirina-kudro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of the Forgotten",
+   "files": [
+    "engine/src/cards/pool/herald-of-the-forgotten.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavabrink Floodgates",
+   "files": [
+    "engine/src/cards/pool/lavabrink-floodgates.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nikara, Lair Scavenger",
+   "files": [
+    "engine/src/cards/pool/nikara-lair-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glademuse",
+   "files": [
+    "engine/src/cards/pool/glademuse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Predatory Impetus",
+   "files": [
+    "engine/src/cards/pool/predatory-impetus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avenging Huntbonder",
+   "files": [
+    "engine/src/cards/pool/avenging-huntbonder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fireflux Squad",
+   "files": [
+    "engine/src/cards/pool/fireflux-squad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silvar, Devourer of the Free",
+   "files": [
+    "engine/src/cards/pool/silvar-devourer-of-the-free.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crystalline Resonance",
+   "files": [
+    "engine/src/cards/pool/crystalline-resonance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nascent Metamorph",
+   "files": [
+    "engine/src/cards/pool/nascent-metamorph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treeshaker Chimera",
+   "files": [
+    "engine/src/cards/pool/treeshaker-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindwrack Harpy",
+   "files": [
+    "engine/src/cards/pool/mindwrack-harpy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Birth of Meletis",
+   "files": [
+    "engine/src/cards/pool/the-birth-of-meletis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cling to Dust",
+   "files": [
+    "engine/src/cards/pool/cling-to-dust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thirst for Meaning",
+   "files": [
+    "engine/src/cards/pool/thirst-for-meaning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Demon of Loathing",
+   "files": [
+    "engine/src/cards/pool/demon-of-loathing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nessian Wanderer",
+   "files": [
+    "engine/src/cards/pool/nessian-wanderer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Karametra's Blessing",
+   "files": [
+    "engine/src/cards/pool/karametras-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ironscale Hydra",
+   "files": [
+    "engine/src/cards/pool/ironscale-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chainweb Aracnir",
+   "files": [
+    "engine/src/cards/pool/chainweb-aracnir.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ox of Agonas",
+   "files": [
+    "engine/src/cards/pool/ox-of-agonas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treacherous Blessing",
+   "files": [
+    "engine/src/cards/pool/treacherous-blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Naiad of Hidden Coves",
+   "files": [
+    "engine/src/cards/pool/naiad-of-hidden-coves.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Protean Thaumaturge",
+   "files": [
+    "engine/src/cards/pool/protean-thaumaturge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tymaret, Chosen from Death",
+   "files": [
+    "engine/src/cards/pool/tymaret-chosen-from-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Funeral Rites",
+   "files": [
+    "engine/src/cards/pool/funeral-rites.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Binding of the Titans",
+   "files": [
+    "engine/src/cards/pool/the-binding-of-the-titans.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Polukranos, Unchained",
+   "files": [
+    "engine/src/cards/pool/polukranos-unchained.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elspeth's Nightmare",
+   "files": [
+    "engine/src/cards/pool/elspeths-nightmare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skola Grovedancer",
+   "files": [
+    "engine/src/cards/pool/skola-grovedancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drag to the Underworld",
+   "files": [
+    "engine/src/cards/pool/drag-to-the-underworld.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nessian Boar",
+   "files": [
+    "engine/src/cards/pool/nessian-boar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nessian Hornbeetle",
+   "files": [
+    "engine/src/cards/pool/nessian-hornbeetle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acolyte of Affliction",
+   "files": [
+    "engine/src/cards/pool/acolyte-of-affliction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eutropia the Twice-Favored",
+   "files": [
+    "engine/src/cards/pool/eutropia-the-twice-favored.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purphoros's Intervention",
+   "files": [
+    "engine/src/cards/pool/purphoross-intervention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stinging Lionfish",
+   "files": [
+    "engine/src/cards/pool/stinging-lionfish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elspeth, Sun's Nemesis",
+   "files": [
+    "engine/src/cards/pool/elspeth-suns-nemesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omen of the Sun",
+   "files": [
+    "engine/src/cards/pool/omen-of-the-sun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamshaper Shaman",
+   "files": [
+    "engine/src/cards/pool/dreamshaper-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Aspirant",
+   "files": [
+    "engine/src/cards/pool/blood-aspirant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mantle of the Wolf",
+   "files": [
+    "engine/src/cards/pool/mantle-of-the-wolf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taranika, Akroan Veteran",
+   "files": [
+    "engine/src/cards/pool/taranika-akroan-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commanding Presence",
+   "files": [
+    "engine/src/cards/pool/commanding-presence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathbellow War Cry",
+   "files": [
+    "engine/src/cards/pool/deathbellow-war-cry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gallia of the Endless Dance",
+   "files": [
+    "engine/src/cards/pool/gallia-of-the-endless-dance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phoenix of Ash",
+   "files": [
+    "engine/src/cards/pool/phoenix-of-ash.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Escape Velocity",
+   "files": [
+    "engine/src/cards/pool/escape-velocity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aphemia, the Cacophony",
+   "files": [
+    "engine/src/cards/pool/aphemia-the-cacophony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tymaret Calls the Dead",
+   "files": [
+    "engine/src/cards/pool/tymaret-calls-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Klothys's Design",
+   "files": [
+    "engine/src/cards/pool/klothyss-design.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Satyr's Cunning",
+   "files": [
+    "engine/src/cards/pool/satyrs-cunning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slaughter-Priest of Mogis",
+   "files": [
+    "engine/src/cards/pool/slaughter-priest-of-mogis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inevitable End",
+   "files": [
+    "engine/src/cards/pool/inevitable-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glimpse of Freedom",
+   "files": [
+    "engine/src/cards/pool/glimpse-of-freedom.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deny the Divine",
+   "files": [
+    "engine/src/cards/pool/deny-the-divine.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Relentless Pursuit",
+   "files": [
+    "engine/src/cards/pool/relentless-pursuit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mischievous Chimera",
+   "files": [
+    "engine/src/cards/pool/mischievous-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elspeth, Undaunted Hero",
+   "files": [
+    "engine/src/cards/pool/elspeth-undaunted-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grasping Giant",
+   "files": [
+    "engine/src/cards/pool/grasping-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Irreverent Revelers",
+   "files": [
+    "engine/src/cards/pool/irreverent-revelers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oread of Mountain's Blaze",
+   "files": [
+    "engine/src/cards/pool/oread-of-mountains-blaze.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inspire Awe",
+   "files": [
+    "engine/src/cards/pool/inspire-awe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Repeal",
+   "files": [
+    "engine/src/cards/pool/mystic-repeal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Triumph of Anax",
+   "files": [
+    "engine/src/cards/pool/the-triumph-of-anax.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise to Glory",
+   "files": [
+    "engine/src/cards/pool/rise-to-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sleep of the Dead",
+   "files": [
+    "engine/src/cards/pool/sleep-of-the-dead.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Setessan Petitioner",
+   "files": [
+    "engine/src/cards/pool/setessan-petitioner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phalanx Tactics",
+   "files": [
+    "engine/src/cards/pool/phalanx-tactics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shimmerwing Chimera",
+   "files": [
+    "engine/src/cards/pool/shimmerwing-chimera.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Enigmatic Incarnation",
+   "files": [
+    "engine/src/cards/pool/enigmatic-incarnation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawn Evangel",
+   "files": [
+    "engine/src/cards/pool/dawn-evangel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devourer of Memory",
+   "files": [
+    "engine/src/cards/pool/devourer-of-memory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sweet Oblivion",
+   "files": [
+    "engine/src/cards/pool/sweet-oblivion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero of the Nyxborn",
+   "files": [
+    "engine/src/cards/pool/hero-of-the-nyxborn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pharika's Spawn",
+   "files": [
+    "engine/src/cards/pool/pharikas-spawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nyx Herald",
+   "files": [
+    "engine/src/cards/pool/nyx-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "One with the Stars",
+   "files": [
+    "engine/src/cards/pool/one-with-the-stars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alirios, Enraptured",
+   "files": [
+    "engine/src/cards/pool/alirios-enraptured.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shoal Kraken",
+   "files": [
+    "engine/src/cards/pool/shoal-kraken.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stampede Rider",
+   "files": [
+    "engine/src/cards/pool/stampede-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroes of the Revel",
+   "files": [
+    "engine/src/cards/pool/heroes-of-the-revel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogis's Favor",
+   "files": [
+    "engine/src/cards/pool/mogiss-favor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lagonna-Band Storyteller",
+   "files": [
+    "engine/src/cards/pool/lagonna-band-storyteller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero of the Pride",
+   "files": [
+    "engine/src/cards/pool/hero-of-the-pride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impending Doom",
+   "files": [
+    "engine/src/cards/pool/impending-doom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blight-Breath Catoblepas",
+   "files": [
+    "engine/src/cards/pool/blight-breath-catoblepas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea God's Scorn",
+   "files": [
+    "engine/src/cards/pool/sea-gods-scorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nylea's Huntmaster",
+   "files": [
+    "engine/src/cards/pool/nyleas-huntmaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Final Flare",
+   "files": [
+    "engine/src/cards/pool/final-flare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brine Giant",
+   "files": [
+    "engine/src/cards/pool/brine-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Underworld Charger",
+   "files": [
+    "engine/src/cards/pool/underworld-charger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Threnody Singer",
+   "files": [
+    "engine/src/cards/pool/threnody-singer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daybreak Chimera",
+   "files": [
+    "engine/src/cards/pool/daybreak-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero of the Games",
+   "files": [
+    "engine/src/cards/pool/hero-of-the-games.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Voracious Typhon",
+   "files": [
+    "engine/src/cards/pool/voracious-typhon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamstalker Manticore",
+   "files": [
+    "engine/src/cards/pool/dreamstalker-manticore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fruit of Tizerus",
+   "files": [
+    "engine/src/cards/pool/fruit-of-tizerus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elspeth's Devotee",
+   "files": [
+    "engine/src/cards/pool/elspeths-devotee.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ashiok's Forerunner",
+   "files": [
+    "engine/src/cards/pool/ashioks-forerunner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arena Trickster",
+   "files": [
+    "engine/src/cards/pool/arena-trickster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunlit Hoplite",
+   "files": [
+    "engine/src/cards/pool/sunlit-hoplite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skophos Warleader",
+   "files": [
+    "engine/src/cards/pool/skophos-warleader.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warden of the Chained",
+   "files": [
+    "engine/src/cards/pool/warden-of-the-chained.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Swimmer in Nightmares",
+   "files": [
+    "engine/src/cards/pool/swimmer-in-nightmares.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pheres-Band Brawler",
+   "files": [
+    "engine/src/cards/pool/pheres-band-brawler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Loathsome Chimera",
+   "files": [
+    "engine/src/cards/pool/loathsome-chimera.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Temple Thief",
+   "files": [
+    "engine/src/cards/pool/temple-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero of the Winds",
+   "files": [
+    "engine/src/cards/pool/hero-of-the-winds.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Agonizing Remorse",
+   "needs": [
+    "decision:choose-from-hand-and-graveyard"
+   ],
+   "why": "choose a nonland card from the hand or any card from the graveyard"
+  },
+  {
+   "name": "Akim, the Soaring Wind",
+   "needs": [
+    "trigger:token-created-trigger"
+   ],
+   "why": "whenever you create one or more tokens for the first time each turn"
+  },
+  {
+   "name": "Allure of the Unknown",
+   "needs": [
+    "effect:opponent-chooses-from-found",
+    "effect:opponent-casts-exiled-free"
+   ],
+   "why": "an opponent chooses a nonland card from among revealed cards and may cast it without paying its mana cost"
+  },
+  {
+   "name": "Ashiok, Sculptor of Fears",
+   "needs": [
+    "effect:gain-control-all-target-player"
+   ],
+   "why": "−11: gain control of all creatures target opponent controls"
+  },
+  {
+   "name": "Ashiok's Erasure",
+   "needs": [
+    "filter:same-name-as-exiled-with-source"
+   ],
+   "why": "opponents can't cast spells with the same name as the exiled card"
+  },
+  {
+   "name": "Aspect of Manticore",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "when this enters, enchanted creature gains first strike"
+  },
+  {
+   "name": "Atris, Oracle of Half-Truths",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "an opponent separates cards into a face-down and a face-up pile"
+  },
+  {
+   "name": "Bonder's Ornament",
+   "needs": [
+    "condition:that-player-controls"
+   ],
+   "why": "each player who controls a permanent named Bonder's Ornament draws a card"
+  },
+  {
+   "name": "Boneyard Mycodrax",
+   "needs": [
+    "amount:cda-graveyard-count-excluding-self"
+   ],
+   "why": "P/T counts other creature cards in your graveyard; it would count itself there"
+  },
+  {
+   "name": "Bronzehide Lion",
+   "needs": [
+    "effect:return-as-aura-with-granted-ability"
+   ],
+   "why": "returns as an Aura enchanting a creature you control, losing its other abilities and granting a new one"
+  },
+  {
+   "name": "Callaphe, Beloved of the Sea",
+   "needs": [
+    "cost:targeted-by-spells-mana-tax"
+   ],
+   "why": "spells your opponents cast that target a creature or enchantment you control cost {1} more for each such target"
+  },
+  {
+   "name": "Capricopian",
+   "needs": [
+    "effect:reselect-attack-target"
+   ],
+   "why": "reselect which player a creature attacks"
+  },
+  {
+   "name": "Decoy Gambit",
+   "needs": [
+    "effect:each-player-chooses-then-all-act",
+    "effect:unless-that-player"
+   ],
+   "why": "each opponent chooses in turn order, then you draw, then all chosen creatures return together"
+  },
+  {
+   "name": "Dreadful Apathy",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "{2}{W}: exile enchanted creature"
+  },
+  {
+   "name": "Eidolon of Obstruction",
+   "needs": [
+    "cost:loyalty-cost-increase"
+   ],
+   "why": "loyalty abilities of planeswalkers your opponents control cost {1} more"
+  },
+  {
+   "name": "Enemy of Enlightenment",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "-1/-1 for each card in your opponents' hands"
+  },
+  {
+   "name": "Entrancing Lyre",
+   "needs": [
+    "static:may-choose-not-to-untap",
+    "effect:doesnt-untap-while-source-tapped"
+   ],
+   "why": "may choose not to untap; the creature doesn't untap for as long as this stays tapped"
+  },
+  {
+   "name": "Eon Frolicker",
+   "needs": [
+    "effect:protection-from-player-for-you-and-planeswalkers"
+   ],
+   "why": "target opponent's extra turn; you and planeswalkers you control gain protection from that player"
+  },
+  {
+   "name": "Ethereal Forager",
+   "needs": [
+    "amount:cards-exiled-with-delve"
+   ],
+   "why": "return an instant or sorcery card exiled with this (by its delve) to hand"
+  },
+  {
+   "name": "Flummoxed Cyclops",
+   "needs": [
+    "effect:restrict-until-end-of-combat"
+   ],
+   "why": "can't block this combat"
+  },
+  {
+   "name": "Furious Rise",
+   "needs": [
+    "zone:impulse-until-next-exile"
+   ],
+   "why": "you may play that card until you exile another card with this"
+  },
+  {
+   "name": "Gavi, Nest Warden",
+   "needs": [
+    "cost:cycling-alt-cost"
+   ],
+   "why": "pay {0} rather than the cycling cost of the first card you cycle each turn"
+  },
+  {
+   "name": "Haktos the Unscarred",
+   "needs": [
+    "effect:random-choice",
+    "static:protection-from-mana-values"
+   ],
+   "why": "chooses 2, 3 or 4 at random as it enters; protection from each mana value other than the chosen number"
+  },
+  {
+   "name": "Heliod's Punishment",
+   "needs": [
+    "static:static-lose-all-abilities",
+    "static:aura-grants-ability-referencing-aura"
+   ],
+   "why": "loses all abilities; the granted upkeep ability removes counters from and destroys the Aura that granted it"
+  },
+  {
+   "name": "Ichthyomorphosis",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "enchanted creature loses all abilities and is a 0/1 blue Fish"
+  },
+  {
+   "name": "Incendiary Oracle",
+   "needs": [
+    "filter:damaged-this-turn-by-source",
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "whenever a creature dealt damage by this creature this turn dies"
+  },
+  {
+   "name": "Kathril, Aspect Warper",
+   "needs": [
+    "effect:hexproof-from-counters",
+    "mechanic:keyword-counters"
+   ],
+   "why": "one counter per hexproof-from variant among cards in your graveyard"
+  },
+  {
+   "name": "Kunoros, Hound of Athreos",
+   "needs": [
+    "static:graveyard-enter-prohibition",
+    "static:prohibit-cast-from-graveyard-or-library"
+   ],
+   "why": "creature cards in graveyards can't enter; opponents can't cast spells from graveyards"
+  },
+  {
+   "name": "Manascape Refractor",
+   "needs": [
+    "static:gain-activated-abilities-of-others"
+   ],
+   "why": "has all activated abilities of all lands on the battlefield"
+  },
+  {
+   "name": "Medomai's Prophecy",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "chapter II chooses a card name chapter III reads"
+  },
+  {
+   "name": "Ravenous Gigantotherium",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "divides X damage (its power) among any number of target creatures; each of them deals damage equal to its power to it"
+  },
+  {
+   "name": "Sanctuary Blade",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "as it becomes attached, choose a color; protection from the last chosen color"
+  },
+  {
+   "name": "Selective Adaptation",
+   "needs": [
+    "effect:look-and-choose-one-each"
+   ],
+   "why": "one card per keyword (the player assigns multi-keyword cards), then one chosen onto the battlefield and the rest to hand"
+  },
+  {
+   "name": "Shatter the Sky",
+   "needs": [
+    "condition:that-player-controls"
+   ],
+   "why": "each player who controls a creature with power 4 or greater draws a card"
+  },
+  {
+   "name": "Siona, Captain of the Pyleas",
+   "needs": [
+    "trigger:becomes-attached"
+   ],
+   "why": "whenever an Aura you control becomes attached to a creature you control"
+  },
+  {
+   "name": "Skophos Maze-Warden",
+   "needs": [
+    "trigger:becomes-target-by-named-source",
+    "trigger:becomes-target-by-your-ability"
+   ],
+   "why": "whenever another creature becomes the target of an ability of a land you control named Labyrinth of Skophos"
+  },
+  {
+   "name": "Spellpyre Phoenix",
+   "needs": [
+    "condition:cards-cycled-this-turn"
+   ],
+   "why": "if you cycled two or more cards this turn"
+  },
+  {
+   "name": "Starlit Mantle",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "when this enters, enchanted creature gains hexproof (last enchanted if the Aura has left)"
+  },
+  {
+   "name": "Storm Herald",
+   "needs": [
+    "effect:return-auras-attached-to-chosen-creatures"
+   ],
+   "why": "return any number of Auras, each attached to a creature you control"
+  },
+  {
+   "name": "The Akroan War",
+   "needs": [
+    "effect:each-creature-damages-itself"
+   ],
+   "why": "chapter III: each tapped creature deals damage to itself equal to its power"
+  },
+  {
+   "name": "Towering-Wave Mystic",
+   "needs": [
+    "trigger:deals-damage-once-per-event"
+   ],
+   "why": "whenever this deals damage: once per event, not per recipient (Vessel of the All-Consuming ruling)"
+  },
+  {
+   "name": "Underworld Fires",
+   "needs": [
+    "replacement:dealt-damage-this-way-exile-if-dies"
+   ],
+   "why": "if a permanent dealt damage this way would die this turn, exile it instead"
+  },
+  {
+   "name": "Underworld Sentinel",
+   "needs": [
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "puts the exiled cards onto the battlefield under the control of whoever controlled it when it died"
+  },
+  {
+   "name": "Vitality Hunter",
+   "needs": [
+    "decision:x-targets"
+   ],
+   "why": "up to X target creatures on the becomes-monstrous trigger"
+  },
+  {
+   "name": "Warbriar Blessing",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "enchanted creature fights up to one target creature (last enchanted if the Aura has left)"
+  },
+  {
+   "name": "Wings of Hubris",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "the equipped creature (as it last was) becomes unblockable and is sacrificed at the next end step"
+  },
+  {
+   "name": "Yannik, Scavenging Sentinel",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "distribute X +1/+1 counters, X the exiled creature's power"
+  }
+ ]
+}

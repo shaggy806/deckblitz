@@ -48,6 +48,7 @@ import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
 import _poolBigPlay from "../pool/big-play.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
 import _poolBlastZone from "../pool/blast-zone.js";
+import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
 import _poolBogardanFirefiend from "../pool/bogardan-firefiend.js";
@@ -201,6 +202,7 @@ import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
 import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
+import _poolHeraldOfTheForgotten from "../pool/herald-of-the-forgotten.js";
 import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
 import _poolHexgoldSlash from "../pool/hexgold-slash.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
@@ -422,6 +424,7 @@ import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolSynchronizedSpellcraft from "../pool/synchronized-spellcraft.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
+import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
@@ -431,6 +434,7 @@ import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
+import _poolThirstForMeaning from "../pool/thirst-for-meaning.js";
 import _poolThreeTreeScribe from "../pool/three-tree-scribe.js";
 import _poolThreeVisits from "../pool/three-visits.js";
 import _poolThroneOfTheGodPharaoh from "../pool/throne-of-the-god-pharaoh.js";
@@ -566,6 +570,7 @@ const shard: CardShard = {
     _poolBigPlay,
     _poolBirdsOfParadise,
     _poolBlastZone,
+    _poolBloodAspirant,
     _poolBloodServitor,
     _poolBloodforgedBattleAxe,
     _poolBogardanFirefiend,
@@ -719,6 +724,7 @@ const shard: CardShard = {
     _poolHeiBaiSpiritOfBalance,
     _poolHenchbots,
     _poolHeraldOfKozilek,
+    _poolHeraldOfTheForgotten,
     _poolHerbologyInstructor,
     _poolHexgoldSlash,
     _poolHighspireBellRinger,
@@ -940,6 +946,7 @@ const shard: CardShard = {
     _poolSynchronizedSpellcraft,
     _poolTaintedIsle,
     _poolTallymanOfNurgle,
+    _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
     _poolThaumaturgesFamiliar,
@@ -949,6 +956,7 @@ const shard: CardShard = {
     _poolTheTwelfthDoctor,
     _poolThermalGlider,
     _poolThingSwing,
+    _poolThirstForMeaning,
     _poolThreeTreeScribe,
     _poolThreeVisits,
     _poolThroneOfTheGodPharaoh,

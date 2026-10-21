@@ -75,6 +75,7 @@ import _poolCapriciousSliver from "../pool/capricious-sliver.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
 import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
+import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
 import _poolChasmSkulker from "../pool/chasm-skulker.js";
@@ -396,6 +397,7 @@ import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
 import _poolSkitteringInvasion from "../pool/skittering-invasion.js";
 import _poolSkyknightSquire from "../pool/skyknight-squire.js";
 import _poolSlaughterCry from "../pool/slaughter-cry.js";
+import _poolSlaughterPriestOfMogis from "../pool/slaughter-priest-of-mogis.js";
 import _poolSleekSchooner from "../pool/sleek-schooner.js";
 import _poolSmokeBomb from "../pool/smoke-bomb.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
@@ -600,6 +602,7 @@ const shard: CardShard = {
     _poolCaptureOfJingzhou,
     _poolCaradoraHeartOfAlacria,
     _poolCasualtiesOfWar,
+    _poolCazurRuthlessStalker,
     _poolCentaurHealer,
     _poolCharcoalDiamond,
     _poolChasmSkulker,
@@ -921,6 +924,7 @@ const shard: CardShard = {
     _poolSkitteringInvasion,
     _poolSkyknightSquire,
     _poolSlaughterCry,
+    _poolSlaughterPriestOfMogis,
     _poolSleekSchooner,
     _poolSmokeBomb,
     _poolSmolderingCrater,

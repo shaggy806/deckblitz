@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2020 and Theros Beyond Death, whole** (batch 118): C20's last 35 cards (19
+  authored, 16 blocked) and THB's 130 (99 authored, 31 blocked), by six `card-author` agents and
+  the lead, with "this spell costs {X} less to cast, where X is your devotion to [color]" built
+  (rule 700.5 — Drag to the Underworld, Daybreak Chimera) (2026-10-20).
 - **Ikoria: Lair of Behemoths, whole** (batch 117): its 136 cards, 101 authored, 35 blocked,
   with **mutate** built (rule 702.140 — merged permanents, rule 730: the same object, the top
   card's characteristics and every card's abilities, coming apart as it leaves) and "whenever

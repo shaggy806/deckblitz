@@ -143,6 +143,7 @@ import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
+import _poolEscapeVelocity from "../pool/escape-velocity.js";
 import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
 import _poolExorcise from "../pool/exorcise.js";
 import _poolExpeditedInheritance from "../pool/expedited-inheritance.js";
@@ -292,6 +293,7 @@ import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
+import _poolNaiadOfHiddenCoves from "../pool/naiad-of-hidden-coves.js";
 import _poolNecromancersFamiliar from "../pool/necromancers-familiar.js";
 import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
@@ -403,6 +405,7 @@ import _poolShivanDragon from "../pool/shivan-dragon.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
+import _poolSkophosWarleader from "../pool/skophos-warleader.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
 import _poolSkyCrier from "../pool/sky-crier.js";
 import _poolSkystreakEngineer from "../pool/skystreak-engineer.js";
@@ -675,6 +678,7 @@ const shard: CardShard = {
     _poolEnvoyOfOkinecAhau,
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
+    _poolEscapeVelocity,
     _poolEvershrikesGift,
     _poolExorcise,
     _poolExpeditedInheritance,
@@ -824,6 +828,7 @@ const shard: CardShard = {
     _poolMycosynthGolem,
     _poolMyrkulsInvoker,
     _poolMysticArchaeologist,
+    _poolNaiadOfHiddenCoves,
     _poolNecromancersFamiliar,
     _poolNeedForSpeed,
     _poolNeedlevergePathway,
@@ -935,6 +940,7 @@ const shard: CardShard = {
     _poolSilundiVision,
     _poolSimicRagworm,
     _poolSirensRuse,
+    _poolSkophosWarleader,
     _poolSkullclamp,
     _poolSkyCrier,
     _poolSkystreakEngineer,

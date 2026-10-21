@@ -264,6 +264,7 @@ import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
 import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
 import _poolNoblePanther from "../pool/noble-panther.js";
+import _poolNyleasHuntmaster from "../pool/nyleas-huntmaster.js";
 import _poolNyxbloomAncient from "../pool/nyxbloom-ancient.js";
 import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
 import _poolOfferingToAsha from "../pool/offering-to-asha.js";
@@ -749,6 +750,7 @@ const shard: CardShard = {
     _poolNicanzilCurrentConductor,
     _poolNimbusWings,
     _poolNoblePanther,
+    _poolNyleasHuntmaster,
     _poolNyxbloomAncient,
     _poolNyxbornBrute,
     _poolOfferingToAsha,

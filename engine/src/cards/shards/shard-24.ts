@@ -59,6 +59,7 @@ import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
 import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
 import _poolBreach from "../pool/breach.js";
+import _poolBrineGiant from "../pool/brine-giant.js";
 import _poolBronzeSable from "../pool/bronze-sable.js";
 import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
 import _poolBubbleUp from "../pool/bubble-up.js";
@@ -382,6 +383,7 @@ import _poolSpontaneousFlight from "../pool/spontaneous-flight.js";
 import _poolSpotcycleScouter from "../pool/spotcycle-scouter.js";
 import _poolSpringSplasher from "../pool/spring-splasher.js";
 import _poolStaggeringInsight from "../pool/staggering-insight.js";
+import _poolStampedeRider from "../pool/stampede-rider.js";
 import _poolStarwinder from "../pool/starwinder.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelWall from "../pool/steel-wall.js";
@@ -391,6 +393,7 @@ import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
 import _poolSunblastAngel from "../pool/sunblast-angel.js";
 import _poolSurgehackerMech from "../pool/surgehacker-mech.js";
+import _poolSwimmerInNightmares from "../pool/swimmer-in-nightmares.js";
 import _poolSwordOfTheRealms from "../pool/sword-of-the-realms.js";
 import _poolSwordOfWealthAndPower from "../pool/sword-of-wealth-and-power.js";
 import _poolTaintedStrike from "../pool/tainted-strike.js";
@@ -494,6 +497,7 @@ import _tokensPestToken from "../tokens/pest-token.js";
 import _tokensRhinoToken from "../tokens/rhino-token.js";
 import _tokensSquidToken from "../tokens/squid-token.js";
 import _tokensStormCrowToken from "../tokens/storm-crow-token.js";
+import _tokensWallTokenArtifactDefender from "../tokens/wall-token-artifact-defender.js";
 
 const shard: CardShard = {
   pool: [
@@ -553,6 +557,7 @@ const shard: CardShard = {
     _poolBranchsnapLorian,
     _poolBrashTaunter,
     _poolBreach,
+    _poolBrineGiant,
     _poolBronzeSable,
     _poolBroodmateTyrant,
     _poolBubbleUp,
@@ -876,6 +881,7 @@ const shard: CardShard = {
     _poolSpotcycleScouter,
     _poolSpringSplasher,
     _poolStaggeringInsight,
+    _poolStampedeRider,
     _poolStarwinder,
     _poolSteelHellkite,
     _poolSteelWall,
@@ -885,6 +891,7 @@ const shard: CardShard = {
     _poolSunbladeAngel,
     _poolSunblastAngel,
     _poolSurgehackerMech,
+    _poolSwimmerInNightmares,
     _poolSwordOfTheRealms,
     _poolSwordOfWealthAndPower,
     _poolTaintedStrike,
@@ -990,6 +997,7 @@ const shard: CardShard = {
     _tokensRhinoToken,
     _tokensSquidToken,
     _tokensStormCrowToken,
+    _tokensWallTokenArtifactDefender,
   ],
 };
 

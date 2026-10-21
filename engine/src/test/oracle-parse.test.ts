@@ -1071,6 +1071,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(alliance.complete).toBe(true);
     const domain = face("This spell costs {1} less to cast for each basic land type among lands you control.", "Sorcery");
     expect(domain.selfCostReduction).toEqual({ condition: always, reduceGeneric: { basicLandTypes: "you" } });
+    const drag = face(
+      "This spell costs {X} less to cast, where X is your devotion to black. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)\nDestroy target creature.",
+      "Instant",
+    );
+    expect(drag.selfCostReduction).toEqual({ condition: always, reduceGeneric: { devotionTo: ["B"] } });
+    expect(drag.complete).toBe(true);
     const linvala = face(
       "At the beginning of combat on your turn, if you have a full party, target creature gets +1/+1 and gains flying until end of turn.",
       "Creature — Human Cleric",

@@ -228,6 +228,7 @@ import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
 import _poolInTheTrenches from "../pool/in-the-trenches.js";
+import _poolInevitableEnd from "../pool/inevitable-end.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
@@ -296,6 +297,7 @@ import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
 import _poolNeurokReplica from "../pool/neurok-replica.js";
 import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
+import _poolNikaraLairScavenger from "../pool/nikara-lair-scavenger.js";
 import _poolNipGwyllion from "../pool/nip-gwyllion.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
 import _poolNullBrooch from "../pool/null-brooch.js";
@@ -469,12 +471,14 @@ import _poolTroveTracker from "../pool/trove-tracker.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
 import _poolTurtlePower from "../pool/turtle-power.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
+import _poolTymaretChosenFromDeath from "../pool/tymaret-chosen-from-death.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
 import _poolUnassumingSage from "../pool/unassuming-sage.js";
 import _poolUndercoverCrocodelf from "../pool/undercover-crocodelf.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
+import _poolUnderworldCharger from "../pool/underworld-charger.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
 import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.js";
 import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
@@ -764,6 +768,7 @@ const shard: CardShard = {
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
     _poolInTheTrenches,
+    _poolInevitableEnd,
     _poolInfirmaryHealer,
     _poolInfuseWithVitality,
     _poolIngeniousArtillerist,
@@ -832,6 +837,7 @@ const shard: CardShard = {
     _poolNeurokReplica,
     _poolNeutralizeTheGuards,
     _poolNezumiInformant,
+    _poolNikaraLairScavenger,
     _poolNipGwyllion,
     _poolNoxiousDragon,
     _poolNullBrooch,
@@ -1005,12 +1011,14 @@ const shard: CardShard = {
     _poolTuknirDeathlock,
     _poolTurtlePower,
     _poolTwinbladeAssassins,
+    _poolTymaretChosenFromDeath,
     _poolTymnaTheWeaver,
     _poolUSAgentJohnWalker,
     _poolUlvenwaldBear,
     _poolUnassumingSage,
     _poolUndercoverCrocodelf,
     _poolUnderseaInvader,
+    _poolUnderworldCharger,
     _poolUndulatingWitness,
     _poolUnholyAnnexRitualChamber,
     _poolUnsettlingTwins,

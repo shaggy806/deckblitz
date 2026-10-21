@@ -302,6 +302,7 @@ import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
 import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
+import _poolNyxHerald from "../pool/nyx-herald.js";
 import _poolOathswornVampire from "../pool/oathsworn-vampire.js";
 import _poolObeliskOfJund from "../pool/obelisk-of-jund.js";
 import _poolOketrasMonument from "../pool/oketras-monument.js";
@@ -476,10 +477,12 @@ import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
 import _poolVisionsOfBeyond from "../pool/visions-of-beyond.js";
 import _poolVivienReid from "../pool/vivien-reid.js";
+import _poolVoraciousTyphon from "../pool/voracious-typhon.js";
 import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
 import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
 import _poolWallOfFaith from "../pool/wall-of-faith.js";
+import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolNissasExpedition,
     _poolNoviceInspector,
     _poolNurturingPeatland,
+    _poolNyxHerald,
     _poolOathswornVampire,
     _poolObeliskOfJund,
     _poolOketrasMonument,
@@ -982,10 +986,12 @@ const shard: CardShard = {
     _poolVisionOfLove,
     _poolVisionsOfBeyond,
     _poolVivienReid,
+    _poolVoraciousTyphon,
     _poolVrenTheRelentless,
     _poolWakedancer,
     _poolWallOfEarth,
     _poolWallOfFaith,
+    _poolWardenOfTheChained,
     _poolWarriorsSword,
     _poolWhipOfErebos,
     _poolWhiptailWurm,

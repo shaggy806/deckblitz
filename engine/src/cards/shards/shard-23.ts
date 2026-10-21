@@ -119,6 +119,7 @@ import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
 import _poolDeathriteShaman from "../pool/deathrite-shaman.js";
 import _poolDemolitionField from "../pool/demolition-field.js";
+import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
@@ -172,6 +173,7 @@ import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
 import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
+import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
@@ -229,6 +231,7 @@ import _poolIvoryTower from "../pool/ivory-tower.js";
 import _poolJaceBeleren from "../pool/jace-beleren.js";
 import _poolJamesWanderingDad from "../pool/james-wandering-dad.js";
 import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
+import _poolJirinaKudro from "../pool/jirina-kudro.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJoyfulStormsculptor from "../pool/joyful-stormsculptor.js";
 import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
@@ -474,6 +477,7 @@ import _poolTranquilize from "../pool/tranquilize.js";
 import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTravelingBotanist from "../pool/traveling-botanist.js";
+import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
@@ -655,6 +659,7 @@ const shard: CardShard = {
     _poolDeathStroke,
     _poolDeathriteShaman,
     _poolDemolitionField,
+    _poolDemonOfLoathing,
     _poolDesperateMeasures,
     _poolDespoil,
     _poolDisciplinedDuelist,
@@ -708,6 +713,7 @@ const shard: CardShard = {
     _poolFrogButler,
     _poolFrontierSiege,
     _poolFuneralCharm,
+    _poolFuneralRites,
     _poolGandalfGoblinsBane,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
@@ -765,6 +771,7 @@ const shard: CardShard = {
     _poolJaceBeleren,
     _poolJamesWanderingDad,
     _poolJetFreedomFighter,
+    _poolJirinaKudro,
     _poolJooDeeOneOfMany,
     _poolJoyfulStormsculptor,
     _poolJunjiTheMidnightSky,
@@ -1010,6 +1017,7 @@ const shard: CardShard = {
     _poolTrappedInTheScreen,
     _poolTraumaticCritique,
     _poolTravelingBotanist,
+    _poolTreacherousBlessing,
     _poolTrokinHighGuard,
     _poolTwiceUponATime,
     _poolTwilightDrover,

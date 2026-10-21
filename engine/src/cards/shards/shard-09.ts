@@ -110,6 +110,7 @@ import _poolCrystalVein from "../pool/crystal-vein.js";
 import _poolDakkonShadowSlayer from "../pool/dakkon-shadow-slayer.js";
 import _poolDarkwatchElves from "../pool/darkwatch-elves.js";
 import _poolDauntlessCathar from "../pool/dauntless-cathar.js";
+import _poolDaybreakChimera from "../pool/daybreak-chimera.js";
 import _poolDeadlyAlliance from "../pool/deadly-alliance.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
 import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
@@ -248,6 +249,7 @@ import _poolKeralKeepDisciples from "../pool/keral-keep-disciples.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
 import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
 import _poolKitchenImp from "../pool/kitchen-imp.js";
+import _poolKlothyssDesign from "../pool/klothyss-design.js";
 import _poolKnightErrantOfEos from "../pool/knight-errant-of-eos.js";
 import _poolKnightfisher from "../pool/knightfisher.js";
 import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
@@ -278,6 +280,7 @@ import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
+import _poolMindwrackHarpy from "../pool/mindwrack-harpy.js";
 import _poolMinersGuidewing from "../pool/miners-guidewing.js";
 import _poolMirageMirror from "../pool/mirage-mirror.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
@@ -324,6 +327,7 @@ import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
+import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
@@ -444,6 +448,7 @@ import _poolStreamHopper from "../pool/stream-hopper.js";
 import _poolStudiousFirstYear from "../pool/studious-first-year.js";
 import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
+import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
 import _poolSwiftSpiral from "../pool/swift-spiral.js";
@@ -459,6 +464,7 @@ import _poolTerritorialKavu from "../pool/territorial-kavu.js";
 import _poolTestamentBearer from "../pool/testament-bearer.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThaumatog from "../pool/thaumatog.js";
+import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
@@ -539,6 +545,7 @@ import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestatio
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
+import _tokensReflectionToken from "../tokens/reflection-token.js";
 import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automated-assembly-line.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
@@ -654,6 +661,7 @@ const shard: CardShard = {
     _poolDakkonShadowSlayer,
     _poolDarkwatchElves,
     _poolDauntlessCathar,
+    _poolDaybreakChimera,
     _poolDeadlyAlliance,
     _poolDeadlyRecluse,
     _poolDeathInTheFamily,
@@ -792,6 +800,7 @@ const shard: CardShard = {
     _poolKessigFlamebreather,
     _poolKioraOfFireAndAshes,
     _poolKitchenImp,
+    _poolKlothyssDesign,
     _poolKnightErrantOfEos,
     _poolKnightfisher,
     _poolKothOfTheHomestead,
@@ -822,6 +831,7 @@ const shard: CardShard = {
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
     _poolMindseekerOculus,
+    _poolMindwrackHarpy,
     _poolMinersGuidewing,
     _poolMirageMirror,
     _poolMistralCharger,
@@ -868,6 +878,7 @@ const shard: CardShard = {
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
+    _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
     _poolPhytoburst,
     _poolPickUpThePace,
@@ -988,6 +999,7 @@ const shard: CardShard = {
     _poolStudiousFirstYear,
     _poolSubterfuge,
     _poolSummonIxion,
+    _poolSunlitHoplite,
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
     _poolSwiftSpiral,
@@ -1003,6 +1015,7 @@ const shard: CardShard = {
     _poolTestamentBearer,
     _poolTezzeretArtificeMaster,
     _poolThaumatog,
+    _poolTheBirthOfMeletis,
     _poolTheDalekEmperor,
     _poolTheLunarWhale,
     _poolThermalNavigator,
@@ -1085,6 +1098,7 @@ const shard: CardShard = {
     _tokensMouseToken,
     _tokensMowu,
     _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,
+    _tokensReflectionToken,
     _tokensRobotTokenAutomatedAssemblyLine,
     _tokensTreasureToken,
     _tokensZombieKnightToken,

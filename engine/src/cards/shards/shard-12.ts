@@ -88,6 +88,7 @@ import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
+import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
 import _poolDawnrayArcher from "../pool/dawnray-archer.js";
@@ -154,6 +155,7 @@ import _poolFieldsOfStrife from "../pool/fields-of-strife.js";
 import _poolFiftyFeetOfRope from "../pool/fifty-feet-of-rope.js";
 import _poolFightRigging from "../pool/fight-rigging.js";
 import _poolFireNationPalace from "../pool/fire-nation-palace.js";
+import _poolFirefluxSquad from "../pool/fireflux-squad.js";
 import _poolFireglassMentor from "../pool/fireglass-mentor.js";
 import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
@@ -401,6 +403,7 @@ import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
 import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
+import _poolSouvenirSnatcher from "../pool/souvenir-snatcher.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
@@ -603,6 +606,7 @@ const shard: CardShard = {
     _poolCrossoverCollaboration,
     _poolCrystalSlipper,
     _poolCutOfTheProfits,
+    _poolDaringFiendbonder,
     _poolDarkmossBridge,
     _poolDarksteelGargoyle,
     _poolDawnrayArcher,
@@ -669,6 +673,7 @@ const shard: CardShard = {
     _poolFiftyFeetOfRope,
     _poolFightRigging,
     _poolFireNationPalace,
+    _poolFirefluxSquad,
     _poolFireglassMentor,
     _poolFistsOfIronwood,
     _poolFlamekinSpitfire,
@@ -916,6 +921,7 @@ const shard: CardShard = {
     _poolSoltariTrooper,
     _poolSongOfEarendil,
     _poolSophiaDoggedDetective,
+    _poolSouvenirSnatcher,
     _poolSpectacularSpiderMan,
     _poolSpellbook,
     _poolSpellgyre,

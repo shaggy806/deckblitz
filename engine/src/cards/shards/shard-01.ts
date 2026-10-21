@@ -93,6 +93,7 @@ import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDejaVu from "../pool/deja-vu.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
+import _poolDevourerOfMemory from "../pool/devourer-of-memory.js";
 import _poolDiamondWeapon from "../pool/diamond-weapon.js";
 import _poolDismalBackwater from "../pool/dismal-backwater.js";
 import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
@@ -163,6 +164,7 @@ import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
 import _poolGorgonFlail from "../pool/gorgon-flail.js";
 import _poolGougedZealot from "../pool/gouged-zealot.js";
 import _poolGracefulTakedown from "../pool/graceful-takedown.js";
+import _poolGraspingGiant from "../pool/grasping-giant.js";
 import _poolGravelighter from "../pool/gravelighter.js";
 import _poolGrenzoHavocRaiser from "../pool/grenzo-havoc-raiser.js";
 import _poolGrimGuardian from "../pool/grim-guardian.js";
@@ -181,6 +183,7 @@ import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
+import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
 import _poolHighlandGiant from "../pool/highland-giant.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
@@ -604,6 +607,7 @@ const shard: CardShard = {
     _poolDejaVu,
     _poolDerangedAssistant,
     _poolDesperateFarmer,
+    _poolDevourerOfMemory,
     _poolDiamondWeapon,
     _poolDismalBackwater,
     _poolDisruptiveStormbrood,
@@ -674,6 +678,7 @@ const shard: CardShard = {
     _poolGorgonFlail,
     _poolGougedZealot,
     _poolGracefulTakedown,
+    _poolGraspingGiant,
     _poolGravelighter,
     _poolGrenzoHavocRaiser,
     _poolGrimGuardian,
@@ -692,6 +697,7 @@ const shard: CardShard = {
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeirOfTheAncientFang,
+    _poolHeroesOfTheRevel,
     _poolHeroesRemembered,
     _poolHighlandGiant,
     _poolHomaridShaman,

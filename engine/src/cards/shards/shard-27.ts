@@ -105,6 +105,7 @@ import _poolDefacedGallery from "../pool/defaced-gallery.js";
 import _poolDefenestrate from "../pool/defenestrate.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDemonBolt from "../pool/demon-bolt.js";
+import _poolDenyTheDivine from "../pool/deny-the-divine.js";
 import _poolDepartTheRealm from "../pool/depart-the-realm.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
@@ -214,6 +215,7 @@ import _poolHoundOfGriselbrand from "../pool/hound-of-griselbrand.js";
 import _poolHuatliTheSunsHeart from "../pool/huatli-the-suns-heart.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
+import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
@@ -294,6 +296,7 @@ import _poolNightScythe from "../pool/night-scythe.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
+import _poolOneWithTheStars from "../pool/one-with-the-stars.js";
 import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
 import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
@@ -379,6 +382,7 @@ import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
+import _poolSkolaGrovedancer from "../pool/skola-grovedancer.js";
 import _poolSkullportMerchant from "../pool/skullport-merchant.js";
 import _poolSkySkiff from "../pool/sky-skiff.js";
 import _poolSkySpirit from "../pool/sky-spirit.js";
@@ -634,6 +638,7 @@ const shard: CardShard = {
     _poolDefenestrate,
     _poolDefilingDaemogoth,
     _poolDemonBolt,
+    _poolDenyTheDivine,
     _poolDepartTheRealm,
     _poolDeployToTheFront,
     _poolDereviEmpyrialTactician,
@@ -743,6 +748,7 @@ const shard: CardShard = {
     _poolHuatliTheSunsHeart,
     _poolHussarPatrol,
     _poolIdyllicGrange,
+    _poolImpendingDoom,
     _poolIncrementalBlight,
     _poolInfernalPhantom,
     _poolInspiredTethermage,
@@ -823,6 +829,7 @@ const shard: CardShard = {
     _poolNurglesRot,
     _poolObsianusGolem,
     _poolOctaviaLivingThesis,
+    _poolOneWithTheStars,
     _poolOrderOfLeitbur,
     _poolOreskosSwiftclaw,
     _poolOriginOfTheHulk,
@@ -908,6 +915,7 @@ const shard: CardShard = {
     _poolSilverShroudCostume,
     _poolSilverbackElder,
     _poolSilverchaseFox,
+    _poolSkolaGrovedancer,
     _poolSkullportMerchant,
     _poolSkySkiff,
     _poolSkySpirit,

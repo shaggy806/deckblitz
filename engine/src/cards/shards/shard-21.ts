@@ -128,6 +128,7 @@ import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
 import _poolEgonGodOfDeath from "../pool/egon-god-of-death.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
+import _poolElspethsNightmare from "../pool/elspeths-nightmare.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
 import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
@@ -315,6 +316,7 @@ import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
+import _poolPheresBandBrawler from "../pool/pheres-band-brawler.js";
 import _poolPheresBandCentaurs from "../pool/pheres-band-centaurs.js";
 import _poolPhyrexianHulk from "../pool/phyrexian-hulk.js";
 import _poolPhyrexianWalker from "../pool/phyrexian-walker.js";
@@ -454,6 +456,7 @@ import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
 import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
+import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
 import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadMinotaur from "../pool/undead-minotaur.js";
@@ -642,6 +645,7 @@ const shard: CardShard = {
     _poolEfflorescence,
     _poolEgonGodOfDeath,
     _poolElanorGardner,
+    _poolElspethsNightmare,
     _poolElvenFarsight,
     _poolElvishDoomsayer,
     _poolEmeritusOfAbundance,
@@ -829,6 +833,7 @@ const shard: CardShard = {
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
     _poolPhantasmalImage,
+    _poolPheresBandBrawler,
     _poolPheresBandCentaurs,
     _poolPhyrexianHulk,
     _poolPhyrexianWalker,
@@ -968,6 +973,7 @@ const shard: CardShard = {
     _poolTurbulentFen,
     _poolTurbulentSteppe,
     _poolTuyaBearclaw,
+    _poolTymaretCallsTheDead,
     _poolUmaraEntangler,
     _poolUnctussRetrofitter,
     _poolUndeadMinotaur,

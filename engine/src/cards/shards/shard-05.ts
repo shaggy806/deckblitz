@@ -22,6 +22,7 @@ import _poolAmbushParty from "../pool/ambush-party.js";
 import _poolAnHavvaTownship from "../pool/an-havva-township.js";
 import _poolAnabaBodyguard from "../pool/anaba-bodyguard.js";
 import _poolAnimistsMight from "../pool/animists-might.js";
+import _poolAphemiaTheCacophony from "../pool/aphemia-the-cacophony.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArcboundTracker from "../pool/arcbound-tracker.js";
@@ -109,6 +110,7 @@ import _poolClapSnap from "../pool/clap-snap.js";
 import _poolCleaverRiot from "../pool/cleaver-riot.js";
 import _poolCliffhavenSellSword from "../pool/cliffhaven-sell-sword.js";
 import _poolClifftopLookout from "../pool/clifftop-lookout.js";
+import _poolClingToDust from "../pool/cling-to-dust.js";
 import _poolClockworkFox from "../pool/clockwork-fox.js";
 import _poolCloudManta from "../pool/cloud-manta.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
@@ -223,6 +225,7 @@ import _poolHelixPinnacle from "../pool/helix-pinnacle.js";
 import _poolHelpfulHunter from "../pool/helpful-hunter.js";
 import _poolHerdHeirloom from "../pool/herd-heirloom.js";
 import _poolHeritageReclamation from "../pool/heritage-reclamation.js";
+import _poolHeroOfTheNyxborn from "../pool/hero-of-the-nyxborn.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
 import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
@@ -559,6 +562,7 @@ const shard: CardShard = {
     _poolAnHavvaTownship,
     _poolAnabaBodyguard,
     _poolAnimistsMight,
+    _poolAphemiaTheCacophony,
     _poolAphettoGrifter,
     _poolArcboundCrusher,
     _poolArcboundTracker,
@@ -646,6 +650,7 @@ const shard: CardShard = {
     _poolCleaverRiot,
     _poolCliffhavenSellSword,
     _poolClifftopLookout,
+    _poolClingToDust,
     _poolClockworkFox,
     _poolCloudManta,
     _poolCombatTutorial,
@@ -760,6 +765,7 @@ const shard: CardShard = {
     _poolHelpfulHunter,
     _poolHerdHeirloom,
     _poolHeritageReclamation,
+    _poolHeroOfTheNyxborn,
     _poolHinderingLight,
     _poolHireACrew,
     _poolHornedLochWhale,

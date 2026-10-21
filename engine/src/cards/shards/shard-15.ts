@@ -20,6 +20,7 @@ import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
 import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
+import _poolArenaTrickster from "../pool/arena-trickster.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
 import _poolArgivianFind from "../pool/argivian-find.js";
 import _poolArmorWars from "../pool/armor-wars.js";
@@ -70,6 +71,7 @@ import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
+import _poolCommandingPresence from "../pool/commanding-presence.js";
 import _poolCompassGnome from "../pool/compass-gnome.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
 import _poolConcentrate from "../pool/concentrate.js";
@@ -108,6 +110,7 @@ import _poolDoggedHunter from "../pool/dogged-hunter.js";
 import _poolDonatelloGadgetMaster from "../pool/donatello-gadget-master.js";
 import _poolDoomskarWarrior from "../pool/doomskar-warrior.js";
 import _poolDoranBesiegedByTime from "../pool/doran-besieged-by-time.js";
+import _poolDragToTheUnderworld from "../pool/drag-to-the-underworld.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
 import _poolDrannithStinger from "../pool/drannith-stinger.js";
@@ -236,6 +239,7 @@ import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
 import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
 import _poolIronMyr from "../pool/iron-myr.js";
+import _poolIronscaleHydra from "../pool/ironscale-hydra.js";
 import _poolIrreverentGremlin from "../pool/irreverent-gremlin.js";
 import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
@@ -257,6 +261,7 @@ import _poolLamentation from "../pool/lamentation.js";
 import _poolLanternFlare from "../pool/lantern-flare.js";
 import _poolLanternKami from "../pool/lantern-kami.js";
 import _poolLarderZombie from "../pool/larder-zombie.js";
+import _poolLavabrinkFloodgates from "../pool/lavabrink-floodgates.js";
 import _poolLawlessBroker from "../pool/lawless-broker.js";
 import _poolLazotepReaver from "../pool/lazotep-reaver.js";
 import _poolLegionStronghold from "../pool/legion-stronghold.js";
@@ -292,6 +297,7 @@ import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
 import _poolMindbreakTrap from "../pool/mindbreak-trap.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMirrormade from "../pool/mirrormade.js";
+import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
 import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
@@ -535,6 +541,7 @@ const shard: CardShard = {
     _poolAnglerDrake,
     _poolAqueousAria,
     _poolArcboundWhelp,
+    _poolArenaTrickster,
     _poolAresGodOfWar,
     _poolArgivianFind,
     _poolArmorWars,
@@ -585,6 +592,7 @@ const shard: CardShard = {
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
     _poolCometCrawler,
+    _poolCommandingPresence,
     _poolCompassGnome,
     _poolCompulsiveResearch,
     _poolConcentrate,
@@ -623,6 +631,7 @@ const shard: CardShard = {
     _poolDonatelloGadgetMaster,
     _poolDoomskarWarrior,
     _poolDoranBesiegedByTime,
+    _poolDragToTheUnderworld,
     _poolDragonTrainer,
     _poolDragonmasterOutcast,
     _poolDrannithStinger,
@@ -751,6 +760,7 @@ const shard: CardShard = {
     _poolIrenicussVileDuplication,
     _poolIronHillsBlacksmith,
     _poolIronMyr,
+    _poolIronscaleHydra,
     _poolIrreverentGremlin,
     _poolIzzetCluestone,
     _poolJhovallQueen,
@@ -772,6 +782,7 @@ const shard: CardShard = {
     _poolLanternFlare,
     _poolLanternKami,
     _poolLarderZombie,
+    _poolLavabrinkFloodgates,
     _poolLawlessBroker,
     _poolLazotepReaver,
     _poolLegionStronghold,
@@ -807,6 +818,7 @@ const shard: CardShard = {
     _poolMindbreakTrap,
     _poolMineBearer,
     _poolMirrormade,
+    _poolMischievousChimera,
     _poolMisshapenFiend,
     _poolMoaningSpirit,
     _poolMoltenCoreMaestro,

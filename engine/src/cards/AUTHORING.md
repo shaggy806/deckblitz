@@ -658,7 +658,9 @@ Asphodel; a hybrid pip counts for each colour it contains, `{X}` and generic
 for nothing; `"that-color"` is the colour an `"any-color"` `add-mana` is
 making — Nykthos, Shrine to Nyx; a list is "your devotion to [one] and
 [other]", a `{W/B}` counted once; Altar of the Pantheon's `devotionBonus`
-adds to every one), `{ basicLandTypes: "you" }` (domain, an ability word —
+adds to every one; as a `selfCostReduction` amount it takes a list —
+`{ devotionTo: ["B"] }`, Drag to the Underworld's "costs {X} less to cast,
+where X is your devotion to black", generic mana only), `{ basicLandTypes: "you" }` (domain, an ability word —
 rule 207.2c: the basic land types among lands you control, each once, 0 to 5 —
 Meria's Outrider; the same form is a `costReduction`/`selfCostReduction`
 amount, Jodah's Codex and Yavimaya Sojourner, and a CDA count, Nishoba

@@ -12,6 +12,7 @@
 import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectSpec, SpellResolver } from "./effects.js";
 import type { GameEvent } from "./events.js";
+import type { Color } from "./mana.js";
 import type { GameState, PlayerCounterKind, TurnHistoryKind, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
@@ -541,6 +542,12 @@ export type CostReductionAmount =
    * creature in your party". `characteristics.ts`'s
    * `partySizeOf`; see the `EffectAmount` of the same name. */
   | { readonly partySize: "you" }
+  /** Devotion (rule 700.5) — {1} less for each mana symbol of the colors among
+   * the mana costs of permanents its controller controls — Drag to the
+   * Underworld's "This spell costs {X} less to cast, where X is your devotion
+   * to black". `characteristics.ts`'s `devotionOf`; see the `EffectAmount` of
+   * the same name. */
+  | { readonly devotionTo: readonly Color[] }
   /** A sum or maximum over permanents — Ghalta, Primal Hunger's "costs {X}
    * less to cast, where X is the **total power** of creatures you control".
    * Clamped at 0. See `AggregateSpec`. */

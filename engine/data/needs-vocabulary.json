@@ -8812,6 +8812,47 @@
   },
   "filter:has-cycling": {
    "example": "Zenith Flare (built 2026-10-20)"
+  },
+  "static:aura-grants-ability-referencing-aura": {
+   "family": "effect:attached-effect-ref",
+   "example": "Heliod's Punishment"
+  },
+  "effect:opponent-casts-exiled-free": {
+   "family": "effect:opponent-chooses-from-found",
+   "example": "Allure of the Unknown"
+  },
+  "effect:protection-from-player-for-you-and-planeswalkers": {
+   "family": "effect:protection-from-player-for-permanent",
+   "example": "Eon Frolicker"
+  },
+  "condition:cards-cycled-this-turn": {
+   "family": "trigger:cycle-trigger",
+   "example": "Spellpyre Phoenix"
+  },
+  "filter:damaged-this-turn-by-source": {
+   "family": "trigger:dies-after-dealt-damage-by-source",
+   "example": "Incendiary Oracle"
+  },
+  "effect:restrict-until-end-of-combat": {
+   "example": "Flummoxed Cyclops"
+  },
+  "effect:hexproof-from-counters": {
+   "family": "mechanic:keyword-counters",
+   "example": "Kathril, Aspect Warper"
+  },
+  "amount:cda-graveyard-count-excluding-self": {
+   "example": "Boneyard Mycodrax"
+  },
+  "trigger:becomes-target-by-named-source": {
+   "family": "trigger:becomes-target-by-your-ability",
+   "example": "Skophos Maze-Warden"
+  },
+  "effect:doesnt-untap-while-source-tapped": {
+   "family": "static:may-choose-not-to-untap",
+   "example": "Entrancing Lyre"
+  },
+  "cost:cost-reduction-devotion": {
+   "example": "Drag to the Underworld (built 2026-10-20)"
   }
  }
 }

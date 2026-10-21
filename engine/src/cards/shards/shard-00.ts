@@ -147,6 +147,7 @@ import _poolEliteArchers from "../pool/elite-archers.js";
 import _poolElvishHandservant from "../pool/elvish-handservant.js";
 import _poolElvishHarbinger from "../pool/elvish-harbinger.js";
 import _poolEmbercleave from "../pool/embercleave.js";
+import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
 import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
@@ -291,6 +292,7 @@ import _poolMortivore from "../pool/mortivore.js";
 import _poolMourning from "../pool/mourning.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
+import _poolNessianHornbeetle from "../pool/nessian-hornbeetle.js";
 import _poolNettlecyst from "../pool/nettlecyst.js";
 import _poolNevaStalkedByNightmares from "../pool/neva-stalked-by-nightmares.js";
 import _poolNightshadeHarvester from "../pool/nightshade-harvester.js";
@@ -304,6 +306,7 @@ import _poolOneWithTheKami from "../pool/one-with-the-kami.js";
 import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
+import _poolOreadOfMountainsBlaze from "../pool/oread-of-mountains-blaze.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
 import _poolOrmendahlTheCorrupter from "../pool/ormendahl-the-corrupter.js";
 import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
@@ -317,6 +320,7 @@ import _poolParadoxGardens from "../pool/paradox-gardens.js";
 import _poolPasswallAdept from "../pool/passwall-adept.js";
 import _poolPeaceStrider from "../pool/peace-strider.js";
 import _poolPettyTheft from "../pool/petty-theft.js";
+import _poolPhalanxTactics from "../pool/phalanx-tactics.js";
 import _poolPhotonMightyMarvel from "../pool/photon-mighty-marvel.js";
 import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
@@ -451,6 +455,7 @@ import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
 import _poolTerrificTeamUp from "../pool/terrific-team-up.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
+import _poolTheBindingOfTheTitans from "../pool/the-binding-of-the-titans.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
@@ -690,6 +695,7 @@ const shard: CardShard = {
     _poolElvishHandservant,
     _poolElvishHarbinger,
     _poolEmbercleave,
+    _poolEnigmaticIncarnation,
     _poolEnragedCeratok,
     _poolErebosBleakHearted,
     _poolEverethViceroyOfPlunder,
@@ -834,6 +840,7 @@ const shard: CardShard = {
     _poolMourning,
     _poolNaliaDearnise,
     _poolNaturesLore,
+    _poolNessianHornbeetle,
     _poolNettlecyst,
     _poolNevaStalkedByNightmares,
     _poolNightshadeHarvester,
@@ -847,6 +854,7 @@ const shard: CardShard = {
     _poolOpenTheGraves,
     _poolOpulentPalace,
     _poolOraxid,
+    _poolOreadOfMountainsBlaze,
     _poolOriginOfMetalbending,
     _poolOrmendahlTheCorrupter,
     _poolOsgoodOperationDouble,
@@ -860,6 +868,7 @@ const shard: CardShard = {
     _poolPasswallAdept,
     _poolPeaceStrider,
     _poolPettyTheft,
+    _poolPhalanxTactics,
     _poolPhotonMightyMarvel,
     _poolPhyrexianBroodlings,
     _poolPipBoy3000,
@@ -994,6 +1003,7 @@ const shard: CardShard = {
     _poolTeoSpiritedGlider,
     _poolTerrificTeamUp,
     _poolTerritorialHellkite,
+    _poolTheBindingOfTheTitans,
     _poolTheComingOfGalactus,
     _poolTheImmortalWeapons,
     _poolTheMightstoneAndWeakstone,

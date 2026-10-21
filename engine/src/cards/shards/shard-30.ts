@@ -28,6 +28,7 @@ import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
+import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
 import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
@@ -48,6 +49,7 @@ import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
 import _poolBladeHistorian from "../pool/blade-historian.js";
+import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
 import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
@@ -101,6 +103,7 @@ import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
+import _poolCuriousHerd from "../pool/curious-herd.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
@@ -329,6 +332,7 @@ import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
 import _poolMyriadConstruct from "../pool/myriad-construct.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
+import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
@@ -341,6 +345,7 @@ import _poolOffenderAtLarge from "../pool/offender-at-large.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
+import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
@@ -553,6 +558,7 @@ const shard: CardShard = {
     _poolArcboundCondor,
     _poolArgothianEnchantress,
     _poolArtfulDodge,
+    _poolAshioksForerunner,
     _poolAspectOfGorgon,
     _poolAtzocanSeer,
     _poolAugurOfAutumn,
@@ -573,6 +579,7 @@ const shard: CardShard = {
     _poolBlackPantherVanguard,
     _poolBlackbladeReforged,
     _poolBladeHistorian,
+    _poolBlightBreathCatoblepas,
     _poolBlightedWoodland,
     _poolBlightreaperThallid,
     _poolBloodArtist,
@@ -626,6 +633,7 @@ const shard: CardShard = {
     _poolCruelFinality,
     _poolCryptGhast,
     _poolCuriousFarmAnimals,
+    _poolCuriousHerd,
     _poolCutADeal,
     _poolDaringDiscovery,
     _poolDauthiTrapper,
@@ -854,6 +862,7 @@ const shard: CardShard = {
     _poolMyriadConstruct,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,
+    _poolNessianBoar,
     _poolNickValentinePrivateEye,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
@@ -866,6 +875,7 @@ const shard: CardShard = {
     _poolOfferImmortality,
     _poolOildeepGearhulk,
     _poolOmenOfTheDead,
+    _poolOmenOfTheSun,
     _poolOnduInversion,
     _poolOrcishBowmasters,
     _poolOrochiMergeKeeper,

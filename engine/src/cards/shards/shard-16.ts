@@ -8,6 +8,7 @@ import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
+import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
 import _poolAmonkhetRaceway from "../pool/amonkhet-raceway.js";
 import _poolAncientLumberknot from "../pool/ancient-lumberknot.js";
@@ -282,6 +283,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
+import _poolMogissFavor from "../pool/mogiss-favor.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
@@ -294,6 +296,7 @@ import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
 import _poolNaturesChant from "../pool/natures-chant.js";
 import _poolNellyBorcaImpulsiveAccuser from "../pool/nelly-borca-impulsive-accuser.js";
+import _poolNessianWanderer from "../pool/nessian-wanderer.js";
 import _poolNestingDragon from "../pool/nesting-dragon.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
@@ -313,6 +316,7 @@ import _poolOniCultAnvil from "../pool/oni-cult-anvil.js";
 import _poolOnulet from "../pool/onulet.js";
 import _poolOranRiefHydra from "../pool/oran-rief-hydra.js";
 import _poolOrbOfDragonkind from "../pool/orb-of-dragonkind.js";
+import _poolOtrimiTheEverPlayful from "../pool/otrimi-the-ever-playful.js";
 import _poolOubliette from "../pool/oubliette.js";
 import _poolOvergrowth from "../pool/overgrowth.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
@@ -324,6 +328,7 @@ import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
 import _poolPhantomBlade from "../pool/phantom-blade.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
+import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
@@ -400,6 +405,7 @@ import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
 import _poolSkyshroudFalcon from "../pool/skyshroud-falcon.js";
 import _poolSkyskipperDuo from "../pool/skyskipper-duo.js";
 import _poolSleddingOtterPenguin from "../pool/sledding-otter-penguin.js";
+import _poolSleepOfTheDead from "../pool/sleep-of-the-dead.js";
 import _poolSleeperDart from "../pool/sleeper-dart.js";
 import _poolSlimyDualleech from "../pool/slimy-dualleech.js";
 import _poolSlinzaTheSpikedStampede from "../pool/slinza-the-spiked-stampede.js";
@@ -456,6 +462,7 @@ import _poolTheirNameIsDeath from "../pool/their-name-is-death.js";
 import _poolThrabenPurebloods from "../pool/thraben-purebloods.js";
 import _poolThrabenSentry from "../pool/thraben-sentry.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
+import _poolThrenodySinger from "../pool/threnody-singer.js";
 import _poolThrivingSkyclaw from "../pool/thriving-skyclaw.js";
 import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
@@ -566,6 +573,7 @@ const shard: CardShard = {
     _poolAccelerate,
     _poolAesiTyrantOfGyreStrait,
     _poolAkroanJailer,
+    _poolAliriosEnraptured,
     _poolAlmightyBrushwagg,
     _poolAmonkhetRaceway,
     _poolAncientLumberknot,
@@ -840,6 +848,7 @@ const shard: CardShard = {
     _poolMirranBardiche,
     _poolMirrorpool,
     _poolMiserysShadow,
+    _poolMogissFavor,
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
@@ -852,6 +861,7 @@ const shard: CardShard = {
     _poolNaturalize,
     _poolNaturesChant,
     _poolNellyBorcaImpulsiveAccuser,
+    _poolNessianWanderer,
     _poolNestingDragon,
     _poolNiblisOfDusk,
     _poolNightClubber,
@@ -871,6 +881,7 @@ const shard: CardShard = {
     _poolOnulet,
     _poolOranRiefHydra,
     _poolOrbOfDragonkind,
+    _poolOtrimiTheEverPlayful,
     _poolOubliette,
     _poolOvergrowth,
     _poolPainDistributor,
@@ -882,6 +893,7 @@ const shard: CardShard = {
     _poolPerfectedTheory,
     _poolPhantomBlade,
     _poolPhantomWarrior,
+    _poolPharikasSpawn,
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
     _poolPiratesPillage,
@@ -958,6 +970,7 @@ const shard: CardShard = {
     _poolSkyshroudFalcon,
     _poolSkyskipperDuo,
     _poolSleddingOtterPenguin,
+    _poolSleepOfTheDead,
     _poolSleeperDart,
     _poolSlimyDualleech,
     _poolSlinzaTheSpikedStampede,
@@ -1014,6 +1027,7 @@ const shard: CardShard = {
     _poolThrabenPurebloods,
     _poolThrabenSentry,
     _poolThraxodemon,
+    _poolThrenodySinger,
     _poolThrivingSkyclaw,
     _poolThunderhawkGunship,
     _poolThunderingTanadon,

@@ -155,6 +155,7 @@ import _poolFreeTheFae from "../pool/free-the-fae.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
+import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
@@ -677,6 +678,7 @@ const shard: CardShard = {
     _poolFromBeyond,
     _poolGaeasCradle,
     _poolGalacticWayfarer,
+    _poolGalliaOfTheEndlessDance,
     _poolGeodeRager,
     _poolGhostQuarter,
     _poolGiantCrab,

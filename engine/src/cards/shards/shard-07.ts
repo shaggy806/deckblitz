@@ -132,6 +132,7 @@ import _poolFerrovore from "../pool/ferrovore.js";
 import _poolFetidHorror from "../pool/fetid-horror.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFinFangFoom from "../pool/fin-fang-foom.js";
+import _poolFinalFlare from "../pool/final-flare.js";
 import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
 import _poolFirebladeCharger from "../pool/fireblade-charger.js";
 import _poolFirstResponder from "../pool/first-responder.js";
@@ -671,6 +672,7 @@ const shard: CardShard = {
     _poolFetidHorror,
     _poolFieryIntervention,
     _poolFinFangFoom,
+    _poolFinalFlare,
     _poolFinalWordPhantom,
     _poolFirebladeCharger,
     _poolFirstResponder,

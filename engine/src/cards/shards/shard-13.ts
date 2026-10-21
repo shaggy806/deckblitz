@@ -37,6 +37,7 @@ import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
+import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
@@ -130,6 +131,7 @@ import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
+import _poolDreamshaperShaman from "../pool/dreamshaper-shaman.js";
 import _poolDreamtideWhale from "../pool/dreamtide-whale.js";
 import _poolDriftingMeadow from "../pool/drifting-meadow.js";
 import _poolDroverOfTheMighty from "../pool/drover-of-the-mighty.js";
@@ -279,6 +281,7 @@ import _poolMeteorSwarm from "../pool/meteor-swarm.js";
 import _poolMichelangeloGameMaster from "../pool/michelangelo-game-master.js";
 import _poolMidnightBanshee from "../pool/midnight-banshee.js";
 import _poolMigratingKetradon from "../pool/migrating-ketradon.js";
+import _poolMindleecher from "../pool/mindleecher.js";
 import _poolMindslicer from "../pool/mindslicer.js";
 import _poolMindstab from "../pool/mindstab.js";
 import _poolMinscBelovedRanger from "../pool/minsc-beloved-ranger.js";
@@ -572,6 +575,7 @@ const shard: CardShard = {
     _poolAstridPeth,
     _poolAttendedHealer,
     _poolAuthorityOfTheConsuls,
+    _poolAvengingHuntbonder,
     _poolAxegrinderGiant,
     _poolAzulaOnTheHunt,
     _poolBadgermole,
@@ -665,6 +669,7 @@ const shard: CardShard = {
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
     _poolDragonlordAtarka,
+    _poolDreamshaperShaman,
     _poolDreamtideWhale,
     _poolDriftingMeadow,
     _poolDroverOfTheMighty,
@@ -814,6 +819,7 @@ const shard: CardShard = {
     _poolMichelangeloGameMaster,
     _poolMidnightBanshee,
     _poolMigratingKetradon,
+    _poolMindleecher,
     _poolMindslicer,
     _poolMindstab,
     _poolMinscBelovedRanger,
