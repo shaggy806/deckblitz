@@ -507,6 +507,11 @@ function runDamageSteps(
   return { dealt: Math.max(0, total), shieldUsed, shields };
 }
 
+/** How much damage a prevention shield can still take: a "next time" shield
+ * takes the whole of the next event, however much. */
+const shieldLeft = (shield: PreventionShield): number =>
+  shield.nextTime === true ? Number.MAX_SAFE_INTEGER : shield.amount;
+
 /** Every order of `items` but the one given (few: the effects on one damage
  * event). */
 function permutationsOf<T>(items: readonly T[]): T[][] {
@@ -3676,6 +3681,7 @@ export class Game {
     }
     for (const shield of this.state.preventionShields) {
       if (shield.target.kind === "object") pinned.add(shield.target.object);
+      if (shield.from !== undefined) pinned.add(shield.from.object);
     }
     // A spell or ability on the stack whose target was locked in to one token
     // (`lockInTargets`): a new batch folded into that token would make the
@@ -22519,6 +22525,79 @@ export class Game {
         this.state.preventionShields.push({ target, amount, combatOnly, ...stint });
         this.emit({ type: "prevention-shield-created", target, amount });
       },
+      chooseDamageSource: (filter, then) => {
+        // Rule 609.7a: a permanent, or a spell on the stack. (Objects an
+        // ability on the stack or a waiting effect refers to, and face-up
+        // command-zone objects, aren't offered — docs/engine-gaps.md.)
+        const spells = this.state.zones.shared.stack.filter((id) => {
+          const object = this.state.objects[id];
+          return object?.kind === "card" && matchesFilter(this.state, this.registry, id, filter, { you: controller });
+        });
+        const eligible = [...this.battlefieldMatching(controller, filter), ...spells];
+        if (eligible.length === 0) return;
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: controller,
+          eligible,
+          min: 1,
+          max: 1,
+          prompt: "Choose a source of damage",
+          then,
+          source,
+          x,
+          damageSource: true,
+        };
+      },
+      preventDamageFrom: (from, protect, amount, filter, gainLifePrevented) => {
+        if (from.kind !== "object") return;
+        const chosen = this.state.objects[from.object];
+        if (chosen === undefined) return;
+        const stint =
+          protect.kind === "object" ? { zoneChangeCount: this.state.objects[protect.object]?.zoneChangeCount ?? 0 } : {};
+        this.state.preventionShields.push({
+          target: protect,
+          amount: amount === "next-time" ? 0 : amount,
+          combatOnly: false,
+          ...stint,
+          from: {
+            object: from.object,
+            zoneChangeCount: chosen.zoneChangeCount ?? 0,
+            ...(chosen.zone === "stack" ? { orBecomes: true as const } : {}),
+            ...(filter !== undefined ? { filter } : {}),
+            you: controller,
+          },
+          ...(amount === "next-time" ? { nextTime: true as const } : {}),
+          ...(gainLifePrevented ? { gainLife: controller } : {}),
+        });
+        this.emit({
+          type: "prevention-shield-created",
+          target: protect,
+          amount: amount === "next-time" ? 0 : amount,
+          from: from.object,
+          ...(amount === "next-time" ? { nextTime: true as const } : {}),
+        });
+      },
+      becomeColor: (target, colors, duration) => {
+        if (target.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        // A permanent, or a spell while it's on the stack (`moveObject` clears
+        // modifiers as it leaves).
+        if (object === undefined) return;
+        if (object.zone !== "battlefield" && !(object.zone === "stack" && object.kind === "card")) return;
+        const lasting = lastingHere(duration);
+        if (!durationBegins(object, lasting)) return;
+        object.modifiers.push({
+          timestamp: this.freshTimestamp(),
+          power: 0,
+          toughness: 0,
+          keywords: [],
+          setColors: [...colors],
+          ...durationFields(lasting),
+        });
+        invalidateComputedCache();
+        this.emit({ type: "color-changed", object: id, colors: [...colors] });
+      },
       chooseModes: (minModes, maxModes, modes, onDecline, cost, notChosenThisTurn, otherCost, about, xColor) =>
         this.beginModesChoice(
           source,
@@ -27603,13 +27682,15 @@ export class Game {
       this.withEnterBatch(() => {
         for (const id of chosen) {
           // Re-checked rather than trusted: something may have left since.
-          if (this.state.objects[id]?.zone !== "battlefield") continue;
+          // A source of damage may be a spell on the stack (rule 609.7a).
+          const zone = this.state.objects[id]?.zone;
+          if (zone !== "battlefield" && !(awaiting.damageSource === true && zone === "stack")) continue;
           // A chosen permanent is read as it last existed there once it
           // has left (rule 608.2h) — "return it, then put counters equal to
           // its power" reads the power it had (First Responder).
           applyEffectSpec(
             then,
-            this.makeResolutionContext(source, player, [{ kind: "object", object: id }], x, 0, undefined, 1, 0, ["battlefield"]),
+            this.makeResolutionContext(source, player, [{ kind: "object", object: id }], x, 0, undefined, 1, 0, [zone]),
           );
         }
       }),
@@ -31075,8 +31156,22 @@ export class Game {
     shield: PreventionShield,
     target: TargetRef,
     combat: boolean,
+    source: ObjectId,
   ): boolean {
     if (shield.combatOnly && !combat) return false;
+    // "A [red] source of your choice" (rule 609.7): only that object — or the
+    // permanent the spell chosen became — and only while it still matches
+    // (609.7b).
+    if (shield.from !== undefined) {
+      const from = shield.from;
+      if (source !== from.object) return false;
+      const stint = this.state.objects[source]?.zoneChangeCount ?? 0;
+      const became = from.orBecomes === true && stint === from.zoneChangeCount + 1;
+      if (stint !== from.zoneChangeCount && !became) return false;
+      if (from.filter !== undefined && !matchesFilter(this.state, this.registry, source, from.filter, { you: from.you })) {
+        return false;
+      }
+    }
     if (shield.target.kind !== target.kind) return false;
     if (shield.target.kind === "player") return shield.target.player === (target as { player: PlayerId }).player;
     const object = (target as { object: ObjectId }).object;
@@ -31149,7 +31244,7 @@ export class Game {
     }
     // One-shot prevention shields (Healing Salve — rule 614.9 / EG-6).
     for (const shield of this.state.preventionShields) {
-      if (this.shieldCovers(shield, target, combat)) steps.push({ kind: "shield", shield });
+      if (this.shieldCovers(shield, target, combat, source)) steps.push({ kind: "shield", shield });
     }
     // Shield counters (rule 122.1c): not an ability, so one that lost its
     // abilities keeps the protection (the rulings).
@@ -31185,7 +31280,7 @@ export class Game {
     // A shield counter spent is a lasting loss, so it ranks right after the
     // damage itself: a one-turn shield (Healing Salve) goes first.
     const score = (order: readonly DamageStep[]): readonly number[] => {
-      const outcome = runDamageSteps(amount, sources, order, (shield) => shield.amount);
+      const outcome = runDamageSteps(amount, sources, order, shieldLeft);
       const counterSpent = outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0;
       return [outcome.dealt, counterSpent, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
     };
@@ -31429,12 +31524,20 @@ export class Game {
       amount *= sources;
     } else {
       const order = this.bestDamageOrder(amount, sources, steps);
-      const outcome = runDamageSteps(amount, sources, order, (shield) => shield.amount);
+      const outcome = runDamageSteps(amount, sources, order, shieldLeft);
+      const spent: PreventionShield[] = [];
       for (const { shield, prevented } of outcome.shields) {
-        if (shield.all !== true) shield.amount -= prevented;
+        if (shield.nextTime === true) spent.push(shield);
+        else if (shield.all !== true) shield.amount -= prevented;
         this.emit({ type: "damage-prevented", source, target, amount: prevented });
       }
-      this.state.preventionShields = this.state.preventionShields.filter((s) => s.all === true || s.amount > 0);
+      this.state.preventionShields = this.state.preventionShields.filter(
+        (s) => !spent.includes(s) && (s.all === true || s.nextTime === true || s.amount > 0),
+      );
+      // Reverse Damage: life equal to what its shield prevented.
+      for (const { shield, prevented } of outcome.shields) {
+        if (shield.gainLife !== undefined && prevented > 0) this.changeLife(shield.gainLife, prevented);
+      }
       if (outcome.preventedAll !== undefined) {
         const { step, amount: prevented } = outcome.preventedAll;
         this.emit({ type: "damage-prevented", source, target, amount: prevented });

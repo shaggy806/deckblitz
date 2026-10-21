@@ -1203,6 +1203,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(stalwart.complete).toBe(true);
   });
 
+  it("a source of your choice (rule 609.7) and a colour set (layer 5) — Alpha's Circles and Laces", () => {
+    const circle = face("{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.", "Enchantment");
+    expect(circle.activated[0].effect).toEqual({
+      kind: "prevent-damage-from-chosen-source",
+      filter: { colors: ["R"] },
+      to: "you",
+      amount: "next-time",
+    });
+    expect(circle.complete).toBe(true);
+    const lace = face("Target spell or permanent becomes black. (Mana symbols on that permanent remain unchanged.)", "Instant");
+    expect(lace.targets).toEqual([{ kind: "spell-or-permanent" }]);
+    expect(lace.effect).toEqual({ kind: "become-color", target: 0, colors: ["B"], duration: "permanent" });
+    expect(lace.complete).toBe(true);
+  });
+
   it("entwine (rule 702.42): a kicker that chooses every mode", () => {
     const spell = face("Choose one —\n• You gain 4 life.\n• Draw a card.\nEntwine {2} (Choose both if you pay the entwine cost.)", "Sorcery");
     expect(spell.kicker).toEqual({ cost: "{2}", keyword: "entwine" });

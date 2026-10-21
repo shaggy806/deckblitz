@@ -90,6 +90,7 @@ import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
 import _poolChocoComet from "../pool/choco-comet.js";
+import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
 import _poolCivicGuildmage from "../pool/civic-guildmage.js";
 import _poolCobblebrute from "../pool/cobblebrute.js";
 import _poolCoerciveRecruiter from "../pool/coercive-recruiter.js";
@@ -697,6 +698,7 @@ const shard: CardShard = {
     _poolChainwebAracnir,
     _poolChakramSlinger,
     _poolChocoComet,
+    _poolCircleOfProtectionWhite,
     _poolCivicGuildmage,
     _poolCobblebrute,
     _poolCoerciveRecruiter,

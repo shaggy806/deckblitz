@@ -481,6 +481,7 @@ import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
+import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -1044,6 +1045,7 @@ const shard: CardShard = {
     _poolTheLegendOfRoku,
     _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
+    _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThunderStrike,
     _poolTitanHunter,

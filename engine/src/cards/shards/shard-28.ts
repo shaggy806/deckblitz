@@ -84,6 +84,7 @@ import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
+import _poolCeruleanWisps from "../pool/cerulean-wisps.js";
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
 import _poolChangeTheEquation from "../pool/change-the-equation.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
@@ -650,6 +651,7 @@ const shard: CardShard = {
     _poolCarrionCrow,
     _poolCatharsCall,
     _poolCelestineTheLivingSaint,
+    _poolCeruleanWisps,
     _poolChancellorOfTales,
     _poolChangeTheEquation,
     _poolChanneledDragonfire,

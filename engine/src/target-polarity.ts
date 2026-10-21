@@ -474,6 +474,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "create-emblem": none,
   "prevent-all-combat-damage": none,
   "prevent-damage": (n, v) => v.touch(n.target, "help", MINOR),
+  "prevent-damage-from-chosen-source": (n, v) => {
+    if (typeof n.to === "number") v.touch(n.to, "help", MINOR);
+  },
+  // A colour isn't good or bad by itself: what it's for (dodging a Circle of
+  // Protection, or walking into one) decides.
+  "become-color": none,
   // An announced modal ability's modes bring targets of their own, known
   // only once chosen — see `pendingTargetPolarities`.
   modal: (n, v) => {

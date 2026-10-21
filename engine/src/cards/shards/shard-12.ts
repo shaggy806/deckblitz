@@ -76,6 +76,7 @@ import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.j
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChandrasFlameWave from "../pool/chandras-flame-wave.js";
+import _poolChaoslace from "../pool/chaoslace.js";
 import _poolChargingSlateback from "../pool/charging-slateback.js";
 import _poolChargingStrifeknight from "../pool/charging-strifeknight.js";
 import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
@@ -261,6 +262,7 @@ import _poolLazavTheMultifarious from "../pool/lazav-the-multifarious.js";
 import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
+import _poolLifelace from "../pool/lifelace.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
 import _poolLivingTwister from "../pool/living-twister.js";
@@ -631,6 +633,7 @@ const shard: CardShard = {
     _poolChampionOfDusan,
     _poolChampionOfDusk,
     _poolChandrasFlameWave,
+    _poolChaoslace,
     _poolChargingSlateback,
     _poolChargingStrifeknight,
     _poolChocoSeekerOfParadise,
@@ -816,6 +819,7 @@ const shard: CardShard = {
     _poolLeafArrow,
     _poolLeafCrownedVisionary,
     _poolLeylineProwler,
+    _poolLifelace,
     _poolLightshieldParry,
     _poolLilianasScorn,
     _poolLivingTwister,

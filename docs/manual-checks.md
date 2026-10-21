@@ -5160,3 +5160,19 @@ before the rest of its text
   the Island is played, the log says you get the city's blessing, and Dusk Charger shows 5/5.
   Secrets draws three cards, not two. The badge stays after Islands leave. Check at ~768px tall,
   in a 2- and a 4-player room.
+
+### Circle of Protection: Red picks a spell on the stack
+
+*New player decision* — a source of your choice (rule 609.7a): a permanent or a spell on the
+stack, chosen as the Circle's ability resolves; the shield rechecks the colour (609.7b)
+
+- **Setup:** Your precombat main. Your battlefield: Circle of Protection: Red, two Plains, a
+  Mountain and an Island; in hand Lightning Bolt and Thoughtlace. The opponent has Raging Goblin.
+- **Do:** Cast Lightning Bolt targeting yourself and, holding priority, activate the Circle.
+  When asked to choose a source, click the Bolt on the stack. Then, in a second game, activate the
+  Circle choosing the Raging Goblin, and cast Thoughtlace on the Goblin.
+- **Check:** The prompt reads "Choose a source of damage", and the Bolt on the stack and the
+  Raging Goblin are highlighted to pick, while the Circle and your lands are not. The log says the
+  next damage Lightning Bolt would deal to you will be prevented, and your life stays 20. The
+  Goblin becomes blue (the log says so, and the card shows blue), so the Circle no longer covers
+  it. Check at ~768px tall, in a 2- and a 4-player room.

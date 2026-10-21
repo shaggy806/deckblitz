@@ -3231,9 +3231,11 @@ function computeCharacteristicsUncached(
   // card in a library is a Goblin card to a tutor.
   const subtypes: readonly string[] = layer4?.subtypes ?? withChangeling(def, def.subtypes, text);
   // Layer 5 — colour-changing effects.
-  // Off the battlefield only copiable values change them: a prototyped
-  // spell's colors on the stack (rule 718.3b).
-  const colors: ReadonlySet<Color> = onBattlefield
+  // A spell on the stack has any an effect gave it ("target spell becomes
+  // black" — Deathlace, `become-color`) as well as copiable ones (a
+  // prototyped spell's — rule 718.3b); elsewhere off the battlefield only
+  // copiable values change them.
+  const colors: ReadonlySet<Color> = onBattlefield || object.zone === "stack"
     ? effectiveColors(registry, object)
     : object.modifiers.some((m) => m.copiable === true)
       ? effectiveColors(registry, { ...object, modifiers: object.modifiers.filter((m) => m.copiable === true) })

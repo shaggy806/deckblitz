@@ -2651,6 +2651,10 @@ export type AwaitingDecision =
       readonly then: EffectSpec;
       readonly source: ObjectId;
       readonly x: number;
+      /** Set when the choice is of a source of damage (rule 609.7a —
+       * `prevent-damage-from-chosen-source`): a spell on the stack may be
+       * chosen as well as a permanent. */
+      readonly damageSource?: true;
       /** Set when the choice is a spell's casualty cost being paid as it's
        * cast, rather than an effect resolving — see {@link CasualtyAsk}.
        * `then` is unused. */
@@ -3353,6 +3357,24 @@ export interface PreventionShield {
    * that object has changed zones it's a new object the shield doesn't
    * cover. Absent on a state saved before it was recorded. */
   readonly zoneChangeCount?: number;
+  /** Only damage from this source (rule 609.7 — "a source of your choice",
+   * `prevent-damage-from-chosen-source`): that object in the stint it was
+   * chosen in, or — chosen as a permanent spell — the permanent it became
+   * (`orBecomes`, 609.7a). `filter` is rechecked from `you`'s side when the
+   * damage would be dealt: a red source that's turned blue isn't stopped,
+   * and the shield isn't used up (609.7b). */
+  readonly from?: {
+    readonly object: ObjectId;
+    readonly zoneChangeCount: number;
+    readonly orBecomes?: true;
+    readonly filter?: CardFilter;
+    readonly you: PlayerId;
+  };
+  /** "The next time … would deal damage, prevent that damage": all of the
+   * next damage event it covers, then it's gone (`amount` unused). */
+  readonly nextTime?: true;
+  /** Reverse Damage: this player gains life equal to the damage it prevents. */
+  readonly gainLife?: PlayerId;
 }
 
 /**

@@ -234,6 +234,7 @@ import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
+import _poolHealingGrace from "../pool/healing-grace.js";
 import _poolHedgewitchsMask from "../pool/hedgewitchs-mask.js";
 import _poolHedronCrawler from "../pool/hedron-crawler.js";
 import _poolHelixPinnacle from "../pool/helix-pinnacle.js";
@@ -802,6 +803,7 @@ const shard: CardShard = {
     _poolHallwayHeckler,
     _poolHangarbackWalker,
     _poolHauntedMire,
+    _poolHealingGrace,
     _poolHedgewitchsMask,
     _poolHedronCrawler,
     _poolHelixPinnacle,

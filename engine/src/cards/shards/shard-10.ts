@@ -94,6 +94,7 @@ import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
 import _poolCinderclasm from "../pool/cinderclasm.js";
 import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
+import _poolCircleOfProtectionRed from "../pool/circle-of-protection-red.js";
 import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
@@ -679,6 +680,7 @@ const shard: CardShard = {
     _poolChildOfThePack,
     _poolCinderclasm,
     _poolCinderingCutthroat,
+    _poolCircleOfProtectionRed,
     _poolCitanulHierophants,
     _poolCivicWayfinder,
     _poolCompellingArgument,

@@ -33,6 +33,9 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'cant-be-blocked': "can't be blocked",
 }
 
+/** A colour as the log says it — "becomes black". */
+const COLOR_WORD = { W: 'white', U: 'blue', B: 'black', R: 'red', G: 'green' } as const
+
 const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'priority-received',
   'priority-passed',
@@ -405,7 +408,13 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
     case 'prevention-shield-created':
       return event.all
         ? `all damage to ${tgt(event.target)} is prevented this turn`
-        : `a shield prevents the next ${event.amount} damage to ${tgt(event.target)}`
+        : event.nextTime && event.from !== undefined
+          ? `the next damage ${name(event.from)} would deal to ${tgt(event.target)} this turn will be prevented`
+          : event.from !== undefined
+            ? `a shield prevents the next ${event.amount} damage ${name(event.from)} would deal to ${tgt(event.target)}`
+            : `a shield prevents the next ${event.amount} damage to ${tgt(event.target)}`
+    case 'color-changed':
+      return `${name(event.object)} becomes ${event.colors.map((c) => COLOR_WORD[c]).join(' and ')}`
     case 'draw-redirected':
       return `${who(event.from)}'s draw is redirected — ${who(event.to)} draws instead`
     case 'modes-chosen': {

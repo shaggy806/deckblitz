@@ -395,6 +395,7 @@ import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
+import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
 import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolRescueGirlFirstResponder,
     _poolRestlessPrairie,
     _poolReturnUponTheTide,
+    _poolReverseDamage,
     _poolRewind,
     _poolRinAndSeriInseparable,
     _poolRingOfXathrid,

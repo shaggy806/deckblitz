@@ -86,6 +86,7 @@ import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
 import _poolCipherboundSpirit from "../pool/cipherbound-spirit.js";
+import _poolCircleOfProtectionBlue from "../pool/circle-of-protection-blue.js";
 import _poolClearwaterPathway from "../pool/clearwater-pathway.js";
 import _poolClinquantSkymage from "../pool/clinquant-skymage.js";
 import _poolCloudElemental from "../pool/cloud-elemental.js";
@@ -666,6 +667,7 @@ const shard: CardShard = {
     _poolChitteringDispatcher,
     _poolChromaticStar,
     _poolCipherboundSpirit,
+    _poolCircleOfProtectionBlue,
     _poolClearwaterPathway,
     _poolClinquantSkymage,
     _poolCloudElemental,

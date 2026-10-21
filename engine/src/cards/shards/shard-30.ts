@@ -114,6 +114,7 @@ import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
+import _poolDeathlace from "../pool/deathlace.js";
 import _poolDeathlessPilot from "../pool/deathless-pilot.js";
 import _poolDeathsOasis from "../pool/deaths-oasis.js";
 import _poolDebrisFieldCrusher from "../pool/debris-field-crusher.js";
@@ -673,6 +674,7 @@ const shard: CardShard = {
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
     _poolDayOfJudgment,
+    _poolDeathlace,
     _poolDeathlessPilot,
     _poolDeathsOasis,
     _poolDebrisFieldCrusher,

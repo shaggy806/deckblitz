@@ -14,6 +14,14 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
   to pay with life), honoured by the planner first, offered by the client beside the convoke
   picker.
+- **A source of damage is chosen only among permanents and spells.** Rule 609.7a also allows
+  any object an ability on the stack, a waiting replacement or prevention effect or a delayed
+  trigger refers to (a creature that died with its "deals damage" trigger on the stack), and a
+  face-up object in the command zone. `chooseDamageSource` (game.ts, the
+  `prevent-damage-from-chosen-source` effect) offers the battlefield and the stack's spells only,
+  and the client's stack can pick only a spell. **Fix (outline):** offer each stack ability's
+  source when it isn't on the battlefield, and let the client pick it by clicking that ability's
+  stack entry. Circles of Protection, Reverse Damage, Healing Grace.
 - **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
   with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
   (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the

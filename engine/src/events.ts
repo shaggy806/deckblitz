@@ -6,7 +6,7 @@
 
 import type { CastVia } from "./actions.js";
 import type { CardType, CombatRestriction } from "./cards.js";
-import type { ManaType } from "./mana.js";
+import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { PlayerCounterKind, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
@@ -1080,11 +1080,22 @@ export type GameEvent =
       readonly intendedZone: "graveyard" | "hand" | "library";
     })
   | (Base & {
+      /** A spell or permanent's colours were set (`become-color` — Deathlace). */
+      readonly type: "color-changed";
+      readonly object: ObjectId;
+      readonly colors: readonly Color[];
+    })
+  | (Base & {
       /** A one-shot damage-prevention shield was created (Healing Salve —
        * ROADMAP Phase 11 EG-6). */
       readonly type: "prevention-shield-created";
       readonly target: TargetRef;
       readonly amount: number;
+      /** Only against damage from this source (a source of your choice —
+       * Circle of Protection); with `nextTime`, all of its next damage to
+       * `target` (`amount` is 0 then). */
+      readonly from?: ObjectId;
+      readonly nextTime?: true;
       /** It prevents all damage to `target` this turn (Gideon Jura's 0);
        * `amount` is 0 then. */
       readonly all?: true;

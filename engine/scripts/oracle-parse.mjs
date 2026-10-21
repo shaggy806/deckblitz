@@ -1372,6 +1372,21 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };
   }
+  // A source of your choice (rule 609.7): the Circles of Protection.
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage to you this turn, prevent that damage`).exec(s))) {
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
+      to: "you",
+      amount: "next-time",
+    };
+  }
+  // Layer 5 (the Laces): "target spell or permanent becomes black", for good.
+  // "Target spell or permanent" is read only here: a bounce of one (Venser)
+  // needs a step per zone.
+  if ((m = re(`target spell or permanent becomes (white|blue|black|red|green)(?: \(mana symbols on that permanent remain unchanged\.\))?`).exec(s))) {
+    return { kind: "become-color", target: ctx.target({ kind: "spell-or-permanent" }), colors: [COLOR_WORDS[m[1].toLowerCase()]], duration: "permanent" };
+  }
 
   // Combat this turn.
   if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };

@@ -2396,6 +2396,7 @@ import _poolCerebralDownload from "./pool/cerebral-download.js";
 import _poolCeremonialGroundbreaker from "./pool/ceremonial-groundbreaker.js";
 import _poolCerodonYearling from "./pool/cerodon-yearling.js";
 import _poolCeruleanDrake from "./pool/cerulean-drake.js";
+import _poolCeruleanWisps from "./pool/cerulean-wisps.js";
 import _poolCeruleanWyvern from "./pool/cerulean-wyvern.js";
 import _poolCetaDisciple from "./pool/ceta-disciple.js";
 import _poolChainAssassination from "./pool/chain-assassination.js";
@@ -2464,6 +2465,7 @@ import _poolChaosTerminatorLord from "./pool/chaos-terminator-lord.js";
 import _poolChaosTheEndless from "./pool/chaos-the-endless.js";
 import _poolChaosWand from "./pool/chaos-wand.js";
 import _poolChaosWarp from "./pool/chaos-warp.js";
+import _poolChaoslace from "./pool/chaoslace.js";
 import _poolChapelGeist from "./pool/chapel-geist.js";
 import _poolChapelShieldgeist from "./pool/chapel-shieldgeist.js";
 import _poolChaplainOfAlms from "./pool/chaplain-of-alms.js";
@@ -2588,6 +2590,11 @@ import _poolCindervines from "./pool/cindervines.js";
 import _poolCipherboundSpirit from "./pool/cipherbound-spirit.js";
 import _poolCircleOfDreamsDruid from "./pool/circle-of-dreams-druid.js";
 import _poolCircleOfPower from "./pool/circle-of-power.js";
+import _poolCircleOfProtectionBlack from "./pool/circle-of-protection-black.js";
+import _poolCircleOfProtectionBlue from "./pool/circle-of-protection-blue.js";
+import _poolCircleOfProtectionGreen from "./pool/circle-of-protection-green.js";
+import _poolCircleOfProtectionRed from "./pool/circle-of-protection-red.js";
+import _poolCircleOfProtectionWhite from "./pool/circle-of-protection-white.js";
 import _poolCircleOfTheLandDruid from "./pool/circle-of-the-land-druid.js";
 import _poolCircleOfTheMoonDruid from "./pool/circle-of-the-moon-druid.js";
 import _poolCircuitMender from "./pool/circuit-mender.js";
@@ -3115,6 +3122,7 @@ import _poolCrimsonKobolds from "./pool/crimson-kobolds.js";
 import _poolCrimsonMage from "./pool/crimson-mage.js";
 import _poolCrimsonManticore from "./pool/crimson-manticore.js";
 import _poolCrimsonOperative from "./pool/crimson-operative.js";
+import _poolCrimsonWisps from "./pool/crimson-wisps.js";
 import _poolCripplingFear from "./pool/crippling-fear.js";
 import _poolCrisisOfConscience from "./pool/crisis-of-conscience.js";
 import _poolCroakingCounterpart from "./pool/croaking-counterpart.js";
@@ -3509,6 +3517,7 @@ import _poolDeathcurseOgre from "./pool/deathcurse-ogre.js";
 import _poolDeathgazeCockatrice from "./pool/deathgaze-cockatrice.js";
 import _poolDeathgreeter from "./pool/deathgreeter.js";
 import _poolDeathknellBerserker from "./pool/deathknell-berserker.js";
+import _poolDeathlace from "./pool/deathlace.js";
 import _poolDeathleaperTerrorWeapon from "./pool/deathleaper-terror-weapon.js";
 import _poolDeathlessAngel from "./pool/deathless-angel.js";
 import _poolDeathlessKnight from "./pool/deathless-knight.js";
@@ -6778,6 +6787,7 @@ import _poolHealerOfTheGlade from "./pool/healer-of-the-glade.js";
 import _poolHealerOfThePride from "./pool/healer-of-the-pride.js";
 import _poolHealersFlock from "./pool/healers-flock.js";
 import _poolHealersHawk from "./pool/healers-hawk.js";
+import _poolHealingGrace from "./pool/healing-grace.js";
 import _poolHealingTechnique from "./pool/healing-technique.js";
 import _poolHeapDoll from "./pool/heap-doll.js";
 import _poolHeapGate from "./pool/heap-gate.js";
@@ -8536,6 +8546,7 @@ import _poolLifecraftCavalry from "./pool/lifecraft-cavalry.js";
 import _poolLifecraftersBestiary from "./pool/lifecrafters-bestiary.js";
 import _poolLifecreedDuo from "./pool/lifecreed-duo.js";
 import _poolLifegift from "./pool/lifegift.js";
+import _poolLifelace from "./pool/lifelace.js";
 import _poolLifelink from "./pool/lifelink.js";
 import _poolLifesLegacy from "./pool/lifes-legacy.js";
 import _poolLifespringDruid from "./pool/lifespring-druid.js";
@@ -11243,6 +11254,7 @@ import _poolPunySnack from "./pool/puny-snack.js";
 import _poolPuppetCrafting from "./pool/puppet-crafting.js";
 import _poolPuppetMasterStringPuller from "./pool/puppet-master-string-puller.js";
 import _poolPuppeteerClique from "./pool/puppeteer-clique.js";
+import _poolPurelace from "./pool/purelace.js";
 import _poolPuresteelPaladin from "./pool/puresteel-paladin.js";
 import _poolPurestrainGenestealer from "./pool/purestrain-genestealer.js";
 import _poolPurifyTheGrave from "./pool/purify-the-grave.js";
@@ -11907,6 +11919,7 @@ import _poolReverberatingSummons from "./pool/reverberating-summons.js";
 import _poolReveredDead from "./pool/revered-dead.js";
 import _poolReverentHoplite from "./pool/reverent-hoplite.js";
 import _poolReverentHowl from "./pool/reverent-howl.js";
+import _poolReverseDamage from "./pool/reverse-damage.js";
 import _poolRevitalize from "./pool/revitalize.js";
 import _poolRevitalizingRepast from "./pool/revitalizing-repast.js";
 import _poolReviveTheShire from "./pool/revive-the-shire.js";
@@ -15292,6 +15305,7 @@ import _poolThoughtVessel from "./pool/thought-vessel.js";
 import _poolThoughtboundPhantasm from "./pool/thoughtbound-phantasm.js";
 import _poolThoughtcast from "./pool/thoughtcast.js";
 import _poolThoughtflare from "./pool/thoughtflare.js";
+import _poolThoughtlace from "./pool/thoughtlace.js";
 import _poolThoughtseize from "./pool/thoughtseize.js";
 import _poolThoughtweftCharge from "./pool/thoughtweft-charge.js";
 import _poolThoughtweftImbuer from "./pool/thoughtweft-imbuer.js";
@@ -20423,6 +20437,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCeremonialGroundbreaker,
   _poolCerodonYearling,
   _poolCeruleanDrake,
+  _poolCeruleanWisps,
   _poolCeruleanWyvern,
   _poolCetaDisciple,
   _poolChainAssassination,
@@ -20491,6 +20506,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChaosTheEndless,
   _poolChaosWand,
   _poolChaosWarp,
+  _poolChaoslace,
   _poolChapelGeist,
   _poolChapelShieldgeist,
   _poolChaplainOfAlms,
@@ -20615,6 +20631,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCipherboundSpirit,
   _poolCircleOfDreamsDruid,
   _poolCircleOfPower,
+  _poolCircleOfProtectionBlack,
+  _poolCircleOfProtectionBlue,
+  _poolCircleOfProtectionGreen,
+  _poolCircleOfProtectionRed,
+  _poolCircleOfProtectionWhite,
   _poolCircleOfTheLandDruid,
   _poolCircleOfTheMoonDruid,
   _poolCircuitMender,
@@ -21142,6 +21163,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrimsonMage,
   _poolCrimsonManticore,
   _poolCrimsonOperative,
+  _poolCrimsonWisps,
   _poolCripplingFear,
   _poolCrisisOfConscience,
   _poolCroakingCounterpart,
@@ -21536,6 +21558,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeathgazeCockatrice,
   _poolDeathgreeter,
   _poolDeathknellBerserker,
+  _poolDeathlace,
   _poolDeathleaperTerrorWeapon,
   _poolDeathlessAngel,
   _poolDeathlessKnight,
@@ -24805,6 +24828,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHealerOfThePride,
   _poolHealersFlock,
   _poolHealersHawk,
+  _poolHealingGrace,
   _poolHealingTechnique,
   _poolHeapDoll,
   _poolHeapGate,
@@ -26563,6 +26587,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLifecraftersBestiary,
   _poolLifecreedDuo,
   _poolLifegift,
+  _poolLifelace,
   _poolLifelink,
   _poolLifesLegacy,
   _poolLifespringDruid,
@@ -29270,6 +29295,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPuppetCrafting,
   _poolPuppetMasterStringPuller,
   _poolPuppeteerClique,
+  _poolPurelace,
   _poolPuresteelPaladin,
   _poolPurestrainGenestealer,
   _poolPurifyTheGrave,
@@ -29934,6 +29960,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReveredDead,
   _poolReverentHoplite,
   _poolReverentHowl,
+  _poolReverseDamage,
   _poolRevitalize,
   _poolRevitalizingRepast,
   _poolReviveTheShire,
@@ -33319,6 +33346,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThoughtboundPhantasm,
   _poolThoughtcast,
   _poolThoughtflare,
+  _poolThoughtlace,
   _poolThoughtseize,
   _poolThoughtweftCharge,
   _poolThoughtweftImbuer,
@@ -38463,6 +38491,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ceremonial-groundbreaker": _poolCeremonialGroundbreaker,
   "pool/cerodon-yearling": _poolCerodonYearling,
   "pool/cerulean-drake": _poolCeruleanDrake,
+  "pool/cerulean-wisps": _poolCeruleanWisps,
   "pool/cerulean-wyvern": _poolCeruleanWyvern,
   "pool/ceta-disciple": _poolCetaDisciple,
   "pool/chain-assassination": _poolChainAssassination,
@@ -38531,6 +38560,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chaos-the-endless": _poolChaosTheEndless,
   "pool/chaos-wand": _poolChaosWand,
   "pool/chaos-warp": _poolChaosWarp,
+  "pool/chaoslace": _poolChaoslace,
   "pool/chapel-geist": _poolChapelGeist,
   "pool/chapel-shieldgeist": _poolChapelShieldgeist,
   "pool/chaplain-of-alms": _poolChaplainOfAlms,
@@ -38655,6 +38685,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cipherbound-spirit": _poolCipherboundSpirit,
   "pool/circle-of-dreams-druid": _poolCircleOfDreamsDruid,
   "pool/circle-of-power": _poolCircleOfPower,
+  "pool/circle-of-protection-black": _poolCircleOfProtectionBlack,
+  "pool/circle-of-protection-blue": _poolCircleOfProtectionBlue,
+  "pool/circle-of-protection-green": _poolCircleOfProtectionGreen,
+  "pool/circle-of-protection-red": _poolCircleOfProtectionRed,
+  "pool/circle-of-protection-white": _poolCircleOfProtectionWhite,
   "pool/circle-of-the-land-druid": _poolCircleOfTheLandDruid,
   "pool/circle-of-the-moon-druid": _poolCircleOfTheMoonDruid,
   "pool/circuit-mender": _poolCircuitMender,
@@ -39182,6 +39217,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crimson-mage": _poolCrimsonMage,
   "pool/crimson-manticore": _poolCrimsonManticore,
   "pool/crimson-operative": _poolCrimsonOperative,
+  "pool/crimson-wisps": _poolCrimsonWisps,
   "pool/crippling-fear": _poolCripplingFear,
   "pool/crisis-of-conscience": _poolCrisisOfConscience,
   "pool/croaking-counterpart": _poolCroakingCounterpart,
@@ -39576,6 +39612,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deathgaze-cockatrice": _poolDeathgazeCockatrice,
   "pool/deathgreeter": _poolDeathgreeter,
   "pool/deathknell-berserker": _poolDeathknellBerserker,
+  "pool/deathlace": _poolDeathlace,
   "pool/deathleaper-terror-weapon": _poolDeathleaperTerrorWeapon,
   "pool/deathless-angel": _poolDeathlessAngel,
   "pool/deathless-knight": _poolDeathlessKnight,
@@ -42845,6 +42882,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/healer-of-the-pride": _poolHealerOfThePride,
   "pool/healers-flock": _poolHealersFlock,
   "pool/healers-hawk": _poolHealersHawk,
+  "pool/healing-grace": _poolHealingGrace,
   "pool/healing-technique": _poolHealingTechnique,
   "pool/heap-doll": _poolHeapDoll,
   "pool/heap-gate": _poolHeapGate,
@@ -44603,6 +44641,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lifecrafters-bestiary": _poolLifecraftersBestiary,
   "pool/lifecreed-duo": _poolLifecreedDuo,
   "pool/lifegift": _poolLifegift,
+  "pool/lifelace": _poolLifelace,
   "pool/lifelink": _poolLifelink,
   "pool/lifes-legacy": _poolLifesLegacy,
   "pool/lifespring-druid": _poolLifespringDruid,
@@ -47310,6 +47349,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/puppet-crafting": _poolPuppetCrafting,
   "pool/puppet-master-string-puller": _poolPuppetMasterStringPuller,
   "pool/puppeteer-clique": _poolPuppeteerClique,
+  "pool/purelace": _poolPurelace,
   "pool/puresteel-paladin": _poolPuresteelPaladin,
   "pool/purestrain-genestealer": _poolPurestrainGenestealer,
   "pool/purify-the-grave": _poolPurifyTheGrave,
@@ -47974,6 +48014,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/revered-dead": _poolReveredDead,
   "pool/reverent-hoplite": _poolReverentHoplite,
   "pool/reverent-howl": _poolReverentHowl,
+  "pool/reverse-damage": _poolReverseDamage,
   "pool/revitalize": _poolRevitalize,
   "pool/revitalizing-repast": _poolRevitalizingRepast,
   "pool/revive-the-shire": _poolReviveTheShire,
@@ -51359,6 +51400,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thoughtbound-phantasm": _poolThoughtboundPhantasm,
   "pool/thoughtcast": _poolThoughtcast,
   "pool/thoughtflare": _poolThoughtflare,
+  "pool/thoughtlace": _poolThoughtlace,
   "pool/thoughtseize": _poolThoughtseize,
   "pool/thoughtweft-charge": _poolThoughtweftCharge,
   "pool/thoughtweft-imbuer": _poolThoughtweftImbuer,

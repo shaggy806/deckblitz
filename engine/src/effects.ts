@@ -4631,6 +4631,45 @@ export type EffectSpec =
       readonly combatOnly?: boolean;
     }
   | {
+      /** Damage from a source of your choice (rule 609.7): "The next time a
+       * red source of your choice would deal damage to you this turn,
+       * prevent that damage" (Circle of Protection: Red) is `{ filter: {
+       * colors: ["R"] }, to: "you", amount: "next-time" }`; "Prevent the next
+       * 3 damage that would be dealt to any target this turn by a source of
+       * your choice" (Healing Grace) is `{ to: 0, amount: 3 }`. As it
+       * resolves its controller chooses the source — a permanent or a spell
+       * on the stack matching `filter`, from their side (609.7a; a permanent
+       * spell's shield covers the permanent it becomes) — with the
+       * `choose-permanents` decision, and a one-shot prevention shield for
+       * this turn goes on what `to` names (`"you"`, or a target slot).
+       * `"next-time"` prevents all of the next damage event from that source
+       * to it; a number, that much damage in all. The shield rechecks
+       * `filter` when the damage would be dealt, and isn't used up if it
+       * prevents nothing (609.7b). `gainLifePrevented` is Reverse Damage's
+       * "you gain life equal to the damage prevented this way". Nothing
+       * happens with no source to choose. */
+      readonly kind: "prevent-damage-from-chosen-source";
+      readonly filter?: CardFilter;
+      readonly to: "you" | number;
+      readonly amount: "next-time" | number;
+      readonly gainLifePrevented?: true;
+      /** Set by the engine on the copy the choice's answer applies: what the
+       * shield protects, with target 0 the source chosen. */
+      readonly protect?: TargetRef;
+    }
+  | {
+      /** "Target spell or permanent becomes black" (Deathlace — rule 613.1e,
+       * layer 5): its colours become `colors`, replacing its others, for
+       * `duration` — for good (`"permanent"`) for the Laces, `"end-of-turn"`
+       * for Crimson Wisps. A spell keeps it while on the stack; the
+       * permanent it becomes is a new object with its own colours (rule
+       * 400.7). Mana symbols in its cost don't change. */
+      readonly kind: "become-color";
+      readonly target: EffectTargetRef;
+      readonly colors: readonly Color[];
+      readonly duration: PtDuration;
+    }
+  | {
       /** A modal spell/ability (rule 700.2): as it resolves, its controller
        * chooses between `minModes` and `maxModes` of `modes` (usually 1 and 1
        * — "choose one"; 1 and 2 for "choose one or both") and the chosen
@@ -6658,6 +6697,21 @@ export interface EffectApi {
   /** Add a one-shot damage-prevention shield on `target` (a player or object)
    * for `amount` damage this turn — Healing Salve (ROADMAP Phase 11 EG-6). */
   preventDamage(target: TargetRef, amount: number | "all", combatOnly: boolean): void;
+  /** Ask for a source of damage (rule 609.7a) — the permanents and spells
+   * on the stack matching `filter` — and apply `then` to it as target 0. See
+   * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
+  chooseDamageSource(filter: CardFilter, then: EffectSpec): void;
+  /** A one-shot shield on `protect` against damage from `source` only — see
+   * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
+  preventDamageFrom(
+    source: TargetRef,
+    protect: TargetRef,
+    amount: number | "next-time",
+    filter: CardFilter | undefined,
+    gainLifePrevented: boolean,
+  ): void;
+  /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
+  becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration): void;
   /** Raise a `choose-modes` decision — see the `modal` / `may` {@link EffectSpec}.
    * The chosen modes' effects are applied after the controller answers.
    * `onDecline` (a `may` effect's `else` only) applies when zero modes end up
@@ -10243,6 +10297,26 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (ref !== undefined) {
         ctx.preventDamage(ref, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx), spec.combatOnly ?? false);
       }
+      return;
+    }
+    case "prevent-damage-from-chosen-source": {
+      // The answer: target 0 is the source chosen.
+      if (spec.protect !== undefined) {
+        const source = resolveEffectTarget(0, ctx);
+        if (source !== undefined) {
+          ctx.preventDamageFrom(source, spec.protect, spec.amount, spec.filter, spec.gainLifePrevented === true);
+        }
+        return;
+      }
+      const protect: TargetRef | undefined =
+        spec.to === "you" ? { kind: "player", player: ctx.controller } : resolveEffectTarget(spec.to, ctx);
+      if (protect === undefined) return;
+      ctx.chooseDamageSource(spec.filter ?? {}, { ...spec, protect });
+      return;
+    }
+    case "become-color": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.becomeColor(target, spec.colors, spec.duration);
       return;
     }
     case "modal":

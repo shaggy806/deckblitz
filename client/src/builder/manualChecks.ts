@@ -3053,4 +3053,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- A source of your choice; colours set (2026-10-21) ----------------------
+  preset(
+    'Circle of Protection: Red picks a spell on the stack',
+    board({
+      you: {
+        bf: ['Circle of Protection: Red', 'Plains*2', 'Mountain', 'Island'],
+        hand: ['Lightning Bolt', 'Thoughtlace'],
+      },
+      opp: { bf: ['Raging Goblin'] },
+    }),
+  ),
 ]

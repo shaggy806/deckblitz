@@ -374,7 +374,9 @@
   "keyword:entwine",
   "keyword:spectacle",
   "keyword:jump-start",
-  "keyword:ascend"
+  "keyword:ascend",
+  "replacement:prevent-damage-from-chosen-source",
+  "effect:set-color-effect"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

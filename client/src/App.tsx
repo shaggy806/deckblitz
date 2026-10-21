@@ -5951,8 +5951,14 @@ function Table({
         <Stack
           view={view}
           answered={answered}
-          targetSlot={targetSlot}
-          pickedIds={pickedObjKeys}
+          targetSlot={
+            // A source of damage may be a spell on the stack (rule 609.7a —
+            // Circle of Protection): it's picked there, as a target is.
+            mode === 'choose-permanents' && choosePermanentsAction
+              ? choosePermanentsAction.eligible.map((object) => ({ kind: 'object' as const, object }))
+              : targetSlot
+          }
+          pickedIds={mode === 'choose-permanents' ? new Set<string>(permanentPicks) : pickedObjKeys}
           onTargetClick={(id) => clickPermanent([id])}
           aimed={aim}
           onFocusEntry={setStackFocus}

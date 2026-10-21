@@ -1448,6 +1448,10 @@ sources matching it would deal — Arachnogenesis's "by non-Spider creatures", m
 each damage would be dealt, rule 615.1),
 `prevent-damage { target, amount, combatOnly? }` (Healing Salve; `target` may be `"source"`, and `amount: "all"` is "prevent all damage that would be dealt to [it] this turn", never used up — Gideon Jura's 0. A shield on an object covers only that object, not the card back from another zone, rule 400.7).
 
+`prevent-damage-from-chosen-source { filter?, to: "you" | slot, amount: "next-time" | n, gainLifePrevented? }` (rule 609.7 — Alpha's Circles of Protection: `{ filter: { colors: ["R"] }, to: "you", amount: "next-time" }`; Reverse Damage adds `gainLifePrevented`; Healing Grace is `{ to: 0, amount: 3 }`). As it resolves its controller chooses the source with the `choose-permanents` decision — a permanent or a spell on the stack matching `filter`; a permanent spell's shield covers the permanent it becomes (609.7a). The shield rechecks `filter` when damage would be dealt and isn't used up by damage it doesn't cover (609.7b). Not offered yet: objects an ability on the stack refers to (docs/engine-gaps.md). `chosen-source-and-color.test.ts`.
+
+`become-color { target, colors, duration }` (layer 5 — the Laces: `{ target: 0, colors: ["B"], duration: "permanent" }` on a `{ kind: "spell-or-permanent" }` target; Crimson Wisps' `"end-of-turn"`). Its colours are replaced, not added to; a spell keeps them while it's on the stack, and the permanent it becomes has its own (400.7). The scaffolder reads both sentences.
+
 **"Exile … until ~ leaves the battlefield"** (Banishing Light) is rule 610.3:
 the exile is a one-shot effect, and the return a second one created right after
 the source leaves — no triggered ability, so nothing to respond to, and it
