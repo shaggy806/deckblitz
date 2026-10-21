@@ -5,8 +5,8 @@
  * and the rest never stir. Here the path between two events — the browser's
  * coalesced points, then straight lines between them, sampled every few
  * pixels — is hit-tested as the browser would have, and each card it crossed
- * gets the hover's grow for as long as the pointer was over it (a frame at
- * least), in the order it was crossed, a frame behind the pointer. So the fan
+ * gets the hover's grow for as long as the pointer was over it (three
+ * frames at least), in the order it was crossed, a frame behind the pointer. So the fan
  * rises in a wave under a fast sweep, as it would at a much higher rate.
  *
  * A crossed card is marked `data-sweep`, which App.css grows as it does a
@@ -74,12 +74,17 @@ export function sweepRuns<K>(path: readonly PathPoint[], hit: (x: number, y: num
   return runs
 }
 
+/** The fewest frames a swept card is drawn grown, however briefly the
+ * pointer crossed it: one barely stirs it (the hover's transition has hardly
+ * begun), so it's held a little longer to read as a wave. */
+const MIN_PULSE_FRAMES = 3
+
 /** When each swept card grows and settles back, on `performance.now()`'s
- * clock; `shown` the frame it was first drawn grown. */
+ * clock; `frames` how many frames it has been drawn grown so far. */
 interface Pulse {
   on: number
   off: number
-  shown?: number
+  frames?: number
 }
 
 /** The fan the pointer sweeps: the viewer's own hand, not the mulligan
@@ -106,13 +111,12 @@ export function watchHandSweep(): () => void {
     for (const [el, p] of pulses) {
       if (!el.isConnected) {
         pulses.delete(el)
-      } else if (p.shown === undefined) {
+      } else if (p.frames === undefined) {
         if (now >= p.on) {
           el.dataset.sweep = ''
-          p.shown = now
+          p.frames = 0
         }
-      } else if (now >= p.off && now > p.shown) {
-        // Drawn for a frame at least, or it never moved at all.
+      } else if ((p.frames += 1) >= MIN_PULSE_FRAMES && now >= p.off) {
         delete el.dataset.sweep
         pulses.delete(el)
       }
