@@ -3803,6 +3803,17 @@
   rotate: 0deg;
   scale: 1.65;
 }
+/* A card the pointer swept across between two of its move events
+   (ui/handSweep.ts), grown as a hovered card is for as long as the pointer
+   was over it -- but left in the fan's stacking, and never taking the
+   pointer: it's only drawn, so it can't steal the hover from the card the
+   pointer has really reached. */
+.hand-cards .hand-card[data-sweep]:not(:hover) .card-tile {
+  translate: 0 -30px;
+  rotate: 0deg;
+  scale: 1.65;
+  pointer-events: none;
+}
 /* A hover carried over `Table`'s per-frame remount (ui/hoverCarry.ts): the
    card under a resting pointer is a new element, and the browser hovers it a
    moment after first styling it, so its hover would play again from the

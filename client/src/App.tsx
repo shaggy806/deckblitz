@@ -112,6 +112,7 @@ import { emblemToVisible } from './ui/defToVisible.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
 import { carryHover } from './ui/hoverCarry.ts'
 import { handPlacesBefore, slideHand } from './ui/handMotion.ts'
+import { watchHandSweep } from './ui/handSweep.ts'
 import { motionPrefs } from './game/motionPrefs.ts'
 import { LibraryTopCard } from './ui/LibraryTopCard.tsx'
 import { SeatBoard } from './lobby/SeatBoard.tsx'
@@ -1002,6 +1003,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // The order you've dragged your own permanents into, and the drag under
   // way. Up here so a frame arriving mid-drag doesn't drop the tile.
   const boardDrag = useBoardDrag(game.roomId)
+  // A fast sweep across the hand fan fills in between the pointer's move
+  // events, so every card it crossed rises (`ui/handSweep.ts`).
+  useEffect(() => watchHandSweep(), [])
   // Called unconditionally (before the loading-guard below) per the rules of
   // hooks. `ackFrame` is what lets the server pace its bots against these
   // animations rather than racing ahead of them.
