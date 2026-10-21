@@ -372,8 +372,7 @@
   "cost:alt-cost-exile-from-hand",
   "keyword:evoke-alternative-non-mana-cost",
   "keyword:entwine",
-  "keyword:spectacle",
-  "keyword:afterlife"
+  "keyword:spectacle"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
