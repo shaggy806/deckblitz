@@ -10,6 +10,7 @@ import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
 import _poolAlabornGrenadier from "../pool/alaborn-grenadier.js";
+import _poolAlchemistsGift from "../pool/alchemists-gift.js";
 import _poolAlgaeGharial from "../pool/algae-gharial.js";
 import _poolAltarOfTheBrood from "../pool/altar-of-the-brood.js";
 import _poolAmarethTheLustrous from "../pool/amareth-the-lustrous.js";
@@ -55,6 +56,7 @@ import _poolBrokersHideout from "../pool/brokers-hideout.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
 import _poolCacklingImp from "../pool/cackling-imp.js";
+import _poolCanopyStalker from "../pool/canopy-stalker.js";
 import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
@@ -144,6 +146,7 @@ import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
+import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
@@ -334,6 +337,7 @@ import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
+import _poolRoamingGhostlight from "../pool/roaming-ghostlight.js";
 import _poolRockyTarPit from "../pool/rocky-tar-pit.js";
 import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
@@ -418,6 +422,7 @@ import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
+import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
 import _poolThranVigil from "../pool/thran-vigil.js";
@@ -427,6 +432,7 @@ import _poolThrummingbird from "../pool/thrummingbird.js";
 import _poolThundersteelColossus from "../pool/thundersteel-colossus.js";
 import _poolTicketBooth from "../pool/ticket-booth.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
+import _poolTolarianKraken from "../pool/tolarian-kraken.js";
 import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
@@ -513,6 +519,7 @@ const shard: CardShard = {
     _poolAinokTracker,
     _poolAjanisPridemate,
     _poolAlabornGrenadier,
+    _poolAlchemistsGift,
     _poolAlgaeGharial,
     _poolAltarOfTheBrood,
     _poolAmarethTheLustrous,
@@ -558,6 +565,7 @@ const shard: CardShard = {
     _poolBurnwillowClearing,
     _poolBurrogBefuddler,
     _poolCacklingImp,
+    _poolCanopyStalker,
     _poolCastIntoTheFire,
     _poolCatapultMaster,
     _poolCetaDisciple,
@@ -647,6 +655,7 @@ const shard: CardShard = {
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
     _poolFumingEffigy,
+    _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
     _poolGhastlyDeathTyrant,
@@ -837,6 +846,7 @@ const shard: CardShard = {
     _poolRiddlemasterSphinx,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,
+    _poolRoamingGhostlight,
     _poolRockyTarPit,
     _poolRoomOfRefuge,
     _poolRottingFensnake,
@@ -921,6 +931,7 @@ const shard: CardShard = {
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,
+    _poolThievesGuildEnforcer,
     _poolThoughtShucker,
     _poolThoughtcast,
     _poolThranVigil,
@@ -930,6 +941,7 @@ const shard: CardShard = {
     _poolThundersteelColossus,
     _poolTicketBooth,
     _poolTitaniaProtectorOfArgoth,
+    _poolTolarianKraken,
     _poolTolarianTerror,
     _poolTookReaper,
     _poolToxicAbomination,

@@ -455,6 +455,7 @@ import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
 import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
 import _poolTrostaniThreeWhispers from "../pool/trostani-three-whispers.js";
+import _poolTrufflesnout from "../pool/trufflesnout.js";
 import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
 import _poolTundraFumarole from "../pool/tundra-fumarole.js";
@@ -508,6 +509,7 @@ import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
 import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
+import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
@@ -973,6 +975,7 @@ const shard: CardShard = {
     _poolTriumphantChomp,
     _poolTrollsOfTelJilad,
     _poolTrostaniThreeWhispers,
+    _poolTrufflesnout,
     _poolTrumpetingCarnosaur,
     _poolTrustyPackbeast,
     _poolTundraFumarole,
@@ -1028,6 +1031,7 @@ const shard: CardShard = {
     _tokensBallisticBoulderToken,
     _tokensDragonTokenAvatarRoku,
     _tokensEldraziAngelToken,
+    _tokensGoblinWizardToken,
     _tokensGremlinToken,
     _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,

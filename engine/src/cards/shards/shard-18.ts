@@ -64,6 +64,7 @@ import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolCelestialRegulator from "../pool/celestial-regulator.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
+import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
@@ -313,6 +314,7 @@ import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
 import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
+import _poolPredatoryWurm from "../pool/predatory-wurm.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
 import _poolProjektorInspector from "../pool/projektor-inspector.js";
@@ -445,6 +447,7 @@ import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
 import _poolTolarianWinds from "../pool/tolarian-winds.js";
 import _poolTombTrawler from "../pool/tomb-trawler.js";
+import _poolTomeAnima from "../pool/tome-anima.js";
 import _poolTomeScour from "../pool/tome-scour.js";
 import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
@@ -602,6 +605,7 @@ const shard: CardShard = {
     _poolCelestialArmor,
     _poolCelestialRegulator,
     _poolChampionsOfThePerfect,
+    _poolChandrasPyreling,
     _poolChangeOfPlans,
     _poolChillingScreech,
     _poolClamorousIronclad,
@@ -851,6 +855,7 @@ const shard: CardShard = {
     _poolPlowThrough,
     _poolPossibilityTechnician,
     _poolPouncingCheetah,
+    _poolPredatoryWurm,
     _poolPrimalAmulet,
     _poolProftsEideticMemory,
     _poolProjektorInspector,
@@ -983,6 +988,7 @@ const shard: CardShard = {
     _poolTimelessWitness,
     _poolTolarianWinds,
     _poolTombTrawler,
+    _poolTomeAnima,
     _poolTomeScour,
     _poolTorment,
     _poolToughCookie,

@@ -37,6 +37,7 @@ import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
 import _poolBarretAvalancheLeader from "../pool/barret-avalanche-leader.js";
 import _poolBasilicaGuards from "../pool/basilica-guards.js";
+import _poolBasrisLieutenant from "../pool/basris-lieutenant.js";
 import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
@@ -147,6 +148,7 @@ import _poolEther from "../pool/ether.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
+import _poolFalconerAdept from "../pool/falconer-adept.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
@@ -556,6 +558,7 @@ import _tokensTiny from "../tokens/tiny.js";
 import _tokensTyranidGargoyleToken from "../tokens/tyranid-gargoyle-token.js";
 import _tokensWarriorTokenVigilance from "../tokens/warrior-token-vigilance.js";
 import _tokensWolfTokenGarrukCursedHuntsman from "../tokens/wolf-token-garruk-cursed-huntsman.js";
+import _tokensXXBlueRedWeirdToken from "../tokens/x-x-blue-red-weird-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -593,6 +596,7 @@ const shard: CardShard = {
     _poolBarbedServitor,
     _poolBarretAvalancheLeader,
     _poolBasilicaGuards,
+    _poolBasrisLieutenant,
     _poolBattlemagesBracers,
     _poolBeaconOfUnrest,
     _poolBehindTheScenes,
@@ -703,6 +707,7 @@ const shard: CardShard = {
     _poolExtractPower,
     _poolFacetReader,
     _poolFailedFording,
+    _poolFalconerAdept,
     _poolFanaticOfRhonas,
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
@@ -1114,6 +1119,7 @@ const shard: CardShard = {
     _tokensTyranidGargoyleToken,
     _tokensWarriorTokenVigilance,
     _tokensWolfTokenGarrukCursedHuntsman,
+    _tokensXXBlueRedWeirdToken,
   ],
 };
 

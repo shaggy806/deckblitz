@@ -176,6 +176,7 @@ import _poolGiantSpectacle from "../pool/giant-spectacle.js";
 import _poolGlenElendraLiege from "../pool/glen-elendra-liege.js";
 import _poolGloryBearers from "../pool/glory-bearers.js";
 import _poolGnarledMass from "../pool/gnarled-mass.js";
+import _poolGnarledSage from "../pool/gnarled-sage.js";
 import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
@@ -236,6 +237,7 @@ import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
+import _poolLilianasScorn from "../pool/lilianas-scorn.js";
 import _poolLizardBlades from "../pool/lizard-blades.js";
 import _poolLodestoneMyr from "../pool/lodestone-myr.js";
 import _poolLongFengGrandSecretariat from "../pool/long-feng-grand-secretariat.js";
@@ -685,6 +687,7 @@ const shard: CardShard = {
     _poolGlenElendraLiege,
     _poolGloryBearers,
     _poolGnarledMass,
+    _poolGnarledSage,
     _poolGoNuts,
     _poolGoShintaiOfSharedPurpose,
     _poolGoblinCommando,
@@ -745,6 +748,7 @@ const shard: CardShard = {
     _poolLeafCrownedVisionary,
     _poolLeylineProwler,
     _poolLightshieldParry,
+    _poolLilianasScorn,
     _poolLizardBlades,
     _poolLodestoneMyr,
     _poolLongFengGrandSecretariat,

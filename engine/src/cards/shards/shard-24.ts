@@ -347,6 +347,7 @@ import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
 import _poolSeamRip from "../pool/seam-rip.js";
 import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
 import _poolSeasonedCathar from "../pool/seasoned-cathar.js";
+import _poolSeasonedHallowblade from "../pool/seasoned-hallowblade.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
@@ -358,6 +359,7 @@ import _poolShrikeForce from "../pool/shrike-force.js";
 import _poolSicken from "../pool/sicken.js";
 import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
 import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
+import _poolSigiledContender from "../pool/sigiled-contender.js";
 import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
@@ -838,6 +840,7 @@ const shard: CardShard = {
     _poolSeamRip,
     _poolSearingSpearAskari,
     _poolSeasonedCathar,
+    _poolSeasonedHallowblade,
     _poolSeedshipImpact,
     _poolSeiferAlmasy,
     _poolSelflessPoliceCaptain,
@@ -849,6 +852,7 @@ const shard: CardShard = {
     _poolSicken,
     _poolSidequestRaiseAChocobo,
     _poolSidisiBroodTyrant,
+    _poolSigiledContender,
     _poolSilverSableMercenaryLeader,
     _poolSimicGuildgate,
     _poolSinkhole,

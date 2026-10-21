@@ -1078,6 +1078,15 @@ export interface Characteristics {
      * engine can identify as an object; see `protectionBlocks`. */
     readonly filters: readonly CardFilter[];
   };
+  /** Hexproof from a quality (rule 702.11d-e): the union of every "hexproof
+   * from …" clause — a matching spell, or an ability from a matching source,
+   * an opponent of this permanent's controller controls can't target it.
+   * The same three clauses as `protectionFrom`, evaluated the same way. */
+  readonly hexproofFrom: {
+    readonly colors: ReadonlySet<Color>;
+    readonly types: ReadonlySet<CardType>;
+    readonly filters: readonly CardFilter[];
+  };
 }
 
 /**
@@ -2735,6 +2744,12 @@ interface AppliedEffect {
     types?: readonly CardType[];
     filter?: CardFilter;
   } | null;
+  /** "Hexproof from …" it grants — the same shape as `protection`. */
+  readonly hexproofFrom: {
+    colors?: readonly Color[];
+    types?: readonly CardType[];
+    filter?: CardFilter;
+  } | null;
   /** Layer 7b — a `setBasePt`. */
   readonly setBase: { readonly power?: number; readonly toughness?: number } | null;
 }
@@ -2803,6 +2818,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
     ability.cantBeSacrificed === true ||
     ability.protection !== undefined ||
+    ability.hexproofFrom !== undefined ||
     ability.setBasePt !== undefined
   );
 }
@@ -3009,6 +3025,7 @@ function collectStaticEffects(
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       cantBeSacrificed: ability.cantBeSacrificed === true,
       protection: ability.protection ?? null,
+      hexproofFrom: ability.hexproofFrom ?? null,
       setBase: ability.setBasePt ?? null,
     };
   };
@@ -3058,6 +3075,7 @@ function collectStaticEffects(
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       cantBeSacrificed: ability.cantBeSacrificed === true,
       protection: ability.protection ?? null,
+      hexproofFrom: ability.hexproofFrom ?? null,
       setBase: null,
     });
   }
@@ -3158,6 +3176,9 @@ function assertSameCharacteristics(
       // Serialised whole: a filter is a plain object, and two of them
       // differing is exactly the divergence this check exists to catch.
       protFilters: c.protectionFrom.filters.map((f) => JSON.stringify(f)).sort(),
+      hexColors: [...c.hexproofFrom.colors].sort(),
+      hexTypes: [...c.hexproofFrom.types].sort(),
+      hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
     });
   const a = show(cached);
   const b = show(fresh);
@@ -3222,6 +3243,9 @@ function computeCharacteristicsUncached(
   const protColors = new Set<Color>();
   const protTypes = new Set<CardType>();
   const protFilters: CardFilter[] = [];
+  const hexColors = new Set<Color>();
+  const hexTypes = new Set<CardType>();
+  const hexFilters: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
@@ -3255,6 +3279,11 @@ function computeCharacteristicsUncached(
       for (const c of effect.protection.colors ?? []) protColors.add(c);
       for (const t of effect.protection.types ?? []) protTypes.add(t);
       if (effect.protection.filter !== undefined) protFilters.push(effect.protection.filter);
+    }
+    if (effect.hexproofFrom && granted) {
+      for (const c of effect.hexproofFrom.colors ?? []) hexColors.add(c);
+      for (const t of effect.hexproofFrom.types ?? []) hexTypes.add(t);
+      if (effect.hexproofFrom.filter !== undefined) hexFilters.push(effect.hexproofFrom.filter);
     }
   }
   // A spell's keywords from what grants them to spells (`grantsToSpells`).
@@ -3400,6 +3429,7 @@ function computeCharacteristicsUncached(
     canAttackAttackersDespiteDefender,
     cantBeSacrificed,
     protectionFrom: { colors: protColors, types: protTypes, filters: protFilters },
+    hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters },
   };
 }
 

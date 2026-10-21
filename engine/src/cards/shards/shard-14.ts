@@ -12,6 +12,7 @@ import _poolAgnaQela from "../pool/agna-qela.js";
 import _poolAgonizingSyphon from "../pool/agonizing-syphon.js";
 import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
 import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
+import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
@@ -29,6 +30,7 @@ import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
+import _poolBadDeal from "../pool/bad-deal.js";
 import _poolBagOfTricks from "../pool/bag-of-tricks.js";
 import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
 import _poolBardClass from "../pool/bard-class.js";
@@ -185,6 +187,7 @@ import _poolFuturistForge from "../pool/futurist-forge.js";
 import _poolGaladhrimBrigade from "../pool/galadhrim-brigade.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
+import _poolGarrukUnleashed from "../pool/garruk-unleashed.js";
 import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
@@ -497,6 +500,7 @@ import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
 import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
+import _tokensDemonToken55 from "../tokens/demon-token-5-5.js";
 import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-token-dance-of-the-tumbleweeds.js";
 import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
@@ -521,6 +525,7 @@ const shard: CardShard = {
     _poolAgonizingSyphon,
     _poolAjanisWelcome,
     _poolAllFatesStalker,
+    _poolAlpineHoundmaster,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
     _poolArbiterOfWoe,
@@ -538,6 +543,7 @@ const shard: CardShard = {
     _poolAxebaneGuardian,
     _poolAzureMage,
     _poolBackupAgent,
+    _poolBadDeal,
     _poolBagOfTricks,
     _poolBanishFromEdoras,
     _poolBardClass,
@@ -694,6 +700,7 @@ const shard: CardShard = {
     _poolGaladhrimBrigade,
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
+    _poolGarrukUnleashed,
     _poolGeistwave,
     _poolGhostsOfTheDamned,
     _poolGliderStaff,
@@ -1008,6 +1015,7 @@ const shard: CardShard = {
     _tokensApeToken,
     _tokensCrabToken,
     _tokensDeathtouchRatToken,
+    _tokensDemonToken55,
     _tokensElementalTokenDanceOfTheTumbleweeds,
     _tokensFishToken,
     _tokensGoblinConstructToken,

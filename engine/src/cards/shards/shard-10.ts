@@ -461,6 +461,7 @@ import _poolTormentedSoul from "../pool/tormented-soul.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
 import _poolTranquilCove from "../pool/tranquil-cove.js";
 import _poolTranquilLandscape from "../pool/tranquil-landscape.js";
+import _poolTransmogrify from "../pool/transmogrify.js";
 import _poolTreetopSnarespinner from "../pool/treetop-snarespinner.js";
 import _poolTrenchingSteed from "../pool/trenching-steed.js";
 import _poolTriSentinelActOfVengeance from "../pool/tri-sentinel-act-of-vengeance.js";
@@ -991,6 +992,7 @@ const shard: CardShard = {
     _poolToxrillTheCorrosive,
     _poolTranquilCove,
     _poolTranquilLandscape,
+    _poolTransmogrify,
     _poolTreetopSnarespinner,
     _poolTrenchingSteed,
     _poolTriSentinelActOfVengeance,

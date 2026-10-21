@@ -360,6 +360,7 @@ import _poolRoseTyler from "../pool/rose-tyler.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
+import _poolSabertoothMauler from "../pool/sabertooth-mauler.js";
 import _poolSabotender from "../pool/sabotender.js";
 import _poolSaguPummeler from "../pool/sagu-pummeler.js";
 import _poolSaid from "../pool/said.js";
@@ -447,6 +448,7 @@ import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
 import _poolThreefoldThunderhulk from "../pool/threefold-thunderhulk.js";
+import _poolThrunBreakerOfSilence from "../pool/thrun-breaker-of-silence.js";
 import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
 import _poolTickedOff from "../pool/ticked-off.js";
@@ -485,6 +487,7 @@ import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
+import _poolWakerOfWaves from "../pool/waker-of-waves.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWallOff from "../pool/wall-off.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
@@ -881,6 +884,7 @@ const shard: CardShard = {
     _poolRuneclawBear,
     _poolRunehornHellkite,
     _poolRustedSlasher,
+    _poolSabertoothMauler,
     _poolSabotender,
     _poolSaguPummeler,
     _poolSaid,
@@ -968,6 +972,7 @@ const shard: CardShard = {
     _poolThoughtseize,
     _poolThreeTreeCity,
     _poolThreefoldThunderhulk,
+    _poolThrunBreakerOfSilence,
     _poolThunderclapWyvern,
     _poolThundermawHellkite,
     _poolTickedOff,
@@ -1006,6 +1011,7 @@ const shard: CardShard = {
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,
     _poolVolcanicUpheaval,
+    _poolWakerOfWaves,
     _poolWalkingCorpse,
     _poolWallOff,
     _poolWarclampMastiff,

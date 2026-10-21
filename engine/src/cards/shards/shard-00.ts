@@ -472,6 +472,7 @@ import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
 import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
+import _poolTrackDown from "../pool/track-down.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
@@ -518,6 +519,7 @@ import _poolWildCeratok from "../pool/wild-ceratok.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
 import _poolWindriderWizard from "../pool/windrider-wizard.js";
 import _poolWitchingWell from "../pool/witching-well.js";
+import _poolWitchsCauldron from "../pool/witchs-cauldron.js";
 import _poolWoodedRidgeline from "../pool/wooded-ridgeline.js";
 import _poolWreckingGecko from "../pool/wrecking-gecko.js";
 import _poolYourFateEndsHere from "../pool/your-fate-ends-here.js";
@@ -1012,6 +1014,7 @@ const shard: CardShard = {
     _poolTooGreedilyTooDeep,
     _poolToothOfRamos,
     _poolTorchDrake,
+    _poolTrackDown,
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTunnelOfHate,
@@ -1058,6 +1061,7 @@ const shard: CardShard = {
     _poolWildUnraveling,
     _poolWindriderWizard,
     _poolWitchingWell,
+    _poolWitchsCauldron,
     _poolWoodedRidgeline,
     _poolWreckingGecko,
     _poolYourFateEndsHere,

@@ -8752,6 +8752,25 @@
   "effect:rotate-chosen-permanents": {
    "family": "effect:exchange-control",
    "example": "Inniaz, the Gale Force"
+  },
+  "static:aura-cast-time-target-restriction": {
+   "example": "Enthralling Hold"
+  },
+  "condition:permanent-put-into-hand-from-battlefield-this-turn": {
+   "example": "Barrin, Tolarian Archmage"
+  },
+  "effect:phase-out-until-your-next-turn-end": {
+   "example": "Teferi, Timeless Voyager"
+  },
+  "effect:exile-graveyard-until-source-leaves": {
+   "example": "Idol of Endurance"
+  },
+  "effect:cast-from-linked-exile-free-this-turn": {
+   "example": "Idol of Endurance"
+  },
+  "cost:self-graveyard-cast-discard-cost": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Demonic Embrace"
   }
  }
 }

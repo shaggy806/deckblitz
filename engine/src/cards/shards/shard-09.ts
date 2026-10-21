@@ -20,6 +20,7 @@ import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
+import _poolAngelicAscension from "../pool/angelic-ascension.js";
 import _poolApostleOfInvasion from "../pool/apostle-of-invasion.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
 import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
@@ -207,6 +208,7 @@ import _poolHavocDemon from "../pool/havoc-demon.js";
 import _poolHeavyInfantry from "../pool/heavy-infantry.js";
 import _poolHellToPay from "../pool/hell-to-pay.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
+import _poolHistorianOfZhalfir from "../pool/historian-of-zhalfir.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
@@ -239,6 +241,7 @@ import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
+import _poolKeralKeepDisciples from "../pool/keral-keep-disciples.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
 import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
 import _poolKitchenImp from "../pool/kitchen-imp.js";
@@ -373,6 +376,7 @@ import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
+import _poolSanguineIndulgence from "../pool/sanguine-indulgence.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
@@ -495,6 +499,7 @@ import _poolVowOfTorment from "../pool/vow-of-torment.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
+import _poolWardedBattlements from "../pool/warded-battlements.js";
 import _poolWatchfulAutomaton from "../pool/watchful-automaton.js";
 import _poolWaveWingElemental from "../pool/wave-wing-elemental.js";
 import _poolWebShooters from "../pool/web-shooters.js";
@@ -555,6 +560,7 @@ const shard: CardShard = {
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
     _poolAngelfireCrusader,
+    _poolAngelicAscension,
     _poolApostleOfInvasion,
     _poolApprenticeWizard,
     _poolArachnoidAdaptation,
@@ -742,6 +748,7 @@ const shard: CardShard = {
     _poolHeavyInfantry,
     _poolHellToPay,
     _poolHeroOfBladehold,
+    _poolHistorianOfZhalfir,
     _poolHogMonkey,
     _poolHoldAtBay,
     _poolHollowhengeScavenger,
@@ -774,6 +781,7 @@ const shard: CardShard = {
     _poolKayasWrath,
     _poolKeeneyeAven,
     _poolKembaKhaEnduring,
+    _poolKeralKeepDisciples,
     _poolKessigFlamebreather,
     _poolKioraOfFireAndAshes,
     _poolKitchenImp,
@@ -908,6 +916,7 @@ const shard: CardShard = {
     _poolSakashimaTheImpostor,
     _poolSamutHazoretsChampion,
     _poolSandstalkerMoloch,
+    _poolSanguineIndulgence,
     _poolSatyrRambler,
     _poolSavageKnuckleblade,
     _poolSavaiCrystal,
@@ -1030,6 +1039,7 @@ const shard: CardShard = {
     _poolWallOfDenial,
     _poolWarBehemoth,
     _poolWarEffort,
+    _poolWardedBattlements,
     _poolWatchfulAutomaton,
     _poolWaveWingElemental,
     _poolWebShooters,

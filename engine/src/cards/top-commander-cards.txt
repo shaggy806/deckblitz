@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3727 already implemented / 1273 missing (marks refreshed 2026-10-20)
+3728 already implemented / 1272 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3954,7 +3954,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3961  Scavenger's Talent                       {B}              Enchantment — Class
 [ ]  3962  Hare Apparent                            {1}{W}           Creature — Rabbit Noble
 [x]  3963  Indulgent Tormentor                      {3}{B}{B}        Creature — Demon
-[ ]  3964  Breaker of Creation                      {6}{C}{C}        Creature — Eldrazi
+[x]  3964  Breaker of Creation                      {6}{C}{C}        Creature — Eldrazi
 [x]  3965  Turbulent Wilderness                     {0}              Land — Forest Island
 [x]  3966  Clown Car                                {X}              Artifact — Vehicle
 [x]  3967  Arctic Treeline                          {0}              Snow Land — Forest Plains

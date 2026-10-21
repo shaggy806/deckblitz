@@ -174,6 +174,7 @@ import _poolForceVoid from "../pool/force-void.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
+import _poolFranticInventory from "../pool/frantic-inventory.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
@@ -289,6 +290,7 @@ import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
 import _poolMalanthrope from "../pool/malanthrope.js";
+import _poolMaleficScythe from "../pool/malefic-scythe.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
@@ -693,6 +695,7 @@ const shard: CardShard = {
     _poolForensicResearcher,
     _poolFortuitousFind,
     _poolFourKnocks,
+    _poolFranticInventory,
     _poolFreestriderCommando,
     _poolFrenziedRaptor,
     _poolFriendlyNeighborhood,
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolMadameMasque,
     _poolMageTowerReferee,
     _poolMalanthrope,
+    _poolMaleficScythe,
     _poolManyPartings,
     _poolMarchingDuodrone,
     _poolMarkovPatrician,

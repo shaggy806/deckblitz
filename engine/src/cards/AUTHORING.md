@@ -3513,8 +3513,18 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   battlefield — for the legend rule and for every "legendary" filter
   (`supertypesOf`). A storm copy is a token once it resolves (rule 707.10f).
   `affects` is irrelevant.
-- `protection: { colors?, types? }` — rule 702.16 (White Knight: `{ colors:
-  ["B"] }`).
+- `protection: { colors?, types?, filter? }` — rule 702.16 (White Knight: `{ colors:
+  ["B"] }`; a `filter` for what neither names — Basri's Lieutenant's
+  multicolored, `{}` for everything).
+- `hexproofFrom: { colors?, types?, filter? }` — hexproof from a quality (rule
+  702.11d): an opponent's matching spell, or an ability from a matching source
+  they control, can't target it. Sporeweb Weaver's "hexproof from blue" is
+  `{ colors: ["U"] }`, "hexproof from each color" all five (Breaker of
+  Creation), Nevinyrral's "from artifacts, creatures, and enchantments"
+  `{ types: [...] }`, Thrun's "can't be the target of nongreen spells your
+  opponents control or abilities from nongreen sources" `{ filter: {
+  notColors: ["G"] } }`. Targeting only — not blocking, damage or enchanting.
+  Granting it until end of turn (Skrelv's chosen color) isn't built.
 - Ward is **not** a static — it's a triggered ability; see `ward(...)` in §9.
 - `costModification: { applies: CardFilter, reduceGeneric?, increaseGeneric? }`
   — Foundry Inspector, Thalia. `affects` is ignored — `applies` says what it
@@ -4592,8 +4602,6 @@ Delete an entry in the same commit as the feature that retires it.
   the type line from a fixed menu, was removed on 2026-10-09. Exchange of
   Words (its "for as long as this enchantment remains on the battlefield"
   duration) isn't built.
-- **Protection** is `{ colors, types }` only — not "protection from
-  [full filter]" (e.g. "from Dragons", "from everything").
 - **Conditional statics / intervening-ifs** are limited to the
   `StaticCondition` kinds the union lists (`controls` / `opponent-controls` /
   `your-turn` / `threshold` / `delirium` / `metalcraft` / … — read the type).

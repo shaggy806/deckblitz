@@ -105,6 +105,7 @@ import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
+import _poolDireFleetWarmonger from "../pool/dire-fleet-warmonger.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
@@ -402,6 +403,7 @@ import _poolSteppeLynx from "../pool/steppe-lynx.js";
 import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
+import _poolStormCaller from "../pool/storm-caller.js";
 import _poolStudyBreak from "../pool/study-break.js";
 import _poolSubterraneanScout from "../pool/subterranean-scout.js";
 import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
@@ -617,6 +619,7 @@ const shard: CardShard = {
     _poolDecoyPloy,
     _poolDeepfathomSkulker,
     _poolDevotedPaladin,
+    _poolDireFleetWarmonger,
     _poolDiregrafCaptain,
     _poolDisposalMummy,
     _poolDistractingGeist,
@@ -914,6 +917,7 @@ const shard: CardShard = {
     _poolStewardOfValeron,
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
+    _poolStormCaller,
     _poolStudyBreak,
     _poolSubterraneanScout,
     _poolSuccumbToTheCold,

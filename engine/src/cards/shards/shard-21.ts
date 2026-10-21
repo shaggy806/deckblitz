@@ -414,6 +414,7 @@ import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
+import _poolTeferisWavecaster from "../pool/teferis-wavecaster.js";
 import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTemptedByTheOriq from "../pool/tempted-by-the-oriq.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolTanglepoolBridge,
     _poolTarkirDuneshaper,
     _poolTeamTactics,
+    _poolTeferisWavecaster,
     _poolTemporalCleansing,
     _poolTemptedByTheOriq,
     _poolTendrilsOfAgony,

@@ -67,6 +67,7 @@ import _poolBuoyancy from "../pool/buoyancy.js";
 import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js";
 import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
+import _poolCagedZombie from "../pool/caged-zombie.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
 import _poolCarnelianOrbOfDragonkind from "../pool/carnelian-orb-of-dragonkind.js";
@@ -617,6 +618,7 @@ const shard: CardShard = {
     _poolButchDeloriaTunnelSnake,
     _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
+    _poolCagedZombie,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
     _poolCarnelianOrbOfDragonkind,

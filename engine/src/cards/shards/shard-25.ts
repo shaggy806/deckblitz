@@ -33,6 +33,7 @@ import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBandage from "../pool/bandage.js";
+import _poolBasrisAegis from "../pool/basris-aegis.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
 import _poolBastionProtector from "../pool/bastion-protector.js";
 import _poolBayouGroff from "../pool/bayou-groff.js";
@@ -58,6 +59,7 @@ import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
 import _poolBrazenBorrower from "../pool/brazen-borrower.js";
 import _poolBrazenScourge from "../pool/brazen-scourge.js";
+import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
@@ -210,6 +212,7 @@ import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
 import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
+import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
 import _poolIgneousGolem from "../pool/igneous-golem.js";
@@ -410,6 +413,7 @@ import _poolSmotheringTithe from "../pool/smothering-tithe.js";
 import _poolSolemnity from "../pool/solemnity.js";
 import _poolSolidarity from "../pool/solidarity.js";
 import _poolSoulEnervation from "../pool/soul-enervation.js";
+import _poolSoulSear from "../pool/soul-sear.js";
 import _poolSoulmender from "../pool/soulmender.js";
 import _poolSparasHeadquarters from "../pool/sparas-headquarters.js";
 import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
@@ -559,6 +563,7 @@ const shard: CardShard = {
     _poolAvengersUnderSiege,
     _poolBaSingSe,
     _poolBandage,
+    _poolBasrisAegis,
     _poolBastionOfRemembrance,
     _poolBastionProtector,
     _poolBayouGroff,
@@ -584,6 +589,7 @@ const shard: CardShard = {
     _poolBranchOfBoseiju,
     _poolBrazenBorrower,
     _poolBrazenScourge,
+    _poolBreakerOfCreation,
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
@@ -736,6 +742,7 @@ const shard: CardShard = {
     _poolHarvesterOfMisery,
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
+    _poolHeartfireImmolator,
     _poolHydaelynTheMothercrystal,
     _poolHydrosurge,
     _poolIgneousGolem,
@@ -936,6 +943,7 @@ const shard: CardShard = {
     _poolSolemnity,
     _poolSolidarity,
     _poolSoulEnervation,
+    _poolSoulSear,
     _poolSoulmender,
     _poolSparasHeadquarters,
     _poolSpawnbedProtector,

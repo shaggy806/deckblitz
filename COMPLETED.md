@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Core Set 2021, whole** (batch 116): its last 88 cards, 70 authored by three `card-author`
+  agents and the lead, 18 blocked, with **hexproof from a quality** built (rule 702.11d — a
+  colour, a card type or a filter; Sporeweb Weaver, Garruk's Harbinger) and three earlier-triaged
+  cards it unblocked (Breaker of Creation, Thrun, Breaker of Silence, Nevinyrral, Urborg
+  Tyrant) (2026-10-20).
 - **Jumpstart, whole** (batch 115): its last 12 cards, 10 authored by the lead, with `cast-now`'s
   `exileAfter: "instants-and-sorceries"` built for Scholar of the Lost Trove (an artifact cast
   this way isn't exiled, its ruling); Ormos and Inniaz blocked (2026-10-20).

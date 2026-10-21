@@ -27,6 +27,7 @@ import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArcaneOmens from "../pool/arcane-omens.js";
 import _poolArchelosLagoonMystic from "../pool/archelos-lagoon-mystic.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
+import _poolArchfiendsVessel from "../pool/archfiends-vessel.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
@@ -75,6 +76,7 @@ import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
 import _poolCatapultFodder from "../pool/catapult-fodder.js";
+import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
@@ -154,6 +156,7 @@ import _poolEnchantedCarriage from "../pool/enchanted-carriage.js";
 import _poolEnergyRefractor from "../pool/energy-refractor.js";
 import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolEntDraughtBasin from "../pool/ent-draught-basin.js";
+import _poolExperimentalOverload from "../pool/experimental-overload.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
 import _poolFalkenrathPitFighter from "../pool/falkenrath-pit-fighter.js";
@@ -391,6 +394,7 @@ import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
+import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
@@ -562,6 +566,7 @@ const shard: CardShard = {
     _poolArcaneOmens,
     _poolArchelosLagoonMystic,
     _poolArchersParapet,
+    _poolArchfiendsVessel,
     _poolArdentPlea,
     _poolArgentDais,
     _poolArmoredCancrix,
@@ -610,6 +615,7 @@ const shard: CardShard = {
     _poolCastleSengir,
     _poolCatalystElemental,
     _poolCatapultFodder,
+    _poolCelestialEnforcer,
     _poolChaosTerminatorLord,
     _poolChargeOfTheMites,
     _poolCharityExtractor,
@@ -689,6 +695,7 @@ const shard: CardShard = {
     _poolEnergyRefractor,
     _poolEnlightenedManiac,
     _poolEntDraughtBasin,
+    _poolExperimentalOverload,
     _poolFacevaulter,
     _poolFaithfulPikemaster,
     _poolFalkenrathPitFighter,
@@ -926,6 +933,7 @@ const shard: CardShard = {
     _poolScavengingOoze,
     _poolScornfulAetherLich,
     _poolScrapMastery,
+    _poolSecureTheScene,
     _poolSeedpodCaretaker,
     _poolSeveredLegion,
     _poolShardlessAgent,

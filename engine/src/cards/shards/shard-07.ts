@@ -52,6 +52,7 @@ import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
+import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChargingHooligan from "../pool/charging-hooligan.js";
 import _poolCharmingScoundrel from "../pool/charming-scoundrel.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
@@ -589,6 +590,7 @@ const shard: CardShard = {
     _poolCallousInspector,
     _poolCaseOfTheShatteredPact,
     _poolChandrasEmberling,
+    _poolChandrasFiremaw,
     _poolChargingHooligan,
     _poolCharmingScoundrel,
     _poolChatterstorm,

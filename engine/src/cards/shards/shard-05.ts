@@ -7,6 +7,7 @@ import _poolAbandonThePost from "../pool/abandon-the-post.js";
 import _poolAbsorbingManAndTitania from "../pool/absorbing-man-and-titania.js";
 import _poolAccorderPaladin from "../pool/accorder-paladin.js";
 import _poolAdaptiveSnapjaw from "../pool/adaptive-snapjaw.js";
+import _poolAdherentOfHope from "../pool/adherent-of-hope.js";
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
 import _poolAgateBladeAssassin from "../pool/agate-blade-assassin.js";
@@ -541,6 +542,7 @@ const shard: CardShard = {
     _poolAbsorbingManAndTitania,
     _poolAccorderPaladin,
     _poolAdaptiveSnapjaw,
+    _poolAdherentOfHope,
     _poolAetherworksMarvel,
     _poolAftermathAnalyst,
     _poolAgateBladeAssassin,

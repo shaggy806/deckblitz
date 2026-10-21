@@ -135,6 +135,7 @@ import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
+import _poolDrowsingTyrannodon from "../pool/drowsing-tyrannodon.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
@@ -276,6 +277,8 @@ import _poolNaturalConnection from "../pool/natural-connection.js";
 import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
 import _poolNettletoothDjinn from "../pool/nettletooth-djinn.js";
+import _poolNevinyrralUrborgTyrant from "../pool/nevinyrral-urborg-tyrant.js";
+import _poolNiambiEsteemedSpeaker from "../pool/niambi-esteemed-speaker.js";
 import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
@@ -654,6 +657,7 @@ const shard: CardShard = {
     _poolDragToTheRoots,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
+    _poolDrowsingTyrannodon,
     _poolDualSunTechnique,
     _poolDutifulServants,
     _poolDynamiteDiver,
@@ -795,6 +799,8 @@ const shard: CardShard = {
     _poolNecrogenRotpriest,
     _poolNeedlepeakSpider,
     _poolNettletoothDjinn,
+    _poolNevinyrralUrborgTyrant,
+    _poolNiambiEsteemedSpeaker,
     _poolNickFurySpymaster,
     _poolNightshadeDryad,
     _poolNightveilSprite,

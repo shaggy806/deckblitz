@@ -193,6 +193,7 @@ import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
+import _poolGoblinWizardry from "../pool/goblin-wizardry.js";
 import _poolGoldwardensHelm from "../pool/goldwardens-helm.js";
 import _poolGolgariSignet from "../pool/golgari-signet.js";
 import _poolGoliathSpider from "../pool/goliath-spider.js";
@@ -320,6 +321,7 @@ import _poolOneirophage from "../pool/oneirophage.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
 import _poolOrderOfTheAlabasterHost from "../pool/order-of-the-alabaster-host.js";
+import _poolOrneryDilophosaur from "../pool/ornery-dilophosaur.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
 import _poolOssification from "../pool/ossification.js";
 import _poolOutOfAir from "../pool/out-of-air.js";
@@ -407,6 +409,7 @@ import _poolShreddedSails from "../pool/shredded-sails.js";
 import _poolShuDefender from "../pool/shu-defender.js";
 import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
 import _poolSidequestCardCollection from "../pool/sidequest-card-collection.js";
+import _poolSiegeStriker from "../pool/siege-striker.js";
 import _poolSiegfriedFamedSwordsman from "../pool/siegfried-famed-swordsman.js";
 import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
@@ -754,6 +757,7 @@ const shard: CardShard = {
     _poolGloriousAnthem,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
+    _poolGoblinWizardry,
     _poolGoldwardensHelm,
     _poolGolgariSignet,
     _poolGoliathSpider,
@@ -881,6 +885,7 @@ const shard: CardShard = {
     _poolOrcishCannonade,
     _poolOrcishMechanics,
     _poolOrderOfTheAlabasterHost,
+    _poolOrneryDilophosaur,
     _poolOrochiLeafcaller,
     _poolOssification,
     _poolOutOfAir,
@@ -968,6 +973,7 @@ const shard: CardShard = {
     _poolShuDefender,
     _poolShuriTheBlackPanther,
     _poolSidequestCardCollection,
+    _poolSiegeStriker,
     _poolSiegfriedFamedSwordsman,
     _poolSigiledBehemoth,
     _poolSilenceTheEcho,

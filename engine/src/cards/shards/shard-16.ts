@@ -234,6 +234,7 @@ import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
+import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
@@ -789,6 +790,7 @@ const shard: CardShard = {
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
     _poolKazanduValley,
+    _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
     _poolKnightOfDoves,

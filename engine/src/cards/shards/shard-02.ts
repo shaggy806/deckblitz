@@ -75,6 +75,7 @@ import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
+import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
@@ -209,6 +210,7 @@ import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
+import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
@@ -350,6 +352,7 @@ import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
 import _poolRivendell from "../pool/rivendell.js";
 import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js";
+import _poolRookieMistake from "../pool/rookie-mistake.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
@@ -576,6 +579,7 @@ const shard: CardShard = {
     _poolCavernousMaw,
     _poolCelebornTheWise,
     _poolChampionsOfTheShoal,
+    _poolChandraFlamesCatalyst,
     _poolChangelingOutcast,
     _poolCharitableLevy,
     _poolCinderStrike,
@@ -710,6 +714,7 @@ const shard: CardShard = {
     _poolHobblingZombie,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
+    _poolHuntersEdge,
     _poolHurloonShaman,
     _poolHyraxTowerScout,
     _poolIlluminatorVirtuoso,
@@ -851,6 +856,7 @@ const shard: CardShard = {
     _poolRiptideTurtle,
     _poolRivendell,
     _poolRocksteadyMutantMarauder,
+    _poolRookieMistake,
     _poolRootwaterCommando,
     _poolRoughRhinoCavalry,
     _poolRumorGatherer,

@@ -173,6 +173,7 @@ import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
 import _poolGoblinStriker from "../pool/goblin-striker.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
 import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
+import _poolGoremand from "../pool/goremand.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
@@ -321,6 +322,7 @@ import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
+import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
 import _poolRallyAtTheHornburg from "../pool/rally-at-the-hornburg.js";
 import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
@@ -435,6 +437,7 @@ import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
+import _poolTemperedVeteran from "../pool/tempered-veteran.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
 import _poolTergridsShadow from "../pool/tergrids-shadow.js";
 import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
@@ -703,6 +706,7 @@ const shard: CardShard = {
     _poolGoblinStriker,
     _poolGoldveinPick,
     _poolGollumTheAbandoned,
+    _poolGoremand,
     _poolGravestoneStrider,
     _poolGriffinAerie,
     _poolGuadosalamFarplaneGateway,
@@ -851,6 +855,7 @@ const shard: CardShard = {
     _poolProudMentor,
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
+    _poolRadhaHeartOfKeld,
     _poolRallyAtTheHornburg,
     _poolRancor,
     _poolRangersGuile,
@@ -965,6 +970,7 @@ const shard: CardShard = {
     _poolTalismanOfUnity,
     _poolTattermungeManiac,
     _poolTelJiladExile,
+    _poolTemperedVeteran,
     _poolTergridsLantern,
     _poolTergridsShadow,
     _poolTerrorOfMountVelus,

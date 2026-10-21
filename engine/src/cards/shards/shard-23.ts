@@ -37,6 +37,7 @@ import _poolBarbedSpike from "../pool/barbed-spike.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBasilicaStalker from "../pool/basilica-stalker.js";
+import _poolBasrisAcolyte from "../pool/basris-acolyte.js";
 import _poolBatteryBearer from "../pool/battery-bearer.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
@@ -252,6 +253,7 @@ import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
+import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
@@ -297,6 +299,7 @@ import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
 import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
+import _poolMysticSkyfish from "../pool/mystic-skyfish.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
@@ -396,6 +399,7 @@ import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
 import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
 import _poolSilkNet from "../pool/silk-net.js";
+import _poolSilversmoteGhoul from "../pool/silversmote-ghoul.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
@@ -567,6 +571,7 @@ const shard: CardShard = {
     _poolBarkformHarvester,
     _poolBarrelsOfBlastingJelly,
     _poolBasilicaStalker,
+    _poolBasrisAcolyte,
     _poolBatteryBearer,
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
@@ -782,6 +787,7 @@ const shard: CardShard = {
     _poolKyoshiBattleFan,
     _poolLarvalScoutlander,
     _poolLavaAxe,
+    _poolLeafkinAvenger,
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
     _poolLeylineInvocation,
@@ -827,6 +833,7 @@ const shard: CardShard = {
     _poolMoxOpal,
     _poolMurmuringVolume,
     _poolMysticPeak,
+    _poolMysticSkyfish,
     _poolNantukoElder,
     _poolNarnamCobra,
     _poolNeoExdeathDimensionsEnd,
@@ -926,6 +933,7 @@ const shard: CardShard = {
     _poolSibsigAppraiser,
     _poolSibyllineSoothsayer,
     _poolSilkNet,
+    _poolSilversmoteGhoul,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
     _poolSkeletonCrew,

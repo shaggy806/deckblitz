@@ -1929,6 +1929,20 @@ export interface StaticAbility {
     readonly types?: readonly CardType[];
     readonly filter?: CardFilter;
   };
+  /** Hexproof from a quality (rule 702.11d-e) — the affected permanent can't
+   * be the target of a matching spell, or an ability from a matching source,
+   * that an opponent of its controller controls. Sporeweb Weaver's "hexproof
+   * from blue" is `{ colors: ["U"] }`; "hexproof from each color" all five;
+   * Nevinyrral's "hexproof from artifacts, creatures, and enchantments"
+   * `{ types: [...] }`; a `filter` the qualities neither names (Thrun's
+   * "nongreen": `{ filter: { notColors: ["G"] } }`). The clauses are ORed
+   * and evaluated as `protection`'s are (`protectionBlocks`). Unlike
+   * protection it stops targeting only — not blocking, enchanting or damage. */
+  readonly hexproofFrom?: {
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly filter?: CardFilter;
+  };
   /** Adjust the generic-mana cost of matching *spells* as they're cast
    * (Foundry Inspector: `{ applies: { type: "artifact", controlledBy: "you" },
    * reduceGeneric: 1 }`; Thalia: `{ applies: { notTypes: ["creature"] },

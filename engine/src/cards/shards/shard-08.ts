@@ -176,6 +176,7 @@ import _poolFuturistOperative from "../pool/futurist-operative.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
+import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
@@ -425,6 +426,7 @@ import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
 import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
+import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
 import _poolSteelswarmOperator from "../pool/steelswarm-operator.js";
 import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
@@ -720,6 +722,7 @@ const shard: CardShard = {
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
     _poolGargoyleFlock,
+    _poolGarruksWarsteed,
     _poolGeneralLeoCristophe,
     _poolGhoulcallersBell,
     _poolGildedScuttler,
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolSpiderManNewChampion,
     _poolSpiritOfMalevolence,
     _poolSplashPortal,
+    _poolSporewebWeaver,
     _poolSteamclaw,
     _poolSteelswarmOperator,
     _poolStingerquillAnnex,

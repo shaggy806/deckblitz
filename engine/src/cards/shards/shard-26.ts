@@ -456,6 +456,7 @@ import _poolTirelessTracker from "../pool/tireless-tracker.js";
 import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTrainedCheetah from "../pool/trained-cheetah.js";
+import _poolTraitorousGreed from "../pool/traitorous-greed.js";
 import _poolTransformativeCommons from "../pool/transformative-commons.js";
 import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
@@ -977,6 +978,7 @@ const shard: CardShard = {
     _poolToArms,
     _poolTorrentialGearhulk,
     _poolTrainedCheetah,
+    _poolTraitorousGreed,
     _poolTransformativeCommons,
     _poolTreasureHunter,
     _poolTreebeardGraciousHost,

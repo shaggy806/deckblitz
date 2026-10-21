@@ -1,0 +1,649 @@
+{
+ "batch": "B116",
+ "status": "complete",
+ "ranks": "Core Set 2021 (M21, 2020-07-03): the rest of the set, with three cards triaged earlier that hexproof from a quality unblocked",
+ "authored": [
+  {
+   "name": "Sporeweb Weaver",
+   "files": [
+    "engine/src/cards/pool/sporeweb-weaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basri's Lieutenant",
+   "files": [
+    "engine/src/cards/pool/basris-lieutenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radha, Heart of Keld",
+   "files": [
+    "engine/src/cards/pool/radha-heart-of-keld.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garruk, Unleashed",
+   "files": [
+    "engine/src/cards/pool/garruk-unleashed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volcanic Salvo",
+   "files": [
+    "engine/src/cards/pool/volcanic-salvo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Traitorous Greed",
+   "files": [
+    "engine/src/cards/pool/traitorous-greed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thieves' Guild Enforcer",
+   "files": [
+    "engine/src/cards/pool/thieves-guild-enforcer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leafkin Avenger",
+   "files": [
+    "engine/src/cards/pool/leafkin-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolarian Kraken",
+   "files": [
+    "engine/src/cards/pool/tolarian-kraken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transmogrify",
+   "files": [
+    "engine/src/cards/pool/transmogrify.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaervek, the Spiteful",
+   "files": [
+    "engine/src/cards/pool/kaervek-the-spiteful.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Witch's Cauldron",
+   "files": [
+    "engine/src/cards/pool/witchs-cauldron.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silversmote Ghoul",
+   "files": [
+    "engine/src/cards/pool/silversmote-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Ascension",
+   "files": [
+    "engine/src/cards/pool/angelic-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra, Flame's Catalyst",
+   "files": [
+    "engine/src/cards/pool/chandra-flames-catalyst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bad Deal",
+   "files": [
+    "engine/src/cards/pool/bad-deal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Pyreling",
+   "files": [
+    "engine/src/cards/pool/chandras-pyreling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Experimental Overload",
+   "files": [
+    "engine/src/cards/pool/experimental-overload.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alchemist's Gift",
+   "files": [
+    "engine/src/cards/pool/alchemists-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garruk's Harbinger",
+   "files": [
+    "engine/src/cards/pool/garruks-harbinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Wizardry",
+   "files": [
+    "engine/src/cards/pool/goblin-wizardry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goremand",
+   "files": [
+    "engine/src/cards/pool/goremand.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soul Sear",
+   "files": [
+    "engine/src/cards/pool/soul-sear.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Archfiend's Vessel",
+   "files": [
+    "engine/src/cards/pool/archfiends-vessel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartfire Immolator",
+   "files": [
+    "engine/src/cards/pool/heartfire-immolator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niambi, Esteemed Speaker",
+   "files": [
+    "engine/src/cards/pool/niambi-esteemed-speaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basri's Acolyte",
+   "files": [
+    "engine/src/cards/pool/basris-acolyte.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sanguine Indulgence",
+   "files": [
+    "engine/src/cards/pool/sanguine-indulgence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Track Down",
+   "files": [
+    "engine/src/cards/pool/track-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waker of Waves",
+   "files": [
+    "engine/src/cards/pool/waker-of-waves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana's Scrounger",
+   "files": [
+    "engine/src/cards/pool/lilianas-scrounger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ornery Dilophosaur",
+   "files": [
+    "engine/src/cards/pool/ornery-dilophosaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malefic Scythe",
+   "files": [
+    "engine/src/cards/pool/malefic-scythe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seasoned Hallowblade",
+   "files": [
+    "engine/src/cards/pool/seasoned-hallowblade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kinetic Augur",
+   "files": [
+    "engine/src/cards/pool/kinetic-augur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keral Keep Disciples",
+   "files": [
+    "engine/src/cards/pool/keral-keep-disciples.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Firemaw",
+   "files": [
+    "engine/src/cards/pool/chandras-firemaw.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hunter's Edge",
+   "files": [
+    "engine/src/cards/pool/hunters-edge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Falconer Adept",
+   "files": [
+    "engine/src/cards/pool/falconer-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloom Sower",
+   "files": [
+    "engine/src/cards/pool/gloom-sower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drowsing Tyrannodon",
+   "files": [
+    "engine/src/cards/pool/drowsing-tyrannodon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Liliana's Scorn",
+   "files": [
+    "engine/src/cards/pool/lilianas-scorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Storm Caller",
+   "files": [
+    "engine/src/cards/pool/storm-caller.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warded Battlements",
+   "files": [
+    "engine/src/cards/pool/warded-battlements.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sabertooth Mauler",
+   "files": [
+    "engine/src/cards/pool/sabertooth-mauler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alpine Houndmaster",
+   "files": [
+    "engine/src/cards/pool/alpine-houndmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempered Veteran",
+   "files": [
+    "engine/src/cards/pool/tempered-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Read the Tides",
+   "files": [
+    "engine/src/cards/pool/read-the-tides.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Canopy Stalker",
+   "files": [
+    "engine/src/cards/pool/canopy-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trufflesnout",
+   "files": [
+    "engine/src/cards/pool/trufflesnout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Caged Zombie",
+   "files": [
+    "engine/src/cards/pool/caged-zombie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siege Striker",
+   "files": [
+    "engine/src/cards/pool/siege-striker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mystic Skyfish",
+   "files": [
+    "engine/src/cards/pool/mystic-skyfish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Predatory Wurm",
+   "files": [
+    "engine/src/cards/pool/predatory-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sparkhunter Masticore",
+   "files": [
+    "engine/src/cards/pool/sparkhunter-masticore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dire Fleet Warmonger",
+   "files": [
+    "engine/src/cards/pool/dire-fleet-warmonger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Run Afoul",
+   "files": [
+    "engine/src/cards/pool/run-afoul.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Garruk's Warsteed",
+   "files": [
+    "engine/src/cards/pool/garruks-warsteed.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Secure the Scene",
+   "files": [
+    "engine/src/cards/pool/secure-the-scene.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tome Anima",
+   "files": [
+    "engine/src/cards/pool/tome-anima.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Roaming Ghostlight",
+   "files": [
+    "engine/src/cards/pool/roaming-ghostlight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gnarled Sage",
+   "files": [
+    "engine/src/cards/pool/gnarled-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rookie Mistake",
+   "files": [
+    "engine/src/cards/pool/rookie-mistake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi's Wavecaster",
+   "files": [
+    "engine/src/cards/pool/teferis-wavecaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Basri's Aegis",
+   "files": [
+    "engine/src/cards/pool/basris-aegis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Adherent of Hope",
+   "files": [
+    "engine/src/cards/pool/adherent-of-hope.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Celestial Enforcer",
+   "files": [
+    "engine/src/cards/pool/celestial-enforcer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frantic Inventory",
+   "files": [
+    "engine/src/cards/pool/frantic-inventory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigiled Contender",
+   "files": [
+    "engine/src/cards/pool/sigiled-contender.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Historian of Zhalfir",
+   "files": [
+    "engine/src/cards/pool/historian-of-zhalfir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breaker of Creation",
+   "files": [
+    "engine/src/cards/pool/breaker-of-creation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrun, Breaker of Silence",
+   "files": [
+    "engine/src/cards/pool/thrun-breaker-of-silence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nevinyrral, Urborg Tyrant",
+   "files": [
+    "engine/src/cards/pool/nevinyrral-urborg-tyrant.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Barrin, Tolarian Archmage",
+   "needs": [
+    "condition:permanent-put-into-hand-from-battlefield-this-turn"
+   ],
+   "why": "if a permanent was put into your hand from the battlefield this turn"
+  },
+  {
+   "name": "Basri, Devoted Paladin",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "−1: whenever a creature attacks this turn"
+  },
+  {
+   "name": "Carrion Grub",
+   "needs": [
+    "effect:aggregate-over-graveyard"
+   ],
+   "why": "+X/+0 where X is the greatest power among creature cards in your graveyard, as a static"
+  },
+  {
+   "name": "Chandra, Heart of Fire",
+   "needs": [
+    "effect:search-to-exile-then-cast"
+   ],
+   "why": "−9: search for red instants/sorceries, exile them, cast them this turn"
+  },
+  {
+   "name": "Chrome Replicator",
+   "needs": [
+    "new:controls-n-same-name-condition"
+   ],
+   "why": "if you control two or more nonland, nontoken permanents with the same name"
+  },
+  {
+   "name": "Crypt Lurker",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "discard a creature card as an effect"
+  },
+  {
+   "name": "Demonic Embrace",
+   "needs": [
+    "zone:graveyard-cast-permissions",
+    "cost:self-graveyard-cast-discard-cost"
+   ],
+   "why": "cast from your graveyard by paying 3 life and discarding a card"
+  },
+  {
+   "name": "Discontinuity",
+   "needs": [
+    "effect:end-the-turn",
+    "cost:self-cost-reduction-colored"
+   ],
+   "why": "end the turn; costs {2}{U}{U} less during your turn"
+  },
+  {
+   "name": "Enthralling Hold",
+   "needs": [
+    "static:aura-cast-time-target-restriction"
+   ],
+   "why": "\"you can't choose an untapped creature as this spell's target as you cast it\" — a cast-time-only restriction; the enchant restriction would also drop the Aura once the creature untaps"
+  },
+  {
+   "name": "Garruk, Savage Herald",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "−7: creatures gain \"may assign combat damage as though it weren't blocked\""
+  },
+  {
+   "name": "Idol of Endurance",
+   "needs": [
+    "effect:exile-graveyard-until-source-leaves",
+    "effect:cast-from-linked-exile-free-this-turn"
+   ],
+   "why": "exile graveyard creatures until it leaves; cast one free this turn"
+  },
+  {
+   "name": "Liliana, Death Mage",
+   "needs": [
+    "effect:count-in-target-player-graveyard"
+   ],
+   "why": "−7: count the creature cards in the target opponent's graveyard"
+  },
+  {
+   "name": "Necromentia",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "choose a card name, then search several zones for it"
+  },
+  {
+   "name": "Pestilent Haze",
+   "needs": [
+    "effect:remove-counters-all"
+   ],
+   "why": "remove two loyalty counters from each planeswalker"
+  },
+  {
+   "name": "Pursued Whale",
+   "needs": [
+    "cost:targeted-by-spells-mana-tax"
+   ],
+   "why": "spells your opponents cast that target it cost {3} more"
+  },
+  {
+   "name": "Stormwing Entity",
+   "needs": [
+    "cost:self-cost-reduction-colored"
+   ],
+   "why": "costs {2}{U} less if you've cast an instant or sorcery this turn"
+  },
+  {
+   "name": "Subira, Tulzidi Caravanner",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "whenever a creature you control with power 2 or less deals combat damage this turn"
+  },
+  {
+   "name": "Teferi, Timeless Voyager",
+   "needs": [
+    "effect:phase-out-until-your-next-turn-end"
+   ],
+   "why": "−8: phase out until the end of your next turn, can't phase in"
+  }
+ ]
+}

@@ -236,6 +236,7 @@ import _poolJourneyersKite from "../pool/journeyers-kite.js";
 import _poolJudgesFamiliar from "../pool/judges-familiar.js";
 import _poolJukaiPreserver from "../pool/jukai-preserver.js";
 import _poolJump from "../pool/jump.js";
+import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
@@ -760,6 +761,7 @@ const shard: CardShard = {
     _poolJudgesFamiliar,
     _poolJukaiPreserver,
     _poolJump,
+    _poolKaervekTheSpiteful,
     _poolKamahlsDruidicVow,
     _poolKeenGlidemaster,
     _poolKeeperOfSecrets,

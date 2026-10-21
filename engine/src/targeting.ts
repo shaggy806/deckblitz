@@ -10,6 +10,7 @@ import {
   withComputedCache,
 } from "./characteristics.js";
 import { filterReadsX, matchesFilter } from "./filter.js";
+import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { printedCardName } from "./state.js";
@@ -132,7 +133,33 @@ export function protectionBlocks(
 ): boolean {
   const object = state.objects[target];
   if (object === undefined || object.zone !== "battlefield") return false;
-  const prot = computeCharacteristics(state, registry, target).protectionFrom;
+  return qualityMatches(state, registry, object.controller, computeCharacteristics(state, registry, target).protectionFrom, source);
+}
+
+/** Hexproof from a quality (rule 702.11d-e): `target` has hexproof from
+ * something `source` is, and `source` is controlled by an opponent of its
+ * controller (`forPlayer`, the one targeting). Matched as protection is. */
+export function hexproofFromBlocks(
+  state: GameState,
+  registry: CardRegistry,
+  target: ObjectId,
+  source: TargetSource,
+  forPlayer: PlayerId,
+): boolean {
+  const object = state.objects[target];
+  if (object === undefined || object.zone !== "battlefield" || object.controller === forPlayer) return false;
+  return qualityMatches(state, registry, object.controller, computeCharacteristics(state, registry, target).hexproofFrom, source);
+}
+
+/** Whether `source` has one of the qualities `prot` names — a colour, a card
+ * type, or a filter (see `protectionBlocks`). */
+function qualityMatches(
+  state: GameState,
+  registry: CardRegistry,
+  controller: PlayerId,
+  prot: { readonly colors: ReadonlySet<Color>; readonly types: ReadonlySet<CardType>; readonly filters: readonly CardFilter[] },
+  source: TargetSource,
+): boolean {
   if (prot.colors.size === 0 && prot.types.size === 0 && prot.filters.length === 0) return false;
   for (const c of source.colors) if (prot.colors.has(c)) return true;
   for (const t of source.types) if (prot.types.has(t)) return true;
@@ -147,7 +174,7 @@ export function protectionBlocks(
     const from = source.object;
     if (
       prot.filters.some((filter) =>
-        matchesFilter(state, registry, from, filter, { you: object.controller }),
+        matchesFilter(state, registry, from, filter, { you: controller }),
       )
     ) {
       return true;
@@ -269,6 +296,9 @@ function isLegalTargetUncached(
     }
     // Protection (rule 702.16) — can't be targeted by a matching source.
     if (source !== undefined && protectionBlocks(state, registry, ref.object, source)) {
+      return false;
+    }
+    if (source !== undefined && hexproofFromBlocks(state, registry, ref.object, source, forPlayer)) {
       return false;
     }
   } else if (

@@ -151,6 +151,7 @@ import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
 import _poolGlintingCreeper from "../pool/glinting-creeper.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
+import _poolGloomSower from "../pool/gloom-sower.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
 import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
@@ -295,6 +296,7 @@ import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavagersMace from "../pool/ravagers-mace.js";
 import _poolRavenousSkirge from "../pool/ravenous-skirge.js";
 import _poolRayOfDissolution from "../pool/ray-of-dissolution.js";
+import _poolReadTheTides from "../pool/read-the-tides.js";
 import _poolRealityShift from "../pool/reality-shift.js";
 import _poolRegalForce from "../pool/regal-force.js";
 import _poolRejuvenatingSprings from "../pool/rejuvenating-springs.js";
@@ -310,6 +312,7 @@ import _poolRowanScholarOfSparks from "../pool/rowan-scholar-of-sparks.js";
 import _poolRowansGrimSearch from "../pool/rowans-grim-search.js";
 import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
+import _poolRunAfoul from "../pool/run-afoul.js";
 import _poolRuneCervinRider from "../pool/rune-cervin-rider.js";
 import _poolRushwoodElemental from "../pool/rushwood-elemental.js";
 import _poolSacredPrey from "../pool/sacred-prey.js";
@@ -361,6 +364,7 @@ import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
 import _poolSpareSupplies from "../pool/spare-supplies.js";
 import _poolSparkDouble from "../pool/spark-double.js";
+import _poolSparkhunterMasticore from "../pool/sparkhunter-masticore.js";
 import _poolSparkmageApprentice from "../pool/sparkmage-apprentice.js";
 import _poolSpecterOfMortality from "../pool/specter-of-mortality.js";
 import _poolSpectralDeluge from "../pool/spectral-deluge.js";
@@ -629,6 +633,7 @@ const shard: CardShard = {
     _poolGlintingCreeper,
     _poolGlissasCourier,
     _poolGloinTheMighty,
+    _poolGloomSower,
     _poolGnawingVermin,
     _poolGoNinjaGo,
     _poolGoShintaiOfBoundlessVigor,
@@ -773,6 +778,7 @@ const shard: CardShard = {
     _poolRavagersMace,
     _poolRavenousSkirge,
     _poolRayOfDissolution,
+    _poolReadTheTides,
     _poolRealityShift,
     _poolRegalForce,
     _poolRejuvenatingSprings,
@@ -788,6 +794,7 @@ const shard: CardShard = {
     _poolRowansGrimSearch,
     _poolRubblebeltRecluse,
     _poolRumbleArena,
+    _poolRunAfoul,
     _poolRuneCervinRider,
     _poolRushwoodElemental,
     _poolSacredPrey,
@@ -839,6 +846,7 @@ const shard: CardShard = {
     _poolSoulOfTheRapids,
     _poolSpareSupplies,
     _poolSparkDouble,
+    _poolSparkhunterMasticore,
     _poolSparkmageApprentice,
     _poolSpecterOfMortality,
     _poolSpectralDeluge,
