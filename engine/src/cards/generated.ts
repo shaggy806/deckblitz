@@ -968,6 +968,7 @@ import _poolBaSingSe from "./pool/ba-sing-se.js";
 import _poolBackForSeconds from "./pool/back-for-seconds.js";
 import _poolBackInTown from "./pool/back-in-town.js";
 import _poolBackOnTrack from "./pool/back-on-track.js";
+import _poolBackToBasics from "./pool/back-to-basics.js";
 import _poolBackupAgent from "./pool/backup-agent.js";
 import _poolBadDeal from "./pool/bad-deal.js";
 import _poolBadRiver from "./pool/bad-river.js";
@@ -14782,6 +14783,7 @@ import _poolToxinAnalysis from "./pool/toxin-analysis.js";
 import _poolToxrillTheCorrosive from "./pool/toxrill-the-corrosive.js";
 import _poolTraceOfAbundance from "./pool/trace-of-abundance.js";
 import _poolTrackDown from "./pool/track-down.js";
+import _poolTractorBeam from "./pool/tractor-beam.js";
 import _poolTradeRouteEnvoy from "./pool/trade-route-envoy.js";
 import _poolTradewindRider from "./pool/tradewind-rider.js";
 import _poolTradingPost from "./pool/trading-post.js";
@@ -18030,6 +18032,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBackForSeconds,
   _poolBackInTown,
   _poolBackOnTrack,
+  _poolBackToBasics,
   _poolBackupAgent,
   _poolBadDeal,
   _poolBadRiver,
@@ -31844,6 +31847,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolToxrillTheCorrosive,
   _poolTraceOfAbundance,
   _poolTrackDown,
+  _poolTractorBeam,
   _poolTradeRouteEnvoy,
   _poolTradewindRider,
   _poolTradingPost,
@@ -35105,6 +35109,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/back-for-seconds": _poolBackForSeconds,
   "pool/back-in-town": _poolBackInTown,
   "pool/back-on-track": _poolBackOnTrack,
+  "pool/back-to-basics": _poolBackToBasics,
   "pool/backup-agent": _poolBackupAgent,
   "pool/bad-deal": _poolBadDeal,
   "pool/bad-river": _poolBadRiver,
@@ -48919,6 +48924,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/toxrill-the-corrosive": _poolToxrillTheCorrosive,
   "pool/trace-of-abundance": _poolTraceOfAbundance,
   "pool/track-down": _poolTrackDown,
+  "pool/tractor-beam": _poolTractorBeam,
   "pool/trade-route-envoy": _poolTradeRouteEnvoy,
   "pool/tradewind-rider": _poolTradewindRider,
   "pool/trading-post": _poolTradingPost,

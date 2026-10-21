@@ -474,6 +474,7 @@ import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
 import _poolTimeBeetle from "../pool/time-beetle.js";
 import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
+import _poolTractorBeam from "../pool/tractor-beam.js";
 import _poolTrainedCaracal from "../pool/trained-caracal.js";
 import _poolTranquilize from "../pool/tranquilize.js";
 import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
@@ -1016,6 +1017,7 @@ const shard: CardShard = {
     _poolTimeBeetle,
     _poolTimelineInquiry,
     _poolToriDavenantFuryRider,
+    _poolTractorBeam,
     _poolTrainedCaracal,
     _poolTranquilize,
     _poolTrappedInTheScreen,

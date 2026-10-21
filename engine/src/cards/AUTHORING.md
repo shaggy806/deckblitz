@@ -3100,7 +3100,9 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   also reads the one-shot `grant-player-hexproof`). `affects` is ignored; a
   "your creatures have hexproof" half is a separate static.
 - `doesntUntap: true` — "This artifact doesn't untap during your untap step"
-  (Mana Vault, Basalt Monolith). Only its controller's own untap step.
+  (Mana Vault, Basalt Monolith). Only its controller's own untap step. On
+  anything else — "enchanted creature", "nonbasic lands" — it's the
+  `"doesnt-untap"` restriction.
 - `loyaltyAtInstantSpeed: true` — "You may activate loyalty abilities of [this]
   on any player's turn any time you could cast an instant" (Teferi, Master of
   Time): its loyalty abilities skip sorcery timing (rule 606.3), still one per
@@ -3441,6 +3443,12 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   creature off its owner — the player only, so it may still attack their
   planeswalkers (Alexios, Deimos of Kosmos's ruling; Xantcha's "or
   planeswalkers its owner controls" would need a restriction of its own).
+  `"doesnt-untap"` is "doesn't untap during its controller's untap step" on
+  what the static reaches (rule 502.3) — Tractor Beam's `"attached"` scope,
+  Back to Basics' `"filter"` (`doesnt-untap-restriction.test.ts`); only that
+  untap step, so an effect or Seedborn Muse still untaps it. A `power` clause
+  in the scope's filter can't be answered inside the fold and fails closed
+  (Meekstone's "creatures with power 3 or greater" stays out).
   The same list, until end of turn, is what the `restrict` effect imposes
   (§6).
 - `combatDamageByToughness: "always" | "if-toughness-greater"` — the affected

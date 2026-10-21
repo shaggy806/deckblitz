@@ -334,7 +334,14 @@ export type CombatRestriction =
    * rule 508.1b — a creature attacks a player *or* a planeswalker).
    * Xantcha's "can't attack its owner or planeswalkers its owner controls"
    * would be a restriction of its own. */
-  | "cant-attack-owner";
+  | "cant-attack-owner"
+  /** "Doesn't untap during its controller's untap step" (rule 502.3) — on
+   * what the static reaches: Tractor Beam's "enchanted permanent", T-45 Power
+   * Armor's "equipped creature". Only that untap step: something that untaps
+   * it at another time (an effect, Seedborn Muse during another player's)
+   * still does. A permanent's own "this doesn't untap" is the static's
+   * `doesntUntap` (Mana Vault). */
+  | "doesnt-untap";
 
 /**
  * A dynamic quantity a characteristic-defining ability can read (rule 604.3).

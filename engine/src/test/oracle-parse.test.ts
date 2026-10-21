@@ -1057,6 +1057,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(brawler.complete).toBe(true);
   });
 
+  it("\"enchanted creature doesn't untap\" is the doesnt-untap restriction (rule 502.3)", () => {
+    const grasp = face("Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.", "Enchantment — Aura");
+    expect(grasp.static[0]).toMatchObject({ affects: { scope: "attached" }, restrictions: ["doesnt-untap"] });
+    expect(grasp.complete).toBe(true);
+  });
+
   it("\"enchanted creature\" in an Aura's trigger is the attached permanent (Starlit Mantle)", () => {
     const mantle = face(
       "Enchant creature you control\nWhen this Aura enters, enchanted creature gains hexproof until end of turn.\nEnchanted creature gets +1/+1.",

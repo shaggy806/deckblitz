@@ -89,6 +89,7 @@ import {
   cardTypesInGraveyards,
   basicLandTypesAmong,
   partySizeOf,
+  restrictionsOf,
   colorsAmongPermanents,
   computeCharacteristics,
   computedCacheMemo,
@@ -6059,7 +6060,10 @@ export class Game {
         object.exertedBy !== active &&
         object.skipsNextUntap !== true &&
         object.skipsUntapOf !== active &&
-        !this.hasOwnStatic(object, (a) => a.doesntUntap === true)
+        !this.hasOwnStatic(object, (a) => a.doesntUntap === true) &&
+        // "Enchanted creature doesn't untap during its controller's untap
+        // step" (Tractor Beam) — a restriction a static puts on it.
+        !restrictionsOf(this.state, this.registry, id).has("doesnt-untap")
       ) {
         this.untapUnlessStunned(id);
       }

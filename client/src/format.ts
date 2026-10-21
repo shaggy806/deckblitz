@@ -29,6 +29,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'must-be-blocked': 'must be blocked by every creature able',
   'must-be-blocked-if-able': 'must be blocked if able',
   'cant-attack-owner': "can't attack its owner",
+  'doesnt-untap': "doesn't untap during its controller's untap step",
 }
 
 const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([

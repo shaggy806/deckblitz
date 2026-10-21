@@ -32,6 +32,7 @@ import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
 import _poolAvabruckCaretaker from "../pool/avabruck-caretaker.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
+import _poolBackToBasics from "../pool/back-to-basics.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
 import _poolBarrageOgre from "../pool/barrage-ogre.js";
 import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
@@ -575,6 +576,7 @@ const shard: CardShard = {
     _poolAugerSpree,
     _poolAvabruckCaretaker,
     _poolAvenFleetwing,
+    _poolBackToBasics,
     _poolBaronAirshipKingdom,
     _poolBarrageOgre,
     _poolBarrierOfBones,

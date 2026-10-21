@@ -2594,6 +2594,11 @@ function parseStatic(line, text) {
   if ((m = /^(?:Enchanted|Equipped) creature can't attack or block\.$/.exec(line))) {
     return { affects: { scope: "attached" }, restrictions: ["cant-attack", "cant-block"], text };
   }
+  // "Enchanted creature doesn't untap during its controller's untap step"
+  // (rule 502.3 — Tractor Beam, Watery Grasp).
+  if (/^(?:Enchanted|Equipped) (?:creature|permanent|land|artifact) doesn't untap during its controller's untap step\.$/.test(line)) {
+    return { affects: { scope: "attached" }, restrictions: ["doesnt-untap"], text };
+  }
   return null;
 }
 
