@@ -737,12 +737,23 @@ function ErrorLine({ game }: { readonly game: NetworkGame }) {
 /** How many stand-ins a blitz's notice names before "and N more". */
 const BLITZ_REPORT_SHOWN = 6
 
+/** How long a blitz's notice stays up: twice a toast's, for a list to read.
+ * App.css's `.toast-long` fades it over the last half second. */
+const BLITZ_REPORT_LINGER_MS = 12000
+
 /**
  * What a blitz changed in the pasted list — the stand-ins for cards the
- * engine doesn't have yet, and any card with none — over the board until
- * clicked, since a player should know they're not playing exactly their list.
+ * engine doesn't have yet, and any card with none — over the board as the
+ * game opens, since a player should know they're not playing exactly their
+ * list. It clears itself after {@link BLITZ_REPORT_LINGER_MS}, or on a click;
+ * it used to stay until clicked, over the top of the board (a bug report,
+ * 2026-10-21).
  */
 function BlitzReportToast({ report, onDismiss }: { readonly report: BlitzReport; readonly onDismiss: () => void }) {
+  useEffect(() => {
+    const t = window.setTimeout(onDismiss, BLITZ_REPORT_LINGER_MS)
+    return () => window.clearTimeout(t)
+  }, [report, onDismiss])
   const { substituted, dropped } = report
   const shown = substituted.slice(0, BLITZ_REPORT_SHOWN)
   const more = substituted.length - shown.length
@@ -751,7 +762,7 @@ function BlitzReportToast({ report, onDismiss }: { readonly report: BlitzReport;
     dropped.length > 0 ? `${dropped.length} card${dropped.length === 1 ? '' : 's'} left out` : null,
   ].filter((c) => c !== null)
   return (
-    <div className="toast info toast-sticky blitz-report" role="status" onClick={onDismiss} title="Click to dismiss">
+    <div className="toast info toast-long blitz-report" role="status" onClick={onDismiss} title="Click to dismiss">
       <div>
         {report.deckName}: {counts.join(', ')}. Change them in the deck builder.
       </div>

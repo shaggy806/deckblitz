@@ -51,18 +51,24 @@ async function stubImport(page: Page): Promise<void> {
   )
 }
 
-async function expectBlitzStarted(page: Page): Promise<void> {
+async function expectBlitzStarted(page: Page, dismiss: 'click' | 'wait'): Promise<void> {
   // Straight into the game, with no seat board on the way: four players at
   // the table (the bots are named for their decks' commanders).
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 20_000 })
   await expect(page.locator('.seat-board')).toHaveCount(0)
   expect(await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))).toMatch(/^[A-Z0-9]{5}$/)
-  // What the import changed, over the board until clicked.
+  // What the import changed, over the board as the game opens: gone on a
+  // click, or by itself after 12 seconds (a bug report: it used to stay).
   const report = page.locator('.blitz-report')
   await expect(report).toContainText('Imported: Ghalta, Primal Hunger: 1 stand-in')
   await expect(report).toContainText('Tooth and Nail → Natural Order')
-  await report.click()
-  await expect(report).toHaveCount(0)
+  if (dismiss === 'click') {
+    await report.click()
+    await expect(report).toHaveCount(0)
+  } else {
+    await expect(report).toBeVisible()
+    await expect(report).toHaveCount(0, { timeout: 15_000 })
+  }
 }
 
 test('blitzing the clipboard starts a game against three bots', async ({ page, context }) => {
@@ -75,7 +81,7 @@ test('blitzing the clipboard starts a game against three bots', async ({ page, c
   await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
   await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
 
-  await expectBlitzStarted(page)
+  await expectBlitzStarted(page, 'click')
   // The deck was saved, and is now the active one.
   const saved = await page.evaluate(() => window.localStorage.getItem('mtg-engine:decks'))
   expect(saved).toContain('Imported: Ghalta, Primal Hunger')
@@ -94,5 +100,5 @@ test('with no list on the clipboard, a box to paste it into', async ({ page, con
   await page.locator('#landing-blitz-list').fill(LIST)
   await page.getByRole('button', { name: 'Blitz', exact: true }).click()
 
-  await expectBlitzStarted(page)
+  await expectBlitzStarted(page, 'wait')
 })

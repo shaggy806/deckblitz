@@ -556,9 +556,11 @@
   background: color-mix(in srgb, var(--panel) 92%, var(--accent));
   border: 1px solid var(--accent);
 }
-/* Stays until clicked: a blitz's report of what it changed in the list. */
-.toast.toast-sticky {
-  animation: toast-in 140ms ease-out;
+/* A blitz's report of what it changed in the list: twice as long, for a list
+   to read. The 11.5s delay plus the 500ms fade is BLITZ_REPORT_LINGER_MS
+   (12000) in App.tsx — keep the two in step, as `.toast`'s are. */
+.toast.toast-long {
+  animation: toast-in 140ms ease-out, toast-out 500ms ease-in 11.5s both;
 }
 .blitz-report {
   font-weight: 600;
