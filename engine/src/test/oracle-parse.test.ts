@@ -1171,6 +1171,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("kicker on a permanent (rule 702.33): the cost, and 'if it was kicked' on its enters trigger", () => {
+    const knight = face(
+      "Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nWhen this creature enters, if it was kicked, target player discards two cards.",
+      "Creature — Human Knight",
+    );
+    expect(knight.kicker).toEqual({ cost: "{2}{B}" });
+    expect(knight.triggered[0].condition).toEqual({ kind: "self-kicked" });
+    // A spell's kicker carries what kicking changes: not read here.
+    expect(face("Kicker {4}\nDeal 2 damage.", "Instant").kicker).toBeUndefined();
+  });
+
   it("jump-start and mentor (rules 702.133, 702.134)", () => {
     const idea = face("Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)", "Instant", { mana_cost: "{1}{U}" });
     expect(idea.flashback).toEqual({ cost: "{1}{U}", discard: 1, keyword: "jump-start" });

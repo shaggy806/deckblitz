@@ -1915,6 +1915,10 @@ export function parseFace(face, ctx = {}) {
     // Bargain (rule 702.166a): a kicker that sacrifices an artifact, enchantment or token — what
     // "if this spell was bargained" changes is the card's own (702.166c) — and its cost reduction.
     if (line === "Bargain") { out.kicker = { cost: "", keyword: "bargain" }; continue; }
+    // Kicker [cost] (rule 702.33a). What kicking changes is read elsewhere: a
+    // permanent's "When this enters, if it was kicked, …" (`self-kicked`); a
+    // spell's "if this spell was kicked" stays a person's.
+    if (!isSpell && (m = /^Kicker ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1] }; continue; }
     // Entwine [cost] (rule 702.42a): a kicker that chooses every mode — the
     // modal spell's `kickedModes`, set once its modes are read.
     if (isSpell && (m = /^Entwine ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "entwine" }; continue; }
@@ -2364,6 +2368,9 @@ const INTERVENING_IFS = {
   // Rule 702.166b: the permanent's spell was bargained.
   "if it was bargained,": { kind: "self-kicked" },
   "if ~ was bargained,": { kind: "self-kicked" },
+  // Rule 702.33d: the permanent's spell was kicked.
+  "if it was kicked,": { kind: "self-kicked" },
+  "if ~ was kicked,": { kind: "self-kicked" },
   // Rule 702.137a: the permanent's spell was cast for its spectacle cost.
   "if its spectacle cost was paid,": { kind: "self-spectacle-paid" },
   "if ~'s spectacle cost was paid,": { kind: "self-spectacle-paid" },
