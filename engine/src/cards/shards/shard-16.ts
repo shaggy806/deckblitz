@@ -60,6 +60,7 @@ import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
 import _poolBoneShards from "../pool/bone-shards.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
+import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
@@ -526,6 +527,7 @@ import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
 import _poolUnmake from "../pool/unmake.js";
 import _poolUnrulyCatapult from "../pool/unruly-catapult.js";
 import _poolUnwillingVessel from "../pool/unwilling-vessel.js";
+import _poolUrzasChalice from "../pool/urzas-chalice.js";
 import _poolUrzasCommand from "../pool/urzas-command.js";
 import _poolUrzasMine from "../pool/urzas-mine.js";
 import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
@@ -663,6 +665,7 @@ const shard: CardShard = {
     _poolBoltHound,
     _poolBoneShards,
     _poolBorosRecruit,
+    _poolBottleOfSuleiman,
     _poolBoulderRush,
     _poolBoundingFelidar,
     _poolBrokersInitiate,
@@ -1129,6 +1132,7 @@ const shard: CardShard = {
     _poolUnmake,
     _poolUnrulyCatapult,
     _poolUnwillingVessel,
+    _poolUrzasChalice,
     _poolUrzasCommand,
     _poolUrzasMine,
     _poolVaultbornTyrant,

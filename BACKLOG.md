@@ -97,8 +97,9 @@ section keeps only what to do next.
   2026-10-21): the same whole-set walk from Limited Edition Alpha forward in time
   (`npm run cards:sets -w engine -- --oldest --next 60`), until it meets the newest-first walk
   below. Batch 130 took Alpha whole and Beta's last card, building chosen-source prevention and
-  colour setting. **Next, Arabian Nights** (53 left), then Antiquities (53), Legends (219), The
-  Dark (82). Leads measured over the whole pool: setting a land's type with its rules text gone
+  colour setting; batch 131 Arabian Nights and Antiquities, on "you may choose not to untap" and
+  "for as long as ~ remains tapped"; rampage built for Legends. **Next, Legends** (batches 132-133
+  under way), then The Dark (82), Fallen Empires (79). Leads measured over the whole pool: setting a land's type with its rules text gone
   (`static:land-type-setting`, rule 305.7 — 8), damage redirection
   (`replacement:damage-redirection` — 7), banding (`keyword:banding` — 4).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
@@ -188,6 +189,13 @@ section keeps only what to do next.
   that prepare is built (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
+- **A creature blocking more than one attacker** (measured 2026-10-21, the oldest-first walk):
+  banding and "bands with other" (rule 702.22h: a blocker of one band member blocks them all —
+  21 Commander-legal cards, 14 triaged so far) and "can block an additional creature" / "any
+  number of creatures" (509.1a; 38 cards — `static:block-additional-creature`) both need it, but
+  `GameObject.blocking` is one attacker. A core combat change — block declaration, damage
+  assignment by the other player (702.22j-k), removal from combat, the client's block bar, the
+  bots' combat sim — so it wants a design pass and the user's go-ahead before it's built.
 - **Features with a family of cards behind them**, each detailed where it points:
   the rest of "enters tapped and attacking" (`docs/card-blockers.md`); modal
   activated abilities with targeted modes, host triggers (28 cards), the EDH-popularity tiers
@@ -207,6 +215,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.
 - **Losing loyalty never emits `counter-removed`** (306.8, 606.4): damage to a planeswalker and a minus loyalty cost emit only `loyalty-changed`, so a `counters-removed` trigger for loyalty never fires (Chandra, Fire Artisan).
 - **A merged permanent's token status is its own object's** (730.2d): a card mutated on top of a token still counts as a token.

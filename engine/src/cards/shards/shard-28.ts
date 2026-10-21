@@ -560,6 +560,7 @@ import _poolZap from "../pool/zap.js";
 import _poolZardaThePowerPrincess from "../pool/zarda-the-power-princess.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
+import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
 import _tokensClericToken from "../tokens/cleric-token.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensElkToken from "../tokens/elk-token.js";
@@ -1133,6 +1134,7 @@ const shard: CardShard = {
     _poolZendikarFarguide,
   ],
   tokens: [
+    _tokens55DjinnArtifactToken,
     _tokensClericToken,
     _tokensElementalTokenWildfireAwakener,
     _tokensElkToken,

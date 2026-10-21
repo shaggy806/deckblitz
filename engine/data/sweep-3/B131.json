@@ -1,0 +1,792 @@
+{
+ "batch": "B131",
+ "status": "complete",
+ "ranks": "Arabian Nights (ARN, 1993-12-17) and Antiquities (ATQ, 1994-03-04): whole sets (oldest-first walk); and Immovable Rod, The Blackstaff of Waterdeep, Entrancing Lyre, Hedge Whisperer, which the untap feature unblocked",
+ "authored": [
+  {
+   "name": "Ashnod's Battle Gear",
+   "files": [
+    "engine/src/cards/pool/ashnods-battle-gear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Entrancing Lyre",
+   "files": [
+    "engine/src/cards/pool/entrancing-lyre.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hedge Whisperer",
+   "files": [
+    "engine/src/cards/pool/hedge-whisperer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Immovable Rod",
+   "files": [
+    "engine/src/cards/pool/immovable-rod.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phyrexian Gremlins",
+   "files": [
+    "engine/src/cards/pool/phyrexian-gremlins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tawnos's Weaponry",
+   "files": [
+    "engine/src/cards/pool/tawnoss-weaponry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Blackstaff of Waterdeep",
+   "files": [
+    "engine/src/cards/pool/the-blackstaff-of-waterdeep.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ashnod's Transmogrant",
+   "files": [
+    "engine/src/cards/pool/ashnods-transmogrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Circle of Protection: Artifacts",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-artifacts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Detonate",
+   "files": [
+    "engine/src/cards/pool/detonate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hasran Ogress",
+   "files": [
+    "engine/src/cards/pool/hasran-ogress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "King Suleiman",
+   "files": [
+    "engine/src/cards/pool/king-suleiman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakalite",
+   "files": [
+    "engine/src/cards/pool/rakalite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandstorm",
+   "files": [
+    "engine/src/cards/pool/sandstorm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ali Baba",
+   "files": [
+    "engine/src/cards/pool/ali-baba.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Argothian Treefolk",
+   "files": [
+    "engine/src/cards/pool/argothian-treefolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artifact Blast",
+   "files": [
+    "engine/src/cards/pool/artifact-blast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crumble",
+   "files": [
+    "engine/src/cards/pool/crumble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Weaponsmith",
+   "files": [
+    "engine/src/cards/pool/dwarven-weaponsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elephant Graveyard",
+   "files": [
+    "engine/src/cards/pool/elephant-graveyard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mightstone",
+   "files": [
+    "engine/src/cards/pool/mightstone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Obelisk of Undoing",
+   "files": [
+    "engine/src/cards/pool/obelisk-of-undoing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rukh Egg",
+   "files": [
+    "engine/src/cards/pool/rukh-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandals of Abdallah",
+   "files": [
+    "engine/src/cards/pool/sandals-of-abdallah.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shatterstorm",
+   "files": [
+    "engine/src/cards/pool/shatterstorm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sorceress Queen",
+   "files": [
+    "engine/src/cards/pool/sorceress-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unstable Mutation",
+   "files": [
+    "engine/src/cards/pool/unstable-mutation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Army of Allah",
+   "files": [
+    "engine/src/cards/pool/army-of-allah.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bottle of Suleiman",
+   "files": [
+    "engine/src/cards/pool/bottle-of-suleiman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brass Man",
+   "files": [
+    "engine/src/cards/pool/brass-man.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Desert Nomads",
+   "files": [
+    "engine/src/cards/pool/desert-nomads.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Energy Flux",
+   "files": [
+    "engine/src/cards/pool/energy-flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Avenger",
+   "files": [
+    "engine/src/cards/pool/gaeas-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gate to Phyrexia",
+   "files": [
+    "engine/src/cards/pool/gate-to-phyrexia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Tortoise",
+   "files": [
+    "engine/src/cards/pool/giant-tortoise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metamorphosis",
+   "files": [
+    "engine/src/cards/pool/metamorphosis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piety",
+   "files": [
+    "engine/src/cards/pool/piety.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tablet of Epityr",
+   "files": [
+    "engine/src/cards/pool/tablet-of-epityr.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urza's Chalice",
+   "files": [
+    "engine/src/cards/pool/urzas-chalice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yawgmoth Demon",
+   "files": [
+    "engine/src/cards/pool/yawgmoth-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Argothian Pixies",
+   "files": [
+    "engine/src/cards/pool/argothian-pixies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossus of Sardia",
+   "files": [
+    "engine/src/cards/pool/colossus-of-sardia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diamond Valley",
+   "files": [
+    "engine/src/cards/pool/diamond-valley.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erhnam Djinn",
+   "files": [
+    "engine/src/cards/pool/erhnam-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hurkyl's Recall",
+   "files": [
+    "engine/src/cards/pool/hurkyls-recall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Junún Efreet",
+   "files": [
+    "engine/src/cards/pool/junun-efreet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Khabál Ghoul",
+   "files": [
+    "engine/src/cards/pool/khabal-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mijae Djinn",
+   "files": [
+    "engine/src/cards/pool/mijae-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weakstone",
+   "files": [
+    "engine/src/cards/pool/weakstone.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Battering Ram",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding during combat"
+  },
+  {
+   "name": "Camel",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Mishra's War Machine",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Urza's Avenger",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "gains banding"
+  },
+  {
+   "name": "War Elephant",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Cuombajj Witches",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "a target of an opponent's choice"
+  },
+  {
+   "name": "Abu Ja'far",
+   "needs": [
+    "filter:blocking-trigger-object"
+   ],
+   "why": "each creature blocking or blocked by it"
+  },
+  {
+   "name": "Aladdin",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "for as long as you control Aladdin"
+  },
+  {
+   "name": "Drop of Honey",
+   "needs": [
+    "filter:least-among-its-controller",
+    "trigger:state-trigger"
+   ],
+   "why": "the creature with the least power; when there are no creatures"
+  },
+  {
+   "name": "Old Man of the Sea",
+   "needs": [
+    "effect:duration-while-power-comparison"
+   ],
+   "why": "while that creature's power remains no greater than this one's"
+  },
+  {
+   "name": "Ydwen Efreet",
+   "needs": [
+    "effect:remove-blocker-unblock-and-reblock"
+   ],
+   "why": "removed from combat, the creatures it blocked become unblocked"
+  },
+  {
+   "name": "Merchant Ship",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "trigger:state-trigger"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Ring of Ma'rûf",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "a card you own from outside the game"
+  },
+  {
+   "name": "Hurr Jackal",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "target creature can't be regenerated this turn"
+  },
+  {
+   "name": "El-Hajjâj",
+   "needs": [
+    "trigger:damage-trigger-extensions"
+   ],
+   "why": "whenever this deals damage, gain that much — once per event"
+  },
+  {
+   "name": "Titania's Song",
+   "needs": [
+    "static:animate-pt-equal-mana-value",
+    "static:static-loses-all-abilities",
+    "static:effect-lingers-until-eot-after-leaving"
+   ],
+   "why": "noncreature artifacts become creatures with P/T equal to mana value; lingers until end of turn"
+  },
+  {
+   "name": "Xenic Poltergeist",
+   "needs": [
+    "duration:until-your-next-upkeep",
+    "effect:animate-with-cda-pt"
+   ],
+   "why": "until your next upkeep, an artifact creature with P/T equal to its mana value"
+  },
+  {
+   "name": "Powerleech",
+   "needs": [
+    "trigger:activates-mana-ability",
+    "filter:ability-cost-without-tap"
+   ],
+   "why": "whenever an artifact's ability without {T} in its cost is activated"
+  },
+  {
+   "name": "Artifact Possession",
+   "needs": [
+    "trigger:activates-mana-ability",
+    "filter:ability-cost-without-tap"
+   ],
+   "why": "whenever enchanted artifact becomes tapped or has an ability without {T} activated"
+  },
+  {
+   "name": "Tetravus",
+   "needs": [
+    "effect:tokens-created-with-source",
+    "effect:as-enters-remove-counters-from-any-number"
+   ],
+   "why": "remove any number of counters for tokens; exile the tokens it made"
+  },
+  {
+   "name": "Clockwork Avian",
+   "needs": [
+    "condition:attacked-or-blocked-this-combat",
+    "effect:may-pay-x-capped"
+   ],
+   "why": "up to X counters, four at most; attacked or blocked this combat"
+  },
+  {
+   "name": "Shapeshifter",
+   "needs": [
+    "decision:choose-number"
+   ],
+   "why": "choose a number at upkeep; P/T from it"
+  },
+  {
+   "name": "Martyrs of Korlis",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "damage to you is dealt to this instead"
+  },
+  {
+   "name": "Island of Wak-Wak",
+   "needs": [
+    "effect:set-base-power-only"
+   ],
+   "why": "target creature with flying has base power 0"
+  },
+  {
+   "name": "Singing Tree",
+   "needs": [
+    "effect:set-base-power-only"
+   ],
+   "why": "target attacking creature has base power 0"
+  },
+  {
+   "name": "Guardian Beast",
+   "needs": [
+    "static:cant-be-enchanted",
+    "static:cant-gain-control"
+   ],
+   "why": "noncreature artifacts can't be enchanted or have control gained"
+  },
+  {
+   "name": "Cyclone",
+   "needs": [
+    "cost:unless-pay-colored-per-amount"
+   ],
+   "why": "unless you pay {G} for each wind counter"
+  },
+  {
+   "name": "Nafs Asp",
+   "needs": [
+    "effect:pay-before-delayed-deadline"
+   ],
+   "why": "pay {1} any time before the next draw step"
+  },
+  {
+   "name": "Pyramids",
+   "needs": [
+    "effect:modal-activated-targeted-modes",
+    "replacement:land-destruction-damage-removal-shield"
+   ],
+   "why": "a modal activated ability with targeted modes; remove damage instead of destruction"
+  },
+  {
+   "name": "Feldon's Cane",
+   "needs": [
+    "effect:shuffle-graveyard-into-library"
+   ],
+   "why": "shuffle your graveyard into your library"
+  },
+  {
+   "name": "Power Artifact",
+   "needs": [
+    "filter:enchanted-by-source"
+   ],
+   "why": "the enchanted artifact's activated abilities cost {2} less"
+  },
+  {
+   "name": "Goblin Artisans",
+   "needs": [
+    "filter:not-targeted-by-named-ability"
+   ],
+   "why": "a spell that isn't the target of another Goblin Artisans' ability"
+  },
+  {
+   "name": "Rocket Launcher",
+   "needs": [
+    "condition:controlled-since-turn-start"
+   ],
+   "why": "activate only if you've controlled it continuously since your most recent turn began"
+  },
+  {
+   "name": "Reverse Polarity",
+   "needs": [
+    "amount:damage-taken-from-filtered-sources"
+   ],
+   "why": "twice the damage artifacts dealt you this turn"
+  },
+  {
+   "name": "Priest of Yawgmoth",
+   "needs": [
+    "amount:mana-ability-sacrificed-object"
+   ],
+   "why": "a mana ability reading the sacrificed artifact's mana value (an engine gap)"
+  },
+  {
+   "name": "Dandân",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "trigger:state-trigger"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Serendib Djinn",
+   "needs": [
+    "trigger:state-trigger"
+   ],
+   "why": "when you control no lands, sacrifice it"
+  },
+  {
+   "name": "Eye for an Eye",
+   "needs": [
+    "replacement:damage-reflection"
+   ],
+   "why": "that source deals that much damage to you, and this deals it to that source's controller"
+  },
+  {
+   "name": "Sindbad",
+   "needs": [
+    "effect:discard-drawn-card-if"
+   ],
+   "why": "discard the card drawn if it isn't a land"
+  },
+  {
+   "name": "City in a Bottle",
+   "needs": [
+    "filter:originally-printed-in-set"
+   ],
+   "why": "a name originally printed in Arabian Nights"
+  },
+  {
+   "name": "Golgothian Sylex",
+   "needs": [
+    "filter:originally-printed-in-set"
+   ],
+   "why": "a name originally printed in Antiquities"
+  },
+  {
+   "name": "Ghazbán Ogre",
+   "needs": [
+    "effect:gain-control-to-player-with-most-life"
+   ],
+   "why": "the player with the most life gains control of it"
+  },
+  {
+   "name": "Drafna's Restoration",
+   "needs": [
+    "target:cards-from-targeted-players-graveyard"
+   ],
+   "why": "artifact cards from target player's graveyard, in any order"
+  },
+  {
+   "name": "Primal Clay",
+   "needs": [
+    "replacement:as-enters-choose-characteristics"
+   ],
+   "why": "as it enters, choose one of three copiable forms"
+  },
+  {
+   "name": "Artifact Ward",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "can't be the target of abilities from artifact sources"
+  },
+  {
+   "name": "Coral Helm",
+   "needs": [
+    "cost:discard-at-random"
+   ],
+   "why": "discard a card at random as a cost"
+  },
+  {
+   "name": "Aladdin's Lamp",
+   "needs": [
+    "replacement:draw-replacement-look-and-choose"
+   ],
+   "why": "the next time you would draw, look at the top X instead"
+  },
+  {
+   "name": "Magnetic Mountain",
+   "needs": [
+    "decision:pay-per-chosen-permanent"
+   ],
+   "why": "choose tapped blue creatures and pay {4} for each"
+  },
+  {
+   "name": "Ebony Horse",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target"
+   ],
+   "why": "prevent all combat damage dealt to and by that creature this turn"
+  },
+  {
+   "name": "Ali from Cairo",
+   "needs": [
+    "static:damage-life-floor"
+   ],
+   "why": "damage can't reduce your life below 1"
+  },
+  {
+   "name": "Island Fish Jasconius",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "trigger:state-trigger"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Ifh-Bíff Efreet",
+   "needs": [
+    "effect:opponents-may-activate"
+   ],
+   "why": "any player may activate this ability"
+  },
+  {
+   "name": "Jandor's Ring",
+   "needs": [
+    "cost:discard-last-drawn"
+   ],
+   "why": "discard the last card you drew this turn"
+  },
+  {
+   "name": "Erg Raiders",
+   "needs": [
+    "condition:came-under-control-this-turn"
+   ],
+   "why": "unless it came under your control this turn"
+  },
+  {
+   "name": "The Rack",
+   "needs": [
+    "decision:choose-player-on-enter"
+   ],
+   "why": "as it enters, choose an opponent"
+  },
+  {
+   "name": "Armageddon Clock",
+   "needs": [
+    "effect:opponents-may-activate"
+   ],
+   "why": "any player may activate this, only during any upkeep"
+  },
+  {
+   "name": "Cursed Rack",
+   "needs": [
+    "decision:choose-player-on-enter"
+   ],
+   "why": "the chosen player's maximum hand size is four"
+  },
+  {
+   "name": "Tawnos's Coffin",
+   "needs": [
+    "effect:exile-until-source-untaps-with-auras"
+   ],
+   "why": "exile until this leaves or untaps, returning it with its counters and Auras"
+  },
+  {
+   "name": "Haunting Wind",
+   "needs": [
+    "trigger:activates-ability"
+   ],
+   "why": "whenever an artifact becomes tapped or a player activates an artifact's ability without {T}"
+  },
+  {
+   "name": "Damping Field",
+   "needs": [
+    "static:untap-step-limit"
+   ],
+   "why": "players can't untap more than one artifact during their untap steps"
+  },
+  {
+   "name": "Urza's Miter",
+   "needs": [
+    "condition:trigger-object-not-sacrificed"
+   ],
+   "why": "if it wasn't sacrificed"
+  }
+ ]
+}

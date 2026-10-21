@@ -6175,7 +6175,7 @@ export class Game {
 
   /** `id` has untapped: end every modifier and control effect that lasted
    * "for as long as" it remained tapped (rule 611.2b — Ashnod's Battle Gear,
-   * Rubinia Soulsinger). Its leaving ends them too, with the rest of its
+   * Phyrexian Gremlins). Its leaving ends them too, with the rest of its
    * `whileSource` effects (`endWhileSourceEffects`). */
   private endWhileTappedEffects(id: ObjectId): void {
     if (this.state.whileSourceIds?.includes(id) !== true) return;

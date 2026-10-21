@@ -22,6 +22,7 @@ import _poolArmoryAutomaton from "../pool/armory-automaton.js";
 import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantOutlaw from "../pool/arrogant-outlaw.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
+import _poolArtifactBlast from "../pool/artifact-blast.js";
 import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
@@ -568,6 +569,7 @@ const shard: CardShard = {
     _poolAronBenaliasRuin,
     _poolArrogantOutlaw,
     _poolArrogantVampire,
+    _poolArtifactBlast,
     _poolAtKnifepoint,
     _poolAtTheDoor,
     _poolAtomicMicrosizer,

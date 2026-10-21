@@ -9199,6 +9199,90 @@
   },
   "keyword:rampage": {
    "example": "Aerathi Berserker"
+  },
+  "effect:duration-while-power-comparison": {
+   "example": "Old Man of the Sea"
+  },
+  "static:static-loses-all-abilities": {
+   "example": "Titania's Song"
+  },
+  "static:effect-lingers-until-eot-after-leaving": {
+   "example": "Titania's Song"
+  },
+  "duration:until-your-next-upkeep": {
+   "example": "Xenic Poltergeist"
+  },
+  "filter:ability-cost-without-tap": {
+   "example": "Powerleech"
+  },
+  "static:cant-be-enchanted": {
+   "example": "Guardian Beast"
+  },
+  "static:cant-gain-control": {
+   "example": "Guardian Beast"
+  },
+  "cost:unless-pay-colored-per-amount": {
+   "example": "Cyclone"
+  },
+  "effect:pay-before-delayed-deadline": {
+   "example": "Nafs Asp"
+  },
+  "replacement:land-destruction-damage-removal-shield": {
+   "example": "Pyramids"
+  },
+  "filter:enchanted-by-source": {
+   "example": "Power Artifact"
+  },
+  "filter:not-targeted-by-named-ability": {
+   "example": "Goblin Artisans"
+  },
+  "condition:controlled-since-turn-start": {
+   "example": "Rocket Launcher"
+  },
+  "amount:damage-taken-from-filtered-sources": {
+   "example": "Reverse Polarity"
+  },
+  "amount:mana-ability-sacrificed-object": {
+   "example": "Priest of Yawgmoth"
+  },
+  "replacement:damage-reflection": {
+   "example": "Eye for an Eye"
+  },
+  "effect:discard-drawn-card-if": {
+   "example": "Sindbad"
+  },
+  "filter:originally-printed-in-set": {
+   "example": "City in a Bottle"
+  },
+  "effect:gain-control-to-player-with-most-life": {
+   "example": "Ghazbán Ogre"
+  },
+  "target:cards-from-targeted-players-graveyard": {
+   "example": "Drafna's Restoration"
+  },
+  "cost:discard-at-random": {
+   "example": "Coral Helm"
+  },
+  "decision:pay-per-chosen-permanent": {
+   "example": "Magnetic Mountain"
+  },
+  "effect:prevent-combat-damage-to-and-by-target": {
+   "example": "Ebony Horse"
+  },
+  "static:damage-life-floor": {
+   "example": "Ali from Cairo"
+  },
+  "cost:discard-last-drawn": {
+   "example": "Jandor's Ring"
+  },
+  "condition:came-under-control-this-turn": {
+   "example": "Erg Raiders"
+  },
+  "effect:exile-until-source-untaps-with-auras": {
+   "example": "Tawnos's Coffin"
+  },
+  "condition:trigger-object-not-sacrificed": {
+   "example": "Urza's Miter"
   }
  }
 }

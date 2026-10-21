@@ -112,6 +112,7 @@ import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
+import _poolDetonate from "../pool/detonate.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
 import _poolDireFleetWarmonger from "../pool/dire-fleet-warmonger.js";
 import _poolDirectCurrent from "../pool/direct-current.js";
@@ -142,6 +143,7 @@ import _poolEerieGravestone from "../pool/eerie-gravestone.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
 import _poolElderArthurMaxson from "../pool/elder-arthur-maxson.js";
 import _poolElectrolyze from "../pool/electrolyze.js";
+import _poolElephantGraveyard from "../pool/elephant-graveyard.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
@@ -208,6 +210,7 @@ import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
+import _poolHasranOgress from "../pool/hasran-ogress.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeartfireHero from "../pool/heartfire-hero.js";
@@ -252,6 +255,7 @@ import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
 import _poolKangPrime from "../pool/kang-prime.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
 import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
+import _poolKhabalGhoul from "../pool/khabal-ghoul.js";
 import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
@@ -665,6 +669,7 @@ const shard: CardShard = {
     _poolDeclareDominance,
     _poolDecoyPloy,
     _poolDeepfathomSkulker,
+    _poolDetonate,
     _poolDevotedPaladin,
     _poolDireFleetWarmonger,
     _poolDirectCurrent,
@@ -695,6 +700,7 @@ const shard: CardShard = {
     _poolEfficientConstruction,
     _poolElderArthurMaxson,
     _poolElectrolyze,
+    _poolElephantGraveyard,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
     _poolEnterTheGodEternals,
@@ -761,6 +767,7 @@ const shard: CardShard = {
     _poolHammersOfMoradin,
     _poolHangedExecutioner,
     _poolHashepOasis,
+    _poolHasranOgress,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
     _poolHeartfireHero,
@@ -805,6 +812,7 @@ const shard: CardShard = {
     _poolKangPrime,
     _poolKeyToTheCity,
     _poolKeysToTheHouse,
+    _poolKhabalGhoul,
     _poolKickoffCelebrations,
     _poolKilnFiend,
     _poolKishlaSkimmer,

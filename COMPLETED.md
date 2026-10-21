@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Arabian Nights and Antiquities, whole** (batch 131): **"you may choose not to untap"** (rule
+  502.3 — a choice in the untap step, without priority) and the **"for as long as ~ remains
+  tapped"** duration (611.2b) built and taught to the scaffolder; 45 of their last 106 cards
+  authored by four `card-author` agents and the lead — Ashnod's Battle Gear, Phyrexian Gremlins,
+  Bottle of Suleiman, Erhnam Djinn, Mijae Djinn, Hurkyl's Recall, Shatterstorm — plus four earlier
+  cards (Immovable Rod, The Blackstaff of Waterdeep, Entrancing Lyre, Hedge Whisperer); 61 blocked,
+  banding (5) the most shared (2026-10-21).
 - **Limited Edition Alpha, whole** (batch 130 — the first of the oldest-first walk), and Beta's
   last card: **a source of your choice** (rule 609.7 — the Circles of Protection, Reverse Damage,
   Healing Grace) and **colour setting** (`become-color`, layer 5 — the Laces, the Wisps) built

@@ -448,6 +448,7 @@ import _poolSnarlSong from "../pool/snarl-song.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
+import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
@@ -1037,6 +1038,7 @@ const shard: CardShard = {
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
+    _poolSorceressQueen,
     _poolSorinsGuide,
     _poolSoulSnuffers,
     _poolSozinsComet,

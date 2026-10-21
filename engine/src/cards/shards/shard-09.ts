@@ -197,6 +197,7 @@ import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
 import _poolGethThaneOfContracts from "../pool/geth-thane-of-contracts.js";
 import _poolGiantBadger from "../pool/giant-badger.js";
 import _poolGiantKiller from "../pool/giant-killer.js";
+import _poolGiantTortoise from "../pool/giant-tortoise.js";
 import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
@@ -488,6 +489,7 @@ import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
+import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
 import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
@@ -788,6 +790,7 @@ const shard: CardShard = {
     _poolGethThaneOfContracts,
     _poolGiantBadger,
     _poolGiantKiller,
+    _poolGiantTortoise,
     _poolGiftOfCompleation,
     _poolGloomhunter,
     _poolGloomlakeVerge,
@@ -1079,6 +1082,7 @@ const shard: CardShard = {
     _poolSylvanAwakening,
     _poolSylvanScrying,
     _poolSythisHarvestsHand,
+    _poolTabletOfEpityr,
     _poolTangletrap,
     _poolTanukiTransplanter,
     _poolTaxiDriver,

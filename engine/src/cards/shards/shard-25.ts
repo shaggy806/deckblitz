@@ -248,6 +248,7 @@ import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
 import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
+import _poolJununEfreet from "../pool/junun-efreet.js";
 import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
@@ -325,6 +326,7 @@ import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
+import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
 import _poolOdricBloodCursed from "../pool/odric-blood-cursed.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
@@ -817,6 +819,7 @@ const shard: CardShard = {
     _poolJetMedallion,
     _poolJoragaVisionary,
     _poolJudgeMagisterGabranth,
+    _poolJununEfreet,
     _poolKaleidostone,
     _poolKarametrasFavor,
     _poolKataraTheFearless,
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,
     _poolNyxbornSeaguard,
+    _poolObeliskOfUndoing,
     _poolObscuraAscendancy,
     _poolOdricBloodCursed,
     _poolOldGrowthGrove,

@@ -28,6 +28,7 @@ import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
+import _poolArmyOfAllah from "../pool/army-of-allah.js";
 import _poolArtilleryBlast from "../pool/artillery-blast.js";
 import _poolAspirantsAscent from "../pool/aspirants-ascent.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
@@ -104,6 +105,7 @@ import _poolCloudSpirit from "../pool/cloud-spirit.js";
 import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
+import _poolColossusOfSardia from "../pool/colossus-of-sardia.js";
 import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContactOtherPlane from "../pool/contact-other-plane.js";
@@ -154,6 +156,7 @@ import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
+import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
 import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
@@ -240,6 +243,7 @@ import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
+import _poolHurkylsRecall from "../pool/hurkyls-recall.js";
 import _poolIceMagic from "../pool/ice-magic.js";
 import _poolIchorDrinker from "../pool/ichor-drinker.js";
 import _poolIgnisScientia from "../pool/ignis-scientia.js";
@@ -618,6 +622,7 @@ const shard: CardShard = {
     _poolArcboundSlasher,
     _poolArgothSanctumOfNature,
     _poolArmillarySphere,
+    _poolArmyOfAllah,
     _poolArtilleryBlast,
     _poolAspirantsAscent,
     _poolAssaultFormation,
@@ -694,6 +699,7 @@ const shard: CardShard = {
     _poolCloutOfTheDominus,
     _poolCoastalPeak,
     _poolColorstormStallion,
+    _poolColossusOfSardia,
     _poolConfoundingRiddle,
     _poolConsumingSinkhole,
     _poolContactOtherPlane,
@@ -744,6 +750,7 @@ const shard: CardShard = {
     _poolElvenRaftSteerer,
     _poolEmrakulsMessenger,
     _poolEnslavedDwarf,
+    _poolErhnamDjinn,
     _poolEsgarothGarrison,
     _poolEssenceknitScholar,
     _poolEusocialEngineering,
@@ -830,6 +837,7 @@ const shard: CardShard = {
     _poolHondenOfInfiniteRage,
     _poolHorrorOfTheDim,
     _poolHulklingYoungAvenger,
+    _poolHurkylsRecall,
     _poolIceMagic,
     _poolIchorDrinker,
     _poolIgnisScientia,

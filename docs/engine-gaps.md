@@ -14,6 +14,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
   to pay with life), honoured by the planner first, offered by the client beside the convoke
   picker.
+- **A mana ability can't read what its cost sacrificed.** `{ manaValueOf: "sacrificed" }` works
+  for a spell's additional cost (Metamorphosis, Burnt Offering) but a mana ability — which
+  resolves at once, never on the stack (rule 605.3) — reads 0, so Priest of Yawgmoth ("{T},
+  Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's mana value")
+  makes no mana. **Fix (outline):** record the cost's sacrificed objects on the mana ability's
+  activation the way a spell's are, before its amount is read. Found 2026-10-21 (B131).
 - **A source of damage is chosen only among permanents and spells.** Rule 609.7a also allows
   any object an ability on the stack, a waiting replacement or prevention effect or a delayed
   trigger refers to (a creature that died with its "deals damage" trigger on the stack), and a

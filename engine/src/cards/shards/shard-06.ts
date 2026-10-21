@@ -30,6 +30,7 @@ import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
+import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
@@ -525,6 +526,7 @@ import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWarrant from "../pool/warrant.js";
 import _poolWaterknot from "../pool/waterknot.js";
+import _poolWeakstone from "../pool/weakstone.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolAriaOfFlame,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
+    _poolAshnodsTransmogrant,
     _poolAssureAssemble,
     _poolAtog,
     _poolAugmentingAutomaton,
@@ -1093,6 +1096,7 @@ const shard: CardShard = {
     _poolWarlockClass,
     _poolWarrant,
     _poolWaterknot,
+    _poolWeakstone,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

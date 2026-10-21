@@ -63,6 +63,7 @@ import _poolBoundlessRealms from "../pool/boundless-realms.js";
 import _poolBountyOfSkemfar from "../pool/bounty-of-skemfar.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
+import _poolBrassMan from "../pool/brass-man.js";
 import _poolBringToLife from "../pool/bring-to-life.js";
 import _poolBrotherhoodVertibird from "../pool/brotherhood-vertibird.js";
 import _poolBruceBanner from "../pool/bruce-banner.js";
@@ -84,6 +85,7 @@ import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
+import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
 import _poolClear from "../pool/clear.js";
 import _poolCloisterGargoyle from "../pool/cloister-gargoyle.js";
@@ -126,6 +128,7 @@ import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
 import _poolDevotedHero from "../pool/devoted-hero.js";
 import _poolDiamondCity from "../pool/diamond-city.js";
+import _poolDiamondValley from "../pool/diamond-valley.js";
 import _poolDiluvianPrimordial from "../pool/diluvian-primordial.js";
 import _poolDireFleetHoarder from "../pool/dire-fleet-hoarder.js";
 import _poolDiscordantPiper from "../pool/discordant-piper.js";
@@ -373,6 +376,7 @@ import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js
 import _poolRookieMistake from "../pool/rookie-mistake.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
+import _poolRukhEgg from "../pool/rukh-egg.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
 import _poolRunAmok from "../pool/run-amok.js";
 import _poolRunBehind from "../pool/run-behind.js";
@@ -599,6 +603,7 @@ const shard: CardShard = {
     _poolBountyOfSkemfar,
     _poolBrambleCreeper,
     _poolBranchingEvolution,
+    _poolBrassMan,
     _poolBringToLife,
     _poolBrotherhoodVertibird,
     _poolBruceBanner,
@@ -620,6 +625,7 @@ const shard: CardShard = {
     _poolChangelingOutcast,
     _poolCharitableLevy,
     _poolCinderStrike,
+    _poolCircleOfProtectionArtifacts,
     _poolCircleOfTheLandDruid,
     _poolClear,
     _poolCloisterGargoyle,
@@ -662,6 +668,7 @@ const shard: CardShard = {
     _poolDesertOfTheTrue,
     _poolDevotedHero,
     _poolDiamondCity,
+    _poolDiamondValley,
     _poolDiluvianPrimordial,
     _poolDireFleetHoarder,
     _poolDiscordantPiper,
@@ -909,6 +916,7 @@ const shard: CardShard = {
     _poolRookieMistake,
     _poolRootwaterCommando,
     _poolRoughRhinoCavalry,
+    _poolRukhEgg,
     _poolRumorGatherer,
     _poolRunAmok,
     _poolRunBehind,

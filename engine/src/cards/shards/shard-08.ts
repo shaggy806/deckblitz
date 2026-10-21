@@ -32,6 +32,7 @@ import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolAquaticIngress from "../pool/aquatic-ingress.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
+import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
 import _poolAshrootAnimist from "../pool/ashroot-animist.js";
@@ -314,6 +315,7 @@ import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.j
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
 import _poolMesaFalcon from "../pool/mesa-falcon.js";
+import _poolMetamorphosis from "../pool/metamorphosis.js";
 import _poolMeteorCrater from "../pool/meteor-crater.js";
 import _poolMetropolisAngel from "../pool/metropolis-angel.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
@@ -379,6 +381,7 @@ import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
+import _poolRakalite from "../pool/rakalite.js";
 import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolAnzragTheQuakeMole,
     _poolAquaticIngress,
     _poolArcanisTheOmnipotent,
+    _poolArgothianPixies,
     _poolArtificersAssistant,
     _poolAshenRider,
     _poolAshrootAnimist,
@@ -914,6 +918,7 @@ const shard: CardShard = {
     _poolMemnite,
     _poolMercurialGeists,
     _poolMesaFalcon,
+    _poolMetamorphosis,
     _poolMeteorCrater,
     _poolMetropolisAngel,
     _poolMidnightReaper,
@@ -979,6 +984,7 @@ const shard: CardShard = {
     _poolPuppeteerClique,
     _poolPygmyAllosaurus,
     _poolRagingKavu,
+    _poolRakalite,
     _poolRakishCrew,
     _poolRampageOfTheValkyries,
     _poolRangingRaptors,

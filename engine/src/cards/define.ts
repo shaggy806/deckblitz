@@ -1834,7 +1834,7 @@ export interface StaticAbility {
    * ignored — it is always the permanent carrying it. */
   readonly doesntUntap?: boolean;
   /** "You may choose not to untap [this] during your untap step" (rule
-   * 502.3 — Ashnod's Battle Gear, Rubinia Soulsinger): as its controller's
+   * 502.3 — Ashnod's Battle Gear, Phyrexian Gremlins): as its controller's
    * untap step untaps their permanents, they choose which of these to leave
    * tapped (the `choose-permanents` decision, asked only when one would
    * untap); no player gets priority (502.4). `affects` is ignored. Usually

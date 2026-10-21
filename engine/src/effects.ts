@@ -2243,8 +2243,10 @@ export type EffectSpec =
        * effect ends as the effect's source leaves — nothing at all if it
        * already has (rule 611.2b). Not with `untilEndOfTurn`. */
       readonly whileSource?: boolean;
-      /** "…for as long as ~ remains tapped" (Rubinia Soulsinger): it ends as
-       * the source untaps or leaves — nothing if it's already untapped. */
+      /** "…for as long as ~ remains tapped": it ends as the source untaps or
+       * leaves — nothing if it's already untapped. Not "for as long as you
+       * control ~ and ~ remains tapped" (Rubinia Soulsinger): a change of the
+       * source's controller doesn't end it. */
       readonly whileSourceTapped?: boolean;
     }
   | {

@@ -152,6 +152,7 @@ import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEnergyFlux from "../pool/energy-flux.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
 import _poolExecute from "../pool/execute.js";
@@ -247,6 +248,7 @@ import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
+import _poolKingSuleiman from "../pool/king-suleiman.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
@@ -282,6 +284,7 @@ import _poolMeganticSliver from "../pool/megantic-sliver.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
 import _poolMeteorSword from "../pool/meteor-sword.js";
+import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
@@ -700,6 +703,7 @@ const shard: CardShard = {
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
     _poolElvishVisionary,
+    _poolEnergyFlux,
     _poolEntsFury,
     _poolErode,
     _poolExecute,
@@ -795,6 +799,7 @@ const shard: CardShard = {
     _poolKarnsTemporalSundering,
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
+    _poolKingSuleiman,
     _poolKinnanBonderProdigy,
     _poolKitesailCorsair,
     _poolKnightOfGlory,
@@ -830,6 +835,7 @@ const shard: CardShard = {
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
     _poolMeteorSword,
+    _poolMijaeDjinn,
     _poolMillennialGargoyle,
     _poolMindRot,
     _poolMindcrank,

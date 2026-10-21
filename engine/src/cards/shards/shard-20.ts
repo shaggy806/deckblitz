@@ -417,6 +417,7 @@ import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
+import _poolSandstorm from "../pool/sandstorm.js";
 import _poolSanguineGuard from "../pool/sanguine-guard.js";
 import _poolSarulfRealmEater from "../pool/sarulf-realm-eater.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
@@ -555,6 +556,7 @@ import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
+import _poolUnstableMutation from "../pool/unstable-mutation.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUrzasTome from "../pool/urzas-tome.js";
@@ -1028,6 +1030,7 @@ const shard: CardShard = {
     _poolRubyMedallion,
     _poolSanarUnfinishedGenius,
     _poolSandbendersStorm,
+    _poolSandstorm,
     _poolSanguineGuard,
     _poolSarulfRealmEater,
     _poolSazhsChocobo,
@@ -1166,6 +1169,7 @@ const shard: CardShard = {
     _poolTwinbladePaladin,
     _poolTwistedFealty,
     _poolUndeadAugur,
+    _poolUnstableMutation,
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
     _poolUrzasTome,

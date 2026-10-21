@@ -194,6 +194,7 @@ import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
+import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
@@ -765,6 +766,7 @@ const shard: CardShard = {
     _poolGadgetTechnician,
     _poolGaleSwooper,
     _poolGarruksPackleader,
+    _poolGateToPhyrexia,
     _poolGatewaySneak,
     _poolGenemorphImago,
     _poolGenjiGlove,

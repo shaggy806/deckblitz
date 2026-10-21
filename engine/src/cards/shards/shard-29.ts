@@ -11,6 +11,7 @@ import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAirMarshal from "../pool/air-marshal.js";
 import _poolAjanisInfluence from "../pool/ajanis-influence.js";
+import _poolAliBaba from "../pool/ali-baba.js";
 import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
@@ -291,6 +292,7 @@ import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMemorialToUnity from "../pool/memorial-to-unity.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
+import _poolMightstone from "../pool/mightstone.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
@@ -325,6 +327,7 @@ import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
+import _poolOsaiVultures from "../pool/osai-vultures.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
@@ -585,6 +588,7 @@ const shard: CardShard = {
     _poolAidFromTheCowl,
     _poolAirMarshal,
     _poolAjanisInfluence,
+    _poolAliBaba,
     _poolAlliedAssault,
     _poolAllosaurusShepherd,
     _poolAmbitiousAssault,
@@ -865,6 +869,7 @@ const shard: CardShard = {
     _poolMemorialToGenius,
     _poolMemorialToUnity,
     _poolMessengersSpeed,
+    _poolMightstone,
     _poolMightstonesAnimation,
     _poolMishrasJuggernaut,
     _poolMishrasResearchDesk,
@@ -899,6 +904,7 @@ const shard: CardShard = {
     _poolOnyxMage,
     _poolOrbitalPlunge,
     _poolOrcishMedicine,
+    _poolOsaiVultures,
     _poolOtharriSunsGlory,
     _poolOutcasterTrailblazer,
     _poolOwlinHistorian,

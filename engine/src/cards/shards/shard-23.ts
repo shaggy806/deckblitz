@@ -418,6 +418,7 @@ import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
+import _poolShatterstorm from "../pool/shatterstorm.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
@@ -987,6 +988,7 @@ const shard: CardShard = {
     _poolSetessanTraining,
     _poolShadeOfTrokair,
     _poolShamblingGhast,
+    _poolShatterstorm,
     _poolShelteringLandscape,
     _poolShilgengarSireOfFamine,
     _poolShimmeringGrotto,

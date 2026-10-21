@@ -106,6 +106,7 @@ import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
+import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
@@ -496,6 +497,7 @@ import _poolWreckageWickerfolk from "../pool/wreckage-wickerfolk.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
+import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensBoo from "../tokens/boo.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
@@ -614,6 +616,7 @@ const shard: CardShard = {
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
+    _poolDwarvenWeaponsmith,
     _poolEdenSeatOfTheSanctum,
     _poolElementalSummoning,
     _poolEloiseNephaliaSleuth,
@@ -1006,6 +1009,7 @@ const shard: CardShard = {
     _poolZhalfirinLancer,
   ],
   tokens: [
+    _tokens44RedBirdToken,
     _tokensBirdToken,
     _tokensBoo,
     _tokensCatBirdToken,

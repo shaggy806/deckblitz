@@ -107,6 +107,7 @@ import _poolCrackOpen from "../pool/crack-open.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
 import _poolCruelAdministrator from "../pool/cruel-administrator.js";
+import _poolCrumble from "../pool/crumble.js";
 import _poolCryptek from "../pool/cryptek.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
@@ -197,6 +198,7 @@ import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
 import _poolFrontierSeeker from "../pool/frontier-seeker.js";
 import _poolFrostveilAmbush from "../pool/frostveil-ambush.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
+import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
@@ -690,6 +692,7 @@ const shard: CardShard = {
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
     _poolCruelAdministrator,
+    _poolCrumble,
     _poolCryptek,
     _poolCurseOfOpulence,
     _poolCurseOfVerbosity,
@@ -780,6 +783,7 @@ const shard: CardShard = {
     _poolFrontierSeeker,
     _poolFrostveilAmbush,
     _poolFungalInfection,
+    _poolGaeasAvenger,
     _poolGallifreyCouncilChamber,
     _poolGastalThrillseeker,
     _poolGatewatchBeacon,
