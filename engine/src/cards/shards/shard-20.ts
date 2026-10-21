@@ -203,6 +203,7 @@ import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
 import _poolGnarlbackRhino from "../pool/gnarlback-rhino.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
+import _poolGoblinWarParty from "../pool/goblin-war-party.js";
 import _poolGoblinWizardry from "../pool/goblin-wizardry.js";
 import _poolGoldwardensHelm from "../pool/goldwardens-helm.js";
 import _poolGolgariSignet from "../pool/golgari-signet.js";
@@ -789,6 +790,7 @@ const shard: CardShard = {
     _poolGnarlbackRhino,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
+    _poolGoblinWarParty,
     _poolGoblinWizardry,
     _poolGoldwardensHelm,
     _poolGolgariSignet,

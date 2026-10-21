@@ -1892,6 +1892,9 @@ export function parseFace(face, ctx = {}) {
     // Bargain (rule 702.166a): a kicker that sacrifices an artifact, enchantment or token — what
     // "if this spell was bargained" changes is the card's own (702.166c) — and its cost reduction.
     if (line === "Bargain") { out.kicker = { cost: "", keyword: "bargain" }; continue; }
+    // Entwine [cost] (rule 702.42a): a kicker that chooses every mode — the
+    // modal spell's `kickedModes`, set once its modes are read.
+    if (isSpell && (m = /^Entwine ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "entwine" }; continue; }
     if (out.kicker?.keyword === "bargain" && (m = /^~ costs \{(\d+)\} less to cast if it's bargained\.$/.exec(line))) {
       out.kicker = { ...out.kicker, reduceGeneric: Number(m[1]) };
       continue;
@@ -2139,7 +2142,11 @@ export function parseFace(face, ctx = {}) {
     const modal = parseModalSpell(out.spellLines, { tokenFor, onStack: true, spell: true });
     if (modal !== undefined) {
       if (modal === null) out.todo.push(...out.spellLines.map((l) => printed(l.raw)));
-      else Object.assign(out, modal);
+      else {
+        Object.assign(out, modal);
+        // Entwine (rule 702.42): every mode when the entwine cost is paid.
+        if (out.kicker?.keyword === "entwine") out.castModal = { ...out.castModal, kickedModes: out.castModal.modes.length };
+      }
     } else {
       const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true };
       let text = out.spellLines.map((l) => l.line).join(" ");

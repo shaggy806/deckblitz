@@ -453,6 +453,7 @@ import _poolTipTheScales from "../pool/tip-the-scales.js";
 import _poolTitaniasCommand from "../pool/titanias-command.js";
 import _poolTithingBlade from "../pool/tithing-blade.js";
 import _poolTobiasAndrion from "../pool/tobias-andrion.js";
+import _poolToothAndNail from "../pool/tooth-and-nail.js";
 import _poolTorturedExistence from "../pool/tortured-existence.js";
 import _poolTouchOfInvisibility from "../pool/touch-of-invisibility.js";
 import _poolTovolarsPackleader from "../pool/tovolars-packleader.js";
@@ -984,6 +985,7 @@ const shard: CardShard = {
     _poolTitaniasCommand,
     _poolTithingBlade,
     _poolTobiasAndrion,
+    _poolToothAndNail,
     _poolTorturedExistence,
     _poolTouchOfInvisibility,
     _poolTovolarsPackleader,

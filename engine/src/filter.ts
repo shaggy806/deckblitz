@@ -1290,7 +1290,11 @@ export function matchesFilter(
     if (has !== filter.hasMutate) return false;
   }
   if (filter.kicked !== undefined) {
-    const kicked = live !== undefined && live.zone === "stack" && live.kicked === true;
+    // Only a kicker (rule 702.33): a spell whose "kicker" is entwine, gift,
+    // bargain or another keyword paid that cost, but wasn't kicked.
+    const name = live !== undefined ? rulesTextName(live) : undefined;
+    const kicker = name !== undefined && registry.has(name) ? registry.get(name).kicker : null;
+    const kicked = live !== undefined && live.zone === "stack" && live.kicked === true && kicker?.keyword === undefined;
     if (kicked !== filter.kicked) return false;
   }
   if (filter.faceDown !== undefined) {

@@ -357,6 +357,7 @@ import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
+import _poolRoadOfReturn from "../pool/road-of-return.js";
 import _poolRookTurret from "../pool/rook-turret.js";
 import _poolRootwireAmalgam from "../pool/rootwire-amalgam.js";
 import _poolRunewing from "../pool/runewing.js";
@@ -916,6 +917,7 @@ const shard: CardShard = {
     _poolRipApart,
     _poolRiskyResearch,
     _poolRiverguardsReflexes,
+    _poolRoadOfReturn,
     _poolRookTurret,
     _poolRootwireAmalgam,
     _poolRunewing,

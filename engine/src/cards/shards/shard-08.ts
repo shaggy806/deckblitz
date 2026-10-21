@@ -393,6 +393,7 @@ import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.j
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
 import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
+import _poolSavageBeating from "../pool/savage-beating.js";
 import _poolScrollshift from "../pool/scrollshift.js";
 import _poolSculptedPerfection from "../pool/sculpted-perfection.js";
 import _poolSeaEagle from "../pool/sea-eagle.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolSalvagerOfSecrets,
     _poolSandbenderScavengers,
     _poolSandsOfDelirium,
+    _poolSavageBeating,
     _poolScrollshift,
     _poolSculptedPerfection,
     _poolSeaEagle,

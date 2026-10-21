@@ -180,6 +180,7 @@ import _poolFlameRift from "../pool/flame-rift.js";
 import _poolFlameshadowConjuring from "../pool/flameshadow-conjuring.js";
 import _poolFlickeringHound from "../pool/flickering-hound.js";
 import _poolFloralEvoker from "../pool/floral-evoker.js";
+import _poolFlourishingStrike from "../pool/flourishing-strike.js";
 import _poolFogBank from "../pool/fog-bank.js";
 import _poolFog from "../pool/fog.js";
 import _poolFontOfMythos from "../pool/font-of-mythos.js";
@@ -745,6 +746,7 @@ const shard: CardShard = {
     _poolFlameshadowConjuring,
     _poolFlickeringHound,
     _poolFloralEvoker,
+    _poolFlourishingStrike,
     _poolFogBank,
     _poolFog,
     _poolFontOfMythos,

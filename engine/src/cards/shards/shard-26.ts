@@ -281,6 +281,7 @@ import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
+import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
@@ -822,6 +823,7 @@ const shard: CardShard = {
     _poolMeglonoth,
     _poolMetalworkColossus,
     _poolMindMeanderer,
+    _poolMirageMockery,
     _poolMistCloakedHerald,
     _poolMomentumRumbler,
     _poolMoorlandInquisitor,

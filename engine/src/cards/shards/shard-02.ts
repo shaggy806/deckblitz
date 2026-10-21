@@ -193,6 +193,7 @@ import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
+import _poolGravedig from "../pool/gravedig.js";
 import _poolGrayscaledGharial from "../pool/grayscaled-gharial.js";
 import _poolGreatFurnace from "../pool/great-furnace.js";
 import _poolGreensleevesMaroSorcerer from "../pool/greensleeves-maro-sorcerer.js";
@@ -712,6 +713,7 @@ const shard: CardShard = {
     _poolGlimmerburst,
     _poolGolgariLocket,
     _poolGorehornRaider,
+    _poolGravedig,
     _poolGrayscaledGharial,
     _poolGreatFurnace,
     _poolGreensleevesMaroSorcerer,

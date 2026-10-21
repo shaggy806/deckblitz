@@ -235,6 +235,7 @@ import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
 import _poolJumpScare from "../pool/jump-scare.js";
 import _poolJundPanorama from "../pool/jund-panorama.js";
 import _poolKayaGeistHunter from "../pool/kaya-geist-hunter.js";
+import _poolKayasGuile from "../pool/kayas-guile.js";
 import _poolKeeperOfTheAccord from "../pool/keeper-of-the-accord.js";
 import _poolKeeperOfTheNineGales from "../pool/keeper-of-the-nine-gales.js";
 import _poolKhalniHeartExpedition from "../pool/khalni-heart-expedition.js";
@@ -759,6 +760,7 @@ const shard: CardShard = {
     _poolJumpScare,
     _poolJundPanorama,
     _poolKayaGeistHunter,
+    _poolKayasGuile,
     _poolKeeperOfTheAccord,
     _poolKeeperOfTheNineGales,
     _poolKhalniHeartExpedition,

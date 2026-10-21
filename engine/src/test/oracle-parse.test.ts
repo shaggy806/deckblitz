@@ -1152,6 +1152,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("entwine (rule 702.42): a kicker that chooses every mode", () => {
+    const spell = face("Choose one —\n• You gain 4 life.\n• Draw a card.\nEntwine {2} (Choose both if you pay the entwine cost.)", "Sorcery");
+    expect(spell.kicker).toEqual({ cost: "{2}", keyword: "entwine" });
+    expect(spell.castModal).toMatchObject({ minModes: 1, maxModes: 1, kickedModes: 2 });
+    expect(spell.complete).toBe(true);
+  });
+
   it("madness (rule 702.35): the keyword line's cost, a mana cost only", () => {
     const imp = face(
       "Flying, haste\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)",

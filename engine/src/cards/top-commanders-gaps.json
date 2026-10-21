@@ -370,7 +370,8 @@
   "mechanic:shield-counters",
   "keyword:reconfigure",
   "cost:alt-cost-exile-from-hand",
-  "keyword:evoke-alternative-non-mana-cost"
+  "keyword:evoke-alternative-non-mana-cost",
+  "keyword:entwine"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
