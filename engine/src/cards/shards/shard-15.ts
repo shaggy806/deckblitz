@@ -110,6 +110,7 @@ import _poolDoomskarWarrior from "../pool/doomskar-warrior.js";
 import _poolDoranBesiegedByTime from "../pool/doran-besieged-by-time.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
+import _poolDrannithStinger from "../pool/drannith-stinger.js";
 import _poolDreamstoneHedron from "../pool/dreamstone-hedron.js";
 import _poolDromarsAttendant from "../pool/dromars-attendant.js";
 import _poolDrownInShapelessness from "../pool/drown-in-shapelessness.js";
@@ -327,6 +328,7 @@ import _poolOverchargedAmalgam from "../pool/overcharged-amalgam.js";
 import _poolPackAPunch from "../pool/pack-a-punch.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
+import _poolPatagiaTiger from "../pool/patagia-tiger.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
@@ -462,6 +464,7 @@ import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-
 import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
+import _poolVadrokApexOfThunder from "../pool/vadrok-apex-of-thunder.js";
 import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
 import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
@@ -622,6 +625,7 @@ const shard: CardShard = {
     _poolDoranBesiegedByTime,
     _poolDragonTrainer,
     _poolDragonmasterOutcast,
+    _poolDrannithStinger,
     _poolDreamstoneHedron,
     _poolDromarsAttendant,
     _poolDrownInShapelessness,
@@ -839,6 +843,7 @@ const shard: CardShard = {
     _poolPackAPunch,
     _poolPantherRobot,
     _poolPashalikMons,
+    _poolPatagiaTiger,
     _poolPearlOfWisdom,
     _poolPetrifyingMeddler,
     _poolPiercingExhale,
@@ -974,6 +979,7 @@ const shard: CardShard = {
     _poolUnitedBattlefront,
     _poolUnmarkedGrave,
     _poolUrzasFactory,
+    _poolVadrokApexOfThunder,
     _poolVampireSoulcaller,
     _poolVandalsEdit,
     _poolVastlandsScavenger,

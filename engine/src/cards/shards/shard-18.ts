@@ -126,6 +126,7 @@ import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
+import _poolEscapeProtocol from "../pool/escape-protocol.js";
 import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
 import _poolEvangelOfSynthesis from "../pool/evangel-of-synthesis.js";
@@ -284,6 +285,7 @@ import _poolMossPitSkeleton from "../pool/moss-pit-skeleton.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
+import _poolMysteriousEgg from "../pool/mysterious-egg.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
@@ -351,6 +353,7 @@ import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
 import _poolSamiteHerbalist from "../pool/samite-herbalist.js";
+import _poolSanctuarySmasher from "../pool/sanctuary-smasher.js";
 import _poolSandmanShiftingScoundrel from "../pool/sandman-shifting-scoundrel.js";
 import _poolSarcomiteMyr from "../pool/sarcomite-myr.js";
 import _poolSatyrEnchanter from "../pool/satyr-enchanter.js";
@@ -667,6 +670,7 @@ const shard: CardShard = {
     _poolEnragedRevolutionary,
     _poolEntishRestoration,
     _poolEntryDenied,
+    _poolEscapeProtocol,
     _poolEsikasChariot,
     _poolEssenceExtraction,
     _poolEvangelOfSynthesis,
@@ -825,6 +829,7 @@ const shard: CardShard = {
     _poolMostValuableSlayer,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
+    _poolMysteriousEgg,
     _poolNacatlOutlander,
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
@@ -892,6 +897,7 @@ const shard: CardShard = {
     _poolSalivatingGremlins,
     _poolSaltMarsh,
     _poolSamiteHerbalist,
+    _poolSanctuarySmasher,
     _poolSandmanShiftingScoundrel,
     _poolSarcomiteMyr,
     _poolSatyrEnchanter,

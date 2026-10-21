@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3728 already implemented / 1272 missing (marks refreshed 2026-10-21)
+3730 already implemented / 1270 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3902,7 +3902,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3909  Soaring Lightbringer                     {4}{W}           Enchantment Creature — Bird Glimmer
 [x]  3910  Sunblast Angel                           {4}{W}{W}        Creature — Angel
 [x]  3911  Bovine Intervention                      {1}{W}           Instant
-[ ]  3912  Gemrazer                                 {3}{G}           Creature — Beast
+[x]  3912  Gemrazer                                 {3}{G}           Creature — Beast
 [ ]  3913  Karmic Justice                           {2}{W}           Enchantment
 [ ]  3914  Tevesh Szat, Doom of Fools               {4}{B}           Legendary Planeswalker — Szat
 [x]  3915  Squee, Goblin Nabob                      {2}{R}           Legendary Creature — Goblin
@@ -4738,7 +4738,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4745  Far Traveler                             {2}{W}           Legendary Enchantment — Background
 [x]  4746  Glimmervoid                              {0}              Land
 [x]  4747  Outrageous Robbery                       {X}{B}{B}        Instant
-[ ]  4748  Sea-Dasher Octopus                       {1}{U}{U}        Creature — Octopus
+[x]  4748  Sea-Dasher Octopus                       {1}{U}{U}        Creature — Octopus
 [x]  4749  Ruric Thar, the Unbowed                  {4}{R}{G}        Legendary Creature — Ogre Warrior
 [ ]  4750  Restless Spire                           {0}              Land
 [x]  4751  Heronblade Elite                         {2}{G}           Creature — Human Warrior

@@ -53,6 +53,7 @@ import _poolBitterTriumph from "../pool/bitter-triumph.js";
 import _poolBladetuskBoar from "../pool/bladetusk-boar.js";
 import _poolBlindingSouleater from "../pool/blinding-souleater.js";
 import _poolBlisterstickShaman from "../pool/blisterstick-shaman.js";
+import _poolBloodCurdle from "../pool/blood-curdle.js";
 import _poolBloodbondVampire from "../pool/bloodbond-vampire.js";
 import _poolBloodfireMentor from "../pool/bloodfire-mentor.js";
 import _poolBlossomBlessedAngel from "../pool/blossom-blessed-angel.js";
@@ -167,6 +168,7 @@ import _poolFireUrchin from "../pool/fire-urchin.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
 import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
 import _poolFlickACoin from "../pool/flick-a-coin.js";
+import _poolForbiddenFriendship from "../pool/forbidden-friendship.js";
 import _poolForensicGadgeteer from "../pool/forensic-gadgeteer.js";
 import _poolFoundationBreaker from "../pool/foundation-breaker.js";
 import _poolFromTheRubble from "../pool/from-the-rubble.js";
@@ -275,6 +277,7 @@ import _poolLoxodonPartisan from "../pool/loxodon-partisan.js";
 import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
 import _poolLuminollusk from "../pool/luminollusk.js";
+import _poolLurkingDeadeye from "../pool/lurking-deadeye.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
@@ -418,6 +421,7 @@ import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
+import _poolSolidFooting from "../pool/solid-footing.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
@@ -599,6 +603,7 @@ const shard: CardShard = {
     _poolBladetuskBoar,
     _poolBlindingSouleater,
     _poolBlisterstickShaman,
+    _poolBloodCurdle,
     _poolBloodbondVampire,
     _poolBloodfireMentor,
     _poolBlossomBlessedAngel,
@@ -713,6 +718,7 @@ const shard: CardShard = {
     _poolFlawlessForgery,
     _poolFledglingMawcor,
     _poolFlickACoin,
+    _poolForbiddenFriendship,
     _poolForensicGadgeteer,
     _poolFoundationBreaker,
     _poolFromTheRubble,
@@ -821,6 +827,7 @@ const shard: CardShard = {
     _poolLuckyThePizzaDog,
     _poolLumberingFalls,
     _poolLuminollusk,
+    _poolLurkingDeadeye,
     _poolMaelstromArchangel,
     _poolMagesAttendant,
     _poolMagetasBoon,
@@ -964,6 +971,7 @@ const shard: CardShard = {
     _poolSmelt,
     _poolSoaringThoughtThief,
     _poolSokkasHaiku,
+    _poolSolidFooting,
     _poolSoulShred,
     _poolSparringRegimen,
     _poolSpeakSecrets,

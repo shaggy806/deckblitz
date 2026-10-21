@@ -77,6 +77,7 @@ import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
+import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
 import _poolCursedCourtier from "../pool/cursed-courtier.js";
 import _poolCutPropulsion from "../pool/cut-propulsion.js";
@@ -160,6 +161,7 @@ import _poolGiantCrab from "../pool/giant-crab.js";
 import _poolGigastormTitan from "../pool/gigastorm-titan.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
+import _poolGoForBlood from "../pool/go-for-blood.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
 import _poolGoblinDeathraiders from "../pool/goblin-deathraiders.js";
 import _poolGoblinOutlander from "../pool/goblin-outlander.js";
@@ -597,6 +599,7 @@ const shard: CardShard = {
     _poolCrimsonCaravaneer,
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
+    _poolCubwarden,
     _poolCultistOfTheAbsolute,
     _poolCursedCourtier,
     _poolCutPropulsion,
@@ -680,6 +683,7 @@ const shard: CardShard = {
     _poolGigastormTitan,
     _poolGingerbreadCabin,
     _poolGlenElendraArchmage,
+    _poolGoForBlood,
     _poolGoblinAnarchomancer,
     _poolGoblinDeathraiders,
     _poolGoblinOutlander,

@@ -166,6 +166,7 @@ import _poolFoulOrchard from "../pool/foul-orchard.js";
 import _poolFrilledCaveWurm from "../pool/frilled-cave-wurm.js";
 import _poolFrilledOculus from "../pool/frilled-oculus.js";
 import _poolFrilledSandwalla from "../pool/frilled-sandwalla.js";
+import _poolFrondlandFelidar from "../pool/frondland-felidar.js";
 import _poolFrontlineWarRager from "../pool/frontline-war-rager.js";
 import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
@@ -369,6 +370,7 @@ import _poolRushedRebirth from "../pool/rushed-rebirth.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
 import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
+import _poolSanctuaryLockdown from "../pool/sanctuary-lockdown.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
@@ -722,6 +724,7 @@ const shard: CardShard = {
     _poolFrilledCaveWurm,
     _poolFrilledOculus,
     _poolFrilledSandwalla,
+    _poolFrondlandFelidar,
     _poolFrontlineWarRager,
     _poolFrostbitePyromental,
     _poolFurycalmSnarl,
@@ -925,6 +928,7 @@ const shard: CardShard = {
     _poolSacredFoundry,
     _poolSallySparrow,
     _poolSamutTheDrivingForce,
+    _poolSanctuaryLockdown,
     _poolSavagePackmate,
     _poolScatterTheSeeds,
     _poolScroungeForEternity,

@@ -258,6 +258,7 @@ import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
 import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
 import _poolLonisGeneticsExpert from "../pool/lonis-genetics-expert.js";
+import _poolLoreDrakkis from "../pool/lore-drakkis.js";
 import _poolLorienRevealed from "../pool/lorien-revealed.js";
 import _poolLostInALabyrinth from "../pool/lost-in-a-labyrinth.js";
 import _poolLostInTheMist from "../pool/lost-in-the-mist.js";
@@ -366,6 +367,7 @@ import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
+import _poolSavaiThundermane from "../pool/savai-thundermane.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolSchemaThief from "../pool/schema-thief.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
@@ -762,6 +764,7 @@ const shard: CardShard = {
     _poolLilianasCaress,
     _poolLokiTheDeceiver,
     _poolLonisGeneticsExpert,
+    _poolLoreDrakkis,
     _poolLorienRevealed,
     _poolLostInALabyrinth,
     _poolLostInTheMist,
@@ -870,6 +873,7 @@ const shard: CardShard = {
     _poolSandstoneWarrior,
     _poolSangriteSurge,
     _poolSapphireMedallion,
+    _poolSavaiThundermane,
     _poolScavengedWeaponry,
     _poolSchemaThief,
     _poolScionOfGlaciers,

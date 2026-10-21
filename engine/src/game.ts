@@ -284,6 +284,7 @@ import {
   phasedOutIds,
   printedCardName,
   rulesTextName,
+  textNameOf,
   nameOf,
   tokenFoldKey,
   speedOf,
@@ -12978,7 +12979,8 @@ export class Game {
     // One its text box came with (rule 612.5) is that card's ability, which
     // it stays whatever becomes of this permanent's text.
     if (abilityIndex < printed) {
-      return object.textFrom === undefined ? undefined : { kind: "card-activated", cardName: object.textFrom, index: abilityIndex };
+      const textName = textNameOf(object);
+      return textName === undefined ? undefined : { kind: "card-activated", cardName: textName, index: abilityIndex };
     }
     const intrinsic = this.intrinsicExtras(object);
     if (abilityIndex < printed + intrinsic.length) return { kind: "intrinsic", color: intrinsic[abilityIndex - printed] };
@@ -16175,6 +16177,52 @@ export class Game {
         );
   }
 
+  /**
+   * A mutating creature spell begins resolving (rule 702.140b-c). Its target
+   * still legal: its controller chooses on top or underneath — a mode choice
+   * as it resolves — and it merges (`mergeMutatingSpell`); `true`, done.
+   * Its target illegal: it ceases to be a mutating spell (its targets and
+   * alternative-cost flag go) and `false` sends it on through the ordinary
+   * resolution, onto the battlefield.
+   */
+  private resolveMutatingSpell(id: ObjectId, def: CardDefinition): boolean {
+    const object = this.state.objects[id];
+    const legality = this.targetLegality(
+      this.spellTargetSpecs(object),
+      object.targets ?? [],
+      this.targetsStillMeant(object),
+      object.controller,
+      this.cardSource(def, id),
+    );
+    if (legality.fizzles) {
+      this.forgetSpellTargets(object);
+      object.overloaded = undefined;
+      object.targets = [];
+      return false;
+    }
+    const parked = this.state.suspendedResolutions.length;
+    this.withDecisionSource(id, () => {
+      const context = this.makeResolutionContext(id, object.controller, legality.targets, 0, 0, undefined, 1, 0, object.targetZones);
+      applyEffectSpec(
+        {
+          kind: "modal",
+          minModes: 1,
+          maxModes: 1,
+          modes: [
+            { text: "Put it on top of the creature", effect: { kind: "mutate-merge", onTop: true } },
+            { text: "Put it under the creature", effect: { kind: "mutate-merge", onTop: false } },
+          ],
+        },
+        context,
+      );
+    });
+    // Waiting on the choice: it stays on the stack until it merges.
+    if (this.state.suspendedResolutions.length > parked || this.decisionOutstanding()) {
+      this.state.suspendedResolutions.splice(parked, 0, { effect: null, leaveStack: id });
+    }
+    return true;
+  }
+
   private resolveTopObject(): void {
     const stack = this.state.zones.shared.stack;
     const id = stack[stack.length - 1];
@@ -16188,6 +16236,12 @@ export class Game {
     }
 
     const def = this.registry.get(printedCardName(object));
+
+    // A mutating creature spell (rule 702.140) never fizzles: with its target
+    // legal it merges with it (702.140c), and with the target gone it stops
+    // being a mutating spell and resolves as an ordinary creature spell
+    // (702.140b) — below, with no targets.
+    if (object.overloaded === true && def.overload?.keyword === "mutate" && this.resolveMutatingSpell(id, def)) return;
 
     // A kicked spell may target something its unkicked specs wouldn't allow
     // (Tear Asunder), so the check uses the specs it was actually cast with,
@@ -17419,7 +17473,7 @@ export class Game {
                   : atTrigger;
           // A printed ability its text box came with (rule 612.5) is that
           // card's, which it stays however this permanent changes.
-          const textName = lastSeen !== undefined ? lastSeen.textName : object.textFrom;
+          const textName = lastSeen !== undefined ? lastSeen.textName : textNameOf(object);
           const base = {
             sourceObjectId: id,
             cardName: lastSeen !== undefined ? lastSeen.name : printedCardName(object),
@@ -18406,6 +18460,12 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
+      case "mutates":
+        return (
+          event.type === "permanent-mutated" &&
+          this.matchesWho(spec.who, event.object, self) &&
+          this.triggerFilterOk(spec.filter, event.object, self)
+        );
       case "transforms":
         return (
           event.type === "permanent-transformed" &&
@@ -18699,6 +18759,12 @@ export class Game {
         );
       case "this-cycled":
         return event.type === "card-cycled" && event.object === self.id;
+      case "cycles":
+        return (
+          event.type === "card-cycled" &&
+          (spec.who === "any" || (spec.who === "you") === (event.player === self.controller)) &&
+          !(spec.otherOnly === true && event.object === self.id)
+        );
       case "this-plotted":
         return event.type === "card-plotted" && event.object === self.id;
       case "evidence-collected":
@@ -18797,6 +18863,7 @@ export class Game {
       event.type === "permanent-left-battlefield" ||
       event.type === "permanent-sacrificed" ||
       event.type === "permanent-transformed" ||
+      event.type === "permanent-mutated" ||
       event.type === "became-monstrous" ||
       event.type === "became-saddled" ||
       event.type === "permanent-exerted" ||
@@ -22188,6 +22255,11 @@ export class Game {
       greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
       basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
       partySize: () => partySizeOf(this.state, this.registry, controller),
+      timesMutated: () => {
+        const object = this.state.objects[source];
+        if (object?.zone === "battlefield") return object.merged?.timesMutated ?? 0;
+        return object?.lastKnown?.timesMutated ?? 0;
+      },
       opponentsControllingFewer: (filter) => {
         // What each player *controls* (read from their own side), whether or
         // not the filter says so — Voice of Many's `{ type: "creature" }`
@@ -22279,6 +22351,10 @@ export class Game {
       },
       takeInitiative: (who, via) => {
         for (const p of scoped(who ?? "you")) this.takeInitiative(p, via ?? "effect");
+      },
+      mergeMutatingSpell: (onTop) => {
+        const t = targets[0];
+        if (t?.kind === "object") this.mergeMutatingSpell(source, t.object, onTop);
       },
       venture: (undercity) => this.ventureInto(controller, undercity, source),
       increaseSpeed: (player, amount) => this.setSpeed(player, speedOf(this.state, player) + amount),
@@ -33562,7 +33638,8 @@ export class Game {
       ...(object.saddled === true ? { saddled: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
-      ...(object.textFrom !== undefined ? { textName: object.textFrom } : {}),
+      ...(textNameOf(object) !== undefined ? { textName: textNameOf(object) } : {}),
+      ...(object.merged !== undefined ? { timesMutated: object.merged.timesMutated } : {}),
       ...(object.modifiers.some((m) => m.copiable === true)
         ? { copiable: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })) }
         : {}),
@@ -33714,6 +33791,61 @@ export class Game {
       if (since !== undefined && open.from >= since) this.state.publicStints?.[id]?.pop();
       else open.until = this.state.eventSeq;
     }
+  }
+
+  /**
+   * The other components of a merged permanent that has just left the
+   * battlefield (rule 730.3), each put into `to` as a new card of its own —
+   * its owner's graveyard, hand or library, or exile. A token component
+   * ceases to exist (rule 111.8 — it never reaches another zone). They
+   * follow the permanent into the zone it went to, wherever a replacement
+   * sent it (730.3d); the owner's arrangement of a graveyard or library is
+   * the order they merged in (730.3a lets them choose — not asked).
+   */
+  private scatterMergedComponents(merged: NonNullable<GameObject["merged"]>, to: ZoneType): void {
+    const zone: ZoneType = to === "battlefield" || to === "stack" ? "graveyard" : to;
+    for (const component of merged.components) {
+      if ("self" in component || component.token) continue;
+      const id = this.makeCardObject(component.cardName, component.owner, { zone });
+      this.zoneList(zone, component.owner).push(id);
+      this.state.objects[id].zoneChangeCount = 1;
+    }
+    invalidateComputedCache();
+  }
+
+  /**
+   * A mutating creature spell merges with its target (rules 702.140c,
+   * 730.2): it doesn't enter the battlefield — it leaves the stack and
+   * becomes part of the target, on top or underneath as its controller
+   * chose, and the target stays the same object (730.2c: no new entry, no
+   * new control, every effect on it still on it). On top, its
+   * characteristics are the mutating card's (730.2a); either way it has
+   * every component's abilities (702.140e). Announced as
+   * `permanent-mutated`, what "whenever this creature mutates" waits for
+   * (702.140d).
+   */
+  mergeMutatingSpell(spellId: ObjectId, targetId: ObjectId, onTop: boolean): void {
+    const spell = this.state.objects[spellId];
+    const target = this.state.objects[targetId];
+    if (spell === undefined || spell.zone !== "stack" || target === undefined || target.zone !== "battlefield") return;
+    const component = {
+      cardName: spell.cardName,
+      owner: spell.owner,
+      // A copy of a mutating spell merges as a token (rule 707.10, 730.2d).
+      token: spell.isCopy === true || spell.isToken,
+    };
+    const existing = target.merged?.components ?? [{ self: true as const }];
+    target.merged = {
+      components: onTop ? [component, ...existing] : [...existing, component],
+      timesMutated: (target.merged?.timesMutated ?? 0) + 1,
+    };
+    const stack = this.state.zones.shared.stack;
+    const index = stack.indexOf(spellId);
+    if (index >= 0) stack.splice(index, 1);
+    this.forgetSpellTargets(spell);
+    delete this.state.objects[spellId];
+    invalidateComputedCache();
+    this.emit({ type: "permanent-mutated", object: targetId, player: target.controller });
   }
 
   private moveObjectUncached(id: ObjectId, to: ZoneType, enter: EnterOptions): boolean {
@@ -34174,6 +34306,12 @@ export class Game {
     // So does an exchange of text boxes (rule 612.5): a new object has its
     // own text again (400.7).
     delete object.textFrom;
+    // A merged permanent comes apart as it leaves the battlefield (rule
+    // 730.3): this object goes on as its own card or token, and every other
+    // card it was goes to the same zone as a card of its own.
+    const merged = object.merged;
+    delete object.merged;
+    if (merged !== undefined) this.scatterMergedComponents(merged, to);
     // An ETB "choose a creature type" choice ends when the object changes
     // zones — a fresh entry chooses again (Urza's Incubator — P14). So does
     // any other "as this enters" choice (a Heraldic Banner that comes back

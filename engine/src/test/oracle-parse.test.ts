@@ -1077,6 +1077,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(linvala.triggered[0].condition).toEqual({ kind: "full-party" });
     expect(linvala.complete).toBe(true);
+    expect(parseTrigger("Whenever you cycle another card")).toEqual([{ on: "cycles", who: "you", otherOnly: true }]);
+    expect(parseTrigger("Whenever ~ mutates")).toEqual([{ on: "mutates", who: "self" }]);
     const veteran = face("Test Card is also a Cleric, Rogue, Warrior, and Wizard.\nVigilance", "Creature — Human");
     expect(veteran.alsoSubtypes).toEqual(["Cleric", "Rogue", "Warrior", "Wizard"]);
     expect(veteran.complete).toBe(true);

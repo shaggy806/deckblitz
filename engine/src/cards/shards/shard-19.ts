@@ -136,6 +136,7 @@ import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
+import _poolDurableCoilbug from "../pool/durable-coilbug.js";
 import _poolDutifulGriffin from "../pool/dutiful-griffin.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
@@ -525,6 +526,7 @@ import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
 import _poolWhiteTigerAvaAyala from "../pool/white-tiger-ava-ayala.js";
 import _poolWickerWitch from "../pool/wicker-witch.js";
+import _poolWillOfTheAllHunter from "../pool/will-of-the-all-hunter.js";
 import _poolWilsonRefinedGrizzly from "../pool/wilson-refined-grizzly.js";
 import _poolWindScarredCrag from "../pool/wind-scarred-crag.js";
 import _poolWingSnare from "../pool/wing-snare.js";
@@ -687,6 +689,7 @@ const shard: CardShard = {
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,
+    _poolDurableCoilbug,
     _poolDutifulGriffin,
     _poolEarthcraft,
     _poolElectrozoa,
@@ -1076,6 +1079,7 @@ const shard: CardShard = {
     _poolWhiskAway,
     _poolWhiteTigerAvaAyala,
     _poolWickerWitch,
+    _poolWillOfTheAllHunter,
     _poolWilsonRefinedGrizzly,
     _poolWindScarredCrag,
     _poolWingSnare,

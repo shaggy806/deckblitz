@@ -145,6 +145,7 @@ import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
+import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
@@ -166,6 +167,7 @@ import _poolGravelighter from "../pool/gravelighter.js";
 import _poolGrenzoHavocRaiser from "../pool/grenzo-havoc-raiser.js";
 import _poolGrimGuardian from "../pool/grim-guardian.js";
 import _poolGrimReapersScythe from "../pool/grim-reapers-scythe.js";
+import _poolGrimdancer from "../pool/grimdancer.js";
 import _poolGrotesqueDemise from "../pool/grotesque-demise.js";
 import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
@@ -654,6 +656,7 @@ const shard: CardShard = {
     _poolForumOfAmity,
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
+    _poolFrillscareMentor,
     _poolFumingEffigy,
     _poolGarruksHarbinger,
     _poolGaryClone,
@@ -675,6 +678,7 @@ const shard: CardShard = {
     _poolGrenzoHavocRaiser,
     _poolGrimGuardian,
     _poolGrimReapersScythe,
+    _poolGrimdancer,
     _poolGrotesqueDemise,
     _poolGrowingRitesOfItlimoc,
     _poolGuardiansOfAkrasa,

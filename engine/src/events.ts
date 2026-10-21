@@ -145,6 +145,15 @@ export type GameEvent =
       readonly front: boolean;
     })
   | (Base & {
+      /** A mutating creature spell merged with this permanent (rule
+       * 702.140c — `Game.mergeMutatingSpell`): "whenever this creature
+       * mutates" (702.140d). Same object, no entry. `player` is its
+       * controller. */
+      readonly type: "permanent-mutated";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+    })
+  | (Base & {
       /** A permanent became monstrous (rule 701.37a — the `monstrosity`
        * effect), its `amount` +1/+1 counters already put on it. Not emitted
        * for one already monstrous, which nothing happens to. */

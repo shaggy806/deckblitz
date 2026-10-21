@@ -176,6 +176,7 @@ import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
+import _poolFullyGrown from "../pool/fully-grown.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
@@ -191,6 +192,7 @@ import _poolGlacialFloodplain from "../pool/glacial-floodplain.js";
 import _poolGlacialStalker from "../pool/glacial-stalker.js";
 import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
+import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
 import _poolGoblinWizardry from "../pool/goblin-wizardry.js";
@@ -315,6 +317,7 @@ import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolNurturingPixie from "../pool/nurturing-pixie.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
 import _poolObuunMulDayaAncestor from "../pool/obuun-mul-daya-ancestor.js";
+import _poolOfOneMind from "../pool/of-one-mind.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
@@ -373,6 +376,7 @@ import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
 import _poolRentIsDue from "../pool/rent-is-due.js";
+import _poolReptilianReflection from "../pool/reptilian-reflection.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
@@ -740,6 +744,7 @@ const shard: CardShard = {
     _poolFolkOfAnHavva,
     _poolFrodoDeterminedHero,
     _poolFugitiveDroid,
+    _poolFullyGrown,
     _poolFurnaceSpirit,
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
@@ -755,6 +760,7 @@ const shard: CardShard = {
     _poolGlacialStalker,
     _poolGlamerGifter,
     _poolGloriousAnthem,
+    _poolGlowstoneRecluse,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
     _poolGoblinWizardry,
@@ -879,6 +885,7 @@ const shard: CardShard = {
     _poolNurturingPixie,
     _poolOboroPalaceInTheClouds,
     _poolObuunMulDayaAncestor,
+    _poolOfOneMind,
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
     _poolOneirophage,
@@ -937,6 +944,7 @@ const shard: CardShard = {
     _poolRefresh,
     _poolRenderSpeechless,
     _poolRentIsDue,
+    _poolReptilianReflection,
     _poolRestrictedOffice,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,

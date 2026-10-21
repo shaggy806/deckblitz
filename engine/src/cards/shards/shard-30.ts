@@ -107,6 +107,7 @@ import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
 import _poolDeathlessPilot from "../pool/deathless-pilot.js";
+import _poolDeathsOasis from "../pool/deaths-oasis.js";
 import _poolDebrisFieldCrusher from "../pool/debris-field-crusher.js";
 import _poolDecisiveDenial from "../pool/decisive-denial.js";
 import _poolDefeat from "../pool/defeat.js";
@@ -169,6 +170,7 @@ import _poolFitOfRage from "../pool/fit-of-rage.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
+import _poolFlourishingFox from "../pool/flourishing-fox.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceVoid from "../pool/force-void.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
@@ -355,6 +357,7 @@ import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPlasmaJockey from "../pool/plasma-jockey.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
+import _poolPollywogSymbiote from "../pool/pollywog-symbiote.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
@@ -393,6 +396,7 @@ import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
 import _poolSerpentWarrior from "../pool/serpent-warrior.js";
+import _poolSerratedScorpion from "../pool/serrated-scorpion.js";
 import _poolSerumVisions from "../pool/serum-visions.js";
 import _poolSetessanSkirmisher from "../pool/setessan-skirmisher.js";
 import _poolSettleTheWreckage from "../pool/settle-the-wreckage.js";
@@ -628,6 +632,7 @@ const shard: CardShard = {
     _poolDawnbringerCleric,
     _poolDayOfJudgment,
     _poolDeathlessPilot,
+    _poolDeathsOasis,
     _poolDebrisFieldCrusher,
     _poolDecisiveDenial,
     _poolDefeat,
@@ -690,6 +695,7 @@ const shard: CardShard = {
     _poolFleetFootedMonk,
     _poolFleetingReflection,
     _poolFloodfarmVerge,
+    _poolFlourishingFox,
     _poolFogwellsGym,
     _poolForceVoid,
     _poolForensicResearcher,
@@ -876,6 +882,7 @@ const shard: CardShard = {
     _poolPlasmaJockey,
     _poolPlazaOfHeroes,
     _poolPollutedDead,
+    _poolPollywogSymbiote,
     _poolPolygoyf,
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
@@ -914,6 +921,7 @@ const shard: CardShard = {
     _poolSelflessSafewright,
     _poolSephirothsIntervention,
     _poolSerpentWarrior,
+    _poolSerratedScorpion,
     _poolSerumVisions,
     _poolSetessanSkirmisher,
     _poolSettleTheWreckage,

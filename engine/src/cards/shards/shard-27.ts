@@ -13,6 +13,7 @@ import _poolAhriman from "../pool/ahriman.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
+import _poolAlertHeedbonder from "../pool/alert-heedbonder.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
@@ -92,6 +93,7 @@ import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
 import _poolCultistsStaff from "../pool/cultists-staff.js";
+import _poolCunningNightbonder from "../pool/cunning-nightbonder.js";
 import _poolDamnablePact from "../pool/damnable-pact.js";
 import _poolDarkHatchling from "../pool/dark-hatchling.js";
 import _poolDarkslickShores from "../pool/darkslick-shores.js";
@@ -142,6 +144,7 @@ import _poolErtaiWizardAdept from "../pool/ertai-wizard-adept.js";
 import _poolEsperCharm from "../pool/esper-charm.js";
 import _poolEsperPanorama from "../pool/esper-panorama.js";
 import _poolEssenceScatter from "../pool/essence-scatter.js";
+import _poolEssenceSymbiote from "../pool/essence-symbiote.js";
 import _poolEvolvedSpinoderm from "../pool/evolved-spinoderm.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
@@ -300,6 +303,7 @@ import _poolParch from "../pool/parch.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
+import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
@@ -332,6 +336,7 @@ import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
 import _poolRedrockSentinel from "../pool/redrock-sentinel.js";
 import _poolRefractionElemental from "../pool/refraction-elemental.js";
+import _poolRegalLeosaur from "../pool/regal-leosaur.js";
 import _poolRegalSliver from "../pool/regal-sliver.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
@@ -431,6 +436,7 @@ import _poolTellingTime from "../pool/telling-time.js";
 import _poolTempleOfEnlightenment from "../pool/temple-of-enlightenment.js";
 import _poolTempleOfPlenty from "../pool/temple-of-plenty.js";
 import _poolTenderWildguide from "../pool/tender-wildguide.js";
+import _poolTentativeConnection from "../pool/tentative-connection.js";
 import _poolTerisiaresDevastation from "../pool/terisiares-devastation.js";
 import _poolTervigon from "../pool/tervigon.js";
 import _poolTestOfEndurance from "../pool/test-of-endurance.js";
@@ -536,6 +542,7 @@ const shard: CardShard = {
     _poolAjanisAnguish,
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
+    _poolAlertHeedbonder,
     _poolAltarsReap,
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,
@@ -615,6 +622,7 @@ const shard: CardShard = {
     _poolCruelAlliance,
     _poolCryptRipper,
     _poolCultistsStaff,
+    _poolCunningNightbonder,
     _poolDamnablePact,
     _poolDarkHatchling,
     _poolDarkslickShores,
@@ -665,6 +673,7 @@ const shard: CardShard = {
     _poolEsperCharm,
     _poolEsperPanorama,
     _poolEssenceScatter,
+    _poolEssenceSymbiote,
     _poolEvolvedSpinoderm,
     _poolExpansionExplosion,
     _poolExpedite,
@@ -823,6 +832,7 @@ const shard: CardShard = {
     _poolPartingGust,
     _poolPathfindingAxejaw,
     _poolPatrollingPeacemaker,
+    _poolPerimeterSergeant,
     _poolPestilence,
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
@@ -855,6 +865,7 @@ const shard: CardShard = {
     _poolRecover,
     _poolRedrockSentinel,
     _poolRefractionElemental,
+    _poolRegalLeosaur,
     _poolRegalSliver,
     _poolRegathanFirecat,
     _poolRejoinder,
@@ -954,6 +965,7 @@ const shard: CardShard = {
     _poolTempleOfEnlightenment,
     _poolTempleOfPlenty,
     _poolTenderWildguide,
+    _poolTentativeConnection,
     _poolTerisiaresDevastation,
     _poolTervigon,
     _poolTestOfEndurance,

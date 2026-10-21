@@ -378,6 +378,7 @@ import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
+import _poolSpontaneousFlight from "../pool/spontaneous-flight.js";
 import _poolSpotcycleScouter from "../pool/spotcycle-scouter.js";
 import _poolSpringSplasher from "../pool/spring-splasher.js";
 import _poolStaggeringInsight from "../pool/staggering-insight.js";
@@ -871,6 +872,7 @@ const shard: CardShard = {
     _poolSorinsVengeance,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
+    _poolSpontaneousFlight,
     _poolSpotcycleScouter,
     _poolSpringSplasher,
     _poolStaggeringInsight,

@@ -66,6 +66,7 @@ import _poolBoaConstrictor from "../pool/boa-constrictor.js";
 import _poolBoardingParty from "../pool/boarding-party.js";
 import _poolBoneFlute from "../pool/bone-flute.js";
 import _poolBookwurm from "../pool/bookwurm.js";
+import _poolBootNipper from "../pool/boot-nipper.js";
 import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
@@ -139,6 +140,7 @@ import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
+import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
@@ -156,6 +158,7 @@ import _poolFeistySpikeling from "../pool/feisty-spikeling.js";
 import _poolFeralShadow from "../pool/feral-shadow.js";
 import _poolFertileFootsteps from "../pool/fertile-footsteps.js";
 import _poolFireLordAzula from "../pool/fire-lord-azula.js";
+import _poolFireProphecy from "../pool/fire-prophecy.js";
 import _poolFireSnake from "../pool/fire-snake.js";
 import _poolFishliverOil from "../pool/fishliver-oil.js";
 import _poolFlatten from "../pool/flatten.js";
@@ -293,6 +296,7 @@ import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
 import _poolNetherHorror from "../pool/nether-horror.js";
+import _poolNethroiApexOfDeath from "../pool/nethroi-apex-of-death.js";
 import _poolNezumiCutthroat from "../pool/nezumi-cutthroat.js";
 import _poolNightsWhisper from "../pool/nights-whisper.js";
 import _poolNightsquadCommando from "../pool/nightsquad-commando.js";
@@ -606,6 +610,7 @@ const shard: CardShard = {
     _poolBoardingParty,
     _poolBoneFlute,
     _poolBookwurm,
+    _poolBootNipper,
     _poolBorosSwiftblade,
     _poolBrackishTrudge,
     _poolBrazenDwarf,
@@ -679,6 +684,7 @@ const shard: CardShard = {
     _poolErrantStreetArtist,
     _poolEshkiDragonclaw,
     _poolEtheriumSpinner,
+    _poolEverquillPhoenix,
     _poolEvolutionCharm,
     _poolExclude,
     _poolExcoriate,
@@ -696,6 +702,7 @@ const shard: CardShard = {
     _poolFeralShadow,
     _poolFertileFootsteps,
     _poolFireLordAzula,
+    _poolFireProphecy,
     _poolFireSnake,
     _poolFishliverOil,
     _poolFlatten,
@@ -833,6 +840,7 @@ const shard: CardShard = {
     _poolNayaCharm,
     _poolNemesisMask,
     _poolNetherHorror,
+    _poolNethroiApexOfDeath,
     _poolNezumiCutthroat,
     _poolNightsWhisper,
     _poolNightsquadCommando,

@@ -108,8 +108,8 @@ section keeps only what to do next.
   Horizons 2 and Commander 2021, on madness; batch 111 Strixhaven, on learn as the rummage
   alone; batch 112 Kaldheim and its Commander set, on snow mana; batch 113 the rest of Commander
   Legends, no engine change; batch 114 Zendikar Rising and its Commander set, on party; batch
-  115 the rest of Jumpstart; batch 116 the rest of Core Set 2021, on hexproof from a quality);
-  **next, Ikoria: Lair of Behemoths** (IKO — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
+  115 the rest of Jumpstart; batch 116 the rest of Core Set 2021, on hexproof from a quality; batch 117 Ikoria,
+  on mutate); **next, Commander 2020** (C20 — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
   sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
   6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
   Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative
@@ -175,6 +175,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A merged permanent's token status is its own object's** (730.2d): a card mutated on top of a token still counts as a token.
 - **A granted leaves-the-battlefield trigger doesn't look back for its grant** (603.10a): Relic Vial when its only Cleric dies.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A granted ability's dynamic filter is fixed when it's granted**: an `{ amount }` in its target filter reads the granter, not the creature that has it (Firja's Retribution).

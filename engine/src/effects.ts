@@ -421,6 +421,11 @@ export type EffectAmount =
    * `characteristics.ts`'s `partySizeOf`; a cost reduction and a CDA count
    * have the same form. */
   | { readonly partySize: "you" }
+  /** "The number of times this creature has mutated" (rule 702.140 —
+   * Archipelagore, Porcuparrot): the mutating spells merged with the source
+   * since it became this object (`GameObject.merged.timesMutated`), 0 for
+   * one that never mutated; as it last existed if it has left. */
+  | { readonly timesMutated: "source" }
   /** How many creatures died under the effect controller's control this turn
    * — Liliana's Standard Bearer. Reads `PlayerState.creaturesDiedThisTurn`.
    * `anyController`: every creature that died this turn, whoever controlled
@@ -4474,6 +4479,14 @@ export type EffectSpec =
       readonly via?: "combat-damage";
     }
   | {
+      /** Engine-internal: the resolving mutating creature spell merges with
+       * its target (rule 702.140c), on top of it or underneath — the two
+       * modes `Game` offers its controller as it resolves. Not for a card's
+       * own text. */
+      readonly kind: "mutate-merge";
+      readonly onTop: boolean;
+    }
+  | {
       /** The effect's controller ventures into the dungeon (rule 701.49):
        * enter a dungeon if they're in none (choosing which, 701.49a), move to
        * the next room (choosing at a fork, 701.49b), or complete it from the
@@ -5645,6 +5658,8 @@ export interface EffectApi {
   basicLandTypes(): number;
   /** See the `{ partySize }` {@link EffectAmount}. */
   partySize(): number;
+  /** See the `{ timesMutated }` {@link EffectAmount}. */
+  timesMutated(): number;
   /** See the `{ opponentsControllingFewer }` {@link EffectAmount}. */
   opponentsControllingFewer(filter: CardFilter): number;
   /** See the `{ creaturesDiedThisTurn }` {@link EffectAmount}. */
@@ -6585,6 +6600,9 @@ export interface EffectApi {
   becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
   /** See the `"take-initiative"` {@link EffectSpec}. */
   takeInitiative(who: PlayerScope | undefined, via?: "combat-damage"): void;
+  /** See the `"mutate-merge"` {@link EffectSpec}: the resolving spell merges
+   * with target 0. */
+  mergeMutatingSpell(onTop: boolean): void;
   /** See the `"venture"` {@link EffectSpec}: the effect's controller
    * ventures. */
   venture(undercity: boolean): void;
@@ -7616,6 +7634,7 @@ function signedAmountValue(
   if ("greatestCommanderManaValue" in amount) return ctx.greatestCommanderManaValue();
   if ("basicLandTypes" in amount) return ctx.basicLandTypes();
   if ("partySize" in amount) return ctx.partySize();
+  if ("timesMutated" in amount) return ctx.timesMutated();
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
     const ref = resolveAmountRef(amount.powerOf, ctx);
@@ -10110,6 +10129,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "take-initiative":
       ctx.takeInitiative(spec.who, spec.via);
+      return;
+    case "mutate-merge":
+      ctx.mergeMutatingSpell(spec.onTop);
       return;
     case "venture":
       ctx.venture(spec.into === "undercity");

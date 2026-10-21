@@ -144,6 +144,7 @@ import _poolExpandedAnatomy from "../pool/expanded-anatomy.js";
 import _poolExpeditionDiviner from "../pool/expedition-diviner.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
+import _poolExuberantWolfbear from "../pool/exuberant-wolfbear.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFacelessHaven from "../pool/faceless-haven.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
@@ -325,6 +326,7 @@ import _poolPortraitOfMichiko from "../pool/portrait-of-michiko.js";
 import _poolPrairieStream from "../pool/prairie-stream.js";
 import _poolPrescientChimera from "../pool/prescient-chimera.js";
 import _poolPreysVengeance from "../pool/preys-vengeance.js";
+import _poolPricklyMarmoset from "../pool/prickly-marmoset.js";
 import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
@@ -678,6 +680,7 @@ const shard: CardShard = {
     _poolExpeditionDiviner,
     _poolExploreTheUnderdark,
     _poolExtractFromDarkness,
+    _poolExuberantWolfbear,
     _poolEyeOfRamos,
     _poolFacelessHaven,
     _poolFadeIntoAntiquity,
@@ -859,6 +862,7 @@ const shard: CardShard = {
     _poolPrairieStream,
     _poolPrescientChimera,
     _poolPreysVengeance,
+    _poolPricklyMarmoset,
     _poolPriestOfAncientLore,
     _poolProsperousPartnership,
     _poolProudPackRhino,

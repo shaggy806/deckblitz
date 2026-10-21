@@ -2484,7 +2484,7 @@ export interface CardDefinition {
     readonly cost: string;
     readonly effect: EffectSpec;
     readonly targets?: readonly TargetSpec[];
-    readonly keyword?: "cleave";
+    readonly keyword?: "cleave" | "mutate";
   } | null;
   /**
    * A conditional free-cast permission printed on the spell itself (the CMM
@@ -3230,6 +3230,14 @@ interface CardDraft {
     readonly targets: readonly TargetSpec[];
     readonly effect: EffectSpec;
   };
+  /** Mutate [cost] (rule 702.140a): "you may pay [cost] rather than pay
+   * this spell's mana cost. If you do, it becomes a mutating creature spell
+   * and targets a non-Human creature with the same owner as this spell" —
+   * held as `overload` with `keyword: "mutate"` and {@link MUTATE_TARGET}.
+   * Resolving with a legal target, it merges with it (702.140c, rule 730 —
+   * `Game.mergeMutatingSpell`); with an illegal one it's an ordinary
+   * creature spell (702.140b). */
+  mutate?: string;
   freeCastIf?: { readonly condition: StaticCondition };
   alternativeCost?: {
     readonly mana: string;
@@ -3331,6 +3339,15 @@ function readAheadChoices(draft: CardDraft): readonly string[] | null {
   return Array.from({ length: final }, (_, i) => String(i + 1));
 }
 
+/** A mutating creature spell's target (rule 702.140a): "a non-Human creature
+ * with the same owner as this spell" — `ownedBy` reads the spell's
+ * controller, who is its owner when cast. */
+export const MUTATE_TARGET: TargetSpec = {
+  kind: "permanent",
+  whose: "any",
+  filter: { type: "creature", notSubtypes: ["Human"], ownedBy: "you" },
+};
+
 export function defineCard(draft: CardDraft): CardDefinition {
   const loyalty = draft.loyalty ?? null;
   // A planeswalker enters with `loyalty` loyalty counters (rule 306.5b) —
@@ -3388,7 +3405,13 @@ export function defineCard(draft: CardDraft): CardDefinition {
     castModal: draft.castModal ?? null,
     additionalCost: draft.additionalCost ?? null,
     kicker: draft.kicker ?? null,
-    overload: draft.overload ?? (draft.cleave !== undefined ? { ...draft.cleave, keyword: "cleave" } : null),
+    overload:
+      draft.overload ??
+      (draft.cleave !== undefined
+        ? { ...draft.cleave, keyword: "cleave" }
+        : draft.mutate !== undefined
+          ? { cost: draft.mutate, keyword: "mutate", targets: [MUTATE_TARGET], effect: { kind: "sequence", effects: [] } }
+          : null),
     freeCastIf: draft.freeCastIf ?? null,
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,

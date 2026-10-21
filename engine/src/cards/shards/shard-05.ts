@@ -228,6 +228,7 @@ import _poolHireACrew from "../pool/hire-a-crew.js";
 import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
+import _poolHumbleNaturalist from "../pool/humble-naturalist.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
@@ -240,6 +241,7 @@ import _poolInfernalTribute from "../pool/infernal-tribute.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
+import _poolInspiredUltimatum from "../pool/inspired-ultimatum.js";
 import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
 import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
 import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
@@ -763,6 +765,7 @@ const shard: CardShard = {
     _poolHornedLochWhale,
     _poolHorseshoeCrab,
     _poolHowlingGolem,
+    _poolHumbleNaturalist,
     _poolHumblingElder,
     _poolHuntersBow,
     _poolIceCreamKitty,
@@ -775,6 +778,7 @@ const shard: CardShard = {
     _poolInquisitivePuppet,
     _poolInsectoidExterminator,
     _poolInspiredCharge,
+    _poolInspiredUltimatum,
     _poolIntrepidStablemaster,
     _poolIntrepidTrufflesnout,
     _poolInvasionOfMoag,

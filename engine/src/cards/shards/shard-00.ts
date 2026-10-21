@@ -87,6 +87,7 @@ import _poolCloakOfFeathers from "../pool/cloak-of-feathers.js";
 import _poolCloisteredYouth from "../pool/cloistered-youth.js";
 import _poolCloudExSoldier from "../pool/cloud-ex-soldier.js";
 import _poolCloudblazer from "../pool/cloudblazer.js";
+import _poolCloudpiercer from "../pool/cloudpiercer.js";
 import _poolCoastalBulwark from "../pool/coastal-bulwark.js";
 import _poolCollectiveNightmare from "../pool/collective-nightmare.js";
 import _poolCollisionCourse from "../pool/collision-course.js";
@@ -629,6 +630,7 @@ const shard: CardShard = {
     _poolCloisteredYouth,
     _poolCloudExSoldier,
     _poolCloudblazer,
+    _poolCloudpiercer,
     _poolCoastalBulwark,
     _poolCollectiveNightmare,
     _poolCollisionCourse,

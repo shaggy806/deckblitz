@@ -209,6 +209,7 @@ import _poolHomesteadCourage from "../pool/homestead-courage.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
 import _poolHornedTurtle from "../pool/horned-turtle.js";
 import _poolHornetNest from "../pool/hornet-nest.js";
+import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
 import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
@@ -380,6 +381,7 @@ import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
+import _poolSnapdaxApexOfTheHunt from "../pool/snapdax-apex-of-the-hunt.js";
 import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
@@ -391,10 +393,12 @@ import _poolSoulsAttendant from "../pool/souls-attendant.js";
 import _poolSparkJolt from "../pool/spark-jolt.js";
 import _poolSpecterOfTheFens from "../pool/specter-of-the-fens.js";
 import _poolSpectralFlight from "../pool/spectral-flight.js";
+import _poolSpelleaterWolverine from "../pool/spelleater-wolverine.js";
 import _poolSpiderMobile from "../pool/spider-mobile.js";
 import _poolSpiderRexDaringDino from "../pool/spider-rex-daring-dino.js";
 import _poolSpinedWurm from "../pool/spined-wurm.js";
 import _poolSpireGarden from "../pool/spire-garden.js";
+import _poolSplendorMare from "../pool/splendor-mare.js";
 import _poolStarlightInvoker from "../pool/starlight-invoker.js";
 import _poolSteadfastPaladin from "../pool/steadfast-paladin.js";
 import _poolSteelOverseer from "../pool/steel-overseer.js";
@@ -723,6 +727,7 @@ const shard: CardShard = {
     _poolHondenOfNightsReach,
     _poolHornedTurtle,
     _poolHornetNest,
+    _poolHuntmasterLiger,
     _poolHushwoodVerge,
     _poolHydroidKrasis,
     _poolIllTemperedLoner,
@@ -894,6 +899,7 @@ const shard: CardShard = {
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,
+    _poolSnapdaxApexOfTheHunt,
     _poolSnarlingWolf,
     _poolSoaringSandwing,
     _poolSongbirdSonicScreamer,
@@ -905,10 +911,12 @@ const shard: CardShard = {
     _poolSparkJolt,
     _poolSpecterOfTheFens,
     _poolSpectralFlight,
+    _poolSpelleaterWolverine,
     _poolSpiderMobile,
     _poolSpiderRexDaringDino,
     _poolSpinedWurm,
     _poolSpireGarden,
+    _poolSplendorMare,
     _poolStarlightInvoker,
     _poolSteadfastPaladin,
     _poolSteelOverseer,

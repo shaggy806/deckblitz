@@ -81,6 +81,8 @@ import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js"
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
 import _poolChangeTheEquation from "../pool/change-the-equation.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
+import _poolChevillBaneOfMonsters from "../pool/chevill-bane-of-monsters.js";
+import _poolChitteringHarvester from "../pool/chittering-harvester.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
@@ -121,6 +123,7 @@ import _poolDispersalTechnician from "../pool/dispersal-technician.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
+import _poolDreamtailHeron from "../pool/dreamtail-heron.js";
 import _poolDregRecycler from "../pool/dreg-recycler.js";
 import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
@@ -423,6 +426,7 @@ import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStormclawRager from "../pool/stormclaw-rager.js";
+import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
@@ -484,6 +488,7 @@ import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
 import _poolVituGhaziInspector from "../pool/vitu-ghazi-inspector.js";
 import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
+import _poolVoidBeckoner from "../pool/void-beckoner.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
@@ -605,6 +610,8 @@ const shard: CardShard = {
     _poolChancellorOfTales,
     _poolChangeTheEquation,
     _poolChanneledDragonfire,
+    _poolChevillBaneOfMonsters,
+    _poolChitteringHarvester,
     _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
@@ -645,6 +652,7 @@ const shard: CardShard = {
     _poolDoggedDetective,
     _poolDragoonsWyvern,
     _poolDreamPillager,
+    _poolDreamtailHeron,
     _poolDregRecycler,
     _poolDriftOfPhantasms,
     _poolDrossRipper,
@@ -947,6 +955,7 @@ const shard: CardShard = {
     _poolStickyFingers,
     _poolStonybrookBanneret,
     _poolStormclawRager,
+    _poolStormwildCapridor,
     _poolStrixhavenStadium,
     _poolStruggleForSkemfar,
     _poolSunWarriors,
@@ -1008,6 +1017,7 @@ const shard: CardShard = {
     _poolVisceraDragger,
     _poolVituGhaziInspector,
     _poolVodalianSoldiers,
+    _poolVoidBeckoner,
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,
     _poolVolcanicUpheaval,

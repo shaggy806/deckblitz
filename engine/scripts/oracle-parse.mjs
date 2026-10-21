@@ -736,6 +736,13 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
   if (/^Whenever ~ attacks or blocks$/.test(c)) return [...self("attacks"), ...self("blocks")];
+  // Mutate (rule 702.140d).
+  if (/^Whenever ~ mutates$/.test(c)) return self("mutates");
+  if (/^Whenever a creature you control mutates$/.test(c)) return [{ on: "mutates", who: "you-control" }];
+  // Cycling (rule 702.29): "whenever you cycle a card / another card".
+  if ((m = /^Whenever you cycle (a|another) card$/.exec(c))) {
+    return [{ on: "cycles", who: "you", ...(m[1] === "another" ? { otherOnly: true } : {}) }];
+  }
   // A saddled designation (rule 702.171b) becoming true: "for the first time
   // each turn" only when it wasn't saddled already.
   if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
@@ -1795,6 +1802,8 @@ export function parseFace(face, ctx = {}) {
     // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8
     // life" isn't read).
     if ((m = /^Madness ((?:\{[^}]+\})+)$/.exec(line))) { out.madness = { cost: m[1] }; continue; }
+    // Mutate [cost] (rule 702.140a): the card's `mutate`.
+    if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Party (rule 700.8) and domain (207.2c) cost reductions: {1} less for
     // each, unconditionally — the always-true gate Leyline Binding uses.
     const perEach = {

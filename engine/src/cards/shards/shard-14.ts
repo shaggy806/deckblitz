@@ -128,6 +128,7 @@ import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
 import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
+import _poolDrannithHealer from "../pool/drannith-healer.js";
 import _poolDrannithRuins from "../pool/drannith-ruins.js";
 import _poolDreadwurm from "../pool/dreadwurm.js";
 import _poolDrossCrocodile from "../pool/dross-crocodile.js";
@@ -226,6 +227,7 @@ import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
 import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
 import _poolHeartlessHidetsugu from "../pool/heartless-hidetsugu.js";
+import _poolHeightenedReflexes from "../pool/heightened-reflexes.js";
 import _poolHellsparkElemental from "../pool/hellspark-elemental.js";
 import _poolHellspurBrute from "../pool/hellspur-brute.js";
 import _poolHemosymbicMite from "../pool/hemosymbic-mite.js";
@@ -239,6 +241,7 @@ import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
+import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
@@ -452,11 +455,13 @@ import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
 import _poolTroveWarden from "../pool/trove-warden.js";
+import _poolTrumpetingGnarr from "../pool/trumpeting-gnarr.js";
 import _poolTrustyRetriever from "../pool/trusty-retriever.js";
 import _poolTunnelSurveyor from "../pool/tunnel-surveyor.js";
 import _poolTwinflame from "../pool/twinflame.js";
 import _poolUmaraWizard from "../pool/umara-wizard.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
+import _poolUnbreakableBond from "../pool/unbreakable-bond.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
@@ -641,6 +646,7 @@ const shard: CardShard = {
     _poolDistractTheGuards,
     _poolDouseInGloom,
     _poolDragonBellMonk,
+    _poolDrannithHealer,
     _poolDrannithRuins,
     _poolDreadwurm,
     _poolDrossCrocodile,
@@ -739,6 +745,7 @@ const shard: CardShard = {
     _poolHazezonShaperOfSand,
     _poolHeartOfRamos,
     _poolHeartlessHidetsugu,
+    _poolHeightenedReflexes,
     _poolHellsparkElemental,
     _poolHellspurBrute,
     _poolHemosymbicMite,
@@ -752,6 +759,7 @@ const shard: CardShard = {
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolIdolOfTheDeepKing,
+    _poolIllunaApexOfWishes,
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
@@ -965,11 +973,13 @@ const shard: CardShard = {
     _poolTributaryVaulter,
     _poolTributeMage,
     _poolTroveWarden,
+    _poolTrumpetingGnarr,
     _poolTrustyRetriever,
     _poolTunnelSurveyor,
     _poolTwinflame,
     _poolUmaraWizard,
     _poolUmezawasCharm,
+    _poolUnbreakableBond,
     _poolUndermine,
     _poolUnexpectedAssistance,
     _poolUnionOfTheThirdPath,

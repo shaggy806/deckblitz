@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Ikoria: Lair of Behemoths, whole** (batch 117): its 136 cards, 101 authored, 35 blocked,
+  with **mutate** built (rule 702.140 — merged permanents, rule 730: the same object, the top
+  card's characteristics and every card's abilities, coming apart as it leaves) and "whenever
+  you cycle a card" / "a card with a cycling ability"; plus seven mutate cards triaged earlier
+  (Nethroi, Apex of Death, Gemrazer, Sawtusk Demolisher and four more) (2026-10-20).
 - **Core Set 2021, whole** (batch 116): its last 88 cards, 70 authored by three `card-author`
   agents and the lead, 18 blocked, with **hexproof from a quality** built (rule 702.11d — a
   colour, a card type or a filter; Sporeweb Weaver, Garruk's Harbinger) and three earlier-triaged

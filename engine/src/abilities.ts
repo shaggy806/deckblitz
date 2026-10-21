@@ -1133,6 +1133,17 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
     }
   | {
+      /** A mutating creature spell merged with a permanent (rule 702.140d).
+       * `who: "self"` is "whenever this creature mutates" — every
+       * component's such ability fires, the merged permanent having them all
+       * (702.140e); `"you-control"` is "whenever a creature you control
+       * mutates" (Essence Symbiote), the mutated permanent the trigger
+       * object. */
+      readonly on: "mutates";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+    }
+  | {
       /** A permanent became monstrous (rule 701.37 — the `monstrosity`
        * effect): "when this creature becomes monstrous" is `who: "self"`.
        * Never fires for a permanent that was monstrous already, or that left
@@ -1708,6 +1719,17 @@ export type TriggerSpec =
        * card, and goes on the stack above the cycling ability — so it
        * resolves before the draw (the rulings). */
       readonly on: "this-cycled";
+    }
+  | {
+      /** "Whenever you cycle a card" (rule 702.29 — Snare Tactician): a
+       * player cycled a card, `who` relative to this permanent's controller
+       * (`"you"`, `"opponent"`, `"any"`); `otherOnly` is "another card"
+       * (Drannith Healer). The cycled card is the trigger object. The
+       * trigger goes on the stack above the cycling ability, so it resolves
+       * before the draw. */
+      readonly on: "cycles";
+      readonly who: "you" | "opponent" | "any";
+      readonly otherOnly?: boolean;
     }
   | {
       /** "Whenever you commit a crime" / "whenever an opponent commits a

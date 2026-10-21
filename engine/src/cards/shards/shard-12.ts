@@ -63,6 +63,7 @@ import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
 import _poolBristlepackSentry from "../pool/bristlepack-sentry.js";
 import _poolBruteSuit from "../pool/brute-suit.js";
+import _poolBushmeatPoacher from "../pool/bushmeat-poacher.js";
 import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
@@ -226,6 +227,7 @@ import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
+import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
@@ -306,6 +308,7 @@ import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
 import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
+import _poolPhaseDolphin from "../pool/phase-dolphin.js";
 import _poolPhyrexianArchivist from "../pool/phyrexian-archivist.js";
 import _poolPhyrexianDigester from "../pool/phyrexian-digester.js";
 import _poolPhyrexianEspionage from "../pool/phyrexian-espionage.js";
@@ -321,6 +324,7 @@ import _poolPortableHole from "../pool/portable-hole.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
+import _poolPrimalEmpathy from "../pool/primal-empathy.js";
 import _poolPrismariPianist from "../pool/prismari-pianist.js";
 import _poolProphetOfThePeak from "../pool/prophet-of-the-peak.js";
 import _poolProsperity from "../pool/prosperity.js";
@@ -574,6 +578,7 @@ const shard: CardShard = {
     _poolBristlebaneBattler,
     _poolBristlepackSentry,
     _poolBruteSuit,
+    _poolBushmeatPoacher,
     _poolCalibratedBlast,
     _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
@@ -737,6 +742,7 @@ const shard: CardShard = {
     _poolKarlachFuryOfAvernus,
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,
+    _poolKeensightMentor,
     _poolKeldonNecropolis,
     _poolKillersMask,
     _poolKotisTheFangkeeper,
@@ -817,6 +823,7 @@ const shard: CardShard = {
     _poolPendrellDrake,
     _poolPestControl,
     _poolPetrifiedPlating,
+    _poolPhaseDolphin,
     _poolPhyrexianArchivist,
     _poolPhyrexianDigester,
     _poolPhyrexianEspionage,
@@ -832,6 +839,7 @@ const shard: CardShard = {
     _poolPortalToPhyrexia,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,
+    _poolPrimalEmpathy,
     _poolPrismariPianist,
     _poolProphetOfThePeak,
     _poolProsperity,

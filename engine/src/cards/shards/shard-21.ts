@@ -268,6 +268,7 @@ import _poolMessengerDrake from "../pool/messenger-drake.js";
 import _poolMetathranZombie from "../pool/metathran-zombie.js";
 import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
+import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
@@ -359,6 +360,7 @@ import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
 import _poolScionOfOpulence from "../pool/scion-of-opulence.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
+import _poolSeaDasherOctopus from "../pool/sea-dasher-octopus.js";
 import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicShudder from "../pool/seismic-shudder.js";
 import _poolSelesnyaLocket from "../pool/selesnya-locket.js";
@@ -780,6 +782,7 @@ const shard: CardShard = {
     _poolMetathranZombie,
     _poolMethodsOfTheMighty,
     _poolMicromancer,
+    _poolMigratoryGreathorn,
     _poolMinionsReturn,
     _poolMirrorEntity,
     _poolMisguidedRage,
@@ -871,6 +874,7 @@ const shard: CardShard = {
     _poolScionOfOpulence,
     _poolScrubland,
     _poolSculptingSteel,
+    _poolSeaDasherOctopus,
     _poolSeethingSong,
     _poolSeismicShudder,
     _poolSelesnyaLocket,

@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-443 already implemented / 57 missing
+444 already implemented / 56 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -380,7 +380,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  374  Extus, Oriq Overlord                            7704 decks  {1}{W}{B}{B}     Legendary Creature — Human Warlock // Sorcery
 [x]  375  Tifa, Martial Artist                            7684 decks  {1}{R}{G}{W}     Legendary Creature — Human Monk
 [x]  376  Kardur, Doomscourge                             7660 decks  {2}{B}{R}        Legendary Creature — Demon Berserker
-[ ]  377  Nethroi, Apex of Death                          7620 decks  {2}{W}{B}{G}     Legendary Creature — Cat Nightmare Beast
+[x]  377  Nethroi, Apex of Death                          7620 decks  {2}{W}{B}{G}     Legendary Creature — Cat Nightmare Beast
 [ ]  378  Lynde, Cheerful Tormentor                       7594 decks  {1}{U}{B}{R}     Legendary Creature — Human Warlock
 [x]  379  Commodore Guff                                  7586 decks  {1}{U}{R}{W}     Legendary Planeswalker — Guff
 [x]  380  Bruce Banner                                    7581 decks  {U}              Legendary Creature — Human Scientist Hero // Legendary Creature — Gamma Berserker Hero

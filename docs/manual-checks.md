@@ -5104,3 +5104,25 @@ owner may cast it for its madness cost as the trigger resolves
   {B}?", the button "Cast Kitchen Imp (madness {B})"; the Imp costs one Swamp and comes in with
   haste. Declined, Terminal Agony goes to the graveyard. The Mongrel is 6/5 after both. Check at
   ~768px tall.
+
+## Mutate (2026-10-20)
+
+### Dreamtail Heron and Glowstone Recluse (mutate)
+
+*New player decision* — mutate (rule 702.140): cast for its mutate cost onto a non-Human
+creature you own, the spell's controller chooses on top or underneath, and the result is one
+merged permanent with the top card's characteristics and every card's abilities
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears and eight lands (four Forests,
+  four Islands); in hand Glowstone Recluse and Dreamtail Heron. The opponent has Hill Giant.
+- **Do:** Cast Glowstone Recluse for its mutate cost targeting Grizzly Bears and put it on top.
+  Then cast Dreamtail Heron for its mutate cost targeting the same creature and put it
+  underneath. Then destroy it (or attack into the Giant).
+- **Check:** The cast button reads "(mutate {3}{G})" and asks for a target (the Giant isn't
+  offered). As it resolves, the choice reads "Put it on top of the creature" / "Put it under the
+  creature". On top, the permanent shows Glowstone Recluse's card, 4/5 with two +1/+1 counters and
+  reach, and stays untapped and able to attack (it isn't new). After the Heron goes underneath,
+  it is still Glowstone Recluse with flying too, you draw a card, and two more counters arrive
+  (the Recluse's trigger fires again). Its text shows all three cards' abilities. When it dies,
+  Grizzly Bears, Glowstone Recluse and Dreamtail Heron all go to your graveyard. Check at ~768px
+  tall.

@@ -454,6 +454,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "day-night": none,
   "become-monarch": none,
   "take-initiative": none,
+  "mutate-merge": none,
   venture: none,
   // Its controller's own speed: no slot.
   "increase-speed": none,

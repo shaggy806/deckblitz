@@ -156,7 +156,9 @@ import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
+import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
+import _poolFlycatcherGiraffid from "../pool/flycatcher-giraffid.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
@@ -476,6 +478,7 @@ import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
 import _poolVolcanicHammer from "../pool/volcanic-hammer.js";
 import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
+import _poolVulpikeet from "../pool/vulpikeet.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
@@ -678,7 +681,9 @@ const shard: CardShard = {
     _poolFerociousWerefox,
     _poolFireNationCadets,
     _poolFireNationSoldier,
+    _poolFlameSpill,
     _poolFlashback,
+    _poolFlycatcherGiraffid,
     _poolFlyingOctobot,
     _poolFoggySwampSpiritKeeper,
     _poolForgottenCreation,
@@ -998,6 +1003,7 @@ const shard: CardShard = {
     _poolVoiceOfDuty,
     _poolVolcanicHammer,
     _poolVoltstormAngel,
+    _poolVulpikeet,
     _poolWallOfBlood,
     _poolWallOfOmens,
     _poolWarMachineLegacyOfIron,

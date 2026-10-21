@@ -73,6 +73,7 @@ import _poolChokedEstuary from "../pool/choked-estuary.js";
 import _poolChompingChangeling from "../pool/chomping-changeling.js";
 import _poolCircleOfTheMoonDruid from "../pool/circle-of-the-moon-druid.js";
 import _poolCitizensArrest from "../pool/citizens-arrest.js";
+import _poolClashOfTitans from "../pool/clash-of-titans.js";
 import _poolClericOfChillDepths from "../pool/cleric-of-chill-depths.js";
 import _poolCoalGolem from "../pool/coal-golem.js";
 import _poolColdsteelHeart from "../pool/coldsteel-heart.js";
@@ -183,6 +184,7 @@ import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
+import _poolHelicaGlider from "../pool/helica-glider.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHighlandGame from "../pool/highland-game.js";
@@ -246,6 +248,7 @@ import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
+import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
@@ -428,6 +431,7 @@ import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
 import _poolSurlyBadgersaur from "../pool/surly-badgersaur.js";
 import _poolSurveillanceMonitor from "../pool/surveillance-monitor.js";
+import _poolSurvivorsBond from "../pool/survivors-bond.js";
 import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolSyphonEssence from "../pool/syphon-essence.js";
@@ -521,6 +525,7 @@ import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
 import _poolYipYip from "../pool/yip-yip.js";
 import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
+import _poolZagothMamba from "../pool/zagoth-mamba.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
 import _tokensAxeToken from "../tokens/axe-token.js";
@@ -606,6 +611,7 @@ const shard: CardShard = {
     _poolChompingChangeling,
     _poolCircleOfTheMoonDruid,
     _poolCitizensArrest,
+    _poolClashOfTitans,
     _poolClericOfChillDepths,
     _poolCoalGolem,
     _poolColdsteelHeart,
@@ -716,6 +722,7 @@ const shard: CardShard = {
     _poolHeavyBallista,
     _poolHeirloomAuntie,
     _poolHeirloomBlade,
+    _poolHelicaGlider,
     _poolHellSwarm,
     _poolHeronbladeElite,
     _poolHighlandGame,
@@ -779,6 +786,7 @@ const shard: CardShard = {
     _poolLotusPathDjinn,
     _poolMaestrosGift,
     _poolMaggotCarrier,
+    _poolMajesticAuricorn,
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,
     _poolMaskOfAvacyn,
@@ -961,6 +969,7 @@ const shard: CardShard = {
     _poolSummonFatChocobo,
     _poolSurlyBadgersaur,
     _poolSurveillanceMonitor,
+    _poolSurvivorsBond,
     _poolSwashbuckling,
     _poolSwordOfWarAndPeace,
     _poolSyphonEssence,
@@ -1054,6 +1063,7 @@ const shard: CardShard = {
     _poolYipYip,
     _poolYotiaDeclaresWar,
     _poolYurikoTheTigersShadow,
+    _poolZagothMamba,
     _poolZiatoraTheIncinerator,
   ],
   tokens: [

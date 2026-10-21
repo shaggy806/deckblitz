@@ -31,6 +31,7 @@ import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
+import _poolAvianOddity from "../pool/avian-oddity.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
@@ -378,6 +379,7 @@ import _poolRoyalAssassin from "../pool/royal-assassin.js";
 import _poolRoyalWarden from "../pool/royal-warden.js";
 import _poolRuinousIntrusion from "../pool/ruinous-intrusion.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
+import _poolRumblingRockslide from "../pool/rumbling-rockslide.js";
 import _poolSalvationColossus from "../pool/salvation-colossus.js";
 import _poolSamiteHealer from "../pool/samite-healer.js";
 import _poolSandScout from "../pool/sand-scout.js";
@@ -561,6 +563,7 @@ const shard: CardShard = {
     _poolAssimilateEssence,
     _poolAstralSteel,
     _poolAvengersUnderSiege,
+    _poolAvianOddity,
     _poolBaSingSe,
     _poolBandage,
     _poolBasrisAegis,
@@ -908,6 +911,7 @@ const shard: CardShard = {
     _poolRoyalWarden,
     _poolRuinousIntrusion,
     _poolRumblingBaloth,
+    _poolRumblingRockslide,
     _poolSalvationColossus,
     _poolSamiteHealer,
     _poolSandScout,

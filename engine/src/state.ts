@@ -31,6 +31,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameEvent, Vote } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
+import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 export type PrivateZone = "library" | "hand" | "graveyard";
@@ -588,6 +589,24 @@ export interface GameObject {
    * abilities are read through {@link rulesTextName}. Cleared on any zone
    * change, with `copyOf`. */
   textFrom?: string;
+  /**
+   * A merged permanent (rule 730 — mutate, 702.140): the cards and tokens
+   * that represent it, topmost first. One entry is `{ self: true }`, this
+   * object's own card or token; the others are what merged with it, each
+   * by the name it was (`printedCardName`), its owner and whether it was a
+   * token. Its characteristics are the topmost component's (730.2a — a
+   * copiable effect, so {@link printedCardName} returns it) and its
+   * abilities every component's (702.140e — {@link rulesTextName} names a
+   * combined definition the registry builds, see {@link mergedTextName}).
+   * It stays the same object (730.2c). As it leaves the battlefield the
+   * other components go to the same zone as cards of their own, a token
+   * ceasing to exist (730.3). `timesMutated` is "the number of times this
+   * creature has mutated". Cleared on any zone change.
+   */
+  merged?: {
+    readonly components: readonly MergedComponent[];
+    readonly timesMutated: number;
+  };
   /**
    * The copy effects with a duration that apply to it, oldest first —
    * entering as a copy until end of turn (Cursed Mirror), a `become-copy`
@@ -1390,6 +1409,8 @@ export type GrantedAbilityRef =
  * rest of the turn.
  */
 export interface LastKnownInfo {
+  /** How many times it had mutated (`GameObject.merged.timesMutated`). */
+  readonly timesMutated?: number;
   /** The permanent's `zoneChangeCount` while it was on the battlefield — which
    * of its stints there this describes. A reference to the permanent names
    * the stint it means the same way (see {@link LastKnownRefs}), so a card
@@ -4204,7 +4225,14 @@ export const printedCardName = (object: GameObject): string =>
     ? FACE_DOWN_CARDS[object.faceDown.kind]
     : object.doors !== undefined && !object.doors.left && !object.doors.right
       ? LOCKED_ROOM
-      : (object.copyOf ?? faceName(object));
+      : (mergedTopName(object) ?? object.copyOf ?? faceName(object));
+
+/** A merged permanent's topmost component's name, when that isn't its own
+ * card (rule 730.2a). */
+const mergedTopName = (object: GameObject): string | undefined => {
+  const top = object.merged?.components[0];
+  return top === undefined || "self" in top ? undefined : top.cardName;
+};
 
 /** The registry name of a Room with both doors locked (rule 709.5): an
  * enchantment — Room with no name, mana cost or rules text — an internal
@@ -4239,6 +4267,20 @@ export const FACE_DOWN_CARDS: Readonly<Record<FaceDownKind, string>> = {
   disguise: "Face-Down Creature (Ward {2})",
 };
 
+/** One card or token of a merged permanent (`GameObject.merged`). */
+export type MergedComponent =
+  | { readonly self: true }
+  | { readonly cardName: string; readonly owner: PlayerId; readonly token: boolean };
+
+
+/** A merged permanent's combined definition's key: the components'
+ * names, topmost first. `undefined` for an object that isn't merged. */
+export const mergedTextName = (object: GameObject): string | undefined => {
+  if (object.merged === undefined || object.merged.components.length < 2) return undefined;
+  const own = object.copyOf ?? faceName(object);
+  return MERGED_PREFIX + object.merged.components.map((c) => ("self" in c ? own : c.cardName)).join(MERGED_SEPARATOR);
+};
+
 /** The card whose rules text this object has (layer 3): another's, once an
  * exchange of text boxes gave it that (`GameObject.textFrom`, rule 612.5),
  * else its {@link printedCardName}. Every read of an object's *abilities* —
@@ -4246,7 +4288,14 @@ export const FACE_DOWN_CARDS: Readonly<Record<FaceDownKind, string>> = {
  * text says — goes through this; its name, mana cost, colors, types and P/T
  * still come from `printedCardName`. */
 export const rulesTextName = (object: GameObject): string =>
-  object.textFrom ?? printedCardName(object);
+  object.textFrom ?? mergedTextName(object) ?? printedCardName(object);
+
+/** The card name its abilities come from when that isn't its own
+ * {@link printedCardName}: another card's text box (rule 612.5), or a merged
+ * permanent's combined definition (702.140e). A triggered or activated
+ * ability is found by this name and its index. `undefined` otherwise. */
+export const textNameOf = (object: GameObject): string | undefined =>
+  object.textFrom ?? mergedTextName(object);
 
 /** The name `object` has (rule 201.2): one a copy exception gave it
  * ("except its name is Mishra's Warform" — a copiable `setName`, the latest
@@ -4337,6 +4386,8 @@ export function tokenFoldKey(o: GameObject): string {
   return JSON.stringify([
     o.cardName,
     o.copyOf,
+    // A merged permanent is its components (rule 730.2) — never one of a stack.
+    o.merged ?? null,
     o.temporaryCopies ?? null,
     o.copyBase ?? null,
     o.owner,

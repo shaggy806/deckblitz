@@ -8771,6 +8771,47 @@
   "cost:self-graveyard-cast-discard-cost": {
    "family": "zone:graveyard-cast-permissions",
    "example": "Demonic Embrace"
+  },
+  "filter:odd-mana-value": {
+   "example": "Obosh, the Preypiercer"
+  },
+  "effect:cant-activate-abilities-until-next-turn": {
+   "example": "Mythos of Vadrok"
+  },
+  "cost:tap-untapped-creature-additional": {
+   "example": "Swallow Whole"
+  },
+  "effect:choose-card-from-hand-or-graveyard": {
+   "example": "Memory Leak"
+  },
+  "effect:exile-target-card-play-until-next-turn": {
+   "example": "Rooting Moloch"
+  },
+  "trigger:first-cycle-each-turn": {
+   "family": "trigger:cycle-trigger",
+   "example": "Valiant Rescuer"
+  },
+  "condition:cycled-named-card-this-game": {
+   "example": "Yidaro, Wandering Monster"
+  },
+  "effect:each-creature-deals-damage-to-each-opponent": {
+   "example": "Lukka, Coppercoat Outcast"
+  },
+  "static:lethal-damage-by-power": {
+   "example": "Zilortha, Strength Incarnate"
+  },
+  "replacement:cycling-draw": {
+   "example": "Unpredictable Cyclone"
+  },
+  "effect:reveal-until-count-exile": {
+   "example": "Auspicious Starrix"
+  },
+  "mechanic:mutate-from-graveyard": {
+   "family": "mechanic:mutate",
+   "example": "Brokkos, Apex of Forever"
+  },
+  "filter:has-cycling": {
+   "example": "Zenith Flare (built 2026-10-20)"
   }
  }
 }

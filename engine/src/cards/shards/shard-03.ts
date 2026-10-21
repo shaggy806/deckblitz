@@ -126,6 +126,7 @@ import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
 import _poolFeebleness from "../pool/feebleness.js";
 import _poolFeedTheInfection from "../pool/feed-the-infection.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
+import _poolFerociousTigorilla from "../pool/ferocious-tigorilla.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
@@ -453,12 +454,14 @@ import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWeatherlightCompleated from "../pool/weatherlight-compleated.js";
 import _poolWebShot from "../pool/web-shot.js";
+import _poolWhisperSquad from "../pool/whisper-squad.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
 import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
 import _poolWidowsBite from "../pool/widows-bite.js";
 import _poolWingIt from "../pool/wing-it.js";
 import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
+import _poolWingspanMentor from "../pool/wingspan-mentor.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
@@ -608,6 +611,7 @@ const shard: CardShard = {
     _poolFeebleness,
     _poolFeedTheInfection,
     _poolFellHorseman,
+    _poolFerociousTigorilla,
     _poolFireFieldOgre,
     _poolFireImp,
     _poolFireSprites,
@@ -935,12 +939,14 @@ const shard: CardShard = {
     _poolWeatherMaker,
     _poolWeatherlightCompleated,
     _poolWebShot,
+    _poolWhisperSquad,
     _poolWhiteKnight,
     _poolWhiteWidowFreeAgent,
     _poolWiccanRisingMagician,
     _poolWidowsBite,
     _poolWingIt,
     _poolWingbladeDisciple,
+    _poolWingspanMentor,
     _poolWittyRoastmaster,
     _poolWoeStrider,
     _poolWondrousCrucible,

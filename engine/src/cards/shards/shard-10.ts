@@ -172,6 +172,7 @@ import _poolFurious from "../pool/furious.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
+import _poolGemrazer from "../pool/gemrazer.js";
 import _poolGenerousStray from "../pool/generous-stray.js";
 import _poolGenesisWave from "../pool/genesis-wave.js";
 import _poolGeralfTheFleshwright from "../pool/geralf-the-fleshwright.js";
@@ -321,6 +322,7 @@ import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
 import _poolPoetsQuill from "../pool/poets-quill.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
+import _poolPouncingShoreshark from "../pool/pouncing-shoreshark.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
 import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
 import _poolPredatorFlagship from "../pool/predator-flagship.js";
@@ -396,6 +398,7 @@ import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
 import _poolSlaughterPact from "../pool/slaughter-pact.js";
 import _poolSmellFear from "../pool/smell-fear.js";
 import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
+import _poolSnareTactician from "../pool/snare-tactician.js";
 import _poolSnarlSong from "../pool/snarl-song.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
@@ -703,6 +706,7 @@ const shard: CardShard = {
     _poolGaeasSkyfolk,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
+    _poolGemrazer,
     _poolGenerousStray,
     _poolGenesisWave,
     _poolGeralfTheFleshwright,
@@ -852,6 +856,7 @@ const shard: CardShard = {
     _poolPlatedSpider,
     _poolPoetsQuill,
     _poolPoisonTheWaters,
+    _poolPouncingShoreshark,
     _poolPowerbalance,
     _poolPravaOfTheSteelLegion,
     _poolPredatorFlagship,
@@ -927,6 +932,7 @@ const shard: CardShard = {
     _poolSlaughterPact,
     _poolSmellFear,
     _poolSmeltWardMinotaur,
+    _poolSnareTactician,
     _poolSnarlSong,
     _poolSoldierOn,
     _poolSomberHoverguard,

@@ -3024,4 +3024,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  // --- Mutate (2026-10-20) ----------------------------------------------------
+  preset(
+    'Dreamtail Heron and Glowstone Recluse (mutate)',
+    board({
+      you: { bf: ['Grizzly Bears', 'Forest*4', 'Island*4'], hand: ['Glowstone Recluse', 'Dreamtail Heron'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]

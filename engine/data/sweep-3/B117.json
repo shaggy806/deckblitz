@@ -1,0 +1,1020 @@
+{
+ "batch": "B117",
+ "status": "complete",
+ "ranks": "Ikoria: Lair of Behemoths (IKO, 2020-04-24): whole set, with eight mutate cards triaged earlier",
+ "authored": [
+  {
+   "name": "Adaptive Shimmerer",
+   "files": [
+    "engine/src/cards/pool/adaptive-shimmerer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Alert Heedbonder",
+   "files": [
+    "engine/src/cards/pool/alert-heedbonder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avian Oddity",
+   "files": [
+    "engine/src/cards/pool/avian-oddity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrier Breach",
+   "files": [
+    "engine/src/cards/pool/barrier-breach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Curdle",
+   "files": [
+    "engine/src/cards/pool/blood-curdle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boneyard Lurker",
+   "files": [
+    "engine/src/cards/pool/boneyard-lurker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boot Nipper",
+   "files": [
+    "engine/src/cards/pool/boot-nipper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bushmeat Poacher",
+   "files": [
+    "engine/src/cards/pool/bushmeat-poacher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cavern Whisperer",
+   "files": [
+    "engine/src/cards/pool/cavern-whisperer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chevill, Bane of Monsters",
+   "files": [
+    "engine/src/cards/pool/chevill-bane-of-monsters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chittering Harvester",
+   "files": [
+    "engine/src/cards/pool/chittering-harvester.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Clash of Titans",
+   "files": [
+    "engine/src/cards/pool/clash-of-titans.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudpiercer",
+   "files": [
+    "engine/src/cards/pool/cloudpiercer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cubwarden",
+   "files": [
+    "engine/src/cards/pool/cubwarden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cunning Nightbonder",
+   "files": [
+    "engine/src/cards/pool/cunning-nightbonder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death's Oasis",
+   "files": [
+    "engine/src/cards/pool/deaths-oasis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dirge Bat",
+   "files": [
+    "engine/src/cards/pool/dirge-bat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Drannith Healer",
+   "files": [
+    "engine/src/cards/pool/drannith-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drannith Stinger",
+   "files": [
+    "engine/src/cards/pool/drannith-stinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dreamtail Heron",
+   "files": [
+    "engine/src/cards/pool/dreamtail-heron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Durable Coilbug",
+   "files": [
+    "engine/src/cards/pool/durable-coilbug.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskfang Mentor",
+   "files": [
+    "engine/src/cards/pool/duskfang-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Escape Protocol",
+   "files": [
+    "engine/src/cards/pool/escape-protocol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Essence Symbiote",
+   "files": [
+    "engine/src/cards/pool/essence-symbiote.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everquill Phoenix",
+   "files": [
+    "engine/src/cards/pool/everquill-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exuberant Wolfbear",
+   "files": [
+    "engine/src/cards/pool/exuberant-wolfbear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ferocious Tigorilla",
+   "files": [
+    "engine/src/cards/pool/ferocious-tigorilla.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fight as One",
+   "files": [
+    "engine/src/cards/pool/fight-as-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Prophecy",
+   "files": [
+    "engine/src/cards/pool/fire-prophecy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flame Spill",
+   "files": [
+    "engine/src/cards/pool/flame-spill.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flourishing Fox",
+   "files": [
+    "engine/src/cards/pool/flourishing-fox.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flycatcher Giraffid",
+   "files": [
+    "engine/src/cards/pool/flycatcher-giraffid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Footfall Crater",
+   "files": [
+    "engine/src/cards/pool/footfall-crater.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Forbidden Friendship",
+   "files": [
+    "engine/src/cards/pool/forbidden-friendship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frillscare Mentor",
+   "files": [
+    "engine/src/cards/pool/frillscare-mentor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frondland Felidar",
+   "files": [
+    "engine/src/cards/pool/frondland-felidar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frostveil Ambush",
+   "files": [
+    "engine/src/cards/pool/frostveil-ambush.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fully Grown",
+   "files": [
+    "engine/src/cards/pool/fully-grown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gemrazer",
+   "files": [
+    "engine/src/cards/pool/gemrazer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "General Kudro of Drannith",
+   "files": [
+    "engine/src/cards/pool/general-kudro-of-drannith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glowstone Recluse",
+   "files": [
+    "engine/src/cards/pool/glowstone-recluse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Go for Blood",
+   "files": [
+    "engine/src/cards/pool/go-for-blood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grimdancer",
+   "files": [
+    "engine/src/cards/pool/grimdancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gust of Wind",
+   "files": [
+    "engine/src/cards/pool/gust-of-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heightened Reflexes",
+   "files": [
+    "engine/src/cards/pool/heightened-reflexes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Helica Glider",
+   "files": [
+    "engine/src/cards/pool/helica-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hornbash Mentor",
+   "files": [
+    "engine/src/cards/pool/hornbash-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Humble Naturalist",
+   "files": [
+    "engine/src/cards/pool/humble-naturalist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Huntmaster Liger",
+   "files": [
+    "engine/src/cards/pool/huntmaster-liger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illuna, Apex of Wishes",
+   "files": [
+    "engine/src/cards/pool/illuna-apex-of-wishes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insatiable Hemophage",
+   "files": [
+    "engine/src/cards/pool/insatiable-hemophage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspired Ultimatum",
+   "files": [
+    "engine/src/cards/pool/inspired-ultimatum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keensight Mentor",
+   "files": [
+    "engine/src/cards/pool/keensight-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lore Drakkis",
+   "files": [
+    "engine/src/cards/pool/lore-drakkis.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lurking Deadeye",
+   "files": [
+    "engine/src/cards/pool/lurking-deadeye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Majestic Auricorn",
+   "files": [
+    "engine/src/cards/pool/majestic-auricorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Migratory Greathorn",
+   "files": [
+    "engine/src/cards/pool/migratory-greathorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Momentum Rumbler",
+   "files": [
+    "engine/src/cards/pool/momentum-rumbler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mysterious Egg",
+   "files": [
+    "engine/src/cards/pool/mysterious-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necropanther",
+   "files": [
+    "engine/src/cards/pool/necropanther.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nethroi, Apex of Death",
+   "files": [
+    "engine/src/cards/pool/nethroi-apex-of-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Of One Mind",
+   "files": [
+    "engine/src/cards/pool/of-one-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Offspring's Revenge",
+   "files": [
+    "engine/src/cards/pool/offsprings-revenge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parcelbeast",
+   "files": [
+    "engine/src/cards/pool/parcelbeast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patagia Tiger",
+   "files": [
+    "engine/src/cards/pool/patagia-tiger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Perimeter Sergeant",
+   "files": [
+    "engine/src/cards/pool/perimeter-sergeant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phase Dolphin",
+   "files": [
+    "engine/src/cards/pool/phase-dolphin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pollywog Symbiote",
+   "files": [
+    "engine/src/cards/pool/pollywog-symbiote.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Porcuparrot",
+   "files": [
+    "engine/src/cards/pool/porcuparrot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pouncing Shoreshark",
+   "files": [
+    "engine/src/cards/pool/pouncing-shoreshark.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Prickly Marmoset",
+   "files": [
+    "engine/src/cards/pool/prickly-marmoset.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primal Empathy",
+   "files": [
+    "engine/src/cards/pool/primal-empathy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regal Leosaur",
+   "files": [
+    "engine/src/cards/pool/regal-leosaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reptilian Reflection",
+   "files": [
+    "engine/src/cards/pool/reptilian-reflection.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rumbling Rockslide",
+   "files": [
+    "engine/src/cards/pool/rumbling-rockslide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sanctuary Lockdown",
+   "files": [
+    "engine/src/cards/pool/sanctuary-lockdown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanctuary Smasher",
+   "files": [
+    "engine/src/cards/pool/sanctuary-smasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savai Thundermane",
+   "files": [
+    "engine/src/cards/pool/savai-thundermane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sawtusk Demolisher",
+   "files": [
+    "engine/src/cards/pool/sawtusk-demolisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea-Dasher Octopus",
+   "files": [
+    "engine/src/cards/pool/sea-dasher-octopus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Serrated Scorpion",
+   "files": [
+    "engine/src/cards/pool/serrated-scorpion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slitherwisp",
+   "files": [
+    "engine/src/cards/pool/slitherwisp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snapdax, Apex of the Hunt",
+   "files": [
+    "engine/src/cards/pool/snapdax-apex-of-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snare Tactician",
+   "files": [
+    "engine/src/cards/pool/snare-tactician.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Solid Footing",
+   "files": [
+    "engine/src/cards/pool/solid-footing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spelleater Wolverine",
+   "files": [
+    "engine/src/cards/pool/spelleater-wolverine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splendor Mare",
+   "files": [
+    "engine/src/cards/pool/splendor-mare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spontaneous Flight",
+   "files": [
+    "engine/src/cards/pool/spontaneous-flight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Springjaw Trap",
+   "files": [
+    "engine/src/cards/pool/springjaw-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Startling Development",
+   "files": [
+    "engine/src/cards/pool/startling-development.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormwild Capridor",
+   "files": [
+    "engine/src/cards/pool/stormwild-capridor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sudden Spinnerets",
+   "files": [
+    "engine/src/cards/pool/sudden-spinnerets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Survivors' Bond",
+   "files": [
+    "engine/src/cards/pool/survivors-bond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tentative Connection",
+   "files": [
+    "engine/src/cards/pool/tentative-connection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thieving Otter",
+   "files": [
+    "engine/src/cards/pool/thieving-otter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trumpeting Gnarr",
+   "files": [
+    "engine/src/cards/pool/trumpeting-gnarr.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unbreakable Bond",
+   "files": [
+    "engine/src/cards/pool/unbreakable-bond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unexpected Fangs",
+   "files": [
+    "engine/src/cards/pool/unexpected-fangs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vadrok, Apex of Thunder",
+   "files": [
+    "engine/src/cards/pool/vadrok-apex-of-thunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Void Beckoner",
+   "files": [
+    "engine/src/cards/pool/void-beckoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voracious Greatshark",
+   "files": [
+    "engine/src/cards/pool/voracious-greatshark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vulpikeet",
+   "files": [
+    "engine/src/cards/pool/vulpikeet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whisper Squad",
+   "files": [
+    "engine/src/cards/pool/whisper-squad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Will of the All-Hunter",
+   "files": [
+    "engine/src/cards/pool/will-of-the-all-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingfold Pteron",
+   "files": [
+    "engine/src/cards/pool/wingfold-pteron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingspan Mentor",
+   "files": [
+    "engine/src/cards/pool/wingspan-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zagoth Mamba",
+   "files": [
+    "engine/src/cards/pool/zagoth-mamba.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zenith Flare",
+   "files": [
+    "engine/src/cards/pool/zenith-flare.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Archipelagore",
+   "needs": [
+    "decision:variable-target-count"
+   ],
+   "why": "tap up to X target creatures, X the times it has mutated"
+  },
+  {
+   "name": "Auspicious Starrix",
+   "needs": [
+    "effect:reveal-until-count-exile"
+   ],
+   "why": "exile until X permanent cards, the rest staying exiled"
+  },
+  {
+   "name": "Back for More",
+   "needs": [
+    "effect:reflexive-refers-to-creating-objects"
+   ],
+   "why": "the returned creature fights"
+  },
+  {
+   "name": "Blitz Leech",
+   "needs": [
+    "effect:remove-all-counters"
+   ],
+   "why": "remove all counters from target creature"
+  },
+  {
+   "name": "Blitz of the Thunder-Raptor",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "if it would die this turn, exile it instead"
+  },
+  {
+   "name": "Brokkos, Apex of Forever",
+   "needs": [
+    "mechanic:mutate-from-graveyard"
+   ],
+   "why": "cast from your graveyard using its mutate ability"
+  },
+  {
+   "name": "Call of the Death-Dweller",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "targets with total mana value 3 or less; counters on either"
+  },
+  {
+   "name": "Channeled Force",
+   "needs": [
+    "cost:discard-x-cost"
+   ],
+   "why": "discard X cards as an additional cost"
+  },
+  {
+   "name": "Charge of the Forever-Beast",
+   "needs": [
+    "cost:reveal-card-as-additional-cost"
+   ],
+   "why": "reveal a creature card from your hand as an additional cost; its power"
+  },
+  {
+   "name": "Extinction Event",
+   "needs": [
+    "decision:choose-odd-or-even"
+   ],
+   "why": "choose odd or even"
+  },
+  {
+   "name": "Hunted Nightmare",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "target opponent puts a deathtouch counter on a creature they control"
+  },
+  {
+   "name": "Keruga, the Macrosage",
+   "needs": [
+    "mechanic:companion"
+   ],
+   "why": "companion"
+  },
+  {
+   "name": "Labyrinth Raptor",
+   "needs": [
+    "filter:blocking-trigger-object"
+   ],
+   "why": "a creature blocking the trigger's attacker"
+  },
+  {
+   "name": "Lavabrink Venturer",
+   "needs": [
+    "decision:choose-odd-or-even",
+    "keyword:protection-from-mana-value"
+   ],
+   "why": "protection from each mana value of the chosen parity"
+  },
+  {
+   "name": "Lukka, Coppercoat Outcast",
+   "needs": [
+    "effect:each-creature-deals-damage-to-each-opponent"
+   ],
+   "why": "−7: each creature you control deals damage equal to its power to each opponent"
+  },
+  {
+   "name": "Lutri, the Spellchaser",
+   "needs": [
+    "mechanic:companion"
+   ],
+   "why": "companion"
+  },
+  {
+   "name": "Memory Leak",
+   "needs": [
+    "effect:choose-card-from-hand-or-graveyard"
+   ],
+   "why": "choose a nonland card from a player's hand or graveyard and exile it"
+  },
+  {
+   "name": "Monstrous Step",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "up to one target creature blocks it this turn if able"
+  },
+  {
+   "name": "Mutual Destruction",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "flash as long as you control a permanent with flash"
+  },
+  {
+   "name": "Mystic Subdual",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "enchanted creature loses all abilities"
+  },
+  {
+   "name": "Mythos of Brokkos",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "if {U}{B} was spent to cast this spell"
+  },
+  {
+   "name": "Mythos of Illuna",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "if {R}{G} was spent"
+  },
+  {
+   "name": "Mythos of Nethroi",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "if {G}{W} was spent"
+  },
+  {
+   "name": "Mythos of Vadrok",
+   "needs": [
+    "stat:mana-color-spent-condition",
+    "effect:cant-activate-abilities-until-next-turn"
+   ],
+   "why": "if {W}{U} was spent; their activated abilities can't be activated until your next turn"
+  },
+  {
+   "name": "Obosh, the Preypiercer",
+   "needs": [
+    "mechanic:companion",
+    "filter:odd-mana-value"
+   ],
+   "why": "companion; a damage-doubling replacement for sources with odd mana value"
+  },
+  {
+   "name": "Proud Wildbonder",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "creatures with trample may assign damage as though they weren't blocked"
+  },
+  {
+   "name": "Rooting Moloch",
+   "needs": [
+    "effect:exile-target-card-play-until-next-turn"
+   ],
+   "why": "exile target card from your graveyard; you may play it until the end of your next turn"
+  },
+  {
+   "name": "Sonorous Howlbonder",
+   "needs": [
+    "static:cant-be-blocked-except-by-n"
+   ],
+   "why": "can't be blocked except by three or more creatures"
+  },
+  {
+   "name": "Swallow Whole",
+   "needs": [
+    "cost:tap-untapped-creature-additional"
+   ],
+   "why": "tap an untapped creature you control as an additional cost, and refer back to it"
+  },
+  {
+   "name": "Thwart the Enemy",
+   "needs": [
+    "replacement:prevent-combat-damage-by-filter"
+   ],
+   "why": "prevent all damage, combat or not, creatures your opponents control would deal this turn"
+  },
+  {
+   "name": "Titans' Nest",
+   "needs": [
+    "effect:mana-ability-graveyard-exile-cost"
+   ],
+   "why": "a mana ability exiling a card from your graveyard"
+  },
+  {
+   "name": "Umori, the Collector",
+   "needs": [
+    "mechanic:companion"
+   ],
+   "why": "companion"
+  },
+  {
+   "name": "Unpredictable Cyclone",
+   "needs": [
+    "replacement:cycling-draw"
+   ],
+   "why": "replace a cycling draw"
+  },
+  {
+   "name": "Valiant Rescuer",
+   "needs": [
+    "trigger:first-cycle-each-turn"
+   ],
+   "why": "whenever you cycle another card for the first time each turn"
+  },
+  {
+   "name": "Yidaro, Wandering Monster",
+   "needs": [
+    "condition:cycled-named-card-this-game"
+   ],
+   "why": "counts the times you've cycled a card named Yidaro this game"
+  },
+  {
+   "name": "Zilortha, Strength Incarnate",
+   "needs": [
+    "static:lethal-damage-by-power"
+   ],
+   "why": "lethal damage judged by power"
+  }
+ ]
+}

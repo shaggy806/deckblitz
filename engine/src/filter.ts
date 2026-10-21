@@ -446,6 +446,13 @@ export interface CardFilter {
    * with a kicker ability" (Murasa Sproutling, Coralhelm Chronicler). Read off
    * its rules text (`rulesTextName`), in any zone. */
   readonly hasKicker?: boolean;
+  /** Has (or hasn't) a cycling ability (rule 702.29 — typecycling is one,
+   * 702.29e): "a card with a cycling ability" (Zenith Flare, Rooting
+   * Moloch). Read off its rules text, in any zone. */
+  readonly hasCycling?: boolean;
+  /** Has (or hasn't) mutate (rule 702.140) — "if it has mutate" (Pollywog
+   * Symbiote). Read off its rules text, in any zone. */
+  readonly hasMutate?: boolean;
   /** A spell on the stack that was kicked (rule 702.33d — its kicker cost was
    * paid as it was cast; a copy of it is kicked too, 707.10): "whenever you
    * cast a kicked spell" (Roost of Drakes). Nothing off the stack is a kicked
@@ -1252,6 +1259,16 @@ export function matchesFilter(
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
     const has = name !== undefined && registry.has(name) && registry.get(name).kicker !== null;
     if (has !== filter.hasKicker) return false;
+  }
+  if (filter.hasCycling !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).cycling !== null;
+    if (has !== filter.hasCycling) return false;
+  }
+  if (filter.hasMutate !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).overload?.keyword === "mutate";
+    if (has !== filter.hasMutate) return false;
   }
   if (filter.kicked !== undefined) {
     const kicked = live !== undefined && live.zone === "stack" && live.kicked === true;

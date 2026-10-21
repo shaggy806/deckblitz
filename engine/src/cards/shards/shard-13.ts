@@ -43,6 +43,7 @@ import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
 import _poolBalefulBeholder from "../pool/baleful-beholder.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
+import _poolBarrierBreach from "../pool/barrier-breach.js";
 import _poolBarrowWitches from "../pool/barrow-witches.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
@@ -83,6 +84,7 @@ import _poolCatharsShield from "../pool/cathars-shield.js";
 import _poolCaughtRedHanded from "../pool/caught-red-handed.js";
 import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
 import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
+import _poolCavernWhisperer from "../pool/cavern-whisperer.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
@@ -370,6 +372,7 @@ import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
 import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js";
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
+import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolScorchingShot from "../pool/scorching-shot.js";
 import _poolScourgeDevil from "../pool/scourge-devil.js";
@@ -397,6 +400,7 @@ import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
+import _poolSlitherwisp from "../pool/slitherwisp.js";
 import _poolSnaremasterSprite from "../pool/snaremaster-sprite.js";
 import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
@@ -412,6 +416,7 @@ import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
+import _poolSpringjawTrap from "../pool/springjaw-trap.js";
 import _poolSpringmantleCleric from "../pool/springmantle-cleric.js";
 import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
@@ -470,6 +475,7 @@ import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
 import _poolUltimateNullification from "../pool/ultimate-nullification.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
+import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolUtromScientists from "../pool/utrom-scientists.js";
@@ -502,11 +508,13 @@ import _poolWildAesthir from "../pool/wild-aesthir.js";
 import _poolWildWanderer from "../pool/wild-wanderer.js";
 import _poolWingedHiveTyrant from "../pool/winged-hive-tyrant.js";
 import _poolWingedTempleOfOrazca from "../pool/winged-temple-of-orazca.js";
+import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
+import _poolZenithFlare from "../pool/zenith-flare.js";
 import _poolZephid from "../pool/zephid.js";
 import _poolZephyrCharge from "../pool/zephyr-charge.js";
 import _poolZephyrSinger from "../pool/zephyr-singer.js";
@@ -515,7 +523,9 @@ import _poolZombieOutlander from "../pool/zombie-outlander.js";
 import _tokensBatToken from "../tokens/bat-token.js";
 import _tokensClueToken from "../tokens/clue-token.js";
 import _tokensDemonToken from "../tokens/demon-token.js";
+import _tokensDinosaurToken11Haste from "../tokens/dinosaur-token-1-1-haste.js";
 import _tokensEldraziHorrorToken from "../tokens/eldrazi-horror-token.js";
+import _tokensFeatherToken from "../tokens/feather-token.js";
 import _tokensGolemTrampleToken from "../tokens/golem-trample-token.js";
 import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
@@ -568,6 +578,7 @@ const shard: CardShard = {
     _poolBagOfHolding,
     _poolBalefulBeholder,
     _poolBardHeirOfGirion,
+    _poolBarrierBreach,
     _poolBarrowWitches,
     _poolBaxterBuilding,
     _poolBeaconBehemoth,
@@ -608,6 +619,7 @@ const shard: CardShard = {
     _poolCaughtRedHanded,
     _poolCavalierOfDawn,
     _poolCavernOfSouls,
+    _poolCavernWhisperer,
     _poolCelestialUnicorn,
     _poolCheerfulOsteomancer,
     _poolClamorShaman,
@@ -895,6 +907,7 @@ const shard: CardShard = {
     _poolSaradocMasterOfBuckland,
     _poolSarevoksTome,
     _poolSarumansTrickery,
+    _poolSawtuskDemolisher,
     _poolScarwoodGoblins,
     _poolScorchingShot,
     _poolScourgeDevil,
@@ -922,6 +935,7 @@ const shard: CardShard = {
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
+    _poolSlitherwisp,
     _poolSnaremasterSprite,
     _poolSnowslopeHunter,
     _poolSoliton,
@@ -937,6 +951,7 @@ const shard: CardShard = {
     _poolSpinalCentipede,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
+    _poolSpringjawTrap,
     _poolSpringmantleCleric,
     _poolStagecoachSecurity,
     _poolStaggeringSize,
@@ -995,6 +1010,7 @@ const shard: CardShard = {
     _poolUkudCobra,
     _poolUltimateNullification,
     _poolUlvenwaldHydra,
+    _poolUnexpectedFangs,
     _poolUnhinge,
     _poolUnswervingSloth,
     _poolUtromScientists,
@@ -1027,11 +1043,13 @@ const shard: CardShard = {
     _poolWildWanderer,
     _poolWingedHiveTyrant,
     _poolWingedTempleOfOrazca,
+    _poolWingfoldPteron,
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
     _poolWizardsRockets,
     _poolWoodlandPatrol,
     _poolYouSeeAPairOfGoblins,
+    _poolZenithFlare,
     _poolZephid,
     _poolZephyrCharge,
     _poolZephyrSinger,
@@ -1042,7 +1060,9 @@ const shard: CardShard = {
     _tokensBatToken,
     _tokensClueToken,
     _tokensDemonToken,
+    _tokensDinosaurToken11Haste,
     _tokensEldraziHorrorToken,
+    _tokensFeatherToken,
     _tokensGolemTrampleToken,
     _tokensHumanWarriorToken,
     _tokensMerfolkTokenSilvergillMentor,

@@ -131,6 +131,7 @@ import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
 import _poolDungeonMap from "../pool/dungeon-map.js";
+import _poolDuskfangMentor from "../pool/duskfang-mentor.js";
 import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEarthRumbleWrestlers from "../pool/earth-rumble-wrestlers.js";
@@ -209,6 +210,7 @@ import _poolHiredBlade from "../pool/hired-blade.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
 import _poolHomewardPath from "../pool/homeward-path.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
+import _poolHornbashMentor from "../pool/hornbash-mentor.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
 import _poolHulkingRaptor from "../pool/hulking-raptor.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
@@ -665,6 +667,7 @@ const shard: CardShard = {
     _poolDrownyardAmalgam,
     _poolDualStrike,
     _poolDungeonMap,
+    _poolDuskfangMentor,
     _poolDuskwatchHunter,
     _poolEarthOriginYak,
     _poolEarthRumbleWrestlers,
@@ -743,6 +746,7 @@ const shard: CardShard = {
     _poolHobgoblinDragoon,
     _poolHomewardPath,
     _poolHorizonSeeker,
+    _poolHornbashMentor,
     _poolHornetQueen,
     _poolHulkingRaptor,
     _poolHungrySpriggan,

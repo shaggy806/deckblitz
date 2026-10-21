@@ -555,7 +555,14 @@ function visible(
     // The permanent's true identity ("Clone"); `copyOf` carries the copied
     // card's name (rule 707) and the client renders that face.
     cardName: faceDown !== undefined ? printedName : object.cardName,
-    copyOf: faceDown !== undefined ? null : object.copyOf,
+    // A merged permanent shows its topmost card (rule 730.2a), drawn as a
+    // copy's face is when that isn't its own.
+    copyOf:
+      faceDown !== undefined
+        ? null
+        : object.merged !== undefined && printedName !== (object.copyOf ?? faceName(object))
+          ? printedName
+          : object.copyOf,
     faceName: faceDown !== undefined ? printedName : roomDoors !== undefined ? object.cardName : faceName(object),
     ...(nameOf(object) !== printedCardName(object) ? { name: nameOf(object) } : {}),
     faces: object.faces === undefined || faceDown !== undefined ? null : [...object.faces],
