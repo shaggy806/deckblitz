@@ -28,6 +28,7 @@ import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
+import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
@@ -50,6 +51,7 @@ import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodOnTheSnow from "../pool/blood-on-the-snow.js";
+import _poolBloodOperative from "../pool/blood-operative.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
 import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
@@ -163,6 +165,7 @@ import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
+import _poolFlower from "../pool/flower.js";
 import _poolFlycatcherGiraffid from "../pool/flycatcher-giraffid.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
@@ -189,6 +192,8 @@ import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
 import _poolGhiredMirrorOfTheWilds from "../pool/ghired-mirror-of-the-wilds.js";
 import _poolGhostfireSlice from "../pool/ghostfire-slice.js";
 import _poolGhostlyPrison from "../pool/ghostly-prison.js";
+import _poolGirdForBattle from "../pool/gird-for-battle.js";
+import _poolGlaiveOfTheGuildpact from "../pool/glaive-of-the-guildpact.js";
 import _poolGlamdring from "../pool/glamdring.js";
 import _poolGlimmerOfGenius from "../pool/glimmer-of-genius.js";
 import _poolGlimmervoid from "../pool/glimmervoid.js";
@@ -242,6 +247,7 @@ import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
+import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
@@ -405,6 +411,7 @@ import _poolSkillfulLunge from "../pool/skillful-lunge.js";
 import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
 import _poolSkitteringInvasion from "../pool/skittering-invasion.js";
 import _poolSkyknightSquire from "../pool/skyknight-squire.js";
+import _poolSkylineScout from "../pool/skyline-scout.js";
 import _poolSlaughterCry from "../pool/slaughter-cry.js";
 import _poolSlaughterPriestOfMogis from "../pool/slaughter-priest-of-mogis.js";
 import _poolSleekSchooner from "../pool/sleek-schooner.js";
@@ -434,6 +441,7 @@ import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
 import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
+import _poolTakeHeart from "../pool/take-heart.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
@@ -567,6 +575,7 @@ const shard: CardShard = {
     _poolAriaOfFlame,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
+    _poolAssureAssemble,
     _poolAtog,
     _poolAugmentingAutomaton,
     _poolAvatarsWrath,
@@ -589,6 +598,7 @@ const shard: CardShard = {
     _poolBlightRot,
     _poolBlindCreeper,
     _poolBloodOnTheSnow,
+    _poolBloodOperative,
     _poolBloodlineBidding,
     _poolBloomingStinger,
     _poolBoilerbilgesRipper,
@@ -702,6 +712,7 @@ const shard: CardShard = {
     _poolFireNationSoldier,
     _poolFlameSpill,
     _poolFlashback,
+    _poolFlower,
     _poolFlycatcherGiraffid,
     _poolFlyingOctobot,
     _poolFoggySwampSpiritKeeper,
@@ -728,6 +739,8 @@ const shard: CardShard = {
     _poolGhiredMirrorOfTheWilds,
     _poolGhostfireSlice,
     _poolGhostlyPrison,
+    _poolGirdForBattle,
+    _poolGlaiveOfTheGuildpact,
     _poolGlamdring,
     _poolGlimmerOfGenius,
     _poolGlimmervoid,
@@ -781,6 +794,7 @@ const shard: CardShard = {
     _poolKelsinkoRanger,
     _poolKindredJudgment,
     _poolKingDarienXlviii,
+    _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
     _poolLagoonBreach,
@@ -944,6 +958,7 @@ const shard: CardShard = {
     _poolSkirsdagFlayer,
     _poolSkitteringInvasion,
     _poolSkyknightSquire,
+    _poolSkylineScout,
     _poolSlaughterCry,
     _poolSlaughterPriestOfMogis,
     _poolSleekSchooner,
@@ -973,6 +988,7 @@ const shard: CardShard = {
     _poolSwordOfLightAndShadow,
     _poolSyndicateMessenger,
     _poolTackleArtist,
+    _poolTakeHeart,
     _poolTakenumaAbandonedMire,
     _poolTanufelRimespeaker,
     _poolTeachingsOfTheKirin,

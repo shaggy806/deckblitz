@@ -264,6 +264,7 @@ import _poolKutzilMalametExemplar from "../pool/kutzil-malamet-exemplar.js";
 import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
+import _poolLeapfrog from "../pool/leapfrog.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
@@ -409,6 +410,7 @@ import _poolSiegeGangLieutenant from "../pool/siege-gang-lieutenant.js";
 import _poolSiegeWurm from "../pool/siege-wurm.js";
 import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
 import _poolSignalingRoar from "../pool/signaling-roar.js";
+import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
@@ -438,6 +440,7 @@ import _poolStaggeringSize from "../pool/staggering-size.js";
 import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
 import _poolStarlitMantle from "../pool/starlit-mantle.js";
+import _poolStartTheTardis from "../pool/start-the-tardis.js";
 import _poolSteadfastSentry from "../pool/steadfast-sentry.js";
 import _poolStirge from "../pool/stirge.js";
 import _poolStitchedAssistant from "../pool/stitched-assistant.js";
@@ -818,6 +821,7 @@ const shard: CardShard = {
     _poolLabyrinthMinotaur,
     _poolLandscapePainter,
     _poolLargerThanLife,
+    _poolLeapfrog,
     _poolLegionLoyalty,
     _poolLeylineDowser,
     _poolLightningHelix,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolSiegeWurm,
     _poolSightedCasteSorcerer,
     _poolSignalingRoar,
+    _poolSilentDart,
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
@@ -992,6 +997,7 @@ const shard: CardShard = {
     _poolStallOut,
     _poolStampedingRhino,
     _poolStarlitMantle,
+    _poolStartTheTardis,
     _poolSteadfastSentry,
     _poolStirge,
     _poolStitchedAssistant,

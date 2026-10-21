@@ -142,6 +142,7 @@ import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
+import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
 import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
@@ -168,6 +169,7 @@ import _poolFireSnake from "../pool/fire-snake.js";
 import _poolFishliverOil from "../pool/fishliver-oil.js";
 import _poolFlatten from "../pool/flatten.js";
 import _poolFling from "../pool/fling.js";
+import _poolFlourish from "../pool/flourish.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
@@ -335,6 +337,7 @@ import _poolOverwhelmingEncounter from "../pool/overwhelming-encounter.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
+import _poolPeltCollector from "../pool/pelt-collector.js";
 import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
@@ -386,6 +389,7 @@ import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
+import _poolRocCharger from "../pool/roc-charger.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
 import _poolRoilEruption from "../pool/roil-eruption.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
@@ -710,6 +714,7 @@ const shard: CardShard = {
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
     _poolErrantStreetArtist,
+    _poolErstwhileTrooper,
     _poolEshkiDragonclaw,
     _poolEternalTaskmaster,
     _poolEtheriumSpinner,
@@ -736,6 +741,7 @@ const shard: CardShard = {
     _poolFishliverOil,
     _poolFlatten,
     _poolFling,
+    _poolFlourish,
     _poolFoggyNelsonOnRetainer,
     _poolForebodingLandscape,
     _poolForgottenAncient,
@@ -903,6 +909,7 @@ const shard: CardShard = {
     _poolParapetWatchers,
     _poolParhelionPatrol,
     _poolPawnOfUlamog,
+    _poolPeltCollector,
     _poolPerforatingArtist,
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
@@ -954,6 +961,7 @@ const shard: CardShard = {
     _poolRidgetopRaptor,
     _poolRiteOfTheDragoncaller,
     _poolRiveteersRequisitioner,
+    _poolRocCharger,
     _poolRockfaceVillage,
     _poolRoilEruption,
     _poolRootwiseSurvivor,

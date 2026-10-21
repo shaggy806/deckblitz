@@ -91,6 +91,7 @@ import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
+import _poolDistrictGuide from "../pool/district-guide.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
 import _poolDoctorDoom from "../pool/doctor-doom.js";
@@ -180,6 +181,7 @@ import _poolHasteMagic from "../pool/haste-magic.js";
 import _poolHawkeyeBowslinger from "../pool/hawkeye-bowslinger.js";
 import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
+import _poolHellkiteWhelp from "../pool/hellkite-whelp.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
@@ -220,6 +222,7 @@ import _poolKolaghansCommand from "../pool/kolaghans-command.js";
 import _poolKonstrariCharm from "../pool/konstrari-charm.js";
 import _poolKorCartographer from "../pool/kor-cartographer.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
+import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
@@ -299,6 +302,7 @@ import _poolQueenBrahne from "../pool/queen-brahne.js";
 import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRaidersKarve from "../pool/raiders-karve.js";
+import _poolRalsDispersal from "../pool/rals-dispersal.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavagersMace from "../pool/ravagers-mace.js";
@@ -585,6 +589,7 @@ const shard: CardShard = {
     _poolDesmondMiles,
     _poolDigDeep,
     _poolDiscipleOfTheOldWays,
+    _poolDistrictGuide,
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
     _poolDoctorDoom,
@@ -674,6 +679,7 @@ const shard: CardShard = {
     _poolHawkeyeBowslinger,
     _poolHazelsNocturne,
     _poolHealersHawk,
+    _poolHellkiteWhelp,
     _poolHengeOfRamos,
     _poolHeraldOfTheDreadhorde,
     _poolHookbladeVeteran,
@@ -714,6 +720,7 @@ const shard: CardShard = {
     _poolKonstrariCharm,
     _poolKorCartographer,
     _poolKrarkClanStoker,
+    _poolKraulForagers,
     _poolKravensCats,
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
@@ -793,6 +800,7 @@ const shard: CardShard = {
     _poolQuickbeamUpstartEnt,
     _poolRagingRegisaur,
     _poolRaidersKarve,
+    _poolRalsDispersal,
     _poolRampagingHippo,
     _poolRaugrinCrystal,
     _poolRavagersMace,

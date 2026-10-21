@@ -91,6 +91,7 @@ import _poolColfenorsUrn from "../pool/colfenors-urn.js";
 import _poolCollectorsVault from "../pool/collectors-vault.js";
 import _poolColossalMight from "../pool/colossal-might.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
+import _poolConcoct from "../pool/concoct.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
@@ -252,6 +253,7 @@ import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
 import _poolKomasFaithful from "../pool/komas-faithful.js";
 import _poolKozileksTranslator from "../pool/kozileks-translator.js";
+import _poolKraulSwarm from "../pool/kraul-swarm.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLargeBear from "../pool/large-bear.js";
@@ -305,6 +307,7 @@ import _poolNinjaOfTheNewMoon from "../pool/ninja-of-the-new-moon.js";
 import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
+import _poolNotionRain from "../pool/notion-rain.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
 import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
 import _poolNyxHerald from "../pool/nyx-herald.js";
@@ -612,6 +615,7 @@ const shard: CardShard = {
     _poolCollectorsVault,
     _poolColossalMight,
     _poolCombustionMan,
+    _poolConcoct,
     _poolConscriptedInfantry,
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
@@ -773,6 +777,7 @@ const shard: CardShard = {
     _poolKnighthood,
     _poolKomasFaithful,
     _poolKozileksTranslator,
+    _poolKraulSwarm,
     _poolKrenkosCommand,
     _poolLambholtRavager,
     _poolLargeBear,
@@ -826,6 +831,7 @@ const shard: CardShard = {
     _poolNissaLeylineTamer,
     _poolNissaVitalForce,
     _poolNissasExpedition,
+    _poolNotionRain,
     _poolNoviceInspector,
     _poolNurturingPeatland,
     _poolNyxHerald,

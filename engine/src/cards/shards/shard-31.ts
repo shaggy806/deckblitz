@@ -94,6 +94,7 @@ import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
 import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
 import _poolComponentCollector from "../pool/component-collector.js";
+import _poolConclaveGuildmage from "../pool/conclave-guildmage.js";
 import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
@@ -222,6 +223,7 @@ import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
+import _poolGuildSummit from "../pool/guild-summit.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
 import _poolHalberdier from "../pool/halberdier.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
@@ -662,6 +664,7 @@ const shard: CardShard = {
     _poolCombatMedic,
     _poolCommissarSeverinaRaine,
     _poolComponentCollector,
+    _poolConclaveGuildmage,
     _poolCookingCampsite,
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
@@ -790,6 +793,7 @@ const shard: CardShard = {
     _poolGrotesqueMutation,
     _poolGrowExtraArms,
     _poolGuidingBolt,
+    _poolGuildSummit,
     _poolGysahlGreens,
     _poolHalberdier,
     _poolHallOfTagsin,

@@ -53,6 +53,7 @@ import _poolBloodMist from "../pool/blood-mist.js";
 import _poolBloodbraidMarauder from "../pool/bloodbraid-marauder.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
+import _poolBookDevourer from "../pool/book-devourer.js";
 import _poolBookOfRass from "../pool/book-of-rass.js";
 import _poolBootleggersStash from "../pool/bootleggers-stash.js";
 import _poolBorosCluestone from "../pool/boros-cluestone.js";
@@ -248,6 +249,7 @@ import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
 import _poolLastGasp from "../pool/last-gasp.js";
 import _poolLaughingMad from "../pool/laughing-mad.js";
+import _poolLazavTheMultifarious from "../pool/lazav-the-multifarious.js";
 import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
@@ -596,6 +598,7 @@ const shard: CardShard = {
     _poolBloodbraidMarauder,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
+    _poolBookDevourer,
     _poolBookOfRass,
     _poolBootleggersStash,
     _poolBorosCluestone,
@@ -791,6 +794,7 @@ const shard: CardShard = {
     _poolKunLunWarrior,
     _poolLastGasp,
     _poolLaughingMad,
+    _poolLazavTheMultifarious,
     _poolLeafArrow,
     _poolLeafCrownedVisionary,
     _poolLeylineProwler,

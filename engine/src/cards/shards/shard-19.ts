@@ -8,6 +8,7 @@ import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
+import _poolAffectionateIndrik from "../pool/affectionate-indrik.js";
 import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAggressiveSabotage from "../pool/aggressive-sabotage.js";
@@ -127,6 +128,7 @@ import _poolDepower from "../pool/depower.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
 import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
+import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
@@ -255,6 +257,7 @@ import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolItemShopkeep from "../pool/item-shopkeep.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJadedAnalyst from "../pool/jaded-analyst.js";
+import _poolJoinShields from "../pool/join-shields.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
@@ -581,6 +584,7 @@ const shard: CardShard = {
     _poolAccessTunnel,
     _poolAerialPredation,
     _poolAetherGale,
+    _poolAffectionateIndrik,
     _poolAgainstAllOdds,
     _poolAgentsOfSHIELD,
     _poolAggressiveSabotage,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolDerelictAtticWidowsWalk,
     _poolDestinedConfrontation,
     _poolDevilthornFox,
+    _poolDeviousCoverUp,
     _poolDimensionX,
     _poolDismiss,
     _poolDisruptivePitmage,
@@ -828,6 +833,7 @@ const shard: CardShard = {
     _poolItemShopkeep,
     _poolIzzetChronarch,
     _poolJadedAnalyst,
+    _poolJoinShields,
     _poolJoustThrough,
     _poolJungleTroll,
     _poolKamiOfFalseHope,

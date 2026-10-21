@@ -26,6 +26,7 @@ import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
 import _poolAscendantSpirit from "../pool/ascendant-spirit.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
+import _poolAssemble from "../pool/assemble.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
@@ -106,6 +107,7 @@ import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
+import _poolDreamEater from "../pool/dream-eater.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
 import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
@@ -491,6 +493,7 @@ import _poolVolrathsStronghold from "../pool/volraths-stronghold.js";
 import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVortexRunner from "../pool/vortex-runner.js";
 import _poolVoteOut from "../pool/vote-out.js";
+import _poolVraskasStoneglare from "../pool/vraskas-stoneglare.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWantedGriffin from "../pool/wanted-griffin.js";
@@ -555,6 +558,7 @@ const shard: CardShard = {
     _poolArtisansSorrow,
     _poolAscendantSpirit,
     _poolAshioksReaper,
+    _poolAssemble,
     _poolAstelliReclaimer,
     _poolAwakenTheBear,
     _poolAzureDrake,
@@ -635,6 +639,7 @@ const shard: CardShard = {
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
+    _poolDreamEater,
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
     _poolDuskRoseReliquary,
@@ -1020,6 +1025,7 @@ const shard: CardShard = {
     _poolVoraciousBibliophile,
     _poolVortexRunner,
     _poolVoteOut,
+    _poolVraskasStoneglare,
     _poolWanderOff,
     _poolWandertaleMentor,
     _poolWantedGriffin,

@@ -26,6 +26,7 @@ import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
 import _poolAtraxasFall from "../pool/atraxas-fall.js";
+import _poolAttendantOfVraska from "../pool/attendant-of-vraska.js";
 import _poolAttentiveSkywarden from "../pool/attentive-skywarden.js";
 import _poolAudienceWithTrostani from "../pool/audience-with-trostani.js";
 import _poolAvalancheCaller from "../pool/avalanche-caller.js";
@@ -248,6 +249,7 @@ import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
+import _poolLeagueGuildmage from "../pool/league-guildmage.js";
 import _poolLeinoreAutumnSovereign from "../pool/leinore-autumn-sovereign.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
@@ -451,6 +453,7 @@ import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
+import _poolThoughtErasure from "../pool/thought-erasure.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
 import _poolTollOfTheInvasion from "../pool/toll-of-the-invasion.js";
@@ -464,6 +467,7 @@ import _poolTransmograntAltar from "../pool/transmogrant-altar.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
 import _poolTruePolymorph from "../pool/true-polymorph.js";
+import _poolTruefireCaptain from "../pool/truefire-captain.js";
 import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
@@ -555,6 +559,7 @@ const shard: CardShard = {
     _poolAtTheDoor,
     _poolAtomicMicrosizer,
     _poolAtraxasFall,
+    _poolAttendantOfVraska,
     _poolAttentiveSkywarden,
     _poolAudienceWithTrostani,
     _poolAvalancheCaller,
@@ -777,6 +782,7 @@ const shard: CardShard = {
     _poolLakesideShack,
     _poolLambholtHarrier,
     _poolLazotepSliver,
+    _poolLeagueGuildmage,
     _poolLeinoreAutumnSovereign,
     _poolLensFlare,
     _poolLeonardoLeaderInBlue,
@@ -980,6 +986,7 @@ const shard: CardShard = {
     _poolTheRegalia,
     _poolTheSibsigCeremony,
     _poolThornwoodFalls,
+    _poolThoughtErasure,
     _poolThrivingGrove,
     _poolTobiasDoomedConqueror,
     _poolTollOfTheInvasion,
@@ -993,6 +1000,7 @@ const shard: CardShard = {
     _poolTrapmakersSnare,
     _poolTrueLovesKiss,
     _poolTruePolymorph,
+    _poolTruefireCaptain,
     _poolTundra,
     _poolTurbulentFen,
     _poolTurbulentSteppe,

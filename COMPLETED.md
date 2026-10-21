@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Guilds of Ravnica, whole, with jump-start and mentor** (batch 125): GRN's last 131 cards, 105
+  authored by five `card-author` agents and the lead (and Quasiduplicate and Start the TARDIS
+  from earlier), with **jump-start** built (rule 702.133 — the flashback cast for the card's own
+  mana cost plus `discard: 1`) and a `mentor()` helper, both read by the scaffolder — Arclight
+  Phoenix, Lazav, the Multifarious, Ral, Caller of Storms, Vraska, Regal Gorgon, Pelt Collector,
+  Aurelia, Exemplar of Justice, the guild split cards (2026-10-21).
 - **War of the Spark, whole, and entwine** (batch 123): WAR's last 112 cards, 82 authored by four
   `card-author` agents and the lead (the amass cards the scaffolder finished); and **entwine**
   built (rule 702.42 — a kicker keyword with `castModal.kickedModes`; an entwined spell isn't a

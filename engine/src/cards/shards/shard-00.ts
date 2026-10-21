@@ -106,6 +106,7 @@ import _poolCountNefaria from "../pool/count-nefaria.js";
 import _poolCradleClearcutter from "../pool/cradle-clearcutter.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
+import _poolCreepingChill from "../pool/creeping-chill.js";
 import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
 import _poolCrosswayVampire from "../pool/crossway-vampire.js";
 import _poolCrushingCanopy from "../pool/crushing-canopy.js";
@@ -196,9 +197,11 @@ import _poolGoShintaiOfLostWisdom from "../pool/go-shintai-of-lost-wisdom.js";
 import _poolGoblinCavaliers from "../pool/goblin-cavaliers.js";
 import _poolGoblinElectromancer from "../pool/goblin-electromancer.js";
 import _poolGoblinGrenade from "../pool/goblin-grenade.js";
+import _poolGoblinLocksmith from "../pool/goblin-locksmith.js";
 import _poolGoblinTrailblazer from "../pool/goblin-trailblazer.js";
 import _poolGoldPan from "../pool/gold-pan.js";
 import _poolGolgariGuildgate from "../pool/golgari-guildgate.js";
+import _poolGolgariRaiders from "../pool/golgari-raiders.js";
 import _poolGossipsTalent from "../pool/gossips-talent.js";
 import _poolGourmandsTalent from "../pool/gourmands-talent.js";
 import _poolGrandEntryway from "../pool/grand-entryway.js";
@@ -372,6 +375,7 @@ import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
+import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
 import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
 import _poolRigForWar from "../pool/rig-for-war.js";
 import _poolRimefireTorque from "../pool/rimefire-torque.js";
@@ -458,6 +462,7 @@ import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-leg
 import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
+import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
 import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
 import _poolTajuruParagon from "../pool/tajuru-paragon.js";
@@ -514,6 +519,7 @@ import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUthdenTroll from "../pool/uthden-troll.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
+import _poolVeneratedLoxodon from "../pool/venerated-loxodon.js";
 import _poolVerazolTheSplitCurrent from "../pool/verazol-the-split-current.js";
 import _poolViciousHunger from "../pool/vicious-hunger.js";
 import _poolViciousVerse from "../pool/vicious-verse.js";
@@ -673,6 +679,7 @@ const shard: CardShard = {
     _poolCradleClearcutter,
     _poolCraftworkCrusher,
     _poolCraterhoofBehemoth,
+    _poolCreepingChill,
     _poolCrescentIslandTemple,
     _poolCrosswayVampire,
     _poolCrushingCanopy,
@@ -763,9 +770,11 @@ const shard: CardShard = {
     _poolGoblinCavaliers,
     _poolGoblinElectromancer,
     _poolGoblinGrenade,
+    _poolGoblinLocksmith,
     _poolGoblinTrailblazer,
     _poolGoldPan,
     _poolGolgariGuildgate,
+    _poolGolgariRaiders,
     _poolGossipsTalent,
     _poolGourmandsTalent,
     _poolGrandEntryway,
@@ -939,6 +948,7 @@ const shard: CardShard = {
     _poolReliquaryTower,
     _poolRestlessFortress,
     _poolRevelInRiches,
+    _poolRhizomeLurcher,
     _poolRideTheShoopuf,
     _poolRigForWar,
     _poolRimefireTorque,
@@ -1025,6 +1035,7 @@ const shard: CardShard = {
     _poolSunlance,
     _poolSunpetalGrove,
     _poolSunscorchRegent,
+    _poolSwathcutterGiant,
     _poolSwordsmanSharpScoundrel,
     _poolSwordwiseCentaur,
     _poolTajuruParagon,
@@ -1081,6 +1092,7 @@ const shard: CardShard = {
     _poolUthdenTroll,
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
+    _poolVeneratedLoxodon,
     _poolVerazolTheSplitCurrent,
     _poolViciousHunger,
     _poolViciousVerse,

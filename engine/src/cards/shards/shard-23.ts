@@ -124,6 +124,7 @@ import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
+import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
@@ -226,6 +227,7 @@ import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolInfernalCaptor from "../pool/infernal-captor.js";
+import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
@@ -320,6 +322,7 @@ import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
 import _poolObscuraCharm from "../pool/obscura-charm.js";
+import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
@@ -358,6 +361,7 @@ import _poolPython from "../pool/python.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
+import _poolRalsStaticaster from "../pool/rals-staticaster.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRavenOfFellOmens from "../pool/raven-of-fell-omens.js";
@@ -678,6 +682,7 @@ const shard: CardShard = {
     _poolDesperateMeasures,
     _poolDespoil,
     _poolDisciplinedDuelist,
+    _poolDisinformationCampaign,
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
@@ -780,6 +785,7 @@ const shard: CardShard = {
     _poolIncitedRabble,
     _poolIncurableOgre,
     _poolInfernalCaptor,
+    _poolIntegrityIntervention,
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
     _poolItzquinthFirstbornOfGishath,
@@ -874,6 +880,7 @@ const shard: CardShard = {
     _poolNyxLotus,
     _poolObNixilisReignited,
     _poolObscuraCharm,
+    _poolOchranAssassin,
     _poolOhranFrostfang,
     _poolOmenOfTheForge,
     _poolOrdruunMentor,
@@ -912,6 +919,7 @@ const shard: CardShard = {
     _poolRainOfFilth,
     _poolRaiseThePalisade,
     _poolRakingClaws,
+    _poolRalsStaticaster,
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
     _poolRavenOfFellOmens,

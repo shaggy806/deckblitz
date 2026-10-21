@@ -483,6 +483,7 @@ import _poolTwinflame from "../pool/twinflame.js";
 import _poolUmaraWizard from "../pool/umara-wizard.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
 import _poolUnbreakableBond from "../pool/unbreakable-bond.js";
+import _poolUndercityNecrolisk from "../pool/undercity-necrolisk.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _poolUmaraWizard,
     _poolUmezawasCharm,
     _poolUnbreakableBond,
+    _poolUndercityNecrolisk,
     _poolUndermine,
     _poolUnexpectedAssistance,
     _poolUnionOfTheThirdPath,

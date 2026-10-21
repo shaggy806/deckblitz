@@ -61,6 +61,7 @@ import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChandrasRegulator from "../pool/chandras-regulator.js";
 import _poolChargingHooligan from "../pool/charging-hooligan.js";
 import _poolCharmingScoundrel from "../pool/charming-scoundrel.js";
+import _poolCharnelTroll from "../pool/charnel-troll.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
 import _poolCheeringCrowd from "../pool/cheering-crowd.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
@@ -72,6 +73,7 @@ import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
+import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
 import _poolCorporealProjection from "../pool/corporeal-projection.js";
@@ -152,6 +154,7 @@ import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
+import _poolGarrisonSergeant from "../pool/garrison-sergeant.js";
 import _poolGemhideSliver from "../pool/gemhide-sliver.js";
 import _poolGeneralKreatTheBoltbringer from "../pool/general-kreat-the-boltbringer.js";
 import _poolGeralfsMessenger from "../pool/geralfs-messenger.js";
@@ -234,6 +237,7 @@ import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLegionVanguard from "../pool/legion-vanguard.js";
+import _poolLightOfTheLegion from "../pool/light-of-the-legion.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
 import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
@@ -312,6 +316,7 @@ import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
+import _poolPilferingImp from "../pool/pilfering-imp.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
@@ -621,6 +626,7 @@ const shard: CardShard = {
     _poolChandrasRegulator,
     _poolChargingHooligan,
     _poolCharmingScoundrel,
+    _poolCharnelTroll,
     _poolChatterstorm,
     _poolCheeringCrowd,
     _poolChildOfAlara,
@@ -632,6 +638,7 @@ const shard: CardShard = {
     _poolClockworkPercussionist,
     _poolCollectorOuphe,
     _poolColossapede,
+    _poolConclaveCavalier,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,
     _poolCorporealProjection,
@@ -712,6 +719,7 @@ const shard: CardShard = {
     _poolFumikoTheLowblood,
     _poolFuriousStrength,
     _poolGalecasterColossus,
+    _poolGarrisonSergeant,
     _poolGemhideSliver,
     _poolGeneralKreatTheBoltbringer,
     _poolGeralfsMessenger,
@@ -794,6 +802,7 @@ const shard: CardShard = {
     _poolLatNamAdept,
     _poolLaviniaFoilToConspiracy,
     _poolLegionVanguard,
+    _poolLightOfTheLegion,
     _poolLightningVisionary,
     _poolLightningWolf,
     _poolLilianaTheRepentant,
@@ -872,6 +881,7 @@ const shard: CardShard = {
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
     _poolPhantasmalDreadmaw,
+    _poolPilferingImp,
     _poolPitilessCarnage,
     _poolPlagueWind,
     _poolPlunderTheTrollshaws,

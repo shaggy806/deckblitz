@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3750 already implemented / 1250 missing (marks refreshed 2026-10-21)
+3752 already implemented / 1248 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1224,7 +1224,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1229  Magda, Brazen Outlaw                     {1}{R}           Legendary Creature — Dwarf Berserker
 [ ]  1230  Amphibian Downpour                       {2}{U}           Enchantment — Aura
 [x]  1231  Skyclave Apparition                      {1}{W}{W}        Creature — Kor Spirit
-[ ]  1232  Light Up the Stage                       {2}{R}           Sorcery
+[x]  1232  Light Up the Stage                       {2}{R}           Sorcery
 [x]  1233  Agate Instigator                         {1}{R}           Creature — Lizard Rogue
 [x]  1234  Junji, the Midnight Sky                  {3}{B}{B}        Legendary Creature — Dragon Spirit
 [x]  1235  Explosive Vegetation                     {3}{G}           Sorcery
@@ -3349,7 +3349,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3356  Grove of the Burnwillows                 {0}              Land
 [x]  3357  Goblin King                              {1}{R}{R}        Creature — Goblin
 [x]  3358  Mortality Spear                          {2}{B}{G}        Instant
-[ ]  3359  Quasiduplicate                           {1}{U}{U}        Sorcery
+[x]  3359  Quasiduplicate                           {1}{U}{U}        Sorcery
 [x]  3360  Daily Bugle Building                     {0}              Land
 [ ]  3361  Bane of Bala Ged                         {7}              Creature — Eldrazi
 [ ]  3362  Songbirds' Blessing                      {3}{W}           Enchantment — Aura

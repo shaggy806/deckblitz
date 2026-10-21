@@ -249,6 +249,7 @@ import _poolLaboratoryBrute from "../pool/laboratory-brute.js";
 import _poolLeadenMyr from "../pool/leaden-myr.js";
 import _poolLeafDancer from "../pool/leaf-dancer.js";
 import _poolLeafGilder from "../pool/leaf-gilder.js";
+import _poolLedevChampion from "../pool/ledev-champion.js";
 import _poolLeechGauntlet from "../pool/leech-gauntlet.js";
 import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
 import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
@@ -265,6 +266,7 @@ import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
+import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
 import _poolMeganticSliver from "../pool/megantic-sliver.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
@@ -277,6 +279,7 @@ import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
 import _poolMobLookout from "../pool/mob-lookout.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
+import _poolMoodmarkPainter from "../pool/moodmark-painter.js";
 import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
@@ -476,6 +479,7 @@ import _poolVeteranArmorer from "../pool/veteran-armorer.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
+import _poolVividRevival from "../pool/vivid-revival.js";
 import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
 import _poolVraskasFall from "../pool/vraskas-fall.js";
 import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
@@ -769,6 +773,7 @@ const shard: CardShard = {
     _poolLeadenMyr,
     _poolLeafDancer,
     _poolLeafGilder,
+    _poolLedevChampion,
     _poolLeechGauntlet,
     _poolLegionLieutenant,
     _poolLibraryOfAlexandria,
@@ -785,6 +790,7 @@ const shard: CardShard = {
     _poolMarchOfTheMultitudes,
     _poolMasterSymmetrist,
     _poolMausoleumGuard,
+    _poolMausoleumSecrets,
     _poolMeganticSliver,
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
@@ -797,6 +803,7 @@ const shard: CardShard = {
     _poolMireInMisery,
     _poolMobLookout,
     _poolMonumentToEndurance,
+    _poolMoodmarkPainter,
     _poolMoonGirlAndDevilDinosaur,
     _poolMorgueToad,
     _poolMostDecrepitOldBird,
@@ -996,6 +1003,7 @@ const shard: CardShard = {
     _poolVildinPackOutcast,
     _poolViridianClaw,
     _poolVividMeadow,
+    _poolVividRevival,
     _poolVoldarenThrillseeker,
     _poolVraskasFall,
     _poolWakandanShieldGuard,

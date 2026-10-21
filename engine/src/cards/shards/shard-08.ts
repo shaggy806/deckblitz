@@ -32,10 +32,12 @@ import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
 import _poolAshrootAnimist from "../pool/ashroot-animist.js";
+import _poolAssure from "../pool/assure.js";
 import _poolAttunedHunter from "../pool/attuned-hunter.js";
 import _poolAuguryRaven from "../pool/augury-raven.js";
 import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
+import _poolAureliaExemplarOfJustice from "../pool/aurelia-exemplar-of-justice.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
 import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
@@ -448,6 +450,7 @@ import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
+import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
 import _poolSteelswarmOperator from "../pool/steelswarm-operator.js";
 import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
@@ -457,6 +460,7 @@ import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
+import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
@@ -608,10 +612,12 @@ const shard: CardShard = {
     _poolArtificersAssistant,
     _poolAshenRider,
     _poolAshrootAnimist,
+    _poolAssure,
     _poolAttunedHunter,
     _poolAuguryRaven,
     _poolAuntMay,
     _poolAuraBlast,
+    _poolAureliaExemplarOfJustice,
     _poolAzoriusLocket,
     _poolAzusaLostButSeeking,
     _poolBagEndPorter,
@@ -1024,6 +1030,7 @@ const shard: CardShard = {
     _poolSpiritOfMalevolence,
     _poolSplashPortal,
     _poolSporewebWeaver,
+    _poolSproutingRenewal,
     _poolSteamclaw,
     _poolSteelswarmOperator,
     _poolStingerquillAnnex,
@@ -1033,6 +1040,7 @@ const shard: CardShard = {
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,
     _poolSulfurousMire,
+    _poolSumalaWoodshaper,
     _poolSummonChocoMog,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,

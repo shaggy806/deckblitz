@@ -83,6 +83,7 @@ import _poolClawingTorment from "../pool/clawing-torment.js";
 import _poolCloudSprite from "../pool/cloud-sprite.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
+import _poolConnive from "../pool/connive.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
@@ -331,6 +332,7 @@ import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
 import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuakeAgentOfSHIELD from "../pool/quake-agent-of-s-h-i-e-l-d.js";
+import _poolQuasiduplicate from "../pool/quasiduplicate.js";
 import _poolQuestForTheNecropolis from "../pool/quest-for-the-necropolis.js";
 import _poolQuintoriusFieldHistorian from "../pool/quintorius-field-historian.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
@@ -629,6 +631,7 @@ const shard: CardShard = {
     _poolCloudSprite,
     _poolCommercialDistrict,
     _poolCommuneWithEvil,
+    _poolConnive,
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
     _poolCorruptEunuchs,
@@ -877,6 +880,7 @@ const shard: CardShard = {
     _poolPyreticPrankster,
     _poolQasaliSlingers,
     _poolQuakeAgentOfSHIELD,
+    _poolQuasiduplicate,
     _poolQuestForTheNecropolis,
     _poolQuintoriusFieldHistorian,
     _poolQuirionRanger,

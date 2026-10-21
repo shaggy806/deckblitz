@@ -187,6 +187,7 @@ import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHackrobat from "../pool/hackrobat.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
+import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
@@ -215,6 +216,7 @@ import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
+import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
@@ -442,6 +444,7 @@ import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
 import _poolSurlyBadgersaur from "../pool/surly-badgersaur.js";
 import _poolSurveillanceMonitor from "../pool/surveillance-monitor.js";
 import _poolSurvivorsBond from "../pool/survivors-bond.js";
+import _poolSwarmGuildmage from "../pool/swarm-guildmage.js";
 import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolSyphonEssence from "../pool/syphon-essence.js";
@@ -478,6 +481,7 @@ import _poolThunderingGiant from "../pool/thundering-giant.js";
 import _poolTimberGorge from "../pool/timber-gorge.js";
 import _poolTinybonesBaubleBurglar from "../pool/tinybones-bauble-burglar.js";
 import _poolTivitSellerOfSecrets from "../pool/tivit-seller-of-secrets.js";
+import _poolTorchCourier from "../pool/torch-courier.js";
 import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
@@ -738,6 +742,7 @@ const shard: CardShard = {
     _poolGuardianOfPilgrims,
     _poolHackrobat,
     _poolHakodaSelflessCommander,
+    _poolHatcherySpider,
     _poolHauntedScreen,
     _poolHeavyBallista,
     _poolHeirloomAuntie,
@@ -766,6 +771,7 @@ const shard: CardShard = {
     _poolInspireAwe,
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
+    _poolIntrusivePackbeast,
     _poolInvasionOfTolvada,
     _poolIronwillForger,
     _poolJeskaiDevotee,
@@ -993,6 +999,7 @@ const shard: CardShard = {
     _poolSurlyBadgersaur,
     _poolSurveillanceMonitor,
     _poolSurvivorsBond,
+    _poolSwarmGuildmage,
     _poolSwashbuckling,
     _poolSwordOfWarAndPeace,
     _poolSyphonEssence,
@@ -1029,6 +1036,7 @@ const shard: CardShard = {
     _poolTimberGorge,
     _poolTinybonesBaubleBurglar,
     _poolTivitSellerOfSecrets,
+    _poolTorchCourier,
     _poolTormentedAngel,
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,

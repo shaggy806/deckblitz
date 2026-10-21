@@ -201,6 +201,7 @@ import _poolGlacialRevelation from "../pool/glacial-revelation.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
+import _poolGlowsporeShaman from "../pool/glowspore-shaman.js";
 import _poolGluttonousZombie from "../pool/gluttonous-zombie.js";
 import _poolGnarlrootPallbearer from "../pool/gnarlroot-pallbearer.js";
 import _poolGoblinRoughrider from "../pool/goblin-roughrider.js";
@@ -258,6 +259,7 @@ import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
 import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
 import _poolInvasionOfShandalar from "../pool/invasion-of-shandalar.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
+import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
@@ -441,6 +443,7 @@ import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
+import _poolStatusStatue from "../pool/status-statue.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
 import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
@@ -758,6 +761,7 @@ const shard: CardShard = {
     _poolGlimmerbell,
     _poolGlisterBairn,
     _poolGlorySeeker,
+    _poolGlowsporeShaman,
     _poolGluttonousZombie,
     _poolGnarlrootPallbearer,
     _poolGoblinRoughrider,
@@ -815,6 +819,7 @@ const shard: CardShard = {
     _poolInvasionOfMoag,
     _poolInvasionOfShandalar,
     _poolInvokeTheDivine,
+    _poolIonize,
     _poolIrohTeaMaster,
     _poolJacesSanctum,
     _poolJasmineBoreal,
@@ -998,6 +1003,7 @@ const shard: CardShard = {
     _poolSpiritSummoning,
     _poolSpitefulBully,
     _poolStarOfExtinction,
+    _poolStatusStatue,
     _poolStealerOfSecrets,
     _poolSteamBlast,
     _poolStegronTheDinosaurMan,

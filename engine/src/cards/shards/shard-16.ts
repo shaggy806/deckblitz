@@ -87,6 +87,7 @@ import _poolCombatProfessor from "../pool/combat-professor.js";
 import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
 import _poolContainmentBreach from "../pool/containment-breach.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
+import _poolCosmotronicWave from "../pool/cosmotronic-wave.js";
 import _poolCouncilsDeliberation from "../pool/councils-deliberation.js";
 import _poolCourtOfGarenbrig from "../pool/court-of-garenbrig.js";
 import _poolCraterize from "../pool/craterize.js";
@@ -130,6 +131,7 @@ import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolErrantAndGiada from "../pool/errant-and-giada.js";
+import _poolErraticCyclops from "../pool/erratic-cyclops.js";
 import _poolEssenceFlux from "../pool/essence-flux.js";
 import _poolEssencePulse from "../pool/essence-pulse.js";
 import _poolEtchedCornfield from "../pool/etched-cornfield.js";
@@ -201,6 +203,7 @@ import _poolGruulNodorog from "../pool/gruul-nodorog.js";
 import _poolGuardianOfTheHalls from "../pool/guardian-of-the-halls.js";
 import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
+import _poolHaazdaMarshal from "../pool/haazda-marshal.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHeadstone from "../pool/headstone.js";
 import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
@@ -287,6 +290,7 @@ import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
 import _poolMogissFavor from "../pool/mogiss-favor.js";
+import _poolMolderhulk from "../pool/molderhulk.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
@@ -336,6 +340,7 @@ import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
+import _poolPistonFistCyclops from "../pool/piston-fist-cyclops.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
@@ -438,6 +443,7 @@ import _poolStonesplitterBolt from "../pool/stonesplitter-bolt.js";
 import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
 import _poolStormsWrath from "../pool/storms-wrath.js";
+import _poolStreetRiot from "../pool/street-riot.js";
 import _poolStripMine from "../pool/strip-mine.js";
 import _poolSultaiCharm from "../pool/sultai-charm.js";
 import _poolSunderingEruption from "../pool/sundering-eruption.js";
@@ -526,6 +532,7 @@ import _poolVivisection from "../pool/vivisection.js";
 import _poolVoiceOfTheVermin from "../pool/voice-of-the-vermin.js";
 import _poolVoldarenDuelist from "../pool/voldaren-duelist.js";
 import _poolVoldarenStinger from "../pool/voldaren-stinger.js";
+import _poolVraskaRegalGorgon from "../pool/vraska-regal-gorgon.js";
 import _poolWailOfTheForgotten from "../pool/wail-of-the-forgotten.js";
 import _poolWaildrifter from "../pool/waildrifter.js";
 import _poolWakeOfVultures from "../pool/wake-of-vultures.js";
@@ -533,6 +540,7 @@ import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
 import _poolWallOfHeat from "../pool/wall-of-heat.js";
 import _poolWallOfLava from "../pool/wall-of-lava.js";
+import _poolWandOfVertebrae from "../pool/wand-of-vertebrae.js";
 import _poolWarbriarBlessing from "../pool/warbriar-blessing.js";
 import _poolWarlordsAxe from "../pool/warlords-axe.js";
 import _poolWarpedTusker from "../pool/warped-tusker.js";
@@ -668,6 +676,7 @@ const shard: CardShard = {
     _poolCombineChrysalis,
     _poolContainmentBreach,
     _poolContaminantGrafter,
+    _poolCosmotronicWave,
     _poolCouncilsDeliberation,
     _poolCourtOfGarenbrig,
     _poolCraterize,
@@ -711,6 +720,7 @@ const shard: CardShard = {
     _poolEnlightenedTutor,
     _poolErodedCanyon,
     _poolErrantAndGiada,
+    _poolErraticCyclops,
     _poolEssenceFlux,
     _poolEssencePulse,
     _poolEtchedCornfield,
@@ -782,6 +792,7 @@ const shard: CardShard = {
     _poolGuardianOfTheHalls,
     _poolGuidingHydra,
     _poolGuulDrazMucklord,
+    _poolHaazdaMarshal,
     _poolHarmlessOffering,
     _poolHeadstone,
     _poolHeartflameDuelist,
@@ -868,6 +879,7 @@ const shard: CardShard = {
     _poolMirrorpool,
     _poolMiserysShadow,
     _poolMogissFavor,
+    _poolMolderhulk,
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
@@ -917,6 +929,7 @@ const shard: CardShard = {
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
     _poolPiratesPillage,
+    _poolPistonFistCyclops,
     _poolPitOfOfferings,
     _poolPizzaFaceGastromancer,
     _poolPlatinumAngel,
@@ -1019,6 +1032,7 @@ const shard: CardShard = {
     _poolStormFleetPyromancer,
     _poolStormGodsOracle,
     _poolStormsWrath,
+    _poolStreetRiot,
     _poolStripMine,
     _poolSultaiCharm,
     _poolSunderingEruption,
@@ -1107,6 +1121,7 @@ const shard: CardShard = {
     _poolVoiceOfTheVermin,
     _poolVoldarenDuelist,
     _poolVoldarenStinger,
+    _poolVraskaRegalGorgon,
     _poolWailOfTheForgotten,
     _poolWaildrifter,
     _poolWakeOfVultures,
@@ -1114,6 +1129,7 @@ const shard: CardShard = {
     _poolWallOfGranite,
     _poolWallOfHeat,
     _poolWallOfLava,
+    _poolWandOfVertebrae,
     _poolWarbriarBlessing,
     _poolWarlordsAxe,
     _poolWarpedTusker,

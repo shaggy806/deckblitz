@@ -1,0 +1,959 @@
+{
+ "batch": "B125",
+ "status": "complete",
+ "ranks": "Guilds of Ravnica (GRN, 2018-10-05): the rest of the set, whole; with jump-start built, the earlier jump-start cards Quasiduplicate, Start the TARDIS and Filigree Racer",
+ "authored": [
+  {
+   "name": "Chemister's Insight",
+   "files": [
+    "engine/src/cards/pool/chemisters-insight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Radical Idea",
+   "files": [
+    "engine/src/cards/pool/radical-idea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maximize Velocity",
+   "files": [
+    "engine/src/cards/pool/maximize-velocity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Banneret",
+   "files": [
+    "engine/src/cards/pool/goblin-banneret.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Capture Sphere",
+   "files": [
+    "engine/src/cards/pool/capture-sphere.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boros Challenger",
+   "files": [
+    "engine/src/cards/pool/boros-challenger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Maximize Altitude",
+   "files": [
+    "engine/src/cards/pool/maximize-altitude.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunhome Stalwart",
+   "files": [
+    "engine/src/cards/pool/sunhome-stalwart.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barging Sergeant",
+   "files": [
+    "engine/src/cards/pool/barging-sergeant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parhelion Patrol",
+   "files": [
+    "engine/src/cards/pool/parhelion-patrol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hammer Dropper",
+   "files": [
+    "engine/src/cards/pool/hammer-dropper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Direct Current",
+   "files": [
+    "engine/src/cards/pool/direct-current.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blade Instructor",
+   "files": [
+    "engine/src/cards/pool/blade-instructor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Drowned Secrets",
+   "files": [
+    "engine/src/cards/pool/drowned-secrets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Eater",
+   "files": [
+    "engine/src/cards/pool/dream-eater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haazda Marshal",
+   "files": [
+    "engine/src/cards/pool/haazda-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disinformation Campaign",
+   "files": [
+    "engine/src/cards/pool/disinformation-campaign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devious Cover-Up",
+   "files": [
+    "engine/src/cards/pool/devious-cover-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pelt Collector",
+   "files": [
+    "engine/src/cards/pool/pelt-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urban Utopia",
+   "files": [
+    "engine/src/cards/pool/urban-utopia.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "League Guildmage",
+   "files": [
+    "engine/src/cards/pool/league-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swathcutter Giant",
+   "files": [
+    "engine/src/cards/pool/swathcutter-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golgari Raiders",
+   "files": [
+    "engine/src/cards/pool/golgari-raiders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellkite Whelp",
+   "files": [
+    "engine/src/cards/pool/hellkite-whelp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vivid Revival",
+   "files": [
+    "engine/src/cards/pool/vivid-revival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Centaur Peacemaker",
+   "files": [
+    "engine/src/cards/pool/centaur-peacemaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ledev Champion",
+   "files": [
+    "engine/src/cards/pool/ledev-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silent Dart",
+   "files": [
+    "engine/src/cards/pool/silent-dart.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Attendant of Vraska",
+   "files": [
+    "engine/src/cards/pool/attendant-of-vraska.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Start the TARDIS",
+   "files": [
+    "engine/src/cards/pool/start-the-tardis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Status // Statue",
+   "files": [
+    "engine/src/cards/pool/status-statue.ts",
+    "engine/src/cards/pool/status.ts",
+    "engine/src/cards/pool/statue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Integrity // Intervention",
+   "files": [
+    "engine/src/cards/pool/integrity-intervention.ts",
+    "engine/src/cards/pool/integrity.ts",
+    "engine/src/cards/pool/intervention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mausoleum Secrets",
+   "files": [
+    "engine/src/cards/pool/mausoleum-secrets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Risk Factor",
+   "files": [
+    "engine/src/cards/pool/risk-factor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "District Guide",
+   "files": [
+    "engine/src/cards/pool/district-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cosmotronic Wave",
+   "files": [
+    "engine/src/cards/pool/cosmotronic-wave.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Street Riot",
+   "files": [
+    "engine/src/cards/pool/street-riot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Severed Strands",
+   "files": [
+    "engine/src/cards/pool/severed-strands.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venerated Loxodon",
+   "files": [
+    "engine/src/cards/pool/venerated-loxodon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molderhulk",
+   "files": [
+    "engine/src/cards/pool/molderhulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ritual of Soot",
+   "files": [
+    "engine/src/cards/pool/ritual-of-soot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thoughtbound Phantasm",
+   "files": [
+    "engine/src/cards/pool/thoughtbound-phantasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kraul Foragers",
+   "files": [
+    "engine/src/cards/pool/kraul-foragers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erratic Cyclops",
+   "files": [
+    "engine/src/cards/pool/erratic-cyclops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leapfrog",
+   "files": [
+    "engine/src/cards/pool/leapfrog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assure // Assemble",
+   "files": [
+    "engine/src/cards/pool/assure-assemble.ts",
+    "engine/src/cards/pool/assure.ts",
+    "engine/src/cards/pool/assemble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vigorspore Wurm",
+   "files": [
+    "engine/src/cards/pool/vigorspore-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Book Devourer",
+   "files": [
+    "engine/src/cards/pool/book-devourer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garrison Sergeant",
+   "files": [
+    "engine/src/cards/pool/garrison-sergeant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piston-Fist Cyclops",
+   "files": [
+    "engine/src/cards/pool/piston-fist-cyclops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quasiduplicate",
+   "files": [
+    "engine/src/cards/pool/quasiduplicate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ionize",
+   "files": [
+    "engine/src/cards/pool/ionize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurelia, Exemplar of Justice",
+   "files": [
+    "engine/src/cards/pool/aurelia-exemplar-of-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Notion Rain",
+   "files": [
+    "engine/src/cards/pool/notion-rain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glowspore Shaman",
+   "files": [
+    "engine/src/cards/pool/glowspore-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Justice Strike",
+   "files": [
+    "engine/src/cards/pool/justice-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Truefire Captain",
+   "files": [
+    "engine/src/cards/pool/truefire-captain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Firemind's Research",
+   "files": [
+    "engine/src/cards/pool/fireminds-research.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kraul Harpooner",
+   "files": [
+    "engine/src/cards/pool/kraul-harpooner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Portcullis Vine",
+   "files": [
+    "engine/src/cards/pool/portcullis-vine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Light of the Legion",
+   "files": [
+    "engine/src/cards/pool/light-of-the-legion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhizome Lurcher",
+   "files": [
+    "engine/src/cards/pool/rhizome-lurcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gird for Battle",
+   "files": [
+    "engine/src/cards/pool/gird-for-battle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Undercity Uprising",
+   "files": [
+    "engine/src/cards/pool/undercity-uprising.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flower // Flourish",
+   "files": [
+    "engine/src/cards/pool/flower-flourish.ts",
+    "engine/src/cards/pool/flower.ts",
+    "engine/src/cards/pool/flourish.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conclave Cavalier",
+   "files": [
+    "engine/src/cards/pool/conclave-cavalier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sumala Woodshaper",
+   "files": [
+    "engine/src/cards/pool/sumala-woodshaper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Moodmark Painter",
+   "files": [
+    "engine/src/cards/pool/moodmark-painter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Undercity Necrolisk",
+   "files": [
+    "engine/src/cards/pool/undercity-necrolisk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ral's Dispersal",
+   "files": [
+    "engine/src/cards/pool/rals-dispersal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skyline Scout",
+   "files": [
+    "engine/src/cards/pool/skyline-scout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guild Summit",
+   "files": [
+    "engine/src/cards/pool/guild-summit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lazav, the Multifarious",
+   "files": [
+    "engine/src/cards/pool/lazav-the-multifarious.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gravitic Punch",
+   "files": [
+    "engine/src/cards/pool/gravitic-punch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hatchery Spider",
+   "files": [
+    "engine/src/cards/pool/hatchery-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wand of Vertebrae",
+   "files": [
+    "engine/src/cards/pool/wand-of-vertebrae.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pause for Reflection",
+   "files": [
+    "engine/src/cards/pool/pause-for-reflection.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pilfering Imp",
+   "files": [
+    "engine/src/cards/pool/pilfering-imp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Conclave Guildmage",
+   "files": [
+    "engine/src/cards/pool/conclave-guildmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gatekeeper Gargoyle",
+   "files": [
+    "engine/src/cards/pool/gatekeeper-gargoyle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blood Operative",
+   "files": [
+    "engine/src/cards/pool/blood-operative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arclight Phoenix",
+   "files": [
+    "engine/src/cards/pool/arclight-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take Heart",
+   "files": [
+    "engine/src/cards/pool/take-heart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creeping Chill",
+   "files": [
+    "engine/src/cards/pool/creeping-chill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swarm Guildmage",
+   "files": [
+    "engine/src/cards/pool/swarm-guildmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sonic Assault",
+   "files": [
+    "engine/src/cards/pool/sonic-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Locksmith",
+   "files": [
+    "engine/src/cards/pool/goblin-locksmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rampaging Monument",
+   "files": [
+    "engine/src/cards/pool/rampaging-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roc Charger",
+   "files": [
+    "engine/src/cards/pool/roc-charger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kraul Swarm",
+   "files": [
+    "engine/src/cards/pool/kraul-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charnel Troll",
+   "files": [
+    "engine/src/cards/pool/charnel-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ral's Staticaster",
+   "files": [
+    "engine/src/cards/pool/rals-staticaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Connive // Concoct",
+   "files": [
+    "engine/src/cards/pool/connive-concoct.ts",
+    "engine/src/cards/pool/connive.ts",
+    "engine/src/cards/pool/concoct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torch Courier",
+   "files": [
+    "engine/src/cards/pool/torch-courier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ochran Assassin",
+   "files": [
+    "engine/src/cards/pool/ochran-assassin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glaive of the Guildpact",
+   "files": [
+    "engine/src/cards/pool/glaive-of-the-guildpact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Join Shields",
+   "files": [
+    "engine/src/cards/pool/join-shields.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Erasure",
+   "files": [
+    "engine/src/cards/pool/thought-erasure.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sprouting Renewal",
+   "files": [
+    "engine/src/cards/pool/sprouting-renewal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vraska, Regal Gorgon",
+   "files": [
+    "engine/src/cards/pool/vraska-regal-gorgon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omnispell Adept",
+   "files": [
+    "engine/src/cards/pool/omnispell-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ral, Caller of Storms",
+   "files": [
+    "engine/src/cards/pool/ral-caller-of-storms.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Affectionate Indrik",
+   "files": [
+    "engine/src/cards/pool/affectionate-indrik.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Worldsoul Colossus",
+   "files": [
+    "engine/src/cards/pool/worldsoul-colossus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Legion Guildmage",
+   "files": [
+    "engine/src/cards/pool/legion-guildmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vraska's Stoneglare",
+   "files": [
+    "engine/src/cards/pool/vraskas-stoneglare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erstwhile Trooper",
+   "files": [
+    "engine/src/cards/pool/erstwhile-trooper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intrusive Packbeast",
+   "files": [
+    "engine/src/cards/pool/intrusive-packbeast.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Etrata, the Silencer",
+   "needs": [
+    "condition:that-player-owns-exiled-with-counter"
+   ],
+   "why": "\"if that player owns three or more exiled cards with hit counters\" — cards-in-exile's ownedBy can't mean the damaged player"
+  },
+  {
+   "name": "Crackling Drake",
+   "needs": [
+    "amount:count-in-exile"
+   ],
+   "why": "instants and sorceries you own in exile as well as your graveyard"
+  },
+  {
+   "name": "Ral, Izzet Viceroy",
+   "needs": [
+    "amount:count-in-exile"
+   ],
+   "why": "the −3 counts your graveyard and exile"
+  },
+  {
+   "name": "Hypothesizzle",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "\"you may discard a nonland card\""
+  },
+  {
+   "name": "Necrotic Wound",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "if that creature would die this turn, exile it instead"
+  },
+  {
+   "name": "Filigree Racer",
+   "needs": [
+    "effect:grant-jump-start"
+   ],
+   "why": "\"gains jump-start until end of turn\" — grant-flashback has no discard part"
+  },
+  {
+   "name": "Discovery // Dispersal",
+   "needs": [
+    "effect:each-player-chooses-then-all-act"
+   ],
+   "why": "each opponent chooses their own greatest-mana-value nonland permanent, then all return together"
+  },
+  {
+   "name": "Gruesome Menagerie",
+   "needs": [
+    "effect:return-one-each-from-graveyard"
+   ],
+   "why": "one creature card each of mana value 1, 2 and 3, entering together"
+  },
+  {
+   "name": "Selective Snare",
+   "needs": [
+    "cost:choose-creature-type-as-cast"
+   ],
+   "why": "a creature type chosen as it's cast, before its X targets"
+  },
+  {
+   "name": "Chamber Sentry",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove X +1/+1 counters as a cost"
+  },
+  {
+   "name": "Never Happened",
+   "needs": [
+    "effect:choose-card-from-hand-or-graveyard"
+   ],
+   "why": "one pick across a player's graveyard and hand"
+  },
+  {
+   "name": "Beamsplitter Mage",
+   "needs": [
+    "effect:copy-spell-retarget-chosen",
+    "condition:spell-could-target"
+   ],
+   "why": "the copy targets a chosen (not targeted) creature, under an intervening-if"
+  },
+  {
+   "name": "Darkblade Agent",
+   "needs": [
+    "stat:surveilled-this-turn"
+   ],
+   "why": "surveilled this turn (scried-or-surveilled counts scries)"
+  },
+  {
+   "name": "Whispering Snitch",
+   "needs": [
+    "trigger:surveils-first-time-each-turn"
+   ],
+   "why": "the first surveil each turn; oncePerTurn breaks the ruling"
+  },
+  {
+   "name": "Nullhide Ferox",
+   "needs": [
+    "effect:any-player-may-activate",
+    "replacement:discarded-by-opponent-to-battlefield"
+   ],
+   "why": "any player may activate; discarded by an opponent's effect, it enters instead"
+  },
+  {
+   "name": "Chance for Glory",
+   "needs": [
+    "effect:extra-turn-scoped-effects"
+   ],
+   "why": "\"at the beginning of that turn's end step, you lose the game\""
+  },
+  {
+   "name": "Experimental Frenzy",
+   "needs": [
+    "effect:prohibit-cast-by-zone"
+   ],
+   "why": "you can't play lands or cast spells from your hand"
+  },
+  {
+   "name": "Demotion",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "enchanted creature's activated abilities can't be activated"
+  },
+  {
+   "name": "Tajic, Legion's Edge",
+   "needs": [
+    "replacement:prevent-damage-to-other-filter"
+   ],
+   "why": "prevent noncombat damage to *other* creatures you control"
+  },
+  {
+   "name": "Guildmages' Forum",
+   "needs": [
+    "new:mana-spent-replacement"
+   ],
+   "why": "a creature spell cast with this mana enters with an additional counter"
+  },
+  {
+   "name": "Beacon Bolt",
+   "needs": [
+    "amount:count-in-exile"
+   ],
+   "why": "instants and sorceries in your graveyard and exile"
+  },
+  {
+   "name": "Invert // Invent",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switching power and toughness"
+  },
+  {
+   "name": "Lava Coil",
+   "needs": [
+    "replacement:grant-exile-if-would-die"
+   ],
+   "why": "if that creature would die this turn, exile it instead"
+  },
+  {
+   "name": "Unmoored Ego",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "naming a card, then searching graveyard, hand and library"
+  },
+  {
+   "name": "Wojek Bodyguard",
+   "needs": [
+    "static:cant-attack-or-block-alone"
+   ],
+   "why": "can't attack or block alone"
+  },
+  {
+   "name": "Ornery Goblin",
+   "needs": [
+    "effect:damage-to-trigger-object"
+   ],
+   "why": "untargeted damage to the creature it blocks or is blocked by"
+  }
+ ]
+}

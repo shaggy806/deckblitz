@@ -377,6 +377,7 @@ import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
 import _poolRictusRobber from "../pool/rictus-robber.js";
 import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
+import _poolRiskFactor from "../pool/risk-factor.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
 import _poolRoamersRoutine from "../pool/roamers-routine.js";
@@ -445,6 +446,7 @@ import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
 import _poolStarforgedSword from "../pool/starforged-sword.js";
 import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
+import _poolStatue from "../pool/statue.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
 import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
@@ -494,6 +496,7 @@ import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
+import _poolUrbanUtopia from "../pool/urban-utopia.js";
 import _poolUrzaChiefArtificer from "../pool/urza-chief-artificer.js";
 import _poolVampireAristocrat from "../pool/vampire-aristocrat.js";
 import _poolVampireNeonate from "../pool/vampire-neonate.js";
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _poolRictusRobber,
     _poolRiptideLaboratory,
     _poolRiseOfTheEldrazi,
+    _poolRiskFactor,
     _poolRiskyShortcut,
     _poolRiveteersInitiate,
     _poolRoamersRoutine,
@@ -996,6 +1000,7 @@ const shard: CardShard = {
     _poolStalkedResearcher,
     _poolStarforgedSword,
     _poolStarnheimUnleashed,
+    _poolStatue,
     _poolStaunchDefenders,
     _poolStingerquillVoxmancer,
     _poolStormCrow,
@@ -1045,6 +1050,7 @@ const shard: CardShard = {
     _poolUnfortunateAccident,
     _poolUnleashFury,
     _poolUnwillingIngredient,
+    _poolUrbanUtopia,
     _poolUrzaChiefArtificer,
     _poolVampireAristocrat,
     _poolVampireNeonate,

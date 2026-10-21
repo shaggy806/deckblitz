@@ -18,6 +18,7 @@ import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
 import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
+import _poolArclightPhoenix from "../pool/arclight-phoenix.js";
 import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
@@ -241,6 +242,7 @@ import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
 import _poolLawRuneEnforcer from "../pool/law-rune-enforcer.js";
 import _poolLeechFanatic from "../pool/leech-fanatic.js";
+import _poolLegionGuildmage from "../pool/legion-guildmage.js";
 import _poolLegionLeadership from "../pool/legion-leadership.js";
 import _poolLevelUp from "../pool/level-up.js";
 import _poolLevitation from "../pool/levitation.js";
@@ -344,6 +346,7 @@ import _poolRadiantsJudgment from "../pool/radiants-judgment.js";
 import _poolRaggedPlaymate from "../pool/ragged-playmate.js";
 import _poolRagnar from "../pool/ragnar.js";
 import _poolRainveilRejuvenator from "../pool/rainveil-rejuvenator.js";
+import _poolRalCallerOfStorms from "../pool/ral-caller-of-storms.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
@@ -382,6 +385,7 @@ import _poolScientistSupremeOfAIM from "../pool/scientist-supreme-of-a-i-m.js";
 import _poolScourgeOfTheUndercity from "../pool/scourge-of-the-undercity.js";
 import _poolScrap from "../pool/scrap.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
+import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
@@ -582,6 +586,7 @@ const shard: CardShard = {
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,
     _poolArchpriestOfShadows,
+    _poolArclightPhoenix,
     _poolArdentDustspeaker,
     _poolAuntiesSentence,
     _poolAvengerOfZendikar,
@@ -805,6 +810,7 @@ const shard: CardShard = {
     _poolLavafumeInvoker,
     _poolLawRuneEnforcer,
     _poolLeechFanatic,
+    _poolLegionGuildmage,
     _poolLegionLeadership,
     _poolLevelUp,
     _poolLevitation,
@@ -908,6 +914,7 @@ const shard: CardShard = {
     _poolRaggedPlaymate,
     _poolRagnar,
     _poolRainveilRejuvenator,
+    _poolRalCallerOfStorms,
     _poolRammasEchorAncientShield,
     _poolRavenousBaboons,
     _poolRazorclawBear,
@@ -946,6 +953,7 @@ const shard: CardShard = {
     _poolScourgeOfTheUndercity,
     _poolScrap,
     _poolSentinelSpider,
+    _poolSeveredStrands,
     _poolShalaisAcolyte,
     _poolShatteredAngel,
     _poolShellSkulkin,

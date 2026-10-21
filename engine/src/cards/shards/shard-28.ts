@@ -217,6 +217,8 @@ import _poolInfiltrationLens from "../pool/infiltration-lens.js";
 import _poolIngaAndEsika from "../pool/inga-and-esika.js";
 import _poolIngeniousInfiltrator from "../pool/ingenious-infiltrator.js";
 import _poolInquisitorialRosette from "../pool/inquisitorial-rosette.js";
+import _poolIntegrity from "../pool/integrity.js";
+import _poolIntervention from "../pool/intervention.js";
 import _poolIntoTheFire from "../pool/into-the-fire.js";
 import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
@@ -227,6 +229,7 @@ import _poolJewelThief from "../pool/jewel-thief.js";
 import _poolJhessianThief from "../pool/jhessian-thief.js";
 import _poolJudithTheScourgeDiva from "../pool/judith-the-scourge-diva.js";
 import _poolJuneBountyHunter from "../pool/june-bounty-hunter.js";
+import _poolJusticeStrike from "../pool/justice-strike.js";
 import _poolKalonianTusker from "../pool/kalonian-tusker.js";
 import _poolKamiOfAncientLaw from "../pool/kami-of-ancient-law.js";
 import _poolKamiOfOldStone from "../pool/kami-of-old-stone.js";
@@ -765,6 +768,8 @@ const shard: CardShard = {
     _poolIngaAndEsika,
     _poolIngeniousInfiltrator,
     _poolInquisitorialRosette,
+    _poolIntegrity,
+    _poolIntervention,
     _poolIntoTheFire,
     _poolIntrepidRabbit,
     _poolIridescentVinelasher,
@@ -775,6 +780,7 @@ const shard: CardShard = {
     _poolJhessianThief,
     _poolJudithTheScourgeDiva,
     _poolJuneBountyHunter,
+    _poolJusticeStrike,
     _poolKalonianTusker,
     _poolKamiOfAncientLaw,
     _poolKamiOfOldStone,

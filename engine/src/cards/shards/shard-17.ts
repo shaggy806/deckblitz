@@ -122,6 +122,7 @@ import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
 import _poolDrossProwler from "../pool/dross-prowler.js";
+import _poolDrownedSecrets from "../pool/drowned-secrets.js";
 import _poolDryadArbor from "../pool/dryad-arbor.js";
 import _poolDwarvenMattock from "../pool/dwarven-mattock.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
@@ -469,6 +470,7 @@ import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
 import _poolUndercellarMyconid from "../pool/undercellar-myconid.js";
+import _poolUndercityUprising from "../pool/undercity-uprising.js";
 import _poolUnderworldDreams from "../pool/underworld-dreams.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
@@ -657,6 +659,7 @@ const shard: CardShard = {
     _poolDrogskolReaver,
     _poolDromadPurebred,
     _poolDrossProwler,
+    _poolDrownedSecrets,
     _poolDryadArbor,
     _poolDwarvenMattock,
     _poolDwynensElite,
@@ -1004,6 +1007,7 @@ const shard: CardShard = {
     _poolUktabiFaerie,
     _poolUlvenwaldBehemoth,
     _poolUndercellarMyconid,
+    _poolUndercityUprising,
     _poolUnderworldDreams,
     _poolUnholyOfficiant,
     _poolUnknownShores,

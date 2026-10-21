@@ -376,6 +376,7 @@ import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRaiyuuStormsEdge from "../pool/raiyuu-storms-edge.js";
 import _poolRalsReinforcements from "../pool/rals-reinforcements.js";
+import _poolRampagingMonument from "../pool/rampaging-monument.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
@@ -402,6 +403,7 @@ import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
+import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
@@ -970,6 +972,7 @@ const shard: CardShard = {
     _poolRaiseThePast,
     _poolRaiyuuStormsEdge,
     _poolRalsReinforcements,
+    _poolRampagingMonument,
     _poolRancorousArchaic,
     _poolRatcatcherTrainee,
     _poolRatcatcher,
@@ -996,6 +999,7 @@ const shard: CardShard = {
     _poolRidgescaleTusker,
     _poolRiseToGlory,
     _poolRishkarPeemaRenegade,
+    _poolRitualOfSoot,
     _poolRottedHystrix,
     _poolRubyMedallion,
     _poolSanarUnfinishedGenius,

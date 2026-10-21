@@ -96,6 +96,7 @@ import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
 import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
+import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
@@ -205,6 +206,7 @@ import _poolGoblinTownFlunkies from "../pool/goblin-town-flunkies.js";
 import _poolGoblinWarStrike from "../pool/goblin-war-strike.js";
 import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
+import _poolGraviticPunch from "../pool/gravitic-punch.js";
 import _poolGreaterGood from "../pool/greater-good.js";
 import _poolGreedsGambit from "../pool/greeds-gambit.js";
 import _poolGreyHostReinforcements from "../pool/grey-host-reinforcements.js";
@@ -321,6 +323,7 @@ import _poolOashraCultivator from "../pool/oashra-cultivator.js";
 import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
 import _poolOldRutstein from "../pool/old-rutstein.js";
+import _poolOmnispellAdept from "../pool/omnispell-adept.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
@@ -483,6 +486,7 @@ import _poolTheWondrousWasp from "../pool/the-wondrous-wasp.js";
 import _poolThisTownAintBigEnough from "../pool/this-town-aint-big-enough.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
 import _poolThoughtScour from "../pool/thought-scour.js";
+import _poolThoughtboundPhantasm from "../pool/thoughtbound-phantasm.js";
 import _poolThunderbolt from "../pool/thunderbolt.js";
 import _poolTigereyeCameo from "../pool/tigereye-cameo.js";
 import _poolTinkersTote from "../pool/tinkers-tote.js";
@@ -514,6 +518,7 @@ import _poolVedalkenOrrery from "../pool/vedalken-orrery.js";
 import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
+import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
 import _poolVincentsLimitBreak from "../pool/vincents-limit-break.js";
 import _poolVindicate from "../pool/vindicate.js";
@@ -662,6 +667,7 @@ const shard: CardShard = {
     _poolCitanulHierophants,
     _poolCivicWayfinder,
     _poolCompellingArgument,
+    _poolConniveConcoct,
     _poolCoralhelmGuide,
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
@@ -771,6 +777,7 @@ const shard: CardShard = {
     _poolGoblinWarStrike,
     _poolGolgariCluestone,
     _poolGracefulAdept,
+    _poolGraviticPunch,
     _poolGreaterGood,
     _poolGreedsGambit,
     _poolGreyHostReinforcements,
@@ -887,6 +894,7 @@ const shard: CardShard = {
     _poolOdricsOutrider,
     _poolOgreBattledriver,
     _poolOldRutstein,
+    _poolOmnispellAdept,
     _poolOnduGiant,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
@@ -1049,6 +1057,7 @@ const shard: CardShard = {
     _poolThisTownAintBigEnough,
     _poolThopterArchitect,
     _poolThoughtScour,
+    _poolThoughtboundPhantasm,
     _poolThunderbolt,
     _poolTigereyeCameo,
     _poolTinkersTote,
@@ -1080,6 +1089,7 @@ const shard: CardShard = {
     _poolVenomthrope,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
+    _poolVigorsporeWurm,
     _poolVilisBrokerOfBlood,
     _poolVincentsLimitBreak,
     _poolVindicate,

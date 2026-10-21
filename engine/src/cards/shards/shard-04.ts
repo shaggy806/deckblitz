@@ -143,11 +143,13 @@ import _poolFemerefHealer from "../pool/femeref-healer.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
+import _poolFiremindsResearch from "../pool/fireminds-research.js";
 import _poolFlameLash from "../pool/flame-lash.js";
 import _poolFlamekinHarbinger from "../pool/flamekin-harbinger.js";
 import _poolFlankingTroops from "../pool/flanking-troops.js";
 import _poolFlayedOne from "../pool/flayed-one.js";
 import _poolFleshformer from "../pool/fleshformer.js";
+import _poolFlowerFlourish from "../pool/flower-flourish.js";
 import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
 import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
@@ -158,6 +160,7 @@ import _poolFromBeyond from "../pool/from-beyond.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
+import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
@@ -399,6 +402,7 @@ import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
 import _poolSnowDay from "../pool/snow-day.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
+import _poolSonicAssault from "../pool/sonic-assault.js";
 import _poolSonicShrieker from "../pool/sonic-shrieker.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralBinding from "../pool/spectral-binding.js";
@@ -676,11 +680,13 @@ const shard: CardShard = {
     _poolFieldSurgeon,
     _poolFierceEmpath,
     _poolFiligreeCrawler,
+    _poolFiremindsResearch,
     _poolFlameLash,
     _poolFlamekinHarbinger,
     _poolFlankingTroops,
     _poolFlayedOne,
     _poolFleshformer,
+    _poolFlowerFlourish,
     _poolFlowstoneCharger,
     _poolForgingTheTyriteSword,
     _poolForsakeTheWorldly,
@@ -691,6 +697,7 @@ const shard: CardShard = {
     _poolGaeasCradle,
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
+    _poolGatekeeperGargoyle,
     _poolGeodeRager,
     _poolGhostQuarter,
     _poolGiantCrab,
@@ -932,6 +939,7 @@ const shard: CardShard = {
     _poolSnowDay,
     _poolSongMadRuins,
     _poolSongMadTreachery,
+    _poolSonicAssault,
     _poolSonicShrieker,
     _poolSparringMummy,
     _poolSpectralBinding,

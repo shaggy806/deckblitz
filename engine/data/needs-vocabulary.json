@@ -8962,6 +8962,46 @@
   "replacement:as-enters-return-permanent": {
    "family": "bug:as-enters-choices-any-entry",
    "example": "Rescuer Sphinx"
+  },
+  "condition:that-player-owns-exiled-with-counter": {
+   "example": "Etrata, the Silencer"
+  },
+  "effect:grant-jump-start": {
+   "family": "keyword:jump-start",
+   "example": "Filigree Racer"
+  },
+  "effect:return-one-each-from-graveyard": {
+   "example": "Gruesome Menagerie"
+  },
+  "effect:copy-spell-retarget-chosen": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Beamsplitter Mage"
+  },
+  "condition:spell-could-target": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Beamsplitter Mage"
+  },
+  "stat:surveilled-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Darkblade Agent"
+  },
+  "trigger:surveils-first-time-each-turn": {
+   "family": "trigger:surveils",
+   "example": "Whispering Snitch"
+  },
+  "effect:any-player-may-activate": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Nullhide Ferox"
+  },
+  "replacement:discarded-by-opponent-to-battlefield": {
+   "example": "Nullhide Ferox"
+  },
+  "replacement:prevent-damage-to-other-filter": {
+   "example": "Tajic, Legion's Edge"
+  },
+  "static:cant-attack-or-block-alone": {
+   "family": "static:cant-attack-alone",
+   "example": "Wojek Bodyguard"
   }
  }
 }

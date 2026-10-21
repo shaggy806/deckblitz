@@ -70,6 +70,7 @@ import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
 import _poolCausticHound from "../pool/caustic-hound.js";
 import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
+import _poolCentaurPeacemaker from "../pool/centaur-peacemaker.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
@@ -527,6 +528,7 @@ import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
+import _poolWorldsoulColossus from "../pool/worldsoul-colossus.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
@@ -624,6 +626,7 @@ const shard: CardShard = {
     _poolCausticHound,
     _poolCavernThoctar,
     _poolCelestialAncient,
+    _poolCentaurPeacemaker,
     _poolChar,
     _poolChargingBadger,
     _poolCharredGraverobber,
@@ -1081,6 +1084,7 @@ const shard: CardShard = {
     _poolWispdrinkerVampire,
     _poolWithstandDeath,
     _poolWoodcallerAutomaton,
+    _poolWorldsoulColossus,
     _poolWortBoggartAuntie,
     _poolYellowScarvesTroops,
     _poolYoshimaruScrappyStray,

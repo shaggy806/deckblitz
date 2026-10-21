@@ -345,6 +345,7 @@ import _poolPackAPunch from "../pool/pack-a-punch.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPatagiaTiger from "../pool/patagia-tiger.js";
+import _poolPauseForReflection from "../pool/pause-for-reflection.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
@@ -428,6 +429,7 @@ import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
 import _poolSquareUp from "../pool/square-up.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
+import _poolStatus from "../pool/status.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
 import _poolStormchaserDrake from "../pool/stormchaser-drake.js";
 import _poolStormriderSpirit from "../pool/stormrider-spirit.js";
@@ -882,6 +884,7 @@ const shard: CardShard = {
     _poolPantherRobot,
     _poolPashalikMons,
     _poolPatagiaTiger,
+    _poolPauseForReflection,
     _poolPearlOfWisdom,
     _poolPetrifyingMeddler,
     _poolPiercingExhale,
@@ -965,6 +968,7 @@ const shard: CardShard = {
     _poolSproutingGoblin,
     _poolSquareUp,
     _poolStatureYoungAvenger,
+    _poolStatus,
     _poolStingingVitriol,
     _poolStormchaserDrake,
     _poolStormriderSpirit,
