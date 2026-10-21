@@ -591,6 +591,7 @@ import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
 import _tokensServoToken from "../tokens/servo-token.js";
+import _tokensSnakeTokenArtifactPoison from "../tokens/snake-token-artifact-poison.js";
 import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
 import _tokensSpiritTokenDusyutEarthcarver from "../tokens/spirit-token-dusyut-earthcarver.js";
 import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-vessel.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _tokensPhyrexianMiteToken,
     _tokensRedElementalToken11,
     _tokensServoToken,
+    _tokensSnakeTokenArtifactPoison,
     _tokensSpiritTokenAbzanMonument,
     _tokensSpiritTokenDusyutEarthcarver,
     _tokensSpiritTokenUnwillingVessel,

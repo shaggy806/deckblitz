@@ -374,6 +374,7 @@ import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
+import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
@@ -960,6 +961,7 @@ const shard: CardShard = {
     _poolParadoxicalOutcome,
     _poolParcelbeast,
     _poolPatriarsSeal,
+    _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPestFriend,
     _poolPetrifiedField,

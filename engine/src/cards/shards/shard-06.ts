@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbjure from "../pool/abjure.js";
+import _poolAcidRain from "../pool/acid-rain.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
 import _poolAdventurousImpulse from "../pool/adventurous-impulse.js";
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
@@ -399,6 +400,7 @@ import _poolScionOfCalamity from "../pool/scion-of-calamity.js";
 import _poolScorchingSpear from "../pool/scorching-spear.js";
 import _poolScourgeServant from "../pool/scourge-servant.js";
 import _poolScrapskinDrake from "../pool/scrapskin-drake.js";
+import _poolSeaKingsBlessing from "../pool/sea-kings-blessing.js";
 import _poolSeanceBoard from "../pool/seance-board.js";
 import _poolSearstepPathway from "../pool/searstep-pathway.js";
 import _poolSecretsOfTheDead from "../pool/secrets-of-the-dead.js";
@@ -574,6 +576,7 @@ import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
 const shard: CardShard = {
   pool: [
     _poolAbjure,
+    _poolAcidRain,
     _poolAdelineResplendentCathar,
     _poolAdventurousImpulse,
     _poolAegisSculptor,
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolScorchingSpear,
     _poolScourgeServant,
     _poolScrapskinDrake,
+    _poolSeaKingsBlessing,
     _poolSeanceBoard,
     _poolSearstepPathway,
     _poolSecretsOfTheDead,

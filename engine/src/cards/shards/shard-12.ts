@@ -32,6 +32,7 @@ import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.j
 import _poolAvenFlock from "../pool/aven-flock.js";
 import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "../pool/aven-gagglemaster.js";
+import _poolAvoidFate from "../pool/avoid-fate.js";
 import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
@@ -591,6 +592,7 @@ const shard: CardShard = {
     _poolAvenFlock,
     _poolAvenFogbringer,
     _poolAvenGagglemaster,
+    _poolAvoidFate,
     _poolAzoriusSkyguard,
     _poolBalaGedScorpion,
     _poolBanishingKnack,

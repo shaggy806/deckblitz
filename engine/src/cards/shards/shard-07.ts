@@ -25,6 +25,7 @@ import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee
 import _poolArcboundPrototype from "../pool/arcbound-prototype.js";
 import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
+import _poolArenaOfTheAncients from "../pool/arena-of-the-ancients.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
 import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
@@ -217,6 +218,7 @@ import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
 import _poolIncisorGlider from "../pool/incisor-glider.js";
+import _poolIndestructibleAura from "../pool/indestructible-aura.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfectedDefector from "../pool/infected-defector.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
@@ -462,6 +464,7 @@ import _poolSwiftResponse from "../pool/swift-response.js";
 import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
 import _poolSymbioteSpiderMan from "../pool/symbiote-spider-man.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
+import _poolSyphonSoul from "../pool/syphon-soul.js";
 import _poolSyrGingerTheMealEnder from "../pool/syr-ginger-the-meal-ender.js";
 import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
 import _poolTabletOfCompleation from "../pool/tablet-of-compleation.js";
@@ -612,6 +615,7 @@ const shard: CardShard = {
     _poolArcboundPrototype,
     _poolArchonOfFallingStars,
     _poolArdozCobblerOfWar,
+    _poolArenaOfTheAncients,
     _poolArmasaurGuide,
     _poolAshnodsBattleGear,
     _poolAspiringChampion,
@@ -804,6 +808,7 @@ const shard: CardShard = {
     _poolIfnirDeadlands,
     _poolImmersturmPredator,
     _poolIncisorGlider,
+    _poolIndestructibleAura,
     _poolInfantryVeteran,
     _poolInfectedDefector,
     _poolInfestationSage,
@@ -1049,6 +1054,7 @@ const shard: CardShard = {
     _poolSwordOfFireAndIce,
     _poolSymbioteSpiderMan,
     _poolSyphonSliver,
+    _poolSyphonSoul,
     _poolSyrGingerTheMealEnder,
     _poolTabaxiToucaneers,
     _poolTabletOfCompleation,

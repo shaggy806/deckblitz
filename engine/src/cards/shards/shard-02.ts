@@ -214,6 +214,7 @@ import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
+import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
@@ -496,6 +497,7 @@ import _poolUntamedKavu from "../pool/untamed-kavu.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
+import _poolUrborg from "../pool/urborg.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolUtilityKnife from "../pool/utility-knife.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
@@ -757,6 +759,7 @@ const shard: CardShard = {
     _poolGrizzledLeotau,
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
+    _poolGwendlynDiCorci,
     _poolHalvarGodOfBattle,
     _poolHangarScrounger,
     _poolHarvesttideInfiltrator,
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolUntimelyMalfunction,
     _poolUrbanEvolution,
     _poolUrbisProtector,
+    _poolUrborg,
     _poolUrzasWorkshop,
     _poolUtilityKnife,
     _poolValorousStance,

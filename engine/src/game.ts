@@ -1016,7 +1016,14 @@ function lasting(
    * isn't on the battlefield as the stint the effect refers to. */
   source: WhileSource | null = null,
 ): EffectDuration {
-  if (duration === "while-source" || duration === "while-source-tapped") return { whileSource: source };
+  if (
+    duration === "while-source" ||
+    duration === "while-source-tapped" ||
+    duration === "while-you-control-source" ||
+    duration === "while-you-control-source-tapped"
+  ) {
+    return { whileSource: source };
+  }
   return duration === "until-your-next-turn" ? { untilTurnOf: you } : duration;
 }
 
@@ -6178,8 +6185,22 @@ export class Game {
    * Phyrexian Gremlins). Its leaving ends them too, with the rest of its
    * `whileSource` effects (`endWhileSourceEffects`). */
   private endWhileTappedEffects(id: ObjectId): void {
+    this.endWhileSourceCondition(id, (w) => w.tapped === true);
+  }
+
+  /** `id` has changed hands: end what lasted "for as long as you control"
+   * it (rule 611.2b — Aladdin, Rubinia Soulsinger) now that the player it
+   * names doesn't. */
+  private endWhileControlledEffects(id: ObjectId): void {
+    const now = this.state.objects[id]?.controller;
+    this.endWhileSourceCondition(id, (w) => w.controller !== undefined && w.controller !== now);
+  }
+
+  /** End every modifier and control effect lasting while `id` remains as
+   * its `WhileSource` says, where `ended` says that has stopped. */
+  private endWhileSourceCondition(id: ObjectId, ended: (w: WhileSource) => boolean): void {
     if (this.state.whileSourceIds?.includes(id) !== true) return;
-    const over = (w: WhileSource | undefined): boolean => w !== undefined && w.tapped === true && w.id === id;
+    const over = (w: WhileSource | undefined): boolean => w !== undefined && w.id === id && ended(w);
     const expired: ObjectId[] = [];
     let controlEnded = false;
     for (const other of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
@@ -20019,18 +20040,31 @@ export class Game {
     // stint this refers to, or nothing if it has left (rule 611.2b).
     const lastingHere = (duration: PtDuration): EffectDuration => {
       let here: WhileSource | null = null;
-      if (duration === "while-source" || duration === "while-source-tapped") {
+      if (
+        duration === "while-source" ||
+        duration === "while-source-tapped" ||
+        duration === "while-you-control-source" ||
+        duration === "while-you-control-source-tapped"
+      ) {
         const object = this.state.objects[source];
         const stint = object?.zoneChangeCount ?? 0;
-        // "For as long as ~ remains tapped" with it untapped already: nothing
-        // (rule 611.2b).
-        const tapped = duration === "while-source-tapped";
+        // "For as long as ~ remains tapped" with it untapped already, or
+        // "for as long as you control ~" with someone else controlling it:
+        // nothing (rule 611.2b).
+        const tapped = duration === "while-source-tapped" || duration === "while-you-control-source-tapped";
+        const yours = duration === "while-you-control-source" || duration === "while-you-control-source-tapped";
         if (
           object?.zone === "battlefield" &&
           (refs.source === undefined || refs.source === stint) &&
-          (!tapped || object.tapped)
+          (!tapped || object.tapped) &&
+          (!yours || object.controller === controller)
         ) {
-          here = { id: source, zoneChangeCount: stint, ...(tapped ? { tapped: true as const } : {}) };
+          here = {
+            id: source,
+            zoneChangeCount: stint,
+            ...(tapped ? { tapped: true as const } : {}),
+            ...(yours ? { controller } : {}),
+          };
           this.noteWhileSource(source);
         }
       }
@@ -21376,14 +21410,22 @@ export class Game {
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
       counterSpell: (target, into) => this.counterSpellByEffect(target, into),
-      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped) => {
-        if (whileSource !== true && whileSourceTapped !== true) {
+      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource) => {
+        if (whileSource !== true && whileSourceTapped !== true && whileYouControlSource !== true) {
           this.gainControlByEffect(player, target, untilEndOfTurn);
           return;
         }
-        // "For as long as this creature remains on the battlefield [tapped]":
-        // nothing if it already hasn't (rule 611.2b).
-        const kept = lastingHere(whileSourceTapped === true ? "while-source-tapped" : "while-source");
+        // "For as long as this creature remains on the battlefield [tapped]"
+        // or "…you control ~": nothing if that already isn't so (rule 611.2b).
+        const kept = lastingHere(
+          whileYouControlSource === true
+            ? whileSourceTapped === true
+              ? "while-you-control-source-tapped"
+              : "while-you-control-source"
+            : whileSourceTapped === true
+              ? "while-source-tapped"
+              : "while-source",
+        );
         if (typeof kept !== "object" || !("whileSource" in kept) || kept.whileSource === null) return;
         this.gainControlByEffect(player, target, false, false, { whileSource: kept.whileSource });
       },
@@ -35596,6 +35638,8 @@ export class Game {
     ) {
       this.grantCitysBlessings(true);
     }
+    // "For as long as you control ~" ends as ~ changes hands (rule 611.2b).
+    if (full.type === "control-changed") this.endWhileControlledEffects(full.object);
     // "For as long as it has a [kind] counter on it" ends with the last one
     // (rule 611.2b), whatever removed it.
     if (full.type === "counter-removed") this.endCounterDurations(full.object);

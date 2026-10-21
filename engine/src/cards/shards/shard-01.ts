@@ -9,6 +9,7 @@ import _poolAdarkarSentinel from "../pool/adarkar-sentinel.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
+import _poolAlabasterPotion from "../pool/alabaster-potion.js";
 import _poolAlabornGrenadier from "../pool/alaborn-grenadier.js";
 import _poolAlchemistsGift from "../pool/alchemists-gift.js";
 import _poolAlgaeGharial from "../pool/algae-gharial.js";
@@ -150,6 +151,7 @@ import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
 import _poolFiresOfVictory from "../pool/fires-of-victory.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
+import _poolFlashFlood from "../pool/flash-flood.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
 import _poolForceOfDespair from "../pool/force-of-despair.js";
@@ -211,6 +213,7 @@ import _poolIcebindPillar from "../pool/icebind-pillar.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
+import _poolInTheEyeOfChaos from "../pool/in-the-eye-of-chaos.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
@@ -560,6 +563,7 @@ const shard: CardShard = {
     _poolAetherfluxConduit,
     _poolAinokTracker,
     _poolAjanisPridemate,
+    _poolAlabasterPotion,
     _poolAlabornGrenadier,
     _poolAlchemistsGift,
     _poolAlgaeGharial,
@@ -701,6 +705,7 @@ const shard: CardShard = {
     _poolFiresOfVictory,
     _poolFlameblastDragon,
     _poolFlametongueKavu,
+    _poolFlashFlood,
     _poolFloodedGrove,
     _poolFootlightFiend,
     _poolForceOfDespair,
@@ -762,6 +767,7 @@ const shard: CardShard = {
     _poolIconicShield,
     _poolIgnobleHierarch,
     _poolIllustriousHistorian,
+    _poolInTheEyeOfChaos,
     _poolIndulgentAristocrat,
     _poolInfiltrate,
     _poolInsatiableHarpy,

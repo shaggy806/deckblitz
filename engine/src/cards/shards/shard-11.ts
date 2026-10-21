@@ -222,6 +222,7 @@ import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHaggle from "../pool/haggle.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
 import _poolHauntingFigment from "../pool/haunting-figment.js";
+import _poolHazezonTamar from "../pool/hazezon-tamar.js";
 import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
 import _poolHeatedDebate from "../pool/heated-debate.js";
 import _poolHedronScrabbler from "../pool/hedron-scrabbler.js";
@@ -296,6 +297,7 @@ import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolLootDispute from "../pool/loot-dispute.js";
 import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
+import _poolManaMatrix from "../pool/mana-matrix.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMasterOfWinds from "../pool/master-of-winds.js";
@@ -450,6 +452,7 @@ import _poolSlingGangLieutenant from "../pool/sling-gang-lieutenant.js";
 import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
 import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
 import _poolSliverHivelord from "../pool/sliver-hivelord.js";
+import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
@@ -810,6 +813,7 @@ const shard: CardShard = {
     _poolHaggle,
     _poolHallowedHaunting,
     _poolHauntingFigment,
+    _poolHazezonTamar,
     _poolHearthfireHobgoblin,
     _poolHeatedDebate,
     _poolHedronScrabbler,
@@ -884,6 +888,7 @@ const shard: CardShard = {
     _poolLootDispute,
     _poolLootTheKeyToEverything,
     _poolManaCylix,
+    _poolManaMatrix,
     _poolManifestationSage,
     _poolMaraudingMako,
     _poolMasterOfWinds,
@@ -1038,6 +1043,7 @@ const shard: CardShard = {
     _poolSlipOnTheRing,
     _poolSlipOutTheBack,
     _poolSliverHivelord,
+    _poolSolkanarTheSwampKing,
     _poolSomnomancer,
     _poolSongOfFreyalise,
     _poolSorinRavenousNeonate,

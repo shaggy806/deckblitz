@@ -6,8 +6,10 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbandonThePost from "../pool/abandon-the-post.js";
 import _poolAbsorbingManAndTitania from "../pool/absorbing-man-and-titania.js";
 import _poolAccorderPaladin from "../pool/accorder-paladin.js";
+import _poolActiveVolcano from "../pool/active-volcano.js";
 import _poolAdaptiveSnapjaw from "../pool/adaptive-snapjaw.js";
 import _poolAdherentOfHope from "../pool/adherent-of-hope.js";
+import _poolAegisAngel from "../pool/aegis-angel.js";
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
 import _poolAgateBladeAssassin from "../pool/agate-blade-assassin.js";
@@ -319,6 +321,7 @@ import _poolMaskOfMemory from "../pool/mask-of-memory.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
 import _poolMendingHands from "../pool/mending-hands.js";
 import _poolMerchantOfManyHats from "../pool/merchant-of-many-hats.js";
+import _poolMerchantRaiders from "../pool/merchant-raiders.js";
 import _poolMerfolkOfThePearlTrident from "../pool/merfolk-of-the-pearl-trident.js";
 import _poolMerryEsquireOfRohan from "../pool/merry-esquire-of-rohan.js";
 import _poolMightOfOaks from "../pool/might-of-oaks.js";
@@ -578,8 +581,10 @@ const shard: CardShard = {
     _poolAbandonThePost,
     _poolAbsorbingManAndTitania,
     _poolAccorderPaladin,
+    _poolActiveVolcano,
     _poolAdaptiveSnapjaw,
     _poolAdherentOfHope,
+    _poolAegisAngel,
     _poolAetherworksMarvel,
     _poolAftermathAnalyst,
     _poolAgateBladeAssassin,
@@ -891,6 +896,7 @@ const shard: CardShard = {
     _poolMaulOfTheSkyclaves,
     _poolMendingHands,
     _poolMerchantOfManyHats,
+    _poolMerchantRaiders,
     _poolMerfolkOfThePearlTrident,
     _poolMerryEsquireOfRohan,
     _poolMightOfOaks,

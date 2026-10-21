@@ -114,7 +114,15 @@ export type PtDuration =
    * tapped — it ends as the source untaps or leaves, and does nothing if the
    * source is already untapped or gone (rule 611.2b). Usually beside a
    * `mayChooseNotToUntap` static. */
-  | "while-source-tapped";
+  | "while-source-tapped"
+  /** "For as long as you control [this]" (Aegis Angel, Aladdin): the source, in that stint, staying on the battlefield
+   * under the effect's controller — it ends as the source leaves or changes
+   * hands, and does nothing if they don't control it as it would begin
+   * (rule 611.2b). */
+  | "while-you-control-source"
+  /** Both: "for as long as you control ~ and ~ remains tapped" (Rubinia
+   * Soulsinger, Willow Satyr). */
+  | "while-you-control-source-tapped";
 
 /**
  * A "spend this mana only to …" clause on a mana ability (rule 106.6b).
@@ -2245,9 +2253,13 @@ export type EffectSpec =
       readonly whileSource?: boolean;
       /** "…for as long as ~ remains tapped": it ends as the source untaps or
        * leaves — nothing if it's already untapped. Not "for as long as you
-       * control ~ and ~ remains tapped" (Rubinia Soulsinger): a change of the
-       * source's controller doesn't end it. */
+       * control ~ and ~ remains tapped" (Rubinia Soulsinger): that's this
+       * with `whileYouControlSource`. */
       readonly whileSourceTapped?: boolean;
+      /** "For as long as you control ~" (Aladdin): it ends as the source
+       * leaves or changes hands — nothing if you don't control it as it
+       * would begin. With `whileSourceTapped`, both (Rubinia Soulsinger). */
+      readonly whileYouControlSource?: boolean;
     }
   | {
       /** Every battlefield permanent matching `filter` (read from the
@@ -6129,6 +6141,7 @@ export interface EffectApi {
     player: PlayerId,
     whileSource?: boolean,
     whileSourceTapped?: boolean,
+    whileYouControlSource?: boolean,
   ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner; `controlledBy` keeps only what that player
@@ -8791,7 +8804,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target === undefined || illegalSlot(spec.target, ctx)) return;
       const player = effectPlayer(spec.who ?? "you", ctx);
       if (player !== undefined) {
-        ctx.gainControl(target, spec.untilEndOfTurn, player, spec.whileSource === true, spec.whileSourceTapped === true);
+        ctx.gainControl(
+          target,
+          spec.untilEndOfTurn,
+          player,
+          spec.whileSource === true,
+          spec.whileSourceTapped === true,
+          spec.whileYouControlSource === true,
+        );
       }
       return;
     }

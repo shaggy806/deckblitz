@@ -23,6 +23,7 @@ import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
 import _poolAncientGreenwarden from "../pool/ancient-greenwarden.js";
 import _poolAngelOfInvention from "../pool/angel-of-invention.js";
 import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
+import _poolAngelicVoices from "../pool/angelic-voices.js";
 import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js";
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
@@ -53,6 +54,7 @@ import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
+import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
 import _poolBogImp from "../pool/bog-imp.js";
@@ -172,6 +174,7 @@ import _poolFireslinger from "../pool/fireslinger.js";
 import _poolFirjaJudgeOfValor from "../pool/firja-judge-of-valor.js";
 import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
+import _poolFlashCounter from "../pool/flash-counter.js";
 import _poolFlensingRaptor from "../pool/flensing-raptor.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
@@ -453,6 +456,7 @@ import _poolStirge from "../pool/stirge.js";
 import _poolStitchedAssistant from "../pool/stitched-assistant.js";
 import _poolStompingGround from "../pool/stomping-ground.js";
 import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
+import _poolStormSeeker from "../pool/storm-seeker.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
@@ -592,6 +596,7 @@ const shard: CardShard = {
     _poolAncientGreenwarden,
     _poolAngelOfInvention,
     _poolAngelicSkirmisher,
+    _poolAngelicVoices,
     _poolAprilReporterOfTheWeird,
     _poolAquitectsWill,
     _poolArcaneSignet,
@@ -622,6 +627,7 @@ const shard: CardShard = {
     _poolBiorganicCarapace,
     _poolBiteDown,
     _poolBlazemireVerge,
+    _poolBloodLust,
     _poolBloodPact,
     _poolBloodfireExpert,
     _poolBogImp,
@@ -741,6 +747,7 @@ const shard: CardShard = {
     _poolFirjaJudgeOfValor,
     _poolFlamekinBrawler,
     _poolFlaringCinder,
+    _poolFlashCounter,
     _poolFlensingRaptor,
     _poolFlexibleWaterbender,
     _poolFlightDeckCoordinator,
@@ -1022,6 +1029,7 @@ const shard: CardShard = {
     _poolStitchedAssistant,
     _poolStompingGround,
     _poolStormFleetArsonist,
+    _poolStormSeeker,
     _poolStrandsOfNight,
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,

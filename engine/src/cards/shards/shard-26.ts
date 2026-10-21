@@ -202,6 +202,7 @@ import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHagraConstrictor from "../pool/hagra-constrictor.js";
+import _poolHammerheim from "../pool/hammerheim.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
@@ -209,6 +210,7 @@ import _poolHarvestriteHost from "../pool/harvestrite-host.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
+import _poolHellfire from "../pool/hellfire.js";
 import _poolHellsThunder from "../pool/hells-thunder.js";
 import _poolHemlockVial from "../pool/hemlock-vial.js";
 import _poolHerbalPoultice from "../pool/herbal-poultice.js";
@@ -251,6 +253,7 @@ import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolKitnap from "../pool/kitnap.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
+import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
@@ -476,6 +479,7 @@ import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThroneOfBone from "../pool/throne-of-bone.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolThunderingDjinn from "../pool/thundering-djinn.js";
+import _poolTimeOfIce from "../pool/time-of-ice.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
@@ -756,6 +760,7 @@ const shard: CardShard = {
     _poolGutterSkulk,
     _poolHaakonStromgaldScourge,
     _poolHagraConstrictor,
+    _poolHammerheim,
     _poolHarbingerOfTheHunt,
     _poolHarmoniousGrovestrider,
     _poolHarmonizedTrio,
@@ -763,6 +768,7 @@ const shard: CardShard = {
     _poolHavocSower,
     _poolHeapGate,
     _poolHeartSliver,
+    _poolHellfire,
     _poolHellsThunder,
     _poolHemlockVial,
     _poolHerbalPoultice,
@@ -805,6 +811,7 @@ const shard: CardShard = {
     _poolKitnap,
     _poolKnife,
     _poolKnightsOfDolAmroth,
+    _poolKyodaiSoulOfKamigawa,
     _poolLegacyWeapon,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
@@ -1030,6 +1037,7 @@ const shard: CardShard = {
     _poolThroneOfBone,
     _poolThunderSalvo,
     _poolThunderingDjinn,
+    _poolTimeOfIce,
     _poolTimelessLotus,
     _poolTinker,
     _poolTirelessTracker,

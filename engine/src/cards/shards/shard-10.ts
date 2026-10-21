@@ -17,6 +17,7 @@ import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
+import _poolAngusMackenzie from "../pool/angus-mackenzie.js";
 import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
 import _poolAnointedProcession from "../pool/anointed-procession.js";
 import _poolAppendageAmalgam from "../pool/appendage-amalgam.js";
@@ -391,6 +392,7 @@ import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
 import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
+import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
@@ -608,6 +610,7 @@ const shard: CardShard = {
     _poolAnafenzaUnyieldingLineage,
     _poolAncestralCraving,
     _poolAncestralVengeance,
+    _poolAngusMackenzie,
     _poolAnimarSoulOfElements,
     _poolAnointedProcession,
     _poolAppendageAmalgam,
@@ -982,6 +985,7 @@ const shard: CardShard = {
     _poolRiverwalkTechnique,
     _poolRiveteersDecoy,
     _poolRobTheArchives,
+    _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
     _poolRootManipulation,
     _poolRotatingFireplace,

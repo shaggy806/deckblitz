@@ -60,6 +60,9 @@ export interface WhileSource {
   readonly id: ObjectId;
   readonly zoneChangeCount: number;
   readonly tapped?: true;
+  /** "For as long as **you control** ~": it ends as ~ stops being this
+   * player's, too. */
+  readonly controller?: PlayerId;
 }
 
 /** What a random choice picked — the `chosen-at-random` event: a player, a

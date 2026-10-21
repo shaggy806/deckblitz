@@ -137,6 +137,7 @@ import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
 import _poolDoublecast from "../pool/doublecast.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
+import _poolDragonlordSilumgar from "../pool/dragonlord-silumgar.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
@@ -707,6 +708,7 @@ const shard: CardShard = {
     _poolDoublecast,
     _poolDragTheCanal,
     _poolDragonflySwarm,
+    _poolDragonlordSilumgar,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
     _poolDualStrike,

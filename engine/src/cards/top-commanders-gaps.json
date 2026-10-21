@@ -381,7 +381,10 @@
   "effect:duration-while-source-tapped",
   "effect:doesnt-untap-while-source-tapped",
   "keyword:rampage",
-  "mechanic:world-rule"
+  "mechanic:world-rule",
+  "effect:duration-while-you-control-source",
+  "effect:control-while-you-control-source",
+  "effect:doesnt-untap-while-you-control-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

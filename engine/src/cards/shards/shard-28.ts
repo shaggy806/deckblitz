@@ -72,6 +72,7 @@ import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
 import _poolBringToTrial from "../pool/bring-to-trial.js";
 import _poolBroadsideBarrage from "../pool/broadside-barrage.js";
+import _poolBronzeHorse from "../pool/bronze-horse.js";
 import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
@@ -351,6 +352,7 @@ import _poolPolygraphOrb from "../pool/polygraph-orb.js";
 import _poolPondProphet from "../pool/pond-prophet.js";
 import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
+import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
 import _poolProfaneInsight from "../pool/profane-insight.js";
@@ -487,6 +489,7 @@ import _poolTerritorialRoc from "../pool/territorial-roc.js";
 import _poolTeysaKarlov from "../pool/teysa-karlov.js";
 import _poolThanosDeathsConsort from "../pool/thanos-deaths-consort.js";
 import _poolTheAncientOne from "../pool/the-ancient-one.js";
+import _poolTheBrute from "../pool/the-brute.js";
 import _poolTheSwarmweaver from "../pool/the-swarmweaver.js";
 import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
@@ -500,6 +503,7 @@ import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
 import _poolTitanicGrowth from "../pool/titanic-growth.js";
 import _poolTorensFistOfTheAngels from "../pool/torens-fist-of-the-angels.js";
+import _poolTouchOfDarkness from "../pool/touch-of-darkness.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
@@ -550,6 +554,7 @@ import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
+import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
@@ -644,6 +649,7 @@ const shard: CardShard = {
     _poolBrighthearthBanneret,
     _poolBringToTrial,
     _poolBroadsideBarrage,
+    _poolBronzeHorse,
     _poolBrotherhoodOutcast,
     _poolBrushstrider,
     _poolBullCerodon,
@@ -923,6 +929,7 @@ const shard: CardShard = {
     _poolPondProphet,
     _poolPortOfKarfell,
     _poolPowerDepot,
+    _poolPresenceOfTheMaster,
     _poolPrimarisChaplain,
     _poolProcrastinate,
     _poolProfaneInsight,
@@ -1059,6 +1066,7 @@ const shard: CardShard = {
     _poolTeysaKarlov,
     _poolThanosDeathsConsort,
     _poolTheAncientOne,
+    _poolTheBrute,
     _poolTheSwarmweaver,
     _poolTheThirdDoctor,
     _poolTheUnbeatableSquirrelGirl,
@@ -1072,6 +1080,7 @@ const shard: CardShard = {
     _poolTillerOfFlesh,
     _poolTitanicGrowth,
     _poolTorensFistOfTheAngels,
+    _poolTouchOfDarkness,
     _poolTraceOfAbundance,
     _poolTrainedArmodon,
     _poolTramwayStation,
@@ -1122,6 +1131,7 @@ const shard: CardShard = {
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
     _poolWillScholarOfFrost,
+    _poolWillowSatyr,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWorldChampionCelestialWeapon,

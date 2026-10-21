@@ -36,6 +36,7 @@ import _poolAugerSpree from "../pool/auger-spree.js";
 import _poolAvabruckCaretaker from "../pool/avabruck-caretaker.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
 import _poolBackToBasics from "../pool/back-to-basics.js";
+import _poolBackfire from "../pool/backfire.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
 import _poolBarrageOgre from "../pool/barrage-ogre.js";
 import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
@@ -516,6 +517,7 @@ import _poolUncannySpeed from "../pool/uncanny-speed.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
+import _poolVaevictisAsmadi from "../pool/vaevictis-asmadi.js";
 import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
 import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
@@ -608,6 +610,7 @@ const shard: CardShard = {
     _poolAvabruckCaretaker,
     _poolAvenFleetwing,
     _poolBackToBasics,
+    _poolBackfire,
     _poolBaronAirshipKingdom,
     _poolBarrageOgre,
     _poolBarrierOfBones,
@@ -1088,6 +1091,7 @@ const shard: CardShard = {
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
     _poolUtvaraScalper,
+    _poolVaevictisAsmadi,
     _poolValleyMightcaller,
     _poolVantressPaladin,
     _poolVectorAsp,

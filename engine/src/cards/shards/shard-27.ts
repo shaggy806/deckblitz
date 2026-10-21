@@ -22,6 +22,7 @@ import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
+import _poolArcadesSabboth from "../pool/arcades-sabboth.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
 import _poolArmsRace from "../pool/arms-race.js";
 import _poolArtisticProcess from "../pool/artistic-process.js";
@@ -307,6 +308,7 @@ import _poolMythosOfNethroi from "../pool/mythos-of-nethroi.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNegate from "../pool/negate.js";
+import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
@@ -318,6 +320,7 @@ import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolParch from "../pool/parch.js";
+import _poolPartWater from "../pool/part-water.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
@@ -582,6 +585,7 @@ const shard: CardShard = {
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
+    _poolArcadesSabboth,
     _poolArcaneFlight,
     _poolArmsRace,
     _poolArtisticProcess,
@@ -867,6 +871,7 @@ const shard: CardShard = {
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNegate,
+    _poolNicolBolas,
     _poolNightScythe,
     _poolNurglesRot,
     _poolObsianusGolem,
@@ -878,6 +883,7 @@ const shard: CardShard = {
     _poolOstiaryThrull,
     _poolOverlordOfTheBoilerbilges,
     _poolParch,
+    _poolPartWater,
     _poolPartingGust,
     _poolPathfindingAxejaw,
     _poolPatrollingPeacemaker,

@@ -399,10 +399,12 @@ import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
+import _poolRingOfImmortals from "../pool/ring-of-immortals.js";
 import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
+import _poolRoilElemental from "../pool/roil-elemental.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
@@ -474,6 +476,7 @@ import _poolTempleOfTriumph from "../pool/temple-of-triumph.js";
 import _poolTenuredInkcaster from "../pool/tenured-inkcaster.js";
 import _poolTeyoDiamondbladeMage from "../pool/teyo-diamondblade-mage.js";
 import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
+import _poolThancredWaters from "../pool/thancred-waters.js";
 import _poolTheAesirEscapeValhalla from "../pool/the-aesir-escape-valhalla.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
 import _poolTheFirstEruption from "../pool/the-first-eruption.js";
@@ -958,10 +961,12 @@ const shard: CardShard = {
     _poolReverseDamage,
     _poolRewind,
     _poolRinAndSeriInseparable,
+    _poolRingOfImmortals,
     _poolRingOfXathrid,
     _poolRiteOfOblivion,
     _poolRoccoStreetChef,
     _poolRocketVolley,
+    _poolRoilElemental,
     _poolRooftopSaboteurs,
     _poolRuinousGremlin,
     _poolRunawayTrashBot,
@@ -1033,6 +1038,7 @@ const shard: CardShard = {
     _poolTenuredInkcaster,
     _poolTeyoDiamondbladeMage,
     _poolThalisseReverentMedium,
+    _poolThancredWaters,
     _poolTheAesirEscapeValhalla,
     _poolTheEternityElevator,
     _poolTheFirstEruption,

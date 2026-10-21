@@ -374,6 +374,7 @@ import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
+import _poolPrimordialOoze from "../pool/primordial-ooze.js";
 import _poolPrisonBreak from "../pool/prison-break.js";
 import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
@@ -967,6 +968,7 @@ const shard: CardShard = {
     _poolPricklyBoggart,
     _poolPrimalRage,
     _poolPrimalWitchstalker,
+    _poolPrimordialOoze,
     _poolPrisonBreak,
     _poolProfessorOfZoomancy,
     _poolProfessorZeiAnthropologist,

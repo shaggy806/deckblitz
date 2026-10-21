@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { B, cast, keywords, lands, spawn, table, toHand, toStep, zone } from "./harness.js";
+import { B, cast, keywords, lands, ref, spawn, table, toHand, toStep, zone } from "./harness.js";
 
 describe("the world rule", () => {
   it("a newer world enchantment puts the older one into the graveyard", () => {
@@ -22,6 +22,20 @@ describe("the world rule", () => {
     spawn(game, "Gravity Sphere");
     const bird = spawn(game, "Suntail Hawk", B);
     expect(keywords(game, bird).has("flying")).toBe(false);
+  });
+
+  it("In the Eye of Chaos counters an instant unless its mana value is paid; not a creature spell", () => {
+    const { game } = table();
+    spawn(game, "In the Eye of Chaos", B);
+    lands(game, "Mountain", 1);
+    const bolt = toHand(game, "Lightning Bolt");
+    cast(game, bolt, { targets: [ref(B)] });
+    expect(zone(game, bolt)).toBe("graveyard");
+    expect(game.state.players[B].life).toBe(20);
+    lands(game, "Forest", 2);
+    const bears = toHand(game, "Grizzly Bears");
+    cast(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
   });
 
   it("Nether Void counters a spell whose controller doesn't pay {3}", () => {

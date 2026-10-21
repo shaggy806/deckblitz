@@ -282,6 +282,7 @@ import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js"
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
 import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKnightOfTheLastBreath from "../pool/knight-of-the-last-breath.js";
+import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
@@ -885,6 +886,7 @@ const shard: CardShard = {
     _poolKitchenFinks,
     _poolKnightOfDusksShadow,
     _poolKnightOfTheLastBreath,
+    _poolKoboldDrillSergeant,
     _poolKomodoRhino,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,

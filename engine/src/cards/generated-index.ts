@@ -389,6 +389,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Smoke Blessing Token",
   "Snail Token",
   "Snake Token",
+  "Snake Token (artifact, poison)",
   "Soldier Artifact Token",
   "Soldier Token",
   "Soldier Token (Finale of Glory)",

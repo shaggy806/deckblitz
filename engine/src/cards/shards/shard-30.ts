@@ -416,6 +416,7 @@ import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
 import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
+import _poolRubiniaSoulsinger from "../pool/rubinia-soulsinger.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
 import _poolRydiasReturn from "../pool/rydias-return.js";
 import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
@@ -979,6 +980,7 @@ const shard: CardShard = {
     _poolRoughshodDuo,
     _poolRoverBlades,
     _poolRoyalTalonFighterJet,
+    _poolRubiniaSoulsinger,
     _poolRustrazorButcher,
     _poolRydiasReturn,
     _poolSageOfLatNam,

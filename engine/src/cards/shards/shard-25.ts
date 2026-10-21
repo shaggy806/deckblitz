@@ -377,6 +377,7 @@ import _poolRedcapGutterDweller from "../pool/redcap-gutter-dweller.js";
 import _poolRefereeSquad from "../pool/referee-squad.js";
 import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
+import _poolRemoveEnchantments from "../pool/remove-enchantments.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
@@ -423,6 +424,7 @@ import _poolSecretPassage from "../pool/secret-passage.js";
 import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
+import _poolSerpentGenerator from "../pool/serpent-generator.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
 import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
@@ -949,6 +951,7 @@ const shard: CardShard = {
     _poolRefereeSquad,
     _poolReflectionsOfLittjara,
     _poolRehearsedDebater,
+    _poolRemoveEnchantments,
     _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolRescuerChwinga,
@@ -995,6 +998,7 @@ const shard: CardShard = {
     _poolSeedglaiveMentor,
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
+    _poolSerpentGenerator,
     _poolShaperGuildmage,
     _poolSharktocrab,
     _poolShepherdOfTheFlock,

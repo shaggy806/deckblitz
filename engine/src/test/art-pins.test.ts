@@ -54,6 +54,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Zeppelin",
   // Bottle of Suleiman lists no token printing (the Oracle snapshot, 2026-10-21).
   "5/5 Djinn Artifact Token",
+  // Serpent Generator lists none either.
+  "Snake Token (artifact, poison)",
 ]);
 
 describe("token art", () => {

@@ -8,6 +8,7 @@ import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
+import _poolAladdin from "../pool/aladdin.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
 import _poolAmonkhetRaceway from "../pool/amonkhet-raceway.js";
@@ -255,6 +256,7 @@ import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
+import _poolKismet from "../pool/kismet.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
 import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
@@ -376,6 +378,7 @@ import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
+import _poolRecall from "../pool/recall.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
@@ -614,6 +617,7 @@ const shard: CardShard = {
     _poolAccelerate,
     _poolAesiTyrantOfGyreStrait,
     _poolAkroanJailer,
+    _poolAladdin,
     _poolAliriosEnraptured,
     _poolAlmightyBrushwagg,
     _poolAmonkhetRaceway,
@@ -861,6 +865,7 @@ const shard: CardShard = {
     _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
+    _poolKismet,
     _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
     _poolKnockoutManeuver,
@@ -982,6 +987,7 @@ const shard: CardShard = {
     _poolRazeToTheGround,
     _poolRazorRings,
     _poolRazorkinNeedlehead,
+    _poolRecall,
     _poolRedtoothGenealogist,
     _poolReflectingPool,
     _poolRegalUnicorn,

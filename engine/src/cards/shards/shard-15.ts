@@ -39,6 +39,7 @@ import _poolBiblioplexKraken from "../pool/biblioplex-kraken.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
+import _poolBlight from "../pool/blight.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
@@ -230,6 +231,7 @@ import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
 import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeartfire from "../pool/heartfire.js";
+import _poolHeavensGate from "../pool/heavens-gate.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
@@ -363,6 +365,7 @@ import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
 import _poolPopularEntertainer from "../pool/popular-entertainer.js";
+import _poolPossessionEngine from "../pool/possession-engine.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrizefight from "../pool/prizefight.js";
@@ -589,6 +592,7 @@ const shard: CardShard = {
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
     _poolBlessedHippogriff,
+    _poolBlight,
     _poolBlightstepPathway,
     _poolBloodMoney,
     _poolBloodtallowCandle,
@@ -780,6 +784,7 @@ const shard: CardShard = {
     _poolHealersFlock,
     _poolHealingTechnique,
     _poolHeartfire,
+    _poolHeavensGate,
     _poolHeirloomMirror,
     _poolHiddenFootblade,
     _poolHighlandWeald,
@@ -913,6 +918,7 @@ const shard: CardShard = {
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,
     _poolPopularEntertainer,
+    _poolPossessionEngine,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrizefight,

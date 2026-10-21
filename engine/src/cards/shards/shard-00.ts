@@ -227,6 +227,7 @@ import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
+import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
@@ -384,6 +385,7 @@ import _poolReleaseTheDogs from "../pool/release-the-dogs.js";
 import _poolRelicAxe from "../pool/relic-axe.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
+import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
@@ -523,6 +525,7 @@ import _poolTuskeriFirewalker from "../pool/tuskeri-firewalker.js";
 import _poolTwistedEmbrace from "../pool/twisted-embrace.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
+import _poolTyLeeChiBlocker from "../pool/ty-lee-chi-blocker.js";
 import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.js";
 import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
@@ -815,6 +818,7 @@ const shard: CardShard = {
     _poolHeadlessSpecter,
     _poolHealingSalve,
     _poolHellkiteCourser,
+    _poolHellsCaretaker,
     _poolHiredClaw,
     _poolHornetHarasser,
     _poolHowlsquadHeavy,
@@ -972,6 +976,7 @@ const shard: CardShard = {
     _poolRelicAxe,
     _poolReliquaryMonk,
     _poolReliquaryTower,
+    _poolReset,
     _poolRestlessFortress,
     _poolRevelInRiches,
     _poolRhizomeLurcher,
@@ -1111,6 +1116,7 @@ const shard: CardShard = {
     _poolTwistedEmbrace,
     _poolTwistedLandscape,
     _poolTwofoldIntent,
+    _poolTyLeeChiBlocker,
     _poolUchbenbakTheGreatMistake,
     _poolUglukOfTheWhiteHand,
     _poolUltramarinesHonourGuard,

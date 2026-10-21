@@ -292,6 +292,7 @@ import _poolMindcrank from "../pool/mindcrank.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
+import _poolMoat from "../pool/moat.js";
 import _poolMobLookout from "../pool/mob-lookout.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
 import _poolMoodmarkPainter from "../pool/moodmark-painter.js";
@@ -456,6 +457,7 @@ import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
 import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
+import _poolTheTabernacleAtPendrellVale from "../pool/the-tabernacle-at-pendrell-vale.js";
 import _poolTheTarrasque from "../pool/the-tarrasque.js";
 import _poolTheWitchsVanity from "../pool/the-witchs-vanity.js";
 import _poolTheWorldTree from "../pool/the-world-tree.js";
@@ -488,6 +490,7 @@ import _poolUnexplainedVision from "../pool/unexplained-vision.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUntamedPup from "../pool/untamed-pup.js";
+import _poolUntamedWilds from "../pool/untamed-wilds.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
@@ -844,6 +847,7 @@ const shard: CardShard = {
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
+    _poolMoat,
     _poolMobLookout,
     _poolMonumentToEndurance,
     _poolMoodmarkPainter,
@@ -1008,6 +1012,7 @@ const shard: CardShard = {
     _poolTheNecrobloom,
     _poolTheNotaryHobbits,
     _poolTheSpotsPortal,
+    _poolTheTabernacleAtPendrellVale,
     _poolTheTarrasque,
     _poolTheWitchsVanity,
     _poolTheWorldTree,
@@ -1040,6 +1045,7 @@ const shard: CardShard = {
     _poolUnnaturalSpeed,
     _poolUnrootedAncestor,
     _poolUntamedPup,
+    _poolUntamedWilds,
     _poolUproot,
     _poolUrGolemsEye,
     _poolUrtetRemnantOfMemnarch,
