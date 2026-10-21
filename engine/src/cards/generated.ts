@@ -17161,6 +17161,7 @@ import _tokensElementalTokenWildfireAwakener from "./tokens/elemental-token-wild
 import _tokensElementalToken from "./tokens/elemental-token.js";
 import _tokensElephantToken from "./tokens/elephant-token.js";
 import _tokensElfDruidToken from "./tokens/elf-druid-token.js";
+import _tokensElfKnightToken from "./tokens/elf-knight-token.js";
 import _tokensElfToken from "./tokens/elf-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "./tokens/elf-warrior-token-rhys-the-redeemed.js";
 import _tokensElfWarriorToken from "./tokens/elf-warrior-token.js";
@@ -34684,6 +34685,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensElementalToken,
   _tokensElephantToken,
   _tokensElfDruidToken,
+  _tokensElfKnightToken,
   _tokensElfToken,
   _tokensElfWarriorTokenRhysTheRedeemed,
   _tokensElfWarriorToken,
@@ -52208,6 +52210,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/elemental-token": _tokensElementalToken,
   "tokens/elephant-token": _tokensElephantToken,
   "tokens/elf-druid-token": _tokensElfDruidToken,
+  "tokens/elf-knight-token": _tokensElfKnightToken,
   "tokens/elf-token": _tokensElfToken,
   "tokens/elf-warrior-token-rhys-the-redeemed": _tokensElfWarriorTokenRhysTheRedeemed,
   "tokens/elf-warrior-token": _tokensElfWarriorToken,

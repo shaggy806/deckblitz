@@ -528,6 +528,7 @@ import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
 import _tokensDemonToken55 from "../tokens/demon-token-5-5.js";
 import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-token-dance-of-the-tumbleweeds.js";
+import _tokensElfKnightToken from "../tokens/elf-knight-token.js";
 import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
@@ -1069,6 +1070,7 @@ const shard: CardShard = {
     _tokensDeathtouchRatToken,
     _tokensDemonToken55,
     _tokensElementalTokenDanceOfTheTumbleweeds,
+    _tokensElfKnightToken,
     _tokensFishToken,
     _tokensGoblinConstructToken,
     _tokensGolemEnchantmentArtifactToken,

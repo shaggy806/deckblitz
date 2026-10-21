@@ -149,6 +149,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Elemental Token (Wildfire Awakener)",
   "Elephant Token",
   "Elf Druid Token",
+  "Elf Knight Token",
   "Elf Token",
   "Elf Warrior Token",
   "Elf Warrior Token (Rhys the Redeemed)",
