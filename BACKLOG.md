@@ -80,6 +80,15 @@ section keeps only what to do next.
   `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
   all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid
   Ground and Doc Samson after the additive counters each need more).
+- **Need-key audit, after the set walk's first pass** (the user's call, 2026-10-21): sort every
+  need key the blocked records use into "already expressible" (an authoring agent missed a
+  shape — author the card), "a small extension of an existing effect" (an option, a field or an
+  `-all` form — e.g. `effect:return-commanders-to-command-zone` is `put-in-command-zone` in an
+  `-all` form, Mass Diminish's `animate-all` lacks only `controlledByTarget`, Vengeful Warchief's
+  `loses-life` lacks only the `firstTimeEachTurn` `gains-life` has), and "a real feature"; merge
+  near-duplicate keys (B121 proposed `replacement:dies-exile-with-counter` beside the existing
+  `replacement:die-exile-with-counter`). `cards:needs -- --stale` finds only needs later built,
+  not ones keyed wrong from the start.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`). Balance, Channel,
   Emrakul, the Aeons Torn, Erayo, Fastbond, Flash, Hullbreacher, Iona, Leovold, Limited
   Resources, Nadu, Sundering Titan, Sylvan Primordial, Time Vault, Trade Secrets and Yawgmoth's
