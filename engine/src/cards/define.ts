@@ -1086,6 +1086,10 @@ export type StaticCondition =
    * (rule 603.4) reading the `kicked` flag the cast left on the object.
    */
   | { readonly kind: "self-kicked" }
+  /** Was the ability's own source cast for its spectacle cost (rule
+   * 702.137)? — Rafter Demon's "When this creature enters, **if its
+   * spectacle cost was paid**, …"; read like `self-kicked`. */
+  | { readonly kind: "self-spectacle-paid" }
   /**
    * How many counters the ability's own source has — Undying's "**if it had
    * no +1/+1 counters on it**".
@@ -2524,9 +2528,15 @@ export interface CardDefinition {
    * it on the card's controller's view as it's cast ("If it's not your turn"
    * — Force of Negation, Force of Vigor). Offered only when all of it can be
    * paid (rule 601.2h), so never with no other card to exile.
+   *
+   * `keyword: "spectacle"` is **Spectacle [cost]** (rule 702.137a — Skewer
+   * the Critics): `{ mana, keyword: "spectacle", condition: SPECTACLE }`,
+   * the condition "an opponent lost life this turn"; a spell cast this way
+   * answers `self-spectacle-paid`.
    */
   readonly alternativeCost: {
     readonly mana: string;
+    readonly keyword?: "spectacle";
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;

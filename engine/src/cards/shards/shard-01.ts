@@ -242,6 +242,7 @@ import _poolLieutenantKirtar from "../pool/lieutenant-kirtar.js";
 import _poolLifegift from "../pool/lifegift.js";
 import _poolLightEmUp from "../pool/light-em-up.js";
 import _poolLightPawsEmperorsVoice from "../pool/light-paws-emperors-voice.js";
+import _poolLightUpTheStage from "../pool/light-up-the-stage.js";
 import _poolLightwheelEnhancements from "../pool/lightwheel-enhancements.js";
 import _poolLilianasDevotee from "../pool/lilianas-devotee.js";
 import _poolLilianasSpecter from "../pool/lilianas-specter.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolLifegift,
     _poolLightEmUp,
     _poolLightPawsEmperorsVoice,
+    _poolLightUpTheStage,
     _poolLightwheelEnhancements,
     _poolLilianasDevotee,
     _poolLilianasSpecter,

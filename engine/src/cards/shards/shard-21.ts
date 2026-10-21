@@ -278,6 +278,7 @@ import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
 import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
+import _poolMinistrantOfObligation from "../pool/ministrant-of-obligation.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
 import _poolMishrasDomination from "../pool/mishras-domination.js";
@@ -364,6 +365,7 @@ import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
+import _poolSauroformHybrid from "../pool/sauroform-hybrid.js";
 import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
@@ -805,6 +807,7 @@ const shard: CardShard = {
     _poolMicromancer,
     _poolMigratoryGreathorn,
     _poolMinionsReturn,
+    _poolMinistrantOfObligation,
     _poolMirrorEntity,
     _poolMisguidedRage,
     _poolMishrasDomination,
@@ -891,6 +894,7 @@ const shard: CardShard = {
     _poolRustwingFalcon,
     _poolSandstoneBridge,
     _poolSatoruUmezawa,
+    _poolSauroformHybrid,
     _poolScaledHerbalist,
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,

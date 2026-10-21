@@ -1152,6 +1152,25 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("afterlife, spectacle and adapt (rules 702.135, 702.137, 701.46)", () => {
+    const priest = face("Afterlife 2 (When this creature dies, create two 1/1 white and black Spirit creature tokens with flying.)", "Creature — Human Cleric");
+    expect(priest.triggered[0].effect).toEqual({ kind: "create-token", token: "Spirit Token (White-Black)", count: 2 });
+    expect(priest.complete).toBe(true);
+    const demon = face("Spectacle {3}{B}{R}\nWhen ~ enters, if its spectacle cost was paid, each opponent discards a card.", "Creature — Demon");
+    expect(demon.alternativeCost).toEqual({
+      mana: "{3}{B}{R}",
+      keyword: "spectacle",
+      condition: { kind: "turn-stat", stat: "life-lost", who: "opponent", atLeast: 1 },
+    });
+    expect(demon.triggered[0].condition).toEqual({ kind: "self-spectacle-paid" });
+    const eel = face("{2}{U}: Adapt 2.", "Creature — Fish");
+    expect(eel.activated[0].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
+      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 },
+    });
+  });
+
   it("entwine (rule 702.42): a kicker that chooses every mode", () => {
     const spell = face("Choose one —\n• You gain 4 life.\n• Draw a card.\nEntwine {2} (Choose both if you pay the entwine cost.)", "Sorcery");
     expect(spell.kicker).toEqual({ cost: "{2}", keyword: "entwine" });

@@ -390,6 +390,7 @@ import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
+import _poolSkitterEel from "../pool/skitter-eel.js";
 import _poolSkolaGrovedancer from "../pool/skola-grovedancer.js";
 import _poolSkullportMerchant from "../pool/skullport-merchant.js";
 import _poolSkySkiff from "../pool/sky-skiff.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolSilverShroudCostume,
     _poolSilverbackElder,
     _poolSilverchaseFox,
+    _poolSkitterEel,
     _poolSkolaGrovedancer,
     _poolSkullportMerchant,
     _poolSkySkiff,

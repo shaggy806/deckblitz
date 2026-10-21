@@ -432,6 +432,7 @@ import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
+import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
@@ -970,6 +971,7 @@ const shard: CardShard = {
     _poolSunkenRuins,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
+    _poolSyndicateMessenger,
     _poolTackleArtist,
     _poolTakenumaAbandonedMire,
     _poolTanufelRimespeaker,

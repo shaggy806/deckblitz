@@ -326,6 +326,7 @@ import _poolOgreArsonist from "../pool/ogre-arsonist.js";
 import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
+import _poolOrzhovEnforcer from "../pool/orzhov-enforcer.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
 import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
 import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
@@ -891,6 +892,7 @@ const shard: CardShard = {
     _poolOliphaunt,
     _poolOliviasWrath,
     _poolOnWingsOfGold,
+    _poolOrzhovEnforcer,
     _poolOtherworldlyGaze,
     _poolOutlawStitcher,
     _poolOverlordOfTheBalemurk,

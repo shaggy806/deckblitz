@@ -371,7 +371,9 @@
   "keyword:reconfigure",
   "cost:alt-cost-exile-from-hand",
   "keyword:evoke-alternative-non-mana-cost",
-  "keyword:entwine"
+  "keyword:entwine",
+  "keyword:spectacle",
+  "keyword:afterlife"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

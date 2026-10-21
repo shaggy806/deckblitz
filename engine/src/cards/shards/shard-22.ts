@@ -50,6 +50,7 @@ import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
 import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
+import _poolBodyCount from "../pool/body-count.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
@@ -184,6 +185,7 @@ import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
+import _poolHackrobat from "../pool/hackrobat.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
@@ -599,6 +601,7 @@ const shard: CardShard = {
     _poolBloomTender,
     _poolBloomingBlast,
     _poolBlotOutTheSky,
+    _poolBodyCount,
     _poolBogInitiate,
     _poolBoneclubBerserker,
     _poolBoulderbranchGolem,
@@ -733,6 +736,7 @@ const shard: CardShard = {
     _poolGriffinAerie,
     _poolGuadosalamFarplaneGateway,
     _poolGuardianOfPilgrims,
+    _poolHackrobat,
     _poolHakodaSelflessCommander,
     _poolHauntedScreen,
     _poolHeavyBallista,

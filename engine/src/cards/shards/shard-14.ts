@@ -118,6 +118,7 @@ import _poolDawnstrikePaladin from "../pool/dawnstrike-paladin.js";
 import _poolDaybreakCombatants from "../pool/daybreak-combatants.js";
 import _poolDeadeyeDuelist from "../pool/deadeye-duelist.js";
 import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
+import _poolDebtorsTransport from "../pool/debtors-transport.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
@@ -655,6 +656,7 @@ const shard: CardShard = {
     _poolDaybreakCombatants,
     _poolDeadeyeDuelist,
     _poolDeathbloomThallid,
+    _poolDebtorsTransport,
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,

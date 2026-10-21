@@ -26,6 +26,7 @@
 import {
   affinity,
   afflict,
+  afterlife,
   annihilator,
   crew,
   dethrone,
@@ -40,6 +41,7 @@ import {
   outlast,
   persist,
   saddle,
+  spectacle,
   undying,
   unearth,
   vanishing,
@@ -138,6 +140,10 @@ function keywordPart(part) {
   // Saddle N (rule 702.171a): crew's cost at sorcery speed, the Mount saddled.
   if ((m = /^saddle (\d+)$/i.exec(p))) return { activated: [saddle(Number(m[1]))] };
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
+  // Afterlife N (rule 702.135a): its dies trigger.
+  if ((m = /^afterlife (\d+)$/i.exec(p))) return { triggered: [afterlife(Number(m[1]))] };
+  // Spectacle [cost] (rule 702.137a): an alternative cost.
+  if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
@@ -942,6 +948,15 @@ export function parseSentence(sentence, ctx) {
   // X for a cast-time X.
   if (/\bwhere X\b|\bfor each\b/i.test(s)) return null;
   let m;
+  // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
+  // put N +1/+1 counters on it."
+  if ((m = /^Adapt (\d+)\.$/.exec(s))) {
+    return {
+      kind: "conditional",
+      condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
+      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: Number(m[1]) },
+    };
+  }
   const re = (src) => new RegExp(`^${src}\\.$`, "i");
   const amount = (w) => numberOf(w);
   const slot = (phrase) => {
@@ -2341,6 +2356,9 @@ const INTERVENING_IFS = {
   // Rule 702.166b: the permanent's spell was bargained.
   "if it was bargained,": { kind: "self-kicked" },
   "if ~ was bargained,": { kind: "self-kicked" },
+  // Rule 702.137a: the permanent's spell was cast for its spectacle cost.
+  "if its spectacle cost was paid,": { kind: "self-spectacle-paid" },
+  "if ~'s spectacle cost was paid,": { kind: "self-spectacle-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },

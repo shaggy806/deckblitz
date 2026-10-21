@@ -3216,16 +3216,18 @@ export class Game {
         ...(offspring === true && offspringCost !== null ? { offspring: true, offspringCost } : {}),
         ...(evoke !== undefined ? { evoke: true, evokeCost: evoke } : {}),
         ...(evoke !== undefined && evoke === def.evoke?.cost && def.evoke.exileFromHand !== undefined
-          ? { pitchText: `exile ${def.evoke.exileFromHand.text} from your hand` }
+          ? { altCostText: `exile ${def.evoke.exileFromHand.text} from your hand` }
           : {}),
         ...(altCost === true && def.alternativeCost?.exileFromHand !== undefined
           ? {
-              pitchText: [
+              altCostText: [
                 ...(def.alternativeCost.payLife !== undefined ? [`pay ${def.alternativeCost.payLife} life`] : []),
                 `exile ${def.alternativeCost.exileFromHand.text} from your hand`,
               ].join(", "),
             }
-          : {}),
+          : altCost === true && def.alternativeCost?.keyword !== undefined
+            ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
+            : {}),
         ...(free ? { free: true } : {}),
         ...(harmonizeTap !== undefined
           ? {
@@ -11990,6 +11992,7 @@ export class Game {
     }
     if (offspring) object.offspringGrantPaid = true;
     if (evoke !== null) object.evokePaid = true;
+    if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
     if (overload) object.overloaded = true;
     this.executePayment(player, payment);
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
@@ -25002,6 +25005,7 @@ export class Game {
       ...(object.timesKicked !== undefined ? { timesKicked: object.timesKicked } : {}),
       ...(object.overloaded === true ? { overloaded: true } : {}),
       ...(object.evokePaid === true ? { evokePaid: true } : {}),
+      ...(object.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
@@ -25067,6 +25071,7 @@ export class Game {
       ...(spell.timesKicked !== undefined ? { timesKicked: spell.timesKicked } : {}),
       ...(spell.overloaded === true ? { overloaded: true } : {}),
       ...(spell.evokePaid === true ? { evokePaid: true } : {}),
+      ...(spell.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(spell.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       // "If you copy a spell for which the gift was promised, the gift was
       // also promised to the same opponent for the copy" (the ruling).
@@ -33712,6 +33717,7 @@ export class Game {
       isCommander: object.isCommander,
       tapped: object.tapped,
       ...(object.enteredKicked === true ? { enteredKicked: true } : {}),
+      ...(object.enteredSpectacle === true ? { enteredSpectacle: true } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
@@ -34233,6 +34239,7 @@ export class Game {
     // already here (Verix Bladewing). Cleared like any other zone-scoped
     // flag on the *next* move, so a Verix that dies and returns is unkicked.
     const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
+    const enteringSpectacle = object.zone === "stack" && to === "battlefield" && object.spectaclePaid === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
@@ -34516,12 +34523,14 @@ export class Game {
     object.offspringGrantPaid = undefined;
     object.giftTo = undefined;
     object.evokePaid = undefined;
+    object.spectaclePaid = undefined;
     // "That spell can't be countered" was about this casting, so it ends when
     // the spell leaves the stack (Cavern of Souls). So does what the casting
     // sacrificed ("the sacrificed creature" — see `LastKnownRefs`).
     object.uncounterable = undefined;
     object.lastKnownRefs = undefined;
     object.enteredKicked = enteringKicked;
+    object.enteredSpectacle = enteringSpectacle;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;

@@ -121,6 +121,10 @@ export interface GameObject {
    * rider is an ETB trigger (Verix Bladewing). See `moveObject`.
    */
   enteredKicked?: boolean;
+  /** This permanent's spell was cast for its spectacle cost (rule 702.137),
+   * kept across the move the way `enteredKicked` is — Rafter Demon's "if its
+   * spectacle cost was paid". */
+  enteredSpectacle?: boolean;
   /** How many times its spell was kicked, for a multikicker spell (rule
    * 702.33c) — `timesKicked` carried across the stack-to-battlefield move
    * the way `enteredKicked` is, for "enters with a charge counter on it for
@@ -783,6 +787,10 @@ export interface GameObject {
    * becomes gets evoke's sacrifice trigger as it enters. Cleared on any
    * zone change after that. */
   evokePaid?: boolean;
+  /** This spell was cast for its spectacle cost (rule 702.137 — the
+   * `alternativeCost` with `keyword: "spectacle"`), for "if its spectacle
+   * cost was paid" (`self-spectacle-paid`). A copy has it too (707.10). */
+  spectaclePaid?: boolean;
   /** This spell was cast for its overload cost (rule 702.126 — Cyclonic
    * Rift): its overload cost was paid instead of its mana cost, with no
    * targets, so `resolveTopOfStack` applies `CardDefinition.overload.effect`.
@@ -1169,6 +1177,7 @@ export interface SpellSnapshot {
   readonly timesKicked?: number;
   readonly overloaded?: boolean;
   readonly evokePaid?: boolean;
+  readonly spectaclePaid?: boolean;
   readonly offspringGrantPaid?: boolean;
   /** Who its gift was promised to — a copy's is promised to them too. */
   readonly giftTo?: PlayerId;
@@ -1469,6 +1478,8 @@ export interface LastKnownInfo {
   /** Its spell was cast kicked (or its offspring cost paid) — `enteredKicked`,
    * so "if it was kicked" still answers once it has left. */
   readonly enteredKicked?: boolean;
+  /** Its spell was cast for its spectacle cost — `enteredSpectacle`. */
+  readonly enteredSpectacle?: boolean;
   /** How many times its spell's multikicker or squad cost was paid —
    * `enteredTimesKicked`, so squad's copies are still made once it has left
    * (rule 702.157a). */

@@ -390,6 +390,32 @@ export const persist = (): TriggeredAbility => ({
 });
 
 /**
+ * Afterlife N (rule 702.135a): "When this permanent dies, create N 1/1 white
+ * and black Spirit creature tokens with flying." Each instance triggers on
+ * its own (702.135b). Put "Afterlife N" in `text` as well.
+ */
+export const afterlife = (n: number): TriggeredAbility => ({
+  trigger: { on: "dies", who: "self" },
+  targets: [],
+  effect: { kind: "create-token", token: "Spirit Token (White-Black)", count: n },
+  resolve: null,
+  text: `Afterlife ${n} (When this creature dies, create ${n === 1 ? "a" : String(n)} 1/1 white and black Spirit creature token${n === 1 ? "" : "s"} with flying.)`,
+});
+
+/**
+ * Spectacle [cost] (rule 702.137a): "You may cast this spell for its
+ * spectacle cost rather than its mana cost if an opponent lost life this
+ * turn" — the card's `alternativeCost`. A spell cast this way answers
+ * `self-spectacle-paid` ("if its spectacle cost was paid"). Put "Spectacle
+ * [cost]" in `text` as well.
+ */
+export const spectacle = (mana: string): NonNullable<CardDefinition["alternativeCost"]> => ({
+  mana,
+  keyword: "spectacle",
+  condition: { kind: "turn-stat", stat: "life-lost", who: "opponent", atLeast: 1 },
+});
+
+/**
  * Melee (rule 702.121): "Whenever this creature attacks, it gets +1/+1 until
  * end of turn for each opponent you attacked with a creature this combat."
  * Each instance triggers on its own. Put "Melee" in `text` as well.

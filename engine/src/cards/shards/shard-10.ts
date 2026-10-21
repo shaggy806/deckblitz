@@ -355,6 +355,7 @@ import _poolPunkFrogs from "../pool/punk-frogs.js";
 import _poolPyrophobia from "../pool/pyrophobia.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRacersRing from "../pool/racers-ring.js";
+import _poolRafterDemon from "../pool/rafter-demon.js";
 import _poolRampagingGrowth from "../pool/rampaging-growth.js";
 import _poolRanAndShaw from "../pool/ran-and-shaw.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
@@ -413,6 +414,7 @@ import _poolSiegeRhino from "../pool/siege-rhino.js";
 import _poolSilentArtisan from "../pool/silent-artisan.js";
 import _poolSilundiIsle from "../pool/silundi-isle.js";
 import _poolSimplify from "../pool/simplify.js";
+import _poolSkewerTheCritics from "../pool/skewer-the-critics.js";
 import _poolSkullslitherWorm from "../pool/skullslither-worm.js";
 import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
@@ -434,6 +436,7 @@ import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
+import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
@@ -917,6 +920,7 @@ const shard: CardShard = {
     _poolPyrophobia,
     _poolQuantumMisalignment,
     _poolRacersRing,
+    _poolRafterDemon,
     _poolRampagingGrowth,
     _poolRanAndShaw,
     _poolRavenousRats,
@@ -975,6 +979,7 @@ const shard: CardShard = {
     _poolSilentArtisan,
     _poolSilundiIsle,
     _poolSimplify,
+    _poolSkewerTheCritics,
     _poolSkullslitherWorm,
     _poolSkyshroudArcher,
     _poolSkywinderDrake,
@@ -996,6 +1001,7 @@ const shard: CardShard = {
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,
     _poolSpiderManMilesMorales,
+    _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,

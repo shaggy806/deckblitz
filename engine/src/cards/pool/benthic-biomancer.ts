@@ -33,7 +33,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "conditional",
-        condition: { kind: "source", filter: { counters: { kind: "+1/+1", compare: { op: "eq", n: 0 } } } },
+        condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
         then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       },
       resolve: null,
