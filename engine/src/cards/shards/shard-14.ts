@@ -249,6 +249,7 @@ import _poolHeraldOfThePantheon from "../pool/herald-of-the-pantheon.js";
 import _poolHeroOfTheGames from "../pool/hero-of-the-games.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHiddenCataract from "../pool/hidden-cataract.js";
+import _poolHieromancersCage from "../pool/hieromancers-cage.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
@@ -287,6 +288,7 @@ import _poolKrosanColossus from "../pool/krosan-colossus.js";
 import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
+import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
 import _poolLightningCoreExcavator from "../pool/lightning-core-excavator.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
@@ -795,6 +797,7 @@ const shard: CardShard = {
     _poolHeroOfTheGames,
     _poolHexplateWallbreaker,
     _poolHiddenCataract,
+    _poolHieromancersCage,
     _poolHistoryOfBenalia,
     _poolHoarShade,
     _poolHollowScavenger,
@@ -833,6 +836,7 @@ const shard: CardShard = {
     _poolKurbisHarvestCelebrant,
     _poolLassoedByTheLaw,
     _poolLawbringer,
+    _poolLeoninVanguard,
     _poolLeveler,
     _poolLightningCoreExcavator,
     _poolLimDulsHighGuard,

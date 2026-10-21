@@ -9037,6 +9037,39 @@
   },
   "effect:player-effect-target-player": {
    "example": "Will Kenrith"
+  },
+  "amount:count-for-chosen-player": {
+   "example": "Boreas Charger"
+  },
+  "effect:sacrifice-all-but-dynamic": {
+   "example": "Magus of the Balance"
+  },
+  "effect:prevent-counters-while-source": {
+   "example": "Suncleanser"
+  },
+  "effect:grant-cant-be-blocked-except": {
+   "example": "Departed Deckhand"
+  },
+  "trigger:commander-put-into-command-zone": {
+   "example": "Myth Unbound"
+  },
+  "effect:unless-sacrifice-target": {
+   "example": "Enchanter's Bane"
+  },
+  "replacement:exile-instead-counters-on-source": {
+   "example": "Ravenous Slime"
+  },
+  "effect:per-player-targets-sacrifice-reveal-put": {
+   "example": "Vaevictis Asmadi, the Dire"
+  },
+  "condition:opponent-controls-n-more": {
+   "example": "Isolated Watchtower"
+  },
+  "effect:temporary-enter-exile-replacement": {
+   "example": "Mistcaller"
+  },
+  "effect:damage-from-this-way": {
+   "example": "Vivien's Invocation"
   }
  }
 }

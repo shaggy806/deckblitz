@@ -78,6 +78,7 @@ import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
 import _poolCorporealProjection from "../pool/corporeal-projection.js";
 import _poolCourtOfVantress from "../pool/court-of-vantress.js";
+import _poolCrashOfRhinoBeetles from "../pool/crash-of-rhino-beetles.js";
 import _poolCrazedSkirge from "../pool/crazed-skirge.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
@@ -241,6 +242,7 @@ import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLegionVanguard from "../pool/legion-vanguard.js";
+import _poolLenaSelflessChampion from "../pool/lena-selfless-champion.js";
 import _poolLeyWeaver from "../pool/ley-weaver.js";
 import _poolLightOfTheLegion from "../pool/light-of-the-legion.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
@@ -408,6 +410,7 @@ import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
+import _poolSkullStorm from "../pool/skull-storm.js";
 import _poolSkyboxFerry from "../pool/skybox-ferry.js";
 import _poolSkyshroudClaim from "../pool/skyshroud-claim.js";
 import _poolSkyshroudPoacher from "../pool/skyshroud-poacher.js";
@@ -648,6 +651,7 @@ const shard: CardShard = {
     _poolContrabandLivestock,
     _poolCorporealProjection,
     _poolCourtOfVantress,
+    _poolCrashOfRhinoBeetles,
     _poolCrazedSkirge,
     _poolCreosoteHeath,
     _poolCrushOfWurms,
@@ -811,6 +815,7 @@ const shard: CardShard = {
     _poolLatNamAdept,
     _poolLaviniaFoilToConspiracy,
     _poolLegionVanguard,
+    _poolLenaSelflessChampion,
     _poolLeyWeaver,
     _poolLightOfTheLegion,
     _poolLightningVisionary,
@@ -978,6 +983,7 @@ const shard: CardShard = {
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
     _poolSimicCharm,
+    _poolSkullStorm,
     _poolSkyboxFerry,
     _poolSkyshroudClaim,
     _poolSkyshroudPoacher,

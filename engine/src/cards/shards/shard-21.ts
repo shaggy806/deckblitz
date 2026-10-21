@@ -136,6 +136,7 @@ import _poolEgonGodOfDeath from "../pool/egon-god-of-death.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElspethsNightmare from "../pool/elspeths-nightmare.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
+import _poolElvishClancaller from "../pool/elvish-clancaller.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
 import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
 import _poolEmissaryGreen from "../pool/emissary-green.js";
@@ -676,6 +677,7 @@ const shard: CardShard = {
     _poolElanorGardner,
     _poolElspethsNightmare,
     _poolElvenFarsight,
+    _poolElvishClancaller,
     _poolElvishDoomsayer,
     _poolEmeritusOfAbundance,
     _poolEmissaryGreen,

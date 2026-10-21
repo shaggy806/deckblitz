@@ -299,6 +299,7 @@ import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
+import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
 import _poolLivaanCultistOfTiamat from "../pool/livaan-cultist-of-tiamat.js";
@@ -422,6 +423,7 @@ import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
+import _poolShieldMare from "../pool/shield-mare.js";
 import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
 import _poolShimmerscaleDrake from "../pool/shimmerscale-drake.js";
 import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
@@ -871,6 +873,7 @@ const shard: CardShard = {
     _poolLakeTownToymaker,
     _poolLanternOfTheLost,
     _poolLeoninLightbringer,
+    _poolLilianasSpoils,
     _poolLilysplashMentor,
     _poolLithomanticBarrage,
     _poolLivaanCultistOfTiamat,
@@ -994,6 +997,7 @@ const shard: CardShard = {
     _poolSeveredLegion,
     _poolShardlessAgent,
     _poolSheHulkJenniferWalters,
+    _poolShieldMare,
     _poolShimmeringBarrier,
     _poolShimmerscaleDrake,
     _poolShinenOfStarsLight,

@@ -10,6 +10,7 @@ import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAirMarshal from "../pool/air-marshal.js";
+import _poolAjanisInfluence from "../pool/ajanis-influence.js";
 import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
@@ -406,6 +407,7 @@ import _poolShimmercreep from "../pool/shimmercreep.js";
 import _poolShockingSharpshooter from "../pool/shocking-sharpshooter.js";
 import _poolShorelineLooter from "../pool/shoreline-looter.js";
 import _poolSiegebreakerGiant from "../pool/siegebreaker-giant.js";
+import _poolSigiledSwordOfValeron from "../pool/sigiled-sword-of-valeron.js";
 import _poolSilverKnight from "../pool/silver-knight.js";
 import _poolSimicGrowthChamber from "../pool/simic-growth-chamber.js";
 import _poolSimicSkySwallower from "../pool/simic-sky-swallower.js";
@@ -482,6 +484,7 @@ import _poolTorturePit from "../pool/torture-pit.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTroveTracker from "../pool/trove-tracker.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
+import _poolTurntimberSower from "../pool/turntimber-sower.js";
 import _poolTurtlePower from "../pool/turtle-power.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymaretChosenFromDeath from "../pool/tymaret-chosen-from-death.js";
@@ -569,6 +572,7 @@ const shard: CardShard = {
     _poolAffaProtector,
     _poolAidFromTheCowl,
     _poolAirMarshal,
+    _poolAjanisInfluence,
     _poolAlliedAssault,
     _poolAllosaurusShepherd,
     _poolAmbitiousAssault,
@@ -965,6 +969,7 @@ const shard: CardShard = {
     _poolShockingSharpshooter,
     _poolShorelineLooter,
     _poolSiegebreakerGiant,
+    _poolSigiledSwordOfValeron,
     _poolSilverKnight,
     _poolSimicGrowthChamber,
     _poolSimicSkySwallower,
@@ -1041,6 +1046,7 @@ const shard: CardShard = {
     _poolTriumphantAdventurer,
     _poolTroveTracker,
     _poolTuknirDeathlock,
+    _poolTurntimberSower,
     _poolTurtlePower,
     _poolTwinbladeAssassins,
     _poolTymaretChosenFromDeath,

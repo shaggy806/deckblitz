@@ -159,6 +159,7 @@ import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
 import _poolFractalize from "../pool/fractalize.js";
 import _poolFreeTheFae from "../pool/free-the-fae.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
+import _poolFuryStorm from "../pool/fury-storm.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
@@ -400,6 +401,7 @@ import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
+import _poolSkilledAnimator from "../pool/skilled-animator.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
 import _poolSkybladesBoon from "../pool/skyblades-boon.js";
 import _poolSlashOfTalons from "../pool/slash-of-talons.js";
@@ -503,6 +505,7 @@ import _poolViciousRivalry from "../pool/vicious-rivalry.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
 import _poolVineshaperProdigy from "../pool/vineshaper-prodigy.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
+import _poolVivienOfTheArkbow from "../pool/vivien-of-the-arkbow.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
 import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
@@ -705,6 +708,7 @@ const shard: CardShard = {
     _poolFractalize,
     _poolFreeTheFae,
     _poolFromBeyond,
+    _poolFuryStorm,
     _poolGaeasCradle,
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
@@ -946,6 +950,7 @@ const shard: CardShard = {
     _poolShuGrainCaravan,
     _poolSigiledSkink,
     _poolSisterHospitaller,
+    _poolSkilledAnimator,
     _poolSkyTerror,
     _poolSkybladesBoon,
     _poolSlashOfTalons,
@@ -1049,6 +1054,7 @@ const shard: CardShard = {
     _poolVillageCannibals,
     _poolVineshaperProdigy,
     _poolVitalizingWind,
+    _poolVivienOfTheArkbow,
     _poolVoiceOfTheProvinces,
     _poolVoiceOfVictory,
     _poolVoltaicServant,

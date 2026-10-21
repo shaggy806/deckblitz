@@ -197,6 +197,7 @@ import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
 import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
+import _poolHeroicReinforcements from "../pool/heroic-reinforcements.js";
 import _poolHighlandGiant from "../pool/highland-giant.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
 import _poolHordelingOutburst from "../pool/hordeling-outburst.js";
@@ -373,6 +374,7 @@ import _poolSaltRoadPatrol from "../pool/salt-road-patrol.js";
 import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
+import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
 import _poolSautekhImmortal from "../pool/sautekh-immortal.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
@@ -413,6 +415,7 @@ import _poolSolemnRecruit from "../pool/solemn-recruit.js";
 import _poolSoulFeast from "../pool/soul-feast.js";
 import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
 import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
+import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
@@ -737,6 +740,7 @@ const shard: CardShard = {
     _poolHeirOfTheAncientFang,
     _poolHeroesOfTheRevel,
     _poolHeroesRemembered,
+    _poolHeroicReinforcements,
     _poolHighlandGiant,
     _poolHomaridShaman,
     _poolHordelingOutburst,
@@ -913,6 +917,7 @@ const shard: CardShard = {
     _poolSamutTyrantOfNaktamun,
     _poolSanctumOfTranquilLight,
     _poolSarevokDeathbringer,
+    _poolSarkhansWhelp,
     _poolSautekhImmortal,
     _poolSavageMansion,
     _poolSavannah,
@@ -953,6 +958,7 @@ const shard: CardShard = {
     _poolSoulFeast,
     _poolSoulOfWindgrace,
     _poolSoulOfZendikar,
+    _poolSparktongueDragon,
     _poolSpectralRider,
     _poolSpellSwindle,
     _poolSpewFlame,

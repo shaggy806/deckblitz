@@ -512,6 +512,7 @@ import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVampiresVengeance from "../pool/vampires-vengeance.js";
 import _poolVarragothBloodskySire from "../pool/varragoth-bloodsky-sire.js";
 import _poolVaultRobber from "../pool/vault-robber.js";
+import _poolVedalkenHumiliator from "../pool/vedalken-humiliator.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
@@ -1077,6 +1078,7 @@ const shard: CardShard = {
     _poolVampiresVengeance,
     _poolVarragothBloodskySire,
     _poolVaultRobber,
+    _poolVedalkenHumiliator,
     _poolVengeance,
     _poolVengefulRebel,
     _poolViashinoSandsprinter,

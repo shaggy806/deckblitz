@@ -176,6 +176,7 @@ import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
+import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolFurycalmSnarl,
     _poolFutureFlight,
     _poolGalestrike,
+    _poolGearsmithGuardian,
     _poolGenghisFrog,
     _poolGeomancersGambit,
     _poolGeosurge,

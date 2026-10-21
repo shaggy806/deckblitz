@@ -103,6 +103,7 @@ import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
+import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
@@ -229,6 +230,7 @@ import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
+import _poolLilianaTheNecromancer from "../pool/liliana-the-necromancer.js";
 import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
@@ -426,6 +428,7 @@ import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
 import _poolTemurMonument from "../pool/temur-monument.js";
 import _poolTerminationFacilitator from "../pool/termination-facilitator.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
+import _poolTezzeretsStrider from "../pool/tezzerets-strider.js";
 import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
 import _poolTheIncredibleHulk from "../pool/the-incredible-hulk.js";
@@ -456,6 +459,7 @@ import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
 import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
+import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
@@ -602,6 +606,7 @@ const shard: CardShard = {
     _poolDreadhound,
     _poolDreamTwist,
     _poolDustBowl,
+    _poolDwarvenPriest,
     _poolEdenSeatOfTheSanctum,
     _poolElementalSummoning,
     _poolEloiseNephaliaSleuth,
@@ -728,6 +733,7 @@ const shard: CardShard = {
     _poolLambholtRaconteur,
     _poolLazotepChancellor,
     _poolLiberatedDwarf,
+    _poolLilianaTheNecromancer,
     _poolLivingLibrary,
     _poolLizardConnorssCurse,
     _poolLlanowarTribe,
@@ -925,6 +931,7 @@ const shard: CardShard = {
     _poolTemurMonument,
     _poolTerminationFacilitator,
     _poolTesharAncestorsApostle,
+    _poolTezzeretsStrider,
     _poolTheFantasticFour,
     _poolTheGaffer,
     _poolTheIncredibleHulk,
@@ -955,6 +962,7 @@ const shard: CardShard = {
     _poolVialSmasherGleefulGrenadier,
     _poolViridianLongbow,
     _poolVoiceOfTruth,
+    _poolVolleyVeteran,
     _poolVonaButcherOfMagan,
     _poolVraskasContempt,
     _poolWallOfRoots,

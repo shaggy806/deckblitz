@@ -452,6 +452,7 @@ import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
 import _poolTallAsABeanstalk from "../pool/tall-as-a-beanstalk.js";
 import _poolTalonrend from "../pool/talonrend.js";
 import _poolTappingAtTheWindow from "../pool/tapping-at-the-window.js";
+import _poolTawnosUrzasApprentice from "../pool/tawnos-urzas-apprentice.js";
 import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
@@ -1001,6 +1002,7 @@ const shard: CardShard = {
     _poolTallAsABeanstalk,
     _poolTalonrend,
     _poolTappingAtTheWindow,
+    _poolTawnosUrzasApprentice,
     _poolTeemingDragonstorm,
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,

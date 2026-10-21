@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2018 and Core Set 2019, whole** (batch 126): their last 109 cards, 76 authored by
+  four `card-author` agents and 2 by the lead — the five Storms, Ajani, Adversary of Tyrants,
+  Liliana, the Necromancer, Lena, Selfless Champion, Isareth the Awakener, Chromium, the Mutable;
+  "can't be blocked this turn" built as a restriction, so a later loss of abilities can't take it
+  (rule 611.2c — Chromium, Tezzeret's Gatebreaker, and War of the Spark's Jace, Arcane
+  Strategist); 31 blocked, umbra armor the only need shared (2026-10-21).
 - **Battlebond, whole** (batch 127): its last 58 cards, 26 authored by two `card-author` agents,
   "your team" read as "you" (rule 102.4) — Krav, the Unredeemed, Regna, the Redeemer, Sylvia
   Brightspear, Khorvath Brightflame, Virtus the Veiled, Archon of Valor's Reach; 32 blocked, 16 of

@@ -97,6 +97,7 @@ import _poolCryptRipper from "../pool/crypt-ripper.js";
 import _poolCultistsStaff from "../pool/cultists-staff.js";
 import _poolCunningNightbonder from "../pool/cunning-nightbonder.js";
 import _poolDamnablePact from "../pool/damnable-pact.js";
+import _poolDarkDwellerOracle from "../pool/dark-dweller-oracle.js";
 import _poolDarkHatchling from "../pool/dark-hatchling.js";
 import _poolDarkslickShores from "../pool/darkslick-shores.js";
 import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
@@ -196,6 +197,7 @@ import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
 import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
+import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
 import _poolHaystack from "../pool/haystack.js";
@@ -284,6 +286,7 @@ import _poolMemoryErosion from "../pool/memory-erosion.js";
 import _poolMephiticDraught from "../pool/mephitic-draught.js";
 import _poolMesmericGlare from "../pool/mesmeric-glare.js";
 import _poolMidnightHaunting from "../pool/midnight-haunting.js";
+import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
@@ -377,6 +380,7 @@ import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
 import _poolSawbladeSkinripper from "../pool/sawblade-skinripper.js";
 import _poolScanTheClouds from "../pool/scan-the-clouds.js";
+import _poolScholarOfStars from "../pool/scholar-of-stars.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
 import _poolScurridColony from "../pool/scurrid-colony.js";
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolCultistsStaff,
     _poolCunningNightbonder,
     _poolDamnablePact,
+    _poolDarkDwellerOracle,
     _poolDarkHatchling,
     _poolDarkslickShores,
     _poolDeathHoodCobra,
@@ -747,6 +752,7 @@ const shard: CardShard = {
     _poolGrondTheGatebreaker,
     _poolGuardianNaga,
     _poolGuidelightSynergist,
+    _poolGyrusWakerOfCorpses,
     _poolHarvestGwyllion,
     _poolHavenwoodBattleground,
     _poolHaystack,
@@ -835,6 +841,7 @@ const shard: CardShard = {
     _poolMephiticDraught,
     _poolMesmericGlare,
     _poolMidnightHaunting,
+    _poolMilitiaBugler,
     _poolMindsDilation,
     _poolMischievousPup,
     _poolMistDancer,
@@ -928,6 +935,7 @@ const shard: CardShard = {
     _poolSavraQueenOfTheGolgari,
     _poolSawbladeSkinripper,
     _poolScanTheClouds,
+    _poolScholarOfStars,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
     _poolScurridColony,

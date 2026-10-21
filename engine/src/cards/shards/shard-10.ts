@@ -125,6 +125,7 @@ import _poolDelete from "../pool/delete.js";
 import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
 import _poolDesertWarfare from "../pool/desert-warfare.js";
+import _poolDiamondMare from "../pool/diamond-mare.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
 import _poolDigSiteInventory from "../pool/dig-site-inventory.js";
 import _poolDimirGuildgate from "../pool/dimir-guildgate.js";
@@ -144,6 +145,7 @@ import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
+import _poolDwindle from "../pool/dwindle.js";
 import _poolEccentricFarmer from "../pool/eccentric-farmer.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
@@ -341,6 +343,7 @@ import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
 import _poolPillageTheBog from "../pool/pillage-the-bog.js";
 import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
 import _poolPippinWardenOfIsengard from "../pool/pippin-warden-of-isengard.js";
+import _poolPlagueMare from "../pool/plague-mare.js";
 import _poolPlagueNurse from "../pool/plague-nurse.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
@@ -399,6 +402,7 @@ import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js"
 import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
+import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
 import _poolScavengerDrake from "../pool/scavenger-drake.js";
 import _poolScrapshooter from "../pool/scrapshooter.js";
@@ -477,6 +481,7 @@ import _poolTaintedRemedy from "../pool/tainted-remedy.js";
 import _poolTakeUpArms from "../pool/take-up-arms.js";
 import _poolTalasMerchant from "../pool/talas-merchant.js";
 import _poolTaleOfMomo from "../pool/tale-of-momo.js";
+import _poolTalonsOfWildwood from "../pool/talons-of-wildwood.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
@@ -700,6 +705,7 @@ const shard: CardShard = {
     _poolDeltaBloodflies,
     _poolDenOfTheBugbear,
     _poolDesertWarfare,
+    _poolDiamondMare,
     _poolDictateOfErebos,
     _poolDigSiteInventory,
     _poolDimirGuildgate,
@@ -719,6 +725,7 @@ const shard: CardShard = {
     _poolDuelTactics,
     _poolDuelcraftTrainer,
     _poolDutyBeyondDeath,
+    _poolDwindle,
     _poolEccentricFarmer,
     _poolEchoOfDusk,
     _poolEclipsedMerrow,
@@ -916,6 +923,7 @@ const shard: CardShard = {
     _poolPillageTheBog,
     _poolPinToTheEarth,
     _poolPippinWardenOfIsengard,
+    _poolPlagueMare,
     _poolPlagueNurse,
     _poolPlanarBridge,
     _poolPlatedSpider,
@@ -974,6 +982,7 @@ const shard: CardShard = {
     _poolSamutTyrantSmasher,
     _poolSandstoneOracle,
     _poolSanguineBond,
+    _poolSarkhansDragonfire,
     _poolSavageVentmaw,
     _poolScavengerDrake,
     _poolScrapshooter,
@@ -1052,6 +1061,7 @@ const shard: CardShard = {
     _poolTakeUpArms,
     _poolTalasMerchant,
     _poolTaleOfMomo,
+    _poolTalonsOfWildwood,
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,

@@ -1,0 +1,777 @@
+{
+ "batch": "B126",
+ "status": "complete",
+ "ranks": "Commander 2018 (C18, 2018-08-10) and Core Set 2019 (M19, 2018-07-13): the rest of each set, whole",
+ "authored": [
+  {
+   "name": "Night Incarnate",
+   "files": [
+    "engine/src/cards/pool/night-incarnate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tezzeret's Gatebreaker",
+   "files": [
+    "engine/src/cards/pool/tezzerets-gatebreaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fury Storm",
+   "files": [
+    "engine/src/cards/pool/fury-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Empyrial Storm",
+   "files": [
+    "engine/src/cards/pool/empyrial-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroic Reinforcements",
+   "files": [
+    "engine/src/cards/pool/heroic-reinforcements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volley Veteran",
+   "files": [
+    "engine/src/cards/pool/volley-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Supreme Phantom",
+   "files": [
+    "engine/src/cards/pool/supreme-phantom.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Patient Rebuilding",
+   "files": [
+    "engine/src/cards/pool/patient-rebuilding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani, Wise Counselor",
+   "files": [
+    "engine/src/cards/pool/ajani-wise-counselor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plague Mare",
+   "files": [
+    "engine/src/cards/pool/plague-mare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Talons of Wildwood",
+   "files": [
+    "engine/src/cards/pool/talons-of-wildwood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani's Influence",
+   "files": [
+    "engine/src/cards/pool/ajanis-influence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dismissive Pyromancer",
+   "files": [
+    "engine/src/cards/pool/dismissive-pyromancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Graveyard Marshal",
+   "files": [
+    "engine/src/cards/pool/graveyard-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arisen Gorgon",
+   "files": [
+    "engine/src/cards/pool/arisen-gorgon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Star-Crowned Stag",
+   "files": [
+    "engine/src/cards/pool/star-crowned-stag.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hieromancer's Cage",
+   "files": [
+    "engine/src/cards/pool/hieromancers-cage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gearsmith Prodigy",
+   "files": [
+    "engine/src/cards/pool/gearsmith-prodigy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gearsmith Guardian",
+   "files": [
+    "engine/src/cards/pool/gearsmith-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nylea's Colossus",
+   "files": [
+    "engine/src/cards/pool/nyleas-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Echo Storm",
+   "files": [
+    "engine/src/cards/pool/echo-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tawnos, Urza's Apprentice",
+   "files": [
+    "engine/src/cards/pool/tawnos-urzas-apprentice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gyrus, Waker of Corpses",
+   "files": [
+    "engine/src/cards/pool/gyrus-waker-of-corpses.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani, Adversary of Tyrants",
+   "files": [
+    "engine/src/cards/pool/ajani-adversary-of-tyrants.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lena, Selfless Champion",
+   "files": [
+    "engine/src/cards/pool/lena-selfless-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doublecast",
+   "files": [
+    "engine/src/cards/pool/doublecast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elvish Clancaller",
+   "files": [
+    "engine/src/cards/pool/elvish-clancaller.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Militia Bugler",
+   "files": [
+    "engine/src/cards/pool/militia-bugler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Liliana, the Necromancer",
+   "files": [
+    "engine/src/cards/pool/liliana-the-necromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angel of the Dawn",
+   "files": [
+    "engine/src/cards/pool/angel-of-the-dawn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nightmare's Thirst",
+   "files": [
+    "engine/src/cards/pool/nightmares-thirst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Declare Dominance",
+   "files": [
+    "engine/src/cards/pool/declare-dominance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Liliana's Spoils",
+   "files": [
+    "engine/src/cards/pool/lilianas-spoils.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vine Mare",
+   "files": [
+    "engine/src/cards/pool/vine-mare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Psychic Symbiont",
+   "files": [
+    "engine/src/cards/pool/psychic-symbiont.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bristling Boar",
+   "files": [
+    "engine/src/cards/pool/bristling-boar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Isolate",
+   "files": [
+    "engine/src/cards/pool/isolate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwindle",
+   "files": [
+    "engine/src/cards/pool/dwindle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brawl-Bash Ogre",
+   "files": [
+    "engine/src/cards/pool/brawl-bash-ogre.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Turntimber Sower",
+   "files": [
+    "engine/src/cards/pool/turntimber-sower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genesis Storm",
+   "files": [
+    "engine/src/cards/pool/genesis-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transmogrifying Wand",
+   "files": [
+    "engine/src/cards/pool/transmogrifying-wand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigiled Sword of Valeron",
+   "files": [
+    "engine/src/cards/pool/sigiled-sword-of-valeron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Root Snare",
+   "files": [
+    "engine/src/cards/pool/root-snare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Regal Bloodlord",
+   "files": [
+    "engine/src/cards/pool/regal-bloodlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Isareth the Awakener",
+   "files": [
+    "engine/src/cards/pool/isareth-the-awakener.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shield Mare",
+   "files": [
+    "engine/src/cards/pool/shield-mare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bone Dragon",
+   "files": [
+    "engine/src/cards/pool/bone-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Mare",
+   "files": [
+    "engine/src/cards/pool/lightning-mare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vivien of the Arkbow",
+   "files": [
+    "engine/src/cards/pool/vivien-of-the-arkbow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dwarven Priest",
+   "files": [
+    "engine/src/cards/pool/dwarven-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skilled Animator",
+   "files": [
+    "engine/src/cards/pool/skilled-animator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skyrider Patrol",
+   "files": [
+    "engine/src/cards/pool/skyrider-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Reckoning",
+   "files": [
+    "engine/src/cards/pool/infernal-reckoning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarkhan's Dragonfire",
+   "files": [
+    "engine/src/cards/pool/sarkhans-dragonfire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aerial Engineer",
+   "files": [
+    "engine/src/cards/pool/aerial-engineer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Court Cleric",
+   "files": [
+    "engine/src/cards/pool/court-cleric.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tezzeret's Strider",
+   "files": [
+    "engine/src/cards/pool/tezzerets-strider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vedalken Humiliator",
+   "files": [
+    "engine/src/cards/pool/vedalken-humiliator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crash of Rhino Beetles",
+   "files": [
+    "engine/src/cards/pool/crash-of-rhino-beetles.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skull Storm",
+   "files": [
+    "engine/src/cards/pool/skull-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diamond Mare",
+   "files": [
+    "engine/src/cards/pool/diamond-mare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark-Dweller Oracle",
+   "files": [
+    "engine/src/cards/pool/dark-dweller-oracle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Abnormal Endurance",
+   "files": [
+    "engine/src/cards/pool/abnormal-endurance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sarkhan, Dragonsoul",
+   "files": [
+    "engine/src/cards/pool/sarkhan-dragonsoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leonin Vanguard",
+   "files": [
+    "engine/src/cards/pool/leonin-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demon of Catastrophes",
+   "files": [
+    "engine/src/cards/pool/demon-of-catastrophes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chromium, the Mutable",
+   "files": [
+    "engine/src/cards/pool/chromium-the-mutable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dryad Greenseeker",
+   "files": [
+    "engine/src/cards/pool/dryad-greenseeker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skalla Wolf",
+   "files": [
+    "engine/src/cards/pool/skalla-wolf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surge Mare",
+   "files": [
+    "engine/src/cards/pool/surge-mare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sparktongue Dragon",
+   "files": [
+    "engine/src/cards/pool/sparktongue-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Novice Knight",
+   "files": [
+    "engine/src/cards/pool/novice-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarkhan's Whelp",
+   "files": [
+    "engine/src/cards/pool/sarkhans-whelp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kargan Dragonrider",
+   "files": [
+    "engine/src/cards/pool/kargan-dragonrider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scholar of Stars",
+   "files": [
+    "engine/src/cards/pool/scholar-of-stars.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Druid of Horns",
+   "files": [
+    "engine/src/cards/pool/druid-of-horns.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien's Jaguar",
+   "files": [
+    "engine/src/cards/pool/viviens-jaguar.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Saheeli, the Gifted",
+   "needs": [
+    "effect:next-spell-cost-reduction",
+    "keyword:affinity"
+   ],
+   "why": "\"the next spell you cast this turn has affinity for artifacts\""
+  },
+  {
+   "name": "Boreas Charger",
+   "needs": [
+    "decision:choose-opponent",
+    "amount:count-for-chosen-player"
+   ],
+   "why": "an opponent who controls more lands than you, and counting that player's lands"
+  },
+  {
+   "name": "Heavenly Blademaster",
+   "needs": [
+    "static:count-attached-to-affected"
+   ],
+   "why": "+1/+1 for each Aura and Equipment attached to this creature"
+  },
+  {
+   "name": "Estrid, the Masked",
+   "needs": [
+    "keyword:umbra-armor"
+   ],
+   "why": "the Mask token's umbra armor"
+  },
+  {
+   "name": "Magus of the Balance",
+   "needs": [
+    "effect:sacrifice-all-but-dynamic"
+   ],
+   "why": "down to the fewest any player has, and a discard counterpart"
+  },
+  {
+   "name": "Metamorphic Alteration",
+   "needs": [
+    "effect:become-copy-while-source"
+   ],
+   "why": "as it enters choose a creature; enchanted creature is a copy of it"
+  },
+  {
+   "name": "Ghastbark Twins",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature each combat"
+  },
+  {
+   "name": "Suncleanser",
+   "needs": [
+    "effect:remove-all-counters",
+    "effect:prevent-counters-while-source"
+   ],
+   "why": "remove all counters, and can't have or get counters while it stays"
+  },
+  {
+   "name": "Ajani's Last Stand",
+   "needs": [
+    "trigger:discards-extensions"
+   ],
+   "why": "when an opponent's spell or ability makes you discard this card"
+  },
+  {
+   "name": "Inferno Hellion",
+   "needs": [
+    "filter:blocked-this-turn"
+   ],
+   "why": "attacked or blocked this turn"
+  },
+  {
+   "name": "Reality Scramble",
+   "needs": [
+    "keyword:retrace",
+    "filter:shares-card-type-with-target"
+   ],
+   "why": "retrace, and reveal until a card sharing a card type with that permanent"
+  },
+  {
+   "name": "Octopus Umbra",
+   "needs": [
+    "keyword:umbra-armor"
+   ],
+   "why": "umbra armor"
+  },
+  {
+   "name": "Saheeli's Directive",
+   "needs": [
+    "keyword:improvise"
+   ],
+   "why": "improvise"
+  },
+  {
+   "name": "Departed Deckhand",
+   "needs": [
+    "effect:grant-cant-be-blocked-except"
+   ],
+   "why": "can't be blocked this turn except by Spirits"
+  },
+  {
+   "name": "Palladia-Mors, the Ruiner",
+   "needs": [
+    "condition:source-hasnt-dealt-damage"
+   ],
+   "why": "hexproof as long as it hasn't dealt damage yet"
+  },
+  {
+   "name": "Tezzeret, Cruel Machinist",
+   "needs": [
+    "mechanic:face-down"
+   ],
+   "why": "the −7 puts cards onto the battlefield face down as 5/5 artifact creatures"
+  },
+  {
+   "name": "Ursine Champion",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "\"becomes a Bear Berserker\" replacing its creature types, beside +3/+3"
+  },
+  {
+   "name": "Myth Unbound",
+   "needs": [
+    "cost:cost-reduction-commander-casts",
+    "trigger:commander-put-into-command-zone"
+   ],
+   "why": "commander spells cost {1} less per command-zone cast; a commander put into the command zone"
+  },
+  {
+   "name": "Enchanter's Bane",
+   "needs": [
+    "effect:unless-sacrifice-target"
+   ],
+   "why": "deals damage unless its controller sacrifices *that* enchantment"
+  },
+  {
+   "name": "Ravenous Slime",
+   "needs": [
+    "replacement:exile-instead-counters-on-source"
+   ],
+   "why": "exile instead of dying, with counters equal to its power on the Slime"
+  },
+  {
+   "name": "Entreat the Dead",
+   "needs": [
+    "keyword:miracle"
+   ],
+   "why": "miracle"
+  },
+  {
+   "name": "Emissary of Grudges",
+   "needs": [
+    "decision:secret-choice"
+   ],
+   "why": "a secretly chosen opponent, revealed as a cost"
+  },
+  {
+   "name": "Vaevictis Asmadi, the Dire",
+   "needs": [
+    "effect:per-player-targets-sacrifice-reveal-put"
+   ],
+   "why": "one target per player, sacrificed, then reveal and put"
+  },
+  {
+   "name": "Amulet of Safekeeping",
+   "needs": [
+    "trigger:player-becomes-target"
+   ],
+   "why": "whenever you become the target of a spell or ability an opponent controls"
+  },
+  {
+   "name": "Yennett, Cryptic Sovereign",
+   "needs": [
+    "filter:odd-mana-value"
+   ],
+   "why": "an odd mana value"
+  },
+  {
+   "name": "Isolated Watchtower",
+   "needs": [
+    "condition:opponent-controls-n-more"
+   ],
+   "why": "an opponent controls at least two more lands than you"
+  },
+  {
+   "name": "Kestia, the Cultivator",
+   "needs": [
+    "keyword:bestow"
+   ],
+   "why": "bestow"
+  },
+  {
+   "name": "Fraying Omnipotence",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "sacrifice half their creatures, rounded up"
+  },
+  {
+   "name": "Mistcaller",
+   "needs": [
+    "effect:temporary-enter-exile-replacement"
+   ],
+   "why": "until end of turn, a nontoken creature that wasn't cast is exiled instead of entering"
+  },
+  {
+   "name": "Vivien's Invocation",
+   "needs": [
+    "effect:damage-from-this-way"
+   ],
+   "why": "the creature put onto the battlefield deals the damage"
+  },
+  {
+   "name": "Alpine Moon",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "choose a nonbasic land card name"
+  }
+ ]
+}

@@ -214,6 +214,7 @@ import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
 import _poolInvigoratingSurge from "../pool/invigorating-surge.js";
 import _poolIridescentTiger from "../pool/iridescent-tiger.js";
+import _poolIsolate from "../pool/isolate.js";
 import _poolIvyLaneDenizen from "../pool/ivy-lane-denizen.js";
 import _poolIxallisLorekeeper from "../pool/ixallis-lorekeeper.js";
 import _poolIzzetCharm from "../pool/izzet-charm.js";
@@ -787,6 +788,7 @@ const shard: CardShard = {
     _poolInspiringCaptain,
     _poolInvigoratingSurge,
     _poolIridescentTiger,
+    _poolIsolate,
     _poolIvyLaneDenizen,
     _poolIxallisLorekeeper,
     _poolIzzetCharm,

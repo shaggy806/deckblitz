@@ -54,6 +54,7 @@ import _poolBloomingBlast from "../pool/blooming-blast.js";
 import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
 import _poolBodyCount from "../pool/body-count.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
+import _poolBoneDragon from "../pool/bone-dragon.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
@@ -222,6 +223,7 @@ import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
+import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
@@ -516,6 +518,7 @@ import _poolVillagePillagers from "../pool/village-pillagers.js";
 import _poolVirtuousCharge from "../pool/virtuous-charge.js";
 import _poolVirulentSwipe from "../pool/virulent-swipe.js";
 import _poolVithianStinger from "../pool/vithian-stinger.js";
+import _poolViviensJaguar from "../pool/viviens-jaguar.js";
 import _poolViviensTalent from "../pool/viviens-talent.js";
 import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
@@ -614,6 +617,7 @@ const shard: CardShard = {
     _poolBlotOutTheSky,
     _poolBodyCount,
     _poolBogInitiate,
+    _poolBoneDragon,
     _poolBoneclubBerserker,
     _poolBoulderbranchGolem,
     _poolBrainFreeze,
@@ -782,6 +786,7 @@ const shard: CardShard = {
     _poolIntrusivePackbeast,
     _poolInvasionOfTolvada,
     _poolIronwillForger,
+    _poolIsarethTheAwakener,
     _poolJeskaiDevotee,
     _poolJourneyToOblivion,
     _poolJukaiNaturalist,
@@ -1076,6 +1081,7 @@ const shard: CardShard = {
     _poolVirtuousCharge,
     _poolVirulentSwipe,
     _poolVithianStinger,
+    _poolViviensJaguar,
     _poolViviensTalent,
     _poolVolcanicTorrent,
     _poolVulshokBattlegear,

@@ -126,6 +126,7 @@ import _poolDeadeyeTormentor from "../pool/deadeye-tormentor.js";
 import _poolDeadpoolTradingCard from "../pool/deadpool-trading-card.js";
 import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
 import _poolDeceiveTheMessenger from "../pool/deceive-the-messenger.js";
+import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
 import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
@@ -230,6 +231,7 @@ import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
+import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
@@ -347,6 +349,7 @@ import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
 import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
 import _poolRooftopNuisance from "../pool/rooftop-nuisance.js";
+import _poolRootSnare from "../pool/root-snare.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
 import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
 import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
@@ -458,6 +461,7 @@ import _poolTonyStark from "../pool/tony-stark.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
 import _poolTotallyLost from "../pool/totally-lost.js";
 import _poolTrainedArynx from "../pool/trained-arynx.js";
+import _poolTransmogrifyingWand from "../pool/transmogrifying-wand.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTrollbredGuardian from "../pool/trollbred-guardian.js";
@@ -484,6 +488,7 @@ import _poolVastwoodSurge from "../pool/vastwood-surge.js";
 import _poolVerdantForce from "../pool/verdant-force.js";
 import _poolVeteranArmorer from "../pool/veteran-armorer.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
+import _poolVineMare from "../pool/vine-mare.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
 import _poolVividRevival from "../pool/vivid-revival.js";
@@ -658,6 +663,7 @@ const shard: CardShard = {
     _poolDeadpoolTradingCard,
     _poolDeathgazeCockatrice,
     _poolDeceiveTheMessenger,
+    _poolDemonOfCatastrophes,
     _poolDesertOfTheFervent,
     _poolDestructiveForce,
     _poolDevilDinosaur,
@@ -762,6 +768,7 @@ const shard: CardShard = {
     _poolIceFangCoatl,
     _poolImpoliteEntrance,
     _poolIncubationSac,
+    _poolInfernalReckoning,
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
     _poolJoriEnRuinDiver,
@@ -879,6 +886,7 @@ const shard: CardShard = {
     _poolRocketPoweredGoblinGlider,
     _poolRockslideElemental,
     _poolRooftopNuisance,
+    _poolRootSnare,
     _poolRootwaterDiver,
     _poolRotcrownGhoul,
     _poolRoxxonBrutes,
@@ -990,6 +998,7 @@ const shard: CardShard = {
     _poolToskiBearerOfSecrets,
     _poolTotallyLost,
     _poolTrainedArynx,
+    _poolTransmogrifyingWand,
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
     _poolTrollbredGuardian,
@@ -1016,6 +1025,7 @@ const shard: CardShard = {
     _poolVerdantForce,
     _poolVeteranArmorer,
     _poolVildinPackOutcast,
+    _poolVineMare,
     _poolViridianClaw,
     _poolVividMeadow,
     _poolVividRevival,

@@ -71,6 +71,7 @@ import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
+import _poolBristlingBoar from "../pool/bristling-boar.js";
 import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
 import _poolBubbleSmuggler from "../pool/bubble-smuggler.js";
 import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
@@ -448,6 +449,7 @@ import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
+import _poolStarCrownedStag from "../pool/star-crowned-stag.js";
 import _poolStarforgedSword from "../pool/starforged-sword.js";
 import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
 import _poolStatue from "../pool/statue.js";
@@ -629,6 +631,7 @@ const shard: CardShard = {
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
+    _poolBristlingBoar,
     _poolBrotherhoodSpy,
     _poolBubbleSmuggler,
     _poolBumbleflowersSharepot,
@@ -1006,6 +1009,7 @@ const shard: CardShard = {
     _poolSpireOfIndustry,
     _poolSqueeGoblinNabob,
     _poolStalkedResearcher,
+    _poolStarCrownedStag,
     _poolStarforgedSword,
     _poolStarnheimUnleashed,
     _poolStatue,

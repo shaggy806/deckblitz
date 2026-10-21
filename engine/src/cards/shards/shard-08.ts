@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbnormalEndurance from "../pool/abnormal-endurance.js";
 import _poolAbrade from "../pool/abrade.js";
 import _poolAcademicAscent from "../pool/academic-ascent.js";
 import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
@@ -260,6 +261,7 @@ import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKapow from "../pool/kapow.js";
+import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
@@ -331,6 +333,7 @@ import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
+import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
@@ -590,6 +593,7 @@ import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-cur
 
 const shard: CardShard = {
   pool: [
+    _poolAbnormalEndurance,
     _poolAbrade,
     _poolAcademicAscent,
     _poolAcrobaticManeuver,
@@ -847,6 +851,7 @@ const shard: CardShard = {
     _poolJwariScuttler,
     _poolKabiraTakedown,
     _poolKapow,
+    _poolKarganDragonrider,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
     _poolKaylasCommand,
@@ -918,6 +923,7 @@ const shard: CardShard = {
     _poolNecrogenesis,
     _poolNeighborhoodGuardian,
     _poolNevinyrralsDisk,
+    _poolNightmaresThirst,
     _poolNightveilPredator,
     _poolNinjasBlades,
     _poolNorthPolePatrol,

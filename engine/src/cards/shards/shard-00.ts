@@ -276,6 +276,7 @@ import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
+import _poolLightningMare from "../pool/lightning-mare.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
 import _poolMagnify from "../pool/magnify.js";
@@ -311,9 +312,11 @@ import _poolNaturesLore from "../pool/natures-lore.js";
 import _poolNessianHornbeetle from "../pool/nessian-hornbeetle.js";
 import _poolNettlecyst from "../pool/nettlecyst.js";
 import _poolNevaStalkedByNightmares from "../pool/neva-stalked-by-nightmares.js";
+import _poolNightIncarnate from "../pool/night-incarnate.js";
 import _poolNightshadeHarvester from "../pool/nightshade-harvester.js";
 import _poolNightshadeStinger from "../pool/nightshade-stinger.js";
 import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
+import _poolNoviceKnight from "../pool/novice-knight.js";
 import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOkosHospitality from "../pool/okos-hospitality.js";
@@ -856,6 +859,7 @@ const shard: CardShard = {
     _poolLeelaSevateemWarrior,
     _poolLetTheGalaxyBurn,
     _poolLightningAngel,
+    _poolLightningMare,
     _poolLluwenExchangeStudent,
     _poolLostInSpace,
     _poolMagnify,
@@ -891,9 +895,11 @@ const shard: CardShard = {
     _poolNessianHornbeetle,
     _poolNettlecyst,
     _poolNevaStalkedByNightmares,
+    _poolNightIncarnate,
     _poolNightshadeHarvester,
     _poolNightshadeStinger,
     _poolNimblewrightSchematic,
+    _poolNoviceKnight,
     _poolNyleasForerunner,
     _poolOinTheBrave,
     _poolOkosHospitality,

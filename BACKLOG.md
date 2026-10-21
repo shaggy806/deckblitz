@@ -123,9 +123,10 @@ section keeps only what to do next.
   Eldraine, on "enchanted creature doesn't untap" and adamant, with the earlier cards both
   unblocked; batch 121 Commander 2019 and Core Set 2020, no engine change; batch 122 Modern
   Horizons, on pitch costs; batch 123 War of the Spark, with entwine built beside it; batch 124
-  Ravnica Allegiance, on spectacle and afterlife; batch 125 Guilds of Ravnica, on jump-start);
-  **next, Commander 2018 and Core Set 2019** (C18 28 left, M19 81 — `npm run cards:sets -w
-  engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
+  Ravnica Allegiance, on spectacle and afterlife; batch 125 Guilds of Ravnica, on jump-start;
+  batch 126 Commander 2018 and Core Set 2019, with a "can't be blocked" restriction; batch 127
+  Battlebond, no engine change); **next, Dominaria** (batch 128, under way), then Rivals of
+  Ixalan (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
   "if that creature would die this turn, exile it instead" five
   (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
   long as it stays tapped" (`effect:duration-while-source-tapped`, 3), an Aura's lasting "loses

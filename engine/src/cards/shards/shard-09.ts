@@ -189,6 +189,7 @@ import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
 import _poolGarenbrigSquire from "../pool/garenbrig-squire.js";
 import _poolGarruksCompanion from "../pool/garruks-companion.js";
 import _poolGasGuzzler from "../pool/gas-guzzler.js";
+import _poolGearsmithProdigy from "../pool/gearsmith-prodigy.js";
 import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
 import _poolGethThaneOfContracts from "../pool/geth-thane-of-contracts.js";
 import _poolGiantBadger from "../pool/giant-badger.js";
@@ -369,6 +370,7 @@ import _poolPrisonBreak from "../pool/prison-break.js";
 import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
+import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
@@ -766,6 +768,7 @@ const shard: CardShard = {
     _poolGarenbrigSquire,
     _poolGarruksCompanion,
     _poolGasGuzzler,
+    _poolGearsmithProdigy,
     _poolGeistOfTheMoors,
     _poolGethThaneOfContracts,
     _poolGiantBadger,
@@ -946,6 +949,7 @@ const shard: CardShard = {
     _poolProfessorOfZoomancy,
     _poolProfessorZeiAnthropologist,
     _poolProsperousBandit,
+    _poolPsychicSymbiont,
     _poolPunySnack,
     _poolQuilledCharger,
     _poolRageReflection,

@@ -22,6 +22,7 @@ import _poolArcRunner from "../pool/arc-runner.js";
 import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
 import _poolAridMesa from "../pool/arid-mesa.js";
+import _poolArisenGorgon from "../pool/arisen-gorgon.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
@@ -70,6 +71,7 @@ import _poolBomburGentleDreamer from "../pool/bombur-gentle-dreamer.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBorrowing100000Arrows from "../pool/borrowing-100-000-arrows.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
+import _poolBrawlBashOgre from "../pool/brawl-bash-ogre.js";
 import _poolBreatheYourLast from "../pool/breathe-your-last.js";
 import _poolBreathlessKnight from "../pool/breathless-knight.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
@@ -129,6 +131,7 @@ import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
+import _poolDoublecast from "../pool/doublecast.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
@@ -374,6 +377,7 @@ import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
 import _poolRedTigerMechan from "../pool/red-tiger-mechan.js";
 import _poolRedXiiiProudWarrior from "../pool/red-xiii-proud-warrior.js";
 import _poolRedemptionChoir from "../pool/redemption-choir.js";
+import _poolRegalBloodlord from "../pool/regal-bloodlord.js";
 import _poolRegisaurAlpha from "../pool/regisaur-alpha.js";
 import _poolRelicBarrier from "../pool/relic-barrier.js";
 import _poolRenegadeTactics from "../pool/renegade-tactics.js";
@@ -581,6 +585,7 @@ const shard: CardShard = {
     _poolArchaeologicalDig,
     _poolArchfiendOfSorrows,
     _poolAridMesa,
+    _poolArisenGorgon,
     _poolArmoredSkaab,
     _poolArrestersZeal,
     _poolAtlasSizableStooge,
@@ -629,6 +634,7 @@ const shard: CardShard = {
     _poolBorderlandMinotaur,
     _poolBorrowing100000Arrows,
     _poolBrasssBounty,
+    _poolBrawlBashOgre,
     _poolBreatheYourLast,
     _poolBreathlessKnight,
     _poolBreenaTheDemagogue,
@@ -688,6 +694,7 @@ const shard: CardShard = {
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
+    _poolDoublecast,
     _poolDragTheCanal,
     _poolDragonflySwarm,
     _poolDrivnodCarnageDominus,
@@ -933,6 +940,7 @@ const shard: CardShard = {
     _poolRedTigerMechan,
     _poolRedXiiiProudWarrior,
     _poolRedemptionChoir,
+    _poolRegalBloodlord,
     _poolRegisaurAlpha,
     _poolRelicBarrier,
     _poolRenegadeTactics,

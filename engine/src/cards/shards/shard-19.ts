@@ -363,6 +363,7 @@ import _poolOverlordOfTheMistmoors from "../pool/overlord-of-the-mistmoors.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
+import _poolPatientRebuilding from "../pool/patient-rebuilding.js";
 import _poolPeerReview from "../pool/peer-review.js";
 import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
@@ -497,6 +498,7 @@ import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
 import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
+import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
@@ -945,6 +947,7 @@ const shard: CardShard = {
     _poolOwlbear,
     _poolPackRat,
     _poolPaleRiderOfTrostad,
+    _poolPatientRebuilding,
     _poolPeerReview,
     _poolPendulumOfPatterns,
     _poolPerilousLandscape,
@@ -1079,6 +1082,7 @@ const shard: CardShard = {
     _poolTarnishedCitadel,
     _poolTasteOfDeath,
     _poolTazeemRoilmage,
+    _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
     _poolTheMountainKingsReturn,

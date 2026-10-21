@@ -13,6 +13,7 @@ import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
 import _poolAgentsToolkit from "../pool/agents-toolkit.js";
+import _poolAjaniWiseCounselor from "../pool/ajani-wise-counselor.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
 import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
@@ -21,6 +22,7 @@ import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
 import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
 import _poolAnepVizierOfHazoret from "../pool/anep-vizier-of-hazoret.js";
+import _poolAngelOfTheDawn from "../pool/angel-of-the-dawn.js";
 import _poolAngrathsMarauders from "../pool/angraths-marauders.js";
 import _poolAnkleShanker from "../pool/ankle-shanker.js";
 import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
@@ -83,6 +85,7 @@ import _poolChainToMemory from "../pool/chain-to-memory.js";
 import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
+import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
 import _poolCitadelGate from "../pool/citadel-gate.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
 import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
@@ -563,6 +566,7 @@ const shard: CardShard = {
     _poolAegisTurtle,
     _poolAeronautCavalry,
     _poolAgentsToolkit,
+    _poolAjaniWiseCounselor,
     _poolAlabasterWall,
     _poolAlaniasPathmaker,
     _poolAlphinaudLeveilleur,
@@ -571,6 +575,7 @@ const shard: CardShard = {
     _poolAmprynTactician,
     _poolAnabaShaman,
     _poolAnepVizierOfHazoret,
+    _poolAngelOfTheDawn,
     _poolAngrathsMarauders,
     _poolAnkleShanker,
     _poolAragornKingOfGondor,
@@ -633,6 +638,7 @@ const shard: CardShard = {
     _poolChannelerInitiate,
     _poolChartoothCougar,
     _poolChromaticSphere,
+    _poolChromiumTheMutable,
     _poolCitadelGate,
     _poolClockOfOmens,
     _poolCloudOfDarkness,

@@ -147,6 +147,7 @@ import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
 import _poolDrowsingTyrannodon from "../pool/drowsing-tyrannodon.js";
+import _poolDruidOfHorns from "../pool/druid-of-horns.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
@@ -702,6 +703,7 @@ const shard: CardShard = {
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
     _poolDrowsingTyrannodon,
+    _poolDruidOfHorns,
     _poolDualSunTechnique,
     _poolDutifulServants,
     _poolDynamiteDiver,

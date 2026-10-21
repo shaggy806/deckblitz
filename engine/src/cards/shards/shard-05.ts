@@ -158,6 +158,7 @@ import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
 import _poolEasyPickings from "../pool/easy-pickings.js";
+import _poolEchoStorm from "../pool/echo-storm.js";
 import _poolElegantEntourage from "../pool/elegant-entourage.js";
 import _poolElfhamePalace from "../pool/elfhame-palace.js";
 import _poolEliteJavelineer from "../pool/elite-javelineer.js";
@@ -166,6 +167,7 @@ import _poolElvishAberration from "../pool/elvish-aberration.js";
 import _poolEmbermouthSentinel from "../pool/embermouth-sentinel.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
 import _poolEmptiness from "../pool/emptiness.js";
+import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
@@ -398,6 +400,7 @@ import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
 import _poolSandstormSalvager from "../pool/sandstorm-salvager.js";
+import _poolSarkhanDragonsoul from "../pool/sarkhan-dragonsoul.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
 import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
@@ -720,6 +723,7 @@ const shard: CardShard = {
     _poolDwarvenForgeChanter,
     _poolDwynenGiltLeafDaen,
     _poolEasyPickings,
+    _poolEchoStorm,
     _poolElegantEntourage,
     _poolElfhamePalace,
     _poolEliteJavelineer,
@@ -728,6 +732,7 @@ const shard: CardShard = {
     _poolEmbermouthSentinel,
     _poolEmeraldOryx,
     _poolEmptiness,
+    _poolEmpyrialStorm,
     _poolEndbringer,
     _poolEnormousBaloth,
     _poolEpicDownfall,
@@ -960,6 +965,7 @@ const shard: CardShard = {
     _poolSaltFlats,
     _poolSamutsSprint,
     _poolSandstormSalvager,
+    _poolSarkhanDragonsoul,
     _poolSarkhanUnbroken,
     _poolSauronTheDarkLord,
     _poolScabClanCharger,

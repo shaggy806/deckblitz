@@ -131,6 +131,7 @@ import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
 import _poolDiningRoom from "../pool/dining-room.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
 import _poolDiscipleOfLaw from "../pool/disciple-of-law.js";
+import _poolDismissivePyromancer from "../pool/dismissive-pyromancer.js";
 import _poolDispatch from "../pool/dispatch.js";
 import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
@@ -707,6 +708,7 @@ const shard: CardShard = {
     _poolDiningRoom,
     _poolDiscipleOfGrace,
     _poolDiscipleOfLaw,
+    _poolDismissivePyromancer,
     _poolDispatch,
     _poolDisplacerBeast,
     _poolDivineTransformation,

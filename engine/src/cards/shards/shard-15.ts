@@ -124,6 +124,7 @@ import _poolDrawnFromDreams from "../pool/drawn-from-dreams.js";
 import _poolDreamstoneHedron from "../pool/dreamstone-hedron.js";
 import _poolDromarsAttendant from "../pool/dromars-attendant.js";
 import _poolDrownInShapelessness from "../pool/drown-in-shapelessness.js";
+import _poolDryadGreenseeker from "../pool/dryad-greenseeker.js";
 import _poolDryadOfTheIlysianGrove from "../pool/dryad-of-the-ilysian-grove.js";
 import _poolDundoolinWeaver from "../pool/dundoolin-weaver.js";
 import _poolDuneDrifter from "../pool/dune-drifter.js";
@@ -408,6 +409,7 @@ import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
 import _poolSizzlingChangeling from "../pool/sizzling-changeling.js";
+import _poolSkallaWolf from "../pool/skalla-wolf.js";
 import _poolSkarrgTheRagePits from "../pool/skarrg-the-rage-pits.js";
 import _poolSkateboard from "../pool/skateboard.js";
 import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
@@ -666,6 +668,7 @@ const shard: CardShard = {
     _poolDreamstoneHedron,
     _poolDromarsAttendant,
     _poolDrownInShapelessness,
+    _poolDryadGreenseeker,
     _poolDryadOfTheIlysianGrove,
     _poolDundoolinWeaver,
     _poolDuneDrifter,
@@ -950,6 +953,7 @@ const shard: CardShard = {
     _poolSilverbackApe,
     _poolSilvercoatLion,
     _poolSizzlingChangeling,
+    _poolSkallaWolf,
     _poolSkarrgTheRagePits,
     _poolSkateboard,
     _poolSkorpekhDestroyer,

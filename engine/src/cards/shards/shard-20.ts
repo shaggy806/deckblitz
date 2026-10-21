@@ -8,6 +8,7 @@ import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
+import _poolAerialEngineer from "../pool/aerial-engineer.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
 import _poolAeveProgenitorOoze from "../pool/aeve-progenitor-ooze.js";
 import _poolAffaGuardHound from "../pool/affa-guard-hound.js";
@@ -105,6 +106,7 @@ import _poolCorsairCaptain from "../pool/corsair-captain.js";
 import _poolCosmicCrucible from "../pool/cosmic-crucible.js";
 import _poolCountersculpt from "../pool/countersculpt.js";
 import _poolCountlessGearsRenegade from "../pool/countless-gears-renegade.js";
+import _poolCourtCleric from "../pool/court-cleric.js";
 import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
 import _poolCovetousCastaway from "../pool/covetous-castaway.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
@@ -214,6 +216,7 @@ import _poolGoodFortuneUnicorn from "../pool/good-fortune-unicorn.js";
 import _poolGoretuskFirebeast from "../pool/goretusk-firebeast.js";
 import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
+import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
@@ -604,6 +607,7 @@ const shard: CardShard = {
     _poolAberrantManawurm,
     _poolAbsorbingMan,
     _poolActOfTreason,
+    _poolAerialEngineer,
     _poolAetherChanneler,
     _poolAeveProgenitorOoze,
     _poolAffaGuardHound,
@@ -701,6 +705,7 @@ const shard: CardShard = {
     _poolCosmicCrucible,
     _poolCountersculpt,
     _poolCountlessGearsRenegade,
+    _poolCourtCleric,
     _poolCoverOfDarkness,
     _poolCovetousCastaway,
     _poolCrashOfRhinos,
@@ -810,6 +815,7 @@ const shard: CardShard = {
     _poolGoretuskFirebeast,
     _poolGranGran,
     _poolGravedigger,
+    _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
     _poolGrimDiscovery,
     _poolGrimWanderer,

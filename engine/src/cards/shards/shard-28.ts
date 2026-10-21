@@ -177,6 +177,7 @@ import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
+import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
@@ -425,6 +426,7 @@ import _poolSimicSignet from "../pool/simic-signet.js";
 import _poolSkullProphet from "../pool/skull-prophet.js";
 import _poolSkyCycle from "../pool/sky-cycle.js";
 import _poolSkyclaveGeopede from "../pool/skyclave-geopede.js";
+import _poolSkyriderPatrol from "../pool/skyrider-patrol.js";
 import _poolSkyscanner from "../pool/skyscanner.js";
 import _poolSkyshipBuccaneer from "../pool/skyship-buccaneer.js";
 import _poolSkywaySniper from "../pool/skyway-sniper.js";
@@ -457,6 +459,7 @@ import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
+import _poolSurgeMare from "../pool/surge-mare.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSwallowedByLeviathan from "../pool/swallowed-by-leviathan.js";
 import _poolSycoraxCommander from "../pool/sycorax-commander.js";
@@ -732,6 +735,7 @@ const shard: CardShard = {
     _poolFusionElemental,
     _poolGallantCavalry,
     _poolGalvanicArc,
+    _poolGenesisStorm,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
     _poolGildedPinions,
@@ -980,6 +984,7 @@ const shard: CardShard = {
     _poolSkullProphet,
     _poolSkyCycle,
     _poolSkyclaveGeopede,
+    _poolSkyriderPatrol,
     _poolSkyscanner,
     _poolSkyshipBuccaneer,
     _poolSkywaySniper,
@@ -1012,6 +1017,7 @@ const shard: CardShard = {
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,
     _poolSunstarExpansionist,
+    _poolSurgeMare,
     _poolSurveillancePhantasm,
     _poolSwallowedByLeviathan,
     _poolSycoraxCommander,

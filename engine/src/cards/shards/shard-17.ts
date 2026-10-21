@@ -9,6 +9,7 @@ import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
 import _poolAetherMembrane from "../pool/aether-membrane.js";
 import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
+import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
@@ -107,6 +108,7 @@ import _poolDeadapult from "../pool/deadapult.js";
 import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
+import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
@@ -303,6 +305,7 @@ import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
+import _poolNyleasColossus from "../pool/nyleas-colossus.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
@@ -434,6 +437,7 @@ import _poolSummoningMateria from "../pool/summoning-materia.js";
 import _poolSunderTheGateway from "../pool/sunder-the-gateway.js";
 import _poolSunriseCavalier from "../pool/sunrise-cavalier.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
+import _poolSupremePhantom from "../pool/supreme-phantom.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
@@ -549,6 +553,7 @@ const shard: CardShard = {
     _poolAdewaleBreakerOfChains,
     _poolAetherMembrane,
     _poolAirbendersReversal,
+    _poolAjaniAdversaryOfTyrants,
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
     _poolAlabornCavalier,
@@ -647,6 +652,7 @@ const shard: CardShard = {
     _poolDeadlyEmbrace,
     _poolDeathBaron,
     _poolDeceptiveLandscape,
+    _poolDeclareDominance,
     _poolDecoyPloy,
     _poolDeepfathomSkulker,
     _poolDevotedPaladin,
@@ -843,6 +849,7 @@ const shard: CardShard = {
     _poolNimanaSkydancer,
     _poolNornsInquisitor,
     _poolNoxiousGrasp,
+    _poolNyleasColossus,
     _poolNyleasIntervention,
     _poolObyraDreamingDuelist,
     _poolOgreSentry,
@@ -974,6 +981,7 @@ const shard: CardShard = {
     _poolSunderTheGateway,
     _poolSunriseCavalier,
     _poolSuperShredder,
+    _poolSupremePhantom,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
