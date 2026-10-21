@@ -3064,4 +3064,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Raging Goblin'] },
     }),
   ),
+  // --- You may choose not to untap (2026-10-21) -------------------------------
+  preset(
+    "Ashnod's Battle Gear left tapped through the untap step",
+    board({
+      you: { bf: ["Ashnod's Battle Gear", 'Hill Giant', 'Plains*2'] },
+    }),
+  ),
 ]

@@ -26,6 +26,7 @@ import _poolArcboundPrototype from "../pool/arcbound-prototype.js";
 import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
+import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
@@ -200,6 +201,7 @@ import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
 import _poolHeartwarmingRedemption from "../pool/heartwarming-redemption.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
+import _poolHedgeWhisperer from "../pool/hedge-whisperer.js";
 import _poolHeikoYamazakiTheGeneral from "../pool/heiko-yamazaki-the-general.js";
 import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
 import _poolHerculesPrinceOfPower from "../pool/hercules-prince-of-power.js";
@@ -611,6 +613,7 @@ const shard: CardShard = {
     _poolArchonOfFallingStars,
     _poolArdozCobblerOfWar,
     _poolArmasaurGuide,
+    _poolAshnodsBattleGear,
     _poolAspiringChampion,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
@@ -785,6 +788,7 @@ const shard: CardShard = {
     _poolHeartlessSummoning,
     _poolHeartwarmingRedemption,
     _poolHeartwoodGiant,
+    _poolHedgeWhisperer,
     _poolHeikoYamazakiTheGeneral,
     _poolHeliodSunCrowned,
     _poolHerculesPrinceOfPower,

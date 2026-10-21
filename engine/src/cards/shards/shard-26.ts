@@ -138,6 +138,7 @@ import _poolEmergencyWeld from "../pool/emergency-weld.js";
 import _poolEmergentWoodwurm from "../pool/emergent-woodwurm.js";
 import _poolEnduringCuriosity from "../pool/enduring-curiosity.js";
 import _poolEnforcerGriffin from "../pool/enforcer-griffin.js";
+import _poolEntrancingLyre from "../pool/entrancing-lyre.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
@@ -690,6 +691,7 @@ const shard: CardShard = {
     _poolEmergentWoodwurm,
     _poolEnduringCuriosity,
     _poolEnforcerGriffin,
+    _poolEntrancingLyre,
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
     _poolErrandRiderOfGondor,

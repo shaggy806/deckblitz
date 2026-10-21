@@ -1218,6 +1218,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(lace.complete).toBe(true);
   });
 
+  it("'you may choose not to untap' (rule 502.3) and 'for as long as ~ remains tapped'", () => {
+    const gear = face(
+      "You may choose not to untap this artifact during your untap step.\n{2}, {T}: Target creature you control gets +2/-2 for as long as this artifact remains tapped.",
+      "Artifact",
+    );
+    expect(gear.static[0]).toMatchObject({ affects: { scope: "self" }, mayChooseNotToUntap: true });
+    expect(gear.activated[0].effect).toEqual({ kind: "modify-pt", target: 0, power: 2, toughness: -2, duration: "while-source-tapped" });
+    expect(gear.complete).toBe(true);
+  });
+
   it("entwine (rule 702.42): a kicker that chooses every mode", () => {
     const spell = face("Choose one —\n• You gain 4 life.\n• Draw a card.\nEntwine {2} (Choose both if you pay the entwine cost.)", "Sorcery");
     expect(spell.kicker).toEqual({ cost: "{2}", keyword: "entwine" });

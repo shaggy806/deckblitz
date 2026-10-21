@@ -476,6 +476,7 @@ import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
 import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
 import _poolTheArchimandrite from "../pool/the-archimandrite.js";
+import _poolTheBlackstaffOfWaterdeep from "../pool/the-blackstaff-of-waterdeep.js";
 import _poolTheFirstSliver from "../pool/the-first-sliver.js";
 import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
 import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
@@ -1049,6 +1050,7 @@ const shard: CardShard = {
     _poolThalakosSeer,
     _poolThaliasLieutenant,
     _poolTheArchimandrite,
+    _poolTheBlackstaffOfWaterdeep,
     _poolTheFirstSliver,
     _poolTheMasterOfKeys,
     _poolTheQueenOfDale,

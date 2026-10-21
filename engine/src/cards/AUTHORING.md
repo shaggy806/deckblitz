@@ -1452,6 +1452,8 @@ each damage would be dealt, rule 615.1),
 
 `become-color { target, colors, duration }` (layer 5 — the Laces: `{ target: 0, colors: ["B"], duration: "permanent" }` on a `{ kind: "spell-or-permanent" }` target; Crimson Wisps' `"end-of-turn"`). Its colours are replaced, not added to; a spell keeps them while it's on the stack, and the permanent it becomes has its own (400.7). The scaffolder reads both sentences.
 
+`mayChooseNotToUntap: true` (a `StaticAbility`, rule 502.3 — "You may choose not to untap ~ during your untap step": Ashnod's Battle Gear, Phyrexian Gremlins, Entrancing Lyre). As its controller's untap step untaps their permanents, they pick which of these to leave tapped (the `choose-permanents` decision, asked only when one would untap; no priority, 502.4). Beside it, the `"while-source-tapped"` `PtDuration` — "for as long as ~ remains tapped" — on `modify-pt`, `restrict`, `animate`, `lose-abilities` and anything else taking a `PtDuration`, and `gain-control`'s `whileSourceTapped`: it ends as the source untaps or leaves, and does nothing if the source is already untapped (611.2b). The scaffolder reads the static line and "gets +N/+N for as long as ~ remains tapped". `choose-not-to-untap.test.ts`.
+
 **"Exile … until ~ leaves the battlefield"** (Banishing Light) is rule 610.3:
 the exile is a one-shot effect, and the return a second one created right after
 the source leaves — no triggered ability, so nothing to respond to, and it

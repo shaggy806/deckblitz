@@ -1271,6 +1271,16 @@ export function parseSentence(sentence, ctx) {
     return { kind: "search-library", filter: {}, destination: "hand", min: 1, max: 1 };
   }
 
+  // "For as long as ~ remains tapped" (rule 611.2b — Ashnod's Battle Gear).
+  if ((m = re(`(~|${TARGET}) gets ([+-]\\d+)/([+-]\\d+) for as long as ~ remains tapped`).exec(s))) {
+    return {
+      kind: "modify-pt",
+      target: m[1] === "~" ? "source" : slot(m[1]),
+      power: Number(m[2]),
+      toughness: Number(m[3]),
+      duration: "while-source-tapped",
+    };
+  }
   // Power, toughness and keywords until end of turn.
   if ((m = re(`(~|${TARGET}) gets ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return {
@@ -2584,6 +2594,10 @@ function parseStatic(line, text) {
       const amount = words[w[1]] ?? Number(w[1]);
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: w[2], amount } }, text };
     }
+  }
+  // Rule 502.3 (Antiquities): its controller's choice in the untap step.
+  if (line === "You may choose not to untap ~ during your untap step.") {
+    return { affects: { scope: "self" }, mayChooseNotToUntap: true, text };
   }
   if (line === "~ enters tapped.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", tapped: true }, text };

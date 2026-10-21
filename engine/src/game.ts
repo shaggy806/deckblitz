@@ -230,6 +230,7 @@ import type {
   GameEventType,
   RandomPick,
   Vote,
+  WhileSource,
   VoteChoice,
 } from "./events.js";
 import {
@@ -1013,9 +1014,9 @@ function lasting(
   you: PlayerId,
   /** The effect's source as it is now, for `"while-source"`: `null` when it
    * isn't on the battlefield as the stint the effect refers to. */
-  source: { readonly id: ObjectId; readonly zoneChangeCount: number } | null = null,
+  source: WhileSource | null = null,
 ): EffectDuration {
-  if (duration === "while-source") return { whileSource: source };
+  if (duration === "while-source" || duration === "while-source-tapped") return { whileSource: source };
   return duration === "until-your-next-turn" ? { untilTurnOf: you } : duration;
 }
 
@@ -6056,6 +6057,7 @@ export class Game {
 
   private untapStep(): void {
     const active = this.activePlayer;
+    const untapping: ObjectId[] = [];
     // First, phasing (rule 502.1), before anything untaps.
     this.phasingStep(active);
     // The turn's resets reach a phased-out permanent too: what it did on an
@@ -6092,8 +6094,39 @@ export class Game {
         // step" (Tractor Beam) — a restriction a static puts on it.
         !restrictionsOf(this.state, this.registry, id).has("doesnt-untap")
       ) {
-        this.untapUnlessStunned(id);
+        untapping.push(id);
       }
+    }
+    // "You may choose not to untap ~ during your untap step" (rule 502.3):
+    // its controller chooses which to leave tapped, without priority
+    // (502.4); the step finishes once they have (`applyChoosePermanents`).
+    const optional = untapping.filter((id) =>
+      this.hasOwnStatic(this.state.objects[id], (a) => a.mayChooseNotToUntap === true),
+    );
+    if (optional.length > 0 && !this.activeHasLeft()) {
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: active,
+        eligible: optional,
+        min: 0,
+        max: optional.length,
+        prompt: "Choose permanents to leave tapped",
+        then: { kind: "sequence", effects: [] },
+        source: optional[0],
+        x: 0,
+        untapStep: untapping,
+      };
+      return;
+    }
+    this.finishUntapStep(untapping, []);
+  }
+
+  /** The untap step's untapping (rule 502.3), once its controller has chosen
+   * which of `untapping` to leave tapped (`kept`). */
+  private finishUntapStep(untapping: readonly ObjectId[], kept: readonly ObjectId[]): void {
+    const active = this.activePlayer;
+    for (const id of untapping) {
+      if (!kept.includes(id)) this.untapUnlessStunned(id);
     }
     // Seedborn Muse, Unwinding Clock, Bender's Waterskin: other players'
     // permanents that untap during this player's untap step too.
@@ -6136,7 +6169,36 @@ export class Game {
     }
     object.tapped = false;
     this.emit({ type: "permanent-untapped", object: id });
+    this.endWhileTappedEffects(id);
     return true;
+  }
+
+  /** `id` has untapped: end every modifier and control effect that lasted
+   * "for as long as" it remained tapped (rule 611.2b — Ashnod's Battle Gear,
+   * Rubinia Soulsinger). Its leaving ends them too, with the rest of its
+   * `whileSource` effects (`endWhileSourceEffects`). */
+  private endWhileTappedEffects(id: ObjectId): void {
+    if (this.state.whileSourceIds?.includes(id) !== true) return;
+    const over = (w: WhileSource | undefined): boolean => w !== undefined && w.tapped === true && w.id === id;
+    const expired: ObjectId[] = [];
+    let controlEnded = false;
+    for (const other of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
+      const object = this.state.objects[other];
+      if (object.modifiers.some((m) => over(m.whileSource))) {
+        object.modifiers = object.modifiers.filter((m) => !over(m.whileSource));
+        expired.push(other);
+      }
+      if (object.controlEffects?.some((e) => over(e.whileSource))) {
+        const left = object.controlEffects.filter((e) => !over(e.whileSource));
+        if (left.length > 0) object.controlEffects = left;
+        else delete object.controlEffects;
+        controlEnded = true;
+      }
+    }
+    if (expired.length === 0 && !controlEnded) return;
+    invalidateComputedCache();
+    if (expired.length > 0) this.emit({ type: "pt-modifier-expired", objects: expired });
+    if (controlEnded) this.recomputeControl();
   }
 
   /** Does `object` carry an active static of its own matching `test`? */
@@ -19956,12 +20018,19 @@ export class Game {
     // "For as long as [this] remains on the battlefield": the source in the
     // stint this refers to, or nothing if it has left (rule 611.2b).
     const lastingHere = (duration: PtDuration): EffectDuration => {
-      let here: { readonly id: ObjectId; readonly zoneChangeCount: number } | null = null;
-      if (duration === "while-source") {
+      let here: WhileSource | null = null;
+      if (duration === "while-source" || duration === "while-source-tapped") {
         const object = this.state.objects[source];
         const stint = object?.zoneChangeCount ?? 0;
-        if (object?.zone === "battlefield" && (refs.source === undefined || refs.source === stint)) {
-          here = { id: source, zoneChangeCount: stint };
+        // "For as long as ~ remains tapped" with it untapped already: nothing
+        // (rule 611.2b).
+        const tapped = duration === "while-source-tapped";
+        if (
+          object?.zone === "battlefield" &&
+          (refs.source === undefined || refs.source === stint) &&
+          (!tapped || object.tapped)
+        ) {
+          here = { id: source, zoneChangeCount: stint, ...(tapped ? { tapped: true as const } : {}) };
           this.noteWhileSource(source);
         }
       }
@@ -21307,14 +21376,14 @@ export class Game {
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
       counterSpell: (target, into) => this.counterSpellByEffect(target, into),
-      gainControl: (target, untilEndOfTurn, player, whileSource) => {
-        if (whileSource !== true) {
+      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped) => {
+        if (whileSource !== true && whileSourceTapped !== true) {
           this.gainControlByEffect(player, target, untilEndOfTurn);
           return;
         }
-        // "For as long as this creature remains on the battlefield": nothing
-        // if it already hasn't (rule 611.2b).
-        const kept = lastingHere("while-source");
+        // "For as long as this creature remains on the battlefield [tapped]":
+        // nothing if it already hasn't (rule 611.2b).
+        const kept = lastingHere(whileSourceTapped === true ? "while-source-tapped" : "while-source");
         if (typeof kept !== "object" || !("whileSource" in kept) || kept.whileSource === null) return;
         this.gainControlByEffect(player, target, false, false, { whileSource: kept.whileSource });
       },
@@ -27620,6 +27689,15 @@ export class Game {
     }
     if (awaiting.casualty !== undefined) {
       this.applyCasualty(player, chosen, awaiting.casualty);
+      return;
+    }
+    // The untap step's "you may choose not to untap" (rule 502.3): what's
+    // picked stays tapped, and the step carries on with no priority (502.4).
+    if (awaiting.untapStep !== undefined) {
+      this.state.awaiting = null;
+      this.finishUntapStep(awaiting.untapStep, chosen);
+      this.state.priority.active = false;
+      this.state.priority.holder = null;
       return;
     }
     // An entering Deadpool's exchange: asked before it moved

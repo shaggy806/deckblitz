@@ -329,6 +329,7 @@ import _poolPestilenceDemon from "../pool/pestilence-demon.js";
 import _poolPhyrexianAwakening from "../pool/phyrexian-awakening.js";
 import _poolPhyrexianCrusader from "../pool/phyrexian-crusader.js";
 import _poolPhyrexianGhoul from "../pool/phyrexian-ghoul.js";
+import _poolPhyrexianGremlins from "../pool/phyrexian-gremlins.js";
 import _poolPiaAetherAscetic from "../pool/pia-aether-ascetic.js";
 import _poolPineBarrens from "../pool/pine-barrens.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
@@ -455,6 +456,7 @@ import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
+import _poolTawnossWeaponry from "../pool/tawnoss-weaponry.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
@@ -885,6 +887,7 @@ const shard: CardShard = {
     _poolPhyrexianAwakening,
     _poolPhyrexianCrusader,
     _poolPhyrexianGhoul,
+    _poolPhyrexianGremlins,
     _poolPiaAetherAscetic,
     _poolPineBarrens,
     _poolPlatedGeopede,
@@ -1011,6 +1014,7 @@ const shard: CardShard = {
     _poolSzarekhTheSilentKing,
     _poolTamsResistance,
     _poolTangledFlorahedron,
+    _poolTawnossWeaponry,
     _poolTelJiladJustice,
     _poolTerisianMindbreaker,
     _poolTerminate,

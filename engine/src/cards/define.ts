@@ -1833,6 +1833,13 @@ export interface StaticAbility {
    * it during another player's (Seedborn Muse) still does. `affects` is
    * ignored — it is always the permanent carrying it. */
   readonly doesntUntap?: boolean;
+  /** "You may choose not to untap [this] during your untap step" (rule
+   * 502.3 — Ashnod's Battle Gear, Rubinia Soulsinger): as its controller's
+   * untap step untaps their permanents, they choose which of these to leave
+   * tapped (the `choose-permanents` decision, asked only when one would
+   * untap); no player gets priority (502.4). `affects` is ignored. Usually
+   * beside an effect lasting `"while-source-tapped"`. */
+  readonly mayChooseNotToUntap?: true;
   /** "You may activate loyalty abilities of [this] on any player's turn any
    * time you could cast an instant" (Teferi, Master of Time): its loyalty
    * abilities aren't held to sorcery timing (rule 606.3) — still one per

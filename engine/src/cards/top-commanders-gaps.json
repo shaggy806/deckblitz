@@ -376,7 +376,10 @@
   "keyword:jump-start",
   "keyword:ascend",
   "replacement:prevent-damage-from-chosen-source",
-  "effect:set-color-effect"
+  "effect:set-color-effect",
+  "static:may-choose-not-to-untap",
+  "effect:duration-while-source-tapped",
+  "effect:doesnt-untap-while-source-tapped"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

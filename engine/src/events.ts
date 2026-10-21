@@ -50,7 +50,17 @@ export type EffectDuration =
   /** For as long as that permanent — the effect's source, in that stint —
    * remains on the battlefield; `null` when it had already left as the
    * effect would begin, so the effect doesn't (rule 611.2b). */
-  | { readonly whileSource: { readonly id: ObjectId; readonly zoneChangeCount: number } | null };
+  | { readonly whileSource: WhileSource | null };
+
+/** The source an effect lasts "for as long as" (see `EffectDuration`): that
+ * permanent in that stint, remaining on the battlefield — and, with
+ * `tapped`, remaining tapped ("for as long as ~ remains tapped"; rule
+ * 611.2b), so it ends as the source untaps too. */
+export interface WhileSource {
+  readonly id: ObjectId;
+  readonly zoneChangeCount: number;
+  readonly tapped?: true;
+}
 
 /** What a random choice picked — the `chosen-at-random` event: a player, a
  * card (in a public zone, so everyone sees which), or a mode by its text. */

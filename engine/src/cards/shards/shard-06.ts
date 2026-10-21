@@ -236,6 +236,7 @@ import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
 import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
+import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
 import _poolInfuriate from "../pool/infuriate.js";
@@ -803,6 +804,7 @@ const shard: CardShard = {
     _poolHowlingGalefang,
     _poolHuatliRadiantChampion,
     _poolHypnoticGrifter,
+    _poolImmovableRod,
     _poolImprovisedArmor,
     _poolInfernoTitan,
     _poolInfuriate,

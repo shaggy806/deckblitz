@@ -5176,3 +5176,17 @@ stack, chosen as the Circle's ability resolves; the shield rechecks the colour (
   next damage Lightning Bolt would deal to you will be prevented, and your life stays 20. The
   Goblin becomes blue (the log says so, and the card shows blue), so the Circle no longer covers
   it. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Ashnod's Battle Gear left tapped through the untap step
+
+*New player decision* — "you may choose not to untap" (rule 502.3), asked in the untap step,
+with no priority there (502.4); the bonus lasts "for as long as ~ remains tapped" (611.2b)
+
+- **Setup:** Your precombat main. Your battlefield: Ashnod's Battle Gear, Hill Giant and two
+  Plains.
+- **Do:** Activate the Gear targeting the Hill Giant (it shows 5/1). Pass the turn; on your next
+  untap step, when asked, pick the Gear to leave it tapped. On the turn after, don't pick it.
+- **Check:** The question comes in your untap step only (not the opponent's), reads "Choose
+  permanents to leave tapped", offers only the Gear, and can be confirmed with nothing picked.
+  Left tapped, the Giant stays 5/1; let untap, it goes back to 3/3 at once. Check at ~768px tall,
+  in a 2- and a 4-player room.

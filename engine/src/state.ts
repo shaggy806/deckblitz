@@ -28,7 +28,7 @@ import type {
 import type { CardFilter } from "./filter.js";
 import type { Color, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { GameEvent, Vote } from "./events.js";
+import type { GameEvent, Vote, WhileSource } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
@@ -99,7 +99,7 @@ export interface ControlEffect {
   /** "For as long as [that permanent] remains on the battlefield"
    * (Opportunistic Dragon): it ends as that permanent, in that stint,
    * leaves. */
-  readonly whileSource?: { readonly id: ObjectId; readonly zoneChangeCount: number };
+  readonly whileSource?: WhileSource;
 }
 
 /** An instance of a card (or token) somewhere in the game. */
@@ -1306,7 +1306,7 @@ export interface PtModifier {
    * (Opportunistic Dragon): it ends as that permanent, in that stint,
    * leaves — once everything leaving with it has left, so what it took away
    * stays away for that event's look back (rule 603.10a). */
-  whileSource?: { readonly id: ObjectId; readonly zoneChangeCount: number };
+  whileSource?: WhileSource;
   /** It can attack as though it didn't have defender (the
    * `attack-despite-defender` effect). A rule about it, not an ability it
    * has, so a loss of abilities doesn't end it. */
@@ -2655,6 +2655,10 @@ export type AwaitingDecision =
        * `prevent-damage-from-chosen-source`): a spell on the stack may be
        * chosen as well as a permanent. */
       readonly damageSource?: true;
+      /** Set when the choice is the untap step's "you may choose not to
+       * untap" (rule 502.3): every permanent about to untap, the picks among
+       * them staying tapped. `then` is unused. */
+      readonly untapStep?: readonly ObjectId[];
       /** Set when the choice is a spell's casualty cost being paid as it's
        * cast, rather than an effect resolving — see {@link CasualtyAsk}.
        * `then` is unused. */

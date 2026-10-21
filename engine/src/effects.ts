@@ -108,7 +108,13 @@ export type PtDuration =
    * source, in the stint the resolving ability refers to (Opportunistic
    * Dragon): it ends as that leaves, and does nothing if it already has
    * (rule 611.2b). */
-  | "while-source";
+  | "while-source"
+  /** "For as long as [this] remains tapped" (Ashnod's Battle Gear, Phyrexian
+   * Gremlins): the source, in that stint, staying on the battlefield and
+   * tapped — it ends as the source untaps or leaves, and does nothing if the
+   * source is already untapped or gone (rule 611.2b). Usually beside a
+   * `mayChooseNotToUntap` static. */
+  | "while-source-tapped";
 
 /**
  * A "spend this mana only to …" clause on a mana ability (rule 106.6b).
@@ -2232,6 +2238,9 @@ export type EffectSpec =
        * effect ends as the effect's source leaves — nothing at all if it
        * already has (rule 611.2b). Not with `untilEndOfTurn`. */
       readonly whileSource?: boolean;
+      /** "…for as long as ~ remains tapped" (Rubinia Soulsinger): it ends as
+       * the source untaps or leaves — nothing if it's already untapped. */
+      readonly whileSourceTapped?: boolean;
     }
   | {
       /** Every battlefield permanent matching `filter` (read from the
@@ -6105,7 +6114,13 @@ export interface EffectApi {
   counterSpell(target: TargetRef, into?: "hand" | "exile"): void;
   /** `player` gains control of `target` — see the `"gain-control"`
    * {@link EffectSpec}. */
-  gainControl(target: TargetRef, untilEndOfTurn: boolean, player: PlayerId, whileSource?: boolean): void;
+  gainControl(
+    target: TargetRef,
+    untilEndOfTurn: boolean,
+    player: PlayerId,
+    whileSource?: boolean,
+    whileSourceTapped?: boolean,
+  ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner; `controlledBy` keeps only what that player
    * controls. */
@@ -8765,7 +8780,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = resolveEffectTarget(spec.target, ctx);
       if (target === undefined || illegalSlot(spec.target, ctx)) return;
       const player = effectPlayer(spec.who ?? "you", ctx);
-      if (player !== undefined) ctx.gainControl(target, spec.untilEndOfTurn, player, spec.whileSource === true);
+      if (player !== undefined) {
+        ctx.gainControl(target, spec.untilEndOfTurn, player, spec.whileSource === true, spec.whileSourceTapped === true);
+      }
       return;
     }
     case "gain-control-all": {
