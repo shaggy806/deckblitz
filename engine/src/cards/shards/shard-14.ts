@@ -93,6 +93,7 @@ import _poolCompelledDuel from "../pool/compelled-duel.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
 import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
+import _poolCoopedUp from "../pool/cooped-up.js";
 import _poolCorpseHauler from "../pool/corpse-hauler.js";
 import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
 import _poolCouncilOfEchoes from "../pool/council-of-echoes.js";
@@ -294,6 +295,7 @@ import _poolMakeObsolete from "../pool/make-obsolete.js";
 import _poolManaFlare from "../pool/mana-flare.js";
 import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
+import _poolMeltstridersResolve from "../pool/meltstriders-resolve.js";
 import _poolMemoryDeluge from "../pool/memory-deluge.js";
 import _poolMentalModulation from "../pool/mental-modulation.js";
 import _poolMerchantScroll from "../pool/merchant-scroll.js";
@@ -372,6 +374,7 @@ import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
+import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
@@ -617,6 +620,7 @@ const shard: CardShard = {
     _poolConiferStrider,
     _poolConservatory,
     _poolConsultTheNecrosages,
+    _poolCoopedUp,
     _poolCorpseHauler,
     _poolCosmograndZenith,
     _poolCouncilOfEchoes,
@@ -818,6 +822,7 @@ const shard: CardShard = {
     _poolManaFlare,
     _poolMasterOfBarbs,
     _poolMedusaInhumanQueen,
+    _poolMeltstridersResolve,
     _poolMemoryDeluge,
     _poolMentalModulation,
     _poolMerchantScroll,
@@ -896,6 +901,7 @@ const shard: CardShard = {
     _poolReturnUponTheTide,
     _poolRewind,
     _poolRinAndSeriInseparable,
+    _poolRingOfXathrid,
     _poolRiteOfOblivion,
     _poolRoccoStreetChef,
     _poolRocketVolley,

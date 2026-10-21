@@ -282,6 +282,7 @@ import _poolMassiveRaid from "../pool/massive-raid.js";
 import _poolMastermindPlum from "../pool/mastermind-plum.js";
 import _poolMastersCall from "../pool/masters-call.js";
 import _poolMastersRebuke from "../pool/masters-rebuke.js";
+import _poolMazesMantle from "../pool/mazes-mantle.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
@@ -443,6 +444,7 @@ import _poolSubmerge from "../pool/submerge.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
+import _poolSuperSpeed from "../pool/super-speed.js";
 import _poolSurtlandFlinger from "../pool/surtland-flinger.js";
 import _poolSurtrFieryJotun from "../pool/surtr-fiery-jotun.js";
 import _poolSusanForeman from "../pool/susan-foreman.js";
@@ -822,6 +824,7 @@ const shard: CardShard = {
     _poolMastermindPlum,
     _poolMastersCall,
     _poolMastersRebuke,
+    _poolMazesMantle,
     _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,
     _poolMesaUnicorn,
@@ -983,6 +986,7 @@ const shard: CardShard = {
     _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSundialDawnTyrant,
+    _poolSuperSpeed,
     _poolSurtlandFlinger,
     _poolSurtrFieryJotun,
     _poolSusanForeman,

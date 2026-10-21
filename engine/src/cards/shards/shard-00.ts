@@ -22,6 +22,7 @@ import _poolAngelheartProtector from "../pool/angelheart-protector.js";
 import _poolAngelicGift from "../pool/angelic-gift.js";
 import _poolAnnexSentry from "../pool/annex-sentry.js";
 import _poolApocalypseRunner from "../pool/apocalypse-runner.js";
+import _poolAquitectsDefenses from "../pool/aquitects-defenses.js";
 import _poolArcaneSanctum from "../pool/arcane-sanctum.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
@@ -570,6 +571,7 @@ const shard: CardShard = {
     _poolAngelicGift,
     _poolAnnexSentry,
     _poolApocalypseRunner,
+    _poolAquitectsDefenses,
     _poolArcaneSanctum,
     _poolArchiveArbiter,
     _poolArvadTheCursed,

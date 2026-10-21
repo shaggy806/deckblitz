@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The cards "enchanted creature" in an effect unblocked** (batch 119): 51 earlier-triaged cards,
+  39 authored by two `card-author` agents and the lead (Colossification, Pemmin's Aura, Tarrian's
+  Soulcleaver, Blade of the Bloodchief, Adventuring Gear and 34 more), 12 still blocked — 7 on
+  "enchanted creature doesn't untap" (`static:doesnt-untap-filter`); with an `attachedTo` filter
+  fix (the host read as it is, not through the departed Aura's snapshot) (2026-10-20).
 - **Commander 2020 and Theros Beyond Death, whole** (batch 118): C20's last 35 cards (19
   authored, 16 blocked) and THB's 130 (104 authored, 26 blocked), by six `card-author` agents and
   the lead, with "this spell costs {X} less to cast, where X is your devotion to [color]" built

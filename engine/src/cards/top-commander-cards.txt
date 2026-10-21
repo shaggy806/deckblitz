@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3730 already implemented / 1270 missing (marks refreshed 2026-10-21)
+3738 already implemented / 1262 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1168,7 +1168,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1173  The Shire                                {0}              Legendary Land
 [x]  1174  Seachrome Coast                          {0}              Land
 [x]  1175  Concealed Courtyard                      {0}              Land
-[ ]  1176  Tarrian's Soulcleaver                    {1}              Legendary Artifact — Equipment
+[x]  1176  Tarrian's Soulcleaver                    {1}              Legendary Artifact — Equipment
 [x]  1177  Thriving Grove                           {0}              Land
 [x]  1178  Mikokoro, Center of the Sea              {0}              Legendary Land
 [ ]  1179  The Black Gate                           {0}              Legendary Land — Gate
@@ -1558,7 +1558,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1565  Null Elemental Blast                     {C}              Instant
 [ ]  1566  Malcolm, Alluring Scoundrel              {1}{U}           Legendary Creature — Siren Pirate
 [ ]  1567  Kozilek, the Great Distortion            {8}{C}{C}        Legendary Creature — Eldrazi
-[ ]  1568  Freed from the Real                      {2}{U}           Enchantment — Aura
+[x]  1568  Freed from the Real                      {2}{U}           Enchantment — Aura
 [ ]  1569  Ulamog, the Defiler                      {10}             Legendary Creature — Eldrazi
 [x]  1570  Mazirek, Kraul Death Priest              {3}{B}{G}        Legendary Creature — Insect Shaman
 [x]  1571  Tergrid, God of Fright // Tergrid's Lantern {5}              Legendary Creature — God // Legendary Artifact
@@ -2114,7 +2114,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2121  Masked Vandal                            {1}{G}           Creature — Shapeshifter
 [x]  2122  Reckless Impulse                         {1}{R}           Sorcery
 [x]  2123  Universal Automaton                      {1}              Artifact Creature — Shapeshifter
-[ ]  2124  Hydra's Growth                           {2}{G}           Enchantment — Aura
+[x]  2124  Hydra's Growth                           {2}{G}           Enchantment — Aura
 [ ]  2125  Selvala, Explorer Returned               {1}{G}{W}        Legendary Creature — Elf Scout
 [x]  2126  Crackling Doom                           {R}{W}{B}        Instant
 [x]  2127  Agent of Treachery                       {5}{U}{U}        Creature — Human Rogue
@@ -2455,7 +2455,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2462  Erebor Flamesmith                        {1}{R}           Creature — Dwarf Artificer
 [ ]  2463  Crimson Wisps                            {R}              Instant
 [ ]  2464  Agitator Ant                             {2}{R}           Creature — Insect
-[ ]  2465  Blade of the Bloodchief                  {1}              Artifact — Equipment
+[x]  2465  Blade of the Bloodchief                  {1}              Artifact — Equipment
 [x]  2466  Crib Swap                                {2}{W}           Kindred Instant — Shapeshifter
 [ ]  2467  Emrakul, the World Anew                  {12}             Legendary Creature — Eldrazi
 [x]  2468  Ureni of the Unwritten                   {4}{G}{U}{R}     Legendary Creature — Spirit Dragon
@@ -2646,7 +2646,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2653  Prologue to Phyresis                     {1}{U}           Instant
 [x]  2654  Crystal Grotto                           {0}              Land
 [ ]  2655  Chandra's Incinerator                    {5}{R}           Creature — Elemental
-[ ]  2656  Pemmin's Aura                            {1}{U}{U}        Enchantment — Aura
+[x]  2656  Pemmin's Aura                            {1}{U}{U}        Enchantment — Aura
 [ ]  2657  Questing Beast                           {2}{G}{G}        Legendary Creature — Beast
 [x]  2658  Baylen, the Haymaker                     {R}{G}{W}        Legendary Creature — Rabbit Warrior
 [x]  2659  Tempt with Vengeance                     {X}{R}           Sorcery
@@ -3549,7 +3549,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3556  Vitalize                                 {G}              Instant
 [x]  3557  Bedrock Tortoise                         {3}{G}           Creature — Turtle
 [x]  3558  Lord of the Nazgûl                       {3}{U}{B}        Legendary Creature — Wraith Noble
-[ ]  3559  Redemption Arc                           {2}{W}           Enchantment — Aura
+[x]  3559  Redemption Arc                           {2}{W}           Enchantment — Aura
 [x]  3560  Turbulent Springs                        {0}              Land — Island Mountain
 [x]  3561  Irma, Part-Time Mutant                   {2}{U}           Legendary Creature — Human Mutant Shapeshifter
 [x]  3562  Oscorp Industries                        {0}              Land
@@ -4034,7 +4034,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4041  Spell Stutter                            {1}{U}           Instant
 [ ]  4042  Scroll of Fate                           {3}              Artifact
 [x]  4043  Desolation Twin                          {10}             Creature — Eldrazi
-[ ]  4044  Colossification                          {5}{G}{G}        Enchantment — Aura
+[x]  4044  Colossification                          {5}{G}{G}        Enchantment — Aura
 [ ]  4045  Kefka, Dancing Mad                       {5}{B}{R}        Legendary Creature — Human Wizard
 [x]  4046  Innocent Blood                           {B}              Sorcery
 [x]  4047  Alania, Divergent Storm                  {3}{U}{R}        Legendary Creature — Otter Wizard
@@ -4175,7 +4175,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4182  Galadriel, Light of Valinor              {2}{G}{W}{U}     Legendary Creature — Elf Noble
 [x]  4183  Faldorn, Dread Wolf Herald               {1}{R}{G}        Legendary Creature — Human Druid
 [x]  4184  Veinwitch Coven                          {2}{B}           Creature — Vampire Warlock
-[ ]  4185  Level Up                                 {1}{G}           Enchantment — Aura
+[x]  4185  Level Up                                 {1}{G}           Enchantment — Aura
 [x]  4186  Bygone Colossus                          {9}              Artifact Creature — Robot Giant
 [x]  4187  Kaito, Cunning Infiltrator               {1}{U}{U}        Legendary Planeswalker — Kaito
 [x]  4188  Jace's Sanctum                           {3}{U}           Enchantment

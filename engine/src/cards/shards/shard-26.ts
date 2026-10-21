@@ -52,6 +52,7 @@ import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
 import _poolBellowingMauler from "../pool/bellowing-mauler.js";
 import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
+import _poolBladeOfTheBloodchief from "../pool/blade-of-the-bloodchief.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
@@ -238,6 +239,7 @@ import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
+import _poolKitnap from "../pool/kitnap.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
@@ -580,6 +582,7 @@ const shard: CardShard = {
     _poolBefuddle,
     _poolBellowingMauler,
     _poolBlackWidowDaringOperative,
+    _poolBladeOfTheBloodchief,
     _poolBlessedWine,
     _poolBogSmugglers,
     _poolBoldImpaler,
@@ -766,6 +769,7 @@ const shard: CardShard = {
     _poolKelsFightFixer,
     _poolKhalniAmbush,
     _poolKinTreeSeverance,
+    _poolKitnap,
     _poolKnife,
     _poolKnightsOfDolAmroth,
     _poolLegacyWeapon,

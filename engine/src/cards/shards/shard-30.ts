@@ -35,6 +35,7 @@ import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
 import _poolAuriokTransfixer from "../pool/auriok-transfixer.js";
 import _poolAvenFisher from "../pool/aven-fisher.js";
 import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
+import _poolAwakenedAwareness from "../pool/awakened-awareness.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
@@ -244,6 +245,7 @@ import _poolHydraDisintegrator from "../pool/hydra-disintegrator.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIguanaParrot from "../pool/iguana-parrot.js";
 import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
+import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
@@ -565,6 +567,7 @@ const shard: CardShard = {
     _poolAuriokTransfixer,
     _poolAvenFisher,
     _poolAwakenTheBloodAvatar,
+    _poolAwakenedAwareness,
     _poolAzoriusGuildgate,
     _poolAzulaAlwaysLies,
     _poolBalothWoodcrasher,
@@ -774,6 +777,7 @@ const shard: CardShard = {
     _poolIfritWardenOfInferno,
     _poolIguanaParrot,
     _poolIlMhegPixie,
+    _poolIncriminatingImpetus,
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
     _poolInspiringCall,

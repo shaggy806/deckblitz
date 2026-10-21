@@ -151,6 +151,7 @@ import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
 import _poolGlintingCreeper from "../pool/glinting-creeper.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
+import _poolGlisteningOil from "../pool/glistening-oil.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGloomSower from "../pool/gloom-sower.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
@@ -637,6 +638,7 @@ const shard: CardShard = {
     _poolGlimmerSeeker,
     _poolGlintingCreeper,
     _poolGlissasCourier,
+    _poolGlisteningOil,
     _poolGloinTheMighty,
     _poolGloomSower,
     _poolGnawingVermin,

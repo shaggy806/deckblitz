@@ -387,6 +387,7 @@ import _poolSkullportMerchant from "../pool/skullport-merchant.js";
 import _poolSkySkiff from "../pool/sky-skiff.js";
 import _poolSkySpirit from "../pool/sky-spirit.js";
 import _poolSkybridgeTowers from "../pool/skybridge-towers.js";
+import _poolSkyclavePickAxe from "../pool/skyclave-pick-axe.js";
 import _poolSkyclaveSentinel from "../pool/skyclave-sentinel.js";
 import _poolSkyhunterProwler from "../pool/skyhunter-prowler.js";
 import _poolSlagStrider from "../pool/slag-strider.js";
@@ -435,6 +436,7 @@ import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
 import _poolTaintedTreats from "../pool/tainted-treats.js";
 import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
+import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
 import _poolTellingTime from "../pool/telling-time.js";
 import _poolTempleOfEnlightenment from "../pool/temple-of-enlightenment.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolSkySkiff,
     _poolSkySpirit,
     _poolSkybridgeTowers,
+    _poolSkyclavePickAxe,
     _poolSkyclaveSentinel,
     _poolSkyhunterProwler,
     _poolSlagStrider,
@@ -968,6 +971,7 @@ const shard: CardShard = {
     _poolTaintedTreats,
     _poolTalionTheKindlyLord,
     _poolTalismanOfIndulgence,
+    _poolTarriansSoulcleaver,
     _poolTawnossWand,
     _poolTellingTime,
     _poolTempleOfEnlightenment,

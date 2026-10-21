@@ -384,6 +384,7 @@ import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
 import _poolShadewingLaureate from "../pool/shadewing-laureate.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
+import _poolShatteredEgo from "../pool/shattered-ego.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
 import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
@@ -498,6 +499,7 @@ import _poolVillagePillagers from "../pool/village-pillagers.js";
 import _poolVirtuousCharge from "../pool/virtuous-charge.js";
 import _poolVirulentSwipe from "../pool/virulent-swipe.js";
 import _poolVithianStinger from "../pool/vithian-stinger.js";
+import _poolViviensTalent from "../pool/viviens-talent.js";
 import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
@@ -925,6 +927,7 @@ const shard: CardShard = {
     _poolSentryOfTheUnderworld,
     _poolShadewingLaureate,
     _poolSharuumTheHegemon,
+    _poolShatteredEgo,
     _poolShepherdOfRot,
     _poolShinraReinforcements,
     _poolShireTerrace,
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolVirtuousCharge,
     _poolVirulentSwipe,
     _poolVithianStinger,
+    _poolViviensTalent,
     _poolVolcanicTorrent,
     _poolVulshokBattlegear,
     _poolVulshokRefugee,

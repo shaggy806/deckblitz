@@ -84,6 +84,7 @@ import _poolCopperLonglegs from "../pool/copper-longlegs.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
 import _poolCourierBat from "../pool/courier-bat.js";
 import _poolCovertCutpurse from "../pool/covert-cutpurse.js";
+import _poolCradleOfSafety from "../pool/cradle-of-safety.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
@@ -184,6 +185,7 @@ import _poolGhostLitNourisher from "../pool/ghost-lit-nourisher.js";
 import _poolGiantOctopus from "../pool/giant-octopus.js";
 import _poolGideonsReproach from "../pool/gideons-reproach.js";
 import _poolGigantosaurus from "../pool/gigantosaurus.js";
+import _poolGiltLeafsEmbrace from "../pool/gilt-leafs-embrace.js";
 import _poolGlacierGodmaw from "../pool/glacier-godmaw.js";
 import _poolGlassworks from "../pool/glassworks.js";
 import _poolGlint from "../pool/glint.js";
@@ -411,6 +413,7 @@ import _poolSpellscornCoven from "../pool/spellscorn-coven.js";
 import _poolSpellstutterSprite from "../pool/spellstutter-sprite.js";
 import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
+import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
@@ -605,6 +608,7 @@ const shard: CardShard = {
     _poolCormelaGlamourThief,
     _poolCourierBat,
     _poolCovertCutpurse,
+    _poolCradleOfSafety,
     _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrowdFavorites,
@@ -705,6 +709,7 @@ const shard: CardShard = {
     _poolGiantOctopus,
     _poolGideonsReproach,
     _poolGigantosaurus,
+    _poolGiltLeafsEmbrace,
     _poolGlacierGodmaw,
     _poolGlassworks,
     _poolGlint,
@@ -932,6 +937,7 @@ const shard: CardShard = {
     _poolSpellstutterSprite,
     _poolSpiderUk,
     _poolSpincrusher,
+    _poolSpiralIntoSolitude,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,

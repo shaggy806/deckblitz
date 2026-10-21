@@ -109,7 +109,9 @@ section keeps only what to do next.
   alone; batch 112 Kaldheim and its Commander set, on snow mana; batch 113 the rest of Commander
   Legends, no engine change; batch 114 Zendikar Rising and its Commander set, on party; batch
   115 the rest of Jumpstart; batch 116 the rest of Core Set 2021, on hexproof from a quality; batch 117 Ikoria,
-  on mutate; batch 118 Commander 2020 and Theros Beyond Death, on devotion cost reductions);
+  on mutate; batch 118 Commander 2020 and Theros Beyond Death, on devotion cost reductions and
+  "enchanted creature" in an effect; batch 119 the cards that unblocked, leaving "enchanted
+  creature doesn't untap" — `static:doesnt-untap-filter`, 7 — as the next lead);
   **next, Throne of Eldraine** (ELD — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
   sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
   6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the

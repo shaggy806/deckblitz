@@ -154,6 +154,7 @@ import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
+import _poolFaeFlight from "../pool/fae-flight.js";
 import _poolFaeOffering from "../pool/fae-offering.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
 import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
@@ -353,6 +354,7 @@ import _poolPestilentWolf from "../pool/pestilent-wolf.js";
 import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
+import _poolPitilessFists from "../pool/pitiless-fists.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlanForAllOutcomes from "../pool/plan-for-all-outcomes.js";
 import _poolPlayWithFire from "../pool/play-with-fire.js";
@@ -711,6 +713,7 @@ const shard: CardShard = {
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
+    _poolFaeFlight,
     _poolFaeOffering,
     _poolFalkenrathNoble,
     _poolFallajiArchaeologist,
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _poolPettyLarceny,
     _poolPhenaxGodOfDeception,
     _poolPiratePeddlers,
+    _poolPitilessFists,
     _poolPlagueMyr,
     _poolPlanForAllOutcomes,
     _poolPlayWithFire,

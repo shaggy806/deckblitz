@@ -164,6 +164,7 @@ import _poolFlywheelRacer from "../pool/flywheel-racer.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
+import _poolFreedFromTheReal from "../pool/freed-from-the-real.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
@@ -261,6 +262,7 @@ import _poolMentorsGuidance from "../pool/mentors-guidance.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
 import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
+import _poolMilitaryDiscipline from "../pool/military-discipline.js";
 import _poolMindSculpt from "../pool/mind-sculpt.js";
 import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
@@ -307,6 +309,7 @@ import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
+import _poolPemminsAura from "../pool/pemmins-aura.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
 import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
@@ -682,6 +685,7 @@ const shard: CardShard = {
     _poolForcedFruition,
     _poolForumsFavor,
     _poolFoulRoads,
+    _poolFreedFromTheReal,
     _poolFrolickingFamiliar,
     _poolGalionElvenkingsButler,
     _poolGarrukWildspeaker,
@@ -779,6 +783,7 @@ const shard: CardShard = {
     _poolMerrowReejerey,
     _poolMetamorphicBlast,
     _poolMigratoryRoute,
+    _poolMilitaryDiscipline,
     _poolMindSculpt,
     _poolMinesOfMoria,
     _poolMireTriton,
@@ -825,6 +830,7 @@ const shard: CardShard = {
     _poolPatagiaGolem,
     _poolPathToTheFestival,
     _poolPathbreakerIbex,
+    _poolPemminsAura,
     _poolPendrellDrake,
     _poolPestControl,
     _poolPetrifiedPlating,

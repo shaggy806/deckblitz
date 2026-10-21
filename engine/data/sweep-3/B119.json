@@ -1,0 +1,371 @@
+{
+ "batch": "B119",
+ "status": "complete",
+ "ranks": "The cards an effect naming the enchanted or equipped permanent unblocked (effect:attached-effect-ref, effect:effect-on-enchanted-permanent — built in batch 118), from earlier batches",
+ "authored": [
+  {
+   "name": "Accelerated Evolution",
+   "files": [
+    "engine/src/cards/pool/accelerated-evolution.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Adventuring Gear",
+   "files": [
+    "engine/src/cards/pool/adventuring-gear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aquitect's Defenses",
+   "files": [
+    "engine/src/cards/pool/aquitects-defenses.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Awakened Awareness",
+   "files": [
+    "engine/src/cards/pool/awakened-awareness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blade of the Bloodchief",
+   "files": [
+    "engine/src/cards/pool/blade-of-the-bloodchief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossification",
+   "files": [
+    "engine/src/cards/pool/colossification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Convenient Target",
+   "files": [
+    "engine/src/cards/pool/convenient-target.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cooped Up",
+   "files": [
+    "engine/src/cards/pool/cooped-up.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cradle of Safety",
+   "files": [
+    "engine/src/cards/pool/cradle-of-safety.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fae Flight",
+   "files": [
+    "engine/src/cards/pool/fae-flight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fire-Rim Form",
+   "files": [
+    "engine/src/cards/pool/fire-rim-form.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Freed from the Real",
+   "files": [
+    "engine/src/cards/pool/freed-from-the-real.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilt-Leaf's Embrace",
+   "files": [
+    "engine/src/cards/pool/gilt-leafs-embrace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glistening Oil",
+   "files": [
+    "engine/src/cards/pool/glistening-oil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howl of the Hunt",
+   "files": [
+    "engine/src/cards/pool/howl-of-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hydra's Growth",
+   "files": [
+    "engine/src/cards/pool/hydras-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incriminating Impetus",
+   "files": [
+    "engine/src/cards/pool/incriminating-impetus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Junk Jet",
+   "files": [
+    "engine/src/cards/pool/junk-jet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitnap",
+   "files": [
+    "engine/src/cards/pool/kitnap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Level Up",
+   "files": [
+    "engine/src/cards/pool/level-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maze's Mantle",
+   "files": [
+    "engine/src/cards/pool/mazes-mantle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meltstrider's Resolve",
+   "files": [
+    "engine/src/cards/pool/meltstriders-resolve.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Military Discipline",
+   "files": [
+    "engine/src/cards/pool/military-discipline.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Novel Nunchaku",
+   "files": [
+    "engine/src/cards/pool/novel-nunchaku.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path to Redemption",
+   "files": [
+    "engine/src/cards/pool/path-to-redemption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pemmin's Aura",
+   "files": [
+    "engine/src/cards/pool/pemmins-aura.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pitiless Fists",
+   "files": [
+    "engine/src/cards/pool/pitiless-fists.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Redemption Arc",
+   "files": [
+    "engine/src/cards/pool/redemption-arc.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ring of Xathrid",
+   "files": [
+    "engine/src/cards/pool/ring-of-xathrid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shattered Ego",
+   "files": [
+    "engine/src/cards/pool/shattered-ego.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigarda's Imprisonment",
+   "files": [
+    "engine/src/cards/pool/sigardas-imprisonment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silken Strength",
+   "files": [
+    "engine/src/cards/pool/silken-strength.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyclave Pick-Axe",
+   "files": [
+    "engine/src/cards/pool/skyclave-pick-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiral into Solitude",
+   "files": [
+    "engine/src/cards/pool/spiral-into-solitude.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stark's Ingenuity",
+   "files": [
+    "engine/src/cards/pool/starks-ingenuity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super Speed",
+   "files": [
+    "engine/src/cards/pool/super-speed.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tarrian's Soulcleaver",
+   "files": [
+    "engine/src/cards/pool/tarrians-soulcleaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uneasy Alliance",
+   "files": [
+    "engine/src/cards/pool/uneasy-alliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien's Talent",
+   "files": [
+    "engine/src/cards/pool/viviens-talent.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Airtight Alibi",
+   "needs": [
+    "static:cant-become-suspected"
+   ],
+   "why": "enchanted creature can't become suspected"
+  },
+  {
+   "name": "Blossombind",
+   "needs": [
+    "static:cant-become-untapped"
+   ],
+   "why": "enchanted creature can't become untapped"
+  },
+  {
+   "name": "Dramatic Accusation",
+   "needs": [
+    "static:doesnt-untap-filter",
+    "effect:shuffle-into-library"
+   ],
+   "why": "enchanted creature doesn't untap during its controller's untap step"
+  },
+  {
+   "name": "Enchanted River's Grasp",
+   "needs": [
+    "static:static-lose-all-abilities",
+    "static:doesnt-untap-filter",
+    "effect:remove-all-counters"
+   ],
+   "why": "loses all abilities, doesn't untap; removes all counters"
+  },
+  {
+   "name": "Heliod's Punishment",
+   "needs": [
+    "static:static-lose-all-abilities",
+    "static:aura-grants-ability-referencing-aura"
+   ],
+   "why": "loses all abilities; the granted ability removes counters from and destroys the Aura that granted it"
+  },
+  {
+   "name": "Observed Stasis",
+   "needs": [
+    "effect:attached-controller-player-scope"
+   ],
+   "why": "draw a card for each tapped creature the enchanted creature's controller controls"
+  },
+  {
+   "name": "Stay Hidden, Stay Silent",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "enchanted creature doesn't untap during its controller's untap step"
+  },
+  {
+   "name": "T-45 Power Armor",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "equipped creature doesn't untap during its controller's untap step"
+  },
+  {
+   "name": "Tamiyo's Compleation",
+   "needs": [
+    "static:static-lose-all-abilities",
+    "static:doesnt-untap-filter"
+   ],
+   "why": "enchanted permanent loses all abilities and doesn't untap"
+  },
+  {
+   "name": "Tractor Beam",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "enchanted permanent doesn't untap during its controller's untap step"
+  },
+  {
+   "name": "Vengeful Strangler",
+   "needs": [
+    "effect:attached-controller-player-scope"
+   ],
+   "why": "Strangling Grasp: the enchanted permanent's controller sacrifices and loses life"
+  },
+  {
+   "name": "Watery Grasp",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "enchanted creature doesn't untap during its controller's untap step"
+  }
+ ]
+}

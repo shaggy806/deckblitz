@@ -213,6 +213,7 @@ import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
 import _poolHulkingCyclops from "../pool/hulking-cyclops.js";
+import _poolHydrasGrowth from "../pool/hydras-growth.js";
 import _poolHydroChanneler from "../pool/hydro-channeler.js";
 import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
@@ -395,6 +396,7 @@ import _poolShriekingDrake from "../pool/shrieking-drake.js";
 import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
+import _poolSilkenStrength from "../pool/silken-strength.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
@@ -779,6 +781,7 @@ const shard: CardShard = {
     _poolHondenOfCleansingFire,
     _poolHoverstonePilgrim,
     _poolHulkingCyclops,
+    _poolHydrasGrowth,
     _poolHydroChanneler,
     _poolIchorspitBasilisk,
     _poolIkraShidiqiTheUsurper,
@@ -961,6 +964,7 @@ const shard: CardShard = {
     _poolShrink,
     _poolShroudedShepherd,
     _poolSigilOfMyrkul,
+    _poolSilkenStrength,
     _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,

@@ -479,6 +479,7 @@ import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
 import _poolUltimateNullification from "../pool/ultimate-nullification.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
+import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
@@ -1018,6 +1019,7 @@ const shard: CardShard = {
     _poolUkudCobra,
     _poolUltimateNullification,
     _poolUlvenwaldHydra,
+    _poolUneasyAlliance,
     _poolUnexpectedFangs,
     _poolUnhinge,
     _poolUnswervingSloth,

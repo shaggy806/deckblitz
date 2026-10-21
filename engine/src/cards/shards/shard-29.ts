@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
+import _poolAcceleratedEvolution from "../pool/accelerated-evolution.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
@@ -544,6 +545,7 @@ import _tokensZombieTokenGhoulishProcession from "../tokens/zombie-token-ghoulis
 const shard: CardShard = {
   pool: [
     _poolAIMSynthoids,
+    _poolAcceleratedEvolution,
     _poolAdaptiveGemguard,
     _poolAetherSyphon,
     _poolAffaProtector,

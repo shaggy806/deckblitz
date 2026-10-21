@@ -7,6 +7,7 @@ import _poolAbandonedCampground from "../pool/abandoned-campground.js";
 import _poolActionNewsCrew from "../pool/action-news-crew.js";
 import _poolAdaptiveShimmerer from "../pool/adaptive-shimmerer.js";
 import _poolAdvanceScout from "../pool/advance-scout.js";
+import _poolAdventuringGear from "../pool/adventuring-gear.js";
 import _poolAgentBishopManInBlack from "../pool/agent-bishop-man-in-black.js";
 import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
@@ -547,6 +548,7 @@ const shard: CardShard = {
     _poolActionNewsCrew,
     _poolAdaptiveShimmerer,
     _poolAdvanceScout,
+    _poolAdventuringGear,
     _poolAgentBishopManInBlack,
     _poolAgentVenom,
     _poolAgonasaurRex,

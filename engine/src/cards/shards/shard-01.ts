@@ -376,6 +376,7 @@ import _poolShadyTraveler from "../pool/shady-traveler.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
+import _poolSigardasImprisonment from "../pool/sigardas-imprisonment.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
 import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
 import _poolSixthSense from "../pool/sixth-sense.js";
@@ -890,6 +891,7 @@ const shard: CardShard = {
     _poolShatteredYard,
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
+    _poolSigardasImprisonment,
     _poolSignpostScarecrow,
     _poolSigridGodFavored,
     _poolSixthSense,

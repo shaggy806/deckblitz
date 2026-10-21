@@ -200,6 +200,7 @@ import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
 import _poolHornetCobra from "../pool/hornet-cobra.js";
 import _poolHorsesOfTheBruinen from "../pool/horses-of-the-bruinen.js";
 import _poolHoundTamer from "../pool/hound-tamer.js";
+import _poolHowlOfTheHunt from "../pool/howl-of-the-hunt.js";
 import _poolHowlpackPiper from "../pool/howlpack-piper.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
@@ -723,6 +724,7 @@ const shard: CardShard = {
     _poolHornetCobra,
     _poolHorsesOfTheBruinen,
     _poolHoundTamer,
+    _poolHowlOfTheHunt,
     _poolHowlpackPiper,
     _poolHulkingGoblin,
     _poolHumongulus,

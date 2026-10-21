@@ -1280,11 +1280,17 @@ export function matchesFilter(
   }
   if (filter.attachedTo !== undefined) {
     const host = live !== undefined ? live.attachedTo : lki!.attachedTo;
+    // The host is read as it is now, not through this object's snapshot: an
+    // Equipment that has left still asks whether the creature it equipped is
+    // a Vampire (Blade of the Bloodchief) — and that creature in the stint it
+    // was attached in (rule 400.7).
+    const { snapshot: _snapshot, lastKnown: _lastKnown, ...hostCtx } = ctx;
     if (
       host === null ||
       host === undefined ||
       state.objects[host]?.zone !== "battlefield" ||
-      !matchesFilter(state, registry, host, filter.attachedTo, ctx)
+      (lki?.attachedToStint !== undefined && state.objects[host].zoneChangeCount !== lki.attachedToStint) ||
+      !matchesFilter(state, registry, host, filter.attachedTo, hostCtx)
     ) {
       return false;
     }

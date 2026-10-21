@@ -139,6 +139,7 @@ import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
+import _poolFireRimForm from "../pool/fire-rim-form.js";
 import _poolFirebolt from "../pool/firebolt.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
@@ -234,6 +235,7 @@ import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
 import _poolLawRuneEnforcer from "../pool/law-rune-enforcer.js";
 import _poolLeechFanatic from "../pool/leech-fanatic.js";
 import _poolLegionLeadership from "../pool/legion-leadership.js";
+import _poolLevelUp from "../pool/level-up.js";
 import _poolLevitation from "../pool/levitation.js";
 import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
@@ -295,6 +297,7 @@ import _poolNantukoDisciple from "../pool/nantuko-disciple.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
+import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
@@ -686,6 +689,7 @@ const shard: CardShard = {
     _poolFeralMaaka,
     _poolFierceRetribution,
     _poolFinaleOfGlory,
+    _poolFireRimForm,
     _poolFirebolt,
     _poolFlashThompsonSpiderFan,
     _poolFlowOfKnowledge,
@@ -781,6 +785,7 @@ const shard: CardShard = {
     _poolLawRuneEnforcer,
     _poolLeechFanatic,
     _poolLegionLeadership,
+    _poolLevelUp,
     _poolLevitation,
     _poolLightbringer,
     _poolLightlessEvangel,
@@ -842,6 +847,7 @@ const shard: CardShard = {
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
     _poolNineTailWhiteFox,
+    _poolNovelNunchaku,
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,

@@ -242,6 +242,7 @@ import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
 import _poolJechtReluctantGuardian from "../pool/jecht-reluctant-guardian.js";
 import _poolJenniferWalters from "../pool/jennifer-walters.js";
 import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js";
+import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKapow from "../pool/kapow.js";
@@ -799,6 +800,7 @@ const shard: CardShard = {
     _poolJechtReluctantGuardian,
     _poolJenniferWalters,
     _poolJonIrenicusShatteredOne,
+    _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,
     _poolKapow,

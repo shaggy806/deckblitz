@@ -406,6 +406,7 @@ import _poolSpikeJester from "../pool/spike-jester.js";
 import _poolSpittingDrake from "../pool/spitting-drake.js";
 import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
 import _poolSproutbackTrudge from "../pool/sproutback-trudge.js";
+import _poolStarksIngenuity from "../pool/starks-ingenuity.js";
 import _poolSteadfastUnicorn from "../pool/steadfast-unicorn.js";
 import _poolSteadyProgress from "../pool/steady-progress.js";
 import _poolSteamClean from "../pool/steam-clean.js";
@@ -915,6 +916,7 @@ const shard: CardShard = {
     _poolSpittingDrake,
     _poolSplinterHamatoYoshi,
     _poolSproutbackTrudge,
+    _poolStarksIngenuity,
     _poolSteadfastUnicorn,
     _poolSteadyProgress,
     _poolSteamClean,

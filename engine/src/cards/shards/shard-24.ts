@@ -92,6 +92,7 @@ import _poolCliffThreader from "../pool/cliff-threader.js";
 import _poolCoilingOracle from "../pool/coiling-oracle.js";
 import _poolCollarTheCulprit from "../pool/collar-the-culprit.js";
 import _poolColossalDreadmaw from "../pool/colossal-dreadmaw.js";
+import _poolColossification from "../pool/colossification.js";
 import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
@@ -288,6 +289,7 @@ import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
+import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
@@ -311,6 +313,7 @@ import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRankRat from "../pool/rank-rat.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
+import _poolRedemptionArc from "../pool/redemption-arc.js";
 import _poolReknit from "../pool/reknit.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
@@ -590,6 +593,7 @@ const shard: CardShard = {
     _poolCoilingOracle,
     _poolCollarTheCulprit,
     _poolColossalDreadmaw,
+    _poolColossification,
     _poolCommandTheStorm,
     _poolCommanderSofiaDaguerre,
     _poolConfidenceFromStrength,
@@ -786,6 +790,7 @@ const shard: CardShard = {
     _poolOverlordOfTheFloodpits,
     _poolPairedTactician,
     _poolParcelMyr,
+    _poolPathToRedemption,
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
     _poolPitilessGorgon,
@@ -809,6 +814,7 @@ const shard: CardShard = {
     _poolRampagingFerocidon,
     _poolRankRat,
     _poolRecklessDetective,
+    _poolRedemptionArc,
     _poolReknit,
     _poolRenegadeMap,
     _poolRhoxBrute,

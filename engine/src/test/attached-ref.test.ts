@@ -14,8 +14,10 @@ import {
   B,
   activate,
   cast,
+  enter,
   keywords,
   lands,
+  nextTurn,
   pickTargets,
   pt,
   ref,
@@ -112,6 +114,95 @@ describe("an Aura's activated ability", () => {
     settle(game);
     expect(zone(game, apathy)).toBe("graveyard");
     expect(zone(game, bears)).toBe("exile");
+  });
+});
+
+describe("equipped creature in an Equipment's trigger", () => {
+  it("Adventuring Gear: landfall pumps the creature it equips as the trigger resolves", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Wastes", 1);
+    const gear = spawn(game, "Adventuring Gear");
+    activate(game, gear, 0, { targets: [ref(bears)] });
+    enter(game, "Forest");
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 4 });
+  });
+});
+
+describe("a condition on the attached permanent, with the source gone", () => {
+  it("Blade of the Bloodchief destroyed in response: its Vampire still gets two counters", () => {
+    const { game } = table();
+    const vampire = spawn(game, "Vampire Nighthawk");
+    lands(game, "Wastes", 1);
+    const blade = spawn(game, "Blade of the Bloodchief");
+    activate(game, blade, 0, { targets: [ref(vampire)] });
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [ref(bears)]);
+    game.advanceUntil((s) => s.zones.shared.stack.length > 0 || s.awaiting !== null);
+    destroyNow(game, blade);
+    settle(game);
+    expect(zone(game, blade)).toBe("graveyard");
+    expect(game.state.objects[vampire].counters["+1/+1"]).toBe(2);
+  });
+
+  it("Blade of the Bloodchief on a non-Vampire: one counter", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Wastes", 1);
+    const blade = spawn(game, "Blade of the Bloodchief");
+    activate(game, blade, 0, { targets: [ref(bears)] });
+    destroyNow(game, spawn(game, "Grizzly Bears", B));
+    settle(game);
+    expect(game.state.objects[bears].counters["+1/+1"]).toBe(1);
+  });
+
+  it("Ring of Xathrid: a counter at upkeep only on a black creature", () => {
+    const { game } = table();
+    const vampire = spawn(game, "Vampire Nighthawk");
+    lands(game, "Wastes", 1);
+    const ring = spawn(game, "Ring of Xathrid");
+    activate(game, ring, 1, { targets: [ref(vampire)] });
+    nextTurn(game, "upkeep");
+    nextTurn(game, "upkeep");
+    settle(game);
+    expect(game.state.objects[vampire].counters["+1/+1"]).toBe(1);
+  });
+
+  it("Maze's Mantle: hexproof only for a creature with toxic", () => {
+    const { game } = table();
+    const rat = spawn(game, "Blightbelly Rat");
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Forest", 6);
+    cast(game, toHand(game, "Maze's Mantle"), { targets: [ref(rat)] });
+    cast(game, toHand(game, "Maze's Mantle"), { targets: [ref(bears)] });
+    expect(keywords(game, rat).has("hexproof")).toBe(true);
+    expect(keywords(game, bears).has("hexproof")).toBe(false);
+  });
+
+  it("Howl of the Hunt destroyed in response still untaps the Wolf it enchanted; a non-Wolf stays tapped", () => {
+    const { game } = table();
+    const wolf = spawn(game, "Bounding Wolf", A, { tapped: true });
+    const bears = spawn(game, "Grizzly Bears", A, { tapped: true });
+    lands(game, "Forest", 6);
+    const howl = toHand(game, "Howl of the Hunt");
+    castToTrigger(game, howl, wolf);
+    destroyNow(game, howl);
+    settle(game);
+    expect(game.state.objects[wolf].tapped).toBe(false);
+    cast(game, toHand(game, "Howl of the Hunt"), { targets: [ref(bears)] });
+    expect(game.state.objects[bears].tapped).toBe(true);
+  });
+
+  it("Maze's Mantle destroyed in response: its intervening if reads the creature it last enchanted (rule 603.4)", () => {
+    const { game } = table();
+    const rat = spawn(game, "Blightbelly Rat");
+    lands(game, "Forest", 3);
+    const mantle = toHand(game, "Maze's Mantle");
+    castToTrigger(game, mantle, rat);
+    destroyNow(game, mantle);
+    settle(game);
+    expect(zone(game, mantle)).toBe("graveyard");
+    expect(keywords(game, rat).has("hexproof")).toBe(true);
   });
 });
 
