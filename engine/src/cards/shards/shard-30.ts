@@ -121,6 +121,7 @@ import _poolDeftDuelist from "../pool/deft-duelist.js";
 import _poolDeliberate from "../pool/deliberate.js";
 import _poolDemolish from "../pool/demolish.js";
 import _poolDemonicBargain from "../pool/demonic-bargain.js";
+import _poolDeploy from "../pool/deploy.js";
 import _poolDerangedOutcast from "../pool/deranged-outcast.js";
 import _poolDesolationProwler from "../pool/desolation-prowler.js";
 import _poolDevotedGrafkeeper from "../pool/devoted-grafkeeper.js";
@@ -362,6 +363,7 @@ import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
+import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPilferingHawk from "../pool/pilfering-hawk.js";
@@ -435,6 +437,7 @@ import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
+import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
 import _poolSpectralHuntCaller from "../pool/spectral-hunt-caller.js";
 import _poolSpellbindingSoprano from "../pool/spellbinding-soprano.js";
@@ -665,6 +668,7 @@ const shard: CardShard = {
     _poolDeliberate,
     _poolDemolish,
     _poolDemonicBargain,
+    _poolDeploy,
     _poolDerangedOutcast,
     _poolDesolationProwler,
     _poolDevotedGrafkeeper,
@@ -906,6 +910,7 @@ const shard: CardShard = {
     _poolOverprotect,
     _poolPanharmonicon,
     _poolPantherWarriors,
+    _poolPestilentSpirit,
     _poolPhantasmalShieldback,
     _poolPiaDeterminedRebuilder,
     _poolPilferingHawk,
@@ -979,6 +984,7 @@ const shard: CardShard = {
     _poolSoltariPriest,
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,
+    _poolSpawnOfMayhem,
     _poolSpawningKraken,
     _poolSpectralHuntCaller,
     _poolSpellbindingSoprano,

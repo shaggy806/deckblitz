@@ -318,6 +318,7 @@ import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
 import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
 import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
+import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
 import _poolPaleBears from "../pool/pale-bears.js";
 import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
@@ -394,6 +395,7 @@ import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
+import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
 import _poolSilverflameSquire from "../pool/silverflame-squire.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
@@ -473,6 +475,7 @@ import _poolTwinBlades from "../pool/twin-blades.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
+import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
@@ -842,6 +845,7 @@ const shard: CardShard = {
     _poolOnslaught,
     _poolOpenTheGates,
     _poolOriginOfTheAvengers,
+    _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
     _poolPaleBears,
     _poolPathOfThePyromancer,
@@ -918,6 +922,7 @@ const shard: CardShard = {
     _poolShepherdOfTheClouds,
     _poolShiftingCeratops,
     _poolSickleRipper,
+    _poolSilhanaWayfinder,
     _poolSilkWebWeaver,
     _poolSilverflameSquire,
     _poolSimianSimulacrum,
@@ -997,6 +1002,7 @@ const shard: CardShard = {
     _poolTyLeeArtfulAcrobat,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
+    _poolUndercityScavenger,
     _poolUnderwaterTunnel,
     _poolUnscrupulousContractor,
     _poolUntimelyMalfunction,

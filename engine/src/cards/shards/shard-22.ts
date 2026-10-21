@@ -40,6 +40,7 @@ import _poolBarrageOgre from "../pool/barrage-ogre.js";
 import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
 import _poolBazaarTrademage from "../pool/bazaar-trademage.js";
 import _poolBeaconOfTomorrows from "../pool/beacon-of-tomorrows.js";
+import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
@@ -211,6 +212,7 @@ import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
+import _poolIncongruity from "../pool/incongruity.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
@@ -333,11 +335,13 @@ import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
+import _poolPteramander from "../pool/pteramander.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
 import _poolRallyAtTheHornburg from "../pool/rally-at-the-hornburg.js";
+import _poolRallyToBattle from "../pool/rally-to-battle.js";
 import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRaphaelsTechnique from "../pool/raphaels-technique.js";
@@ -595,6 +599,7 @@ const shard: CardShard = {
     _poolBarrierOfBones,
     _poolBazaarTrademage,
     _poolBeaconOfTomorrows,
+    _poolBedeckBedazzle,
     _poolBeeSting,
     _poolBenalishHeralds,
     _poolBespokeBattlegarb,
@@ -766,6 +771,7 @@ const shard: CardShard = {
     _poolIconOfAncestry,
     _poolIllvoiLightJammer,
     _poolImpulsivePilferer,
+    _poolIncongruity,
     _poolInexorableTide,
     _poolInfestedWerewolf,
     _poolInspireAwe,
@@ -888,11 +894,13 @@ const shard: CardShard = {
     _poolPredatorsStrike,
     _poolPrimordialHydra,
     _poolProudMentor,
+    _poolPteramander,
     _poolPurphorossIntervention,
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
     _poolRadhaHeartOfKeld,
     _poolRallyAtTheHornburg,
+    _poolRallyToBattle,
     _poolRancor,
     _poolRangersGuile,
     _poolRaphaelsTechnique,

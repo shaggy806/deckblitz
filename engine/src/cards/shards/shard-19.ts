@@ -20,6 +20,7 @@ import _poolAncestralCommunion from "../pool/ancestral-communion.js";
 import _poolAnchorToTheAether from "../pool/anchor-to-the-aether.js";
 import _poolAncientSilverback from "../pool/ancient-silverback.js";
 import _poolAncientTomb from "../pool/ancient-tomb.js";
+import _poolAngelicExaltation from "../pool/angelic-exaltation.js";
 import _poolAngrathCaptainOfChaos from "../pool/angrath-captain-of-chaos.js";
 import _poolApexOfPower from "../pool/apex-of-power.js";
 import _poolArashinCleric from "../pool/arashin-cleric.js";
@@ -47,6 +48,7 @@ import _poolBiblioplexAssistant from "../pool/biblioplex-assistant.js";
 import _poolBiosynthicBurst from "../pool/biosynthic-burst.js";
 import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
+import _poolBladeJuggler from "../pool/blade-juggler.js";
 import _poolBladestitchedSkaab from "../pool/bladestitched-skaab.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlazingRootwalla from "../pool/blazing-rootwalla.js";
@@ -74,6 +76,8 @@ import _poolCagedZombie from "../pool/caged-zombie.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
 import _poolCarnelianOrbOfDragonkind from "../pool/carnelian-orb-of-dragonkind.js";
+import _poolCarnival from "../pool/carnival.js";
+import _poolCarrionImp from "../pool/carrion-imp.js";
 import _poolCartographer from "../pool/cartographer.js";
 import _poolCatGator from "../pool/cat-gator.js";
 import _poolCatharsCrusade from "../pool/cathars-crusade.js";
@@ -91,6 +95,7 @@ import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolClawsOut from "../pool/claws-out.js";
 import _poolCleansingWildfire from "../pool/cleansing-wildfire.js";
+import _poolClearTheStage from "../pool/clear-the-stage.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
@@ -473,6 +478,7 @@ import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
 import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
+import _poolStonyStrength from "../pool/stony-strength.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
 import _poolStreakingOilgorger from "../pool/streaking-oilgorger.js";
@@ -596,6 +602,7 @@ const shard: CardShard = {
     _poolAnchorToTheAether,
     _poolAncientSilverback,
     _poolAncientTomb,
+    _poolAngelicExaltation,
     _poolAngrathCaptainOfChaos,
     _poolApexOfPower,
     _poolArashinCleric,
@@ -623,6 +630,7 @@ const shard: CardShard = {
     _poolBiosynthicBurst,
     _poolBirninZanaPlaza,
     _poolBitterReunion,
+    _poolBladeJuggler,
     _poolBladestitchedSkaab,
     _poolBlastingStation,
     _poolBlazingRootwalla,
@@ -650,6 +658,8 @@ const shard: CardShard = {
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
     _poolCarnelianOrbOfDragonkind,
+    _poolCarnival,
+    _poolCarrionImp,
     _poolCartographer,
     _poolCatGator,
     _poolCatharsCrusade,
@@ -667,6 +677,7 @@ const shard: CardShard = {
     _poolChromeMox,
     _poolClawsOut,
     _poolCleansingWildfire,
+    _poolClearTheStage,
     _poolClergyEnVec,
     _poolCliffhavenKitesail,
     _poolCloakedSiren,
@@ -1049,6 +1060,7 @@ const shard: CardShard = {
     _poolSteelWreckingBall,
     _poolStirringHopesinger,
     _poolStoneboundMentor,
+    _poolStonyStrength,
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,
     _poolStreakingOilgorger,

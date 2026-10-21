@@ -95,6 +95,7 @@ import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
 import _poolDemonicRuckus from "../pool/demonic-ruckus.js";
+import _poolDepose from "../pool/depose.js";
 import _poolDescentIntoAvernus from "../pool/descent-into-avernus.js";
 import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
@@ -155,6 +156,7 @@ import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
 import _poolGarrisonSergeant from "../pool/garrison-sergeant.js";
+import _poolGateColossus from "../pool/gate-colossus.js";
 import _poolGemhideSliver from "../pool/gemhide-sliver.js";
 import _poolGeneralKreatTheBoltbringer from "../pool/general-kreat-the-boltbringer.js";
 import _poolGeralfsMessenger from "../pool/geralfs-messenger.js";
@@ -167,6 +169,7 @@ import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGloomStalker from "../pool/gloom-stalker.js";
+import _poolGoblinGathering from "../pool/goblin-gathering.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoldMyr from "../pool/gold-myr.js";
 import _poolGoldhound from "../pool/goldhound.js";
@@ -660,6 +663,7 @@ const shard: CardShard = {
     _poolDefenderOfChaos,
     _poolDeflectingSwat,
     _poolDemonicRuckus,
+    _poolDepose,
     _poolDescentIntoAvernus,
     _poolDesperateFuturescribe,
     _poolDestructiveDigger,
@@ -720,6 +724,7 @@ const shard: CardShard = {
     _poolFuriousStrength,
     _poolGalecasterColossus,
     _poolGarrisonSergeant,
+    _poolGateColossus,
     _poolGemhideSliver,
     _poolGeneralKreatTheBoltbringer,
     _poolGeralfsMessenger,
@@ -732,6 +737,7 @@ const shard: CardShard = {
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
     _poolGloomStalker,
+    _poolGoblinGathering,
     _poolGoblinShortcutter,
     _poolGoldMyr,
     _poolGoldhound,

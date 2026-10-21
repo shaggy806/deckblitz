@@ -77,6 +77,7 @@ import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
 import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
 import _poolChargeThrough from "../pool/charge-through.js";
+import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolCloudpost from "../pool/cloudpost.js";
@@ -224,6 +225,7 @@ import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
 import _poolImperialMoth from "../pool/imperial-moth.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
+import _poolIncubationIncongruity from "../pool/incubation-incongruity.js";
 import _poolIndathaTriome from "../pool/indatha-triome.js";
 import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
 import _poolInspiredInventor from "../pool/inspired-inventor.js";
@@ -397,6 +399,7 @@ import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
+import _poolSentinelsMark from "../pool/sentinels-mark.js";
 import _poolSeshirosLivingLegacy from "../pool/seshiros-living-legacy.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
@@ -427,6 +430,7 @@ import _poolSlurrkAllIngesting from "../pool/slurrk-all-ingesting.js";
 import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
+import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
 import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
@@ -666,6 +670,7 @@ const shard: CardShard = {
     _poolCentaurCourser,
     _poolCentaurNurturer,
     _poolChargeThrough,
+    _poolChargingWarBoar,
     _poolChildOfNight,
     _poolCityPigeon,
     _poolCloudpost,
@@ -813,6 +818,7 @@ const shard: CardShard = {
     _poolImmolatingSouleater,
     _poolImperialMoth,
     _poolImperiousInkmage,
+    _poolIncubationIncongruity,
     _poolIndathaTriome,
     _poolInkmothNexus,
     _poolInspiredInventor,
@@ -986,6 +992,7 @@ const shard: CardShard = {
     _poolSelesnyaGuildmage,
     _poolSenateCourier,
     _poolSentinelOfTheNamelessCity,
+    _poolSentinelsMark,
     _poolSeshirosLivingLegacy,
     _poolShadowUrchin,
     _poolShadrixSilverquill,
@@ -1016,6 +1023,7 @@ const shard: CardShard = {
     _poolSmaugTheGreatCalamity,
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
+    _poolSphinxOfTheGuildpact,
     _poolSpinedKarok,
     _poolSpinningWheel,
     _poolSpitefulVisions,

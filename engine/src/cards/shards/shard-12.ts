@@ -32,6 +32,7 @@ import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.j
 import _poolAvenFlock from "../pool/aven-flock.js";
 import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "../pool/aven-gagglemaster.js";
+import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
 import _poolBarterInBlood from "../pool/barter-in-blood.js";
@@ -39,6 +40,7 @@ import _poolBasiliskGate from "../pool/basilisk-gate.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
 import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
 import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
+import _poolBedazzle from "../pool/bedazzle.js";
 import _poolBeholdTheMultiverse from "../pool/behold-the-multiverse.js";
 import _poolBiowasteBlob from "../pool/biowaste-blob.js";
 import _poolBitterblossom from "../pool/bitterblossom.js";
@@ -80,6 +82,7 @@ import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
 import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
+import _poolClanGuildmage from "../pool/clan-guildmage.js";
 import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
@@ -577,6 +580,7 @@ const shard: CardShard = {
     _poolAvenFlock,
     _poolAvenFogbringer,
     _poolAvenGagglemaster,
+    _poolAzoriusSkyguard,
     _poolBalaGedScorpion,
     _poolBanishingKnack,
     _poolBarterInBlood,
@@ -584,6 +588,7 @@ const shard: CardShard = {
     _poolBattlegroundGeist,
     _poolBayekOfSiwa,
     _poolBearerOfGlory,
+    _poolBedazzle,
     _poolBeholdTheMultiverse,
     _poolBiowasteBlob,
     _poolBitterblossom,
@@ -625,6 +630,7 @@ const shard: CardShard = {
     _poolChromeProwler,
     _poolCircuitousRoute,
     _poolCitadelOfPain,
+    _poolClanGuildmage,
     _poolCleanupCrew,
     _poolClickslither,
     _poolCloudPirates,

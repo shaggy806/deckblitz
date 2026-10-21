@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Ravnica Allegiance, whole, with spectacle and afterlife** (batch 124): RNA's last 139 cards,
+  113 authored by five `card-author` agents (restarted once, after an interruption stopped
+  them) and the lead, with **spectacle** (an `alternativeCost` gated on an opponent losing life;
+  `self-spectacle-paid`) and **afterlife** built and the scaffolder reading adapt — Prime
+  Speaker Vannifar, The Haunt of Hightower, Light Up the Stage, Skewer the Critics, Biogenic
+  Ooze, Angel of Grace, Gutterbones, the guild split cards (2026-10-21).
 - **Guilds of Ravnica, whole, with jump-start and mentor** (batch 125): GRN's last 131 cards, 105
   authored by five `card-author` agents and the lead (and Quasiduplicate and Start the TARDIS
   from earlier), with **jump-start** built (rule 702.133 — the flashback cast for the card's own

@@ -10,6 +10,7 @@ import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
+import _poolAngelOfGrace from "../pool/angel-of-grace.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
 import _poolArachnoform from "../pool/arachnoform.js";
@@ -508,6 +509,7 @@ const shard: CardShard = {
     _poolAlibansTower,
     _poolAnafenzaTheForemost,
     _poolAncestralAnger,
+    _poolAngelOfGrace,
     _poolAnodetLurker,
     _poolAppetiteForTheUnnatural,
     _poolArachnoform,

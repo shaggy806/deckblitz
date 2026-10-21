@@ -50,6 +50,7 @@ import _poolBaruWurmspeaker from "../pool/baru-wurmspeaker.js";
 import _poolBatheInDragonfire from "../pool/bathe-in-dragonfire.js";
 import _poolBearCub from "../pool/bear-cub.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
+import _poolBedeck from "../pool/bedeck.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
 import _poolBillThePony from "../pool/bill-the-pony.js";
@@ -207,6 +208,7 @@ import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
+import _poolGraspingThrull from "../pool/grasping-thrull.js";
 import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
@@ -235,6 +237,7 @@ import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolImmolatingGyre from "../pool/immolating-gyre.js";
 import _poolImprobableAlliance from "../pool/improbable-alliance.js";
+import _poolIncubation from "../pool/incubation.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
@@ -488,6 +491,7 @@ import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
 import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
+import _poolThrashThreat from "../pool/thrash-threat.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
 import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
@@ -539,6 +543,7 @@ import _poolWickerboughElder from "../pool/wickerbough-elder.js";
 import _poolWildfire from "../pool/wildfire.js";
 import _poolWildheartInvoker from "../pool/wildheart-invoker.js";
 import _poolWilyGoblin from "../pool/wily-goblin.js";
+import _poolWindstormDrake from "../pool/windstorm-drake.js";
 import _poolWisecrack from "../pool/wisecrack.js";
 import _poolWitnessOfTomorrows from "../pool/witness-of-tomorrows.js";
 import _poolWolverineRiders from "../pool/wolverine-riders.js";
@@ -622,6 +627,7 @@ const shard: CardShard = {
     _poolBatheInDragonfire,
     _poolBearCub,
     _poolBecomeBrutes,
+    _poolBedeck,
     _poolBewilderingBlizzard,
     _poolBilbosRing,
     _poolBillThePony,
@@ -779,6 +785,7 @@ const shard: CardShard = {
     _poolGraftedWargear,
     _poolGrahamObrien,
     _poolGraspOfPhantoms,
+    _poolGraspingThrull,
     _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,
@@ -807,6 +814,7 @@ const shard: CardShard = {
     _poolIllegitimateBusiness,
     _poolImmolatingGyre,
     _poolImprobableAlliance,
+    _poolIncubation,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
     _poolInsatiableSouleater,
@@ -1060,6 +1068,7 @@ const shard: CardShard = {
     _poolThopterMechanic,
     _poolThoroughInvestigation,
     _poolThoseWhoServe,
+    _poolThrashThreat,
     _poolThrivingIsle,
     _poolThundermaneDragon,
     _poolThunderousSnapper,
@@ -1111,6 +1120,7 @@ const shard: CardShard = {
     _poolWildfire,
     _poolWildheartInvoker,
     _poolWilyGoblin,
+    _poolWindstormDrake,
     _poolWisecrack,
     _poolWitnessOfTomorrows,
     _poolWolverineRiders,

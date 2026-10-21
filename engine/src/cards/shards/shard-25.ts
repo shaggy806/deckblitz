@@ -51,6 +51,7 @@ import _poolBerserkersOnslaught from "../pool/berserkers-onslaught.js";
 import _poolBetrayalAtTheVault from "../pool/betrayal-at-the-vault.js";
 import _poolBigGameHunter from "../pool/big-game-hunter.js";
 import _poolBindingMummy from "../pool/binding-mummy.js";
+import _poolBiogenicUpgrade from "../pool/biogenic-upgrade.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBitterChill from "../pool/bitter-chill.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
@@ -283,6 +284,7 @@ import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
 import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
 import _poolMerfolkFalconer from "../pool/merfolk-falconer.js";
+import _poolMesmerizingBenthid from "../pool/mesmerizing-benthid.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -411,6 +413,7 @@ import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
+import _poolSharktocrab from "../pool/sharktocrab.js";
 import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
@@ -605,6 +608,7 @@ const shard: CardShard = {
     _poolBetrayalAtTheVault,
     _poolBigGameHunter,
     _poolBindingMummy,
+    _poolBiogenicUpgrade,
     _poolBirthingPod,
     _poolBitterChill,
     _poolBlazingVolley,
@@ -837,6 +841,7 @@ const shard: CardShard = {
     _poolMemorialTeamLeader,
     _poolMemoryGuardian,
     _poolMerfolkFalconer,
+    _poolMesmerizingBenthid,
     _poolMineRaider,
     _poolMinotaurAbomination,
     _poolMiscalculation,
@@ -965,6 +970,7 @@ const shard: CardShard = {
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
     _poolShaperGuildmage,
+    _poolSharktocrab,
     _poolShepherdOfTheFlock,
     _poolShipwreckDowser,
     _poolShireShirriff,

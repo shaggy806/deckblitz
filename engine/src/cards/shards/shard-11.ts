@@ -495,6 +495,7 @@ import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
 import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
+import _poolThrash from "../pool/thrash.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolThunderousOrator from "../pool/thunderous-orator.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
@@ -557,6 +558,7 @@ import _poolZogTriceratonCastaway from "../pool/zog-triceraton-castaway.js";
 import _poolZombieMaster from "../pool/zombie-master.js";
 import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
+import _tokensCentaurToken33 from "../tokens/centaur-token-3-3.js";
 import _tokensDragonTokenDragonbackAssault from "../tokens/dragon-token-dragonback-assault.js";
 import _tokensElementalToken from "../tokens/elemental-token.js";
 import _tokensGreenElementalToken22 from "../tokens/green-elemental-token-2-2.js";
@@ -1066,6 +1068,7 @@ const shard: CardShard = {
     _poolTheNeutrinos,
     _poolTheThingBenGrimm,
     _poolThornscapeApprentice,
+    _poolThrash,
     _poolThunderfootBaloth,
     _poolThunderousOrator,
     _poolTimeEbb,
@@ -1130,6 +1133,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens22BlackBirdToken,
+    _tokensCentaurToken33,
     _tokensDragonTokenDragonbackAssault,
     _tokensElementalToken,
     _tokensGreenElementalToken22,

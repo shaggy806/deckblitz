@@ -23,6 +23,7 @@ import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
 import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
+import _poolArrestersAdmonition from "../pool/arresters-admonition.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
 import _poolAscendantSpirit from "../pool/ascendant-spirit.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
@@ -78,6 +79,8 @@ import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
 import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
 import _poolConformerShuriken from "../pool/conformer-shuriken.js";
+import _poolConsignToThePit from "../pool/consign-to-the-pit.js";
+import _poolConsume from "../pool/consume.js";
 import _poolControlMagic from "../pool/control-magic.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
@@ -141,6 +144,7 @@ import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFaridehsFireball from "../pool/faridehs-fireball.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFesterleech from "../pool/festerleech.js";
+import _poolFinalPayment from "../pool/final-payment.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
 import _poolFiresOfVictory from "../pool/fires-of-victory.js";
@@ -321,6 +325,7 @@ import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
 import _poolPopQuiz from "../pool/pop-quiz.js";
 import _poolPowerBoost from "../pool/power-boost.js";
+import _poolPrecognitivePerception from "../pool/precognitive-perception.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
@@ -411,6 +416,7 @@ import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
+import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
@@ -446,6 +452,7 @@ import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
 import _poolThranVigil from "../pool/thran-vigil.js";
+import _poolThreat from "../pool/threat.js";
 import _poolThreatsAroundEveryCorner from "../pool/threats-around-every-corner.js";
 import _poolThreeTragedies from "../pool/three-tragedies.js";
 import _poolThrummingbird from "../pool/thrummingbird.js";
@@ -499,6 +506,7 @@ import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWantedGriffin from "../pool/wanted-griffin.js";
 import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWarTrainedSlasher from "../pool/war-trained-slasher.js";
+import _poolWarrantWarden from "../pool/warrant-warden.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWavesifter from "../pool/wavesifter.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
@@ -555,6 +563,7 @@ const shard: CardShard = {
     _poolAnticipate,
     _poolArchweaver,
     _poolArmsOfHadar,
+    _poolArrestersAdmonition,
     _poolArtisansSorrow,
     _poolAscendantSpirit,
     _poolAshioksReaper,
@@ -610,6 +619,8 @@ const shard: CardShard = {
     _poolComeBackWrong,
     _poolCommuneWithBeavers,
     _poolConformerShuriken,
+    _poolConsignToThePit,
+    _poolConsume,
     _poolControlMagic,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
@@ -673,6 +684,7 @@ const shard: CardShard = {
     _poolFaridehsFireball,
     _poolFarmerCotton,
     _poolFesterleech,
+    _poolFinalPayment,
     _poolFireNationEngineer,
     _poolFireOfOrthanc,
     _poolFiresOfVictory,
@@ -853,6 +865,7 @@ const shard: CardShard = {
     _poolPlunderingBarbarian,
     _poolPopQuiz,
     _poolPowerBoost,
+    _poolPrecognitivePerception,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
     _poolPrismaticLens,
@@ -943,6 +956,7 @@ const shard: CardShard = {
     _poolSpectralRider,
     _poolSpellSwindle,
     _poolSpewFlame,
+    _poolSphinxsInsight,
     _poolStab,
     _poolStarbreachWhale,
     _poolStartingColumn,
@@ -978,6 +992,7 @@ const shard: CardShard = {
     _poolThoughtShucker,
     _poolThoughtcast,
     _poolThranVigil,
+    _poolThreat,
     _poolThreatsAroundEveryCorner,
     _poolThreeTragedies,
     _poolThrummingbird,
@@ -1031,6 +1046,7 @@ const shard: CardShard = {
     _poolWantedGriffin,
     _poolWarSqueak,
     _poolWarTrainedSlasher,
+    _poolWarrantWarden,
     _poolWastewoodVerge,
     _poolWavesifter,
     _poolWayOfTheCryomancer,

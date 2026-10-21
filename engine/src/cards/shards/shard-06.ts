@@ -15,6 +15,7 @@ import _poolAlibouAncientWitness from "../pool/alibou-ancient-witness.js";
 import _poolAlleyStrangler from "../pool/alley-strangler.js";
 import _poolAllureOfPower from "../pool/allure-of-power.js";
 import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
+import _poolAmplifire from "../pool/amplifire.js";
 import _poolAngelOfIndemnity from "../pool/angel-of-indemnity.js";
 import _poolAngelOfRetribution from "../pool/angel-of-retribution.js";
 import _poolAnowonTheRuinThief from "../pool/anowon-the-ruin-thief.js";
@@ -53,6 +54,7 @@ import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodOnTheSnow from "../pool/blood-on-the-snow.js";
 import _poolBloodOperative from "../pool/blood-operative.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
+import _poolBloodmistInfiltrator from "../pool/bloodmist-infiltrator.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
 import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
 import _poolBombard from "../pool/bombard.js";
@@ -96,6 +98,7 @@ import _poolCliffgate from "../pool/cliffgate.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
+import _poolConsecrateConsume from "../pool/consecrate-consume.js";
 import _poolConsider from "../pool/consider.js";
 import _poolConsumingAshes from "../pool/consuming-ashes.js";
 import _poolCopyArtifact from "../pool/copy-artifact.js";
@@ -136,6 +139,8 @@ import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
+import _poolDomriCitySmasher from "../pool/domri-city-smasher.js";
+import _poolDomrisNodorog from "../pool/domris-nodorog.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
 import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
@@ -424,6 +429,7 @@ import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
+import _poolSpiritOfTheSpires from "../pool/spirit-of-the-spires.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
 import _poolSplittingThePowerstone from "../pool/splitting-the-powerstone.js";
 import _poolSquiresLightblade from "../pool/squires-lightblade.js";
@@ -435,6 +441,7 @@ import _poolStormKilnArtist from "../pool/storm-kiln-artist.js";
 import _poolSuChiCaveGuard from "../pool/su-chi-cave-guard.js";
 import _poolSubwayTrain from "../pool/subway-train.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
+import _poolSunderShaman from "../pool/sunder-shaman.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
@@ -505,6 +512,7 @@ import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
+import _poolWarrant from "../pool/warrant.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -562,6 +570,7 @@ const shard: CardShard = {
     _poolAlleyStrangler,
     _poolAllureOfPower,
     _poolAlphaDeathclaw,
+    _poolAmplifire,
     _poolAngelOfIndemnity,
     _poolAngelOfRetribution,
     _poolAnowonTheRuinThief,
@@ -600,6 +609,7 @@ const shard: CardShard = {
     _poolBloodOnTheSnow,
     _poolBloodOperative,
     _poolBloodlineBidding,
+    _poolBloodmistInfiltrator,
     _poolBloomingStinger,
     _poolBoilerbilgesRipper,
     _poolBombard,
@@ -643,6 +653,7 @@ const shard: CardShard = {
     _poolCloudchaserEagle,
     _poolComfortingCounsel,
     _poolConductElectricity,
+    _poolConsecrateConsume,
     _poolConsider,
     _poolConsumingAshes,
     _poolCopyArtifact,
@@ -683,6 +694,8 @@ const shard: CardShard = {
     _poolDivineSmite,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
+    _poolDomriCitySmasher,
+    _poolDomrisNodorog,
     _poolDoomsTimePlatform,
     _poolDragToTheBottom,
     _poolDragToTheRoots,
@@ -971,6 +984,7 @@ const shard: CardShard = {
     _poolSpectralProcession,
     _poolSpellseeker,
     _poolSpiketailDrakeling,
+    _poolSpiritOfTheSpires,
     _poolSpiritcallEnthusiast,
     _poolSplittingThePowerstone,
     _poolSquiresLightblade,
@@ -982,6 +996,7 @@ const shard: CardShard = {
     _poolSuChiCaveGuard,
     _poolSubwayTrain,
     _poolSunbirdsInvocation,
+    _poolSunderShaman,
     _poolSundownPass,
     _poolSunkenRuins,
     _poolSwiftwaterCliffs,
@@ -1052,6 +1067,7 @@ const shard: CardShard = {
     _poolWallOfOmens,
     _poolWarMachineLegacyOfIron,
     _poolWarlockClass,
+    _poolWarrant,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

@@ -135,6 +135,7 @@ import _poolDisorient from "../pool/disorient.js";
 import _poolDisrupt from "../pool/disrupt.js";
 import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
+import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
@@ -235,6 +236,7 @@ import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
 import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
+import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
@@ -401,6 +403,7 @@ import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
 import _poolScavengerDrake from "../pool/scavenger-drake.js";
 import _poolScrapshooter from "../pool/scrapshooter.js";
 import _poolScrapworkRager from "../pool/scrapwork-rager.js";
+import _poolScuttlegator from "../pool/scuttlegator.js";
 import _poolSeaGateBanneret from "../pool/sea-gate-banneret.js";
 import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
 import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
@@ -420,6 +423,7 @@ import _poolSilundiIsle from "../pool/silundi-isle.js";
 import _poolSimplify from "../pool/simplify.js";
 import _poolSkewerTheCritics from "../pool/skewer-the-critics.js";
 import _poolSkullslitherWorm from "../pool/skullslither-worm.js";
+import _poolSkyTether from "../pool/sky-tether.js";
 import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
 import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
@@ -706,6 +710,7 @@ const shard: CardShard = {
     _poolDisrupt,
     _poolDissolve,
     _poolDivinerOfMist,
+    _poolDovinsDismissal,
     _poolDownInTheValley,
     _poolDragonbackAssault,
     _poolDramaticAccusation,
@@ -806,6 +811,7 @@ const shard: CardShard = {
     _poolIanTheReckless,
     _poolIchorplateGolem,
     _poolIdolOfOblivion,
+    _poolIllGottenInheritance,
     _poolImperialCosmographer,
     _poolIndathaCrystal,
     _poolInescapableBlaze,
@@ -972,6 +978,7 @@ const shard: CardShard = {
     _poolScavengerDrake,
     _poolScrapshooter,
     _poolScrapworkRager,
+    _poolScuttlegator,
     _poolSeaGateBanneret,
     _poolSearchForAzcanta,
     _poolSeasonedConsultant,
@@ -991,6 +998,7 @@ const shard: CardShard = {
     _poolSimplify,
     _poolSkewerTheCritics,
     _poolSkullslitherWorm,
+    _poolSkyTether,
     _poolSkyshroudArcher,
     _poolSkywinderDrake,
     _poolSlashTheRanks,

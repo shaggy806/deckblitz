@@ -23,6 +23,7 @@ import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArchiveHaunt from "../pool/archive-haunt.js";
+import _poolArchwayAngel from "../pool/archway-angel.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
 import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
@@ -118,6 +119,7 @@ import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
+import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
@@ -141,6 +143,7 @@ import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
+import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
@@ -560,6 +563,7 @@ const shard: CardShard = {
     _poolArcadeCabinet,
     _poolArcboundBruiser,
     _poolArchiveHaunt,
+    _poolArchwayAngel,
     _poolArcticTreeline,
     _poolArdentElectromancer,
     _poolArdentRecruit,
@@ -655,6 +659,7 @@ const shard: CardShard = {
     _poolDoctorSpectrum,
     _poolDone,
     _poolDoomwakeGiant,
+    _poolDovinsAutomaton,
     _poolDraugrRecruiter,
     _poolDrogskolReaver,
     _poolDromadPurebred,
@@ -678,6 +683,7 @@ const shard: CardShard = {
     _poolEmblemOfTheWarmind,
     _poolEnterTheGodEternals,
     _poolEpharasWarden,
+    _poolEtherealAbsolution,
     _poolExhibitionMagician,
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,

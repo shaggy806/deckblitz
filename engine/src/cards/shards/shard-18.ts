@@ -63,6 +63,7 @@ import _poolCarrionHowler from "../pool/carrion-howler.js";
 import _poolCastleDoom from "../pool/castle-doom.js";
 import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
+import _poolCavalcadeOfCalamity from "../pool/cavalcade-of-calamity.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolCelestialRegulator from "../pool/celestial-regulator.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
@@ -97,6 +98,7 @@ import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
+import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
@@ -264,6 +266,7 @@ import _poolLunarConvocation from "../pool/lunar-convocation.js";
 import _poolLunaticPandora from "../pool/lunatic-pandora.js";
 import _poolLupinflowerVillage from "../pool/lupinflower-village.js";
 import _poolMaarikaBrutalGladiator from "../pool/maarika-brutal-gladiator.js";
+import _poolMacabreMockery from "../pool/macabre-mockery.js";
 import _poolMaccreadyLamplightMayor from "../pool/maccready-lamplight-mayor.js";
 import _poolMaelstromNexus from "../pool/maelstrom-nexus.js";
 import _poolMagitekInfantry from "../pool/magitek-infantry.js";
@@ -389,6 +392,7 @@ import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
+import _poolShimmerOfPossibility from "../pool/shimmer-of-possibility.js";
 import _poolSigardasAid from "../pool/sigardas-aid.js";
 import _poolSilverbluffBridge from "../pool/silverbluff-bridge.js";
 import _poolSilvercladFerocidons from "../pool/silverclad-ferocidons.js";
@@ -562,6 +566,7 @@ import _tokensPhyrexianHydraTokenReach from "../tokens/phyrexian-hydra-token-rea
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
 import _tokensSmokeBlessingToken from "../tokens/smoke-blessing-token.js";
+import _tokensSphinxToken from "../tokens/sphinx-token.js";
 import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-arashin-city.js";
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensSturdyShieldToken from "../tokens/sturdy-shield-token.js";
@@ -631,6 +636,7 @@ const shard: CardShard = {
     _poolCastleDoom,
     _poolCatharticAdept,
     _poolCauldronFamiliar,
+    _poolCavalcadeOfCalamity,
     _poolCelestialArmor,
     _poolCelestialRegulator,
     _poolChampionsOfThePerfect,
@@ -665,6 +671,7 @@ const shard: CardShard = {
     _poolDecadentDragon,
     _poolDeepGoblinSkulltaker,
     _poolDeeprootChampion,
+    _poolDeposeDeploy,
     _poolDesperateCharge,
     _poolDevotedDruid,
     _poolDevoutChaplain,
@@ -832,6 +839,7 @@ const shard: CardShard = {
     _poolLunaticPandora,
     _poolLupinflowerVillage,
     _poolMaarikaBrutalGladiator,
+    _poolMacabreMockery,
     _poolMaccreadyLamplightMayor,
     _poolMaelstromNexus,
     _poolMagitekInfantry,
@@ -957,6 +965,7 @@ const shard: CardShard = {
     _poolShalaisAcolyte,
     _poolShatteredAngel,
     _poolShellSkulkin,
+    _poolShimmerOfPossibility,
     _poolSigardasAid,
     _poolSilverbluffBridge,
     _poolSilvercladFerocidons,
@@ -1132,6 +1141,7 @@ const shard: CardShard = {
     _tokensRatTokenCantBlock,
     _tokensSkeletonPirateToken,
     _tokensSmokeBlessingToken,
+    _tokensSphinxToken,
     _tokensSpiritTokenGreatArashinCity,
     _tokensSpiritTokenKuraTheBoundlessSky,
     _tokensSturdyShieldToken,

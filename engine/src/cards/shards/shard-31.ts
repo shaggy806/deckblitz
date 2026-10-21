@@ -378,6 +378,7 @@ import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
 import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
 import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
 import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
+import _poolRampageOfTheClans from "../pool/rampage-of-the-clans.js";
 import _poolRangerCaptainOfEos from "../pool/ranger-captain-of-eos.js";
 import _poolRavenform from "../pool/ravenform.js";
 import _poolReapersTalisman from "../pool/reapers-talisman.js";
@@ -404,6 +405,7 @@ import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRufusShinra from "../pool/rufus-shinra.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
+import _poolRumblingRuin from "../pool/rumbling-ruin.js";
 import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
@@ -948,6 +950,7 @@ const shard: CardShard = {
     _poolRallyForTheThrone,
     _poolRamirezDepietroPillager,
     _poolRamosianGreatsword,
+    _poolRampageOfTheClans,
     _poolRangerCaptainOfEos,
     _poolRavenform,
     _poolReapersTalisman,
@@ -974,6 +977,7 @@ const shard: CardShard = {
     _poolRufusShinra,
     _poolRuggedPrairie,
     _poolRuinousRampage,
+    _poolRumblingRuin,
     _poolRunadiBehemothCaller,
     _poolSHIELDFlyingCar,
     _poolSamuraisKatana,

@@ -23,6 +23,7 @@ import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
 import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
+import _poolArrestersZeal from "../pool/arresters-zeal.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAuraShards from "../pool/aura-shards.js";
@@ -581,6 +582,7 @@ const shard: CardShard = {
     _poolArchfiendOfSorrows,
     _poolAridMesa,
     _poolArmoredSkaab,
+    _poolArrestersZeal,
     _poolAtlasSizableStooge,
     _poolAttercop,
     _poolAuraShards,

@@ -355,6 +355,7 @@ import _poolRearingEmbermare from "../pool/rearing-embermare.js";
 import _poolReclusiveTaxidermist from "../pool/reclusive-taxidermist.js";
 import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
+import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
@@ -365,6 +366,7 @@ import _poolRipscalePredator from "../pool/ripscale-predator.js";
 import _poolRiseFromTheWreck from "../pool/rise-from-the-wreck.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
+import _poolRixMaadiReveler from "../pool/rix-maadi-reveler.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
 import _poolRoboticsMastery from "../pool/robotics-mastery.js";
 import _poolRope from "../pool/rope.js";
@@ -377,6 +379,7 @@ import _poolRuneboundWolf from "../pool/runebound-wolf.js";
 import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
+import _poolSagittarsVolley from "../pool/sagittars-volley.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
@@ -454,6 +457,7 @@ import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
 import _poolSuitUp from "../pool/suit-up.js";
+import _poolSummaryJudgment from "../pool/summary-judgment.js";
 import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
@@ -473,6 +477,7 @@ import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
+import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
@@ -494,6 +499,7 @@ import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
 import _poolUltimateNullification from "../pool/ultimate-nullification.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
+import _poolUndercitysEmbrace from "../pool/undercitys-embrace.js";
 import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhinge from "../pool/unhinge.js";
@@ -912,6 +918,7 @@ const shard: CardShard = {
     _poolReclusiveTaxidermist,
     _poolReconstruction,
     _poolRedGhostIntangibleGenius,
+    _poolRepudiateReplicate,
     _poolResurgentBelief,
     _poolResurrectedCultist,
     _poolRhoxWarMonk,
@@ -922,6 +929,7 @@ const shard: CardShard = {
     _poolRiseFromTheWreck,
     _poolRitesOfFlourishing,
     _poolRivenTurnbull,
+    _poolRixMaadiReveler,
     _poolRobotDomination,
     _poolRoboticsMastery,
     _poolRope,
@@ -934,6 +942,7 @@ const shard: CardShard = {
     _poolRuralRecruit,
     _poolRussetWolves,
     _poolSageOfDays,
+    _poolSagittarsVolley,
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
     _poolSalvationSwan,
@@ -1011,6 +1020,7 @@ const shard: CardShard = {
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,
     _poolSuitUp,
+    _poolSummaryJudgment,
     _poolSunBlessedGuardian,
     _poolSunBlessedPeak,
     _poolSunlitMarsh,
@@ -1030,6 +1040,7 @@ const shard: CardShard = {
     _poolTeamAvatar,
     _poolTectonicGiant,
     _poolTempleGarden,
+    _poolTenthDistrictVeteran,
     _poolTevalsJudgment,
     _poolTheDrossPits,
     _poolTheJollyBalloonMan,
@@ -1051,6 +1062,7 @@ const shard: CardShard = {
     _poolUkudCobra,
     _poolUltimateNullification,
     _poolUlvenwaldHydra,
+    _poolUndercitysEmbrace,
     _poolUneasyAlliance,
     _poolUnexpectedFangs,
     _poolUnhinge,

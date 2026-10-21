@@ -34,6 +34,7 @@ import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
 import _poolAwakenedSkyclave from "../pool/awakened-skyclave.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
+import _poolBankruptInBlood from "../pool/bankrupt-in-blood.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBargeIn from "../pool/barge-in.js";
@@ -349,6 +350,7 @@ import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRadiantSolar from "../pool/radiant-solar.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
+import _poolRakdosFirewheeler from "../pool/rakdos-firewheeler.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
 import _poolReconnaissance from "../pool/reconnaissance.js";
 import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
@@ -590,6 +592,7 @@ const shard: CardShard = {
     _poolAwakenedSkyclave,
     _poolBalefulForce,
     _poolBallistaCharger,
+    _poolBankruptInBlood,
     _poolBarbedBloodletter,
     _poolBargain,
     _poolBargeIn,
@@ -905,6 +908,7 @@ const shard: CardShard = {
     _poolRadiantSolar,
     _poolRaffinesTower,
     _poolRagingPoltergeist,
+    _poolRakdosFirewheeler,
     _poolRakishHeir,
     _poolReconnaissance,
     _poolRedshiftRocketeerChief,

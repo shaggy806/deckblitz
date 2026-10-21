@@ -94,6 +94,7 @@ import _poolCombatThresher from "../pool/combat-thresher.js";
 import _poolCompanyCommander from "../pool/company-commander.js";
 import _poolCompelledDuel from "../pool/compelled-duel.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
+import _poolConsecrate from "../pool/consecrate.js";
 import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
 import _poolCoopedUp from "../pool/cooped-up.js";
@@ -200,6 +201,7 @@ import _poolGaladhrimBrigade from "../pool/galadhrim-brigade.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
 import _poolGarrukUnleashed from "../pool/garruk-unleashed.js";
+import _poolGatebreakerRam from "../pool/gatebreaker-ram.js";
 import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
@@ -337,6 +339,7 @@ import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
+import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
 import _poolNuclearFallout from "../pool/nuclear-fallout.js";
@@ -361,6 +364,7 @@ import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPlagueDogs from "../pool/plague-dogs.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
+import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
@@ -378,6 +382,7 @@ import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
+import _poolRegenesis from "../pool/regenesis.js";
 import _poolRegress from "../pool/regress.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
@@ -635,6 +640,7 @@ const shard: CardShard = {
     _poolCompanyCommander,
     _poolCompelledDuel,
     _poolConiferStrider,
+    _poolConsecrate,
     _poolConservatory,
     _poolConsultTheNecrosages,
     _poolCoopedUp,
@@ -741,6 +747,7 @@ const shard: CardShard = {
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
     _poolGarrukUnleashed,
+    _poolGatebreakerRam,
     _poolGeistwave,
     _poolGhostsOfTheDamned,
     _poolGideonsCompany,
@@ -878,6 +885,7 @@ const shard: CardShard = {
     _poolNanogeneConversion,
     _poolNecrogenScudder,
     _poolNettleGuard,
+    _poolNikyaOfTheOldWays,
     _poolNivMizzetParun,
     _poolNoMercy,
     _poolNuclearFallout,
@@ -902,6 +910,7 @@ const shard: CardShard = {
     _poolPlagueDogs,
     _poolPlasmaBolt,
     _poolPredictivePreparations,
+    _poolPrimeSpeakerVannifar,
     _poolPrimevalBounty,
     _poolPrismite,
     _poolProfessionalFaceBreaker,
@@ -919,6 +928,7 @@ const shard: CardShard = {
     _poolRancidRats,
     _poolRayOfEnfeeblement,
     _poolRecklessAbandon,
+    _poolRegenesis,
     _poolRegress,
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,

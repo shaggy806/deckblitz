@@ -135,6 +135,8 @@ import _poolDiversionUnit from "../pool/diversion-unit.js";
 import _poolDoomedDissenter from "../pool/doomed-dissenter.js";
 import _poolDoomedTraveler from "../pool/doomed-traveler.js";
 import _poolDoubleVision from "../pool/double-vision.js";
+import _poolDovinGrandArbiter from "../pool/dovin-grand-arbiter.js";
+import _poolDovinsAcuity from "../pool/dovins-acuity.js";
 import _poolDowsingDagger from "../pool/dowsing-dagger.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
 import _poolDreadfulAsTheStorm from "../pool/dreadful-as-the-storm.js";
@@ -233,6 +235,7 @@ import _poolIchorSynthesizer from "../pool/ichor-synthesizer.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolIgneousElemental from "../pool/igneous-elemental.js";
 import _poolIgniteTheBeacon from "../pool/ignite-the-beacon.js";
+import _poolImmolationShaman from "../pool/immolation-shaman.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js";
@@ -476,6 +479,7 @@ import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
 import _poolTerrificTeamUp from "../pool/terrific-team-up.js";
+import _poolTerritorialBoar from "../pool/territorial-boar.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheBindingOfTheTitans from "../pool/the-binding-of-the-titans.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
@@ -708,6 +712,8 @@ const shard: CardShard = {
     _poolDoomedDissenter,
     _poolDoomedTraveler,
     _poolDoubleVision,
+    _poolDovinGrandArbiter,
+    _poolDovinsAcuity,
     _poolDowsingDagger,
     _poolDragonEngine,
     _poolDreadfulAsTheStorm,
@@ -806,6 +812,7 @@ const shard: CardShard = {
     _poolIdentityEcho,
     _poolIgneousElemental,
     _poolIgniteTheBeacon,
+    _poolImmolationShaman,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
     _poolImpostorOfTheSixthPride,
@@ -1049,6 +1056,7 @@ const shard: CardShard = {
     _poolTemporalManipulation,
     _poolTeoSpiritedGlider,
     _poolTerrificTeamUp,
+    _poolTerritorialBoar,
     _poolTerritorialHellkite,
     _poolTheBindingOfTheTitans,
     _poolTheComingOfGalactus,

@@ -103,6 +103,7 @@ import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
 import _poolDeepfathomEcho from "../pool/deepfathom-echo.js";
+import _poolDeface from "../pool/deface.js";
 import _poolDefacedGallery from "../pool/defaced-gallery.js";
 import _poolDefenestrate from "../pool/defenestrate.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
@@ -407,6 +408,7 @@ import _poolSleepCursedFaerie from "../pool/sleep-cursed-faerie.js";
 import _poolSleepMagic from "../pool/sleep-magic.js";
 import _poolSlickshotVaultBuster from "../pool/slickshot-vault-buster.js";
 import _poolSlinkingSkirge from "../pool/slinking-skirge.js";
+import _poolSmeltWardIgnus from "../pool/smelt-ward-ignus.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
@@ -541,6 +543,7 @@ import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
 import _tokensDwarfBerserkerToken from "../tokens/dwarf-berserker-token.js";
 import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHumanToken from "../tokens/human-token.js";
+import _tokensOozeToken from "../tokens/ooze-token.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
@@ -651,6 +654,7 @@ const shard: CardShard = {
     _poolDeconstruct,
     _poolDeepAnalysis,
     _poolDeepfathomEcho,
+    _poolDeface,
     _poolDefacedGallery,
     _poolDefenestrate,
     _poolDefilingDaemogoth,
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolSleepMagic,
     _poolSlickshotVaultBuster,
     _poolSlinkingSkirge,
+    _poolSmeltWardIgnus,
     _poolSnappingCreeper,
     _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
@@ -1091,6 +1096,7 @@ const shard: CardShard = {
     _tokensDwarfBerserkerToken,
     _tokensFractalToken,
     _tokensHumanToken,
+    _tokensOozeToken,
     _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,
     _tokensScionOfTheDeepToken,

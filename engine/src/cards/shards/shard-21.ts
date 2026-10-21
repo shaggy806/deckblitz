@@ -103,6 +103,7 @@ import _poolCrystalShard from "../pool/crystal-shard.js";
 import _poolCurseOfBounty from "../pool/curse-of-bounty.js";
 import _poolCurseOfTheSwine from "../pool/curse-of-the-swine.js";
 import _poolDaemogothTitan from "../pool/daemogoth-titan.js";
+import _poolDaggerCaster from "../pool/dagger-caster.js";
 import _poolDaggerfangDuo from "../pool/daggerfang-duo.js";
 import _poolDarajaGriffin from "../pool/daraja-griffin.js";
 import _poolDaredevilManWithoutFear from "../pool/daredevil-man-without-fear.js";
@@ -202,6 +203,7 @@ import _poolGrowthCurve from "../pool/growth-curve.js";
 import _poolGruesomeDeformity from "../pool/gruesome-deformity.js";
 import _poolGruulTurf from "../pool/gruul-turf.js";
 import _poolGutShot from "../pool/gut-shot.js";
+import _poolGutterbones from "../pool/gutterbones.js";
 import _poolHappyHoganDauntlessDriver from "../pool/happy-hogan-dauntless-driver.js";
 import _poolHardWonJitte from "../pool/hard-won-jitte.js";
 import _poolHeadwaterSentries from "../pool/headwater-sentries.js";
@@ -372,6 +374,7 @@ import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
 import _poolScionOfOpulence from "../pool/scion-of-opulence.js";
+import _poolScreamingShield from "../pool/screaming-shield.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
 import _poolSeaDasherOctopus from "../pool/sea-dasher-octopus.js";
@@ -455,6 +458,7 @@ import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
+import _poolTitanicBrawl from "../pool/titanic-brawl.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
 import _poolTollOfTheInvasion from "../pool/toll-of-the-invasion.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
@@ -518,6 +522,7 @@ import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
+import _tokensBeastTokenRedGreen from "../tokens/beast-token-red-green.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensBoarTokenRuralRecruit from "../tokens/boar-token-rural-recruit.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
@@ -636,6 +641,7 @@ const shard: CardShard = {
     _poolCurseOfBounty,
     _poolCurseOfTheSwine,
     _poolDaemogothTitan,
+    _poolDaggerCaster,
     _poolDaggerfangDuo,
     _poolDarajaGriffin,
     _poolDaredevilManWithoutFear,
@@ -735,6 +741,7 @@ const shard: CardShard = {
     _poolGruesomeDeformity,
     _poolGruulTurf,
     _poolGutShot,
+    _poolGutterbones,
     _poolHappyHoganDauntlessDriver,
     _poolHardWonJitte,
     _poolHeadwaterSentries,
@@ -905,6 +912,7 @@ const shard: CardShard = {
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
     _poolScionOfOpulence,
+    _poolScreamingShield,
     _poolScrubland,
     _poolSculptingSteel,
     _poolSeaDasherOctopus,
@@ -988,6 +996,7 @@ const shard: CardShard = {
     _poolThornwoodFalls,
     _poolThoughtErasure,
     _poolThrivingGrove,
+    _poolTitanicBrawl,
     _poolTobiasDoomedConqueror,
     _poolTollOfTheInvasion,
     _poolTomBombadil,
@@ -1053,6 +1062,7 @@ const shard: CardShard = {
     _poolZhentarimBandit,
   ],
   tokens: [
+    _tokensBeastTokenRedGreen,
     _tokensBirdTokenGwaihirGreatestOfTheEagles,
     _tokensBoarTokenRuralRecruit,
     _tokensConstructTokenJanJansenChaosCrafter,

@@ -73,6 +73,7 @@ import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
+import _poolCollision from "../pool/collision.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
 import _poolCommandingPresence from "../pool/commanding-presence.js";
 import _poolCompassGnome from "../pool/compass-gnome.js";
@@ -213,6 +214,7 @@ import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
+import _poolGruulBeastmaster from "../pool/gruul-beastmaster.js";
 import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
 import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
@@ -612,6 +614,7 @@ const shard: CardShard = {
     _poolCinderbones,
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
+    _poolCollision,
     _poolCometCrawler,
     _poolCommandingPresence,
     _poolCompassGnome,
@@ -752,6 +755,7 @@ const shard: CardShard = {
     _poolGrapplerSpider,
     _poolGratuitousViolence,
     _poolGrimoireOfTheDead,
+    _poolGruulBeastmaster,
     _poolGruulGuildmage,
     _poolGuardianScalelord,
     _poolGuruPathik,

@@ -59,6 +59,8 @@ import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
+import _poolCarnage from "../pool/carnage.js";
+import _poolCarnivalCarnage from "../pool/carnival-carnage.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
@@ -166,6 +168,7 @@ import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
 import _poolGigastormTitan from "../pool/gigastorm-titan.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
+import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
 import _poolGoForBlood from "../pool/go-for-blood.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
@@ -182,6 +185,7 @@ import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
 import _poolGrimHireling from "../pool/grim-hireling.js";
 import _poolGrislyTransformation from "../pool/grisly-transformation.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
+import _poolGruulSpellbreaker from "../pool/gruul-spellbreaker.js";
 import _poolGuildswornProwler from "../pool/guildsworn-prowler.js";
 import _poolGurglingAnointer from "../pool/gurgling-anointer.js";
 import _poolHamletVanguard from "../pool/hamlet-vanguard.js";
@@ -195,6 +199,7 @@ import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
 import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
 import _poolHerdGnarr from "../pool/herd-gnarr.js";
+import _poolHeroOfPrecinctOne from "../pool/hero-of-precinct-one.js";
 import _poolHerosDemise from "../pool/heros-demise.js";
 import _poolHerosDownfall from "../pool/heros-downfall.js";
 import _poolHidetsuguDevouringChaos from "../pool/hidetsugu-devouring-chaos.js";
@@ -320,6 +325,7 @@ import _poolPhyrexianGhoul from "../pool/phyrexian-ghoul.js";
 import _poolPiaAetherAscetic from "../pool/pia-aether-ascetic.js";
 import _poolPineBarrens from "../pool/pine-barrens.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
+import _poolPlazaOfHarmony from "../pool/plaza-of-harmony.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
@@ -346,6 +352,7 @@ import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
 import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolReflectiveGolem from "../pool/reflective-golem.js";
+import _poolReplicate from "../pool/replicate.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
 import _poolResoluteStrike from "../pool/resolute-strike.js";
@@ -365,6 +372,7 @@ import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js"
 import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRowanFearlessSparkmage from "../pool/rowan-fearless-sparkmage.js";
 import _poolRoyalTreatment from "../pool/royal-treatment.js";
+import _poolRubblebeltRunner from "../pool/rubblebelt-runner.js";
 import _poolRubyDaringTracker from "../pool/ruby-daring-tracker.js";
 import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
 import _poolRunOver from "../pool/run-over.js";
@@ -503,6 +511,7 @@ import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
 import _poolWandasVision from "../pool/wandas-vision.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
+import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
@@ -596,6 +605,8 @@ const shard: CardShard = {
     _poolBurningSunCavalry,
     _poolCaprichrome,
     _poolCarnageTyrant,
+    _poolCarnage,
+    _poolCarnivalCarnage,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
     _poolChainersEdict,
@@ -703,6 +714,7 @@ const shard: CardShard = {
     _poolGiantCrab,
     _poolGigastormTitan,
     _poolGingerbreadCabin,
+    _poolGlassOfTheGuildpact,
     _poolGlenElendraArchmage,
     _poolGoForBlood,
     _poolGoblinAnarchomancer,
@@ -719,6 +731,7 @@ const shard: CardShard = {
     _poolGrimHireling,
     _poolGrislyTransformation,
     _poolGruffTriplets,
+    _poolGruulSpellbreaker,
     _poolGuildswornProwler,
     _poolGurglingAnointer,
     _poolHamletVanguard,
@@ -732,6 +745,7 @@ const shard: CardShard = {
     _poolHeapDoll,
     _poolHeartwoodTreefolk,
     _poolHerdGnarr,
+    _poolHeroOfPrecinctOne,
     _poolHerosDemise,
     _poolHerosDownfall,
     _poolHidetsuguDevouringChaos,
@@ -857,6 +871,7 @@ const shard: CardShard = {
     _poolPiaAetherAscetic,
     _poolPineBarrens,
     _poolPlatedGeopede,
+    _poolPlazaOfHarmony,
     _poolPoisonTipArcher,
     _poolPowerstoneEngineer,
     _poolPrideGuardian,
@@ -883,6 +898,7 @@ const shard: CardShard = {
     _poolReckonersBargain,
     _poolRedtoothVanguard,
     _poolReflectiveGolem,
+    _poolReplicate,
     _poolRequitingHex,
     _poolResearchAssistant,
     _poolResoluteStrike,
@@ -902,6 +918,7 @@ const shard: CardShard = {
     _poolRootSliver,
     _poolRowanFearlessSparkmage,
     _poolRoyalTreatment,
+    _poolRubblebeltRunner,
     _poolRubyDaringTracker,
     _poolRugOfSmothering,
     _poolRunOver,
@@ -1040,6 +1057,7 @@ const shard: CardShard = {
     _poolWallOfTorches,
     _poolWandasVision,
     _poolWardenOfTheWoods,
+    _poolWarden,
     _poolWarehouseThief,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,

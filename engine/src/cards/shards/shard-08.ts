@@ -38,6 +38,7 @@ import _poolAuguryRaven from "../pool/augury-raven.js";
 import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAureliaExemplarOfJustice from "../pool/aurelia-exemplar-of-justice.js";
+import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
 import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
@@ -81,6 +82,7 @@ import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
+import _poolChillbringer from "../pool/chillbringer.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
@@ -427,6 +429,7 @@ import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
 import _poolSinuousBenthisaur from "../pool/sinuous-benthisaur.js";
+import _poolSkatewingSpy from "../pool/skatewing-spy.js";
 import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
 import _poolSkinbrandGoblin from "../pool/skinbrand-goblin.js";
 import _poolSkyclaveInvader from "../pool/skyclave-invader.js";
@@ -479,6 +482,7 @@ import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolThawbringer from "../pool/thawbringer.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
+import _poolTheHauntOfHightower from "../pool/the-haunt-of-hightower.js";
 import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
 import _poolTheModernAge from "../pool/the-modern-age.js";
 import _poolTheStasisCoffin from "../pool/the-stasis-coffin.js";
@@ -618,6 +622,7 @@ const shard: CardShard = {
     _poolAuntMay,
     _poolAuraBlast,
     _poolAureliaExemplarOfJustice,
+    _poolAwakenTheErstwhile,
     _poolAzoriusLocket,
     _poolAzusaLostButSeeking,
     _poolBagEndPorter,
@@ -661,6 +666,7 @@ const shard: CardShard = {
     _poolCatharCommando,
     _poolCharmedStray,
     _poolChelonianTackle,
+    _poolChillbringer,
     _poolChronomancer,
     _poolCloakOfTheBat,
     _poolClownCar,
@@ -1007,6 +1013,7 @@ const shard: CardShard = {
     _poolSilkenfistFighter,
     _poolSilverMyr,
     _poolSinuousBenthisaur,
+    _poolSkatewingSpy,
     _poolSkilledBattlecarver,
     _poolSkinbrandGoblin,
     _poolSkyclaveInvader,
@@ -1059,6 +1066,7 @@ const shard: CardShard = {
     _poolThawbringer,
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
+    _poolTheHauntOfHightower,
     _poolTheInfamousCruelclaw,
     _poolTheModernAge,
     _poolTheStasisCoffin,

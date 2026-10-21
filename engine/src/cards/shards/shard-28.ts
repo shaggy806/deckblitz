@@ -50,6 +50,7 @@ import _poolBelloBardOfTheBrambles from "../pool/bello-bard-of-the-brambles.js";
 import _poolBelovedBeggar from "../pool/beloved-beggar.js";
 import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
+import _poolBiogenicOoze from "../pool/biogenic-ooze.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBlackMarket from "../pool/black-market.js";
 import _poolBlightbeetle from "../pool/blightbeetle.js";
@@ -90,8 +91,10 @@ import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCloakwoodSwarmkeeper from "../pool/cloakwood-swarmkeeper.js";
+import _poolCodeOfConstraint from "../pool/code-of-constraint.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
+import _poolColossus from "../pool/colossus.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
 import _poolConcordWithTheKami from "../pool/concord-with-the-kami.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
@@ -188,6 +191,7 @@ import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
 import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
+import _poolGrowthChamberGuardian from "../pool/growth-chamber-guardian.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
 import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
@@ -601,6 +605,7 @@ const shard: CardShard = {
     _poolBelovedBeggar,
     _poolBeneathTheSands,
     _poolBilbosDeadlySlice,
+    _poolBiogenicOoze,
     _poolBiomassMutation,
     _poolBlackMarket,
     _poolBlightbeetle,
@@ -641,8 +646,10 @@ const shard: CardShard = {
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
     _poolCloakwoodSwarmkeeper,
+    _poolCodeOfConstraint,
     _poolCogworkArchivist,
     _poolCoilingRebirth,
+    _poolColossus,
     _poolConcealedCourtyard,
     _poolConcordWithTheKami,
     _poolContestOfClaws,
@@ -739,6 +746,7 @@ const shard: CardShard = {
     _poolGreenSunsZenith,
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
+    _poolGrowthChamberGuardian,
     _poolGurmagSwiftwing,
     _poolHakbalOfTheSurgingSoul,
     _poolHapatraTheDesertFrost,

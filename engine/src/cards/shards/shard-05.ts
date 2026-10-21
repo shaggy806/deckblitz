@@ -44,6 +44,7 @@ import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
 import _poolBasalThrull from "../pool/basal-thrull.js";
+import _poolBasilicaBellHaunt from "../pool/basilica-bell-haunt.js";
 import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
 import _poolBaskingCapybara from "../pool/basking-capybara.js";
 import _poolBatWhisperer from "../pool/bat-whisperer.js";
@@ -149,6 +150,7 @@ import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
+import _poolDrillBit from "../pool/drill-bit.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
@@ -604,6 +606,7 @@ const shard: CardShard = {
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
     _poolBasalThrull,
+    _poolBasilicaBellHaunt,
     _poolBasilicaScreecher,
     _poolBaskingCapybara,
     _poolBatWhisperer,
@@ -709,6 +712,7 @@ const shard: CardShard = {
     _poolDragonsPresence,
     _poolDreadfulApathy,
     _poolDreyKeeper,
+    _poolDrillBit,
     _poolDryadsFavor,
     _poolDuskLegionSergeant,
     _poolDuskdaleWurm,

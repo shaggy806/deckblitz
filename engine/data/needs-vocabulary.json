@@ -9002,6 +9002,23 @@
   "static:cant-attack-or-block-alone": {
    "family": "static:cant-attack-alone",
    "example": "Wojek Bodyguard"
+  },
+  "effect:creatures-enter-with-counter-this-turn": {
+   "example": "Combine Guildmage"
+  },
+  "effect:skip-next-untap-step": {
+   "example": "Dovin, Architect of Law"
+  },
+  "effect:damage-all-except-target": {
+   "example": "Flames of the Raze-Boar"
+  },
+  "trigger:becomes-blocked-attacked-recipient": {
+   "family": "trigger:trigger-recipient-ref",
+   "example": "Rakdos Roustabout"
+  },
+  "effect:remove-counters-from-among": {
+   "family": "effect:counters-removed-this-way",
+   "example": "Galloping Lizrog"
   }
  }
 }
