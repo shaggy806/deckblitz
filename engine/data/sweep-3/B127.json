@@ -1,0 +1,415 @@
+{
+ "batch": "B127",
+ "status": "complete",
+ "ranks": "Battlebond (BBD, 2018-06-08): the rest of the set, whole",
+ "authored": [
+  {
+   "name": "Arena Rector",
+   "files": [
+    "engine/src/cards/pool/arena-rector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krav, the Unredeemed",
+   "files": [
+    "engine/src/cards/pool/krav-the-unredeemed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archon of Valor's Reach",
+   "files": [
+    "engine/src/cards/pool/archon-of-valors-reach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvia Brightspear",
+   "files": [
+    "engine/src/cards/pool/sylvia-brightspear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Khorvath Brightflame",
+   "files": [
+    "engine/src/cards/pool/khorvath-brightflame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ley Weaver",
+   "files": [
+    "engine/src/cards/pool/ley-weaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Decorated Champion",
+   "files": [
+    "engine/src/cards/pool/decorated-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jungle Wayfinder",
+   "files": [
+    "engine/src/cards/pool/jungle-wayfinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blaring Captain",
+   "files": [
+    "engine/src/cards/pool/blaring-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saltwater Stalwart",
+   "files": [
+    "engine/src/cards/pool/saltwater-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurora Champion",
+   "files": [
+    "engine/src/cards/pool/aurora-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Combo Attack",
+   "files": [
+    "engine/src/cards/pool/combo-attack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jubilant Mascot",
+   "files": [
+    "engine/src/cards/pool/jubilant-mascot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azra Bladeseeker",
+   "files": [
+    "engine/src/cards/pool/azra-bladeseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Virtus the Veiled",
+   "files": [
+    "engine/src/cards/pool/virtus-the-veiled.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azra Oddsmaker",
+   "files": [
+    "engine/src/cards/pool/azra-oddsmaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rushblade Commander",
+   "files": [
+    "engine/src/cards/pool/rushblade-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regna, the Redeemer",
+   "files": [
+    "engine/src/cards/pool/regna-the-redeemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrasher Brute",
+   "files": [
+    "engine/src/cards/pool/thrasher-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inner Demon",
+   "files": [
+    "engine/src/cards/pool/inner-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brightling",
+   "files": [
+    "engine/src/cards/pool/brightling.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bull-Rush Bruiser",
+   "files": [
+    "engine/src/cards/pool/bull-rush-bruiser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sickle Dancer",
+   "files": [
+    "engine/src/cards/pool/sickle-dancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impetuous Protege",
+   "files": [
+    "engine/src/cards/pool/impetuous-protege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulblade Renewer",
+   "files": [
+    "engine/src/cards/pool/soulblade-renewer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nimbus Champion",
+   "files": [
+    "engine/src/cards/pool/nimbus-champion.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Play of the Game",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Huddle Up",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Skystreamer",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Bloodborn Scoundrels",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Charging Binox",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Spellweaver Duo",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Dwarven Lightsmith",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Game Plan",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Out of Bounds",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "The Crowd Goes Wild",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Gang Up",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Vampire Charmseeker",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Bring Down",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Lava-Field Overlord",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Fan Favorite",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Magma Hellion",
+   "needs": [
+    "mechanic:assist"
+   ],
+   "why": "assist (rule 702.132a): another player may pay generic mana of the spell's cost"
+  },
+  {
+   "name": "Khorvath's Fury",
+   "needs": [
+    "mechanic:friend-or-foe"
+   ],
+   "why": "for each player, choose friend or foe"
+  },
+  {
+   "name": "Regna's Sanction",
+   "needs": [
+    "mechanic:friend-or-foe"
+   ],
+   "why": "for each player, choose friend or foe"
+  },
+  {
+   "name": "Virtus's Maneuver",
+   "needs": [
+    "mechanic:friend-or-foe"
+   ],
+   "why": "for each player, choose friend or foe"
+  },
+  {
+   "name": "Zndrsplt's Judgment",
+   "needs": [
+    "mechanic:friend-or-foe"
+   ],
+   "why": "for each player, choose friend or foe"
+  },
+  {
+   "name": "Thrilling Encore",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "creature cards put into graveyards from the battlefield this turn"
+  },
+  {
+   "name": "Arcane Artisan",
+   "needs": [
+    "effect:tokens-created-with-source"
+   ],
+   "why": "exile the tokens created with it when it leaves"
+  },
+  {
+   "name": "Stadium Vendors",
+   "needs": [
+    "decision:choose-player"
+   ],
+   "why": "choose a player (not a target) who adds two mana of any one color"
+  },
+  {
+   "name": "Gorm the Great",
+   "needs": [
+    "static:must-be-blocked-by-two-or-more"
+   ],
+   "why": "must be blocked by two or more creatures if able"
+  },
+  {
+   "name": "Rowan Kenrith",
+   "needs": [
+    "effect:attacks-if-able-during-target-player-next-turn"
+   ],
+   "why": "during target player's next turn, their creatures attack if able"
+  },
+  {
+   "name": "Fumble",
+   "needs": [
+    "effect:gain-control-attachments"
+   ],
+   "why": "gain control of the bounced creature's Auras and Equipment and attach them to one creature"
+  },
+  {
+   "name": "Sentinel Tower",
+   "needs": [
+    "stat:spells-cast-this-turn-record"
+   ],
+   "why": "instants and sorceries any player cast before that one this turn"
+  },
+  {
+   "name": "Last One Standing",
+   "needs": [
+    "effect:random-choice"
+   ],
+   "why": "choose a creature at random"
+  },
+  {
+   "name": "Stunning Reversal",
+   "needs": [
+    "replacement:would-lose-game"
+   ],
+   "why": "the next time you would lose the game this turn, instead"
+  },
+  {
+   "name": "Will Kenrith",
+   "needs": [
+    "effect:player-effect-target-player"
+   ],
+   "why": "until your next turn, spells target player casts cost {2} less"
+  },
+  {
+   "name": "Cheering Fanatic",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "choose a card name"
+  },
+  {
+   "name": "Soulblade Corrupter",
+   "needs": [
+    "condition:attacking-an-opponent-filter"
+   ],
+   "why": "whenever a creature attacks one of your opponents"
+  }
+ ]
+}

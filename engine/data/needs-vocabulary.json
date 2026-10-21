@@ -9019,6 +9019,24 @@
   "effect:remove-counters-from-among": {
    "family": "effect:counters-removed-this-way",
    "example": "Galloping Lizrog"
+  },
+  "mechanic:assist": {
+   "example": "Play of the Game"
+  },
+  "static:must-be-blocked-by-two-or-more": {
+   "example": "Gorm the Great"
+  },
+  "effect:attacks-if-able-during-target-player-next-turn": {
+   "example": "Rowan Kenrith"
+  },
+  "effect:gain-control-attachments": {
+   "example": "Fumble"
+  },
+  "replacement:would-lose-game": {
+   "example": "Stunning Reversal"
+  },
+  "effect:player-effect-target-player": {
+   "example": "Will Kenrith"
   }
  }
 }

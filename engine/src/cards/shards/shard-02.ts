@@ -492,6 +492,7 @@ import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
+import _poolVirtusTheVeiled from "../pool/virtus-the-veiled.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
 import _poolVisionsOfBeyond from "../pool/visions-of-beyond.js";
 import _poolVivienReid from "../pool/vivien-reid.js";
@@ -1019,6 +1020,7 @@ const shard: CardShard = {
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,
     _poolVinelasherAdept,
+    _poolVirtusTheVeiled,
     _poolVisionOfLove,
     _poolVisionsOfBeyond,
     _poolVivienReid,

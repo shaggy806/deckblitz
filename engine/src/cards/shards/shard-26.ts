@@ -41,6 +41,7 @@ import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
+import _poolAzraBladeseeker from "../pool/azra-bladeseeker.js";
 import _poolBagelAndSchmear from "../pool/bagel-and-schmear.js";
 import _poolBalduvianAtrocity from "../pool/balduvian-atrocity.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
@@ -586,6 +587,7 @@ const shard: CardShard = {
     _poolAwakenTheInferno,
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
+    _poolAzraBladeseeker,
     _poolBagelAndSchmear,
     _poolBalduvianAtrocity,
     _poolBaralAndKariZev,

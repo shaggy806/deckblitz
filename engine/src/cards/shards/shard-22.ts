@@ -23,6 +23,7 @@ import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolArchivist from "../pool/archivist.js";
+import _poolArchonOfValorsReach from "../pool/archon-of-valors-reach.js";
 import _poolArchwayCommons from "../pool/archway-commons.js";
 import _poolArdentMilitia from "../pool/ardent-militia.js";
 import _poolArixmethesSlumberingIsle from "../pool/arixmethes-slumbering-isle.js";
@@ -582,6 +583,7 @@ const shard: CardShard = {
     _poolAnowonTheRuinSage,
     _poolAppaLoyalSkyBison,
     _poolArchivist,
+    _poolArchonOfValorsReach,
     _poolArchwayCommons,
     _poolArdentMilitia,
     _poolArixmethesSlumberingIsle,

@@ -38,6 +38,7 @@ import _poolAuguryRaven from "../pool/augury-raven.js";
 import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAureliaExemplarOfJustice from "../pool/aurelia-exemplar-of-justice.js";
+import _poolAuroraChampion from "../pool/aurora-champion.js";
 import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
 import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
@@ -54,6 +55,7 @@ import _poolBhaalLordOfMurder from "../pool/bhaal-lord-of-murder.js";
 import _poolBileVialBoggart from "../pool/bile-vial-boggart.js";
 import _poolBitterTriumph from "../pool/bitter-triumph.js";
 import _poolBladetuskBoar from "../pool/bladetusk-boar.js";
+import _poolBlaringCaptain from "../pool/blaring-captain.js";
 import _poolBlindingSouleater from "../pool/blinding-souleater.js";
 import _poolBlisterstickShaman from "../pool/blisterstick-shaman.js";
 import _poolBloodCurdle from "../pool/blood-curdle.js";
@@ -239,6 +241,7 @@ import _poolImmoralBargain from "../pool/immoral-bargain.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
+import _poolInnerDemon from "../pool/inner-demon.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
@@ -622,6 +625,7 @@ const shard: CardShard = {
     _poolAuntMay,
     _poolAuraBlast,
     _poolAureliaExemplarOfJustice,
+    _poolAuroraChampion,
     _poolAwakenTheErstwhile,
     _poolAzoriusLocket,
     _poolAzusaLostButSeeking,
@@ -638,6 +642,7 @@ const shard: CardShard = {
     _poolBileVialBoggart,
     _poolBitterTriumph,
     _poolBladetuskBoar,
+    _poolBlaringCaptain,
     _poolBlindingSouleater,
     _poolBlisterstickShaman,
     _poolBloodCurdle,
@@ -823,6 +828,7 @@ const shard: CardShard = {
     _poolIndomitableAncients,
     _poolInfest,
     _poolInformedInkwright,
+    _poolInnerDemon,
     _poolInspirationFromBeyond,
     _poolIntimidationCampaign,
     _poolInvasionOfErgamon,

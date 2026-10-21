@@ -221,6 +221,7 @@ import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
+import _poolImpetuousProtege from "../pool/impetuous-protege.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolInfernalIdol from "../pool/infernal-idol.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
@@ -769,6 +770,7 @@ const shard: CardShard = {
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
     _poolIcehideGolem,
+    _poolImpetuousProtege,
     _poolIncreasingDevotion,
     _poolInfernalIdol,
     _poolInfernalRebirth,

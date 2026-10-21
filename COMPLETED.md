@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Battlebond, whole** (batch 127): its last 58 cards, 26 authored by two `card-author` agents,
+  "your team" read as "you" (rule 102.4) — Krav, the Unredeemed, Regna, the Redeemer, Sylvia
+  Brightspear, Khorvath Brightflame, Virtus the Veiled, Archon of Valor's Reach; 32 blocked, 16 of
+  them on assist and 4 on friend or foe (2026-10-21).
 - **Ravnica Allegiance, whole, with spectacle and afterlife** (batch 124): RNA's last 139 cards,
   113 authored by five `card-author` agents (restarted once, after an interruption stopped
   them) and the lead, with **spectacle** (an `alternativeCost` gated on an opponent losing life;

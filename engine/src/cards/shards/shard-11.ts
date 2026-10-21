@@ -24,6 +24,7 @@ import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
+import _poolArenaRector from "../pool/arena-rector.js";
 import _poolArmamentDragon from "../pool/armament-dragon.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
 import _poolAshenFirebeast from "../pool/ashen-firebeast.js";
@@ -97,6 +98,7 @@ import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
+import _poolComboAttack from "../pool/combo-attack.js";
 import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
 import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
@@ -424,6 +426,7 @@ import _poolShipwreckPatrol from "../pool/shipwreck-patrol.js";
 import _poolShoreUp from "../pool/shore-up.js";
 import _poolShowOfValor from "../pool/show-of-valor.js";
 import _poolShriekTreblemaker from "../pool/shriek-treblemaker.js";
+import _poolSickleDancer from "../pool/sickle-dancer.js";
 import _poolSidarKondoOfJamuraa from "../pool/sidar-kondo-of-jamuraa.js";
 import _poolSiegeMastodon from "../pool/siege-mastodon.js";
 import _poolSiegeVeteran from "../pool/siege-veteran.js";
@@ -597,6 +600,7 @@ const shard: CardShard = {
     _poolArcboundRavager,
     _poolArcboundStinger,
     _poolArchaeomender,
+    _poolArenaRector,
     _poolArmamentDragon,
     _poolArmsDealer,
     _poolAshenFirebeast,
@@ -670,6 +674,7 @@ const shard: CardShard = {
     _poolCoatWithVenom,
     _poolCodecrackerHound,
     _poolCoffinPurge,
+    _poolComboAttack,
     _poolCommanderMustard,
     _poolConclaveMentor,
     _poolConduitOfWorlds,
@@ -997,6 +1002,7 @@ const shard: CardShard = {
     _poolShoreUp,
     _poolShowOfValor,
     _poolShriekTreblemaker,
+    _poolSickleDancer,
     _poolSidarKondoOfJamuraa,
     _poolSiegeMastodon,
     _poolSiegeVeteran,

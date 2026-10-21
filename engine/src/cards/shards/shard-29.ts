@@ -111,6 +111,7 @@ import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
 import _poolDebrisBeetle from "../pool/debris-beetle.js";
 import _poolDecoctionModule from "../pool/decoction-module.js";
+import _poolDecoratedChampion from "../pool/decorated-champion.js";
 import _poolDedicatedMartyr from "../pool/dedicated-martyr.js";
 import _poolDeepwoodWolverine from "../pool/deepwood-wolverine.js";
 import _poolDemandAnswers from "../pool/demand-answers.js";
@@ -669,6 +670,7 @@ const shard: CardShard = {
     _poolDazzlingDenial,
     _poolDebrisBeetle,
     _poolDecoctionModule,
+    _poolDecoratedChampion,
     _poolDedicatedMartyr,
     _poolDeepwoodWolverine,
     _poolDemandAnswers,

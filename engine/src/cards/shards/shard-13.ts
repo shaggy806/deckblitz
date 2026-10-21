@@ -64,6 +64,7 @@ import _poolBrauliosOfPheresBand from "../pool/braulios-of-pheres-band.js";
 import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
 import _poolBredForTheHunt from "../pool/bred-for-the-hunt.js";
+import _poolBrightling from "../pool/brightling.js";
 import _poolBroodrageMycoid from "../pool/broodrage-mycoid.js";
 import _poolBurnerRocket from "../pool/burner-rocket.js";
 import _poolBurningCuriosity from "../pool/burning-curiosity.js";
@@ -377,6 +378,7 @@ import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRuneboundWolf from "../pool/runebound-wolf.js";
 import _poolRuralRecruit from "../pool/rural-recruit.js";
+import _poolRushbladeCommander from "../pool/rushblade-commander.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
 import _poolSagittarsVolley from "../pool/sagittars-volley.js";
@@ -627,6 +629,7 @@ const shard: CardShard = {
     _poolBrawn,
     _poolBreathstealer,
     _poolBredForTheHunt,
+    _poolBrightling,
     _poolBroodrageMycoid,
     _poolBurnerRocket,
     _poolBurningCuriosity,
@@ -940,6 +943,7 @@ const shard: CardShard = {
     _poolRunThePlay,
     _poolRuneboundWolf,
     _poolRuralRecruit,
+    _poolRushbladeCommander,
     _poolRussetWolves,
     _poolSageOfDays,
     _poolSagittarsVolley,

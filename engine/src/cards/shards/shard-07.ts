@@ -219,6 +219,7 @@ import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
 import _poolJacesRuse from "../pool/jaces-ruse.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
+import _poolJubilantMascot from "../pool/jubilant-mascot.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
 import _poolKabutoMoth from "../pool/kabuto-moth.js";
@@ -240,6 +241,7 @@ import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLegionVanguard from "../pool/legion-vanguard.js";
+import _poolLeyWeaver from "../pool/ley-weaver.js";
 import _poolLightOfTheLegion from "../pool/light-of-the-legion.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
@@ -787,6 +789,7 @@ const shard: CardShard = {
     _poolItsClobberinTime,
     _poolJacesRuse,
     _poolJetmirsGarden,
+    _poolJubilantMascot,
     _poolJwariRuins,
     _poolKabiraPlateau,
     _poolKabutoMoth,
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolLatNamAdept,
     _poolLaviniaFoilToConspiracy,
     _poolLegionVanguard,
+    _poolLeyWeaver,
     _poolLightOfTheLegion,
     _poolLightningVisionary,
     _poolLightningWolf,

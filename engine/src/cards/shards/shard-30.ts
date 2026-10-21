@@ -344,6 +344,7 @@ import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
+import _poolNimbusChampion from "../pool/nimbus-champion.js";
 import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
@@ -386,6 +387,7 @@ import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
+import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
@@ -435,6 +437,7 @@ import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
+import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
@@ -891,6 +894,7 @@ const shard: CardShard = {
     _poolNickValentinePrivateEye,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
+    _poolNimbusChampion,
     _poolNishobaBrawler,
     _poolNobody,
     _poolOathOfTheGreyHost,
@@ -933,6 +937,7 @@ const shard: CardShard = {
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,
     _poolReadyToRumble,
+    _poolRegnaTheRedeemer,
     _poolRejuvenate,
     _poolRelentlessAdvance,
     _poolReluctantRoleModel,
@@ -982,6 +987,7 @@ const shard: CardShard = {
     _poolSmugglersSurprise,
     _poolSneeringShadewriter,
     _poolSoltariPriest,
+    _poolSoulbladeRenewer,
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,
     _poolSpawnOfMayhem,

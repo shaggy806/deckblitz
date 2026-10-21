@@ -64,6 +64,7 @@ import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
+import _poolBullRushBruiser from "../pool/bull-rush-bruiser.js";
 import _poolBurakosPartyLeader from "../pool/burakos-party-leader.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
 import _poolBuyYourSilence from "../pool/buy-your-silence.js";
@@ -242,6 +243,7 @@ import _poolKayasGuile from "../pool/kayas-guile.js";
 import _poolKeeperOfTheAccord from "../pool/keeper-of-the-accord.js";
 import _poolKeeperOfTheNineGales from "../pool/keeper-of-the-nine-gales.js";
 import _poolKhalniHeartExpedition from "../pool/khalni-heart-expedition.js";
+import _poolKhorvathBrightflame from "../pool/khorvath-brightflame.js";
 import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
@@ -602,6 +604,7 @@ const shard: CardShard = {
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
     _poolBugenhagenWiseElder,
+    _poolBullRushBruiser,
     _poolBurakosPartyLeader,
     _poolBurstOfSpeed,
     _poolBuyYourSilence,
@@ -780,6 +783,7 @@ const shard: CardShard = {
     _poolKeeperOfTheAccord,
     _poolKeeperOfTheNineGales,
     _poolKhalniHeartExpedition,
+    _poolKhorvathBrightflame,
     _poolKiorasDambreaker,
     _poolKodamaOfTheNorthTree,
     _poolKreeCommandos,

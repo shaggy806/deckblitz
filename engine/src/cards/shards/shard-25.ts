@@ -35,6 +35,7 @@ import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
+import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
@@ -592,6 +593,7 @@ const shard: CardShard = {
     _poolAstralSteel,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
+    _poolAzraOddsmaker,
     _poolBaSingSe,
     _poolBandage,
     _poolBasrisAegis,

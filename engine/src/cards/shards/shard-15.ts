@@ -257,6 +257,7 @@ import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
 import _poolJoinForces from "../pool/join-forces.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
+import _poolJungleWayfinder from "../pool/jungle-wayfinder.js";
 import _poolKaraisTechnique from "../pool/karais-technique.js";
 import _poolKaslemsStrider from "../pool/kaslems-strider.js";
 import _poolKeeperOfFables from "../pool/keeper-of-fables.js";
@@ -798,6 +799,7 @@ const shard: CardShard = {
     _poolJillShivasDominant,
     _poolJoinForces,
     _poolJungleHollow,
+    _poolJungleWayfinder,
     _poolKaraisTechnique,
     _poolKaslemsStrider,
     _poolKeeperOfFables,
