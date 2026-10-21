@@ -143,6 +143,7 @@ import _poolEpharaEverSheltering from "../pool/ephara-ever-sheltering.js";
 import _poolEpicFight from "../pool/epic-fight.js";
 import _poolEssenceOfOrthodoxy from "../pool/essence-of-orthodoxy.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
+import _poolEverdawnChampion from "../pool/everdawn-champion.js";
 import _poolEvolutionaryLeap from "../pool/evolutionary-leap.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
 import _poolExorcist from "../pool/exorcist.js";
@@ -228,6 +229,7 @@ import _poolJadelightRanger from "../pool/jadelight-ranger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
+import _poolJungleCreeper from "../pool/jungle-creeper.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
@@ -414,6 +416,7 @@ import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSlipperyBogle from "../pool/slippery-bogle.js";
+import _poolSlipperyScoundrel from "../pool/slippery-scoundrel.js";
 import _poolSlithAscendant from "../pool/slith-ascendant.js";
 import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
@@ -522,6 +525,7 @@ import _poolVithianStinger from "../pool/vithian-stinger.js";
 import _poolViviensJaguar from "../pool/viviens-jaguar.js";
 import _poolViviensTalent from "../pool/viviens-talent.js";
 import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
+import _poolVoraciousVampire from "../pool/voracious-vampire.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
@@ -707,6 +711,7 @@ const shard: CardShard = {
     _poolEpicFight,
     _poolEssenceOfOrthodoxy,
     _poolEtherswornAdjudicator,
+    _poolEverdawnChampion,
     _poolEvolutionaryLeap,
     _poolExemplarOfLight,
     _poolExorcist,
@@ -792,6 +797,7 @@ const shard: CardShard = {
     _poolJeskaiDevotee,
     _poolJourneyToOblivion,
     _poolJukaiNaturalist,
+    _poolJungleCreeper,
     _poolJungleDelver,
     _poolK9MarkI,
     _poolKaervekTheMerciless,
@@ -978,6 +984,7 @@ const shard: CardShard = {
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,
     _poolSlipperyBogle,
+    _poolSlipperyScoundrel,
     _poolSlithAscendant,
     _poolSlumberingCerberus,
     _poolSmaugWickedWorm,
@@ -1086,6 +1093,7 @@ const shard: CardShard = {
     _poolViviensJaguar,
     _poolViviensTalent,
     _poolVolcanicTorrent,
+    _poolVoraciousVampire,
     _poolVulshokBattlegear,
     _poolVulshokRefugee,
     _poolWalkingDead,

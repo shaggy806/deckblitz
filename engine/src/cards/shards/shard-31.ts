@@ -31,6 +31,7 @@ import _poolArchfiendsVessel from "../pool/archfiends-vessel.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
+import _poolArterialFlow from "../pool/arterial-flow.js";
 import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
@@ -536,6 +537,7 @@ import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
+import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
@@ -609,6 +611,7 @@ const shard: CardShard = {
     _poolArdentPlea,
     _poolArgentDais,
     _poolArmoredCancrix,
+    _poolArterialFlow,
     _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,
     _poolAvatarRokuFirebender,
@@ -1114,6 +1117,7 @@ const shard: CardShard = {
     _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,
+    _poolVraskasConquistador,
     _poolWalkingAtlas,
     _poolWallOfMist,
     _poolWallOfWood,

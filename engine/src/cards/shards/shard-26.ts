@@ -339,6 +339,7 @@ import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPurpleWorm from "../pool/purple-worm.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
+import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
@@ -369,6 +370,7 @@ import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSandAugury from "../pool/sand-augury.js";
+import _poolSanguineGlorifier from "../pool/sanguine-glorifier.js";
 import _poolSaplingOfColfenor from "../pool/sapling-of-colfenor.js";
 import _poolSapphireDragon from "../pool/sapphire-dragon.js";
 import _poolSarinthGreatwurm from "../pool/sarinth-greatwurm.js";
@@ -886,6 +888,7 @@ const shard: CardShard = {
     _poolPurpleWorm,
     _poolPygmyRazorback,
     _poolQarsiRevenant,
+    _poolRadiantDestiny,
     _poolRaftSecurityOfficer,
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
@@ -916,6 +919,7 @@ const shard: CardShard = {
     _poolSafeholdElite,
     _poolSaltfieldRecluse,
     _poolSandAugury,
+    _poolSanguineGlorifier,
     _poolSaplingOfColfenor,
     _poolSapphireDragon,
     _poolSarinthGreatwurm,

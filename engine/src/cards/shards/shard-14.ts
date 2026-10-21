@@ -131,6 +131,7 @@ import _poolDevouringSwarm from "../pool/devouring-swarm.js";
 import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
 import _poolDimirSignet from "../pool/dimir-signet.js";
 import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
+import _poolDireFleetNeckbreaker from "../pool/dire-fleet-neckbreaker.js";
 import _poolDiscoverTheImpossible from "../pool/discover-the-impossible.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
@@ -431,6 +432,7 @@ import _poolShriekmaw from "../pool/shriekmaw.js";
 import _poolShrineSteward from "../pool/shrine-steward.js";
 import _poolShuFootSoldiers from "../pool/shu-foot-soldiers.js";
 import _poolSiegeZombie from "../pool/siege-zombie.js";
+import _poolSiegehornCeratops from "../pool/siegehorn-ceratops.js";
 import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
@@ -459,6 +461,7 @@ import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
+import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
@@ -685,6 +688,7 @@ const shard: CardShard = {
     _poolDiabolicTutor,
     _poolDimirSignet,
     _poolDiplomaticRelations,
+    _poolDireFleetNeckbreaker,
     _poolDiscoverTheImpossible,
     _poolDissentersDeliverance,
     _poolDistractTheGuards,
@@ -985,6 +989,7 @@ const shard: CardShard = {
     _poolShrineSteward,
     _poolShuFootSoldiers,
     _poolSiegeZombie,
+    _poolSiegehornCeratops,
     _poolSigardaChampionOfLight,
     _poolSilverRaven,
     _poolSkithiryxTheBlightDragon,
@@ -1013,6 +1018,7 @@ const shard: CardShard = {
     _poolSurgicalSkullbomb,
     _poolSurrakarBanisher,
     _poolSuspiciousShambler,
+    _poolSwaggeringCorsair,
     _poolTalrand,
     _poolTanaTheBloodsower,
     _poolTasigurTheGoldenFang,

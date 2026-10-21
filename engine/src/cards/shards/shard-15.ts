@@ -207,6 +207,7 @@ import _poolGoblinBrigand from "../pool/goblin-brigand.js";
 import _poolGoblinFireleaper from "../pool/goblin-fireleaper.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
 import _poolGoldRush from "../pool/gold-rush.js";
+import _poolGoldenGuardian from "../pool/golden-guardian.js";
 import _poolGolgariCharm from "../pool/golgari-charm.js";
 import _poolGolgariGraveTroll from "../pool/golgari-grave-troll.js";
 import _poolGolgariLonglegs from "../pool/golgari-longlegs.js";
@@ -436,6 +437,7 @@ import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
 import _poolSquareUp from "../pool/square-up.js";
+import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStatus from "../pool/status.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
@@ -755,6 +757,7 @@ const shard: CardShard = {
     _poolGoblinFireleaper,
     _poolGoblinSledder,
     _poolGoldRush,
+    _poolGoldenGuardian,
     _poolGolgariCharm,
     _poolGolgariGraveTroll,
     _poolGolgariLonglegs,
@@ -984,6 +987,7 @@ const shard: CardShard = {
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
     _poolSquareUp,
+    _poolStampedingHorncrest,
     _poolStatureYoungAvenger,
     _poolStatus,
     _poolStingingVitriol,

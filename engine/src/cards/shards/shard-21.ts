@@ -80,6 +80,7 @@ import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
 import _poolChaosSpewer from "../pool/chaos-spewer.js";
 import _poolChargingPaladin from "../pool/charging-paladin.js";
+import _poolChargingTuskodon from "../pool/charging-tuskodon.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
@@ -193,6 +194,7 @@ import _poolGoblinLackey from "../pool/goblin-lackey.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
 import _poolGodsHallGuardian from "../pool/gods-hall-guardian.js";
+import _poolGoldenDemise from "../pool/golden-demise.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
@@ -621,6 +623,7 @@ const shard: CardShard = {
     _poolChandrasMagmutt,
     _poolChaosSpewer,
     _poolChargingPaladin,
+    _poolChargingTuskodon,
     _poolChartACourse,
     _poolChaseInspiration,
     _poolChromaticLantern,
@@ -734,6 +737,7 @@ const shard: CardShard = {
     _poolGoblinSurprise,
     _poolGoblinWarchief,
     _poolGodsHallGuardian,
+    _poolGoldenDemise,
     _poolGoldmeadowDodger,
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,

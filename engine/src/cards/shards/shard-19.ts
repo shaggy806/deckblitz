@@ -210,6 +210,7 @@ import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
+import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
 import _poolGraveRobbers from "../pool/grave-robbers.js";
 import _poolGreatForestDruid from "../pool/great-forest-druid.js";
 import _poolGreatHart from "../pool/great-hart.js";
@@ -243,6 +244,7 @@ import _poolIceMagic from "../pool/ice-magic.js";
 import _poolIchorDrinker from "../pool/ichor-drinker.js";
 import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
+import _poolIllustriousWanderglyph from "../pool/illustrious-wanderglyph.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
 import _poolImpostorSyndrome from "../pool/impostor-syndrome.js";
@@ -305,6 +307,7 @@ import _poolMagefireWings from "../pool/magefire-wings.js";
 import _poolMagmaticSinkhole from "../pool/magmatic-sinkhole.js";
 import _poolMagusOfTheBridge from "../pool/magus-of-the-bridge.js";
 import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
+import _poolMajesticHeliopterus from "../pool/majestic-heliopterus.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
 import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
@@ -381,6 +384,7 @@ import _poolPlummet from "../pool/plummet.js";
 import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
 import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
+import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
@@ -486,6 +490,7 @@ import _poolStreakingOilgorger from "../pool/streaking-oilgorger.js";
 import _poolStrikingSliver from "../pool/striking-sliver.js";
 import _poolSummonGfIfrit from "../pool/summon-gf-ifrit.js";
 import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
+import _poolSunCrestedPterodon from "../pool/sun-crested-pterodon.js";
 import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
 import _poolSupportiveParents from "../pool/supportive-parents.js";
@@ -552,6 +557,7 @@ import _poolWarScreecher from "../pool/war-screecher.js";
 import _poolWartimeProtestors from "../pool/wartime-protestors.js";
 import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
 import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
+import _poolWaywardSwordtooth from "../pool/wayward-swordtooth.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
@@ -794,6 +800,7 @@ const shard: CardShard = {
     _poolGoblinGlider,
     _poolGoliathMassManipulator,
     _poolGrapplingKraken,
+    _poolGraspingScoundrel,
     _poolGraveRobbers,
     _poolGreatForestDruid,
     _poolGreatHart,
@@ -827,6 +834,7 @@ const shard: CardShard = {
     _poolIchorDrinker,
     _poolIgnisScientia,
     _poolIgniteTheFuture,
+    _poolIllustriousWanderglyph,
     _poolImpale,
     _poolImplode,
     _poolImpostorSyndrome,
@@ -889,6 +897,7 @@ const shard: CardShard = {
     _poolMagmaticSinkhole,
     _poolMagusOfTheBridge,
     _poolMagusOfTheCandelabra,
+    _poolMajesticHeliopterus,
     _poolMakeYourMove,
     _poolMakindiSliderunner,
     _poolMandateOfAbaddon,
@@ -965,6 +974,7 @@ const shard: CardShard = {
     _poolPoeticIngenuity,
     _poolPoisonersApprentice,
     _poolPolyraptor,
+    _poolPrideOfConquerors,
     _poolPrizedStatue,
     _poolProdigysPrototype,
     _poolProsperousPirates,
@@ -1070,6 +1080,7 @@ const shard: CardShard = {
     _poolStrikingSliver,
     _poolSummonGfIfrit,
     _poolSummonKnightsOfRound,
+    _poolSunCrestedPterodon,
     _poolSunbillowVerge,
     _poolSunbladeSamurai,
     _poolSupportiveParents,
@@ -1136,6 +1147,7 @@ const shard: CardShard = {
     _poolWartimeProtestors,
     _poolWaterbenderAscension,
     _poolWayOfTheParadox,
+    _poolWaywardSwordtooth,
     _poolWhelmingWave,
     _poolWhirlwindOfThought,
     _poolWhiskAway,

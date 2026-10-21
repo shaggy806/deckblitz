@@ -7,6 +7,7 @@ import _poolAbandonedCampground from "../pool/abandoned-campground.js";
 import _poolAcademyJourneymage from "../pool/academy-journeymage.js";
 import _poolActionNewsCrew from "../pool/action-news-crew.js";
 import _poolAdaptiveShimmerer from "../pool/adaptive-shimmerer.js";
+import _poolAdmiralsOrder from "../pool/admirals-order.js";
 import _poolAdvanceScout from "../pool/advance-scout.js";
 import _poolAdventuringGear from "../pool/adventuring-gear.js";
 import _poolAgentBishopManInBlack from "../pool/agent-bishop-man-in-black.js";
@@ -131,10 +132,13 @@ import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolEscarpmentFortress from "../pool/escarpment-fortress.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
+import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFallenFerromancer from "../pool/fallen-ferromancer.js";
 import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js";
+import _poolFamishedPaladin from "../pool/famished-paladin.js";
+import _poolFathomFleetBoarder from "../pool/fathom-fleet-boarder.js";
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
 import _poolFear from "../pool/fear.js";
 import _poolFearlessPup from "../pool/fearless-pup.js";
@@ -308,6 +312,7 @@ import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
+import _poolOcelotPride from "../pool/ocelot-pride.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
@@ -585,6 +590,7 @@ const shard: CardShard = {
     _poolAcademyJourneymage,
     _poolActionNewsCrew,
     _poolAdaptiveShimmerer,
+    _poolAdmiralsOrder,
     _poolAdvanceScout,
     _poolAdventuringGear,
     _poolAgentBishopManInBlack,
@@ -709,10 +715,13 @@ const shard: CardShard = {
     _poolErebosGodOfTheDead,
     _poolEscarpmentFortress,
     _poolExaltedFlamerOfTzeentch,
+    _poolExpelFromOrazca,
     _poolExultantSkymarcher,
     _poolFaerieHarbinger,
     _poolFallenFerromancer,
     _poolFalthisShadowcatFamiliar,
+    _poolFamishedPaladin,
+    _poolFathomFleetBoarder,
     _poolFavoredOfIroas,
     _poolFear,
     _poolFearlessPup,
@@ -886,6 +895,7 @@ const shard: CardShard = {
     _poolNimbleclawAdept,
     _poolNurturingBristleback,
     _poolNyleaKeenEyed,
+    _poolOcelotPride,
     _poolOldGrowthEducator,
     _poolOldOneEye,
     _poolOnTheTrail,

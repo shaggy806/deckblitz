@@ -130,6 +130,7 @@ import _poolDesolationProwler from "../pool/desolation-prowler.js";
 import _poolDevotedGrafkeeper from "../pool/devoted-grafkeeper.js";
 import _poolDiminisherWitch from "../pool/diminisher-witch.js";
 import _poolDimirAqueduct from "../pool/dimir-aqueduct.js";
+import _poolDireFleetPoisoner from "../pool/dire-fleet-poisoner.js";
 import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
 import _poolDirtwaterWraith from "../pool/dirtwater-wraith.js";
 import _poolDisperse from "../pool/disperse.js";
@@ -184,6 +185,7 @@ import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
 import _poolForceVoid from "../pool/force-void.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
+import _poolFormOfTheDinosaur from "../pool/form-of-the-dinosaur.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFranticInventory from "../pool/frantic-inventory.js";
@@ -687,6 +689,7 @@ const shard: CardShard = {
     _poolDevotedGrafkeeper,
     _poolDiminisherWitch,
     _poolDimirAqueduct,
+    _poolDireFleetPoisoner,
     _poolDiregrafColossus,
     _poolDirtwaterWraith,
     _poolDisperse,
@@ -741,6 +744,7 @@ const shard: CardShard = {
     _poolForceOfVirtue,
     _poolForceVoid,
     _poolForensicResearcher,
+    _poolFormOfTheDinosaur,
     _poolFortuitousFind,
     _poolFourKnocks,
     _poolFranticInventory,

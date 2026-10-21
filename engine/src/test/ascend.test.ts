@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
 
-import { A, B, activate, cast, destroy, hand, keywords, lands, pt, spawn, table, toHand, toStep } from "./harness.js";
+import { A, B, activate, cast, destroy, hand, keywords, lands, pt, settle, spawn, table, toHand, toStep, tokensNamed } from "./harness.js";
 
 const blessed = (game: Game, player: PlayerId = A): boolean => game.state.players[player].citysBlessing === true;
 /** Pass priority far enough for a state-based check. */
@@ -70,6 +70,31 @@ describe("ascend on a permanent", () => {
     const before = hand(game).length;
     activate(game, arch, 1);
     expect(hand(game).length).toBe(before + 1);
+  });
+});
+
+describe("ascend any time (rule 702.131b)", () => {
+  it("Ocelot Pride: the Cat that's the tenth permanent gives the blessing before the copy step asks", () => {
+    const { game } = table();
+    spawn(game, "Ocelot Pride");
+    lands(game, "Plains", 8);
+    game.debugApplyEffect(A, { kind: "gain-life", amount: 1 });
+    toStep(game, "end");
+    settle(game);
+    // The Cat made nine permanents ten; its copy is made in the same resolution.
+    expect(blessed(game)).toBe(true);
+    expect(tokensNamed(game, "Cat Token (Arahbo, the First Fang)", A)).toBe(2);
+  });
+
+  it("with only nine permanents after the Cat, no blessing and no copies", () => {
+    const { game } = table();
+    spawn(game, "Ocelot Pride");
+    lands(game, "Plains", 7);
+    game.debugApplyEffect(A, { kind: "gain-life", amount: 1 });
+    toStep(game, "end");
+    settle(game);
+    expect(blessed(game)).toBe(false);
+    expect(tokensNamed(game, "Cat Token (Arahbo, the First Fang)", A)).toBe(1);
   });
 });
 

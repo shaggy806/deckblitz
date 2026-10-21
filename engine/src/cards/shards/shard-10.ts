@@ -489,6 +489,7 @@ import _poolTalonsOfWildwood from "../pool/talons-of-wildwood.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
+import _poolTendershootDryad from "../pool/tendershoot-dryad.js";
 import _poolTerritoryForge from "../pool/territory-forge.js";
 import _poolTheDestinedThief from "../pool/the-destined-thief.js";
 import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
@@ -1073,6 +1074,7 @@ const shard: CardShard = {
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
+    _poolTendershootDryad,
     _poolTerritoryForge,
     _poolTheDestinedThief,
     _poolTheMastersOfEvil,

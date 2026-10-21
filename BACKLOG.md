@@ -130,9 +130,9 @@ section keeps only what to do next.
   Horizons, on pitch costs; batch 123 War of the Spark, with entwine built beside it; batch 124
   Ravnica Allegiance, on spectacle and afterlife; batch 125 Guilds of Ravnica, on jump-start;
   batch 126 Commander 2018 and Core Set 2019, with a "can't be blocked" restriction; batch 127
-  Battlebond, no engine change; batch 128 Dominaria, on kicker's scaffolder template);
-  **next, Rivals of Ixalan** (99 left), then Ixalan (117) (`npm run cards:sets -w engine --
-  --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
+  Battlebond, no engine change; batch 128 Dominaria, on kicker's scaffolder template; batch 129
+  Rivals of Ixalan, on ascend); **next, Ixalan** (117 left), then Commander 2017 (22)
+  (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
   "if that creature would die this turn, exile it instead" five
   (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
   long as it stays tapped" (`effect:duration-while-source-tapped`, 3), an Aura's lasting "loses

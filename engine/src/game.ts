@@ -32248,6 +32248,9 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         if (this.protectorValid(id)) continue;
         const battle = this.state.objects[id];
+        // One a player who has left the game owns stays on the board inert,
+        // under them (rule 800.4a — `recomputeControl`): they choose nothing.
+        if (this.state.players[battle.controller]?.hasLost === true) continue;
         const attacked = this.state.zones.shared.battlefield.some((a) => this.state.objects[a]?.attacking === id);
         if (attacked) continue;
         const options = this.protectorOptions(
@@ -35183,20 +35186,30 @@ export class Game {
 
   /**
    * Ascend on a permanent (rule 702.131b): a player who controls a permanent
-   * with ascend and ten or more permanents gets the city's blessing. Run in
-   * each state-based check, as storied is, so it's had before the game looks
-   * for what triggered (702.131d). Whether anyone got it.
+   * with ascend and ten or more permanents gets the city's blessing — "any
+   * time", so mid-resolution too: run as permanents enter or change control
+   * (`emit`), so a token that's the tenth permanent gives the blessing before
+   * the rest of its resolution asks for it (Ocelot Pride's ruling), and in
+   * each state-based check, before the game looks for what triggered
+   * (702.131d), for anything else. `onEvent` skips any player without a
+   * permanent whose own text has ascend, keeping the per-event check cheap
+   * (no card grants ascend; the state-based check reads every permanent's
+   * keywords). Whether anyone got it.
    */
-  private grantCitysBlessings(): boolean {
+  private grantCitysBlessings(onEvent = false): boolean {
     let granted = false;
     for (const player of this.state.turnOrder) {
-      if (this.state.players[player]?.citysBlessing === true) continue;
-      const ascends = this.state.zones.shared.battlefield.some(
-        (id) =>
-          this.state.objects[id].controller === player &&
-          computeCharacteristics(this.state, this.registry, id).keywords.has("ascend"),
-      );
-      if (ascends && this.ascend(player)) granted = true;
+      const playerState = this.state.players[player];
+      if (playerState === undefined || playerState.citysBlessing === true || playerState.hasLost) continue;
+      const controlled = this.state.zones.shared.battlefield.filter((id) => this.state.objects[id].controller === player);
+      if (permanentCount(this.state, controlled) < 10) continue;
+      const printed = (id: ObjectId): boolean =>
+        (this.registry.get(rulesTextName(this.state.objects[id])).keywords ?? []).includes("ascend");
+      if (onEvent && !controlled.some(printed)) continue;
+      // Read as things stand after the event that ran this check.
+      if (onEvent) invalidateComputedCache();
+      if (!controlled.some((id) => computeCharacteristics(this.state, this.registry, id).keywords.has("ascend"))) continue;
+      if (this.ascend(player)) granted = true;
     }
     return granted;
   }
@@ -35374,6 +35387,15 @@ export class Game {
       this.openStint(full.object, seq);
     }
     if (full.type === "spell-copied" && this.openStintOf(full.copy) === undefined) this.openStint(full.copy, seq);
+    // Ascend on a permanent applies any time (rule 702.131b): a permanent
+    // that arrives or changes hands mid-resolution may be the tenth.
+    if (
+      full.type === "permanent-entered-battlefield" ||
+      full.type === "control-changed" ||
+      full.type === "permanents-phased-in"
+    ) {
+      this.grantCitysBlessings(true);
+    }
     // "For as long as it has a [kind] counter on it" ends with the last one
     // (rule 611.2b), whatever removed it.
     if (full.type === "counter-removed") this.endCounterDurations(full.object);

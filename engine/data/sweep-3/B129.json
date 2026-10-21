@@ -1,0 +1,782 @@
+{
+ "batch": "B129",
+ "status": "complete",
+ "ranks": "Rivals of Ixalan (RIX, 2018-01-19): the rest of the set, whole; and 11 earlier-triaged cards ascend unblocked",
+ "authored": [
+  {
+   "name": "Angrath, the Flame-Chained",
+   "files": [
+    "engine/src/cards/pool/angrath-the-flame-chained.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arterial Flow",
+   "files": [
+    "engine/src/cards/pool/arterial-flow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blazing Hope",
+   "files": [
+    "engine/src/cards/pool/blazing-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charging Tuskodon",
+   "files": [
+    "engine/src/cards/pool/charging-tuskodon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curious Obsession",
+   "files": [
+    "engine/src/cards/pool/curious-obsession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dire Fleet Neckbreaker",
+   "files": [
+    "engine/src/cards/pool/dire-fleet-neckbreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Form of the Dinosaur",
+   "files": [
+    "engine/src/cards/pool/form-of-the-dinosaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frilled Deathspitter",
+   "files": [
+    "engine/src/cards/pool/frilled-deathspitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golden Demise",
+   "files": [
+    "engine/src/cards/pool/golden-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grasping Scoundrel",
+   "files": [
+    "engine/src/cards/pool/grasping-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruesome Fate",
+   "files": [
+    "engine/src/cards/pool/gruesome-fate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hardy Veteran",
+   "files": [
+    "engine/src/cards/pool/hardy-veteran.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Illustrious Wanderglyph",
+   "files": [
+    "engine/src/cards/pool/illustrious-wanderglyph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Majestic Heliopterus",
+   "files": [
+    "engine/src/cards/pool/majestic-heliopterus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reckless Rage",
+   "files": [
+    "engine/src/cards/pool/reckless-rage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sea Legs",
+   "files": [
+    "engine/src/cards/pool/sea-legs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siren Reaver",
+   "files": [
+    "engine/src/cards/pool/siren-reaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slippery Scoundrel",
+   "files": [
+    "engine/src/cards/pool/slippery-scoundrel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Twilight Prophet",
+   "files": [
+    "engine/src/cards/pool/twilight-prophet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Andúril, Narsil Reforged",
+   "files": [
+    "engine/src/cards/pool/anduril-narsil-reforged.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angrath's Ambusher",
+   "files": [
+    "engine/src/cards/pool/angraths-ambusher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Inquiry",
+   "files": [
+    "engine/src/cards/pool/dark-inquiry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dire Fleet Poisoner",
+   "files": [
+    "engine/src/cards/pool/dire-fleet-poisoner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Enter the Unknown",
+   "files": [
+    "engine/src/cards/pool/enter-the-unknown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fanatical Firebrand",
+   "files": [
+    "engine/src/cards/pool/fanatical-firebrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forerunner of the Heralds",
+   "files": [
+    "engine/src/cards/pool/forerunner-of-the-heralds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Needletooth Raptor",
+   "files": [
+    "engine/src/cards/pool/needletooth-raptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pride of Conquerors",
+   "files": [
+    "engine/src/cards/pool/pride-of-conquerors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rekindling Phoenix",
+   "files": [
+    "engine/src/cards/pool/rekindling-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riverwise Augur",
+   "files": [
+    "engine/src/cards/pool/riverwise-augur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Swaggering Corsair",
+   "files": [
+    "engine/src/cards/pool/swaggering-corsair.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tendershoot Dryad",
+   "files": [
+    "engine/src/cards/pool/tendershoot-dryad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tilonalli's Summoner",
+   "files": [
+    "engine/src/cards/pool/tilonallis-summoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tomb Robber",
+   "files": [
+    "engine/src/cards/pool/tomb-robber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voracious Vampire",
+   "files": [
+    "engine/src/cards/pool/voracious-vampire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vraska, Scheming Gorgon",
+   "files": [
+    "engine/src/cards/pool/vraska-scheming-gorgon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vraska's Conquistador",
+   "files": [
+    "engine/src/cards/pool/vraskas-conquistador.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wayward Swordtooth",
+   "files": [
+    "engine/src/cards/pool/wayward-swordtooth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Admiral's Order",
+   "files": [
+    "engine/src/cards/pool/admirals-order.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Buccaneer's Bravado",
+   "files": [
+    "engine/src/cards/pool/buccaneers-bravado.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cleansing Ray",
+   "files": [
+    "engine/src/cards/pool/cleansing-ray.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Detective of the Month",
+   "files": [
+    "engine/src/cards/pool/detective-of-the-month.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everdawn Champion",
+   "files": [
+    "engine/src/cards/pool/everdawn-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Famished Paladin",
+   "files": [
+    "engine/src/cards/pool/famished-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fathom Fleet Boarder",
+   "files": [
+    "engine/src/cards/pool/fathom-fleet-boarder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golden Guardian // Gold-Forge Garrison",
+   "files": [
+    "engine/src/cards/pool/golden-guardian.ts",
+    "engine/src/cards/pool/gold-forge-garrison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Huatli, Radiant Champion",
+   "files": [
+    "engine/src/cards/pool/huatli-radiant-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitesail Corsair",
+   "files": [
+    "engine/src/cards/pool/kitesail-corsair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kumena's Awakening",
+   "files": [
+    "engine/src/cards/pool/kumenas-awakening.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "River Darter",
+   "files": [
+    "engine/src/cards/pool/river-darter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stampeding Horncrest",
+   "files": [
+    "engine/src/cards/pool/stampeding-horncrest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sun-Crested Pterodon",
+   "files": [
+    "engine/src/cards/pool/sun-crested-pterodon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Swift Warden",
+   "files": [
+    "engine/src/cards/pool/swift-warden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tetzimoc, Primal Death",
+   "files": [
+    "engine/src/cards/pool/tetzimoc-primal-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trapjaw Tyrant",
+   "files": [
+    "engine/src/cards/pool/trapjaw-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angrath's Fury",
+   "files": [
+    "engine/src/cards/pool/angraths-fury.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aquatic Incursion",
+   "files": [
+    "engine/src/cards/pool/aquatic-incursion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Baffling End",
+   "files": [
+    "engine/src/cards/pool/baffling-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dinosaur Hunter",
+   "files": [
+    "engine/src/cards/pool/dinosaur-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expel from Orazca",
+   "files": [
+    "engine/src/cards/pool/expel-from-orazca.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flood of Recollection",
+   "files": [
+    "engine/src/cards/pool/flood-of-recollection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forerunner of the Coalition",
+   "files": [
+    "engine/src/cards/pool/forerunner-of-the-coalition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hornswoggle",
+   "files": [
+    "engine/src/cards/pool/hornswoggle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jade Bearer",
+   "files": [
+    "engine/src/cards/pool/jade-bearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jungle Creeper",
+   "files": [
+    "engine/src/cards/pool/jungle-creeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orazca Relic",
+   "files": [
+    "engine/src/cards/pool/orazca-relic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radiant Destiny",
+   "files": [
+    "engine/src/cards/pool/radiant-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanguine Glorifier",
+   "files": [
+    "engine/src/cards/pool/sanguine-glorifier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "See Red",
+   "files": [
+    "engine/src/cards/pool/see-red.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siegehorn Ceratops",
+   "files": [
+    "engine/src/cards/pool/siegehorn-ceratops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vraska's Scorn",
+   "files": [
+    "engine/src/cards/pool/vraskas-scorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jadelight Ranger",
+   "files": [
+    "engine/src/cards/pool/jadelight-ranger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skymarcher Aspirant",
+   "files": [
+    "engine/src/cards/pool/skymarcher-aspirant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadeye Brawler",
+   "files": [
+    "engine/src/cards/pool/deadeye-brawler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Snubhorn Sentry",
+   "files": [
+    "engine/src/cards/pool/snubhorn-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterknot",
+   "files": [
+    "engine/src/cards/pool/waterknot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Storm Fleet Swashbuckler",
+   "files": [
+    "engine/src/cards/pool/storm-fleet-swashbuckler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dusk Charger",
+   "files": [
+    "engine/src/cards/pool/dusk-charger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resplendent Griffin",
+   "files": [
+    "engine/src/cards/pool/resplendent-griffin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mausoleum Harpy",
+   "files": [
+    "engine/src/cards/pool/mausoleum-harpy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spire Winder",
+   "files": [
+    "engine/src/cards/pool/spire-winder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arch of Orazca",
+   "files": [
+    "engine/src/cards/pool/arch-of-orazca.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Secrets of the Golden City",
+   "files": [
+    "engine/src/cards/pool/secrets-of-the-golden-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ocelot Pride",
+   "files": [
+    "engine/src/cards/pool/ocelot-pride.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Azor, the Lawbringer",
+   "needs": [
+    "effect:player-effect-until-target-next-turn"
+   ],
+   "why": "each opponent can't cast instant or sorcery spells during that player's next turn"
+  },
+  {
+   "name": "Tilonalli's Crown",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "it deals 1 damage to enchanted creature, untargeted"
+  },
+  {
+   "name": "Crashing Tide",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "has flash as long as you control a Merfolk"
+  },
+  {
+   "name": "Relentless Raptor",
+   "needs": [
+    "static:must-block-each-combat"
+   ],
+   "why": "blocks each combat if able"
+  },
+  {
+   "name": "Sadistic Skymarcher",
+   "needs": [
+    "cost:reveal-card-as-additional-cost"
+   ],
+   "why": "as an additional cost, you may reveal a Vampire card from your hand"
+  },
+  {
+   "name": "Mastermind's Acquisition",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "a card you own from outside the game"
+  },
+  {
+   "name": "Cherished Hatchling",
+   "needs": [
+    "effect:flash-permission-this-turn"
+   ],
+   "why": "cast Dinosaur spells this turn as though they had flash, and they gain a fight trigger"
+  },
+  {
+   "name": "Awakened Amalgam",
+   "needs": [
+    "effect:distinct-names-count"
+   ],
+   "why": "the number of differently named lands you control"
+  },
+  {
+   "name": "Silent Gravestone",
+   "needs": [
+    "static:graveyard-cards-untargetable"
+   ],
+   "why": "cards in graveyards can't be the targets of spells or abilities"
+  },
+  {
+   "name": "Sphinx's Decree",
+   "needs": [
+    "effect:player-effect-until-target-next-turn"
+   ],
+   "why": "each opponent can't cast instant or sorcery spells during that player's next turn"
+  },
+  {
+   "name": "Profane Procession // Tomb of the Dusk Rose",
+   "needs": [
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "put a creature card exiled with this permanent onto the battlefield"
+  },
+  {
+   "name": "Azor's Gateway // Sanctum of the Sun",
+   "needs": [
+    "effect:exile-from-hand-by-filter",
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "exile a card from your hand, then five or more different mana values among cards exiled with it"
+  },
+  {
+   "name": "Protean Raider",
+   "needs": [
+    "replacement:copy-on-enter-options"
+   ],
+   "why": "raid: may enter as a copy only if you attacked this turn"
+  },
+  {
+   "name": "Blood Sun",
+   "needs": [
+    "static:lose-all-abilities-except-mana"
+   ],
+   "why": "all lands lose all abilities except mana abilities"
+  },
+  {
+   "name": "Path of Mettle // Metzali, Tower of Triumph",
+   "needs": [
+    "effect:random-permanent"
+   ],
+   "why": "choose a creature at random that attacked this turn"
+  },
+  {
+   "name": "Paladin of Atonement",
+   "needs": [
+    "condition:lost-life-last-turn"
+   ],
+   "why": "if you lost life last turn"
+  },
+  {
+   "name": "Daring Buccaneer",
+   "needs": [
+    "cost:reveal-card-as-additional-cost"
+   ],
+   "why": "as an additional cost, reveal a Pirate card from your hand or pay {2}"
+  },
+  {
+   "name": "Vona's Hunger",
+   "needs": [
+    "effect:sacrifice-amount",
+    "effect:choose-half-of-permanents"
+   ],
+   "why": "each opponent sacrifices half the creatures they control, rounded up"
+  },
+  {
+   "name": "Dead Man's Chest",
+   "needs": [
+    "effect:impulse-exile-owner-of-trigger-object"
+   ],
+   "why": "exile cards from the top of its owner's library"
+  },
+  {
+   "name": "Release to the Wind",
+   "needs": [
+    "zone:exile-owner-may-play"
+   ],
+   "why": "its owner may cast it without paying its mana cost"
+  },
+  {
+   "name": "Crafty Cutpurse",
+   "needs": [
+    "replacement:token-control-redirect-this-turn"
+   ],
+   "why": "tokens an opponent would create this turn enter under your control instead"
+  },
+  {
+   "name": "Mutiny",
+   "needs": [
+    "effect:targets-same-controller"
+   ],
+   "why": "another target creature that player controls"
+  },
+  {
+   "name": "Angrath, Minotaur Pirate",
+   "needs": [
+    "effect:aggregate-of-target-players-permanents"
+   ],
+   "why": "damage equal to the total power of the creatures destroyed this way, indestructible ones included"
+  },
+  {
+   "name": "Bishop of Binding",
+   "needs": [
+    "amount:exiled-with-source-power"
+   ],
+   "why": "X is the power of the exiled card"
+  },
+  {
+   "name": "Induced Amnesia",
+   "needs": [
+    "effect:exile-hands-face-down-return-later"
+   ],
+   "why": "exile a hand face down, return those cards when this is put into a graveyard"
+  },
+  {
+   "name": "Timestream Navigator",
+   "needs": [
+    "cost:put-self-on-library-bottom"
+   ],
+   "why": "put this card on the bottom of its owner's library as a cost"
+  }
+ ]
+}

@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Rivals of Ixalan, whole** (batch 129): its last 99 cards, with **ascend** built (rule
+  702.131 — the city's blessing on permanents, any time, and on spells as they resolve; a 🏛️
+  badge on the player panel) and taught to the scaffolder; 73 RIX cards authored and 11 earlier
+  ascend cards unblocked (Ocelot Pride, Twilight Prophet, Wayward Swordtooth, Tendershoot Dryad,
+  Radiant Destiny, Arch of Orazca…) by four `card-author` agents and the lead; RIX is 147 of 178.
+  A battle whose controller left the game no longer asks them for a new protector (a fuzzer
+  stall) (2026-10-21).
 - **Dominaria, whole** (batch 128): its last 119 cards, 84 authored by four `card-author`
   agents and 5 by the scaffolder (kicker on permanents and "if it was kicked," taught to it) —
   Teferi, Timebender, Chandra, Bold Pyromancer, Hallar, the Firefletcher, Grunn, the Lonely King,

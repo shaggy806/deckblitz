@@ -37,6 +37,7 @@ import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
 import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
+import _poolBafflingEnd from "../pool/baffling-end.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
@@ -175,6 +176,7 @@ import _poolFireDiamond from "../pool/fire-diamond.js";
 import _poolFirebrandArcher from "../pool/firebrand-archer.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
 import _poolFleetingDistraction from "../pool/fleeting-distraction.js";
+import _poolFloodOfRecollection from "../pool/flood-of-recollection.js";
 import _poolFlowstoneInfusion from "../pool/flowstone-infusion.js";
 import _poolFlumph from "../pool/flumph.js";
 import _poolFlushOut from "../pool/flush-out.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolAvianOddity,
     _poolAzraOddsmaker,
     _poolBaSingSe,
+    _poolBafflingEnd,
     _poolBandage,
     _poolBasrisAegis,
     _poolBastionOfRemembrance,
@@ -736,6 +739,7 @@ const shard: CardShard = {
     _poolFirebrandArcher,
     _poolFlameSlash,
     _poolFleetingDistraction,
+    _poolFloodOfRecollection,
     _poolFlowstoneInfusion,
     _poolFlumph,
     _poolFlushOut,

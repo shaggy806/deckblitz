@@ -88,6 +88,7 @@ import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
 import _poolDarkEndurance from "../pool/dark-endurance.js";
+import _poolDarkInquiry from "../pool/dark-inquiry.js";
 import _poolDarklightPhoenix from "../pool/darklight-phoenix.js";
 import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
@@ -98,6 +99,7 @@ import _poolDefiledCrypt from "../pool/defiled-crypt.js";
 import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
 import _poolDemonicLore from "../pool/demonic-lore.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
+import _poolDetectiveOfTheMonth from "../pool/detective-of-the-month.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
@@ -291,6 +293,7 @@ import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
+import _poolNeedletoothRaptor from "../pool/needletooth-raptor.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimanaSkitterSneak from "../pool/nimana-skitter-sneak.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
@@ -475,6 +478,7 @@ import _poolTovolarsPackleader from "../pool/tovolars-packleader.js";
 import _poolToweringTitan from "../pool/towering-titan.js";
 import _poolToxicDeluge from "../pool/toxic-deluge.js";
 import _poolTransplantTheorist from "../pool/transplant-theorist.js";
+import _poolTrapjawTyrant from "../pool/trapjaw-tyrant.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
@@ -637,6 +641,7 @@ const shard: CardShard = {
     _poolDailyBugleNewspaper,
     _poolDakmorScorpion,
     _poolDarkEndurance,
+    _poolDarkInquiry,
     _poolDarklightPhoenix,
     _poolDarksteelMyr,
     _poolDauntlessSurvivor,
@@ -647,6 +652,7 @@ const shard: CardShard = {
     _poolDelneyStreetwiseLookout,
     _poolDemonicLore,
     _poolDesperateParry,
+    _poolDetectiveOfTheMonth,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,
     _poolDireStrainRampage,
@@ -840,6 +846,7 @@ const shard: CardShard = {
     _poolMukotaiAmbusher,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
+    _poolNeedletoothRaptor,
     _poolNeverwinterDryad,
     _poolNimanaSkitterSneak,
     _poolNimbleBladeKhenra,
@@ -1024,6 +1031,7 @@ const shard: CardShard = {
     _poolToweringTitan,
     _poolToxicDeluge,
     _poolTransplantTheorist,
+    _poolTrapjawTyrant,
     _poolTrelasarraMoonDancer,
     _poolTritonWaverider,
     _poolTriumphantChomp,

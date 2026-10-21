@@ -468,6 +468,7 @@ import _poolThunderingRebuke from "../pool/thundering-rebuke.js";
 import _poolThunderscapeMaster from "../pool/thunderscape-master.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
+import _poolTombRobber from "../pool/tomb-robber.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
@@ -540,6 +541,7 @@ import _tokensConstructTokenKaylasCommand from "../tokens/construct-token-kaylas
 import _tokensDarkstar from "../tokens/darkstar.js";
 import _tokensEldraziToken from "../tokens/eldrazi-token.js";
 import _tokensFungusTokenCantBlock from "../tokens/fungus-token-cant-block.js";
+import _tokensGolemToken44 from "../tokens/golem-token-4-4.js";
 import _tokensGriffinToken from "../tokens/griffin-token.js";
 import _tokensKnightToken from "../tokens/knight-token.js";
 import _tokensMoloidToken from "../tokens/moloid-token.js";
@@ -1016,6 +1018,7 @@ const shard: CardShard = {
     _poolThunderscapeMaster,
     _poolTideSkimmer,
     _poolTitaniaNaturesForce,
+    _poolTombRobber,
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
     _poolTrestleTroll,
@@ -1090,6 +1093,7 @@ const shard: CardShard = {
     _tokensDarkstar,
     _tokensEldraziToken,
     _tokensFungusTokenCantBlock,
+    _tokensGolemToken44,
     _tokensGriffinToken,
     _tokensKnightToken,
     _tokensMoloidToken,

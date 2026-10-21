@@ -232,6 +232,7 @@ import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
 import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
+import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
@@ -549,6 +550,7 @@ import _tokensCadet from "../tokens/cadet.js";
 import _tokensCitizenToken from "../tokens/citizen-token.js";
 import _tokensDragonTokenFirebreathing from "../tokens/dragon-token-firebreathing.js";
 import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
+import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
 import _tokensGolemTokenGolemFoundry from "../tokens/golem-token-golem-foundry.js";
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
@@ -794,6 +796,7 @@ const shard: CardShard = {
     _poolHostileTakeover,
     _poolHourOfReckoning,
     _poolHowlingGalefang,
+    _poolHuatliRadiantChampion,
     _poolHypnoticGrifter,
     _poolImprovisedArmor,
     _poolInfernoTitan,
@@ -1113,6 +1116,7 @@ const shard: CardShard = {
     _tokensCitizenToken,
     _tokensDragonTokenFirebreathing,
     _tokensEldraziSpawnToken,
+    _tokensElementalTokenRekindlingPhoenix,
     _tokensGolemTokenGolemFoundry,
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,

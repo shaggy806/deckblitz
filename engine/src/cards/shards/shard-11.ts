@@ -158,6 +158,7 @@ import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
 import _poolFalconerAdept from "../pool/falconer-adept.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
+import _poolFanaticalFirebrand from "../pool/fanatical-firebrand.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
 import _poolFetidGargantua from "../pool/fetid-gargantua.js";
@@ -437,6 +438,7 @@ import _poolSiegeMastodon from "../pool/siege-mastodon.js";
 import _poolSiegeVeteran from "../pool/siege-veteran.js";
 import _poolSigilOfSleep from "../pool/sigil-of-sleep.js";
 import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
+import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
 import _poolSkyEelSchool from "../pool/sky-eel-school.js";
 import _poolSkyclaveCleric from "../pool/skyclave-cleric.js";
@@ -519,6 +521,7 @@ import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
+import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
 import _poolTwoHeadedHunter from "../pool/two-headed-hunter.js";
 import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
@@ -739,6 +742,7 @@ const shard: CardShard = {
     _poolFailedFording,
     _poolFalconerAdept,
     _poolFanaticOfRhonas,
+    _poolFanaticalFirebrand,
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
     _poolFetidGargantua,
@@ -1018,6 +1022,7 @@ const shard: CardShard = {
     _poolSiegeVeteran,
     _poolSigilOfSleep,
     _poolSireOfSevenDeaths,
+    _poolSirenReaver,
     _poolSistersOfTheFlame,
     _poolSkyEelSchool,
     _poolSkyclaveCleric,
@@ -1100,6 +1105,7 @@ const shard: CardShard = {
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,
     _poolTundraWall,
+    _poolTwilightProphet,
     _poolTwinbladeInvocation,
     _poolTwoHeadedHunter,
     _poolTyroxSauridTyrant,

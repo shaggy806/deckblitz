@@ -208,4 +208,19 @@ describe("a battle's protector", () => {
     game.advanceUntil((s) => s.awaiting === null && s.zones.shared.stack.length === 0);
     expect(game.state.objects[battle].protector).toBe(C);
   });
+
+  it("one whose controller left the game too stays inert: nobody is asked (rule 800.4a)", () => {
+    // A fuzzer game (seed 11) stalled when a battle's controller and its
+    // protector lost at once: the left player was asked for a new protector.
+    const { game, a } = table({ players: 4 });
+    a.chooseCreatureTypeFn = () => B;
+    const battle = invade(game);
+    expect(game.state.objects[battle].protector).toBe(B);
+    game.state.players[A].life = 0;
+    game.state.players[B].life = 0;
+    game.advanceUntil((s) => s.players[A].hasLost && s.players[B].hasLost);
+    game.advanceUntil((s) => s.turn.number > 2);
+    expect(game.state.awaiting?.player).not.toBe(A);
+    expect(game.state.objects[battle].controller).toBe(A);
+  });
 });

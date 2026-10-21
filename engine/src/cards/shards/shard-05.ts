@@ -24,6 +24,7 @@ import _poolAnabaBodyguard from "../pool/anaba-bodyguard.js";
 import _poolAnimistsMight from "../pool/animists-might.js";
 import _poolAphemiaTheCacophony from "../pool/aphemia-the-cacophony.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
+import _poolAquaticIncursion from "../pool/aquatic-incursion.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArcboundTracker from "../pool/arcbound-tracker.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
@@ -384,6 +385,7 @@ import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
 import _poolRitualGuardian from "../pool/ritual-guardian.js";
 import _poolRiversRebuke from "../pool/rivers-rebuke.js";
+import _poolRiverwiseAugur from "../pool/riverwise-augur.js";
 import _poolRobTheHoard from "../pool/rob-the-hoard.js";
 import _poolRodeoPyromancers from "../pool/rodeo-pyromancers.js";
 import _poolRooftopPercher from "../pool/rooftop-percher.js";
@@ -590,6 +592,7 @@ const shard: CardShard = {
     _poolAnimistsMight,
     _poolAphemiaTheCacophony,
     _poolAphettoGrifter,
+    _poolAquaticIncursion,
     _poolArcboundCrusher,
     _poolArcboundTracker,
     _poolArchangelOfThune,
@@ -950,6 +953,7 @@ const shard: CardShard = {
     _poolRisingOfTheDay,
     _poolRitualGuardian,
     _poolRiversRebuke,
+    _poolRiverwiseAugur,
     _poolRobTheHoard,
     _poolRodeoPyromancers,
     _poolRooftopPercher,

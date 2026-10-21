@@ -150,6 +150,7 @@ import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
 import _poolEnchantresssPresence from "../pool/enchantresss-presence.js";
 import _poolEngulfingEruption from "../pool/engulfing-eruption.js";
 import _poolEnlightenedAscetic from "../pool/enlightened-ascetic.js";
+import _poolEnterTheUnknown from "../pool/enter-the-unknown.js";
 import _poolEnvoyOfTheAncestors from "../pool/envoy-of-the-ancestors.js";
 import _poolEscapeTunnel from "../pool/escape-tunnel.js";
 import _poolEsikaGodOfTheTree from "../pool/esika-god-of-the-tree.js";
@@ -198,6 +199,7 @@ import _poolGrowthChamberGuardian from "../pool/growth-chamber-guardian.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
 import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
+import _poolHardyVeteran from "../pool/hardy-veteran.js";
 import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHellMongrel from "../pool/hell-mongrel.js";
@@ -526,6 +528,7 @@ import _poolVoidBeckoner from "../pool/void-beckoner.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
+import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWallOff from "../pool/wall-off.js";
@@ -713,6 +716,7 @@ const shard: CardShard = {
     _poolEnchantresssPresence,
     _poolEngulfingEruption,
     _poolEnlightenedAscetic,
+    _poolEnterTheUnknown,
     _poolEnvoyOfTheAncestors,
     _poolEscapeTunnel,
     _poolEsikaGodOfTheTree,
@@ -761,6 +765,7 @@ const shard: CardShard = {
     _poolGurmagSwiftwing,
     _poolHakbalOfTheSurgingSoul,
     _poolHapatraTheDesertFrost,
+    _poolHardyVeteran,
     _poolHareRaising,
     _poolHarmonize,
     _poolHellMongrel,
@@ -1089,6 +1094,7 @@ const shard: CardShard = {
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,
     _poolVolcanicUpheaval,
+    _poolVraskasScorn,
     _poolWakerOfWaves,
     _poolWalkingCorpse,
     _poolWallOff,

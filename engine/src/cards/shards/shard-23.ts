@@ -14,6 +14,8 @@ import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
 import _poolAngelOfLight from "../pool/angel-of-light.js";
+import _poolAngrathTheFlameChained from "../pool/angrath-the-flame-chained.js";
+import _poolAngrathsAmbusher from "../pool/angraths-ambusher.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
 import _poolApothecaryStomper from "../pool/apothecary-stomper.js";
 import _poolAragornTheUniter from "../pool/aragorn-the-uniter.js";
@@ -405,6 +407,7 @@ import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScrollboost from "../pool/scrollboost.js";
+import _poolSeeRed from "../pool/see-red.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
 import _poolSelesnyaEulogist from "../pool/selesnya-eulogist.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
@@ -578,6 +581,8 @@ const shard: CardShard = {
     _poolAncestorsEmbrace,
     _poolAndurilFlameOfTheWest,
     _poolAngelOfLight,
+    _poolAngrathTheFlameChained,
+    _poolAngrathsAmbusher,
     _poolAngrathsRampage,
     _poolApothecaryStomper,
     _poolAragornTheUniter,
@@ -969,6 +974,7 @@ const shard: CardShard = {
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
     _poolScrollboost,
+    _poolSeeRed,
     _poolSeizedFromSlumber,
     _poolSelesnyaEulogist,
     _poolSelesnyaSignet,

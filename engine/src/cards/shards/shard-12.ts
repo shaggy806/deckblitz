@@ -176,6 +176,7 @@ import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
 import _poolFreedFromTheReal from "../pool/freed-from-the-real.js";
+import _poolFrilledDeathspitter from "../pool/frilled-deathspitter.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
@@ -730,6 +731,7 @@ const shard: CardShard = {
     _poolForumsFavor,
     _poolFoulRoads,
     _poolFreedFromTheReal,
+    _poolFrilledDeathspitter,
     _poolFrolickingFamiliar,
     _poolGalionElvenkingsButler,
     _poolGarrukWildspeaker,

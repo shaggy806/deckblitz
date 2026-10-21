@@ -22,6 +22,7 @@ import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
 import _poolAncientSpring from "../pool/ancient-spring.js";
+import _poolAndurilNarsilReforged from "../pool/anduril-narsil-reforged.js";
 import _poolAngelicDestiny from "../pool/angelic-destiny.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
@@ -133,6 +134,7 @@ import _poolDepravedHarvester from "../pool/depraved-harvester.js";
 import _poolDepressurize from "../pool/depressurize.js";
 import _poolDigUp from "../pool/dig-up.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
+import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
 import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.js";
@@ -339,6 +341,7 @@ import _poolOfOneMind from "../pool/of-one-mind.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
+import _poolOrazcaRelic from "../pool/orazca-relic.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
 import _poolOrderOfTheAlabasterHost from "../pool/order-of-the-alabaster-host.js";
@@ -393,6 +396,7 @@ import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
+import _poolRecklessRage from "../pool/reckless-rage.js";
 import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
@@ -625,6 +629,7 @@ const shard: CardShard = {
     _poolAnaconda,
     _poolAncestorsProphet,
     _poolAncientSpring,
+    _poolAndurilNarsilReforged,
     _poolAngelicDestiny,
     _poolAnnihilate,
     _poolAntQueen,
@@ -736,6 +741,7 @@ const shard: CardShard = {
     _poolDepressurize,
     _poolDigUp,
     _poolDimirLocket,
+    _poolDinosaurHunter,
     _poolDispel,
     _poolDistortionStrike,
     _poolDonatelloWayWithMachines,
@@ -942,6 +948,7 @@ const shard: CardShard = {
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
     _poolOneirophage,
+    _poolOrazcaRelic,
     _poolOrcishCannonade,
     _poolOrcishMechanics,
     _poolOrderOfTheAlabasterHost,
@@ -996,6 +1003,7 @@ const shard: CardShard = {
     _poolRazzleDazzler,
     _poolRebelSalvo,
     _poolRecklessAssault,
+    _poolRecklessRage,
     _poolRedcapHeelslasher,
     _poolRefresh,
     _poolRenderSpeechless,

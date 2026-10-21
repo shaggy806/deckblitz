@@ -53,6 +53,7 @@ import _poolBrightcapBadger from "../pool/brightcap-badger.js";
 import _poolBrimstoneTrebuchet from "../pool/brimstone-trebuchet.js";
 import _poolBrinelinTheMoonKraken from "../pool/brinelin-the-moon-kraken.js";
 import _poolBrotherhoodRegalia from "../pool/brotherhood-regalia.js";
+import _poolBuccaneersBravado from "../pool/buccaneers-bravado.js";
 import _poolBurningTreeEmissary from "../pool/burning-tree-emissary.js";
 import _poolBurningYardTrainer from "../pool/burning-yard-trainer.js";
 import _poolCabalStronghold from "../pool/cabal-stronghold.js";
@@ -154,6 +155,7 @@ import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolFogOnTheBarrowDowns from "../pool/fog-on-the-barrow-downs.js";
+import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
@@ -630,6 +632,7 @@ const shard: CardShard = {
     _poolBrimstoneTrebuchet,
     _poolBrinelinTheMoonKraken,
     _poolBrotherhoodRegalia,
+    _poolBuccaneersBravado,
     _poolBurningTreeEmissary,
     _poolBurningYardTrainer,
     _poolCabalStronghold,
@@ -731,6 +734,7 @@ const shard: CardShard = {
     _poolFlowOfKnowledge,
     _poolFodderCannon,
     _poolFogOnTheBarrowDowns,
+    _poolForerunnerOfTheHeralds,
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFromFatherToSon,

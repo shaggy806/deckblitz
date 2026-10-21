@@ -81,6 +81,7 @@ import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
+import _poolCleansingRay from "../pool/cleansing-ray.js";
 import _poolCleverImpersonator from "../pool/clever-impersonator.js";
 import _poolCloudDragon from "../pool/cloud-dragon.js";
 import _poolCodieVociferousCodex from "../pool/codie-vociferous-codex.js";
@@ -374,6 +375,7 @@ import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRisonaAsariCommander from "../pool/risona-asari-commander.js";
+import _poolRiverDarter from "../pool/river-darter.js";
 import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRoguesGallery from "../pool/rogues-gallery.js";
@@ -648,6 +650,7 @@ const shard: CardShard = {
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
     _poolCityOfDeath,
+    _poolCleansingRay,
     _poolCleverImpersonator,
     _poolCloudDragon,
     _poolCodieVociferousCodex,
@@ -941,6 +944,7 @@ const shard: CardShard = {
     _poolRevivingMelody,
     _poolRingwraiths,
     _poolRisonaAsariCommander,
+    _poolRiverDarter,
     _poolRiverSneak,
     _poolRobeOfStars,
     _poolRoguesGallery,

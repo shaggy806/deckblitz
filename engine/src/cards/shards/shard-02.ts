@@ -44,6 +44,7 @@ import _poolBefriendingTheMoths from "../pool/befriending-the-moths.js";
 import _poolBergStrider from "../pool/berg-strider.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
+import _poolBlazingHope from "../pool/blazing-hope.js";
 import _poolBleedingEdge from "../pool/bleeding-edge.js";
 import _poolBleedingEffect from "../pool/bleeding-effect.js";
 import _poolBlessedDefiance from "../pool/blessed-defiance.js";
@@ -101,6 +102,7 @@ import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
 import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
+import _poolCuriousObsession from "../pool/curious-obsession.js";
 import _poolCycleOfRenewal from "../pool/cycle-of-renewal.js";
 import _poolCycloneSummoner from "../pool/cyclone-summoner.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
@@ -194,6 +196,7 @@ import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
 import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
+import _poolGoldForgeGarrison from "../pool/gold-forge-garrison.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
 import _poolGravedig from "../pool/gravedig.js";
@@ -216,6 +219,7 @@ import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
+import _poolHornswoggle from "../pool/hornswoggle.js";
 import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
@@ -574,6 +578,7 @@ const shard: CardShard = {
     _poolBergStrider,
     _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
+    _poolBlazingHope,
     _poolBleedingEdge,
     _poolBleedingEffect,
     _poolBlessedDefiance,
@@ -631,6 +636,7 @@ const shard: CardShard = {
     _poolCribSwap,
     _poolCudgelTroll,
     _poolCulminationOfStudies,
+    _poolCuriousObsession,
     _poolCycleOfRenewal,
     _poolCycloneSummoner,
     _poolCyclonicRift,
@@ -724,6 +730,7 @@ const shard: CardShard = {
     _poolGiantAnkheg,
     _poolGlaringFleshraker,
     _poolGlimmerburst,
+    _poolGoldForgeGarrison,
     _poolGolgariLocket,
     _poolGorehornRaider,
     _poolGravedig,
@@ -746,6 +753,7 @@ const shard: CardShard = {
     _poolHobblingZombie,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
+    _poolHornswoggle,
     _poolHuntersEdge,
     _poolHurloonShaman,
     _poolHyraxTowerScout,

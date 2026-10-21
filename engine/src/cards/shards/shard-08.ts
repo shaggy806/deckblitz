@@ -26,6 +26,7 @@ import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
+import _poolAngrathsFury from "../pool/angraths-fury.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolAquaticIngress from "../pool/aquatic-ingress.js";
@@ -252,6 +253,7 @@ import _poolInvasionOfTheros from "../pool/invasion-of-theros.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolIronsoulEnforcer from "../pool/ironsoul-enforcer.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
+import _poolJadeBearer from "../pool/jade-bearer.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
@@ -620,6 +622,7 @@ const shard: CardShard = {
     _poolAmbushParatrooper,
     _poolAnaraWolvidFamiliar,
     _poolAngelicQuartermaster,
+    _poolAngrathsFury,
     _poolAnnieFlashTheVeteran,
     _poolAnzragTheQuakeMole,
     _poolAquaticIngress,
@@ -846,6 +849,7 @@ const shard: CardShard = {
     _poolIorethOfTheHealingHouse,
     _poolIronsoulEnforcer,
     _poolJackOfHeartsVolatileHero,
+    _poolJadeBearer,
     _poolJanJansenChaosCrafter,
     _poolJayemdaeTome,
     _poolJazalGoldmane,

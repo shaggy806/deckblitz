@@ -153,6 +153,7 @@ import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
 import _poolForceOfDespair from "../pool/force-of-despair.js";
+import _poolForerunnerOfTheCoalition from "../pool/forerunner-of-the-coalition.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
@@ -239,6 +240,7 @@ import _poolKorHalberd from "../pool/kor-halberd.js";
 import _poolKothFireOfResistance from "../pool/koth-fire-of-resistance.js";
 import _poolKothTheGeomancer from "../pool/koth-the-geomancer.js";
 import _poolKrenkoTinStreetKingpin from "../pool/krenko-tin-street-kingpin.js";
+import _poolKumenasAwakening from "../pool/kumenas-awakening.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
@@ -434,6 +436,7 @@ import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
 import _poolSuperState from "../pool/super-state.js";
 import _poolSwarmShambler from "../pool/swarm-shambler.js";
+import _poolSwiftWarden from "../pool/swift-warden.js";
 import _poolTailTheSuspect from "../pool/tail-the-suspect.js";
 import _poolTakenByNightmares from "../pool/taken-by-nightmares.js";
 import _poolTalismanOfConviction from "../pool/talisman-of-conviction.js";
@@ -698,6 +701,7 @@ const shard: CardShard = {
     _poolFloodedGrove,
     _poolFootlightFiend,
     _poolForceOfDespair,
+    _poolForerunnerOfTheCoalition,
     _poolForgingTheAnchor,
     _poolForumOfAmity,
     _poolFragmentOfKonda,
@@ -784,6 +788,7 @@ const shard: CardShard = {
     _poolKothFireOfResistance,
     _poolKothTheGeomancer,
     _poolKrenkoTinStreetKingpin,
+    _poolKumenasAwakening,
     _poolLapisOrbOfDragonkind,
     _poolLavaFlow,
     _poolLavaSpike,
@@ -979,6 +984,7 @@ const shard: CardShard = {
     _poolSunscapeMaster,
     _poolSuperState,
     _poolSwarmShambler,
+    _poolSwiftWarden,
     _poolTailTheSuspect,
     _poolTakenByNightmares,
     _poolTalismanOfConviction,

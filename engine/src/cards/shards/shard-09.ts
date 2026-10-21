@@ -390,6 +390,7 @@ import _poolRebuke from "../pool/rebuke.js";
 import _poolRecklessCharge from "../pool/reckless-charge.js";
 import _poolRecklessFireweaver from "../pool/reckless-fireweaver.js";
 import _poolReigningVictor from "../pool/reigning-victor.js";
+import _poolRekindlingPhoenix from "../pool/rekindling-phoenix.js";
 import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js";
 import _poolRepel from "../pool/repel.js";
 import _poolReplenish from "../pool/replenish.js";
@@ -426,6 +427,7 @@ import _poolScoutTheCity from "../pool/scout-the-city.js";
 import _poolScrybRanger from "../pool/scryb-ranger.js";
 import _poolScuttletide from "../pool/scuttletide.js";
 import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
+import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
@@ -504,6 +506,7 @@ import _poolThrashThreat from "../pool/thrash-threat.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
 import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
+import _poolTilonallisSummoner from "../pool/tilonallis-summoner.js";
 import _poolTimeStretch from "../pool/time-stretch.js";
 import _poolTitaniasBoon from "../pool/titanias-boon.js";
 import _poolTocasiasWelcome from "../pool/tocasias-welcome.js";
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolRecklessCharge,
     _poolRecklessFireweaver,
     _poolReigningVictor,
+    _poolRekindlingPhoenix,
     _poolRenariMerchantOfMarvels,
     _poolRepel,
     _poolReplenish,
@@ -1012,6 +1016,7 @@ const shard: CardShard = {
     _poolScrybRanger,
     _poolScuttletide,
     _poolScuzzbackScrounger,
+    _poolSeaLegs,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
     _poolSephirothPlanetsHeir,
@@ -1090,6 +1095,7 @@ const shard: CardShard = {
     _poolThrivingIsle,
     _poolThundermaneDragon,
     _poolThunderousSnapper,
+    _poolTilonallisSummoner,
     _poolTimeStretch,
     _poolTitaniasBoon,
     _poolTocasiasWelcome,

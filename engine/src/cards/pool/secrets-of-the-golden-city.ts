@@ -17,5 +17,4 @@ export default defineCard({
     then: { kind: "draw", amount: 3 },
     else: { kind: "draw", amount: 2 },
   },
-  resolve: null,
 });

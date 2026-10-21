@@ -9088,6 +9088,24 @@
   },
   "effect:damage-from-created-token": {
    "example": "Chainer's Torment"
+  },
+  "static:lose-all-abilities-except-mana": {
+   "example": "Blood Sun"
+  },
+  "condition:lost-life-last-turn": {
+   "example": "Paladin of Atonement"
+  },
+  "effect:impulse-exile-owner-of-trigger-object": {
+   "example": "Dead Man's Chest"
+  },
+  "replacement:token-control-redirect-this-turn": {
+   "example": "Crafty Cutpurse"
+  },
+  "amount:exiled-with-source-power": {
+   "example": "Bishop of Binding"
+  },
+  "cost:put-self-on-library-bottom": {
+   "example": "Timestream Navigator"
   }
  }
 }

@@ -526,6 +526,7 @@ import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
 import _poolVolcanicSalvo from "../pool/volcanic-salvo.js";
 import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
+import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
@@ -1084,6 +1085,7 @@ const shard: CardShard = {
     _poolVolcanicFissure,
     _poolVolcanicSalvo,
     _poolVoyagerGlidecar,
+    _poolVraskaSchemingGorgon,
     _poolWallOfStone,
     _poolWarriorsHonor,
     _poolWaxenShapethief,
