@@ -86,6 +86,9 @@ export interface PublicPlayerInfo {
   /** The enduring story designation (rule 702.195b — storied), for the rest
    * of the game once had. */
   readonly enduringStory: boolean;
+  /** The city's blessing (rule 702.131 — ascend), for the rest of the game
+   * once had. */
+  readonly citysBlessing: boolean;
   /** Their speed (rule 702.179), 1 to 4 — max speed at 4 — or `null` while
    * they have none (702.179b). Public: each player tracks it openly. */
   readonly speed: number | null;
@@ -865,6 +868,7 @@ function viewForUncached(
       energy: playerState.energy,
       counters: { ...playerState.counters },
       enduringStory: playerState.enduringStory === true,
+      citysBlessing: playerState.citysBlessing === true,
       speed: playerState.speed ?? null,
       dungeon: (() => {
         const current = playerState.dungeon;

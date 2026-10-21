@@ -111,7 +111,7 @@ export const KEYWORDS = {
   flying: "flying", reach: "reach", haste: "haste", vigilance: "vigilance", defender: "defender",
   "first strike": "first-strike", "double strike": "double-strike", trample: "trample",
   deathtouch: "deathtouch", lifelink: "lifelink", menace: "menace", indestructible: "indestructible",
-  hexproof: "hexproof", shroud: "shroud", flash: "flash", fear: "fear", intimidate: "intimidate", skulk: "skulk", riot: "riot", storied: "storied",
+  hexproof: "hexproof", shroud: "shroud", flash: "flash", fear: "fear", intimidate: "intimidate", skulk: "skulk", riot: "riot", storied: "storied", ascend: "ascend",
   "start your engines!": "start-your-engines",
   infect: "infect", wither: "wither",
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
@@ -2087,6 +2087,11 @@ export function parseFace(face, ctx = {}) {
         ability.condition = { kind: "coven" };
         return "";
       });
+      // Ascend's "Activate only if you have the city's blessing" (Orazca Relic).
+      rest = rest.replace(/ Activate only if you have the city's blessing\.$/, () => {
+        ability.condition = { kind: "citys-blessing" };
+        return "";
+      });
       if (/Activate only /.test(rest)) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
@@ -2340,7 +2345,13 @@ const CELEBRATION_CONDITION = { kind: "turn-history", what: "entered", filter: {
  * becomes (`parseStatic`). */
 const STATIC_CONDITION_SUFFIXES = [
   [" as long as two or more nonland permanents entered the battlefield under your control this turn.", CELEBRATION_CONDITION],
+  // Ascend (rule 702.131 — Rivals of Ixalan): "~ gets +2/+2 as long as you
+  // have the city's blessing" (Dusk Charger).
+  [" as long as you have the city's blessing.", { kind: "citys-blessing" }],
 ];
+/** The same, leading: "As long as you have the city's blessing, ~ has
+ * hexproof" (Slippery Scoundrel). */
+const STATIC_CONDITION_PREFIXES = [["As long as you have the city's blessing, ", { kind: "citys-blessing" }]];
 
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
@@ -2379,6 +2390,8 @@ const INTERVENING_IFS = {
   "if you've completed a dungeon,": { kind: "completed-dungeon" },
   // Rule 700.8c (Zendikar Rising).
   "if you have a full party,": { kind: "full-party" },
+  // Rule 702.131 (Rivals of Ixalan's ascend).
+  "if you have the city's blessing,": { kind: "citys-blessing" },
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the
@@ -2535,6 +2548,12 @@ function parseStatic(line, text) {
   for (const [suffix, condition] of STATIC_CONDITION_SUFFIXES) {
     if (!line.endsWith(suffix)) continue;
     const inner = parseStatic(`${line.slice(0, -suffix.length)}.`, text);
+    if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
+  for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
+    if (!line.startsWith(prefix)) continue;
+    const rest = line.slice(prefix.length);
+    const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }
   // Rule 722.3a — `entersPrepared()`.

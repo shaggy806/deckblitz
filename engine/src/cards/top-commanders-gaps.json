@@ -373,7 +373,8 @@
   "keyword:evoke-alternative-non-mana-cost",
   "keyword:entwine",
   "keyword:spectacle",
-  "keyword:jump-start"
+  "keyword:jump-start",
+  "keyword:ascend"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

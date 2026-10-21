@@ -369,6 +369,7 @@ import _poolReefRoads from "../pool/reef-roads.js";
 import _poolRepelTheVile from "../pool/repel-the-vile.js";
 import _poolResistanceSkywarden from "../pool/resistance-skywarden.js";
 import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
+import _poolResplendentGriffin from "../pool/resplendent-griffin.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
 import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
@@ -931,6 +932,7 @@ const shard: CardShard = {
     _poolRepelTheVile,
     _poolResistanceSkywarden,
     _poolResoluteReinforcements,
+    _poolResplendentGriffin,
     _poolRestlessReef,
     _poolReveillark,
     _poolReviveTheShire,

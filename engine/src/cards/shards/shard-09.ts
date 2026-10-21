@@ -295,6 +295,7 @@ import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
 import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
+import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
@@ -445,6 +446,7 @@ import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
 import _poolSlimefootTheStowaway from "../pool/slimefoot-the-stowaway.js";
 import _poolSlithFirewalker from "../pool/slith-firewalker.js";
 import _poolSneakingGuide from "../pool/sneaking-guide.js";
+import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
@@ -879,6 +881,7 @@ const shard: CardShard = {
     _poolMammothBellow,
     _poolManaGeyser,
     _poolManaLeak,
+    _poolMausoleumHarpy,
     _poolMemoryWorm,
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
@@ -1029,6 +1032,7 @@ const shard: CardShard = {
     _poolSlimefootTheStowaway,
     _poolSlithFirewalker,
     _poolSneakingGuide,
+    _poolSnubhornSentry,
     _poolSoaringDrake,
     _poolSoaringShowOff,
     _poolSparkTrooper,

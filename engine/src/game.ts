@@ -16336,6 +16336,11 @@ export class Game {
     }
 
     this.withDecisionSource(id, () => {
+      // Ascend on an instant or sorcery (rule 702.131a) is a spell ability,
+      // printed first, so it's followed before the rest of the text.
+      if (!this.isPermanentSpell(def) && computeCharacteristics(this.state, this.registry, id).keywords.has("ascend")) {
+        this.ascend(object.controller);
+      }
       if (chosenModes !== undefined && def.castModal !== null) {
         // A targeted modal spell (rule 700.2 — ROADMAP Phase 11 EG-2): each
         // chosen mode applies with its own slice of `targets`, a target gone
@@ -32181,6 +32186,8 @@ export class Game {
       // Rule 702.195c: an enduring story is had before the game looks for
       // what triggered.
       if (this.grantEnduringStories()) changed = true;
+      // Rule 702.131d: likewise the city's blessing.
+      if (this.grantCitysBlessings()) changed = true;
       // A dungeon finished on its bottommost room is completed (rule 309.6).
       if (this.completeFinishedDungeons()) changed = true;
 
@@ -35172,6 +35179,43 @@ export class Game {
       granted = true;
     }
     return granted;
+  }
+
+  /**
+   * Ascend on a permanent (rule 702.131b): a player who controls a permanent
+   * with ascend and ten or more permanents gets the city's blessing. Run in
+   * each state-based check, as storied is, so it's had before the game looks
+   * for what triggered (702.131d). Whether anyone got it.
+   */
+  private grantCitysBlessings(): boolean {
+    let granted = false;
+    for (const player of this.state.turnOrder) {
+      if (this.state.players[player]?.citysBlessing === true) continue;
+      const ascends = this.state.zones.shared.battlefield.some(
+        (id) =>
+          this.state.objects[id].controller === player &&
+          computeCharacteristics(this.state, this.registry, id).keywords.has("ascend"),
+      );
+      if (ascends && this.ascend(player)) granted = true;
+    }
+    return granted;
+  }
+
+  /**
+   * Ascend (rule 702.131): if `player` controls ten or more permanents (each
+   * token of a stack counting) and doesn't have the city's blessing, they
+   * get it for the rest of the game. Whether they got it now.
+   */
+  private ascend(player: PlayerId): boolean {
+    const playerState = this.state.players[player];
+    if (playerState === undefined || playerState.citysBlessing === true || playerState.hasLost) return false;
+    const battlefield = this.state.zones.shared.battlefield;
+    const controlled = battlefield.filter((id) => this.state.objects[id].controller === player);
+    if (permanentCount(this.state, controlled) < 10) return false;
+    playerState.citysBlessing = true;
+    invalidateComputedCache();
+    this.emit({ type: "citys-blessing", player });
+    return true;
   }
 
   /**

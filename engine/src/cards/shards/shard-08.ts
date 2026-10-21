@@ -414,6 +414,7 @@ import _poolSeaHag from "../pool/sea-hag.js";
 import _poolSeaScryer from "../pool/sea-scryer.js";
 import _poolSeasonalRitual from "../pool/seasonal-ritual.js";
 import _poolSecretRendezvous from "../pool/secret-rendezvous.js";
+import _poolSecretsOfTheGoldenCity from "../pool/secrets-of-the-golden-city.js";
 import _poolSeersLantern from "../pool/seers-lantern.js";
 import _poolSegovianAngel from "../pool/segovian-angel.js";
 import _poolSeizeTheInitiative from "../pool/seize-the-initiative.js";
@@ -1007,6 +1008,7 @@ const shard: CardShard = {
     _poolSeaScryer,
     _poolSeasonalRitual,
     _poolSecretRendezvous,
+    _poolSecretsOfTheGoldenCity,
     _poolSeersLantern,
     _poolSegovianAngel,
     _poolSeizeTheInitiative,

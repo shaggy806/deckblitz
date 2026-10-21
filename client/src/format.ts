@@ -30,6 +30,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'must-be-blocked-if-able': 'must be blocked if able',
   'cant-attack-owner': "can't attack its owner",
   'doesnt-untap': "doesn't untap during its controller's untap step",
+  'cant-be-blocked': "can't be blocked",
 }
 
 const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
@@ -172,6 +173,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} goes on an adventure (exiled)`
     case 'enduring-story':
       return `${who(event.player)} has an enduring story`
+    case 'citys-blessing':
+      return `${who(event.player)} gets the city's blessing`
     case 'speed-changed':
       return event.from === undefined
         ? `${who(event.player)} starts their engines — speed ${event.speed}`

@@ -5146,3 +5146,17 @@ card is exiled is chosen once the spell is on the stack (601.2h)
   then only Swords to Plowshares, picked without asking if it's the only one. No land taps, you
   lose 1 life, the Bears are countered, the Giant is exiled and its controller gains 3 life, and
   Solitude is sacrificed. Check at ~768px tall.
+
+### Ascend and the city's blessing
+
+*A careful rules call* — ascend (rule 702.131): on a permanent, you get the city's blessing for
+the rest of the game the moment you control ten or more permanents; on a sorcery, as it resolves,
+before the rest of its text
+
+- **Setup:** Your precombat main. Your battlefield: Dusk Charger and eight Islands; in hand
+  Secrets of the Golden City and an Island.
+- **Do:** Play the Island, then cast Secrets of the Golden City.
+- **Check:** Your player panel shows a 🏛️ badge ("The city's blessing…" on hover) as soon as
+  the Island is played, the log says you get the city's blessing, and Dusk Charger shows 5/5.
+  Secrets draws three cards, not two. The badge stays after Islands leave. Check at ~768px tall,
+  in a 2- and a 4-player room.

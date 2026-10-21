@@ -1826,6 +1826,11 @@ export interface PlayerState {
    * the game once this player controls a permanent with storied and three or
    * more artifacts, Sagas and/or legendary permanents (`Game.grantEnduringStories`). */
   enduringStory?: boolean;
+  /** The city's blessing (rule 702.131c): had for the rest of the game once
+   * this player controls ten or more permanents as a spell with ascend
+   * resolves or while they control a permanent with ascend
+   * (`Game.grantCitysBlessings`). */
+  citysBlessing?: boolean;
   /**
    * This player's speed (rule 702.179): absent while they have none (rule
    * 702.179b — a player has no speed until a rule or effect sets it), then

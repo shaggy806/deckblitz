@@ -224,6 +224,7 @@ import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
+import _poolJadelightRanger from "../pool/jadelight-ranger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
@@ -787,6 +788,7 @@ const shard: CardShard = {
     _poolInvasionOfTolvada,
     _poolIronwillForger,
     _poolIsarethTheAwakener,
+    _poolJadelightRanger,
     _poolJeskaiDevotee,
     _poolJourneyToOblivion,
     _poolJukaiNaturalist,

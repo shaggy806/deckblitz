@@ -119,6 +119,7 @@ import _poolDakmorPlague from "../pool/dakmor-plague.js";
 import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnhartMentor from "../pool/dawnhart-mentor.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
+import _poolDeadeyeBrawler from "../pool/deadeye-brawler.js";
 import _poolDecommission from "../pool/decommission.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
@@ -699,6 +700,7 @@ const shard: CardShard = {
     _poolDarksteelForge,
     _poolDawnhartMentor,
     _poolDawnsireSunstarDreadnought,
+    _poolDeadeyeBrawler,
     _poolDecommission,
     _poolDefacingDuskmage,
     _poolDefendersOfHumanity,

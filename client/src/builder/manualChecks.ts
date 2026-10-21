@@ -3043,4 +3043,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  // --- Ascend (2026-10-21) ----------------------------------------------------
+  preset(
+    "Ascend and the city's blessing",
+    board({
+      you: {
+        bf: ['Dusk Charger', 'Island*8'],
+        hand: ['Secrets of the Golden City', 'Island'],
+      },
+    }),
+  ),
 ]

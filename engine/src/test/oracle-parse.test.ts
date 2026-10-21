@@ -1171,6 +1171,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("ascend and the city's blessing (rule 702.131)", () => {
+    const reminder = "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)";
+    const charger = face(`${reminder}\n~ gets +2/+2 as long as you have the city's blessing.`, "Creature — Horse");
+    expect(charger.keywords).toEqual(["ascend"]);
+    expect(charger.static[0]).toMatchObject({ grantPt: [2, 2], condition: { kind: "citys-blessing" } });
+    expect(charger.complete).toBe(true);
+    const griffin = face(`${reminder}\nWhenever ~ attacks, if you have the city's blessing, put a +1/+1 counter on it.`, "Creature — Griffin");
+    expect(griffin.triggered[0].condition).toEqual({ kind: "citys-blessing" });
+    const arch = face(`${reminder}\n{5}, {T}: Draw a card. Activate only if you have the city's blessing.`, "Land");
+    expect(arch.activated[0].condition).toEqual({ kind: "citys-blessing" });
+  });
+
   it("kicker on a permanent (rule 702.33): the cost, and 'if it was kicked' on its enters trigger", () => {
     const knight = face(
       "Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nWhen this creature enters, if it was kicked, target player discards two cards.",

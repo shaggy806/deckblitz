@@ -60,6 +60,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Storied',
     text: 'If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.',
   },
+  ascend: {
+    name: 'Ascend',
+    text: "If you control ten or more permanents, you get the city's blessing for the rest of the game.",
+  },
   riot: { name: 'Riot', text: 'Enters with your choice of a +1/+1 counter or haste.' },
   infect: {
     name: 'Infect',

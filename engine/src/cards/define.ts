@@ -196,6 +196,13 @@ export type Keyword =
    * permanent's current keywords, so one that lost its abilities grants
    * nothing. */
   | "storied"
+  /** Ascend (rule 702.131): on a permanent a static ability — any time its
+   * controller controls ten or more permanents, they get the city's blessing
+   * for the rest of the game (`PlayerState.citysBlessing`,
+   * `Game.grantCitysBlessings`, read off the permanent's current keywords);
+   * on an instant or sorcery a spell ability, its first instruction as it
+   * resolves (702.131a). */
+  | "ascend"
   /** Infect (rule 702.90): damage this deals to a player gives them that
    * many poison counters instead of costing life (120.3b), and damage it
    * deals to a creature is that many -1/-1 counters instead of marked damage
@@ -631,6 +638,10 @@ export type StaticCondition =
    * "as long as you have an enduring story" (Fíli the Pathfinder), "if you
    * have an enduring story" (Balin, Loremaster). */
   | { readonly kind: "enduring-story" }
+  /** You have the city's blessing (rule 702.131 — ascend's designation): "as
+   * long as you have the city's blessing" (Dusk Charger), "if you have the
+   * city's blessing" (Resplendent Griffin). */
+  | { readonly kind: "citys-blessing" }
   /**
    * A player's speed (rule 702.179), inclusive bounds — 0 for a player with
    * none (702.179f). "Max speed — [ability]" and "if you have max speed" are

@@ -431,6 +431,7 @@ import _poolSimplify from "../pool/simplify.js";
 import _poolSkewerTheCritics from "../pool/skewer-the-critics.js";
 import _poolSkullslitherWorm from "../pool/skullslither-worm.js";
 import _poolSkyTether from "../pool/sky-tether.js";
+import _poolSkymarcherAspirant from "../pool/skymarcher-aspirant.js";
 import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
 import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
@@ -1014,6 +1015,7 @@ const shard: CardShard = {
     _poolSkewerTheCritics,
     _poolSkullslitherWorm,
     _poolSkyTether,
+    _poolSkymarcherAspirant,
     _poolSkyshroudArcher,
     _poolSkywinderDrake,
     _poolSlashTheRanks,

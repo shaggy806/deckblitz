@@ -297,6 +297,12 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** A player got the city's blessing (rule 702.131 — ascend), for the
+       * rest of the game. */
+      readonly type: "citys-blessing";
+      readonly player: PlayerId;
+    })
+  | (Base & {
       /** A player's speed was set (rule 702.179): to 1 by start your
        * engines! (704.5aa — `from` absent: they had none), or up by its
        * inherent triggered ability (702.179d). */

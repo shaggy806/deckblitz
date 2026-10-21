@@ -235,6 +235,11 @@ export function PlayerPanel({
             📜
           </span>
         ) : null}
+        {info.citysBlessing ? (
+          <span className="pp-story" title="The city's blessing (ascend, rule 702.131), for the rest of the game">
+            🏛️
+          </span>
+        ) : null}
         {info.commanderDamageTaken.length > 0 ? (
           <span className="pp-cmdr-dmg">
             {info.commanderDamageTaken.map((d) => (

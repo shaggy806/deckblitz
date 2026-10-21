@@ -61,6 +61,7 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   'start-your-engines': '', // ms-ability-crew
   // Storied has no icon of its own; the Saga one — Sagas are what it counts.
   storied: '', // ms-saga
+  ascend: '', // ms-ability-ascend
   // No flanking icon anywhere in the font; it's a block trigger, so the
   // combat-condition one.
   flanking: '', // ms-ability-combat-condition
