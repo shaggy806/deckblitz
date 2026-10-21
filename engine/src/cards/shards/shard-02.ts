@@ -44,6 +44,7 @@ import _poolBefriendingTheMoths from "../pool/befriending-the-moths.js";
 import _poolBergStrider from "../pool/berg-strider.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
+import _poolBleedingEdge from "../pool/bleeding-edge.js";
 import _poolBleedingEffect from "../pool/bleeding-effect.js";
 import _poolBlessedDefiance from "../pool/blessed-defiance.js";
 import _poolBlightMound from "../pool/blight-mound.js";
@@ -564,6 +565,7 @@ const shard: CardShard = {
     _poolBergStrider,
     _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
+    _poolBleedingEdge,
     _poolBleedingEffect,
     _poolBlessedDefiance,
     _poolBlightMound,

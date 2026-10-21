@@ -411,6 +411,7 @@ import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
 import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
+import _poolSilentSubmersible from "../pool/silent-submersible.js";
 import _poolSilkNet from "../pool/silk-net.js";
 import _poolSilversmoteGhoul from "../pool/silversmote-ghoul.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
@@ -478,6 +479,7 @@ import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
 import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
+import _poolTibaltRakishInstigator from "../pool/tibalt-rakish-instigator.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
 import _poolTimeBeetle from "../pool/time-beetle.js";
@@ -963,6 +965,7 @@ const shard: CardShard = {
     _poolShinyImpetus,
     _poolSibsigAppraiser,
     _poolSibyllineSoothsayer,
+    _poolSilentSubmersible,
     _poolSilkNet,
     _poolSilversmoteGhoul,
     _poolSinisterCryologist,
@@ -1030,6 +1033,7 @@ const shard: CardShard = {
     _poolThorin,
     _poolThunderLasso,
     _poolThunderingBroodwagon,
+    _poolTibaltRakishInstigator,
     _poolTidalKraken,
     _poolTigraFelineFury,
     _poolTimeBeetle,

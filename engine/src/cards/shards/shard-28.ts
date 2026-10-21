@@ -61,6 +61,7 @@ import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
 import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
+import _poolBondOfPassion from "../pool/bond-of-passion.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBramblesnap from "../pool/bramblesnap.js";
@@ -124,6 +125,7 @@ import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
+import _poolDomrisAmbush from "../pool/domris-ambush.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
 import _poolDreamtailHeron from "../pool/dreamtail-heron.js";
@@ -274,6 +276,7 @@ import _poolMineWorker from "../pool/mine-worker.js";
 import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
+import _poolMizziumTank from "../pool/mizzium-tank.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
 import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
 import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
@@ -371,6 +374,7 @@ import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
 import _poolRootwalla from "../pool/rootwalla.js";
 import _poolRoseTyler from "../pool/rose-tyler.js";
+import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
@@ -605,6 +609,7 @@ const shard: CardShard = {
     _poolBloodbraidChallenger,
     _poolBloodtitheCollector,
     _poolBoarQPine,
+    _poolBondOfPassion,
     _poolBoommobile,
     _poolBountyOfMight,
     _poolBramblesnap,
@@ -668,6 +673,7 @@ const shard: CardShard = {
     _poolDismantlingWave,
     _poolDispersalTechnician,
     _poolDoggedDetective,
+    _poolDomrisAmbush,
     _poolDragoonsWyvern,
     _poolDreamPillager,
     _poolDreamtailHeron,
@@ -818,6 +824,7 @@ const shard: CardShard = {
     _poolMinecartDaredevil,
     _poolMirrorworks,
     _poolMistfireAdept,
+    _poolMizziumTank,
     _poolMoleManMoloidMaster,
     _poolMoltenManInfernoIncarnate,
     _poolMonasteryMessenger,
@@ -915,6 +922,7 @@ const shard: CardShard = {
     _poolRootbreakerWurm,
     _poolRootwalla,
     _poolRoseTyler,
+    _poolRubblebeltRioters,
     _poolRuneclawBear,
     _poolRunehornHellkite,
     _poolRustedSlasher,

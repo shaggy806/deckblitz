@@ -142,6 +142,7 @@ import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
+import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
 import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
@@ -203,6 +204,7 @@ import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
+import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
@@ -515,6 +517,7 @@ import _poolVodalianMage from "../pool/vodalian-mage.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
 import _poolVoldarenAmbusher from "../pool/voldaren-ambusher.js";
 import _poolVowOfTorment from "../pool/vow-of-torment.js";
+import _poolVraskaSwarmsEminence from "../pool/vraska-swarms-eminence.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
@@ -558,6 +561,7 @@ import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexia
 import _tokensReflectionToken from "../tokens/reflection-token.js";
 import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automated-assembly-line.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
+import _tokensVojaFriendToElves from "../tokens/voja-friend-to-elves.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
 import _tokensZombieTokenCrowdedCrypt from "../tokens/zombie-token-crowded-crypt.js";
 import _tokensZombieTokenTransmograntAltar from "../tokens/zombie-token-transmogrant-altar.js";
@@ -703,6 +707,7 @@ const shard: CardShard = {
     _poolEntropicDecay,
     _poolErrantStreetArtist,
     _poolEshkiDragonclaw,
+    _poolEternalTaskmaster,
     _poolEtheriumSpinner,
     _poolEverquillPhoenix,
     _poolEvolutionCharm,
@@ -764,6 +769,7 @@ const shard: CardShard = {
     _poolGraftedWargear,
     _poolGrahamObrien,
     _poolGraspOfPhantoms,
+    _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,
     _poolGuardianGladewalker,
@@ -1076,6 +1082,7 @@ const shard: CardShard = {
     _poolVolcanicStrength,
     _poolVoldarenAmbusher,
     _poolVowOfTorment,
+    _poolVraskaSwarmsEminence,
     _poolWallOfDenial,
     _poolWarBehemoth,
     _poolWarEffort,
@@ -1121,6 +1128,7 @@ const shard: CardShard = {
     _tokensReflectionToken,
     _tokensRobotTokenAutomatedAssemblyLine,
     _tokensTreasureToken,
+    _tokensVojaFriendToElves,
     _tokensZombieKnightToken,
     _tokensZombieTokenCrowdedCrypt,
     _tokensZombieTokenTransmograntAltar,

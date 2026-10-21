@@ -68,6 +68,7 @@ import _poolBrambleArmor from "../pool/bramble-armor.js";
 import _poolBrandywineFarmer from "../pool/brandywine-farmer.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
+import _poolCallousDismissal from "../pool/callous-dismissal.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainRipleyVance from "../pool/captain-ripley-vance.js";
@@ -436,6 +437,7 @@ import _poolSleepWithTheFishes from "../pool/sleep-with-the-fishes.js";
 import _poolSliceInTwain from "../pool/slice-in-twain.js";
 import _poolSmokeSpiritsAid from "../pool/smoke-spirits-aid.js";
 import _poolSmokespewInvoker from "../pool/smokespew-invoker.js";
+import _poolSnarespinner from "../pool/snarespinner.js";
 import _poolSnowfieldSinkhole from "../pool/snowfield-sinkhole.js";
 import _poolSoulManipulation from "../pool/soul-manipulation.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
@@ -634,6 +636,7 @@ const shard: CardShard = {
     _poolBrandywineFarmer,
     _poolBrindleBoar,
     _poolBrotherhoodAmbushers,
+    _poolCallousDismissal,
     _poolCampusCrier,
     _poolCandelabraOfTawnos,
     _poolCaptainRipleyVance,
@@ -1002,6 +1005,7 @@ const shard: CardShard = {
     _poolSliceInTwain,
     _poolSmokeSpiritsAid,
     _poolSmokespewInvoker,
+    _poolSnarespinner,
     _poolSnowfieldSinkhole,
     _poolSoulManipulation,
     _poolSowerOfTemptation,

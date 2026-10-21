@@ -179,6 +179,7 @@ import _poolHawkeyeBowslinger from "../pool/hawkeye-bowslinger.js";
 import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
+import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
@@ -193,6 +194,7 @@ import _poolIrrigationDitch from "../pool/irrigation-ditch.js";
 import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
 import _poolIxhelScionOfAtraxa from "../pool/ixhel-scion-of-atraxa.js";
+import _poolJacesProjection from "../pool/jaces-projection.js";
 import _poolJadedSellSword from "../pool/jaded-sell-sword.js";
 import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
 import _poolJavelinOfLightning from "../pool/javelin-of-lightning.js";
@@ -669,6 +671,7 @@ const shard: CardShard = {
     _poolHazelsNocturne,
     _poolHealersHawk,
     _poolHengeOfRamos,
+    _poolHeraldOfTheDreadhorde,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,
     _poolHowlingFury,
@@ -683,6 +686,7 @@ const shard: CardShard = {
     _poolIsshinTwoHeavensAsOne,
     _poolIvyGleefulSpellthief,
     _poolIxhelScionOfAtraxa,
+    _poolJacesProjection,
     _poolJadedSellSword,
     _poolJandorsSaddlebags,
     _poolJavelinOfLightning,

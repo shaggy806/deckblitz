@@ -231,6 +231,7 @@ import _poolInventorsFair from "../pool/inventors-fair.js";
 import _poolInvisibleStalker from "../pool/invisible-stalker.js";
 import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
 import _poolItThatHeraldsTheEnd from "../pool/it-that-heralds-the-end.js";
+import _poolJaceArcaneStrategist from "../pool/jace-arcane-strategist.js";
 import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
@@ -461,6 +462,7 @@ import _poolTemurBanner from "../pool/temur-banner.js";
 import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
+import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLastRoninsTechnique from "../pool/the-last-ronins-technique.js";
 import _poolTheLocustGod from "../pool/the-locust-god.js";
@@ -473,6 +475,7 @@ import _poolThraxodemon from "../pool/thraxodemon.js";
 import _poolThrenodySinger from "../pool/threnody-singer.js";
 import _poolThrivingSkyclaw from "../pool/thriving-skyclaw.js";
 import _poolThroatseeker from "../pool/throatseeker.js";
+import _poolThunderDrake from "../pool/thunder-drake.js";
 import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
@@ -489,6 +492,7 @@ import _poolTragicFall from "../pool/tragic-fall.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
+import _poolTrustedPegasus from "../pool/trusted-pegasus.js";
 import _poolTukatongueThallid from "../pool/tukatongue-thallid.js";
 import _poolTunnelingGeopede from "../pool/tunneling-geopede.js";
 import _poolTurnStones from "../pool/turn-stones.js";
@@ -808,6 +812,7 @@ const shard: CardShard = {
     _poolInvisibleStalker,
     _poolIpnuRivulet,
     _poolItThatHeraldsTheEnd,
+    _poolJaceArcaneStrategist,
     _poolJaceWielderOfMysteries,
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
@@ -1038,6 +1043,7 @@ const shard: CardShard = {
     _poolTemurTawnyback,
     _poolTerashisVerdict,
     _poolTerohsFaithful,
+    _poolTeyoTheShieldmage,
     _poolTheFalconSamWilson,
     _poolTheLastRoninsTechnique,
     _poolTheLocustGod,
@@ -1050,6 +1056,7 @@ const shard: CardShard = {
     _poolThrenodySinger,
     _poolThrivingSkyclaw,
     _poolThroatseeker,
+    _poolThunderDrake,
     _poolThunderhawkGunship,
     _poolThunderingTanadon,
     _poolTigerSharkAbyssalHunter,
@@ -1066,6 +1073,7 @@ const shard: CardShard = {
     _poolTreeOfPerdition,
     _poolTriplicateTitan,
     _poolTroopOfPonies,
+    _poolTrustedPegasus,
     _poolTukatongueThallid,
     _poolTunnelingGeopede,
     _poolTurnStones,

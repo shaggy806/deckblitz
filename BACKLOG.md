@@ -122,9 +122,9 @@ section keeps only what to do next.
   "enchanted creature" in an effect; batch 119 the cards that unblocked; batch 120 Throne of
   Eldraine, on "enchanted creature doesn't untap" and adamant, with the earlier cards both
   unblocked; batch 121 Commander 2019 and Core Set 2020, no engine change; batch 122 Modern
-  Horizons, on pitch costs); **next, War of the Spark** (WAR — `npm run cards:sets -w engine --
-  --next 60`). Entwine now waits on ten cards (`keyword:entwine` — Tooth and Nail, Kaya's Guile,
-  Goblin War Party, Savage Beating, Gravedig, …). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
+  Horizons, on pitch costs; batch 123 War of the Spark, with entwine built beside it); **next,
+  Ravnica Allegiance** (RNA, 139 left — `npm run cards:sets -w engine -- --next 60`). Leading
+  blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
   long as it stays tapped" (`effect:duration-while-source-tapped`, 3), an Aura's lasting "loses
   all abilities" (`static:static-lose-all-abilities`), and "put into a graveyard from the
   battlefield this turn" (`filter:put-into-graveyard-from-battlefield-this-turn` — Salvager of

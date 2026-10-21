@@ -65,6 +65,8 @@ import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBlueMarvelAdamBrashear from "../pool/blue-marvel-adam-brashear.js";
 import _poolBodyDropper from "../pool/body-dropper.js";
+import _poolBondOfFlourishing from "../pool/bond-of-flourishing.js";
+import _poolBondOfInsight from "../pool/bond-of-insight.js";
 import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
 import _poolBrassSquire from "../pool/brass-squire.js";
 import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
@@ -619,6 +621,8 @@ const shard: CardShard = {
     _poolBlossomingTortoise,
     _poolBlueMarvelAdamBrashear,
     _poolBodyDropper,
+    _poolBondOfFlourishing,
+    _poolBondOfInsight,
     _poolBraidsCabalMinion,
     _poolBrassSquire,
     _poolBreakUnderPressure,

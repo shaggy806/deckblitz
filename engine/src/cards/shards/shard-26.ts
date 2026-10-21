@@ -58,6 +58,7 @@ import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
+import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
@@ -145,6 +146,7 @@ import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
+import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFearlessLiberator from "../pool/fearless-liberator.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
@@ -479,6 +481,7 @@ import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
@@ -600,6 +603,7 @@ const shard: CardShard = {
     _poolBogSmugglers,
     _poolBogardanDragonheart,
     _poolBoldImpaler,
+    _poolBondOfRevival,
     _poolBoneyardLurker,
     _poolBorealShelf,
     _poolBreakneckBerserker,
@@ -687,6 +691,7 @@ const shard: CardShard = {
     _poolExtinguishTheLight,
     _poolFadingHope,
     _poolFblthpImpossiblyLost,
+    _poolFblthpTheLost,
     _poolFearOfDeath,
     _poolFearlessLiberator,
     _poolFeloniousRage,
@@ -1021,6 +1026,7 @@ const shard: CardShard = {
     _poolTrevasCharm,
     _poolTribuneOfRot,
     _poolTritonShorestalker,
+    _poolTurretOgre,
     _poolTwinshotSniper,
     _poolTwistedFates,
     _poolUktabiOrangutan,

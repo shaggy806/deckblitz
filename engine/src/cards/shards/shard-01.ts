@@ -295,6 +295,7 @@ import _poolNestingGrounds from "../pool/nesting-grounds.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
+import _poolNoEscape from "../pool/no-escape.js";
 import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
@@ -822,6 +823,7 @@ const shard: CardShard = {
     _poolNightscapeMaster,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
+    _poolNoEscape,
     _poolNoOneLeftBehind,
     _poolNoWayOut,
     _poolNornsWellspring,

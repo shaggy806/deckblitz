@@ -67,6 +67,7 @@ import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js
 import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
+import _poolChandrasTriumph from "../pool/chandras-triumph.js";
 import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-general.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
@@ -222,6 +223,7 @@ import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
 import _poolHealingTechnique from "../pool/healing-technique.js";
+import _poolHeartfire from "../pool/heartfire.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
@@ -460,6 +462,7 @@ import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
+import _poolTolsimirFriendToWolves from "../pool/tolsimir-friend-to-wolves.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTovolarsHuntmaster from "../pool/tovolars-huntmaster.js";
@@ -600,6 +603,7 @@ const shard: CardShard = {
     _poolCaughtInTheCrossfire,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
+    _poolChandrasTriumph,
     _poolChatterfangSquirrelGeneral,
     _poolCidFreeflierPilot,
     _poolCinderbones,
@@ -755,6 +759,7 @@ const shard: CardShard = {
     _poolHawkeyesBow,
     _poolHealersFlock,
     _poolHealingTechnique,
+    _poolHeartfire,
     _poolHeirloomMirror,
     _poolHiddenFootblade,
     _poolHighlandWeald,
@@ -993,6 +998,7 @@ const shard: CardShard = {
     _poolThunderwolfCavalry,
     _poolTidepoolTurtle,
     _poolTitansVanguard,
+    _poolTolsimirFriendToWolves,
     _poolTouchOfDeath,
     _poolTovolarTheMidnightScourge,
     _poolTovolarsHuntmaster,

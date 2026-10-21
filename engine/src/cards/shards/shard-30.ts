@@ -102,6 +102,7 @@ import _poolCrossbowInfantry from "../pool/crossbow-infantry.js";
 import _poolCrossroadsVillage from "../pool/crossroads-village.js";
 import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
+import _poolCrushDissent from "../pool/crush-dissent.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCuriousHerd from "../pool/curious-herd.js";
@@ -335,6 +336,7 @@ import _poolMurasaBrute from "../pool/murasa-brute.js";
 import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
 import _poolMyriadConstruct from "../pool/myriad-construct.js";
+import _poolNahirisStoneblades from "../pool/nahiris-stoneblades.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
@@ -382,6 +384,7 @@ import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
+import _poolRelentlessAdvance from "../pool/relentless-advance.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
@@ -392,6 +395,7 @@ import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
+import _poolRoaleskApexHybrid from "../pool/roalesk-apex-hybrid.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
 import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
@@ -640,6 +644,7 @@ const shard: CardShard = {
     _poolCrossroadsVillage,
     _poolCruelCelebrant,
     _poolCruelFinality,
+    _poolCrushDissent,
     _poolCryptGhast,
     _poolCuriousFarmAnimals,
     _poolCuriousHerd,
@@ -873,6 +878,7 @@ const shard: CardShard = {
     _poolMuseSeeker,
     _poolMyrMoonvessel,
     _poolMyriadConstruct,
+    _poolNahirisStoneblades,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,
     _poolNessianBoar,
@@ -920,6 +926,7 @@ const shard: CardShard = {
     _poolRazorfieldThresher,
     _poolReadyToRumble,
     _poolRejuvenate,
+    _poolRelentlessAdvance,
     _poolReluctantRoleModel,
     _poolRepairAndRecharge,
     _poolRescuePepperPotts,
@@ -930,6 +937,7 @@ const shard: CardShard = {
     _poolReturnToBattle,
     _poolRilsaRaelKingpin,
     _poolRiteOfReplication,
+    _poolRoaleskApexHybrid,
     _poolRootwaterHunter,
     _poolRoughshodDuo,
     _poolRoverBlades,

@@ -510,8 +510,10 @@ import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
 import _poolVolrathTheShapestealer from "../pool/volrath-the-shapestealer.js";
 import _poolVotaryOfTheConclave from "../pool/votary-of-the-conclave.js";
+import _poolVraskasFinisher from "../pool/vraskas-finisher.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
 import _poolWallOfOneThousandCuts from "../pool/wall-of-one-thousand-cuts.js";
+import _poolWanderersStrike from "../pool/wanderers-strike.js";
 import _poolWaterServant from "../pool/water-servant.js";
 import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
 import _poolWeaponizeTheMonsters from "../pool/weaponize-the-monsters.js";
@@ -1062,8 +1064,10 @@ const shard: CardShard = {
     _poolVoloGuideToMonsters,
     _poolVolrathTheShapestealer,
     _poolVotaryOfTheConclave,
+    _poolVraskasFinisher,
     _poolWallOfIce,
     _poolWallOfOneThousandCuts,
+    _poolWanderersStrike,
     _poolWaterServant,
     _poolWeakstonesSubjugation,
     _poolWeaponizeTheMonsters,

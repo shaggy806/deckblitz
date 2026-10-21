@@ -165,6 +165,7 @@ import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
 import _poolFieldCreeper from "../pool/field-creeper.js";
 import _poolFieryHellhound from "../pool/fiery-hellhound.js";
+import _poolFinaleOfEternity from "../pool/finale-of-eternity.js";
 import _poolFireNationSentinels from "../pool/fire-nation-sentinels.js";
 import _poolFireslinger from "../pool/fireslinger.js";
 import _poolFirjaJudgeOfValor from "../pool/firja-judge-of-valor.js";
@@ -338,6 +339,7 @@ import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
+import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRadiantEpicure from "../pool/radiant-epicure.js";
@@ -716,6 +718,7 @@ const shard: CardShard = {
     _poolFelidarGuardian,
     _poolFieldCreeper,
     _poolFieryHellhound,
+    _poolFinaleOfEternity,
     _poolFireNationSentinels,
     _poolFireslinger,
     _poolFirjaJudgeOfValor,
@@ -889,6 +892,7 @@ const shard: CardShard = {
     _poolPlanarAlly,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
+    _poolPrisonRealm,
     _poolProtectionMagic,
     _poolRabidAttack,
     _poolRadiantEpicure,

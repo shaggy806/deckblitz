@@ -8935,6 +8935,33 @@
   },
   "effect:graveyard-to-library-bottom-random": {
    "example": "Endurance"
+  },
+  "effect:look-and-choose-together": {
+   "example": "Niv-Mizzet Reborn"
+  },
+  "static:opponents-cant-play-from-graveyard": {
+   "example": "Tomik, Distinguished Advokist"
+  },
+  "replacement:counter-plus-one-self-only": {
+   "example": "Mowu, Loyal Companion"
+  },
+  "static:opponent-cant-cause-discard": {
+   "family": "static:opponent-cant-cause-sacrifice",
+   "example": "Tamiyo, Collector of Tales"
+  },
+  "filter:shares-permanent-type-with-other-target": {
+   "family": "effect:exchange-control",
+   "example": "Role Reversal"
+  },
+  "trigger:loyalty-counters-removed": {
+   "example": "Chandra, Fire Artisan"
+  },
+  "filter:not-put-into-graveyard-this-combat": {
+   "example": "Storrev, Devkarin Lich"
+  },
+  "replacement:as-enters-return-permanent": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "Rescuer Sphinx"
   }
  }
 }

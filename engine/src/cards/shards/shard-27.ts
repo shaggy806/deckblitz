@@ -87,6 +87,7 @@ import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
+import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
@@ -161,6 +162,7 @@ import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
+import _poolForcedLanding from "../pool/forced-landing.js";
 import _poolForcedRetreat from "../pool/forced-retreat.js";
 import _poolForgehammerCenturion from "../pool/forgehammer-centurion.js";
 import _poolForgottenSentinel from "../pool/forgotten-sentinel.js";
@@ -220,6 +222,7 @@ import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
+import _poolInvadingManticore from "../pool/invading-manticore.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
@@ -265,6 +268,7 @@ import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
 import _poolMakeYourOwnLuck from "../pool/make-your-own-luck.js";
+import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
@@ -628,6 +632,7 @@ const shard: CardShard = {
     _poolConsumptiveGoo,
     _poolCorruptEunuchs,
     _poolCosmicEpiphany,
+    _poolCourageInCrisis,
     _poolCourtOfIre,
     _poolCowabunga,
     _poolCrosissCharm,
@@ -702,6 +707,7 @@ const shard: CardShard = {
     _poolFlowstoneWyvern,
     _poolFlusterstorm,
     _poolForceOfSavagery,
+    _poolForcedLanding,
     _poolForcedRetreat,
     _poolForgehammerCenturion,
     _poolForgottenSentinel,
@@ -761,6 +767,7 @@ const shard: CardShard = {
     _poolIncrementalBlight,
     _poolInfernalPhantom,
     _poolInspiredTethermage,
+    _poolInvadingManticore,
     _poolIronLeagueSteed,
     _poolIronManTitanOfInnovation,
     _poolJadeCastSentinel,
@@ -806,6 +813,7 @@ const shard: CardShard = {
     _poolMagmaw,
     _poolMagusLuceaKane,
     _poolMakeYourOwnLuck,
+    _poolMakeshiftBattalion,
     _poolMalachOfTheDawn,
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,

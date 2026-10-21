@@ -111,6 +111,7 @@ import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
+import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
@@ -134,6 +135,7 @@ import _poolDoubleVision from "../pool/double-vision.js";
 import _poolDowsingDagger from "../pool/dowsing-dagger.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
 import _poolDreadfulAsTheStorm from "../pool/dreadful-as-the-storm.js";
+import _poolDreadhordeTwins from "../pool/dreadhorde-twins.js";
 import _poolDreadlightMonstrosity from "../pool/dreadlight-monstrosity.js";
 import _poolDreamSeizer from "../pool/dream-seizer.js";
 import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
@@ -225,6 +227,7 @@ import _poolIcebergTitan from "../pool/iceberg-titan.js";
 import _poolIchorSynthesizer from "../pool/ichor-synthesizer.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolIgneousElemental from "../pool/igneous-elemental.js";
+import _poolIgniteTheBeacon from "../pool/ignite-the-beacon.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js";
@@ -333,6 +336,7 @@ import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPippinsBravery from "../pool/pippins-bravery.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
+import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
@@ -352,6 +356,7 @@ import _poolRagostDeftGastronaut from "../pool/ragost-deft-gastronaut.js";
 import _poolRakishScoundrel from "../pool/rakish-scoundrel.js";
 import _poolRalAndTheImplicitMaze from "../pool/ral-and-the-implicit-maze.js";
 import _poolRallyOfWings from "../pool/rally-of-wings.js";
+import _poolRalsOutburst from "../pool/rals-outburst.js";
 import _poolRamblingPossum from "../pool/rambling-possum.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
 import _poolRapturousMoment from "../pool/rapturous-moment.js";
@@ -671,6 +676,7 @@ const shard: CardShard = {
     _poolCunningCoyote,
     _poolCursedMinotaur,
     _poolCursedRecording,
+    _poolCyclopsElectromancer,
     _poolDanithaBenaliasHope,
     _poolDarkTutelage,
     _poolDazzlingSphinx,
@@ -694,6 +700,7 @@ const shard: CardShard = {
     _poolDowsingDagger,
     _poolDragonEngine,
     _poolDreadfulAsTheStorm,
+    _poolDreadhordeTwins,
     _poolDreadlightMonstrosity,
     _poolDreamSeizer,
     _poolDrogskolShieldmate,
@@ -785,6 +792,7 @@ const shard: CardShard = {
     _poolIchorSynthesizer,
     _poolIdentityEcho,
     _poolIgneousElemental,
+    _poolIgniteTheBeacon,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
     _poolImpostorOfTheSixthPride,
@@ -893,6 +901,7 @@ const shard: CardShard = {
     _poolPipBoy3000,
     _poolPippinsBravery,
     _poolPlatedOnslaught,
+    _poolPledgeOfUnity,
     _poolPlunderingPirate,
     _poolPowerFist,
     _poolPriestOfForgottenGods,
@@ -912,6 +921,7 @@ const shard: CardShard = {
     _poolRakishScoundrel,
     _poolRalAndTheImplicitMaze,
     _poolRallyOfWings,
+    _poolRalsOutburst,
     _poolRamblingPossum,
     _poolRangerEnVec,
     _poolRapturousMoment,

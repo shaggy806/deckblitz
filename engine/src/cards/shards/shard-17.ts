@@ -172,6 +172,7 @@ import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
+import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
 import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
 import _poolGiftOfStrength from "../pool/gift-of-strength.js";
 import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
@@ -704,6 +705,7 @@ const shard: CardShard = {
     _poolGenesisHydra,
     _poolGhostLitWarder,
     _poolGiantGrowth,
+    _poolGideonsBattleCry,
     _poolGiftOfOrzhova,
     _poolGiftOfStrength,
     _poolGiottKingOfTheDwarves,

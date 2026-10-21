@@ -253,6 +253,7 @@ import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
+import _poolLivingTwister from "../pool/living-twister.js";
 import _poolLizardBlades from "../pool/lizard-blades.js";
 import _poolLodestoneMyr from "../pool/lodestone-myr.js";
 import _poolLongFengGrandSecretariat from "../pool/long-feng-grand-secretariat.js";
@@ -495,6 +496,7 @@ import _poolVernadiShieldmate from "../pool/vernadi-shieldmate.js";
 import _poolVictorValgavothsSeneschal from "../pool/victor-valgavoths-seneschal.js";
 import _poolVineTrellis from "../pool/vine-trellis.js";
 import _poolVitoThornOfTheDuskRose from "../pool/vito-thorn-of-the-dusk-rose.js";
+import _poolViviensArkbow from "../pool/viviens-arkbow.js";
 import _poolVizzerdrix from "../pool/vizzerdrix.js";
 import _poolVoltaicConstruct from "../pool/voltaic-construct.js";
 import _poolVorstclaw from "../pool/vorstclaw.js";
@@ -794,6 +796,7 @@ const shard: CardShard = {
     _poolLeylineProwler,
     _poolLightshieldParry,
     _poolLilianasScorn,
+    _poolLivingTwister,
     _poolLizardBlades,
     _poolLodestoneMyr,
     _poolLongFengGrandSecretariat,
@@ -1036,6 +1039,7 @@ const shard: CardShard = {
     _poolVictorValgavothsSeneschal,
     _poolVineTrellis,
     _poolVitoThornOfTheDuskRose,
+    _poolViviensArkbow,
     _poolVizzerdrix,
     _poolVoltaicConstruct,
     _poolVorstclaw,

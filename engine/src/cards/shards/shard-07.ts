@@ -114,6 +114,7 @@ import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
 import _poolElectrickery from "../pool/electrickery.js";
+import _poolEliteGuardmage from "../pool/elite-guardmage.js";
 import _poolEliteInstructor from "../pool/elite-instructor.js";
 import _poolEliteInterceptor from "../pool/elite-interceptor.js";
 import _poolElvishRanger from "../pool/elvish-ranger.js";
@@ -183,6 +184,7 @@ import _poolHandOfDeath from "../pool/hand-of-death.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
 import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
+import _poolHeartwarmingRedemption from "../pool/heartwarming-redemption.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
 import _poolHeikoYamazakiTheGeneral from "../pool/heiko-yamazaki-the-general.js";
 import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
@@ -209,6 +211,7 @@ import _poolIntoTheFaeCourt from "../pool/into-the-fae-court.js";
 import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
+import _poolJacesRuse from "../pool/jaces-ruse.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
@@ -411,6 +414,7 @@ import _poolSoulSnare from "../pool/soul-snare.js";
 import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
+import _poolSparkHarvest from "../pool/spark-harvest.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolSpreadingRot from "../pool/spreading-rot.js";
 import _poolSquadCommander from "../pool/squad-commander.js";
@@ -487,6 +491,7 @@ import _poolVibrance from "../pool/vibrance.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
 import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
+import _poolViviensGrizzly from "../pool/viviens-grizzly.js";
 import _poolVolcanicGeyser from "../pool/volcanic-geyser.js";
 import _poolVoldarenEpicure from "../pool/voldaren-epicure.js";
 import _poolVoyageHome from "../pool/voyage-home.js";
@@ -669,6 +674,7 @@ const shard: CardShard = {
     _poolDwarvenRuins,
     _poolDwarvenWarriors,
     _poolElectrickery,
+    _poolEliteGuardmage,
     _poolEliteInstructor,
     _poolEliteInterceptor,
     _poolElvishRanger,
@@ -738,6 +744,7 @@ const shard: CardShard = {
     _poolHapatraVizierOfPoisons,
     _poolHavocEater,
     _poolHeartlessSummoning,
+    _poolHeartwarmingRedemption,
     _poolHeartwoodGiant,
     _poolHeikoYamazakiTheGeneral,
     _poolHeliodSunCrowned,
@@ -764,6 +771,7 @@ const shard: CardShard = {
     _poolIrregularCohort,
     _poolIsamaruHoundOfKonda,
     _poolItsClobberinTime,
+    _poolJacesRuse,
     _poolJetmirsGarden,
     _poolJwariRuins,
     _poolKabiraPlateau,
@@ -966,6 +974,7 @@ const shard: CardShard = {
     _poolSoulsOfTheLost,
     _poolSouredSprings,
     _poolSpaceshift,
+    _poolSparkHarvest,
     _poolSpitfireLagac,
     _poolSpreadingRot,
     _poolSquadCommander,
@@ -1042,6 +1051,7 @@ const shard: CardShard = {
     _poolVigilantBaloth,
     _poolVindictiveTriumph,
     _poolViviOrnitier,
+    _poolViviensGrizzly,
     _poolVolcanicGeyser,
     _poolVoldarenEpicure,
     _poolVoyageHome,

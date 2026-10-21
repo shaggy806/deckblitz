@@ -77,6 +77,7 @@ import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
+import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
@@ -651,6 +652,7 @@ const shard: CardShard = {
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
     _poolCatharCommando,
+    _poolCharmedStray,
     _poolChelonianTackle,
     _poolChronomancer,
     _poolCloakOfTheBat,

@@ -115,6 +115,7 @@ import _poolDeathlessAngel from "../pool/deathless-angel.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
+import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
@@ -235,6 +236,7 @@ import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
+import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
 import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
@@ -446,6 +448,7 @@ import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
 import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
+import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
 import _poolStunningShot from "../pool/stunning-shot.js";
@@ -663,6 +666,7 @@ const shard: CardShard = {
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
     _poolDevilishValet,
+    _poolDevouringHellion,
     _poolDictateOfKruphix,
     _poolDimirKeyrune,
     _poolDissectionTools,
@@ -783,6 +787,7 @@ const shard: CardShard = {
     _poolInkwellLeviathan,
     _poolInnerDemonsGangsters,
     _poolInspiringPaladin,
+    _poolJacesTriumph,
     _poolJetMedallion,
     _poolJoragaVisionary,
     _poolJudgeMagisterGabranth,
@@ -994,6 +999,7 @@ const shard: CardShard = {
     _poolStaunchDefenders,
     _poolStingerquillVoxmancer,
     _poolStormCrow,
+    _poolStormTheCitadel,
     _poolStorySeeker,
     _poolStrionicResonator,
     _poolStunningShot,

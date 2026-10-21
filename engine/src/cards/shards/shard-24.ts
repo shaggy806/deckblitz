@@ -33,15 +33,18 @@ import _poolAridArchway from "../pool/arid-archway.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
+import _poolAvenEternal from "../pool/aven-eternal.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
+import _poolBandTogether from "../pool/band-together.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
 import _poolBannersRaised from "../pool/banners-raised.js";
 import _poolBarkhideTroll from "../pool/barkhide-troll.js";
 import _poolBaronBertramGraywater from "../pool/baron-bertram-graywater.js";
 import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
+import _poolBattlefieldPromotion from "../pool/battlefield-promotion.js";
 import _poolBattlegrowth from "../pool/battlegrowth.js";
 import _poolBeginTheInvasion from "../pool/begin-the-invasion.js";
 import _poolBelligerentGuest from "../pool/belligerent-guest.js";
@@ -237,6 +240,7 @@ import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
 import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
+import _poolKronchWrangler from "../pool/kronch-wrangler.js";
 import _poolKrosanVerge from "../pool/krosan-verge.js";
 import _poolKuldothaForgemaster from "../pool/kuldotha-forgemaster.js";
 import _poolKyoshiVillage from "../pool/kyoshi-village.js";
@@ -548,15 +552,18 @@ const shard: CardShard = {
     _poolAshlingsCommand,
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
+    _poolAvenEternal,
     _poolAvenSquire,
     _poolAxgardBraggart,
     _poolBalefulStrix,
+    _poolBandTogether,
     _poolBaneAlleyBlackguard,
     _poolBannersRaised,
     _poolBarkhideTroll,
     _poolBaronBertramGraywater,
     _poolBassaraTowerArcher,
     _poolBattershieldWarrior,
+    _poolBattlefieldPromotion,
     _poolBattlegrowth,
     _poolBeginTheInvasion,
     _poolBelligerentGuest,
@@ -752,6 +759,7 @@ const shard: CardShard = {
     _poolKinnanBonderProdigy,
     _poolKnightOfGlory,
     _poolKoglaTheTitanApe,
+    _poolKronchWrangler,
     _poolKrosanVerge,
     _poolKuldothaForgemaster,
     _poolKyoshiVillage,

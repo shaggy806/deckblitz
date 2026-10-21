@@ -22,6 +22,7 @@ import _poolArchfiendOfIfnir from "../pool/archfiend-of-ifnir.js";
 import _poolArchonOfRedemption from "../pool/archon-of-redemption.js";
 import _poolArdentElementalist from "../pool/ardent-elementalist.js";
 import _poolArgivianPhalanx from "../pool/argivian-phalanx.js";
+import _poolArlinnVoiceOfThePack from "../pool/arlinn-voice-of-the-pack.js";
 import _poolArniHumbleScribe from "../pool/arni-humble-scribe.js";
 import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
@@ -199,6 +200,7 @@ import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
 import _poolGarrukUnleashed from "../pool/garruk-unleashed.js";
 import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
+import _poolGideonsCompany from "../pool/gideons-company.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
@@ -255,6 +257,7 @@ import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
+import _poolInvadeTheCity from "../pool/invade-the-city.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronShieldElf from "../pool/iron-shield-elf.js";
@@ -556,6 +559,7 @@ const shard: CardShard = {
     _poolArchonOfRedemption,
     _poolArdentElementalist,
     _poolArgivianPhalanx,
+    _poolArlinnVoiceOfThePack,
     _poolArniHumbleScribe,
     _poolArtistsTalent,
     _poolAshcoatOfTheShadowSwarm,
@@ -733,6 +737,7 @@ const shard: CardShard = {
     _poolGarrukUnleashed,
     _poolGeistwave,
     _poolGhostsOfTheDamned,
+    _poolGideonsCompany,
     _poolGliderStaff,
     _poolGlimpseTheCore,
     _poolGlitchGhostSurveyor,
@@ -789,6 +794,7 @@ const shard: CardShard = {
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
+    _poolInvadeTheCity,
     _poolInvasionOfIxalan,
     _poolInvokeTheFiremind,
     _poolIronShieldElf,

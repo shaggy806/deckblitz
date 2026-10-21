@@ -19,6 +19,7 @@ import _poolAncestralCommunion from "../pool/ancestral-communion.js";
 import _poolAnchorToTheAether from "../pool/anchor-to-the-aether.js";
 import _poolAncientSilverback from "../pool/ancient-silverback.js";
 import _poolAncientTomb from "../pool/ancient-tomb.js";
+import _poolAngrathCaptainOfChaos from "../pool/angrath-captain-of-chaos.js";
 import _poolApexOfPower from "../pool/apex-of-power.js";
 import _poolArashinCleric from "../pool/arashin-cleric.js";
 import _poolArboretumElemental from "../pool/arboretum-elemental.js";
@@ -591,6 +592,7 @@ const shard: CardShard = {
     _poolAnchorToTheAether,
     _poolAncientSilverback,
     _poolAncientTomb,
+    _poolAngrathCaptainOfChaos,
     _poolApexOfPower,
     _poolArashinCleric,
     _poolArboretumElemental,

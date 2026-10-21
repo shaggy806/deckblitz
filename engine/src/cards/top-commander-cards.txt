@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3748 already implemented / 1252 missing (marks refreshed 2026-10-21)
+3750 already implemented / 1250 missing (marks refreshed 2026-10-21)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2861,7 +2861,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2868  Earthquake                               {X}{R}           Sorcery
 [x]  2869  Fell                                     {1}{B}           Sorcery
 [x]  2870  Ripjaw Raptor                            {2}{G}{G}        Creature — Dinosaur
-[ ]  2871  Tooth and Nail                           {5}{G}{G}        Sorcery
+[x]  2871  Tooth and Nail                           {5}{G}{G}        Sorcery
 [ ]  2872  Pain for All                             {2}{R}           Enchantment — Aura
 [x]  2873  Elvish Harbinger                         {2}{G}           Creature — Elf Druid
 [ ]  2874  Nowhere to Run                           {1}{B}           Enchantment
@@ -2924,7 +2924,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2931  Skirge Familiar                          {4}{B}           Creature — Phyrexian Imp
 [x]  2932  Mudflat Village                          {0}              Land
 [ ]  2933  Duplicant                                {6}              Artifact Creature — Shapeshifter
-[ ]  2934  Savage Beating                           {3}{R}{R}        Instant
+[x]  2934  Savage Beating                           {3}{R}{R}        Instant
 [x]  2935  Brokers Ascendancy                       {G}{W}{U}        Enchantment
 [x]  2936  Foundation Breaker                       {3}{G}           Creature — Elemental
 [x]  2937  Toph, Hardheaded Teacher                 {2}{R}{G}        Legendary Creature — Human Warrior Ally

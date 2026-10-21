@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **War of the Spark, whole, and entwine** (batch 123): WAR's last 112 cards, 82 authored by four
+  `card-author` agents and the lead (the amass cards the scaffolder finished); and **entwine**
+  built (rule 702.42 — a kicker keyword with `castModal.kickedModes`; an entwined spell isn't a
+  kicked spell), with Tooth and Nail, Kaya's Guile, Goblin War Party, Savage Beating, Gravedig,
+  Mirage Mockery, Road of Return, Flourishing Strike and Unbounded Potential (2026-10-21).
 - **Modern Horizons, whole, and pitch costs** (batch 122): MH1's last 112 cards, 86 authored by
   four `card-author` agents and the lead, with **pitch costs** built — "[if it's not your turn,]
   you may [pay 1 life and] exile a blue card from your hand rather than pay this spell's mana

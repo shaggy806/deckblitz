@@ -139,6 +139,7 @@ import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDraconicDestiny from "../pool/draconic-destiny.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
+import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
@@ -305,6 +306,7 @@ import _poolMirriCatWarrior from "../pool/mirri-cat-warrior.js";
 import _poolMirrorRoomFracturedRealm from "../pool/mirror-room-fractured-realm.js";
 import _poolMirrorform from "../pool/mirrorform.js";
 import _poolMischievousPoltergeist from "../pool/mischievous-poltergeist.js";
+import _poolMobilizedDistrict from "../pool/mobilized-district.js";
 import _poolMoltenTributary from "../pool/molten-tributary.js";
 import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
 import _poolMomentOfCraving from "../pool/moment-of-craving.js";
@@ -321,6 +323,7 @@ import _poolNaturesRhythm from "../pool/natures-rhythm.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
 import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
+import _poolNissasTriumph from "../pool/nissas-triumph.js";
 import _poolNivixBarrier from "../pool/nivix-barrier.js";
 import _poolNoDachi from "../pool/no-dachi.js";
 import _poolNocturnalHunger from "../pool/nocturnal-hunger.js";
@@ -485,6 +488,7 @@ import _poolTaintedObserver from "../pool/tainted-observer.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
 import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
 import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
+import _poolTamiyosEpiphany from "../pool/tamiyos-epiphany.js";
 import _poolTatyova from "../pool/tatyova.js";
 import _poolTauntingSliver from "../pool/taunting-sliver.js";
 import _poolTavernScoundrel from "../pool/tavern-scoundrel.js";
@@ -520,6 +524,7 @@ import _poolTitansStrength from "../pool/titans-strength.js";
 import _poolTolarianGeyser from "../pool/tolarian-geyser.js";
 import _poolTollsOfWar from "../pool/tolls-of-war.js";
 import _poolTomeBlast from "../pool/tome-blast.js";
+import _poolToppleTheStatue from "../pool/topple-the-statue.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
 import _poolTourachsCanticle from "../pool/tourachs-canticle.js";
 import _poolTrailOfCrumbs from "../pool/trail-of-crumbs.js";
@@ -575,6 +580,7 @@ import _poolZellDincht from "../pool/zell-dincht.js";
 import _poolZephyrNet from "../pool/zephyr-net.js";
 import _poolZeriamGoldenWind from "../pool/zeriam-golden-wind.js";
 import _tokensAngelToken33 from "../tokens/angel-token-3-3.js";
+import _tokensAssassinTokenVraskaSwarmsEminence from "../tokens/assassin-token-vraska-swarms-eminence.js";
 import _tokensCursedRoleToken from "../tokens/cursed-role-token.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
@@ -726,6 +732,7 @@ const shard: CardShard = {
     _poolDoublingSeason,
     _poolDraconicDestiny,
     _poolDragoonsLance,
+    _poolDreadhordeArcanist,
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
     _poolDreamstalkerManticore,
@@ -892,6 +899,7 @@ const shard: CardShard = {
     _poolMirrorRoomFracturedRealm,
     _poolMirrorform,
     _poolMischievousPoltergeist,
+    _poolMobilizedDistrict,
     _poolMoltenTributary,
     _poolMoltensteelDragon,
     _poolMomentOfCraving,
@@ -908,6 +916,7 @@ const shard: CardShard = {
     _poolNecroskitter,
     _poolNemesisOfReason,
     _poolNinjaOfTheDeepHours,
+    _poolNissasTriumph,
     _poolNivixBarrier,
     _poolNoDachi,
     _poolNocturnalHunger,
@@ -1072,6 +1081,7 @@ const shard: CardShard = {
     _poolTalasAirShip,
     _poolTalismanOfHierarchy,
     _poolTalonGatesOfMadara,
+    _poolTamiyosEpiphany,
     _poolTatyova,
     _poolTauntingSliver,
     _poolTavernScoundrel,
@@ -1107,6 +1117,7 @@ const shard: CardShard = {
     _poolTolarianGeyser,
     _poolTollsOfWar,
     _poolTomeBlast,
+    _poolToppleTheStatue,
     _poolTormodsCrypt,
     _poolTourachsCanticle,
     _poolTrailOfCrumbs,
@@ -1164,6 +1175,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAngelToken33,
+    _tokensAssassinTokenVraskaSwarmsEminence,
     _tokensCursedRoleToken,
     _tokensFaerieToken,
     _tokensGiantWizardToken,

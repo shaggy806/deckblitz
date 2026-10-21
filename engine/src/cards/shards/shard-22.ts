@@ -45,6 +45,7 @@ import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
 import _poolBindingGeist from "../pool/binding-geist.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
+import _poolBlindblast from "../pool/blindblast.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
@@ -593,6 +594,7 @@ const shard: CardShard = {
     _poolBespokeBattlegarb,
     _poolBindingGeist,
     _poolBlackWidowIntelExpert,
+    _poolBlindblast,
     _poolBlindingDrone,
     _poolBloomTender,
     _poolBloomingBlast,

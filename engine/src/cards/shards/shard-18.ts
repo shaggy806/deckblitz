@@ -79,6 +79,7 @@ import _poolCollectorsCase from "../pool/collectors-case.js";
 import _poolColossalMajesty from "../pool/colossal-majesty.js";
 import _poolComingInHot from "../pool/coming-in-hot.js";
 import _poolCommandBeacon from "../pool/command-beacon.js";
+import _poolCommenceTheEndgame from "../pool/commence-the-endgame.js";
 import _poolCommodoreGuff from "../pool/commodore-guff.js";
 import _poolCongregate from "../pool/congregate.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
@@ -177,6 +178,7 @@ import _poolGrayHarborMerfolk from "../pool/gray-harbor-merfolk.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
+import _poolGuildpactInformant from "../pool/guildpact-informant.js";
 import _poolHall from "../pool/hall.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
 import _poolHardenedTactician from "../pool/hardened-tactician.js";
@@ -419,6 +421,7 @@ import _poolStarAthlete from "../pool/star-athlete.js";
 import _poolStarfallInvocation from "../pool/starfall-invocation.js";
 import _poolStarstorm from "../pool/starstorm.js";
 import _poolStaticPrison from "../pool/static-prison.js";
+import _poolStealthMission from "../pool/stealth-mission.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
@@ -445,6 +448,7 @@ import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
+import _poolTheElderspell from "../pool/the-elderspell.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheOneRing from "../pool/the-one-ring.js";
 import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
@@ -639,6 +643,7 @@ const shard: CardShard = {
     _poolColossalMajesty,
     _poolComingInHot,
     _poolCommandBeacon,
+    _poolCommenceTheEndgame,
     _poolCommodoreGuff,
     _poolCongregate,
     _poolCopperlineGorge,
@@ -737,6 +742,7 @@ const shard: CardShard = {
     _poolGreedyFreebooter,
     _poolGrinningDemon,
     _poolGuidelightMatrix,
+    _poolGuildpactInformant,
     _poolHall,
     _poolHamzaGuardianOfArashin,
     _poolHardenedTactician,
@@ -979,6 +985,7 @@ const shard: CardShard = {
     _poolStarfallInvocation,
     _poolStarstorm,
     _poolStaticPrison,
+    _poolStealthMission,
     _poolStepThrough,
     _poolStewardOfTheHarvest,
     _poolStirringBard,
@@ -1005,6 +1012,7 @@ const shard: CardShard = {
     _poolThassaDeepDwelling,
     _poolTheCrystalsChosen,
     _poolTheEarthCrystal,
+    _poolTheElderspell,
     _poolTheMechanistAerialArtisan,
     _poolTheOneRing,
     _poolTheTenthDoctor,

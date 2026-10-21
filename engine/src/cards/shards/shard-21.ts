@@ -431,6 +431,7 @@ import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTemptedByTheOriq from "../pool/tempted-by-the-oriq.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
+import _poolTenthDistrictLegionnaire from "../pool/tenth-district-legionnaire.js";
 import _poolTerminalAgony from "../pool/terminal-agony.js";
 import _poolTerramorph from "../pool/terramorph.js";
 import _poolTerritorialWitchstalker from "../pool/territorial-witchstalker.js";
@@ -450,6 +451,7 @@ import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
+import _poolTollOfTheInvasion from "../pool/toll-of-the-invasion.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
 import _poolTorrentSculptor from "../pool/torrent-sculptor.js";
@@ -956,6 +958,7 @@ const shard: CardShard = {
     _poolTemptedByTheOriq,
     _poolTendrilsOfAgony,
     _poolTendrilsOfDespair,
+    _poolTenthDistrictLegionnaire,
     _poolTerminalAgony,
     _poolTerramorph,
     _poolTerritorialWitchstalker,
@@ -975,6 +978,7 @@ const shard: CardShard = {
     _poolThornwoodFalls,
     _poolThrivingGrove,
     _poolTobiasDoomedConqueror,
+    _poolTollOfTheInvasion,
     _poolTomBombadil,
     _poolTorgalAFineHound,
     _poolTorrentSculptor,

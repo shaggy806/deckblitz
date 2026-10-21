@@ -215,6 +215,7 @@ import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
+import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
 import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
@@ -472,6 +473,7 @@ import _poolTurntimberGrove from "../pool/turntimber-grove.js";
 import _poolTwoHeadedSliver from "../pool/two-headed-sliver.js";
 import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
+import _poolUginsConjurant from "../pool/ugins-conjurant.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
@@ -751,6 +753,7 @@ const shard: CardShard = {
     _poolHigureTheStillWind,
     _poolHoardingOgre,
     _poolHonestRutstein,
+    _poolHonorTheGodPharaoh,
     _poolHostileTakeover,
     _poolHourOfReckoning,
     _poolHowlingGalefang,
@@ -1008,6 +1011,7 @@ const shard: CardShard = {
     _poolTwoHeadedSliver,
     _poolTyrantsFamiliar,
     _poolUchuulon,
+    _poolUginsConjurant,
     _poolUnbreathingHorde,
     _poolUndercityScrounger,
     _poolUnfinishedBusiness,

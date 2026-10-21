@@ -75,6 +75,7 @@ import _poolBreathOfLife from "../pool/breath-of-life.js";
 import _poolBrightmare from "../pool/brightmare.js";
 import _poolBrokersAscendancy from "../pool/brokers-ascendancy.js";
 import _poolBullRush from "../pool/bull-rush.js";
+import _poolBurningProphet from "../pool/burning-prophet.js";
 import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
 import _poolBurstOfEnergy from "../pool/burst-of-energy.js";
 import _poolBywayBarterer from "../pool/byway-barterer.js";
@@ -113,6 +114,7 @@ import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
+import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
@@ -439,6 +441,7 @@ import _poolSpyglassSiren from "../pool/spyglass-siren.js";
 import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
 import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
+import _poolSteadyAim from "../pool/steady-aim.js";
 import _poolSteelPlumeMarshal from "../pool/steel-plume-marshal.js";
 import _poolSteelgazeGriffin from "../pool/steelgaze-griffin.js";
 import _poolStingingLionfish from "../pool/stinging-lionfish.js";
@@ -634,6 +637,7 @@ const shard: CardShard = {
     _poolBrightmare,
     _poolBrokersAscendancy,
     _poolBullRush,
+    _poolBurningProphet,
     _poolBurningShieldAskari,
     _poolBurstOfEnergy,
     _poolBywayBarterer,
@@ -672,6 +676,7 @@ const shard: CardShard = {
     _poolDanithaSwordOfHope,
     _poolDarkness,
     _poolDarksteelSplicer,
+    _poolDavrielsShadowfugue,
     _poolDaybreakCharger,
     _poolDeadbridgeChant,
     _poolDecodeTransmissions,
@@ -998,6 +1003,7 @@ const shard: CardShard = {
     _poolSquirrelSovereign,
     _poolStadiumTidalmage,
     _poolStaunchThroneguard,
+    _poolSteadyAim,
     _poolSteelPlumeMarshal,
     _poolSteelgazeGriffin,
     _poolStingingLionfish,

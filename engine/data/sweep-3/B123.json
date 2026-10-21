@@ -1,0 +1,801 @@
+{
+ "batch": "B123",
+ "status": "complete",
+ "ranks": "War of the Spark (WAR, 2019-05-03): the rest of the set, whole",
+ "authored": [
+  {
+   "name": "Angrath, Captain of Chaos",
+   "files": [
+    "engine/src/cards/pool/angrath-captain-of-chaos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aven Eternal",
+   "files": [
+    "engine/src/cards/pool/aven-eternal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Callous Dismissal",
+   "files": [
+    "engine/src/cards/pool/callous-dismissal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crush Dissent",
+   "files": [
+    "engine/src/cards/pool/crush-dissent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grim Initiate",
+   "files": [
+    "engine/src/cards/pool/grim-initiate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Herald of the Dreadhorde",
+   "files": [
+    "engine/src/cards/pool/herald-of-the-dreadhorde.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invading Manticore",
+   "files": [
+    "engine/src/cards/pool/invading-manticore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Relentless Advance",
+   "files": [
+    "engine/src/cards/pool/relentless-advance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Commence the Endgame",
+   "files": [
+    "engine/src/cards/pool/commence-the-endgame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fblthp, the Lost",
+   "files": [
+    "engine/src/cards/pool/fblthp-the-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roalesk, Apex Hybrid",
+   "files": [
+    "engine/src/cards/pool/roalesk-apex-hybrid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ugin's Conjurant",
+   "files": [
+    "engine/src/cards/pool/ugins-conjurant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Band Together",
+   "files": [
+    "engine/src/cards/pool/band-together.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadhorde Butcher",
+   "files": [
+    "engine/src/cards/pool/dreadhorde-butcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snarespinner",
+   "files": [
+    "engine/src/cards/pool/snarespinner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stealth Mission",
+   "files": [
+    "engine/src/cards/pool/stealth-mission.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "No Escape",
+   "files": [
+    "engine/src/cards/pool/no-escape.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chandra's Triumph",
+   "files": [
+    "engine/src/cards/pool/chandras-triumph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ral's Outburst",
+   "files": [
+    "engine/src/cards/pool/rals-outburst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gideon's Company",
+   "files": [
+    "engine/src/cards/pool/gideons-company.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charmed Stray",
+   "files": [
+    "engine/src/cards/pool/charmed-stray.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steady Aim",
+   "files": [
+    "engine/src/cards/pool/steady-aim.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gideon's Battle Cry",
+   "files": [
+    "engine/src/cards/pool/gideons-battle-cry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bond of Passion",
+   "files": [
+    "engine/src/cards/pool/bond-of-passion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teyo, the Shieldmage",
+   "files": [
+    "engine/src/cards/pool/teyo-the-shieldmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tibalt, Rakish Instigator",
+   "files": [
+    "engine/src/cards/pool/tibalt-rakish-instigator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mobilized District",
+   "files": [
+    "engine/src/cards/pool/mobilized-district.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartwarming Redemption",
+   "files": [
+    "engine/src/cards/pool/heartwarming-redemption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Prophet",
+   "files": [
+    "engine/src/cards/pool/burning-prophet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ignite the Beacon",
+   "files": [
+    "engine/src/cards/pool/ignite-the-beacon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invade the City",
+   "files": [
+    "engine/src/cards/pool/invade-the-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bond of Revival",
+   "files": [
+    "engine/src/cards/pool/bond-of-revival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eternal Taskmaster",
+   "files": [
+    "engine/src/cards/pool/eternal-taskmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien's Arkbow",
+   "files": [
+    "engine/src/cards/pool/viviens-arkbow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blindblast",
+   "files": [
+    "engine/src/cards/pool/blindblast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Battlefield Promotion",
+   "files": [
+    "engine/src/cards/pool/battlefield-promotion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bleeding Edge",
+   "files": [
+    "engine/src/cards/pool/bleeding-edge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Toll of the Invasion",
+   "files": [
+    "engine/src/cards/pool/toll-of-the-invasion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm the Citadel",
+   "files": [
+    "engine/src/cards/pool/storm-the-citadel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Makeshift Battalion",
+   "files": [
+    "engine/src/cards/pool/makeshift-battalion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Davriel's Shadowfugue",
+   "files": [
+    "engine/src/cards/pool/davriels-shadowfugue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pledge of Unity",
+   "files": [
+    "engine/src/cards/pool/pledge-of-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Finale of Eternity",
+   "files": [
+    "engine/src/cards/pool/finale-of-eternity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace, Arcane Strategist",
+   "files": [
+    "engine/src/cards/pool/jace-arcane-strategist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spark Harvest",
+   "files": [
+    "engine/src/cards/pool/spark-harvest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arlinn, Voice of the Pack",
+   "files": [
+    "engine/src/cards/pool/arlinn-voice-of-the-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Twister",
+   "files": [
+    "engine/src/cards/pool/living-twister.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Elderspell",
+   "files": [
+    "engine/src/cards/pool/the-elderspell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Honor the God-Pharaoh",
+   "files": [
+    "engine/src/cards/pool/honor-the-god-pharaoh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Projection",
+   "files": [
+    "engine/src/cards/pool/jaces-projection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadhorde Twins",
+   "files": [
+    "engine/src/cards/pool/dreadhorde-twins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Triumph",
+   "files": [
+    "engine/src/cards/pool/jaces-triumph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trusted Pegasus",
+   "files": [
+    "engine/src/cards/pool/trusted-pegasus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bond of Flourishing",
+   "files": [
+    "engine/src/cards/pool/bond-of-flourishing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rubblebelt Rioters",
+   "files": [
+    "engine/src/cards/pool/rubblebelt-rioters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Topple the Statue",
+   "files": [
+    "engine/src/cards/pool/topple-the-statue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Ruse",
+   "files": [
+    "engine/src/cards/pool/jaces-ruse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartfire",
+   "files": [
+    "engine/src/cards/pool/heartfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forced Landing",
+   "files": [
+    "engine/src/cards/pool/forced-landing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turret Ogre",
+   "files": [
+    "engine/src/cards/pool/turret-ogre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devouring Hellion",
+   "files": [
+    "engine/src/cards/pool/devouring-hellion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadhorde Arcanist",
+   "files": [
+    "engine/src/cards/pool/dreadhorde-arcanist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Courage in Crisis",
+   "files": [
+    "engine/src/cards/pool/courage-in-crisis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guildpact Informant",
+   "files": [
+    "engine/src/cards/pool/guildpact-informant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bond of Insight",
+   "files": [
+    "engine/src/cards/pool/bond-of-insight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolsimir, Friend to Wolves",
+   "files": [
+    "engine/src/cards/pool/tolsimir-friend-to-wolves.ts",
+    "engine/src/cards/tokens/voja-friend-to-elves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tamiyo's Epiphany",
+   "files": [
+    "engine/src/cards/pool/tamiyos-epiphany.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elite Guardmage",
+   "files": [
+    "engine/src/cards/pool/elite-guardmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vraska, Swarm's Eminence",
+   "files": [
+    "engine/src/cards/pool/vraska-swarms-eminence.ts",
+    "engine/src/cards/tokens/assassin-token-vraska-swarms-eminence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderer's Strike",
+   "files": [
+    "engine/src/cards/pool/wanderers-strike.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vivien's Grizzly",
+   "files": [
+    "engine/src/cards/pool/viviens-grizzly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa's Triumph",
+   "files": [
+    "engine/src/cards/pool/nissas-triumph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Domri's Ambush",
+   "files": [
+    "engine/src/cards/pool/domris-ambush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tenth District Legionnaire",
+   "files": [
+    "engine/src/cards/pool/tenth-district-legionnaire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silent Submersible",
+   "files": [
+    "engine/src/cards/pool/silent-submersible.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Prison Realm",
+   "files": [
+    "engine/src/cards/pool/prison-realm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mizzium Tank",
+   "files": [
+    "engine/src/cards/pool/mizzium-tank.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunder Drake",
+   "files": [
+    "engine/src/cards/pool/thunder-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vraska's Finisher",
+   "files": [
+    "engine/src/cards/pool/vraskas-finisher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cyclops Electromancer",
+   "files": [
+    "engine/src/cards/pool/cyclops-electromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kronch Wrangler",
+   "files": [
+    "engine/src/cards/pool/kronch-wrangler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nahiri's Stoneblades",
+   "files": [
+    "engine/src/cards/pool/nahiris-stoneblades.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Kasmina's Transmutation",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "an Aura's lasting \"loses all abilities\""
+  },
+  {
+   "name": "Dovin, Hand of Control",
+   "needs": [
+    "replacement:prevent-damage-by-and-to-permanent"
+   ],
+   "why": "the −1's prevention of all damage to and by a target permanent until your next turn"
+  },
+  {
+   "name": "Niv-Mizzet Reborn",
+   "needs": [
+    "effect:look-and-choose-together"
+   ],
+   "why": "one card for each colour pair, exactly those colours"
+  },
+  {
+   "name": "Tomik, Distinguished Advokist",
+   "needs": [
+    "static:graveyard-cards-untargetable",
+    "static:opponents-cant-play-from-graveyard"
+   ],
+   "why": "lands and graveyard land cards untargetable by opponents; opponents can't play lands from graveyards"
+  },
+  {
+   "name": "Davriel, Rogue Shadowmage",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "an intervening-if on the active opponent's hand size"
+  },
+  {
+   "name": "Deliver Unto Evil",
+   "needs": [
+    "effect:opponent-chooses-among-targets"
+   ],
+   "why": "an opponent chooses two of the targeted cards"
+  },
+  {
+   "name": "Oath of Kaya",
+   "needs": [
+    "trigger:opponent-attacks-your-planeswalkers"
+   ],
+   "why": "once per attacked planeswalker you control"
+  },
+  {
+   "name": "Price of Betrayal",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "up to five counters of any kinds from one target"
+  },
+  {
+   "name": "Ob Nixilis's Cruelty",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "if that creature would die this turn, exile it instead"
+  },
+  {
+   "name": "Raging Kronch",
+   "needs": [
+    "static:cant-attack-alone"
+   ],
+   "why": "can't attack alone"
+  },
+  {
+   "name": "Widespread Brutality",
+   "needs": [
+    "effect:amassed-army-power"
+   ],
+   "why": "the amassed Army as the damage source"
+  },
+  {
+   "name": "Mowu, Loyal Companion",
+   "needs": [
+    "replacement:counter-plus-one-self-only"
+   ],
+   "why": "the +1/+1-counter replacement limited to itself"
+  },
+  {
+   "name": "Tamiyo, Collector of Tales",
+   "needs": [
+    "static:opponent-cant-cause-sacrifice",
+    "static:opponent-cant-cause-discard",
+    "decision:choose-card-name"
+   ],
+   "why": "opponents can't make you discard or sacrifice; naming a card"
+  },
+  {
+   "name": "Awakening of Vitu-Ghazi",
+   "needs": [
+    "static:set-name"
+   ],
+   "why": "the land becomes a legendary creature named Vitu-Ghazi"
+  },
+  {
+   "name": "Solar Blaze",
+   "needs": [
+    "effect:each-creature-damages-itself"
+   ],
+   "why": "each creature deals damage to itself equal to its power"
+  },
+  {
+   "name": "Jaya, Venerated Firemage",
+   "needs": [
+    "replacement:damage-plus-from-other-sources"
+   ],
+   "why": "\"another red source\" — the damage bonus can't leave out its own source"
+  },
+  {
+   "name": "Nahiri, Storm of Stone",
+   "needs": [
+    "cost:loyalty-x",
+    "cost:equip-ability-cost-reduction"
+   ],
+   "why": "−X loyalty, and an equip cost reduction"
+  },
+  {
+   "name": "Gideon's Triumph",
+   "needs": [
+    "filter:blocked-this-turn"
+   ],
+   "why": "a creature that attacked or blocked this turn"
+  },
+  {
+   "name": "Saheeli's Silverwing",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library"
+   ],
+   "why": "looking at the top card of a target opponent's library"
+  },
+  {
+   "name": "Role Reversal",
+   "needs": [
+    "effect:exchange-control",
+    "filter:shares-permanent-type-with-other-target"
+   ],
+   "why": "exchange control of two permanents that share a permanent type"
+  },
+  {
+   "name": "God-Eternal Kefnet",
+   "needs": [
+    "decision:may-reveal-first-draw"
+   ],
+   "why": "reveal the first card drawn, copy it and cast the copy for {2} less"
+  },
+  {
+   "name": "Soul Diviner",
+   "needs": [
+    "cost:remove-counters-from-chosen",
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "remove a counter of any kind from another permanent you control"
+  },
+  {
+   "name": "Chandra, Fire Artisan",
+   "needs": [
+    "trigger:loyalty-counters-removed"
+   ],
+   "why": "loyalty loss never emits counter-removed (damage or a minus cost)"
+  },
+  {
+   "name": "Storrev, Devkarin Lich",
+   "needs": [
+    "filter:not-put-into-graveyard-this-combat"
+   ],
+   "why": "a graveyard card that wasn't put there this combat"
+  },
+  {
+   "name": "Gideon, the Oathsworn",
+   "needs": [
+    "effect:attack-batch-those-creatures"
+   ],
+   "why": "\"each of those creatures\" — the creatures that attacked"
+  },
+  {
+   "name": "Gideon Blackblade",
+   "needs": [
+    "static:planeswalker-becomes-creature"
+   ],
+   "why": "a planeswalker that's a creature on your turn"
+  },
+  {
+   "name": "Guild Globe",
+   "needs": [
+    "effect:add-mana-two-different-colors"
+   ],
+   "why": "two mana of different colours"
+  },
+  {
+   "name": "Bioessence Hydra",
+   "needs": [
+    "trigger:counters-put-batch"
+   ],
+   "why": "once per event for loyalty counters put on planeswalkers you control"
+  },
+  {
+   "name": "Kaya, Bane of the Dead",
+   "needs": [
+    "static:ignore-hexproof"
+   ],
+   "why": "targeting as though they didn't have hexproof"
+  },
+  {
+   "name": "Rescuer Sphinx",
+   "needs": [
+    "replacement:as-enters-return-permanent"
+   ],
+   "why": "an as-enters choice to return a nonland permanent, then enter with a counter"
+  }
+ ]
+}
