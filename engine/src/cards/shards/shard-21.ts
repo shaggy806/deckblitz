@@ -230,6 +230,7 @@ import _poolHolyDay from "../pool/holy-day.js";
 import _poolHoneyMammoth from "../pool/honey-mammoth.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
+import _poolIchneumonDruid from "../pool/ichneumon-druid.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
 import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
@@ -777,6 +778,7 @@ const shard: CardShard = {
     _poolHoneyMammoth,
     _poolHugsGrislyGuardian,
     _poolHydraTroopers,
+    _poolIchneumonDruid,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
     _poolInSearchOfGreatness,

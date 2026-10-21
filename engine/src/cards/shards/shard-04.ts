@@ -70,6 +70,7 @@ import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
+import _poolCocoon from "../pool/cocoon.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolConiferWurm from "../pool/conifer-wurm.js";
@@ -238,6 +239,7 @@ import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
+import _poolJovialEvil from "../pool/jovial-evil.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
@@ -269,6 +271,7 @@ import _poolLeadersTalent from "../pool/leaders-talent.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLesserMasticore from "../pool/lesser-masticore.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
+import _poolLifeMatrix from "../pool/life-matrix.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
@@ -630,6 +633,7 @@ const shard: CardShard = {
     _poolChasmDrake,
     _poolChillOfTheGrave,
     _poolCleverConjurer,
+    _poolCocoon,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
     _poolConiferWurm,
@@ -798,6 +802,7 @@ const shard: CardShard = {
     _poolIroncladKrovod,
     _poolJenovaAncientCalamity,
     _poolJeongJeongTheDeserter,
+    _poolJovialEvil,
     _poolKariZevsExpertise,
     _poolKarumonixTheRatKing,
     _poolKeenEyedRaven,
@@ -829,6 +834,7 @@ const shard: CardShard = {
     _poolLeavesFromTheVine,
     _poolLesserMasticore,
     _poolLichsRelic,
+    _poolLifeMatrix,
     _poolLightningElemental,
     _poolLivingPhone,
     _poolLoathsomeTroll,

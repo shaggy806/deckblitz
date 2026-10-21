@@ -131,6 +131,7 @@ import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
 import _poolEchoingEquation from "../pool/echoing-equation.js";
 import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
+import _poolElvenRiders from "../pool/elven-riders.js";
 import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
 import _poolElvishArchers from "../pool/elvish-archers.js";
 import _poolElvishReclaimer from "../pool/elvish-reclaimer.js";
@@ -690,6 +691,7 @@ const shard: CardShard = {
     _poolEchoingEquation,
     _poolEdgarCharmedGroom,
     _poolEliteArrester,
+    _poolElvenRiders,
     _poolElvishArchdruid,
     _poolElvishArchers,
     _poolElvishReclaimer,

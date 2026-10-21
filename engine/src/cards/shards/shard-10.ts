@@ -421,6 +421,7 @@ import _poolSealAway from "../pool/seal-away.js";
 import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
 import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
+import _poolSeeker from "../pool/seeker.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
 import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
@@ -1014,6 +1015,7 @@ const shard: CardShard = {
     _poolSearchForAzcanta,
     _poolSeasonedConsultant,
     _poolSeeTheTruth,
+    _poolSeeker,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
     _poolShadowfaxLordOfHorses,

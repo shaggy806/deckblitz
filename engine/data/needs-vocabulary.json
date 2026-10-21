@@ -9286,6 +9286,129 @@
   },
   "static:block-as-though-no-landwalk": {
    "example": "Quagmire"
+  },
+  "replacement:draw-replaced-by-discard-then-draw": {
+   "example": "Chains of Mephistopheles"
+  },
+  "effect:game-is-a-draw": {
+   "example": "Divine Intervention"
+  },
+  "static:cant-attack-player-unless-acted-last-turn": {
+   "example": "Arboria"
+  },
+  "condition:spell-would-destroy-land": {
+   "example": "Equinox"
+  },
+  "cost:activate-no-more-than-n-times-each-turn": {
+   "example": "Vampire Bats"
+  },
+  "static:attacking-doesnt-cause-tap": {
+   "example": "Johan"
+  },
+  "static:players-play-with-library-top-revealed": {
+   "example": "Field of Dreams"
+  },
+  "static:untargetable-by-wall-only-spells": {
+   "example": "Wall of Shadows"
+  },
+  "effect:reveal-x-random-discard-named": {
+   "example": "Nebuchadnezzar"
+  },
+  "effect:pt-until-end-of-combat": {
+   "example": "Glyph of Destruction"
+  },
+  "static:players-play-with-hands-revealed": {
+   "example": "Revelation"
+  },
+  "effect:aura-becomes-non-aura-enchantment": {
+   "example": "Takklemaggot"
+  },
+  "filter:creature-source-is-blocking": {
+   "example": "Wall of Vapor"
+  },
+  "effect:restrict-during-controllers-next-turn": {
+   "example": "Wall of Dust"
+  },
+  "effect:set-base-toughness-only": {
+   "example": "Sentinel"
+  },
+  "replacement:opponent-land-enters-then-sacrifice": {
+   "example": "Land Equilibrium"
+  },
+  "effect:return-from-trigger-owners-graveyard-under-owner": {
+   "example": "Reincarnation"
+  },
+  "static:counter-cap": {
+   "example": "Rasputin Dreamweaver"
+  },
+  "condition:started-turn-untapped": {
+   "example": "Rasputin Dreamweaver"
+  },
+  "effect:prevent-damage-to-you-by-filter-this-turn": {
+   "example": "Al-abara's Carpet"
+  },
+  "effect:prevent-combat-damage-by-target": {
+   "example": "Telekinesis"
+  },
+  "effect:doesnt-untap-next-two-untap-steps": {
+   "example": "Telekinesis"
+  },
+  "amount:count-that-player-controls": {
+   "example": "Typhoon"
+  },
+  "effect:grant-rampage-if-lacking": {
+   "example": "Rapid Fire"
+  },
+  "replacement:prevent-damage-by-target-this-turn": {
+   "example": "Horn of Deafening"
+  },
+  "condition:source-attacked-during-your-last-turn": {
+   "example": "Giant Turtle"
+  },
+  "condition:source-dealt-damage-to-opponent-this-turn": {
+   "example": "Whirling Dervish"
+  },
+  "static:pt-from-sacrificed-as-entered": {
+   "example": "Wood Elemental"
+  },
+  "amount:damage-dealt-by-spell-this-turn": {
+   "example": "Backdraft"
+  },
+  "replacement:dies-return-to-hand-cant-play-until-next-turn": {
+   "example": "Firestorm Phoenix"
+  },
+  "replacement:tap-for-mana-produces-colorless-instead": {
+   "example": "Quarum Trench Gnomes"
+  },
+  "cost:x-fixed-by-source-counters": {
+   "example": "Voodoo Doll"
+  },
+  "amount:damage-dealt-to-source-this-turn-by-filter": {
+   "example": "Blazing Effigy"
+  },
+  "replacement:prevent-damage-from-targeting-sources": {
+   "example": "Silhouette"
+  },
+  "effect:damage-to-source": {
+   "example": "Psionic Entity"
+  },
+  "replacement:damage-capped": {
+   "example": "Forethought Amulet"
+  },
+  "filter:blocking-target-creature": {
+   "example": "Feint"
+  },
+  "keyword:legendary-landwalk": {
+   "example": "Livonya Silone"
+  },
+  "condition:destroyed-this-way-in-earlier-delayed-trigger": {
+   "example": "Infinite Authority"
+  },
+  "static:cant-be-target-of-aura-spells": {
+   "example": "Bartel Runeaxe"
+  },
+  "filter:dealt-damage-to-source-this-turn": {
+   "example": "Brine Hag"
   }
  }
 }

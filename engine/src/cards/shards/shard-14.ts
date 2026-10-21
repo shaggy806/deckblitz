@@ -11,6 +11,7 @@ import _poolAgeGracedChapel from "../pool/age-graced-chapel.js";
 import _poolAgnaQela from "../pool/agna-qela.js";
 import _poolAgonizingSyphon from "../pool/agonizing-syphon.js";
 import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
+import _poolAlchorsTomb from "../pool/alchors-tomb.js";
 import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
 import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
@@ -573,6 +574,7 @@ const shard: CardShard = {
     _poolAgnaQela,
     _poolAgonizingSyphon,
     _poolAjanisWelcome,
+    _poolAlchorsTomb,
     _poolAllFatesStalker,
     _poolAlpineHoundmaster,
     _poolAndTheyShallKnowNoFear,

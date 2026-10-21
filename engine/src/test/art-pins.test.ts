@@ -56,6 +56,8 @@ const NO_TOKEN_PRINTING = new Set([
   "5/5 Djinn Artifact Token",
   // Serpent Generator lists none either.
   "Snake Token (artifact, poison)",
+  // Boris Devilboon lists none.
+  "Minor Demon Token",
 ]);
 
 describe("token art", () => {

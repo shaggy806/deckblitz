@@ -142,6 +142,7 @@ import _poolDivineVerdict from "../pool/divine-verdict.js";
 import _poolDoomedArtisan from "../pool/doomed-artisan.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
 import _poolDreadSummons from "../pool/dread-summons.js";
+import _poolDreamCoat from "../pool/dream-coat.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
@@ -734,6 +735,7 @@ const shard: CardShard = {
     _poolDoomedArtisan,
     _poolDranaLiberatorOfMalakir,
     _poolDreadSummons,
+    _poolDreamCoat,
     _poolDregscapeZombie,
     _poolEarthquakeDragon,
     _poolEidolonOfPhilosophy,

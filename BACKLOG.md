@@ -98,8 +98,11 @@ section keeps only what to do next.
   (`npm run cards:sets -w engine -- --oldest --next 60`), until it meets the newest-first walk
   below. Batch 130 took Alpha whole and Beta's last card, building chosen-source prevention and
   colour setting; batch 131 Arabian Nights and Antiquities, on "you may choose not to untap" and
-  "for as long as ~ remains tapped"; rampage built for Legends. **Next, Legends** (batches 132-133
-  under way), then The Dark (82), Fallen Empires (79). Leads measured over the whole pool: setting a land's type with its rules text gone
+  "for as long as ~ remains tapped"; batches 132-133 Legends, on rampage, the world rule, "for as
+  long as you control ~" and "blockable as though it didn't have landwalk". **Next, The Dark** (82
+  left), then Fallen Empires (79), Ice Age. Leads over the whole pool now: banding (20 — needs the
+  multi-blocking line below), removing any number of counters as a cost (`cost:remove-x-counters-cost`
+  — 15, the Mana Batteries among them), damage redirection (11). Leads measured over the whole pool: setting a land's type with its rules text gone
   (`static:land-type-setting`, rule 305.7 — 8), damage redirection
   (`replacement:damage-redirection` — 7), banding (`keyword:banding` — 4).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call

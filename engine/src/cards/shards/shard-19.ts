@@ -137,6 +137,7 @@ import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
 import _poolDimensionX from "../pool/dimension-x.js";
+import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
 import _poolDissectionPractice from "../pool/dissection-practice.js";
@@ -217,6 +218,7 @@ import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
 import _poolGraveRobbers from "../pool/grave-robbers.js";
 import _poolGreatForestDruid from "../pool/great-forest-druid.js";
 import _poolGreatHart from "../pool/great-hart.js";
+import _poolGreaterRealmOfPreservation from "../pool/greater-realm-of-preservation.js";
 import _poolGreatswordOfTyr from "../pool/greatsword-of-tyr.js";
 import _poolGreelsCaress from "../pool/greels-caress.js";
 import _poolGriffinDreamfinder from "../pool/griffin-dreamfinder.js";
@@ -732,6 +734,7 @@ const shard: CardShard = {
     _poolDevilthornFox,
     _poolDeviousCoverUp,
     _poolDimensionX,
+    _poolDisharmony,
     _poolDismiss,
     _poolDisruptivePitmage,
     _poolDissectionPractice,
@@ -812,6 +815,7 @@ const shard: CardShard = {
     _poolGraveRobbers,
     _poolGreatForestDruid,
     _poolGreatHart,
+    _poolGreaterRealmOfPreservation,
     _poolGreatswordOfTyr,
     _poolGreelsCaress,
     _poolGriffinDreamfinder,

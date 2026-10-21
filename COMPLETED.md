@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Legends, whole** (batches 132-133): **rampage**, the **world rule** (704.5k), **"for as long as
+  you control ~"** and **"can be blocked as though it didn't have landwalk"** built, the scaffolder
+  taught rampage and the landwalk line; 122 of its last 219 cards authored by eight `card-author`
+  agents and the lead — Nicol Bolas, Chromium, Palladia-Mors, Arcades Sabboth, Vaevictis Asmadi,
+  The Tabernacle at Pendrell Vale, Moat, Kismet, Rubinia Soulsinger, Hazezon Tamar — plus ten earlier
+  cards "for as long as you control" unblocked (Dragonlord Silumgar, Aegis Angel, Aladdin, Roil
+  Elemental…); 97 blocked, banding (11) the most shared (2026-10-21).
 - **Arabian Nights and Antiquities, whole** (batch 131): **"you may choose not to untap"** (rule
   502.3 — a choice in the untap step, without priority) and the **"for as long as ~ remains
   tapped"** duration (611.2b) built and taught to the scaffolder; 45 of their last 106 cards

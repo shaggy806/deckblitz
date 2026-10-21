@@ -234,6 +234,7 @@ import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
 import _poolHurloonMinotaur from "../pool/hurloon-minotaur.js";
 import _poolHymnOfTheFaller from "../pool/hymn-of-the-faller.js";
+import _poolHyperionBlacksmith from "../pool/hyperion-blacksmith.js";
 import _poolIceFlan from "../pool/ice-flan.js";
 import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
 import _poolIchTekikSalvageSplicer from "../pool/ich-tekik-salvage-splicer.js";
@@ -252,6 +253,7 @@ import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
 import _poolIsuTheAbominable from "../pool/isu-the-abominable.js";
+import _poolJacquesLeVert from "../pool/jacques-le-vert.js";
 import _poolJawboneDuelist from "../pool/jawbone-duelist.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
@@ -811,6 +813,7 @@ const shard: CardShard = {
     _poolHuntersInsight,
     _poolHurloonMinotaur,
     _poolHymnOfTheFaller,
+    _poolHyperionBlacksmith,
     _poolIceFlan,
     _poolIcecaveCrasher,
     _poolIchTekikSalvageSplicer,
@@ -829,6 +832,7 @@ const shard: CardShard = {
     _poolInundatedArchive,
     _poolInvasionOfXerex,
     _poolIsuTheAbominable,
+    _poolJacquesLeVert,
     _poolJawboneDuelist,
     _poolJirinaDauntlessGeneral,
     _poolJorKadeenFirstGoldwarden,

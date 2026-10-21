@@ -41,6 +41,7 @@ import _poolBasiliskGate from "../pool/basilisk-gate.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
 import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
 import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
+import _poolBeastsOfBogardan from "../pool/beasts-of-bogardan.js";
 import _poolBedazzle from "../pool/bedazzle.js";
 import _poolBeholdTheMultiverse from "../pool/behold-the-multiverse.js";
 import _poolBiowasteBlob from "../pool/biowaste-blob.js";
@@ -59,6 +60,7 @@ import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBookDevourer from "../pool/book-devourer.js";
 import _poolBookOfRass from "../pool/book-of-rass.js";
 import _poolBootleggersStash from "../pool/bootleggers-stash.js";
+import _poolBorisDevilboon from "../pool/boris-devilboon.js";
 import _poolBorosCluestone from "../pool/boros-cluestone.js";
 import _poolBoseijuReachesSkyward from "../pool/boseiju-reaches-skyward.js";
 import _poolBottomlessPoolLockerRoom from "../pool/bottomless-pool-locker-room.js";
@@ -98,6 +100,7 @@ import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
+import _poolCyclopeanMummy from "../pool/cyclopean-mummy.js";
 import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
@@ -143,6 +146,7 @@ import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
+import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
@@ -601,6 +605,7 @@ const shard: CardShard = {
     _poolBattlegroundGeist,
     _poolBayekOfSiwa,
     _poolBearerOfGlory,
+    _poolBeastsOfBogardan,
     _poolBedazzle,
     _poolBeholdTheMultiverse,
     _poolBiowasteBlob,
@@ -619,6 +624,7 @@ const shard: CardShard = {
     _poolBookDevourer,
     _poolBookOfRass,
     _poolBootleggersStash,
+    _poolBorisDevilboon,
     _poolBorosCluestone,
     _poolBoseijuReachesSkyward,
     _poolBottomlessPoolLockerRoom,
@@ -658,6 +664,7 @@ const shard: CardShard = {
     _poolCrystalSlipper,
     _poolCunningEvasion,
     _poolCutOfTheProfits,
+    _poolCyclopeanMummy,
     _poolDaringFiendbonder,
     _poolDarkmossBridge,
     _poolDarksteelGargoyle,
@@ -703,6 +710,7 @@ const shard: CardShard = {
     _poolElvishHerder,
     _poolEmberShot,
     _poolEmberethPaladin,
+    _poolEnchantedBeing,
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,

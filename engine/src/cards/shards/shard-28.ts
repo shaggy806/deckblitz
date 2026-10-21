@@ -540,6 +540,7 @@ import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
+import _poolWallOfPutridFlesh from "../pool/wall-of-putrid-flesh.js";
 import _poolWallOff from "../pool/wall-off.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
 import _poolWarmWelcome from "../pool/warm-welcome.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolVraskasScorn,
     _poolWakerOfWaves,
     _poolWalkingCorpse,
+    _poolWallOfPutridFlesh,
     _poolWallOff,
     _poolWarclampMastiff,
     _poolWarmWelcome,

@@ -477,6 +477,7 @@ import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
+import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
@@ -1042,6 +1043,7 @@ const shard: CardShard = {
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolTangleMantis,
+    _poolTeleport,
     _poolTempleOfMalice,
     _poolTheBalrogOfMoria,
     _poolTheFloodOfMars,

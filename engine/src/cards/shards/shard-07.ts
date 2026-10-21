@@ -15,6 +15,7 @@ import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
 import _poolAinokSurvivalist from "../pool/ainok-survivalist.js";
 import _poolAjanisMantra from "../pool/ajanis-mantra.js";
+import _poolAkronLegionnaire from "../pool/akron-legionnaire.js";
 import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js";
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
@@ -390,6 +391,7 @@ import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
 import _poolRunoStromkirk from "../pool/runo-stromkirk.js";
+import _poolRust from "../pool/rust.js";
 import _poolSHIELDDeploymentDrone from "../pool/s-h-i-e-l-d-deployment-drone.js";
 import _poolSacellumArchers from "../pool/sacellum-archers.js";
 import _poolSacredWolf from "../pool/sacred-wolf.js";
@@ -605,6 +607,7 @@ const shard: CardShard = {
     _poolAgonasaurRex,
     _poolAinokSurvivalist,
     _poolAjanisMantra,
+    _poolAkronLegionnaire,
     _poolAlpharaelDreamingAcolyte,
     _poolAlterFate,
     _poolAlteredEgo,
@@ -980,6 +983,7 @@ const shard: CardShard = {
     _poolRosemaneCentaur,
     _poolRoyalTrooper,
     _poolRunoStromkirk,
+    _poolRust,
     _poolSHIELDDeploymentDrone,
     _poolSacellumArchers,
     _poolSacredWolf,

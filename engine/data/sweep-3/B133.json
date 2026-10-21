@@ -1,0 +1,829 @@
+{
+ "batch": "B133",
+ "status": "complete",
+ "ranks": "Legends (LEG, 1994-06-01): the rest of the set, whole (oldest-first walk); and 11 earlier cards \"for as long as you control\" unblocked",
+ "authored": [
+  {
+   "name": "Aegis Angel",
+   "files": [
+    "engine/src/cards/pool/aegis-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aladdin",
+   "files": [
+    "engine/src/cards/pool/aladdin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonlord Silumgar",
+   "files": [
+    "engine/src/cards/pool/dragonlord-silumgar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kyodai, Soul of Kamigawa",
+   "files": [
+    "engine/src/cards/pool/kyodai-soul-of-kamigawa.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Merchant Raiders",
+   "files": [
+    "engine/src/cards/pool/merchant-raiders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Possession Engine",
+   "files": [
+    "engine/src/cards/pool/possession-engine.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Roil Elemental",
+   "files": [
+    "engine/src/cards/pool/roil-elemental.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thancred Waters",
+   "files": [
+    "engine/src/cards/pool/thancred-waters.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Time of Ice",
+   "files": [
+    "engine/src/cards/pool/time-of-ice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ty Lee, Chi Blocker",
+   "files": [
+    "engine/src/cards/pool/ty-lee-chi-blocker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crevasse",
+   "files": [
+    "engine/src/cards/pool/crevasse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deadfall",
+   "files": [
+    "engine/src/cards/pool/deadfall.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gosta Dirk",
+   "files": [
+    "engine/src/cards/pool/gosta-dirk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Great Wall",
+   "files": [
+    "engine/src/cards/pool/great-wall.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lord Magnus",
+   "files": [
+    "engine/src/cards/pool/lord-magnus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quagmire",
+   "files": [
+    "engine/src/cards/pool/quagmire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undertow",
+   "files": [
+    "engine/src/cards/pool/undertow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ur-Drago",
+   "files": [
+    "engine/src/cards/pool/ur-drago.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boris Devilboon",
+   "files": [
+    "engine/src/cards/pool/boris-devilboon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cocoon",
+   "files": [
+    "engine/src/cards/pool/cocoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enchanted Being",
+   "files": [
+    "engine/src/cards/pool/enchanted-being.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Great Defender",
+   "files": [
+    "engine/src/cards/pool/great-defender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jovial Evil",
+   "files": [
+    "engine/src/cards/pool/jovial-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifeblood",
+   "files": [
+    "engine/src/cards/pool/lifeblood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pit Scorpion",
+   "files": [
+    "engine/src/cards/pool/pit-scorpion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Puppet Master",
+   "files": [
+    "engine/src/cards/pool/puppet-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radjan Spirit",
+   "files": [
+    "engine/src/cards/pool/radjan-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rust",
+   "files": [
+    "engine/src/cards/pool/rust.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spirit Shackle",
+   "files": [
+    "engine/src/cards/pool/spirit-shackle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiritual Sanctuary",
+   "files": [
+    "engine/src/cards/pool/spiritual-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teleport",
+   "files": [
+    "engine/src/cards/pool/teleport.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cosmic Horror",
+   "files": [
+    "engine/src/cards/pool/cosmic-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disharmony",
+   "files": [
+    "engine/src/cards/pool/disharmony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Spawn",
+   "files": [
+    "engine/src/cards/pool/elder-spawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Slug",
+   "files": [
+    "engine/src/cards/pool/giant-slug.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ivory Guardians",
+   "files": [
+    "engine/src/cards/pool/ivory-guardians.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life Matrix",
+   "files": [
+    "engine/src/cards/pool/life-matrix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mold Demon",
+   "files": [
+    "engine/src/cards/pool/mold-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Bind",
+   "files": [
+    "engine/src/cards/pool/relic-bind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Time Elemental",
+   "files": [
+    "engine/src/cards/pool/time-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Putrid Flesh",
+   "files": [
+    "engine/src/cards/pool/wall-of-putrid-flesh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cyclopean Mummy",
+   "files": [
+    "engine/src/cards/pool/cyclopean-mummy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Land Wurm",
+   "files": [
+    "engine/src/cards/pool/elder-land-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elven Riders",
+   "files": [
+    "engine/src/cards/pool/elven-riders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greater Realm of Preservation",
+   "files": [
+    "engine/src/cards/pool/greater-realm-of-preservation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ichneumon Druid",
+   "files": [
+    "engine/src/cards/pool/ichneumon-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seeker",
+   "files": [
+    "engine/src/cards/pool/seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Cloak",
+   "files": [
+    "engine/src/cards/pool/spectral-cloak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Paradise",
+   "files": [
+    "engine/src/cards/pool/sylvan-paradise.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Venarian Gold",
+   "files": [
+    "engine/src/cards/pool/venarian-gold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aisling Leprechaun",
+   "files": [
+    "engine/src/cards/pool/aisling-leprechaun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akron Legionnaire",
+   "files": [
+    "engine/src/cards/pool/akron-legionnaire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alchor's Tomb",
+   "files": [
+    "engine/src/cards/pool/alchors-tomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beasts of Bogardan",
+   "files": [
+    "engine/src/cards/pool/beasts-of-bogardan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Coat",
+   "files": [
+    "engine/src/cards/pool/dream-coat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Song",
+   "files": [
+    "engine/src/cards/pool/dwarven-song.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hyperion Blacksmith",
+   "files": [
+    "engine/src/cards/pool/hyperion-blacksmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jacques le Vert",
+   "files": [
+    "engine/src/cards/pool/jacques-le-vert.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ramses Overdark",
+   "files": [
+    "engine/src/cards/pool/ramses-overdark.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wall of Wonder",
+   "files": [
+    "engine/src/cards/pool/wall-of-wonder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winter Blast",
+   "files": [
+    "engine/src/cards/pool/winter-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Osai Vultures",
+   "files": [
+    "engine/src/cards/pool/osai-vultures.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Anti-Magic Aura",
+   "needs": [
+    "static:cant-be-targeted-by-filter",
+    "static:cant-be-enchanted-by-other-auras"
+   ],
+   "why": "can't be the target of spells, can't be enchanted by other Auras"
+  },
+  {
+   "name": "Glyph of Delusion",
+   "needs": [
+    "filter:blocked-this-turn"
+   ],
+   "why": "a creature target Wall blocked this turn"
+  },
+  {
+   "name": "Al-abara's Carpet",
+   "needs": [
+    "effect:prevent-damage-to-you-by-filter-this-turn"
+   ],
+   "why": "prevent damage to you this turn from attacking creatures without flying"
+  },
+  {
+   "name": "Visions",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library",
+    "effect:shuffle-library"
+   ],
+   "why": "look at target player's top five, then they may shuffle"
+  },
+  {
+   "name": "Psychic Purge",
+   "needs": [
+    "trigger:discard-this-card"
+   ],
+   "why": "when an opponent's spell or ability makes you discard this"
+  },
+  {
+   "name": "Demonic Torment",
+   "needs": [
+    "replacement:prevent-combat-damage-by-filter",
+    "filter:enchanted-by-source"
+   ],
+   "why": "prevent combat damage dealt by enchanted creature"
+  },
+  {
+   "name": "Telekinesis",
+   "needs": [
+    "effect:prevent-combat-damage-by-target",
+    "effect:doesnt-untap-next-two-untap-steps"
+   ],
+   "why": "prevent combat damage by target; doesn't untap for two untap steps"
+  },
+  {
+   "name": "Subdue",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent combat damage dealt by target creature"
+  },
+  {
+   "name": "Typhoon",
+   "needs": [
+    "amount:count-that-player-controls"
+   ],
+   "why": "damage to each opponent equal to the Islands that player controls"
+  },
+  {
+   "name": "Nova Pentacle",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "redirect a source's next damage to a creature of an opponent's choice"
+  },
+  {
+   "name": "Shimian Night Stalker",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "redirect an attacking creature's damage to this"
+  },
+  {
+   "name": "Rapid Fire",
+   "needs": [
+    "condition:cast-timing-condition",
+    "effect:grant-rampage-if-lacking"
+   ],
+   "why": "before blockers; rampage 2 if it lacks rampage"
+  },
+  {
+   "name": "Marble Priest",
+   "needs": [
+    "static:must-be-blocked-by-filter"
+   ],
+   "why": "all Walls able to block it do so"
+  },
+  {
+   "name": "Lesser Werewolf",
+   "needs": [
+    "effect:target-creature-blocking-source",
+    "effect:target-creature-source-is-blocking"
+   ],
+   "why": "a creature blocking or blocked by it"
+  },
+  {
+   "name": "Red Mana Battery",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove any number of charge counters"
+  },
+  {
+   "name": "Green Mana Battery",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove any number of charge counters"
+  },
+  {
+   "name": "Master of the Hunt",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "its tokens band with other Wolves of the Hunt"
+  },
+  {
+   "name": "Axelrod Gunnarson",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "whenever a creature dealt damage by it this turn dies"
+  },
+  {
+   "name": "Horn of Deafening",
+   "needs": [
+    "replacement:prevent-damage-by-target-this-turn"
+   ],
+   "why": "prevent combat damage dealt by target creature"
+  },
+  {
+   "name": "Kry Shield",
+   "needs": [
+    "replacement:prevent-damage-by-target-this-turn"
+   ],
+   "why": "prevent damage dealt by target creature you control"
+  },
+  {
+   "name": "Giant Turtle",
+   "needs": [
+    "condition:source-attacked-during-your-last-turn"
+   ],
+   "why": "can't attack if it attacked during your last turn"
+  },
+  {
+   "name": "Whirling Dervish",
+   "needs": [
+    "condition:source-dealt-damage-to-opponent-this-turn"
+   ],
+   "why": "if it dealt damage to an opponent this turn"
+  },
+  {
+   "name": "Wood Elemental",
+   "needs": [
+    "effect:sacrifice-any-number",
+    "static:pt-from-sacrificed-as-entered"
+   ],
+   "why": "sacrifice any number of Forests as it enters; P/T from them"
+  },
+  {
+   "name": "Backdraft",
+   "needs": [
+    "amount:damage-dealt-by-spell-this-turn"
+   ],
+   "why": "half the damage a sorcery spell dealt this turn"
+  },
+  {
+   "name": "Firestorm Phoenix",
+   "needs": [
+    "replacement:dies-return-to-hand-cant-play-until-next-turn"
+   ],
+   "why": "returns to hand instead and can't be played until next turn"
+  },
+  {
+   "name": "Quarum Trench Gnomes",
+   "needs": [
+    "replacement:tap-for-mana-produces-colorless-instead"
+   ],
+   "why": "a Plains taps for colorless instead of white"
+  },
+  {
+   "name": "North Star",
+   "needs": [
+    "cost:spend-mana-as-any-color"
+   ],
+   "why": "spend mana as any type for the next spell"
+  },
+  {
+   "name": "Stangg",
+   "needs": [
+    "effect:linked-token-leaves"
+   ],
+   "why": "the linked Stangg Twin token and Stangg leave together"
+  },
+  {
+   "name": "Tetsuo Umezawa",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "can't be the target of Aura spells"
+  },
+  {
+   "name": "The Wretched",
+   "needs": [
+    "effect:target-creature-blocking-source"
+   ],
+   "why": "gain control of all creatures blocking it"
+  },
+  {
+   "name": "Petra Sphinx",
+   "needs": [
+    "decision:name-a-card"
+   ],
+   "why": "target player names a card"
+  },
+  {
+   "name": "Halfdane",
+   "needs": [
+    "duration:until-your-next-upkeep"
+   ],
+   "why": "until the end of your next upkeep"
+  },
+  {
+   "name": "Voodoo Doll",
+   "needs": [
+    "cost:x-fixed-by-source-counters"
+   ],
+   "why": "{X}{X} where X is the pin counters on it"
+  },
+  {
+   "name": "Glyph of Doom",
+   "needs": [
+    "filter:blocked-or-blocked-by-filter-this-turn"
+   ],
+   "why": "creatures that target Wall blocked this turn"
+  },
+  {
+   "name": "Glyph of Reincarnation",
+   "needs": [
+    "filter:blocked-or-blocked-by-filter-this-turn"
+   ],
+   "why": "creatures blocked by that Wall this turn, returned under their old controller"
+  },
+  {
+   "name": "Rabid Wombat",
+   "needs": [
+    "static:count-attached-to-affected"
+   ],
+   "why": "+2/+2 for each Aura attached to it"
+  },
+  {
+   "name": "Transmutation",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switch target creature's power and toughness"
+  },
+  {
+   "name": "Knowledge Vault",
+   "needs": [
+    "effect:exile-top-face-down-linked"
+   ],
+   "why": "exile the top card face down, linked"
+  },
+  {
+   "name": "Blazing Effigy",
+   "needs": [
+    "amount:damage-dealt-to-source-this-turn-by-filter"
+   ],
+   "why": "damage dealt to it this turn by sources named Blazing Effigy"
+  },
+  {
+   "name": "Floral Spuzzem",
+   "needs": [
+    "trigger:attacks-and-isnt-blocked"
+   ],
+   "why": "whenever it attacks and isn't blocked"
+  },
+  {
+   "name": "Shelkin Brownie",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "gains bands with other"
+  },
+  {
+   "name": "Silhouette",
+   "needs": [
+    "replacement:prevent-damage-from-targeting-sources"
+   ],
+   "why": "prevent damage from spells or abilities that target it"
+  },
+  {
+   "name": "Psionic Entity",
+   "needs": [
+    "effect:damage-to-source"
+   ],
+   "why": "and 3 damage to itself"
+  },
+  {
+   "name": "Forethought Amulet",
+   "needs": [
+    "replacement:damage-capped"
+   ],
+   "why": "damage of 3 or more is reduced to 2"
+  },
+  {
+   "name": "Clergy of the Holy Nimbus",
+   "needs": [
+    "effect:opponents-may-activate"
+   ],
+   "why": "only your opponents may activate this"
+  },
+  {
+   "name": "White Mana Battery",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove any number of charge counters"
+  },
+  {
+   "name": "Lady Evangela",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent combat damage dealt by target creature"
+  },
+  {
+   "name": "Feint",
+   "needs": [
+    "filter:blocking-target-creature",
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "creatures blocking target attacking creature"
+  },
+  {
+   "name": "Wall of Tombstones",
+   "needs": [
+    "effect:set-base-toughness-only"
+   ],
+   "why": "base toughness becomes 1 plus the creature cards in your graveyard"
+  },
+  {
+   "name": "Reverberation",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "a sorcery's damage is dealt to its controller instead"
+  },
+  {
+   "name": "Livonya Silone",
+   "needs": [
+    "keyword:legendary-landwalk"
+   ],
+   "why": "legendary landwalk"
+  },
+  {
+   "name": "Infinite Authority",
+   "needs": [
+    "condition:destroyed-this-way-in-earlier-delayed-trigger"
+   ],
+   "why": "if a creature it blocked was destroyed this way"
+  },
+  {
+   "name": "Bartel Runeaxe",
+   "needs": [
+    "static:cant-be-target-of-aura-spells"
+   ],
+   "why": "can't be the target of Aura spells"
+  },
+  {
+   "name": "Brine Hag",
+   "needs": [
+    "filter:dealt-damage-to-source-this-turn"
+   ],
+   "why": "each creature that dealt damage to it this turn"
+  }
+ ]
+}

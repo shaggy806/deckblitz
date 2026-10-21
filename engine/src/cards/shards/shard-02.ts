@@ -360,6 +360,7 @@ import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
+import _poolRamsesOverdark from "../pool/ramses-overdark.js";
 import _poolRashmiAndRagavan from "../pool/rashmi-and-ragavan.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
@@ -906,6 +907,7 @@ const shard: CardShard = {
     _poolRacersScoreboard,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
+    _poolRamsesOverdark,
     _poolRashmiAndRagavan,
     _poolRavenousBaloth,
     _poolRavenousChupacabra,

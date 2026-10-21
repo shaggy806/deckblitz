@@ -252,6 +252,7 @@ import _poolInvasionOfBelenon from "../pool/invasion-of-belenon.js";
 import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolIvoryCup from "../pool/ivory-cup.js";
+import _poolIvoryGuardians from "../pool/ivory-guardians.js";
 import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
@@ -299,6 +300,7 @@ import _poolMisterFantastic from "../pool/mister-fantastic.js";
 import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
 import _poolMoggSalvage from "../pool/mogg-salvage.js";
 import _poolMoggSentry from "../pool/mogg-sentry.js";
+import _poolMoldDemon from "../pool/mold-demon.js";
 import _poolMoltenLavamancer from "../pool/molten-lavamancer.js";
 import _poolMoonbladeShinobi from "../pool/moonblade-shinobi.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
@@ -353,6 +355,7 @@ import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
 import _poolRadiantStrike from "../pool/radiant-strike.js";
+import _poolRadjanSpirit from "../pool/radjan-spirit.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
 import _poolRaggadraggaGoregutsBoss from "../pool/raggadragga-goreguts-boss.js";
 import _poolRagingGoblin from "../pool/raging-goblin.js";
@@ -540,6 +543,7 @@ import _poolWindfall from "../pool/windfall.js";
 import _poolWingedCoatl from "../pool/winged-coatl.js";
 import _poolWingedWords from "../pool/winged-words.js";
 import _poolWingshieldAgent from "../pool/wingshield-agent.js";
+import _poolWinterBlast from "../pool/winter-blast.js";
 import _poolWinterSoldierRebornAvenger from "../pool/winter-soldier-reborn-avenger.js";
 import _poolWitchstalkerFrenzy from "../pool/witchstalker-frenzy.js";
 import _poolWizardReplica from "../pool/wizard-replica.js";
@@ -825,6 +829,7 @@ const shard: CardShard = {
     _poolInvasiveManeuvers,
     _poolIronApprentice,
     _poolIvoryCup,
+    _poolIvoryGuardians,
     _poolJadeSeedstones,
     _poolJarvisEarthsMightiestButler,
     _poolJerrenCorruptedBishop,
@@ -872,6 +877,7 @@ const shard: CardShard = {
     _poolMockingbirdBobbiMorse,
     _poolMoggSalvage,
     _poolMoggSentry,
+    _poolMoldDemon,
     _poolMoltenLavamancer,
     _poolMoonbladeShinobi,
     _poolMrFoxglove,
@@ -926,6 +932,7 @@ const shard: CardShard = {
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
     _poolRadiantStrike,
+    _poolRadjanSpirit,
     _poolRaffinesInformant,
     _poolRaggadraggaGoregutsBoss,
     _poolRagingGoblin,
@@ -1113,6 +1120,7 @@ const shard: CardShard = {
     _poolWingedCoatl,
     _poolWingedWords,
     _poolWingshieldAgent,
+    _poolWinterBlast,
     _poolWinterSoldierRebornAvenger,
     _poolWitchstalkerFrenzy,
     _poolWizardReplica,

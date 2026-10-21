@@ -143,6 +143,7 @@ import _poolDuskUrchins from "../pool/dusk-urchins.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
 import _poolEgoDrain from "../pool/ego-drain.js";
+import _poolElderSpawn from "../pool/elder-spawn.js";
 import _poolElderleafMentor from "../pool/elderleaf-mentor.js";
 import _poolElegantEdgecrafters from "../pool/elegant-edgecrafters.js";
 import _poolElendasHierophant from "../pool/elendas-hierophant.js";
@@ -468,6 +469,7 @@ import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
 import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
+import _poolSpiritualSanctuary from "../pool/spiritual-sanctuary.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
 import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
@@ -747,6 +749,7 @@ const shard: CardShard = {
     _poolDwarvenProvisioner,
     _poolEclipsedKithkin,
     _poolEgoDrain,
+    _poolElderSpawn,
     _poolElderleafMentor,
     _poolElegantEdgecrafters,
     _poolElendasHierophant,
@@ -1072,6 +1075,7 @@ const shard: CardShard = {
     _poolSpiderHamPeterPorker,
     _poolSpiderManNewChampion,
     _poolSpiritOfMalevolence,
+    _poolSpiritualSanctuary,
     _poolSplashPortal,
     _poolSporewebWeaver,
     _poolSproutingRenewal,

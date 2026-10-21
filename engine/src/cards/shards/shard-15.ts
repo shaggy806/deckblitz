@@ -361,6 +361,7 @@ import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
+import _poolPitScorpion from "../pool/pit-scorpion.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
@@ -504,6 +505,7 @@ import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVectorGlider from "../pool/vector-glider.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
+import _poolVenarianGold from "../pool/venarian-gold.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
 import _poolViashivanDragon from "../pool/viashivan-dragon.js";
 import _poolVileEntomber from "../pool/vile-entomber.js";
@@ -914,6 +916,7 @@ const shard: CardShard = {
     _poolPiercingExhale,
     _poolPilgrimOfTheAges,
     _poolPiranhaMarsh,
+    _poolPitScorpion,
     _poolPitchburnDevils,
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,
@@ -1057,6 +1060,7 @@ const shard: CardShard = {
     _poolVastlandsScavenger,
     _poolVectorGlider,
     _poolVegaTheWatcher,
+    _poolVenarianGold,
     _poolViashinoGrappler,
     _poolViashivanDragon,
     _poolVileEntomber,

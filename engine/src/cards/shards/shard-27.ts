@@ -337,6 +337,7 @@ import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
+import _poolPuppetMaster from "../pool/puppet-master.js";
 import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
 import _poolQasaliSlingers from "../pool/qasali-slingers.js";
@@ -362,6 +363,7 @@ import _poolRegalLeosaur from "../pool/regal-leosaur.js";
 import _poolRegalSliver from "../pool/regal-sliver.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
+import _poolRelicBind from "../pool/relic-bind.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
@@ -900,6 +902,7 @@ const shard: CardShard = {
     _poolPrinceImrahilTheFair,
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
+    _poolPuppetMaster,
     _poolPurpleDragonPunks,
     _poolPyreticPrankster,
     _poolQasaliSlingers,
@@ -925,6 +928,7 @@ const shard: CardShard = {
     _poolRegalSliver,
     _poolRegathanFirecat,
     _poolRejoinder,
+    _poolRelicBind,
     _poolRestlessCottage,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,

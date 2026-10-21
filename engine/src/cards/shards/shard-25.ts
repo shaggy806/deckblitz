@@ -10,6 +10,7 @@ import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-tita
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
+import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
@@ -493,6 +494,7 @@ import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
+import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
 import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
 import _poolTopiaryStomper from "../pool/topiary-stomper.js";
@@ -584,6 +586,7 @@ const shard: CardShard = {
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
     _poolAchillesDavenport,
+    _poolAislingLeprechaun,
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
     _poolAlrundsEpiphany,
@@ -1067,6 +1070,7 @@ const shard: CardShard = {
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThunderStrike,
+    _poolTimeElemental,
     _poolTitanHunter,
     _poolTophEarthbendingMaster,
     _poolTopiaryStomper,

@@ -147,6 +147,7 @@ import _poolDuskanaTheRageMother from "../pool/duskana-the-rage-mother.js";
 import _poolDuskriderFalcon from "../pool/duskrider-falcon.js";
 import _poolEarthKingdomJailer from "../pool/earth-kingdom-jailer.js";
 import _poolEddieBrock from "../pool/eddie-brock.js";
+import _poolElderLandWurm from "../pool/elder-land-wurm.js";
 import _poolEldraziTemple from "../pool/eldrazi-temple.js";
 import _poolElsha from "../pool/elsha.js";
 import _poolElvenPassage from "../pool/elven-passage.js";
@@ -720,6 +721,7 @@ const shard: CardShard = {
     _poolDuskriderFalcon,
     _poolEarthKingdomJailer,
     _poolEddieBrock,
+    _poolElderLandWurm,
     _poolEldraziTemple,
     _poolElsha,
     _poolElvenPassage,

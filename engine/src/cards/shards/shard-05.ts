@@ -161,6 +161,7 @@ import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
+import _poolDwarvenSong from "../pool/dwarven-song.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
 import _poolEasyPickings from "../pool/easy-pickings.js";
 import _poolEchoStorm from "../pool/echo-storm.js";
@@ -203,6 +204,7 @@ import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
+import _poolGiantSlug from "../pool/giant-slug.js";
 import _poolGiantsSkewer from "../pool/giants-skewer.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
@@ -485,6 +487,7 @@ import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
 import _poolSyggRiverCutthroat from "../pool/sygg-river-cutthroat.js";
 import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
+import _poolSylvanParadise from "../pool/sylvan-paradise.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
@@ -738,6 +741,7 @@ const shard: CardShard = {
     _poolDuskdaleWurm,
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
+    _poolDwarvenSong,
     _poolDwynenGiltLeafDaen,
     _poolEasyPickings,
     _poolEchoStorm,
@@ -780,6 +784,7 @@ const shard: CardShard = {
     _poolGhituAmplifier,
     _poolGhostlyChangeling,
     _poolGiantOx,
+    _poolGiantSlug,
     _poolGiantsSkewer,
     _poolGild,
     _poolGingerbreadHunter,
@@ -1062,6 +1067,7 @@ const shard: CardShard = {
     _poolSwordDancer,
     _poolSyggRiverCutthroat,
     _poolSylvanAnthem,
+    _poolSylvanParadise,
     _poolTaboraxHopesDemise,
     _poolTandemTakedown,
     _poolTarmogoyfNest,

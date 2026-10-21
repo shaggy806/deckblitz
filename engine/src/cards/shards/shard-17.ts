@@ -200,6 +200,7 @@ import _poolGrakmawSkyclaveRavager from "../pool/grakmaw-skyclave-ravager.js";
 import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGraspingShadows from "../pool/grasping-shadows.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
+import _poolGreatDefender from "../pool/great-defender.js";
 import _poolGretchenTitchwillow from "../pool/gretchen-titchwillow.js";
 import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
@@ -270,6 +271,7 @@ import _poolLastKiss from "../pool/last-kiss.js";
 import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
 import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
+import _poolLifeblood from "../pool/lifeblood.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
 import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
@@ -759,6 +761,7 @@ const shard: CardShard = {
     _poolGrandArbiterAugustinIv,
     _poolGraspingShadows,
     _poolGrazingKelpie,
+    _poolGreatDefender,
     _poolGretchenTitchwillow,
     _poolGreyKnightParagon,
     _poolGrimBounty,
@@ -829,6 +832,7 @@ const shard: CardShard = {
     _poolLeoninSnarecaster,
     _poolLetterOfAcceptance,
     _poolLifeFromTheLoam,
+    _poolLifeblood,
     _poolLithoformEngine,
     _poolLostToLegend,
     _poolLothlorienBlade,

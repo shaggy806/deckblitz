@@ -104,6 +104,7 @@ import _poolConvenientTarget from "../pool/convenient-target.js";
 import _poolCopyCatchers from "../pool/copy-catchers.js";
 import _poolCorridorMonitor from "../pool/corridor-monitor.js";
 import _poolCorruptedConviction from "../pool/corrupted-conviction.js";
+import _poolCosmicHorror from "../pool/cosmic-horror.js";
 import _poolCosmicRebirth from "../pool/cosmic-rebirth.js";
 import _poolCountersquall from "../pool/countersquall.js";
 import _poolCourtOfCunning from "../pool/court-of-cunning.js";
@@ -456,6 +457,7 @@ import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
+import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
 import _poolSpikedPitTrap from "../pool/spiked-pit-trap.js";
 import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
@@ -547,6 +549,7 @@ import _poolVoldarenAmbusher from "../pool/voldaren-ambusher.js";
 import _poolVowOfTorment from "../pool/vow-of-torment.js";
 import _poolVraskaSwarmsEminence from "../pool/vraska-swarms-eminence.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
+import _poolWallOfWonder from "../pool/wall-of-wonder.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
 import _poolWardedBattlements from "../pool/warded-battlements.js";
@@ -698,6 +701,7 @@ const shard: CardShard = {
     _poolCopyCatchers,
     _poolCorridorMonitor,
     _poolCorruptedConviction,
+    _poolCosmicHorror,
     _poolCosmicRebirth,
     _poolCountersquall,
     _poolCourtOfCunning,
@@ -1050,6 +1054,7 @@ const shard: CardShard = {
     _poolSoaringDrake,
     _poolSoaringShowOff,
     _poolSparkTrooper,
+    _poolSpectralCloak,
     _poolSpiderManWebSpinner,
     _poolSpikedPitTrap,
     _poolSpinewoodsPaladin,
@@ -1141,6 +1146,7 @@ const shard: CardShard = {
     _poolVowOfTorment,
     _poolVraskaSwarmsEminence,
     _poolWallOfDenial,
+    _poolWallOfWonder,
     _poolWarBehemoth,
     _poolWarEffort,
     _poolWardedBattlements,

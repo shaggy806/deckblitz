@@ -1,0 +1,805 @@
+{
+ "batch": "B132",
+ "status": "complete",
+ "ranks": "Legends (LEG, 1994-06-01): the first half of its last 219 cards by EDHREC rank (oldest-first walk)",
+ "authored": [
+  {
+   "name": "Aerathi Berserker",
+   "files": [
+    "engine/src/cards/pool/aerathi-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Craw Giant",
+   "files": [
+    "engine/src/cards/pool/craw-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frost Giant",
+   "files": [
+    "engine/src/cards/pool/frost-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hunding Gjornersen",
+   "files": [
+    "engine/src/cards/pool/hunding-gjornersen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Marhault Elsdragon",
+   "files": [
+    "engine/src/cards/pool/marhault-elsdragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wolverine Pack",
+   "files": [
+    "engine/src/cards/pool/wolverine-pack.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gravity Sphere",
+   "files": [
+    "engine/src/cards/pool/gravity-sphere.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nether Void",
+   "files": [
+    "engine/src/cards/pool/nether-void.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "In the Eye of Chaos",
+   "files": [
+    "engine/src/cards/pool/in-the-eye-of-chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rubinia Soulsinger",
+   "files": [
+    "engine/src/cards/pool/rubinia-soulsinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Willow Satyr",
+   "files": [
+    "engine/src/cards/pool/willow-satyr.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Living Plane",
+   "files": [
+    "engine/src/cards/pool/living-plane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm World",
+   "files": [
+    "engine/src/cards/pool/storm-world.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abomination",
+   "files": [
+    "engine/src/cards/pool/abomination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chromium",
+   "files": [
+    "engine/src/cards/pool/chromium.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dakkon Blackblade",
+   "files": [
+    "engine/src/cards/pool/dakkon-blackblade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divine Offering",
+   "files": [
+    "engine/src/cards/pool/divine-offering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Energy Tap",
+   "files": [
+    "engine/src/cards/pool/energy-tap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evil Eye of Orms-by-Gore",
+   "files": [
+    "engine/src/cards/pool/evil-eye-of-orms-by-gore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kobold Overlord",
+   "files": [
+    "engine/src/cards/pool/kobold-overlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life Chisel",
+   "files": [
+    "engine/src/cards/pool/life-chisel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Palladia-Mors",
+   "files": [
+    "engine/src/cards/pool/palladia-mors.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pyrotechnics",
+   "files": [
+    "engine/src/cards/pool/pyrotechnics.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Alabaster Potion",
+   "files": [
+    "engine/src/cards/pool/alabaster-potion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Voices",
+   "files": [
+    "engine/src/cards/pool/angelic-voices.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Lust",
+   "files": [
+    "engine/src/cards/pool/blood-lust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flash Counter",
+   "files": [
+    "engine/src/cards/pool/flash-counter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gwendlyn Di Corci",
+   "files": [
+    "engine/src/cards/pool/gwendlyn-di-corci.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hammerheim",
+   "files": [
+    "engine/src/cards/pool/hammerheim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hazezon Tamar",
+   "files": [
+    "engine/src/cards/pool/hazezon-tamar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heaven's Gate",
+   "files": [
+    "engine/src/cards/pool/heavens-gate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Indestructible Aura",
+   "files": [
+    "engine/src/cards/pool/indestructible-aura.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kismet",
+   "files": [
+    "engine/src/cards/pool/kismet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pendelhaven",
+   "files": [
+    "engine/src/cards/pool/pendelhaven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primordial Ooze",
+   "files": [
+    "engine/src/cards/pool/primordial-ooze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Remove Enchantments",
+   "files": [
+    "engine/src/cards/pool/remove-enchantments.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ring of Immortals",
+   "files": [
+    "engine/src/cards/pool/ring-of-immortals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sol'kanar the Swamp King",
+   "files": [
+    "engine/src/cards/pool/solkanar-the-swamp-king.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Syphon Soul",
+   "files": [
+    "engine/src/cards/pool/syphon-soul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vaevictis Asmadi",
+   "files": [
+    "engine/src/cards/pool/vaevictis-asmadi.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Acid Rain",
+   "files": [
+    "engine/src/cards/pool/acid-rain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcades Sabboth",
+   "files": [
+    "engine/src/cards/pool/arcades-sabboth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arena of the Ancients",
+   "files": [
+    "engine/src/cards/pool/arena-of-the-ancients.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avoid Fate",
+   "files": [
+    "engine/src/cards/pool/avoid-fate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Backfire",
+   "files": [
+    "engine/src/cards/pool/backfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellfire",
+   "files": [
+    "engine/src/cards/pool/hellfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hell's Caretaker",
+   "files": [
+    "engine/src/cards/pool/hells-caretaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nicol Bolas",
+   "files": [
+    "engine/src/cards/pool/nicol-bolas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Part Water",
+   "files": [
+    "engine/src/cards/pool/part-water.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Presence of the Master",
+   "files": [
+    "engine/src/cards/pool/presence-of-the-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Recall",
+   "files": [
+    "engine/src/cards/pool/recall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serpent Generator",
+   "files": [
+    "engine/src/cards/pool/serpent-generator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Untamed Wilds",
+   "files": [
+    "engine/src/cards/pool/untamed-wilds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Active Volcano",
+   "files": [
+    "engine/src/cards/pool/active-volcano.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Angus Mackenzie",
+   "files": [
+    "engine/src/cards/pool/angus-mackenzie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blight",
+   "files": [
+    "engine/src/cards/pool/blight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bronze Horse",
+   "files": [
+    "engine/src/cards/pool/bronze-horse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flash Flood",
+   "files": [
+    "engine/src/cards/pool/flash-flood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kobold Drill Sergeant",
+   "files": [
+    "engine/src/cards/pool/kobold-drill-sergeant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Matrix",
+   "files": [
+    "engine/src/cards/pool/mana-matrix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Moat",
+   "files": [
+    "engine/src/cards/pool/moat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planar Gate",
+   "files": [
+    "engine/src/cards/pool/planar-gate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reset",
+   "files": [
+    "engine/src/cards/pool/reset.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rohgahh of Kher Keep",
+   "files": [
+    "engine/src/cards/pool/rohgahh-of-kher-keep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea Kings' Blessing",
+   "files": [
+    "engine/src/cards/pool/sea-kings-blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Storm Seeker",
+   "files": [
+    "engine/src/cards/pool/storm-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Brute",
+   "files": [
+    "engine/src/cards/pool/the-brute.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Tabernacle at Pendrell Vale",
+   "files": [
+    "engine/src/cards/pool/the-tabernacle-at-pendrell-vale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Touch of Darkness",
+   "files": [
+    "engine/src/cards/pool/touch-of-darkness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urborg",
+   "files": [
+    "engine/src/cards/pool/urborg.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Chains of Mephistopheles",
+   "needs": [
+    "replacement:draw-replaced-by-discard-then-draw",
+    "bug:stacking-draw-replacements"
+   ],
+   "why": "a draw replaced by discard-then-draw, or a mill with an empty hand"
+  },
+  {
+   "name": "Divine Intervention",
+   "needs": [
+    "effect:game-is-a-draw"
+   ],
+   "why": "the game is a draw"
+  },
+  {
+   "name": "Arboria",
+   "needs": [
+    "static:cant-attack-player-unless-acted-last-turn"
+   ],
+   "why": "can't attack a player who didn't cast a spell or put a card onto the battlefield last turn"
+  },
+  {
+   "name": "Caverns of Despair",
+   "needs": [
+    "static:max-attackers-blockers"
+   ],
+   "why": "no more than two creatures can attack or block each combat"
+  },
+  {
+   "name": "Cathedral of Serra",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "bands with other legendary creatures"
+  },
+  {
+   "name": "The Abyss",
+   "needs": [
+    "target:chosen-by-other-player"
+   ],
+   "why": "the active player chooses the target of a trigger another player controls"
+  },
+  {
+   "name": "Mirror Universe",
+   "needs": [
+    "effect:exchange-life-totals"
+   ],
+   "why": "exchange life totals with target opponent"
+  },
+  {
+   "name": "Equinox",
+   "needs": [
+    "condition:spell-would-destroy-land"
+   ],
+   "why": "counter a spell if it would destroy a land you control"
+  },
+  {
+   "name": "Vampire Bats",
+   "needs": [
+    "cost:activate-no-more-than-n-times-each-turn"
+   ],
+   "why": "activate no more than twice each turn"
+  },
+  {
+   "name": "Glyph of Life",
+   "needs": [
+    "effect:delayed-trigger-on-targeted-creature-damage"
+   ],
+   "why": "whenever that Wall is dealt damage by an attacking creature this turn"
+  },
+  {
+   "name": "Blue Mana Battery",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove any number of charge counters"
+  },
+  {
+   "name": "Johan",
+   "needs": [
+    "static:attacking-doesnt-cause-tap"
+   ],
+   "why": "attacking doesn't cause creatures you control to tap"
+  },
+  {
+   "name": "Seafarer's Quay",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "bands with other legendary creatures"
+  },
+  {
+   "name": "Wall of Caltrops",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "gains banding"
+  },
+  {
+   "name": "Field of Dreams",
+   "needs": [
+    "static:players-play-with-library-top-revealed"
+   ],
+   "why": "every player plays with the top card of their library revealed"
+  },
+  {
+   "name": "Eureka",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "each player in turn may put a permanent card onto the battlefield, repeated"
+  },
+  {
+   "name": "All Hallow's Eve",
+   "needs": [
+    "trigger:trigger-from-exile"
+   ],
+   "why": "an upkeep trigger from exile"
+  },
+  {
+   "name": "Wall of Shadows",
+   "needs": [
+    "static:untargetable-by-wall-only-spells"
+   ],
+   "why": "can't be the target of spells or abilities that can target only Walls"
+  },
+  {
+   "name": "Juxtapose",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of creatures"
+  },
+  {
+   "name": "Nebuchadnezzar",
+   "needs": [
+    "decision:name-a-card",
+    "effect:reveal-x-random-discard-named"
+   ],
+   "why": "name a card; reveal X at random, discard those named"
+  },
+  {
+   "name": "Black Mana Battery",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove any number of charge counters"
+  },
+  {
+   "name": "Glyph of Destruction",
+   "needs": [
+    "effect:pt-until-end-of-combat"
+   ],
+   "why": "+10/+0 until end of combat"
+  },
+  {
+   "name": "Land's Edge",
+   "needs": [
+    "effect:any-player-may-activate"
+   ],
+   "why": "any player may activate this ability"
+  },
+  {
+   "name": "Revelation",
+   "needs": [
+    "static:players-play-with-hands-revealed"
+   ],
+   "why": "players play with their hands revealed"
+  },
+  {
+   "name": "Tolaria",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "target creature loses banding"
+  },
+  {
+   "name": "Fortified Area",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "Walls you control get banding"
+  },
+  {
+   "name": "Mountain Stronghold",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "bands with other legendary creatures"
+  },
+  {
+   "name": "Takklemaggot",
+   "needs": [
+    "effect:return-aura-after-host-died",
+    "effect:aura-becomes-non-aura-enchantment"
+   ],
+   "why": "moves to a new host chosen by the dead creature's controller, or becomes a non-Aura enchantment"
+  },
+  {
+   "name": "Wall of Vapor",
+   "needs": [
+    "filter:creature-source-is-blocking"
+   ],
+   "why": "prevent damage dealt to it by creatures it's blocking"
+  },
+  {
+   "name": "Wall of Dust",
+   "needs": [
+    "effect:restrict-during-controllers-next-turn"
+   ],
+   "why": "can't attack during its controller's next turn"
+  },
+  {
+   "name": "Sentinel",
+   "needs": [
+    "effect:target-creature-source-is-blocking",
+    "effect:set-base-toughness-only"
+   ],
+   "why": "base toughness 1 plus a creature blocking or blocked by it"
+  },
+  {
+   "name": "Sword of the Ages",
+   "needs": [
+    "effect:sacrifice-any-number"
+   ],
+   "why": "sacrifice this and any number of creatures"
+  },
+  {
+   "name": "Land Equilibrium",
+   "needs": [
+    "replacement:opponent-land-enters-then-sacrifice"
+   ],
+   "why": "an opponent with as many lands puts a land onto the battlefield, then sacrifices one"
+  },
+  {
+   "name": "Gabriel Angelfire",
+   "needs": [
+    "duration:until-your-next-upkeep"
+   ],
+   "why": "gains the chosen ability until your next upkeep"
+  },
+  {
+   "name": "Adventurers' Guildhouse",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "bands with other legendary creatures"
+  },
+  {
+   "name": "Unholy Citadel",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "bands with other legendary creatures"
+  },
+  {
+   "name": "Ayesha Tanaka",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Gaseous Form",
+   "needs": [
+    "replacement:prevent-damage-to-attached"
+   ],
+   "why": "prevent combat damage dealt to and by enchanted creature"
+  },
+  {
+   "name": "Gauntlets of Chaos",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of permanents that share a type"
+  },
+  {
+   "name": "Triassic Egg",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "a modal activated ability with a targeted mode"
+  },
+  {
+   "name": "Reincarnation",
+   "needs": [
+    "effect:return-from-trigger-owners-graveyard-under-owner"
+   ],
+   "why": "a creature card from the dead creature's owner's graveyard, under that owner"
+  },
+  {
+   "name": "Rasputin Dreamweaver",
+   "needs": [
+    "static:counter-cap",
+    "condition:started-turn-untapped"
+   ],
+   "why": "no more than seven dream counters; if it started the turn untapped"
+  },
+  {
+   "name": "Enchantment Alteration",
+   "needs": [
+    "effect:attach-to-chosen-creature"
+   ],
+   "why": "attach target Aura to another permanent chosen as it resolves"
+  }
+ ]
+}

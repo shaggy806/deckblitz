@@ -549,6 +549,7 @@ import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
 import _tokensHeroToken from "../tokens/hero-token.js";
 import _tokensIllusionTokenFreezingBlocker from "../tokens/illusion-token-freezing-blocker.js";
 import _tokensKorWarriorToken from "../tokens/kor-warrior-token.js";
+import _tokensMinorDemonToken from "../tokens/minor-demon-token.js";
 import _tokensOrnithopterToken from "../tokens/ornithopter-token.js";
 import _tokensPestToken from "../tokens/pest-token.js";
 import _tokensRhinoToken from "../tokens/rhino-token.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _tokensHeroToken,
     _tokensIllusionTokenFreezingBlocker,
     _tokensKorWarriorToken,
+    _tokensMinorDemonToken,
     _tokensOrnithopterToken,
     _tokensPestToken,
     _tokensRhinoToken,
