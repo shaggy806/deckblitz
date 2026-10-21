@@ -10,6 +10,7 @@ import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
 import { ArtCredit } from './ArtCredit.tsx'
 import { TaxBadge } from './TaxBadge.tsx'
+import { counterSummary } from './counterSummary.ts'
 import {
   isArtBlocked,
   isArtPending,
@@ -475,19 +476,7 @@ export function CardTile({
           </span>
         ) : null}
         {counters.length > 0 || obj.regenerationShields > 0 ? (
-          <span className="ct-counters">
-            {counters.map(([k, n]) => (
-              <span key={k}>
-                {n}× {k}
-              </span>
-            ))}
-            {obj.regenerationShields > 0 ? (
-              <span>
-                {obj.regenerationShields} regeneration shield
-                {obj.regenerationShields === 1 ? '' : 's'}
-              </span>
-            ) : null}
-          </span>
+          <span className="ct-counters">{counterSummary(counters, obj.regenerationShields)}</span>
         ) : null}
       </span>
 
