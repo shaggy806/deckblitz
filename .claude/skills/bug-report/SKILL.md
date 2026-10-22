@@ -76,8 +76,8 @@ quick patch would hide the cause, fix the cause.
   `docs/client-gaps.md` under the same bold title), with a fix outline:
   where, what, what it risks. Then ask.
 - **A hand check is worth keeping** (a new player decision, a careful rules
-  call): add an entry to `docs/manual-checks.md` with its board in
-  `client/src/builder/manualChecks.ts`.
+  call): add a quick test to `docs/manual-checks.md` (one thing checked; the doc's intro has the
+  format) with its board in `client/src/builder/manualChecks.ts`.
 
 ## 5. Ship
 

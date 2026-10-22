@@ -5,7 +5,8 @@ Status: **shipped** (2026-10-03) — the first version; its known gaps are in `B
 A developer's tool for testing cards and interactions: build a board from scratch, searching the
 card pool and placing cards, with nothing triggering while it's built; then play it, to see how
 cards interact, how the bots answer, or whether the engine gets it right. Its first workload is
-`docs/manual-checks.md`, whose entries each give a setup to build and what to look for.
+`docs/manual-checks.md`: quick tests, each a ready board, one thing to do and what to look for
+(rewritten that way 2026-10-22).
 
 ## Where it lives
 

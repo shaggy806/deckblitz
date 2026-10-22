@@ -149,7 +149,8 @@ whoever writes it:
   leads. A feature that landed and was a BACKLOG item: its line to
   `COMPLETED.md`.
 - A new player decision or a careful rules call: an entry in
-  `docs/manual-checks.md` with its board in `client/src/builder/manualChecks.ts`.
+  `docs/manual-checks.md` — quick tests, one thing each (the doc's intro has the format) — each
+  with its own board in `client/src/builder/manualChecks.ts`.
 
 ## 6. Ship
 

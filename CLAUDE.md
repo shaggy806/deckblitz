@@ -68,11 +68,12 @@ for:
   substitution tables in `engine/src/sample-decks.ts`) go as their originals land. The pool is
   ~5,400 real cards (`npm run card:verify -w engine` prints the current count of definitions,
   which is a little higher: each face of a double-faced card is its own).
-- **`docs/manual-checks.md`** — the cards worth checking by hand in a live game: a new player
-  decision or a careful rules call, each with a setup, what to do and what to look for. Each
-  authoring pass adds entries for what it introduces, each with a loadable board in
-  `client/src/builder/manualChecks.ts` (the scenario builder's Manual checks list; a server test
-  insists every entry has one); an entry is deleted once it checks out.
+- **`docs/manual-checks.md`** — quick tests to play by hand in the scenario builder: a new player
+  decision or a careful rules call, **one thing per test** — a `###` title, a one- or two-step
+  **Do** and a short **Expect** (the doc's intro has the format). Each authoring pass adds tests
+  for what it introduces, each with its own board in `client/src/builder/manualChecks.ts` (the
+  builder's Manual checks list plays it in one click; a server test insists every test has exactly
+  one); a test is deleted once it checks out.
 - **`docs/card-blockers.md`** — reference, not a to-do list: what blocks the unimplemented cards,
   batch by batch (top-5000 batches, the TDC precons, card sweep 2) and by family, indexing the
   per-card JSON records in `engine/data/sweep-2/` and `sweep-3/` — their needs keyed on one

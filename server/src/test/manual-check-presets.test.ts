@@ -40,14 +40,17 @@ describe("the manual-check presets", () => {
     expect(headings.filter((h) => !titles.has(h))).toEqual([]);
   });
 
-  it("gives each board of one entry a different variant name", () => {
+  it("gives each test exactly one board, and each test a heading of its own", () => {
+    // Quick tests (2026-10-22): one thing checked per test, so one board —
+    // "Play this test" loads the first, and a second would never be seen.
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const p of MANUAL_CHECK_PRESETS) {
-      const id = `${p.title} / ${p.variant ?? ""}`;
-      if (seen.has(id)) dupes.push(id);
-      seen.add(id);
+      if (seen.has(p.title)) dupes.push(p.title);
+      seen.add(p.title);
     }
     expect(dupes).toEqual([]);
+    const headings = entryHeadings();
+    expect(headings.filter((h, i) => headings.indexOf(h) !== i)).toEqual([]);
   });
 });
