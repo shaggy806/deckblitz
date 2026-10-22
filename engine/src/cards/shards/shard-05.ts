@@ -132,6 +132,7 @@ import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
 import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
+import _poolCrocodileOfTheCrossing from "../pool/crocodile-of-the-crossing.js";
 import _poolCryptCreeper from "../pool/crypt-creeper.js";
 import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
@@ -729,6 +730,7 @@ const shard: CardShard = {
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
     _poolCrimestopperSprite,
+    _poolCrocodileOfTheCrossing,
     _poolCryptCreeper,
     _poolCryptbreaker,
     _poolCustodianOfTheTrove,

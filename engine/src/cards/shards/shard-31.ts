@@ -182,6 +182,7 @@ import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFearOfFalling from "../pool/fear-of-falling.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
 import _poolFesteringGoblin from "../pool/festering-goblin.js";
+import _poolFesteringMummy from "../pool/festering-mummy.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
 import _poolFeveredSuspicion from "../pool/fevered-suspicion.js";
 import _poolFightAsOne from "../pool/fight-as-one.js";
@@ -786,6 +787,7 @@ const shard: CardShard = {
     _poolFearOfFalling,
     _poolFellwarStone,
     _poolFesteringGoblin,
+    _poolFesteringMummy,
     _poolFetidHeath,
     _poolFeveredSuspicion,
     _poolFightAsOne,

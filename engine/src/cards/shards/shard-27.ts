@@ -197,6 +197,7 @@ import _poolGithzeraiMonk from "../pool/githzerai-monk.js";
 import _poolGladecoverScout from "../pool/gladecover-scout.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGoblinTombRaider from "../pool/goblin-tomb-raider.js";
+import _poolGraspingDunes from "../pool/grasping-dunes.js";
 import _poolGravelgillAxeshark from "../pool/gravelgill-axeshark.js";
 import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
 import _poolGrimJavelineer from "../pool/grim-javelineer.js";
@@ -776,6 +777,7 @@ const shard: CardShard = {
     _poolGladecoverScout,
     _poolGoblinMountaineer,
     _poolGoblinTombRaider,
+    _poolGraspingDunes,
     _poolGravelgillAxeshark,
     _poolGreatDivideGuide,
     _poolGrimJavelineer,

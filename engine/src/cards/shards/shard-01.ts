@@ -383,6 +383,7 @@ import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRowansBattleguard from "../pool/rowans-battleguard.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
+import _poolSacredCat from "../pool/sacred-cat.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
 import _poolSaltRoadPackbeast from "../pool/salt-road-packbeast.js";
 import _poolSaltRoadPatrol from "../pool/salt-road-patrol.js";
@@ -948,6 +949,7 @@ const shard: CardShard = {
     _poolRowansBattleguard,
     _poolRummagingWizard,
     _poolRuthlessDeathfang,
+    _poolSacredCat,
     _poolSakashimaOfAThousandFaces,
     _poolSaltRoadPackbeast,
     _poolSaltRoadPatrol,

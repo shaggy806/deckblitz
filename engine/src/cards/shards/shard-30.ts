@@ -25,6 +25,7 @@ import _poolAnepVizierOfHazoret from "../pool/anep-vizier-of-hazoret.js";
 import _poolAngelOfTheDawn from "../pool/angel-of-the-dawn.js";
 import _poolAngrathsMarauders from "../pool/angraths-marauders.js";
 import _poolAnkleShanker from "../pool/ankle-shanker.js";
+import _poolAnointerPriest from "../pool/anointer-priest.js";
 import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
@@ -604,6 +605,7 @@ const shard: CardShard = {
     _poolAngelOfTheDawn,
     _poolAngrathsMarauders,
     _poolAnkleShanker,
+    _poolAnointerPriest,
     _poolAragornKingOfGondor,
     _poolArcaneBombardment,
     _poolArcboundCondor,

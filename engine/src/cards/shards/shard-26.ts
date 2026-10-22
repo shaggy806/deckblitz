@@ -564,6 +564,7 @@ import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
 import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dragon.js";
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
+import _tokensHippoToken from "../tokens/hippo-token.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
@@ -1138,6 +1139,7 @@ const shard: CardShard = {
     _tokensDragonElementalToken,
     _tokensDragonTokenWakeTheDragon,
     _tokensElementalTokenVernalSovereign,
+    _tokensHippoToken,
     _tokensNymphToken,
     _tokensPegasusToken,
     _tokensRebelToken,

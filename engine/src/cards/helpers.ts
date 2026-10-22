@@ -1368,6 +1368,30 @@ export const eternalizeAbility = (cost: string, text: string): ActivatedAbility 
 });
 
 /**
+ * Embalm (rule 702.128a — Sacred Cat): "[Cost], Exile this card from your
+ * graveyard: Create a token that's a copy of this card, except it's white, it
+ * has no mana cost, and it's a Zombie in addition to its other types. Activate
+ * only as a sorcery." Eternalize's twin, keeping the card's own size. `text`
+ * is the ability as printed, reminder text included.
+ */
+export const embalmAbility = (cost: string, text: string): ActivatedAbility => ({
+  cost: { mana: cost, tap: false },
+  zone: "graveyard",
+  sorcerySpeed: true,
+  targets: [],
+  effect: {
+    kind: "create-token-copy",
+    of: "source",
+    count: 1,
+    who: "you",
+    asCard: true,
+    exceptions: { setColors: ["W"], addSubtypes: ["Zombie"], noManaCost: true },
+  },
+  resolve: null,
+  text,
+});
+
+/**
  * Evolve (rule 702.100a): "Whenever a creature you control enters, if that
  * creature's power is greater than this creature's power and/or that
  * creature's toughness is greater than this creature's toughness, put a +1/+1

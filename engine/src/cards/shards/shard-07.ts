@@ -334,6 +334,7 @@ import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
 import _poolOpenFire from "../pool/open-fire.js";
 import _poolOreplatePangolin from "../pool/oreplate-pangolin.js";
+import _poolOrneryKudu from "../pool/ornery-kudu.js";
 import _poolOrnithopterOfParadise from "../pool/ornithopter-of-paradise.js";
 import _poolOrzhovGuildgate from "../pool/orzhov-guildgate.js";
 import _poolOteclanLandmark from "../pool/oteclan-landmark.js";
@@ -940,6 +941,7 @@ const shard: CardShard = {
     _poolOnduWarCleric,
     _poolOpenFire,
     _poolOreplatePangolin,
+    _poolOrneryKudu,
     _poolOrnithopterOfParadise,
     _poolOrzhovGuildgate,
     _poolOteclanLandmark,
