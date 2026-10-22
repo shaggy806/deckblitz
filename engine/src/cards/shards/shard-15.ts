@@ -558,6 +558,7 @@ import _tokensForestTentacleToken from "../tokens/forest-tentacle-token.js";
 import _tokensGoatToken from "../tokens/goat-token.js";
 import _tokensGoblinToken from "../tokens/goblin-token.js";
 import _tokensGreenPlantToken11 from "../tokens/green-plant-token-1-1.js";
+import _tokensGremlinToken22 from "../tokens/gremlin-token-2-2.js";
 import _tokensGuenhwyvar from "../tokens/guenhwyvar.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
@@ -1130,6 +1131,7 @@ const shard: CardShard = {
     _tokensGoatToken,
     _tokensGoblinToken,
     _tokensGreenPlantToken11,
+    _tokensGremlinToken22,
     _tokensGuenhwyvar,
     _tokensHumanClericToken,
     _tokensMonkToken,

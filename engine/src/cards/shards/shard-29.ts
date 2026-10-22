@@ -575,6 +575,7 @@ import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
+import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
 import _tokensHorrorTokenTheFinalDays from "../tokens/horror-token-the-final-days.js";
@@ -1168,6 +1169,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAngelWarriorToken,
     _tokensElementalToken53,
+    _tokensEtheriumCellToken,
     _tokensFaerieDragonToken,
     _tokensHornetToken,
     _tokensHorrorTokenTheFinalDays,

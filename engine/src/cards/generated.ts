@@ -18559,6 +18559,7 @@ import _tokensElfToken from "./tokens/elf-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "./tokens/elf-warrior-token-rhys-the-redeemed.js";
 import _tokensElfWarriorToken from "./tokens/elf-warrior-token.js";
 import _tokensElkToken from "./tokens/elk-token.js";
+import _tokensEtheriumCellToken from "./tokens/etherium-cell-token.js";
 import _tokensEverywhereToken from "./tokens/everywhere-token.js";
 import _tokensFaerieDragonToken from "./tokens/faerie-dragon-token.js";
 import _tokensFaerieRogueToken from "./tokens/faerie-rogue-token.js";
@@ -18585,6 +18586,7 @@ import _tokensGlimmerToken from "./tokens/glimmer-token.js";
 import _tokensGnomeToken from "./tokens/gnome-token.js";
 import _tokensGoatToken from "./tokens/goat-token.js";
 import _tokensGoblinConstructToken from "./tokens/goblin-construct-token.js";
+import _tokensGoblinShamanToken from "./tokens/goblin-shaman-token.js";
 import _tokensGoblinTokenBoggartMischief from "./tokens/goblin-token-boggart-mischief.js";
 import _tokensGoblinTokenGoblinSpymaster from "./tokens/goblin-token-goblin-spymaster.js";
 import _tokensGoblinTokenHaste from "./tokens/goblin-token-haste.js";
@@ -18604,6 +18606,7 @@ import _tokensGreenElementalToken22 from "./tokens/green-elemental-token-2-2.js"
 import _tokensGreenOxToken44 from "./tokens/green-ox-token-4-4.js";
 import _tokensGreenPlantToken11 from "./tokens/green-plant-token-1-1.js";
 import _tokensGreenSpiderTokenReach from "./tokens/green-spider-token-reach.js";
+import _tokensGremlinToken22 from "./tokens/gremlin-token-2-2.js";
 import _tokensGremlinToken from "./tokens/gremlin-token.js";
 import _tokensGriffinToken from "./tokens/griffin-token.js";
 import _tokensGuenhwyvar from "./tokens/guenhwyvar.js";
@@ -37489,6 +37492,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensElfWarriorTokenRhysTheRedeemed,
   _tokensElfWarriorToken,
   _tokensElkToken,
+  _tokensEtheriumCellToken,
   _tokensEverywhereToken,
   _tokensFaerieDragonToken,
   _tokensFaerieRogueToken,
@@ -37515,6 +37519,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGnomeToken,
   _tokensGoatToken,
   _tokensGoblinConstructToken,
+  _tokensGoblinShamanToken,
   _tokensGoblinTokenBoggartMischief,
   _tokensGoblinTokenGoblinSpymaster,
   _tokensGoblinTokenHaste,
@@ -37534,6 +37539,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGreenOxToken44,
   _tokensGreenPlantToken11,
   _tokensGreenSpiderTokenReach,
+  _tokensGremlinToken22,
   _tokensGremlinToken,
   _tokensGriffinToken,
   _tokensGuenhwyvar,
@@ -56420,6 +56426,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/elf-warrior-token-rhys-the-redeemed": _tokensElfWarriorTokenRhysTheRedeemed,
   "tokens/elf-warrior-token": _tokensElfWarriorToken,
   "tokens/elk-token": _tokensElkToken,
+  "tokens/etherium-cell-token": _tokensEtheriumCellToken,
   "tokens/everywhere-token": _tokensEverywhereToken,
   "tokens/faerie-dragon-token": _tokensFaerieDragonToken,
   "tokens/faerie-rogue-token": _tokensFaerieRogueToken,
@@ -56446,6 +56453,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/gnome-token": _tokensGnomeToken,
   "tokens/goat-token": _tokensGoatToken,
   "tokens/goblin-construct-token": _tokensGoblinConstructToken,
+  "tokens/goblin-shaman-token": _tokensGoblinShamanToken,
   "tokens/goblin-token-boggart-mischief": _tokensGoblinTokenBoggartMischief,
   "tokens/goblin-token-goblin-spymaster": _tokensGoblinTokenGoblinSpymaster,
   "tokens/goblin-token-haste": _tokensGoblinTokenHaste,
@@ -56465,6 +56473,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/green-ox-token-4-4": _tokensGreenOxToken44,
   "tokens/green-plant-token-1-1": _tokensGreenPlantToken11,
   "tokens/green-spider-token-reach": _tokensGreenSpiderTokenReach,
+  "tokens/gremlin-token-2-2": _tokensGremlinToken22,
   "tokens/gremlin-token": _tokensGremlinToken,
   "tokens/griffin-token": _tokensGriffinToken,
   "tokens/guenhwyvar": _tokensGuenhwyvar,
