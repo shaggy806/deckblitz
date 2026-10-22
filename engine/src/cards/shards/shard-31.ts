@@ -10,6 +10,7 @@ import _poolAberrantMindSorcerer from "../pool/aberrant-mind-sorcerer.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
 import _poolAerialGuide from "../pool/aerial-guide.js";
+import _poolAethersphereHarvester from "../pool/aethersphere-harvester.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
@@ -256,6 +257,7 @@ import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
 import _poolHerosResolve from "../pool/heros-resolve.js";
 import _poolHideousVisage from "../pool/hideous-visage.js";
+import _poolHighspireInfusion from "../pool/highspire-infusion.js";
 import _poolHighwayRobbery from "../pool/highway-robbery.js";
 import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
 import _poolHollowTrees from "../pool/hollow-trees.js";
@@ -453,6 +455,7 @@ import _poolShieldMare from "../pool/shield-mare.js";
 import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
 import _poolShimmerscaleDrake from "../pool/shimmerscale-drake.js";
 import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
+import _poolShipwreckMoray from "../pool/shipwreck-moray.js";
 import _poolShireScarecrow from "../pool/shire-scarecrow.js";
 import _poolShivanHarvest from "../pool/shivan-harvest.js";
 import _poolShurisFabricator from "../pool/shuris-fabricator.js";
@@ -620,6 +623,7 @@ const shard: CardShard = {
     _poolAbzanBanner,
     _poolAcolyteOfAclazotz,
     _poolAerialGuide,
+    _poolAethersphereHarvester,
     _poolAirCultElemental,
     _poolAkkiBattleSquad,
     _poolAlongTheCrookedWay,
@@ -866,6 +870,7 @@ const shard: CardShard = {
     _poolHellkiteTyrant,
     _poolHerosResolve,
     _poolHideousVisage,
+    _poolHighspireInfusion,
     _poolHighwayRobbery,
     _poolHoldoutSettlement,
     _poolHollowTrees,
@@ -1063,6 +1068,7 @@ const shard: CardShard = {
     _poolShimmeringBarrier,
     _poolShimmerscaleDrake,
     _poolShinenOfStarsLight,
+    _poolShipwreckMoray,
     _poolShireScarecrow,
     _poolShivanHarvest,
     _poolShurisFabricator,

@@ -97,6 +97,7 @@ import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
+import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
@@ -120,6 +121,7 @@ import _poolDemonsDue from "../pool/demons-due.js";
 import _poolDerelictAttic from "../pool/derelict-attic.js";
 import _poolDesertersDisciple from "../pool/deserters-disciple.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
+import _poolDestructiveTampering from "../pool/destructive-tampering.js";
 import _poolDetainedByLegionnaires from "../pool/detained-by-legionnaires.js";
 import _poolDevoutDecree from "../pool/devout-decree.js";
 import _poolDimirCluestone from "../pool/dimir-cluestone.js";
@@ -206,6 +208,7 @@ import _poolGhostTown from "../pool/ghost-town.js";
 import _poolGhostlyVisit from "../pool/ghostly-visit.js";
 import _poolGiantSpectacle from "../pool/giant-spectacle.js";
 import _poolGlenElendraLiege from "../pool/glen-elendra-liege.js";
+import _poolGlintSleeveSiphoner from "../pool/glint-sleeve-siphoner.js";
 import _poolGloryBearers from "../pool/glory-bearers.js";
 import _poolGnarledMass from "../pool/gnarled-mass.js";
 import _poolGnarledSage from "../pool/gnarled-sage.js";
@@ -281,6 +284,7 @@ import _poolLazavTheMultifarious from "../pool/lazav-the-multifarious.js";
 import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
+import _poolLifecraftersGift from "../pool/lifecrafters-gift.js";
 import _poolLifelace from "../pool/lifelace.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
@@ -355,6 +359,7 @@ import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPemminsAura from "../pool/pemmins-aura.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
+import _poolPerilousPredicament from "../pool/perilous-predicament.js";
 import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
 import _poolPhaseDolphin from "../pool/phase-dolphin.js";
@@ -402,6 +407,7 @@ import _poolRiggingRunner from "../pool/rigging-runner.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
+import _poolRogueRefiner from "../pool/rogue-refiner.js";
 import _poolRorixBladewing from "../pool/rorix-bladewing.js";
 import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
 import _poolRottingLegion from "../pool/rotting-legion.js";
@@ -682,6 +688,7 @@ const shard: CardShard = {
     _poolConciliatorsDuelist,
     _poolConsumingAetherborn,
     _poolCopperTablet,
+    _poolCrackdownConstruct,
     _poolCreepingTarPit,
     _poolCrewCaptain,
     _poolCrossoverCollaboration,
@@ -705,6 +712,7 @@ const shard: CardShard = {
     _poolDerelictAttic,
     _poolDesertersDisciple,
     _poolDestinySpinner,
+    _poolDestructiveTampering,
     _poolDetainedByLegionnaires,
     _poolDevoutDecree,
     _poolDimirCluestone,
@@ -791,6 +799,7 @@ const shard: CardShard = {
     _poolGhostlyVisit,
     _poolGiantSpectacle,
     _poolGlenElendraLiege,
+    _poolGlintSleeveSiphoner,
     _poolGloryBearers,
     _poolGnarledMass,
     _poolGnarledSage,
@@ -866,6 +875,7 @@ const shard: CardShard = {
     _poolLeafArrow,
     _poolLeafCrownedVisionary,
     _poolLeylineProwler,
+    _poolLifecraftersGift,
     _poolLifelace,
     _poolLightshieldParry,
     _poolLilianasScorn,
@@ -940,6 +950,7 @@ const shard: CardShard = {
     _poolPathbreakerIbex,
     _poolPemminsAura,
     _poolPendrellDrake,
+    _poolPerilousPredicament,
     _poolPestControl,
     _poolPetrifiedPlating,
     _poolPhaseDolphin,
@@ -987,6 +998,7 @@ const shard: CardShard = {
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
     _poolRiseAgain,
+    _poolRogueRefiner,
     _poolRorixBladewing,
     _poolRoseRoomTreasurer,
     _poolRottingLegion,

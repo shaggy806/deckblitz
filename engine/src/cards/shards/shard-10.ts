@@ -252,6 +252,7 @@ import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
 import _poolIcatianMoneychanger from "../pool/icatian-moneychanger.js";
+import _poolIceOver from "../pool/ice-over.js";
 import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
@@ -361,6 +362,7 @@ import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
 import _poolPhotonLivingLight from "../pool/photon-living-light.js";
 import _poolPiaAndKiranNalaar from "../pool/pia-and-kiran-nalaar.js";
+import _poolPiasRevolution from "../pool/pias-revolution.js";
 import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
 import _poolPillageTheBog from "../pool/pillage-the-bog.js";
 import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
@@ -444,6 +446,7 @@ import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
 import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
 import _poolShefetMonitor from "../pool/shefet-monitor.js";
+import _poolShieldedAetherThief from "../pool/shielded-aether-thief.js";
 import _poolShimmerwingChimera from "../pool/shimmerwing-chimera.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
 import _poolShivanFire from "../pool/shivan-fire.js";
@@ -867,6 +870,7 @@ const shard: CardShard = {
     _poolHuntedWitness,
     _poolIanTheReckless,
     _poolIcatianMoneychanger,
+    _poolIceOver,
     _poolIchorplateGolem,
     _poolIdolOfOblivion,
     _poolIllGottenInheritance,
@@ -976,6 +980,7 @@ const shard: CardShard = {
     _poolPersonify,
     _poolPhotonLivingLight,
     _poolPiaAndKiranNalaar,
+    _poolPiasRevolution,
     _poolPilgrimsEye,
     _poolPillageTheBog,
     _poolPinToTheEarth,
@@ -1059,6 +1064,7 @@ const shard: CardShard = {
     _poolShadowspear,
     _poolShamblingCieth,
     _poolShefetMonitor,
+    _poolShieldedAetherThief,
     _poolShimmerwingChimera,
     _poolShineshadowSnarl,
     _poolShivanFire,

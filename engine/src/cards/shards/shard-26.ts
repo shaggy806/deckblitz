@@ -8,6 +8,7 @@ import _poolAbzanBattlePriest from "../pool/abzan-battle-priest.js";
 import _poolAccessDenied from "../pool/access-denied.js";
 import _poolAdaptiveSporesinger from "../pool/adaptive-sporesinger.js";
 import _poolAdrianaCaptainOfTheGuard from "../pool/adriana-captain-of-the-guard.js";
+import _poolAegisAutomaton from "../pool/aegis-automaton.js";
 import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
@@ -81,6 +82,7 @@ import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
+import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
 import _poolChandler from "../pool/chandler.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
@@ -586,6 +588,7 @@ const shard: CardShard = {
     _poolAccessDenied,
     _poolAdaptiveSporesinger,
     _poolAdrianaCaptainOfTheGuard,
+    _poolAegisAutomaton,
     _poolAegisOfTheHeavens,
     _poolAetherSpellbomb,
     _poolAetherfluxReservoir,
@@ -659,6 +662,7 @@ const shard: CardShard = {
     _poolCaseyJonesJuryRigJusticiar,
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
+    _poolCaughtInTheBrights,
     _poolChandler,
     _poolChaosTheEndless,
     _poolChaplainsBlessing,

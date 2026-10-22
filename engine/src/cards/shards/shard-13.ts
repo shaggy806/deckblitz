@@ -9,6 +9,7 @@ import _poolAccordersShield from "../pool/accorders-shield.js";
 import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
+import _poolAetherInspector from "../pool/aether-inspector.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
@@ -38,6 +39,7 @@ import _poolAsariCaptain from "../pool/asari-captain.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
+import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolAccursedHorde,
     _poolAerialDoombot,
     _poolAerialResponder,
+    _poolAetherInspector,
     _poolAfterlifeFromTheLoam,
     _poolAfterthoughtSentry,
     _poolAgentOfHorizons,
@@ -627,6 +630,7 @@ const shard: CardShard = {
     _poolAsphyxiate,
     _poolAstridPeth,
     _poolAttendedHealer,
+    _poolAudaciousInfiltrator,
     _poolAuthorityOfTheConsuls,
     _poolAvengingHuntbonder,
     _poolAxegrinderGiant,

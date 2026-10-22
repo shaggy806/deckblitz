@@ -3121,6 +3121,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Reverse Engineer: improvise with artifacts',
+    board({
+      you: { bf: ['Island*2', 'Darksteel Relic', 'Memnite', 'Ornithopter', 'Grizzly Bears'], hand: ['Reverse Engineer'] },
+    }),
+  ),
+  preset(
     "Conqueror's Galleon attacks and comes back a land",
     board({
       you: { bf: ["Conqueror's Galleon", 'Craw Wurm'] },

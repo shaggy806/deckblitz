@@ -1299,7 +1299,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     substitutions: [
       sub("Dragonhawk, Fate's Tempest", "Demanding Dragon", "Five-mana red flying Dragon."),
       sub("Minion of the Mighty", "Dragonkin Berserker", "Cheap red creature that pays off Dragons."),
-      sub("The Elder Dragon War", "Enduring Courage", "Red enchantment that pumps and hastes the deck's creatures."),
     ],
   }),
   precon({

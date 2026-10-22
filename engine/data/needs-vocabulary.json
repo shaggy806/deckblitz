@@ -9679,6 +9679,18 @@
   "effect:shuffle-graveyard-filter-into-library": {
    "family": "effect:shuffle-library",
    "example": "Elixir: shuffle the nonland cards from your graveyard into your library, then gain life equal to the number shuffled — shuffle-graveyard-into-library has no filter or this-way count."
+  },
+  "cost:crew-alternative-remove-loyalty": {
+   "family": "keyword:crew",
+   "example": "Heart of Kiran: crew by removing a loyalty counter from a planeswalker you control rather than tapping creatures."
+  },
+  "effect:prevent-combat-damage-by-chosen-creature": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "Ajani's Aid: prevent all combat damage a creature of your choice would deal this turn — chosen as it resolves, not targeted."
+  },
+  "effect:reveal-until-per-destroyed-this-way": {
+   "family": "effect:reveal-until-count",
+   "example": "Indomitable Creativity: for each permanent destroyed this way, its controller reveals until an artifact or creature card, and all of them enter at once."
   }
  }
 }

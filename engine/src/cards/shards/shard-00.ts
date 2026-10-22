@@ -118,6 +118,7 @@ import _poolCursedRecording from "../pool/cursed-recording.js";
 import _poolCybermat from "../pool/cybermat.js";
 import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
+import _poolDarkIntimations from "../pool/dark-intimations.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
@@ -727,6 +728,7 @@ const shard: CardShard = {
     _poolCybermat,
     _poolCyclopsElectromancer,
     _poolDanithaBenaliasHope,
+    _poolDarkIntimations,
     _poolDarkTutelage,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,

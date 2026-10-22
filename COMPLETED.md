@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Aether Revolt, whole** (batch 140): **improvise** (rule 702.126a, on convoke's machinery —
+  artifacts, generic mana only, the client's bar saying so) built; 99 authored by five
+  `card-author` agents and the lead — Herald of Anguish, Reverse Engineer, Metallic Rebuke,
+  Maverick Thopterist and the other improvise cards, Ajani Unyielding, Tezzeret the Schemer,
+  Yahenni's Expertise, Treasure Keeper — with five "discard any number" rechecks (Neheb,
+  Dreadhorde Champion, Cavalier of Flame, Celes, Illuminate History, The Elder Dragon War); AER
+  is 161 of 186. 27 blocked, "discard up to N" the most shared (2026-10-22).
 - **Amonkhet, whole** (batch 139): **embalm** (`embalmAbility`, rule 702.128a), **"lands you
   control don't untap during your next untap step"** (`skip-next-untap`, later lands included —
   the Gods' Last cards) and **"discard any number of cards"** (the discard decision's `upTo`,

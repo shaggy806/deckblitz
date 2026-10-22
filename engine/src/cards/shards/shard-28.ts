@@ -15,6 +15,7 @@ import _poolAgelessGuardian from "../pool/ageless-guardian.js";
 import _poolAgentsOfHydra from "../pool/agents-of-hydra.js";
 import _poolAirdropAeronauts from "../pool/airdrop-aeronauts.js";
 import _poolAirshipEngineRoom from "../pool/airship-engine-room.js";
+import _poolAjaniUnyielding from "../pool/ajani-unyielding.js";
 import _poolAjanisSunstriker from "../pool/ajanis-sunstriker.js";
 import _poolAkromasMemorial from "../pool/akromas-memorial.js";
 import _poolAkromasVengeance from "../pool/akromas-vengeance.js";
@@ -87,6 +88,7 @@ import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
+import _poolCelesRuneKnight from "../pool/celes-rune-knight.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolCeruleanWisps from "../pool/cerulean-wisps.js";
 import _poolChampionOfWits from "../pool/champion-of-wits.js";
@@ -234,6 +236,8 @@ import _poolIcebergCancrix from "../pool/iceberg-cancrix.js";
 import _poolIcyManipulator from "../pool/icy-manipulator.js";
 import _poolImpeccableTiming from "../pool/impeccable-timing.js";
 import _poolImperialOath from "../pool/imperial-oath.js";
+import _poolImplementOfFerocity from "../pool/implement-of-ferocity.js";
+import _poolImplementOfMalice from "../pool/implement-of-malice.js";
 import _poolImpossibleMan from "../pool/impossible-man.js";
 import _poolIncineratingBlast from "../pool/incinerating-blast.js";
 import _poolIndustrialAdvancement from "../pool/industrial-advancement.js";
@@ -394,6 +398,7 @@ import _poolResistanceSkywarden from "../pool/resistance-skywarden.js";
 import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
 import _poolResplendentGriffin from "../pool/resplendent-griffin.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
+import _poolRestorationSpecialist from "../pool/restoration-specialist.js";
 import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
@@ -617,6 +622,7 @@ const shard: CardShard = {
     _poolAgentsOfHydra,
     _poolAirdropAeronauts,
     _poolAirshipEngineRoom,
+    _poolAjaniUnyielding,
     _poolAjanisSunstriker,
     _poolAkromasMemorial,
     _poolAkromasVengeance,
@@ -689,6 +695,7 @@ const shard: CardShard = {
     _poolCarrierPigeons,
     _poolCarrionCrow,
     _poolCatharsCall,
+    _poolCelesRuneKnight,
     _poolCelestineTheLivingSaint,
     _poolCeruleanWisps,
     _poolChampionOfWits,
@@ -836,6 +843,8 @@ const shard: CardShard = {
     _poolIcyManipulator,
     _poolImpeccableTiming,
     _poolImperialOath,
+    _poolImplementOfFerocity,
+    _poolImplementOfMalice,
     _poolImpossibleMan,
     _poolIncineratingBlast,
     _poolIndustrialAdvancement,
@@ -996,6 +1005,7 @@ const shard: CardShard = {
     _poolResoluteReinforcements,
     _poolResplendentGriffin,
     _poolRestlessReef,
+    _poolRestorationSpecialist,
     _poolReveillark,
     _poolReviveTheShire,
     _poolRevokeDemise,

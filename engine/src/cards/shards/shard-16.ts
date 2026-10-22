@@ -315,6 +315,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
+import _poolMobileGarrison from "../pool/mobile-garrison.js";
 import _poolMogissFavor from "../pool/mogiss-favor.js";
 import _poolMolderhulk from "../pool/molderhulk.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
@@ -397,6 +398,7 @@ import _poolRecall from "../pool/recall.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
+import _poolReleaseTheGremlins from "../pool/release-the-gremlins.js";
 import _poolRelicGolem from "../pool/relic-golem.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
@@ -421,6 +423,7 @@ import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
+import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
 import _poolSedgeTroll from "../pool/sedge-troll.js";
@@ -949,6 +952,7 @@ const shard: CardShard = {
     _poolMirranBardiche,
     _poolMirrorpool,
     _poolMiserysShadow,
+    _poolMobileGarrison,
     _poolMogissFavor,
     _poolMolderhulk,
     _poolMorgulKnifeWound,
@@ -1031,6 +1035,7 @@ const shard: CardShard = {
     _poolRedtoothGenealogist,
     _poolReflectingPool,
     _poolRegalUnicorn,
+    _poolReleaseTheGremlins,
     _poolRelicGolem,
     _poolRelicSloth,
     _poolRemand,
@@ -1055,6 +1060,7 @@ const shard: CardShard = {
     _poolScaldingCauldron,
     _poolScatterTheSeeds,
     _poolScroungeForEternity,
+    _poolScroungingBandar,
     _poolScurryOak,
     _poolSealFromExistence,
     _poolSedgeTroll,

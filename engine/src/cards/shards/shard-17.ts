@@ -7,6 +7,7 @@ import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
 import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
+import _poolAerialModification from "../pool/aerial-modification.js";
 import _poolAetherMembrane from "../pool/aether-membrane.js";
 import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
@@ -306,6 +307,7 @@ import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
+import _poolMidnightEntourage from "../pool/midnight-entourage.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
@@ -479,6 +481,7 @@ import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
+import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolAbandonedOutpost,
     _poolAdeptWatershaper,
     _poolAdewaleBreakerOfChains,
+    _poolAerialModification,
     _poolAetherMembrane,
     _poolAirbendersReversal,
     _poolAjaniAdversaryOfTyrants,
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolMeriasOutrider,
     _poolMessengerHawk,
     _poolMiasmicMummy,
+    _poolMidnightEntourage,
     _poolMidnightMangler,
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
@@ -1067,6 +1072,7 @@ const shard: CardShard = {
     _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
+    _poolTezzeretsTouch,
     _poolThaumaturgesFamiliar,
     _poolTheAstonishingAntMan,
     _poolTheFalconAirshipRestored,

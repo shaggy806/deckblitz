@@ -104,6 +104,7 @@ import _poolChopDown from "../pool/chop-down.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
+import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
@@ -236,6 +237,7 @@ import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
 import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
+import _poolIlluminateHistory from "../pool/illuminate-history.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
@@ -379,6 +381,7 @@ import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
 import _poolPyreSledgeArsonist from "../pool/pyre-sledge-arsonist.js";
 import _poolPython from "../pool/python.js";
+import _poolQuicksmithRebel from "../pool/quicksmith-rebel.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
@@ -494,6 +497,7 @@ import _poolSwoopingProtector from "../pool/swooping-protector.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
 import _poolTaigamMasterOpportunist from "../pool/taigam-master-opportunist.js";
+import _poolTakeIntoCustody from "../pool/take-into-custody.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
@@ -577,6 +581,7 @@ import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
 import _poolWitchsMark from "../pool/witchs-mark.js";
 import _poolWithstand from "../pool/withstand.js";
+import _poolWrangle from "../pool/wrangle.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
@@ -694,6 +699,7 @@ const shard: CardShard = {
     _poolCloudboundMoogle,
     _poolCoalstokeGearhulk,
     _poolCoeurl,
+    _poolCogworkAssembler,
     _poolCommuneWithLava,
     _poolCongregationGryff,
     _poolCoolButRude,
@@ -826,6 +832,7 @@ const shard: CardShard = {
     _poolIcatianPriest,
     _poolIdyllicTutor,
     _poolIgneousCur,
+    _poolIlluminateHistory,
     _poolImmolatingGlare,
     _poolIncandescentAria,
     _poolIncitedRabble,
@@ -969,6 +976,7 @@ const shard: CardShard = {
     _poolPurphorosBronzeBlooded,
     _poolPyreSledgeArsonist,
     _poolPython,
+    _poolQuicksmithRebel,
     _poolRainOfFilth,
     _poolRaiseThePalisade,
     _poolRakingClaws,
@@ -1084,6 +1092,7 @@ const shard: CardShard = {
     _poolSyrAlinTheLionsClaw,
     _poolSystemsOverride,
     _poolTaigamMasterOpportunist,
+    _poolTakeIntoCustody,
     _poolTanglespanLookout,
     _poolTasseledDromedary,
     _poolTeamTransmitter,
@@ -1167,6 +1176,7 @@ const shard: CardShard = {
     _poolWirewoodHivemaster,
     _poolWitchsMark,
     _poolWithstand,
+    _poolWrangle,
     _poolYoshimaruBelovedCompanion,
     _poolZaskSkitteringSwarmlord,
     _poolZeroPointBallad,

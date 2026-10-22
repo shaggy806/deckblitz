@@ -14,6 +14,7 @@ import _poolAegisOfTheMeek from "../pool/aegis-of-the-meek.js";
 import _poolAerathiBerserker from "../pool/aerathi-berserker.js";
 import _poolAerialBoost from "../pool/aerial-boost.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
+import _poolAetherChaser from "../pool/aether-chaser.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
@@ -407,8 +408,10 @@ import _poolRefocus from "../pool/refocus.js";
 import _poolRefuteDestiny from "../pool/refute-destiny.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
 import _poolRenataCalledToTheHunt from "../pool/renata-called-to-the-hunt.js";
+import _poolRenegadeWheelsmith from "../pool/renegade-wheelsmith.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
 import _poolRepulsorRays from "../pool/repulsor-rays.js";
+import _poolReservoirWalker from "../pool/reservoir-walker.js";
 import _poolRetractionHelix from "../pool/retraction-helix.js";
 import _poolReturnTheFavor from "../pool/return-the-favor.js";
 import _poolReturnedCentaur from "../pool/returned-centaur.js";
@@ -457,6 +460,7 @@ import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
 import _poolSidequestCatchAFish from "../pool/sidequest-catch-a-fish.js";
+import _poolSiegeModification from "../pool/siege-modification.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
@@ -487,6 +491,7 @@ import _poolSpiritualSanctuary from "../pool/spiritual-sanctuary.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
 import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
+import _poolStealTheShow from "../pool/steal-the-show.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
 import _poolSteelswarmOperator from "../pool/steelswarm-operator.js";
 import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
@@ -511,6 +516,7 @@ import _poolTegwyllDukeOfSplendor from "../pool/tegwyll-duke-of-splendor.js";
 import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolTenuredConcocter from "../pool/tenured-concocter.js";
+import _poolTezzeretsSimulacrum from "../pool/tezzerets-simulacrum.js";
 import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolThallidOmnivore from "../pool/thallid-omnivore.js";
 import _poolThawbringer from "../pool/thawbringer.js";
@@ -637,6 +643,7 @@ const shard: CardShard = {
     _poolAerathiBerserker,
     _poolAerialBoost,
     _poolAetherAdept,
+    _poolAetherChaser,
     _poolAgentOfShauku,
     _poolAggravatedAssault,
     _poolAidTheFallen,
@@ -1030,8 +1037,10 @@ const shard: CardShard = {
     _poolRefuteDestiny,
     _poolRemoveSoul,
     _poolRenataCalledToTheHunt,
+    _poolRenegadeWheelsmith,
     _poolRepentantBlacksmith,
     _poolRepulsorRays,
+    _poolReservoirWalker,
     _poolRetractionHelix,
     _poolReturnTheFavor,
     _poolReturnedCentaur,
@@ -1080,6 +1089,7 @@ const shard: CardShard = {
     _poolShriekOfDread,
     _poolShuriVibraniumTechnologist,
     _poolSidequestCatchAFish,
+    _poolSiegeModification,
     _poolSilentDeparture,
     _poolSilkenfistFighter,
     _poolSilverMyr,
@@ -1110,6 +1120,7 @@ const shard: CardShard = {
     _poolSplashPortal,
     _poolSporewebWeaver,
     _poolSproutingRenewal,
+    _poolStealTheShow,
     _poolSteamclaw,
     _poolSteelswarmOperator,
     _poolStingerquillAnnex,
@@ -1134,6 +1145,7 @@ const shard: CardShard = {
     _poolTemmetNaktamunsWill,
     _poolTemurDevotee,
     _poolTenuredConcocter,
+    _poolTezzeretsSimulacrum,
     _poolThaliasLancers,
     _poolThallidOmnivore,
     _poolThawbringer,

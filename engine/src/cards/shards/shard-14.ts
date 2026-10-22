@@ -7,6 +7,8 @@ import _poolALittleChat from "../pool/a-little-chat.js";
 import _poolAberrant from "../pool/aberrant.js";
 import _poolAbsorbVis from "../pool/absorb-vis.js";
 import _poolAeronautsWings from "../pool/aeronauts-wings.js";
+import _poolAetherHerder from "../pool/aether-herder.js";
+import _poolAetherwindBasker from "../pool/aetherwind-basker.js";
 import _poolAgeGracedChapel from "../pool/age-graced-chapel.js";
 import _poolAgnaQela from "../pool/agna-qela.js";
 import _poolAgonizingSyphon from "../pool/agonizing-syphon.js";
@@ -74,6 +76,7 @@ import _poolCarefulStudy from "../pool/careful-study.js";
 import _poolCatWarriors from "../pool/cat-warriors.js";
 import _poolCatharsCompanion from "../pool/cathars-companion.js";
 import _poolCauldronOfEssence from "../pool/cauldron-of-essence.js";
+import _poolCavalierOfFlame from "../pool/cavalier-of-flame.js";
 import _poolCavalryDrillmaster from "../pool/cavalry-drillmaster.js";
 import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
 import _poolChalkOutline from "../pool/chalk-outline.js";
@@ -275,6 +278,7 @@ import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
+import _poolIntoTheNight from "../pool/into-the-night.js";
 import _poolInvadeTheCity from "../pool/invade-the-city.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
 import _poolInvisibility from "../pool/invisibility.js";
@@ -406,6 +410,7 @@ import _poolRegress from "../pool/regress.js";
 import _poolRelicRunner from "../pool/relic-runner.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
+import _poolResourcefulReturn from "../pool/resourceful-return.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
@@ -510,6 +515,7 @@ import _poolToucanPuffin from "../pool/toucan-puffin.js";
 import _poolTournamentGrounds from "../pool/tournament-grounds.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
 import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
+import _poolTreasureKeeper from "../pool/treasure-keeper.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
@@ -558,6 +564,7 @@ import _poolWitchHunter from "../pool/witch-hunter.js";
 import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
 import _poolWizardsLightning from "../pool/wizards-lightning.js";
+import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
@@ -587,6 +594,8 @@ const shard: CardShard = {
     _poolAberrant,
     _poolAbsorbVis,
     _poolAeronautsWings,
+    _poolAetherHerder,
+    _poolAetherwindBasker,
     _poolAgeGracedChapel,
     _poolAgnaQela,
     _poolAgonizingSyphon,
@@ -654,6 +663,7 @@ const shard: CardShard = {
     _poolCatWarriors,
     _poolCatharsCompanion,
     _poolCauldronOfEssence,
+    _poolCavalierOfFlame,
     _poolCavalryDrillmaster,
     _poolCephalidPathmage,
     _poolChalkOutline,
@@ -855,6 +865,7 @@ const shard: CardShard = {
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
+    _poolIntoTheNight,
     _poolInvadeTheCity,
     _poolInvasionOfIxalan,
     _poolInvisibility,
@@ -986,6 +997,7 @@ const shard: CardShard = {
     _poolRelicRunner,
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,
+    _poolResourcefulReturn,
     _poolRestlessPrairie,
     _poolReturnUponTheTide,
     _poolReverseDamage,
@@ -1090,6 +1102,7 @@ const shard: CardShard = {
     _poolTournamentGrounds,
     _poolTrainedJackal,
     _poolTranceKujaFateDefied,
+    _poolTreasureKeeper,
     _poolTreasureTrove,
     _poolTributaryVaulter,
     _poolTributeMage,
@@ -1138,6 +1151,7 @@ const shard: CardShard = {
     _poolWitchsClinic,
     _poolWitherbloomCharm,
     _poolWizardsLightning,
+    _poolYahennisExpertise,
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
     _poolZealousLorecaster,

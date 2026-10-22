@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
+import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
@@ -165,6 +166,7 @@ import _poolFogOnTheBarrowDowns from "../pool/fog-on-the-barrow-downs.js";
 import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
+import _poolFoundryHornet from "../pool/foundry-hornet.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
@@ -606,6 +608,7 @@ const shard: CardShard = {
     _poolAcererakTheArchlich,
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
+    _poolAeronautAdmiral,
     _poolAkalPakalFirstAmongEquals,
     _poolAkkiBlizzardHerder,
     _poolAkkiDrillmaster,
@@ -765,6 +768,7 @@ const shard: CardShard = {
     _poolForerunnerOfTheHeralds,
     _poolForgottenCave,
     _poolFoulFamiliar,
+    _poolFoundryHornet,
     _poolFromFatherToSon,
     _poolFungalPlots,
     _poolFurnaceSkullbomb,

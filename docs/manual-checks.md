@@ -5289,3 +5289,15 @@ up to the whole hand
 - **Check:** The bar reads "Discard any number of cards" and the button works with none, one,
   two or three picked. Two discarded draws two; none discarded draws none. Check at ~768px tall,
   in a 2- and a 4-player room.
+
+### Reverse Engineer: improvise with artifacts
+
+*New cast payment* — improvise (rule 702.126a): untapped artifacts pay generic mana, never a
+coloured pip
+
+- **Setup:** Your precombat main. Your battlefield: two Islands, Darksteel Relic, Memnite,
+  Ornithopter, Grizzly Bears; your hand: Reverse Engineer.
+- **Do:** Cast Reverse Engineer. When the bar asks, tap the three artifacts, then pay the rest.
+- **Check:** The bar reads "improvise — tap up to 3 artifacts" and only the artifacts can be
+  picked (not the Bears). With all three tapped, the two Islands pay {U}{U}; you draw three.
+  Check at ~768px tall, in a 2- and a 4-player room.

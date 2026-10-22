@@ -236,6 +236,7 @@ import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
+import _poolInvigoratedRampage from "../pool/invigorated-rampage.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
 import _poolJadelightRanger from "../pool/jadelight-ranger.js";
@@ -264,6 +265,7 @@ import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
+import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
 import _poolLilianasMastery from "../pool/lilianas-mastery.js";
 import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-marvel.js";
@@ -379,6 +381,7 @@ import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
 import _poolRealityHeist from "../pool/reality-heist.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
+import _poolRecklessRacer from "../pool/reckless-racer.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
@@ -830,6 +833,7 @@ const shard: CardShard = {
     _poolIntrepidTenderfoot,
     _poolIntrusivePackbeast,
     _poolInvasionOfTolvada,
+    _poolInvigoratedRampage,
     _poolIronwillForger,
     _poolIsarethTheAwakener,
     _poolJadelightRanger,
@@ -858,6 +862,7 @@ const shard: CardShard = {
     _poolLastMarchOfTheEnts,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
+    _poolLifecraftAwakening,
     _poolLightningJavelin,
     _poolLilianasMastery,
     _poolLivingBrainMechanicalMarvel,
@@ -973,6 +978,7 @@ const shard: CardShard = {
     _poolRazortipWhip,
     _poolRealityHeist,
     _poolRecklessLackey,
+    _poolRecklessRacer,
     _poolRegeneration,
     _poolReinforcedRonin,
     _poolRelearn,

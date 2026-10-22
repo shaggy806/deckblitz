@@ -10,6 +10,7 @@ import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
+import _poolAetherPoisoner from "../pool/aether-poisoner.js";
 import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
@@ -319,6 +320,7 @@ import _poolMythosOfBrokkos from "../pool/mythos-of-brokkos.js";
 import _poolMythosOfNethroi from "../pool/mythos-of-nethroi.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
+import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
@@ -528,6 +530,7 @@ import _poolTwinmawStormbrood from "../pool/twinmaw-stormbrood.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
 import _poolUltrosObnoxiousOctopus from "../pool/ultros-obnoxious-octopus.js";
+import _poolUnbridledGrowth from "../pool/unbridled-growth.js";
 import _poolUnderdarkBasilisk from "../pool/underdark-basilisk.js";
 import _poolUnderworldRageHound from "../pool/underworld-rage-hound.js";
 import _poolUnendingWhisper from "../pool/unending-whisper.js";
@@ -596,6 +599,7 @@ const shard: CardShard = {
     _poolAdventurersAirship,
     _poolAeolipile,
     _poolAerieMystics,
+    _poolAetherPoisoner,
     _poolAhnCropCrasher,
     _poolAhriman,
     _poolAjanisAnguish,
@@ -905,6 +909,7 @@ const shard: CardShard = {
     _poolMythosOfNethroi,
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
+    _poolNaturalObsolescence,
     _poolNegate,
     _poolNicolBolas,
     _poolNightScythe,
@@ -1114,6 +1119,7 @@ const shard: CardShard = {
     _poolTyriteSanctum,
     _poolUltimaWeapon,
     _poolUltrosObnoxiousOctopus,
+    _poolUnbridledGrowth,
     _poolUnderdarkBasilisk,
     _poolUnderworldRageHound,
     _poolUnendingWhisper,

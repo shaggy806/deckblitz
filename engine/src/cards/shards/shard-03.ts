@@ -72,6 +72,7 @@ import _poolCompelBrutality from "../pool/compel-brutality.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolConfrontThePast from "../pool/confront-the-past.js";
+import _poolConsulateTurret from "../pool/consulate-turret.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
 import _poolCranialRam from "../pool/cranial-ram.js";
@@ -612,6 +613,7 @@ const shard: CardShard = {
     _poolCondemn,
     _poolCondescend,
     _poolConfrontThePast,
+    _poolConsulateTurret,
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
     _poolCranialRam,

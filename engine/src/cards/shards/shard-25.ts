@@ -10,7 +10,9 @@ import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-tita
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
+import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
 import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
+import _poolAjanisComrade from "../pool/ajanis-comrade.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
@@ -610,7 +612,9 @@ const shard: CardShard = {
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
     _poolAchillesDavenport,
+    _poolAethergeodeMiner,
     _poolAislingLeprechaun,
+    _poolAjanisComrade,
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
     _poolAlrundsEpiphany,

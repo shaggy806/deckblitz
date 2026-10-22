@@ -234,6 +234,7 @@ import _poolHurricane from "../pool/hurricane.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
+import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
@@ -814,6 +815,7 @@ const shard: CardShard = {
     _poolHydraInfiltration,
     _poolHymnToTourach,
     _poolIceOut,
+    _poolIllusionistsStratagem,
     _poolImposingVantasaur,
     _poolImskirIronEater,
     _poolIndrikStomphowler,

@@ -116,6 +116,7 @@ import _poolCutRibbons from "../pool/cut-ribbons.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
+import _poolDawnfeatherEagle from "../pool/dawnfeather-eagle.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
 import _poolDeathlace from "../pool/deathlace.js";
 import _poolDeathlessPilot from "../pool/deathless-pilot.js";
@@ -266,6 +267,7 @@ import _poolHydraDisintegrator from "../pool/hydra-disintegrator.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIguanaParrot from "../pool/iguana-parrot.js";
 import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
+import _poolImplementOfCombustion from "../pool/implement-of-combustion.js";
 import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
@@ -477,6 +479,7 @@ import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
 import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
+import _poolSpirePatrol from "../pool/spire-patrol.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolDaringDiscovery,
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
+    _poolDawnfeatherEagle,
     _poolDayOfJudgment,
     _poolDeathlace,
     _poolDeathlessPilot,
@@ -852,6 +856,7 @@ const shard: CardShard = {
     _poolIfritWardenOfInferno,
     _poolIguanaParrot,
     _poolIlMhegPixie,
+    _poolImplementOfCombustion,
     _poolIncriminatingImpetus,
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
@@ -1063,6 +1068,7 @@ const shard: CardShard = {
     _poolSpinedThopter,
     _poolSpinningWheelKick,
     _poolSpireMonitor,
+    _poolSpirePatrol,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,

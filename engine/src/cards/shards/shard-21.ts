@@ -7,6 +7,7 @@ import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
+import _poolAethertideWhale from "../pool/aethertide-whale.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
@@ -98,6 +99,7 @@ import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolClockworkServant from "../pool/clockwork-servant.js";
 import _poolCockatrice from "../pool/cockatrice.js";
 import _poolCoercion from "../pool/coercion.js";
+import _poolColossusOfTheBloodAge from "../pool/colossus-of-the-blood-age.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
 import _poolCommonBond from "../pool/common-bond.js";
@@ -373,6 +375,7 @@ import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
 import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
+import _poolQuicksmithSpy from "../pool/quicksmith-spy.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
 import _poolRaiseTheAlarm from "../pool/raise-the-alarm.js";
 import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
@@ -582,6 +585,7 @@ const shard: CardShard = {
     _poolAbueloAncestralEcho,
     _poolAcquisitionOctopus,
     _poolAeridKonstrari,
+    _poolAethertideWhale,
     _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAlpineWatchdog,
@@ -673,6 +677,7 @@ const shard: CardShard = {
     _poolClockworkServant,
     _poolCockatrice,
     _poolCoercion,
+    _poolColossusOfTheBloodAge,
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
     _poolCommonBond,
@@ -948,6 +953,7 @@ const shard: CardShard = {
     _poolPyreHound,
     _poolPyroclasticHellion,
     _poolQuickDrawDagger,
+    _poolQuicksmithSpy,
     _poolRainOfRevelation,
     _poolRaiseTheAlarm,
     _poolRakshasaDebaser,

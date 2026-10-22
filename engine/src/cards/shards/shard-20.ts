@@ -256,6 +256,7 @@ import _poolHoverguardObserver from "../pool/hoverguard-observer.js";
 import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
+import _poolHungryFlames from "../pool/hungry-flames.js";
 import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
 import _poolHymnOfRebirth from "../pool/hymn-of-rebirth.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
@@ -342,6 +343,7 @@ import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
 import _poolNarwhal from "../pool/narwhal.js";
 import _poolNaturesRhythm from "../pool/natures-rhythm.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
+import _poolNehebDreadhordeChampion from "../pool/neheb-dreadhorde-champion.js";
 import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
 import _poolNissasTriumph from "../pool/nissas-triumph.js";
@@ -535,6 +537,7 @@ import _poolTermagantSwarm from "../pool/termagant-swarm.js";
 import _poolTerminalVelocity from "../pool/terminal-velocity.js";
 import _poolTerritorialScythecat from "../pool/territorial-scythecat.js";
 import _poolTetsukoUmezawaPursuer from "../pool/tetsuko-umezawa-pursuer.js";
+import _poolTezzeretTheSchemer from "../pool/tezzeret-the-schemer.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
 import _poolTheEleventhDoctor from "../pool/the-eleventh-doctor.js";
@@ -895,6 +898,7 @@ const shard: CardShard = {
     _poolHowlingGiant,
     _poolHowlingMine,
     _poolHulkingOgre,
+    _poolHungryFlames,
     _poolHydroelectricSpecimen,
     _poolHymnOfRebirth,
     _poolHypnoticSprite,
@@ -981,6 +985,7 @@ const shard: CardShard = {
     _poolNarwhal,
     _poolNaturesRhythm,
     _poolNecroskitter,
+    _poolNehebDreadhordeChampion,
     _poolNemesisOfReason,
     _poolNinjaOfTheDeepHours,
     _poolNissasTriumph,
@@ -1174,6 +1179,7 @@ const shard: CardShard = {
     _poolTerminalVelocity,
     _poolTerritorialScythecat,
     _poolTetsukoUmezawaPursuer,
+    _poolTezzeretTheSchemer,
     _poolTezzeretsGambit,
     _poolThaliaGuardianOfThraben,
     _poolTheEleventhDoctor,

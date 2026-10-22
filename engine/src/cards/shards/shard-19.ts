@@ -249,6 +249,7 @@ import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
 import _poolHighMarket from "../pool/high-market.js";
+import _poolHinterlandDrake from "../pool/hinterland-drake.js";
 import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
@@ -864,6 +865,7 @@ const shard: CardShard = {
     _poolHiddenVolcano,
     _poolHieroglyphicIllumination,
     _poolHighMarket,
+    _poolHinterlandDrake,
     _poolHollowheadSliver,
     _poolHondenOfInfiniteRage,
     _poolHorrorOfTheDim,

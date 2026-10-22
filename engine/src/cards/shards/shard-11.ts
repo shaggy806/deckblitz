@@ -7,6 +7,7 @@ import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
 import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
+import _poolAetherSwooper from "../pool/aether-swooper.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
@@ -255,6 +256,7 @@ import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
 import _poolHuntersBlowgun from "../pool/hunters-blowgun.js";
 import _poolImperialRecoveryUnit from "../pool/imperial-recovery-unit.js";
+import _poolImplementOfImprovement from "../pool/implement-of-improvement.js";
 import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
@@ -621,6 +623,7 @@ const shard: CardShard = {
     _poolAbigalePoetLaureate,
     _poolAetherGust,
     _poolAetherHub,
+    _poolAetherSwooper,
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
     _poolAkkiRockspeaker,
@@ -869,6 +872,7 @@ const shard: CardShard = {
     _poolHuntedBonebrute,
     _poolHuntersBlowgun,
     _poolImperialRecoveryUnit,
+    _poolImplementOfImprovement,
     _poolImprovisedArsenal,
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,

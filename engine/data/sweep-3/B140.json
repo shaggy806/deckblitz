@@ -1,0 +1,893 @@
+{
+ "batch": "B140",
+ "status": "complete",
+ "ranks": "Aether Revolt (AER, 2017-01-20): the rest of the set, whole; and the earlier-triaged cards 'discard any number' unblocked",
+ "authored": [
+  {
+   "name": "Aegis Automaton",
+   "files": [
+    "engine/src/cards/pool/aegis-automaton.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aerial Modification",
+   "files": [
+    "engine/src/cards/pool/aerial-modification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aeronaut Admiral",
+   "files": [
+    "engine/src/cards/pool/aeronaut-admiral.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aether Chaser",
+   "files": [
+    "engine/src/cards/pool/aether-chaser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Herder",
+   "files": [
+    "engine/src/cards/pool/aether-herder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aether Inspector",
+   "files": [
+    "engine/src/cards/pool/aether-inspector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Poisoner",
+   "files": [
+    "engine/src/cards/pool/aether-poisoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Swooper",
+   "files": [
+    "engine/src/cards/pool/aether-swooper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aethergeode Miner",
+   "files": [
+    "engine/src/cards/pool/aethergeode-miner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aethersphere Harvester",
+   "files": [
+    "engine/src/cards/pool/aethersphere-harvester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetherstream Leopard",
+   "files": [
+    "engine/src/cards/pool/aetherstream-leopard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aethertide Whale",
+   "files": [
+    "engine/src/cards/pool/aethertide-whale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetherwind Basker",
+   "files": [
+    "engine/src/cards/pool/aetherwind-basker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani Unyielding",
+   "files": [
+    "engine/src/cards/pool/ajani-unyielding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani's Comrade",
+   "files": [
+    "engine/src/cards/pool/ajanis-comrade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ajani, Valiant Protector",
+   "files": [
+    "engine/src/cards/pool/ajani-valiant-protector.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Audacious Infiltrator",
+   "files": [
+    "engine/src/cards/pool/audacious-infiltrator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barricade Breaker",
+   "files": [
+    "engine/src/cards/pool/barricade-breaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bastion Inventor",
+   "files": [
+    "engine/src/cards/pool/bastion-inventor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Battle at the Bridge",
+   "files": [
+    "engine/src/cards/pool/battle-at-the-bridge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caught in the Brights",
+   "files": [
+    "engine/src/cards/pool/caught-in-the-brights.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cavalier of Flame",
+   "files": [
+    "engine/src/cards/pool/cavalier-of-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celes, Rune Knight",
+   "files": [
+    "engine/src/cards/pool/celes-rune-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Revolution",
+   "files": [
+    "engine/src/cards/pool/chandras-revolution.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cogwork Assembler",
+   "files": [
+    "engine/src/cards/pool/cogwork-assembler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossus of the Blood Age",
+   "files": [
+    "engine/src/cards/pool/colossus-of-the-blood-age.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consulate Crackdown",
+   "files": [
+    "engine/src/cards/pool/consulate-crackdown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consulate Turret",
+   "files": [
+    "engine/src/cards/pool/consulate-turret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crackdown Construct",
+   "files": [
+    "engine/src/cards/pool/crackdown-construct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Demolition",
+   "files": [
+    "engine/src/cards/pool/daring-demolition.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Intimations",
+   "files": [
+    "engine/src/cards/pool/dark-intimations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawnfeather Eagle",
+   "files": [
+    "engine/src/cards/pool/dawnfeather-eagle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deft Dismissal",
+   "files": [
+    "engine/src/cards/pool/deft-dismissal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Destructive Tampering",
+   "files": [
+    "engine/src/cards/pool/destructive-tampering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enraged Giant",
+   "files": [
+    "engine/src/cards/pool/enraged-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fen Hauler",
+   "files": [
+    "engine/src/cards/pool/fen-hauler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Foundry Assembler",
+   "files": [
+    "engine/src/cards/pool/foundry-assembler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Foundry Hornet",
+   "files": [
+    "engine/src/cards/pool/foundry-hornet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fourth Bridge Prowler",
+   "files": [
+    "engine/src/cards/pool/fourth-bridge-prowler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Freejam Regent",
+   "files": [
+    "engine/src/cards/pool/freejam-regent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glint-Sleeve Siphoner",
+   "files": [
+    "engine/src/cards/pool/glint-sleeve-siphoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of Anguish",
+   "files": [
+    "engine/src/cards/pool/herald-of-anguish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Highspire Infusion",
+   "files": [
+    "engine/src/cards/pool/highspire-infusion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hinterland Drake",
+   "files": [
+    "engine/src/cards/pool/hinterland-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hungry Flames",
+   "files": [
+    "engine/src/cards/pool/hungry-flames.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ice Over",
+   "files": [
+    "engine/src/cards/pool/ice-over.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Illuminate History",
+   "files": [
+    "engine/src/cards/pool/illuminate-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illusionist's Stratagem",
+   "files": [
+    "engine/src/cards/pool/illusionists-stratagem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Implement of Combustion",
+   "files": [
+    "engine/src/cards/pool/implement-of-combustion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Implement of Examination",
+   "files": [
+    "engine/src/cards/pool/implement-of-examination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Implement of Ferocity",
+   "files": [
+    "engine/src/cards/pool/implement-of-ferocity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Implement of Improvement",
+   "files": [
+    "engine/src/cards/pool/implement-of-improvement.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Implement of Malice",
+   "files": [
+    "engine/src/cards/pool/implement-of-malice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Into the Night",
+   "files": [
+    "engine/src/cards/pool/into-the-night.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invigorated Rampage",
+   "files": [
+    "engine/src/cards/pool/invigorated-rampage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ironclad Revolutionary",
+   "files": [
+    "engine/src/cards/pool/ironclad-revolutionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifecraft Awakening",
+   "files": [
+    "engine/src/cards/pool/lifecraft-awakening.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifecrafter's Gift",
+   "files": [
+    "engine/src/cards/pool/lifecrafters-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maverick Thopterist",
+   "files": [
+    "engine/src/cards/pool/maverick-thopterist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Metallic Rebuke",
+   "files": [
+    "engine/src/cards/pool/metallic-rebuke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Midnight Entourage",
+   "files": [
+    "engine/src/cards/pool/midnight-entourage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mobile Garrison",
+   "files": [
+    "engine/src/cards/pool/mobile-garrison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Natural Obsolescence",
+   "files": [
+    "engine/src/cards/pool/natural-obsolescence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Neheb, Dreadhorde Champion",
+   "files": [
+    "engine/src/cards/pool/neheb-dreadhorde-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oath of Ajani",
+   "files": [
+    "engine/src/cards/pool/oath-of-ajani.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perilous Predicament",
+   "files": [
+    "engine/src/cards/pool/perilous-predicament.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pia's Revolution",
+   "files": [
+    "engine/src/cards/pool/pias-revolution.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksmith Rebel",
+   "files": [
+    "engine/src/cards/pool/quicksmith-rebel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksmith Spy",
+   "files": [
+    "engine/src/cards/pool/quicksmith-spy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Racer",
+   "files": [
+    "engine/src/cards/pool/reckless-racer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Release the Gremlins",
+   "files": [
+    "engine/src/cards/pool/release-the-gremlins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Wheelsmith",
+   "files": [
+    "engine/src/cards/pool/renegade-wheelsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reservoir Walker",
+   "files": [
+    "engine/src/cards/pool/reservoir-walker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Resourceful Return",
+   "files": [
+    "engine/src/cards/pool/resourceful-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Restoration Specialist",
+   "files": [
+    "engine/src/cards/pool/restoration-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reverse Engineer",
+   "files": [
+    "engine/src/cards/pool/reverse-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rogue Refiner",
+   "files": [
+    "engine/src/cards/pool/rogue-refiner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Salvage Scuttler",
+   "files": [
+    "engine/src/cards/pool/salvage-scuttler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrapper Champion",
+   "files": [
+    "engine/src/cards/pool/scrapper-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scrounging Bandar",
+   "files": [
+    "engine/src/cards/pool/scrounging-bandar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shielded Aether Thief",
+   "files": [
+    "engine/src/cards/pool/shielded-aether-thief.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shipwreck Moray",
+   "files": [
+    "engine/src/cards/pool/shipwreck-moray.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Siege Modification",
+   "files": [
+    "engine/src/cards/pool/siege-modification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sly Requisitioner",
+   "files": [
+    "engine/src/cards/pool/sly-requisitioner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spire Patrol",
+   "files": [
+    "engine/src/cards/pool/spire-patrol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Steal the Show",
+   "files": [
+    "engine/src/cards/pool/steal-the-show.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sweatworks Brawler",
+   "files": [
+    "engine/src/cards/pool/sweatworks-brawler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Take into Custody",
+   "files": [
+    "engine/src/cards/pool/take-into-custody.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tezzeret the Schemer",
+   "files": [
+    "engine/src/cards/pool/tezzeret-the-schemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tezzeret's Betrayal",
+   "files": [
+    "engine/src/cards/pool/tezzerets-betrayal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tezzeret's Simulacrum",
+   "files": [
+    "engine/src/cards/pool/tezzerets-simulacrum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tezzeret's Touch",
+   "files": [
+    "engine/src/cards/pool/tezzerets-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Elder Dragon War",
+   "files": [
+    "engine/src/cards/pool/the-elder-dragon-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thopter Arrest",
+   "files": [
+    "engine/src/cards/pool/thopter-arrest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treasure Keeper",
+   "files": [
+    "engine/src/cards/pool/treasure-keeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unbridled Growth",
+   "files": [
+    "engine/src/cards/pool/unbridled-growth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wind-Kin Raiders",
+   "files": [
+    "engine/src/cards/pool/wind-kin-raiders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wrangle",
+   "files": [
+    "engine/src/cards/pool/wrangle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yahenni's Expertise",
+   "files": [
+    "engine/src/cards/pool/yahennis-expertise.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Ajani's Aid",
+   "needs": [
+    "effect:prevent-combat-damage-by-chosen-creature"
+   ],
+   "why": "prevent all combat damage a creature of your choice would deal this turn"
+  },
+  {
+   "name": "Borborygmos and Fblthp",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "discard any number of land cards — anyNumber takes no filter"
+  },
+  {
+   "name": "Brass's Tunnel-Grinder // Tecutlan, the Searing Rift",
+   "needs": [
+    "stat:cast-using-mana-from-this-source"
+   ],
+   "why": "whenever you cast a permanent spell using mana from Tecutlan, discover X"
+  },
+  {
+   "name": "Cathartic Pyre",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "discard up to two cards, then draw that many — 'up to N' isn't built"
+  },
+  {
+   "name": "Daredevil Dragster",
+   "needs": [
+    "condition:attacked-or-blocked-this-combat"
+   ],
+   "why": "at end of combat, if it attacked or blocked this combat"
+  },
+  {
+   "name": "Daretti, Scrap Savant",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "+2: discard up to two cards, then draw that many — 'up to N' isn't built"
+  },
+  {
+   "name": "Exquisite Archangel",
+   "needs": [
+    "replacement:lose-game-replacement"
+   ],
+   "why": "if you would lose the game, instead exile this and set your life to your starting total"
+  },
+  {
+   "name": "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "chapter II: you may discard up to two cards, then draw that many — 'up to N' isn't built"
+  },
+  {
+   "name": "Fervent Mastery",
+   "needs": [
+    "condition:alternative-cost-paid"
+   ],
+   "why": "if its {2}{R}{R} alternative cost was paid, discard any number then draw that many"
+  },
+  {
+   "name": "Gonti's Machinations",
+   "needs": [
+    "trigger:loses-life-first-time-each-turn"
+   ],
+   "why": "whenever you lose life for the first time each turn"
+  },
+  {
+   "name": "Greenbelt Rampager",
+   "needs": [
+    "effect:energy-count-amount"
+   ],
+   "why": "pay {E}{E}; if you can't, return it to its owner's hand and get {E} — a mandatory energy payment"
+  },
+  {
+   "name": "Gremlin Infestation",
+   "needs": [
+    "effect:attached-controller-player-scope"
+   ],
+   "why": "at your end step, deals 2 damage to enchanted artifact's controller"
+  },
+  {
+   "name": "Heart of Kiran",
+   "needs": [
+    "cost:crew-alternative-remove-loyalty"
+   ],
+   "why": "crew by removing a loyalty counter from a planeswalker you control rather than tapping"
+  },
+  {
+   "name": "Indominus Rex, Alpha",
+   "needs": [
+    "decision:discard-any-number",
+    "bug:as-enters-choices-any-entry",
+    "mechanic:keyword-counters"
+   ],
+   "why": "as it enters, discard any number of creature cards; it enters with a counter of each listed keyword among them"
+  },
+  {
+   "name": "Indomitable Creativity",
+   "needs": [
+    "effect:reveal-until-per-destroyed-this-way"
+   ],
+   "why": "each destroyed permanent's controller reveals until an artifact or creature once per permanent; put them all onto the battlefield"
+  },
+  {
+   "name": "Maulfist Revolutionary",
+   "needs": [
+    "effect:one-more-of-each-counter-kind"
+   ],
+   "why": "for each kind of counter on target permanent or player, give it another or remove one"
+  },
+  {
+   "name": "Merchant's Dockhand",
+   "needs": [
+    "cost:tap-x-untapped-cost"
+   ],
+   "why": "{3}{U}, {T}, tap X untapped artifacts you control: X is chosen by how many are tapped"
+  },
+  {
+   "name": "Miasma Demon",
+   "needs": [
+    "decision:variable-target-count"
+   ],
+   "why": "up to that many target creatures, the number discarded"
+  },
+  {
+   "name": "Mishra's Command",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "target player draws X cards, then discards X cards — and 'up to N' discards aren't built"
+  },
+  {
+   "name": "Night Market Guard",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature each combat"
+  },
+  {
+   "name": "Peema Aether-Seer",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "target creature blocks this turn if able"
+  },
+  {
+   "name": "Secret Salvage",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "search your library for any number of cards with the same name as the exiled card"
+  },
+  {
+   "name": "Skyship Plunderer",
+   "needs": [
+    "effect:one-more-of-each-counter-kind"
+   ],
+   "why": "combat damage to a player: for each kind of counter on target permanent or player, give it another"
+  },
+  {
+   "name": "Sokka, Bold Boomeranger",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "when it enters, discard up to two cards, then draw that many — 'up to N' isn't built"
+  },
+  {
+   "name": "Tamiyo Meets the Story Circle",
+   "needs": [
+    "effect:delayed-trigger-extensions"
+   ],
+   "why": "chapter I: until your next turn, whenever a creature attacks you or a planeswalker you control"
+  },
+  {
+   "name": "Tersa Lightshatter",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "discard up to two cards, then draw that many — 'up to N' isn't built (Kinetic Augur's modal count may serve)"
+  },
+  {
+   "name": "Tezzeret, Master of Metal",
+   "needs": [
+    "effect:gain-control-all-target-player"
+   ],
+   "why": "-8: gain control of all artifacts and creatures target opponent controls"
+  }
+ ]
+}

@@ -245,6 +245,7 @@ import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
+import _poolImplementOfExamination from "../pool/implement-of-examination.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
@@ -483,6 +484,7 @@ import _poolTangle from "../pool/tangle.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
+import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheFireNationDrill from "../pool/the-fire-nation-drill.js";
 import _poolThePrimaVista from "../pool/the-prima-vista.js";
@@ -492,6 +494,7 @@ import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
+import _poolThopterArrest from "../pool/thopter-arrest.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
@@ -811,6 +814,7 @@ const shard: CardShard = {
     _poolHyraxTowerScout,
     _poolIceberg,
     _poolIlluminatorVirtuoso,
+    _poolImplementOfExamination,
     _poolImpulsivity,
     _poolIndomitableArchangel,
     _poolInfectiousHost,
@@ -1049,6 +1053,7 @@ const shard: CardShard = {
     _poolTauntingKobold,
     _poolTeferiMasterOfTime,
     _poolTenaciousHunter,
+    _poolTezzeretsBetrayal,
     _poolTheFantasticar,
     _poolTheFireNationDrill,
     _poolThePrimaVista,
@@ -1058,6 +1063,7 @@ const shard: CardShard = {
     _poolTheThirteenthDoctor,
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
+    _poolThopterArrest,
     _poolThousandMoonsInfantry,
     _poolThrillingDiscovery,
     _poolThroatSlitter,

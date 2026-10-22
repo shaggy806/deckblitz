@@ -103,6 +103,7 @@ import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
 import _poolDeathbloomRitualist from "../pool/deathbloom-ritualist.js";
 import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
+import _poolDeftDismissal from "../pool/deft-dismissal.js";
 import _poolDejaVu from "../pool/deja-vu.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
@@ -675,6 +676,7 @@ const shard: CardShard = {
     _poolDeathbloomRitualist,
     _poolDefabricate,
     _poolDefiantSalvager,
+    _poolDeftDismissal,
     _poolDejaVu,
     _poolDerangedAssistant,
     _poolDesperateFarmer,

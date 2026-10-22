@@ -184,6 +184,7 @@ import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolForsakenMiner from "../pool/forsaken-miner.js";
 import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
+import _poolFourthBridgeProwler from "../pool/fourth-bridge-prowler.js";
 import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
 import _poolFreelanceMuscle from "../pool/freelance-muscle.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
@@ -347,6 +348,7 @@ import _poolNorikaYamazakiThePoet from "../pool/norika-yamazaki-the-poet.js";
 import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
 import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets.js";
 import _poolNullmageShepherd from "../pool/nullmage-shepherd.js";
+import _poolOathOfAjani from "../pool/oath-of-ajani.js";
 import _poolObNixilisTheFallen from "../pool/ob-nixilis-the-fallen.js";
 import _poolOdricLunarchMarshal from "../pool/odric-lunarch-marshal.js";
 import _poolOfficiousInterrogation from "../pool/officious-interrogation.js";
@@ -522,6 +524,7 @@ import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThaumatog from "../pool/thaumatog.js";
 import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
+import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
@@ -800,6 +803,7 @@ const shard: CardShard = {
     _poolForgottenAncient,
     _poolForsakenMiner,
     _poolForumNecroscribe,
+    _poolFourthBridgeProwler,
     _poolFranticFirebolt,
     _poolFreelanceMuscle,
     _poolFrilledSeaSerpent,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolNornsChoirmaster,
     _poolNullGroupBiologicalAssets,
     _poolNullmageShepherd,
+    _poolOathOfAjani,
     _poolObNixilisTheFallen,
     _poolOdricLunarchMarshal,
     _poolOfficiousInterrogation,
@@ -1138,6 +1143,7 @@ const shard: CardShard = {
     _poolThaumatog,
     _poolTheBirthOfMeletis,
     _poolTheDalekEmperor,
+    _poolTheElderDragonWar,
     _poolTheLunarWhale,
     _poolThermalNavigator,
     _poolThopterMechanic,

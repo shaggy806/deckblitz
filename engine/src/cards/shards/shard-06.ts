@@ -128,6 +128,7 @@ import _poolDakmorSalvage from "../pool/dakmor-salvage.js";
 import _poolDamageControlCrew from "../pool/damage-control-crew.js";
 import _poolDamnation from "../pool/damnation.js";
 import _poolDancingFromDarkToDawn from "../pool/dancing-from-dark-to-dawn.js";
+import _poolDaringDemolition from "../pool/daring-demolition.js";
 import _poolDaringLeap from "../pool/daring-leap.js";
 import _poolDaringMechanic from "../pool/daring-mechanic.js";
 import _poolDarkHeartOfTheWood from "../pool/dark-heart-of-the-wood.js";
@@ -259,6 +260,7 @@ import _poolIntoTheRoil from "../pool/into-the-roil.js";
 import _poolInvasionOfBelenon from "../pool/invasion-of-belenon.js";
 import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
+import _poolIroncladRevolutionary from "../pool/ironclad-revolutionary.js";
 import _poolIvoryCup from "../pool/ivory-cup.js";
 import _poolIvoryGuardians from "../pool/ivory-guardians.js";
 import _poolJadeSeedstones from "../pool/jade-seedstones.js";
@@ -406,6 +408,7 @@ import _poolRunAground from "../pool/run-aground.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
 import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
 import _poolSaidDone from "../pool/said-done.js";
+import _poolSalvageScuttler from "../pool/salvage-scuttler.js";
 import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
 import _poolSawInHalf from "../pool/saw-in-half.js";
@@ -720,6 +723,7 @@ const shard: CardShard = {
     _poolDamageControlCrew,
     _poolDamnation,
     _poolDancingFromDarkToDawn,
+    _poolDaringDemolition,
     _poolDaringLeap,
     _poolDaringMechanic,
     _poolDarkHeartOfTheWood,
@@ -851,6 +855,7 @@ const shard: CardShard = {
     _poolInvasionOfBelenon,
     _poolInvasiveManeuvers,
     _poolIronApprentice,
+    _poolIroncladRevolutionary,
     _poolIvoryCup,
     _poolIvoryGuardians,
     _poolJadeSeedstones,
@@ -998,6 +1003,7 @@ const shard: CardShard = {
     _poolRushOfVitality,
     _poolSabertoothNishoba,
     _poolSaidDone,
+    _poolSalvageScuttler,
     _poolSandbarMerfolk,
     _poolSavageGorilla,
     _poolSawInHalf,
