@@ -204,11 +204,24 @@ export class HybridSocket implements RoomSocket {
    * the server's side is opened again, with the page's own backoff, and
    * the page hears of the drop only if it sends the server something before
    * that's done — then as a dropped socket, and reconnects as ever.
+   *
+   * `startsHere` says the page is loading into one of the worker's rooms (a
+   * reload mid-game): the socket opens from the worker at once, not when the
+   * server answers, and the server's side opens behind it as a reopened one
+   * would — so a game played here is picked up with the server down.
    */
-  constructor(openServer: () => RoomSocket, playingHere: () => boolean = () => false) {
+  constructor(openServer: () => RoomSocket, playingHere: () => boolean = () => false, startsHere = false) {
     this.openServer = openServer
     this.playingHere = playingHere
-    this.server = this.attachServer(openServer(), false)
+    const here = startsHere && !workerFailed
+    this.server = this.attachServer(openServer(), here)
+    if (here) {
+      this.serverDown = true
+      this.worker()
+      queueMicrotask(() => {
+        if (!this.closed) this.onopen?.()
+      })
+    }
   }
 
   private readonly openServer: () => RoomSocket
@@ -262,8 +275,11 @@ export class HybridSocket implements RoomSocket {
   send(data: string): void {
     const roomId = roomIdOf(data)
     if (roomId !== null && localRooms.has(roomId)) this.worker().send(data)
-    else if (this.serverDown) this.dropServer()
-    else this.server.send(data)
+    else if (this.serverDown) {
+      // A new connection's first word: the server's side says it itself
+      // when it opens again (`attachServer`), the worker already has.
+      if (!data.includes('"event-deltas"')) this.dropServer()
+    } else this.server.send(data)
   }
 
   /** The server's connection went down under a game here and is still down

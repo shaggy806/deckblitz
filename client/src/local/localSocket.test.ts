@@ -128,6 +128,42 @@ describe('HybridSocket', () => {
     expect(servers).toHaveLength(1)
   })
 
+  it('picks a game here up on a reload with the server down', async () => {
+    // The tab remembers its worker's room across the reload.
+    const stored = new Map([['mtg.localRooms', JSON.stringify(['LOCAL'])]])
+    vi.stubGlobal('sessionStorage', { getItem: (k: string) => stored.get(k) ?? null, setItem: () => {} })
+    const { HybridSocket } = await import('./localSocket.ts')
+    const ws = new HybridSocket(
+      () => {
+        const server = new FakeServer()
+        servers.push(server)
+        return server
+      },
+      () => room === 'LOCAL',
+      true,
+    )
+    ws.onopen = () => {
+      page.opens += 1
+      // What the page does on opening: rejoin the URL's room.
+      room = 'LOCAL'
+      ws.send(JSON.stringify({ type: 'event-deltas' }))
+      ws.send(JSON.stringify({ type: 'join-room', roomId: 'LOCAL' }))
+    }
+    ws.onclose = () => (page.closes += 1)
+    // Open before the server says anything.
+    await Promise.resolve()
+    expect(page.opens).toBe(1)
+    expect(servers[0].sent).toEqual([])
+    // The server never answers: the page carries on, and the server's side
+    // is tried again behind it.
+    servers[0].drop()
+    expect(page).toEqual({ opens: 1, closes: 0, errors: 0 })
+    vi.advanceTimersByTime(1000)
+    servers[1].onopen?.()
+    expect(servers[1].sent).toEqual([JSON.stringify({ type: 'event-deltas' })])
+    expect(page.opens).toBe(1)
+  })
+
   it('passes a drop straight on when no game here needs the socket', async () => {
     await open()
     servers[0].drop()

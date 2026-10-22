@@ -564,6 +564,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **A local game picked up without the room server** (a bug report, 2026-10-20; landed
+  2026-10-22): a page loading into one of the tab's local rooms opens its socket from the worker
+  at once (`HybridSocket`'s `startsHere`), the server's side opening behind it — a reload with the
+  wifi down went to "Reconnecting" though the worker held the game.
 - **One damage decision for a stack of blocked attackers** (the user, 2026-10-22): the damage
   prompt says how many attackers still to assign are in the same situation (the same attacker,
   power and blockers), and "Same for all N" gives each that split (`assign-combat-damage`'s

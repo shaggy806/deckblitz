@@ -503,6 +503,8 @@ export function useNetworkGame(): NetworkGame {
       ? new HybridSocket(
           () => new WebSocket(SERVER_URL) as RoomSocket,
           () => isLocalRoom(roomIdRef.current),
+          // A reload into a game played here needn't wait for the server.
+          isLocalRoom(new URL(window.location.href).searchParams.get('room')),
         )
       : (new WebSocket(SERVER_URL) as RoomSocket)
     wsRef.current = ws
