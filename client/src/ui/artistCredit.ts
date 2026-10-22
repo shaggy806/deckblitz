@@ -1,3 +1,5 @@
+import { useSyncExternalStore } from 'react'
+
 /**
  * Who illustrated a card's art, for the credit Scryfall's image guidelines
  * ask for wherever an art crop is shown: "When using the art_crop, list the
@@ -270,3 +272,12 @@ export function artistFor(art: string | null | undefined, name: string, backFace
 
 /** The copyright line a card prints beside its illustrator. */
 export const CARD_COPYRIGHT = '™ & © Wizards of the Coast'
+
+/** The credit's words, re-rendering as the artist arrives: for a small art
+ * crop with no room for it, as its tooltip (a commander-damage or Curse
+ * chip). */
+export function useArtCreditText(art: string | null | undefined, name: string, backFace = false): string {
+  useSyncExternalStore(subscribeArtists, getArtistsVersion, getArtistsVersion)
+  const artist = artistFor(art, name, backFace)
+  return `${artist ? `Illus. ${artist} · ` : ''}${CARD_COPYRIGHT}`
+}

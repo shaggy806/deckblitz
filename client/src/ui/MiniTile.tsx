@@ -1,4 +1,3 @@
-import { useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import type { VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
@@ -16,15 +15,7 @@ import { CounterChips } from './CounterChips.tsx'
 import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
 import { roomLabel } from './rooms.ts'
-import {
-  isArtBlocked,
-  isArtPending,
-  getArtCacheVersion,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-} from './art.ts'
+import { useCardArt } from './useCardArt.ts'
 
 const TAP_ICON_URL = manaSymbolUrl('T')
 
@@ -107,16 +98,7 @@ export function MiniTile({
   const face = obj.copyOf ?? obj.faceName ?? obj.cardName
   // A face-down permanent shows a card back, never art (rule 708.2a).
   const faceDown = faceDownLabel(obj)
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-  // Queued synchronously during render — see the comment in CardTile.tsx.
-  if (!obj.art && faceDown === null) queueArtLookup(face)
-  const pending = faceDown === null && !obj.art && isArtPending(face)
-  // `faceIsBack` comes from the engine: a chosen printing is named by
-  // card id, which serves the front image unless asked otherwise, and
-  // only the registry knows a two-entry `faces` list is a real back face
-  // rather than an adventure's spell half.
-  const artSrc = resolveArtUrl(obj.art, face, 'art_crop', { backFace: obj.faceIsBack })
-  const artFailed = !pending && isArtBlocked(artSrc)
+  const art = useCardArt(obj.art, face, { backFace: obj.faceIsBack, skip: faceDown !== null })
   const isCreature = obj.power !== null && obj.toughness !== null
   const clickable = Boolean(onClick) && (highlight || selected || activatable)
   const tint = cardTint(obj)
@@ -166,12 +148,12 @@ export function MiniTile({
         </span>
         <span className="mt-body">
           <span className={faceDown !== null ? `mt-art ${faceDownArtClass(ownerSeat)}` : `mt-art tint-${tint}`}>
-            {faceDown === null && !pending && !artFailed ? (
+            {art.ready ? (
               <img
-                src={artSrc}
+                src={art.src}
                 alt=""
                 loading="lazy"
-                onError={() => recordArtFailure(artSrc)}
+                onError={art.onError}
               />
             ) : null}
           </span>

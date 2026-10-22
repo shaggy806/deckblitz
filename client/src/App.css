@@ -2834,6 +2834,21 @@
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.72));
   pointer-events: none;
 }
+/* ArtCredit's `fit`: one line across the art, whatever the artist's name —
+   the font is the box's width over the text's length (about half an em a
+   character in this face), never past --credit-max. The ellipsis is only a
+   backstop. */
+.art-credit-fit {
+  container-type: inline-size;
+  --credit-max: calc(8.5px * var(--ct-scale, 1));
+}
+.art-credit-text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: min(var(--credit-max), calc(100cqw / (var(--credit-chars, 40) * 0.5)));
+}
 /* An Adventure or Omen half (`VisibleObject.spellFace`): its own small block
    at the top of the text box, set off from the creature's text below it. */
 .ct-spellface {
@@ -3811,6 +3826,11 @@
   translate: 0 -30px;
   rotate: 0deg;
   scale: 1.65;
+}
+/* The art credit (ArtCredit's one line) only on the grown card: at the fan's
+   own size it would be a few pixels high, noise over the art. */
+.hand-cards .hand-card:not(:hover, .hover-carry, :focus-within) .ct-credit {
+  display: none;
 }
 /* A card the pointer swept across between two of its move events
    (ui/handSweep.ts), grown as a hovered card is for as long as the pointer

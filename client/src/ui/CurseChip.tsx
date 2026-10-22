@@ -1,14 +1,6 @@
-import { useSyncExternalStore } from 'react'
 import type { ObjectId } from 'engine/client'
-import {
-  getArtCacheVersion,
-  isArtBlocked,
-  isArtPending,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-} from './art.ts'
+import { useCardArt } from './useCardArt.ts'
+import { useArtCreditText } from './artistCredit.ts'
 import type { SeatClass } from '../format.ts'
 
 /** A Curse attached to a player, as their panel shows it. */
@@ -29,17 +21,14 @@ export interface CurseOnPlayer {
  * other; this is so the player it's on can be seen to be cursed, and by whom.
  */
 export function CurseChip({ curse }: { readonly curse: CurseOnPlayer }) {
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-  // Queued synchronously during render — see the comment in CardTile.tsx.
-  if (!curse.art) queueArtLookup(curse.name)
-  const pending = !curse.art && isArtPending(curse.name)
-  const artSrc = resolveArtUrl(curse.art, curse.name, 'art_crop')
-  const showArt = !pending && !isArtBlocked(artSrc)
-  const title = `${curse.name} (${curse.controllerLabel}'s) is enchanting this player`
+  const art = useCardArt(curse.art, curse.name)
+  const credit = useArtCreditText(curse.art, curse.name)
+  const title = `${curse.name} (${curse.controllerLabel}'s) is enchanting this player
+${credit}`
   return (
     <span className={`cmdr-dmg pp-curse ${curse.controllerClass}`} title={title} aria-label={title}>
       <span className="cmdr-dmg-art">
-        {showArt ? <img src={artSrc} alt="" loading="lazy" onError={() => recordArtFailure(artSrc)} /> : null}
+        {art.ready ? <img src={art.src} alt="" loading="lazy" onError={art.onError} /> : null}
       </span>
       <span className="pp-curse-mark" aria-hidden="true">
         ✶

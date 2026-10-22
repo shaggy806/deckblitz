@@ -359,11 +359,6 @@ animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When a
 delete its detail there and move this line to `COMPLETED.md`.
 
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
-- **One art-crop primitive** — the art lookup is repeated in six components.
-- **The artist credit shows on only some art, on two lines** (the user, 2026-10-17): check every
-  way a card is displayed (the eleven listed under "One art-crop primitive" in
-  `docs/client-gaps.md`) and make the credit's font shrink or grow to fit its text on one line
-  (`ui/artistCredit.ts`).
 - **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **Quality-of-life room options (house rules)**, opt-in per room.

@@ -560,6 +560,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **One art lookup, and the artist credit on one line everywhere it fits** (the user, 2026-10-17;
+  done 2026-10-22): `ui/useCardArt.ts` replaces the lookup seven components each repeated. The
+  credit (`ArtCredit`'s `fit`) is one line across the art, its font sized to the text's length; it
+  shows in the hand's grown card, the spotlight and reveals as well as the hover card and the stack,
+  and the commander-damage and Curse chips carry it in their tooltips.
 - **A forced look-and-choose no longer asks** (2026-10-22): a zone choice where every card shown
   is taken, with nothing to order or split (Dark Confidant's and Yuriko's revealed card into the
   hand), is answered by the drivers (`forcedZoneChoice` in `engine/src/auto-settle.ts`, used by

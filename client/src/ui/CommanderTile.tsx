@@ -1,4 +1,3 @@
-import { useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import type { VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
@@ -8,15 +7,7 @@ import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
 import { cardTint } from './symbols.ts'
 import { TaxBadge } from './TaxBadge.tsx'
-import {
-  isArtBlocked,
-  isArtPending,
-  getArtCacheVersion,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-} from './art.ts'
+import { useCardArt } from './useCardArt.ts'
 
 export interface CommanderTileProps {
   readonly obj: VisibleObject
@@ -66,16 +57,7 @@ export function CommanderTile({
   const clickable = Boolean(onClick) && highlight
 
   const face = obj.copyOf ?? obj.faceName ?? obj.cardName
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-  // Queued synchronously during render — see the comment in CardTile.tsx.
-  if (!obj.art) queueArtLookup(face)
-  const pending = !obj.art && isArtPending(face)
-  // `faceIsBack` comes from the engine: a chosen printing is named by
-  // card id, which serves the front image unless asked otherwise, and
-  // only the registry knows a two-entry `faces` list is a real back face
-  // rather than an adventure's spell half.
-  const artSrc = resolveArtUrl(obj.art, face, 'art_crop', { backFace: obj.faceIsBack })
-  const artFailed = !pending && isArtBlocked(artSrc)
+  const art = useCardArt(obj.art, face, { backFace: obj.faceIsBack })
   const tint = cardTint(obj)
 
   return (
@@ -90,9 +72,7 @@ export function CommanderTile({
         aria-label={face}
       >
         <span className={`cmdt-art tint-${tint}`}>
-          {!pending && !artFailed ? (
-            <img src={artSrc} alt="" loading="lazy" onError={() => recordArtFailure(artSrc)} />
-          ) : null}
+          {art.ready ? <img src={art.src} alt="" loading="lazy" onError={art.onError} /> : null}
         </span>
         {/* What it costs now, as in the hand (`CardTile`): a cost
             reduction shows here too, the printed cost on the tooltip. The

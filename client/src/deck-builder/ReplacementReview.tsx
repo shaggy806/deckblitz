@@ -1,15 +1,7 @@
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useEffect, useState } from 'react'
 import { CardImage } from '../ui/CardImage.tsx'
 import { cardPool } from '../cards/cardData.ts'
-import {
-  getArtCacheVersion,
-  isArtBlocked,
-  isArtPending,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-} from '../ui/art.ts'
+import { useCardArt } from '../ui/useCardArt.ts'
 import type { ReplacementOption } from 'protocol'
 import { CONFIDENCE_LABEL, tagLabel } from './replacement-labels.ts'
 import '../ui/card-image.css'
@@ -189,17 +181,13 @@ export function ReplacementReview({
  * it. Same batched lookup path, and a named placeholder until it lands.
  */
 function ScryfallCardImage({ name }: { readonly name: string }) {
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-  queueArtLookup(name)
-  const pending = isArtPending(name)
-  const src = resolveArtUrl(undefined, name, 'normal')
-  const failed = !pending && isArtBlocked(src)
+  const { src, pending, failed, onError } = useCardArt(undefined, name, { version: 'normal' })
   return (
     <span className={`card-image${pending || failed ? ' placeholder' : ''}`}>
       {pending || failed ? (
         <span className="rr-placeholder">{pending ? '' : name}</span>
       ) : (
-        <img src={src} alt={name} decoding="async" onError={() => recordArtFailure(src)} />
+        <img src={src} alt={name} decoding="async" onError={onError} />
       )}
     </span>
   )

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useSyncExternalStore } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import type { VisibleObject } from 'engine/client'
 import { CostSymbols, LoyaltyCounter, Symbols } from './Symbols.tsx'
 import { cardTint } from './symbols.ts'
@@ -11,15 +11,7 @@ import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
 import { ArtCredit } from './ArtCredit.tsx'
 import { TaxBadge } from './TaxBadge.tsx'
 import { counterSummary } from './counterSummary.ts'
-import {
-  isArtBlocked,
-  isArtPending,
-  getArtCacheVersion,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-} from './art.ts'
+import { useCardArt } from './useCardArt.ts'
 
 const TAP_ICON_URL = manaSymbolUrl('T')
 
@@ -180,31 +172,9 @@ export function CardTile({
   // A Clone renders the *copied* card's face; a multi-face card renders its up
   // face (`faceName`); `cardName` stays the true identity for the log.
   const face = obj.copyOf ?? obj.faceName ?? obj.cardName
-  // Re-render once a batched art lookup resolves so `artSrc` below can pick
-  // up the direct (no-redirect) CDN URL instead of the by-name fallback.
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-  // Queued synchronously during render, not from an effect: an effect fires
-  // after the browser has already committed this tile's <img> and started
-  // loading whatever `artSrc` said on the very first render. Queuing here
-  // instead means `isArtPending` below already sees this name as queued in
-  // that same render, so the eager by-name <img> never mounts in the first
-  // place — see `isArtPending`'s comment in art.ts for why that matters.
-  // `queueArtLookup` is idempotent, so a React Strict Mode double-render (or
-  // an unrelated re-render) costs nothing extra.
   // A face-down permanent shows a card back, never art (rule 708.2a).
   const faceDown = faceDownLabel(obj)
-  if (!obj.art && faceDown === null) queueArtLookup(face)
-  // While the batched lookup for this name is still in flight (or retrying
-  // a transient failure), hold off on the eager by-name <img> entirely.
-  const pending = faceDown === null && !obj.art && isArtPending(face)
-  // `faceIsBack` comes from the engine: a chosen printing is named by
-  // card id, which serves the front image unless asked otherwise, and
-  // only the registry knows a two-entry `faces` list is a real back face
-  // rather than an adventure's spell half.
-  const artSrc = resolveArtUrl(obj.art, face, 'art_crop', { backFace: obj.faceIsBack })
-  // Derived fresh from artSrc (which can change once the batched lookup
-  // resolves) rather than captured once at mount.
-  const artFailed = !pending && isArtBlocked(artSrc)
+  const art = useCardArt(obj.art, face, { backFace: obj.faceIsBack, skip: faceDown !== null })
   const isCreature = obj.power !== null && obj.toughness !== null
   const counters = Object.entries(obj.counters).filter(
     ([k, n]) => n !== 0 && k !== 'loyalty',
@@ -390,12 +360,12 @@ export function CardTile({
       )}
 
       <span className={faceDown !== null ? `ct-art ${faceDownArtClass(ownerSeat)}` : `ct-art tint-${tint}`}>
-        {faceDown === null && !pending && !artFailed ? (
+        {art.ready ? (
           <img
-            src={artSrc}
+            src={art.src}
             alt=""
             loading="lazy"
-            onError={() => recordArtFailure(artSrc)}
+            onError={art.onError}
           />
         ) : null}
         {artFirst && leftCostNode ? <span className="ct-cost-overlay left">{leftCostNode}</span> : null}
@@ -407,11 +377,11 @@ export function CardTile({
         {badge ? <span className="card-badge">{badge}</span> : null}
         {aimedBy !== null ? <TargetedMark by={aimedBy} /> : null}
         {/* The illustrator and copyright along the foot of the art: the
-            credit Scryfall asks for beside an art crop (artistCredit.ts).
-            Not on the hand's compact cards — hovering one shows this card,
-            credit and all. */}
-        {!artFirst && faceDown === null ? (
-          <ArtCredit art={obj.art} name={face} backFace={obj.faceIsBack} className="ct-credit" />
+            credit Scryfall asks for beside an art crop (artistCredit.ts),
+            on one line in either layout — the hand, the spotlight and the
+            reveals as well as the hover card and the stack. */}
+        {faceDown === null ? (
+          <ArtCredit art={obj.art} name={face} backFace={obj.faceIsBack} className="ct-credit" fit />
         ) : null}
       </span>
 

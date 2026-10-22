@@ -1,15 +1,7 @@
-import { useSyncExternalStore } from 'react'
 import { COMMANDER_DAMAGE_LETHAL } from 'engine/client'
 import type { CommanderDamage } from 'engine/client'
-import {
-  getArtCacheVersion,
-  isArtBlocked,
-  isArtPending,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-} from './art.ts'
+import { useCardArt } from './useCardArt.ts'
+import { useArtCreditText } from './artistCredit.ts'
 import type { SeatClass } from '../format.ts'
 
 /** Commander damage from one commander at or past which the chip warns, then
@@ -38,26 +30,22 @@ export function CommanderDamageChip({
   readonly ownerClass: SeatClass
   readonly ownerLabel: string
 }) {
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-  // Queued synchronously during render — see the comment in CardTile.tsx.
-  if (!damage.art) queueArtLookup(damage.name)
-  const pending = !damage.art && isArtPending(damage.name)
-  const artSrc = resolveArtUrl(damage.art, damage.name, 'art_crop')
-  const showArt = !pending && !isArtBlocked(artSrc)
+  const art = useCardArt(damage.art, damage.name)
+  const credit = useArtCreditText(damage.art, damage.name)
 
   const level =
     damage.amount >= DANGER_AT ? ' danger' : damage.amount >= WARN_AT ? ' warn' : ''
   const left = COMMANDER_DAMAGE_LETHAL - damage.amount
   const title =
     `${damage.amount} combat damage from ${damage.name} (${ownerLabel}'s commander)` +
-    (left > 0 ? ` — ${left} more loses` : '')
+    (left > 0 ? ` — ${left} more loses` : '') +
+    `
+${credit}`
 
   return (
     <span className={`cmdr-dmg ${ownerClass}${level}`} title={title} aria-label={title} data-tour="game-commander-damage">
       <span className="cmdr-dmg-art">
-        {showArt ? (
-          <img src={artSrc} alt="" loading="lazy" onError={() => recordArtFailure(artSrc)} />
-        ) : null}
+        {art.ready ? <img src={art.src} alt="" loading="lazy" onError={art.onError} /> : null}
       </span>
       <span className="cmdr-dmg-amount">{damage.amount}</span>
     </span>

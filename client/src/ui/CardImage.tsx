@@ -1,17 +1,8 @@
-import { useSyncExternalStore } from 'react'
 import type { CardDefinition } from 'engine/client'
 import { isTokenCard } from 'engine/client'
 import { Symbols } from './Symbols.tsx'
-import {
-  getArtCacheVersion,
-  isArtBlocked,
-  isArtPending,
-  queueArtLookup,
-  recordArtFailure,
-  resolveArtUrl,
-  subscribeArtCache,
-  type ArtVersion,
-} from './art.ts'
+import type { ArtVersion } from './art.ts'
+import { useCardArt } from './useCardArt.ts'
 import './card-image.css'
 
 /**
@@ -42,21 +33,13 @@ export function CardImage({
    * panel, on a flipped double-faced card). */
   readonly backFace?: boolean
 }) {
-  // Re-render when a batched lookup resolves, so the direct CDN URL replaces
-  // the by-name fallback (and a name the batch gave up on stops being held).
-  useSyncExternalStore(subscribeArtCache, getArtCacheVersion, getArtCacheVersion)
-
   // A token's name ("Soldier Token") isn't a name Scryfall knows — real token
   // printings are named for the creature alone, and only some of ours pin a
   // printing with `art`. Looking the rest up anyway cost a not-found batch
   // round plus four backed-off `<img>` retries each, all of which could only
   // ever end at the same fallback, so go there directly.
   const unlookupable = !def.art && isTokenCard(def)
-  if (!def.art && !unlookupable) queueArtLookup(def.name)
-
-  const pending = !def.art && !unlookupable && isArtPending(def.name)
-  const src = resolveArtUrl(def.art, def.name, version, { backFace })
-  const failed = !pending && (unlookupable || isArtBlocked(src))
+  const { src, pending, failed, onError } = useCardArt(def.art, def.name, { version, backFace, skip: unlookupable })
 
   const classes = pending || failed ? 'card-image placeholder' : 'card-image'
 
@@ -78,7 +61,7 @@ export function CardImage({
           alt={def.name}
           loading="lazy"
           decoding="async"
-          onError={() => recordArtFailure(src)}
+          onError={onError}
         />
       )}
     </span>
