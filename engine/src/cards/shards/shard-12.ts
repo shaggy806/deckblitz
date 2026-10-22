@@ -56,6 +56,7 @@ import _poolBloodDivination from "../pool/blood-divination.js";
 import _poolBloodHustler from "../pool/blood-hustler.js";
 import _poolBloodMist from "../pool/blood-mist.js";
 import _poolBloodbraidMarauder from "../pool/bloodbraid-marauder.js";
+import _poolBlurOfBlades from "../pool/blur-of-blades.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBookDevourer from "../pool/book-devourer.js";
@@ -80,6 +81,7 @@ import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.j
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChandrasFlameWave from "../pool/chandras-flame-wave.js";
+import _poolChaosMaw from "../pool/chaos-maw.js";
 import _poolChaoslace from "../pool/chaoslace.js";
 import _poolChargingSlateback from "../pool/charging-slateback.js";
 import _poolChargingStrifeknight from "../pool/charging-strifeknight.js";
@@ -547,6 +549,7 @@ import _poolWhiteManaBattery from "../pool/white-mana-battery.js";
 import _poolWhiteScarab from "../pool/white-scarab.js";
 import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
+import _poolWildfireEternal from "../pool/wildfire-eternal.js";
 import _poolWildsize from "../pool/wildsize.js";
 import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
 import _poolWindcallerAven from "../pool/windcaller-aven.js";
@@ -634,6 +637,7 @@ const shard: CardShard = {
     _poolBloodHustler,
     _poolBloodMist,
     _poolBloodbraidMarauder,
+    _poolBlurOfBlades,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
     _poolBookDevourer,
@@ -658,6 +662,7 @@ const shard: CardShard = {
     _poolChampionOfDusan,
     _poolChampionOfDusk,
     _poolChandrasFlameWave,
+    _poolChaosMaw,
     _poolChaoslace,
     _poolChargingSlateback,
     _poolChargingStrifeknight,
@@ -1125,6 +1130,7 @@ const shard: CardShard = {
     _poolWhiteScarab,
     _poolWildIdea,
     _poolWildernessReclamation,
+    _poolWildfireEternal,
     _poolWildsize,
     _poolWilheltTheRotcleaver,
     _poolWindcallerAven,

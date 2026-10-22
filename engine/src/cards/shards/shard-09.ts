@@ -406,6 +406,7 @@ import _poolRekindlingPhoenix from "../pool/rekindling-phoenix.js";
 import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js";
 import _poolRepel from "../pool/repel.js";
 import _poolReplenish from "../pool/replenish.js";
+import _poolResoluteSurvivors from "../pool/resolute-survivors.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
@@ -1014,6 +1015,7 @@ const shard: CardShard = {
     _poolRenariMerchantOfMarvels,
     _poolRepel,
     _poolReplenish,
+    _poolResoluteSurvivors,
     _poolRestorationGearsmith,
     _poolRetrieve,
     _poolRetrofittedTransmogrant,

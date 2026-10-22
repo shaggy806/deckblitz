@@ -17,6 +17,7 @@ import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
 import _poolAnchorToReality from "../pool/anchor-to-reality.js";
 import _poolAngelicAberration from "../pool/angelic-aberration.js";
+import _poolAppealAuthority from "../pool/appeal-authority.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
 import _poolArcOfFortune from "../pool/arc-of-fortune.js";
 import _poolArchitectOfRestoration from "../pool/architect-of-restoration.js";
@@ -96,6 +97,7 @@ import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
+import _poolCrookOfCondemnation from "../pool/crook-of-condemnation.js";
 import _poolCrumblingVestige from "../pool/crumbling-vestige.js";
 import _poolCrushingVines from "../pool/crushing-vines.js";
 import _poolCryoshatter from "../pool/cryoshatter.js";
@@ -378,6 +380,7 @@ import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
 import _poolRepurposingBay from "../pool/repurposing-bay.js";
 import _poolRescueLeopard from "../pool/rescue-leopard.js";
+import _poolResilientKhenra from "../pool/resilient-khenra.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
@@ -600,6 +603,7 @@ const shard: CardShard = {
     _poolAmbitiousAssault,
     _poolAnchorToReality,
     _poolAngelicAberration,
+    _poolAppealAuthority,
     _poolApproachOfTheSecondSun,
     _poolArcOfFortune,
     _poolArchitectOfRestoration,
@@ -679,6 +683,7 @@ const shard: CardShard = {
     _poolCoralBarrier,
     _poolCoriMountainMonastery,
     _poolCravenKnight,
+    _poolCrookOfCondemnation,
     _poolCrumblingVestige,
     _poolCrushingVines,
     _poolCryoshatter,
@@ -961,6 +966,7 @@ const shard: CardShard = {
     _poolReprieve,
     _poolRepurposingBay,
     _poolRescueLeopard,
+    _poolResilientKhenra,
     _poolRestlessVinestalk,
     _poolRetchedWretch,
     _poolRevealingEye,

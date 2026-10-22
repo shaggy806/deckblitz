@@ -12,6 +12,7 @@ import _poolAhnCropInvader from "../pool/ahn-crop-invader.js";
 import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
 import _poolAirServant from "../pool/air-servant.js";
 import _poolAlexisCloak from "../pool/alexis-cloak.js";
+import _poolAmmitEternal from "../pool/ammit-eternal.js";
 import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolAnsweredPrayers from "../pool/answered-prayers.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
@@ -90,6 +91,7 @@ import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
+import _poolClaimFame from "../pool/claim-fame.js";
 import _poolClear from "../pool/clear.js";
 import _poolCloisterGargoyle from "../pool/cloister-gargoyle.js";
 import _poolClone from "../pool/clone.js";
@@ -475,6 +477,7 @@ import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
+import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheFireNationDrill from "../pool/the-fire-nation-drill.js";
 import _poolThePrimaVista from "../pool/the-prima-vista.js";
@@ -570,6 +573,7 @@ const shard: CardShard = {
     _poolAinokStrikeLeader,
     _poolAirServant,
     _poolAlexisCloak,
+    _poolAmmitEternal,
     _poolAngelicWall,
     _poolAnsweredPrayers,
     _poolApexAltisaur,
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolCinderStrike,
     _poolCircleOfProtectionArtifacts,
     _poolCircleOfTheLandDruid,
+    _poolClaimFame,
     _poolClear,
     _poolCloisterGargoyle,
     _poolClone,
@@ -1033,6 +1038,7 @@ const shard: CardShard = {
     _poolTangle,
     _poolTauntingKobold,
     _poolTeferiMasterOfTime,
+    _poolTenaciousHunter,
     _poolTheFantasticar,
     _poolTheFireNationDrill,
     _poolThePrimaVista,

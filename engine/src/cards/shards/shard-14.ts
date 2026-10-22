@@ -176,6 +176,7 @@ import _poolExocrine from "../pool/exocrine.js";
 import _poolExplorationBroodship from "../pool/exploration-broodship.js";
 import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
+import _poolFame from "../pool/fame.js";
 import _poolFangbladeBrigand from "../pool/fangblade-brigand.js";
 import _poolFarrelsZealot from "../pool/farrels-zealot.js";
 import _poolFathomFleetSwordjack from "../pool/fathom-fleet-swordjack.js";
@@ -745,6 +746,7 @@ const shard: CardShard = {
     _poolExplorationBroodship,
     _poolExplosiveImpact,
     _poolFaerieFormation,
+    _poolFame,
     _poolFangbladeBrigand,
     _poolFarrelsZealot,
     _poolFathomFleetSwordjack,

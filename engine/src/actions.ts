@@ -63,6 +63,10 @@ export type CastVia =
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
    * cost, tapping up to one creature (`harmonizeTap`). */
   | "harmonize"
+  /** Aftermath (rule 702.127a) — the aftermath half of a split card, from
+   * the caster's graveyard, for its mana cost; exiled whenever it would
+   * leave the stack. */
+  | "aftermath"
   /** "Impulse draw" (Dream Pillager, Tectonic Giant, Theater of Horrors) — a
    * card exiled face-up with permission to play it, for its normal cost —
    * or one a `playFromExile` static lets its controller play (Grolnok, the

@@ -106,6 +106,7 @@ import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
 import _poolCouncilsJudgment from "../pool/councils-judgment.js";
+import _poolCountervailingWinds from "../pool/countervailing-winds.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
@@ -116,6 +117,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
+import _poolDaggerOfTheWorthy from "../pool/dagger-of-the-worthy.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
@@ -563,6 +565,7 @@ import _poolVraanExecutionerThane from "../pool/vraan-executioner-thane.js";
 import _poolVraskaSoulOfStone from "../pool/vraska-soul-of-stone.js";
 import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
+import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
@@ -711,6 +714,7 @@ const shard: CardShard = {
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
     _poolCouncilsJudgment,
+    _poolCountervailingWinds,
     _poolCovertTechnician,
     _poolCrawlingChorus,
     _poolCrookshankKobolds,
@@ -721,6 +725,7 @@ const shard: CardShard = {
     _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
+    _poolDaggerOfTheWorthy,
     _poolDaggerdromeImp,
     _poolDanithaSwordOfHope,
     _poolDarkness,
@@ -1168,6 +1173,7 @@ const shard: CardShard = {
     _poolVraskaSoulOfStone,
     _poolWallOfBrambles,
     _poolWallOfFire,
+    _poolWallOfForgottenPharaohs,
     _poolWandOfOrcus,
     _poolWanderingMusicians,
     _poolWarhornBlast,

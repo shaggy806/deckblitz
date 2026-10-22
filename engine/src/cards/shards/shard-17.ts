@@ -55,6 +55,7 @@ import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
+import _poolBloodwaterEntity from "../pool/bloodwater-entity.js";
 import _poolBlueScarab from "../pool/blue-scarab.js";
 import _poolBogardanFirefiend from "../pool/bogardan-firefiend.js";
 import _poolBoggartBog from "../pool/boggart-bog.js";
@@ -289,6 +290,7 @@ import _poolMagmaJet from "../pool/magma-jet.js";
 import _poolMagmaOpus from "../pool/magma-opus.js";
 import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
 import _poolManamorphose from "../pool/manamorphose.js";
+import _poolMarket from "../pool/market.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
@@ -320,6 +322,7 @@ import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
+import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
 import _poolNyleasColossus from "../pool/nyleas-colossus.js";
@@ -370,6 +373,7 @@ import _poolRavenousGigamole from "../pool/ravenous-gigamole.js";
 import _poolRavos from "../pool/ravos.js";
 import _poolReadTheBones from "../pool/read-the-bones.js";
 import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
+import _poolReasonBelieve from "../pool/reason-believe.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
@@ -418,6 +422,7 @@ import _poolShockBrigade from "../pool/shock-brigade.js";
 import _poolShock from "../pool/shock.js";
 import _poolShoreLurker from "../pool/shore-lurker.js";
 import _poolSidequestHuntTheMark from "../pool/sidequest-hunt-the-mark.js";
+import _poolSifterWurm from "../pool/sifter-wurm.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
@@ -488,6 +493,7 @@ import _poolThunderscapeMaster from "../pool/thunderscape-master.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
+import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
@@ -500,6 +506,7 @@ import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
+import _poolUnconventionalTactics from "../pool/unconventional-tactics.js";
 import _poolUndercellarMyconid from "../pool/undercellar-myconid.js";
 import _poolUndercityUprising from "../pool/undercity-uprising.js";
 import _poolUndertow from "../pool/undertow.js";
@@ -629,6 +636,7 @@ const shard: CardShard = {
     _poolBloodAspirant,
     _poolBloodServitor,
     _poolBloodforgedBattleAxe,
+    _poolBloodwaterEntity,
     _poolBlueScarab,
     _poolBogardanFirefiend,
     _poolBoggartBog,
@@ -863,6 +871,7 @@ const shard: CardShard = {
     _poolMagmaOpus,
     _poolMagmaticSprinter,
     _poolManamorphose,
+    _poolMarket,
     _poolMarketwatchPhantom,
     _poolMasterApothecary,
     _poolMasterworkOfIngenuity,
@@ -894,6 +903,7 @@ const shard: CardShard = {
     _poolNiambiFaithfulHealer,
     _poolNightOfTheSweetsRevenge,
     _poolNimanaSkydancer,
+    _poolNissaGenesisMage,
     _poolNornsInquisitor,
     _poolNoxiousGrasp,
     _poolNyleasColossus,
@@ -944,6 +954,7 @@ const shard: CardShard = {
     _poolRavos,
     _poolReadTheBones,
     _poolReaperFromTheAbyss,
+    _poolReasonBelieve,
     _poolRecruiterOfTheGuard,
     _poolRecuperate,
     _poolRedMagesRapier,
@@ -992,6 +1003,7 @@ const shard: CardShard = {
     _poolShock,
     _poolShoreLurker,
     _poolSidequestHuntTheMark,
+    _poolSifterWurm,
     _poolSigiledPaladin,
     _poolSkylasher,
     _poolSkymarchBloodletter,
@@ -1062,6 +1074,7 @@ const shard: CardShard = {
     _poolTideSkimmer,
     _poolTitaniaNaturesForce,
     _poolTombRobber,
+    _poolTragicLesson,
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
     _poolTrestleTroll,
@@ -1074,6 +1087,7 @@ const shard: CardShard = {
     _poolTyranidPrime,
     _poolUktabiFaerie,
     _poolUlvenwaldBehemoth,
+    _poolUnconventionalTactics,
     _poolUndercellarMyconid,
     _poolUndercityUprising,
     _poolUndertow,

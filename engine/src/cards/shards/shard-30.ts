@@ -253,6 +253,7 @@ import _poolHornedTroll from "../pool/horned-troll.js";
 import _poolHorridVigor from "../pool/horrid-vigor.js";
 import _poolHotSprings from "../pool/hot-springs.js";
 import _poolHotshotMechanic from "../pool/hotshot-mechanic.js";
+import _poolHourOfDevastation from "../pool/hour-of-devastation.js";
 import _poolHowltoothHollow from "../pool/howltooth-hollow.js";
 import _poolHraesvelgrOfTheFirstBrood from "../pool/hraesvelgr-of-the-first-brood.js";
 import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
@@ -484,6 +485,7 @@ import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
 import _poolStormWorld from "../pool/storm-world.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
+import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
@@ -830,6 +832,7 @@ const shard: CardShard = {
     _poolHorridVigor,
     _poolHotSprings,
     _poolHotshotMechanic,
+    _poolHourOfDevastation,
     _poolHowltoothHollow,
     _poolHraesvelgrOfTheFirstBrood,
     _poolHuatlisRaptor,
@@ -1061,6 +1064,7 @@ const shard: CardShard = {
     _poolStormWorld,
     _poolStridingShotcaller,
     _poolSunhomeStalwart,
+    _poolSunscourgeChampion,
     _poolSwarmCuller,
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,

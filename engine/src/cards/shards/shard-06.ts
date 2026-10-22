@@ -35,6 +35,7 @@ import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
+import _poolAuthority from "../pool/authority.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
@@ -74,6 +75,7 @@ import _poolBroodbirthViper from "../pool/broodbirth-viper.js";
 import _poolBruvacTheGrandiloquent from "../pool/bruvac-the-grandiloquent.js";
 import _poolBulwarkGiant from "../pool/bulwark-giant.js";
 import _poolBumiEclecticEarthbender from "../pool/bumi-eclectic-earthbender.js";
+import _poolBurningFistMinotaur from "../pool/burning-fist-minotaur.js";
 import _poolBurrentonShieldBearers from "../pool/burrenton-shield-bearers.js";
 import _poolBurrowing from "../pool/burrowing.js";
 import _poolCactuar from "../pool/cactuar.js";
@@ -104,6 +106,7 @@ import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsecrateConsume from "../pool/consecrate-consume.js";
 import _poolConsider from "../pool/consider.js";
+import _poolConsignOblivion from "../pool/consign-oblivion.js";
 import _poolConsumingAshes from "../pool/consuming-ashes.js";
 import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
@@ -277,6 +280,7 @@ import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
+import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLivingAirship from "../pool/living-airship.js";
 import _poolLoamDryad from "../pool/loam-dryad.js";
@@ -324,6 +328,7 @@ import _poolNiambiEsteemedSpeaker from "../pool/niambi-esteemed-speaker.js";
 import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
+import _poolNissasDefeat from "../pool/nissas-defeat.js";
 import _poolNoblesPurse from "../pool/nobles-purse.js";
 import _poolObeliskOfAlara from "../pool/obelisk-of-alara.js";
 import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
@@ -621,6 +626,7 @@ const shard: CardShard = {
     _poolAssureAssemble,
     _poolAtog,
     _poolAugmentingAutomaton,
+    _poolAuthority,
     _poolAvatarsWrath,
     _poolBalambTRexaur,
     _poolBallLightning,
@@ -660,6 +666,7 @@ const shard: CardShard = {
     _poolBruvacTheGrandiloquent,
     _poolBulwarkGiant,
     _poolBumiEclecticEarthbender,
+    _poolBurningFistMinotaur,
     _poolBurrentonShieldBearers,
     _poolBurrowing,
     _poolCactuar,
@@ -690,6 +697,7 @@ const shard: CardShard = {
     _poolConductElectricity,
     _poolConsecrateConsume,
     _poolConsider,
+    _poolConsignOblivion,
     _poolConsumingAshes,
     _poolCopyArtifact,
     _poolCoretapper,
@@ -863,6 +871,7 @@ const shard: CardShard = {
     _poolLathlissDragonQueen,
     _poolLayDownArms,
     _poolLegionsLanding,
+    _poolLilianasDefeat,
     _poolLingeringTormentor,
     _poolLivingAirship,
     _poolLoamDryad,
@@ -910,6 +919,7 @@ const shard: CardShard = {
     _poolNickFurySpymaster,
     _poolNightshadeDryad,
     _poolNightveilSprite,
+    _poolNissasDefeat,
     _poolNoblesPurse,
     _poolObeliskOfAlara,
     _poolObeliskOfBant,

@@ -22,6 +22,7 @@ import _poolAnkhOfMishra from "../pool/ankh-of-mishra.js";
 import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
+import _poolAppeal from "../pool/appeal.js";
 import _poolArcboundJavelineer from "../pool/arcbound-javelineer.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArchonOfValorsReach from "../pool/archon-of-valors-reach.js";
@@ -96,6 +97,7 @@ import _poolColossadactyl from "../pool/colossadactyl.js";
 import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
+import _poolConsign from "../pool/consign.js";
 import _poolCouncilOfAdvisors from "../pool/council-of-advisors.js";
 import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
@@ -190,6 +192,7 @@ import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
 import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
 import _poolGoblinStriker from "../pool/goblin-striker.js";
+import _poolGodPharaohsFaithful from "../pool/god-pharaohs-faithful.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
 import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
 import _poolGoremand from "../pool/goremand.js";
@@ -213,6 +216,7 @@ import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
 import _poolHospitalRoom from "../pool/hospital-room.js";
+import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
@@ -451,6 +455,7 @@ import _poolSpotterThopter from "../pool/spotter-thopter.js";
 import _poolSquall from "../pool/squall.js";
 import _poolStaggershock from "../pool/staggershock.js";
 import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js";
+import _poolSteadfastSentinel from "../pool/steadfast-sentinel.js";
 import _poolSterlingGrove from "../pool/sterling-grove.js";
 import _poolSternScolding from "../pool/stern-scolding.js";
 import _poolStockmanMadFlyEntist from "../pool/stockman-mad-fly-entist.js";
@@ -463,6 +468,7 @@ import _poolStranglingSpores from "../pool/strangling-spores.js";
 import _poolStrategicIntervention from "../pool/strategic-intervention.js";
 import _poolStressDream from "../pool/stress-dream.js";
 import _poolStrongholdZeppelin from "../pool/stronghold-zeppelin.js";
+import _poolStruggleSurvive from "../pool/struggle-survive.js";
 import _poolSuChi from "../pool/su-chi.js";
 import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
@@ -605,6 +611,7 @@ const shard: CardShard = {
     _poolAnnoyedAltisaur,
     _poolAnowonTheRuinSage,
     _poolAppaLoyalSkyBison,
+    _poolAppeal,
     _poolArcboundJavelineer,
     _poolArchivist,
     _poolArchonOfValorsReach,
@@ -679,6 +686,7 @@ const shard: CardShard = {
     _poolColossalSkyturtle,
     _poolCombatCourier,
     _poolConclaveEvangelist,
+    _poolConsign,
     _poolCouncilOfAdvisors,
     _poolCountryRoads,
     _poolCovenantOfBlood,
@@ -773,6 +781,7 @@ const shard: CardShard = {
     _poolGoblinRabblemaster,
     _poolGoblinSkyRaider,
     _poolGoblinStriker,
+    _poolGodPharaohsFaithful,
     _poolGoldveinPick,
     _poolGollumTheAbandoned,
     _poolGoremand,
@@ -796,6 +805,7 @@ const shard: CardShard = {
     _poolHonorGuard,
     _poolHoppingAutomaton,
     _poolHospitalRoom,
+    _poolHostileDesert,
     _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
@@ -1034,6 +1044,7 @@ const shard: CardShard = {
     _poolSquall,
     _poolStaggershock,
     _poolStarkIndustriesExecutive,
+    _poolSteadfastSentinel,
     _poolSterlingGrove,
     _poolSternScolding,
     _poolStockmanMadFlyEntist,
@@ -1046,6 +1057,7 @@ const shard: CardShard = {
     _poolStrategicIntervention,
     _poolStressDream,
     _poolStrongholdZeppelin,
+    _poolStruggleSurvive,
     _poolSuChi,
     _poolSumalaRumblers,
     _poolSummonFatChocobo,

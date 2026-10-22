@@ -169,6 +169,7 @@ import _poolEyeOfNowhere from "../pool/eye-of-nowhere.js";
 import _poolFaithbearerPaladin from "../pool/faithbearer-paladin.js";
 import _poolFanaticOfMogis from "../pool/fanatic-of-mogis.js";
 import _poolFarTraveler from "../pool/far-traveler.js";
+import _poolFarm from "../pool/farm.js";
 import _poolFeastOfSanity from "../pool/feast-of-sanity.js";
 import _poolFeiyiSnake from "../pool/feiyi-snake.js";
 import _poolFeldonRonomExcavator from "../pool/feldon-ronom-excavator.js";
@@ -224,6 +225,7 @@ import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
 import _poolGrandEntrywayElegantRotunda from "../pool/grand-entryway-elegant-rotunda.js";
 import _poolGraspingCurrent from "../pool/grasping-current.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
+import _poolGravenAbomination from "../pool/graven-abomination.js";
 import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
@@ -294,6 +296,7 @@ import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
+import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
 import _poolMaritLagesSlumber from "../pool/marit-lages-slumber.js";
 import _poolMarthaJones from "../pool/martha-jones.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
@@ -380,6 +383,7 @@ import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
+import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
@@ -403,6 +407,7 @@ import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
 import _poolRiskFactor from "../pool/risk-factor.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
+import _poolRiverHoopoe from "../pool/river-hoopoe.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
 import _poolRoamersRoutine from "../pool/roamers-routine.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
@@ -444,6 +449,7 @@ import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
+import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
 import _poolSkophosWarleader from "../pool/skophos-warleader.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
@@ -525,6 +531,7 @@ import _poolUndercitySewers from "../pool/undercity-sewers.js";
 import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
+import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
 import _poolUrbanUtopia from "../pool/urban-utopia.js";
 import _poolUrzaChiefArtificer from "../pool/urza-chief-artificer.js";
@@ -755,6 +762,7 @@ const shard: CardShard = {
     _poolFaithbearerPaladin,
     _poolFanaticOfMogis,
     _poolFarTraveler,
+    _poolFarm,
     _poolFeastOfSanity,
     _poolFeiyiSnake,
     _poolFeldonRonomExcavator,
@@ -810,6 +818,7 @@ const shard: CardShard = {
     _poolGrandEntrywayElegantRotunda,
     _poolGraspingCurrent,
     _poolGraspingLongneck,
+    _poolGravenAbomination,
     _poolGravitonFundamentalForce,
     _poolGreatHallOfTheBiblioplex,
     _poolGuardiansOfOboro,
@@ -880,6 +889,7 @@ const shard: CardShard = {
     _poolMaladyInvoker,
     _poolMalevolentChandelier,
     _poolMantisRider,
+    _poolMaraudingBoneslasher,
     _poolMaritLagesSlumber,
     _poolMarthaJones,
     _poolMaryReadAndAnneBonny,
@@ -966,6 +976,7 @@ const shard: CardShard = {
     _poolRaphaelToughTurtle,
     _poolRaucousAudience,
     _poolReachForTheSky,
+    _poolReason,
     _poolRebelliousStrike,
     _poolRecklessBarbarian,
     _poolRedRoomRecruit,
@@ -989,6 +1000,7 @@ const shard: CardShard = {
     _poolRiseOfTheEldrazi,
     _poolRiskFactor,
     _poolRiskyShortcut,
+    _poolRiverHoopoe,
     _poolRiveteersInitiate,
     _poolRoamersRoutine,
     _poolRockfallVale,
@@ -1030,6 +1042,7 @@ const shard: CardShard = {
     _poolShivanDragon,
     _poolSilundiVision,
     _poolSimicRagworm,
+    _poolSinuousStriker,
     _poolSirensRuse,
     _poolSkophosWarleader,
     _poolSkullclamp,
@@ -1111,6 +1124,7 @@ const shard: CardShard = {
     _poolUndergroundSea,
     _poolUnfortunateAccident,
     _poolUnleashFury,
+    _poolUnravelingMummy,
     _poolUnwillingIngredient,
     _poolUrbanUtopia,
     _poolUrzaChiefArtificer,

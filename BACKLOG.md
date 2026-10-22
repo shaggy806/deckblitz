@@ -141,8 +141,14 @@ section keeps only what to do next.
   Ravnica Allegiance, on spectacle and afterlife; batch 125 Guilds of Ravnica, on jump-start;
   batch 126 Commander 2018 and Core Set 2019, with a "can't be blocked" restriction; batch 127
   Battlebond, no engine change; batch 128 Dominaria, on kicker's scaffolder template; batch 129
-  Rivals of Ixalan, on ascend; batch 137 Ixalan and Commander 2017, no engine change); **next,
-  Hour of Devastation** (114 left), then Amonkhet (141)
+  Rivals of Ixalan, on ascend; batch 137 Ixalan and Commander 2017, no engine change; batch 138
+  Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
+  library"); **next, Amonkhet** (141 left, with the earlier aftermath and exert-cost cards
+  now unblocked), then Aether Revolt. Leads after HOU: "lands you control don't untap during
+  your next untap step", later lands included (`effect:player-next-untap-step-skip-filter` —
+  the five Gods' Last cards and Imaginary Threats), "discard any number of cards"
+  (`new:discard-any-number` — 14 cards: Neheb, Cavalier of Flame, the Rites), "your life total
+  becomes N" (`effect:life-total-becomes`)
   (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
   "if that creature would die this turn, exile it instead" five
   (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
@@ -222,6 +228,8 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
+- **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.
 - **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).
 - **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.

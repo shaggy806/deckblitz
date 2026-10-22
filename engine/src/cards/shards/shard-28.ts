@@ -88,6 +88,7 @@ import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolCeruleanWisps from "../pool/cerulean-wisps.js";
+import _poolChampionOfWits from "../pool/champion-of-wits.js";
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
 import _poolChangeTheEquation from "../pool/change-the-equation.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
@@ -134,10 +135,12 @@ import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
+import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
+import _poolDreamstealer from "../pool/dreamstealer.js";
 import _poolDreamtailHeron from "../pool/dreamtail-heron.js";
 import _poolDregRecycler from "../pool/dreg-recycler.js";
 import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
@@ -364,6 +367,7 @@ import _poolProfaneInsight from "../pool/profane-insight.js";
 import _poolProjectDeathlokSoldier from "../pool/project-deathlok-soldier.js";
 import _poolPropaganda from "../pool/propaganda.js";
 import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
+import _poolProvenCombatant from "../pool/proven-combatant.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
@@ -460,6 +464,7 @@ import _poolSmittenSwordmaster from "../pool/smitten-swordmaster.js";
 import _poolSmugglersCopter from "../pool/smugglers-copter.js";
 import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
+import _poolSolitaryCamel from "../pool/solitary-camel.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
@@ -532,6 +537,7 @@ import _poolUmaraSkyfalls from "../pool/umara-skyfalls.js";
 import _poolUndergroundRiver from "../pool/underground-river.js";
 import _poolUnderworldBreach from "../pool/underworld-breach.js";
 import _poolUniversalAutomaton from "../pool/universal-automaton.js";
+import _poolUnquenchableThirst from "../pool/unquenchable-thirst.js";
 import _poolUrsapine from "../pool/ursapine.js";
 import _poolVaanStreetThief from "../pool/vaan-street-thief.js";
 import _poolValakutAwakening from "../pool/valakut-awakening.js";
@@ -678,6 +684,7 @@ const shard: CardShard = {
     _poolCatharsCall,
     _poolCelestineTheLivingSaint,
     _poolCeruleanWisps,
+    _poolChampionOfWits,
     _poolChancellorOfTales,
     _poolChangeTheEquation,
     _poolChanneledDragonfire,
@@ -724,10 +731,12 @@ const shard: CardShard = {
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
+    _poolDjerusRenunciation,
     _poolDoggedDetective,
     _poolDomrisAmbush,
     _poolDragoonsWyvern,
     _poolDreamPillager,
+    _poolDreamstealer,
     _poolDreamtailHeron,
     _poolDregRecycler,
     _poolDriftOfPhantasms,
@@ -954,6 +963,7 @@ const shard: CardShard = {
     _poolProjectDeathlokSoldier,
     _poolPropaganda,
     _poolProtectorOfTheWastes,
+    _poolProvenCombatant,
     _poolPryingBlade,
     _poolPygmyPyrosaur,
     _poolQuagFeast,
@@ -1050,6 +1060,7 @@ const shard: CardShard = {
     _poolSmugglersCopter,
     _poolSnareThopter,
     _poolSolTalisman,
+    _poolSolitaryCamel,
     _poolSoulsFire,
     _poolSpDrPilotedByPeni,
     _poolSpecimenCollector,
@@ -1122,6 +1133,7 @@ const shard: CardShard = {
     _poolUndergroundRiver,
     _poolUnderworldBreach,
     _poolUniversalAutomaton,
+    _poolUnquenchableThirst,
     _poolUrsapine,
     _poolVaanStreetThief,
     _poolValakutAwakening,

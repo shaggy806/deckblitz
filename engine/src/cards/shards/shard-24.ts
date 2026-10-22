@@ -195,6 +195,7 @@ import _poolGeistOfSaintThalia from "../pool/geist-of-saint-thalia.js";
 import _poolGeothermalCrevice from "../pool/geothermal-crevice.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
 import _poolGilacorn from "../pool/gilacorn.js";
+import _poolGildedCerodon from "../pool/gilded-cerodon.js";
 import _poolGishathSunsAvatar from "../pool/gishath-suns-avatar.js";
 import _poolGlimmerlight from "../pool/glimmerlight.js";
 import _poolGloriousSunrise from "../pool/glorious-sunrise.js";
@@ -254,6 +255,7 @@ import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
+import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
@@ -444,6 +446,7 @@ import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
 import _poolSunblastAngel from "../pool/sunblast-angel.js";
 import _poolSunkenCity from "../pool/sunken-city.js";
+import _poolSupremeWill from "../pool/supreme-will.js";
 import _poolSurgehackerMech from "../pool/surgehacker-mech.js";
 import _poolSwimmerInNightmares from "../pool/swimmer-in-nightmares.js";
 import _poolSwordOfTheRealms from "../pool/sword-of-the-realms.js";
@@ -763,6 +766,7 @@ const shard: CardShard = {
     _poolGeothermalCrevice,
     _poolGiftedAetherborn,
     _poolGilacorn,
+    _poolGildedCerodon,
     _poolGishathSunsAvatar,
     _poolGlimmerlight,
     _poolGloriousSunrise,
@@ -822,6 +826,7 @@ const shard: CardShard = {
     _poolKarnsTemporalSundering,
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
+    _poolKhenraScrapper,
     _poolKingSuleiman,
     _poolKinnanBonderProdigy,
     _poolKitesailCorsair,
@@ -1012,6 +1017,7 @@ const shard: CardShard = {
     _poolSunbladeAngel,
     _poolSunblastAngel,
     _poolSunkenCity,
+    _poolSupremeWill,
     _poolSurgehackerMech,
     _poolSwimmerInNightmares,
     _poolSwordOfTheRealms,

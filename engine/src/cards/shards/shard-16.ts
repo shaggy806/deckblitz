@@ -11,9 +11,11 @@ import _poolAkroanJailer from "../pool/akroan-jailer.js";
 import _poolAladdin from "../pool/aladdin.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
+import _poolAmbuscade from "../pool/ambuscade.js";
 import _poolAmonkhetRaceway from "../pool/amonkhet-raceway.js";
 import _poolAncientLumberknot from "../pool/ancient-lumberknot.js";
 import _poolAncientZiggurat from "../pool/ancient-ziggurat.js";
+import _poolAngelOfCondemnation from "../pool/angel-of-condemnation.js";
 import _poolAnger from "../pool/anger.js";
 import _poolAnglerTurtle from "../pool/angler-turtle.js";
 import _poolAngryRabble from "../pool/angry-rabble.js";
@@ -128,6 +130,7 @@ import _poolDuelForDominance from "../pool/duel-for-dominance.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
+import _poolEarthshakerKhenra from "../pool/earthshaker-khenra.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEfreetFlamepainter from "../pool/efreet-flamepainter.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
@@ -558,6 +561,7 @@ import _poolVictorysEnvoy from "../pool/victorys-envoy.js";
 import _poolVillageRites from "../pool/village-rites.js";
 import _poolVindictiveLich from "../pool/vindictive-lich.js";
 import _poolViridianEmissary from "../pool/viridian-emissary.js";
+import _poolVisageOfBolas from "../pool/visage-of-bolas.js";
 import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
@@ -633,9 +637,11 @@ const shard: CardShard = {
     _poolAladdin,
     _poolAliriosEnraptured,
     _poolAlmightyBrushwagg,
+    _poolAmbuscade,
     _poolAmonkhetRaceway,
     _poolAncientLumberknot,
     _poolAncientZiggurat,
+    _poolAngelOfCondemnation,
     _poolAnger,
     _poolAnglerTurtle,
     _poolAngryRabble,
@@ -750,6 +756,7 @@ const shard: CardShard = {
     _poolDuskwielder,
     _poolDwarvenArmorer,
     _poolDwarvenTrader,
+    _poolEarthshakerKhenra,
     _poolEdgarMoonlitSovereign,
     _poolEfreetFlamepainter,
     _poolEiganjoCastle,
@@ -1180,6 +1187,7 @@ const shard: CardShard = {
     _poolVillageRites,
     _poolVindictiveLich,
     _poolViridianEmissary,
+    _poolVisageOfBolas,
     _poolVisceridDeepwalker,
     _poolVividGrove,
     _poolVivisection,

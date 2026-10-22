@@ -293,6 +293,7 @@ import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
+import _poolLifeGoesOn from "../pool/life-goes-on.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
@@ -572,6 +573,7 @@ import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
 import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
+import _poolUncageTheMenagerie from "../pool/uncage-the-menagerie.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUnstableMutation from "../pool/unstable-mutation.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
@@ -925,6 +927,7 @@ const shard: CardShard = {
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,
+    _poolLifeGoesOn,
     _poolLifesLegacy,
     _poolLightningSpear,
     _poolLochKorrigan,
@@ -1204,6 +1207,7 @@ const shard: CardShard = {
     _poolTwiddle,
     _poolTwinbladePaladin,
     _poolTwistedFealty,
+    _poolUncageTheMenagerie,
     _poolUndeadAugur,
     _poolUnstableMutation,
     _poolUrdnanDromokaWarrior,

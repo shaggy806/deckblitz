@@ -390,7 +390,11 @@
   "trigger:unblocked-attackers-trigger",
   "cost:remove-x-counters-cost",
   "trigger:state-trigger",
-  "keyword:cumulative-upkeep"
+  "keyword:cumulative-upkeep",
+  "keyword:aftermath",
+  "cost:exert",
+  "effect:shuffle-graveyard-into-library",
+  "effect:target-player-shuffles-graveyard-into-library"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

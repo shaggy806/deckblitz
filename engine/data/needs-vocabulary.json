@@ -9650,6 +9650,28 @@
   "effect:may-reveal-from-hand": {
    "family": "effect:this-way-results",
    "example": "Priest of the Wakening Sun: you may reveal a Dinosaur card from your hand; if you do, gain 2 life — no optional reveal-a-card-from-hand effect."
+  },
+  "bug:blight-ignores-counter-prevention": {
+   "example": "Lethal Sting: blight can't be paid without a -1/-1 counter you can put (rule 701.68b); canBlight only checks for a creature, so Melira doesn't stop a blight cost or kicker."
+  },
+  "effect:grant-keyword-variants": {
+   "family": "effect:target-spec-additions",
+   "example": "Majestic Myriarch: gains each listed keyword a creature you control has, its variants (hexproof from white) included — keyword checks can't see or grant variants."
+  },
+  "effect:must-attack-target-players-creatures": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Imaginary Threats: creatures target opponent controls attack this turn if able — `restrict` can't reach a player's creatures."
+  },
+  "effect:search-library-and-graveyard-named-set": {
+   "example": "Nissa's Encouragement: search library and graveyard for a card named each of three cards; the forced find in a graveyard over-constrains a oneEach search (its ruling: you may find none)."
+  },
+  "effect:unless-sacrifice-other-than-target": {
+   "family": "effect:choices-by-other-players",
+   "example": "Torment of Venom: loses 3 life unless they sacrifice another nonland permanent — the unless sacrifice option can't leave out the target."
+  },
+  "replacement:exile-if-not-cycled": {
+   "family": "replacement:new-event-replacements",
+   "example": "Abandoned Sarcophagus: a card with cycling that would go to your graveyard other than by being cycled is exiled instead."
   }
  }
 }

@@ -2744,6 +2744,14 @@ export interface CardDefinition {
    */
   readonly rebound: boolean;
   /**
+   * Aftermath (rule 702.127a), on one half of a split card (`split`, the
+   * half's own definition): that half may be cast from its owner's graveyard
+   * (`via: "aftermath"`), can't be cast from any other zone, and a spell cast
+   * from a graveyard is exiled whenever it would leave the stack. For its
+   * mana cost — no alternative cost.
+   */
+  readonly aftermath: boolean;
+  /**
    * Sneak (rule 702.190) — "any time you could cast an instant during your
    * declare blockers step, you may cast this spell by paying `cost` and
    * returning an unblocked creature you control to its owner's hand rather
@@ -3157,6 +3165,7 @@ const PRINTED_ABILITY: {
   flashback: (def) => def.flashback !== null,
   mayhem: (def) => def.mayhem !== null,
   rebound: (def) => def.rebound,
+  aftermath: (def) => def.aftermath,
   sneak: (def) => def.sneak !== null,
   webSlinging: (def) => def.webSlinging !== null,
   harmonize: (def) => def.harmonize !== null,
@@ -3352,6 +3361,7 @@ interface CardDraft {
   defense?: number;
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
+  aftermath?: boolean;
   sneak?: { readonly cost: string };
   webSlinging?: { readonly cost: string };
   flashback?: NonNullable<CardDefinition["flashback"]>;
@@ -3510,6 +3520,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     flashback: draft.flashback ?? null,
     mayhem: draft.mayhem ?? null,
     rebound: draft.rebound ?? false,
+    aftermath: draft.aftermath ?? false,
     sneak: draft.sneak ?? null,
     webSlinging: draft.webSlinging ?? null,
     harmonize: draft.harmonize ?? null,

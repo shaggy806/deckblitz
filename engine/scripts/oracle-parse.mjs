@@ -722,6 +722,8 @@ export function parseCost(text) {
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
+    // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
+    else if (part === "Exert ~") cost.exertSelf = true;
     // Blight N (rule 701.68a), chosen as it's paid.
     else if ((m = /^Blight (\d+)$/.exec(part))) cost.blight = Number(m[1]);
     // Waterbend {N} (rule 701.67a): the mana, some of it maybe paid by tapping.

@@ -123,6 +123,7 @@ import _poolCryptolithRite from "../pool/cryptolith-rite.js";
 import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js";
 import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
 import _poolCuboidColony from "../pool/cuboid-colony.js";
+import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
@@ -163,6 +164,7 @@ import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
 import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
+import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
@@ -226,6 +228,7 @@ import _poolGreatswordOfTyr from "../pool/greatsword-of-tyr.js";
 import _poolGreelsCaress from "../pool/greels-caress.js";
 import _poolGriffinDreamfinder from "../pool/griffin-dreamfinder.js";
 import _poolGrimBauble from "../pool/grim-bauble.js";
+import _poolGrindDust from "../pool/grind-dust.js";
 import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
 import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
@@ -732,6 +735,7 @@ const shard: CardShard = {
     _poolCrystalSkullIsuSpyglass,
     _poolCrystallineResonance,
     _poolCuboidColony,
+    _poolCunningSurvivor,
     _poolDaringApprentice,
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
@@ -772,6 +776,7 @@ const shard: CardShard = {
     _poolErhnamDjinn,
     _poolEsgarothGarrison,
     _poolEssenceknitScholar,
+    _poolEternalOfHarshTruths,
     _poolEusocialEngineering,
     _poolEutropiaTheTwiceFavored,
     _poolExperimentTwelve,
@@ -835,6 +840,7 @@ const shard: CardShard = {
     _poolGreelsCaress,
     _poolGriffinDreamfinder,
     _poolGrimBauble,
+    _poolGrindDust,
     _poolGrolnokTheOmnivore,
     _poolGuardianOfFaith,
     _poolGuardianProject,

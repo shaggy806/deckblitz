@@ -27,6 +27,7 @@ import _poolAnarchy from "../pool/anarchy.js";
 import _poolAnimistsMight from "../pool/animists-might.js";
 import _poolAphemiaTheCacophony from "../pool/aphemia-the-cacophony.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
+import _poolApocalypseDemon from "../pool/apocalypse-demon.js";
 import _poolAquaticIncursion from "../pool/aquatic-incursion.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArcboundTracker from "../pool/arcbound-tracker.js";
@@ -161,6 +162,7 @@ import _poolDrillBit from "../pool/drill-bit.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
+import _poolDust from "../pool/dust.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
@@ -320,6 +322,7 @@ import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
 import _poolLupariShield from "../pool/lupari-shield.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
+import _poolMagmaroth from "../pool/magmaroth.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
 import _poolMammothGrowth from "../pool/mammoth-growth.js";
 import _poolManalith from "../pool/manalith.js";
@@ -491,6 +494,7 @@ import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSurgeEngine from "../pool/surge-engine.js";
+import _poolSurvive from "../pool/survive.js";
 import _poolSwanSong from "../pool/swan-song.js";
 import _poolSwarmingGoblins from "../pool/swarming-goblins.js";
 import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
@@ -566,6 +570,7 @@ import _poolWindriderPatrol from "../pool/windrider-patrol.js";
 import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
 import _poolWolfsQuarry from "../pool/wolfs-quarry.js";
 import _poolWorldMap from "../pool/world-map.js";
+import _poolWretchedCamel from "../pool/wretched-camel.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
 import _poolYouthfulScholar from "../pool/youthful-scholar.js";
 import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js";
@@ -619,6 +624,7 @@ const shard: CardShard = {
     _poolAnimistsMight,
     _poolAphemiaTheCacophony,
     _poolAphettoGrifter,
+    _poolApocalypseDemon,
     _poolAquaticIncursion,
     _poolArcboundCrusher,
     _poolArcboundTracker,
@@ -753,6 +759,7 @@ const shard: CardShard = {
     _poolDryadsFavor,
     _poolDuskLegionSergeant,
     _poolDuskdaleWurm,
+    _poolDust,
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
     _poolDwarvenLieutenant,
@@ -912,6 +919,7 @@ const shard: CardShard = {
     _poolLupariShield,
     _poolLyseHext,
     _poolMadameNullPowerBroker,
+    _poolMagmaroth,
     _poolMalachiteGolem,
     _poolMammothGrowth,
     _poolManalith,
@@ -1083,6 +1091,7 @@ const shard: CardShard = {
     _poolSupplyRunners,
     _poolSupremeVerdict,
     _poolSurgeEngine,
+    _poolSurvive,
     _poolSwanSong,
     _poolSwarmingGoblins,
     _poolSwiftfootBoots,
@@ -1158,6 +1167,7 @@ const shard: CardShard = {
     _poolWinterMisanthropicGuide,
     _poolWolfsQuarry,
     _poolWorldMap,
+    _poolWretchedCamel,
     _poolYoshimaru,
     _poolYouthfulScholar,
     _poolZagrasThiefOfHeartbeats,

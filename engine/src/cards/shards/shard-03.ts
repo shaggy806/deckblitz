@@ -93,6 +93,7 @@ import _poolDelightfulDiscovery from "../pool/delightful-discovery.js";
 import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
+import _poolDespair from "../pool/despair.js";
 import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
@@ -180,6 +181,7 @@ import _poolGorgonsHead from "../pool/gorgons-head.js";
 import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGrimServant from "../pool/grim-servant.js";
+import _poolGrislySurvivor from "../pool/grisly-survivor.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
@@ -200,6 +202,7 @@ import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
 import _poolHulkAlwaysAngry from "../pool/hulk-always-angry.js";
 import _poolIchorWellspring from "../pool/ichor-wellspring.js";
+import _poolImminentDoom from "../pool/imminent-doom.js";
 import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
 import _poolInfiniteGuidelineStation from "../pool/infinite-guideline-station.js";
@@ -264,6 +267,7 @@ import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMedicsKitesail from "../pool/medics-kitesail.js";
+import _poolMercilessEternal from "../pool/merciless-eternal.js";
 import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
@@ -297,6 +301,7 @@ import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
+import _poolOvercome from "../pool/overcome.js";
 import _poolPalladiaMors from "../pool/palladia-mors.js";
 import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
@@ -455,6 +460,7 @@ import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
 import _poolTheUnspeakable from "../pool/the-unspeakable.js";
 import _poolTheorixCharm from "../pool/theorix-charm.js";
 import _poolTheorixMetamage from "../pool/theorix-metamage.js";
+import _poolThornedMoloch from "../pool/thorned-moloch.js";
 import _poolThrabenGargoyle from "../pool/thraben-gargoyle.js";
 import _poolThrillOfTheHunt from "../pool/thrill-of-the-hunt.js";
 import _poolThrivingBluff from "../pool/thriving-bluff.js";
@@ -620,6 +626,7 @@ const shard: CardShard = {
     _poolDementiaBat,
     _poolDemonsHorn,
     _poolDesmondMiles,
+    _poolDespair,
     _poolDigDeep,
     _poolDinosaurStampede,
     _poolDiscipleOfTheOldWays,
@@ -707,6 +714,7 @@ const shard: CardShard = {
     _poolGraftedGrowth,
     _poolGravkill,
     _poolGrimServant,
+    _poolGrislySurvivor,
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGutsplitterGang,
@@ -727,6 +735,7 @@ const shard: CardShard = {
     _poolHowlingFury,
     _poolHulkAlwaysAngry,
     _poolIchorWellspring,
+    _poolImminentDoom,
     _poolImperialLancer,
     _poolImperiousPerfect,
     _poolInfiniteGuidelineStation,
@@ -791,6 +800,7 @@ const shard: CardShard = {
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
     _poolMedicsKitesail,
+    _poolMercilessEternal,
     _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
@@ -824,6 +834,7 @@ const shard: CardShard = {
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,
     _poolOrcristGoblinCleaver,
+    _poolOvercome,
     _poolPalladiaMors,
     _poolPenregonStrongbull,
     _poolPersist,
@@ -982,6 +993,7 @@ const shard: CardShard = {
     _poolTheUnspeakable,
     _poolTheorixCharm,
     _poolTheorixMetamage,
+    _poolThornedMoloch,
     _poolThrabenGargoyle,
     _poolThrillOfTheHunt,
     _poolThrivingBluff,

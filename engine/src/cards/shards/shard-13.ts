@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAIMScientists from "../pool/a-i-m-scientists.js";
 import _poolAbbeyGriffin from "../pool/abbey-griffin.js";
 import _poolAccordersShield from "../pool/accorders-shield.js";
+import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
@@ -105,6 +106,7 @@ import _poolCommuneWithSpirits from "../pool/commune-with-spirits.js";
 import _poolConcealedWeapon from "../pool/concealed-weapon.js";
 import _poolConstrictingSliver from "../pool/constricting-sliver.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
+import _poolCooperate from "../pool/cooperate.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
 import _poolCoreProwler from "../pool/core-prowler.js";
 import _poolCoruscationMage from "../pool/coruscation-mage.js";
@@ -245,6 +247,7 @@ import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
+import _poolJacesDefeat from "../pool/jaces-defeat.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
 import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
@@ -358,6 +361,7 @@ import _poolRadiantEpicure from "../pool/radiant-epicure.js";
 import _poolRainbowVale from "../pool/rainbow-vale.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
+import _poolRamunapHydra from "../pool/ramunap-hydra.js";
 import _poolRangersPath from "../pool/rangers-path.js";
 import _poolRavagedHighlands from "../pool/ravaged-highlands.js";
 import _poolRavenousSquirrel from "../pool/ravenous-squirrel.js";
@@ -395,6 +399,7 @@ import _poolSagittarsVolley from "../pool/sagittars-volley.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
+import _poolSamutTheTested from "../pool/samut-the-tested.js";
 import _poolSandalsOfAbdallah from "../pool/sandals-of-abdallah.js";
 import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
 import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
@@ -531,6 +536,7 @@ import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
 import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
 import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
+import _poolVileManifestation from "../pool/vile-manifestation.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolViolentEchoes from "../pool/violent-echoes.js";
 import _poolVisageOfDread from "../pool/visage-of-dread.js";
@@ -585,6 +591,7 @@ const shard: CardShard = {
     _poolAIMScientists,
     _poolAbbeyGriffin,
     _poolAccordersShield,
+    _poolAccursedHorde,
     _poolAerialDoombot,
     _poolAerialResponder,
     _poolAfterlifeFromTheLoam,
@@ -684,6 +691,7 @@ const shard: CardShard = {
     _poolConcealedWeapon,
     _poolConstrictingSliver,
     _poolConsumedByGreed,
+    _poolCooperate,
     _poolCopyEnchantment,
     _poolCoreProwler,
     _poolCoruscationMage,
@@ -824,6 +832,7 @@ const shard: CardShard = {
     _poolIsolatedChapel,
     _poolIzoniCenterOfTheWeb,
     _poolIzzetLocket,
+    _poolJacesDefeat,
     _poolJadecraftArtisan,
     _poolJewelEyedCobra,
     _poolJhoiraWeatherlightCorsair,
@@ -937,6 +946,7 @@ const shard: CardShard = {
     _poolRainbowVale,
     _poolRakdosGuildgate,
     _poolRampantGrowth,
+    _poolRamunapHydra,
     _poolRangersPath,
     _poolRavagedHighlands,
     _poolRavenousSquirrel,
@@ -974,6 +984,7 @@ const shard: CardShard = {
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
     _poolSalvationSwan,
+    _poolSamutTheTested,
     _poolSandalsOfAbdallah,
     _poolSandskitterOutrider,
     _poolSanguineSyphoner,
@@ -1110,6 +1121,7 @@ const shard: CardShard = {
     _poolViashinoSandsprinter,
     _poolVibrantOutburst,
     _poolVictorTimelyWilyTycoon,
+    _poolVileManifestation,
     _poolVillainousWrath,
     _poolViolentEchoes,
     _poolVisageOfDread,

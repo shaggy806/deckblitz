@@ -243,6 +243,11 @@ export interface AbilityCost {
    * hand: …"). Paid as the ability is activated, so nothing can answer it;
    * the ability resolves without its source, read as it last existed. */
   readonly returnSelfToHand?: boolean;
+  /** Exert the source as part of the cost (rule 701.43 — Oasis Ritualist's
+   * "{T}, Exert this creature: Add two mana of any one color"): it won't
+   * untap during its controller's next untap step. Payable tapped or not, and
+   * when already exerted (701.43b); an `exerted` trigger sees it. */
+  readonly exertSelf?: boolean;
   /** Discard your whole hand as part of the cost (Slate of Ancestry: "{4},
    * {T}, Discard your hand: Draw a card for each creature you control").
    * Nothing to choose, so it's automatic like `payLife` — the empty hand is

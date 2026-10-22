@@ -212,6 +212,7 @@ import _poolGravebornMuse from "../pool/graveborn-muse.js";
 import _poolGraveyardGlutton from "../pool/graveyard-glutton.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
+import _poolGrind from "../pool/grind.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
 import _poolGrowthCurve from "../pool/growth-curve.js";
 import _poolGruesomeDeformity from "../pool/gruesome-deformity.js";
@@ -325,6 +326,7 @@ import _poolNecrosquito from "../pool/necrosquito.js";
 import _poolNexusOfFate from "../pool/nexus-of-fate.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
+import _poolNicolBolasTheDeceiver from "../pool/nicol-bolas-the-deceiver.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
 import _poolNimbleBrigand from "../pool/nimble-brigand.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
@@ -378,11 +380,13 @@ import _poolRathiTrapper from "../pool/rathi-trapper.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
+import _poolRefuse from "../pool/refuse.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
 import _poolRepulsorBlast from "../pool/repulsor-blast.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
+import _poolRiddleform from "../pool/riddleform.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
@@ -780,6 +784,7 @@ const shard: CardShard = {
     _poolGraveyardGlutton,
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
+    _poolGrind,
     _poolGrowingRanks,
     _poolGrowthCurve,
     _poolGruesomeDeformity,
@@ -893,6 +898,7 @@ const shard: CardShard = {
     _poolNexusOfFate,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
+    _poolNicolBolasTheDeceiver,
     _poolNightmareShepherd,
     _poolNimbleBrigand,
     _poolNovaHellkite,
@@ -946,11 +952,13 @@ const shard: CardShard = {
     _poolRazortoothRats,
     _poolReaveSoul,
     _poolRedHerring,
+    _poolRefuse,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
     _poolRepulsorBlast,
     _poolRevengeOfRavens,
     _poolRewriteRegrets,
+    _poolRiddleform,
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,

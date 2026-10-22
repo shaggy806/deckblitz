@@ -147,6 +147,7 @@ import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js"
 import _poolDreadSummons from "../pool/dread-summons.js";
 import _poolDreamCoat from "../pool/dream-coat.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
+import _poolDrivenDespair from "../pool/driven-despair.js";
 import _poolEarthlink from "../pool/earthlink.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
@@ -208,6 +209,7 @@ import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
 import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
+import _poolGodPharaohsGift from "../pool/god-pharaohs-gift.js";
 import _poolGoddricCloakedReveler from "../pool/goddric-cloaked-reveler.js";
 import _poolGolbezCrystalCollector from "../pool/golbez-crystal-collector.js";
 import _poolGoliathSphinx from "../pool/goliath-sphinx.js";
@@ -351,6 +353,7 @@ import _poolNogiDracoZealot from "../pool/nogi-draco-zealot.js";
 import _poolNullElementalBlast from "../pool/null-elemental-blast.js";
 import _poolNutrientBlock from "../pool/nutrient-block.js";
 import _poolOakenform from "../pool/oakenform.js";
+import _poolOasisRitualist from "../pool/oasis-ritualist.js";
 import _poolOblivionStrike from "../pool/oblivion-strike.js";
 import _poolOkosAccomplices from "../pool/okos-accomplices.js";
 import _poolOkoyeDoraMilajeLeader from "../pool/okoye-dora-milaje-leader.js";
@@ -756,6 +759,7 @@ const shard: CardShard = {
     _poolDreadSummons,
     _poolDreamCoat,
     _poolDregscapeZombie,
+    _poolDrivenDespair,
     _poolEarthlink,
     _poolEarthquakeDragon,
     _poolEidolonOfPhilosophy,
@@ -817,6 +821,7 @@ const shard: CardShard = {
     _poolGloom,
     _poolGoShintaiOfLifesOrigin,
     _poolGoblinChieftain,
+    _poolGodPharaohsGift,
     _poolGoddricCloakedReveler,
     _poolGolbezCrystalCollector,
     _poolGoliathSphinx,
@@ -960,6 +965,7 @@ const shard: CardShard = {
     _poolNullElementalBlast,
     _poolNutrientBlock,
     _poolOakenform,
+    _poolOasisRitualist,
     _poolOblivionStrike,
     _poolOkosAccomplices,
     _poolOkoyeDoraMilajeLeader,

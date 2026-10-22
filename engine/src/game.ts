@@ -2026,6 +2026,24 @@ export class Game {
       out.push(...this.castSpellActions(player, card, cardName, def, { via: "harmonize", costString: def.harmonize.cost }));
     }
 
+    // Aftermath (rule 702.127a) — a split card's aftermath half may be cast
+    // from its owner's graveyard, for its mana cost.
+    for (const card of this.state.zones.perPlayer[player].graveyard) {
+      const ownDef = this.registry.get(this.state.objects[card].cardName);
+      if (!ownDef.split) continue;
+      for (const face of castableFaces(ownDef)) {
+        const def = this.faceDef(card, face ?? 0);
+        if (!def.aftermath) continue;
+        out.push(
+          ...this.castSpellActions(player, card, def.name, def, {
+            via: "aftermath",
+            ...(face !== undefined ? { face } : {}),
+            costString: def.manaCost,
+          }),
+        );
+      }
+    }
+
     // Disturb (rule 702.150) — a transforming DFC in this player's graveyard
     // whose front face has disturb may be cast as its back face (face 1) from
     // there; the spell is then exiled (like flashback).
@@ -10438,6 +10456,11 @@ export class Game {
     const def = this.faceDef(cardId, face);
     const prohibited = this.whyProhibitedFromCasting(player, cardId, def);
     if (prohibited !== null) return prohibited;
+    // Aftermath (rule 702.127a): "this half of this split card can't be cast
+    // from any zone other than a graveyard" — whatever else would allow it.
+    if (def.aftermath && this.state.objects[cardId]?.zone !== "graveyard") {
+      return `${def.name} can only be cast from a graveyard (aftermath)`;
+    }
     // "By discarding a card rather than paying its mana cost" (Cruelclaw):
     // a card to discard, besides any the spell's own costs take.
     if (
@@ -10637,6 +10660,12 @@ export class Game {
       }
     } else if (via === "effect") {
       // Wherever the card is — the offer is the permission (checked above).
+    } else if (via === "aftermath") {
+      // Rule 702.127a — the aftermath half, from the caster's own graveyard.
+      if (!def.aftermath) return `${def.name} does not have aftermath`;
+      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+        return `${def.name} is not in ${player}'s graveyard`;
+      }
     } else if (via === "blitz") {
       // Rule 702.152a — for its blitz cost, from the hand or a commander from
       // the command zone: an alternative cost, so no other one goes with it
@@ -12020,7 +12049,8 @@ export class Game {
       via === "escape" ||
       via === "disturb" ||
       via === "graveyard-permission" ||
-      via === "mayhem"
+      via === "mayhem" ||
+      via === "aftermath"
     ) {
       this.state.players[player].usedGraveyardThisTurn = true;
     }
@@ -13871,6 +13901,9 @@ export class Game {
       this.moveObject(sourceId, "exile");
       this.emit({ type: "permanent-exiled", object: sourceId });
     }
+    // "Exert this creature" as a cost (rule 701.43): paid now, so it skips the
+    // next untap step even if the ability is countered.
+    if (ability.cost.exertSelf === true) this.exertPermanent(sourceId, player, false);
     if (ability.cost.returnSelfToHand === true) {
       // "Return Shigeki to its owner's hand" — the cost itself, paid now.
       this.returnToHandByEffect({ kind: "object", object: sourceId }, false);
@@ -14536,6 +14569,7 @@ export class Game {
           ability.cost.returnToHand !== undefined ||
           ability.cost.exileFromGraveyard !== undefined ||
           ability.cost.returnSelfToHand === true ||
+          ability.cost.exertSelf === true ||
           ability.exhaust === true ||
           ability.powerUp === true
         ) {
@@ -16640,6 +16674,7 @@ export class Game {
         adventure ||
         object.castVia === "flashback" ||
         object.castVia === "harmonize" ||
+        this.aftermathExiles(object) ||
         this.rebounds(object) ||
         this.exilesItselfInstead(object) ||
         object.exileIfWouldGoToGraveyard === true ||
@@ -21488,6 +21523,7 @@ export class Game {
       grantCantBeSacrificed: (target, duration) =>
         this.grantCantBeSacrificed(target, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
+      shuffleGraveyardIntoLibrary: (target) => this.shuffleGraveyardIntoLibraryByEffect(target),
       exileFromLibrary: (target, count, withCounters) =>
         this.exileFromLibraryByEffect(target, count, controller, withCounters),
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
@@ -21544,14 +21580,8 @@ export class Game {
         this.addCounter(target, counter, amount, true, by ?? controller, training),
       amass: (amount, creatureType, onto) => this.amass(controller, amount, creatureType, source, x, onto),
       exert: (target, asItAttacks) => {
-        // Rule 701.43: only a permanent can be exerted (701.43c), tapped or
-        // not, and again (701.43b); it skips its exerter's next untap step.
         if (target.kind !== "object") return;
-        const object = this.state.objects[target.object];
-        if (object === undefined || object.zone !== "battlefield") return;
-        object.exertedBy = controller;
-        object.exertedOnTurn = this.state.turn.number;
-        this.emit({ type: "permanent-exerted", object: target.object, player: controller, asItAttacks });
+        this.exertPermanent(target.object, controller, asItAttacks);
       },
       monstrosity: (amount) => {
         // Rule 701.37a: "if this permanent isn't monstrous" — its own source,
@@ -30848,6 +30878,18 @@ export class Game {
     }
   }
 
+  /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: the
+   * player's whole graveyard into their library as one leave, then the
+   * library shuffled (rule 701.24a), the graveyard empty or not. */
+  private shuffleGraveyardIntoLibraryByEffect(target: TargetRef): void {
+    if (target.kind !== "player" || this.state.players[target.player] === undefined) return;
+    const player = target.player;
+    this.withGraveyardLeaveBatch(() => {
+      for (const id of [...this.state.zones.perPlayer[player].graveyard]) this.moveObject(id, "library");
+    });
+    this.shuffleLibraryOf(player);
+  }
+
   private millByEffect(target: TargetRef, amount: number): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -34037,6 +34079,30 @@ export class Game {
     });
   }
 
+  /** Exert `id` (rule 701.43): only a permanent can be exerted (701.43c),
+   * tapped or not, and again (701.43b); it skips `by`'s next untap step. By
+   * an effect, or as a cost (`AbilityCost.exertSelf`). */
+  private exertPermanent(id: ObjectId, by: PlayerId, asItAttacks: boolean): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield") return;
+    object.exertedBy = by;
+    object.exertedOnTurn = this.state.turn.number;
+    this.emit({ type: "permanent-exerted", object: id, player: by, asItAttacks });
+  }
+
+  /** Aftermath's "if this spell was cast from a graveyard, exile it instead
+   * of putting it anywhere else any time it would leave the stack" (rule
+   * 702.127a): an aftermath half on the stack that was cast from a graveyard
+   * — by aftermath itself or under any other permission (Kess). */
+  private aftermathExiles(object: GameObject): boolean {
+    return (
+      object.zone === "stack" &&
+      object.castFrom === "graveyard" &&
+      !hasLostAbilities(object) &&
+      this.faceDef(object.id, object.face ?? 0).aftermath
+    );
+  }
+
   /**
    * The counters a card exiled instead of being put into a graveyard has as
    * it arrives — Dauthi Voidwalker's void counter — when several
@@ -34496,6 +34562,7 @@ export class Game {
           finality ||
             object.castVia === "flashback" ||
             object.castVia === "harmonize" ||
+            this.aftermathExiles(object) ||
             exilesItself ||
             object.exileIfWouldGoToGraveyard === true,
         );
@@ -34509,7 +34576,10 @@ export class Game {
     // the stack→battlefield move). A disturb back face's "exile it instead"
     // is the face's own ability (`exilesItselfInstead`), not the cast's.
     if (
-      (object.castVia === "flashback" || object.castVia === "harmonize" || exilesItself) &&
+      (object.castVia === "flashback" ||
+        object.castVia === "harmonize" ||
+        exilesItself ||
+        this.aftermathExiles(object)) &&
       to === "graveyard"
     ) {
       to = "exile";
@@ -34524,9 +34594,10 @@ export class Game {
     // Flashback's "exile this card instead of putting it anywhere else any
     // time it would leave the stack" (rule 702.34a) covers more than a
     // graveyard: a flashed-back spell countered into its owner's hand
-    // (Remand) or returned there (Unsubstantiate) is exiled too.
+    // (Remand) or returned there (Unsubstantiate) is exiled too — and so is
+    // an aftermath half cast from a graveyard (rule 702.127a, the same words).
     if (
-      object.castVia === "flashback" &&
+      (object.castVia === "flashback" || this.aftermathExiles(object)) &&
       object.zone === "stack" &&
       (to === "hand" || to === "library")
     ) {

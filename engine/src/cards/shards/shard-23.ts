@@ -226,6 +226,7 @@ import _poolHighbornGhoul from "../pool/highborn-ghoul.js";
 import _poolHiredBlade from "../pool/hired-blade.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
 import _poolHomewardPath from "../pool/homeward-path.js";
+import _poolHopeTender from "../pool/hope-tender.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
 import _poolHornbashMentor from "../pool/hornbash-mentor.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
@@ -343,6 +344,7 @@ import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
+import _poolOminousSphinx from "../pool/ominous-sphinx.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
 import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
@@ -412,6 +414,7 @@ import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSageOfTheFalls from "../pool/sage-of-the-falls.js";
 import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
+import _poolSandStrangler from "../pool/sand-strangler.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -812,6 +815,7 @@ const shard: CardShard = {
     _poolHiredBlade,
     _poolHobgoblinDragoon,
     _poolHomewardPath,
+    _poolHopeTender,
     _poolHorizonSeeker,
     _poolHornbashMentor,
     _poolHornetQueen,
@@ -929,6 +933,7 @@ const shard: CardShard = {
     _poolOchranAssassin,
     _poolOhranFrostfang,
     _poolOmenOfTheForge,
+    _poolOminousSphinx,
     _poolOrdruunMentor,
     _poolOutCold,
     _poolOvergrownFarmland,
@@ -998,6 +1003,7 @@ const shard: CardShard = {
     _poolRuneScarredDemon,
     _poolSageOfTheFalls,
     _poolSanctuaryRaptor,
+    _poolSandStrangler,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,

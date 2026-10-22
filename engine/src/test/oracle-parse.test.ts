@@ -86,6 +86,8 @@ describe("costs and triggers", () => {
     });
     // Discard as a cost isn't modeled.
     expect(parseCost("{1}, Discard a card")).toBeNull();
+    // Exert as a cost (rule 701.43 — Steward of Solidarity).
+    expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, exertSelf: true });
   });
 
   it("lines the scaffolder must leave to a person, and what it must get right (the 2026-10-12 review)", () => {

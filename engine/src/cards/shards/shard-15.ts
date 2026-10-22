@@ -72,6 +72,7 @@ import _poolChandrasTriumph from "../pool/chandras-triumph.js";
 import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-general.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
+import _poolClaim from "../pool/claim.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollision from "../pool/collision.js";
@@ -154,12 +155,14 @@ import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolEzzarootChanneler from "../pool/ezzaroot-channeler.js";
 import _poolFancyFootwork from "../pool/fancy-footwork.js";
 import _poolFangornTreeShepherd from "../pool/fangorn-tree-shepherd.js";
+import _poolFarmMarket from "../pool/farm-market.js";
 import _poolFarsightAdept from "../pool/farsight-adept.js";
 import _poolFast from "../pool/fast.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
 import _poolFellBeastOfMordor from "../pool/fell-beast-of-mordor.js";
 import _poolFeralAppetite from "../pool/feral-appetite.js";
+import _poolFerventPaincaster from "../pool/fervent-paincaster.js";
 import _poolFesteringGulch from "../pool/festering-gulch.js";
 import _poolFetidImp from "../pool/fetid-imp.js";
 import _poolFilterOut from "../pool/filter-out.js";
@@ -634,6 +637,7 @@ const shard: CardShard = {
     _poolChatterfangSquirrelGeneral,
     _poolCidFreeflierPilot,
     _poolCinderbones,
+    _poolClaim,
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
     _poolCollision,
@@ -716,12 +720,14 @@ const shard: CardShard = {
     _poolEzzarootChanneler,
     _poolFancyFootwork,
     _poolFangornTreeShepherd,
+    _poolFarmMarket,
     _poolFarsightAdept,
     _poolFast,
     _poolFatefulEnd,
     _poolFelixFiveBoots,
     _poolFellBeastOfMordor,
     _poolFeralAppetite,
+    _poolFerventPaincaster,
     _poolFesteringGulch,
     _poolFetidImp,
     _poolFilterOut,

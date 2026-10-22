@@ -243,6 +243,7 @@ import _poolHolyCow from "../pool/holy-cow.js";
 import _poolHolyStrength from "../pool/holy-strength.js";
 import _poolHondenOfSeeingWinds from "../pool/honden-of-seeing-winds.js";
 import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
+import _poolHourOfEternity from "../pool/hour-of-eternity.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
@@ -856,6 +857,7 @@ const shard: CardShard = {
     _poolHolyStrength,
     _poolHondenOfSeeingWinds,
     _poolHorridShadowspinner,
+    _poolHourOfEternity,
     _poolHowlFromBeyond,
     _poolHuatlisSpurring,
     _poolHyalopterousLemure,

@@ -34,8 +34,10 @@ import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
 import _poolAustereCommand from "../pool/austere-command.js";
+import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
 import _poolBackdraftHellkite from "../pool/backdraft-hellkite.js";
 import _poolBakeryRaid from "../pool/bakery-raid.js";
+import _poolBanewhipPunisher from "../pool/banewhip-punisher.js";
 import _poolBarTheDoor from "../pool/bar-the-door.js";
 import _poolBardTheBowman from "../pool/bard-the-bowman.js";
 import _poolBattlesongBerserker from "../pool/battlesong-berserker.js";
@@ -421,6 +423,7 @@ import _poolSearingSpear from "../pool/searing-spear.js";
 import _poolSeasonedMarshal from "../pool/seasoned-marshal.js";
 import _poolSecretsOfTheKey from "../pool/secrets-of-the-key.js";
 import _poolSeedsOfStrength from "../pool/seeds-of-strength.js";
+import _poolSeerOfTheLastTomorrow from "../pool/seer-of-the-last-tomorrow.js";
 import _poolSegovianLeviathan from "../pool/segovian-leviathan.js";
 import _poolSeizeTheSecrets from "../pool/seize-the-secrets.js";
 import _poolSelesnyaCluestone from "../pool/selesnya-cluestone.js";
@@ -468,6 +471,7 @@ import _poolSubtlety from "../pool/subtlety.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
+import _poolSunsetPyramid from "../pool/sunset-pyramid.js";
 import _poolSunshowerDruid from "../pool/sunshower-druid.js";
 import _poolSurgicalPrecision from "../pool/surgical-precision.js";
 import _poolSuspiciousBookcase from "../pool/suspicious-bookcase.js";
@@ -636,8 +640,10 @@ const shard: CardShard = {
     _poolAstorBearerOfBlades,
     _poolAuriokChampion,
     _poolAustereCommand,
+    _poolAvidReclaimer,
     _poolBackdraftHellkite,
     _poolBakeryRaid,
+    _poolBanewhipPunisher,
     _poolBarTheDoor,
     _poolBardTheBowman,
     _poolBattlesongBerserker,
@@ -1023,6 +1029,7 @@ const shard: CardShard = {
     _poolSeasonedMarshal,
     _poolSecretsOfTheKey,
     _poolSeedsOfStrength,
+    _poolSeerOfTheLastTomorrow,
     _poolSegovianLeviathan,
     _poolSeizeTheSecrets,
     _poolSelesnyaCluestone,
@@ -1070,6 +1077,7 @@ const shard: CardShard = {
     _poolSuddenStrength,
     _poolSunSentinel,
     _poolSungracePegasus,
+    _poolSunsetPyramid,
     _poolSunshowerDruid,
     _poolSurgicalPrecision,
     _poolSuspiciousBookcase,

@@ -1,0 +1,830 @@
+{
+ "batch": "B138",
+ "status": "complete",
+ "ranks": "Hour of Devastation (HOU, 2017-07-14): the rest of the set, whole",
+ "authored": [
+  {
+   "name": "Accursed Horde",
+   "files": [
+    "engine/src/cards/pool/accursed-horde.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aerial Guide",
+   "files": [
+    "engine/src/cards/pool/aerial-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ambuscade",
+   "files": [
+    "engine/src/cards/pool/ambuscade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ammit Eternal",
+   "files": [
+    "engine/src/cards/pool/ammit-eternal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angel of Condemnation",
+   "files": [
+    "engine/src/cards/pool/angel-of-condemnation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Apocalypse Demon",
+   "files": [
+    "engine/src/cards/pool/apocalypse-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Appeal // Authority",
+   "files": [
+    "engine/src/cards/pool/appeal-authority.ts",
+    "engine/src/cards/pool/appeal.ts",
+    "engine/src/cards/pool/authority.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avid Reclaimer",
+   "files": [
+    "engine/src/cards/pool/avid-reclaimer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Banewhip Punisher",
+   "files": [
+    "engine/src/cards/pool/banewhip-punisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodwater Entity",
+   "files": [
+    "engine/src/cards/pool/bloodwater-entity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blur of Blades",
+   "files": [
+    "engine/src/cards/pool/blur-of-blades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning-Fist Minotaur",
+   "files": [
+    "engine/src/cards/pool/burning-fist-minotaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Champion of Wits",
+   "files": [
+    "engine/src/cards/pool/champion-of-wits.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Defeat",
+   "files": [
+    "engine/src/cards/pool/chandras-defeat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaos Maw",
+   "files": [
+    "engine/src/cards/pool/chaos-maw.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Claim // Fame",
+   "files": [
+    "engine/src/cards/pool/claim-fame.ts",
+    "engine/src/cards/pool/claim.ts",
+    "engine/src/cards/pool/fame.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Consign // Oblivion",
+   "files": [
+    "engine/src/cards/pool/consign-oblivion.ts",
+    "engine/src/cards/pool/consign.ts",
+    "engine/src/cards/pool/oblivion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Countervailing Winds",
+   "files": [
+    "engine/src/cards/pool/countervailing-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crook of Condemnation",
+   "files": [
+    "engine/src/cards/pool/crook-of-condemnation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cunning Survivor",
+   "files": [
+    "engine/src/cards/pool/cunning-survivor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dagger of the Worthy",
+   "files": [
+    "engine/src/cards/pool/dagger-of-the-worthy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Djeru's Renunciation",
+   "files": [
+    "engine/src/cards/pool/djerus-renunciation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamstealer",
+   "files": [
+    "engine/src/cards/pool/dreamstealer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Driven // Despair",
+   "files": [
+    "engine/src/cards/pool/despair.ts",
+    "engine/src/cards/pool/driven-despair.ts",
+    "engine/src/cards/pool/driven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthshaker Khenra",
+   "files": [
+    "engine/src/cards/pool/earthshaker-khenra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eternal of Harsh Truths",
+   "files": [
+    "engine/src/cards/pool/eternal-of-harsh-truths.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Farm // Market",
+   "files": [
+    "engine/src/cards/pool/farm-market.ts",
+    "engine/src/cards/pool/farm.ts",
+    "engine/src/cards/pool/market.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fervent Paincaster",
+   "files": [
+    "engine/src/cards/pool/fervent-paincaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gideon's Defeat",
+   "files": [
+    "engine/src/cards/pool/gideons-defeat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilded Cerodon",
+   "files": [
+    "engine/src/cards/pool/gilded-cerodon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "God-Pharaoh's Faithful",
+   "files": [
+    "engine/src/cards/pool/god-pharaohs-faithful.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "God-Pharaoh's Gift",
+   "files": [
+    "engine/src/cards/pool/god-pharaohs-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graven Abomination",
+   "files": [
+    "engine/src/cards/pool/graven-abomination.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grind // Dust",
+   "files": [
+    "engine/src/cards/pool/dust.ts",
+    "engine/src/cards/pool/grind-dust.ts",
+    "engine/src/cards/pool/grind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grisly Survivor",
+   "files": [
+    "engine/src/cards/pool/grisly-survivor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hope Tender",
+   "files": [
+    "engine/src/cards/pool/hope-tender.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hostile Desert",
+   "files": [
+    "engine/src/cards/pool/hostile-desert.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hour of Devastation",
+   "files": [
+    "engine/src/cards/pool/hour-of-devastation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hour of Eternity",
+   "files": [
+    "engine/src/cards/pool/hour-of-eternity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imminent Doom",
+   "files": [
+    "engine/src/cards/pool/imminent-doom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Defeat",
+   "files": [
+    "engine/src/cards/pool/jaces-defeat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Khenra Scrapper",
+   "files": [
+    "engine/src/cards/pool/khenra-scrapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life Goes On",
+   "files": [
+    "engine/src/cards/pool/life-goes-on.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana's Defeat",
+   "files": [
+    "engine/src/cards/pool/lilianas-defeat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magmaroth",
+   "files": [
+    "engine/src/cards/pool/magmaroth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marauding Boneslasher",
+   "files": [
+    "engine/src/cards/pool/marauding-boneslasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merciless Eternal",
+   "files": [
+    "engine/src/cards/pool/merciless-eternal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nicol Bolas, the Deceiver",
+   "files": [
+    "engine/src/cards/pool/nicol-bolas-the-deceiver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa's Defeat",
+   "files": [
+    "engine/src/cards/pool/nissas-defeat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa, Genesis Mage",
+   "files": [
+    "engine/src/cards/pool/nissa-genesis-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oasis Ritualist",
+   "files": [
+    "engine/src/cards/pool/oasis-ritualist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oketra's Avenger",
+   "files": [
+    "engine/src/cards/pool/oketras-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ominous Sphinx",
+   "files": [
+    "engine/src/cards/pool/ominous-sphinx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overcome",
+   "files": [
+    "engine/src/cards/pool/overcome.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Proven Combatant",
+   "files": [
+    "engine/src/cards/pool/proven-combatant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ramunap Hydra",
+   "files": [
+    "engine/src/cards/pool/ramunap-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reason // Believe",
+   "files": [
+    "engine/src/cards/pool/believe.ts",
+    "engine/src/cards/pool/reason-believe.ts",
+    "engine/src/cards/pool/reason.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Refuse // Cooperate",
+   "files": [
+    "engine/src/cards/pool/cooperate.ts",
+    "engine/src/cards/pool/refuse-cooperate.ts",
+    "engine/src/cards/pool/refuse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resilient Khenra",
+   "files": [
+    "engine/src/cards/pool/resilient-khenra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resolute Survivors",
+   "files": [
+    "engine/src/cards/pool/resolute-survivors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riddleform",
+   "files": [
+    "engine/src/cards/pool/riddleform.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "River Hoopoe",
+   "files": [
+    "engine/src/cards/pool/river-hoopoe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Samut, the Tested",
+   "files": [
+    "engine/src/cards/pool/samut-the-tested.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sand Strangler",
+   "files": [
+    "engine/src/cards/pool/sand-strangler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seer of the Last Tomorrow",
+   "files": [
+    "engine/src/cards/pool/seer-of-the-last-tomorrow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sidewinder Naga",
+   "files": [
+    "engine/src/cards/pool/sidewinder-naga.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sifter Wurm",
+   "files": [
+    "engine/src/cards/pool/sifter-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinuous Striker",
+   "files": [
+    "engine/src/cards/pool/sinuous-striker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Solitary Camel",
+   "files": [
+    "engine/src/cards/pool/solitary-camel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steadfast Sentinel",
+   "files": [
+    "engine/src/cards/pool/steadfast-sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Steward of Solidarity",
+   "files": [
+    "engine/src/cards/pool/steward-of-solidarity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Struggle // Survive",
+   "files": [
+    "engine/src/cards/pool/struggle-survive.ts",
+    "engine/src/cards/pool/struggle.ts",
+    "engine/src/cards/pool/survive.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunscourge Champion",
+   "files": [
+    "engine/src/cards/pool/sunscourge-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunset Pyramid",
+   "files": [
+    "engine/src/cards/pool/sunset-pyramid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Supreme Will",
+   "files": [
+    "engine/src/cards/pool/supreme-will.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tenacious Hunter",
+   "files": [
+    "engine/src/cards/pool/tenacious-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thorned Moloch",
+   "files": [
+    "engine/src/cards/pool/thorned-moloch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tragic Lesson",
+   "files": [
+    "engine/src/cards/pool/tragic-lesson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uncage the Menagerie",
+   "files": [
+    "engine/src/cards/pool/uncage-the-menagerie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unconventional Tactics",
+   "files": [
+    "engine/src/cards/pool/unconventional-tactics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unquenchable Thirst",
+   "files": [
+    "engine/src/cards/pool/unquenchable-thirst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unraveling Mummy",
+   "files": [
+    "engine/src/cards/pool/unraveling-mummy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vile Manifestation",
+   "files": [
+    "engine/src/cards/pool/vile-manifestation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visage of Bolas",
+   "files": [
+    "engine/src/cards/pool/visage-of-bolas.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vizier of the True",
+   "files": [
+    "engine/src/cards/pool/vizier-of-the-true.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Forgotten Pharaohs",
+   "files": [
+    "engine/src/cards/pool/wall-of-forgotten-pharaohs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wasp of the Bitter End",
+   "files": [
+    "engine/src/cards/pool/wasp-of-the-bitter-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildfire Eternal",
+   "files": [
+    "engine/src/cards/pool/wildfire-eternal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wretched Camel",
+   "files": [
+    "engine/src/cards/pool/wretched-camel.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Abandoned Sarcophagus",
+   "needs": [
+    "replacement:exile-if-not-cycled"
+   ],
+   "why": "a card with cycling that would go to your graveyard from anywhere other than being cycled is exiled instead"
+  },
+  {
+   "name": "Act of Heroism",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "target creature can block an additional creature this turn"
+  },
+  {
+   "name": "Bontu's Last Reckoning",
+   "needs": [
+    "effect:player-next-untap-step-skip-filter"
+   ],
+   "why": "lands you control don't untap during your next untap step — lands that enter later too (the ruling); doesntUntapNext marks only the ones there as it resolves"
+  },
+  {
+   "name": "Desert's Hold",
+   "needs": [
+    "filter:enchanted-by-source"
+   ],
+   "why": "enchanted creature's activated abilities can't be activated — prohibits.abilitiesOf can't pick out this Aura's creature"
+  },
+  {
+   "name": "Djeru, With Eyes Open",
+   "needs": [
+    "replacement:prevent-n-of-damage"
+   ],
+   "why": "if a source would deal damage to a planeswalker you control, prevent 1 of that damage"
+  },
+  {
+   "name": "Doomfall",
+   "needs": [
+    "effect:each-opponent-exiles-choice",
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "target opponent exiles a creature of their choice; or reveal a hand and exile a nonland card from it"
+  },
+  {
+   "name": "Hazoret's Undying Fury",
+   "needs": [
+    "effect:player-next-untap-step-skip-filter"
+   ],
+   "why": "lands you control don't untap during your next untap step, including ones that enter later"
+  },
+  {
+   "name": "Hollow One",
+   "needs": [
+    "effect:turn-stat-cards-discarded"
+   ],
+   "why": "costs {2} less for each card you've cycled or discarded this turn — nothing counts discards this turn"
+  },
+  {
+   "name": "Hour of Glory",
+   "needs": [
+    "effect:exile-from-hand-by-filter",
+    "condition:same-name-as-target"
+   ],
+   "why": "reveal the exiled creature's owner's hand and exile all cards with the same name"
+  },
+  {
+   "name": "Imaginary Threats",
+   "needs": [
+    "effect:player-next-untap-step-skip-filter",
+    "effect:must-attack-target-players-creatures"
+   ],
+   "why": "creatures target opponent controls attack this turn if able; they don't untap during that player's next untap step, later ones included"
+  },
+  {
+   "name": "Kefnet's Last Word",
+   "needs": [
+    "effect:player-next-untap-step-skip-filter"
+   ],
+   "why": "lands you control don't untap during your next untap step, including ones that enter later"
+  },
+  {
+   "name": "Leave // Chance",
+   "needs": [
+    "new:discard-any-number"
+   ],
+   "why": "Chance: discard any number of cards, then draw that many"
+  },
+  {
+   "name": "Lethal Sting",
+   "needs": [
+    "bug:blight-ignores-counter-prevention"
+   ],
+   "why": "can't be cast without being able to put a -1/-1 counter on a creature you control (rule 701.68b); canBlight ignores counter prevention"
+  },
+  {
+   "name": "Majestic Myriarch",
+   "needs": [
+    "effect:grant-keyword-variants"
+   ],
+   "why": "gains each keyword a creature you control has, its variants (hexproof from white) included"
+  },
+  {
+   "name": "Nissa's Encouragement",
+   "needs": [
+    "effect:search-library-and-graveyard-named-set"
+   ],
+   "why": "search library and graveyard for one each of three named cards; the forced-find rule over-constrains a oneEach search"
+  },
+  {
+   "name": "Oketra's Last Mercy",
+   "needs": [
+    "effect:life-total-becomes",
+    "effect:player-next-untap-step-skip-filter"
+   ],
+   "why": "your life total becomes your starting life total; lands you control don't untap during your next untap step, including later ones"
+  },
+  {
+   "name": "Overwhelming Splendor",
+   "needs": [
+    "effect:mass-lose-all-abilities",
+    "effect:prohibit-non-mana-abilities"
+   ],
+   "why": "enchanted player's creatures lose all abilities and are 1/1; they can't activate non-mana, non-loyalty abilities"
+  },
+  {
+   "name": "Puncturing Blow",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "if that creature would die this turn, exile it instead"
+  },
+  {
+   "name": "Rhonas's Last Stand",
+   "needs": [
+    "effect:player-next-untap-step-skip-filter"
+   ],
+   "why": "lands you control don't untap during your next untap step, including ones that enter later"
+  },
+  {
+   "name": "Rhonas's Stalwart",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "can't be blocked by creatures with power 2 or less this turn"
+  },
+  {
+   "name": "Saving Grace",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "damage dealt to you and permanents you control is dealt to enchanted creature instead"
+  },
+  {
+   "name": "Torment of Scarabs",
+   "needs": [
+    "trigger:enchanted-player-step-begins"
+   ],
+   "why": "at the beginning of enchanted player's upkeep — step-begins can't name the enchanted player"
+  },
+  {
+   "name": "Torment of Venom",
+   "needs": [
+    "effect:unless-sacrifice-other-than-target"
+   ],
+   "why": "loses 3 life unless they sacrifice another nonland permanent — the sacrifice option can't exclude the target"
+  },
+  {
+   "name": "Unesh, Criosphinx Sovereign",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "an opponent separates the revealed cards into two piles"
+  },
+  {
+   "name": "Vizier of the Anointed",
+   "needs": [
+    "keyword:embalm"
+   ],
+   "why": "search for a creature card with eternalize or embalm; whenever you activate eternalize or embalm, draw"
+  }
+ ]
+}

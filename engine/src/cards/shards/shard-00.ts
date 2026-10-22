@@ -438,6 +438,7 @@ import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
+import _poolSidewinderNaga from "../pool/sidewinder-naga.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
 import _poolSilvanussInvoker from "../pool/silvanuss-invoker.js";
@@ -464,6 +465,7 @@ import _poolStarfieldMystic from "../pool/starfield-mystic.js";
 import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
 import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
+import _poolStewardOfSolidarity from "../pool/steward-of-solidarity.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
 import _poolStoneHavenPilgrim from "../pool/stone-haven-pilgrim.js";
 import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
@@ -555,6 +557,7 @@ import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
+import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
+    _poolSidewinderNaga,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
     _poolSilvanussInvoker,
@@ -1065,6 +1069,7 @@ const shard: CardShard = {
     _poolStarfighterPilot,
     _poolStarkIndustries,
     _poolSterlingKeykeeper,
+    _poolStewardOfSolidarity,
     _poolStitchInTime,
     _poolStoneHavenPilgrim,
     _poolStoneriseSpirit,
@@ -1156,6 +1161,7 @@ const shard: CardShard = {
     _poolVihaanGoldwaker,
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
+    _poolVizierOfTheTrue,
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,
     _poolVrock,

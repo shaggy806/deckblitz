@@ -9,6 +9,7 @@ import _poolAbbeyGargoyles from "../pool/abbey-gargoyles.js";
 import _poolAberrantMindSorcerer from "../pool/aberrant-mind-sorcerer.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
+import _poolAerialGuide from "../pool/aerial-guide.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
@@ -49,6 +50,7 @@ import _poolBasicConjuration from "../pool/basic-conjuration.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
+import _poolBelieve from "../pool/believe.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
 import _poolBigBertha from "../pool/big-bertha.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
@@ -82,6 +84,7 @@ import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
 import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
+import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
@@ -561,6 +564,7 @@ import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
 import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
+import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
 import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
@@ -609,6 +613,7 @@ const shard: CardShard = {
     _poolAberrantMindSorcerer,
     _poolAbzanBanner,
     _poolAcolyteOfAclazotz,
+    _poolAerialGuide,
     _poolAirCultElemental,
     _poolAkkiBattleSquad,
     _poolAlongTheCrookedWay,
@@ -649,6 +654,7 @@ const shard: CardShard = {
     _poolBatteringCraghorn,
     _poolBeanstalkGiant,
     _poolBeanstalkWurm,
+    _poolBelieve,
     _poolBestowGreatness,
     _poolBigBertha,
     _poolBindingTheOldGods,
@@ -682,6 +688,7 @@ const shard: CardShard = {
     _poolCatalystElemental,
     _poolCatapultFodder,
     _poolCelestialEnforcer,
+    _poolChandrasDefeat,
     _poolChaosTerminatorLord,
     _poolChargeOfTheMites,
     _poolCharityExtractor,
@@ -1161,6 +1168,7 @@ const shard: CardShard = {
     _poolWallOfMist,
     _poolWallOfWood,
     _poolWarmakerGunship,
+    _poolWaspOfTheBitterEnd,
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,
     _poolWayOfTheDeathbringer,

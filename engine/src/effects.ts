@@ -5225,6 +5225,18 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
     }
   | {
+      /**
+       * "Target player **shuffles their graveyard into their library**"
+       * (Reminisce), or a scope — Survive's "each player …", Feldon's Cane's
+       * "shuffle your graveyard into your library": every card in that
+       * player's graveyard goes into their library, one move, and the library
+       * is shuffled (rule 701.24a) — even with an empty graveyard (Survive's
+       * ruling). "Each player" moves every graveyard at once.
+       */
+      readonly kind: "shuffle-graveyard-into-library";
+      readonly target: number | PlayerScope;
+    }
+  | {
       /** Surveil `amount` (rule 701.43) — look at the top N, put any number
        * into the graveyard, keep the rest on top. `then` applied after. */
       readonly kind: "surveil";
@@ -6189,6 +6201,8 @@ export interface EffectApi {
   grantCantBeSacrificed(target: TargetRef, duration: PtDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
+  /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}. */
+  shuffleGraveyardIntoLibrary(target: TargetRef): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
    * of `target`'s library, or all of it but the bottom `allBut`. */
   exileFromLibrary(
@@ -9104,6 +9118,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       for (const target of scopedOrTargetedPlayers(spec.target, ctx)) {
         ctx.mill(target, amountValue(spec.amount, ctx, target.kind === "player" ? target.player : undefined));
       }
+      return;
+    }
+    case "shuffle-graveyard-into-library": {
+      const players = scopedOrTargetedPlayers(spec.target, ctx);
+      ctx.simultaneously(() => {
+        for (const target of players) ctx.shuffleGraveyardIntoLibrary(target);
+      });
       return;
     }
     case "exile-from-library": {

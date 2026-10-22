@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Hour of Devastation, whole** (batch 138): **aftermath** (rule 702.127a — the second half
+  cast only from a graveyard, then exiled), **exert as an activation cost** (`exertSelf`, rule
+  701.43, read by the scaffolder) and **"shuffle your graveyard into your library"** built; 89
+  of its last 114 authored by four `card-author` agents and the lead — Hour of Devastation,
+  God-Pharaoh's Gift, Nicol Bolas, the Deceiver, Samut, Champion of Wits, Imminent Doom, nine
+  aftermath split cards; HOU is 152 of 186. 25 blocked; the Gods' Last cards' "lands don't
+  untap" the most shared (5) (2026-10-22).
 - **Ixalan and Commander 2017, whole** (batch 137): no engine change — raid, explore, enrage,
   Treasure, crew and the flip enchantments were all there already. 111 cards authored by five
   `card-author` agents and the lead (14 explore cards the scaffolder finished) — Raging

@@ -5263,3 +5263,16 @@ only if it's still on the battlefield (rule 400.7)
 - **Check:** At end of combat the Galleon is exiled and returns as Conqueror's Foothold, an
   untapped land under your control with its four abilities. Check at ~768px tall, in a 2- and a
   4-player room.
+
+### Consign // Oblivion: aftermath from the graveyard
+
+*New cast route* — aftermath (rule 702.127a): the second half casts only from the graveyard, then
+is exiled
+
+- **Setup:** Your precombat main. Your battlefield: two Islands, five Swamps; your hand: Consign //
+  Oblivion. Opponent: Grizzly Bears on the battlefield, two cards in hand.
+- **Do:** Look at the card in hand: only Consign is offered. Cast Consign on the Bears. Then open
+  your graveyard and cast Oblivion at the opponent.
+- **Check:** From the hand only Consign can be cast; from the graveyard only Oblivion (labelled
+  aftermath). The opponent discards two, and Consign // Oblivion ends in exile, not the
+  graveyard. Check at ~768px tall, in a 2- and a 4-player room.

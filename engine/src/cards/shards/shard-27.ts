@@ -127,6 +127,7 @@ import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
+import _poolDriven from "../pool/driven.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDuelingCoach from "../pool/dueling-coach.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
@@ -318,8 +319,10 @@ import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
+import _poolOblivion from "../pool/oblivion.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
+import _poolOketrasAvenger from "../pool/oketras-avenger.js";
 import _poolOneWithTheStars from "../pool/one-with-the-stars.js";
 import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
 import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
@@ -366,6 +369,7 @@ import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
 import _poolRedrockSentinel from "../pool/redrock-sentinel.js";
 import _poolRefractionElemental from "../pool/refraction-elemental.js";
+import _poolRefuseCooperate from "../pool/refuse-cooperate.js";
 import _poolRegalLeosaur from "../pool/regal-leosaur.js";
 import _poolRegalSliver from "../pool/regal-sliver.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
@@ -702,6 +706,7 @@ const shard: CardShard = {
     _poolDonatellosTechnique,
     _poolDragonCursedHalls,
     _poolDrillworksMole,
+    _poolDriven,
     _poolDrumhunter,
     _poolDuelingCoach,
     _poolDukharaPeafowl,
@@ -893,8 +898,10 @@ const shard: CardShard = {
     _poolNicolBolas,
     _poolNightScythe,
     _poolNurglesRot,
+    _poolOblivion,
     _poolObsianusGolem,
     _poolOctaviaLivingThesis,
+    _poolOketrasAvenger,
     _poolOneWithTheStars,
     _poolOrderOfLeitbur,
     _poolOreskosSwiftclaw,
@@ -941,6 +948,7 @@ const shard: CardShard = {
     _poolRecover,
     _poolRedrockSentinel,
     _poolRefractionElemental,
+    _poolRefuseCooperate,
     _poolRegalLeosaur,
     _poolRegalSliver,
     _poolRegathanFirecat,

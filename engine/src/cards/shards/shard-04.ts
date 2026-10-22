@@ -176,6 +176,7 @@ import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
+import _poolGideonsDefeat from "../pool/gideons-defeat.js";
 import _poolGigastormTitan from "../pool/gigastorm-titan.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
 import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
@@ -748,6 +749,7 @@ const shard: CardShard = {
     _poolGeodeRager,
     _poolGhostQuarter,
     _poolGiantCrab,
+    _poolGideonsDefeat,
     _poolGigastormTitan,
     _poolGingerbreadCabin,
     _poolGlassOfTheGuildpact,

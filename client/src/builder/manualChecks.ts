@@ -3108,6 +3108,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Consign // Oblivion: aftermath from the graveyard',
+    board({
+      you: { bf: ['Island*2', 'Swamp*5'], hand: ['Consign // Oblivion'] },
+      opp: { bf: ['Grizzly Bears'], hand: ['Hill Giant', 'Craw Wurm'] },
+    }),
+  ),
+  preset(
     "Conqueror's Galleon attacks and comes back a land",
     board({
       you: { bf: ["Conqueror's Galleon", 'Craw Wurm'] },
