@@ -560,6 +560,25 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **A forced look-and-choose no longer asks** (2026-10-22): a zone choice where every card shown
+  is taken, with nothing to order or split (Dark Confidant's and Yuriko's revealed card into the
+  hand), is answered by the drivers (`forcedZoneChoice` in `engine/src/auto-settle.ts`, used by
+  `autoSettle` and the room's `autoAdvanceHumanSeat`) instead of opening a one-card picker.
+- **A gift's opponent is one question** (2026-10-22): a `choose-modes` with a "Promise the gift to …"
+  mode per opponent (each an `about-player`), and in the client any choice of one player — a gift,
+  "choose an opponent" — is also picked by clicking that player's panel.
+- **The phase track fits at 1024 wide** (2026-10-22): below 75rem the turn banner drops the spelled-out
+  step, which the track's lit pip (and its tooltip) already says.
+- **The reconnecting screen dims the last screen** (the user, 2026-10-20; done 2026-10-22): a lost
+  connection keeps the board or lobby up, greyed under a "Reconnecting…" box, rather than replacing
+  the page; a first visit that never connected still shows "Waiting for the server…".
+- **Slow bots and slow animations by default; no "Card entrance" setting** (the user, 2026-10-13/14;
+  done 2026-10-22): a new room's bots play at "Slow" and animations start at "Slow" (motion settings
+  version 4 reads an older save's untouched "Normal" as the new default); the played card always
+  rises in.
+- **A Max button on each colour of the mana-split prompt** (the user, 2026-10-21; done 2026-10-22):
+  puts everything left into that colour (`CountStepper`'s `maxButton`).
+
 - **A lobby game with only bots across the table plays in the browser** (the user, 2026-10-18): the
   host seated, every other seat a bot and nobody watching, Start Game rebuilds the table in the
   page's worker as a blitz does (`client/src/lobby/localStart.ts`) and leaves the server's room,

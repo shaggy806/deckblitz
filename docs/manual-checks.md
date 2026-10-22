@@ -2076,7 +2076,8 @@ How to use it:
 - **Check:** The trigger goes on the stack (not a mana ability — ruling) and X is read on
   resolution: after the Bolt it's 4 (Klauth only), not 6. One prompt, "Add 4 mana in any
   combination" (70 splits is too many to list as options): a row per colour with its mana symbol,
-  − / field / +, and a running total. No field goes past what's left to share out, "Add mana" is
+  − / field / + / Max, and a running total. Max puts everything left into that colour (and greys
+  out once nothing is left). No field goes past what's left to share out, "Add mana" is
   enabled only at 4/4, and the pool in your player header shows exactly what you picked. The mana stays through combat into postcombat main, can cast a spell, can't pay an
   ability (Mind Stone's draw isn't payable with it), and is gone by the next turn.
 - **Known limits:** Up to 35 splits (three mana over five colours) are still one list of

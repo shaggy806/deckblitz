@@ -639,27 +639,30 @@ function coachPageOf(status: NetworkGame['status']): PageId {
   }
 }
 
-/** The screen for the connection's status. */
+type ShownStatus = Exclude<NetworkGame['status'], 'connecting' | 'disconnected'>
+
+/**
+ * The screen for the connection's status. A connection lost after it was
+ * made keeps the last screen up, dimmed under a "Reconnecting…" box, rather
+ * than swapping the whole page for one (the user, 2026-10-20): the board is
+ * still what it was, and it's back the moment the socket is. A first visit
+ * that never got through has no screen to keep.
+ */
 function AppScreen({ game }: { readonly game: NetworkGame }) {
-  if (game.status === 'connecting') {
-    return <CenteredScreen title="Connecting…" />
-  }
-  if (game.status === 'disconnected') {
-    // A first visit that never got through fails exactly like a mid-game drop
-    // — `onerror` then `onclose`, so this same branch catches both — but
-    // telling someone who has only just arrived that they "lost the
-    // connection" is untrue and reads as though they broke something. The
-    // retry loop behind these two is identical; only the words differ.
-    return game.everConnected ? (
-      <CenteredScreen title="Reconnecting…">
-        <p className="muted">
-          Lost the connection to the room server — retrying automatically.
-        </p>
-        <button type="button" onClick={game.reconnect}>
-          Retry now
-        </button>
-      </CenteredScreen>
-    ) : (
+  const [lastShown, setLastShown] = useState<ShownStatus | null>(null)
+  const connected = game.status !== 'connecting' && game.status !== 'disconnected'
+  // Remembered as it renders (React's "storing information from previous
+  // renders"), so the first dimmed frame already has it.
+  if (connected && lastShown !== game.status) setLastShown(game.status as ShownStatus)
+  const held = connected ? null : lastShown
+
+  if (!connected && held === null) {
+    if (game.status === 'connecting') return <CenteredScreen title="Connecting…" />
+    // A first visit that never got through fails exactly like a mid-game
+    // drop — `onerror` then `onclose` — but telling someone who has only just
+    // arrived that they "lost the connection" is untrue and reads as though
+    // they broke something. The retry loop behind it is the same.
+    return (
       <CenteredScreen title="Waiting for the server…">
         <p className="muted">
           The room server isn't answering yet. Still trying — this page will
@@ -671,16 +674,36 @@ function AppScreen({ game }: { readonly game: NetworkGame }) {
       </CenteredScreen>
     )
   }
-  if (game.status === 'room-not-found') {
+  return (
+    <>
+      <StatusScreen game={game} status={connected ? (game.status as ShownStatus) : (held as ShownStatus)} />
+      {connected ? null : (
+        <div className="overlay reconnect-overlay" role="alertdialog" aria-label="Reconnecting">
+          <div className="overlay-box">
+            <h2>Reconnecting…</h2>
+            <p className="muted">Lost the connection to the room server — retrying automatically.</p>
+            <button type="button" onClick={game.reconnect} disabled={game.status === 'connecting'}>
+              Retry now
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+/** The screen for a connected status (or the last one, while reconnecting). */
+function StatusScreen({ game, status }: { readonly game: NetworkGame; readonly status: ShownStatus }) {
+  if (status === 'room-not-found') {
     return <LandingScreen game={game} notFound />
   }
-  if (game.status === 'no-room') {
+  if (status === 'no-room') {
     return <LandingScreen game={game} />
   }
-  if (game.status === 'choosing-seat') {
+  if (status === 'choosing-seat') {
     return <SeatPickerScreen game={game} />
   }
-  if (game.status === 'waiting-for-players') {
+  if (status === 'waiting-for-players') {
     return <WaitingForPlayersScreen game={game} />
   }
   // Keyed on the game, so a rematch starts the screen afresh: its playback
@@ -4182,6 +4205,7 @@ function Table({
                 count={count}
                 max={count + (amount - sum)}
                 showMax={false}
+                maxButton
                 onChange={(n) => setManaSplit((cur) => ({ ...cur, [color]: n }))}
               />
             )

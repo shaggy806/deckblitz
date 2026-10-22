@@ -5,10 +5,6 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
-- **A gift's opponent is asked one opponent at a time** (rule 702.174a): with two or more
-  opponents the caster answers a yes-or-no `choose-modes` `about` each in turn, the last one
-  left taking it. One prompt naming every opponent (picked on their panels) would read better;
-  the engine side is `promptNextGift`.
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or
   face-down card, no effects lasting a turn, and nothing on the stack — so "Edit from here"
@@ -37,10 +33,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   offers all of one type per type, and a count picker would let the player choose any split.
   And when the payer taps such a source for more than a payment needs, the player can't choose
   the colour of what floats. The rest of `effect:mana-ability-dynamic-amount` is built.
-- **A max button on each colour of the mana-split prompt.** The user, 2026-10-21: the menu that
-  comes up when a source adds a significant amount of mana in any combination of colours should
-  have a max button on each option, putting the rest of the amount into that colour. The prompt
-  is `App.tsx`'s `manaSplit` state (one count field per colour, around line 4160).
 - **Quality-of-life room options (house rules).** Options the room creator can turn on before a
   game that are technically against the rules but make play smoother. The user's example: mana
   that, when tapped, doesn't have its colour decided until it's spent on a specific coloured
@@ -88,20 +80,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   displayed one to it. Also keep the next/previous buttons still: today they move as the
   viewer box grows and shrinks with whether the card has associated tokens.
   `client/src/library/LibraryPage.tsx`, `library.css`.
-- **The top strip still clips the phase track at 1024 wide** (2026-10-06 UI review). Moving bot
-  speed into the Settings panel brought every step back at 1366x768, but at 1024 the track
-  (`PhaseTrack`) still stops short: at EC on 2026-10-09, with the turn banner's round (added
-  that day) already shortened to "R3" below 75rem. "Player 1 to act" and the text buttons
-  (Settings, History, Capture, Seat) are what's left to shorten — icons, or the acting player
-  folded into the turn banner.
-
-**A forced look-and-choose still asks**
-
-Yuriko, the Tiger's Shadow and Dark Confidant reveal the top card and put it into your hand: a
-`look-and-choose` over the library with `count: 1, min: 1, max: 1`, so the zone picker opens on one
-card that must be taken (seen live 2026-10-09). The engine could skip the `choose-from-zone` when
-the eligible cards are exactly `min` = `max` and there's no order to pick (`Game`'s look-and-choose,
-where the decision is raised); bots and the fuzzer answer it already.
 
 - **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15). Hovering The
   Dawning Archaic in the hand (Reach, a cost reduction, an attack trigger that casts from the

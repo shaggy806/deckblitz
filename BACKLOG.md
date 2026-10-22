@@ -358,9 +358,6 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
-- **A forced look-and-choose still asks**: Yuriko's and Dark Confidant's "reveal the top card and put it into your hand" open a one-card picker with nothing to choose (`look-and-choose` with `count`, `min` and `max` 1); it could take the card unasked.
-- **The top strip still clips the phase track at 1024 wide** (2026-10-06 UI review): with bot speed moved into Settings every step shows at 1366, but at 1024 the track stops at EC.
-- **A gift's opponent is asked one opponent at a time** — one prompt naming every opponent would read better.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **One art-crop primitive** — the art lookup is repeated in six components.
 - **The artist credit shows on only some art, on two lines** (the user, 2026-10-17): check every
@@ -368,7 +365,6 @@ delete its detail there and move this line to `COMPLETED.md`.
   `docs/client-gaps.md`) and make the credit's font shrink or grow to fit its text on one line
   (`ui/artistCredit.ts`).
 - **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
-- **A max button on each colour of the mana-split prompt** (the user, 2026-10-21): when asked to add a large amount of mana in any combination of colours, each colour's row should have a button that puts all of what's left into that colour (`App.tsx`'s `manaSplit` prompt).
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).
@@ -376,11 +372,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md`, the user's decisions (2026-10-13) at its end; what's built is in `COMPLETED.md`. Next: the seeded decks and game 1's chapters (plan phase 4).
-- **Remove the entrance animation options from the settings panel** (the user, 2026-10-13): the "Card entrance" row (`client/src/ui/MotionControl.tsx`, `castEntrance` in `game/motionPrefs.ts`).
-- **The site should default to slow bots and slow animations** (the user, 2026-10-14): so people getting used to the site aren't overwhelmed by the speed. The defaults behind Settings' bot speed (`client/src/ui/botSpeeds.ts`, the room's `botSpeed`) and animation speed (`client/src/ui/MotionControl.tsx`, `game/motionPrefs.ts`).
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15): the hovered hand card shrinks long text until it can't be read (The Dawning Archaic); no fix in mind yet.
-- **The reconnecting / lost-connection screen replaces the whole page** (the user, 2026-10-20): make it a dimming filter over the most recent screen with a popup in the middle, rather than an entirely different screen (`App.tsx`'s `game.status === 'disconnected'` branch).
 - **A local game can't be picked up without the room server** (a bug report, 2026-10-20): a drop mid-game no longer shows "Reconnecting", but a reload (or any page load into a local room) still waits for the server's socket to open before it rejoins the worker's game; detail in `docs/client-gaps.md`.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 

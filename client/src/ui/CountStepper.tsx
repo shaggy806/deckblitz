@@ -18,6 +18,7 @@ export function CountStepper({
   min = 0,
   max,
   showMax = true,
+  maxButton = false,
   onChange,
 }: {
   /** What it counts — shown, and the field's accessible name. */
@@ -32,6 +33,10 @@ export function CountStepper({
    * out (a mana split), which would read as a moving total. The cell stays,
    * empty. */
   readonly showMax?: boolean
+  /** A "Max" button in that last cell instead, setting the count to `max`:
+   * all of what's left of a mana split into this colour (the user,
+   * 2026-10-21). */
+  readonly maxButton?: boolean
   readonly onChange: (n: number) => void
 }) {
   const [draft, setDraft] = useState<string | null>(null)
@@ -61,7 +66,13 @@ export function CountStepper({
       </button>
       {/* Always a cell: in `.stack-counts`' grid each stepper is five of them
           (`display: contents`), and one short shifts every row after it. */}
-      <span className="muted">{showMax ? `of ${max}` : ''}</span>
+      {maxButton ? (
+        <button type="button" disabled={count >= max} onClick={() => send(max)} aria-label={`All the rest as ${label}`}>
+          Max
+        </button>
+      ) : (
+        <span className="muted">{showMax ? `of ${max}` : ''}</span>
+      )}
     </span>
   )
 }

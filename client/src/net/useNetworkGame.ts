@@ -456,7 +456,7 @@ export function useNetworkGame(): NetworkGame {
   const [autoPassing, setAutoPassing] = useState(false)
   const [autoPassPaused, setAutoPassPaused] = useState(false)
   const [isHost, setIsHost] = useState(false)
-  const [botSpeed, setBotSpeedState] = useState<BotSpeed>('normal')
+  const [botSpeed, setBotSpeedState] = useState<BotSpeed>('slow')
   const [roomSettings, setRoomSettingsState] = useState<RoomSettings | null>(null)
   const [firstPlayerChosen, setFirstPlayerChosen] = useState(false)
   const [stopped, setStopped] = useState<string | null>(null)

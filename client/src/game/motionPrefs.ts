@@ -19,19 +19,14 @@ import { useSyncExternalStore } from 'react'
 export const ANIM_SCALES = [0.5, 1, 1.5, 2] as const
 export type AnimScale = (typeof ANIM_SCALES)[number]
 
-/** How a played card's spotlight comes in. `rise` (the default, the user's
- * pick on 2026-09-30) comes up from the same spot for everyone — with the
- * caption naming the player, flying in from their side of the table read as
- * wrong; `side` is that older flight, kept as an option for now; `fade` fades
- * in place. Read by CSS as `:root[data-cast-entrance]`. */
-export const CAST_ENTRANCES = ['rise', 'side', 'fade'] as const
-export type CastEntrance = (typeof CAST_ENTRANCES)[number]
+/** Where animation speed starts: "Slow", so a player new to the site isn't
+ * overwhelmed by the pace (the user, 2026-10-14). */
+export const DEFAULT_ANIM_SCALE: AnimScale = 1.5
 
 export interface MotionSettings {
   readonly animScale: AnimScale
   /** The viewer's own switch, not counting the browser's preference. */
   readonly reduceMotion: boolean
-  readonly castEntrance: CastEntrance
   /** Sound effects' volume (`game/sound.ts`), 0 (off) to 1. */
   readonly soundVolume: number
   /** The background music's volume in a game (`game/music.ts`), 0 (off) to 1. */
@@ -44,10 +39,14 @@ export interface MotionSettings {
  * `sound: false` whether or not the viewer had touched it (changing the speed
  * saved it too), so a `sound` saved without a version is no choice. 3: the
  * on/off `sound` became two volumes; a version 2 `sound: false` is a sound
- * volume of 0.
+ * volume of 0. 4 (2026-10-22): the default speed became "Slow" (1.5), and a
+ * speed of 1 saved before then was usually just the old default, written
+ * along with a volume change, so it reads as the new default.
  */
-const VERSION = 3
+const VERSION = 4
 const SOUND_DEFAULT_ON = 2
+const VOLUMES = 3
+const SLOW_DEFAULT = 4
 
 /** Where each slider starts. */
 export const DEFAULT_SOUND_VOLUME = 0.7
@@ -63,9 +62,8 @@ export interface MotionPrefs extends MotionSettings {
 
 const STORAGE_KEY = 'mtg.motion'
 const DEFAULTS: MotionSettings = {
-  animScale: 1,
+  animScale: DEFAULT_ANIM_SCALE,
   reduceMotion: false,
-  castEntrance: 'rise',
   soundVolume: DEFAULT_SOUND_VOLUME,
   musicVolume: DEFAULT_MUSIC_VOLUME,
 }
@@ -87,20 +85,19 @@ export function parseSettings(raw: string | null): MotionSettings {
       readonly version?: number
       readonly sound?: boolean
     }
-    const animScale = ANIM_SCALES.find((s) => s === parsed.animScale) ?? DEFAULTS.animScale
-    const castEntrance =
-      CAST_ENTRANCES.find((e) => e === parsed.castEntrance) ?? DEFAULTS.castEntrance
+    const version = parsed.version ?? 0
+    const saved = ANIM_SCALES.find((s) => s === parsed.animScale)
+    const animScale = saved === undefined || (saved === 1 && version < SLOW_DEFAULT) ? DEFAULTS.animScale : saved
     return {
       animScale,
       reduceMotion: parsed.reduceMotion === true,
-      castEntrance,
       soundVolume:
-        parsed.version === VERSION
+        version >= VOLUMES
           ? volume(parsed.soundVolume, DEFAULTS.soundVolume)
-          : parsed.version === SOUND_DEFAULT_ON && parsed.sound === false
+          : version === SOUND_DEFAULT_ON && parsed.sound === false
             ? 0
             : DEFAULTS.soundVolume,
-      musicVolume: parsed.version === VERSION ? volume(parsed.musicVolume, DEFAULTS.musicVolume) : DEFAULTS.musicVolume,
+      musicVolume: version >= VOLUMES ? volume(parsed.musicVolume, DEFAULTS.musicVolume) : DEFAULTS.musicVolume,
     }
   } catch {
     return DEFAULTS
@@ -129,7 +126,9 @@ function apply(): void {
   if (typeof document === 'undefined') return
   const root = document.documentElement
   root.style.setProperty('--anim-scale', String(current.animScale))
-  root.setAttribute('data-cast-entrance', current.castEntrance)
+  // The played card always rises into its spotlight; the attribute is what
+  // the CSS keys that on (App.css's `played-card-rise`).
+  root.setAttribute('data-cast-entrance', 'rise')
   if (current.reduced) root.setAttribute('data-reduce-motion', '')
   else root.removeAttribute('data-reduce-motion')
   for (const l of listeners) l()

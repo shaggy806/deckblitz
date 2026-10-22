@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DEFAULT_MUSIC_VOLUME, DEFAULT_SOUND_VOLUME, parseSettings } from './motionPrefs.ts'
+import { DEFAULT_ANIM_SCALE, DEFAULT_MUSIC_VOLUME, DEFAULT_SOUND_VOLUME, parseSettings } from './motionPrefs.ts'
 
 const saved = (o: object) => JSON.stringify(o)
 
@@ -36,6 +36,17 @@ describe('parseSettings', () => {
   })
 
   it('falls back to the defaults on anything unreadable', () => {
-    expect(parseSettings('{not json')).toMatchObject({ soundVolume: DEFAULT_SOUND_VOLUME, animScale: 1 })
+    expect(parseSettings('{not json')).toMatchObject({ soundVolume: DEFAULT_SOUND_VOLUME, animScale: DEFAULT_ANIM_SCALE })
+  })
+
+  it('starts animations at Slow, reading an older save\'s Normal as the old default', () => {
+    expect(DEFAULT_ANIM_SCALE).toBe(1.5)
+    expect(parseSettings(null)).toMatchObject({ animScale: 1.5 })
+    expect(parseSettings(saved({ version: 3, animScale: 1, soundVolume: 0.25 }))).toMatchObject({
+      animScale: 1.5,
+      soundVolume: 0.25,
+    })
+    expect(parseSettings(saved({ version: 3, animScale: 0.5 }))).toMatchObject({ animScale: 0.5 })
+    expect(parseSettings(saved({ version: 4, animScale: 1 }))).toMatchObject({ animScale: 1 })
   })
 })

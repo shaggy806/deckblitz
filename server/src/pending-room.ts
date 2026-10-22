@@ -170,7 +170,9 @@ export class PendingRoom {
   private lastActivityAt: number;
   /** Carried onto the promoted `Room` — see `HostRole`. */
   readonly host: HostRole;
-  botSpeed: BotSpeed = "normal";
+  /** Slow by default, so a newcomer can follow the bots' moves (the user,
+   * 2026-10-14); the host can speed them up from Settings. */
+  botSpeed: BotSpeed = "slow";
   /** The host's choices for the game this room starts — see `RoomSettings`.
    * Starting life defaults to the room's rules (40 for Commander). */
   settings: RoomSettings;

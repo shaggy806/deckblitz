@@ -84,7 +84,7 @@ describe("room host", () => {
   it("makes the room's creator the host, before they've taken a seat", async () => {
     const { joined } = await hostedRoom();
     expect(joined.isHost).toBe(true);
-    expect(joined.botSpeed).toBe("normal");
+    expect(joined.botSpeed).toBe("slow");
     expect(joined.settings).toEqual({ startingLife: 40, firstPlayer: "random", commanderLegalOnly: false, botDecks: "precon" });
     expect(joined.seats.some((s) => s.isHost)).toBe(false);
   });

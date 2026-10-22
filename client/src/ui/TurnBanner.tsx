@@ -41,7 +41,7 @@ export function TurnBanner({
           {playerLabel(view.activePlayer, seats)}'s Turn{view.turn.isExtra ? ' (extra)' : ''}
         </StableLabel>
       </span>
-      <span className="turn-banner-sep">·</span>
+      <span className="turn-banner-sep turn-banner-phase-sep">·</span>
       <span className="turn-banner-phase">
         <StableLabel widest={Object.values(STEP_LABEL)}>{STEP_LABEL[view.turn.step]}</StableLabel>
       </span>

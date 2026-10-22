@@ -405,6 +405,13 @@
   .turn-banner-round-short {
     display: inline;
   }
+  /* The step spelled out, too: the phase track's lit pip says it (its
+     tooltip in full), and at 1024 wide the name cost the track its last
+     steps (the 2026-10-06 UI review). */
+  .turn-banner-phase,
+  .turn-banner-phase-sep {
+    display: none;
+  }
 }
 .turn-banner-sep {
   margin: 0 8px;
@@ -4347,22 +4354,18 @@
     opacity: 0;
   }
 }
-/* How the played card comes in (motionPrefs' `castEntrance`, the Animations
-   panel's "Card entrance"): the same beat and the same length, a different
-   way in. `rise`, the default, comes up from one spot below the middle for
-   every player — the caption says whose it is, and flying in from their side
-   of the table read as wrong once it did. `side` is that flight (the base
-   rule above); `fade` is the reduced-motion fade below. */
-/* Rising (or fading) in, the card stands just left of the stack pile rather
+/* How the played card comes in: it rises from one spot below the middle for
+   every player (`data-cast-entrance='rise'`, set by motionPrefs) — the
+   caption says whose it is, and flying in from their side of the table (the
+   base rule above, once a Settings choice) read as wrong once it did. */
+/* Rising in, the card stands just left of the stack pile rather
    in the middle of the screen, so its flight into its place on the stack is
    a short one (the user's ask, 2026-10-06). --spot-x is how far right of
    centre that is: the stack's top card's left edge (.stack-overlay's
    `right` inset plus its card width), less a gap and half this card, and
    never left of centre on a narrow screen. A `translate` of its own, so it
-   composes with the keyframes' `transform`. `side` keeps flying in from the
-   caster's cell to the middle. */
-:root[data-cast-entrance='rise'] .played-card-fly,
-:root[data-cast-entrance='fade'] .played-card-fly {
+   composes with the keyframes' `transform`. */
+:root[data-cast-entrance='rise'] .played-card-fly {
   --spot-x: max(
     0px,
     calc(
@@ -4374,9 +4377,6 @@
 }
 :root[data-cast-entrance='rise'] .played-card-fly {
   animation-name: played-card-rise;
-}
-:root[data-cast-entrance='fade'] .played-card-fly {
-  animation-name: played-card-fade;
 }
 @keyframes played-card-rise {
   0% {
@@ -4412,9 +4412,6 @@
 :root[data-cast-entrance='rise'] .played-card-fly.holds {
   animation-name: played-card-rise-hold;
 }
-:root[data-cast-entrance='fade'] .played-card-fly.holds {
-  animation-name: played-card-fade-hold;
-}
 @keyframes played-card-fly-hold {
   0% {
     transform: translate(var(--fly-x, 0px), var(--fly-y, 45vh)) scale(0.35);
@@ -4434,15 +4431,6 @@
   25%,
   100% {
     transform: translateY(0) scale(1.08);
-    opacity: 1;
-  }
-}
-@keyframes played-card-fade-hold {
-  0% {
-    opacity: 0;
-  }
-  16.7%,
-  100% {
     opacity: 1;
   }
 }
@@ -5485,4 +5473,12 @@ body.board-dragging {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 14%, var(--panel-2));
   box-shadow: var(--bevel-pressed);
+}
+
+/* Reconnecting over the last screen (App.tsx's AppScreen): the board or lobby
+   stays up, dimmed and unclickable, with the box in the middle — above every
+   popover, banner and tour layer. */
+.reconnect-overlay {
+  z-index: 10050;
+  backdrop-filter: grayscale(0.6);
 }
