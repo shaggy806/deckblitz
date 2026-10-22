@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import { isCardFront, isTokenCard } from 'engine/client'
 import type { CardDefinition, ObjectId, PlayerId } from 'engine/client'
@@ -25,6 +25,8 @@ import {
   updateSeat,
 } from './spec.ts'
 import { ManualChecksSection } from './ManualChecksSection.tsx'
+import { SeatFollow, SeatStrip } from './SeatSwitcher.tsx'
+import { useFollowAction, waitingOn } from './useFollowAction.ts'
 import './builder.css'
 
 /**
@@ -148,6 +150,9 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
   const [saved, setSaved] = useState<Record<string, ScenarioSpec>>(loadSaved)
   const [hover, setHover] = useState<HoverTarget | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
+  const [follow, setFollow] = useFollowAction()
+  const [holdFor, setHoldFor] = useState<PlayerId | null>(null)
+  const releaseHold = useCallback(() => setHoldFor(null), [])
 
   useEffect(() => {
     let live = true
@@ -282,15 +287,22 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
     send({ ...spec, cards })
   }
 
+  const seatFollow = <SeatFollow game={game} spec={spec} building={building} follow={follow} holdFor={holdFor} onRelease={releaseHold} />
+
   if (!open) {
     return (
-      <button type="button" className="builder-tab" onClick={() => setOpen(true)}>
-        Builder ◂
-      </button>
+      <>
+        {seatFollow}
+        <button type="button" className="builder-tab" onClick={() => setOpen(true)}>
+          Builder ◂
+        </button>
+      </>
     )
   }
 
   return (
+    <>
+    {seatFollow}
     <aside className="builder-panel" aria-label="Scenario builder">
       <header className="bp-head">
         <h2>Scenario builder</h2>
@@ -303,6 +315,8 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
         {notice ? <p className="bp-notice bp-notice-float">{notice}</p> : null}
       </header>
 
+      <SeatStrip game={game} spec={spec} building={building} follow={follow} onFollow={setFollow} onSwitch={setHoldFor} />
+
       {!game.isHost ? <p className="bp-notice bad">Only this room's host can change the board.</p> : null}
 
       <div className="bp-scroll">
@@ -311,6 +325,14 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
           onLoad={(next) => {
             send(next)
             setSelected(null)
+          }}
+          onPlay={(next) => {
+            // Each is handled as it arrives, in order: back to building,
+            // the test's board, then play from it.
+            if (!building) game.builderStop(false)
+            send(next)
+            setSelected(null)
+            game.builderStart()
           }}
         />
         <Section title="Seats">
@@ -388,7 +410,10 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
                         className="bp-small"
                         disabled={!building && s.bot}
                         title="Act for this seat"
-                        onClick={() => game.builderSeat(s.player)}
+                        onClick={() => {
+                          setHoldFor(waitingOn(game.view))
+                          game.builderSeat(s.player)
+                        }}
                       >
                         Sit
                       </button>
@@ -868,5 +893,6 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
       ) : null}
       <CardHoverPreview target={hover} />
     </aside>
+    </>
   )
 }

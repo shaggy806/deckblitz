@@ -395,3 +395,115 @@
 .bp-check-text b {
   color: var(--text);
 }
+/* "Not a bug": correct behaviour a tester might report — set back a step. */
+.bp-check-text .bp-check-note {
+  color: var(--muted);
+  font-size: var(--text-xs);
+}
+
+/* Acting for more than one seat (SeatSwitcher.tsx). Each piece takes its
+   seat's colour through --sc. */
+.seat-a { --sc: var(--seat-a); }
+.seat-b { --sc: var(--seat-b); }
+.seat-c { --sc: var(--seat-c); }
+.seat-d { --sc: var(--seat-d); }
+
+/* The strip at the top of the drawer: who you are, and the seats to switch to. */
+.bp-seatstrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  background: color-mix(in srgb, var(--sc, var(--panel-2)) 12%, var(--panel));
+}
+.bp-seat-now {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.bp-seat-now b {
+  color: var(--sc, var(--text));
+  font-size: var(--text-base);
+}
+.bp-seat-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.bp-seat-go {
+  padding: 3px 10px;
+  border: 1px solid var(--sc, var(--border));
+  color: var(--text);
+  background: transparent;
+  font-size: var(--text-xs);
+}
+/* The seat the game is waiting on: filled in its colour, pulsing. */
+.bp-seat-go.due {
+  background: var(--sc);
+  color: #111;
+  font-weight: 700;
+  animation: bp-seat-due 1.1s ease-in-out infinite alternate;
+}
+@keyframes bp-seat-due {
+  from {
+    box-shadow: 0 0 0 0 var(--sc);
+  }
+  to {
+    box-shadow: 0 0 10px 2px var(--sc);
+  }
+}
+:root[data-reduce-motion] .bp-seat-go.due {
+  animation: none;
+}
+.bp-seat-follow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+/* While you act for a seat that isn't your own: the whole table framed in
+   its colour, so it's never in doubt whose cards you're playing. */
+.seat-away-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 54;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 4px var(--sc);
+}
+
+/* "You are now Bob": over the table for a moment at each change of seat. */
+.seat-switch-flash {
+  position: fixed;
+  top: 32%;
+  left: 50%;
+  z-index: 10040;
+  translate: -50% 0;
+  padding: 14px 28px;
+  border: 2px solid var(--sc);
+  background: var(--panel);
+  box-shadow: 0 0 24px var(--sc), var(--shadow-dialog);
+  font-size: var(--text-xl);
+  color: var(--text);
+  pointer-events: none;
+  animation: seat-switch-flash 1.4s ease-out both;
+}
+.seat-switch-flash b {
+  color: var(--sc);
+}
+@keyframes seat-switch-flash {
+  0% {
+    opacity: 0;
+    scale: 0.92;
+  }
+  12%,
+  75% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
