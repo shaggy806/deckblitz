@@ -175,6 +175,7 @@ import _poolElvenChorus from "../pool/elven-chorus.js";
 import _poolElvishAberration from "../pool/elvish-aberration.js";
 import _poolEmbermouthSentinel from "../pool/embermouth-sentinel.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
+import _poolEmperorsVanguard from "../pool/emperors-vanguard.js";
 import _poolEmptiness from "../pool/emptiness.js";
 import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
@@ -281,6 +282,7 @@ import _poolInvasionOfShandalar from "../pool/invasion-of-shandalar.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
+import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
@@ -535,10 +537,12 @@ import _poolUndergrowthRecon from "../pool/undergrowth-recon.js";
 import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
+import _poolVampiresZeal from "../pool/vampires-zeal.js";
 import _poolVatEmergence from "../pool/vat-emergence.js";
 import _poolVelomachusLorehold from "../pool/velomachus-lorehold.js";
 import _poolVenomousChangeling from "../pool/venomous-changeling.js";
 import _poolVentureDeeper from "../pool/venture-deeper.js";
+import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
 import _poolVindictiveWarden from "../pool/vindictive-warden.js";
 import _poolViridianRevel from "../pool/viridian-revel.js";
 import _poolViridianShaman from "../pool/viridian-shaman.js";
@@ -763,6 +767,7 @@ const shard: CardShard = {
     _poolElvishAberration,
     _poolEmbermouthSentinel,
     _poolEmeraldOryx,
+    _poolEmperorsVanguard,
     _poolEmptiness,
     _poolEmpyrialStorm,
     _poolEndbringer,
@@ -869,6 +874,7 @@ const shard: CardShard = {
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
+    _poolIzzetChemister,
     _poolJacesSanctum,
     _poolJasmineBoreal,
     _poolJeskaiRevelation,
@@ -1123,10 +1129,12 @@ const shard: CardShard = {
     _poolUndergrowthStadium,
     _poolUnnaturalMoonrise,
     _poolVampireNoble,
+    _poolVampiresZeal,
     _poolVatEmergence,
     _poolVelomachusLorehold,
     _poolVenomousChangeling,
     _poolVentureDeeper,
+    _poolVerdantRebirth,
     _poolVindictiveWarden,
     _poolViridianRevel,
     _poolViridianShaman,

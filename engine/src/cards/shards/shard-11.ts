@@ -118,6 +118,7 @@ import _poolCuratorsWard from "../pool/curators-ward.js";
 import _poolCuriosityCrafter from "../pool/curiosity-crafter.js";
 import _poolCursecatcher from "../pool/cursecatcher.js";
 import _poolDakmorPlague from "../pool/dakmor-plague.js";
+import _poolDaringSaboteur from "../pool/daring-saboteur.js";
 import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnhartMentor from "../pool/dawnhart-mentor.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
@@ -133,6 +134,7 @@ import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
 import _poolDiningRoom from "../pool/dining-room.js";
+import _poolDireFleetInterloper from "../pool/dire-fleet-interloper.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
 import _poolDiscipleOfLaw from "../pool/disciple-of-law.js";
 import _poolDismissivePyromancer from "../pool/dismissive-pyromancer.js";
@@ -289,6 +291,7 @@ import _poolKoboldsOfKherKeep from "../pool/kobolds-of-kher-keep.js";
 import _poolKollTheForgemaster from "../pool/koll-the-forgemaster.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
+import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
 import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
 import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
@@ -351,6 +354,7 @@ import _poolOakenform from "../pool/oakenform.js";
 import _poolOblivionStrike from "../pool/oblivion-strike.js";
 import _poolOkosAccomplices from "../pool/okos-accomplices.js";
 import _poolOkoyeDoraMilajeLeader from "../pool/okoye-dora-milaje-leader.js";
+import _poolOldGrowthDryads from "../pool/old-growth-dryads.js";
 import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
@@ -450,6 +454,7 @@ import _poolSigilOfSleep from "../pool/sigil-of-sleep.js";
 import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
+import _poolSkulduggery from "../pool/skulduggery.js";
 import _poolSkyEelSchool from "../pool/sky-eel-school.js";
 import _poolSkyclaveCleric from "../pool/skyclave-cleric.js";
 import _poolSkyclaveSquid from "../pool/skyclave-squid.js";
@@ -722,6 +727,7 @@ const shard: CardShard = {
     _poolCuriosityCrafter,
     _poolCursecatcher,
     _poolDakmorPlague,
+    _poolDaringSaboteur,
     _poolDarksteelForge,
     _poolDawnhartMentor,
     _poolDawnsireSunstarDreadnought,
@@ -737,6 +743,7 @@ const shard: CardShard = {
     _poolDevouringTendrils,
     _poolDimirGuildmage,
     _poolDiningRoom,
+    _poolDireFleetInterloper,
     _poolDiscipleOfGrace,
     _poolDiscipleOfLaw,
     _poolDismissivePyromancer,
@@ -893,6 +900,7 @@ const shard: CardShard = {
     _poolKollTheForgemaster,
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
+    _poolLegionConquistador,
     _poolLegolasGreenleaf,
     _poolLeonardoBigBrother,
     _poolLeoninSkyhunter,
@@ -955,6 +963,7 @@ const shard: CardShard = {
     _poolOblivionStrike,
     _poolOkosAccomplices,
     _poolOkoyeDoraMilajeLeader,
+    _poolOldGrowthDryads,
     _poolOmoQueenOfVesuva,
     _poolOneWithTheMachine,
     _poolOpalineUnicorn,
@@ -1054,6 +1063,7 @@ const shard: CardShard = {
     _poolSireOfSevenDeaths,
     _poolSirenReaver,
     _poolSistersOfTheFlame,
+    _poolSkulduggery,
     _poolSkyEelSchool,
     _poolSkyclaveCleric,
     _poolSkyclaveSquid,

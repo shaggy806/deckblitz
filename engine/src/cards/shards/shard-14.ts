@@ -184,6 +184,7 @@ import _poolFelotharDawnOfTheAbzan from "../pool/felothar-dawn-of-the-abzan.js";
 import _poolFemerefScouts from "../pool/femeref-scouts.js";
 import _poolFerociousZheng from "../pool/ferocious-zheng.js";
 import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
+import _poolFireShrineKeeper from "../pool/fire-shrine-keeper.js";
 import _poolFlamekinGildweaver from "../pool/flamekin-gildweaver.js";
 import _poolFledglingDjinn from "../pool/fledgling-djinn.js";
 import _poolFleetfeatherSandals from "../pool/fleetfeather-sandals.js";
@@ -491,6 +492,7 @@ import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTitaniumMan from "../pool/titanium-man.js";
+import _poolTocatliHonorGuard from "../pool/tocatli-honor-guard.js";
 import _poolTonberry from "../pool/tonberry.js";
 import _poolTorporOrb from "../pool/torpor-orb.js";
 import _poolToucanPuffin from "../pool/toucan-puffin.js";
@@ -751,6 +753,7 @@ const shard: CardShard = {
     _poolFemerefScouts,
     _poolFerociousZheng,
     _poolFireOmenCrane,
+    _poolFireShrineKeeper,
     _poolFlamekinGildweaver,
     _poolFledglingDjinn,
     _poolFleetfeatherSandals,
@@ -1058,6 +1061,7 @@ const shard: CardShard = {
     _poolThunderboltsConspiracy,
     _poolTitaniaProudPummeler,
     _poolTitaniumMan,
+    _poolTocatliHonorGuard,
     _poolTonberry,
     _poolTorporOrb,
     _poolToucanPuffin,

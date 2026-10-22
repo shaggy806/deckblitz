@@ -157,6 +157,7 @@ import _poolEmberethSkyblazer from "../pool/embereth-skyblazer.js";
 import _poolEmbraceOblivion from "../pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEmeraldCharm from "../pool/emerald-charm.js";
+import _poolEmissaryOfSunrise from "../pool/emissary-of-sunrise.js";
 import _poolEndlessRanksOfTheDead from "../pool/endless-ranks-of-the-dead.js";
 import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
 import _poolErdwalRipper from "../pool/erdwal-ripper.js";
@@ -243,6 +244,7 @@ import _poolHolyStrength from "../pool/holy-strength.js";
 import _poolHondenOfSeeingWinds from "../pool/honden-of-seeing-winds.js";
 import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
+import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
@@ -385,6 +387,7 @@ import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
+import _poolRagingSwordtooth from "../pool/raging-swordtooth.js";
 import _poolRakalite from "../pool/rakalite.js";
 import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
@@ -767,6 +770,7 @@ const shard: CardShard = {
     _poolEmbraceOblivion,
     _poolEmbraceTheParadox,
     _poolEmeraldCharm,
+    _poolEmissaryOfSunrise,
     _poolEndlessRanksOfTheDead,
     _poolEntrapmentManeuver,
     _poolErdwalRipper,
@@ -853,6 +857,7 @@ const shard: CardShard = {
     _poolHondenOfSeeingWinds,
     _poolHorridShadowspinner,
     _poolHowlFromBeyond,
+    _poolHuatlisSpurring,
     _poolHyalopterousLemure,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
@@ -995,6 +1000,7 @@ const shard: CardShard = {
     _poolPuppeteerClique,
     _poolPygmyAllosaurus,
     _poolRagingKavu,
+    _poolRagingSwordtooth,
     _poolRakalite,
     _poolRakishCrew,
     _poolRampageOfTheValkyries,

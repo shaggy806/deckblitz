@@ -40,6 +40,7 @@ import _poolBarTheDoor from "../pool/bar-the-door.js";
 import _poolBardTheBowman from "../pool/bard-the-bowman.js";
 import _poolBattlesongBerserker from "../pool/battlesong-berserker.js";
 import _poolBelakorTheDarkMaster from "../pool/belakor-the-dark-master.js";
+import _poolBishopOfRebirth from "../pool/bishop-of-rebirth.js";
 import _poolBlackcleaveCliffs from "../pool/blackcleave-cliffs.js";
 import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
 import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
@@ -81,6 +82,7 @@ import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
+import _poolConquerorsGalleon from "../pool/conquerors-galleon.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
 import _poolCorporealProjection from "../pool/corporeal-projection.js";
@@ -109,6 +111,7 @@ import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
+import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
@@ -339,6 +342,7 @@ import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
+import _poolPerilousVoyage from "../pool/perilous-voyage.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
@@ -362,6 +366,7 @@ import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
 import _poolRalStormConduit from "../pool/ral-storm-conduit.js";
+import _poolRallyingRoar from "../pool/rallying-roar.js";
 import _poolRampagingSpiketail from "../pool/rampaging-spiketail.js";
 import _poolRampantRejuvenator from "../pool/rampant-rejuvenator.js";
 import _poolRapidHybridization from "../pool/rapid-hybridization.js";
@@ -637,6 +642,7 @@ const shard: CardShard = {
     _poolBardTheBowman,
     _poolBattlesongBerserker,
     _poolBelakorTheDarkMaster,
+    _poolBishopOfRebirth,
     _poolBlackcleaveCliffs,
     _poolBlackcleaveGoblin,
     _poolBladeBlizzardKitsune,
@@ -678,6 +684,7 @@ const shard: CardShard = {
     _poolCollectorOuphe,
     _poolColossapede,
     _poolConclaveCavalier,
+    _poolConquerorsGalleon,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,
     _poolCorporealProjection,
@@ -706,6 +713,7 @@ const shard: CardShard = {
     _poolDestructiveDigger,
     _poolDevilsPlay,
     _poolDictateOfHeliod,
+    _poolDireFleetCaptain,
     _poolDisfigure,
     _poolDisplacerKitten,
     _poolDivineResilience,
@@ -936,6 +944,7 @@ const shard: CardShard = {
     _poolOverzealousMuscle,
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
+    _poolPerilousVoyage,
     _poolPhantasmalDreadmaw,
     _poolPilferingImp,
     _poolPitilessCarnage,
@@ -959,6 +968,7 @@ const shard: CardShard = {
     _poolPyromanticPilgrim,
     _poolRakdosTheMuscle,
     _poolRalStormConduit,
+    _poolRallyingRoar,
     _poolRampagingSpiketail,
     _poolRampantRejuvenator,
     _poolRapidHybridization,

@@ -35,6 +35,7 @@ import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAtomize from "../pool/atomize.js";
+import _poolAtzocanArcher from "../pool/atzocan-archer.js";
 import _poolAugmenterPugilist from "../pool/augmenter-pugilist.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
@@ -162,6 +163,7 @@ import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
 import _poolFinishingBlow from "../pool/finishing-blow.js";
+import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
@@ -246,6 +248,7 @@ import _poolInspiringUnicorn from "../pool/inspiring-unicorn.js";
 import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
 import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
+import _poolJaceIngeniousMindMage from "../pool/jace-ingenious-mind-mage.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
@@ -354,6 +357,7 @@ import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPurpleWorm from "../pool/purple-worm.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
+import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
@@ -603,6 +607,7 @@ const shard: CardShard = {
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAtomize,
+    _poolAtzocanArcher,
     _poolAugmenterPugilist,
     _poolAuntieOolCursewretch,
     _poolAutonSoldier,
@@ -730,6 +735,7 @@ const shard: CardShard = {
     _poolFetidPools,
     _poolFieryEmancipation,
     _poolFinishingBlow,
+    _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,
     _poolFleetfootDancer,
@@ -814,6 +820,7 @@ const shard: CardShard = {
     _poolInterceptorMechan,
     _poolInvasionOfKarsus,
     _poolIronGiant,
+    _poolJaceIngeniousMindMage,
     _poolJaceUnravelerOfSecrets,
     _poolJaredCarthalion,
     _poolJeditOjanen,
@@ -922,6 +929,7 @@ const shard: CardShard = {
     _poolPurpleWorm,
     _poolPygmyRazorback,
     _poolQarsiRevenant,
+    _poolQueensAgent,
     _poolRadiantDestiny,
     _poolRaftSecurityOfficer,
     _poolRasputinTheOneiromancer,

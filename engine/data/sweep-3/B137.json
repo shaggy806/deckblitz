@@ -1,0 +1,986 @@
+{
+ "batch": "B137",
+ "status": "complete",
+ "ranks": "Ixalan (XLN, 2017-09-29) and Commander 2017 (C17, 2017-08-25): the rest of each set, whole",
+ "authored": [
+  {
+   "name": "Adanto Vanguard",
+   "files": [
+    "engine/src/cards/pool/adanto-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anointed Deacon",
+   "files": [
+    "engine/src/cards/pool/anointed-deacon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arguel's Blood Fast // Temple of Aclazotz",
+   "files": [
+    "engine/src/cards/pool/arguels-blood-fast.ts",
+    "engine/src/cards/pool/temple-of-aclazotz.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atzocan Archer",
+   "files": [
+    "engine/src/cards/pool/atzocan-archer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Belligerent Brontodon",
+   "files": [
+    "engine/src/cards/pool/belligerent-brontodon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bishop of Rebirth",
+   "files": [
+    "engine/src/cards/pool/bishop-of-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bishop of the Bloodstained",
+   "files": [
+    "engine/src/cards/pool/bishop-of-the-bloodstained.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodcrazed Paladin",
+   "files": [
+    "engine/src/cards/pool/bloodcrazed-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodsworn Steward",
+   "files": [
+    "engine/src/cards/pool/bloodsworn-steward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boneyard Scourge",
+   "files": [
+    "engine/src/cards/pool/boneyard-scourge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brazen Buccaneers",
+   "files": [
+    "engine/src/cards/pool/brazen-buccaneers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Burning Sun's Avatar",
+   "files": [
+    "engine/src/cards/pool/burning-suns-avatar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Castaway's Despair",
+   "files": [
+    "engine/src/cards/pool/castaways-despair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commune with Dinosaurs",
+   "files": [
+    "engine/src/cards/pool/commune-with-dinosaurs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conqueror's Galleon // Conqueror's Foothold",
+   "files": [
+    "engine/src/cards/pool/conquerors-foothold.ts",
+    "engine/src/cards/pool/conquerors-galleon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crimson Honor Guard",
+   "files": [
+    "engine/src/cards/pool/crimson-honor-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Vitality",
+   "files": [
+    "engine/src/cards/pool/curse-of-vitality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Saboteur",
+   "files": [
+    "engine/src/cards/pool/daring-saboteur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadeye Plunderers",
+   "files": [
+    "engine/src/cards/pool/deadeye-plunderers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadeye Quartermaster",
+   "files": [
+    "engine/src/cards/pool/deadeye-quartermaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deathgorge Scavenger",
+   "files": [
+    "engine/src/cards/pool/deathgorge-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathless Ancient",
+   "files": [
+    "engine/src/cards/pool/deathless-ancient.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desperate Castaways",
+   "files": [
+    "engine/src/cards/pool/desperate-castaways.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dinosaur Stampede",
+   "files": [
+    "engine/src/cards/pool/dinosaur-stampede.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dire Fleet Captain",
+   "files": [
+    "engine/src/cards/pool/dire-fleet-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dire Fleet Interloper",
+   "files": [
+    "engine/src/cards/pool/dire-fleet-interloper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dreamcaller Siren",
+   "files": [
+    "engine/src/cards/pool/dreamcaller-siren.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskborne Skymarcher",
+   "files": [
+    "engine/src/cards/pool/duskborne-skymarcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elaborate Firecannon",
+   "files": [
+    "engine/src/cards/pool/elaborate-firecannon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emergent Growth",
+   "files": [
+    "engine/src/cards/pool/emergent-growth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Emissary of Sunrise",
+   "files": [
+    "engine/src/cards/pool/emissary-of-sunrise.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Emperor's Vanguard",
+   "files": [
+    "engine/src/cards/pool/emperors-vanguard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Entrancing Melody",
+   "files": [
+    "engine/src/cards/pool/entrancing-melody.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fathom Fleet Captain",
+   "files": [
+    "engine/src/cards/pool/fathom-fleet-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fathom Fleet Cutthroat",
+   "files": [
+    "engine/src/cards/pool/fathom-fleet-cutthroat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fell Flagship",
+   "files": [
+    "engine/src/cards/pool/fell-flagship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fiery Cannonade",
+   "files": [
+    "engine/src/cards/pool/fiery-cannonade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Shrine Keeper",
+   "files": [
+    "engine/src/cards/pool/fire-shrine-keeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Firecannon Blast",
+   "files": [
+    "engine/src/cards/pool/firecannon-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grasping Current",
+   "files": [
+    "engine/src/cards/pool/grasping-current.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grim Captain's Call",
+   "files": [
+    "engine/src/cards/pool/grim-captains-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Headstrong Brute",
+   "files": [
+    "engine/src/cards/pool/headstrong-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartless Pillage",
+   "files": [
+    "engine/src/cards/pool/heartless-pillage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Huatli's Spurring",
+   "files": [
+    "engine/src/cards/pool/huatlis-spurring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Huatli, Dinosaur Knight",
+   "files": [
+    "engine/src/cards/pool/huatli-dinosaur-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imperial Aerosaur",
+   "files": [
+    "engine/src/cards/pool/imperial-aerosaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Imperial Lancer",
+   "files": [
+    "engine/src/cards/pool/imperial-lancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ixalli's Diviner",
+   "files": [
+    "engine/src/cards/pool/ixallis-diviner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Izzet Chemister",
+   "files": [
+    "engine/src/cards/pool/izzet-chemister.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Sentinel",
+   "files": [
+    "engine/src/cards/pool/jaces-sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jace, Ingenious Mind-Mage",
+   "files": [
+    "engine/src/cards/pool/jace-ingenious-mind-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jade Guardian",
+   "files": [
+    "engine/src/cards/pool/jade-guardian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kindred Boon",
+   "files": [
+    "engine/src/cards/pool/kindred-boon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kumena's Speaker",
+   "files": [
+    "engine/src/cards/pool/kumenas-speaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Legion Conquistador",
+   "files": [
+    "engine/src/cards/pool/legion-conquistador.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Licia, Sanguine Tribune",
+   "files": [
+    "engine/src/cards/pool/licia-sanguine-tribune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lookout's Dispersal",
+   "files": [
+    "engine/src/cards/pool/lookouts-dispersal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lurking Chupacabra",
+   "files": [
+    "engine/src/cards/pool/lurking-chupacabra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magus of the Mind",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marauding Looter",
+   "files": [
+    "engine/src/cards/pool/marauding-looter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "March of the Drowned",
+   "files": [
+    "engine/src/cards/pool/march-of-the-drowned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mathas, Fiend Seeker",
+   "files": [
+    "engine/src/cards/pool/mathas-fiend-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Branchwalker",
+   "files": [
+    "engine/src/cards/pool/merfolk-branchwalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirror of the Forebears",
+   "files": [
+    "engine/src/cards/pool/mirror-of-the-forebears.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Old-Growth Dryads",
+   "files": [
+    "engine/src/cards/pool/old-growth-dryads.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perilous Voyage",
+   "files": [
+    "engine/src/cards/pool/perilous-voyage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pirate's Cutlass",
+   "files": [
+    "engine/src/cards/pool/pirates-cutlass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pounce",
+   "files": [
+    "engine/src/cards/pool/pounce.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pterodon Knight",
+   "files": [
+    "engine/src/cards/pool/pterodon-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Queen's Agent",
+   "files": [
+    "engine/src/cards/pool/queens-agent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Raging Swordtooth",
+   "files": [
+    "engine/src/cards/pool/raging-swordtooth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rallying Roar",
+   "files": [
+    "engine/src/cards/pool/rallying-roar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Repeating Barrage",
+   "files": [
+    "engine/src/cards/pool/repeating-barrage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rigging Runner",
+   "files": [
+    "engine/src/cards/pool/rigging-runner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "River Heralds' Boon",
+   "files": [
+    "engine/src/cards/pool/river-heralds-boon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rowdy Crew",
+   "files": [
+    "engine/src/cards/pool/rowdy-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruin Raider",
+   "files": [
+    "engine/src/cards/pool/ruin-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruthless Knave",
+   "files": [
+    "engine/src/cards/pool/ruthless-knave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanguine Sacrament",
+   "files": [
+    "engine/src/cards/pool/sanguine-sacrament.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seekers' Squire",
+   "files": [
+    "engine/src/cards/pool/seekers-squire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sentinel Totem",
+   "files": [
+    "engine/src/cards/pool/sentinel-totem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shadowed Caravel",
+   "files": [
+    "engine/src/cards/pool/shadowed-caravel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shaper Apprentice",
+   "files": [
+    "engine/src/cards/pool/shaper-apprentice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shapers' Sanctuary",
+   "files": [
+    "engine/src/cards/pool/shapers-sanctuary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shipwreck Looter",
+   "files": [
+    "engine/src/cards/pool/shipwreck-looter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siren Lookout",
+   "files": [
+    "engine/src/cards/pool/siren-lookout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skulduggery",
+   "files": [
+    "engine/src/cards/pool/skulduggery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snapping Sailback",
+   "files": [
+    "engine/src/cards/pool/snapping-sailback.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Storm Fleet Aerialist",
+   "files": [
+    "engine/src/cards/pool/storm-fleet-aerialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm Sculptor",
+   "files": [
+    "engine/src/cards/pool/storm-sculptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun-Blessed Mount",
+   "files": [
+    "engine/src/cards/pool/sun-blessed-mount.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sun-Crowned Hunters",
+   "files": [
+    "engine/src/cards/pool/sun-crowned-hunters.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunrise Seeker",
+   "files": [
+    "engine/src/cards/pool/sunrise-seeker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tempest Caller",
+   "files": [
+    "engine/src/cards/pool/tempest-caller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrash of Raptors",
+   "files": [
+    "engine/src/cards/pool/thrash-of-raptors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thundering Spineback",
+   "files": [
+    "engine/src/cards/pool/thundering-spineback.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tilonalli's Knight",
+   "files": [
+    "engine/src/cards/pool/tilonallis-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tilonalli's Skinshifter",
+   "files": [
+    "engine/src/cards/pool/tilonallis-skinshifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tishana's Wayfinder",
+   "files": [
+    "engine/src/cards/pool/tishanas-wayfinder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tocatli Honor Guard",
+   "files": [
+    "engine/src/cards/pool/tocatli-honor-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampire's Zeal",
+   "files": [
+    "engine/src/cards/pool/vampires-zeal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vance's Blasting Cannons // Spitfire Bastion",
+   "files": [
+    "engine/src/cards/pool/spitfire-bastion.ts",
+    "engine/src/cards/pool/vances-blasting-cannons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verdant Rebirth",
+   "files": [
+    "engine/src/cards/pool/verdant-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vindictive Lich",
+   "files": [
+    "engine/src/cards/pool/vindictive-lich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vineshaper Mystic",
+   "files": [
+    "engine/src/cards/pool/vineshaper-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waker of the Wilds",
+   "files": [
+    "engine/src/cards/pool/waker-of-the-wilds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walk the Plank",
+   "files": [
+    "engine/src/cards/pool/walk-the-plank.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanted Scoundrels",
+   "files": [
+    "engine/src/cards/pool/wanted-scoundrels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wasitora, Nekoru Queen",
+   "files": [
+    "engine/src/cards/pool/wasitora-nekoru-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Watertrap Weaver",
+   "files": [
+    "engine/src/cards/pool/watertrap-weaver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wildgrowth Walker",
+   "files": [
+    "engine/src/cards/pool/wildgrowth-walker.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Ashes of the Abhorrent",
+   "needs": [
+    "static:prohibit-cast-from-graveyard-or-library",
+    "static:prohibit-graveyard-card-abilities"
+   ],
+   "why": "players can't cast spells from graveyards or activate abilities of cards in graveyards"
+  },
+  {
+   "name": "Axis of Mortality",
+   "needs": [
+    "effect:exchange-life-totals"
+   ],
+   "why": "two target players exchange life totals; only life-with-toughness exchange exists"
+  },
+  {
+   "name": "Blinding Fog",
+   "needs": [
+    "replacement:prevent-damage-to-filter-this-turn"
+   ],
+   "why": "prevent all damage that would be dealt to creatures this turn, including ones that enter later"
+  },
+  {
+   "name": "Bonded Horncrest",
+   "needs": [
+    "static:cant-attack-alone"
+   ],
+   "why": "can't attack or block alone"
+  },
+  {
+   "name": "Boneyard Parley",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "an opponent separates the exiled cards into two piles; you choose one"
+  },
+  {
+   "name": "Deadeye Tracker",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "two target cards from one opponent's graveyard (the ruling); targets can't require one graveyard"
+  },
+  {
+   "name": "Fortunate Few",
+   "needs": [
+    "effect:each-player-chooses-destroy-rest"
+   ],
+   "why": "each player chooses a nonland permanent they don't control not yet chosen; destroy all others"
+  },
+  {
+   "name": "Huatli, Warrior Poet",
+   "needs": [
+    "cost:loyalty-x"
+   ],
+   "why": "−X loyalty cost, and X damage divided among any number of target creatures"
+  },
+  {
+   "name": "Ixalan's Binding",
+   "needs": [
+    "filter:same-name-as-exiled-with-source"
+   ],
+   "why": "opponents can't cast spells with the same name as the exiled card"
+  },
+  {
+   "name": "Jace, Cunning Castaway",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "+1: whenever one or more creatures you control deal combat damage to a player this turn, loot — a delayed trigger that fires repeatedly"
+  },
+  {
+   "name": "Kheru Mind-Eater",
+   "needs": [
+    "zone:cast-from-linked-exile"
+   ],
+   "why": "that player exiles a card from hand face down, linked to this creature; you may look at and play those cards"
+  },
+  {
+   "name": "Kitesail Freebooter",
+   "needs": [
+    "effect:exile-from-hand-until-source-leaves"
+   ],
+   "why": "you choose a noncreature, nonland card from a revealed hand and exile it until this creature leaves"
+  },
+  {
+   "name": "Mairsil, the Pretender",
+   "needs": [
+    "static:activated-abilities-of-exiled-with-counter"
+   ],
+   "why": "has the activated abilities of every card you own in exile with a cage counter, each once a turn"
+  },
+  {
+   "name": "Nazahn, Revered Bladesmith",
+   "needs": [
+    "effect:search-destination-by-type"
+   ],
+   "why": "the found Equipment goes onto the battlefield if it's Hammer of Nazahn, else to hand"
+  },
+  {
+   "name": "O-Kagachi, Vengeful Kami",
+   "needs": [
+    "condition:player-attacked-you-last-turn"
+   ],
+   "why": "if that player attacked you during their last turn: tracked (attackedYouDuringTheirLastTurn) but no condition reads it"
+  },
+  {
+   "name": "Portal Mage",
+   "needs": [
+    "effect:reselect-attack-target"
+   ],
+   "why": "reselect which player or permanent an attacking creature is attacking"
+  },
+  {
+   "name": "Priest of the Wakening Sun",
+   "needs": [
+    "effect:may-reveal-from-hand"
+   ],
+   "why": "you may reveal a Dinosaur card from your hand; if you do, gain 2 life"
+  },
+  {
+   "name": "Shapers of Nature",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "remove a +1/+1 counter from a creature you control as a cost; removeCounter reads only the source"
+  },
+  {
+   "name": "Shifting Shadow",
+   "needs": [
+    "effect:attach-granting-aura"
+   ],
+   "why": "the granted upkeep trigger attaches the Aura that granted it to the creature revealed"
+  },
+  {
+   "name": "Sorcerous Spyglass",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "look at an opponent's hand, then choose any card name; activated abilities of that name can't be activated"
+  },
+  {
+   "name": "Spike-Tailed Ceratops",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature each combat"
+  },
+  {
+   "name": "Stalking Leonin",
+   "needs": [
+    "decision:secret-choice"
+   ],
+   "why": "secretly choose an opponent; revealing the choice is the activation cost"
+  },
+  {
+   "name": "Steadfast Armasaur",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "target creature blocking or blocked by it"
+  },
+  {
+   "name": "Sword-Point Diplomacy",
+   "needs": [
+    "decision:unless-any-opponent-pays-per-card"
+   ],
+   "why": "per revealed card, any opponent may pay 3 life to keep it from your hand; the rest exiled"
+  },
+  {
+   "name": "Taigam, Ojutai Master",
+   "needs": [
+    "effect:grant-rebound-to-spell"
+   ],
+   "why": "an instant or sorcery cast from hand gains rebound if Taigam attacked this turn"
+  },
+  {
+   "name": "Taigam, Sidisi's Hand",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "Skip your draw step"
+  },
+  {
+   "name": "Trove of Temptation",
+   "needs": [
+    "static:player-must-attack-with-a-creature"
+   ],
+   "why": "each opponent must attack you or a planeswalker you control with at least one creature each combat"
+  },
+  {
+   "name": "Vraska, Relic Seeker",
+   "needs": [
+    "effect:life-total-becomes"
+   ],
+   "why": "−10: target player's life total becomes 1"
+  }
+ ]
+}

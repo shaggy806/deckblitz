@@ -369,6 +369,7 @@ import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
 import _poolPopularEntertainer from "../pool/popular-entertainer.js";
 import _poolPossessionEngine from "../pool/possession-engine.js";
+import _poolPounce from "../pool/pounce.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrizefight from "../pool/prizefight.js";
@@ -521,6 +522,7 @@ import _poolVolrathsGardens from "../pool/volraths-gardens.js";
 import _poolVoraciousVermin from "../pool/voracious-vermin.js";
 import _poolVorapede from "../pool/vorapede.js";
 import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
+import _poolWalkThePlank from "../pool/walk-the-plank.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWarriorsResolve from "../pool/warriors-resolve.js";
 import _poolWarteyeWitch from "../pool/warteye-witch.js";
@@ -541,6 +543,7 @@ import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
+import _tokensCatDragonToken from "../tokens/cat-dragon-token.js";
 import _tokensDemonToken66FlyingTrampleUpkeepSacrifice from "../tokens/demon-token-6-6-flying-trample-upkeep-sacrifice.js";
 import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
 import _tokensForestTentacleToken from "../tokens/forest-tentacle-token.js";
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _poolPoliticalTriumph,
     _poolPopularEntertainer,
     _poolPossessionEngine,
+    _poolPounce,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrizefight,
@@ -1080,6 +1084,7 @@ const shard: CardShard = {
     _poolVoraciousVermin,
     _poolVorapede,
     _poolVraskasFinalMercy,
+    _poolWalkThePlank,
     _poolWardenOfTheEye,
     _poolWarriorsResolve,
     _poolWarteyeWitch,
@@ -1102,6 +1107,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBadgerToken,
+    _tokensCatDragonToken,
     _tokensDemonToken66FlyingTrampleUpkeepSacrifice,
     _tokensDragonToken55,
     _tokensForestTentacleToken,

@@ -44,6 +44,7 @@ import _poolBeetleLegacyCriminal from "../pool/beetle-legacy-criminal.js";
 import _poolBefriendingTheMoths from "../pool/befriending-the-moths.js";
 import _poolBergStrider from "../pool/berg-strider.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
+import _poolBishopOfTheBloodstained from "../pool/bishop-of-the-bloodstained.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
 import _poolBlazingHope from "../pool/blazing-hope.js";
 import _poolBleedingEdge from "../pool/bleeding-edge.js";
@@ -75,6 +76,7 @@ import _poolCabalCoffers from "../pool/cabal-coffers.js";
 import _poolCaptivatingCave from "../pool/captivating-cave.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCastDown from "../pool/cast-down.js";
+import _poolCastawaysDespair from "../pool/castaways-despair.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
@@ -389,6 +391,7 @@ import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js
 import _poolRookieMistake from "../pool/rookie-mistake.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
+import _poolRuinRaider from "../pool/ruin-raider.js";
 import _poolRukhEgg from "../pool/rukh-egg.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
 import _poolRunAmok from "../pool/run-amok.js";
@@ -599,6 +602,7 @@ const shard: CardShard = {
     _poolBefriendingTheMoths,
     _poolBergStrider,
     _poolBertaWiseExtrapolator,
+    _poolBishopOfTheBloodstained,
     _poolBlackDragonGate,
     _poolBlazingHope,
     _poolBleedingEdge,
@@ -630,6 +634,7 @@ const shard: CardShard = {
     _poolCaptivatingCave,
     _poolCastAwayDoubt,
     _poolCastDown,
+    _poolCastawaysDespair,
     _poolCatBurglar,
     _poolCatacombSlug,
     _poolCausticBronco,
@@ -944,6 +949,7 @@ const shard: CardShard = {
     _poolRookieMistake,
     _poolRootwaterCommando,
     _poolRoughRhinoCavalry,
+    _poolRuinRaider,
     _poolRukhEgg,
     _poolRumorGatherer,
     _poolRunAmok,

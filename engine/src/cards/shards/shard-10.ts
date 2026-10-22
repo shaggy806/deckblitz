@@ -123,6 +123,8 @@ import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
+import _poolDeadeyePlunderers from "../pool/deadeye-plunderers.js";
+import _poolDeadeyeQuartermaster from "../pool/deadeye-quartermaster.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
@@ -172,6 +174,7 @@ import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
+import _poolFathomFleetCutthroat from "../pool/fathom-fleet-cutthroat.js";
 import _poolFearlessFledgling from "../pool/fearless-fledgling.js";
 import _poolFecundity from "../pool/fecundity.js";
 import _poolFeedTheSwarm from "../pool/feed-the-swarm.js";
@@ -256,6 +259,7 @@ import _poolIronVerdict from "../pool/iron-verdict.js";
 import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
+import _poolJacesSentinel from "../pool/jaces-sentinel.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
 import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
@@ -724,6 +728,8 @@ const shard: CardShard = {
     _poolDavrielsShadowfugue,
     _poolDaybreakCharger,
     _poolDeadbridgeChant,
+    _poolDeadeyePlunderers,
+    _poolDeadeyeQuartermaster,
     _poolDecodeTransmissions,
     _poolDefendTheCelestus,
     _poolDefensiveStance,
@@ -773,6 +779,7 @@ const shard: CardShard = {
     _poolEverflowingChalice,
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
+    _poolFathomFleetCutthroat,
     _poolFearlessFledgling,
     _poolFecundity,
     _poolFeedTheSwarm,
@@ -857,6 +864,7 @@ const shard: CardShard = {
     _poolIronrootWarlord,
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
+    _poolJacesSentinel,
     _poolJeskaiBanner,
     _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,

@@ -109,6 +109,7 @@ import _poolDawnrayArcher from "../pool/dawnray-archer.js";
 import _poolDawntreaderElk from "../pool/dawntreader-elk.js";
 import _poolDeadeyeRigHauler from "../pool/deadeye-rig-hauler.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
+import _poolDeathlessAncient from "../pool/deathless-ancient.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDemonWall from "../pool/demon-wall.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
@@ -392,6 +393,7 @@ import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolRevitalize from "../pool/revitalize.js";
+import _poolRiggingRunner from "../pool/rigging-runner.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
@@ -685,6 +687,7 @@ const shard: CardShard = {
     _poolDawntreaderElk,
     _poolDeadeyeRigHauler,
     _poolDeadlyBrew,
+    _poolDeathlessAncient,
     _poolDedicatedCommons,
     _poolDemonWall,
     _poolDemonicTutor,
@@ -968,6 +971,7 @@ const shard: CardShard = {
     _poolResearchThief,
     _poolRestlessDead,
     _poolRevitalize,
+    _poolRiggingRunner,
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
     _poolRiseAgain,

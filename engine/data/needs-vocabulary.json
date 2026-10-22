@@ -9634,6 +9634,22 @@
   },
   "static:colorless-damage-sources": {
    "example": "Ghostly Flame"
+  },
+  "decision:unless-any-opponent-pays-per-card": {
+   "family": "effect:choices-by-other-players",
+   "example": "Sword-Point Diplomacy: for each of three revealed cards, any opponent may pay 3 life to keep it out of your hand — `unless` asks one chooser about one effect, not every opponent per card."
+  },
+  "static:prohibit-graveyard-card-abilities": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Ashes of the Abhorrent: players can't activate abilities of cards in graveyards — `abilitiesProhibited` reads only battlefield sources."
+  },
+  "effect:attach-granting-aura": {
+   "family": "effect:attach-extensions",
+   "example": "Shifting Shadow: the upkeep trigger it grants attaches the granting Aura to the creature revealed — no effect refers to the Aura that granted the ability."
+  },
+  "effect:may-reveal-from-hand": {
+   "family": "effect:this-way-results",
+   "example": "Priest of the Wakening Sun: you may reveal a Dinosaur card from your hand; if you do, gain 2 life — no optional reveal-a-card-from-hand effect."
   }
  }
 }

@@ -281,6 +281,7 @@ import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
+import _poolLiciaSanguineTribune from "../pool/licia-sanguine-tribune.js";
 import _poolLifetap from "../pool/lifetap.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
@@ -491,6 +492,7 @@ import _poolTectonicHazard from "../pool/tectonic-hazard.js";
 import _poolTeferisSentinel from "../pool/teferis-sentinel.js";
 import _poolTeganJovanka from "../pool/tegan-jovanka.js";
 import _poolTempestAngler from "../pool/tempest-angler.js";
+import _poolTempestCaller from "../pool/tempest-caller.js";
 import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
@@ -515,6 +517,7 @@ import _poolThrasherBrute from "../pool/thrasher-brute.js";
 import _poolThunderousDebut from "../pool/thunderous-debut.js";
 import _poolTiamatsFanatics from "../pool/tiamats-fanatics.js";
 import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
+import _poolTilonallisKnight from "../pool/tilonallis-knight.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
 import _poolTimelessDragon from "../pool/timeless-dragon.js";
 import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
@@ -879,6 +882,7 @@ const shard: CardShard = {
     _poolLedevGuardian,
     _poolLeelaSevateemWarrior,
     _poolLetTheGalaxyBurn,
+    _poolLiciaSanguineTribune,
     _poolLifetap,
     _poolLightningAngel,
     _poolLightningMare,
@@ -1089,6 +1093,7 @@ const shard: CardShard = {
     _poolTeferisSentinel,
     _poolTeganJovanka,
     _poolTempestAngler,
+    _poolTempestCaller,
     _poolTempestDrake,
     _poolTemporalManipulation,
     _poolTeoSpiritedGlider,
@@ -1113,6 +1118,7 @@ const shard: CardShard = {
     _poolThunderousDebut,
     _poolTiamatsFanatics,
     _poolTidusBlitzballStar,
+    _poolTilonallisKnight,
     _poolTimberlandRuins,
     _poolTimelessDragon,
     _poolTivashGloomSummoner,

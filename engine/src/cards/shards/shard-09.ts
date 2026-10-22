@@ -282,6 +282,7 @@ import _poolKnightfisher from "../pool/knightfisher.js";
 import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
 import _poolKrenkosEnforcer from "../pool/krenkos-enforcer.js";
 import _poolKrosanDruid from "../pool/krosan-druid.js";
+import _poolKumenasSpeaker from "../pool/kumenas-speaker.js";
 import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
 import _poolLakeTown from "../pool/lake-town.js";
@@ -386,6 +387,7 @@ import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
+import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
@@ -491,6 +493,7 @@ import _poolStreamHopper from "../pool/stream-hopper.js";
 import _poolStudiousFirstYear from "../pool/studious-first-year.js";
 import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
+import _poolSunCrownedHunters from "../pool/sun-crowned-hunters.js";
 import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
@@ -502,6 +505,7 @@ import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
 import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
+import _poolTempleOfAclazotz from "../pool/temple-of-aclazotz.js";
 import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
 import _poolTerritorialKavu from "../pool/territorial-kavu.js";
@@ -547,6 +551,7 @@ import _poolVeteranBeastrider from "../pool/veteran-beastrider.js";
 import _poolVeteransSidearm from "../pool/veterans-sidearm.js";
 import _poolVibraniumStrikeGauntlets from "../pool/vibranium-strike-gauntlets.js";
 import _poolVillageReavers from "../pool/village-reavers.js";
+import _poolVineshaperMystic from "../pool/vineshaper-mystic.js";
 import _poolVioletPall from "../pool/violet-pall.js";
 import _poolVitalize from "../pool/vitalize.js";
 import _poolVodalianMage from "../pool/vodalian-mage.js";
@@ -885,6 +890,7 @@ const shard: CardShard = {
     _poolKothOfTheHomestead,
     _poolKrenkosEnforcer,
     _poolKrosanDruid,
+    _poolKumenasSpeaker,
     _poolKykarZephyrAwakener,
     _poolLagacLizard,
     _poolLakeTown,
@@ -989,6 +995,7 @@ const shard: CardShard = {
     _poolProfessorZeiAnthropologist,
     _poolProsperousBandit,
     _poolPsychicSymbiont,
+    _poolPterodonKnight,
     _poolPunySnack,
     _poolQuilledCharger,
     _poolRageReflection,
@@ -1094,6 +1101,7 @@ const shard: CardShard = {
     _poolStudiousFirstYear,
     _poolSubterfuge,
     _poolSummonIxion,
+    _poolSunCrownedHunters,
     _poolSunlitHoplite,
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
@@ -1105,6 +1113,7 @@ const shard: CardShard = {
     _poolTangletrap,
     _poolTanukiTransplanter,
     _poolTaxiDriver,
+    _poolTempleOfAclazotz,
     _poolTemurBattleRage,
     _poolTergridGodOfFright,
     _poolTerritorialKavu,
@@ -1150,6 +1159,7 @@ const shard: CardShard = {
     _poolVeteransSidearm,
     _poolVibraniumStrikeGauntlets,
     _poolVillageReavers,
+    _poolVineshaperMystic,
     _poolVioletPall,
     _poolVitalize,
     _poolVodalianMage,

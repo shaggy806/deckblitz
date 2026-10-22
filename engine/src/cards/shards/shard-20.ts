@@ -136,6 +136,7 @@ import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDepravedHarvester from "../pool/depraved-harvester.js";
 import _poolDepressurize from "../pool/depressurize.js";
+import _poolDesperateCastaways from "../pool/desperate-castaways.js";
 import _poolDigUp from "../pool/dig-up.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
@@ -176,6 +177,7 @@ import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
+import _poolFellFlagship from "../pool/fell-flagship.js";
 import _poolFerocification from "../pool/ferocification.js";
 import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
@@ -226,6 +228,7 @@ import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
+import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
@@ -240,6 +243,7 @@ import _poolHarshAnnotation from "../pool/harsh-annotation.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHaythamKenway from "../pool/haytham-kenway.js";
+import _poolHeartlessPillage from "../pool/heartless-pillage.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
 import _poolHeroesForHire from "../pool/heroes-for-hire.js";
@@ -426,6 +430,7 @@ import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
+import _poolRuthlessKnave from "../pool/ruthless-knave.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
 import _poolSandstorm from "../pool/sandstorm.js";
@@ -574,6 +579,7 @@ import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUrzasTome from "../pool/urzas-tome.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
+import _poolVancesBlastingCannons from "../pool/vances-blasting-cannons.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
@@ -762,6 +768,7 @@ const shard: CardShard = {
     _poolDelayedBlastFireball,
     _poolDepravedHarvester,
     _poolDepressurize,
+    _poolDesperateCastaways,
     _poolDigUp,
     _poolDimirLocket,
     _poolDinosaurHunter,
@@ -802,6 +809,7 @@ const shard: CardShard = {
     _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFavorOfJukai,
+    _poolFellFlagship,
     _poolFerocification,
     _poolFeywildTrickster,
     _poolFierceWitchstalker,
@@ -852,6 +860,7 @@ const shard: CardShard = {
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
+    _poolGrimCaptainsCall,
     _poolGrimDiscovery,
     _poolGrimWanderer,
     _poolGrizzledOutrider,
@@ -866,6 +875,7 @@ const shard: CardShard = {
     _poolHateMirage,
     _poolHawkeyeTrickShot,
     _poolHaythamKenway,
+    _poolHeartlessPillage,
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
     _poolHeroesForHire,
@@ -1052,6 +1062,7 @@ const shard: CardShard = {
     _poolRitualOfSoot,
     _poolRottedHystrix,
     _poolRubyMedallion,
+    _poolRuthlessKnave,
     _poolSanarUnfinishedGenius,
     _poolSandbendersStorm,
     _poolSandstorm,
@@ -1200,6 +1211,7 @@ const shard: CardShard = {
     _poolUrzasTome,
     _poolUtromMonitor,
     _poolValentinaAllegraDeFontaine,
+    _poolVancesBlastingCannons,
     _poolVeloheartBike,
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,

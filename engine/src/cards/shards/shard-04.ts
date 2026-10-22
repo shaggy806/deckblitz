@@ -85,6 +85,7 @@ import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
 import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
+import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
 import _poolCursedCourtier from "../pool/cursed-courtier.js";
 import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
@@ -145,6 +146,7 @@ import _poolFalkenrathCelebrants from "../pool/falkenrath-celebrants.js";
 import _poolFanaticalOffering from "../pool/fanatical-offering.js";
 import _poolFangbladeEviscerator from "../pool/fangblade-eviscerator.js";
 import _poolFatefulDiscovery from "../pool/fateful-discovery.js";
+import _poolFathomFleetCaptain from "../pool/fathom-fleet-captain.js";
 import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
 import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
@@ -248,6 +250,7 @@ import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
+import _poolKindredBoon from "../pool/kindred-boon.js";
 import _poolKingCheetah from "../pool/king-cheetah.js";
 import _poolKingpinWilsonFisk from "../pool/kingpin-wilson-fisk.js";
 import _poolKinscaerSentry from "../pool/kinscaer-sentry.js";
@@ -410,6 +413,7 @@ import _poolSelfDestruct from "../pool/self-destruct.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
+import _poolShapersSanctuary from "../pool/shapers-sanctuary.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
 import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
@@ -653,6 +657,7 @@ const shard: CardShard = {
     _poolCrumblingNecropolis,
     _poolCubwarden,
     _poolCultistOfTheAbsolute,
+    _poolCurseOfVitality,
     _poolCursedCourtier,
     _poolCutPropulsion,
     _poolDaggerbackBasilisk,
@@ -713,6 +718,7 @@ const shard: CardShard = {
     _poolFanaticalOffering,
     _poolFangbladeEviscerator,
     _poolFatefulDiscovery,
+    _poolFathomFleetCaptain,
     _poolFearOfLostTeeth,
     _poolFelotharTheSteadfast,
     _poolFemerefHealer,
@@ -816,6 +822,7 @@ const shard: CardShard = {
     _poolKeenSense,
     _poolKheruGoldkeeper,
     _poolKindleTheInnerFlame,
+    _poolKindredBoon,
     _poolKingCheetah,
     _poolKingpinWilsonFisk,
     _poolKinscaerSentry,
@@ -978,6 +985,7 @@ const shard: CardShard = {
     _poolShadowRift,
     _poolShadowyBackstreet,
     _poolShamelessCharlatan,
+    _poolShapersSanctuary,
     _poolShelobsAmbush,
     _poolShieldWall,
     _poolShimmeringWings,

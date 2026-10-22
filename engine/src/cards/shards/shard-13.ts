@@ -281,6 +281,7 @@ import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
+import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
 import _poolMadRatter from "../pool/mad-ratter.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
@@ -859,6 +860,7 @@ const shard: CardShard = {
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
     _poolLuminousBroodmoth,
+    _poolLurkingChupacabra,
     _poolMadRatter,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,

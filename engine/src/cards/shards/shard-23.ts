@@ -64,6 +64,7 @@ import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBlessingOfBelzenlok from "../pool/blessing-of-belzenlok.js";
 import _poolBloodForBones from "../pool/blood-for-bones.js";
+import _poolBloodcrazedPaladin from "../pool/bloodcrazed-paladin.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
 import _poolBloodriteInvoker from "../pool/bloodrite-invoker.js";
 import _poolBloodrockCyclops from "../pool/bloodrock-cyclops.js";
@@ -125,6 +126,7 @@ import _poolDawnhartRejuvenator from "../pool/dawnhart-rejuvenator.js";
 import _poolDazzlingLights from "../pool/dazzling-lights.js";
 import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
+import _poolDeathgorgeScavenger from "../pool/deathgorge-scavenger.js";
 import _poolDeathriteShaman from "../pool/deathrite-shaman.js";
 import _poolDemolitionField from "../pool/demolition-field.js";
 import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
@@ -506,6 +508,7 @@ import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
 import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
+import _poolThunderingSpineback from "../pool/thundering-spineback.js";
 import _poolTibaltRakishInstigator from "../pool/tibalt-rakish-instigator.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
@@ -647,6 +650,7 @@ const shard: CardShard = {
     _poolBlessedSpirits,
     _poolBlessingOfBelzenlok,
     _poolBloodForBones,
+    _poolBloodcrazedPaladin,
     _poolBloodflowConnoisseur,
     _poolBloodriteInvoker,
     _poolBloodrockCyclops,
@@ -708,6 +712,7 @@ const shard: CardShard = {
     _poolDazzlingLights,
     _poolDeadlyPlot,
     _poolDeathStroke,
+    _poolDeathgorgeScavenger,
     _poolDeathriteShaman,
     _poolDemolitionField,
     _poolDemonOfLoathing,
@@ -1089,6 +1094,7 @@ const shard: CardShard = {
     _poolThorin,
     _poolThunderLasso,
     _poolThunderingBroodwagon,
+    _poolThunderingSpineback,
     _poolTibaltRakishInstigator,
     _poolTidalKraken,
     _poolTigraFelineFury,

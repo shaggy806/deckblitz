@@ -231,6 +231,7 @@ import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
 import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
+import _poolHuatliDinosaurKnight from "../pool/huatli-dinosaur-knight.js";
 import _poolHulkingCyclops from "../pool/hulking-cyclops.js";
 import _poolHydrasGrowth from "../pool/hydras-growth.js";
 import _poolHydroChanneler from "../pool/hydro-channeler.js";
@@ -467,6 +468,7 @@ import _poolStolenVitality from "../pool/stolen-vitality.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
 import _poolStoneRetrievalUnit from "../pool/stone-retrieval-unit.js";
 import _poolStonesplitterBolt from "../pool/stonesplitter-bolt.js";
+import _poolStormFleetAerialist from "../pool/storm-fleet-aerialist.js";
 import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
 import _poolStormsWrath from "../pool/storms-wrath.js";
@@ -554,6 +556,7 @@ import _poolViashinoFangtail from "../pool/viashino-fangtail.js";
 import _poolViashinoFirstblade from "../pool/viashino-firstblade.js";
 import _poolVictorysEnvoy from "../pool/victorys-envoy.js";
 import _poolVillageRites from "../pool/village-rites.js";
+import _poolVindictiveLich from "../pool/vindictive-lich.js";
 import _poolViridianEmissary from "../pool/viridian-emissary.js";
 import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
@@ -850,6 +853,7 @@ const shard: CardShard = {
     _poolHomaridExplorer,
     _poolHondenOfCleansingFire,
     _poolHoverstonePilgrim,
+    _poolHuatliDinosaurKnight,
     _poolHulkingCyclops,
     _poolHydrasGrowth,
     _poolHydroChanneler,
@@ -1086,6 +1090,7 @@ const shard: CardShard = {
     _poolStoneHavenMedic,
     _poolStoneRetrievalUnit,
     _poolStonesplitterBolt,
+    _poolStormFleetAerialist,
     _poolStormFleetPyromancer,
     _poolStormGodsOracle,
     _poolStormsWrath,
@@ -1173,6 +1178,7 @@ const shard: CardShard = {
     _poolViashinoFirstblade,
     _poolVictorysEnvoy,
     _poolVillageRites,
+    _poolVindictiveLich,
     _poolViridianEmissary,
     _poolVisceridDeepwalker,
     _poolVividGrove,

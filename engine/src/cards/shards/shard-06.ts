@@ -244,6 +244,7 @@ import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolIcatianJavelineers from "../pool/icatian-javelineers.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
+import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
 import _poolInfuriate from "../pool/infuriate.js";
@@ -289,6 +290,7 @@ import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
+import _poolMaraudingLooter from "../pool/marauding-looter.js";
 import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
@@ -534,6 +536,7 @@ import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolVulpikeet from "../pool/vulpikeet.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
+import _poolWantedScoundrels from "../pool/wanted-scoundrels.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWarrant from "../pool/warrant.js";
@@ -827,6 +830,7 @@ const shard: CardShard = {
     _poolHypnoticGrifter,
     _poolIcatianJavelineers,
     _poolImmovableRod,
+    _poolImperialAerosaur,
     _poolImprovisedArmor,
     _poolInfernoTitan,
     _poolInfuriate,
@@ -872,6 +876,7 @@ const shard: CardShard = {
     _poolLydiaFrye,
     _poolManaCrypt,
     _poolManifoldMouse,
+    _poolMaraudingLooter,
     _poolMarduBanner,
     _poolMaritimeGuard,
     _poolMarkedByHonor,
@@ -1117,6 +1122,7 @@ const shard: CardShard = {
     _poolVulpikeet,
     _poolWallOfBlood,
     _poolWallOfOmens,
+    _poolWantedScoundrels,
     _poolWarMachineLegacyOfIron,
     _poolWarlockClass,
     _poolWarrant,

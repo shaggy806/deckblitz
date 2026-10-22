@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Ixalan and Commander 2017, whole** (batch 137): no engine change — raid, explore, enrage,
+  Treasure, crew and the flip enchantments were all there already. 111 cards authored by five
+  `card-author` agents and the lead (14 explore cards the scaffolder finished) — Raging
+  Swordtooth, Vindictive Lich, Kindred Boon, Conqueror's Galleon, Vance's Blasting Cannons,
+  Arguel's Blood Fast, Jace, Ingenious Mind-Mage, Huatli, Dinosaur Knight, Wasitora, Mathas;
+  XLN is 217 of 245, C17 38 of 56. 28 blocked, none sharing a feature (2026-10-22).
 - **Ice Age, whole** (batch 136): **cumulative upkeep** built (rule 702.24, the
   `cumulativeUpkeep(cost)` helper on a new `unless` option `times`), the scaffolder taught it;
   126 of its last 256 cards authored by eight `card-author` agents and the lead — Polar Kraken,

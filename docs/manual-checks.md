@@ -5239,3 +5239,27 @@ the stack
 - **Check:** As the last counter goes, one trigger goes on the stack (not one per priority pass);
   it resolves to sacrifice Dark Depths and make one Marit Lage, a 20/20 flying indestructible
   Avatar. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Vindictive Lich's modes each at a different opponent, three players
+
+*Careful rules call* — "choose one or more; each mode must target a different player": modes and
+their targets are chosen as the dies trigger goes on the stack
+
+- **Setup:** Three players, your precombat main. Your battlefield: Vindictive Lich, three
+  Swamps; your hand: Murder. Each opponent: a creature on the battlefield, two cards in hand.
+- **Do:** Cast Murder on your own Vindictive Lich. Choose the sacrifice mode and the
+  lose-5-life mode, each at a different opponent.
+- **Check:** You're offered at most two modes (one per opponent) and can't aim two modes at one
+  player; one opponent sacrifices their creature, the other loses 5 life, nobody discards.
+  Check at ~768px tall, in a 4-player room too.
+
+### Conqueror's Galleon attacks and comes back a land
+
+*Careful rules call* — "exile it at end of combat, then return it transformed": a new object, and
+only if it's still on the battlefield (rule 400.7)
+
+- **Setup:** Your precombat main. Your battlefield: Conqueror's Galleon, Craw Wurm.
+- **Do:** Crew 4 with the Wurm, attack with the Galleon, let combat end.
+- **Check:** At end of combat the Galleon is exiled and returns as Conqueror's Foothold, an
+  untapped land under your control with its four abilities. Check at ~768px tall, in a 2- and a
+  4-player room.

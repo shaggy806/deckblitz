@@ -10,6 +10,7 @@ import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
+import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
 import _poolArchwingDragon from "../pool/archwing-dragon.js";
@@ -134,6 +135,7 @@ import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDrogskolInfantry from "../pool/drogskol-infantry.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
+import _poolDuskborneSkymarcher from "../pool/duskborne-skymarcher.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
@@ -163,6 +165,7 @@ import _poolFelidarRetreat from "../pool/felidar-retreat.js";
 import _poolFestivalCrasher from "../pool/festival-crasher.js";
 import _poolFestival from "../pool/festival.js";
 import _poolFeywildVisitor from "../pool/feywild-visitor.js";
+import _poolFieryCannonade from "../pool/fiery-cannonade.js";
 import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
@@ -385,6 +388,7 @@ import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRoostOfDrakes from "../pool/roost-of-drakes.js";
 import _poolRoothaMercurialArtist from "../pool/rootha-mercurial-artist.js";
+import _poolRowdyCrew from "../pool/rowdy-crew.js";
 import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
@@ -419,6 +423,7 @@ import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
+import _poolSnappingSailback from "../pool/snapping-sailback.js";
 import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
 import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
@@ -479,6 +484,7 @@ import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
+import _poolThrashOfRaptors from "../pool/thrash-of-raptors.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
 import _poolTitanicBrawl from "../pool/titanic-brawl.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
@@ -555,6 +561,7 @@ import _tokensIncubatorToken from "../tokens/incubator-token.js";
 import _tokensKnightTokenRasputinTheOneiromancer from "../tokens/knight-token-rasputin-the-oneiromancer.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
+import _tokensPirateToken from "../tokens/pirate-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
 import _tokensRagavanToken from "../tokens/ragavan-token.js";
 import _tokensRobotHeroToken11 from "../tokens/robot-hero-token-1-1.js";
@@ -571,6 +578,7 @@ const shard: CardShard = {
     _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAlpineWatchdog,
+    _poolAnointedDeacon,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
     _poolArchwingDragon,
@@ -695,6 +703,7 @@ const shard: CardShard = {
     _poolDrogskolInfantry,
     _poolDuress,
     _poolDuskLegionZealot,
+    _poolDuskborneSkymarcher,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
     _poolEclipsedFlamekin,
@@ -724,6 +733,7 @@ const shard: CardShard = {
     _poolFestivalCrasher,
     _poolFestival,
     _poolFeywildVisitor,
+    _poolFieryCannonade,
     _poolFiligreeAttendant,
     _poolFireLitThicket,
     _poolFirebendingStudent,
@@ -946,6 +956,7 @@ const shard: CardShard = {
     _poolRoilingRegrowth,
     _poolRoostOfDrakes,
     _poolRoothaMercurialArtist,
+    _poolRowdyCrew,
     _poolRunOutOfTown,
     _poolRunawayBoulder,
     _poolRustwingFalcon,
@@ -980,6 +991,7 @@ const shard: CardShard = {
     _poolSlashingTiger,
     _poolSlinkingSerpent,
     _poolSlumberingKeepguard,
+    _poolSnappingSailback,
     _poolSolphimMayhemDominus,
     _poolSomberwaldSage,
     _poolSongOfInspiration,
@@ -1040,6 +1052,7 @@ const shard: CardShard = {
     _poolTheSibsigCeremony,
     _poolThornwoodFalls,
     _poolThoughtErasure,
+    _poolThrashOfRaptors,
     _poolThrivingGrove,
     _poolTitanicBrawl,
     _poolTobiasDoomedConqueror,
@@ -1118,6 +1131,7 @@ const shard: CardShard = {
     _tokensKnightTokenRasputinTheOneiromancer,
     _tokensMoogleToken,
     _tokensPhyrexianGoblinToken,
+    _tokensPirateToken,
     _tokensPlantWarriorToken,
     _tokensRagavanToken,
     _tokensRobotHeroToken11,

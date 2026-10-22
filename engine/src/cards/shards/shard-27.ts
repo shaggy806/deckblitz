@@ -94,6 +94,7 @@ import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
+import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
@@ -136,6 +137,7 @@ import _poolEchoingAssault from "../pool/echoing-assault.js";
 import _poolEcologistsTerrarium from "../pool/ecologists-terrarium.js";
 import _poolEdgewallInn from "../pool/edgewall-inn.js";
 import _poolEdwardKenway from "../pool/edward-kenway.js";
+import _poolElaborateFirecannon from "../pool/elaborate-firecannon.js";
 import _poolElderOwynLyons from "../pool/elder-owyn-lyons.js";
 import _poolEldraziDisplacer from "../pool/eldrazi-displacer.js";
 import _poolElementalBond from "../pool/elemental-bond.js";
@@ -377,6 +379,7 @@ import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
 import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
 import _poolRishadanAirship from "../pool/rishadan-airship.js";
 import _poolRiverHeraldScout from "../pool/river-herald-scout.js";
+import _poolRiverHeraldsBoon from "../pool/river-heralds-boon.js";
 import _poolRiverMerfolk from "../pool/river-merfolk.js";
 import _poolRiverwheelAerialists from "../pool/riverwheel-aerialists.js";
 import _poolRmsTitanic from "../pool/rms-titanic.js";
@@ -666,6 +669,7 @@ const shard: CardShard = {
     _poolCourageInCrisis,
     _poolCourtOfIre,
     _poolCowabunga,
+    _poolCrimsonHonorGuard,
     _poolCrosissCharm,
     _poolCruelAlliance,
     _poolCryptRipper,
@@ -708,6 +712,7 @@ const shard: CardShard = {
     _poolEcologistsTerrarium,
     _poolEdgewallInn,
     _poolEdwardKenway,
+    _poolElaborateFirecannon,
     _poolElderOwynLyons,
     _poolEldraziDisplacer,
     _poolElementalBond,
@@ -949,6 +954,7 @@ const shard: CardShard = {
     _poolRiseOfTheDeathbringer,
     _poolRishadanAirship,
     _poolRiverHeraldScout,
+    _poolRiverHeraldsBoon,
     _poolRiverMerfolk,
     _poolRiverwheelAerialists,
     _poolRmsTitanic,

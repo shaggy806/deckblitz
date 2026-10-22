@@ -94,6 +94,7 @@ import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDigDeep from "../pool/dig-deep.js";
+import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDistrictGuide from "../pool/district-guide.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
@@ -199,6 +200,7 @@ import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
 import _poolHulkAlwaysAngry from "../pool/hulk-always-angry.js";
 import _poolIchorWellspring from "../pool/ichor-wellspring.js";
+import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
 import _poolInfiniteGuidelineStation from "../pool/infinite-guideline-station.js";
 import _poolInsomniaCrownCity from "../pool/insomnia-crown-city.js";
@@ -366,6 +368,7 @@ import _poolSerumSovereign from "../pool/serum-sovereign.js";
 import _poolSettleTheScore from "../pool/settle-the-score.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
+import _poolShaperApprentice from "../pool/shaper-apprentice.js";
 import _poolShatterTheOath from "../pool/shatter-the-oath.js";
 import _poolSheHulkAttorneyAtLaw from "../pool/she-hulk-attorney-at-law.js";
 import _poolShelteredThicket from "../pool/sheltered-thicket.js";
@@ -378,6 +381,7 @@ import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
 import _poolSilverBolt from "../pool/silver-bolt.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
 import _poolSinisterConcierge from "../pool/sinister-concierge.js";
+import _poolSirenLookout from "../pool/siren-lookout.js";
 import _poolSkinwing from "../pool/skinwing.js";
 import _poolSkophosReaver from "../pool/skophos-reaver.js";
 import _poolSkullOfOrm from "../pool/skull-of-orm.js";
@@ -617,6 +621,7 @@ const shard: CardShard = {
     _poolDemonsHorn,
     _poolDesmondMiles,
     _poolDigDeep,
+    _poolDinosaurStampede,
     _poolDiscipleOfTheOldWays,
     _poolDistrictGuide,
     _poolDocksideExtortionist,
@@ -722,6 +727,7 @@ const shard: CardShard = {
     _poolHowlingFury,
     _poolHulkAlwaysAngry,
     _poolIchorWellspring,
+    _poolImperialLancer,
     _poolImperiousPerfect,
     _poolInfiniteGuidelineStation,
     _poolInsomniaCrownCity,
@@ -889,6 +895,7 @@ const shard: CardShard = {
     _poolSettleTheScore,
     _poolSewerdreg,
     _poolShamblingGhoul,
+    _poolShaperApprentice,
     _poolShatterTheOath,
     _poolSheHulkAttorneyAtLaw,
     _poolShelteredThicket,
@@ -901,6 +908,7 @@ const shard: CardShard = {
     _poolSilverBolt,
     _poolSilverbackShaman,
     _poolSinisterConcierge,
+    _poolSirenLookout,
     _poolSkinwing,
     _poolSkophosReaver,
     _poolSkullOfOrm,

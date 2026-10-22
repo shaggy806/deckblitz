@@ -47,6 +47,7 @@ import _poolBattleOfHooverDam from "../pool/battle-of-hoover-dam.js";
 import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
+import _poolBelligerentBrontodon from "../pool/belligerent-brontodon.js";
 import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
 import _poolBigPlay from "../pool/big-play.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
@@ -295,6 +296,7 @@ import _poolMazemindTome from "../pool/mazemind-tome.js";
 import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
+import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
@@ -520,7 +522,9 @@ import _poolWailingGhoul from "../pool/wailing-ghoul.js";
 import _poolWallOfWater from "../pool/wall-of-water.js";
 import _poolWarChariot from "../pool/war-chariot.js";
 import _poolWarMachineJamesRhodes from "../pool/war-machine-james-rhodes.js";
+import _poolWasitoraNekoruQueen from "../pool/wasitora-nekoru-queen.js";
 import _poolWaterWurm from "../pool/water-wurm.js";
+import _poolWatertrapWeaver from "../pool/watertrap-weaver.js";
 import _poolWayOfTheNecromancer from "../pool/way-of-the-necromancer.js";
 import _poolWayfarersBauble from "../pool/wayfarers-bauble.js";
 import _poolWeaponcraftEnthusiast from "../pool/weaponcraft-enthusiast.js";
@@ -617,6 +621,7 @@ const shard: CardShard = {
     _poolBattleflightEagle,
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
+    _poolBelligerentBrontodon,
     _poolBeyondTheQuiet,
     _poolBigPlay,
     _poolBirdsOfParadise,
@@ -865,6 +870,7 @@ const shard: CardShard = {
     _poolMechanShieldmate,
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
+    _poolMerfolkBranchwalker,
     _poolMeriasOutrider,
     _poolMessengerHawk,
     _poolMidnightMangler,
@@ -1090,7 +1096,9 @@ const shard: CardShard = {
     _poolWallOfWater,
     _poolWarChariot,
     _poolWarMachineJamesRhodes,
+    _poolWasitoraNekoruQueen,
     _poolWaterWurm,
+    _poolWatertrapWeaver,
     _poolWayOfTheNecromancer,
     _poolWayfarersBauble,
     _poolWeaponcraftEnthusiast,

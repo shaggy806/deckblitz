@@ -52,6 +52,7 @@ import _poolBlackWard from "../pool/black-ward.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindblast from "../pool/blindblast.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
+import _poolBloodswornSteward from "../pool/bloodsworn-steward.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
 import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
@@ -63,6 +64,7 @@ import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
 import _poolBrambleguardVeteran from "../pool/brambleguard-veteran.js";
 import _poolBranchOfVituGhazi from "../pool/branch-of-vitu-ghazi.js";
+import _poolBrazenBuccaneers from "../pool/brazen-buccaneers.js";
 import _poolBrazenCollector from "../pool/brazen-collector.js";
 import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
@@ -272,6 +274,7 @@ import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
+import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
@@ -280,6 +283,7 @@ import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
 import _poolMasterOfDeath from "../pool/master-of-death.js";
+import _poolMathasFiendSeeker from "../pool/mathas-fiend-seeker.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
 import _poolMeldwebStrider from "../pool/meldweb-strider.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
@@ -631,6 +635,7 @@ const shard: CardShard = {
     _poolBlackWidowIntelExpert,
     _poolBlindblast,
     _poolBlindingDrone,
+    _poolBloodswornSteward,
     _poolBloomTender,
     _poolBloomingBlast,
     _poolBlotOutTheSky,
@@ -642,6 +647,7 @@ const shard: CardShard = {
     _poolBrainFreeze,
     _poolBrambleguardVeteran,
     _poolBranchOfVituGhazi,
+    _poolBrazenBuccaneers,
     _poolBrazenCollector,
     _poolBridledBighorn,
     _poolBroodcallerScourge,
@@ -851,6 +857,7 @@ const shard: CardShard = {
     _poolLotusPathDjinn,
     _poolMaestrosGift,
     _poolMaggotCarrier,
+    _poolMagusOfTheMind,
     _poolMajesticAuricorn,
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,
@@ -859,6 +866,7 @@ const shard: CardShard = {
     _poolMaskOfTheSchemer,
     _poolMassManipulation,
     _poolMasterOfDeath,
+    _poolMathasFiendSeeker,
     _poolMazirekKraulDeathPriest,
     _poolMeldwebStrider,
     _poolMidnightMayhem,

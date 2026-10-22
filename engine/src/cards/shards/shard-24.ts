@@ -156,6 +156,7 @@ import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
+import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
 import _poolExecute from "../pool/execute.js";
@@ -398,6 +399,8 @@ import _poolSeasonedHallowblade from "../pool/seasoned-hallowblade.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
+import _poolSentinelTotem from "../pool/sentinel-totem.js";
+import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
 import _poolShepherdOfTheCosmos from "../pool/shepherd-of-the-cosmos.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
@@ -517,6 +520,7 @@ import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
 import _poolVraskasFall from "../pool/vraskas-fall.js";
 import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
 import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
+import _poolWakerOfTheWilds from "../pool/waker-of-the-wilds.js";
 import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWanderlust from "../pool/wanderlust.js";
@@ -531,6 +535,7 @@ import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
 import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
+import _poolWildgrowthWalker from "../pool/wildgrowth-walker.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
 import _poolWindgraceAcolyte from "../pool/windgrace-acolyte.js";
@@ -719,6 +724,7 @@ const shard: CardShard = {
     _poolElvishHunter,
     _poolElvishVisionary,
     _poolEnergyFlux,
+    _poolEntrancingMelody,
     _poolEntsFury,
     _poolErode,
     _poolExecute,
@@ -961,6 +967,8 @@ const shard: CardShard = {
     _poolSeedshipImpact,
     _poolSeiferAlmasy,
     _poolSelflessPoliceCaptain,
+    _poolSentinelTotem,
+    _poolShadowedCaravel,
     _poolShantottoTacticianMagician,
     _poolShepherdOfTheCosmos,
     _poolShepherdingSpirits,
@@ -1080,6 +1088,7 @@ const shard: CardShard = {
     _poolVraskasFall,
     _poolWakandanShieldGuard,
     _poolWakeningSunsAvatar,
+    _poolWakerOfTheWilds,
     _poolWalkingBulwark,
     _poolWallOfSpears,
     _poolWanderlust,
@@ -1094,6 +1103,7 @@ const shard: CardShard = {
     _poolWerefoxBodyguard,
     _poolWildPackSquad,
     _poolWildShape,
+    _poolWildgrowthWalker,
     _poolWillowWind,
     _poolWindbriskHeights,
     _poolWindgraceAcolyte,

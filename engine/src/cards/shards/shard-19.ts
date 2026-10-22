@@ -63,6 +63,7 @@ import _poolBodyOfResearch from "../pool/body-of-research.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
 import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
+import _poolBoneyardScourge from "../pool/boneyard-scourge.js";
 import _poolBoomerScrapper from "../pool/boomer-scrapper.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
@@ -270,6 +271,7 @@ import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolItemShopkeep from "../pool/item-shopkeep.js";
+import _poolIxallisDiviner from "../pool/ixallis-diviner.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJadedAnalyst from "../pool/jaded-analyst.js";
 import _poolJoinShields from "../pool/join-shields.js";
@@ -385,6 +387,7 @@ import _poolPestilentWolf from "../pool/pestilent-wolf.js";
 import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
+import _poolPiratesCutlass from "../pool/pirates-cutlass.js";
 import _poolPitilessFists from "../pool/pitiless-fists.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlanForAllOutcomes from "../pool/plan-for-all-outcomes.js";
@@ -444,6 +447,7 @@ import _poolScuttlingDoomEngine from "../pool/scuttling-doom-engine.js";
 import _poolSearingBarb from "../pool/searing-barb.js";
 import _poolSecludedSteppe from "../pool/secluded-steppe.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
+import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
@@ -505,6 +509,7 @@ import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
 import _poolSunCrestedPterodon from "../pool/sun-crested-pterodon.js";
 import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
+import _poolSunriseSeeker from "../pool/sunrise-seeker.js";
 import _poolSupportiveParents from "../pool/supportive-parents.js";
 import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
@@ -667,6 +672,7 @@ const shard: CardShard = {
     _poolBogNaughty,
     _poolBoldwyrAggressor,
     _poolBoneyardDesecrator,
+    _poolBoneyardScourge,
     _poolBoomerScrapper,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
@@ -874,6 +880,7 @@ const shard: CardShard = {
     _poolIronManModernMarvel,
     _poolIronrootTreefolk,
     _poolItemShopkeep,
+    _poolIxallisDiviner,
     _poolIzzetChronarch,
     _poolJadedAnalyst,
     _poolJoinShields,
@@ -989,6 +996,7 @@ const shard: CardShard = {
     _poolPettyLarceny,
     _poolPhenaxGodOfDeception,
     _poolPiratePeddlers,
+    _poolPiratesCutlass,
     _poolPitilessFists,
     _poolPlagueMyr,
     _poolPlanForAllOutcomes,
@@ -1048,6 +1056,7 @@ const shard: CardShard = {
     _poolSearingBarb,
     _poolSecludedSteppe,
     _poolSeekerOfSunlight,
+    _poolSeekersSquire,
     _poolSelesnyaSanctuary,
     _poolSerpentsPass,
     _poolSerraPaladin,
@@ -1109,6 +1118,7 @@ const shard: CardShard = {
     _poolSunCrestedPterodon,
     _poolSunbillowVerge,
     _poolSunbladeSamurai,
+    _poolSunriseSeeker,
     _poolSupportiveParents,
     _poolSurrakarMarauder,
     _poolSweetOblivion,

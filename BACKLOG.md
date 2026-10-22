@@ -141,7 +141,8 @@ section keeps only what to do next.
   Ravnica Allegiance, on spectacle and afterlife; batch 125 Guilds of Ravnica, on jump-start;
   batch 126 Commander 2018 and Core Set 2019, with a "can't be blocked" restriction; batch 127
   Battlebond, no engine change; batch 128 Dominaria, on kicker's scaffolder template; batch 129
-  Rivals of Ixalan, on ascend); **next, Ixalan** (117 left), then Commander 2017 (22)
+  Rivals of Ixalan, on ascend; batch 137 Ixalan and Commander 2017, no engine change); **next,
+  Hour of Devastation** (114 left), then Amonkhet (141)
   (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
   "if that creature would die this turn, exile it instead" five
   (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as

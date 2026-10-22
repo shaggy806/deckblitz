@@ -23,6 +23,7 @@ import _poolAnthemOfChampions from "../pool/anthem-of-champions.js";
 import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
+import _poolArguelsBloodFast from "../pool/arguels-blood-fast.js";
 import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArrestersAdmonition from "../pool/arresters-admonition.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
@@ -58,6 +59,7 @@ import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
 import _poolBrokersHideout from "../pool/brokers-hideout.js";
+import _poolBurningSunsAvatar from "../pool/burning-suns-avatar.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
 import _poolCacklingImp from "../pool/cackling-imp.js";
@@ -282,6 +284,7 @@ import _poolMalboro from "../pool/malboro.js";
 import _poolManorSkeleton from "../pool/manor-skeleton.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
+import _poolMarchOfTheDrowned from "../pool/march-of-the-drowned.js";
 import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
@@ -585,6 +588,7 @@ const shard: CardShard = {
     _poolAnthropede,
     _poolAnticipate,
     _poolArchweaver,
+    _poolArguelsBloodFast,
     _poolArmsOfHadar,
     _poolArrestersAdmonition,
     _poolArtisansSorrow,
@@ -620,6 +624,7 @@ const shard: CardShard = {
     _poolBreathWeapon,
     _poolBrokenBond,
     _poolBrokersHideout,
+    _poolBurningSunsAvatar,
     _poolBurnwillowClearing,
     _poolBurrogBefuddler,
     _poolCacklingImp,
@@ -844,6 +849,7 @@ const shard: CardShard = {
     _poolManorSkeleton,
     _poolMantaRiders,
     _poolMaraleafPixie,
+    _poolMarchOfTheDrowned,
     _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,

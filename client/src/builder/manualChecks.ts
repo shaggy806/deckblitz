@@ -3097,4 +3097,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: [{ name: 'Dark Depths', counters: { ice: 1 } }, 'Wastes*3'] },
     }),
   ),
+  preset(
+    "Vindictive Lich's modes each at a different opponent, three players",
+    board({
+      you: { bf: ['Vindictive Lich', 'Swamp*3'], hand: ['Murder'] },
+      opp: [
+        { bf: ['Grizzly Bears'], hand: ['Hill Giant', 'Craw Wurm'] },
+        { bf: ['Hill Giant'], hand: ['Grizzly Bears', 'Craw Wurm'] },
+      ],
+    }),
+  ),
+  preset(
+    "Conqueror's Galleon attacks and comes back a land",
+    board({
+      you: { bf: ["Conqueror's Galleon", 'Craw Wurm'] },
+    }),
+  ),
 ]

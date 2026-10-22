@@ -97,6 +97,7 @@ import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
 import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
+import _poolCommuneWithDinosaurs from "../pool/commune-with-dinosaurs.js";
 import _poolComponentCollector from "../pool/component-collector.js";
 import _poolConclaveGuildmage from "../pool/conclave-guildmage.js";
 import _poolCookingCampsite from "../pool/cooking-campsite.js";
@@ -469,6 +470,7 @@ import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
+import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
@@ -482,6 +484,7 @@ import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolSuddenSpinnerets from "../pool/sudden-spinnerets.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
 import _poolSummonUndead from "../pool/summon-undead.js";
+import _poolSunBlessedMount from "../pool/sun-blessed-mount.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
@@ -514,6 +517,7 @@ import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
 import _poolTifaLockhart from "../pool/tifa-lockhart.js";
+import _poolTilonallisSkinshifter from "../pool/tilonallis-skinshifter.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
 import _poolTooEvilToStayDead from "../pool/too-evil-to-stay-dead.js";
@@ -693,6 +697,7 @@ const shard: CardShard = {
     _poolColossodonYearling,
     _poolCombatMedic,
     _poolCommissarSeverinaRaine,
+    _poolCommuneWithDinosaurs,
     _poolComponentCollector,
     _poolConclaveGuildmage,
     _poolCookingCampsite,
@@ -1065,6 +1070,7 @@ const shard: CardShard = {
     _poolSparringDummy,
     _poolSpelunking,
     _poolSpinelessThug,
+    _poolSpitfireBastion,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
     _poolStartledRelicSloth,
@@ -1078,6 +1084,7 @@ const shard: CardShard = {
     _poolSuddenSpinnerets,
     _poolSummerBloom,
     _poolSummonUndead,
+    _poolSunBlessedMount,
     _poolSuperAdaptoid,
     _poolSurrakDragonclaw,
     _poolSwarmyard,
@@ -1110,6 +1117,7 @@ const shard: CardShard = {
     _poolThunderkinAwakener,
     _poolTidecallerMentor,
     _poolTifaLockhart,
+    _poolTilonallisSkinshifter,
     _poolTimbercrownPathway,
     _poolTombstoneCareerCriminal,
     _poolTooEvilToStayDead,

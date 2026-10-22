@@ -87,6 +87,7 @@ import _poolCommandBeacon from "../pool/command-beacon.js";
 import _poolCommenceTheEndgame from "../pool/commence-the-endgame.js";
 import _poolCommodoreGuff from "../pool/commodore-guff.js";
 import _poolCongregate from "../pool/congregate.js";
+import _poolConquerorsFoothold from "../pool/conquerors-foothold.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
@@ -118,6 +119,7 @@ import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
 import _poolDreamStrix from "../pool/dream-strix.js";
+import _poolDreamcallerSiren from "../pool/dreamcaller-siren.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
 import _poolDroverGrizzly from "../pool/drover-grizzly.js";
 import _poolDuskCharger from "../pool/dusk-charger.js";
@@ -375,6 +377,7 @@ import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
 import _poolRegalImperiosaur from "../pool/regal-imperiosaur.js";
 import _poolRelentlessHunter from "../pool/relentless-hunter.js";
 import _poolRelicsRoar from "../pool/relics-roar.js";
+import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
@@ -678,6 +681,7 @@ const shard: CardShard = {
     _poolCommenceTheEndgame,
     _poolCommodoreGuff,
     _poolCongregate,
+    _poolConquerorsFoothold,
     _poolCopperlineGorge,
     _poolCosmiumKiln,
     _poolCourserOfKruphix,
@@ -709,6 +713,7 @@ const shard: CardShard = {
     _poolDragonwingGlider,
     _poolDreadmawsIre,
     _poolDreamStrix,
+    _poolDreamcallerSiren,
     _poolDrelnoch,
     _poolDroverGrizzly,
     _poolDuskCharger,
@@ -966,6 +971,7 @@ const shard: CardShard = {
     _poolRegalImperiosaur,
     _poolRelentlessHunter,
     _poolRelicsRoar,
+    _poolRepeatingBarrage,
     _poolResoluteRider,
     _poolRiftSower,
     _poolRipApart,
