@@ -16,8 +16,9 @@ import { waitingOn } from './useFollowAction.ts'
  *   playing, whenever another seat that isn't a bot must act, you're moved to
  *   it — so a test never stalls on a seat nobody is sitting at.
  * - **The switch flash**: every change of seat shows "You are now Bob" over
- *   the table in the seat's colour, and the table's frame takes that colour
- *   while you're not at your own seat.
+ *   the table in the seat's colour. (The table was framed in that colour too
+ *   while you were away from your own seat; too much, the user, 2026-10-22 —
+ *   the board says whose turn to act it is on the player's name instead.)
  */
 
 const FLASH_MS = 1400
@@ -78,13 +79,8 @@ export function SeatFollow({
   }, [flash])
 
   const turnOrder = game.view?.turnOrder ?? spec.seats.map((s) => s.player)
-  const home = spec.seats[0]?.player
   return (
     <>
-      {/* The table framed in the seat's colour while you're away from your own. */}
-      {seat !== null && home !== undefined && seat !== home ? (
-        <div className={`seat-away-frame ${seatClassOf(turnOrder, seat)}`} aria-hidden="true" />
-      ) : null}
       {flash !== null ? (
         <div key={flash.n} className={`seat-switch-flash ${seatClassOf(turnOrder, flash.player)}`} role="status">
           You are now <b>{label(flash.player)}</b>

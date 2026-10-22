@@ -205,9 +205,8 @@ export function Stack({
                 {!isGhost && label ? ' · ' : null}
                 {label}
               </div>
-              {/* The card in a box of its own size: the top entry's pulsing
-                  glow is this box's `::after` (App.css), since the tile clips
-                  anything of its own drawn outside it. */}
+              {/* The card in a box of its own size, which a card resolving
+                  off the stack flies from (AnimationLayer). */}
               <div className="stack-card">
                 <CardTile
                   // The decision's cause is a card, not an object on the
@@ -223,7 +222,7 @@ export function Stack({
                 />
               </div>
               {!isGhost && obj.targets && obj.targets.length > 0 ? (
-                <div className="stack-targets">
+                <div className="stack-targets" title={`→ ${obj.targets.map(tgt).join(', ')}`}>
                   {'→ '}
                   {obj.targets.map(tgt).join(', ')}
                 </div>

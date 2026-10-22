@@ -58,9 +58,7 @@
   --card-face: #20202a;
   --card-bar: #2a2a36;
   --card-well: #121217;
-  --card-back-leather: linear-gradient(160deg, #3a2412, #160d06);
-  /* the faint light over the top of the table and the landing page */
-  --table-glow: #1a1a24;
+  --card-back-leather: #26180b;
   /* Elevation, as three steps: a card or control lifted off the table, a
      menu/toast/banner floating over it, a dialog over a scrim. */
   --shadow-raised: 0 6px 16px rgba(0, 0, 0, 0.45);
@@ -207,7 +205,8 @@ button:hover:not(:disabled) {
    own their hover and disabled looks; every other button gets these two. */
 button:hover:not(:disabled, .card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat-deck-slot, .rr-option, .phase-pip, .pp-zone-link) {
   /* a veil over whatever fill the button has, rather than a new fill, so a
-     transparent, tinted or accent button each lifts from its own colour */
+     transparent, tinted or accent button each lifts from its own colour (one
+     flat colour: a "gradient" of a single colour is how CSS lays a veil) */
   background-image: linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
 }
 button:disabled {

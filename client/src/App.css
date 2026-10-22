@@ -33,11 +33,10 @@
      narrows rather than sitting under it. */
   margin-right: var(--side-panel);
   position: relative;
+  /* One flat colour (no sheen: nothing on the site has a gradient, the
+     user, 2026-10-22). background-color, not the shorthand, is what the
+     active-seat wash below transitions. */
   background-color: var(--bg);
-  /* a faint felt-table sheen -- background-color (not this shorthand) is
-     what the active-seat wash below transitions, so it layers on top
-     instead of getting wiped by it */
-  background-image: radial-gradient(ellipse at 50% -10%, var(--table-glow) 0%, transparent 60%);
   transition: background-color 0.6s ease;
 }
 /* whose turn it is, as a faint wash over the whole page */
@@ -66,7 +65,7 @@
   gap: clamp(10px, 1.4vw, 20px);
   padding: 0 clamp(8px, 1.2vw, 16px);
   margin: -12px -20px 8px;
-  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  background: var(--panel);
   border-bottom: 1px solid var(--border);
   font-size: clamp(11px, 1.05vw, 13px);
 }
@@ -789,9 +788,6 @@
 .player-panel.active {
   border-color: var(--accent);
 }
-.player-panel.priority {
-  box-shadow: 0 0 0 2px var(--accent-bg) inset;
-}
 .player-panel.targetable {
   outline: 2px solid var(--warn);
   cursor: pointer;
@@ -810,15 +806,19 @@
 /* per-player identity — the left edge stays this color even while active,
    so "whose panel is this" and "who's active right now" read separately */
 .player-panel.seat-a {
+  --pp-seat: var(--seat-a);
   border-left-color: var(--seat-a);
 }
 .player-panel.seat-b {
+  --pp-seat: var(--seat-b);
   border-left-color: var(--seat-b);
 }
 .player-panel.seat-c {
+  --pp-seat: var(--seat-c);
   border-left-color: var(--seat-c);
 }
 .player-panel.seat-d {
+  --pp-seat: var(--seat-d);
   border-left-color: var(--seat-d);
 }
 .player-panel.seat-a .pp-name {
@@ -832,6 +832,16 @@
 }
 .player-panel.seat-d .pp-name {
   color: var(--seat-d);
+}
+/* Who holds priority: their name, on the board, filled in their seat's
+   colour (`--pp-seat`, above; after the seat colours, which it overrides) —
+   not a ring round the panel or a frame round the screen, which read as too
+   much (the user, 2026-10-22). */
+.player-panel.priority .pp-name {
+  padding: 0 0.45em;
+  background: var(--pp-seat, var(--accent));
+  color: #0d0d10;
+  font-weight: 800;
 }
 .pp-head {
   display: flex;
@@ -1086,7 +1096,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(120% 140% at 50% 0%, var(--panel) 0%, var(--bg) 85%);
+  background: color-mix(in srgb, var(--panel) 45%, var(--bg));
   border: 1px solid var(--border-soft);
   border-radius: 0;
   /* not overflow:hidden -- .quadrant-head/.quadrant-body stay transparent
@@ -1893,7 +1903,7 @@
 }
 /* Art crop, not the full card frame — the same "recognize it at a glance,
    hover to read it" trade .mt-art makes on the board. Reuses .ct-art's own
-   tint-* fallback gradients for a card whose art hasn't loaded (or is
+   tint-* fallback colours for a card whose art hasn't loaded (or is
    blocked), so an empty box is still coloured by the card's identity. */
 .cmdt-art {
   display: block;
@@ -2000,9 +2010,7 @@
    .mt-art come later in this file, so a `background` here would lose to
    theirs and the art box would show as a plain dark well. */
 .face-down-art {
-  --tint-bg:
-    radial-gradient(circle closest-side at center, color-mix(in srgb, var(--accent) 22%, transparent) 0%, color-mix(in srgb, var(--accent) 6%, transparent) 70%, transparent 73%),
-    var(--card-back-leather);
+  --tint-bg: var(--card-back-leather);
 }
 /* …and in its owner's seat colour once the tile knows whose it is
    (`faceDownArtClass`): the same mix as their library's back below. */
@@ -2019,9 +2027,7 @@
   --fd-seat: var(--seat-d);
 }
 .face-down-art.owned {
-  --tint-bg:
-    radial-gradient(circle closest-side at center, color-mix(in srgb, var(--fd-seat) 26%, transparent) 0%, color-mix(in srgb, var(--fd-seat) 8%, transparent) 70%, transparent 73%),
-    linear-gradient(160deg, color-mix(in srgb, var(--fd-seat) 34%, #17130f), color-mix(in srgb, var(--fd-seat) 12%, #08070a));
+  --tint-bg: color-mix(in srgb, var(--fd-seat) 24%, #100d0b);
 }
 .card-back {
   width: var(--card-w);
@@ -2031,16 +2037,12 @@
   justify-content: center;
   border-radius: 8px;
   border: 1px solid var(--border);
-  /* A dark leather back with a gold glow, picking up the accent (index.css)
-     — the indigo it was sat apart from everything around it. A circle, not
-     an oval (`closest-side` of a portrait card is half its width), sized to
-     sit just around the count's ring. */
-  background:
-    radial-gradient(circle closest-side at center, color-mix(in srgb, var(--accent) 22%, transparent) 0%, color-mix(in srgb, var(--accent) 6%, transparent) 70%, transparent 73%),
-    var(--card-back-leather);
+  /* A plain dark leather back, one flat colour (index.css) — no shading or
+     glow, as nothing on the site has a gradient (the user, 2026-10-22). */
+  background: var(--card-back-leather);
 }
 /* A player's own library is their seat's colour: the leather mixed with
-   it, the glow and the count's ring in it, so each pile says whose it is
+   it, one flat colour, and the count's ring in it, so each pile says whose it is
    at a glance across the table. Inside a player's quadrant (which sets
    --seat), and on a card back an animation flies out of that pile
    (`seat-tinted`, with the pile's --seat copied on). A face-down card that
@@ -2048,9 +2050,7 @@
    plain leather above. */
 .quadrant-cell .card-back,
 .seat-tinted .card-back {
-  background:
-    radial-gradient(circle closest-side at center, color-mix(in srgb, var(--seat) 26%, transparent) 0%, color-mix(in srgb, var(--seat) 8%, transparent) 70%, transparent 73%),
-    linear-gradient(160deg, color-mix(in srgb, var(--seat) 34%, #17130f), color-mix(in srgb, var(--seat) 12%, #08070a));
+  background: color-mix(in srgb, var(--seat) 24%, #100d0b);
   border-color: color-mix(in srgb, var(--seat) 45%, var(--border));
 }
 .quadrant-cell .card-back-count,
@@ -2230,71 +2230,43 @@
   transition: none;
   animation: none;
 }
-/* Every card on the stack gets a warm outline so "something is on the stack"
+/* Every card on the stack gets a gold outline so "something is on the stack"
    is impossible to miss against the dark table; the top one -- what a player
-   facing a decision is actually responding to -- gets a brighter, slowly
-   pulsing version of the same glow. Everything behind it is already
+   facing a decision is actually responding to -- gets a thicker, brighter
+   one. Flat outlines, no glow (the user, 2026-10-22: a flat, boxy look, no
+   gradients). Everything behind it is already
    smaller/dimmer/rotated by its own custom-property styling (computed
    per-depth in Stack.tsx), not a separate CSS size rule. */
 .stack-entry .card-tile {
   --ct-scale: calc(var(--card-w) / var(--card-w-max));
   border-color: color-mix(in srgb, var(--gold) 75%, transparent);
   box-shadow:
-    0 0 0 2px color-mix(in srgb, var(--gold) 40%, transparent),
-    0 0 14px 2px color-mix(in srgb, var(--warn) 40%, transparent),
+    0 0 0 2px color-mix(in srgb, var(--gold) 55%, transparent),
     var(--shadow-raised);
 }
 .stack-entry.is-top .card-tile {
   border-color: var(--gold);
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--gold) 70%, transparent),
-    0 0 22px 5px color-mix(in srgb, var(--warn) 50%, transparent),
+    0 0 0 3px var(--gold),
     var(--shadow-raised);
 }
-/* The pulse: a brighter glow over the steady one, fading in and out. Its
-   opacity is what animates, which the compositor runs off the main thread;
-   animating the box-shadow itself repainted the card every frame something
-   was on the stack, the page's costliest animation on a slow laptop (a
-   performance trace, 2026-10-13). On the card's own box (`.stack-card`,
-   Stack.tsx), since the tile clips anything of its own drawn outside it. */
+/* The card's own box (`.stack-card`, Stack.tsx), the tile's size exactly:
+   what a card resolving off the stack flies from (AnimationLayer). */
 .stack-card {
   position: relative;
   display: flex;
 }
-.stack-entry.is-top:not(.is-prompt) .stack-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  pointer-events: none;
-  box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--gold) 95%, transparent),
-    0 0 34px 10px color-mix(in srgb, var(--warn) 75%, transparent);
-  opacity: 0;
-  animation: stack-top-glow 1.9s ease-in-out infinite;
-}
-@keyframes stack-top-glow {
-  50% {
-    opacity: 1;
-  }
-}
-/* Still, the glow sits between the two. */
-:root[data-reduce-motion] .stack-entry.is-top:not(.is-prompt) .stack-card::after {
-  animation: none;
-  opacity: 0.4;
-}
 /* The card that *caused* the decision you're answering, when it isn't on the
    stack any more (an edict's sacrifice is asked after the edict has resolved
    into a graveyard -- see Stack.tsx's `decisionGhostOf`). It sits at depth 0
-   like anything else being responded to, but swaps the stack's warm glow for
-   a cool one so it doesn't read as a spell still waiting to resolve, and
+   like anything else being responded to, but swaps the stack's gold outline
+   for a blue one so it doesn't read as a spell still waiting to resolve, and
    isn't clickable. */
 .stack-entry.is-prompt .card-tile,
 .stack-entry.is-prompt.is-top .card-tile {
   border-color: rgba(122, 184, 255, 0.8);
   box-shadow:
-    0 0 0 2px rgba(122, 184, 255, 0.45),
-    0 0 18px 3px rgba(80, 150, 235, 0.4),
+    0 0 0 2px rgba(122, 184, 255, 0.8),
     var(--shadow-raised);
   animation: none;
 }
@@ -2333,22 +2305,28 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* The top entry's line — whose it is, what it is — read at a glance (the
-   user, 2026-10-22: it was lost in the glow): larger, bright, on a dark
-   pill, and lifted clear of the card's pulsing glow. Every entry's label
-   takes this room (only the top's is shown), so a card doesn't move as its
-   entry comes to the top. */
-.stack-entry .stack-entry-label {
+/* The top entry's lines — whose it is and what it is above the card, what it
+   targets below — read at a glance (the user, 2026-10-22: they were lost in
+   the glow): larger, bright, on a dark pill, and held clear of the card's
+   outline. Every entry's lines take this room (only the top's are shown), so
+   a card doesn't move as its entry comes to the top. */
+.stack-entry .stack-entry-label,
+.stack-entry .stack-targets {
   font-size: clamp(13px, calc(var(--card-w) * 0.1), 21px);
   font-weight: 600;
-  color: var(--text);
   max-width: calc(var(--card-w) * 1.7);
   padding: 2px 10px;
-  margin-bottom: clamp(8px, 1.4vh, 14px);
   background: rgb(0 0 0 / 0.72);
   border: 1px solid var(--border-soft);
   border-radius: 999px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.5);
+}
+.stack-entry .stack-entry-label {
+  color: var(--text);
+  margin-bottom: clamp(8px, 1.4vh, 14px);
+}
+.stack-entry .stack-targets {
+  margin-top: clamp(8px, 1.4vh, 14px);
 }
 /* Only the top entry -- what a player is responding to -- says whose it is
    and what it targets (`shows-lines`, Stack.tsx: the real top entry under a
@@ -2782,19 +2760,19 @@
    selectors, so an art rule declared later in the file would otherwise win
    the cascade outright and the tint would silently never apply. */
 .tint-W {
-  --tint-bg: linear-gradient(160deg, #4a4633, #23241d);
+  --tint-bg: #383528;
 }
 .tint-U {
-  --tint-bg: linear-gradient(160deg, #26415c, #1a2530);
+  --tint-bg: #203347;
 }
 .tint-B {
-  --tint-bg: linear-gradient(160deg, #3a3040, #201d26);
+  --tint-bg: #2e2733;
 }
 .tint-R {
-  --tint-bg: linear-gradient(160deg, #5a2f28, #2a1d1b);
+  --tint-bg: #432622;
 }
 .tint-G {
-  --tint-bg: linear-gradient(160deg, #2f4a2c, #1d271c);
+  --tint-bg: #263924;
 }
 /* P/T box in the card's bottom-right corner, like a real MTG card */
 .ct-pt {
@@ -2911,7 +2889,7 @@
   line-height: 1.25;
   color: #ece9e2;
   text-shadow: 0 0 2px #000;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.72));
+  background: rgba(0, 0, 0, 0.62);
   pointer-events: none;
 }
 /* ArtCredit's `fit`: one line across the art, whatever the artist's name —
@@ -3224,7 +3202,7 @@
 .mini-tile.legendary .mt-banner,
 .card-tile.legendary .ct-title,
 .card-tile.legendary .ct-name-row {
-  background: linear-gradient(180deg, #5c4a22 0%, var(--card-bar) 90%);
+  background: #4a3c22;
   box-shadow:
     inset 0 2px 0 var(--gold),
     inset 0 -1px 0 color-mix(in srgb, var(--gold) 55%, transparent);
@@ -5321,14 +5299,13 @@
   animation: none;
 }
 /* A spell on the stack that the focused entry targets (a counterspell's):
-   the stack's own orange glow turns red. A buried card shows only its
+   the stack's own gold outline turns red. A buried card shows only its
    offset edge, so the reticle over its art is often covered by the card in
    front — the red edge is what reads. */
 .stack-entry .card-tile.aimed {
   border-color: var(--bad);
   box-shadow:
-    0 0 0 2px color-mix(in srgb, var(--bad) 80%, transparent),
-    0 0 16px 3px color-mix(in srgb, var(--bad) 60%, transparent),
+    0 0 0 2px var(--bad),
     var(--shadow-raised);
   animation: none;
 }
@@ -5504,9 +5481,7 @@ body.board-dragging {
   height: 100%;
   display: grid;
   place-items: center;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), transparent 55%),
-    linear-gradient(145deg, color-mix(in srgb, var(--die) 92%, white), color-mix(in srgb, var(--die) 70%, black));
+  background: color-mix(in srgb, var(--die) 85%, black);
 }
 .die.d4 {
   clip-path: polygon(50% 2%, 98% 96%, 2% 96%);

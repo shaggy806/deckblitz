@@ -19,7 +19,7 @@ const ROOM_CODE_CHARS = /[^ABCDEFGHJKLMNPQRSTUVWXYZ23456789]/g
 
 /**
  * One card's art, blurred and dimmed behind the title. Purely decorative —
- * `.landing-hero` paints its own gradient underneath, so a failed load costs
+ * `.landing-hero` paints its own colour underneath, so a failed load costs
  * nothing.
  *
  * Deliberately *not* required to be in the pool: `resolveArtUrl` falls back
@@ -194,12 +194,8 @@ export function LandingScreen({
           <h1 className="landing-title">{SITE_TITLE}</h1>
           {/* What it's for, naming the game — the brand itself carries no
               Wizards trademark (docs/plans/fan-content-policy.md). */}
+          {/* What blitzing is, the tutorial says (the user, 2026-10-22). */}
           <p className="landing-kicker">{SITE_DESCRIPTOR}</p>
-          <p className="landing-tagline">
-            Goldfishing tests a deck against nobody. Blitzing tests it against
-            three bots: copy a Commander decklist, hit Blitz, and you're playing.
-            Or start a table with friends.
-          </p>
         </div>
       </header>
 

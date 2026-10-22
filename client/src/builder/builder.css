@@ -465,16 +465,6 @@
   color: var(--muted);
 }
 
-/* While you act for a seat that isn't your own: the whole table framed in
-   its colour, so it's never in doubt whose cards you're playing. */
-.seat-away-frame {
-  position: fixed;
-  inset: 0;
-  z-index: 54;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 4px var(--sc);
-}
-
 /* "You are now Bob": over the table for a moment at each change of seat. */
 .seat-switch-flash {
   position: fixed;
