@@ -158,6 +158,7 @@ import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
 import _poolEnroot from "../pool/enroot.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
+import _poolErosion from "../pool/erosion.js";
 import _poolErraticApparition from "../pool/erratic-apparition.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEtaliPrimalSickness from "../pool/etali-primal-sickness.js";
@@ -323,6 +324,7 @@ import _poolMaskOfTheJadecrafter from "../pool/mask-of-the-jadecrafter.js";
 import _poolMasterfulFlourish from "../pool/masterful-flourish.js";
 import _poolMeditationPools from "../pool/meditation-pools.js";
 import _poolMeldedMoxite from "../pool/melded-moxite.js";
+import _poolMerfolkAssassin from "../pool/merfolk-assassin.js";
 import _poolMessengerFalcons from "../pool/messenger-falcons.js";
 import _poolMetalhead from "../pool/metalhead.js";
 import _poolMetastaticEvangel from "../pool/metastatic-evangel.js";
@@ -423,6 +425,7 @@ import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
 import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
+import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
@@ -724,6 +727,7 @@ const shard: CardShard = {
     _poolEnroot,
     _poolEreborFlamesmith,
     _poolEriettesLullaby,
+    _poolErosion,
     _poolErraticApparition,
     _poolEssenceAnchor,
     _poolEtaliPrimalSickness,
@@ -889,6 +893,7 @@ const shard: CardShard = {
     _poolMasterfulFlourish,
     _poolMeditationPools,
     _poolMeldedMoxite,
+    _poolMerfolkAssassin,
     _poolMessengerFalcons,
     _poolMetalhead,
     _poolMetastaticEvangel,
@@ -989,6 +994,7 @@ const shard: CardShard = {
     _poolSandstormCharger,
     _poolSanguinaryMage,
     _poolSaurianSymbiote,
+    _poolSavaenElves,
     _poolSavageGorger,
     _poolSavageLands,
     _poolSavageSwipe,

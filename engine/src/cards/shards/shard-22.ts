@@ -132,8 +132,10 @@ import _poolDreadLinnorm from "../pool/dread-linnorm.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
 import _poolDruidOfTheSpade from "../pool/druid-of-the-spade.js";
 import _poolDuelingRapier from "../pool/dueling-rapier.js";
+import _poolDustToDust from "../pool/dust-to-dust.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
+import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
 import _poolEject from "../pool/eject.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
@@ -706,8 +708,10 @@ const shard: CardShard = {
     _poolDrogskolCavalry,
     _poolDruidOfTheSpade,
     _poolDuelingRapier,
+    _poolDustToDust,
     _poolDwarvenGrunt,
     _poolEarthRift,
+    _poolEaterOfTheDead,
     _poolEject,
     _poolElementalMasterpiece,
     _poolEmeriaShatteredSkyclave,

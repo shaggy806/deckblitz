@@ -418,6 +418,7 @@ import _poolSarkhanDragonsoul from "../pool/sarkhan-dragonsoul.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
 import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
+import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
@@ -998,6 +999,7 @@ const shard: CardShard = {
     _poolSarkhanUnbroken,
     _poolSauronTheDarkLord,
     _poolScabClanCharger,
+    _poolScarwoodHag,
     _poolScoriaElemental,
     _poolScythecatCub,
     _poolSeasonedWarrenguard,

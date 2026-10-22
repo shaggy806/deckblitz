@@ -288,6 +288,7 @@ import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
+import _poolMarshViper from "../pool/marsh-viper.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
 import _poolMegatonsFate from "../pool/megatons-fate.js";
@@ -390,6 +391,7 @@ import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRidesEnd from "../pool/rides-end.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
+import _poolRiptide from "../pool/riptide.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
 import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
@@ -897,6 +899,7 @@ const shard: CardShard = {
     _poolManaformHellkite,
     _poolMarchesasEmissary,
     _poolMarketbackWalker,
+    _poolMarshViper,
     _poolMarwynTheClearcutter,
     _poolMawOfKozilek,
     _poolMegatonsFate,
@@ -999,6 +1002,7 @@ const shard: CardShard = {
     _poolRhysticStudy,
     _poolRidesEnd,
     _poolRipTheSeams,
+    _poolRiptide,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
     _poolRonomUnicorn,

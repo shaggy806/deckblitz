@@ -201,6 +201,7 @@ import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
 import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
 import _poolFullBore from "../pool/full-bore.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
+import _poolGaeasTouch from "../pool/gaeas-touch.js";
 import _poolGaladhrimBrigade from "../pool/galadhrim-brigade.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
@@ -764,6 +765,7 @@ const shard: CardShard = {
     _poolFuelForTheCause,
     _poolFullBore,
     _poolFuturistForge,
+    _poolGaeasTouch,
     _poolGaladhrimBrigade,
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,

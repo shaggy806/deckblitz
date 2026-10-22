@@ -295,6 +295,7 @@ import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
+import _poolMiracleWorker from "../pool/miracle-worker.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
 import _poolMisleadingMotes from "../pool/misleading-motes.js";
@@ -332,6 +333,7 @@ import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
+import _poolPeopleOfTheWoods from "../pool/people-of-the-woods.js";
 import _poolPhantomNinja from "../pool/phantom-ninja.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
@@ -878,6 +880,7 @@ const shard: CardShard = {
     _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
     _poolMindspringMerfolk,
+    _poolMiracleWorker,
     _poolMirkwoodSpider,
     _poolMirrorshellCrab,
     _poolMisleadingMotes,
@@ -915,6 +918,7 @@ const shard: CardShard = {
     _poolPatchworkAutomaton,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,
+    _poolPeopleOfTheWoods,
     _poolPhantomNinja,
     _poolPhyrexianDragonEngine,
     _poolPhyrexiasCore,

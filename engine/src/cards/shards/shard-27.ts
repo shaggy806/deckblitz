@@ -164,6 +164,7 @@ import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
 import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
+import _poolFlood from "../pool/flood.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
@@ -487,6 +488,7 @@ import _poolThreeTreeRootweaver from "../pool/three-tree-rootweaver.js";
 import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
 import _poolThuridMareOfDestiny from "../pool/thurid-mare-of-destiny.js";
 import _poolTimberlandAncient from "../pool/timberland-ancient.js";
+import _poolTivadarsCrusade from "../pool/tivadars-crusade.js";
 import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
 import _poolTopiaryPanther from "../pool/topiary-panther.js";
@@ -729,6 +731,7 @@ const shard: CardShard = {
     _poolFeralInvocation,
     _poolFieryFall,
     _poolFiliThePathfinder,
+    _poolFlood,
     _poolFlowstoneWyvern,
     _poolFlusterstorm,
     _poolForceOfSavagery,
@@ -1052,6 +1055,7 @@ const shard: CardShard = {
     _poolThunderbreakRegent,
     _poolThuridMareOfDestiny,
     _poolTimberlandAncient,
+    _poolTivadarsCrusade,
     _poolTolarianAcademy,
     _poolTolarianScholar,
     _poolTopiaryPanther,

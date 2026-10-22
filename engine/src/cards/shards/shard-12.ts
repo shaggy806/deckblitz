@@ -204,6 +204,7 @@ import _poolGnarledMass from "../pool/gnarled-mass.js";
 import _poolGnarledSage from "../pool/gnarled-sage.js";
 import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
+import _poolGoblinCaves from "../pool/goblin-caves.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoliathTruck from "../pool/goliath-truck.js";
@@ -227,6 +228,7 @@ import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
 import _poolHeadsplitter from "../pool/headsplitter.js";
 import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
+import _poolHiddenPath from "../pool/hidden-path.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
@@ -768,6 +770,7 @@ const shard: CardShard = {
     _poolGnarledSage,
     _poolGoNuts,
     _poolGoShintaiOfSharedPurpose,
+    _poolGoblinCaves,
     _poolGoblinCommando,
     _poolGoldForgedThopteryx,
     _poolGoliathTruck,
@@ -791,6 +794,7 @@ const shard: CardShard = {
     _poolHarrierStrix,
     _poolHeadsplitter,
     _poolHearthhullTheWorldseed,
+    _poolHiddenPath,
     _poolHonorboundPage,
     _poolHornetSting,
     _poolHowlpackAvenger,

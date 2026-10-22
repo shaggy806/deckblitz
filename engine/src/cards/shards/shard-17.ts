@@ -513,6 +513,7 @@ import _poolWailingGhoul from "../pool/wailing-ghoul.js";
 import _poolWallOfWater from "../pool/wall-of-water.js";
 import _poolWarChariot from "../pool/war-chariot.js";
 import _poolWarMachineJamesRhodes from "../pool/war-machine-james-rhodes.js";
+import _poolWaterWurm from "../pool/water-wurm.js";
 import _poolWayOfTheNecromancer from "../pool/way-of-the-necromancer.js";
 import _poolWayfarersBauble from "../pool/wayfarers-bauble.js";
 import _poolWeaponcraftEnthusiast from "../pool/weaponcraft-enthusiast.js";
@@ -1074,6 +1075,7 @@ const shard: CardShard = {
     _poolWallOfWater,
     _poolWarChariot,
     _poolWarMachineJamesRhodes,
+    _poolWaterWurm,
     _poolWayOfTheNecromancer,
     _poolWayfarersBauble,
     _poolWeaponcraftEnthusiast,

@@ -35,6 +35,7 @@ import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
+import _poolAshesToAshes from "../pool/ashes-to-ashes.js";
 import _poolAshrootAnimist from "../pool/ashroot-animist.js";
 import _poolAssure from "../pool/assure.js";
 import _poolAttunedHunter from "../pool/attuned-hunter.js";
@@ -641,6 +642,7 @@ const shard: CardShard = {
     _poolArgothianPixies,
     _poolArtificersAssistant,
     _poolAshenRider,
+    _poolAshesToAshes,
     _poolAshrootAnimist,
     _poolAssure,
     _poolAttunedHunter,

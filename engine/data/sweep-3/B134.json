@@ -1,0 +1,591 @@
+{
+ "batch": "B134",
+ "status": "complete",
+ "ranks": "The Dark (DRK, 1994-08-01): whole set (oldest-first walk)",
+ "authored": [
+  {
+   "name": "Bog Rats",
+   "files": [
+    "engine/src/cards/pool/bog-rats.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dust to Dust",
+   "files": [
+    "engine/src/cards/pool/dust-to-dust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Electric Eel",
+   "files": [
+    "engine/src/cards/pool/electric-eel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Path",
+   "files": [
+    "engine/src/cards/pool/hidden-path.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Holy Light",
+   "files": [
+    "engine/src/cards/pool/holy-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marsh Viper",
+   "files": [
+    "engine/src/cards/pool/marsh-viper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martyr's Cry",
+   "files": [
+    "engine/src/cards/pool/martyrs-cry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Assassin",
+   "files": [
+    "engine/src/cards/pool/merfolk-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morale",
+   "files": [
+    "engine/src/cards/pool/morale.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Safe Haven",
+   "files": [
+    "engine/src/cards/pool/safe-haven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarwood Hag",
+   "files": [
+    "engine/src/cards/pool/scarwood-hag.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashes to Ashes",
+   "files": [
+    "engine/src/cards/pool/ashes-to-ashes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erosion",
+   "files": [
+    "engine/src/cards/pool/erosion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eternal Flame",
+   "files": [
+    "engine/src/cards/pool/eternal-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flood",
+   "files": [
+    "engine/src/cards/pool/flood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Touch",
+   "files": [
+    "engine/src/cards/pool/gaeas-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Caves",
+   "files": [
+    "engine/src/cards/pool/goblin-caves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Digging Team",
+   "files": [
+    "engine/src/cards/pool/goblin-digging-team.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Armor",
+   "files": [
+    "engine/src/cards/pool/living-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orc General",
+   "files": [
+    "engine/src/cards/pool/orc-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riptide",
+   "files": [
+    "engine/src/cards/pool/riptide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savaen Elves",
+   "files": [
+    "engine/src/cards/pool/savaen-elves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tivadar's Crusade",
+   "files": [
+    "engine/src/cards/pool/tivadars-crusade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uncle Istvan",
+   "files": [
+    "engine/src/cards/pool/uncle-istvan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angry Mob",
+   "files": [
+    "engine/src/cards/pool/angry-mob.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banshee",
+   "files": [
+    "engine/src/cards/pool/banshee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eater of the Dead",
+   "files": [
+    "engine/src/cards/pool/eater-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festival",
+   "files": [
+    "engine/src/cards/pool/festival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Shrine",
+   "files": [
+    "engine/src/cards/pool/goblin-shrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miracle Worker",
+   "files": [
+    "engine/src/cards/pool/miracle-worker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "People of the Woods",
+   "files": [
+    "engine/src/cards/pool/people-of-the-woods.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunken City",
+   "files": [
+    "engine/src/cards/pool/sunken-city.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Venom",
+   "files": [
+    "engine/src/cards/pool/venom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War Barge",
+   "files": [
+    "engine/src/cards/pool/war-barge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Water Wurm",
+   "files": [
+    "engine/src/cards/pool/water-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Word of Binding",
+   "files": [
+    "engine/src/cards/pool/word-of-binding.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wormwood Treefolk",
+   "files": [
+    "engine/src/cards/pool/wormwood-treefolk.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Mana Clash",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "flip coins repeatedly until both players win a flip"
+  },
+  {
+   "name": "Dance of Many",
+   "needs": [
+    "effect:linked-token-leaves"
+   ],
+   "why": "the token copy and this enchantment leave together"
+  },
+  {
+   "name": "City of Shadows",
+   "needs": [
+    "cost:exile-creature-cost"
+   ],
+   "why": "exile a creature you control as a cost"
+  },
+  {
+   "name": "Cleansing",
+   "needs": [
+    "effect:unless-any-player-pays"
+   ],
+   "why": "destroy each land unless any player pays 1 life"
+  },
+  {
+   "name": "Necropolis",
+   "needs": [
+    "effect:cost-exiled-cards-this-way"
+   ],
+   "why": "+1/+1 counters equal to the exiled card's mana value"
+  },
+  {
+   "name": "Tower of Coireall",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "can't be blocked by Walls this turn"
+  },
+  {
+   "name": "Knights of Thorn",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Leviathan",
+   "needs": [
+    "cost:attack-cost-sacrifice"
+   ],
+   "why": "can't attack unless you sacrifice two Islands"
+  },
+  {
+   "name": "Rag Man",
+   "needs": [
+    "effect:random-choice"
+   ],
+   "why": "target opponent discards a creature card at random"
+  },
+  {
+   "name": "Whippoorwill",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn",
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "can't be regenerated, damage can't be prevented this turn"
+  },
+  {
+   "name": "Scarwood Bandits",
+   "needs": [
+    "effect:unless-any-player-pays"
+   ],
+   "why": "gain control unless any other player pays {2}"
+  },
+  {
+   "name": "Psychic Allergy",
+   "needs": [
+    "filter:chosen-color"
+   ],
+   "why": "damage equal to the permanents of the chosen color"
+  },
+  {
+   "name": "Curse Artifact",
+   "needs": [
+    "effect:unless-sacrifice-that-permanent"
+   ],
+   "why": "2 damage unless that player sacrifices the artifact"
+  },
+  {
+   "name": "Fasting",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "you may skip your draw step"
+  },
+  {
+   "name": "Nameless Race",
+   "needs": [
+    "cost:pay-any-amount-of-life-as-enters"
+   ],
+   "why": "pay any amount of life as it enters, up to the white permanents"
+  },
+  {
+   "name": "Murk Dwellers",
+   "needs": [
+    "trigger:unblocked-attackers-trigger",
+    "effect:pt-until-end-of-combat"
+   ],
+   "why": "attacks and isn't blocked: +2/+0 until end of combat"
+  },
+  {
+   "name": "Pikemen",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Goblin Wizard",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "target Goblin gains protection from white until end of turn"
+  },
+  {
+   "name": "Stone Calendar",
+   "needs": [
+    "cost:optional-cost-reduction"
+   ],
+   "why": "the reduction may be declined (its ruling)"
+  },
+  {
+   "name": "Brainwash",
+   "needs": [
+    "static:attack-cost-for-creature"
+   ],
+   "why": "enchanted creature can't attack unless its controller pays {3}"
+  },
+  {
+   "name": "Amnesia",
+   "needs": [
+    "effect:discard-all-matching"
+   ],
+   "why": "target player discards all nonland cards"
+  },
+  {
+   "name": "Scarecrow",
+   "needs": [
+    "effect:prevent-damage-to-you-by-filter-this-turn"
+   ],
+   "why": "prevent damage to you by creatures with flying this turn"
+  },
+  {
+   "name": "Goblins of the Flarg",
+   "needs": [
+    "trigger:state-trigger"
+   ],
+   "why": "when you control a Dwarf, sacrifice it"
+  },
+  {
+   "name": "Giant Shark",
+   "needs": [
+    "trigger:state-trigger",
+    "static:cant-attack-unless-defender-controls"
+   ],
+   "why": "sacrifice with no Islands; attacks only a player with an Island"
+  },
+  {
+   "name": "The Fallen",
+   "needs": [
+    "effect:damage-players-source-damaged-this-game"
+   ],
+   "why": "damage each opponent it has dealt damage to this game"
+  },
+  {
+   "name": "Runesword",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn",
+    "trigger:delayed-target-leaves-this-turn",
+    "replacement:exile-if-damaged-by-target-dies"
+   ],
+   "why": "sacrifice when that creature leaves; its damage's no-regeneration and exile riders"
+  },
+  {
+   "name": "Fire and Brimstone",
+   "needs": [
+    "filter:target-player-attacked-this-turn"
+   ],
+   "why": "target player who attacked this turn"
+  },
+  {
+   "name": "Tangle Kelp",
+   "needs": [
+    "condition:attached-attacked-during-controllers-last-turn"
+   ],
+   "why": "doesn't untap if it attacked during its controller's last turn"
+  },
+  {
+   "name": "Inquisition",
+   "needs": [
+    "amount:cards-in-hand-matching-filter"
+   ],
+   "why": "damage equal to the white cards in that hand"
+  },
+  {
+   "name": "Spitting Slug",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "first strike, or each creature blocking or blocked by it gains first strike"
+  },
+  {
+   "name": "Dark Sphere",
+   "needs": [
+    "replacement:prevent-half-damage"
+   ],
+   "why": "prevent half the damage, rounded down"
+  },
+  {
+   "name": "Mind Bomb",
+   "needs": [
+    "effect:each-player-discards-up-to-n"
+   ],
+   "why": "each player may discard up to three, then takes 3 less that much"
+  },
+  {
+   "name": "Blood of the Martyr",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "damage to creatures is dealt to you instead"
+  },
+  {
+   "name": "Season of the Witch",
+   "needs": [
+    "filter:could-have-attacked-this-turn"
+   ],
+   "why": "destroy untapped creatures that didn't attack, except those that couldn't"
+  },
+  {
+   "name": "Mana Vortex",
+   "needs": [
+    "trigger:state-trigger"
+   ],
+   "why": "when there are no lands, sacrifice it"
+  },
+  {
+   "name": "Preacher",
+   "needs": [
+    "target:chosen-by-other-player"
+   ],
+   "why": "target opponent chooses which of their creatures"
+  },
+  {
+   "name": "Sorrow's Path",
+   "needs": [
+    "effect:remove-blocker-unblock-and-reblock"
+   ],
+   "why": "swap two blockers' blocks"
+  },
+  {
+   "name": "Worms of the Earth",
+   "needs": [
+    "replacement:lands-cant-enter"
+   ],
+   "why": "lands can't enter the battlefield"
+  },
+  {
+   "name": "Frankenstein's Monster",
+   "needs": [
+    "replacement:as-enters-exile-from-graveyard"
+   ],
+   "why": "exile X creature cards as it enters, each a chosen counter"
+  },
+  {
+   "name": "Wand of Ith",
+   "needs": [
+    "effect:random-card-from-hand"
+   ],
+   "why": "reveal a card at random from hand; pay life or discard"
+  },
+  {
+   "name": "Reflecting Mirror",
+   "needs": [
+    "cost:x-from-target-mana-value",
+    "effect:change-target"
+   ],
+   "why": "X is twice the spell's mana value; change its target"
+  },
+  {
+   "name": "Deep Water",
+   "needs": [
+    "replacement:tap-for-mana-produces-color-instead"
+   ],
+   "why": "your lands tap for {U} instead"
+  },
+  {
+   "name": "Goblin Rock Sled",
+   "needs": [
+    "condition:source-attacked-during-your-last-turn",
+    "static:cant-attack-unless-defender-controls"
+   ],
+   "why": "doesn't untap if it attacked; attacks only a player with a Mountain"
+  },
+  {
+   "name": "Tracker",
+   "needs": [
+    "effect:damage-to-source"
+   ],
+   "why": "target creature deals damage to Tracker"
+  },
+  {
+   "name": "Lurker",
+   "needs": [
+    "static:cant-be-targeted-by-filter",
+    "filter:blocked-this-turn"
+   ],
+   "why": "can't be targeted unless it attacked or blocked this turn"
+  }
+ ]
+}

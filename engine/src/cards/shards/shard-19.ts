@@ -579,6 +579,7 @@ import _poolWinternightStories from "../pool/winternight-stories.js";
 import _poolWintersIntervention from "../pool/winters-intervention.js";
 import _poolWitchsCottage from "../pool/witchs-cottage.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
+import _poolWordOfBinding from "../pool/word-of-binding.js";
 import _poolWreckAndRebuild from "../pool/wreck-and-rebuild.js";
 import _poolWyluliWolf from "../pool/wyluli-wolf.js";
 import _poolYathanTombguard from "../pool/yathan-tombguard.js";
@@ -1176,6 +1177,7 @@ const shard: CardShard = {
     _poolWintersIntervention,
     _poolWitchsCottage,
     _poolWoodlandChangeling,
+    _poolWordOfBinding,
     _poolWreckAndRebuild,
     _poolWyluliWolf,
     _poolYathanTombguard,

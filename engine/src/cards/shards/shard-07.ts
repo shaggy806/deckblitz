@@ -212,6 +212,7 @@ import _poolHeroicTeamwork from "../pool/heroic-teamwork.js";
 import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
+import _poolHolyLight from "../pool/holy-light.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
@@ -804,6 +805,7 @@ const shard: CardShard = {
     _poolHiddenLair,
     _poolHiddenNecropolis,
     _poolHighlandLake,
+    _poolHolyLight,
     _poolHookhandMariner,
     _poolHydraBroodmaster,
     _poolHystericalBlindness,

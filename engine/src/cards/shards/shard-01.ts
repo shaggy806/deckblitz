@@ -489,6 +489,7 @@ import _poolTwilightPanther from "../pool/twilight-panther.js";
 import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
 import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
+import _poolUncleIstvan from "../pool/uncle-istvan.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
 import _poolUnshakableTail from "../pool/unshakable-tail.js";
@@ -1043,6 +1044,7 @@ const shard: CardShard = {
     _poolUlnaAlleyShopkeep,
     _poolUltronsAuxiliary,
     _poolUlvenwaldTracker,
+    _poolUncleIstvan,
     _poolUnexpectedWindfall,
     _poolUnseenWalker,
     _poolUnshakableTail,

@@ -400,6 +400,7 @@ import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
 import _poolRocOfKherRidges from "../pool/roc-of-kher-ridges.js";
 import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
+import _poolSafeHaven from "../pool/safe-haven.js";
 import _poolSageEyeHarrier from "../pool/sage-eye-harrier.js";
 import _poolSaguArcher from "../pool/sagu-archer.js";
 import _poolSahagin from "../pool/sahagin.js";
@@ -555,6 +556,7 @@ import _poolWallOfBone from "../pool/wall-of-bone.js";
 import _poolWallOfSwords from "../pool/wall-of-swords.js";
 import _poolWanderbrineTrapper from "../pool/wanderbrine-trapper.js";
 import _poolWanderingTombshell from "../pool/wandering-tombshell.js";
+import _poolWarBarge from "../pool/war-barge.js";
 import _poolWarOfTheLastAlliance from "../pool/war-of-the-last-alliance.js";
 import _poolWarbeastOfGorgoroth from "../pool/warbeast-of-gorgoroth.js";
 import _poolWasteNot from "../pool/waste-not.js";
@@ -992,6 +994,7 @@ const shard: CardShard = {
     _poolRocOfKherRidges,
     _poolRoxanneStarfallSavant,
     _poolRumblingSlum,
+    _poolSafeHaven,
     _poolSageEyeHarrier,
     _poolSaguArcher,
     _poolSahagin,
@@ -1147,6 +1150,7 @@ const shard: CardShard = {
     _poolWallOfSwords,
     _poolWanderbrineTrapper,
     _poolWanderingTombshell,
+    _poolWarBarge,
     _poolWarOfTheLastAlliance,
     _poolWarbeastOfGorgoroth,
     _poolWasteNot,

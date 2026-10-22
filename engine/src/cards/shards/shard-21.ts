@@ -54,6 +54,7 @@ import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBloodlineCulling from "../pool/bloodline-culling.js";
 import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
 import _poolBlueWard from "../pool/blue-ward.js";
+import _poolBogRats from "../pool/bog-rats.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
@@ -159,6 +160,7 @@ import _poolFatefulAbsence from "../pool/fateful-absence.js";
 import _poolFecundGreenshell from "../pool/fecund-greenshell.js";
 import _poolFelidarRetreat from "../pool/felidar-retreat.js";
 import _poolFestivalCrasher from "../pool/festival-crasher.js";
+import _poolFestival from "../pool/festival.js";
 import _poolFeywildVisitor from "../pool/feywild-visitor.js";
 import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
@@ -194,6 +196,7 @@ import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
+import _poolGoblinShrine from "../pool/goblin-shrine.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
 import _poolGodsHallGuardian from "../pool/gods-hall-guardian.js";
@@ -325,6 +328,7 @@ import _poolOgreHeadHelm from "../pool/ogre-head-helm.js";
 import _poolOldHobAlleycatBlues from "../pool/old-hob-alleycat-blues.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
+import _poolOrcGeneral from "../pool/orc-general.js";
 import _poolOrneryTumblewagg from "../pool/ornery-tumblewagg.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
 import _poolOsseousExhale from "../pool/osseous-exhale.js";
@@ -602,6 +606,7 @@ const shard: CardShard = {
     _poolBloodlineCulling,
     _poolBloodskyBerserker,
     _poolBlueWard,
+    _poolBogRats,
     _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBonebindOrator,
@@ -707,6 +712,7 @@ const shard: CardShard = {
     _poolFecundGreenshell,
     _poolFelidarRetreat,
     _poolFestivalCrasher,
+    _poolFestival,
     _poolFeywildVisitor,
     _poolFiligreeAttendant,
     _poolFireLitThicket,
@@ -742,6 +748,7 @@ const shard: CardShard = {
     _poolGoblinChampion,
     _poolGoblinKing,
     _poolGoblinLackey,
+    _poolGoblinShrine,
     _poolGoblinSurprise,
     _poolGoblinWarchief,
     _poolGodsHallGuardian,
@@ -873,6 +880,7 @@ const shard: CardShard = {
     _poolOldHobAlleycatBlues,
     _poolOpposition,
     _poolOrazcaRaptor,
+    _poolOrcGeneral,
     _poolOrneryTumblewagg,
     _poolOrzhovSignet,
     _poolOsseousExhale,

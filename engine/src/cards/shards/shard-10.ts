@@ -538,6 +538,7 @@ import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
 import _poolVampireOfTheDireMoon from "../pool/vampire-of-the-dire-moon.js";
 import _poolVampiricTutor from "../pool/vampiric-tutor.js";
 import _poolVedalkenOrrery from "../pool/vedalken-orrery.js";
+import _poolVenom from "../pool/venom.js";
 import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
@@ -1132,6 +1133,7 @@ const shard: CardShard = {
     _poolVampireOfTheDireMoon,
     _poolVampiricTutor,
     _poolVedalkenOrrery,
+    _poolVenom,
     _poolVenomthrope,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,

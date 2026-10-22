@@ -86,6 +86,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The Dark, whole** (batch 134): 37 of its last 82 cards authored by three `card-author` agents
+  on existing features — Safe Haven, Martyr's Cry, Venom, War Barge, Angry Mob, Banshee, Eater of
+  the Dead, Festival, Uncle Istvan, Gaea's Touch; 45 blocked, mostly one apiece (2026-10-21).
 - **Legends, whole** (batches 132-133): **rampage**, the **world rule** (704.5k), **"for as long as
   you control ~"** and **"can be blocked as though it didn't have landwalk"** built, the scaffolder
   taught rampage and the landwalk line; 122 of its last 219 cards authored by eight `card-author`

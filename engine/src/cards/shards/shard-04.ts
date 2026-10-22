@@ -15,6 +15,7 @@ import _poolAltarOfTheGoyf from "../pool/altar-of-the-goyf.js";
 import _poolAmazingSpiderMan from "../pool/amazing-spider-man.js";
 import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
+import _poolAngryMob from "../pool/angry-mob.js";
 import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
 import _poolAnimateWall from "../pool/animate-wall.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
@@ -286,6 +287,7 @@ import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.j
 import _poolManaConfluence from "../pool/mana-confluence.js";
 import _poolMarkovRetribution from "../pool/markov-retribution.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
+import _poolMartyrsCry from "../pool/martyrs-cry.js";
 import _poolMasterHealer from "../pool/master-healer.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
@@ -578,6 +580,7 @@ const shard: CardShard = {
     _poolAmazingSpiderMan,
     _poolAngelicChorus,
     _poolAngelsGrace,
+    _poolAngryMob,
     _poolAnheloThePainter,
     _poolAnimateWall,
     _poolAnkleBiter,
@@ -849,6 +852,7 @@ const shard: CardShard = {
     _poolManaConfluence,
     _poolMarkovRetribution,
     _poolMarneusCalgar,
+    _poolMartyrsCry,
     _poolMasterHealer,
     _poolMawcor,
     _poolMeetingOfTheFive,

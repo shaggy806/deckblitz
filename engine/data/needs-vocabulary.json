@@ -9409,6 +9409,63 @@
   },
   "filter:dealt-damage-to-source-this-turn": {
    "example": "Brine Hag"
+  },
+  "effect:unless-any-player-pays": {
+   "example": "Cleansing"
+  },
+  "cost:attack-cost-sacrifice": {
+   "example": "Leviathan"
+  },
+  "filter:chosen-color": {
+   "example": "Psychic Allergy"
+  },
+  "effect:unless-sacrifice-that-permanent": {
+   "example": "Curse Artifact"
+  },
+  "cost:pay-any-amount-of-life-as-enters": {
+   "example": "Nameless Race"
+  },
+  "cost:optional-cost-reduction": {
+   "example": "Stone Calendar"
+  },
+  "static:attack-cost-for-creature": {
+   "example": "Brainwash"
+  },
+  "effect:damage-players-source-damaged-this-game": {
+   "example": "The Fallen"
+  },
+  "trigger:delayed-target-leaves-this-turn": {
+   "example": "Runesword"
+  },
+  "replacement:exile-if-damaged-by-target-dies": {
+   "example": "Runesword"
+  },
+  "filter:target-player-attacked-this-turn": {
+   "example": "Fire and Brimstone"
+  },
+  "condition:attached-attacked-during-controllers-last-turn": {
+   "example": "Tangle Kelp"
+  },
+  "amount:cards-in-hand-matching-filter": {
+   "example": "Inquisition"
+  },
+  "filter:blocking-or-blocked-by-source": {
+   "example": "Spitting Slug"
+  },
+  "effect:each-player-discards-up-to-n": {
+   "example": "Mind Bomb"
+  },
+  "filter:could-have-attacked-this-turn": {
+   "example": "Season of the Witch"
+  },
+  "replacement:lands-cant-enter": {
+   "example": "Worms of the Earth"
+  },
+  "cost:x-from-target-mana-value": {
+   "example": "Reflecting Mirror"
+  },
+  "replacement:tap-for-mana-produces-color-instead": {
+   "example": "Deep Water"
   }
  }
 }

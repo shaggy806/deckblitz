@@ -40,6 +40,7 @@ import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
 import _poolBallroom from "../pool/ballroom.js";
+import _poolBanshee from "../pool/banshee.js";
 import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
 import _poolBashfulBeastie from "../pool/bashful-beastie.js";
@@ -311,6 +312,7 @@ import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
 import _poolLivaanCultistOfTiamat from "../pool/livaan-cultist-of-tiamat.js";
+import _poolLivingArmor from "../pool/living-armor.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
@@ -344,6 +346,7 @@ import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMonstrousVortex from "../pool/monstrous-vortex.js";
 import _poolMoonveilRegent from "../pool/moonveil-regent.js";
+import _poolMorale from "../pool/morale.js";
 import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
@@ -560,6 +563,7 @@ import _poolWingsOfHubris from "../pool/wings-of-hubris.js";
 import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
+import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
@@ -627,6 +631,7 @@ const shard: CardShard = {
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
     _poolBallroom,
+    _poolBanshee,
     _poolBaradDur,
     _poolBarbarianRiftcutter,
     _poolBashfulBeastie,
@@ -898,6 +903,7 @@ const shard: CardShard = {
     _poolLilysplashMentor,
     _poolLithomanticBarrage,
     _poolLivaanCultistOfTiamat,
+    _poolLivingArmor,
     _poolLivingLightningChargedUp,
     _poolLizardWarrior,
     _poolLlanowarReborn,
@@ -931,6 +937,7 @@ const shard: CardShard = {
     _poolMomentOfDefiance,
     _poolMonstrousVortex,
     _poolMoonveilRegent,
+    _poolMorale,
     _poolMordorOnTheMarch,
     _poolMortalitySpear,
     _poolMsMarvelElasticAlly,
@@ -1147,6 +1154,7 @@ const shard: CardShard = {
     _poolWintermoorCommander,
     _poolWipeClean,
     _poolWoodlandLiege,
+    _poolWormwoodTreefolk,
     _poolWreckRemover,
     _poolYavimayaSapherd,
     _poolYusriFortunesFlame,

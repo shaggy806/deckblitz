@@ -147,6 +147,7 @@ import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
+import _poolEternalFlame from "../pool/eternal-flame.js";
 import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
 import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
@@ -744,6 +745,7 @@ const shard: CardShard = {
     _poolErrantStreetArtist,
     _poolErstwhileTrooper,
     _poolEshkiDragonclaw,
+    _poolEternalFlame,
     _poolEternalTaskmaster,
     _poolEtheriumSpinner,
     _poolEverquillPhoenix,

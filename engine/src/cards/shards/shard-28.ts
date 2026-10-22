@@ -146,6 +146,7 @@ import _poolDuskMangler from "../pool/dusk-mangler.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
+import _poolElectricEel from "../pool/electric-eel.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
 import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
@@ -724,6 +725,7 @@ const shard: CardShard = {
     _poolEarthrumbler,
     _poolEiganjoDynastorian,
     _poolEldritchPact,
+    _poolElectricEel,
     _poolElminstersSimulacrum,
     _poolElvishPiper,
     _poolEmberEyeWolf,

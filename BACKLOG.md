@@ -99,12 +99,11 @@ section keeps only what to do next.
   below. Batch 130 took Alpha whole and Beta's last card, building chosen-source prevention and
   colour setting; batch 131 Arabian Nights and Antiquities, on "you may choose not to untap" and
   "for as long as ~ remains tapped"; batches 132-133 Legends, on rampage, the world rule, "for as
-  long as you control ~" and "blockable as though it didn't have landwalk". **Next, The Dark** (82
-  left), then Fallen Empires (79), Ice Age. Leads over the whole pool now: banding (20 — needs the
-  multi-blocking line below), removing any number of counters as a cost (`cost:remove-x-counters-cost`
-  — 15, the Mana Batteries among them), damage redirection (11). Leads measured over the whole pool: setting a land's type with its rules text gone
-  (`static:land-type-setting`, rule 305.7 — 8), damage redirection
-  (`replacement:damage-redirection` — 7), banding (`keyword:banding` — 4).
+  long as you control ~" and "blockable as though it didn't have landwalk"; batch 134 The Dark,
+  on existing features only. **Next, Fallen Empires** (79 left), then Ice Age. Leads over the
+  whole pool now: banding (22 — needs the multi-blocking line below), removing any number of
+  counters as a cost (`cost:remove-x-counters-cost` — 15, the Mana Batteries among them), state
+  triggers (`trigger:state-trigger` — 15), damage redirection (12).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
   ranked ones first. Every set from Reality Fracture back to Phyrexia: All Will Be One is whole
