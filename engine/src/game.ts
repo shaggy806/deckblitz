@@ -12495,8 +12495,9 @@ export class Game {
   }
 
   /** Choose the next promised gift's opponent (see `queueGift`): the only
-   * one there is without asking, else a yes-or-no `choose-modes` about the
-   * first candidate. */
+   * one there is without asking, else one `choose-modes` with a mode per
+   * candidate (each an `about-player`, so a client can offer them on the
+   * players' panels — as a `choose-opponent` is asked). */
   private promptNextGift(): void {
     const [ask, ...queue] = this.state.pendingGifts ?? [];
     if (queue.length > 0) this.state.pendingGifts = queue;
@@ -12513,11 +12514,13 @@ export class Game {
     this.state.awaiting = {
       kind: "choose-modes",
       player: ask.player,
-      about: candidates[0],
       source: ask.spell,
-      minModes: 0,
+      minModes: 1,
       maxModes: 1,
-      modes: [{ text: "Promise the gift to this opponent?", effect: { kind: "sequence", effects: [] } }],
+      modes: candidates.map((to) => ({
+        text: `Promise the gift to ${to}`,
+        effect: { kind: "about-player", player: to, effect: { kind: "sequence", effects: [] } },
+      })),
       x: 0,
       targets: [],
       giftAsk: { ...ask, candidates },
@@ -12532,18 +12535,13 @@ export class Game {
     this.emit({ type: "gift-promised", spell: spellId, player, to });
   }
 
-  /** Answers a gift's "promise it to this opponent?" (`promptNextGift`):
-   * yes, and it's theirs; no, and the next is asked about — the last one
-   * left taking it, since a promise was made. Then `priorityTo` gets
-   * priority once nothing else is owed. */
+  /** Answers a gift's "which opponent?" (`promptNextGift`): the chosen
+   * mode's candidate is promised it. Then `priorityTo` gets priority once
+   * nothing else is owed. */
   private applyGiftChoice(player: PlayerId, chosen: readonly number[], ask: GiftAsk): void {
     this.state.awaiting = null;
-    const [first, ...rest] = ask.candidates;
-    if (chosen.length > 0 && first !== undefined) {
-      this.promiseGift(ask.spell, player, first);
-    } else if (rest.length > 0) {
-      (this.state.pendingGifts ??= []).unshift({ ...ask, candidates: rest });
-    }
+    const to = ask.candidates[chosen[0] ?? 0];
+    if (to !== undefined) this.promiseGift(ask.spell, player, to);
     this.prepareForPriority(ask.priorityTo);
   }
 

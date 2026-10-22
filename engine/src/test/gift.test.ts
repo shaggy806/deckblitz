@@ -3,7 +3,7 @@
  * choose an opponent". Promising it is the cast variant the kicker machinery
  * offers under the keyword `gift` (702.174k); the opponent is chosen as the
  * cost is paid — with one opponent there's nothing to ask, with more the
- * caster is asked about each in turn (`GiftAsk`). An instant or sorcery gives
+ * caster picks one of them in a single question (`GiftAsk`). An instant or sorcery gives
  * the gift before its other effects (702.174j); a permanent, when it enters
  * (702.174b). A spell countered gives nothing; a copy of one is promised to
  * the same opponent (the rulings).
@@ -75,15 +75,20 @@ describe("gift — the cast", () => {
     expect(game.eventsOfType("gift-promised").map((e) => e.to)).toEqual([B]);
   });
 
-  it("more opponents: asked about each in turn, the last one left taking it", () => {
+  it("more opponents: one question naming each, picked by mode", () => {
     const game = setUp([A, B, C]);
     lands(game, "Plains", 4);
     const first = toHand(game, "Dawn's Truce");
     game.dispatch({ type: "cast-spell", player: A, card: first, targets: [], kicked: true });
-    const ask = game.state.awaiting;
-    expect(ask?.kind === "choose-modes" ? ask.about : undefined).toBe(B);
-    game.dispatch({ type: "choose-modes", player: A, modes: [] });
-    // Declined Bob: Carol is the only one left, and gets it.
+    const offer = game.legalActions(A).find((a) => a.kind === "choose-modes");
+    expect(offer?.kind === "choose-modes" ? [offer.minModes, offer.maxModes, offer.modePlayers] : null).toEqual([
+      1,
+      1,
+      [B, C],
+    ]);
+    // No answer of none: a promise was made.
+    expect(game.canDispatch({ type: "choose-modes", player: A, modes: [] })).not.toBeNull();
+    game.dispatch({ type: "choose-modes", player: A, modes: [1] });
     expect(game.state.objects[first].giftTo).toBe(C);
     game.advanceUntil(quiet);
 

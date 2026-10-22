@@ -2094,16 +2094,15 @@ export const COMMANDER_RULES: Partial<GameRules> = {
  * under the keyword `gift` — and the opponent is chosen as the cost is paid
  * (601.2h, after the targets), queued in `GameState.pendingGifts` as the
  * spell is cast and asked before anyone gets priority. With one opponent
- * there's nothing to ask; with more, the caster is asked about each in turn
- * ("promise it to this opponent?", a `choose-modes` naming them), the last
- * one left taking it. See {@link CasualtyAsk} for the same shape.
+ * there's nothing to ask; with more, the caster picks one (a `choose-modes`
+ * with a mode per opponent). See {@link CasualtyAsk} for the same shape.
  */
 export interface GiftAsk {
   readonly spell: ObjectId;
   /** The caster, who promised it. */
   readonly player: PlayerId;
-  /** The opponents it may still go to, in turn order from the caster's
-   * left; the first is the one a raised decision is asking about. */
+  /** The opponents it may go to, in turn order from the caster's left —
+   * a raised decision's modes, in this order. */
   readonly candidates: readonly PlayerId[];
   readonly priorityTo: PlayerId;
 }
@@ -2797,9 +2796,9 @@ export type AwaitingDecision =
        * decision's target 0). Choosing to pay logs `ward-paid`. */
       readonly ward?: { readonly warded: ObjectId; readonly spell: ObjectId };
       /** Set when this is a gift being promised (rule 702.174a — see
-       * {@link GiftAsk}): its one mode promises it to `about`, the first of
-       * the candidates; declining asks about the next. Its modes' effects
-       * are unused. */
+       * {@link GiftAsk}): mode i promises it to candidate i (each an
+       * `about-player`, so it reads as a choice of player). Its modes'
+       * effects are unused. */
       readonly giftAsk?: GiftAsk;
       /** The life and energy parts of a `may`'s cost — see `may.costLife`
        * and `may.costEnergy` — paid alongside `cost` as the choice is made. */

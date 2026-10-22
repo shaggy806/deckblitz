@@ -2539,21 +2539,19 @@ How to use it:
 - **Setup:** 4-player game: you plus B, C, D in turn order. Your main phase. You: 4 Plains, Grizzly
   Bears, Sol Ring. Hand: 3 copies of Dawn's Truce. B: Counterspell and UU open. Also repeat in a
   2-player game, and in a 4-player game where one opponent has already lost.
-- **Do:** Open the cast options for Dawn's Truce. Cast the gift version: answer No for B and No for
-  C. Let it resolve. Cast a second copy promised, answer Yes for B, and have B counter it. Cast a
-  third copy unpromised.
+- **Do:** Open the cast options for Dawn's Truce. Cast the gift version and promise it to D by
+  clicking D's player panel. Let it resolve. Cast a second copy promised, pick B with the banner's
+  button, and have B counter it. Cast a third copy unpromised.
 - **Check:** There are two cast buttons: 'Cast Dawn's Truce' and 'Cast Dawn's Truce (gift)'. The
-  gift button shows no mana symbol, because a gift costs nothing. The promised cast asks 'Dawn's
-  Truce — Promise the gift to this opponent? — B' with Yes/No, in turn order from your left. After
-  No to B and C, D gets it with no third question. The log reads 'You promise Dawn's Truce's gift to
-  D'. On resolution D draws first (702.174j). Then you have hexproof, and every permanent you
+  gift button shows no mana symbol, because a gift costs nothing. The promised cast asks once:
+  'Dawn's Truce — choose one' with a 'Promise the gift to …' button per opponent, in turn order from
+  your left, and the opponents' panels lit — clicking one picks them. No "none" answer. The log
+  reads 'You promise Dawn's Truce's gift to D'. On resolution D draws first (702.174j). Then you have hexproof, and every permanent you
   control (lands and Sol Ring too) has hexproof and indestructible until end of turn. Countered: no
   gift card is drawn (ruling). Unpromised: hexproof only and nobody draws. In 2-player there is no
   question at all. An opponent who has lost is never offered, and a promised opponent who leaves
   before resolution gets nothing.
-- **Known limits:** Asking about one opponent at a time is a known UI gap. BACKLOG (Client/UI) wants
-  a single prompt naming every opponent, so don't report the sequence as a bug. Cascade and suspend
-  never offer the gift (BACKLOG).
+- **Known limits:** Cascade and suspend never offer the gift (BACKLOG).
 
 ### Into the Flood Maw, Long River's Pull, Wear Down, Peerless Recycling, Sazacap's Brew
 

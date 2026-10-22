@@ -483,6 +483,19 @@ interface Targeting {
   readonly targetCount?: TargetCountRange
 }
 
+/** In a choice of one player (a `choose-modes` whose modes each name one —
+ * "choose an opponent", a gift's opponent), the mode `pid`'s panel picks, so
+ * the player is picked on the board as well as by the banner's buttons. */
+function modePlayerIndex(
+  action: ModesChoiceAction | undefined,
+  mode: string,
+  pid: PlayerId,
+): number | null {
+  if (mode !== 'choose-modes' || action === undefined || action.maxModes !== 1) return null
+  const i = action.modePlayers?.indexOf(pid) ?? -1
+  return i >= 0 ? i : null
+}
+
 /**
  * The options for the slot being filled: what `slotOptions` allows ("another
  * target" leaves out what an earlier slot took), less any that would leave
@@ -2937,6 +2950,11 @@ function Table({
 
   const clickPlayerTarget = useCallback(
     (pid: PlayerId) => {
+      const playerMode = modePlayerIndex(modesChoiceAction, mode, pid)
+      if (playerMode !== null) {
+        game.dispatch({ type: 'choose-modes', player: seat, modes: [playerMode] })
+        return
+      }
       if (mode === 'choose-enchant' && enchantAction) {
         if ((enchantAction.players ?? []).includes(pid)) {
           game.dispatch({ type: 'choose-enchant', player: seat, enchant: pid })
@@ -2964,7 +2982,7 @@ function Table({
         unpickTarget({ kind: 'player', player: pid })
       }
     },
-    [attackAction, mode, pickTarget, unpickTarget, activeTargeting, sendPicksAt, proliferateAction, enchantAction, game, seat],
+    [attackAction, mode, pickTarget, unpickTarget, activeTargeting, sendPicksAt, proliferateAction, enchantAction, modesChoiceAction, game, seat],
   )
 
   const confirmAttackers = useCallback(() => {
@@ -3094,6 +3112,7 @@ function Table({
       : playerLabel(t as PlayerId, game.seats)
 
   const playerIsTargetable = (pid: PlayerId): boolean => {
+    if (modePlayerIndex(modesChoiceAction, mode, pid) !== null) return true
     if (mode === 'choose-enchant' && enchantAction) {
       return (enchantAction.players ?? []).includes(pid)
     }
@@ -3922,7 +3941,12 @@ function Table({
     // their names; the engine's own text names the seat.
     const modeLabel = (i: number): ReactNode => {
       const player = modePlayers?.[i] ?? null
-      return player !== null ? `Choose ${playerLabel(player, game.seats)}` : <Symbols text={modeTexts[i]} />
+      if (player === null) return <Symbols text={modeTexts[i]} />
+      // A mode naming its player in its own words (a gift's "Promise the
+      // gift to …") keeps them; otherwise it's "Choose …".
+      return modeTexts[i].includes(player)
+        ? withNames(modeTexts[i], game.seats, game.nameOf)
+        : `Choose ${playerLabel(player, game.seats)}`
     }
     // A "may" — one mode, yes or no. Up to one of several (an additional
     // vote, "time" or "knowledge" or none) is one button each plus none.
