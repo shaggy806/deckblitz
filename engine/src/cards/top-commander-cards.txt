@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3765 already implemented / 1235 missing (marks refreshed 2026-10-22)
+3771 already implemented / 1229 missing (marks refreshed 2026-10-22)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -946,7 +946,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   950  Omnath, Locus of Rage                    {3}{R}{R}{G}{G}  Legendary Creature — Elemental
 [x]   951  Tezzeret's Gambit                        {3}{U/P}         Sorcery
 [x]   952  Wastewood Verge                          {0}              Land
-[ ]   953  Dusk // Dawn                             {2}{W}{W} // {3}{W}{W} Sorcery // Sorcery
+[x]   953  Dusk // Dawn                             {2}{W}{W} // {3}{W}{W} Sorcery // Sorcery
 [x]   954  Phyrexian Reclamation                    {B}              Enchantment
 [x]   955  Taurean Mauler                           {2}{R}           Creature — Shapeshifter
 [ ]   956  Desperate Ritual                         {1}{R}           Instant — Arcane
@@ -1110,7 +1110,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1115  Herd Heirloom                            {1}{G}           Artifact
 [x]  1116  Up the Beanstalk                         {1}{G}           Enchantment
 [ ]  1117  Great Train Heist                        {R}              Instant
-[ ]  1118  Kozilek, Butcher of Truth                {10}             Legendary Creature — Eldrazi
+[x]  1118  Kozilek, Butcher of Truth                {10}             Legendary Creature — Eldrazi
 [x]  1119  Vivi Ornitier                            {1}{U}{R}        Legendary Creature — Wizard
 [x]  1120  Drakuseth, Maw of Flames                 {4}{R}{R}{R}     Legendary Creature — Dragon
 [x]  1121  Vilis, Broker of Blood                   {5}{B}{B}{B}     Legendary Creature — Demon
@@ -1373,7 +1373,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1380  Cloud of Faeries                         {1}{U}           Creature — Faerie
 [ ]  1381  Invasion of Ikoria // Zilortha, Apex of Ikoria {2}              Battle — Siege // Legendary Creature — Dinosaur
 [x]  1382  Regrowth                                 {1}{G}           Sorcery
-[ ]  1383  Ulamog, the Infinite Gyre                {11}             Legendary Creature — Eldrazi
+[x]  1383  Ulamog, the Infinite Gyre                {11}             Legendary Creature — Eldrazi
 [x]  1384  Vampiric Rites                           {B}              Enchantment
 [ ]  1385  Giver of Runes                           {W}              Creature — Kor Cleric
 [x]  1386  Bonehoard Dracosaur                      {3}{R}{R}        Creature — Dinosaur Dragon
@@ -1433,7 +1433,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1440  Koma, Cosmos Serpent                     {3}{G}{G}{U}{U}  Legendary Creature — Serpent
 [x]  1441  Snapcaster Mage                          {1}{U}           Creature — Human Wizard
 [ ]  1442  Ancient Silver Dragon                    {6}{U}{U}        Creature — Elder Dragon
-[ ]  1443  Elixir of Immortality                    {1}              Artifact
+[x]  1443  Elixir of Immortality                    {1}              Artifact
 [ ]  1444  Ishgard, the Holy See // Faith & Grief   {3}{W}{W}        Land — Town // Sorcery — Adventure
 [ ]  1445  Comet Storm                              {X}{R}{R}        Instant
 [x]  1446  Underworld Dreams                        {B}{B}{B}        Enchantment
@@ -3414,7 +3414,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3421  Turbulent Fen                            {0}              Land — Swamp Forest
 [x]  3422  Strength of Will                         {1}{G}           Instant
 [x]  3423  Cloudshredder Sliver                     {R}{W}           Creature — Sliver
-[ ]  3424  The Mending of Dominaria                 {3}{G}{G}        Enchantment — Saga
+[x]  3424  The Mending of Dominaria                 {3}{G}{G}        Enchantment — Saga
 [x]  3425  Tormented Soul                           {B}              Creature — Spirit
 [x]  3426  Edric, Spymaster of Trest                {1}{G}{U}        Legendary Creature — Elf Rogue
 [ ]  3427  Eidolon of Countless Battles             {1}{W}{W}        Enchantment Creature — Spirit
@@ -3779,7 +3779,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3786  Dark Petition                            {3}{B}{B}        Sorcery
 [ ]  3787  Joshua, Phoenix's Dominant // Phoenix, Warden of Fire {3}              Legendary Creature — Human Noble Wizard // Legendary Enchantment Creature — Saga Phoenix
 [x]  3788  Waterbender Ascension                    {1}{U}           Enchantment
-[ ]  3789  Blessed Respite                          {1}{G}           Instant
+[x]  3789  Blessed Respite                          {1}{G}           Instant
 [x]  3790  Goldnight Commander                      {3}{W}           Creature — Human Cleric Soldier
 [x]  3791  White Auracite                           {2}{W}{W}        Artifact
 [x]  3792  Tempered Steel                           {1}{W}{W}        Enchantment
