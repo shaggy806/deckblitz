@@ -564,6 +564,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **Blocking a token stack with a token stack** (the user, 2026-10-22): pairing your stack with an
+  attacking one blocks one for one at once; the bar's row has Max and "1 / 2 / 3 each" with a line
+  saying how the blocks spread; the blockers stay one tile once declared, with one arrow and the
+  attacker named; and a bot's combat damage assignments go through without a frame each — 100
+  Zombies each blocked by two Soldiers went from 112 s of combat to 5.4 s (dev-rooms' STKVS board).
 - **Big mills, the empty library, entering attackers and the stack's label** (the user,
   2026-10-22): an empty library is an outlined slot with a red 0, not a word; during a mill the
   library's label, panel count and pile tick down together (each as a card clears the pile); the

@@ -40,6 +40,16 @@ interface Drawn extends ArrowSpec, Course {
 }
 
 const objSel = (id: ObjectId): string => `.board [data-obj-id="${CSS.escape(id)}"]`
+
+/** What `sel` points at on screen. A permanent not drawn itself is one of a
+ * folded tile's members (`data-obj-ids` lists them all), and points from that
+ * tile: two hundred Soldier tokens blocking a hundred Zombies are one tile
+ * each side, every member's line between those two (drawn once, below). */
+function find(sel: string): HTMLElement | null {
+  const found = document.querySelector<HTMLElement>(sel)
+  if (found !== null || !sel.startsWith('.board [data-obj-id=')) return found
+  return document.querySelector<HTMLElement>(sel.replace('[data-obj-id=', '[data-obj-ids~='))
+}
 const stackSel = (id: ObjectId): string => `.stack-entry[data-stack-id="${CSS.escape(id)}"] .card-tile`
 /** A player is pointed at by their life total — what an attack or a burn
  * spell threatens — rather than their whole panel, whose middle (a header
@@ -169,13 +179,23 @@ export function ArrowLayer({
     const measure = (): void => {
       const seen = new Set<string>()
       const next: Drawn[] = []
+      // Each element on screen, numbered: a folded tile is found through any
+      // of its members, so a pair of them is told by the elements found.
+      const numbers = new Map<HTMLElement, number>()
+      const numberOf = (found: HTMLElement): number => {
+        // A tile's own permanent and a member found through it are one tile.
+        const el = found.closest<HTMLElement>('[data-obj-ids]') ?? found
+        let n = numbers.get(el)
+        if (n === undefined) numbers.set(el, (n = numbers.size))
+        return n
+      }
       for (const s of specs) {
-        const a = document.querySelector<HTMLElement>(s.from)
-        const b = document.querySelector<HTMLElement>(s.to)
+        const a = find(s.from)
+        const b = find(s.to)
         if (!a || !b || a === b) continue
         // A folded tile stands for several permanents: one line per pair of
         // things drawn on screen.
-        const pair = `${s.kind}|${s.from}|${s.to}`
+        const pair = `${s.kind}|${numberOf(a)}|${numberOf(b)}`
         if (seen.has(pair)) continue
         seen.add(pair)
         const ra = a.getBoundingClientRect()

@@ -1605,6 +1605,20 @@
 .count-stepper input {
   width: 3.2em;
 }
+/* A stack blocking a stack, under its count row: how the blocks spread, and
+   a button per "N on each" (App.tsx's blockers bar). */
+.block-pair-each {
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.block-pair-summary {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  margin-right: auto;
+}
 @keyframes decision-pulse {
   50% {
     opacity: 1;

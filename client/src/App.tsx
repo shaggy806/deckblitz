@@ -2912,7 +2912,19 @@ function Table({
         if (blockFocus) {
           const at = leastBlocked(ids, blockFocus, blockAction, blockAssign)
           if (at !== null) {
-            setBlockAssign((cur) => ({ ...cur, [blockFocus]: at }))
+            setBlockAssign((cur) => {
+              const next = { ...cur, [blockFocus]: at }
+              // A stack (or folded tile) of blockers onto a stack of
+              // attackers blocks one for one, as far as it goes — 100 of
+              // 200 Soldiers on 100 Zombies — rather than a single blocker
+              // to count up from; the bar's row sets any other number.
+              const pair = blockPairs(blockAction, next, tileOf).find(
+                (p) => p.blockers.includes(blockFocus) && p.attackers.includes(at),
+              )
+              return pair !== undefined && pair.attackers.length > 1
+                ? setPairCount(pair, Math.min(pair.max, pair.attackers.length), blockAction, next)
+                : next
+            })
             setBlockFocus(null)
           }
           return
@@ -2946,6 +2958,7 @@ function Table({
       blockAssign,
       blockFocus,
       stackMembers,
+      tileOf,
       mode,
       pickIdForClick,
       pickTarget,
@@ -3178,7 +3191,9 @@ function Table({
     const attackSeat = aimedAt === null ? null : attackSeatClass(aimedAt)
 
     if (obj.attacking && !choosingTarget) badge = `⚔ ${attackTargetLabel(obj.attacking)}`
-    else if (obj.blocking) badge = `\u{1F6E1} ${game.nameOf(obj.blocking)}`
+    // Named off the board shown, as the tile is: the game may already have
+    // moved on past this combat, the attacker gone (a raw id read in its place).
+    else if (obj.blocking) badge = `\u{1F6E1} ${view.objects[obj.blocking]?.name ?? game.nameOf(obj.blocking)}`
     else if (obj.isCommander) badge = 'Commander'
 
     if (mode === 'targeting') {
@@ -5032,11 +5047,47 @@ function Table({
                 }`}
                 count={p.count}
                 max={p.max}
+                maxButton
                 onChange={(n) => setBlockAssign((cur) => setPairCount(p, n, blockAction, cur))}
               />
             ))}
           </span>
         ) : null}
+        {/* A stack blocking a stack: how the blockers spread over the
+            attackers, and one click to a block of 1, 2 or 3 on each (the
+            user, 2026-10-22: 200 Soldiers on 100 Zombies). */}
+        {pairs
+          .filter((p) => p.attackers.length > 1)
+          .map((p) => {
+            const per = p.attackers.length
+            const each = Array.from({ length: Math.min(3, Math.floor(p.max / per)) }, (_, i) => i + 1)
+            const low = Math.floor(p.count / per)
+            const extra = p.count % per
+            return (
+              <span key={`each-${p.blockers[0]}>${p.attackers[0]}`} className="block-pair-each">
+                <span className="block-pair-summary">
+                  {p.count === 0
+                    ? 'none blocked'
+                    : p.count < per
+                      ? `${p.count} of ${per} blocked, 1 on each`
+                      : extra === 0
+                        ? `every one blocked, ${low} on each`
+                        : `every one blocked, ${low}–${low + 1} on each`}
+                </span>
+                {each.map((k) => (
+                  <button
+                    key={k}
+                    type="button"
+                    className={p.count === k * per ? 'selected' : undefined}
+                    aria-pressed={p.count === k * per}
+                    onClick={() => setBlockAssign((cur) => setPairCount(p, k * per, blockAction, cur))}
+                  >
+                    {k} each
+                  </button>
+                ))}
+              </span>
+            )
+          })}
         <button
           type="button"
           onClick={() => {

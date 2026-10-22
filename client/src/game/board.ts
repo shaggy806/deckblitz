@@ -66,10 +66,20 @@ export function bucketOf(obj: VisibleObject): Bucket {
  * shows it (`CardFlags`), so on anything else it kept a Forest played this
  * turn, or a Treasure just made, off the tile of its identical fellows until
  * the next turn (the user, 2026-10-12).
+ *
+ * What a blocker blocks is compared by how that attacker looks (its own key,
+ * through `objects`), not by its id: two hundred Soldier tokens blocking a
+ * hundred identical Zombie tokens two to a Zombie are one tile, not a hundred
+ * (the user, 2026-10-22). The arrows still go from each to its own attacker.
  */
-function tileKey(obj: VisibleObject): string {
-  const { id: _id, stackCount: _stackCount, blocked: _blocked, summoningSick, ...shown } = obj
-  return JSON.stringify({ ...shown, sick: summoningSick && obj.types.includes('creature') })
+function tileKey(obj: VisibleObject, objects?: Readonly<Record<string, VisibleObject | undefined>>): string {
+  const { id: _id, stackCount: _stackCount, blocked: _blocked, summoningSick, blocking, ...shown } = obj
+  const blocked = blocking === null ? null : objects?.[blocking]
+  return JSON.stringify({
+    ...shown,
+    blocking: blocked === undefined || blocked === null ? blocking : tileKey(blocked),
+    sick: summoningSick && obj.types.includes('creature'),
+  })
 }
 
 /** All battlefield entries for `pid`'s board, bucketed and stacked. */
@@ -131,7 +141,7 @@ export function computeBoardEntries(
         : obj.isToken) // real (nontoken) permanents never fold into a stack
     const count = obj.stackCount ?? 1
     if (stackable) {
-      const key = tileKey(obj)
+      const key = tileKey(obj, view.objects)
       const idx = stackIndex.get(key)
       if (idx !== undefined) {
         entries[idx].ids.push(obj.id)

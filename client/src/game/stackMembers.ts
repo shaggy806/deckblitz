@@ -33,9 +33,10 @@ import type {
 type AttackOffer = Extract<LegalAction, { kind: 'declare-attackers' }>
 type BlockOffer = Extract<LegalAction, { kind: 'declare-blockers' }>
 
-/** The engine's `MAX_MATERIALIZED`: past it a blocking stack's extra tokens
- * sit the combat out whatever is declared. */
-export const MEMBER_CAP = 100
+/** The engine's `Game.MAX_BLOCKERS_WOKEN`: past it a blocking stack's extra
+ * tokens sit the combat out whatever is declared. 500, so a stack can block
+ * an attacking one two (or more) to a token. */
+export const MEMBER_CAP = 500
 
 /** Members of one attacking stack: any number of its tokens attack, so this
  * only bounds the bar's own bookkeeping (a self-copier reaches millions). */
