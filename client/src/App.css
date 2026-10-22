@@ -1812,6 +1812,37 @@
   color: var(--muted);
   font-size: var(--text-sm);
 }
+/* An empty library (App.tsx's side zone): the pile's own place and size, a
+   dashed outline with a 0 where the count was, so it reads at a glance. */
+.library-empty {
+  width: var(--card-w);
+  min-height: calc(var(--card-w) * 1.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 2px dashed color-mix(in srgb, var(--bad) 55%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bad) 6%, transparent);
+  color: var(--muted);
+}
+.quadrant-body .side-zone .library-empty {
+  min-height: 40px;
+  height: 100%;
+  max-height: calc(var(--card-w) * 1.4);
+}
+.library-empty-count {
+  font-size: calc(var(--card-w) * 0.22);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--bad);
+}
+.library-empty-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
 /* an empty command zone slot — an outline, not a face-down card, since
    there's nothing there at all (unlike the library, which always has one).
    Sized to a CommanderTile, not a full card, since that's what fills it:
@@ -2287,6 +2318,23 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+/* The top entry's line — whose it is, what it is — read at a glance (the
+   user, 2026-10-22: it was lost in the glow): larger, bright, on a dark
+   pill, and lifted clear of the card's pulsing glow. Every entry's label
+   takes this room (only the top's is shown), so a card doesn't move as its
+   entry comes to the top. */
+.stack-entry .stack-entry-label {
+  font-size: clamp(13px, calc(var(--card-w) * 0.1), 21px);
+  font-weight: 600;
+  color: var(--text);
+  max-width: calc(var(--card-w) * 1.7);
+  padding: 2px 10px;
+  margin-bottom: clamp(8px, 1.4vh, 14px);
+  background: rgb(0 0 0 / 0.72);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.5);
 }
 /* Only the top entry -- what a player is responding to -- says whose it is
    and what it targets (`shows-lines`, Stack.tsx: the real top entry under a

@@ -1562,7 +1562,9 @@ const TONE_RGB: Record<Tone, string> = {
  * React, like the ghosts, and gone when it's done. Waits out `delay` hidden
  * (`fill: 'both'`), since after-half cues are all started at once. Under
  * reduced motion it fades where it is instead of rising. Starts from the
- * middle of the element, or `down` (a fraction of its height) from its top.
+ * middle of the element, or `down` (a fraction of its height) from its top —
+ * past 1, below it. Kept inside the game's width (less a docked side panel),
+ * so a number off something at the screen's edge is read whole.
  */
 function floatText(
   from: Element,
@@ -1577,9 +1579,11 @@ function floatText(
   const el = document.createElement('div')
   el.className = `float-text ${tone}`
   el.textContent = text
-  el.style.left = `${r.left + r.width / 2}px`
   el.style.top = `${r.top + r.height * down}px`
   document.body.appendChild(el)
+  const half = el.getBoundingClientRect().width / 2
+  const rightEdge = (document.querySelector('.app')?.getBoundingClientRect().right ?? window.innerWidth) - 8
+  el.style.left = `${Math.max(8 + half, Math.min(r.left + r.width / 2, rightEdge - half))}px`
   const rise = motionPrefs().reduced ? 0 : 1
   const animation = el.animate(
     [
@@ -1807,6 +1811,10 @@ function peelFace(card: { readonly object: ObjectId; readonly seq: number }, vie
 
 /** The cards of one library's `parts` peeling off the top of `player`'s
  * pile, each part where the one before it left off — see {@link runMill}. */
+/** How far through its lift a peeling card has cleared its pile: up, turned
+ * and off the number it carried (`peelCards`' keyframes). */
+const PEEL_CLEARS = 0.2
+
 function peelFrom(player: PlayerId, parts: readonly PeelPart[], view: PlayerView): void {
   const pile = document.querySelector<HTMLElement>(`[data-library-of="${CSS.escape(player)}"]`)
   // What peels, and what the total floats off: the card the pile shows.
@@ -1861,21 +1869,27 @@ function peelFrom(player: PlayerId, parts: readonly PeelPart[], view: PlayerView
     const begin = part.startStep * stagger
     const into = part.exile ? exile : graveyard
     const intoKey = part.exile ? 'exile' : 'graveyard'
-    // Off the top of the card, rising away from the number in its middle,
-    // which is counting down the while.
+    // Just under the pile, rising towards it: the turned-over cards fan out
+    // level with the pile, and a total over them hid the cards it counts.
     floatText(
       top,
       `−${part.count} ${part.exile ? 'exiled' : 'milled'}`,
       'loss',
       begin,
       duration + (shown - 1) * stagger,
-      0.22,
+      1.18,
     )
     for (let i = 0; i < shown; i += 1) {
       const moved = Math.ceil((part.count * (i + 1)) / shown)
-      const at = begin + i * stagger + duration * 0.35
-      for (const el of library) tick(el, (startOf.get(el) ?? 0) - left - moved, at)
-      if (into) tick(into, (startOf.get(into) ?? 0) + landed[intoKey] + moved, at)
+      // The library counts down as the card clears the pile (a fifth of its
+      // lift: up and turned, its number gone), uncovering the next card,
+      // which carries the new number — so the label, the panel and the pile
+      // say the same throughout (a card's number staying while the label had
+      // moved on, or the other way about, read as two counts); the graveyard
+      // (or exile) counts up a little later, the card on its way there.
+      const lifts = begin + i * stagger
+      for (const el of library) tick(el, (startOf.get(el) ?? 0) - left - moved, lifts + duration * PEEL_CLEARS)
+      if (into) tick(into, (startOf.get(into) ?? 0) + landed[intoKey] + moved, lifts + duration * 0.35)
     }
     // The pile's number as each card is its top card: the cards waiting
     // cover the pile's own cardback, so they carry its count down with them.

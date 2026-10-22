@@ -3610,7 +3610,13 @@ function Table({
                 <span className="card-back-count">{librarySize}</span>
               </div>
             ) : (
-              <div className="side-zone-empty">empty</div>
+              // An empty library keeps the pile's place and shape, outlined —
+              // drawing from it loses the game (rule 704.5b), so it should be
+              // as plain to see as a full one.
+              <div className="library-empty" title="No cards left: drawing from an empty library loses the game">
+                <span className="library-empty-count">0</span>
+                <span className="library-empty-label">empty</span>
+              </div>
             )}
           </div>
         </div>

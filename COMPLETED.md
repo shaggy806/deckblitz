@@ -560,6 +560,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **Big mills, the empty library, entering attackers and the stack's label** (the user,
+  2026-10-22): an empty library is an outlined slot with a red 0, not a word; during a mill the
+  library's label, panel count and pile tick down together (each as a card clears the pile); the
+  "−N milled" total rises from under the pile, inside the board, clear of the turned-over cards; a
+  creature put onto the battlefield attacking has no arrow until its defender is chosen (the view's
+  `attackingUndecided`); and the top stack entry's line is larger, on a dark pill, clear of the glow.
 - **Copies of one trigger condense on the stack** (the user, 2026-10-07 and 2026-10-22; done
   2026-10-22): abilities that are copies of one another (`stackCopyKey` — one controller, the same
   ability of a same-named card, nothing chosen) show as one entry "×N"; resolving them all goes in
