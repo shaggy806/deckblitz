@@ -407,6 +407,7 @@ import _poolRetractionHelix from "../pool/retraction-helix.js";
 import _poolReturnTheFavor from "../pool/return-the-favor.js";
 import _poolReturnedCentaur from "../pool/returned-centaur.js";
 import _poolRevelRuiner from "../pool/revel-ruiner.js";
+import _poolRhonassLastStand from "../pool/rhonass-last-stand.js";
 import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
 import _poolRighteousAvengers from "../pool/righteous-avengers.js";
 import _poolRimeTender from "../pool/rime-tender.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolReturnTheFavor,
     _poolReturnedCentaur,
     _poolRevelRuiner,
+    _poolRhonassLastStand,
     _poolRicketyGazebo,
     _poolRighteousAvengers,
     _poolRimeTender,

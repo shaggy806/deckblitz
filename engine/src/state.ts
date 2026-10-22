@@ -1980,6 +1980,12 @@ export interface PlayerState {
   /** This player cast a spell from a graveyard, or activated an ability of a
    * card in a graveyard, this turn (Laboratory Drudge). */
   usedGraveyardThisTurn: boolean;
+  /** "Lands you control don't untap during your next untap step" (Kefnet's
+   * Last Word): during this player's next untap step, no permanent they
+   * control then that matches one of these untaps — those that came under
+   * their control since included (the rulings). Cleared by that untap step.
+   * Absent with none. See the `skip-next-untap` effect. */
+  untapSkips?: readonly CardFilter[];
   /** What this player's turn so far has held — see {@link TurnHistory}.
    * Absent until something is recorded; reset as each turn begins. */
   turnHistory?: TurnHistory;
@@ -2218,6 +2224,9 @@ export type AwaitingDecision =
       /** "…unless they discard a land card" (Compulsive Research): any one
        * of these on its own is an answer, instead of `count` cards. */
       readonly orOneOf?: readonly ObjectId[];
+      /** "Discard any number of cards" (the `discard` effect's `anyNumber`):
+       * any number up to `count` — none included. */
+      readonly upTo?: true;
       /** A cost's discard (a spell's additional cost, an activated
        * ability's): who gets priority once it's answered — who cast or
        * activated (rule 117.3c), whoever's turn it is. Absent: the active
@@ -3805,6 +3814,8 @@ export interface GameState {
     readonly filter?: CardFilter;
     /** See the `discard` effect's `unlessOne`. */
     readonly unlessOne?: CardFilter;
+    /** See the `discard` effect's `anyNumber`. */
+    readonly upTo?: true;
   }[];
   /**
    * Attackers just declared whose "you may exert this creature as it

@@ -284,6 +284,7 @@ import _poolLateToDinner from "../pool/late-to-dinner.js";
 import _poolLavaspurBoots from "../pool/lavaspur-boots.js";
 import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
 import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
+import _poolLeaveChance from "../pool/leave-chance.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
 import _poolLifeforce from "../pool/lifeforce.js";
 import _poolLightningTalons from "../pool/lightning-talons.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolLavaspurBoots,
     _poolLayOfTheLand,
     _poolLazavDimirMastermind,
+    _poolLeaveChance,
     _poolLeoninScimitar,
     _poolLifeforce,
     _poolLightningTalons,

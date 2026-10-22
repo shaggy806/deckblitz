@@ -51,6 +51,7 @@ import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
+import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
@@ -69,6 +70,7 @@ import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
 import _poolChainwhipCyclops from "../pool/chainwhip-cyclops.js";
+import _poolChance from "../pool/chance.js";
 import _poolChargingBandits from "../pool/charging-bandits.js";
 import _poolCinderStorm from "../pool/cinder-storm.js";
 import _poolClaimTerritory from "../pool/claim-territory.js";
@@ -617,6 +619,7 @@ const shard: CardShard = {
     _poolBloodHypnotist,
     _poolBloodtracker,
     _poolBloomwielderDryads,
+    _poolBontusLastReckoning,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
     _poolBoundInSilence,
@@ -635,6 +638,7 @@ const shard: CardShard = {
     _poolCauldronsGift,
     _poolCetaDisciple,
     _poolChainwhipCyclops,
+    _poolChance,
     _poolChargingBandits,
     _poolCinderStorm,
     _poolClaimTerritory,

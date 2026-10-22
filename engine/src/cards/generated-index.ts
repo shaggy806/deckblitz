@@ -44,6 +44,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "4/4 Red Bird Token",
   "4/4 Vigilant Angel Token",
   "5/3 Green Elemental Token",
+  "5/4 Snake Token",
   "5/5 Demon Token",
   "5/5 Djinn Artifact Token",
   "5/5 Elemental Token",

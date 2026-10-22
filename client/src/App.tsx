@@ -5013,8 +5013,8 @@ function Table({
         <span>
           {fromEffect
             ? `${view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}Discard ${
-                discardAction.count
-              } card${discardAction.count === 1 ? '' : 's'}`
+                discardAction.upTo === true ? 'any number of cards' : discardAction.count
+              }${discardAction.upTo === true ? '' : ` card${discardAction.count === 1 ? '' : 's'}`}`
             : 'Discard to hand size'}
           {discardAction.orOneOf !== undefined ? ', or one land card' : ''}{' '}
           — click cards in your hand · {discardPicks.length}/{discardAction.count}
@@ -5022,7 +5022,8 @@ function Table({
         <button
           type="button"
           disabled={
-            discardPicks.length !== discardAction.count &&
+            // "Any number": none up to the hand.
+            (discardAction.upTo === true ? discardPicks.length > discardAction.count : discardPicks.length !== discardAction.count) &&
             !(discardPicks.length === 1 && (discardAction.orOneOf ?? []).includes(discardPicks[0]))
           }
           onClick={confirmDiscard}

@@ -2794,6 +2794,11 @@ export type EffectSpec =
       /** "…unless they discard a [land] card" (Compulsive Research): one card
        * matching this is a whole answer by itself, instead of `amount`. */
       readonly unlessOne?: CardFilter;
+      /** "Discard **any number of** cards" (Chance, Neheb's "discard any
+       * number of cards, then draw that many"): the player picks how many,
+       * from none to their whole hand; `amount` is ignored. "That many" after
+       * it is `{ thisWay: "discarded" }`. */
+      readonly anyNumber?: true;
     }
   | {
       readonly kind: "modify-pt";
@@ -3988,6 +3993,19 @@ export type EffectSpec =
        * rather than to whoever controls each permanent then
        * (`GameObject.skipsUntapOf`). */
       readonly untapStepOfTarget?: boolean;
+    }
+  | {
+      /**
+       * "Lands you control don't untap during your next untap step" (Kefnet's
+       * Last Word, the Gods' Last cards): during that player's next untap
+       * step, no permanent they control matching `filter` untaps — read then,
+       * so one that came under their control since is held too (the rulings),
+       * unlike `tap-all`'s `doesntUntapNext`, which marks what's there now.
+       * `who` is a player slot or a scope, `"you"` by default.
+       */
+      readonly kind: "skip-next-untap";
+      readonly filter: CardFilter;
+      readonly who?: number | PlayerScope;
     }
   | {
       /**
@@ -6203,6 +6221,8 @@ export interface EffectApi {
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}. */
   shuffleGraveyardIntoLibrary(target: TargetRef): void;
+  /** See the `"skip-next-untap"` {@link EffectSpec}. */
+  skipNextUntap(target: TargetRef, filter: CardFilter): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
    * of `target`'s library, or all of it but the bottom `allBut`. */
   exileFromLibrary(
@@ -6239,7 +6259,7 @@ export interface EffectApi {
     },
   ): boolean;
   /** `target` (a player) discards `amount` cards. */
-  discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter): void;
+  discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter, anyNumber?: boolean): void;
   /** See the `discard-chosen` {@link EffectSpec}: `target` (a player) reveals
    * their hand (or the controller looks at it), the controller chooses, and
    * that player discards the card chosen. */
@@ -9120,6 +9140,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "skip-next-untap": {
+      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) ctx.skipNextUntap(target, spec.filter);
+      return;
+    }
     case "shuffle-graveyard-into-library": {
       const players = scopedOrTargetedPlayers(spec.target, ctx);
       ctx.simultaneously(() => {
@@ -9359,6 +9383,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           amountValue(spec.amount, ctx, target.kind === "player" ? target.player : undefined),
           spec.random === true,
           spec.unlessOne,
+          spec.anyNumber === true,
         );
       }
       return;

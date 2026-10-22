@@ -6106,6 +6106,9 @@ export class Game {
   private untapStep(): void {
     const active = this.activePlayer;
     const untapping: ObjectId[] = [];
+    // "Lands you control don't untap during your next untap step" (Kefnet's
+    // Last Word): whatever matches now, whenever it arrived.
+    const skips = this.state.players[active]?.untapSkips ?? [];
     // First, phasing (rule 502.1), before anything untaps.
     this.phasingStep(active);
     // The turn's resets reach a phased-out permanent too: what it did on an
@@ -6137,6 +6140,7 @@ export class Game {
         object.exertedBy !== active &&
         object.skipsNextUntap !== true &&
         object.skipsUntapOf !== active &&
+        !skips.some((filter) => matchesFilter(this.state, this.registry, id, filter, { you: active })) &&
         !this.hasOwnStatic(object, (a) => a.doesntUntap === true) &&
         // "Enchanted creature doesn't untap during its controller's untap
         // step" (Tractor Beam) — a restriction a static puts on it.
@@ -6195,6 +6199,8 @@ export class Game {
       if (object?.controller === active) delete object.skipsNextUntap;
       if (object?.skipsUntapOf === active) delete object.skipsUntapOf;
     }
+    const activeState = this.state.players[active];
+    if (activeState?.untapSkips !== undefined) delete activeState.untapSkips;
   }
 
   /**
@@ -21540,14 +21546,18 @@ export class Game {
         this.grantCantBeSacrificed(target, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
       shuffleGraveyardIntoLibrary: (target) => this.shuffleGraveyardIntoLibraryByEffect(target),
+      skipNextUntap: (target, filter) => {
+        const player = target.kind === "player" ? this.state.players[target.player] : undefined;
+        if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
+      },
       exileFromLibrary: (target, count, withCounters) =>
         this.exileFromLibraryByEffect(target, count, controller, withCounters),
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
       aggregate: (spec, except) => this.aggregateBattlefield(controller, spec, except),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, opts),
-      discardCards: (target, amount, random, unlessOne) =>
-        this.discardByEffect(target, amount, random === true, undefined, unlessOne),
+      discardCards: (target, amount, random, unlessOne, anyNumber) =>
+        this.discardByEffect(target, amount, random === true, undefined, unlessOne, anyNumber === true),
       discardChosen: (target, filter, lookOnly, optional) =>
         this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional),
       modifyPt: (target, power, toughness, duration) =>
@@ -31085,10 +31095,30 @@ export class Game {
     random = false,
     filter?: CardFilter,
     unlessOne?: CardFilter,
+    /** "Discard any number of cards": up to the whole hand, the player's
+     * pick of how many — `amount` is ignored. */
+    upTo = false,
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
-    if (this.state.players[player] === undefined || amount <= 0) return;
+    if (this.state.players[player] === undefined) return;
+    if (upTo) {
+      if (this.discardCandidates(player, filter).length === 0) return;
+      if (this.state.awaiting !== null || this.state.pendingDiscards.length > 0) {
+        const from = this.state.decisionSource;
+        this.state.pendingDiscards.push({
+          player,
+          count: 0,
+          upTo: true,
+          ...(from !== null ? { source: from } : {}),
+          ...(filter !== undefined ? { filter } : {}),
+        });
+        return;
+      }
+      this.discardNow(player, 0, filter, undefined, true);
+      return;
+    }
+    if (amount <= 0) return;
     // "At random": nobody is asked, so nothing waits its turn — the game
     // picks, with the same seeded shuffle a library uses.
     if (random) {
@@ -31227,7 +31257,7 @@ export class Game {
   private promptNextDiscard(): void {
     const next = this.state.pendingDiscards.shift();
     if (next === undefined || this.state.players[next.player]?.hasLost === true) return;
-    this.discardNow(next.player, next.count, next.filter, next.unlessOne);
+    this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true);
     if (this.state.awaiting !== null && next.source !== undefined) {
       this.state.decisionSource = next.source;
     }
@@ -31235,8 +31265,27 @@ export class Game {
 
   /** Discard `amount` cards from `player`'s hand: the whole hand at once if
    * that's all there is, else ask which. */
-  private discardNow(player: PlayerId, amount: number, filter?: CardFilter, unlessOne?: CardFilter): void {
+  private discardNow(
+    player: PlayerId,
+    amount: number,
+    filter?: CardFilter,
+    unlessOne?: CardFilter,
+    upTo = false,
+  ): void {
     const hand = this.discardCandidates(player, filter);
+    // "Any number of cards": a choice of how many whenever there's a card.
+    if (upTo) {
+      if (hand.length === 0) return;
+      this.state.awaiting = {
+        kind: "discard",
+        player,
+        count: hand.length,
+        upTo: true,
+        fromEffect: true,
+        ...(filter !== undefined ? { eligible: hand } : {}),
+      };
+      return;
+    }
     if (!this.discardHasChoice(player, amount, filter, unlessOne)) {
       const all = [...hand];
       if (this.state.heldChoices !== undefined) {

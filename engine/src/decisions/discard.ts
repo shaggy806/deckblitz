@@ -39,6 +39,7 @@ export const discard = defineDecision({
       // creature card") — then only those.
       from: [...(awaiting.eligible ?? ctx.state.zones.perPlayer[player].hand)],
       ...(awaiting.orOneOf !== undefined ? { orOneOf: [...awaiting.orOneOf] } : {}),
+      ...(awaiting.upTo === true ? { upTo: true as const } : {}),
     },
   ],
 
@@ -55,11 +56,16 @@ export const discard = defineDecision({
     // other way round. Preserved rather than harmonised: both orders are
     // reachable and the messages are asserted.
     return (
-      exactCount(
-        cards,
-        awaiting.count,
-        (got, want) => `${player} must discard exactly ${want} card(s), chose ${got}`,
-      ) ??
+      // "Discard any number of cards": none to `count`.
+      (awaiting.upTo === true
+        ? cards.length > awaiting.count
+          ? `${player} can discard at most ${awaiting.count} card(s), chose ${cards.length}`
+          : null
+        : exactCount(
+            cards,
+            awaiting.count,
+            (got, want) => `${player} must discard exactly ${want} card(s), chose ${got}`,
+          )) ??
       noDuplicates(cards, `${player} chose the same card twice to discard`) ??
       subsetOf(
         cards,
@@ -87,15 +93,23 @@ export const discard = defineDecision({
    * card, and a capped list should keep the cheap ones. */
   candidates: (legal, player, limit, helpers): Action[] => {
     if (legal.kind !== "discard") return [];
-    return combinations([...helpers.order(legal.from)].reverse(), legal.count, limit).map(
-      (cards) => ({ type: "discard", player, cards }),
-    );
+    const worstFirst = [...helpers.order(legal.from)].reverse();
+    // "Any number": every size, smallest first, the cap shared out in order.
+    const sizes = legal.upTo === true ? Array.from({ length: legal.count + 1 }, (_, n) => n) : [legal.count];
+    const out: Action[] = [];
+    for (const size of sizes) {
+      if (out.length >= limit) break;
+      for (const cards of combinations(worstFirst, size, limit - out.length)) out.push({ type: "discard", player, cards });
+    }
+    return out;
   },
 
   randomAnswer: (legal, player, rng): Action => {
     const pool = [...legal.from];
     const cards: ObjectId[] = [];
-    for (let i = 0; i < legal.count && pool.length > 0; i += 1) {
+    // "Any number": how many is drawn too.
+    const count = legal.upTo === true ? rng.pickIndex(legal.count + 1) : legal.count;
+    for (let i = 0; i < count && pool.length > 0; i += 1) {
       cards.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }
     return { type: "discard", player, cards };

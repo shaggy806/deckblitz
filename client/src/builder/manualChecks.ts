@@ -3115,6 +3115,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Chance: discard any number of cards',
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Grizzly Bears', 'Hill Giant', 'Craw Wurm'], gy: ['Leave // Chance'] },
+    }),
+  ),
+  preset(
     "Conqueror's Galleon attacks and comes back a land",
     board({
       you: { bf: ["Conqueror's Galleon", 'Craw Wurm'] },

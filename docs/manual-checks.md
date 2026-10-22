@@ -5276,3 +5276,16 @@ is exiled
 - **Check:** From the hand only Consign can be cast; from the graveyard only Oblivion (labelled
   aftermath). The opponent discards two, and Consign // Oblivion ends in exile, not the
   graveyard. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Chance: discard any number of cards
+
+*New player decision* — "discard any number of cards, then draw that many": a discard of none
+up to the whole hand
+
+- **Setup:** Your precombat main. Your battlefield: four Mountains; your hand: Grizzly Bears, Hill
+  Giant, Craw Wurm; your graveyard: Leave // Chance.
+- **Do:** Cast Chance from the graveyard. When asked, pick two cards and confirm. Then reload the
+  board and cast it again, confirming with none picked.
+- **Check:** The bar reads "Discard any number of cards" and the button works with none, one,
+  two or three picked. Two discarded draws two; none discarded draws none. Check at ~768px tall,
+  in a 2- and a 4-player room.

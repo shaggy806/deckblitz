@@ -394,7 +394,9 @@
   "keyword:aftermath",
   "cost:exert",
   "effect:shuffle-graveyard-into-library",
-  "effect:target-player-shuffles-graveyard-into-library"
+  "effect:target-player-shuffles-graveyard-into-library",
+  "effect:player-next-untap-step-skip-filter",
+  "decision:discard-any-number"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

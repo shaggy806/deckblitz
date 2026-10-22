@@ -240,6 +240,7 @@ import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
 import _poolHarriedSpearguard from "../pool/harried-spearguard.js";
 import _poolHarvesterOfSouls from "../pool/harvester-of-souls.js";
 import _poolHavenOfTheHarvest from "../pool/haven-of-the-harvest.js";
+import _poolHazoretsUndyingFury from "../pool/hazorets-undying-fury.js";
 import _poolHeadlessRider from "../pool/headless-rider.js";
 import _poolHeliodsPilgrim from "../pool/heliods-pilgrim.js";
 import _poolHeroesHangout from "../pool/heroes-hangout.js";
@@ -820,6 +821,7 @@ const shard: CardShard = {
     _poolHarriedSpearguard,
     _poolHarvesterOfSouls,
     _poolHavenOfTheHarvest,
+    _poolHazoretsUndyingFury,
     _poolHeadlessRider,
     _poolHeliodsPilgrim,
     _poolHeroesHangout,

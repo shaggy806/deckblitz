@@ -291,6 +291,7 @@ import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
 import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
 import _poolKarganWarleader from "../pool/kargan-warleader.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
+import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
@@ -862,6 +863,7 @@ const shard: CardShard = {
     _poolKamiOfRestlessShadows,
     _poolKarganWarleader,
     _poolKeenBuccaneer,
+    _poolKefnetsLastWord,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,

@@ -1836,6 +1836,7 @@ import _poolBonesplitter from "./pool/bonesplitter.js";
 import _poolBoneyardDesecrator from "./pool/boneyard-desecrator.js";
 import _poolBoneyardLurker from "./pool/boneyard-lurker.js";
 import _poolBoneyardScourge from "./pool/boneyard-scourge.js";
+import _poolBontusLastReckoning from "./pool/bontus-last-reckoning.js";
 import _poolBontusMonument from "./pool/bontus-monument.js";
 import _poolBookDevourer from "./pool/book-devourer.js";
 import _poolBookOfMazarbul from "./pool/book-of-mazarbul.js";
@@ -2532,6 +2533,7 @@ import _poolChampionsOfThePerfect from "./pool/champions-of-the-perfect.js";
 import _poolChampionsOfTheShoal from "./pool/champions-of-the-shoal.js";
 import _poolChanceEncounter from "./pool/chance-encounter.js";
 import _poolChanceMetElves from "./pool/chance-met-elves.js";
+import _poolChance from "./pool/chance.js";
 import _poolChancellorOfTales from "./pool/chancellor-of-tales.js";
 import _poolChandler from "./pool/chandler.js";
 import _poolChandraAcolyteOfFlame from "./pool/chandra-acolyte-of-flame.js";
@@ -7069,6 +7071,7 @@ import _poolHazezonShaperOfSand from "./pool/hazezon-shaper-of-sand.js";
 import _poolHazezonTamar from "./pool/hazezon-tamar.js";
 import _poolHazoretGodseeker from "./pool/hazoret-godseeker.js";
 import _poolHazoretsMonument from "./pool/hazorets-monument.js";
+import _poolHazoretsUndyingFury from "./pool/hazorets-undying-fury.js";
 import _poolHeadOfTheHomestead from "./pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "./pool/headless-horseman.js";
 import _poolHeadlessRider from "./pool/headless-rider.js";
@@ -8389,6 +8392,7 @@ import _poolKeeperOfTheQuietHour from "./pool/keeper-of-the-quiet-hour.js";
 import _poolKeepersOfTheFaith from "./pool/keepers-of-the-faith.js";
 import _poolKefkaCourtMage from "./pool/kefka-court-mage.js";
 import _poolKefkaRulerOfRuin from "./pool/kefka-ruler-of-ruin.js";
+import _poolKefnetsLastWord from "./pool/kefnets-last-word.js";
 import _poolKefnetsMonument from "./pool/kefnets-monument.js";
 import _poolKeiTakahashi from "./pool/kei-takahashi.js";
 import _poolKeigaTheTideStar from "./pool/keiga-the-tide-star.js";
@@ -8834,7 +8838,9 @@ import _poolLeapingMaster from "./pool/leaping-master.js";
 import _poolLeatherArmor from "./pool/leather-armor.js";
 import _poolLeatherbackBaloth from "./pool/leatherback-baloth.js";
 import _poolLeatherheadIronGator from "./pool/leatherhead-iron-gator.js";
+import _poolLeaveChance from "./pool/leave-chance.js";
 import _poolLeaveInTheDust from "./pool/leave-in-the-dust.js";
+import _poolLeave from "./pool/leave.js";
 import _poolLeavesFromTheVine from "./pool/leaves-from-the-vine.js";
 import _poolLectureHall from "./pool/lecture-hall.js";
 import _poolLecturingScornmage from "./pool/lecturing-scornmage.js";
@@ -12451,6 +12457,7 @@ import _poolRhinoBarrelingBrute from "./pool/rhino-barreling-brute.js";
 import _poolRhinosRampage from "./pool/rhinos-rampage.js";
 import _poolRhizomeLurcher from "./pool/rhizome-lurcher.js";
 import _poolRhonasTheIndomitable from "./pool/rhonas-the-indomitable.js";
+import _poolRhonassLastStand from "./pool/rhonass-last-stand.js";
 import _poolRhonassMonument from "./pool/rhonass-monument.js";
 import _poolRhovanionRampager from "./pool/rhovanion-rampager.js";
 import _poolRhoxBodyguard from "./pool/rhox-bodyguard.js";
@@ -18649,6 +18656,7 @@ import _tokensSliverToken from "./tokens/sliver-token.js";
 import _tokensSlugToken from "./tokens/slug-token.js";
 import _tokensSmokeBlessingToken from "./tokens/smoke-blessing-token.js";
 import _tokensSnailToken from "./tokens/snail-token.js";
+import _tokensSnakeToken54 from "./tokens/snake-token-5-4.js";
 import _tokensSnakeTokenArtifactPoison from "./tokens/snake-token-artifact-poison.js";
 import _tokensSnakeToken from "./tokens/snake-token.js";
 import _tokensSoldierArtifactToken from "./tokens/soldier-artifact-token.js";
@@ -20607,6 +20615,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoneyardDesecrator,
   _poolBoneyardLurker,
   _poolBoneyardScourge,
+  _poolBontusLastReckoning,
   _poolBontusMonument,
   _poolBookDevourer,
   _poolBookOfMazarbul,
@@ -21303,6 +21312,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChampionsOfTheShoal,
   _poolChanceEncounter,
   _poolChanceMetElves,
+  _poolChance,
   _poolChancellorOfTales,
   _poolChandler,
   _poolChandraAcolyteOfFlame,
@@ -25840,6 +25850,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHazezonTamar,
   _poolHazoretGodseeker,
   _poolHazoretsMonument,
+  _poolHazoretsUndyingFury,
   _poolHeadOfTheHomestead,
   _poolHeadlessHorseman,
   _poolHeadlessRider,
@@ -27160,6 +27171,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKeepersOfTheFaith,
   _poolKefkaCourtMage,
   _poolKefkaRulerOfRuin,
+  _poolKefnetsLastWord,
   _poolKefnetsMonument,
   _poolKeiTakahashi,
   _poolKeigaTheTideStar,
@@ -27605,7 +27617,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeatherArmor,
   _poolLeatherbackBaloth,
   _poolLeatherheadIronGator,
+  _poolLeaveChance,
   _poolLeaveInTheDust,
+  _poolLeave,
   _poolLeavesFromTheVine,
   _poolLectureHall,
   _poolLecturingScornmage,
@@ -31222,6 +31236,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRhinosRampage,
   _poolRhizomeLurcher,
   _poolRhonasTheIndomitable,
+  _poolRhonassLastStand,
   _poolRhonassMonument,
   _poolRhovanionRampager,
   _poolRhoxBodyguard,
@@ -37426,6 +37441,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSlugToken,
   _tokensSmokeBlessingToken,
   _tokensSnailToken,
+  _tokensSnakeToken54,
   _tokensSnakeTokenArtifactPoison,
   _tokensSnakeToken,
   _tokensSoldierArtifactToken,
@@ -39391,6 +39407,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boneyard-desecrator": _poolBoneyardDesecrator,
   "pool/boneyard-lurker": _poolBoneyardLurker,
   "pool/boneyard-scourge": _poolBoneyardScourge,
+  "pool/bontus-last-reckoning": _poolBontusLastReckoning,
   "pool/bontus-monument": _poolBontusMonument,
   "pool/book-devourer": _poolBookDevourer,
   "pool/book-of-mazarbul": _poolBookOfMazarbul,
@@ -40087,6 +40104,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/champions-of-the-shoal": _poolChampionsOfTheShoal,
   "pool/chance-encounter": _poolChanceEncounter,
   "pool/chance-met-elves": _poolChanceMetElves,
+  "pool/chance": _poolChance,
   "pool/chancellor-of-tales": _poolChancellorOfTales,
   "pool/chandler": _poolChandler,
   "pool/chandra-acolyte-of-flame": _poolChandraAcolyteOfFlame,
@@ -44624,6 +44642,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hazezon-tamar": _poolHazezonTamar,
   "pool/hazoret-godseeker": _poolHazoretGodseeker,
   "pool/hazorets-monument": _poolHazoretsMonument,
+  "pool/hazorets-undying-fury": _poolHazoretsUndyingFury,
   "pool/head-of-the-homestead": _poolHeadOfTheHomestead,
   "pool/headless-horseman": _poolHeadlessHorseman,
   "pool/headless-rider": _poolHeadlessRider,
@@ -45944,6 +45963,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/keepers-of-the-faith": _poolKeepersOfTheFaith,
   "pool/kefka-court-mage": _poolKefkaCourtMage,
   "pool/kefka-ruler-of-ruin": _poolKefkaRulerOfRuin,
+  "pool/kefnets-last-word": _poolKefnetsLastWord,
   "pool/kefnets-monument": _poolKefnetsMonument,
   "pool/kei-takahashi": _poolKeiTakahashi,
   "pool/keiga-the-tide-star": _poolKeigaTheTideStar,
@@ -46389,7 +46409,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leather-armor": _poolLeatherArmor,
   "pool/leatherback-baloth": _poolLeatherbackBaloth,
   "pool/leatherhead-iron-gator": _poolLeatherheadIronGator,
+  "pool/leave-chance": _poolLeaveChance,
   "pool/leave-in-the-dust": _poolLeaveInTheDust,
+  "pool/leave": _poolLeave,
   "pool/leaves-from-the-vine": _poolLeavesFromTheVine,
   "pool/lecture-hall": _poolLectureHall,
   "pool/lecturing-scornmage": _poolLecturingScornmage,
@@ -50006,6 +50028,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rhinos-rampage": _poolRhinosRampage,
   "pool/rhizome-lurcher": _poolRhizomeLurcher,
   "pool/rhonas-the-indomitable": _poolRhonasTheIndomitable,
+  "pool/rhonass-last-stand": _poolRhonassLastStand,
   "pool/rhonass-monument": _poolRhonassMonument,
   "pool/rhovanion-rampager": _poolRhovanionRampager,
   "pool/rhox-bodyguard": _poolRhoxBodyguard,
@@ -56204,6 +56227,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/slug-token": _tokensSlugToken,
   "tokens/smoke-blessing-token": _tokensSmokeBlessingToken,
   "tokens/snail-token": _tokensSnailToken,
+  "tokens/snake-token-5-4": _tokensSnakeToken54,
   "tokens/snake-token-artifact-poison": _tokensSnakeTokenArtifactPoison,
   "tokens/snake-token": _tokensSnakeToken,
   "tokens/soldier-artifact-token": _tokensSoldierArtifactToken,
