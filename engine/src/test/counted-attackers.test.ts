@@ -146,3 +146,32 @@ describe("a token stack past the wake-up cap attacks as one counted object", () 
     expect(game.battlefield.length).toBe(objects + 39);
   });
 });
+
+describe("a blocking token stack", () => {
+  it("blocks with up to 500 of its tokens in one declaration (Game.MAX_BLOCKERS_WOKEN)", () => {
+    // Bob's 150 Soldier tokens all block one Craw Wurm: past the 100 that
+    // combat used to wake for a blocking stack.
+    const a = new ScriptedController(A);
+    const b = new ScriptedController(B);
+    const game = Game.create({
+      seed: 1,
+      shuffle: false,
+      rules: { skipFirstDraw: false, maxLandsPerTurn: 99, maxHandSize: 99, startingLife: 10_000 },
+      controllers: { [A]: a, [B]: b },
+      decks: [
+        { player: A, cards: Array(40).fill("Forest") },
+        { player: B, cards: Array(40).fill("Island") },
+      ],
+    });
+    game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "precombat-main");
+    const wurm = game.debugSpawn("Craw Wurm", A, "battlefield", { summoningSick: false });
+    const soldiers = game.debugSpawn("Soldier Token", B, "battlefield", { summoningSick: false });
+    game.state.objects[soldiers].isToken = true;
+    game.state.objects[soldiers].stackCount = 150;
+    a.declareAttackersFn = () => [{ attacker: wurm, defender: B }];
+    b.declareBlockersFn = () => [{ blocker: soldiers, attacker: wurm, count: 150 }];
+    game.advanceUntil((s) => s.turn.step === "combat-damage" || s.turn.step === "end-combat" || s.turn.step === "postcombat-main");
+    const blocking = game.battlefield.filter((id) => game.state.objects[id].blocking === wurm);
+    expect(blocking.reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0)).toBe(150);
+  });
+});

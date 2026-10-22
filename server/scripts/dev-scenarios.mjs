@@ -341,6 +341,24 @@ export default {
     bots: { bob: { attack: "alice" } },
   },
 
+  STKVS: {
+    about:
+      "2p. A token stack blocking a token stack (the user, 2026-10-22): bob attacks with a " +
+      "stack of 100 2/2 Zombie tokens, and alice blocks with her stack of 200 1/1 Soldier tokens.",
+    players: ["bob", "alice"],
+    lands: { alice: 3, bob: 3 },
+    life: { alice: 1000 },
+    setup(game) {
+      const zombies = game.debugSpawn("Zombie Token", "bob", "battlefield", { summoningSick: false });
+      game.state.objects[zombies].isToken = true;
+      game.state.objects[zombies].stackCount = 100;
+      const soldiers = game.debugSpawn("Soldier Token", "alice", "battlefield", { summoningSick: false });
+      game.state.objects[soldiers].isToken = true;
+      game.state.objects[soldiers].stackCount = 200;
+    },
+    bots: { bob: { attack: "alice" } },
+  },
+
   DEEPS: {
     about:
       "2p. A deep stack to watch resolve: bob has two Terror of the Peaks and casts " +

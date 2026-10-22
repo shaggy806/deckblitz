@@ -449,6 +449,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Up to 500 tokens of one stack can block** (509.1a; 2026-10-22): a blocking stack wakes up to
+  `Game.MAX_BLOCKERS_WOKEN` (500) tokens rather than `MAX_MATERIALIZED`'s 100, so a stack can block an
+  attacking one two or more to a token (200 Soldiers on 100 Zombies). Still a bound for a whole stack
+  of millions declared at once.
 - **Stale records rechecked after tonight's fixes**: `exile-all` gains `exceptSource` and `linked` ("exile … with this", 607.2a) — Worldgorger Dragon; Darksteel Angel on `preventsCounters` (2026-10-20).
 - **A `{T}` ability on a token stack taps the whole stack** (latent): the `activate-ability` dispatch splits one token off a stack before an ability that taps its source (2026-10-20).
 - **Convoke with a choice of additional costs** (latent): `legalActions`' convoke re-check prices the variant's `costOption` (and `altCost`) instead of none, so such a spell is offered on convoke alone (2026-10-20).

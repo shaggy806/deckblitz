@@ -1373,7 +1373,11 @@ export class Room {
         // Asked exactly once for this move, then carried through the wait —
         // see `botAction` for what asking twice cost.
         const move = this.botAction(bot);
-        if (this.game.isDeadForMana(bot) || move.type === "pass-priority") {
+        // A bot's combat damage assignment is bookkeeping too: nothing shows
+        // until the damage is dealt, after every attacker's is in — a frame
+        // and a bot-speed pause each made a hundred attacking tokens, each
+        // blocked, take over a minute and a half (the user, 2026-10-22).
+        if (this.game.isDeadForMana(bot) || move.type === "pass-priority" || move.type === "assign-combat-damage") {
           // Nothing here a spectator could watch: passing priority, or
           // tapping for mana that casting would have tapped anyway. Spending
           // a frame and a think-time beat on these is worse than pointless —

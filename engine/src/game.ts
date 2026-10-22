@@ -3827,6 +3827,16 @@ export class Game {
   private static readonly MAX_MATERIALIZED = 100;
 
   /**
+   * The most tokens of one stack that wake up to block. Larger than
+   * {@link MAX_MATERIALIZED}: a defender's stack blocking an attacking one
+   * two to a token needs twice as many blockers as attackers (the user,
+   * 2026-10-22: 200 Soldiers against 100 Zombies), and the number is the
+   * defender's declared choice, not a generator's. Still a bound, for a
+   * declaration of a whole stack of millions.
+   */
+  static readonly MAX_BLOCKERS_WOKEN = 500;
+
+  /**
    * The most separate things one effect makes, one at a time, where each is a
    * real object or queued item: individually minted tokens (the kinds that
    * never stack, like Treasures), mana units in a pool, and per-instance
@@ -3871,7 +3881,8 @@ export class Game {
    * place this optimization "wakes up" a stack rather than singling one member
    * out of it.
    *
-   * At most {@link MAX_MATERIALIZED} members wake up; past that the remainder
+   * At most `cap` members wake up ({@link MAX_MATERIALIZED}, or
+   * {@link MAX_BLOCKERS_WOKEN} for a blocking stack); past that the remainder
    * stays compacted on `id` and simply doesn't join this combat. That's a
    * *legal* declaration, not a fudged board: attacking and blocking are both
    * optional (rules 508.1a / 509.1a — a player may attack or block with any
@@ -3929,11 +3940,11 @@ export class Game {
     return newId;
   }
 
-  private materializeStack(id: ObjectId, wanted?: number): ObjectId[] {
+  private materializeStack(id: ObjectId, wanted?: number, cap: number = Game.MAX_MATERIALIZED): ObjectId[] {
     const stack = this.state.objects[id];
     const count = stack?.stackCount ?? 1;
     if (stack === undefined || count <= 1) return [id];
-    const n = Math.min(wanted ?? count, Game.MAX_MATERIALIZED);
+    const n = Math.min(wanted ?? count, cap);
     if (n < count) {
       const ids: ObjectId[] = [];
       for (let i = 0; i < n; i += 1) ids.push(this.splitOneFromStack(id));
@@ -7532,7 +7543,7 @@ export class Game {
     for (const { blocker: blockerId, attacker: stackOrAttacker, count, attackerMember } of blocks) {
       // A compacted stack materializes into real individual blockers here —
       // all of it, or the entry's `count`.
-      for (const bId of this.materializeStack(blockerId, count)) {
+      for (const bId of this.materializeStack(blockerId, count, Game.MAX_BLOCKERS_WOKEN)) {
         // An attacking stack (`attackingStackPart`) is that many attackers:
         // the blocked token splits off and is the one blocked — each blocker
         // a token of its own, or a named member's shared one (rule 509.1a).

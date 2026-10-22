@@ -689,6 +689,37 @@ describe("Room pacing (realtime)", () => {
       expectAttackShownBeforeDamage(alice.frames, bears);
     });
 
+    it("doesn't spend a frame on each of a bot's combat damage assignments", () => {
+      // Bob's three Hill Giants attack, each blocked by two of Alice's Bears:
+      // three assignments for Bob, none of them anything to show until the
+      // damage is dealt.
+      const giants: ObjectId[] = [];
+      class AllOut extends HeuristicBotController {
+        override declareAttackers() {
+          return giants.map((attacker) => ({ attacker, defender: ALICE }));
+        }
+      }
+      const { room, clock, alice } = makePacedRoom(true, "slow", (player) => new AllOut(player));
+      room.addBot(BOB);
+      room.start();
+      for (let i = 0; i < 3; i += 1) giants.push(room.game.debugSpawn("Hill Giant", BOB, "battlefield", { summoningSick: false }));
+      const bears = Array.from({ length: 6 }, () => room.game.debugSpawn("Grizzly Bears", ALICE, "battlefield", { summoningSick: false }));
+      room.publish();
+      room.requestPassTurn(alice.connection);
+      for (let i = 0; i < 80 && room.game.state.awaiting?.kind !== "blockers"; i += 1) clock.advance(500);
+      expect(room.game.state.awaiting?.kind).toBe("blockers");
+      room.dispatch(alice.connection, {
+        type: "declare-blockers",
+        player: ALICE,
+        blocks: bears.map((blocker, i) => ({ blocker, attacker: giants[Math.floor(i / 2)] })),
+      });
+      const framesAtBlock = alice.frames.length;
+      for (let i = 0; i < 40 && !giants.every((g) => hasHit(room, g)); i += 1) clock.advance(500);
+      expect(giants.every((g) => hasHit(room, g))).toBe(true);
+      // The blocks shown, then the damage: not a held frame per assignment.
+      expect(alice.frames.length - framesAtBlock).toBeLessThan(3);
+    });
+
     it("shows a player's own attack on the board before its combat damage", () => {
       const { room, clock, alice } = makePacedRoom(true);
       room.addBot(BOB);

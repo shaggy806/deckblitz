@@ -53,19 +53,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   and the client's stack can pick only a spell. **Fix (outline):** offer each stack ability's
   source when it isn't on the battlefield, and let the client pick it by clicking that ability's
   stack entry. Circles of Protection, Reverse Damage, Healing Grace.
-- **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
-  with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
-  (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the
-  client's `MEMBER_CAP` caps the block bar to match). Attacking had the same cap until 2026-10-07
-  (a bug report: 336 Scute Swarms, 103 offered), fixed by a counted attacking stack
-  (`attackingStackPart`: past the cap a stack attacks as one object with its count, blockers
-  split off the tokens they block, and its damage is one event from that many sources).
-  **Fix (outline):** a blocking stack can be counted the same way when its tokens block one-to-one
-  — k tokens of one stack each blocking a token of one attacking stack is a stack of k blockers
-  against a stack of k attackers, and their combat damage is damage to each stack, which the
-  engine already deals to every token in it. Anything other than one-to-one (two blockers on one
-  attacker) still wakes tokens up. Risk: the damage assignment and "blocked by" checks that
-  assume one blocker is one object.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
