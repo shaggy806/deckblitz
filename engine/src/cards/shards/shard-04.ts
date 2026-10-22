@@ -265,6 +265,7 @@ import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
+import _poolLandCap from "../pool/land-cap.js";
 import _poolLandscaperColos from "../pool/landscaper-colos.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
@@ -448,6 +449,7 @@ import _poolStartle from "../pool/startle.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
+import _poolStonehands from "../pool/stonehands.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
 import _poolSultaiSkullkeeper from "../pool/sultai-skullkeeper.js";
@@ -831,6 +833,7 @@ const shard: CardShard = {
     _poolKuldothaCackler,
     _poolLampadOfDeathsVigil,
     _poolLance,
+    _poolLandCap,
     _poolLandscaperColos,
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,
@@ -1014,6 +1017,7 @@ const shard: CardShard = {
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
     _poolStokeGenius,
+    _poolStonehands,
     _poolStreamOfLife,
     _poolStrifeScholar,
     _poolSultaiSkullkeeper,

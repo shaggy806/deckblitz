@@ -3086,6 +3086,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Illusionary Wall pays a growing cumulative upkeep',
+    board({
+      you: { bf: [{ name: 'Illusionary Wall', counters: { age: 1 } }, 'Island*3'] },
+    }),
+  ),
+  preset(
     'Dark Depths loses its last ice counter',
     board({
       you: { bf: [{ name: 'Dark Depths', counters: { ice: 1 } }, 'Wastes*3'] },

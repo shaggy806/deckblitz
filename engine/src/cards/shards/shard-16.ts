@@ -78,6 +78,7 @@ import _poolCatOwl from "../pool/cat-owl.js";
 import _poolCausticCaterpillar from "../pool/caustic-caterpillar.js";
 import _poolCavesOfChaosAdventurer from "../pool/caves-of-chaos-adventurer.js";
 import _poolCelestialColonnade from "../pool/celestial-colonnade.js";
+import _poolCelestialSword from "../pool/celestial-sword.js";
 import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
 import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
@@ -136,6 +137,7 @@ import _poolElvenPalisade from "../pool/elven-palisade.js";
 import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
 import _poolEncroachingDragonstorm from "../pool/encroaching-dragonstorm.js";
 import _poolEndRazeForerunners from "../pool/end-raze-forerunners.js";
+import _poolEnergyStorm from "../pool/energy-storm.js";
 import _poolEnergyTap from "../pool/energy-tap.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
@@ -234,6 +236,7 @@ import _poolHydrasGrowth from "../pool/hydras-growth.js";
 import _poolHydroChanneler from "../pool/hydro-channeler.js";
 import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
+import _poolIllusionaryWall from "../pool/illusionary-wall.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
 import _poolImperialMoth from "../pool/imperial-moth.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
@@ -435,6 +438,7 @@ import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
 import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
 import _poolSkeletalKathari from "../pool/skeletal-kathari.js";
+import _poolSkeletonShip from "../pool/skeleton-ship.js";
 import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
 import _poolSkyshroudFalcon from "../pool/skyshroud-falcon.js";
 import _poolSkyskipperDuo from "../pool/skyskipper-duo.js";
@@ -454,6 +458,7 @@ import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
 import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
+import _poolStampede from "../pool/stampede.js";
 import _poolSteelExemplar from "../pool/steel-exemplar.js";
 import _poolSteelclawLance from "../pool/steelclaw-lance.js";
 import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
@@ -692,6 +697,7 @@ const shard: CardShard = {
     _poolCausticCaterpillar,
     _poolCavesOfChaosAdventurer,
     _poolCelestialColonnade,
+    _poolCelestialSword,
     _poolCentaurArcher,
     _poolCentaurCourser,
     _poolCentaurNurturer,
@@ -750,6 +756,7 @@ const shard: CardShard = {
     _poolEmbraalGearSmasher,
     _poolEncroachingDragonstorm,
     _poolEndRazeForerunners,
+    _poolEnergyStorm,
     _poolEnergyTap,
     _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
@@ -848,6 +855,7 @@ const shard: CardShard = {
     _poolHydroChanneler,
     _poolIchorspitBasilisk,
     _poolIkraShidiqiTheUsurper,
+    _poolIllusionaryWall,
     _poolImmolatingSouleater,
     _poolImperialMoth,
     _poolImperiousInkmage,
@@ -1049,6 +1057,7 @@ const shard: CardShard = {
     _poolSisterhoodOfKarn,
     _poolSkarrganHellkite,
     _poolSkeletalKathari,
+    _poolSkeletonShip,
     _poolSkybladeOfTheLegion,
     _poolSkyshroudFalcon,
     _poolSkyskipperDuo,
@@ -1068,6 +1077,7 @@ const shard: CardShard = {
     _poolSpitefulVisions,
     _poolSprout,
     _poolStaffOfTheStoryteller,
+    _poolStampede,
     _poolSteelExemplar,
     _poolSteelclawLance,
     _poolStiltzkinMoogleMerchant,

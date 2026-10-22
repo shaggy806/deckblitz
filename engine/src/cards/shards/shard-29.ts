@@ -44,6 +44,7 @@ import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
+import _poolBindingGrasp from "../pool/binding-grasp.js";
 import _poolBlackChocobo from "../pool/black-chocobo.js";
 import _poolBlackbloomRogue from "../pool/blackbloom-rogue.js";
 import _poolBlacksmithsTalent from "../pool/blacksmiths-talent.js";
@@ -264,6 +265,7 @@ import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
 import _poolKeldonOverseer from "../pool/keldon-overseer.js";
 import _poolKessigWolf from "../pool/kessig-wolf.js";
+import _poolKjeldoranDead from "../pool/kjeldoran-dead.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
 import _poolKraulRaider from "../pool/kraul-raider.js";
@@ -625,6 +627,7 @@ const shard: CardShard = {
     _poolBarkKnuckleBoxer,
     _poolBeatrixLoyalGeneral,
     _poolBetorKinToAll,
+    _poolBindingGrasp,
     _poolBlackChocobo,
     _poolBlackbloomRogue,
     _poolBlacksmithsTalent,
@@ -845,6 +848,7 @@ const shard: CardShard = {
     _poolKazarovSengirPureblood,
     _poolKeldonOverseer,
     _poolKessigWolf,
+    _poolKjeldoranDead,
     _poolKnightLuminary,
     _poolKnightlyValor,
     _poolKraulRaider,

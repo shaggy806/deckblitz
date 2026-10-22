@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolATaleForTheAges from "../pool/a-tale-for-the-ages.js";
+import _poolAbyssalSpecter from "../pool/abyssal-specter.js";
 import _poolAcademyDrake from "../pool/academy-drake.js";
 import _poolAccursedSpirit from "../pool/accursed-spirit.js";
 import _poolAcolyteHybrid from "../pool/acolyte-hybrid.js";
@@ -94,6 +95,7 @@ import _poolChitteringHarvester from "../pool/chittering-harvester.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
+import _poolCloakOfConfusion from "../pool/cloak-of-confusion.js";
 import _poolCloakwoodSwarmkeeper from "../pool/cloakwood-swarmkeeper.js";
 import _poolCodeOfConstraint from "../pool/code-of-constraint.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
@@ -503,9 +505,11 @@ import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
 import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
+import _poolTimeBomb from "../pool/time-bomb.js";
 import _poolTitanicGrowth from "../pool/titanic-growth.js";
 import _poolTorensFistOfTheAngels from "../pool/torens-fist-of-the-angels.js";
 import _poolTouchOfDarkness from "../pool/touch-of-darkness.js";
+import _poolTouchOfVitae from "../pool/touch-of-vitae.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
@@ -542,6 +546,7 @@ import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
+import _poolWalkingWall from "../pool/walking-wall.js";
 import _poolWallOfPutridFlesh from "../pool/wall-of-putrid-flesh.js";
 import _poolWallOff from "../pool/wall-off.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
@@ -584,6 +589,7 @@ import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeak
 const shard: CardShard = {
   pool: [
     _poolATaleForTheAges,
+    _poolAbyssalSpecter,
     _poolAcademyDrake,
     _poolAccursedSpirit,
     _poolAcolyteHybrid,
@@ -674,6 +680,7 @@ const shard: CardShard = {
     _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
+    _poolCloakOfConfusion,
     _poolCloakwoodSwarmkeeper,
     _poolCodeOfConstraint,
     _poolCogworkArchivist,
@@ -1083,9 +1090,11 @@ const shard: CardShard = {
     _poolThundermawHellkite,
     _poolTickedOff,
     _poolTillerOfFlesh,
+    _poolTimeBomb,
     _poolTitanicGrowth,
     _poolTorensFistOfTheAngels,
     _poolTouchOfDarkness,
+    _poolTouchOfVitae,
     _poolTraceOfAbundance,
     _poolTrainedArmodon,
     _poolTramwayStation,
@@ -1122,6 +1131,7 @@ const shard: CardShard = {
     _poolVraskasScorn,
     _poolWakerOfWaves,
     _poolWalkingCorpse,
+    _poolWalkingWall,
     _poolWallOfPutridFlesh,
     _poolWallOff,
     _poolWarclampMastiff,

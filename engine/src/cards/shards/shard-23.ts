@@ -43,6 +43,7 @@ import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBasilicaStalker from "../pool/basilica-stalker.js";
 import _poolBasrisAcolyte from "../pool/basris-acolyte.js";
 import _poolBatteryBearer from "../pool/battery-bearer.js";
+import _poolBattleFrenzy from "../pool/battle-frenzy.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
@@ -214,6 +215,7 @@ import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
 import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
 import _poolHelpingHand from "../pool/helping-hand.js";
+import _poolHematiteTalisman from "../pool/hematite-talisman.js";
 import _poolHeraldOfTheFair from "../pool/herald-of-the-fair.js";
 import _poolHiddenBlade from "../pool/hidden-blade.js";
 import _poolHiddenStockpile from "../pool/hidden-stockpile.js";
@@ -251,6 +253,7 @@ import _poolJunktown from "../pool/junktown.js";
 import _poolKaervekThePunisher from "../pool/kaervek-the-punisher.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
 import _poolKarnsBastion from "../pool/karns-bastion.js";
+import _poolKarplusanGiant from "../pool/karplusan-giant.js";
 import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
@@ -274,6 +277,7 @@ import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
+import _poolLhurgoyf from "../pool/lhurgoyf.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLostLegion from "../pool/lost-legion.js";
@@ -319,8 +323,10 @@ import _poolMountainYeti from "../pool/mountain-yeti.js";
 import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
 import _poolMurmuringVolume from "../pool/murmuring-volume.js";
+import _poolMysticMight from "../pool/mystic-might.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolMysticSkyfish from "../pool/mystic-skyfish.js";
+import _poolNacreTalisman from "../pool/nacre-talisman.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNecrite from "../pool/necrite.js";
@@ -371,6 +377,7 @@ import _poolPython from "../pool/python.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
+import _poolRally from "../pool/rally.js";
 import _poolRalsStaticaster from "../pool/rals-staticaster.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
@@ -426,6 +433,7 @@ import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
+import _poolShyft from "../pool/shyft.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
 import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
 import _poolSilentSubmersible from "../pool/silent-submersible.js";
@@ -535,6 +543,7 @@ import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
 import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
+import _poolVertigo from "../pool/vertigo.js";
 import _poolVeteransPowerblade from "../pool/veterans-powerblade.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
 import _poolVirtuousVariant from "../pool/virtuous-variant.js";
@@ -617,6 +626,7 @@ const shard: CardShard = {
     _poolBasilicaStalker,
     _poolBasrisAcolyte,
     _poolBatteryBearer,
+    _poolBattleFrenzy,
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
@@ -788,6 +798,7 @@ const shard: CardShard = {
     _poolHecteyes,
     _poolHeirsOfStromkirk,
     _poolHelpingHand,
+    _poolHematiteTalisman,
     _poolHeraldOfTheFair,
     _poolHiddenBlade,
     _poolHiddenStockpile,
@@ -825,6 +836,7 @@ const shard: CardShard = {
     _poolKaervekThePunisher,
     _poolKamiOfTheCrescentMoon,
     _poolKarnsBastion,
+    _poolKarplusanGiant,
     _poolKavaronSkywarden,
     _poolKaylasReconstruction,
     _poolKeeningApparition,
@@ -848,6 +860,7 @@ const shard: CardShard = {
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
     _poolLeylineInvocation,
+    _poolLhurgoyf,
     _poolLightningBlast,
     _poolLightningBlow,
     _poolLostLegion,
@@ -893,8 +906,10 @@ const shard: CardShard = {
     _poolMouthOfTheStorm,
     _poolMoxOpal,
     _poolMurmuringVolume,
+    _poolMysticMight,
     _poolMysticPeak,
     _poolMysticSkyfish,
+    _poolNacreTalisman,
     _poolNantukoElder,
     _poolNarnamCobra,
     _poolNecrite,
@@ -945,6 +960,7 @@ const shard: CardShard = {
     _poolRainOfFilth,
     _poolRaiseThePalisade,
     _poolRakingClaws,
+    _poolRally,
     _poolRalsStaticaster,
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
@@ -1000,6 +1016,7 @@ const shard: CardShard = {
     _poolShilgengarSireOfFamine,
     _poolShimmeringGrotto,
     _poolShinyImpetus,
+    _poolShyft,
     _poolSibsigAppraiser,
     _poolSibyllineSoothsayer,
     _poolSilentSubmersible,
@@ -1109,6 +1126,7 @@ const shard: CardShard = {
     _poolVelvetwingButterflies,
     _poolVentureForth,
     _poolVerdantKraken,
+    _poolVertigo,
     _poolVeteransPowerblade,
     _poolVibraniumEnergyDaggers,
     _poolVirtuousVariant,

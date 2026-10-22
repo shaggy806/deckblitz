@@ -59,6 +59,7 @@ const NO_TOKEN_PRINTING = new Set([
   // Boris Devilboon lists none.
   "Minor Demon Token",
   "Camarid Token",
+  "Caribou Token",
 ]);
 
 describe("token art", () => {

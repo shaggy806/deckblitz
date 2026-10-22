@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Ice Age, whole** (batch 136): **cumulative upkeep** built (rule 702.24, the
+  `cumulativeUpkeep(cost)` helper on a new `unless` option `times`), the scaffolder taught it;
+  126 of its last 256 cards authored by eight `card-author` agents and the lead — Polar Kraken,
+  Illusions of Grandeur, Lhurgoyf, Jokulhaups, Hydroblast, Abyssal Specter, Hecatomb, Fiery
+  Justice, the depletion lands, the Talismans and Scarabs; 130 blocked, banding (11) the most
+  shared (2026-10-21).
 - **Fallen Empires, whole** (batch 135): **"whenever ~ attacks and isn't blocked"** (rule
   509.3g, with its delayed form and "assigns no combat damage this turn"), **removing any number
   of counters as a cost** (X announced as it's activated) and **state triggers** (rule 603.8)

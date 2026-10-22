@@ -29,6 +29,7 @@ import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
+import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
 import _poolBadlands from "../pool/badlands.js";
@@ -289,6 +290,7 @@ import _poolLivingDeath from "../pool/living-death.js";
 import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
+import _poolMaddeningWind from "../pool/maddening-wind.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
 import _poolMagmaticChanneler from "../pool/magmatic-channeler.js";
 import _poolMajaBretagardProtector from "../pool/maja-bretagard-protector.js";
@@ -434,6 +436,7 @@ import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
 import _poolShivanFire from "../pool/shivan-fire.js";
 import _poolShowerOfArrows from "../pool/shower-of-arrows.js";
 import _poolShrivel from "../pool/shrivel.js";
+import _poolSibilantSpirit from "../pool/sibilant-spirit.js";
 import _poolSiegeRhino from "../pool/siege-rhino.js";
 import _poolSilentArtisan from "../pool/silent-artisan.js";
 import _poolSilundiIsle from "../pool/silundi-isle.js";
@@ -566,6 +569,7 @@ import _poolWelcomingVampire from "../pool/welcoming-vampire.js";
 import _poolWhetwheel from "../pool/whetwheel.js";
 import _poolWhiskervaleForerunner from "../pool/whiskervale-forerunner.js";
 import _poolWhisperBloodLiturgist from "../pool/whisper-blood-liturgist.js";
+import _poolWhiteout from "../pool/whiteout.js";
 import _poolWiccanYoungAvenger from "../pool/wiccan-young-avenger.js";
 import _poolWickedWolf from "../pool/wicked-wolf.js";
 import _poolWildwoodRebirth from "../pool/wildwood-rebirth.js";
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolAsceticism,
     _poolAssassinGauntlet,
     _poolAuroraShifter,
+    _poolAvalanche,
     _poolAvengersQuinjet,
     _poolAysenAbbey,
     _poolBadlands,
@@ -886,6 +891,7 @@ const shard: CardShard = {
     _poolLordOfExtinction,
     _poolLuminarchAspirant,
     _poolLyraDawnbringer,
+    _poolMaddeningWind,
     _poolMagistratesScepter,
     _poolMagmaticChanneler,
     _poolMajaBretagardProtector,
@@ -1031,6 +1037,7 @@ const shard: CardShard = {
     _poolShivanFire,
     _poolShowerOfArrows,
     _poolShrivel,
+    _poolSibilantSpirit,
     _poolSiegeRhino,
     _poolSilentArtisan,
     _poolSilundiIsle,
@@ -1163,6 +1170,7 @@ const shard: CardShard = {
     _poolWhetwheel,
     _poolWhiskervaleForerunner,
     _poolWhisperBloodLiturgist,
+    _poolWhiteout,
     _poolWiccanYoungAvenger,
     _poolWickedWolf,
     _poolWildwoodRebirth,

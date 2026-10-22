@@ -336,6 +336,7 @@ import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
+import _poolPentagramOfTheAges from "../pool/pentagram-of-the-ages.js";
 import _poolPeopleOfTheWoods from "../pool/people-of-the-woods.js";
 import _poolPhantomNinja from "../pool/phantom-ninja.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
@@ -926,6 +927,7 @@ const shard: CardShard = {
     _poolPatchworkAutomaton,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,
+    _poolPentagramOfTheAges,
     _poolPeopleOfTheWoods,
     _poolPhantomNinja,
     _poolPhyrexianDragonEngine,

@@ -23,6 +23,7 @@ import _poolAmbassadorOak from "../pool/ambassador-oak.js";
 import _poolAmbushParty from "../pool/ambush-party.js";
 import _poolAnHavvaTownship from "../pool/an-havva-township.js";
 import _poolAnabaBodyguard from "../pool/anaba-bodyguard.js";
+import _poolAnarchy from "../pool/anarchy.js";
 import _poolAnimistsMight from "../pool/animists-might.js";
 import _poolAphemiaTheCacophony from "../pool/aphemia-the-cacophony.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
@@ -120,6 +121,7 @@ import _poolClifftopLookout from "../pool/clifftop-lookout.js";
 import _poolClingToDust from "../pool/cling-to-dust.js";
 import _poolClockworkFox from "../pool/clockwork-fox.js";
 import _poolCloudManta from "../pool/cloud-manta.js";
+import _poolColdSnap from "../pool/cold-snap.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
 import _poolCompleteDisregard from "../pool/complete-disregard.js";
 import _poolConquerorsFlail from "../pool/conquerors-flail.js";
@@ -178,6 +180,7 @@ import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
+import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
@@ -411,6 +414,7 @@ import _poolRuinationRioter from "../pool/ruination-rioter.js";
 import _poolRuinationWurm from "../pool/ruination-wurm.js";
 import _poolRuinsRecluse from "../pool/ruins-recluse.js";
 import _poolRumbleweed from "../pool/rumbleweed.js";
+import _poolRunedArch from "../pool/runed-arch.js";
 import _poolRuptureSpire from "../pool/rupture-spire.js";
 import _poolRustHarvester from "../pool/rust-harvester.js";
 import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
@@ -607,6 +611,7 @@ const shard: CardShard = {
     _poolAmbushParty,
     _poolAnHavvaTownship,
     _poolAnabaBodyguard,
+    _poolAnarchy,
     _poolAnimistsMight,
     _poolAphemiaTheCacophony,
     _poolAphettoGrifter,
@@ -704,6 +709,7 @@ const shard: CardShard = {
     _poolClingToDust,
     _poolClockworkFox,
     _poolCloudManta,
+    _poolColdSnap,
     _poolCombatTutorial,
     _poolCompleteDisregard,
     _poolConquerorsFlail,
@@ -762,6 +768,7 @@ const shard: CardShard = {
     _poolEndbringer,
     _poolEnormousBaloth,
     _poolEpicDownfall,
+    _poolEssenceFlare,
     _poolEternalWitness,
     _poolExpeditionSkulker,
     _poolEyeblightAssassin,
@@ -995,6 +1002,7 @@ const shard: CardShard = {
     _poolRuinationWurm,
     _poolRuinsRecluse,
     _poolRumbleweed,
+    _poolRunedArch,
     _poolRuptureSpire,
     _poolRustHarvester,
     _poolSageOfTheFang,

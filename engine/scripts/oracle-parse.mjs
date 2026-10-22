@@ -28,6 +28,7 @@ import {
   afflict,
   afterlife,
   rampage,
+  cumulativeUpkeep,
   annihilator,
   mentor,
   crew,
@@ -144,6 +145,13 @@ function keywordPart(part) {
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
   // Afterlife N (rule 702.135a): its dies trigger.
   if ((m = /^afterlife (\d+)$/i.exec(p))) return { triggered: [afterlife(Number(m[1]))] };
+  // Cumulative upkeep [cost] (rule 702.24a): its upkeep trigger, the cost
+  // paid once per age counter.
+  if ((m = new RegExp(`^cumulative upkeep ${COST}$`, "i").exec(p))) return { triggered: [cumulativeUpkeep(m[1])] };
+  if ((m = /^cumulative upkeep—pay (\d+) life\.?$/i.exec(p))) return { triggered: [cumulativeUpkeep({ life: Number(m[1]) })] };
+  if (/^cumulative upkeep—sacrifice a land\.?$/i.test(p)) {
+    return { triggered: [cumulativeUpkeep({ sacrifice: { type: "land" }, text: "Sacrifice a land" })] };
+  }
   // Rampage N (rule 702.23a): its becomes-blocked trigger.
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
   // Spectacle [cost] (rule 702.137a): an alternative cost.

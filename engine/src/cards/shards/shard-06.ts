@@ -135,6 +135,7 @@ import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
 import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
 import _poolDeepSight from "../pool/deep-sight.js";
+import _poolDeflection from "../pool/deflection.js";
 import _poolDeliveryMoogle from "../pool/delivery-moogle.js";
 import _poolDepthsOfDesire from "../pool/depths-of-desire.js";
 import _poolDesertedBeach from "../pool/deserted-beach.js";
@@ -188,6 +189,7 @@ import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
 import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
+import _poolFumarole from "../pool/fumarole.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
 import _poolGalvanize from "../pool/galvanize.js";
@@ -217,6 +219,7 @@ import _poolGoblinTrashmaster from "../pool/goblin-trashmaster.js";
 import _poolGoblinTurncoat from "../pool/goblin-turncoat.js";
 import _poolGraftSurgeon from "../pool/graft-surgeon.js";
 import _poolGravitationalShift from "../pool/gravitational-shift.js";
+import _poolGreenScarab from "../pool/green-scarab.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
 import _poolGrislySalvage from "../pool/grisly-salvage.js";
@@ -294,6 +297,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
+import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
 import _poolMischievousCatgeist from "../pool/mischievous-catgeist.js";
 import _poolMistbreathElder from "../pool/mistbreath-elder.js";
@@ -366,6 +370,7 @@ import _poolRamThrough from "../pool/ram-through.js";
 import _poolRampagingBrontodon from "../pool/rampaging-brontodon.js";
 import _poolRamunapRuins from "../pool/ramunap-ruins.js";
 import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
+import _poolRedScarab from "../pool/red-scarab.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
@@ -713,6 +718,7 @@ const shard: CardShard = {
     _poolDeadfall,
     _poolDeadlyRiposte,
     _poolDeepSight,
+    _poolDeflection,
     _poolDeliveryMoogle,
     _poolDepthsOfDesire,
     _poolDesertedBeach,
@@ -766,6 +772,7 @@ const shard: CardShard = {
     _poolFountainOfRenewal,
     _poolFrostMarsh,
     _poolFrozenShade,
+    _poolFumarole,
     _poolFyndhornElves,
     _poolGalvanicBlast,
     _poolGalvanize,
@@ -795,6 +802,7 @@ const shard: CardShard = {
     _poolGoblinTurncoat,
     _poolGraftSurgeon,
     _poolGravitationalShift,
+    _poolGreenScarab,
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,
     _poolGrislySalvage,
@@ -872,6 +880,7 @@ const shard: CardShard = {
     _poolMeliraSylvokOutcast,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
+    _poolMinionOfLeshrac,
     _poolMirkoObsessiveTheorist,
     _poolMischievousCatgeist,
     _poolMistbreathElder,
@@ -944,6 +953,7 @@ const shard: CardShard = {
     _poolRampagingBrontodon,
     _poolRamunapRuins,
     _poolRankleMasterOfPranks,
+    _poolRedScarab,
     _poolRedoubledStormsinger,
     _poolReefWorm,
     _poolReitoSentinel,

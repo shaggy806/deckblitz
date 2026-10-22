@@ -5,7 +5,7 @@
  */
 
 import type { ActivatedAbility, CraftMaterials, TriggeredAbility, TriggerSpec } from "../abilities.js";
-import { wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type WardCost } from "../effects.js";
+import { wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type UnlessOption, type WardCost } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import type { Color, ManaType } from "../mana.js";
 import type { TargetSpec } from "../target.js";
@@ -416,6 +416,46 @@ export const rampage = (n: number): TriggeredAbility => {
     effect: { kind: "modify-pt", target: "source", power: bonus, toughness: bonus, duration: "end-of-turn" },
     resolve: null,
     text: `Rampage ${n} (Whenever this creature becomes blocked, it gets +${n}/+${n} until end of turn for each creature blocking it beyond the first.)`,
+  };
+};
+
+/**
+ * Cumulative upkeep [cost] (rule 702.24a): "At the beginning of your upkeep,
+ * if this permanent is on the battlefield, put an age counter on this
+ * permanent. Then you may pay [cost] for each age counter on it. If you
+ * don't, sacrifice it." `cost` is a mana cost (`"{U}"`), life (`{ life: 1 }`)
+ * or a sacrifice (`{ sacrifice: { type: "land" }, text: "Sacrifice a land" }`),
+ * paid once per age counter as it resolves — all of it or none (no partial
+ * payments). Each instance triggers on its own and counts every age counter
+ * (702.24b). Put the keyword line in `text` as well.
+ */
+export const cumulativeUpkeep = (
+  cost: string | { readonly life: number } | { readonly sacrifice: CardFilter; readonly text: string },
+): TriggeredAbility => {
+  const ages = { countersOn: "source", counter: "age" } as const;
+  const label = typeof cost === "string" ? cost : "life" in cost ? `—Pay ${cost.life} life` : `—${cost.text}`;
+  const option: UnlessOption =
+    typeof cost === "string"
+      ? { pay: cost, times: ages, text: `Pay ${cost} for each age counter` }
+      : "life" in cost
+        ? { payLife: cost.life, times: ages, text: `Pay ${cost.life} life for each age counter` }
+        : { sacrifice: cost.sacrifice, times: ages, text: cost.text };
+  return {
+    trigger: { on: "step-begins", step: "upkeep", who: "you" },
+    targets: [],
+    effect: {
+      kind: "conditional",
+      condition: { kind: "source-on-battlefield" },
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "add-counter", target: "source", counter: "age", amount: 1 },
+          { kind: "unless", chooser: "you", options: [option], otherwise: { kind: "sacrifice-source" } },
+        ],
+      },
+    },
+    resolve: null,
+    text: `Cumulative upkeep${typeof cost === "string" ? " " : ""}${label} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)`,
   };
 };
 

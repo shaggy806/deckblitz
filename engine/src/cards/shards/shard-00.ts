@@ -275,6 +275,7 @@ import _poolLanguish from "../pool/languish.js";
 import _poolLanternSpirit from "../pool/lantern-spirit.js";
 import _poolLatchSeeker from "../pool/latch-seeker.js";
 import _poolLavaSerpent from "../pool/lava-serpent.js";
+import _poolLavaTubes from "../pool/lava-tubes.js";
 import _poolLavastepRaider from "../pool/lavastep-raider.js";
 import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
@@ -446,6 +447,7 @@ import _poolSlickSequence from "../pool/slick-sequence.js";
 import _poolSlithPredator from "../pool/slith-predator.js";
 import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
+import _poolSnowDevil from "../pool/snow-devil.js";
 import _poolSocialSnub from "../pool/social-snub.js";
 import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSolitude from "../pool/solitude.js";
@@ -540,6 +542,7 @@ import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUthdenTroll from "../pool/uthden-troll.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
+import _poolVeldt from "../pool/veldt.js";
 import _poolVeneratedLoxodon from "../pool/venerated-loxodon.js";
 import _poolVerazolTheSplitCurrent from "../pool/verazol-the-split-current.js";
 import _poolViciousHunger from "../pool/vicious-hunger.js";
@@ -870,6 +873,7 @@ const shard: CardShard = {
     _poolLanternSpirit,
     _poolLatchSeeker,
     _poolLavaSerpent,
+    _poolLavaTubes,
     _poolLavastepRaider,
     _poolLazotepBehemoth,
     _poolLedevGuardian,
@@ -1041,6 +1045,7 @@ const shard: CardShard = {
     _poolSlithPredator,
     _poolSmitingHelix,
     _poolSnappingDrake,
+    _poolSnowDevil,
     _poolSocialSnub,
     _poolSoldierMilitaryProgram,
     _poolSolitude,
@@ -1135,6 +1140,7 @@ const shard: CardShard = {
     _poolUthdenTroll,
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
+    _poolVeldt,
     _poolVeneratedLoxodon,
     _poolVerazolTheSplitCurrent,
     _poolViciousHunger,

@@ -10,6 +10,7 @@ import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
 import _poolAdmiralBrassUnsinkable from "../pool/admiral-brass-unsinkable.js";
 import _poolAdornedPouncer from "../pool/adorned-pouncer.js";
 import _poolAdunOakenshield from "../pool/adun-oakenshield.js";
+import _poolAegisOfTheMeek from "../pool/aegis-of-the-meek.js";
 import _poolAerathiBerserker from "../pool/aerathi-berserker.js";
 import _poolAerialBoost from "../pool/aerial-boost.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
@@ -555,6 +556,7 @@ import _poolVerduranEnchantress from "../pool/verduran-enchantress.js";
 import _poolVernalFen from "../pool/vernal-fen.js";
 import _poolVertigoSpawn from "../pool/vertigo-spawn.js";
 import _poolVeteranGuardmouse from "../pool/veteran-guardmouse.js";
+import _poolVibratingSphere from "../pool/vibrating-sphere.js";
 import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVitosInquisitor from "../pool/vitos-inquisitor.js";
@@ -618,6 +620,7 @@ const shard: CardShard = {
     _poolAdmiralBrassUnsinkable,
     _poolAdornedPouncer,
     _poolAdunOakenshield,
+    _poolAegisOfTheMeek,
     _poolAerathiBerserker,
     _poolAerialBoost,
     _poolAetherAdept,
@@ -1163,6 +1166,7 @@ const shard: CardShard = {
     _poolVernalFen,
     _poolVertigoSpawn,
     _poolVeteranGuardmouse,
+    _poolVibratingSphere,
     _poolVisionSkeins,
     _poolVithianRenegades,
     _poolVitosInquisitor,

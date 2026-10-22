@@ -37,6 +37,7 @@ import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
 import _poolAssassinsTrophy from "../pool/assassins-trophy.js";
 import _poolAtlantisAttacks from "../pool/atlantis-attacks.js";
 import _poolAuraFracture from "../pool/aura-fracture.js";
+import _poolAurochs from "../pool/aurochs.js";
 import _poolAutomaticLibrarian from "../pool/automatic-librarian.js";
 import _poolAvenBattlePriest from "../pool/aven-battle-priest.js";
 import _poolAxebaneBeast from "../pool/axebane-beast.js";
@@ -76,6 +77,7 @@ import _poolBrightbladeStoat from "../pool/brightblade-stoat.js";
 import _poolBrightclimbPathway from "../pool/brightclimb-pathway.js";
 import _poolBrightwoodTracker from "../pool/brightwood-tracker.js";
 import _poolBrotherhoodsEnd from "../pool/brotherhoods-end.js";
+import _poolBrownOuphe from "../pool/brown-ouphe.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
 import _poolBumiBash from "../pool/bumi-bash.js";
 import _poolBurnBright from "../pool/burn-bright.js";
@@ -150,6 +152,7 @@ import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
+import _poolDriftOfTheDead from "../pool/drift-of-the-dead.js";
 import _poolDubiousDelicacy from "../pool/dubious-delicacy.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
 import _poolDurkwoodBaloth from "../pool/durkwood-baloth.js";
@@ -247,6 +250,7 @@ import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
+import _poolHymnOfRebirth from "../pool/hymn-of-rebirth.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
 import _poolIcatianTown from "../pool/icatian-town.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
@@ -345,6 +349,7 @@ import _poolOfOneMind from "../pool/of-one-mind.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
+import _poolOnyxTalisman from "../pool/onyx-talisman.js";
 import _poolOrazcaRelic from "../pool/orazca-relic.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
@@ -357,6 +362,7 @@ import _poolOutOfAir from "../pool/out-of-air.js";
 import _poolOvergrownArmasaur from "../pool/overgrown-armasaur.js";
 import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
+import _poolPanic from "../pool/panic.js";
 import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
 import _poolPeerPastTheVeil from "../pool/peer-past-the-veil.js";
@@ -594,6 +600,7 @@ import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
 import _poolWoodenSphere from "../pool/wooden-sphere.js";
+import _poolWordOfBlasting from "../pool/word-of-blasting.js";
 import _poolWorldWeary from "../pool/world-weary.js";
 import _poolWreckingBall from "../pool/wrecking-ball.js";
 import _poolWrench from "../pool/wrench.js";
@@ -656,6 +663,7 @@ const shard: CardShard = {
     _poolAssassinsTrophy,
     _poolAtlantisAttacks,
     _poolAuraFracture,
+    _poolAurochs,
     _poolAutomaticLibrarian,
     _poolAvenBattlePriest,
     _poolAxebaneBeast,
@@ -695,6 +703,7 @@ const shard: CardShard = {
     _poolBrightclimbPathway,
     _poolBrightwoodTracker,
     _poolBrotherhoodsEnd,
+    _poolBrownOuphe,
     _poolBullHippo,
     _poolBumiBash,
     _poolBurnBright,
@@ -769,6 +778,7 @@ const shard: CardShard = {
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
     _poolDreamstalkerManticore,
+    _poolDriftOfTheDead,
     _poolDubiousDelicacy,
     _poolDuelistsHeritage,
     _poolDurkwoodBaloth,
@@ -866,6 +876,7 @@ const shard: CardShard = {
     _poolHowlingMine,
     _poolHulkingOgre,
     _poolHydroelectricSpecimen,
+    _poolHymnOfRebirth,
     _poolHypnoticSprite,
     _poolIcatianTown,
     _poolIllusionistsBracers,
@@ -964,6 +975,7 @@ const shard: CardShard = {
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
     _poolOneirophage,
+    _poolOnyxTalisman,
     _poolOrazcaRelic,
     _poolOrcishCannonade,
     _poolOrcishMechanics,
@@ -976,6 +988,7 @@ const shard: CardShard = {
     _poolOvergrownArmasaur,
     _poolOversimplify,
     _poolOverwhelmingInstinct,
+    _poolPanic,
     _poolPatronWizard,
     _poolPeacewalkerColossus,
     _poolPeerPastTheVeil,
@@ -1213,6 +1226,7 @@ const shard: CardShard = {
     _poolWirewoodGuardian,
     _poolWitchsVengeance,
     _poolWoodenSphere,
+    _poolWordOfBlasting,
     _poolWorldWeary,
     _poolWreckingBall,
     _poolWrench,

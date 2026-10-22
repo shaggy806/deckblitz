@@ -1,0 +1,1828 @@
+{
+ "batch": "B136",
+ "status": "complete",
+ "ranks": "Ice Age (ICE, 1995-06-03): whole set (oldest-first walk)",
+ "authored": [
+  {
+   "name": "Abyssal Specter",
+   "files": [
+    "engine/src/cards/pool/abyssal-specter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aegis of the Meek",
+   "files": [
+    "engine/src/cards/pool/aegis-of-the-meek.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Anarchy",
+   "files": [
+    "engine/src/cards/pool/anarchy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arenson's Aura",
+   "files": [
+    "engine/src/cards/pool/arensons-aura.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armor of Faith",
+   "files": [
+    "engine/src/cards/pool/armor-of-faith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arnjlot's Ascent",
+   "files": [
+    "engine/src/cards/pool/arnjlots-ascent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aurochs",
+   "files": [
+    "engine/src/cards/pool/aurochs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avalanche",
+   "files": [
+    "engine/src/cards/pool/avalanche.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balduvian Conjurer",
+   "files": [
+    "engine/src/cards/pool/balduvian-conjurer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Balduvian Hydra",
+   "files": [
+    "engine/src/cards/pool/balduvian-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barbed Sextant",
+   "files": [
+    "engine/src/cards/pool/barbed-sextant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle Frenzy",
+   "files": [
+    "engine/src/cards/pool/battle-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Binding Grasp",
+   "files": [
+    "engine/src/cards/pool/binding-grasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Scarab",
+   "files": [
+    "engine/src/cards/pool/black-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blizzard",
+   "files": [
+    "engine/src/cards/pool/blizzard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blue Scarab",
+   "files": [
+    "engine/src/cards/pool/blue-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brown Ouphe",
+   "files": [
+    "engine/src/cards/pool/brown-ouphe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Caribou Range",
+   "files": [
+    "engine/src/cards/pool/caribou-range.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Sword",
+   "files": [
+    "engine/src/cards/pool/celestial-sword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chub Toad",
+   "files": [
+    "engine/src/cards/pool/chub-toad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cloak of Confusion",
+   "files": [
+    "engine/src/cards/pool/cloak-of-confusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cold Snap",
+   "files": [
+    "engine/src/cards/pool/cold-snap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conquer",
+   "files": [
+    "engine/src/cards/pool/conquer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Marit Lage",
+   "files": [
+    "engine/src/cards/pool/curse-of-marit-lage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deflection",
+   "files": [
+    "engine/src/cards/pool/deflection.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Despotic Scepter",
+   "files": [
+    "engine/src/cards/pool/despotic-scepter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diabolic Vision",
+   "files": [
+    "engine/src/cards/pool/diabolic-vision.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drift of the Dead",
+   "files": [
+    "engine/src/cards/pool/drift-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Armory",
+   "files": [
+    "engine/src/cards/pool/dwarven-armory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthlink",
+   "files": [
+    "engine/src/cards/pool/earthlink.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Druid",
+   "files": [
+    "engine/src/cards/pool/elder-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Healer",
+   "files": [
+    "engine/src/cards/pool/elvish-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Energy Storm",
+   "files": [
+    "engine/src/cards/pool/energy-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enervate",
+   "files": [
+    "engine/src/cards/pool/enervate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence Filter",
+   "files": [
+    "engine/src/cards/pool/essence-filter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence Flare",
+   "files": [
+    "engine/src/cards/pool/essence-flare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fiery Justice",
+   "files": [
+    "engine/src/cards/pool/fiery-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flow of Maggots",
+   "files": [
+    "engine/src/cards/pool/flow-of-maggots.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forbidden Lore",
+   "files": [
+    "engine/src/cards/pool/forbidden-lore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Freyalise Supplicant",
+   "files": [
+    "engine/src/cards/pool/freyalise-supplicant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freyalise's Charm",
+   "files": [
+    "engine/src/cards/pool/freyalises-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fumarole",
+   "files": [
+    "engine/src/cards/pool/fumarole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fylgja",
+   "files": [
+    "engine/src/cards/pool/fylgja.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fyndhorn Pollen",
+   "files": [
+    "engine/src/cards/pool/fyndhorn-pollen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gangrenous Zombies",
+   "files": [
+    "engine/src/cards/pool/gangrenous-zombies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glacial Crevasses",
+   "files": [
+    "engine/src/cards/pool/glacial-crevasses.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Sappers",
+   "files": [
+    "engine/src/cards/pool/goblin-sappers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Ski Patrol",
+   "files": [
+    "engine/src/cards/pool/goblin-ski-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Green Scarab",
+   "files": [
+    "engine/src/cards/pool/green-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hallowed Ground",
+   "files": [
+    "engine/src/cards/pool/hallowed-ground.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hecatomb",
+   "files": [
+    "engine/src/cards/pool/hecatomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hematite Talisman",
+   "files": [
+    "engine/src/cards/pool/hematite-talisman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hot Springs",
+   "files": [
+    "engine/src/cards/pool/hot-springs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hydroblast",
+   "files": [
+    "engine/src/cards/pool/hydroblast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hymn of Rebirth",
+   "files": [
+    "engine/src/cards/pool/hymn-of-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iceberg",
+   "files": [
+    "engine/src/cards/pool/iceberg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icequake",
+   "files": [
+    "engine/src/cards/pool/icequake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illusionary Forces",
+   "files": [
+    "engine/src/cards/pool/illusionary-forces.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Illusionary Wall",
+   "files": [
+    "engine/src/cards/pool/illusionary-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illusions of Grandeur",
+   "files": [
+    "engine/src/cards/pool/illusions-of-grandeur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Infuse",
+   "files": [
+    "engine/src/cards/pool/infuse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Johtull Wurm",
+   "files": [
+    "engine/src/cards/pool/johtull-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jokulhaups",
+   "files": [
+    "engine/src/cards/pool/jokulhaups.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Karplusan Giant",
+   "files": [
+    "engine/src/cards/pool/karplusan-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kjeldoran Dead",
+   "files": [
+    "engine/src/cards/pool/kjeldoran-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kjeldoran Elite Guard",
+   "files": [
+    "engine/src/cards/pool/kjeldoran-elite-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovikan Elementalist",
+   "files": [
+    "engine/src/cards/pool/krovikan-elementalist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Land Cap",
+   "files": [
+    "engine/src/cards/pool/land-cap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lapis Lazuli Talisman",
+   "files": [
+    "engine/src/cards/pool/lapis-lazuli-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lava Tubes",
+   "files": [
+    "engine/src/cards/pool/lava-tubes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lhurgoyf",
+   "files": [
+    "engine/src/cards/pool/lhurgoyf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maddening Wind",
+   "files": [
+    "engine/src/cards/pool/maddening-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malachite Talisman",
+   "files": [
+    "engine/src/cards/pool/malachite-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Márton Stromgald",
+   "files": [
+    "engine/src/cards/pool/marton-stromgald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mesmeric Trance",
+   "files": [
+    "engine/src/cards/pool/mesmeric-trance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mind Whip",
+   "files": [
+    "engine/src/cards/pool/mind-whip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minion of Leshrac",
+   "files": [
+    "engine/src/cards/pool/minion-of-leshrac.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minion of Tevesh Szat",
+   "files": [
+    "engine/src/cards/pool/minion-of-tevesh-szat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mistfolk",
+   "files": [
+    "engine/src/cards/pool/mistfolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mole Worms",
+   "files": [
+    "engine/src/cards/pool/mole-worms.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Monsoon",
+   "files": [
+    "engine/src/cards/pool/monsoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Might",
+   "files": [
+    "engine/src/cards/pool/mystic-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nacre Talisman",
+   "files": [
+    "engine/src/cards/pool/nacre-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Onyx Talisman",
+   "files": [
+    "engine/src/cards/pool/onyx-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orcish Squatters",
+   "files": [
+    "engine/src/cards/pool/orcish-squatters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Order of the Sacred Torch",
+   "files": [
+    "engine/src/cards/pool/order-of-the-sacred-torch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Panic",
+   "files": [
+    "engine/src/cards/pool/panic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pentagram of the Ages",
+   "files": [
+    "engine/src/cards/pool/pentagram-of-the-ages.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phantasmal Mount",
+   "files": [
+    "engine/src/cards/pool/phantasmal-mount.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pit Trap",
+   "files": [
+    "engine/src/cards/pool/pit-trap.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Polar Kraken",
+   "files": [
+    "engine/src/cards/pool/polar-kraken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally",
+   "files": [
+    "engine/src/cards/pool/rally.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Red Scarab",
+   "files": [
+    "engine/src/cards/pool/red-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "River Delta",
+   "files": [
+    "engine/src/cards/pool/river-delta.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Runed Arch",
+   "files": [
+    "engine/src/cards/pool/runed-arch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seizures",
+   "files": [
+    "engine/src/cards/pool/seizures.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shyft",
+   "files": [
+    "engine/src/cards/pool/shyft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sibilant Spirit",
+   "files": [
+    "engine/src/cards/pool/sibilant-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skeleton Ship",
+   "files": [
+    "engine/src/cards/pool/skeleton-ship.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Snow Devil",
+   "files": [
+    "engine/src/cards/pool/snow-devil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snow Hound",
+   "files": [
+    "engine/src/cards/pool/snow-hound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldevi Golem",
+   "files": [
+    "engine/src/cards/pool/soldevi-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldevi Machinist",
+   "files": [
+    "engine/src/cards/pool/soldevi-machinist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soldevi Simulacrum",
+   "files": [
+    "engine/src/cards/pool/soldevi-simulacrum.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soul Barrier",
+   "files": [
+    "engine/src/cards/pool/soul-barrier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Staff of the Ages",
+   "files": [
+    "engine/src/cards/pool/staff-of-the-ages.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stampede",
+   "files": [
+    "engine/src/cards/pool/stampede.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stone Spirit",
+   "files": [
+    "engine/src/cards/pool/stone-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stonehands",
+   "files": [
+    "engine/src/cards/pool/stonehands.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stromgald Cabal",
+   "files": [
+    "engine/src/cards/pool/stromgald-cabal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunstone",
+   "files": [
+    "engine/src/cards/pool/sunstone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thermokarst",
+   "files": [
+    "engine/src/cards/pool/thermokarst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thoughtleech",
+   "files": [
+    "engine/src/cards/pool/thoughtleech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timberline Ridge",
+   "files": [
+    "engine/src/cards/pool/timberline-ridge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Time Bomb",
+   "files": [
+    "engine/src/cards/pool/time-bomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Touch of Vitae",
+   "files": [
+    "engine/src/cards/pool/touch-of-vitae.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veldt",
+   "files": [
+    "engine/src/cards/pool/veldt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vertigo",
+   "files": [
+    "engine/src/cards/pool/vertigo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vibrating Sphere",
+   "files": [
+    "engine/src/cards/pool/vibrating-sphere.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Wall",
+   "files": [
+    "engine/src/cards/pool/walking-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Scarab",
+   "files": [
+    "engine/src/cards/pool/white-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whiteout",
+   "files": [
+    "engine/src/cards/pool/whiteout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woolly Mammoths",
+   "files": [
+    "engine/src/cards/pool/woolly-mammoths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woolly Spider",
+   "files": [
+    "engine/src/cards/pool/woolly-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Word of Blasting",
+   "files": [
+    "engine/src/cards/pool/word-of-blasting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wrath of Marit Lage",
+   "files": [
+    "engine/src/cards/pool/wrath-of-marit-lage.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Baton of Morale",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Cooperation",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Dire Wolves",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Formation",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Kjeldoran Knight",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Kjeldoran Phalanx",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Kjeldoran Skycaptain",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Kjeldoran Skyknight",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Kjeldoran Warrior",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Shield Bearer",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Wall of Shields",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "has or grants banding"
+  },
+  {
+   "name": "Game of Chaos",
+   "needs": [
+    "mechanic:coin-flip-choose-to-stop",
+    "mechanic:coin-flip-by-other-player"
+   ],
+   "why": "repeated flips, doubling stakes, the last winner chooses to go on"
+  },
+  {
+   "name": "Ice Floe",
+   "needs": [
+    "filter:attacking-you"
+   ],
+   "why": "target creature without flying that's attacking you"
+  },
+  {
+   "name": "Mudslide",
+   "needs": [
+    "decision:pay-per-chosen-untap"
+   ],
+   "why": "choose any number of tapped creatures and pay {2} for each"
+  },
+  {
+   "name": "Ashen Ghoul",
+   "needs": [
+    "condition:creature-cards-above-in-graveyard"
+   ],
+   "why": "three or more creature cards above it in your graveyard"
+  },
+  {
+   "name": "Freyalise's Winds",
+   "needs": [
+    "replacement:untap-step-remove-counter-instead"
+   ],
+   "why": "remove the wind counters instead of untapping"
+  },
+  {
+   "name": "Brand of Ill Omen",
+   "needs": [
+    "static:prohibit-enchanted-controller"
+   ],
+   "why": "enchanted creature's controller can't cast creature spells"
+  },
+  {
+   "name": "Gorilla Pack",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls a Forest"
+  },
+  {
+   "name": "Soul Kiss",
+   "needs": [
+    "cost:activate-no-more-than-n-times-each-turn"
+   ],
+   "why": "activate no more than three times each turn"
+  },
+  {
+   "name": "Shield of the Ages",
+   "needs": [
+    "effect:prevent-next-n-damage-to-you"
+   ],
+   "why": "prevent the next 1 damage to you, untargeted"
+  },
+  {
+   "name": "Kjeldoran Guard",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "only if defending player controls no snow lands"
+  },
+  {
+   "name": "Lim-Dûl's Cohort",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "that creature can't be regenerated this turn"
+  },
+  {
+   "name": "Mercenaries",
+   "needs": [
+    "effect:any-player-may-activate"
+   ],
+   "why": "any player may activate this ability"
+  },
+  {
+   "name": "Total War",
+   "needs": [
+    "filter:controlled-continuously-since-turn-start"
+   ],
+   "why": "creatures not controlled continuously since the turn began"
+  },
+  {
+   "name": "Magus of the Unseen",
+   "needs": [
+    "trigger:lose-control-trigger"
+   ],
+   "why": "when you lose control of the artifact, tap it"
+  },
+  {
+   "name": "Crown of the Ages",
+   "needs": [
+    "effect:attach-to-chosen-creature"
+   ],
+   "why": "move target Aura to a creature chosen as it resolves"
+  },
+  {
+   "name": "Gaze of Pain",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn",
+    "effect:delayed-trigger-own-targets"
+   ],
+   "why": "until end of turn, whenever a creature attacks and isn't blocked, with a target"
+  },
+  {
+   "name": "Illusionary Terrain",
+   "needs": [
+    "static:land-type-setting",
+    "static:choose-basic-land-type"
+   ],
+   "why": "basic lands of the chosen type are the other chosen type"
+  },
+  {
+   "name": "Giant Trap Door Spider",
+   "needs": [
+    "filter:attacking-you"
+   ],
+   "why": "creature without flying that's attacking you"
+  },
+  {
+   "name": "Snowblind",
+   "needs": [
+    "effect:count-defending-player-controls",
+    "amount:min-of-amounts"
+   ],
+   "why": "-X/-Y by the defending player's snow lands, capped by its toughness"
+  },
+  {
+   "name": "Battle Cry",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "whenever a creature blocks this turn"
+  },
+  {
+   "name": "Seraph",
+   "needs": [
+    "trigger:lose-control-trigger"
+   ],
+   "why": "sacrifice the creature when you lose control of Seraph"
+  },
+  {
+   "name": "Vexing Arcanix",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "target player names a card"
+  },
+  {
+   "name": "Lost Order of Jarkeld",
+   "needs": [
+    "decision:choose-player",
+    "amount:count-for-chosen-player"
+   ],
+   "why": "an opponent chosen as it enters; that player's creatures counted"
+  },
+  {
+   "name": "Dread Wight",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "each creature blocking or blocked by it"
+  },
+  {
+   "name": "Elkin Bottle",
+   "needs": [
+    "duration:until-your-next-upkeep"
+   ],
+   "why": "play it until the beginning of your next upkeep"
+  },
+  {
+   "name": "Goblin Mutant",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack if defending player controls an untapped creature with power 3 or greater"
+  },
+  {
+   "name": "Grizzled Wolverine",
+   "needs": [
+    "amount:creatures-blocking-it",
+    "condition:source-blocked-by-at-least-one"
+   ],
+   "why": "activate only if a creature is blocking it"
+  },
+  {
+   "name": "Lim-Dûl's Hex",
+   "needs": [
+    "effect:unless-that-player"
+   ],
+   "why": "each player pays {B} or {3}, two mana options"
+  },
+  {
+   "name": "Jester's Mask",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search target opponent's library"
+  },
+  {
+   "name": "Orcish Librarian",
+   "needs": [
+    "effect:random-choice"
+   ],
+   "why": "exile four of the top eight at random"
+  },
+  {
+   "name": "Chaos Lord",
+   "needs": [
+    "condition:permanent-count-parity",
+    "static:attack-as-though-haste-unless-entered-this-turn"
+   ],
+   "why": "an even number of permanents; attacks as though it had haste"
+  },
+  {
+   "name": "Breath of Dreams",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "grants cumulative upkeep to green creatures"
+  },
+  {
+   "name": "Arcum's Whistle",
+   "needs": [
+    "filter:controlled-continuously-since-turn-start",
+    "effect:unless-target-controller"
+   ],
+   "why": "pay X or it must attack; destroyed if it didn't"
+  },
+  {
+   "name": "Chromatic Armor",
+   "needs": [
+    "decision:choose-color-on-resolution"
+   ],
+   "why": "the colour chosen again with each activation"
+  },
+  {
+   "name": "Arcum's Weathervane",
+   "needs": [
+    "effect:animate-add-supertype"
+   ],
+   "why": "a land becomes or stops being snow"
+  },
+  {
+   "name": "Icy Prison",
+   "needs": [
+    "effect:unless-any-player-pays"
+   ],
+   "why": "unless any player pays {3}"
+  },
+  {
+   "name": "Glaciers",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "all Mountains are Plains"
+  },
+  {
+   "name": "Melee",
+   "needs": [
+    "decision:attacker-chooses-blocks"
+   ],
+   "why": "you choose how the opponent's creatures block"
+  },
+  {
+   "name": "Earthlore",
+   "needs": [
+    "cost:tap-enchanted-permanent"
+   ],
+   "why": "tap enchanted land as a cost"
+  },
+  {
+   "name": "Orcish Conscripts",
+   "needs": [
+    "static:cant-attack-or-block-unless-two-others"
+   ],
+   "why": "can't attack or block unless at least two other creatures do"
+  },
+  {
+   "name": "Illusionary Presence",
+   "needs": [
+    "decision:choose-land-type-on-resolution",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "gains landwalk of a land type chosen each upkeep"
+  },
+  {
+   "name": "Pox",
+   "needs": [
+    "effect:amount-third-rounded-up"
+   ],
+   "why": "a third, rounded up"
+  },
+  {
+   "name": "Clairvoyance",
+   "needs": [
+    "effect:look-at-target-player-hand"
+   ],
+   "why": "look at target player's hand"
+  },
+  {
+   "name": "Spoils of Evil",
+   "needs": [
+    "effect:count-in-target-player-graveyard"
+   ],
+   "why": "artifact and creature cards in target opponent's graveyard"
+  },
+  {
+   "name": "Musician",
+   "needs": [
+    "effect:grant-ability-if-lacking",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "a creature gains the music-counter ability only if it lacks it"
+  },
+  {
+   "name": "Naked Singularity",
+   "needs": [
+    "replacement:land-mana-type-replacement",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "each basic land type makes a different colour"
+  },
+  {
+   "name": "Meteor Shower",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "X plus 1 damage divided"
+  },
+  {
+   "name": "Snow Fortress",
+   "needs": [
+    "filter:attacking-you"
+   ],
+   "why": "target creature without flying that's attacking you"
+  },
+  {
+   "name": "Kjeldoran Royal Guard",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "unblocked creatures' combat damage dealt to it instead"
+  },
+  {
+   "name": "Forgotten Lore",
+   "needs": [
+    "effect:repeat-process",
+    "effect:opponent-chooses-from-graveyard"
+   ],
+   "why": "the opponent picks again while you pay {G}"
+  },
+  {
+   "name": "Spoils of War",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "X counters distributed, X a count of a graveyard"
+  },
+  {
+   "name": "Elemental Augury",
+   "needs": [
+    "effect:look-at-target-player-library"
+   ],
+   "why": "look at the top three of target player's library"
+  },
+  {
+   "name": "Call to Arms",
+   "needs": [
+    "condition:most-common-color-among-chosen-player-permanents"
+   ],
+   "why": "a colour and an opponent chosen as it enters"
+  },
+  {
+   "name": "Kjeldoran Frostbeast",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "destroy all creatures blocking or blocked by it"
+  },
+  {
+   "name": "Pestilence Rats",
+   "needs": [
+    "amount:cda-count-excluding-self"
+   ],
+   "why": "power equal to the other Rats"
+  },
+  {
+   "name": "Incinerate",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "a creature dealt damage this way can't be regenerated this turn"
+  },
+  {
+   "name": "Enduring Renewal",
+   "needs": [
+    "replacement:draw-replacement-reveal",
+    "static:play-with-hand-revealed"
+   ],
+   "why": "play with your hand revealed; a drawn creature card is discarded"
+  },
+  {
+   "name": "Errantry",
+   "needs": [
+    "static:can-only-attack-alone"
+   ],
+   "why": "enchanted creature can only attack alone"
+  },
+  {
+   "name": "Halls of Mist",
+   "needs": [
+    "filter:attacked-during-controllers-last-turn",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "creatures that attacked during their controller's last turn can't attack"
+  },
+  {
+   "name": "Withering Wisps",
+   "needs": [
+    "cost:activation-limit-by-count"
+   ],
+   "why": "no more times each turn than the snow Swamps you control"
+  },
+  {
+   "name": "Chaos Moon",
+   "needs": [
+    "replacement:tap-for-mana-produces-colorless-instead",
+    "condition:permanent-count-parity"
+   ],
+   "why": "odd or even permanents change what Mountains make"
+  },
+  {
+   "name": "Goblin Lyre",
+   "needs": [
+    "amount:count-for-controller-of-target"
+   ],
+   "why": "damage equal to the creatures that player controls"
+  },
+  {
+   "name": "Snowfall",
+   "needs": [
+    "mana:spend-only-cumulative-upkeep",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "extra {U} spendable only on cumulative upkeep"
+  },
+  {
+   "name": "Dreams of the Dead",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "grants cumulative upkeep {2} to the returned creature"
+  },
+  {
+   "name": "Reality Twist",
+   "needs": [
+    "replacement:tap-for-mana-produces-color-instead",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "lands of each type tap for another colour"
+  },
+  {
+   "name": "Justice",
+   "needs": [
+    "trigger:deals-damage-once-per-event"
+   ],
+   "why": "whenever a red creature or spell deals damage, one source's simultaneous damage summed"
+  },
+  {
+   "name": "Orcish Farmer",
+   "needs": [
+    "static:land-type-setting",
+    "effect:until-controllers-next-untap-step-duration"
+   ],
+   "why": "a land becomes a Swamp until its controller's next untap step"
+  },
+  {
+   "name": "Balduvian Shaman",
+   "needs": [
+    "effect:text-change-color-or-land-words",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "change an enchantment's colour words; it gains cumulative upkeep"
+  },
+  {
+   "name": "Barbarian Guides",
+   "needs": [
+    "keyword:snow-landwalk"
+   ],
+   "why": "grants snow landwalk"
+  },
+  {
+   "name": "Sacred Boon",
+   "needs": [
+    "amount:damage-prevented-this-way"
+   ],
+   "why": "+0/+1 counters for each damage prevented"
+  },
+  {
+   "name": "Karplusan Yeti",
+   "needs": [
+    "effect:damage-to-source"
+   ],
+   "why": "target creature deals damage to the Yeti"
+  },
+  {
+   "name": "Mountain Titan",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "until end of turn, whenever you cast a black spell"
+  },
+  {
+   "name": "Merieke Ri Berit",
+   "needs": [
+    "trigger:delayed-source-becomes-untapped"
+   ],
+   "why": "when Merieke becomes untapped, destroy that creature"
+  },
+  {
+   "name": "Ray of Command",
+   "needs": [
+    "trigger:lose-control-trigger"
+   ],
+   "why": "when you lose control of the creature, tap it"
+  },
+  {
+   "name": "Leshrac's Sigil",
+   "needs": [
+    "effect:discard-chosen-nontargeted-player"
+   ],
+   "why": "look at that player's hand and choose a card for them to discard"
+  },
+  {
+   "name": "Goblin Snowman",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target",
+    "effect:target-creature-source-is-blocking"
+   ],
+   "why": "prevent combat damage to and by it; damage a creature it's blocking"
+  },
+  {
+   "name": "Norritt",
+   "needs": [
+    "condition:controlled-since-turn-start"
+   ],
+   "why": "a creature that must attack, and is destroyed if it didn't"
+  },
+  {
+   "name": "Soul Burn",
+   "needs": [
+    "cost:x-spend-color-restriction",
+    "amount:colored-mana-spent-on-x"
+   ],
+   "why": "spend only black and/or red mana on X"
+  },
+  {
+   "name": "Ice Cauldron",
+   "needs": [
+    "mechanic:noted-mana-type-and-amount",
+    "effect:exile-from-hand-by-filter"
+   ],
+   "why": "note the mana paid and add it back later"
+  },
+  {
+   "name": "Gravebind",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "target creature can't be regenerated this turn"
+  },
+  {
+   "name": "Bone Shaman",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "creatures it damaged this turn can't be regenerated"
+  },
+  {
+   "name": "Essence Vortex",
+   "needs": [
+    "effect:unless-pay-life-amount"
+   ],
+   "why": "unless its controller pays life equal to its toughness"
+  },
+  {
+   "name": "Aggression",
+   "needs": [
+    "trigger:aura-host-locked-at-trigger"
+   ],
+   "why": "the creature destroyed is the one enchanted as it triggered"
+  },
+  {
+   "name": "Word of Undoing",
+   "needs": [
+    "condition:attached-to-target"
+   ],
+   "why": "white Auras you own attached to it return too"
+  },
+  {
+   "name": "Reclamation",
+   "needs": [
+    "cost:attack-cost-sacrifice"
+   ],
+   "why": "black creatures can't attack unless their controller sacrifices a land"
+  },
+  {
+   "name": "Krovikan Vampire",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source",
+    "trigger:lose-control-trigger"
+   ],
+   "why": "creatures it damaged that die return under your control"
+  },
+  {
+   "name": "Spectral Shield",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "enchanted creature can't be the target of spells"
+  },
+  {
+   "name": "Warning",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent combat damage dealt by target attacking creature"
+  },
+  {
+   "name": "Errant Minion",
+   "needs": [
+    "effect:pay-any-amount-of-mana"
+   ],
+   "why": "pay any amount of mana to prevent that much damage"
+  },
+  {
+   "name": "Wiitigo",
+   "needs": [
+    "condition:blocked-or-was-blocked-since-last-upkeep"
+   ],
+   "why": "if it blocked or was blocked since your last upkeep"
+  },
+  {
+   "name": "Legions of Lim-Dûl",
+   "needs": [
+    "keyword:snow-landwalk"
+   ],
+   "why": "snow swampwalk"
+  },
+  {
+   "name": "Rime Dryad",
+   "needs": [
+    "keyword:snow-landwalk"
+   ],
+   "why": "snow forestwalk"
+  },
+  {
+   "name": "Zur's Weirding",
+   "needs": [
+    "static:players-play-with-hands-revealed",
+    "replacement:draw-replacement-reveal"
+   ],
+   "why": "hands revealed; any player may pay 2 life to make you discard a drawn card"
+  },
+  {
+   "name": "Jester's Cap",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search target player's library for three cards and exile them"
+  },
+  {
+   "name": "Winter's Chill",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target",
+    "cost:x-capped-by-count"
+   ],
+   "why": "X no greater than your snow lands; each controller pays {1} or {2}"
+  },
+  {
+   "name": "Infernal Darkness",
+   "needs": [
+    "keyword:cumulative-upkeep",
+    "replacement:tap-for-mana-produces-color-instead"
+   ],
+   "why": "cumulative upkeep—pay {B} and 1 life; lands tap for {B}"
+  },
+  {
+   "name": "Oath of Lim-Dûl",
+   "needs": [
+    "effect:repeat-effect-x-times"
+   ],
+   "why": "for each 1 life lost, discard or sacrifice"
+  },
+  {
+   "name": "Krovikan Sorcerer",
+   "needs": [
+    "effect:discard-one-of-drawn"
+   ],
+   "why": "draw two, then discard one of them"
+  },
+  {
+   "name": "Flooded Woodlands",
+   "needs": [
+    "cost:attack-cost-sacrifice"
+   ],
+   "why": "green creatures can't attack unless their controller sacrifices a land"
+  },
+  {
+   "name": "Foxfire",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target"
+   ],
+   "why": "prevent combat damage to and by target attacking creature"
+  },
+  {
+   "name": "Ritual of Subdual",
+   "needs": [
+    "replacement:tap-for-mana-produces-colorless-instead",
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "lands tap for colorless instead"
+  },
+  {
+   "name": "Prismatic Ward",
+   "needs": [
+    "replacement:prevent-damage-to-attached"
+   ],
+   "why": "prevent damage of the chosen colour to enchanted creature"
+  },
+  {
+   "name": "Hipparion",
+   "needs": [
+    "static:block-tax"
+   ],
+   "why": "can't block a creature with power 3 or greater unless you pay {1}"
+  },
+  {
+   "name": "Infernal Denizen",
+   "needs": [
+    "effect:opponent-gains-control-of-chosen"
+   ],
+   "why": "an opponent gains control of a creature of their choice"
+  },
+  {
+   "name": "Venomous Breath",
+   "needs": [
+    "filter:blocked-or-blocked-by-filter-this-turn"
+   ],
+   "why": "destroy creatures blocking or blocked by it at end of combat"
+  },
+  {
+   "name": "Adarkar Unicorn",
+   "needs": [
+    "mana:spend-only-cumulative-upkeep"
+   ],
+   "why": "mana spendable only on cumulative upkeep"
+  },
+  {
+   "name": "Melting",
+   "needs": [
+    "static:lose-supertype"
+   ],
+   "why": "all lands are no longer snow"
+  },
+  {
+   "name": "Infinite Hourglass",
+   "needs": [
+    "effect:any-player-may-activate"
+   ],
+   "why": "any player may activate this ability"
+  },
+  {
+   "name": "Lava Burst",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "damage can't be prevented or redirected to a creature"
+  },
+  {
+   "name": "Stench of Evil",
+   "needs": [
+    "effect:for-each-destroyed-this-way-unless"
+   ],
+   "why": "for each Plains destroyed, 1 damage unless its controller pays {2}"
+  },
+  {
+   "name": "General Jarkeld",
+   "needs": [
+    "effect:switch-blockers"
+   ],
+   "why": "switch the blockers of two attacking creatures"
+  },
+  {
+   "name": "Arctic Foxes",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "can't be blocked by power 2+ while defending player controls a snow land"
+  },
+  {
+   "name": "Arcum's Sleigh",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "only if defending player controls a snow land"
+  },
+  {
+   "name": "Drought",
+   "needs": [
+    "static:additional-cost-per-mana-symbol"
+   ],
+   "why": "sacrifice a Swamp for each black mana symbol"
+  },
+  {
+   "name": "Mind Warp",
+   "needs": [
+    "effect:discard-chosen-count"
+   ],
+   "why": "look at a hand and choose X cards to discard"
+  },
+  {
+   "name": "Stunted Growth",
+   "needs": [
+    "effect:target-player-puts-cards-from-hand-on-library"
+   ],
+   "why": "target player puts three cards from hand on top"
+  },
+  {
+   "name": "Stormbind",
+   "needs": [
+    "cost:discard-at-random"
+   ],
+   "why": "discard a card at random as a cost"
+  },
+  {
+   "name": "Ghostly Flame",
+   "needs": [
+    "static:colorless-damage-sources"
+   ],
+   "why": "black and red sources deal colorless damage"
+  },
+  {
+   "name": "Orcish Healer",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "target creature can't be regenerated this turn"
+  }
+ ]
+}

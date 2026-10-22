@@ -95,6 +95,7 @@ import _poolCogworkersPuzzleknot from "../pool/cogworkers-puzzleknot.js";
 import _poolCompassionateHealer from "../pool/compassionate-healer.js";
 import _poolCompleatDevotion from "../pool/compleat-devotion.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
+import _poolConquer from "../pool/conquer.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
 import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
@@ -165,6 +166,7 @@ import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
 import _poolFlopsieBumisBuddy from "../pool/flopsie-bumis-buddy.js";
+import _poolFlowOfMaggots from "../pool/flow-of-maggots.js";
 import _poolFlowstoneMauler from "../pool/flowstone-mauler.js";
 import _poolFlutterfox from "../pool/flutterfox.js";
 import _poolFluxChanneler from "../pool/flux-channeler.js";
@@ -231,6 +233,7 @@ import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
 import _poolIchorRats from "../pool/ichor-rats.js";
 import _poolIdolOfFalseGods from "../pool/idol-of-false-gods.js";
+import _poolIllusionsOfGrandeur from "../pool/illusions-of-grandeur.js";
 import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
 import _poolImprovisedWeaponry from "../pool/improvised-weaponry.js";
@@ -660,6 +663,7 @@ const shard: CardShard = {
     _poolCompassionateHealer,
     _poolCompleatDevotion,
     _poolConclaveEquenaut,
+    _poolConquer,
     _poolCorpseKnight,
     _poolCountOnLuck,
     _poolCrackedEarthTechnique,
@@ -730,6 +734,7 @@ const shard: CardShard = {
     _poolFlagstonesOfTrokair,
     _poolFleetfootDancer,
     _poolFlopsieBumisBuddy,
+    _poolFlowOfMaggots,
     _poolFlowstoneMauler,
     _poolFlutterfox,
     _poolFluxChanneler,
@@ -796,6 +801,7 @@ const shard: CardShard = {
     _poolIceTunnel,
     _poolIchorRats,
     _poolIdolOfFalseGods,
+    _poolIllusionsOfGrandeur,
     _poolImmolation,
     _poolImpetuousSunchaser,
     _poolImprovisedWeaponry,

@@ -56,12 +56,14 @@ import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
 import _poolCanopyGargantuan from "../pool/canopy-gargantuan.js";
 import _poolCaptainOfUmbar from "../pool/captain-of-umbar.js";
 import _poolCaptivatingVampire from "../pool/captivating-vampire.js";
+import _poolCaribouRange from "../pool/caribou-range.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
+import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCommandTower from "../pool/command-tower.js";
@@ -146,10 +148,12 @@ import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
+import _poolFyndhornPollen from "../pool/fyndhorn-pollen.js";
 import _poolGallantFowlknight from "../pool/gallant-fowlknight.js";
 import _poolGalvanicIteration from "../pool/galvanic-iteration.js";
 import _poolGalvanicKey from "../pool/galvanic-key.js";
 import _poolGameTrail from "../pool/game-trail.js";
+import _poolGangrenousZombies from "../pool/gangrenous-zombies.js";
 import _poolGauFeralYouth from "../pool/gau-feral-youth.js";
 import _poolGeneralsEnforcer from "../pool/generals-enforcer.js";
 import _poolGenkuFutureShaper from "../pool/genku-future-shaper.js";
@@ -253,6 +257,7 @@ import _poolMakindiMesas from "../pool/makindi-mesas.js";
 import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
+import _poolMartonStromgald from "../pool/marton-stromgald.js";
 import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
@@ -327,6 +332,7 @@ import _poolResculpt from "../pool/resculpt.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
+import _poolRiverDelta from "../pool/river-delta.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
 import _poolRocHunter from "../pool/roc-hunter.js";
 import _poolRowanScholarOfSparks from "../pool/rowan-scholar-of-sparks.js";
@@ -397,6 +403,7 @@ import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
+import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
 import _poolSteamVents from "../pool/steam-vents.js";
@@ -504,6 +511,7 @@ import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensBoo from "../tokens/boo.js";
 import _tokensCamaridToken from "../tokens/camarid-token.js";
+import _tokensCaribouToken from "../tokens/caribou-token.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
@@ -571,12 +579,14 @@ const shard: CardShard = {
     _poolCanopyGargantuan,
     _poolCaptainOfUmbar,
     _poolCaptivatingVampire,
+    _poolCaribouRange,
     _poolCarvenCaryatid,
     _poolCavesOfKoilos,
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
     _poolChocoboCamp,
+    _poolChubToad,
     _poolCinderBarrens,
     _poolCleverConcealment,
     _poolCommandTower,
@@ -661,10 +671,12 @@ const shard: CardShard = {
     _poolForsakenMonument,
     _poolFrogmyrEnforcer,
     _poolFyndhornBow,
+    _poolFyndhornPollen,
     _poolGallantFowlknight,
     _poolGalvanicIteration,
     _poolGalvanicKey,
     _poolGameTrail,
+    _poolGangrenousZombies,
     _poolGauFeralYouth,
     _poolGeneralsEnforcer,
     _poolGenkuFutureShaper,
@@ -768,6 +780,7 @@ const shard: CardShard = {
     _poolMalevolentAwakening,
     _poolMandibularKite,
     _poolMapTheFrontier,
+    _poolMartonStromgald,
     _poolMassMutiny,
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
@@ -842,6 +855,7 @@ const shard: CardShard = {
     _poolRestlessApparition,
     _poolRighteousBlow,
     _poolRithsAttendant,
+    _poolRiverDelta,
     _poolRoarOfEndlessSong,
     _poolRocHunter,
     _poolRowanScholarOfSparks,
@@ -912,6 +926,7 @@ const shard: CardShard = {
     _poolSpiritMascot,
     _poolSpitefulSquad,
     _poolSplendidReclamation,
+    _poolStaffOfTheAges,
     _poolStarlitAngel,
     _poolStaunchCrewmate,
     _poolSteamVents,
@@ -1021,6 +1036,7 @@ const shard: CardShard = {
     _tokensBirdToken,
     _tokensBoo,
     _tokensCamaridToken,
+    _tokensCaribouToken,
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,

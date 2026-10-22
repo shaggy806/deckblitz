@@ -145,6 +145,7 @@ import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js"
 import _poolDreadSummons from "../pool/dread-summons.js";
 import _poolDreamCoat from "../pool/dream-coat.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
+import _poolEarthlink from "../pool/earthlink.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
 import _poolElectricRevelation from "../pool/electric-revelation.js";
@@ -153,6 +154,7 @@ import _poolElvishRegrower from "../pool/elvish-regrower.js";
 import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
+import _poolEnervate from "../pool/enervate.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEther from "../pool/ether.js";
@@ -456,6 +458,7 @@ import _poolSlingGangLieutenant from "../pool/sling-gang-lieutenant.js";
 import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
 import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
 import _poolSliverHivelord from "../pool/sliver-hivelord.js";
+import _poolSoldeviGolem from "../pool/soldevi-golem.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
@@ -516,10 +519,12 @@ import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
+import _poolThoughtleech from "../pool/thoughtleech.js";
 import _poolThrash from "../pool/thrash.js";
 import _poolThrullWizard from "../pool/thrull-wizard.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolThunderousOrator from "../pool/thunderous-orator.js";
+import _poolTimberlineRidge from "../pool/timberline-ridge.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
 import _poolTimeOfNeed from "../pool/time-of-need.js";
 import _poolTineShrike from "../pool/tine-shrike.js";
@@ -573,6 +578,7 @@ import _poolWirewoodSymbiote from "../pool/wirewood-symbiote.js";
 import _poolWishcoinCrab from "../pool/wishcoin-crab.js";
 import _poolWithinRange from "../pool/within-range.js";
 import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
+import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
@@ -743,6 +749,7 @@ const shard: CardShard = {
     _poolDreadSummons,
     _poolDreamCoat,
     _poolDregscapeZombie,
+    _poolEarthlink,
     _poolEarthquakeDragon,
     _poolEidolonOfPhilosophy,
     _poolElectricRevelation,
@@ -751,6 +758,7 @@ const shard: CardShard = {
     _poolEmeritusOfWoe,
     _poolEnduringCourage,
     _poolEnduringVitality,
+    _poolEnervate,
     _poolEpicureOfBlood,
     _poolEpistolaryLibrarian,
     _poolEther,
@@ -1054,6 +1062,7 @@ const shard: CardShard = {
     _poolSlipOnTheRing,
     _poolSlipOutTheBack,
     _poolSliverHivelord,
+    _poolSoldeviGolem,
     _poolSolkanarTheSwampKing,
     _poolSomnomancer,
     _poolSongOfFreyalise,
@@ -1114,10 +1123,12 @@ const shard: CardShard = {
     _poolTheThingBenGrimm,
     _poolTheloniteDruid,
     _poolThornscapeApprentice,
+    _poolThoughtleech,
     _poolThrash,
     _poolThrullWizard,
     _poolThunderfootBaloth,
     _poolThunderousOrator,
+    _poolTimberlineRidge,
     _poolTimeEbb,
     _poolTimeOfNeed,
     _poolTineShrike,
@@ -1171,6 +1182,7 @@ const shard: CardShard = {
     _poolWishcoinCrab,
     _poolWithinRange,
     _poolWoodcuttersGrit,
+    _poolWoollyMammoths,
     _poolWormholeSerpent,
     _poolYevaNaturesHerald,
     _poolYouFindTheVillainsLair,

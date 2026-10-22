@@ -94,6 +94,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Boo",
   "Cadet",
   "Camarid Token",
+  "Caribou Token",
   "Cat Beast Token",
   "Cat Bird Token",
   "Cat Token",

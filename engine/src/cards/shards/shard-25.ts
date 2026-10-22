@@ -40,6 +40,7 @@ import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBadMoon from "../pool/bad-moon.js";
 import _poolBafflingEnd from "../pool/baffling-end.js";
+import _poolBalduvianConjurer from "../pool/balduvian-conjurer.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
@@ -233,6 +234,7 @@ import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
+import _poolHydroblast from "../pool/hydroblast.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
 import _poolIcatianStore from "../pool/icatian-store.js";
 import _poolIgneousGolem from "../pool/igneous-golem.js";
@@ -619,6 +621,7 @@ const shard: CardShard = {
     _poolBaSingSe,
     _poolBadMoon,
     _poolBafflingEnd,
+    _poolBalduvianConjurer,
     _poolBandage,
     _poolBasrisAegis,
     _poolBastionOfRemembrance,
@@ -812,6 +815,7 @@ const shard: CardShard = {
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
     _poolHydaelynTheMothercrystal,
+    _poolHydroblast,
     _poolHydrosurge,
     _poolIcatianStore,
     _poolIgneousGolem,

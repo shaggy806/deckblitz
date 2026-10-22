@@ -6,6 +6,16 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **"Until end of turn, whenever …" is a granted trigger, not a delayed one.** Rule 603.7c: an
+  effect that says "until end of turn, whenever [event], [effect]" creates a delayed triggered
+  ability with a duration — it belongs to no permanent, so nothing that happens to its source
+  ends it. Dovin, Grand Arbiter's −1 (`pool/dovin-grand-arbiter.ts`) is authored with
+  `grant-triggered` on Dovin itself, which matches only while Dovin keeps its abilities and its
+  controller. The fix is a `delayed-trigger` whose `at` is an ordinary `TriggerSpec` for the
+  rest of the turn (a watch like `DelayedUnblockedWatch`, checked in `detectTriggers`), then Dovin
+  moved onto it. Blocks Mountain Titan ("until end of turn, whenever you cast a black spell"),
+  Gaze of Pain and Battle Cry (B136, `effect:delayed-trigger-rest-of-turn`). Found by an
+  authoring agent, 2026-10-21.
 - **Phyrexian mana is paid with life only when mana can't pay it.** Rule 107.4f lets a Phyrexian
   symbol be paid with one mana of its colour or 2 life, the player's choice. `mana-payment.ts`'s
   pip resolution (`resolveHybridCost` and `resolveReducedTwobrid`) pays 2 life for a Phyrexian pip only when no mana can

@@ -139,6 +139,7 @@ import _poolEardrumRattler from "../pool/eardrum-rattler.js";
 import _poolEarthbendingStudent from "../pool/earthbending-student.js";
 import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
 import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
+import _poolElderDruid from "../pool/elder-druid.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
@@ -197,6 +198,7 @@ import _poolGiantOctopus from "../pool/giant-octopus.js";
 import _poolGideonsReproach from "../pool/gideons-reproach.js";
 import _poolGigantosaurus from "../pool/gigantosaurus.js";
 import _poolGiltLeafsEmbrace from "../pool/gilt-leafs-embrace.js";
+import _poolGlacialCrevasses from "../pool/glacial-crevasses.js";
 import _poolGlacierGodmaw from "../pool/glacier-godmaw.js";
 import _poolGlassworks from "../pool/glassworks.js";
 import _poolGlint from "../pool/glint.js";
@@ -445,6 +447,7 @@ import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStatus from "../pool/status.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
+import _poolStoneSpirit from "../pool/stone-spirit.js";
 import _poolStormchaserDrake from "../pool/stormchaser-drake.js";
 import _poolStormriderSpirit from "../pool/stormrider-spirit.js";
 import _poolStrengthOfWill from "../pool/strength-of-will.js";
@@ -474,6 +477,7 @@ import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
+import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
@@ -694,6 +698,7 @@ const shard: CardShard = {
     _poolEarthbendingStudent,
     _poolEasterlingVanguard,
     _poolEiganjoUprising,
+    _poolElderDruid,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
     _poolErinisGloomStalker,
@@ -752,6 +757,7 @@ const shard: CardShard = {
     _poolGideonsReproach,
     _poolGigantosaurus,
     _poolGiltLeafsEmbrace,
+    _poolGlacialCrevasses,
     _poolGlacierGodmaw,
     _poolGlassworks,
     _poolGlint,
@@ -1000,6 +1006,7 @@ const shard: CardShard = {
     _poolStatureYoungAvenger,
     _poolStatus,
     _poolStingingVitriol,
+    _poolStoneSpirit,
     _poolStormchaserDrake,
     _poolStormriderSpirit,
     _poolStrengthOfWill,
@@ -1029,6 +1036,7 @@ const shard: CardShard = {
     _poolTheHungerTideRises,
     _poolTheNightOfTheDoctor,
     _poolTheTerrorOfSerpentsPass,
+    _poolThermokarst,
     _poolThinkTwice,
     _poolThornLieutenant,
     _poolThunderwolfCavalry,

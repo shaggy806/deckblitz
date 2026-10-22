@@ -31,6 +31,7 @@ import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
 import _poolArcticFlats from "../pool/arctic-flats.js";
 import _poolArgivianArchaeologist from "../pool/argivian-archaeologist.js";
+import _poolArmorOfFaith from "../pool/armor-of-faith.js";
 import _poolArmorThrull from "../pool/armor-thrull.js";
 import _poolArwenMortalQueen from "../pool/arwen-mortal-queen.js";
 import _poolArwenWeaverOfHope from "../pool/arwen-weaver-of-hope.js";
@@ -243,6 +244,7 @@ import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
 import _poolIceStorm from "../pool/ice-storm.js";
+import _poolIcequake from "../pool/icequake.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolImmolatingGyre from "../pool/immolating-gyre.js";
@@ -459,6 +461,7 @@ import _poolSneakingGuide from "../pool/sneaking-guide.js";
 import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
+import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
@@ -631,6 +634,7 @@ const shard: CardShard = {
     _poolArchonOfSunsGrace,
     _poolArcticFlats,
     _poolArgivianArchaeologist,
+    _poolArmorOfFaith,
     _poolArmorThrull,
     _poolArwenMortalQueen,
     _poolArwenWeaverOfHope,
@@ -843,6 +847,7 @@ const shard: CardShard = {
     _poolHyenaPack,
     _poolIcatianLieutenant,
     _poolIceStorm,
+    _poolIcequake,
     _poolIcyReception,
     _poolIllegitimateBusiness,
     _poolImmolatingGyre,
@@ -1059,6 +1064,7 @@ const shard: CardShard = {
     _poolSnubhornSentry,
     _poolSoaringDrake,
     _poolSoaringShowOff,
+    _poolSoldeviMachinist,
     _poolSparkTrooper,
     _poolSpectralCloak,
     _poolSpiderManWebSpinner,

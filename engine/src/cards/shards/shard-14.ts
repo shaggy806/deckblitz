@@ -108,6 +108,7 @@ import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
 import _poolCrystalBall from "../pool/crystal-ball.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
+import _poolCurseOfMaritLage from "../pool/curse-of-marit-lage.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
 import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
 import _poolDaiLiAgents from "../pool/dai-li-agents.js";
@@ -465,6 +466,7 @@ import _poolStrafe from "../pool/strafe.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
 import _poolStudy from "../pool/study.js";
 import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
+import _poolSunstone from "../pool/sunstone.js";
 import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
@@ -673,6 +675,7 @@ const shard: CardShard = {
     _poolCreativeTechnique,
     _poolCrystalBall,
     _poolCuriousAltisaur,
+    _poolCurseOfMaritLage,
     _poolCyberdriveAwakener,
     _poolCyclopsOfEternalFury,
     _poolDaiLiAgents,
@@ -1030,6 +1033,7 @@ const shard: CardShard = {
     _poolStrikeItRich,
     _poolStudy,
     _poolSunsetSaboteur,
+    _poolSunstone,
     _poolSurgicalSkullbomb,
     _poolSurrakarBanisher,
     _poolSuspiciousShambler,

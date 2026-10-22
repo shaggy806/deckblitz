@@ -5216,6 +5216,19 @@ damage this turn" (510.1a)
   Zealot deals the opponent no combat damage. Declined instead, the Zealot hits for 2. Check at
   ~768px tall, in a 2- and a 4-player room.
 
+### Illusionary Wall pays a growing cumulative upkeep
+
+*New player decision* — cumulative upkeep (rule 702.24a): the cost once per age counter, all or
+nothing
+
+- **Setup:** Your precombat main. Your battlefield: Illusionary Wall with one age counter, three
+  Islands.
+- **Do:** Pass the turn and come back to your upkeep. When asked, pay. Pass again; at the next
+  upkeep, decline.
+- **Check:** The first prompt asks for {U}{U} (two age counters) and offers paying or not; paid,
+  the Wall stays with two counters. The next asks for {U}{U}{U}; declined, the Wall is
+  sacrificed. Check at ~768px tall, in a 2- and a 4-player room.
+
 ### Dark Depths loses its last ice counter
 
 *Careful rules call* — a state trigger (rule 603.8): it triggers once, and not again while it's on

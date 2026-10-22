@@ -47,6 +47,7 @@ import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
 import _poolBlightKeeper from "../pool/blight-keeper.js";
 import _poolBlightedFen from "../pool/blighted-fen.js";
 import _poolBlizzardBrawl from "../pool/blizzard-brawl.js";
+import _poolBlizzard from "../pool/blizzard.js";
 import _poolBloodCelebrant from "../pool/blood-celebrant.js";
 import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
@@ -457,6 +458,7 @@ import _poolStormcallersBoon from "../pool/stormcallers-boon.js";
 import _poolStormscapeApprentice from "../pool/stormscape-apprentice.js";
 import _poolStratozeppelid from "../pool/stratozeppelid.js";
 import _poolStrikingPalette from "../pool/striking-palette.js";
+import _poolStromgaldCabal from "../pool/stromgald-cabal.js";
 import _poolSubtlety from "../pool/subtlety.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
@@ -642,6 +644,7 @@ const shard: CardShard = {
     _poolBlightKeeper,
     _poolBlightedFen,
     _poolBlizzardBrawl,
+    _poolBlizzard,
     _poolBloodCelebrant,
     _poolBloodTollHarpy,
     _poolBloodsoakedChampion,
@@ -1052,6 +1055,7 @@ const shard: CardShard = {
     _poolStormscapeApprentice,
     _poolStratozeppelid,
     _poolStrikingPalette,
+    _poolStromgaldCabal,
     _poolSubtlety,
     _poolSuddenStrength,
     _poolSunSentinel,

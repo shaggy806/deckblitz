@@ -164,6 +164,7 @@ import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
 import _poolFieryFall from "../pool/fiery-fall.js";
+import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
@@ -230,6 +231,7 @@ import _poolIdyllicGrange from "../pool/idyllic-grange.js";
 import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
+import _poolInfuse from "../pool/infuse.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
 import _poolInvadingManticore from "../pool/invading-manticore.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
@@ -734,6 +736,7 @@ const shard: CardShard = {
     _poolFellMire,
     _poolFeralInvocation,
     _poolFieryFall,
+    _poolFieryJustice,
     _poolFiliThePathfinder,
     _poolFlood,
     _poolFlowstoneWyvern,
@@ -800,6 +803,7 @@ const shard: CardShard = {
     _poolImpendingDoom,
     _poolIncrementalBlight,
     _poolInfernalPhantom,
+    _poolInfuse,
     _poolInspiredTethermage,
     _poolInvadingManticore,
     _poolIronLeagueSteed,

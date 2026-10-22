@@ -773,26 +773,35 @@ export function wardCostText(cost: WardCost): string {
  * who can do all of it (rule 118.3): mana they can pay, at least that much
  * life, a permanent to sacrifice, enough cards in hand, a matching card in
  * hand. */
+/**
+ * `times` on an {@link UnlessOption}: that cost paid this many times over,
+ * read as the effect applies — cumulative upkeep's "pay [cost] for each age
+ * counter on it" (rule 702.24a): the mana repeated, the life multiplied, that
+ * many more to sacrifice. One when absent. Fixed into the bound option, whose
+ * `text` then shows the total.
+ */
+export type UnlessTimes = { readonly times?: EffectAmount };
+
 export type UnlessOption =
-  | { readonly pay: string; readonly text: string }
+  | ({ readonly pay: string; readonly text: string } & UnlessTimes)
   /** "…unless that player pays {X}, where X is this creature's power"
    * (Esper Sentinel): that much generic mana, read as the effect applies —
    * `{X}` in `text` shows the amount. A mana option like `pay`. */
   | { readonly payGeneric: EffectAmount; readonly text: string }
-  | { readonly payLife: number; readonly text: string }
+  | ({ readonly payLife: number; readonly text: string } & UnlessTimes)
   /** `exceptSource`: "sacrifice **another** creature" (Ziatora, the
    * Incinerator) — never the effect's own source. `count`: "sacrifice **two**
    * Blood tokens" (Strefan, Maurer Progenitor; Rakdos, Patron of Chaos) —
    * offered only to a player with that many to sacrifice (rule 118.3), who
    * then chooses which. One when absent. */
-  | {
+  | ({
       readonly sacrifice: CardFilter;
       readonly count?: number;
       readonly exceptSource?: boolean;
       /** One of forage's two ways (rule 701.61a) — see `forageOptions()`. */
       readonly forage?: true;
       readonly text: string;
-    }
+    } & UnlessTimes)
   /** "Exile N cards from your graveyard", the player's choice of which —
    * forage's other way (rule 701.61a), offered only with that many there.
    * `forage` marks it as foraging, which "whenever you forage" sees. */
@@ -7221,6 +7230,32 @@ function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void
 }
 
 /**
+ * An `unless` option's `times` (see {@link UnlessTimes}) fixed as the effect
+ * applies: the mana repeated, the life multiplied, that many more to
+ * sacrifice — all of it or none (rule 702.24a: no partial payments). Its
+ * `text` names the total.
+ */
+function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): BoundUnlessOption {
+  if (!("times" in option) || option.times === undefined) return option;
+  const n = Math.max(0, Math.floor(amountValue(option.times, ctx)));
+  if ("pay" in option) {
+    const pay = option.pay.repeat(n);
+    return { pay, text: `Pay ${pay}` };
+  }
+  if ("payLife" in option) return { payLife: option.payLife * n, text: `Pay ${option.payLife * n} life` };
+  if ("sacrifice" in option) {
+    const count = (option.count ?? 1) * n;
+    return {
+      sacrifice: option.sacrifice,
+      count,
+      ...(option.exceptSource === true ? { exceptSource: true } : {}),
+      text: `${option.text} (${count})`,
+    };
+  }
+  return option;
+}
+
+/**
  * An `"each-player-may"`: ask each player in turn, then apply the follow-ups
  * player by player. Each question — and each follow-up that stops to ask
  * something — parks the rest as a copy carrying its `progress`, beneath
@@ -10574,9 +10609,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.chooser,
         // A generic amount is fixed as the effect applies.
         spec.options.map((option): BoundUnlessOption => {
-          if (!("payGeneric" in option)) return option;
-          const n = amountValue(option.payGeneric, ctx);
-          return { pay: `{${n}}`, text: option.text.split("{X}").join(`{${n}}`) };
+          if ("payGeneric" in option) {
+            const n = amountValue(option.payGeneric, ctx);
+            return { pay: `{${n}}`, text: option.text.split("{X}").join(`{${n}}`) };
+          }
+          return bindUnlessTimes(option, ctx);
         }),
         spec.otherwise,
       );

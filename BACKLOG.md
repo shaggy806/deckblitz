@@ -101,11 +101,13 @@ section keeps only what to do next.
   "for as long as ~ remains tapped"; batches 132-133 Legends, on rampage, the world rule, "for as
   long as you control ~" and "blockable as though it didn't have landwalk"; batch 134 The Dark,
   on existing features only; batch 135 Fallen Empires, on "attacks and isn't blocked", removing
-  any number of counters as a cost, and state triggers. **Next, Ice Age** (256 left — two or
-  three batches), then Homelands. Leads over the whole pool now: banding (25 — needs the
-  multi-blocking line below), damage redirection (12), "can't attack unless defending player
-  controls …" (`static:attack-restriction-defending-player-condition` — 7, the Island-only sea
-  creatures; their state triggers are built).
+  any number of counters as a cost, and state triggers; batch 136 Ice Age whole, on cumulative
+  upkeep. **Next, Homelands** (79 left), then Alliances (118). Leads over the whole pool now:
+  banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
+  (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana
+  spendable only on it), damage redirection (13), "can't be regenerated this turn"
+  (`effect:cant-be-regenerated-this-turn` — 9), "can't attack unless defending player controls
+  …" (`static:attack-restriction-defending-player-condition` — 9).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
   ranked ones first. Every set from Reality Fracture back to Phyrexia: All Will Be One is whole
@@ -219,6 +221,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).
 - **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.
 - **Losing loyalty never emits `counter-removed`** (306.8, 606.4): damage to a planeswalker and a minus loyalty cost emit only `loyalty-changed`, so a `counters-removed` trigger for loyalty never fires (Chandra, Fire Artisan).

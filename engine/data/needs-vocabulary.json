@@ -9517,6 +9517,123 @@
   },
   "filter:tapped-to-pay-for-source-this-turn": {
    "example": "Vodalian War Machine"
+  },
+  "static:prohibit-enchanted-controller": {
+   "example": "Brand of Ill Omen"
+  },
+  "condition:defending-player-controls": {
+   "example": "Kjeldoran Guard, Arctic Foxes, Arcum's Sleigh"
+  },
+  "amount:min-of-amounts": {
+   "example": "Snowblind"
+  },
+  "condition:source-blocked-by-at-least-one": {
+   "example": "Grizzled Wolverine"
+  },
+  "condition:permanent-count-parity": {
+   "example": "Chaos Lord, Chaos Moon"
+  },
+  "static:attack-as-though-haste-unless-entered-this-turn": {
+   "example": "Chaos Lord"
+  },
+  "static:cant-attack-or-block-unless-two-others": {
+   "example": "Orcish Conscripts"
+  },
+  "effect:grant-ability-if-lacking": {
+   "example": "Musician"
+  },
+  "replacement:land-mana-type-replacement": {
+   "example": "Naked Singularity"
+  },
+  "condition:most-common-color-among-chosen-player-permanents": {
+   "example": "Call to Arms"
+  },
+  "amount:cda-count-excluding-self": {
+   "example": "Pestilence Rats"
+  },
+  "static:play-with-hand-revealed": {
+   "example": "Enduring Renewal"
+  },
+  "static:can-only-attack-alone": {
+   "example": "Errantry"
+  },
+  "filter:attacked-during-controllers-last-turn": {
+   "example": "Halls of Mist"
+  },
+  "cost:activation-limit-by-count": {
+   "example": "Withering Wisps"
+  },
+  "amount:count-for-controller-of-target": {
+   "example": "Goblin Lyre"
+  },
+  "mana:spend-only-cumulative-upkeep": {
+   "example": "Snowfall, Adarkar Unicorn"
+  },
+  "effect:until-controllers-next-untap-step-duration": {
+   "example": "Orcish Farmer"
+  },
+  "keyword:snow-landwalk": {
+   "example": "Barbarian Guides, Legions of Lim-Dûl, Rime Dryad"
+  },
+  "amount:damage-prevented-this-way": {
+   "example": "Sacred Boon"
+  },
+  "trigger:delayed-source-becomes-untapped": {
+   "example": "Merieke Ri Berit"
+  },
+  "effect:discard-chosen-nontargeted-player": {
+   "example": "Leshrac's Sigil"
+  },
+  "cost:x-spend-color-restriction": {
+   "example": "Soul Burn"
+  },
+  "amount:colored-mana-spent-on-x": {
+   "example": "Soul Burn"
+  },
+  "mechanic:noted-mana-type-and-amount": {
+   "example": "Ice Cauldron"
+  },
+  "effect:unless-pay-life-amount": {
+   "example": "Essence Vortex"
+  },
+  "trigger:aura-host-locked-at-trigger": {
+   "example": "Aggression"
+  },
+  "condition:blocked-or-was-blocked-since-last-upkeep": {
+   "example": "Wiitigo"
+  },
+  "cost:x-capped-by-count": {
+   "example": "Winter's Chill"
+  },
+  "effect:discard-one-of-drawn": {
+   "example": "Krovikan Sorcerer"
+  },
+  "static:block-tax": {
+   "example": "Hipparion"
+  },
+  "effect:opponent-gains-control-of-chosen": {
+   "example": "Infernal Denizen"
+  },
+  "static:lose-supertype": {
+   "example": "Melting"
+  },
+  "effect:for-each-destroyed-this-way-unless": {
+   "example": "Stench of Evil"
+  },
+  "effect:switch-blockers": {
+   "example": "General Jarkeld"
+  },
+  "static:additional-cost-per-mana-symbol": {
+   "example": "Drought"
+  },
+  "effect:discard-chosen-count": {
+   "example": "Mind Warp"
+  },
+  "effect:target-player-puts-cards-from-hand-on-library": {
+   "example": "Stunted Growth"
+  },
+  "static:colorless-damage-sources": {
+   "example": "Ghostly Flame"
   }
  }
 }

@@ -36,6 +36,7 @@ import _poolAvoidFate from "../pool/avoid-fate.js";
 import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
+import _poolBarbedSextant from "../pool/barbed-sextant.js";
 import _poolBarterInBlood from "../pool/barter-in-blood.js";
 import _poolBasiliskGate from "../pool/basilisk-gate.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
@@ -184,6 +185,7 @@ import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
 import _poolFreedFromTheReal from "../pool/freed-from-the-real.js";
+import _poolFreyalisesCharm from "../pool/freyalises-charm.js";
 import _poolFrilledDeathspitter from "../pool/frilled-deathspitter.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
@@ -224,16 +226,19 @@ import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
 import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
+import _poolHallowedGround from "../pool/hallowed-ground.js";
 import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
 import _poolHeadsplitter from "../pool/headsplitter.js";
 import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
+import _poolHecatomb from "../pool/hecatomb.js";
 import _poolHiddenPath from "../pool/hidden-path.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
+import _poolIllusionaryForces from "../pool/illusionary-forces.js";
 import _poolImpetuousProtege from "../pool/impetuous-protege.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolInfernalIdol from "../pool/infernal-idol.js";
@@ -438,6 +443,7 @@ import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
+import _poolSnowHound from "../pool/snow-hound.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
 import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
@@ -536,6 +542,7 @@ import _poolWeaponRack from "../pool/weapon-rack.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
 import _poolWhiteManaBattery from "../pool/white-mana-battery.js";
+import _poolWhiteScarab from "../pool/white-scarab.js";
 import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildsize from "../pool/wildsize.js";
@@ -546,6 +553,7 @@ import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
+import _poolWrathOfMaritLage from "../pool/wrath-of-marit-lage.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
@@ -604,6 +612,7 @@ const shard: CardShard = {
     _poolAzoriusSkyguard,
     _poolBalaGedScorpion,
     _poolBanishingKnack,
+    _poolBarbedSextant,
     _poolBarterInBlood,
     _poolBasiliskGate,
     _poolBattlegroundGeist,
@@ -752,6 +761,7 @@ const shard: CardShard = {
     _poolForumsFavor,
     _poolFoulRoads,
     _poolFreedFromTheReal,
+    _poolFreyalisesCharm,
     _poolFrilledDeathspitter,
     _poolFrolickingFamiliar,
     _poolGalionElvenkingsButler,
@@ -792,16 +802,19 @@ const shard: CardShard = {
     _poolHaazdaOfficer,
     _poolHaliyaGuidedByLight,
     _poolHallOfOracles,
+    _poolHallowedGround,
     _poolHandThatFeeds,
     _poolHarrierStrix,
     _poolHeadsplitter,
     _poolHearthhullTheWorldseed,
+    _poolHecatomb,
     _poolHiddenPath,
     _poolHonorboundPage,
     _poolHornetSting,
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
     _poolIcehideGolem,
+    _poolIllusionaryForces,
     _poolImpetuousProtege,
     _poolIncreasingDevotion,
     _poolInfernalIdol,
@@ -1006,6 +1019,7 @@ const shard: CardShard = {
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
     _poolSnareTheSkies,
+    _poolSnowHound,
     _poolSoltariTrooper,
     _poolSongOfEarendil,
     _poolSophiaDoggedDetective,
@@ -1104,6 +1118,7 @@ const shard: CardShard = {
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
     _poolWhiteManaBattery,
+    _poolWhiteScarab,
     _poolWildIdea,
     _poolWildernessReclamation,
     _poolWildsize,
@@ -1114,6 +1129,7 @@ const shard: CardShard = {
     _poolWitheringCurse,
     _poolWolfbat,
     _poolWolfridersSaddle,
+    _poolWrathOfMaritLage,
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,

@@ -291,11 +291,13 @@ import _poolMerfolkWindrobber from "../pool/merfolk-windrobber.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
 import _poolMesaEnchantress from "../pool/mesa-enchantress.js";
 import _poolMesmericOrb from "../pool/mesmeric-orb.js";
+import _poolMesmericTrance from "../pool/mesmeric-trance.js";
 import _poolMessengerDrake from "../pool/messenger-drake.js";
 import _poolMetathranZombie from "../pool/metathran-zombie.js";
 import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
 import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
+import _poolMindWhip from "../pool/mind-whip.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMinistrantOfObligation from "../pool/ministrant-of-obligation.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
@@ -331,6 +333,7 @@ import _poolOldHobAlleycatBlues from "../pool/old-hob-alleycat-blues.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
 import _poolOrcGeneral from "../pool/orc-general.js";
+import _poolOrcishSquatters from "../pool/orcish-squatters.js";
 import _poolOrneryTumblewagg from "../pool/ornery-tumblewagg.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
 import _poolOsseousExhale from "../pool/osseous-exhale.js";
@@ -345,6 +348,7 @@ import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
+import _poolPhantasmalMount from "../pool/phantasmal-mount.js";
 import _poolPheresBandBrawler from "../pool/pheres-band-brawler.js";
 import _poolPheresBandCentaurs from "../pool/pheres-band-centaurs.js";
 import _poolPhyrexianHulk from "../pool/phyrexian-hulk.js";
@@ -352,6 +356,7 @@ import _poolPhyrexianWalker from "../pool/phyrexian-walker.js";
 import _poolPicturesOfSpiderMan from "../pool/pictures-of-spider-man.js";
 import _poolPiperOfTheSwarm from "../pool/piper-of-the-swarm.js";
 import _poolPiperWrightPublickReporter from "../pool/piper-wright-publick-reporter.js";
+import _poolPitTrap from "../pool/pit-trap.js";
 import _poolPlarggDeanOfChaos from "../pool/plargg-dean-of-chaos.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
@@ -847,11 +852,13 @@ const shard: CardShard = {
     _poolMerryWardenOfIsengard,
     _poolMesaEnchantress,
     _poolMesmericOrb,
+    _poolMesmericTrance,
     _poolMessengerDrake,
     _poolMetathranZombie,
     _poolMethodsOfTheMighty,
     _poolMicromancer,
     _poolMigratoryGreathorn,
+    _poolMindWhip,
     _poolMinionsReturn,
     _poolMinistrantOfObligation,
     _poolMirrorEntity,
@@ -887,6 +894,7 @@ const shard: CardShard = {
     _poolOpposition,
     _poolOrazcaRaptor,
     _poolOrcGeneral,
+    _poolOrcishSquatters,
     _poolOrneryTumblewagg,
     _poolOrzhovSignet,
     _poolOsseousExhale,
@@ -901,6 +909,7 @@ const shard: CardShard = {
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
     _poolPhantasmalImage,
+    _poolPhantasmalMount,
     _poolPheresBandBrawler,
     _poolPheresBandCentaurs,
     _poolPhyrexianHulk,
@@ -908,6 +917,7 @@ const shard: CardShard = {
     _poolPicturesOfSpiderMan,
     _poolPiperOfTheSwarm,
     _poolPiperWrightPublickReporter,
+    _poolPitTrap,
     _poolPlarggDeanOfChaos,
     _poolPotionOfHealing,
     _poolPrecipitousDrop,

@@ -50,6 +50,7 @@ import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
+import _poolBlackScarab from "../pool/black-scarab.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
 import _poolBladeHistorian from "../pool/blade-historian.js";
 import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
@@ -129,6 +130,7 @@ import _poolDeploy from "../pool/deploy.js";
 import _poolDerangedOutcast from "../pool/deranged-outcast.js";
 import _poolDesolationProwler from "../pool/desolation-prowler.js";
 import _poolDevotedGrafkeeper from "../pool/devoted-grafkeeper.js";
+import _poolDiabolicVision from "../pool/diabolic-vision.js";
 import _poolDiminisherWitch from "../pool/diminisher-witch.js";
 import _poolDimirAqueduct from "../pool/dimir-aqueduct.js";
 import _poolDireFleetPoisoner from "../pool/dire-fleet-poisoner.js";
@@ -145,6 +147,7 @@ import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
 import _poolDuneMover from "../pool/dune-mover.js";
 import _poolDungeoneersPack from "../pool/dungeoneers-pack.js";
+import _poolDwarvenArmory from "../pool/dwarven-armory.js";
 import _poolEagleOfTheGreatShelf from "../pool/eagle-of-the-great-shelf.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
@@ -211,6 +214,7 @@ import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
 import _poolGoblinMaskmaker from "../pool/goblin-maskmaker.js";
+import _poolGoblinSappers from "../pool/goblin-sappers.js";
 import _poolGoblinSmuggler from "../pool/goblin-smuggler.js";
 import _poolGoblinSpymaster from "../pool/goblin-spymaster.js";
 import _poolGollumSilentSlinker from "../pool/gollum-silent-slinker.js";
@@ -247,6 +251,7 @@ import _poolHopToIt from "../pool/hop-to-it.js";
 import _poolHorizonScholar from "../pool/horizon-scholar.js";
 import _poolHornedTroll from "../pool/horned-troll.js";
 import _poolHorridVigor from "../pool/horrid-vigor.js";
+import _poolHotSprings from "../pool/hot-springs.js";
 import _poolHotshotMechanic from "../pool/hotshot-mechanic.js";
 import _poolHowltoothHollow from "../pool/howltooth-hollow.js";
 import _poolHraesvelgrOfTheFirstBrood from "../pool/hraesvelgr-of-the-first-brood.js";
@@ -274,6 +279,7 @@ import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
 import _poolJemLightfooteSkyExplorer from "../pool/jem-lightfoote-sky-explorer.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolJodahsCodex from "../pool/jodahs-codex.js";
+import _poolJohtullWurm from "../pool/johtull-wurm.js";
 import _poolJoust from "../pool/joust.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
@@ -620,6 +626,7 @@ const shard: CardShard = {
     _poolBenevolentRiverSpirit,
     _poolBilboBirthdayCelebrant,
     _poolBlackPantherVanguard,
+    _poolBlackScarab,
     _poolBlackbladeReforged,
     _poolBladeHistorian,
     _poolBlightBreathCatoblepas,
@@ -699,6 +706,7 @@ const shard: CardShard = {
     _poolDerangedOutcast,
     _poolDesolationProwler,
     _poolDevotedGrafkeeper,
+    _poolDiabolicVision,
     _poolDiminisherWitch,
     _poolDimirAqueduct,
     _poolDireFleetPoisoner,
@@ -715,6 +723,7 @@ const shard: CardShard = {
     _poolDromokaWarrior,
     _poolDuneMover,
     _poolDungeoneersPack,
+    _poolDwarvenArmory,
     _poolEagleOfTheGreatShelf,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,
@@ -781,6 +790,7 @@ const shard: CardShard = {
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
     _poolGoblinMaskmaker,
+    _poolGoblinSappers,
     _poolGoblinSmuggler,
     _poolGoblinSpymaster,
     _poolGollumSilentSlinker,
@@ -817,6 +827,7 @@ const shard: CardShard = {
     _poolHorizonScholar,
     _poolHornedTroll,
     _poolHorridVigor,
+    _poolHotSprings,
     _poolHotshotMechanic,
     _poolHowltoothHollow,
     _poolHraesvelgrOfTheFirstBrood,
@@ -844,6 +855,7 @@ const shard: CardShard = {
     _poolJemLightfooteSkyExplorer,
     _poolJeongJeongsDeserters,
     _poolJodahsCodex,
+    _poolJohtullWurm,
     _poolJoust,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,

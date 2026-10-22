@@ -222,6 +222,7 @@ import _poolGnathosaur from "../pool/gnathosaur.js";
 import _poolGoblinBerserker from "../pool/goblin-berserker.js";
 import _poolGoblinBombardment from "../pool/goblin-bombardment.js";
 import _poolGoblinGlasswright from "../pool/goblin-glasswright.js";
+import _poolGoblinSkiPatrol from "../pool/goblin-ski-patrol.js";
 import _poolGodlessShrine from "../pool/godless-shrine.js";
 import _poolGoldenglowMoth from "../pool/goldenglow-moth.js";
 import _poolGolgariGermination from "../pool/golgari-germination.js";
@@ -372,6 +373,7 @@ import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
+import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
@@ -816,6 +818,7 @@ const shard: CardShard = {
     _poolGoblinBerserker,
     _poolGoblinBombardment,
     _poolGoblinGlasswright,
+    _poolGoblinSkiPatrol,
     _poolGodlessShrine,
     _poolGoldenglowMoth,
     _poolGolgariGermination,
@@ -966,6 +969,7 @@ const shard: CardShard = {
     _poolOnduGreathorn,
     _poolOranRiefOoze,
     _poolOrcishVandal,
+    _poolOrderOfTheSacredTorch,
     _poolOrochiSustainer,
     _poolOverkill,
     _poolPacifism,

@@ -178,12 +178,14 @@ import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
 import _poolFly from "../pool/fly.js";
+import _poolForbiddenLore from "../pool/forbidden-lore.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
 import _poolFreewindFalcon from "../pool/freewind-falcon.js";
 import _poolFreezeInPlace from "../pool/freeze-in-place.js";
+import _poolFreyaliseSupplicant from "../pool/freyalise-supplicant.js";
 import _poolFrilledMystic from "../pool/frilled-mystic.js";
 import _poolFrodoBaggins from "../pool/frodo-baggins.js";
 import _poolFrogmite from "../pool/frogmite.js";
@@ -232,6 +234,7 @@ import _poolHornswoggle from "../pool/hornswoggle.js";
 import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
+import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
@@ -270,6 +273,7 @@ import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKraulSwarm from "../pool/kraul-swarm.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
+import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
@@ -308,7 +312,9 @@ import _poolMinwuWhiteMage from "../pool/minwu-white-mage.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
 import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-richards.js";
+import _poolMistfolk from "../pool/mistfolk.js";
 import _poolMolderingKarok from "../pool/moldering-karok.js";
+import _poolMoleWorms from "../pool/mole-worms.js";
 import _poolMountain from "../pool/mountain.js";
 import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
@@ -727,12 +733,14 @@ const shard: CardShard = {
     _poolFistsOfFlame,
     _poolFlamingSword,
     _poolFly,
+    _poolForbiddenLore,
     _poolForceSpike,
     _poolForcefulDenial,
     _poolFortressCyclops,
     _poolFranticSearch,
     _poolFreewindFalcon,
     _poolFreezeInPlace,
+    _poolFreyaliseSupplicant,
     _poolFrilledMystic,
     _poolFrodoBaggins,
     _poolFrogmite,
@@ -781,6 +789,7 @@ const shard: CardShard = {
     _poolHuntersEdge,
     _poolHurloonShaman,
     _poolHyraxTowerScout,
+    _poolIceberg,
     _poolIlluminatorVirtuoso,
     _poolImpulsivity,
     _poolIndomitableArchangel,
@@ -819,6 +828,7 @@ const shard: CardShard = {
     _poolKraulSwarm,
     _poolKrenkosCommand,
     _poolLambholtRavager,
+    _poolLapisLazuliTalisman,
     _poolLargeBear,
     _poolLatticeLibrary,
     _poolLavaleaper,
@@ -857,7 +867,9 @@ const shard: CardShard = {
     _poolMishrasOnslaught,
     _poolMistbladeShinobi,
     _poolMisterFantasticReedRichards,
+    _poolMistfolk,
     _poolMolderingKarok,
+    _poolMoleWorms,
     _poolMountain,
     _poolMutalithVortexBeast,
     _poolMycosynthWellspring,

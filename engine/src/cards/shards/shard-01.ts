@@ -132,6 +132,7 @@ import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
+import _poolEssenceFilter from "../pool/essence-filter.js";
 import _poolEtaliPrimalConqueror from "../pool/etali-primal-conqueror.js";
 import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
@@ -247,6 +248,7 @@ import _poolKorHalberd from "../pool/kor-halberd.js";
 import _poolKothFireOfResistance from "../pool/koth-fire-of-resistance.js";
 import _poolKothTheGeomancer from "../pool/koth-the-geomancer.js";
 import _poolKrenkoTinStreetKingpin from "../pool/krenko-tin-street-kingpin.js";
+import _poolKrovikanElementalist from "../pool/krovikan-elementalist.js";
 import _poolKumenasAwakening from "../pool/kumenas-awakening.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
@@ -399,6 +401,7 @@ import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
 import _poolSefrisOfTheHiddenWays from "../pool/sefris-of-the-hidden-ways.js";
 import _poolSeismicRupture from "../pool/seismic-rupture.js";
+import _poolSeizures from "../pool/seizures.js";
 import _poolSensoryDeprivation from "../pool/sensory-deprivation.js";
 import _poolSerrasGuardian from "../pool/serras-guardian.js";
 import _poolShadowRitePriest from "../pool/shadow-rite-priest.js";
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,
     _poolEssenceChanneler,
+    _poolEssenceFilter,
     _poolEtaliPrimalConqueror,
     _poolEtheriumAbomination,
     _poolEumidianTerrabotanist,
@@ -806,6 +810,7 @@ const shard: CardShard = {
     _poolKothFireOfResistance,
     _poolKothTheGeomancer,
     _poolKrenkoTinStreetKingpin,
+    _poolKrovikanElementalist,
     _poolKumenasAwakening,
     _poolLapisOrbOfDragonkind,
     _poolLavaFlow,
@@ -958,6 +963,7 @@ const shard: CardShard = {
     _poolSeashellCameo,
     _poolSefrisOfTheHiddenWays,
     _poolSeismicRupture,
+    _poolSeizures,
     _poolSensoryDeprivation,
     _poolSerrasGuardian,
     _poolShadowRitePriest,

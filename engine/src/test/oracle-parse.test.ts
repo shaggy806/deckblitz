@@ -1254,6 +1254,20 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("cumulative upkeep (rule 702.24a): mana, life or a sacrifice, once per age counter", () => {
+    const reminder =
+      "(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)";
+    const wall = face(`Cumulative upkeep {U} ${reminder}`, "Creature — Illusion Wall");
+    expect(wall.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "you" });
+    expect(wall.triggered[0].effect).toMatchObject({
+      kind: "conditional",
+      then: { effects: [{ kind: "add-counter", counter: "age" }, { kind: "unless", options: [{ pay: "{U}", times: { countersOn: "source", counter: "age" } }] }] },
+    });
+    expect(wall.complete).toBe(true);
+    expect(face(`Cumulative upkeep—Pay 2 life. ${reminder}`, "Enchantment").complete).toBe(true);
+    expect(face(`Cumulative upkeep—Sacrifice a land. ${reminder}`, "Creature — Kraken").complete).toBe(true);
+  });
+
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
     const battery = face(
       "{T}, Remove any number of charge counters from this artifact: Add {U}, then add an additional {U} for each charge counter removed this way.",

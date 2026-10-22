@@ -389,7 +389,8 @@
   "trigger:attacks-and-isnt-blocked",
   "trigger:unblocked-attackers-trigger",
   "cost:remove-x-counters-cost",
-  "trigger:state-trigger"
+  "trigger:state-trigger",
+  "keyword:cumulative-upkeep"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

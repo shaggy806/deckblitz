@@ -54,6 +54,7 @@ import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
+import _poolBlueScarab from "../pool/blue-scarab.js";
 import _poolBogardanFirefiend from "../pool/bogardan-firefiend.js";
 import _poolBoggartBog from "../pool/boggart-bog.js";
 import _poolBondedFetch from "../pool/bonded-fetch.js";
@@ -424,6 +425,7 @@ import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
+import _poolSoulBarrier from "../pool/soul-barrier.js";
 import _poolSoulOfTheHarvest from "../pool/soul-of-the-harvest.js";
 import _poolSoulTransfer from "../pool/soul-transfer.js";
 import _poolSoulbladeDjinn from "../pool/soulblade-djinn.js";
@@ -622,6 +624,7 @@ const shard: CardShard = {
     _poolBloodAspirant,
     _poolBloodServitor,
     _poolBloodforgedBattleAxe,
+    _poolBlueScarab,
     _poolBogardanFirefiend,
     _poolBoggartBog,
     _poolBondedFetch,
@@ -992,6 +995,7 @@ const shard: CardShard = {
     _poolSoaringSandwing,
     _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
+    _poolSoulBarrier,
     _poolSoulOfTheHarvest,
     _poolSoulTransfer,
     _poolSoulbladeDjinn,

@@ -43,6 +43,7 @@ import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
+import _poolBalduvianHydra from "../pool/balduvian-hydra.js";
 import _poolBalefulBeholder from "../pool/baleful-beholder.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
 import _poolBarrierBreach from "../pool/barrier-breach.js";
@@ -248,6 +249,7 @@ import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
 import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
 import _poolJoinTheDance from "../pool/join-the-dance.js";
+import _poolJokulhaups from "../pool/jokulhaups.js";
 import _poolJourneyersKite from "../pool/journeyers-kite.js";
 import _poolJudgesFamiliar from "../pool/judges-familiar.js";
 import _poolJukaiPreserver from "../pool/jukai-preserver.js";
@@ -619,6 +621,7 @@ const shard: CardShard = {
     _poolAzulaOnTheHunt,
     _poolBadgermole,
     _poolBagOfHolding,
+    _poolBalduvianHydra,
     _poolBalefulBeholder,
     _poolBardHeirOfGirion,
     _poolBarrierBreach,
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolJewelEyedCobra,
     _poolJhoiraWeatherlightCorsair,
     _poolJoinTheDance,
+    _poolJokulhaups,
     _poolJourneyersKite,
     _poolJudgesFamiliar,
     _poolJukaiPreserver,

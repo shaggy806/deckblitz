@@ -29,6 +29,7 @@ import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
 import _poolArmyOfAllah from "../pool/army-of-allah.js";
+import _poolArnjlotsAscent from "../pool/arnjlots-ascent.js";
 import _poolArtilleryBlast from "../pool/artillery-blast.js";
 import _poolAspirantsAscent from "../pool/aspirants-ascent.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
@@ -155,6 +156,7 @@ import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
+import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
@@ -284,6 +286,7 @@ import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
 import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
 import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
+import _poolKjeldoranEliteGuard from "../pool/kjeldoran-elite-guard.js";
 import _poolKnightOfDawnsLight from "../pool/knight-of-dawns-light.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
@@ -332,6 +335,7 @@ import _poolMiaraThornOfTheGlade from "../pool/miara-thorn-of-the-glade.js";
 import _poolMidnightAngelArmor from "../pool/midnight-angel-armor.js";
 import _poolMindbladeRender from "../pool/mindblade-render.js";
 import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
+import _poolMinionOfTeveshSzat from "../pool/minion-of-tevesh-szat.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
@@ -389,6 +393,7 @@ import _poolPlayfulShove from "../pool/playful-shove.js";
 import _poolPlummet from "../pool/plummet.js";
 import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
 import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
+import _poolPolarKraken from "../pool/polar-kraken.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
 import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
@@ -471,6 +476,7 @@ import _poolSmokeShroud from "../pool/smoke-shroud.js";
 import _poolSneakySnacker from "../pool/sneaky-snacker.js";
 import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
+import _poolSoldeviSimulacrum from "../pool/soldevi-simulacrum.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
@@ -627,6 +633,7 @@ const shard: CardShard = {
     _poolArgothSanctumOfNature,
     _poolArmillarySphere,
     _poolArmyOfAllah,
+    _poolArnjlotsAscent,
     _poolArtilleryBlast,
     _poolAspirantsAscent,
     _poolAssaultFormation,
@@ -753,6 +760,7 @@ const shard: CardShard = {
     _poolElectrozoa,
     _poolElvenAmbush,
     _poolElvenRaftSteerer,
+    _poolElvishHealer,
     _poolEmrakulsMessenger,
     _poolEnslavedDwarf,
     _poolErhnamDjinn,
@@ -882,6 +890,7 @@ const shard: CardShard = {
     _poolKillerWhale,
     _poolKinjallisDawnrunner,
     _poolKinsbaileAspirant,
+    _poolKjeldoranEliteGuard,
     _poolKnightOfDawnsLight,
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
@@ -930,6 +939,7 @@ const shard: CardShard = {
     _poolMidnightAngelArmor,
     _poolMindbladeRender,
     _poolMineshaftSpider,
+    _poolMinionOfTeveshSzat,
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMoldervineReclamation,
@@ -987,6 +997,7 @@ const shard: CardShard = {
     _poolPlummet,
     _poolPoeticIngenuity,
     _poolPoisonersApprentice,
+    _poolPolarKraken,
     _poolPolyraptor,
     _poolPrideOfConquerors,
     _poolPrizedStatue,
@@ -1069,6 +1080,7 @@ const shard: CardShard = {
     _poolSneakySnacker,
     _poolSoaringSeacliff,
     _poolSokkaTenaciousTactician,
+    _poolSoldeviSimulacrum,
     _poolSomberwaldDryad,
     _poolSpaceMarineScout,
     _poolSpellPierce,

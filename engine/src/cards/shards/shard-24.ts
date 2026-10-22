@@ -29,6 +29,7 @@ import _poolArcaneInvestigator from "../pool/arcane-investigator.js";
 import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
 import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
+import _poolArensonsAura from "../pool/arensons-aura.js";
 import _poolAridArchway from "../pool/arid-archway.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
@@ -132,6 +133,7 @@ import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
 import _poolDeceiveTheMessenger from "../pool/deceive-the-messenger.js";
 import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
+import _poolDespoticScepter from "../pool/despotic-scepter.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
 import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDevotedDuelist from "../pool/devoted-duelist.js";
@@ -183,6 +185,7 @@ import _poolFlatline from "../pool/flatline.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolFry from "../pool/fry.js";
+import _poolFylgja from "../pool/fylgja.js";
 import _poolGadwickTheWizened from "../pool/gadwick-the-wizened.js";
 import _poolGanglyStompling from "../pool/gangly-stompling.js";
 import _poolGastalThrillroller from "../pool/gastal-thrillroller.js";
@@ -277,6 +280,7 @@ import _poolLotusPetal from "../pool/lotus-petal.js";
 import _poolLotusguardDisciple from "../pool/lotusguard-disciple.js";
 import _poolLumberknot from "../pool/lumberknot.js";
 import _poolMaestrosCharm from "../pool/maestros-charm.js";
+import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
@@ -533,6 +537,7 @@ import _poolWindgraceAcolyte from "../pool/windgrace-acolyte.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
+import _poolWoollySpider from "../pool/woolly-spider.js";
 import _poolWorldShaper from "../pool/world-shaper.js";
 import _poolWorldgorgerDragon from "../pool/worldgorger-dragon.js";
 import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolArchersOfQarsi,
     _poolArchfiendOfDepravity,
     _poolArchiveDragon,
+    _poolArensonsAura,
     _poolAridArchway,
     _poolAshlingsCommand,
     _poolAssaultronDominator,
@@ -690,6 +696,7 @@ const shard: CardShard = {
     _poolDeceiveTheMessenger,
     _poolDemonOfCatastrophes,
     _poolDesertOfTheFervent,
+    _poolDespoticScepter,
     _poolDestructiveForce,
     _poolDevilDinosaur,
     _poolDevotedDuelist,
@@ -741,6 +748,7 @@ const shard: CardShard = {
     _poolFootSoldiers,
     _poolFrontierGuide,
     _poolFry,
+    _poolFylgja,
     _poolGadwickTheWizened,
     _poolGanglyStompling,
     _poolGastalThrillroller,
@@ -835,6 +843,7 @@ const shard: CardShard = {
     _poolLotusguardDisciple,
     _poolLumberknot,
     _poolMaestrosCharm,
+    _poolMalachiteTalisman,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
     _poolMasterSymmetrist,
@@ -1091,6 +1100,7 @@ const shard: CardShard = {
     _poolWirewoodElf,
     _poolWitchsOven,
     _poolWitherbloomPledgemage,
+    _poolWoollySpider,
     _poolWorldShaper,
     _poolWorldgorgerDragon,
     _poolWranglerOfTheDamned,
