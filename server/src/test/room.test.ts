@@ -369,6 +369,28 @@ describe("Room", () => {
     expect(() => room.claimSeat(ALICE, "token-b", stranger)).toThrow(/already claimed/);
   });
 
+  it("answers a zone choice with only one answer for a human seat (Dark Confidant)", () => {
+    const room = makeSparseRoom();
+    const { connection: aliceConn } = fakeConnection();
+    const { connection: bobConn } = fakeConnection();
+    room.claimSeat(ALICE, "alice-token", aliceConn);
+    room.claimSeat(BOB, "bob-token", bobConn);
+    expect(room.game.activePlayer).toBe(ALICE);
+    room.game.debugSpawn("Dark Confidant", BOB, "battlefield");
+    const top = room.game.state.zones.perPlayer[BOB].library[0];
+
+    // Alice passes her turn away; Bob's upkeep reveals his top card.
+    for (let i = 0; i < 30 && room.game.activePlayer === ALICE; i += 1) {
+      const holder = room.game.state.priority.holder;
+      if (holder === null) break;
+      room.dispatch(holder === ALICE ? aliceConn : bobConn, { type: "pass-priority", player: holder });
+    }
+    expect(room.game.activePlayer).toBe(BOB);
+    // No one-card picker left open for Bob: the card went straight to his hand.
+    expect(room.game.state.awaiting?.kind).not.toBe("choose-from-zone");
+    expect(room.game.state.zones.perPlayer[BOB].hand).toContain(top);
+  });
+
   describe("resolve all", () => {
     /** Several spells on the stack at once, in a room whose seats have real
      * choices.

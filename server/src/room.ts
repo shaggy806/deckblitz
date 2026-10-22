@@ -29,7 +29,7 @@
  */
 
 import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine/local";
-import { autoAnswerFor } from "engine/local";
+import { autoAnswerFor, forcedZoneChoice } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
 import type {
@@ -1146,6 +1146,14 @@ export class Room {
    */
   private autoAdvanceHumanSeat(s: GameState): boolean {
     if (s.awaiting !== null) {
+      // A zone choice with only one answer — every card shown taken (Dark
+      // Confidant's revealed card into the hand) — is answered for the seat
+      // rather than opening a picker with nothing to pick (`forcedZoneChoice`).
+      const forced = forcedZoneChoice(s);
+      if (forced !== null) {
+        this.game.dispatch({ type: "choose-from-zone", ...forced });
+        return true;
+      }
       const seat = this.seatFor(s.awaiting.player);
       // No resuming here, only at a priority window. A decision owed while
       // paused is usually the interruption's own consequence (an edict's
