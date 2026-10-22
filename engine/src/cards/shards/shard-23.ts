@@ -311,6 +311,7 @@ import _poolMireShade from "../pool/mire-shade.js";
 import _poolMisfortuneTeller from "../pool/misfortune-teller.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
 import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
+import _poolMoltenSlagheap from "../pool/molten-slagheap.js";
 import _poolMomentOfTruth from "../pool/moment-of-truth.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
 import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
@@ -322,6 +323,7 @@ import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolMysticSkyfish from "../pool/mystic-skyfish.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
+import _poolNecrite from "../pool/necrite.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
@@ -883,6 +885,7 @@ const shard: CardShard = {
     _poolMisfortuneTeller,
     _poolMnemonicWall,
     _poolMoiraAndTeshar,
+    _poolMoltenSlagheap,
     _poolMomentOfTruth,
     _poolMomentaryBlink,
     _poolMothdustChangeling,
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolMysticSkyfish,
     _poolNantukoElder,
     _poolNarnamCobra,
+    _poolNecrite,
     _poolNeoExdeathDimensionsEnd,
     _poolNewsHelicopter,
     _poolNezumiLinkbreaker,

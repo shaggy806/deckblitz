@@ -1062,6 +1062,9 @@ export interface Characteristics {
    * resolved against its final P/T for the `"if-toughness-greater"` form.
    * Read it through {@link combatDamageOf}, never directly. */
   readonly damageByToughness: boolean;
+  /** It assigns no combat damage this turn (an `assigns-no-combat-damage`
+   * effect — Farrel's Zealot). Read it through {@link combatDamageOf}. */
+  readonly assignsNoCombatDamage?: boolean;
   /** It "can attack as though it didn't have defender" (a
    * `canAttackAsThoughNoDefender` static — Arcades, the Strategist). */
   readonly canAttackAsThoughNoDefender: boolean;
@@ -3176,6 +3179,7 @@ function assertSameCharacteristics(
       controller: c.controller,
       restrictions: [...c.restrictions].sort(),
       damageByToughness: c.damageByToughness,
+      assignsNoCombatDamage: c.assignsNoCombatDamage === true,
       canAttackAsThoughNoDefender: c.canAttackAsThoughNoDefender,
       canAttackAttackersDespiteDefender: c.canAttackAttackersDespiteDefender,
       cantBeSacrificed: c.cantBeSacrificed,
@@ -3257,6 +3261,7 @@ function computeCharacteristicsUncached(
   const hexTypes = new Set<CardType>();
   const hexFilters: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
+  let assignsNoCombatDamage = false;
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
   let cantBeSacrificed = false;
@@ -3317,6 +3322,7 @@ function computeCharacteristicsUncached(
     // ends them.
     if (modifier.canAttackAsThoughNoDefender === true) canAttackAsThoughNoDefender = true;
     if (modifier.combatDamageByToughness === true) byToughness = "always";
+    if (modifier.assignsNoCombatDamage === true) assignsNoCombatDamage = true;
   }
   for (const keyword of keywordCountersOn(object)) {
     const at = keywordCounterTimestamp(object, keyword);
@@ -3435,6 +3441,7 @@ function computeCharacteristicsUncached(
     controller: object.controller,
     restrictions,
     damageByToughness,
+    ...(assignsNoCombatDamage ? { assignsNoCombatDamage: true } : {}),
     canAttackAsThoughNoDefender,
     canAttackAttackersDespiteDefender,
     cantBeSacrificed,
@@ -3512,9 +3519,11 @@ export function exemptFromLegendRule(state: GameState, registry: CardRegistry, i
  * `assign-combat-damage` offer, and the bots' combat arithmetic — while
  * everything else that says "power" keeps reading `power` (the rulings: the
  * static changes no creature's power). May be zero or negative, which, as
- * with power, assigns no damage.
+ * with power, assigns no damage. Zero for a creature that "assigns no combat
+ * damage this turn" (Farrel's Zealot), whatever its power.
  */
 export function combatDamageOf(c: Characteristics): number {
+  if (c.assignsNoCombatDamage === true) return 0;
   return c.damageByToughness ? c.toughness : c.power;
 }
 

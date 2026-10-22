@@ -3071,4 +3071,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ["Ashnod's Battle Gear", 'Hill Giant', 'Plains*2'] },
     }),
   ),
+  // --- Fallen Empires (2026-10-21) ---------------------------------------------
+  preset(
+    'Bottomless Vault removes any number of storage counters',
+    board({
+      you: { bf: [{ name: 'Bottomless Vault', counters: { storage: 3 } }], hand: ['Hymn to Tourach', 'Necrite'] },
+    }),
+  ),
+  preset(
+    "Farrel's Zealot attacks and isn't blocked",
+    board({
+      you: { bf: ["Farrel's Zealot", 'Necrite'] },
+      opp: { bf: ['Craw Wurm'] },
+    }),
+  ),
+  preset(
+    'Dark Depths loses its last ice counter',
+    board({
+      you: { bf: [{ name: 'Dark Depths', counters: { ice: 1 } }, 'Wastes*3'] },
+    }),
+  ),
 ]

@@ -58,6 +58,7 @@ const NO_TOKEN_PRINTING = new Set([
   "Snake Token (artifact, poison)",
   // Boris Devilboon lists none.
   "Minor Demon Token",
+  "Camarid Token",
 ]);
 
 describe("token art", () => {

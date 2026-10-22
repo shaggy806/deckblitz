@@ -60,6 +60,7 @@ import _poolBonehoard from "../pool/bonehoard.js";
 import _poolBoomerang from "../pool/boomerang.js";
 import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
+import _poolBottomlessVault from "../pool/bottomless-vault.js";
 import _poolBraidsArisenNightmare from "../pool/braids-arisen-nightmare.js";
 import _poolBramblewoodParagon from "../pool/bramblewood-paragon.js";
 import _poolBraveTheWilds from "../pool/brave-the-wilds.js";
@@ -351,6 +352,7 @@ import _poolOkoyeDoraMilajeLeader from "../pool/okoye-dora-milaje-leader.js";
 import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
+import _poolOrcishCaptain from "../pool/orcish-captain.js";
 import _poolOrmendahlProfanePrince from "../pool/ormendahl-profane-prince.js";
 import _poolOrzhovBasilica from "../pool/orzhov-basilica.js";
 import _poolOuroboroid from "../pool/ouroboroid.js";
@@ -512,8 +514,10 @@ import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
 import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
 import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
+import _poolTheloniteDruid from "../pool/thelonite-druid.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThrash from "../pool/thrash.js";
+import _poolThrullWizard from "../pool/thrull-wizard.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolThunderousOrator from "../pool/thunderous-orator.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
@@ -573,6 +577,7 @@ import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
 import _poolYouSeeAGuardApproach from "../pool/you-see-a-guard-approach.js";
+import _poolZelyonSword from "../pool/zelyon-sword.js";
 import _poolZetalpaPrimalDawn from "../pool/zetalpa-primal-dawn.js";
 import _poolZogTriceratonCastaway from "../pool/zog-triceraton-castaway.js";
 import _poolZombieMaster from "../pool/zombie-master.js";
@@ -653,6 +658,7 @@ const shard: CardShard = {
     _poolBoomerang,
     _poolBorderPatrol,
     _poolBorosGuildmage,
+    _poolBottomlessVault,
     _poolBraidsArisenNightmare,
     _poolBramblewoodParagon,
     _poolBraveTheWilds,
@@ -944,6 +950,7 @@ const shard: CardShard = {
     _poolOmoQueenOfVesuva,
     _poolOneWithTheMachine,
     _poolOpalineUnicorn,
+    _poolOrcishCaptain,
     _poolOrmendahlProfanePrince,
     _poolOrzhovBasilica,
     _poolOuroboroid,
@@ -1105,8 +1112,10 @@ const shard: CardShard = {
     _poolTheBeamtownBullies,
     _poolTheNeutrinos,
     _poolTheThingBenGrimm,
+    _poolTheloniteDruid,
     _poolThornscapeApprentice,
     _poolThrash,
+    _poolThrullWizard,
     _poolThunderfootBaloth,
     _poolThunderousOrator,
     _poolTimeEbb,
@@ -1166,6 +1175,7 @@ const shard: CardShard = {
     _poolYevaNaturesHerald,
     _poolYouFindTheVillainsLair,
     _poolYouSeeAGuardApproach,
+    _poolZelyonSword,
     _poolZetalpaPrimalDawn,
     _poolZogTriceratonCastaway,
     _poolZombieMaster,

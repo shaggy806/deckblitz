@@ -161,6 +161,7 @@ import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
+import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
 import _poolDwarvenSong from "../pool/dwarven-song.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
 import _poolEasyPickings from "../pool/easy-pickings.js";
@@ -194,6 +195,7 @@ import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
+import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
@@ -251,6 +253,7 @@ import _poolHeritageReclamation from "../pool/heritage-reclamation.js";
 import _poolHeroOfTheNyxborn from "../pool/hero-of-the-nyxborn.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
+import _poolHomarid from "../pool/homarid.js";
 import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
@@ -742,6 +745,7 @@ const shard: CardShard = {
     _poolDuskdaleWurm,
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
+    _poolDwarvenLieutenant,
     _poolDwarvenSong,
     _poolDwynenGiltLeafDaen,
     _poolEasyPickings,
@@ -775,6 +779,7 @@ const shard: CardShard = {
     _poolFleshlessGladiator,
     _poolFlightOfEquenauts,
     _poolFrenziedDevils,
+    _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaleSwooper,
     _poolGarruksPackleader,
@@ -832,6 +837,7 @@ const shard: CardShard = {
     _poolHeroOfTheNyxborn,
     _poolHinderingLight,
     _poolHireACrew,
+    _poolHomarid,
     _poolHornedLochWhale,
     _poolHorseshoeCrab,
     _poolHowlingGolem,

@@ -1315,6 +1315,10 @@ export interface PtModifier {
    * (the `damage-by-toughness` effect, rule 510.1a). Like the above, not an
    * ability. */
   combatDamageByToughness?: true;
+  /** It assigns no combat damage (the `assigns-no-combat-damage` effect —
+   * Farrel's Zealot's "this creature assigns no combat damage this turn",
+   * rule 510.1a). Like the above, a rule about it, not an ability. */
+  assignsNoCombatDamage?: true;
   /** Layer 6 — it gains "This creature can't be sacrificed" (the
    * `"cant-be-sacrificed"` effect). The static equivalent is
    * `StaticAbility.cantBeSacrificed`. */
@@ -3085,6 +3089,16 @@ export interface DelayedDamageWatch {
   readonly turn: number;
 }
 
+/** A delayed trigger waiting on a permanent attacking and not being blocked
+ * this turn — see `DelayedUnblocked`. Fires each time (a second combat);
+ * lapses with the turn. */
+export interface DelayedUnblockedWatch {
+  readonly attacksUnblocked: ObjectId;
+  /** Which stint of it on the battlefield. */
+  readonly stint: number;
+  readonly turn: number;
+}
+
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
   /** Or the next ability its controller activates with {X} in its
@@ -3110,7 +3124,12 @@ export interface DelayedTrigger {
   readonly controller: PlayerId;
   /** The step it waits for, the permanent whose leaving it waits for, or
    * the spell its controller casts next. */
-  readonly at: DelayedTriggerTiming | DelayedLeaveWatch | DelayedCastWatch | DelayedDamageWatch;
+  readonly at:
+    | DelayedTriggerTiming
+    | DelayedLeaveWatch
+    | DelayedCastWatch
+    | DelayedDamageWatch
+    | DelayedUnblockedWatch;
   /** The creating ability's trigger object, and its `zoneChangeCount` then
    * — "return **that card** to the battlefield" (Shirei, Shizo's Caretaker).
    * It's the delayed ability's trigger object too, as long as it's still that

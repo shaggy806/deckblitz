@@ -74,6 +74,7 @@ import _poolBoundaryLandsRanger from "../pool/boundary-lands-ranger.js";
 import _poolBrawlersPlate from "../pool/brawlers-plate.js";
 import _poolBrazenFreebooter from "../pool/brazen-freebooter.js";
 import _poolBreathOfLife from "../pool/breath-of-life.js";
+import _poolBreedingPit from "../pool/breeding-pit.js";
 import _poolBrightmare from "../pool/brightmare.js";
 import _poolBrokersAscendancy from "../pool/brokers-ascendancy.js";
 import _poolBullRush from "../pool/bull-rush.js";
@@ -241,6 +242,7 @@ import _poolHouseGuildmage from "../pool/house-guildmage.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
+import _poolIcatianMoneychanger from "../pool/icatian-moneychanger.js";
 import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
@@ -669,6 +671,7 @@ const shard: CardShard = {
     _poolBrawlersPlate,
     _poolBrazenFreebooter,
     _poolBreathOfLife,
+    _poolBreedingPit,
     _poolBrightmare,
     _poolBrokersAscendancy,
     _poolBullRush,
@@ -836,6 +839,7 @@ const shard: CardShard = {
     _poolHullbreakerHorror,
     _poolHuntedWitness,
     _poolIanTheReckless,
+    _poolIcatianMoneychanger,
     _poolIchorplateGolem,
     _poolIdolOfOblivion,
     _poolIllGottenInheritance,

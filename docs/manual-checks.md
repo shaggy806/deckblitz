@@ -5190,3 +5190,39 @@ with no priority there (502.4); the bonus lasts "for as long as ~ remains tapped
   permanents to leave tapped", offers only the Gear, and can be confirmed with nothing picked.
   Left tapped, the Giant stays 5/1; let untap, it goes back to 3/3 at once. Check at ~768px tall,
   in a 2- and a 4-player room.
+
+### Bottomless Vault removes any number of storage counters
+
+*New player decision* — X for a mana ability's "remove any number of storage counters" (rules
+601.2b, 602.2b), 0 allowed
+
+- **Setup:** Your precombat main. Your battlefield: Bottomless Vault with three storage counters.
+  Your hand: Hymn to Tourach, Necrite.
+- **Do:** Activate the Vault's mana ability by hand; choose X = 2, then cast Hymn to Tourach with
+  the {B}{B}. Then activate it again with X = 0.
+- **Check:** The X picker offers 0 to 3. X = 2 adds exactly {B}{B} and leaves one counter; X = 0
+  taps it for nothing and leaves the counter. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Farrel's Zealot attacks and isn't blocked
+
+*New trigger* — "whenever ~ attacks and isn't blocked" (rule 509.3g), and "assigns no combat
+damage this turn" (510.1a)
+
+- **Setup:** Your precombat main. Your battlefield: Farrel's Zealot, Necrite. The opponent's: Craw
+  Wurm.
+- **Do:** Attack with both. Have the opponent block Necrite with the Wurm and leave the Zealot
+  unblocked. Accept the Zealot's offer, targeting the Wurm.
+- **Check:** Only the Zealot's ability triggers (Necrite was blocked). The Wurm takes 3, and the
+  Zealot deals the opponent no combat damage. Declined instead, the Zealot hits for 2. Check at
+  ~768px tall, in a 2- and a 4-player room.
+
+### Dark Depths loses its last ice counter
+
+*Careful rules call* — a state trigger (rule 603.8): it triggers once, and not again while it's on
+the stack
+
+- **Setup:** Your precombat main. Your battlefield: Dark Depths with one ice counter, three Wastes.
+- **Do:** Activate Dark Depths' {3} ability.
+- **Check:** As the last counter goes, one trigger goes on the stack (not one per priority pass);
+  it resolves to sacrifice Dark Depths and make one Marit Lage, a 20/20 flying indestructible
+  Avatar. Check at ~768px tall, in a 2- and a 4-player room.

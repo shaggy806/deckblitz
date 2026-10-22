@@ -9466,6 +9466,57 @@
   },
   "replacement:tap-for-mana-produces-color-instead": {
    "example": "Deep Water"
+  },
+  "filter:controller-controls-filter": {
+   "example": "Seasinger: target creature whose controller controls an Island"
+  },
+  "effect:look-at-target-player-library": {
+   "example": "Orcish Spy"
+  },
+  "condition:mana-ability-activation-count": {
+   "example": "Initiates of the Ebon Hand: if this mana ability has been activated four or more times this turn"
+  },
+  "trigger:becomes-blocked-by-filtered": {
+   "example": "Dwarven Soldier: becomes blocked by one or more Orcs, once"
+  },
+  "filter:blocking-specific-creature": {
+   "example": "Tidal Flats"
+  },
+  "effect:unless-put-counter": {
+   "example": "Thelon's Chant: unless they put a -1/-1 counter on a creature they control"
+  },
+  "trigger:player-puts-onto-battlefield": {
+   "example": "Thelon's Chant: whenever a player puts a Swamp onto the battlefield (that player, not its controller)"
+  },
+  "effect:grant-trigger-this-combat": {
+   "example": "Goblin Flotilla"
+  },
+  "static:cost-increase-colored": {
+   "example": "Derelor: black spells you cast cost {B} more"
+  },
+  "decision:pay-per-chosen-untap": {
+   "example": "Thelon's Curse"
+  },
+  "cost:exile-from-single-graveyard": {
+   "example": "Night Soil"
+  },
+  "effect:damage-divided-evenly-among-filter": {
+   "example": "Dwarven Catapult"
+  },
+  "effect:doesnt-untap-your-next-untap-step": {
+   "example": "Deep Spawn: the activator's next untap step, not its controller's"
+  },
+  "cost:pay-mana-cost-of-attached": {
+   "example": "Merseine"
+  },
+  "cost:tap-enchanted-permanent": {
+   "example": "Tourach's Gate"
+  },
+  "effect:each-player-taps-to-protect-chosen": {
+   "example": "Raiding Party"
+  },
+  "filter:tapped-to-pay-for-source-this-turn": {
+   "example": "Vodalian War Machine"
   }
  }
 }

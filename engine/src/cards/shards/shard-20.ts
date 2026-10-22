@@ -89,6 +89,7 @@ import _poolChainAssassination from "../pool/chain-assassination.js";
 import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
+import _poolChamberSentry from "../pool/chamber-sentry.js";
 import _poolChocoComet from "../pool/choco-comet.js";
 import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
 import _poolCivicGuildmage from "../pool/civic-guildmage.js";
@@ -247,6 +248,7 @@ import _poolHowlingMine from "../pool/howling-mine.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
+import _poolIcatianTown from "../pool/icatian-town.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
@@ -346,6 +348,7 @@ import _poolOneirophage from "../pool/oneirophage.js";
 import _poolOrazcaRelic from "../pool/orazca-relic.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
+import _poolOrcishVeteran from "../pool/orcish-veteran.js";
 import _poolOrderOfTheAlabasterHost from "../pool/order-of-the-alabaster-host.js";
 import _poolOrneryDilophosaur from "../pool/ornery-dilophosaur.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
@@ -528,6 +531,7 @@ import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
 import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
+import _poolThornThallid from "../pool/thorn-thallid.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
 import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
@@ -704,6 +708,7 @@ const shard: CardShard = {
     _poolChainDevil,
     _poolChainwebAracnir,
     _poolChakramSlinger,
+    _poolChamberSentry,
     _poolChocoComet,
     _poolCircleOfProtectionWhite,
     _poolCivicGuildmage,
@@ -862,6 +867,7 @@ const shard: CardShard = {
     _poolHulkingOgre,
     _poolHydroelectricSpecimen,
     _poolHypnoticSprite,
+    _poolIcatianTown,
     _poolIllusionistsBracers,
     _poolImmersturmSkullcairn,
     _poolImpulse,
@@ -961,6 +967,7 @@ const shard: CardShard = {
     _poolOrazcaRelic,
     _poolOrcishCannonade,
     _poolOrcishMechanics,
+    _poolOrcishVeteran,
     _poolOrderOfTheAlabasterHost,
     _poolOrneryDilophosaur,
     _poolOrochiLeafcaller,
@@ -1143,6 +1150,7 @@ const shard: CardShard = {
     _poolTheWhizzerClassicSpeedster,
     _poolThiefsKnife,
     _poolThorOdinson,
+    _poolThornThallid,
     _poolThoughtVessel,
     _poolThrabenMilitia,
     _poolThranduilSindarinLiege,

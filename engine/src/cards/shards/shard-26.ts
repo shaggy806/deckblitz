@@ -53,6 +53,7 @@ import _poolBeastieBeatdown from "../pool/beastie-beatdown.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
 import _poolBellowingMauler from "../pool/bellowing-mauler.js";
+import _poolBlackManaBattery from "../pool/black-mana-battery.js";
 import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
 import _poolBladeOfTheBloodchief from "../pool/blade-of-the-bloodchief.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
@@ -108,6 +109,7 @@ import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
 import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
+import _poolDelifsCone from "../pool/delifs-cone.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
 import _poolDiscipleOfTheSun from "../pool/disciple-of-the-sun.js";
@@ -128,6 +130,7 @@ import _poolDwarvenReinforcements from "../pool/dwarven-reinforcements.js";
 import _poolEagleOfDeliverance from "../pool/eagle-of-deliverance.js";
 import _poolEarthElemental from "../pool/earth-elemental.js";
 import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
+import _poolEbonPraetor from "../pool/ebon-praetor.js";
 import _poolEchoingEquation from "../pool/echoing-equation.js";
 import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
@@ -350,6 +353,7 @@ import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
+import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
@@ -614,6 +618,7 @@ const shard: CardShard = {
     _poolBedlam,
     _poolBefuddle,
     _poolBellowingMauler,
+    _poolBlackManaBattery,
     _poolBlackWidowDaringOperative,
     _poolBladeOfTheBloodchief,
     _poolBlessedWine,
@@ -669,6 +674,7 @@ const shard: CardShard = {
     _poolDarlingOfTheMasses,
     _poolDauthiJackal,
     _poolDecreeOfPain,
+    _poolDelifsCone,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
     _poolDiscipleOfTheSun,
@@ -689,6 +695,7 @@ const shard: CardShard = {
     _poolEagleOfDeliverance,
     _poolEarthElemental,
     _poolEarthshakerDreadmaw,
+    _poolEbonPraetor,
     _poolEchoingEquation,
     _poolEdgarCharmedGroom,
     _poolEliteArrester,
@@ -911,6 +918,7 @@ const shard: CardShard = {
     _poolQarsiRevenant,
     _poolRadiantDestiny,
     _poolRaftSecurityOfficer,
+    _poolRasputinTheOneiromancer,
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
     _poolRavenousLindwurm,

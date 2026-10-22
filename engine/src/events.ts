@@ -875,6 +875,15 @@ export type GameEvent =
       readonly blockers: readonly ObjectId[];
     })
   | (Base & {
+      /** An attacking creature had no creatures declared as blockers for it
+       * (rule 509.1h) — once per attacker, as the last defending player's
+       * declaration completes (or is skipped): "whenever ~ attacks and isn't
+       * blocked" (509.3g). Never for one blocked and then left with no
+       * blockers, nor one put onto the battlefield attacking afterward. */
+      readonly type: "attacker-unblocked";
+      readonly attacker: ObjectId;
+    })
+  | (Base & {
       readonly type: "spell-fizzled";
       readonly object: ObjectId;
       readonly reason: string;

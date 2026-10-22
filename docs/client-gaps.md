@@ -37,6 +37,10 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   offers all of one type per type, and a count picker would let the player choose any split.
   And when the payer taps such a source for more than a payment needs, the player can't choose
   the colour of what floats. The rest of `effect:mana-ability-dynamic-amount` is built.
+- **A max button on each colour of the mana-split prompt.** The user, 2026-10-21: the menu that
+  comes up when a source adds a significant amount of mana in any combination of colours should
+  have a max button on each option, putting the rest of the amount into that colour. The prompt
+  is `App.tsx`'s `manaSplit` state (one count field per colour, around line 4160).
 - **Quality-of-life room options (house rules).** Options the room creator can turn on before a
   game that are technically against the rules but make play smoother. The user's example: mana
   that, when tapped, doesn't have its colour decided until it's spent on a specific coloured

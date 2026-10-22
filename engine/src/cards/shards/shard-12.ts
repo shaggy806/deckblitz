@@ -490,6 +490,7 @@ import _poolThreeTreeMascot from "../pool/three-tree-mascot.js";
 import _poolThunderheadSquadron from "../pool/thunderhead-squadron.js";
 import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
 import _poolTicketTortoise from "../pool/ticket-tortoise.js";
+import _poolTidalInfluence from "../pool/tidal-influence.js";
 import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
@@ -534,6 +535,7 @@ import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
 import _poolWeaponRack from "../pool/weapon-rack.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
+import _poolWhiteManaBattery from "../pool/white-mana-battery.js";
 import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildsize from "../pool/wildsize.js";
@@ -1056,6 +1058,7 @@ const shard: CardShard = {
     _poolThunderheadSquadron,
     _poolThunderscapeApprentice,
     _poolTicketTortoise,
+    _poolTidalInfluence,
     _poolTillAndTend,
     _poolTormentingVoice,
     _poolTrainingCompound,
@@ -1100,6 +1103,7 @@ const shard: CardShard = {
     _poolWeaponRack,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
+    _poolWhiteManaBattery,
     _poolWildIdea,
     _poolWildernessReclamation,
     _poolWildsize,

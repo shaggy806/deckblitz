@@ -34,6 +34,7 @@ import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
 import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
+import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
@@ -206,6 +207,7 @@ import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGauntletOfMight from "../pool/gauntlet-of-might.js";
+import _poolGeistflameReservoir from "../pool/geistflame-reservoir.js";
 import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
@@ -250,6 +252,7 @@ import _poolHerosResolve from "../pool/heros-resolve.js";
 import _poolHideousVisage from "../pool/hideous-visage.js";
 import _poolHighwayRobbery from "../pool/highway-robbery.js";
 import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
+import _poolHollowTrees from "../pool/hollow-trees.js";
 import _poolHoneymoonHearse from "../pool/honeymoon-hearse.js";
 import _poolHonoredDreyleader from "../pool/honored-dreyleader.js";
 import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
@@ -625,6 +628,7 @@ const shard: CardShard = {
     _poolArterialFlow,
     _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,
+    _poolAuntieBlyteBadInfluence,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
     _poolAzraSmokeshaper,
@@ -797,6 +801,7 @@ const shard: CardShard = {
     _poolGatherTheWhiteLotus,
     _poolGatheringStone,
     _poolGauntletOfMight,
+    _poolGeistflameReservoir,
     _poolGeneralKudroOfDrannith,
     _poolGenesisChamber,
     _poolGhostlyFlicker,
@@ -841,6 +846,7 @@ const shard: CardShard = {
     _poolHideousVisage,
     _poolHighwayRobbery,
     _poolHoldoutSettlement,
+    _poolHollowTrees,
     _poolHoneymoonHearse,
     _poolHonoredDreyleader,
     _poolHopelessNightmare,

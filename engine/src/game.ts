@@ -304,6 +304,7 @@ import type {
   DelayedCastWatch,
   DelayedDamageWatch,
   DelayedLeaveWatch,
+  DelayedUnblockedWatch,
   DelayedTrigger,
   EnterAttackingChoice,
   EntryRecord,
@@ -2332,7 +2333,12 @@ export class Game {
         ability.cost.discard?.count === "x"
           ? this.discardCandidates(player, ability.cost.discard.filter, source).length
           : undefined;
-      const caps = [manaX, sacrificeX, exileX, discardX].filter((n): n is number => n !== undefined);
+      // "Remove any number of storage counters": as many as it has.
+      const counterX =
+        ability.cost.removeCounter?.count === "x"
+          ? (this.state.objects[source]?.counters[ability.cost.removeCounter.kind] ?? 0)
+          : undefined;
+      const caps = [manaX, sacrificeX, exileX, discardX, counterX].filter((n): n is number => n !== undefined);
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
       // "X can't be 0" (Ruthless Technomancer).
       const minX = ability.minX ?? 0;
@@ -3685,6 +3691,7 @@ export class Game {
       for (const t of trigger.targets) if (t?.kind === "object") pinned.add(t.object);
       if (typeof trigger.at === "object" && "leaves" in trigger.at) pinned.add(trigger.at.leaves);
       if (typeof trigger.at === "object" && "dealsCombatDamage" in trigger.at) pinned.add(trigger.at.dealsCombatDamage);
+      if (typeof trigger.at === "object" && "attacksUnblocked" in trigger.at) pinned.add(trigger.at.attacksUnblocked);
       if (trigger.triggerObject !== undefined) pinned.add(trigger.triggerObject);
     }
     for (const shield of this.state.preventionShields) {
@@ -7208,6 +7215,21 @@ export class Game {
     ];
     this.state.pendingBlockerDeclarations = rotated.filter((p) => attackedBy.has(p));
     this.promptNextBlockerDeclaration();
+    // Nobody could block anything: every attacker is unblocked now.
+    if (this.state.pendingBlockerDeclarations.length === 0) this.announceUnblockedAttackers();
+  }
+
+  /** Once every defending player has declared (or had nothing to declare
+   * with), each attacker with no creatures declared as blockers is an
+   * unblocked creature (rule 509.1h): one `attacker-unblocked` apiece, for
+   * "whenever ~ attacks and isn't blocked" (509.3g). Its triggers wait for
+   * the active player's priority with every other declare-blockers trigger. */
+  private announceUnblockedAttackers(): void {
+    for (const attacker of this.currentAttackers()) {
+      if (this.state.objects[attacker]?.blocked === false) {
+        this.emit({ type: "attacker-unblocked", attacker });
+      }
+    }
   }
 
   /**
@@ -7489,6 +7511,7 @@ export class Game {
     this.state.awaiting = null;
     this.state.pendingBlockerDeclarations = this.state.pendingBlockerDeclarations.slice(1);
     this.promptNextBlockerDeclaration();
+    if (this.state.pendingBlockerDeclarations.length === 0) this.announceUnblockedAttackers();
     // TS's narrowing of `this.state.awaiting` from the `= null` assignment
     // above incorrectly persists across the call that may have just
     // reassigned it; the cast reflects its real declared type.
@@ -13557,7 +13580,9 @@ export class Game {
       }
     }
     if (ability.cost.removeCounter !== undefined) {
-      const { kind, count } = ability.cost.removeCounter;
+      const { kind } = ability.cost.removeCounter;
+      const count =
+        ability.cost.removeCounter.count === "x" ? Math.max(0, Math.floor(x ?? 0)) : ability.cost.removeCounter.count;
       if ((source.counters[kind] ?? 0) < count) {
         return `${def.name} does not have ${count} ${kind} counter(s) to remove`;
       }
@@ -13821,10 +13846,14 @@ export class Game {
     const lifeCost = abilityLifeCost(this.state, player, ability.cost) ?? 0;
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
     if (ability.cost.removeCounter !== undefined) {
-      const { kind, count } = ability.cost.removeCounter;
-      source.counters[kind] = (source.counters[kind] ?? 0) - count;
-      if (source.counters[kind] <= 0) delete source.counters[kind];
-      this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count, after: source.counters[kind] ?? 0 });
+      const { kind } = ability.cost.removeCounter;
+      const count = ability.cost.removeCounter.count === "x" ? chosenX : ability.cost.removeCounter.count;
+      // Removing none (X = 0) removes nothing, and announces nothing.
+      if (count > 0) {
+        source.counters[kind] = (source.counters[kind] ?? 0) - count;
+        if (source.counters[kind] <= 0) delete source.counters[kind];
+        this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count, after: source.counters[kind] ?? 0 });
+      }
     }
     if (ability.cost.payEnergy !== undefined) {
       this.changeEnergy(player, -ability.cost.payEnergy);
@@ -17900,6 +17929,7 @@ export class Game {
       this.fireActivationWatchers(event.player, event.ability);
     }
     if (event.type === "damage-dealt") this.fireDamageWatchers(event);
+    if (event.type === "attacker-unblocked") this.fireUnblockedWatchers(event.attacker);
   }
 
   /** Has `object`'s `oncePerTurn` triggered ability `index` triggered yet
@@ -18087,9 +18117,14 @@ export class Game {
       // The player who activated it (Harsh Mentor: "deals 2 damage to that
       // player").
       player = event.player;
-    } else if (event.type === "attacker-blocked" || event.type === "attacked-alone") {
+    } else if (
+      event.type === "attacker-blocked" ||
+      event.type === "attacked-alone" ||
+      event.type === "attacker-unblocked"
+    ) {
       // The defending player — the one whose creatures blocked it, or the
-      // one the lone attacker attacks (Strategic Intervention).
+      // one the lone or unblocked attacker attacks (Strategic Intervention,
+      // Mindstab Thrull).
       const attacking = this.state.objects[event.attacker]?.attacking;
       if (attacking !== null && attacking !== undefined) player = this.defendingPlayerOf(attacking);
     } else if (event.type === "object-targeted") {
@@ -18696,6 +18731,15 @@ export class Game {
           !(spec.otherOnly === true && event.attacker === self.id) &&
           this.triggerFilterOk(spec.filter, event.attacker, self)
         );
+      case "state":
+        // Not an event's: `checkStateTriggers` looks for it (rule 603.8).
+        return false;
+      case "attacks-unblocked":
+        return (
+          event.type === "attacker-unblocked" &&
+          this.matchesWho(spec.who, event.attacker, self) &&
+          this.triggerFilterOk(spec.filter, event.attacker, self)
+        );
       case "put-into-graveyard": {
         if (event.type !== "cards-put-into-graveyard") return false;
         const arrived = this.graveyardArrivals(spec, event.arrivals, self);
@@ -19033,7 +19077,8 @@ export class Game {
           ? (event.chosen ?? undefined)
         : event.type === "attacker-declared" ||
             event.type === "attacked-alone" ||
-            event.type === "attacker-blocked"
+            event.type === "attacker-blocked" ||
+            event.type === "attacker-unblocked"
           ? event.attacker
           : // The blocker: "whenever a creature you control blocks, it
             // gets +X/+X" (Doran, Besieged by Time) — or the creature it
@@ -21822,6 +21867,7 @@ export class Game {
         this.markUntilEndOfTurn(target, { canAttackAsThoughNoDefender: true });
       },
       damageByToughness: (target) => this.markUntilEndOfTurn(target, { combatDamageByToughness: true }),
+      assignsNoCombatDamage: (target) => this.markUntilEndOfTurn(target, { assignsNoCombatDamage: true }),
       exchangeLifeToughness: (target, player) => this.exchangeLifeToughness(player, target),
       putInCommandZone: (target) => {
         // A commander still here as the same object (rule 400.7 — the
@@ -26272,7 +26318,7 @@ export class Game {
 
   private markUntilEndOfTurn(
     target: TargetRef | undefined,
-    fields: Pick<PtModifier, "canAttackAsThoughNoDefender" | "combatDamageByToughness">,
+    fields: Pick<PtModifier, "canAttackAsThoughNoDefender" | "combatDamageByToughness" | "assignsNoCombatDamage">,
   ): void {
     if (target?.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
@@ -29347,7 +29393,8 @@ export class Game {
           readonly thisTurn?: boolean;
         }
       | DelayedNextSpell
-      | { readonly dealsCombatDamage: ObjectId },
+      | { readonly dealsCombatDamage: ObjectId }
+      | { readonly attacksUnblocked: ObjectId },
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -29355,7 +29402,12 @@ export class Game {
     /** The creating ability's trigger object, and how it knew it. */
     creator: { readonly triggerObject?: ObjectId; readonly refs?: LastKnownRefs } = {},
   ): void {
-    let when: DelayedTriggerTiming | DelayedLeaveWatch | DelayedCastWatch | DelayedDamageWatch;
+    let when:
+      | DelayedTriggerTiming
+      | DelayedLeaveWatch
+      | DelayedCastWatch
+      | DelayedDamageWatch
+      | DelayedUnblockedWatch;
     if (typeof at === "object" && "nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
@@ -29367,6 +29419,14 @@ export class Game {
       if (watched?.zone !== "battlefield") return;
       when = {
         dealsCombatDamage: at.dealsCombatDamage,
+        stint: watched.zoneChangeCount ?? 0,
+        turn: this.state.turn.number,
+      };
+    } else if (typeof at === "object" && "attacksUnblocked" in at) {
+      const watched = this.state.objects[at.attacksUnblocked];
+      if (watched?.zone !== "battlefield") return;
+      when = {
+        attacksUnblocked: at.attacksUnblocked,
         stint: watched.zoneChangeCount ?? 0,
         turn: this.state.turn.number,
       };
@@ -29608,6 +29668,34 @@ export class Game {
    * the spell matches. Each fires once — queued like any trigger, the spell
    * as its trigger object — and is used up.
    */
+  private fireUnblockedWatchers(attacker: ObjectId): void {
+    if (this.state.delayedTriggers.length === 0) return;
+    const object = this.state.objects[attacker];
+    if (object?.zone !== "battlefield") return;
+    const stint = object.zoneChangeCount ?? 0;
+    for (const trigger of this.state.delayedTriggers) {
+      if (
+        typeof trigger.at !== "object" ||
+        !("attacksUnblocked" in trigger.at) ||
+        trigger.at.attacksUnblocked !== attacker ||
+        trigger.at.stint !== stint ||
+        trigger.at.turn !== this.state.turn.number
+      ) {
+        continue;
+      }
+      // Not used up: "this turn, when" has a stated duration (rule 603.7c).
+      this.state.pendingTriggers.push({
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
+        controller: trigger.controller,
+        triggerObject: attacker,
+        lastKnownRefs: { triggerObject: stint },
+        delayed: trigger,
+      });
+    }
+  }
+
   private fireDamageWatchers(event: Extract<GameEvent, { type: "damage-dealt" }>): void {
     if (this.state.delayedTriggers.length === 0 || event.combat !== true || event.target.kind !== "player") return;
     const object = this.state.objects[event.source];
@@ -32615,8 +32703,45 @@ export class Game {
 
     if (this.state.result.over) return;
     if (this.endIfOnePlayerLeft()) return;
+    // State triggers (rule 603.8) are no state-based action, but are looked
+    // for at every point one is.
+    this.checkStateTriggers();
     // The 903.9a choices this check found, now that the rest of it is done.
     this.raiseNextCommanderChoice();
+  }
+
+  /**
+   * Rule 603.8: each battlefield permanent's state triggers whose state is
+   * true now trigger — unless that ability already has an instance waiting
+   * to go on the stack or on it, which holds it off until that one is gone.
+   * Only printed state triggers are looked for (no card grants one).
+   */
+  private checkStateTriggers(): void {
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || this.state.players[object.controller]?.hasLost === true) continue;
+      const printed = this.registry.get(rulesTextName(object)).triggered;
+      if (!printed.some((t) => t.trigger.on === "state")) continue;
+      this.effectiveTriggeredEntries(id).forEach(({ ability, ref, lost }, index) => {
+        if (lost === true || ability.trigger.on !== "state") return;
+        const waiting =
+          this.state.pendingTriggers.some((t) => t.sourceObjectId === id && t.abilityIndex === index) ||
+          this.state.zones.shared.stack.some((s) => {
+            const o = this.state.objects[s];
+            return o?.kind === "ability" && o.abilityKind === "triggered" && o.sourceObjectId === id && o.abilityIndex === index;
+          });
+        if (waiting) return;
+        if (!this.interveningIfMet(ability.trigger.state, object)) return;
+        if (!this.interveningIfMet(ability.condition, object)) return;
+        this.state.pendingTriggers.push({
+          sourceObjectId: id,
+          cardName: printedCardName(object),
+          abilityIndex: index,
+          controller: object.controller,
+          ...(ref !== undefined ? { grantedAbility: ref } : {}),
+        });
+      });
+    }
   }
 
   /**
@@ -35640,6 +35765,17 @@ export class Game {
     }
     // "For as long as you control ~" ends as ~ changes hands (rule 611.2b).
     if (full.type === "control-changed") this.endWhileControlledEffects(full.object);
+    // A state trigger triggers as soon as its state is true (rule 603.8),
+    // mid-resolution too: these are what change the states cards name.
+    if (
+      full.type === "permanent-left-battlefield" ||
+      full.type === "permanent-entered-battlefield" ||
+      full.type === "control-changed" ||
+      full.type === "counter-added" ||
+      full.type === "counter-removed"
+    ) {
+      this.checkStateTriggers();
+    }
     // "For as long as it has a [kind] counter on it" ends with the last one
     // (rule 611.2b), whatever removed it.
     if (full.type === "counter-removed") this.endCounterDurations(full.object);

@@ -79,6 +79,7 @@ import _poolCoastWatcher from "../pool/coast-watcher.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
 import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
+import _poolConchHorn from "../pool/conch-horn.js";
 import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolConsignToThePit from "../pool/consign-to-the-pit.js";
 import _poolConsume from "../pool/consume.js";
@@ -124,7 +125,9 @@ import _poolElectrodominance from "../pool/electrodominance.js";
 import _poolElectrostaticField from "../pool/electrostatic-field.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolElvishDreadlord from "../pool/elvish-dreadlord.js";
+import _poolElvishFarmer from "../pool/elvish-farmer.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
+import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
@@ -427,6 +430,7 @@ import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
+import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
@@ -634,6 +638,7 @@ const shard: CardShard = {
     _poolCodexShredder,
     _poolComeBackWrong,
     _poolCommuneWithBeavers,
+    _poolConchHorn,
     _poolConformerShuriken,
     _poolConsignToThePit,
     _poolConsume,
@@ -679,7 +684,9 @@ const shard: CardShard = {
     _poolElectrostaticField,
     _poolElugeTheShorelessSea,
     _poolElvishDreadlord,
+    _poolElvishFarmer,
     _poolEmbodimentOfSpring,
+    _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,
@@ -982,6 +989,7 @@ const shard: CardShard = {
     _poolSpellSwindle,
     _poolSpewFlame,
     _poolSphinxsInsight,
+    _poolSpiritShield,
     _poolStab,
     _poolStarbreachWhale,
     _poolStartingColumn,

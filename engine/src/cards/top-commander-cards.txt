@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3762 already implemented / 1238 missing (marks refreshed 2026-10-21)
+3765 already implemented / 1235 missing (marks refreshed 2026-10-22)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1455,7 +1455,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1462  Eldrazi Monument                         {5}              Artifact
 [x]  1463  Vedalken Orrery                          {4}              Artifact
 [ ]  1464  Concordant Crossroads                    {G}              World Enchantment
-[ ]  1465  Dark Depths                              {0}              Legendary Snow Land
+[x]  1465  Dark Depths                              {0}              Legendary Snow Land
 [ ]  1466  Mystic Confluence                        {3}{U}{U}        Instant
 [ ]  1467  Treasure Nabber                          {2}{R}           Creature — Goblin Rogue
 [x]  1468  Isshin, Two Heavens as One               {R}{W}{B}        Legendary Creature — Human Samurai
@@ -3202,7 +3202,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3209  Spell Swindle                            {3}{U}{U}        Instant
 [ ]  3210  One Ring to Rule Them All                {2}{B}{B}        Enchantment — Saga
 [x]  3211  Favorable Winds                          {1}{U}           Enchantment
-[ ]  3212  Endrek Sahr, Master Breeder              {4}{B}           Legendary Creature — Human Wizard
+[x]  3212  Endrek Sahr, Master Breeder              {4}{B}           Legendary Creature — Human Wizard
 [x]  3213  Woodland Chasm                           {0}              Snow Land — Swamp Forest
 [ ]  3214  Tezzeret, Master of the Bridge           {4}{U}{B}        Legendary Planeswalker — Tezzeret
 [ ]  3215  Oviya, Automech Artisan                  {3}{G}           Legendary Creature — Human Artificer
@@ -3684,7 +3684,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3691  Magus of the Candelabra                  {G}              Creature — Human Wizard
 [x]  3692  Liquimetal Coating                       {2}              Artifact
 [x]  3693  Pack Rat                                 {1}{B}           Creature — Rat
-[ ]  3694  Darksteel Reactor                        {4}              Artifact
+[x]  3694  Darksteel Reactor                        {4}              Artifact
 [x]  3695  Glorious Sunrise                         {3}{G}{G}        Enchantment
 [x]  3696  Arcbound Ravager                         {2}              Artifact Creature — Beast
 [x]  3697  Turbulent Moor                           {0}              Land — Plains Swamp

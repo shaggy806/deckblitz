@@ -398,6 +398,7 @@ import _poolSaintTraftAndRemKarolus from "../pool/saint-traft-and-rem-karolus.js
 import _poolSamiWildcatCaptain from "../pool/sami-wildcat-captain.js";
 import _poolSanctuaryCat from "../pool/sanctuary-cat.js";
 import _poolSanctumOfShatteredHeights from "../pool/sanctum-of-shattered-heights.js";
+import _poolSandSilos from "../pool/sand-silos.js";
 import _poolSandstormVerge from "../pool/sandstorm-verge.js";
 import _poolSarythTheVipersFang from "../pool/saryth-the-vipers-fang.js";
 import _poolSavaiTriome from "../pool/savai-triome.js";
@@ -448,6 +449,7 @@ import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
 import _poolSpittingGourna from "../pool/spitting-gourna.js";
+import _poolSporeFlower from "../pool/spore-flower.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
@@ -977,6 +979,7 @@ const shard: CardShard = {
     _poolSamiWildcatCaptain,
     _poolSanctuaryCat,
     _poolSanctumOfShatteredHeights,
+    _poolSandSilos,
     _poolSandstormVerge,
     _poolSarythTheVipersFang,
     _poolSavaiTriome,
@@ -1027,6 +1030,7 @@ const shard: CardShard = {
     _poolSpinedTyrranax,
     _poolSpiritualGuardian,
     _poolSpittingGourna,
+    _poolSporeFlower,
     _poolSpottedGriffin,
     _poolStalwartShieldBearers,
     _poolStarnheimCourser,

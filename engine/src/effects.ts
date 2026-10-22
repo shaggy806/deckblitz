@@ -221,6 +221,16 @@ export interface DelayedCombatDamage {
   readonly dealsCombatDamage: EffectTargetRef;
 }
 
+/** "This turn, when **target creature you control** attacks and isn't
+ * blocked" (Delif's Cone, rule 509.3g) — keyed to the permanent in
+ * `attacksUnblocked`'s slot, for this stint of it. With a stated duration it
+ * fires each time this turn (rule 603.7c: a second combat), and lapses as
+ * the turn ends. That permanent is its trigger object, and its defending
+ * player the trigger player. */
+export interface DelayedUnblocked {
+  readonly attacksUnblocked: EffectTargetRef;
+}
+
 /** How a `flicker` returns what it exiled — the non-target half of its
  * {@link EffectSpec}. */
 export interface FlickerOptions {
@@ -2391,7 +2401,7 @@ export type EffectSpec =
        * card** to the battlefield at the beginning of the next end step" —
        * Shirei, Shizo's Caretaker) is the delayed ability's too, unless the
        * spell it waits for is. */
-      readonly at: DelayedTriggerTiming | DelayedLeaves | DelayedNextSpell | DelayedCombatDamage;
+      readonly at: DelayedTriggerTiming | DelayedLeaves | DelayedNextSpell | DelayedCombatDamage | DelayedUnblocked;
       readonly effect: EffectSpec;
       /** Text for the log and the stack. */
       readonly text: string;
@@ -3435,6 +3445,15 @@ export type EffectSpec =
        * power is unchanged for everything else. The static form is
        * `StaticAbility.combatDamageByToughness`. */
       readonly kind: "damage-by-toughness";
+      readonly target: EffectTargetRef;
+    }
+  | {
+      /** `target` assigns no combat damage this turn (rule 510.1a — Farrel's
+       * Zealot, Ophidian: "if you do, this creature assigns no combat damage
+       * this turn"). An unblocked one deals the player nothing, and a
+       * blocked one nothing to its blockers; it's still attacking, blocked
+       * or not, and its power is unchanged for everything else. */
+      readonly kind: "assigns-no-combat-damage";
       readonly target: EffectTargetRef;
     }
   | {
@@ -5953,7 +5972,8 @@ export interface EffectApi {
           readonly thisTurn?: boolean;
         }
       | DelayedNextSpell
-      | { readonly dealsCombatDamage: ObjectId },
+      | { readonly dealsCombatDamage: ObjectId }
+      | { readonly attacksUnblocked: ObjectId },
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -6335,6 +6355,8 @@ export interface EffectApi {
   attackDespiteDefender(target: TargetRef | undefined, filter: CardFilter | undefined): void;
   /** See the `"damage-by-toughness"` {@link EffectSpec}. */
   damageByToughness(target: TargetRef): void;
+  /** See the `"assigns-no-combat-damage"` {@link EffectSpec}. */
+  assignsNoCombatDamage(target: TargetRef): void;
   /** See the `"put-in-command-zone"` {@link EffectSpec}. */
   putInCommandZone(target: TargetRef): void;
   /** See the `"exchange-life-toughness"` {@link EffectSpec}. */
@@ -9088,6 +9110,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.delayTrigger({ dealsCombatDamage: watched.object }, spec.effect, spec.text, controller);
         return;
       }
+      if (typeof spec.at === "object" && "attacksUnblocked" in spec.at) {
+        const watched = resolveEffectTarget(spec.at.attacksUnblocked, ctx);
+        if (watched?.kind !== "object") return;
+        ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
+        return;
+      }
       if (typeof spec.at === "object" && "nextSpell" in spec.at) {
         ctx.delayTrigger(
           {
@@ -9713,6 +9741,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "damage-by-toughness": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.damageByToughness(target);
+      return;
+    }
+    case "assigns-no-combat-damage": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.assignsNoCombatDamage(target);
       return;
     }
     case "attack-random-opponent": {

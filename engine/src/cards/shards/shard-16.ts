@@ -64,6 +64,7 @@ import _poolBorosRecruit from "../pool/boros-recruit.js";
 import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
+import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
@@ -110,6 +111,7 @@ import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
 import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
+import _poolDelifsCube from "../pool/delifs-cube.js";
 import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
@@ -123,6 +125,7 @@ import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDub from "../pool/dub.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
+import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEfreetFlamepainter from "../pool/efreet-flamepainter.js";
@@ -675,6 +678,7 @@ const shard: CardShard = {
     _poolBottleOfSuleiman,
     _poolBoulderRush,
     _poolBoundingFelidar,
+    _poolBrassclawOrcs,
     _poolBrokersInitiate,
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,
@@ -721,6 +725,7 @@ const shard: CardShard = {
     _poolDeepmuckDesperado,
     _poolDeeprootElite,
     _poolDeepwoodTantiv,
+    _poolDelifsCube,
     _poolDelightedHalfling,
     _poolDemonicDread,
     _poolDesolateLighthouse,
@@ -734,6 +739,7 @@ const shard: CardShard = {
     _poolDub,
     _poolDuelForDominance,
     _poolDuskwielder,
+    _poolDwarvenArmorer,
     _poolDwarvenTrader,
     _poolEdgarMoonlitSovereign,
     _poolEfreetFlamepainter,

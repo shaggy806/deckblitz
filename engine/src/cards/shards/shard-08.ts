@@ -431,6 +431,7 @@ import _poolSegovianAngel from "../pool/segovian-angel.js";
 import _poolSeizeTheInitiative from "../pool/seize-the-initiative.js";
 import _poolSellerOfSongbirds from "../pool/seller-of-songbirds.js";
 import _poolSemesterForeseer from "../pool/semester-foreseer.js";
+import _poolSerendibDjinn from "../pool/serendib-djinn.js";
 import _poolSerpentsGift from "../pool/serpents-gift.js";
 import _poolShadowGuildmage from "../pool/shadow-guildmage.js";
 import _poolShadyInformant from "../pool/shady-informant.js";
@@ -1038,6 +1039,7 @@ const shard: CardShard = {
     _poolSeizeTheInitiative,
     _poolSellerOfSongbirds,
     _poolSemesterForeseer,
+    _poolSerendibDjinn,
     _poolSerpentsGift,
     _poolShadowGuildmage,
     _poolShadyInformant,

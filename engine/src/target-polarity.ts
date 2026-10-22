@@ -242,6 +242,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.target !== undefined) v.touch(n.target, "help", MINOR);
   },
   "damage-by-toughness": (n, v) => v.touch(n.target, "help", MINOR),
+  // Usually the price of an "if you do" (Farrel's Zealot): a cost to the
+  // creature's own controller.
+  "assigns-no-combat-damage": (n, v) => v.touch(n.target, "harm", MINOR),
   "attack-random-opponent": (n, v) => {
     v.touch(n.target, "either", MINOR);
     v.child(n.else);

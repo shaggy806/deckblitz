@@ -142,6 +142,7 @@ import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
 import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
+import _poolDwarvenHold from "../pool/dwarven-hold.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
 import _poolEcstaticAwakener from "../pool/ecstatic-awakener.js";
 import _poolEcstaticBeauty from "../pool/ecstatic-beauty.js";
@@ -226,12 +227,14 @@ import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
+import _poolHaruspex from "../pool/haruspex.js";
 import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
+import _poolIcatianStore from "../pool/icatian-store.js";
 import _poolIgneousGolem from "../pool/igneous-golem.js";
 import _poolIgneousInspiration from "../pool/igneous-inspiration.js";
 import _poolIhsansShade from "../pool/ihsans-shade.js";
@@ -718,6 +721,7 @@ const shard: CardShard = {
     _poolDromarsCharm,
     _poolDrownInIchor,
     _poolDugganPrivateDetective,
+    _poolDwarvenHold,
     _poolEccentricPestfinder,
     _poolEcstaticAwakener,
     _poolEcstaticBeauty,
@@ -802,12 +806,14 @@ const shard: CardShard = {
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
     _poolHarnessedSnubhorn,
+    _poolHaruspex,
     _poolHarvesterOfMisery,
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
     _poolHydaelynTheMothercrystal,
     _poolHydrosurge,
+    _poolIcatianStore,
     _poolIgneousGolem,
     _poolIgneousInspiration,
     _poolIhsansShade,

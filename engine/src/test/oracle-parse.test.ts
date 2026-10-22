@@ -1225,6 +1225,45 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(berserker.complete).toBe(true);
   });
 
+  it("'attacks and isn't blocked' (rule 509.3g) and 'if you do, ~ assigns no combat damage this turn'", () => {
+    const ophidian = face(
+      "Whenever this creature attacks and isn't blocked, you may draw a card. If you do, this creature assigns no combat damage this turn.",
+      "Creature — Snake",
+    );
+    expect(ophidian.triggered[0].trigger).toEqual({ on: "attacks-unblocked", who: "self" });
+    expect(ophidian.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "draw", amount: 1 },
+      then: { kind: "assigns-no-combat-damage", target: "source" },
+    });
+    expect(ophidian.complete).toBe(true);
+  });
+
+  it("state triggers (rule 603.8): counters on ~, and what you control", () => {
+    const flarg = face("When you control a Dwarf, sacrifice this creature.", "Creature — Goblin Warrior");
+    expect(flarg.triggered[0].trigger).toEqual({
+      on: "state",
+      state: { kind: "controls", filter: { subtype: "Dwarf" }, atLeast: 1 },
+    });
+    expect(flarg.triggered[0].effect).toEqual({ kind: "sacrifice-source" });
+    expect(flarg.complete).toBe(true);
+    const tide = face("Whenever there are four or more tide counters on this creature, sacrifice it.", "Creature — Homarid");
+    expect(tide.triggered[0].trigger).toEqual({
+      on: "state",
+      state: { kind: "self-counters", counter: "tide", compare: { op: "gte", n: 4 } },
+    });
+  });
+
+  it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
+    const battery = face(
+      "{T}, Remove any number of charge counters from this artifact: Add {U}, then add an additional {U} for each charge counter removed this way.",
+      "Artifact",
+    );
+    expect(battery.activated[0].cost).toEqual({ mana: null, tap: true, removeCounter: { kind: "charge", count: "x" } });
+    expect(battery.activated[0].effect).toEqual({ kind: "add-mana", mana: "U", amount: { sum: [1, "x"] } });
+    expect(battery.complete).toBe(true);
+  });
+
   it("'you may choose not to untap' (rule 502.3) and 'for as long as ~ remains tapped'", () => {
     const gear = face(
       "You may choose not to untap this artifact during your untap step.\n{2}, {T}: Target creature you control gets +2/-2 for as long as this artifact remains tapped.",

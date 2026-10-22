@@ -207,6 +207,7 @@ import _poolGuidestoneCompass from "../pool/guidestone-compass.js";
 import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
+import _poolHandOfJustice from "../pool/hand-of-justice.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHaradrimSpearmaster from "../pool/haradrim-spearmaster.js";
 import _poolHauntOfTheDeadMarshes from "../pool/haunt-of-the-dead-marshes.js";
@@ -764,6 +765,7 @@ const shard: CardShard = {
     _poolGurmagRakshasa,
     _poolHallMonitor,
     _poolHammerOfPurphoros,
+    _poolHandOfJustice,
     _poolHanweirGarrison,
     _poolHaradrimSpearmaster,
     _poolHauntOfTheDeadMarshes,

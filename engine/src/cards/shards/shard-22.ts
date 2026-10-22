@@ -22,6 +22,7 @@ import _poolAnkhOfMishra from "../pool/ankh-of-mishra.js";
 import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
+import _poolArcboundJavelineer from "../pool/arcbound-javelineer.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArchonOfValorsReach from "../pool/archon-of-valors-reach.js";
 import _poolArchwayCommons from "../pool/archway-commons.js";
@@ -183,6 +184,7 @@ import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
 import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
 import _poolGlorifierOfDusk from "../pool/glorifier-of-dusk.js";
+import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
 import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
 import _poolGoblinStriker from "../pool/goblin-striker.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolAnnoyedAltisaur,
     _poolAnowonTheRuinSage,
     _poolAppaLoyalSkyBison,
+    _poolArcboundJavelineer,
     _poolArchivist,
     _poolArchonOfValorsReach,
     _poolArchwayCommons,
@@ -759,6 +762,7 @@ const shard: CardShard = {
     _poolGlazeFiend,
     _poolGlintwingInvoker,
     _poolGlorifierOfDusk,
+    _poolGoblinKites,
     _poolGoblinRabblemaster,
     _poolGoblinSkyRaider,
     _poolGoblinStriker,

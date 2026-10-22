@@ -60,7 +60,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 28 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 27 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
@@ -100,10 +100,12 @@ section keeps only what to do next.
   colour setting; batch 131 Arabian Nights and Antiquities, on "you may choose not to untap" and
   "for as long as ~ remains tapped"; batches 132-133 Legends, on rampage, the world rule, "for as
   long as you control ~" and "blockable as though it didn't have landwalk"; batch 134 The Dark,
-  on existing features only. **Next, Fallen Empires** (79 left), then Ice Age. Leads over the
-  whole pool now: banding (22 — needs the multi-blocking line below), removing any number of
-  counters as a cost (`cost:remove-x-counters-cost` — 15, the Mana Batteries among them), state
-  triggers (`trigger:state-trigger` — 15), damage redirection (12).
+  on existing features only; batch 135 Fallen Empires, on "attacks and isn't blocked", removing
+  any number of counters as a cost, and state triggers. **Next, Ice Age** (256 left — two or
+  three batches), then Homelands. Leads over the whole pool now: banding (25 — needs the
+  multi-blocking line below), damage redirection (12), "can't attack unless defending player
+  controls …" (`static:attack-restriction-defending-player-condition` — 7, the Island-only sea
+  creatures; their state triggers are built).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
   ranked ones first. Every set from Reality Fracture back to Phyrexia: All Will Be One is whole
@@ -351,6 +353,7 @@ delete its detail there and move this line to `COMPLETED.md`.
   `docs/client-gaps.md`) and make the credit's font shrink or grow to fit its text on one line
   (`ui/artistCredit.ts`).
 - **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
+- **A max button on each colour of the mana-split prompt** (the user, 2026-10-21): when asked to add a large amount of mana in any combination of colours, each colour's row should have a button that puts all of what's left into that colour (`App.tsx`'s `manaSplit` prompt).
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).

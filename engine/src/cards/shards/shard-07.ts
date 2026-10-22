@@ -158,6 +158,7 @@ import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
 import _poolFlayEssence from "../pool/flay-essence.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
+import _poolFloralSpuzzem from "../pool/floral-spuzzem.js";
 import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
@@ -479,6 +480,7 @@ import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
 import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
+import _poolThallidDevourer from "../pool/thallid-devourer.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
@@ -751,6 +753,7 @@ const shard: CardShard = {
     _poolFlamebornViron,
     _poolFlayEssence,
     _poolFleshBurrower,
+    _poolFloralSpuzzem,
     _poolFlourishingBloomKin,
     _poolFloweringOfTheWhiteTree,
     _poolFlowstoneOverseer,
@@ -1072,6 +1075,7 @@ const shard: CardShard = {
     _poolTemporalAdept,
     _poolTerritorialAllosaurus,
     _poolThaliasGeistcaller,
+    _poolThallidDevourer,
     _poolThassasOracle,
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,

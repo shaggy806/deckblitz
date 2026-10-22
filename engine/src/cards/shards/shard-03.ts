@@ -448,6 +448,7 @@ import _poolThrabenGargoyle from "../pool/thraben-gargoyle.js";
 import _poolThrillOfTheHunt from "../pool/thrill-of-the-hunt.js";
 import _poolThrivingBluff from "../pool/thriving-bluff.js";
 import _poolThrivingMoor from "../pool/thriving-moor.js";
+import _poolThrullChampion from "../pool/thrull-champion.js";
 import _poolTidings from "../pool/tidings.js";
 import _poolTitanicBulvox from "../pool/titanic-bulvox.js";
 import _poolTitanicUltimatum from "../pool/titanic-ultimatum.js";
@@ -502,6 +503,7 @@ import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
 import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensBoo from "../tokens/boo.js";
+import _tokensCamaridToken from "../tokens/camarid-token.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
@@ -511,6 +513,7 @@ import _tokensOxToken from "../tokens/ox-token.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js";
 import _tokensWhaleToken from "../tokens/whale-token.js";
+import _tokensWhiteCitizenToken from "../tokens/white-citizen-token.js";
 import _tokensWormToken from "../tokens/worm-token.js";
 
 const shard: CardShard = {
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolThrillOfTheHunt,
     _poolThrivingBluff,
     _poolThrivingMoor,
+    _poolThrullChampion,
     _poolTidings,
     _poolTitanicBulvox,
     _poolTitanicUltimatum,
@@ -1016,6 +1020,7 @@ const shard: CardShard = {
     _tokens44RedBirdToken,
     _tokensBirdToken,
     _tokensBoo,
+    _tokensCamaridToken,
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
@@ -1025,6 +1030,7 @@ const shard: CardShard = {
     _tokensPlantToken,
     _tokensSpiritTokenWhiteBlack,
     _tokensWhaleToken,
+    _tokensWhiteCitizenToken,
     _tokensWormToken,
   ],
 };

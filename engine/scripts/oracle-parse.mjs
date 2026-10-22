@@ -698,7 +698,10 @@ export function parseCost(text) {
       if (m[1] === "another") extra.otherOnly = true;
     } else if ((m = /^Pay (\d+) life$/.exec(part))) cost.payLife = Number(m[1]);
     else if (part === "Discard your hand") cost.discardHand = true;
-    else if ((m = new RegExp(`^Remove ${N} ([+-]\\d+/[+-]\\d+|\\w+) counters? from ~$`, "i").exec(part))) {
+    else if ((m = /^Remove (?:X|any number of) ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
+      // X announced as it's activated (rules 601.2b, 602.2b), 0 allowed.
+      cost.removeCounter = { kind: m[1], count: "x" };
+    } else if ((m = new RegExp(`^Remove ${N} ([+-]\\d+/[+-]\\d+|\\w+) counters? from ~$`, "i").exec(part))) {
       const count = numberOf(m[1]);
       if (typeof count !== "number") return null;
       cost.removeCounter = { kind: m[2], count };
@@ -755,6 +758,24 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ attacks$/.test(c)) return self("attacks");
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
+  // Rule 509.3g: as blockers are declared, with none declared for it.
+  if (/^Whenever ~ attacks and isn't blocked$/.test(c)) return self("attacks-unblocked");
+  // State triggers (rule 603.8): a state of ~'s counters, or of what you
+  // control.
+  if ((m = /^When(?:ever)? (?:there are (\w+) or more (\w+) counters on ~|~ has (\w+) or more (\w+) counters on it)$/.exec(c))) {
+    const n = numberOf(m[1] ?? m[3]);
+    if (typeof n !== "number") return null;
+    return [{ on: "state", state: { kind: "self-counters", counter: m[2] ?? m[4], compare: { op: "gte", n } } }];
+  }
+  if ((m = /^When ~ has no (\w+) counters on it$/.exec(c))) {
+    return [{ on: "state", state: { kind: "self-counters", counter: m[1], compare: { op: "eq", n: 0 } } }];
+  }
+  if ((m = /^When you control (no|an?) (.+)$/.exec(c))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null) return null;
+    const controls = { kind: "controls", filter, atLeast: 1 };
+    return [{ on: "state", state: m[1] === "no" ? { kind: "not", of: controls } : controls }];
+  }
   if (/^Whenever ~ attacks or blocks$/.test(c)) return [...self("attacks"), ...self("blocks")];
   // Mutate (rule 702.140d).
   if (/^Whenever ~ mutates$/.test(c)) return self("mutates");
@@ -951,7 +972,9 @@ export function parseSentence(sentence, ctx) {
   // "…, where X is the number of …" / "for each …" define an amount by a rule
   // of their own; no template reads one, and matching the rest would take the
   // X for a cast-time X.
-  if (/\bwhere X\b|\bfor each\b/i.test(s)) return null;
+  // The one exception: "for each … counter removed this way", which is the
+  // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
+  if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   let m;
   // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
   // put N +1/+1 counters on it."
@@ -1353,6 +1376,16 @@ export function parseSentence(sentence, ctx) {
     return choice(m.slice(1).filter(Boolean), 1);
   }
   const WUBRG = ["W", "U", "B", "R", "G"];
+  // A "remove any number of counters" cost's X (`removeCounter.count: "x"`):
+  // "Add {B} for each storage counter removed this way" (Bottomless Vault),
+  // "Add {U}, then add an additional {U} for each charge counter removed this
+  // way" (Blue Mana Battery).
+  if ((m = /^add \{([WUBRGC])\} for each [\w+/-]+ counter removed this way\.$/i.exec(s))) {
+    return { kind: "add-mana", mana: m[1], amount: "x" };
+  }
+  if ((m = /^add \{([WUBRGC])\}, then add an additional \{([WUBRGC])\} for each [\w+/-]+ counter removed this way\.$/i.exec(s)) && m[1] === m[2]) {
+    return { kind: "add-mana", mana: m[1], amount: { sum: [1, "x"] } };
+  }
   if (/^add one mana of any color\.$/i.test(s)) return choice(WUBRG, 1);
   if ((m = new RegExp(`^add ${N} mana of any one color\\.$`, "i").exec(s))) {
     const n = amount(m[1]);
@@ -1669,6 +1702,16 @@ export function parseEffect(text, outer) {
         hints.push({ sentence, effect: may });
         continue;
       }
+    }
+    // "If you do, ~ assigns no combat damage this turn." after a may (rule
+    // 510.1a — Farrel's Zealot, Ophidian): the price of saying yes, so the
+    // may's `then`.
+    if (/^if you do, ~ assigns no combat damage this turn\.$/i.test(sentence) && parsed.at(-1)?.kind === "may" && parsed.at(-1).then === undefined) {
+      const may = { ...parsed.pop(), then: { kind: "assigns-no-combat-damage", target: "source" } };
+      hints.pop();
+      parsed.push(may);
+      hints.push({ sentence, effect: may });
+      continue;
     }
     // "It can't be regenerated." (rule 701.19c) after the destroy it's about.
     if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {

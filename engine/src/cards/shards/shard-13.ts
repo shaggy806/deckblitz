@@ -167,6 +167,7 @@ import _poolFatestitcher from "../pool/fatestitcher.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
+import _poolFeralThallid from "../pool/feral-thallid.js";
 import _poolFieldCreeper from "../pool/field-creeper.js";
 import _poolFieryHellhound from "../pool/fiery-hellhound.js";
 import _poolFinaleOfEternity from "../pool/finale-of-eternity.js";
@@ -351,6 +352,7 @@ import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRadiantEpicure from "../pool/radiant-epicure.js";
+import _poolRainbowVale from "../pool/rainbow-vale.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
 import _poolRangersPath from "../pool/rangers-path.js";
@@ -741,6 +743,7 @@ const shard: CardShard = {
     _poolFearOfBeingHunted,
     _poolFelhideMinotaur,
     _poolFelidarGuardian,
+    _poolFeralThallid,
     _poolFieldCreeper,
     _poolFieryHellhound,
     _poolFinaleOfEternity,
@@ -925,6 +928,7 @@ const shard: CardShard = {
     _poolProtectionMagic,
     _poolRabidAttack,
     _poolRadiantEpicure,
+    _poolRainbowVale,
     _poolRakdosGuildgate,
     _poolRampantGrowth,
     _poolRangersPath,

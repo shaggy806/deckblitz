@@ -104,6 +104,7 @@ import _poolCutYourLosses from "../pool/cut-your-losses.js";
 import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js";
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDaringArchaeologist from "../pool/daring-archaeologist.js";
+import _poolDarkDepths from "../pool/dark-depths.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
 import _poolDeadOfWinter from "../pool/dead-of-winter.js";
 import _poolDeadapult from "../pool/deadapult.js";
@@ -193,6 +194,7 @@ import _poolGloomPangolin from "../pool/gloom-pangolin.js";
 import _poolGoblinBanneret from "../pool/goblin-banneret.js";
 import _poolGoblinRingleader from "../pool/goblin-ringleader.js";
 import _poolGoblinSurveyor from "../pool/goblin-surveyor.js";
+import _poolGoblinsOfTheFlarg from "../pool/goblins-of-the-flarg.js";
 import _poolGoldmireBridge from "../pool/goldmire-bridge.js";
 import _poolGongagaReactorTown from "../pool/gongaga-reactor-town.js";
 import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
@@ -226,6 +228,7 @@ import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
 import _poolHexgoldSlash from "../pool/hexgold-slash.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
+import _poolHomaridSpawningBed from "../pool/homarid-spawning-bed.js";
 import _poolHomesteadCourage from "../pool/homestead-courage.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
 import _poolHornedTurtle from "../pool/horned-turtle.js";
@@ -287,6 +290,7 @@ import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
+import _poolMazemindTome from "../pool/mazemind-tome.js";
 import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
@@ -462,6 +466,7 @@ import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
+import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
 import _poolTheHuntsmansRedemption from "../pool/the-huntsmans-redemption.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
@@ -561,6 +566,7 @@ import _tokensRedElementalToken31 from "../tokens/red-elemental-token-3-1.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
 import _tokensScarecrowToken from "../tokens/scarecrow-token.js";
 import _tokensSpiritTokenAnafenzaUnyieldingLineage from "../tokens/spirit-token-anafenza-unyielding-lineage.js";
+import _tokensThrullToken from "../tokens/thrull-token.js";
 import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-flying-haste.js";
 
 const shard: CardShard = {
@@ -666,6 +672,7 @@ const shard: CardShard = {
     _poolDaredevilFearlessFighter,
     _poolDarigaazsCharm,
     _poolDaringArchaeologist,
+    _poolDarkDepths,
     _poolDarkthicketWolf,
     _poolDeadOfWinter,
     _poolDeadapult,
@@ -755,6 +762,7 @@ const shard: CardShard = {
     _poolGoblinBanneret,
     _poolGoblinRingleader,
     _poolGoblinSurveyor,
+    _poolGoblinsOfTheFlarg,
     _poolGoldmireBridge,
     _poolGongagaReactorTown,
     _poolGoroGoroAndSatoru,
@@ -788,6 +796,7 @@ const shard: CardShard = {
     _poolHexgoldSlash,
     _poolHighspireBellRinger,
     _poolHollowDogs,
+    _poolHomaridSpawningBed,
     _poolHomesteadCourage,
     _poolHondenOfNightsReach,
     _poolHornedTurtle,
@@ -849,6 +858,7 @@ const shard: CardShard = {
     _poolMarketwatchPhantom,
     _poolMasterApothecary,
     _poolMasterworkOfIngenuity,
+    _poolMazemindTome,
     _poolMechanShieldmate,
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
@@ -1024,6 +1034,7 @@ const shard: CardShard = {
     _poolTatteredApparition,
     _poolTeethingWurmlet,
     _poolThaumaturgesFamiliar,
+    _poolTheAstonishingAntMan,
     _poolTheFalconAirshipRestored,
     _poolTheHuntsmansRedemption,
     _poolThePrismaticBridge,
@@ -1125,6 +1136,7 @@ const shard: CardShard = {
     _tokensRedSpiritTokenMenace,
     _tokensScarecrowToken,
     _tokensSpiritTokenAnafenzaUnyieldingLineage,
+    _tokensThrullToken,
     _tokensXXElementalTokenFlyingHaste,
   ],
 };

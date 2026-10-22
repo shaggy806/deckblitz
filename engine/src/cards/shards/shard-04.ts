@@ -226,6 +226,7 @@ import _poolHungryForMore from "../pool/hungry-for-more.js";
 import _poolHuntForSpecimens from "../pool/hunt-for-specimens.js";
 import _poolHurricane from "../pool/hurricane.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
+import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
@@ -791,6 +792,7 @@ const shard: CardShard = {
     _poolHuntForSpecimens,
     _poolHurricane,
     _poolHydraInfiltration,
+    _poolHymnToTourach,
     _poolIceOut,
     _poolImposingVantasaur,
     _poolImskirIronEater,

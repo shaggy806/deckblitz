@@ -1,0 +1,735 @@
+{
+ "batch": "B135",
+ "status": "complete",
+ "ranks": "Fallen Empires (FEM, 1994-11-01): whole set (oldest-first walk); and 24 earlier cards three features unblocked",
+ "authored": [
+  {
+   "name": "Aeolipile",
+   "files": [
+    "engine/src/cards/pool/aeolipile.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcbound Javelineer",
+   "files": [
+    "engine/src/cards/pool/arcbound-javelineer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armor Thrull",
+   "files": [
+    "engine/src/cards/pool/armor-thrull.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Auntie Blyte, Bad Influence",
+   "files": [
+    "engine/src/cards/pool/auntie-blyte-bad-influence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Black Mana Battery",
+   "files": [
+    "engine/src/cards/pool/black-mana-battery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blue Mana Battery",
+   "files": [
+    "engine/src/cards/pool/blue-mana-battery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bottomless Vault",
+   "files": [
+    "engine/src/cards/pool/bottomless-vault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brassclaw Orcs",
+   "files": [
+    "engine/src/cards/pool/brassclaw-orcs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Breeding Pit",
+   "files": [
+    "engine/src/cards/pool/breeding-pit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chamber Sentry",
+   "files": [
+    "engine/src/cards/pool/chamber-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conch Horn",
+   "files": [
+    "engine/src/cards/pool/conch-horn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cybermat",
+   "files": [
+    "engine/src/cards/pool/cybermat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark Depths",
+   "files": [
+    "engine/src/cards/pool/dark-depths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darksteel Reactor",
+   "files": [
+    "engine/src/cards/pool/darksteel-reactor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delif's Cone",
+   "files": [
+    "engine/src/cards/pool/delifs-cone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delif's Cube",
+   "files": [
+    "engine/src/cards/pool/delifs-cube.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Armorer",
+   "files": [
+    "engine/src/cards/pool/dwarven-armorer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Hold",
+   "files": [
+    "engine/src/cards/pool/dwarven-hold.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dwarven Lieutenant",
+   "files": [
+    "engine/src/cards/pool/dwarven-lieutenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ebon Praetor",
+   "files": [
+    "engine/src/cards/pool/ebon-praetor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Farmer",
+   "files": [
+    "engine/src/cards/pool/elvish-farmer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Endrek Sahr, Master Breeder",
+   "files": [
+    "engine/src/cards/pool/endrek-sahr-master-breeder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Farrel's Zealot",
+   "files": [
+    "engine/src/cards/pool/farrels-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feral Thallid",
+   "files": [
+    "engine/src/cards/pool/feral-thallid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Floral Spuzzem",
+   "files": [
+    "engine/src/cards/pool/floral-spuzzem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fungal Bloom",
+   "files": [
+    "engine/src/cards/pool/fungal-bloom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geistflame Reservoir",
+   "files": [
+    "engine/src/cards/pool/geistflame-reservoir.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Kites",
+   "files": [
+    "engine/src/cards/pool/goblin-kites.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Warrens",
+   "files": [
+    "engine/src/cards/pool/goblin-warrens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblins of the Flarg",
+   "files": [
+    "engine/src/cards/pool/goblins-of-the-flarg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Green Mana Battery",
+   "files": [
+    "engine/src/cards/pool/green-mana-battery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guiltfeeder",
+   "files": [
+    "engine/src/cards/pool/guiltfeeder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hand of Justice",
+   "files": [
+    "engine/src/cards/pool/hand-of-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haruspex",
+   "files": [
+    "engine/src/cards/pool/haruspex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hollow Trees",
+   "files": [
+    "engine/src/cards/pool/hollow-trees.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Homarid Spawning Bed",
+   "files": [
+    "engine/src/cards/pool/homarid-spawning-bed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Homarid",
+   "files": [
+    "engine/src/cards/pool/homarid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hourglass of the Lost",
+   "files": [
+    "engine/src/cards/pool/hourglass-of-the-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hymn to Tourach",
+   "files": [
+    "engine/src/cards/pool/hymn-to-tourach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icatian Javelineers",
+   "files": [
+    "engine/src/cards/pool/icatian-javelineers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icatian Lieutenant",
+   "files": [
+    "engine/src/cards/pool/icatian-lieutenant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Icatian Moneychanger",
+   "files": [
+    "engine/src/cards/pool/icatian-moneychanger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icatian Store",
+   "files": [
+    "engine/src/cards/pool/icatian-store.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icatian Town",
+   "files": [
+    "engine/src/cards/pool/icatian-town.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Vortex",
+   "files": [
+    "engine/src/cards/pool/mana-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mazemind Tome",
+   "files": [
+    "engine/src/cards/pool/mazemind-tome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindstab Thrull",
+   "files": [
+    "engine/src/cards/pool/mindstab-thrull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Slagheap",
+   "files": [
+    "engine/src/cards/pool/molten-slagheap.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Necrite",
+   "files": [
+    "engine/src/cards/pool/necrite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orcish Captain",
+   "files": [
+    "engine/src/cards/pool/orcish-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orcish Veteran",
+   "files": [
+    "engine/src/cards/pool/orcish-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rainbow Vale",
+   "files": [
+    "engine/src/cards/pool/rainbow-vale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rasputin, the Oneiromancer",
+   "files": [
+    "engine/src/cards/pool/rasputin-the-oneiromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Mana Battery",
+   "files": [
+    "engine/src/cards/pool/red-mana-battery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ring of Renewal",
+   "files": [
+    "engine/src/cards/pool/ring-of-renewal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sand Silos",
+   "files": [
+    "engine/src/cards/pool/sand-silos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serendib Djinn",
+   "files": [
+    "engine/src/cards/pool/serendib-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit Shield",
+   "files": [
+    "engine/src/cards/pool/spirit-shield.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spore Cloud",
+   "files": [
+    "engine/src/cards/pool/spore-cloud.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spore Flower",
+   "files": [
+    "engine/src/cards/pool/spore-flower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Svyelunite Priest",
+   "files": [
+    "engine/src/cards/pool/svyelunite-priest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thallid Devourer",
+   "files": [
+    "engine/src/cards/pool/thallid-devourer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thallid",
+   "files": [
+    "engine/src/cards/pool/thallid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Astonishing Ant-Man",
+   "files": [
+    "engine/src/cards/pool/the-astonishing-ant-man.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thelonite Druid",
+   "files": [
+    "engine/src/cards/pool/thelonite-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thorn Thallid",
+   "files": [
+    "engine/src/cards/pool/thorn-thallid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thrull Champion",
+   "files": [
+    "engine/src/cards/pool/thrull-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrull Retainer",
+   "files": [
+    "engine/src/cards/pool/thrull-retainer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrull Wizard",
+   "files": [
+    "engine/src/cards/pool/thrull-wizard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Influence",
+   "files": [
+    "engine/src/cards/pool/tidal-influence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Mana Battery",
+   "files": [
+    "engine/src/cards/pool/white-mana-battery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zelyon Sword",
+   "files": [
+    "engine/src/cards/pool/zelyon-sword.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Seasinger",
+   "needs": [
+    "filter:controller-controls-filter"
+   ],
+   "why": "target creature whose controller controls an Island"
+  },
+  {
+   "name": "Vodalian Knights",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Farrel's Mantle",
+   "needs": [
+    "decision:may-answered-by-other-player"
+   ],
+   "why": "the enchanted creature's controller, maybe an opponent, answers the may"
+  },
+  {
+   "name": "Icatian Infantry",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "gains banding until end of turn"
+  },
+  {
+   "name": "Icatian Phalanx",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Icatian Skirmishers",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding; creatures banded with it gain first strike"
+  },
+  {
+   "name": "Soul Exchange",
+   "needs": [
+    "cost:exile-creature-cost"
+   ],
+   "why": "exile a creature you control as an additional cost"
+  },
+  {
+   "name": "Orcish Spy",
+   "needs": [
+    "effect:look-at-target-player-library"
+   ],
+   "why": "look at the top three cards of target player's library"
+  },
+  {
+   "name": "Initiates of the Ebon Hand",
+   "needs": [
+    "condition:mana-ability-activation-count"
+   ],
+   "why": "if this mana ability has been activated four or more times this turn"
+  },
+  {
+   "name": "Farrelite Priest",
+   "needs": [
+    "condition:mana-ability-activation-count"
+   ],
+   "why": "if this mana ability has been activated four or more times this turn"
+  },
+  {
+   "name": "Dwarven Soldier",
+   "needs": [
+    "trigger:becomes-blocked-by-filtered"
+   ],
+   "why": "becomes blocked by one or more Orcs, once"
+  },
+  {
+   "name": "Tidal Flats",
+   "needs": [
+    "filter:blocking-specific-creature"
+   ],
+   "why": "creatures blocking that creature; a payment per attacker"
+  },
+  {
+   "name": "Thelon's Chant",
+   "needs": [
+    "effect:unless-put-counter",
+    "trigger:player-puts-onto-battlefield"
+   ],
+   "why": "unless they put a -1/-1 counter on a creature they control; whoever put the Swamp there"
+  },
+  {
+   "name": "Goblin Flotilla",
+   "needs": [
+    "effect:grant-trigger-this-combat"
+   ],
+   "why": "a trigger granted for this combat only"
+  },
+  {
+   "name": "Derelor",
+   "needs": [
+    "static:cost-increase-colored"
+   ],
+   "why": "black spells you cast cost {B} more"
+  },
+  {
+   "name": "Thelon's Curse",
+   "needs": [
+    "decision:pay-per-chosen-untap"
+   ],
+   "why": "choose any number of tapped blue creatures and pay {U} for each"
+  },
+  {
+   "name": "Night Soil",
+   "needs": [
+    "decision:choose-from-any-graveyard",
+    "cost:exile-from-single-graveyard"
+   ],
+   "why": "exile two creature cards from a single graveyard as a cost"
+  },
+  {
+   "name": "Elvish Scout",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target"
+   ],
+   "why": "prevent combat damage dealt to and by it this turn"
+  },
+  {
+   "name": "Dwarven Catapult",
+   "needs": [
+    "effect:damage-divided-evenly-among-filter"
+   ],
+   "why": "X damage divided evenly among all creatures target opponent controls"
+  },
+  {
+   "name": "Thelonite Monk",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "target land becomes a Forest"
+  },
+  {
+   "name": "Tourach's Chant",
+   "needs": [
+    "effect:unless-put-counter",
+    "trigger:player-puts-onto-battlefield"
+   ],
+   "why": "unless they put a -1/-1 counter on a creature they control; whoever put the Forest there"
+  },
+  {
+   "name": "Deep Spawn",
+   "needs": [
+    "effect:doesnt-untap-your-next-untap-step"
+   ],
+   "why": "doesn't untap during your (the activator's) next untap step"
+  },
+  {
+   "name": "Homarid Warrior",
+   "needs": [
+    "effect:doesnt-untap-your-next-untap-step"
+   ],
+   "why": "doesn't untap during your (the activator's) next untap step"
+  },
+  {
+   "name": "Merseine",
+   "needs": [
+    "effect:any-player-may-activate",
+    "cost:pay-mana-cost-of-attached"
+   ],
+   "why": "only the enchanted creature's controller may activate; pay its mana cost"
+  },
+  {
+   "name": "Draconian Cylix",
+   "needs": [
+    "cost:discard-at-random"
+   ],
+   "why": "discard a card at random as a cost"
+  },
+  {
+   "name": "Tourach's Gate",
+   "needs": [
+    "cost:tap-enchanted-permanent"
+   ],
+   "why": "tap enchanted land as a cost"
+  },
+  {
+   "name": "Balm of Restoration",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "a modal activated ability with a targeted mode"
+  },
+  {
+   "name": "Raiding Party",
+   "needs": [
+    "effect:each-player-taps-to-protect-chosen"
+   ],
+   "why": "each player taps white creatures to save Plains"
+  },
+  {
+   "name": "Vodalian War Machine",
+   "needs": [
+    "filter:tapped-to-pay-for-source-this-turn"
+   ],
+   "why": "destroy all Merfolk tapped this turn to pay for its abilities"
+  },
+  {
+   "name": "Orgg",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack if defending player controls an untapped creature with power 3 or greater"
+  },
+  {
+   "name": "Heroism",
+   "needs": [
+    "effect:prevent-combat-damage-by-target",
+    "effect:unless-that-player"
+   ],
+   "why": "per red attacker, prevented unless its controller pays {2}{R}"
+  }
+ ]
+}

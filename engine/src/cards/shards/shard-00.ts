@@ -115,6 +115,7 @@ import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
+import _poolCybermat from "../pool/cybermat.js";
 import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
@@ -709,6 +710,7 @@ const shard: CardShard = {
     _poolCunningCoyote,
     _poolCursedMinotaur,
     _poolCursedRecording,
+    _poolCybermat,
     _poolCyclopsElectromancer,
     _poolDanithaBenaliasHope,
     _poolDarkTutelage,

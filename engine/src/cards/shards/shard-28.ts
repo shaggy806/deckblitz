@@ -385,6 +385,7 @@ import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
+import _poolRingOfRenewal from "../pool/ring-of-renewal.js";
 import _poolRingwardenOwl from "../pool/ringwarden-owl.js";
 import _poolRiseOfTheVarmints from "../pool/rise-of-the-varmints.js";
 import _poolRobeOfMirrors from "../pool/robe-of-mirrors.js";
@@ -964,6 +965,7 @@ const shard: CardShard = {
     _poolReviveTheShire,
     _poolRevokeDemise,
     _poolRimeshieldFrostGiant,
+    _poolRingOfRenewal,
     _poolRingwardenOwl,
     _poolRiseOfTheVarmints,
     _poolRobeOfMirrors,

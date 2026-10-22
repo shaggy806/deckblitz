@@ -115,6 +115,7 @@ import _poolDamningVerdict from "../pool/damning-verdict.js";
 import _poolDarkKnightsGreatsword from "../pool/dark-knights-greatsword.js";
 import _poolDarklitGargoyle from "../pool/darklit-gargoyle.js";
 import _poolDarksteelPendant from "../pool/darksteel-pendant.js";
+import _poolDarksteelReactor from "../pool/darksteel-reactor.js";
 import _poolDartingMerfolk from "../pool/darting-merfolk.js";
 import _poolDauntlessAven from "../pool/dauntless-aven.js";
 import _poolDauntlessEscort from "../pool/dauntless-escort.js";
@@ -456,6 +457,7 @@ import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSunpearlKirin from "../pool/sunpearl-kirin.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
 import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
+import _poolSvyelunitePriest from "../pool/svyelunite-priest.js";
 import _poolSwarmingOfMoria from "../pool/swarming-of-moria.js";
 import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
@@ -662,6 +664,7 @@ const shard: CardShard = {
     _poolDarkKnightsGreatsword,
     _poolDarklitGargoyle,
     _poolDarksteelPendant,
+    _poolDarksteelReactor,
     _poolDartingMerfolk,
     _poolDauntlessAven,
     _poolDauntlessEscort,
@@ -1003,6 +1006,7 @@ const shard: CardShard = {
     _poolSunpearlKirin,
     _poolSurtlandFrostpyre,
     _poolSvellaIceShaper,
+    _poolSvyelunitePriest,
     _poolSwarmingOfMoria,
     _poolSwordOfTheSqueak,
     _poolSwordsToPlowshares,

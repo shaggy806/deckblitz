@@ -81,7 +81,10 @@ export function sacrificeCostReadsX(cost: { readonly sacrifice?: SacrificeCost }
  * Treasures", Gix, Yawgmoth Praetor's "Discard X cards")? */
 export function costAnnouncesX(cost: AbilityCost): boolean {
   return (
-    sacrificeCostReadsX(cost) || cost.discard?.count === "x" || cost.exileFromGraveyard?.count === "x"
+    sacrificeCostReadsX(cost) ||
+    cost.discard?.count === "x" ||
+    cost.exileFromGraveyard?.count === "x" ||
+    cost.removeCounter?.count === "x"
   );
 }
 
@@ -197,8 +200,13 @@ export interface AbilityCost {
    * {@link abilityLifeCost}, never directly. */
   readonly payLife?: AbilityLifeCost;
   /** Counters to remove from the source as part of the cost (Walking
-   * Ballista: "Remove a +1/+1 counter from ~"). */
-  readonly removeCounter?: { readonly kind: string; readonly count: number };
+   * Ballista: "Remove a +1/+1 counter from ~"). `count: "x"` is "remove X
+   * counters" or "remove any number of counters" (Bottomless Vault, the Mana
+   * Batteries): X is announced as it's activated (rule 601.2b, via 602.2b),
+   * up to the counters it has, 0 allowed, and the effect reads it as `"x"`
+   * — "add {B} for each storage counter removed this way". A mana ability
+   * with it is activated by hand only (the auto-payer pays no counters). */
+  readonly removeCounter?: { readonly kind: string; readonly count: number | "x" };
   /**
    * Counters to put on the source as part of the cost — Wall of Roots' "Put
    * a -0/-1 counter on this creature: Add {G}", Devoted Druid's "Put a -1/-1
@@ -1313,6 +1321,36 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+    }
+  | {
+      /**
+       * "Whenever ~ attacks and isn't blocked" (rule 509.3g; Farrel's
+       * Zealot, Ophidian): an attacking creature with no creatures declared
+       * as blockers for it, once per attacker as blockers are declared, off
+       * `attacker-unblocked` — even one that entered the battlefield
+       * attacking before then, never one blocked and then left with no
+       * blockers. The attacker is the trigger object, and the player it
+       * attacks (or who protects what it attacks) the `"trigger-player"` —
+       * the defending player. With nothing able to block, no player declares,
+       * and it still triggers.
+       */
+      readonly on: "attacks-unblocked";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+    }
+  | {
+      /**
+       * A **state trigger** (rule 603.8): "When you control no Islands,
+       * sacrifice ~" (Seasinger), "Whenever there are four or more tide
+       * counters on ~, remove all tide counters from it" (Homarid). It
+       * triggers as soon as `state` is true of the permanent — no event —
+       * and doesn't trigger again until that instance has resolved, been
+       * countered or otherwise left the stack; then, if `state` is still
+       * true, it triggers again. Looked for whenever state-based actions are
+       * (and as zones, counters and control change), from the battlefield.
+       */
+      readonly on: "state";
+      readonly state: StaticCondition;
     }
   | {
       /**

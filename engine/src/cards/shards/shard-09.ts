@@ -31,6 +31,7 @@ import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
 import _poolArcticFlats from "../pool/arctic-flats.js";
 import _poolArgivianArchaeologist from "../pool/argivian-archaeologist.js";
+import _poolArmorThrull from "../pool/armor-thrull.js";
 import _poolArwenMortalQueen from "../pool/arwen-mortal-queen.js";
 import _poolArwenWeaverOfHope from "../pool/arwen-weaver-of-hope.js";
 import _poolAsgardianCitadel from "../pool/asgardian-citadel.js";
@@ -240,6 +241,7 @@ import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
 import _poolHopefulVigil from "../pool/hopeful-vigil.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
+import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
 import _poolIceStorm from "../pool/ice-storm.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
@@ -629,6 +631,7 @@ const shard: CardShard = {
     _poolArchonOfSunsGrace,
     _poolArcticFlats,
     _poolArgivianArchaeologist,
+    _poolArmorThrull,
     _poolArwenMortalQueen,
     _poolArwenWeaverOfHope,
     _poolAsgardianCitadel,
@@ -838,6 +841,7 @@ const shard: CardShard = {
     _poolHopefulVigil,
     _poolHowlingBanshee,
     _poolHyenaPack,
+    _poolIcatianLieutenant,
     _poolIceStorm,
     _poolIcyReception,
     _poolIllegitimateBusiness,

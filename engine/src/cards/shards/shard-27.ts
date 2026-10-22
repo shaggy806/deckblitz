@@ -8,6 +8,7 @@ import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brut
 import _poolAbzanGuide from "../pool/abzan-guide.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
+import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
 import _poolAhriman from "../pool/ahriman.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
@@ -200,6 +201,7 @@ import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
 import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
+import _poolGuiltfeeder from "../pool/guiltfeeder.js";
 import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
@@ -438,6 +440,7 @@ import _poolSpiderSense from "../pool/spider-sense.js";
 import _poolSpinalVillain from "../pool/spinal-villain.js";
 import _poolSpinerockKnoll from "../pool/spinerock-knoll.js";
 import _poolSpiritedCompanion from "../pool/spirited-companion.js";
+import _poolSporeCloud from "../pool/spore-cloud.js";
 import _poolSporocyst from "../pool/sporocyst.js";
 import _poolSpurredWolverine from "../pool/spurred-wolverine.js";
 import _poolStalkerHag from "../pool/stalker-hag.js";
@@ -575,6 +578,7 @@ const shard: CardShard = {
     _poolAbzanGuide,
     _poolAdaptiveTrainingPost,
     _poolAdventurersAirship,
+    _poolAeolipile,
     _poolAerieMystics,
     _poolAhriman,
     _poolAjanisAnguish,
@@ -767,6 +771,7 @@ const shard: CardShard = {
     _poolGrondTheGatebreaker,
     _poolGuardianNaga,
     _poolGuidelightSynergist,
+    _poolGuiltfeeder,
     _poolGyrusWakerOfCorpses,
     _poolHarvestGwyllion,
     _poolHavenwoodBattleground,
@@ -1005,6 +1010,7 @@ const shard: CardShard = {
     _poolSpinalVillain,
     _poolSpinerockKnoll,
     _poolSpiritedCompanion,
+    _poolSporeCloud,
     _poolSporocyst,
     _poolSpurredWolverine,
     _poolStalkerHag,

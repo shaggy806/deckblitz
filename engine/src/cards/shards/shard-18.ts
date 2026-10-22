@@ -179,12 +179,14 @@ import _poolGleamingOverseer from "../pool/gleaming-overseer.js";
 import _poolGluttonousTroll from "../pool/gluttonous-troll.js";
 import _poolGoblinFirebomb from "../pool/goblin-firebomb.js";
 import _poolGoblinSharpshooter from "../pool/goblin-sharpshooter.js";
+import _poolGoblinWarrens from "../pool/goblin-warrens.js";
 import _poolGoldenBear from "../pool/golden-bear.js";
 import _poolGorbagOfMinasMorgul from "../pool/gorbag-of-minas-morgul.js";
 import _poolGrandmotherSengir from "../pool/grandmother-sengir.js";
 import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
 import _poolGrayHarborMerfolk from "../pool/gray-harbor-merfolk.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
+import _poolGreenManaBattery from "../pool/green-mana-battery.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
@@ -295,6 +297,7 @@ import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
+import _poolMindstabThrull from "../pool/mindstab-thrull.js";
 import _poolMiracleWorker from "../pool/miracle-worker.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
@@ -366,6 +369,7 @@ import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
 import _poolRedHulk from "../pool/red-hulk.js";
+import _poolRedManaBattery from "../pool/red-mana-battery.js";
 import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
 import _poolRegalImperiosaur from "../pool/regal-imperiosaur.js";
 import _poolRelentlessHunter from "../pool/relentless-hunter.js";
@@ -480,6 +484,7 @@ import _poolThoughtflare from "../pool/thoughtflare.js";
 import _poolThrashingFrontliner from "../pool/thrashing-frontliner.js";
 import _poolThrashingWumpus from "../pool/thrashing-wumpus.js";
 import _poolThreeBlindMice from "../pool/three-blind-mice.js";
+import _poolThrullRetainer from "../pool/thrull-retainer.js";
 import _poolThunderheadGunner from "../pool/thunderhead-gunner.js";
 import _poolThunderingCeratok from "../pool/thundering-ceratok.js";
 import _poolThunderousVelocipede from "../pool/thunderous-velocipede.js";
@@ -764,12 +769,14 @@ const shard: CardShard = {
     _poolGluttonousTroll,
     _poolGoblinFirebomb,
     _poolGoblinSharpshooter,
+    _poolGoblinWarrens,
     _poolGoldenBear,
     _poolGorbagOfMinasMorgul,
     _poolGrandmotherSengir,
     _poolGrangerGuildmage,
     _poolGrayHarborMerfolk,
     _poolGreedyFreebooter,
+    _poolGreenManaBattery,
     _poolGrinningDemon,
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
@@ -880,6 +887,7 @@ const shard: CardShard = {
     _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
     _poolMindspringMerfolk,
+    _poolMindstabThrull,
     _poolMiracleWorker,
     _poolMirkwoodSpider,
     _poolMirrorshellCrab,
@@ -951,6 +959,7 @@ const shard: CardShard = {
     _poolRazorkinHordecaller,
     _poolReapingTheGraves,
     _poolRedHulk,
+    _poolRedManaBattery,
     _poolRegalBunnicorn,
     _poolRegalImperiosaur,
     _poolRelentlessHunter,
@@ -1065,6 +1074,7 @@ const shard: CardShard = {
     _poolThrashingFrontliner,
     _poolThrashingWumpus,
     _poolThreeBlindMice,
+    _poolThrullRetainer,
     _poolThunderheadGunner,
     _poolThunderingCeratok,
     _poolThunderousVelocipede,

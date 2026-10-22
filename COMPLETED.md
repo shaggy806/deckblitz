@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Fallen Empires, whole** (batch 135): **"whenever ~ attacks and isn't blocked"** (rule
+  509.3g, with its delayed form and "assigns no combat damage this turn"), **removing any number
+  of counters as a cost** (X announced as it's activated) and **state triggers** (rule 603.8)
+  built, the scaffolder taught all three; 48 of its last 79 cards authored by two `card-author`
+  agents and the lead — Hymn to Tourach, the five storage lands, the Thallids, Farrel's Zealot,
+  Homarid, Delif's Cone — plus 24 earlier cards the features unblocked (Dark Depths, Darksteel
+  Reactor, Endrek Sahr, Mazemind Tome, the five Mana Batteries, Guiltfeeder, Haruspex,
+  Hourglass of the Lost…); 31 blocked, banding (3) the most shared (2026-10-21).
 - **The Dark, whole** (batch 134): 37 of its last 82 cards authored by three `card-author` agents
   on existing features — Safe Haven, Martyr's Cry, Venom, War Barge, Angry Mob, Banshee, Eater of
   the Dead, Festival, Uncle Istvan, Gaea's Touch; 45 blocked, mostly one apiece (2026-10-21).

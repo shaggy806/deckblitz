@@ -53,6 +53,7 @@ import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
 import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBloodlineCulling from "../pool/bloodline-culling.js";
 import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
+import _poolBlueManaBattery from "../pool/blue-mana-battery.js";
 import _poolBlueWard from "../pool/blue-ward.js";
 import _poolBogRats from "../pool/bog-rats.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
@@ -231,6 +232,7 @@ import _poolHillcomberGiant from "../pool/hillcomber-giant.js";
 import _poolHissingQuagmire from "../pool/hissing-quagmire.js";
 import _poolHolyDay from "../pool/holy-day.js";
 import _poolHoneyMammoth from "../pool/honey-mammoth.js";
+import _poolHourglassOfTheLost from "../pool/hourglass-of-the-lost.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
 import _poolIchneumonDruid from "../pool/ichneumon-druid.js";
@@ -461,6 +463,7 @@ import _poolTerrorOfTowashi from "../pool/terror-of-towashi.js";
 import _poolTerrorTide from "../pool/terror-tide.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
 import _poolThalakosSentry from "../pool/thalakos-sentry.js";
+import _poolThallid from "../pool/thallid.js";
 import _poolTheDawningArchaic from "../pool/the-dawning-archaic.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
@@ -544,6 +547,7 @@ import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-pris
 import _tokensFungusBeastToken from "../tokens/fungus-beast-token.js";
 import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
 import _tokensIncubatorToken from "../tokens/incubator-token.js";
+import _tokensKnightTokenRasputinTheOneiromancer from "../tokens/knight-token-rasputin-the-oneiromancer.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
@@ -605,6 +609,7 @@ const shard: CardShard = {
     _poolBloodFountain,
     _poolBloodlineCulling,
     _poolBloodskyBerserker,
+    _poolBlueManaBattery,
     _poolBlueWard,
     _poolBogRats,
     _poolBoltBend,
@@ -783,6 +788,7 @@ const shard: CardShard = {
     _poolHissingQuagmire,
     _poolHolyDay,
     _poolHoneyMammoth,
+    _poolHourglassOfTheLost,
     _poolHugsGrislyGuardian,
     _poolHydraTroopers,
     _poolIchneumonDruid,
@@ -1013,6 +1019,7 @@ const shard: CardShard = {
     _poolTerrorTide,
     _poolTezzeretCruelCaptain,
     _poolThalakosSentry,
+    _poolThallid,
     _poolTheDawningArchaic,
     _poolTheEldestReborn,
     _poolTheFrightfulFour,
@@ -1098,6 +1105,7 @@ const shard: CardShard = {
     _tokensFungusBeastToken,
     _tokensHumanRogueToken,
     _tokensIncubatorToken,
+    _tokensKnightTokenRasputinTheOneiromancer,
     _tokensMoogleToken,
     _tokensPhyrexianGoblinToken,
     _tokensPlantWarriorToken,
