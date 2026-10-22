@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3771 already implemented / 1229 missing (marks refreshed 2026-10-22)
+3773 already implemented / 1227 missing (marks refreshed 2026-10-22)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3933,7 +3933,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3940  Aboleth Spawn                            {2}{U}           Creature — Fish Horror
 [x]  3941  Rampaging Brontodon                      {5}{G}{G}        Creature — Dinosaur
 [x]  3942  Sazacap's Brew                           {1}{R}           Instant
-[ ]  3943  Neheb, Dreadhorde Champion               {2}{R}{R}        Legendary Creature — Zombie Minotaur Warrior
+[x]  3943  Neheb, Dreadhorde Champion               {2}{R}{R}        Legendary Creature — Zombie Minotaur Warrior
 [x]  3944  Conformer Shuriken                       {2}              Legendary Artifact — Equipment
 [x]  3945  Captain of the Watch                     {4}{W}{W}        Creature — Human Soldier
 [ ]  3946  Exhume                                   {1}{B}           Sorcery
@@ -4941,7 +4941,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4948  Sharlayan, Nation of Scholars            {0}              Land — Town
 [x]  4949  Goldberry, River-Daughter                {1}{U}           Legendary Creature — Nymph
 [ ]  4950  Summon: Shiva                            {3}{U}{U}        Enchantment Creature — Saga Elemental
-[ ]  4951  Celes, Rune Knight                       {1}{R}{W}{B}     Legendary Creature — Human Wizard Knight
+[x]  4951  Celes, Rune Knight                       {1}{R}{W}{B}     Legendary Creature — Human Wizard Knight
 [x]  4952  The Magic Mirror                         {6}{U}{U}{U}     Legendary Artifact
 [x]  4953  Grasslands                               {0}              Land
 [ ]  4954  Defiler of Faith                         {3}{W}{W}        Creature — Phyrexian Human

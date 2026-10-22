@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-444 already implemented / 56 missing
+445 already implemented / 55 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -206,7 +206,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  200  Anti-Venom, Horrifying Healer                  12251 decks  {W}{W}{W}{W}{W}  Legendary Creature — Symbiote Hero
 [x]  201  Judith, Carnage Connoisseur                    12173 decks  {3}{B}{R}        Legendary Creature — Human Shaman
 [x]  202  Sheoldred, the Apocalypse                      12116 decks  {2}{B}{B}        Legendary Creature — Phyrexian Praetor
-[ ]  203  Celes, Rune Knight                             12104 decks  {1}{R}{W}{B}     Legendary Creature — Human Wizard Knight
+[x]  203  Celes, Rune Knight                             12104 decks  {1}{R}{W}{B}     Legendary Creature — Human Wizard Knight
 [x]  204  Sonic the Hedgehog                             12031 decks  {1}{U}{R}{W}     Legendary Creature — Hedgehog Warrior
 [x]  205  Varina, Lich Queen                             11960 decks  {1}{W}{U}{B}     Legendary Creature — Zombie Wizard
 [x]  206  Kona, Rescue Beastie                           11932 decks  {3}{G}           Legendary Creature — Beast Survivor
