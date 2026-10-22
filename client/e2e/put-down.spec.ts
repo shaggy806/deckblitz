@@ -3,6 +3,8 @@ import type { APIRequestContext, Page } from '@playwright/test'
 import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 
+import { DEFAULT_ANIM_SCALE } from '../src/game/motionPrefs.ts'
+
 // Cards flying to where they went (AnimationLayer):
 // - a cast spell's spotlight holds, then flies into the place its entry takes
 //   on the stack (`liftSpotlight` / `slotIntoStack`), the entry hidden until
@@ -21,11 +23,12 @@ import { join } from 'node:path'
 const CONTROL = `http://127.0.0.1:${process.env.E2E_CONTROL_PORT ?? 4099}`
 const SHOTS = process.env.PUT_DOWN_SHOTS
 
-// animationSchedule.ts's flight timing, at normal speed.
+// animationSchedule.ts's flight timing, at the default speed (normal speed
+// times the default `animScale`, which these tests leave as it is).
 const FLIGHT_MIN_MS = 420
 const FLIGHT_MAX_MS = 1100
 const expectedFlightMs = (distance: number, diagonal: number): number =>
-  Math.min(FLIGHT_MAX_MS, Math.max(FLIGHT_MIN_MS, 220 + (distance / diagonal) * 1100))
+  Math.min(FLIGHT_MAX_MS, Math.max(FLIGHT_MIN_MS, 220 + (distance / diagonal) * 1100)) * DEFAULT_ANIM_SCALE
 
 // Waiting for a bot's turn to come round is paced like play.
 test.describe.configure({ timeout: 120_000 })
