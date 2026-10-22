@@ -107,6 +107,23 @@ describe("put onto the battlefield attacking (rule 508.4)", () => {
     expect(game.state.objects[second].attacking).toBe(D);
   });
 
+  it("shows the creature as attacking but its defender undecided until chosen", () => {
+    const { game, c } = inCombat([A, B, C]);
+    c[A].chooseAttackTargetsFn = (_view, creatures) => creatures.map((cr) => ({ object: cr.object, target: C }));
+    game.debugApplyEffect(A, soldiers(1, "choose"));
+    const [soldier] = soldierIds(game);
+    // Every seat sees it attacking, with no defender to draw an arrow to yet.
+    for (const seat of [A, B, C]) {
+      const seen = game.viewFor(seat).objects[soldier];
+      expect(seen.attacking).not.toBeNull();
+      expect(seen.attackingUndecided).toBe(true);
+    }
+    game.advanceUntil(quiet);
+    const after = game.viewFor(B).objects[soldier];
+    expect(after.attacking).toBe(C);
+    expect(after.attackingUndecided).toBeUndefined();
+  });
+
   it("refuses an answer that leaves a creature out or picks something not offered", () => {
     const { game, c } = inCombat([A, B, C]);
     c[A].chooseAttackTargetsFn = () => [];

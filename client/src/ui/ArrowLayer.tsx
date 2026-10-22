@@ -93,7 +93,10 @@ function arrowsFor(
   for (const id of view.zones.battlefield) {
     const obj = view.objects[id]
     if (!obj) continue
-    if (obj.attacking !== null) {
+    // A creature put onto the battlefield attacking whose controller hasn't
+    // chosen what it attacks yet holds only a placeholder: no arrow until
+    // they do (their picks draw their own while they choose).
+    if (obj.attacking !== null && obj.attackingUndecided !== true) {
       const defender = obj.attacking
       // A player, or a planeswalker or battle (an object): told apart by
       // whether it's one of the seats.

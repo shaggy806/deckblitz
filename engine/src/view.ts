@@ -223,6 +223,11 @@ export interface VisibleObject {
   readonly summoningSick: boolean;
   /** A player, or an opponent's planeswalker (an `ObjectId`), or `null`. */
   readonly attacking: PlayerId | ObjectId | null;
+  /** Put onto the battlefield attacking, with what it attacks still to be
+   * chosen by its controller (rule 508.4 — the `enter-attacking` decision,
+   * asked or queued): `attacking` holds only a placeholder until then, so no
+   * arrow is drawn for it. */
+  readonly attackingUndecided?: true;
   readonly blocking: ObjectId | null;
   /** An attacker that has been blocked this combat — and stays blocked
    * after its blockers leave (rule 509.1h), which no blocker's `blocking`
@@ -434,6 +439,15 @@ function decisionSourceFor(state: GameState): DecisionSource | null {
 
 /** See `VisibleObject.chosen`. Read off a permanent only: both fields are
  * cleared on a zone change, but a card on its way in can carry a stale one. */
+/** `id` was put onto the battlefield attacking and its controller hasn't yet
+ * chosen what it attacks (rule 508.4): it's in the `enter-attacking`
+ * decision being asked, or one queued behind it. */
+function attackChoicePending(state: GameState, id: ObjectId): boolean {
+  const awaiting = state.awaiting;
+  if (awaiting?.kind === "enter-attacking" && awaiting.creatures.some((c) => c.object === id)) return true;
+  return (state.pendingEnterAttacking ?? []).some((q) => q.creatures.some((c) => c.object === id));
+}
+
 function chosenOf(object: GameObject): string | null {
   if (object.zone !== "battlefield" && object.zone !== "phased-out") return null;
   return object.chosenOnEnter ?? object.chosenCreatureType ?? null;
@@ -625,6 +639,7 @@ function visible(
     counters: { ...object.counters },
     summoningSick: object.summoningSick,
     attacking: object.attacking,
+    ...(object.attacking !== null && attackChoicePending(state, id) ? { attackingUndecided: true as const } : {}),
     blocking: object.blocking,
     blocked: object.attacking !== null && object.blocked,
     kind: object.kind,
