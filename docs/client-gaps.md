@@ -12,11 +12,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   turn number, a commander's cast count and damage marked are fields since 2026-10-13. A commander placed in a library goes to its
   bottom, whatever its place in the list. Each is a field on `ScenarioCard`/`ScenarioSpec` and a
   step in `server/src/builder.ts`'s `buildScenario` and `snapshotScenario`.
-- **Large live mana amounts by hand.** "X mana in any combination" offers every split as its
-  own menu entry only while the list stays small (two colours up to X = 22). Past that it
-  offers all of one type per type, and a count picker would let the player choose any split.
-  And when the payer taps such a source for more than a payment needs, the player can't choose
-  the colour of what floats. The rest of `effect:mana-ability-dynamic-amount` is built.
 - **Quality-of-life room options (house rules).** Options the room creator can turn on before a
   game that are technically against the rules but make play smoother. The user's example: mana
   that, when tapped, doesn't have its colour decided until it's spent on a specific coloured

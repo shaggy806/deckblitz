@@ -40,6 +40,7 @@ import type {
   ConvokePayment,
   GraveyardGrant,
   LegalAction,
+  ManaSplitOffer,
   PlayLandOffer,
   TapCostOffer,
   WaterbendOffer,
@@ -260,6 +261,7 @@ import {
   multipliedManaOption,
   planPayment,
   standaloneManaChoices,
+  standaloneManaSplit,
   widerSpendAs,
 } from "./mana-payment.js";
 import type {
@@ -1041,6 +1043,15 @@ function durationFields(
   return "untilTurnOf" in duration
     ? { untilEndOfTurn: false, untilTurnOf: duration.untilTurnOf }
     : { untilEndOfTurn: false, whileCounter: duration.whileCounter };
+}
+
+/** One way of activating a mana ability by hand (`standaloneManaVariants`):
+ * its picks, everything it makes, and — for the variant whose split is the
+ * player's — the split to ask. */
+interface StandaloneManaVariant {
+  readonly manaColors: readonly ManaType[];
+  readonly makes: readonly ManaType[];
+  readonly manaSplit?: ManaSplitOffer;
 }
 
 /** Whether an effect lasting `duration` on `object` begins at all: one
@@ -2321,6 +2332,7 @@ export class Game {
       /** Everything this variant of a mana ability makes, for its label —
        * `manaColors` when that's all of it. */
       makes: readonly ManaType[] | undefined = manaColors,
+      manaSplit?: ManaSplitOffer,
     ): void => {
       if (this.whyCannotActivateAbility(player, source, index) !== null) return;
       const manaX =
@@ -2371,9 +2383,11 @@ export class Game {
         const label =
           manaColors === undefined || makes === undefined
             ? ability.text
-            : makes.length === 0
-              ? `${ability.text} (add no mana)`
-              : `${ability.text} (add ${makes.map((m) => `{${m}}`).join("")})`;
+            : manaSplit !== undefined
+              ? `${ability.text} (choose how much of each)`
+              : makes.length === 0
+                ? `${ability.text} (add no mana)`
+                : `${ability.text} (add ${makes.map((m) => `{${m}}`).join("")})`;
         out.push({
           kind: "activate-ability",
           source,
@@ -2381,6 +2395,7 @@ export class Game {
           cardName,
           text: xCost?.minX !== undefined && xCost.minX === xCost.maxX ? `${label} (X=${xCost.minX})` : label,
           ...(manaColors !== undefined ? { manaColors } : {}),
+          ...(manaSplit !== undefined ? { manaSplit } : {}),
           targetSpecs,
           targetOptions,
           // One permanent, named on the action. A cost of several is chosen
@@ -2458,7 +2473,7 @@ export class Game {
           return;
         }
         for (const variant of variants) {
-          pushActivateAbility(source, printedCardName(object), ability, index, variant.manaColors, variant.makes);
+          pushActivateAbility(source, printedCardName(object), ability, index, variant.manaColors, variant.makes, variant.manaSplit);
         }
       });
     }
@@ -15377,11 +15392,12 @@ export class Game {
     sourceId: ObjectId,
     ability: ActivatedAbility,
     player: PlayerId,
-  ): { readonly manaColors: readonly ManaType[]; readonly makes: readonly ManaType[] }[] | null {
+  ): StandaloneManaVariant[] | null {
     const effect = ability.effect;
     // Anything else goes on the stack and asks as it resolves (rule 608.2d).
     if (effect === null || !isManaAbility(ability)) return null;
-    let own: { readonly picks: readonly ManaType[]; readonly makes: readonly ManaType[] }[] | null;
+    type Own = { readonly picks: readonly ManaType[]; readonly makes: readonly ManaType[]; readonly split?: ManaSplitOffer };
+    let own: Own[] | null;
     if (effect.kind === "add-mana" && effect.mana === "any-color" && Game.amountReadsManaColor(effect.amount)) {
       own = [];
       let none = false;
@@ -15392,20 +15408,28 @@ export class Game {
       }
       if (none) own.push({ picks: [], makes: [] });
     } else {
-      const choices = standaloneManaChoices(
-        ability,
-        (m) => this.manaOneOf(m, player, sourceId),
-        () =>
-          effect.kind === "add-mana" && typeof effect.amount !== "number"
-            ? this.liveManaAmount(sourceId, player, effect.amount)
-            : null,
-      );
+      const oneOf = (m: { readonly oneOf: readonly ManaType[] } | BoardManaList) => this.manaOneOf(m, player, sourceId);
+      const live = () =>
+        effect.kind === "add-mana" && typeof effect.amount !== "number"
+          ? this.liveManaAmount(sourceId, player, effect.amount)
+          : null;
+      const choices = standaloneManaChoices(ability, oneOf, live);
       // A list naming no type now (Mox Amber with no legendary permanent,
       // Exotic Orchard with no coloured land opposite) can still be
       // activated — it just adds no mana (the Mox Amber ruling).
       own = choices === null ? null : choices.length === 0 ? [{ picks: [], makes: [] }] : choices.map((c) => ({ picks: c, makes: c }));
+      // Too many splits to list: one more offer, whose split the player
+      // picks (its picks here are only a stand-in for the client's).
+      const listed = own === null ? null : standaloneManaSplit(ability, oneOf, live);
+      // No more units than one activation mints (`addMana` below).
+      const split = listed === null ? null : { ...listed, amount: Math.min(listed.amount, Game.MAX_EFFECT_INSTANCES) };
+      if (own !== null && split !== null) {
+        const stand = Array<ManaType>(split.amount).fill(split.colors[0]);
+        own.push({ picks: stand, makes: stand, split });
+      }
     }
-    const asIs = own === null ? null : own.map((v) => ({ manaColors: v.picks, makes: v.makes }));
+    const withSplit = (split: ManaSplitOffer | undefined) => (split !== undefined ? { manaSplit: split } : {});
+    const asIs = own === null ? null : own.map((v) => ({ manaColors: v.picks, makes: v.makes, ...withSplit(v.split) }));
     const object = this.state.objects[sourceId];
     if (!ability.cost.tap || object === undefined) return asIs;
     const extras = this.tappedForManaExtras(object);
@@ -15417,18 +15441,17 @@ export class Game {
       if (fixed === null) return asIs;
       base = [{ picks: [], makes: fixed }];
     }
-    const out: { manaColors: readonly ManaType[]; makes: readonly ManaType[] }[] = [];
+    const out: StandaloneManaVariant[] = [];
     for (const variant of base) {
       const made = variant.makes.flatMap((t) => Array<ManaType>(multiplier).fill(t));
-      let combos: { manaColors: readonly ManaType[]; makes: readonly ManaType[] }[] = [
-        { manaColors: variant.picks, makes: made },
-      ];
+      let combos: StandaloneManaVariant[] = [{ manaColors: variant.picks, makes: made, ...withSplit(variant.split) }];
       for (const extra of this.extraManaOutputs(object, made, player)) {
         combos =
           "units" in extra
-            ? combos.map((c) => ({ manaColors: c.manaColors, makes: [...c.makes, ...extra.units] }))
+            ? combos.map((c) => ({ ...c, makes: [...c.makes, ...extra.units] }))
             : combos.flatMap((c) =>
                 extra.choices.map((t) => ({
+                  ...c,
                   manaColors: [...c.manaColors, t],
                   makes: [...c.makes, ...Array<ManaType>(extra.amount).fill(t)],
                 })),

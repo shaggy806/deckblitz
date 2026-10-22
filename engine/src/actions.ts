@@ -257,6 +257,14 @@ export interface WaterbendOffer {
   readonly byX?: readonly { readonly max: number; readonly proof: readonly ObjectId[] }[];
 }
 
+/** "X mana in any combination of `colors`" at a live X of `amount`, too many
+ * splits to list: the player picks the split (an `activate-ability`
+ * offer's `manaSplit`). */
+export interface ManaSplitOffer {
+  readonly colors: readonly ManaType[];
+  readonly amount: number;
+}
+
 /** A waterbend offer's `max` and `proof` at `x` — the offer's own when its
  * cost has no `{X}`. */
 export function waterbendAt(
@@ -1150,6 +1158,13 @@ export type LegalAction =
        * client can offer them as separate menu entries; absent for an ability
        * whose output is fixed. */
       readonly manaColors?: readonly ManaType[];
+      /** Set on the one extra variant of "X mana in any combination of …"
+       * offered when a live X has too many splits to list (the rest are all
+       * of one type each): the player picks how many of each of `colors`,
+       * `amount` in all, and activates with those picks as `manaColors`'
+       * first `amount` entries — any picks after them (a triggered mana
+       * ability's) as this variant has them. */
+      readonly manaSplit?: ManaSplitOffer;
       /** Set when this is nothing but "{T}: Add [this one mana]" — no other
        * cost, no restriction, no rider (`plainTapMana`). Two offers of one
        * source with the same `plainMana` tap it for the same mana (a City of

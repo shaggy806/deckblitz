@@ -358,7 +358,6 @@ animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When a
 delete its detail there and move this line to `COMPLETED.md`.
 
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
-- **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).

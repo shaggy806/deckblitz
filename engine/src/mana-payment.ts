@@ -399,6 +399,32 @@ export function multipliedManaOption(option: ManaOption, times: number): ManaOpt
   }));
 }
 
+/**
+ * The split a player picks for themselves when {@link standaloneManaChoices}
+ * has too many to list — "X mana in any combination of …" with a live X past
+ * {@link MAX_STANDALONE_UNITS}, offered there as all of one type per type —
+ * or `null` when the list has every split (or there's no split to pick). A
+ * client asks how many of each and activates with those picks
+ * (`activate-ability`'s `manaColors`, one per unit), which the engine takes
+ * as it takes any listed variant's.
+ */
+export function standaloneManaSplit(
+  ability: ActivatedAbility,
+  oneOf: (mana: { readonly oneOf: readonly ManaType[] } | BoardManaList) => readonly ManaType[],
+  liveAmount: () => number | null,
+): { readonly colors: readonly ManaType[]; readonly amount: number } | null {
+  const effect = ability.effect;
+  if (effect === null || effect.kind !== "add-mana" || typeof effect.amount === "number") return null;
+  const mana = effect.mana;
+  if (typeof mana !== "object" || "all" in mana || "eachColorAmong" in mana) return null;
+  if ("same" in mana && mana.same === true) return null;
+  const amount = liveAmount();
+  if (amount === null || amount < 1) return null;
+  const colors = oneOf(mana);
+  if (colors.length < 2 || splitCount(colors.length, amount) * amount <= MAX_STANDALONE_UNITS) return null;
+  return { colors, amount };
+}
+
 /** See {@link multipliedManaOption}. */
 const MAX_MULTIPLIED_SPLITS = 70;
 

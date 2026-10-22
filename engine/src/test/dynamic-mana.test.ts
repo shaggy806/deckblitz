@@ -305,8 +305,29 @@ describe("Vivi Ornitier", () => {
     const twenty = offered();
     expect(twenty).toHaveLength(21);
     expect(twenty).toContainEqual([...Array(10).fill("U"), ...Array(10).fill("R")]);
+    // Past the list's budget: all of one colour each, and one whose split
+    // the player picks.
     counters(game, vivi, 1_000_000);
-    expect(offered()).toHaveLength(2);
+    expect(offered()).toHaveLength(3);
+  });
+
+  it("lets the player pick any split of a large X by hand", () => {
+    const { game, vivi } = setup();
+    counters(game, vivi, 30);
+    const offers = game.legalActions(A).filter((a) => a.kind === "activate-ability" && a.source === vivi);
+    expect(offers).toHaveLength(3);
+    const split = offers.find((a) => a.kind === "activate-ability" && a.manaSplit !== undefined);
+    expect(split?.kind === "activate-ability" ? split.manaSplit : undefined).toEqual({ colors: ["U", "R"], amount: 30 });
+    game.dispatch({
+      type: "activate-ability",
+      player: A,
+      source: vivi,
+      abilityIndex: 0,
+      targets: [],
+      manaColors: [...Array(12).fill("U"), ...Array(18).fill("R")],
+    });
+    expect(pool(game).U).toBe(12);
+    expect(pool(game).R).toBe(18);
   });
 
   it("makes exactly X of its own colours whatever manaColors a client sends", () => {

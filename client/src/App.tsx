@@ -1616,6 +1616,10 @@ function Table({
   // "N mana in any combination of …": how many of each colour so far.
   // Cleared once sent, so the next split starts from nothing.
   const [manaSplit, setManaSplit] = useState<Readonly<Record<string, number>>>({})
+  // A mana ability activated by hand whose split is the player's to pick
+  // (`manaSplit` on the offer: "X mana in any combination" with too many
+  // splits to list), asked in the same strip as the engine's own.
+  const [pendingManaSplit, setPendingManaSplit] = useState<AbilityAction | null>(null)
   // Time travel's answer as it's built: +1 or -1 per object, absent = neither;
   // and which way a click on a permanent goes.
   const [timeTravelPicks, setTimeTravelPicks] = useState<Readonly<Record<string, 1 | -1>>>({})
@@ -1879,6 +1883,8 @@ function Table({
     (a): a is ProliferateAction => a.kind === 'proliferate',
   )
   const splitManaAction = actions.find((a): a is SplitManaAction => a.kind === 'split-mana')
+  // The split to ask: the engine's, or a hand activation's (`pendingManaSplit`).
+  const manaSplitAsk = splitManaAction ?? pendingManaSplit?.manaSplit
   const timeTravelAction = actions.find((a): a is TimeTravelAction => a.kind === 'time-travel')
   const ventureAction = actions.find((a): a is VentureAction => a.kind === 'venture')
   const scryAction = actions.find((a): a is ScryAction => a.kind === 'scry')
@@ -2056,6 +2062,8 @@ function Table({
                       ? 'choose-waterbend'
                     : pendingDivision
                       ? 'choose-division'
+                    : pendingManaSplit
+                      ? 'split-mana'
                     : activeTargeting
                       ? 'targeting'
                     // Last: once a variant is picked, its X / modes / targets
@@ -2492,6 +2500,11 @@ function Table({
           return
         }
         setPendingX({ action: ab, value: ab.xCost.maxX })
+        return
+      }
+      if (ab.manaSplit) {
+        setManaSplit({})
+        setPendingManaSplit(ab)
         return
       }
       if (ab.sacrifice) {
@@ -4204,11 +4217,13 @@ function Table({
         </button>
       </div>
     )
-  } else if (mode === 'split-mana' && splitManaAction) {
+  } else if (mode === 'split-mana' && manaSplitAsk) {
     // "N mana in any combination of …", how many of each colour, as one
     // answer — the engine used to ask each unit's colour in turn, fifty times
-    // for a big Klauth attack (a live report, 2026-10-08).
-    const { colors, amount } = splitManaAction
+    // for a big Klauth attack (a live report, 2026-10-08). The same strip
+    // asks for a mana ability activated by hand with too many splits to list.
+    const byHand = splitManaAction ? null : pendingManaSplit
+    const { colors, amount } = manaSplitAsk
     const sum = colors.reduce((n, c) => n + (manaSplit[c] ?? 0), 0)
     controls = (
       <div className="controls">
@@ -4240,11 +4255,28 @@ function Table({
               colors.flatMap((c): [string, number][] => ((manaSplit[c] ?? 0) > 0 ? [[c, manaSplit[c] ?? 0]] : [])),
             )
             setManaSplit({})
-            game.dispatch({ type: 'split-mana', player: seat, counts } as Action)
+            if (byHand) {
+              // The split's picks first, then any after them as the offer
+              // has them (a triggered mana ability's).
+              const picks = colors.flatMap((c) => Array<ManaType>(manaSplit[c] ?? 0).fill(c))
+              setPendingManaSplit(null)
+              startAbility({ ...byHand, manaColors: [...picks, ...(byHand.manaColors ?? []).slice(amount)] })
+            } else game.dispatch({ type: 'split-mana', player: seat, counts } as Action)
           }}
         >
           Add mana
         </button>
+        {byHand ? (
+          <button
+            type="button"
+            onClick={() => {
+              setManaSplit({})
+              setPendingManaSplit(null)
+            }}
+          >
+            Cancel
+          </button>
+        ) : null}
       </div>
     )
   } else if (mode === 'venture' && ventureAction) {

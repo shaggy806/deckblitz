@@ -564,6 +564,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **Large live mana amounts by hand** (2026-10-22): "X mana in any combination of …" with a live X
+  too large to list every split of (two colours past X = 22) offers one more variant whose split
+  the player picks in the split-mana strip (`manaSplit`, `standaloneManaSplit`); choosing what
+  floats past a payment is that activation made by hand before casting (rule 601.2g), the pool
+  then paying.
 - **A local game picked up without the room server** (a bug report, 2026-10-20; landed
   2026-10-22): a page loading into one of the tab's local rooms opens its socket from the worker
   at once (`HybridSocket`'s `startsHere`), the server's side opening behind it — a reload with the
