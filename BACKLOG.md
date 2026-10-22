@@ -60,7 +60,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 27 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 26 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
@@ -143,12 +143,14 @@ section keeps only what to do next.
   Battlebond, no engine change; batch 128 Dominaria, on kicker's scaffolder template; batch 129
   Rivals of Ixalan, on ascend; batch 137 Ixalan and Commander 2017, no engine change; batch 138
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
-  library"); **next, Amonkhet** (141 left, with the earlier aftermath and exert-cost cards
-  now unblocked), then Aether Revolt. Leads after HOU: "lands you control don't untap during
-  your next untap step", later lands included (`effect:player-next-untap-step-skip-filter` —
-  the five Gods' Last cards and Imaginary Threats), "discard any number of cards"
-  (`new:discard-any-number` — 14 cards: Neheb, Cavalier of Flame, the Rites), "your life total
-  becomes N" (`effect:life-total-becomes`)
+  library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
+  untap step" and "discard any number of cards"); **next, Aether Revolt** (106 left), then
+  Kaladesh. "Discard any number of cards" is built but its earlier cards wait for a recheck
+  (`cards:needs -- --feature decision:discard-any-number` — Fable of the Mirror-Breaker,
+  Neheb, Daretti, Cavalier of Flame). Leads: "choose a card name" (`decision:choose-card-name`
+  — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an
+  additional creature" (`static:block-additional-creature` — 4), "your life total becomes N"
+  (`effect:life-total-becomes` — 7)
   (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
   "if that creature would die this turn, exile it instead" five
   (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as

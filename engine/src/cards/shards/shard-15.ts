@@ -73,6 +73,7 @@ import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-genera
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
 import _poolClaim from "../pool/claim.js";
+import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollision from "../pool/collision.js";
@@ -96,6 +97,7 @@ import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
 import _poolCryptFeaster from "../pool/crypt-feaster.js";
 import _poolCrystalQuarry from "../pool/crystal-quarry.js";
+import _poolCuratorOfMysteries from "../pool/curator-of-mysteries.js";
 import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
 import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
@@ -109,6 +111,7 @@ import _poolDemonicGifts from "../pool/demonic-gifts.js";
 import _poolDemonicVigor from "../pool/demonic-vigor.js";
 import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
+import _poolDestined from "../pool/destined.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
 import _poolDidactEcho from "../pool/didact-echo.js";
 import _poolDiregrafHorde from "../pool/diregraf-horde.js";
@@ -287,6 +290,7 @@ import _poolLarderZombie from "../pool/larder-zombie.js";
 import _poolLavabrinkFloodgates from "../pool/lavabrink-floodgates.js";
 import _poolLawlessBroker from "../pool/lawless-broker.js";
 import _poolLazotepReaver from "../pool/lazotep-reaver.js";
+import _poolLead from "../pool/lead.js";
 import _poolLegionStronghold from "../pool/legion-stronghold.js";
 import _poolLeoninWarleader from "../pool/leonin-warleader.js";
 import _poolLierDiscipleOfTheDrowned from "../pool/lier-disciple-of-the-drowned.js";
@@ -639,6 +643,7 @@ const shard: CardShard = {
     _poolCidFreeflierPilot,
     _poolCinderbones,
     _poolClaim,
+    _poolClearTheMind,
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
     _poolCollision,
@@ -662,6 +667,7 @@ const shard: CardShard = {
     _poolCrowdFavorites,
     _poolCryptFeaster,
     _poolCrystalQuarry,
+    _poolCuratorOfMysteries,
     _poolCutthroatContender,
     _poolCybermenSquadron,
     _poolCynetteJellyDrover,
@@ -675,6 +681,7 @@ const shard: CardShard = {
     _poolDemonicVigor,
     _poolDenyTheWitch,
     _poolDespark,
+    _poolDestined,
     _poolDiaryOfDreams,
     _poolDidactEcho,
     _poolDiregrafHorde,
@@ -853,6 +860,7 @@ const shard: CardShard = {
     _poolLavabrinkFloodgates,
     _poolLawlessBroker,
     _poolLazotepReaver,
+    _poolLead,
     _poolLegionStronghold,
     _poolLeoninWarleader,
     _poolLierDiscipleOfTheDrowned,

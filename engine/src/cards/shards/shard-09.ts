@@ -123,6 +123,7 @@ import _poolDeadlyAlliance from "../pool/deadly-alliance.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
 import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
+import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
@@ -169,6 +170,7 @@ import _poolFeedTheSerpent from "../pool/feed-the-serpent.js";
 import _poolFeistySpikeling from "../pool/feisty-spikeling.js";
 import _poolFeralShadow from "../pool/feral-shadow.js";
 import _poolFertileFootsteps from "../pool/fertile-footsteps.js";
+import _poolFight from "../pool/fight.js";
 import _poolFireLordAzula from "../pool/fire-lord-azula.js";
 import _poolFireProphecy from "../pool/fire-prophecy.js";
 import _poolFireSnake from "../pool/fire-snake.js";
@@ -293,6 +295,7 @@ import _poolLedgerShredder from "../pool/ledger-shredder.js";
 import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
+import _poolLilianaDeathWielder from "../pool/liliana-death-wielder.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
@@ -309,6 +312,7 @@ import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
+import _poolMind from "../pool/mind.js";
 import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
 import _poolMindwrackHarpy from "../pool/mindwrack-harpy.js";
 import _poolMinersGuidewing from "../pool/miners-guidewing.js";
@@ -331,6 +335,8 @@ import _poolNayaCharm from "../pool/naya-charm.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
 import _poolNetherHorror from "../pool/nether-horror.js";
 import _poolNethroiApexOfDeath from "../pool/nethroi-apex-of-death.js";
+import _poolNeverReturn from "../pool/never-return.js";
+import _poolNever from "../pool/never.js";
 import _poolNezumiCutthroat from "../pool/nezumi-cutthroat.js";
 import _poolNightsWhisper from "../pool/nights-whisper.js";
 import _poolNightsquadCommando from "../pool/nightsquad-commando.js";
@@ -379,6 +385,7 @@ import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
 import _poolPriceOfBeauty from "../pool/price-of-beauty.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
+import _poolPrimalCommand from "../pool/primal-command.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
 import _poolPrimordialOoze from "../pool/primordial-ooze.js";
@@ -732,6 +739,7 @@ const shard: CardShard = {
     _poolDeadlyRecluse,
     _poolDeathInTheFamily,
     _poolDefiantKhenra,
+    _poolDesiccatedNaga,
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
@@ -778,6 +786,7 @@ const shard: CardShard = {
     _poolFeistySpikeling,
     _poolFeralShadow,
     _poolFertileFootsteps,
+    _poolFight,
     _poolFireLordAzula,
     _poolFireProphecy,
     _poolFireSnake,
@@ -902,6 +911,7 @@ const shard: CardShard = {
     _poolLieInWait,
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
+    _poolLilianaDeathWielder,
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
     _poolLushPortico,
@@ -918,6 +928,7 @@ const shard: CardShard = {
     _poolMemoryWorm,
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
+    _poolMind,
     _poolMindseekerOculus,
     _poolMindwrackHarpy,
     _poolMinersGuidewing,
@@ -940,6 +951,8 @@ const shard: CardShard = {
     _poolNemesisMask,
     _poolNetherHorror,
     _poolNethroiApexOfDeath,
+    _poolNeverReturn,
+    _poolNever,
     _poolNezumiCutthroat,
     _poolNightsWhisper,
     _poolNightsquadCommando,
@@ -988,6 +1001,7 @@ const shard: CardShard = {
     _poolPriceOfBeauty,
     _poolPriceOfFreedom,
     _poolPricklyBoggart,
+    _poolPrimalCommand,
     _poolPrimalRage,
     _poolPrimalWitchstalker,
     _poolPrimordialOoze,

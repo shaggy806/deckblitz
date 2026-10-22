@@ -72,6 +72,7 @@ import _poolCaldaiaStrongarm from "../pool/caldaia-strongarm.js";
 import _poolCanyonCrawler from "../pool/canyon-crawler.js";
 import _poolCaretakersTalent from "../pool/caretakers-talent.js";
 import _poolCartographersSurvey from "../pool/cartographers-survey.js";
+import _poolCartoucheOfStrength from "../pool/cartouche-of-strength.js";
 import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
 import _poolCausticHound from "../pool/caustic-hound.js";
 import _poolCavernThoctar from "../pool/cavern-thoctar.js";
@@ -146,6 +147,7 @@ import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
+import _poolEnigmaDrake from "../pool/enigma-drake.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
 import _poolEternalStudent from "../pool/eternal-student.js";
 import _poolEtherealElk from "../pool/ethereal-elk.js";
@@ -331,6 +333,7 @@ import _poolOjerAxonilDeepestMight from "../pool/ojer-axonil-deepest-might.js";
 import _poolOldGhastbark from "../pool/old-ghastbark.js";
 import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
+import _poolOraclesVault from "../pool/oracles-vault.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOsaiVultures from "../pool/osai-vultures.js";
@@ -467,6 +470,7 @@ import _poolStillnessInMotion from "../pool/stillness-in-motion.js";
 import _poolStingSlinger from "../pool/sting-slinger.js";
 import _poolStingerquillCharm from "../pool/stingerquill-charm.js";
 import _poolStingingBarrier from "../pool/stinging-barrier.js";
+import _poolStirTheSands from "../pool/stir-the-sands.js";
 import _poolStolenGrain from "../pool/stolen-grain.js";
 import _poolStormFleetSprinter from "../pool/storm-fleet-sprinter.js";
 import _poolStormForceOfNature from "../pool/storm-force-of-nature.js";
@@ -505,6 +509,7 @@ import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
+import _poolTrialOfStrength from "../pool/trial-of-strength.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTroveTracker from "../pool/trove-tracker.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
@@ -658,6 +663,7 @@ const shard: CardShard = {
     _poolCanyonCrawler,
     _poolCaretakersTalent,
     _poolCartographersSurvey,
+    _poolCartoucheOfStrength,
     _poolCaseOfTheCrimsonPulse,
     _poolCausticHound,
     _poolCavernThoctar,
@@ -732,6 +738,7 @@ const shard: CardShard = {
     _poolElvishPromenade,
     _poolEndriderSpikespitter,
     _poolEnduringInnocence,
+    _poolEnigmaDrake,
     _poolErietteOfTheCharmedApple,
     _poolEternalStudent,
     _poolEtherealElk,
@@ -917,6 +924,7 @@ const shard: CardShard = {
     _poolOldGhastbark,
     _poolOminousSeas,
     _poolOnyxMage,
+    _poolOraclesVault,
     _poolOrbitalPlunge,
     _poolOrcishMedicine,
     _poolOsaiVultures,
@@ -1053,6 +1061,7 @@ const shard: CardShard = {
     _poolStingSlinger,
     _poolStingerquillCharm,
     _poolStingingBarrier,
+    _poolStirTheSands,
     _poolStolenGrain,
     _poolStormFleetSprinter,
     _poolStormForceOfNature,
@@ -1091,6 +1100,7 @@ const shard: CardShard = {
     _poolTorchBreath,
     _poolTormodTheDesecrator,
     _poolTorturePit,
+    _poolTrialOfStrength,
     _poolTriumphantAdventurer,
     _poolTroveTracker,
     _poolTuknirDeathlock,

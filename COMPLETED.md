@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Amonkhet, whole** (batch 139): **embalm** (`embalmAbility`, rule 702.128a), **"lands you
+  control don't untap during your next untap step"** (`skip-next-untap`, later lands included —
+  the Gods' Last cards) and **"discard any number of cards"** (the discard decision's `upTo`,
+  with the client's discard bar) built; 136 authored by six `card-author` agents and the lead —
+  Kefnet, Bontu, Hazoret, Oketra, Rhonas's cycle, Gideon, Martial Paragon,
+  Liliana, Death Wielder, Cut // Ribbons and 13 more aftermath cards, Sacred Cat — with 18
+  rechecked from earlier batches (Kozilek, Butcher of Truth, Ulamog, the Infinite Gyre, Primal
+  Command, Feldon's Cane, The Mending of Dominaria, Pride Sovereign); AKH is 213 of 241. 28
+  blocked, "choose a card name" the most shared (2026-10-22).
 - **Hour of Devastation, whole** (batch 138): **aftermath** (rule 702.127a — the second half
   cast only from a graveyard, then exiled), **exert as an activation cost** (`exertSelf`, rule
   701.43, read by the scaffolder) and **"shuffle your graveyard into your library"** built; 89

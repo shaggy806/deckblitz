@@ -127,6 +127,7 @@ import _poolDebtorsTransport from "../pool/debtors-transport.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
+import _poolDevotedCropMate from "../pool/devoted-crop-mate.js";
 import _poolDevourIntellect from "../pool/devour-intellect.js";
 import _poolDevouringLight from "../pool/devouring-light.js";
 import _poolDevouringSwarm from "../pool/devouring-swarm.js";
@@ -186,6 +187,7 @@ import _poolFemerefScouts from "../pool/femeref-scouts.js";
 import _poolFerociousZheng from "../pool/ferocious-zheng.js";
 import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
 import _poolFireShrineKeeper from "../pool/fire-shrine-keeper.js";
+import _poolFlamebladeAdept from "../pool/flameblade-adept.js";
 import _poolFlamekinGildweaver from "../pool/flamekin-gildweaver.js";
 import _poolFledglingDjinn from "../pool/fledgling-djinn.js";
 import _poolFleetfeatherSandals from "../pool/fleetfeather-sandals.js";
@@ -250,6 +252,7 @@ import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
 import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
 import _poolHeartlessHidetsugu from "../pool/heartless-hidetsugu.js";
+import _poolHeaven from "../pool/heaven.js";
 import _poolHeightenedReflexes from "../pool/heightened-reflexes.js";
 import _poolHellsparkElemental from "../pool/hellspark-elemental.js";
 import _poolHellspurBrute from "../pool/hellspur-brute.js";
@@ -263,6 +266,7 @@ import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
+import _poolHonoredHydra from "../pool/honored-hydra.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
@@ -312,6 +316,7 @@ import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
 import _poolLurkingLizards from "../pool/lurking-lizards.js";
+import _poolLuxaRiverShrine from "../pool/luxa-river-shrine.js";
 import _poolLychguard from "../pool/lychguard.js";
 import _poolMadameHydraReanimated from "../pool/madame-hydra-reanimated.js";
 import _poolMagitekArmor from "../pool/magitek-armor.js";
@@ -405,6 +410,7 @@ import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolRewind from "../pool/rewind.js";
+import _poolRibbons from "../pool/ribbons.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
 import _poolRingOfImmortals from "../pool/ring-of-immortals.js";
 import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
@@ -460,6 +466,7 @@ import _poolSpidersManHeroicHorde from "../pool/spiders-man-heroic-horde.js";
 import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
 import _poolSpitefulHexmage from "../pool/spiteful-hexmage.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
+import _poolSplendidAgony from "../pool/splendid-agony.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
@@ -475,6 +482,7 @@ import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
 import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
+import _poolTahCropSkirmisher from "../pool/tah-crop-skirmisher.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
@@ -699,6 +707,7 @@ const shard: CardShard = {
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,
+    _poolDevotedCropMate,
     _poolDevourIntellect,
     _poolDevouringLight,
     _poolDevouringSwarm,
@@ -758,6 +767,7 @@ const shard: CardShard = {
     _poolFerociousZheng,
     _poolFireOmenCrane,
     _poolFireShrineKeeper,
+    _poolFlamebladeAdept,
     _poolFlamekinGildweaver,
     _poolFledglingDjinn,
     _poolFleetfeatherSandals,
@@ -822,6 +832,7 @@ const shard: CardShard = {
     _poolHazezonShaperOfSand,
     _poolHeartOfRamos,
     _poolHeartlessHidetsugu,
+    _poolHeaven,
     _poolHeightenedReflexes,
     _poolHellsparkElemental,
     _poolHellspurBrute,
@@ -835,6 +846,7 @@ const shard: CardShard = {
     _poolHoarShade,
     _poolHollowScavenger,
     _poolHomicideInvestigator,
+    _poolHonoredHydra,
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolIdolOfTheDeepKing,
@@ -884,6 +896,7 @@ const shard: CardShard = {
     _poolLoyalWarhound,
     _poolLuminousPhantom,
     _poolLurkingLizards,
+    _poolLuxaRiverShrine,
     _poolLychguard,
     _poolMadameHydraReanimated,
     _poolMagitekArmor,
@@ -977,6 +990,7 @@ const shard: CardShard = {
     _poolReturnUponTheTide,
     _poolReverseDamage,
     _poolRewind,
+    _poolRibbons,
     _poolRinAndSeriInseparable,
     _poolRingOfImmortals,
     _poolRingOfXathrid,
@@ -1032,6 +1046,7 @@ const shard: CardShard = {
     _poolSpiteflameWitch,
     _poolSpitefulHexmage,
     _poolSpitefulMotives,
+    _poolSplendidAgony,
     _poolStingingHivemaster,
     _poolStingingShot,
     _poolStitchTogether,
@@ -1047,6 +1062,7 @@ const shard: CardShard = {
     _poolSurrakarBanisher,
     _poolSuspiciousShambler,
     _poolSwaggeringCorsair,
+    _poolTahCropSkirmisher,
     _poolTalrand,
     _poolTanaTheBloodsower,
     _poolTasigurTheGoldenFang,

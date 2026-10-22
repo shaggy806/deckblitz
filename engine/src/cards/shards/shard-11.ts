@@ -124,6 +124,7 @@ import _poolDawnhartMentor from "../pool/dawnhart-mentor.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
 import _poolDeadeyeBrawler from "../pool/deadeye-brawler.js";
 import _poolDecommission from "../pool/decommission.js";
+import _poolDeemWorthy from "../pool/deem-worthy.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
@@ -505,6 +506,7 @@ import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
 import _poolSwornCompanions from "../pool/sworn-companions.js";
+import _poolSynchronizedStrike from "../pool/synchronized-strike.js";
 import _poolSyndicOfTithes from "../pool/syndic-of-tithes.js";
 import _poolSyndicateEnforcer from "../pool/syndicate-enforcer.js";
 import _poolTaintedWood from "../pool/tainted-wood.js";
@@ -736,6 +738,7 @@ const shard: CardShard = {
     _poolDawnsireSunstarDreadnought,
     _poolDeadeyeBrawler,
     _poolDecommission,
+    _poolDeemWorthy,
     _poolDefacingDuskmage,
     _poolDefendersOfHumanity,
     _poolDelusionsOfMediocrity,
@@ -1117,6 +1120,7 @@ const shard: CardShard = {
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,
     _poolSwornCompanions,
+    _poolSynchronizedStrike,
     _poolSyndicOfTithes,
     _poolSyndicateEnforcer,
     _poolTaintedWood,

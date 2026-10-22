@@ -9,6 +9,7 @@ import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
+import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAlpineGuide from "../pool/alpine-guide.js";
@@ -213,6 +214,7 @@ import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
+import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinMorningstar from "../pool/goblin-morningstar.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
@@ -235,6 +237,7 @@ import _poolHardenedEscort from "../pool/hardened-escort.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
 import _poolHaveABite from "../pool/have-a-bite.js";
 import _poolHaviTheAllFather from "../pool/havi-the-all-father.js";
+import _poolHazeOfPollen from "../pool/haze-of-pollen.js";
 import _poolHellrider from "../pool/hellrider.js";
 import _poolHeraldOfWar from "../pool/herald-of-war.js";
 import _poolHermitDruid from "../pool/hermit-druid.js";
@@ -331,6 +334,7 @@ import _poolMoonsnareSpecialist from "../pool/moonsnare-specialist.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMulch from "../pool/mulch.js";
+import _poolNagaVitalist from "../pool/naga-vitalist.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNascentMetamorph from "../pool/nascent-metamorph.js";
 import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
@@ -399,6 +403,7 @@ import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
+import _poolRiverSerpent from "../pool/river-serpent.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
 import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
@@ -438,6 +443,7 @@ import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
 import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
 import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
+import _poolShefetMonitor from "../pool/shefet-monitor.js";
 import _poolShimmerwingChimera from "../pool/shimmerwing-chimera.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
 import _poolShivanFire from "../pool/shivan-fire.js";
@@ -618,6 +624,7 @@ const shard: CardShard = {
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
     _poolAgentPhilCoulson,
+    _poolAhnCropChampion,
     _poolAjaniOutlandChaperone,
     _poolAlpharaelStonechosen,
     _poolAlpineGuide,
@@ -822,6 +829,7 @@ const shard: CardShard = {
     _poolGladiolusAmicitia,
     _poolGlassCasket,
     _poolGlittermonger,
+    _poolGloryBoundInitiate,
     _poolGoblinHero,
     _poolGoblinMorningstar,
     _poolGoblinReplica,
@@ -844,6 +852,7 @@ const shard: CardShard = {
     _poolHarriedArtisan,
     _poolHaveABite,
     _poolHaviTheAllFather,
+    _poolHazeOfPollen,
     _poolHellrider,
     _poolHeraldOfWar,
     _poolHermitDruid,
@@ -940,6 +949,7 @@ const shard: CardShard = {
     _poolMoorFiend,
     _poolMouserMarkIii,
     _poolMulch,
+    _poolNagaVitalist,
     _poolNantukoShade,
     _poolNascentMetamorph,
     _poolNastyLittleRabbit,
@@ -1008,6 +1018,7 @@ const shard: CardShard = {
     _poolRilingDawnbreaker,
     _poolRiotSpikes,
     _poolRipjawRaptor,
+    _poolRiverSerpent,
     _poolRiverchurnMonument,
     _poolRiverwalkTechnique,
     _poolRiveteersDecoy,
@@ -1047,6 +1058,7 @@ const shard: CardShard = {
     _poolShadowfaxLordOfHorses,
     _poolShadowspear,
     _poolShamblingCieth,
+    _poolShefetMonitor,
     _poolShimmerwingChimera,
     _poolShineshadowSnarl,
     _poolShivanFire,

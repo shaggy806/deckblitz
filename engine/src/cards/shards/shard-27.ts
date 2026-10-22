@@ -10,6 +10,7 @@ import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
+import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
@@ -170,6 +171,7 @@ import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFlood from "../pool/flood.js";
+import _poolFloodwaters from "../pool/floodwaters.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
@@ -264,6 +266,7 @@ import _poolKoskunKeep from "../pool/koskun-keep.js";
 import _poolKruphixGodOfHorizons from "../pool/kruphix-god-of-horizons.js";
 import _poolKulrathMystic from "../pool/kulrath-mystic.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
+import _poolLabyrinthGuardian from "../pool/labyrinth-guardian.js";
 import _poolLanternOfRevealing from "../pool/lantern-of-revealing.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
@@ -339,6 +342,7 @@ import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
+import _poolPitilessVizier from "../pool/pitiless-vizier.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
@@ -369,6 +373,7 @@ import _poolRavenousGiant from "../pool/ravenous-giant.js";
 import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
 import _poolRedrockSentinel from "../pool/redrock-sentinel.js";
+import _poolReduceRubble from "../pool/reduce-rubble.js";
 import _poolRefractionElemental from "../pool/refraction-elemental.js";
 import _poolRefuseCooperate from "../pool/refuse-cooperate.js";
 import _poolRegalLeosaur from "../pool/regal-leosaur.js";
@@ -388,6 +393,7 @@ import _poolRiverHeraldsBoon from "../pool/river-heralds-boon.js";
 import _poolRiverMerfolk from "../pool/river-merfolk.js";
 import _poolRiverwheelAerialists from "../pool/riverwheel-aerialists.js";
 import _poolRmsTitanic from "../pool/rms-titanic.js";
+import _poolRoad from "../pool/road.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
@@ -590,6 +596,7 @@ const shard: CardShard = {
     _poolAdventurersAirship,
     _poolAeolipile,
     _poolAerieMystics,
+    _poolAhnCropCrasher,
     _poolAhriman,
     _poolAjanisAnguish,
     _poolAkroanPhalanx,
@@ -750,6 +757,7 @@ const shard: CardShard = {
     _poolFieryJustice,
     _poolFiliThePathfinder,
     _poolFlood,
+    _poolFloodwaters,
     _poolFlowstoneWyvern,
     _poolFlusterstorm,
     _poolForceOfSavagery,
@@ -844,6 +852,7 @@ const shard: CardShard = {
     _poolKruphixGodOfHorizons,
     _poolKulrathMystic,
     _poolKyoshiWarriors,
+    _poolLabyrinthGuardian,
     _poolLanternOfRevealing,
     _poolLathnuSailback,
     _poolLeapingLizard,
@@ -919,6 +928,7 @@ const shard: CardShard = {
     _poolPestilence,
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
+    _poolPitilessVizier,
     _poolPoisedPractitioner,
     _poolPreordain,
     _poolPreyUpon,
@@ -949,6 +959,7 @@ const shard: CardShard = {
     _poolRazorgrassField,
     _poolRecover,
     _poolRedrockSentinel,
+    _poolReduceRubble,
     _poolRefractionElemental,
     _poolRefuseCooperate,
     _poolRegalLeosaur,
@@ -968,6 +979,7 @@ const shard: CardShard = {
     _poolRiverMerfolk,
     _poolRiverwheelAerialists,
     _poolRmsTitanic,
+    _poolRoad,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
     _poolRotTideGargantua,

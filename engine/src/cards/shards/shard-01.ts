@@ -203,6 +203,7 @@ import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
 import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
 import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
+import _poolHazoretTheFervent from "../pool/hazoret-the-fervent.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
@@ -221,6 +222,7 @@ import _poolIcebindPillar from "../pool/icebind-pillar.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
+import _poolInOketrasName from "../pool/in-oketras-name.js";
 import _poolInTheEyeOfChaos from "../pool/in-the-eye-of-chaos.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
@@ -529,6 +531,7 @@ import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVortexRunner from "../pool/vortex-runner.js";
 import _poolVoteOut from "../pool/vote-out.js";
 import _poolVraskasStoneglare from "../pool/vraskas-stoneglare.js";
+import _poolWanderInDeath from "../pool/wander-in-death.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWantedGriffin from "../pool/wanted-griffin.js";
@@ -771,6 +774,7 @@ const shard: CardShard = {
     _poolHawkeyesShot,
     _poolHaywireMite,
     _poolHazoretGodseeker,
+    _poolHazoretTheFervent,
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeirOfTheAncientFang,
@@ -789,6 +793,7 @@ const shard: CardShard = {
     _poolIconicShield,
     _poolIgnobleHierarch,
     _poolIllustriousHistorian,
+    _poolInOketrasName,
     _poolInTheEyeOfChaos,
     _poolIndulgentAristocrat,
     _poolInfiltrate,
@@ -1097,6 +1102,7 @@ const shard: CardShard = {
     _poolVortexRunner,
     _poolVoteOut,
     _poolVraskasStoneglare,
+    _poolWanderInDeath,
     _poolWanderOff,
     _poolWandertaleMentor,
     _poolWantedGriffin,

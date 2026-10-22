@@ -112,6 +112,7 @@ import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCuriousHerd from "../pool/curious-herd.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
+import _poolCutRibbons from "../pool/cut-ribbons.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
@@ -308,6 +309,7 @@ import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
+import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
@@ -481,6 +483,7 @@ import _poolStalkingDrone from "../pool/stalking-drone.js";
 import _poolStarCharter from "../pool/star-charter.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
+import _poolStartFinish from "../pool/start-finish.js";
 import _poolSteamcoreScholar from "../pool/steamcore-scholar.js";
 import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
@@ -522,6 +525,7 @@ import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
 import _poolTripNoose from "../pool/trip-noose.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
+import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
 import _poolUnearth from "../pool/unearth.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
@@ -548,6 +552,7 @@ import _poolVulpineGoliath from "../pool/vulpine-goliath.js";
 import _poolWallOfLostThoughts from "../pool/wall-of-lost-thoughts.js";
 import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
 import _poolWanderwineDistracter from "../pool/wanderwine-distracter.js";
+import _poolWarfireJavelineer from "../pool/warfire-javelineer.js";
 import _poolWarleadersCall from "../pool/warleaders-call.js";
 import _poolWarrenTorchmaster from "../pool/warren-torchmaster.js";
 import _poolWashOut from "../pool/wash-out.js";
@@ -693,6 +698,7 @@ const shard: CardShard = {
     _poolCuriousFarmAnimals,
     _poolCuriousHerd,
     _poolCutADeal,
+    _poolCutRibbons,
     _poolDaringDiscovery,
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
@@ -889,6 +895,7 @@ const shard: CardShard = {
     _poolLavaglidePathway,
     _poolLeylineBinding,
     _poolLightOfHope,
+    _poolLimitsOfSolidarity,
     _poolLitaLittleOrphanAmphibian,
     _poolLonelyArroyo,
     _poolLongRiversPull,
@@ -1062,6 +1069,7 @@ const shard: CardShard = {
     _poolStarCharter,
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
+    _poolStartFinish,
     _poolSteamcoreScholar,
     _poolSteampathCharger,
     _poolStockpilingCelebrant,
@@ -1103,6 +1111,7 @@ const shard: CardShard = {
     _poolTripNoose,
     _poolTunnelTipster,
     _poolTyrantOfKherRidges,
+    _poolUlamogTheInfiniteGyre,
     _poolUmbrisFearManifest,
     _poolUnearth,
     _poolUnexplainedDisappearance,
@@ -1129,6 +1138,7 @@ const shard: CardShard = {
     _poolWallOfLostThoughts,
     _poolWanderersIntervention,
     _poolWanderwineDistracter,
+    _poolWarfireJavelineer,
     _poolWarleadersCall,
     _poolWarrenTorchmaster,
     _poolWashOut,

@@ -54,6 +54,7 @@ import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
 import _poolBaskingCapybara from "../pool/basking-capybara.js";
 import _poolBatWhisperer from "../pool/bat-whisperer.js";
 import _poolBattleDisplay from "../pool/battle-display.js";
+import _poolBattlefieldScavenger from "../pool/battlefield-scavenger.js";
 import _poolBeatAPath from "../pool/beat-a-path.js";
 import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
@@ -191,6 +192,7 @@ import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
+import _poolFeed from "../pool/feed.js";
 import _poolFeralInstinct from "../pool/feral-instinct.js";
 import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
@@ -261,6 +263,7 @@ import _poolHeroOfTheNyxborn from "../pool/hero-of-the-nyxborn.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
 import _poolHomarid from "../pool/homarid.js";
+import _poolHonoredCropCaptain from "../pool/honored-crop-captain.js";
 import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
@@ -351,6 +354,7 @@ import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
 import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
+import _poolNefCropEntangler from "../pool/nef-crop-entangler.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
@@ -652,6 +656,7 @@ const shard: CardShard = {
     _poolBaskingCapybara,
     _poolBatWhisperer,
     _poolBattleDisplay,
+    _poolBattlefieldScavenger,
     _poolBeatAPath,
     _poolBeledrosWitherbloom,
     _poolBellowingCrier,
@@ -789,6 +794,7 @@ const shard: CardShard = {
     _poolFakeYourOwnDeath,
     _poolFateUnraveler,
     _poolFeasterOfFools,
+    _poolFeed,
     _poolFeralInstinct,
     _poolFightOn,
     _poolFiligreeSages,
@@ -859,6 +865,7 @@ const shard: CardShard = {
     _poolHinderingLight,
     _poolHireACrew,
     _poolHomarid,
+    _poolHonoredCropCaptain,
     _poolHornedLochWhale,
     _poolHorseshoeCrab,
     _poolHowlingGolem,
@@ -949,6 +956,7 @@ const shard: CardShard = {
     _poolMyconidSporeTender,
     _poolMysticSkull,
     _poolMythosOfIlluna,
+    _poolNefCropEntangler,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
     _poolNicoMinoruRunaway,

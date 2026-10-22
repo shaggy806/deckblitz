@@ -362,6 +362,7 @@ import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
+import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
@@ -953,6 +954,7 @@ const shard: CardShard = {
     _poolPrismaticVista,
     _poolProsperTomeBound,
     _poolProwlerClawedThief,
+    _poolPursueGlory,
     _poolPutrefax,
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,

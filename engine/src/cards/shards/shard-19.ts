@@ -43,6 +43,7 @@ import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
 import _poolBenalishTrapper from "../pool/benalish-trapper.js";
+import _poolBenefactionOfRhonas from "../pool/benefaction-of-rhonas.js";
 import _poolBewilder from "../pool/bewilder.js";
 import _poolBeyeenVeil from "../pool/beyeen-veil.js";
 import _poolBhaalsInvoker from "../pool/bhaals-invoker.js";
@@ -167,6 +168,7 @@ import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
+import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
@@ -526,6 +528,7 @@ import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
+import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
@@ -655,6 +658,7 @@ const shard: CardShard = {
     _poolBedheadBeastie,
     _poolBelleOfTheBrawl,
     _poolBenalishTrapper,
+    _poolBenefactionOfRhonas,
     _poolBewilder,
     _poolBeyeenVeil,
     _poolBhaalsInvoker,
@@ -779,6 +783,7 @@ const shard: CardShard = {
     _poolEternalOfHarshTruths,
     _poolEusocialEngineering,
     _poolEutropiaTheTwiceFavored,
+    _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
     _poolExsanguinate,
@@ -1138,6 +1143,7 @@ const shard: CardShard = {
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
+    _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
     _poolThrabenHeretic,

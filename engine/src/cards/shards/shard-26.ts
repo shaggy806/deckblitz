@@ -154,6 +154,7 @@ import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolFadingHope from "../pool/fading-hope.js";
+import _poolFaithOfTheDevoted from "../pool/faith-of-the-devoted.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
@@ -332,6 +333,7 @@ import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
+import _poolOnward from "../pool/onward.js";
 import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
@@ -449,6 +451,7 @@ import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
+import _poolSpringMind from "../pool/spring-mind.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
 import _poolStaffOfDomination from "../pool/staff-of-domination.js";
@@ -728,6 +731,7 @@ const shard: CardShard = {
     _poolExpressiveFiredancer,
     _poolExtinguishTheLight,
     _poolFadingHope,
+    _poolFaithOfTheDevoted,
     _poolFblthpImpossiblyLost,
     _poolFblthpTheLost,
     _poolFearOfDeath,
@@ -906,6 +910,7 @@ const shard: CardShard = {
     _poolObyrasAttendants,
     _poolOgreErrant,
     _poolOmnathLocusOfTheRoil,
+    _poolOnward,
     _poolOpportunity,
     _poolOpt,
     _poolOrcSureshot,
@@ -1023,6 +1028,7 @@ const shard: CardShard = {
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
     _poolSporeSwarm,
+    _poolSpringMind,
     _poolSpringmaneCervin,
     _poolSquiresDevotion,
     _poolStaffOfDomination,

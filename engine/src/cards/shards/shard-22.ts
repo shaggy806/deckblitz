@@ -132,6 +132,7 @@ import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
 import _poolDragonskullSummit from "../pool/dragonskull-summit.js";
+import _poolDrakeHaven from "../pool/drake-haven.js";
 import _poolDramaticReversal from "../pool/dramatic-reversal.js";
 import _poolDreadLinnorm from "../pool/dread-linnorm.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
@@ -301,6 +302,7 @@ import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMonsoon from "../pool/monsoon.js";
 import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
+import _poolMouthFeed from "../pool/mouth-feed.js";
 import _poolMudflatVillage from "../pool/mudflat-village.js";
 import _poolMyrBattlesphere from "../pool/myr-battlesphere.js";
 import _poolNadiersNightblade from "../pool/nadiers-nightblade.js";
@@ -360,6 +362,7 @@ import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolPteramander from "../pool/pteramander.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
+import _poolPyramidOfThePantheon from "../pool/pyramid-of-the-pantheon.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
@@ -421,6 +424,7 @@ import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
 import _poolShadewingLaureate from "../pool/shadewing-laureate.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShatteredEgo from "../pool/shattered-ego.js";
+import _poolShedWeakness from "../pool/shed-weakness.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
 import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
@@ -485,6 +489,7 @@ import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
+import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
 import _poolTemperedVeteran from "../pool/tempered-veteran.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
 import _poolTergridsShadow from "../pool/tergrids-shadow.js";
@@ -721,6 +726,7 @@ const shard: CardShard = {
     _poolDraconauticsEngineer,
     _poolDraconicMuralists,
     _poolDragonskullSummit,
+    _poolDrakeHaven,
     _poolDramaticReversal,
     _poolDreadLinnorm,
     _poolDrogskolCavalry,
@@ -890,6 +896,7 @@ const shard: CardShard = {
     _poolMonsoon,
     _poolMourningPatrol,
     _poolMouseTrapper,
+    _poolMouthFeed,
     _poolMudflatVillage,
     _poolMyrBattlesphere,
     _poolNadiersNightblade,
@@ -949,6 +956,7 @@ const shard: CardShard = {
     _poolProudMentor,
     _poolPteramander,
     _poolPurphorossIntervention,
+    _poolPyramidOfThePantheon,
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
     _poolRadhaHeartOfKeld,
@@ -1010,6 +1018,7 @@ const shard: CardShard = {
     _poolShadewingLaureate,
     _poolSharuumTheHegemon,
     _poolShatteredEgo,
+    _poolShedWeakness,
     _poolShepherdOfRot,
     _poolShinraReinforcements,
     _poolShireTerrace,
@@ -1074,6 +1083,7 @@ const shard: CardShard = {
     _poolTalismanOfUnity,
     _poolTattermungeManiac,
     _poolTelJiladExile,
+    _poolTemmetVizierOfNaktamun,
     _poolTemperedVeteran,
     _poolTergridsLantern,
     _poolTergridsShadow,

@@ -165,6 +165,7 @@ import _poolFateholdAnnex from "../pool/fatehold-annex.js";
 import _poolFavorableWinds from "../pool/favorable-winds.js";
 import _poolFearOfFailedTests from "../pool/fear-of-failed-tests.js";
 import _poolFeastOfSuccession from "../pool/feast-of-succession.js";
+import _poolFeldonsCane from "../pool/feldons-cane.js";
 import _poolFelisaFangOfSilverquill from "../pool/felisa-fang-of-silverquill.js";
 import _poolFeralFerocity from "../pool/feral-ferocity.js";
 import _poolFertilidsFavor from "../pool/fertilids-favor.js";
@@ -276,9 +277,11 @@ import _poolKraulWarrior from "../pool/kraul-warrior.js";
 import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
+import _poolLayBareTheHeart from "../pool/lay-bare-the-heart.js";
 import _poolLibrary from "../pool/library.js";
 import _poolLidlessGaze from "../pool/lidless-gaze.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
+import _poolLilianasInfluence from "../pool/lilianas-influence.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
@@ -344,6 +347,7 @@ import _poolOneWithNature from "../pool/one-with-nature.js";
 import _poolOneWithTheWind from "../pool/one-with-the-wind.js";
 import _poolOniCultAnvil from "../pool/oni-cult-anvil.js";
 import _poolOnulet from "../pool/onulet.js";
+import _poolOpenIntoWonder from "../pool/open-into-wonder.js";
 import _poolOranRiefHydra from "../pool/oran-rief-hydra.js";
 import _poolOrbOfDragonkind from "../pool/orb-of-dragonkind.js";
 import _poolOtrimiTheEverPlayful from "../pool/otrimi-the-ever-playful.js";
@@ -480,6 +484,7 @@ import _poolStripMine from "../pool/strip-mine.js";
 import _poolSultaiCharm from "../pool/sultai-charm.js";
 import _poolSunderingEruption from "../pool/sundering-eruption.js";
 import _poolSunshotMilitia from "../pool/sunshot-militia.js";
+import _poolSupplyCaravan from "../pool/supply-caravan.js";
 import _poolSurgeConductor from "../pool/surge-conductor.js";
 import _poolSurrakAndGoreclaw from "../pool/surrak-and-goreclaw.js";
 import _poolSurviveTheNight from "../pool/survive-the-night.js";
@@ -512,6 +517,7 @@ import _poolThrabenPurebloods from "../pool/thraben-purebloods.js";
 import _poolThrabenSentry from "../pool/thraben-sentry.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
 import _poolThrenodySinger from "../pool/threnody-singer.js";
+import _poolThresherLizard from "../pool/thresher-lizard.js";
 import _poolThrivingSkyclaw from "../pool/thriving-skyclaw.js";
 import _poolThroatseeker from "../pool/throatseeker.js";
 import _poolThunderDrake from "../pool/thunder-drake.js";
@@ -529,6 +535,7 @@ import _poolTorstenFounderOfBenalia from "../pool/torsten-founder-of-benalia.js"
 import _poolTradingPost from "../pool/trading-post.js";
 import _poolTragicFall from "../pool/tragic-fall.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
+import _poolTrialOfKnowledge from "../pool/trial-of-knowledge.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
 import _poolTrustedPegasus from "../pool/trusted-pegasus.js";
@@ -582,6 +589,7 @@ import _poolWarlordsAxe from "../pool/warlords-axe.js";
 import _poolWarpedTusker from "../pool/warped-tusker.js";
 import _poolWarstormSurge from "../pool/warstorm-surge.js";
 import _poolWashAway from "../pool/wash-away.js";
+import _poolWatchfulNaga from "../pool/watchful-naga.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
@@ -791,6 +799,7 @@ const shard: CardShard = {
     _poolFavorableWinds,
     _poolFearOfFailedTests,
     _poolFeastOfSuccession,
+    _poolFeldonsCane,
     _poolFelisaFangOfSilverquill,
     _poolFeralFerocity,
     _poolFertilidsFavor,
@@ -902,9 +911,11 @@ const shard: CardShard = {
     _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
     _poolLashOfThorns,
+    _poolLayBareTheHeart,
     _poolLibrary,
     _poolLidlessGaze,
     _poolLifecreedDuo,
+    _poolLilianasInfluence,
     _poolLiminalHold,
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
@@ -970,6 +981,7 @@ const shard: CardShard = {
     _poolOneWithTheWind,
     _poolOniCultAnvil,
     _poolOnulet,
+    _poolOpenIntoWonder,
     _poolOranRiefHydra,
     _poolOrbOfDragonkind,
     _poolOtrimiTheEverPlayful,
@@ -1106,6 +1118,7 @@ const shard: CardShard = {
     _poolSultaiCharm,
     _poolSunderingEruption,
     _poolSunshotMilitia,
+    _poolSupplyCaravan,
     _poolSurgeConductor,
     _poolSurrakAndGoreclaw,
     _poolSurviveTheNight,
@@ -1138,6 +1151,7 @@ const shard: CardShard = {
     _poolThrabenSentry,
     _poolThraxodemon,
     _poolThrenodySinger,
+    _poolThresherLizard,
     _poolThrivingSkyclaw,
     _poolThroatseeker,
     _poolThunderDrake,
@@ -1155,6 +1169,7 @@ const shard: CardShard = {
     _poolTradingPost,
     _poolTragicFall,
     _poolTreeOfPerdition,
+    _poolTrialOfKnowledge,
     _poolTriplicateTitan,
     _poolTroopOfPonies,
     _poolTrustedPegasus,
@@ -1208,6 +1223,7 @@ const shard: CardShard = {
     _poolWarpedTusker,
     _poolWarstormSurge,
     _poolWashAway,
+    _poolWatchfulNaga,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
     _poolWhenWeWereYoung,

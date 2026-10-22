@@ -113,6 +113,7 @@ import _poolDeadeyeRigHauler from "../pool/deadeye-rig-hauler.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDeathlessAncient from "../pool/deathless-ancient.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
+import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
 import _poolDemonWall from "../pool/demon-wall.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDemonsDue from "../pool/demons-due.js";
@@ -333,6 +334,7 @@ import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
 import _poolOblivionsHunger from "../pool/oblivions-hunger.js";
+import _poolOketraTheTrue from "../pool/oketra-the-true.js";
 import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOminousRoost from "../pool/ominous-roost.js";
@@ -457,6 +459,7 @@ import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
+import _poolSpring from "../pool/spring.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
 import _poolSternProctor from "../pool/stern-proctor.js";
@@ -694,6 +697,7 @@ const shard: CardShard = {
     _poolDeadlyBrew,
     _poolDeathlessAncient,
     _poolDedicatedCommons,
+    _poolDefiantGreatmaw,
     _poolDemonWall,
     _poolDemonicTutor,
     _poolDemonsDue,
@@ -914,6 +918,7 @@ const shard: CardShard = {
     _poolNyxbornMarauder,
     _poolOathOfNissa,
     _poolOblivionsHunger,
+    _poolOketraTheTrue,
     _poolOllenbockEscort,
     _poolOmenHawker,
     _poolOminousRoost,
@@ -1038,6 +1043,7 @@ const shard: CardShard = {
     _poolSpellgyre,
     _poolSpiderFood,
     _poolSpireMangler,
+    _poolSpring,
     _poolSteelbaneHydra,
     _poolSternDismissal,
     _poolSternProctor,

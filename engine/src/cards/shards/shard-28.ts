@@ -213,6 +213,7 @@ import _poolHardyVeteran from "../pool/hardy-veteran.js";
 import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHeadstrongBrute from "../pool/headstrong-brute.js";
+import _poolHeartPiercerManticore from "../pool/heart-piercer-manticore.js";
 import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHerdMigration from "../pool/herd-migration.js";
@@ -308,6 +309,7 @@ import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
 import _poolMotivatedPony from "../pool/motivated-pony.js";
+import _poolMouth from "../pool/mouth.js";
 import _poolMurasaBehemoth from "../pool/murasa-behemoth.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
@@ -337,6 +339,7 @@ import _poolOutmuscle from "../pool/outmuscle.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
 import _poolOxOfAgonas from "../pool/ox-of-agonas.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
+import _poolPainfulLesson from "../pool/painful-lesson.js";
 import _poolPaintedBluffs from "../pool/painted-bluffs.js";
 import _poolPalaceFamiliar from "../pool/palace-familiar.js";
 import _poolPalaceSentinels from "../pool/palace-sentinels.js";
@@ -360,6 +363,7 @@ import _poolPolygraphOrb from "../pool/polygraph-orb.js";
 import _poolPondProphet from "../pool/pond-prophet.js";
 import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
+import _poolPrepare from "../pool/prepare.js";
 import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
@@ -466,6 +470,7 @@ import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
+import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
@@ -809,6 +814,7 @@ const shard: CardShard = {
     _poolHareRaising,
     _poolHarmonize,
     _poolHeadstrongBrute,
+    _poolHeartPiercerManticore,
     _poolHellMongrel,
     _poolHeraldOfFaith,
     _poolHerdMigration,
@@ -904,6 +910,7 @@ const shard: CardShard = {
     _poolMoriaMarauder,
     _poolMortalsArdor,
     _poolMotivatedPony,
+    _poolMouth,
     _poolMurasaBehemoth,
     _poolMurderousRedcap,
     _poolMutableExplorer,
@@ -933,6 +940,7 @@ const shard: CardShard = {
     _poolOvergrownBattlement,
     _poolOxOfAgonas,
     _poolPacificationArray,
+    _poolPainfulLesson,
     _poolPaintedBluffs,
     _poolPalaceFamiliar,
     _poolPalaceSentinels,
@@ -956,6 +964,7 @@ const shard: CardShard = {
     _poolPondProphet,
     _poolPortOfKarfell,
     _poolPowerDepot,
+    _poolPrepare,
     _poolPresenceOfTheMaster,
     _poolPrimarisChaplain,
     _poolProcrastinate,
@@ -1062,6 +1071,7 @@ const shard: CardShard = {
     _poolSolTalisman,
     _poolSolitaryCamel,
     _poolSoulsFire,
+    _poolSoulstinger,
     _poolSpDrPilotedByPeni,
     _poolSpecimenCollector,
     _poolSpitefulSliver,

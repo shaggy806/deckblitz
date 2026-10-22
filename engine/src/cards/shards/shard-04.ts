@@ -219,6 +219,7 @@ import _poolHorizonOfProgress from "../pool/horizon-of-progress.js";
 import _poolHornOfGreed from "../pool/horn-of-greed.js";
 import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
 import _poolHornetCobra from "../pool/hornet-cobra.js";
+import _poolHorrorOfTheBrokenLands from "../pool/horror-of-the-broken-lands.js";
 import _poolHorsesOfTheBruinen from "../pool/horses-of-the-bruinen.js";
 import _poolHoundTamer from "../pool/hound-tamer.js";
 import _poolHowlOfTheHunt from "../pool/howl-of-the-hunt.js";
@@ -249,6 +250,7 @@ import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
+import _poolKefnetTheMindful from "../pool/kefnet-the-mindful.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
 import _poolKindredBoon from "../pool/kindred-boon.js";
@@ -469,6 +471,7 @@ import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
 import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
+import _poolTahCropElite from "../pool/tah-crop-elite.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTawnossWeaponry from "../pool/tawnoss-weaponry.js";
@@ -504,6 +507,7 @@ import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
 import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
 import _poolTrostaniThreeWhispers from "../pool/trostani-three-whispers.js";
+import _poolTrueheartTwins from "../pool/trueheart-twins.js";
 import _poolTrufflesnout from "../pool/trufflesnout.js";
 import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
@@ -792,6 +796,7 @@ const shard: CardShard = {
     _poolHornOfGreed,
     _poolHornOfValhalla,
     _poolHornetCobra,
+    _poolHorrorOfTheBrokenLands,
     _poolHorsesOfTheBruinen,
     _poolHoundTamer,
     _poolHowlOfTheHunt,
@@ -822,6 +827,7 @@ const shard: CardShard = {
     _poolKarumonixTheRatKing,
     _poolKeenEyedRaven,
     _poolKeenSense,
+    _poolKefnetTheMindful,
     _poolKheruGoldkeeper,
     _poolKindleTheInnerFlame,
     _poolKindredBoon,
@@ -1042,6 +1048,7 @@ const shard: CardShard = {
     _poolSyphonMind,
     _poolSyrArmontTheRedeemer,
     _poolSzarekhTheSilentKing,
+    _poolTahCropElite,
     _poolTamsResistance,
     _poolTangledFlorahedron,
     _poolTawnossWeaponry,
@@ -1077,6 +1084,7 @@ const shard: CardShard = {
     _poolTriumphantChomp,
     _poolTrollsOfTelJilad,
     _poolTrostaniThreeWhispers,
+    _poolTrueheartTwins,
     _poolTrufflesnout,
     _poolTrumpetingCarnosaur,
     _poolTrustyPackbeast,

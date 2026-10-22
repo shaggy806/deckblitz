@@ -189,6 +189,7 @@ import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
+import _poolGideonsResolve from "../pool/gideons-resolve.js";
 import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
 import _poolGiftOfStrength from "../pool/gift-of-strength.js";
 import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
@@ -217,6 +218,7 @@ import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
+import _poolHapatrasMark from "../pool/hapatras-mark.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHasranOgress from "../pool/hasran-ogress.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
@@ -275,6 +277,7 @@ import _poolKwiaVigorbloom from "../pool/kwia-vigorbloom.js";
 import _poolLandTax from "../pool/land-tax.js";
 import _poolLashOfTheWhip from "../pool/lash-of-the-whip.js";
 import _poolLastKiss from "../pool/last-kiss.js";
+import _poolLayClaim from "../pool/lay-claim.js";
 import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
 import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
@@ -302,6 +305,7 @@ import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
+import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
@@ -498,6 +502,7 @@ import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
+import _poolTrialOfAmbition from "../pool/trial-of-ambition.js";
 import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
 import _poolTroubledHealer from "../pool/troubled-healer.js";
 import _poolTrueIdentity from "../pool/true-identity.js";
@@ -771,6 +776,7 @@ const shard: CardShard = {
     _poolGhostLitWarder,
     _poolGiantGrowth,
     _poolGideonsBattleCry,
+    _poolGideonsResolve,
     _poolGiftOfOrzhova,
     _poolGiftOfStrength,
     _poolGiottKingOfTheDwarves,
@@ -799,6 +805,7 @@ const shard: CardShard = {
     _poolGutTrueSoulZealot,
     _poolHammersOfMoradin,
     _poolHangedExecutioner,
+    _poolHapatrasMark,
     _poolHashepOasis,
     _poolHasranOgress,
     _poolHeadOfTheHomestead,
@@ -857,6 +864,7 @@ const shard: CardShard = {
     _poolLandTax,
     _poolLashOfTheWhip,
     _poolLastKiss,
+    _poolLayClaim,
     _poolLeoninSnarecaster,
     _poolLetterOfAcceptance,
     _poolLifeFromTheLoam,
@@ -884,6 +892,7 @@ const shard: CardShard = {
     _poolMerfolkBranchwalker,
     _poolMeriasOutrider,
     _poolMessengerHawk,
+    _poolMiasmicMummy,
     _poolMidnightMangler,
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
@@ -1080,6 +1089,7 @@ const shard: CardShard = {
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
     _poolTrestleTroll,
+    _poolTrialOfAmbition,
     _poolTriarchPraetorian,
     _poolTroubledHealer,
     _poolTrueIdentity,

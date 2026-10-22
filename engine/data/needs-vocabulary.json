@@ -9672,6 +9672,13 @@
   "replacement:exile-if-not-cycled": {
    "family": "replacement:new-event-replacements",
    "example": "Abandoned Sarcophagus: a card with cycling that would go to your graveyard other than by being cycled is exiled instead."
+  },
+  "effect:counter-targeting-spell-or-ability": {
+   "example": "Glyph Keeper: the first time each turn it becomes the target of a spell or ability (any player's), counter that spell or ability — only ward counters a targeting spell, always with a cost; becomes-target's firstTimeEachTurn counts per targeting player."
+  },
+  "effect:shuffle-graveyard-filter-into-library": {
+   "family": "effect:shuffle-library",
+   "example": "Elixir: shuffle the nonland cards from your graveyard into your library, then gain life equal to the number shuffled — shuffle-graveyard-into-library has no filter or this-way count."
   }
  }
 }

@@ -57,6 +57,7 @@ import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
 import _poolBoldBiochemist from "../pool/bold-biochemist.js";
+import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
@@ -102,6 +103,7 @@ import _poolDarettiRocketeerEngineer from "../pool/daretti-rocketeer-engineer.js
 import _poolDarigaazsAttendant from "../pool/darigaazs-attendant.js";
 import _poolDarkBetrayal from "../pool/dark-betrayal.js";
 import _poolDawnGryff from "../pool/dawn-gryff.js";
+import _poolDawn from "../pool/dawn.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
@@ -300,6 +302,7 @@ import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
+import _poolMercilessJavelineer from "../pool/merciless-javelineer.js";
 import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
@@ -382,6 +385,7 @@ import _poolReanimate from "../pool/reanimate.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
 import _poolRecruitmentOfficer from "../pool/recruitment-officer.js";
 import _poolRedirectLightning from "../pool/redirect-lightning.js";
+import _poolReduce from "../pool/reduce.js";
 import _poolReflexes from "../pool/reflexes.js";
 import _poolRefurbish from "../pool/refurbish.js";
 import _poolRegalCaracal from "../pool/regal-caracal.js";
@@ -395,6 +399,7 @@ import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
 import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
+import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRonasVortex from "../pool/ronas-vortex.js";
@@ -664,6 +669,7 @@ const shard: CardShard = {
     _poolBlueSunsTwilight,
     _poolBojukaBog,
     _poolBoldBiochemist,
+    _poolBonePicker,
     _poolBoonOfBoseiju,
     _poolBountyAgent,
     _poolBronzebeakMoa,
@@ -709,6 +715,7 @@ const shard: CardShard = {
     _poolDarigaazsAttendant,
     _poolDarkBetrayal,
     _poolDawnGryff,
+    _poolDawn,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
     _poolDefenderOfChaos,
@@ -907,6 +914,7 @@ const shard: CardShard = {
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,
     _poolMerchantOfSecrets,
+    _poolMercilessJavelineer,
     _poolMidnightSnack,
     _poolMightyLeap,
     _poolMindeyeDrake,
@@ -989,6 +997,7 @@ const shard: CardShard = {
     _poolReconnaissanceMission,
     _poolRecruitmentOfficer,
     _poolRedirectLightning,
+    _poolReduce,
     _poolReflexes,
     _poolRefurbish,
     _poolRegalCaracal,
@@ -1002,6 +1011,7 @@ const shard: CardShard = {
     _poolRhoxFaithmender,
     _poolRhoxVeteran,
     _poolRingsOfBrighthearth,
+    _poolRoadRuin,
     _poolRoarOfChallenge,
     _poolRoguesGloves,
     _poolRonasVortex,

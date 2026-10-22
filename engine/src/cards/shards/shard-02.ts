@@ -85,6 +85,7 @@ import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
+import _poolChampionOfRhonas from "../pool/champion-of-rhonas.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
@@ -101,8 +102,10 @@ import _poolColfenorsUrn from "../pool/colfenors-urn.js";
 import _poolCollectorsVault from "../pool/collectors-vault.js";
 import _poolColossalMight from "../pool/colossal-might.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
+import _poolCompulsoryRest from "../pool/compulsory-rest.js";
 import _poolConcoct from "../pool/concoct.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
+import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCramSession from "../pool/cram-session.js";
@@ -227,6 +230,7 @@ import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
+import _poolHazoretsFavor from "../pool/hazorets-favor.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
 import _poolHeraldOfHadar from "../pool/herald-of-hadar.js";
@@ -647,6 +651,7 @@ const shard: CardShard = {
     _poolCautiousSurvivor,
     _poolCavernousMaw,
     _poolCelebornTheWise,
+    _poolChampionOfRhonas,
     _poolChampionsOfTheShoal,
     _poolChandraFlamesCatalyst,
     _poolChangelingOutcast,
@@ -663,8 +668,10 @@ const shard: CardShard = {
     _poolCollectorsVault,
     _poolColossalMight,
     _poolCombustionMan,
+    _poolCompulsoryRest,
     _poolConcoct,
     _poolConscriptedInfantry,
+    _poolConsumingFervor,
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
     _poolCramSession,
@@ -789,6 +796,7 @@ const shard: CardShard = {
     _poolHalvarGodOfBattle,
     _poolHangarScrounger,
     _poolHarvesttideInfiltrator,
+    _poolHazoretsFavor,
     _poolHeartstringPuller,
     _poolHelionaut,
     _poolHeraldOfHadar,

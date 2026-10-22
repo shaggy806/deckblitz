@@ -64,6 +64,7 @@ import _poolBoggartBrute from "../pool/boggart-brute.js";
 import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
 import _poolBoneSabres from "../pool/bone-sabres.js";
+import _poolBontuTheGlorified from "../pool/bontu-the-glorified.js";
 import _poolBrauliosOfPheresBand from "../pool/braulios-of-pheres-band.js";
 import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
@@ -222,6 +223,7 @@ import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHivespineWolverine from "../pool/hivespine-wolverine.js";
+import _poolHoodedBrawler from "../pool/hooded-brawler.js";
 import _poolHuatlisSnubhorn from "../pool/huatlis-snubhorn.js";
 import _poolHulkbusterArmor from "../pool/hulkbuster-armor.js";
 import _poolHulksThunderclap from "../pool/hulks-thunderclap.js";
@@ -320,6 +322,7 @@ import _poolMysticMonstrosity from "../pool/mystic-monstrosity.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
 import _poolNaturesEmbrace from "../pool/natures-embrace.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
+import _poolNehebTheWorthy from "../pool/neheb-the-worthy.js";
 import _poolNervousGardener from "../pool/nervous-gardener.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
@@ -394,6 +397,7 @@ import _poolRuneboundWolf from "../pool/runebound-wolf.js";
 import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRushbladeCommander from "../pool/rushblade-commander.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
+import _poolSacredExcavation from "../pool/sacred-excavation.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
 import _poolSagittarsVolley from "../pool/sagittars-volley.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
@@ -649,6 +653,7 @@ const shard: CardShard = {
     _poolBoilingRockPrison,
     _poolBoneDevourer,
     _poolBoneSabres,
+    _poolBontuTheGlorified,
     _poolBrauliosOfPheresBand,
     _poolBrawn,
     _poolBreathstealer,
@@ -807,6 +812,7 @@ const shard: CardShard = {
     _poolHerosBlade,
     _poolHinataDawnCrowned,
     _poolHivespineWolverine,
+    _poolHoodedBrawler,
     _poolHuatlisSnubhorn,
     _poolHulkbusterArmor,
     _poolHulksThunderclap,
@@ -905,6 +911,7 @@ const shard: CardShard = {
     _poolNarsetEnlightenedMaster,
     _poolNaturesEmbrace,
     _poolNeedletoothPack,
+    _poolNehebTheWorthy,
     _poolNervousGardener,
     _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
@@ -979,6 +986,7 @@ const shard: CardShard = {
     _poolRuralRecruit,
     _poolRushbladeCommander,
     _poolRussetWolves,
+    _poolSacredExcavation,
     _poolSageOfDays,
     _poolSagittarsVolley,
     _poolSakashimasProtege,

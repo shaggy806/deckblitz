@@ -86,6 +86,7 @@ import _poolComingInHot from "../pool/coming-in-hot.js";
 import _poolCommandBeacon from "../pool/command-beacon.js";
 import _poolCommenceTheEndgame from "../pool/commence-the-endgame.js";
 import _poolCommodoreGuff from "../pool/commodore-guff.js";
+import _poolCompanionOfTheTrials from "../pool/companion-of-the-trials.js";
 import _poolCongregate from "../pool/congregate.js";
 import _poolConquerorsFoothold from "../pool/conquerors-foothold.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
@@ -136,6 +137,7 @@ import _poolElgaudInquisitor from "../pool/elgaud-inquisitor.js";
 import _poolElspethSunsNemesis from "../pool/elspeth-suns-nemesis.js";
 import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
+import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
@@ -153,6 +155,7 @@ import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
+import _poolFinish from "../pool/finish.js";
 import _poolFireRimForm from "../pool/fire-rim-form.js";
 import _poolFirebolt from "../pool/firebolt.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
@@ -329,6 +332,7 @@ import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
+import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
@@ -681,6 +685,7 @@ const shard: CardShard = {
     _poolCommandBeacon,
     _poolCommenceTheEndgame,
     _poolCommodoreGuff,
+    _poolCompanionOfTheTrials,
     _poolCongregate,
     _poolConquerorsFoothold,
     _poolCopperlineGorge,
@@ -731,6 +736,7 @@ const shard: CardShard = {
     _poolElspethSunsNemesis,
     _poolElturgardRanger,
     _poolElvishHydromancer,
+    _poolEmberhornMinotaur,
     _poolEnragedRevolutionary,
     _poolEntishRestoration,
     _poolEntryDenied,
@@ -748,6 +754,7 @@ const shard: CardShard = {
     _poolFeralMaaka,
     _poolFierceRetribution,
     _poolFinaleOfGlory,
+    _poolFinish,
     _poolFireRimForm,
     _poolFirebolt,
     _poolFlashThompsonSpiderFan,
@@ -924,6 +931,7 @@ const shard: CardShard = {
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
     _poolOmenportVigilante,
+    _poolOnwardVictory,
     _poolOranRiefInvoker,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,

@@ -38,6 +38,7 @@ import _poolBellowingAegisaur from "../pool/bellowing-aegisaur.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
+import _poolBlessedRespite from "../pool/blessed-respite.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBlinkDog from "../pool/blink-dog.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
@@ -77,6 +78,7 @@ import _poolCranialRam from "../pool/cranial-ram.js";
 import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
+import _poolCut from "../pool/cut.js";
 import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
@@ -94,6 +96,7 @@ import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
+import _poolDestinedLead from "../pool/destined-lead.js";
 import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
@@ -105,6 +108,7 @@ import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
 import _poolDoombotHarbinger from "../pool/doombot-harbinger.js";
 import _poolDracosaurAuxiliary from "../pool/dracosaur-auxiliary.js";
 import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
+import _poolDreadWanderer from "../pool/dread-wanderer.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
@@ -236,6 +240,7 @@ import _poolKoalaSheep from "../pool/koala-sheep.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
 import _poolKonstrariCharm from "../pool/konstrari-charm.js";
 import _poolKorCartographer from "../pool/kor-cartographer.js";
+import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
@@ -365,6 +370,7 @@ import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
 import _poolSecretDoor from "../pool/secret-door.js";
 import _poolSeekThrills from "../pool/seek-thrills.js";
+import _poolSeekerOfInsight from "../pool/seeker-of-insight.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
@@ -571,6 +577,7 @@ const shard: CardShard = {
     _poolBelovedPrincess,
     _poolBenalishCavalry,
     _poolBenevolentHydra,
+    _poolBlessedRespite,
     _poolBlightedCataract,
     _poolBlinkDog,
     _poolBoggartPrankster,
@@ -610,6 +617,7 @@ const shard: CardShard = {
     _poolCrashingDrawbridge,
     _poolCrucibleOfFire,
     _poolCruelSomnophage,
+    _poolCut,
     _poolCystbearer,
     _poolDalekSquadron,
     _poolDarkBargain,
@@ -627,6 +635,7 @@ const shard: CardShard = {
     _poolDemonsHorn,
     _poolDesmondMiles,
     _poolDespair,
+    _poolDestinedLead,
     _poolDigDeep,
     _poolDinosaurStampede,
     _poolDiscipleOfTheOldWays,
@@ -638,6 +647,7 @@ const shard: CardShard = {
     _poolDoombotHarbinger,
     _poolDracosaurAuxiliary,
     _poolDreadOsseosaur,
+    _poolDreadWanderer,
     _poolDreadhound,
     _poolDreamTwist,
     _poolDustBowl,
@@ -769,6 +779,7 @@ const shard: CardShard = {
     _poolKolaghansCommand,
     _poolKonstrariCharm,
     _poolKorCartographer,
+    _poolKozilekButcherOfTruth,
     _poolKrarkClanStoker,
     _poolKraulForagers,
     _poolKravensCats,
@@ -898,6 +909,7 @@ const shard: CardShard = {
     _poolSeatOfTheSynod,
     _poolSecretDoor,
     _poolSeekThrills,
+    _poolSeekerOfInsight,
     _poolSeleniaDarkAngel,
     _poolSendInThePest,
     _poolSeraphicSteed,

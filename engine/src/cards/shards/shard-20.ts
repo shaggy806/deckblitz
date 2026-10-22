@@ -157,6 +157,7 @@ import _poolDriftOfTheDead from "../pool/drift-of-the-dead.js";
 import _poolDubiousDelicacy from "../pool/dubious-delicacy.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
 import _poolDurkwoodBaloth from "../pool/durkwood-baloth.js";
+import _poolDuskDawn from "../pool/dusk-dawn.js";
 import _poolDuskmantleProwler from "../pool/duskmantle-prowler.js";
 import _poolEarthbenderAscension from "../pool/earthbender-ascension.js";
 import _poolEbonyTreefolk from "../pool/ebony-treefolk.js";
@@ -244,6 +245,7 @@ import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHaythamKenway from "../pool/haytham-kenway.js";
 import _poolHeartlessPillage from "../pool/heartless-pillage.js";
+import _poolHeavenEarth from "../pool/heaven-earth.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
 import _poolHeroesForHire from "../pool/heroes-for-hire.js";
@@ -351,6 +353,7 @@ import _poolNurturingPixie from "../pool/nurturing-pixie.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
 import _poolObuunMulDayaAncestor from "../pool/obuun-mul-daya-ancestor.js";
 import _poolOfOneMind from "../pool/of-one-mind.js";
+import _poolOketrasAttendant from "../pool/oketras-attendant.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
@@ -432,6 +435,7 @@ import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolRuthlessKnave from "../pool/ruthless-knave.js";
+import _poolRuthlessSniper from "../pool/ruthless-sniper.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
 import _poolSandstorm from "../pool/sandstorm.js";
@@ -791,6 +795,7 @@ const shard: CardShard = {
     _poolDubiousDelicacy,
     _poolDuelistsHeritage,
     _poolDurkwoodBaloth,
+    _poolDuskDawn,
     _poolDuskmantleProwler,
     _poolEarthbenderAscension,
     _poolEbonyTreefolk,
@@ -878,6 +883,7 @@ const shard: CardShard = {
     _poolHawkeyeTrickShot,
     _poolHaythamKenway,
     _poolHeartlessPillage,
+    _poolHeavenEarth,
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
     _poolHeroesForHire,
@@ -985,6 +991,7 @@ const shard: CardShard = {
     _poolOboroPalaceInTheClouds,
     _poolObuunMulDayaAncestor,
     _poolOfOneMind,
+    _poolOketrasAttendant,
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
     _poolOneirophage,
@@ -1066,6 +1073,7 @@ const shard: CardShard = {
     _poolRottedHystrix,
     _poolRubyMedallion,
     _poolRuthlessKnave,
+    _poolRuthlessSniper,
     _poolSanarUnfinishedGenius,
     _poolSandbendersStorm,
     _poolSandstorm,

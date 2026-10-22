@@ -34,6 +34,7 @@ import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
+import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
 import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
@@ -59,6 +60,7 @@ import _poolBindingMummy from "../pool/binding-mummy.js";
 import _poolBiogenicUpgrade from "../pool/biogenic-upgrade.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBitterChill from "../pool/bitter-chill.js";
+import _poolBitterbladeWarrior from "../pool/bitterblade-warrior.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
@@ -121,6 +123,7 @@ import _poolDauthiMarauder from "../pool/dauthi-marauder.js";
 import _poolDeadWeight from "../pool/dead-weight.js";
 import _poolDeathCultist from "../pool/death-cultist.js";
 import _poolDeathlessAngel from "../pool/deathless-angel.js";
+import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
@@ -207,6 +210,7 @@ import _poolGeothermalBog from "../pool/geothermal-bog.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
 import _poolGiantAdephage from "../pool/giant-adephage.js";
 import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
+import _poolGideonMartialParagon from "../pool/gideon-martial-paragon.js";
 import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
 import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
@@ -245,6 +249,7 @@ import _poolIgneousGolem from "../pool/igneous-golem.js";
 import _poolIgneousInspiration from "../pool/igneous-inspiration.js";
 import _poolIhsansShade from "../pool/ihsans-shade.js";
 import _poolIllicitShipment from "../pool/illicit-shipment.js";
+import _poolIllusoryWrappings from "../pool/illusory-wrappings.js";
 import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
 import _poolImpendingFlux from "../pool/impending-flux.js";
 import _poolImplementsOfSacrifice from "../pool/implements-of-sacrifice.js";
@@ -366,6 +371,7 @@ import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
 import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
+import _poolPrideSovereign from "../pool/pride-sovereign.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
@@ -441,6 +447,7 @@ import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolSerpentGenerator from "../pool/serpent-generator.js";
+import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
 import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
@@ -627,6 +634,7 @@ const shard: CardShard = {
     _poolAssimilateEssence,
     _poolAstralDrift,
     _poolAstralSteel,
+    _poolAvenWindGuide,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
     _poolAzraOddsmaker,
@@ -652,6 +660,7 @@ const shard: CardShard = {
     _poolBiogenicUpgrade,
     _poolBirthingPod,
     _poolBitterChill,
+    _poolBitterbladeWarrior,
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
@@ -714,6 +723,7 @@ const shard: CardShard = {
     _poolDeadWeight,
     _poolDeathCultist,
     _poolDeathlessAngel,
+    _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
     _poolDevilishValet,
@@ -800,6 +810,7 @@ const shard: CardShard = {
     _poolGhostWarden,
     _poolGiantAdephage,
     _poolGiantDustwasp,
+    _poolGideonMartialParagon,
     _poolGideonTheOathless,
     _poolGilanraCallerOfWirewood,
     _poolGiveInToViolence,
@@ -838,6 +849,7 @@ const shard: CardShard = {
     _poolIgneousInspiration,
     _poolIhsansShade,
     _poolIllicitShipment,
+    _poolIllusoryWrappings,
     _poolIllvoiGaleblade,
     _poolImpendingFlux,
     _poolImplementsOfSacrifice,
@@ -959,6 +971,7 @@ const shard: CardShard = {
     _poolPolJamaarIllusionist,
     _poolPorcelainLegionnaire,
     _poolPriceOfLoyalty,
+    _poolPrideSovereign,
     _poolPrimevalProtector,
     _poolPrimocEscapee,
     _poolPrismariCampus,
@@ -1034,6 +1047,7 @@ const shard: CardShard = {
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
     _poolSerpentGenerator,
+    _poolShadowstormVizier,
     _poolShaperGuildmage,
     _poolSharktocrab,
     _poolShepherdOfTheFlock,

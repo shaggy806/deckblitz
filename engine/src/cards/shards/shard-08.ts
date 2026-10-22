@@ -45,6 +45,7 @@ import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAureliaExemplarOfJustice from "../pool/aurelia-exemplar-of-justice.js";
 import _poolAuroraChampion from "../pool/aurora-champion.js";
+import _poolAvenInitiate from "../pool/aven-initiate.js";
 import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
 import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
@@ -107,6 +108,7 @@ import _poolCragplateBaloth from "../pool/cragplate-baloth.js";
 import _poolCreepingTrailblazer from "../pool/creeping-trailblazer.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
+import _poolCrypticSerpent from "../pool/cryptic-serpent.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCrystalRod from "../pool/crystal-rod.js";
 import _poolCursebreak from "../pool/cursebreak.js";
@@ -142,6 +144,7 @@ import _poolDruidLyrist from "../pool/druid-lyrist.js";
 import _poolDruidOfTheCowl from "../pool/druid-of-the-cowl.js";
 import _poolDuneDiviner from "../pool/dune-diviner.js";
 import _poolDuskUrchins from "../pool/dusk-urchins.js";
+import _poolDusk from "../pool/dusk.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
 import _poolEgoDrain from "../pool/ego-drain.js";
@@ -151,6 +154,7 @@ import _poolElegantEdgecrafters from "../pool/elegant-edgecrafters.js";
 import _poolElendasHierophant from "../pool/elendas-hierophant.js";
 import _poolElephantAmbush from "../pool/elephant-ambush.js";
 import _poolElfswornGiant from "../pool/elfsworn-giant.js";
+import _poolElixirOfImmortality from "../pool/elixir-of-immortality.js";
 import _poolElvenkingsHalls from "../pool/elvenkings-halls.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
 import _poolEmberethSkyblazer from "../pool/embereth-skyblazer.js";
@@ -527,6 +531,7 @@ import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
+import _poolTrialOfZeal from "../pool/trial-of-zeal.js";
 import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
 import _poolTsunami from "../pool/tsunami.js";
@@ -543,6 +548,7 @@ import _poolUnquenchableFury from "../pool/unquenchable-fury.js";
 import _poolUnsealTheNecropolis from "../pool/unseal-the-necropolis.js";
 import _poolUnstableMoleculeSuit from "../pool/unstable-molecule-suit.js";
 import _poolUnwantedRemake from "../pool/unwanted-remake.js";
+import _poolUnwaveringInitiate from "../pool/unwavering-initiate.js";
 import _poolUnwind from "../pool/unwind.js";
 import _poolUpriserRenegade from "../pool/upriser-renegade.js";
 import _poolUrborgVolcano from "../pool/urborg-volcano.js";
@@ -660,6 +666,7 @@ const shard: CardShard = {
     _poolAuraBlast,
     _poolAureliaExemplarOfJustice,
     _poolAuroraChampion,
+    _poolAvenInitiate,
     _poolAwakenTheErstwhile,
     _poolAzoriusLocket,
     _poolAzusaLostButSeeking,
@@ -722,6 +729,7 @@ const shard: CardShard = {
     _poolCreepingTrailblazer,
     _poolCrookclawElder,
     _poolCrownOfSkemfar,
+    _poolCrypticSerpent,
     _poolCrystalGrotto,
     _poolCrystalRod,
     _poolCursebreak,
@@ -757,6 +765,7 @@ const shard: CardShard = {
     _poolDruidOfTheCowl,
     _poolDuneDiviner,
     _poolDuskUrchins,
+    _poolDusk,
     _poolDwarvenProvisioner,
     _poolEclipsedKithkin,
     _poolEgoDrain,
@@ -766,6 +775,7 @@ const shard: CardShard = {
     _poolElendasHierophant,
     _poolElephantAmbush,
     _poolElfswornGiant,
+    _poolElixirOfImmortality,
     _poolElvenkingsHalls,
     _poolElvishVanguard,
     _poolEmberethSkyblazer,
@@ -1142,6 +1152,7 @@ const shard: CardShard = {
     _poolToxicNim,
     _poolTragicTrajectory,
     _poolTreeshakerChimera,
+    _poolTrialOfZeal,
     _poolTributaryInstructor,
     _poolTrustworthyScout,
     _poolTsunami,
@@ -1158,6 +1169,7 @@ const shard: CardShard = {
     _poolUnsealTheNecropolis,
     _poolUnstableMoleculeSuit,
     _poolUnwantedRemake,
+    _poolUnwaveringInitiate,
     _poolUnwind,
     _poolUpriserRenegade,
     _poolUrborgVolcano,

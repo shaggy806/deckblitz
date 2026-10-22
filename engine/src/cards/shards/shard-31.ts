@@ -416,6 +416,7 @@ import _poolRescueTheFoal from "../pool/rescue-the-foal.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
 import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-hall.js";
 import _poolReturnFromTheWilds from "../pool/return-from-the-wilds.js";
+import _poolReturn from "../pool/return.js";
 import _poolReyaDawnbringer from "../pool/reya-dawnbringer.js";
 import _poolRidersOfTheMark from "../pool/riders-of-the-mark.js";
 import _poolRidgelineRager from "../pool/ridgeline-rager.js";
@@ -425,9 +426,11 @@ import _poolRobobrainWarMind from "../pool/robobrain-war-mind.js";
 import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRootlessYew from "../pool/rootless-yew.js";
+import _poolRubble from "../pool/rubble.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRufusShinra from "../pool/rufus-shinra.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
+import _poolRuin from "../pool/ruin.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
 import _poolRumblingRuin from "../pool/rumbling-ruin.js";
 import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
@@ -477,6 +480,7 @@ import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
+import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
@@ -573,6 +577,7 @@ import _poolWearyPrisoner from "../pool/weary-prisoner.js";
 import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
+import _poolWindsOfRebuke from "../pool/winds-of-rebuke.js";
 import _poolWingsOfHubris from "../pool/wings-of-hubris.js";
 import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
@@ -1021,6 +1026,7 @@ const shard: CardShard = {
     _poolRestlessRidgeline,
     _poolRestrictedOfficeLectureHall,
     _poolReturnFromTheWilds,
+    _poolReturn,
     _poolReyaDawnbringer,
     _poolRidersOfTheMark,
     _poolRidgelineRager,
@@ -1030,9 +1036,11 @@ const shard: CardShard = {
     _poolRockBadger,
     _poolRollingTemblor,
     _poolRootlessYew,
+    _poolRubble,
     _poolRubblebeltMaaka,
     _poolRufusShinra,
     _poolRuggedPrairie,
+    _poolRuin,
     _poolRuinousRampage,
     _poolRumblingRuin,
     _poolRunadiBehemothCaller,
@@ -1082,6 +1090,7 @@ const shard: CardShard = {
     _poolSpitfireBastion,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
+    _poolStart,
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,
     _poolSternLesson,
@@ -1178,6 +1187,7 @@ const shard: CardShard = {
     _poolWeatherseedFaeries,
     _poolWeddingCrasher,
     _poolWickTheWhorledMind,
+    _poolWindsOfRebuke,
     _poolWingsOfHubris,
     _poolWintermoorCommander,
     _poolWipeClean,

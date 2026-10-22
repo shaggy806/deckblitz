@@ -44,6 +44,7 @@ import _poolBannersRaised from "../pool/banners-raised.js";
 import _poolBargingSergeant from "../pool/barging-sergeant.js";
 import _poolBarkhideTroll from "../pool/barkhide-troll.js";
 import _poolBaronBertramGraywater from "../pool/baron-bertram-graywater.js";
+import _poolBasriTomorrowsChampion from "../pool/basri-tomorrows-champion.js";
 import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
 import _poolBattlefieldPromotion from "../pool/battlefield-promotion.js";
@@ -64,6 +65,7 @@ import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
 import _poolBorborygmos from "../pool/borborygmos.js";
+import _poolBountyOfTheLuxa from "../pool/bounty-of-the-luxa.js";
 import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
 import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
@@ -220,6 +222,7 @@ import _poolHaveForDinner from "../pool/have-for-dinner.js";
 import _poolHazardousBlast from "../pool/hazardous-blast.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHeavenSent from "../pool/heaven-sent.js";
+import _poolHekmaSentinels from "../pool/hekma-sentinels.js";
 import _poolHelgaSkittishSeer from "../pool/helga-skittish-seer.js";
 import _poolHeliodGodOfTheSun from "../pool/heliod-god-of-the-sun.js";
 import _poolHellsKitchen from "../pool/hells-kitchen.js";
@@ -338,6 +341,7 @@ import _poolPointedDiscussion from "../pool/pointed-discussion.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
+import _poolPrepareFight from "../pool/prepare-fight.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
@@ -359,6 +363,7 @@ import _poolRedemptionArc from "../pool/redemption-arc.js";
 import _poolReknit from "../pool/reknit.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
 import _poolRepudiate from "../pool/repudiate.js";
+import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
@@ -551,6 +556,7 @@ import _poolWorldgorgerDragon from "../pool/worldgorger-dragon.js";
 import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
 import _poolWrensRunHydra from "../pool/wrens-run-hydra.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
+import _poolZenithSeeker from "../pool/zenith-seeker.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
 import _poolZhalfirinDecoy from "../pool/zhalfirin-decoy.js";
 import _poolZodiacGoat from "../pool/zodiac-goat.js";
@@ -616,6 +622,7 @@ const shard: CardShard = {
     _poolBargingSergeant,
     _poolBarkhideTroll,
     _poolBaronBertramGraywater,
+    _poolBasriTomorrowsChampion,
     _poolBassaraTowerArcher,
     _poolBattershieldWarrior,
     _poolBattlefieldPromotion,
@@ -636,6 +643,7 @@ const shard: CardShard = {
     _poolBoggartShenanigans,
     _poolBonesplitter,
     _poolBorborygmos,
+    _poolBountyOfTheLuxa,
     _poolBrambleweftBehemoth,
     _poolBranchsnapLorian,
     _poolBrashTaunter,
@@ -792,6 +800,7 @@ const shard: CardShard = {
     _poolHazardousBlast,
     _poolHeartWarden,
     _poolHeavenSent,
+    _poolHekmaSentinels,
     _poolHelgaSkittishSeer,
     _poolHeliodGodOfTheSun,
     _poolHellsKitchen,
@@ -910,6 +919,7 @@ const shard: CardShard = {
     _poolPoisonArrow,
     _poolPolliwallop,
     _poolPramikonSkyRampart,
+    _poolPrepareFight,
     _poolPressurePoint,
     _poolPrideOfThePerfect,
     _poolPrologueToPhyresis,
@@ -931,6 +941,7 @@ const shard: CardShard = {
     _poolReknit,
     _poolRenegadeMap,
     _poolRepudiate,
+    _poolRhetCropSpearmaster,
     _poolRhoxBrute,
     _poolRickJonesDestinedSidekick,
     _poolRikuOfManyPaths,
@@ -1123,6 +1134,7 @@ const shard: CardShard = {
     _poolWranglerOfTheDamned,
     _poolWrensRunHydra,
     _poolYotianDissident,
+    _poolZenithSeeker,
     _poolZephyrSprite,
     _poolZhalfirinDecoy,
     _poolZodiacGoat,

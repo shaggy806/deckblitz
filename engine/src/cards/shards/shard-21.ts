@@ -10,6 +10,7 @@ import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
+import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -129,6 +130,7 @@ import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
+import _poolDjerusResolve from "../pool/djerus-resolve.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
 import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
@@ -532,6 +534,7 @@ import _poolVesuvanDrifter from "../pool/vesuvan-drifter.js";
 import _poolVexingBauble from "../pool/vexing-bauble.js";
 import _poolVibraniumMiningMech from "../pool/vibranium-mining-mech.js";
 import _poolViconiaDrowApostate from "../pool/viconia-drow-apostate.js";
+import _poolVictory from "../pool/victory.js";
 import _poolVileRebirth from "../pool/vile-rebirth.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
@@ -582,6 +585,7 @@ const shard: CardShard = {
     _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAlpineWatchdog,
+    _poolAngelOfSanctions,
     _poolAnointedDeacon,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -701,6 +705,7 @@ const shard: CardShard = {
     _poolDiscipleOfPerdition,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
+    _poolDjerusResolve,
     _poolDocOckSinisterScientist,
     _poolDragonsparkReactor,
     _poolDranasChosen,
@@ -1104,6 +1109,7 @@ const shard: CardShard = {
     _poolVexingBauble,
     _poolVibraniumMiningMech,
     _poolViconiaDrowApostate,
+    _poolVictory,
     _poolVileRebirth,
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
