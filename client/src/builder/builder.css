@@ -4,19 +4,20 @@
 
 .builder-panel {
   position: fixed;
-  top: clamp(36px, 5vh, 48px);
+  /* Docked down the whole right edge, beside the game rather than over it:
+     open, it sets `data-side-panel` on the root, and the game narrows by
+     --side-panel (index.css) — the same width — so the board, its Pass row
+     and decision banner, the stack and the hand all sit to its left (the
+     user, 2026-10-22). */
+  top: 0;
   right: 0;
-  /* Above the band the table keeps for its Pass row and decision banner,
-     which stay usable — and on top — while the drawer is open. */
-  bottom: var(--bottom-band, clamp(52px, 6vh, 72px));
+  bottom: 0;
   z-index: 55;
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 26vw, 440px);
+  width: var(--side-panel, clamp(300px, 26vw, 440px));
   background: var(--panel);
   border-left: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  border-bottom-left-radius: 8px;
   box-shadow: -8px 0 24px rgb(0 0 0 / 0.35);
   color: var(--text);
   font-size: var(--text-md);

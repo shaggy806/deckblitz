@@ -134,6 +134,7 @@ function Section({ title, children, right }: { readonly title: string; readonly 
 export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
   const builder = game.builder
   const [open, setOpen] = useState(true)
+  const docked = builder !== null && open
   const [pool, setPool] = useState<CardPool | null>(null)
   const [poolError, setPoolError] = useState<string | null>(null)
   const [query, setQuery] = useState('')
@@ -153,6 +154,15 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
   const [follow, setFollow] = useFollowAction()
   const [holdFor, setHoldFor] = useState<PlayerId | null>(null)
   const releaseHold = useCallback(() => setHoldFor(null), [])
+
+  // Open, the drawer docks beside the game: the root's `data-side-panel`
+  // narrows the page by its width (index.css's --side-panel).
+  useEffect(() => {
+    if (!docked) return
+    const root = document.documentElement
+    root.setAttribute('data-side-panel', '')
+    return () => root.removeAttribute('data-side-panel')
+  }, [docked])
 
   useEffect(() => {
     let live = true

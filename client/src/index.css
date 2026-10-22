@@ -99,8 +99,13 @@
      App.css's .quadrant-body .side-zone) narrows --card-w for its own
      subtree against that ceiling, so every card-shaped thing inside it
      still derives from one number rather than re-deriving the clamp. */
-  --card-w-max: clamp(96px, 9vw, 150px);
+  --card-w-max: clamp(96px, calc((100vw - var(--side-panel)) * 0.09), 150px);
   --card-w: var(--card-w-max);
+  /* A panel docked at the right edge that the game makes room for rather
+     than sitting under (the scenario builder's drawer, `data-side-panel`):
+     the page narrows by this much, and everything sized or placed against
+     the viewport's right edge allows for it. */
+  --side-panel: 0px;
   /* A battlefield permanent's width (--mini-w, see MiniTile.tsx) isn't set
      here: it depends on how much room that permanent's own board has, so
      it's declared per board, in App.css's `.board` rule. */
@@ -358,4 +363,10 @@ h3 {
 }
 :root[data-reduce-motion] .pool-progress-fill {
   transition: none;
+}
+
+/* The scenario builder's drawer is open (BuilderPanel sets the attribute):
+   the game narrows to make room for it. The same width as `.builder-panel`. */
+:root[data-side-panel] {
+  --side-panel: clamp(300px, 26vw, 440px);
 }

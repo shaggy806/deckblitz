@@ -29,6 +29,9 @@
   height: 100vh;
   overflow-y: auto;
   padding: 12px 20px;
+  /* Room for a docked side panel (index.css's --side-panel): the game
+     narrows rather than sitting under it. */
+  margin-right: var(--side-panel);
   position: relative;
   background-color: var(--bg);
   /* a faint felt-table sheen -- background-color (not this shorthand) is
@@ -413,6 +416,21 @@
     display: none;
   }
 }
+/* The same where a docked side panel takes the room (--side-panel): the game
+   is that much narrower than the viewport the query above reads. */
+@media (max-width: 110rem) {
+  :root[data-side-panel] .turn-banner-round-long,
+  :root[data-side-panel] .turn-banner-phase,
+  :root[data-side-panel] .turn-banner-phase-sep {
+    display: none;
+  }
+  :root[data-side-panel] .turn-banner-round-short {
+    display: inline;
+  }
+  :root[data-side-panel] .top-strip {
+    gap: 10px;
+  }
+}
 .turn-banner-sep {
   margin: 0 8px;
   color: var(--muted-dim);
@@ -523,7 +541,7 @@
 .toast-stack {
   position: fixed;
   top: clamp(10px, 1.6vh, 18px);
-  left: 50%;
+  left: calc((100vw - var(--side-panel)) / 2);
   translate: -50% 0;
   z-index: 10003;
   display: flex;
@@ -1290,13 +1308,13 @@
    fallback (tabbing into a hand card raises it same as a hover would). */
 .hand-strip.peekable {
   position: fixed;
-  left: 50%;
+  left: calc((100vw - var(--side-panel)) / 2);
   translate: -50% 0;
   bottom: 0;
   /* wide -- more room here means the hand's own overlap math (see App.tsx's
      HAND_CARD_GAP) needs less overlap to fit an ordinary hand, so cards read
      clearer before it ever has to squash them together. */
-  width: min(94vw, 1500px);
+  width: min(calc((100vw - var(--side-panel)) * 0.94), 1500px);
   height: clamp(260px, 38vh, 360px);
   z-index: 100;
   display: flex;
@@ -1372,7 +1390,7 @@
    reachable without hovering the hand open first. */
 .priority-actions {
   position: fixed;
-  right: clamp(10px, 1.4vw, 18px);
+  right: calc(var(--side-panel) + clamp(10px, 1.4vw, 18px));
   bottom: clamp(12px, 2vh, 20px);
   z-index: 110;
   /* "Resolve stack (3)": a count in proportional figures moved Pass. */
@@ -1431,7 +1449,7 @@
    prompt either -- that reaches the same failure by the other road. */
 .decision-banner {
   position: fixed;
-  right: clamp(10px, 1.4vw, 18px);
+  right: calc(var(--side-panel) + clamp(10px, 1.4vw, 18px));
   bottom: clamp(12px, 2vh, 20px);
   z-index: 120;
   /* One width, .priority-actions' own ceiling, rather than the old fixed
@@ -2088,7 +2106,7 @@
      at the ends of the players' headers. It used to sit at the edge, over
      the bottom-right player's life. The rail is --card-w-max wide at most,
      plus its padding and the page's. */
-  right: calc(var(--card-w-max) + 2.2vw + 8px);
+  right: calc(var(--side-panel) + var(--card-w-max) + 2.2vw + 8px);
   /* Above a board tile's 20 and the arrows' 21 (.arrow-layer), so an arrow
      leaves the card from behind it; under the 23 of an arrow from one entry
      to another (.arrow-layer.over-pile). */
@@ -3638,7 +3656,7 @@
 .mulligan-modal {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: calc((100vw - var(--side-panel)) / 2);
   translate: -50% -50%;
   z-index: 200;
   /* 1100px, or more on a big screen where the cards are bigger: at 1920 wide
@@ -4136,7 +4154,9 @@
    a click meant for the real board underneath it. */
 .anim-layer {
   position: fixed;
-  inset: 0;
+  /* Over the game, not a docked side panel (--side-panel): the spotlight
+     centres on the board. */
+  inset: 0 var(--side-panel) 0 0;
   pointer-events: none;
   z-index: 10001; /* above the mini-tile popover's own 10000 */
   display: flex;
@@ -4389,7 +4409,7 @@
   --spot-x: max(
     0px,
     calc(
-      50vw - var(--card-w-max) - 2.2vw - 8px - min(calc(var(--card-w-max) * 1.5), 28vh) - 2.5vw -
+      (100vw - var(--side-panel)) / 2 - var(--card-w-max) - 2.2vw - 8px - min(calc(var(--card-w-max) * 1.5), 28vh) - 2.5vw -
         var(--card-w) / 2
     )
   );
