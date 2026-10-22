@@ -3,7 +3,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { B, cast, counters, enter, lands, pickTargets, pt, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, cast, counters, enter, lands, pickTargets, pt, ref, spawn, table, toGraveyard, toHand, toLibrary, zone } from "./harness.js";
 
 describe("Lurking Chupacabra", () => {
   it("a creature you control exploring gives an opponent's creature -2/-2", () => {
@@ -45,5 +45,18 @@ describe("Castaway's Despair", () => {
     cast(game, aura, { targets: [ref(bears)] });
     expect(zone(game, aura)).toBe("battlefield");
     expect(game.state.objects[bears].tapped).toBe(true);
+  });
+});
+
+describe("March of the Drowned", () => {
+  it("doesn't offer two Pirate cards' worth of targets with one Pirate card in the graveyard", () => {
+    const { game } = table();
+    lands(game, "Swamp", 1);
+    toGraveyard(game, "Fathom Fleet Captain");
+    const card = toHand(game, "March of the Drowned");
+    const offer = game.legalActions(A).find((a) => a.kind === "cast-spell" && a.card === card);
+    if (offer?.kind !== "cast-spell" || offer.castModal === undefined) throw new Error("no modal offer");
+    expect(offer.castModal.modes[0].targetOptions[0]).toHaveLength(1);
+    expect(offer.castModal.modes[1].targetOptions.every((slot) => slot.length === 0)).toBe(true);
   });
 });

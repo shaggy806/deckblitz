@@ -169,6 +169,16 @@ export const chooseTargets = defineDecision({
   randomAnswer: (legal, player, rng): Action => ({
     type: "choose-targets",
     player,
-    targets: rng.pickTargets(legal.options, legal.specs),
+    // A copy's new targets (rule 707.10c) keep the copied spell's number of
+    // targets, so an optional slot that has one can't be left empty: each is
+    // drawn as a required slot.
+    targets: rng.pickTargets(
+      legal.options,
+      legal.current === undefined
+        ? legal.specs
+        : legal.specs.map((spec, i) =>
+            typeof spec === "object" && spec.kind === "optional" && legal.current?.[i] != null ? spec.of : spec,
+          ),
+    ),
   }),
 });

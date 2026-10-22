@@ -2654,15 +2654,31 @@ export class Game {
         modes: def.castModal.modes.map((m) => ({
           text: m.text,
           targetSpecs: [...(m.targets ?? [])],
-          targetOptions: this.affordableTargetOptions(
-            player,
-            this.targetOptionsFor(m.targets ?? [], player, this.cardSource(def, card)),
+          targetOptions: this.fillableModeOptions(
+            m.targets ?? [],
+            this.affordableTargetOptions(
+              player,
+              this.targetOptionsFor(m.targets ?? [], player, this.cardSource(def, card)),
+            ),
           ),
           ...(m.spreeCost !== undefined ? { cost: m.spreeCost } : {}),
         })),
         ...(modeSets !== undefined ? { modeSets: modeSets.map((set) => [...set]) } : {}),
       },
     };
+  }
+
+  /** A mode's target options as offered: none at all when its slots can't be
+   * filled at once — "two target Pirate cards" with one Pirate card in the
+   * graveyard (rule 601.2c: every slot each with a different object) — so a
+   * driver passes that mode by, as it does one with an empty slot. */
+  private fillableModeOptions(
+    specs: readonly TargetSpec[],
+    options: readonly (readonly TargetRef[])[],
+  ): readonly (readonly TargetRef[])[] {
+    return targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))
+      ? options
+      : options.map(() => []);
   }
 
   /**
