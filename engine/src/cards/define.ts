@@ -2579,6 +2579,14 @@ export interface CardDefinition {
    * the printed cost, targets, or effect at all, unlike `overload`/`kicker`.
    */
   readonly convoke: boolean;
+  /**
+   * Improvise (rule 702.126a — Maverick Thopterist): "For each generic mana
+   * in this spell's total cost, you may tap an untapped artifact you control
+   * rather than pay that mana." Paid through convoke's machinery
+   * (`Action.convoke`, each entry paying `"generic"`), with artifacts as the
+   * candidates; not an additional or alternative cost (702.126b).
+   */
+  readonly improvise: boolean;
   /** "If it's neither day nor night, it becomes day as this creature
    * enters" (rule 731.1 — Midnight Hunt's day/night cards that aren't
    * daybound): it becomes day as the permanent enters, if it's neither. A
@@ -3138,6 +3146,7 @@ const PRINTED_ABILITY: {
   freeCastIf: (def) => def.freeCastIf !== null,
   alternativeCost: (def) => def.alternativeCost !== null,
   convoke: (def) => def.convoke,
+  improvise: (def) => def.improvise,
   becomesDayAsEnters: (def) => def.becomesDayAsEnters,
   delve: (def) => def.delve,
   selfCostReduction: (def) => def.selfCostReduction !== null,
@@ -3326,6 +3335,7 @@ interface CardDraft {
   freeCastIf?: { readonly condition: StaticCondition };
   alternativeCost?: NonNullable<CardDefinition["alternativeCost"]>;
   convoke?: boolean;
+  improvise?: boolean;
   becomesDayAsEnters?: boolean;
   delve?: boolean;
   selfCostReduction?: {
@@ -3493,6 +3503,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     freeCastIf: draft.freeCastIf ?? null,
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,
+    improvise: draft.improvise ?? false,
     becomesDayAsEnters: draft.becomesDayAsEnters ?? false,
     delve: draft.delve ?? false,
     selfCostReduction: draft.selfCostReduction ?? null,

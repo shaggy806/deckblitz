@@ -142,6 +142,7 @@ import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
 import _poolFeebleness from "../pool/feebleness.js";
 import _poolFeedTheInfection from "../pool/feed-the-infection.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
+import _poolFenHauler from "../pool/fen-hauler.js";
 import _poolFerociousTigorilla from "../pool/ferocious-tigorilla.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
@@ -681,6 +682,7 @@ const shard: CardShard = {
     _poolFeebleness,
     _poolFeedTheInfection,
     _poolFellHorseman,
+    _poolFenHauler,
     _poolFerociousTigorilla,
     _poolFireFieldOgre,
     _poolFireImp,

@@ -35,6 +35,7 @@ import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
 import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
+import _poolBarricadeBreaker from "../pool/barricade-breaker.js";
 import _poolBarrinMasterWizard from "../pool/barrin-master-wizard.js";
 import _poolBashToBits from "../pool/bash-to-bits.js";
 import _poolBattlewandOak from "../pool/battlewand-oak.js";
@@ -134,6 +135,7 @@ import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
 import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
 import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
+import _poolEnragedGiant from "../pool/enraged-giant.js";
 import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
@@ -466,6 +468,7 @@ import _poolSunDappledCelebrant from "../pool/sun-dappled-celebrant.js";
 import _poolSuntailHawk from "../pool/suntail-hawk.js";
 import _poolSurvivalOfTheFittest from "../pool/survival-of-the-fittest.js";
 import _poolSwarmyardMassacre from "../pool/swarmyard-massacre.js";
+import _poolSweatworksBrawler from "../pool/sweatworks-brawler.js";
 import _poolSwoopingLookout from "../pool/swooping-lookout.js";
 import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
@@ -612,6 +615,7 @@ const shard: CardShard = {
     _poolBaelothBarritylEntertainer,
     _poolBarlsCage,
     _poolBaronyVampire,
+    _poolBarricadeBreaker,
     _poolBarrinMasterWizard,
     _poolBashToBits,
     _poolBattlewandOak,
@@ -711,6 +715,7 @@ const shard: CardShard = {
     _poolEmeritusOfConflict,
     _poolEnemyOfTheGuildpact,
     _poolEngineRat,
+    _poolEnragedGiant,
     _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
     _poolExcaliburSwordOfEden,
@@ -1043,6 +1048,7 @@ const shard: CardShard = {
     _poolSuntailHawk,
     _poolSurvivalOfTheFittest,
     _poolSwarmyardMassacre,
+    _poolSweatworksBrawler,
     _poolSwoopingLookout,
     _poolSwordOfBodyAndMind,
     _poolSyphonMind,

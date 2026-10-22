@@ -4318,10 +4318,13 @@ function Table({
   } else if (mode === 'choose-convoke' && pendingConvoke) {
     const { action, offer, picks } = pendingConvoke
     const name = action.type === 'cast-spell' ? game.nameOf(action.card) : ''
+    // Improvise (rule 702.126a) rides the same offer: artifacts, generic only.
+    const verb = offer.improvise === true ? 'improvise' : 'convoke'
+    const what = offer.improvise === true ? 'artifact' : 'creature'
     controls = (
       <div className="controls">
         <span>
-          {name}: convoke — tap up to {offer.maxCreatures} creature
+          {name}: {verb} — tap up to {offer.maxCreatures} {what}
           {offer.maxCreatures === 1 ? '' : 's'} to help pay ({picks.length} chosen)
         </span>
         <button
@@ -4336,7 +4339,7 @@ function Table({
             )
           }}
         >
-          {picks.length === 0 ? 'Pay with mana' : `Convoke ${picks.length}`}
+          {picks.length === 0 ? 'Pay with mana' : `${offer.improvise === true ? 'Improvise' : 'Convoke'} ${picks.length}`}
         </button>
         <button type="button" onClick={() => setPendingConvoke(null)}>
           Cancel
@@ -5377,7 +5380,7 @@ function Table({
             }
           : mode === 'choose-convoke' && pendingConvoke
             ? {
-                verb: 'Convoke',
+                verb: pendingConvoke.offer.improvise === true ? 'Improvise' : 'Convoke',
                 count: pendingConvoke.offer.maxCreatures,
                 of: pendingConvoke.offer.copies?.[stackMenu] ?? 1,
                 picks: pendingConvoke.picks,

@@ -376,6 +376,7 @@ import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
 import _poolRevengeOfTheDrowned from "../pool/revenge-of-the-drowned.js";
 import _poolReveredDead from "../pool/revered-dead.js";
+import _poolReverseEngineer from "../pool/reverse-engineer.js";
 import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
 import _poolRiderInNeed from "../pool/rider-in-need.js";
@@ -953,6 +954,7 @@ const shard: CardShard = {
     _poolRetrievalAgent,
     _poolRevengeOfTheDrowned,
     _poolReveredDead,
+    _poolReverseEngineer,
     _poolRhoxCharger,
     _poolRhoxOracle,
     _poolRiderInNeed,

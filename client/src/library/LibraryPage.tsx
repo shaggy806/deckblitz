@@ -1054,6 +1054,7 @@ function MechanicChips({ def, isToken }: { readonly def: CardDefinition; readonl
   if (def.overload) chips.push(`${def.overload.keyword ?? 'overload'} ${def.overload.cost}`)
   if (def.disturb) chips.push(`disturb ${def.disturb.cost}`)
   if (def.convoke) chips.push('convoke')
+  if (def.improvise) chips.push('improvise')
   if (def.adventure) chips.push('adventure')
   else if (def.omen) chips.push('omen')
   else if (def.transform) chips.push('transforms')

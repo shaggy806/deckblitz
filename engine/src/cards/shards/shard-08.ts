@@ -197,6 +197,7 @@ import _poolFlickACoin from "../pool/flick-a-coin.js";
 import _poolForbiddenFriendship from "../pool/forbidden-friendship.js";
 import _poolForensicGadgeteer from "../pool/forensic-gadgeteer.js";
 import _poolFoundationBreaker from "../pool/foundation-breaker.js";
+import _poolFoundryAssembler from "../pool/foundry-assembler.js";
 import _poolFromTheRubble from "../pool/from-the-rubble.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
 import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
@@ -326,6 +327,7 @@ import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.j
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
 import _poolMesaFalcon from "../pool/mesa-falcon.js";
+import _poolMetallicRebuke from "../pool/metallic-rebuke.js";
 import _poolMetamorphosis from "../pool/metamorphosis.js";
 import _poolMeteorCrater from "../pool/meteor-crater.js";
 import _poolMetropolisAngel from "../pool/metropolis-angel.js";
@@ -818,6 +820,7 @@ const shard: CardShard = {
     _poolForbiddenFriendship,
     _poolForensicGadgeteer,
     _poolFoundationBreaker,
+    _poolFoundryAssembler,
     _poolFromTheRubble,
     _poolFrostOgre,
     _poolFurnaceBlessedConqueror,
@@ -947,6 +950,7 @@ const shard: CardShard = {
     _poolMemnite,
     _poolMercurialGeists,
     _poolMesaFalcon,
+    _poolMetallicRebuke,
     _poolMetamorphosis,
     _poolMeteorCrater,
     _poolMetropolisAngel,

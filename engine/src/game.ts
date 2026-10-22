@@ -2949,7 +2949,7 @@ export class Game {
         // Convoke (rule 702.51): not affordable with mana alone doesn't mean
         // not castable — check again assuming every untapped creature helps,
         // maximally, before giving up on this variant.
-        if (!castable && def.convoke) {
+        if (!castable && Game.tapsToPay(def)) {
           const baseCost = this.withFace(card, face ?? 0, () =>
             this.castingCostOf(
               player,
@@ -2973,7 +2973,7 @@ export class Game {
               targetCount,
             ),
           );
-          const proof = this.maxConvokeFor(this.convokeCandidates(player), baseCost);
+          const proof = this.maxConvokeFor(this.convokeCandidates(player, def), baseCost, def);
           if (
             proof.length > 0 &&
             this.whyCannotCastSpell(
@@ -3376,9 +3376,9 @@ export class Game {
               return { delve: { choices: delvePool, minCards, maxCards, byX } };
             })()
           : {}),
-        ...(def.convoke
+        ...(Game.tapsToPay(def)
           ? (() => {
-              const candidates = this.convokeCandidates(player);
+              const candidates = this.convokeCandidates(player, def);
               const full = this.castingCostOf(player, card, def, 0, cost, pricedAt);
               // As many creatures as the largest X on offer could use.
               const atMaxX =
@@ -3397,9 +3397,13 @@ export class Game {
                   // convoking for generic leaves the {W}{W}{W} it would have
                   // made unpaid). Otherwise it's the allocation `castableAt`
                   // proved.
-                  proof: manaAffordable ? [] : this.maxConvokeFor(candidates, full),
+                  proof: manaAffordable ? [] : this.maxConvokeFor(candidates, full, def),
+                  ...(Game.improvisesOnly(def) ? { improvise: true as const } : {}),
                   manaAffordable,
-                  maxCreatures: atMaxX.generic + COLORS.reduce((n, c) => n + atMaxX.colored[c], 0),
+                  // Improvise pays only the generic part.
+                  maxCreatures: Game.improvisesOnly(def)
+                    ? atMaxX.generic
+                    : atMaxX.generic + COLORS.reduce((n, c) => n + atMaxX.colored[c], 0),
                   ...(xPlan !== null
                     ? {
                         xProof: {
@@ -3569,13 +3573,16 @@ export class Game {
    * last: a creature that convokes can't also tap for mana (see
    * `whyCannotCastSpell`), so a proof built from this order leaves the mana
    * creatures for the mana whenever it can. */
-  private convokeCandidates(player: PlayerId): ObjectId[] {
+  private convokeCandidates(player: PlayerId, def: CardDefinition): ObjectId[] {
+    // Improvise (rule 702.126a) taps untapped artifacts instead, through the
+    // same payment: each pays one generic mana and nothing else.
+    const type = Game.improvisesOnly(def) ? "artifact" : "creature";
     const creatures = this.state.zones.shared.battlefield.filter((id) => {
       const object = this.state.objects[id];
       return (
         object.controller === player &&
         !object.tapped &&
-        computeCharacteristics(this.state, this.registry, id).types.includes("creature")
+        computeCharacteristics(this.state, this.registry, id).types.includes(type)
       );
     });
     const makesMana = new Set(this.manaSources(player).map((s) => s.id));
@@ -3585,6 +3592,18 @@ export class Game {
     ];
   }
 
+  /** Whether `def` taps permanents to pay for itself — convoke (rule 702.51)
+   * or improvise (702.126). */
+  private static tapsToPay(def: CardDefinition): boolean {
+    return def.convoke || def.improvise;
+  }
+
+  /** Improvise without convoke (rule 702.126a): the tapped permanents are
+   * artifacts, each paying one generic mana. No card has both. */
+  private static improvisesOnly(def: CardDefinition): boolean {
+    return def.improvise && !def.convoke;
+  }
+
   /** A greedy convoke allocation using as many of `candidates` as usefully
    * reduce `cost` (colored pips first, since a creature can only help with
    * its own colors or generic; leftover creatures go to generic; a
@@ -3592,12 +3611,15 @@ export class Game {
    * a convokable spell is affordable *at all* — enumerated in
    * `castSpellActions`, never dispatched as-is; the real cast can use any
    * subset/allocation the driver actually chooses. */
-  private maxConvokeFor(candidates: readonly ObjectId[], cost: ManaCost): PaidConvoke[] {
+  private maxConvokeFor(candidates: readonly ObjectId[], cost: ManaCost, def: CardDefinition): PaidConvoke[] {
     const out: PaidConvoke[] = [];
     const colorLeft = { ...cost.colored };
     let genericLeft = cost.generic;
+    const genericOnly = Game.improvisesOnly(def);
     for (const creature of candidates) {
-      const colors = computeCharacteristics(this.state, this.registry, creature).colors;
+      const colors = genericOnly
+        ? new Set<Color>()
+        : computeCharacteristics(this.state, this.registry, creature).colors;
       // A compacted token stack helps once per token.
       for (let i = 0; i < (this.state.objects[creature].stackCount ?? 1); i += 1) {
         const payColor = COLORS.find((c) => colors.has(c) && colorLeft[c] > 0);
@@ -10030,12 +10052,12 @@ export class Game {
     targetCount: number,
     manaOnly: number,
   ): { maxX: number; convoke: PaidConvoke[] } {
-    if (!def.convoke) return { maxX: manaOnly, convoke: [] };
+    if (!Game.tapsToPay(def)) return { maxX: manaOnly, convoke: [] };
     return this.withFace(cardId, face, () => {
       const purpose: ManaPurpose = { kind: "cast", card: cardId };
       const payable = (k: number, pool: readonly ObjectId[]): PaidConvoke[] | null => {
         const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
-        const proof = this.maxConvokeFor(pool, cost);
+        const proof = this.maxConvokeFor(pool, cost, def);
         const arrangement =
           proof.length > 0 ? { withheld: new Set(proof.map((p) => p.creature)) } : undefined;
         const rest = proof.length > 0 ? this.reduceCostByConvoke(cost, proof) : cost;
@@ -10046,7 +10068,7 @@ export class Game {
       // `maxAffordableX` reports 0 even when X=0 itself isn't affordable.
       let best: { maxX: number; convoke: PaidConvoke[] } =
         payable(0, []) !== null ? { maxX: manaOnly, convoke: [] } : { maxX: -1, convoke: [] };
-      const candidates = this.convokeCandidates(player);
+      const candidates = this.convokeCandidates(player, def);
       const sources = this.manaSources(player);
       const makesMana = new Set(sources.map((s) => s.id));
       const spare = candidates.filter((id) => !makesMana.has(id));
@@ -10976,10 +10998,10 @@ export class Game {
     const delved = this.reduceCostByDelve(baseCost, delve);
     let convoked: PaidConvoke[] = [];
     if (convoke !== undefined && convoke.length > 0) {
-      if (!def.convoke) return `${def.name} does not have convoke`;
-      const resolved = this.resolveConvoke(convoke, delved);
+      if (!Game.tapsToPay(def)) return `${def.name} does not have convoke or improvise`;
+      const resolved = this.resolveConvoke(convoke, delved, def);
       if (typeof resolved === "string") return resolved;
-      const convokeError = this.whyCannotConvoke(player, resolved, delved);
+      const convokeError = this.whyCannotConvoke(player, resolved, delved, def);
       if (convokeError !== null) return convokeError;
       convoked = resolved;
     }
@@ -11063,7 +11085,9 @@ export class Game {
     player: PlayerId,
     convoke: readonly PaidConvoke[],
     cost: ManaCost,
+    def: CardDefinition,
   ): string | null {
+    const improvise = Game.improvisesOnly(def);
     const seen = new Map<ObjectId, number>();
     let genericPay = 0;
     const colorPay: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
@@ -11078,7 +11102,11 @@ export class Game {
       seen.set(creature, times);
       if (object.tapped) return "that creature is already tapped";
       const c = computeCharacteristics(this.state, this.registry, creature);
-      if (!c.types.includes("creature")) return "only a creature can convoke";
+      // Improvise (rule 702.126a): an artifact, for one generic mana.
+      if (improvise) {
+        if (!c.types.includes("artifact")) return "only an artifact can improvise";
+        if (pays !== "generic") return "improvise pays only generic mana";
+      } else if (!c.types.includes("creature")) return "only a creature can convoke";
       if (pays === "generic") {
         genericPay += 1;
       } else {
@@ -11104,7 +11132,9 @@ export class Game {
   private resolveConvoke(
     convoke: readonly ConvokePayment[],
     cost: ManaCost,
+    def: CardDefinition,
   ): PaidConvoke[] | string {
+    const genericOnly = Game.improvisesOnly(def);
     const colorLeft = { ...cost.colored };
     let genericLeft = cost.generic;
     for (const { pays } of convoke) {
@@ -11119,7 +11149,7 @@ export class Game {
       }
       const object = this.state.objects[creature];
       if (object === undefined) return "that creature does not exist";
-      const colors = computeCharacteristics(this.state, this.registry, creature).colors;
+      const colors = genericOnly ? new Set<Color>() : computeCharacteristics(this.state, this.registry, creature).colors;
       const color = COLORS.find((c) => colors.has(c) && colorLeft[c] > 0);
       if (color !== undefined) {
         colorLeft[color] -= 1;
@@ -11945,7 +11975,7 @@ export class Game {
     );
     let convoked: PaidConvoke[] = [];
     if (convoke !== undefined && convoke.length > 0) {
-      const resolved = this.resolveConvoke(convoke, fullCost);
+      const resolved = this.resolveConvoke(convoke, fullCost, def);
       if (typeof resolved === "string") throw new Error(resolved);
       convoked = resolved;
     }
@@ -12110,7 +12140,9 @@ export class Game {
     // Where it's cast from, known as its costs are paid — mana that may only
     // pay for a spell cast from a graveyard asks (Lord of the Forsaken).
     object.castFrom = castFrom;
-    if (convokers.length > 0) object.convokedBy = convokers;
+    // Improvise's tapped artifacts didn't convoke it (Lethal Scheme's "each
+    // creature that convoked this spell").
+    if (convokers.length > 0 && def.convoke) object.convokedBy = convokers;
     if (impulseUsed?.oncePerTurn === true && impulseUsed.source !== undefined) {
       const linked = this.state.objects[impulseUsed.source.id];
       if (linked !== undefined) linked.impulseCastOnTurn = this.state.turn.number;

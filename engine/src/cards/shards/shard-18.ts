@@ -429,6 +429,7 @@ import _poolSkullRaid from "../pool/skull-raid.js";
 import _poolSkyclaveApparition from "../pool/skyclave-apparition.js";
 import _poolSkystrikeOfficer from "../pool/skystrike-officer.js";
 import _poolSlimyAquarium from "../pool/slimy-aquarium.js";
+import _poolSlyRequisitioner from "../pool/sly-requisitioner.js";
 import _poolSmiteTheMonstrous from "../pool/smite-the-monstrous.js";
 import _poolSnakeskinVeil from "../pool/snakeskin-veil.js";
 import _poolSolariumSentry from "../pool/solarium-sentry.js";
@@ -1028,6 +1029,7 @@ const shard: CardShard = {
     _poolSkyclaveApparition,
     _poolSkystrikeOfficer,
     _poolSlimyAquarium,
+    _poolSlyRequisitioner,
     _poolSmiteTheMonstrous,
     _poolSnakeskinVeil,
     _poolSolariumSentry,

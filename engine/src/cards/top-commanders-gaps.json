@@ -397,7 +397,8 @@
   "effect:target-player-shuffles-graveyard-into-library",
   "effect:player-next-untap-step-skip-filter",
   "decision:discard-any-number",
-  "keyword:embalm"
+  "keyword:embalm",
+  "keyword:improvise"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

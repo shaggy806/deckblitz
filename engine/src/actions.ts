@@ -1082,6 +1082,9 @@ export type LegalAction =
         /** Whether the spell can be paid for with mana alone. When it can't,
          * convoking isn't optional, and `proof` is a set that works. */
         readonly manaAffordable: boolean;
+        /** Improvise (rule 702.126a), not convoke: the candidates are
+         * artifacts, and each pays one generic mana. */
+        readonly improvise?: true;
         /** The most creatures that can help pay — every generic and
          * coloured pip in the cost, at the largest X offered (`xCost.maxX`)
          * when it has one. Each pays one; past that, a creature has nothing

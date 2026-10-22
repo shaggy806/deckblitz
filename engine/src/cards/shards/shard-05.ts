@@ -338,6 +338,7 @@ import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
 import _poolMaskOfMemory from "../pool/mask-of-memory.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
+import _poolMaverickThopterist from "../pool/maverick-thopterist.js";
 import _poolMendingHands from "../pool/mending-hands.js";
 import _poolMerchantOfManyHats from "../pool/merchant-of-many-hats.js";
 import _poolMerchantRaiders from "../pool/merchant-raiders.js";
@@ -940,6 +941,7 @@ const shard: CardShard = {
     _poolMartyrForTheCause,
     _poolMaskOfMemory,
     _poolMaulOfTheSkyclaves,
+    _poolMaverickThopterist,
     _poolMendingHands,
     _poolMerchantOfManyHats,
     _poolMerchantRaiders,

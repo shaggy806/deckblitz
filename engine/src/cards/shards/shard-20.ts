@@ -44,6 +44,7 @@ import _poolAxebaneBeast from "../pool/axebane-beast.js";
 import _poolBackForSeconds from "../pool/back-for-seconds.js";
 import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
 import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
+import _poolBastionInventor from "../pool/bastion-inventor.js";
 import _poolBatterskull from "../pool/batterskull.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
@@ -682,6 +683,7 @@ const shard: CardShard = {
     _poolBackForSeconds,
     _poolBalshanCollaborator,
     _poolBarkchannelPathway,
+    _poolBastionInventor,
     _poolBatterskull,
     _poolBeckonApparition,
     _poolBelbesPercher,

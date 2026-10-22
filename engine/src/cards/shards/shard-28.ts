@@ -48,6 +48,7 @@ import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
+import _poolBattleAtTheBridge from "../pool/battle-at-the-bridge.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
 import _poolBearerOfMemory from "../pool/bearer-of-memory.js";
 import _poolBelloBardOfTheBrambles from "../pool/bello-bard-of-the-brambles.js";
@@ -649,6 +650,7 @@ const shard: CardShard = {
     _poolAvishkarRaceway,
     _poolAxgardCavalry,
     _poolBartolomeDelPresidio,
+    _poolBattleAtTheBridge,
     _poolBazaarOfBaghdad,
     _poolBearerOfMemory,
     _poolBelloBardOfTheBrambles,
