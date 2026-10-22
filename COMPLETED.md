@@ -560,6 +560,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **Copies of one trigger condense on the stack** (the user, 2026-10-07 and 2026-10-22; done
+  2026-10-22): abilities that are copies of one another (`stackCopyKey` — one controller, the same
+  ability of a same-named card, nothing chosen) show as one entry "×N"; resolving them all goes in
+  one frame with one exit and one shared mill beat. Sixty Mesmeric Orb triggers: 195 s → 6.6 s
+  (`client/scripts/orb-timing.mjs`).
 - **One art lookup, and the artist credit on one line everywhere it fits** (the user, 2026-10-17;
   done 2026-10-22): `ui/useCardArt.ts` replaces the lookup seven components each repeated. The
   credit (`ArtCredit`'s `fit`) is one line across the art, its font sized to the text's length; it

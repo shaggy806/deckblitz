@@ -528,6 +528,39 @@ describe("Room pacing (realtime)", () => {
       expect(stack()).toBe(0);
     });
 
+    it("resolves a run of copies of one ability in one frame (Mesmeric Orb)", () => {
+      const paced = makePacedRoom(true);
+      paced.room.addBot(BOB);
+      paced.room.start();
+      const { room, clock, alice } = paced;
+      const game = room.game;
+      // Alice's Orb sees each of Bob's four Forests untap in his untap step:
+      // four copies of one trigger, all hers. Her Forest and Fog keep her
+      // windows real, so the stack only drains when she asks.
+      game.debugSpawn("Mesmeric Orb", ALICE, "battlefield");
+      game.debugSpawn("Forest", ALICE, "battlefield");
+      game.debugSpawn("Fog", ALICE, "hand");
+      for (let i = 0; i < 4; i += 1) game.debugSpawn("Forest", BOB, "battlefield", { tapped: true });
+      room.publish();
+      const stack = () => game.state.zones.shared.stack.length;
+      for (let i = 0; i < 40 && !(game.activePlayer === BOB && stack() > 0); i += 1) {
+        // Down to seven cards at her cleanup: a Forest goes, never the Fog.
+        if (game.state.awaiting?.kind === "discard") {
+          const forest = game.state.zones.perPlayer[ALICE].hand.find((id) => game.state.objects[id].cardName === "Forest");
+          room.dispatch(alice.connection, { type: "discard", player: ALICE, cards: [forest!] });
+        } else if (game.state.priority.holder === ALICE) room.dispatch(alice.connection, { type: "pass-priority", player: ALICE });
+        clock.advance(1000);
+      }
+      expect(game.activePlayer).toBe(BOB);
+      expect(stack()).toBe(4);
+
+      const framesBefore = alice.frames.length;
+      room.requestResolveAll(alice.connection);
+      // All four went in one go, shown as one frame — not one held frame each.
+      expect(stack()).toBe(0);
+      expect(alice.frames.length).toBe(framesBefore + 1);
+    });
+
     it("shows a spell arriving on the stack before it resolves, without the bot-speed pause", () => {
       const paced = makePacedRoom(true, "slow");
       paced.room.addBot(BOB);

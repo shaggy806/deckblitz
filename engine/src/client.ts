@@ -38,5 +38,7 @@ export { attackingViolations } from "./combat/attacking.js";
 export { blockingViolations } from "./combat/blocking.js";
 export { damageAssignmentViolations, standardAssignment } from "./combat/damage.js";
 export { fitsTogether } from "./zone-choice-together.js";
+export { stackCopyKey } from "./stack-copies.js";
+export type { StackCopyFields } from "./stack-copies.js";
 export { defaultTapPicks, tapPicksPower, waterbendAt } from "./actions.js";
 export type { ZoneChoiceTogether } from "./zone-choice-together.js";

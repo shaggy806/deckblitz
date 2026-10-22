@@ -937,3 +937,30 @@ describe('retimeFlights: the second half as measured on the new board', () => {
     expect(retimeFlights(after, 2 * TAP_STEP_MS, () => 0)).toEqual({ after, afterMs: 2 * TAP_STEP_MS })
   })
 })
+
+describe('a run of copies of one ability resolving in one frame', () => {
+  // Mesmeric Orb's trigger for each of four permanents, all resolved at
+  // once: each its own exit and mill as the engine tells it.
+  const run = () =>
+    [1, 2, 3, 4].flatMap((n) => [
+      ev({ type: 'ability-resolved', source: 'orb', object: `orb${n}` }),
+      ev({ type: 'cards-milled', player: 'p1', objects: [`m${n}`] }),
+    ])
+  const copies = new Map([1, 2, 3, 4].map((n) => [`orb${n}`, 'p1|Mesmeric Orb|0'] as [ObjectId, string]))
+
+  it('leaves the stack as one exit, its mills sharing one beat', () => {
+    const s = scheduleEvents(run(), 'beginning', { scale: 1, reduced: false, stackCopies: copies })
+    const exits = s.items.filter((i) => i.event.type === 'ability-resolved')
+    expect(exits).toHaveLength(1)
+    const mills = s.items.filter((i) => i.event.type === 'cards-milled')
+    expect(mills).toHaveLength(4)
+    expect(new Set(mills.map((m) => m.offset)).size).toBe(1)
+    expect(s.totalMs).toBeLessThan(STACK_EXIT_MS + 2 * MILL_STEP_MS)
+  })
+
+  it('is an exit and a mill each without the copies known', () => {
+    const s = scheduleEvents(run(), 'beginning', { scale: 1, reduced: false })
+    expect(s.items.filter((i) => i.event.type === 'ability-resolved')).toHaveLength(4)
+    expect(s.totalMs).toBeGreaterThanOrEqual(4 * STACK_EXIT_MS)
+  })
+})

@@ -47,6 +47,7 @@ export type { BlockOffer, BlockingViolation } from "./combat/blocking.js";
 export { damageAssignmentViolations, standardAssignment } from "./combat/damage.js";
 export type { DamageAssignmentOffer } from "./combat/damage.js";
 export * from "./auto-settle.js";
+export * from "./stack-copies.js";
 export * from "./target-polarity.js";
 export * from "./deck-bias.js";
 export * from "./bot/index.js";

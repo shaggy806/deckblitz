@@ -5,6 +5,7 @@ import { decisionGhostOf } from '../game/decisionSource.ts'
 import { describeTarget, playerLabel, seatClassOf } from '../format.ts'
 import { CardTile } from './CardTile.tsx'
 import { stackDepthVars } from './stackDepth.ts'
+import { stackRuns } from '../game/stackCopies.ts'
 
 /** A permanent drawn on the stack as its card: none of its state on the
  * battlefield — tapped, damage, counters, combat, attachments — which is
@@ -95,8 +96,11 @@ export function Stack({
   // explaining it. It rides at depth 0 -- where whatever you're responding to
   // always sits -- and isn't a real stack object, so it's never targetable.
   const ghost = decisionGhostOf(view, answered)
-  const ids = [...(ghost ? [ghost] : []), ...[...view.zones.stack].reverse()]
-  const N = ids.length
+  // Copies of one ability in a row (Mesmeric Orb's trigger for each of sixty
+  // permanents) are one entry, "×60": `stackRuns`. Each still resolves on its
+  // own; the entry is its top copy.
+  const runs = [...(ghost ? [[ghost]] : []), ...stackRuns(view, [...view.zones.stack].reverse())]
+  const N = runs.length
   const nameOf = (id: ObjectId): string => view.objects[id]?.cardName ?? id
   /** What an entry's card shows. An ability carries only its source's card
    * name, so drawn by itself it's the card as printed — a prototyped Combat
@@ -130,9 +134,16 @@ export function Stack({
   return (
     <div className="stack-overlay">
       <div className="stack-pile">
-        {ids.map((id, depth) => {
+        {runs.map((run, depth) => {
+          const id = run[0]
           const obj = view.objects[id]
           if (!obj) return null
+          // How many abilities the entry stands for: each copy in the run,
+          // and each identical one an object already stands for itself.
+          const copies = run.reduce((n, member) => n + (view.objects[member]?.stackCount ?? 1), 0)
+          // The run's first copy a target slot can take (Stifle): the entry
+          // lights up and a click picks that one.
+          const targetId = run.find((member) => isTargetable(member)) ?? id
           const isTop = depth === 0
           // Only the top entry says whose it is and what it targets (App.css,
           // `.shows-lines`); under a "prompted by" card, which isn't on the
@@ -154,13 +165,13 @@ export function Stack({
             : obj.kind === 'ability'
               ? `${obj.sourceObjectId ? nameOf(obj.sourceObjectId) : obj.cardName}'s ability${
                   // Several identical triggers as one entry (a watcher seeing a
-                  // token stack enter): each resolves on its own.
-                  (obj.stackCount ?? 1) > 1 ? ` ×${obj.stackCount}` : ''
+                  // token stack enter, a run of copies): each resolves on its own.
+                  copies > 1 ? ` ×${copies}` : ''
                 }`
               : obj.isCopy
                 ? `copy of ${obj.cardName}`
                 : null
-          const targetable = !isGhost && isTargetable(id)
+          const targetable = !isGhost && isTargetable(targetId)
           const isNew = before === null || !before.has(id)
           return (
             <div
@@ -206,9 +217,9 @@ export function Stack({
                   obj={isGhost ? asCardFace(obj) : faceOf(obj)}
                   badge={obj.isCopy ? 'copy' : undefined}
                   highlight={targetable}
-                  selected={!isGhost && (pickedIds?.has(id) ?? false)}
-                  aimedBy={!isGhost && aimed !== null && aimed.objects.has(id) ? aimed.by : null}
-                  onClick={!isGhost && onTargetClick ? () => onTargetClick(id) : undefined}
+                  selected={!isGhost && run.some((member) => pickedIds?.has(member) ?? false)}
+                  aimedBy={!isGhost && aimed !== null && run.some((member) => aimed.objects.has(member)) ? aimed.by : null}
+                  onClick={!isGhost && onTargetClick ? () => onTargetClick(targetId) : undefined}
                 />
               </div>
               {!isGhost && obj.targets && obj.targets.length > 0 ? (

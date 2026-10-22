@@ -351,6 +351,11 @@ export interface ScheduleOptions {
    * into another's tile hitting in the same frame shares that tile's strike
    * rather than waiting a beat of its own with nothing drawn. */
   readonly tileOf?: ReadonlyMap<ObjectId, ObjectId>
+  /** Each ability on the stack on screen, by its `stackCopyKey`: a run of
+   * copies resolving in one frame (Mesmeric Orb's sixty triggers, resolved
+   * all at once) leaves as one exit — the stack draws them as one entry — so
+   * their mills sit together and share a beat too. */
+  readonly stackCopies?: ReadonlyMap<ObjectId, string>
 }
 
 const NORMAL_SPEED: ScheduleOptions = { scale: 1, reduced: false }
@@ -809,10 +814,13 @@ function layOutFrame(
   scale: number,
   reduced: boolean,
   landings: Landings,
-  { handDraws = new Set(), seat = null, tileOf = new Map() }: ScheduleOptions,
+  { handDraws = new Set(), seat = null, tileOf = new Map(), stackCopies = new Map() }: ScheduleOptions,
 ): { schedule: EventSchedule; paired: Set<number> } {
   const phase = { current: startPhase }
   const slots: Slot[] = []
+  // The copy run the last exit belonged to (`stackCopies`): a later copy's
+  // exit is the same entry leaving, already shown.
+  let exitRun: string | null = null
   // Where the frame's last combat damage is: a declaration before it has its
   // hits in this frame too.
   let lastHit = -1
@@ -821,6 +829,11 @@ function layOutFrame(
   }
   for (const [index, event] of events.entries()) {
     for (const slot of slotsFor(event, phase, reduced, landings, index < lastHit)) {
+      if (slot.kind === 'exit') {
+        const run = slot.event.type === 'ability-resolved' ? (stackCopies.get(slot.event.object) ?? null) : null
+        if (run !== null && run === exitRun) continue
+        exitRun = run
+      }
       // A draw into the viewer's own hand settles into its place there, over
       // the new board.
       const own = slot.kind === 'draw' && slot.event.type === 'card-drawn' && handDraws.has(slot.event.object)

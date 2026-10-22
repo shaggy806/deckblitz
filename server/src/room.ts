@@ -29,7 +29,7 @@
  */
 
 import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine/local";
-import { autoAnswerFor, forcedZoneChoice } from "engine/local";
+import { autoAnswerFor, forcedZoneChoice, stackCopyKey } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
 import type {
@@ -435,6 +435,9 @@ export class Room {
   private eventsAtPublish = 0;
   /** The stack as the last frame showed it — see `stackArrivalUnshown`. */
   private stackAtPublish: readonly ObjectId[] = [];
+  /** Each ability the last frame showed on the stack, by its `stackCopyKey`
+   * — read once it has resolved and left the state (`resolvedUnshown`). */
+  private copyKeysAtPublish: ReadonlyMap<ObjectId, string | null> = new Map();
   /** The attacks and blocks the last frame showed — see `combatUnshown`. */
   private combatAtPublish: ReadonlySet<string> = new Set();
   private readonly showStackArrivals: boolean;
@@ -1511,6 +1514,12 @@ export class Room {
     this.seq += 1;
     this.eventsAtPublish = this.game.events.length;
     this.stackAtPublish = [...this.game.state.zones.shared.stack];
+    this.copyKeysAtPublish = new Map(
+      this.stackAtPublish.map((id) => {
+        const object = this.game.state.objects[id];
+        return [id, object === undefined ? null : stackCopyKey(object)] as const;
+      }),
+    );
     this.combatAtPublish = this.combatPairs();
     this.onUpdate(this);
   }
@@ -1575,18 +1584,30 @@ export class Room {
   private resolvedUnshown(): boolean {
     if (!this.seats.some((seat) => seat.resolveAllFrom !== null)) return false;
     const events = this.game.events;
+    // A run of copies of one ability (`stackCopyKey`: Mesmeric Orb's trigger
+    // for each of sixty permanents that untapped) resolves as one frame: shown
+    // once the run is over, not once a copy — sixty held frames took over three
+    // minutes (`client/scripts/orb-timing.mjs`). Anything else that resolved
+    // shows at once, as before.
+    let run: string | null | undefined;
     for (let i = this.eventsAtPublish; i < events.length; i += 1) {
-      const type = events[i].type;
+      const event = events[i];
+      const type = event.type;
       if (
         type === "spell-resolved" ||
         type === "ability-resolved" ||
         type === "spell-countered" ||
         type === "spell-fizzled"
       ) {
-        return true;
+        const key = type === "ability-resolved" ? (this.copyKeysAtPublish.get(event.object) ?? null) : null;
+        if (key === null || (run !== undefined && run !== key)) return true;
+        run = key;
       }
     }
-    return false;
+    if (run === undefined || run === null) return false;
+    const stack = this.game.state.zones.shared.stack;
+    const top = stack.length > 0 ? this.game.state.objects[stack[stack.length - 1]] : undefined;
+    return top === undefined || stackCopyKey(top) !== run;
   }
 
   disconnect(connection: Connection): void {
