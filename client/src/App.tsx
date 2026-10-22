@@ -5276,6 +5276,27 @@ function Table({
         >
           Confirm
         </button>
+        {/* Attackers still to assign that are in the same situation as this
+            one (a stack of tokens each blocked alike): the same split for
+            all of them, rather than a prompt per token (the user,
+            2026-10-22). */}
+        {offer.alike !== undefined && offer.alike > 0 ? (
+          <button
+            type="button"
+            disabled={!valid}
+            title={`This split for this attacker and the ${offer.alike} others blocked the same way`}
+            onClick={() =>
+              game.dispatch({
+                type: 'assign-combat-damage',
+                player: seat,
+                assignment: [...picks],
+                forAll: true,
+              })
+            }
+          >
+            Same for all {offer.alike + 1}
+          </button>
+        ) : null}
       </div>
     )
   } else {

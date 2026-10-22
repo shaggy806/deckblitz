@@ -37,6 +37,7 @@ export const assignCombatDamage = defineDecision({
       lethal: [...awaiting.lethal],
       trample: awaiting.trample,
       indestructible: [...awaiting.indestructible],
+      ...(awaiting.alike !== undefined && awaiting.alike > 0 ? { alike: awaiting.alike } : {}),
     },
   ],
 
@@ -57,7 +58,7 @@ export const assignCombatDamage = defineDecision({
 
   apply: (host, action): void => {
     if (action.type !== "assign-combat-damage") return;
-    host.applyAssignCombatDamage(action.player, action.assignment);
+    host.applyAssignCombatDamage(action.player, action.assignment, action.forAll === true);
   },
 
   ask: (controller, view, awaiting, player): Action => ({

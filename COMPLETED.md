@@ -564,6 +564,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **One damage decision for a stack of blocked attackers** (the user, 2026-10-22): the damage
+  prompt says how many attackers still to assign are in the same situation (the same attacker,
+  power and blockers), and "Same for all N" gives each that split (`assign-combat-damage`'s
+  `forAll`), every one still checked on its own — 100 blocked tokens were 100 prompts.
 - **Blocking a token stack with a token stack** (the user, 2026-10-22): pairing your stack with an
   attacking one blocks one for one at once; the bar's row has Max and "1 / 2 / 3 each" with a line
   saying how the blocks spread; the blockers stay one tile once declared, with one arrow and the

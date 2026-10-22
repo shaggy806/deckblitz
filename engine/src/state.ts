@@ -2935,6 +2935,9 @@ export type AwaitingDecision =
       /** Per blocker: lethal damage won't destroy it. The default split
        * (`standardAssignment`) spends damage on these last. */
       readonly indestructible: readonly boolean[];
+      /** How many attackers pending after this one are in the same situation
+       * (`Game.damageSituation`), which an answer's `forAll` covers. */
+      readonly alike?: number;
     };
 
 /**

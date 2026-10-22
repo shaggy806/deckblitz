@@ -46,6 +46,7 @@ import type {
 } from "./actions.js";
 import {
   autoAssignForAttacker,
+  damageAssignmentViolations,
   lethalFor,
   liveBlockersOf,
   needsDamageAssignmentChoice,
@@ -1247,7 +1248,7 @@ export class Game {
       applyCommanderChoice: (player, toCz) => this.applyCommanderChoice(player, toCz),
       applyMulligan: (player, keep) => this.applyMulligan(player, keep),
       applyPutOnBottom: (player, cards) => this.applyPutOnBottom(player, cards),
-      applyAssignCombatDamage: (p, a) => this.applyAssignCombatDamage(p, a),
+      applyAssignCombatDamage: (p, a, forAll) => this.applyAssignCombatDamage(p, a, forAll),
       applyAttackerDeclarations: (p, d) => this.applyAttackerDeclarations(p, d),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
@@ -7671,6 +7672,8 @@ export class Game {
     if (cd.pendingAssignments.length > 0) {
       const attackerId = cd.pendingAssignments[0];
       const blockers = this.liveBlockersOf(attackerId);
+      const situation = this.damageSituation(attackerId);
+      const alike = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation).length;
       this.state.awaiting = {
         kind: "assign-combat-damage",
         player: this.state.objects[attackerId].controller,
@@ -7680,10 +7683,35 @@ export class Game {
         lethal: blockers.map((b) => this.lethalFor(attackerId, b)),
         trample: this.objHasKeyword(attackerId, "trample"),
         indestructible: blockers.map((b) => this.objHasKeyword(b, "indestructible")),
+        ...(alike > 0 ? { alike } : {}),
       };
       return;
     }
     this.applyCombatDamageSubPass();
+  }
+
+  /**
+   * What a blocked attacker's damage assignment is a choice about, as one
+   * string: its controller, its name, the damage it assigns and trample, and
+   * each blocker in order — its name, its lethal damage, indestructible. Two
+   * attackers with the same one are the same choice (a stack of attacking
+   * tokens each blocked by two Soldiers), so one answer can cover both
+   * (`assign-combat-damage`'s `forAll`).
+   */
+  private damageSituation(attackerId: ObjectId): string {
+    const attacker = this.state.objects[attackerId];
+    const blockers = this.liveBlockersOf(attackerId);
+    return JSON.stringify([
+      attacker?.controller,
+      attacker?.cardName,
+      assignedCombatDamage(this.state, this.registry, attackerId),
+      this.objHasKeyword(attackerId, "trample"),
+      blockers.map((b) => [
+        this.state.objects[b]?.cardName,
+        this.lethalFor(attackerId, b),
+        this.objHasKeyword(b, "indestructible"),
+      ]),
+    ]);
   }
 
   /** Kept because the matching apply validates before applying and throws;
@@ -7698,6 +7726,7 @@ export class Game {
   private applyAssignCombatDamage(
     player: PlayerId,
     assignment: readonly number[],
+    forAll = false,
   ): void {
     const why = this.whyCannotAssignCombatDamage(player, assignment);
     if (why !== null) throw new Error(why);
@@ -7708,11 +7737,30 @@ export class Game {
     const cd = this.state.combatDamage;
     if (cd === null) throw new Error("unreachable: no combat-damage step in progress");
 
-    this.state.combatDamage = {
-      ...cd,
-      assigned: { ...cd.assigned, [awaiting.attacker]: [...assignment] },
-      pendingAssignments: cd.pendingAssignments.slice(1),
-    };
+    const assigned: Record<string, readonly number[]> = { ...cd.assigned, [awaiting.attacker]: [...assignment] };
+    let pending = cd.pendingAssignments.slice(1);
+    if (forAll) {
+      // The same split for each attacker still to assign in the same
+      // situation: each still its own assignment (rule 510.1c), made the
+      // same way, so each is checked as the decision would check it.
+      const situation = this.damageSituation(awaiting.attacker);
+      const same = pending.filter((id) => this.damageSituation(id) === situation);
+      for (const id of same) {
+        const blockers = this.liveBlockersOf(id);
+        const asked = {
+          blockers,
+          power: assignedCombatDamage(this.state, this.registry, id),
+          lethal: blockers.map((b) => this.lethalFor(id, b)),
+          trample: this.objHasKeyword(id, "trample"),
+          indestructible: blockers.map((b) => this.objHasKeyword(b, "indestructible")),
+        };
+        const wrong = damageAssignmentViolations(asked, assignment);
+        if (wrong !== null) throw new Error(wrong);
+        assigned[id] = [...assignment];
+      }
+      pending = pending.filter((id) => !same.includes(id));
+    }
+    this.state.combatDamage = { ...cd, assigned, pendingAssignments: pending };
     this.state.awaiting = null;
     this.promptNextDamageAssignment();
     // `promptNextDamageAssignment` may have set `awaiting` for the next

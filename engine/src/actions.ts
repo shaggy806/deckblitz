@@ -626,6 +626,11 @@ export type Action =
       readonly type: "assign-combat-damage";
       readonly player: PlayerId;
       readonly assignment: readonly number[];
+      /** The same split for every attacker still to assign in the same
+       * situation as this one (the legal action's `alike`): a stack of
+       * attacking tokens each blocked alike answered once. Each is still its
+       * own assignment, checked on its own. */
+      readonly forAll?: true;
     }
   | {
       /** Answers a pending `sacrifice` decision (a sacrifice effect — Diabolic
@@ -1268,6 +1273,11 @@ export type LegalAction =
       readonly lethal: readonly number[];
       readonly trample: boolean;
       readonly indestructible: readonly boolean[];
+      /** How many attackers still to assign after this one are in the same
+       * situation — the same attacker and power, the same blockers by name
+       * in order with the same lethal and indestructible, trample alike — so
+       * the action's `forAll` gives them this split too. */
+      readonly alike?: number;
     }
   | {
       readonly kind: "discard";
