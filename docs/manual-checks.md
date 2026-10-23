@@ -5261,4 +5261,4 @@ engine terms. A second thing to check is a second test.
 
 ### Spinning Wheel Kick: X counts only the creatures it hits
 - **Do:** Cast Spinning Wheel Kick with X=2. Pick your Hill Giant, then Bob's Grizzly Bears and Gray Ogre.
-- **Expect:** After the Hill Giant both of Bob's creatures can be picked, and Done waits for the second one. Hill Giant deals 3 damage to each, and both die.
+- **Expect:** After the Hill Giant both of Bob's creatures can be picked. With one picked, Done stays greyed out; picking the second casts the spell. Hill Giant deals 3 damage to each, and both die.
