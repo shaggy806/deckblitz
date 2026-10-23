@@ -131,6 +131,7 @@ import _poolDisenchant from "../pool/disenchant.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
 import _poolDivination from "../pool/divination.js";
 import _poolDjinnOfFoolsFall from "../pool/djinn-of-fools-fall.js";
+import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
@@ -723,6 +724,7 @@ const shard: CardShard = {
     _poolDisorderInTheCourt,
     _poolDivination,
     _poolDjinnOfFoolsFall,
+    _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
     _poolDragonHatchling,
     _poolDragonMage,

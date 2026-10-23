@@ -173,6 +173,7 @@ import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
+import _poolFutureSight from "../pool/future-sight.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
 import _poolGarrisonSergeant from "../pool/garrison-sergeant.js";
 import _poolGateColossus from "../pool/gate-colossus.js";
@@ -329,6 +330,7 @@ import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
+import _poolNutCollector from "../pool/nut-collector.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOcelotPride from "../pool/ocelot-pride.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
@@ -371,6 +373,7 @@ import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
+import _poolQuestForTheGoblinLord from "../pool/quest-for-the-goblin-lord.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
 import _poolRalStormConduit from "../pool/ral-storm-conduit.js";
 import _poolRallyingRoar from "../pool/rallying-roar.js";
@@ -786,6 +789,7 @@ const shard: CardShard = {
     _poolForgeOfHeroes,
     _poolFumikoTheLowblood,
     _poolFuriousStrength,
+    _poolFutureSight,
     _poolGalecasterColossus,
     _poolGarrisonSergeant,
     _poolGateColossus,
@@ -942,6 +946,7 @@ const shard: CardShard = {
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
     _poolNurturingBristleback,
+    _poolNutCollector,
     _poolNyleaKeenEyed,
     _poolOcelotPride,
     _poolOldGrowthEducator,
@@ -984,6 +989,7 @@ const shard: CardShard = {
     _poolPsychicPickpocket,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
+    _poolQuestForTheGoblinLord,
     _poolRakdosTheMuscle,
     _poolRalStormConduit,
     _poolRallyingRoar,

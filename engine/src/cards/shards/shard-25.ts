@@ -25,6 +25,7 @@ import _poolAnimatingFaerie from "../pool/animating-faerie.js";
 import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
 import _poolAquusSteed from "../pool/aquus-steed.js";
 import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
+import _poolArcboundReclaimer from "../pool/arcbound-reclaimer.js";
 import _poolArcboundWorker from "../pool/arcbound-worker.js";
 import _poolArcoFlagellant from "../pool/arco-flagellant.js";
 import _poolArmoredPegasus from "../pool/armored-pegasus.js";
@@ -509,6 +510,7 @@ import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
 import _poolTeachByExample from "../pool/teach-by-example.js";
+import _poolTemurCharm from "../pool/temur-charm.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
@@ -628,6 +630,7 @@ const shard: CardShard = {
     _poolApprenticeNecromancer,
     _poolAquusSteed,
     _poolArcaneEncyclopedia,
+    _poolArcboundReclaimer,
     _poolArcboundWorker,
     _poolArcoFlagellant,
     _poolArmoredPegasus,
@@ -1112,6 +1115,7 @@ const shard: CardShard = {
     _poolTarSnare,
     _poolTatteredDrake,
     _poolTeachByExample,
+    _poolTemurCharm,
     _poolTerramorphicExpanse,
     _poolTetherTechnician,
     _poolTextbookTabulator,

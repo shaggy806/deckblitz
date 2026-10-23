@@ -29,6 +29,7 @@ import _poolArchOfOrazca from "../pool/arch-of-orazca.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
 import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
+import _poolAvatarOfSlaughter from "../pool/avatar-of-slaughter.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
 import _poolAwakeningZone from "../pool/awakening-zone.js";
@@ -639,6 +640,7 @@ const shard: CardShard = {
     _poolArchiveArbiter,
     _poolArvadTheCursed,
     _poolAscendantPackleader,
+    _poolAvatarOfSlaughter,
     _poolAvenCloudchaser,
     _poolAvenSentry,
     _poolAwakeningZone,

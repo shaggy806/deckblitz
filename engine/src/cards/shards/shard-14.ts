@@ -21,6 +21,7 @@ import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
 import _poolArchaeomancer from "../pool/archaeomancer.js";
+import _poolArchangelAvacyn from "../pool/archangel-avacyn.js";
 import _poolArchfiendOfIfnir from "../pool/archfiend-of-ifnir.js";
 import _poolArchonOfRedemption from "../pool/archon-of-redemption.js";
 import _poolArdentElementalist from "../pool/ardent-elementalist.js";
@@ -110,6 +111,7 @@ import _poolCouriersBriefcase from "../pool/couriers-briefcase.js";
 import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
 import _poolCrystalBall from "../pool/crystal-ball.js";
+import _poolCullingDais from "../pool/culling-dais.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
 import _poolCurseOfMaritLage from "../pool/curse-of-marit-lage.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
@@ -385,6 +387,7 @@ import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
 import _poolPiaNalaar from "../pool/pia-nalaar.js";
 import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPlagueDogs from "../pool/plague-dogs.js";
+import _poolPlagueSpitter from "../pool/plague-spitter.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
@@ -610,6 +613,7 @@ const shard: CardShard = {
     _poolArbiterOfWoe,
     _poolArborealGrazer,
     _poolArchaeomancer,
+    _poolArchangelAvacyn,
     _poolArchfiendOfIfnir,
     _poolArchonOfRedemption,
     _poolArdentElementalist,
@@ -699,6 +703,7 @@ const shard: CardShard = {
     _poolCrawlingInfestation,
     _poolCreativeTechnique,
     _poolCrystalBall,
+    _poolCullingDais,
     _poolCuriousAltisaur,
     _poolCurseOfMaritLage,
     _poolCyberdriveAwakener,
@@ -974,6 +979,7 @@ const shard: CardShard = {
     _poolPiaNalaar,
     _poolPiercingLight,
     _poolPlagueDogs,
+    _poolPlagueSpitter,
     _poolPlasmaBolt,
     _poolPredictivePreparations,
     _poolPrimeSpeakerVannifar,

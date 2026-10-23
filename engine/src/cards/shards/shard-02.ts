@@ -28,6 +28,7 @@ import _poolArtisticRefusal from "../pool/artistic-refusal.js";
 import _poolAshadTheLoneCyberman from "../pool/ashad-the-lone-cyberman.js";
 import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
+import _poolAttemptedMurder from "../pool/attempted-murder.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
 import _poolAxebaneStag from "../pool/axebane-stag.js";
 import _poolBadRiver from "../pool/bad-river.js";
@@ -224,6 +225,7 @@ import _poolGreensleevesMaroSorcerer from "../pool/greensleeves-maro-sorcerer.js
 import _poolGrimTutor from "../pool/grim-tutor.js";
 import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
+import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
 import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolAshadTheLoneCyberman,
     _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
+    _poolAttemptedMurder,
     _poolAvenEnvoy,
     _poolAxebaneStag,
     _poolBadRiver,
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolGrimTutor,
     _poolGrimaSarumansFootman,
     _poolGrizzledLeotau,
+    _poolGruulRagebeast,
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
     _poolGwendlynDiCorci,

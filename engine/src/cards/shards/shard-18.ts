@@ -31,6 +31,7 @@ import _poolAzoriusSignet from "../pool/azorius-signet.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
 import _poolBattlefieldButcher from "../pool/battlefield-butcher.js";
+import _poolBaxterFlyInTheOintment from "../pool/baxter-fly-in-the-ointment.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
 import _poolBehindTheMask from "../pool/behind-the-mask.js";
@@ -100,6 +101,7 @@ import _poolCrystallineGiant from "../pool/crystalline-giant.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
+import _poolDeathbringerLiege from "../pool/deathbringer-liege.js";
 import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
@@ -633,6 +635,7 @@ const shard: CardShard = {
     _poolBanishingBetrayal,
     _poolBarbedBattlegear,
     _poolBattlefieldButcher,
+    _poolBaxterFlyInTheOintment,
     _poolBebopRocksteady,
     _poolBedevil,
     _poolBehindTheMask,
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
+    _poolDeathbringerLiege,
     _poolDeathknellBerserker,
     _poolDecadentDragon,
     _poolDeepGoblinSkulltaker,

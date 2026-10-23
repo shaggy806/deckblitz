@@ -15,7 +15,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   discards, and each discard is its own event. **Fix (outline):** collect every scoped player's
   choice first (rule 101.4's choose-then-act machinery, built for the Forgotten Realms set — batch
   109), hidden from the others, then discard them all as one graveyard batch. Miasmic Mummy and
-  Neheb are in the pool on today's behaviour; blocks Delirium Skeins
+  Neheb are in the pool on today's behaviour; blocks Delirium Skeins and Stronghold Rats
   (`effect:hidden-simultaneous-choices`). Found by an authoring agent, 2026-10-23 (B141).
 - **Blight ignores counter prevention.** Rule 701.68b: a player can't blight if they can't put a
   -1/-1 counter on a creature they control. `Game.canBlight` only checks that they control a

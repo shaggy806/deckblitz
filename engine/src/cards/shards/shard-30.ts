@@ -85,6 +85,7 @@ import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
 import _poolChainToMemory from "../pool/chain-to-memory.js";
 import _poolChannelerInitiate from "../pool/channeler-initiate.js";
+import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
@@ -675,6 +676,7 @@ const shard: CardShard = {
     _poolCemeteryTampering,
     _poolChainToMemory,
     _poolChannelerInitiate,
+    _poolChariotOfVictory,
     _poolChartoothCougar,
     _poolChromaticSphere,
     _poolChromiumTheMutable,

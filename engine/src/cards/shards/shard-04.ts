@@ -60,6 +60,7 @@ import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
+import _poolBygoneBishop from "../pool/bygone-bishop.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCarnage from "../pool/carnage.js";
@@ -416,6 +417,7 @@ import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
 import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
+import _poolSeedguideAsh from "../pool/seedguide-ash.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
@@ -644,6 +646,7 @@ const shard: CardShard = {
     _poolBruteStrength,
     _poolBucolicRanch,
     _poolBurningSunCavalry,
+    _poolBygoneBishop,
     _poolCaprichrome,
     _poolCarnageTyrant,
     _poolCarnage,
@@ -1000,6 +1003,7 @@ const shard: CardShard = {
     _poolScarbladeScout,
     _poolScatteredGroves,
     _poolSeafloorOracle,
+    _poolSeedguideAsh,
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
     _poolSelfDestruct,

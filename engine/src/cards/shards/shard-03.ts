@@ -426,6 +426,7 @@ import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
 import _poolSteamVents from "../pool/steam-vents.js";
 import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
+import _poolSteelyResolve from "../pool/steely-resolve.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
@@ -968,6 +969,7 @@ const shard: CardShard = {
     _poolStaunchCrewmate,
     _poolSteamVents,
     _poolSteelcladSpirit,
+    _poolSteelyResolve,
     _poolSterlingHound,
     _poolStoneKavu,
     _poolStoneSeederHierophant,

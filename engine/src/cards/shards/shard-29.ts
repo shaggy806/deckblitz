@@ -352,6 +352,7 @@ import _poolPawpatchRecruit from "../pool/pawpatch-recruit.js";
 import _poolPersonOfInterest from "../pool/person-of-interest.js";
 import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
+import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
@@ -947,6 +948,7 @@ const shard: CardShard = {
     _poolPersonOfInterest,
     _poolPestbroodSloth,
     _poolPetAvengers,
+    _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
     _poolPileatedProvisioner,
     _poolPirateHat,

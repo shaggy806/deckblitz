@@ -74,6 +74,7 @@ import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
+import _poolBroodhatchNantuko from "../pool/broodhatch-nantuko.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
 import _poolBruseTarlRovingRancher from "../pool/bruse-tarl-roving-rancher.js";
@@ -357,6 +358,7 @@ import _poolOgreArsonist from "../pool/ogre-arsonist.js";
 import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
+import _poolOnduCleric from "../pool/ondu-cleric.js";
 import _poolOrzhovEnforcer from "../pool/orzhov-enforcer.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
 import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
@@ -694,6 +696,7 @@ const shard: CardShard = {
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
+    _poolBroodhatchNantuko,
     _poolBrothersOfFire,
     _poolBrudicladTelchorEngineer,
     _poolBruseTarlRovingRancher,
@@ -977,6 +980,7 @@ const shard: CardShard = {
     _poolOliphaunt,
     _poolOliviasWrath,
     _poolOnWingsOfGold,
+    _poolOnduCleric,
     _poolOrzhovEnforcer,
     _poolOtherworldlyGaze,
     _poolOutlawStitcher,

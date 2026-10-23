@@ -44,6 +44,7 @@ import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolAssassinate from "../pool/assassinate.js";
 import _poolAssertPerfection from "../pool/assert-perfection.js";
 import _poolAtalanJackal from "../pool/atalan-jackal.js";
+import _poolAvacynThePurifier from "../pool/avacyn-the-purifier.js";
 import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
 import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
@@ -653,6 +654,7 @@ const shard: CardShard = {
     _poolAssassinate,
     _poolAssertPerfection,
     _poolAtalanJackal,
+    _poolAvacynThePurifier,
     _poolAvenSmokeweaver,
     _poolAvengingHunter,
     _poolAvishkarRaceway,

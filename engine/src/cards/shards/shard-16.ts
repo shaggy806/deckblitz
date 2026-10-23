@@ -475,6 +475,7 @@ import _poolStampede from "../pool/stampede.js";
 import _poolSteelExemplar from "../pool/steel-exemplar.js";
 import _poolSteelclawLance from "../pool/steelclaw-lance.js";
 import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
+import _poolStirringWildwood from "../pool/stirring-wildwood.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStolenVitality from "../pool/stolen-vitality.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolSteelExemplar,
     _poolSteelclawLance,
     _poolStiltzkinMoogleMerchant,
+    _poolStirringWildwood,
     _poolStoicRebuttal,
     _poolStolenVitality,
     _poolStoneHavenMedic,

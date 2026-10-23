@@ -304,6 +304,7 @@ import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
+import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
@@ -393,6 +394,7 @@ import _poolRuinousUltimatum from "../pool/ruinous-ultimatum.js";
 import _poolRyanSinclair from "../pool/ryan-sinclair.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
+import _poolSaffiEriksdotter from "../pool/saffi-eriksdotter.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSandAugury from "../pool/sand-augury.js";
 import _poolSanguineGlorifier from "../pool/sanguine-glorifier.js";
@@ -884,6 +886,7 @@ const shard: CardShard = {
     _poolMechanNavigator,
     _poolMeglonoth,
     _poolMetalworkColossus,
+    _poolMightOfTheMasses,
     _poolMindMeanderer,
     _poolMirageMockery,
     _poolMistCloakedHerald,
@@ -973,6 +976,7 @@ const shard: CardShard = {
     _poolRyanSinclair,
     _poolSHIELDHelicarrier,
     _poolSafeholdElite,
+    _poolSaffiEriksdotter,
     _poolSaltfieldRecluse,
     _poolSandAugury,
     _poolSanguineGlorifier,

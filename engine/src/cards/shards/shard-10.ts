@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _pool2Mace from "../pool/2-mace.js";
 import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
+import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
@@ -243,6 +244,7 @@ import _poolHeraldOfWar from "../pool/herald-of-war.js";
 import _poolHermitDruid from "../pool/hermit-druid.js";
 import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
+import _poolHex from "../pool/hex.js";
 import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
 import _poolHoodedHydra from "../pool/hooded-hydra.js";
@@ -626,6 +628,7 @@ const shard: CardShard = {
     _pool2Mace,
     _poolAbsorbIdentity,
     _poolAbstergoEntertainment,
+    _poolAbzanBeastmaster,
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
     _poolAgentPhilCoulson,
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolHermitDruid,
     _poolHeroOfTheWinds,
     _poolHeroicIntervention,
+    _poolHex,
     _poolHobbitsSting,
     _poolHonoredKnightCaptain,
     _poolHoodedHydra,

@@ -251,6 +251,7 @@ import _poolHobgoblinMantledMarauder from "../pool/hobgoblin-mantled-marauder.js
 import _poolHonoredHeirloom from "../pool/honored-heirloom.js";
 import _poolHookHauntDrifter from "../pool/hook-haunt-drifter.js";
 import _poolHovermyr from "../pool/hovermyr.js";
+import _poolHowlpackResurgence from "../pool/howlpack-resurgence.js";
 import _poolHullBreach from "../pool/hull-breach.js";
 import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
@@ -316,6 +317,7 @@ import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMasterOfWinds from "../pool/master-of-winds.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
+import _poolMeltdown from "../pool/meltdown.js";
 import _poolMemorialVault from "../pool/memorial-vault.js";
 import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
@@ -867,6 +869,7 @@ const shard: CardShard = {
     _poolHonoredHeirloom,
     _poolHookHauntDrifter,
     _poolHovermyr,
+    _poolHowlpackResurgence,
     _poolHullBreach,
     _poolHungeringPuppetbeast,
     _poolHuntedBonebrute,
@@ -932,6 +935,7 @@ const shard: CardShard = {
     _poolMasterOfWinds,
     _poolMasterPakku,
     _poolMeditationPuzzle,
+    _poolMeltdown,
     _poolMemorialVault,
     _poolMerchantOfVenom,
     _poolMercilessEnforcers,

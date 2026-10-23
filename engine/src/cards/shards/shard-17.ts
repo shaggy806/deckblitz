@@ -230,6 +230,7 @@ import _poolHeartfireHero from "../pool/heartfire-hero.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
+import _poolHellkiteIgniter from "../pool/hellkite-igniter.js";
 import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
 import _poolHeraldOfTheForgotten from "../pool/herald-of-the-forgotten.js";
@@ -299,6 +300,7 @@ import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMarket from "../pool/market.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
+import _poolMaskOfRiddles from "../pool/mask-of-riddles.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
 import _poolMazemindTome from "../pool/mazemind-tome.js";
@@ -823,6 +825,7 @@ const shard: CardShard = {
     _poolHeatedArgument,
     _poolHedgeMaze,
     _poolHeiBaiSpiritOfBalance,
+    _poolHellkiteIgniter,
     _poolHenchbots,
     _poolHeraldOfKozilek,
     _poolHeraldOfTheForgotten,
@@ -892,6 +895,7 @@ const shard: CardShard = {
     _poolManamorphose,
     _poolMarket,
     _poolMarketwatchPhantom,
+    _poolMaskOfRiddles,
     _poolMasterApothecary,
     _poolMasterworkOfIngenuity,
     _poolMazemindTome,

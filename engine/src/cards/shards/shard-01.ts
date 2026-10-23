@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbigaleEloquentFirstYear from "../pool/abigale-eloquent-first-year.js";
 import _poolAbundantHarvest from "../pool/abundant-harvest.js";
 import _poolAdarkarSentinel from "../pool/adarkar-sentinel.js";
+import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
@@ -580,6 +581,7 @@ const shard: CardShard = {
     _poolAbigaleEloquentFirstYear,
     _poolAbundantHarvest,
     _poolAdarkarSentinel,
+    _poolAegisOfTheGods,
     _poolAetherfluxConduit,
     _poolAinokTracker,
     _poolAjanisPridemate,

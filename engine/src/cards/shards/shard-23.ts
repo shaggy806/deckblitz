@@ -405,6 +405,7 @@ import _poolRenegadeTactics from "../pool/renegade-tactics.js";
 import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolReprisal from "../pool/reprisal.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
+import _poolRicochetTrap from "../pool/ricochet-trap.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRitualOfHope from "../pool/ritual-of-hope.js";
@@ -1001,6 +1002,7 @@ const shard: CardShard = {
     _poolRenegadeTroops,
     _poolReprisal,
     _poolRhoxPummeler,
+    _poolRicochetTrap,
     _poolRile,
     _poolRimefurReindeer,
     _poolRitualOfHope,

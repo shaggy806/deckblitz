@@ -269,6 +269,7 @@ import _poolInspiration from "../pool/inspiration.js";
 import _poolInspiredSphinx from "../pool/inspired-sphinx.js";
 import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
+import _poolIntellectualOffering from "../pool/intellectual-offering.js";
 import _poolIntrepidAce from "../pool/intrepid-ace.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
 import _poolInvoluntaryCooldown from "../pool/involuntary-cooldown.js";
@@ -325,6 +326,7 @@ import _poolMagefireWings from "../pool/magefire-wings.js";
 import _poolMagmaticSinkhole from "../pool/magmatic-sinkhole.js";
 import _poolMagusOfTheBridge from "../pool/magus-of-the-bridge.js";
 import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
+import _poolMagusOfTheMoat from "../pool/magus-of-the-moat.js";
 import _poolMajesticHeliopterus from "../pool/majestic-heliopterus.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
@@ -337,6 +339,7 @@ import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
+import _poolMelekIzzetParagon from "../pool/melek-izzet-paragon.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
 import _poolMetalspinnersPuzzleknot from "../pool/metalspinners-puzzleknot.js";
 import _poolMeticulousArchive from "../pool/meticulous-archive.js";
@@ -886,6 +889,7 @@ const shard: CardShard = {
     _poolInspiredSphinx,
     _poolInspiritFlagshipVessel,
     _poolIntangibleVirtue,
+    _poolIntellectualOffering,
     _poolIntrepidAce,
     _poolInvisibleForceField,
     _poolInvoluntaryCooldown,
@@ -942,6 +946,7 @@ const shard: CardShard = {
     _poolMagmaticSinkhole,
     _poolMagusOfTheBridge,
     _poolMagusOfTheCandelabra,
+    _poolMagusOfTheMoat,
     _poolMajesticHeliopterus,
     _poolMakeYourMove,
     _poolMakindiSliderunner,
@@ -954,6 +959,7 @@ const shard: CardShard = {
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
     _poolMazeSkullbomb,
+    _poolMelekIzzetParagon,
     _poolMercilessExecutioner,
     _poolMetalspinnersPuzzleknot,
     _poolMeticulousArchive,

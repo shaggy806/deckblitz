@@ -154,6 +154,7 @@ import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
 import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
+import _poolEraOfInnovation from "../pool/era-of-innovation.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
@@ -252,6 +253,7 @@ import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolIronStar from "../pool/iron-star.js";
+import _poolJacesErasure from "../pool/jaces-erasure.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
@@ -437,6 +439,7 @@ import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
 import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
 import _poolSontaranGeneral from "../pool/sontaran-general.js";
+import _poolSoulbrightFlamekin from "../pool/soulbright-flamekin.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
@@ -732,6 +735,7 @@ const shard: CardShard = {
     _poolEmissaryGreen,
     _poolEmmessiTome,
     _poolEmperorMihailIi,
+    _poolEraOfInnovation,
     _poolErase,
     _poolEriettesTemptingApple,
     _poolEscapedExperiment,
@@ -830,6 +834,7 @@ const shard: CardShard = {
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
     _poolIronStar,
+    _poolJacesErasure,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
     _poolJeskaiShrinekeeper,
@@ -1015,6 +1020,7 @@ const shard: CardShard = {
     _poolSomberwaldSage,
     _poolSongOfInspiration,
     _poolSontaranGeneral,
+    _poolSoulbrightFlamekin,
     _poolSouthWindAvatar,
     _poolSpectacularTactics,
     _poolSpikedBaloth,

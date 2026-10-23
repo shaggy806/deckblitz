@@ -319,6 +319,7 @@ import _poolMoltenLavamancer from "../pool/molten-lavamancer.js";
 import _poolMoonbladeShinobi from "../pool/moonblade-shinobi.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
+import _poolMyrWelder from "../pool/myr-welder.js";
 import _poolMyriadLandscape from "../pool/myriad-landscape.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
@@ -916,6 +917,7 @@ const shard: CardShard = {
     _poolMoonbladeShinobi,
     _poolMrFoxglove,
     _poolMuxusGoblinGrandee,
+    _poolMyrWelder,
     _poolMyriadLandscape,
     _poolMysteriousTome,
     _poolMysticMelting,

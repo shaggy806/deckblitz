@@ -59,10 +59,14 @@ section keeps only what to do next.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7454 on (batch 141 took 7181–7451 and the stale records). Batches run 4-5 agents, ~30 cards each, with the
+  untriaged cards by rank: rank 7707 on (batch 142 took 7454–7703). Batches run 4-5 agents, ~30 cards each, with the
   leading features built alongside in worktrees. The nine other starter precons' 25 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
-- **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
+- **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
+  "until end of turn, whenever …" and its "until your next turn" form as a real delayed
+  trigger (`effect:delayed-trigger-rest-of-turn` — 39 waiting, 33 on nothing else, 2026-10-23;
+  rule 603.7c, which also fixes Dovin, Grand Arbiter's −1 under Engine rules gaps), ahead of
+  banding (36). Before it
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
   `cost:remove-counters-from-chosen` (21, 14), `effect:effect-on-enchanted-permanent` (21, 16),
   `decision:variable-target-count` (19, 15), `decision:owner-chooses-top-or-bottom` (19, 18),
@@ -230,7 +234,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins (`effect:hidden-simultaneous-choices`).
+- **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins and Stronghold Rats (`effect:hidden-simultaneous-choices`).
 - **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
 - **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.
 - **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).

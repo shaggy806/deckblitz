@@ -105,6 +105,7 @@ import _poolCoralCommando from "../pool/coral-commando.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
+import _poolCourtStreetDenizen from "../pool/court-street-denizen.js";
 import _poolCragplateBaloth from "../pool/cragplate-baloth.js";
 import _poolCreepingTrailblazer from "../pool/creeping-trailblazer.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
@@ -736,6 +737,7 @@ const shard: CardShard = {
     _poolCorpseBlockade,
     _poolCorrodingDragonstorm,
     _poolCourtOfBounty,
+    _poolCourtStreetDenizen,
     _poolCragplateBaloth,
     _poolCreepingTrailblazer,
     _poolCrookclawElder,

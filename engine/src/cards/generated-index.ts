@@ -540,6 +540,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Ashmouth Dragon": "https://cards.scryfall.io/art_crop/back/4/1/41b6381f-4ff8-49e9-bf00-cfe32851318b.jpg",
   "At the Door": "https://cards.scryfall.io/art_crop/back/3/a/3aa29fe8-1687-486f-b4df-c04977869ab1.jpg",
   "Augusta, Dean of Order": "https://cards.scryfall.io/art_crop/back/5/b/5bd9b5cf-f018-48af-a081-995ce8ecc539.jpg",
+  "Avacyn, the Purifier": "https://cards.scryfall.io/art_crop/back/f/e/fe675f03-cbb5-4177-b7d7-64a30260ee2a.jpg",
   "Avatar Kyoshi": "https://cards.scryfall.io/art_crop/back/4/8/4887ce64-7c98-4bd7-95db-0c43ab71cc6e.jpg",
   "Avatar Roku": "https://cards.scryfall.io/art_crop/back/9/5/95f2f5af-d405-4534-8683-5a9001f997b4.jpg",
   "Awaken the Blood Avatar": "https://cards.scryfall.io/art_crop/back/b/a/ba09360a-067e-48a5-bdc5-a19fd066a785.jpg",

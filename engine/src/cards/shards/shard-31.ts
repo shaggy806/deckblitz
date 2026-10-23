@@ -13,6 +13,7 @@ import _poolAerialGuide from "../pool/aerial-guide.js";
 import _poolAethersphereHarvester from "../pool/aethersphere-harvester.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
+import _poolAllyEncampment from "../pool/ally-encampment.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
 import _poolAltanakTheThriceCalled from "../pool/altanak-the-thrice-called.js";
@@ -89,6 +90,7 @@ import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
+import _poolCharmbreakerDevils from "../pool/charmbreaker-devils.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
 import _poolCipherboundSpirit from "../pool/cipherbound-spirit.js";
@@ -447,6 +449,7 @@ import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
+import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
@@ -627,6 +630,7 @@ const shard: CardShard = {
     _poolAethersphereHarvester,
     _poolAirCultElemental,
     _poolAkkiBattleSquad,
+    _poolAllyEncampment,
     _poolAlongTheCrookedWay,
     _poolAlphaMyr,
     _poolAltanakTheThriceCalled,
@@ -703,6 +707,7 @@ const shard: CardShard = {
     _poolChaosTerminatorLord,
     _poolChargeOfTheMites,
     _poolCharityExtractor,
+    _poolCharmbreakerDevils,
     _poolChitteringDispatcher,
     _poolChromaticStar,
     _poolCipherboundSpirit,
@@ -1061,6 +1066,7 @@ const shard: CardShard = {
     _poolScavengingOoze,
     _poolScornfulAetherLich,
     _poolScrapMastery,
+    _poolSeaGateLoremaster,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
     _poolSeveredLegion,
