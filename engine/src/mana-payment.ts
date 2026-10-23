@@ -1204,6 +1204,10 @@ function planManaPaymentOrdered(
    * from a Swamp, not from an Island). Then a source not yet open, with a
    * free option only. A Treasure funds one only when nothing plain can.
    */
+  /** Whether mana with this tag may pay an ability's cost: unrestricted, or
+   * deny-list mana ("can't be spent to cast nonartifact spells"). */
+  const paysAbilities = (tag: Omit<ManaUnit, "type"> | undefined): boolean =>
+    tag?.restriction === undefined || tag.restriction.notSpell !== undefined;
   const coverGenericFrom = (exclude: ObjectId, of: readonly ManaType[] | null): ManaType | null => {
     // The kinds this unit may be, the payment's least wanted first.
     const kinds = (of ?? MANA_TYPES_ORDER).filter(() => true).sort(
@@ -1220,8 +1224,11 @@ function planManaPaymentOrdered(
     // Anything already open but the converter being funded — another
     // converter's leftover too: a Plains funds one Mystic Gate, whose {U}{U}
     // funds a second. Everything open was funded before this one, so there's
-    // no cycle, and `steps` below activates funders first.
-    const eligible = (t: Tapped): boolean => t.src.id !== exclude;
+    // no cycle, and `steps` below activates funders first. Not a source
+    // whose mana is kept for a kind of spell: a converter's cost is an
+    // ability's, which that mana can't pay (`fundable` above, `Game.removeMana`
+    // — fuzzer seed 20 funded a Twilight Mire with a land's creature-only {B}).
+    const eligible = (t: Tapped): boolean => t.src.id !== exclude && paysAbilities(t.tag);
     const dull = (src: ManaSource): boolean =>
       src.options.every(
         (o) => o.anyColor === 0 && !o.fixed.some((m) => wantedColors.has(m)),
@@ -1243,7 +1250,7 @@ function planManaPaymentOrdered(
     }
     // A source opened here is never funded itself, so only its free options
     // count: a filter land funds another with its {C}, or not at all.
-    const freeOptions = (s: ManaSource): ManaOption[] => s.options.filter((o) => !costsMana(o));
+    const freeOptions = (s: ManaSource): ManaOption[] => s.options.filter((o) => !costsMana(o) && paysAbilities(o.tag));
     const makesOne = (s: ManaSource): boolean =>
       freeOptions(s).some((o) => of === null || of.some((m) => o.fixed.includes(m) || anyUnitMakes(o, m)));
     const free = sources.filter((s) => !isTapped(s.id) && s.id !== exclude && makesOne(s));
