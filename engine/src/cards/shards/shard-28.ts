@@ -224,6 +224,7 @@ import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHeadstrongBrute from "../pool/headstrong-brute.js";
 import _poolHeartPiercerManticore from "../pool/heart-piercer-manticore.js";
+import _poolHeirOfFalkenrath from "../pool/heir-of-falkenrath.js";
 import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHerdMigration from "../pool/herd-migration.js";
@@ -303,6 +304,7 @@ import _poolMaralenFaeAscendant from "../pool/maralen-fae-ascendant.js";
 import _poolMarchesaTheBlackRose from "../pool/marchesa-the-black-rose.js";
 import _poolMarionetteApprentice from "../pool/marionette-apprentice.js";
 import _poolMarkOfTheVampire from "../pool/mark-of-the-vampire.js";
+import _poolMarkovDreadknight from "../pool/markov-dreadknight.js";
 import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
@@ -846,6 +848,7 @@ const shard: CardShard = {
     _poolHarmonize,
     _poolHeadstrongBrute,
     _poolHeartPiercerManticore,
+    _poolHeirOfFalkenrath,
     _poolHellMongrel,
     _poolHeraldOfFaith,
     _poolHerdMigration,
@@ -925,6 +928,7 @@ const shard: CardShard = {
     _poolMarchesaTheBlackRose,
     _poolMarionetteApprentice,
     _poolMarkOfTheVampire,
+    _poolMarkovDreadknight,
     _poolMarshGoblins,
     _poolMartialGlory,
     _poolMassAppeal,

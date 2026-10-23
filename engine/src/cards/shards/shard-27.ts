@@ -216,6 +216,7 @@ import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolGuiltfeeder from "../pool/guiltfeeder.js";
 import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
+import _poolHarvestHand from "../pool/harvest-hand.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
 import _poolHaystack from "../pool/haystack.js";
 import _poolHazoretsMonument from "../pool/hazorets-monument.js";
@@ -317,6 +318,7 @@ import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
+import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
@@ -324,6 +326,7 @@ import _poolMunitionsExpert from "../pool/munitions-expert.js";
 import _poolMyrCustodian from "../pool/myr-custodian.js";
 import _poolMythosOfBrokkos from "../pool/mythos-of-brokkos.js";
 import _poolMythosOfNethroi from "../pool/mythos-of-nethroi.js";
+import _poolNahiriTheHarbinger from "../pool/nahiri-the-harbinger.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
@@ -419,6 +422,7 @@ import _poolScanTheClouds from "../pool/scan-the-clouds.js";
 import _poolScholarOfStars from "../pool/scholar-of-stars.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
+import _poolScroungedScythe from "../pool/scrounged-scythe.js";
 import _poolScurridColony from "../pool/scurrid-colony.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
@@ -537,6 +541,7 @@ import _poolTrustyMachete from "../pool/trusty-machete.js";
 import _poolTruthOrConsequences from "../pool/truth-or-consequences.js";
 import _poolTurtleBlimp from "../pool/turtle-blimp.js";
 import _poolTwinmawStormbrood from "../pool/twinmaw-stormbrood.js";
+import _poolTwinsOfMaurerEstate from "../pool/twins-of-maurer-estate.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
 import _poolUltrosObnoxiousOctopus from "../pool/ultros-obnoxious-octopus.js";
@@ -559,6 +564,7 @@ import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
+import _poolVeteranCathar from "../pool/veteran-cathar.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
 import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
@@ -817,6 +823,7 @@ const shard: CardShard = {
     _poolGuiltfeeder,
     _poolGyrusWakerOfCorpses,
     _poolHarvestGwyllion,
+    _poolHarvestHand,
     _poolHavenwoodBattleground,
     _poolHaystack,
     _poolHazoretsMonument,
@@ -918,6 +925,7 @@ const shard: CardShard = {
     _poolMomoPlayfulPet,
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
+    _poolMorkrutNecropod,
     _poolMosscoatGoriak,
     _poolMouserFoundry,
     _poolMultiversalIncursion,
@@ -925,6 +933,7 @@ const shard: CardShard = {
     _poolMyrCustodian,
     _poolMythosOfBrokkos,
     _poolMythosOfNethroi,
+    _poolNahiriTheHarbinger,
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNaturalObsolescence,
@@ -1020,6 +1029,7 @@ const shard: CardShard = {
     _poolScholarOfStars,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
+    _poolScroungedScythe,
     _poolScurridColony,
     _poolScuzzbackScrapper,
     _poolSeekerOfTheWay,
@@ -1138,6 +1148,7 @@ const shard: CardShard = {
     _poolTruthOrConsequences,
     _poolTurtleBlimp,
     _poolTwinmawStormbrood,
+    _poolTwinsOfMaurerEstate,
     _poolTyriteSanctum,
     _poolUltimaWeapon,
     _poolUltrosObnoxiousOctopus,
@@ -1160,6 +1171,7 @@ const shard: CardShard = {
     _poolVelaTheNightClad,
     _poolVenerableWarsinger,
     _poolVesselOfVolatility,
+    _poolVeteranCathar,
     _poolVigorbloomVanguard,
     _poolVilespawnSpider,
     _poolVirulentEmissary,

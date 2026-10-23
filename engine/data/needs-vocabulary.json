@@ -9868,6 +9868,37 @@
   "trigger:sacrificed-for-emerge": {
    "family": "keyword:emerge",
    "example": "Foul Emissary: 'When you sacrifice this creature while casting a spell with emerge, create two 1/1 colorless Eldrazi Scion tokens.'"
+  },
+  "scope:each-player-with-life-total": {
+   "example": "Triskaidekaphobia: 'each player with exactly 13 life loses the game' — no player scope by life total, and the losses must happen at once (a draw if all have 13)."
+  },
+  "static:cant-transform": {
+   "example": "Bound by Moonsilver: 'Enchanted permanent can't attack, block, or transform.'"
+  },
+  "filter:shares-card-type-with-discarded": {
+   "family": "effect:hidden-simultaneous-choices",
+   "example": "Creeping Dread: 'Each opponent who discarded a card that shares a card type with the card you discarded loses 3 life.'"
+  },
+  "filter:same-name-as-trigger-spell": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Harness the Storm: 'you may cast target card with the same name as that spell from your graveyard'."
+  },
+  "trigger:becomes-target-by-spell-type": {
+   "example": "Silverfur Partisan: 'Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell' — `becomes-target` has `spellOnly` but no spell type."
+  },
+  "static:grant-madness": {
+   "family": "keyword:madness",
+   "example": "Falkenrath Gorger: 'Each Vampire creature card you own that isn't on the battlefield has madness.'"
+  },
+  "bug:aura-enters-transformed-asks-enchant": {
+   "example": "Skin Invasion: a double-faced Aura put onto the battlefield transformed is still asked what it enchants (`askEnterChoice` reads the front face), so it stays in the graveyard with nothing to enchant."
+  },
+  "effect:each-creature-deals-power-damage-to-target": {
+   "example": "Moonlight Hunt: 'Choose target creature you don't control. Each Wolf and Werewolf you control deals damage equal to its power to that creature.'"
+  },
+  "effect:damage-to-trigger-object-controller": {
+   "family": "effect:damage-to-trigger-object",
+   "example": "Assembled Alphas: '…deals 3 damage to that creature and 3 damage to that creature's controller' — damage to a trigger object is built, to its controller isn't."
   }
  }
 }

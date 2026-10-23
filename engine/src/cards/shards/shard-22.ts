@@ -35,6 +35,7 @@ import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
 import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
+import _poolAutumnalGloom from "../pool/autumnal-gloom.js";
 import _poolAvabruckCaretaker from "../pool/avabruck-caretaker.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
 import _poolBackToBasics from "../pool/back-to-basics.js";
@@ -49,6 +50,7 @@ import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
 import _poolBindingGeist from "../pool/binding-geist.js";
+import _poolBitingRain from "../pool/biting-rain.js";
 import _poolBlackWard from "../pool/black-ward.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindblast from "../pool/blindblast.js";
@@ -371,6 +373,7 @@ import _poolPlumeveil from "../pool/plumeveil.js";
 import _poolPoisonTheCup from "../pool/poison-the-cup.js";
 import _poolPollutedDelta from "../pool/polluted-delta.js";
 import _poolPompousBattlemage from "../pool/pompous-battlemage.js";
+import _poolPoreOverThePages from "../pool/pore-over-the-pages.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
@@ -446,6 +449,7 @@ import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
+import _poolSigardaHeronsGrace from "../pool/sigarda-herons-grace.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSigiledSentinel from "../pool/sigiled-sentinel.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolAtlanteanSkirmisher,
     _poolAtmosphereSurgeon,
     _poolAugerSpree,
+    _poolAutumnalGloom,
     _poolAvabruckCaretaker,
     _poolAvenFleetwing,
     _poolBackToBasics,
@@ -662,6 +667,7 @@ const shard: CardShard = {
     _poolBenalishHeralds,
     _poolBespokeBattlegarb,
     _poolBindingGeist,
+    _poolBitingRain,
     _poolBlackWard,
     _poolBlackWidowIntelExpert,
     _poolBlindblast,
@@ -984,6 +990,7 @@ const shard: CardShard = {
     _poolPoisonTheCup,
     _poolPollutedDelta,
     _poolPompousBattlemage,
+    _poolPoreOverThePages,
     _poolPrecisionBolt,
     _poolPredatorsStrike,
     _poolPrimordialHydra,
@@ -1059,6 +1066,7 @@ const shard: CardShard = {
     _poolShireTerrace,
     _poolShockerUnshakable,
     _poolSiegeGangCommander,
+    _poolSigardaHeronsGrace,
     _poolSightlessGhoul,
     _poolSigiledSentinel,
     _poolSilverFurMaster,

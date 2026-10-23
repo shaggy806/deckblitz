@@ -97,6 +97,7 @@ import _poolDefenderOfLaw from "../pool/defender-of-law.js";
 import _poolDefenseOfTheHeart from "../pool/defense-of-the-heart.js";
 import _poolDelightfulDiscovery from "../pool/delightful-discovery.js";
 import _poolDementiaBat from "../pool/dementia-bat.js";
+import _poolDemonPossessedWitch from "../pool/demon-possessed-witch.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
@@ -372,6 +373,7 @@ import _poolSagesReverie from "../pool/sages-reverie.js";
 import _poolSaguWildling from "../pool/sagu-wildling.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
+import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScavengedBlade from "../pool/scavenged-blade.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
@@ -433,6 +435,7 @@ import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
+import _poolStartledAwake from "../pool/startled-awake.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
 import _poolSteamVents from "../pool/steam-vents.js";
 import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
@@ -650,6 +653,7 @@ const shard: CardShard = {
     _poolDefenseOfTheHeart,
     _poolDelightfulDiscovery,
     _poolDementiaBat,
+    _poolDemonPossessedWitch,
     _poolDemonsHorn,
     _poolDesmondMiles,
     _poolDespair,
@@ -925,6 +929,7 @@ const shard: CardShard = {
     _poolSaguWildling,
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
+    _poolSanitariumSkeleton,
     _poolScamperingSurveyor,
     _poolScavengedBlade,
     _poolScrapTrawler,
@@ -986,6 +991,7 @@ const shard: CardShard = {
     _poolSplendidReclamation,
     _poolStaffOfTheAges,
     _poolStarlitAngel,
+    _poolStartledAwake,
     _poolStaunchCrewmate,
     _poolSteamVents,
     _poolSteelcladSpirit,

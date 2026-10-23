@@ -133,6 +133,7 @@ import _poolDesertCerodon from "../pool/desert-cerodon.js";
 import _poolDesynchronize from "../pool/desynchronize.js";
 import _poolDetectivesSatchel from "../pool/detectives-satchel.js";
 import _poolDevastate from "../pool/devastate.js";
+import _poolDevilsPlayground from "../pool/devils-playground.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
 import _poolDisciplesOfGix from "../pool/disciples-of-gix.js";
@@ -396,6 +397,7 @@ import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
+import _poolPressForAnswers from "../pool/press-for-answers.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
 import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
@@ -772,6 +774,7 @@ const shard: CardShard = {
     _poolDesynchronize,
     _poolDetectivesSatchel,
     _poolDevastate,
+    _poolDevilsPlayground,
     _poolDevkarinDissident,
     _poolDevouringDeep,
     _poolDisciplesOfGix,
@@ -1035,6 +1038,7 @@ const shard: CardShard = {
     _poolPlagonLordOfTheBeach,
     _poolPolukranosUnchained,
     _poolPreemptiveStrike,
+    _poolPressForAnswers,
     _poolPrimalDruid,
     _poolProfessionalWrestler,
     _poolProfessorsWarning,

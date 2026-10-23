@@ -130,6 +130,7 @@ import _poolDeduce from "../pool/deduce.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
+import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
@@ -297,6 +298,7 @@ import _poolLukeCageHeroForHire from "../pool/luke-cage-hero-for-hire.js";
 import _poolLullmagesFamiliar from "../pool/lullmages-familiar.js";
 import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
+import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
@@ -453,6 +455,7 @@ import _poolSpikedBaloth from "../pool/spiked-baloth.js";
 import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
 import _poolStalkingAssassin from "../pool/stalking-assassin.js";
+import _poolStallionOfAshmouth from "../pool/stallion-of-ashmouth.js";
 import _poolStampedingScurryfoot from "../pool/stampeding-scurryfoot.js";
 import _poolStandFirm from "../pool/stand-firm.js";
 import _poolStandingStones from "../pool/standing-stones.js";
@@ -510,6 +513,7 @@ import _poolTitanicBrawl from "../pool/titanic-brawl.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
 import _poolTollOfTheInvasion from "../pool/toll-of-the-invasion.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
+import _poolTopplegeist from "../pool/topplegeist.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
 import _poolTorrentSculptor from "../pool/torrent-sculptor.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
@@ -719,6 +723,7 @@ const shard: CardShard = {
     _poolDeeprootWaters,
     _poolDegaDisciple,
     _poolDemogorgonsClutches,
+    _poolDescendUponTheSinful,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
     _poolDiscipleOfPerdition,
@@ -886,6 +891,7 @@ const shard: CardShard = {
     _poolLullmagesFamiliar,
     _poolLuminousRebuke,
     _poolLysAlanaHuntmaster,
+    _poolMalevolentWhispers,
     _poolMangaraTheDiplomat,
     _poolMarkovBaron,
     _poolMarwynTheNurturer,
@@ -1042,6 +1048,7 @@ const shard: CardShard = {
     _poolSpikedRipsaw,
     _poolSpringleafParade,
     _poolStalkingAssassin,
+    _poolStallionOfAshmouth,
     _poolStampedingScurryfoot,
     _poolStandFirm,
     _poolStandingStones,
@@ -1099,6 +1106,7 @@ const shard: CardShard = {
     _poolTobiasDoomedConqueror,
     _poolTollOfTheInvasion,
     _poolTomBombadil,
+    _poolTopplegeist,
     _poolTorgalAFineHound,
     _poolTorrentSculptor,
     _poolTorstenVonUrsus,

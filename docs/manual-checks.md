@@ -5266,3 +5266,13 @@ engine terms. A second thing to check is a second test.
 ### Sinuous Vermin: menace once it's monstrous
 - **Do:** Activate Sinuous Vermin's monstrosity.
 - **Expect:** It gets three +1/+1 counters and shows menace; it didn't have menace before.
+
+## Werewolves (2026-10-23)
+
+### Hinterland Logger: transforms after a turn with no spells
+- **Do:** Cast nothing and pass the turn.
+- **Expect:** As Bob's turn begins, Hinterland Logger transforms into Timber Shredder (4/2, trample).
+
+### Startled Awake: comes back from the graveyard as Persistent Nightmare
+- **Do:** Activate Startled Awake's ability in your graveyard ({3}{U}{U}).
+- **Expect:** It enters as Persistent Nightmare, a 1/1 with skulk — not as the sorcery, and not left in your graveyard.

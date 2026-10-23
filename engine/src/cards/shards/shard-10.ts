@@ -269,6 +269,7 @@ import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
+import _poolInvocationOfSaintTraft from "../pool/invocation-of-saint-traft.js";
 import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
 import _poolIronVerdict from "../pool/iron-verdict.js";
 import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
@@ -335,6 +336,7 @@ import _poolMigrationPath from "../pool/migration-path.js";
 import _poolMindDrillAssailant from "../pool/mind-drill-assailant.js";
 import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
+import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMonkClass from "../pool/monk-class.js";
@@ -469,6 +471,7 @@ import _poolShowerOfArrows from "../pool/shower-of-arrows.js";
 import _poolShrivel from "../pool/shrivel.js";
 import _poolSibilantSpirit from "../pool/sibilant-spirit.js";
 import _poolSiegeRhino from "../pool/siege-rhino.js";
+import _poolSilburlindSnapper from "../pool/silburlind-snapper.js";
 import _poolSilentArtisan from "../pool/silent-artisan.js";
 import _poolSilundiIsle from "../pool/silundi-isle.js";
 import _poolSimplify from "../pool/simplify.js";
@@ -556,6 +559,7 @@ import _poolTirelessMissionaries from "../pool/tireless-missionaries.js";
 import _poolTitaniumGolem from "../pool/titanium-golem.js";
 import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
 import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
+import _poolToothCollector from "../pool/tooth-collector.js";
 import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
 import _poolTormentedSoul from "../pool/tormented-soul.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
@@ -907,6 +911,7 @@ const shard: CardShard = {
     _poolIndestructibility,
     _poolInescapableBlaze,
     _poolInspiringRoar,
+    _poolInvocationOfSaintTraft,
     _poolIrencragPyromancer,
     _poolIronVerdict,
     _poolIronrootWarlord,
@@ -973,6 +978,7 @@ const shard: CardShard = {
     _poolMindDrillAssailant,
     _poolMindIntoMatter,
     _poolMindlessAutomaton,
+    _poolMindwrackDemon,
     _poolMishrasFoundry,
     _poolMockingbird,
     _poolMonkClass,
@@ -1107,6 +1113,7 @@ const shard: CardShard = {
     _poolShrivel,
     _poolSibilantSpirit,
     _poolSiegeRhino,
+    _poolSilburlindSnapper,
     _poolSilentArtisan,
     _poolSilundiIsle,
     _poolSimplify,
@@ -1194,6 +1201,7 @@ const shard: CardShard = {
     _poolTitaniumGolem,
     _poolTolarianSerpent,
     _poolTomakulScrapsmith,
+    _poolToothCollector,
     _poolTorbranThaneOfRedFell,
     _poolTormentedSoul,
     _poolToxrillTheCorrosive,

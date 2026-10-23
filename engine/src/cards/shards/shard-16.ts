@@ -74,6 +74,7 @@ import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
+import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
 import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
@@ -148,6 +149,7 @@ import _poolEnergyStorm from "../pool/energy-storm.js";
 import _poolEnergyTap from "../pool/energy-tap.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
+import _poolEpitaphGolem from "../pool/epitaph-golem.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolErrantAndGiada from "../pool/errant-and-giada.js";
 import _poolErraticCyclops from "../pool/erratic-cyclops.js";
@@ -376,6 +378,7 @@ import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
+import _poolPiecesOfThePuzzle from "../pool/pieces-of-the-puzzle.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPistonFistCyclops from "../pool/piston-fist-cyclops.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
@@ -495,6 +498,7 @@ import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
 import _poolStormsWrath from "../pool/storms-wrath.js";
 import _poolStreetRiot from "../pool/street-riot.js";
+import _poolStrengthOfArms from "../pool/strength-of-arms.js";
 import _poolStripMine from "../pool/strip-mine.js";
 import _poolSultaiCharm from "../pool/sultai-charm.js";
 import _poolSunderingEruption from "../pool/sundering-eruption.js";
@@ -555,6 +559,7 @@ import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTrialOfKnowledge from "../pool/trial-of-knowledge.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
+import _poolTrueFaithCenser from "../pool/true-faith-censer.js";
 import _poolTrustedPegasus from "../pool/trusted-pegasus.js";
 import _poolTukatongueThallid from "../pool/tukatongue-thallid.js";
 import _poolTunnelingGeopede from "../pool/tunneling-geopede.js";
@@ -727,6 +732,7 @@ const shard: CardShard = {
     _poolBuckyBarnesEagerAlly,
     _poolBurdenOfProof,
     _poolCadaverLab,
+    _poolCallTheBloodline,
     _poolCanoptekTombSentinel,
     _poolCarnivorousMossBeast,
     _poolCartoucheOfKnowledge,
@@ -801,6 +807,7 @@ const shard: CardShard = {
     _poolEnergyTap,
     _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
+    _poolEpitaphGolem,
     _poolErodedCanyon,
     _poolErrantAndGiada,
     _poolErraticCyclops,
@@ -1029,6 +1036,7 @@ const shard: CardShard = {
     _poolPharikasSpawn,
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
+    _poolPiecesOfThePuzzle,
     _poolPiratesPillage,
     _poolPistonFistCyclops,
     _poolPitOfOfferings,
@@ -1148,6 +1156,7 @@ const shard: CardShard = {
     _poolStormGodsOracle,
     _poolStormsWrath,
     _poolStreetRiot,
+    _poolStrengthOfArms,
     _poolStripMine,
     _poolSultaiCharm,
     _poolSunderingEruption,
@@ -1208,6 +1217,7 @@ const shard: CardShard = {
     _poolTrialOfKnowledge,
     _poolTriplicateTitan,
     _poolTroopOfPonies,
+    _poolTrueFaithCenser,
     _poolTrustedPegasus,
     _poolTukatongueThallid,
     _poolTunnelingGeopede,

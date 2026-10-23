@@ -200,6 +200,7 @@ import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
 import _poolGazeOfPain from "../pool/gaze-of-pain.js";
+import _poolGeistblast from "../pool/geistblast.js";
 import _poolGeneratorServant from "../pool/generator-servant.js";
 import _poolGetOut from "../pool/get-out.js";
 import _poolGeyserGlider from "../pool/geyser-glider.js";
@@ -262,6 +263,7 @@ import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
 import _poolInfernalPet from "../pool/infernal-pet.js";
 import _poolIngeniousSmith from "../pool/ingenious-smith.js";
+import _poolInsidiousMist from "../pool/insidious-mist.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
 import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
@@ -318,6 +320,7 @@ import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
 import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
+import _poolManicScribe from "../pool/manic-scribe.js";
 import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
@@ -389,6 +392,7 @@ import _poolPounce from "../pool/pounce.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrimalBellow from "../pool/primal-bellow.js";
+import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
@@ -784,6 +788,7 @@ const shard: CardShard = {
     _poolGavonyTownship,
     _poolGazeOfGranite,
     _poolGazeOfPain,
+    _poolGeistblast,
     _poolGeneratorServant,
     _poolGetOut,
     _poolGeyserGlider,
@@ -846,6 +851,7 @@ const shard: CardShard = {
     _poolIndoctrinationAttendant,
     _poolInfernalPet,
     _poolIngeniousSmith,
+    _poolInsidiousMist,
     _poolInsightEngine,
     _poolInvasionOfMercadia,
     _poolInvasionOfMuraganda,
@@ -902,6 +908,7 @@ const shard: CardShard = {
     _poolMaggotTherapy,
     _poolMagitekScythe,
     _poolMakeshiftMunitions,
+    _poolManicScribe,
     _poolManticoreOfTheGauntlet,
     _poolMarrowBats,
     _poolMarshLurker,
@@ -973,6 +980,7 @@ const shard: CardShard = {
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrimalBellow,
+    _poolPrizedAmalgam,
     _poolPrizefight,
     _poolPsionicSnoop,
     _poolPyreticRebirth,

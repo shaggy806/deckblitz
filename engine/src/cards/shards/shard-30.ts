@@ -257,6 +257,7 @@ import _poolHexplateGolem from "../pool/hexplate-golem.js";
 import _poolHiredHexblade from "../pool/hired-hexblade.js";
 import _poolHoardersOverflow from "../pool/hoarders-overflow.js";
 import _poolHopToIt from "../pool/hop-to-it.js";
+import _poolHopeAgainstHope from "../pool/hope-against-hope.js";
 import _poolHorizonScholar from "../pool/horizon-scholar.js";
 import _poolHornedTroll from "../pool/horned-troll.js";
 import _poolHorridVigor from "../pool/horrid-vigor.js";
@@ -477,6 +478,7 @@ import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
+import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolHiredHexblade,
     _poolHoardersOverflow,
     _poolHopToIt,
+    _poolHopeAgainstHope,
     _poolHorizonScholar,
     _poolHornedTroll,
     _poolHorridVigor,
@@ -1084,6 +1087,7 @@ const shard: CardShard = {
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,
+    _poolSleepParalysis,
     _poolSmaugTheMagnificent,
     _poolSmugglersSurprise,
     _poolSneeringShadewriter,

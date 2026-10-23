@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbaddonTheDespoiler from "../pool/abaddon-the-despoiler.js";
 import _poolAbandonedAirTemple from "../pool/abandoned-air-temple.js";
+import _poolAberrantResearcher from "../pool/aberrant-researcher.js";
 import _poolAcademyRaider from "../pool/academy-raider.js";
 import _poolAcquiredMutation from "../pool/acquired-mutation.js";
 import _poolAethershieldArtificer from "../pool/aethershield-artificer.js";
@@ -13,6 +14,7 @@ import _poolAgentFrankHorrigan from "../pool/agent-frank-horrigan.js";
 import _poolAirResponseUnit from "../pool/air-response-unit.js";
 import _poolAkoumRefuge from "../pool/akoum-refuge.js";
 import _poolAladdinsRing from "../pool/aladdins-ring.js";
+import _poolAlmsOfTheVein from "../pool/alms-of-the-vein.js";
 import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
 import _poolAnointedChorister from "../pool/anointed-chorister.js";
@@ -23,6 +25,7 @@ import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
 import _poolArwensGift from "../pool/arwens-gift.js";
+import _poolAshmouthBlade from "../pool/ashmouth-blade.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
@@ -99,6 +102,7 @@ import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
+import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
@@ -343,6 +347,7 @@ import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
+import _poolNotForgotten from "../pool/not-forgotten.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
 import _poolOblivionsHunger from "../pool/oblivions-hunger.js";
@@ -611,6 +616,7 @@ const shard: CardShard = {
   pool: [
     _poolAbaddonTheDespoiler,
     _poolAbandonedAirTemple,
+    _poolAberrantResearcher,
     _poolAcademyRaider,
     _poolAcquiredMutation,
     _poolAethershieldArtificer,
@@ -619,6 +625,7 @@ const shard: CardShard = {
     _poolAirResponseUnit,
     _poolAkoumRefuge,
     _poolAladdinsRing,
+    _poolAlmsOfTheVein,
     _poolAncestralStatue,
     _poolAncientDen,
     _poolAnointedChorister,
@@ -629,6 +636,7 @@ const shard: CardShard = {
     _poolArmoryPaladin,
     _poolArtifistAcumen,
     _poolArwensGift,
+    _poolAshmouthBlade,
     _poolAspectOfLamprey,
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
@@ -705,6 +713,7 @@ const shard: CardShard = {
     _poolConflux,
     _poolConsumingAetherborn,
     _poolCopperTablet,
+    _poolCorruptedGrafstone,
     _poolCrackdownConstruct,
     _poolCreepingTarPit,
     _poolCrewCaptain,
@@ -949,6 +958,7 @@ const shard: CardShard = {
     _poolNightscapeFamiliar,
     _poolNightwhorlHermit,
     _poolNorthernAirTemple,
+    _poolNotForgotten,
     _poolNyxbornMarauder,
     _poolOathOfNissa,
     _poolOblivionsHunger,

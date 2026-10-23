@@ -16,6 +16,7 @@ import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
 import _poolAlchorsTomb from "../pool/alchors-tomb.js";
 import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
 import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
+import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
@@ -131,6 +132,7 @@ import _poolDawnstrikePaladin from "../pool/dawnstrike-paladin.js";
 import _poolDaybreakCombatants from "../pool/daybreak-combatants.js";
 import _poolDeadeyeDuelist from "../pool/deadeye-duelist.js";
 import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
+import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
 import _poolDebtorsTransport from "../pool/debtors-transport.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
@@ -238,6 +240,7 @@ import _poolGoblinInstigator from "../pool/goblin-instigator.js";
 import _poolGoblinWardriver from "../pool/goblin-wardriver.js";
 import _poolGogglesOfNight from "../pool/goggles-of-night.js";
 import _poolGoldfuryStrider from "../pool/goldfury-strider.js";
+import _poolGoldnightCastigator from "../pool/goldnight-castigator.js";
 import _poolGoldspanDragon from "../pool/goldspan-dragon.js";
 import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGoneMissing from "../pool/gone-missing.js";
@@ -277,6 +280,7 @@ import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHonoredHydra from "../pool/honored-hydra.js";
+import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
@@ -308,6 +312,7 @@ import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
 import _poolKarganWarleader from "../pool/kargan-warleader.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
+import _poolKindlyStranger from "../pool/kindly-stranger.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
@@ -340,6 +345,7 @@ import _poolMeltstridersResolve from "../pool/meltstriders-resolve.js";
 import _poolMemoryDeluge from "../pool/memory-deluge.js";
 import _poolMentalModulation from "../pool/mental-modulation.js";
 import _poolMerchantScroll from "../pool/merchant-scroll.js";
+import _poolMercilessResolve from "../pool/merciless-resolve.js";
 import _poolMerfolkLooter from "../pool/merfolk-looter.js";
 import _poolMerfolkMistbinder from "../pool/merfolk-mistbinder.js";
 import _poolMerfolkTrickster from "../pool/merfolk-trickster.js";
@@ -434,6 +440,7 @@ import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
+import _poolRunawayCarriage from "../pool/runaway-carriage.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSaheelisArtistry from "../pool/saheelis-artistry.js";
@@ -617,6 +624,7 @@ const shard: CardShard = {
     _poolAlchorsTomb,
     _poolAllFatesStalker,
     _poolAlpineHoundmaster,
+    _poolAncientOfTheEquinox,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
     _poolArbiterOfWoe,
@@ -732,6 +740,7 @@ const shard: CardShard = {
     _poolDaybreakCombatants,
     _poolDeadeyeDuelist,
     _poolDeathbloomThallid,
+    _poolDeathcapCultivator,
     _poolDebtorsTransport,
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
@@ -839,6 +848,7 @@ const shard: CardShard = {
     _poolGoblinWardriver,
     _poolGogglesOfNight,
     _poolGoldfuryStrider,
+    _poolGoldnightCastigator,
     _poolGoldspanDragon,
     _poolGolosTirelessPilgrim,
     _poolGoneMissing,
@@ -878,6 +888,7 @@ const shard: CardShard = {
     _poolHollowScavenger,
     _poolHomicideInvestigator,
     _poolHonoredHydra,
+    _poolHowlpackWolf,
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolIdolOfTheDeepKing,
@@ -909,6 +920,7 @@ const shard: CardShard = {
     _poolKarganWarleader,
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
+    _poolKindlyStranger,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
@@ -941,6 +953,7 @@ const shard: CardShard = {
     _poolMemoryDeluge,
     _poolMentalModulation,
     _poolMerchantScroll,
+    _poolMercilessResolve,
     _poolMerfolkLooter,
     _poolMerfolkMistbinder,
     _poolMerfolkTrickster,
@@ -1035,6 +1048,7 @@ const shard: CardShard = {
     _poolRoilElemental,
     _poolRooftopSaboteurs,
     _poolRuinousGremlin,
+    _poolRunawayCarriage,
     _poolRunawayTrashBot,
     _poolRunescaleStormbrood,
     _poolSaheelisArtistry,

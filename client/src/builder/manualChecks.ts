@@ -8080,4 +8080,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Sinuous Vermin', 'Swamp*5'] },
     }),
   ),
+  preset(
+    'Hinterland Logger: transforms after a turn with no spells',
+    board({
+      you: { bf: ['Hinterland Logger', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Startled Awake: comes back from the graveyard as Persistent Nightmare',
+    board({
+      you: { bf: ['Island*5'], gy: ['Startled Awake'] },
+    }),
+  ),
 ]

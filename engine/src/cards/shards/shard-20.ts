@@ -50,6 +50,7 @@ import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
 import _poolBasriKet from "../pool/basri-ket.js";
 import _poolBastionInventor from "../pool/bastion-inventor.js";
 import _poolBatterskull from "../pool/batterskull.js";
+import _poolBearerOfOverwhelmingTruths from "../pool/bearer-of-overwhelming-truths.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingElk from "../pool/bellowing-elk.js";
@@ -276,6 +277,7 @@ import _poolIcatianTown from "../pool/icatian-town.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
+import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
 import _poolInvoluntaryEmployment from "../pool/involuntary-employment.js";
@@ -526,6 +528,7 @@ import _poolStormcloudSpirit from "../pool/stormcloud-spirit.js";
 import _poolStormscaleScion from "../pool/stormscale-scion.js";
 import _poolStorvaldFrostGiantJarl from "../pool/storvald-frost-giant-jarl.js";
 import _poolStrixhavenSkycoach from "../pool/strixhaven-skycoach.js";
+import _poolStromkirkMentor from "../pool/stromkirk-mentor.js";
 import _poolSubterraneanCavern from "../pool/subterranean-cavern.js";
 import _poolSuddenStrike from "../pool/sudden-strike.js";
 import _poolSultaiAscendancy from "../pool/sultai-ascendancy.js";
@@ -610,6 +613,7 @@ import _poolVancesBlastingCannons from "../pool/vances-blasting-cannons.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
+import _poolVesselOfNascency from "../pool/vessel-of-nascency.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
 import _poolVillageWatch from "../pool/village-watch.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
@@ -710,6 +714,7 @@ const shard: CardShard = {
     _poolBasriKet,
     _poolBastionInventor,
     _poolBatterskull,
+    _poolBearerOfOverwhelmingTruths,
     _poolBeckonApparition,
     _poolBelbesPercher,
     _poolBellowingElk,
@@ -936,6 +941,7 @@ const shard: CardShard = {
     _poolIllusionistsBracers,
     _poolImmersturmSkullcairn,
     _poolImpulse,
+    _poolIncorrigibleYouths,
     _poolInnovativeCommons,
     _poolInvigoratingHotSpring,
     _poolInvoluntaryEmployment,
@@ -1186,6 +1192,7 @@ const shard: CardShard = {
     _poolStormscaleScion,
     _poolStorvaldFrostGiantJarl,
     _poolStrixhavenSkycoach,
+    _poolStromkirkMentor,
     _poolSubterraneanCavern,
     _poolSuddenStrike,
     _poolSultaiAscendancy,
@@ -1270,6 +1277,7 @@ const shard: CardShard = {
     _poolVeloheartBike,
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
+    _poolVesselOfNascency,
     _poolVileMutilator,
     _poolVillageWatch,
     _poolViridianAcolyte,

@@ -103,6 +103,7 @@ import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
 import _poolChopDown from "../pool/chop-down.js";
+import _poolClipWings from "../pool/clip-wings.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
@@ -119,6 +120,7 @@ import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolCryptidInspector from "../pool/cryptid-inspector.js";
+import _poolDanceWithDevils from "../pool/dance-with-devils.js";
 import _poolDapperShieldmate from "../pool/dapper-shieldmate.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
 import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
@@ -369,6 +371,7 @@ import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPinkHorror from "../pool/pink-horror.js";
+import _poolPiousEvangel from "../pool/pious-evangel.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
 import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
@@ -587,6 +590,7 @@ import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
+import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
 import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
@@ -714,6 +718,7 @@ const shard: CardShard = {
     _poolChatterOfTheSquirrel,
     _poolChildOfTheVolcano,
     _poolChopDown,
+    _poolClipWings,
     _poolCloudboundMoogle,
     _poolCoalstokeGearhulk,
     _poolCoeurl,
@@ -730,6 +735,7 @@ const shard: CardShard = {
     _poolCrowdedCrypt,
     _poolCryptOfTheEternals,
     _poolCryptidInspector,
+    _poolDanceWithDevils,
     _poolDapperShieldmate,
     _poolDaringEscape,
     _poolDaringThunderThief,
@@ -980,6 +986,7 @@ const shard: CardShard = {
     _poolPhyrexianMonitor,
     _poolPierceTheSky,
     _poolPinkHorror,
+    _poolPiousEvangel,
     _poolPlasmancer,
     _poolPoisonBladeMentor,
     _poolPollenShieldHare,
@@ -1198,6 +1205,7 @@ const shard: CardShard = {
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
     _poolWebWarriors,
+    _poolWeirdingWood,
     _poolWhack,
     _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,

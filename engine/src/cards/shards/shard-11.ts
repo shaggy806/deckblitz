@@ -349,6 +349,7 @@ import _poolMossdog from "../pool/mossdog.js";
 import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
 import _poolMurasaRootgrazer from "../pool/murasa-rootgrazer.js";
+import _poolMurderersAxe from "../pool/murderers-axe.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
 import _poolMyPrecious from "../pool/my-precious.js";
 import _poolMysidianElder from "../pool/mysidian-elder.js";
@@ -595,10 +596,12 @@ import _poolWedgelightRammer from "../pool/wedgelight-rammer.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
 import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
 import _poolWieldingTheGreenDragon from "../pool/wielding-the-green-dragon.js";
+import _poolWildFieldScarecrow from "../pool/wild-field-scarecrow.js";
 import _poolWildJhovall from "../pool/wild-jhovall.js";
 import _poolWirewoodSymbiote from "../pool/wirewood-symbiote.js";
 import _poolWishcoinCrab from "../pool/wishcoin-crab.js";
 import _poolWithinRange from "../pool/within-range.js";
+import _poolWolfOfDevilsBreach from "../pool/wolf-of-devils-breach.js";
 import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
 import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolMoxSapphire,
     _poolMoxTantalite,
     _poolMurasaRootgrazer,
+    _poolMurderersAxe,
     _poolMusterTheDeparted,
     _poolMyPrecious,
     _poolMysidianElder,
@@ -1222,10 +1226,12 @@ const shard: CardShard = {
     _poolWhiptongueHydra,
     _poolWhirlwindTechnique,
     _poolWieldingTheGreenDragon,
+    _poolWildFieldScarecrow,
     _poolWildJhovall,
     _poolWirewoodSymbiote,
     _poolWishcoinCrab,
     _poolWithinRange,
+    _poolWolfOfDevilsBreach,
     _poolWoodcuttersGrit,
     _poolWoollyMammoths,
     _poolWormholeSerpent,

@@ -12,6 +12,7 @@ import _poolAegisAutomaton from "../pool/aegis-automaton.js";
 import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
+import _poolAimHigh from "../pool/aim-high.js";
 import _poolAirElemental from "../pool/air-elemental.js";
 import _poolAirshipCrash from "../pool/airship-crash.js";
 import _poolAjaniVengeant from "../pool/ajani-vengeant.js";
@@ -311,6 +312,7 @@ import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
+import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
@@ -589,6 +591,7 @@ import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dra
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
 import _tokensHippoToken from "../tokens/hippo-token.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
+import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
 import _tokensRhinoWarriorToken from "../tokens/rhino-warrior-token.js";
@@ -609,6 +612,7 @@ const shard: CardShard = {
     _poolAegisOfTheHeavens,
     _poolAetherSpellbomb,
     _poolAetherfluxReservoir,
+    _poolAimHigh,
     _poolAirElemental,
     _poolAirshipCrash,
     _poolAjaniVengeant,
@@ -908,6 +912,7 @@ const shard: CardShard = {
     _poolMetalworkColossus,
     _poolMidnightScavengers,
     _poolMightOfTheMasses,
+    _poolMilitantInquisitor,
     _poolMindMeanderer,
     _poolMirageMockery,
     _poolMistCloakedHerald,
@@ -1188,6 +1193,7 @@ const shard: CardShard = {
     _tokensElementalTokenVernalSovereign,
     _tokensHippoToken,
     _tokensNymphToken,
+    _tokensOozeToken33,
     _tokensPegasusToken,
     _tokensRebelToken,
     _tokensRhinoWarriorToken,

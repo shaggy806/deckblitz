@@ -265,6 +265,7 @@ import _poolHardCover from "../pool/hard-cover.js";
 import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
+import _poolHeirToTheNight from "../pool/heir-to-the-night.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
 import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
@@ -409,6 +410,7 @@ import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
+import _poolPerfectedForm from "../pool/perfected-form.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
@@ -900,6 +902,7 @@ const shard: CardShard = {
     _poolHarmoniousArchon,
     _poolHeartflameSlash,
     _poolHedronArchive,
+    _poolHeirToTheNight,
     _poolHelicarrierStrike,
     _poolHellkiteCharger,
     _poolHellkiteTyrant,
@@ -1044,6 +1047,7 @@ const shard: CardShard = {
     _poolPatriarsSeal,
     _poolPendelhaven,
     _poolPeregrineGriffin,
+    _poolPerfectedForm,
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,

@@ -55,6 +55,7 @@ import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
+import _poolBrainInAJar from "../pool/brain-in-a-jar.js";
 import _poolBrainstone from "../pool/brainstone.js";
 import _poolBrandedHowler from "../pool/branded-howler.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
@@ -114,6 +115,7 @@ import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
 import _poolCrosswayVampire from "../pool/crossway-vampire.js";
 import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
+import _poolCultOfTheWaxingMoon from "../pool/cult-of-the-waxing-moon.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
@@ -468,6 +470,7 @@ import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
+import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
@@ -508,6 +511,7 @@ import _poolTempestAngler from "../pool/tempest-angler.js";
 import _poolTempestCaller from "../pool/tempest-caller.js";
 import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
+import _poolTenacity from "../pool/tenacity.js";
 import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
 import _poolTerrificTeamUp from "../pool/terrific-team-up.js";
 import _poolTerritorialBoar from "../pool/territorial-boar.js";
@@ -675,6 +679,7 @@ const shard: CardShard = {
     _poolBlowflyInfestation,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
+    _poolBrainInAJar,
     _poolBrainstone,
     _poolBrandedHowler,
     _poolBreechesEagerPillager,
@@ -734,6 +739,7 @@ const shard: CardShard = {
     _poolCrosswayVampire,
     _poolCrushingCanopy,
     _poolCryptcallerChariot,
+    _poolCultOfTheWaxingMoon,
     _poolCunningCoyote,
     _poolCursedMinotaur,
     _poolCursedRecording,
@@ -1088,6 +1094,7 @@ const shard: CardShard = {
     _poolSoulherder,
     _poolSowerOfChaos,
     _poolSpectacleSummit,
+    _poolSpectralShepherd,
     _poolSpellStutter,
     _poolSpinedMegalodon,
     _poolSpringLoadedSawblades,
@@ -1128,6 +1135,7 @@ const shard: CardShard = {
     _poolTempestCaller,
     _poolTempestDrake,
     _poolTemporalManipulation,
+    _poolTenacity,
     _poolTeoSpiritedGlider,
     _poolTerrificTeamUp,
     _poolTerritorialBoar,

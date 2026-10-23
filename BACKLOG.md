@@ -149,15 +149,15 @@ section keeps only what to do next.
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise; batch
   146 the rest of Commander 2016 and Kaladesh, no engine change; batch 147 Conspiracy: Take the
-  Crown and Eldritch Moon, on emerge and "as long as it's monstrous");
-  **next, Shadows over Innistrad** (161 left), then Oath of the Gatewatch (95 left). Its
-  werewolves' "if no spells were cast last turn, transform" upkeep trigger isn't built
-  (`condition:werewolf-transform-spells-last-turn` — Ulrich, Duskwatch Recruiter so far): with
-  Shadows' and Innistrad's werewolves it may lead the next batch. Batch 147's leading blockers:
+  Crown and Eldritch Moon, on emerge and "as long as it's monstrous"; batch 148 Shadows over
+  Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object);
+  **next, Oath of the Gatewatch** (95 left), then Commander 2015 (21 left). The leader now:
+  "if that creature would die this turn, exile it instead" (`replacement:target-exile-if-dies-this-turn`
+  — Reduce to Ashes, Burn from Within; 30 cards). Batch 147's leading blockers:
   meld (`mechanic:meld`, 15 cards now), the Conspiracy draft's own abilities
   (`mechanic:draft-matters`, 15 — kept blocked, even the two whose draft text leaves a vanilla
-  body), the secret-discard gap (`effect:hidden-simultaneous-choices`, 13) and "can block an
-  additional creature" (`static:block-additional-creature`, 13). Batch 146's: undaunted
+  body), the secret-discard gap (`effect:hidden-simultaneous-choices`, 14) and "can block an
+  additional creature" (`static:block-additional-creature`, 14). Batch 146's: undaunted
   (`keyword:undaunted`, 6) and "whenever this creature crews a Vehicle"
   (`trigger:crews-or-saddles`, 5); "pay any amount of {E}" (`cost:pay-any-amount-of-energy`) is
   at 12. The earlier improvise
@@ -250,6 +250,7 @@ there and move this line to `COMPLETED.md`.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.
 - **Losing loyalty never emits `counter-removed`** (306.8, 606.4): damage to a planeswalker and a minus loyalty cost emit only `loyalty-changed`, so a `counters-removed` trigger for loyalty never fires (Chandra, Fire Artisan).
 - **A merged permanent's token status is its own object's** (730.2d): a card mutated on top of a token still counts as a token.
+- **A double-faced Aura put onto the battlefield transformed is asked what it enchants** (712.14a): `askEnterChoice` reads its front face, so Skin Invasion's back face returns only with something to enchant, unattached; blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`).
 - **A granted leaves-the-battlefield trigger doesn't look back for its grant** (603.10a): Relic Vial when its only Cleric dies.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A granted ability's dynamic filter is fixed when it's granted**: an `{ amount }` in its target filter reads the granter, not the creature that has it (Firja's Retribution).

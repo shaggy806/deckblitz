@@ -81,6 +81,7 @@ import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
 import _poolBretagardStronghold from "../pool/bretagard-stronghold.js";
 import _poolBrightReprisal from "../pool/bright-reprisal.js";
 import _poolBrineShaman from "../pool/brine-shaman.js";
+import _poolBrokenConcentration from "../pool/broken-concentration.js";
 import _poolBuriedTreasure from "../pool/buried-treasure.js";
 import _poolBurlyBreaker from "../pool/burly-breaker.js";
 import _poolBushwhack from "../pool/bushwhack.js";
@@ -362,6 +363,7 @@ import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
 import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
 import _poolNefCropEntangler from "../pool/nef-crop-entangler.js";
+import _poolNeglectedHeirloom from "../pool/neglected-heirloom.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
 import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
@@ -446,6 +448,7 @@ import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
 import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
+import _poolScourgeWolf from "../pool/scourge-wolf.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
@@ -555,6 +558,7 @@ import _poolTwoHeadedHellkite from "../pool/two-headed-hellkite.js";
 import _poolTyrranaxAtrocity from "../pool/tyrranax-atrocity.js";
 import _poolUndergrowthRecon from "../pool/undergrowth-recon.js";
 import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
+import _poolUninvitedGeist from "../pool/uninvited-geist.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
 import _poolVampiresZeal from "../pool/vampires-zeal.js";
@@ -695,6 +699,7 @@ const shard: CardShard = {
     _poolBretagardStronghold,
     _poolBrightReprisal,
     _poolBrineShaman,
+    _poolBrokenConcentration,
     _poolBuriedTreasure,
     _poolBurlyBreaker,
     _poolBushwhack,
@@ -976,6 +981,7 @@ const shard: CardShard = {
     _poolMysticSkull,
     _poolMythosOfIlluna,
     _poolNefCropEntangler,
+    _poolNeglectedHeirloom,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
     _poolNiblisOfFrost,
@@ -1060,6 +1066,7 @@ const shard: CardShard = {
     _poolScabClanCharger,
     _poolScarwoodHag,
     _poolScoriaElemental,
+    _poolScourgeWolf,
     _poolScythecatCub,
     _poolSeasonedWarrenguard,
     _poolSeekerOfSkybreak,
@@ -1169,6 +1176,7 @@ const shard: CardShard = {
     _poolTyrranaxAtrocity,
     _poolUndergrowthRecon,
     _poolUndergrowthStadium,
+    _poolUninvitedGeist,
     _poolUnnaturalMoonrise,
     _poolVampireNoble,
     _poolVampiresZeal,

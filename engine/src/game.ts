@@ -34832,8 +34832,16 @@ export class Game {
     // An instant or sorcery card that would enter the battlefield stays where
     // it was (rule 400.4a) — unless it enters face down, as a 2/2 creature
     // with no other characteristics (rules 701.40a, 708.2a): manifested,
-    // cloaked or manifested dread, it stays face down for good (701.40b).
-    if (to === "battlefield" && object.zone !== "battlefield" && enter.faceDown === undefined) {
+    // cloaked or manifested dread, it stays face down for good (701.40b) —
+    // or a double-faced card told to enter transformed, which enters back
+    // face up (rule 712.14a): Startled Awake's ruling returns it as Persistent
+    // Nightmare. No transforming card's back face is an instant or sorcery.
+    if (
+      to === "battlefield" &&
+      object.zone !== "battlefield" &&
+      enter.faceDown === undefined &&
+      !(enter.transformed === true && this.isDoubleFacedCard(id))
+    ) {
       const types = computeCharacteristics(this.state, this.registry, id).types;
       if (types.includes("instant") || types.includes("sorcery")) return false;
     }

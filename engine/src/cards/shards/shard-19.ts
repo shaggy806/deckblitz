@@ -135,6 +135,7 @@ import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
 import _poolDenethorRulingSteward from "../pool/denethor-ruling-steward.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
+import _poolDenyExistence from "../pool/deny-existence.js";
 import _poolDenyReality from "../pool/deny-reality.js";
 import _poolDepower from "../pool/depower.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
@@ -193,6 +194,7 @@ import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
 import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
+import _poolFlamebladeAngel from "../pool/flameblade-angel.js";
 import _poolFlamingFist from "../pool/flaming-fist.js";
 import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
@@ -295,6 +297,7 @@ import _poolKarokWrangler from "../pool/karok-wrangler.js";
 import _poolKataraSeekingRevenge from "../pool/katara-seeking-revenge.js";
 import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
+import _poolKessigDireSwine from "../pool/kessig-dire-swine.js";
 import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
 import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
@@ -763,6 +766,7 @@ const shard: CardShard = {
     _poolDelversTorch,
     _poolDenethorRulingSteward,
     _poolDenyEntry,
+    _poolDenyExistence,
     _poolDenyReality,
     _poolDepower,
     _poolDerelictAtticWidowsWalk,
@@ -821,6 +825,7 @@ const shard: CardShard = {
     _poolFireNationRaider,
     _poolFirstTimeFlyer,
     _poolFissureWizard,
+    _poolFlamebladeAngel,
     _poolFlamingFist,
     _poolFlamingTyrannosaurus,
     _poolFlipTheSwitch,
@@ -923,6 +928,7 @@ const shard: CardShard = {
     _poolKataraSeekingRevenge,
     _poolKelpieGuide,
     _poolKelsienThePlague,
+    _poolKessigDireSwine,
     _poolKhenraSpellspear,
     _poolKillerWhale,
     _poolKinjallisDawnrunner,

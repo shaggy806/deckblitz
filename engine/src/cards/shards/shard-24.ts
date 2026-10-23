@@ -199,9 +199,11 @@ import _poolGastalThrillroller from "../pool/gastal-thrillroller.js";
 import _poolGatesAblaze from "../pool/gates-ablaze.js";
 import _poolGeistOfSaintThalia from "../pool/geist-of-saint-thalia.js";
 import _poolGeothermalCrevice from "../pool/geothermal-crevice.js";
+import _poolGibberingFiend from "../pool/gibbering-fiend.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
 import _poolGilacorn from "../pool/gilacorn.js";
 import _poolGildedCerodon from "../pool/gilded-cerodon.js";
+import _poolGisasBidding from "../pool/gisas-bidding.js";
 import _poolGishathSunsAvatar from "../pool/gishath-suns-avatar.js";
 import _poolGlimmerlight from "../pool/glimmerlight.js";
 import _poolGloriousSunrise from "../pool/glorious-sunrise.js";
@@ -255,6 +257,7 @@ import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
+import _poolIntrepidProvisioner from "../pool/intrepid-provisioner.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
 import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
@@ -796,9 +799,11 @@ const shard: CardShard = {
     _poolGatesAblaze,
     _poolGeistOfSaintThalia,
     _poolGeothermalCrevice,
+    _poolGibberingFiend,
     _poolGiftedAetherborn,
     _poolGilacorn,
     _poolGildedCerodon,
+    _poolGisasBidding,
     _poolGishathSunsAvatar,
     _poolGlimmerlight,
     _poolGloriousSunrise,
@@ -852,6 +857,7 @@ const shard: CardShard = {
     _poolInfernalReckoning,
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
+    _poolIntrepidProvisioner,
     _poolJoriEnRuinDiver,
     _poolJunkWinder,
     _poolJwarIsleRefuge,

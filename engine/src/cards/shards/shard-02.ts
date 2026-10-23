@@ -170,6 +170,7 @@ import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
+import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEstridsInvocation from "../pool/estrids-invocation.js";
@@ -237,6 +238,7 @@ import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
 import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
+import _poolHanweirMilitiaCaptain from "../pool/hanweir-militia-captain.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHazoretsFavor from "../pool/hazorets-favor.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
@@ -355,6 +357,7 @@ import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
 import _poolNyxHerald from "../pool/nyx-herald.js";
 import _poolOathswornVampire from "../pool/oathsworn-vampire.js";
 import _poolObeliskOfJund from "../pool/obelisk-of-jund.js";
+import _poolObsessiveSkinner from "../pool/obsessive-skinner.js";
 import _poolOketrasMonument from "../pool/oketras-monument.js";
 import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
 import _poolOnslaught from "../pool/onslaught.js";
@@ -755,6 +758,7 @@ const shard: CardShard = {
     _poolEidolonOfBlossoms,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
+    _poolElusiveTormentor,
     _poolEnatuGolem,
     _poolEphemeralShields,
     _poolEstridsInvocation,
@@ -822,6 +826,7 @@ const shard: CardShard = {
     _poolGwendlynDiCorci,
     _poolHalvarGodOfBattle,
     _poolHangarScrounger,
+    _poolHanweirMilitiaCaptain,
     _poolHarvesttideInfiltrator,
     _poolHazoretsFavor,
     _poolHeartstringPuller,
@@ -940,6 +945,7 @@ const shard: CardShard = {
     _poolNyxHerald,
     _poolOathswornVampire,
     _poolObeliskOfJund,
+    _poolObsessiveSkinner,
     _poolOketrasMonument,
     _poolOloroAgelessAscetic,
     _poolOnslaught,

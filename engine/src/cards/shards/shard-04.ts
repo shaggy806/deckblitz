@@ -322,6 +322,7 @@ import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
+import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
 import _poolNeedletoothRaptor from "../pool/needletooth-raptor.js";
@@ -341,7 +342,9 @@ import _poolOathOfLiliana from "../pool/oath-of-liliana.js";
 import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
+import _poolOliviasBloodsworn from "../pool/olivias-bloodsworn.js";
 import _poolOnThinIce from "../pool/on-thin-ice.js";
+import _poolOngoingInvestigation from "../pool/ongoing-investigation.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
@@ -540,6 +543,7 @@ import _poolUnburiedEarthcarver from "../pool/unburied-earthcarver.js";
 import _poolUncomfortableChill from "../pool/uncomfortable-chill.js";
 import _poolUnderfootUnderdogs from "../pool/underfoot-underdogs.js";
 import _poolUnflinchingHortimancer from "../pool/unflinching-hortimancer.js";
+import _poolUnimpededTrespasser from "../pool/unimpeded-trespasser.js";
 import _poolUnstableExperiment from "../pool/unstable-experiment.js";
 import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
@@ -920,6 +924,7 @@ const shard: CardShard = {
     _poolMortalsResolve,
     _poolMoxJet,
     _poolMukotaiAmbusher,
+    _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
     _poolNeedletoothRaptor,
@@ -939,7 +944,9 @@ const shard: CardShard = {
     _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
     _poolOjutaiInterceptor,
+    _poolOliviasBloodsworn,
     _poolOnThinIce,
+    _poolOngoingInvestigation,
     _poolOrderOfMidnight,
     _poolOrimSamiteHealer,
     _poolOtterPenguin,
@@ -1138,6 +1145,7 @@ const shard: CardShard = {
     _poolUncomfortableChill,
     _poolUnderfootUnderdogs,
     _poolUnflinchingHortimancer,
+    _poolUnimpededTrespasser,
     _poolUnstableExperiment,
     _poolValorOfTheWorthy,
     _poolVampireChampion,

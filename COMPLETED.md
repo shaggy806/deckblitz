@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Shadows over Innistrad, whole** (batch 148): the werewolves' "if no spells were cast last
+  turn, transform" built (`spells-cast-last-turn`, the scaffolder reading both faces' lines),
+  with damage to a trigger's object (`damage.target: "trigger-object"`) and the all-hands count;
+  a double-faced card told to enter transformed is judged by its back face (Startled Awake).
+  137 authored — five `card-author` agents and the lead: the eleven werewolves, Ulrich of the
+  Krallenhorde, Duskwatch Recruiter, Sigarda, Heron's Grace, Olivia, Mobilized for War, Nahiri,
+  the Harbinger, Prized Amalgam, Startled Awake, Ornery Goblin, Caltrops and Storm, Queen of
+  Wakanda; SOI is 230 of 267. 31 blocked, "exile it instead if it would die this turn" the most
+  shared (30 cards now) (2026-10-23).
 - **Conspiracy: Take the Crown and Eldritch Moon, whole** (batch 147): **emerge** built (rule
   702.119 — `emerge: { cost, from? }`, one cast offer per creature that could be sacrificed, its
   mana value off the total cost after increases) and "as long as this creature is monstrous"

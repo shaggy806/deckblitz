@@ -42,6 +42,7 @@ import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBattleOfFrostAndFire from "../pool/battle-of-frost-and-fire.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
 import _poolBedlamReveler from "../pool/bedlam-reveler.js";
+import _poolBeholdTheBeyond from "../pool/behold-the-beyond.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
@@ -316,6 +317,7 @@ import _poolMerchantOfTheVale from "../pool/merchant-of-the-vale.js";
 import _poolMerenOfClanNelToth from "../pool/meren-of-clan-nel-toth.js";
 import _poolMeteorGolem from "../pool/meteor-golem.js";
 import _poolMeteoricMace from "../pool/meteoric-mace.js";
+import _poolMightBeyondReason from "../pool/might-beyond-reason.js";
 import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
@@ -323,6 +325,7 @@ import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
 import _poolMogMoogleWarrior from "../pool/mog-moogle-warrior.js";
 import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
+import _poolMoorlandDrifter from "../pool/moorland-drifter.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
@@ -431,6 +434,7 @@ import _poolSerrasGuardian from "../pool/serras-guardian.js";
 import _poolShadowRitePriest from "../pool/shadow-rite-priest.js";
 import _poolShadowfeed from "../pool/shadowfeed.js";
 import _poolShadyTraveler from "../pool/shady-traveler.js";
+import _poolShardOfBrokenGlass from "../pool/shard-of-broken-glass.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
@@ -438,6 +442,7 @@ import _poolSigardasImprisonment from "../pool/sigardas-imprisonment.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
 import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
 import _poolSixthSense from "../pool/sixth-sense.js";
+import _poolSkeletonKey from "../pool/skeleton-key.js";
 import _poolSkemfarElderhall from "../pool/skemfar-elderhall.js";
 import _poolSkirkFireMarshal from "../pool/skirk-fire-marshal.js";
 import _poolSkyclaveShadowcat from "../pool/skyclave-shadowcat.js";
@@ -466,6 +471,7 @@ import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
+import _poolStructuralDistortion from "../pool/structural-distortion.js";
 import _poolStun from "../pool/stun.js";
 import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
 import _poolSunderflock from "../pool/sunderflock.js";
@@ -631,6 +637,7 @@ const shard: CardShard = {
     _poolBattleOfFrostAndFire,
     _poolBeastWhisperer,
     _poolBedlamReveler,
+    _poolBeholdTheBeyond,
     _poolBelenonWarAnthem,
     _poolBellowsLizard,
     _poolBespokeBo,
@@ -905,6 +912,7 @@ const shard: CardShard = {
     _poolMerenOfClanNelToth,
     _poolMeteorGolem,
     _poolMeteoricMace,
+    _poolMightBeyondReason,
     _poolMightformHarmonizer,
     _poolMindRavel,
     _poolMinotaurSureshot,
@@ -912,6 +920,7 @@ const shard: CardShard = {
     _poolMogMoogleWarrior,
     _poolMonkGyatso,
     _poolMoonBlessedCleric,
+    _poolMoorlandDrifter,
     _poolMorcantsEyes,
     _poolMountainGoat,
     _poolMrOrfeoTheBoulder,
@@ -1020,6 +1029,7 @@ const shard: CardShard = {
     _poolShadowRitePriest,
     _poolShadowfeed,
     _poolShadyTraveler,
+    _poolShardOfBrokenGlass,
     _poolShatteredYard,
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
@@ -1027,6 +1037,7 @@ const shard: CardShard = {
     _poolSignpostScarecrow,
     _poolSigridGodFavored,
     _poolSixthSense,
+    _poolSkeletonKey,
     _poolSkemfarElderhall,
     _poolSkirkFireMarshal,
     _poolSkyclaveShadowcat,
@@ -1055,6 +1066,7 @@ const shard: CardShard = {
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
     _poolStormTheSeedcore,
+    _poolStructuralDistortion,
     _poolStun,
     _poolSubterraneanTremors,
     _poolSunderflock,

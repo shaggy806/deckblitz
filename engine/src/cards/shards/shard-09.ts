@@ -115,6 +115,7 @@ import _poolCountersquall from "../pool/countersquall.js";
 import _poolCourtOfCunning from "../pool/court-of-cunning.js";
 import _poolCovertOperative from "../pool/covert-operative.js";
 import _poolCreatureBond from "../pool/creature-bond.js";
+import _poolCrowOfDarkTidings from "../pool/crow-of-dark-tidings.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
 import _poolCrystalCarapace from "../pool/crystal-carapace.js";
 import _poolCrystalVein from "../pool/crystal-vein.js";
@@ -248,6 +249,7 @@ import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
 import _poolHopefulVigil from "../pool/hopeful-vigil.js";
+import _poolHoundOfTheFarbogs from "../pool/hound-of-the-farbogs.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
@@ -745,6 +747,7 @@ const shard: CardShard = {
     _poolCourtOfCunning,
     _poolCovertOperative,
     _poolCreatureBond,
+    _poolCrowOfDarkTidings,
     _poolCrudeRampart,
     _poolCrystalCarapace,
     _poolCrystalVein,
@@ -878,6 +881,7 @@ const shard: CardShard = {
     _poolHollowhengeScavenger,
     _poolHopeEnderCoatl,
     _poolHopefulVigil,
+    _poolHoundOfTheFarbogs,
     _poolHowlingBanshee,
     _poolHyenaPack,
     _poolIcatianLieutenant,

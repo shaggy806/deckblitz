@@ -71,6 +71,7 @@ import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
+import _poolBloodmadVampire from "../pool/bloodmad-vampire.js";
 import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
 import _poolBodyLaunderer from "../pool/body-launderer.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
@@ -122,6 +123,7 @@ import _poolCruelWitness from "../pool/cruel-witness.js";
 import _poolCryogenRelic from "../pool/cryogen-relic.js";
 import _poolDanithaCapashenParagon from "../pool/danitha-capashen-paragon.js";
 import _poolDanseMacabre from "../pool/danse-macabre.js";
+import _poolDaringSleuth from "../pool/daring-sleuth.js";
 import _poolDarkblast from "../pool/darkblast.js";
 import _poolDarkborePathway from "../pool/darkbore-pathway.js";
 import _poolDauntlessVeteran from "../pool/dauntless-veteran.js";
@@ -362,6 +364,7 @@ import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
 import _poolOdricBloodCursed from "../pool/odric-blood-cursed.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
+import _poolOliviaMobilizedForWar from "../pool/olivia-mobilized-for-war.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
 import _poolOnduKnotmaster from "../pool/ondu-knotmaster.js";
 import _poolOpportunisticDragon from "../pool/opportunistic-dragon.js";
@@ -372,8 +375,10 @@ import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
 import _poolOrthodoxyEnforcer from "../pool/orthodoxy-enforcer.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
+import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
+import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
@@ -578,6 +583,7 @@ import _poolWanderingTroubadour from "../pool/wandering-troubadour.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
 import _poolWarchanterSkald from "../pool/warchanter-skald.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
+import _poolWaywardDisciple from "../pool/wayward-disciple.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
 import _poolWildfireHowl from "../pool/wildfire-howl.js";
@@ -686,6 +692,7 @@ const shard: CardShard = {
     _poolBlizzardStrix,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
+    _poolBloodmadVampire,
     _poolBloodtitheHarvester,
     _poolBodyLaunderer,
     _poolBrambleWurm,
@@ -737,6 +744,7 @@ const shard: CardShard = {
     _poolCryogenRelic,
     _poolDanithaCapashenParagon,
     _poolDanseMacabre,
+    _poolDaringSleuth,
     _poolDarkblast,
     _poolDarkborePathway,
     _poolDauntlessVeteran,
@@ -977,6 +985,7 @@ const shard: CardShard = {
     _poolObscuraAscendancy,
     _poolOdricBloodCursed,
     _poolOldGrowthGrove,
+    _poolOliviaMobilizedForWar,
     _poolOmashuCity,
     _poolOnduKnotmaster,
     _poolOpportunisticDragon,
@@ -987,8 +996,10 @@ const shard: CardShard = {
     _poolOrthionHeroOfLavabrink,
     _poolOrthodoxyEnforcer,
     _poolOscorpResearchTeam,
+    _poolParanoidParishBlade,
     _poolParkHeightsPegasus,
     _poolPelargirSurvivor,
+    _poolPersistentNightmare,
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
     _poolPitilessPlunderer,
@@ -1193,6 +1204,7 @@ const shard: CardShard = {
     _poolWanderlightSpirit,
     _poolWarchanterSkald,
     _poolWastefulHarvest,
+    _poolWaywardDisciple,
     _poolWeaveFate,
     _poolWickedReward,
     _poolWildfireHowl,

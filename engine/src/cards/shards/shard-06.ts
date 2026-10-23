@@ -301,6 +301,7 @@ import _poolLoreholdExcavation from "../pool/lorehold-excavation.js";
 import _poolLotlethGiant from "../pool/lotleth-giant.js";
 import _poolLovestruckBeast from "../pool/lovestruck-beast.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
+import _poolLunarchInquisitors from "../pool/lunarch-inquisitors.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
@@ -325,6 +326,7 @@ import _poolMoldDemon from "../pool/mold-demon.js";
 import _poolMoltenLavamancer from "../pool/molten-lavamancer.js";
 import _poolMoonbladeShinobi from "../pool/moonblade-shinobi.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
+import _poolMurderousCompulsion from "../pool/murderous-compulsion.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
 import _poolMyrWelder from "../pool/myr-welder.js";
 import _poolMyriadLandscape from "../pool/myriad-landscape.js";
@@ -470,6 +472,7 @@ import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
 import _poolSnowVilliers from "../pool/snow-villiers.js";
 import _poolSonarStrike from "../pool/sonar-strike.js";
+import _poolSoulSwallower from "../pool/soul-swallower.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
@@ -521,6 +524,7 @@ import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
 import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
+import _poolToTheSlaughter from "../pool/to-the-slaughter.js";
 import _poolTomeboundLich from "../pool/tomebound-lich.js";
 import _poolTormodsCryptkeeper from "../pool/tormods-cryptkeeper.js";
 import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
@@ -909,6 +913,7 @@ const shard: CardShard = {
     _poolLotlethGiant,
     _poolLovestruckBeast,
     _poolLuminousAngel,
+    _poolLunarchInquisitors,
     _poolLydiaFrye,
     _poolManaCrypt,
     _poolManifoldMouse,
@@ -933,6 +938,7 @@ const shard: CardShard = {
     _poolMoltenLavamancer,
     _poolMoonbladeShinobi,
     _poolMrFoxglove,
+    _poolMurderousCompulsion,
     _poolMuxusGoblinGrandee,
     _poolMyrWelder,
     _poolMyriadLandscape,
@@ -1078,6 +1084,7 @@ const shard: CardShard = {
     _poolSnappingGnarlid,
     _poolSnowVilliers,
     _poolSonarStrike,
+    _poolSoulSwallower,
     _poolSoulboundGuardians,
     _poolSpectralProcession,
     _poolSpellseeker,
@@ -1129,6 +1136,7 @@ const shard: CardShard = {
     _poolTimeSieve,
     _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
+    _poolToTheSlaughter,
     _poolTomeboundLich,
     _poolTormodsCryptkeeper,
     _poolTotentanzSwarmPiper,

@@ -228,6 +228,7 @@ import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
+import _poolInnerStruggle from "../pool/inner-struggle.js";
 import _poolInsatiableGorgers from "../pool/insatiable-gorgers.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
@@ -243,6 +244,7 @@ import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJhoiraAgelessInnovator from "../pool/jhoira-ageless-innovator.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
+import _poolJustTheWind from "../pool/just-the-wind.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
@@ -261,6 +263,7 @@ import _poolKroxaAndKunoros from "../pool/kroxa-and-kunoros.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
+import _poolLamplighterOfSelhoff from "../pool/lamplighter-of-selhoff.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
 import _poolLawRuneEnforcer from "../pool/law-rune-enforcer.js";
 import _poolLeechFanatic from "../pool/leech-fanatic.js";
@@ -466,6 +469,7 @@ import _poolStealArtifact from "../pool/steal-artifact.js";
 import _poolStealthMission from "../pool/stealth-mission.js";
 import _poolStensiaBanquet from "../pool/stensia-banquet.js";
 import _poolStepThrough from "../pool/step-through.js";
+import _poolSternConstable from "../pool/stern-constable.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
@@ -843,6 +847,7 @@ const shard: CardShard = {
     _poolIndependentTroops,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
+    _poolInnerStruggle,
     _poolInsatiableGorgers,
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
@@ -858,6 +863,7 @@ const shard: CardShard = {
     _poolJhoiraAgelessInnovator,
     _poolJiangYangguNeverAlone,
     _poolJodahTheUnifier,
+    _poolJustTheWind,
     _poolJyotiMoagAncient,
     _poolKalonianHydra,
     _poolKayaIntangibleSlayer,
@@ -876,6 +882,7 @@ const shard: CardShard = {
     _poolKynaiosAndTiroOfMeletis,
     _poolLacerateFlesh,
     _poolLakeTownMariners,
+    _poolLamplighterOfSelhoff,
     _poolLavafumeInvoker,
     _poolLawRuneEnforcer,
     _poolLeechFanatic,
@@ -1081,6 +1088,7 @@ const shard: CardShard = {
     _poolStealthMission,
     _poolStensiaBanquet,
     _poolStepThrough,
+    _poolSternConstable,
     _poolStewardOfTheHarvest,
     _poolStirringBard,
     _poolStormcragElemental,

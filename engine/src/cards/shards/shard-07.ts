@@ -85,6 +85,7 @@ import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
+import _poolConfrontTheUnknown from "../pool/confront-the-unknown.js";
 import _poolConquerorsGalleon from "../pool/conquerors-galleon.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
@@ -129,6 +130,7 @@ import _poolDreadRider from "../pool/dread-rider.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
 import _poolDreamdrinkerVampire from "../pool/dreamdrinker-vampire.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
+import _poolDrunauCorpseTrawler from "../pool/drunau-corpse-trawler.js";
 import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
@@ -315,6 +317,7 @@ import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
+import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
 import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
@@ -711,6 +714,7 @@ const shard: CardShard = {
     _poolCollectorOuphe,
     _poolColossapede,
     _poolConclaveCavalier,
+    _poolConfrontTheUnknown,
     _poolConquerorsGalleon,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,
@@ -755,6 +759,7 @@ const shard: CardShard = {
     _poolDreadmalkin,
     _poolDreamdrinkerVampire,
     _poolDruidOfTheAnima,
+    _poolDrunauCorpseTrawler,
     _poolDwarvenMine,
     _poolDwarvenRuins,
     _poolDwarvenWarriors,
@@ -941,6 +946,7 @@ const shard: CardShard = {
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMirrodinAvenged,
+    _poolMoldgrafScavenger,
     _poolMoltenFrame,
     _poolMomentOfGlory,
     _poolMomentumBreaker,

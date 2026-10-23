@@ -162,6 +162,7 @@ import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
+import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
@@ -258,6 +259,7 @@ import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIncendiarySabotage from "../pool/incendiary-sabotage.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
+import _poolInexorableBlob from "../pool/inexorable-blob.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
 import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
 import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
@@ -447,6 +449,7 @@ import _poolSidequestHuntTheMark from "../pool/sidequest-hunt-the-mark.js";
 import _poolSifterWurm from "../pool/sifter-wurm.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSilklashSpider from "../pool/silklash-spider.js";
+import _poolSinisterConcoction from "../pool/sinister-concoction.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
@@ -771,6 +774,7 @@ const shard: CardShard = {
     _poolExhibitionMagician,
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,
+    _poolExplosiveApparatus,
     _poolFaebloomTrick,
     _poolFaerieVandal,
     _poolFandanielTelophoroiAscian,
@@ -867,6 +871,7 @@ const shard: CardShard = {
     _poolImpsMischief,
     _poolIncendiarySabotage,
     _poolIndulgentTormentor,
+    _poolInexorableBlob,
     _poolInfernalGrasp,
     _poolInjectorCrocodile,
     _poolInvertedIceberg,
@@ -1056,6 +1061,7 @@ const shard: CardShard = {
     _poolSifterWurm,
     _poolSigiledPaladin,
     _poolSilklashSpider,
+    _poolSinisterConcoction,
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,

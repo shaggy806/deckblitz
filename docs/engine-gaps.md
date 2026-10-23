@@ -199,6 +199,16 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
 that needs it is authored.
 
+- **A double-faced Aura put onto the battlefield transformed is asked what it enchants.** Rule
+  712.14a puts it onto the battlefield back face up, so Skin Invasion returns as Skin Shedder, a
+  creature with nothing to enchant. `Game.askEnterChoice` (and `nextEnterChoice`) read the card's
+  current face, the front Aura's, before the move applies `transformed`: with no creature to
+  enchant it stays in the graveyard (303.4g), and with one the player is asked a meaningless
+  enchant choice and Skin Shedder enters unattached. The fix asks the enter choices of the face it
+  will enter as. Blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`). (The same
+  front-face reading kept an instant or sorcery card from entering transformed — Startled Awake —
+  until batch 148.)
+
 
 
 - **A mana ability's discard cost is never paid.** Rule 605.3b: a mana ability's costs are paid
