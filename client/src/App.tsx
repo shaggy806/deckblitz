@@ -5896,6 +5896,9 @@ function Table({
                       {a.kind === 'cast-spell' && a.via === 'web-slinging' && a.webSlingingReturn
                         ? ` (web-slinging, returning ${a.webSlingingReturn.cardName})`
                         : ''}
+                      {a.kind === 'cast-spell' && a.via === 'emerge' && a.emergeSacrifice
+                        ? ` (emerge, sacrificing ${a.emergeSacrifice.cardName}: −${a.emergeSacrifice.manaValue})`
+                        : ''}
                       {a.kind === 'cast-spell' && a.costOptionText ? (
                         <> (<Symbols text={a.costOptionText} />)</>
                       ) : null}

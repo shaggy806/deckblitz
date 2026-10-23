@@ -400,7 +400,8 @@
   "keyword:embalm",
   "keyword:improvise",
   "effect:delayed-trigger-rest-of-turn",
-  "effect:delayed-trigger-own-targets"
+  "effect:delayed-trigger-own-targets",
+  "keyword:emerge"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

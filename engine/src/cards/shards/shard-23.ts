@@ -325,6 +325,7 @@ import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
 import _poolMisfortuneTeller from "../pool/misfortune-teller.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
+import _poolMockeryOfNature from "../pool/mockery-of-nature.js";
 import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
 import _poolMoltenSlagheap from "../pool/molten-slagheap.js";
 import _poolMomentOfTruth from "../pool/moment-of-truth.js";
@@ -930,6 +931,7 @@ const shard: CardShard = {
     _poolMireShade,
     _poolMisfortuneTeller,
     _poolMnemonicWall,
+    _poolMockeryOfNature,
     _poolMoiraAndTeshar,
     _poolMoltenSlagheap,
     _poolMomentOfTruth,

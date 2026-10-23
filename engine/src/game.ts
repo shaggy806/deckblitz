@@ -1918,6 +1918,33 @@ export class Game {
               }
             }
           }
+          // Emerge (rule 702.119a) — for its emerge cost, one offer per
+          // creature that could be sacrificed, each priced with that
+          // creature's mana value off (so one too small to make it
+          // affordable isn't offered). Normal timing.
+          if (def.emerge !== null) {
+            for (const victim of this.emergeSacrifices(player, def)) {
+              const offers = this.withEmergeSacrifice(victim, () =>
+                this.castSpellActions(player, card, cardName, def, {
+                  ...faceProp,
+                  via: "emerge",
+                  costString: def.emerge?.cost ?? null,
+                }),
+              );
+              for (const offer of offers) {
+                if (offer.kind !== "cast-spell") continue;
+                out.push({
+                  ...offer,
+                  sacrifice: { choices: [victim] },
+                  emergeSacrifice: {
+                    object: victim,
+                    cardName: printedCardName(this.state.objects[victim]),
+                    manaValue: manaValueOfObject(this.registry, this.state.objects[victim]),
+                  },
+                });
+              }
+            }
+          }
           // Morph, megamorph and disguise (rules 702.37c, 702.168a) — face
           // down for {3}, worked out as the face-down 2/2 spell it would be.
           const downKind = face === undefined || face === 0 ? this.faceDownKindOf(card) : null;
@@ -2784,13 +2811,14 @@ export class Game {
     // with warp, itself an alternative cost (rule 118.9a: only one applies).
     // Blitz is an alternative cost from the hand too (rule 702.152a), and so
     // is web-slinging (702.188a; its ruling: never with "without paying its
-    // mana cost"), and airbend's {2} from exile (701.65a).
+    // mana cost"), emerge (702.119a), and airbend's {2} from exile (701.65a).
     const warp =
       via === "warp" ||
       via === "blitz" ||
       via === "impending" ||
       via === "freerunning" ||
       via === "web-slinging" ||
+      via === "emerge" ||
       via === "airbend";
     if (def.overload !== null && impulseFree !== "only" && !warp) {
       variants.push({ kicked: false, overload: true, free: false });
@@ -3201,7 +3229,7 @@ export class Game {
         player,
         def,
         costOption,
-        this.graveyardPermissionSacrifice(player, card, face ?? 0, via, graveyardGrant),
+        this.castRouteSacrifice(player, card, face ?? 0, via, graveyardGrant),
       );
       const xPlan =
         parseManaCost(cost).x > 0 ? this.xPlanFor(player, card, def, cost, face ?? 0, pricedAt) : null;
@@ -9366,9 +9394,11 @@ export class Game {
     const mods = this.costModificationFor(player, cardId, targetCount);
     // Harmonize's tapped creature (rule 702.180a), probed by the caller.
     // A bargained Ice Out's {1} (`kicker.reduceGeneric`), likewise probed.
+    // So is emerge's sacrificed creature's mana value (rule 702.119a).
     let reduction =
       mods.reduceGeneric +
       this.harmonizePower +
+      this.emergeManaValue +
       (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
     if (
       def.selfCostReduction !== null &&
@@ -10353,6 +10383,8 @@ export class Game {
           ? (def.sneak?.cost ?? null)
         : via === "web-slinging"
           ? this.webSlingingCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
+        : via === "emerge"
+          ? (def.emerge?.cost ?? null)
         : // Airbend (rule 701.65a): {2} rather than its mana cost.
           via === "airbend"
           ? Game.AIRBEND_COST
@@ -10444,19 +10476,36 @@ export class Game {
     return this.eligibleSacrifices(player, filter);
   }
 
-  /** What a cast under a graveyard permission sacrifices on top of its other
-   * costs — Exploration Broodship's "by sacrificing a land in addition to
-   * paying its other costs" (`castFromGraveyard.sacrifice`); `undefined` for
-   * any other cast. */
-  private graveyardPermissionSacrifice(
+  /** What a cast's route sacrifices beside its other costs: under a graveyard
+   * permission, Exploration Broodship's "by sacrificing a land in addition
+   * to paying its other costs" (`castFromGraveyard.sacrifice`); for emerge,
+   * the creature its cost sacrifices (rule 702.119a — `emerge.from` for
+   * "emerge from [quality]", 702.119b). `undefined` for any other cast. */
+  private castRouteSacrifice(
     player: PlayerId,
     card: ObjectId,
     face: number,
     via: CastVia | undefined,
     grant: GraveyardGrant | undefined,
   ): CardFilter | undefined {
+    if (via === "emerge") {
+      const emerge = this.faceDef(card, face).emerge;
+      return emerge === null ? undefined : Game.emergeFilter(emerge);
+    }
     if (via !== "graveyard-permission") return undefined;
     return this.findGraveyardGrant(player, card, face, grant)?.permission?.sacrifice;
+  }
+
+  /** What emerge sacrifices (rule 702.119): a creature, or a permanent of
+   * "emerge from [quality]"'s quality. */
+  private static emergeFilter(emerge: NonNullable<CardDefinition["emerge"]>): CardFilter {
+    return emerge.from ?? { type: "creature" };
+  }
+
+  /** The permanents `player` could sacrifice to pay `def`'s emerge cost
+   * (rule 702.119a). */
+  private emergeSacrifices(player: PlayerId, def: CardDefinition): ObjectId[] {
+    return def.emerge === null ? [] : this.eligibleSacrifices(player, Game.emergeFilter(def.emerge));
   }
 
   /** The most modes `card` may be cast with: its `maxModesIf`'s count while
@@ -10740,6 +10789,34 @@ export class Game {
       if (this.webSlingingReturns(player).length === 0) {
         return `${def.name}'s web-slinging returns a tapped creature you control, and ${player} controls none`;
       }
+    } else if (via === "emerge") {
+      // Rule 702.119a — from the hand (or a commander from the command zone),
+      // sacrificing a creature: an alternative cost (118.9a). Timing is the
+      // spell's own.
+      if (def.emerge === null) return `${def.name} doesn't have emerge`;
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (overload || free || altCost || evoke !== null) {
+        return `emerge is an alternative cost, and can't be combined with another`;
+      }
+      // Emerge's sacrifice rides the cast's one `sacrifice`: a card with an
+      // additional sacrifice of its own as well isn't supported.
+      if (def.additionalCost?.sacrifice !== undefined || def.additionalCost?.options?.some((o) => o.sacrifice !== undefined)) {
+        return `${def.name}'s emerge can't be paid beside a sacrifice of its own`;
+      }
+      const victims = this.emergeSacrifices(player, def);
+      const victim = sacrifice ?? this.emergeProbed ?? victims[0];
+      if (victim === undefined) return `${def.name}'s emerge sacrifices a creature, and ${player} controls none`;
+      if (!victims.includes(victim)) return `that permanent cannot be sacrificed for ${def.name}'s emerge`;
+      // Priced with the sacrificed creature's mana value off.
+      if (this.emergeProbed !== victim) {
+        return this.withEmergeSacrifice(victim, () =>
+          this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, victim, overload, free, convoke,
+            altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve,
+            targets),
+        );
+      }
     } else if (via === "prepared") {
       // Rule 722.3c — a prepared permanent's copy of its prepare spell, cast
       // from exile by that permanent's controller while the link holds.
@@ -10989,7 +11066,7 @@ export class Game {
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once
     // the driver has named one — that permanent must actually qualify.
-    const permissionSacrifice = this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant);
+    const permissionSacrifice = this.castRouteSacrifice(player, cardId, face, via, graveyardGrant);
     if (permissionSacrifice !== undefined) {
       const candidates = this.additionalCostSacrifices(player, def, costOption, permissionSacrifice);
       if (candidates.length === 0) return `${player} has nothing to sacrifice to cast ${def.name} this way`;
@@ -11616,6 +11693,33 @@ export class Game {
   /** Set while {@link withHarmonizeTap} is pricing a harmonize cast, so the
    * casting check and the cast don't re-enter it. */
   private harmonizeProbed = false;
+  /**
+   * The generic mana an emerge cast's sacrificed creature takes off its
+   * total cost — its mana value (rule 702.119a) — while that cast is priced,
+   * checked or paid; `castingCostOf` subtracts it after increases (601.2f).
+   * 0 otherwise. {@link emergeProbed} is the creature it was read from.
+   */
+  private emergeManaValue = 0;
+  /** The creature {@link withEmergeSacrifice} is pricing an emerge cast
+   * with, so the casting check and the cast don't re-enter it; `null`
+   * otherwise. */
+  private emergeProbed: ObjectId | null = null;
+
+  /** Price what `fn` prices as an emerge cast sacrificing `victim`: its mana
+   * value as it is now. Restores the probe after. */
+  private withEmergeSacrifice<T>(victim: ObjectId, fn: () => T): T {
+    const valueBefore = this.emergeManaValue;
+    const probedBefore = this.emergeProbed;
+    const object = this.state.objects[victim];
+    this.emergeManaValue = object === undefined ? 0 : manaValueOfObject(this.registry, object);
+    this.emergeProbed = victim;
+    try {
+      return fn();
+    } finally {
+      this.emergeManaValue = valueBefore;
+      this.emergeProbed = probedBefore;
+    }
+  }
   /** The `sneakReturn` of the `cast-spell` being dispatched (rule 702.190a),
    * read as its cost is paid; unset otherwise. */
   private sneakReturnChoice: ObjectId | undefined = undefined;
@@ -11910,6 +12014,18 @@ export class Game {
       );
       return;
     }
+    // Emerge (rule 702.119a): every cost below is priced with the sacrificed
+    // creature's mana value off — the one named, else the first that could be.
+    if (via === "emerge") {
+      const victim = sacrifice ?? this.emergeSacrifices(player, this.faceDef(cardId, face))[0];
+      if (victim !== undefined && this.emergeProbed !== victim) {
+        this.withEmergeSacrifice(victim, () =>
+          this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, victim, overload, free,
+            convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+        );
+        return;
+      }
+    }
     if (prototype && !this.prototypeApplied(cardId)) {
       if (this.faceDef(cardId, face).prototype === null) throw new Error(`${this.faceDef(cardId, face).name} has no prototype`);
       this.withPrototype(cardId, () =>
@@ -12025,7 +12141,7 @@ export class Game {
       player,
       def,
       costOption,
-      this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant),
+      this.castRouteSacrifice(player, cardId, face, via, graveyardGrant),
     );
     const sacrificeVictim =
       sacrificeCandidates.length === 0 ? undefined : (sacrifice ?? sacrificeCandidates[0]);

@@ -9810,6 +9810,18 @@
   "static:max-hand-size-equal-to-counters": {
    "family": "static:max-hand-size",
    "example": "Midnight Oil: 'Your maximum hand size is equal to the number of hour counters on this enchantment' — `maxHandSize` takes a fixed `set` minus a CountSpec, and no CountSpec counts counters on the source."
+  },
+  "static:grant-emerge": {
+   "family": "keyword:emerge",
+   "example": "Herigast, Erupting Nullkite: 'Each creature spell you cast has emerge. The emerge cost is equal to its mana cost' — emerge is printed only (`CardDefinition.emerge`), never granted."
+  },
+  "amount:emerge-sacrificed-creature": {
+   "family": "keyword:emerge",
+   "example": "Adipose Offspring: 'If this creature's emerge cost was paid, instead create X of those tokens, where X is the sacrificed creature's toughness' — the permanent keeps neither that its emerge cost was paid nor what was sacrificed."
+  },
+  "effect:discard-chosen-two-filters": {
+   "family": "effect:discard-chosen-count",
+   "example": "Distended Mindbender: 'You choose from it a nonland card with mana value 3 or less and a card with mana value 4 or greater. That player discards those cards' — `discard-chosen` picks one card under one filter; two would be two separate discards."
   }
  }
 }

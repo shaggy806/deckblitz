@@ -265,6 +265,7 @@ import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
+import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
@@ -587,6 +588,7 @@ import _poolWoodlandStream from "../pool/woodland-stream.js";
 import _poolWoodlotCrawler from "../pool/woodlot-crawler.js";
 import _poolWorkshopWarchief from "../pool/workshop-warchief.js";
 import _poolWorthyCost from "../pool/worthy-cost.js";
+import _poolWretchedGryff from "../pool/wretched-gryff.js";
 import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
 import _poolXandeDarkMage from "../pool/xande-dark-mage.js";
 import _poolXolatoyacTheSmilingFlood from "../pool/xolatoyac-the-smiling-flood.js";
@@ -887,6 +889,7 @@ const shard: CardShard = {
     _poolKumenaTyrantOfOrazca,
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
+    _poolLashweedLurker,
     _poolLastWord,
     _poolLatNamAdept,
     _poolLaviniaFoilToConspiracy,
@@ -1209,6 +1212,7 @@ const shard: CardShard = {
     _poolWoodlotCrawler,
     _poolWorkshopWarchief,
     _poolWorthyCost,
+    _poolWretchedGryff,
     _poolWrithingChrysalis,
     _poolXandeDarkMage,
     _poolXolatoyacTheSmilingFlood,

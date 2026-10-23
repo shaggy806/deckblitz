@@ -2017,6 +2017,12 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
     // Web-slinging [cost] (rule 702.188a): an alternative cost returning a tapped creature you control.
     if ((m = /^Web-slinging ((?:\{[^}]+\})+)$/.exec(line))) { out.webSlinging = { cost: m[1] }; continue; }
+    // Emerge [cost] (rule 702.119a): an alternative cost sacrificing a creature, its mana value off;
+    // "Emerge from [quality]" (702.119b) sacrifices a permanent of that type instead.
+    if ((m = /^Emerge (?:from (artifact|enchantment|land) )?((?:\{[^}]+\})+)$/.exec(line))) {
+      out.emerge = { cost: m[2], ...(m[1] !== undefined ? { from: { type: m[1] } } : {}) };
+      continue;
+    }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.

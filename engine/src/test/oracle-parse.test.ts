@@ -560,6 +560,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(slinger.webSlinging).toEqual({ cost: "{R}{G}" });
     expect(slinger.complete).toBe(true);
+    // Emerge (rule 702.119a), and emerge from [quality] (702.119b).
+    const emerger = face(
+      "Emerge {5}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)",
+    );
+    expect(emerger.emerge).toEqual({ cost: "{5}{U}" });
+    expect(emerger.complete).toBe(true);
+    expect(
+      face(
+        "Emerge from artifact {5}{B}{B} (You may cast this spell by sacrificing an artifact and paying the emerge cost reduced by that artifact's mana value.)",
+      ).emerge,
+    ).toEqual({ cost: "{5}{B}{B}", from: { type: "artifact" } });
     // Impending N—[cost] (rule 702.176a): the cost, and its two abilities — not a
     // creature while it has a time counter, and the end step's removal.
     const overlord = face(

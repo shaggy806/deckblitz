@@ -560,6 +560,7 @@ import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
 import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
+import _poolTwistedRiddlekeeper from "../pool/twisted-riddlekeeper.js";
 import _poolTwoHeadedHunter from "../pool/two-headed-hunter.js";
 import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
 import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolTundraWall,
     _poolTwilightProphet,
     _poolTwinbladeInvocation,
+    _poolTwistedRiddlekeeper,
     _poolTwoHeadedHunter,
     _poolTyroxSauridTyrant,
     _poolUltimateAlliance,

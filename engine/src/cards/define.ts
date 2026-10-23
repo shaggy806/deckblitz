@@ -2783,6 +2783,21 @@ export interface CardDefinition {
    * "web-slinging-mana-value"`). `null` for none.
    */
   readonly webSlinging: { readonly cost: string } | null;
+  /**
+   * Emerge (rule 702.119a) — "you may cast this spell by paying `cost` and
+   * sacrificing a creature rather than paying its mana cost", its total cost
+   * then reduced by an amount of generic mana equal to the sacrificed
+   * creature's mana value (601.2f, after any increase). An alternative cost
+   * (118.9a), from the hand or — a commander — the command zone, under every
+   * normal timing rule. Offered once per creature the caster could sacrifice
+   * (`LegalAction.emergeSacrifice`), each priced with that creature's mana
+   * value off, and echoed back as the cast's `sacrifice`: the creature is
+   * chosen as the cost is chosen (702.119c) and sacrificed as it's paid,
+   * after it has tapped for mana where it can (601.2g). `from` is "Emerge
+   * from [quality]" (702.119b): a permanent matching it rather than a
+   * creature. The spell's `castVia` is `"emerge"`. `null` for none.
+   */
+  readonly emerge: { readonly cost: string; readonly from?: CardFilter } | null;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
    * exiled instead of going anywhere else from the stack. `null` for a card
@@ -3177,6 +3192,7 @@ const PRINTED_ABILITY: {
   aftermath: (def) => def.aftermath,
   sneak: (def) => def.sneak !== null,
   webSlinging: (def) => def.webSlinging !== null,
+  emerge: (def) => def.emerge !== null,
   harmonize: (def) => def.harmonize !== null,
   madness: (def) => def.madness !== null,
   foretell: (def) => def.foretell !== null,
@@ -3374,6 +3390,7 @@ interface CardDraft {
   aftermath?: boolean;
   sneak?: { readonly cost: string };
   webSlinging?: { readonly cost: string };
+  emerge?: NonNullable<CardDefinition["emerge"]>;
   flashback?: NonNullable<CardDefinition["flashback"]>;
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };
@@ -3534,6 +3551,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     aftermath: draft.aftermath ?? false,
     sneak: draft.sneak ?? null,
     webSlinging: draft.webSlinging ?? null,
+    emerge: draft.emerge ?? null,
     harmonize: draft.harmonize ?? null,
     madness: draft.madness ?? null,
     foretell: draft.foretell ?? null,

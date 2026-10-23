@@ -58,6 +58,11 @@ export type CastVia =
    * owner's hand (`webSlingingReturn`). An alternative cost (601.2b,
    * 601.2f–h); every timing rule still applies. */
   | "web-slinging"
+  /** For its emerge cost (rule 702.119a): from the hand or the command
+   * zone, sacrificing a creature (the cast's `sacrifice`) whose mana value
+   * comes off the total cost. An alternative cost; every timing rule still
+   * applies. */
+  | "emerge"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
@@ -872,6 +877,11 @@ export type LegalAction =
        * one offer per creature that could be, echoed back as
        * `webSlingingReturn`. */
       readonly webSlingingReturn?: { readonly object: ObjectId; readonly cardName: string };
+      /** An emerge variant's creature to sacrifice (rule 702.119a): one offer
+       * per creature that could be, priced with its mana value off and
+       * echoed back as the cast's `sacrifice` (the offer's `sacrifice`
+       * choices are just it). */
+      readonly emergeSacrifice?: { readonly object: ObjectId; readonly cardName: string; readonly manaValue: number };
       /** Set for a *targeted modal* spell (rule 700.2 — ROADMAP Phase 11 EG-2):
        * the driver picks `minModes..maxModes` of `modes` (each a text label +
        * its own target specs), then targets for the chosen modes, then echoes

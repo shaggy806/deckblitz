@@ -209,6 +209,7 @@ function faceSource(face, ctx) {
     becomesDayAsEnters: parsed.becomesDayAsEnters,
     sneak: parsed.sneak,
     webSlinging: parsed.webSlinging,
+    emerge: parsed.emerge,
     impending: parsed.impending,
     freerunning: parsed.freerunning,
     kicker: parsed.kicker,
