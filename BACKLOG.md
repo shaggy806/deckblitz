@@ -147,8 +147,12 @@ section keeps only what to do next.
   Rivals of Ixalan, on ascend; batch 137 Ixalan and Commander 2017, no engine change; batch 138
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
-  untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise);
-  **next, Commander 2016** (20 left), then Kaladesh (121 left). The earlier improvise
+  untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise; batch
+  146 the rest of Commander 2016 and Kaladesh, no engine change);
+  **next, Conspiracy: Take the Crown** (51 left), then Eldritch Moon (125 left). Batch 146's
+  leading blockers: undaunted (`keyword:undaunted`, 6 cards) and "whenever this creature crews
+  a Vehicle" (`trigger:crews-or-saddles`, 5); "pay any amount of {E}"
+  (`cost:pay-any-amount-of-energy`) is at 12. The earlier improvise
   cards were rechecked in batch 141; three wait on granting it (`static:grant-improvise`). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
   Kinetic Augur already does it as a 0/1/2 modal count, so it may already be expressible), "choose a card name" (`decision:choose-card-name`
   — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an

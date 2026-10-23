@@ -15,6 +15,7 @@ import _poolAerathiBerserker from "../pool/aerathi-berserker.js";
 import _poolAerialBoost from "../pool/aerial-boost.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAetherChaser from "../pool/aether-chaser.js";
+import _poolAetherbornMarauder from "../pool/aetherborn-marauder.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
@@ -34,6 +35,7 @@ import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolAquaticIngress from "../pool/aquatic-ingress.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
+import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
@@ -80,6 +82,7 @@ import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
 import _poolBrightfieldMustang from "../pool/brightfield-mustang.js";
 import _poolBristlebaneOutrider from "../pool/bristlebane-outrider.js";
 import _poolBrokenWings from "../pool/broken-wings.js";
+import _poolBuiltToLast from "../pool/built-to-last.js";
 import _poolBywayCourier from "../pool/byway-courier.js";
 import _poolCabalEvangel from "../pool/cabal-evangel.js";
 import _poolCalderaLake from "../pool/caldera-lake.js";
@@ -647,6 +650,7 @@ const shard: CardShard = {
     _poolAerialBoost,
     _poolAetherAdept,
     _poolAetherChaser,
+    _poolAetherbornMarauder,
     _poolAgentOfShauku,
     _poolAggravatedAssault,
     _poolAidTheFallen,
@@ -666,6 +670,7 @@ const shard: CardShard = {
     _poolAnzragTheQuakeMole,
     _poolAquaticIngress,
     _poolArcanisTheOmnipotent,
+    _poolArchitectOfTheUntamed,
     _poolArgothianPixies,
     _poolArtificersAssistant,
     _poolAshenRider,
@@ -712,6 +717,7 @@ const shard: CardShard = {
     _poolBrightfieldMustang,
     _poolBristlebaneOutrider,
     _poolBrokenWings,
+    _poolBuiltToLast,
     _poolBywayCourier,
     _poolCabalEvangel,
     _poolCalderaLake,

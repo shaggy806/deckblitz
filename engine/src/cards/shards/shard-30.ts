@@ -160,6 +160,7 @@ import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
 import _poolEmergentHaunting from "../pool/emergent-haunting.js";
 import _poolEmeriaCaptain from "../pool/emeria-captain.js";
 import _poolEnergizer from "../pool/energizer.js";
+import _poolEngineeredMight from "../pool/engineered-might.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
 import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
 import _poolEnroot from "../pool/enroot.js";
@@ -430,6 +431,7 @@ import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
+import _poolRiparianTiger from "../pool/riparian-tiger.js";
 import _poolRiteOfBelzenlok from "../pool/rite-of-belzenlok.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRoaleskApexHybrid from "../pool/roalesk-apex-hybrid.js";
@@ -502,6 +504,7 @@ import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
+import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
@@ -536,6 +539,7 @@ import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
+import _poolUnderhandedDesigns from "../pool/underhanded-designs.js";
 import _poolUnearth from "../pool/unearth.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
 import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
@@ -557,6 +561,7 @@ import _poolVodalianArcanist from "../pool/vodalian-arcanist.js";
 import _poolVoiceOfReason from "../pool/voice-of-reason.js";
 import _poolVoidSnare from "../pool/void-snare.js";
 import _poolVoltCharge from "../pool/volt-charge.js";
+import _poolVoltaicBrawler from "../pool/voltaic-brawler.js";
 import _poolVulpineGoliath from "../pool/vulpine-goliath.js";
 import _poolWallOfLostThoughts from "../pool/wall-of-lost-thoughts.js";
 import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
@@ -755,6 +760,7 @@ const shard: CardShard = {
     _poolEmergentHaunting,
     _poolEmeriaCaptain,
     _poolEnergizer,
+    _poolEngineeredMight,
     _poolEngulfTheShore,
     _poolEnhancedAwareness,
     _poolEnroot,
@@ -1025,6 +1031,7 @@ const shard: CardShard = {
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
     _poolRilsaRaelKingpin,
+    _poolRiparianTiger,
     _poolRiteOfBelzenlok,
     _poolRiteOfReplication,
     _poolRoaleskApexHybrid,
@@ -1097,6 +1104,7 @@ const shard: CardShard = {
     _poolSwarmCuller,
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
+    _poolSyndicateTrafficker,
     _poolTangleMantis,
     _poolTeleport,
     _poolTempleOfMalice,
@@ -1131,6 +1139,7 @@ const shard: CardShard = {
     _poolTyrantOfKherRidges,
     _poolUlamogTheInfiniteGyre,
     _poolUmbrisFearManifest,
+    _poolUnderhandedDesigns,
     _poolUnearth,
     _poolUnexplainedDisappearance,
     _poolUnfulfilledDesires,
@@ -1152,6 +1161,7 @@ const shard: CardShard = {
     _poolVoiceOfReason,
     _poolVoidSnare,
     _poolVoltCharge,
+    _poolVoltaicBrawler,
     _poolVulpineGoliath,
     _poolWallOfLostThoughts,
     _poolWanderersIntervention,

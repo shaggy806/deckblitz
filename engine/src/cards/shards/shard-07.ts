@@ -136,6 +136,7 @@ import _poolEliteGuardmage from "../pool/elite-guardmage.js";
 import _poolEliteInstructor from "../pool/elite-instructor.js";
 import _poolEliteInterceptor from "../pool/elite-interceptor.js";
 import _poolElvishRanger from "../pool/elvish-ranger.js";
+import _poolEmbraalBruiser from "../pool/embraal-bruiser.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
@@ -277,6 +278,7 @@ import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
 import _poolLionheartMaverick from "../pool/lionheart-maverick.js";
 import _poolLiquimetalCoating from "../pool/liquimetal-coating.js";
 import _poolLitaMechanicalEngineer from "../pool/lita-mechanical-engineer.js";
+import _poolLiveFast from "../pool/live-fast.js";
 import _poolLivingLectern from "../pool/living-lectern.js";
 import _poolLlanowarBehemoth from "../pool/llanowar-behemoth.js";
 import _poolLlanowarDead from "../pool/llanowar-dead.js";
@@ -756,6 +758,7 @@ const shard: CardShard = {
     _poolEliteInstructor,
     _poolEliteInterceptor,
     _poolElvishRanger,
+    _poolEmbraalBruiser,
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
     _poolEndBlazeEpiphany,
@@ -897,6 +900,7 @@ const shard: CardShard = {
     _poolLionheartMaverick,
     _poolLiquimetalCoating,
     _poolLitaMechanicalEngineer,
+    _poolLiveFast,
     _poolLivingLectern,
     _poolLlanowarBehemoth,
     _poolLlanowarDead,

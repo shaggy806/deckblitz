@@ -141,6 +141,7 @@ import _poolDriftingShade from "../pool/drifting-shade.js";
 import _poolDronepackKindred from "../pool/dronepack-kindred.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
+import _poolDynavoltTower from "../pool/dynavolt-tower.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
@@ -315,6 +316,7 @@ import _poolMiteOverseer from "../pool/mite-overseer.js";
 import _poolMizziumSkin from "../pool/mizzium-skin.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
+import _poolMorbidCuriosity from "../pool/morbid-curiosity.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
 import _poolMorkrutBehemoth from "../pool/morkrut-behemoth.js";
 import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
@@ -464,6 +466,7 @@ import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
 import _poolSpittingGourna from "../pool/spitting-gourna.js";
+import _poolSpontaneousArtist from "../pool/spontaneous-artist.js";
 import _poolSporeFlower from "../pool/spore-flower.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
@@ -741,6 +744,7 @@ const shard: CardShard = {
     _poolDronepackKindred,
     _poolDrownyardExplorers,
     _poolDwarvenBloodboiler,
+    _poolDynavoltTower,
     _poolEarthKingdomProtectors,
     _poolEchoInspector,
     _poolEdgewallInnkeeper,
@@ -915,6 +919,7 @@ const shard: CardShard = {
     _poolMizziumSkin,
     _poolMomentsPeace,
     _poolMoongloveExtractor,
+    _poolMorbidCuriosity,
     _poolMorgueTheft,
     _poolMorkrutBehemoth,
     _poolMountVelusManticore,
@@ -1064,6 +1069,7 @@ const shard: CardShard = {
     _poolSpinedTyrranax,
     _poolSpiritualGuardian,
     _poolSpittingGourna,
+    _poolSpontaneousArtist,
     _poolSporeFlower,
     _poolSpottedGriffin,
     _poolStalwartShieldBearers,

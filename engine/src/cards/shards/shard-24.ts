@@ -94,6 +94,7 @@ import _poolChampionOfLambholt from "../pool/champion-of-lambholt.js";
 import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
 import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
+import _poolChandrasPyrohelix from "../pool/chandras-pyrohelix.js";
 import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
 import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
@@ -187,6 +188,7 @@ import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
 import _poolFlatline from "../pool/flatline.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
+import _poolFoundryScreecher from "../pool/foundry-screecher.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolFry from "../pool/fry.js";
 import _poolFylgja from "../pool/fylgja.js";
@@ -219,6 +221,7 @@ import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHandOfJustice from "../pool/hand-of-justice.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHaradrimSpearmaster from "../pool/haradrim-spearmaster.js";
+import _poolHarshScrutiny from "../pool/harsh-scrutiny.js";
 import _poolHauntOfTheDeadMarshes from "../pool/haunt-of-the-dead-marshes.js";
 import _poolHaveForDinner from "../pool/have-for-dinner.js";
 import _poolHazardousBlast from "../pool/hazardous-blast.js";
@@ -238,6 +241,7 @@ import _poolHexingSquelcher from "../pool/hexing-squelcher.js";
 import _poolHiddenGrotto from "../pool/hidden-grotto.js";
 import _poolHiddenHerbalists from "../pool/hidden-herbalists.js";
 import _poolHighFlyingAce from "../pool/high-flying-ace.js";
+import _poolHightideHermit from "../pool/hightide-hermit.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
@@ -333,6 +337,7 @@ import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
+import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPathToRedemption from "../pool/path-to-redemption.js";
@@ -411,6 +416,7 @@ import _poolSeasonedCathar from "../pool/seasoned-cathar.js";
 import _poolSeasonedHallowblade from "../pool/seasoned-hallowblade.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
+import _poolSelfAssembler from "../pool/self-assembler.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolSentinelTotem from "../pool/sentinel-totem.js";
 import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
@@ -680,6 +686,7 @@ const shard: CardShard = {
     _poolChampionOfThePerished,
     _poolChanceEncounter,
     _poolChandraFlameshaper,
+    _poolChandrasPyrohelix,
     _poolChitteringSkitterling,
     _poolChromeCourier,
     _poolClandestineMeddler,
@@ -773,6 +780,7 @@ const shard: CardShard = {
     _poolFlameSweep,
     _poolFlatline,
     _poolFootSoldiers,
+    _poolFoundryScreecher,
     _poolFrontierGuide,
     _poolFry,
     _poolFylgja,
@@ -805,6 +813,7 @@ const shard: CardShard = {
     _poolHandOfJustice,
     _poolHanweirGarrison,
     _poolHaradrimSpearmaster,
+    _poolHarshScrutiny,
     _poolHauntOfTheDeadMarshes,
     _poolHaveForDinner,
     _poolHazardousBlast,
@@ -824,6 +833,7 @@ const shard: CardShard = {
     _poolHiddenGrotto,
     _poolHiddenHerbalists,
     _poolHighFlyingAce,
+    _poolHightideHermit,
     _poolHiveStirrings,
     _poolHollowmurkSiege,
     _poolHondenOfLifesWeb,
@@ -919,6 +929,7 @@ const shard: CardShard = {
     _poolOrazcaPuzzleDoor,
     _poolOriginOfCaptainAmerica,
     _poolOverlordOfTheFloodpits,
+    _poolOviyaPashiriSageLifecrafter,
     _poolPairedTactician,
     _poolParcelMyr,
     _poolPathToRedemption,
@@ -997,6 +1008,7 @@ const shard: CardShard = {
     _poolSeasonedHallowblade,
     _poolSeedshipImpact,
     _poolSeiferAlmasy,
+    _poolSelfAssembler,
     _poolSelflessPoliceCaptain,
     _poolSentinelTotem,
     _poolShadowedCaravel,

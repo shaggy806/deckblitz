@@ -305,6 +305,7 @@ import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarshViper from "../pool/marsh-viper.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
+import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
 import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
@@ -426,6 +427,7 @@ import _poolSanctuaryLockdown from "../pool/sanctuary-lockdown.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
+import _poolScrapheapScrounger from "../pool/scrapheap-scrounger.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
@@ -527,6 +529,7 @@ import _poolThrabenSentry from "../pool/thraben-sentry.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
 import _poolThrenodySinger from "../pool/threnody-singer.js";
 import _poolThresherLizard from "../pool/thresher-lizard.js";
+import _poolThrivingRhino from "../pool/thriving-rhino.js";
 import _poolThrivingSkyclaw from "../pool/thriving-skyclaw.js";
 import _poolThroatseeker from "../pool/throatseeker.js";
 import _poolThunderDrake from "../pool/thunder-drake.js";
@@ -616,6 +619,7 @@ import _poolWizardsSchool from "../pool/wizards-school.js";
 import _poolWizenedMentor from "../pool/wizened-mentor.js";
 import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
 import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
+import _poolWoodweaversPuzzleknot from "../pool/woodweavers-puzzleknot.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
@@ -948,6 +952,7 @@ const shard: CardShard = {
     _poolMarketbackWalker,
     _poolMarshViper,
     _poolMarwynTheClearcutter,
+    _poolMasterTrinketeer,
     _poolMawOfKozilek,
     _poolMegatonsFate,
     _poolMeltstriderEulogist,
@@ -1069,6 +1074,7 @@ const shard: CardShard = {
     _poolSavagePackmate,
     _poolScaldingCauldron,
     _poolScatterTheSeeds,
+    _poolScrapheapScrounger,
     _poolScroungeForEternity,
     _poolScroungingBandar,
     _poolScurryOak,
@@ -1170,6 +1176,7 @@ const shard: CardShard = {
     _poolThraxodemon,
     _poolThrenodySinger,
     _poolThresherLizard,
+    _poolThrivingRhino,
     _poolThrivingSkyclaw,
     _poolThroatseeker,
     _poolThunderDrake,
@@ -1259,6 +1266,7 @@ const shard: CardShard = {
     _poolWizenedMentor,
     _poolWolverineBestThereIs,
     _poolWoodlandAcolyte,
+    _poolWoodweaversPuzzleknot,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
     _poolYouAreAlreadyDead,

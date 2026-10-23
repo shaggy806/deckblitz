@@ -29,6 +29,7 @@ import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
+import _poolAttuneWithAether from "../pool/attune-with-aether.js";
 import _poolAuraShards from "../pool/aura-shards.js";
 import _poolAwokenDemon from "../pool/awoken-demon.js";
 import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
@@ -135,6 +136,7 @@ import _poolDemolitionField from "../pool/demolition-field.js";
 import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
+import _poolDhundOperative from "../pool/dhund-operative.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
@@ -632,6 +634,7 @@ const shard: CardShard = {
     _poolArrestersZeal,
     _poolAtlasSizableStooge,
     _poolAttercop,
+    _poolAttuneWithAether,
     _poolAuraShards,
     _poolAwokenDemon,
     _poolAzizaMageTowerCaptain,
@@ -738,6 +741,7 @@ const shard: CardShard = {
     _poolDemonOfLoathing,
     _poolDesperateMeasures,
     _poolDespoil,
+    _poolDhundOperative,
     _poolDisciplinedDuelist,
     _poolDisinformationCampaign,
     _poolDistinguishedConjurer,

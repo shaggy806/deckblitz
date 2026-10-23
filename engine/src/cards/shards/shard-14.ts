@@ -113,6 +113,7 @@ import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
 import _poolCrystalBall from "../pool/crystal-ball.js";
 import _poolCullingDais from "../pool/culling-dais.js";
+import _poolCultivatorOfBlades from "../pool/cultivator-of-blades.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
 import _poolCurseOfMaritLage from "../pool/curse-of-marit-lage.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
@@ -159,6 +160,7 @@ import _poolDuergarCaveGuard from "../pool/duergar-cave-guard.js";
 import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
 import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolDustAnimus from "../pool/dust-animus.js";
+import _poolEagerConstruct from "../pool/eager-construct.js";
 import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
@@ -282,6 +284,7 @@ import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
+import _poolInsidiousWill from "../pool/insidious-will.js";
 import _poolIntoTheNight from "../pool/into-the-night.js";
 import _poolInvadeTheCity from "../pool/invade-the-city.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
@@ -709,6 +712,7 @@ const shard: CardShard = {
     _poolCreativeTechnique,
     _poolCrystalBall,
     _poolCullingDais,
+    _poolCultivatorOfBlades,
     _poolCuriousAltisaur,
     _poolCurseOfMaritLage,
     _poolCyberdriveAwakener,
@@ -755,6 +759,7 @@ const shard: CardShard = {
     _poolDukeUlderRavengard,
     _poolDuskImp,
     _poolDustAnimus,
+    _poolEagerConstruct,
     _poolEaglesRescue,
     _poolEbonDrake,
     _poolEchoOfDeathsWail,
@@ -878,6 +883,7 @@ const shard: CardShard = {
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
+    _poolInsidiousWill,
     _poolIntoTheNight,
     _poolInvadeTheCity,
     _poolInvasionOfIxalan,

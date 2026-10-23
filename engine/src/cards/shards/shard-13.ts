@@ -10,6 +10,7 @@ import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAetherInspector from "../pool/aether-inspector.js";
+import _poolAethertorchRenegade from "../pool/aethertorch-renegade.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
@@ -347,6 +348,7 @@ import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
 import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
+import _poolOvalchaseDaredevil from "../pool/ovalchase-daredevil.js";
 import _poolOverflowingInsight from "../pool/overflowing-insight.js";
 import _poolOverloadedMageRing from "../pool/overloaded-mage-ring.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
@@ -567,6 +569,7 @@ import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
 import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWildAesthir from "../pool/wild-aesthir.js";
 import _poolWildWanderer from "../pool/wild-wanderer.js";
+import _poolWildestDreams from "../pool/wildest-dreams.js";
 import _poolWingedHiveTyrant from "../pool/winged-hive-tyrant.js";
 import _poolWingedTempleOfOrazca from "../pool/winged-temple-of-orazca.js";
 import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
@@ -608,6 +611,7 @@ const shard: CardShard = {
     _poolAerialDoombot,
     _poolAerialResponder,
     _poolAetherInspector,
+    _poolAethertorchRenegade,
     _poolAfterlifeFromTheLoam,
     _poolAfterthoughtSentry,
     _poolAgentOfHorizons,
@@ -945,6 +949,7 @@ const shard: CardShard = {
     _poolOrcishLumberjack,
     _poolOrphansOfTheWheat,
     _poolOrzhovCluestone,
+    _poolOvalchaseDaredevil,
     _poolOverflowingInsight,
     _poolOverloadedMageRing,
     _poolOwlinSpiralmancer,
@@ -1165,6 +1170,7 @@ const shard: CardShard = {
     _poolWestCoastExpansion,
     _poolWildAesthir,
     _poolWildWanderer,
+    _poolWildestDreams,
     _poolWingedHiveTyrant,
     _poolWingedTempleOfOrazca,
     _poolWingfoldPteron,

@@ -51,6 +51,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "5/5 Elemental Token",
   "5/5 Elephant Token",
   "5/5 Tyranid Token",
+  "6/6 Beast Artifact Token",
   "6/6 Black Demon Token (Flying, Trample, Upkeep Sacrifice)",
   "6/6 Dragon Token",
   "6/6 Wurm Token",

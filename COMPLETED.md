@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2016 and Kaladesh, whole** (batch 146): no engine change; 101 authored by five
+  `card-author` agents — Aetherstorm Roc, Demon of Dark Schemes, Nissa, Nature's Artisan,
+  Fateful Showdown, Architect of the Untamed and 96 more; C16 is 39 of 56, KLD 213 of 246. 34
+  blocked, undaunted the most shared (2026-10-23).
 - **"Until end of turn, whenever …"** (batch 144; 2026-10-23): the leading blocker
   (`effect:delayed-trigger-rest-of-turn`, 39 cards) built as a `delayed-trigger` at `{ whenever }`,
   with its own targets and "until your next turn"; 34 cards authored on it (Massacre Girl, Vraska

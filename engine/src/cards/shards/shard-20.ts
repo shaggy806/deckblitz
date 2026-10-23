@@ -14,6 +14,7 @@ import _poolAeveProgenitorOoze from "../pool/aeve-progenitor-ooze.js";
 import _poolAffaGuardHound from "../pool/affa-guard-hound.js";
 import _poolAgencyCoroner from "../pool/agency-coroner.js";
 import _poolAirbenderAscension from "../pool/airbender-ascension.js";
+import _poolAkiriLineSlinger from "../pool/akiri-line-slinger.js";
 import _poolAkroanHorse from "../pool/akroan-horse.js";
 import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
 import _poolAleshasLegacy from "../pool/aleshas-legacy.js";
@@ -138,6 +139,7 @@ import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
+import _poolDepalaPilotExemplar from "../pool/depala-pilot-exemplar.js";
 import _poolDepravedHarvester from "../pool/depraved-harvester.js";
 import _poolDepressurize from "../pool/depressurize.js";
 import _poolDesperateCastaways from "../pool/desperate-castaways.js";
@@ -663,6 +665,7 @@ const shard: CardShard = {
     _poolAffaGuardHound,
     _poolAgencyCoroner,
     _poolAirbenderAscension,
+    _poolAkiriLineSlinger,
     _poolAkroanHorse,
     _poolAlelaArtfulProvocateur,
     _poolAleshasLegacy,
@@ -787,6 +790,7 @@ const shard: CardShard = {
     _poolDeathreapRitual,
     _poolDeathsPresence,
     _poolDelayedBlastFireball,
+    _poolDepalaPilotExemplar,
     _poolDepravedHarvester,
     _poolDepressurize,
     _poolDesperateCastaways,

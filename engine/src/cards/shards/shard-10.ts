@@ -9,6 +9,7 @@ import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
+import _poolAetherTheorist from "../pool/aether-theorist.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
@@ -178,6 +179,7 @@ import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
+import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
 import _poolFathomFleetCutthroat from "../pool/fathom-fleet-cutthroat.js";
 import _poolFearlessFledgling from "../pool/fearless-fledgling.js";
 import _poolFecundity from "../pool/fecundity.js";
@@ -347,6 +349,7 @@ import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
+import _poolNightMarketLookout from "../pool/night-market-lookout.js";
 import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
@@ -386,6 +389,7 @@ import _poolPredatoryImpetus from "../pool/predatory-impetus.js";
 import _poolPreeningChampion from "../pool/preening-champion.js";
 import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
 import _poolPrismaticEnding from "../pool/prismatic-ending.js";
+import _poolPrismaticGeoscope from "../pool/prismatic-geoscope.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
@@ -428,6 +432,7 @@ import _poolRustShieldRampager from "../pool/rust-shield-rampager.js";
 import _poolRustvaleBridge from "../pool/rustvale-bridge.js";
 import _poolRuthlessWinnower from "../pool/ruthless-winnower.js";
 import _poolSacredNectar from "../pool/sacred-nectar.js";
+import _poolSageOfShailasClaim from "../pool/sage-of-shailas-claim.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
 import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
 import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
@@ -635,6 +640,7 @@ const shard: CardShard = {
     _poolAbzanBeastmaster,
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
+    _poolAetherTheorist,
     _poolAgentPhilCoulson,
     _poolAhnCropChampion,
     _poolAjaniOutlandChaperone,
@@ -804,6 +810,7 @@ const shard: CardShard = {
     _poolEverflowingChalice,
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
+    _poolFairgroundsWarden,
     _poolFathomFleetCutthroat,
     _poolFearlessFledgling,
     _poolFecundity,
@@ -973,6 +980,7 @@ const shard: CardShard = {
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
+    _poolNightMarketLookout,
     _poolNimbleBirdsticker,
     _poolNimbusMaze,
     _poolNorthPoleGates,
@@ -1012,6 +1020,7 @@ const shard: CardShard = {
     _poolPreeningChampion,
     _poolPriestOfUrabrask,
     _poolPrismaticEnding,
+    _poolPrismaticGeoscope,
     _poolPrismaticOmen,
     _poolPropagatorDrone,
     _poolProwlersHelm,
@@ -1054,6 +1063,7 @@ const shard: CardShard = {
     _poolRustvaleBridge,
     _poolRuthlessWinnower,
     _poolSacredNectar,
+    _poolSageOfShailasClaim,
     _poolSaheeliTheSunsBrilliance,
     _poolSallyPrideLionessLeader,
     _poolSamutTyrantSmasher,

@@ -74,6 +74,7 @@ import _poolBrainsurge from "../pool/brainsurge.js";
 import _poolBrambleArmor from "../pool/bramble-armor.js";
 import _poolBrandywineFarmer from "../pool/brandywine-farmer.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
+import _poolBristlingHydra from "../pool/bristling-hydra.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
@@ -129,6 +130,7 @@ import _poolDawnEvangel from "../pool/dawn-evangel.js";
 import _poolDeceit from "../pool/deceit.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
+import _poolDemonOfDarkSchemes from "../pool/demon-of-dark-schemes.js";
 import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
 import _poolDepthDefiler from "../pool/depth-defiler.js";
 import _poolDerangedWhelp from "../pool/deranged-whelp.js";
@@ -244,6 +246,7 @@ import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
+import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-conduit.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolGuildSummit from "../pool/guild-summit.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
@@ -338,6 +341,7 @@ import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
+import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
 import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
@@ -374,6 +378,7 @@ import _poolNetherVoid from "../pool/nether-void.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
+import _poolNinthBridgePatrol from "../pool/ninth-bridge-patrol.js";
 import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
@@ -417,6 +422,7 @@ import _poolReapersTalisman from "../pool/reapers-talisman.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
+import _poolRenegadeFirebrand from "../pool/renegade-firebrand.js";
 import _poolRenegadeSilent from "../pool/renegade-silent.js";
 import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
@@ -591,6 +597,7 @@ import _poolWindsOfRebuke from "../pool/winds-of-rebuke.js";
 import _poolWingsOfHubris from "../pool/wings-of-hubris.js";
 import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
+import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
@@ -694,6 +701,7 @@ const shard: CardShard = {
     _poolBrambleArmor,
     _poolBrandywineFarmer,
     _poolBrindleBoar,
+    _poolBristlingHydra,
     _poolBrotherhoodAmbushers,
     _poolCallousDismissal,
     _poolCampusCrier,
@@ -749,6 +757,7 @@ const shard: CardShard = {
     _poolDeceit,
     _poolDeepwoodGhoul,
     _poolDematerialize,
+    _poolDemonOfDarkSchemes,
     _poolDependableQuinjet,
     _poolDepthDefiler,
     _poolDerangedWhelp,
@@ -864,6 +873,7 @@ const shard: CardShard = {
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
     _poolGrowExtraArms,
+    _poolGuardianOfTheGreatConduit,
     _poolGuidingBolt,
     _poolGuildSummit,
     _poolGysahlGreens,
@@ -958,6 +968,7 @@ const shard: CardShard = {
     _poolLongshotRebelBowman,
     _poolLoomingHoverguard,
     _poolLuckyOffering,
+    _poolLudevicNecroAlchemist,
     _poolMageDuel,
     _poolMagmaquake,
     _poolMalcolmTheEyes,
@@ -994,6 +1005,7 @@ const shard: CardShard = {
     _poolNewHorizons,
     _poolNezumiBladeblesser,
     _poolNimReplica,
+    _poolNinthBridgePatrol,
     _poolNissasZendikon,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
@@ -1037,6 +1049,7 @@ const shard: CardShard = {
     _poolRedDragon,
     _poolRegrowth,
     _poolRemorsefulCleric,
+    _poolRenegadeFirebrand,
     _poolRenegadeSilent,
     _poolRepeatOffender,
     _poolReputableMerchant,
@@ -1211,6 +1224,7 @@ const shard: CardShard = {
     _poolWingsOfHubris,
     _poolWintermoorCommander,
     _poolWipeClean,
+    _poolWispweaverAngel,
     _poolWoodlandLiege,
     _poolWormwoodTreefolk,
     _poolWreckRemover,

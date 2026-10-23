@@ -182,6 +182,7 @@ import _poolEmbermouthSentinel from "../pool/embermouth-sentinel.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
 import _poolEmperorsVanguard from "../pool/emperors-vanguard.js";
 import _poolEmptiness from "../pool/emptiness.js";
+import _poolEmpyrealVoyager from "../pool/empyreal-voyager.js";
 import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
@@ -287,6 +288,7 @@ import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
 import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
 import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
 import _poolInvasionOfShandalar from "../pool/invasion-of-shandalar.js";
+import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
@@ -528,6 +530,7 @@ import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThinkTank from "../pool/think-tank.js";
 import _poolThinkingCap from "../pool/thinking-cap.js";
 import _poolThranduilsCompany from "../pool/thranduils-company.js";
+import _poolThrivingGrubs from "../pool/thriving-grubs.js";
 import _poolThrowFromTheSaddle from "../pool/throw-from-the-saddle.js";
 import _poolTiamat from "../pool/tiamat.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
@@ -536,6 +539,7 @@ import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
+import _poolToolcraftExemplar from "../pool/toolcraft-exemplar.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
 import _poolToxicScorpion from "../pool/toxic-scorpion.js";
 import _poolTraverseEternity from "../pool/traverse-eternity.js";
@@ -789,6 +793,7 @@ const shard: CardShard = {
     _poolEmeraldOryx,
     _poolEmperorsVanguard,
     _poolEmptiness,
+    _poolEmpyrealVoyager,
     _poolEmpyrialStorm,
     _poolEndbringer,
     _poolEnormousBaloth,
@@ -894,6 +899,7 @@ const shard: CardShard = {
     _poolIntrepidTrufflesnout,
     _poolInvasionOfMoag,
     _poolInvasionOfShandalar,
+    _poolInventorsApprentice,
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
@@ -1135,6 +1141,7 @@ const shard: CardShard = {
     _poolThinkTank,
     _poolThinkingCap,
     _poolThranduilsCompany,
+    _poolThrivingGrubs,
     _poolThrowFromTheSaddle,
     _poolTiamat,
     _poolTillerEngine,
@@ -1143,6 +1150,7 @@ const shard: CardShard = {
     _poolTithebearerGiant,
     _poolTokkaRahzarTerribleTwos,
     _poolTomeRaider,
+    _poolToolcraftExemplar,
     _poolTopiaryLecturer,
     _poolToxicScorpion,
     _poolTraverseEternity,

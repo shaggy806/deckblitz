@@ -585,6 +585,7 @@ import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
 import _poolZodiacRat from "../pool/zodiac-rat.js";
 import _poolZooEscapees from "../pool/zoo-escapees.js";
+import _tokens66BeastArtifactToken from "../tokens/6-6-beast-artifact-token.js";
 import _tokensAllyToken from "../tokens/ally-token.js";
 import _tokensBloodToken from "../tokens/blood-token.js";
 import _tokensCatTokenJolraelMwonvuliRecluse from "../tokens/cat-token-jolrael-mwonvuli-recluse.js";
@@ -1196,6 +1197,7 @@ const shard: CardShard = {
     _poolZooEscapees,
   ],
   tokens: [
+    _tokens66BeastArtifactToken,
     _tokensAllyToken,
     _tokensBloodToken,
     _tokensCatTokenJolraelMwonvuliRecluse,

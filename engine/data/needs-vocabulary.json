@@ -9791,6 +9791,25 @@
   "effect:choose-how-players-vote": {
    "family": "mechanic:voting",
    "example": "Illusion of Choice: 'You choose how each player votes this turn.'"
+  },
+  "effect:damage-all-controller-of-target": {
+   "family": "effect:target-spec-additions",
+   "example": "Chandra, Pyrogenius: '−10: Chandra deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls' — `damage-all`'s `controlledByTarget` reads only a player target, not a planeswalker's controller."
+  },
+  "effect:allow-play-from-exile": {
+   "example": "Spark of Creativity: 'Exile the top card of your library. You may have it deal damage equal to its mana value to target creature. If you don't, you may play that card until end of turn' — permission to play (lands too) a card exiled earlier in the same resolution; `allow-cast-from-exile` only casts."
+  },
+  "replacement:prevent-all-damage-from-chosen-source-this-turn": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "example": "Consulate Surveillance: 'Pay {E}: Prevent all damage that would be dealt to you this turn by a source of your choice' — `prevent-damage-from-chosen-source` takes only \"next-time\" or a fixed amount."
+  },
+  "effect:change-target-to-enchanted": {
+   "family": "effect:change-target",
+   "example": "Captured by the Consulate: 'Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able' — `change-targets`'s `to` accepts only \"source\"."
+  },
+  "static:max-hand-size-equal-to-counters": {
+   "family": "static:max-hand-size",
+   "example": "Midnight Oil: 'Your maximum hand size is equal to the number of hour counters on this enchantment' — `maxHandSize` takes a fixed `set` minus a CountSpec, and no CountSpec counts counters on the source."
   }
  }
 }
