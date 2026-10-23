@@ -178,6 +178,7 @@ import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
+import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
 import _poolFeastingTrollKing from "../pool/feasting-troll-king.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
@@ -323,6 +324,7 @@ import _poolMrFoxglove from "../pool/mr-foxglove.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
 import _poolMyrWelder from "../pool/myr-welder.js";
 import _poolMyriadLandscape from "../pool/myriad-landscape.js";
+import _poolMyrsmith from "../pool/myrsmith.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
@@ -778,6 +780,7 @@ const shard: CardShard = {
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
     _poolFateshaperAspirant,
+    _poolFavorOfTheOverbeing,
     _poolFeastingTrollKing,
     _poolFelidarSovereign,
     _poolFerociousWerefox,
@@ -923,6 +926,7 @@ const shard: CardShard = {
     _poolMuxusGoblinGrandee,
     _poolMyrWelder,
     _poolMyriadLandscape,
+    _poolMyrsmith,
     _poolMysteriousTome,
     _poolMysticMelting,
     _poolNaturalConnection,

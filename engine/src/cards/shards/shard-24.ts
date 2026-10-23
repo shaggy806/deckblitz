@@ -214,6 +214,7 @@ import _poolGruulLocket from "../pool/gruul-locket.js";
 import _poolGuidestoneCompass from "../pool/guidestone-compass.js";
 import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
+import _poolHallowedSpiritkeeper from "../pool/hallowed-spiritkeeper.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHandOfJustice from "../pool/hand-of-justice.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
@@ -294,6 +295,7 @@ import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
 import _poolMeganticSliver from "../pool/megantic-sliver.js";
+import _poolMemnarch from "../pool/memnarch.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
 import _poolMeteorSword from "../pool/meteor-sword.js";
@@ -304,6 +306,7 @@ import _poolMindcrank from "../pool/mindcrank.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
+import _poolMirrorGallery from "../pool/mirror-gallery.js";
 import _poolMoat from "../pool/moat.js";
 import _poolMobLookout from "../pool/mob-lookout.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
@@ -797,6 +800,7 @@ const shard: CardShard = {
     _poolGuidestoneCompass,
     _poolGurmagRakshasa,
     _poolHallMonitor,
+    _poolHallowedSpiritkeeper,
     _poolHammerOfPurphoros,
     _poolHandOfJustice,
     _poolHanweirGarrison,
@@ -877,6 +881,7 @@ const shard: CardShard = {
     _poolMausoleumGuard,
     _poolMausoleumSecrets,
     _poolMeganticSliver,
+    _poolMemnarch,
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
     _poolMeteorSword,
@@ -887,6 +892,7 @@ const shard: CardShard = {
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
+    _poolMirrorGallery,
     _poolMoat,
     _poolMobLookout,
     _poolMonumentToEndurance,

@@ -301,6 +301,7 @@ import _poolMartyrOfDusk from "../pool/martyr-of-dusk.js";
 import _poolMaskedBlackguard from "../pool/masked-blackguard.js";
 import _poolMassacreGirlKnownKiller from "../pool/massacre-girl-known-killer.js";
 import _poolMasterOfTheFeast from "../pool/master-of-the-feast.js";
+import _poolMatterReshaper from "../pool/matter-reshaper.js";
 import _poolMegrim from "../pool/megrim.js";
 import _poolMengHuosHorde from "../pool/meng-huos-horde.js";
 import _poolMercilessRepurposing from "../pool/merciless-repurposing.js";
@@ -913,6 +914,7 @@ const shard: CardShard = {
     _poolMaskedBlackguard,
     _poolMassacreGirlKnownKiller,
     _poolMasterOfTheFeast,
+    _poolMatterReshaper,
     _poolMegrim,
     _poolMengHuosHorde,
     _poolMercilessRepurposing,

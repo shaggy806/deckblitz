@@ -63,6 +63,7 @@ import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBlessingOfBelzenlok from "../pool/blessing-of-belzenlok.js";
+import _poolBlightedSteppe from "../pool/blighted-steppe.js";
 import _poolBloodForBones from "../pool/blood-for-bones.js";
 import _poolBloodcrazedPaladin from "../pool/bloodcrazed-paladin.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
@@ -129,6 +130,7 @@ import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
 import _poolDeathgorgeScavenger from "../pool/deathgorge-scavenger.js";
 import _poolDeathriteShaman from "../pool/deathrite-shaman.js";
+import _poolDebtorsKnell from "../pool/debtors-knell.js";
 import _poolDemolitionField from "../pool/demolition-field.js";
 import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
@@ -284,6 +286,7 @@ import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
 import _poolLhurgoyf from "../pool/lhurgoyf.js";
+import _poolLifeFindsAWay from "../pool/life-finds-a-way.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLostLegion from "../pool/lost-legion.js";
@@ -408,6 +411,7 @@ import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRicochetTrap from "../pool/ricochet-trap.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
+import _poolRiteOfConsumption from "../pool/rite-of-consumption.js";
 import _poolRitualOfHope from "../pool/ritual-of-hope.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
@@ -662,6 +666,7 @@ const shard: CardShard = {
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
     _poolBlessingOfBelzenlok,
+    _poolBlightedSteppe,
     _poolBloodForBones,
     _poolBloodcrazedPaladin,
     _poolBloodflowConnoisseur,
@@ -728,6 +733,7 @@ const shard: CardShard = {
     _poolDeathStroke,
     _poolDeathgorgeScavenger,
     _poolDeathriteShaman,
+    _poolDebtorsKnell,
     _poolDemolitionField,
     _poolDemonOfLoathing,
     _poolDesperateMeasures,
@@ -883,6 +889,7 @@ const shard: CardShard = {
     _poolLeopardSpottedJiao,
     _poolLeylineInvocation,
     _poolLhurgoyf,
+    _poolLifeFindsAWay,
     _poolLightningBlast,
     _poolLightningBlow,
     _poolLostLegion,
@@ -1007,6 +1014,7 @@ const shard: CardShard = {
     _poolRicochetTrap,
     _poolRile,
     _poolRimefurReindeer,
+    _poolRiteOfConsumption,
     _poolRitualOfHope,
     _poolRoilingCanopy,
     _poolRooftopAssassin,

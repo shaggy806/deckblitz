@@ -152,6 +152,7 @@ import _poolDreadSummons from "../pool/dread-summons.js";
 import _poolDreamCoat from "../pool/dream-coat.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
 import _poolDrivenDespair from "../pool/driven-despair.js";
+import _poolDrownerOfHope from "../pool/drowner-of-hope.js";
 import _poolEarthlink from "../pool/earthlink.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
@@ -354,6 +355,7 @@ import _poolMysticGate from "../pool/mystic-gate.js";
 import _poolMysticRepeal from "../pool/mystic-repeal.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
+import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNighthaze from "../pool/nighthaze.js";
 import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
@@ -598,6 +600,7 @@ import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
 import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
+import _poolYisanTheWandererBard from "../pool/yisan-the-wanderer-bard.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
 import _poolYouSeeAGuardApproach from "../pool/you-see-a-guard-approach.js";
 import _poolZelyonSword from "../pool/zelyon-sword.js";
@@ -773,6 +776,7 @@ const shard: CardShard = {
     _poolDreamCoat,
     _poolDregscapeZombie,
     _poolDrivenDespair,
+    _poolDrownerOfHope,
     _poolEarthlink,
     _poolEarthquakeDragon,
     _poolEidolonOfPhilosophy,
@@ -975,6 +979,7 @@ const shard: CardShard = {
     _poolMysticRepeal,
     _poolNearheathStalker,
     _poolNessianCourser,
+    _poolNeurokStealthsuit,
     _poolNightdrinkerMoroii,
     _poolNighthaze,
     _poolNivMizzetTheFiremind,
@@ -1219,6 +1224,7 @@ const shard: CardShard = {
     _poolWoollyMammoths,
     _poolWormholeSerpent,
     _poolYevaNaturesHerald,
+    _poolYisanTheWandererBard,
     _poolYouFindTheVillainsLair,
     _poolYouSeeAGuardApproach,
     _poolZelyonSword,

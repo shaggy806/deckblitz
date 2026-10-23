@@ -59,7 +59,7 @@ section keeps only what to do next.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7949 on (batch 143 took 7707–7947). Batches run 4-5 agents, ~30 cards each, with the
+  untriaged cards by rank: rank 8207 on (batch 145 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
   leading features built alongside in worktrees. The nine other starter precons' 25 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
@@ -231,7 +231,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins and Stronghold Rats (`effect:hidden-simultaneous-choices`).
+- **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins, Stronghold Rats and Cunning Lethemancer (`effect:hidden-simultaneous-choices`).
 - **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
 - **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.
 - **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.

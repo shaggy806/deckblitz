@@ -215,6 +215,7 @@ import _poolHeirloomBlade from "../pool/heirloom-blade.js";
 import _poolHelicaGlider from "../pool/helica-glider.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeroOfIroas from "../pool/hero-of-iroas.js";
+import _poolHeroesBane from "../pool/heroes-bane.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHighlandGame from "../pool/highland-game.js";
 import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
@@ -304,6 +305,7 @@ import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
 import _poolMintstrosity from "../pool/mintstrosity.js";
+import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
@@ -819,6 +821,7 @@ const shard: CardShard = {
     _poolHelicaGlider,
     _poolHellSwarm,
     _poolHeroOfIroas,
+    _poolHeroesBane,
     _poolHeronbladeElite,
     _poolHighlandGame,
     _poolHiveOfTheEyeTyrant,
@@ -908,6 +911,7 @@ const shard: CardShard = {
     _poolMinersBane,
     _poolMinotaurWarrior,
     _poolMintstrosity,
+    _poolMirenTheMoaningWell,
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
     _poolMizziumMortars,

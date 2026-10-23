@@ -9779,6 +9779,18 @@
   "effect:search-to-linked-exile": {
    "family": "zone:impulse-permission-options",
    "example": "Roads Go Ever, Ever On I: search for Plains cards and exile them, linked to the Saga — `search-library` has no exile destination."
+  },
+  "effect:copy-spell-for-each-by-caster": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Mirrorwing Dragon: 'that player copies that spell for each other creature they control that the spell could target' — the copies the caster's, aimed at the caster's own creatures; `forEachItCouldTarget` reads and gives from the effect's controller's side."
+  },
+  "replacement:draw-replacement-search": {
+   "family": "replacement:new-event-replacements",
+   "example": "Archmage Ascension: 'if you would draw a card, you may instead search your library for a card, put that card into your hand' — `would-draw`'s `instead` has no search."
+  },
+  "effect:choose-how-players-vote": {
+   "family": "mechanic:voting",
+   "example": "Illusion of Choice: 'You choose how each player votes this turn.'"
   }
  }
 }

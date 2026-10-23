@@ -157,6 +157,7 @@ import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFaridehsFireball from "../pool/faridehs-fireball.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFesterleech from "../pool/festerleech.js";
+import _poolFinalJudgment from "../pool/final-judgment.js";
 import _poolFinalPayment from "../pool/final-payment.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
@@ -299,6 +300,7 @@ import _poolMarchOfTheDrowned from "../pool/march-of-the-drowned.js";
 import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
+import _poolMasterSplicer from "../pool/master-splicer.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
@@ -735,6 +737,7 @@ const shard: CardShard = {
     _poolFaridehsFireball,
     _poolFarmerCotton,
     _poolFesterleech,
+    _poolFinalJudgment,
     _poolFinalPayment,
     _poolFireNationEngineer,
     _poolFireOfOrthanc,
@@ -877,6 +880,7 @@ const shard: CardShard = {
     _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,
+    _poolMasterSplicer,
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
     _poolMawOfTheMire,

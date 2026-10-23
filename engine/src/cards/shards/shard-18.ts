@@ -7,6 +7,7 @@ import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
+import _poolAjaniMentorOfHeroes from "../pool/ajani-mentor-of-heroes.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
@@ -615,6 +616,7 @@ const shard: CardShard = {
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAeronautAdmiral,
+    _poolAjaniMentorOfHeroes,
     _poolAkalPakalFirstAmongEquals,
     _poolAkkiBlizzardHerder,
     _poolAkkiDrillmaster,

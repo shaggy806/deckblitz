@@ -1,0 +1,429 @@
+{
+ "batch": "B145",
+ "status": "complete",
+ "ranks": "EDHREC ranks 7949–8197 (the next 60 untriaged by rank)",
+ "authored": [
+  {
+   "name": "Ajani, Mentor of Heroes",
+   "files": [
+    "engine/src/cards/pool/ajani-mentor-of-heroes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armory of Iroas",
+   "files": [
+    "engine/src/cards/pool/armory-of-iroas.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Withering",
+   "files": [
+    "engine/src/cards/pool/dark-withering.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Debtors' Knell",
+   "files": [
+    "engine/src/cards/pool/debtors-knell.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Drowner of Hope",
+   "files": [
+    "engine/src/cards/pool/drowner-of-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Favor of the Overbeing",
+   "files": [
+    "engine/src/cards/pool/favor-of-the-overbeing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Final Judgment",
+   "files": [
+    "engine/src/cards/pool/final-judgment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gnat Miser",
+   "files": [
+    "engine/src/cards/pool/gnat-miser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hallowed Spiritkeeper",
+   "files": [
+    "engine/src/cards/pool/hallowed-spiritkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Phantasm",
+   "files": [
+    "engine/src/cards/pool/jaces-phantasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jagged-Scar Archers",
+   "files": [
+    "engine/src/cards/pool/jagged-scar-archers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lashwrithe",
+   "files": [
+    "engine/src/cards/pool/lashwrithe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life Finds a Way",
+   "files": [
+    "engine/src/cards/pool/life-finds-a-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Matter Reshaper",
+   "files": [
+    "engine/src/cards/pool/matter-reshaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memnarch",
+   "files": [
+    "engine/src/cards/pool/memnarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miren, the Moaning Well",
+   "files": [
+    "engine/src/cards/pool/miren-the-moaning-well.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Obsessive Search",
+   "files": [
+    "engine/src/cards/pool/obsessive-search.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rite of Consumption",
+   "files": [
+    "engine/src/cards/pool/rite-of-consumption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screams from Within",
+   "files": [
+    "engine/src/cards/pool/screams-from-within.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smellerbee, Rebel Fighter",
+   "files": [
+    "engine/src/cards/pool/smellerbee-rebel-fighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider Spawning",
+   "files": [
+    "engine/src/cards/pool/spider-spawning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transguild Promenade",
+   "files": [
+    "engine/src/cards/pool/transguild-promenade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blighted Steppe",
+   "files": [
+    "engine/src/cards/pool/blighted-steppe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conflux",
+   "files": [
+    "engine/src/cards/pool/conflux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Congregation at Dawn",
+   "files": [
+    "engine/src/cards/pool/congregation-at-dawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fiery Temper",
+   "files": [
+    "engine/src/cards/pool/fiery-temper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gelatinous Genesis",
+   "files": [
+    "engine/src/cards/pool/gelatinous-genesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Bushwhacker",
+   "files": [
+    "engine/src/cards/pool/goblin-bushwhacker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroes' Bane",
+   "files": [
+    "engine/src/cards/pool/heroes-bane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Juniper Order Ranger",
+   "files": [
+    "engine/src/cards/pool/juniper-order-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martyr's Cause",
+   "files": [
+    "engine/src/cards/pool/martyrs-cause.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Master Splicer",
+   "files": [
+    "engine/src/cards/pool/master-splicer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirror Gallery",
+   "files": [
+    "engine/src/cards/pool/mirror-gallery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myrsmith",
+   "files": [
+    "engine/src/cards/pool/myrsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nantuko Vigilante",
+   "files": [
+    "engine/src/cards/pool/nantuko-vigilante.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Neurok Stealthsuit",
+   "files": [
+    "engine/src/cards/pool/neurok-stealthsuit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Overwhelming Victory",
+   "files": [
+    "engine/src/cards/pool/overwhelming-victory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saheeli Rai",
+   "files": [
+    "engine/src/cards/pool/saheeli-rai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thopter Foundry",
+   "files": [
+    "engine/src/cards/pool/thopter-foundry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titan Forge",
+   "files": [
+    "engine/src/cards/pool/titan-forge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treachery",
+   "files": [
+    "engine/src/cards/pool/treachery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yisan, the Wanderer Bard",
+   "files": [
+    "engine/src/cards/pool/yisan-the-wanderer-bard.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Surveyor's Scope",
+   "needs": [
+    "effect:players-controlling-more-amount"
+   ],
+   "why": "X is the number of players who control at least two more lands than you: no such per-player count."
+  },
+  {
+   "name": "Ixidron",
+   "needs": [
+    "effect:turn-face-down"
+   ],
+   "why": "\"Turn all other nontoken creatures face down\": nothing turns an existing permanent face down."
+  },
+  {
+   "name": "Rout",
+   "needs": [
+    "effect:flash-for-extra-cost"
+   ],
+   "why": "\"You may cast this spell as though it had flash if you pay {2} more\": a kicker would make it a kicked spell and offer the {2} at sorcery speed."
+  },
+  {
+   "name": "Duneblast",
+   "needs": [
+    "effect:each-player-chooses-destroy-rest"
+   ],
+   "why": "\"Choose up to one creature. Destroy the rest\": the choice isn't kept to exclude."
+  },
+  {
+   "name": "Death's Shadow",
+   "needs": [
+    "static:pt-per-life-total"
+   ],
+   "why": "-X/-X where X is your life total."
+  },
+  {
+   "name": "Wall of Glare",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "\"Can block any number of creatures.\""
+  },
+  {
+   "name": "Mirrorwing Dragon",
+   "needs": [
+    "effect:copy-spell-for-each-by-caster"
+   ],
+   "why": "The caster copies the spell for each other creature they control it could target."
+  },
+  {
+   "name": "Forbid",
+   "needs": [
+    "keyword:buyback"
+   ],
+   "why": "Buyback—Discard two cards."
+  },
+  {
+   "name": "Elder Deep-Fiend",
+   "needs": [
+    "keyword:emerge"
+   ],
+   "why": "Emerge isn't built."
+  },
+  {
+   "name": "Cunning Lethemancer",
+   "needs": [
+    "effect:hidden-simultaneous-choices"
+   ],
+   "why": "Its ruling hides each player's discard until all have chosen (docs/engine-gaps.md)."
+  },
+  {
+   "name": "Confusion in the Ranks",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "Exchange control of two permanents, the target chosen by the entering permanent's controller."
+  },
+  {
+   "name": "Guilty Conscience",
+   "needs": [
+    "trigger:damage-trigger-extensions"
+   ],
+   "why": "\"Whenever enchanted creature deals damage\" once per damage event, not per recipient."
+  },
+  {
+   "name": "Primal Surge",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "\"If you do, repeat this process.\""
+  },
+  {
+   "name": "Archmage Ascension",
+   "needs": [
+    "replacement:draw-replacement-search"
+   ],
+   "why": "\"If you would draw a card, you may instead search your library for a card.\""
+  },
+  {
+   "name": "Acidic Soil",
+   "needs": [
+    "amount:count-per-player"
+   ],
+   "why": "Damage to each player equal to the number of lands that player controls."
+  },
+  {
+   "name": "Illusion of Choice",
+   "needs": [
+    "effect:choose-how-players-vote"
+   ],
+   "why": "\"You choose how each player votes this turn.\""
+  },
+  {
+   "name": "Scrabbling Claws",
+   "needs": [
+    "effect:player-exiles-chosen-from-own-graveyard"
+   ],
+   "why": "\"Target player exiles a card from their graveyard\", that player's choice."
+  },
+  {
+   "name": "Nameless Inversion",
+   "needs": [
+    "effect:gain-lose-all-creature-types"
+   ],
+   "why": "\"Loses all creature types until end of turn.\""
+  }
+ ]
+}

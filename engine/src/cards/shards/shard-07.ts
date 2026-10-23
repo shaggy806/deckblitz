@@ -242,6 +242,7 @@ import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
 import _poolJacesRuse from "../pool/jaces-ruse.js";
+import _poolJaggedScarArchers from "../pool/jagged-scar-archers.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
 import _poolJubilantMascot from "../pool/jubilant-mascot.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
@@ -300,6 +301,7 @@ import _poolMarchOfTheCanonized from "../pool/march-of-the-canonized.js";
 import _poolMarduRoughrider from "../pool/mardu-roughrider.js";
 import _poolMarinaVendrell from "../pool/marina-vendrell.js";
 import _poolMarshThreader from "../pool/marsh-threader.js";
+import _poolMartyrsCause from "../pool/martyrs-cause.js";
 import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
@@ -860,6 +862,7 @@ const shard: CardShard = {
     _poolIsamaruHoundOfKonda,
     _poolItsClobberinTime,
     _poolJacesRuse,
+    _poolJaggedScarArchers,
     _poolJetmirsGarden,
     _poolJubilantMascot,
     _poolJwariRuins,
@@ -918,6 +921,7 @@ const shard: CardShard = {
     _poolMarduRoughrider,
     _poolMarinaVendrell,
     _poolMarshThreader,
+    _poolMartyrsCause,
     _poolMaskOfGriselbrand,
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,

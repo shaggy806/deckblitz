@@ -105,6 +105,7 @@ import _poolColossalMight from "../pool/colossal-might.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
 import _poolCompulsoryRest from "../pool/compulsory-rest.js";
 import _poolConcoct from "../pool/concoct.js";
+import _poolCongregationAtDawn from "../pool/congregation-at-dawn.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
@@ -287,6 +288,7 @@ import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
+import _poolLashwrithe from "../pool/lashwrithe.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
@@ -679,6 +681,7 @@ const shard: CardShard = {
     _poolCombustionMan,
     _poolCompulsoryRest,
     _poolConcoct,
+    _poolCongregationAtDawn,
     _poolConscriptedInfantry,
     _poolConsumingFervor,
     _poolCoordinatedClobbering,
@@ -861,6 +864,7 @@ const shard: CardShard = {
     _poolLambholtRavager,
     _poolLapisLazuliTalisman,
     _poolLargeBear,
+    _poolLashwrithe,
     _poolLatticeLibrary,
     _poolLavaleaper,
     _poolLichsCaress,

@@ -170,6 +170,7 @@ import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
 import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
+import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
@@ -764,6 +765,7 @@ const shard: CardShard = {
     _poolFeralInvocation,
     _poolFieryFall,
     _poolFieryJustice,
+    _poolFieryTemper,
     _poolFiliThePathfinder,
     _poolFlood,
     _poolFloodwaters,

@@ -471,6 +471,7 @@ import _poolSkywinderDrake from "../pool/skywinder-drake.js";
 import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
 import _poolSlaughterPact from "../pool/slaughter-pact.js";
 import _poolSmellFear from "../pool/smell-fear.js";
+import _poolSmellerbeeRebelFighter from "../pool/smellerbee-rebel-fighter.js";
 import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
 import _poolSnapback from "../pool/snapback.js";
 import _poolSnareTactician from "../pool/snare-tactician.js";
@@ -613,6 +614,7 @@ import _poolZealousConscripts from "../pool/zealous-conscripts.js";
 import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
+import _tokensBlueThopterToken from "../tokens/blue-thopter-token.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
@@ -1095,6 +1097,7 @@ const shard: CardShard = {
     _poolSlashTheRanks,
     _poolSlaughterPact,
     _poolSmellFear,
+    _poolSmellerbeeRebelFighter,
     _poolSmeltWardMinotaur,
     _poolSnapback,
     _poolSnareTactician,
@@ -1239,6 +1242,7 @@ const shard: CardShard = {
   tokens: [
     _tokens11BlueBirdToken,
     _tokensBeastTokenGarrukVeiledButcher,
+    _tokensBlueThopterToken,
     _tokensDinosaurToken33,
     _tokensDragonToken66,
     _tokensEverywhereToken,

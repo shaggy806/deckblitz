@@ -125,6 +125,7 @@ import _poolCutthroatCenturion from "../pool/cutthroat-centurion.js";
 import _poolDakmorBat from "../pool/dakmor-bat.js";
 import _poolDalekDrone from "../pool/dalek-drone.js";
 import _poolDarkBanishing from "../pool/dark-banishing.js";
+import _poolDarkWithering from "../pool/dark-withering.js";
 import _poolDarksteelCitadel from "../pool/darksteel-citadel.js";
 import _poolDarksteelSentinel from "../pool/darksteel-sentinel.js";
 import _poolDaruHealer from "../pool/daru-healer.js";
@@ -194,6 +195,7 @@ import _poolFrostGiant from "../pool/frost-giant.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
+import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
@@ -736,6 +738,7 @@ const shard: CardShard = {
     _poolDakmorBat,
     _poolDalekDrone,
     _poolDarkBanishing,
+    _poolDarkWithering,
     _poolDarksteelCitadel,
     _poolDarksteelSentinel,
     _poolDaruHealer,
@@ -805,6 +808,7 @@ const shard: CardShard = {
     _poolFusionElemental,
     _poolGallantCavalry,
     _poolGalvanicArc,
+    _poolGelatinousGenesis,
     _poolGenesisStorm,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,

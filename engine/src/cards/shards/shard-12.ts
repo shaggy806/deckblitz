@@ -95,6 +95,7 @@ import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
+import _poolConflux from "../pool/conflux.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
@@ -330,6 +331,7 @@ import _poolMyrKinsmith from "../pool/myr-kinsmith.js";
 import _poolNadaarSelflessPaladin from "../pool/nadaar-selfless-paladin.js";
 import _poolNadierAgentOfTheDuskenel from "../pool/nadier-agent-of-the-duskenel.js";
 import _poolNantukoHusk from "../pool/nantuko-husk.js";
+import _poolNantukoVigilante from "../pool/nantuko-vigilante.js";
 import _poolNarciFableSinger from "../pool/narci-fable-singer.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecronMonolith from "../pool/necron-monolith.js";
@@ -506,6 +508,7 @@ import _poolTheRoyalScions from "../pool/the-royal-scions.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
 import _poolThievingMagpie from "../pool/thieving-magpie.js";
 import _poolThirstForDiscovery from "../pool/thirst-for-discovery.js";
+import _poolThopterFoundry from "../pool/thopter-foundry.js";
 import _poolThornplateIntimidator from "../pool/thornplate-intimidator.js";
 import _poolThornspireVerge from "../pool/thornspire-verge.js";
 import _poolThrasiosTritonHero from "../pool/thrasios-triton-hero.js";
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolCloudPirates,
     _poolCloudcrownOak,
     _poolConciliatorsDuelist,
+    _poolConflux,
     _poolConsumingAetherborn,
     _poolCopperTablet,
     _poolCrackdownConstruct,
@@ -924,6 +928,7 @@ const shard: CardShard = {
     _poolNadaarSelflessPaladin,
     _poolNadierAgentOfTheDuskenel,
     _poolNantukoHusk,
+    _poolNantukoVigilante,
     _poolNarciFableSinger,
     _poolNecromanticSelection,
     _poolNecronMonolith,
@@ -1100,6 +1105,7 @@ const shard: CardShard = {
     _poolTheScarabGod,
     _poolThievingMagpie,
     _poolThirstForDiscovery,
+    _poolThopterFoundry,
     _poolThornplateIntimidator,
     _poolThornspireVerge,
     _poolThrasiosTritonHero,

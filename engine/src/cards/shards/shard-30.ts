@@ -441,6 +441,7 @@ import _poolRubiniaSoulsinger from "../pool/rubinia-soulsinger.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
 import _poolRydiasReturn from "../pool/rydias-return.js";
 import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
+import _poolSaheeliRai from "../pool/saheeli-rai.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
 import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolRustrazorButcher,
     _poolRydiasReturn,
     _poolSageOfLatNam,
+    _poolSaheeliRai,
     _poolSandstormCharger,
     _poolSanguinaryMage,
     _poolSaurianSymbiote,

@@ -512,6 +512,7 @@ import _poolToweringTitan from "../pool/towering-titan.js";
 import _poolToxicDeluge from "../pool/toxic-deluge.js";
 import _poolTransplantTheorist from "../pool/transplant-theorist.js";
 import _poolTrapjawTyrant from "../pool/trapjaw-tyrant.js";
+import _poolTreachery from "../pool/treachery.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
@@ -1099,6 +1100,7 @@ const shard: CardShard = {
     _poolToxicDeluge,
     _poolTransplantTheorist,
     _poolTrapjawTyrant,
+    _poolTreachery,
     _poolTrelasarraMoonDancer,
     _poolTritonWaverider,
     _poolTriumphantChomp,

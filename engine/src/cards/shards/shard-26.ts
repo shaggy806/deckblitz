@@ -253,6 +253,7 @@ import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
 import _poolJaceIngeniousMindMage from "../pool/jace-ingenious-mind-mage.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
+import _poolJacesPhantasm from "../pool/jaces-phantasm.js";
 import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
@@ -343,6 +344,7 @@ import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
 import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
+import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPestProblem from "../pool/pest-problem.js";
@@ -506,6 +508,7 @@ import _poolTimeOfIce from "../pool/time-of-ice.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
+import _poolTitanForge from "../pool/titan-forge.js";
 import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTrainedCheetah from "../pool/trained-cheetah.js";
@@ -836,6 +839,7 @@ const shard: CardShard = {
     _poolIronGiant,
     _poolJaceIngeniousMindMage,
     _poolJaceUnravelerOfSecrets,
+    _poolJacesPhantasm,
     _poolJaredCarthalion,
     _poolJeditOjanen,
     _poolJosuVessLichKnight,
@@ -926,6 +930,7 @@ const shard: CardShard = {
     _poolOrderOfTheSacredBell,
     _poolOriginOfTheHiddenOnes,
     _poolOvergrownArch,
+    _poolOverwhelmingVictory,
     _poolPacksBetrayal,
     _poolPearlMedallion,
     _poolPestProblem,
@@ -1089,6 +1094,7 @@ const shard: CardShard = {
     _poolTimelessLotus,
     _poolTinker,
     _poolTirelessTracker,
+    _poolTitanForge,
     _poolToArms,
     _poolTorrentialGearhulk,
     _poolTrainedCheetah,

@@ -177,6 +177,7 @@ import _poolGloomSower from "../pool/gloom-sower.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
 import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
+import _poolGoblinBushwhacker from "../pool/goblin-bushwhacker.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
 import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
@@ -721,6 +722,7 @@ const shard: CardShard = {
     _poolGnawingVermin,
     _poolGoNinjaGo,
     _poolGoShintaiOfBoundlessVigor,
+    _poolGoblinBushwhacker,
     _poolGoblinCannon,
     _poolGoblinNegotiation,
     _poolGoblinTunneler,
