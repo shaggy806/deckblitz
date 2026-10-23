@@ -261,6 +261,7 @@ import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
+import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
@@ -884,6 +885,7 @@ const shard: CardShard = {
     _poolIllGottenInheritance,
     _poolImperialCosmographer,
     _poolIndathaCrystal,
+    _poolIndestructibility,
     _poolInescapableBlaze,
     _poolInspiringRoar,
     _poolIrencragPyromancer,

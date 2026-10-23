@@ -193,6 +193,7 @@ import _poolGougedZealot from "../pool/gouged-zealot.js";
 import _poolGracefulTakedown from "../pool/graceful-takedown.js";
 import _poolGraspingGiant from "../pool/grasping-giant.js";
 import _poolGravelighter from "../pool/gravelighter.js";
+import _poolGreenGoblinNemesis from "../pool/green-goblin-nemesis.js";
 import _poolGrenzoHavocRaiser from "../pool/grenzo-havoc-raiser.js";
 import _poolGrimGuardian from "../pool/grim-guardian.js";
 import _poolGrimReapersScythe from "../pool/grim-reapers-scythe.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolGracefulTakedown,
     _poolGraspingGiant,
     _poolGravelighter,
+    _poolGreenGoblinNemesis,
     _poolGrenzoHavocRaiser,
     _poolGrimGuardian,
     _poolGrimReapersScythe,

@@ -542,6 +542,7 @@ import _poolVisionOfLove from "../pool/vision-of-love.js";
 import _poolVisionsOfBeyond from "../pool/visions-of-beyond.js";
 import _poolVivienReid from "../pool/vivien-reid.js";
 import _poolVoraciousTyphon from "../pool/voracious-typhon.js";
+import _poolVowOfLightning from "../pool/vow-of-lightning.js";
 import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
 import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
@@ -1115,6 +1116,7 @@ const shard: CardShard = {
     _poolVisionsOfBeyond,
     _poolVivienReid,
     _poolVoraciousTyphon,
+    _poolVowOfLightning,
     _poolVrenTheRelentless,
     _poolWakedancer,
     _poolWallOfEarth,

@@ -557,6 +557,7 @@ import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
 import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
+import _poolVerdurousGearhulk from "../pool/verdurous-gearhulk.js";
 import _poolVertigo from "../pool/vertigo.js";
 import _poolVeteransPowerblade from "../pool/veterans-powerblade.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
@@ -1155,6 +1156,7 @@ const shard: CardShard = {
     _poolVelvetwingButterflies,
     _poolVentureForth,
     _poolVerdantKraken,
+    _poolVerdurousGearhulk,
     _poolVertigo,
     _poolVeteransPowerblade,
     _poolVibraniumEnergyDaggers,

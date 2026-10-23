@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3777 already implemented / 1223 missing (marks refreshed 2026-10-23)
+3778 already implemented / 1222 missing (marks refreshed 2026-10-23)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1714,7 +1714,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1721  Overlord of the Hauntwoods               {3}{G}{G}        Enchantment Creature — Avatar Horror
 [x]  1722  Fate Unraveler                           {3}{B}           Enchantment Creature — Hag
 [x]  1723  Impulsive Pilferer                       {R}              Creature — Goblin Pirate
-[ ]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
+[x]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
 [x]  1725  Nyx Weaver                               {1}{B}{G}        Enchantment Creature — Spider
 [x]  1726  Intruder Alarm                           {2}{U}           Enchantment
 [x]  1727  Slither Blade                            {U}              Creature — Snake Rogue

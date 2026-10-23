@@ -27,6 +27,7 @@ import _poolArchonOfRedemption from "../pool/archon-of-redemption.js";
 import _poolArdentElementalist from "../pool/ardent-elementalist.js";
 import _poolArgivianPhalanx from "../pool/argivian-phalanx.js";
 import _poolArlinnVoiceOfThePack from "../pool/arlinn-voice-of-the-pack.js";
+import _poolArmoredAscension from "../pool/armored-ascension.js";
 import _poolArniHumbleScribe from "../pool/arni-humble-scribe.js";
 import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
@@ -484,6 +485,7 @@ import _poolStolenGoodies from "../pool/stolen-goodies.js";
 import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
 import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
 import _poolStrafe from "../pool/strafe.js";
+import _poolStrategicPlanning from "../pool/strategic-planning.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
 import _poolStudy from "../pool/study.js";
 import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
@@ -620,6 +622,7 @@ const shard: CardShard = {
     _poolArdentElementalist,
     _poolArgivianPhalanx,
     _poolArlinnVoiceOfThePack,
+    _poolArmoredAscension,
     _poolArniHumbleScribe,
     _poolArtistsTalent,
     _poolAshcoatOfTheShadowSwarm,
@@ -1077,6 +1080,7 @@ const shard: CardShard = {
     _poolStormShakerOfSkies,
     _poolStormchasersTalent,
     _poolStrafe,
+    _poolStrategicPlanning,
     _poolStrikeItRich,
     _poolStudy,
     _poolSunsetSaboteur,

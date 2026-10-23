@@ -76,6 +76,7 @@ import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
+import _poolConfiscationCoup from "../pool/confiscation-coup.js";
 import _poolConiferWurm from "../pool/conifer-wurm.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
@@ -662,6 +663,7 @@ const shard: CardShard = {
     _poolCocoon,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
+    _poolConfiscationCoup,
     _poolConiferWurm,
     _poolContradict,
     _poolConverterBeast,

@@ -270,6 +270,7 @@ import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
 import _poolLabyrinthGuardian from "../pool/labyrinth-guardian.js";
 import _poolLanternOfRevealing from "../pool/lantern-of-revealing.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
+import _poolLavaclawReaches from "../pool/lavaclaw-reaches.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
 import _poolLeatherbackBaloth from "../pool/leatherback-baloth.js";
 import _poolLeatherheadIronGator from "../pool/leatherhead-iron-gator.js";
@@ -863,6 +864,7 @@ const shard: CardShard = {
     _poolLabyrinthGuardian,
     _poolLanternOfRevealing,
     _poolLathnuSailback,
+    _poolLavaclawReaches,
     _poolLeapingLizard,
     _poolLeatherbackBaloth,
     _poolLeatherheadIronGator,

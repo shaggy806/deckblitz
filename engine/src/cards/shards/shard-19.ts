@@ -168,6 +168,7 @@ import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
+import _poolEvangelOfHeliod from "../pool/evangel-of-heliod.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -454,6 +455,7 @@ import _poolScorchedRusalka from "../pool/scorched-rusalka.js";
 import _poolScreamPuff from "../pool/scream-puff.js";
 import _poolScreechingDrake from "../pool/screeching-drake.js";
 import _poolScuttlingDoomEngine from "../pool/scuttling-doom-engine.js";
+import _poolSeaGateOracle from "../pool/sea-gate-oracle.js";
 import _poolSearingBarb from "../pool/searing-barb.js";
 import _poolSecludedSteppe from "../pool/secluded-steppe.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
@@ -788,6 +790,7 @@ const shard: CardShard = {
     _poolEternalOfHarshTruths,
     _poolEusocialEngineering,
     _poolEutropiaTheTwiceFavored,
+    _poolEvangelOfHeliod,
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
@@ -1074,6 +1077,7 @@ const shard: CardShard = {
     _poolScreamPuff,
     _poolScreechingDrake,
     _poolScuttlingDoomEngine,
+    _poolSeaGateOracle,
     _poolSearingBarb,
     _poolSecludedSteppe,
     _poolSeekerOfSunlight,

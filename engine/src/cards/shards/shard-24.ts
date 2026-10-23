@@ -352,6 +352,7 @@ import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
+import _poolQuickling from "../pool/quickling.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
 import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
@@ -934,6 +935,7 @@ const shard: CardShard = {
     _poolPyrogoyf,
     _poolPyrrhicBlast,
     _poolQuarryBeetle,
+    _poolQuickling,
     _poolQuicksilverSpeedster,
     _poolQuicksmithGenius,
     _poolRaggedShortSpear,

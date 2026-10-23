@@ -159,6 +159,7 @@ import _poolDragonsguardElite from "../pool/dragonsguard-elite.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
+import _poolDreambornMuse from "../pool/dreamborn-muse.js";
 import _poolDruidsRepository from "../pool/druids-repository.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
@@ -266,6 +267,7 @@ import _poolHighwayRobbery from "../pool/highway-robbery.js";
 import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
 import _poolHollowTrees from "../pool/hollow-trees.js";
 import _poolHoneymoonHearse from "../pool/honeymoon-hearse.js";
+import _poolHonorOfThePure from "../pool/honor-of-the-pure.js";
 import _poolHonoredDreyleader from "../pool/honored-dreyleader.js";
 import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
 import _poolHorizonExplorer from "../pool/horizon-explorer.js";
@@ -777,6 +779,7 @@ const shard: CardShard = {
     _poolDragonspeakerShaman,
     _poolDreadReturn,
     _poolDreamSpoilers,
+    _poolDreambornMuse,
     _poolDruidsRepository,
     _poolDungeonDescent,
     _poolDunlandCrebain,
@@ -884,6 +887,7 @@ const shard: CardShard = {
     _poolHoldoutSettlement,
     _poolHollowTrees,
     _poolHoneymoonHearse,
+    _poolHonorOfThePure,
     _poolHonoredDreyleader,
     _poolHopelessNightmare,
     _poolHorizonExplorer,

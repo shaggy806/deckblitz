@@ -224,6 +224,7 @@ import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHapatrasMark from "../pool/hapatras-mark.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHasranOgress from "../pool/hasran-ogress.js";
+import _poolHatred from "../pool/hatred.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeartfireHero from "../pool/heartfire-hero.js";
@@ -437,6 +438,7 @@ import _poolShoreLurker from "../pool/shore-lurker.js";
 import _poolSidequestHuntTheMark from "../pool/sidequest-hunt-the-mark.js";
 import _poolSifterWurm from "../pool/sifter-wurm.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
+import _poolSilklashSpider from "../pool/silklash-spider.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
@@ -821,6 +823,7 @@ const shard: CardShard = {
     _poolHapatrasMark,
     _poolHashepOasis,
     _poolHasranOgress,
+    _poolHatred,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
     _poolHeartfireHero,
@@ -1034,6 +1037,7 @@ const shard: CardShard = {
     _poolSidequestHuntTheMark,
     _poolSifterWurm,
     _poolSigiledPaladin,
+    _poolSilklashSpider,
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,

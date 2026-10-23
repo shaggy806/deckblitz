@@ -500,6 +500,7 @@ import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
+import _poolTendoIceBridge from "../pool/tendo-ice-bridge.js";
 import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
 import _poolThallidDevourer from "../pool/thallid-devourer.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolTchallaTheBlackPanther,
     _poolTempestHarvester,
     _poolTemporalAdept,
+    _poolTendoIceBridge,
     _poolTerritorialAllosaurus,
     _poolThaliasGeistcaller,
     _poolThallidDevourer,

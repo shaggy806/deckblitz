@@ -305,6 +305,7 @@ import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
+import _poolMindOverMatter from "../pool/mind-over-matter.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMindstabThrull from "../pool/mindstab-thrull.js";
 import _poolMiracleWorker from "../pool/miracle-worker.js";
@@ -389,6 +390,7 @@ import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
+import _poolRiseFromTheTides from "../pool/rise-from-the-tides.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
 import _poolRoadOfReturn from "../pool/road-of-return.js";
@@ -491,6 +493,7 @@ import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan
 import _poolTheOneRing from "../pool/the-one-ring.js";
 import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
+import _poolTheloniteHermit from "../pool/thelonite-hermit.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _poolMichikosReignOfTruth,
     _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
+    _poolMindOverMatter,
     _poolMindspringMerfolk,
     _poolMindstabThrull,
     _poolMiracleWorker,
@@ -994,6 +998,7 @@ const shard: CardShard = {
     _poolResoluteRider,
     _poolRiftSower,
     _poolRipApart,
+    _poolRiseFromTheTides,
     _poolRiskyResearch,
     _poolRiverguardsReflexes,
     _poolRoadOfReturn,
@@ -1096,6 +1101,7 @@ const shard: CardShard = {
     _poolTheOneRing,
     _poolTheTenthDoctor,
     _poolTheWaspJanetVanDyne,
+    _poolTheloniteHermit,
     _poolThirstingRoots,
     _poolThistledownPlayers,
     _poolThornOfAmethyst,

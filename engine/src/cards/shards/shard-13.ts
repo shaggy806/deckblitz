@@ -159,6 +159,7 @@ import _poolElsha from "../pool/elsha.js";
 import _poolElvenPassage from "../pool/elven-passage.js";
 import _poolElvesOfDeepShadow from "../pool/elves-of-deep-shadow.js";
 import _poolElvishChampion from "../pool/elvish-champion.js";
+import _poolEmrakulsHatcher from "../pool/emrakuls-hatcher.js";
 import _poolEmryLurkerOfTheLoch from "../pool/emry-lurker-of-the-loch.js";
 import _poolEnslavedScout from "../pool/enslaved-scout.js";
 import _poolEpharasDispersal from "../pool/epharas-dispersal.js";
@@ -755,6 +756,7 @@ const shard: CardShard = {
     _poolElvenPassage,
     _poolElvesOfDeepShadow,
     _poolElvishChampion,
+    _poolEmrakulsHatcher,
     _poolEmryLurkerOfTheLoch,
     _poolEnslavedScout,
     _poolEpharasDispersal,

@@ -11,6 +11,7 @@ import _poolAethertideWhale from "../pool/aethertide-whale.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
+import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
@@ -222,6 +223,7 @@ import _poolGrowingRanks from "../pool/growing-ranks.js";
 import _poolGrowthCurve from "../pool/growth-curve.js";
 import _poolGruesomeDeformity from "../pool/gruesome-deformity.js";
 import _poolGruulTurf from "../pool/gruul-turf.js";
+import _poolGryffsBoon from "../pool/gryffs-boon.js";
 import _poolGutShot from "../pool/gut-shot.js";
 import _poolGutterbones from "../pool/gutterbones.js";
 import _poolHappyHoganDauntlessDriver from "../pool/happy-hogan-dauntless-driver.js";
@@ -352,6 +354,7 @@ import _poolOsseousExhale from "../pool/osseous-exhale.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
 import _poolOvergrowthElemental from "../pool/overgrowth-elemental.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
+import _poolPalinchron from "../pool/palinchron.js";
 import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
@@ -594,6 +597,7 @@ const shard: CardShard = {
     _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAlpineWatchdog,
+    _poolAmyRose,
     _poolAngelOfSanctions,
     _poolAnointedDeacon,
     _poolArachnogenesis,
@@ -805,6 +809,7 @@ const shard: CardShard = {
     _poolGrowthCurve,
     _poolGruesomeDeformity,
     _poolGruulTurf,
+    _poolGryffsBoon,
     _poolGutShot,
     _poolGutterbones,
     _poolHappyHoganDauntlessDriver,
@@ -935,6 +940,7 @@ const shard: CardShard = {
     _poolOvalchaseDragster,
     _poolOvergrowthElemental,
     _poolOverwriteTheMultiverse,
+    _poolPalinchron,
     _poolParadoxSurveyor,
     _poolParallelLives,
     _poolParapetThrasher,

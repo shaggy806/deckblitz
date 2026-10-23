@@ -186,6 +186,7 @@ import _poolGontiCannyAcquisitor from "../pool/gonti-canny-acquisitor.js";
 import _poolGorgonsHead from "../pool/gorgons-head.js";
 import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGravkill from "../pool/gravkill.js";
+import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
@@ -729,6 +730,7 @@ const shard: CardShard = {
     _poolGorgonsHead,
     _poolGraftedGrowth,
     _poolGravkill,
+    _poolGridMonitor,
     _poolGrimServant,
     _poolGrislySurvivor,
     _poolGuardianKirin,

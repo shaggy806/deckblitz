@@ -1,0 +1,424 @@
+{
+ "batch": "B143",
+ "status": "complete",
+ "ranks": "EDHREC ranks 7707–7947 (the next 60 untriaged by rank); Don't Move is in the delayed-trigger record (B144)",
+ "authored": [
+  {
+   "name": "Admonition Angel",
+   "files": [
+    "engine/src/cards/pool/admonition-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amy Rose",
+   "files": [
+    "engine/src/cards/pool/amy-rose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angel of Glory's Rise",
+   "files": [
+    "engine/src/cards/pool/angel-of-glorys-rise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodmark Mentor",
+   "files": [
+    "engine/src/cards/pool/bloodmark-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eladamri's Vineyard",
+   "files": [
+    "engine/src/cards/pool/eladamris-vineyard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Evangel of Heliod",
+   "files": [
+    "engine/src/cards/pool/evangel-of-heliod.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grid Monitor",
+   "files": [
+    "engine/src/cards/pool/grid-monitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Honor of the Pure",
+   "files": [
+    "engine/src/cards/pool/honor-of-the-pure.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Liliana, the Last Hope",
+   "files": [
+    "engine/src/cards/pool/liliana-the-last-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lorthos, the Tidemaker",
+   "files": [
+    "engine/src/cards/pool/lorthos-the-tidemaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Palinchron",
+   "files": [
+    "engine/src/cards/pool/palinchron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychotrope Thallid",
+   "files": [
+    "engine/src/cards/pool/psychotrope-thallid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silklash Spider",
+   "files": [
+    "engine/src/cards/pool/silklash-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strategic Planning",
+   "files": [
+    "engine/src/cards/pool/strategic-planning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tendo Ice Bridge",
+   "files": [
+    "engine/src/cards/pool/tendo-ice-bridge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Verdurous Gearhulk",
+   "files": [
+    "engine/src/cards/pool/verdurous-gearhulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vow of Lightning",
+   "files": [
+    "engine/src/cards/pool/vow-of-lightning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armored Ascension",
+   "files": [
+    "engine/src/cards/pool/armored-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collective Defiance",
+   "files": [
+    "engine/src/cards/pool/collective-defiance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confiscation Coup",
+   "files": [
+    "engine/src/cards/pool/confiscation-coup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamborn Muse",
+   "files": [
+    "engine/src/cards/pool/dreamborn-muse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emrakul's Hatcher",
+   "files": [
+    "engine/src/cards/pool/emrakuls-hatcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Green Goblin, Nemesis",
+   "files": [
+    "engine/src/cards/pool/green-goblin-nemesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gryff's Boon",
+   "files": [
+    "engine/src/cards/pool/gryffs-boon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hatred",
+   "files": [
+    "engine/src/cards/pool/hatred.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Indestructibility",
+   "files": [
+    "engine/src/cards/pool/indestructibility.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lavaclaw Reaches",
+   "files": [
+    "engine/src/cards/pool/lavaclaw-reaches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Over Matter",
+   "files": [
+    "engine/src/cards/pool/mind-over-matter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mizzium Skin",
+   "files": [
+    "engine/src/cards/pool/mizzium-skin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quickling",
+   "files": [
+    "engine/src/cards/pool/quickling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise from the Tides",
+   "files": [
+    "engine/src/cards/pool/rise-from-the-tides.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea Gate Oracle",
+   "files": [
+    "engine/src/cards/pool/sea-gate-oracle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thelonite Hermit",
+   "files": [
+    "engine/src/cards/pool/thelonite-hermit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timber Protector",
+   "files": [
+    "engine/src/cards/pool/timber-protector.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Hive Mind",
+   "needs": [
+    "effect:copy-spell-for-other-player"
+   ],
+   "why": "\"Each other player copies that spell\", in turn order: no player scope names everyone but the caster."
+  },
+  {
+   "name": "Godsend",
+   "needs": [
+    "filter:same-name-as-exiled-with-source"
+   ],
+   "why": "\"Your opponents can't cast spells with the same name as a card exiled with Godsend\", and the block trigger's \"exile one of those creatures\"."
+  },
+  {
+   "name": "Curse of Bloodletting",
+   "needs": [
+    "static:static-over-enchanted-player"
+   ],
+   "why": "Doubling damage to the enchanted player: `would-deal-damage`'s `to` has no enchanted-player form."
+  },
+  {
+   "name": "Quicksilver Elemental",
+   "needs": [
+    "effect:gain-activated-abilities-of-target"
+   ],
+   "why": "Gaining all activated abilities of target creature until end of turn, and spending blue mana as any colour for them."
+  },
+  {
+   "name": "Moldgraf Monstrosity",
+   "needs": [
+    "effect:return-random-cards-from-graveyard"
+   ],
+   "why": "Two creature cards at random from the graveyard: `choose-random-card` picks one."
+  },
+  {
+   "name": "Tectonic Split",
+   "needs": [
+    "cost:additional-cost-sacrifice-amount"
+   ],
+   "why": "Sacrificing half your lands, rounded up, as an additional cost."
+  },
+  {
+   "name": "Repay in Kind",
+   "needs": [
+    "effect:life-total-becomes"
+   ],
+   "why": "\"Each player's life total becomes the lowest life total among all players.\""
+  },
+  {
+   "name": "Spectral Searchlight",
+   "needs": [
+    "effect:other-player-adds-mana-choice"
+   ],
+   "why": "The chosen player adds one mana of the colour they choose."
+  },
+  {
+   "name": "Ohran Viper",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "\"Destroy that creature at end of combat\": the end-of-combat delayed trigger can't carry the damaged creature."
+  },
+  {
+   "name": "Dragonlord Kolaghan",
+   "needs": [
+    "filter:same-name-as-card-in-casters-graveyard"
+   ],
+   "why": "A spell with the same name as a card in its caster's graveyard."
+  },
+  {
+   "name": "Narset Transcendent",
+   "needs": [
+    "effect:grant-rebound-to-spell",
+    "effect:emblem-static-abilities"
+   ],
+   "why": "The −2's rebound for the next instant or sorcery, and the −9 emblem's static."
+  },
+  {
+   "name": "Wandering Fumarole",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "The granted \"{0}: Switch this creature's power and toughness until end of turn.\""
+  },
+  {
+   "name": "Contamination",
+   "needs": [
+    "replacement:land-mana-type-replacement"
+   ],
+   "why": "\"If a land is tapped for mana, it produces {B} instead of any other type and amount.\""
+  },
+  {
+   "name": "Kiora, the Crashing Wave",
+   "needs": [
+    "replacement:prevent-damage-by-and-to-permanent"
+   ],
+   "why": "The +1's \"until your next turn, prevent all damage that would be dealt to and dealt by target permanent\"."
+  },
+  {
+   "name": "Serra Avatar",
+   "needs": [
+    "static:cda-life-total"
+   ],
+   "why": "Power and toughness equal to your life total."
+  },
+  {
+   "name": "Locket of Yesterdays",
+   "needs": [
+    "cost:cost-reduction-same-name-in-graveyard"
+   ],
+   "why": "{1} less for each card in your graveyard with the spell's name."
+  },
+  {
+   "name": "Rolling Earthquake",
+   "needs": [
+    "keyword:horsemanship"
+   ],
+   "why": "\"Each creature without horsemanship\": horsemanship isn't a keyword the engine has, so the filter can't be said."
+  },
+  {
+   "name": "Sage of Hours",
+   "needs": [
+    "effect:remove-all-counters",
+    "effect:take-extra-turns-count"
+   ],
+   "why": "Removing all its +1/+1 counters as the cost, and an extra turn for each five."
+  },
+  {
+   "name": "Spelltwine",
+   "needs": [
+    "effect:cast-copies-of-exiled"
+   ],
+   "why": "\"Cast the copies if able\": a mandatory cast of two copies, in the player's order."
+  },
+  {
+   "name": "Ratchet, Field Medic // Ratchet, Rescue Racer",
+   "needs": [
+    "mechanic:more-than-meets-the-eye"
+   ],
+   "why": "More Than Meets the Eye, convert and living metal."
+  },
+  {
+   "name": "Stonehorn Dignitary",
+   "needs": [
+    "effect:skip-next-combat-phase"
+   ],
+   "why": "Target opponent skips their next combat phase."
+  },
+  {
+   "name": "Kheru Spellsnatcher",
+   "needs": [
+    "effect:cast-free-while-exiled"
+   ],
+   "why": "Casting the countered card free for as long as it remains exiled."
+  },
+  {
+   "name": "Aurelia's Fury",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "X damage divided, tapping each creature dealt damage, and \"can't cast noncreature spells this turn\" for each player dealt damage."
+  },
+  {
+   "name": "Boar Umbra",
+   "needs": [
+    "keyword:umbra-armor"
+   ],
+   "why": "Umbra armor isn't modelled."
+  },
+  {
+   "name": "Shattering Spree",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "Replicate isn't modelled."
+  }
+ ]
+}

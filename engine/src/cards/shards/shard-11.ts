@@ -56,6 +56,7 @@ import _poolBladeSplicer from "../pool/blade-splicer.js";
 import _poolBlaze from "../pool/blaze.js";
 import _poolBlitzballShot from "../pool/blitzball-shot.js";
 import _poolBloodVassal from "../pool/blood-vassal.js";
+import _poolBloodmarkMentor from "../pool/bloodmark-mentor.js";
 import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
 import _poolBonehoard from "../pool/bonehoard.js";
@@ -311,6 +312,7 @@ import _poolLlanowarVanguard from "../pool/llanowar-vanguard.js";
 import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolLootDispute from "../pool/loot-dispute.js";
 import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
+import _poolLorthosTheTidemaker from "../pool/lorthos-the-tidemaker.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManaMatrix from "../pool/mana-matrix.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
@@ -675,6 +677,7 @@ const shard: CardShard = {
     _poolBlaze,
     _poolBlitzballShot,
     _poolBloodVassal,
+    _poolBloodmarkMentor,
     _poolBloodsoakedReveler,
     _poolBlueSunsZenith,
     _poolBonehoard,
@@ -930,6 +933,7 @@ const shard: CardShard = {
     _poolLoamdraggerGiant,
     _poolLootDispute,
     _poolLootTheKeyToEverything,
+    _poolLorthosTheTidemaker,
     _poolManaCylix,
     _poolManaMatrix,
     _poolManifestationSage,

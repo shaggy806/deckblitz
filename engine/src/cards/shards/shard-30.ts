@@ -313,6 +313,7 @@ import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
+import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
@@ -906,6 +907,7 @@ const shard: CardShard = {
     _poolLavaglidePathway,
     _poolLeylineBinding,
     _poolLightOfHope,
+    _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
     _poolLitaLittleOrphanAmphibian,
     _poolLonelyArroyo,

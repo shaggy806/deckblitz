@@ -18,6 +18,7 @@ import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
 import _poolAnchorToReality from "../pool/anchor-to-reality.js";
+import _poolAngelOfGlorysRise from "../pool/angel-of-glorys-rise.js";
 import _poolAngelicAberration from "../pool/angelic-aberration.js";
 import _poolAppealAuthority from "../pool/appeal-authority.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
@@ -311,6 +312,7 @@ import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMiteOverseer from "../pool/mite-overseer.js";
+import _poolMizziumSkin from "../pool/mizzium-skin.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
@@ -368,6 +370,7 @@ import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
+import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
@@ -615,6 +618,7 @@ const shard: CardShard = {
     _poolAllosaurusShepherd,
     _poolAmbitiousAssault,
     _poolAnchorToReality,
+    _poolAngelOfGlorysRise,
     _poolAngelicAberration,
     _poolAppealAuthority,
     _poolApproachOfTheSecondSun,
@@ -908,6 +912,7 @@ const shard: CardShard = {
     _poolMisthiossFury,
     _poolMistvaultBridge,
     _poolMiteOverseer,
+    _poolMizziumSkin,
     _poolMomentsPeace,
     _poolMoongloveExtractor,
     _poolMorgueTheft,
@@ -965,6 +970,7 @@ const shard: CardShard = {
     _poolProsperousPartnership,
     _poolProudPackRhino,
     _poolPsychoticFury,
+    _poolPsychotropeThallid,
     _poolPunctureBlast,
     _poolQilinsBlessing,
     _poolQuaketuskBoar,

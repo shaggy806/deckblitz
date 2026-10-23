@@ -165,6 +165,7 @@ import _poolDuskmantleProwler from "../pool/duskmantle-prowler.js";
 import _poolEarthbenderAscension from "../pool/earthbender-ascension.js";
 import _poolEbonyTreefolk from "../pool/ebony-treefolk.js";
 import _poolEidolonOfInspiration from "../pool/eidolon-of-inspiration.js";
+import _poolEladamrisVineyard from "../pool/eladamris-vineyard.js";
 import _poolElderfangVenom from "../pool/elderfang-venom.js";
 import _poolElectrosBolt from "../pool/electros-bolt.js";
 import _poolEmberethShieldbreaker from "../pool/embereth-shieldbreaker.js";
@@ -560,6 +561,7 @@ import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
+import _poolTimberProtector from "../pool/timber-protector.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
 import _poolTiminYouthfulGeist from "../pool/timin-youthful-geist.js";
 import _poolTishanaVoiceOfThunder from "../pool/tishana-voice-of-thunder.js";
@@ -811,6 +813,7 @@ const shard: CardShard = {
     _poolEarthbenderAscension,
     _poolEbonyTreefolk,
     _poolEidolonOfInspiration,
+    _poolEladamrisVineyard,
     _poolElderfangVenom,
     _poolElectrosBolt,
     _poolEmberethShieldbreaker,
@@ -1206,6 +1209,7 @@ const shard: CardShard = {
     _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,
     _poolThrivingHeath,
+    _poolTimberProtector,
     _poolTimberwatchElf,
     _poolTiminYouthfulGeist,
     _poolTishanaVoiceOfThunder,
