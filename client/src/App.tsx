@@ -29,6 +29,7 @@ import {
   groupPowerExceeded,
   isOptionalSpec,
   publicNameAt,
+  rangeTargetCount,
   slotOptions,
   specsAtX,
   standardAssignment,
@@ -511,8 +512,11 @@ function currentSlotOptions(t: Targeting): readonly TargetRef[] {
   // Inside an "any number of" group, the fewest is Done's to check
   // (`mayFinishGroup`): another member never takes the count away from it.
   if (inTargetGroup(t)) {
-    return options.filter((ref) => distinctTargetCount([...t.picked, ref], range.copies) <= range.max)
+    return options.filter((ref) => rangeTargetCount([...t.picked, ref], range) <= range.max)
   }
+  // A range of an X group's members (`from` — Spinning Wheel Kick): the
+  // slots before the group are outside it.
+  if (range.from !== undefined) return options
   const later = t.specs.length - i - 1
   return options.filter((ref) => {
     const n = distinctTargetCount([...t.picked, ref], range.copies)
@@ -542,7 +546,7 @@ function mayFinishGroup(t: Pick<Targeting, 'specs' | 'picked' | 'targetCount'>):
   if (group < 0) return true
   if (t.picked.length - group < groupBounds(t.specs[group]).min) return false
   const range = t.targetCount
-  return range === undefined || distinctTargetCount(t.picked, range.copies) >= range.min
+  return range === undefined || rangeTargetCount(t.picked, range) >= range.min
 }
 
 /** The spec the next pick fills: the group's, once inside it. */
@@ -556,7 +560,7 @@ function currentSpec(t: Pick<Targeting, 'specs' | 'picked'>): TargetSpec | undef
  * with. */
 function maySkipSlot(t: Targeting): boolean {
   const range = t.targetCount
-  if (range === undefined) return true
+  if (range === undefined || range.from !== undefined) return true
   const later = t.specs.length - t.picked.length - 1
   return distinctTargetCount(t.picked, range.copies) + later >= range.min
 }

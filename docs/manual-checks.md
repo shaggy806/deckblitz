@@ -5256,3 +5256,9 @@ engine terms. A second thing to check is a second test.
 ### Reverse Engineer: improvise with artifacts
 - **Do:** Cast Reverse Engineer. When the bar asks, tap the three artifacts, then pay the rest.
 - **Expect:** The bar reads "improvise — tap up to 3 artifacts" and only the artifacts can be picked (not Grizzly Bears). With all three tapped, the two Islands pay {U}{U}, and you draw three cards.
+
+## X targets after another target (2026-10-23)
+
+### Spinning Wheel Kick: X counts only the creatures it hits
+- **Do:** Cast Spinning Wheel Kick with X=2. Pick your Hill Giant, then Bob's Grizzly Bears and Gray Ogre.
+- **Expect:** After the Hill Giant both of Bob's creatures can be picked, and Done waits for the second one. Hill Giant deals 3 damage to each, and both die.

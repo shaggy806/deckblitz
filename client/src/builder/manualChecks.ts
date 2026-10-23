@@ -8068,4 +8068,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Island*2', 'Darksteel Relic', 'Memnite', 'Ornithopter', 'Grizzly Bears'], hand: ['Reverse Engineer'] },
     }),
   ),
+  preset(
+    'Spinning Wheel Kick: X counts only the creatures it hits',
+    board({
+      you: { bf: ['Forest*6', 'Hill Giant'], hand: ['Spinning Wheel Kick'] },
+      opp: { bf: ['Grizzly Bears', 'Gray Ogre'] },
+    }),
+  ),
 ]
