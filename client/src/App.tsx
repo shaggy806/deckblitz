@@ -5827,8 +5827,11 @@ function Table({
           const faceOpts =
             mode === 'priority' ? (playFacesByCard.get(id) ?? []) : []
           // More than one way to play this card: a multi-face card's sides,
-          // or a kickable spell's kicked / unkicked casts (P8).
-          const multiFace = faceOpts.length > 1
+          // or a kickable spell's kicked / unkicked casts (P8). An emerge
+          // cast sacrifices a creature, so even alone it's a button that
+          // names it — never a click on the card that sacrifices silently.
+          const multiFace =
+            faceOpts.length > 1 || faceOpts.some((a) => a.kind === 'cast-spell' && a.emergeSacrifice !== undefined)
           return (
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
