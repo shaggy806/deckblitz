@@ -151,9 +151,15 @@ section keeps only what to do next.
   146 the rest of Commander 2016 and Kaladesh, no engine change; batch 147 Conspiracy: Take the
   Crown and Eldritch Moon, on emerge and "as long as it's monstrous"; batch 148 Shadows over
   Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object);
-  **next, Oath of the Gatewatch** (95 left), then Commander 2015 (21 left). The leader now:
-  "if that creature would die this turn, exile it instead" (`replacement:target-exile-if-dies-this-turn`
-  — Reduce to Ashes, Burn from Within; 30 cards). Batch 147's leading blockers:
+  **next, Oath of the Gatewatch** (95 left), then Commander 2015 (21 left) — 116 cards, one
+  batch. Researched for it (2026-10-23), build first: "if that creature would die this turn,
+  exile it instead" (`replacement:target-exile-if-dies-this-turn` — Lava Coil, Scorching
+  Dragonfire, Obliterating Bolt, Reduce to Ashes; 30 cards), a per-object flag beside
+  `GameObject.exileIfItWouldLeave` read in `moveObject` for a battlefield→graveyard move that
+  turn and cleared by any zone change; and **surge** (rule 702.117 — 11 of Oath's cards), an
+  `alternativeCost` keyword as spectacle is (`helpers.ts`'s `spectacle()`, `spectaclePaid`,
+  `self-spectacle-paid`, the parser's spectacle template) with `{ kind: "cast-this-turn", who:
+  "you", atLeast: 1 }` as its condition. Support (6) and cohort (2) look expressible already. Batch 147's leading blockers:
   meld (`mechanic:meld`, 15 cards now), the Conspiracy draft's own abilities
   (`mechanic:draft-matters`, 15 — kept blocked, even the two whose draft text leaves a vanilla
   body), the secret-discard gap (`effect:hidden-simultaneous-choices`, 14) and "can block an
