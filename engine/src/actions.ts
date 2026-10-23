@@ -981,7 +981,10 @@ export type LegalAction =
        * up to its size, `copies`) from `min` to `max`; a driver has to choose
        * targets inside that range (`fitTargetCount`), or the cast is
        * refused. The range is what X=0 affords; with an `{X}`, see
-       * `xCost.maxXByTargetCount`. */
+       * `xCost.maxXByTargetCount`. A group tied to X (Curse of the Swine)
+       * sets it too, as its number of members: after another slot
+       * (Spinning Wheel Kick) it counts from the group's (`from`), so read
+       * it through `rangeTargetCount`. */
       readonly targetCount?: TargetCountRange;
       /** Present when this is an alternative-permission cast (not from the hand
        * for the printed cost — `"flashback"` / `"escape"` from the graveyard,

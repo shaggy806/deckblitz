@@ -5368,3 +5368,8 @@ engine terms. A second thing to check is a second test.
 ### Dromoka's Gift: bolster asks only between the creatures tied for least toughness
 - **Do:** Cast Dromoka's Gift.
 - **Expect:** You're asked to choose one of your two Grizzly Bears — Craw Wurm can't be picked. The one you choose gets four +1/+1 counters.
+## X targets after another target (2026-10-23)
+
+### Spinning Wheel Kick: X counts only the creatures it hits
+- **Do:** Cast Spinning Wheel Kick with X=2. Pick your Hill Giant, then Bob's Grizzly Bears and Gray Ogre.
+- **Expect:** After the Hill Giant both of Bob's creatures can be picked, and Done waits for the second one. Hill Giant deals 3 damage to each, and both die.
