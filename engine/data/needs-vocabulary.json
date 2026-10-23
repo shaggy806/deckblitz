@@ -3598,6 +3598,9 @@
   "keyword:spectacle": {
    "example": "Light Up the Stage: Spectacle — an alternative cost usable only if an opponent lost life this turn."
   },
+  "keyword:surge": {
+   "example": "Crush of Tentacles: Surge {3}{U}{U} (cast for it if you've cast another spell this turn), and 'if this spell's surge cost was paid'."
+  },
   "keyword:splice": {
    "example": "Desperate Ritual: Splice onto Arcane."
   },

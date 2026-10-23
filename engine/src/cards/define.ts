@@ -1118,6 +1118,10 @@ export type StaticCondition =
    * 702.137)? — Rafter Demon's "When this creature enters, **if its
    * spectacle cost was paid**, …"; read like `self-kicked`. */
   | { readonly kind: "self-spectacle-paid" }
+  /** Was the ability's own source cast for its surge cost (rule 702.117a)?
+   * "If its surge cost was paid" (Reckless Bushwhacker, Crush of Tentacles);
+   * read like `self-spectacle-paid`. */
+  | { readonly kind: "self-surge-paid" }
   /**
    * How many counters the ability's own source has — Undying's "**if it had
    * no +1/+1 counters on it**".
@@ -2572,11 +2576,13 @@ export interface CardDefinition {
    * `keyword: "spectacle"` is **Spectacle [cost]** (rule 702.137a — Skewer
    * the Critics): `{ mana, keyword: "spectacle", condition: SPECTACLE }`,
    * the condition "an opponent lost life this turn"; a spell cast this way
-   * answers `self-spectacle-paid`.
+   * answers `self-spectacle-paid`. `keyword: "surge"` is **Surge [cost]**
+   * (rule 702.117a — Crush of Tentacles): `surge(mana)`, the condition "you
+   * have cast another spell this turn"; it answers `self-surge-paid`.
    */
   readonly alternativeCost: {
     readonly mana: string;
-    readonly keyword?: "spectacle";
+    readonly keyword?: "spectacle" | "surge";
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;

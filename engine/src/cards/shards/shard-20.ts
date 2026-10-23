@@ -107,6 +107,7 @@ import _poolCoilAndCatch from "../pool/coil-and-catch.js";
 import _poolCoiledTinviper from "../pool/coiled-tinviper.js";
 import _poolColosYearling from "../pool/colos-yearling.js";
 import _poolColossalBadger from "../pool/colossal-badger.js";
+import _poolComparativeAnalysis from "../pool/comparative-analysis.js";
 import _poolConcertedDefense from "../pool/concerted-defense.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
@@ -601,6 +602,7 @@ import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
 import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
+import _poolTyrantOfValakut from "../pool/tyrant-of-valakut.js";
 import _poolUncageTheMenagerie from "../pool/uncage-the-menagerie.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUnstableMutation from "../pool/unstable-mutation.js";
@@ -771,6 +773,7 @@ const shard: CardShard = {
     _poolCoiledTinviper,
     _poolColosYearling,
     _poolColossalBadger,
+    _poolComparativeAnalysis,
     _poolConcertedDefense,
     _poolConsulateDreadnought,
     _poolContagionClasp,
@@ -1265,6 +1268,7 @@ const shard: CardShard = {
     _poolTwiddle,
     _poolTwinbladePaladin,
     _poolTwistedFealty,
+    _poolTyrantOfValakut,
     _poolUncageTheMenagerie,
     _poolUndeadAugur,
     _poolUnstableMutation,

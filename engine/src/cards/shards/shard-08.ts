@@ -16,6 +16,7 @@ import _poolAerialBoost from "../pool/aerial-boost.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAetherChaser from "../pool/aether-chaser.js";
 import _poolAetherbornMarauder from "../pool/aetherborn-marauder.js";
+import _poolAgateAssault from "../pool/agate-assault.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
@@ -163,6 +164,7 @@ import _poolElendasHierophant from "../pool/elendas-hierophant.js";
 import _poolElephantAmbush from "../pool/elephant-ambush.js";
 import _poolElfswornGiant from "../pool/elfsworn-giant.js";
 import _poolElixirOfImmortality from "../pool/elixir-of-immortality.js";
+import _poolElspethsSmite from "../pool/elspeths-smite.js";
 import _poolElvenkingsHalls from "../pool/elvenkings-halls.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
 import _poolEmberethSkyblazer from "../pool/embereth-skyblazer.js";
@@ -415,6 +417,7 @@ import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
+import _poolReduceToAshes from "../pool/reduce-to-ashes.js";
 import _poolRefocus from "../pool/refocus.js";
 import _poolRefuteDestiny from "../pool/refute-destiny.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
@@ -657,6 +660,7 @@ const shard: CardShard = {
     _poolAetherAdept,
     _poolAetherChaser,
     _poolAetherbornMarauder,
+    _poolAgateAssault,
     _poolAgentOfShauku,
     _poolAggravatedAssault,
     _poolAidTheFallen,
@@ -804,6 +808,7 @@ const shard: CardShard = {
     _poolElephantAmbush,
     _poolElfswornGiant,
     _poolElixirOfImmortality,
+    _poolElspethsSmite,
     _poolElvenkingsHalls,
     _poolElvishVanguard,
     _poolEmberethSkyblazer,
@@ -1056,6 +1061,7 @@ const shard: CardShard = {
     _poolRealmScorcherHellkite,
     _poolReapersScythe,
     _poolReaverAmbush,
+    _poolReduceToAshes,
     _poolRefocus,
     _poolRefuteDestiny,
     _poolRemoveSoul,

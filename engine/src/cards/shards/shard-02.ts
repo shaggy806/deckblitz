@@ -183,6 +183,7 @@ import _poolExplosiveGetaway from "../pool/explosive-getaway.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
 import _poolFangDruidSummoner from "../pool/fang-druid-summoner.js";
+import _poolFangedFlames from "../pool/fanged-flames.js";
 import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
@@ -191,6 +192,7 @@ import _poolFelineSovereign from "../pool/feline-sovereign.js";
 import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
+import _poolFlameBlessedBolt from "../pool/flame-blessed-bolt.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
 import _poolFly from "../pool/fly.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
@@ -771,6 +773,7 @@ const shard: CardShard = {
     _poolFaerieGuidemother,
     _poolFaithfulMending,
     _poolFangDruidSummoner,
+    _poolFangedFlames,
     _poolFangkeepersFamiliar,
     _poolFarfinder,
     _poolFearOfBurningAlive,
@@ -779,6 +782,7 @@ const shard: CardShard = {
     _poolFinchFormation,
     _poolFirebendingLesson,
     _poolFistsOfFlame,
+    _poolFlameBlessedBolt,
     _poolFlamingSword,
     _poolFly,
     _poolForbiddenLore,

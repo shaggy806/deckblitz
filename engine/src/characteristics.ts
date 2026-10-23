@@ -876,6 +876,12 @@ function evalStaticCondition(
         source.spectaclePaid === true ||
         opts.sourceLastKnown?.enteredSpectacle === true
       );
+    case "self-surge-paid":
+      return (
+        source.enteredSurge === true ||
+        source.surgePaid === true ||
+        opts.sourceLastKnown?.enteredSurge === true
+      );
     case "self-kicked":
       // On the battlefield it's `enteredKicked` (the stack flag is cleared by
       // the move that put the permanent here); `kicked` still answers for a

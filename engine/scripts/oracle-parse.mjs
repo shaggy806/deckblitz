@@ -45,6 +45,7 @@ import {
   persist,
   saddle,
   spectacle,
+  surge,
   undying,
   unearth,
   vanishing,
@@ -156,6 +157,8 @@ function keywordPart(part) {
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
   // Spectacle [cost] (rule 702.137a): an alternative cost.
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
+  // Surge [cost] (rule 702.117a): an alternative cost.
+  if ((m = new RegExp(`^surge ${COST}$`, "i").exec(p))) return { card: { alternativeCost: surge(m[1]) } };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
@@ -1773,6 +1776,14 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: out });
       continue;
     }
+    // "If that creature would die this turn, exile it instead." after the one
+    // sentence that targeted (Lava Coil — rule 614.1a): that target.
+    if (/^if that (?:creature|planeswalker|creature or planeswalker) would die this turn, exile it instead\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const instead = { kind: "exile-if-dies-this-turn", target: 0 };
+      parsed.push(instead);
+      hints.push({ sentence, effect: instead });
+      continue;
+    }
     const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
     if (lossM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(lossM[1]) === "number") {
       const loss = { kind: "lose-life", amount: numberOf(lossM[1]), toControllerOfTarget: 0 };
@@ -2517,6 +2528,9 @@ const INTERVENING_IFS = {
   // Rule 702.137a: the permanent's spell was cast for its spectacle cost.
   "if its spectacle cost was paid,": { kind: "self-spectacle-paid" },
   "if ~'s spectacle cost was paid,": { kind: "self-spectacle-paid" },
+  // Rule 702.117a: the permanent's spell was cast for its surge cost.
+  "if its surge cost was paid,": { kind: "self-surge-paid" },
+  "if ~'s surge cost was paid,": { kind: "self-surge-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },

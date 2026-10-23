@@ -316,6 +316,7 @@ import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLatticeBladeMantis from "../pool/lattice-blade-mantis.js";
 import _poolLaunchMishap from "../pool/launch-mishap.js";
 import _poolLaunchParty from "../pool/launch-party.js";
+import _poolLavaCoil from "../pool/lava-coil.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolLatticeBladeMantis,
     _poolLaunchMishap,
     _poolLaunchParty,
+    _poolLavaCoil,
     _poolLavaglidePathway,
     _poolLeylineBinding,
     _poolLightOfHope,

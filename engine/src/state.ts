@@ -125,6 +125,10 @@ export interface GameObject {
    * kept across the move the way `enteredKicked` is — Rafter Demon's "if its
    * spectacle cost was paid". */
   enteredSpectacle?: boolean;
+  /** This permanent's spell was cast for its surge cost (rule 702.117),
+   * kept across the move as `enteredSpectacle` is — Reckless Bushwhacker's
+   * "if its surge cost was paid". */
+  enteredSurge?: boolean;
   /** How many times its spell was kicked, for a multikicker spell (rule
    * 702.33c) — `timesKicked` carried across the stack-to-battlefield move
    * the way `enteredKicked` is, for "enters with a charge counter on it for
@@ -791,6 +795,10 @@ export interface GameObject {
    * `alternativeCost` with `keyword: "spectacle"`), for "if its spectacle
    * cost was paid" (`self-spectacle-paid`). A copy has it too (707.10). */
   spectaclePaid?: boolean;
+  /** This spell was cast for its surge cost (rule 702.117 — the
+   * `alternativeCost` with `keyword: "surge"`), for "if its surge cost was
+   * paid" (`self-surge-paid`). A copy has it too (707.10). */
+  surgePaid?: boolean;
   /** This spell was cast for its overload cost (rule 702.126 — Cyclonic
    * Rift): its overload cost was paid instead of its mana cost, with no
    * targets, so `resolveTopOfStack` applies `CardDefinition.overload.effect`.
@@ -832,6 +840,13 @@ export interface GameObject {
    * cleared by that same move — the card that lands in exile is a new object
    * the replacement no longer applies to (rule 400.7). */
   exileIfItWouldLeave?: boolean;
+  /** "If that creature would die this turn, exile it instead" (Lava Coil —
+   * rule 614.1a): the turn number it was said on. `moveObject` exiles the
+   * permanent instead of putting it into a graveyard from the battlefield
+   * while `state.turn.number` still equals it — "this turn" ends with the
+   * turn, so no sweep clears it — and any zone change clears it (rule
+   * 400.7). */
+  exileIfDiesTurn?: number;
   /** True on a token copy created "except it's not legendary" (Miirym — rule
    * 707 / needed-cards P5b). The legend-rule SBA skips it. Intrinsic, like
    * `isToken` — never reset. */
@@ -1178,6 +1193,7 @@ export interface SpellSnapshot {
   readonly overloaded?: boolean;
   readonly evokePaid?: boolean;
   readonly spectaclePaid?: boolean;
+  readonly surgePaid?: boolean;
   readonly offspringGrantPaid?: boolean;
   /** Who its gift was promised to — a copy's is promised to them too. */
   readonly giftTo?: PlayerId;
@@ -1484,6 +1500,8 @@ export interface LastKnownInfo {
   readonly enteredKicked?: boolean;
   /** Its spell was cast for its spectacle cost — `enteredSpectacle`. */
   readonly enteredSpectacle?: boolean;
+  /** Its spell was cast for its surge cost — `enteredSurge`. */
+  readonly enteredSurge?: boolean;
   /** How many times its spell's multikicker or squad cost was paid —
    * `enteredTimesKicked`, so squad's copies are still made once it has left
    * (rule 702.157a). */

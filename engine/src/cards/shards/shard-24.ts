@@ -111,6 +111,7 @@ import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
+import _poolContainmentMembrane from "../pool/containment-membrane.js";
 import _poolConvolute from "../pool/convolute.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
@@ -326,6 +327,7 @@ import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMycoloth from "../pool/mycoloth.js";
 import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
+import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
@@ -333,6 +335,7 @@ import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
 import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
+import _poolObliteratingBolt from "../pool/obliterating-bolt.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
@@ -361,6 +364,7 @@ import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
+import _poolPuncturingBlow from "../pool/puncturing-blow.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
@@ -711,6 +715,7 @@ const shard: CardShard = {
     _poolCommanderSofiaDaguerre,
     _poolConfidenceFromStrength,
     _poolConjurersMantle,
+    _poolContainmentMembrane,
     _poolConvolute,
     _poolCoralEel,
     _poolCracklingCyclops,
@@ -926,6 +931,7 @@ const shard: CardShard = {
     _poolMurkfiendLiege,
     _poolMycoloth,
     _poolMyrGalvanizer,
+    _poolNarsetsRebuke,
     _poolNarstadScrapper,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
@@ -933,6 +939,7 @@ const shard: CardShard = {
     _poolNovaFlame,
     _poolNurturingPresence,
     _poolOakhameAdversary,
+    _poolObliteratingBolt,
     _poolObscuraStorefront,
     _poolOgreSlumlord,
     _poolOgreWarrior,
@@ -961,6 +968,7 @@ const shard: CardShard = {
     _poolPrologueToPhyresis,
     _poolProwlingFelidar,
     _poolPullFromTheGrave,
+    _poolPuncturingBlow,
     _poolPurifyTheGrave,
     _poolPyrogoyf,
     _poolPyrrhicBlast,

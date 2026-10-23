@@ -176,6 +176,7 @@ import _poolFantasticBounce from "../pool/fantastic-bounce.js";
 import _poolFarseek from "../pool/farseek.js";
 import _poolFarsightRitual from "../pool/farsight-ritual.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
+import _poolFeedTheFlames from "../pool/feed-the-flames.js";
 import _poolFelidarSavior from "../pool/felidar-savior.js";
 import _poolFellStinger from "../pool/fell-stinger.js";
 import _poolFieryEncore from "../pool/fiery-encore.js";
@@ -256,6 +257,7 @@ import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleCreeper from "../pool/jungle-creeper.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
+import _poolJwarIsleAvenger from "../pool/jwar-isle-avenger.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
 import _poolKarametraGodOfHarvests from "../pool/karametra-god-of-harvests.js";
@@ -341,6 +343,7 @@ import _poolNomadOutpost from "../pool/nomad-outpost.js";
 import _poolNowForWrathNowForRuin from "../pool/now-for-wrath-now-for-ruin.js";
 import _poolNukaColaVendingMachine from "../pool/nuka-cola-vending-machine.js";
 import _poolNyxbornCourser from "../pool/nyxborn-courser.js";
+import _poolObNixilissCruelty from "../pool/ob-nixiliss-cruelty.js";
 import _poolObeliskOfUrd from "../pool/obelisk-of-urd.js";
 import _poolObzedatsAid from "../pool/obzedats-aid.js";
 import _poolOculus from "../pool/oculus.js";
@@ -367,6 +370,7 @@ import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
+import _poolPineconeStrike from "../pool/pinecone-strike.js";
 import _poolPiruTheVolatile from "../pool/piru-the-volatile.js";
 import _poolPlatedWurm from "../pool/plated-wurm.js";
 import _poolPlumeveil from "../pool/plumeveil.js";
@@ -793,6 +797,7 @@ const shard: CardShard = {
     _poolFarseek,
     _poolFarsightRitual,
     _poolFearOfImpostors,
+    _poolFeedTheFlames,
     _poolFelidarSavior,
     _poolFellStinger,
     _poolFieryEncore,
@@ -873,6 +878,7 @@ const shard: CardShard = {
     _poolJukaiNaturalist,
     _poolJungleCreeper,
     _poolJungleDelver,
+    _poolJwarIsleAvenger,
     _poolK9MarkI,
     _poolKaervekTheMerciless,
     _poolKarametraGodOfHarvests,
@@ -958,6 +964,7 @@ const shard: CardShard = {
     _poolNowForWrathNowForRuin,
     _poolNukaColaVendingMachine,
     _poolNyxbornCourser,
+    _poolObNixilissCruelty,
     _poolObeliskOfUrd,
     _poolObzedatsAid,
     _poolOculus,
@@ -984,6 +991,7 @@ const shard: CardShard = {
     _poolPhyrexianAtlas,
     _poolPillarOfLight,
     _poolPillarfieldOx,
+    _poolPineconeStrike,
     _poolPiruTheVolatile,
     _poolPlatedWurm,
     _poolPlumeveil,

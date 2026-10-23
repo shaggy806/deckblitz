@@ -373,6 +373,8 @@
   "keyword:evoke-alternative-non-mana-cost",
   "keyword:entwine",
   "keyword:spectacle",
+  "keyword:surge",
+  "replacement:target-exile-if-dies-this-turn",
   "keyword:jump-start",
   "keyword:ascend",
   "replacement:prevent-damage-from-chosen-source",

@@ -12415,6 +12415,7 @@ export class Game {
     if (offspring) object.offspringGrantPaid = true;
     if (evoke !== null) object.evokePaid = true;
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
+    if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
     if (overload) object.overloaded = true;
     this.executePayment(player, payment);
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
@@ -22154,6 +22155,13 @@ export class Game {
         if (counter === undefined) return Object.values(counters).reduce((n, k) => n + k, 0);
         return counters[counter] ?? 0;
       },
+      exileIfDiesThisTurn: (target) => {
+        if (target.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        if (object === undefined || object.zone !== "battlefield") return;
+        object.exileIfDiesTurn = this.state.turn.number;
+      },
       putOnBottomOfLibrary: (target) => {
         if (target.kind !== "object") return;
         const id = this.splitOneFromStack(target.object);
@@ -25640,6 +25648,7 @@ export class Game {
       ...(object.overloaded === true ? { overloaded: true } : {}),
       ...(object.evokePaid === true ? { evokePaid: true } : {}),
       ...(object.spectaclePaid === true ? { spectaclePaid: true } : {}),
+      ...(object.surgePaid === true ? { surgePaid: true } : {}),
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
@@ -25706,6 +25715,7 @@ export class Game {
       ...(spell.overloaded === true ? { overloaded: true } : {}),
       ...(spell.evokePaid === true ? { evokePaid: true } : {}),
       ...(spell.spectaclePaid === true ? { spectaclePaid: true } : {}),
+      ...(spell.surgePaid === true ? { surgePaid: true } : {}),
       ...(spell.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       // "If you copy a spell for which the gift was promised, the gift was
       // also promised to the same opponent for the copy" (the ruling).
@@ -34569,6 +34579,7 @@ export class Game {
       tapped: object.tapped,
       ...(object.enteredKicked === true ? { enteredKicked: true } : {}),
       ...(object.enteredSpectacle === true ? { enteredSpectacle: true } : {}),
+      ...(object.enteredSurge === true ? { enteredSurge: true } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
@@ -34947,7 +34958,15 @@ export class Game {
     let exileCounters: { readonly kind: string; readonly amount: number } | undefined;
     const exilesItself = to === "graveyard" && this.exilesItselfInstead(object);
     if (to === "graveyard") {
-      const finality = leavingBattlefield && (object.counters["finality"] ?? 0) > 0;
+      // "If that creature would die this turn, exile it instead" (Lava Coil)
+      // is the same shape: a battlefield-to-graveyard move only, while the
+      // turn it was said on lasts and the permanent is still a creature or
+      // planeswalker — what dying is (rule 700.4).
+      const finality =
+        leavingBattlefield &&
+        ((object.counters["finality"] ?? 0) > 0 ||
+          (object.exileIfDiesTurn === this.state.turn.number &&
+            effectiveTypes(this.state, this.registry, object).some((t) => t === "creature" || t === "planeswalker")));
       const replaced = this.graveyardExileReplacements(id, leavingBattlefield);
       if (finality || replaced.length > 0) {
         to = "exile";
@@ -35105,6 +35124,7 @@ export class Game {
     // flag on the *next* move, so a Verix that dies and returns is unkicked.
     const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
     const enteringSpectacle = object.zone === "stack" && to === "battlefield" && object.spectaclePaid === true;
+    const enteringSurge = object.zone === "stack" && to === "battlefield" && object.surgePaid === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
@@ -35389,6 +35409,7 @@ export class Game {
     object.giftTo = undefined;
     object.evokePaid = undefined;
     object.spectaclePaid = undefined;
+    object.surgePaid = undefined;
     // "That spell can't be countered" was about this casting, so it ends when
     // the spell leaves the stack (Cavern of Souls). So does what the casting
     // sacrificed ("the sacrificed creature" — see `LastKnownRefs`).
@@ -35396,6 +35417,7 @@ export class Game {
     object.lastKnownRefs = undefined;
     object.enteredKicked = enteringKicked;
     object.enteredSpectacle = enteringSpectacle;
+    object.enteredSurge = enteringSurge;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
@@ -35433,6 +35455,7 @@ export class Game {
     // Its "exile it if it would leave" replacement was about the permanent
     // that just left (rule 400.7).
     object.exileIfItWouldLeave = undefined;
+    object.exileIfDiesTurn = undefined;
     // So was having transformed (rule 701.28f) — and entering transformed
     // isn't transforming.
     object.transformedAtSeq = undefined;

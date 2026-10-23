@@ -1218,6 +1218,29 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("surge (rule 702.117a) and 'if that creature would die this turn, exile it instead' (rule 614.1a)", () => {
+    const tyrant = face("Surge {3}{R}{R}\nFlying\nWhen ~ enters, if its surge cost was paid, it deals 3 damage to any target.", "Creature — Dragon");
+    expect(tyrant.alternativeCost).toEqual({
+      mana: "{3}{R}{R}",
+      keyword: "surge",
+      condition: { kind: "cast-this-turn", who: "you", atLeast: 1 },
+    });
+    expect(tyrant.triggered[0].condition).toEqual({ kind: "self-surge-paid" });
+    const bolt = face(
+      "~ deals 4 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.",
+      "Instant",
+    );
+    expect(bolt.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 4, target: 0 },
+        { kind: "exile-if-dies-this-turn", target: 0 },
+      ],
+    });
+    // Not after a sentence with no target of its own to point at.
+    expect(face("If that creature would die this turn, exile it instead.", "Instant").complete).toBe(false);
+  });
+
   it("ascend and the city's blessing (rule 702.131)", () => {
     const reminder = "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)";
     const charger = face(`${reminder}\n~ gets +2/+2 as long as you have the city's blessing.`, "Creature — Horse");

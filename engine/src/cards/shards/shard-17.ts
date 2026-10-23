@@ -64,6 +64,7 @@ import _poolBoggartBog from "../pool/boggart-bog.js";
 import _poolBondedFetch from "../pool/bonded-fetch.js";
 import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
+import _poolBotBashingTime from "../pool/bot-bashing-time.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
 import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
@@ -676,6 +677,7 @@ const shard: CardShard = {
     _poolBondedFetch,
     _poolBondedHerdbeast,
     _poolBorosCharm,
+    _poolBotBashingTime,
     _poolBroodguardElite,
     _poolBuddingInsurgent,
     _poolBuriedInTheGarden,

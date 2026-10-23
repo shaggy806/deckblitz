@@ -392,6 +392,7 @@ import _poolOscorpIndustries from "../pool/oscorp-industries.js";
 import _poolOswaldFiddlebender from "../pool/oswald-fiddlebender.js";
 import _poolOutlawMedic from "../pool/outlaw-medic.js";
 import _poolOverlordOfTheMistmoors from "../pool/overlord-of-the-mistmoors.js";
+import _poolOverwhelmingDenial from "../pool/overwhelming-denial.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _poolOswaldFiddlebender,
     _poolOutlawMedic,
     _poolOverlordOfTheMistmoors,
+    _poolOverwhelmingDenial,
     _poolOwlbear,
     _poolPackRat,
     _poolPaleRiderOfTrostad,

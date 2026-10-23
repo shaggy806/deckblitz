@@ -72,6 +72,7 @@ import _poolBookwurm from "../pool/bookwurm.js";
 import _poolBootNipper from "../pool/boot-nipper.js";
 import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
 import _poolBorrowedGrace from "../pool/borrowed-grace.js";
+import _poolBoulderSalvo from "../pool/boulder-salvo.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
@@ -704,6 +705,7 @@ const shard: CardShard = {
     _poolBootNipper,
     _poolBorosSwiftblade,
     _poolBorrowedGrace,
+    _poolBoulderSalvo,
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,

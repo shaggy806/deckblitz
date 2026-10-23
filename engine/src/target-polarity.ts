@@ -185,6 +185,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "become-prepared": (n, v) => v.touch(n.target, "help", MINOR),
   destroy: (n, v) => v.touch(n.target, "harm", DECISIVE),
   "put-on-bottom-of-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
+  "exile-if-dies-this-turn": (n, v) => v.touch(n.target, "harm", MINOR),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   // "… target player controls": that player is the one hurt.
   "destroy-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),

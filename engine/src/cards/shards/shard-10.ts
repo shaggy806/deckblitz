@@ -57,6 +57,7 @@ import _poolBiotechSpecialist from "../pool/biotech-specialist.js";
 import _poolBirdAdmirer from "../pool/bird-admirer.js";
 import _poolBladebrand from "../pool/bladebrand.js";
 import _poolBlasphemousAct from "../pool/blasphemous-act.js";
+import _poolBleedDry from "../pool/bleed-dry.js";
 import _poolBlightbellyRat from "../pool/blightbelly-rat.js";
 import _poolBlisteringFirecat from "../pool/blistering-firecat.js";
 import _poolBlizzardElemental from "../pool/blizzard-elemental.js";
@@ -220,6 +221,7 @@ import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
+import _poolGoblinFreerunner from "../pool/goblin-freerunner.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinMorningstar from "../pool/goblin-morningstar.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
@@ -448,6 +450,7 @@ import _poolSanguineBond from "../pool/sanguine-bond.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
 import _poolScavengerDrake from "../pool/scavenger-drake.js";
+import _poolScorchingDragonfire from "../pool/scorching-dragonfire.js";
 import _poolScrapshooter from "../pool/scrapshooter.js";
 import _poolScrapworkRager from "../pool/scrapwork-rager.js";
 import _poolScuttlegator from "../pool/scuttlegator.js";
@@ -699,6 +702,7 @@ const shard: CardShard = {
     _poolBirdAdmirer,
     _poolBladebrand,
     _poolBlasphemousAct,
+    _poolBleedDry,
     _poolBlightbellyRat,
     _poolBlisteringFirecat,
     _poolBlizzardElemental,
@@ -862,6 +866,7 @@ const shard: CardShard = {
     _poolGlassCasket,
     _poolGlittermonger,
     _poolGloryBoundInitiate,
+    _poolGoblinFreerunner,
     _poolGoblinHero,
     _poolGoblinMorningstar,
     _poolGoblinReplica,
@@ -1090,6 +1095,7 @@ const shard: CardShard = {
     _poolSarkhansDragonfire,
     _poolSavageVentmaw,
     _poolScavengerDrake,
+    _poolScorchingDragonfire,
     _poolScrapshooter,
     _poolScrapworkRager,
     _poolScuttlegator,

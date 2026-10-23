@@ -492,6 +492,21 @@ export const spectacle = (mana: string): NonNullable<CardDefinition["alternative
 });
 
 /**
+ * Surge [cost] (rule 702.117a): "You may cast this spell for its surge cost
+ * if you or a teammate has cast another spell this turn" — the card's
+ * `alternativeCost`. The condition is read as the spell is proposed (rule
+ * 601.2b), before this spell counts as cast, so one spell cast this turn is
+ * "another". There are no teammates in a free-for-all. A spell cast this way
+ * answers `self-surge-paid` ("if its surge cost was paid"). Put "Surge
+ * [cost]" in `text` as well.
+ */
+export const surge = (mana: string): NonNullable<CardDefinition["alternativeCost"]> => ({
+  mana,
+  keyword: "surge",
+  condition: { kind: "cast-this-turn", who: "you", atLeast: 1 },
+});
+
+/**
  * Melee (rule 702.121): "Whenever this creature attacks, it gets +1/+1 until
  * end of turn for each opponent you attacked with a creature this combat."
  * Each instance triggers on its own. Put "Melee" in `text` as well.

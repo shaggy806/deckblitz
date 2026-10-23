@@ -428,6 +428,7 @@ import _poolSanguineMorass from "../pool/sanguine-morass.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
 import _poolScatteredGroves from "../pool/scattered-groves.js";
+import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
@@ -1030,6 +1031,7 @@ const shard: CardShard = {
     _poolSarkhansTriumph,
     _poolScarbladeScout,
     _poolScatteredGroves,
+    _poolScorchmark,
     _poolSeafloorOracle,
     _poolSeedguideAsh,
     _poolSeizanPerverterOfTruth,
