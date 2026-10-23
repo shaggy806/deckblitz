@@ -184,6 +184,31 @@ describe("costs and triggers", () => {
     expect(sphere.complete).toBe(false);
   });
 
+  it("a delayed trigger for the rest of the turn, and one with a target of its own", () => {
+    // Glimpse of Nature, Subira's "until end of turn, whenever …" and Origin
+    // of Thor's chapter II (rule 603.7c). The delayed ability's target is its
+    // own, not the creating ability's.
+    expect(parseSentence("Whenever you cast a creature spell this turn, draw a card.", ctx())).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "cast-spell", who: "you", filter: { type: "creature" } } },
+      effect: { kind: "draw", amount: 1 },
+      text: "Whenever you cast a creature spell this turn, draw a card.",
+    });
+    expect(
+      parseSentence("Until your next turn, whenever a creature you control deals combat damage to a player, draw a card.", ctx()),
+    ).toMatchObject({ at: { until: "your-next-turn", whenever: { on: "deals-combat-damage-to-player" } } });
+    const outer = ctx();
+    expect(
+      parseSentence("Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.", outer),
+    ).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "cast-spell", who: "you" }, targets: ["creature-you-control"] },
+      effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+      text: "Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.",
+    });
+    expect(outer.targets).toEqual([]);
+  });
+
   it("a spell is bounced from the stack", () => {
     // Take It Back: without `from: "stack"` the bounce would look for a
     // permanent and do nothing to the spell.

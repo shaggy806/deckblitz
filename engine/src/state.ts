@@ -7,7 +7,7 @@
  */
 
 import type { CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
-import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
+import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
   CardType,
@@ -3110,6 +3110,19 @@ export interface DelayedUnblockedWatch {
   readonly turn: number;
 }
 
+/** A delayed trigger with a duration matching any event a trigger can name
+ * — see `DelayedWhenever`. Fires each time; lapses as the next turn begins,
+ * or with `untilYourNextTurn`, as its controller's next turn does. */
+export interface DelayedWheneverWatch {
+  readonly whenever: TriggerSpec;
+  /** Targets it chooses each time it triggers — absent, it reads the
+   * creating ability's. */
+  readonly targets?: readonly TargetSpec[];
+  readonly untilYourNextTurn?: true;
+  /** The turn it was made on. */
+  readonly turn: number;
+}
+
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
   /** Or the next ability its controller activates with {X} in its
@@ -3140,7 +3153,8 @@ export interface DelayedTrigger {
     | DelayedLeaveWatch
     | DelayedCastWatch
     | DelayedDamageWatch
-    | DelayedUnblockedWatch;
+    | DelayedUnblockedWatch
+    | DelayedWheneverWatch;
   /** The creating ability's trigger object, and its `zoneChangeCount` then
    * — "return **that card** to the battlefield" (Shirei, Shizo's Caretaker).
    * It's the delayed ability's trigger object too, as long as it's still that

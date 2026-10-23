@@ -986,6 +986,41 @@ export function parseSentence(sentence, ctx) {
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   let m;
+  // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
+  // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
+  // ability with a duration. Its effect is read as a printed trigger's is —
+  // "it" its trigger object — and any target it names is its own, chosen as
+  // it triggers.
+  if (
+    (m = /^(Until end of turn|Until your next turn), (whenever [^,]+), (.+)\.$/i.exec(s)) ||
+    (m = /^()(Whenever [^,]+) this turn, (.+)\.$/.exec(s))
+  ) {
+    const clause = m[2].charAt(0).toUpperCase() + m[2].slice(1);
+    const triggers = parseTrigger(clause);
+    if (triggers === null || triggers.length !== 1) return null;
+    const inner = { ...ctx, spell: false, targets: [], it: itOf(triggers), departed: departedOf(triggers) };
+    inner.target = (spec) => inner.targets.push(spec) - 1;
+    const effectText = `${m[3].charAt(0).toUpperCase()}${m[3].slice(1)}.`;
+    const effect = parseSentence(effectText, inner);
+    if (effect === null || containsUndefined(effect)) return null;
+    // "Whenever ~ deals combat damage to a player" this turn is the older
+    // `dealsCombatDamage` watch on the source (Lyra, Tolarian Archangel).
+    const ownCombatDamage =
+      triggers[0].on === "deals-combat-damage-to-player" && triggers[0].who === "self" && Object.keys(triggers[0]).length === 2;
+    if (ownCombatDamage && inner.targets.length === 0 && !/^until your next turn$/i.test(m[1])) {
+      return { kind: "delayed-trigger", at: { dealsCombatDamage: "source" }, effect, text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.` };
+    }
+    return {
+      kind: "delayed-trigger",
+      at: {
+        whenever: triggers[0],
+        ...(/^until your next turn$/i.test(m[1]) ? { until: "your-next-turn" } : {}),
+        ...(inner.targets.length > 0 ? { targets: inner.targets } : {}),
+      },
+      effect,
+      text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.`,
+    };
+  }
   // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
   // put N +1/+1 counters on it."
   if ((m = /^Adapt (\d+)\.$/.exec(s))) {

@@ -39,6 +39,7 @@ import _poolBanesInvoker from "../pool/banes-invoker.js";
 import _poolBantCharm from "../pool/bant-charm.js";
 import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
+import _poolBattleOfFrostAndFire from "../pool/battle-of-frost-and-fire.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
@@ -201,6 +202,7 @@ import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolGuyInTheChair from "../pool/guy-in-the-chair.js";
+import _poolHaraldUnitesTheElves from "../pool/harald-unites-the-elves.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
 import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
 import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
@@ -614,6 +616,7 @@ const shard: CardShard = {
     _poolBantCharm,
     _poolBarrageOfExpendables,
     _poolBattleHymn,
+    _poolBattleOfFrostAndFire,
     _poolBeastWhisperer,
     _poolBelenonWarAnthem,
     _poolBellowsLizard,
@@ -776,6 +779,7 @@ const shard: CardShard = {
     _poolGuardiansOfAkrasa,
     _poolGuttersnipe,
     _poolGuyInTheChair,
+    _poolHaraldUnitesTheElves,
     _poolHarrierGriffin,
     _poolHashatonScarabsFist,
     _poolHawkeyesShot,

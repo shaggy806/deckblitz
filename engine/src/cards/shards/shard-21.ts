@@ -336,6 +336,7 @@ import _poolNicolBolasTheDeceiver from "../pool/nicol-bolas-the-deceiver.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
 import _poolNimbleBrigand from "../pool/nimble-brigand.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
+import _poolNoxiousAssault from "../pool/noxious-assault.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
@@ -494,6 +495,7 @@ import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
 import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
+import _poolTheoreticalDuplication from "../pool/theoretical-duplication.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
 import _poolThrashOfRaptors from "../pool/thrash-of-raptors.js";
@@ -917,6 +919,7 @@ const shard: CardShard = {
     _poolNightmareShepherd,
     _poolNimbleBrigand,
     _poolNovaHellkite,
+    _poolNoxiousAssault,
     _poolNoxiousRevival,
     _poolNymrisOonasTrickster,
     _poolObeliskOfGrixis,
@@ -1075,6 +1078,7 @@ const shard: CardShard = {
     _poolTheMasterMesmerist,
     _poolTheRegalia,
     _poolTheSibsigCeremony,
+    _poolTheoreticalDuplication,
     _poolThornwoodFalls,
     _poolThoughtErasure,
     _poolThrashOfRaptors,

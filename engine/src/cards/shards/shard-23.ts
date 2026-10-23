@@ -517,6 +517,7 @@ import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
 import _poolThunderLasso from "../pool/thunder-lasso.js";
+import _poolThunderOfUnity from "../pool/thunder-of-unity.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
 import _poolThunderingSpineback from "../pool/thundering-spineback.js";
 import _poolTibaltRakishInstigator from "../pool/tibalt-rakish-instigator.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolThopterShop,
     _poolThorin,
     _poolThunderLasso,
+    _poolThunderOfUnity,
     _poolThunderingBroodwagon,
     _poolThunderingSpineback,
     _poolTibaltRakishInstigator,

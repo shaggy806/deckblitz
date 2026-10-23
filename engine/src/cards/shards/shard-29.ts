@@ -554,6 +554,7 @@ import _poolVraskasFinisher from "../pool/vraskas-finisher.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
 import _poolWallOfOneThousandCuts from "../pool/wall-of-one-thousand-cuts.js";
 import _poolWanderersStrike from "../pool/wanderers-strike.js";
+import _poolWarhostsFrenzy from "../pool/warhosts-frenzy.js";
 import _poolWaterServant from "../pool/water-servant.js";
 import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
 import _poolWeaponizeTheMonsters from "../pool/weaponize-the-monsters.js";
@@ -1150,6 +1151,7 @@ const shard: CardShard = {
     _poolWallOfIce,
     _poolWallOfOneThousandCuts,
     _poolWanderersStrike,
+    _poolWarhostsFrenzy,
     _poolWaterServant,
     _poolWeakstonesSubjugation,
     _poolWeaponizeTheMonsters,

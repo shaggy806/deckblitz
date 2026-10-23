@@ -282,6 +282,7 @@ import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
+import _poolMageHuntersOnslaught from "../pool/mage-hunters-onslaught.js";
 import _poolMagicMissile from "../pool/magic-missile.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
 import _poolMaiScornfulStriker from "../pool/mai-scornful-striker.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLuxurySuite,
+    _poolMageHuntersOnslaught,
     _poolMagicMissile,
     _poolMagusOfTheCoffers,
     _poolMaiScornfulStriker,

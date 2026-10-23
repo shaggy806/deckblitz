@@ -198,6 +198,7 @@ import _poolGarrisonGriffin from "../pool/garrison-griffin.js";
 import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
+import _poolGazeOfPain from "../pool/gaze-of-pain.js";
 import _poolGeneratorServant from "../pool/generator-servant.js";
 import _poolGetOut from "../pool/get-out.js";
 import _poolGeyserGlider from "../pool/geyser-glider.js";
@@ -564,6 +565,7 @@ import _tokensGreenPlantToken11 from "../tokens/green-plant-token-1-1.js";
 import _tokensGremlinToken22 from "../tokens/gremlin-token-2-2.js";
 import _tokensGuenhwyvar from "../tokens/guenhwyvar.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
+import _tokensIllusionTokenSacrificedWhenTargeted from "../tokens/illusion-token-sacrificed-when-targeted.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
 import _tokensPhyrexianHorrorTokenNissaAscendedAnimist from "../tokens/phyrexian-horror-token-nissa-ascended-animist.js";
 import _tokensRedWarriorToken from "../tokens/red-warrior-token.js";
@@ -772,6 +774,7 @@ const shard: CardShard = {
     _poolGastalBlockbuster,
     _poolGavonyTownship,
     _poolGazeOfGranite,
+    _poolGazeOfPain,
     _poolGeneratorServant,
     _poolGetOut,
     _poolGeyserGlider,
@@ -1140,6 +1143,7 @@ const shard: CardShard = {
     _tokensGremlinToken22,
     _tokensGuenhwyvar,
     _tokensHumanClericToken,
+    _tokensIllusionTokenSacrificedWhenTargeted,
     _tokensMonkToken,
     _tokensPhyrexianHorrorTokenNissaAscendedAnimist,
     _tokensRedWarriorToken,

@@ -59,14 +59,13 @@ section keeps only what to do next.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7707 on (batch 142 took 7454–7703). Batches run 4-5 agents, ~30 cards each, with the
+  untriaged cards by rank: rank 7949 on (batch 143 took 7707–7947). Batches run 4-5 agents, ~30 cards each, with the
   leading features built alongside in worktrees. The nine other starter precons' 25 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
-  "until end of turn, whenever …" and its "until your next turn" form as a real delayed
-  trigger (`effect:delayed-trigger-rest-of-turn` — 39 waiting, 33 on nothing else, 2026-10-23;
-  rule 603.7c, which also fixes Dovin, Grand Arbiter's −1 under Engine rules gaps), ahead of
-  banding (36). Before it
+  banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
+  multi-blocking line under the oldest-first walk below), now "until end of turn, whenever …" is
+  built (batch 144). Before it
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
   `cost:remove-counters-from-chosen` (21, 14), `effect:effect-on-enchanted-permanent` (21, 16),
   `decision:variable-target-count` (19, 15), `decision:owner-chooses-top-or-bottom` (19, 18),
@@ -162,9 +161,7 @@ section keeps only what to do next.
   all abilities" (`static:static-lose-all-abilities`), and "put into a graveyard from the
   battlefield this turn" (`filter:put-into-graveyard-from-battlefield-this-turn` — Salvager of
   Ruin, Gerrard, Weatherlight Hero). The most shared blocks of the last three
-  sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
-  6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
-  Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative
+  sets (the rest-of-turn triggered ability that led them was built in batch 144): the Mastery cycle's "if the alternative
   cost was paid" (`condition:alternative-cost-paid`, 4), "you've discarded a card this turn"
   (`stat:cards-discarded-this-turn`, 4) and an Aura granting the Equipment it enchants a static
   (`static:grant-static-ability`, 3 — the Runes).
@@ -237,7 +234,6 @@ there and move this line to `COMPLETED.md`.
 - **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins and Stronghold Rats (`effect:hidden-simultaneous-choices`).
 - **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
 - **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.
-- **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).
 - **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.
 - **Losing loyalty never emits `counter-removed`** (306.8, 606.4): damage to a planeswalker and a minus loyalty cost emit only `loyalty-changed`, so a `counters-removed` trigger for loyalty never fires (Chandra, Fire Artisan).

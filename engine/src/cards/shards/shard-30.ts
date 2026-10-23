@@ -338,6 +338,7 @@ import _poolMarshHulk from "../pool/marsh-hulk.js";
 import _poolMartyrsTomb from "../pool/martyrs-tomb.js";
 import _poolMaryJaneWatson from "../pool/mary-jane-watson.js";
 import _poolMaskOfTheJadecrafter from "../pool/mask-of-the-jadecrafter.js";
+import _poolMassacreGirl from "../pool/massacre-girl.js";
 import _poolMasterfulFlourish from "../pool/masterful-flourish.js";
 import _poolMeditationPools from "../pool/meditation-pools.js";
 import _poolMeldedMoxite from "../pool/melded-moxite.js";
@@ -508,6 +509,7 @@ import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
 import _poolTheMonumentalFacade from "../pool/the-monumental-facade.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
+import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
@@ -929,6 +931,7 @@ const shard: CardShard = {
     _poolMartyrsTomb,
     _poolMaryJaneWatson,
     _poolMaskOfTheJadecrafter,
+    _poolMassacreGirl,
     _poolMasterfulFlourish,
     _poolMeditationPools,
     _poolMeldedMoxite,
@@ -1099,6 +1102,7 @@ const shard: CardShard = {
     _poolTheMightyThorJaneFoster,
     _poolTheMonumentalFacade,
     _poolThePrydwenSteelFlagship,
+    _poolTheRevelationsOfEzio,
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThousandYearStorm,

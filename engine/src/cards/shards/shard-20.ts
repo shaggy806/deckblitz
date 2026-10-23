@@ -44,6 +44,7 @@ import _poolAxebaneBeast from "../pool/axebane-beast.js";
 import _poolBackForSeconds from "../pool/back-for-seconds.js";
 import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
 import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
+import _poolBasriKet from "../pool/basri-ket.js";
 import _poolBastionInventor from "../pool/bastion-inventor.js";
 import _poolBatterskull from "../pool/batterskull.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
@@ -217,6 +218,7 @@ import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
 import _poolGnarlbackRhino from "../pool/gnarlback-rhino.js";
+import _poolGnawingCrescendo from "../pool/gnawing-crescendo.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
 import _poolGoblinWarParty from "../pool/goblin-war-party.js";
@@ -688,6 +690,7 @@ const shard: CardShard = {
     _poolBackForSeconds,
     _poolBalshanCollaborator,
     _poolBarkchannelPathway,
+    _poolBasriKet,
     _poolBastionInventor,
     _poolBatterskull,
     _poolBeckonApparition,
@@ -861,6 +864,7 @@ const shard: CardShard = {
     _poolGloriousAnthem,
     _poolGlowstoneRecluse,
     _poolGnarlbackRhino,
+    _poolGnawingCrescendo,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
     _poolGoblinWarParty,

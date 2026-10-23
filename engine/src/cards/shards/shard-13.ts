@@ -241,6 +241,7 @@ import _poolImpactTremors from "../pool/impact-tremors.js";
 import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImperiousOligarch from "../pool/imperious-oligarch.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
+import _poolInfestedThrinax from "../pool/infested-thrinax.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
 import _poolInsatiableAppetite from "../pool/insatiable-appetite.js";
@@ -251,8 +252,10 @@ import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
+import _poolJaceCunningCastaway from "../pool/jace-cunning-castaway.js";
 import _poolJacesDefeat from "../pool/jaces-defeat.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
+import _poolJayaFieryNegotiator from "../pool/jaya-fiery-negotiator.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
 import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
 import _poolJoinTheDance from "../pool/join-the-dance.js";
@@ -577,6 +580,7 @@ import _poolZephyrCharge from "../pool/zephyr-charge.js";
 import _poolZephyrSinger from "../pool/zephyr-singer.js";
 import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
 import _poolZombieOutlander from "../pool/zombie-outlander.js";
+import _tokensAlienSalamanderToken from "../tokens/alien-salamander-token.js";
 import _tokensBatToken from "../tokens/bat-token.js";
 import _tokensClueToken from "../tokens/clue-token.js";
 import _tokensDemonToken from "../tokens/demon-token.js";
@@ -833,6 +837,7 @@ const shard: CardShard = {
     _poolImperialSeal,
     _poolImperiousOligarch,
     _poolImprovisedAct,
+    _poolInfestedThrinax,
     _poolInfiltratorIlKor,
     _poolInnocuousRat,
     _poolInsatiableAppetite,
@@ -843,8 +848,10 @@ const shard: CardShard = {
     _poolIsolatedChapel,
     _poolIzoniCenterOfTheWeb,
     _poolIzzetLocket,
+    _poolJaceCunningCastaway,
     _poolJacesDefeat,
     _poolJadecraftArtisan,
+    _poolJayaFieryNegotiator,
     _poolJewelEyedCobra,
     _poolJhoiraWeatherlightCorsair,
     _poolJoinTheDance,
@@ -1171,6 +1178,7 @@ const shard: CardShard = {
     _poolZombieOutlander,
   ],
   tokens: [
+    _tokensAlienSalamanderToken,
     _tokensBatToken,
     _tokensClueToken,
     _tokensDemonToken,

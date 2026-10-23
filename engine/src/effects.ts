@@ -8,7 +8,7 @@
  * into the spell's or ability's chosen targets, or the literal `"source"`.
  */
 
-import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
+import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
   CardType,
@@ -229,6 +229,31 @@ export interface DelayedCombatDamage {
  * player the trigger player. */
 export interface DelayedUnblocked {
   readonly attacksUnblocked: EffectTargetRef;
+}
+
+/**
+ * "Until end of turn, whenever [event], [effect]" — and "whenever [event]
+ * this turn", and a planeswalker's "until your next turn, whenever …" (rule
+ * 603.7c): a delayed triggered ability with a duration, matched like any
+ * triggered ability's `whenever` — "you" is its controller, `"self"` the
+ * object that set it up, in the stint it was in then — and firing each time
+ * until the duration ends. It belongs to no permanent, so nothing that
+ * happens to its source (leaving, losing its abilities, changing hands) ends
+ * it. Its trigger object is the event's (`"trigger-object"` is "it"), and
+ * `"source"` is still the card that set it up (Mountain Titan's "put a
+ * +1/+1 counter on this creature").
+ *
+ * With no `targets` its effect reads the creating ability's targets by slot
+ * (Jaya, Fiery Negotiator's "to that creature"). With `targets` it chooses
+ * its own each time it triggers, as a printed trigger does, and its slots
+ * are those (Origin of Thor's "put a +1/+1 counter on target creature you
+ * control").
+ */
+export interface DelayedWhenever {
+  readonly whenever: TriggerSpec;
+  /** Lasts until its controller's next turn begins, not just this turn. */
+  readonly until?: "your-next-turn";
+  readonly targets?: readonly TargetSpec[];
 }
 
 /** How a `flicker` returns what it exiled — the non-target half of its
@@ -2405,12 +2430,20 @@ export type EffectSpec =
       readonly kind: "delayed-trigger";
       /** A step ("at the beginning of the next end step"), a permanent
        * leaving the battlefield ("when it dies" — see {@link DelayedLeaves}),
-       * or the controller's next spell this turn ({@link DelayedNextSpell}).
+       * the controller's next spell this turn ({@link DelayedNextSpell}), or
+       * any event a trigger can name, until end of turn or until your next
+       * turn ({@link DelayedWhenever}).
        * Whatever the creating ability's trigger object was ("return **that
        * card** to the battlefield at the beginning of the next end step" —
        * Shirei, Shizo's Caretaker) is the delayed ability's too, unless the
        * spell it waits for is. */
-      readonly at: DelayedTriggerTiming | DelayedLeaves | DelayedNextSpell | DelayedCombatDamage | DelayedUnblocked;
+      readonly at:
+        | DelayedTriggerTiming
+        | DelayedLeaves
+        | DelayedNextSpell
+        | DelayedCombatDamage
+        | DelayedUnblocked
+        | DelayedWhenever;
       readonly effect: EffectSpec;
       /** Text for the log and the stack. */
       readonly text: string;
@@ -6012,7 +6045,8 @@ export interface EffectApi {
         }
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
-      | { readonly attacksUnblocked: ObjectId },
+      | { readonly attacksUnblocked: ObjectId }
+      | DelayedWhenever,
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -9194,6 +9228,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const watched = resolveEffectTarget(spec.at.attacksUnblocked, ctx);
         if (watched?.kind !== "object") return;
         ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
+        return;
+      }
+      if (typeof spec.at === "object" && "whenever" in spec.at) {
+        ctx.delayTrigger(spec.at, spec.effect, spec.text, controller);
         return;
       }
       if (typeof spec.at === "object" && "nextSpell" in spec.at) {

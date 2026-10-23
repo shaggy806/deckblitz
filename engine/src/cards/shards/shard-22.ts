@@ -508,6 +508,7 @@ import _poolThassasBounty from "../pool/thassas-bounty.js";
 import _poolTheBiblioplex from "../pool/the-biblioplex.js";
 import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
+import _poolTheMirariConjecture from "../pool/the-mirari-conjecture.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
 import _poolTheWallsOfBaSingSe from "../pool/the-walls-of-ba-sing-se.js";
 import _poolTheWanderingRescuer from "../pool/the-wandering-rescuer.js";
@@ -1110,6 +1111,7 @@ const shard: CardShard = {
     _poolTheBiblioplex,
     _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,
+    _poolTheMirariConjecture,
     _poolTheSackvilleBagginses,
     _poolTheWallsOfBaSingSe,
     _poolTheWanderingRescuer,

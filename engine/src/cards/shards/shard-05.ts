@@ -587,6 +587,7 @@ import _poolZodiacSnake from "../pool/zodiac-snake.js";
 import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
 import _tokensAngelWarriorTokenFlyingVigilance from "../tokens/angel-warrior-token-flying-vigilance.js";
 import _tokensAssassinTokenAyaOfAlexandria from "../tokens/assassin-token-aya-of-alexandria.js";
+import _tokensAssassinTokenVraskaTheUnseen from "../tokens/assassin-token-vraska-the-unseen.js";
 import _tokensBananaToken from "../tokens/banana-token.js";
 import _tokensBirdTokenOminousRoost from "../tokens/bird-token-ominous-roost.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
@@ -1194,6 +1195,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAngelWarriorTokenFlyingVigilance,
     _tokensAssassinTokenAyaOfAlexandria,
+    _tokensAssassinTokenVraskaTheUnseen,
     _tokensBananaToken,
     _tokensBirdTokenOminousRoost,
     _tokensDeathtouchSnakeToken,

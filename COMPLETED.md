@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **"Until end of turn, whenever …"** (batch 144; 2026-10-23): the leading blocker
+  (`effect:delayed-trigger-rest-of-turn`, 39 cards) built as a `delayed-trigger` at `{ whenever }`,
+  with its own targets and "until your next turn"; 34 cards authored on it (Massacre Girl, Vraska
+  the Unseen, Basri Ket, Jaya, Fiery Negotiator, Glimpse of Nature and 29 more).
 - **Aether Revolt, whole** (batch 140): **improvise** (rule 702.126a, on convoke's machinery —
   artifacts, generic mana only, the client's bar saying so) built; 99 authored by five
   `card-author` agents and the lead — Herald of Anguish, Reverse Engineer, Metallic Rebuke,
@@ -449,6 +453,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **"Until end of turn, whenever …" is a delayed trigger, not a granted one** (603.7c; 2026-10-23):
+  the `delayed-trigger` effect's `at: { whenever: TriggerSpec, until?, targets? }`, matched against
+  every event and ended by nothing that happens to its source; Dovin, Grand Arbiter's +1 moved onto
+  it from `grant-triggered`.
 - **Up to 500 tokens of one stack can block** (509.1a; 2026-10-22): a blocking stack wakes up to
   `Game.MAX_BLOCKERS_WOKEN` (500) tokens rather than `MAX_MATERIALIZED`'s 100, so a stack can block an
   attacking one two or more to a token (200 Soldiers on 100 Zombies). Still a bound for a whole stack

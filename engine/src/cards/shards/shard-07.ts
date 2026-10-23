@@ -477,6 +477,7 @@ import _poolStormscapeApprentice from "../pool/stormscape-apprentice.js";
 import _poolStratozeppelid from "../pool/stratozeppelid.js";
 import _poolStrikingPalette from "../pool/striking-palette.js";
 import _poolStromgaldCabal from "../pool/stromgald-cabal.js";
+import _poolSubiraTulzidiCaravanner from "../pool/subira-tulzidi-caravanner.js";
 import _poolSubtlety from "../pool/subtlety.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolStratozeppelid,
     _poolStrikingPalette,
     _poolStromgaldCabal,
+    _poolSubiraTulzidiCaravanner,
     _poolSubtlety,
     _poolSuddenStrength,
     _poolSunSentinel,

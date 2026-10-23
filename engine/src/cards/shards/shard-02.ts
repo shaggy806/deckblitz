@@ -492,6 +492,7 @@ import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheFireNationDrill from "../pool/the-fire-nation-drill.js";
 import _poolThePrimaVista from "../pool/the-prima-vista.js";
 import _poolTheRestorationOfEiganjo from "../pool/the-restoration-of-eiganjo.js";
+import _poolTheSeaDevils from "../pool/the-sea-devils.js";
 import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
 import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
@@ -1064,6 +1065,7 @@ const shard: CardShard = {
     _poolTheFireNationDrill,
     _poolThePrimaVista,
     _poolTheRestorationOfEiganjo,
+    _poolTheSeaDevils,
     _poolTheSquadronSinister,
     _poolTheSurgicalBay,
     _poolTheThirteenthDoctor,

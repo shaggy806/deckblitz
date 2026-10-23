@@ -320,6 +320,7 @@ import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
 import _poolMisdirection from "../pool/misdirection.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
 import _poolMistsOfLittjara from "../pool/mists-of-littjara.js";
+import _poolMistwaySpy from "../pool/mistway-spy.js";
 import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
@@ -346,6 +347,7 @@ import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
+import _poolOriginOfThor from "../pool/origin-of-thor.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
@@ -915,6 +917,7 @@ const shard: CardShard = {
     _poolMisdirection,
     _poolMistgatePathway,
     _poolMistsOfLittjara,
+    _poolMistwaySpy,
     _poolMobileHomestead,
     _poolMoggMob,
     _poolMollyHayesRunaway,
@@ -941,6 +944,7 @@ const shard: CardShard = {
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
     _poolOrderOfSacredDusk,
+    _poolOriginOfThor,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
     _poolPaladinOfPredation,

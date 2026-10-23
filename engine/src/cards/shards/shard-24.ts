@@ -182,6 +182,7 @@ import _poolFinalShowdown from "../pool/final-showdown.js";
 import _poolFireElemental from "../pool/fire-elemental.js";
 import _poolFireball from "../pool/fireball.js";
 import _poolFirebladeArtist from "../pool/fireblade-artist.js";
+import _poolFirstDayOfClass from "../pool/first-day-of-class.js";
 import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
 import _poolFlatline from "../pool/flatline.js";
@@ -414,6 +415,7 @@ import _poolShepherdOfTheCosmos from "../pool/shepherd-of-the-cosmos.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
 import _poolShinechaser from "../pool/shinechaser.js";
 import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
+import _poolShowdownOfTheSkalds from "../pool/showdown-of-the-skalds.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
 import _poolSicken from "../pool/sicken.js";
 import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
@@ -762,6 +764,7 @@ const shard: CardShard = {
     _poolFireElemental,
     _poolFireball,
     _poolFirebladeArtist,
+    _poolFirstDayOfClass,
     _poolFlameOn,
     _poolFlameSweep,
     _poolFlatline,
@@ -994,6 +997,7 @@ const shard: CardShard = {
     _poolShepherdingSpirits,
     _poolShinechaser,
     _poolShootTheSheriff,
+    _poolShowdownOfTheSkalds,
     _poolShrikeForce,
     _poolSicken,
     _poolSidequestRaiseAChocobo,

@@ -187,6 +187,7 @@ import type {
   CastNowOptions,
   DamageFrom,
   DelayedNextSpell,
+  DelayedWhenever,
   EffectAmount,
   EffectSpec,
   ManaSplitAsk,
@@ -308,6 +309,7 @@ import type {
   DelayedDamageWatch,
   DelayedLeaveWatch,
   DelayedUnblockedWatch,
+  DelayedWheneverWatch,
   DelayedTrigger,
   EnterAttackingChoice,
   EntryRecord,
@@ -5621,9 +5623,13 @@ export class Game {
     delete this.state.modesChosenThisTurn;
     this.state.preventionShields = [];
     // "When that creature dies this turn" watches no longer, nor does "when
-    // you next cast a spell this turn".
+    // you next cast a spell this turn", nor "until end of turn, whenever …".
+    // "Until your next turn, whenever …" waits for whose turn this is (below).
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
-      (t) => typeof t.at !== "object" || ("leaves" in t.at && t.at.thisTurn !== true),
+      (t) =>
+        typeof t.at !== "object" ||
+        ("leaves" in t.at && t.at.thisTurn !== true) ||
+        ("whenever" in t.at && t.at.untilYourNextTurn === true),
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
@@ -5758,6 +5764,10 @@ export class Game {
         else object.goadedBy = left;
       }
     }
+    // So does "until your next turn, whenever …" (Vraska the Unseen's +1).
+    this.state.delayedTriggers = this.state.delayedTriggers.filter(
+      (t) => !(typeof t.at === "object" && "whenever" in t.at && beginningFor.includes(t.controller)),
+    );
     // So do attack-requirement rules (Kardur, Doomscourge's "until your next
     // turn, creatures your opponents control attack each combat …").
     const rules = this.state.attackRequirements;
@@ -17485,6 +17495,201 @@ export class Game {
 
   // --- triggered abilities ------------------------------------
 
+  /**
+   * A numeric quantity the triggering event supplies, snapshotted as the
+   * ability triggers — for an `EffectAmount` `{ triggerValue: true }`: the
+   * entering / attacking creature's power (Terror of the Peaks), or the
+   * combat damage a creature just dealt a player (Old Gnawbone). ROADMAP P4b.
+   * `object` is the ability's source, as the trigger is matched against it.
+   */
+  private triggerValueOf(trigger: TriggerSpec, event: GameEvent, object: GameObject): number | undefined {
+    const powerOfId =
+      event.type === "permanent-entered-battlefield"
+        ? event.object
+        : event.type === "attacker-declared"
+          ? event.attacker
+          : undefined;
+    return (
+      // "That much": how many permanents of the entry matched.
+      trigger.on === "enters-battlefield" &&
+        trigger.batched === true &&
+        event.type === "permanent-entered-battlefield"
+        ? this.enterBatchMatches(trigger, event, object)
+        : event.type === "dice-rolled"
+        ? event.results.reduce((n, r) => n + r, 0)
+        : powerOfId !== undefined && this.state.objects[powerOfId] !== undefined
+        ? computeCharacteristics(this.state, this.registry, powerOfId).power
+        : (trigger.on === "deals-combat-damage-to-player" || trigger.on === "deals-damage") &&
+            event.type === "damage-dealt"
+          ? // Each source's own: a counted stack's tokens share the event.
+            event.amount / (event.sources ?? 1)
+          : trigger.on === "dealt-damage" && event.type === "damage-dealt"
+          ? event.amount
+          : // A batched attack trigger's value is *how many* matched,
+            // which is what "draw that many cards" reads.
+            trigger.on === "attacks-batch" && event.type === "attackers-declared"
+            ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
+            : // How many creatures attack that player.
+              trigger.on === "attacks-player" && event.type === "player-attacked"
+            ? this.creatureCount(event.attackers)
+            : // How many cards left the graveyard, for "that many".
+              trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
+              ? this.graveyardLeavers(trigger, event.objects, object).length
+              : // How many cards were put into the graveyard.
+                trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
+              ? this.graveyardArrivals(trigger, event.arrivals, object).length
+              : trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
+              ? this.exileArrivals(trigger, event.arrivals, object).length
+              : // "…for each card discarded this way".
+                trigger.on === "discards" && event.type === "cards-discarded"
+              ? this.discardedMatching(trigger, event.objects, object).length
+              : // "Deals that much damage": how many counters were put.
+                trigger.on === "counters-put" && event.type === "counter-added"
+              ? event.amount
+              : trigger.on === "counters-removed" && event.type === "counter-removed"
+              ? event.amount
+              : // "The number of cards looked at while scrying this way".
+                trigger.on === "scries" && event.type === "scried"
+              ? event.looked
+              : // "Discover again for the same value" (Curator of Sun's Creation).
+                trigger.on === "discovers" && event.type === "discovered"
+              ? event.amount
+              : // The N it became monstrous with (rule 701.37c's X).
+                trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
+              ? event.amount
+              : // "The number of times you chose a mode for that spell".
+                trigger.on === "cast-spell" && trigger.modal === true && event.type === "spell-cast"
+              ? (this.state.objects[event.object]?.chosenModes?.length ?? 0)
+              : // "Draw that many cards": how many targets the spell has.
+                trigger.on === "cast-spell" && trigger.withTargets === true && event.type === "spell-cast"
+              ? this.spellTargetCount(event.object)
+              : // "For each other instant and sorcery spell you've cast
+                // before it this turn" (Thousand-Year Storm).
+                trigger.on === "cast-spell" && trigger.countCastBefore !== undefined && event.type === "spell-cast"
+                ? this.castBefore(event.player, event.object, trigger.countCastBefore, object.controller)
+                : // "Loses that much life" (Sanguine Bond, Exquisite Blood):
+                  // how much the life total moved.
+                  (trigger.on === "gains-life" || trigger.on === "loses-life") && event.type === "life-changed"
+                  ? Math.abs(event.delta)
+                  : undefined
+    );
+  }
+
+  /**
+   * How many times `event` fires a trigger watching it from `id`, for the
+   * token stacks in it (rule 603.2: each token its own permanent). `id` is
+   * the watcher; its own stack scales by its `stackCount` elsewhere, so an
+   * event about it isn't counted again here.
+   */
+  private eventMultiplier(trigger: TriggerSpec, event: GameEvent, id: ObjectId): number {
+    // A compacted stack that left play is that many permanents leaving,
+    // each its own event: Zulaport Cutthroat drains once per Goblin in
+    // a stack a wrath kills.
+    const departed =
+      (event.type === "permanent-left-battlefield" ||
+        event.type === "permanent-destroyed" ||
+        event.type === "permanent-sacrificed") &&
+      event.object !== id
+        ? (this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    // Damage dealt to a token stack was dealt to every token in it, each
+    // its own permanent: a watcher fires once per token (a stack's own
+    // `dealt-damage` already scales by its `stackCount`). Each firing that
+    // deals damage to "that permanent" peels one token off
+    // (`splitTargetRef`), so ten tokens dealt 1 are each dealt 2 more.
+    const recipients =
+      (trigger.on === "deals-damage" || trigger.on === "dealt-damage") &&
+      event.type === "damage-dealt" &&
+      event.target.kind === "object" &&
+      event.target.object !== id
+        ? (this.state.objects[event.target.object]?.stackCount ?? 1)
+        : 1;
+    // A counted attacking stack (`attackingStackPart`) is every token in
+    // it attacking, and its combat damage every token's: "whenever a
+    // creature you control attacks" or "deals combat damage" fires
+    // once per token.
+    const attacked =
+      event.type === "attacker-declared" && event.attacker !== id
+        ? (this.state.objects[event.attacker]?.stackCount ?? 1)
+        : 1;
+    const dealtBy =
+      event.type === "damage-dealt" &&
+      event.source !== id &&
+      (trigger.on === "deals-damage" || trigger.on === "deals-combat-damage-to-player")
+        ? (event.sources ?? 1)
+        : 1;
+    // A compacted stack untapping is every token in it untapping, each
+    // its own permanent: Mesmeric Orb mills once per token. Tapping
+    // likewise (a tap-all over a stack, or attacking with a declared
+    // count of it): Magda makes a Treasure per Dwarf (rule 701.26a).
+    const turned =
+      (event.type === "permanent-untapped" || event.type === "permanent-tapped") && event.object !== id
+        ? (this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    // Counters put on a token stack were put on every token in it
+    // (Basri's Solidarity, proliferate, Black Sun's Zenith), each its
+    // own permanent: "whenever one or more counters are put on a
+    // creature" fires once per token — Simic Ascendancy grows by ten
+    // for a stack of ten, Hapatra makes ten Snakes. A batch entering
+    // with counters into a stack already there names how many it was.
+    const countered =
+      trigger.on === "counters-put" && event.type === "counter-added" && event.object !== id
+        ? (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    const entered = event.type === "permanent-entered-battlefield" ? (event.count ?? 1) : 1;
+    return departed * recipients * attacked * dealtBy * turned * countered * entered;
+  }
+
+  /**
+   * The "until end of turn, whenever …" delayed triggers `event` answers
+   * (`DelayedWheneverWatch`, rule 603.7c): each matched like a printed
+   * trigger, its controller as "you" and the object that set it up as
+   * "self" — while that is still the object it was (rule 400.7). Not used
+   * up: each fires every time, until its duration ends. One with targets of
+   * its own is queued as an ability that chooses them as it goes on the
+   * stack; one without acts on the creating ability's.
+   */
+  private fireWheneverWatchers(event: GameEvent): void {
+    for (const trigger of this.state.delayedTriggers) {
+      const at = trigger.at;
+      if (typeof at !== "object" || !("whenever" in at)) continue;
+      if (at.untilYourNextTurn !== true && at.turn !== this.state.turn.number) continue;
+      if (this.state.players[trigger.controller]?.hasLost !== false) continue;
+      const source = this.state.objects[trigger.source];
+      if (source === undefined) continue;
+      const aboutSelf =
+        ("who" in at.whenever && at.whenever.who === "self") || ("to" in at.whenever && at.whenever.to === "self");
+      if (aboutSelf && (source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== trigger.sourceStint)) {
+        continue;
+      }
+      const object = source.controller === trigger.controller ? source : { ...source, controller: trigger.controller };
+      if (!this.triggerMatches(at.whenever, event, object)) continue;
+      const triggerObject = this.eventTriggerObject(at.whenever, event);
+      const triggerValue = this.triggerValueOf(at.whenever, event, object);
+      const refs = this.refsAtTrigger(source, undefined, event, triggerObject);
+      const pending: PendingTrigger = {
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
+        controller: trigger.controller,
+        ...(triggerObject !== undefined ? { triggerObject } : {}),
+        ...(triggerValue !== undefined ? { triggerValue } : {}),
+        ...(refs !== undefined ? { lastKnownRefs: refs } : {}),
+        ...(at.targets !== undefined
+          ? {
+              grantedAbility: {
+                kind: "modifier" as const,
+                ability: { trigger: at.whenever, targets: at.targets, effect: trigger.effect, resolve: null, text: trigger.text },
+              },
+            }
+          : { delayed: trigger }),
+      };
+      // A token stack in the event is a permanent per token (rule 603.2).
+      const times = Math.min(this.eventMultiplier(at.whenever, event, trigger.source), Game.MAX_EFFECT_INSTANCES);
+      for (let i = 0; i < times; i += 1) this.state.pendingTriggers.push(pending);
+    }
+  }
+
   /** Scan for triggered abilities that just fired and queue them. */
   private detectTriggers(event: GameEvent): void {
     // A departing player's cards leaving the stack left the game — nothing
@@ -17711,86 +17916,7 @@ export class Game {
           // The object whose entering / attacking / etc. fired this trigger —
           // for `create-token-copy` `of: "trigger-object"` (Miirym). P5b.
           const triggerObject = this.eventTriggerObject(ability.trigger, event);
-          const powerOfId =
-            event.type === "permanent-entered-battlefield"
-              ? event.object
-              : event.type === "attacker-declared"
-                ? event.attacker
-                : undefined;
-          const triggerValue =
-            // "That much": how many permanents of the entry matched.
-            ability.trigger.on === "enters-battlefield" &&
-            ability.trigger.batched === true &&
-            event.type === "permanent-entered-battlefield"
-              ? this.enterBatchMatches(ability.trigger, event, object)
-              : event.type === "dice-rolled"
-              ? event.results.reduce((n, r) => n + r, 0)
-              : powerOfId !== undefined && this.state.objects[powerOfId] !== undefined
-              ? computeCharacteristics(this.state, this.registry, powerOfId).power
-              : (ability.trigger.on === "deals-combat-damage-to-player" ||
-                    ability.trigger.on === "deals-damage") &&
-                  event.type === "damage-dealt"
-                ? // Each source's own: a counted stack's tokens share the event.
-                  event.amount / (event.sources ?? 1)
-                : ability.trigger.on === "dealt-damage" && event.type === "damage-dealt"
-                ? event.amount
-                : // A batched attack trigger's value is *how many* matched,
-                  // which is what "draw that many cards" reads.
-                  ability.trigger.on === "attacks-batch" &&
-                    event.type === "attackers-declared"
-                  ? this.creatureCount(this.batchedAttackers(ability.trigger, event.attackers, object))
-                  : // How many creatures attack that player.
-                    ability.trigger.on === "attacks-player" && event.type === "player-attacked"
-                  ? this.creatureCount(event.attackers)
-                  : // How many cards left the graveyard, for "that many".
-                    ability.trigger.on === "leaves-graveyard" &&
-                      event.type === "cards-left-graveyard"
-                    ? this.graveyardLeavers(ability.trigger, event.objects, object).length
-                    : // How many cards were put into the graveyard.
-                    ability.trigger.on === "put-into-graveyard" &&
-                      event.type === "cards-put-into-graveyard"
-                    ? this.graveyardArrivals(ability.trigger, event.arrivals, object).length
-                    : ability.trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
-                    ? this.exileArrivals(ability.trigger, event.arrivals, object).length
-                    : // "…for each card discarded this way".
-                    ability.trigger.on === "discards" && event.type === "cards-discarded"
-                    ? this.discardedMatching(ability.trigger, event.objects, object).length
-                    : // "Deals that much damage": how many counters were put.
-                    ability.trigger.on === "counters-put" && event.type === "counter-added"
-                    ? event.amount
-                    : ability.trigger.on === "counters-removed" && event.type === "counter-removed"
-                    ? event.amount
-                    : // "The number of cards looked at while scrying this way".
-                    ability.trigger.on === "scries" && event.type === "scried"
-                    ? event.looked
-                    : // "Discover again for the same value" (Curator of Sun's Creation).
-                    ability.trigger.on === "discovers" && event.type === "discovered"
-                    ? event.amount
-                    : // The N it became monstrous with (rule 701.37c's X).
-                    ability.trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
-                    ? event.amount
-                    : // "The number of times you chose a mode for that spell".
-                    ability.trigger.on === "cast-spell" &&
-                      ability.trigger.modal === true &&
-                      event.type === "spell-cast"
-                    ? (this.state.objects[event.object]?.chosenModes?.length ?? 0)
-                    : // "Draw that many cards": how many targets the spell has.
-                    ability.trigger.on === "cast-spell" &&
-                      ability.trigger.withTargets === true &&
-                      event.type === "spell-cast"
-                    ? this.spellTargetCount(event.object)
-                    : // "For each other instant and sorcery spell you've cast
-                      // before it this turn" (Thousand-Year Storm).
-                      ability.trigger.on === "cast-spell" &&
-                        ability.trigger.countCastBefore !== undefined &&
-                        event.type === "spell-cast"
-                      ? this.castBefore(event.player, event.object, ability.trigger.countCastBefore, object.controller)
-                    : // "Loses that much life" (Sanguine Bond, Exquisite Blood):
-                      // how much the life total moved.
-                      (ability.trigger.on === "gains-life" || ability.trigger.on === "loses-life") &&
-                        event.type === "life-changed"
-                      ? Math.abs(event.delta)
-                      : undefined;
+          const triggerValue = this.triggerValueOf(ability.trigger, event, object);
           // Rule 107.3m: an enters ability of a permanent cast with X, or a
           // cast trigger, snapshots that X now (`triggerCastX`).
           const castX = this.triggerCastX(ability.trigger, event, object);
@@ -17877,61 +18003,6 @@ export class Game {
                 : 0) +
               this.causeTriggerDoublers(object.controller, event) +
               this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined);
-          // A compacted stack that left play is that many permanents leaving,
-          // each its own event: Zulaport Cutthroat drains once per Goblin in
-          // a stack a wrath kills. The stack's own abilities already scale by
-          // `object.stackCount` just below, so it isn't counted twice.
-          const departed =
-            (event.type === "permanent-left-battlefield" ||
-              event.type === "permanent-destroyed" ||
-              event.type === "permanent-sacrificed") &&
-            event.object !== id
-              ? (this.state.objects[event.object]?.stackCount ?? 1)
-              : 1;
-          // Damage dealt to a token stack was dealt to every token in it, each
-          // its own permanent: a watcher fires once per token (a stack's own
-          // `dealt-damage` already scales by `object.stackCount` above). Each
-          // firing that deals damage to "that permanent" peels one token off
-          // (`splitTargetRef`), so ten tokens dealt 1 are each dealt 2 more.
-          const recipients =
-            (ability.trigger.on === "deals-damage" || ability.trigger.on === "dealt-damage") &&
-            event.type === "damage-dealt" &&
-            event.target.kind === "object" &&
-            event.target.object !== id
-              ? (this.state.objects[event.target.object]?.stackCount ?? 1)
-              : 1;
-          // A counted attacking stack (`attackingStackPart`) is every token in
-          // it attacking, and its combat damage every token's: "whenever a
-          // creature you control attacks" or "deals combat damage" fires
-          // once per token. Its own abilities already scale by `stackCount`.
-          const attacked =
-            event.type === "attacker-declared" && event.attacker !== id
-              ? (this.state.objects[event.attacker]?.stackCount ?? 1)
-              : 1;
-          const dealtBy =
-            event.type === "damage-dealt" &&
-            event.source !== id &&
-            (ability.trigger.on === "deals-damage" || ability.trigger.on === "deals-combat-damage-to-player")
-              ? (event.sources ?? 1)
-              : 1;
-          // A compacted stack untapping is every token in it untapping, each
-          // its own permanent: Mesmeric Orb mills once per token. Tapping
-          // likewise (a tap-all over a stack, or attacking with a declared
-          // count of it): Magda makes a Treasure per Dwarf (rule 701.26a).
-          const turned =
-            (event.type === "permanent-untapped" || event.type === "permanent-tapped") && event.object !== id
-              ? (this.state.objects[event.object]?.stackCount ?? 1)
-              : 1;
-          // Counters put on a token stack were put on every token in it
-          // (Basri's Solidarity, proliferate, Black Sun's Zenith), each its
-          // own permanent: "whenever one or more counters are put on a
-          // creature" fires once per token — Simic Ascendancy grows by ten
-          // for a stack of ten, Hapatra makes ten Snakes. A batch entering
-          // with counters into a stack already there names how many it was.
-          const countered =
-            ability.trigger.on === "counters-put" && event.type === "counter-added" && event.object !== id
-              ? (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
-              : 1;
           // "Triggers only once each turn": this firing is the one, whatever
           // the stack size or batch count would otherwise multiply it to.
           if (ability.oncePerTurn === true) {
@@ -17958,15 +18029,7 @@ export class Game {
               : (object.stackCount ?? 1);
           const multiplier =
             watchers *
-            (ability.oncePerTurn === true || batchedEntry
-              ? 1
-              : departed *
-                recipients *
-                attacked *
-                dealtBy *
-                turned *
-                countered *
-                (event.type === "permanent-entered-battlefield" ? (event.count ?? 1) : 1)) *
+            (ability.oncePerTurn === true || batchedEntry ? 1 : this.eventMultiplier(ability.trigger, event, id)) *
             (1 + entryDoublers);
           // Damage dealt all at once is dealt to a permanent once, however
           // many sources dealt it (rule 510.2 — the two creatures blocking an
@@ -18099,6 +18162,8 @@ export class Game {
     }
     if (event.type === "damage-dealt") this.fireDamageWatchers(event);
     if (event.type === "attacker-unblocked") this.fireUnblockedWatchers(event.attacker);
+    // "Until end of turn, whenever …" — any event a trigger can name.
+    if (this.state.delayedTriggers.length > 0) this.fireWheneverWatchers(event);
   }
 
   /** Has `object`'s `oncePerTurn` triggered ability `index` triggered yet
@@ -19395,12 +19460,16 @@ export class Game {
     // The recipient.
     const target = event.target;
     if (target.kind === "player") {
-      if (spec.to === "permanent" || spec.to === "creature" || spec.to === "planeswalker") return false;
+      if (spec.to === "permanent" || spec.to === "creature" || spec.to === "planeswalker" || spec.to === "self") {
+        return false;
+      }
       if (spec.toFilter !== undefined) return false;
       if (spec.to === "opponent" && target.player === self.controller) return false;
       if (spec.to === "you" && target.player !== self.controller) return false;
     } else {
       if (spec.to === "player" || spec.to === "opponent" || spec.to === "you") return false;
+      // "Deals combat damage to Vraska": the ability's own source.
+      if (spec.to === "self" && target.object !== self.id) return false;
       if (spec.to === "creature" || spec.to === "planeswalker") {
         if (this.state.objects[target.object] === undefined) return false;
         const types = computeCharacteristics(this.state, this.registry, target.object).types;
@@ -19749,7 +19818,8 @@ export class Game {
         "triggered",
         0,
         trigger.delayed.targets,
-        undefined,
+        // "That many" of an "until end of turn, whenever …" (Basri Ket).
+        trigger.triggerValue,
         trigger.triggerObject,
       );
       this.state.objects[id].delayedTrigger = trigger.delayed;
@@ -29562,7 +29632,8 @@ export class Game {
         }
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
-      | { readonly attacksUnblocked: ObjectId },
+      | { readonly attacksUnblocked: ObjectId }
+      | DelayedWhenever,
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -29575,8 +29646,16 @@ export class Game {
       | DelayedLeaveWatch
       | DelayedCastWatch
       | DelayedDamageWatch
-      | DelayedUnblockedWatch;
-    if (typeof at === "object" && "nextSpell" in at) {
+      | DelayedUnblockedWatch
+      | DelayedWheneverWatch;
+    if (typeof at === "object" && "whenever" in at) {
+      when = {
+        whenever: at.whenever,
+        ...(at.targets !== undefined ? { targets: at.targets } : {}),
+        ...(at.until === "your-next-turn" ? { untilYourNextTurn: true as const } : {}),
+        turn: this.state.turn.number,
+      };
+    } else if (typeof at === "object" && "nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
         ...(at.orNextAbility !== undefined ? { orNextAbility: at.orNextAbility } : {}),

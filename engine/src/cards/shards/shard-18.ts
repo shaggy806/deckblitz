@@ -547,6 +547,7 @@ import _poolViolentOutburst from "../pool/violent-outburst.js";
 import _poolViscidLemures from "../pool/viscid-lemures.js";
 import _poolVoidRend from "../pool/void-rend.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
+import _poolVraskaTheUnseen from "../pool/vraska-the-unseen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
 import _poolWallCrawl from "../pool/wall-crawl.js";
@@ -1151,6 +1152,7 @@ const shard: CardShard = {
     _poolViscidLemures,
     _poolVoidRend,
     _poolVraskaGolgariQueen,
+    _poolVraskaTheUnseen,
     _poolVulshokSorcerer,
     _poolWakandanTusker,
     _poolWallCrawl,

@@ -398,7 +398,9 @@
   "effect:player-next-untap-step-skip-filter",
   "decision:discard-any-number",
   "keyword:embalm",
-  "keyword:improvise"
+  "keyword:improvise",
+  "effect:delayed-trigger-rest-of-turn",
+  "effect:delayed-trigger-own-targets"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

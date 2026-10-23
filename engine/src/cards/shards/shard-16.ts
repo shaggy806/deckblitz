@@ -416,6 +416,7 @@ import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
+import _poolRuinousWaterbending from "../pool/ruinous-waterbending.js";
 import _poolRushedRebirth from "../pool/rushed-rebirth.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
 import _poolSallySparrow from "../pool/sally-sparrow.js";
@@ -514,6 +515,7 @@ import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
+import _poolTheLastRonin from "../pool/the-last-ronin.js";
 import _poolTheLastRoninsTechnique from "../pool/the-last-ronins-technique.js";
 import _poolTheLocustGod from "../pool/the-locust-god.js";
 import _poolTheSpeedDemon from "../pool/the-speed-demon.js";
@@ -1056,6 +1058,7 @@ const shard: CardShard = {
     _poolRootboundCrag,
     _poolRubblebeltBraggart,
     _poolRuinRat,
+    _poolRuinousWaterbending,
     _poolRushedRebirth,
     _poolSacredFoundry,
     _poolSallySparrow,
@@ -1154,6 +1157,7 @@ const shard: CardShard = {
     _poolTerohsFaithful,
     _poolTeyoTheShieldmage,
     _poolTheFalconSamWilson,
+    _poolTheLastRonin,
     _poolTheLastRoninsTechnique,
     _poolTheLocustGod,
     _poolTheSpeedDemon,

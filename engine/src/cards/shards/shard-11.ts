@@ -42,6 +42,7 @@ import _poolBarbedServitor from "../pool/barbed-servitor.js";
 import _poolBarretAvalancheLeader from "../pool/barret-avalanche-leader.js";
 import _poolBasilicaGuards from "../pool/basilica-guards.js";
 import _poolBasrisLieutenant from "../pool/basris-lieutenant.js";
+import _poolBattleCry from "../pool/battle-cry.js";
 import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
@@ -660,6 +661,7 @@ const shard: CardShard = {
     _poolBarretAvalancheLeader,
     _poolBasilicaGuards,
     _poolBasrisLieutenant,
+    _poolBattleCry,
     _poolBattlemagesBracers,
     _poolBeaconOfUnrest,
     _poolBehindTheScenes,
