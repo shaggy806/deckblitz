@@ -4176,6 +4176,11 @@ export interface GameState {
    * Reset in `beginTurn`. `PlayerState.spellsCastThisTurn` is the per-player
    * count for "your first spell each turn" triggers. ROADMAP Phase 8. */
   spellsCastThisTurn: number;
+  /** The turn before this one's spells, as `beginTurn` found them: how many
+   * were cast in all, and the most any one player cast — the
+   * `spells-cast-last-turn` condition (the werewolves' transforms). Nothing
+   * on the game's first turn, which had none before it. */
+  spellsCastLastTurn?: { readonly total: number; readonly mostByOnePlayer: number };
   /** The day/night designation (rule 726 — ROADMAP Phase 10b). `null` until a
    * card or effect first makes it day or night. `beginTurn` then flips it per
    * 726.3/726.4 (day → night if the previous turn's player cast no spells;

@@ -201,6 +201,7 @@ import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
+import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
 import _poolGemrazer from "../pool/gemrazer.js";
@@ -248,6 +249,7 @@ import _poolHermitDruid from "../pool/hermit-druid.js";
 import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
 import _poolHex from "../pool/hex.js";
+import _poolHinterlandLogger from "../pool/hinterland-logger.js";
 import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
 import _poolHoodedHydra from "../pool/hooded-hydra.js";
@@ -282,6 +284,7 @@ import _poolKalakscionHungerTyrant from "../pool/kalakscion-hunger-tyrant.js";
 import _poolKarametrasBlessing from "../pool/karametras-blessing.js";
 import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
+import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
 import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
@@ -836,6 +839,7 @@ const shard: CardShard = {
     _poolFurious,
     _poolGaeasSkyfolk,
     _poolGarrulousSycophant,
+    _poolGatstafRavagers,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
     _poolGemrazer,
@@ -883,6 +887,7 @@ const shard: CardShard = {
     _poolHeroOfTheWinds,
     _poolHeroicIntervention,
     _poolHex,
+    _poolHinterlandLogger,
     _poolHobbitsSting,
     _poolHonoredKnightCaptain,
     _poolHoodedHydra,
@@ -917,6 +922,7 @@ const shard: CardShard = {
     _poolKarametrasBlessing,
     _poolKarnLegacyReforged,
     _poolKathariRemnant,
+    _poolKessigForgemaster,
     _poolKimahriValiantGuardian,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,

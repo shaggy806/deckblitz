@@ -77,6 +77,7 @@ import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBristlingHydra from "../pool/bristling-hydra.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
+import _poolCaltrops from "../pool/caltrops.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainRipleyVance from "../pool/captain-ripley-vance.js";
@@ -221,6 +222,7 @@ import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
+import _poolGatstafArsonists from "../pool/gatstaf-arsonists.js";
 import _poolGauntletOfMight from "../pool/gauntlet-of-might.js";
 import _poolGeistflameReservoir from "../pool/geistflame-reservoir.js";
 import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
@@ -710,6 +712,7 @@ const shard: CardShard = {
     _poolBristlingHydra,
     _poolBrotherhoodAmbushers,
     _poolCallousDismissal,
+    _poolCaltrops,
     _poolCampusCrier,
     _poolCandelabraOfTawnos,
     _poolCaptainRipleyVance,
@@ -854,6 +857,7 @@ const shard: CardShard = {
     _poolGatewatchBeacon,
     _poolGatherTheWhiteLotus,
     _poolGatheringStone,
+    _poolGatstafArsonists,
     _poolGauntletOfMight,
     _poolGeistflameReservoir,
     _poolGeneralKudroOfDrannith,

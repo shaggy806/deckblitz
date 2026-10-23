@@ -287,7 +287,9 @@ import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
 import _poolKinTreeNurturer from "../pool/kin-tree-nurturer.js";
 import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
+import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
+import _poolLambholtButcher from "../pool/lambholt-butcher.js";
 import _poolLamentation from "../pool/lamentation.js";
 import _poolLanternFlare from "../pool/lantern-flare.js";
 import _poolLanternKami from "../pool/lantern-kami.js";
@@ -869,7 +871,9 @@ const shard: CardShard = {
     _poolKinTreeNurturer,
     _poolKirinTouchedOrochi,
     _poolKitchen,
+    _poolKrallenhordeHowler,
     _poolKyoshiIslandPlaza,
+    _poolLambholtButcher,
     _poolLamentation,
     _poolLanternFlare,
     _poolLanternKami,

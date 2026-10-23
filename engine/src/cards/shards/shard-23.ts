@@ -357,6 +357,7 @@ import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOminousSphinx from "../pool/ominous-sphinx.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
+import _poolOrneryGoblin from "../pool/ornery-goblin.js";
 import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
@@ -551,6 +552,7 @@ import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
 import _poolTyranidHarridan from "../pool/tyranid-harridan.js";
 import _poolTyrranaxRex from "../pool/tyrranax-rex.js";
 import _poolTzaangorShaman from "../pool/tzaangor-shaman.js";
+import _poolUlrichOfTheKrallenhorde from "../pool/ulrich-of-the-krallenhorde.js";
 import _poolUndergrowthLeopard from "../pool/undergrowth-leopard.js";
 import _poolUnholyGrotto from "../pool/unholy-grotto.js";
 import _poolUnluckyDrop from "../pool/unlucky-drop.js";
@@ -966,6 +968,7 @@ const shard: CardShard = {
     _poolOmenOfTheForge,
     _poolOminousSphinx,
     _poolOrdruunMentor,
+    _poolOrneryGoblin,
     _poolOutCold,
     _poolOvergrownFarmland,
     _poolOxidize,
@@ -1160,6 +1163,7 @@ const shard: CardShard = {
     _poolTyranidHarridan,
     _poolTyrranaxRex,
     _poolTzaangorShaman,
+    _poolUlrichOfTheKrallenhorde,
     _poolUndergrowthLeopard,
     _poolUnholyGrotto,
     _poolUnluckyDrop,

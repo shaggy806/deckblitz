@@ -575,6 +575,7 @@ import _poolVengefulVampire from "../pool/vengeful-vampire.js";
 import _poolVerdantCrescendo from "../pool/verdant-crescendo.js";
 import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
 import _poolVigilance from "../pool/vigilance.js";
+import _poolVildinPackAlpha from "../pool/vildin-pack-alpha.js";
 import _poolVillageElder from "../pool/village-elder.js";
 import _poolViridianCorrupter from "../pool/viridian-corrupter.js";
 import _poolVirtueOfLoyalty from "../pool/virtue-of-loyalty.js";
@@ -1202,6 +1203,7 @@ const shard: CardShard = {
     _poolVerdantCrescendo,
     _poolViashinoLashclaw,
     _poolVigilance,
+    _poolVildinPackAlpha,
     _poolVillageElder,
     _poolViridianCorrupter,
     _poolVirtueOfLoyalty,

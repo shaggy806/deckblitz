@@ -609,6 +609,7 @@ import _poolWashAway from "../pool/wash-away.js";
 import _poolWatchfulNaga from "../pool/watchful-naga.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
+import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
 import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolWatchfulNaga,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
+    _poolWerewolfOfAncientHunger,
     _poolWhenWeWereYoung,
     _poolWhiplashWordsmith,
     _poolWhiteMagesStaff,

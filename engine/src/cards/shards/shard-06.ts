@@ -164,6 +164,7 @@ import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
 import _poolDrowsingTyrannodon from "../pool/drowsing-tyrannodon.js";
 import _poolDruidOfHorns from "../pool/druid-of-horns.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
+import _poolDuskwatchRecruiter from "../pool/duskwatch-recruiter.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
@@ -771,6 +772,7 @@ const shard: CardShard = {
     _poolDrowsingTyrannodon,
     _poolDruidOfHorns,
     _poolDualSunTechnique,
+    _poolDuskwatchRecruiter,
     _poolDutifulServants,
     _poolDynamiteDiver,
     _poolEarthenAlly,

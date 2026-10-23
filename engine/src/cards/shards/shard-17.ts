@@ -284,6 +284,7 @@ import _poolKrarkClanGrunt from "../pool/krark-clan-grunt.js";
 import _poolKratosStoicFather from "../pool/kratos-stoic-father.js";
 import _poolKrosanConstrictor from "../pool/krosan-constrictor.js";
 import _poolKwiaVigorbloom from "../pool/kwia-vigorbloom.js";
+import _poolLambholtPacifist from "../pool/lambholt-pacifist.js";
 import _poolLandTax from "../pool/land-tax.js";
 import _poolLashOfTheWhip from "../pool/lash-of-the-whip.js";
 import _poolLastKiss from "../pool/last-kiss.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolKratosStoicFather,
     _poolKrosanConstrictor,
     _poolKwiaVigorbloom,
+    _poolLambholtPacifist,
     _poolLandTax,
     _poolLashOfTheWhip,
     _poolLastKiss,

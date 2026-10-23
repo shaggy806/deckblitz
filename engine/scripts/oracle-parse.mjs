@@ -2492,6 +2492,9 @@ const INTERVENING_IFS = {
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
+  // The Innistrad werewolves' transforms: the previous turn's spells.
+  "if no spells were cast last turn,": { kind: "spells-cast-last-turn", none: true },
+  "if a player cast two or more spells last turn,": { kind: "spells-cast-last-turn", byOnePlayerAtLeast: 2 },
   "if a nonland permanent left the battlefield this turn or a spell was warped this turn,": VOID_CONDITION,
   "if a permanent left the battlefield under your control this turn,": REVOLT_CONDITION,
   "if a permanent you controlled left the battlefield this turn,": REVOLT_CONDITION,

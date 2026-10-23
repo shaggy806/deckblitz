@@ -521,6 +521,7 @@ import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
 import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
 import _poolTidalTerror from "../pool/tidal-terror.js";
+import _poolTimberShredder from "../pool/timber-shredder.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolThunderWall,
     _poolThundertrapTrainer,
     _poolTidalTerror,
+    _poolTimberShredder,
     _poolTimberlandGuide,
     _poolTimeWipe,
     _poolTomeShredder,

@@ -188,6 +188,7 @@ import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
 import _poolGaladhrimBow from "../pool/galadhrim-bow.js";
 import _poolGaledrifter from "../pool/galedrifter.js";
 import _poolGearseekerSerpent from "../pool/gearseeker-serpent.js";
+import _poolGeierReachBandit from "../pool/geier-reach-bandit.js";
 import _poolGeistflame from "../pool/geistflame.js";
 import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.js";
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
@@ -403,6 +404,7 @@ import _poolRyanSinclair from "../pool/ryan-sinclair.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
 import _poolSaffiEriksdotter from "../pool/saffi-eriksdotter.js";
+import _poolSageOfAncientLore from "../pool/sage-of-ancient-lore.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSandAugury from "../pool/sand-augury.js";
 import _poolSanguineGlorifier from "../pool/sanguine-glorifier.js";
@@ -783,6 +785,7 @@ const shard: CardShard = {
     _poolGaladhrimBow,
     _poolGaledrifter,
     _poolGearseekerSerpent,
+    _poolGeierReachBandit,
     _poolGeistflame,
     _poolGeneralTraagHeartOfStone,
     _poolGerrardsBattleCry,
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolSHIELDHelicarrier,
     _poolSafeholdElite,
     _poolSaffiEriksdotter,
+    _poolSageOfAncientLore,
     _poolSaltfieldRecluse,
     _poolSandAugury,
     _poolSanguineGlorifier,

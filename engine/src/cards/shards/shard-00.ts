@@ -56,6 +56,7 @@ import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
 import _poolBrainstone from "../pool/brainstone.js";
+import _poolBrandedHowler from "../pool/branded-howler.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
 import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
 import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
@@ -568,6 +569,7 @@ import _poolViciousVerse from "../pool/vicious-verse.js";
 import _poolVigilantDrake from "../pool/vigilant-drake.js";
 import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
+import _poolVillageMessenger from "../pool/village-messenger.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
@@ -674,6 +676,7 @@ const shard: CardShard = {
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
     _poolBrainstone,
+    _poolBrandedHowler,
     _poolBreechesEagerPillager,
     _poolBrightfieldGlider,
     _poolBrigidClachansHeart,
@@ -1186,6 +1189,7 @@ const shard: CardShard = {
     _poolVigilantDrake,
     _poolVigorbloomCharm,
     _poolVihaanGoldwaker,
+    _poolVillageMessenger,
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
     _poolVizierOfTheTrue,

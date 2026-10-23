@@ -1453,8 +1453,13 @@ export type EffectSpec =
   | {
       readonly kind: "damage";
       readonly amount: EffectAmount;
-      /** A target slot index — omit when `who` is set instead. */
-      readonly target?: number;
+      /** A target slot index — omit when `who` is set instead. Or
+       * `"trigger-object"`, untargeted: "whenever this creature blocks or
+       * becomes blocked by a creature, this creature deals 1 damage to **that
+       * creature**" (Ornery Goblin — `blocks` with `object: "blocked"`, and
+       * `blocked-by`, whose trigger object is the blocker). One that has left
+       * the battlefield since is dealt nothing. */
+      readonly target?: number | "trigger-object";
       /** Untargeted damage to a whole scope of players (Sabotender / Tannuk:
        * "deals 1 damage to each opponent" — needed-cards P16), instead of a
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read
@@ -8675,7 +8680,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.toTriggerRecipient === true
           ? ctx.triggerRecipient()
           : spec.target !== undefined
-            ? ctx.targets[spec.target]
+            ? resolveEffectTarget(spec.target, ctx)
             : undefined;
       if (target !== undefined) {
         const each = target.kind === "player" ? target.player : undefined;

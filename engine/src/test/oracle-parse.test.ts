@@ -560,6 +560,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(slinger.webSlinging).toEqual({ cost: "{R}{G}" });
     expect(slinger.complete).toBe(true);
+    // The Innistrad werewolves' transforms: the previous turn's spells.
+    expect(face("At the beginning of each upkeep, if no spells were cast last turn, transform this creature.").triggered[0].condition).toEqual({
+      kind: "spells-cast-last-turn",
+      none: true,
+    });
+    expect(
+      face("At the beginning of each upkeep, if a player cast two or more spells last turn, transform this creature.").triggered[0]
+        .condition,
+    ).toEqual({ kind: "spells-cast-last-turn", byOnePlayerAtLeast: 2 });
     // Emerge (rule 702.119a), and emerge from [quality] (702.119b).
     const emerger = face(
       "Emerge {5}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)",

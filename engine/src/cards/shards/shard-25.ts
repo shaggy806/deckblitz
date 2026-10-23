@@ -193,6 +193,7 @@ import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
 import _poolFirebrandArcher from "../pool/firebrand-archer.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
+import _poolFlameheartWerewolf from "../pool/flameheart-werewolf.js";
 import _poolFleetingDistraction from "../pool/fleeting-distraction.js";
 import _poolFloodOfRecollection from "../pool/flood-of-recollection.js";
 import _poolFlowstoneInfusion from "../pool/flowstone-infusion.js";
@@ -249,6 +250,7 @@ import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
+import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
@@ -806,6 +808,7 @@ const shard: CardShard = {
     _poolFireDiamond,
     _poolFirebrandArcher,
     _poolFlameSlash,
+    _poolFlameheartWerewolf,
     _poolFleetingDistraction,
     _poolFloodOfRecollection,
     _poolFlowstoneInfusion,
@@ -862,6 +865,7 @@ const shard: CardShard = {
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
+    _poolHermitOfTheNatterknolls,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
     _poolHydrosurge,

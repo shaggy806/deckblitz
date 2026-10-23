@@ -366,6 +366,9 @@ export type CountSpec =
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
   | "cards-in-your-hand"
+  /** How many cards are in all players' hands together (Werewolf of
+   * Ancient Hunger). */
+  | "cards-in-all-hands"
   /** Battlefield permanents matching a filter, a token stack counting as
    * every token in it (`permanentCount`) — Beanstalk Giant's "the number of
    * lands you control" is `{ countOf: { type: "land", controlledBy: "you" } }`.
@@ -680,6 +683,14 @@ export type StaticCondition =
   /** Who has the initiative (rule 726): you, or any opponent. False while
    * nobody does. */
   | { readonly kind: "initiative"; readonly who: "you" | "opponent" }
+  /** Spells cast during the previous turn, whoever's it was — the Innistrad
+   * werewolves' transform triggers (Hinterland Logger): `none` is "if no
+   * spells were cast last turn", `byOnePlayerAtLeast: 2` "if a player cast
+   * two or more spells last turn" — one player's, never several players'
+   * together (the rulings). It looks at the whole previous turn, wherever the
+   * source was then; on the game's first turn no spells were cast last turn.
+   * Read from `GameState.spellsCastLastTurn`. */
+  | { readonly kind: "spells-cast-last-turn"; readonly none?: true; readonly byOnePlayerAtLeast?: number }
   /** "If you've completed a dungeon" (rule 309.7): you've completed at least
    * one this game. `name` is "if you've completed **Tomb of Annihilation**"
    * (Acererak — under `not` for "haven't"). */

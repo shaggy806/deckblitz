@@ -289,6 +289,7 @@ import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
 import _poolLightningHounds from "../pool/lightning-hounds.js";
 import _poolLluwenImperfectNaturalist from "../pool/lluwen-imperfect-naturalist.js";
+import _poolLoneWolfOfTheNatterknolls from "../pool/lone-wolf-of-the-natterknolls.js";
 import _poolLotusPetal from "../pool/lotus-petal.js";
 import _poolLotusguardDisciple from "../pool/lotusguard-disciple.js";
 import _poolLumberknot from "../pool/lumberknot.js";
@@ -460,6 +461,7 @@ import _poolStarwinder from "../pool/starwinder.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
+import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
 import _poolSubjugatorAngel from "../pool/subjugator-angel.js";
 import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
@@ -884,6 +886,7 @@ const shard: CardShard = {
     _poolLightningBolt,
     _poolLightningHounds,
     _poolLluwenImperfectNaturalist,
+    _poolLoneWolfOfTheNatterknolls,
     _poolLotusPetal,
     _poolLotusguardDisciple,
     _poolLumberknot,
@@ -1055,6 +1058,7 @@ const shard: CardShard = {
     _poolSteelHellkite,
     _poolSteelWall,
     _poolStormFleetSpy,
+    _poolStormQueenOfWakanda,
     _poolStormshriekFeral,
     _poolSubjugatorAngel,
     _poolSulfuricVortex,

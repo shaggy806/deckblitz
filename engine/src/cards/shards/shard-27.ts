@@ -65,6 +65,7 @@ import _poolBorderlandRanger from "../pool/borderland-ranger.js";
 import _poolBorosGarrison from "../pool/boros-garrison.js";
 import _poolBraidssFrightfulReturn from "../pool/braidss-frightful-return.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
+import _poolBreakneckRider from "../pool/breakneck-rider.js";
 import _poolBrilliantPlan from "../pool/brilliant-plan.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
 import _poolCallToTheNetherworld from "../pool/call-to-the-netherworld.js";
@@ -92,6 +93,7 @@ import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConnive from "../pool/connive.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
+import _poolConvictedKiller from "../pool/convicted-killer.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
@@ -664,6 +666,7 @@ const shard: CardShard = {
     _poolBorosGarrison,
     _poolBraidssFrightfulReturn,
     _poolBrambleFamiliar,
+    _poolBreakneckRider,
     _poolBrilliantPlan,
     _poolCabarettiInitiate,
     _poolCallToTheNetherworld,
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolConnive,
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
+    _poolConvictedKiller,
     _poolCorruptEunuchs,
     _poolCosmicEpiphany,
     _poolCourageInCrisis,

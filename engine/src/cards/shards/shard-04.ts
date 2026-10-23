@@ -317,6 +317,7 @@ import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
+import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
@@ -450,6 +451,7 @@ import _poolSlimebind from "../pool/slimebind.js";
 import _poolSlitherBlade from "../pool/slither-blade.js";
 import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
 import _poolSnowDay from "../pool/snow-day.js";
+import _poolSolitaryHunter from "../pool/solitary-hunter.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSonicAssault from "../pool/sonic-assault.js";
@@ -913,6 +915,7 @@ const shard: CardShard = {
     _poolMindfulBiomancer,
     _poolMockingbirdAceAgent,
     _poolMomentOfValor,
+    _poolMoonriseIntruder,
     _poolMoonshadow,
     _poolMortalsResolve,
     _poolMoxJet,
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolSlitherBlade,
     _poolSnowCoveredWastes,
     _poolSnowDay,
+    _poolSolitaryHunter,
     _poolSongMadRuins,
     _poolSongMadTreachery,
     _poolSonicAssault,

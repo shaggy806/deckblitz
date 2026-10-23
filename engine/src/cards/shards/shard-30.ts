@@ -374,6 +374,7 @@ import _poolMyriadConstruct from "../pool/myriad-construct.js";
 import _poolNahirisStoneblades from "../pool/nahiris-stoneblades.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
+import _poolNeckBreaker from "../pool/neck-breaker.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
@@ -397,6 +398,7 @@ import _poolOtherworldlyOutburst from "../pool/otherworldly-outburst.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
 import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
+import _poolPalazzoArchers from "../pool/palazzo-archers.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
 import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
@@ -979,6 +981,7 @@ const shard: CardShard = {
     _poolNahirisStoneblades,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,
+    _poolNeckBreaker,
     _poolNessianBoar,
     _poolNickValentinePrivateEye,
     _poolNimbleInnovator,
@@ -1002,6 +1005,7 @@ const shard: CardShard = {
     _poolOutlandBoar,
     _poolOutpaceOblivion,
     _poolOverprotect,
+    _poolPalazzoArchers,
     _poolPanharmonicon,
     _poolPantherWarriors,
     _poolPestilentSpirit,

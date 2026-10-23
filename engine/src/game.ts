@@ -5666,6 +5666,12 @@ export class Game {
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
     }
     this.state.extraCombats = 0;
+    // The turn that just ended, for "if no spells were cast last turn" (the
+    // werewolves): read before the counts reset.
+    this.state.spellsCastLastTurn = {
+      total: this.state.spellsCastThisTurn,
+      mostByOnePlayer: Math.max(0, ...Object.values(this.state.players).map((p) => p.spellsCastThisTurn)),
+    };
     this.state.spellsCastThisTurn = 0;
     delete this.state.turnRestrictions;
     delete this.state.turnDefenderAttacks;

@@ -350,6 +350,7 @@ import _poolOketraTheTrue from "../pool/oketra-the-true.js";
 import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOminousRoost from "../pool/ominous-roost.js";
+import _poolOneOfThePack from "../pool/one-of-the-pack.js";
 import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolOllenbockEscort,
     _poolOmenHawker,
     _poolOminousRoost,
+    _poolOneOfThePack,
     _poolOozeSpill,
     _poolOphidianEye,
     _poolOriKeeperOfSongs,
