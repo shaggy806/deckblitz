@@ -1,0 +1,1086 @@
+{
+  "batch": 149,
+  "status": "complete",
+  "ranks": "Oath of the Gatewatch (OGW, 2016-01-22) and Commander 2015 (C15, 2015-11-13): whole sets; with surge, 'if that creature would die this turn, exile it instead' and its 'dealt damage this way' form built, and the earlier cards they unblocked",
+  "authored": [
+    {
+      "name": "Abstruse Interference",
+      "files": [
+        "engine/src/cards/pool/abstruse-interference.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Agate Assault",
+      "files": [
+        "engine/src/cards/pool/agate-assault.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Akoum Flameseeker",
+      "files": [
+        "engine/src/cards/pool/akoum-flameseeker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Allied Reinforcements",
+      "files": [
+        "engine/src/cards/pool/allied-reinforcements.ts",
+        "engine/src/cards/tokens/knight-ally-token.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Anger of the Gods",
+      "files": [
+        "engine/src/cards/pool/anger-of-the-gods.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arjun, the Shifting Flame",
+      "files": [
+        "engine/src/cards/pool/arjun-the-shifting-flame.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Awaken the Sky Tyrant",
+      "files": [
+        "engine/src/cards/pool/awaken-the-sky-tyrant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Baloth Null",
+      "files": [
+        "engine/src/cards/pool/baloth-null.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Baloth Pup",
+      "files": [
+        "engine/src/cards/pool/baloth-pup.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Banshee of the Dread Choir",
+      "files": [
+        "engine/src/cards/pool/banshee-of-the-dread-choir.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bearer of Silence",
+      "files": [
+        "engine/src/cards/pool/bearer-of-silence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Betrayer's Bargain",
+      "files": [
+        "engine/src/cards/pool/betrayers-bargain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Birthing Hulk",
+      "files": [
+        "engine/src/cards/pool/birthing-hulk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bleed Dry",
+      "files": [
+        "engine/src/cards/pool/bleed-dry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blitz of the Thunder-Raptor",
+      "files": [
+        "engine/src/cards/pool/blitz-of-the-thunder-raptor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bloodspore Thrinax",
+      "files": [
+        "engine/src/cards/pool/bloodspore-thrinax.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bonds of Mortality",
+      "files": [
+        "engine/src/cards/pool/bonds-of-mortality.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bot Bashing Time",
+      "files": [
+        "engine/src/cards/pool/bot-bashing-time.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Boulder Salvo",
+      "files": [
+        "engine/src/cards/pool/boulder-salvo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bouncer's Beatdown",
+      "files": [
+        "engine/src/cards/pool/bouncers-beatdown.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Burn from Within",
+      "files": [
+        "engine/src/cards/pool/burn-from-within.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Burn the Accursed",
+      "files": [
+        "engine/src/cards/pool/burn-the-accursed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Captain's Claws",
+      "files": [
+        "engine/src/cards/pool/captains-claws.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Combustion Technique",
+      "files": [
+        "engine/src/cards/pool/combustion-technique.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Comparative Analysis",
+      "files": [
+        "engine/src/cards/pool/comparative-analysis.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Containment Membrane",
+      "files": [
+        "engine/src/cards/pool/containment-membrane.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crush of Tentacles",
+      "files": [
+        "engine/src/cards/pool/crush-of-tentacles.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crush the Weak",
+      "files": [
+        "engine/src/cards/pool/crush-the-weak.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cyclone Sire",
+      "files": [
+        "engine/src/cards/pool/cyclone-sire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daxos the Returned",
+      "files": [
+        "engine/src/cards/pool/daxos-the-returned.ts",
+        "engine/src/cards/tokens/spirit-token-experience-counters.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daxos's Torment",
+      "files": [
+        "engine/src/cards/pool/daxoss-torment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dimensional Infiltrator",
+      "files": [
+        "engine/src/cards/pool/dimensional-infiltrator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eldrazi Aggressor",
+      "files": [
+        "engine/src/cards/pool/eldrazi-aggressor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eldrazi Mimic",
+      "files": [
+        "engine/src/cards/pool/eldrazi-mimic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eldrazi Obligator",
+      "files": [
+        "engine/src/cards/pool/eldrazi-obligator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elemental Uprising",
+      "files": [
+        "engine/src/cards/pool/elemental-uprising.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Elspeth's Smite",
+      "files": [
+        "engine/src/cards/pool/elspeths-smite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Embodiment of Fury",
+      "files": [
+        "engine/src/cards/pool/embodiment-of-fury.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Essence Burn",
+      "files": [
+        "engine/src/cards/pool/essence-burn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Expedition Raptor",
+      "files": [
+        "engine/src/cards/pool/expedition-raptor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fall of the Titans",
+      "files": [
+        "engine/src/cards/pool/fall-of-the-titans.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fanged Flames",
+      "files": [
+        "engine/src/cards/pool/fanged-flames.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Feed the Flames",
+      "files": [
+        "engine/src/cards/pool/feed-the-flames.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flame-Blessed Bolt",
+      "files": [
+        "engine/src/cards/pool/flame-blessed-bolt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flayer Drone",
+      "files": [
+        "engine/src/cards/pool/flayer-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "General Tazri",
+      "files": [
+        "engine/src/cards/pool/general-tazri.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gift of Tusks",
+      "files": [
+        "engine/src/cards/pool/gift-of-tusks.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gigantoplasm",
+      "files": [
+        "engine/src/cards/pool/gigantoplasm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gladehart Cavalry",
+      "files": [
+        "engine/src/cards/pool/gladehart-cavalry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gnashing of Teeth",
+      "files": [
+        "engine/src/cards/pool/gnashing-of-teeth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Dark-Dwellers",
+      "files": [
+        "engine/src/cards/pool/goblin-dark-dwellers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Freerunner",
+      "files": [
+        "engine/src/cards/pool/goblin-freerunner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gravity Negator",
+      "files": [
+        "engine/src/cards/pool/gravity-negator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grip of the Roil",
+      "files": [
+        "engine/src/cards/pool/grip-of-the-roil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Harvester Troll",
+      "files": [
+        "engine/src/cards/pool/harvester-troll.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Immobilizer Eldrazi",
+      "files": [
+        "engine/src/cards/pool/immobilizer-eldrazi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Incendiary Flow",
+      "files": [
+        "engine/src/cards/pool/incendiary-flow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Isolation Zone",
+      "files": [
+        "engine/src/cards/pool/isolation-zone.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Joraga Auxiliary",
+      "files": [
+        "engine/src/cards/pool/joraga-auxiliary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jwar Isle Avenger",
+      "files": [
+        "engine/src/cards/pool/jwar-isle-avenger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kalemne's Captain",
+      "files": [
+        "engine/src/cards/pool/kalemnes-captain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kalemne, Disciple of Iroas",
+      "files": [
+        "engine/src/cards/pool/kalemne-disciple-of-iroas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kaseto, Orochi Archmage",
+      "files": [
+        "engine/src/cards/pool/kaseto-orochi-archmage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kazuul's Toll Collector",
+      "files": [
+        "engine/src/cards/pool/kazuuls-toll-collector.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Scythemaster",
+      "files": [
+        "engine/src/cards/pool/kor-scythemaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kozilek's Return",
+      "files": [
+        "engine/src/cards/pool/kozileks-return.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lava Coil",
+      "files": [
+        "engine/src/cards/pool/lava-coil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lead by Example",
+      "files": [
+        "engine/src/cards/pool/lead-by-example.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loam Larva",
+      "files": [
+        "engine/src/cards/pool/loam-larva.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mawloc",
+      "files": [
+        "engine/src/cards/pool/mawloc.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Meteor Blast",
+      "files": [
+        "engine/src/cards/pool/meteor-blast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Narset's Rebuke",
+      "files": [
+        "engine/src/cards/pool/narsets-rebuke.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Necrotic Wound",
+      "files": [
+        "engine/src/cards/pool/necrotic-wound.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Null Caller",
+      "files": [
+        "engine/src/cards/pool/null-caller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oath of Chandra",
+      "files": [
+        "engine/src/cards/pool/oath-of-chandra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Oath of Jace",
+      "files": [
+        "engine/src/cards/pool/oath-of-jace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ob Nixilis's Cruelty",
+      "files": [
+        "engine/src/cards/pool/ob-nixiliss-cruelty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Obliterating Bolt",
+      "files": [
+        "engine/src/cards/pool/obliterating-bolt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Overwhelming Denial",
+      "files": [
+        "engine/src/cards/pool/overwhelming-denial.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pinecone Strike",
+      "files": [
+        "engine/src/cards/pool/pinecone-strike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Press into Service",
+      "files": [
+        "engine/src/cards/pool/press-into-service.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Puncturing Blow",
+      "files": [
+        "engine/src/cards/pool/puncturing-blow.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pyromancer's Assault",
+      "files": [
+        "engine/src/cards/pool/pyromancers-assault.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reality Smasher",
+      "files": [
+        "engine/src/cards/pool/reality-smasher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reaver Drone",
+      "files": [
+        "engine/src/cards/pool/reaver-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reckless Bushwhacker",
+      "files": [
+        "engine/src/cards/pool/reckless-bushwhacker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reduce to Ashes",
+      "files": [
+        "engine/src/cards/pool/reduce-to-ashes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Relief Captain",
+      "files": [
+        "engine/src/cards/pool/relief-captain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Remorseless Punishment",
+      "files": [
+        "engine/src/cards/pool/remorseless-punishment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Roiling Waters",
+      "files": [
+        "engine/src/cards/pool/roiling-waters.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Saddleback Lagac",
+      "files": [
+        "engine/src/cards/pool/saddleback-lagac.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scion Summoner",
+      "files": [
+        "engine/src/cards/pool/scion-summoner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scorching Dragonfire",
+      "files": [
+        "engine/src/cards/pool/scorching-dragonfire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scorchmark",
+      "files": [
+        "engine/src/cards/pool/scorchmark.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Searing Light",
+      "files": [
+        "engine/src/cards/pool/searing-light.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seed Guardian",
+      "files": [
+        "engine/src/cards/pool/seed-guardian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shoulder to Shoulder",
+      "files": [
+        "engine/src/cards/pool/shoulder-to-shoulder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sky Scourer",
+      "files": [
+        "engine/src/cards/pool/sky-scourer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smite the Deathless",
+      "files": [
+        "engine/src/cards/pool/smite-the-deathless.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sparkmage's Gambit",
+      "files": [
+        "engine/src/cards/pool/sparkmages-gambit.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sphinx of the Final Word",
+      "files": [
+        "engine/src/cards/pool/sphinx-of-the-final-word.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Steppe Glider",
+      "files": [
+        "engine/src/cards/pool/steppe-glider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stone Haven Outfitter",
+      "files": [
+        "engine/src/cards/pool/stone-haven-outfitter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stoneforge Acolyte",
+      "files": [
+        "engine/src/cards/pool/stoneforge-acolyte.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sweep Away",
+      "files": [
+        "engine/src/cards/pool/sweep-away.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sylvan Advocate",
+      "files": [
+        "engine/src/cards/pool/sylvan-advocate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thought Harvester",
+      "files": [
+        "engine/src/cards/pool/thought-harvester.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Torch the Tower",
+      "files": [
+        "engine/src/cards/pool/torch-the-tower.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tyrant of Valakut",
+      "files": [
+        "engine/src/cards/pool/tyrant-of-valakut.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Underworld Fires",
+      "files": [
+        "engine/src/cards/pool/underworld-fires.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unity of Purpose",
+      "files": [
+        "engine/src/cards/pool/unity-of-purpose.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unnatural Endurance",
+      "files": [
+        "engine/src/cards/pool/unnatural-endurance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vampire Envoy",
+      "files": [
+        "engine/src/cards/pool/vampire-envoy.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vile Redeemer",
+      "files": [
+        "engine/src/cards/pool/vile-redeemer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vines of the Recluse",
+      "files": [
+        "engine/src/cards/pool/vines-of-the-recluse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Void Grafter",
+      "files": [
+        "engine/src/cards/pool/void-grafter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Void Shatter",
+      "files": [
+        "engine/src/cards/pool/void-shatter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Walker of the Wastes",
+      "files": [
+        "engine/src/cards/pool/walker-of-the-wastes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wall of Resurgence",
+      "files": [
+        "engine/src/cards/pool/wall-of-resurgence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Weapons Trainer",
+      "files": [
+        "engine/src/cards/pool/weapons-trainer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wilt in the Heat",
+      "files": [
+        "engine/src/cards/pool/wilt-in-the-heat.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Visions of Brutality",
+      "needs": [
+        "trigger:deals-damage-once-per-event"
+      ],
+      "why": "'Whenever enchanted creature deals damage, its controller loses that much life' triggers once per damage event (the rulings); `deals-damage` fires once per recipient."
+    },
+    {
+      "name": "Dazzling Reflection",
+      "needs": [
+        "replacement:prevent-damage-by-target-this-turn"
+      ],
+      "why": "Prevents the next damage dealt by the target creature this turn; prevention shields only cover damage dealt to something or by a source chosen on resolution."
+    },
+    {
+      "name": "Dread Defiler",
+      "needs": [
+        "effect:cost-exiled-cards-this-way"
+      ],
+      "why": "Damage equal to the power of the creature card exiled to pay the cost: no amount reads a cost-exiled card."
+    },
+    {
+      "name": "Mindmelter",
+      "needs": [
+        "effect:target-player-exiles-from-hand"
+      ],
+      "why": "'Target opponent exiles a card from their hand': no target-player hand exile."
+    },
+    {
+      "name": "Hedron Alignment",
+      "needs": [
+        "condition:owns-named-card-in-every-zone"
+      ],
+      "why": "Win condition reads cards named Hedron Alignment across hand, graveyard, exile and battlefield, after an optional reveal of your hand."
+    },
+    {
+      "name": "Synthetic Destiny",
+      "needs": [
+        "effect:delayed-count-done-this-way"
+      ],
+      "why": "The end-step delayed trigger must remember how many creatures were exiled."
+    },
+    {
+      "name": "Wretched Confluence",
+      "needs": [
+        "effect:modal-repeat-modes"
+      ],
+      "why": "'You may choose the same mode more than once': castModal can't repeat a mode."
+    },
+    {
+      "name": "Deceiver of Form",
+      "needs": [
+        "effect:become-copy-filter-except-source"
+      ],
+      "why": "'Creatures you control other than this creature become copies': become-copy's filter can't leave out the source."
+    },
+    {
+      "name": "Flaying Tendrils",
+      "needs": [
+        "replacement:turn-exile-if-dies-filter"
+      ],
+      "why": "'If a creature would die this turn, exile it instead' covers every creature for the turn, not a target or the creatures it damaged."
+    },
+    {
+      "name": "Witness the End",
+      "needs": [
+        "effect:target-player-exiles-from-hand"
+      ],
+      "why": "'Target opponent exiles two cards from their hand': no target-player hand exile."
+    },
+    {
+      "name": "Verdant Confluence",
+      "needs": [
+        "effect:modal-repeat-modes"
+      ],
+      "why": "Choose three, the same mode more than once."
+    },
+    {
+      "name": "Righteous Confluence",
+      "needs": [
+        "effect:modal-repeat-modes"
+      ],
+      "why": "Choose three, the same mode more than once."
+    },
+    {
+      "name": "Thought-Knot Seer",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "Exile a nonland card you choose from a target opponent's revealed hand: discard-chosen only discards."
+    },
+    {
+      "name": "Inverter of Truth",
+      "needs": [
+        "zone:exile-face-down"
+      ],
+      "why": "Exiles the library face down (no one may look at it, the ruling)."
+    },
+    {
+      "name": "Linvala, the Preserver",
+      "needs": [
+        "condition:opponent-more-life"
+      ],
+      "why": "'If an opponent has more life than you' has no condition."
+    },
+    {
+      "name": "Cultivator Drone",
+      "needs": [
+        "mana:spend-only-colorless-or-c-cost"
+      ],
+      "why": "'… or pay a cost that contains {C}' isn't a ManaSpendOnly."
+    },
+    {
+      "name": "Nissa's Judgment",
+      "needs": [
+        "effect:each-creature-deals-power-damage-to-target"
+      ],
+      "why": "Each creature with a +1/+1 counter deals damage as its own source."
+    },
+    {
+      "name": "Ruin in Their Wake",
+      "needs": [
+        "effect:search-destination-choice"
+      ],
+      "why": "Battlefield or hand is chosen after the search, only with a Wastes."
+    },
+    {
+      "name": "Thief of Blood",
+      "needs": [
+        "effect:remove-all-counters",
+        "effect:counters-removed-this-way"
+      ],
+      "why": "Removes every counter from all permanents and enters with that many."
+    },
+    {
+      "name": "Dawnbreak Reclaimer",
+      "needs": [
+        "effect:opponent-chooses-from-graveyard",
+        "decision:opponent-chooses-card"
+      ],
+      "why": "The opponent chooses a card in your graveyard, then you may return both."
+    },
+    {
+      "name": "Chandra, Flamecaller",
+      "needs": [
+        "cost:loyalty-x"
+      ],
+      "why": "The −X ability."
+    },
+    {
+      "name": "Iona's Blessing",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "'Can block an additional creature each combat'."
+    },
+    {
+      "name": "Kozilek's Pathfinder",
+      "needs": [
+        "effect:target-cant-block-source-this-turn"
+      ],
+      "why": "'Target creature can't block this creature this turn': a restriction naming one attacker."
+    },
+    {
+      "name": "Devour in Flames",
+      "needs": [
+        "cost:return-permanent-additional-cost"
+      ],
+      "why": "Additional cost: return a land you control to its owner's hand."
+    },
+    {
+      "name": "Anya, Merciless Angel",
+      "needs": [
+        "effect:opponents-with-less-life-count",
+        "condition:life-less-than-half-starting"
+      ],
+      "why": "Counts opponents strictly below half their starting life."
+    },
+    {
+      "name": "Seal of the Guildpact",
+      "needs": [
+        "mechanic:choose-two-colors-on-enter",
+        "filter:chosen-color"
+      ],
+      "why": "Choose two colours as it enters; cost reductions read them."
+    },
+    {
+      "name": "Aethersnatch",
+      "needs": [
+        "effect:gain-control-spell"
+      ],
+      "why": "Gains control of a target spell."
+    },
+    {
+      "name": "Mirror Match",
+      "needs": [
+        "effect:token-enters-blocking"
+      ],
+      "why": "Token copies enter blocking each attacker."
+    },
+    {
+      "name": "Can't Stay Away",
+      "needs": [
+        "replacement:grant-exile-if-would-die"
+      ],
+      "why": "The returned creature gains 'If this creature would die, exile it instead' — a permanent ability, not this turn's replacement."
+    },
+    {
+      "name": "Draconic Intervention",
+      "needs": [
+        "cost:additional-cost-exile-from-graveyard"
+      ],
+      "why": "The 'creature dealt damage this way' exile is built; the additional cost exiling an instant or sorcery card (X = its mana value) isn't."
+    },
+    {
+      "name": "Disintegrate",
+      "needs": [
+        "effect:cant-be-regenerated-this-turn"
+      ],
+      "why": "The exile is built; 'it can't be regenerated this turn' isn't."
+    },
+    {
+      "name": "Fiery Annihilation",
+      "needs": [
+        "condition:attached-to-target"
+      ],
+      "why": "The exile is built; 'exile up to one target Equipment attached to that creature' isn't."
+    }
+  ]
+}

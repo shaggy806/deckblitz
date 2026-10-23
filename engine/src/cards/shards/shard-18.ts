@@ -98,6 +98,7 @@ import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
+import _poolCrushOfTentacles from "../pool/crush-of-tentacles.js";
 import _poolCrystallineGiant from "../pool/crystalline-giant.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
@@ -112,6 +113,7 @@ import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiligentExcavator from "../pool/diligent-excavator.js";
+import _poolDimensionalInfiltrator from "../pool/dimensional-infiltrator.js";
 import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
@@ -203,6 +205,7 @@ import _poolGuildpactInformant from "../pool/guildpact-informant.js";
 import _poolHall from "../pool/hall.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
 import _poolHardenedTactician from "../pool/hardened-tactician.js";
+import _poolHarvesterTroll from "../pool/harvester-troll.js";
 import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
@@ -254,6 +257,7 @@ import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
 import _poolKomainuBattleArmor from "../pool/komainu-battle-armor.js";
 import _poolKothsCourier from "../pool/koths-courier.js";
+import _poolKozileksReturn from "../pool/kozileks-return.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
 import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKraumViolentCacophony from "../pool/kraum-violent-cacophony.js";
@@ -718,6 +722,7 @@ const shard: CardShard = {
     _poolCrashingFootfalls,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
+    _poolCrushOfTentacles,
     _poolCrystallineGiant,
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
@@ -732,6 +737,7 @@ const shard: CardShard = {
     _poolDevotedDruid,
     _poolDevoutChaplain,
     _poolDiligentExcavator,
+    _poolDimensionalInfiltrator,
     _poolDirgurIslandDragon,
     _poolDiscipleOfBolas,
     _poolDisempower,
@@ -823,6 +829,7 @@ const shard: CardShard = {
     _poolHall,
     _poolHamzaGuardianOfArashin,
     _poolHardenedTactician,
+    _poolHarvesterTroll,
     _poolHauntTheNetwork,
     _poolHauntedCloak,
     _poolHearthbornBattler,
@@ -874,6 +881,7 @@ const shard: CardShard = {
     _poolKolaghanWarmonger,
     _poolKomainuBattleArmor,
     _poolKothsCourier,
+    _poolKozileksReturn,
     _poolKozileksUnsealing,
     _poolKrangMasterMind,
     _poolKraumViolentCacophony,

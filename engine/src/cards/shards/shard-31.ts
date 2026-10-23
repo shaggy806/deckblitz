@@ -60,6 +60,7 @@ import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
+import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
 import _poolBloodCrypt from "../pool/blood-crypt.js";
 import _poolBloodswornKnight from "../pool/bloodsworn-knight.js";
 import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
@@ -76,6 +77,7 @@ import _poolBrandywineFarmer from "../pool/brandywine-farmer.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBristlingHydra from "../pool/bristling-hydra.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
+import _poolBurnFromWithin from "../pool/burn-from-within.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
 import _poolCaltrops from "../pool/caltrops.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
@@ -389,6 +391,7 @@ import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
+import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
 import _poolOffspringsRevenge from "../pool/offsprings-revenge.js";
@@ -447,6 +450,7 @@ import _poolRimrockKnight from "../pool/rimrock-knight.js";
 import _poolRitualOfRestoration from "../pool/ritual-of-restoration.js";
 import _poolRobobrainWarMind from "../pool/robobrain-war-mind.js";
 import _poolRockBadger from "../pool/rock-badger.js";
+import _poolRoilingWaters from "../pool/roiling-waters.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRootlessYew from "../pool/rootless-yew.js";
 import _poolRubble from "../pool/rubble.js";
@@ -697,6 +701,7 @@ const shard: CardShard = {
     _poolBlackWidowDeadlyHunter,
     _poolBlightedAgent,
     _poolBlinkmothWell,
+    _poolBlitzOfTheThunderRaptor,
     _poolBloodCrypt,
     _poolBloodswornKnight,
     _poolBloodthornTaunter,
@@ -713,6 +718,7 @@ const shard: CardShard = {
     _poolBrindleBoar,
     _poolBristlingHydra,
     _poolBrotherhoodAmbushers,
+    _poolBurnFromWithin,
     _poolCallousDismissal,
     _poolCaltrops,
     _poolCampusCrier,
@@ -1026,6 +1032,7 @@ const shard: CardShard = {
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
+    _poolOathOfJace,
     _poolObscuraInterceptor,
     _poolOccultEpiphany,
     _poolOffspringsRevenge,
@@ -1084,6 +1091,7 @@ const shard: CardShard = {
     _poolRitualOfRestoration,
     _poolRobobrainWarMind,
     _poolRockBadger,
+    _poolRoilingWaters,
     _poolRollingTemblor,
     _poolRootlessYew,
     _poolRubble,

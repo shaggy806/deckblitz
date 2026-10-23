@@ -322,6 +322,7 @@ import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMarshalOfZhalfir from "../pool/marshal-of-zhalfir.js";
 import _poolMastersManufactory from "../pool/masters-manufactory.js";
 import _poolMaulfistSquad from "../pool/maulfist-squad.js";
+import _poolMawloc from "../pool/mawloc.js";
 import _poolMayhemDevil from "../pool/mayhem-devil.js";
 import _poolMelesseSpirit from "../pool/melesse-spirit.js";
 import _poolMemorialToWar from "../pool/memorial-to-war.js";
@@ -387,6 +388,7 @@ import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
 import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPsychicWhorl from "../pool/psychic-whorl.js";
 import _poolPulseTracker from "../pool/pulse-tracker.js";
+import _poolPyromancersAssault from "../pool/pyromancers-assault.js";
 import _poolPyrotechnics from "../pool/pyrotechnics.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
@@ -446,6 +448,7 @@ import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
+import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
@@ -544,6 +547,7 @@ import _poolUrborg from "../pool/urborg.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolUtilityKnife from "../pool/utility-knife.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
+import _poolVampireEnvoy from "../pool/vampire-envoy.js";
 import _poolVampireGourmand from "../pool/vampire-gourmand.js";
 import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
@@ -912,6 +916,7 @@ const shard: CardShard = {
     _poolMarshalOfZhalfir,
     _poolMastersManufactory,
     _poolMaulfistSquad,
+    _poolMawloc,
     _poolMayhemDevil,
     _poolMelesseSpirit,
     _poolMemorialToWar,
@@ -977,6 +982,7 @@ const shard: CardShard = {
     _poolPsychicFrog,
     _poolPsychicWhorl,
     _poolPulseTracker,
+    _poolPyromancersAssault,
     _poolPyrotechnics,
     _poolQuantumEntanglement,
     _poolQuillBladeLaureate,
@@ -1036,6 +1042,7 @@ const shard: CardShard = {
     _poolShatterskullGiant,
     _poolShepherdOfTheClouds,
     _poolShiftingCeratops,
+    _poolShoulderToShoulder,
     _poolSickleRipper,
     _poolSilhanaWayfinder,
     _poolSilkWebWeaver,
@@ -1134,6 +1141,7 @@ const shard: CardShard = {
     _poolUrzasWorkshop,
     _poolUtilityKnife,
     _poolValorousStance,
+    _poolVampireEnvoy,
     _poolVampireGourmand,
     _poolVanguardOfTheRestless,
     _poolVassalSoul,

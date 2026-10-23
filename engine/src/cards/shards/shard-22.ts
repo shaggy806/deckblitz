@@ -122,6 +122,7 @@ import _poolCynicalLoner from "../pool/cynical-loner.js";
 import _poolDarkSalvation from "../pool/dark-salvation.js";
 import _poolDaruLancer from "../pool/daru-lancer.js";
 import _poolDashingBloodsucker from "../pool/dashing-bloodsucker.js";
+import _poolDaxosTheReturned from "../pool/daxos-the-returned.js";
 import _poolDeadlyTempest from "../pool/deadly-tempest.js";
 import _poolDeathGrasp from "../pool/death-grasp.js";
 import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
@@ -400,6 +401,7 @@ import _poolRayFilletWaveWarrior from "../pool/ray-fillet-wave-warrior.js";
 import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
 import _poolRealityHeist from "../pool/reality-heist.js";
+import _poolReaverDrone from "../pool/reaver-drone.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolRecklessRacer from "../pool/reckless-racer.js";
 import _poolRegeneration from "../pool/regeneration.js";
@@ -438,6 +440,7 @@ import _poolScreechingHarpy from "../pool/screeching-harpy.js";
 import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSearchThePremises from "../pool/search-the-premises.js";
+import _poolSearingLight from "../pool/searing-light.js";
 import _poolSeedpodSquire from "../pool/seedpod-squire.js";
 import _poolSeekTheHeart from "../pool/seek-the-heart.js";
 import _poolSeekersFolly from "../pool/seekers-folly.js";
@@ -576,6 +579,7 @@ import _poolVirulentSwipe from "../pool/virulent-swipe.js";
 import _poolVithianStinger from "../pool/vithian-stinger.js";
 import _poolViviensJaguar from "../pool/viviens-jaguar.js";
 import _poolViviensTalent from "../pool/viviens-talent.js";
+import _poolVoidShatter from "../pool/void-shatter.js";
 import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
 import _poolVoraciousVampire from "../pool/voracious-vampire.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
@@ -743,6 +747,7 @@ const shard: CardShard = {
     _poolDarkSalvation,
     _poolDaruLancer,
     _poolDashingBloodsucker,
+    _poolDaxosTheReturned,
     _poolDeadlyTempest,
     _poolDeathGrasp,
     _poolDeathbloomGardener,
@@ -1021,6 +1026,7 @@ const shard: CardShard = {
     _poolRazorfinHunter,
     _poolRazortipWhip,
     _poolRealityHeist,
+    _poolReaverDrone,
     _poolRecklessLackey,
     _poolRecklessRacer,
     _poolRegeneration,
@@ -1059,6 +1065,7 @@ const shard: CardShard = {
     _poolSeafloorStalker,
     _poolSealOfStrength,
     _poolSearchThePremises,
+    _poolSearingLight,
     _poolSeedpodSquire,
     _poolSeekTheHeart,
     _poolSeekersFolly,
@@ -1197,6 +1204,7 @@ const shard: CardShard = {
     _poolVithianStinger,
     _poolViviensJaguar,
     _poolViviensTalent,
+    _poolVoidShatter,
     _poolVolcanicTorrent,
     _poolVoraciousVampire,
     _poolVulshokBattlegear,

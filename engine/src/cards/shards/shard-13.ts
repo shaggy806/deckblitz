@@ -213,13 +213,16 @@ import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
 import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
 import _poolGatesOfIstfell from "../pool/gates-of-istfell.js";
 import _poolGatheringPlace from "../pool/gathering-place.js";
+import _poolGeneralTazri from "../pool/general-tazri.js";
 import _poolGhoulsteed from "../pool/ghoulsteed.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGigantoad from "../pool/gigantoad.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
+import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
+import _poolGripOfTheRoil from "../pool/grip-of-the-roil.js";
 import _poolGroveRumbler from "../pool/grove-rumbler.js";
 import _poolGrubNotoriousAuntie from "../pool/grub-notorious-auntie.js";
 import _poolGuidedStrike from "../pool/guided-strike.js";
@@ -418,6 +421,7 @@ import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRushbladeCommander from "../pool/rushblade-commander.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSacredExcavation from "../pool/sacred-excavation.js";
+import _poolSaddlebackLagac from "../pool/saddleback-lagac.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
 import _poolSagittarsVolley from "../pool/sagittars-volley.js";
 import _poolSaheelisDirective from "../pool/saheelis-directive.js";
@@ -433,6 +437,7 @@ import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
+import _poolScionSummoner from "../pool/scion-summoner.js";
 import _poolScorchingShot from "../pool/scorching-shot.js";
 import _poolScourgeDevil from "../pool/scourge-devil.js";
 import _poolScrappyBruiser from "../pool/scrappy-bruiser.js";
@@ -830,13 +835,16 @@ const shard: CardShard = {
     _poolGarrisonExcavator,
     _poolGatesOfIstfell,
     _poolGatheringPlace,
+    _poolGeneralTazri,
     _poolGhoulsteed,
     _poolGiantsBoulder,
     _poolGiftOfParadise,
     _poolGigantoad,
     _poolGoblinBalloonBrigade,
+    _poolGoblinDarkDwellers,
     _poolGoblinPiker,
     _poolGreatHornKrushok,
+    _poolGripOfTheRoil,
     _poolGroveRumbler,
     _poolGrubNotoriousAuntie,
     _poolGuidedStrike,
@@ -1035,6 +1043,7 @@ const shard: CardShard = {
     _poolRushbladeCommander,
     _poolRussetWolves,
     _poolSacredExcavation,
+    _poolSaddlebackLagac,
     _poolSageOfDays,
     _poolSagittarsVolley,
     _poolSaheelisDirective,
@@ -1050,6 +1059,7 @@ const shard: CardShard = {
     _poolSarumansTrickery,
     _poolSawtuskDemolisher,
     _poolScarwoodGoblins,
+    _poolScionSummoner,
     _poolScorchingShot,
     _poolScourgeDevil,
     _poolScrappyBruiser,

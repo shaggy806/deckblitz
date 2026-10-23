@@ -8,6 +8,7 @@ import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
+import _poolAbstruseInterference from "../pool/abstruse-interference.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAerialEngineer from "../pool/aerial-engineer.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
@@ -45,6 +46,7 @@ import _poolAutomaticLibrarian from "../pool/automatic-librarian.js";
 import _poolAvenBattlePriest from "../pool/aven-battle-priest.js";
 import _poolAxebaneBeast from "../pool/axebane-beast.js";
 import _poolBackForSeconds from "../pool/back-for-seconds.js";
+import _poolBalothPup from "../pool/baloth-pup.js";
 import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
 import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
 import _poolBasriKet from "../pool/basri-ket.js";
@@ -438,6 +440,7 @@ import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRecklessRage from "../pool/reckless-rage.js";
 import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
+import _poolReliefCaptain from "../pool/relief-captain.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
 import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolReptilianReflection from "../pool/reptilian-reflection.js";
@@ -571,6 +574,7 @@ import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedst
 import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThornThallid from "../pool/thorn-thallid.js";
+import _poolThoughtHarvester from "../pool/thought-harvester.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
 import _poolThrabenFoulbloods from "../pool/thraben-foulbloods.js";
 import _poolThrabenMilitia from "../pool/thraben-militia.js";
@@ -674,6 +678,7 @@ const shard: CardShard = {
     _poolAberrantManawurm,
     _poolAbolisherOfBloodlines,
     _poolAbsorbingMan,
+    _poolAbstruseInterference,
     _poolActOfTreason,
     _poolAerialEngineer,
     _poolAetherChanneler,
@@ -711,6 +716,7 @@ const shard: CardShard = {
     _poolAvenBattlePriest,
     _poolAxebaneBeast,
     _poolBackForSeconds,
+    _poolBalothPup,
     _poolBalshanCollaborator,
     _poolBarkchannelPathway,
     _poolBasriKet,
@@ -1104,6 +1110,7 @@ const shard: CardShard = {
     _poolRecklessRage,
     _poolRedcapHeelslasher,
     _poolRefresh,
+    _poolReliefCaptain,
     _poolRenderSpeechless,
     _poolRentIsDue,
     _poolReptilianReflection,
@@ -1237,6 +1244,7 @@ const shard: CardShard = {
     _poolThiefsKnife,
     _poolThorOdinson,
     _poolThornThallid,
+    _poolThoughtHarvester,
     _poolThoughtVessel,
     _poolThrabenFoulbloods,
     _poolThrabenMilitia,

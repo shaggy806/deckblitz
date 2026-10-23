@@ -185,6 +185,7 @@ import _poolFalconAbomination from "../pool/falcon-abomination.js";
 import _poolFalconWingedWonder from "../pool/falcon-winged-wonder.js";
 import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
+import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendlash from "../pool/fiendlash.js";
@@ -260,6 +261,7 @@ import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
 import _poolIchTekikSalvageSplicer from "../pool/ich-tekik-salvage-splicer.js";
 import _poolIdolized from "../pool/idolized.js";
 import _poolIllicitMasquerade from "../pool/illicit-masquerade.js";
+import _poolImmobilizerEldrazi from "../pool/immobilizer-eldrazi.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
@@ -807,6 +809,7 @@ const shard: CardShard = {
     _poolFalconWingedWonder,
     _poolFalkenrathForebear,
     _poolFalkenrathMarauders,
+    _poolFallOfTheTitans,
     _poolFangrenMarauder,
     _poolFertileGround,
     _poolFiendlash,
@@ -882,6 +885,7 @@ const shard: CardShard = {
     _poolIchTekikSalvageSplicer,
     _poolIdolized,
     _poolIllicitMasquerade,
+    _poolImmobilizerEldrazi,
     _poolImotekhTheStormlord,
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,

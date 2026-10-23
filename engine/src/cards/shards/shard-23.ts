@@ -253,6 +253,7 @@ import _poolInfernalCaptor from "../pool/infernal-captor.js";
 import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
+import _poolIsolationZone from "../pool/isolation-zone.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
 import _poolIvoryTower from "../pool/ivory-tower.js";
 import _poolJaceBeleren from "../pool/jace-beleren.js";
@@ -869,6 +870,7 @@ const shard: CardShard = {
     _poolIntegrityIntervention,
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
+    _poolIsolationZone,
     _poolItzquinthFirstbornOfGishath,
     _poolIvoryTower,
     _poolJaceBeleren,

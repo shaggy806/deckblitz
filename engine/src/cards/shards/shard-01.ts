@@ -25,6 +25,7 @@ import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
 import _poolArguelsBloodFast from "../pool/arguels-blood-fast.js";
+import _poolArjunTheShiftingFlame from "../pool/arjun-the-shifting-flame.js";
 import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArrestersAdmonition from "../pool/arresters-admonition.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
@@ -130,6 +131,7 @@ import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
 import _poolDutifulReplicator from "../pool/dutiful-replicator.js";
 import _poolDwarfholdChampion from "../pool/dwarfhold-champion.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
+import _poolEldraziMimic from "../pool/eldrazi-mimic.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
 import _poolElectrodominance from "../pool/electrodominance.js";
@@ -187,6 +189,7 @@ import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
+import _poolGladehartCavalry from "../pool/gladehart-cavalry.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
@@ -364,6 +367,7 @@ import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
 import _poolPopQuiz from "../pool/pop-quiz.js";
 import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrecognitivePerception from "../pool/precognitive-perception.js";
+import _poolPressIntoService from "../pool/press-into-service.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
@@ -462,6 +466,7 @@ import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
+import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
 import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
 import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
@@ -481,6 +486,7 @@ import _poolSunscapeMaster from "../pool/sunscape-master.js";
 import _poolSuperState from "../pool/super-state.js";
 import _poolSwarmShambler from "../pool/swarm-shambler.js";
 import _poolSwiftWarden from "../pool/swift-warden.js";
+import _poolSylvanAdvocate from "../pool/sylvan-advocate.js";
 import _poolTailTheSuspect from "../pool/tail-the-suspect.js";
 import _poolTakenByNightmares from "../pool/taken-by-nightmares.js";
 import _poolTalismanOfConviction from "../pool/talisman-of-conviction.js";
@@ -621,6 +627,7 @@ const shard: CardShard = {
     _poolAnticipate,
     _poolArchweaver,
     _poolArguelsBloodFast,
+    _poolArjunTheShiftingFlame,
     _poolArmsOfHadar,
     _poolArrestersAdmonition,
     _poolArtisansSorrow,
@@ -726,6 +733,7 @@ const shard: CardShard = {
     _poolDutifulReplicator,
     _poolDwarfholdChampion,
     _poolEagleVision,
+    _poolEldraziMimic,
     _poolEldraziMonument,
     _poolEldritchEvolution,
     _poolElectrodominance,
@@ -783,6 +791,7 @@ const shard: CardShard = {
     _poolGhoulcallersAccomplice,
     _poolGibberingBarricade,
     _poolGiftOfStrands,
+    _poolGladehartCavalry,
     _poolGlareOfSubdual,
     _poolGleamingBastion,
     _poolGluttonousGuest,
@@ -960,6 +969,7 @@ const shard: CardShard = {
     _poolPopQuiz,
     _poolPowerBoost,
     _poolPrecognitivePerception,
+    _poolPressIntoService,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
     _poolPrismaticLens,
@@ -1058,6 +1068,7 @@ const shard: CardShard = {
     _poolSpectralRider,
     _poolSpellSwindle,
     _poolSpewFlame,
+    _poolSphinxOfTheFinalWord,
     _poolSphinxsInsight,
     _poolSpiritShield,
     _poolStab,
@@ -1077,6 +1088,7 @@ const shard: CardShard = {
     _poolSuperState,
     _poolSwarmShambler,
     _poolSwiftWarden,
+    _poolSylvanAdvocate,
     _poolTailTheSuspect,
     _poolTakenByNightmares,
     _poolTalismanOfConviction,

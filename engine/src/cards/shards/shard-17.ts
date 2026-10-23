@@ -155,6 +155,7 @@ import _poolEerieGravestone from "../pool/eerie-gravestone.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
 import _poolElderArthurMaxson from "../pool/elder-arthur-maxson.js";
 import _poolElectrolyze from "../pool/electrolyze.js";
+import _poolElementalUprising from "../pool/elemental-uprising.js";
 import _poolElephantGraveyard from "../pool/elephant-graveyard.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
@@ -341,6 +342,7 @@ import _poolMonkIdealist from "../pool/monk-idealist.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
+import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
@@ -612,6 +614,7 @@ import _tokensRedElementalToken31 from "../tokens/red-elemental-token-3-1.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
 import _tokensScarecrowToken from "../tokens/scarecrow-token.js";
 import _tokensSpiritTokenAnafenzaUnyieldingLineage from "../tokens/spirit-token-anafenza-unyielding-lineage.js";
+import _tokensSpiritTokenExperienceCounters from "../tokens/spirit-token-experience-counters.js";
 import _tokensThrullToken from "../tokens/thrull-token.js";
 import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-flying-haste.js";
 
@@ -769,6 +772,7 @@ const shard: CardShard = {
     _poolEfficientConstruction,
     _poolElderArthurMaxson,
     _poolElectrolyze,
+    _poolElementalUprising,
     _poolElephantGraveyard,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolMountainValley,
     _poolNardoleResourcefulCyborg,
     _poolNayaPanorama,
+    _poolNecroticWound,
     _poolNemaSiltlurker,
     _poolNestRobber,
     _poolNiambiFaithfulHealer,
@@ -1228,6 +1233,7 @@ const shard: CardShard = {
     _tokensRedSpiritTokenMenace,
     _tokensScarecrowToken,
     _tokensSpiritTokenAnafenzaUnyieldingLineage,
+    _tokensSpiritTokenExperienceCounters,
     _tokensThrullToken,
     _tokensXXElementalTokenFlyingHaste,
   ],

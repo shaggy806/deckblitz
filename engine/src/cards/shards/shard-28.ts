@@ -288,6 +288,7 @@ import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
+import _poolLoamLarva from "../pool/loam-larva.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
@@ -407,6 +408,7 @@ import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
 import _poolReefRoads from "../pool/reef-roads.js";
+import _poolRemorselessPunishment from "../pool/remorseless-punishment.js";
 import _poolRepelTheVile from "../pool/repel-the-vile.js";
 import _poolResistanceSkywarden from "../pool/resistance-skywarden.js";
 import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
@@ -912,6 +914,7 @@ const shard: CardShard = {
     _poolLevitatingStatue,
     _poolLivingWall,
     _poolLlanowarKnight,
+    _poolLoamLarva,
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolRecklessImpulse,
     _poolRedcapThief,
     _poolReefRoads,
+    _poolRemorselessPunishment,
     _poolRepelTheVile,
     _poolResistanceSkywarden,
     _poolResoluteReinforcements,

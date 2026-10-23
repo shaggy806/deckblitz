@@ -327,6 +327,7 @@ import _poolMeltdown from "../pool/meltdown.js";
 import _poolMemorialVault from "../pool/memorial-vault.js";
 import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
+import _poolMeteorBlast from "../pool/meteor-blast.js";
 import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
@@ -598,6 +599,7 @@ import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
 import _poolWieldingTheGreenDragon from "../pool/wielding-the-green-dragon.js";
 import _poolWildFieldScarecrow from "../pool/wild-field-scarecrow.js";
 import _poolWildJhovall from "../pool/wild-jhovall.js";
+import _poolWiltInTheHeat from "../pool/wilt-in-the-heat.js";
 import _poolWirewoodSymbiote from "../pool/wirewood-symbiote.js";
 import _poolWishcoinCrab from "../pool/wishcoin-crab.js";
 import _poolWithinRange from "../pool/within-range.js";
@@ -957,6 +959,7 @@ const shard: CardShard = {
     _poolMemorialVault,
     _poolMerchantOfVenom,
     _poolMercilessEnforcers,
+    _poolMeteorBlast,
     _poolMeteorite,
     _poolMeticulousCommons,
     _poolMinasMorgulDarkFortress,
@@ -1228,6 +1231,7 @@ const shard: CardShard = {
     _poolWieldingTheGreenDragon,
     _poolWildFieldScarecrow,
     _poolWildJhovall,
+    _poolWiltInTheHeat,
     _poolWirewoodSymbiote,
     _poolWishcoinCrab,
     _poolWithinRange,

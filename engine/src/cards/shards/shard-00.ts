@@ -13,6 +13,7 @@ import _poolAfflict from "../pool/afflict.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
 import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
+import _poolAkoumFlameseeker from "../pool/akoum-flameseeker.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
 import _poolAlloyMyr from "../pool/alloy-myr.js";
@@ -52,6 +53,7 @@ import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
+import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
@@ -182,6 +184,7 @@ import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
+import _poolFlayerDrone from "../pool/flayer-drone.js";
 import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
@@ -469,6 +472,7 @@ import _poolSolitude from "../pool/solitude.js";
 import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
+import _poolSparkmagesGambit from "../pool/sparkmages-gambit.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
 import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
@@ -482,6 +486,7 @@ import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
 import _poolStewardOfSolidarity from "../pool/steward-of-solidarity.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
 import _poolStoneHavenPilgrim from "../pool/stone-haven-pilgrim.js";
+import _poolStoneforgeAcolyte from "../pool/stoneforge-acolyte.js";
 import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
@@ -637,6 +642,7 @@ const shard: CardShard = {
     _poolAgathasChampion,
     _poolAgentOfTheIronThrone,
     _poolAirliftChaplain,
+    _poolAkoumFlameseeker,
     _poolAleshaWhoLaughsAtFate,
     _poolAlliesAtLast,
     _poolAlloyMyr,
@@ -676,6 +682,7 @@ const shard: CardShard = {
     _poolBladewingTheRisen,
     _poolBlindObedience,
     _poolBloodcrazedNeonate,
+    _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
@@ -806,6 +813,7 @@ const shard: CardShard = {
     _poolFillWithFright,
     _poolFireshrieker,
     _poolFishingGear,
+    _poolFlayerDrone,
     _poolFloodpitsDrowner,
     _poolFlowstoneThopter,
     _poolFootHeadquarters,
@@ -1093,6 +1101,7 @@ const shard: CardShard = {
     _poolSongOfStupefaction,
     _poolSoulherder,
     _poolSowerOfChaos,
+    _poolSparkmagesGambit,
     _poolSpectacleSummit,
     _poolSpectralShepherd,
     _poolSpellStutter,
@@ -1106,6 +1115,7 @@ const shard: CardShard = {
     _poolStewardOfSolidarity,
     _poolStitchInTime,
     _poolStoneHavenPilgrim,
+    _poolStoneforgeAcolyte,
     _poolStoneriseSpirit,
     _poolStoneworkPuma,
     _poolStormbeaconBlade,

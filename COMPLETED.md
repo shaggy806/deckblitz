@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Oath of the Gatewatch and Commander 2015, whole** (batch 149): surge (rule 702.117 —
+  `alternativeCost` with `keyword: "surge"`, `self-surge-paid`) and "if that creature would die
+  this turn, exile it instead" (`exile-if-dies-this-turn` — a per-object turn number read in
+  `moveObject`), with its "if a creature dealt damage this way would die" form, all three read
+  by the scaffolder. 121 authored — four `card-author` agents and the lead: Reality Smasher,
+  Kozilek's Return, Crush of Tentacles, Mawloc, Kalemne, Disciple of Iroas, Daxos the Returned,
+  Gigantoplasm, Lava Coil, Anger of the Gods, Scorching Dragonfire and the 27 other cards
+  earlier batches had blocked on the exile replacement (2026-10-23).
 - **Shadows over Innistrad, whole** (batch 148): the werewolves' "if no spells were cast last
   turn, transform" built (`spells-cast-last-turn`, the scaffolder reading both faces' lines),
   with damage to a trigger's object (`damage.target: "trigger-object"`) and the all-hands count;

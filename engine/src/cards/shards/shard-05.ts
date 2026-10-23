@@ -568,6 +568,7 @@ import _poolVenomousChangeling from "../pool/venomous-changeling.js";
 import _poolVentureDeeper from "../pool/venture-deeper.js";
 import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
 import _poolVindictiveWarden from "../pool/vindictive-warden.js";
+import _poolVinesOfTheRecluse from "../pool/vines-of-the-recluse.js";
 import _poolViridianRevel from "../pool/viridian-revel.js";
 import _poolViridianShaman from "../pool/viridian-shaman.js";
 import _poolVodalianZombie from "../pool/vodalian-zombie.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolVentureDeeper,
     _poolVerdantRebirth,
     _poolVindictiveWarden,
+    _poolVinesOfTheRecluse,
     _poolViridianRevel,
     _poolViridianShaman,
     _poolVodalianZombie,

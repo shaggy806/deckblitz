@@ -52,6 +52,7 @@ import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
 import _poolBatteringKrasis from "../pool/battering-krasis.js";
 import _poolBattleMammoth from "../pool/battle-mammoth.js";
+import _poolBearerOfSilence from "../pool/bearer-of-silence.js";
 import _poolBeastieBeatdown from "../pool/beastie-beatdown.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
@@ -153,6 +154,7 @@ import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
+import _poolExpeditionRaptor from "../pool/expedition-raptor.js";
 import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
@@ -652,6 +654,7 @@ const shard: CardShard = {
     _poolBasiliskCollar,
     _poolBatteringKrasis,
     _poolBattleMammoth,
+    _poolBearerOfSilence,
     _poolBeastieBeatdown,
     _poolBedlam,
     _poolBefuddle,
@@ -753,6 +756,7 @@ const shard: CardShard = {
     _poolErrandRiderOfGondor,
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
+    _poolExpeditionRaptor,
     _poolExploration,
     _poolExpressiveFiredancer,
     _poolExtinguishTheLight,

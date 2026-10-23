@@ -35,6 +35,7 @@ import _poolBayou from "../pool/bayou.js";
 import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
 import _poolBelbeCorruptedObserver from "../pool/belbe-corrupted-observer.js";
 import _poolBenthicGiant from "../pool/benthic-giant.js";
+import _poolBetrayersBargain from "../pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
 import _poolBiblioplexKraken from "../pool/biblioplex-kraken.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
@@ -448,6 +449,7 @@ import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
 import _poolSkycoachWaypoint from "../pool/skycoach-waypoint.js";
 import _poolSliverOverlord from "../pool/sliver-overlord.js";
 import _poolSlumReaper from "../pool/slum-reaper.js";
+import _poolSmiteTheDeathless from "../pool/smite-the-deathless.js";
 import _poolSnakeBasket from "../pool/snake-basket.js";
 import _poolSokenzanCrucibleOfDefiance from "../pool/sokenzan-crucible-of-defiance.js";
 import _poolSolidGround from "../pool/solid-ground.js";
@@ -623,6 +625,7 @@ const shard: CardShard = {
     _poolBeetleHeadedMerchants,
     _poolBelbeCorruptedObserver,
     _poolBenthicGiant,
+    _poolBetrayersBargain,
     _poolBetrothTheBeast,
     _poolBiblioplexKraken,
     _poolBladeOfTheSixthPride,
@@ -1036,6 +1039,7 @@ const shard: CardShard = {
     _poolSkycoachWaypoint,
     _poolSliverOverlord,
     _poolSlumReaper,
+    _poolSmiteTheDeathless,
     _poolSnakeBasket,
     _poolSokenzanCrucibleOfDefiance,
     _poolSolidGround,

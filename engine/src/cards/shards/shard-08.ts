@@ -26,6 +26,7 @@ import _poolAlabasterMage from "../pool/alabaster-mage.js";
 import _poolAlacrianArmory from "../pool/alacrian-armory.js";
 import _poolAlertShuInfantry from "../pool/alert-shu-infantry.js";
 import _poolAllIsDust from "../pool/all-is-dust.js";
+import _poolAlliedReinforcements from "../pool/allied-reinforcements.js";
 import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
@@ -56,6 +57,7 @@ import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
 import _poolBaldursGate from "../pool/baldurs-gate.js";
 import _poolBalduvianBarbarians from "../pool/balduvian-barbarians.js";
+import _poolBansheeOfTheDreadChoir from "../pool/banshee-of-the-dread-choir.js";
 import _poolBarTheGate from "../pool/bar-the-gate.js";
 import _poolBarrenMoor from "../pool/barren-moor.js";
 import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
@@ -168,6 +170,7 @@ import _poolElspethsSmite from "../pool/elspeths-smite.js";
 import _poolElvenkingsHalls from "../pool/elvenkings-halls.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
 import _poolEmberethSkyblazer from "../pool/embereth-skyblazer.js";
+import _poolEmbodimentOfFury from "../pool/embodiment-of-fury.js";
 import _poolEmbodimentOfInsight from "../pool/embodiment-of-insight.js";
 import _poolEmbraceOblivion from "../pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
@@ -289,6 +292,7 @@ import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js"
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
+import _poolKalemneDiscipleOfIroas from "../pool/kalemne-disciple-of-iroas.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
@@ -414,6 +418,7 @@ import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
+import _poolRealitySmasher from "../pool/reality-smasher.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
@@ -670,6 +675,7 @@ const shard: CardShard = {
     _poolAlacrianArmory,
     _poolAlertShuInfantry,
     _poolAllIsDust,
+    _poolAlliedReinforcements,
     _poolAloeAlchemist,
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
@@ -700,6 +706,7 @@ const shard: CardShard = {
     _poolBagEndPorter,
     _poolBaldursGate,
     _poolBalduvianBarbarians,
+    _poolBansheeOfTheDreadChoir,
     _poolBarTheGate,
     _poolBarrenMoor,
     _poolBattleflySwarm,
@@ -812,6 +819,7 @@ const shard: CardShard = {
     _poolElvenkingsHalls,
     _poolElvishVanguard,
     _poolEmberethSkyblazer,
+    _poolEmbodimentOfFury,
     _poolEmbodimentOfInsight,
     _poolEmbraceOblivion,
     _poolEmbraceTheParadox,
@@ -933,6 +941,7 @@ const shard: CardShard = {
     _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,
+    _poolKalemneDiscipleOfIroas,
     _poolKapow,
     _poolKarganDragonrider,
     _poolKarooMeerkat,
@@ -1058,6 +1067,7 @@ const shard: CardShard = {
     _poolRangingRaptors,
     _poolRaphaelTheMuscle,
     _poolRaucousTheater,
+    _poolRealitySmasher,
     _poolRealmScorcherHellkite,
     _poolReapersScythe,
     _poolReaverAmbush,

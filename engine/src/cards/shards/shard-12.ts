@@ -490,6 +490,7 @@ import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
 import _poolSternProctor from "../pool/stern-proctor.js";
 import _poolStewTheConeys from "../pool/stew-the-coneys.js";
+import _poolStoneHavenOutfitter from "../pool/stone-haven-outfitter.js";
 import _poolStormchaserMage from "../pool/stormchaser-mage.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
@@ -1101,6 +1102,7 @@ const shard: CardShard = {
     _poolSternDismissal,
     _poolSternProctor,
     _poolStewTheConeys,
+    _poolStoneHavenOutfitter,
     _poolStormchaserMage,
     _poolStringOfDisappearances,
     _poolStrixLookout,

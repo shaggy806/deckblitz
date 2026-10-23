@@ -36,6 +36,7 @@ import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
 import _poolAvenEternal from "../pool/aven-eternal.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
+import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBandTogether from "../pool/band-together.js";
@@ -55,6 +56,7 @@ import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
 import _poolBenalishHonorGuard from "../pool/benalish-honor-guard.js";
 import _poolBesottedKnight from "../pool/besotted-knight.js";
 import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
+import _poolBirthingHulk from "../pool/birthing-hulk.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
@@ -641,6 +643,7 @@ const shard: CardShard = {
     _poolAssembleTheEntmoot,
     _poolAvenEternal,
     _poolAvenSquire,
+    _poolAwakenTheSkyTyrant,
     _poolAxgardBraggart,
     _poolBalefulStrix,
     _poolBandTogether,
@@ -660,6 +663,7 @@ const shard: CardShard = {
     _poolBenalishHonorGuard,
     _poolBesottedKnight,
     _poolBetorAncestorsVoice,
+    _poolBirthingHulk,
     _poolBitterbowSharpshooters,
     _poolBlackBoltInhumanKing,
     _poolBlacksmithsSkill,

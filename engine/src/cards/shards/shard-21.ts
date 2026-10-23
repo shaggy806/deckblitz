@@ -65,6 +65,7 @@ import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBother from "../pool/bother.js";
+import _poolBouncersBeatdown from "../pool/bouncers-beatdown.js";
 import _poolBramblefortFink from "../pool/bramblefort-fink.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
@@ -79,6 +80,7 @@ import _poolBuyYourSilence from "../pool/buy-your-silence.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
+import _poolCaptainsClaws from "../pool/captains-claws.js";
 import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCementShoes from "../pool/cement-shoes.js";
@@ -658,6 +660,7 @@ const shard: CardShard = {
     _poolBonebindOrator,
     _poolBoonOfEmrakul,
     _poolBother,
+    _poolBouncersBeatdown,
     _poolBramblefortFink,
     _poolBrawnAmadeusCho,
     _poolBrazenBlademaster,
@@ -672,6 +675,7 @@ const shard: CardShard = {
     _poolCacklingFiend,
     _poolCadricSoulKindler,
     _poolCanonizedInBlood,
+    _poolCaptainsClaws,
     _poolCapturedByLagacs,
     _poolCarnivorousPlant,
     _poolCementShoes,

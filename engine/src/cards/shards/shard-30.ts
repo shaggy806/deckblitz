@@ -41,6 +41,7 @@ import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAwakenedAwareness from "../pool/awakened-awareness.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
+import _poolBalothNull from "../pool/baloth-null.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
@@ -297,6 +298,7 @@ import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolJodahsCodex from "../pool/jodahs-codex.js";
 import _poolJohtullWurm from "../pool/johtull-wurm.js";
 import _poolJoust from "../pool/joust.js";
+import _poolKalemnesCaptain from "../pool/kalemnes-captain.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
 import _poolKazuulsCliffs from "../pool/kazuuls-cliffs.js";
@@ -428,6 +430,7 @@ import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
+import _poolRecklessBushwhacker from "../pool/reckless-bushwhacker.js";
 import _poolRedWard from "../pool/red-ward.js";
 import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
@@ -556,6 +559,7 @@ import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js"
 import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
 import _poolUnholyHeat from "../pool/unholy-heat.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
+import _poolUnnaturalEndurance from "../pool/unnatural-endurance.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
@@ -574,6 +578,7 @@ import _poolVoidSnare from "../pool/void-snare.js";
 import _poolVoltCharge from "../pool/volt-charge.js";
 import _poolVoltaicBrawler from "../pool/voltaic-brawler.js";
 import _poolVulpineGoliath from "../pool/vulpine-goliath.js";
+import _poolWalkerOfTheWastes from "../pool/walker-of-the-wastes.js";
 import _poolWallOfLostThoughts from "../pool/wall-of-lost-thoughts.js";
 import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
 import _poolWanderwineDistracter from "../pool/wanderwine-distracter.js";
@@ -652,6 +657,7 @@ const shard: CardShard = {
     _poolAwakenedAwareness,
     _poolAzoriusGuildgate,
     _poolAzulaAlwaysLies,
+    _poolBalothNull,
     _poolBalothWoodcrasher,
     _poolBannerhideKrushok,
     _poolBasilicaShepherd,
@@ -908,6 +914,7 @@ const shard: CardShard = {
     _poolJodahsCodex,
     _poolJohtullWurm,
     _poolJoust,
+    _poolKalemnesCaptain,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,
     _poolKazuulsCliffs,
@@ -1039,6 +1046,7 @@ const shard: CardShard = {
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,
     _poolReadyToRumble,
+    _poolRecklessBushwhacker,
     _poolRedWard,
     _poolRegnaTheRedeemer,
     _poolRejuvenate,
@@ -1167,6 +1175,7 @@ const shard: CardShard = {
     _poolUnfulfilledDesires,
     _poolUnholyHeat,
     _poolUniversityCampus,
+    _poolUnnaturalEndurance,
     _poolValleyFlamecaller,
     _poolVaporSnag,
     _poolVault75MiddleSchool,
@@ -1185,6 +1194,7 @@ const shard: CardShard = {
     _poolVoltCharge,
     _poolVoltaicBrawler,
     _poolVulpineGoliath,
+    _poolWalkerOfTheWastes,
     _poolWallOfLostThoughts,
     _poolWanderersIntervention,
     _poolWanderwineDistracter,

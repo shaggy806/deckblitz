@@ -5276,3 +5276,11 @@ engine terms. A second thing to check is a second test.
 ### Startled Awake: comes back from the graveyard as Persistent Nightmare
 - **Do:** Activate Startled Awake's ability in your graveyard ({3}{U}{U}).
 - **Expect:** It enters as Persistent Nightmare, a 1/1 with skulk — not as the sorcery, and not left in your graveyard.
+
+### Boulder Salvo: its surge cost is offered after you cast another spell
+- **Do:** Click Boulder Salvo in your hand and look at its ways to cast. Then cast Shock at Bob and look again.
+- **Expect:** At first only its {4}{R} cost is offered (you can't pay it). After Shock, a second choice reads "surge {1}{R}", and casting it that way kills Grizzly Bears.
+
+### Lava Coil: a creature that survives it is exiled when it dies later that turn
+- **Do:** Cast Lava Coil on Bob's Colossal Dreadmaw, then cast Shock on it.
+- **Expect:** The Dreadmaw survives Lava Coil (6/6 with 4 damage). Shock kills it, and it goes to exile, not Bob's graveyard.

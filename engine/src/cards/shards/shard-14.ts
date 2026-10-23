@@ -228,6 +228,7 @@ import _poolGatebreakerRam from "../pool/gatebreaker-ram.js";
 import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
+import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
@@ -310,6 +311,7 @@ import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
 import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
 import _poolKarganWarleader from "../pool/kargan-warleader.js";
+import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
@@ -565,6 +567,7 @@ import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
 import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
+import _poolVoidGrafter from "../pool/void-grafter.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
 import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
 import _poolVultureSchemingScavenger from "../pool/vulture-scheming-scavenger.js";
@@ -836,6 +839,7 @@ const shard: CardShard = {
     _poolGeistwave,
     _poolGhostsOfTheDamned,
     _poolGideonsCompany,
+    _poolGiftOfTusks,
     _poolGliderStaff,
     _poolGlimpseTheCore,
     _poolGlitchGhostSurveyor,
@@ -918,6 +922,7 @@ const shard: CardShard = {
     _poolKamiOfIndustry,
     _poolKamiOfRestlessShadows,
     _poolKarganWarleader,
+    _poolKasetoOrochiArchmage,
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
     _poolKindlyStranger,
@@ -1173,6 +1178,7 @@ const shard: CardShard = {
     _poolVillageBellRinger,
     _poolVinereapMentor,
     _poolVnwxtVerboseHost,
+    _poolVoidGrafter,
     _poolVoldarenEstate,
     _poolVoraciousTomeSkimmer,
     _poolVultureSchemingScavenger,

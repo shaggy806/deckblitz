@@ -109,6 +109,7 @@ import _poolDamnablePact from "../pool/damnable-pact.js";
 import _poolDarkDwellerOracle from "../pool/dark-dweller-oracle.js";
 import _poolDarkHatchling from "../pool/dark-hatchling.js";
 import _poolDarkslickShores from "../pool/darkslick-shores.js";
+import _poolDaxossTorment from "../pool/daxoss-torment.js";
 import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
@@ -145,6 +146,7 @@ import _poolEdgewallInn from "../pool/edgewall-inn.js";
 import _poolEdwardKenway from "../pool/edward-kenway.js";
 import _poolElaborateFirecannon from "../pool/elaborate-firecannon.js";
 import _poolElderOwynLyons from "../pool/elder-owyn-lyons.js";
+import _poolEldraziAggressor from "../pool/eldrazi-aggressor.js";
 import _poolEldraziDisplacer from "../pool/eldrazi-displacer.js";
 import _poolElementalBond from "../pool/elemental-bond.js";
 import _poolElusiveKrasis from "../pool/elusive-krasis.js";
@@ -334,6 +336,7 @@ import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
 import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
+import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
@@ -716,6 +719,7 @@ const shard: CardShard = {
     _poolDarkDwellerOracle,
     _poolDarkHatchling,
     _poolDarkslickShores,
+    _poolDaxossTorment,
     _poolDeathHoodCobra,
     _poolDeconstruct,
     _poolDeepAnalysis,
@@ -752,6 +756,7 @@ const shard: CardShard = {
     _poolEdwardKenway,
     _poolElaborateFirecannon,
     _poolElderOwynLyons,
+    _poolEldraziAggressor,
     _poolEldraziDisplacer,
     _poolElementalBond,
     _poolElusiveKrasis,
@@ -941,6 +946,7 @@ const shard: CardShard = {
     _poolNicolBolas,
     _poolNightScythe,
     _poolNoosegrafMob,
+    _poolNullCaller,
     _poolNurglesRot,
     _poolOblivion,
     _poolObsianusGolem,

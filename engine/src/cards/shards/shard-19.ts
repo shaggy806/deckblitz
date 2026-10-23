@@ -382,6 +382,7 @@ import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
+import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
@@ -625,6 +626,7 @@ import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
+import _tokensKnightAllyToken from "../tokens/knight-ally-token.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
 import _tokensServoToken from "../tokens/servo-token.js";
@@ -1014,6 +1016,7 @@ const shard: CardShard = {
     _poolNimbleTrapfinder,
     _poolNissaResurgentAnimist,
     _poolNorwoodWarrior,
+    _poolOathOfChandra,
     _poolOgreBerserker,
     _poolOgreSiegebreaker,
     _poolOrderOfTheWhiteShield,
@@ -1259,6 +1262,7 @@ const shard: CardShard = {
   tokens: [
     _tokensHeartwoodToken,
     _tokensJumblebones,
+    _tokensKnightAllyToken,
     _tokensPhyrexianMiteToken,
     _tokensRedElementalToken11,
     _tokensServoToken,

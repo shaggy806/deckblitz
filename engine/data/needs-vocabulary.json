@@ -9902,6 +9902,26 @@
   "effect:damage-to-trigger-object-controller": {
    "family": "effect:damage-to-trigger-object",
    "example": "Assembled Alphas: '…deals 3 damage to that creature and 3 damage to that creature's controller' — damage to a trigger object is built, to its controller isn't."
+  },
+  "condition:owns-named-card-in-every-zone": {
+   "example": "Hedron Alignment: 'if you control a permanent named Hedron Alignment and a card named Hedron Alignment is in your hand, graveyard and exile' — a by-name ownership check across zones, with an optional reveal of your hand."
+  },
+  "effect:become-copy-filter-except-source": {
+   "family": "effect:become-copy",
+   "example": "Deceiver of Form: 'creatures you control other than this creature become copies of that card' — become-copy over a filter that leaves out the source (only `exceptOf` exists)."
+  },
+  "mana:spend-only-colorless-or-c-cost": {
+   "example": "Cultivator Drone: 'spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}' — the last clause isn't a ManaSpendOnly yet."
+  },
+  "effect:target-cant-block-source-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Kozilek's Pathfinder: '{C}: Target creature can't block this creature this turn' — a restriction naming one attacker, not a plain cant-block."
+  },
+  "condition:life-less-than-half-starting": {
+   "example": "Anya, Merciless Angel: 'for each opponent whose life total is less than half their starting life total' — a strict bound per opponent; `life-total`'s atMost: half-starting is 'at most'."
+  },
+  "mechanic:choose-two-colors-on-enter": {
+   "example": "Seal of the Guildpact: 'as this artifact enters, choose two colors' — chooseOnEnter takes one choice, and cost reductions can't read a chosen colour."
   }
  }
 }

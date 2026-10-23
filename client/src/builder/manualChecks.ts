@@ -8092,4 +8092,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Island*5'], gy: ['Startled Awake'] },
     }),
   ),
+  preset(
+    'Boulder Salvo: its surge cost is offered after you cast another spell',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Shock', 'Boulder Salvo'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Lava Coil: a creature that survives it is exiled when it dies later that turn',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Lava Coil', 'Shock'] },
+      opp: { bf: ['Colossal Dreadmaw'] },
+    }),
+  ),
 ]

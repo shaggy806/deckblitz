@@ -301,6 +301,7 @@ import _poolLateToDinner from "../pool/late-to-dinner.js";
 import _poolLavaspurBoots from "../pool/lavaspur-boots.js";
 import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
 import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
+import _poolLeadByExample from "../pool/lead-by-example.js";
 import _poolLeaveChance from "../pool/leave-chance.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
 import _poolLifeforce from "../pool/lifeforce.js";
@@ -589,6 +590,7 @@ import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
+import _poolVileRedeemer from "../pool/vile-redeemer.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
 import _poolVincentsLimitBreak from "../pool/vincents-limit-break.js";
 import _poolVindicate from "../pool/vindicate.js";
@@ -946,6 +948,7 @@ const shard: CardShard = {
     _poolLavaspurBoots,
     _poolLayOfTheLand,
     _poolLazavDimirMastermind,
+    _poolLeadByExample,
     _poolLeaveChance,
     _poolLeoninScimitar,
     _poolLifeforce,
@@ -1234,6 +1237,7 @@ const shard: CardShard = {
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
     _poolVigorsporeWurm,
+    _poolVileRedeemer,
     _poolVilisBrokerOfBlood,
     _poolVincentsLimitBreak,
     _poolVindicate,

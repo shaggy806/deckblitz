@@ -82,6 +82,7 @@ import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
 import _poolCut from "../pool/cut.js";
+import _poolCycloneSire from "../pool/cyclone-sire.js";
 import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
@@ -173,6 +174,7 @@ import _poolGauFeralYouth from "../pool/gau-feral-youth.js";
 import _poolGeneralsEnforcer from "../pool/generals-enforcer.js";
 import _poolGenkuFutureShaper from "../pool/genku-future-shaper.js";
 import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
+import _poolGigantoplasm from "../pool/gigantoplasm.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
@@ -181,6 +183,7 @@ import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGlisteningOil from "../pool/glistening-oil.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGloomSower from "../pool/gloom-sower.js";
+import _poolGnashingOfTeeth from "../pool/gnashing-of-teeth.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
 import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
@@ -240,6 +243,7 @@ import _poolKarazikarTheEyeTyrant from "../pool/karazikar-the-eye-tyrant.js";
 import _poolKarnGildedGuardian from "../pool/karn-gilded-guardian.js";
 import _poolKataraWaterbendingMaster from "../pool/katara-waterbending-master.js";
 import _poolKavaronTurbodrone from "../pool/kavaron-turbodrone.js";
+import _poolKazuulsTollCollector from "../pool/kazuuls-toll-collector.js";
 import _poolKeepWatch from "../pool/keep-watch.js";
 import _poolKeeperOfTheQuietHour from "../pool/keeper-of-the-quiet-hour.js";
 import _poolKefnetsMonument from "../pool/kefnets-monument.js";
@@ -252,6 +256,7 @@ import _poolKoalaSheep from "../pool/koala-sheep.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
 import _poolKonstrariCharm from "../pool/konstrari-charm.js";
 import _poolKorCartographer from "../pool/kor-cartographer.js";
+import _poolKorScythemaster from "../pool/kor-scythemaster.js";
 import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
@@ -638,6 +643,7 @@ const shard: CardShard = {
     _poolCrucibleOfFire,
     _poolCruelSomnophage,
     _poolCut,
+    _poolCycloneSire,
     _poolCystbearer,
     _poolDalekSquadron,
     _poolDarkBargain,
@@ -729,6 +735,7 @@ const shard: CardShard = {
     _poolGeneralsEnforcer,
     _poolGenkuFutureShaper,
     _poolGiadaFontOfHope,
+    _poolGigantoplasm,
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
     _poolGlimmerSeeker,
@@ -737,6 +744,7 @@ const shard: CardShard = {
     _poolGlisteningOil,
     _poolGloinTheMighty,
     _poolGloomSower,
+    _poolGnashingOfTeeth,
     _poolGnawingVermin,
     _poolGoNinjaGo,
     _poolGoShintaiOfBoundlessVigor,
@@ -796,6 +804,7 @@ const shard: CardShard = {
     _poolKarnGildedGuardian,
     _poolKataraWaterbendingMaster,
     _poolKavaronTurbodrone,
+    _poolKazuulsTollCollector,
     _poolKeepWatch,
     _poolKeeperOfTheQuietHour,
     _poolKefnetsMonument,
@@ -808,6 +817,7 @@ const shard: CardShard = {
     _poolKolaghansCommand,
     _poolKonstrariCharm,
     _poolKorCartographer,
+    _poolKorScythemaster,
     _poolKozilekButcherOfTruth,
     _poolKrarkClanStoker,
     _poolKraulForagers,

@@ -474,6 +474,7 @@ import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
 import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
+import _poolSkyScourer from "../pool/sky-scourer.js";
 import _poolSkyclaveBasilica from "../pool/skyclave-basilica.js";
 import _poolSkyspearCavalry from "../pool/skyspear-cavalry.js";
 import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
@@ -1107,6 +1108,7 @@ const shard: CardShard = {
     _poolSidisisPet,
     _poolSilkguard,
     _poolSimicAscendancy,
+    _poolSkyScourer,
     _poolSkyclaveBasilica,
     _poolSkyspearCavalry,
     _poolSlaveringBranchsnapper,

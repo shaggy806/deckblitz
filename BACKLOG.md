@@ -150,16 +150,21 @@ section keeps only what to do next.
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise; batch
   146 the rest of Commander 2016 and Kaladesh, no engine change; batch 147 Conspiracy: Take the
   Crown and Eldritch Moon, on emerge and "as long as it's monstrous"; batch 148 Shadows over
-  Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object);
-  **next, Oath of the Gatewatch** (95 left), then Commander 2015 (21 left) — 116 cards, one
-  batch. Researched for it (2026-10-23), build first: "if that creature would die this turn,
-  exile it instead" (`replacement:target-exile-if-dies-this-turn` — Lava Coil, Scorching
-  Dragonfire, Obliterating Bolt, Reduce to Ashes; 30 cards), a per-object flag beside
-  `GameObject.exileIfItWouldLeave` read in `moveObject` for a battlefield→graveyard move that
-  turn and cleared by any zone change; and **surge** (rule 702.117 — 11 of Oath's cards), an
-  `alternativeCost` keyword as spectacle is (`helpers.ts`'s `spectacle()`, `spectaclePaid`,
-  `self-spectacle-paid`, the parser's spectacle template) with `{ kind: "cast-this-turn", who:
-  "you", atLeast: 1 }` as its condition. Support (6) and cohort (2) look expressible already. Batch 147's leading blockers:
+  Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object;
+  batch 149 Oath of the Gatewatch and Commander 2015, on surge and "if that creature would die
+  this turn, exile it instead" with its "dealt damage this way" form);
+  **next, Battle for Zendikar** (131 left) — one batch, 4-5 agents. Researched for it
+  (2026-10-23): **awaken** (rule 702.113 — 13 of its cards, no helper yet) leads: an
+  `alternativeCost` like surge's (`surge()` in `helpers.ts`) whose spell, cast that way, adds
+  "put N +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature
+  with haste" (a permanent effect) — a kicker-shaped variant (its own target slot, rule
+  702.113a), so look at how bargain/gift add a target when paid; then the processors' "put a
+  card an opponent owns from exile into that player's graveyard" (8 — no vocabulary; a cost and
+  a "you may … if you do"); ingest (9) reads like an existing combat-damage trigger exiling the
+  top card of that player's library. Batch 149's leading blockers: "choose the same mode more
+  than once" (`effect:modal-repeat-modes` — the three Confluences), "target opponent exiles
+  cards from their hand" (`effect:target-player-exiles-from-hand` — Mindmelter, Witness the
+  End). Batch 147's leading blockers:
   meld (`mechanic:meld`, 15 cards now), the Conspiracy draft's own abilities
   (`mechanic:draft-matters`, 15 — kept blocked, even the two whose draft text leaves a vanilla
   body), the secret-discard gap (`effect:hidden-simultaneous-choices`, 14) and "can block an
@@ -172,9 +177,7 @@ section keeps only what to do next.
   — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an
   additional creature" (`static:block-additional-creature` — 4), "your life total becomes N"
   (`effect:life-total-becomes` — 7)
-  (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
-  "if that creature would die this turn, exile it instead" five
-  (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
+  (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
   long as it stays tapped" (`effect:duration-while-source-tapped`, 3), an Aura's lasting "loses
   all abilities" (`static:static-lose-all-abilities`), and "put into a graveyard from the
   battlefield this turn" (`filter:put-into-graveyard-from-battlefield-this-turn` — Salvager of
@@ -249,6 +252,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **An "X targets" cast offer miscounts a spell's other target slots**: Spinning Wheel Kick is offered an X its targets don't give and the cast is refused (the 4-player fuzzer, seed 18) — the offer counts the group alone, its readers every target.
 - **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins, Stronghold Rats and Cunning Lethemancer (`effect:hidden-simultaneous-choices`).
 - **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
 - **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.

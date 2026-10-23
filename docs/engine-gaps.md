@@ -204,6 +204,20 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 148's checks.
 
+- **An "X targets" cast offer miscounts a spell's other target slots.** `Game.xGroupOffer` builds
+  the cast offer's `targetCount` and `minXByTargetCount`/`maxXByTargetCount` over the `any-number`
+  group's members alone (its doc: "the group is the spell's only slot"), but every reader —
+  `minXForTargets`/`maxXForTargets` and `fitTargetCount` in `target-count.ts`, the bots, the random
+  controllers, and the client's target picker (`App.tsx`) — counts `distinctTargetCount` over all
+  chosen targets. Spinning Wheel Kick ("target creature you control … to each of X target
+  creatures and/or planeswalkers") is the one pool card with a slot before the group: choosing
+  its creature and no group members reads as one target, so X is offered as 1, and the cast is
+  refused ("takes at least 1 of those targets" — `invalidTargetReason` judges it right). The 4-player
+  fuzzer hits it at seed 18 (`play:random -- --players 4 --seed 18`). **Fix (outline):** give the
+  range a `from` (the group's slot) that the count helpers and the client read, or count group
+  members wherever an X group's range is read; the same creature may be both the source slot and a
+  member (rule 115.3), so no fixed offset works. Found by the fuzzer, 2026-10-23 (B149).
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

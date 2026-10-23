@@ -507,6 +507,7 @@ import _poolStarforgedSword from "../pool/starforged-sword.js";
 import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
 import _poolStatue from "../pool/statue.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
+import _poolSteppeGlider from "../pool/steppe-glider.js";
 import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
@@ -557,6 +558,7 @@ import _poolUndeadHandNinja from "../pool/undead-hand-ninja.js";
 import _poolUndercitySewers from "../pool/undercity-sewers.js";
 import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
+import _poolUnityOfPurpose from "../pool/unity-of-purpose.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
 import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
@@ -1128,6 +1130,7 @@ const shard: CardShard = {
     _poolStarnheimUnleashed,
     _poolStatue,
     _poolStaunchDefenders,
+    _poolSteppeGlider,
     _poolStingerquillVoxmancer,
     _poolStormCrow,
     _poolStormTheCitadel,
@@ -1178,6 +1181,7 @@ const shard: CardShard = {
     _poolUndercitySewers,
     _poolUndergroundSea,
     _poolUnfortunateAccident,
+    _poolUnityOfPurpose,
     _poolUnleashFury,
     _poolUnravelingMummy,
     _poolUnwillingIngredient,
