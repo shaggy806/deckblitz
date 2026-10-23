@@ -652,10 +652,12 @@ export type EffectAmount =
    * `turn-history` condition does. See `TurnHistory`.
    */
   | { readonly turnHistory: TurnHistoryKind; readonly who?: PlayerScope; readonly filter?: CardFilter }
-  /** How many opponents the controller is attacking with creatures this
-   * combat — melee's "+1/+1 for each opponent you attacked with a creature
-   * this combat" (rule 702.121). A planeswalker attacked isn't its
-   * controller. */
+  /** How many opponents the controller attacked with creatures this combat
+   * — melee's "+1/+1 for each opponent you attacked with a creature this
+   * combat" (rule 702.121): the players attackers were declared at
+   * (`PlayerState.attackedPlayers`), whether or not those creatures still
+   * attack, and never one put onto the battlefield attacking (the
+   * rulings). A planeswalker attacked isn't its controller. */
   | { readonly opponentsAttacked: true }
   /** How many creatures are attacking the player a per-player effect is
    * acting on — that player, not a planeswalker of theirs (rule 506.3):

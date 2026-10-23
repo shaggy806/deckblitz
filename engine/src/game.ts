@@ -7472,10 +7472,18 @@ export class Game {
         object.attackedThisTurn = true;
         // Which combat, and which player — "didn't attack during your last
         // combat" (Territorial Hellkite). A planeswalker isn't its player.
-        object.lastAttack = {
-          combat: { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 },
-          player: this.state.players[defender as PlayerId] !== undefined ? (defender as PlayerId) : null,
-        };
+        const combat = { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 };
+        const attackedPlayer = this.state.players[defender as PlayerId] !== undefined ? (defender as PlayerId) : null;
+        object.lastAttack = { combat, player: attackedPlayer };
+        // Whom this combat's attack went at (melee, rule 702.121a).
+        const record = this.state.players[player].attackedPlayers;
+        const sameCombat = record !== undefined && record.combat.turn === combat.turn && record.combat.phase === combat.phase;
+        const players = sameCombat ? record.players : [];
+        if (attackedPlayer !== null && !players.includes(attackedPlayer)) {
+          this.state.players[player].attackedPlayers = { combat, players: [...players, attackedPlayer] };
+        } else if (!sameCombat) {
+          this.state.players[player].attackedPlayers = { combat, players };
+        }
         // "During any turn you attacked with a commander" (Neriv).
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
         const taps = !this.objHasKeyword(id, "vigilance");
@@ -21099,15 +21107,15 @@ export class Game {
           land: result.land,
         }),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
+      // The opponents attacked as attackers were declared this combat
+      // (rule 702.121a), whether or not those creatures still attack (the
+      // melee rulings) — none outside the combat it was declared in.
       opponentsAttacked: () => {
-        const attacked = new Set<PlayerId>();
-        for (const id of this.state.zones.shared.battlefield) {
-          const object = this.state.objects[id];
-          const at = object.attacking;
-          if (object.controller !== controller || at === null) continue;
-          if (this.state.players[at as PlayerId] !== undefined && at !== controller) attacked.add(at as PlayerId);
-        }
-        return attacked.size;
+        const record = this.state.players[controller]?.attackedPlayers;
+        if (record === undefined) return 0;
+        const now = { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 };
+        if (record.combat.turn !== now.turn || record.combat.phase !== now.phase) return 0;
+        return record.players.filter((p) => p !== controller && this.state.players[p] !== undefined).length;
       },
       creaturesAttacking: (player) =>
         permanentCount(

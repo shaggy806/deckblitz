@@ -1977,6 +1977,13 @@ export interface PlayerState {
    * attacker: "during any turn you attacked with a commander" (Neriv,
    * Crackling Vanguard). */
   attackedWithCommanderOnTurn?: number;
+  /** The players this player declared creatures attacking in their most
+   * recent combat (rule 508.1), and which combat that was — melee's "each
+   * opponent you attacked with a creature this combat" (702.121a), counted
+   * whether or not those creatures are still attacking, and never a creature
+   * put onto the battlefield attacking (the rulings). A planeswalker attacked
+   * isn't its controller. */
+  attackedPlayers?: { readonly combat: CombatId; readonly players: readonly PlayerId[] };
   /** This player cast a spell from a graveyard, or activated an ability of a
    * card in a graveyard, this turn (Laboratory Drudge). */
   usedGraveyardThisTurn: boolean;
