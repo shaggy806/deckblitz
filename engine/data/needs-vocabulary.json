@@ -4243,6 +4243,10 @@
    "family": "static:grant-abilities-to-spells",
    "example": "Hoarding Broodlord: 'Spells you cast from exile have convoke'."
   },
+  "static:grant-improvise": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Inspiring Statuary: 'Nonartifact spells you cast have improvise'; Archway of Innovation: 'The next spell you cast this turn has improvise'."
+  },
   "static:grant-cycling-to-cards-in-hand": {
    "family": "static:grant-to-cards-outside-battlefield",
    "example": "Rhet-Tomb Mystic: no static granting cycling to cards in hand"
