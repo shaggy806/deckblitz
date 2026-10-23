@@ -538,6 +538,7 @@ import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUlrichUncontestedAlpha from "../pool/ulrich-uncontested-alpha.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
 import _poolUndercoverButler from "../pool/undercover-butler.js";
+import _poolUnderworldFires from "../pool/underworld-fires.js";
 import _poolUnderworldHermit from "../pool/underworld-hermit.js";
 import _poolUnholyAnnex from "../pool/unholy-annex.js";
 import _poolUnnervingGrasp from "../pool/unnerving-grasp.js";
@@ -1157,6 +1158,7 @@ const shard: CardShard = {
     _poolUlrichUncontestedAlpha,
     _poolUndeadLeotau,
     _poolUndercoverButler,
+    _poolUnderworldFires,
     _poolUnderworldHermit,
     _poolUnholyAnnex,
     _poolUnnervingGrasp,

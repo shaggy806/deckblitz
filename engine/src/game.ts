@@ -21041,6 +21041,19 @@ export class Game {
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
+      exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
+        // Every permanent this resolution has dealt damage to so far — damage
+        // prevented was never dealt (rule 615.1) — or only the creatures
+        // among them. A token stack dealt damage as one object is every
+        // token in it, each dealt damage.
+        for (const event of eventLogSince(this.state, since)) {
+          if (event.type !== "damage-dealt" || event.target.kind !== "object") continue;
+          const object = this.state.objects[event.target.object];
+          if (object?.zone !== "battlefield") continue;
+          if (creaturesOnly && !effectiveTypes(this.state, this.registry, object).includes("creature")) continue;
+          object.exileIfDiesTurn = this.state.turn.number;
+        }
+      },
       foraged: () => this.emit({ type: "foraged", player: controller }),
       craftReturn: () => {
         // The card its cost exiled, still in exile from that move (rule

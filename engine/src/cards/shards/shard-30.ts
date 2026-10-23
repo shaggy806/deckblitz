@@ -171,6 +171,7 @@ import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
 import _poolErosion from "../pool/erosion.js";
 import _poolErraticApparition from "../pool/erratic-apparition.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
+import _poolEssenceBurn from "../pool/essence-burn.js";
 import _poolEtaliPrimalSickness from "../pool/etali-primal-sickness.js";
 import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
@@ -781,6 +782,7 @@ const shard: CardShard = {
     _poolErosion,
     _poolErraticApparition,
     _poolEssenceAnchor,
+    _poolEssenceBurn,
     _poolEtaliPrimalSickness,
     _poolEtalisFavor,
     _poolEverythingPizza,

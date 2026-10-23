@@ -1784,6 +1784,15 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: instead });
       continue;
     }
+    // "If a creature dealt damage this way would die this turn, exile it
+    // instead." after the damage (Anger of the Gods): whatever it damaged.
+    const damagedM = /^if a (creature|permanent) dealt damage (?:this way|by ~) would die this turn, exile it instead\.$/i.exec(sentence);
+    if (damagedM !== null && parsed.some(dealsDamage)) {
+      const instead = { kind: "exile-if-dies-this-turn", dealtDamageThisWay: damagedM[1].toLowerCase() };
+      parsed.push(instead);
+      hints.push({ sentence, effect: instead });
+      continue;
+    }
     const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
     if (lossM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(lossM[1]) === "number") {
       const loss = { kind: "lose-life", amount: numberOf(lossM[1]), toControllerOfTarget: 0 };
@@ -2584,6 +2593,10 @@ function departedOf(triggers) {
 const LIBRARY_EFFECTS = new Set([
   "draw", "mill", "search-library", "scry", "surveil", "look-and-choose", "put-on-library", "reveal-until",
 ]);
+/** Does an effect deal damage anywhere inside it? */
+const dealsDamage = (e) =>
+  e !== null && typeof e === "object" &&
+  (/^damage/.test(e.kind ?? "") || Object.values(e).some((v) => (Array.isArray(v) ? v.some(dealsDamage) : dealsDamage(v))));
 const touchesLibrary = (e) =>
   e !== null && typeof e === "object" &&
   (LIBRARY_EFFECTS.has(e.kind) || Object.values(e).some((v) => (Array.isArray(v) ? v.some(touchesLibrary) : touchesLibrary(v))));

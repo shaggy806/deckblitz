@@ -106,6 +106,7 @@ import _poolCrackedSkull from "../pool/cracked-skull.js";
 import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCrashThrough from "../pool/crash-through.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
+import _poolCrushTheWeak from "../pool/crush-the-weak.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
@@ -719,6 +720,7 @@ const shard: CardShard = {
     _poolCraftWithPride,
     _poolCrashThrough,
     _poolCrosissAttendant,
+    _poolCrushTheWeak,
     _poolCurioVendor,
     _poolCursedFlesh,
     _poolCutYourLosses,

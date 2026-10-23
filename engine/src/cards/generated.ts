@@ -560,6 +560,7 @@ import _poolAngelicVoices from "./pool/angelic-voices.js";
 import _poolAngelicWall from "./pool/angelic-wall.js";
 import _poolAngelsGrace from "./pool/angels-grace.js";
 import _poolAngelsMercy from "./pool/angels-mercy.js";
+import _poolAngerOfTheGods from "./pool/anger-of-the-gods.js";
 import _poolAnger from "./pool/anger.js";
 import _poolAnglerDrake from "./pool/angler-drake.js";
 import _poolAnglerTurtle from "./pool/angler-turtle.js";
@@ -3070,6 +3071,7 @@ import _poolCombineChrysalis from "./pool/combine-chrysalis.js";
 import _poolComboAttack from "./pool/combo-attack.js";
 import _poolCombustibleGearhulk from "./pool/combustible-gearhulk.js";
 import _poolCombustionMan from "./pool/combustion-man.js";
+import _poolCombustionTechnique from "./pool/combustion-technique.js";
 import _poolComeBackWrong from "./pool/come-back-wrong.js";
 import _poolCometCrawler from "./pool/comet-crawler.js";
 import _poolComfortingCounsel from "./pool/comforting-counsel.js";
@@ -3460,6 +3462,7 @@ import _poolCrumblingVestige from "./pool/crumbling-vestige.js";
 import _poolCrushContraband from "./pool/crush-contraband.js";
 import _poolCrushDissent from "./pool/crush-dissent.js";
 import _poolCrushOfWurms from "./pool/crush-of-wurms.js";
+import _poolCrushTheWeak from "./pool/crush-the-weak.js";
 import _poolCrush from "./pool/crush.js";
 import _poolCrushingCanopy from "./pool/crushing-canopy.js";
 import _poolCrushingDisappointment from "./pool/crushing-disappointment.js";
@@ -5137,6 +5140,7 @@ import _poolEsperCormorants from "./pool/esper-cormorants.js";
 import _poolEsperPanorama from "./pool/esper-panorama.js";
 import _poolEsperSentinel from "./pool/esper-sentinel.js";
 import _poolEssenceAnchor from "./pool/essence-anchor.js";
+import _poolEssenceBurn from "./pool/essence-burn.js";
 import _poolEssenceCapture from "./pool/essence-capture.js";
 import _poolEssenceChanneler from "./pool/essence-channeler.js";
 import _poolEssenceDepleter from "./pool/essence-depleter.js";
@@ -8110,6 +8114,7 @@ import _poolInallaArchmageRitualist from "./pool/inalla-archmage-ritualist.js";
 import _poolIncandescentAria from "./pool/incandescent-aria.js";
 import _poolIncandescentSoulstoke from "./pool/incandescent-soulstoke.js";
 import _poolIncarnationTechnique from "./pool/incarnation-technique.js";
+import _poolIncendiaryFlow from "./pool/incendiary-flow.js";
 import _poolIncendiarySabotage from "./pool/incendiary-sabotage.js";
 import _poolIncineratingBlast from "./pool/incinerating-blast.js";
 import _poolIncisorGlider from "./pool/incisor-glider.js";
@@ -17027,6 +17032,7 @@ import _poolTorchCourier from "./pool/torch-courier.js";
 import _poolTorchDrake from "./pool/torch-drake.js";
 import _poolTorchFiend from "./pool/torch-fiend.js";
 import _poolTorchGauntlet from "./pool/torch-gauntlet.js";
+import _poolTorchTheTower from "./pool/torch-the-tower.js";
 import _poolTorchTheWitness from "./pool/torch-the-witness.js";
 import _poolTorensFistOfTheAngels from "./pool/torens-fist-of-the-angels.js";
 import _poolTorgalAFineHound from "./pool/torgal-a-fine-hound.js";
@@ -17526,6 +17532,7 @@ import _poolUnderworldBreach from "./pool/underworld-breach.js";
 import _poolUnderworldCharger from "./pool/underworld-charger.js";
 import _poolUnderworldConnections from "./pool/underworld-connections.js";
 import _poolUnderworldDreams from "./pool/underworld-dreams.js";
+import _poolUnderworldFires from "./pool/underworld-fires.js";
 import _poolUnderworldHermit from "./pool/underworld-hermit.js";
 import _poolUnderworldRageHound from "./pool/underworld-rage-hound.js";
 import _poolUndulatingWitness from "./pool/undulating-witness.js";
@@ -20211,6 +20218,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAngelicWall,
   _poolAngelsGrace,
   _poolAngelsMercy,
+  _poolAngerOfTheGods,
   _poolAnger,
   _poolAnglerDrake,
   _poolAnglerTurtle,
@@ -22721,6 +22729,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolComboAttack,
   _poolCombustibleGearhulk,
   _poolCombustionMan,
+  _poolCombustionTechnique,
   _poolComeBackWrong,
   _poolCometCrawler,
   _poolComfortingCounsel,
@@ -23111,6 +23120,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrushContraband,
   _poolCrushDissent,
   _poolCrushOfWurms,
+  _poolCrushTheWeak,
   _poolCrush,
   _poolCrushingCanopy,
   _poolCrushingDisappointment,
@@ -24788,6 +24798,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEsperPanorama,
   _poolEsperSentinel,
   _poolEssenceAnchor,
+  _poolEssenceBurn,
   _poolEssenceCapture,
   _poolEssenceChanneler,
   _poolEssenceDepleter,
@@ -27761,6 +27772,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIncandescentAria,
   _poolIncandescentSoulstoke,
   _poolIncarnationTechnique,
+  _poolIncendiaryFlow,
   _poolIncendiarySabotage,
   _poolIncineratingBlast,
   _poolIncisorGlider,
@@ -36678,6 +36690,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorchDrake,
   _poolTorchFiend,
   _poolTorchGauntlet,
+  _poolTorchTheTower,
   _poolTorchTheWitness,
   _poolTorensFistOfTheAngels,
   _poolTorgalAFineHound,
@@ -37177,6 +37190,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnderworldCharger,
   _poolUnderworldConnections,
   _poolUnderworldDreams,
+  _poolUnderworldFires,
   _poolUnderworldHermit,
   _poolUnderworldRageHound,
   _poolUndulatingWitness,
@@ -39875,6 +39889,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/angelic-wall": _poolAngelicWall,
   "pool/angels-grace": _poolAngelsGrace,
   "pool/angels-mercy": _poolAngelsMercy,
+  "pool/anger-of-the-gods": _poolAngerOfTheGods,
   "pool/anger": _poolAnger,
   "pool/angler-drake": _poolAnglerDrake,
   "pool/angler-turtle": _poolAnglerTurtle,
@@ -42385,6 +42400,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/combo-attack": _poolComboAttack,
   "pool/combustible-gearhulk": _poolCombustibleGearhulk,
   "pool/combustion-man": _poolCombustionMan,
+  "pool/combustion-technique": _poolCombustionTechnique,
   "pool/come-back-wrong": _poolComeBackWrong,
   "pool/comet-crawler": _poolCometCrawler,
   "pool/comforting-counsel": _poolComfortingCounsel,
@@ -42775,6 +42791,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crush-contraband": _poolCrushContraband,
   "pool/crush-dissent": _poolCrushDissent,
   "pool/crush-of-wurms": _poolCrushOfWurms,
+  "pool/crush-the-weak": _poolCrushTheWeak,
   "pool/crush": _poolCrush,
   "pool/crushing-canopy": _poolCrushingCanopy,
   "pool/crushing-disappointment": _poolCrushingDisappointment,
@@ -44452,6 +44469,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/esper-panorama": _poolEsperPanorama,
   "pool/esper-sentinel": _poolEsperSentinel,
   "pool/essence-anchor": _poolEssenceAnchor,
+  "pool/essence-burn": _poolEssenceBurn,
   "pool/essence-capture": _poolEssenceCapture,
   "pool/essence-channeler": _poolEssenceChanneler,
   "pool/essence-depleter": _poolEssenceDepleter,
@@ -47425,6 +47443,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/incandescent-aria": _poolIncandescentAria,
   "pool/incandescent-soulstoke": _poolIncandescentSoulstoke,
   "pool/incarnation-technique": _poolIncarnationTechnique,
+  "pool/incendiary-flow": _poolIncendiaryFlow,
   "pool/incendiary-sabotage": _poolIncendiarySabotage,
   "pool/incinerating-blast": _poolIncineratingBlast,
   "pool/incisor-glider": _poolIncisorGlider,
@@ -56342,6 +56361,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/torch-drake": _poolTorchDrake,
   "pool/torch-fiend": _poolTorchFiend,
   "pool/torch-gauntlet": _poolTorchGauntlet,
+  "pool/torch-the-tower": _poolTorchTheTower,
   "pool/torch-the-witness": _poolTorchTheWitness,
   "pool/torens-fist-of-the-angels": _poolTorensFistOfTheAngels,
   "pool/torgal-a-fine-hound": _poolTorgalAFineHound,
@@ -56841,6 +56861,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/underworld-charger": _poolUnderworldCharger,
   "pool/underworld-connections": _poolUnderworldConnections,
   "pool/underworld-dreams": _poolUnderworldDreams,
+  "pool/underworld-fires": _poolUnderworldFires,
   "pool/underworld-hermit": _poolUnderworldHermit,
   "pool/underworld-rage-hound": _poolUnderworldRageHound,
   "pool/undulating-witness": _poolUndulatingWitness,

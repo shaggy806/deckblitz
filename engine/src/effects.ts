@@ -1737,7 +1737,16 @@ export type EffectSpec =
        * (the rulings); a target that isn't a permanent (a player, through
        * "any target") is left alone. */
       readonly kind: "exile-if-dies-this-turn";
-      readonly target: EffectTargetRef;
+      readonly target?: EffectTargetRef;
+      /** Instead of `target`: "If a creature **dealt damage this way** would
+       * die this turn, exile it instead" (Anger of the Gods, Incendiary
+       * Flow) — every permanent the resolution under way has dealt damage to
+       * so far, so put it after the damage. A target whose damage was
+       * prevented isn't covered (rule 615.1, the rulings). `"creature"`
+       * covers only the creatures among them (Incendiary Flow's any target
+       * leaves a planeswalker out), `"permanent"` creatures and planeswalkers
+       * (Underworld Fires). */
+      readonly dealtDamageThisWay?: "creature" | "permanent";
     }
   | {
       /** Destroy every battlefield permanent matching `filter` (Wrath of God:
@@ -5867,6 +5876,9 @@ export interface EffectApi {
   putOnBottomOfLibrary(target: TargetRef): void;
   /** See the `"exile-if-dies-this-turn"` {@link EffectSpec}. */
   exileIfDiesThisTurn(target: TargetRef): void;
+  /** See the `"exile-if-dies-this-turn"` {@link EffectSpec}'s
+   * `dealtDamageThisWay`. */
+  exileDamagedThisWayIfTheyDie(creaturesOnly: boolean): void;
   /** Every player a `PlayerScope` names, in APNAP order and skipping anyone
    * who has already lost. The shared scope resolution behind `draw`'s `who`,
    * `discard-hand`, and anything else that acts on a scope one player at a
@@ -8833,6 +8845,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "exile-if-dies-this-turn": {
+      if (spec.dealtDamageThisWay !== undefined) {
+        ctx.exileDamagedThisWayIfTheyDie(spec.dealtDamageThisWay === "creature");
+        return;
+      }
+      if (spec.target === undefined) return;
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.exileIfDiesThisTurn(target);
       return;

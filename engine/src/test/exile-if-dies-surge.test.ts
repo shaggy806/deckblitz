@@ -67,7 +67,59 @@ describe("exile if it would die this turn", () => {
   });
 });
 
-const surgeOffers = (game: Game, card: ObjectId) =>
+describe("exile if a permanent dealt damage this way would die this turn", () => {
+  it("Anger of the Gods: each creature it damaged, killed by it or later that turn", () => {
+    const { game } = table();
+    lands(game, "Mountain", 3);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const maw = spawn(game, "Colossal Dreadmaw", B);
+    cast(game, toHand(game, "Anger of the Gods"));
+    expect(zone(game, bears)).toBe("exile");
+    expect(zone(game, maw)).toBe("battlefield");
+    destroy(game, maw);
+    expect(zone(game, maw)).toBe("exile");
+  });
+
+  it("a creature that wasn't dealt damage isn't covered: one entering later that turn", () => {
+    const { game } = table();
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Anger of the Gods"));
+    const later = spawn(game, "Grizzly Bears", B);
+    destroy(game, later);
+    expect(zone(game, later)).toBe("graveyard");
+  });
+
+  it("Incendiary Flow: 'a creature dealt damage this way' leaves a planeswalker out", () => {
+    const { game } = table();
+    lands(game, "Mountain", 2);
+    const jace = spawn(game, "Jace Beleren", B);
+    game.state.objects[jace].counters.loyalty = 3;
+    cast(game, toHand(game, "Incendiary Flow"), { targets: [ref(jace)] });
+    expect(zone(game, jace)).toBe("graveyard");
+  });
+
+  it("Underworld Fires: 'a permanent dealt damage this way' covers a planeswalker", () => {
+    const { game } = table();
+    lands(game, "Mountain", 2);
+    const jace = spawn(game, "Jace Beleren", B);
+    game.state.objects[jace].counters.loyalty = 1;
+    cast(game, toHand(game, "Underworld Fires"));
+    expect(zone(game, jace)).toBe("exile");
+  });
+
+  it("Torch the Tower bargained: 3 damage, a scry, and the exile", () => {
+    const { game } = table();
+    lands(game, "Mountain", 1);
+    const treasure = spawn(game, "Treasure Token");
+    const maw = spawn(game, "Colossal Dreadmaw", B);
+    game.state.objects[maw].damageMarked = 3;
+    cast(game, toHand(game, "Torch the Tower"), { targets: [ref(maw)], kicked: true });
+    expect(zone(game, treasure)).not.toBe("battlefield");
+    expect(zone(game, maw)).toBe("exile");
+  });
+});
+
+const surgeOffers =(game: Game, card: ObjectId) =>
   game.legalActions(A).filter((a) => a.kind === "cast-spell" && a.card === card && a.altCost === true);
 
 describe("surge", () => {

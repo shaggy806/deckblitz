@@ -237,6 +237,7 @@ import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolInOketrasName from "../pool/in-oketras-name.js";
 import _poolInTheEyeOfChaos from "../pool/in-the-eye-of-chaos.js";
+import _poolIncendiaryFlow from "../pool/incendiary-flow.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
@@ -832,6 +833,7 @@ const shard: CardShard = {
     _poolIllustriousHistorian,
     _poolInOketrasName,
     _poolInTheEyeOfChaos,
+    _poolIncendiaryFlow,
     _poolIndulgentAristocrat,
     _poolInfiltrate,
     _poolInsatiableHarpy,

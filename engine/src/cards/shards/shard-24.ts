@@ -107,6 +107,7 @@ import _poolCollarTheCulprit from "../pool/collar-the-culprit.js";
 import _poolCollisionColossus from "../pool/collision-colossus.js";
 import _poolColossalDreadmaw from "../pool/colossal-dreadmaw.js";
 import _poolColossification from "../pool/colossification.js";
+import _poolCombustionTechnique from "../pool/combustion-technique.js";
 import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
@@ -711,6 +712,7 @@ const shard: CardShard = {
     _poolCollisionColossus,
     _poolColossalDreadmaw,
     _poolColossification,
+    _poolCombustionTechnique,
     _poolCommandTheStorm,
     _poolCommanderSofiaDaguerre,
     _poolConfidenceFromStrength,

@@ -1237,6 +1237,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         { kind: "exile-if-dies-this-turn", target: 0 },
       ],
     });
+    expect(face("~ deals 3 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.", "Sorcery").effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage-all", amount: 3, filter: { type: "creature" } },
+        { kind: "exile-if-dies-this-turn", dealtDamageThisWay: "creature" },
+      ],
+    });
     // Not after a sentence with no target of its own to point at.
     expect(face("If that creature would die this turn, exile it instead.", "Instant").complete).toBe(false);
   });

@@ -375,6 +375,7 @@
   "keyword:spectacle",
   "keyword:surge",
   "replacement:target-exile-if-dies-this-turn",
+  "replacement:dealt-damage-this-way-exile-if-dies",
   "keyword:jump-start",
   "keyword:ascend",
   "replacement:prevent-damage-from-chosen-source",
