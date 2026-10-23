@@ -273,6 +273,7 @@ import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
 import _poolLeatherbackBaloth from "../pool/leatherback-baloth.js";
 import _poolLeatherheadIronGator from "../pool/leatherhead-iron-gator.js";
+import _poolLeoninRelicWarder from "../pool/leonin-relic-warder.js";
 import _poolLeoninSunStandard from "../pool/leonin-sun-standard.js";
 import _poolLeoninSurveyor from "../pool/leonin-surveyor.js";
 import _poolLightshellDuo from "../pool/lightshell-duo.js";
@@ -417,6 +418,7 @@ import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
+import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
@@ -535,6 +537,7 @@ import _poolUnderdarkBasilisk from "../pool/underdark-basilisk.js";
 import _poolUnderworldRageHound from "../pool/underworld-rage-hound.js";
 import _poolUnendingWhisper from "../pool/unending-whisper.js";
 import _poolUniversalSolvent from "../pool/universal-solvent.js";
+import _poolUniversalSurveillance from "../pool/universal-surveillance.js";
 import _poolUnlicensedDisintegration from "../pool/unlicensed-disintegration.js";
 import _poolUntetheredExpress from "../pool/untethered-express.js";
 import _poolUrborgTombOfYawgmoth from "../pool/urborg-tomb-of-yawgmoth.js";
@@ -862,6 +865,7 @@ const shard: CardShard = {
     _poolLeapingLizard,
     _poolLeatherbackBaloth,
     _poolLeatherheadIronGator,
+    _poolLeoninRelicWarder,
     _poolLeoninSunStandard,
     _poolLeoninSurveyor,
     _poolLightshellDuo,
@@ -1006,6 +1010,7 @@ const shard: CardShard = {
     _poolSentinelsEyes,
     _poolSergeantJohnBenton,
     _poolSerraAscendant,
+    _poolShadowAlleyDenizen,
     _poolShamblingRemains,
     _poolShivanDevastator,
     _poolShivanOasis,
@@ -1124,6 +1129,7 @@ const shard: CardShard = {
     _poolUnderworldRageHound,
     _poolUnendingWhisper,
     _poolUniversalSolvent,
+    _poolUniversalSurveillance,
     _poolUnlicensedDisintegration,
     _poolUntetheredExpress,
     _poolUrborgTombOfYawgmoth,

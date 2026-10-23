@@ -264,6 +264,7 @@ import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
 import _poolHulkStrongestThereIs from "../pool/hulk-strongest-there-is.js";
 import _poolHurlerCyclops from "../pool/hurler-cyclops.js";
 import _poolHydraDisintegrator from "../pool/hydra-disintegrator.js";
+import _poolIcyBlast from "../pool/icy-blast.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIguanaParrot from "../pool/iguana-parrot.js";
 import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
@@ -853,6 +854,7 @@ const shard: CardShard = {
     _poolHulkStrongestThereIs,
     _poolHurlerCyclops,
     _poolHydraDisintegrator,
+    _poolIcyBlast,
     _poolIfritWardenOfInferno,
     _poolIguanaParrot,
     _poolIlMhegPixie,

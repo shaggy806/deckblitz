@@ -278,6 +278,7 @@ import _poolMercilessEternal from "../pool/merciless-eternal.js";
 import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
+import _poolMightSliver from "../pool/might-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
 import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
@@ -819,6 +820,7 @@ const shard: CardShard = {
     _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
+    _poolMightSliver,
     _poolMinotaurAggressor,
     _poolMishraExcavationProdigy,
     _poolMoltenExhale,

@@ -6,6 +6,17 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **"Each player discards" isn't chosen in secret.** Rule 101.4: when every player makes a choice
+  at once, the active player chooses first, then the others in turn order, and then the choices
+  take effect together; the rulings of Miasmic Mummy, Neheb, the Worthy and Delirium Skeins add
+  "no one sees what the other players are discarding before deciding". A scoped `discard`
+  (`GameState.pendingDiscards`, drained by `promptNextDiscard`) asks one player at a time and
+  discards each player's cards before the next chooses, so a later player sees the earlier
+  discards, and each discard is its own event. **Fix (outline):** collect every scoped player's
+  choice first (rule 101.4's choose-then-act machinery, built for the Forgotten Realms set — batch
+  109), hidden from the others, then discard them all as one graveyard batch. Miasmic Mummy and
+  Neheb are in the pool on today's behaviour; blocks Delirium Skeins
+  (`effect:hidden-simultaneous-choices`). Found by an authoring agent, 2026-10-23 (B141).
 - **Blight ignores counter prevention.** Rule 701.68b: a player can't blight if they can't put a
   -1/-1 counter on a creature they control. `Game.canBlight` only checks that they control a
   creature, so with Melira, Sylvok Outcast (in the pool) on the battlefield every blight cost and
@@ -200,6 +211,19 @@ that needs it is authored.
 
 
 
+- **A mana ability's discard cost is never paid.** Rule 605.3b: a mana ability's costs are paid
+  as it's activated, like any other's. `Game.activateAbility` checks a `cost.discard` can be paid
+  but takes the discard only on the stack path (where `discardByEffect` asks); the
+  `isManaAbility` branch resolves the mana and returns first, so the mana comes free. It refuses
+  a mana ability's graveyard-exile or multi-sacrifice cost outright, but not a discard. No pool
+  card has one; blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
+  2026-10-23 (B141).
+- **A token with devour never devours.** Rule 702.82a: devour is a replacement as the permanent
+  enters. It's asked through `askEnterChoice`, which a spell resolving, a reanimation and a blink
+  call, but token creation (`createTokens`, `mintTokenBatch`) never does, so a `create-token` of
+  a token definition with `devour` makes the token without the choice (AUTHORING §15 notes the
+  same for a token copy's "as this enters" choices). No pool token has devour; blocks Dragon
+  Broodmother (`mechanic:token-devour`). Found by an authoring agent, 2026-10-23 (B141).
 - **Convoke with a target-dependent cost.** The offered `proof` is priced at the dearer end of
   the target-count range.
 

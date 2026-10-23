@@ -542,6 +542,7 @@ import _poolWeaponsVendor from "../pool/weapons-vendor.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
+import _poolWhirOfInvention from "../pool/whir-of-invention.js";
 import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
 import _poolWildgrowthWalker from "../pool/wildgrowth-walker.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolWeaselbackRedcap,
     _poolWeaverOfBlossoms,
     _poolWerefoxBodyguard,
+    _poolWhirOfInvention,
     _poolWildPackSquad,
     _poolWildShape,
     _poolWildgrowthWalker,

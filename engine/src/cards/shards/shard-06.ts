@@ -66,6 +66,7 @@ import _poolBombard from "../pool/bombard.js";
 import _poolBonepickerSkirge from "../pool/bonepicker-skirge.js";
 import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
+import _poolBottleCapBlast from "../pool/bottle-cap-blast.js";
 import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
@@ -461,6 +462,7 @@ import _poolSonarStrike from "../pool/sonar-strike.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
+import _poolSpidersilkArmor from "../pool/spidersilk-armor.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
 import _poolSpiritOfTheSpires from "../pool/spirit-of-the-spires.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
@@ -661,6 +663,7 @@ const shard: CardShard = {
     _poolBonepickerSkirge,
     _poolBoomerangBasics,
     _poolBoonBringerValkyrie,
+    _poolBottleCapBlast,
     _poolBottleGolems,
     _poolBottomlessPit,
     _poolBountifulPromenade,
@@ -1056,6 +1059,7 @@ const shard: CardShard = {
     _poolSoulboundGuardians,
     _poolSpectralProcession,
     _poolSpellseeker,
+    _poolSpidersilkArmor,
     _poolSpiketailDrakeling,
     _poolSpiritOfTheSpires,
     _poolSpiritcallEnthusiast,

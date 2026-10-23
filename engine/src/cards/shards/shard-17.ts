@@ -10,6 +10,7 @@ import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
 import _poolAerialModification from "../pool/aerial-modification.js";
 import _poolAetherMembrane from "../pool/aether-membrane.js";
 import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
+import _poolAirborneAid from "../pool/airborne-aid.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
@@ -131,6 +132,7 @@ import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
 import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
+import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
@@ -601,6 +603,7 @@ const shard: CardShard = {
     _poolAerialModification,
     _poolAetherMembrane,
     _poolAirbendersReversal,
+    _poolAirborneAid,
     _poolAjaniAdversaryOfTyrants,
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
@@ -722,6 +725,7 @@ const shard: CardShard = {
     _poolDone,
     _poolDoomwakeGiant,
     _poolDovinsAutomaton,
+    _poolDragonlordOjutai,
     _poolDraugrRecruiter,
     _poolDrogskolReaver,
     _poolDromadPurebred,

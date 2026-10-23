@@ -159,6 +159,7 @@ import _poolElixirOfImmortality from "../pool/elixir-of-immortality.js";
 import _poolElvenkingsHalls from "../pool/elvenkings-halls.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
 import _poolEmberethSkyblazer from "../pool/embereth-skyblazer.js";
+import _poolEmbodimentOfInsight from "../pool/embodiment-of-insight.js";
 import _poolEmbraceOblivion from "../pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEmeraldCharm from "../pool/emerald-charm.js";
@@ -400,6 +401,7 @@ import _poolRakalite from "../pool/rakalite.js";
 import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
+import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
@@ -788,6 +790,7 @@ const shard: CardShard = {
     _poolElvenkingsHalls,
     _poolElvishVanguard,
     _poolEmberethSkyblazer,
+    _poolEmbodimentOfInsight,
     _poolEmbraceOblivion,
     _poolEmbraceTheParadox,
     _poolEmeraldCharm,
@@ -1029,6 +1032,7 @@ const shard: CardShard = {
     _poolRakishCrew,
     _poolRampageOfTheValkyries,
     _poolRangingRaptors,
+    _poolRaphaelTheMuscle,
     _poolRaucousTheater,
     _poolRealmScorcherHellkite,
     _poolReapersScythe,

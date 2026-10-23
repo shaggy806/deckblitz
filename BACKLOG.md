@@ -59,7 +59,7 @@ section keeps only what to do next.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
+  untriaged cards by rank: rank 7454 on (batch 141 took 7181–7451 and the stale records). Batches run 4-5 agents, ~30 cards each, with the
   leading features built alongside in worktrees. The nine other starter precons' 25 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
@@ -145,9 +145,8 @@ section keeps only what to do next.
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise);
-  **next, Commander 2016** (20 left), then Kaladesh (121 left). Eleven earlier improvise
-  cards wait for a recheck (`cards:needs -- --feature keyword:improvise`, `docs/card-blockers.md`
-  batch 140). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
+  **next, Commander 2016** (20 left), then Kaladesh (121 left). The earlier improvise
+  cards were rechecked in batch 141; three wait on granting it (`static:grant-improvise`). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
   Kinetic Augur already does it as a 0/1/2 modal count, so it may already be expressible), "choose a card name" (`decision:choose-card-name`
   — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an
   additional creature" (`static:block-additional-creature` — 4), "your life total becomes N"
@@ -231,6 +230,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins (`effect:hidden-simultaneous-choices`).
 - **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
 - **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.
 - **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).
@@ -268,6 +268,8 @@ there and move this line to `COMPLETED.md`.
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
 
+- **A mana ability's discard cost is never paid** (605.3b): the mana ability path returns before the discard — Bog Witch waits (`cost:mana-ability-discard`).
+- **A token with devour never devours** (702.82a): token creation never calls `askEnterChoice` — Dragon Broodmother waits (`mechanic:token-devour`).
 - **Convoke with a target-dependent cost.**
 - **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
 

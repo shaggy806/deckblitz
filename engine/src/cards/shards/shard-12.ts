@@ -357,6 +357,7 @@ import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
+import _poolPatternOfRebirth from "../pool/pattern-of-rebirth.js";
 import _poolPemminsAura from "../pool/pemmins-aura.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
 import _poolPerilousPredicament from "../pool/perilous-predicament.js";
@@ -948,6 +949,7 @@ const shard: CardShard = {
     _poolPatagiaGolem,
     _poolPathToTheFestival,
     _poolPathbreakerIbex,
+    _poolPatternOfRebirth,
     _poolPemminsAura,
     _poolPendrellDrake,
     _poolPerilousPredicament,

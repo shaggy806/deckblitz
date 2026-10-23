@@ -294,6 +294,7 @@ import _poolMarionetteApprentice from "../pool/marionette-apprentice.js";
 import _poolMarkOfTheVampire from "../pool/mark-of-the-vampire.js";
 import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
+import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
@@ -403,6 +404,7 @@ import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
+import _poolRingOfEvosIsle from "../pool/ring-of-evos-isle.js";
 import _poolRingOfRenewal from "../pool/ring-of-renewal.js";
 import _poolRingwardenOwl from "../pool/ringwarden-owl.js";
 import _poolRiseOfTheVarmints from "../pool/rise-of-the-varmints.js";
@@ -901,6 +903,7 @@ const shard: CardShard = {
     _poolMarkOfTheVampire,
     _poolMarshGoblins,
     _poolMartialGlory,
+    _poolMassAppeal,
     _poolMassCalcify,
     _poolMassOfGhouls,
     _poolMeriaScholarOfAntiquity,
@@ -1010,6 +1013,7 @@ const shard: CardShard = {
     _poolReviveTheShire,
     _poolRevokeDemise,
     _poolRimeshieldFrostGiant,
+    _poolRingOfEvosIsle,
     _poolRingOfRenewal,
     _poolRingwardenOwl,
     _poolRiseOfTheVarmints,

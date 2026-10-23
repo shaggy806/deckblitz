@@ -280,6 +280,7 @@ import _poolItemShopkeep from "../pool/item-shopkeep.js";
 import _poolIxallisDiviner from "../pool/ixallis-diviner.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJadedAnalyst from "../pool/jaded-analyst.js";
+import _poolJeskaiBarricade from "../pool/jeskai-barricade.js";
 import _poolJoinShields from "../pool/join-shields.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
@@ -896,6 +897,7 @@ const shard: CardShard = {
     _poolIxallisDiviner,
     _poolIzzetChronarch,
     _poolJadedAnalyst,
+    _poolJeskaiBarricade,
     _poolJoinShields,
     _poolJoustThrough,
     _poolJungleTroll,

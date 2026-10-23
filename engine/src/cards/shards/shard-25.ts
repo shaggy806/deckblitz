@@ -503,6 +503,7 @@ import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
+import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolSunderingVitae,
     _poolSuspiciousStowaway,
     _poolSweepTheSkies,
+    _poolSynthInfiltrator,
     _poolTaintedPeak,
     _poolTameshiRealityArchitect,
     _poolTarSnare,

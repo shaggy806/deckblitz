@@ -253,6 +253,7 @@ import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
 import _poolIcatianMoneychanger from "../pool/icatian-moneychanger.js";
 import _poolIceOver from "../pool/ice-over.js";
+import _poolIcebreakerKraken from "../pool/icebreaker-kraken.js";
 import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
@@ -299,6 +300,7 @@ import _poolLiveOrDie from "../pool/live-or-die.js";
 import _poolLivingArtifact from "../pool/living-artifact.js";
 import _poolLivingDeath from "../pool/living-death.js";
 import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
+import _poolLull from "../pool/lull.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMaddeningWind from "../pool/maddening-wind.js";
@@ -871,6 +873,7 @@ const shard: CardShard = {
     _poolIanTheReckless,
     _poolIcatianMoneychanger,
     _poolIceOver,
+    _poolIcebreakerKraken,
     _poolIchorplateGolem,
     _poolIdolOfOblivion,
     _poolIllGottenInheritance,
@@ -917,6 +920,7 @@ const shard: CardShard = {
     _poolLivingArtifact,
     _poolLivingDeath,
     _poolLordOfExtinction,
+    _poolLull,
     _poolLuminarchAspirant,
     _poolLyraDawnbringer,
     _poolMaddeningWind,

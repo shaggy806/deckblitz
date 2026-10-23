@@ -115,6 +115,7 @@ import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
+import _poolDragonThroneOfTarkir from "../pool/dragon-throne-of-tarkir.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDranasSilencer from "../pool/dranas-silencer.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
@@ -197,6 +198,7 @@ import _poolGravelSlinger from "../pool/gravel-slinger.js";
 import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
 import _poolGrimHireling from "../pool/grim-hireling.js";
 import _poolGrislyTransformation from "../pool/grisly-transformation.js";
+import _poolGrowthSpasm from "../pool/growth-spasm.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
 import _poolGruulSpellbreaker from "../pool/gruul-spellbreaker.js";
 import _poolGuildswornProwler from "../pool/guildsworn-prowler.js";
@@ -322,6 +324,7 @@ import _poolNineFingersKeene from "../pool/nine-fingers-keene.js";
 import _poolNirkanaAssassin from "../pool/nirkana-assassin.js";
 import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
 import _poolNotionThief from "../pool/notion-thief.js";
+import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
@@ -696,6 +699,7 @@ const shard: CardShard = {
     _poolDoomsServoGuards,
     _poolDoseOfDawnglow,
     _poolDoubleDown,
+    _poolDragonThroneOfTarkir,
     _poolDrakeHatchling,
     _poolDranasSilencer,
     _poolDreadPresence,
@@ -778,6 +782,7 @@ const shard: CardShard = {
     _poolGriffinSentinel,
     _poolGrimHireling,
     _poolGrislyTransformation,
+    _poolGrowthSpasm,
     _poolGruffTriplets,
     _poolGruulSpellbreaker,
     _poolGuildswornProwler,
@@ -903,6 +908,7 @@ const shard: CardShard = {
     _poolNirkanaAssassin,
     _poolNivMizzetVisionary,
     _poolNotionThief,
+    _poolNovijenHeartOfProgress,
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,

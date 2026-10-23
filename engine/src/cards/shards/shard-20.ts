@@ -116,6 +116,7 @@ import _poolCourtCleric from "../pool/court-cleric.js";
 import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
 import _poolCovetousCastaway from "../pool/covetous-castaway.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
+import _poolCreepingRenaissance from "../pool/creeping-renaissance.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
@@ -598,6 +599,7 @@ import _poolVillageWatch from "../pool/village-watch.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
 import _poolViridianZealot from "../pool/viridian-zealot.js";
 import _poolVisionarysDance from "../pool/visionarys-dance.js";
+import _poolVividCrag from "../pool/vivid-crag.js";
 import _poolVivisPersistence from "../pool/vivis-persistence.js";
 import _poolVodalianHexcatcher from "../pool/vodalian-hexcatcher.js";
 import _poolVolcanicEruption from "../pool/volcanic-eruption.js";
@@ -758,6 +760,7 @@ const shard: CardShard = {
     _poolCoverOfDarkness,
     _poolCovetousCastaway,
     _poolCrashOfRhinos,
+    _poolCreepingRenaissance,
     _poolCrestedSunmare,
     _poolCrosswayTroublemakers,
     _poolCrowdsFavor,
@@ -1240,6 +1243,7 @@ const shard: CardShard = {
     _poolViridianAcolyte,
     _poolViridianZealot,
     _poolVisionarysDance,
+    _poolVividCrag,
     _poolVivisPersistence,
     _poolVodalianHexcatcher,
     _poolVolcanicEruption,

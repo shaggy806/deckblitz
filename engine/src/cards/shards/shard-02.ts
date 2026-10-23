@@ -419,6 +419,7 @@ import _poolSchemaThief from "../pool/schema-thief.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
 import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
+import _poolScytheclaw from "../pool/scytheclaw.js";
 import _poolSearingBarrage from "../pool/searing-barrage.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
@@ -988,6 +989,7 @@ const shard: CardShard = {
     _poolScionOfGlaciers,
     _poolScouringSands,
     _poolScrybSprites,
+    _poolScytheclaw,
     _poolSearingBarrage,
     _poolSeedshipBroodtender,
     _poolSerraFaithkeeper,

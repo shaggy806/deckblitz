@@ -9695,6 +9695,50 @@
   "effect:reveal-until-per-destroyed-this-way": {
    "family": "effect:reveal-until-count",
    "example": "Indomitable Creativity: for each permanent destroyed this way, its controller reveals until an artifact or creature card, and all of them enter at once."
+  },
+  "amount:creatures-dealt-combat-damage-to-player-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Excess (Indulge // Excess): 'for each creature you controlled that dealt combat damage to a player this turn' — no turn-history list records which creatures did."
+  },
+  "cost:mana-ability-discard": {
+   "family": "cost:mana-ability-complex-costs",
+   "example": "Bog Witch: '{B}, {T}, Discard a card: Add {B}{B}{B}.' A mana ability's activation never pays `cost.discard` (only the stack path does), and activation doesn't refuse it either — docs/engine-gaps.md."
+  },
+  "effect:discard-controller-of-target": {
+   "family": "effect:player-scope-extensions",
+   "example": "Nicol Bolas, Planeswalker's −9: 'that player or that planeswalker's controller discards seven cards, then sacrifices seven permanents' — `discard` reads only a player slot."
+  },
+  "effect:grant-embalm": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Cursecloth Wrappings: 'target creature card in your graveyard gains embalm until end of turn. The embalm cost is equal to its mana cost.'"
+  },
+  "effect:counter-into-battlefield": {
+   "family": "effect:control-change-extensions",
+   "example": "Desertion: 'if an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard' — `counter`'s `into` is a hand or exile."
+  },
+  "decision:any-opponent-may": {
+   "family": "effect:choices-by-other-players",
+   "example": "Sin Prodder: 'Any opponent may have you put that card into your graveyard. If a player does, …' — one opponent's yes ends it; `each-player-may` lets every opponent say yes."
+  },
+  "replacement:clone-exception-if-embalmed": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Vizier of Many Faces: 'except if this creature was embalmed, the token has no mana cost, it's white, and it's a Zombie' — a `copyOnEnter` exception that applies only to the embalmed token."
+  },
+  "condition:source-monstrous": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Colossus of Akros: 'As long as this creature is monstrous, it has trample and can attack as though it didn't have defender' — `GameObject.monstrous` is recorded but no filter or condition reads it."
+  },
+  "condition:dice-rolled-doubles": {
+   "family": "mechanic:dice-rolling",
+   "example": "Celebr-8000: roll two six-sided dice, a result table per die, and 'if you rolled doubles'."
+  },
+  "static:equip-only-to-filter": {
+   "family": "effect:attach-extensions",
+   "example": "O-Naginata: 'This Equipment can be attached only to a creature with power 3 or greater' — an attach restriction, and the state-based unattach when the creature stops qualifying (rule 301.5c)."
+  },
+  "mechanic:token-devour": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "Dragon Broodmother: a token with devour 2. Devour is asked only where `askEnterChoice` runs; token creation never asks, so a token's devour would never happen — docs/engine-gaps.md."
   }
  }
 }

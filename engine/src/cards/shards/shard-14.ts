@@ -427,6 +427,7 @@ import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
+import _poolSaheelisArtistry from "../pool/saheelis-artistry.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
@@ -487,6 +488,7 @@ import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
 import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
+import _poolSwordOfTheMeek from "../pool/sword-of-the-meek.js";
 import _poolTahCropSkirmisher from "../pool/tah-crop-skirmisher.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
@@ -1014,6 +1016,7 @@ const shard: CardShard = {
     _poolRuinousGremlin,
     _poolRunawayTrashBot,
     _poolRunescaleStormbrood,
+    _poolSaheelisArtistry,
     _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
@@ -1074,6 +1077,7 @@ const shard: CardShard = {
     _poolSurrakarBanisher,
     _poolSuspiciousShambler,
     _poolSwaggeringCorsair,
+    _poolSwordOfTheMeek,
     _poolTahCropSkirmisher,
     _poolTalrand,
     _poolTanaTheBloodsower,

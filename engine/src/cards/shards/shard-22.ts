@@ -197,6 +197,7 @@ import _poolGodPharaohsFaithful from "../pool/god-pharaohs-faithful.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
 import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
 import _poolGoremand from "../pool/goremand.js";
+import _poolGrandArchitect from "../pool/grand-architect.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
@@ -210,6 +211,7 @@ import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
 import _poolHelicaGlider from "../pool/helica-glider.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
+import _poolHeroOfIroas from "../pool/hero-of-iroas.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHighlandGame from "../pool/highland-game.js";
 import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
@@ -282,6 +284,7 @@ import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
 import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
+import _poolMagusOfTheVineyard from "../pool/magus-of-the-vineyard.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolGoldveinPick,
     _poolGollumTheAbandoned,
     _poolGoremand,
+    _poolGrandArchitect,
     _poolGravestoneStrider,
     _poolGriffinAerie,
     _poolGuadosalamFarplaneGateway,
@@ -807,6 +811,7 @@ const shard: CardShard = {
     _poolHeirloomBlade,
     _poolHelicaGlider,
     _poolHellSwarm,
+    _poolHeroOfIroas,
     _poolHeronbladeElite,
     _poolHighlandGame,
     _poolHiveOfTheEyeTyrant,
@@ -879,6 +884,7 @@ const shard: CardShard = {
     _poolMaestrosGift,
     _poolMaggotCarrier,
     _poolMagusOfTheMind,
+    _poolMagusOfTheVineyard,
     _poolMajesticAuricorn,
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,

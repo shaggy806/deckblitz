@@ -234,6 +234,7 @@ import _poolHideousFleshwheeler from "../pool/hideous-fleshwheeler.js";
 import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
 import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
+import _poolHornedSliver from "../pool/horned-sliver.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
 import _poolHuatliDinosaurKnight from "../pool/huatli-dinosaur-knight.js";
 import _poolHulkingCyclops from "../pool/hulking-cyclops.js";
@@ -286,6 +287,7 @@ import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
 import _poolLivingHistory from "../pool/living-history.js";
+import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
@@ -871,6 +873,7 @@ const shard: CardShard = {
     _poolHighPerfectMorcant,
     _poolHomaridExplorer,
     _poolHondenOfCleansingFire,
+    _poolHornedSliver,
     _poolHoverstonePilgrim,
     _poolHuatliDinosaurKnight,
     _poolHulkingCyclops,
@@ -923,6 +926,7 @@ const shard: CardShard = {
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
     _poolLivingHistory,
+    _poolLodestoneGolem,
     _poolLokisScepter,
     _poolLongtuskCub,
     _poolLoxodonLineBreaker,

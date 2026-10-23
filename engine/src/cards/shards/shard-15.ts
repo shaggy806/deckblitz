@@ -90,6 +90,7 @@ import _poolConsumingSepulcher from "../pool/consuming-sepulcher.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
+import _poolCorpseChurn from "../pool/corpse-churn.js";
 import _poolCourierBat from "../pool/courier-bat.js";
 import _poolCovertCutpurse from "../pool/covert-cutpurse.js";
 import _poolCradleOfSafety from "../pool/cradle-of-safety.js";
@@ -381,6 +382,7 @@ import _poolPossessionEngine from "../pool/possession-engine.js";
 import _poolPounce from "../pool/pounce.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
+import _poolPrimalBellow from "../pool/primal-bellow.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
@@ -662,6 +664,7 @@ const shard: CardShard = {
     _poolContingencyPlan,
     _poolCopperLonglegs,
     _poolCormelaGlamourThief,
+    _poolCorpseChurn,
     _poolCourierBat,
     _poolCovertCutpurse,
     _poolCradleOfSafety,
@@ -953,6 +956,7 @@ const shard: CardShard = {
     _poolPounce,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
+    _poolPrimalBellow,
     _poolPrizefight,
     _poolPsionicSnoop,
     _poolPyreticRebirth,

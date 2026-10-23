@@ -65,6 +65,7 @@ import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
 import _poolCacklingImp from "../pool/cackling-imp.js";
 import _poolCanopyStalker from "../pool/canopy-stalker.js";
+import _poolCaseyJonesBackAlleyBrute from "../pool/casey-jones-back-alley-brute.js";
 import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
@@ -638,6 +639,7 @@ const shard: CardShard = {
     _poolBurrogBefuddler,
     _poolCacklingImp,
     _poolCanopyStalker,
+    _poolCaseyJonesBackAlleyBrute,
     _poolCastIntoTheFire,
     _poolCatapultMaster,
     _poolCauldronsGift,

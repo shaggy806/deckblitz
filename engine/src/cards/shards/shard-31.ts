@@ -157,6 +157,7 @@ import _poolDragonsguardElite from "../pool/dragonsguard-elite.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
+import _poolDruidsRepository from "../pool/druids-repository.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
 import _poolEarthCultElemental from "../pool/earth-cult-elemental.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolDragonspeakerShaman,
     _poolDreadReturn,
     _poolDreamSpoilers,
+    _poolDruidsRepository,
     _poolDungeonDescent,
     _poolDunlandCrebain,
     _poolEarthCultElemental,

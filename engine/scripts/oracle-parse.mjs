@@ -2309,9 +2309,15 @@ export function parseFace(face, ctx = {}) {
   // "Cards exiled with ~" (rule 607.2a): the card's own exiles are linked to
   // the abilities that read them — Boiling Rock Rioter's "exile target card
   // from a graveyard" and "cast an Ally spell from among cards you own exiled
-  // with this creature". An exile until ~ leaves is linked another way.
+  // with this creature". So are the old two-trigger wording's (Leonin
+  // Relic-Warder's "you may exile target artifact" and "when this leaves,
+  // return the exiled card"). An exile until ~ leaves is linked another way.
   const oracleText = face.oracle_text ?? "";
-  if (/\bexiled with this \w+/.test(oracleText) || (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))) {
+  if (
+    /\bexiled with this \w+/.test(oracleText) ||
+    /\breturn the exiled card\b/.test(oracleText) ||
+    (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
+  ) {
     const linkExiles = (node) => {
       if (Array.isArray(node)) node.forEach(linkExiles);
       else if (node !== null && typeof node === "object") {
