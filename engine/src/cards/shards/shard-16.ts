@@ -370,6 +370,7 @@ import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
 import _poolParadoxZone from "../pool/paradox-zone.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
+import _poolPartTheWaterveil from "../pool/part-the-waterveil.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
@@ -1028,6 +1029,7 @@ const shard: CardShard = {
     _poolPalladiumMyr,
     _poolParadoxZone,
     _poolPardicCollaborator,
+    _poolPartTheWaterveil,
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,

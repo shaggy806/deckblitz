@@ -429,6 +429,8 @@ import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
 import _poolRootriderFaun from "../pool/rootrider-faun.js";
 import _poolRuinCrab from "../pool/ruin-crab.js";
+import _poolRuinousPath from "../pool/ruinous-path.js";
+import _poolRushOfIce from "../pool/rush-of-ice.js";
 import _poolRushTheRoom from "../pool/rush-the-room.js";
 import _poolSacredFire from "../pool/sacred-fire.js";
 import _poolSageOfTheInwardEye from "../pool/sage-of-the-inward-eye.js";
@@ -1061,6 +1063,8 @@ const shard: CardShard = {
     _poolRiverKaijin,
     _poolRootriderFaun,
     _poolRuinCrab,
+    _poolRuinousPath,
+    _poolRushOfIce,
     _poolRushTheRoom,
     _poolSacredFire,
     _poolSageOfTheInwardEye,

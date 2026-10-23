@@ -507,7 +507,51 @@ export const surge = (mana: string): NonNullable<CardDefinition["alternativeCost
 });
 
 /**
- * Melee (rule 702.121): "Whenever this creature attacks, it gets +1/+1 until
+ * Awaken N—[cost] (rule 702.113a): "If you cast this spell for [cost], also
+ * put N +1/+1 counters on target land you control and it becomes a 0/0
+ * Elemental creature with haste. It's still a land." — the card's
+ * `overload`, `keyword: "awaken"`: cast for `cost` rather than the mana cost,
+ * with the printed `targets` and then the land, and the printed `effect` and
+ * then the land's. Pass the spell's own `targets` and `effect` (the card's
+ * fields too). The land is the last target, so an illegal land skips only
+ * its part, and a spell with no other target doesn't resolve without it (the
+ * rulings). The animation is permanent and gives no color (the ruling). Put
+ * the "Awaken N—[cost]" line in `text` as well.
+ */
+export const awaken = (
+  n: number,
+  cost: string,
+  spell: { readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec },
+): NonNullable<CardDefinition["overload"]> => {
+  const targets = spell.targets ?? [];
+  const land = targets.length;
+  const steps = spell.effect.kind === "sequence" && spell.effect.simultaneous !== true ? spell.effect.effects : [spell.effect];
+  return {
+    cost,
+    keyword: "awaken",
+    targets: [...targets, "land-you-control"],
+    effect: {
+      kind: "sequence",
+      effects: [
+        ...steps,
+        { kind: "add-counter", target: land, counter: "+1/+1", amount: n },
+        {
+          kind: "animate",
+          target: land,
+          power: 0,
+          toughness: 0,
+          addTypes: ["creature"],
+          addSubtypes: ["Elemental"],
+          keywords: ["haste"],
+          duration: "permanent",
+        },
+      ],
+    },
+  };
+};
+
+/**
+ * Melee (rule 702.121):"Whenever this creature attacks, it gets +1/+1 until
  * end of turn for each opponent you attacked with a creature this combat."
  * Each instance triggers on its own. Put "Melee" in `text` as well.
  */

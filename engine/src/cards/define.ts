@@ -2534,12 +2534,19 @@ export interface CardDefinition {
    * version) and held here with `keyword: "cleave"`. Its `targets` are chosen
    * in place of the printed ones; a copy of a cleaved spell is cleaved too
    * (707.10 — it copies the alternative cost paid), as an overloaded one is.
+   *
+   * Awaken N—[cost] (rule 702.113a) is the same thing again, `keyword:
+   * "awaken"`: cast for [cost] rather than the mana cost, the spell also
+   * puts N +1/+1 counters on target land you control and makes it a 0/0
+   * Elemental creature with haste — its `targets` the printed ones and then
+   * that land, its `effect` the printed one and then that. Written with the
+   * `awaken()` helper.
    */
   readonly overload: {
     readonly cost: string;
     readonly effect: EffectSpec;
     readonly targets?: readonly TargetSpec[];
-    readonly keyword?: "cleave" | "mutate";
+    readonly keyword?: "cleave" | "mutate" | "awaken";
   } | null;
   /**
    * A conditional free-cast permission printed on the spell itself (the CMM

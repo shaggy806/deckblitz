@@ -1218,6 +1218,41 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("awaken (rule 702.113a): the spell's own targets and effect, then the land's", () => {
+    const clutch = face(
+      "Return target creature to its owner's hand.\nAwaken 3—{4}{U} (If you cast this spell for {4}{U}, also put three +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)",
+      "Sorcery",
+    );
+    expect(clutch.complete).toBe(true);
+    expect(clutch.targets).toEqual(["creature"]);
+    expect(clutch.overload).toEqual({
+      cost: "{4}{U}",
+      keyword: "awaken",
+      targets: ["creature", "land-you-control"],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "return-to-hand", target: 0 },
+          { kind: "add-counter", target: 1, counter: "+1/+1", amount: 3 },
+          {
+            kind: "animate",
+            target: 1,
+            power: 0,
+            toughness: 0,
+            addTypes: ["creature"],
+            addSubtypes: ["Elemental"],
+            keywords: ["haste"],
+            duration: "permanent",
+          },
+        ],
+      },
+    });
+    // A spell not read whole leaves its awaken line to a person too.
+    const unread = face("Frobnicate the widgets.\nAwaken 2—{4}{W} (reminder)", "Instant");
+    expect(unread.overload).toBeUndefined();
+    expect(unread.todo).toContain("Awaken 2—{4}{W}");
+  });
+
   it("surge (rule 702.117a) and 'if that creature would die this turn, exile it instead' (rule 614.1a)", () => {
     const tyrant = face("Surge {3}{R}{R}\nFlying\nWhen ~ enters, if its surge cost was paid, it deals 3 damage to any target.", "Creature — Dragon");
     expect(tyrant.alternativeCost).toEqual({

@@ -105,6 +105,7 @@ import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
+import _poolClutchOfCurrents from "../pool/clutch-of-currents.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
 import _poolCoatiScavenger from "../pool/coati-scavenger.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
@@ -727,6 +728,7 @@ const shard: CardShard = {
     _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
+    _poolClutchOfCurrents,
     _poolCoastalTower,
     _poolCoatiScavenger,
     _poolCommandersInsignia,

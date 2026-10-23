@@ -56,6 +56,7 @@ import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
+import _poolBoilingEarth from "../pool/boiling-earth.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
@@ -361,6 +362,7 @@ import _poolPegasusCharger from "../pool/pegasus-charger.js";
 import _poolPeterParkersCamera from "../pool/peter-parkers-camera.js";
 import _poolPharikasLibation from "../pool/pharikas-libation.js";
 import _poolPillardropWarden from "../pool/pillardrop-warden.js";
+import _poolPlanarOutburst from "../pool/planar-outburst.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
@@ -658,6 +660,7 @@ const shard: CardShard = {
     _poolBloodHypnotist,
     _poolBloodtracker,
     _poolBloomwielderDryads,
+    _poolBoilingEarth,
     _poolBontusLastReckoning,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
@@ -963,6 +966,7 @@ const shard: CardShard = {
     _poolPeterParkersCamera,
     _poolPharikasLibation,
     _poolPillardropWarden,
+    _poolPlanarOutburst,
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,
     _poolPlunderingBarbarian,

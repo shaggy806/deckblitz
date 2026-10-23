@@ -1021,8 +1021,9 @@ export type LegalAction =
       readonly overloadCost?: string;
       /** `"cleave"` when this `overload` variant is a cleave (rule 702.148 —
        * `CardDefinition.overload.keyword`), whose `targetSpecs` are the
-       * cleaved text's; for labelling. */
-      readonly overloadKeyword?: "cleave" | "mutate";
+       * cleaved text's; `"awaken"` an awaken cast (rule 702.113), whose
+       * `targetSpecs` add the land; for labelling. */
+      readonly overloadKeyword?: "cleave" | "mutate" | "awaken";
       /** A conditional free-cast permission (`CardDefinition.freeCastIf`) is
        * enumerated **twice** when its condition is currently met — once
        * paying the printed cost, once free — the same "one entry per

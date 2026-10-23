@@ -158,6 +158,7 @@ import _poolDungroveElder from "../pool/dungrove-elder.js";
 import _poolDurableCoilbug from "../pool/durable-coilbug.js";
 import _poolDutifulGriffin from "../pool/dutiful-griffin.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
+import _poolEarthenArms from "../pool/earthen-arms.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
@@ -478,6 +479,7 @@ import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
 import _poolShamblingSuit from "../pool/shambling-suit.js";
 import _poolShangChiAndTheTenRings from "../pool/shang-chi-and-the-ten-rings.js";
 import _poolShatteredWings from "../pool/shattered-wings.js";
+import _poolSheerDrop from "../pool/sheer-drop.js";
 import _poolShefetDunes from "../pool/shefet-dunes.js";
 import _poolShortcutToMushrooms from "../pool/shortcut-to-mushrooms.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
@@ -792,6 +794,7 @@ const shard: CardShard = {
     _poolDurableCoilbug,
     _poolDutifulGriffin,
     _poolEarthcraft,
+    _poolEarthenArms,
     _poolElectrozoa,
     _poolElvenAmbush,
     _poolElvenRaftSteerer,
@@ -1112,6 +1115,7 @@ const shard: CardShard = {
     _poolShamblingSuit,
     _poolShangChiAndTheTenRings,
     _poolShatteredWings,
+    _poolSheerDrop,
     _poolShefetDunes,
     _poolShortcutToMushrooms,
     _poolShuEliteInfantry,

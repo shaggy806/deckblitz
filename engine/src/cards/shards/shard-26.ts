@@ -420,6 +420,7 @@ import _poolSaviorOfTheSleeping from "../pool/savior-of-the-sleeping.js";
 import _poolScaldingViper from "../pool/scalding-viper.js";
 import _poolScareTactics from "../pool/scare-tactics.js";
 import _poolScatheZombies from "../pool/scathe-zombies.js";
+import _poolScatterToTheWinds from "../pool/scatter-to-the-winds.js";
 import _poolScatteredThoughts from "../pool/scattered-thoughts.js";
 import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolScornfulEgotist from "../pool/scornful-egotist.js";
@@ -1022,6 +1023,7 @@ const shard: CardShard = {
     _poolScaldingViper,
     _poolScareTactics,
     _poolScatheZombies,
+    _poolScatterToTheWinds,
     _poolScatteredThoughts,
     _poolScepterOfDominance,
     _poolScornfulEgotist,

@@ -204,6 +204,7 @@ function faceSource(face, ctx) {
     evoke: parsed.evoke,
     alternativeCost: parsed.alternativeCost,
     mutate: parsed.mutate,
+    overload: parsed.overload,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
     becomesDayAsEnters: parsed.becomesDayAsEnters,

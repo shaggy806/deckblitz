@@ -351,6 +351,7 @@ import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
+import _poolOnduRising from "../pool/ondu-rising.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
 import _poolOpenFire from "../pool/open-fire.js";
 import _poolOreplatePangolin from "../pool/oreplate-pangolin.js";
@@ -989,6 +990,7 @@ const shard: CardShard = {
     _poolOldOneEye,
     _poolOnTheTrail,
     _poolOnakkeOgre,
+    _poolOnduRising,
     _poolOnduWarCleric,
     _poolOpenFire,
     _poolOreplatePangolin,

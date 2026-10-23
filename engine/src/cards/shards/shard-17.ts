@@ -413,6 +413,7 @@ import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
 import _poolRisenRiptide from "../pool/risen-riptide.js";
 import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
+import _poolRisingMiasma from "../pool/rising-miasma.js";
 import _poolRiverBear from "../pool/river-bear.js";
 import _poolRiverKelpie from "../pool/river-kelpie.js";
 import _poolRockshardElemental from "../pool/rockshard-elemental.js";
@@ -1030,6 +1031,7 @@ const shard: CardShard = {
     _poolRimekinRecluse,
     _poolRisenRiptide,
     _poolRishadanDockhand,
+    _poolRisingMiasma,
     _poolRiverBear,
     _poolRiverKelpie,
     _poolRockshardElemental,

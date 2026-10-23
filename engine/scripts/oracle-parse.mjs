@@ -30,6 +30,7 @@ import {
   rampage,
   cumulativeUpkeep,
   annihilator,
+  awaken,
   mentor,
   crew,
   dethrone,
@@ -159,6 +160,10 @@ function keywordPart(part) {
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
   // Surge [cost] (rule 702.117a): an alternative cost.
   if ((m = new RegExp(`^surge ${COST}$`, "i").exec(p))) return { card: { alternativeCost: surge(m[1]) } };
+  // Awaken N—[cost] (rule 702.113a): an alternative cost adding a target and
+  // an effect — `awaken()` over the spell's own targets and effect, once
+  // they're read (`parseFace`).
+  if ((m = new RegExp(`^awaken (\\d+)—${COST}$`, "i").exec(p))) return { card: { awakenKeyword: { n: Number(m[1]), cost: m[2] } } };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
@@ -2351,6 +2356,11 @@ export function parseFace(face, ctx = {}) {
         out.todo.push(...r.todo);
         out.effectHints = r.hints;
       }
+      // Awaken (rule 702.113a): the awaken cast's targets and effect are the
+      // spell's own and then the land's.
+      if (out.awakenKeyword !== undefined && r.effect !== null) {
+        out.overload = awaken(out.awakenKeyword.n, out.awakenKeyword.cost, { targets: ownTargets, effect: r.effect });
+      }
       if (kickedTail !== undefined) {
         const extra = r.effect === null ? { effect: null } : parseEffect(kickedTail.rest, ctx2);
         if (extra.effect === null) out.todo.push(kickedTail.sentence);
@@ -2366,6 +2376,11 @@ export function parseFace(face, ctx = {}) {
     }
     delete out.spellLines;
   }
+  // An awaken line over a spell not read whole (or a modal one) is a person's.
+  if (out.awakenKeyword !== undefined && out.overload === undefined) {
+    out.todo.push(printed(lines.find((l) => /^Awaken \d/.test(l)) ?? "Awaken"));
+  }
+  delete out.awakenKeyword;
 
   // "Cards exiled with ~" (rule 607.2a): the card's own exiles are linked to
   // the abilities that read them — Boiling Rock Rioter's "exile target card
