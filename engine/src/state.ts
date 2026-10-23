@@ -1494,6 +1494,8 @@ export interface LastKnownInfo {
   /** The turn it entered the battlefield on, and the turn it attacked on if
    * it did — for the `enteredThisTurn` / `attackedThisTurn` filter clauses. */
   readonly enteredOnTurn?: number;
+  /** It was monstrous (rule 701.37b) — the `monstrous` filter clause. */
+  readonly monstrous?: true;
   /** How it had entered — `GameObject.entry`. */
   readonly entry?: EntryRecord;
   readonly attackedOnTurn?: number;

@@ -251,11 +251,13 @@ import _poolInspiringUnicorn from "../pool/inspiring-unicorn.js";
 import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
 import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
+import _poolItThatRidesAsOne from "../pool/it-that-rides-as-one.js";
 import _poolJaceIngeniousMindMage from "../pool/jace-ingenious-mind-mage.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJacesPhantasm from "../pool/jaces-phantasm.js";
 import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
+import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
@@ -283,6 +285,7 @@ import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
+import _poolLupinePrototype from "../pool/lupine-prototype.js";
 import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
@@ -305,6 +308,7 @@ import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
+import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
@@ -476,6 +480,7 @@ import _poolStockUp from "../pool/stock-up.js";
 import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
+import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwat from "../pool/swat.js";
@@ -841,11 +846,13 @@ const shard: CardShard = {
     _poolInterceptorMechan,
     _poolInvasionOfKarsus,
     _poolIronGiant,
+    _poolItThatRidesAsOne,
     _poolJaceIngeniousMindMage,
     _poolJaceUnravelerOfSecrets,
     _poolJacesPhantasm,
     _poolJaredCarthalion,
     _poolJeditOjanen,
+    _poolJeeringHomunculus,
     _poolJosuVessLichKnight,
     _poolKangeeSkyWarden,
     _poolKardursViciousReturn,
@@ -873,6 +880,7 @@ const shard: CardShard = {
     _poolLothlorienLookout,
     _poolLoyalGryff,
     _poolLumengridSentinel,
+    _poolLupinePrototype,
     _poolMacabreReconstruction,
     _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,
@@ -895,6 +903,7 @@ const shard: CardShard = {
     _poolMechanNavigator,
     _poolMeglonoth,
     _poolMetalworkColossus,
+    _poolMidnightScavengers,
     _poolMightOfTheMasses,
     _poolMindMeanderer,
     _poolMirageMockery,
@@ -1066,6 +1075,7 @@ const shard: CardShard = {
     _poolStoneOfErech,
     _poolStormboundGeist,
     _poolStrokeOfMidnight,
+    _poolStromkirkCondemned,
     _poolSummitSentinel,
     _poolSureStrike,
     _poolSwat,

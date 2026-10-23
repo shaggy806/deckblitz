@@ -101,6 +101,7 @@ import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolClockworkServant from "../pool/clockwork-servant.js";
 import _poolCockatrice from "../pool/cockatrice.js";
 import _poolCoercion from "../pool/coercion.js";
+import _poolColossusOfAkros from "../pool/colossus-of-akros.js";
 import _poolColossusOfTheBloodAge from "../pool/colossus-of-the-blood-age.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
@@ -689,6 +690,7 @@ const shard: CardShard = {
     _poolClockworkServant,
     _poolCockatrice,
     _poolCoercion,
+    _poolColossusOfAkros,
     _poolColossusOfTheBloodAge,
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,

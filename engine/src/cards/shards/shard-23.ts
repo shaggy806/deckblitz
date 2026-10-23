@@ -114,6 +114,7 @@ import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
 import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
+import _poolCropSigil from "../pool/crop-sigil.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
@@ -296,6 +297,7 @@ import _poolLotusGuardian from "../pool/lotus-guardian.js";
 import _poolLoxodonLifechanter from "../pool/loxodon-lifechanter.js";
 import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
 import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
+import _poolLunarchMantle from "../pool/lunarch-mantle.js";
 import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
 import _poolMakeYourMark from "../pool/make-your-mark.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
@@ -484,6 +486,7 @@ import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
 import _poolSplitDecision from "../pool/split-decision.js";
+import _poolSplittingSlime from "../pool/splitting-slime.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
@@ -720,6 +723,7 @@ const shard: CardShard = {
     _poolCostumeCloset,
     _poolCracklingSpellslinger,
     _poolCreepingBloodsucker,
+    _poolCropSigil,
     _poolCrossbowAmbush,
     _poolCrowdedCrypt,
     _poolCryptOfTheEternals,
@@ -902,6 +906,7 @@ const shard: CardShard = {
     _poolLoxodonLifechanter,
     _poolLuluLoyalHollyphant,
     _poolLumenClassFrigate,
+    _poolLunarchMantle,
     _poolMabelValleyHero,
     _poolMakeYourMark,
     _poolMakindiOx,
@@ -1090,6 +1095,7 @@ const shard: CardShard = {
     _poolSpiderwigBoggart,
     _poolSpiritShackle,
     _poolSplitDecision,
+    _poolSplittingSlime,
     _poolSporecapSpider,
     _poolSpringbloomDruid,
     _poolSteelDromedary,

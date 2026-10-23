@@ -293,6 +293,7 @@ import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
+import _poolLoneRider from "../pool/lone-rider.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
 import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
 import _poolLoxodonMender from "../pool/loxodon-mender.js";
@@ -350,6 +351,7 @@ import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
 import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
+import _poolOrchardElemental from "../pool/orchard-elemental.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
@@ -477,6 +479,7 @@ import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
 import _poolStormCaller from "../pool/storm-caller.js";
+import _poolStromkirkOccultist from "../pool/stromkirk-occultist.js";
 import _poolStudyBreak from "../pool/study-break.js";
 import _poolSubterraneanScout from "../pool/subterranean-scout.js";
 import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
@@ -898,6 +901,7 @@ const shard: CardShard = {
     _poolLifeFromTheLoam,
     _poolLifeblood,
     _poolLithoformEngine,
+    _poolLoneRider,
     _poolLostToLegend,
     _poolLothlorienBlade,
     _poolLoxodonMender,
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
     _poolOrahSkyclaveHierophant,
+    _poolOrchardElemental,
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
     _poolOrderOfSacredDusk,
@@ -1082,6 +1087,7 @@ const shard: CardShard = {
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
     _poolStormCaller,
+    _poolStromkirkOccultist,
     _poolStudyBreak,
     _poolSubterraneanScout,
     _poolSuccumbToTheCold,

@@ -8068,4 +8068,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Island*2', 'Darksteel Relic', 'Memnite', 'Ornithopter', 'Grizzly Bears'], hand: ['Reverse Engineer'] },
     }),
   ),
+  preset(
+    'Wretched Gryff: emerge, sacrificing a creature to pay less',
+    board({
+      you: { bf: ['Island*2', 'Hill Giant', 'Grizzly Bears'], hand: ['Wretched Gryff'] },
+    }),
+  ),
+  preset(
+    "Sinuous Vermin: menace once it's monstrous",
+    board({
+      you: { bf: ['Sinuous Vermin', 'Swamp*5'] },
+    }),
+  ),
 ]

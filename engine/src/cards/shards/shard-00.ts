@@ -410,6 +410,7 @@ import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
 import _poolRocOfKherRidges from "../pool/roc-of-kher-ridges.js";
 import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
+import _poolRuthlessDisposal from "../pool/ruthless-disposal.js";
 import _poolSafeHaven from "../pool/safe-haven.js";
 import _poolSageEyeHarrier from "../pool/sage-eye-harrier.js";
 import _poolSaguArcher from "../pool/sagu-archer.js";
@@ -445,11 +446,13 @@ import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
+import _poolShrillHowler from "../pool/shrill-howler.js";
 import _poolSidewinderNaga from "../pool/sidewinder-naga.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
 import _poolSilvanussInvoker from "../pool/silvanuss-invoker.js";
 import _poolSinewDancer from "../pool/sinew-dancer.js";
+import _poolSinuousVermin from "../pool/sinuous-vermin.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSlickSequence from "../pool/slick-sequence.js";
@@ -1025,6 +1028,7 @@ const shard: CardShard = {
     _poolRocOfKherRidges,
     _poolRoxanneStarfallSavant,
     _poolRumblingSlum,
+    _poolRuthlessDisposal,
     _poolSafeHaven,
     _poolSageEyeHarrier,
     _poolSaguArcher,
@@ -1060,11 +1064,13 @@ const shard: CardShard = {
     _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
+    _poolShrillHowler,
     _poolSidewinderNaga,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
     _poolSilvanussInvoker,
     _poolSinewDancer,
+    _poolSinuousVermin,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,
     _poolSlickSequence,

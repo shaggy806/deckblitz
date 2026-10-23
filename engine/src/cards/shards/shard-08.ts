@@ -107,6 +107,7 @@ import _poolContemplation from "../pool/contemplation.js";
 import _poolCoralCommando from "../pool/coral-commando.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
+import _poolCourageousOutrider from "../pool/courageous-outrider.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCourtStreetDenizen from "../pool/court-street-denizen.js";
 import _poolCragplateBaloth from "../pool/cragplate-baloth.js";
@@ -329,6 +330,7 @@ import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
+import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
@@ -538,6 +540,7 @@ import _poolThornfistStriker from "../pool/thornfist-striker.js";
 import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
 import _poolThoughtweftImbuer from "../pool/thoughtweft-imbuer.js";
 import _poolThroneOfGeth from "../pool/throne-of-geth.js";
+import _poolThroneWarden from "../pool/throne-warden.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
@@ -743,6 +746,7 @@ const shard: CardShard = {
     _poolCoralCommando,
     _poolCorpseBlockade,
     _poolCorrodingDragonstorm,
+    _poolCourageousOutrider,
     _poolCourtOfBounty,
     _poolCourtStreetDenizen,
     _poolCragplateBaloth,
@@ -965,6 +969,7 @@ const shard: CardShard = {
     _poolMagetasBoon,
     _poolMalakirCullblade,
     _poolMantleOfTheWolf,
+    _poolMarkovCrusader,
     _poolMartialCoup,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,
@@ -1174,6 +1179,7 @@ const shard: CardShard = {
     _poolThoughtweftCharge,
     _poolThoughtweftImbuer,
     _poolThroneOfGeth,
+    _poolThroneWarden,
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,
     _poolTocasiasDigSite,

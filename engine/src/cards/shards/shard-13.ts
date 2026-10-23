@@ -134,6 +134,7 @@ import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
+import _poolDeputizedProtester from "../pool/deputized-protester.js";
 import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
 import _poolDestroyEvil from "../pool/destroy-evil.js";
@@ -191,6 +192,7 @@ import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
 import _poolFlyingCarpet from "../pool/flying-carpet.js";
 import _poolFogOfGnats from "../pool/fog-of-gnats.js";
+import _poolFogwalker from "../pool/fogwalker.js";
 import _poolFoulImp from "../pool/foul-imp.js";
 import _poolFountainOfYouth from "../pool/fountain-of-youth.js";
 import _poolFractalMascot from "../pool/fractal-mascot.js";
@@ -298,6 +300,7 @@ import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
 import _poolMadRatter from "../pool/mad-ratter.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
+import _poolMakeMischief from "../pool/make-mischief.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
@@ -483,6 +486,7 @@ import _poolStompingGround from "../pool/stomping-ground.js";
 import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
 import _poolStormSeeker from "../pool/storm-seeker.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
+import _poolStrangeAugmentation from "../pool/strange-augmentation.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
@@ -557,6 +561,7 @@ import _poolVisageOfDread from "../pool/visage-of-dread.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
+import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
@@ -735,6 +740,7 @@ const shard: CardShard = {
     _poolDebtToTheDeathless,
     _poolDeepwoodDenizen,
     _poolDefyGravity,
+    _poolDeputizedProtester,
     _poolDesertOfTheMindful,
     _poolDesperateLunge,
     _poolDestroyEvil,
@@ -792,6 +798,7 @@ const shard: CardShard = {
     _poolFlowstoneHellion,
     _poolFlyingCarpet,
     _poolFogOfGnats,
+    _poolFogwalker,
     _poolFoulImp,
     _poolFountainOfYouth,
     _poolFractalMascot,
@@ -899,6 +906,7 @@ const shard: CardShard = {
     _poolMadRatter,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
+    _poolMakeMischief,
     _poolMalametBrawler,
     _poolMalametVeteran,
     _poolMaraudingBrinefang,
@@ -1084,6 +1092,7 @@ const shard: CardShard = {
     _poolStormFleetArsonist,
     _poolStormSeeker,
     _poolStrandsOfNight,
+    _poolStrangeAugmentation,
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,
     _poolStromkirkBloodthief,
@@ -1158,6 +1167,7 @@ const shard: CardShard = {
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,
+    _poolVoldarenPariah,
     _poolVoltaicWhip,
     _poolVowToErebor,
     _poolVulshokMorningstar,

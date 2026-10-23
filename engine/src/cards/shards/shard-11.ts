@@ -170,6 +170,7 @@ import _poolEther from "../pool/ether.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
+import _poolFaithUnbroken from "../pool/faith-unbroken.js";
 import _poolFalconerAdept from "../pool/falconer-adept.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFanaticalFirebrand from "../pool/fanatical-firebrand.js";
@@ -796,6 +797,7 @@ const shard: CardShard = {
     _poolExtractPower,
     _poolFacetReader,
     _poolFailedFording,
+    _poolFaithUnbroken,
     _poolFalconerAdept,
     _poolFanaticOfRhonas,
     _poolFanaticalFirebrand,

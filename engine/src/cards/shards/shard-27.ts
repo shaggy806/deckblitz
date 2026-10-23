@@ -7,6 +7,7 @@ import _poolAIMBot from "../pool/a-i-m-bot.js";
 import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brute.js";
 import _poolAbzanGuide from "../pool/abzan-guide.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
+import _poolAdvancedStitchwing from "../pool/advanced-stitchwing.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
@@ -327,6 +328,7 @@ import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
+import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
@@ -426,6 +428,7 @@ import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
 import _poolShowOfConfidence from "../pool/show-of-confidence.js";
+import _poolShredsOfSanity from "../pool/shreds-of-sanity.js";
 import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
@@ -561,6 +564,7 @@ import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
 import _poolVolcanicSalvo from "../pool/volcanic-salvo.js";
+import _poolVoraciousReader from "../pool/voracious-reader.js";
 import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
@@ -602,6 +606,7 @@ const shard: CardShard = {
     _poolAbominationIrradiatedBrute,
     _poolAbzanGuide,
     _poolAdaptiveTrainingPost,
+    _poolAdvancedStitchwing,
     _poolAdventurersAirship,
     _poolAeolipile,
     _poolAerieMystics,
@@ -922,6 +927,7 @@ const shard: CardShard = {
     _poolNegate,
     _poolNicolBolas,
     _poolNightScythe,
+    _poolNoosegrafMob,
     _poolNurglesRot,
     _poolOblivion,
     _poolObsianusGolem,
@@ -1021,6 +1027,7 @@ const shard: CardShard = {
     _poolShivanDevastator,
     _poolShivanOasis,
     _poolShowOfConfidence,
+    _poolShredsOfSanity,
     _poolSigardianSavior,
     _poolSilverShroudCostume,
     _poolSilverbackElder,
@@ -1156,6 +1163,7 @@ const shard: CardShard = {
     _poolVodalianMerchant,
     _poolVolcanicFissure,
     _poolVolcanicSalvo,
+    _poolVoraciousReader,
     _poolVoyagerGlidecar,
     _poolVraskaSchemingGorgon,
     _poolWallOfStone,

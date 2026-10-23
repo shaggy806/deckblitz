@@ -228,6 +228,7 @@ import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
+import _poolInsatiableGorgers from "../pool/insatiable-gorgers.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
 import _poolInvigoratingSurge from "../pool/invigorating-surge.js";
@@ -301,6 +302,7 @@ import _poolMasterSkald from "../pool/master-skald.js";
 import _poolMechanozoa from "../pool/mechanozoa.js";
 import _poolMelancholicPoet from "../pool/melancholic-poet.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
+import _poolMenagerieLiberator from "../pool/menagerie-liberator.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
 import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11.js";
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
@@ -323,6 +325,7 @@ import _poolMoonlitScavengers from "../pool/moonlit-scavengers.js";
 import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
 import _poolMossPitSkeleton from "../pool/moss-pit-skeleton.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
+import _poolMournwillow from "../pool/mournwillow.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
 import _poolMysteriousEgg from "../pool/mysterious-egg.js";
@@ -461,6 +464,7 @@ import _poolStarstorm from "../pool/starstorm.js";
 import _poolStaticPrison from "../pool/static-prison.js";
 import _poolStealArtifact from "../pool/steal-artifact.js";
 import _poolStealthMission from "../pool/stealth-mission.js";
+import _poolStensiaBanquet from "../pool/stensia-banquet.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
@@ -838,6 +842,7 @@ const shard: CardShard = {
     _poolIndependentTroops,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
+    _poolInsatiableGorgers,
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
     _poolInvigoratingSurge,
@@ -911,6 +916,7 @@ const shard: CardShard = {
     _poolMechanozoa,
     _poolMelancholicPoet,
     _poolMemorialToFolly,
+    _poolMenagerieLiberator,
     _poolMichelangeloTheHeart,
     _poolMichelangeloWeirdnessTo11,
     _poolMichikosReignOfTruth,
@@ -933,6 +939,7 @@ const shard: CardShard = {
     _poolMordenkainensPolymorph,
     _poolMossPitSkeleton,
     _poolMostValuableSlayer,
+    _poolMournwillow,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
     _poolMysteriousEgg,
@@ -1071,6 +1078,7 @@ const shard: CardShard = {
     _poolStaticPrison,
     _poolStealArtifact,
     _poolStealthMission,
+    _poolStensiaBanquet,
     _poolStepThrough,
     _poolStewardOfTheHarvest,
     _poolStirringBard,

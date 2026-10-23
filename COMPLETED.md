@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Conspiracy: Take the Crown and Eldritch Moon, whole** (batch 147): **emerge** built (rule
+  702.119 — `emerge: { cost, from? }`, one cast offer per creature that could be sacrificed, its
+  mana value off the total cost after increases) and "as long as this creature is monstrous"
+  (the `monstrous` filter clause); melee fixed to count the opponents attacked as declared.
+  123 authored — five `card-author` agents and the lead: Elder Deep-Fiend, Wretched Gryff,
+  Decimator of the Provinces, Identity Thief, Lunar Force, Noosegraf Mob, Bedlam Reveler,
+  Custodi Soulcaller, Colossus of Akros and the other monstrous cards; CN2 is 34 of 67, EMN 158
+  of 199. 59 blocked, meld and the draft-only cards the most shared (2026-10-23).
 - **Commander 2016 and Kaladesh, whole** (batch 146): no engine change; 101 authored by five
   `card-author` agents — Aetherstorm Roc, Demon of Dark Schemes, Nissa, Nature's Artisan,
   Fateful Showdown, Architect of the Untamed and 96 more; C16 is 39 of 56, KLD 213 of 246. 34

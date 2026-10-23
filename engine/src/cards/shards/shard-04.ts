@@ -114,6 +114,7 @@ import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
+import _poolDistemperOfTheBlood from "../pool/distemper-of-the-blood.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
@@ -261,6 +262,7 @@ import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
+import _poolKeeperOfKeys from "../pool/keeper-of-keys.js";
 import _poolKefnetTheMindful from "../pool/kefnet-the-mindful.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
@@ -334,6 +336,7 @@ import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
+import _poolOathOfLiliana from "../pool/oath-of-liliana.js";
 import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
@@ -435,6 +438,7 @@ import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
+import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkilledAnimator from "../pool/skilled-animator.js";
@@ -706,6 +710,7 @@ const shard: CardShard = {
     _poolDireStrainRampage,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
+    _poolDistemperOfTheBlood,
     _poolDistortedCuriosity,
     _poolDoomsServoGuards,
     _poolDoseOfDawnglow,
@@ -853,6 +858,7 @@ const shard: CardShard = {
     _poolKarumonixTheRatKing,
     _poolKeenEyedRaven,
     _poolKeenSense,
+    _poolKeeperOfKeys,
     _poolKefnetTheMindful,
     _poolKheruGoldkeeper,
     _poolKindleTheInnerFlame,
@@ -926,6 +932,7 @@ const shard: CardShard = {
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,
+    _poolOathOfLiliana,
     _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
     _poolOjutaiInterceptor,
@@ -1027,6 +1034,7 @@ const shard: CardShard = {
     _poolShimmeringWings,
     _poolShivanReef,
     _poolShuGrainCaravan,
+    _poolSigardianPriest,
     _poolSigiledSkink,
     _poolSisterHospitaller,
     _poolSkilledAnimator,

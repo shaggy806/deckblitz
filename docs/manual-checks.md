@@ -5256,3 +5256,13 @@ engine terms. A second thing to check is a second test.
 ### Reverse Engineer: improvise with artifacts
 - **Do:** Cast Reverse Engineer. When the bar asks, tap the three artifacts, then pay the rest.
 - **Expect:** The bar reads "improvise — tap up to 3 artifacts" and only the artifacts can be picked (not Grizzly Bears). With all three tapped, the two Islands pay {U}{U}, and you draw three cards.
+
+## Emerge (2026-10-23)
+
+### Wretched Gryff: emerge, sacrificing a creature to pay less
+- **Do:** Click Wretched Gryff in your hand and look at its ways to cast. Cast it the emerge way.
+- **Expect:** One choice reads "(emerge, sacrificing Hill Giant: −4)"; there's none for Grizzly Bears (it would leave {3}{U}, more than your two Islands). Hill Giant goes to your graveyard, both Islands tap, and you draw a card as the Gryff is cast.
+
+### Sinuous Vermin: menace once it's monstrous
+- **Do:** Activate Sinuous Vermin's monstrosity.
+- **Expect:** It gets three +1/+1 counters and shows menace; it didn't have menace before.

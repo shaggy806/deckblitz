@@ -401,7 +401,8 @@
   "keyword:improvise",
   "effect:delayed-trigger-rest-of-turn",
   "effect:delayed-trigger-own-targets",
-  "keyword:emerge"
+  "keyword:emerge",
+  "condition:source-monstrous"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

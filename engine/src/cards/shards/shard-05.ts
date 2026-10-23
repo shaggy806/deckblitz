@@ -212,6 +212,7 @@ import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
+import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
@@ -269,6 +270,7 @@ import _poolHomarid from "../pool/homarid.js";
 import _poolHonoredCropCaptain from "../pool/honored-crop-captain.js";
 import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
+import _poolHowlingChorus from "../pool/howling-chorus.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumbleNaturalist from "../pool/humble-naturalist.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
@@ -362,6 +364,7 @@ import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
 import _poolNefCropEntangler from "../pool/nef-crop-entangler.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
+import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
@@ -823,6 +826,7 @@ const shard: CardShard = {
     _poolGarruksPackleader,
     _poolGateToPhyrexia,
     _poolGatewaySneak,
+    _poolGeistOfTheLonelyVigil,
     _poolGenemorphImago,
     _poolGenjiGlove,
     _poolGhituAmplifier,
@@ -880,6 +884,7 @@ const shard: CardShard = {
     _poolHonoredCropCaptain,
     _poolHornedLochWhale,
     _poolHorseshoeCrab,
+    _poolHowlingChorus,
     _poolHowlingGolem,
     _poolHumbleNaturalist,
     _poolHumblingElder,
@@ -973,6 +978,7 @@ const shard: CardShard = {
     _poolNefCropEntangler,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
+    _poolNiblisOfFrost,
     _poolNicoMinoruRunaway,
     _poolNightbladeBrigade,
     _poolNobleHierarch,

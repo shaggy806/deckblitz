@@ -41,6 +41,7 @@ import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBattleOfFrostAndFire from "../pool/battle-of-frost-and-fire.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
+import _poolBedlamReveler from "../pool/bedlam-reveler.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
@@ -177,6 +178,7 @@ import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.
 import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolFury from "../pool/fury.js";
+import _poolGalvanicBombardment from "../pool/galvanic-bombardment.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
@@ -363,6 +365,7 @@ import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
 import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
+import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
@@ -414,6 +417,7 @@ import _poolScaldingTarn from "../pool/scalding-tarn.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
+import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
@@ -457,11 +461,13 @@ import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
+import _poolStensiaInnkeeper from "../pool/stensia-innkeeper.js";
 import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
 import _poolStun from "../pool/stun.js";
+import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
@@ -624,6 +630,7 @@ const shard: CardShard = {
     _poolBattleHymn,
     _poolBattleOfFrostAndFire,
     _poolBeastWhisperer,
+    _poolBedlamReveler,
     _poolBelenonWarAnthem,
     _poolBellowsLizard,
     _poolBespokeBo,
@@ -760,6 +767,7 @@ const shard: CardShard = {
     _poolFrillscareMentor,
     _poolFumingEffigy,
     _poolFury,
+    _poolGalvanicBombardment,
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
@@ -946,6 +954,7 @@ const shard: CardShard = {
     _poolPrismaticLens,
     _poolPrivateEye,
     _poolPrizefighterConstruct,
+    _poolPropheticRavings,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
     _poolPummelerForHire,
@@ -997,6 +1006,7 @@ const shard: CardShard = {
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,
+    _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
     _poolScurryOfGremlins,
@@ -1040,11 +1050,13 @@ const shard: CardShard = {
     _poolStab,
     _poolStarbreachWhale,
     _poolStartingColumn,
+    _poolStensiaInnkeeper,
     _poolStingbladeAssassin,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
     _poolStormTheSeedcore,
     _poolStun,
+    _poolSubterraneanTremors,
     _poolSunderflock,
     _poolSungrassPrairie,
     _poolSunscapeMaster,

@@ -9822,6 +9822,52 @@
   "effect:discard-chosen-two-filters": {
    "family": "effect:discard-chosen-count",
    "example": "Distended Mindbender: 'You choose from it a nonland card with mana value 3 or less and a card with mana value 4 or greater. That player discards those cards' — `discard-chosen` picks one card under one filter; two would be two separate discards."
+  },
+  "condition:monarch-as-turn-began": {
+   "example": "Knights of the Black Rose: 'if you were the monarch as the turn began' — nothing records who was the monarch as each turn began."
+  },
+  "cost:sacrifice-self-and-any-number": {
+   "family": "effect:sacrifice-any-number",
+   "example": "Emrakul's Evangel: 'Sacrifice this creature and any number of other non-Eldrazi creatures: Create a 3/2 Eldrazi Horror token for each creature sacrificed this way.'"
+  },
+  "decision:choose-self-or-target-on-resolution": {
+   "example": "Kaya, Ghost Assassin's 0: 'Exile Kaya or up to one target creature. Return that card…' — which one is chosen as it resolves."
+  },
+  "effect:can-block-any-number-this-turn": {
+   "family": "static:block-additional-creature",
+   "example": "Give No Ground: 'target creature … can block any number of creatures this turn'."
+  },
+  "effect:exile-all-spells": {
+   "family": "effect:exile-target-spell",
+   "example": "Summary Dismissal: 'Exile all other spells and counter all abilities.'"
+  },
+  "filter:dealt-combat-damage-to-creature-this-turn": {
+   "family": "stat:object-damage-history",
+   "example": "Thirsting Axe: 'if equipped creature didn't deal combat damage to a creature this turn' — `dealtDamageToCreatureThisTurn` counts any damage."
+  },
+  "mechanic:draft-matters": {
+   "example": "Paliano Vanguard, Spire Phantasm, Noble Banneret: abilities that refer to the Conspiracy draft (rule 905.2) — choices made, names or numbers noted, cards drafted face up."
+  },
+  "replacement:prevent-all-damage-by-filter": {
+   "family": "replacement:damage-modification",
+   "example": "Repel the Abominable: 'Prevent all damage that would be dealt this turn by non-Human sources' — `prevent-all-combat-damage`'s `by` covers combat damage only."
+  },
+  "static:has-all-names": {
+   "example": "Spy Kit: 'Equipped creature has all names of nonlegendary creature cards in addition to its name.'"
+  },
+  "static:prohibit-spells-by-chosen-number": {
+   "example": "Sanctum Prelate: 'As this creature enters, choose a number. Noncreature spells with mana value equal to the chosen number can't be cast.'"
+  },
+  "target:card-in-graveyard-or-permanent": {
+   "family": "effect:target-spec-additions",
+   "example": "Daretti, Ingenious Iconoclast's −6: 'Choose target artifact card in a graveyard or artifact on the battlefield' — one slot over two zones."
+  },
+  "trigger:attacks-different-players": {
+   "example": "Canal Courier: 'Whenever this creature and another creature attack different players, …'"
+  },
+  "trigger:sacrificed-for-emerge": {
+   "family": "keyword:emerge",
+   "example": "Foul Emissary: 'When you sacrifice this creature while casting a spell with emerge, create two 1/1 colorless Eldrazi Scion tokens.'"
   }
  }
 }

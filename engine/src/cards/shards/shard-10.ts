@@ -200,6 +200,7 @@ import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
 import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
+import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
 import _poolGemrazer from "../pool/gemrazer.js";
@@ -346,6 +347,7 @@ import _poolNagaVitalist from "../pool/naga-vitalist.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNascentMetamorph from "../pool/nascent-metamorph.js";
 import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
+import _poolNebelgastHerald from "../pool/nebelgast-herald.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
@@ -490,6 +492,7 @@ import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
+import _poolSpectralGrasp from "../pool/spectral-grasp.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
@@ -593,6 +596,7 @@ import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
+import _poolWaxingMoon from "../pool/waxing-moon.js";
 import _poolWeddingAnnouncement from "../pool/wedding-announcement.js";
 import _poolWelcomingVampire from "../pool/welcoming-vampire.js";
 import _poolWhetwheel from "../pool/whetwheel.js";
@@ -831,6 +835,7 @@ const shard: CardShard = {
     _poolFruitOfTizerus,
     _poolFurious,
     _poolGaeasSkyfolk,
+    _poolGarrulousSycophant,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
     _poolGemrazer,
@@ -977,6 +982,7 @@ const shard: CardShard = {
     _poolNantukoShade,
     _poolNascentMetamorph,
     _poolNastyLittleRabbit,
+    _poolNebelgastHerald,
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
@@ -1121,6 +1127,7 @@ const shard: CardShard = {
     _poolSozinsComet,
     _poolSpatialContortion,
     _poolSpectacularSkywhale,
+    _poolSpectralGrasp,
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,
     _poolSpiderManMilesMorales,
@@ -1224,6 +1231,7 @@ const shard: CardShard = {
     _poolWarhornBlast,
     _poolWarrenInstigator,
     _poolWaterspoutWarden,
+    _poolWaxingMoon,
     _poolWeddingAnnouncement,
     _poolWelcomingVampire,
     _poolWhetwheel,

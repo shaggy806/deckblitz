@@ -202,6 +202,7 @@ import _poolGodPharaohsFaithful from "../pool/god-pharaohs-faithful.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
 import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
 import _poolGoremand from "../pool/goremand.js";
+import _poolGrafHarvest from "../pool/graf-harvest.js";
 import _poolGrandArchitect from "../pool/grand-architect.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
@@ -280,6 +281,7 @@ import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-ma
 import _poolLivingTempest from "../pool/living-tempest.js";
 import _poolLochDragon from "../pool/loch-dragon.js";
 import _poolLockeCole from "../pool/locke-cole.js";
+import _poolLongRoadHome from "../pool/long-road-home.js";
 import _poolLorcanWarlockCollector from "../pool/lorcan-warlock-collector.js";
 import _poolLordOfLineage from "../pool/lord-of-lineage.js";
 import _poolLordOfTheAccursed from "../pool/lord-of-the-accursed.js";
@@ -499,6 +501,7 @@ import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolSyphonEssence from "../pool/syphon-essence.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
+import _poolTakeInventory from "../pool/take-inventory.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
@@ -583,6 +586,7 @@ import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
 import _poolWilyBandar from "../pool/wily-bandar.js";
 import _poolWindbornMuse from "../pool/windborn-muse.js";
+import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
 import _poolWirewoodLodge from "../pool/wirewood-lodge.js";
 import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
@@ -811,6 +815,7 @@ const shard: CardShard = {
     _poolGoldveinPick,
     _poolGollumTheAbandoned,
     _poolGoremand,
+    _poolGrafHarvest,
     _poolGrandArchitect,
     _poolGravestoneStrider,
     _poolGriffinAerie,
@@ -889,6 +894,7 @@ const shard: CardShard = {
     _poolLivingTempest,
     _poolLochDragon,
     _poolLockeCole,
+    _poolLongRoadHome,
     _poolLorcanWarlockCollector,
     _poolLordOfLineage,
     _poolLordOfTheAccursed,
@@ -1108,6 +1114,7 @@ const shard: CardShard = {
     _poolSyphonEssence,
     _poolTaigamsScheming,
     _poolTaintedField,
+    _poolTakeInventory,
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
     _poolTattermungeManiac,
@@ -1192,6 +1199,7 @@ const shard: CardShard = {
     _poolWildslayerElves,
     _poolWilyBandar,
     _poolWindbornMuse,
+    _poolWingsOfTheGuard,
     _poolWirewoodLodge,
     _poolWitnessOfTheAges,
     _poolWrathfulJailbreaker,

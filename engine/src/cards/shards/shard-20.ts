@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbandonAttachments from "../pool/abandon-attachments.js";
 import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
+import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAerialEngineer from "../pool/aerial-engineer.js";
@@ -209,6 +210,7 @@ import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGavonyDawnguard from "../pool/gavony-dawnguard.js";
+import _poolGeistFueledScarecrow from "../pool/geist-fueled-scarecrow.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
@@ -226,6 +228,7 @@ import _poolGnarlbackRhino from "../pool/gnarlback-rhino.js";
 import _poolGnawingCrescendo from "../pool/gnawing-crescendo.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
+import _poolGoblinRacketeer from "../pool/goblin-racketeer.js";
 import _poolGoblinWarParty from "../pool/goblin-war-party.js";
 import _poolGoblinWizardry from "../pool/goblin-wizardry.js";
 import _poolGoldwardensHelm from "../pool/goldwardens-helm.js";
@@ -241,6 +244,7 @@ import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
+import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
@@ -305,6 +309,7 @@ import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
+import _poolLieutenantsOfTheGuard from "../pool/lieutenants-of-the-guard.js";
 import _poolLifeGoesOn from "../pool/life-goes-on.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
@@ -481,8 +486,10 @@ import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
 import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js";
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
+import _poolSinuousPredator from "../pool/sinuous-predator.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
+import _poolSkitteringCrustacean from "../pool/skittering-crustacean.js";
 import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
 import _poolSkyshroudTroll from "../pool/skyshroud-troll.js";
@@ -561,6 +568,7 @@ import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThornThallid from "../pool/thorn-thallid.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
+import _poolThrabenFoulbloods from "../pool/thraben-foulbloods.js";
 import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
@@ -658,6 +666,7 @@ const shard: CardShard = {
     _poolAbandonAttachments,
     _poolAbdelAdrianGorionsWard,
     _poolAberrantManawurm,
+    _poolAbolisherOfBloodlines,
     _poolAbsorbingMan,
     _poolActOfTreason,
     _poolAerialEngineer,
@@ -861,6 +870,7 @@ const shard: CardShard = {
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
     _poolGavonyDawnguard,
+    _poolGeistFueledScarecrow,
     _poolGenerousRevival,
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
@@ -878,6 +888,7 @@ const shard: CardShard = {
     _poolGnawingCrescendo,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
+    _poolGoblinRacketeer,
     _poolGoblinWarParty,
     _poolGoblinWizardry,
     _poolGoldwardensHelm,
@@ -893,6 +904,7 @@ const shard: CardShard = {
     _poolGrimCaptainsCall,
     _poolGrimDiscovery,
     _poolGrimWanderer,
+    _poolGrislyAnglerfish,
     _poolGrizzledOutrider,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
@@ -957,6 +969,7 @@ const shard: CardShard = {
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,
+    _poolLieutenantsOfTheGuard,
     _poolLifeGoesOn,
     _poolLifesLegacy,
     _poolLightningSpear,
@@ -1133,8 +1146,10 @@ const shard: CardShard = {
     _poolSilenceTheEcho,
     _poolSilvarDevourerOfTheFree,
     _poolSinisterSabotage,
+    _poolSinuousPredator,
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,
+    _poolSkitteringCrustacean,
     _poolSkullknockerOgre,
     _poolSkyshipStalker,
     _poolSkyshroudTroll,
@@ -1213,6 +1228,7 @@ const shard: CardShard = {
     _poolThorOdinson,
     _poolThornThallid,
     _poolThoughtVessel,
+    _poolThrabenFoulbloods,
     _poolThrabenMilitia,
     _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,

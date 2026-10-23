@@ -115,6 +115,7 @@ import _poolCrystalBall from "../pool/crystal-ball.js";
 import _poolCullingDais from "../pool/culling-dais.js";
 import _poolCultivatorOfBlades from "../pool/cultivator-of-blades.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
+import _poolCuriousHomunculus from "../pool/curious-homunculus.js";
 import _poolCurseOfMaritLage from "../pool/curse-of-marit-lage.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
 import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
@@ -482,6 +483,7 @@ import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
 import _poolSpitefulHexmage from "../pool/spiteful-hexmage.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolSplendidAgony from "../pool/splendid-agony.js";
+import _poolSpreadingFlames from "../pool/spreading-flames.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
@@ -714,6 +716,7 @@ const shard: CardShard = {
     _poolCullingDais,
     _poolCultivatorOfBlades,
     _poolCuriousAltisaur,
+    _poolCuriousHomunculus,
     _poolCurseOfMaritLage,
     _poolCyberdriveAwakener,
     _poolCyclopsOfEternalFury,
@@ -1081,6 +1084,7 @@ const shard: CardShard = {
     _poolSpitefulHexmage,
     _poolSpitefulMotives,
     _poolSplendidAgony,
+    _poolSpreadingFlames,
     _poolStingingHivemaster,
     _poolStingingShot,
     _poolStitchTogether,

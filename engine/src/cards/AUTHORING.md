@@ -1943,7 +1943,7 @@ ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
 enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
-putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, hasManaAbility, hasAbilities,
+putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
@@ -2033,7 +2033,7 @@ that has one, and a creature with none shares nothing. `enteredThisTurn` /
 entered this turn", Kratos, God of War's "creatures that player controls that
 **didn't attack** this turn" (`attackedThisTurn: false`). A permanent that
 changes zones is a new object that did neither; one that has left is asked as
-it last was. So are `damagedThisTurnBy: { subtype?, type?, controlledBy? }` —
+it last was — as is `monstrous`, the designation monstrosity gives (rule 701.37b; "as long as this creature is monstrous" is a static's `condition: { kind: "source", filter: { monstrous: true } }` — Domesticated Hydra). So are `damagedThisTurnBy: { subtype?, type?, controlledBy? }` —
 "dealt damage this turn by a Spider **you controlled**" (Shelob, Child of
 Ungoliant), matched against each source as it was when it dealt the damage
 (`GameObject.damageThisTurn`) — `excessDamageThisTurn` (rule 120.4a: more

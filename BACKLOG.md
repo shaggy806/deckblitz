@@ -148,11 +148,19 @@ section keeps only what to do next.
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise; batch
-  146 the rest of Commander 2016 and Kaladesh, no engine change);
-  **next, Conspiracy: Take the Crown** (51 left), then Eldritch Moon (125 left). Batch 146's
-  leading blockers: undaunted (`keyword:undaunted`, 6 cards) and "whenever this creature crews
-  a Vehicle" (`trigger:crews-or-saddles`, 5); "pay any amount of {E}"
-  (`cost:pay-any-amount-of-energy`) is at 12. The earlier improvise
+  146 the rest of Commander 2016 and Kaladesh, no engine change; batch 147 Conspiracy: Take the
+  Crown and Eldritch Moon, on emerge and "as long as it's monstrous");
+  **next, Shadows over Innistrad** (161 left), then Oath of the Gatewatch (95 left). Its
+  werewolves' "if no spells were cast last turn, transform" upkeep trigger isn't built
+  (`condition:werewolf-transform-spells-last-turn` — Ulrich, Duskwatch Recruiter so far): with
+  Shadows' and Innistrad's werewolves it may lead the next batch. Batch 147's leading blockers:
+  meld (`mechanic:meld`, 15 cards now), the Conspiracy draft's own abilities
+  (`mechanic:draft-matters`, 15 — kept blocked, even the two whose draft text leaves a vanilla
+  body), the secret-discard gap (`effect:hidden-simultaneous-choices`, 13) and "can block an
+  additional creature" (`static:block-additional-creature`, 13). Batch 146's: undaunted
+  (`keyword:undaunted`, 6) and "whenever this creature crews a Vehicle"
+  (`trigger:crews-or-saddles`, 5); "pay any amount of {E}" (`cost:pay-any-amount-of-energy`) is
+  at 12. The earlier improvise
   cards were rechecked in batch 141; three wait on granting it (`static:grant-improvise`). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
   Kinetic Augur already does it as a 0/1/2 modal count, so it may already be expressible), "choose a card name" (`decision:choose-card-name`
   — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an
@@ -172,9 +180,9 @@ section keeps only what to do next.
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
   declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
   Aradesh.
-  The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
+  The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 15 cards:
   the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
-  Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
+  Hanweir Battlements, Bruna, Gisela, Graf Rats and the Eldritch Moon results …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
   Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …).
   Phyrexia: All Will Be One's blocks are
   nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,

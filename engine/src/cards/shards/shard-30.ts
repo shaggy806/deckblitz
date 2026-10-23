@@ -54,6 +54,7 @@ import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackScarab from "../pool/black-scarab.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
 import _poolBladeHistorian from "../pool/blade-historian.js";
+import _poolBlessedAlliance from "../pool/blessed-alliance.js";
 import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
 import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
@@ -90,6 +91,7 @@ import _poolChartoothCougar from "../pool/chartooth-cougar.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
 import _poolCitadelGate from "../pool/citadel-gate.js";
+import _poolClearShot from "../pool/clear-shot.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
 import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
 import _poolCloudOfFaeries from "../pool/cloud-of-faeries.js";
@@ -232,6 +234,7 @@ import _poolGreasewrenchGoblin from "../pool/greasewrench-goblin.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGreenWard from "../pool/green-ward.js";
+import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
@@ -390,6 +393,7 @@ import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
+import _poolOtherworldlyOutburst from "../pool/otherworldly-outburst.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
 import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
@@ -655,6 +659,7 @@ const shard: CardShard = {
     _poolBlackScarab,
     _poolBlackbladeReforged,
     _poolBladeHistorian,
+    _poolBlessedAlliance,
     _poolBlightBreathCatoblepas,
     _poolBlightedWoodland,
     _poolBlightreaperThallid,
@@ -691,6 +696,7 @@ const shard: CardShard = {
     _poolChromaticSphere,
     _poolChromiumTheMutable,
     _poolCitadelGate,
+    _poolClearShot,
     _poolClockOfOmens,
     _poolCloudOfDarkness,
     _poolCloudOfFaeries,
@@ -833,6 +839,7 @@ const shard: CardShard = {
     _poolGreatIntelligencesPlan,
     _poolGreaterForgeling,
     _poolGreenWard,
+    _poolGrenzosRuffians,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
     _poolGruesomeRealization,
@@ -991,6 +998,7 @@ const shard: CardShard = {
     _poolOrcishBowmasters,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
+    _poolOtherworldlyOutburst,
     _poolOutlandBoar,
     _poolOutpaceOblivion,
     _poolOverprotect,

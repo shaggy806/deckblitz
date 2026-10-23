@@ -71,6 +71,7 @@ import _poolBoneFlute from "../pool/bone-flute.js";
 import _poolBookwurm from "../pool/bookwurm.js";
 import _poolBootNipper from "../pool/boot-nipper.js";
 import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
+import _poolBorrowedGrace from "../pool/borrowed-grace.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
@@ -94,6 +95,7 @@ import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
 import _poolChemistersInsight from "../pool/chemisters-insight.js";
+import _poolChokingRestraints from "../pool/choking-restraints.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
@@ -487,6 +489,7 @@ import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
+import _poolSpontaneousMutation from "../pool/spontaneous-mutation.js";
 import _poolSpringLeafAvenger from "../pool/spring-leaf-avenger.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
@@ -551,6 +554,7 @@ import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
+import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
 import _poolUnleashShell from "../pool/unleash-shell.js";
@@ -623,6 +627,7 @@ import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automa
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensVojaFriendToElves from "../tokens/voja-friend-to-elves.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
+import _tokensZombieTokenBlack00 from "../tokens/zombie-token-black-0-0.js";
 import _tokensZombieTokenCrowdedCrypt from "../tokens/zombie-token-crowded-crypt.js";
 import _tokensZombieTokenTransmograntAltar from "../tokens/zombie-token-transmogrant-altar.js";
 
@@ -696,6 +701,7 @@ const shard: CardShard = {
     _poolBookwurm,
     _poolBootNipper,
     _poolBorosSwiftblade,
+    _poolBorrowedGrace,
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
@@ -719,6 +725,7 @@ const shard: CardShard = {
     _poolChargeTheSanctum,
     _poolCharmingPrince,
     _poolChemistersInsight,
+    _poolChokingRestraints,
     _poolChromeCompanion,
     _poolChulane,
     _poolCitanulDruid,
@@ -1112,6 +1119,7 @@ const shard: CardShard = {
     _poolSpireMechcycle,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,
+    _poolSpontaneousMutation,
     _poolSpringLeafAvenger,
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,
@@ -1176,6 +1184,7 @@ const shard: CardShard = {
     _poolTraxosScourgeEternal,
     _poolTrenchpost,
     _poolTyvarsStand,
+    _poolUlvenwaldObserver,
     _poolUnauthorizedExit,
     _poolUnclaimedTerritory,
     _poolUnleashShell,
@@ -1250,6 +1259,7 @@ const shard: CardShard = {
     _tokensTreasureToken,
     _tokensVojaFriendToElves,
     _tokensZombieKnightToken,
+    _tokensZombieTokenBlack00,
     _tokensZombieTokenCrowdedCrypt,
     _tokensZombieTokenTransmograntAltar,
   ],

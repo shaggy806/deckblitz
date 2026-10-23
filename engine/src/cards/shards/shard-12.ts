@@ -64,6 +64,7 @@ import _poolBookOfRass from "../pool/book-of-rass.js";
 import _poolBootleggersStash from "../pool/bootleggers-stash.js";
 import _poolBorisDevilboon from "../pool/boris-devilboon.js";
 import _poolBorosCluestone from "../pool/boros-cluestone.js";
+import _poolBorrowedHostility from "../pool/borrowed-hostility.js";
 import _poolBoseijuReachesSkyward from "../pool/boseiju-reaches-skyward.js";
 import _poolBottomlessPoolLockerRoom from "../pool/bottomless-pool-locker-room.js";
 import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
@@ -169,6 +170,7 @@ import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
 import _poolFanaticOfTheHarrowing from "../pool/fanatic-of-the-harrowing.js";
+import _poolFangOfThePack from "../pool/fang-of-the-pack.js";
 import _poolFarmstead from "../pool/farmstead.js";
 import _poolFearOfInfinity from "../pool/fear-of-infinity.js";
 import _poolFeatherTheRedeemed from "../pool/feather-the-redeemed.js";
@@ -290,6 +292,7 @@ import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLifecraftersGift from "../pool/lifecrafters-gift.js";
 import _poolLifelace from "../pool/lifelace.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
+import _poolLilianasElite from "../pool/lilianas-elite.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
 import _poolLivingTwister from "../pool/living-twister.js";
 import _poolLizardBlades from "../pool/lizard-blades.js";
@@ -424,6 +427,7 @@ import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
+import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
@@ -458,10 +462,12 @@ import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
 import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
+import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
+import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
@@ -663,6 +669,7 @@ const shard: CardShard = {
     _poolBootleggersStash,
     _poolBorisDevilboon,
     _poolBorosCluestone,
+    _poolBorrowedHostility,
     _poolBoseijuReachesSkyward,
     _poolBottomlessPoolLockerRoom,
     _poolBraidsConjurerAdept,
@@ -768,6 +775,7 @@ const shard: CardShard = {
     _poolFalkenrathReaver,
     _poolFallenAskari,
     _poolFanaticOfTheHarrowing,
+    _poolFangOfThePack,
     _poolFarmstead,
     _poolFearOfInfinity,
     _poolFeatherTheRedeemed,
@@ -889,6 +897,7 @@ const shard: CardShard = {
     _poolLifecraftersGift,
     _poolLifelace,
     _poolLightshieldParry,
+    _poolLilianasElite,
     _poolLilianasScorn,
     _poolLivingTwister,
     _poolLizardBlades,
@@ -1023,6 +1032,7 @@ const shard: CardShard = {
     _poolRuricThar,
     _poolRydiaSummonerOfMist,
     _poolSailorOfMeans,
+    _poolSanctifierOfSouls,
     _poolSanctumOfCalmWaters,
     _poolSanctumOfUgin,
     _poolSarpadianSimulacrum,
@@ -1057,10 +1067,12 @@ const shard: CardShard = {
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,
     _poolSkemfarAvenger,
+    _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
+    _poolSmolderingWerewolf,
     _poolSnareTheSkies,
     _poolSnowHound,
     _poolSoltariTrooper,

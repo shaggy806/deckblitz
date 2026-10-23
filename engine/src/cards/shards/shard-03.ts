@@ -41,6 +41,7 @@ import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
 import _poolBlessedRespite from "../pool/blessed-respite.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBlinkDog from "../pool/blink-dog.js";
+import _poolBloodhallPriest from "../pool/bloodhall-priest.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBorosChallenger from "../pool/boros-challenger.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
@@ -60,6 +61,7 @@ import _poolCaptivatingVampire from "../pool/captivating-vampire.js";
 import _poolCaribouRange from "../pool/caribou-range.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
+import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
@@ -126,6 +128,7 @@ import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
+import _poolEmrakulsInfluence from "../pool/emrakuls-influence.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
@@ -157,6 +160,7 @@ import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
+import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
 import _poolFyndhornPollen from "../pool/fyndhorn-pollen.js";
 import _poolGallantFowlknight from "../pool/gallant-fowlknight.js";
@@ -192,6 +196,7 @@ import _poolGravkill from "../pool/gravkill.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
+import _poolGrizzledAngler from "../pool/grizzled-angler.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
@@ -423,6 +428,7 @@ import _poolSpellSnip from "../pool/spell-snip.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
+import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
@@ -588,6 +594,7 @@ const shard: CardShard = {
     _poolBlessedRespite,
     _poolBlightedCataract,
     _poolBlinkDog,
+    _poolBloodhallPriest,
     _poolBoggartPrankster,
     _poolBorosChallenger,
     _poolBoroughBackup,
@@ -607,6 +614,7 @@ const shard: CardShard = {
     _poolCaribouRange,
     _poolCarvenCaryatid,
     _poolCavesOfKoilos,
+    _poolCemeteryRecruitment,
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
@@ -673,6 +681,7 @@ const shard: CardShard = {
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
+    _poolEmrakulsInfluence,
     _poolEndlessOne,
     _poolEndriderCatalyzer,
     _poolEphemerate,
@@ -704,6 +713,7 @@ const shard: CardShard = {
     _poolFlourishingHunter,
     _poolForsakenMonument,
     _poolFrogmyrEnforcer,
+    _poolFurybladeVampire,
     _poolFyndhornBow,
     _poolFyndhornPollen,
     _poolGallantFowlknight,
@@ -739,6 +749,7 @@ const shard: CardShard = {
     _poolGridMonitor,
     _poolGrimServant,
     _poolGrislySurvivor,
+    _poolGrizzledAngler,
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGutsplitterGang,
@@ -970,6 +981,7 @@ const shard: CardShard = {
     _poolSpiderManNoir,
     _poolSpikedCorridor,
     _poolSpiritMascot,
+    _poolSpiritOfTheHunt,
     _poolSpitefulSquad,
     _poolSplendidReclamation,
     _poolStaffOfTheAges,

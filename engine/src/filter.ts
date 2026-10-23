@@ -504,6 +504,11 @@ export interface CardFilter {
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
   readonly enteredThisTurn?: boolean;
+  /** Is (or isn't) monstrous (rule 701.37b) — "as long as this creature is
+   * monstrous" (Domesticated Hydra), read through a `source` condition. A
+   * permanent that left is asked as it last was; a card anywhere else never
+   * is. */
+  readonly monstrous?: boolean;
   /** Was declared as an attacker this turn (or wasn't) — Kratos, God of
    * War's "creatures that player controls that didn't attack this turn". A
    * permanent that left the battlefield and came back is a new object that
@@ -1157,6 +1162,10 @@ export function matchesFilter(
   if (filter.isCommander !== undefined) {
     const commander = live !== undefined ? live.isCommander : lki!.isCommander;
     if (commander !== filter.isCommander) return false;
+  }
+  if (filter.monstrous !== undefined) {
+    const monstrous = live !== undefined ? live.zone === "battlefield" && live.monstrous === true : lki!.monstrous === true;
+    if (monstrous !== filter.monstrous) return false;
   }
   if (filter.enteredThisTurn !== undefined) {
     const turn = live !== undefined ? live.enteredBattlefieldOnTurn : (lki!.enteredOnTurn ?? null);
