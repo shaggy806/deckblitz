@@ -193,6 +193,16 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   says all of it is prevented and one counter removed. Affects Unbreathing Horde (in the pool);
   blocks Oathsworn Knight (`replacement:prevent-once-per-damage-event`). Polukranos, Unchained's
   "remove that many" sums the same per source, so it's right.
+- **A target cost reduction two slots can earn is offered unrestricted.** Rule 601.2f fixes the
+  cost once targets are chosen. `Game.targetReductionOptions` offers only the earning targets when
+  the full price isn't affordable, but only when exactly one slot can hold one; with two (This Town
+  Ain't Big Enough's "up to two", both slots any nonland permanent) it offers every target in both,
+  so a cast naming two the caster doesn't control is offered and then refused for mana. Seen in the
+  fuzzer (`random-demo.mjs --players 4 --seed 19` with batch 148's second half forced): Thorn of
+  Amethyst made it {5}{U} against Carol's five mana. One offer can't say "at least one slot
+  earns"; the fix narrows the first earning slot to the earners (no legal cast lost while the
+  slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
+  random controller kept from skipping it. Found 2026-10-23, batch 148's checks.
 
 ## Latent
 
@@ -208,8 +218,6 @@ that needs it is authored.
   will enter as. Blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`). (The same
   front-face reading kept an instant or sorcery card from entering transformed — Startled Awake —
   until batch 148.)
-
-
 
 - **A mana ability's discard cost is never paid.** Rule 605.3b: a mana ability's costs are paid
   as it's activated, like any other's. `Game.activateAbility` checks a `cost.discard` can be paid

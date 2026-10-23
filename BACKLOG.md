@@ -256,7 +256,7 @@ there and move this line to `COMPLETED.md`.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.
 - **Losing loyalty never emits `counter-removed`** (306.8, 606.4): damage to a planeswalker and a minus loyalty cost emit only `loyalty-changed`, so a `counters-removed` trigger for loyalty never fires (Chandra, Fire Artisan).
 - **A merged permanent's token status is its own object's** (730.2d): a card mutated on top of a token still counts as a token.
-- **A double-faced Aura put onto the battlefield transformed is asked what it enchants** (712.14a): `askEnterChoice` reads its front face, so Skin Invasion's back face returns only with something to enchant, unattached; blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`).
+- **A target cost reduction two slots can earn is offered unrestricted** (601.2f): `targetReductionOptions` narrows only a lone earning slot, so This Town Ain't Big Enough under a tax it can pay only reduced is offered two non-earning targets and refused at the cast (fuzzer, batch 148's forced decks, seed 19).
 - **A granted leaves-the-battlefield trigger doesn't look back for its grant** (603.10a): Relic Vial when its only Cleric dies.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A granted ability's dynamic filter is fixed when it's granted**: an `{ amount }` in its target filter reads the granter, not the creature that has it (Firja's Retribution).
@@ -291,6 +291,7 @@ when a card that needs it is authored.
 - **A token with devour never devours** (702.82a): token creation never calls `askEnterChoice` — Dragon Broodmother waits (`mechanic:token-devour`).
 - **Convoke with a target-dependent cost.**
 - **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
+- **A double-faced Aura put onto the battlefield transformed is asked what it enchants** (712.14a): `askEnterChoice` reads its front face, so Skin Invasion's back face returns only with something to enchant, unattached; blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`).
 
 ## Bots
 
