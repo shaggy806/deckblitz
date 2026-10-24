@@ -6,13 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **A search of library and graveyard forces a graveyard find.** Rule 701.23b lets a search of a
-  hidden zone for cards with a stated quality fail to find; a public zone's search must find one
-  if there is one. `beginLibrarySearch` (`game.ts`) forces at least one find whenever any card
-  matches in the graveyard, without regard to the library being searched too or to a `oneEach`
-  set's slots — Nissa's Encouragement's ruling says "you could even find none". Blocks Nissa's
-  Encouragement (`effect:search-library-and-graveyard-named-set`). Found by an authoring agent,
-  2026-10-22 (B138).
 - **"Until end of turn, whenever …" is a granted trigger, not a delayed one.** Rule 603.7c: an
   effect that says "until end of turn, whenever [event], [effect]" creates a delayed triggered
   ability with a duration — it belongs to no permanent, so nothing that happens to its source

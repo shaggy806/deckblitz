@@ -10717,6 +10717,7 @@ import _poolNissaVitalForce from "./pool/nissa-vital-force.js";
 import _poolNissaVoiceOfZendikar from "./pool/nissa-voice-of-zendikar.js";
 import _poolNissaWhoShakesTheWorld from "./pool/nissa-who-shakes-the-world.js";
 import _poolNissasDefeat from "./pool/nissas-defeat.js";
+import _poolNissasEncouragement from "./pool/nissas-encouragement.js";
 import _poolNissasExpedition from "./pool/nissas-expedition.js";
 import _poolNissasPilgrimage from "./pool/nissas-pilgrimage.js";
 import _poolNissasTriumph from "./pool/nissas-triumph.js";
@@ -29744,6 +29745,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNissaVoiceOfZendikar,
   _poolNissaWhoShakesTheWorld,
   _poolNissasDefeat,
+  _poolNissasEncouragement,
   _poolNissasExpedition,
   _poolNissasPilgrimage,
   _poolNissasTriumph,
@@ -48784,6 +48786,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nissa-voice-of-zendikar": _poolNissaVoiceOfZendikar,
   "pool/nissa-who-shakes-the-world": _poolNissaWhoShakesTheWorld,
   "pool/nissas-defeat": _poolNissasDefeat,
+  "pool/nissas-encouragement": _poolNissasEncouragement,
   "pool/nissas-expedition": _poolNissasExpedition,
   "pool/nissas-pilgrimage": _poolNissasPilgrimage,
   "pool/nissas-triumph": _poolNissasTriumph,

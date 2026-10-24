@@ -5262,3 +5262,7 @@ engine terms. A second thing to check is a second test.
 ### Lethal Sting: can't be cast while Melira protects your creatures
 - **Do:** Click Lethal Sting in your hand.
 - **Expect:** It can't be cast: Melira, Sylvok Outcast stops -1/-1 counters on your creatures, so its extra cost can't be paid, though you have Grizzly Bears and the mana.
+
+### Nissa's Encouragement: may find nothing, though a Forest is in your graveyard
+- **Do:** Cast Nissa's Encouragement. When asked, confirm with nothing picked.
+- **Expect:** The Forest in your graveyard and the Brambleweft Behemoth in your library are offered, and the button works with nothing picked. The Forest stays in your graveyard.

@@ -399,7 +399,8 @@
   "decision:discard-any-number",
   "keyword:embalm",
   "keyword:improvise",
-  "bug:blight-ignores-counter-prevention"
+  "bug:blight-ignores-counter-prevention",
+  "effect:search-library-and-graveyard-named-set"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

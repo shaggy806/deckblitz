@@ -20,6 +20,7 @@ import {
   lands,
   life,
   loyalty,
+  pickFromZone,
   pickModes,
   pickPermanents,
   pickTargets,
@@ -224,6 +225,8 @@ describe("Jace's Ruse", () => {
     const bears = [spawn(game, "Grizzly Bears", B), spawn(game, "Grizzly Bears", B)];
     const jace = toGraveyard(game, "Jace, Arcane Strategist");
     pickModes(a, 0);
+    // Searching the library too, finding is a choice (rule 701.23b).
+    pickFromZone(a, jace);
     cast(game, toHand(game, "Jace's Ruse"), { targets: bears.map(ref) });
     for (const b of bears) expect(zone(game, b)).toBe("hand");
     expect(zone(game, jace)).toBe("hand");

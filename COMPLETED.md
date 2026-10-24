@@ -449,6 +449,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **A search of library and graveyard forced a graveyard find** (701.23b; 2026-10-24): only a search of the graveyard alone must find a match there; one that takes in the library may find none (`beginLibrarySearch`). Nissa's Encouragement authored (`effect:search-library-and-graveyard-named-set`).
 - **Blight ignores counter prevention** (701.68b; 2026-10-24): a blight cost, blighting kicker, ward—blight or "you may blight" is offered only with a creature a -1/-1 counter can go on (`Game.blightable`, through the `preventsCounters` statics), and a blight paid as a cost chooses among those; Lethal Sting authored.
 - **Up to 500 tokens of one stack can block** (509.1a; 2026-10-22): a blocking stack wakes up to
   `Game.MAX_BLOCKERS_WOKEN` (500) tokens rather than `MAX_MATERIALIZED`'s 100, so a stack can block an

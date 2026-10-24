@@ -23226,8 +23226,10 @@ export class Game {
     const inGraveyard = zones === "library" ? [] : matching("graveyard");
     const eligible = [...(library ? matching("library") : []), ...inGraveyard];
     // Only a hidden zone lets a search fail to find (rule 701.23b): a match
-    // in the graveyard, which everyone can see, must be found.
-    const least = inGraveyard.length > 0 ? Math.max(min, 1) : min;
+    // in the graveyard, which everyone can see, must be found when the
+    // graveyard alone is searched. A search that takes in the library too
+    // may find none (Nissa's Encouragement's ruling).
+    const least = zones === "graveyard" && inGraveyard.length > 0 ? Math.max(min, 1) : min;
     const set = together === undefined ? undefined : this.searchTogether(together, eligible, player, x);
     // "A Forest card and a Plains card" finds one card per slot at most.
     const most = together !== undefined && "oneEach" in together ? Math.min(max, together.oneEach.length) : max;

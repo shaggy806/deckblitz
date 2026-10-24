@@ -8075,4 +8075,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  preset(
+    "Nissa's Encouragement: may find nothing, though a Forest is in your graveyard",
+    board({
+      you: { bf: ['Forest*5'], hand: ["Nissa's Encouragement"], gy: ['Forest'], lib: ['Brambleweft Behemoth'] },
+    }),
+  ),
 ]
