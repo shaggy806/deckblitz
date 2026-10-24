@@ -21,6 +21,7 @@ import _poolAgateAssault from "../pool/agate-assault.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
+import _poolAinokArtillerist from "../pool/ainok-artillerist.js";
 import _poolAinokWayfarer from "../pool/ainok-wayfarer.js";
 import _poolAkoumHellkite from "../pool/akoum-hellkite.js";
 import _poolAlabasterMage from "../pool/alabaster-mage.js";
@@ -485,6 +486,7 @@ import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
+import _poolSibsigIcebreakers from "../pool/sibsig-icebreakers.js";
 import _poolSidequestCatchAFish from "../pool/sidequest-catch-a-fish.js";
 import _poolSiegeModification from "../pool/siege-modification.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
@@ -678,6 +680,7 @@ const shard: CardShard = {
     _poolAgentOfShauku,
     _poolAggravatedAssault,
     _poolAidTheFallen,
+    _poolAinokArtillerist,
     _poolAinokWayfarer,
     _poolAkoumHellkite,
     _poolAlabasterMage,
@@ -1142,6 +1145,7 @@ const shard: CardShard = {
     _poolShreddersRevenge,
     _poolShriekOfDread,
     _poolShuriVibraniumTechnologist,
+    _poolSibsigIcebreakers,
     _poolSidequestCatchAFish,
     _poolSiegeModification,
     _poolSilentDeparture,

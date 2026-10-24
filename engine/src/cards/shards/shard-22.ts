@@ -53,6 +53,7 @@ import _poolBindingGeist from "../pool/binding-geist.js";
 import _poolBitingRain from "../pool/biting-rain.js";
 import _poolBlackWard from "../pool/black-ward.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
+import _poolBlessedReincarnation from "../pool/blessed-reincarnation.js";
 import _poolBlindblast from "../pool/blindblast.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloodswornSteward from "../pool/bloodsworn-steward.js";
@@ -355,6 +356,7 @@ import _poolObzedatsAid from "../pool/obzedats-aid.js";
 import _poolOculus from "../pool/oculus.js";
 import _poolOggyarBattleSeer from "../pool/oggyar-battle-seer.js";
 import _poolOgresCleaver from "../pool/ogres-cleaver.js";
+import _poolOjutaiExemplars from "../pool/ojutai-exemplars.js";
 import _poolOldFatSpider from "../pool/old-fat-spider.js";
 import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
 import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
@@ -409,6 +411,7 @@ import _poolRealityHeist from "../pool/reality-heist.js";
 import _poolReaverDrone from "../pool/reaver-drone.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolRecklessRacer from "../pool/reckless-racer.js";
+import _poolReduceInStature from "../pool/reduce-in-stature.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
@@ -684,6 +687,7 @@ const shard: CardShard = {
     _poolBitingRain,
     _poolBlackWard,
     _poolBlackWidowIntelExpert,
+    _poolBlessedReincarnation,
     _poolBlindblast,
     _poolBlindingDrone,
     _poolBloodswornSteward,
@@ -986,6 +990,7 @@ const shard: CardShard = {
     _poolOculus,
     _poolOggyarBattleSeer,
     _poolOgresCleaver,
+    _poolOjutaiExemplars,
     _poolOldFatSpider,
     _poolOliviaOpulentOutlaw,
     _poolOltecCloudGuard,
@@ -1040,6 +1045,7 @@ const shard: CardShard = {
     _poolReaverDrone,
     _poolRecklessLackey,
     _poolRecklessRacer,
+    _poolReduceInStature,
     _poolRegeneration,
     _poolReinforcedRonin,
     _poolRelearn,

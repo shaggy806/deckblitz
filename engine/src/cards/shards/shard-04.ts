@@ -429,6 +429,7 @@ import _poolSaibaTrespassers from "../pool/saiba-trespassers.js";
 import _poolSanctify from "../pool/sanctify.js";
 import _poolSandworm from "../pool/sandworm.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
+import _poolSarkhansRage from "../pool/sarkhans-rage.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
 import _poolScatteredGroves from "../pool/scattered-groves.js";
@@ -1038,6 +1039,7 @@ const shard: CardShard = {
     _poolSanctify,
     _poolSandworm,
     _poolSanguineMorass,
+    _poolSarkhansRage,
     _poolSarkhansTriumph,
     _poolScarbladeScout,
     _poolScatteredGroves,

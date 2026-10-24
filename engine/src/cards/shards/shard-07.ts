@@ -104,6 +104,7 @@ import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
 import _poolDaggersailAeronaut from "../pool/daggersail-aeronaut.js";
+import _poolDanceOfTheSkywise from "../pool/dance-of-the-skywise.js";
 import _poolDancingScimitar from "../pool/dancing-scimitar.js";
 import _poolDarettiRocketeerEngineer from "../pool/daretti-rocketeer-engineer.js";
 import _poolDarigaazsAttendant from "../pool/darigaazs-attendant.js";
@@ -749,6 +750,7 @@ const shard: CardShard = {
     _poolCuratorOfSunsCreation,
     _poolCuriousPair,
     _poolDaggersailAeronaut,
+    _poolDanceOfTheSkywise,
     _poolDancingScimitar,
     _poolDarettiRocketeerEngineer,
     _poolDarigaazsAttendant,

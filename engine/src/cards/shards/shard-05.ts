@@ -160,6 +160,7 @@ import _poolDiverSkaab from "../pool/diver-skaab.js";
 import _poolDormantGrove from "../pool/dormant-grove.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
+import _poolDragonloftIdol from "../pool/dragonloft-idol.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
@@ -168,6 +169,7 @@ import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
 import _poolDust from "../pool/dust.js";
+import _poolDutifulAttendant from "../pool/dutiful-attendant.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
@@ -312,6 +314,7 @@ import _poolKhenraEternal from "../pool/khenra-eternal.js";
 import _poolKioraSovereignOfTheDeep from "../pool/kiora-sovereign-of-the-deep.js";
 import _poolKitesailCleric from "../pool/kitesail-cleric.js";
 import _poolKnightedMyr from "../pool/knighted-myr.js";
+import _poolKolaghanForerunners from "../pool/kolaghan-forerunners.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLancerSliver from "../pool/lancer-sliver.js";
@@ -469,6 +472,7 @@ import _poolSharkShredderKillerClone from "../pool/shark-shredder-killer-clone.j
 import _poolSharlayanNationOfScholars from "../pool/sharlayan-nation-of-scholars.js";
 import _poolShatterskullCharger from "../pool/shatterskull-charger.js";
 import _poolShatterskullRecruit from "../pool/shatterskull-recruit.js";
+import _poolShelteredAerie from "../pool/sheltered-aerie.js";
 import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShorelineRanger from "../pool/shoreline-ranger.js";
 import _poolShriekdiver from "../pool/shriekdiver.js";
@@ -571,6 +575,7 @@ import _poolVelomachusLorehold from "../pool/velomachus-lorehold.js";
 import _poolVenomousChangeling from "../pool/venomous-changeling.js";
 import _poolVentureDeeper from "../pool/venture-deeper.js";
 import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
+import _poolVialOfDragonfire from "../pool/vial-of-dragonfire.js";
 import _poolVindictiveWarden from "../pool/vindictive-warden.js";
 import _poolVinesOfTheRecluse from "../pool/vines-of-the-recluse.js";
 import _poolViridianRevel from "../pool/viridian-revel.js";
@@ -784,6 +789,7 @@ const shard: CardShard = {
     _poolDormantGrove,
     _poolDragonclawStrike,
     _poolDragonkinBerserker,
+    _poolDragonloftIdol,
     _poolDragonsPresence,
     _poolDreadfulApathy,
     _poolDreyKeeper,
@@ -792,6 +798,7 @@ const shard: CardShard = {
     _poolDuskLegionSergeant,
     _poolDuskdaleWurm,
     _poolDust,
+    _poolDutifulAttendant,
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
     _poolDwarvenLieutenant,
@@ -936,6 +943,7 @@ const shard: CardShard = {
     _poolKioraSovereignOfTheDeep,
     _poolKitesailCleric,
     _poolKnightedMyr,
+    _poolKolaghanForerunners,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
     _poolLancerSliver,
@@ -1093,6 +1101,7 @@ const shard: CardShard = {
     _poolSharlayanNationOfScholars,
     _poolShatterskullCharger,
     _poolShatterskullRecruit,
+    _poolShelteredAerie,
     _poolShivaWardenOfIce,
     _poolShorelineRanger,
     _poolShriekdiver,
@@ -1195,6 +1204,7 @@ const shard: CardShard = {
     _poolVenomousChangeling,
     _poolVentureDeeper,
     _poolVerdantRebirth,
+    _poolVialOfDragonfire,
     _poolVindictiveWarden,
     _poolVinesOfTheRecluse,
     _poolViridianRevel,

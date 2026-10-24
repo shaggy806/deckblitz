@@ -511,6 +511,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Zeppelin",
   "Zombie Berserker Token",
   "Zombie Druid Token",
+  "Zombie Horror Token",
   "Zombie Knight Token",
   "Zombie Mutant Token",
   "Zombie Rogue Token",

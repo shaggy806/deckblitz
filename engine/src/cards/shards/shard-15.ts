@@ -76,10 +76,12 @@ import _poolChandrasTriumph from "../pool/chandras-triumph.js";
 import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-general.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
+import _poolCircleOfElders from "../pool/circle-of-elders.js";
 import _poolClaim from "../pool/claim.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
+import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
 import _poolCommandingPresence from "../pool/commanding-presence.js";
@@ -189,6 +191,7 @@ import _poolFodderTosser from "../pool/fodder-tosser.js";
 import _poolForebodingRuins from "../pool/foreboding-ruins.js";
 import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js";
 import _poolFortressCrab from "../pool/fortress-crab.js";
+import _poolFoulRenewal from "../pool/foul-renewal.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
 import _poolFrostpeakYeti from "../pool/frostpeak-yeti.js";
 import _poolFuneralRoom from "../pool/funeral-room.js";
@@ -249,6 +252,7 @@ import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeartfire from "../pool/heartfire.js";
 import _poolHeavensGate from "../pool/heavens-gate.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
+import _poolHerdchaserDragon from "../pool/herdchaser-dragon.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
@@ -359,6 +363,7 @@ import _poolNamelessConqueror from "../pool/nameless-conqueror.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
 import _poolNearheathChaplain from "../pool/nearheath-chaplain.js";
 import _poolNebelgastBeguiler from "../pool/nebelgast-beguiler.js";
+import _poolNecromasterDragon from "../pool/necromaster-dragon.js";
 import _poolNecropolisFiend from "../pool/necropolis-fiend.js";
 import _poolNeurokInvisimancer from "../pool/neurok-invisimancer.js";
 import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
@@ -673,10 +678,12 @@ const shard: CardShard = {
     _poolChatterfangSquirrelGeneral,
     _poolCidFreeflierPilot,
     _poolCinderbones,
+    _poolCircleOfElders,
     _poolClaim,
     _poolClearTheMind,
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
+    _poolCollectedCompany,
     _poolCollision,
     _poolCometCrawler,
     _poolCommandingPresence,
@@ -786,6 +793,7 @@ const shard: CardShard = {
     _poolForebodingRuins,
     _poolForecastingFortuneTeller,
     _poolFortressCrab,
+    _poolFoulRenewal,
     _poolFreeFromFlesh,
     _poolFrostpeakYeti,
     _poolFuneralRoom,
@@ -846,6 +854,7 @@ const shard: CardShard = {
     _poolHeartfire,
     _poolHeavensGate,
     _poolHeirloomMirror,
+    _poolHerdchaserDragon,
     _poolHiddenFootblade,
     _poolHighlandWeald,
     _poolHillGiant,
@@ -956,6 +965,7 @@ const shard: CardShard = {
     _poolNaturalEnd,
     _poolNearheathChaplain,
     _poolNebelgastBeguiler,
+    _poolNecromasterDragon,
     _poolNecropolisFiend,
     _poolNeurokInvisimancer,
     _poolNeyamShaiMurad,

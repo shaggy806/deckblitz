@@ -125,6 +125,7 @@ import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDreamEater from "../pool/dream-eater.js";
+import _poolDromokaMonument from "../pool/dromoka-monument.js";
 import _poolDukharaScavenger from "../pool/dukhara-scavenger.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
@@ -250,6 +251,7 @@ import _poolInspiringVeteran from "../pool/inspiring-veteran.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolInvokeDespair from "../pool/invoke-despair.js";
+import _poolIreShaman from "../pool/ire-shaman.js";
 import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
@@ -271,6 +273,8 @@ import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
 import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
+import _poolKolaghanMonument from "../pool/kolaghan-monument.js";
+import _poolKolaghanStormsinger from "../pool/kolaghan-stormsinger.js";
 import _poolKorHalberd from "../pool/kor-halberd.js";
 import _poolKothFireOfResistance from "../pool/koth-fire-of-resistance.js";
 import _poolKothTheGeomancer from "../pool/koth-the-geomancer.js";
@@ -732,6 +736,7 @@ const shard: CardShard = {
     _poolDragonSniper,
     _poolDragonStyleTwins,
     _poolDreamEater,
+    _poolDromokaMonument,
     _poolDukharaScavenger,
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
@@ -857,6 +862,7 @@ const shard: CardShard = {
     _poolInsufferableBalladeer,
     _poolInvasionOfZendikar,
     _poolInvokeDespair,
+    _poolIreShaman,
     _poolIronManArmoredAvenger,
     _poolIvoryCharm,
     _poolJaddiOffshoot,
@@ -878,6 +884,8 @@ const shard: CardShard = {
     _poolKitsaOtterballElite,
     _poolKnightOfAutumn,
     _poolKodamaOfTheWestTree,
+    _poolKolaghanMonument,
+    _poolKolaghanStormsinger,
     _poolKorHalberd,
     _poolKothFireOfResistance,
     _poolKothTheGeomancer,

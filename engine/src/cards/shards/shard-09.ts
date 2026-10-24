@@ -130,6 +130,7 @@ import _poolDeadlyAlliance from "../pool/deadly-alliance.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
 import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
+import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
 import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
@@ -527,6 +528,7 @@ import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
 import _poolSwiftSpiral from "../pool/swift-spiral.js";
+import _poolSwiftWarkite from "../pool/swift-warkite.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
@@ -771,6 +773,7 @@ const shard: CardShard = {
     _poolDeadlyRecluse,
     _poolDeathInTheFamily,
     _poolDefiantKhenra,
+    _poolDescentOfTheDragons,
     _poolDesiccatedNaga,
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
@@ -1168,6 +1171,7 @@ const shard: CardShard = {
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
     _poolSwiftSpiral,
+    _poolSwiftWarkite,
     _poolSylvanAwakening,
     _poolSylvanScrying,
     _poolSythisHarvestsHand,

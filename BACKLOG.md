@@ -153,15 +153,16 @@ section keeps only what to do next.
   Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object;
   batch 149 Oath of the Gatewatch and Commander 2015, on surge and "if that creature would die
   this turn, exile it instead" with its "dealt damage this way" form; batch 150 the rest of
-  Battle for Zendikar, on awaken; batch 151 the rest of Magic Origins, on renown);
-  **next, Dragons of Tarkir** (144 left) — one batch, 4-5 agents. Its leading mechanics are
-  **bolster** (rule 701.39 — 11 of its cards, nothing built, plus Anafenza, Kin-Tree Spirit and
-  Sandsteppe War Riders: "choose a creature with the least toughness among creatures you control
-  and put N +1/+1 counters on it", the choice among tied creatures the player's, made as it
-  resolves) and **dash** (rule 702.109 — 10 of its cards, plus 6 waiting elsewhere: an
-  alternative cost giving haste and "return it to its owner's hand at the beginning of the next
-  end step"); megamorph (17), exploit (9), formidable (10) and rebound (6) are all in the pool
-  already. Batch 151's blockers are one each, no leader (`docs/card-blockers.md`). Batch 150's leading blocker:
+  Battle for Zendikar, on awaken; batch 151 the rest of Magic Origins, on renown; batch 152
+  Dragons of Tarkir, on dash and bolster);
+  **next, Fate Reforged** (103 left) — one batch, 4 agents. Its mechanics are all built
+  already: manifest, delve, bolster and dash (both from batch 152), prowess, and ferocious,
+  raid and outlast as conditions and abilities the pool has. Batch 152's leading blocker: the
+  optional "you may reveal a Dragon card from your hand" additional cost with "if you revealed a
+  Dragon card or controlled a Dragon as you cast this" (`cost:additional-cost-reveal` — 7, six
+  of them the set's own, every one on nothing else; a copy keeps the bonus only from a revealed
+  card, so behold's kicker won't do); then a chosen-colour protection grant
+  (`effect:grant-protection-choice`, 19 over the pool). Batch 151's blockers are one each, no leader (`docs/card-blockers.md`). Batch 150's leading blocker:
   the processors' "put a card an opponent owns from exile into that player's graveyard"
   (`cost:put-opponent-exiled-card-into-graveyard` — 12, every processor in the set, as a cost
   or a "you may … if you do"). Batch 149's leading blockers: "choose the same mode more

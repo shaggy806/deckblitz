@@ -299,6 +299,7 @@ import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
+import _poolMagmaticChasm from "../pool/magmatic-chasm.js";
 import _poolMagnify from "../pool/magnify.js";
 import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
 import _poolMalcatorPurityOverseer from "../pool/malcator-purity-overseer.js";
@@ -495,6 +496,7 @@ import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
+import _poolStormriderRig from "../pool/stormrider-rig.js";
 import _poolStrixSerenade from "../pool/strix-serenade.js";
 import _poolStrongarmThug from "../pool/strongarm-thug.js";
 import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
@@ -590,6 +592,7 @@ import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
+import _poolVulturousAven from "../pool/vulturous-aven.js";
 import _poolWallOfBlossoms from "../pool/wall-of-blossoms.js";
 import _poolWallOfBone from "../pool/wall-of-bone.js";
 import _poolWallOfSwords from "../pool/wall-of-swords.js";
@@ -933,6 +936,7 @@ const shard: CardShard = {
     _poolLightningMare,
     _poolLluwenExchangeStudent,
     _poolLostInSpace,
+    _poolMagmaticChasm,
     _poolMagnify,
     _poolMahaItsFeathersNight,
     _poolMalcatorPurityOverseer,
@@ -1129,6 +1133,7 @@ const shard: CardShard = {
     _poolStoneworkPuma,
     _poolStormbeaconBlade,
     _poolStormkeldVanguard,
+    _poolStormriderRig,
     _poolStrixSerenade,
     _poolStrongarmThug,
     _poolStrongholdAssassin,
@@ -1224,6 +1229,7 @@ const shard: CardShard = {
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,
     _poolVrock,
+    _poolVulturousAven,
     _poolWallOfBlossoms,
     _poolWallOfBone,
     _poolWallOfSwords,

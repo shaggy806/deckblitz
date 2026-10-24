@@ -481,6 +481,7 @@ import _poolShivanHellkite from "../pool/shivan-hellkite.js";
 import _poolShreddingWinds from "../pool/shredding-winds.js";
 import _poolShrineOfTheForsakenGods from "../pool/shrine-of-the-forsaken-gods.js";
 import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
+import _poolSightOfTheScalelords from "../pool/sight-of-the-scalelords.js";
 import _poolSigilOfValor from "../pool/sigil-of-valor.js";
 import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
@@ -488,6 +489,7 @@ import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
+import _poolSkywiseTeachings from "../pool/skywise-teachings.js";
 import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
@@ -1105,6 +1107,7 @@ const shard: CardShard = {
     _poolShreddingWinds,
     _poolShrineOfTheForsakenGods,
     _poolShuSoldierFarmers,
+    _poolSightOfTheScalelords,
     _poolSigilOfValor,
     _poolSilumgarSorcerer,
     _poolSilverflameRitual,
@@ -1112,6 +1115,7 @@ const shard: CardShard = {
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,
+    _poolSkywiseTeachings,
     _poolSleepParalysis,
     _poolSmaugTheMagnificent,
     _poolSmugglersSurprise,

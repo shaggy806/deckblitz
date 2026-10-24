@@ -305,6 +305,7 @@ import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMistIntruder from "../pool/mist-intruder.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
+import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
@@ -415,6 +416,7 @@ import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
 import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
+import _poolSilumgarSpellEater from "../pool/silumgar-spell-eater.js";
 import _poolSilverBolt from "../pool/silver-bolt.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
 import _poolSinisterConcierge from "../pool/sinister-concierge.js";
@@ -874,6 +876,7 @@ const shard: CardShard = {
     _poolMistIntruder,
     _poolMoltenExhale,
     _poolMoltenMonstrosity,
+    _poolMonasteryLoremaster,
     _poolMorbidHunger,
     _poolMortify,
     _poolMossKami,
@@ -984,6 +987,7 @@ const shard: CardShard = {
     _poolShivanBranchBurner,
     _poolShopkeepersBane,
     _poolSilkweaverElite,
+    _poolSilumgarSpellEater,
     _poolSilverBolt,
     _poolSilverbackShaman,
     _poolSinisterConcierge,

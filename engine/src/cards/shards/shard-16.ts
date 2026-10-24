@@ -153,6 +153,7 @@ import _poolEnergyStorm from "../pool/energy-storm.js";
 import _poolEnergyTap from "../pool/energy-tap.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
+import _poolEpicConfrontation from "../pool/epic-confrontation.js";
 import _poolEpitaphGolem from "../pool/epitaph-golem.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolErrantAndGiada from "../pool/errant-and-giada.js";
@@ -285,6 +286,7 @@ import _poolKismet from "../pool/kismet.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
 import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
+import _poolKolaghanAspirant from "../pool/kolaghan-aspirant.js";
 import _poolKolaghanTheStormsFury from "../pool/kolaghan-the-storms-fury.js";
 import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
 import _poolKoseiPenitentWarlord from "../pool/kosei-penitent-warlord.js";
@@ -361,6 +363,7 @@ import _poolObsessiveSearch from "../pool/obsessive-search.js";
 import _poolOceanusDragon from "../pool/oceanus-dragon.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
 import _poolOgreMenial from "../pool/ogre-menial.js";
+import _poolOjutaiMonument from "../pool/ojutai-monument.js";
 import _poolOmegaMyr from "../pool/omega-myr.js";
 import _poolOneWithNature from "../pool/one-with-nature.js";
 import _poolOneWithTheWind from "../pool/one-with-the-wind.js";
@@ -436,6 +439,7 @@ import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
 import _poolRuinousWaterbending from "../pool/ruinous-waterbending.js";
 import _poolRushedRebirth from "../pool/rushed-rebirth.js";
+import _poolSabertoothOutrider from "../pool/sabertooth-outrider.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
 import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
@@ -465,6 +469,7 @@ import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
 import _poolSilkenStrength from "../pool/silken-strength.js";
+import _poolSilkwrap from "../pool/silkwrap.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
@@ -665,6 +670,7 @@ import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
 import _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin from "../tokens/vampire-token-edgar-charmed-groom-edgar-markovs-coffin.js";
 import _tokensWallTokenBuildersTalent from "../tokens/wall-token-builders-talent.js";
 import _tokensXXDemonTokenFlying from "../tokens/x-x-demon-token-flying.js";
+import _tokensZombieHorrorToken from "../tokens/zombie-horror-token.js";
 import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
 
 const shard: CardShard = {
@@ -819,6 +825,7 @@ const shard: CardShard = {
     _poolEnergyTap,
     _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
+    _poolEpicConfrontation,
     _poolEpitaphGolem,
     _poolErodedCanyon,
     _poolErrantAndGiada,
@@ -951,6 +958,7 @@ const shard: CardShard = {
     _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
     _poolKnockoutManeuver,
+    _poolKolaghanAspirant,
     _poolKolaghanTheStormsFury,
     _poolKorSkyClimber,
     _poolKoseiPenitentWarlord,
@@ -1027,6 +1035,7 @@ const shard: CardShard = {
     _poolOceanusDragon,
     _poolOctoprophet,
     _poolOgreMenial,
+    _poolOjutaiMonument,
     _poolOmegaMyr,
     _poolOneWithNature,
     _poolOneWithTheWind,
@@ -1102,6 +1111,7 @@ const shard: CardShard = {
     _poolRuinRat,
     _poolRuinousWaterbending,
     _poolRushedRebirth,
+    _poolSabertoothOutrider,
     _poolSacredFoundry,
     _poolSallySparrow,
     _poolSamutTheDrivingForce,
@@ -1131,6 +1141,7 @@ const shard: CardShard = {
     _poolShroudedShepherd,
     _poolSigilOfMyrkul,
     _poolSilkenStrength,
+    _poolSilkwrap,
     _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
@@ -1333,6 +1344,7 @@ const shard: CardShard = {
     _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin,
     _tokensWallTokenBuildersTalent,
     _tokensXXDemonTokenFlying,
+    _tokensZombieHorrorToken,
     _tokensZombieWarriorToken,
   ],
 };

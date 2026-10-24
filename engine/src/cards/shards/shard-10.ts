@@ -25,6 +25,7 @@ import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
 import _poolAnointedProcession from "../pool/anointed-procession.js";
 import _poolAppendageAmalgam from "../pool/appendage-amalgam.js";
 import _poolArahboRoarOfTheWorld from "../pool/arahbo-roar-of-the-world.js";
+import _poolArashinForemost from "../pool/arashin-foremost.js";
 import _poolArborArmament from "../pool/arbor-armament.js";
 import _poolArchenemysCharm from "../pool/archenemys-charm.js";
 import _poolArmTheCathars from "../pool/arm-the-cathars.js";
@@ -458,6 +459,7 @@ import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
+import _poolScaleBlessing from "../pool/scale-blessing.js";
 import _poolScavengerDrake from "../pool/scavenger-drake.js";
 import _poolScorchingDragonfire from "../pool/scorching-dragonfire.js";
 import _poolScrapshooter from "../pool/scrapshooter.js";
@@ -681,6 +683,7 @@ const shard: CardShard = {
     _poolAnointedProcession,
     _poolAppendageAmalgam,
     _poolArahboRoarOfTheWorld,
+    _poolArashinForemost,
     _poolArborArmament,
     _poolArchenemysCharm,
     _poolArmTheCathars,
@@ -1114,6 +1117,7 @@ const shard: CardShard = {
     _poolSanguineBond,
     _poolSarkhansDragonfire,
     _poolSavageVentmaw,
+    _poolScaleBlessing,
     _poolScavengerDrake,
     _poolScorchingDragonfire,
     _poolScrapshooter,

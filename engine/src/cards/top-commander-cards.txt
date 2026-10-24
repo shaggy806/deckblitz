@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3778 already implemented / 1222 missing (marks refreshed 2026-10-24)
+3780 already implemented / 1220 missing (marks refreshed 2026-10-24)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -277,7 +277,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   278  Exsanguinate                             {X}{B}{B}        Sorcery
 [x]   279  Inspiring Call                           {2}{G}           Instant
 [x]   280  Haunted Ridge                            {0}              Land
-[ ]   281  Ragavan, Nimble Pilferer                 {R}              Legendary Creature — Monkey Pirate
+[x]   281  Ragavan, Nimble Pilferer                 {R}              Legendary Creature — Monkey Pirate
 [x]   282  Rugged Prairie                           {0}              Land
 [x]   283  Reality Shift                            {1}{U}           Instant
 [x]   284  Darksteel Citadel                        {0}              Artifact Land
@@ -4821,7 +4821,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4828  Atzocan Seer                             {1}{G}{W}        Creature — Human Druid
 [x]  4829  Neriv, Heart of the Storm                {1}{R}{W}{B}     Legendary Creature — Spirit Dragon
 [x]  4830  Brotherhood Vertibird                    {3}              Artifact — Vehicle
-[ ]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
+[x]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
 [x]  4832  Brainstone                               {1}              Artifact
 [x]  4833  Short Bow                                {2}              Artifact — Equipment
 [x]  4834  Norman Osborn // Green Goblin            {2}              Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain

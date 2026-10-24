@@ -42,6 +42,7 @@ import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
+import _poolBloodChinFanatic from "../pool/blood-chin-fanatic.js";
 import _poolBloodlineNecromancer from "../pool/bloodline-necromancer.js";
 import _poolBloodlinePretender from "../pool/bloodline-pretender.js";
 import _poolBloomHulk from "../pool/bloom-hulk.js";
@@ -670,6 +671,7 @@ const shard: CardShard = {
     _poolBlackWidowDoubleAgent,
     _poolBlindingMage,
     _poolBlitzAutomaton,
+    _poolBloodChinFanatic,
     _poolBloodlineNecromancer,
     _poolBloodlinePretender,
     _poolBloomHulk,

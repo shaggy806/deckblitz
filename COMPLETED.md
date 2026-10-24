@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Dragons of Tarkir, the whole set** (batch 152): dash (rule 702.109a — `dash: { cost }`, an
+  alternative cast giving haste and a return to the owner's hand at the next end step, from the
+  hand or the command zone) and bolster (rule 701.39a — the `bolster` effect, chosen among the
+  least-toughness creatures as it resolves), both read by the scaffolder; and a command-zone
+  commander with more than one way to cast it now opens a menu of them. 122 authored — four
+  `card-author` agents and the lead: Ragavan, Nimble Pilferer, Kolaghan, the Storm's Fury,
+  Anafenza, Kin-Tree Spirit, Flamerush Rider and four more that waited only on dash or bolster,
+  Collected Company, Descent of the Dragons, Necromaster Dragon, Swift Warkite, Ojutai's Command
+  and Dromoka's Gift (2026-10-24).
 - **Magic Origins, the rest of it** (batch 151): renown (rule 702.112 — the `renown()` helper,
   the `renown` effect and the `renowned` designation, a filter clause, with a `becomes-renowned`
   trigger; read by the scaffolder) and `return-to-hand-all` reading X in its filter. 84

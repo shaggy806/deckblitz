@@ -22,6 +22,7 @@ import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
 import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
+import _poolArashinSovereign from "../pool/arashin-sovereign.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
@@ -649,6 +650,7 @@ const shard: CardShard = {
     _poolAncestralRecall,
     _poolAncientCraving,
     _poolAngelicPage,
+    _poolArashinSovereign,
     _poolArbalestEngineers,
     _poolArcadeCabinet,
     _poolArcboundBruiser,

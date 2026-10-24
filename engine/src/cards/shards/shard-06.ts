@@ -243,6 +243,7 @@ import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
+import _poolHiddenDragonslayer from "../pool/hidden-dragonslayer.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
@@ -858,6 +859,7 @@ const shard: CardShard = {
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,
+    _poolHiddenDragonslayer,
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
     _poolHigureTheStillWind,

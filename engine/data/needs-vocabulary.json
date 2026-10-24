@@ -9971,6 +9971,38 @@
   "static:enchanted-abilities-cant-be-activated": {
    "family": "effect:cast-and-activate-restrictions",
    "example": "Suppression Bonds: 'Enchanted permanent can't attack or block, and its activated abilities can't be activated' — a static's `prohibits.abilitiesOf` filter can't name the permanent this Aura is attached to."
+  },
+  "trigger:turned-face-up-other": {
+   "family": "mechanic:face-down",
+   "example": "Salt Road Ambushers: the `turned-face-up` trigger has no `otherOnly` — \"whenever another permanent you control is turned face up\""
+  },
+  "static:play-from-linked-exile-once-per-turn": {
+   "family": "effect:linked-exiled-card",
+   "example": "Hedonist's Trove: play lands and cast spells from among cards exiled with this enchantment, spells only once each turn"
+  },
+  "cost:self-graveyard-cast-cost-increase": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Risen Executioner: cast from your graveyard, costing {1} more for each other creature card in your graveyard"
+  },
+  "amount:auras-attached-to-self": {
+   "family": "condition:source-enchanted-by-n-auras",
+   "example": "Graceblade Artisan: +2/+2 for each Aura attached to it"
+  },
+  "static:block-as-though-reach-filter": {
+   "family": "static:block-additional-creature",
+   "example": "Dragon Hunter: can block Dragons as though it had reach"
+  },
+  "cost:attack-block-cost-self": {
+   "family": "cost:attack-tax",
+   "example": "Qal Sisma Behemoth: can't block or attack unless its controller pays {1}"
+  },
+  "effect:flicker-return-face-down": {
+   "family": "mechanic:face-down",
+   "example": "Shorecrasher Elemental: exile it, then return it face down"
+  },
+  "static:dash-cost-reduction": {
+   "family": "keyword:dash",
+   "example": "Warbringer: dash costs you pay cost {2} less — reducing the dash cost string before commander tax is added would discount too little"
   }
  }
 }

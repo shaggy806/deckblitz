@@ -50,6 +50,7 @@ import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
 import _poolBeastsOfBogardan from "../pool/beasts-of-bogardan.js";
 import _poolBedazzle from "../pool/bedazzle.js";
 import _poolBeholdTheMultiverse from "../pool/behold-the-multiverse.js";
+import _poolBelltollDragon from "../pool/belltoll-dragon.js";
 import _poolBiowasteBlob from "../pool/biowaste-blob.js";
 import _poolBitterblossom from "../pool/bitterblossom.js";
 import _poolBituminousBlast from "../pool/bituminous-blast.js";
@@ -498,6 +499,7 @@ import _poolSternProctor from "../pool/stern-proctor.js";
 import _poolStewTheConeys from "../pool/stew-the-coneys.js";
 import _poolStoneHavenOutfitter from "../pool/stone-haven-outfitter.js";
 import _poolStormchaserMage from "../pool/stormchaser-mage.js";
+import _poolStratusDancer from "../pool/stratus-dancer.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
@@ -510,6 +512,7 @@ import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
 import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
 import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
+import _poolTaigamsStrike from "../pool/taigams-strike.js";
 import _poolTallAsABeanstalk from "../pool/tall-as-a-beanstalk.js";
 import _poolTalonrend from "../pool/talonrend.js";
 import _poolTappingAtTheWindow from "../pool/tapping-at-the-window.js";
@@ -670,6 +673,7 @@ const shard: CardShard = {
     _poolBeastsOfBogardan,
     _poolBedazzle,
     _poolBeholdTheMultiverse,
+    _poolBelltollDragon,
     _poolBiowasteBlob,
     _poolBitterblossom,
     _poolBituminousBlast,
@@ -1118,6 +1122,7 @@ const shard: CardShard = {
     _poolStewTheConeys,
     _poolStoneHavenOutfitter,
     _poolStormchaserMage,
+    _poolStratusDancer,
     _poolStringOfDisappearances,
     _poolStrixLookout,
     _poolSubterraneanSpirit,
@@ -1130,6 +1135,7 @@ const shard: CardShard = {
     _poolSurrakTheHuntCaller,
     _poolSusurianVoidborn,
     _poolSwordOfOnceAndFuture,
+    _poolTaigamsStrike,
     _poolTallAsABeanstalk,
     _poolTalonrend,
     _poolTappingAtTheWindow,

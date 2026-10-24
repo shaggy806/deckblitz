@@ -55,6 +55,7 @@ import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js
 import _poolBlightMamba from "../pool/blight-mamba.js";
 import _poolBlightwidow from "../pool/blightwidow.js";
 import _poolBloodBairn from "../pool/blood-bairn.js";
+import _poolBloodChinRager from "../pool/blood-chin-rager.js";
 import _poolBloodPetalCelebrant from "../pool/blood-petal-celebrant.js";
 import _poolBloodResearcher from "../pool/blood-researcher.js";
 import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
@@ -69,6 +70,7 @@ import _poolBraidssFrightfulReturn from "../pool/braidss-frightful-return.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
 import _poolBreakneckRider from "../pool/breakneck-rider.js";
 import _poolBrilliantPlan from "../pool/brilliant-plan.js";
+import _poolButchersGlee from "../pool/butchers-glee.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
 import _poolCallToTheNetherworld from "../pool/call-to-the-netherworld.js";
 import _poolCancel from "../pool/cancel.js";
@@ -294,6 +296,7 @@ import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLodestoneNeedle from "../pool/lodestone-needle.js";
 import _poolLongRangeSensor from "../pool/long-range-sensor.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
+import _poolLoseCalm from "../pool/lose-calm.js";
 import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
@@ -441,6 +444,7 @@ import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
+import _poolShieldhideDragon from "../pool/shieldhide-dragon.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
 import _poolShowOfConfidence from "../pool/show-of-confidence.js";
@@ -675,6 +679,7 @@ const shard: CardShard = {
     _poolBlightMamba,
     _poolBlightwidow,
     _poolBloodBairn,
+    _poolBloodChinRager,
     _poolBloodPetalCelebrant,
     _poolBloodResearcher,
     _poolBloodchiefAscension,
@@ -689,6 +694,7 @@ const shard: CardShard = {
     _poolBrambleFamiliar,
     _poolBreakneckRider,
     _poolBrilliantPlan,
+    _poolButchersGlee,
     _poolCabarettiInitiate,
     _poolCallToTheNetherworld,
     _poolCancel,
@@ -914,6 +920,7 @@ const shard: CardShard = {
     _poolLodestoneNeedle,
     _poolLongRangeSensor,
     _poolLordOfTheForsaken,
+    _poolLoseCalm,
     _poolLumengridWarden,
     _poolLuxCannon,
     _poolMagmaw,
@@ -1061,6 +1068,7 @@ const shard: CardShard = {
     _poolSerraAscendant,
     _poolShadowAlleyDenizen,
     _poolShamblingRemains,
+    _poolShieldhideDragon,
     _poolShivanDevastator,
     _poolShivanOasis,
     _poolShowOfConfidence,

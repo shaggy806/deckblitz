@@ -40,6 +40,7 @@ import _poolAttendedKnight from "../pool/attended-knight.js";
 import _poolAttentiveSunscribe from "../pool/attentive-sunscribe.js";
 import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
+import _poolAvatarOfTheResolute from "../pool/avatar-of-the-resolute.js";
 import _poolAwakenedSkyclave from "../pool/awakened-skyclave.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
@@ -303,6 +304,7 @@ import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
 import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
+import _poolLightwalker from "../pool/lightwalker.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
@@ -513,6 +515,7 @@ import _poolStormfrontPegasus from "../pool/stormfront-pegasus.js";
 import _poolStormkeldProwler from "../pool/stormkeld-prowler.js";
 import _poolSuccumbToTemptation from "../pool/succumb-to-temptation.js";
 import _poolSummonersPact from "../pool/summoners-pact.js";
+import _poolSunbringersTouch from "../pool/sunbringers-touch.js";
 import _poolSunscorchedDivide from "../pool/sunscorched-divide.js";
 import _poolSurveyTheWreckage from "../pool/survey-the-wreckage.js";
 import _poolSylvanCaryatid from "../pool/sylvan-caryatid.js";
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolAttentiveSunscribe,
     _poolAuspiciousArrival,
     _poolAutochthonWurm,
+    _poolAvatarOfTheResolute,
     _poolAwakenedSkyclave,
     _poolBalefulForce,
     _poolBallistaCharger,
@@ -934,6 +938,7 @@ const shard: CardShard = {
     _poolLegolassQuickReflexes,
     _poolLeylineSurge,
     _poolLightfootRogue,
+    _poolLightwalker,
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
     _poolLoxodonAnchorite,
@@ -1144,6 +1149,7 @@ const shard: CardShard = {
     _poolStormkeldProwler,
     _poolSuccumbToTemptation,
     _poolSummonersPact,
+    _poolSunbringersTouch,
     _poolSunscorchedDivide,
     _poolSurveyTheWreckage,
     _poolSylvanCaryatid,

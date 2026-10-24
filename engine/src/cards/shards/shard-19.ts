@@ -116,6 +116,7 @@ import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCoralSword from "../pool/coral-sword.js";
+import _poolCorpseweft from "../pool/corpseweft.js";
 import _poolCourageousGoblin from "../pool/courageous-goblin.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
 import _poolCovetedPrize from "../pool/coveted-prize.js";
@@ -151,6 +152,7 @@ import _poolDissectionPractice from "../pool/dissection-practice.js";
 import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
+import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
@@ -243,6 +245,7 @@ import _poolGrindDust from "../pool/grind-dust.js";
 import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
 import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
+import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
@@ -254,6 +257,7 @@ import _poolHauntedHellride from "../pool/haunted-hellride.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
+import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
 import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
@@ -474,6 +478,7 @@ import _poolSecludedSteppe from "../pool/secluded-steppe.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
+import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
 import _poolSerraZealot from "../pool/serra-zealot.js";
@@ -757,6 +762,7 @@ const shard: CardShard = {
     _poolContactOtherPlane,
     _poolContractKilling,
     _poolCoralSword,
+    _poolCorpseweft,
     _poolCourageousGoblin,
     _poolCourierGriffin,
     _poolCovetedPrize,
@@ -792,6 +798,7 @@ const shard: CardShard = {
     _poolDiversionSpecialist,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
+    _poolDragonScarredBear,
     _poolDramaticFinale,
     _poolDreadFugue,
     _poolDrossSkullbomb,
@@ -884,6 +891,7 @@ const shard: CardShard = {
     _poolGrolnokTheOmnivore,
     _poolGuardianOfFaith,
     _poolGuardianProject,
+    _poolGuardianShieldBearer,
     _poolGuardiansOfMeletis,
     _poolGutlessPlunderer,
     _poolHadanasClimb,
@@ -895,6 +903,7 @@ const shard: CardShard = {
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
     _poolHelmutZemoMastermind,
+    _poolHeraldOfDromoka,
     _poolHibernationSliver,
     _poolHiddenVolcano,
     _poolHieroglyphicIllumination,
@@ -1115,6 +1124,7 @@ const shard: CardShard = {
     _poolSeekerOfSunlight,
     _poolSeekersSquire,
     _poolSelesnyaSanctuary,
+    _poolSelfInflictedWound,
     _poolSerpentsPass,
     _poolSerraPaladin,
     _poolSerraZealot,

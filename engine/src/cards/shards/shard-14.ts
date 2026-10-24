@@ -231,6 +231,7 @@ import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
 import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
+import _poolGladeWatcher from "../pool/glade-watcher.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
@@ -412,6 +413,7 @@ import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
+import _poolProfanerOfTheDead from "../pool/profaner-of-the-dead.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
 import _poolProtectTheNegotiators from "../pool/protect-the-negotiators.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
@@ -466,6 +468,7 @@ import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScreamsFromWithin from "../pool/screams-from-within.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
 import _poolSerpentOfYawningDepths from "../pool/serpent-of-yawning-depths.js";
+import _poolServantOfTheScale from "../pool/servant-of-the-scale.js";
 import _poolShapeTheSands from "../pool/shape-the-sands.js";
 import _poolShardOfTheVoidDragon from "../pool/shard-of-the-void-dragon.js";
 import _poolShatterTheSource from "../pool/shatter-the-source.js";
@@ -482,6 +485,7 @@ import _poolShuFootSoldiers from "../pool/shu-foot-soldiers.js";
 import _poolSiegeZombie from "../pool/siege-zombie.js";
 import _poolSiegehornCeratops from "../pool/siegehorn-ceratops.js";
 import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
+import _poolSilumgarAssassin from "../pool/silumgar-assassin.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
 import _poolSkylineCascade from "../pool/skyline-cascade.js";
@@ -517,6 +521,7 @@ import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
 import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
 import _poolSwordOfTheMeek from "../pool/sword-of-the-meek.js";
 import _poolTahCropSkirmisher from "../pool/tah-crop-skirmisher.js";
+import _poolTailSlash from "../pool/tail-slash.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
@@ -849,6 +854,7 @@ const shard: CardShard = {
     _poolGhostsOfTheDamned,
     _poolGideonsCompany,
     _poolGiftOfTusks,
+    _poolGladeWatcher,
     _poolGliderStaff,
     _poolGlimpseTheCore,
     _poolGlitchGhostSurveyor,
@@ -1030,6 +1036,7 @@ const shard: CardShard = {
     _poolPrimeSpeakerVannifar,
     _poolPrimevalBounty,
     _poolPrismite,
+    _poolProfanerOfTheDead,
     _poolProfessionalFaceBreaker,
     _poolProtectTheNegotiators,
     _poolProwessOfTheFair,
@@ -1084,6 +1091,7 @@ const shard: CardShard = {
     _poolScreamsFromWithin,
     _poolScurryOfSquirrels,
     _poolSerpentOfYawningDepths,
+    _poolServantOfTheScale,
     _poolShapeTheSands,
     _poolShardOfTheVoidDragon,
     _poolShatterTheSource,
@@ -1100,6 +1108,7 @@ const shard: CardShard = {
     _poolSiegeZombie,
     _poolSiegehornCeratops,
     _poolSigardaChampionOfLight,
+    _poolSilumgarAssassin,
     _poolSilverRaven,
     _poolSkithiryxTheBlightDragon,
     _poolSkylineCascade,
@@ -1135,6 +1144,7 @@ const shard: CardShard = {
     _poolSwaggeringCorsair,
     _poolSwordOfTheMeek,
     _poolTahCropSkirmisher,
+    _poolTailSlash,
     _poolTalrand,
     _poolTanaTheBloodsower,
     _poolTasigurTheGoldenFang,

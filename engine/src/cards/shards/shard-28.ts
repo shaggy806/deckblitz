@@ -44,6 +44,7 @@ import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolAssassinate from "../pool/assassinate.js";
 import _poolAssertPerfection from "../pool/assert-perfection.js";
 import _poolAtalanJackal from "../pool/atalan-jackal.js";
+import _poolAtarkaBeastbreaker from "../pool/atarka-beastbreaker.js";
 import _poolAvacynThePurifier from "../pool/avacyn-the-purifier.js";
 import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
 import _poolAvengingHunter from "../pool/avenging-hunter.js";
@@ -134,6 +135,7 @@ import _poolDarksteelSentinel from "../pool/darksteel-sentinel.js";
 import _poolDaruHealer from "../pool/daru-healer.js";
 import _poolDawningAngel from "../pool/dawning-angel.js";
 import _poolDawnsTruce from "../pool/dawns-truce.js";
+import _poolDeadlyWanderings from "../pool/deadly-wanderings.js";
 import _poolDeathbonnetSprout from "../pool/deathbonnet-sprout.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
@@ -681,6 +683,7 @@ const shard: CardShard = {
     _poolAssassinate,
     _poolAssertPerfection,
     _poolAtalanJackal,
+    _poolAtarkaBeastbreaker,
     _poolAvacynThePurifier,
     _poolAvenSmokeweaver,
     _poolAvengingHunter,
@@ -771,6 +774,7 @@ const shard: CardShard = {
     _poolDaruHealer,
     _poolDawningAngel,
     _poolDawnsTruce,
+    _poolDeadlyWanderings,
     _poolDeathbonnetSprout,
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,

@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAangsJourney from "../pool/aangs-journey.js";
 import _poolAbomination from "../pool/abomination.js";
+import _poolAcidSpewerDragon from "../pool/acid-spewer-dragon.js";
 import _poolAdrixAndNev from "../pool/adrix-and-nev.js";
 import _poolAdvancedHoverguard from "../pool/advanced-hoverguard.js";
 import _poolAerialManeuver from "../pool/aerial-maneuver.js";
@@ -173,6 +174,7 @@ import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
+import _poolElusiveSpellfist from "../pool/elusive-spellfist.js";
 import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
@@ -387,6 +389,7 @@ import _poolPlacidRottentail from "../pool/placid-rottentail.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
+import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
@@ -459,6 +462,7 @@ import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
+import _poolSilumgarMonument from "../pool/silumgar-monument.js";
 import _poolSilverflameSquire from "../pool/silverflame-squire.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
@@ -541,6 +545,7 @@ import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
 import _poolTwinBlades from "../pool/twin-blades.js";
+import _poolTwinBolt from "../pool/twin-bolt.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
@@ -607,6 +612,7 @@ const shard: CardShard = {
   pool: [
     _poolAangsJourney,
     _poolAbomination,
+    _poolAcidSpewerDragon,
     _poolAdrixAndNev,
     _poolAdvancedHoverguard,
     _poolAerialManeuver,
@@ -775,6 +781,7 @@ const shard: CardShard = {
     _poolEidolonOfBlossoms,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
+    _poolElusiveSpellfist,
     _poolElusiveTormentor,
     _poolEnatuGolem,
     _poolEnshroudingMist,
@@ -989,6 +996,7 @@ const shard: CardShard = {
     _poolPlasmaElemental,
     _poolPlatypusBear,
     _poolPlunderingPredator,
+    _poolPressTheAdvantage,
     _poolPrimaryResearch,
     _poolPrimordialSage,
     _poolPrizedGriffin,
@@ -1061,6 +1069,7 @@ const shard: CardShard = {
     _poolSickleRipper,
     _poolSilhanaWayfinder,
     _poolSilkWebWeaver,
+    _poolSilumgarMonument,
     _poolSilverflameSquire,
     _poolSimianSimulacrum,
     _poolSinisterStarfish,
@@ -1143,6 +1152,7 @@ const shard: CardShard = {
     _poolTropicalIsland,
     _poolTrystanCallousCultivator,
     _poolTwinBlades,
+    _poolTwinBolt,
     _poolTyLeeArtfulAcrobat,
     _poolUmbralCollarZealot,
     _poolUncagedFury,

@@ -150,6 +150,7 @@ import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
 import _poolDoomedArtisan from "../pool/doomed-artisan.js";
+import _poolDragonWhisperer from "../pool/dragon-whisperer.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
 import _poolDreadSummons from "../pool/dread-summons.js";
 import _poolDreamCoat from "../pool/dream-coat.js";
@@ -412,6 +413,7 @@ import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
+import _poolRadiantPurge from "../pool/radiant-purge.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
 import _poolRaffCapashenShipsMage from "../pool/raff-capashen-ships-mage.js";
 import _poolRaffinesSilencer from "../pool/raffines-silencer.js";
@@ -791,6 +793,7 @@ const shard: CardShard = {
     _poolDivineTransformation,
     _poolDivineVerdict,
     _poolDoomedArtisan,
+    _poolDragonWhisperer,
     _poolDranaLiberatorOfMalakir,
     _poolDreadSummons,
     _poolDreamCoat,
@@ -1053,6 +1056,7 @@ const shard: CardShard = {
     _poolQuarrel,
     _poolQuilledSlagwurm,
     _poolRadiantGrove,
+    _poolRadiantPurge,
     _poolRadiantSummit,
     _poolRaffCapashenShipsMage,
     _poolRaffinesSilencer,

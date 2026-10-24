@@ -193,6 +193,7 @@ import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
 import _poolFlatline from "../pool/flatline.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
+import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
 import _poolFoundryScreecher from "../pool/foundry-screecher.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolFry from "../pool/fry.js";
@@ -343,6 +344,7 @@ import _poolObliteratingBolt from "../pool/obliterating-bolt.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
+import _poolOjutaisCommand from "../pool/ojutais-command.js";
 import _poolOkibaReckonerRaid from "../pool/okiba-reckoner-raid.js";
 import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
@@ -474,6 +476,7 @@ import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
+import _poolStormwingDragon from "../pool/stormwing-dragon.js";
 import _poolSubjugatorAngel from "../pool/subjugator-angel.js";
 import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
@@ -802,6 +805,7 @@ const shard: CardShard = {
     _poolFlameSweep,
     _poolFlatline,
     _poolFootSoldiers,
+    _poolFoulTongueShriek,
     _poolFoundryScreecher,
     _poolFrontierGuide,
     _poolFry,
@@ -952,6 +956,7 @@ const shard: CardShard = {
     _poolObscuraStorefront,
     _poolOgreSlumlord,
     _poolOgreWarrior,
+    _poolOjutaisCommand,
     _poolOkibaReckonerRaid,
     _poolOltecArchaeologists,
     _poolOnTheJob,
@@ -1083,6 +1088,7 @@ const shard: CardShard = {
     _poolStormFleetSpy,
     _poolStormQueenOfWakanda,
     _poolStormshriekFeral,
+    _poolStormwingDragon,
     _poolSubjugatorAngel,
     _poolSulfuricVortex,
     _poolSunbladeAngel,

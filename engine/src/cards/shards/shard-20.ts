@@ -278,6 +278,7 @@ import _poolHymnOfRebirth from "../pool/hymn-of-rebirth.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
 import _poolIcatianTown from "../pool/icatian-town.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
+import _poolIllusoryGains from "../pool/illusory-gains.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
@@ -311,6 +312,7 @@ import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
+import _poolLearnFromThePast from "../pool/learn-from-the-past.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
@@ -356,6 +358,7 @@ import _poolMooglesValor from "../pool/moogles-valor.js";
 import _poolMorningApparition from "../pool/morning-apparition.js";
 import _poolMoroii from "../pool/moroii.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
+import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
 import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
@@ -491,6 +494,7 @@ import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
 import _poolSidequestCardCollection from "../pool/sidequest-card-collection.js";
 import _poolSiegeStriker from "../pool/siege-striker.js";
 import _poolSiegfriedFamedSwordsman from "../pool/siegfried-famed-swordsman.js";
+import _poolSightBeyondSight from "../pool/sight-beyond-sight.js";
 import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
 import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js";
@@ -952,6 +956,7 @@ const shard: CardShard = {
     _poolHypnoticSprite,
     _poolIcatianTown,
     _poolIllusionistsBracers,
+    _poolIllusoryGains,
     _poolImmersturmSkullcairn,
     _poolImpulse,
     _poolIncorrigibleYouths,
@@ -985,6 +990,7 @@ const shard: CardShard = {
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
     _poolLavakinBrawler,
+    _poolLearnFromThePast,
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,
@@ -1030,6 +1036,7 @@ const shard: CardShard = {
     _poolMorningApparition,
     _poolMoroii,
     _poolMoxJasper,
+    _poolMysticMeditation,
     _poolMysticSnake,
     _poolNantukoTracer,
     _poolNarfiBetrayerKing,
@@ -1165,6 +1172,7 @@ const shard: CardShard = {
     _poolSidequestCardCollection,
     _poolSiegeStriker,
     _poolSiegfriedFamedSwordsman,
+    _poolSightBeyondSight,
     _poolSigiledBehemoth,
     _poolSilenceTheEcho,
     _poolSilvarDevourerOfTheFree,

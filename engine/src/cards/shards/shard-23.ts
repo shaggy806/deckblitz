@@ -417,6 +417,7 @@ import _poolRedemptionChoir from "../pool/redemption-choir.js";
 import _poolRegalBloodlord from "../pool/regal-bloodlord.js";
 import _poolRegisaurAlpha from "../pool/regisaur-alpha.js";
 import _poolRelicBarrier from "../pool/relic-barrier.js";
+import _poolRendingVolley from "../pool/rending-volley.js";
 import _poolRenegadeTactics from "../pool/renegade-tactics.js";
 import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolReprisal from "../pool/reprisal.js";
@@ -511,6 +512,7 @@ import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
 import _poolSuperSpeed from "../pool/super-speed.js";
+import _poolSurgeOfRighteousness from "../pool/surge-of-righteousness.js";
 import _poolSurtlandFlinger from "../pool/surtland-flinger.js";
 import _poolSurtrFieryJotun from "../pool/surtr-fiery-jotun.js";
 import _poolSusanForeman from "../pool/susan-foreman.js";
@@ -615,6 +617,7 @@ import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZimoneInfiniteAnalyst from "../pool/zimone-infinite-analyst.js";
 import _poolZofConsumption from "../pool/zof-consumption.js";
+import _poolZurgoBellstriker from "../pool/zurgo-bellstriker.js";
 import _tokensAssemblyWorkerToken from "../tokens/assembly-worker-token.js";
 import _tokensBlueHorror from "../tokens/blue-horror.js";
 import _tokensBlueRedElementalToken44 from "../tokens/blue-red-elemental-token-4-4.js";
@@ -1040,6 +1043,7 @@ const shard: CardShard = {
     _poolRegalBloodlord,
     _poolRegisaurAlpha,
     _poolRelicBarrier,
+    _poolRendingVolley,
     _poolRenegadeTactics,
     _poolRenegadeTroops,
     _poolReprisal,
@@ -1134,6 +1138,7 @@ const shard: CardShard = {
     _poolSunTitan,
     _poolSundialDawnTyrant,
     _poolSuperSpeed,
+    _poolSurgeOfRighteousness,
     _poolSurtlandFlinger,
     _poolSurtrFieryJotun,
     _poolSusanForeman,
@@ -1238,6 +1243,7 @@ const shard: CardShard = {
     _poolZeroPointBallad,
     _poolZimoneInfiniteAnalyst,
     _poolZofConsumption,
+    _poolZurgoBellstriker,
   ],
   tokens: [
     _tokensAssemblyWorkerToken,

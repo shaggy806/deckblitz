@@ -352,6 +352,8 @@ import _poolNoxiousRevival from "../pool/noxious-revival.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
 import _poolOgreHeadHelm from "../pool/ogre-head-helm.js";
+import _poolOjutaisBreath from "../pool/ojutais-breath.js";
+import _poolOjutaisSummons from "../pool/ojutais-summons.js";
 import _poolOldHobAlleycatBlues from "../pool/old-hob-alleycat-blues.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
@@ -487,6 +489,7 @@ import _poolSymbioticBeast from "../pool/symbiotic-beast.js";
 import _poolTangleTumbler from "../pool/tangle-tumbler.js";
 import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
+import _poolTapestryOfTheAges from "../pool/tapestry-of-the-ages.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTeferisWavecaster from "../pool/teferis-wavecaster.js";
@@ -953,6 +956,8 @@ const shard: CardShard = {
     _poolNymrisOonasTrickster,
     _poolObeliskOfGrixis,
     _poolOgreHeadHelm,
+    _poolOjutaisBreath,
+    _poolOjutaisSummons,
     _poolOldHobAlleycatBlues,
     _poolOpposition,
     _poolOrazcaRaptor,
@@ -1088,6 +1093,7 @@ const shard: CardShard = {
     _poolTangleTumbler,
     _poolTanglebloom,
     _poolTanglepoolBridge,
+    _poolTapestryOfTheAges,
     _poolTarkirDuneshaper,
     _poolTeamTactics,
     _poolTeferisWavecaster,

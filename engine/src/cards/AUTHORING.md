@@ -4729,9 +4729,8 @@ Delete an entry in the same commit as the feature that retires it.
 - **Conditional statics / intervening-ifs** are limited to the
   `StaticCondition` kinds the union lists (`controls` / `opponent-controls` /
   `your-turn` / `threshold` / `delirium` / `metalcraft` / … — read the type).
-  Other "as long as …" / "if …" clauses aren't expressible; Coven (three or
-  more creatures with different powers) and Raid (you attacked this turn) are
-  the two the EDH backlog currently wants.
+  Other "as long as …" / "if …" clauses aren't expressible. (Coven and raid
+  are built: `coven` and `turn-stat` `attacked`.)
 - **Replacement ordering** — if two replacements would apply to one event
   there's no general `choose-replacement-order`. Feather, the Redeemed's
   exile beside another replacement that would exile the same resolving spell
