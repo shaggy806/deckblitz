@@ -32,6 +32,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         prevent: true,
+        perEvent: true,
         to: "self",
         then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" },
       },

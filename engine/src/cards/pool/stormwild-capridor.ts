@@ -20,6 +20,7 @@ export default defineCard({
         event: "would-deal-damage",
         combat: false,
         prevent: true,
+        perEvent: true,
         to: "self",
         then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" },
       },

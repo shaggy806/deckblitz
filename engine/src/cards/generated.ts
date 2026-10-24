@@ -10834,6 +10834,7 @@ import _poolOathOfEorl from "./pool/oath-of-eorl.js";
 import _poolOathOfGideon from "./pool/oath-of-gideon.js";
 import _poolOathOfNissa from "./pool/oath-of-nissa.js";
 import _poolOathOfTheGreyHost from "./pool/oath-of-the-grey-host.js";
+import _poolOathswornKnight from "./pool/oathsworn-knight.js";
 import _poolOathswornVampire from "./pool/oathsworn-vampire.js";
 import _poolObNixilisReignited from "./pool/ob-nixilis-reignited.js";
 import _poolObNixilisTheAscended from "./pool/ob-nixilis-the-ascended.js";
@@ -29864,6 +29865,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOathOfGideon,
   _poolOathOfNissa,
   _poolOathOfTheGreyHost,
+  _poolOathswornKnight,
   _poolOathswornVampire,
   _poolObNixilisReignited,
   _poolObNixilisTheAscended,
@@ -48907,6 +48909,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oath-of-gideon": _poolOathOfGideon,
   "pool/oath-of-nissa": _poolOathOfNissa,
   "pool/oath-of-the-grey-host": _poolOathOfTheGreyHost,
+  "pool/oathsworn-knight": _poolOathswornKnight,
   "pool/oathsworn-vampire": _poolOathswornVampire,
   "pool/ob-nixilis-reignited": _poolObNixilisReignited,
   "pool/ob-nixilis-the-ascended": _poolObNixilisTheAscended,

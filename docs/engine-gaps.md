@@ -156,15 +156,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   things at once would draw or gain life twice. Check each pool card on `deals-damage` without a
   `to` clause (raised by batch 109's review of Vrondiss).
 
-- **A "prevent that damage and remove a counter" replacement runs once per source.** A
-  `would-deal-damage` replacement with `prevent` and a `then` (Unbreathing Horde's "remove a +1/+1
-  counter from it") is applied per damage source by `Game.dealDamage`, so combat damage from two
-  blockers at once removes two counters — and with one counter left, the second blocker's damage
-  isn't prevented. Combat damage is dealt simultaneously (rule 510.2), one event: Oathsworn Knight's ruling
-  says all of it is prevented and one counter removed. Affects Unbreathing Horde (in the pool);
-  blocks Oathsworn Knight (`replacement:prevent-once-per-damage-event`). Polukranos, Unchained's
-  "remove that many" sums the same per source, so it's right.
-
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

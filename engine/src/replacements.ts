@@ -408,6 +408,14 @@ export interface DamageMultiplierReplacement {
   readonly combat?: boolean;
   readonly prevent?: boolean;
   readonly then?: EffectSpec;
+  /** With `prevent` and `then`: "if damage **would be dealt to** this
+   * creature" — the replacement applies to a simultaneous damage event once
+   * (rule 614.5), so in combat its `then` happens once, after all of it, with
+   * "that many" the total (Oathsworn Knight's ruling: two blockers, one
+   * counter). Without it, "if a creature **would deal** damage to this
+   * creature" applies per source (Ironscale Hydra's ruling: a counter per
+   * creature). */
+  readonly perEvent?: true;
   readonly source?: CardFilter;
   /** Only damage **this permanent** would deal — Wolverine, Best There
    * Is's "double all damage Wolverine would deal". */
