@@ -3540,7 +3540,10 @@ export class Game {
    * the counts of targets it can be cast with and, for each, the least and
    * most X that count allows. "Up to X" (Pest Infestation) needs X at least
    * the count; "X target …" (Curse of the Swine) exactly it. `payableX` is
-   * the most X the caster can pay. The group is the spell's only slot.
+   * the most X the caster can pay. The counts are of the group's members
+   * alone: a slot before it (Spinning Wheel Kick's "target creature you
+   * control") is no part of X, and may name one of them too (rule 115.3), so
+   * the range reads from the group's slot (`TargetCountRange.from`).
    */
   private xGroupOffer(
     specs: readonly TargetSpec[],
@@ -3576,7 +3579,12 @@ export class Game {
     const lo = open[0];
     const hi = open[open.length - 1];
     return {
-      targetCount: { min: lo, max: hi, ...(Object.keys(copies).length > 0 ? { copies } : {}) },
+      targetCount: {
+        min: lo,
+        max: hi,
+        ...(Object.keys(copies).length > 0 ? { copies } : {}),
+        ...(group > 0 ? { from: group } : {}),
+      },
       minXByTargetCount: minX.slice(lo, hi + 1),
       maxXByTargetCount: maxX.slice(lo, hi + 1),
     };

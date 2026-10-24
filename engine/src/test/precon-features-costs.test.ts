@@ -9,18 +9,24 @@
  *   (Exploration Broodship);
  * - a spell's X read by its targets: a target count tied to X (Curse of the
  *   Swine, Pest Infestation) and a target filter reading X (Stolen by the
- *   Fae) — rule 601.2b–c, X is announced before targets are chosen.
+ *   Fae) — rule 601.2b–c, X is announced before targets are chosen;
+ *   and a group tied to X after another slot, its range counting the
+ *   group's members alone (Spinning Wheel Kick — `TargetCountRange.from`).
  */
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
+import { candidateActions } from "../bot/candidates.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { createDefaultRegistry } from "../cards/registry.js";
+import type { RandomSource } from "../decisions/contract.js";
+import { randomCast } from "../decisions/shared/random-cast.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 import type { TargetRef } from "../target.js";
+import { fitTargetCount, maxXForTargets, minXForTargets, targetCountAtX } from "../target-count.js";
 
 type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
 
@@ -425,5 +431,78 @@ describe("Stolen by the Fae — a target filter reading X", () => {
     expect(() =>
       game.dispatch({ type: "cast-spell", player: A, card, targets: [obj(bears)], xValue: 3 }),
     ).toThrow(/target/);
+  });
+});
+
+describe("Spinning Wheel Kick — X targets after another slot", () => {
+  const board = () => {
+    const game = setUp({ hand: ["Spinning Wheel Kick"] });
+    lands(game, "Forest", 6);
+    const giant = spawn(game, "Hill Giant");
+    const bears = spawn(game, "Grizzly Bears", B);
+    const ogre = spawn(game, "Gray Ogre", B);
+    const card = inHand(game, "Spinning Wheel Kick");
+    const [offer] = castOffers(game, card);
+    if (offer === undefined) throw new Error("no cast offer");
+    return { game, card, offer, giant, bears, ogre };
+  };
+
+  it("offers counts of the group's members, read from its slot", () => {
+    const { offer } = board();
+    expect(offer.targetCount).toEqual({ min: 0, max: 2, from: 1 });
+    expect(offer.xCost).toEqual({ maxX: 2, maxXByTargetCount: [0, 1, 2], minXByTargetCount: [0, 1, 2] });
+  });
+
+  it("is cast through the offer with X=1: the creature you control isn't one of the X", () => {
+    const { game, card, offer, giant, bears, ogre } = board();
+    const range = targetCountAtX(offer.targetCount!, offer.xCost, 1)!;
+    // The creature alone, grown to one member; X read off the targets.
+    const targets = fitTargetCount([obj(giant)], offer.targetOptions, offer.targetSpecs, range)!;
+    expect(targets).toHaveLength(2);
+    expect(targets[0]).toEqual(obj(giant));
+    expect(minXForTargets(offer.xCost!, offer.targetCount, targets)).toBe(1);
+    expect(maxXForTargets(offer.xCost!, offer.targetCount, targets)).toBe(1);
+    game.dispatch({ type: "cast-spell", player: A, card, targets: [obj(giant), obj(bears)], xValue: 1 });
+    game.advanceUntil(quiet);
+    expect(game.state.objects[bears].zone).toBe("graveyard");
+    expect(game.state.objects[ogre].zone).toBe("battlefield");
+  });
+
+  it("is cast through the offer with X=2, the creature also one of the X (rule 115.3)", () => {
+    const { game, card, offer, giant, bears } = board();
+    const targets = [obj(giant), obj(bears), obj(giant)];
+    expect(minXForTargets(offer.xCost!, offer.targetCount, targets)).toBe(2);
+    expect(maxXForTargets(offer.xCost!, offer.targetCount, targets)).toBe(2);
+    game.dispatch({ type: "cast-spell", player: A, card, targets, xValue: 2 });
+    game.advanceUntil(quiet);
+    expect(game.state.objects[bears].zone).toBe("graveyard");
+    expect(game.state.objects[giant].zone).toBe("graveyard");
+  });
+
+  it("a random cast and the bot's candidates are never refused", () => {
+    const { game, offer } = board();
+    let seed = 7;
+    const random = () => {
+      seed = (seed * 1103515245 + 12345) % 2147483648;
+      return seed / 2147483648;
+    };
+    const pickIndex = (length: number) => Math.min(length - 1, Math.floor(random() * length));
+    const rng: RandomSource = {
+      random,
+      pickIndex,
+      // The creature, then a random subset of the group.
+      pickTargets: (options) => [
+        options[0][pickIndex(options[0].length)],
+        ...options[1].filter(() => random() < 0.5),
+      ],
+    };
+    for (let i = 0; i < 40; i += 1) {
+      const cast = randomCast(offer, A, rng);
+      expect(cast).not.toBeNull();
+      expect(game.canDispatch(cast!)).toBeNull();
+    }
+    const candidates = candidateActions(offer, A);
+    expect(candidates.length).toBeGreaterThan(0);
+    for (const cast of candidates) expect(game.canDispatch(cast)).toBeNull();
   });
 });

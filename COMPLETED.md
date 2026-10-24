@@ -449,6 +449,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **An "X targets" cast offer miscounts a spell's other target slots** (601.2b–c, 115.3;
+  2026-10-23): `Game.xGroupOffer`'s range counts the group's members alone, from its slot
+  (`TargetCountRange.from`, read through `rangeTargetCount` by `minXForTargets`/`maxXForTargets`/
+  `fitTargetCount`, the bots and the client's picker), so Spinning Wheel Kick's creature no longer
+  reads as one of the X and a random or bot cast isn't refused.
 - **Up to 500 tokens of one stack can block** (509.1a; 2026-10-22): a blocking stack wakes up to
   `Game.MAX_BLOCKERS_WOKEN` (500) tokens rather than `MAX_MATERIALIZED`'s 100, so a stack can block an
   attacking one two or more to a token (200 Soldiers on 100 Zombies). Still a bound for a whole stack

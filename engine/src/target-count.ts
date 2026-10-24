@@ -17,6 +17,12 @@ export interface TargetCountRange {
    * not one: each slot is given its own token as the spell is cast
    * (`Game.lockInTargets`). */
   readonly copies?: TargetCopies;
+  /** The slot the counted targets start at — an X-tied "any number of
+   * target …" group's (`Game.xGroupOffer`), whose range is how many members
+   * it has: a slot before it (Spinning Wheel Kick's "target creature you
+   * control") is outside the count, even naming one of the members (rule
+   * 115.3). Absent: every target counts. See {@link rangeTargetCount}. */
+  readonly from?: number;
 }
 
 /** Token-stack sizes by object id, for the stacks among a spell's target
@@ -53,6 +59,15 @@ export function distinctTargetCount(
   let count = 0;
   for (const { ref, n } of uses.values()) count += Math.min(n, copiesOf(ref, copies));
   return count;
+}
+
+/** The targets `range` counts, distinct as `distinctTargetCount` counts
+ * them: those from its `from` slot on, or all of them. */
+export function rangeTargetCount(
+  targets: readonly (TargetRef | null | undefined)[] | undefined,
+  range: TargetCountRange,
+): number {
+  return distinctTargetCount(range.from === undefined ? targets : targets?.slice(range.from), range.copies);
 }
 
 /**
@@ -127,7 +142,8 @@ export function targetCountBounds(
  * slots, then aim a slot at a target another slot already has. Too few: fill
  * skipped optional slots, then move a doubled-up slot onto a fresh target.
  * Each change is kept only if it moves the count the right way (counted as
- * the engine counts it, token stacks included — `range.copies`). Drivers that
+ * the engine counts it, token stacks included — `range.copies` — and from
+ * `range.from` on). Drivers that
  * pick targets without reading costs (the fuzzer, the bots) run their choice
  * through this before echoing a `cast-spell` with a `targetCount`. An "any
  * number of target …" group (always last) is trimmed from its end or grown
@@ -140,7 +156,7 @@ export function fitTargetCount(
   range: TargetCountRange,
 ): (TargetRef | null)[] | null {
   const out = [...chosen];
-  const count = () => distinctTargetCount(out, range.copies);
+  const count = () => rangeTargetCount(out, range);
   const group = anyNumberSlot(specs);
   if (group >= 0) {
     while (count() > range.max && out.length > group) out.pop();
@@ -152,6 +168,8 @@ export function fitTargetCount(
     }
     const n = count();
     if (n >= range.min && n <= range.max) return out;
+    // A count of the group's members alone: the slots before it can't move it.
+    if (range.from !== undefined) return null;
     // Still outside: the slots before the group, as below.
     const head = fitTargetCount(out.slice(0, group), options.slice(0, group), specs.slice(0, group), {
       ...range,
@@ -216,7 +234,7 @@ export function maxXForTargets(
   const max =
     byCount === undefined || range === undefined
       ? xCost.maxX
-      : (byCount[distinctTargetCount(targets, range.copies) - range.min] ?? 0);
+      : (byCount[rangeTargetCount(targets, range) - range.min] ?? 0);
   const reducing = xCost.reducingTargets;
   if (xCost.maxXUnreduced === undefined || reducing === undefined) return max;
   const earns = targets.some((t) => t?.kind === "object" && reducing.includes(t.object));
@@ -233,7 +251,7 @@ export function minXForTargets(
 ): number {
   const byCount = xCost.minXByTargetCount;
   if (byCount === undefined || range === undefined) return xCost.minX ?? 0;
-  return byCount[distinctTargetCount(targets, range.copies) - range.min] ?? 0;
+  return byCount[rangeTargetCount(targets, range) - range.min] ?? 0;
 }
 
 /** The part of `range` still payable once X is `x`: the target counts whose
