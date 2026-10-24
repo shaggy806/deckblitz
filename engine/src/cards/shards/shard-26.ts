@@ -417,6 +417,7 @@ import _poolSaffiEriksdotter from "../pool/saffi-eriksdotter.js";
 import _poolSageOfAncientLore from "../pool/sage-of-ancient-lore.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSandAugury from "../pool/sand-augury.js";
+import _poolSandsteppeScavenger from "../pool/sandsteppe-scavenger.js";
 import _poolSanguineGlorifier from "../pool/sanguine-glorifier.js";
 import _poolSaplingOfColfenor from "../pool/sapling-of-colfenor.js";
 import _poolSapphireDragon from "../pool/sapphire-dragon.js";
@@ -1026,6 +1027,7 @@ const shard: CardShard = {
     _poolSageOfAncientLore,
     _poolSaltfieldRecluse,
     _poolSandAugury,
+    _poolSandsteppeScavenger,
     _poolSanguineGlorifier,
     _poolSaplingOfColfenor,
     _poolSapphireDragon,

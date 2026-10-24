@@ -408,7 +408,9 @@
   "condition:source-monstrous",
   "condition:werewolf-transform-spells-last-turn",
   "effect:damage-to-trigger-object",
-  "keyword:renown"
+  "keyword:renown",
+  "keyword:dash",
+  "keyword:bolster"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -171,6 +171,7 @@ import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
 import _poolEmergentGrowth from "../pool/emergent-growth.js";
 import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
 import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
+import _poolEnduringVictory from "../pool/enduring-victory.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
@@ -413,6 +414,7 @@ import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
+import _poolRecklessImp from "../pool/reckless-imp.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
 import _poolRedcapGutterDweller from "../pool/redcap-gutter-dweller.js";
 import _poolRefereeSquad from "../pool/referee-squad.js";
@@ -797,6 +799,7 @@ const shard: CardShard = {
     _poolEmergentGrowth,
     _poolEmptyTheWarrens,
     _poolEndlessRanksOfHydra,
+    _poolEnduringVictory,
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
     _poolEscapeFromOrthanc,
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolReason,
     _poolRebelliousStrike,
     _poolRecklessBarbarian,
+    _poolRecklessImp,
     _poolRedRoomRecruit,
     _poolRedcapGutterDweller,
     _poolRefereeSquad,

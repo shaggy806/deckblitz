@@ -272,7 +272,7 @@ there and move this line to `COMPLETED.md`.
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.
-- **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
+- **Blitz, dash, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).

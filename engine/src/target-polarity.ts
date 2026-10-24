@@ -162,6 +162,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // Its `then` reads the beheld card or permanent as target 0.
   behold: none,
+  bolster: none,
   // Its `then` reads the card it picked as target 0.
   "choose-random-card": none,
   "empower-jace": none,

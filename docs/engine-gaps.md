@@ -54,12 +54,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   and the client's stack can pick only a spell. **Fix (outline):** offer each stack ability's
   source when it isn't on the battlefield, and let the client pick it by clicking that ability's
   stack entry. Circles of Protection, Reverse Damage, Healing Grace.
-- **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
+- **Blitz, dash, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
   those two zones, so a blitz card another permission lets you cast (an impulse exile, a
   graveyard grant, the top of a library) isn't offered its blitz cost there, though rule
-  702.152a allows it. Henzie's discount also moves only a cost's generic number, never an `{X}`
+  702.152a allows it; `Game.dashCostOf` the same (702.109a). Henzie's discount also moves only a cost's generic number, never an `{X}`
   (no blitz cost in the pool has one yet).
 - **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
   against the card in its pre-cast zone, so an ability a static grants a spell as it's cast

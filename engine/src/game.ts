@@ -1872,6 +1872,17 @@ export class Game {
               }),
             );
           }
+          // Dash (rule 702.109a) — from the hand, for its dash cost.
+          const dashCost = this.dashCostOf(card, def, player);
+          if (dashCost !== null) {
+            out.push(
+              ...this.castSpellActions(player, card, cardName, def, {
+                ...faceProp,
+                via: "dash",
+                costString: dashCost,
+              }),
+            );
+          }
           // Impending (rule 702.176a) — for its impending cost, an
           // alternative cost.
           if (def.impending !== null) {
@@ -2815,6 +2826,7 @@ export class Game {
     const warp =
       via === "warp" ||
       via === "blitz" ||
+      via === "dash" ||
       via === "impending" ||
       via === "freerunning" ||
       via === "web-slinging" ||
@@ -10410,6 +10422,8 @@ export class Game {
               ? this.warpCostOfCaster(cardId, def, caster)
               : via === "blitz"
               ? this.blitzCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
+              : via === "dash"
+              ? this.dashCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
               : via === "impending"
               ? (def.impending?.cost ?? null)
               : via === "freerunning"
@@ -10894,6 +10908,14 @@ export class Game {
       }
       if (this.blitzCostOf(cardId, def, player) === null) return `${def.name} does not have blitz`;
       if (overload || free || altCost) return `blitz is an alternative cost, and can't be combined with another`;
+    } else if (via === "dash") {
+      // Rule 702.109a — for its dash cost, from the hand or a commander from
+      // the command zone: an alternative cost (118.9a).
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (this.dashCostOf(cardId, def, player) === null) return `${def.name} does not have dash`;
+      if (overload || free || altCost) return `dash is an alternative cost, and can't be combined with another`;
     } else if (via === "impending") {
       // Rule 702.176a — for its impending cost, from the hand or a commander
       // from the command zone: an alternative cost (118.9a).
@@ -16459,6 +16481,7 @@ export class Game {
     const impendingWith = object.castVia === "impending" ? def.impending?.count : undefined;
     const warped = object.castVia === "warp";
     const blitzed = object.castVia === "blitz";
+    const dashed = object.castVia === "dash";
     // "That creature enters with two additional +1/+1 counters" (Yuna).
     const extraCounters = object.entersWithCounters;
     // Read before the move, which ends it with the stack.
@@ -16581,6 +16604,28 @@ export class Game {
         "next-end-step",
         { kind: "sacrifice-source" },
         "Blitz — sacrifice it at the beginning of the next end step.",
+        [],
+      );
+    }
+    // Dash (rule 702.109a): its dash cost was paid, so as long as it stays
+    // this permanent it has haste — a modifier, which a copy doesn't copy —
+    // and it returns to its owner's hand at the beginning of the next end
+    // step, by a delayed trigger that finds nothing once it has left.
+    if (dashed && this.state.objects[id]?.zone === "battlefield") {
+      this.state.objects[id].modifiers.push({
+        timestamp: this.state.timestampSeq,
+        power: 0,
+        toughness: 0,
+        keywords: ["haste"],
+        untilEndOfTurn: false,
+      });
+      invalidateComputedCache();
+      this.createDelayedTrigger(
+        id,
+        object.controller,
+        "next-end-step",
+        { kind: "return-to-hand", target: "source" },
+        "Dash — return it to its owner's hand at the beginning of the next end step.",
         [],
       );
     }
@@ -22235,6 +22280,7 @@ export class Game {
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except) =>
         this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true, except),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
+      bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
       canBehold: (spec) => this.canBehold(controller, spec),
       grantKeyword: (target, keyword, duration) =>
@@ -27856,6 +27902,41 @@ export class Game {
   }
 
   /**
+   * Bolster N (rule 701.39a): `player` chooses a creature they control with
+   * the least toughness, or tied for it, among creatures they control, and
+   * puts `amount` +1/+1 counters on it — chosen as the effect resolves, not
+   * targeted. Which of the tied creatures is the `choose-permanents`
+   * decision; with one to choose from (a token stack is one — its tokens are
+   * identical) it's that one, unasked. No creature, nothing.
+   */
+  private beginBolster(player: PlayerId, source: ObjectId, amount: number, x: number): void {
+    if (this.state.players[player]?.hasLost !== false || amount <= 0) return;
+    const creatures = this.battlefieldMatching(player, { type: "creature", controlledBy: "you" });
+    if (creatures.length === 0) return;
+    const toughness = new Map(creatures.map((id) => [id, this.characteristics(id).toughness]));
+    const least = Math.min(...toughness.values());
+    const eligible = creatures.filter((id) => toughness.get(id) === least);
+    const then: EffectSpec = { kind: "add-counter", target: 0, counter: "+1/+1", amount };
+    if (eligible.length === 1) {
+      const one = this.splitOneFromStack(eligible[0]);
+      applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x));
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-permanents",
+      player,
+      eligible,
+      min: 1,
+      max: 1,
+      prompt: `Bolster ${amount} — put ${amount === 1 ? "a +1/+1 counter" : `${amount} +1/+1 counters`} on a creature you control with the least toughness`,
+      then,
+      source,
+      x,
+      bolster: amount,
+    };
+  }
+
+  /**
    * What `player` could behold for `spec` (rule 701.4a): the cards in their
    * hand and the permanents they control that match its quality — each read
    * where it is, so a changeling card is a Dragon card (rule 702.73a works
@@ -28245,12 +28326,13 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
       return;
     }
-    const { then, source, x, priorityTo, costOf, blight } = awaiting;
+    const { then, source, x, priorityTo, costOf, blight, bolster } = awaiting;
     this.state.awaiting = null;
     if (costOf !== undefined) for (const id of chosen) this.recordReturnedAttacking(costOf, id);
     // A blight's creature is singled out of its stack before the counters
-    // go on, so its `then` reads the blighted one (rule 701.68c).
-    if (blight !== undefined) {
+    // go on, so its `then` reads the blighted one (rule 701.68c) — and a
+    // bolstered one, so only that token gets them (701.39a).
+    if (blight !== undefined || bolster !== undefined) {
       const id = chosen[0];
       if (id !== undefined && this.state.objects[id]?.zone === "battlefield") {
         const one = this.splitOneFromStack(id);
@@ -30712,6 +30794,19 @@ export class Game {
     if (discounts === 0) return cost;
     const casts = Object.values(this.state.players[player].commanderCastCounts).reduce((n, c) => n + c, 0);
     return reduceGenericInCost(cost, casts * discounts);
+  }
+
+  /**
+   * The dash cost `player` may cast `cardId` for (rule 702.109a): from their
+   * hand, or as a commander from the command zone (its tax still added).
+   * `null` when it has none, or isn't where it may be cast from that way.
+   */
+  private dashCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
+    if (def.dash === null || this.state.players[player] === undefined) return null;
+    if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+      return null;
+    }
+    return def.dash.cost;
   }
 
   private warpCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {

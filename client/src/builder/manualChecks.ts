@@ -8118,4 +8118,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Aragorn, Hornburg Hero', 'Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Screamreach Brawler: dashed in, it attacks at once and comes back to your hand',
+    board({ you: { bf: ['Mountain*3'], hand: ['Screamreach Brawler'] } }),
+  ),
+  preset(
+    'Ragavan, Nimble Pilferer: the command zone offers both ways to cast it',
+    board({ you: { cmd: ['Ragavan, Nimble Pilferer'], bf: ['Mountain*2'] } }),
+  ),
+  preset(
+    "Dromoka's Gift: bolster asks only between the creatures tied for least toughness",
+    board({ you: { bf: ['Grizzly Bears', 'Grizzly Bears', 'Craw Wurm', 'Forest*5'], hand: ["Dromoka's Gift"] } }),
+  ),
 ]

@@ -91,6 +91,10 @@ export type CastVia =
   | "warp"
   /** Blitz (rule 702.152a) — cast from the hand for its blitz cost. */
   | "blitz"
+  /** Dash (rule 702.109a) — cast from the hand (or a commander from the
+   * command zone) for its dash cost: haste, and back to its owner's hand at
+   * the next end step. */
+  | "dash"
   /** Impending (rule 702.176a) — cast from the hand (or a commander from
    * the command zone) for its impending cost, an alternative cost: the
    * permanent enters with N time counters and isn't a creature while it has
@@ -1563,6 +1567,9 @@ export type LegalAction =
       /** Set when it's which creature blights this many (rule 701.68a):
        * exactly one, and the counters go on it. */
       readonly blight?: number;
+      /** Set when it's which of the least-toughness creatures bolsters this
+       * many (rule 701.39a): exactly one, and the +1/+1 counters go on it. */
+      readonly bolster?: number;
     }
   | {
       readonly kind: "scry";

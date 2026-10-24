@@ -379,6 +379,7 @@ import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
+import _poolPinionFeast from "../pool/pinion-feast.js";
 import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
@@ -1008,6 +1009,7 @@ const shard: CardShard = {
     _poolPhyrexianVivisector,
     _poolPickYourPoison,
     _poolPillage,
+    _poolPinionFeast,
     _poolPiousInterdiction,
     _poolPiranhaFly,
     _poolPlanarAlly,

@@ -193,6 +193,7 @@ import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
+import _poolFlamerushRider from "../pool/flamerush-rider.js";
 import _poolFlashfires from "../pool/flashfires.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
@@ -452,6 +453,7 @@ import _poolSageOfShailasClaim from "../pool/sage-of-shailas-claim.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
 import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
 import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
+import _poolSandcrafterMage from "../pool/sandcrafter-mage.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
@@ -847,6 +849,7 @@ const shard: CardShard = {
     _poolFinCladeFugitives,
     _poolFinalReward,
     _poolFixerTechnoTerror,
+    _poolFlamerushRider,
     _poolFlashfires,
     _poolFleshbagMarauder,
     _poolFloodedStrand,
@@ -1106,6 +1109,7 @@ const shard: CardShard = {
     _poolSaheeliTheSunsBrilliance,
     _poolSallyPrideLionessLeader,
     _poolSamutTyrantSmasher,
+    _poolSandcrafterMage,
     _poolSandstoneOracle,
     _poolSanguineBond,
     _poolSarkhansDragonfire,

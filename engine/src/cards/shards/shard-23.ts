@@ -10,6 +10,7 @@ import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
 import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
+import _poolAnafenzaKinTreeSpirit from "../pool/anafenza-kin-tree-spirit.js";
 import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
@@ -496,6 +497,7 @@ import _poolSplitDecision from "../pool/split-decision.js";
 import _poolSplittingSlime from "../pool/splitting-slime.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
+import _poolSprintingWarbrute from "../pool/sprinting-warbrute.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
 import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
@@ -552,6 +554,7 @@ import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
+import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTunnel from "../pool/tunnel.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
@@ -630,6 +633,7 @@ const shard: CardShard = {
     _poolAjaniTheGreathearted,
     _poolAlienInvasion,
     _poolAmbitionsCost,
+    _poolAnafenzaKinTreeSpirit,
     _poolAnaxHardenedInTheForge,
     _poolAncestorsEmbrace,
     _poolAndurilFlameOfTheWest,
@@ -1116,6 +1120,7 @@ const shard: CardShard = {
     _poolSplittingSlime,
     _poolSporecapSpider,
     _poolSpringbloomDruid,
+    _poolSprintingWarbrute,
     _poolSteelDromedary,
     _poolStensiaUprising,
     _poolStitchersGraft,
@@ -1172,6 +1177,7 @@ const shard: CardShard = {
     _poolTraumaticCritique,
     _poolTravelingBotanist,
     _poolTreacherousBlessing,
+    _poolTreetopAmbusher,
     _poolTrokinHighGuard,
     _poolTunnel,
     _poolTwiceUponATime,

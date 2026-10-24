@@ -1300,6 +1300,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * Bolster N (rule 701.39a): the effect's controller chooses a creature
+       * they control with the least toughness, or tied for it, among
+       * creatures they control, and puts `amount` +1/+1 counters on it. The
+       * choice is made as this resolves — not a target — with the
+       * `choose-permanents` decision, asked only when creatures are tied
+       * (a token stack's tokens are one choice). Nothing, if they control no
+       * creature.
+       */
+      readonly kind: "bolster";
+      readonly amount: EffectAmount;
+    }
+  | {
+      /**
        * Blight N (rule 701.68a): each player in `who` (default `"you"`) puts
        * `amount` -1/-1 counters on a creature they control, which they choose
        * as this resolves — not a target — with the `choose-permanents`
@@ -6026,6 +6039,9 @@ export interface EffectApi {
    * creature chosen now, or asked for — then `then` with it as target 0.
    * Nothing, if they control no creature (rule 701.68b). */
   blight(player: PlayerId, amount: number, then?: EffectSpec): void;
+  /** See the `"bolster"` {@link EffectSpec}: the controller bolsters
+   * `amount` — the creature chosen now, or asked for. */
+  bolster(amount: number): void;
   /** See the `"behold"` {@link EffectSpec}: the controller beholds (rule
    * 701.4a) — the object chosen now, or asked for — then `then` with it as
    * target 0. Nothing, if nothing qualifies. */
@@ -8676,6 +8692,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "bolster":
+      // Rule 701.39a: by the effect's controller, chosen as it resolves.
+      ctx.bolster(amountValue(spec.amount, ctx));
+      return;
     case "behold":
       // Rule 701.4a: by the effect's controller, chosen as it resolves.
       ctx.behold(spec, spec.then);

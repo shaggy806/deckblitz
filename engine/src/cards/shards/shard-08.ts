@@ -152,6 +152,7 @@ import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
+import _poolDromokasGift from "../pool/dromokas-gift.js";
 import _poolDrownInSorrow from "../pool/drown-in-sorrow.js";
 import _poolDrudgeReavers from "../pool/drudge-reavers.js";
 import _poolDruidLyrist from "../pool/druid-lyrist.js";
@@ -808,6 +809,7 @@ const shard: CardShard = {
     _poolDowsingDevice,
     _poolDragonflySuit,
     _poolDrixFatemaker,
+    _poolDromokasGift,
     _poolDrownInSorrow,
     _poolDrudgeReavers,
     _poolDruidLyrist,

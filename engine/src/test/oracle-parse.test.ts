@@ -580,6 +580,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         "Emerge from artifact {5}{B}{B} (You may cast this spell by sacrificing an artifact and paying the emerge cost reduced by that artifact's mana value.)",
       ).emerge,
     ).toEqual({ cost: "{5}{B}{B}", from: { type: "artifact" } });
+    // Dash (rule 702.109a).
+    const dasher = face(
+      "Dash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)",
+    );
+    expect(dasher.dash).toEqual({ cost: "{2}{R}" });
+    expect(dasher.complete).toBe(true);
     // Impending N—[cost] (rule 702.176a): the cost, and its two abilities — not a
     // creature while it has a time counter, and the end step's removal.
     const overlord = face(
@@ -728,6 +734,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         ],
       },
     });
+  });
+
+  it("bolster (rule 701.39a): an effect", () => {
+    expect(parseSentence("Bolster 2.", ctx())).toEqual({ kind: "bolster", amount: 2 });
+    const scaleguard = face("When this creature enters, bolster 2.");
+    expect(scaleguard.triggered[0].effect).toEqual({ kind: "bolster", amount: 2 });
+    expect(scaleguard.complete).toBe(true);
   });
 
   it("blight (rule 701.68a): a cost, a choice of costs, an optional cost, an effect and 'you may blight N. If you do, …'", () => {

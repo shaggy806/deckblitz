@@ -43,6 +43,7 @@ import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
 import _poolAuraMutation from "../pool/aura-mutation.js";
 import _poolAvatarKyoshi from "../pool/avatar-kyoshi.js";
+import _poolAvenTactician from "../pool/aven-tactician.js";
 import _poolAwakeningHall from "../pool/awakening-hall.js";
 import _poolAyaraFirstOfLocthwain from "../pool/ayara-first-of-locthwain.js";
 import _poolBaithookAngler from "../pool/baithook-angler.js";
@@ -683,6 +684,7 @@ const shard: CardShard = {
     _poolAttackInTheBox,
     _poolAuraMutation,
     _poolAvatarKyoshi,
+    _poolAvenTactician,
     _poolAwakeningHall,
     _poolAyaraFirstOfLocthwain,
     _poolBaithookAngler,

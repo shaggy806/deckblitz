@@ -398,6 +398,7 @@ import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
 import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRadiantSolar from "../pool/radiant-solar.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
+import _poolRagavanNimblePilferer from "../pool/ragavan-nimble-pilferer.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakdosFirewheeler from "../pool/rakdos-firewheeler.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
@@ -1027,6 +1028,7 @@ const shard: CardShard = {
     _poolQuietusSpike,
     _poolRadiantSolar,
     _poolRaffinesTower,
+    _poolRagavanNimblePilferer,
     _poolRagingPoltergeist,
     _poolRakdosFirewheeler,
     _poolRakishHeir,

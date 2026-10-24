@@ -317,6 +317,7 @@ import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
 import _poolLieutenantsOfTheGuard from "../pool/lieutenants-of-the-guard.js";
 import _poolLifeGoesOn from "../pool/life-goes-on.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
+import _poolLightningBerserker from "../pool/lightning-berserker.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
@@ -660,6 +661,7 @@ import _poolZeriamGoldenWind from "../pool/zeriam-golden-wind.js";
 import _tokensAngelToken33 from "../tokens/angel-token-3-3.js";
 import _tokensAssassinTokenVraskaSwarmsEminence from "../tokens/assassin-token-vraska-swarms-eminence.js";
 import _tokensCursedRoleToken from "../tokens/cursed-role-token.js";
+import _tokensDjinnMonkToken from "../tokens/djinn-monk-token.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
@@ -988,6 +990,7 @@ const shard: CardShard = {
     _poolLieutenantsOfTheGuard,
     _poolLifeGoesOn,
     _poolLifesLegacy,
+    _poolLightningBerserker,
     _poolLightningSpear,
     _poolLochKorrigan,
     _poolLongGoodbye,
@@ -1333,6 +1336,7 @@ const shard: CardShard = {
     _tokensAngelToken33,
     _tokensAssassinTokenVraskaSwarmsEminence,
     _tokensCursedRoleToken,
+    _tokensDjinnMonkToken,
     _tokensFaerieToken,
     _tokensGiantWizardToken,
     _tokensIllusionTokenMinn,

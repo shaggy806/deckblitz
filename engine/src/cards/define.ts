@@ -2909,6 +2909,16 @@ export interface CardDefinition {
    */
   readonly blitz: { readonly cost: string } | null;
   /**
+   * Dash (rule 702.109a — Ragavan, Nimble Pilferer): "You may cast this card
+   * by paying [cost] rather than its mana cost"; a permanent cast that way has
+   * haste for as long as it stays this permanent, and is returned to its
+   * owner's hand at the beginning of the next end step (a delayed trigger). An
+   * alternative cost from the hand, or a commander from the command zone,
+   * offered as its own `cast-spell` (`via: "dash"`). A copy of it gets none
+   * of that. `null` for none.
+   */
+  readonly dash: { readonly cost: string } | null;
+  /**
    * Impending (rule 702.176a — Overlord of the Mistmoors: "Impending 4—
    * {2}{W}{W}"): "You may choose to pay [cost] rather than pay this spell's
    * mana cost" and "If you chose to pay this permanent's impending cost, it
@@ -3223,6 +3233,7 @@ const PRINTED_ABILITY: {
   plot: (def) => def.plot !== null,
   warp: (def) => def.warp !== null,
   blitz: (def) => def.blitz !== null,
+  dash: (def) => def.dash !== null,
   impending: (def) => def.impending !== null,
   freerunning: (def) => def.freerunning !== null,
   evoke: (def) => def.evoke !== null,
@@ -3423,6 +3434,7 @@ interface CardDraft {
   plot?: { readonly cost: string };
   warp?: { readonly cost: string };
   blitz?: { readonly cost: string };
+  dash?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
   freerunning?: { readonly cost: string };
   evoke?: NonNullable<CardDefinition["evoke"]>;
@@ -3582,6 +3594,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     plot: draft.plot ?? null,
     warp: draft.warp ?? null,
     blitz: draft.blitz ?? null,
+    dash: draft.dash ?? null,
     impending: draft.impending ?? null,
     freerunning: draft.freerunning ?? null,
     evoke: draft.evoke ?? null,

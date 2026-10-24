@@ -131,6 +131,7 @@ import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
 import _poolDredgingClaw from "../pool/dredging-claw.js";
+import _poolDromokaCaptain from "../pool/dromoka-captain.js";
 import _poolDub from "../pool/dub.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
 import _poolDuskFeaster from "../pool/dusk-feaster.js";
@@ -138,6 +139,7 @@ import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEarthshakerKhenra from "../pool/earthshaker-khenra.js";
+import _poolEchoesOfTheKinTree from "../pool/echoes-of-the-kin-tree.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEfreetFlamepainter from "../pool/efreet-flamepainter.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
@@ -283,6 +285,7 @@ import _poolKismet from "../pool/kismet.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
 import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
+import _poolKolaghanTheStormsFury from "../pool/kolaghan-the-storms-fury.js";
 import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
 import _poolKoseiPenitentWarlord from "../pool/kosei-penitent-warlord.js";
 import _poolKraulWarrior from "../pool/kraul-warrior.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolDragonTurtle,
     _poolDragonsEyeSentry,
     _poolDredgingClaw,
+    _poolDromokaCaptain,
     _poolDub,
     _poolDuelForDominance,
     _poolDuskFeaster,
@@ -801,6 +805,7 @@ const shard: CardShard = {
     _poolDwarvenArmorer,
     _poolDwarvenTrader,
     _poolEarthshakerKhenra,
+    _poolEchoesOfTheKinTree,
     _poolEdgarMoonlitSovereign,
     _poolEfreetFlamepainter,
     _poolEiganjoCastle,
@@ -946,6 +951,7 @@ const shard: CardShard = {
     _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
     _poolKnockoutManeuver,
+    _poolKolaghanTheStormsFury,
     _poolKorSkyClimber,
     _poolKoseiPenitentWarlord,
     _poolKraulWarrior,

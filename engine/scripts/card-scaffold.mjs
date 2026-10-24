@@ -211,6 +211,7 @@ function faceSource(face, ctx) {
     sneak: parsed.sneak,
     webSlinging: parsed.webSlinging,
     emerge: parsed.emerge,
+    dash: parsed.dash,
     impending: parsed.impending,
     freerunning: parsed.freerunning,
     kicker: parsed.kicker,

@@ -1683,6 +1683,8 @@ export function parseSentence(sentence, ctx) {
   if (re("you take the initiative").test(s)) return { kind: "take-initiative" };
   if (re("venture into the dungeon").test(s)) return { kind: "venture" };
   if (re("venture into undercity").test(s)) return { kind: "venture", into: "undercity" };
+  // Bolster N (rule 701.39a): on a creature of yours with the least toughness.
+  if ((m = re("bolster (\\d+)").exec(s))) return { kind: "bolster", amount: Number(m[1]) };
   // Blight N (rule 701.68a): you, or each opponent, each on a creature of theirs.
   if ((m = re("blight (\\d+)").exec(s))) return { kind: "blight", amount: Number(m[1]) };
   if ((m = re("each (opponent|player) blights (\\d+)").exec(s))) {
@@ -2054,6 +2056,8 @@ export function parseFace(face, ctx = {}) {
       out.emerge = { cost: m[2], ...(m[1] !== undefined ? { from: { type: m[1] } } : {}) };
       continue;
     }
+    // Dash [cost] (rule 702.109a): an alternative cost — haste, and back to its owner's hand at the next end step.
+    if ((m = /^Dash ((?:\{[^}]+\})+)$/.exec(line))) { out.dash = { cost: m[1] }; continue; }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.

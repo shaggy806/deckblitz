@@ -417,6 +417,7 @@ import _poolRowdyCrew from "../pool/rowdy-crew.js";
 import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
+import _poolSandsteppeWarRiders from "../pool/sandsteppe-war-riders.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
 import _poolSauroformHybrid from "../pool/sauroform-hybrid.js";
@@ -1017,6 +1018,7 @@ const shard: CardShard = {
     _poolRunOutOfTown,
     _poolRunawayBoulder,
     _poolRustwingFalcon,
+    _poolSandsteppeWarRiders,
     _poolSandstoneBridge,
     _poolSatoruUmezawa,
     _poolSauroformHybrid,

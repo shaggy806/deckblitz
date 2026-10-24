@@ -414,6 +414,7 @@ import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiety from "../pool/piety.js";
 import _poolPilferingHawk from "../pool/pilfering-hawk.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
+import _poolPitilessHorde from "../pool/pitiless-horde.js";
 import _poolPlasmaJockey from "../pool/plasma-jockey.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
@@ -1036,6 +1037,7 @@ const shard: CardShard = {
     _poolPiety,
     _poolPilferingHawk,
     _poolPiousWayfarer,
+    _poolPitilessHorde,
     _poolPlasmaJockey,
     _poolPlazaOfHeroes,
     _poolPollutedDead,

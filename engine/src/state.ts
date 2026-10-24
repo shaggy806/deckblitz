@@ -2746,6 +2746,10 @@ export type AwaitingDecision =
        * creatures, singled out of a token stack, and `then` puts the
        * counters on it. */
       readonly blight?: number;
+      /** Set when the choice is which of the least-toughness creatures
+       * bolsters this many (rule 701.39a — `Game.beginBolster`): exactly one,
+       * singled out of a token stack, and `then` puts the counters on it. */
+      readonly bolster?: number;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"

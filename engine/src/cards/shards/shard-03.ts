@@ -90,6 +90,7 @@ import _poolDeadlockTrap from "../pool/deadlock-trap.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
 import _poolDeathBegetsLife from "../pool/death-begets-life.js";
+import _poolDeathGreetersChampion from "../pool/death-greeters-champion.js";
 import _poolDeathbonnetHulk from "../pool/deathbonnet-hulk.js";
 import _poolDecimate from "../pool/decimate.js";
 import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
@@ -658,6 +659,7 @@ const shard: CardShard = {
     _poolDeadlyDerision,
     _poolDeadlyVisit,
     _poolDeathBegetsLife,
+    _poolDeathGreetersChampion,
     _poolDeathbonnetHulk,
     _poolDecimate,
     _poolDeeptreadMerrow,

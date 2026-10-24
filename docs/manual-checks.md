@@ -5294,3 +5294,17 @@ engine terms. A second thing to check is a second test.
 ### Aragorn, Hornburg Hero: the hit that makes a creature renowned doesn't double its counters
 - **Do:** Attack Bob with Grizzly Bears. Next turn, attack with it again.
 - **Expect:** The first hit gives the Bears one +1/+1 counter (renown), not two. The second hit doubles it to two counters.
+
+## Dash and bolster (2026-10-24)
+
+### Screamreach Brawler: dashed in, it attacks at once and comes back to your hand
+- **Do:** Click Screamreach Brawler and cast it the "(dash)" way. Attack Bob with it, then pass to your end step.
+- **Expect:** It can attack the turn it arrives. At the beginning of your end step it returns to your hand.
+
+### Ragavan, Nimble Pilferer: the command zone offers both ways to cast it
+- **Do:** Click Ragavan in your command zone.
+- **Expect:** A menu offers "Cast Ragavan, Nimble Pilferer" and "Cast Ragavan, Nimble Pilferer (dash)". The dash one taps both Mountains, and Ragavan can attack this turn.
+
+### Dromoka's Gift: bolster asks only between the creatures tied for least toughness
+- **Do:** Cast Dromoka's Gift.
+- **Expect:** You're asked to choose one of your two Grizzly Bears — Craw Wurm can't be picked. The one you choose gets four +1/+1 counters.
