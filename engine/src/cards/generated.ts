@@ -11745,6 +11745,7 @@ import _poolPriestOfTheCrossing from "./pool/priest-of-the-crossing.js";
 import _poolPriestOfTheHauntedEdge from "./pool/priest-of-the-haunted-edge.js";
 import _poolPriestOfTitania from "./pool/priest-of-titania.js";
 import _poolPriestOfUrabrask from "./pool/priest-of-urabrask.js";
+import _poolPriestOfYawgmoth from "./pool/priest-of-yawgmoth.js";
 import _poolPriestsOfNorn from "./pool/priests-of-norn.js";
 import _poolPrimalAmulet from "./pool/primal-amulet.js";
 import _poolPrimalBeyond from "./pool/primal-beyond.js";
@@ -30774,6 +30775,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPriestOfTheHauntedEdge,
   _poolPriestOfTitania,
   _poolPriestOfUrabrask,
+  _poolPriestOfYawgmoth,
   _poolPriestsOfNorn,
   _poolPrimalAmulet,
   _poolPrimalBeyond,
@@ -49816,6 +49818,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/priest-of-the-haunted-edge": _poolPriestOfTheHauntedEdge,
   "pool/priest-of-titania": _poolPriestOfTitania,
   "pool/priest-of-urabrask": _poolPriestOfUrabrask,
+  "pool/priest-of-yawgmoth": _poolPriestOfYawgmoth,
   "pool/priests-of-norn": _poolPriestsOfNorn,
   "pool/primal-amulet": _poolPrimalAmulet,
   "pool/primal-beyond": _poolPrimalBeyond,

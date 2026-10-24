@@ -401,7 +401,8 @@
   "keyword:improvise",
   "bug:blight-ignores-counter-prevention",
   "effect:search-library-and-graveyard-named-set",
-  "trigger:loyalty-counters-removed"
+  "trigger:loyalty-counters-removed",
+  "amount:mana-ability-sacrificed-object"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

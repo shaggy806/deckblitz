@@ -5270,3 +5270,7 @@ engine terms. A second thing to check is a second test.
 ### Chandra, Fire Artisan: two attackers at once make one trigger
 - **Do:** Attack Bob's Chandra, Fire Artisan with both Grizzly Bears. Don't block (as Bob, if asked).
 - **Expect:** Chandra drops from 5 to 1 loyalty and her ability triggers once, dealing 4 damage to you — not twice for 2.
+
+### Priest of Yawgmoth: mana equal to the sacrificed artifact's mana value
+- **Do:** Activate Priest of Yawgmoth, sacrificing Mind Stone.
+- **Expect:** Mind Stone goes to your graveyard and you get {B}{B} (its mana value is 2), enough to cast Night's Whisper.

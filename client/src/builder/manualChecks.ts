@@ -8088,4 +8088,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [{ name: 'Chandra, Fire Artisan', counters: { loyalty: 5 } }] },
     }),
   ),
+  preset(
+    "Priest of Yawgmoth: mana equal to the sacrificed artifact's mana value",
+    board({
+      you: { bf: ['Priest of Yawgmoth', 'Mind Stone', 'Darksteel Relic'], hand: ["Night's Whisper"] },
+    }),
+  ),
 ]

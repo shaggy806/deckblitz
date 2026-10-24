@@ -348,6 +348,7 @@ import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
 import _poolPopQuiz from "../pool/pop-quiz.js";
 import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrecognitivePerception from "../pool/precognitive-perception.js";
+import _poolPriestOfYawgmoth from "../pool/priest-of-yawgmoth.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
@@ -921,6 +922,7 @@ const shard: CardShard = {
     _poolPopQuiz,
     _poolPowerBoost,
     _poolPrecognitivePerception,
+    _poolPriestOfYawgmoth,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
     _poolPrismaticLens,

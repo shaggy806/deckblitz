@@ -14112,8 +14112,14 @@ export class Game {
     // cast: no commander tax, no cast trigger.
 
     if (isManaAbility(ability)) {
-      // Mana abilities resolve immediately and never use the stack.
-      const base = this.makeResolutionContext(sourceId, player, [], chosenX);
+      // Mana abilities resolve immediately and never use the stack (rule
+      // 605.3b) — handed what the cost sacrificed or tapped, read as it last
+      // existed (608.2h): Priest of Yawgmoth's "the sacrificed artifact's
+      // mana value".
+      const base = this.makeResolutionContext(sourceId, player, [], chosenX, 0, undefined, 1, 0, [], {
+        ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
+        ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
+      });
       // The colour(s) the activating player picked, one per unit whose type
       // was theirs to pick: an "any color" / "any combination of" ability's
       // own units first (see `standaloneManaChoices`), then one per
