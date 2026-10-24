@@ -352,6 +352,7 @@ import {
   isOptionalSpec,
   normalizeTargets,
   otherThan,
+  renumberOtherSlots,
   sameTargetRef,
   targetsFillable,
 } from "./target.js";
@@ -25726,15 +25727,27 @@ export class Game {
       // than the ones before it" relation is checked across the answer.
       const inGroup = group >= 0 && i >= group;
       const member = inGroup && typeof spec === "object" && spec.kind === "other" ? spec.of : spec;
+      // Another than a slot filled automatically, which isn't offered: never
+      // that slot's target.
+      const than = otherThan(spec);
+      const fixed = (than === undefined ? [] : otherThanSlots(than))
+        .filter((slot) => auto.has(slot))
+        .flatMap((slot) => (targets[slot] === undefined ? [] : [targets[slot]]));
       const legal = legalTargets(this.state, this.registry, member, object.controller, source).filter(
-        (t) => (t.kind !== "object" || t.object !== id) && !sameTargetRef(t, target),
+        (t) =>
+          (t.kind !== "object" || t.object !== id) &&
+          !sameTargetRef(t, target) &&
+          !fixed.some((f) => sameTargetRef(t, f)),
       );
       slots.push(i);
       slotSpecs.push(spec);
       current.push(target);
       others.push(legal);
     });
-    return { slots, specs: slotSpecs, current, others };
+    // The offered slots are numbered afresh, so each "other than slot n"
+    // follows its slot there (a skipped optional slot shifts the rest).
+    const kept = new Map(slots.map((slot, k) => [slot, k] as const));
+    return { slots, specs: slotSpecs.map((spec) => renumberOtherSlots(spec, kept)), current, others };
   }
 
   /**

@@ -470,6 +470,23 @@ export function otherThanSlots(than: OtherThan): readonly number[] {
 }
 
 /**
+ * `spec` with its "other than slot n" relation renumbered through `kept`
+ * (old slot → new) — for a choice offered over only some of a spell's slots,
+ * a copy's new targets (rule 707.10c). A slot left out isn't offered, so the
+ * relation to it goes; with none left, the plain spec it wraps.
+ */
+export function renumberOtherSlots(spec: TargetSpec, kept: ReadonlyMap<number, number>): TargetSpec {
+  if (typeof spec !== "object") return spec;
+  if (spec.kind === "optional") return { ...spec, of: renumberOtherSlots(spec.of, kept) };
+  if (spec.kind !== "other" || spec.than === undefined || typeof spec.than !== "object") return spec;
+  const slots = otherThanSlots(spec.than).flatMap((slot) => {
+    const to = kept.get(slot);
+    return to === undefined ? [] : [to];
+  });
+  return slots.length === 0 ? spec.of : { ...spec, than: { slots } };
+}
+
+/**
  * Targets as the engine carries them internally, once a dispatched action has
  * been normalized: a **hole** (`undefined`) where an optional slot was
  * skipped. `undefined` rather than `null` on purpose — every effect already
