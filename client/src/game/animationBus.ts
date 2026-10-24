@@ -86,4 +86,24 @@ export class AnimationBus {
   measureFlight(cue: AnimationCue): number {
     return this.measure?.(cue) ?? cue.flightMs ?? 0
   }
+
+  /** The cards in the air that land somewhere (on a tile, in the stack):
+   * `AnimationLayer` adds each flight as it starts it, and `usePlayback`
+   * ends a half only once they're down (`landingsDone`). A flight starts a
+   * frame or more after it's asked to, so its timer alone runs out early. */
+  private readonly landings = new Set<Animation>()
+
+  addLanding(flight: Animation): void {
+    this.landings.add(flight)
+    const drop = (): void => {
+      this.landings.delete(flight)
+    }
+    flight.finished.then(drop, drop)
+  }
+
+  /** Settles once every flight added so far is down (or was cancelled). */
+  landingsDone(): Promise<void> {
+    const down = (): void => {}
+    return Promise.all([...this.landings].map((f) => f.finished.then(down, down))).then(down)
+  }
 }

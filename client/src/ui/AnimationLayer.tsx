@@ -981,18 +981,18 @@ function pinTileTokens(to: HTMLElement, tile: HTMLElement): void {
  * the card fades where it hovers instead. The flight takes `duration`, what
  * `measureFlight` made of the distance.
  */
-function putDownOnTile(object: ObjectId, isToken: boolean, delay: number, duration: number): void {
+function putDownOnTile(object: ObjectId, isToken: boolean, delay: number, duration: number): Animation | null {
   const held = takeHeld(object)
   if (!held) {
     runEnter(object, isToken, delay)
-    return
+    return null
   }
   const wrap = tileTargetOf(object)
   const tile = wrap?.querySelector<HTMLElement>('.mini-tile')
   if (!wrap || !tile) {
     dropLifted(held, delay)
     runEnter(object, isToken, delay)
-    return
+    return null
   }
   const t = wrap.getBoundingClientRect()
   const width = wrap.offsetWidth
@@ -1064,6 +1064,7 @@ function putDownOnTile(object: ObjectId, isToken: boolean, delay: number, durati
     glow(tile, 'gain', delay + duration, scaled(ENTER_STEP_MS))
     floatText(wrap, '+1', 'gain', delay + duration, scaled(ENTER_STEP_MS) * 1.5)
   }
+  return flight
 }
 
 /*
@@ -1187,13 +1188,18 @@ function entryCopy(spot: StackSpot): HTMLElement {
  * With no spotlight drawn (nothing to fly) the entry simply appears; with no
  * entry in view the card fades where it hovers.
  */
-function slotIntoStack(object: ObjectId, delay: number, duration: number, onLanded: () => void): void {
+function slotIntoStack(
+  object: ObjectId,
+  delay: number,
+  duration: number,
+  onLanded: () => void,
+): Animation | null {
   const held = takeHeld(object)
   const spot = stackSpotOf(object)
   if (!held || !spot) {
     if (held) dropLifted(held, delay)
     onLanded()
-    return
+    return null
   }
   const { entry, matrix } = spot
   const landing = entryCopy(spot)
@@ -1242,7 +1248,25 @@ function slotIntoStack(object: ObjectId, delay: number, duration: number, onLand
   held.box.dataset.flightMs = String(duration)
   // Hidden for exactly the flight (`HIDE_UNTIL_LANDED`).
   entry.animate([{ opacity: 0 }, { opacity: 0 }], { duration: delay + duration, fill: 'backwards' })
-  window.setTimeout(onLanded, delay + duration)
+  afterLanding(flight, onLanded)
+  return flight
+}
+
+/**
+ * Runs `fn` once `flight` is down and the frame it landed in is painted. Not
+ * on a timer of the flight's length: the flight starts on the next animation
+ * frame, so the timer runs out a frame or more before it lands, and what
+ * `fn` sets off (`aims.landed`, which re-renders the whole `Table`) then held
+ * the card short of the stack for 100–200 ms on a 4-player board. The frame
+ * callback is that same frame's, run before its paint; the task it queues
+ * runs after.
+ */
+function afterLanding(flight: Animation, fn: () => void): void {
+  const landed = (): void => {
+    requestAnimationFrame(() => window.setTimeout(fn, 0))
+  }
+  // A flight cancelled (its box taken down early) is down as far as it goes.
+  flight.finished.then(landed, landed)
 }
 
 /**
@@ -1253,17 +1277,17 @@ function slotIntoStack(object: ObjectId, delay: number, duration: number, onLand
  * the copy is down on it. Plays in the trigger's beat, beside its source's
  * pulse (`runPulse`).
  *
- * False, leaving the entry to arrive in place as before, under reduced
- * motion, when the source has no tile in view (it has left the battlefield:
- * a dies trigger), or when the entry isn't on the board shown (the trigger
- * already resolved, or the stack is out of view).
+ * The flight, or null, leaving the entry to arrive in place as before, under
+ * reduced motion, when the source has no tile in view (it has left the
+ * battlefield: a dies trigger), or when the entry isn't on the board shown
+ * (the trigger already resolved, or the stack is out of view).
  */
-function flyAbilityIn(object: ObjectId, source: ObjectId, delay: number, duration: number): boolean {
-  if (motionPrefs().reduced) return false
+function flyAbilityIn(object: ObjectId, source: ObjectId, delay: number, duration: number): Animation | null {
+  if (motionPrefs().reduced) return null
   const tile = document.querySelector<HTMLElement>(`[data-obj-id="${CSS.escape(source)}"] .mini-tile`)
-  if (!tile || !inView(tile)) return false
+  if (!tile || !inView(tile)) return null
   const spot = stackSpotOf(object)
-  if (!spot) return false
+  if (!spot) return null
   const from = tile.getBoundingClientRect()
   const box = document.createElement('div')
   box.className = 'ghost-flight'
@@ -1287,7 +1311,7 @@ function flyAbilityIn(object: ObjectId, source: ObjectId, delay: number, duratio
   releaseWhenDone(box, flight)
   box.dataset.trigger = object
   spot.entry.animate([{ opacity: 0 }, { opacity: 0 }], { duration: delay + duration, fill: 'backwards' })
-  return true
+  return flight
 }
 
 /**
@@ -2623,23 +2647,27 @@ export function AnimationLayer({
               // Its arrows wait for it to land (`usePlayback` marked it
               // arriving); one that doesn't fly is there already.
               const duration = scaled(TRIGGER_STEP_MS)
-              if (flyAbilityIn(object, source, cue.delay, duration)) {
+              const flight = flyAbilityIn(object, source, cue.delay, duration)
+              if (flight) {
                 abilitiesFlying.add(object)
-                window.setTimeout(() => bus.aims.landed(object), cue.delay + duration)
+                bus.addLanding(flight)
+                afterLanding(flight, () => bus.aims.landed(object))
               } else bus.aims.landed(object)
             }
           }
           else if (cue.event.type === 'permanent-entered-battlefield' && cue.putDown) {
             const object = cue.event.object
             const duration = cue.flightMs ?? measureFlight(cue)
-            putDownOnTile(object, cue.view.objects[object]?.isToken ?? false, cue.delay, duration)
+            const flight = putDownOnTile(object, cue.view.objects[object]?.isToken ?? false, cue.delay, duration)
+            if (flight) bus.addLanding(flight)
             // The thud as the card lands on its tile, not as it sets off.
             enterSound(cue.view.objects[object], cue.delay + duration)
           } else if (cue.event.type === 'spell-cast' && cue.putDown) {
             const object = cue.event.object
             const duration = cue.flightMs ?? measureFlight(cue)
             stackLandings.set(object, cue.delay + duration)
-            slotIntoStack(object, cue.delay, duration, () => bus.aims.landed(object))
+            const flight = slotIntoStack(object, cue.delay, duration, () => bus.aims.landed(object))
+            if (flight) bus.addLanding(flight)
             // Its sound was the cast's.
             continue
           } else if (cue.event.type === 'permanent-entered-battlefield') {

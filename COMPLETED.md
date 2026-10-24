@@ -655,3 +655,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   lessons in a Web Worker (e21848ab), lobbies on the server, a local game surviving a reload
   (d68fae3d), measured on the user's low-end laptop (bots and memory fine), and on by default
   on the site with a fallback to the server (e6242373) (2026-10-13).
+
+## Tooling / docs
+
+- **`client/e2e/put-down.spec.ts` was flaky** (2026-10-24): not the test — a card landing froze
+  short of its tile or the stack for 100–250 ms on a 4-player board. Timers ran out a frame or more
+  before the flights they timed (a flight starts on a later frame), so the frame's end, and with it
+  the next frame's whole-`Table` remount, and `aims.landed`'s `Table` re-render, ran ahead of the
+  landing frame. A half now ends once its flights are down and that frame is painted
+  (`usePlayback`'s `endWhenDrawn`, the bus's `addLanding`/`landingsDone`), and a stack landing
+  notifies the same way (`afterLanding`).

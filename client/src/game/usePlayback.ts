@@ -80,6 +80,36 @@ function arrivingOnStack(event: GameEvent, putDown: boolean): ObjectId[] {
   return []
 }
 
+/** How long past its length `endWhenDrawn` waits for frames before ending a
+ * half without them: a tab hidden mid-half draws none, and must still end
+ * its frame and ack. */
+const DRAWN_BACKSTOP_MS = 500
+
+/**
+ * Runs `fn` once a half published just now is over on screen: its `ms` are
+ * up, its flights are down (`landed`), and the frame they landed in is
+ * painted. A timer of `ms` alone ran out while the last card was still in
+ * the air (a flight starts a frame or more after it's asked to, later after
+ * a long render such as the board's remount), and the next frame's render —
+ * a whole `Table` remount — then held the card short of its tile for 100–250
+ * ms on a 4-player board. The frame callback queued as the flights finish is
+ * that frame's, run before its paint; the task it queues runs after. Returns
+ * the backstop's timer id.
+ */
+function endWhenDrawn(ms: number, landed: Promise<void>, fn: () => void): number {
+  let ran = false
+  const run = (): void => {
+    if (ran) return
+    ran = true
+    window.clearTimeout(backstop)
+    fn()
+  }
+  const backstop = window.setTimeout(run, ms + DRAWN_BACKSTOP_MS)
+  const due = new Promise<void>((resolve) => window.setTimeout(resolve, ms))
+  void Promise.all([due, landed]).then(() => requestAnimationFrame(() => window.setTimeout(run, 0)))
+  return backstop
+}
+
 /**
  * Plays the server's frames out one at a time and reports what the player
  * should currently be looking at.
@@ -155,6 +185,9 @@ export function usePlayback(
   const queueRef = useRef<Frame[]>([])
   const playingRef = useRef(false)
   const timerRef = useRef<number | null>(null)
+  /** Bumped when playback is torn down, so a frame end still waiting on a
+   * frame (`endWhenDrawn`) knows it no longer has a frame to end. */
+  const epochRef = useRef(0)
   const revisionRef = useRef(0)
   /** How many events of the game's log have already been played out, so a
    * frame only animates what it actually added. Seeded from the frame this
@@ -280,7 +313,11 @@ export function usePlayback(
       busRef.current.aims.play(schedule.aims)
     }
 
+    // Playback torn down since (`epochRef`): a half's end still waiting on a
+    // frame (`endWhenDrawn`) has no frame to end.
+    const epoch = epochRef.current
     const finish = (): void => {
+      if (epochRef.current !== epoch) return
       timerRef.current = null
       playingRef.current = false
       if (afterMs > 0) {
@@ -398,20 +435,26 @@ export function usePlayback(
     // whatever it didn't need of its reservation (see `retimeFlights`).
     const bus = busRef.current
     const timed = retimeFlights(pending.items, pending.afterMs, (i) => bus.measureFlight(cueOf(i)))
-    // The frame ends when the measured half does. Only while the backstop
+    bus.publish(timed.after.map(cueOf))
+    // The frame ends when the measured half is over on screen, its flights
+    // (started by the publish) down (`endWhenDrawn`). Only while the backstop
     // started with this board is still the one pending — never another
     // frame's timer.
-    if (timed.afterMs < pending.afterMs && pending.timer !== null && timerRef.current === pending.timer) {
+    if (pending.timer !== null && timerRef.current === pending.timer) {
       window.clearTimeout(pending.timer)
-      timerRef.current = window.setTimeout(pending.finish, timed.afterMs)
+      timerRef.current = endWhenDrawn(
+        Math.min(timed.afterMs, pending.afterMs),
+        bus.landingsDone(),
+        pending.finish,
+      )
     }
-    bus.publish(timed.after.map(cueOf))
   }, [displayed.revision])
 
   useEffect(() => {
     if (frame === null) {
       queueRef.current = []
       pendingAfterRef.current = null
+      epochRef.current += 1
       lastViewRef.current = null
       busRef.current.aims.clear()
       if (timerRef.current !== null) window.clearTimeout(timerRef.current)
@@ -443,6 +486,7 @@ export function usePlayback(
 
   useEffect(
     () => () => {
+      epochRef.current += 1
       if (timerRef.current !== null) window.clearTimeout(timerRef.current)
       busRef.current.aims.clear()
     },
