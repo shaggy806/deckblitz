@@ -1175,6 +1175,17 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
     }
   | {
+      /** A permanent became renowned (rule 702.112 — the `renown` effect):
+       * "when this creature becomes renowned" is `who: "self"` (Relic
+       * Seeker), "whenever a creature you control becomes renowned" `who:
+       * "you-control"` (Valeron Wardens). Never fires for one renowned
+       * already, or that left before its renown trigger resolved (the
+       * rulings). The permanent is the trigger object. */
+      readonly on: "becomes-renowned";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+    }
+  | {
       /** A permanent became saddled (rule 702.171b — the `become-saddled`
        * effect, a saddle ability's or another's: "whenever this creature
        * becomes saddled" is `who: "self"`). Fires again for one already

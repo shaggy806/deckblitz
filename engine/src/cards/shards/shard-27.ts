@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAIMBot from "../pool/a-i-m-bot.js";
 import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brute.js";
 import _poolAbzanGuide from "../pool/abzan-guide.js";
+import _poolAcolyteOfTheInferno from "../pool/acolyte-of-the-inferno.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAdvancedStitchwing from "../pool/advanced-stitchwing.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
@@ -399,6 +400,7 @@ import _poolRegalSliver from "../pool/regal-sliver.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRelicBind from "../pool/relic-bind.js";
+import _poolRelicSeeker from "../pool/relic-seeker.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
@@ -533,6 +535,7 @@ import _poolTimberlandAncient from "../pool/timberland-ancient.js";
 import _poolTivadarsCrusade from "../pool/tivadars-crusade.js";
 import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
+import _poolTopanFreeblade from "../pool/topan-freeblade.js";
 import _poolTopiaryPanther from "../pool/topiary-panther.js";
 import _poolTotemSpeaker from "../pool/totem-speaker.js";
 import _poolToweringViewpoint from "../pool/towering-viewpoint.js";
@@ -621,6 +624,7 @@ const shard: CardShard = {
     _poolAIMBot,
     _poolAbominationIrradiatedBrute,
     _poolAbzanGuide,
+    _poolAcolyteOfTheInferno,
     _poolAdaptiveTrainingPost,
     _poolAdvancedStitchwing,
     _poolAdventurersAirship,
@@ -1014,6 +1018,7 @@ const shard: CardShard = {
     _poolRegathanFirecat,
     _poolRejoinder,
     _poolRelicBind,
+    _poolRelicSeeker,
     _poolRestlessCottage,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
@@ -1148,6 +1153,7 @@ const shard: CardShard = {
     _poolTivadarsCrusade,
     _poolTolarianAcademy,
     _poolTolarianScholar,
+    _poolTopanFreeblade,
     _poolTopiaryPanther,
     _poolTotemSpeaker,
     _poolToweringViewpoint,

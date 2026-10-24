@@ -8106,4 +8106,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Colossal Dreadmaw'] },
     }),
   ),
+  preset(
+    "Goblin Glory Chaser: menace once it's renowned",
+    board({
+      you: { bf: ['Goblin Glory Chaser'] },
+    }),
+  ),
+  preset(
+    "Aragorn, Hornburg Hero: the hit that makes a creature renowned doesn't double its counters",
+    board({
+      you: { bf: ['Aragorn, Hornburg Hero', 'Grizzly Bears'] },
+    }),
+  ),
 ]

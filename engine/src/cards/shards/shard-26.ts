@@ -359,6 +359,7 @@ import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPestProblem from "../pool/pest-problem.js";
+import _poolPharikasDisciple from "../pool/pharikas-disciple.js";
 import _poolPigmentStorm from "../pool/pigment-storm.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
@@ -964,6 +965,7 @@ const shard: CardShard = {
     _poolPacksBetrayal,
     _poolPearlMedallion,
     _poolPestProblem,
+    _poolPharikasDisciple,
     _poolPigmentStorm,
     _poolPilferedPlans,
     _poolPillarOfTheParuns,

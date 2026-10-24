@@ -28,6 +28,7 @@ import {
   afflict,
   afterlife,
   rampage,
+  renown,
   cumulativeUpkeep,
   annihilator,
   awaken,
@@ -156,6 +157,8 @@ function keywordPart(part) {
   }
   // Rampage N (rule 702.23a): its becomes-blocked trigger.
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
+  // Renown N (rule 702.112a): its combat-damage trigger, "if it isn't renowned".
+  if ((m = /^renown (\d+)$/i.exec(p))) return { triggered: [renown(Number(m[1]))] };
   // Spectacle [cost] (rule 702.137a): an alternative cost.
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
   // Surge [cost] (rule 702.117a): an alternative cost.
@@ -802,6 +805,9 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever you cycle (a|another) card$/.exec(c))) {
     return [{ on: "cycles", who: "you", ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // The renowned designation (rule 702.112b) becoming true.
+  if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return self("becomes-renowned");
+  if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
   // A saddled designation (rule 702.171b) becoming true: "for the first time
   // each turn" only when it wasn't saddled already.
   if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
@@ -2515,7 +2521,12 @@ const STATIC_CONDITION_SUFFIXES = [
 ];
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */
-const STATIC_CONDITION_PREFIXES = [["As long as you have the city's blessing, ", { kind: "citys-blessing" }]];
+const STATIC_CONDITION_PREFIXES = [
+  ["As long as you have the city's blessing, ", { kind: "citys-blessing" }],
+  // Renowned (rule 702.112b): "As long as ~ is renowned, it has menace"
+  // (Goblin Glory Chaser) — the "it" is ~.
+  ["As long as ~ is renowned, ", { kind: "source", filter: { renowned: true } }],
+];
 
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
@@ -2539,6 +2550,9 @@ const INTERVENING_IFS = {
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
+  // Rule 702.112b: the source's renowned designation.
+  "if it's renowned,": { kind: "source", filter: { renowned: true } },
+  "if ~ is renowned,": { kind: "source", filter: { renowned: true } },
   // Rule 700.13 (Outlaws of Thunder Junction).
   "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
   // Rule 701.59c: the spell's collect-evidence additional cost was paid.
@@ -2726,7 +2740,7 @@ function parseStatic(line, text) {
   }
   for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
     if (!line.startsWith(prefix)) continue;
-    const rest = line.slice(prefix.length);
+    const rest = line.slice(prefix.length).replace(/^it /, "~ ");
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }

@@ -79,6 +79,7 @@ import _poolBristlingHydra from "../pool/bristling-hydra.js";
 import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
+import _poolCallOfTheFullMoon from "../pool/call-of-the-full-moon.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
 import _poolCaltrops from "../pool/caltrops.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
@@ -512,6 +513,7 @@ import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
+import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
@@ -723,6 +725,7 @@ const shard: CardShard = {
     _poolBroodMonitor,
     _poolBrotherhoodAmbushers,
     _poolBurnFromWithin,
+    _poolCallOfTheFullMoon,
     _poolCallousDismissal,
     _poolCaltrops,
     _poolCampusCrier,
@@ -1156,6 +1159,7 @@ const shard: CardShard = {
     _poolSpitfireBastion,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
+    _poolStalwartAven,
     _poolStart,
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,

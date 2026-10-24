@@ -363,6 +363,7 @@ import _poolOrzhovGuildgate from "../pool/orzhov-guildgate.js";
 import _poolOteclanLandmark from "../pool/oteclan-landmark.js";
 import _poolOteclanLevitator from "../pool/oteclan-levitator.js";
 import _poolOutflank from "../pool/outflank.js";
+import _poolOutlandColossus from "../pool/outland-colossus.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
@@ -1004,6 +1005,7 @@ const shard: CardShard = {
     _poolOteclanLandmark,
     _poolOteclanLevitator,
     _poolOutflank,
+    _poolOutlandColossus,
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
     _poolOverzealousMuscle,

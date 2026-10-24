@@ -111,6 +111,7 @@ import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
+import _poolConstableOfTheRealm from "../pool/constable-of-the-realm.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
@@ -735,6 +736,7 @@ const shard: CardShard = {
     _poolConcertedCare,
     _poolConclaveSledgeCaptain,
     _poolConductorOfCacophony,
+    _poolConstableOfTheRealm,
     _poolConstrictorSage,
     _poolContaminatedLandscape,
     _poolCovetedPeacock,

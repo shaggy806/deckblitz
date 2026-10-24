@@ -413,6 +413,7 @@ import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
 import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
+import _poolRhoxMaulers from "../pool/rhox-maulers.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
 import _poolRisenRiptide from "../pool/risen-riptide.js";
 import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
@@ -549,6 +550,7 @@ import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
 import _poolUnconventionalTactics from "../pool/unconventional-tactics.js";
 import _poolUndercellarMyconid from "../pool/undercellar-myconid.js";
+import _poolUndercityTroll from "../pool/undercity-troll.js";
 import _poolUndercityUprising from "../pool/undercity-uprising.js";
 import _poolUndertow from "../pool/undertow.js";
 import _poolUnderworldDreams from "../pool/underworld-dreams.js";
@@ -1037,6 +1039,7 @@ const shard: CardShard = {
     _poolRestlessBloodseeker,
     _poolRestlessBones,
     _poolReturnToTheLightRealms,
+    _poolRhoxMaulers,
     _poolRimekinRecluse,
     _poolRisenRiptide,
     _poolRishadanDockhand,
@@ -1173,6 +1176,7 @@ const shard: CardShard = {
     _poolUlvenwaldBehemoth,
     _poolUnconventionalTactics,
     _poolUndercellarMyconid,
+    _poolUndercityTroll,
     _poolUndercityUprising,
     _poolUndertow,
     _poolUnderworldDreams,

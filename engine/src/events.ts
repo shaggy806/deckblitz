@@ -175,6 +175,14 @@ export type GameEvent =
       readonly amount: number;
     })
   | (Base & {
+      /** A permanent became renowned (rule 702.112a — the `renown` effect),
+       * its `amount` +1/+1 counters already put on it. Not emitted for one
+       * already renowned, which nothing happens to (702.112c). */
+      readonly type: "became-renowned";
+      readonly object: ObjectId;
+      readonly amount: number;
+    })
+  | (Base & {
       /** A permanent became saddled (rule 702.171b — the `become-saddled`
        * effect). `first` when it wasn't saddled already: "becomes saddled for
        * the first time each turn" (Stubborn Burrowfiend). */

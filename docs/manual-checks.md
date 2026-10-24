@@ -5284,3 +5284,13 @@ engine terms. A second thing to check is a second test.
 ### Lava Coil: a creature that survives it is exiled when it dies later that turn
 - **Do:** Cast Lava Coil on Bob's Colossal Dreadmaw, then cast Shock on it.
 - **Expect:** The Dreadmaw survives Lava Coil (6/6 with 4 damage). Shock kills it, and it goes to exile, not Bob's graveyard.
+
+## Renown (2026-10-24)
+
+### Goblin Glory Chaser: menace once it's renowned
+- **Do:** Attack Bob with Goblin Glory Chaser.
+- **Expect:** It deals 1 damage, gets a +1/+1 counter and shows menace; it didn't have menace before.
+
+### Aragorn, Hornburg Hero: the hit that makes a creature renowned doesn't double its counters
+- **Do:** Attack Bob with Grizzly Bears. Next turn, attack with it again.
+- **Expect:** The first hit gives the Bears one +1/+1 counter (renown), not two. The second hit doubles it to two counters.

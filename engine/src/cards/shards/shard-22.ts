@@ -229,6 +229,7 @@ import _poolHighlandGame from "../pool/highland-game.js";
 import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
+import _poolHonoredHierarch from "../pool/honored-hierarch.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
 import _poolHospitalRoom from "../pool/hospital-room.js";
 import _poolHostileDesert from "../pool/hostile-desert.js";
@@ -857,6 +858,7 @@ const shard: CardShard = {
     _poolHiveOfTheEyeTyrant,
     _poolHomunculusHorde,
     _poolHonorGuard,
+    _poolHonoredHierarch,
     _poolHoppingAutomaton,
     _poolHospitalRoom,
     _poolHostileDesert,

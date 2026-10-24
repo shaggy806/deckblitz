@@ -421,6 +421,7 @@ import _poolSarcomiteMyr from "../pool/sarcomite-myr.js";
 import _poolSatyrEnchanter from "../pool/satyr-enchanter.js";
 import _poolSavannahLions from "../pool/savannah-lions.js";
 import _poolSaviorOfTheSmall from "../pool/savior-of-the-small.js";
+import _poolScabClanBerserker from "../pool/scab-clan-berserker.js";
 import _poolScarletSpiderBenReilly from "../pool/scarlet-spider-ben-reilly.js";
 import _poolScavengedBrawler from "../pool/scavenged-brawler.js";
 import _poolScepterOfFugue from "../pool/scepter-of-fugue.js";
@@ -1046,6 +1047,7 @@ const shard: CardShard = {
     _poolSatyrEnchanter,
     _poolSavannahLions,
     _poolSaviorOfTheSmall,
+    _poolScabClanBerserker,
     _poolScarletSpiderBenReilly,
     _poolScavengedBrawler,
     _poolScepterOfFugue,

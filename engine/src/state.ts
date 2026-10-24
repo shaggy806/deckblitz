@@ -373,6 +373,15 @@ export interface GameObject {
    */
   monstrous?: true;
   /**
+   * The permanent is **renowned** (rule 702.112b): a designation the `renown`
+   * effect gives it, which renown's own trigger reads ("if it isn't
+   * renowned"), "as long as this creature is renowned" statics read (the
+   * `renowned` filter clause) and a `becomes-renowned` trigger watches for.
+   * Like monstrous, neither an ability nor a copiable value; it lasts until
+   * the permanent leaves the battlefield (`moveObject` clears it).
+   */
+  renowned?: true;
+  /**
    * The permanent is **saddled** (rule 702.171b): a designation a saddle
    * ability's effect (or Kolodin's, Guidelight Matrix's…) gives it, which
    * "attacks while saddled" and "if this creature is saddled" read (the
@@ -1514,6 +1523,8 @@ export interface LastKnownInfo {
   readonly enteredOnTurn?: number;
   /** It was monstrous (rule 701.37b) — the `monstrous` filter clause. */
   readonly monstrous?: true;
+  /** It was renowned (rule 702.112b) — the `renowned` filter clause. */
+  readonly renowned?: true;
   /** How it had entered — `GameObject.entry`. */
   readonly entry?: EntryRecord;
   readonly attackedOnTurn?: number;
@@ -4538,6 +4549,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.goadedForGameBy ?? [],
     o.suspectedAt ?? null,
     o.monstrous ?? false,
+    o.renowned ?? false,
     o.saddled ?? false,
     o.saddledThisTurn ?? null,
     o.exertedBy ?? null,

@@ -372,6 +372,7 @@ import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPowerWordKill from "../pool/power-word-kill.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
 import _poolPriceOfFame from "../pool/price-of-fame.js";
+import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
 import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
@@ -984,6 +985,7 @@ const shard: CardShard = {
     _poolPowerWordKill,
     _poolPracticedOffense,
     _poolPriceOfFame,
+    _poolPriestOfTheBloodRite,
     _poolPrimalFrenzy,
     _poolPrimarisEliminator,
     _poolPrismaticVista,

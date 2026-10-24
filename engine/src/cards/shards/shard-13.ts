@@ -584,6 +584,7 @@ import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
 import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
+import _poolWarOracle from "../pool/war-oracle.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
 import _poolWarriorsCharge from "../pool/warriors-charge.js";
 import _poolWarshipScout from "../pool/warship-scout.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolVowToErebor,
     _poolVulshokMorningstar,
     _poolWarMachineAvengingArsenal,
+    _poolWarOracle,
     _poolWardenOfEvosIsle,
     _poolWarriorsCharge,
     _poolWarshipScout,

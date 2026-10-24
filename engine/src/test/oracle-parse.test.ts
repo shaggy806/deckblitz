@@ -1337,6 +1337,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(berserker.complete).toBe(true);
   });
 
+  it("renown (rule 702.112): its trigger, the renowned designation's statics, intervening ifs and triggers", () => {
+    const REMINDER = "(When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)";
+    const chaser = face(`Renown 1 ${REMINDER}\nAs long as this creature is renowned, it has menace.`, "Creature — Goblin Warrior");
+    expect(chaser.triggered[0]).toMatchObject({
+      trigger: { on: "deals-combat-damage-to-player", who: "self" },
+      condition: { kind: "source", filter: { renowned: false } },
+      effect: { kind: "renown", amount: 1 },
+    });
+    expect(chaser.static[0]).toMatchObject({ grantKeywords: ["menace"], condition: { kind: "source", filter: { renowned: true } } });
+    expect(chaser.complete).toBe(true);
+    const wardens = face(`Renown 2 ${REMINDER}\nWhenever a creature you control becomes renowned, draw a card.`, "Creature — Human Monk");
+    expect(wardens.triggered[1].trigger).toEqual({ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } });
+    const seeker = face("When this creature becomes renowned, draw a card.", "Creature — Human Soldier");
+    expect(seeker.triggered[0].trigger).toEqual({ on: "becomes-renowned", who: "self" });
+    const consul = face("Whenever this creature attacks, if it's renowned, draw a card.", "Creature — Human Soldier");
+    expect(consul.triggered[0].condition).toEqual({ kind: "source", filter: { renowned: true } });
+  });
+
   it("'attacks and isn't blocked' (rule 509.3g) and 'if you do, ~ assigns no combat damage this turn'", () => {
     const ophidian = face(
       "Whenever this creature attacks and isn't blocked, you may draw a card. If you do, this creature assigns no combat damage this turn.",

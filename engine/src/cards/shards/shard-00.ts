@@ -182,6 +182,7 @@ import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
+import _poolFirefiendElemental from "../pool/firefiend-elemental.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
 import _poolFlayerDrone from "../pool/flayer-drone.js";
@@ -814,6 +815,7 @@ const shard: CardShard = {
     _poolFearsomeWerewolf,
     _poolFieryInscription,
     _poolFillWithFright,
+    _poolFirefiendElemental,
     _poolFireshrieker,
     _poolFishingGear,
     _poolFlayerDrone,

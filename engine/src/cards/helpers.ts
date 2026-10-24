@@ -420,6 +420,26 @@ export const rampage = (n: number): TriggeredAbility => {
 };
 
 /**
+ * Renown N (rule 702.112a): "When this creature deals combat damage to a
+ * player, if it isn't renowned, put N +1/+1 counters on it and it becomes
+ * renowned" — an intervening if (603.4), asked again as it resolves, so a
+ * second instance does nothing once the first has resolved (702.112c). Put
+ * "Renown N" in `text` as well.
+ */
+export const renown = (n: number): TriggeredAbility => {
+  const words = ["a", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+  const counters = n === 1 ? "a +1/+1 counter" : `${words[n] ?? String(n)} +1/+1 counters`;
+  return {
+    trigger: { on: "deals-combat-damage-to-player", who: "self" },
+    condition: { kind: "source", filter: { renowned: false } },
+    targets: [],
+    effect: { kind: "renown", amount: n },
+    resolve: null,
+    text: `Renown ${n} (When this creature deals combat damage to a player, if it isn't renowned, put ${counters} on it and it becomes renowned.)`,
+  };
+};
+
+/**
  * Cumulative upkeep [cost] (rule 702.24a): "At the beginning of your upkeep,
  * if this permanent is on the battlefield, put an age counter on this
  * permanent. Then you may pay [cost] for each age counter on it. If you

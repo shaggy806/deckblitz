@@ -407,7 +407,8 @@
   "keyword:emerge",
   "condition:source-monstrous",
   "condition:werewolf-transform-spells-last-turn",
-  "effect:damage-to-trigger-object"
+  "effect:damage-to-trigger-object",
+  "keyword:renown"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

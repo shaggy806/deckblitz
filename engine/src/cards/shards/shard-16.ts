@@ -8,6 +8,7 @@ import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
+import _poolAkroanSergeant from "../pool/akroan-sergeant.js";
 import _poolAladdin from "../pool/aladdin.js";
 import _poolAlchemistsGreeting from "../pool/alchemists-greeting.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
@@ -670,6 +671,7 @@ const shard: CardShard = {
     _poolAccelerate,
     _poolAesiTyrantOfGyreStrait,
     _poolAkroanJailer,
+    _poolAkroanSergeant,
     _poolAladdin,
     _poolAlchemistsGreeting,
     _poolAliriosEnraptured,

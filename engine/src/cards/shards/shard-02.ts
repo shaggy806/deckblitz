@@ -174,6 +174,7 @@ import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
+import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvilEyeOfOrmsByGore from "../pool/evil-eye-of-orms-by-gore.js";
@@ -773,6 +774,7 @@ const shard: CardShard = {
     _poolEliteVanguard,
     _poolElusiveTormentor,
     _poolEnatuGolem,
+    _poolEnshroudingMist,
     _poolEphemeralShields,
     _poolEstridsInvocation,
     _poolEvilEyeOfOrmsByGore,

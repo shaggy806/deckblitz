@@ -106,6 +106,7 @@ import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
 import _poolCompositeGolem from "../pool/composite-golem.js";
 import _poolConduitGoblin from "../pool/conduit-goblin.js";
 import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
+import _poolConsulsLieutenant from "../pool/consuls-lieutenant.js";
 import _poolContemplation from "../pool/contemplation.js";
 import _poolCoralCommando from "../pool/coral-commando.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
@@ -758,6 +759,7 @@ const shard: CardShard = {
     _poolCompositeGolem,
     _poolConduitGoblin,
     _poolConduitOfRuin,
+    _poolConsulsLieutenant,
     _poolContemplation,
     _poolCoralCommando,
     _poolCorpseBlockade,

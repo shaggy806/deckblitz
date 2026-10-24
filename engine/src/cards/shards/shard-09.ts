@@ -217,6 +217,7 @@ import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
 import _poolGoatnap from "../pool/goatnap.js";
+import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
 import _poolGoblinWarDrums from "../pool/goblin-war-drums.js";
 import _poolGodEternalOketra from "../pool/god-eternal-oketra.js";
@@ -853,6 +854,7 @@ const shard: CardShard = {
     _poolGloomlakeVerge,
     _poolGlorybringer,
     _poolGoatnap,
+    _poolGoblinGloryChaser,
     _poolGoblinTown,
     _poolGoblinWarDrums,
     _poolGodEternalOketra,

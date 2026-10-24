@@ -19,6 +19,7 @@ import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
 import _poolAnointedChorister from "../pool/anointed-chorister.js";
 import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
+import _poolAragornHornburgHero from "../pool/aragorn-hornburg-hero.js";
 import _poolArchonOfJustice from "../pool/archon-of-justice.js";
 import _poolArdenvalePaladin from "../pool/ardenvale-paladin.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
@@ -284,6 +285,7 @@ import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
+import _poolKnightOfThePilgrimsRoad from "../pool/knight-of-the-pilgrims-road.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
@@ -551,6 +553,7 @@ import _poolUnburialRites from "../pool/unburial-rites.js";
 import _poolUncleIroh from "../pool/uncle-iroh.js";
 import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
+import _poolValeronWardens from "../pool/valeron-wardens.js";
 import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
 import _poolVarisSilverymoonRanger from "../pool/varis-silverymoon-ranger.js";
@@ -633,6 +636,7 @@ const shard: CardShard = {
     _poolAncientDen,
     _poolAnointedChorister,
     _poolAppliedBiomancy,
+    _poolAragornHornburgHero,
     _poolArchonOfJustice,
     _poolArdenvalePaladin,
     _poolArgivianRestoration,
@@ -898,6 +902,7 @@ const shard: CardShard = {
     _poolKeensightMentor,
     _poolKeldonNecropolis,
     _poolKillersMask,
+    _poolKnightOfThePilgrimsRoad,
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
     _poolKunLunWarrior,
@@ -1165,6 +1170,7 @@ const shard: CardShard = {
     _poolUncleIroh,
     _poolUneasyPartings,
     _poolUntamedHunger,
+    _poolValeronWardens,
     _poolValgavothsFaithful,
     _poolValleyRotcaller,
     _poolVarisSilverymoonRanger,

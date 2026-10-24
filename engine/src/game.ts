@@ -19011,6 +19011,12 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
+      case "becomes-renowned":
+        return (
+          event.type === "became-renowned" &&
+          this.matchesWho(spec.who, event.object, self) &&
+          this.triggerFilterOk(spec.filter, event.object, self)
+        );
       case "becomes-saddled":
         return (
           event.type === "became-saddled" &&
@@ -19432,6 +19438,7 @@ export class Game {
       event.type === "permanent-transformed" ||
       event.type === "permanent-mutated" ||
       event.type === "became-monstrous" ||
+      event.type === "became-renowned" ||
       event.type === "became-saddled" ||
       event.type === "permanent-exerted" ||
       // "Whenever a creature you control explores, … it" — the explorer.
@@ -21950,6 +21957,17 @@ export class Game {
         this.addCounter({ kind: "object", object: source }, "+1/+1", amount, false, controller);
         object.monstrous = true;
         this.emit({ type: "became-monstrous", object: source, amount });
+      },
+      renown: (amount) => {
+        // Rule 702.112a: "if it isn't renowned" — monstrosity's shape. A
+        // second instance of renown resolving finds it renowned (702.112c).
+        const object = this.state.objects[source];
+        if (opts.sourceLost === true || object === undefined || object.zone !== "battlefield") return;
+        if (refs.source !== undefined && (object.zoneChangeCount ?? 0) !== refs.source) return;
+        if (object.renowned === true) return;
+        this.addCounter({ kind: "object", object: source }, "+1/+1", amount, false, controller);
+        object.renowned = true;
+        this.emit({ type: "became-renowned", object: source, amount });
       },
       populate: () => this.populate(controller, source, x),
       encore: () => this.encore(controller, source),
@@ -34603,6 +34621,7 @@ export class Game {
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
       ...(object.monstrous === true ? { monstrous: true as const } : {}),
+      ...(object.renowned === true ? { renowned: true as const } : {}),
       ...(object.entry !== undefined ? { entry: object.entry } : {}),
       ...(object.attackedThisTurn === true ? { attackedOnTurn: this.state.turn.number } : {}),
       ...(object.damageThisTurn !== undefined ? { damageThisTurn: object.damageThisTurn } : {}),
@@ -35282,6 +35301,8 @@ export class Game {
     // Monstrous lasts until the permanent leaves the battlefield (701.37b);
     // being exerted, until it's a new object.
     delete object.monstrous;
+    // So does renowned (702.112b).
+    delete object.renowned;
     // So does saddled (702.171b); what it saddled was the old object's (400.7).
     delete object.saddled;
     delete object.saddledThisTurn;

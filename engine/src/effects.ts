@@ -3206,6 +3206,18 @@ export type EffectSpec =
     }
   | {
       /**
+       * Renown N's effect (rule 702.112a): "if it isn't renowned, put N +1/+1
+       * counters on it and it becomes renowned." Always about the ability's
+       * own source, and only while it's the same object on the battlefield
+       * (rule 400.7): one that has left, or is renowned already (a second
+       * instance of renown, 702.112c), has nothing happen to it and fires no
+       * `becomes-renowned` trigger. The `renown()` helper's trigger.
+       */
+      readonly kind: "renown";
+      readonly amount: EffectAmount;
+    }
+  | {
+      /**
        * Proliferate (rule 701.27): choose any number of permanents and/or
        * players with counters on them, then give each another counter of each
        * kind already there. Raises a `proliferate` decision — the choice is
@@ -6502,6 +6514,8 @@ export interface EffectApi {
   amass(amount: number, creatureType: string, onto?: ObjectId): void;
   /** See the `"monstrosity"` {@link EffectSpec}. */
   monstrosity(amount: number): void;
+  /** See the `"renown"` {@link EffectSpec}. */
+  renown(amount: number): void;
   /** See the `"add-counter-all"` {@link EffectSpec}. */
   addCounterAll(
     filter: CardFilter,
@@ -9514,6 +9528,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "monstrosity":
       ctx.monstrosity(amountValue(spec.amount, ctx));
+      return;
+    case "renown":
+      ctx.renown(amountValue(spec.amount, ctx));
       return;
     case "add-counter-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);
