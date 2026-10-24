@@ -138,3 +138,20 @@ describe("Nature's Rhythm", () => {
     expect(game.state.objects[rhythm].zone).toBe("exile");
   });
 });
+
+describe("the harmonize creature as a mana source", () => {
+  it("isn't counted as paying the mana when it's the creature tapped (rule 702.180b)", () => {
+    const game = setUp();
+    const rhythm = game.debugSpawn("Nature's Rhythm", A, "graveyard");
+    const elves = game.debugSpawn("Llanowar Elves", A, "battlefield", { summoningSick: false });
+    for (let i = 0; i < 3; i += 1) game.debugSpawn("Forest", A, "battlefield");
+    // {G}{G}{G}{G} at X=0: three Forests and the Elves pay it, but tapping
+    // the Elves for harmonize leaves only the Forests — the fuzzer's "cannot
+    // pay the cost" once the check counted it both ways.
+    const tapped = { type: "cast-spell", player: A, card: rhythm, targets: [], via: "harmonize", xValue: 0, tap: [elves] } as const;
+    expect(game.canDispatch(tapped)).not.toBeNull();
+    expect(harmonizeOffers(game, rhythm).some((o) => o.harmonizeTap?.object === elves)).toBe(false);
+    const plain = { type: "cast-spell", player: A, card: rhythm, targets: [], via: "harmonize", xValue: 0 } as const;
+    expect(game.canDispatch(plain)).toBeNull();
+  });
+});

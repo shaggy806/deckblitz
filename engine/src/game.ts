@@ -11208,9 +11208,13 @@ export class Game {
     const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
-    // So is an artifact or creature tapped to waterbend (rule 701.67a).
+    // So is an artifact or creature tapped to waterbend (rule 701.67a), and
+    // harmonize's creature (rule 702.180b), as `castSpell` pays it — the
+    // one chosen, or the one an offer is being priced with.
+    const harmonized =
+      via !== "harmonize" ? [] : (tap ?? (this.harmonizeCreature !== null ? [this.harmonizeCreature] : []));
     const arrangementWith = (tapped: Iterable<ObjectId>): ManaSourceArrangement | undefined => {
-      const withheld = new Set([...convoked.map((p) => p.creature), ...tapped]);
+      const withheld = new Set([...convoked.map((p) => p.creature), ...harmonized, ...tapped]);
       return withheld.size === 0 && sacrificeCandidates === undefined
         ? undefined
         : {
