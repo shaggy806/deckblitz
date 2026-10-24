@@ -449,6 +449,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Losing loyalty never emitted `counter-removed`** (306.8, 606.4; 2026-10-24): damage to a planeswalker (as many as it had, at most) and a minus loyalty cost emit it, and simultaneous damage removes them as one event (`withDamageBatch`'s `countersRemoved`). Chandra, Fire Artisan authored (`trigger:loyalty-counters-removed`).
 - **A copy's new targets with a skipped "up to" slot couldn't be answered** (707.10c; 2026-10-24, found by the fuzzer): `stackTargetSlots` offers only the filled slots but kept each one's "other than slot n" in the old numbering, so a Twincast copy of Band Together cast with one creature of yours refused every answer; the relations are renumbered (`renumberOtherSlots`).
 - **A search of library and graveyard forced a graveyard find** (701.23b; 2026-10-24): only a search of the graveyard alone must find a match there; one that takes in the library may find none (`beginLibrarySearch`). Nissa's Encouragement authored (`effect:search-library-and-graveyard-named-set`).
 - **Blight ignores counter prevention** (701.68b; 2026-10-24): a blight cost, blighting kicker, ward—blight or "you may blight" is offered only with a creature a -1/-1 counter can go on (`Game.blightable`, through the `preventsCounters` statics), and a blight paid as a cost chooses among those; Lethal Sting authored.

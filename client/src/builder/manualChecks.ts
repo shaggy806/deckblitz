@@ -8081,4 +8081,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Forest*5'], hand: ["Nissa's Encouragement"], gy: ['Forest'], lib: ['Brambleweft Behemoth'] },
     }),
   ),
+  preset(
+    'Chandra, Fire Artisan: two attackers at once make one trigger',
+    board({
+      you: { bf: ['Grizzly Bears*2'] },
+      opp: { bf: [{ name: 'Chandra, Fire Artisan', counters: { loyalty: 5 } }] },
+    }),
+  ),
 ]

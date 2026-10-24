@@ -5266,3 +5266,7 @@ engine terms. A second thing to check is a second test.
 ### Nissa's Encouragement: may find nothing, though a Forest is in your graveyard
 - **Do:** Cast Nissa's Encouragement. When asked, confirm with nothing picked.
 - **Expect:** The Forest in your graveyard and the Brambleweft Behemoth in your library are offered, and the button works with nothing picked. The Forest stays in your graveyard.
+
+### Chandra, Fire Artisan: two attackers at once make one trigger
+- **Do:** Attack Bob's Chandra, Fire Artisan with both Grizzly Bears. Don't block (as Bob, if asked).
+- **Expect:** Chandra drops from 5 to 1 loyalty and her ability triggers once, dealing 4 damage to you — not twice for 2.

@@ -234,7 +234,6 @@ there and move this line to `COMPLETED.md`.
 - **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).
 - **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.
 - **A source of damage is chosen only among permanents and spells** (609.7a): not an object an ability on the stack refers to — a Circle of Protection against a dead creature's damage trigger.
-- **Losing loyalty never emits `counter-removed`** (306.8, 606.4): damage to a planeswalker and a minus loyalty cost emit only `loyalty-changed`, so a `counters-removed` trigger for loyalty never fires (Chandra, Fire Artisan).
 - **A merged permanent's token status is its own object's** (730.2d): a card mutated on top of a token still counts as a token.
 - **A granted leaves-the-battlefield trigger doesn't look back for its grant** (603.10a): Relic Vial when its only Cleric dies.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.

@@ -1102,6 +1102,14 @@ export class Game {
     /** `deals-damage-batch` triggers owed, per watcher ability and — unless
      * it fires once per event — per player dealt damage. */
     readonly damageTo: Map<string, OwedDamageBatchTrigger>;
+    /** `counters-removed` triggers owed, once per permanent the damage took
+     * counters from — a planeswalker's loyalty (rule 306.8): two attackers
+     * hitting Chandra, Fire Artisan at once remove them at once (her
+     * ruling). */
+    readonly countersRemoved: Map<
+      string,
+      { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+    >;
   } | null = null;
 
   /** The permanents that have left the battlefield so far in the one
@@ -14063,6 +14071,11 @@ export class Game {
       if (ability.loyaltyCost > 0) {
         this.emit({ type: "counter-added", object: sourceId, counter: "loyalty", amount: ability.loyaltyCost, by: player, after: source.counters.loyalty });
       }
+      // A minus cost removes them (606.4) — Chandra, Fire Artisan's
+      // "whenever one or more loyalty counters are removed".
+      if (ability.loyaltyCost < 0) {
+        this.emit({ type: "counter-removed", object: sourceId, counter: "loyalty", amount: -ability.loyaltyCost, after: source.counters.loyalty });
+      }
     }
     if (sacrificeVictim !== null) {
       // The chosen victim singles out one — split it off a compacted stack
@@ -18078,6 +18091,21 @@ export class Game {
             const owed = damageBatch.dealtDamage.get(key);
             if (owed === undefined) {
               damageBatch.dealtDamage.set(key, { ability, trigger: base, multiplier });
+            } else {
+              owed.trigger = {
+                ...owed.trigger,
+                triggerValue: (owed.trigger.triggerValue ?? 0) + event.amount,
+              };
+            }
+            return;
+          }
+          // Counters simultaneous damage removes (a planeswalker's loyalty,
+          // rule 306.8) go in one event: one trigger, "that much" the total.
+          if (ability.trigger.on === "counters-removed" && event.type === "counter-removed" && damageBatch !== null) {
+            const key = `${id}#${index}@${event.object}`;
+            const owed = damageBatch.countersRemoved.get(key);
+            if (owed === undefined) {
+              damageBatch.countersRemoved.set(key, { ability, trigger: base, multiplier });
             } else {
               owed.trigger = {
                 ...owed.trigger,
@@ -32105,7 +32133,8 @@ export class Game {
       }
     }
     if (recipientTypes.includes("planeswalker") && !recipientTypes.includes("creature")) {
-      object.counters.loyalty = (object.counters.loyalty ?? 0) - amount;
+      const had = object.counters.loyalty ?? 0;
+      object.counters.loyalty = had - amount;
       this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
       this.emit({
         type: "loyalty-changed",
@@ -32113,17 +32142,20 @@ export class Game {
         delta: -amount,
         loyalty: object.counters.loyalty,
       });
+      this.emitLoyaltyRemovedByDamage(target.object, had, amount);
       this.applyLifelink(source, amount, sourceLastKnown);
       return amount;
     }
     if (recipientTypes.includes("planeswalker")) {
-      object.counters.loyalty = (object.counters.loyalty ?? 0) - amount;
+      const had = object.counters.loyalty ?? 0;
+      object.counters.loyalty = had - amount;
       this.emit({
         type: "loyalty-changed",
         object: target.object,
         delta: -amount,
         loyalty: object.counters.loyalty,
       });
+      this.emitLoyaltyRemovedByDamage(target.object, had, amount);
     }
     // From a source with wither or infect, damage to a creature isn't marked:
     // the source's controller puts that many -1/-1 counters on it instead
@@ -32206,6 +32238,16 @@ export class Game {
     return this.objHasKeyword(source, keyword);
   }
 
+  /** Damage dealt to a planeswalker removes that many loyalty counters (rule
+   * 306.8) — as many as it had, at most — so a `counters-removed` trigger
+   * sees them go (Chandra, Fire Artisan), once per simultaneous damage
+   * event (`withDamageBatch`). */
+  private emitLoyaltyRemovedByDamage(object: ObjectId, had: number, amount: number): void {
+    const removed = Math.min(amount, Math.max(0, had));
+    if (removed <= 0) return;
+    this.emit({ type: "counter-removed", object, counter: "loyalty", amount: removed, after: Math.max(0, had - amount) });
+  }
+
   private applyLifelink(source: ObjectId, amount: number, sourceLastKnown?: LastKnownInfo): void {
     if (amount <= 0 || !this.sourceHasKeyword(source, "lifelink", sourceLastKnown)) return;
     // Its controller then: a stolen lifelinker's life is the thief's.
@@ -32250,6 +32292,10 @@ export class Game {
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
       >(),
       damageTo: new Map<string, OwedDamageBatchTrigger>(),
+      countersRemoved: new Map<
+        string,
+        { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+      >(),
     };
     this.damageBatch = batch;
     try {
@@ -32258,6 +32304,9 @@ export class Game {
       this.damageBatch = null;
     }
     for (const { ability, trigger, multiplier } of batch.dealtDamage.values()) {
+      this.queueTrigger(ability, trigger, multiplier);
+    }
+    for (const { ability, trigger, multiplier } of batch.countersRemoved.values()) {
       this.queueTrigger(ability, trigger, multiplier);
     }
     for (const owed of batch.damageTo.values()) {

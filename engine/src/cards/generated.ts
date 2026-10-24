@@ -2576,6 +2576,7 @@ import _poolChancellorOfTales from "./pool/chancellor-of-tales.js";
 import _poolChandler from "./pool/chandler.js";
 import _poolChandraAcolyteOfFlame from "./pool/chandra-acolyte-of-flame.js";
 import _poolChandraBoldPyromancer from "./pool/chandra-bold-pyromancer.js";
+import _poolChandraFireArtisan from "./pool/chandra-fire-artisan.js";
 import _poolChandraFlamesCatalyst from "./pool/chandra-flames-catalyst.js";
 import _poolChandraFlamesFury from "./pool/chandra-flames-fury.js";
 import _poolChandraFlameshaper from "./pool/chandra-flameshaper.js";
@@ -21604,6 +21605,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandler,
   _poolChandraAcolyteOfFlame,
   _poolChandraBoldPyromancer,
+  _poolChandraFireArtisan,
   _poolChandraFlamesCatalyst,
   _poolChandraFlamesFury,
   _poolChandraFlameshaper,
@@ -40645,6 +40647,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandler": _poolChandler,
   "pool/chandra-acolyte-of-flame": _poolChandraAcolyteOfFlame,
   "pool/chandra-bold-pyromancer": _poolChandraBoldPyromancer,
+  "pool/chandra-fire-artisan": _poolChandraFireArtisan,
   "pool/chandra-flames-catalyst": _poolChandraFlamesCatalyst,
   "pool/chandra-flames-fury": _poolChandraFlamesFury,
   "pool/chandra-flameshaper": _poolChandraFlameshaper,

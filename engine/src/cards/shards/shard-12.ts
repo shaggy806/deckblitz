@@ -80,6 +80,7 @@ import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
+import _poolChandraFireArtisan from "../pool/chandra-fire-artisan.js";
 import _poolChandrasFlameWave from "../pool/chandras-flame-wave.js";
 import _poolChaosMaw from "../pool/chaos-maw.js";
 import _poolChaoslace from "../pool/chaoslace.js";
@@ -671,6 +672,7 @@ const shard: CardShard = {
     _poolCelebrateTheMountainKing,
     _poolChampionOfDusan,
     _poolChampionOfDusk,
+    _poolChandraFireArtisan,
     _poolChandrasFlameWave,
     _poolChaosMaw,
     _poolChaoslace,
