@@ -1,0 +1,431 @@
+{
+ "batch": "B142",
+ "status": "complete",
+ "ranks": "EDHREC ranks 7454–7703 (the next 60 untriaged by rank)",
+ "authored": [
+  {
+   "name": "Stirring Wildwood",
+   "files": [
+    "engine/src/cards/pool/stirring-wildwood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Era of Innovation",
+   "files": [
+    "engine/src/cards/pool/era-of-innovation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attempted Murder",
+   "files": [
+    "engine/src/cards/pool/attempted-murder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archangel Avacyn // Avacyn, the Purifier",
+   "files": [
+    "engine/src/cards/pool/archangel-avacyn.ts",
+    "engine/src/cards/pool/avacyn-the-purifier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ally Encampment",
+   "files": [
+    "engine/src/cards/pool/ally-encampment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Charmbreaker Devils",
+   "files": [
+    "engine/src/cards/pool/charmbreaker-devils.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Door to Nothingness",
+   "files": [
+    "engine/src/cards/pool/door-to-nothingness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcbound Reclaimer",
+   "files": [
+    "engine/src/cards/pool/arcbound-reclaimer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Culling Dais",
+   "files": [
+    "engine/src/cards/pool/culling-dais.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nut Collector",
+   "files": [
+    "engine/src/cards/pool/nut-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plague Spitter",
+   "files": [
+    "engine/src/cards/pool/plague-spitter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Melek, Izzet Paragon",
+   "files": [
+    "engine/src/cards/pool/melek-izzet-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ricochet Trap",
+   "files": [
+    "engine/src/cards/pool/ricochet-trap.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Saffi Eriksdotter",
+   "files": [
+    "engine/src/cards/pool/saffi-eriksdotter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meltdown",
+   "files": [
+    "engine/src/cards/pool/meltdown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Steely Resolve",
+   "files": [
+    "engine/src/cards/pool/steely-resolve.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Myr Welder",
+   "files": [
+    "engine/src/cards/pool/myr-welder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deathbringer Liege",
+   "files": [
+    "engine/src/cards/pool/deathbringer-liege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Erasure",
+   "files": [
+    "engine/src/cards/pool/jaces-erasure.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Abzan Beastmaster",
+   "files": [
+    "engine/src/cards/pool/abzan-beastmaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hellkite Igniter",
+   "files": [
+    "engine/src/cards/pool/hellkite-igniter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Future Sight",
+   "files": [
+    "engine/src/cards/pool/future-sight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hex",
+   "files": [
+    "engine/src/cards/pool/hex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intellectual Offering",
+   "files": [
+    "engine/src/cards/pool/intellectual-offering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temur Charm",
+   "files": [
+    "engine/src/cards/pool/temur-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mask of Riddles",
+   "files": [
+    "engine/src/cards/pool/mask-of-riddles.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phage the Untouchable",
+   "files": [
+    "engine/src/cards/pool/phage-the-untouchable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quest for the Goblin Lord",
+   "files": [
+    "engine/src/cards/pool/quest-for-the-goblin-lord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broodhatch Nantuko",
+   "files": [
+    "engine/src/cards/pool/broodhatch-nantuko.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aegis of the Gods",
+   "files": [
+    "engine/src/cards/pool/aegis-of-the-gods.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Baxter, Fly in the Ointment",
+   "files": [
+    "engine/src/cards/pool/baxter-fly-in-the-ointment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea Gate Loremaster",
+   "files": [
+    "engine/src/cards/pool/sea-gate-loremaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bygone Bishop",
+   "files": [
+    "engine/src/cards/pool/bygone-bishop.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seedguide Ash",
+   "files": [
+    "engine/src/cards/pool/seedguide-ash.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Magus of the Moat",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-moat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soulbright Flamekin",
+   "files": [
+    "engine/src/cards/pool/soulbright-flamekin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howlpack Resurgence",
+   "files": [
+    "engine/src/cards/pool/howlpack-resurgence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circular Logic",
+   "files": [
+    "engine/src/cards/pool/circular-logic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ondu Cleric",
+   "files": [
+    "engine/src/cards/pool/ondu-cleric.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chariot of Victory",
+   "files": [
+    "engine/src/cards/pool/chariot-of-victory.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Court Street Denizen",
+   "files": [
+    "engine/src/cards/pool/court-street-denizen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Might of the Masses",
+   "files": [
+    "engine/src/cards/pool/might-of-the-masses.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruul Ragebeast",
+   "files": [
+    "engine/src/cards/pool/gruul-ragebeast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avatar of Slaughter",
+   "files": [
+    "engine/src/cards/pool/avatar-of-slaughter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Salvation",
+   "files": [
+    "engine/src/cards/pool/dark-salvation.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Gravepurge",
+   "needs": [
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "\"Put any number of target creature cards … on top of your library\" in the order you choose: `for-each-target` puts them in target order and never asks."
+  },
+  {
+   "name": "Winding Canyons",
+   "needs": [
+    "effect:flash-permission-this-turn"
+   ],
+   "why": "\"You may cast creature spells this turn as though they had flash\": `castAsThoughFlash` is only a static."
+  },
+  {
+   "name": "Apostle's Blessing",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Protection from artifacts or from the colour of your choice, chosen as it resolves, until end of turn."
+  },
+  {
+   "name": "Felidar Umbra",
+   "needs": [
+    "keyword:umbra-armor"
+   ],
+   "why": "Umbra armor isn't modelled."
+  },
+  {
+   "name": "Jace, Architect of Thought",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn",
+    "decision:separate-into-piles"
+   ],
+   "why": "The +1's \"until your next turn, whenever a creature an opponent controls attacks\", and the −2's piles an opponent separates."
+  },
+  {
+   "name": "Verdeloth the Ancient",
+   "needs": [
+    "keyword:kicker-x"
+   ],
+   "why": "Kicker {X}, and X Saprolings if kicked."
+  },
+  {
+   "name": "Wingcrafter",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond isn't modelled."
+  },
+  {
+   "name": "Stronghold Rats",
+   "needs": [
+    "effect:hidden-simultaneous-choices"
+   ],
+   "why": "Its ruling: each player chooses a card without seeing the others', then all discard at once (docs/engine-gaps.md)."
+  },
+  {
+   "name": "Battle Screech",
+   "needs": [
+    "cost:flashback-tap-creatures-cost"
+   ],
+   "why": "Flashback—Tap three untapped white creatures you control: a flashback cost can't tap creatures."
+  },
+  {
+   "name": "Vraska the Unseen",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "The +1's \"until your next turn, whenever a creature deals combat damage to Vraska, destroy that creature\"."
+  },
+  {
+   "name": "Benefactor's Draught",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"Until end of turn, whenever a creature an opponent controls blocks, draw a card.\""
+  },
+  {
+   "name": "Glimpse of Nature",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"Whenever you cast a creature spell this turn, draw a card\" as a spell's effect."
+  },
+  {
+   "name": "Leyline of Sanctity",
+   "needs": [
+    "mechanic:begin-game-on-battlefield"
+   ],
+   "why": "Beginning the game with it on the battlefield from the opening hand."
+  },
+  {
+   "name": "Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence",
+   "needs": [
+    "mechanic:flip-cards"
+   ],
+   "why": "The Kamigawa flip layout (rule 710) isn't modelled."
+  },
+  {
+   "name": "Deathbringer Regent",
+   "needs": [
+    "condition:condition-count-all-permanents"
+   ],
+   "why": "\"Five or more other creatures on the battlefield\": `controls` counts only yours."
+  }
+ ]
+}

@@ -130,6 +130,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} transforms (now ${event.front ? 'front' : 'back'} face)`
     case 'became-monstrous':
       return `${name(event.object)} becomes monstrous`
+    case 'became-renowned':
+      return `${name(event.object)} becomes renowned`
     case 'became-saddled':
       return `${name(event.object)} becomes saddled`
     case 'permanent-exerted':

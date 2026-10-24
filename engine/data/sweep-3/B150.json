@@ -1,0 +1,927 @@
+{
+  "batch": 150,
+  "status": "complete",
+  "ranks": "Battle for Zendikar (BFZ, 2015-10-02): the rest of the set; with awaken built",
+  "authored": [
+    {
+      "name": "Adverse Conditions",
+      "files": [
+        "engine/src/cards/pool/adverse-conditions.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Akoum Firebird",
+      "files": [
+        "engine/src/cards/pool/akoum-firebird.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Akoum Stonewaker",
+      "files": [
+        "engine/src/cards/pool/akoum-stonewaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aligned Hedron Network",
+      "files": [
+        "engine/src/cards/pool/aligned-hedron-network.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Angel of Renewal",
+      "files": [
+        "engine/src/cards/pool/angel-of-renewal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Angelic Captain",
+      "files": [
+        "engine/src/cards/pool/angelic-captain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Barrage Tyrant",
+      "files": [
+        "engine/src/cards/pool/barrage-tyrant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Benthic Infiltrator",
+      "files": [
+        "engine/src/cards/pool/benthic-infiltrator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blighted Gorge",
+      "files": [
+        "engine/src/cards/pool/blighted-gorge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blisterpod",
+      "files": [
+        "engine/src/cards/pool/blisterpod.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Boiling Earth",
+      "files": [
+        "engine/src/cards/pool/boiling-earth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brilliant Spectrum",
+      "files": [
+        "engine/src/cards/pool/brilliant-spectrum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brood Butcher",
+      "files": [
+        "engine/src/cards/pool/brood-butcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brood Monitor",
+      "files": [
+        "engine/src/cards/pool/brood-monitor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Call the Scions",
+      "files": [
+        "engine/src/cards/pool/call-the-scions.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carrier Thrall",
+      "files": [
+        "engine/src/cards/pool/carrier-thrall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Catacomb Sifter",
+      "files": [
+        "engine/src/cards/pool/catacomb-sifter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chasm Guide",
+      "files": [
+        "engine/src/cards/pool/chasm-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clutch of Currents",
+      "files": [
+        "engine/src/cards/pool/clutch-of-currents.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coastal Discovery",
+      "files": [
+        "engine/src/cards/pool/coastal-discovery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Culling Drone",
+      "files": [
+        "engine/src/cards/pool/culling-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dampening Pulse",
+      "files": [
+        "engine/src/cards/pool/dampening-pulse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deathless Behemoth",
+      "files": [
+        "engine/src/cards/pool/deathless-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dominator Drone",
+      "files": [
+        "engine/src/cards/pool/dominator-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dust Stalker",
+      "files": [
+        "engine/src/cards/pool/dust-stalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Earthen Arms",
+      "files": [
+        "engine/src/cards/pool/earthen-arms.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eldrazi Skyspawner",
+      "files": [
+        "engine/src/cards/pool/eldrazi-skyspawner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Exert Influence",
+      "files": [
+        "engine/src/cards/pool/exert-influence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eyeless Watcher",
+      "files": [
+        "engine/src/cards/pool/eyeless-watcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fathom Feeder",
+      "files": [
+        "engine/src/cards/pool/fathom-feeder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fertile Thicket",
+      "files": [
+        "engine/src/cards/pool/fertile-thicket.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Firemantle Mage",
+      "files": [
+        "engine/src/cards/pool/firemantle-mage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Forerunner of Slaughter",
+      "files": [
+        "engine/src/cards/pool/forerunner-of-slaughter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gideon, Ally of Zendikar",
+      "files": [
+        "engine/src/cards/pool/gideon-ally-of-zendikar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grip of Desolation",
+      "files": [
+        "engine/src/cards/pool/grip-of-desolation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grovetender Druids",
+      "files": [
+        "engine/src/cards/pool/grovetender-druids.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gruesome Slaughter",
+      "files": [
+        "engine/src/cards/pool/gruesome-slaughter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guardian of Tazeem",
+      "files": [
+        "engine/src/cards/pool/guardian-of-tazeem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guul Draz Overseer",
+      "files": [
+        "engine/src/cards/pool/guul-draz-overseer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hero of Goma Fada",
+      "files": [
+        "engine/src/cards/pool/hero-of-goma-fada.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Horribly Awry",
+      "files": [
+        "engine/src/cards/pool/horribly-awry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Incubator Drone",
+      "files": [
+        "engine/src/cards/pool/incubator-drone.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Infuse with the Elements",
+      "files": [
+        "engine/src/cards/pool/infuse-with-the-elements.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kalastria Healer",
+      "files": [
+        "engine/src/cards/pool/kalastria-healer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kiora, Master of the Depths",
+      "files": [
+        "engine/src/cards/pool/kiora-master-of-the-depths.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Bladewhirl",
+      "files": [
+        "engine/src/cards/pool/kor-bladewhirl.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Castigator",
+      "files": [
+        "engine/src/cards/pool/kor-castigator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Entanglers",
+      "files": [
+        "engine/src/cards/pool/kor-entanglers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kozilek's Sentinel",
+      "files": [
+        "engine/src/cards/pool/kozileks-sentinel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lantern Scout",
+      "files": [
+        "engine/src/cards/pool/lantern-scout.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Makindi Patrol",
+      "files": [
+        "engine/src/cards/pool/makindi-patrol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mire's Malice",
+      "files": [
+        "engine/src/cards/pool/mires-malice.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mist Intruder",
+      "files": [
+        "engine/src/cards/pool/mist-intruder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Molten Nursery",
+      "files": [
+        "engine/src/cards/pool/molten-nursery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Munda, Ambush Leader",
+      "files": [
+        "engine/src/cards/pool/munda-ambush-leader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Murasa Ranger",
+      "files": [
+        "engine/src/cards/pool/murasa-ranger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nettle Drone",
+      "files": [
+        "engine/src/cards/pool/nettle-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nissa's Renewal",
+      "files": [
+        "engine/src/cards/pool/nissas-renewal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Noyan Dar, Roil Shaper",
+      "files": [
+        "engine/src/cards/pool/noyan-dar-roil-shaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ondu Champion",
+      "files": [
+        "engine/src/cards/pool/ondu-champion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ondu Rising",
+      "files": [
+        "engine/src/cards/pool/ondu-rising.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Outnumber",
+      "files": [
+        "engine/src/cards/pool/outnumber.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Part the Waterveil",
+      "files": [
+        "engine/src/cards/pool/part-the-waterveil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pathway Arrows",
+      "files": [
+        "engine/src/cards/pool/pathway-arrows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Planar Outburst",
+      "files": [
+        "engine/src/cards/pool/planar-outburst.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prism Array",
+      "files": [
+        "engine/src/cards/pool/prism-array.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Radiant Flames",
+      "files": [
+        "engine/src/cards/pool/radiant-flames.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reckless Cohort",
+      "files": [
+        "engine/src/cards/pool/reckless-cohort.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reclaiming Vines",
+      "files": [
+        "engine/src/cards/pool/reclaiming-vines.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Resolute Blademaster",
+      "files": [
+        "engine/src/cards/pool/resolute-blademaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Retreat to Valakut",
+      "files": [
+        "engine/src/cards/pool/retreat-to-valakut.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rising Miasma",
+      "files": [
+        "engine/src/cards/pool/rising-miasma.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Roil Spout",
+      "files": [
+        "engine/src/cards/pool/roil-spout.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Roil's Retribution",
+      "files": [
+        "engine/src/cards/pool/roils-retribution.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Roilmage's Trick",
+      "files": [
+        "engine/src/cards/pool/roilmages-trick.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruination Guide",
+      "files": [
+        "engine/src/cards/pool/ruination-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruinous Path",
+      "files": [
+        "engine/src/cards/pool/ruinous-path.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rush of Ice",
+      "files": [
+        "engine/src/cards/pool/rush-of-ice.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Salvage Drone",
+      "files": [
+        "engine/src/cards/pool/salvage-drone.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scatter to the Winds",
+      "files": [
+        "engine/src/cards/pool/scatter-to-the-winds.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Seek the Wilds",
+      "files": [
+        "engine/src/cards/pool/seek-the-wilds.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Serene Steward",
+      "files": [
+        "engine/src/cards/pool/serene-steward.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Serpentine Spike",
+      "files": [
+        "engine/src/cards/pool/serpentine-spike.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sheer Drop",
+      "files": [
+        "engine/src/cards/pool/sheer-drop.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silent Skimmer",
+      "files": [
+        "engine/src/cards/pool/silent-skimmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skitterskin",
+      "files": [
+        "engine/src/cards/pool/skitterskin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyrider Elf",
+      "files": [
+        "engine/src/cards/pool/skyrider-elf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slab Hammer",
+      "files": [
+        "engine/src/cards/pool/slab-hammer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sludge Crawler",
+      "files": [
+        "engine/src/cards/pool/sludge-crawler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spell Shrivel",
+      "files": [
+        "engine/src/cards/pool/spell-shrivel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stasis Snare",
+      "files": [
+        "engine/src/cards/pool/stasis-snare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stonefury",
+      "files": [
+        "engine/src/cards/pool/stonefury.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swarm Surge",
+      "files": [
+        "engine/src/cards/pool/swarm-surge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swell of Growth",
+      "files": [
+        "engine/src/cards/pool/swell-of-growth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tajuru Beastmaster",
+      "files": [
+        "engine/src/cards/pool/tajuru-beastmaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tajuru Stalwart",
+      "files": [
+        "engine/src/cards/pool/tajuru-stalwart.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tajuru Warcaller",
+      "files": [
+        "engine/src/cards/pool/tajuru-warcaller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tandem Tactics",
+      "files": [
+        "engine/src/cards/pool/tandem-tactics.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tide Drifter",
+      "files": [
+        "engine/src/cards/pool/tide-drifter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tightening Coils",
+      "files": [
+        "engine/src/cards/pool/tightening-coils.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Touch of the Void",
+      "files": [
+        "engine/src/cards/pool/touch-of-the-void.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Turn Against",
+      "files": [
+        "engine/src/cards/pool/turn-against.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ugin's Insight",
+      "files": [
+        "engine/src/cards/pool/ugins-insight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unified Front",
+      "files": [
+        "engine/src/cards/pool/unified-front.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unnatural Aggression",
+      "files": [
+        "engine/src/cards/pool/unnatural-aggression.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Veteran Warleader",
+      "files": [
+        "engine/src/cards/pool/veteran-warleader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vile Aggregate",
+      "files": [
+        "engine/src/cards/pool/vile-aggregate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodland Wanderer",
+      "files": [
+        "engine/src/cards/pool/woodland-wanderer.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Blight Herder",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (\"you may put two … when you cast this spell; if you do, create three Scions\")."
+    },
+    {
+      "name": "Void Attendant",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (an activation cost)."
+    },
+    {
+      "name": "Wasteland Strangler",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (its enters trigger's \"you may … if you do\")."
+    },
+    {
+      "name": "Murk Strider",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (its enters trigger's \"you may … if you do\")."
+    },
+    {
+      "name": "Ulamog's Nullifier",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (\"you may put two … if you do, counter target spell\")."
+    },
+    {
+      "name": "Ulamog's Despoiler",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (the choice as it enters decides its four counters)."
+    },
+    {
+      "name": "Mind Raker",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (its enters trigger's \"you may … if you do\")."
+    },
+    {
+      "name": "Oracle of Dust",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (an activation cost)."
+    },
+    {
+      "name": "Cryptic Cruiser",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (an activation cost)."
+    },
+    {
+      "name": "Ruin Processor",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (its cast trigger's \"you may … if you do\")."
+    },
+    {
+      "name": "Ulamog's Reclaimer",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (its enters trigger's \"you may … if you do\")."
+    },
+    {
+      "name": "Processor Assault",
+      "needs": [
+        "cost:put-opponent-exiled-card-into-graveyard"
+      ],
+      "why": "A processor: \"put a card an opponent owns from exile into that player's graveyard\" has no vocabulary (an additional cost to cast)."
+    },
+    {
+      "name": "Undergrowth Champion",
+      "needs": [
+        "replacement:prevent-once-per-damage-event"
+      ],
+      "why": "Damage from several sources at once is one event costing one counter (the ruling); the prevent-and-remove-a-counter replacement runs once per source (Unbreathing Horde's gap)."
+    },
+    {
+      "name": "March from the Tomb",
+      "needs": [
+        "decision:target-total-mana-value"
+      ],
+      "why": "\"Any number of target Ally creature cards with total mana value 8 or less\": the any-number group caps total power only."
+    },
+    {
+      "name": "Halimar Tidecaller",
+      "needs": [
+        "filter:has-awaken"
+      ],
+      "why": "No CardFilter clause for \"a card with awaken\"."
+    },
+    {
+      "name": "Brutal Expulsion",
+      "needs": [
+        "target:spell-or-creature"
+      ],
+      "why": "\"Target spell or creature\": spell-or-permanent's filter applies to the spell side too."
+    },
+    {
+      "name": "Hedron Blade",
+      "needs": [
+        "trigger:becomes-blocked-by-filtered"
+      ],
+      "why": "\"Becomes blocked by one or more colorless creatures\": becomes-blocked has no blocker filter, and blocked-by fires once per blocker."
+    },
+    {
+      "name": "Transgress the Mind",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "You choose a card with mana value 3 or greater from a targeted player's revealed hand and exile it; look-and-choose reads only your own or a for-each-player hand, and discard-chosen only discards."
+    },
+    {
+      "name": "Lithomancer's Focus",
+      "needs": [
+        "replacement:prevent-damage-to-target-from-filtered-sources"
+      ],
+      "why": "Prevents damage to the target from colorless sources this turn; prevent-damage has no source filter."
+    },
+    {
+      "name": "Crumble to Dust",
+      "needs": [
+        "condition:same-name-as-target",
+        "effect:search-hand-graveyard-library-exile"
+      ],
+      "why": "Searching hand, graveyard and library for cards with the target land's name and exiling them."
+    },
+    {
+      "name": "Quarantine Field",
+      "needs": [
+        "decision:target-count-amount"
+      ],
+      "why": "Its enters trigger targets up to as many permanents as it has isolation counters; an any-number group's max is a number or a spell's X."
+    },
+    {
+      "name": "Grave Birthing",
+      "needs": [
+        "effect:target-player-exiles-from-graveyard"
+      ],
+      "why": "\"Target opponent exiles a card from their graveyard\" — that player's choice; for-each-player can't take a target slot and look-and-choose's chooser is only that-player."
+    },
+    {
+      "name": "Encircling Fissure",
+      "needs": [
+        "effect:prevent-combat-damage-by-target-players-creatures"
+      ],
+      "why": "Prevent combat damage by creatures target opponent controls; prevent-all-combat-damage's `by` filter can't name a targeted player."
+    }
+  ]
+}

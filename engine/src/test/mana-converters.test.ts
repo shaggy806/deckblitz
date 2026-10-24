@@ -346,6 +346,23 @@ describe("floating mana funds a converter", () => {
     expect(game.state.players[A].manaPool).toEqual([]);
   });
 
+  it("funds a converter only from a source whose mana an ability's cost may spend", () => {
+    // Fuzzer seed 20 (2026-10-23): the same rule for a source the payment
+    // taps. Mudflat Village's {B} is only for creature spells, so it can't
+    // pay Twilight Mire's {B/G}: {2}{B}{B} isn't there — where the planner
+    // had spent the Village's {B} on the spell, lent it to fund the Mire
+    // (to be paid back out of the Mire's {B}{B}), and the payment threw.
+    const game = makeGame();
+    open(game);
+    spawn(game, ["Mudflat Village", "Twilight Mire", "Island", "Island"]);
+    expect(canCast(game, "Archfiend of the Dross")).toBe(false);
+    // A Swamp beside them funds the Mire.
+    spawn(game, ["Swamp"]);
+    const card = game.debugSpawn("Archfiend of the Dross", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card, targets: [] });
+    expect(game.state.zones.shared.stack).toContain(card);
+  });
+
   it("still can't make what isn't there: {R} floating funds the Valley, not a third mana", () => {
     const game = makeGame();
     open(game);

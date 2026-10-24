@@ -3598,6 +3598,9 @@
   "keyword:spectacle": {
    "example": "Light Up the Stage: Spectacle — an alternative cost usable only if an opponent lost life this turn."
   },
+  "keyword:surge": {
+   "example": "Crush of Tentacles: Surge {3}{U}{U} (cast for it if you've cast another spell this turn), and 'if this spell's surge cost was paid'."
+  },
   "keyword:splice": {
    "example": "Desperate Ritual: Splice onto Arcane."
   },
@@ -4242,6 +4245,10 @@
   "static:grant-convoke": {
    "family": "static:grant-abilities-to-spells",
    "example": "Hoarding Broodlord: 'Spells you cast from exile have convoke'."
+  },
+  "static:grant-improvise": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Inspiring Statuary: 'Nonartifact spells you cast have improvise'; Archway of Innovation: 'The next spell you cast this turn has improvise'."
   },
   "static:grant-cycling-to-cards-in-hand": {
    "family": "static:grant-to-cards-outside-battlefield",
@@ -9691,6 +9698,311 @@
   "effect:reveal-until-per-destroyed-this-way": {
    "family": "effect:reveal-until-count",
    "example": "Indomitable Creativity: for each permanent destroyed this way, its controller reveals until an artifact or creature card, and all of them enter at once."
+  },
+  "amount:creatures-dealt-combat-damage-to-player-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Excess (Indulge // Excess): 'for each creature you controlled that dealt combat damage to a player this turn' — no turn-history list records which creatures did."
+  },
+  "cost:mana-ability-discard": {
+   "family": "cost:mana-ability-complex-costs",
+   "example": "Bog Witch: '{B}, {T}, Discard a card: Add {B}{B}{B}.' A mana ability's activation never pays `cost.discard` (only the stack path does), and activation doesn't refuse it either — docs/engine-gaps.md."
+  },
+  "effect:discard-controller-of-target": {
+   "family": "effect:player-scope-extensions",
+   "example": "Nicol Bolas, Planeswalker's −9: 'that player or that planeswalker's controller discards seven cards, then sacrifices seven permanents' — `discard` reads only a player slot."
+  },
+  "effect:grant-embalm": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Cursecloth Wrappings: 'target creature card in your graveyard gains embalm until end of turn. The embalm cost is equal to its mana cost.'"
+  },
+  "effect:counter-into-battlefield": {
+   "family": "effect:control-change-extensions",
+   "example": "Desertion: 'if an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard' — `counter`'s `into` is a hand or exile."
+  },
+  "decision:any-opponent-may": {
+   "family": "effect:choices-by-other-players",
+   "example": "Sin Prodder: 'Any opponent may have you put that card into your graveyard. If a player does, …' — one opponent's yes ends it; `each-player-may` lets every opponent say yes."
+  },
+  "replacement:clone-exception-if-embalmed": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Vizier of Many Faces: 'except if this creature was embalmed, the token has no mana cost, it's white, and it's a Zombie' — a `copyOnEnter` exception that applies only to the embalmed token."
+  },
+  "condition:source-monstrous": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Colossus of Akros: 'As long as this creature is monstrous, it has trample and can attack as though it didn't have defender' — `GameObject.monstrous` is recorded but no filter or condition reads it."
+  },
+  "condition:dice-rolled-doubles": {
+   "family": "mechanic:dice-rolling",
+   "example": "Celebr-8000: roll two six-sided dice, a result table per die, and 'if you rolled doubles'."
+  },
+  "static:equip-only-to-filter": {
+   "family": "effect:attach-extensions",
+   "example": "O-Naginata: 'This Equipment can be attached only to a creature with power 3 or greater' — an attach restriction, and the state-based unattach when the creature stops qualifying (rule 301.5c)."
+  },
+  "mechanic:token-devour": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "Dragon Broodmother: a token with devour 2. Devour is asked only where `askEnterChoice` runs; token creation never asks, so a token's devour would never happen — docs/engine-gaps.md."
+  },
+  "effect:gain-activated-abilities-of-target": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Quicksilver Elemental: '{U}: This creature gains all activated abilities of target creature until end of turn' — and 'you may spend blue mana as though it were mana of any color' to pay them."
+  },
+  "cost:additional-cost-sacrifice-amount": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Tectonic Split: 'As an additional cost to cast this spell, sacrifice half the lands you control, rounded up' — `additionalCost.sacrificeCount` is a number or 'x'."
+  },
+  "effect:other-player-adds-mana-choice": {
+   "family": "effect:choices-by-other-players",
+   "example": "Spectral Searchlight: 'Choose a player. That player adds one mana of any color they choose' — `add-mana`'s `who` takes mana with no choice in it."
+  },
+  "filter:same-name-as-card-in-casters-graveyard": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Dragonlord Kolaghan: 'Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard'."
+  },
+  "cost:cost-reduction-same-name-in-graveyard": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Locket of Yesterdays: 'Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.'"
+  },
+  "effect:take-extra-turns-count": {
+   "family": "effect:amount-new-variants",
+   "example": "Sage of Hours: 'For each five counters removed this way, take an extra turn after this one' — `extra-turn` takes no count."
+  },
+  "effect:skip-next-combat-phase": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Stonehorn Dignitary: 'target opponent skips their next combat phase' — each instance its own skip (the ruling)."
+  },
+  "effect:cast-free-while-exiled": {
+   "family": "zone:impulse-permission-options",
+   "example": "Kheru Spellsnatcher: 'You may cast that card without paying its mana cost for as long as it remains exiled' — the ability's controller, not the owner, on any later turn."
+  },
+  "effect:delayed-leaves-own-targets": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Fatal Fissure: 'When that creature dies this turn, you earthbend 4' — a leave-keyed delayed trigger choosing a target (a land) of its own as it triggers; only `at.whenever` takes `targets`."
+  },
+  "effect:search-to-linked-exile": {
+   "family": "zone:impulse-permission-options",
+   "example": "Roads Go Ever, Ever On I: search for Plains cards and exile them, linked to the Saga — `search-library` has no exile destination."
+  },
+  "effect:copy-spell-for-each-by-caster": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Mirrorwing Dragon: 'that player copies that spell for each other creature they control that the spell could target' — the copies the caster's, aimed at the caster's own creatures; `forEachItCouldTarget` reads and gives from the effect's controller's side."
+  },
+  "replacement:draw-replacement-search": {
+   "family": "replacement:new-event-replacements",
+   "example": "Archmage Ascension: 'if you would draw a card, you may instead search your library for a card, put that card into your hand' — `would-draw`'s `instead` has no search."
+  },
+  "effect:choose-how-players-vote": {
+   "family": "mechanic:voting",
+   "example": "Illusion of Choice: 'You choose how each player votes this turn.'"
+  },
+  "effect:damage-all-controller-of-target": {
+   "family": "effect:target-spec-additions",
+   "example": "Chandra, Pyrogenius: '−10: Chandra deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls' — `damage-all`'s `controlledByTarget` reads only a player target, not a planeswalker's controller."
+  },
+  "effect:allow-play-from-exile": {
+   "example": "Spark of Creativity: 'Exile the top card of your library. You may have it deal damage equal to its mana value to target creature. If you don't, you may play that card until end of turn' — permission to play (lands too) a card exiled earlier in the same resolution; `allow-cast-from-exile` only casts."
+  },
+  "replacement:prevent-all-damage-from-chosen-source-this-turn": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "example": "Consulate Surveillance: 'Pay {E}: Prevent all damage that would be dealt to you this turn by a source of your choice' — `prevent-damage-from-chosen-source` takes only \"next-time\" or a fixed amount."
+  },
+  "effect:change-target-to-enchanted": {
+   "family": "effect:change-target",
+   "example": "Captured by the Consulate: 'Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able' — `change-targets`'s `to` accepts only \"source\"."
+  },
+  "static:max-hand-size-equal-to-counters": {
+   "family": "static:max-hand-size",
+   "example": "Midnight Oil: 'Your maximum hand size is equal to the number of hour counters on this enchantment' — `maxHandSize` takes a fixed `set` minus a CountSpec, and no CountSpec counts counters on the source."
+  },
+  "static:grant-emerge": {
+   "family": "keyword:emerge",
+   "example": "Herigast, Erupting Nullkite: 'Each creature spell you cast has emerge. The emerge cost is equal to its mana cost' — emerge is printed only (`CardDefinition.emerge`), never granted."
+  },
+  "amount:emerge-sacrificed-creature": {
+   "family": "keyword:emerge",
+   "example": "Adipose Offspring: 'If this creature's emerge cost was paid, instead create X of those tokens, where X is the sacrificed creature's toughness' — the permanent keeps neither that its emerge cost was paid nor what was sacrificed."
+  },
+  "effect:discard-chosen-two-filters": {
+   "family": "effect:discard-chosen-count",
+   "example": "Distended Mindbender: 'You choose from it a nonland card with mana value 3 or less and a card with mana value 4 or greater. That player discards those cards' — `discard-chosen` picks one card under one filter; two would be two separate discards."
+  },
+  "condition:monarch-as-turn-began": {
+   "example": "Knights of the Black Rose: 'if you were the monarch as the turn began' — nothing records who was the monarch as each turn began."
+  },
+  "cost:sacrifice-self-and-any-number": {
+   "family": "effect:sacrifice-any-number",
+   "example": "Emrakul's Evangel: 'Sacrifice this creature and any number of other non-Eldrazi creatures: Create a 3/2 Eldrazi Horror token for each creature sacrificed this way.'"
+  },
+  "decision:choose-self-or-target-on-resolution": {
+   "example": "Kaya, Ghost Assassin's 0: 'Exile Kaya or up to one target creature. Return that card…' — which one is chosen as it resolves."
+  },
+  "effect:can-block-any-number-this-turn": {
+   "family": "static:block-additional-creature",
+   "example": "Give No Ground: 'target creature … can block any number of creatures this turn'."
+  },
+  "effect:exile-all-spells": {
+   "family": "effect:exile-target-spell",
+   "example": "Summary Dismissal: 'Exile all other spells and counter all abilities.'"
+  },
+  "filter:dealt-combat-damage-to-creature-this-turn": {
+   "family": "stat:object-damage-history",
+   "example": "Thirsting Axe: 'if equipped creature didn't deal combat damage to a creature this turn' — `dealtDamageToCreatureThisTurn` counts any damage."
+  },
+  "mechanic:draft-matters": {
+   "example": "Paliano Vanguard, Spire Phantasm, Noble Banneret: abilities that refer to the Conspiracy draft (rule 905.2) — choices made, names or numbers noted, cards drafted face up."
+  },
+  "replacement:prevent-all-damage-by-filter": {
+   "family": "replacement:damage-modification",
+   "example": "Repel the Abominable: 'Prevent all damage that would be dealt this turn by non-Human sources' — `prevent-all-combat-damage`'s `by` covers combat damage only."
+  },
+  "static:has-all-names": {
+   "example": "Spy Kit: 'Equipped creature has all names of nonlegendary creature cards in addition to its name.'"
+  },
+  "static:prohibit-spells-by-chosen-number": {
+   "example": "Sanctum Prelate: 'As this creature enters, choose a number. Noncreature spells with mana value equal to the chosen number can't be cast.'"
+  },
+  "target:card-in-graveyard-or-permanent": {
+   "family": "effect:target-spec-additions",
+   "example": "Daretti, Ingenious Iconoclast's −6: 'Choose target artifact card in a graveyard or artifact on the battlefield' — one slot over two zones."
+  },
+  "trigger:attacks-different-players": {
+   "example": "Canal Courier: 'Whenever this creature and another creature attack different players, …'"
+  },
+  "trigger:sacrificed-for-emerge": {
+   "family": "keyword:emerge",
+   "example": "Foul Emissary: 'When you sacrifice this creature while casting a spell with emerge, create two 1/1 colorless Eldrazi Scion tokens.'"
+  },
+  "scope:each-player-with-life-total": {
+   "example": "Triskaidekaphobia: 'each player with exactly 13 life loses the game' — no player scope by life total, and the losses must happen at once (a draw if all have 13)."
+  },
+  "static:cant-transform": {
+   "example": "Bound by Moonsilver: 'Enchanted permanent can't attack, block, or transform.'"
+  },
+  "filter:shares-card-type-with-discarded": {
+   "family": "effect:hidden-simultaneous-choices",
+   "example": "Creeping Dread: 'Each opponent who discarded a card that shares a card type with the card you discarded loses 3 life.'"
+  },
+  "filter:same-name-as-trigger-spell": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Harness the Storm: 'you may cast target card with the same name as that spell from your graveyard'."
+  },
+  "trigger:becomes-target-by-spell-type": {
+   "example": "Silverfur Partisan: 'Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell' — `becomes-target` has `spellOnly` but no spell type."
+  },
+  "static:grant-madness": {
+   "family": "keyword:madness",
+   "example": "Falkenrath Gorger: 'Each Vampire creature card you own that isn't on the battlefield has madness.'"
+  },
+  "bug:aura-enters-transformed-asks-enchant": {
+   "example": "Skin Invasion: a double-faced Aura put onto the battlefield transformed is still asked what it enchants (`askEnterChoice` reads the front face), so it stays in the graveyard with nothing to enchant."
+  },
+  "effect:each-creature-deals-power-damage-to-target": {
+   "example": "Moonlight Hunt: 'Choose target creature you don't control. Each Wolf and Werewolf you control deals damage equal to its power to that creature.'"
+  },
+  "effect:damage-to-trigger-object-controller": {
+   "family": "effect:damage-to-trigger-object",
+   "example": "Assembled Alphas: '…deals 3 damage to that creature and 3 damage to that creature's controller' — damage to a trigger object is built, to its controller isn't."
+  },
+  "condition:owns-named-card-in-every-zone": {
+   "example": "Hedron Alignment: 'if you control a permanent named Hedron Alignment and a card named Hedron Alignment is in your hand, graveyard and exile' — a by-name ownership check across zones, with an optional reveal of your hand."
+  },
+  "effect:become-copy-filter-except-source": {
+   "family": "effect:become-copy",
+   "example": "Deceiver of Form: 'creatures you control other than this creature become copies of that card' — become-copy over a filter that leaves out the source (only `exceptOf` exists)."
+  },
+  "mana:spend-only-colorless-or-c-cost": {
+   "example": "Cultivator Drone: 'spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}' — the last clause isn't a ManaSpendOnly yet."
+  },
+  "effect:target-cant-block-source-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Kozilek's Pathfinder: '{C}: Target creature can't block this creature this turn' — a restriction naming one attacker, not a plain cant-block."
+  },
+  "condition:life-less-than-half-starting": {
+   "example": "Anya, Merciless Angel: 'for each opponent whose life total is less than half their starting life total' — a strict bound per opponent; `life-total`'s atMost: half-starting is 'at most'."
+  },
+  "mechanic:choose-two-colors-on-enter": {
+   "example": "Seal of the Guildpact: 'as this artifact enters, choose two colors' — chooseOnEnter takes one choice, and cost reductions can't read a chosen colour."
+  },
+  "cost:put-opponent-exiled-card-into-graveyard": {
+   "example": "Battle for Zendikar's processors (Ulamog's Nullifier, Blight Herder, Void Attendant): \"put a card an opponent owns from exile into that player's graveyard\" — as an activation cost, or as a \"you may … if you do\" while a spell is cast or a trigger resolves; the player chooses which of the opponents' exiled cards."
+  },
+  "filter:has-awaken": {
+   "family": "filter:has-cycling",
+   "example": "Halimar Tidecaller: \"return target card with awaken from your graveyard\" — a CardFilter clause for a card whose `overload.keyword` is awaken."
+  },
+  "target:spell-or-creature": {
+   "example": "Brutal Expulsion: \"return target spell or creature to its owner's hand\" — any spell, or a creature permanent; `spell-or-permanent`'s filter applies to both sides."
+  },
+  "replacement:prevent-damage-to-target-from-filtered-sources": {
+   "family": "replacement:prevent-damage-from-colored-sources",
+   "example": "Lithomancer's Focus: \"prevent all damage that would be dealt this turn to target creature by colorless sources\" — a turn-long shield on a target, matched by source."
+  },
+  "effect:search-hand-graveyard-library-exile": {
+   "example": "Crumble to Dust: \"search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them\"."
+  },
+  "effect:target-player-exiles-from-graveyard": {
+   "family": "effect:target-player-exiles-from-hand",
+   "example": "Grave Birthing: \"target opponent exiles a card from their graveyard\" — that player chooses."
+  },
+  "effect:prevent-combat-damage-by-target-players-creatures": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "Encircling Fissure: \"prevent all combat damage that would be dealt this turn by creatures target opponent controls\" — `prevent-all-combat-damage`'s `by` filter can't name a targeted player."
+  },
+  "effect:cast-now-from-opponent-library-top": {
+   "family": "zone:cast-from-library-top",
+   "example": "Talent of the Telepath: reveal the top seven of target opponent's library, cast an instant or sorcery from among them free (up to two with spell mastery), the rest into that player's graveyard — cast-now's libraryTop only reads the caster's own library."
+  },
+  "effect:shuffle-hand-and-permanents-draw-that-many": {
+   "family": "effect:shuffle-into-library",
+   "example": "The Great Aurora: each player shuffles their hand and the permanents they own into their library, then draws that many cards; then each player may put any number of land cards from their hand onto the battlefield."
+  },
+  "effect:restrict-each-matching-at-resolution": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Joraga Invocation: 'each creature you control … must be blocked this turn if able' applies to the creatures you control as it resolves (rule 611.2c); a `restrict` with a filter is a rule for the turn that also catches creatures entering later."
+  },
+  "static:self-uncounterable-if": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Exquisite Firecraft: 'Spell mastery — … this spell can't be countered' — `cantBeCountered` is a plain boolean on the card, with no condition."
+  },
+  "effect:copy-countered-spell": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Psychic Rebuttal: 'Counter target instant or sorcery spell that targets you. Spell mastery — … you may copy the spell countered this way' — nothing copies the spell a counter removed, and only if the counter worked (the ruling)."
+  },
+  "static:enchanted-abilities-cant-be-activated": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Suppression Bonds: 'Enchanted permanent can't attack or block, and its activated abilities can't be activated' — a static's `prohibits.abilitiesOf` filter can't name the permanent this Aura is attached to."
+  },
+  "trigger:turned-face-up-other": {
+   "family": "mechanic:face-down",
+   "example": "Salt Road Ambushers: the `turned-face-up` trigger has no `otherOnly` — \"whenever another permanent you control is turned face up\""
+  },
+  "static:play-from-linked-exile-once-per-turn": {
+   "family": "effect:linked-exiled-card",
+   "example": "Hedonist's Trove: play lands and cast spells from among cards exiled with this enchantment, spells only once each turn"
+  },
+  "cost:self-graveyard-cast-cost-increase": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Risen Executioner: cast from your graveyard, costing {1} more for each other creature card in your graveyard"
+  },
+  "amount:auras-attached-to-self": {
+   "family": "condition:source-enchanted-by-n-auras",
+   "example": "Graceblade Artisan: +2/+2 for each Aura attached to it"
+  },
+  "static:block-as-though-reach-filter": {
+   "family": "static:block-additional-creature",
+   "example": "Dragon Hunter: can block Dragons as though it had reach"
+  },
+  "cost:attack-block-cost-self": {
+   "family": "cost:attack-tax",
+   "example": "Qal Sisma Behemoth: can't block or attack unless its controller pays {1}"
+  },
+  "effect:flicker-return-face-down": {
+   "family": "mechanic:face-down",
+   "example": "Shorecrasher Elemental: exile it, then return it face down"
+  },
+  "static:dash-cost-reduction": {
+   "family": "keyword:dash",
+   "example": "Warbringer: dash costs you pay cost {2} less — reducing the dash cost string before commander tax is added would discount too little"
   }
  }
 }

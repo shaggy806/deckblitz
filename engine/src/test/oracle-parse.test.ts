@@ -184,6 +184,31 @@ describe("costs and triggers", () => {
     expect(sphere.complete).toBe(false);
   });
 
+  it("a delayed trigger for the rest of the turn, and one with a target of its own", () => {
+    // Glimpse of Nature, Subira's "until end of turn, whenever …" and Origin
+    // of Thor's chapter II (rule 603.7c). The delayed ability's target is its
+    // own, not the creating ability's.
+    expect(parseSentence("Whenever you cast a creature spell this turn, draw a card.", ctx())).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "cast-spell", who: "you", filter: { type: "creature" } } },
+      effect: { kind: "draw", amount: 1 },
+      text: "Whenever you cast a creature spell this turn, draw a card.",
+    });
+    expect(
+      parseSentence("Until your next turn, whenever a creature you control deals combat damage to a player, draw a card.", ctx()),
+    ).toMatchObject({ at: { until: "your-next-turn", whenever: { on: "deals-combat-damage-to-player" } } });
+    const outer = ctx();
+    expect(
+      parseSentence("Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.", outer),
+    ).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "cast-spell", who: "you" }, targets: ["creature-you-control"] },
+      effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+      text: "Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.",
+    });
+    expect(outer.targets).toEqual([]);
+  });
+
   it("a spell is bounced from the stack", () => {
     // Take It Back: without `from: "stack"` the bounce would look for a
     // permanent and do nothing to the spell.
@@ -535,6 +560,32 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(slinger.webSlinging).toEqual({ cost: "{R}{G}" });
     expect(slinger.complete).toBe(true);
+    // The Innistrad werewolves' transforms: the previous turn's spells.
+    expect(face("At the beginning of each upkeep, if no spells were cast last turn, transform this creature.").triggered[0].condition).toEqual({
+      kind: "spells-cast-last-turn",
+      none: true,
+    });
+    expect(
+      face("At the beginning of each upkeep, if a player cast two or more spells last turn, transform this creature.").triggered[0]
+        .condition,
+    ).toEqual({ kind: "spells-cast-last-turn", byOnePlayerAtLeast: 2 });
+    // Emerge (rule 702.119a), and emerge from [quality] (702.119b).
+    const emerger = face(
+      "Emerge {5}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)",
+    );
+    expect(emerger.emerge).toEqual({ cost: "{5}{U}" });
+    expect(emerger.complete).toBe(true);
+    expect(
+      face(
+        "Emerge from artifact {5}{B}{B} (You may cast this spell by sacrificing an artifact and paying the emerge cost reduced by that artifact's mana value.)",
+      ).emerge,
+    ).toEqual({ cost: "{5}{B}{B}", from: { type: "artifact" } });
+    // Dash (rule 702.109a).
+    const dasher = face(
+      "Dash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)",
+    );
+    expect(dasher.dash).toEqual({ cost: "{2}{R}" });
+    expect(dasher.complete).toBe(true);
     // Impending N—[cost] (rule 702.176a): the cost, and its two abilities — not a
     // creature while it has a time counter, and the end step's removal.
     const overlord = face(
@@ -683,6 +734,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         ],
       },
     });
+  });
+
+  it("bolster (rule 701.39a): an effect", () => {
+    expect(parseSentence("Bolster 2.", ctx())).toEqual({ kind: "bolster", amount: 2 });
+    const scaleguard = face("When this creature enters, bolster 2.");
+    expect(scaleguard.triggered[0].effect).toEqual({ kind: "bolster", amount: 2 });
+    expect(scaleguard.complete).toBe(true);
   });
 
   it("blight (rule 701.68a): a cost, a choice of costs, an optional cost, an effect and 'you may blight N. If you do, …'", () => {
@@ -1173,6 +1231,71 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("awaken (rule 702.113a): the spell's own targets and effect, then the land's", () => {
+    const clutch = face(
+      "Return target creature to its owner's hand.\nAwaken 3—{4}{U} (If you cast this spell for {4}{U}, also put three +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)",
+      "Sorcery",
+    );
+    expect(clutch.complete).toBe(true);
+    expect(clutch.targets).toEqual(["creature"]);
+    expect(clutch.overload).toEqual({
+      cost: "{4}{U}",
+      keyword: "awaken",
+      targets: ["creature", "land-you-control"],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "return-to-hand", target: 0 },
+          { kind: "add-counter", target: 1, counter: "+1/+1", amount: 3 },
+          {
+            kind: "animate",
+            target: 1,
+            power: 0,
+            toughness: 0,
+            addTypes: ["creature"],
+            addSubtypes: ["Elemental"],
+            keywords: ["haste"],
+            duration: "permanent",
+          },
+        ],
+      },
+    });
+    // A spell not read whole leaves its awaken line to a person too.
+    const unread = face("Frobnicate the widgets.\nAwaken 2—{4}{W} (reminder)", "Instant");
+    expect(unread.overload).toBeUndefined();
+    expect(unread.todo).toContain("Awaken 2—{4}{W}");
+  });
+
+  it("surge (rule 702.117a) and 'if that creature would die this turn, exile it instead' (rule 614.1a)", () => {
+    const tyrant = face("Surge {3}{R}{R}\nFlying\nWhen ~ enters, if its surge cost was paid, it deals 3 damage to any target.", "Creature — Dragon");
+    expect(tyrant.alternativeCost).toEqual({
+      mana: "{3}{R}{R}",
+      keyword: "surge",
+      condition: { kind: "cast-this-turn", who: "you", atLeast: 1 },
+    });
+    expect(tyrant.triggered[0].condition).toEqual({ kind: "self-surge-paid" });
+    const bolt = face(
+      "~ deals 4 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.",
+      "Instant",
+    );
+    expect(bolt.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 4, target: 0 },
+        { kind: "exile-if-dies-this-turn", target: 0 },
+      ],
+    });
+    expect(face("~ deals 3 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.", "Sorcery").effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage-all", amount: 3, filter: { type: "creature" } },
+        { kind: "exile-if-dies-this-turn", dealtDamageThisWay: "creature" },
+      ],
+    });
+    // Not after a sentence with no target of its own to point at.
+    expect(face("If that creature would die this turn, exile it instead.", "Instant").complete).toBe(false);
+  });
+
   it("ascend and the city's blessing (rule 702.131)", () => {
     const reminder = "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)";
     const charger = face(`${reminder}\n~ gets +2/+2 as long as you have the city's blessing.`, "Creature — Horse");
@@ -1225,6 +1348,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(berserker.triggered[0].trigger).toEqual({ on: "becomes-blocked", who: "self" });
     expect(berserker.triggered[0].effect).toMatchObject({ kind: "modify-pt", target: "source", power: { product: [3, { difference: [{ blockersOf: "source" }, 1] }] } });
     expect(berserker.complete).toBe(true);
+  });
+
+  it("renown (rule 702.112): its trigger, the renowned designation's statics, intervening ifs and triggers", () => {
+    const REMINDER = "(When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)";
+    const chaser = face(`Renown 1 ${REMINDER}\nAs long as this creature is renowned, it has menace.`, "Creature — Goblin Warrior");
+    expect(chaser.triggered[0]).toMatchObject({
+      trigger: { on: "deals-combat-damage-to-player", who: "self" },
+      condition: { kind: "source", filter: { renowned: false } },
+      effect: { kind: "renown", amount: 1 },
+    });
+    expect(chaser.static[0]).toMatchObject({ grantKeywords: ["menace"], condition: { kind: "source", filter: { renowned: true } } });
+    expect(chaser.complete).toBe(true);
+    const wardens = face(`Renown 2 ${REMINDER}\nWhenever a creature you control becomes renowned, draw a card.`, "Creature — Human Monk");
+    expect(wardens.triggered[1].trigger).toEqual({ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } });
+    const seeker = face("When this creature becomes renowned, draw a card.", "Creature — Human Soldier");
+    expect(seeker.triggered[0].trigger).toEqual({ on: "becomes-renowned", who: "self" });
+    const consul = face("Whenever this creature attacks, if it's renowned, draw a card.", "Creature — Human Soldier");
+    expect(consul.triggered[0].condition).toEqual({ kind: "source", filter: { renowned: true } });
   });
 
   it("'attacks and isn't blocked' (rule 509.3g) and 'if you do, ~ assigns no combat damage this turn'", () => {

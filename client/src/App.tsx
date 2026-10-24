@@ -3538,9 +3538,12 @@ function Table({
    * — see `CommanderTile`. */
   const commandZoneTile = (obj: VisibleObject, paired = false) => {
     const castable = mode === 'priority' && castByCard.has(obj.id)
-    // An ability that works from the command zone (commander ninjutsu): the
-    // tile opens its ability menu, with the cast in it when there is one.
-    const usable = mode === 'priority' && (abilitiesBySource.get(obj.id)?.length ?? 0) > 0
+    // An ability that works from the command zone (commander ninjutsu), or
+    // more than one way to cast it (dash, blitz, kicker): the tile opens its
+    // ability menu, with each cast in it.
+    const usable =
+      mode === 'priority' &&
+      ((abilitiesBySource.get(obj.id)?.length ?? 0) > 0 || (playFacesByCard.get(obj.id)?.length ?? 0) > 1)
     // What's still owed, from the engine: less than 2 per cast once a
     // reduction has outrun the printed generic part (affinity on a
     // commander), none for a tax paid in life.
@@ -5415,6 +5418,7 @@ function Table({
   // the command zone) is still cast from it.
   const selectedCast =
     selectedSource !== null && view.objects[selectedSource]?.zone === 'command' && castByCard.has(selectedSource)
+  const selectedCastOpts = selectedCast ? (playFacesByCard.get(selectedSource) ?? []) : []
 
   const renderPlayerPanel = (pid: PlayerId) => (
     <PlayerPanel
@@ -5827,8 +5831,11 @@ function Table({
           const faceOpts =
             mode === 'priority' ? (playFacesByCard.get(id) ?? []) : []
           // More than one way to play this card: a multi-face card's sides,
-          // or a kickable spell's kicked / unkicked casts (P8).
-          const multiFace = faceOpts.length > 1
+          // or a kickable spell's kicked / unkicked casts (P8). An emerge
+          // cast sacrifices a creature, so even alone it's a button that
+          // names it — never a click on the card that sacrifices silently.
+          const multiFace =
+            faceOpts.length > 1 || faceOpts.some((a) => a.kind === 'cast-spell' && a.emergeSacrifice !== undefined)
           return (
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
@@ -5869,6 +5876,7 @@ function Table({
                         <> face down (a 2/2 for <Symbols text="{3}" />)</>
                       ) : null}
                       {a.kind === 'cast-spell' && a.via === 'blitz' ? ' (blitz)' : ''}
+                      {a.kind === 'cast-spell' && a.via === 'dash' ? ' (dash)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'impending' ? ' (impending)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'freerunning' ? ' (freerunning)' : ''}
                       {a.kind === 'cast-spell' && a.offspring ? (
@@ -5895,6 +5903,9 @@ function Table({
                         : ''}
                       {a.kind === 'cast-spell' && a.via === 'web-slinging' && a.webSlingingReturn
                         ? ` (web-slinging, returning ${a.webSlingingReturn.cardName})`
+                        : ''}
+                      {a.kind === 'cast-spell' && a.via === 'emerge' && a.emergeSacrifice
+                        ? ` (emerge, sacrificing ${a.emergeSacrifice.cardName}: −${a.emergeSacrifice.manaValue})`
                         : ''}
                       {a.kind === 'cast-spell' && a.costOptionText ? (
                         <> (<Symbols text={a.costOptionText} />)</>
@@ -6044,6 +6055,7 @@ function Table({
           sacrifice choice), so the menu closes either way. */}
       {selectedSource !== null &&
       (selectedAbilities.length > 0 ||
+        selectedCastOpts.length > 1 ||
         selectedFaceUp !== undefined ||
         selectedUnlocks.length > 0 ||
         selectedPreparedCasts.length > 0) ? (
@@ -6051,7 +6063,22 @@ function Table({
           source={selectedSource}
           title={game.nameOf(selectedSource)}
           items={[
-            ...(selectedCast
+            // More than one way to cast it: an item each, named as a
+            // graveyard card's ways are (`graveyardVariantLabel`).
+            ...(selectedCastOpts.length > 1
+              ? selectedCastOpts.map((a, i) => {
+                  const variant = graveyardVariantLabel(a, view, false)
+                  const space = variant.indexOf(' ')
+                  return {
+                    key: `cast:${i}`,
+                    label: `Cast ${a.cardName}${space < 0 ? '' : ` (${variant.slice(space + 1)})`}`,
+                    onSelect: () => {
+                      setSelectedSource(null)
+                      playFace(a)
+                    },
+                  }
+                })
+              : selectedCast
               ? [
                   {
                     key: 'cast',

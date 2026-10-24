@@ -18,7 +18,9 @@
  *
  * And which creature blights (rule 701.68a — `Game.beginBlight`, with the
  * awaiting's `blight` set): exactly one of the player's creatures, for a
- * cost being paid or a `blight` effect resolving.
+ * cost being paid or a `blight` effect resolving. And which of the
+ * least-toughness creatures bolsters (rule 701.39a — `Game.beginBolster`,
+ * with `bolster` set): exactly one of them.
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -57,6 +59,7 @@ export const choosePermanents = defineDecision({
           ? { maxTotalPower: awaiting.maxTotalPower, powers: powersOf(ctx, awaiting.eligible) }
           : {}),
         ...(awaiting.blight !== undefined ? { blight: awaiting.blight } : {}),
+        ...(awaiting.bolster !== undefined ? { bolster: awaiting.bolster } : {}),
       },
     ];
   },
@@ -143,6 +146,12 @@ export const choosePermanents = defineDecision({
     // to them — and choosing none isn't one.
     if (legal.blight !== undefined) {
       const each = [...helpers.order(legal.eligible)].reverse().slice(0, Math.max(1, limit));
+      return each.map((id) => ({ type: "choose-permanents", player, permanents: [id] }));
+    }
+    // Which tied creature bolsters (rule 701.39a): the same, the most
+    // valuable first — the counters are a gift.
+    if (legal.bolster !== undefined) {
+      const each = helpers.order(legal.eligible).slice(0, Math.max(1, limit));
       return each.map((id) => ({ type: "choose-permanents", player, permanents: [id] }));
     }
     // "You may choose one" (a casualty, Deadpool's exchange): which one is

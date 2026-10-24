@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3773 already implemented / 1227 missing (marks refreshed 2026-10-22)
+3780 already implemented / 1220 missing (marks refreshed 2026-10-24)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -277,7 +277,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   278  Exsanguinate                             {X}{B}{B}        Sorcery
 [x]   279  Inspiring Call                           {2}{G}           Instant
 [x]   280  Haunted Ridge                            {0}              Land
-[ ]   281  Ragavan, Nimble Pilferer                 {R}              Legendary Creature — Monkey Pirate
+[x]   281  Ragavan, Nimble Pilferer                 {R}              Legendary Creature — Monkey Pirate
 [x]   282  Rugged Prairie                           {0}              Land
 [x]   283  Reality Shift                            {1}{U}           Instant
 [x]   284  Darksteel Citadel                        {0}              Artifact Land
@@ -931,7 +931,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   935  Bastion Protector                        {2}{W}           Creature — Human Soldier
 [x]   936  Evendo, Waking Haven                     {0}              Land — Planet
 [x]   937  Pull from Tomorrow                       {X}{U}{U}        Instant
-[ ]   938  Kappa Cannoneer                          {5}{U}           Artifact Creature — Turtle Warrior
+[x]   938  Kappa Cannoneer                          {5}{U}           Artifact Creature — Turtle Warrior
 [x]   939  Bloodfell Caves                          {0}              Land
 [x]   940  Thopter Spy Network                      {2}{U}{U}        Enchantment
 [x]   941  Thoughtcast                              {4}{U}           Sorcery
@@ -1310,11 +1310,11 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1317  Valakut, the Molten Pinnacle             {0}              Land
 [x]  1318  Dragonspeaker Shaman                     {1}{R}{R}        Creature — Human Barbarian Shaman
 [x]  1319  Halimar Depths                           {0}              Land
-[ ]  1320  Whir of Invention                        {X}{U}{U}{U}     Instant
+[x]  1320  Whir of Invention                        {X}{U}{U}{U}     Instant
 [x]  1321  Uthros, Titanic Godcore                  {0}              Land — Planet
 [x]  1322  Krark-Clan Ironworks                     {4}              Artifact
 [x]  1323  Awaken the Woods                         {X}{G}{G}        Sorcery
-[ ]  1324  Organic Extinction                       {8}{W}{W}        Sorcery
+[x]  1324  Organic Extinction                       {8}{W}{W}        Sorcery
 [x]  1325  Experimental Augury                      {1}{U}           Instant
 [x]  1326  Umbral Collar Zealot                     {1}{B}           Creature — Human Cleric
 [x]  1327  Key to the City                          {2}              Artifact
@@ -1714,7 +1714,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1721  Overlord of the Hauntwoods               {3}{G}{G}        Enchantment Creature — Avatar Horror
 [x]  1722  Fate Unraveler                           {3}{B}           Enchantment Creature — Hag
 [x]  1723  Impulsive Pilferer                       {R}              Creature — Goblin Pirate
-[ ]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
+[x]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
 [x]  1725  Nyx Weaver                               {1}{B}{G}        Enchantment Creature — Spider
 [x]  1726  Intruder Alarm                           {2}{U}           Enchantment
 [x]  1727  Slither Blade                            {U}              Creature — Snake Rogue
@@ -4030,7 +4030,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4037  Will of the Temur                        {5}{U}           Sorcery
 [x]  4038  Canoptek Scarab Swarm                    {4}              Artifact Creature — Insect
 [x]  4039  Titania's Command                        {4}{G}{G}        Sorcery
-[ ]  4040  Bottle-Cap Blast                         {4}{R}           Instant
+[x]  4040  Bottle-Cap Blast                         {4}{R}           Instant
 [x]  4041  Spell Stutter                            {1}{U}           Instant
 [ ]  4042  Scroll of Fate                           {3}              Artifact
 [x]  4043  Desolation Twin                          {10}             Creature — Eldrazi
@@ -4821,7 +4821,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4828  Atzocan Seer                             {1}{G}{W}        Creature — Human Druid
 [x]  4829  Neriv, Heart of the Storm                {1}{R}{W}{B}     Legendary Creature — Spirit Dragon
 [x]  4830  Brotherhood Vertibird                    {3}              Artifact — Vehicle
-[ ]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
+[x]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
 [x]  4832  Brainstone                               {1}              Artifact
 [x]  4833  Short Bow                                {2}              Artifact — Equipment
 [x]  4834  Norman Osborn // Green Goblin            {2}              Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain

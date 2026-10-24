@@ -146,4 +146,29 @@ describe("melee", () => {
     expect(game.characteristics(tifa).power).toBe(4);
     expect(game.characteristics(tifa).toughness).toBe(4);
   });
+
+  it("counts an opponent attacked by a creature that has left combat before melee resolves (the rulings)", () => {
+    const { game, controllers } = setUp([A, B, C]);
+    const tifa = game.debugSpawn(TIFA, A, "battlefield", { summoningSick: false });
+    const bears = game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
+    controllers[A].declareAttackersFn = () => [
+      { attacker: tifa, defender: B },
+      { attacker: bears, defender: C },
+    ];
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.zones.shared.stack.length > 0);
+    game.debugMove(bears, "graveyard");
+    game.advanceUntil((s) => s.turn.step === "declare-blockers");
+    expect(game.characteristics(tifa).power).toBe(4);
+  });
+
+  it("doesn't count a creature put onto the battlefield attacking (the rulings)", () => {
+    const { game, controllers } = setUp([A, B, C]);
+    const tifa = game.debugSpawn(TIFA, A, "battlefield", { summoningSick: false });
+    controllers[A].declareAttackersFn = () => [{ attacker: tifa, defender: B }];
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.zones.shared.stack.length > 0);
+    const late = game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
+    game.state.objects[late].attacking = C;
+    game.advanceUntil((s) => s.turn.step === "declare-blockers");
+    expect(game.characteristics(tifa).power).toBe(3);
+  });
 });

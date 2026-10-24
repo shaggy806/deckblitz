@@ -3,10 +3,12 @@ import { defineCard } from "../define.js";
 // EDHREC rank 15271.
 // Makes Thopter → use "Thopter Token".
 //
-// The +1's "until end of turn, whenever …" is a trigger Dovin has until end
-// of turn: it triggers once for each creature you control that deals combat
-// damage to a player, one loyalty counter each, however much damage (the
-// ruling). The −7 takes all of a library of fewer than three cards (the
+// The +1's "until end of turn, whenever …" is a delayed triggered ability
+// (rule 603.7c), belonging to no permanent: it triggers once for each
+// creature you control that deals combat damage to a player, one loyalty
+// counter each, however much damage (the ruling), and nothing that happens
+// to Dovin ends it — though a Dovin that has left is a new object it can't
+// put counters on (rule 400.7). The −7 takes all of a library of fewer than three cards (the
 // ruling).
 const PLUS_TEXT =
   "+1: Until end of turn, whenever a creature you control deals combat damage to a player, put a loyalty counter on Dovin.";
@@ -29,16 +31,10 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: [],
       effect: {
-        kind: "grant-triggered",
-        target: "source",
-        duration: "end-of-turn",
-        ability: {
-          trigger: { on: "deals-combat-damage-to-player", who: "you-control", filter: { type: "creature" } },
-          targets: [],
-          effect: { kind: "add-counter", target: "source", counter: "loyalty", amount: 1 },
-          resolve: null,
-          text: "Whenever a creature you control deals combat damage to a player, put a loyalty counter on Dovin.",
-        },
+        kind: "delayed-trigger",
+        at: { whenever: { on: "deals-combat-damage-to-player", who: "you-control", filter: { type: "creature" } } },
+        effect: { kind: "add-counter", target: "source", counter: "loyalty", amount: 1 },
+        text: "Whenever a creature you control deals combat damage to a player, put a loyalty counter on Dovin.",
       },
       resolve: null,
       text: PLUS_TEXT,

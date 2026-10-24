@@ -8,7 +8,7 @@
  * into the spell's or ability's chosen targets, or the literal `"source"`.
  */
 
-import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
+import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
   CardType,
@@ -229,6 +229,31 @@ export interface DelayedCombatDamage {
  * player the trigger player. */
 export interface DelayedUnblocked {
   readonly attacksUnblocked: EffectTargetRef;
+}
+
+/**
+ * "Until end of turn, whenever [event], [effect]" — and "whenever [event]
+ * this turn", and a planeswalker's "until your next turn, whenever …" (rule
+ * 603.7c): a delayed triggered ability with a duration, matched like any
+ * triggered ability's `whenever` — "you" is its controller, `"self"` the
+ * object that set it up, in the stint it was in then — and firing each time
+ * until the duration ends. It belongs to no permanent, so nothing that
+ * happens to its source (leaving, losing its abilities, changing hands) ends
+ * it. Its trigger object is the event's (`"trigger-object"` is "it"), and
+ * `"source"` is still the card that set it up (Mountain Titan's "put a
+ * +1/+1 counter on this creature").
+ *
+ * With no `targets` its effect reads the creating ability's targets by slot
+ * (Jaya, Fiery Negotiator's "to that creature"). With `targets` it chooses
+ * its own each time it triggers, as a printed trigger does, and its slots
+ * are those (Origin of Thor's "put a +1/+1 counter on target creature you
+ * control").
+ */
+export interface DelayedWhenever {
+  readonly whenever: TriggerSpec;
+  /** Lasts until its controller's next turn begins, not just this turn. */
+  readonly until?: "your-next-turn";
+  readonly targets?: readonly TargetSpec[];
 }
 
 /** How a `flicker` returns what it exiled — the non-target half of its
@@ -627,10 +652,12 @@ export type EffectAmount =
    * `turn-history` condition does. See `TurnHistory`.
    */
   | { readonly turnHistory: TurnHistoryKind; readonly who?: PlayerScope; readonly filter?: CardFilter }
-  /** How many opponents the controller is attacking with creatures this
-   * combat — melee's "+1/+1 for each opponent you attacked with a creature
-   * this combat" (rule 702.121). A planeswalker attacked isn't its
-   * controller. */
+  /** How many opponents the controller attacked with creatures this combat
+   * — melee's "+1/+1 for each opponent you attacked with a creature this
+   * combat" (rule 702.121): the players attackers were declared at
+   * (`PlayerState.attackedPlayers`), whether or not those creatures still
+   * attack, and never one put onto the battlefield attacking (the
+   * rulings). A planeswalker attacked isn't its controller. */
   | { readonly opponentsAttacked: true }
   /** How many creatures are attacking the player a per-player effect is
    * acting on — that player, not a planeswalker of theirs (rule 506.3):
@@ -1273,6 +1300,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * Bolster N (rule 701.39a): the effect's controller chooses a creature
+       * they control with the least toughness, or tied for it, among
+       * creatures they control, and puts `amount` +1/+1 counters on it. The
+       * choice is made as this resolves — not a target — with the
+       * `choose-permanents` decision, asked only when creatures are tied
+       * (a token stack's tokens are one choice). Nothing, if they control no
+       * creature.
+       */
+      readonly kind: "bolster";
+      readonly amount: EffectAmount;
+    }
+  | {
+      /**
        * Blight N (rule 701.68a): each player in `who` (default `"you"`) puts
        * `amount` -1/-1 counters on a creature they control, which they choose
        * as this resolves — not a target — with the `choose-permanents`
@@ -1426,8 +1466,13 @@ export type EffectSpec =
   | {
       readonly kind: "damage";
       readonly amount: EffectAmount;
-      /** A target slot index — omit when `who` is set instead. */
-      readonly target?: number;
+      /** A target slot index — omit when `who` is set instead. Or
+       * `"trigger-object"`, untargeted: "whenever this creature blocks or
+       * becomes blocked by a creature, this creature deals 1 damage to **that
+       * creature**" (Ornery Goblin — `blocks` with `object: "blocked"`, and
+       * `blocked-by`, whose trigger object is the blocker). One that has left
+       * the battlefield since is dealt nothing. */
+      readonly target?: number | "trigger-object";
       /** Untargeted damage to a whole scope of players (Sabotender / Tannuk:
        * "deals 1 damage to each opponent" — needed-cards P16), instead of a
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read
@@ -1695,6 +1740,26 @@ export type EffectSpec =
        * is its own effect rather than a `return-to-hand` variant. */
       readonly kind: "put-on-bottom-of-library";
       readonly target: number;
+    }
+  | {
+      /** "If that creature would die this turn, exile it instead" (Lava Coil,
+       * Scorching Dragonfire — rule 614.1a): a replacement that follows the
+       * permanent in `target` until the turn ends or it leaves the
+       * battlefield (`GameObject.exileIfDiesTurn`). It applies whether or
+       * not the spell's damage was dealt, and whatever kills it this turn
+       * (the rulings); a target that isn't a permanent (a player, through
+       * "any target") is left alone. */
+      readonly kind: "exile-if-dies-this-turn";
+      readonly target?: EffectTargetRef;
+      /** Instead of `target`: "If a creature **dealt damage this way** would
+       * die this turn, exile it instead" (Anger of the Gods, Incendiary
+       * Flow) — every permanent the resolution under way has dealt damage to
+       * so far, so put it after the damage. A target whose damage was
+       * prevented isn't covered (rule 615.1, the rulings). `"creature"`
+       * covers only the creatures among them (Incendiary Flow's any target
+       * leaves a planeswalker out), `"permanent"` creatures and planeswalkers
+       * (Underworld Fires). */
+      readonly dealtDamageThisWay?: "creature" | "permanent";
     }
   | {
       /** Destroy every battlefield permanent matching `filter` (Wrath of God:
@@ -2405,12 +2470,20 @@ export type EffectSpec =
       readonly kind: "delayed-trigger";
       /** A step ("at the beginning of the next end step"), a permanent
        * leaving the battlefield ("when it dies" — see {@link DelayedLeaves}),
-       * or the controller's next spell this turn ({@link DelayedNextSpell}).
+       * the controller's next spell this turn ({@link DelayedNextSpell}), or
+       * any event a trigger can name, until end of turn or until your next
+       * turn ({@link DelayedWhenever}).
        * Whatever the creating ability's trigger object was ("return **that
        * card** to the battlefield at the beginning of the next end step" —
        * Shirei, Shizo's Caretaker) is the delayed ability's too, unless the
        * spell it waits for is. */
-      readonly at: DelayedTriggerTiming | DelayedLeaves | DelayedNextSpell | DelayedCombatDamage | DelayedUnblocked;
+      readonly at:
+        | DelayedTriggerTiming
+        | DelayedLeaves
+        | DelayedNextSpell
+        | DelayedCombatDamage
+        | DelayedUnblocked
+        | DelayedWhenever;
       readonly effect: EffectSpec;
       /** Text for the log and the stack. */
       readonly text: string;
@@ -3142,6 +3215,18 @@ export type EffectSpec =
        * "Monstrosity X" (701.37c).
        */
       readonly kind: "monstrosity";
+      readonly amount: EffectAmount;
+    }
+  | {
+      /**
+       * Renown N's effect (rule 702.112a): "if it isn't renowned, put N +1/+1
+       * counters on it and it becomes renowned." Always about the ability's
+       * own source, and only while it's the same object on the battlefield
+       * (rule 400.7): one that has left, or is renowned already (a second
+       * instance of renown, 702.112c), has nothing happen to it and fires no
+       * `becomes-renowned` trigger. The `renown()` helper's trigger.
+       */
+      readonly kind: "renown";
       readonly amount: EffectAmount;
     }
   | {
@@ -5814,6 +5899,11 @@ export interface EffectApi {
   countersOf(target: TargetRef, counter: string | undefined): number;
   /** See the `"put-on-bottom-of-library"` {@link EffectSpec}. */
   putOnBottomOfLibrary(target: TargetRef): void;
+  /** See the `"exile-if-dies-this-turn"` {@link EffectSpec}. */
+  exileIfDiesThisTurn(target: TargetRef): void;
+  /** See the `"exile-if-dies-this-turn"` {@link EffectSpec}'s
+   * `dealtDamageThisWay`. */
+  exileDamagedThisWayIfTheyDie(creaturesOnly: boolean): void;
   /** Every player a `PlayerScope` names, in APNAP order and skipping anyone
    * who has already lost. The shared scope resolution behind `draw`'s `who`,
    * `discard-hand`, and anything else that acts on a scope one player at a
@@ -5949,6 +6039,9 @@ export interface EffectApi {
    * creature chosen now, or asked for — then `then` with it as target 0.
    * Nothing, if they control no creature (rule 701.68b). */
   blight(player: PlayerId, amount: number, then?: EffectSpec): void;
+  /** See the `"bolster"` {@link EffectSpec}: the controller bolsters
+   * `amount` — the creature chosen now, or asked for. */
+  bolster(amount: number): void;
   /** See the `"behold"` {@link EffectSpec}: the controller beholds (rule
    * 701.4a) — the object chosen now, or asked for — then `then` with it as
    * target 0. Nothing, if nothing qualifies. */
@@ -6012,7 +6105,8 @@ export interface EffectApi {
         }
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
-      | { readonly attacksUnblocked: ObjectId },
+      | { readonly attacksUnblocked: ObjectId }
+      | DelayedWhenever,
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -6436,6 +6530,8 @@ export interface EffectApi {
   amass(amount: number, creatureType: string, onto?: ObjectId): void;
   /** See the `"monstrosity"` {@link EffectSpec}. */
   monstrosity(amount: number): void;
+  /** See the `"renown"` {@link EffectSpec}. */
+  renown(amount: number): void;
   /** See the `"add-counter-all"` {@link EffectSpec}. */
   addCounterAll(
     filter: CardFilter,
@@ -8596,6 +8692,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "bolster":
+      // Rule 701.39a: by the effect's controller, chosen as it resolves.
+      ctx.bolster(amountValue(spec.amount, ctx));
+      return;
     case "behold":
       // Rule 701.4a: by the effect's controller, chosen as it resolves.
       ctx.behold(spec, spec.then);
@@ -8639,7 +8739,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.toTriggerRecipient === true
           ? ctx.triggerRecipient()
           : spec.target !== undefined
-            ? ctx.targets[spec.target]
+            ? resolveEffectTarget(spec.target, ctx)
             : undefined;
       if (target !== undefined) {
         const each = target.kind === "player" ? target.player : undefined;
@@ -8776,6 +8876,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "That player untaps it": no such player, nothing is untapped.
       if (spec.by !== undefined && effectPlayer(spec.by, ctx) === undefined) return;
       ctx.untapPermanent(target);
+      return;
+    }
+    case "exile-if-dies-this-turn": {
+      if (spec.dealtDamageThisWay !== undefined) {
+        ctx.exileDamagedThisWayIfTheyDie(spec.dealtDamageThisWay === "creature");
+        return;
+      }
+      if (spec.target === undefined) return;
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.exileIfDiesThisTurn(target);
       return;
     }
     case "put-on-bottom-of-library": {
@@ -9196,6 +9306,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
         return;
       }
+      if (typeof spec.at === "object" && "whenever" in spec.at) {
+        ctx.delayTrigger(spec.at, spec.effect, spec.text, controller);
+        return;
+      }
       if (typeof spec.at === "object" && "nextSpell" in spec.at) {
         ctx.delayTrigger(
           {
@@ -9434,6 +9548,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "monstrosity":
       ctx.monstrosity(amountValue(spec.amount, ctx));
+      return;
+    case "renown":
+      ctx.renown(amountValue(spec.amount, ctx));
       return;
     case "add-counter-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);

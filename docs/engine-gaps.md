@@ -6,6 +6,17 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **"Each player discards" isn't chosen in secret.** Rule 101.4: when every player makes a choice
+  at once, the active player chooses first, then the others in turn order, and then the choices
+  take effect together; the rulings of Miasmic Mummy, Neheb, the Worthy and Delirium Skeins add
+  "no one sees what the other players are discarding before deciding". A scoped `discard`
+  (`GameState.pendingDiscards`, drained by `promptNextDiscard`) asks one player at a time and
+  discards each player's cards before the next chooses, so a later player sees the earlier
+  discards, and each discard is its own event. **Fix (outline):** collect every scoped player's
+  choice first (rule 101.4's choose-then-act machinery, built for the Forgotten Realms set — batch
+  109), hidden from the others, then discard them all as one graveyard batch. Miasmic Mummy and
+  Neheb are in the pool on today's behaviour; blocks Delirium Skeins, Stronghold Rats and
+  Cunning Lethemancer (`effect:hidden-simultaneous-choices`). Found by an authoring agent, 2026-10-23 (B141).
 - **Blight ignores counter prevention.** Rule 701.68b: a player can't blight if they can't put a
   -1/-1 counter on a creature they control. `Game.canBlight` only checks that they control a
   creature, so with Melira, Sylvok Outcast (in the pool) on the battlefield every blight cost and
@@ -21,16 +32,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   set's slots — Nissa's Encouragement's ruling says "you could even find none". Blocks Nissa's
   Encouragement (`effect:search-library-and-graveyard-named-set`). Found by an authoring agent,
   2026-10-22 (B138).
-- **"Until end of turn, whenever …" is a granted trigger, not a delayed one.** Rule 603.7c: an
-  effect that says "until end of turn, whenever [event], [effect]" creates a delayed triggered
-  ability with a duration — it belongs to no permanent, so nothing that happens to its source
-  ends it. Dovin, Grand Arbiter's −1 (`pool/dovin-grand-arbiter.ts`) is authored with
-  `grant-triggered` on Dovin itself, which matches only while Dovin keeps its abilities and its
-  controller. The fix is a `delayed-trigger` whose `at` is an ordinary `TriggerSpec` for the
-  rest of the turn (a watch like `DelayedUnblockedWatch`, checked in `detectTriggers`), then Dovin
-  moved onto it. Blocks Mountain Titan ("until end of turn, whenever you cast a black spell"),
-  Gaze of Pain and Battle Cry (B136, `effect:delayed-trigger-rest-of-turn`). Found by an
-  authoring agent, 2026-10-21.
 - **Phyrexian mana is paid with life only when mana can't pay it.** Rule 107.4f lets a Phyrexian
   symbol be paid with one mana of its colour or 2 life, the player's choice. `mana-payment.ts`'s
   pip resolution (`resolveHybridCost` and `resolveReducedTwobrid`) pays 2 life for a Phyrexian pip only when no mana can
@@ -53,12 +54,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   and the client's stack can pick only a spell. **Fix (outline):** offer each stack ability's
   source when it isn't on the battlefield, and let the client pick it by clicking that ability's
   stack entry. Circles of Protection, Reverse Damage, Healing Grace.
-- **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
+- **Blitz, dash, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
   those two zones, so a blitz card another permission lets you cast (an impulse exile, a
   graveyard grant, the top of a library) isn't offered its blitz cost there, though rule
-  702.152a allows it. Henzie's discount also moves only a cost's generic number, never an `{X}`
+  702.152a allows it; `Game.dashCostOf` the same (702.109a). Henzie's discount also moves only a cost's generic number, never an `{X}`
   (no blitz cost in the pool has one yet).
 - **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
   against the card in its pre-cast zone, so an ability a static grants a spell as it's cast
@@ -192,14 +193,59 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   says all of it is prevented and one counter removed. Affects Unbreathing Horde (in the pool);
   blocks Oathsworn Knight (`replacement:prevent-once-per-damage-event`). Polukranos, Unchained's
   "remove that many" sums the same per source, so it's right.
+- **A target cost reduction two slots can earn is offered unrestricted.** Rule 601.2f fixes the
+  cost once targets are chosen. `Game.targetReductionOptions` offers only the earning targets when
+  the full price isn't affordable, but only when exactly one slot can hold one; with two (This Town
+  Ain't Big Enough's "up to two", both slots any nonland permanent) it offers every target in both,
+  so a cast naming two the caster doesn't control is offered and then refused for mana. Seen in the
+  fuzzer (`random-demo.mjs --players 4 --seed 19` with batch 148's second half forced): Thorn of
+  Amethyst made it {5}{U} against Carol's five mana. One offer can't say "at least one slot
+  earns"; the fix narrows the first earning slot to the earners (no legal cast lost while the
+  slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
+  random controller kept from skipping it. Found 2026-10-23, batch 148's checks.
+
+- **An "X targets" cast offer miscounts a spell's other target slots.** `Game.xGroupOffer` builds
+  the cast offer's `targetCount` and `minXByTargetCount`/`maxXByTargetCount` over the `any-number`
+  group's members alone (its doc: "the group is the spell's only slot"), but every reader —
+  `minXForTargets`/`maxXForTargets` and `fitTargetCount` in `target-count.ts`, the bots, the random
+  controllers, and the client's target picker (`App.tsx`) — counts `distinctTargetCount` over all
+  chosen targets. Spinning Wheel Kick ("target creature you control … to each of X target
+  creatures and/or planeswalkers") is the one pool card with a slot before the group: choosing
+  its creature and no group members reads as one target, so X is offered as 1, and the cast is
+  refused ("takes at least 1 of those targets" — `invalidTargetReason` judges it right). The 4-player
+  fuzzer hits it at seed 18 (`play:random -- --players 4 --seed 18`). **Fix (outline):** give the
+  range a `from` (the group's slot) that the count helpers and the client read, or count group
+  members wherever an X group's range is read; the same creature may be both the source slot and a
+  member (rule 115.3), so no fixed offset works. Found by the fuzzer, 2026-10-23 (B149).
 
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
 that needs it is authored.
 
+- **A double-faced Aura put onto the battlefield transformed is asked what it enchants.** Rule
+  712.14a puts it onto the battlefield back face up, so Skin Invasion returns as Skin Shedder, a
+  creature with nothing to enchant. `Game.askEnterChoice` (and `nextEnterChoice`) read the card's
+  current face, the front Aura's, before the move applies `transformed`: with no creature to
+  enchant it stays in the graveyard (303.4g), and with one the player is asked a meaningless
+  enchant choice and Skin Shedder enters unattached. The fix asks the enter choices of the face it
+  will enter as. Blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`). (The same
+  front-face reading kept an instant or sorcery card from entering transformed — Startled Awake —
+  until batch 148.)
 
-
+- **A mana ability's discard cost is never paid.** Rule 605.3b: a mana ability's costs are paid
+  as it's activated, like any other's. `Game.activateAbility` checks a `cost.discard` can be paid
+  but takes the discard only on the stack path (where `discardByEffect` asks); the
+  `isManaAbility` branch resolves the mana and returns first, so the mana comes free. It refuses
+  a mana ability's graveyard-exile or multi-sacrifice cost outright, but not a discard. No pool
+  card has one; blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
+  2026-10-23 (B141).
+- **A token with devour never devours.** Rule 702.82a: devour is a replacement as the permanent
+  enters. It's asked through `askEnterChoice`, which a spell resolving, a reanimation and a blink
+  call, but token creation (`createTokens`, `mintTokenBatch`) never does, so a `create-token` of
+  a token definition with `devour` makes the token without the choice (AUTHORING §15 notes the
+  same for a token copy's "as this enters" choices). No pool token has devour; blocks Dragon
+  Broodmother (`mechanic:token-devour`). Found by an authoring agent, 2026-10-23 (B141).
 - **Convoke with a target-dependent cost.** The offered `proof` is priced at the dearer end of
   the target-count range.
 

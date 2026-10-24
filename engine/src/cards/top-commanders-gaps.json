@@ -373,6 +373,9 @@
   "keyword:evoke-alternative-non-mana-cost",
   "keyword:entwine",
   "keyword:spectacle",
+  "keyword:surge",
+  "replacement:target-exile-if-dies-this-turn",
+  "replacement:dealt-damage-this-way-exile-if-dies",
   "keyword:jump-start",
   "keyword:ascend",
   "replacement:prevent-damage-from-chosen-source",
@@ -398,7 +401,16 @@
   "effect:player-next-untap-step-skip-filter",
   "decision:discard-any-number",
   "keyword:embalm",
-  "keyword:improvise"
+  "keyword:improvise",
+  "effect:delayed-trigger-rest-of-turn",
+  "effect:delayed-trigger-own-targets",
+  "keyword:emerge",
+  "condition:source-monstrous",
+  "condition:werewolf-transform-spells-last-turn",
+  "effect:damage-to-trigger-object",
+  "keyword:renown",
+  "keyword:dash",
+  "keyword:bolster"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

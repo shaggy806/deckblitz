@@ -420,6 +420,26 @@ export const rampage = (n: number): TriggeredAbility => {
 };
 
 /**
+ * Renown N (rule 702.112a): "When this creature deals combat damage to a
+ * player, if it isn't renowned, put N +1/+1 counters on it and it becomes
+ * renowned" — an intervening if (603.4), asked again as it resolves, so a
+ * second instance does nothing once the first has resolved (702.112c). Put
+ * "Renown N" in `text` as well.
+ */
+export const renown = (n: number): TriggeredAbility => {
+  const words = ["a", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+  const counters = n === 1 ? "a +1/+1 counter" : `${words[n] ?? String(n)} +1/+1 counters`;
+  return {
+    trigger: { on: "deals-combat-damage-to-player", who: "self" },
+    condition: { kind: "source", filter: { renowned: false } },
+    targets: [],
+    effect: { kind: "renown", amount: n },
+    resolve: null,
+    text: `Renown ${n} (When this creature deals combat damage to a player, if it isn't renowned, put ${counters} on it and it becomes renowned.)`,
+  };
+};
+
+/**
  * Cumulative upkeep [cost] (rule 702.24a): "At the beginning of your upkeep,
  * if this permanent is on the battlefield, put an age counter on this
  * permanent. Then you may pay [cost] for each age counter on it. If you
@@ -492,7 +512,66 @@ export const spectacle = (mana: string): NonNullable<CardDefinition["alternative
 });
 
 /**
- * Melee (rule 702.121): "Whenever this creature attacks, it gets +1/+1 until
+ * Surge [cost] (rule 702.117a): "You may cast this spell for its surge cost
+ * if you or a teammate has cast another spell this turn" — the card's
+ * `alternativeCost`. The condition is read as the spell is proposed (rule
+ * 601.2b), before this spell counts as cast, so one spell cast this turn is
+ * "another". There are no teammates in a free-for-all. A spell cast this way
+ * answers `self-surge-paid` ("if its surge cost was paid"). Put "Surge
+ * [cost]" in `text` as well.
+ */
+export const surge = (mana: string): NonNullable<CardDefinition["alternativeCost"]> => ({
+  mana,
+  keyword: "surge",
+  condition: { kind: "cast-this-turn", who: "you", atLeast: 1 },
+});
+
+/**
+ * Awaken N—[cost] (rule 702.113a): "If you cast this spell for [cost], also
+ * put N +1/+1 counters on target land you control and it becomes a 0/0
+ * Elemental creature with haste. It's still a land." — the card's
+ * `overload`, `keyword: "awaken"`: cast for `cost` rather than the mana cost,
+ * with the printed `targets` and then the land, and the printed `effect` and
+ * then the land's. Pass the spell's own `targets` and `effect` (the card's
+ * fields too). The land is the last target, so an illegal land skips only
+ * its part, and a spell with no other target doesn't resolve without it (the
+ * rulings). The animation is permanent and gives no color (the ruling). Put
+ * the "Awaken N—[cost]" line in `text` as well.
+ */
+export const awaken = (
+  n: number,
+  cost: string,
+  spell: { readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec },
+): NonNullable<CardDefinition["overload"]> => {
+  const targets = spell.targets ?? [];
+  const land = targets.length;
+  const steps = spell.effect.kind === "sequence" && spell.effect.simultaneous !== true ? spell.effect.effects : [spell.effect];
+  return {
+    cost,
+    keyword: "awaken",
+    targets: [...targets, "land-you-control"],
+    effect: {
+      kind: "sequence",
+      effects: [
+        ...steps,
+        { kind: "add-counter", target: land, counter: "+1/+1", amount: n },
+        {
+          kind: "animate",
+          target: land,
+          power: 0,
+          toughness: 0,
+          addTypes: ["creature"],
+          addSubtypes: ["Elemental"],
+          keywords: ["haste"],
+          duration: "permanent",
+        },
+      ],
+    },
+  };
+};
+
+/**
+ * Melee (rule 702.121):"Whenever this creature attacks, it gets +1/+1 until
  * end of turn for each opponent you attacked with a creature this combat."
  * Each instance triggers on its own. Put "Melee" in `text` as well.
  */

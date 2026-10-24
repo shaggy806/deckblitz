@@ -86,6 +86,60 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Dragons of Tarkir, the whole set** (batch 152): dash (rule 702.109a — `dash: { cost }`, an
+  alternative cast giving haste and a return to the owner's hand at the next end step, from the
+  hand or the command zone) and bolster (rule 701.39a — the `bolster` effect, chosen among the
+  least-toughness creatures as it resolves), both read by the scaffolder; and a command-zone
+  commander with more than one way to cast it now opens a menu of them. 122 authored — four
+  `card-author` agents and the lead: Ragavan, Nimble Pilferer, Kolaghan, the Storm's Fury,
+  Anafenza, Kin-Tree Spirit, Flamerush Rider and four more that waited only on dash or bolster,
+  Collected Company, Descent of the Dragons, Necromaster Dragon, Swift Warkite, Ojutai's Command
+  and Dromoka's Gift (2026-10-24).
+- **Magic Origins, the rest of it** (batch 151): renown (rule 702.112 — the `renown()` helper,
+  the `renown` effect and the `renowned` designation, a filter clause, with a `becomes-renowned`
+  trigger; read by the scaffolder) and `return-to-hand-all` reading X in its filter. 84
+  authored — three `card-author` agents and the lead: the 20 renown cards, Constable of the
+  Realm and Aragorn, Hornburg Hero (which waited only on renown), Demonic Pact, Hixus, Prison
+  Warden, Kothophed, Soul Hoarder, Erebos's Titan, Displacement Wave, Sigil of Valor and Gideon's
+  Phalanx (2026-10-24).
+- **Battle for Zendikar, the rest of it** (batch 150): awaken (rule 702.113 — `overload` with
+  `keyword: "awaken"` and the `awaken()` helper, the land the last target; read by the
+  scaffolder). 108 authored — four `card-author` agents and the lead: Ruinous Path, Gideon, Ally
+  of Zendikar, Kiora, Master of the Depths, Planar Outburst, Part the Waterveil, Ugin's Insight,
+  Aligned Hedron Network, Veteran Warleader and the other awaken spells (2026-10-23).
+- **Oath of the Gatewatch and Commander 2015, whole** (batch 149): surge (rule 702.117 —
+  `alternativeCost` with `keyword: "surge"`, `self-surge-paid`) and "if that creature would die
+  this turn, exile it instead" (`exile-if-dies-this-turn` — a per-object turn number read in
+  `moveObject`), with its "if a creature dealt damage this way would die" form, all three read
+  by the scaffolder. 121 authored — four `card-author` agents and the lead: Reality Smasher,
+  Kozilek's Return, Crush of Tentacles, Mawloc, Kalemne, Disciple of Iroas, Daxos the Returned,
+  Gigantoplasm, Lava Coil, Anger of the Gods, Scorching Dragonfire and the 27 other cards
+  earlier batches had blocked on the exile replacement (2026-10-23).
+- **Shadows over Innistrad, whole** (batch 148): the werewolves' "if no spells were cast last
+  turn, transform" built (`spells-cast-last-turn`, the scaffolder reading both faces' lines),
+  with damage to a trigger's object (`damage.target: "trigger-object"`) and the all-hands count;
+  a double-faced card told to enter transformed is judged by its back face (Startled Awake).
+  137 authored — five `card-author` agents and the lead: the eleven werewolves, Ulrich of the
+  Krallenhorde, Duskwatch Recruiter, Sigarda, Heron's Grace, Olivia, Mobilized for War, Nahiri,
+  the Harbinger, Prized Amalgam, Startled Awake, Ornery Goblin, Caltrops and Storm, Queen of
+  Wakanda; SOI is 230 of 267. 31 blocked, "exile it instead if it would die this turn" the most
+  shared (30 cards now) (2026-10-23).
+- **Conspiracy: Take the Crown and Eldritch Moon, whole** (batch 147): **emerge** built (rule
+  702.119 — `emerge: { cost, from? }`, one cast offer per creature that could be sacrificed, its
+  mana value off the total cost after increases) and "as long as this creature is monstrous"
+  (the `monstrous` filter clause); melee fixed to count the opponents attacked as declared.
+  123 authored — five `card-author` agents and the lead: Elder Deep-Fiend, Wretched Gryff,
+  Decimator of the Provinces, Identity Thief, Lunar Force, Noosegraf Mob, Bedlam Reveler,
+  Custodi Soulcaller, Colossus of Akros and the other monstrous cards; CN2 is 34 of 67, EMN 158
+  of 199. 59 blocked, meld and the draft-only cards the most shared (2026-10-23).
+- **Commander 2016 and Kaladesh, whole** (batch 146): no engine change; 101 authored by five
+  `card-author` agents — Aetherstorm Roc, Demon of Dark Schemes, Nissa, Nature's Artisan,
+  Fateful Showdown, Architect of the Untamed and 96 more; C16 is 39 of 56, KLD 213 of 246. 34
+  blocked, undaunted the most shared (2026-10-23).
+- **"Until end of turn, whenever …"** (batch 144; 2026-10-23): the leading blocker
+  (`effect:delayed-trigger-rest-of-turn`, 39 cards) built as a `delayed-trigger` at `{ whenever }`,
+  with its own targets and "until your next turn"; 34 cards authored on it (Massacre Girl, Vraska
+  the Unseen, Basri Ket, Jaya, Fiery Negotiator, Glimpse of Nature and 29 more).
 - **Aether Revolt, whole** (batch 140): **improvise** (rule 702.126a, on convoke's machinery —
   artifacts, generic mana only, the client's bar saying so) built; 99 authored by five
   `card-author` agents and the lead — Herald of Anguish, Reverse Engineer, Metallic Rebuke,
@@ -449,6 +503,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **"Until end of turn, whenever …" is a delayed trigger, not a granted one** (603.7c; 2026-10-23):
+  the `delayed-trigger` effect's `at: { whenever: TriggerSpec, until?, targets? }`, matched against
+  every event and ended by nothing that happens to its source; Dovin, Grand Arbiter's +1 moved onto
+  it from `grant-triggered`.
 - **Up to 500 tokens of one stack can block** (509.1a; 2026-10-22): a blocking stack wakes up to
   `Game.MAX_BLOCKERS_WOKEN` (500) tokens rather than `MAX_MATERIALIZED`'s 100, so a stack can block an
   attacking one two or more to a token (200 Soldiers on 100 Zombies). Still a bound for a whole stack

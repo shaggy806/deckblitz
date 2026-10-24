@@ -1,0 +1,738 @@
+{
+  "batch": 151,
+  "status": "complete",
+  "ranks": "Magic Origins (ORI, 2015-07-17): the rest of the set; with renown built (and Constable of the Realm and Aragorn, Hornburg Hero, which waited only on renown)",
+  "authored": [
+    {
+      "name": "Vryn Wingmare",
+      "files": [
+        "engine/src/cards/pool/vryn-wingmare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sigil of Valor",
+      "files": [
+        "engine/src/cards/pool/sigil-of-valor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prism Ring",
+      "files": [
+        "engine/src/cards/pool/prism-ring.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kothophed, Soul Hoarder",
+      "files": [
+        "engine/src/cards/pool/kothophed-soul-hoarder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Demonic Pact",
+      "files": [
+        "engine/src/cards/pool/demonic-pact.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Relic Seeker",
+      "files": [
+        "engine/src/cards/pool/relic-seeker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avaricious Dragon",
+      "files": [
+        "engine/src/cards/pool/avaricious-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Alchemist's Vial",
+      "files": [
+        "engine/src/cards/pool/alchemists-vial.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eyeblight Massacre",
+      "files": [
+        "engine/src/cards/pool/eyeblight-massacre.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Displacement Wave",
+      "files": [
+        "engine/src/cards/pool/displacement-wave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clash of Wills",
+      "files": [
+        "engine/src/cards/pool/clash-of-wills.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Priest of the Blood Rite",
+      "files": [
+        "engine/src/cards/pool/priest-of-the-blood-rite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dark Dabbling",
+      "files": [
+        "engine/src/cards/pool/dark-dabbling.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gnarlroot Trapper",
+      "files": [
+        "engine/src/cards/pool/gnarlroot-trapper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Artificer's Epiphany",
+      "files": [
+        "engine/src/cards/pool/artificers-epiphany.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ravaging Blaze",
+      "files": [
+        "engine/src/cards/pool/ravaging-blaze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shadows of the Past",
+      "files": [
+        "engine/src/cards/pool/shadows-of-the-past.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Patron of the Valiant",
+      "files": [
+        "engine/src/cards/pool/patron-of-the-valiant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scab-Clan Berserker",
+      "files": [
+        "engine/src/cards/pool/scab-clan-berserker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Graveblade Marauder",
+      "files": [
+        "engine/src/cards/pool/graveblade-marauder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Calculated Dismissal",
+      "files": [
+        "engine/src/cards/pool/calculated-dismissal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zendikar Incarnate",
+      "files": [
+        "engine/src/cards/pool/zendikar-incarnate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sentinel of the Eternal Watch",
+      "files": [
+        "engine/src/cards/pool/sentinel-of-the-eternal-watch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Abbot of Keral Keep",
+      "files": [
+        "engine/src/cards/pool/abbot-of-keral-keep.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nissa's Revelation",
+      "files": [
+        "engine/src/cards/pool/nissas-revelation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bounding Krasis",
+      "files": [
+        "engine/src/cards/pool/bounding-krasis.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fiery Impulse",
+      "files": [
+        "engine/src/cards/pool/fiery-impulse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gideon's Phalanx",
+      "files": [
+        "engine/src/cards/pool/gideons-phalanx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Honored Hierarch",
+      "files": [
+        "engine/src/cards/pool/honored-hierarch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Necromantic Summons",
+      "files": [
+        "engine/src/cards/pool/necromantic-summons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mizzium Meddler",
+      "files": [
+        "engine/src/cards/pool/mizzium-meddler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gilt-Leaf Winnower",
+      "files": [
+        "engine/src/cards/pool/gilt-leaf-winnower.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grasp of the Hieromancer",
+      "files": [
+        "engine/src/cards/pool/grasp-of-the-hieromancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gather the Pack",
+      "files": [
+        "engine/src/cards/pool/gather-the-pack.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Send to Sleep",
+      "files": [
+        "engine/src/cards/pool/send-to-sleep.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Faerie Miscreant",
+      "files": [
+        "engine/src/cards/pool/faerie-miscreant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Healing Hands",
+      "files": [
+        "engine/src/cards/pool/healing-hands.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Somberwald Alpha",
+      "files": [
+        "engine/src/cards/pool/somberwald-alpha.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Outland Colossus",
+      "files": [
+        "engine/src/cards/pool/outland-colossus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Glory Chaser",
+      "files": [
+        "engine/src/cards/pool/goblin-glory-chaser.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infernal Scarring",
+      "files": [
+        "engine/src/cards/pool/infernal-scarring.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Molten Vortex",
+      "files": [
+        "engine/src/cards/pool/molten-vortex.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Consul's Lieutenant",
+      "files": [
+        "engine/src/cards/pool/consuls-lieutenant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "War Horn",
+      "files": [
+        "engine/src/cards/pool/war-horn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mage-Ring Responder",
+      "files": [
+        "engine/src/cards/pool/mage-ring-responder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blood-Cursed Knight",
+      "files": [
+        "engine/src/cards/pool/blood-cursed-knight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Enthralling Victor",
+      "files": [
+        "engine/src/cards/pool/enthralling-victor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Consecrated by Blood",
+      "files": [
+        "engine/src/cards/pool/consecrated-by-blood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Valeron Wardens",
+      "files": [
+        "engine/src/cards/pool/valeron-wardens.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hixus, Prison Warden",
+      "files": [
+        "engine/src/cards/pool/hixus-prison-warden.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Despoiler of Souls",
+      "files": [
+        "engine/src/cards/pool/despoiler-of-souls.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unholy Hunger",
+      "files": [
+        "engine/src/cards/pool/unholy-hunger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Enshrouding Mist",
+      "files": [
+        "engine/src/cards/pool/enshrouding-mist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kytheon's Irregulars",
+      "files": [
+        "engine/src/cards/pool/kytheons-irregulars.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reclusive Artificer",
+      "files": [
+        "engine/src/cards/pool/reclusive-artificer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pharika's Disciple",
+      "files": [
+        "engine/src/cards/pool/pharikas-disciple.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kytheon's Tactics",
+      "files": [
+        "engine/src/cards/pool/kytheons-tactics.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aerial Volley",
+      "files": [
+        "engine/src/cards/pool/aerial-volley.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Erebos's Titan",
+      "files": [
+        "engine/src/cards/pool/ereboss-titan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Call of the Full Moon",
+      "files": [
+        "engine/src/cards/pool/call-of-the-full-moon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Citadel Castellan",
+      "files": [
+        "engine/src/cards/pool/citadel-castellan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seismic Elemental",
+      "files": [
+        "engine/src/cards/pool/seismic-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wild Instincts",
+      "files": [
+        "engine/src/cards/pool/wild-instincts.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nightsnare",
+      "files": [
+        "engine/src/cards/pool/nightsnare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Throwing Knife",
+      "files": [
+        "engine/src/cards/pool/throwing-knife.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Acolyte of the Inferno",
+      "files": [
+        "engine/src/cards/pool/acolyte-of-the-inferno.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ramroller",
+      "files": [
+        "engine/src/cards/pool/ramroller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Topan Freeblade",
+      "files": [
+        "engine/src/cards/pool/topan-freeblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hydrolash",
+      "files": [
+        "engine/src/cards/pool/hydrolash.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vine Snare",
+      "files": [
+        "engine/src/cards/pool/vine-snare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deep-Sea Terror",
+      "files": [
+        "engine/src/cards/pool/deep-sea-terror.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rhox Maulers",
+      "files": [
+        "engine/src/cards/pool/rhox-maulers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Akroan Sergeant",
+      "files": [
+        "engine/src/cards/pool/akroan-sergeant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stalwart Aven",
+      "files": [
+        "engine/src/cards/pool/stalwart-aven.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "War Oracle",
+      "files": [
+        "engine/src/cards/pool/war-oracle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Undead Servant",
+      "files": [
+        "engine/src/cards/pool/undead-servant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prickleboar",
+      "files": [
+        "engine/src/cards/pool/prickleboar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Infectious Bloodlust",
+      "files": [
+        "engine/src/cards/pool/infectious-bloodlust.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Knight of the Pilgrim's Road",
+      "files": [
+        "engine/src/cards/pool/knight-of-the-pilgrims-road.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Undercity Troll",
+      "files": [
+        "engine/src/cards/pool/undercity-troll.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cleric of the Forward Order",
+      "files": [
+        "engine/src/cards/pool/cleric-of-the-forward-order.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Firefiend Elemental",
+      "files": [
+        "engine/src/cards/pool/firefiend-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Constable of the Realm",
+      "files": [
+        "engine/src/cards/pool/constable-of-the-realm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aragorn, Hornburg Hero",
+      "files": [
+        "engine/src/cards/pool/aragorn-hornburg-hero.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Talent of the Telepath",
+      "needs": [
+        "effect:cast-now-from-opponent-library-top"
+      ],
+      "why": "Cast an instant or sorcery from among the top seven of target opponent's library (up to two with spell mastery), the rest into their graveyard: cast-now's libraryTop reads only the caster's own library."
+    },
+    {
+      "name": "Chandra, Fire of Kaladesh // Chandra, Roaring Flame",
+      "needs": [
+        "condition:single-source-dealt-n-damage-this-turn"
+      ],
+      "why": "'If Chandra has dealt 3 or more damage this turn, exile her, then return her transformed' — nothing counts the damage one source dealt this turn."
+    },
+    {
+      "name": "Kytheon, Hero of Akros // Gideon, Battle-Forged",
+      "needs": [
+        "static:must-attack-planeswalker"
+      ],
+      "why": "Gideon's +2: 'up to one target creature an opponent controls attacks Gideon during its controller's next turn if able' — attack requirements can't name a planeswalker. Both faces blocked."
+    },
+    {
+      "name": "Harbinger of the Tides",
+      "needs": [
+        "effect:flash-for-extra-cost"
+      ],
+      "why": "'You may cast this spell as though it had flash if you pay {2} more' — a kicker with flash would make it a kicked spell and offer the {2} at sorcery speed."
+    },
+    {
+      "name": "The Great Aurora",
+      "needs": [
+        "effect:shuffle-hand-and-permanents-draw-that-many"
+      ],
+      "why": "Each player shuffles their hand and the permanents they own into their library and draws that many, then may put any number of lands from hand onto the battlefield."
+    },
+    {
+      "name": "Orbs of Warding",
+      "needs": [
+        "replacement:prevent-n-of-damage"
+      ],
+      "why": "'If a creature would deal damage to you, prevent 1 of that damage' — a plus: -1 replacement isn't prevention (can't-be-prevented, ordering)."
+    },
+    {
+      "name": "Embermaw Hellion",
+      "needs": [
+        "replacement:damage-plus-from-other-sources"
+      ],
+      "why": "'If another red source you control would deal damage, it deals that much +1' — the damage-plus replacement can't leave out the Hellion itself."
+    },
+    {
+      "name": "Thornbow Archer",
+      "needs": [
+        "condition:that-player-controls"
+      ],
+      "why": "'Each opponent who doesn't control an Elf loses 1 life' — no per-player 'controls' condition inside for-each-player."
+    },
+    {
+      "name": "Disciple of the Ring",
+      "needs": [
+        "effect:modal-activated-targeted-modes"
+      ],
+      "why": "A modal activated ability with targeted modes."
+    },
+    {
+      "name": "Alhammarret, High Arbiter",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Name a nonland card revealed from opponents' hands as it enters; spells with that name can't be cast."
+    },
+    {
+      "name": "Exquisite Firecraft",
+      "needs": [
+        "static:self-uncounterable-if"
+      ],
+      "why": "Spell mastery's 'this spell can't be countered' — cantBeCountered is unconditional."
+    },
+    {
+      "name": "Psychic Rebuttal",
+      "needs": [
+        "effect:copy-countered-spell"
+      ],
+      "why": "Spell mastery's 'you may copy the spell countered this way' — nothing copies the countered spell."
+    },
+    {
+      "name": "Hallowed Moonlight",
+      "needs": [
+        "effect:temporary-enter-exile-replacement"
+      ],
+      "why": "Until end of turn, a creature that would enter and wasn't cast is exiled instead — no temporary enters-exiled replacement."
+    },
+    {
+      "name": "Touch of Moonglove",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source"
+      ],
+      "why": "'Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life' — damagedThisTurnBy can't name one specific object."
+    },
+    {
+      "name": "Possessed Skaab",
+      "needs": [
+        "replacement:self-dies-exile-instead"
+      ],
+      "why": "'If this creature would die, exile it instead' — GraveyardExileReplacement.self is from anywhere, so a countered Skaab would be exiled too."
+    },
+    {
+      "name": "Joraga Invocation",
+      "needs": [
+        "effect:restrict-each-matching-at-resolution"
+      ],
+      "why": "'Each creature you control … must be blocked this turn if able' covers only the creatures there as it resolves; a filtered restrict also catches later ones."
+    },
+    {
+      "name": "Bonded Construct",
+      "needs": [
+        "static:cant-attack-alone"
+      ],
+      "why": "'Can't attack alone' has no vocabulary."
+    },
+    {
+      "name": "Suppression Bonds",
+      "needs": [
+        "static:enchanted-abilities-cant-be-activated"
+      ],
+      "why": "'Its activated abilities can't be activated' — prohibits.abilitiesOf can't name the enchanted permanent."
+    },
+    {
+      "name": "Swift Reckoning",
+      "needs": [
+        "effect:self-flash-if-condition"
+      ],
+      "why": "Spell mastery's 'you may cast this spell as though it had flash' — the only spell-level flash is kicker/behold's."
+    },
+    {
+      "name": "Infinite Obliteration",
+      "needs": [
+        "decision:choose-card-name",
+        "effect:extract-same-name"
+      ],
+      "why": "Choose a creature card name, then search target opponent's graveyard, hand and library for cards with that name and exile them."
+    }
+  ]
+}

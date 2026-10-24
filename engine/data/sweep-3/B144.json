@@ -1,0 +1,262 @@
+{
+ "batch": "B144",
+ "status": "complete",
+ "ranks": "The cards \"until end of turn, whenever …\" (effect:delayed-trigger-rest-of-turn, built 2026-10-23) and a delayed trigger's own targets unblocked, from earlier records; and Don't Move from batch 143",
+ "authored": [
+  {
+   "name": "Basri, Devoted Paladin",
+   "files": [
+    "engine/src/cards/pool/basri-devoted-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basri Ket",
+   "files": [
+    "engine/src/cards/pool/basri-ket.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle Cry",
+   "files": [
+    "engine/src/cards/pool/battle-cry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle of Frost and Fire",
+   "files": [
+    "engine/src/cards/pool/battle-of-frost-and-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Don't Move",
+   "files": [
+    "engine/src/cards/pool/dont-move.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "First Day of Class",
+   "files": [
+    "engine/src/cards/pool/first-day-of-class.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaze of Pain",
+   "files": [
+    "engine/src/cards/pool/gaze-of-pain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnawing Crescendo",
+   "files": [
+    "engine/src/cards/pool/gnawing-crescendo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Green Dragon",
+   "files": [
+    "engine/src/cards/pool/green-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harald Unites the Elves",
+   "files": [
+    "engine/src/cards/pool/harald-unites-the-elves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infested Thrinax",
+   "files": [
+    "engine/src/cards/pool/infested-thrinax.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace, Cunning Castaway",
+   "files": [
+    "engine/src/cards/pool/jace-cunning-castaway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jaya, Fiery Negotiator",
+   "files": [
+    "engine/src/cards/pool/jaya-fiery-negotiator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mage Hunters' Onslaught",
+   "files": [
+    "engine/src/cards/pool/mage-hunters-onslaught.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mistway Spy",
+   "files": [
+    "engine/src/cards/pool/mistway-spy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mountain Titan",
+   "files": [
+    "engine/src/cards/pool/mountain-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noxious Assault",
+   "files": [
+    "engine/src/cards/pool/noxious-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin of the Hidden Ones",
+   "files": [
+    "engine/src/cards/pool/origin-of-the-hidden-ones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rediscover the Way",
+   "files": [
+    "engine/src/cards/pool/rediscover-the-way.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ruinous Waterbending",
+   "files": [
+    "engine/src/cards/pool/ruinous-waterbending.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Showdown of the Skalds",
+   "files": [
+    "engine/src/cards/pool/showdown-of-the-skalds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Subira, Tulzidi Caravanner",
+   "files": [
+    "engine/src/cards/pool/subira-tulzidi-caravanner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Bloodsky Massacre",
+   "files": [
+    "engine/src/cards/pool/the-bloodsky-massacre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Last Ronin",
+   "files": [
+    "engine/src/cards/pool/the-last-ronin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mirari Conjecture",
+   "files": [
+    "engine/src/cards/pool/the-mirari-conjecture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Revelations of Ezio",
+   "files": [
+    "engine/src/cards/pool/the-revelations-of-ezio.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Sea Devils",
+   "files": [
+    "engine/src/cards/pool/the-sea-devils.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Theoretical Duplication",
+   "files": [
+    "engine/src/cards/pool/theoretical-duplication.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunder of Unity",
+   "files": [
+    "engine/src/cards/pool/thunder-of-unity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warhost's Frenzy",
+   "files": [
+    "engine/src/cards/pool/warhosts-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glimpse of Nature",
+   "files": [
+    "engine/src/cards/pool/glimpse-of-nature.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vraska the Unseen",
+   "files": [
+    "engine/src/cards/pool/vraska-the-unseen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin of Thor",
+   "files": [
+    "engine/src/cards/pool/origin-of-thor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Massacre Girl",
+   "files": [
+    "engine/src/cards/pool/massacre-girl.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Fatal Fissure",
+   "needs": [
+    "effect:delayed-leaves-own-targets"
+   ],
+   "why": "\"When that creature dies this turn, you earthbend 4\": a leave-keyed delayed trigger can't choose its own target (the land to earthbend)."
+  },
+  {
+   "name": "Roads Go Ever, Ever On",
+   "needs": [
+    "effect:search-to-linked-exile",
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "Chapter I's search exiles the Plains linked to the Saga, and II and III put one chosen exiled card into its owner's hand."
+  }
+ ]
+}

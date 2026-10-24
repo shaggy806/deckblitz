@@ -28,8 +28,10 @@ import {
   afflict,
   afterlife,
   rampage,
+  renown,
   cumulativeUpkeep,
   annihilator,
+  awaken,
   mentor,
   crew,
   dethrone,
@@ -45,6 +47,7 @@ import {
   persist,
   saddle,
   spectacle,
+  surge,
   undying,
   unearth,
   vanishing,
@@ -154,8 +157,16 @@ function keywordPart(part) {
   }
   // Rampage N (rule 702.23a): its becomes-blocked trigger.
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
+  // Renown N (rule 702.112a): its combat-damage trigger, "if it isn't renowned".
+  if ((m = /^renown (\d+)$/i.exec(p))) return { triggered: [renown(Number(m[1]))] };
   // Spectacle [cost] (rule 702.137a): an alternative cost.
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
+  // Surge [cost] (rule 702.117a): an alternative cost.
+  if ((m = new RegExp(`^surge ${COST}$`, "i").exec(p))) return { card: { alternativeCost: surge(m[1]) } };
+  // Awaken N—[cost] (rule 702.113a): an alternative cost adding a target and
+  // an effect — `awaken()` over the spell's own targets and effect, once
+  // they're read (`parseFace`).
+  if ((m = new RegExp(`^awaken (\\d+)—${COST}$`, "i").exec(p))) return { card: { awakenKeyword: { n: Number(m[1]), cost: m[2] } } };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
@@ -794,6 +805,9 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever you cycle (a|another) card$/.exec(c))) {
     return [{ on: "cycles", who: "you", ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // The renowned designation (rule 702.112b) becoming true.
+  if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return self("becomes-renowned");
+  if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
   // A saddled designation (rule 702.171b) becoming true: "for the first time
   // each turn" only when it wasn't saddled already.
   if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
@@ -986,6 +1000,41 @@ export function parseSentence(sentence, ctx) {
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   let m;
+  // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
+  // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
+  // ability with a duration. Its effect is read as a printed trigger's is —
+  // "it" its trigger object — and any target it names is its own, chosen as
+  // it triggers.
+  if (
+    (m = /^(Until end of turn|Until your next turn), (whenever [^,]+), (.+)\.$/i.exec(s)) ||
+    (m = /^()(Whenever [^,]+) this turn, (.+)\.$/.exec(s))
+  ) {
+    const clause = m[2].charAt(0).toUpperCase() + m[2].slice(1);
+    const triggers = parseTrigger(clause);
+    if (triggers === null || triggers.length !== 1) return null;
+    const inner = { ...ctx, spell: false, targets: [], it: itOf(triggers), departed: departedOf(triggers) };
+    inner.target = (spec) => inner.targets.push(spec) - 1;
+    const effectText = `${m[3].charAt(0).toUpperCase()}${m[3].slice(1)}.`;
+    const effect = parseSentence(effectText, inner);
+    if (effect === null || containsUndefined(effect)) return null;
+    // "Whenever ~ deals combat damage to a player" this turn is the older
+    // `dealsCombatDamage` watch on the source (Lyra, Tolarian Archangel).
+    const ownCombatDamage =
+      triggers[0].on === "deals-combat-damage-to-player" && triggers[0].who === "self" && Object.keys(triggers[0]).length === 2;
+    if (ownCombatDamage && inner.targets.length === 0 && !/^until your next turn$/i.test(m[1])) {
+      return { kind: "delayed-trigger", at: { dealsCombatDamage: "source" }, effect, text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.` };
+    }
+    return {
+      kind: "delayed-trigger",
+      at: {
+        whenever: triggers[0],
+        ...(/^until your next turn$/i.test(m[1]) ? { until: "your-next-turn" } : {}),
+        ...(inner.targets.length > 0 ? { targets: inner.targets } : {}),
+      },
+      effect,
+      text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.`,
+    };
+  }
   // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
   // put N +1/+1 counters on it."
   if ((m = /^Adapt (\d+)\.$/.exec(s))) {
@@ -1634,6 +1683,8 @@ export function parseSentence(sentence, ctx) {
   if (re("you take the initiative").test(s)) return { kind: "take-initiative" };
   if (re("venture into the dungeon").test(s)) return { kind: "venture" };
   if (re("venture into undercity").test(s)) return { kind: "venture", into: "undercity" };
+  // Bolster N (rule 701.39a): on a creature of yours with the least toughness.
+  if ((m = re("bolster (\\d+)").exec(s))) return { kind: "bolster", amount: Number(m[1]) };
   // Blight N (rule 701.68a): you, or each opponent, each on a creature of theirs.
   if ((m = re("blight (\\d+)").exec(s))) return { kind: "blight", amount: Number(m[1]) };
   if ((m = re("each (opponent|player) blights (\\d+)").exec(s))) {
@@ -1736,6 +1787,23 @@ export function parseEffect(text, outer) {
       const out = { kind: "phase-out", target: 0 };
       parsed.push(out);
       hints.push({ sentence, effect: out });
+      continue;
+    }
+    // "If that creature would die this turn, exile it instead." after the one
+    // sentence that targeted (Lava Coil — rule 614.1a): that target.
+    if (/^if that (?:creature|planeswalker|creature or planeswalker) would die this turn, exile it instead\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const instead = { kind: "exile-if-dies-this-turn", target: 0 };
+      parsed.push(instead);
+      hints.push({ sentence, effect: instead });
+      continue;
+    }
+    // "If a creature dealt damage this way would die this turn, exile it
+    // instead." after the damage (Anger of the Gods): whatever it damaged.
+    const damagedM = /^if a (creature|permanent) dealt damage (?:this way|by ~) would die this turn, exile it instead\.$/i.exec(sentence);
+    if (damagedM !== null && parsed.some(dealsDamage)) {
+      const instead = { kind: "exile-if-dies-this-turn", dealtDamageThisWay: damagedM[1].toLowerCase() };
+      parsed.push(instead);
+      hints.push({ sentence, effect: instead });
       continue;
     }
     const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
@@ -1982,6 +2050,14 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
     // Web-slinging [cost] (rule 702.188a): an alternative cost returning a tapped creature you control.
     if ((m = /^Web-slinging ((?:\{[^}]+\})+)$/.exec(line))) { out.webSlinging = { cost: m[1] }; continue; }
+    // Emerge [cost] (rule 702.119a): an alternative cost sacrificing a creature, its mana value off;
+    // "Emerge from [quality]" (702.119b) sacrifices a permanent of that type instead.
+    if ((m = /^Emerge (?:from (artifact|enchantment|land) )?((?:\{[^}]+\})+)$/.exec(line))) {
+      out.emerge = { cost: m[2], ...(m[1] !== undefined ? { from: { type: m[1] } } : {}) };
+      continue;
+    }
+    // Dash [cost] (rule 702.109a): an alternative cost — haste, and back to its owner's hand at the next end step.
+    if ((m = /^Dash ((?:\{[^}]+\})+)$/.exec(line))) { out.dash = { cost: m[1] }; continue; }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.
@@ -2290,6 +2366,11 @@ export function parseFace(face, ctx = {}) {
         out.todo.push(...r.todo);
         out.effectHints = r.hints;
       }
+      // Awaken (rule 702.113a): the awaken cast's targets and effect are the
+      // spell's own and then the land's.
+      if (out.awakenKeyword !== undefined && r.effect !== null) {
+        out.overload = awaken(out.awakenKeyword.n, out.awakenKeyword.cost, { targets: ownTargets, effect: r.effect });
+      }
       if (kickedTail !== undefined) {
         const extra = r.effect === null ? { effect: null } : parseEffect(kickedTail.rest, ctx2);
         if (extra.effect === null) out.todo.push(kickedTail.sentence);
@@ -2305,13 +2386,25 @@ export function parseFace(face, ctx = {}) {
     }
     delete out.spellLines;
   }
+  // An awaken line over a spell not read whole (or a modal one) is a person's.
+  if (out.awakenKeyword !== undefined && out.overload === undefined) {
+    out.todo.push(printed(lines.find((l) => /^Awaken \d/.test(l)) ?? "Awaken"));
+  }
+  delete out.awakenKeyword;
 
   // "Cards exiled with ~" (rule 607.2a): the card's own exiles are linked to
   // the abilities that read them — Boiling Rock Rioter's "exile target card
   // from a graveyard" and "cast an Ally spell from among cards you own exiled
-  // with this creature". An exile until ~ leaves is linked another way.
+  // with this creature" — or "exiled with it" (Myr Welder). So are the old
+  // two-trigger wording's (Leonin Relic-Warder's "you may exile target
+  // artifact" and "when this leaves, return the exiled card"). An exile until
+  // ~ leaves is linked another way.
   const oracleText = face.oracle_text ?? "";
-  if (/\bexiled with this \w+/.test(oracleText) || (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))) {
+  if (
+    /\bexiled with (?:this \w+|it)\b/.test(oracleText) ||
+    /\breturn the exiled card\b/.test(oracleText) ||
+    (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
+  ) {
     const linkExiles = (node) => {
       if (Array.isArray(node)) node.forEach(linkExiles);
       else if (node !== null && typeof node === "object") {
@@ -2432,7 +2525,12 @@ const STATIC_CONDITION_SUFFIXES = [
 ];
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */
-const STATIC_CONDITION_PREFIXES = [["As long as you have the city's blessing, ", { kind: "citys-blessing" }]];
+const STATIC_CONDITION_PREFIXES = [
+  ["As long as you have the city's blessing, ", { kind: "citys-blessing" }],
+  // Renowned (rule 702.112b): "As long as ~ is renowned, it has menace"
+  // (Goblin Glory Chaser) — the "it" is ~.
+  ["As long as ~ is renowned, ", { kind: "source", filter: { renowned: true } }],
+];
 
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
@@ -2444,6 +2542,9 @@ const INTERVENING_IFS = {
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
+  // The Innistrad werewolves' transforms: the previous turn's spells.
+  "if no spells were cast last turn,": { kind: "spells-cast-last-turn", none: true },
+  "if a player cast two or more spells last turn,": { kind: "spells-cast-last-turn", byOnePlayerAtLeast: 2 },
   "if a nonland permanent left the battlefield this turn or a spell was warped this turn,": VOID_CONDITION,
   "if a permanent left the battlefield under your control this turn,": REVOLT_CONDITION,
   "if a permanent you controlled left the battlefield this turn,": REVOLT_CONDITION,
@@ -2453,6 +2554,9 @@ const INTERVENING_IFS = {
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
+  // Rule 702.112b: the source's renowned designation.
+  "if it's renowned,": { kind: "source", filter: { renowned: true } },
+  "if ~ is renowned,": { kind: "source", filter: { renowned: true } },
   // Rule 700.13 (Outlaws of Thunder Junction).
   "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
   // Rule 701.59c: the spell's collect-evidence additional cost was paid.
@@ -2466,6 +2570,9 @@ const INTERVENING_IFS = {
   // Rule 702.137a: the permanent's spell was cast for its spectacle cost.
   "if its spectacle cost was paid,": { kind: "self-spectacle-paid" },
   "if ~'s spectacle cost was paid,": { kind: "self-spectacle-paid" },
+  // Rule 702.117a: the permanent's spell was cast for its surge cost.
+  "if its surge cost was paid,": { kind: "self-surge-paid" },
+  "if ~'s surge cost was paid,": { kind: "self-surge-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },
@@ -2519,6 +2626,10 @@ function departedOf(triggers) {
 const LIBRARY_EFFECTS = new Set([
   "draw", "mill", "search-library", "scry", "surveil", "look-and-choose", "put-on-library", "reveal-until",
 ]);
+/** Does an effect deal damage anywhere inside it? */
+const dealsDamage = (e) =>
+  e !== null && typeof e === "object" &&
+  (/^damage/.test(e.kind ?? "") || Object.values(e).some((v) => (Array.isArray(v) ? v.some(dealsDamage) : dealsDamage(v))));
 const touchesLibrary = (e) =>
   e !== null && typeof e === "object" &&
   (LIBRARY_EFFECTS.has(e.kind) || Object.values(e).some((v) => (Array.isArray(v) ? v.some(touchesLibrary) : touchesLibrary(v))));
@@ -2633,7 +2744,7 @@ function parseStatic(line, text) {
   }
   for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
     if (!line.startsWith(prefix)) continue;
-    const rest = line.slice(prefix.length);
+    const rest = line.slice(prefix.length).replace(/^it /, "~ ");
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }

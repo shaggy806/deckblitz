@@ -1,7 +1,8 @@
 import { defineCard } from "../define.js";
 
-/** 1/1 colourless Thopter artifact creature with flying (Inspired Sphinx,
- * Sharding Sphinx). Colourless, so it carries no `colors`. */
+/** 1/1 colourless Thopter artifact creature with flying (Inspired Sphinx).
+ * Colourless, so it carries no `colors`; the blue one (Thopter Foundry,
+ * Sharding Sphinx) is "Blue Thopter Token". */
 export default defineCard({
   name: "Thopter Token",
   art: "ecfbb9f1-a8c4-4ae3-8db1-e4c39d7fed0c",

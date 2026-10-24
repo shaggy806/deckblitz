@@ -7,7 +7,7 @@
  */
 
 import type { CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
-import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
+import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
   CardType,
@@ -125,6 +125,10 @@ export interface GameObject {
    * kept across the move the way `enteredKicked` is — Rafter Demon's "if its
    * spectacle cost was paid". */
   enteredSpectacle?: boolean;
+  /** This permanent's spell was cast for its surge cost (rule 702.117),
+   * kept across the move as `enteredSpectacle` is — Reckless Bushwhacker's
+   * "if its surge cost was paid". */
+  enteredSurge?: boolean;
   /** How many times its spell was kicked, for a multikicker spell (rule
    * 702.33c) — `timesKicked` carried across the stack-to-battlefield move
    * the way `enteredKicked` is, for "enters with a charge counter on it for
@@ -368,6 +372,15 @@ export interface GameObject {
    * leaves the battlefield (`moveObject` clears it).
    */
   monstrous?: true;
+  /**
+   * The permanent is **renowned** (rule 702.112b): a designation the `renown`
+   * effect gives it, which renown's own trigger reads ("if it isn't
+   * renowned"), "as long as this creature is renowned" statics read (the
+   * `renowned` filter clause) and a `becomes-renowned` trigger watches for.
+   * Like monstrous, neither an ability nor a copiable value; it lasts until
+   * the permanent leaves the battlefield (`moveObject` clears it).
+   */
+  renowned?: true;
   /**
    * The permanent is **saddled** (rule 702.171b): a designation a saddle
    * ability's effect (or Kolodin's, Guidelight Matrix's…) gives it, which
@@ -791,6 +804,10 @@ export interface GameObject {
    * `alternativeCost` with `keyword: "spectacle"`), for "if its spectacle
    * cost was paid" (`self-spectacle-paid`). A copy has it too (707.10). */
   spectaclePaid?: boolean;
+  /** This spell was cast for its surge cost (rule 702.117 — the
+   * `alternativeCost` with `keyword: "surge"`), for "if its surge cost was
+   * paid" (`self-surge-paid`). A copy has it too (707.10). */
+  surgePaid?: boolean;
   /** This spell was cast for its overload cost (rule 702.126 — Cyclonic
    * Rift): its overload cost was paid instead of its mana cost, with no
    * targets, so `resolveTopOfStack` applies `CardDefinition.overload.effect`.
@@ -832,6 +849,13 @@ export interface GameObject {
    * cleared by that same move — the card that lands in exile is a new object
    * the replacement no longer applies to (rule 400.7). */
   exileIfItWouldLeave?: boolean;
+  /** "If that creature would die this turn, exile it instead" (Lava Coil —
+   * rule 614.1a): the turn number it was said on. `moveObject` exiles the
+   * permanent instead of putting it into a graveyard from the battlefield
+   * while `state.turn.number` still equals it — "this turn" ends with the
+   * turn, so no sweep clears it — and any zone change clears it (rule
+   * 400.7). */
+  exileIfDiesTurn?: number;
   /** True on a token copy created "except it's not legendary" (Miirym — rule
    * 707 / needed-cards P5b). The legend-rule SBA skips it. Intrinsic, like
    * `isToken` — never reset. */
@@ -1178,6 +1202,7 @@ export interface SpellSnapshot {
   readonly overloaded?: boolean;
   readonly evokePaid?: boolean;
   readonly spectaclePaid?: boolean;
+  readonly surgePaid?: boolean;
   readonly offspringGrantPaid?: boolean;
   /** Who its gift was promised to — a copy's is promised to them too. */
   readonly giftTo?: PlayerId;
@@ -1484,6 +1509,8 @@ export interface LastKnownInfo {
   readonly enteredKicked?: boolean;
   /** Its spell was cast for its spectacle cost — `enteredSpectacle`. */
   readonly enteredSpectacle?: boolean;
+  /** Its spell was cast for its surge cost — `enteredSurge`. */
+  readonly enteredSurge?: boolean;
   /** How many times its spell's multikicker or squad cost was paid —
    * `enteredTimesKicked`, so squad's copies are still made once it has left
    * (rule 702.157a). */
@@ -1494,6 +1521,10 @@ export interface LastKnownInfo {
   /** The turn it entered the battlefield on, and the turn it attacked on if
    * it did — for the `enteredThisTurn` / `attackedThisTurn` filter clauses. */
   readonly enteredOnTurn?: number;
+  /** It was monstrous (rule 701.37b) — the `monstrous` filter clause. */
+  readonly monstrous?: true;
+  /** It was renowned (rule 702.112b) — the `renowned` filter clause. */
+  readonly renowned?: true;
   /** How it had entered — `GameObject.entry`. */
   readonly entry?: EntryRecord;
   readonly attackedOnTurn?: number;
@@ -1977,6 +2008,13 @@ export interface PlayerState {
    * attacker: "during any turn you attacked with a commander" (Neriv,
    * Crackling Vanguard). */
   attackedWithCommanderOnTurn?: number;
+  /** The players this player declared creatures attacking in their most
+   * recent combat (rule 508.1), and which combat that was — melee's "each
+   * opponent you attacked with a creature this combat" (702.121a), counted
+   * whether or not those creatures are still attacking, and never a creature
+   * put onto the battlefield attacking (the rulings). A planeswalker attacked
+   * isn't its controller. */
+  attackedPlayers?: { readonly combat: CombatId; readonly players: readonly PlayerId[] };
   /** This player cast a spell from a graveyard, or activated an ability of a
    * card in a graveyard, this turn (Laboratory Drudge). */
   usedGraveyardThisTurn: boolean;
@@ -2708,6 +2746,10 @@ export type AwaitingDecision =
        * creatures, singled out of a token stack, and `then` puts the
        * counters on it. */
       readonly blight?: number;
+      /** Set when the choice is which of the least-toughness creatures
+       * bolsters this many (rule 701.39a — `Game.beginBolster`): exactly one,
+       * singled out of a token stack, and `then` puts the counters on it. */
+      readonly bolster?: number;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"
@@ -3110,6 +3152,19 @@ export interface DelayedUnblockedWatch {
   readonly turn: number;
 }
 
+/** A delayed trigger with a duration matching any event a trigger can name
+ * — see `DelayedWhenever`. Fires each time; lapses as the next turn begins,
+ * or with `untilYourNextTurn`, as its controller's next turn does. */
+export interface DelayedWheneverWatch {
+  readonly whenever: TriggerSpec;
+  /** Targets it chooses each time it triggers — absent, it reads the
+   * creating ability's. */
+  readonly targets?: readonly TargetSpec[];
+  readonly untilYourNextTurn?: true;
+  /** The turn it was made on. */
+  readonly turn: number;
+}
+
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
   /** Or the next ability its controller activates with {X} in its
@@ -3140,7 +3195,8 @@ export interface DelayedTrigger {
     | DelayedLeaveWatch
     | DelayedCastWatch
     | DelayedDamageWatch
-    | DelayedUnblockedWatch;
+    | DelayedUnblockedWatch
+    | DelayedWheneverWatch;
   /** The creating ability's trigger object, and its `zoneChangeCount` then
    * — "return **that card** to the battlefield" (Shirei, Shizo's Caretaker).
    * It's the delayed ability's trigger object too, as long as it's still that
@@ -4153,6 +4209,11 @@ export interface GameState {
    * Reset in `beginTurn`. `PlayerState.spellsCastThisTurn` is the per-player
    * count for "your first spell each turn" triggers. ROADMAP Phase 8. */
   spellsCastThisTurn: number;
+  /** The turn before this one's spells, as `beginTurn` found them: how many
+   * were cast in all, and the most any one player cast — the
+   * `spells-cast-last-turn` condition (the werewolves' transforms). Nothing
+   * on the game's first turn, which had none before it. */
+  spellsCastLastTurn?: { readonly total: number; readonly mostByOnePlayer: number };
   /** The day/night designation (rule 726 — ROADMAP Phase 10b). `null` until a
    * card or effect first makes it day or night. `beginTurn` then flips it per
    * 726.3/726.4 (day → night if the previous turn's player cast no spells;
@@ -4492,6 +4553,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.goadedForGameBy ?? [],
     o.suspectedAt ?? null,
     o.monstrous ?? false,
+    o.renowned ?? false,
     o.saddled ?? false,
     o.saddledThisTurn ?? null,
     o.exertedBy ?? null,

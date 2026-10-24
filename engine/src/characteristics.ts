@@ -569,6 +569,12 @@ function evalStaticCondition(
       return condition.who === "you"
         ? state.monarch === you
         : state.monarch !== null && state.monarch !== you;
+    case "spells-cast-last-turn": {
+      const last = state.spellsCastLastTurn ?? { total: 0, mostByOnePlayer: 0 };
+      if (condition.none === true && last.total !== 0) return false;
+      if (condition.byOnePlayerAtLeast !== undefined && last.mostByOnePlayer < condition.byOnePlayerAtLeast) return false;
+      return true;
+    }
     case "initiative": {
       const holder = state.initiative ?? null;
       return condition.who === "you" ? holder === you : holder !== null && holder !== you;
@@ -869,6 +875,12 @@ function evalStaticCondition(
         source.enteredSpectacle === true ||
         source.spectaclePaid === true ||
         opts.sourceLastKnown?.enteredSpectacle === true
+      );
+    case "self-surge-paid":
+      return (
+        source.enteredSurge === true ||
+        source.surgePaid === true ||
+        opts.sourceLastKnown?.enteredSurge === true
       );
     case "self-kicked":
       // On the battlefield it's `enteredKicked` (the stack flag is cleared by
@@ -2150,6 +2162,8 @@ export function countValue(
       return allGraveyards().length;
     case "cards-in-your-hand":
       return state.zones.perPlayer[controller]?.hand.length ?? 0;
+    case "cards-in-all-hands":
+      return Object.values(state.zones.perPlayer).reduce((n, zones) => n + zones.hand.length, 0);
     default:
       return 0;
   }
