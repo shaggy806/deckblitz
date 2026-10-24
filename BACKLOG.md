@@ -245,7 +245,6 @@ there and move this line to `COMPLETED.md`.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
-- **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).
 - **A set rule on a graveyard choice** (Lively Dirge's total mana value 4 or less).
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
@@ -253,7 +252,7 @@ there and move this line to `COMPLETED.md`.
 - **Replacement order is chosen for the affected player, never asked** (616.1).
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**
 - **Toxic's last two shapes** (Skrelv, Defector Mite; Skrelv's Hive).
-- **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape** — Will of the Jeskai, Kwain, Forced Fruition, Ruric Thar, Spellshock, Magebane Lizard, Black Mage's Rod.
+- **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape** — Will of the Jeskai, Kwain, Black Mage's Rod.
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4c, 800.4g–h).
 - **Dividing among targets: what's left** — an X total, distributing counters.
