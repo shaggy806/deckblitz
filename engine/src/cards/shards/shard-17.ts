@@ -41,6 +41,7 @@ import _poolAvengersHangar from "../pool/avengers-hangar.js";
 import _poolBadlandsRevival from "../pool/badlands-revival.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
 import _poolBalinLoremaster from "../pool/balin-loremaster.js";
+import _poolBarrageTyrant from "../pool/barrage-tyrant.js";
 import _poolBarrensteppeSiege from "../pool/barrensteppe-siege.js";
 import _poolBastionEnforcer from "../pool/bastion-enforcer.js";
 import _poolBattalionFootSoldier from "../pool/battalion-foot-soldier.js";
@@ -225,6 +226,7 @@ import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
+import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
@@ -345,6 +347,7 @@ import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNestRobber from "../pool/nest-robber.js";
+import _poolNettleDrone from "../pool/nettle-drone.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
@@ -498,6 +501,7 @@ import _poolSunderTheGateway from "../pool/sunder-the-gateway.js";
 import _poolSunriseCavalier from "../pool/sunrise-cavalier.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSupremePhantom from "../pool/supreme-phantom.js";
+import _poolSwarmSurge from "../pool/swarm-surge.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
@@ -524,6 +528,7 @@ import _poolThroughTheForestGate from "../pool/through-the-forest-gate.js";
 import _poolThunderingFalls from "../pool/thundering-falls.js";
 import _poolThunderingRebuke from "../pool/thundering-rebuke.js";
 import _poolThunderscapeMaster from "../pool/thunderscape-master.js";
+import _poolTideDrifter from "../pool/tide-drifter.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
@@ -536,6 +541,7 @@ import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
 import _poolTroubledHealer from "../pool/troubled-healer.js";
 import _poolTrueIdentity from "../pool/true-identity.js";
 import _poolTurbulentMoor from "../pool/turbulent-moor.js";
+import _poolTurnAgainst from "../pool/turn-against.js";
 import _poolTurntimberAscetic from "../pool/turntimber-ascetic.js";
 import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
@@ -659,6 +665,7 @@ const shard: CardShard = {
     _poolBadlandsRevival,
     _poolBalefireLiege,
     _poolBalinLoremaster,
+    _poolBarrageTyrant,
     _poolBarrensteppeSiege,
     _poolBastionEnforcer,
     _poolBattalionFootSoldier,
@@ -843,6 +850,7 @@ const shard: CardShard = {
     _poolGrizzlyGhoul,
     _poolGroundchuckDirtbag,
     _poolGroundskeeper,
+    _poolGuardianOfTazeem,
     _poolGutTrueSoulZealot,
     _poolHammersOfMoradin,
     _poolHangedExecutioner,
@@ -963,6 +971,7 @@ const shard: CardShard = {
     _poolNecroticWound,
     _poolNemaSiltlurker,
     _poolNestRobber,
+    _poolNettleDrone,
     _poolNiambiFaithfulHealer,
     _poolNightOfTheSweetsRevenge,
     _poolNimanaSkydancer,
@@ -1116,6 +1125,7 @@ const shard: CardShard = {
     _poolSunriseCavalier,
     _poolSuperShredder,
     _poolSupremePhantom,
+    _poolSwarmSurge,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
@@ -1142,6 +1152,7 @@ const shard: CardShard = {
     _poolThunderingFalls,
     _poolThunderingRebuke,
     _poolThunderscapeMaster,
+    _poolTideDrifter,
     _poolTideSkimmer,
     _poolTitaniaNaturesForce,
     _poolTombRobber,
@@ -1154,6 +1165,7 @@ const shard: CardShard = {
     _poolTroubledHealer,
     _poolTrueIdentity,
     _poolTurbulentMoor,
+    _poolTurnAgainst,
     _poolTurntimberAscetic,
     _poolTyranidInvasion,
     _poolTyranidPrime,

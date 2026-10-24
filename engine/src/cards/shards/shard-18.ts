@@ -256,6 +256,7 @@ import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
 import _poolKomainuBattleArmor from "../pool/komainu-battle-armor.js";
+import _poolKorCastigator from "../pool/kor-castigator.js";
 import _poolKothsCourier from "../pool/koths-courier.js";
 import _poolKozileksReturn from "../pool/kozileks-return.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
@@ -880,6 +881,7 @@ const shard: CardShard = {
     _poolKinsbaileCavalier,
     _poolKolaghanWarmonger,
     _poolKomainuBattleArmor,
+    _poolKorCastigator,
     _poolKothsCourier,
     _poolKozileksReturn,
     _poolKozileksUnsealing,

@@ -11,6 +11,7 @@ import _poolAetherSwooper from "../pool/aether-swooper.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
+import _poolAkoumFirebird from "../pool/akoum-firebird.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
@@ -300,6 +301,7 @@ import _poolKirdApe from "../pool/kird-ape.js";
 import _poolKithkinBillyrider from "../pool/kithkin-billyrider.js";
 import _poolKoboldsOfKherKeep from "../pool/kobolds-of-kher-keep.js";
 import _poolKollTheForgemaster from "../pool/koll-the-forgemaster.js";
+import _poolKorBladewhirl from "../pool/kor-bladewhirl.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
@@ -482,6 +484,7 @@ import _poolSlingGangLieutenant from "../pool/sling-gang-lieutenant.js";
 import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
 import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
 import _poolSliverHivelord from "../pool/sliver-hivelord.js";
+import _poolSludgeCrawler from "../pool/sludge-crawler.js";
 import _poolSoldeviGolem from "../pool/soldevi-golem.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
@@ -525,6 +528,7 @@ import _poolSynchronizedStrike from "../pool/synchronized-strike.js";
 import _poolSyndicOfTithes from "../pool/syndic-of-tithes.js";
 import _poolSyndicateEnforcer from "../pool/syndicate-enforcer.js";
 import _poolTaintedWood from "../pool/tainted-wood.js";
+import _poolTajuruWarcaller from "../pool/tajuru-warcaller.js";
 import _poolTalrandsInvocation from "../pool/talrands-invocation.js";
 import _poolTanglespanBridgeworks from "../pool/tanglespan-bridgeworks.js";
 import _poolTatyovaStewardOfTides from "../pool/tatyova-steward-of-tides.js";
@@ -645,6 +649,7 @@ const shard: CardShard = {
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
     _poolAkkiRockspeaker,
+    _poolAkoumFirebird,
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
     _poolAlloyAnimist,
@@ -934,6 +939,7 @@ const shard: CardShard = {
     _poolKithkinBillyrider,
     _poolKoboldsOfKherKeep,
     _poolKollTheForgemaster,
+    _poolKorBladewhirl,
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLegionConquistador,
@@ -1116,6 +1122,7 @@ const shard: CardShard = {
     _poolSlipOnTheRing,
     _poolSlipOutTheBack,
     _poolSliverHivelord,
+    _poolSludgeCrawler,
     _poolSoldeviGolem,
     _poolSolkanarTheSwampKing,
     _poolSomnomancer,
@@ -1159,6 +1166,7 @@ const shard: CardShard = {
     _poolSyndicOfTithes,
     _poolSyndicateEnforcer,
     _poolTaintedWood,
+    _poolTajuruWarcaller,
     _poolTalrandsInvocation,
     _poolTanglespanBridgeworks,
     _poolTatyovaStewardOfTides,

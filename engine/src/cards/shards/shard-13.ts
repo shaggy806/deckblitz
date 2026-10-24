@@ -127,6 +127,7 @@ import _poolCruelRevival from "../pool/cruel-revival.js";
 import _poolCrushingDisappointment from "../pool/crushing-disappointment.js";
 import _poolCrypticCaves from "../pool/cryptic-caves.js";
 import _poolCunningBreezedancer from "../pool/cunning-breezedancer.js";
+import _poolDampeningPulse from "../pool/dampening-pulse.js";
 import _poolDarknessDescends from "../pool/darkness-descends.js";
 import _poolDarkstarAugur from "../pool/darkstar-augur.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
@@ -339,6 +340,7 @@ import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
+import _poolMundaAmbushLeader from "../pool/munda-ambush-leader.js";
 import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolMysticMonstrosity from "../pool/mystic-monstrosity.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
@@ -750,6 +752,7 @@ const shard: CardShard = {
     _poolCrushingDisappointment,
     _poolCrypticCaves,
     _poolCunningBreezedancer,
+    _poolDampeningPulse,
     _poolDarknessDescends,
     _poolDarkstarAugur,
     _poolDauthiEmbrace,
@@ -962,6 +965,7 @@ const shard: CardShard = {
     _poolMonstrousCarabid,
     _poolMoonrageBrute,
     _poolMorphling,
+    _poolMundaAmbushLeader,
     _poolMutantSurveyor,
     _poolMysticMonstrosity,
     _poolNarsetEnlightenedMaster,

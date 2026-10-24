@@ -428,6 +428,7 @@ import _poolRorixBladewing from "../pool/rorix-bladewing.js";
 import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
 import _poolRottingLegion from "../pool/rotting-legion.js";
 import _poolRottingRegisaur from "../pool/rotting-regisaur.js";
+import _poolRuinationGuide from "../pool/ruination-guide.js";
 import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
@@ -532,6 +533,7 @@ import _poolThunderheadSquadron from "../pool/thunderhead-squadron.js";
 import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
 import _poolTicketTortoise from "../pool/ticket-tortoise.js";
 import _poolTidalInfluence from "../pool/tidal-influence.js";
+import _poolTighteningCoils from "../pool/tightening-coils.js";
 import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
@@ -1040,6 +1042,7 @@ const shard: CardShard = {
     _poolRoseRoomTreasurer,
     _poolRottingLegion,
     _poolRottingRegisaur,
+    _poolRuinationGuide,
     _poolRunicArmasaur,
     _poolRuricTharBiomagus,
     _poolRuricThar,
@@ -1144,6 +1147,7 @@ const shard: CardShard = {
     _poolThunderscapeApprentice,
     _poolTicketTortoise,
     _poolTidalInfluence,
+    _poolTighteningCoils,
     _poolTillAndTend,
     _poolTormentingVoice,
     _poolTrainingCompound,

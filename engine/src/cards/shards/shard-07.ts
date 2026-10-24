@@ -61,10 +61,12 @@ import _poolBondsOfMortality from "../pool/bonds-of-mortality.js";
 import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
+import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
+import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
@@ -700,10 +702,12 @@ const shard: CardShard = {
     _poolBonePicker,
     _poolBoonOfBoseiju,
     _poolBountyAgent,
+    _poolBrilliantSpectrum,
     _poolBronzebeakMoa,
     _poolBullsStrength,
     _poolBurnTheAccursed,
     _poolCaligoSkinWitch,
+    _poolCallTheScions,
     _poolCallousInspector,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,

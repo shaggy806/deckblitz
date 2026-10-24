@@ -276,6 +276,7 @@ import _poolKingCrab from "../pool/king-crab.js";
 import _poolKinjallisSunwing from "../pool/kinjallis-sunwing.js";
 import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
+import _poolKozileksSentinel from "../pool/kozileks-sentinel.js";
 import _poolKumanoFacesKakkazan from "../pool/kumano-faces-kakkazan.js";
 import _poolLakeTownLookout from "../pool/lake-town-lookout.js";
 import _poolLathnuHellion from "../pool/lathnu-hellion.js";
@@ -346,6 +347,7 @@ import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
 import _poolNorthernPaladin from "../pool/northern-paladin.js";
+import _poolNoyanDarRoilShaper from "../pool/noyan-dar-roil-shaper.js";
 import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
 import _poolOakenSiren from "../pool/oaken-siren.js";
 import _poolOctomancer from "../pool/octomancer.js";
@@ -397,6 +399,7 @@ import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
 import _poolQumulox from "../pool/qumulox.js";
+import _poolRadiantFlames from "../pool/radiant-flames.js";
 import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
@@ -475,6 +478,7 @@ import _poolSilentSentinel from "../pool/silent-sentinel.js";
 import _poolSilverclawGriffin from "../pool/silverclaw-griffin.js";
 import _poolSilverquillApprentice from "../pool/silverquill-apprentice.js";
 import _poolSimicSignet from "../pool/simic-signet.js";
+import _poolSkitterskin from "../pool/skitterskin.js";
 import _poolSkullProphet from "../pool/skull-prophet.js";
 import _poolSkyCycle from "../pool/sky-cycle.js";
 import _poolSkyclaveGeopede from "../pool/skyclave-geopede.js";
@@ -563,6 +567,7 @@ import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
 import _poolTyrantsScorn from "../pool/tyrants-scorn.js";
 import _poolTyrranax from "../pool/tyrranax.js";
+import _poolUginsInsight from "../pool/ugins-insight.js";
 import _poolUmaraSkyfalls from "../pool/umara-skyfalls.js";
 import _poolUndergroundRiver from "../pool/underground-river.js";
 import _poolUnderworldBreach from "../pool/underworld-breach.js";
@@ -902,6 +907,7 @@ const shard: CardShard = {
     _poolKinjallisSunwing,
     _poolKithkinSpellduster,
     _poolKnotvineMystic,
+    _poolKozileksSentinel,
     _poolKumanoFacesKakkazan,
     _poolLakeTownLookout,
     _poolLathnuHellion,
@@ -972,6 +978,7 @@ const shard: CardShard = {
     _poolNightwindGlider,
     _poolNissasPilgrimage,
     _poolNorthernPaladin,
+    _poolNoyanDarRoilShaper,
     _poolNyamiClassMotherShip,
     _poolOakenSiren,
     _poolOctomancer,
@@ -1023,6 +1030,7 @@ const shard: CardShard = {
     _poolQuagFeast,
     _poolQuarrelsEnd,
     _poolQumulox,
+    _poolRadiantFlames,
     _poolRagingMinotaur,
     _poolRakdosRagemutt,
     _poolRamunapExcavator,
@@ -1101,6 +1109,7 @@ const shard: CardShard = {
     _poolSilverclawGriffin,
     _poolSilverquillApprentice,
     _poolSimicSignet,
+    _poolSkitterskin,
     _poolSkullProphet,
     _poolSkyCycle,
     _poolSkyclaveGeopede,
@@ -1189,6 +1198,7 @@ const shard: CardShard = {
     _poolTuskedColossodon,
     _poolTyrantsScorn,
     _poolTyrranax,
+    _poolUginsInsight,
     _poolUmaraSkyfalls,
     _poolUndergroundRiver,
     _poolUnderworldBreach,

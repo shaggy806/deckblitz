@@ -445,9 +445,11 @@ import _poolRisingPopulace from "../pool/rising-populace.js";
 import _poolRiteOfPassage from "../pool/rite-of-passage.js";
 import _poolRiverwheelSweep from "../pool/riverwheel-sweep.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
+import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
 import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.js";
+import _poolSalvageDrone from "../pool/salvage-drone.js";
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
 import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
@@ -481,6 +483,7 @@ import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologis
 import _poolSidequestCatchAFish from "../pool/sidequest-catch-a-fish.js";
 import _poolSiegeModification from "../pool/siege-modification.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
+import _poolSilentSkimmer from "../pool/silent-skimmer.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
 import _poolSinuousBenthisaur from "../pool/sinuous-benthisaur.js";
@@ -1094,9 +1097,11 @@ const shard: CardShard = {
     _poolRiteOfPassage,
     _poolRiverwheelSweep,
     _poolRockyRoads,
+    _poolRoilsRetribution,
     _poolRoofstalkerWight,
     _poolSageOfTheMaze,
     _poolSaheeliConsulOfOversight,
+    _poolSalvageDrone,
     _poolSalvagerOfSecrets,
     _poolSandbenderScavengers,
     _poolSandsOfDelirium,
@@ -1130,6 +1135,7 @@ const shard: CardShard = {
     _poolSidequestCatchAFish,
     _poolSiegeModification,
     _poolSilentDeparture,
+    _poolSilentSkimmer,
     _poolSilkenfistFighter,
     _poolSilverMyr,
     _poolSinuousBenthisaur,

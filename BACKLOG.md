@@ -152,16 +152,16 @@ section keeps only what to do next.
   Crown and Eldritch Moon, on emerge and "as long as it's monstrous"; batch 148 Shadows over
   Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object;
   batch 149 Oath of the Gatewatch and Commander 2015, on surge and "if that creature would die
-  this turn, exile it instead" with its "dealt damage this way" form);
-  **next, Battle for Zendikar** (131 left) — one batch, 4-5 agents. Researched for it
-  (2026-10-23): **awaken** (rule 702.113 — 13 of its cards, no helper yet) leads: an
-  `alternativeCost` like surge's (`surge()` in `helpers.ts`) whose spell, cast that way, adds
-  "put N +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature
-  with haste" (a permanent effect) — a kicker-shaped variant (its own target slot, rule
-  702.113a), so look at how bargain/gift add a target when paid; then the processors' "put a
-  card an opponent owns from exile into that player's graveyard" (8 — no vocabulary; a cost and
-  a "you may … if you do"); ingest (9) reads like an existing combat-damage trigger exiling the
-  top card of that player's library. Batch 149's leading blockers: "choose the same mode more
+  this turn, exile it instead" with its "dealt damage this way" form; batch 150 the rest of
+  Battle for Zendikar, on awaken);
+  **next, Magic Origins** (102 left) — one batch, 4 agents. Its leading mechanic is **renown**
+  (rule 702.112 — 12 of its cards, nothing built: "whenever this creature deals combat damage to
+  a player, if it isn't renowned, put N +1/+1 counters on it and it becomes renowned", a
+  designation on the permanent that "if it's renowned" statics read, lost when it leaves);
+  spell mastery (11) is already a condition (Nissa's Pilgrimage). Batch 150's leading blocker:
+  the processors' "put a card an opponent owns from exile into that player's graveyard"
+  (`cost:put-opponent-exiled-card-into-graveyard` — 12, every processor in the set, as a cost
+  or a "you may … if you do"). Batch 149's leading blockers: "choose the same mode more
   than once" (`effect:modal-repeat-modes` — the three Confluences), "target opponent exiles
   cards from their hand" (`effect:target-player-exiles-from-hand` — Mindmelter, Witness the
   End). Batch 147's leading blockers:

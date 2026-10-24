@@ -394,6 +394,7 @@ import _poolRamblingPossum from "../pool/rambling-possum.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
 import _poolRapturousMoment from "../pool/rapturous-moment.js";
 import _poolRebelliousCaptives from "../pool/rebellious-captives.js";
+import _poolRecklessCohort from "../pool/reckless-cohort.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
 import _poolRecklessReveler from "../pool/reckless-reveler.js";
 import _poolRedcapMelee from "../pool/redcap-melee.js";
@@ -444,6 +445,7 @@ import _poolSeersSundial from "../pool/seers-sundial.js";
 import _poolSeizeTheSpoils from "../pool/seize-the-spoils.js";
 import _poolSenateGriffin from "../pool/senate-griffin.js";
 import _poolSerahFarron from "../pool/serah-farron.js";
+import _poolSerpentineSpike from "../pool/serpentine-spike.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
@@ -475,6 +477,7 @@ import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
 import _poolSparkmagesGambit from "../pool/sparkmages-gambit.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
 import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
+import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
@@ -1023,6 +1026,7 @@ const shard: CardShard = {
     _poolRangerEnVec,
     _poolRapturousMoment,
     _poolRebelliousCaptives,
+    _poolRecklessCohort,
     _poolRecklessRansacking,
     _poolRecklessReveler,
     _poolRedcapMelee,
@@ -1073,6 +1077,7 @@ const shard: CardShard = {
     _poolSeizeTheSpoils,
     _poolSenateGriffin,
     _poolSerahFarron,
+    _poolSerpentineSpike,
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
     _poolSharpshooterElf,
@@ -1104,6 +1109,7 @@ const shard: CardShard = {
     _poolSparkmagesGambit,
     _poolSpectacleSummit,
     _poolSpectralShepherd,
+    _poolSpellShrivel,
     _poolSpellStutter,
     _poolSpinedMegalodon,
     _poolSpringLoadedSawblades,

@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Battle for Zendikar, the rest of it** (batch 150): awaken (rule 702.113 — `overload` with
+  `keyword: "awaken"` and the `awaken()` helper, the land the last target; read by the
+  scaffolder). 108 authored — four `card-author` agents and the lead: Ruinous Path, Gideon, Ally
+  of Zendikar, Kiora, Master of the Depths, Planar Outburst, Part the Waterveil, Ugin's Insight,
+  Aligned Hedron Network, Veteran Warleader and the other awaken spells (2026-10-23).
 - **Oath of the Gatewatch and Commander 2015, whole** (batch 149): surge (rule 702.117 —
   `alternativeCost` with `keyword: "surge"`, `self-surge-paid`) and "if that creature would die
   this turn, exile it instead" (`exile-if-dies-this-turn` — a per-object turn number read in

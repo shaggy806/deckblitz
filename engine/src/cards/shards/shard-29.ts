@@ -87,6 +87,7 @@ import _poolCentaurPeacemaker from "../pool/centaur-peacemaker.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
+import _poolChasmGuide from "../pool/chasm-guide.js";
 import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
@@ -295,6 +296,7 @@ import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
 import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolKulrathZealot from "../pool/kulrath-zealot.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
+import _poolLanternScout from "../pool/lantern-scout.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
@@ -711,6 +713,7 @@ const shard: CardShard = {
     _poolChar,
     _poolChargingBadger,
     _poolCharredGraverobber,
+    _poolChasmGuide,
     _poolChooseYourWeapon,
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
@@ -919,6 +922,7 @@ const shard: CardShard = {
     _poolKujarSeedsculptor,
     _poolKulrathZealot,
     _poolLairOfTheHydra,
+    _poolLanternScout,
     _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
     _poolLeylineSurge,

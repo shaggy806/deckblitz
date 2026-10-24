@@ -14,6 +14,7 @@ import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
 import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
 import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAjanisComrade from "../pool/ajanis-comrade.js";
+import _poolAkoumStonewaker from "../pool/akoum-stonewaker.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
@@ -637,6 +638,7 @@ const shard: CardShard = {
     _poolAetherstormRoc,
     _poolAislingLeprechaun,
     _poolAjanisComrade,
+    _poolAkoumStonewaker,
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
     _poolAlrundsEpiphany,

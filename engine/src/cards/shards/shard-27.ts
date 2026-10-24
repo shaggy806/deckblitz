@@ -22,6 +22,7 @@ import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
+import _poolAngelOfRenewal from "../pool/angel-of-renewal.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
@@ -335,6 +336,7 @@ import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
+import _poolNissasRenewal from "../pool/nissas-renewal.js";
 import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
@@ -428,6 +430,7 @@ import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
 import _poolScroungedScythe from "../pool/scrounged-scythe.js";
 import _poolScurridColony from "../pool/scurrid-colony.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
+import _poolSeekTheWilds from "../pool/seek-the-wilds.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
@@ -481,6 +484,7 @@ import _poolSpurredWolverine from "../pool/spurred-wolverine.js";
 import _poolStalkerHag from "../pool/stalker-hag.js";
 import _poolStallForTime from "../pool/stall-for-time.js";
 import _poolStampedeSurfer from "../pool/stampede-surfer.js";
+import _poolStasisSnare from "../pool/stasis-snare.js";
 import _poolStaunchShieldmate from "../pool/staunch-shieldmate.js";
 import _poolSteadfastGuard from "../pool/steadfast-guard.js";
 import _poolSteelLeafChampion from "../pool/steel-leaf-champion.js";
@@ -568,6 +572,7 @@ import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVeteranCathar from "../pool/veteran-cathar.js";
+import _poolVeteranWarleader from "../pool/veteran-warleader.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
 import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
@@ -632,6 +637,7 @@ const shard: CardShard = {
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,
     _poolAmuletOfVigor,
+    _poolAngelOfRenewal,
     _poolAngelicSleuth,
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
@@ -945,6 +951,7 @@ const shard: CardShard = {
     _poolNegate,
     _poolNicolBolas,
     _poolNightScythe,
+    _poolNissasRenewal,
     _poolNoosegrafMob,
     _poolNullCaller,
     _poolNurglesRot,
@@ -1038,6 +1045,7 @@ const shard: CardShard = {
     _poolScroungedScythe,
     _poolScurridColony,
     _poolScuzzbackScrapper,
+    _poolSeekTheWilds,
     _poolSeekerOfTheWay,
     _poolSentinelsEyes,
     _poolSergeantJohnBenton,
@@ -1091,6 +1099,7 @@ const shard: CardShard = {
     _poolStalkerHag,
     _poolStallForTime,
     _poolStampedeSurfer,
+    _poolStasisSnare,
     _poolStaunchShieldmate,
     _poolSteadfastGuard,
     _poolSteelLeafChampion,
@@ -1178,6 +1187,7 @@ const shard: CardShard = {
     _poolVenerableWarsinger,
     _poolVesselOfVolatility,
     _poolVeteranCathar,
+    _poolVeteranWarleader,
     _poolVigorbloomVanguard,
     _poolVilespawnSpider,
     _poolVirulentEmissary,

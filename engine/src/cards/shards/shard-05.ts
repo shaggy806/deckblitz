@@ -68,6 +68,7 @@ import _poolBleachboneVerge from "../pool/bleachbone-verge.js";
 import _poolBlessedLight from "../pool/blessed-light.js";
 import _poolBlightPile from "../pool/blight-pile.js";
 import _poolBlightning from "../pool/blightning.js";
+import _poolBlisterpod from "../pool/blisterpod.js";
 import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBlueMarvelAdamBrashear from "../pool/blue-marvel-adam-brashear.js";
@@ -410,6 +411,7 @@ import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
+import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
 import _poolReinterpret from "../pool/reinterpret.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
@@ -560,6 +562,7 @@ import _poolTyrranaxAtrocity from "../pool/tyrranax-atrocity.js";
 import _poolUndergrowthRecon from "../pool/undergrowth-recon.js";
 import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
 import _poolUninvitedGeist from "../pool/uninvited-geist.js";
+import _poolUnnaturalAggression from "../pool/unnatural-aggression.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
 import _poolVampiresZeal from "../pool/vampires-zeal.js";
@@ -591,6 +594,7 @@ import _poolWilt from "../pool/wilt.js";
 import _poolWindriderPatrol from "../pool/windrider-patrol.js";
 import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
 import _poolWolfsQuarry from "../pool/wolfs-quarry.js";
+import _poolWoodlandWanderer from "../pool/woodland-wanderer.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolWretchedCamel from "../pool/wretched-camel.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
@@ -688,6 +692,7 @@ const shard: CardShard = {
     _poolBlessedLight,
     _poolBlightPile,
     _poolBlightning,
+    _poolBlisterpod,
     _poolBloodlineRecollector,
     _poolBlossomingTortoise,
     _poolBlueMarvelAdamBrashear,
@@ -1030,6 +1035,7 @@ const shard: CardShard = {
     _poolRapidAugmenter,
     _poolRavenousIntruder,
     _poolRecklessPangolin,
+    _poolReclaimingVines,
     _poolRefurbishedFamiliar,
     _poolReinterpret,
     _poolRememberTheFallen,
@@ -1180,6 +1186,7 @@ const shard: CardShard = {
     _poolUndergrowthRecon,
     _poolUndergrowthStadium,
     _poolUninvitedGeist,
+    _poolUnnaturalAggression,
     _poolUnnaturalMoonrise,
     _poolVampireNoble,
     _poolVampiresZeal,
@@ -1211,6 +1218,7 @@ const shard: CardShard = {
     _poolWindriderPatrol,
     _poolWinterMisanthropicGuide,
     _poolWolfsQuarry,
+    _poolWoodlandWanderer,
     _poolWorldMap,
     _poolWretchedCamel,
     _poolYoshimaru,

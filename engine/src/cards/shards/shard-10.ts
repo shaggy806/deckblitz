@@ -59,6 +59,7 @@ import _poolBladebrand from "../pool/bladebrand.js";
 import _poolBlasphemousAct from "../pool/blasphemous-act.js";
 import _poolBleedDry from "../pool/bleed-dry.js";
 import _poolBlightbellyRat from "../pool/blightbelly-rat.js";
+import _poolBlightedGorge from "../pool/blighted-gorge.js";
 import _poolBlisteringFirecat from "../pool/blistering-firecat.js";
 import _poolBlizzardElemental from "../pool/blizzard-elemental.js";
 import _poolBloodPrice from "../pool/blood-price.js";
@@ -131,6 +132,7 @@ import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDeadeyePlunderers from "../pool/deadeye-plunderers.js";
 import _poolDeadeyeQuartermaster from "../pool/deadeye-quartermaster.js";
+import _poolDeathlessBehemoth from "../pool/deathless-behemoth.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
@@ -215,6 +217,7 @@ import _poolGhostShip from "../pool/ghost-ship.js";
 import _poolGiantInheritance from "../pool/giant-inheritance.js";
 import _poolGiantWarthog from "../pool/giant-warthog.js";
 import _poolGiantsAmulet from "../pool/giants-amulet.js";
+import _poolGideonAllyOfZendikar from "../pool/gideon-ally-of-zendikar.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
@@ -369,6 +372,7 @@ import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
 import _poolOldRutstein from "../pool/old-rutstein.js";
 import _poolOmnispellAdept from "../pool/omnispell-adept.js";
+import _poolOnduChampion from "../pool/ondu-champion.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
@@ -706,6 +710,7 @@ const shard: CardShard = {
     _poolBlasphemousAct,
     _poolBleedDry,
     _poolBlightbellyRat,
+    _poolBlightedGorge,
     _poolBlisteringFirecat,
     _poolBlizzardElemental,
     _poolBloodPrice,
@@ -778,6 +783,7 @@ const shard: CardShard = {
     _poolDeadbridgeChant,
     _poolDeadeyePlunderers,
     _poolDeadeyeQuartermaster,
+    _poolDeathlessBehemoth,
     _poolDecodeTransmissions,
     _poolDefendTheCelestus,
     _poolDefensiveStance,
@@ -862,6 +868,7 @@ const shard: CardShard = {
     _poolGiantInheritance,
     _poolGiantWarthog,
     _poolGiantsAmulet,
+    _poolGideonAllyOfZendikar,
     _poolGiftOfGranite,
     _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
@@ -1016,6 +1023,7 @@ const shard: CardShard = {
     _poolOgreBattledriver,
     _poolOldRutstein,
     _poolOmnispellAdept,
+    _poolOnduChampion,
     _poolOnduGiant,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,

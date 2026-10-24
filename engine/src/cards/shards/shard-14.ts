@@ -50,6 +50,7 @@ import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBearTrap from "../pool/bear-trap.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
+import _poolBenthicInfiltrator from "../pool/benthic-infiltrator.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
 import _poolBirthOfTheImperium from "../pool/birth-of-the-imperium.js";
 import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
@@ -148,6 +149,7 @@ import _poolDireFleetNeckbreaker from "../pool/dire-fleet-neckbreaker.js";
 import _poolDiscoverTheImpossible from "../pool/discover-the-impossible.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
+import _poolDominatorDrone from "../pool/dominator-drone.js";
 import _poolDontMove from "../pool/dont-move.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
 import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
@@ -257,6 +259,7 @@ import _poolGreatTeachersDecree from "../pool/great-teachers-decree.js";
 import _poolGreataxe from "../pool/greataxe.js";
 import _poolGrimHaruspex from "../pool/grim-haruspex.js";
 import _poolGrimRepriser from "../pool/grim-repriser.js";
+import _poolGripOfDesolation from "../pool/grip-of-desolation.js";
 import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
@@ -340,6 +343,7 @@ import _poolLychguard from "../pool/lychguard.js";
 import _poolMadameHydraReanimated from "../pool/madame-hydra-reanimated.js";
 import _poolMagitekArmor from "../pool/magitek-armor.js";
 import _poolMakeObsolete from "../pool/make-obsolete.js";
+import _poolMakindiPatrol from "../pool/makindi-patrol.js";
 import _poolManaFlare from "../pool/mana-flare.js";
 import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
@@ -364,6 +368,7 @@ import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
 import _poolMoltenDuplication from "../pool/molten-duplication.js";
+import _poolMoltenNursery from "../pool/molten-nursery.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
 import _poolMonstrousRage from "../pool/monstrous-rage.js";
 import _poolMonumentalCorruption from "../pool/monumental-corruption.js";
@@ -427,6 +432,7 @@ import _poolRegress from "../pool/regress.js";
 import _poolRelicRunner from "../pool/relic-runner.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
+import _poolResoluteBlademaster from "../pool/resolute-blademaster.js";
 import _poolResourcefulReturn from "../pool/resourceful-return.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
@@ -661,6 +667,7 @@ const shard: CardShard = {
     _poolBearTrap,
     _poolBennieBracksZoologist,
     _poolBenthicBiomancer,
+    _poolBenthicInfiltrator,
     _poolBileUrchin,
     _poolBirthOfTheImperium,
     _poolBlackTomCassidy,
@@ -759,6 +766,7 @@ const shard: CardShard = {
     _poolDiscoverTheImpossible,
     _poolDissentersDeliverance,
     _poolDistractTheGuards,
+    _poolDominatorDrone,
     _poolDontMove,
     _poolDouseInGloom,
     _poolDragonBellMonk,
@@ -868,6 +876,7 @@ const shard: CardShard = {
     _poolGreataxe,
     _poolGrimHaruspex,
     _poolGrimRepriser,
+    _poolGripOfDesolation,
     _poolGriselbrand,
     _poolGrislyRitual,
     _poolGrumgullyTheGenerous,
@@ -951,6 +960,7 @@ const shard: CardShard = {
     _poolMadameHydraReanimated,
     _poolMagitekArmor,
     _poolMakeObsolete,
+    _poolMakindiPatrol,
     _poolManaFlare,
     _poolMasterOfBarbs,
     _poolMedusaInhumanQueen,
@@ -975,6 +985,7 @@ const shard: CardShard = {
     _poolMnemonicSphere,
     _poolMoldgrafMillipede,
     _poolMoltenDuplication,
+    _poolMoltenNursery,
     _poolMonkRealist,
     _poolMonstrousRage,
     _poolMonumentalCorruption,
@@ -1038,6 +1049,7 @@ const shard: CardShard = {
     _poolRelicRunner,
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,
+    _poolResoluteBlademaster,
     _poolResourcefulReturn,
     _poolRestlessPrairie,
     _poolReturnUponTheTide,

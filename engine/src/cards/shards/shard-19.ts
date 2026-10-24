@@ -159,6 +159,7 @@ import _poolDurableCoilbug from "../pool/durable-coilbug.js";
 import _poolDutifulGriffin from "../pool/dutiful-griffin.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolEarthenArms from "../pool/earthen-arms.js";
+import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
@@ -201,6 +202,7 @@ import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
+import _poolForerunnerOfSlaughter from "../pool/forerunner-of-slaughter.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
@@ -495,6 +497,7 @@ import _poolSkeletalWurm from "../pool/skeletal-wurm.js";
 import _poolSkirmishRhino from "../pool/skirmish-rhino.js";
 import _poolSkyBlessedSamurai from "../pool/sky-blessed-samurai.js";
 import _poolSkyknightVanguard from "../pool/skyknight-vanguard.js";
+import _poolSkyriderElf from "../pool/skyrider-elf.js";
 import _poolSkyshaper from "../pool/skyshaper.js";
 import _poolSlaughterhorn from "../pool/slaughterhorn.js";
 import _poolSliverConstruct from "../pool/sliver-construct.js";
@@ -795,6 +798,7 @@ const shard: CardShard = {
     _poolDutifulGriffin,
     _poolEarthcraft,
     _poolEarthenArms,
+    _poolEldraziSkyspawner,
     _poolElectrozoa,
     _poolElvenAmbush,
     _poolElvenRaftSteerer,
@@ -837,6 +841,7 @@ const shard: CardShard = {
     _poolFlipTheSwitch,
     _poolFlowstoneKavu,
     _poolFlyingDolphinFish,
+    _poolForerunnerOfSlaughter,
     _poolForerunnerOfTheEmpire,
     _poolFormidableSpeaker,
     _poolFortifiedVillage,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolSkirmishRhino,
     _poolSkyBlessedSamurai,
     _poolSkyknightVanguard,
+    _poolSkyriderElf,
     _poolSkyshaper,
     _poolSlaughterhorn,
     _poolSliverConstruct,

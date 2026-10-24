@@ -70,6 +70,7 @@ import _poolBranchOfVituGhazi from "../pool/branch-of-vitu-ghazi.js";
 import _poolBrazenBuccaneers from "../pool/brazen-buccaneers.js";
 import _poolBrazenCollector from "../pool/brazen-collector.js";
 import _poolBridledBighorn from "../pool/bridled-bighorn.js";
+import _poolBroodButcher from "../pool/brood-butcher.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBroodspinner from "../pool/broodspinner.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
@@ -271,6 +272,7 @@ import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
+import _poolKorEntanglers from "../pool/kor-entanglers.js";
 import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
 import _poolLanternsLift from "../pool/lanterns-lift.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
@@ -696,6 +698,7 @@ const shard: CardShard = {
     _poolBrazenBuccaneers,
     _poolBrazenCollector,
     _poolBridledBighorn,
+    _poolBroodButcher,
     _poolBroodcallerScourge,
     _poolBroodspinner,
     _poolBuriedRuin,
@@ -897,6 +900,7 @@ const shard: CardShard = {
     _poolKlawMasterOfSound,
     _poolKnightOfTheWhiteOrchid,
     _poolKonstrariAnnex,
+    _poolKorEntanglers,
     _poolKrotiqNestguard,
     _poolLanternsLift,
     _poolLaserScrewdriver,

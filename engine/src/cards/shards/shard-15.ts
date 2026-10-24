@@ -16,6 +16,7 @@ import _poolAkkiAvalanchers from "../pool/akki-avalanchers.js";
 import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
+import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
@@ -166,6 +167,7 @@ import _poolFarmMarket from "../pool/farm-market.js";
 import _poolFarsightAdept from "../pool/farsight-adept.js";
 import _poolFast from "../pool/fast.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
+import _poolFathomFeeder from "../pool/fathom-feeder.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
 import _poolFellBeastOfMordor from "../pool/fell-beast-of-mordor.js";
 import _poolFeralAppetite from "../pool/feral-appetite.js";
@@ -351,6 +353,7 @@ import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
 import _poolMultiformWonder from "../pool/multiform-wonder.js";
 import _poolMultiversalRecruitment from "../pool/multiversal-recruitment.js";
+import _poolMurasaRanger from "../pool/murasa-ranger.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
 import _poolNamelessConqueror from "../pool/nameless-conqueror.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
@@ -393,6 +396,7 @@ import _poolPounce from "../pool/pounce.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrimalBellow from "../pool/primal-bellow.js";
+import _poolPrismArray from "../pool/prism-array.js";
 import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
@@ -413,6 +417,7 @@ import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
+import _poolRetreatToValakut from "../pool/retreat-to-valakut.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
 import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRiverBoa from "../pool/river-boa.js";
@@ -488,6 +493,7 @@ import _poolSwabGoblin from "../pool/swab-goblin.js";
 import _poolSwamp from "../pool/swamp.js";
 import _poolSymbioticElf from "../pool/symbiotic-elf.js";
 import _poolSyncopate from "../pool/syncopate.js";
+import _poolTajuruBeastmaster from "../pool/tajuru-beastmaster.js";
 import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
@@ -606,6 +612,7 @@ const shard: CardShard = {
     _poolAkoumHellhound,
     _poolAlabasterKirin,
     _poolAlexWilderRunaway,
+    _poolAlignedHedronNetwork,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
     _poolAnglerDrake,
@@ -756,6 +763,7 @@ const shard: CardShard = {
     _poolFarsightAdept,
     _poolFast,
     _poolFatefulEnd,
+    _poolFathomFeeder,
     _poolFelixFiveBoots,
     _poolFellBeastOfMordor,
     _poolFeralAppetite,
@@ -941,6 +949,7 @@ const shard: CardShard = {
     _poolMuldrothaTheGravetide,
     _poolMultiformWonder,
     _poolMultiversalRecruitment,
+    _poolMurasaRanger,
     _poolMysteriosPhantasm,
     _poolNamelessConqueror,
     _poolNaturalEnd,
@@ -983,6 +992,7 @@ const shard: CardShard = {
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrimalBellow,
+    _poolPrismArray,
     _poolPrizedAmalgam,
     _poolPrizefight,
     _poolPsionicSnoop,
@@ -1003,6 +1013,7 @@ const shard: CardShard = {
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,
+    _poolRetreatToValakut,
     _poolReunionOfTheHouse,
     _poolRiftburstHellion,
     _poolRiverBoa,
@@ -1078,6 +1089,7 @@ const shard: CardShard = {
     _poolSwamp,
     _poolSymbioticElf,
     _poolSyncopate,
+    _poolTajuruBeastmaster,
     _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
     _poolTangleSpider,

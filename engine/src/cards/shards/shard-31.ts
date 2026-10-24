@@ -76,6 +76,7 @@ import _poolBrambleArmor from "../pool/bramble-armor.js";
 import _poolBrandywineFarmer from "../pool/brandywine-farmer.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBristlingHydra from "../pool/bristling-hydra.js";
+import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
@@ -252,6 +253,7 @@ import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
+import _poolGrovetenderDruids from "../pool/grovetender-druids.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-conduit.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
@@ -294,6 +296,7 @@ import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
+import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolInheritedFiend from "../pool/inherited-fiend.js";
 import _poolInsatiableHemophage from "../pool/insatiable-hemophage.js";
@@ -717,6 +720,7 @@ const shard: CardShard = {
     _poolBrandywineFarmer,
     _poolBrindleBoar,
     _poolBristlingHydra,
+    _poolBroodMonitor,
     _poolBrotherhoodAmbushers,
     _poolBurnFromWithin,
     _poolCallousDismissal,
@@ -893,6 +897,7 @@ const shard: CardShard = {
     _poolGreenDragon,
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
+    _poolGrovetenderDruids,
     _poolGrowExtraArms,
     _poolGuardianOfTheGreatConduit,
     _poolGuidingBolt,
@@ -935,6 +940,7 @@ const shard: CardShard = {
     _poolIllvoiOperative,
     _poolImmersturmRaider,
     _poolInfestationExpert,
+    _poolInfuseWithTheElements,
     _poolInheritedEnvelope,
     _poolInheritedFiend,
     _poolInsatiableHemophage,

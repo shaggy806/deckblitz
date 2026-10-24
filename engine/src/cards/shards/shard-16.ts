@@ -77,6 +77,7 @@ import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
 import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
+import _poolCarrierThrall from "../pool/carrier-thrall.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
 import _poolCaseOfTheShiftingVisage from "../pool/case-of-the-shifting-visage.js";
 import _poolCatOwl from "../pool/cat-owl.js";
@@ -177,6 +178,7 @@ import _poolFeralFerocity from "../pool/feral-ferocity.js";
 import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
 import _poolFireSages from "../pool/fire-sages.js";
+import _poolFiremantleMage from "../pool/firemantle-mage.js";
 import _poolFirespitterWhelp from "../pool/firespitter-whelp.js";
 import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
 import _poolFlamebornHellion from "../pool/flameborn-hellion.js";
@@ -269,6 +271,7 @@ import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
+import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
@@ -736,6 +739,7 @@ const shard: CardShard = {
     _poolCallTheBloodline,
     _poolCanoptekTombSentinel,
     _poolCarnivorousMossBeast,
+    _poolCarrierThrall,
     _poolCartoucheOfKnowledge,
     _poolCaseOfTheShiftingVisage,
     _poolCatOwl,
@@ -836,6 +840,7 @@ const shard: CardShard = {
     _poolFertilidsFavor,
     _poolFerventCathar,
     _poolFireSages,
+    _poolFiremantleMage,
     _poolFirespitterWhelp,
     _poolFistsOfTheAnvil,
     _poolFlamebornHellion,
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
     _poolJungleWeaver,
+    _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
     _poolKazanduValley,

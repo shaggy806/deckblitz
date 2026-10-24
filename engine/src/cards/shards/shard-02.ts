@@ -14,6 +14,7 @@ import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
 import _poolAirServant from "../pool/air-servant.js";
 import _poolAlexisCloak from "../pool/alexis-cloak.js";
 import _poolAmmitEternal from "../pool/ammit-eternal.js";
+import _poolAngelicCaptain from "../pool/angelic-captain.js";
 import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolAnsweredPrayers from "../pool/answered-prayers.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
@@ -178,6 +179,7 @@ import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvilEyeOfOrmsByGore from "../pool/evil-eye-of-orms-by-gore.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
 import _poolExcaliburIi from "../pool/excalibur-ii.js";
+import _poolExertInfluence from "../pool/exert-influence.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
 import _poolExitSpecialist from "../pool/exit-specialist.js";
 import _poolExplosiveGetaway from "../pool/explosive-getaway.js";
@@ -261,6 +263,7 @@ import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
 import _poolImplementOfExamination from "../pool/implement-of-examination.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
+import _poolIncubatorDrone from "../pool/incubator-drone.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
@@ -498,6 +501,7 @@ import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
 import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
 import _poolSvyelunitePriest from "../pool/svyelunite-priest.js";
 import _poolSwarmingOfMoria from "../pool/swarming-of-moria.js";
+import _poolSwellOfGrowth from "../pool/swell-of-growth.js";
 import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
@@ -609,6 +613,7 @@ const shard: CardShard = {
     _poolAirServant,
     _poolAlexisCloak,
     _poolAmmitEternal,
+    _poolAngelicCaptain,
     _poolAngelicWall,
     _poolAnsweredPrayers,
     _poolApexAltisaur,
@@ -773,6 +778,7 @@ const shard: CardShard = {
     _poolEvilEyeOfOrmsByGore,
     _poolEvisceratorsInsight,
     _poolExcaliburIi,
+    _poolExertInfluence,
     _poolExiledBoggart,
     _poolExitSpecialist,
     _poolExplosiveGetaway,
@@ -856,6 +862,7 @@ const shard: CardShard = {
     _poolIlluminatorVirtuoso,
     _poolImplementOfExamination,
     _poolImpulsivity,
+    _poolIncubatorDrone,
     _poolIndomitableArchangel,
     _poolInfectiousHost,
     _poolIngrisStingerquill,
@@ -1093,6 +1100,7 @@ const shard: CardShard = {
     _poolSvellaIceShaper,
     _poolSvyelunitePriest,
     _poolSwarmingOfMoria,
+    _poolSwellOfGrowth,
     _poolSwordOfTheSqueak,
     _poolSwordsToPlowshares,
     _poolSylvanOffering,

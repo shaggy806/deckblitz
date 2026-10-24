@@ -10,6 +10,7 @@ import _poolAccomplishedAutomaton from "../pool/accomplished-automaton.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAcrobaticLeap from "../pool/acrobatic-leap.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
+import _poolAdverseConditions from "../pool/adverse-conditions.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
@@ -250,6 +251,7 @@ import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
 import _poolHopefulVigil from "../pool/hopeful-vigil.js";
+import _poolHorriblyAwry from "../pool/horribly-awry.js";
 import _poolHoundOfTheFarbogs from "../pool/hound-of-the-farbogs.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
@@ -644,6 +646,7 @@ const shard: CardShard = {
     _poolAcolyteOfXathrid,
     _poolAcrobaticLeap,
     _poolAdamantWill,
+    _poolAdverseConditions,
     _poolAerieAuxiliary,
     _poolAgateInstigator,
     _poolAgrusKosSpiritOfJustice,
@@ -884,6 +887,7 @@ const shard: CardShard = {
     _poolHollowhengeScavenger,
     _poolHopeEnderCoatl,
     _poolHopefulVigil,
+    _poolHorriblyAwry,
     _poolHoundOfTheFarbogs,
     _poolHowlingBanshee,
     _poolHyenaPack,

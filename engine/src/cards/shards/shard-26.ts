@@ -165,6 +165,7 @@ import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFearlessLiberator from "../pool/fearless-liberator.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
+import _poolFertileThicket from "../pool/fertile-thicket.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
@@ -216,6 +217,7 @@ import _poolGreed from "../pool/greed.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
 import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
+import _poolGuulDrazOverseer from "../pool/guul-draz-overseer.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHagraConstrictor from "../pool/hagra-constrictor.js";
 import _poolHammerheim from "../pool/hammerheim.js";
@@ -768,6 +770,7 @@ const shard: CardShard = {
     _poolFearOfDeath,
     _poolFearlessLiberator,
     _poolFeloniousRage,
+    _poolFertileThicket,
     _poolFertilid,
     _poolFetidPools,
     _poolFieryEmancipation,
@@ -819,6 +822,7 @@ const shard: CardShard = {
     _poolGriffinProtector,
     _poolGroundedForLife,
     _poolGutterSkulk,
+    _poolGuulDrazOverseer,
     _poolHaakonStromgaldScourge,
     _poolHagraConstrictor,
     _poolHammerheim,

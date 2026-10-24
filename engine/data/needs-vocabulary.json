@@ -9922,6 +9922,31 @@
   },
   "mechanic:choose-two-colors-on-enter": {
    "example": "Seal of the Guildpact: 'as this artifact enters, choose two colors' — chooseOnEnter takes one choice, and cost reductions can't read a chosen colour."
+  },
+  "cost:put-opponent-exiled-card-into-graveyard": {
+   "example": "Battle for Zendikar's processors (Ulamog's Nullifier, Blight Herder, Void Attendant): \"put a card an opponent owns from exile into that player's graveyard\" — as an activation cost, or as a \"you may … if you do\" while a spell is cast or a trigger resolves; the player chooses which of the opponents' exiled cards."
+  },
+  "filter:has-awaken": {
+   "family": "filter:has-cycling",
+   "example": "Halimar Tidecaller: \"return target card with awaken from your graveyard\" — a CardFilter clause for a card whose `overload.keyword` is awaken."
+  },
+  "target:spell-or-creature": {
+   "example": "Brutal Expulsion: \"return target spell or creature to its owner's hand\" — any spell, or a creature permanent; `spell-or-permanent`'s filter applies to both sides."
+  },
+  "replacement:prevent-damage-to-target-from-filtered-sources": {
+   "family": "replacement:prevent-damage-from-colored-sources",
+   "example": "Lithomancer's Focus: \"prevent all damage that would be dealt this turn to target creature by colorless sources\" — a turn-long shield on a target, matched by source."
+  },
+  "effect:search-hand-graveyard-library-exile": {
+   "example": "Crumble to Dust: \"search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them\"."
+  },
+  "effect:target-player-exiles-from-graveyard": {
+   "family": "effect:target-player-exiles-from-hand",
+   "example": "Grave Birthing: \"target opponent exiles a card from their graveyard\" — that player chooses."
+  },
+  "effect:prevent-combat-damage-by-target-players-creatures": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "Encircling Fissure: \"prevent all combat damage that would be dealt this turn by creatures target opponent controls\" — `prevent-all-combat-damage`'s `by` filter can't name a targeted player."
   }
  }
 }

@@ -515,6 +515,7 @@ import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
 import _poolTaigamMasterOpportunist from "../pool/taigam-master-opportunist.js";
 import _poolTakeIntoCustody from "../pool/take-into-custody.js";
+import _poolTandemTactics from "../pool/tandem-tactics.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
@@ -1132,6 +1133,7 @@ const shard: CardShard = {
     _poolSystemsOverride,
     _poolTaigamMasterOpportunist,
     _poolTakeIntoCustody,
+    _poolTandemTactics,
     _poolTanglespanLookout,
     _poolTasseledDromedary,
     _poolTeamTransmitter,

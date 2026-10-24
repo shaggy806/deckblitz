@@ -116,6 +116,7 @@ import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
+import _poolCullingDrone from "../pool/culling-drone.js";
 import _poolCurseOfBounty from "../pool/curse-of-bounty.js";
 import _poolCurseOfTheSwine from "../pool/curse-of-the-swine.js";
 import _poolDaemogothTitan from "../pool/daemogoth-titan.js";
@@ -146,6 +147,7 @@ import _poolDrogskolInfantry from "../pool/drogskol-infantry.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolDuskborneSkymarcher from "../pool/duskborne-skymarcher.js";
+import _poolDustStalker from "../pool/dust-stalker.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
@@ -366,6 +368,7 @@ import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
+import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
@@ -429,6 +432,7 @@ import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicShudder from "../pool/seismic-shudder.js";
 import _poolSelesnyaLocket from "../pool/selesnya-locket.js";
 import _poolSeparatistVoidmage from "../pool/separatist-voidmage.js";
+import _poolSereneSteward from "../pool/serene-steward.js";
 import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
@@ -711,6 +715,7 @@ const shard: CardShard = {
     _poolCourtOfArdenvale,
     _poolCravenGiant,
     _poolCrystalShard,
+    _poolCullingDrone,
     _poolCurseOfBounty,
     _poolCurseOfTheSwine,
     _poolDaemogothTitan,
@@ -741,6 +746,7 @@ const shard: CardShard = {
     _poolDuress,
     _poolDuskLegionZealot,
     _poolDuskborneSkymarcher,
+    _poolDustStalker,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
     _poolEclipsedFlamekin,
@@ -961,6 +967,7 @@ const shard: CardShard = {
     _poolParallelLives,
     _poolParapetThrasher,
     _poolPathOfAngersFlame,
+    _poolPathwayArrows,
     _poolPatientNaturalist,
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
@@ -1024,6 +1031,7 @@ const shard: CardShard = {
     _poolSeismicShudder,
     _poolSelesnyaLocket,
     _poolSeparatistVoidmage,
+    _poolSereneSteward,
     _poolSerpentBladeAssailant,
     _poolSerumVisionary,
     _poolSetzerWanderingGambler,

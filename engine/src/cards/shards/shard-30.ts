@@ -401,6 +401,7 @@ import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOtherworldlyOutburst from "../pool/otherworldly-outburst.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
+import _poolOutnumber from "../pool/outnumber.js";
 import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
 import _poolPalazzoArchers from "../pool/palazzo-archers.js";
@@ -511,6 +512,7 @@ import _poolStartFinish from "../pool/start-finish.js";
 import _poolSteamcoreScholar from "../pool/steamcore-scholar.js";
 import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
+import _poolStonefury from "../pool/stonefury.js";
 import _poolStormWorld from "../pool/storm-world.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
@@ -519,6 +521,7 @@ import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
+import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
@@ -558,6 +561,7 @@ import _poolUnearth from "../pool/unearth.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
 import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
 import _poolUnholyHeat from "../pool/unholy-heat.js";
+import _poolUnifiedFront from "../pool/unified-front.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolUnnaturalEndurance from "../pool/unnatural-endurance.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
@@ -1017,6 +1021,7 @@ const shard: CardShard = {
     _poolOrysaTideChoreographer,
     _poolOtherworldlyOutburst,
     _poolOutlandBoar,
+    _poolOutnumber,
     _poolOutpaceOblivion,
     _poolOverprotect,
     _poolPalazzoArchers,
@@ -1127,6 +1132,7 @@ const shard: CardShard = {
     _poolSteamcoreScholar,
     _poolSteampathCharger,
     _poolStockpilingCelebrant,
+    _poolStonefury,
     _poolStormWorld,
     _poolStridingShotcaller,
     _poolSunhomeStalwart,
@@ -1135,6 +1141,7 @@ const shard: CardShard = {
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
+    _poolTajuruStalwart,
     _poolTangleMantis,
     _poolTeleport,
     _poolTempleOfMalice,
@@ -1174,6 +1181,7 @@ const shard: CardShard = {
     _poolUnexplainedDisappearance,
     _poolUnfulfilledDesires,
     _poolUnholyHeat,
+    _poolUnifiedFront,
     _poolUniversityCampus,
     _poolUnnaturalEndurance,
     _poolValleyFlamecaller,

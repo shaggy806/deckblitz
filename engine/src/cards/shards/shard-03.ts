@@ -141,6 +141,7 @@ import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
+import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
@@ -201,6 +202,7 @@ import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
 import _poolGrizzledAngler from "../pool/grizzled-angler.js";
+import _poolGruesomeSlaughter from "../pool/gruesome-slaughter.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
@@ -296,6 +298,7 @@ import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMightSliver from "../pool/might-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
 import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
+import _poolMistIntruder from "../pool/mist-intruder.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolEvidenceExaminer,
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
+    _poolEyelessWatcher,
     _poolFaerieDuelist,
     _poolFallOfTheThran,
     _poolFanBearer,
@@ -762,6 +766,7 @@ const shard: CardShard = {
     _poolGrimServant,
     _poolGrislySurvivor,
     _poolGrizzledAngler,
+    _poolGruesomeSlaughter,
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGutsplitterGang,
@@ -857,6 +862,7 @@ const shard: CardShard = {
     _poolMightSliver,
     _poolMinotaurAggressor,
     _poolMishraExcavationProdigy,
+    _poolMistIntruder,
     _poolMoltenExhale,
     _poolMoltenMonstrosity,
     _poolMorbidHunger,

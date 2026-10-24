@@ -66,6 +66,7 @@ import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCarnage from "../pool/carnage.js";
 import _poolCarnivalCarnage from "../pool/carnival-carnage.js";
+import _poolCatacombSifter from "../pool/catacomb-sifter.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
@@ -221,6 +222,7 @@ import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
 import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
 import _poolHerdGnarr from "../pool/herd-gnarr.js";
+import _poolHeroOfGomaFada from "../pool/hero-of-goma-fada.js";
 import _poolHeroOfPrecinctOne from "../pool/hero-of-precinct-one.js";
 import _poolHerosDemise from "../pool/heros-demise.js";
 import _poolHerosDownfall from "../pool/heros-downfall.js";
@@ -411,6 +413,7 @@ import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
+import _poolRoilmagesTrick from "../pool/roilmages-trick.js";
 import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRowanFearlessSparkmage from "../pool/rowan-fearless-sparkmage.js";
 import _poolRoyalTreatment from "../pool/royal-treatment.js";
@@ -557,6 +560,7 @@ import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
 import _poolVibrantIdea from "../pool/vibrant-idea.js";
 import _poolViciousClown from "../pool/vicious-clown.js";
 import _poolViciousRivalry from "../pool/vicious-rivalry.js";
+import _poolVileAggregate from "../pool/vile-aggregate.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
 import _poolVineshaperProdigy from "../pool/vineshaper-prodigy.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
@@ -670,6 +674,7 @@ const shard: CardShard = {
     _poolCarnageTyrant,
     _poolCarnage,
     _poolCarnivalCarnage,
+    _poolCatacombSifter,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
     _poolChainersEdict,
@@ -825,6 +830,7 @@ const shard: CardShard = {
     _poolHeapDoll,
     _poolHeartwoodTreefolk,
     _poolHerdGnarr,
+    _poolHeroOfGomaFada,
     _poolHeroOfPrecinctOne,
     _poolHerosDemise,
     _poolHerosDownfall,
@@ -1015,6 +1021,7 @@ const shard: CardShard = {
     _poolRidgeRannet,
     _poolRitualOfSteel,
     _poolRohgahhKherKeepOverlord,
+    _poolRoilmagesTrick,
     _poolRootSliver,
     _poolRowanFearlessSparkmage,
     _poolRoyalTreatment,
@@ -1161,6 +1168,7 @@ const shard: CardShard = {
     _poolVibrantIdea,
     _poolViciousClown,
     _poolViciousRivalry,
+    _poolVileAggregate,
     _poolVillageCannibals,
     _poolVineshaperProdigy,
     _poolVitalizingWind,

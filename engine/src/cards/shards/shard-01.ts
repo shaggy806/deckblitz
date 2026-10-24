@@ -266,6 +266,7 @@ import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
+import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
 import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
@@ -455,6 +456,7 @@ import _poolSkirkFireMarshal from "../pool/skirk-fire-marshal.js";
 import _poolSkyclaveShadowcat from "../pool/skyclave-shadowcat.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
+import _poolSlabHammer from "../pool/slab-hammer.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
 import _poolSlogurkTheOverslime from "../pool/slogurk-the-overslime.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
@@ -870,6 +872,7 @@ const shard: CardShard = {
     _poolKeldonWarlord,
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,
+    _poolKioraMasterOfTheDepths,
     _poolKitsaOtterballElite,
     _poolKnightOfAutumn,
     _poolKodamaOfTheWestTree,
@@ -1059,6 +1062,7 @@ const shard: CardShard = {
     _poolSkyclaveShadowcat,
     _poolSkycrash,
     _poolSkyhunterStrikeForce,
+    _poolSlabHammer,
     _poolSliceFromTheShadows,
     _poolSlogurkTheOverslime,
     _poolSmolderingSpires,
