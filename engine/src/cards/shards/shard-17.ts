@@ -56,6 +56,7 @@ import _poolBigPlay from "../pool/big-play.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
 import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodAspirant from "../pool/blood-aspirant.js";
+import _poolBloodCursedKnight from "../pool/blood-cursed-knight.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
 import _poolBloodwaterEntity from "../pool/bloodwater-entity.js";
@@ -682,6 +683,7 @@ const shard: CardShard = {
     _poolBirdsOfParadise,
     _poolBlastZone,
     _poolBloodAspirant,
+    _poolBloodCursedKnight,
     _poolBloodServitor,
     _poolBloodforgedBattleAxe,
     _poolBloodwaterEntity,

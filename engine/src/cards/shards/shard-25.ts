@@ -136,6 +136,7 @@ import _poolDeathlessAngel from "../pool/deathless-angel.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
+import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
@@ -761,6 +762,7 @@ const shard: CardShard = {
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
+    _poolDespoilerOfSouls,
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,

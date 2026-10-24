@@ -13,6 +13,7 @@ import _poolAdunOakenshield from "../pool/adun-oakenshield.js";
 import _poolAegisOfTheMeek from "../pool/aegis-of-the-meek.js";
 import _poolAerathiBerserker from "../pool/aerathi-berserker.js";
 import _poolAerialBoost from "../pool/aerial-boost.js";
+import _poolAerialVolley from "../pool/aerial-volley.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAetherChaser from "../pool/aether-chaser.js";
 import _poolAetherbornMarauder from "../pool/aetherborn-marauder.js";
@@ -50,6 +51,7 @@ import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAureliaExemplarOfJustice from "../pool/aurelia-exemplar-of-justice.js";
 import _poolAuroraChampion from "../pool/aurora-champion.js";
+import _poolAvariciousDragon from "../pool/avaricious-dragon.js";
 import _poolAvenInitiate from "../pool/aven-initiate.js";
 import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
@@ -124,6 +126,7 @@ import _poolCrystalRod from "../pool/crystal-rod.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
+import _poolDarkDabbling from "../pool/dark-dabbling.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
@@ -666,6 +669,7 @@ const shard: CardShard = {
     _poolAegisOfTheMeek,
     _poolAerathiBerserker,
     _poolAerialBoost,
+    _poolAerialVolley,
     _poolAetherAdept,
     _poolAetherChaser,
     _poolAetherbornMarauder,
@@ -703,6 +707,7 @@ const shard: CardShard = {
     _poolAuraBlast,
     _poolAureliaExemplarOfJustice,
     _poolAuroraChampion,
+    _poolAvariciousDragon,
     _poolAvenInitiate,
     _poolAwakenTheErstwhile,
     _poolAzoriusLocket,
@@ -777,6 +782,7 @@ const shard: CardShard = {
     _poolCursebreak,
     _poolDainsCompany,
     _poolDanithaSpearOfAgony,
+    _poolDarkDabbling,
     _poolDarksteelAxe,
     _poolDavenantArcher,
     _poolDawnhartWardens,

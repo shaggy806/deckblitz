@@ -129,6 +129,7 @@ import _poolDebrisBeetle from "../pool/debris-beetle.js";
 import _poolDecoctionModule from "../pool/decoction-module.js";
 import _poolDecoratedChampion from "../pool/decorated-champion.js";
 import _poolDedicatedMartyr from "../pool/dedicated-martyr.js";
+import _poolDeepSeaTerror from "../pool/deep-sea-terror.js";
 import _poolDeepwoodWolverine from "../pool/deepwood-wolverine.js";
 import _poolDemandAnswers from "../pool/demand-answers.js";
 import _poolDemolitionStomper from "../pool/demolition-stomper.js";
@@ -268,6 +269,7 @@ import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
 import _poolInTheTrenches from "../pool/in-the-trenches.js";
 import _poolInevitableEnd from "../pool/inevitable-end.js";
+import _poolInfernalScarring from "../pool/infernal-scarring.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
@@ -328,6 +330,7 @@ import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMiteOverseer from "../pool/mite-overseer.js";
+import _poolMizziumMeddler from "../pool/mizzium-meddler.js";
 import _poolMizziumSkin from "../pool/mizzium-skin.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
@@ -755,6 +758,7 @@ const shard: CardShard = {
     _poolDecoctionModule,
     _poolDecoratedChampion,
     _poolDedicatedMartyr,
+    _poolDeepSeaTerror,
     _poolDeepwoodWolverine,
     _poolDemandAnswers,
     _poolDemolitionStomper,
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolImperialCeratops,
     _poolInTheTrenches,
     _poolInevitableEnd,
+    _poolInfernalScarring,
     _poolInfirmaryHealer,
     _poolInfuseWithVitality,
     _poolIngeniousArtillerist,
@@ -954,6 +959,7 @@ const shard: CardShard = {
     _poolMisthiossFury,
     _poolMistvaultBridge,
     _poolMiteOverseer,
+    _poolMizziumMeddler,
     _poolMizziumSkin,
     _poolMomentsPeace,
     _poolMoongloveExtractor,

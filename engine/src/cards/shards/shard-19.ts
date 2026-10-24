@@ -111,6 +111,7 @@ import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolColossusOfSardia from "../pool/colossus-of-sardia.js";
 import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
+import _poolConsecratedByBlood from "../pool/consecrated-by-blood.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
@@ -309,6 +310,7 @@ import _poolKjeldoranEliteGuard from "../pool/kjeldoran-elite-guard.js";
 import _poolKnightOfDawnsLight from "../pool/knight-of-dawns-light.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
+import _poolKothophedSoulHoarder from "../pool/kothophed-soul-hoarder.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
 import _poolLaboratoryManiac from "../pool/laboratory-maniac.js";
@@ -750,6 +752,7 @@ const shard: CardShard = {
     _poolColorstormStallion,
     _poolColossusOfSardia,
     _poolConfoundingRiddle,
+    _poolConsecratedByBlood,
     _poolConsumingSinkhole,
     _poolContactOtherPlane,
     _poolContractKilling,
@@ -948,6 +951,7 @@ const shard: CardShard = {
     _poolKnightOfDawnsLight,
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
+    _poolKothophedSoulHoarder,
     _poolKrovikanFetish,
     _poolKykarWindsFury,
     _poolLaboratoryManiac,

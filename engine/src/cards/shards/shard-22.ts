@@ -321,6 +321,7 @@ import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
+import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMonsoon from "../pool/monsoon.js";
 import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
@@ -331,6 +332,7 @@ import _poolNadiersNightblade from "../pool/nadiers-nightblade.js";
 import _poolNagaOracle from "../pool/naga-oracle.js";
 import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
+import _poolNecromanticSummons from "../pool/necromantic-summons.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
 import _poolNestedShambler from "../pool/nested-shambler.js";
 import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
@@ -950,6 +952,7 @@ const shard: CardShard = {
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
     _poolMizziumMortars,
+    _poolMoltenVortex,
     _poolMonsoon,
     _poolMourningPatrol,
     _poolMouseTrapper,
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolNagaOracle,
     _poolNausea,
     _poolNavigationOrb,
+    _poolNecromanticSummons,
     _poolNeedlethornDrake,
     _poolNestedShambler,
     _poolNettlingNuisance,

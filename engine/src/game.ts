@@ -21222,7 +21222,7 @@ export class Game {
           this.regenerateByEffect({ kind: "object", object: id });
         }
       },
-      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter),
+      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x),
       exileAll: (filter, airbend, except, untilSourceLeaves, linked, scopeTo) => {
         if (untilSourceLeaves !== true) {
           // "Exile … with this" (rule 607.2a): linked to the stint the
@@ -26839,9 +26839,9 @@ export class Game {
 
   /** Which battlefield permanents a mass P/T / keyword effect (Overrun) hits —
    * `matchesFilter` from the effect's controller's perspective. */
-  private battlefieldMatching(you: PlayerId, filter: CardFilter): ObjectId[] {
+  private battlefieldMatching(you: PlayerId, filter: CardFilter, x?: number): ObjectId[] {
     return this.state.zones.shared.battlefield.filter((id) =>
-      matchesFilter(this.state, this.registry, id, filter, { you }),
+      matchesFilter(this.state, this.registry, id, filter, { you, x }),
     );
   }
 
@@ -28673,12 +28673,13 @@ export class Game {
     });
   }
 
-  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter): void {
+  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0): void {
     // One event, so each bounced permanent's leaves-the-battlefield ability
     // sees the rest go too (rule 603.10a). Snapshot: `returnToHandByEffect`
-    // mutates the battlefield array as it goes.
+    // mutates the battlefield array as it goes. `x`: a filter's "mana value X
+    // or less" (Displacement Wave), as `destroyAllByEffect` reads it.
     this.withLeaveBatch(() => {
-      const victims = this.battlefieldMatching(you, filter);
+      const victims = this.battlefieldMatching(you, filter, x);
       this.snapshotLeaving(victims);
       for (const id of victims) {
         this.returnToHandByEffect({ kind: "object", object: id }, false);

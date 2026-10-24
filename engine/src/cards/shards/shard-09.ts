@@ -177,6 +177,7 @@ import _poolFeedTheSerpent from "../pool/feed-the-serpent.js";
 import _poolFeistySpikeling from "../pool/feisty-spikeling.js";
 import _poolFeralShadow from "../pool/feral-shadow.js";
 import _poolFertileFootsteps from "../pool/fertile-footsteps.js";
+import _poolFieryImpulse from "../pool/fiery-impulse.js";
 import _poolFight from "../pool/fight.js";
 import _poolFireLordAzula from "../pool/fire-lord-azula.js";
 import _poolFireProphecy from "../pool/fire-prophecy.js";
@@ -228,7 +229,9 @@ import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
+import _poolGraspOfTheHieromancer from "../pool/grasp-of-the-hieromancer.js";
 import _poolGraspingThrull from "../pool/grasping-thrull.js";
+import _poolGravebladeMarauder from "../pool/graveblade-marauder.js";
 import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
@@ -814,6 +817,7 @@ const shard: CardShard = {
     _poolFeistySpikeling,
     _poolFeralShadow,
     _poolFertileFootsteps,
+    _poolFieryImpulse,
     _poolFight,
     _poolFireLordAzula,
     _poolFireProphecy,
@@ -865,7 +869,9 @@ const shard: CardShard = {
     _poolGraftedWargear,
     _poolGrahamObrien,
     _poolGraspOfPhantoms,
+    _poolGraspOfTheHieromancer,
     _poolGraspingThrull,
+    _poolGravebladeMarauder,
     _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,

@@ -222,6 +222,7 @@ import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
 import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
+import _poolHealingHands from "../pool/healing-hands.js";
 import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
 import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
@@ -379,6 +380,7 @@ import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
 import _poolPongify from "../pool/pongify.js";
 import _poolPortentTracker from "../pool/portent-tracker.js";
+import _poolPrickleboar from "../pool/prickleboar.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
 import _poolPrimeSpeakerZegana from "../pool/prime-speaker-zegana.js";
 import _poolPrimevalHerald from "../pool/primeval-herald.js";
@@ -840,6 +842,7 @@ const shard: CardShard = {
     _poolHavocJester,
     _poolHawkeyeClintBarton,
     _poolHazardrootHerbalist,
+    _poolHealingHands,
     _poolHeartsOnFire,
     _poolHecteyes,
     _poolHeirsOfStromkirk,
@@ -997,6 +1000,7 @@ const shard: CardShard = {
     _poolPollutedMire,
     _poolPongify,
     _poolPortentTracker,
+    _poolPrickleboar,
     _poolPrimalBeyond,
     _poolPrimeSpeakerZegana,
     _poolPrimevalHerald,

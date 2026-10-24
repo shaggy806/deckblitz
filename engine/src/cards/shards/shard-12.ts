@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbaddonTheDespoiler from "../pool/abaddon-the-despoiler.js";
 import _poolAbandonedAirTemple from "../pool/abandoned-air-temple.js";
+import _poolAbbotOfKeralKeep from "../pool/abbot-of-keral-keep.js";
 import _poolAberrantResearcher from "../pool/aberrant-researcher.js";
 import _poolAcademyRaider from "../pool/academy-raider.js";
 import _poolAcquiredMutation from "../pool/acquired-mutation.js";
@@ -96,6 +97,7 @@ import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
 import _poolClanGuildmage from "../pool/clan-guildmage.js";
 import _poolCleanupCrew from "../pool/cleanup-crew.js";
+import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
@@ -123,6 +125,7 @@ import _poolDeathlessAncient from "../pool/deathless-ancient.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
 import _poolDemonWall from "../pool/demon-wall.js";
+import _poolDemonicPact from "../pool/demonic-pact.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDemonsDue from "../pool/demons-due.js";
 import _poolDerelictAttic from "../pool/derelict-attic.js";
@@ -622,6 +625,7 @@ const shard: CardShard = {
   pool: [
     _poolAbaddonTheDespoiler,
     _poolAbandonedAirTemple,
+    _poolAbbotOfKeralKeep,
     _poolAberrantResearcher,
     _poolAcademyRaider,
     _poolAcquiredMutation,
@@ -713,6 +717,7 @@ const shard: CardShard = {
     _poolCitadelOfPain,
     _poolClanGuildmage,
     _poolCleanupCrew,
+    _poolClericOfTheForwardOrder,
     _poolClickslither,
     _poolCloudPirates,
     _poolCloudcrownOak,
@@ -740,6 +745,7 @@ const shard: CardShard = {
     _poolDedicatedCommons,
     _poolDefiantGreatmaw,
     _poolDemonWall,
+    _poolDemonicPact,
     _poolDemonicTutor,
     _poolDemonsDue,
     _poolDerelictAttic,

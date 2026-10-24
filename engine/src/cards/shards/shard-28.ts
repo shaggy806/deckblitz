@@ -86,6 +86,7 @@ import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
+import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
@@ -249,6 +250,7 @@ import _poolImplementOfMalice from "../pool/implement-of-malice.js";
 import _poolImpossibleMan from "../pool/impossible-man.js";
 import _poolIncineratingBlast from "../pool/incinerating-blast.js";
 import _poolIndustrialAdvancement from "../pool/industrial-advancement.js";
+import _poolInfectiousBloodlust from "../pool/infectious-bloodlust.js";
 import _poolInfiltrationLens from "../pool/infiltration-lens.js";
 import _poolIngaAndEsika from "../pool/inga-and-esika.js";
 import _poolIngeniousInfiltrator from "../pool/ingenious-infiltrator.js";
@@ -388,6 +390,7 @@ import _poolPowerDepot from "../pool/power-depot.js";
 import _poolPrepare from "../pool/prepare.js";
 import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
+import _poolPrismRing from "../pool/prism-ring.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
 import _poolProfaneInsight from "../pool/profane-insight.js";
 import _poolProjectDeathlokSoldier from "../pool/project-deathlok-soldier.js";
@@ -607,6 +610,7 @@ import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
+import _poolWildInstincts from "../pool/wild-instincts.js";
 import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
@@ -619,6 +623,7 @@ import _poolZap from "../pool/zap.js";
 import _poolZardaThePowerPrincess from "../pool/zarda-the-power-princess.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
+import _poolZendikarIncarnate from "../pool/zendikar-incarnate.js";
 import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
 import _tokensClericToken from "../tokens/cleric-token.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
@@ -717,6 +722,7 @@ const shard: CardShard = {
     _poolBurningSunsFury,
     _poolCacklingCulprit,
     _poolCalamityBearer,
+    _poolCalculatedDismissal,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
@@ -880,6 +886,7 @@ const shard: CardShard = {
     _poolImpossibleMan,
     _poolIncineratingBlast,
     _poolIndustrialAdvancement,
+    _poolInfectiousBloodlust,
     _poolInfiltrationLens,
     _poolIngaAndEsika,
     _poolIngeniousInfiltrator,
@@ -1019,6 +1026,7 @@ const shard: CardShard = {
     _poolPrepare,
     _poolPresenceOfTheMaster,
     _poolPrimarisChaplain,
+    _poolPrismRing,
     _poolProcrastinate,
     _poolProfaneInsight,
     _poolProjectDeathlokSoldier,
@@ -1238,6 +1246,7 @@ const shard: CardShard = {
     _poolWhisperAgent,
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
+    _poolWildInstincts,
     _poolWillScholarOfFrost,
     _poolWillowSatyr,
     _poolWindswiftSlice,
@@ -1250,6 +1259,7 @@ const shard: CardShard = {
     _poolZardaThePowerPrincess,
     _poolZeganaUtopianSpeaker,
     _poolZendikarFarguide,
+    _poolZendikarIncarnate,
   ],
   tokens: [
     _tokens55DjinnArtifactToken,

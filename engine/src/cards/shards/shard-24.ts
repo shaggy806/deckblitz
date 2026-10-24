@@ -335,6 +335,7 @@ import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
+import _poolNissasRevelation from "../pool/nissas-revelation.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
 import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
@@ -510,6 +511,7 @@ import _poolThornwealdArcher from "../pool/thornweald-archer.js";
 import _poolThoughtMonitor from "../pool/thought-monitor.js";
 import _poolThrabenInspector from "../pool/thraben-inspector.js";
 import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
+import _poolThrowingKnife from "../pool/throwing-knife.js";
 import _poolThrunTheLastTroll from "../pool/thrun-the-last-troll.js";
 import _poolThud from "../pool/thud.js";
 import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
@@ -942,6 +944,7 @@ const shard: CardShard = {
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
     _poolNinjaOfTheHand,
+    _poolNissasRevelation,
     _poolNovaFlame,
     _poolNurturingPresence,
     _poolOakhameAdversary,
@@ -1117,6 +1120,7 @@ const shard: CardShard = {
     _poolThoughtMonitor,
     _poolThrabenInspector,
     _poolThroneOfTheHighCity,
+    _poolThrowingKnife,
     _poolThrunTheLastTroll,
     _poolThud,
     _poolTianaShipsCaretaker,

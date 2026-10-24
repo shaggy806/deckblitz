@@ -255,6 +255,7 @@ import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
 import _poolHex from "../pool/hex.js";
 import _poolHinterlandLogger from "../pool/hinterland-logger.js";
+import _poolHixusPrisonWarden from "../pool/hixus-prison-warden.js";
 import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
 import _poolHoodedHydra from "../pool/hooded-hydra.js";
@@ -379,6 +380,7 @@ import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
+import _poolPatronOfTheValiant from "../pool/patron-of-the-valiant.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
@@ -604,6 +606,7 @@ import _poolVoraciousFellBeast from "../pool/voracious-fell-beast.js";
 import _poolVoyagerQuickwelder from "../pool/voyager-quickwelder.js";
 import _poolVraanExecutionerThane from "../pool/vraan-executioner-thane.js";
 import _poolVraskaSoulOfStone from "../pool/vraska-soul-of-stone.js";
+import _poolVrynWingmare from "../pool/vryn-wingmare.js";
 import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js";
@@ -906,6 +909,7 @@ const shard: CardShard = {
     _poolHeroicIntervention,
     _poolHex,
     _poolHinterlandLogger,
+    _poolHixusPrisonWarden,
     _poolHobbitsSting,
     _poolHonoredKnightCaptain,
     _poolHoodedHydra,
@@ -1030,6 +1034,7 @@ const shard: CardShard = {
     _poolOzaisCruelty,
     _poolPaintersStudioDefacedGallery,
     _poolPatriotYoungAvenger,
+    _poolPatronOfTheValiant,
     _poolPerchProtection,
     _poolPerimeterPatrol,
     _poolPersonify,
@@ -1255,6 +1260,7 @@ const shard: CardShard = {
     _poolVoyagerQuickwelder,
     _poolVraanExecutionerThane,
     _poolVraskaSoulOfStone,
+    _poolVrynWingmare,
     _poolWallOfBrambles,
     _poolWallOfFire,
     _poolWallOfForgottenPharaohs,

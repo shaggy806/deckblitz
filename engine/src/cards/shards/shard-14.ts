@@ -579,6 +579,7 @@ import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
 import _poolVultureSchemingScavenger from "../pool/vulture-scheming-scavenger.js";
 import _poolWakestoneGargoyle from "../pool/wakestone-gargoyle.js";
 import _poolWalkingBallista from "../pool/walking-ballista.js";
+import _poolWarHorn from "../pool/war-horn.js";
 import _poolWargRider from "../pool/warg-rider.js";
 import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
@@ -1196,6 +1197,7 @@ const shard: CardShard = {
     _poolVultureSchemingScavenger,
     _poolWakestoneGargoyle,
     _poolWalkingBallista,
+    _poolWarHorn,
     _poolWargRider,
     _poolWarleadersHelix,
     _poolWeakness,

@@ -9947,6 +9947,30 @@
   "effect:prevent-combat-damage-by-target-players-creatures": {
    "family": "effect:prevent-combat-damage-by-target",
    "example": "Encircling Fissure: \"prevent all combat damage that would be dealt this turn by creatures target opponent controls\" — `prevent-all-combat-damage`'s `by` filter can't name a targeted player."
+  },
+  "effect:cast-now-from-opponent-library-top": {
+   "family": "zone:cast-from-library-top",
+   "example": "Talent of the Telepath: reveal the top seven of target opponent's library, cast an instant or sorcery from among them free (up to two with spell mastery), the rest into that player's graveyard — cast-now's libraryTop only reads the caster's own library."
+  },
+  "effect:shuffle-hand-and-permanents-draw-that-many": {
+   "family": "effect:shuffle-into-library",
+   "example": "The Great Aurora: each player shuffles their hand and the permanents they own into their library, then draws that many cards; then each player may put any number of land cards from their hand onto the battlefield."
+  },
+  "effect:restrict-each-matching-at-resolution": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Joraga Invocation: 'each creature you control … must be blocked this turn if able' applies to the creatures you control as it resolves (rule 611.2c); a `restrict` with a filter is a rule for the turn that also catches creatures entering later."
+  },
+  "static:self-uncounterable-if": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Exquisite Firecraft: 'Spell mastery — … this spell can't be countered' — `cantBeCountered` is a plain boolean on the card, with no condition."
+  },
+  "effect:copy-countered-spell": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Psychic Rebuttal: 'Counter target instant or sorcery spell that targets you. Spell mastery — … you may copy the spell countered this way' — nothing copies the spell a counter removed, and only if the counter worked (the ruling)."
+  },
+  "static:enchanted-abilities-cant-be-activated": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Suppression Bonds: 'Enchanted permanent can't attack or block, and its activated abilities can't be activated' — a static's `prohibits.abilitiesOf` filter can't name the permanent this Aura is attached to."
   }
  }
 }

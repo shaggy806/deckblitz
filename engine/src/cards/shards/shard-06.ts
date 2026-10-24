@@ -33,6 +33,7 @@ import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
+import _poolArtificersEpiphany from "../pool/artificers-epiphany.js";
 import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
@@ -303,6 +304,7 @@ import _poolLovestruckBeast from "../pool/lovestruck-beast.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLunarchInquisitors from "../pool/lunarch-inquisitors.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
+import _poolMageRingResponder from "../pool/mage-ring-responder.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
 import _poolMaraudingLooter from "../pool/marauding-looter.js";
@@ -646,6 +648,7 @@ const shard: CardShard = {
     _poolAriaOfFlame,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
+    _poolArtificersEpiphany,
     _poolAshnodsTransmogrant,
     _poolAssureAssemble,
     _poolAtog,
@@ -916,6 +919,7 @@ const shard: CardShard = {
     _poolLuminousAngel,
     _poolLunarchInquisitors,
     _poolLydiaFrye,
+    _poolMageRingResponder,
     _poolManaCrypt,
     _poolManifoldMouse,
     _poolMaraudingLooter,

@@ -476,6 +476,7 @@ import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
+import _poolShadowsOfThePast from "../pool/shadows-of-the-past.js";
 import _poolShalaiAndHallar from "../pool/shalai-and-hallar.js";
 import _poolShamanOfThePack from "../pool/shaman-of-the-pack.js";
 import _poolShamanicRevelation from "../pool/shamanic-revelation.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolSelectForInspection,
     _poolSerendibEfreet,
     _poolSevinnesReclamation,
+    _poolShadowsOfThePast,
     _poolShalaiAndHallar,
     _poolShamanOfThePack,
     _poolShamanicRevelation,

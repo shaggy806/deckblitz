@@ -169,6 +169,7 @@ import _poolEvolvedSpinoderm from "../pool/evolved-spinoderm.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
 import _poolExtremisElite from "../pool/extremis-elite.js";
+import _poolFaerieMiscreant from "../pool/faerie-miscreant.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
@@ -434,6 +435,7 @@ import _poolScurridColony from "../pool/scurrid-colony.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
 import _poolSeekTheWilds from "../pool/seek-the-wilds.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
+import _poolSentinelOfTheEternalWatch from "../pool/sentinel-of-the-eternal-watch.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
@@ -787,6 +789,7 @@ const shard: CardShard = {
     _poolExpansionExplosion,
     _poolExpedite,
     _poolExtremisElite,
+    _poolFaerieMiscreant,
     _poolFaerieSlumberParty,
     _poolFalkenrathPerforator,
     _poolFalseDefeat,
@@ -1052,6 +1055,7 @@ const shard: CardShard = {
     _poolScuzzbackScrapper,
     _poolSeekTheWilds,
     _poolSeekerOfTheWay,
+    _poolSentinelOfTheEternalWatch,
     _poolSentinelsEyes,
     _poolSergeantJohnBenton,
     _poolSerraAscendant,

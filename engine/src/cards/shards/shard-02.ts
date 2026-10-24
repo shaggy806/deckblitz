@@ -66,6 +66,7 @@ import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
 import _poolBoostedSloop from "../pool/boosted-sloop.js";
 import _poolBoromirGondorsHope from "../pool/boromir-gondors-hope.js";
 import _poolBoughsideWanderers from "../pool/boughside-wanderers.js";
+import _poolBoundingKrasis from "../pool/bounding-krasis.js";
 import _poolBoundlessRealms from "../pool/boundless-realms.js";
 import _poolBountyOfSkemfar from "../pool/bounty-of-skemfar.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
@@ -300,6 +301,7 @@ import _poolKomasFaithful from "../pool/komas-faithful.js";
 import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKraulSwarm from "../pool/kraul-swarm.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
+import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
@@ -666,6 +668,7 @@ const shard: CardShard = {
     _poolBoostedSloop,
     _poolBoromirGondorsHope,
     _poolBoughsideWanderers,
+    _poolBoundingKrasis,
     _poolBoundlessRealms,
     _poolBountyOfSkemfar,
     _poolBrambleCreeper,
@@ -900,6 +903,7 @@ const shard: CardShard = {
     _poolKozileksTranslator,
     _poolKraulSwarm,
     _poolKrenkosCommand,
+    _poolKytheonsTactics,
     _poolLambholtRavager,
     _poolLapisLazuliTalisman,
     _poolLargeBear,

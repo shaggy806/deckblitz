@@ -191,6 +191,7 @@ import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
 import _poolGaladhrimBow from "../pool/galadhrim-bow.js";
 import _poolGaledrifter from "../pool/galedrifter.js";
+import _poolGatherThePack from "../pool/gather-the-pack.js";
 import _poolGearseekerSerpent from "../pool/gearseeker-serpent.js";
 import _poolGeierReachBandit from "../pool/geier-reach-bandit.js";
 import _poolGeistflame from "../pool/geistflame.js";
@@ -338,6 +339,7 @@ import _poolNephaliaMoondrakes from "../pool/nephalia-moondrakes.js";
 import _poolNetherTraitor from "../pool/nether-traitor.js";
 import _poolNeurokHoversail from "../pool/neurok-hoversail.js";
 import _poolNeutralize from "../pool/neutralize.js";
+import _poolNightsnare from "../pool/nightsnare.js";
 import _poolNimraiserPaladin from "../pool/nimraiser-paladin.js";
 import _poolNirkanaRevenant from "../pool/nirkana-revenant.js";
 import _poolNoAdmittance from "../pool/no-admittance.js";
@@ -381,6 +383,7 @@ import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
+import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
@@ -797,6 +800,7 @@ const shard: CardShard = {
     _poolFynnTheFangbearer,
     _poolGaladhrimBow,
     _poolGaledrifter,
+    _poolGatherThePack,
     _poolGearseekerSerpent,
     _poolGeierReachBandit,
     _poolGeistflame,
@@ -944,6 +948,7 @@ const shard: CardShard = {
     _poolNetherTraitor,
     _poolNeurokHoversail,
     _poolNeutralize,
+    _poolNightsnare,
     _poolNimraiserPaladin,
     _poolNirkanaRevenant,
     _poolNoAdmittance,
@@ -987,6 +992,7 @@ const shard: CardShard = {
     _poolRadiantDestiny,
     _poolRaftSecurityOfficer,
     _poolRasputinTheOneiromancer,
+    _poolRavagingBlaze,
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
     _poolRavenousLindwurm,

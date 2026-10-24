@@ -583,6 +583,7 @@ import _poolVigilantDrake from "../pool/vigilant-drake.js";
 import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
 import _poolVillageMessenger from "../pool/village-messenger.js";
+import _poolVineSnare from "../pool/vine-snare.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
@@ -1216,6 +1217,7 @@ const shard: CardShard = {
     _poolVigorbloomCharm,
     _poolVihaanGoldwaker,
     _poolVillageMessenger,
+    _poolVineSnare,
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
     _poolVizierOfTheTrue,

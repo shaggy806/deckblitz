@@ -106,6 +106,7 @@ import _poolDestinedLead from "../pool/destined-lead.js";
 import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
+import _poolDisplacementWave from "../pool/displacement-wave.js";
 import _poolDistrictGuide from "../pool/district-guide.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
@@ -135,6 +136,7 @@ import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
 import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
+import _poolErebossTitan from "../pool/ereboss-titan.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtchingOfKumano from "../pool/etching-of-kumano.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
@@ -427,6 +429,7 @@ import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
+import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
 import _poolSpareSupplies from "../pool/spare-supplies.js";
 import _poolSparkDouble from "../pool/spark-double.js";
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolDigDeep,
     _poolDinosaurStampede,
     _poolDiscipleOfTheOldWays,
+    _poolDisplacementWave,
     _poolDistrictGuide,
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolEndriderCatalyzer,
     _poolEphemerate,
     _poolEquilibriumAdept,
+    _poolErebossTitan,
     _poolErraticVisionary,
     _poolEtchingOfKumano,
     _poolEtheriumHornSorcerer,
@@ -992,6 +997,7 @@ const shard: CardShard = {
     _poolSmeagolHelpfulGuide,
     _poolSmokebraider,
     _poolSolemnOffering,
+    _poolSomberwaldAlpha,
     _poolSoulOfTheRapids,
     _poolSpareSupplies,
     _poolSparkDouble,

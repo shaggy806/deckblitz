@@ -456,6 +456,7 @@ import _poolSeerOfTheLastTomorrow from "../pool/seer-of-the-last-tomorrow.js";
 import _poolSegovianLeviathan from "../pool/segovian-leviathan.js";
 import _poolSeizeTheSecrets from "../pool/seize-the-secrets.js";
 import _poolSelesnyaCluestone from "../pool/selesnya-cluestone.js";
+import _poolSendToSleep from "../pool/send-to-sleep.js";
 import _poolSepulcherGhoul from "../pool/sepulcher-ghoul.js";
 import _poolSerrasBlessing from "../pool/serras-blessing.js";
 import _poolSeshiroTheAnointed from "../pool/seshiro-the-anointed.js";
@@ -1098,6 +1099,7 @@ const shard: CardShard = {
     _poolSegovianLeviathan,
     _poolSeizeTheSecrets,
     _poolSelesnyaCluestone,
+    _poolSendToSleep,
     _poolSepulcherGhoul,
     _poolSerrasBlessing,
     _poolSeshiroTheAnointed,

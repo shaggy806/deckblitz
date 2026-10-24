@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Magic Origins, the rest of it** (batch 151): renown (rule 702.112 — the `renown()` helper,
+  the `renown` effect and the `renowned` designation, a filter clause, with a `becomes-renowned`
+  trigger; read by the scaffolder) and `return-to-hand-all` reading X in its filter. 84
+  authored — three `card-author` agents and the lead: the 20 renown cards, Constable of the
+  Realm and Aragorn, Hornburg Hero (which waited only on renown), Demonic Pact, Hixus, Prison
+  Warden, Kothophed, Soul Hoarder, Erebos's Titan, Displacement Wave, Sigil of Valor and Gideon's
+  Phalanx (2026-10-24).
 - **Battle for Zendikar, the rest of it** (batch 150): awaken (rule 702.113 — `overload` with
   `keyword: "awaken"` and the `awaken()` helper, the land the last target; read by the
   scaffolder). 108 authored — four `card-author` agents and the lead: Ruinous Path, Gideon, Ally

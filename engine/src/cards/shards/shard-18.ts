@@ -77,6 +77,7 @@ import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
+import _poolClashOfWills from "../pool/clash-of-wills.js";
 import _poolClatteringAugur from "../pool/clattering-augur.js";
 import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
@@ -392,6 +393,7 @@ import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
+import _poolReclusiveArtificer from "../pool/reclusive-artificer.js";
 import _poolRedHulk from "../pool/red-hulk.js";
 import _poolRedManaBattery from "../pool/red-mana-battery.js";
 import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
@@ -703,6 +705,7 @@ const shard: CardShard = {
     _poolChillingScreech,
     _poolCircleOfProtectionBlack,
     _poolClamorousIronclad,
+    _poolClashOfWills,
     _poolClatteringAugur,
     _poolCloudspireSkycycle,
     _poolCodsworthHandyHelper,
@@ -1018,6 +1021,7 @@ const shard: CardShard = {
     _poolRazorclawBear,
     _poolRazorkinHordecaller,
     _poolReapingTheGraves,
+    _poolReclusiveArtificer,
     _poolRedHulk,
     _poolRedManaBattery,
     _poolRegalBunnicorn,

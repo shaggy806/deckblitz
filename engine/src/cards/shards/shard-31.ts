@@ -234,11 +234,13 @@ import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
+import _poolGideonsPhalanx from "../pool/gideons-phalanx.js";
 import _poolGiftOfFangs from "../pool/gift-of-fangs.js";
 import _poolGiftOfGrowth from "../pool/gift-of-growth.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
 import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
+import _poolGnarlrootTrapper from "../pool/gnarlroot-trapper.js";
 import _poolGnathosaur from "../pool/gnathosaur.js";
 import _poolGoblinBerserker from "../pool/goblin-berserker.js";
 import _poolGoblinBombardment from "../pool/goblin-bombardment.js";
@@ -880,11 +882,13 @@ const shard: CardShard = {
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
     _poolGideonsLawkeeper,
+    _poolGideonsPhalanx,
     _poolGiftOfFangs,
     _poolGiftOfGrowth,
     _poolGimlisFury,
     _poolGixianSkullflayer,
     _poolGlisteningDawn,
+    _poolGnarlrootTrapper,
     _poolGnathosaur,
     _poolGoblinBerserker,
     _poolGoblinBombardment,

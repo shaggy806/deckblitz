@@ -173,6 +173,7 @@ import _poolEtchedFamiliar from "../pool/etched-familiar.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolExposeEvil from "../pool/expose-evil.js";
 import _poolExquisiteHuntmaster from "../pool/exquisite-huntmaster.js";
+import _poolEyeblightMassacre from "../pool/eyeblight-massacre.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
@@ -248,6 +249,7 @@ import _poolHumbleTheBrute from "../pool/humble-the-brute.js";
 import _poolHundroog from "../pool/hundroog.js";
 import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolHuntingPack from "../pool/hunting-pack.js";
+import _poolHydrolash from "../pool/hydrolash.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
 import _poolImpactTremors from "../pool/impact-tremors.js";
@@ -555,6 +557,7 @@ import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
 import _poolUltimateNullification from "../pool/ultimate-nullification.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
+import _poolUndeadServant from "../pool/undead-servant.js";
 import _poolUndercitysEmbrace from "../pool/undercitys-embrace.js";
 import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
@@ -799,6 +802,7 @@ const shard: CardShard = {
     _poolExperimentalAviator,
     _poolExposeEvil,
     _poolExquisiteHuntmaster,
+    _poolEyeblightMassacre,
     _poolFallOfTheGavel,
     _poolFallToEarth,
     _poolFamishedWorldsire,
@@ -874,6 +878,7 @@ const shard: CardShard = {
     _poolHundroog,
     _poolHungryGhoul,
     _poolHuntingPack,
+    _poolHydrolash,
     _poolIchorclawMyr,
     _poolIlluminatedWings,
     _poolImpactTremors,
@@ -1181,6 +1186,7 @@ const shard: CardShard = {
     _poolUkudCobra,
     _poolUltimateNullification,
     _poolUlvenwaldHydra,
+    _poolUndeadServant,
     _poolUndercitysEmbrace,
     _poolUneasyAlliance,
     _poolUnexpectedFangs,

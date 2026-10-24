@@ -190,6 +190,7 @@ import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
+import _poolGiltLeafWinnower from "../pool/gilt-leaf-winnower.js";
 import _poolGladehartCavalry from "../pool/gladehart-cavalry.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
@@ -796,6 +797,7 @@ const shard: CardShard = {
     _poolGhoulcallersAccomplice,
     _poolGibberingBarricade,
     _poolGiftOfStrands,
+    _poolGiltLeafWinnower,
     _poolGladehartCavalry,
     _poolGlareOfSubdual,
     _poolGleamingBastion,

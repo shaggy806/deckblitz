@@ -12,6 +12,7 @@ import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAkoumFirebird from "../pool/akoum-firebird.js";
+import _poolAlchemistsVial from "../pool/alchemists-vial.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
@@ -417,6 +418,7 @@ import _poolRailwayBrawler from "../pool/railway-brawler.js";
 import _poolRakdosSignet from "../pool/rakdos-signet.js";
 import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
 import _poolRambunctiousMutt from "../pool/rambunctious-mutt.js";
+import _poolRamroller from "../pool/ramroller.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
@@ -650,6 +652,7 @@ const shard: CardShard = {
     _poolAfterlifeInsurance,
     _poolAkkiRockspeaker,
     _poolAkoumFirebird,
+    _poolAlchemistsVial,
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
     _poolAlloyAnimist,
@@ -1055,6 +1058,7 @@ const shard: CardShard = {
     _poolRakdosSignet,
     _poolRallyTheRanks,
     _poolRambunctiousMutt,
+    _poolRamroller,
     _poolRavineRaider,
     _poolRazorSwine,
     _poolRecumbentBliss,

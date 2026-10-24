@@ -533,6 +533,7 @@ import _poolTwinbladeGeist from "../pool/twinblade-geist.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
 import _poolTyrsBlessing from "../pool/tyrs-blessing.js";
 import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
+import _poolUnholyHunger from "../pool/unholy-hunger.js";
 import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
@@ -1129,6 +1130,7 @@ const shard: CardShard = {
     _poolTymorasInvoker,
     _poolTyrsBlessing,
     _poolUnderwaterTunnelSlimyAquarium,
+    _poolUnholyHunger,
     _poolUnitedBattlefront,
     _poolUnmarkedGrave,
     _poolUrzasFactory,

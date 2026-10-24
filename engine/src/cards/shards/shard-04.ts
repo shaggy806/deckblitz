@@ -143,6 +143,7 @@ import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
 import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEnragedGiant from "../pool/enraged-giant.js";
+import _poolEnthrallingVictor from "../pool/enthralling-victor.js";
 import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
@@ -751,6 +752,7 @@ const shard: CardShard = {
     _poolEnemyOfTheGuildpact,
     _poolEngineRat,
     _poolEnragedGiant,
+    _poolEnthrallingVictor,
     _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
     _poolExcaliburSwordOfEden,
