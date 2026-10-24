@@ -452,7 +452,13 @@ type DamageStep =
   | { readonly kind: "times"; readonly by: number }
   | { readonly kind: "plus"; readonly by: number }
   | { readonly kind: "at-least"; readonly power: number }
-  | { readonly kind: "prevent-all"; readonly by: ObjectId; readonly controller: PlayerId; readonly then?: EffectSpec }
+  | {
+      readonly kind: "prevent-all";
+      readonly by: ObjectId;
+      readonly controller: PlayerId;
+      readonly then?: EffectSpec;
+      readonly perEvent?: true;
+    }
   | { readonly kind: "shield"; readonly shield: PreventionShield }
   /** A shield counter's "prevent that damage and remove a shield counter"
    * (rule 122.1c): all of it, one counter however much — none more when
@@ -800,6 +806,16 @@ interface OwedDamageBatchTrigger {
   readonly players: Set<PlayerId>;
   amount: number;
   readonly perEvent: boolean;
+}
+
+/** A "prevent that damage and …" follow-up owed by the damage event under
+ * way: whose replacement, to whom, and the damage prevented so far. */
+interface OwedPreventFollowUp {
+  readonly by: ObjectId;
+  readonly controller: PlayerId;
+  readonly then: EffectSpec;
+  readonly to: string;
+  amount: number;
 }
 
 /** `trigger` without the player its event named (`LastKnownRefs.player`). */
@@ -1153,6 +1169,13 @@ export class Game {
    * 122.1c, 614.5), so the rest of that damage is prevented with no second
    * counter. Not game state: it only ever spans one synchronous call. */
   private shieldCountersSpent: Set<ObjectId> | null = null;
+  /** In the same event (see {@link shieldCountersSpent}), the "prevent that
+   * damage and …" follow-ups owed: one per replacement and recipient, "that
+   * many" the total it prevented, applied once the whole event is dealt —
+   * the replacement applies to the event once (rule 614.5), so two
+   * creatures blocking Oathsworn Knight remove one counter (its ruling).
+   * Not game state: it only ever spans one synchronous call. */
+  private preventedThisEvent: OwedPreventFollowUp[] | null = null;
   /** The +1/+1 counters an Incubator token being made by `incubate` enters
    * with (rule 701.53a) — read by `enteringReplacementOf` for that token
    * only. Not game state: it spans the one `createTokens` call. */
@@ -7967,12 +7990,19 @@ export class Game {
     }
 
     // All combat damage in a pass is dealt simultaneously: one event, so a
-    // shield counter goes once for all of it (`shieldCountersSpent`).
+    // shield counter goes once for all of it (`shieldCountersSpent`), and a
+    // "prevent that damage and …" follows it once (`preventedThisEvent`).
     this.shieldCountersSpent = new Set();
+    const owed: OwedPreventFollowUp[] = [];
+    this.preventedThisEvent = owed;
     try {
       this.dealCombatAssignments(assignments);
     } finally {
       this.shieldCountersSpent = null;
+      this.preventedThisEvent = null;
+    }
+    for (const { by, controller, then, amount } of owed) {
+      applyEffectSpec(then, this.makeResolutionContext(by, controller, [], amount));
     }
   }
 
@@ -31736,7 +31766,13 @@ export class Game {
     }
     for (const { by, r } of applying) {
       if (r.prevent !== true) continue;
-      steps.push({ kind: "prevent-all", by: by.id, controller: by.controller, ...(r.then !== undefined ? { then: r.then } : {}) });
+      steps.push({
+        kind: "prevent-all",
+        by: by.id,
+        controller: by.controller,
+        ...(r.then !== undefined ? { then: r.then } : {}),
+        ...(r.perEvent === true ? { perEvent: true as const } : {}),
+      });
     }
     // One-shot prevention shields (Healing Salve — rule 614.9 / EG-6).
     for (const shield of this.state.preventionShields) {
@@ -32037,7 +32073,14 @@ export class Game {
       if (outcome.preventedAll !== undefined) {
         const { step, amount: prevented } = outcome.preventedAll;
         this.emit({ type: "damage-prevented", source, target, amount: prevented });
-        if (step.then !== undefined) {
+        const owed = this.preventedThisEvent;
+        if (step.then !== undefined && step.perEvent === true && owed !== null) {
+          // Part of a simultaneous event: once for all of it, after it.
+          const to = target.kind === "player" ? `player:${target.player}` : `object:${target.object}`;
+          const same = owed.find((o) => o.by === step.by && o.then === step.then && o.to === to);
+          if (same !== undefined) same.amount += prevented;
+          else owed.push({ by: step.by, controller: step.controller, then: step.then, to, amount: prevented });
+        } else if (step.then !== undefined) {
           applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], prevented));
         }
         return 0;

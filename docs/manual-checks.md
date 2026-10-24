@@ -5274,3 +5274,7 @@ engine terms. A second thing to check is a second test.
 ### Priest of Yawgmoth: mana equal to the sacrificed artifact's mana value
 - **Do:** Activate Priest of Yawgmoth, sacrificing Mind Stone.
 - **Expect:** Mind Stone goes to your graveyard and you get {B}{B} (its mana value is 2), enough to cast Night's Whisper.
+
+### Oathsworn Knight: blocked by two creatures, loses one counter
+- **Do:** Attack with Oathsworn Knight. As Bob, block it with both Grizzly Bears and Hill Giant.
+- **Expect:** All the blockers' damage is prevented and the Knight goes from four +1/+1 counters to three — not two.

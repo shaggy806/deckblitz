@@ -8094,4 +8094,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Priest of Yawgmoth', 'Mind Stone', 'Darksteel Relic'], hand: ["Night's Whisper"] },
     }),
   ),
+  preset(
+    'Oathsworn Knight: blocked by two creatures, loses one counter',
+    board({
+      you: { bf: [{ name: 'Oathsworn Knight', counters: { '+1/+1': 4 } }] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'], human: true },
+    }),
+  ),
 ]
