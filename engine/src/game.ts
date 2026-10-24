@@ -21994,6 +21994,7 @@ export class Game {
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
       canBehold: (spec) => this.canBehold(controller, spec),
+      canBlight: (player) => this.canBlight(player),
       grantKeyword: (target, keyword, duration) =>
         this.grantKeyword(target, keyword, lastingHere(duration)),
       incubate: (amount) => {
@@ -27554,9 +27555,18 @@ export class Game {
   }
 
   /** Whether `player` could blight (rule 701.68b): they control a creature
-   * to put the counters on. */
+   * the counters can go on. */
   private canBlight(player: PlayerId): boolean {
-    return this.battlefieldMatching(player, { type: "creature", controlledBy: "you" }).length > 0;
+    return this.blightable(player).length > 0;
+  }
+
+  /** The creatures `player` controls that -1/-1 counters can be put on —
+   * not one a `preventsCounters` static protects (Melira, Solemnity), so
+   * with none, no blighting (rule 701.68b, Lethal Sting's ruling). */
+  private blightable(player: PlayerId): ObjectId[] {
+    return this.battlefieldMatching(player, { type: "creature", controlledBy: "you" }).filter(
+      (id) => !this.countersPrevented({ object: id }, "-1/-1"),
+    );
   }
 
   /**
@@ -27569,7 +27579,8 @@ export class Game {
    * identical) it's that one, unasked. All the counters go on that one
    * creature, which needn't survive them (the rulings). No creature,
    * nothing (701.68b — whatever offers a choice to blight checks that
-   * first, `canBlight`). `then` follows the counters, with the blighted
+   * first, `canBlight`). Paid as a cost, only a creature the counters can
+   * go on is one to choose (`blightable`). `then` follows the counters, with the blighted
    * creature (701.68c) as its target 0 and `player` its controller.
    */
   private beginBlight(
@@ -27579,7 +27590,10 @@ export class Game {
     opts: { readonly x?: number; readonly then?: EffectSpec; readonly priorityTo?: PlayerId } = {},
   ): void {
     if (this.state.players[player]?.hasLost !== false) return;
-    const eligible = this.battlefieldMatching(player, { type: "creature", controlledBy: "you" });
+    const eligible =
+      opts.priorityTo !== undefined
+        ? this.blightable(player)
+        : this.battlefieldMatching(player, { type: "creature", controlledBy: "you" });
     if (eligible.length === 0) return;
     const then: EffectSpec = {
       kind: "sequence",
@@ -30914,9 +30928,10 @@ export class Game {
       if (eligible < (cost.sacrifice.count ?? 1)) return false;
     }
     if (cost.blight !== undefined) {
-      // A creature left once the mana is paid: one sacrificed for mana is
-      // gone. (No printed ward cost both sacrifices and blights.)
-      const creatures = this.battlefieldMatching(player, { type: "creature", controlledBy: "you" }).reduce(
+      // A creature the counters can go on left once the mana is paid: one
+      // sacrificed for mana is gone. (No printed ward cost both sacrifices
+      // and blights.)
+      const creatures = this.blightable(player).reduce(
         (n, id) => n + Math.max(0, (this.state.objects[id].stackCount ?? 1) - (spent.get(id) ?? 0)),
         0,
       );

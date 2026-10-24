@@ -231,7 +231,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **Blight ignores counter prevention** (701.68b): `canBlight` only asks for a creature you control, so with Melira out a blight cost or kicker is still payable; blocks Lethal Sting (`bug:blight-ignores-counter-prevention`).
 - **A search of library and graveyard forces a graveyard find** (701.23b): `beginLibrarySearch` makes the player find a card when one matches in the graveyard, though a search that includes the library may fail to find; blocks Nissa's Encouragement.
 - **"Until end of turn, whenever …" is a granted trigger, not a delayed one** (603.7c): Dovin, Grand Arbiter's −1 lives on Dovin, so it ends if Dovin loses its abilities or changes hands; blocks Mountain Titan, Gaze of Pain, Battle Cry (`effect:delayed-trigger-rest-of-turn`).
 - **A mana ability can't read what its cost sacrificed** (605.3): `{ manaValueOf: "sacrificed" }` reads 0 there — Priest of Yawgmoth.

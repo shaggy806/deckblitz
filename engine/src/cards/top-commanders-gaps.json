@@ -398,7 +398,8 @@
   "effect:player-next-untap-step-skip-filter",
   "decision:discard-any-number",
   "keyword:embalm",
-  "keyword:improvise"
+  "keyword:improvise",
+  "bug:blight-ignores-counter-prevention"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

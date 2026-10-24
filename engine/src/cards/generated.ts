@@ -9025,6 +9025,7 @@ import _poolLesserMasticore from "./pool/lesser-masticore.js";
 import _poolLessonsFromLife from "./pool/lessons-from-life.js";
 import _poolLetTheGalaxyBurn from "./pool/let-the-galaxy-burn.js";
 import _poolLethalScheme from "./pool/lethal-scheme.js";
+import _poolLethalSting from "./pool/lethal-sting.js";
 import _poolLetsPlayAGame from "./pool/lets-play-a-game.js";
 import _poolLetterOfAcceptance from "./pool/letter-of-acceptance.js";
 import _poolLevelUp from "./pool/level-up.js";
@@ -28051,6 +28052,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLessonsFromLife,
   _poolLetTheGalaxyBurn,
   _poolLethalScheme,
+  _poolLethalSting,
   _poolLetsPlayAGame,
   _poolLetterOfAcceptance,
   _poolLevelUp,
@@ -47090,6 +47092,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lessons-from-life": _poolLessonsFromLife,
   "pool/let-the-galaxy-burn": _poolLetTheGalaxyBurn,
   "pool/lethal-scheme": _poolLethalScheme,
+  "pool/lethal-sting": _poolLethalSting,
   "pool/lets-play-a-game": _poolLetsPlayAGame,
   "pool/letter-of-acceptance": _poolLetterOfAcceptance,
   "pool/level-up": _poolLevelUp,

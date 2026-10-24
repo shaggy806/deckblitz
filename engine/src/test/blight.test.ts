@@ -397,3 +397,106 @@ describe("blight as a cost with no creature to blight (rule 701.68b)", () => {
     expect(named(game, "Grizzly Bears", A)).toEqual([bears]);
   });
 });
+
+describe("blight with counter prevention (rule 701.68b: unable to put the counters on, no blighting)", () => {
+  it("under Melira, a choice of additional costs offers only the other branch, and Lethal Sting can't be cast", () => {
+    const { game } = table();
+    spawn(game, "Swamp");
+    lands(game, "Wastes", 4);
+    spawn(game, "Grizzly Bears");
+    const embrace = toHand(game, "Bogslither's Embrace");
+    const sting = toHand(game, "Lethal Sting");
+    spawn(game, "Grizzly Bears", B);
+    expect(casts(game, embrace).map((c) => c.costOptionText)).toEqual(["Blight 1", "Pay {3}"]);
+    expect(casts(game, sting)).not.toHaveLength(0);
+    spawn(game, "Melira, Sylvok Outcast");
+    expect(casts(game, embrace).map((c) => c.costOptionText)).toEqual(["Pay {3}"]);
+    expect(casts(game, sting)).toHaveLength(0);
+  });
+
+  it("an opponent's Melira protects only their creatures: Lethal Sting is cast, and destroys", () => {
+    const { game } = table();
+    spawn(game, "Swamp");
+    lands(game, "Wastes", 2);
+    const bears = spawn(game, "Grizzly Bears");
+    const melira = spawn(game, "Melira, Sylvok Outcast", B);
+    cast(game, toHand(game, "Lethal Sting"), { targets: [ref(melira)], costOption: 0 });
+    expect(counters(game, bears, "-1/-1")).toBe(1);
+    expect(zone(game, melira)).toBe("graveyard");
+  });
+
+  it("under Melira, the blighting kicker and an ability's blight cost aren't offered", () => {
+    const { game } = table();
+    lands(game, "Mountain", 3);
+    const glutton = spawn(game, "Gristle Glutton");
+    const curiosity = toHand(game, "Burning Curiosity");
+    spawn(game, "Melira, Sylvok Outcast");
+    expect(casts(game, curiosity).map((c) => c.kicked === true)).toEqual([false]);
+    expect(game.canDispatch({ type: "activate-ability", player: A, source: glutton, abilityIndex: 0, targets: [] })).toMatch(
+      /no creature to blight/,
+    );
+  });
+
+  it("under Melira, 'you may blight 1' isn't offered", () => {
+    const { game, a } = table();
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [0];
+    };
+    spawn(game, "Melira, Sylvok Outcast");
+    spawn(game, "Swamp");
+    lands(game, "Wastes", 2);
+    cast(game, toHand(game, "Boggart Mischief"));
+    expect(asked).toBe(0);
+    expect(tokensNamed(game, "Goblin Token (Boggart Mischief)")).toBe(0);
+  });
+
+  it("paid as a cost, only a creature the counter can go on is chosen: the protected one isn't offered", () => {
+    const WARDEN = defineCard({
+      name: "Bear Warden",
+      manaCost: "{1}{G}",
+      colors: ["G"],
+      types: ["enchantment"],
+      text: "Bears you control can't have -1/-1 counters put on them.",
+      static: [
+        {
+          affects: { scope: "self" },
+          preventsCounters: { permanents: { subtype: "Bear", controlledBy: "you" }, kind: "-1/-1" },
+          text: "Bears you control can't have -1/-1 counters put on them.",
+        },
+      ],
+    });
+    const registry = createDefaultRegistry();
+    registry.register(WARDEN);
+    const a = new ScriptedController(A);
+    const b = new ScriptedController(B);
+    const game = Game.create({
+      seed: 1,
+      shuffle: false,
+      registry,
+      startingPlayer: A,
+      rules: { skipFirstDraw: false, maxLandsPerTurn: 99, maxHandSize: 99 },
+      controllers: { [A]: a, [B]: b },
+      decks: [A, B].map((player) => ({ player, cards: Array<string>(40).fill("Wastes") })),
+    });
+    game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "precombat-main" && s.priority.holder === A);
+    spawn(game, "Bear Warden");
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    spawn(game, "Swamp");
+    lands(game, "Wastes", 2);
+    let asked = false;
+    a.choosePermanentsFn = () => {
+      asked = true;
+      return [bears];
+    };
+    cast(game, toHand(game, "Lethal Sting"), { targets: [ref(theirs)], costOption: 0 });
+    // The Elves were the one creature that could pay: chosen unasked.
+    expect(asked).toBe(false);
+    expect(zone(game, elves)).toBe("graveyard");
+    expect(counters(game, bears, "-1/-1")).toBe(0);
+    expect(zone(game, theirs)).toBe("graveyard");
+  });
+});

@@ -8068,4 +8068,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Island*2', 'Darksteel Relic', 'Memnite', 'Ornithopter', 'Grizzly Bears'], hand: ['Reverse Engineer'] },
     }),
   ),
+  preset(
+    "Lethal Sting: can't be cast while Melira protects your creatures",
+    board({
+      you: { bf: ['Swamp*3', 'Grizzly Bears', 'Melira, Sylvok Outcast'], hand: ['Lethal Sting'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]

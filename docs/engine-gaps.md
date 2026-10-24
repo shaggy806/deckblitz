@@ -6,14 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **Blight ignores counter prevention.** Rule 701.68b: a player can't blight if they can't put a
-  -1/-1 counter on a creature they control. `Game.canBlight` only checks that they control a
-  creature, so with Melira, Sylvok Outcast (in the pool) on the battlefield every blight cost and
-  blight kicker in the pool is still offered and payable. **Fix (outline):** judge each candidate
-  creature through the same counter-prevention check `addCounter` uses (`preventsCounters`
-  statics), and refuse when none can take one. Blocks Lethal Sting ("As an additional cost …,
-  put a -1/-1 counter on a creature you control" — its ruling cites the rule). Found by an
-  authoring agent, 2026-10-22 (B138).
 - **A search of library and graveyard forces a graveyard find.** Rule 701.23b lets a search of a
   hidden zone for cards with a stated quality fail to find; a public zone's search must find one
   if there is one. `beginLibrarySearch` (`game.ts`) forces at least one find whenever any card

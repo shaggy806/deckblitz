@@ -5956,6 +5956,9 @@ export interface EffectApi {
   /** Whether the controller could behold `spec` right now (rule 701.4a): as
    * many cards in hand and permanents they control matching it as it takes. */
   canBehold(spec: BeholdSpec): boolean;
+  /** Whether `player` could blight right now (rule 701.68b): they control a
+   * creature -1/-1 counters can be put on. */
+  canBlight(player: PlayerId): boolean;
   /** This context, about `player`: the `"that-player"` scope names them —
    * an `"each-player-may"`'s follow-ups. */
   aboutPlayer(player: PlayerId): ResolutionContext;
@@ -8191,13 +8194,9 @@ function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
       return has >= amountValue(action.amount, ctx, ref.player);
     });
   }
-  // "You may blight 1": a player who controls no creature can't choose to
-  // (rule 701.68b).
-  if (action.kind === "blight") {
-    return blightingPlayers(action.who, ctx).every(
-      (player) => ctx.countMatching({ type: "creature", controlledBy: "you" }, undefined, player) > 0,
-    );
-  }
+  // "You may blight 1": a player who controls no creature the counters can
+  // go on can't choose to (rule 701.68b).
+  if (action.kind === "blight") return blightingPlayers(action.who, ctx).every((player) => ctx.canBlight(player));
   // "You may behold a Dragon" (rule 701.4a): only with one to behold.
   if (action.kind === "behold") return ctx.canBehold(action);
   // "You may move a counter": not when none could move (rule 122.5) — from

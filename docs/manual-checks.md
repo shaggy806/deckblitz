@@ -5256,3 +5256,9 @@ engine terms. A second thing to check is a second test.
 ### Reverse Engineer: improvise with artifacts
 - **Do:** Cast Reverse Engineer. When the bar asks, tap the three artifacts, then pay the rest.
 - **Expect:** The bar reads "improvise — tap up to 3 artifacts" and only the artifacts can be picked (not Grizzly Bears). With all three tapped, the two Islands pay {U}{U}, and you draw three cards.
+
+## Engine rules gaps closed (2026-10-24)
+
+### Lethal Sting: can't be cast while Melira protects your creatures
+- **Do:** Click Lethal Sting in your hand.
+- **Expect:** It can't be cast: Melira, Sylvok Outcast stops -1/-1 counters on your creatures, so its extra cost can't be paid, though you have Grizzly Bears and the mana.
