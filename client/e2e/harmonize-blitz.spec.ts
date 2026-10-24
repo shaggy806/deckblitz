@@ -73,7 +73,9 @@ async function untilChoice(page: Page, prompt: RegExp): Promise<void> {
     const banner = page.locator('.decision-banner', { hasText: prompt })
     if (await banner.isVisible()) return
     const pass = page.getByRole('button', { name: 'Pass (space)' })
-    if (await pass.isEnabled()) await pass.click()
+    // Short timeouts of their own: a decision coming up can take the button
+    // away mid-check or mid-click, which then waited out the whole retry.
+    if (await pass.isEnabled({ timeout: 1000 })) await pass.click({ timeout: 1000 })
     await expect(banner).toBeVisible({ timeout: 1500 })
   }).toPass(paced)
 }

@@ -86,7 +86,9 @@ test('CURSE: a Curse cast at a player is shown on them, and pays out once per at
     const now = await control<RoomState>(request, { op: 'state', room: 'CURSE' })
     if (named(now.players.alice.battlefield, 'Gold Token').length > 0) return
     const pass = page.getByRole('button', { name: 'Pass (space)' })
-    if (await pass.isEnabled()) await pass.click()
+    // Short timeouts of their own: a decision coming up can take the button
+    // away mid-check or mid-click, which then waited out the whole retry.
+    if (await pass.isEnabled({ timeout: 1000 })) await pass.click({ timeout: 1000 })
     throw new Error('no Gold yet')
   }).toPass({ timeout: 90_000 })
   const after = await control<RoomState>(request, { op: 'state', room: 'CURSE' })
