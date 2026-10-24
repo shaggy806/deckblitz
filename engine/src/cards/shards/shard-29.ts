@@ -392,6 +392,7 @@ import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
+import _poolQarsiSadist from "../pool/qarsi-sadist.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
 import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
@@ -1022,6 +1023,7 @@ const shard: CardShard = {
     _poolPsychoticFury,
     _poolPsychotropeThallid,
     _poolPunctureBlast,
+    _poolQarsiSadist,
     _poolQilinsBlessing,
     _poolQuaketuskBoar,
     _poolQuickDrawKatana,

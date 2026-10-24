@@ -457,6 +457,7 @@ import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
 import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
+import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
@@ -1067,6 +1068,7 @@ const shard: CardShard = {
     _poolShrapnelSlinger,
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,
+    _poolSilumgarButcher,
     _poolSilverErne,
     _poolSilverbeakGriffin,
     _poolSilverstrike,

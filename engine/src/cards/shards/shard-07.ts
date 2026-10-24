@@ -393,6 +393,7 @@ import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolQuestForTheGoblinLord from "../pool/quest-for-the-goblin-lord.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
+import _poolRakshasaGravecaller from "../pool/rakshasa-gravecaller.js";
 import _poolRalStormConduit from "../pool/ral-storm-conduit.js";
 import _poolRallyingRoar from "../pool/rallying-roar.js";
 import _poolRampagingSpiketail from "../pool/rampaging-spiketail.js";
@@ -1037,6 +1038,7 @@ const shard: CardShard = {
     _poolPyromanticPilgrim,
     _poolQuestForTheGoblinLord,
     _poolRakdosTheMuscle,
+    _poolRakshasaGravecaller,
     _poolRalStormConduit,
     _poolRallyingRoar,
     _poolRampagingSpiketail,

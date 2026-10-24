@@ -10534,6 +10534,7 @@ import _poolMinionOfTeveshSzat from "./pool/minion-of-tevesh-szat.js";
 import _poolMinionsReturn from "./pool/minions-return.js";
 import _poolMinisterOfImpediments from "./pool/minister-of-impediments.js";
 import _poolMinisterOfInquiries from "./pool/minister-of-inquiries.js";
+import _poolMinisterOfPain from "./pool/minister-of-pain.js";
 import _poolMinistrantOfObligation from "./pool/ministrant-of-obligation.js";
 import _poolMinnWilyIllusionist from "./pool/minn-wily-illusionist.js";
 import _poolMinorMisstep from "./pool/minor-misstep.js";
@@ -12607,6 +12608,7 @@ import _poolPyrrhicStrike from "./pool/pyrrhic-strike.js";
 import _poolPython from "./pool/python.js";
 import _poolQalaAjanisPridemate from "./pool/qala-ajanis-pridemate.js";
 import _poolQarsiRevenant from "./pool/qarsi-revenant.js";
+import _poolQarsiSadist from "./pool/qarsi-sadist.js";
 import _poolQasaliPridemage from "./pool/qasali-pridemage.js";
 import _poolQasaliSlingers from "./pool/qasali-slingers.js";
 import _poolQilinsBlessing from "./pool/qilins-blessing.js";
@@ -12776,6 +12778,7 @@ import _poolRakishHeir from "./pool/rakish-heir.js";
 import _poolRakishScoundrel from "./pool/rakish-scoundrel.js";
 import _poolRakshasaDeathdealer from "./pool/rakshasa-deathdealer.js";
 import _poolRakshasaDebaser from "./pool/rakshasa-debaser.js";
+import _poolRakshasaGravecaller from "./pool/rakshasa-gravecaller.js";
 import _poolRakshasasBargain from "./pool/rakshasas-bargain.js";
 import _poolRalAndTheImplicitMaze from "./pool/ral-and-the-implicit-maze.js";
 import _poolRalCallerOfStorms from "./pool/ral-caller-of-storms.js";
@@ -13822,6 +13825,7 @@ import _poolSaltFlats from "./pool/salt-flats.js";
 import _poolSaltMarsh from "./pool/salt-marsh.js";
 import _poolSaltRoadPackbeast from "./pool/salt-road-packbeast.js";
 import _poolSaltRoadPatrol from "./pool/salt-road-patrol.js";
+import _poolSaltRoadQuartermasters from "./pool/salt-road-quartermasters.js";
 import _poolSaltRoadSkirmish from "./pool/salt-road-skirmish.js";
 import _poolSaltfieldRecluse from "./pool/saltfield-recluse.js";
 import _poolSaltwaterStalwart from "./pool/saltwater-stalwart.js";
@@ -14721,6 +14725,7 @@ import _poolSidequestPlayBlitzball from "./pool/sidequest-play-blitzball.js";
 import _poolSidequestRaiseAChocobo from "./pool/sidequest-raise-a-chocobo.js";
 import _poolSidewinderNaga from "./pool/sidewinder-naga.js";
 import _poolSidisiBroodTyrant from "./pool/sidisi-brood-tyrant.js";
+import _poolSidisisFaithful from "./pool/sidisis-faithful.js";
 import _poolSidisisPet from "./pool/sidisis-pet.js";
 import _poolSiegeGangCommander from "./pool/siege-gang-commander.js";
 import _poolSiegeGangLieutenant from "./pool/siege-gang-lieutenant.js";
@@ -14789,6 +14794,8 @@ import _poolSilkenfistOrder from "./pool/silkenfist-order.js";
 import _poolSilkguard from "./pool/silkguard.js";
 import _poolSilklashSpider from "./pool/silklash-spider.js";
 import _poolSilkweaverElite from "./pool/silkweaver-elite.js";
+import _poolSilumgarButcher from "./pool/silumgar-butcher.js";
+import _poolSilumgarSorcerer from "./pool/silumgar-sorcerer.js";
 import _poolSilumgarsCommand from "./pool/silumgars-command.js";
 import _poolSilundiIsle from "./pool/silundi-isle.js";
 import _poolSilundiVision from "./pool/silundi-vision.js";
@@ -30500,6 +30507,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMinionsReturn,
   _poolMinisterOfImpediments,
   _poolMinisterOfInquiries,
+  _poolMinisterOfPain,
   _poolMinistrantOfObligation,
   _poolMinnWilyIllusionist,
   _poolMinorMisstep,
@@ -32573,6 +32581,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPython,
   _poolQalaAjanisPridemate,
   _poolQarsiRevenant,
+  _poolQarsiSadist,
   _poolQasaliPridemage,
   _poolQasaliSlingers,
   _poolQilinsBlessing,
@@ -32742,6 +32751,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRakishScoundrel,
   _poolRakshasaDeathdealer,
   _poolRakshasaDebaser,
+  _poolRakshasaGravecaller,
   _poolRakshasasBargain,
   _poolRalAndTheImplicitMaze,
   _poolRalCallerOfStorms,
@@ -33788,6 +33798,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSaltMarsh,
   _poolSaltRoadPackbeast,
   _poolSaltRoadPatrol,
+  _poolSaltRoadQuartermasters,
   _poolSaltRoadSkirmish,
   _poolSaltfieldRecluse,
   _poolSaltwaterStalwart,
@@ -34687,6 +34698,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSidequestRaiseAChocobo,
   _poolSidewinderNaga,
   _poolSidisiBroodTyrant,
+  _poolSidisisFaithful,
   _poolSidisisPet,
   _poolSiegeGangCommander,
   _poolSiegeGangLieutenant,
@@ -34755,6 +34767,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilkguard,
   _poolSilklashSpider,
   _poolSilkweaverElite,
+  _poolSilumgarButcher,
+  _poolSilumgarSorcerer,
   _poolSilumgarsCommand,
   _poolSilundiIsle,
   _poolSilundiVision,
@@ -50479,6 +50493,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/minions-return": _poolMinionsReturn,
   "pool/minister-of-impediments": _poolMinisterOfImpediments,
   "pool/minister-of-inquiries": _poolMinisterOfInquiries,
+  "pool/minister-of-pain": _poolMinisterOfPain,
   "pool/ministrant-of-obligation": _poolMinistrantOfObligation,
   "pool/minn-wily-illusionist": _poolMinnWilyIllusionist,
   "pool/minor-misstep": _poolMinorMisstep,
@@ -52552,6 +52567,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/python": _poolPython,
   "pool/qala-ajanis-pridemate": _poolQalaAjanisPridemate,
   "pool/qarsi-revenant": _poolQarsiRevenant,
+  "pool/qarsi-sadist": _poolQarsiSadist,
   "pool/qasali-pridemage": _poolQasaliPridemage,
   "pool/qasali-slingers": _poolQasaliSlingers,
   "pool/qilins-blessing": _poolQilinsBlessing,
@@ -52721,6 +52737,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rakish-scoundrel": _poolRakishScoundrel,
   "pool/rakshasa-deathdealer": _poolRakshasaDeathdealer,
   "pool/rakshasa-debaser": _poolRakshasaDebaser,
+  "pool/rakshasa-gravecaller": _poolRakshasaGravecaller,
   "pool/rakshasas-bargain": _poolRakshasasBargain,
   "pool/ral-and-the-implicit-maze": _poolRalAndTheImplicitMaze,
   "pool/ral-caller-of-storms": _poolRalCallerOfStorms,
@@ -53767,6 +53784,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/salt-marsh": _poolSaltMarsh,
   "pool/salt-road-packbeast": _poolSaltRoadPackbeast,
   "pool/salt-road-patrol": _poolSaltRoadPatrol,
+  "pool/salt-road-quartermasters": _poolSaltRoadQuartermasters,
   "pool/salt-road-skirmish": _poolSaltRoadSkirmish,
   "pool/saltfield-recluse": _poolSaltfieldRecluse,
   "pool/saltwater-stalwart": _poolSaltwaterStalwart,
@@ -54666,6 +54684,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sidequest-raise-a-chocobo": _poolSidequestRaiseAChocobo,
   "pool/sidewinder-naga": _poolSidewinderNaga,
   "pool/sidisi-brood-tyrant": _poolSidisiBroodTyrant,
+  "pool/sidisis-faithful": _poolSidisisFaithful,
   "pool/sidisis-pet": _poolSidisisPet,
   "pool/siege-gang-commander": _poolSiegeGangCommander,
   "pool/siege-gang-lieutenant": _poolSiegeGangLieutenant,
@@ -54734,6 +54753,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silkguard": _poolSilkguard,
   "pool/silklash-spider": _poolSilklashSpider,
   "pool/silkweaver-elite": _poolSilkweaverElite,
+  "pool/silumgar-butcher": _poolSilumgarButcher,
+  "pool/silumgar-sorcerer": _poolSilumgarSorcerer,
   "pool/silumgars-command": _poolSilumgarsCommand,
   "pool/silundi-isle": _poolSilundiIsle,
   "pool/silundi-vision": _poolSilundiVision,

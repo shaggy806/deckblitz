@@ -482,6 +482,7 @@ import _poolShreddingWinds from "../pool/shredding-winds.js";
 import _poolShrineOfTheForsakenGods from "../pool/shrine-of-the-forsaken-gods.js";
 import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
 import _poolSigilOfValor from "../pool/sigil-of-valor.js";
+import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolShrineOfTheForsakenGods,
     _poolShuSoldierFarmers,
     _poolSigilOfValor,
+    _poolSilumgarSorcerer,
     _poolSilverflameRitual,
     _poolSkitteringCicada,
     _poolSkyshroudElf,

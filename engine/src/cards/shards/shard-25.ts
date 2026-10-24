@@ -332,6 +332,7 @@ import _poolMerfolkFalconer from "../pool/merfolk-falconer.js";
 import _poolMesmerizingBenthid from "../pool/mesmerizing-benthid.js";
 import _poolMessengerJays from "../pool/messenger-jays.js";
 import _poolMineRaider from "../pool/mine-raider.js";
+import _poolMinisterOfPain from "../pool/minister-of-pain.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -960,6 +961,7 @@ const shard: CardShard = {
     _poolMesmerizingBenthid,
     _poolMessengerJays,
     _poolMineRaider,
+    _poolMinisterOfPain,
     _poolMinotaurAbomination,
     _poolMirrorOfTheForebears,
     _poolMiscalculation,

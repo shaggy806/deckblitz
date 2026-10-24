@@ -492,6 +492,7 @@ import _poolShireScarecrow from "../pool/shire-scarecrow.js";
 import _poolShivanHarvest from "../pool/shivan-harvest.js";
 import _poolShurisFabricator from "../pool/shuris-fabricator.js";
 import _poolSicarianInfiltrator from "../pool/sicarian-infiltrator.js";
+import _poolSidisisFaithful from "../pool/sidisis-faithful.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolShivanHarvest,
     _poolShurisFabricator,
     _poolSicarianInfiltrator,
+    _poolSidisisFaithful,
     _poolSilasRennSeekerAdept,
     _poolSilentClearing,
     _poolSilentHallcreeper,
