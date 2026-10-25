@@ -28,13 +28,25 @@
 // — committed since it, or not committed at all — so a batch committed
 // locally before verifying is still forced into the fuzzer.
 //
-// Usage: node scripts/verify.mjs [--with "Card Name"]... [--skip step,step]
+// **Full or quick.** A full run every few card batches is enough: on its
+// own, `verify` decides. It reads the batch number of the last full run from
+// `scripts/verify-state.json` (committed, so it outlives a session) and the
+// newest batch record (`engine/data/sweep-3/B<N>.json`); three batches or
+// more since, it runs everything and, if everything passed, writes the newest
+// batch number back — commit the file with the batch. Otherwise it runs
+// quick: no plain fuzzer and no bot gate (the fuzzer with the new cards forced
+// in still runs, at half its games), and the server and client suites only
+// when the change touches `server/`, `client/` or `protocol/` — the bot gate
+// too when it touches the bots (`engine/src/bot/`, `controller.ts`,
+// `effect-worth.ts`, `target-polarity.ts`). `--full` or `--quick` forces one.
+//
+// Usage: node scripts/verify.mjs [--full | --quick] [--with "Card Name"]... [--skip step,step]
 //   steps for --skip: marks, lint, server, client, cardverify,
 //   fuzz, fuzzwith, gate
 //   --games N   2-player fuzz games (default 60; 4-player gets half)
 
 import { spawn, spawnSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -58,6 +70,7 @@ for (let i = 0; i < args.length; i++) {
   else if (args[i] === "--skip") skip = new Set(args[++i].split(","));
   else if (args[i] === "--games") games = Number(args[++i]);
 }
+const forced = args.includes("--full") ? "full" : args.includes("--quick") ? "quick" : null;
 
 const failures = [];
 const started = Date.now();
@@ -160,6 +173,44 @@ function addedCards() {
 
 // ------------------------------------------------------------------ run
 
+/** Files this change touches: uncommitted, or committed since the upstream
+ * branch — `null` with no upstream (then everything counts as touched). */
+function changedFiles() {
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
+  if (git("rev-parse", "--verify", "--quiet", "@{upstream}").status !== 0) return null;
+  const files = git("status", "--porcelain").stdout.split("\n").map((l) => l.slice(3).trim());
+  files.push(...git("diff", "--name-only", "@{upstream}", "HEAD").stdout.split("\n"));
+  return [...new Set(files.filter(Boolean))];
+}
+
+const STATE = path.join(ROOT, "scripts", "verify-state.json");
+/** The newest batch record's number (`engine/data/sweep-3/B<N>.json`). */
+const newestBatch = () =>
+  Math.max(
+    0,
+    ...readdirSync(path.join(ENGINE, "data", "sweep-3"))
+      .map((f) => /^B(\d+)\.json$/.exec(f))
+      .filter(Boolean)
+      .map((m) => Number(m[1])),
+  );
+const lastFull = existsSync(STATE) ? (JSON.parse(readFileSync(STATE, "utf8")).lastFullBatch ?? 0) : 0;
+const EVERY = 3;
+const batch = newestBatch();
+const mode = forced ?? (batch - lastFull >= EVERY ? "full" : "quick");
+let fuzzWithGames = 40;
+if (mode === "quick") {
+  const touched = changedFiles();
+  const touches = (re) => touched === null || touched.some((f) => re.test(f));
+  skip.add("fuzz");
+  fuzzWithGames = 20;
+  if (!touches(/^engine\/src\/(bot\/|controller\.ts|effect-worth\.ts|target-polarity\.ts)/)) skip.add("gate");
+  if (!touches(/^(server|protocol)\//)) skip.add("server");
+  if (!touches(/^(client|protocol)\//)) skip.add("client");
+}
+console.log(
+  `verify: ${mode}${forced ? "" : ` (last full run at batch ${lastFull}, newest batch ${batch}; full every ${EVERY})`}`,
+);
+
 const cards = [...new Set([...withNames, ...addedCards()])];
 console.log(`verify: ${cards.length ? `new/forced cards: ${cards.join(", ")}` : "no new cards"}${skip.size ? `; skipping ${[...skip].join(", ")}` : ""}\n`);
 
@@ -221,7 +272,7 @@ if (!skip.has("fuzzwith") && cards.length > 0) {
     late.push(
       ...fourPlayer(
         "fuzz with new cards",
-        40,
+        fuzzWithGames,
         // A long list goes in a file: a command line has a length limit.
         cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]),
       ),
@@ -251,10 +302,18 @@ await stopOnFailure(
 const engineTests = await run("engine tests", "npx", ["vitest", "run", `--maxWorkers=${Math.min(8, CORES)}`], ENGINE);
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
-const others = await Promise.all([
-  ...(skip.has("server") ? [] : [run("server tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "server"))]),
-  ...(skip.has("client") ? [] : [run("client tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "client"))]),
-]);
+// Side by side at 4 workers each — but on a small machine one after the
+// other at vitest's default, or the server's timed capture tests run past
+// their 5 s (they take 2 s alone; 2026-10-25).
+const suite = (name, dir) => () =>
+  run(name, "npx", ["vitest", "run", ...(SMALL ? [] : ["--maxWorkers=4"])], path.join(ROOT, dir));
+const suites = [
+  ...(skip.has("server") ? [] : [suite("server tests", "server")]),
+  ...(skip.has("client") ? [] : [suite("client tests", "client")]),
+];
+const others = [];
+if (SMALL) for (const s of suites) others.push(await s());
+else others.push(...(await Promise.all(suites.map((s) => s()))));
 for (const r of others) report(r, grab(r.out, /^\s*Tests\s/));
 if (others.some((r) => !r.ok)) stop();
 startLate();
@@ -269,4 +328,9 @@ for (const r of await Promise.all(late)) report(r, grab(r.out, /games —|avg tu
 console.log(failures.length === 0 ? `
 All green (${secs(started)}).` : `
 Failed: ${failures.join(", ")} (${secs(started)}).`);
+// A full run that passed is the one the next quick runs count from.
+if (failures.length === 0 && mode === "full" && skip.size === 0) {
+  writeFileSync(STATE, JSON.stringify({ lastFullBatch: batch, date: new Date().toISOString().slice(0, 10) }, null, 1) + "\n");
+  console.log(`Recorded a full run at batch ${batch} in scripts/verify-state.json — commit it.`);
+}
 process.exit(failures.length === 0 ? 0 : 1);

@@ -129,11 +129,14 @@ whoever writes it:
   this batch).
 - While authoring, run only the touched tests (`npx vitest run
   top10000-batch-<N> pool.test` from `engine/`).
-- Then **`npm run verify`** (in the background): the build, typecheck (tests
-  included), every suite, card:verify, both fuzzer table sizes, the
-  fuzzer with every card the batch adds forced in, and the bot gate. It also
-  re-marks the backlog lists and drops any sample-deck stand-in whose
-  original is now in the pool.
+- Then **`npm run verify`** (in the background, before pushing — it finds the
+  batch's new cards against the upstream branch): the build, typecheck (tests
+  included), the engine suite, card:verify and the fuzzer with every card the
+  batch adds forced in, every time; **every third batch** it decides on its own
+  to run the full set — both fuzzer table sizes, the bot gate, the server and
+  client suites — and records that in `scripts/verify-state.json` (commit it
+  with the batch). It also re-marks the backlog lists and drops any
+  sample-deck stand-in whose original is now in the pool.
 
 ## 5. Record
 

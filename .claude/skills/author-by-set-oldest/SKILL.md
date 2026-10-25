@@ -97,9 +97,9 @@ As `author-by-set` step 3, with this walk's labels:
 - **Commit**: `Cards: <Set name> — <three or four headline cards> and <count>
   more`, or `Engine, Cards: <the feature>, and <Set name>'s …` when a feature
   was built.
-- Between batches, run basic checks and commit locally. Run the full
-  `npm run verify` only every few sets, then push (the `feedback_verify_cadence`
-  and `feedback_batch_run_basic_checks` memories).
+- Run `npm run verify` before pushing each batch: it runs the full set only
+  every third batch on its own (`scripts/verify-state.json`, commit it when it
+  changes) and a quick one in between, so a cleared session keeps the cadence.
 
 ## 4. Report and offer the next
 
