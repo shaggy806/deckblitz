@@ -178,6 +178,7 @@ import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEssenceBurn from "../pool/essence-burn.js";
 import _poolEtaliPrimalSickness from "../pool/etali-primal-sickness.js";
 import _poolEtalisFavor from "../pool/etalis-favor.js";
+import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
@@ -814,6 +815,7 @@ const shard: CardShard = {
     _poolEssenceBurn,
     _poolEtaliPrimalSickness,
     _poolEtalisFavor,
+    _poolEvaporate,
     _poolEverythingPizza,
     _poolExecutionersHood,
     _poolExplorersCache,

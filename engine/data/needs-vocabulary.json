@@ -10173,6 +10173,30 @@
   "effect:look-at-top-of-target-players-library": {
    "family": "effect:target-spec-additions",
    "example": "Merfolk Observer: 'look at the top card of target player's library' — no private look at another player's library top."
+  },
+  "effect:targetable-despite-shroud-by-player": {
+   "family": "effect:target-spec-additions",
+   "example": "Autumn Willow: 'can be the target of spells and abilities controlled by target player as though it didn't have shroud'."
+  },
+  "effect:damage-all-per-object": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Baki's Curse: '2 damage to each creature for each Aura attached to that creature' — damage-all takes one amount for every creature."
+  },
+  "effect:delayed-trigger-while-source-tapped": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Giant Oyster: a draw-step trigger lasting for as long as it remains tapped, and removing those counters when it leaves or untaps."
+  },
+  "filter:block-restriction-relative-to-attached-toughness": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Ironclaw Curse: 'can't block creatures with power equal to or greater than the enchanted creature's toughness'."
+  },
+  "filter:blocked-source-this-turn": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Joven's Ferrets: 'tap all creatures that blocked this creature this turn'."
+  },
+  "static:prohibit-tap-abilities-of-attached": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Serra Bestiary: 'its activated abilities with {T} in their costs can't be activated' (mana abilities included)."
   }
  }
 }

@@ -87,6 +87,7 @@ import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
 import _poolCentaurPeacemaker from "../pool/centaur-peacemaker.js";
 import _poolCeremonialKnife from "../pool/ceremonial-knife.js";
+import _poolChainStasis from "../pool/chain-stasis.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
@@ -243,6 +244,7 @@ import _poolGyreEngineer from "../pool/gyre-engineer.js";
 import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
+import _poolHeartWolf from "../pool/heart-wolf.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
 import _poolHellcatUndyingVigilante from "../pool/hellcat-undying-vigilante.js";
@@ -736,6 +738,7 @@ const shard: CardShard = {
     _poolCelestialAncient,
     _poolCentaurPeacemaker,
     _poolCeremonialKnife,
+    _poolChainStasis,
     _poolChar,
     _poolChargingBadger,
     _poolCharredGraverobber,
@@ -892,6 +895,7 @@ const shard: CardShard = {
     _poolHERBIELovableRobot,
     _poolHardenedAcademic,
     _poolHavocDevils,
+    _poolHeartWolf,
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,
     _poolHellcatUndyingVigilante,

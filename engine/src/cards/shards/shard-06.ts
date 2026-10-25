@@ -314,6 +314,7 @@ import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLunarchInquisitors from "../pool/lunarch-inquisitors.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolMageRingResponder from "../pool/mage-ring-responder.js";
+import _poolMammothHarness from "../pool/mammoth-harness.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
 import _poolMaraudingLooter from "../pool/marauding-looter.js";
@@ -406,6 +407,7 @@ import _poolRamThrough from "../pool/ram-through.js";
 import _poolRampagingBrontodon from "../pool/rampaging-brontodon.js";
 import _poolRamunapRuins from "../pool/ramunap-ruins.js";
 import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
+import _poolRashkaTheSlayer from "../pool/rashka-the-slayer.js";
 import _poolRedScarab from "../pool/red-scarab.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
@@ -626,6 +628,7 @@ import _tokensNinjaToken from "../tokens/ninja-token.js";
 import _tokensOozeTokenConvertToSlime from "../tokens/ooze-token-convert-to-slime.js";
 import _tokensPowerstoneToken from "../tokens/powerstone-token.js";
 import _tokensShardToken from "../tokens/shard-token.js";
+import _tokensSkeletonRegeneratingToken from "../tokens/skeleton-regenerating-token.js";
 import _tokensSpiderToken21MenaceReach from "../tokens/spider-token-2-1-menace-reach.js";
 import _tokensTheVoid from "../tokens/the-void.js";
 import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
@@ -943,6 +946,7 @@ const shard: CardShard = {
     _poolLunarchInquisitors,
     _poolLydiaFrye,
     _poolMageRingResponder,
+    _poolMammothHarness,
     _poolManaCrypt,
     _poolManifoldMouse,
     _poolMaraudingLooter,
@@ -1035,6 +1039,7 @@ const shard: CardShard = {
     _poolRampagingBrontodon,
     _poolRamunapRuins,
     _poolRankleMasterOfPranks,
+    _poolRashkaTheSlayer,
     _poolRedScarab,
     _poolRedoubledStormsinger,
     _poolReefWorm,
@@ -1257,6 +1262,7 @@ const shard: CardShard = {
     _tokensOozeTokenConvertToSlime,
     _tokensPowerstoneToken,
     _tokensShardToken,
+    _tokensSkeletonRegeneratingToken,
     _tokensSpiderToken21MenaceReach,
     _tokensTheVoid,
     _tokensWizardTokenGuff,

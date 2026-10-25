@@ -105,7 +105,9 @@ section keeps only what to do next.
   long as you control ~" and "blockable as though it didn't have landwalk"; batch 134 The Dark,
   on existing features only; batch 135 Fallen Empires, on "attacks and isn't blocked", removing
   any number of counters as a cost, and state triggers; batch 136 Ice Age whole, on cumulative
-  upkeep. **Next, Homelands** (79 left), then Alliances (118). Leads over the whole pool now:
+  upkeep; batch 160 Homelands whole, no feature built (33 blocked, "doesn't untap during your
+  next untap step" leading with 3). **Next, Alliances** (118 left), then Mirage. This walk's range
+  ends at Shadowmoor/Eventide (the middle walk owns Shards of Alara on). Leads over the whole pool now:
   banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
   (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana
   spendable only on it), damage redirection (13), "can't be regenerated this turn"
@@ -272,6 +274,7 @@ there and move this line to `COMPLETED.md`.
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.
 - **A mana-value cast prohibition reads an X spell before X is chosen** (202.3e): Sanctum Prelate waits on it.
 - **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins, Stronghold Rats and Cunning Lethemancer (`effect:hidden-simultaneous-choices`).
+- **`each-player-may` with `choices` drops the controller's own choice**: when the spell's controller is one of the choosers, `"that-player"` in their option resolves to no one (found authoring Truce, batch 160).
 - **A target cost reduction two slots can earn is offered unrestricted** (601.2f): `targetReductionOptions` narrows only a lone earning slot, so This Town Ain't Big Enough under a tax it can pay only reduced is offered two non-earning targets and refused at the cast (fuzzer, batch 151's forced decks, seed 19).
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **Umbra armor's Aura is picked, and goes after the other shields** (616.1): with several umbras on one creature, or a regeneration shield or shield counter beside one, its controller should choose; the engine destroys the umbra of least mana value, and only once neither shield applies.

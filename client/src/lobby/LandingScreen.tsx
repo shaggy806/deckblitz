@@ -8,6 +8,7 @@ import { SiteNotice } from '../legal/SiteNotice.tsx'
 import { SITE_DESCRIPTOR, SITE_TITLE } from '../legal/notice.ts'
 import { CornerToolbar } from '../ui/CornerToolbar.tsx'
 import { BlitzPanel } from './BlitzPanel.tsx'
+import { DevRoomsMenu } from './DevRoomsMenu.tsx'
 import './landing.css'
 
 /** Room codes are five characters from a deliberately unambiguous alphabet —
@@ -298,6 +299,10 @@ export function LandingScreen({
 
       {/* The tutorials' first-visit callout shows on this page only. */}
       <CornerToolbar intro onLesson={(lesson) => game.createTutorial(lesson)} />
+
+      {/* A dev build only: dev-rooms' preloaded boards, fixed down the right
+          side beside the column. */}
+      {import.meta.env.DEV ? <DevRoomsMenu /> : null}
     </div>
   )
 }

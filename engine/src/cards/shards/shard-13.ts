@@ -24,6 +24,7 @@ import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
 import _poolAlchemistsAssistant from "../pool/alchemists-assistant.js";
 import _poolAltarsLight from "../pool/altars-light.js";
 import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
+import _poolAnabaAncestor from "../pool/anaba-ancestor.js";
 import _poolAncientGreenwarden from "../pool/ancient-greenwarden.js";
 import _poolAngelOfInvention from "../pool/angel-of-invention.js";
 import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
@@ -176,6 +177,7 @@ import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolExposeEvil from "../pool/expose-evil.js";
 import _poolExquisiteHuntmaster from "../pool/exquisite-huntmaster.js";
 import _poolEyeblightMassacre from "../pool/eyeblight-massacre.js";
+import _poolFaerieNoble from "../pool/faerie-noble.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
@@ -408,6 +410,7 @@ import _poolRearingEmbermare from "../pool/rearing-embermare.js";
 import _poolReclusiveTaxidermist from "../pool/reclusive-taxidermist.js";
 import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
+import _poolReefPirates from "../pool/reef-pirates.js";
 import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
@@ -663,6 +666,7 @@ const shard: CardShard = {
     _poolAlchemistsAssistant,
     _poolAltarsLight,
     _poolAminatouTheFateshifter,
+    _poolAnabaAncestor,
     _poolAncientGreenwarden,
     _poolAngelOfInvention,
     _poolAngelicSkirmisher,
@@ -815,6 +819,7 @@ const shard: CardShard = {
     _poolExposeEvil,
     _poolExquisiteHuntmaster,
     _poolEyeblightMassacre,
+    _poolFaerieNoble,
     _poolFallOfTheGavel,
     _poolFallToEarth,
     _poolFamishedWorldsire,
@@ -1047,6 +1052,7 @@ const shard: CardShard = {
     _poolReclusiveTaxidermist,
     _poolReconstruction,
     _poolRedGhostIntangibleGenius,
+    _poolReefPirates,
     _poolRepelTheDarkness,
     _poolRepudiateReplicate,
     _poolResurgentBelief,

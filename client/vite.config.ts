@@ -44,6 +44,18 @@ const shardFiles = (): Plugin => ({
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), engineLocal(), shardFiles()],
+  // The landing page's dev menu of test rooms (`src/lobby/devRooms.ts`)
+  // reads dev-rooms' command port (`server/scripts/dev-rooms.mjs`) through
+  // this: same-origin, so no CORS, and the dev server only — a build has
+  // neither. dev-rooms' port, unless $CONTROL_PORT moved it as it does there.
+  server: {
+    proxy: {
+      '/__dev-rooms': {
+        target: `http://127.0.0.1:${process.env.CONTROL_PORT ?? 4099}`,
+        rewrite: () => '/',
+      },
+    },
+  },
   worker: {
     // ES module workers, so the worker can load the card shards as chunks.
     format: 'es',

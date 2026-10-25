@@ -592,6 +592,7 @@ import _poolVandalize from "../pool/vandalize.js";
 import _poolVanishingVerse from "../pool/vanishing-verse.js";
 import _poolVashtaNerada from "../pool/vashta-nerada.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
+import _poolVeldraneOfSengir from "../pool/veldrane-of-sengir.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
 import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolVanishingVerse,
     _poolVashtaNerada,
     _poolVeinRipper,
+    _poolVeldraneOfSengir,
     _poolVelvetwingButterflies,
     _poolVentureForth,
     _poolVerdantKraken,

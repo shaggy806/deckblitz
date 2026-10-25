@@ -19,6 +19,7 @@ import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
 import _poolAmaranthineWall from "../pool/amaranthine-wall.js";
 import _poolAmbushViper from "../pool/ambush-viper.js";
+import _poolAmbush from "../pool/ambush.js";
 import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
 import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
@@ -261,6 +262,7 @@ import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
 import _poolHornedTurtle from "../pool/horned-turtle.js";
 import _poolHornetNest from "../pool/hornet-nest.js";
 import _poolHundingGjornersen from "../pool/hunding-gjornersen.js";
+import _poolHungryMist from "../pool/hungry-mist.js";
 import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
@@ -654,6 +656,7 @@ const shard: CardShard = {
     _poolAloraMerryThief,
     _poolAmaranthineWall,
     _poolAmbushViper,
+    _poolAmbush,
     _poolAmphinPathmage,
     _poolAncestralRecall,
     _poolAncientCraving,
@@ -896,6 +899,7 @@ const shard: CardShard = {
     _poolHornedTurtle,
     _poolHornetNest,
     _poolHundingGjornersen,
+    _poolHungryMist,
     _poolHuntmasterLiger,
     _poolHushwoodVerge,
     _poolHydroidKrasis,
