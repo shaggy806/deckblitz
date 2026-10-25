@@ -112,6 +112,7 @@ import _poolCoralhelmChronicler from "../pool/coralhelm-chronicler.js";
 import _poolCounterspell from "../pool/counterspell.js";
 import _poolCovetousGeist from "../pool/covetous-geist.js";
 import _poolCrackOpen from "../pool/crack-open.js";
+import _poolCrestingMosasaurus from "../pool/cresting-mosasaurus.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
 import _poolCruelAdministrator from "../pool/cruel-administrator.js";
@@ -733,6 +734,7 @@ const shard: CardShard = {
     _poolCounterspell,
     _poolCovetousGeist,
     _poolCrackOpen,
+    _poolCrestingMosasaurus,
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
     _poolCruelAdministrator,

@@ -558,6 +558,7 @@ import _poolValorInAkros from "../pool/valor-in-akros.js";
 import _poolVeldt from "../pool/veldt.js";
 import _poolVeneratedLoxodon from "../pool/venerated-loxodon.js";
 import _poolVerazolTheSplitCurrent from "../pool/verazol-the-split-current.js";
+import _poolVexingScuttler from "../pool/vexing-scuttler.js";
 import _poolViciousHunger from "../pool/vicious-hunger.js";
 import _poolViciousVerse from "../pool/vicious-verse.js";
 import _poolVigilantDrake from "../pool/vigilant-drake.js";
@@ -1171,6 +1172,7 @@ const shard: CardShard = {
     _poolVeldt,
     _poolVeneratedLoxodon,
     _poolVerazolTheSplitCurrent,
+    _poolVexingScuttler,
     _poolViciousHunger,
     _poolViciousVerse,
     _poolVigilantDrake,

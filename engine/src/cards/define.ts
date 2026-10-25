@@ -2562,10 +2562,20 @@ export interface CardDefinition {
    * the Critics): `{ mana, keyword: "spectacle", condition: SPECTACLE }`,
    * the condition "an opponent lost life this turn"; a spell cast this way
    * answers `self-spectacle-paid`.
+   *
+   * `keyword: "emerge"` is **Emerge [cost]** (rule 702.119a — Elder
+   * Deep-Fiend): `{ mana, keyword: "emerge", emerge: { filter } }` — cast by
+   * paying `mana` and sacrificing a permanent `filter` matches (a creature;
+   * an artifact for "emerge from artifact", 702.119b), the total cost
+   * reduced by that permanent's mana value. Each permanent that could be
+   * sacrificed is its own cast variant, priced with its mana value off and
+   * named by the offer's `sacrifice` (chosen as the cost is chosen,
+   * 702.119c); the spell's "the sacrificed creature" reads it.
    */
   readonly alternativeCost: {
     readonly mana: string;
-    readonly keyword?: "spectacle";
+    readonly keyword?: "spectacle" | "emerge";
+    readonly emerge?: { readonly filter: CardFilter };
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;

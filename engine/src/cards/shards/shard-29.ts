@@ -139,6 +139,7 @@ import _poolDramaticRescue from "../pool/dramatic-rescue.js";
 import _poolDriftgloomCoyote from "../pool/driftgloom-coyote.js";
 import _poolDriftingShade from "../pool/drifting-shade.js";
 import _poolDronepackKindred from "../pool/dronepack-kindred.js";
+import _poolDrownyardBehemoth from "../pool/drownyard-behemoth.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
 import _poolDynavoltTower from "../pool/dynavolt-tower.js";
@@ -740,6 +741,7 @@ const shard: CardShard = {
     _poolDriftgloomCoyote,
     _poolDriftingShade,
     _poolDronepackKindred,
+    _poolDrownyardBehemoth,
     _poolDrownyardExplorers,
     _poolDwarvenBloodboiler,
     _poolDynavoltTower,

@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolARealmReborn from "../pool/a-realm-reborn.js";
 import _poolAangAirNomad from "../pool/aang-air-nomad.js";
 import _poolAbundantGrowth from "../pool/abundant-growth.js";
+import _poolAbundantMaw from "../pool/abundant-maw.js";
 import _poolAbzanFalconer from "../pool/abzan-falconer.js";
 import _poolAccursedDuneyard from "../pool/accursed-duneyard.js";
 import _poolAceFearlessRebel from "../pool/ace-fearless-rebel.js";
@@ -583,6 +584,7 @@ const shard: CardShard = {
     _poolARealmReborn,
     _poolAangAirNomad,
     _poolAbundantGrowth,
+    _poolAbundantMaw,
     _poolAbzanFalconer,
     _poolAccursedDuneyard,
     _poolAceFearlessRebel,

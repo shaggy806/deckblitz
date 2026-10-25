@@ -135,6 +135,7 @@ import _poolDeadlyRollick from "../pool/deadly-rollick.js";
 import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
+import _poolDecimatorOfTheProvinces from "../pool/decimator-of-the-provinces.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDepalaPilotExemplar from "../pool/depala-pilot-exemplar.js";
 import _poolDepravedHarvester from "../pool/depraved-harvester.js";
@@ -784,6 +785,7 @@ const shard: CardShard = {
     _poolDeadshotMinotaur,
     _poolDeathreapRitual,
     _poolDeathsPresence,
+    _poolDecimatorOfTheProvinces,
     _poolDelayedBlastFireball,
     _poolDepalaPilotExemplar,
     _poolDepravedHarvester,

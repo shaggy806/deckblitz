@@ -283,6 +283,7 @@ import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
 import _poolIronFistPulverizer from "../pool/iron-fist-pulverizer.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
+import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
 import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
@@ -882,6 +883,7 @@ const shard: CardShard = {
     _poolIronFistPulverizer,
     _poolIronManTonyStark,
     _poolIsochronScepter,
+    _poolItOfTheHorridSwarm,
     _poolIxallisKeeper,
     _poolJadeGuardian,
     _poolJadziStewardOfFate,
