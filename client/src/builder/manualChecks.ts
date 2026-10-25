@@ -8101,4 +8101,29 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Hill Giant'], human: true },
     }),
   ),
+  preset(
+    'Armadillo Cloak: a trampler blocked triggers once',
+    board({
+      you: { bf: ['Grizzly Bears', { name: 'Armadillo Cloak', attach: 'Grizzly Bears' }] },
+      opp: { bf: ['Grizzly Bears'], human: true },
+    }),
+  ),
+  preset(
+    'Relic Vial: your only Cleric dying still drains',
+    board({
+      you: { bf: ['Relic Vial', 'Abbey Matron', 'Plains*2'] },
+    }),
+  ),
+  preset(
+    'Dovin, Grand Arbiter: his +1 counts each creature that connects',
+    board({
+      you: { bf: [{ name: 'Dovin, Grand Arbiter', counters: { loyalty: 3 } }, 'Grizzly Bears', 'Savannah Lions'] },
+    }),
+  ),
+  preset(
+    'Lively Dirge: two creature cards with total mana value 4 or less',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Lively Dirge'], gy: ['Hill Giant', 'Grizzly Bears', 'Savannah Lions'] },
+    }),
+  ),
 ]

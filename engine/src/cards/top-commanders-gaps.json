@@ -408,7 +408,8 @@
   "trigger:deals-damage-once-per-event",
   "trigger:deals-combat-damage-once-per-event",
   "trigger:conditional-grant-look-back",
-  "effect:delayed-trigger-rest-of-turn"
+  "effect:delayed-trigger-rest-of-turn",
+  "effect:look-and-choose-total-mana-value"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

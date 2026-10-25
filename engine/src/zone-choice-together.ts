@@ -15,7 +15,9 @@
  * - `"total"`: the chosen cards' numbers — each card's one tag, its mana
  *   value — add up to `atLeast` or more: collect evidence N (rule 701.59a,
  *   "exile any number of cards from your graveyard with total mana value N
- *   or greater"). With `orNone`, choosing nothing passes too (a "you may").
+ *   or greater"); or to `atMost` or less — Lively Dirge's "up to two
+ *   creature cards with total mana value 4 or less". With `orNone`, choosing
+ *   nothing passes too (a "you may").
  * - `"distinct"`: no two chosen cards share a tag — Tiamat's "Dragon cards
  *   … that each have different names", a card's one tag its name.
  * - `"variety"`: the chosen cards' tags, all together, number `atLeast` or
@@ -43,6 +45,8 @@ export interface ZoneChoiceTogether {
   /** `"total"`: the sum the chosen cards' tags must reach; `"variety"`: how
    * many different tags they must have among them. */
   readonly atLeast?: number;
+  /** `"total"`: the sum the chosen cards' tags may not pass. */
+  readonly atMost?: number;
   /** `"total"`, `"variety"`: choosing no card at all is allowed too. */
   readonly orNone?: boolean;
 }
@@ -67,7 +71,8 @@ export function fitsTogether(together: ZoneChoiceTogether, chosen: readonly Obje
   const tagsOf = (id: ObjectId): readonly string[] => together.tags[id] ?? [];
   if (together.rule === "total") {
     if (chosen.length === 0) return together.orNone === true;
-    return totalOf(together, chosen) >= (together.atLeast ?? 0);
+    const total = totalOf(together, chosen);
+    return total >= (together.atLeast ?? 0) && (together.atMost === undefined || total <= together.atMost);
   }
   if (together.rule === "variety") {
     if (chosen.length === 0) return together.orNone === true;
@@ -119,6 +124,18 @@ export function completeTogether(
 ): ObjectId[] {
   // A sum to reach: the preferred cards first, then the rest in order, until
   // it is reached — nothing at all for a "you may" the chooser declined.
+  // A cap to stay under: the preferred cards that still fit, in order, then
+  // the rest, up to as many as were preferred.
+  if (together.rule === "total" && together.atMost !== undefined) {
+    const want = Math.min(max, Math.max(min, preferred.length));
+    const kept: ObjectId[] = [];
+    for (const id of [...preferred, ...eligible]) {
+      if (kept.length >= want) break;
+      if (kept.includes(id) || !eligible.includes(id)) continue;
+      if (fitsTogether(together, [...kept, id])) kept.push(id);
+    }
+    return kept;
+  }
   if (together.rule === "total" || together.rule === "variety") {
     if (preferred.length === 0 && together.orNone === true) return [];
     const kept: ObjectId[] = [];

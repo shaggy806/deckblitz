@@ -300,6 +300,7 @@ import _poolLightningDiadem from "../pool/lightning-diadem.js";
 import _poolLightningRigCrew from "../pool/lightning-rig-crew.js";
 import _poolLilianasScrounger from "../pool/lilianas-scrounger.js";
 import _poolLingeringPhantom from "../pool/lingering-phantom.js";
+import _poolLivelyDirge from "../pool/lively-dirge.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
 import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
@@ -872,6 +873,7 @@ const shard: CardShard = {
     _poolLightningRigCrew,
     _poolLilianasScrounger,
     _poolLingeringPhantom,
+    _poolLivelyDirge,
     _poolLlanowarLoamspeaker,
     _poolLoranOfTheThirdPath,
     _poolLoreholdApprentice,

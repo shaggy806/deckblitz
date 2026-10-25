@@ -31310,6 +31310,8 @@ export class Game {
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
       readonly attachTo?: ObjectId | null;
+      readonly upTo?: boolean;
+      readonly totalManaValueAtMost?: number;
     } = {},
   ): boolean {
     const graveyards =
@@ -31336,7 +31338,23 @@ export class Game {
     );
     if (eligible.length === 0) return false;
     const enterAs = destination === "battlefield" ? opts.enterAs : undefined;
-    if (count === "all" || eligible.length <= count) {
+    // "Up to N … with total mana value M or less": always the player's
+    // choice, the set checked as a whole (`zone-choice-together.ts`).
+    const cap = opts.totalManaValueAtMost;
+    const together: ZoneChoiceTogether | undefined =
+      cap === undefined
+        ? undefined
+        : {
+            rule: "total",
+            tags: Object.fromEntries(
+              eligible.map((id) => [id, [String(manaValueOfObject(this.registry, this.state.objects[id]))]]),
+            ),
+            atMost: cap,
+            orNone: true,
+            text: `with total mana value ${cap} or less`,
+          };
+    const asked = opts.upTo === true || together !== undefined;
+    if (count === "all" || (!asked && eligible.length <= count)) {
       // Their "as this enters" choices first (rule 614.12), one at a time:
       // nothing moves until they are all made, and this runs again with each.
       if (destination === "battlefield" && eligible.some((id) => this.askEnterChoice(id, player))) {
@@ -31381,10 +31399,11 @@ export class Game {
       player,
       ids: eligible,
       eligible,
-      min: count,
-      max: count,
+      min: opts.upTo === true ? 0 : Math.min(count, eligible.length),
+      max: Math.min(count, eligible.length),
       destination,
       leftover: "stay",
+      ...(together !== undefined ? { together } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       ...(withCounters !== undefined && destination === "battlefield"
         ? { enterWithCounters: withCounters }

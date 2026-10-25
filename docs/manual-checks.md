@@ -5278,3 +5278,21 @@ engine terms. A second thing to check is a second test.
 ### Oathsworn Knight: blocked by two creatures, loses one counter
 - **Do:** Attack with Oathsworn Knight. As Bob, block it with both Grizzly Bears and Hill Giant.
 - **Expect:** All the blockers' damage is prevented and the Knight goes from four +1/+1 counters to three — not two.
+
+## Engine rules gaps closed (2026-10-25)
+
+### Armadillo Cloak: a trampler blocked triggers once
+- **Do:** Attack with the cloaked Grizzly Bears. As Bob, block it with his Grizzly Bears.
+- **Expect:** One Armadillo Cloak trigger goes on the stack, and you gain 4 life — 2 for the blocker and 2 for Bob together, not two triggers of 2.
+
+### Relic Vial: your only Cleric dying still drains
+- **Do:** Activate Relic Vial, sacrificing Abbey Matron.
+- **Expect:** You draw a card, and Relic Vial's trigger makes Bob lose 1 life and you gain 1, though you have no Cleric left.
+
+### Dovin, Grand Arbiter: his +1 counts each creature that connects
+- **Do:** Activate Dovin's +1. Attack Bob with both creatures; Bob doesn't block.
+- **Expect:** Dovin goes from 3 to 4 loyalty, then gets one more loyalty counter for each creature that dealt Bob damage — 6.
+
+### Lively Dirge: two creature cards with total mana value 4 or less
+- **Do:** Cast Lively Dirge choosing only its second mode ({2}). Pick Hill Giant and Grizzly Bears.
+- **Expect:** The prompt reads "up to 2 cards with total mana value 4 or less", and Hill Giant with Grizzly Bears (6 together) can't be confirmed. Grizzly Bears with Savannah Lions can.

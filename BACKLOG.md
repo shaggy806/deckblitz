@@ -239,7 +239,6 @@ there and move this line to `COMPLETED.md`.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
-- **A set rule on a graveyard choice** (Lively Dirge's total mana value 4 or less).
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
 - **Not modeled**: battles, dungeons/Initiative, banding, Companion, snow sources, word-replacing text change (612.2).

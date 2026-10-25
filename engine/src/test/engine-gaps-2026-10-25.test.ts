@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import { matchesFilter } from "../filter.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
+import { fitsTogether } from "../zone-choice-together.js";
 import {
   A,
   B,
@@ -22,6 +23,7 @@ import {
   counters,
   pt,
   nextTurn,
+  pickFromZone,
   pickModes,
   pickTargets,
   registryOf,
@@ -29,6 +31,7 @@ import {
   settle,
   spawn,
   table,
+  toGraveyard,
   toHand,
   tokensNamed,
   zone,
@@ -194,5 +197,42 @@ describe("\"until end of turn, whenever …\" is a delayed trigger (rule 603.7c)
     b.declareBlockersFn = () => [{ blocker: bears, attacker: giant }];
     game.advanceUntil((s) => s.turn.step === "declare-blockers" && s.zones.shared.stack.length === 0 && s.pendingTriggers.length === 0 && s.awaiting === null);
     expect(pt(game, bears)).toEqual({ power: 2, toughness: 3 });
+  });
+});
+
+describe("a graveyard choice with a set rule: total mana value N or less", () => {
+  it("Lively Dirge: up to two creature cards whose mana values add up to 4 or less", () => {
+    const { game, a } = table();
+    const giant = toGraveyard(game, "Hill Giant");
+    const bears = toGraveyard(game, "Grizzly Bears");
+    const lions = toGraveyard(game, "Savannah Lions");
+    lands(game, "Swamp", 4);
+    const seen = pickFromZone(a, bears, lions);
+    cast(game, toHand(game, "Lively Dirge"), { modes: [1] });
+    expect(seen.offered).toEqual(expect.arrayContaining([giant, bears, lions]));
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(zone(game, lions)).toBe("battlefield");
+    expect(zone(game, giant)).toBe("graveyard");
+  });
+
+  it("Lively Dirge: two cards over the total aren't a legal answer", () => {
+    const { game, a } = table();
+    const giant = toGraveyard(game, "Hill Giant");
+    const bears = toGraveyard(game, "Grizzly Bears");
+    lands(game, "Swamp", 4);
+    let fits: ((chosen: readonly ObjectId[]) => boolean) | undefined;
+    a.chooseFromZoneFn = () => {
+      const awaiting = game.state.awaiting;
+      const together = awaiting?.kind === "choose-from-zone" ? awaiting.together : undefined;
+      if (together !== undefined) fits = (chosen) => fitsTogether(together, chosen);
+      return [giant];
+    };
+    cast(game, toHand(game, "Lively Dirge"), { modes: [1] });
+    // Both together are 6.
+    expect(fits?.([giant, bears])).toBe(false);
+    expect(fits?.([giant])).toBe(true);
+    expect(fits?.([])).toBe(true);
+    expect(zone(game, giant)).toBe("battlefield");
+    expect(zone(game, bears)).toBe("graveyard");
   });
 });

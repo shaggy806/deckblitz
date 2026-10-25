@@ -2374,6 +2374,13 @@ export type EffectSpec =
       readonly filter: CardFilter;
       readonly destination: "battlefield" | "hand";
       readonly count: number | "all";
+      /** "Return **up to** `count`": fewer may be chosen, so it's always
+       * asked. */
+      readonly upTo?: boolean;
+      /** "…with **total mana value N or less**" (Lively Dirge): the chosen
+       * cards' mana values may add up to no more than this, so it's always
+       * asked. */
+      readonly totalManaValueAtMost?: number;
       /** Battlefield-bound cards enter tapped (Splendid Reclamation). */
       readonly enterTapped?: boolean;
       /** …"with a finality counter on it" (Shilgengar, Sire of Famine) —
@@ -6277,6 +6284,9 @@ export interface EffectApi {
       readonly enterAs?: EnterTypes;
       /** See the spec's `attachedTo`; `null` for nothing there. */
       readonly attachTo?: ObjectId | null;
+      /** See the spec's `upTo` and `totalManaValueAtMost`. */
+      readonly upTo?: boolean;
+      readonly totalManaValueAtMost?: number;
     },
   ): boolean;
   /** `target` (a player) discards `amount` cards. */
@@ -9393,6 +9403,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.from === "hand-or-graveyard" ? { handToo: true } : {}),
           ...(spec.enterAs !== undefined ? { enterAs: spec.enterAs } : {}),
           ...(spec.attachedTo !== undefined ? { attachTo: attachHost(spec.attachedTo, ctx) } : {}),
+          ...(spec.upTo === true ? { upTo: true } : {}),
+          ...(spec.totalManaValueAtMost !== undefined ? { totalManaValueAtMost: spec.totalManaValueAtMost } : {}),
         },
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);

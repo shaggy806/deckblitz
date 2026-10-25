@@ -38,9 +38,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   delayed trigger lasting the turn, keyed on a target player (Great Train Heist's third mode),
   and "if it's your combat phase" as a condition (its first). `DelayedCombatDamage` watches one
   creature only.
-- **A set rule on a graveyard choice**: "up to two creature cards with total mana value 4 or
-  less" (Lively Dirge's second mode). `together` exists only on a library search
-  (`zone-choice-together.ts` takes a new rule cheaply, and the clients already read it).
 - **Delve and convoke together on an {X} spell.** `xCost.maxX` is the better of the two alone
   (`xPlanFor`), so Chord of Calling under Teval, Arbiter of Virtue can't reach the X both would
   pay together, and its offer's convoke proof and delve ranges are each worked out without the

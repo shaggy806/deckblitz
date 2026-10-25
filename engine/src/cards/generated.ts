@@ -9166,6 +9166,7 @@ import _poolLittleBear from "./pool/little-bear.js";
 import _poolLiturgyOfBlood from "./pool/liturgy-of-blood.js";
 import _poolLivaanCultistOfTiamat from "./pool/livaan-cultist-of-tiamat.js";
 import _poolLiveOrDie from "./pool/live-or-die.js";
+import _poolLivelyDirge from "./pool/lively-dirge.js";
 import _poolLivingAirship from "./pool/living-airship.js";
 import _poolLivingArmor from "./pool/living-armor.js";
 import _poolLivingArtifact from "./pool/living-artifact.js";
@@ -28207,6 +28208,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLiturgyOfBlood,
   _poolLivaanCultistOfTiamat,
   _poolLiveOrDie,
+  _poolLivelyDirge,
   _poolLivingAirship,
   _poolLivingArmor,
   _poolLivingArtifact,
@@ -47261,6 +47263,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/liturgy-of-blood": _poolLiturgyOfBlood,
   "pool/livaan-cultist-of-tiamat": _poolLivaanCultistOfTiamat,
   "pool/live-or-die": _poolLiveOrDie,
+  "pool/lively-dirge": _poolLivelyDirge,
   "pool/living-airship": _poolLivingAirship,
   "pool/living-armor": _poolLivingArmor,
   "pool/living-artifact": _poolLivingArtifact,
