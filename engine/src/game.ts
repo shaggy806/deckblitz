@@ -8984,7 +8984,7 @@ export class Game {
           options: tributeOptions(next.amount),
           catalog: false,
           tribute: "pay",
-          prompt: `Tribute ${next.amount}: pay it, or let its "if tribute wasn't paid" ability happen`,
+          prompt: `Tribute ${next.amount}: you may put ${next.amount} +1/+1 counter${next.amount === 1 ? "" : "s"} on it`,
         };
         return true;
       }
