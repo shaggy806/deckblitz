@@ -5035,6 +5035,7 @@ import _poolEgoDrain from "./pool/ego-drain.js";
 import _poolEgonGodOfDeath from "./pool/egon-god-of-death.js";
 import _poolEidolonOfAstralWinds from "./pool/eidolon-of-astral-winds.js";
 import _poolEidolonOfBlossoms from "./pool/eidolon-of-blossoms.js";
+import _poolEidolonOfCountlessBattles from "./pool/eidolon-of-countless-battles.js";
 import _poolEidolonOfInspiration from "./pool/eidolon-of-inspiration.js";
 import _poolEidolonOfPhilosophy from "./pool/eidolon-of-philosophy.js";
 import _poolEidolonOfTheGreatRevel from "./pool/eidolon-of-the-great-revel.js";
@@ -7017,6 +7018,7 @@ import _poolGluttonousGuest from "./pool/gluttonous-guest.js";
 import _poolGluttonousSlug from "./pool/gluttonous-slug.js";
 import _poolGluttonousTroll from "./pool/gluttonous-troll.js";
 import _poolGluttonousZombie from "./pool/gluttonous-zombie.js";
+import _poolGlyphElemental from "./pool/glyph-elemental.js";
 import _poolGnarlbackRhino from "./pool/gnarlback-rhino.js";
 import _poolGnarledGrovestrider from "./pool/gnarled-grovestrider.js";
 import _poolGnarledMass from "./pool/gnarled-mass.js";
@@ -8541,6 +8543,7 @@ import _poolIncubatorDrone from "./pool/incubator-drone.js";
 import _poolIncurableOgre from "./pool/incurable-ogre.js";
 import _poolIndathaCrystal from "./pool/indatha-crystal.js";
 import _poolIndathaTriome from "./pool/indatha-triome.js";
+import _poolIndebtedSpirit from "./pool/indebted-spirit.js";
 import _poolIndependentTroops from "./pool/independent-troops.js";
 import _poolIndestructibility from "./pool/indestructibility.js";
 import _poolIndestructibleAura from "./pool/indestructible-aura.js";
@@ -9299,6 +9302,7 @@ import _poolKessigRecluse from "./pool/kessig-recluse.js";
 import _poolKessigWolfRun from "./pool/kessig-wolf-run.js";
 import _poolKessigWolf from "./pool/kessig-wolf.js";
 import _poolKessigWolfrider from "./pool/kessig-wolfrider.js";
+import _poolKestiaTheCultivator from "./pool/kestia-the-cultivator.js";
 import _poolKethekCrucibleGoliath from "./pool/kethek-crucible-goliath.js";
 import _poolKetramoseTheNewDawn from "./pool/ketramose-the-new-dawn.js";
 import _poolKetriaCrystal from "./pool/ketria-crystal.js";
@@ -11598,6 +11602,7 @@ import _poolNighthawkDarkDefender from "./pool/nighthawk-dark-defender.js";
 import _poolNighthawkScavenger from "./pool/nighthawk-scavenger.js";
 import _poolNighthaze from "./pool/nighthaze.js";
 import _poolNighthowlPursuer from "./pool/nighthowl-pursuer.js";
+import _poolNighthowler from "./pool/nighthowler.js";
 import _poolNightmareShepherd from "./pool/nightmare-shepherd.js";
 import _poolNightmareSower from "./pool/nightmare-sower.js";
 import _poolNightmareUnmaking from "./pool/nightmare-unmaking.js";
@@ -11779,8 +11784,10 @@ import _poolNyxbornBehemoth from "./pool/nyxborn-behemoth.js";
 import _poolNyxbornBrute from "./pool/nyxborn-brute.js";
 import _poolNyxbornColossus from "./pool/nyxborn-colossus.js";
 import _poolNyxbornCourser from "./pool/nyxborn-courser.js";
+import _poolNyxbornHydra from "./pool/nyxborn-hydra.js";
 import _poolNyxbornMarauder from "./pool/nyxborn-marauder.js";
 import _poolNyxbornSeaguard from "./pool/nyxborn-seaguard.js";
+import _poolNyxbornUnicorn from "./pool/nyxborn-unicorn.js";
 import _poolOakenBoon from "./pool/oaken-boon.js";
 import _poolOakenSiren from "./pool/oaken-siren.js";
 import _poolOakenform from "./pool/oakenform.js";
@@ -16137,6 +16144,7 @@ import _poolSpringOfEternalPeace from "./pool/spring-of-eternal-peace.js";
 import _poolSpringSplasher from "./pool/spring-splasher.js";
 import _poolSpring from "./pool/spring.js";
 import _poolSpringbloomDruid from "./pool/springbloom-druid.js";
+import _poolSpringheartNantuko from "./pool/springheart-nantuko.js";
 import _poolSpringjawTrap from "./pool/springjaw-trap.js";
 import _poolSpringleafDrum from "./pool/springleaf-drum.js";
 import _poolSpringleafParade from "./pool/springleaf-parade.js";
@@ -18117,6 +18125,7 @@ import _poolTriskelion from "./pool/triskelion.js";
 import _poolTritonCavalry from "./pool/triton-cavalry.js";
 import _poolTritonShorestalker from "./pool/triton-shorestalker.js";
 import _poolTritonShorethief from "./pool/triton-shorethief.js";
+import _poolTritonWavebreaker from "./pool/triton-wavebreaker.js";
 import _poolTritonWaverider from "./pool/triton-waverider.js";
 import _poolTriumphOfGerrard from "./pool/triumph-of-gerrard.js";
 import _poolTriumphOfTheHordes from "./pool/triumph-of-the-hordes.js";
@@ -25662,6 +25671,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEgonGodOfDeath,
   _poolEidolonOfAstralWinds,
   _poolEidolonOfBlossoms,
+  _poolEidolonOfCountlessBattles,
   _poolEidolonOfInspiration,
   _poolEidolonOfPhilosophy,
   _poolEidolonOfTheGreatRevel,
@@ -27644,6 +27654,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGluttonousSlug,
   _poolGluttonousTroll,
   _poolGluttonousZombie,
+  _poolGlyphElemental,
   _poolGnarlbackRhino,
   _poolGnarledGrovestrider,
   _poolGnarledMass,
@@ -29168,6 +29179,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIncurableOgre,
   _poolIndathaCrystal,
   _poolIndathaTriome,
+  _poolIndebtedSpirit,
   _poolIndependentTroops,
   _poolIndestructibility,
   _poolIndestructibleAura,
@@ -29926,6 +29938,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKessigWolfRun,
   _poolKessigWolf,
   _poolKessigWolfrider,
+  _poolKestiaTheCultivator,
   _poolKethekCrucibleGoliath,
   _poolKetramoseTheNewDawn,
   _poolKetriaCrystal,
@@ -32225,6 +32238,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNighthawkScavenger,
   _poolNighthaze,
   _poolNighthowlPursuer,
+  _poolNighthowler,
   _poolNightmareShepherd,
   _poolNightmareSower,
   _poolNightmareUnmaking,
@@ -32406,8 +32420,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNyxbornBrute,
   _poolNyxbornColossus,
   _poolNyxbornCourser,
+  _poolNyxbornHydra,
   _poolNyxbornMarauder,
   _poolNyxbornSeaguard,
+  _poolNyxbornUnicorn,
   _poolOakenBoon,
   _poolOakenSiren,
   _poolOakenform,
@@ -36764,6 +36780,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpringSplasher,
   _poolSpring,
   _poolSpringbloomDruid,
+  _poolSpringheartNantuko,
   _poolSpringjawTrap,
   _poolSpringleafDrum,
   _poolSpringleafParade,
@@ -38744,6 +38761,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTritonCavalry,
   _poolTritonShorestalker,
   _poolTritonShorethief,
+  _poolTritonWavebreaker,
   _poolTritonWaverider,
   _poolTriumphOfGerrard,
   _poolTriumphOfTheHordes,
@@ -46302,6 +46320,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/egon-god-of-death": _poolEgonGodOfDeath,
   "pool/eidolon-of-astral-winds": _poolEidolonOfAstralWinds,
   "pool/eidolon-of-blossoms": _poolEidolonOfBlossoms,
+  "pool/eidolon-of-countless-battles": _poolEidolonOfCountlessBattles,
   "pool/eidolon-of-inspiration": _poolEidolonOfInspiration,
   "pool/eidolon-of-philosophy": _poolEidolonOfPhilosophy,
   "pool/eidolon-of-the-great-revel": _poolEidolonOfTheGreatRevel,
@@ -48284,6 +48303,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gluttonous-slug": _poolGluttonousSlug,
   "pool/gluttonous-troll": _poolGluttonousTroll,
   "pool/gluttonous-zombie": _poolGluttonousZombie,
+  "pool/glyph-elemental": _poolGlyphElemental,
   "pool/gnarlback-rhino": _poolGnarlbackRhino,
   "pool/gnarled-grovestrider": _poolGnarledGrovestrider,
   "pool/gnarled-mass": _poolGnarledMass,
@@ -49808,6 +49828,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/incurable-ogre": _poolIncurableOgre,
   "pool/indatha-crystal": _poolIndathaCrystal,
   "pool/indatha-triome": _poolIndathaTriome,
+  "pool/indebted-spirit": _poolIndebtedSpirit,
   "pool/independent-troops": _poolIndependentTroops,
   "pool/indestructibility": _poolIndestructibility,
   "pool/indestructible-aura": _poolIndestructibleAura,
@@ -50566,6 +50587,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kessig-wolf-run": _poolKessigWolfRun,
   "pool/kessig-wolf": _poolKessigWolf,
   "pool/kessig-wolfrider": _poolKessigWolfrider,
+  "pool/kestia-the-cultivator": _poolKestiaTheCultivator,
   "pool/kethek-crucible-goliath": _poolKethekCrucibleGoliath,
   "pool/ketramose-the-new-dawn": _poolKetramoseTheNewDawn,
   "pool/ketria-crystal": _poolKetriaCrystal,
@@ -52865,6 +52887,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nighthawk-scavenger": _poolNighthawkScavenger,
   "pool/nighthaze": _poolNighthaze,
   "pool/nighthowl-pursuer": _poolNighthowlPursuer,
+  "pool/nighthowler": _poolNighthowler,
   "pool/nightmare-shepherd": _poolNightmareShepherd,
   "pool/nightmare-sower": _poolNightmareSower,
   "pool/nightmare-unmaking": _poolNightmareUnmaking,
@@ -53046,8 +53069,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nyxborn-brute": _poolNyxbornBrute,
   "pool/nyxborn-colossus": _poolNyxbornColossus,
   "pool/nyxborn-courser": _poolNyxbornCourser,
+  "pool/nyxborn-hydra": _poolNyxbornHydra,
   "pool/nyxborn-marauder": _poolNyxbornMarauder,
   "pool/nyxborn-seaguard": _poolNyxbornSeaguard,
+  "pool/nyxborn-unicorn": _poolNyxbornUnicorn,
   "pool/oaken-boon": _poolOakenBoon,
   "pool/oaken-siren": _poolOakenSiren,
   "pool/oakenform": _poolOakenform,
@@ -57404,6 +57429,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spring-splasher": _poolSpringSplasher,
   "pool/spring": _poolSpring,
   "pool/springbloom-druid": _poolSpringbloomDruid,
+  "pool/springheart-nantuko": _poolSpringheartNantuko,
   "pool/springjaw-trap": _poolSpringjawTrap,
   "pool/springleaf-drum": _poolSpringleafDrum,
   "pool/springleaf-parade": _poolSpringleafParade,
@@ -59384,6 +59410,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/triton-cavalry": _poolTritonCavalry,
   "pool/triton-shorestalker": _poolTritonShorestalker,
   "pool/triton-shorethief": _poolTritonShorethief,
+  "pool/triton-wavebreaker": _poolTritonWavebreaker,
   "pool/triton-waverider": _poolTritonWaverider,
   "pool/triumph-of-gerrard": _poolTriumphOfGerrard,
   "pool/triumph-of-the-hordes": _poolTriumphOfTheHordes,

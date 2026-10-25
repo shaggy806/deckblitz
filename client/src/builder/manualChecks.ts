@@ -8229,4 +8229,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Gray Ogre'] },
     }),
   ),
+  preset(
+    "Gnarled Scarhide: bestowed, it's an Aura, and a creature again once the host dies",
+    board({ you: { bf: ['Swamp*7', 'Grizzly Bears'], hand: ['Gnarled Scarhide', 'Murder'] } }),
+  ),
 ]

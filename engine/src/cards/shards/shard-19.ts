@@ -401,6 +401,7 @@ import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
+import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
@@ -1063,6 +1064,7 @@ const shard: CardShard = {
     _poolNimbleTrapfinder,
     _poolNissaResurgentAnimist,
     _poolNorwoodWarrior,
+    _poolNyxbornHydra,
     _poolOathOfChandra,
     _poolOgreBerserker,
     _poolOgreSiegebreaker,

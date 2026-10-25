@@ -411,6 +411,7 @@ import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
+import _poolNyxbornUnicorn from "../pool/nyxborn-unicorn.js";
 import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
@@ -1081,6 +1082,7 @@ const shard: CardShard = {
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
+    _poolNyxbornUnicorn,
     _poolOathOfJace,
     _poolObscuraInterceptor,
     _poolOccultEpiphany,

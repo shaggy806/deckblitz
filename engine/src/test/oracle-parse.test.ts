@@ -612,6 +612,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(bestower.bestow).toBe("{3}{B}");
     expect(bestower.complete).toBe(true);
+    // Its afterlife triggers as an Aura too: "put into a graveyard from the
+    // battlefield" (rule 702.135a), not "dies" (Indebted Spirit).
+    const spirit = face(
+      "Bestow {2}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nAfterlife 1 (When this permanent is put into a graveyard from the battlefield, create a 1/1 white and black Spirit creature token with flying.)",
+    );
+    expect(spirit.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "self", to: ["graveyard"] });
     // Dash (rule 702.109a).
     const dasher = face(
       "Dash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)",

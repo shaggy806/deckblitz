@@ -2522,6 +2522,16 @@ export function parseFace(face, ctx = {}) {
   };
   out.activated.forEach((a, i) => nameThisAbility(a.effect, { activated: i }));
   out.triggered.forEach((a, i) => nameThisAbility(a.effect, { triggered: i }));
+  // A card with bestow can be an Aura: its own "dies" leave-triggers read as
+  // their rules do, "put into a graveyard from the battlefield" (afterlife,
+  // rule 702.135a), so they trigger as an Aura too (Indebted Spirit).
+  if (out.bestow !== undefined) {
+    for (const a of out.triggered) {
+      if (a.trigger?.on === "dies" && a.trigger.who === "self" && /^Afterlife \d+/.test(a.text ?? "")) {
+        a.trigger = { on: "leaves-battlefield", who: "self", to: ["graveyard"] };
+      }
+    }
+  }
   return out;
 }
 

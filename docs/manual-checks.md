@@ -5373,3 +5373,9 @@ engine terms. A second thing to check is a second test.
 ### Spinning Wheel Kick: X counts only the creatures it hits
 - **Do:** Cast Spinning Wheel Kick with X=2. Pick your Hill Giant, then Bob's Grizzly Bears and Gray Ogre.
 - **Expect:** After the Hill Giant both of Bob's creatures can be picked. With one picked, Done stays greyed out; picking the second casts the spell. Hill Giant deals 3 damage to each, and both die.
+
+## Bestow (2026-10-25)
+
+### Gnarled Scarhide: bestowed, it's an Aura, and a creature again once the host dies
+- **Do:** Cast Gnarled Scarhide the "(bestow)" way onto your Grizzly Bears. Then cast Murder on the Bears.
+- **Expect:** The Scarhide sits on the Bears as an Aura (they're 4/3 and can't block). When the Bears die, the Scarhide stays on the battlefield as a 2/1 creature, not in the graveyard.

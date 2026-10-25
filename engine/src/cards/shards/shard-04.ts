@@ -201,6 +201,7 @@ import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
 import _poolGlacialCrasher from "../pool/glacial-crasher.js";
 import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
+import _poolGlyphElemental from "../pool/glyph-elemental.js";
 import _poolGoForBlood from "../pool/go-for-blood.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
 import _poolGoblinDeathraiders from "../pool/goblin-deathraiders.js";
@@ -492,6 +493,7 @@ import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
+import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
 import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
 import _poolSqueesToy from "../pool/squees-toy.js";
@@ -832,6 +834,7 @@ const shard: CardShard = {
     _poolGlacialCrasher,
     _poolGlassOfTheGuildpact,
     _poolGlenElendraArchmage,
+    _poolGlyphElemental,
     _poolGoForBlood,
     _poolGoblinAnarchomancer,
     _poolGoblinDeathraiders,
@@ -1123,6 +1126,7 @@ const shard: CardShard = {
     _poolSpiritOfTheAldergard,
     _poolSpitFlame,
     _poolSplatterTechnique,
+    _poolSpringheartNantuko,
     _poolSpringleafDrum,
     _poolSproutingThrinax,
     _poolSqueesToy,

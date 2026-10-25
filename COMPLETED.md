@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Journey into Nyx, the rest of the set** (batch 161, the newest-first walk, 2026-10-25):
+  **bestow** built (rule 702.103 — `bestow` on the card, an `overload` variant labelled "bestow";
+  `GameObject.bestowed` and `bestowedDefinition`, the scaffolder's "Bestow {cost}"). 84 of the
+  set's 103 authored by five `card-author` agents and the lead — Eidolon of the Great Revel,
+  Launch the Fleet, Pharika, God of Affliction, King Macar, the Gold-Cursed, Hypnotic Siren,
+  Spawn of Thraxes and 78 more — and nine older bestow cards a sixth agent took (Nyxborn Hydra,
+  Eidolon of Countless Battles, Nighthowler, Springheart Nantuko, Kestia, the Cultivator and four
+  more); 21 blocked, none on any one feature but "all Auras attached to it" (2).
 - **Rise of the Eldrazi, whole** (batch 159, the middle walk, 2026-10-25): level up and umbra armor
   built (`levelUp`/`levelBand`/`levelStatic`, the `umbra-armor` keyword, both taught to the
   scaffolder). 102 authored by five `card-author` agents and the lead — Vengevine, Student of

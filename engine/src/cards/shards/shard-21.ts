@@ -155,6 +155,7 @@ import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
 import _poolEgonGodOfDeath from "../pool/egon-god-of-death.js";
+import _poolEidolonOfCountlessBattles from "../pool/eidolon-of-countless-battles.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElspethsNightmare from "../pool/elspeths-nightmare.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
@@ -777,6 +778,7 @@ const shard: CardShard = {
     _poolEclipsedFlamekin,
     _poolEfflorescence,
     _poolEgonGodOfDeath,
+    _poolEidolonOfCountlessBattles,
     _poolElanorGardner,
     _poolElspethsNightmare,
     _poolElvenFarsight,
