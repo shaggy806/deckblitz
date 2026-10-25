@@ -516,6 +516,7 @@ import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
+import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
     _poolTarnationVista,
+    _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTerastodon,
     _poolTerraHeraldOfHope,

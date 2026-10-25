@@ -454,6 +454,7 @@ import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
+import _poolSeedsOfInnocence from "../pool/seeds-of-innocence.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
@@ -1090,6 +1091,7 @@ const shard: CardShard = {
     _poolScorchmark,
     _poolSeafloorOracle,
     _poolSeedguideAsh,
+    _poolSeedsOfInnocence,
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
     _poolSelfDestruct,

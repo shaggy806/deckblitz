@@ -202,6 +202,7 @@ import _poolForebearsBlade from "../pool/forebears-blade.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolForsakenMiner from "../pool/forsaken-miner.js";
+import _poolForsakenWastes from "../pool/forsaken-wastes.js";
 import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
 import _poolFourthBridgeProwler from "../pool/fourth-bridge-prowler.js";
 import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
@@ -868,6 +869,7 @@ const shard: CardShard = {
     _poolForebodingLandscape,
     _poolForgottenAncient,
     _poolForsakenMiner,
+    _poolForsakenWastes,
     _poolForumNecroscribe,
     _poolFourthBridgeProwler,
     _poolFranticFirebolt,

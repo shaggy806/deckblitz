@@ -467,6 +467,7 @@ import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
 import _poolShatterskullMinotaur from "../pool/shatterskull-minotaur.js";
+import _poolShaukuEndbringer from "../pool/shauku-endbringer.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
@@ -490,6 +491,7 @@ import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSolitude from "../pool/solitude.js";
 import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulherder from "../pool/soulherder.js";
+import _poolSoulshriek from "../pool/soulshriek.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
 import _poolSparkmagesGambit from "../pool/sparkmages-gambit.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
@@ -1123,6 +1125,7 @@ const shard: CardShard = {
     _poolSewerVeillanceCam,
     _poolSharpshooterElf,
     _poolShatterskullMinotaur,
+    _poolShaukuEndbringer,
     _poolShiftingSliver,
     _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,
@@ -1146,6 +1149,7 @@ const shard: CardShard = {
     _poolSolitude,
     _poolSongOfStupefaction,
     _poolSoulherder,
+    _poolSoulshriek,
     _poolSowerOfChaos,
     _poolSparkmagesGambit,
     _poolSpectacleSummit,

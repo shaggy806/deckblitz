@@ -108,8 +108,10 @@ section keeps only what to do next.
   upkeep; batch 160 Homelands whole, no feature built (33 blocked, "doesn't untap during your
   next untap step" leading with 3); batch 163 Alliances whole, on the `exileTop` cost (69 blocked,
   the lands' "if this would enter, sacrifice a … instead" — `replacement:enter-replacement-sacrifice`
-  — and banding leading with 4 each, an opponent choosing the mode with 3). **Next, Mirage** (220
-  left: two batches of ~110, five agents each), then Visions (113) and Weatherlight. This walk's range
+  — and banding leading with 4 each, an opponent choosing the mode with 3); batch 166 Mirage's
+  first half (its 110 most-played left), no feature built (70 authored, 40 blocked, nothing
+  shared by more than two). **Next, the rest of Mirage** (110 left: one batch, five agents),
+  then Visions (113) and Weatherlight. This walk's range
   ends at Shadowmoor/Eventide (the middle walk owns Shards of Alara on). Leads over the whole pool now:
   banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
   (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana

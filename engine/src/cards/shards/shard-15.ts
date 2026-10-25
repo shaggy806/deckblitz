@@ -83,6 +83,7 @@ import _poolCircleOfElders from "../pool/circle-of-elders.js";
 import _poolClaim from "../pool/claim.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
+import _poolCloakOfInvisibility from "../pool/cloak-of-invisibility.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
@@ -438,6 +439,7 @@ import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
+import _poolRootsOfLife from "../pool/roots-of-life.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
@@ -700,6 +702,7 @@ const shard: CardShard = {
     _poolClaim,
     _poolClearTheMind,
     _poolCliffsideLookout,
+    _poolCloakOfInvisibility,
     _poolCodieRavenousCodex,
     _poolCollectedCompany,
     _poolCollision,
@@ -1055,6 +1058,7 @@ const shard: CardShard = {
     _poolRiverBoa,
     _poolRockSoldiers,
     _poolRoilCartographer,
+    _poolRootsOfLife,
     _poolRuneboggle,
     _poolRuneforgeChampion,
     _poolRushOfAdrenaline,

@@ -560,6 +560,7 @@ import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUntamedPup from "../pool/untamed-pup.js";
 import _poolUntamedWilds from "../pool/untamed-wilds.js";
+import _poolUnyaroGriffin from "../pool/unyaro-griffin.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
@@ -572,6 +573,7 @@ import _poolVastwoodGorger from "../pool/vastwood-gorger.js";
 import _poolVastwoodSurge from "../pool/vastwood-surge.js";
 import _poolVerdantForce from "../pool/verdant-force.js";
 import _poolVeteranArmorer from "../pool/veteran-armorer.js";
+import _poolVigilantMartyr from "../pool/vigilant-martyr.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
 import _poolVineMare from "../pool/vine-mare.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
@@ -1198,6 +1200,7 @@ const shard: CardShard = {
     _poolUnrootedAncestor,
     _poolUntamedPup,
     _poolUntamedWilds,
+    _poolUnyaroGriffin,
     _poolUproot,
     _poolUrGolemsEye,
     _poolUrtetRemnantOfMemnarch,
@@ -1210,6 +1213,7 @@ const shard: CardShard = {
     _poolVastwoodSurge,
     _poolVerdantForce,
     _poolVeteranArmorer,
+    _poolVigilantMartyr,
     _poolVildinPackOutcast,
     _poolVineMare,
     _poolViridianClaw,
