@@ -14,6 +14,15 @@ doesn't author the children's cards itself.
 First used 2026-10-25 (batches B158–B160): newest-first from Magic 2015, a middle walk from
 Rise of the Eldrazi, oldest-first from Homelands.
 
+**Coordinate from a fresh session.** The children keep the authoring skills' token savings
+(one batch per session, lean agents, the digest), so tokens per card are about what a
+single-session batch costs; parallel buys wall-clock time. The coordinator is the one place
+that can waste tokens: every check-in turn re-reads its whole context. Run this skill in a
+new session (after `/clear`, or a new session once a batch has shipped), never in a session
+still holding a batch of its own, and don't take other work into it while the children run.
+B158–B160 were coordinated from the session that had just shipped B157, past 100K before the
+first check-in.
+
 ## The rules that make it safe
 
 - **Ranges never overlap.** Two branches walking the same sets is how five sets were authored
@@ -91,11 +100,14 @@ The environment is inherited from this session (its setup hook installs and buil
 A child that finishes cleanly **doesn't report back**. Arm one check-in with
 `mcp__claude-code-remote__send_later` about 50 minutes out (a batch takes 60–90 minutes:
 setup, scaffolding, 20–25 minutes of agents, integrating, `verify`, landing), naming every
-child's session id and batch. When it fires:
+child's session id and batch; re-arm 30 minutes apart after that. Never poll in between:
+each check-in is a turn over the coordinator's whole context. When it fires, read as little
+as answers the question:
 
 - `get_session` each: `status_bucket` `failed` means its last turn errored; `idle` with no
-  landed batch means it stopped early. `list_events` with `kinds: ["assistant", "result"]`
-  shows its last words.
+  landed batch means it stopped early. Only for a child that failed or stopped, its last
+  words: `list_events` with `kinds: ["assistant", "result"]` and `limit: 20`, never the
+  whole transcript.
 - `git fetch origin main && git log --oneline origin/main` shows which batches landed.
 - A stalled or failed child: read why, then `send_message` it a correction (it continues
   with its context), or tell the user what blocks it. Don't redo its batch here.
