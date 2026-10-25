@@ -1,0 +1,8 @@
+Run the `SKILL` skill (/SKILL) for one batch, as WALK. Your range is **RANGE**. This batch is BATCH_SETS. HOW_TO_PICK
+
+This is one of several card-authoring sessions running in parallel, each owning its own range of sets so none walks another's (BACKLOG.md's line for the author-by-set skill records the ranges). Stay strictly inside your range: if `cards:sets` offers a card from a set outside it, skip that card.
+
+- Your batch number is **BATCHNUM** (`engine/data/sweep-3/BATCHNUM.json`). Before landing, `git fetch origin main` and check no other walk took it; if one did, use the highest number on `origin/main` plus one and rename your record (and its references).
+- Landing: the other sessions land on `main` too. Push your session branch, then `git fetch origin main && git merge origin/main`. On a conflict in the generated card files (`engine/src/cards/generated*.ts`, `shards/`), take either side and re-run `npm run gen:cards -w engine`. In `BACKLOG.md`, `COMPLETED.md`, `docs/card-blockers.md`, `engine/data/needs-vocabulary.json` or `scripts/verify-state.json`, keep both sides' entries. If the merge brought anything in, re-run `npm run verify` before `git push origin HEAD:main`; if the push is rejected because `main` moved again, repeat the fetch, merge and check.
+- If the batch needs a new engine feature, first check `git log origin/main` for the same feature landing from another session; build it only if none did.
+- One batch, then stop: update your walk's hand-off in BACKLOG.md (the next sets in *your* range) and finish with a short report: cards authored and blocked, any feature built, and the commit on `main`.
