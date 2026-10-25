@@ -373,6 +373,7 @@ import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
 import _poolPyrohemia from "../pool/pyrohemia.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
 import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
+import _poolQuirionElves from "../pool/quirion-elves.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRalsDispersal from "../pool/rals-dispersal.js";
@@ -974,6 +975,7 @@ const shard: CardShard = {
     _poolPyrohemia,
     _poolQueenBrahne,
     _poolQuickbeamUpstartEnt,
+    _poolQuirionElves,
     _poolRagingRegisaur,
     _poolRaidersKarve,
     _poolRalsDispersal,

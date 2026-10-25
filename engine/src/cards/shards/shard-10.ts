@@ -13,6 +13,7 @@ import _poolAetherTheorist from "../pool/aether-theorist.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
+import _poolAleatory from "../pool/aleatory.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
@@ -682,6 +683,7 @@ const shard: CardShard = {
     _poolAgentPhilCoulson,
     _poolAhnCropChampion,
     _poolAjaniOutlandChaperone,
+    _poolAleatory,
     _poolAlpharaelStonechosen,
     _poolAlpineGuide,
     _poolAmazingSpiderGirl,

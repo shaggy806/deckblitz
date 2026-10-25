@@ -242,6 +242,7 @@ import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGraspOfTheHieromancer from "../pool/grasp-of-the-hieromancer.js";
 import _poolGraspingThrull from "../pool/grasping-thrull.js";
 import _poolGravebladeMarauder from "../pool/graveblade-marauder.js";
+import _poolGrimFeast from "../pool/grim-feast.js";
 import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
@@ -905,6 +906,7 @@ const shard: CardShard = {
     _poolGraspOfTheHieromancer,
     _poolGraspingThrull,
     _poolGravebladeMarauder,
+    _poolGrimFeast,
     _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,

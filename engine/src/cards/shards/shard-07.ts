@@ -542,6 +542,7 @@ import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
 import _poolTabletOfCompleation from "../pool/tablet-of-compleation.js";
 import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
 import _poolTamiyosImmobilizer from "../pool/tamiyos-immobilizer.js";
+import _poolTaniwha from "../pool/taniwha.js";
 import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
@@ -1214,6 +1215,7 @@ const shard: CardShard = {
     _poolTabletOfCompleation,
     _poolTalismanOfDominance,
     _poolTamiyosImmobilizer,
+    _poolTaniwha,
     _poolTatteredHaunter,
     _poolTchallaTheBlackPanther,
     _poolTempestHarvester,

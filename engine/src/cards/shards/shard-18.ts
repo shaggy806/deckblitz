@@ -42,6 +42,7 @@ import _poolBedevil from "../pool/bedevil.js";
 import _poolBehindTheMask from "../pool/behind-the-mask.js";
 import _poolBelonging from "../pool/belonging.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
+import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
@@ -690,6 +691,7 @@ const shard: CardShard = {
     _poolBehindTheMask,
     _poolBelonging,
     _poolBighornerRancher,
+    _poolBindingAgony,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
     _poolBlindingMage,

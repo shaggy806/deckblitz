@@ -10,6 +10,7 @@ import _poolAetherHub from "../pool/aether-hub.js";
 import _poolAetherSwooper from "../pool/aether-swooper.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
+import _poolAfterlife from "../pool/afterlife.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAkoumFirebird from "../pool/akoum-firebird.js";
 import _poolAlchemistsVial from "../pool/alchemists-vial.js";
@@ -675,6 +676,7 @@ const shard: CardShard = {
     _poolAetherSwooper,
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
+    _poolAfterlife,
     _poolAkkiRockspeaker,
     _poolAkoumFirebird,
     _poolAlchemistsVial,

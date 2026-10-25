@@ -79,6 +79,7 @@ import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
+import _poolBuildersBane from "../pool/builders-bane.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolBurnTogether from "../pool/burn-together.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
@@ -719,6 +720,7 @@ const shard: CardShard = {
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
+    _poolBuildersBane,
     _poolBulwarkOx,
     _poolBurnTogether,
     _poolByrkeLongEarOfTheLaw,

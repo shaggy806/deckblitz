@@ -240,6 +240,7 @@ import _poolGwaihirTheWindlord from "../pool/gwaihir-the-windlord.js";
 import _poolGyreSage from "../pool/gyre-sage.js";
 import _poolHallOfStormGiants from "../pool/hall-of-storm-giants.js";
 import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
+import _poolHarbingerOfNight from "../pool/harbinger-of-night.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
@@ -581,6 +582,7 @@ import _poolTwofoldIntent from "../pool/twofold-intent.js";
 import _poolTyLeeChiBlocker from "../pool/ty-lee-chi-blocker.js";
 import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.js";
 import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
+import _poolUktabiWildcats from "../pool/uktabi-wildcats.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
@@ -893,6 +895,7 @@ const shard: CardShard = {
     _poolGyreSage,
     _poolHallOfStormGiants,
     _poolHannaShipsNavigator,
+    _poolHarbingerOfNight,
     _poolHarmonizedCrescendo,
     _poolHaughtyDjinn,
     _poolHeadlessSpecter,
@@ -1234,6 +1237,7 @@ const shard: CardShard = {
     _poolTyLeeChiBlocker,
     _poolUchbenbakTheGreatMistake,
     _poolUglukOfTheWhiteHand,
+    _poolUktabiWildcats,
     _poolUltramarinesHonourGuard,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,

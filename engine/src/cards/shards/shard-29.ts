@@ -232,6 +232,7 @@ import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
+import _poolGoblinScouts from "../pool/goblin-scouts.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolGnottvoldSlumbermound,
     _poolGoblinArsonist,
     _poolGoblinOffensive,
+    _poolGoblinScouts,
     _poolGodPharaohsStatue,
     _poolGravelgillScoundrel,
     _poolGraveshifter,

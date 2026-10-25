@@ -214,6 +214,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Gnome Token",
   "Goat Token",
   "Goblin Construct Token",
+  "Goblin Scout Token",
   "Goblin Shaman Token",
   "Goblin Token",
   "Goblin Token (Boggart Mischief)",

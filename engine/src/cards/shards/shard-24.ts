@@ -15,6 +15,7 @@ import _poolAgentOfStromgald from "../pool/agent-of-stromgald.js";
 import _poolAgentOfTreachery from "../pool/agent-of-treachery.js";
 import _poolAggressiveMammoth from "../pool/aggressive-mammoth.js";
 import _poolAggressiveUrge from "../pool/aggressive-urge.js";
+import _poolAgility from "../pool/agility.js";
 import _poolAgoraphobia from "../pool/agoraphobia.js";
 import _poolAirbendingLesson from "../pool/airbending-lesson.js";
 import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
@@ -652,6 +653,7 @@ const shard: CardShard = {
     _poolAgentOfTreachery,
     _poolAggressiveMammoth,
     _poolAggressiveUrge,
+    _poolAgility,
     _poolAgoraphobia,
     _poolAirbendingLesson,
     _poolAlaniaDivergentStorm,
