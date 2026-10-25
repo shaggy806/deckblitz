@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3792 already implemented / 1208 missing (marks refreshed 2026-10-25)
+3796 already implemented / 1204 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -697,7 +697,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   698  Charcoal Diamond                         {2}              Artifact
 [x]   699  Curse of Opulence                        {R}              Enchantment — Aura Curse
 [x]   700  The Earth Crystal                        {2}{G}{G}        Legendary Artifact
-[ ]   701  Springheart Nantuko                      {1}{G}           Enchantment Creature — Insect Monk
+[x]   701  Springheart Nantuko                      {1}{G}           Enchantment Creature — Insect Monk
 [x]   702  Elspeth, Storm Slayer                    {3}{W}{W}        Legendary Planeswalker — Elspeth
 [x]   703  Kindred Dominance                        {5}{B}{B}        Sorcery
 [x]   704  Chasm Skulker                            {2}{U}           Creature — Squid Horror
@@ -3402,7 +3402,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3409  Hearthhull, the Worldseed                {1}{B}{R}{G}     Legendary Artifact — Spacecraft
 [ ]  3410  Mob Rule                                 {4}{R}{R}        Sorcery
 [x]  3411  Hermes, Overseer of Elpis                {3}{U}           Legendary Creature — Elder Wizard
-[ ]  3412  Nyxborn Hydra                            {X}{G}           Enchantment Creature — Hydra
+[x]  3412  Nyxborn Hydra                            {X}{G}           Enchantment Creature — Hydra
 [ ]  3413  Gogo, Master of Mimicry                  {2}{U}           Legendary Creature — Wizard
 [x]  3414  Monstrous Rage                           {R}              Instant
 [x]  3415  Obyra, Dreaming Duelist                  {U}{B}           Legendary Creature — Faerie Warrior
@@ -3417,7 +3417,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3424  The Mending of Dominaria                 {3}{G}{G}        Enchantment — Saga
 [x]  3425  Tormented Soul                           {B}              Creature — Spirit
 [x]  3426  Edric, Spymaster of Trest                {1}{G}{U}        Legendary Creature — Elf Rogue
-[ ]  3427  Eidolon of Countless Battles             {1}{W}{W}        Enchantment Creature — Spirit
+[x]  3427  Eidolon of Countless Battles             {1}{W}{W}        Enchantment Creature — Spirit
 [x]  3428  Costly Plunder                           {1}{B}           Instant
 [x]  3429  Aether Hub                               {0}              Land
 [ ]  3430  Ertai Resurrected                        {2}{U}{B}        Legendary Creature — Phyrexian Human Wizard
@@ -4359,7 +4359,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4366  Goblin Ringleader                        {3}{R}           Creature — Goblin
 [x]  4367  Bayek of Siwa                            {3}{R}{W}        Legendary Creature — Human Assassin
 [x]  4368  Venom Sliver                             {1}{G}           Creature — Sliver
-[ ]  4369  Nighthowler                              {1}{B}{B}        Enchantment Creature — Horror
+[x]  4369  Nighthowler                              {1}{B}{B}        Enchantment Creature — Horror
 [ ]  4370  Cayth, Famed Mechanist                   {1}{U}{R}{W}     Legendary Creature — Dwarf Artificer
 [ ]  4371  The Legend of Yangchen // Avatar Yangchen {5}              Enchantment — Saga // Legendary Creature — Avatar
 [x]  4372  Rammas Echor, Ancient Shield             {3}{W}           Legendary Artifact
