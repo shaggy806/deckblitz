@@ -111,9 +111,13 @@ session once per child, with the child's own summary, and costs one turn each, a
 turn per timed check-in whatever the children are doing. Don't poll: each turn here
 re-reads the coordinator's whole context.
 
-A child that crashes, stalls or runs out of budget never reports, so arm **one safety net**
-with `mcp__claude-code-remote__send_later` about 2 hours out (a batch takes 60–90 minutes:
-setup, scaffolding, 20–25 minutes of agents, integrating, `verify`, landing), naming every
+The report-in can be lost: in the second round (B161–B163) the children fired it on landing,
+but the trigger recorded no run and the coordinator, idle with its container reclaimed, never
+woke; the user noticed first. So the safety net is the check you count on, not a backstop.
+A child that crashes, stalls or runs out of budget never reports either, so arm **one safety
+net** with `mcp__claude-code-remote__send_later` about 90 minutes out (round two's batches
+landed 55, 69 and 89 minutes after their start: setup, scaffolding, 20–25 minutes of agents,
+integrating, `verify`, landing), naming every
 child's session id and batch. When a report or the safety net arrives, read as little as
 answers the question:
 
