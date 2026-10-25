@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbandonAttachments from "../pool/abandon-attachments.js";
 import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
+import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAerialEngineer from "../pool/aerial-engineer.js";
@@ -563,6 +564,7 @@ import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThornThallid from "../pool/thorn-thallid.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
+import _poolThrabenFoulbloods from "../pool/thraben-foulbloods.js";
 import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
@@ -658,6 +660,7 @@ const shard: CardShard = {
     _poolAbandonAttachments,
     _poolAbdelAdrianGorionsWard,
     _poolAberrantManawurm,
+    _poolAbolisherOfBloodlines,
     _poolAbsorbingMan,
     _poolActOfTreason,
     _poolAerialEngineer,
@@ -1215,6 +1218,7 @@ const shard: CardShard = {
     _poolThorOdinson,
     _poolThornThallid,
     _poolThoughtVessel,
+    _poolThrabenFoulbloods,
     _poolThrabenMilitia,
     _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,

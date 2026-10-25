@@ -432,6 +432,7 @@ import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
+import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkilledAnimator from "../pool/skilled-animator.js";
@@ -1020,6 +1021,7 @@ const shard: CardShard = {
     _poolShimmeringWings,
     _poolShivanReef,
     _poolShuGrainCaravan,
+    _poolSigardianPriest,
     _poolSigiledSkink,
     _poolSisterHospitaller,
     _poolSkilledAnimator,

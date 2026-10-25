@@ -555,6 +555,7 @@ import _poolVisageOfDread from "../pool/visage-of-dread.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
+import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
@@ -1153,6 +1154,7 @@ const shard: CardShard = {
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,
+    _poolVoldarenPariah,
     _poolVoltaicWhip,
     _poolVowToErebor,
     _poolVulshokMorningstar,

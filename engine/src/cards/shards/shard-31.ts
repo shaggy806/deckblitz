@@ -384,6 +384,7 @@ import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
 import _poolOffspringsRevenge from "../pool/offsprings-revenge.js";
 import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
+import _poolOliviasDragoon from "../pool/olivias-dragoon.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
@@ -1008,6 +1009,7 @@ const shard: CardShard = {
     _poolOccultEpiphany,
     _poolOffspringsRevenge,
     _poolOkaunEyeOfChaos,
+    _poolOliviasDragoon,
     _poolOltecMatterweaver,
     _poolOmenspeaker,
     _poolOnduGreathorn,

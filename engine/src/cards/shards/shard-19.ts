@@ -37,6 +37,7 @@ import _poolAtrociousExperiment from "../pool/atrocious-experiment.js";
 import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
+import _poolBackwoodsSurvivalists from "../pool/backwoods-survivalists.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
@@ -164,6 +165,7 @@ import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
+import _poolEruptingDreadwolf from "../pool/erupting-dreadwolf.js";
 import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
@@ -657,6 +659,7 @@ const shard: CardShard = {
     _poolAvatarEnthusiasts,
     _poolAwakenTheAges,
     _poolAwakenTheWoods,
+    _poolBackwoodsSurvivalists,
     _poolBalemurkLeech,
     _poolBanishingSlash,
     _poolBarbarianHorde,
@@ -784,6 +787,7 @@ const shard: CardShard = {
     _poolEmrakulsMessenger,
     _poolEnslavedDwarf,
     _poolErhnamDjinn,
+    _poolEruptingDreadwolf,
     _poolEsgarothGarrison,
     _poolEssenceknitScholar,
     _poolEternalOfHarshTruths,

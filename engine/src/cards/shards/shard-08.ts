@@ -329,6 +329,7 @@ import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
+import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolMagetasBoon,
     _poolMalakirCullblade,
     _poolMantleOfTheWolf,
+    _poolMarkovCrusader,
     _poolMartialCoup,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,

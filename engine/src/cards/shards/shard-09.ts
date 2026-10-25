@@ -95,6 +95,7 @@ import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
 import _poolChemistersInsight from "../pool/chemisters-insight.js";
+import _poolChokingRestraints from "../pool/choking-restraints.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
@@ -551,6 +552,7 @@ import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
+import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
 import _poolUnleashShell from "../pool/unleash-shell.js";
@@ -719,6 +721,7 @@ const shard: CardShard = {
     _poolChargeTheSanctum,
     _poolCharmingPrince,
     _poolChemistersInsight,
+    _poolChokingRestraints,
     _poolChromeCompanion,
     _poolChulane,
     _poolCitanulDruid,
@@ -1175,6 +1178,7 @@ const shard: CardShard = {
     _poolTraxosScourgeEternal,
     _poolTrenchpost,
     _poolTyvarsStand,
+    _poolUlvenwaldObserver,
     _poolUnauthorizedExit,
     _poolUnclaimedTerritory,
     _poolUnleashShell,

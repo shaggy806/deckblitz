@@ -63,6 +63,7 @@ import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
 import _poolBoneShards from "../pool/bone-shards.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
+import _poolBorrowedMalevolence from "../pool/borrowed-malevolence.js";
 import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
@@ -87,6 +88,7 @@ import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
+import _poolChillingGrasp from "../pool/chilling-grasp.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolCloudpost from "../pool/cloudpost.js";
 import _poolCobbledWings from "../pool/cobbled-wings.js";
@@ -224,6 +226,7 @@ import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHaazdaMarshal from "../pool/haazda-marshal.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
+import _poolHauntedDead from "../pool/haunted-dead.js";
 import _poolHeadstone from "../pool/headstone.js";
 import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
 import _poolHearthElemental from "../pool/hearth-elemental.js";
@@ -705,6 +708,7 @@ const shard: CardShard = {
     _poolBoltHound,
     _poolBoneShards,
     _poolBorosRecruit,
+    _poolBorrowedMalevolence,
     _poolBottleOfSuleiman,
     _poolBoulderRush,
     _poolBoundingFelidar,
@@ -729,6 +733,7 @@ const shard: CardShard = {
     _poolChargeThrough,
     _poolChargingWarBoar,
     _poolChildOfNight,
+    _poolChillingGrasp,
     _poolCityPigeon,
     _poolCloudpost,
     _poolCobbledWings,
@@ -866,6 +871,7 @@ const shard: CardShard = {
     _poolGuulDrazMucklord,
     _poolHaazdaMarshal,
     _poolHarmlessOffering,
+    _poolHauntedDead,
     _poolHeadstone,
     _poolHeartflameDuelist,
     _poolHearthElemental,

@@ -320,6 +320,7 @@ import _poolMoonlitScavengers from "../pool/moonlit-scavengers.js";
 import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
 import _poolMossPitSkeleton from "../pool/moss-pit-skeleton.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
+import _poolMournwillow from "../pool/mournwillow.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
 import _poolMysteriousEgg from "../pool/mysterious-egg.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolMordenkainensPolymorph,
     _poolMossPitSkeleton,
     _poolMostValuableSlayer,
+    _poolMournwillow,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
     _poolMysteriousEgg,

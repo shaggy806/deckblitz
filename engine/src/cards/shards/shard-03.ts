@@ -41,6 +41,7 @@ import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
 import _poolBlessedRespite from "../pool/blessed-respite.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBlinkDog from "../pool/blink-dog.js";
+import _poolBloodhallPriest from "../pool/bloodhall-priest.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBorosChallenger from "../pool/boros-challenger.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
@@ -60,6 +61,7 @@ import _poolCaptivatingVampire from "../pool/captivating-vampire.js";
 import _poolCaribouRange from "../pool/caribou-range.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
+import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
@@ -423,6 +425,7 @@ import _poolSpellSnip from "../pool/spell-snip.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
+import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
@@ -587,6 +590,7 @@ const shard: CardShard = {
     _poolBlessedRespite,
     _poolBlightedCataract,
     _poolBlinkDog,
+    _poolBloodhallPriest,
     _poolBoggartPrankster,
     _poolBorosChallenger,
     _poolBoroughBackup,
@@ -606,6 +610,7 @@ const shard: CardShard = {
     _poolCaribouRange,
     _poolCarvenCaryatid,
     _poolCavesOfKoilos,
+    _poolCemeteryRecruitment,
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
@@ -969,6 +974,7 @@ const shard: CardShard = {
     _poolSpiderManNoir,
     _poolSpikedCorridor,
     _poolSpiritMascot,
+    _poolSpiritOfTheHunt,
     _poolSpitefulSquad,
     _poolSplendidReclamation,
     _poolStaffOfTheAges,

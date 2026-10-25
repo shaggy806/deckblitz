@@ -291,6 +291,7 @@ import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLifecraftersGift from "../pool/lifecrafters-gift.js";
 import _poolLifelace from "../pool/lifelace.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
+import _poolLilianasElite from "../pool/lilianas-elite.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
 import _poolLivingTwister from "../pool/living-twister.js";
 import _poolLizardBlades from "../pool/lizard-blades.js";
@@ -462,6 +463,7 @@ import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
+import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
@@ -889,6 +891,7 @@ const shard: CardShard = {
     _poolLifecraftersGift,
     _poolLifelace,
     _poolLightshieldParry,
+    _poolLilianasElite,
     _poolLilianasScorn,
     _poolLivingTwister,
     _poolLizardBlades,
@@ -1060,6 +1063,7 @@ const shard: CardShard = {
     _poolSkyknightLegionnaire,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
+    _poolSmolderingWerewolf,
     _poolSnareTheSkies,
     _poolSnowHound,
     _poolSoltariTrooper,

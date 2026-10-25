@@ -286,6 +286,7 @@ import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
+import _poolLunarForce from "../pool/lunar-force.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
 import _poolMagicMissile from "../pool/magic-missile.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
@@ -901,6 +902,7 @@ const shard: CardShard = {
     _poolLlanowarKnight,
     _poolLucentLiminid,
     _poolLuciusTheEternal,
+    _poolLunarForce,
     _poolLuxurySuite,
     _poolMagicMissile,
     _poolMagusOfTheCoffers,

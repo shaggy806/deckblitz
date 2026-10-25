@@ -238,6 +238,7 @@ import _poolGraspingLongneck from "../pool/grasping-longneck.js";
 import _poolGravenAbomination from "../pool/graven-abomination.js";
 import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
+import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
@@ -849,6 +850,7 @@ const shard: CardShard = {
     _poolGravenAbomination,
     _poolGravitonFundamentalForce,
     _poolGreatHallOfTheBiblioplex,
+    _poolGrimFlayer,
     _poolGuardiansOfOboro,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,

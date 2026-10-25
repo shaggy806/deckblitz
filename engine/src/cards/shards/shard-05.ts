@@ -214,6 +214,7 @@ import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
+import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
@@ -827,6 +828,7 @@ const shard: CardShard = {
     _poolGarruksPackleader,
     _poolGateToPhyrexia,
     _poolGatewaySneak,
+    _poolGeistOfTheLonelyVigil,
     _poolGenemorphImago,
     _poolGenjiGlove,
     _poolGhituAmplifier,

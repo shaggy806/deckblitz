@@ -294,6 +294,7 @@ import _poolLotusGuardian from "../pool/lotus-guardian.js";
 import _poolLoxodonLifechanter from "../pool/loxodon-lifechanter.js";
 import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
 import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
+import _poolLunarchMantle from "../pool/lunarch-mantle.js";
 import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
 import _poolMakeYourMark from "../pool/make-your-mark.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
@@ -897,6 +898,7 @@ const shard: CardShard = {
     _poolLoxodonLifechanter,
     _poolLuluLoyalHollyphant,
     _poolLumenClassFrigate,
+    _poolLunarchMantle,
     _poolMabelValleyHero,
     _poolMakeYourMark,
     _poolMakindiOx,

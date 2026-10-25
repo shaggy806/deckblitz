@@ -409,6 +409,7 @@ import _poolScaldingTarn from "../pool/scalding-tarn.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
+import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
@@ -988,6 +989,7 @@ const shard: CardShard = {
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,
+    _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
     _poolScurryOfGremlins,

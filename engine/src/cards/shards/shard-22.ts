@@ -201,6 +201,7 @@ import _poolGodPharaohsFaithful from "../pool/god-pharaohs-faithful.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
 import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
 import _poolGoremand from "../pool/goremand.js";
+import _poolGrafHarvest from "../pool/graf-harvest.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
@@ -806,6 +807,7 @@ const shard: CardShard = {
     _poolGoldveinPick,
     _poolGollumTheAbandoned,
     _poolGoremand,
+    _poolGrafHarvest,
     _poolGravestoneStrider,
     _poolGriffinAerie,
     _poolGuadosalamFarplaneGateway,
