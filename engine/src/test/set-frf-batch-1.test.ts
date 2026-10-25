@@ -3,10 +3,11 @@
  * bolster on any Dragon you control attacking, Abzan Advantage's
  * sacrifice-then-bolster, Mardu Shadowspear's drain on attack and
  * Vaultbreaker's "if you do" rummage and Rally the Ancestors' X (the
- * return-from-graveyard filter now reads it).
+ * return-from-graveyard filter now reads it), and a filter's `colorless: false`.
  */
 import { describe, expect, it } from "vitest";
 
+import { matchesFilter } from "../filter.js";
 import { A, B, C, attack, cast, counters, graveyard, hand, lands, life, named, nextTurn, ref, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 describe("Dromoka, the Eternal", () => {
@@ -72,5 +73,16 @@ describe("Rally the Ancestors", () => {
     expect(zone(game, back)).toBe("battlefield");
     nextTurn(game, "precombat-main");
     expect(zone(game, back)).toBe("exile");
+  });
+});
+
+describe("a filter's colorless: false", () => {
+  it("matches one or more colours, and not a colourless permanent", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    const thopter = spawn(game, "Ornithopter");
+    expect(matchesFilter(game.state, game.registry, bears, { colorless: false }, { you: A })).toBe(true);
+    expect(matchesFilter(game.state, game.registry, thopter, { colorless: false }, { you: A })).toBe(false);
+    expect(matchesFilter(game.state, game.registry, thopter, { colorless: true }, { you: A })).toBe(true);
   });
 });

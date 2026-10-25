@@ -201,7 +201,7 @@ export interface CardFilter {
   readonly colors?: readonly Color[];
   /** Current colours must include NONE of these (Doom Blade: `["B"]`). */
   readonly notColors?: readonly Color[];
-  /** Must be colourless. */
+  /** Must be colourless; `false` must have one or more colours. */
   readonly colorless?: boolean;
   /** Must be multicoloured — two or more colours (rule 105.4). `false` matches
    * mono-coloured *and* colourless, which is what "nonmulticolored" means.
@@ -991,7 +991,7 @@ export function matchesFilter(
   if (
     filter.colors !== undefined ||
     filter.notColors !== undefined ||
-    filter.colorless === true ||
+    filter.colorless !== undefined ||
     filter.multicolored !== undefined
   ) {
     const colors: ReadonlySet<Color> =
@@ -1002,7 +1002,7 @@ export function matchesFilter(
     if (filter.notColors !== undefined && filter.notColors.some((col) => colors.has(col))) {
       return false;
     }
-    if (filter.colorless === true && colors.size > 0) return false;
+    if (filter.colorless !== undefined && (colors.size === 0) !== filter.colorless) return false;
     if (filter.multicolored !== undefined && colors.size >= 2 !== filter.multicolored) {
       return false;
     }
