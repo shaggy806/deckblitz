@@ -17194,6 +17194,7 @@ import _poolTechnodrome from "./pool/technodrome.js";
 import _poolTectonicEdge from "./pool/tectonic-edge.js";
 import _poolTectonicGiant from "./pool/tectonic-giant.js";
 import _poolTectonicHazard from "./pool/tectonic-hazard.js";
+import _poolTeekasDragon from "./pool/teekas-dragon.js";
 import _poolTeemingDragonstorm from "./pool/teeming-dragonstorm.js";
 import _poolTeeteringPeaks from "./pool/teetering-peaks.js";
 import _poolTeeterpeakAmbusher from "./pool/teeterpeak-ambusher.js";
@@ -37942,6 +37943,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTectonicEdge,
   _poolTectonicGiant,
   _poolTectonicHazard,
+  _poolTeekasDragon,
   _poolTeemingDragonstorm,
   _poolTeeteringPeaks,
   _poolTeeterpeakAmbusher,
@@ -58703,6 +58705,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tectonic-edge": _poolTectonicEdge,
   "pool/tectonic-giant": _poolTectonicGiant,
   "pool/tectonic-hazard": _poolTectonicHazard,
+  "pool/teekas-dragon": _poolTeekasDragon,
   "pool/teeming-dragonstorm": _poolTeemingDragonstorm,
   "pool/teetering-peaks": _poolTeeteringPeaks,
   "pool/teeterpeak-ambusher": _poolTeeterpeakAmbusher,
