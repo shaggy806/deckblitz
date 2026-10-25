@@ -18573,6 +18573,7 @@ import _tokensBananaToken from "./tokens/banana-token.js";
 import _tokensBatTokenGreedsGambit from "./tokens/bat-token-greeds-gambit.js";
 import _tokensBatToken from "./tokens/bat-token.js";
 import _tokensBearToken from "./tokens/bear-token.js";
+import _tokensBeastArtifactToken66 from "./tokens/beast-artifact-token-6-6.js";
 import _tokensBeastToken33 from "./tokens/beast-token-3-3.js";
 import _tokensBeastToken42 from "./tokens/beast-token-4-2.js";
 import _tokensBeastTokenGarrukVeiledButcher from "./tokens/beast-token-garruk-veiled-butcher.js";
@@ -37625,6 +37626,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensBatTokenGreedsGambit,
   _tokensBatToken,
   _tokensBearToken,
+  _tokensBeastArtifactToken66,
   _tokensBeastToken33,
   _tokensBeastToken42,
   _tokensBeastTokenGarrukVeiledButcher,
@@ -56678,6 +56680,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/bat-token-greeds-gambit": _tokensBatTokenGreedsGambit,
   "tokens/bat-token": _tokensBatToken,
   "tokens/bear-token": _tokensBearToken,
+  "tokens/beast-artifact-token-6-6": _tokensBeastArtifactToken66,
   "tokens/beast-token-3-3": _tokensBeastToken33,
   "tokens/beast-token-4-2": _tokensBeastToken42,
   "tokens/beast-token-garruk-veiled-butcher": _tokensBeastTokenGarrukVeiledButcher,
