@@ -68,7 +68,8 @@ card is a draft like any other — its templates match sentences, not meaning
 2. `npm run cards:sets -w engine -- --next 60` — the batch: the next 60
    untriaged cards, newest set first (the rest of one set, then the next),
    ranked ones first. A set's bottom half is mostly commons and uncommons:
-   batches there can run larger (100-150 across 4-5 agents), since most
+   batches there can run larger — the rest of the set in one batch, up to
+   ~110 cards across six agents of ~18 (`agent-batches.md`) — since most
    cards are short.
 3. **Scaffold first**: `npm run card:scaffold -w engine -- "A" "B" …` over the
    batch. Each card in `review/` is nearly done — read it against its Oracle

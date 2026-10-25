@@ -2,13 +2,13 @@ You are authoring Magic: The Gathering cards for the MTG-Engine repo (a rules en
 
 ## Setup — do exactly this, nothing more (≈1 minute)
 
-From the worktree root (Git Bash is fine for git; the junction needs PowerShell):
+From the worktree root:
 
-1. `git merge --ff-only main` — your worktree starts from `origin/main`, which can be behind the lead's local `main` (the features this batch needs). If it says it can't fast-forward, stop and report.
-2. Link the main checkout's node_modules, **with the PowerShell tool** (the worktree guard refuses `cmd /c mklink`):
-   `New-Item -ItemType Junction -Path "<worktree root>\node_modules" -Target "C:\Users\Toby Ens\Desktop\Programming\MTG Engine\node_modules"`
-   Never delete, move or `rm -rf` that junction or anything inside it. Don't run `npm install`.
-3. Copy your drafts in: `cp STAGING_DIR/scaffold/*.ts engine/src/cards/scaffold/` (and `STAGING_DIR/review/*.ts` into `engine/src/cards/review/` if that folder exists). They are the lead's `card:scaffold` output for your cards — **don't run `card:scaffold` or `npm run build`** (neither is needed: `card:brief`, `card:find`, `gen:cards`, `typecheck` and `vitest` all read the sources).
+1. Bring the worktree to the lead's commit: `git merge --ff-only BASE_COMMIT`. Your worktree starts from wherever the harness branched it, which can be behind the lead (the features this batch needs). If it can't fast-forward and you have changed nothing yet, `git reset --hard BASE_COMMIT` (the worktree is yours and fresh); then `git log --oneline -1` must show BASE_COMMIT.
+2. Link the main checkout's node_modules. Never delete, move or `rm -rf` the link's target or anything inside it, and don't run `npm install`.
+   - **Windows**, with the PowerShell tool (the worktree guard refuses `cmd /c mklink`): `New-Item -ItemType Junction -Path "<worktree root>\node_modules" -Target "MAIN_CHECKOUT/node_modules"`
+   - **Linux or macOS** (a cloud session): `ln -s MAIN_CHECKOUT/node_modules node_modules`, and the same for `engine/node_modules` if `MAIN_CHECKOUT/engine/node_modules` exists.
+3. Copy your drafts in: `cp STAGING_DIR/scaffold/*.ts engine/src/cards/scaffold/` (and, if `STAGING_DIR/review/` has files, `mkdir -p engine/src/cards/review` and copy them there). They are the lead's `card:scaffold` output for your cards — **don't run `card:scaffold` or `npm run build`** (neither is needed: `card:brief`, `card:find`, `gen:cards`, `typecheck` and `vitest` all read the sources).
 4. Read `STAGING_DIR/briefs.txt`: every card's Oracle text, rulings, triage records and the pool's closest authored abilities — the `card:brief` output, already run. Run `card:brief` again only for a card you need more analogs for.
 
 ## Read before authoring
@@ -35,7 +35,7 @@ From the worktree root (Git Bash is fine for git; the junction needs PowerShell)
 
 - Each authored card: move its draft from `scaffold/` (or `review/`) to `engine/src/cards/pool/<kebab-name>.ts`, finish every `TODO(scaffold)`, and remove the SCAFFOLD/REVIEW header comment. Tokens go in `engine/src/cards/tokens/`, reusing an existing token file when one matches exactly (`Glob engine/src/cards/tokens/*<word>*`). Name a new one by what it is, never by your card — `"Crab Token"` in `tokens/crab-token.ts`, not `"Crab Token (Scuttletide)"` — since another agent may be making the same token right now, and the same name is how the lead merges the two. A new token keeps the `art:` id of the token draft it came from (`card:lookup` lists a card's token printings); with no printing at all, say so in your report — `art-pins.test.ts` fails on a token without art.
 - A card's `text` stays close to its Oracle text.
-- Tests: `engine/src/test/TEST_FILE_PREFIXGROUP_LETTER.test.ts`, on `engine/src/test/harness.ts` (read it; `table()` deals each player an 8-card hand, so count hands relative to a "before"; `enter()` then `settle()` can leave the game past main phase — `toStep` back for a sorcery-speed activation). One focused test per card whose behaviour is more than a stat line or an exact copy of an already-tested pattern; test the clause most likely to be wrong.
+- Tests: `engine/src/test/TEST_FILE_PREFIXGROUP_LETTER.test.ts`, on `engine/src/test/harness.ts` (read it; `table()` deals each player an 8-card hand, so count hands relative to a "before"; `enter()` then `settle()` can leave the game past main phase — `toStep` back for a sorcery-speed activation). Two harness traps past agents lost time on: `activate()` passes no `sacrifice` id, so an ability whose cost sacrifices one chosen permanent needs `game.dispatch({ type: "activate-ability", …, sacrifice: id })`; and `spawn()` skips "enters with counters" replacements (a 0/0 that enters with counters dies at once), so use `enter()` for those. One focused test per card whose behaviour is more than a stat line or an exact copy of an already-tested pattern; test the clause most likely to be wrong.
 - Delete the drafts of the cards you BLOCK (and anything left in `scaffold/` or `review/` that's yours) before committing. `scaffold/winter-cynical-opportunist.ts` is tracked and not yours — leave it.
 
 ## Checks (all must pass before you commit)

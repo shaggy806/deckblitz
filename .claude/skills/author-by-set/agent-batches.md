@@ -9,9 +9,13 @@ it), then hands out the rest.
 ## Sizing
 
 By the `feedback_agents_only_over_15_cards` memory: ≤15 authorable cards the
-lead does alone; 16–39 one agent; 40+ split into ~25–30-card agents (a set's
-tail of commons can run 100–150 cards across 4–5 agents, since most are
-short). Each is a **`card-author`** agent (`subagent_type`;
+lead does alone; 16–39 one agent; 40+ split into groups of **~18 cards**, as
+many agents as that takes **up to six** — a set's tail of commons (100–150
+cards) is six agents, not four. Smaller groups finish sooner at about the same
+tokens per card (an agent re-reads its whole context every turn, so a shorter
+list keeps every turn cheaper); past six, the machine's cores set the pace,
+not the agents (B143's four agents of 27 took 14–22 minutes on a 4-core
+cloud session). Each is a **`card-author`** agent (`subagent_type`;
 `.claude/agents/card-author.md`: only the file and shell tools, so a smaller
 fixed context on every turn than the general-purpose agent's) in
 `isolation: "worktree"`, started in the background, all in one message.
@@ -48,16 +52,21 @@ six-way contention — so the lead does this once:
 5. **Stage the digest** once for all of them: `npm run card:digest -w engine
    -- --out <staging>/digest.md` — the whole definition vocabulary on one
    page, after the batch's feature has landed so it lists it.
-6. **Brief each agent** from **`agent-brief.md`** beside this file, its
-   placeholders filled: `GROUP_LETTER`, `SET_NAMES` (the set, or "EDHREC
-   ranks 5001–5060", or "commanders unblocked by <feature>"), `STAGING_DIR`,
-   `TEST_FILE_PREFIX` (`set-<code>-batch-<N>`, `top10000-batch-<N>`,
-   `commanders-<feature>-`; the agent appends its letter), `SET_CODE` (the
-   commit's label: the set code, `batch <N>`), `DIGEST_PATH`, `CARD_LIST`.
-   Before `## Your cards`, add a short **notes** section: the feature just
-   built and its shapes (with a pool card to copy), the batch's other
-   mechanics and where the pool already has them, the tokens already made.
-   Agent prompt: just the brief's path and its letter.
+6. **Brief each agent** with **`fill-brief.mjs`** beside this file — never a
+   shell heredoc (the brief's backticked commands run in an unquoted one; they
+   once ran `npm install` and `git reset --hard` on the main checkout). Put
+   each group's card names in `group-<x>/cards.txt` and the batch's **notes**
+   in `<staging>/notes.md` — the feature just built and its shapes (with a
+   pool card to copy), the batch's other mechanics and where the pool already
+   has them, what's known blocked (a need key to use), the tokens already
+   made — then `node .claude/skills/author-by-set/fill-brief.mjs --staging
+   <staging> --set-names "…" --set-code <CODE> --test-prefix
+   set-<code>-batch-<N>` writes every `group-<x>/brief.md` from
+   **`agent-brief.md`** (its placeholders: `GROUP_LETTER`, `SET_NAMES`,
+   `STAGING_DIR`, `TEST_FILE_PREFIX`, `SET_CODE`, `DIGEST_PATH`,
+   `BASE_COMMIT` — the lead's HEAD, which the agents bring their worktree to,
+   since the harness may branch it from elsewhere — `MAIN_CHECKOUT`,
+   `CARD_LIST`). Agent prompt: just the brief's path and its letter.
 
 Agents run gen:cards, the typecheck and their own test file with `pool.test`
 only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
@@ -65,8 +74,10 @@ reads `dist/`); the lead runs those and the suites after integrating.
 
 ## While they run
 
-The lead's own work that doesn't touch their files: records, docs, the next
-feature's reading. Don't poll them; each one's completion arrives as a
+The lead's own work that doesn't touch their files: the batch record's lead
+part, the docs, and **the next set's feature** — build and commit it now, so
+the next session (or this one) can dispatch the next set straight away.
+Integrate each group as it reports rather than waiting for all of them. Don't poll them; each one's completion arrives as a
 notification.
 
 ## Integrating
@@ -84,8 +95,9 @@ notification.
    `card:parse-check`, then the skill's own record, docs and `npm run
    verify`. **Squash** the group commits into the batch commit.
 5. **Remove the worktrees** the `feedback_worktree_agents` memory's way:
-   unlink each `node_modules` junction by absolute path first and check for
-   zero reparse points before `git worktree remove --force`; delete the
+   unlink each `node_modules` junction (Windows) or symlink (Linux: `rm` the
+   link, no trailing slash, after checking `-L`) by absolute path first, and
+   check none is left before `git worktree remove --force`; delete the
    branches.
 
 **A stopped agent can't be resumed** (SendMessage refuses it). Its worktree
