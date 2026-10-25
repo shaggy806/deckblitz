@@ -535,6 +535,7 @@ import _poolUnderdarkBasilisk from "../pool/underdark-basilisk.js";
 import _poolUnderworldRageHound from "../pool/underworld-rage-hound.js";
 import _poolUnendingWhisper from "../pool/unending-whisper.js";
 import _poolUniversalSolvent from "../pool/universal-solvent.js";
+import _poolUniversalSurveillance from "../pool/universal-surveillance.js";
 import _poolUnlicensedDisintegration from "../pool/unlicensed-disintegration.js";
 import _poolUntetheredExpress from "../pool/untethered-express.js";
 import _poolUrborgTombOfYawgmoth from "../pool/urborg-tomb-of-yawgmoth.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolUnderworldRageHound,
     _poolUnendingWhisper,
     _poolUniversalSolvent,
+    _poolUniversalSurveillance,
     _poolUnlicensedDisintegration,
     _poolUntetheredExpress,
     _poolUrborgTombOfYawgmoth,

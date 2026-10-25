@@ -246,6 +246,7 @@ import _poolJubilantMascot from "../pool/jubilant-mascot.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
 import _poolKabutoMoth from "../pool/kabuto-moth.js";
+import _poolKappaCannoneer from "../pool/kappa-cannoneer.js";
 import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
 import _poolKarma from "../pool/karma.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
@@ -858,6 +859,7 @@ const shard: CardShard = {
     _poolJwariRuins,
     _poolKabiraPlateau,
     _poolKabutoMoth,
+    _poolKappaCannoneer,
     _poolKariZevSkyshipRaider,
     _poolKarma,
     _poolKarvanistaLoyalLupari,
