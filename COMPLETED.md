@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Homelands, whole** (batch 160, the oldest-first walk): no feature built. 46 of its last 79
+  authored by five `card-author` agents — Koskun Falls, Primal Order, Chain Stasis, Serrated
+  Arrows, Feroz's Ban, Drudge Spell, Sengir Autocrat, Truce, Didgeridoo, Rashka the Slayer; 33
+  blocked, "doesn't untap during your next untap step" (3) the most shared (2026-10-25).
 - **Commander 2014 and Khans of Tarkir, the rest of both sets** (batch 157): no feature built. 90
   authored by five `card-author` agents and the lead: Murderous Cut, Wingmate Roc, Nahiri, the
   Lithomancer, Sorin, Solemn Visitor, End Hostilities, See the Unwritten, Angel of the Dire Hour,

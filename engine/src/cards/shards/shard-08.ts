@@ -131,6 +131,7 @@ import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
 import _poolDarkDabbling from "../pool/dark-dabbling.js";
+import _poolDarkMaze from "../pool/dark-maze.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
@@ -291,6 +292,7 @@ import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
 import _poolInvasionOfLorwyn from "../pool/invasion-of-lorwyn.js";
 import _poolInvasionOfTheros from "../pool/invasion-of-theros.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
+import _poolIriniSengir from "../pool/irini-sengir.js";
 import _poolIronsoulEnforcer from "../pool/ironsoul-enforcer.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJadeBearer from "../pool/jade-bearer.js";
@@ -662,9 +664,11 @@ import _tokensFishTokenExpendableLackey from "../tokens/fish-token-expendable-la
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
+import _tokensKelpToken from "../tokens/kelp-token.js";
 import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.js";
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
+import _tokensSerfToken from "../tokens/serf-token.js";
 import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
@@ -802,6 +806,7 @@ const shard: CardShard = {
     _poolDainsCompany,
     _poolDanithaSpearOfAgony,
     _poolDarkDabbling,
+    _poolDarkMaze,
     _poolDarksteelAxe,
     _poolDavenantArcher,
     _poolDawnhartWardens,
@@ -962,6 +967,7 @@ const shard: CardShard = {
     _poolInvasionOfLorwyn,
     _poolInvasionOfTheros,
     _poolIorethOfTheHealingHouse,
+    _poolIriniSengir,
     _poolIronsoulEnforcer,
     _poolJackOfHeartsVolatileHero,
     _poolJadeBearer,
@@ -1335,9 +1341,11 @@ const shard: CardShard = {
     _tokensFoodToken,
     _tokensHorrorToken,
     _tokensJellyfishToken,
+    _tokensKelpToken,
     _tokensKnightTokenGuardedHeir,
     _tokensLeviathanToken,
     _tokensOtterToken,
+    _tokensSerfToken,
     _tokensTheBlackjack,
     _tokensThopterToken,
     _tokensWarriorToken,

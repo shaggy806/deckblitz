@@ -62,6 +62,8 @@ for:
   every set's Commander-legal first printings, going back first over the sets whose top half was
   walked before; and the same walk the other way, oldest set first and forward in time (the
   `author-by-set-oldest` skill since 2026-10-21; `cards:sets -- --oldest`), until the two meet.
+  Several walks can run at once, each in its own cloud session on a range of sets of its own
+  (the `author-walks-parallel` skill since 2026-10-25).
   The other order is EDHREC rank across all sets (the `author-top-cards` skill;
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
   what blocks the most triaged ones). The bots' decks' stand-ins (the

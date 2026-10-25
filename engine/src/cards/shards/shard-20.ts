@@ -169,11 +169,13 @@ import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
 import _poolDriftOfTheDead from "../pool/drift-of-the-dead.js";
+import _poolDrudgeSpell from "../pool/drudge-spell.js";
 import _poolDubiousDelicacy from "../pool/dubious-delicacy.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
 import _poolDurkwoodBaloth from "../pool/durkwood-baloth.js";
 import _poolDuskDawn from "../pool/dusk-dawn.js";
 import _poolDuskmantleProwler from "../pool/duskmantle-prowler.js";
+import _poolDwarvenPony from "../pool/dwarven-pony.js";
 import _poolEarthbenderAscension from "../pool/earthbender-ascension.js";
 import _poolEbonyTreefolk from "../pool/ebony-treefolk.js";
 import _poolEidolonOfInspiration from "../pool/eidolon-of-inspiration.js";
@@ -860,11 +862,13 @@ const shard: CardShard = {
     _poolDreamdewEntrancer,
     _poolDreamstalkerManticore,
     _poolDriftOfTheDead,
+    _poolDrudgeSpell,
     _poolDubiousDelicacy,
     _poolDuelistsHeritage,
     _poolDurkwoodBaloth,
     _poolDuskDawn,
     _poolDuskmantleProwler,
+    _poolDwarvenPony,
     _poolEarthbenderAscension,
     _poolEbonyTreefolk,
     _poolEidolonOfInspiration,
