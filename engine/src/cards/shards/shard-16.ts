@@ -197,6 +197,7 @@ import _poolFloodwaterDam from "../pool/floodwater-dam.js";
 import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
+import _poolForlornPseudamma from "../pool/forlorn-pseudamma.js";
 import _poolFoulOrchard from "../pool/foul-orchard.js";
 import _poolFrilledCaveWurm from "../pool/frilled-cave-wurm.js";
 import _poolFrilledOculus from "../pool/frilled-oculus.js";
@@ -502,6 +503,7 @@ import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
 import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
+import _poolSphinxsDisciple from "../pool/sphinxs-disciple.js";
 import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
@@ -883,6 +885,7 @@ const shard: CardShard = {
     _poolFocusTheMind,
     _poolFolkOfThePines,
     _poolFomoriNomad,
+    _poolForlornPseudamma,
     _poolFoulOrchard,
     _poolFrilledCaveWurm,
     _poolFrilledOculus,
@@ -1188,6 +1191,7 @@ const shard: CardShard = {
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
     _poolSphinxOfTheGuildpact,
+    _poolSphinxsDisciple,
     _poolSpinedKarok,
     _poolSpinningWheel,
     _poolSpitefulVisions,

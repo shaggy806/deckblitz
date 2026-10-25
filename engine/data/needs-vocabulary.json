@@ -10351,6 +10351,22 @@
   },
   "amount:power-before-move": {
    "example": "Dead Reckoning: \"damage equal to that card's power\" after it's put on top of the library — the ruling reads the power it had in the graveyard (Tarmogoyf, Lord of Extinction); powerOf reads it after the move. Lie in Wait shares the gap."
+  },
+  "cost:attack-cost-return-permanent": {
+   "family": "cost:attack-cost-sacrifice",
+   "example": "Floodtide Serpent: \"can't attack unless you return an enchantment you control to its owner's hand\" — a cost paid as attackers are declared that bounces a permanent; attackTax takes only mana or life."
+  },
+  "replacement:enters-with-additional-card-type": {
+   "family": "effect:look-and-choose-enters-with-counters",
+   "example": "Arbiter of the Ideal: the card it puts onto the battlefield \"is an enchantment in addition to its other types\" as it enters (so it triggers constellation) — look-and-choose's enterAs adds no card type."
+  },
+  "static:cant-be-blocked-by-power-less-than-count": {
+   "family": "static:cant-be-blocked-except-by-n",
+   "example": "Kraken of the Straits: \"can't be blocked by creatures with power 2 or less\" against a count (Islands you control) — a block filter's amount reads only the source's own power, toughness or mana value (goad.ts sourceAmount), and anything else silently never applies."
+  },
+  "effect:restrict-this-combat": {
+   "family": "effect:extra-combat-attack-restriction",
+   "example": "Forgestoker Dragon: \"that creature can't block this combat\" — restrict lasts the turn, not the combat, so it would also stop a block in a later combat that turn."
   }
  }
 }

@@ -429,6 +429,7 @@ import _poolProfessorsWarning from "../pool/professors-warning.js";
 import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
+import _poolRagemonger from "../pool/ragemonger.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
 import _poolRagingSwordtooth from "../pool/raging-swordtooth.js";
 import _poolRakalite from "../pool/rakalite.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolProfoundJourney,
     _poolPuppeteerClique,
     _poolPygmyAllosaurus,
+    _poolRagemonger,
     _poolRagingKavu,
     _poolRagingSwordtooth,
     _poolRakalite,

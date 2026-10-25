@@ -184,6 +184,7 @@ import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
+import _poolEpiphanyStorm from "../pool/epiphany-storm.js";
 import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvilEyeOfOrmsByGore from "../pool/evil-eye-of-orms-by-gore.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
@@ -400,6 +401,7 @@ import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPharagaxGiant from "../pool/pharagax-giant.js";
+import _poolPheresBandRaiders from "../pool/pheres-band-raiders.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
@@ -486,6 +488,7 @@ import _poolSilumgarMonument from "../pool/silumgar-monument.js";
 import _poolSilverflameSquire from "../pool/silverflame-squire.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
+import _poolSirenOfTheSilentSong from "../pool/siren-of-the-silent-song.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
 import _poolSkullsnatcher from "../pool/skullsnatcher.js";
 import _poolSkyDiamond from "../pool/sky-diamond.js";
@@ -815,6 +818,7 @@ const shard: CardShard = {
     _poolEnatuGolem,
     _poolEnshroudingMist,
     _poolEphemeralShields,
+    _poolEpiphanyStorm,
     _poolEstridsInvocation,
     _poolEvilEyeOfOrmsByGore,
     _poolEvisceratorsInsight,
@@ -1031,6 +1035,7 @@ const shard: CardShard = {
     _poolPerilousVault,
     _poolPewterGolem,
     _poolPharagaxGiant,
+    _poolPheresBandRaiders,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,
     _poolPlacidRottentail,
@@ -1117,6 +1122,7 @@ const shard: CardShard = {
     _poolSilverflameSquire,
     _poolSimianSimulacrum,
     _poolSinisterStarfish,
+    _poolSirenOfTheSilentSong,
     _poolSkeletalSnake,
     _poolSkullsnatcher,
     _poolSkyDiamond,

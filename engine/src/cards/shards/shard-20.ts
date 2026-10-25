@@ -275,6 +275,7 @@ import _poolHeartlessPillage from "../pool/heartless-pillage.js";
 import _poolHeavenEarth from "../pool/heaven-earth.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
+import _poolHeroOfLeinaTower from "../pool/hero-of-leina-tower.js";
 import _poolHeroesForHire from "../pool/heroes-for-hire.js";
 import _poolHonorTroll from "../pool/honor-troll.js";
 import _poolHonorsReward from "../pool/honors-reward.js";
@@ -980,6 +981,7 @@ const shard: CardShard = {
     _poolHeavenEarth,
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
+    _poolHeroOfLeinaTower,
     _poolHeroesForHire,
     _poolHonorTroll,
     _poolHonorsReward,

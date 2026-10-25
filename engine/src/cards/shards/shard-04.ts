@@ -446,6 +446,7 @@ import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
 import _poolSaibaTrespassers from "../pool/saiba-trespassers.js";
 import _poolSanctify from "../pool/sanctify.js";
 import _poolSandworm from "../pool/sandworm.js";
+import _poolSanguimancy from "../pool/sanguimancy.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
 import _poolSarkhansRage from "../pool/sarkhans-rage.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
@@ -1081,6 +1082,7 @@ const shard: CardShard = {
     _poolSaibaTrespassers,
     _poolSanctify,
     _poolSandworm,
+    _poolSanguimancy,
     _poolSanguineMorass,
     _poolSarkhansRage,
     _poolSarkhansTriumph,

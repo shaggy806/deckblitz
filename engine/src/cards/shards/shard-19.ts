@@ -13,6 +13,7 @@ import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAggressiveSabotage from "../pool/aggressive-sabotage.js";
 import _poolAkkiEmberKeeper from "../pool/akki-ember-keeper.js";
+import _poolAkroanConscriptor from "../pool/akroan-conscriptor.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
@@ -198,6 +199,7 @@ import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
 import _poolFamilysFavor from "../pool/familys-favor.js";
 import _poolFamine from "../pool/famine.js";
 import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
+import _poolFatedInfatuation from "../pool/fated-infatuation.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
 import _poolFeralIncarnation from "../pool/feral-incarnation.js";
 import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
@@ -245,6 +247,7 @@ import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
 import _poolGraveRobbers from "../pool/grave-robbers.js";
+import _poolGraverobberSpider from "../pool/graverobber-spider.js";
 import _poolGreatForestDruid from "../pool/great-forest-druid.js";
 import _poolGreatHart from "../pool/great-hart.js";
 import _poolGreaterRealmOfPreservation from "../pool/greater-realm-of-preservation.js";
@@ -480,6 +483,7 @@ import _poolSandblast from "../pool/sandblast.js";
 import _poolSandwurmConvergence from "../pool/sandwurm-convergence.js";
 import _poolSanguineSavior from "../pool/sanguine-savior.js";
 import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
+import _poolSatyrFiredancer from "../pool/satyr-firedancer.js";
 import _poolScaretiller from "../pool/scaretiller.js";
 import _poolScavengerGrounds from "../pool/scavenger-grounds.js";
 import _poolScholarOfTheAges from "../pool/scholar-of-the-ages.js";
@@ -678,6 +682,7 @@ const shard: CardShard = {
     _poolAgentsOfSHIELD,
     _poolAggressiveSabotage,
     _poolAkkiEmberKeeper,
+    _poolAkroanConscriptor,
     _poolAkulTheUnrepentant,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
@@ -863,6 +868,7 @@ const shard: CardShard = {
     _poolFamilysFavor,
     _poolFamine,
     _poolFantasticElasticity,
+    _poolFatedInfatuation,
     _poolFellTheMighty,
     _poolFeralIncarnation,
     _poolFerocityOfTheHunt,
@@ -910,6 +916,7 @@ const shard: CardShard = {
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
     _poolGraveRobbers,
+    _poolGraverobberSpider,
     _poolGreatForestDruid,
     _poolGreatHart,
     _poolGreaterRealmOfPreservation,
@@ -1145,6 +1152,7 @@ const shard: CardShard = {
     _poolSandwurmConvergence,
     _poolSanguineSavior,
     _poolSaruliCaretaker,
+    _poolSatyrFiredancer,
     _poolScaretiller,
     _poolScavengerGrounds,
     _poolScholarOfTheAges,

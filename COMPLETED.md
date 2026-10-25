@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Born of the Gods, the rest of the set** (batch 164, the newest-first walk, 2026-10-25):
+  **tribute** built (rule 702.104 — `tribute: N` on the card, asked as it's about to enter on the
+  `choose-creature-type` decision with a prompt the client shows; the `tribute-not-paid`
+  condition, kept in last-known information; the scaffolder's "Tribute N" and "if tribute wasn't
+  paid"). 91 of the set's 104 left authored by five `card-author` agents and the lead — Pharagax
+  Giant, Nessian Wilds Ravager, Felhide Spiritbinder, Pain Seer, Champion of Stray Souls, Searing
+  Blood and 85 more; BNG is whole. 13 blocked, one each.
 - **Worldwake, whole** (batch 162, the middle walk, 2026-10-25): `{ timesKicked: "source" }` (a
   multikicker count as an effect amount — Spell Contortion, Wolfbriar Elemental, Bloodhusk Ritualist,
   Deathforge Shaman, Lightkeeper of Emeria) and `StaticAbility.setColors` (layer 5 — the five colored

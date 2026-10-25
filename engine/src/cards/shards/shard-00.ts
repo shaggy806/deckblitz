@@ -370,6 +370,7 @@ import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
 import _poolOverwhelmedApprentice from "../pool/overwhelmed-apprentice.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
+import _poolPainSeer from "../pool/pain-seer.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
@@ -517,6 +518,7 @@ import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
 import _poolStuntDouble from "../pool/stunt-double.js";
 import _poolSultaiMonument from "../pool/sultai-monument.js";
 import _poolSummonGFCerberus from "../pool/summon-g-f-cerberus.js";
+import _poolSunbond from "../pool/sunbond.js";
 import _poolSunderingStroke from "../pool/sundering-stroke.js";
 import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-legion.js";
 import _poolSunlance from "../pool/sunlance.js";
@@ -1024,6 +1026,7 @@ const shard: CardShard = {
     _poolOverwhelmedApprentice,
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,
+    _poolPainSeer,
     _poolPakoArcaneRetriever,
     _poolParadiseDruid,
     _poolParadoxGardens,
@@ -1171,6 +1174,7 @@ const shard: CardShard = {
     _poolStuntDouble,
     _poolSultaiMonument,
     _poolSummonGFCerberus,
+    _poolSunbond,
     _poolSunderingStroke,
     _poolSunhomeFortressOfTheLegion,
     _poolSunlance,

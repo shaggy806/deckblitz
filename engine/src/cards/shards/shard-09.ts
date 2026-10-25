@@ -161,6 +161,7 @@ import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
+import _poolEpharasRadiance from "../pool/epharas-radiance.js";
 import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
@@ -826,6 +827,7 @@ const shard: CardShard = {
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
+    _poolEpharasRadiance,
     _poolEronTheRelentless,
     _poolErrantStreetArtist,
     _poolErstwhileTrooper,

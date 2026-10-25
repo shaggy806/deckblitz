@@ -133,6 +133,7 @@ import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDealBroker from "../pool/deal-broker.js";
 import _poolDeathlessAncient from "../pool/deathless-ancient.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
+import _poolDeepwaterHypnotist from "../pool/deepwater-hypnotist.js";
 import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
 import _poolDemonWall from "../pool/demon-wall.js";
 import _poolDemonicPact from "../pool/demonic-pact.js";
@@ -182,12 +183,14 @@ import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
+import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolExterminatus from "../pool/exterminatus.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
+import _poolFallOfTheHammer from "../pool/fall-of-the-hammer.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
 import _poolFanaticOfTheHarrowing from "../pool/fanatic-of-the-harrowing.js";
 import _poolFangOfThePack from "../pool/fang-of-the-pack.js";
@@ -473,6 +476,7 @@ import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
 import _poolSengirAutocrat from "../pool/sengir-autocrat.js";
+import _poolSetessanOathsworn from "../pool/setessan-oathsworn.js";
 import _poolSettlementBlacksmith from "../pool/settlement-blacksmith.js";
 import _poolSevenTailMentor from "../pool/seven-tail-mentor.js";
 import _poolShacklegeist from "../pool/shacklegeist.js";
@@ -513,6 +517,7 @@ import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
+import _poolSpitefulReturned from "../pool/spiteful-returned.js";
 import _poolSpring from "../pool/spring.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
@@ -779,6 +784,7 @@ const shard: CardShard = {
     _poolDealBroker,
     _poolDeathlessAncient,
     _poolDedicatedCommons,
+    _poolDeepwaterHypnotist,
     _poolDefiantGreatmaw,
     _poolDemonWall,
     _poolDemonicPact,
@@ -828,12 +834,14 @@ const shard: CardShard = {
     _poolEowynShieldmaiden,
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
+    _poolEverflameEidolon,
     _poolEviscerate,
     _poolEvolvedSleeper,
     _poolExperimentalArmor,
     _poolExterminatus,
     _poolFadeFromMemory,
     _poolFalkenrathReaver,
+    _poolFallOfTheHammer,
     _poolFallenAskari,
     _poolFanaticOfTheHarrowing,
     _poolFangOfThePack,
@@ -1119,6 +1127,7 @@ const shard: CardShard = {
     _poolSedgeScorpion,
     _poolSelvalasStampede,
     _poolSengirAutocrat,
+    _poolSetessanOathsworn,
     _poolSettlementBlacksmith,
     _poolSevenTailMentor,
     _poolShacklegeist,
@@ -1159,6 +1168,7 @@ const shard: CardShard = {
     _poolSpellgyre,
     _poolSpiderFood,
     _poolSpireMangler,
+    _poolSpitefulReturned,
     _poolSpring,
     _poolSteelbaneHydra,
     _poolSternDismissal,

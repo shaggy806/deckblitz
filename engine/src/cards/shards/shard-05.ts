@@ -17,6 +17,7 @@ import _poolAgeOfUltron from "../pool/age-of-ultron.js";
 import _poolAinokBondKin from "../pool/ainok-bond-kin.js";
 import _poolAinokGuide from "../pool/ainok-guide.js";
 import _poolAkoumBoulderfoot from "../pool/akoum-boulderfoot.js";
+import _poolAkroanSkyguard from "../pool/akroan-skyguard.js";
 import _poolAlBhedSalvagers from "../pool/al-bhed-salvagers.js";
 import _poolAllThatGlitters from "../pool/all-that-glitters.js";
 import _poolAlpineGrizzly from "../pool/alpine-grizzly.js";
@@ -669,6 +670,7 @@ const shard: CardShard = {
     _poolAinokBondKin,
     _poolAinokGuide,
     _poolAkoumBoulderfoot,
+    _poolAkroanSkyguard,
     _poolAlBhedSalvagers,
     _poolAllThatGlitters,
     _poolAlpineGrizzly,

@@ -215,6 +215,7 @@ import _poolFlameJavelin from "../pool/flame-javelin.js";
 import _poolFlameRift from "../pool/flame-rift.js";
 import _poolFlameshadowConjuring from "../pool/flameshadow-conjuring.js";
 import _poolFlickeringHound from "../pool/flickering-hound.js";
+import _poolFlitterstepEidolon from "../pool/flitterstep-eidolon.js";
 import _poolFloralEvoker from "../pool/floral-evoker.js";
 import _poolFlourishingStrike from "../pool/flourishing-strike.js";
 import _poolFogBank from "../pool/fog-bank.js";
@@ -444,6 +445,7 @@ import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
+import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
@@ -504,6 +506,7 @@ import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
+import _poolServantOfTymaret from "../pool/servant-of-tymaret.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
@@ -893,6 +896,7 @@ const shard: CardShard = {
     _poolFlameRift,
     _poolFlameshadowConjuring,
     _poolFlickeringHound,
+    _poolFlitterstepEidolon,
     _poolFloralEvoker,
     _poolFlourishingStrike,
     _poolFogBank,
@@ -1122,6 +1126,7 @@ const shard: CardShard = {
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
+    _poolPinnacleOfRage,
     _poolPonderingMage,
     _poolPriestsOfNorn,
     _poolPromiseOfAclazotz,
@@ -1182,6 +1187,7 @@ const shard: CardShard = {
     _poolSeaGateLoremaster,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
+    _poolServantOfTymaret,
     _poolSeveredLegion,
     _poolShardlessAgent,
     _poolSheHulkJenniferWalters,

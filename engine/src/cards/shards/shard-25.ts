@@ -560,6 +560,7 @@ import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
+import _poolThunderousMight from "../pool/thunderous-might.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
 import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
@@ -1208,6 +1209,7 @@ const shard: CardShard = {
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThunderStrike,
+    _poolThunderousMight,
     _poolTimeElemental,
     _poolTitanHunter,
     _poolTophEarthbendingMaster,

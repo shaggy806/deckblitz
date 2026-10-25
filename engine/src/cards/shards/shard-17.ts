@@ -383,6 +383,7 @@ import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
+import _poolOraclesInsight from "../pool/oracles-insight.js";
 import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrchardElemental from "../pool/orchard-elemental.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
@@ -586,6 +587,7 @@ import _poolUnderworldDreams from "../pool/underworld-dreams.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
+import _poolVanguardOfBrimaz from "../pool/vanguard-of-brimaz.js";
 import _poolVedalkenInfiltrator from "../pool/vedalken-infiltrator.js";
 import _poolVeiledShade from "../pool/veiled-shade.js";
 import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
@@ -1039,6 +1041,7 @@ const shard: CardShard = {
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
+    _poolOraclesInsight,
     _poolOrahSkyclaveHierophant,
     _poolOrchardElemental,
     _poolOrcishArtillery,
@@ -1242,6 +1245,7 @@ const shard: CardShard = {
     _poolUnholyOfficiant,
     _poolUnknownShores,
     _poolUnsummon,
+    _poolVanguardOfBrimaz,
     _poolVedalkenInfiltrator,
     _poolVeiledShade,
     _poolVeinwitchCoven,

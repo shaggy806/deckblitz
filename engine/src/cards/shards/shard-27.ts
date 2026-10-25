@@ -146,6 +146,7 @@ import _poolDuelingCoach from "../pool/dueling-coach.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
 import _poolEastMarkCavalier from "../pool/east-mark-cavalier.js";
+import _poolEaterOfHope from "../pool/eater-of-hope.js";
 import _poolEbonStronghold from "../pool/ebon-stronghold.js";
 import _poolEchoingAssault from "../pool/echoing-assault.js";
 import _poolEcologistsTerrarium from "../pool/ecologists-terrarium.js";
@@ -179,6 +180,7 @@ import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
+import _poolFelhideBrawler from "../pool/felhide-brawler.js";
 import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
 import _poolFieryFall from "../pool/fiery-fall.js";
@@ -375,6 +377,7 @@ import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
+import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPitilessVizier from "../pool/pitiless-vizier.js";
@@ -789,6 +792,7 @@ const shard: CardShard = {
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,
     _poolEastMarkCavalier,
+    _poolEaterOfHope,
     _poolEbonStronghold,
     _poolEchoingAssault,
     _poolEcologistsTerrarium,
@@ -822,6 +826,7 @@ const shard: CardShard = {
     _poolFalkenrathPerforator,
     _poolFalseDefeat,
     _poolFatalGrudge,
+    _poolFelhideBrawler,
     _poolFellMire,
     _poolFeralInvocation,
     _poolFieryFall,
@@ -1018,6 +1023,7 @@ const shard: CardShard = {
     _poolPatrollingPeacemaker,
     _poolPerimeterSergeant,
     _poolPestilence,
+    _poolPheresBandTromper,
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
     _poolPitilessVizier,

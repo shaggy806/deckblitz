@@ -187,6 +187,7 @@ import _poolFaeburrowElder from "../pool/faeburrow-elder.js";
 import _poolFaerieSnoop from "../pool/faerie-snoop.js";
 import _poolFanaticalDevotion from "../pool/fanatical-devotion.js";
 import _poolFanaticalFever from "../pool/fanatical-fever.js";
+import _poolFatedConflagration from "../pool/fated-conflagration.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
@@ -621,6 +622,7 @@ import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWalkingWall from "../pool/walking-wall.js";
 import _poolWallOfPutridFlesh from "../pool/wall-of-putrid-flesh.js";
 import _poolWallOff from "../pool/wall-off.js";
+import _poolWarchanterOfMogis from "../pool/warchanter-of-mogis.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
 import _poolWarmWelcome from "../pool/warm-welcome.js";
 import _poolWaryThespian from "../pool/wary-thespian.js";
@@ -849,6 +851,7 @@ const shard: CardShard = {
     _poolFaerieSnoop,
     _poolFanaticalDevotion,
     _poolFanaticalFever,
+    _poolFatedConflagration,
     _poolFaunaShaman,
     _poolFearOfMissingOut,
     _poolFelidarCub,
@@ -1283,6 +1286,7 @@ const shard: CardShard = {
     _poolWalkingWall,
     _poolWallOfPutridFlesh,
     _poolWallOff,
+    _poolWarchanterOfMogis,
     _poolWarclampMastiff,
     _poolWarmWelcome,
     _poolWaryThespian,

@@ -402,6 +402,7 @@ import _poolRadiantsJudgment from "../pool/radiants-judgment.js";
 import _poolRaggedPlaymate from "../pool/ragged-playmate.js";
 import _poolRagnar from "../pool/ragnar.js";
 import _poolRainveilRejuvenator from "../pool/rainveil-rejuvenator.js";
+import _poolRaisedByWolves from "../pool/raised-by-wolves.js";
 import _poolRalCallerOfStorms from "../pool/ral-caller-of-storms.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolRaggedPlaymate,
     _poolRagnar,
     _poolRainveilRejuvenator,
+    _poolRaisedByWolves,
     _poolRalCallerOfStorms,
     _poolRammasEchorAncientShield,
     _poolRavenousBaboons,
