@@ -21,6 +21,7 @@ import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
 import _poolAngelicAscension from "../pool/angelic-ascension.js";
+import _poolAnimusOfPredation from "../pool/animus-of-predation.js";
 import _poolApostleOfInvasion from "../pool/apostle-of-invasion.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
 import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
@@ -642,6 +643,7 @@ const shard: CardShard = {
     _poolAncientImperiosaur,
     _poolAngelfireCrusader,
     _poolAngelicAscension,
+    _poolAnimusOfPredation,
     _poolApostleOfInvasion,
     _poolApprenticeWizard,
     _poolArachnoidAdaptation,

@@ -372,6 +372,7 @@ import _poolPsychicVenom from "../pool/psychic-venom.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
 import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
+import _poolPyreticHunter from "../pool/pyretic-hunter.js";
 import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
@@ -968,6 +969,7 @@ const shard: CardShard = {
     _poolPullFromTomorrow,
     _poolPurestrainGenestealer,
     _poolPyreCharger,
+    _poolPyreticHunter,
     _poolPyrokinesis,
     _poolPyromancersGoggles,
     _poolQueenMarchesa,

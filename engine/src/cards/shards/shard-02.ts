@@ -249,6 +249,7 @@ import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
+import _poolIllusionaryInformant from "../pool/illusionary-informant.js";
 import _poolImplementOfExamination from "../pool/implement-of-examination.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
@@ -344,6 +345,7 @@ import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasEncouragement from "../pool/nissas-encouragement.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
+import _poolNobleBanneret from "../pool/noble-banneret.js";
 import _poolNotionRain from "../pool/notion-rain.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
 import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
@@ -824,6 +826,7 @@ const shard: CardShard = {
     _poolHyraxTowerScout,
     _poolIceberg,
     _poolIlluminatorVirtuoso,
+    _poolIllusionaryInformant,
     _poolImplementOfExamination,
     _poolImpulsivity,
     _poolIndomitableArchangel,
@@ -919,6 +922,7 @@ const shard: CardShard = {
     _poolNissaVitalForce,
     _poolNissasEncouragement,
     _poolNissasExpedition,
+    _poolNobleBanneret,
     _poolNotionRain,
     _poolNoviceInspector,
     _poolNurturingPeatland,

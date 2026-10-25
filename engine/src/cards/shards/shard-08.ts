@@ -208,6 +208,7 @@ import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
 import _poolFuturistOperative from "../pool/futurist-operative.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
+import _poolGarbageFire from "../pool/garbage-fire.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
 import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
@@ -841,6 +842,7 @@ const shard: CardShard = {
     _poolFuturistOperative,
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
+    _poolGarbageFire,
     _poolGargoyleFlock,
     _poolGarruksWarsteed,
     _poolGeneralLeoCristophe,

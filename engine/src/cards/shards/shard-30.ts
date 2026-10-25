@@ -76,6 +76,7 @@ import _poolBurdenedAerialist from "../pool/burdened-aerialist.js";
 import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolBuryInBooks from "../pool/bury-in-books.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
+import _poolCallerOfTheUntamed from "../pool/caller-of-the-untamed.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
@@ -672,6 +673,7 @@ const shard: CardShard = {
     _poolBurrogBanemaker,
     _poolBuryInBooks,
     _poolCacklingCounterpart,
+    _poolCallerOfTheUntamed,
     _poolCameraLauncher,
     _poolCandyTrail,
     _poolCapsizingWave,

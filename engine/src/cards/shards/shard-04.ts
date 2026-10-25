@@ -90,6 +90,7 @@ import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
 import _poolCursedCourtier from "../pool/cursed-courtier.js";
+import _poolCustodiPeacekeeper from "../pool/custodi-peacekeeper.js";
 import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
@@ -676,6 +677,7 @@ const shard: CardShard = {
     _poolCultistOfTheAbsolute,
     _poolCurseOfVitality,
     _poolCursedCourtier,
+    _poolCustodiPeacekeeper,
     _poolCutPropulsion,
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,

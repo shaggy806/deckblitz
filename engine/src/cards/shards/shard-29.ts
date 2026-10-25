@@ -449,6 +449,7 @@ import _poolSlagstoneRefinery from "../pool/slagstone-refinery.js";
 import _poolSlagwoodsBridge from "../pool/slagwoods-bridge.js";
 import _poolSlimefootsSurvey from "../pool/slimefoots-survey.js";
 import _poolSmother from "../pool/smother.js";
+import _poolSmugglerCaptain from "../pool/smuggler-captain.js";
 import _poolSnap from "../pool/snap.js";
 import _poolSneakAttack from "../pool/sneak-attack.js";
 import _poolSnoopingPage from "../pool/snooping-page.js";
@@ -1049,6 +1050,7 @@ const shard: CardShard = {
     _poolSlagwoodsBridge,
     _poolSlimefootsSurvey,
     _poolSmother,
+    _poolSmugglerCaptain,
     _poolSnap,
     _poolSneakAttack,
     _poolSnoopingPage,

@@ -579,6 +579,7 @@ import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
 import _poolVoiceOfTheVermin from "../pool/voice-of-the-vermin.js";
+import _poolVolatileChimera from "../pool/volatile-chimera.js";
 import _poolVoldarenDuelist from "../pool/voldaren-duelist.js";
 import _poolVoldarenStinger from "../pool/voldaren-stinger.js";
 import _poolVraskaRegalGorgon from "../pool/vraska-regal-gorgon.js";
@@ -1220,6 +1221,7 @@ const shard: CardShard = {
     _poolVividGrove,
     _poolVivisection,
     _poolVoiceOfTheVermin,
+    _poolVolatileChimera,
     _poolVoldarenDuelist,
     _poolVoldarenStinger,
     _poolVraskaRegalGorgon,

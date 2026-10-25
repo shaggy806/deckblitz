@@ -399,6 +399,7 @@ import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
+import _poolRegicide from "../pool/regicide.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
@@ -975,6 +976,7 @@ const shard: CardShard = {
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
     _poolReduceToMemory,
+    _poolRegicide,
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,

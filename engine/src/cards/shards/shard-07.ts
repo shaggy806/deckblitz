@@ -268,6 +268,7 @@ import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLegionVanguard from "../pool/legion-vanguard.js";
 import _poolLenaSelflessChampion from "../pool/lena-selfless-champion.js";
+import _poolLeovoldsOperative from "../pool/leovolds-operative.js";
 import _poolLeyWeaver from "../pool/ley-weaver.js";
 import _poolLightOfTheLegion from "../pool/light-of-the-legion.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
@@ -883,6 +884,7 @@ const shard: CardShard = {
     _poolLaviniaFoilToConspiracy,
     _poolLegionVanguard,
     _poolLenaSelflessChampion,
+    _poolLeovoldsOperative,
     _poolLeyWeaver,
     _poolLightOfTheLegion,
     _poolLightningVisionary,
