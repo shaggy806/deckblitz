@@ -227,6 +227,9 @@ export type ManaPurpose =
        * Dragon creature card it's on, so Haven of the Spirit Dragon's
        * Dragon-only mana can't pay for it). */
       readonly face?: number;
+      /** Cast for its bestow cost (rule 702.103b): a restriction reads it as
+       * the Aura spell it is, not the creature card. */
+      readonly bestow?: true;
     }
   /** An activated ability of `source` being paid for. */
   | { readonly kind: "ability"; readonly source: ObjectId }

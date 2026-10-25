@@ -731,6 +731,13 @@ interface EnteringReplacement {
 const RIOT_COUNTER = "+1/+1 counter";
 const RIOT_OPTIONS: readonly string[] = [RIOT_COUNTER, "Haste"];
 
+/** A bestow cast's mana purpose (rule 702.103b): the spell is an Aura, not a
+ * creature, so a restriction reads it bestowed — "spend this mana only to
+ * cast a creature spell" can't pay for it. */
+function bestowPurpose(def: CardDefinition, overload: boolean | undefined): { readonly bestow?: true } {
+  return overload === true && def.overload?.keyword === "bestow" ? { bestow: true } : {};
+}
+
 /** Tribute's two answers for the chosen opponent (rule 702.104a), paying
  * first — see `Game.askEnterChoice`. */
 function tributeOptions(amount: number): readonly string[] {
@@ -3274,7 +3281,7 @@ export class Game {
           const total = this.withFace(card, face ?? 0, () =>
             this.castingCostOf(player, card, def, 0, withModes, pricedAt),
           );
-          if (this.payMana(player, total, undefined, undefined, { kind: "cast", card, face: face ?? 0 }) !== null) return k;
+          if (this.payMana(player, total, undefined, undefined, { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload) }) !== null) return k;
         }
         return Math.max(1, modal.minModes);
       };
@@ -3360,7 +3367,7 @@ export class Game {
                 this.withFace(card, face ?? 0, () => this.castingCostOf(player, card, def, 0, cost, pricedAt)),
                 undefined,
                 undefined,
-                { kind: "cast", card, face: face ?? 0 },
+                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload) },
                 { last: candidates },
               );
               if (plan === null) return 0;
@@ -11426,7 +11433,7 @@ export class Game {
       convoked = resolved;
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
-    const purpose: ManaPurpose = { kind: "cast", card: cardId, face };
+    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload) };
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
@@ -12510,7 +12517,7 @@ export class Game {
             cost,
             this.spellWaterbend(def, kicked, chosenX),
             (rest, withheld) =>
-              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId }, withWaterbent(withheld)) !==
+              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload) }, withWaterbent(withheld)) !==
               null,
           );
     if (typeof waterbent === "string") throw new Error(waterbent);
@@ -12520,7 +12527,7 @@ export class Game {
       { ...cost, generic: cost.generic - waterbent.length },
       undefined,
       undefined,
-      { kind: "cast", card: cardId },
+      { kind: "cast", card: cardId, ...bestowPurpose(def, overload) },
       manaArrangement,
     );
     if (payment === null) {
@@ -16324,6 +16331,21 @@ export class Game {
   private manaUnitCanPay(player: PlayerId, unit: ManaUnit, purpose: ManaPurpose): boolean {
     const restriction = unit.restriction;
     if (restriction === undefined) return true;
+    // A bestow cast is judged as the Aura spell it is (`bestowPurpose`),
+    // before the cast has marked it bestowed.
+    if (purpose?.kind === "cast" && purpose.bestow === true) {
+      const card = this.state.objects[purpose.card];
+      const { bestow: _bestow, ...plain } = purpose;
+      if (card === undefined || card.bestowed === true) return this.manaUnitCanPay(player, unit, plain);
+      card.bestowed = true;
+      invalidateComputedCache();
+      try {
+        return this.manaUnitCanPay(player, unit, plain);
+      } finally {
+        card.bestowed = undefined;
+        invalidateComputedCache();
+      }
+    }
     // A deny-list ("can't be spent to cast nonartifact spells" — Karn,
     // Legacy Reforged): everything but casting a matching spell, a ward
     // cost or an ability included (Karn's ruling).
