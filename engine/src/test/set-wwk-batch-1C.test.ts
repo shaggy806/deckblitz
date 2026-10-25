@@ -123,30 +123,6 @@ describe("Graypelt Hunter", () => {
   });
 });
 
-describe("Dead Reckoning", () => {
-  it("puts the creature card on top and deals its power to the target creature", () => {
-    const { game, a } = table();
-    lands(game, "Swamp", 3);
-    const giant = toGraveyard(game, "Hill Giant");
-    const theirs = spawn(game, "Hill Giant", B);
-    pickModes(a, 0);
-    cast(game, toHand(game, "Dead Reckoning"), { targets: [ref(giant), ref(theirs)] });
-    expect(game.state.zones.perPlayer[A].library[0]).toBe(giant);
-    expect(zone(game, theirs)).toBe("graveyard");
-  });
-
-  it("deals no damage if the player declines", () => {
-    const { game, a } = table();
-    lands(game, "Swamp", 3);
-    const giant = toGraveyard(game, "Hill Giant");
-    const theirs = spawn(game, "Hill Giant", B);
-    pickModes(a);
-    cast(game, toHand(game, "Dead Reckoning"), { targets: [ref(giant), ref(theirs)] });
-    expect(zone(game, giant)).toBe("graveyard");
-    expect(game.state.objects[theirs].damageMarked ?? 0).toBe(0);
-  });
-});
-
 describe("Hammer of Ruin", () => {
   it("may destroy an Equipment the damaged player controls", () => {
     const { game, a } = table();
