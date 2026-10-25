@@ -20,6 +20,7 @@ import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
 import _poolArchonOfJustice from "../pool/archon-of-justice.js";
 import _poolArdenvalePaladin from "../pool/ardenvale-paladin.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
+import _poolArmadilloCloak from "../pool/armadillo-cloak.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
 import _poolArwensGift from "../pool/arwens-gift.js";
@@ -612,6 +613,7 @@ const shard: CardShard = {
     _poolArchonOfJustice,
     _poolArdenvalePaladin,
     _poolArgivianRestoration,
+    _poolArmadilloCloak,
     _poolArmoryPaladin,
     _poolArtifistAcumen,
     _poolArwensGift,

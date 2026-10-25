@@ -532,6 +532,7 @@ import _poolVadmirNewBlood from "../pool/vadmir-new-blood.js";
 import _poolValgavothHarrowerOfSouls from "../pool/valgavoth-harrower-of-souls.js";
 import _poolValkyrieHarbinger from "../pool/valkyrie-harbinger.js";
 import _poolVampireSpawn from "../pool/vampire-spawn.js";
+import _poolVampiricLink from "../pool/vampiric-link.js";
 import _poolVastwoodThicket from "../pool/vastwood-thicket.js";
 import _poolVedalkenDismisser from "../pool/vedalken-dismisser.js";
 import _poolVenomConnoisseur from "../pool/venom-connoisseur.js";
@@ -1134,6 +1135,7 @@ const shard: CardShard = {
     _poolValgavothHarrowerOfSouls,
     _poolValkyrieHarbinger,
     _poolVampireSpawn,
+    _poolVampiricLink,
     _poolVastwoodThicket,
     _poolVedalkenDismisser,
     _poolVenomConnoisseur,

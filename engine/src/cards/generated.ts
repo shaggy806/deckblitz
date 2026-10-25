@@ -781,6 +781,7 @@ import _poolArkOfBlight from "./pool/ark-of-blight.js";
 import _poolArlinnVoiceOfThePack from "./pool/arlinn-voice-of-the-pack.js";
 import _poolArlinnsWolf from "./pool/arlinns-wolf.js";
 import _poolArmTheCathars from "./pool/arm-the-cathars.js";
+import _poolArmadilloCloak from "./pool/armadillo-cloak.js";
 import _poolArmageddon from "./pool/armageddon.js";
 import _poolArmaggonFutureShark from "./pool/armaggon-future-shark.js";
 import _poolArmamentDragon from "./pool/armament-dragon.js";
@@ -2532,6 +2533,7 @@ import _poolCephalopodSentry from "./pool/cephalopod-sentry.js";
 import _poolCerebralConfiscation from "./pool/cerebral-confiscation.js";
 import _poolCerebralDownload from "./pool/cerebral-download.js";
 import _poolCeremonialGroundbreaker from "./pool/ceremonial-groundbreaker.js";
+import _poolCeremonialKnife from "./pool/ceremonial-knife.js";
 import _poolCerodonYearling from "./pool/cerodon-yearling.js";
 import _poolCeruleanDrake from "./pool/cerulean-drake.js";
 import _poolCeruleanWisps from "./pool/cerulean-wisps.js";
@@ -14756,6 +14758,8 @@ import _poolSpirePatrol from "./pool/spire-patrol.js";
 import _poolSpireWinder from "./pool/spire-winder.js";
 import _poolSpirebluffCanal from "./pool/spirebluff-canal.js";
 import _poolSpiresOfOrazca from "./pool/spires-of-orazca.js";
+import _poolSpiritLink from "./pool/spirit-link.js";
+import _poolSpiritLoop from "./pool/spirit-loop.js";
 import _poolSpiritMantle from "./pool/spirit-mantle.js";
 import _poolSpiritMascot from "./pool/spirit-mascot.js";
 import _poolSpiritOfMalevolence from "./pool/spirit-of-malevolence.js";
@@ -16522,6 +16526,7 @@ import _poolToweringIndrik from "./pool/towering-indrik.js";
 import _poolToweringThunderfist from "./pool/towering-thunderfist.js";
 import _poolToweringTitan from "./pool/towering-titan.js";
 import _poolToweringViewpoint from "./pool/towering-viewpoint.js";
+import _poolToweringWaveMystic from "./pool/towering-wave-mystic.js";
 import _poolTownGossipmonger from "./pool/town-gossipmonger.js";
 import _poolTownGreeter from "./pool/town-greeter.js";
 import _poolTownSentry from "./pool/town-sentry.js";
@@ -17174,6 +17179,7 @@ import _poolVampiresKiss from "./pool/vampires-kiss.js";
 import _poolVampiresVengeance from "./pool/vampires-vengeance.js";
 import _poolVampiresZeal from "./pool/vampires-zeal.js";
 import _poolVampiricFeast from "./pool/vampiric-feast.js";
+import _poolVampiricLink from "./pool/vampiric-link.js";
 import _poolVampiricRites from "./pool/vampiric-rites.js";
 import _poolVampiricSpirit from "./pool/vampiric-spirit.js";
 import _poolVampiricTouch from "./pool/vampiric-touch.js";
@@ -19813,6 +19819,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArlinnVoiceOfThePack,
   _poolArlinnsWolf,
   _poolArmTheCathars,
+  _poolArmadilloCloak,
   _poolArmageddon,
   _poolArmaggonFutureShark,
   _poolArmamentDragon,
@@ -21564,6 +21571,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCerebralConfiscation,
   _poolCerebralDownload,
   _poolCeremonialGroundbreaker,
+  _poolCeremonialKnife,
   _poolCerodonYearling,
   _poolCeruleanDrake,
   _poolCeruleanWisps,
@@ -33788,6 +33796,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpireWinder,
   _poolSpirebluffCanal,
   _poolSpiresOfOrazca,
+  _poolSpiritLink,
+  _poolSpiritLoop,
   _poolSpiritMantle,
   _poolSpiritMascot,
   _poolSpiritOfMalevolence,
@@ -35554,6 +35564,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolToweringThunderfist,
   _poolToweringTitan,
   _poolToweringViewpoint,
+  _poolToweringWaveMystic,
   _poolTownGossipmonger,
   _poolTownGreeter,
   _poolTownSentry,
@@ -36206,6 +36217,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVampiresVengeance,
   _poolVampiresZeal,
   _poolVampiricFeast,
+  _poolVampiricLink,
   _poolVampiricRites,
   _poolVampiricSpirit,
   _poolVampiricTouch,
@@ -38858,6 +38870,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arlinn-voice-of-the-pack": _poolArlinnVoiceOfThePack,
   "pool/arlinns-wolf": _poolArlinnsWolf,
   "pool/arm-the-cathars": _poolArmTheCathars,
+  "pool/armadillo-cloak": _poolArmadilloCloak,
   "pool/armageddon": _poolArmageddon,
   "pool/armaggon-future-shark": _poolArmaggonFutureShark,
   "pool/armament-dragon": _poolArmamentDragon,
@@ -40609,6 +40622,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cerebral-confiscation": _poolCerebralConfiscation,
   "pool/cerebral-download": _poolCerebralDownload,
   "pool/ceremonial-groundbreaker": _poolCeremonialGroundbreaker,
+  "pool/ceremonial-knife": _poolCeremonialKnife,
   "pool/cerodon-yearling": _poolCerodonYearling,
   "pool/cerulean-drake": _poolCeruleanDrake,
   "pool/cerulean-wisps": _poolCeruleanWisps,
@@ -52833,6 +52847,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spire-winder": _poolSpireWinder,
   "pool/spirebluff-canal": _poolSpirebluffCanal,
   "pool/spires-of-orazca": _poolSpiresOfOrazca,
+  "pool/spirit-link": _poolSpiritLink,
+  "pool/spirit-loop": _poolSpiritLoop,
   "pool/spirit-mantle": _poolSpiritMantle,
   "pool/spirit-mascot": _poolSpiritMascot,
   "pool/spirit-of-malevolence": _poolSpiritOfMalevolence,
@@ -54599,6 +54615,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/towering-thunderfist": _poolToweringThunderfist,
   "pool/towering-titan": _poolToweringTitan,
   "pool/towering-viewpoint": _poolToweringViewpoint,
+  "pool/towering-wave-mystic": _poolToweringWaveMystic,
   "pool/town-gossipmonger": _poolTownGossipmonger,
   "pool/town-greeter": _poolTownGreeter,
   "pool/town-sentry": _poolTownSentry,
@@ -55251,6 +55268,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vampires-vengeance": _poolVampiresVengeance,
   "pool/vampires-zeal": _poolVampiresZeal,
   "pool/vampiric-feast": _poolVampiricFeast,
+  "pool/vampiric-link": _poolVampiricLink,
   "pool/vampiric-rites": _poolVampiricRites,
   "pool/vampiric-spirit": _poolVampiricSpirit,
   "pool/vampiric-touch": _poolVampiricTouch,

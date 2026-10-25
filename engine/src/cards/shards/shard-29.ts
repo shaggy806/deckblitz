@@ -80,6 +80,7 @@ import _poolCausticHound from "../pool/caustic-hound.js";
 import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
 import _poolCentaurPeacemaker from "../pool/centaur-peacemaker.js";
+import _poolCeremonialKnife from "../pool/ceremonial-knife.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
@@ -511,6 +512,7 @@ import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
+import _poolToweringWaveMystic from "../pool/towering-wave-mystic.js";
 import _poolTrialOfStrength from "../pool/trial-of-strength.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTroveTracker from "../pool/trove-tracker.js";
@@ -674,6 +676,7 @@ const shard: CardShard = {
     _poolCavernThoctar,
     _poolCelestialAncient,
     _poolCentaurPeacemaker,
+    _poolCeremonialKnife,
     _poolChar,
     _poolChargingBadger,
     _poolCharredGraverobber,
@@ -1105,6 +1108,7 @@ const shard: CardShard = {
     _poolTorchBreath,
     _poolTormodTheDesecrator,
     _poolTorturePit,
+    _poolToweringWaveMystic,
     _poolTrialOfStrength,
     _poolTriumphantAdventurer,
     _poolTroveTracker,

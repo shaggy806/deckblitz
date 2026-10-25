@@ -140,11 +140,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   its own "enters tapped" the engine makes that player's choice for them — the one they'd make
   almost always, which is why the card is authored. A choice asked of the controller would close
   it.
-- **`deals-damage` fires once per recipient.** Its docs say so on purpose, but an unqualified
-  "whenever ~ deals damage" triggers once per simultaneous damage event, however many things it hit
-  (Armadillo Cloak's ruling — rule 603.2c): a trampler or a creature dealing damage to several
-  things at once would draw or gain life twice. Check each pool card on `deals-damage` without a
-  `to` clause (raised by batch 109's review of Vrondiss).
 
 ## Latent
 

@@ -404,7 +404,9 @@
   "trigger:loyalty-counters-removed",
   "amount:mana-ability-sacrificed-object",
   "replacement:prevent-once-per-damage-event",
-  "effect:grant-activated-dynamic-target-filter"
+  "effect:grant-activated-dynamic-target-filter",
+  "trigger:deals-damage-once-per-event",
+  "trigger:deals-combat-damage-once-per-event"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

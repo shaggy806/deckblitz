@@ -819,6 +819,21 @@ interface OwedPreventFollowUp {
 }
 
 /** `trigger` without the player its event named (`LastKnownRefs.player`). */
+/** A `deals-damage` trigger that says nothing of what the damage was dealt
+ * to — "whenever enchanted creature deals damage" — triggers once per
+ * simultaneous damage event however many things were dealt it (rule 603.2c,
+ * Armadillo Cloak's ruling); one that names a recipient ("to a player", "to
+ * a creature", "exactly 1 to a permanent or player") once per recipient. */
+function dealsDamageOncePerEvent(trigger: TriggerSpec): boolean {
+  return (
+    trigger.on === "deals-damage" &&
+    trigger.to === undefined &&
+    trigger.toFilter === undefined &&
+    trigger.exactly === undefined &&
+    trigger.toItsTarget !== true
+  );
+}
+
 function withoutTriggerPlayer(trigger: PendingTrigger): PendingTrigger {
   const refs = trigger.lastKnownRefs;
   if (refs?.player === undefined) return trigger;
@@ -1123,6 +1138,12 @@ export class Game {
      * hitting Chandra, Fire Artisan at once remove them at once (her
      * ruling). */
     readonly countersRemoved: Map<
+      string,
+      { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+    >;
+    /** Unqualified `deals-damage` triggers owed, once per watcher ability and
+     * source for the whole event ({@link dealsDamageOncePerEvent}). */
+    readonly dealsDamage: Map<
       string,
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
     >;
@@ -17945,6 +17966,7 @@ export class Game {
           // (`splitTargetRef`), so ten tokens dealt 1 are each dealt 2 more.
           const recipients =
             (ability.trigger.on === "deals-damage" || ability.trigger.on === "dealt-damage") &&
+            !dealsDamageOncePerEvent(ability.trigger) &&
             event.type === "damage-dealt" &&
             event.target.kind === "object" &&
             event.target.object !== id
@@ -18114,6 +18136,25 @@ export class Game {
             } else {
               owed.players.add(player);
               owed.amount += event.amount;
+            }
+            return;
+          }
+          // "Whenever this deals damage", with nothing said of what to: once
+          // per simultaneous damage event, however many things it hit (rule
+          // 603.2c — Armadillo Cloak's ruling), "that much" the total.
+          if (dealsDamageOncePerEvent(ability.trigger) && event.type === "damage-dealt" && damageBatch !== null) {
+            const key = `${id}#${index}@${event.source}`;
+            const amount =
+              event.target.kind === "object" ? event.amount * (this.state.objects[event.target.object]?.stackCount ?? 1) : event.amount;
+            const owed = damageBatch.dealsDamage.get(key);
+            if (owed === undefined) {
+              damageBatch.dealsDamage.set(key, {
+                ability,
+                trigger: { ...withoutTriggerPlayer(base), triggerValue: amount },
+                multiplier,
+              });
+            } else {
+              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + amount };
             }
             return;
           }
@@ -32345,6 +32386,10 @@ export class Game {
         string,
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
       >(),
+      dealsDamage: new Map<
+        string,
+        { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+      >(),
     };
     this.damageBatch = batch;
     try {
@@ -32356,6 +32401,9 @@ export class Game {
       this.queueTrigger(ability, trigger, multiplier);
     }
     for (const { ability, trigger, multiplier } of batch.countersRemoved.values()) {
+      this.queueTrigger(ability, trigger, multiplier);
+    }
+    for (const { ability, trigger, multiplier } of batch.dealsDamage.values()) {
       this.queueTrigger(ability, trigger, multiplier);
     }
     for (const owed of batch.damageTo.values()) {

@@ -1561,10 +1561,13 @@ export type TriggerSpec =
        * noncombat damage to an opponent", Kediss's "whenever a commander you
        * control deals combat damage to an opponent".
        *
-       * Fires once per damage event per recipient: a source that deals damage
-       * to three things at once (a `damage-all`, "each opponent", a trampler
-       * and its blocker) triggers three times, each with the amount *that*
-       * recipient was dealt. That amount is after prevention and doubling —
+       * With a recipient named (`to`, `toFilter`, `exactly`, `toItsTarget`)
+       * it fires once per damage event per recipient: a source that deals
+       * damage to three things at once (a `damage-all`, "each opponent", a
+       * trampler and its blocker) triggers three times, each with the amount
+       * *that* recipient was dealt. With none — "whenever this deals damage"
+       * — it fires once per simultaneous damage event, for the total (rule
+       * 603.2c, Armadillo Cloak's ruling). That amount is after prevention and doubling —
        * damage that was prevented was never dealt (rule 615.1), so it doesn't
        * trigger at all, and 2 damage prevented down to 1 is "exactly 1".
        *

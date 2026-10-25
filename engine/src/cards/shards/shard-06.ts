@@ -462,6 +462,7 @@ import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
+import _poolSpiritLoop from "../pool/spirit-loop.js";
 import _poolSpiritOfTheSpires from "../pool/spirit-of-the-spires.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
 import _poolSplittingThePowerstone from "../pool/splitting-the-powerstone.js";
@@ -1057,6 +1058,7 @@ const shard: CardShard = {
     _poolSpectralProcession,
     _poolSpellseeker,
     _poolSpiketailDrakeling,
+    _poolSpiritLoop,
     _poolSpiritOfTheSpires,
     _poolSpiritcallEnthusiast,
     _poolSplittingThePowerstone,
