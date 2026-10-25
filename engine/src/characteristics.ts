@@ -35,7 +35,7 @@ import type {
   StaticCondition,
   TurnStat,
 } from "./cards.js";
-import { printedHasAbility } from "./cards/define.js";
+import { bestowedDefinition, printedHasAbility } from "./cards/define.js";
 import {
   aggregateOver,
   aggregateValueOf,
@@ -1599,8 +1599,17 @@ export function suspectedGrantsApply(object: GameObject): boolean {
 /** Printed subtypes, then its changeling (see {@link withChangeling}) — the
  * subtypes layer 4 starts from. */
 function printedSubtypes(registry: CardRegistry, object: GameObject): readonly string[] {
-  const def = registry.get(printedCardName(object));
+  const def = printedDefinition(registry, object);
   return withChangeling(def, def.subtypes, registry.get(rulesTextName(object)));
+}
+
+/** The definition layer 4 starts from: its printed one, or — cast bestowed
+ * (rule 702.103b, `GameObject.bestowed`) — that card as an Aura
+ * enchantment, not a creature, which no layer effect undoes but those
+ * that come later. */
+function printedDefinition(registry: CardRegistry, object: GameObject): CardDefinition {
+  const def = registry.get(printedCardName(object));
+  return object.bestowed === true ? bestowedDefinition(def) : def;
 }
 
 /**
@@ -1776,7 +1785,7 @@ export function layerFour(
  * before statics could grant types, and still the whole answer whenever no
  * type-granting static is on the battlefield. */
 function ownLayerFour(registry: CardRegistry, object: GameObject): LayerFour {
-  let types: readonly CardType[] = registry.get(printedCardName(object)).types;
+  let types: readonly CardType[] = printedDefinition(registry, object).types;
   let subtypes = printedSubtypes(registry, object);
   for (const modifier of typeModifiers(object)) {
     ({ types, subtypes } = applyModifierTypes(modifier, types, subtypes));
@@ -1829,7 +1838,7 @@ function foldLayerFourOnce(
   steps: readonly LayerFourStep[],
   previous: LayerFour | null,
 ): LayerFour {
-  let types: readonly CardType[] = registry.get(printedCardName(object)).types;
+  let types: readonly CardType[] = printedDefinition(registry, object).types;
   let subtypes = printedSubtypes(registry, object);
   const applied: ContributingStatic[] = [];
   for (const step of steps) {
@@ -3222,7 +3231,7 @@ function computeCharacteristicsUncached(
   id: ObjectId,
 ): Characteristics {
   const object = state.objects[id];
-  const def = registry.get(printedCardName(object));
+  const def = printedDefinition(registry, object);
   // Its abilities are its text's: another card's, after an exchange of text
   // boxes (layer 3, rule 612.5).
   const text = registry.get(rulesTextName(object));

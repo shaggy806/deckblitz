@@ -34,6 +34,7 @@ import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
+import { bestowedDefinition } from "./cards/define.js";
 import { computeCharacteristics, playerCantLoseGame, playerCantLoseLife } from "./characteristics.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
@@ -781,6 +782,9 @@ export function offerPolarities(
     return ability === undefined ? null : abilityPolarities(ability, bias);
   }
   if (offer.castModal !== undefined) return null;
+  // Cast bestowed, it's an Aura with enchant creature (rule 702.103b): its
+  // one slot's polarity is its "enchanted creature" statics'.
+  if (offer.overload === true && def.overload?.keyword === "bestow") return castPolarities(bestowedDefinition(def), bias);
   const face = offer.face !== undefined ? def.faces?.[offer.face] : undefined;
   if (face !== undefined && face !== def.name) {
     return registry.has(face) ? castPolarities(registry.get(face), bias) : null;

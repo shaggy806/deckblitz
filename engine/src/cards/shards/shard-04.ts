@@ -92,6 +92,7 @@ import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
+import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
@@ -329,6 +330,7 @@ import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
+import _poolMogissWarhound from "../pool/mogiss-warhound.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
@@ -718,6 +720,7 @@ const shard: CardShard = {
     _poolCrimsonCaravaneer,
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
+    _poolCrystallineNautilus,
     _poolCubwarden,
     _poolCultistOfTheAbsolute,
     _poolCurseOfVitality,
@@ -955,6 +958,7 @@ const shard: CardShard = {
     _poolMindfulBiomancer,
     _poolMistfireWeaver,
     _poolMockingbirdAceAgent,
+    _poolMogissWarhound,
     _poolMomentOfValor,
     _poolMoonriseIntruder,
     _poolMoonshadow,

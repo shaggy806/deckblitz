@@ -606,6 +606,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         "Emerge from artifact {5}{B}{B} (You may cast this spell by sacrificing an artifact and paying the emerge cost reduced by that artifact's mana value.)",
       ).emerge,
     ).toEqual({ cost: "{5}{B}{B}", from: { type: "artifact" } });
+    // Bestow (rule 702.103a).
+    const bestower = face(
+      "Bestow {3}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)",
+    );
+    expect(bestower.bestow).toBe("{3}{B}");
+    expect(bestower.complete).toBe(true);
     // Dash (rule 702.109a).
     const dasher = face(
       "Dash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)",

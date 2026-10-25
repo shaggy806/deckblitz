@@ -66,6 +66,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { ninjutsu } from "./cards/helpers.js";
+import { bestowedDefinition } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { INITIATIVE_CARD } from "./cards/initiative.js";
@@ -2719,8 +2720,9 @@ export class Game {
 
   /** The colour/type identity of a card (its printed values). */
   private cardSource(def: CardDefinition, object?: ObjectId, x?: number): TargetSource {
-    const base = cardSource(def, object);
     const card = object !== undefined ? this.state.objects[object] : undefined;
+    // A bestowed Aura spell is an enchantment, not a creature (rule 702.103b).
+    const base = cardSource(card?.bestowed === true ? bestowedDefinition(def) : def, object);
     if (object === undefined || card === undefined) return base;
     // A spell's own {X} (rule 107.3) — the X it's being cast for while it's
     // cast (`x`), the X it was cast for once it's on the stack, and zero
@@ -12616,6 +12618,9 @@ export class Game {
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
     if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
     if (overload) object.overloaded = true;
+    // Cast bestowed: an Aura spell with enchant creature from here on (rule
+    // 702.103b), what it targets chosen as an Aura's is.
+    if (overload && def.overload?.keyword === "bestow") object.bestowed = true;
     this.executePayment(player, payment);
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
     // life paid for a Phyrexian pip isn't counted as mana.
@@ -16646,9 +16651,10 @@ export class Game {
     if (object === undefined || object.zone !== "stack") return;
     const def = this.registry.get(printedCardName(object));
     // An Aura spell enters attached to what it targets (rule 608.3b) — the
-    // one way an Aura enters without choosing what it enchants (303.4f).
+    // one way an Aura enters without choosing what it enchants (303.4f). A
+    // bestowed one too (702.103b).
     if (
-      def.subtypes.includes("Aura") &&
+      (def.subtypes.includes("Aura") || object.bestowed === true) &&
       object.enterChoice?.enchant === undefined &&
       object.enterChoice?.enchantPlayer === undefined
     ) {
@@ -16944,6 +16950,27 @@ export class Game {
     return true;
   }
 
+  /** A bestowed Aura spell begins resolving (rule 702.103e): with its target
+   * illegal it stops being bestowed — no Aura, no targets, its overload flag
+   * gone so its spell resolves as the creature it is. */
+  private unbestowIfTargetIllegal(id: ObjectId): void {
+    const object = this.state.objects[id];
+    const def = this.registry.get(printedCardName(object));
+    const legality = this.targetLegality(
+      this.spellTargetSpecs(object),
+      object.targets ?? [],
+      this.targetsStillMeant(object),
+      object.controller,
+      this.cardSource(bestowedDefinition(def), id),
+    );
+    if (!legality.fizzles) return;
+    this.forgetSpellTargets(object);
+    object.bestowed = undefined;
+    object.overloaded = undefined;
+    object.targets = [];
+    invalidateComputedCache();
+  }
+
   private resolveTopObject(): void {
     const stack = this.state.zones.shared.stack;
     const id = stack[stack.length - 1];
@@ -16963,6 +16990,10 @@ export class Game {
     // being a mutating spell and resolves as an ordinary creature spell
     // (702.140b) — below, with no targets.
     if (object.overloaded === true && def.overload?.keyword === "mutate" && this.resolveMutatingSpell(id, def)) return;
+    // A bestowed Aura spell whose target is illegal as it begins resolving
+    // ceases to be bestowed and resolves as a creature spell (rules
+    // 702.103e, 608.3b) — onto the battlefield, never fizzling.
+    if (object.bestowed === true) this.unbestowIfTargetIllegal(id);
 
     // A kicked spell may target something its unkicked specs wouldn't allow
     // (Tear Asunder), so the check uses the specs it was actually cast with,
@@ -26015,6 +26046,7 @@ export class Game {
       ...(object.kicked === true ? { kicked: true } : {}),
       ...(object.timesKicked !== undefined ? { timesKicked: object.timesKicked } : {}),
       ...(object.overloaded === true ? { overloaded: true } : {}),
+      ...(object.bestowed === true ? { bestowed: true } : {}),
       ...(object.evokePaid === true ? { evokePaid: true } : {}),
       ...(object.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(object.surgePaid === true ? { surgePaid: true } : {}),
@@ -26082,6 +26114,8 @@ export class Game {
       ...(spell.kicked === true ? { kicked: true } : {}),
       ...(spell.timesKicked !== undefined ? { timesKicked: spell.timesKicked } : {}),
       ...(spell.overloaded === true ? { overloaded: true } : {}),
+      // A copy of a bestowed Aura spell is one too (rule 702.103c).
+      ...(spell.bestowed === true ? { bestowed: true } : {}),
       ...(spell.evokePaid === true ? { evokePaid: true } : {}),
       ...(spell.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(spell.surgePaid === true ? { surgePaid: true } : {}),
@@ -26752,7 +26786,9 @@ export class Game {
     const sourceObject = this.state.objects[source];
     if (sourceObject === undefined || sourceObject.zone !== "battlefield") return;
     if (sourceObject.attachedTo === targetId) return;
-    const def = this.registry.get(printedCardName(sourceObject));
+    const printed = this.registry.get(printedCardName(sourceObject));
+    // A bestowed Aura moves as an Aura (rule 702.103b).
+    const def = sourceObject.bestowed === true ? bestowedDefinition(printed) : printed;
     const legal = def.subtypes.includes("Aura")
       ? this.canEnchant(source, targetId, sourceObject.controller, def)
       : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true);
@@ -33664,6 +33700,20 @@ export class Game {
       // the graveyard (`stateBasedGraveyardMoves`).
       for (const id of this.state.zones.shared.battlefield) {
         const object = this.state.objects[id];
+        // A bestowed Aura unattached, or attached to something it can't
+        // enchant, becomes unattached and ceases to be bestowed — a creature
+        // again, where it is (rule 702.103f, the exception to 704.5m).
+        if (object.bestowed === true && this.inGame(object)) {
+          const host = object.attachedTo;
+          const def = bestowedDefinition(this.registry.get(printedCardName(object)));
+          if (host !== null && this.canEnchant(id, host, object.controller, def)) continue;
+          object.bestowed = undefined;
+          object.attachedTo = null;
+          invalidateComputedCache();
+          if (host !== null) this.emit({ type: "permanent-unattached", object: id, from: host });
+          changed = true;
+          continue;
+        }
         if (object.attachedTo === null || !this.inGame(object)) continue;
         const subtypes = this.registry.get(printedCardName(object)).subtypes;
         if (subtypes.includes("Aura")) continue;
@@ -36054,6 +36104,9 @@ export class Game {
     object.abilitiesUsedThisTurn = undefined;
     object.exhaustedAbilities = undefined;
     object.overloaded = undefined;
+    // A bestowed Aura spell becomes a bestowed Aura (rule 702.103b); any
+    // other move ends it.
+    if (!(previousZone === "stack" && to === "battlefield")) object.bestowed = undefined;
     // Graveyard permissions: a card's own "you may cast it this turn" belongs
     // to that object in that graveyard, and a grantor's spent allowances to
     // that object on the battlefield — a card that comes back is a new object

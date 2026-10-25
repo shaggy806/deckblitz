@@ -2097,6 +2097,8 @@ export function parseFace(face, ctx = {}) {
     }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
+    // Bestow [cost] (rule 702.103a): the card's `bestow`.
+    if ((m = /^Bestow ((?:\{[^}]+\})+)$/.exec(line))) { out.bestow = m[1]; continue; }
     // Party (rule 700.8) and domain (207.2c) cost reductions: {1} less for
     // each, unconditionally — the always-true gate Leyline Binding uses.
     const perEach = {

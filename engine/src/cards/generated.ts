@@ -3675,6 +3675,7 @@ import _poolCrystalSlipper from "./pool/crystal-slipper.js";
 import _poolCrystalVein from "./pool/crystal-vein.js";
 import _poolCrystallineCrawler from "./pool/crystalline-crawler.js";
 import _poolCrystallineGiant from "./pool/crystalline-giant.js";
+import _poolCrystallineNautilus from "./pool/crystalline-nautilus.js";
 import _poolCrystallineResonance from "./pool/crystalline-resonance.js";
 import _poolCrystallineSliver from "./pool/crystalline-sliver.js";
 import _poolCrystallizedSerah from "./pool/crystallized-serah.js";
@@ -6997,6 +6998,7 @@ import _poolGnarledGrovestrider from "./pool/gnarled-grovestrider.js";
 import _poolGnarledMass from "./pool/gnarled-mass.js";
 import _poolGnarledProfessor from "./pool/gnarled-professor.js";
 import _poolGnarledSage from "./pool/gnarled-sage.js";
+import _poolGnarledScarhide from "./pool/gnarled-scarhide.js";
 import _poolGnarlrootPallbearer from "./pool/gnarlroot-pallbearer.js";
 import _poolGnarlrootTrapper from "./pool/gnarlroot-trapper.js";
 import _poolGnarlwoodDryad from "./pool/gnarlwood-dryad.js";
@@ -8308,6 +8310,7 @@ import _poolHymnToTourach from "./pool/hymn-to-tourach.js";
 import _poolHyperionBlacksmith from "./pool/hyperion-blacksmith.js";
 import _poolHyperionsAtomicVision from "./pool/hyperions-atomic-vision.js";
 import _poolHypnoticGrifter from "./pool/hypnotic-grifter.js";
+import _poolHypnoticSiren from "./pool/hypnotic-siren.js";
 import _poolHypnoticSpecter from "./pool/hypnotic-specter.js";
 import _poolHypnoticSprite from "./pool/hypnotic-sprite.js";
 import _poolHyraxTowerScout from "./pool/hyrax-tower-scout.js";
@@ -11001,6 +11004,7 @@ import _poolMoggSentry from "./pool/mogg-sentry.js";
 import _poolMoggcatcher from "./pool/moggcatcher.js";
 import _poolMogisGodOfSlaughter from "./pool/mogis-god-of-slaughter.js";
 import _poolMogissFavor from "./pool/mogiss-favor.js";
+import _poolMogissWarhound from "./pool/mogiss-warhound.js";
 import _poolMoiraAndTeshar from "./pool/moira-and-teshar.js";
 import _poolMoldDemon from "./pool/mold-demon.js";
 import _poolMolderhulk from "./pool/molderhulk.js";
@@ -24219,6 +24223,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrystalVein,
   _poolCrystallineCrawler,
   _poolCrystallineGiant,
+  _poolCrystallineNautilus,
   _poolCrystallineResonance,
   _poolCrystallineSliver,
   _poolCrystallizedSerah,
@@ -27541,6 +27546,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGnarledMass,
   _poolGnarledProfessor,
   _poolGnarledSage,
+  _poolGnarledScarhide,
   _poolGnarlrootPallbearer,
   _poolGnarlrootTrapper,
   _poolGnarlwoodDryad,
@@ -28852,6 +28858,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHyperionBlacksmith,
   _poolHyperionsAtomicVision,
   _poolHypnoticGrifter,
+  _poolHypnoticSiren,
   _poolHypnoticSpecter,
   _poolHypnoticSprite,
   _poolHyraxTowerScout,
@@ -31545,6 +31552,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoggcatcher,
   _poolMogisGodOfSlaughter,
   _poolMogissFavor,
+  _poolMogissWarhound,
   _poolMoiraAndTeshar,
   _poolMoldDemon,
   _poolMolderhulk,
@@ -44776,6 +44784,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crystal-vein": _poolCrystalVein,
   "pool/crystalline-crawler": _poolCrystallineCrawler,
   "pool/crystalline-giant": _poolCrystallineGiant,
+  "pool/crystalline-nautilus": _poolCrystallineNautilus,
   "pool/crystalline-resonance": _poolCrystallineResonance,
   "pool/crystalline-sliver": _poolCrystallineSliver,
   "pool/crystallized-serah": _poolCrystallizedSerah,
@@ -48098,6 +48107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gnarled-mass": _poolGnarledMass,
   "pool/gnarled-professor": _poolGnarledProfessor,
   "pool/gnarled-sage": _poolGnarledSage,
+  "pool/gnarled-scarhide": _poolGnarledScarhide,
   "pool/gnarlroot-pallbearer": _poolGnarlrootPallbearer,
   "pool/gnarlroot-trapper": _poolGnarlrootTrapper,
   "pool/gnarlwood-dryad": _poolGnarlwoodDryad,
@@ -49409,6 +49419,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hyperion-blacksmith": _poolHyperionBlacksmith,
   "pool/hyperions-atomic-vision": _poolHyperionsAtomicVision,
   "pool/hypnotic-grifter": _poolHypnoticGrifter,
+  "pool/hypnotic-siren": _poolHypnoticSiren,
   "pool/hypnotic-specter": _poolHypnoticSpecter,
   "pool/hypnotic-sprite": _poolHypnoticSprite,
   "pool/hyrax-tower-scout": _poolHyraxTowerScout,
@@ -52102,6 +52113,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moggcatcher": _poolMoggcatcher,
   "pool/mogis-god-of-slaughter": _poolMogisGodOfSlaughter,
   "pool/mogiss-favor": _poolMogissFavor,
+  "pool/mogiss-warhound": _poolMogissWarhound,
   "pool/moira-and-teshar": _poolMoiraAndTeshar,
   "pool/mold-demon": _poolMoldDemon,
   "pool/molderhulk": _poolMolderhulk,

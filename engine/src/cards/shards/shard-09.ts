@@ -226,6 +226,7 @@ import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
+import _poolGnarledScarhide from "../pool/gnarled-scarhide.js";
 import _poolGoatnap from "../pool/goatnap.js";
 import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
@@ -884,6 +885,7 @@ const shard: CardShard = {
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
+    _poolGnarledScarhide,
     _poolGoatnap,
     _poolGoblinGloryChaser,
     _poolGoblinTown,
