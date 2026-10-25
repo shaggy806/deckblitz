@@ -12,6 +12,7 @@ import { fitsTogether } from "../zone-choice-together.js";
 import {
   A,
   B,
+  C,
   activate,
   attack,
   cast,
@@ -33,6 +34,7 @@ import {
   table,
   toGraveyard,
   toHand,
+  toStep,
   tokensNamed,
   zone,
 } from "./harness.js";
@@ -234,5 +236,24 @@ describe("a graveyard choice with a set rule: total mana value N or less", () =>
     expect(fits?.([])).toBe(true);
     expect(zone(game, giant)).toBe("battlefield");
     expect(zone(game, bears)).toBe("graveyard");
+  });
+});
+
+describe("\"whenever a creature you control deals combat damage to that player this turn\"", () => {
+  it("Great Train Heist: a tapped Treasure for each creature that connects with the chosen opponent, none for another", () => {
+    const { game, a } = table({ players: 3 });
+    const bears = spawn(game, "Grizzly Bears");
+    const lions = spawn(game, "Savannah Lions");
+    const giant = spawn(game, "Hill Giant");
+    lands(game, "Mountain", 2);
+    cast(game, toHand(game, "Great Train Heist"), { modes: [2], targets: [ref(B)] });
+    a.declareAttackersFn = () => [
+      { attacker: bears, defender: B },
+      { attacker: lions, defender: B },
+      { attacker: giant, defender: C },
+    ];
+    toStep(game, "postcombat-main");
+    expect(tokensNamed(game, "Treasure Token")).toBe(2);
+    expect(game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === "Treasure Token").every((id) => game.state.objects[id].tapped)).toBe(true);
   });
 });

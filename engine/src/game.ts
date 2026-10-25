@@ -29732,7 +29732,7 @@ export class Game {
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | DelayedWhenever,
+      | { readonly whenever: DelayedWhenever["whenever"]; readonly player?: PlayerId },
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -29748,7 +29748,11 @@ export class Game {
       | DelayedUnblockedWatch
       | DelayedEventWatch;
     if (typeof at === "object" && "whenever" in at) {
-      when = { whenever: at.whenever, turn: this.state.turn.number };
+      when = {
+        whenever: at.whenever,
+        ...(at.player !== undefined ? { player: at.player } : {}),
+        turn: this.state.turn.number,
+      };
     } else if (typeof at === "object" && "nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
@@ -30051,6 +30055,13 @@ export class Game {
         continue;
       }
       const spec = trigger.at.whenever;
+      const toPlayer = trigger.at.player;
+      if (
+        toPlayer !== undefined &&
+        !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === toPlayer)
+      ) {
+        continue;
+      }
       const source = this.state.objects[trigger.source];
       if (source === undefined) continue;
       const self = source.controller === trigger.controller ? source : { ...source, controller: trigger.controller };

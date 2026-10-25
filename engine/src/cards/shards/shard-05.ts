@@ -242,6 +242,7 @@ import _poolGravespawnSovereign from "../pool/gravespawn-sovereign.js";
 import _poolGraySlaad from "../pool/gray-slaad.js";
 import _poolGreasefangOkibaBoss from "../pool/greasefang-okiba-boss.js";
 import _poolGreatHallOfTheCitadel from "../pool/great-hall-of-the-citadel.js";
+import _poolGreatTrainHeist from "../pool/great-train-heist.js";
 import _poolGreenwardenOfMurasa from "../pool/greenwarden-of-murasa.js";
 import _poolGrimAffliction from "../pool/grim-affliction.js";
 import _poolGrimBackwoods from "../pool/grim-backwoods.js";
@@ -846,6 +847,7 @@ const shard: CardShard = {
     _poolGraySlaad,
     _poolGreasefangOkibaBoss,
     _poolGreatHallOfTheCitadel,
+    _poolGreatTrainHeist,
     _poolGreenwardenOfMurasa,
     _poolGrimAffliction,
     _poolGrimBackwoods,

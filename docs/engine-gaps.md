@@ -34,10 +34,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (Abaddon the Despoiler's cascade) is missed: Jasmine Boreal of the Seven's "only to cast
   creature spells with no abilities" (her ruling) would wrongly pay for it. She waits on it
   (`cost:mana-restriction-at-cast` in the gaps JSON).
-- **"Whenever a creature you control deals combat damage to that player this turn"** — a
-  delayed trigger lasting the turn, keyed on a target player (Great Train Heist's third mode),
-  and "if it's your combat phase" as a condition (its first). `DelayedCombatDamage` watches one
-  creature only.
 - **Delve and convoke together on an {X} spell.** `xCost.maxX` is the better of the two alone
   (`xPlanFor`), so Chord of Calling under Teval, Arbiter of Virtue can't reach the X both would
   pay together, and its offer's convoke proof and delve ranges are each worked out without the

@@ -6794,6 +6794,7 @@ import _poolGreatIntelligencesPlan from "./pool/great-intelligences-plan.js";
 import _poolGreatOakGuardian from "./pool/great-oak-guardian.js";
 import _poolGreatSableStag from "./pool/great-sable-stag.js";
 import _poolGreatTeachersDecree from "./pool/great-teachers-decree.js";
+import _poolGreatTrainHeist from "./pool/great-train-heist.js";
 import _poolGreatUglyLookingGoblin from "./pool/great-ugly-looking-goblin.js";
 import _poolGreatWall from "./pool/great-wall.js";
 import _poolGreataxe from "./pool/greataxe.js";
@@ -25836,6 +25837,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGreatOakGuardian,
   _poolGreatSableStag,
   _poolGreatTeachersDecree,
+  _poolGreatTrainHeist,
   _poolGreatUglyLookingGoblin,
   _poolGreatWall,
   _poolGreataxe,
@@ -44891,6 +44893,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/great-oak-guardian": _poolGreatOakGuardian,
   "pool/great-sable-stag": _poolGreatSableStag,
   "pool/great-teachers-decree": _poolGreatTeachersDecree,
+  "pool/great-train-heist": _poolGreatTrainHeist,
   "pool/great-ugly-looking-goblin": _poolGreatUglyLookingGoblin,
   "pool/great-wall": _poolGreatWall,
   "pool/greataxe": _poolGreataxe,

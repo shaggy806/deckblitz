@@ -240,6 +240,10 @@ export interface DelayedUnblocked {
  * with the turn. The event's object is its trigger object. */
 export interface DelayedWhenever {
   readonly whenever: TriggerSpec;
+  /** "…deals combat damage to **that player** this turn" (Great Train
+   * Heist): a target slot holding a player, fixed as this resolves; only
+   * damage dealt to them fires it. */
+  readonly toPlayer?: number;
 }
 
 /** How a `flicker` returns what it exiled — the non-target half of its
@@ -6040,7 +6044,7 @@ export interface EffectApi {
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | DelayedWhenever,
+      | { readonly whenever: TriggerSpec; readonly player?: PlayerId },
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -9226,7 +9230,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (typeof spec.at === "object" && "whenever" in spec.at) {
-        ctx.delayTrigger({ whenever: spec.at.whenever }, spec.effect, spec.text, controller);
+        let player: PlayerId | undefined;
+        if (spec.at.toPlayer !== undefined) {
+          if (illegalSlot(spec.at.toPlayer, ctx)) return;
+          const target = ctx.targets[spec.at.toPlayer];
+          if (target?.kind !== "player") return;
+          player = target.player;
+        }
+        ctx.delayTrigger(
+          { whenever: spec.at.whenever, ...(player !== undefined ? { player } : {}) },
+          spec.effect,
+          spec.text,
+          controller,
+        );
         return;
       }
       if (typeof spec.at === "object" && "attacksUnblocked" in spec.at) {

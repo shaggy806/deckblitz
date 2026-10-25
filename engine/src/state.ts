@@ -3114,6 +3114,8 @@ export interface DelayedUnblockedWatch {
  * the turn — see `DelayedWhenever`. Fires each time; lapses with the turn. */
 export interface DelayedEventWatch {
   readonly whenever: TriggerSpec;
+  /** Only damage dealt to this player — `DelayedWhenever.toPlayer`. */
+  readonly player?: PlayerId;
   readonly turn: number;
 }
 
