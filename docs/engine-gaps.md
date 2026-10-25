@@ -27,10 +27,10 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`xPlanFor`), so Chord of Calling under Teval, Arbiter of Virtue can't reach the X both would
   pay together, and its offer's convoke proof and delve ranges are each worked out without the
   other. Needs a joint plan: convoke the creatures, delve the rest of the generic.
-- **Not modeled.** Battles, dungeons/Initiative, banding, Companion, snow *sources* (snow mana
-  is generic), and text change that replaces words (612.2: Artificial Evolution, Mind Bend, Magical Hack, New Blood — a rework
+- **Not modeled.** Banding, Companion, and text change that replaces words (612.2: Artificial Evolution, Mind Bend, Magical Hack, New Blood — a rework
   of the card format the user ruled not worth one cycle of cards, 2026-10-09; exchanging text
-  boxes, 612.5, is built). ROADMAP's Phase 10 deferred these as large or niche. None of them
+  boxes, 612.5, is built). Battles, dungeons and the Initiative, and snow sources paying {S}, are
+  built. ROADMAP's Phase 10 deferred the rest as large or niche. None of them
   blocks ordinary Commander play. The alt-cast long tail left by Phase 6 (retrace, Warp,
   Bestow, Prototype, …) is in AUTHORING §15 and the limitation ledger.
 - **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
