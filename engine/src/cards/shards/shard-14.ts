@@ -318,6 +318,7 @@ import _poolJJonahJameson from "../pool/j-jonah-jameson.js";
 import _poolJeditsDragoons from "../pool/jedits-dragoons.js";
 import _poolJinGitaxiasCoreAugur from "../pool/jin-gitaxias-core-augur.js";
 import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
+import _poolJolt from "../pool/jolt.js";
 import _poolJoragaWarcaller from "../pool/joraga-warcaller.js";
 import _poolJoustingDummy from "../pool/jousting-dummy.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
@@ -959,6 +960,7 @@ const shard: CardShard = {
     _poolJeditsDragoons,
     _poolJinGitaxiasCoreAugur,
     _poolJolraelsCentaur,
+    _poolJolt,
     _poolJoragaWarcaller,
     _poolJoustingDummy,
     _poolKaitoShizuki,

@@ -406,6 +406,7 @@ import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
+import _poolPrismaticLace from "../pool/prismatic-lace.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
 import _poolProfessorOfSymbology from "../pool/professor-of-symbology.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolPressTheAdvantage,
     _poolPrimaryResearch,
     _poolPrimordialSage,
+    _poolPrismaticLace,
     _poolPrizedGriffin,
     _poolProfessorOfSymbology,
     _poolPsychicCorrosion,

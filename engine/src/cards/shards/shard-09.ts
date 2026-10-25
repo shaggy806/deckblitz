@@ -41,6 +41,7 @@ import _poolArwenMortalQueen from "../pool/arwen-mortal-queen.js";
 import _poolArwenWeaverOfHope from "../pool/arwen-weaver-of-hope.js";
 import _poolAsgardianCitadel from "../pool/asgardian-citadel.js";
 import _poolAsgardianInspiration from "../pool/asgardian-inspiration.js";
+import _poolAshenPowder from "../pool/ashen-powder.js";
 import _poolAshlingRekindled from "../pool/ashling-rekindled.js";
 import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
@@ -706,6 +707,7 @@ const shard: CardShard = {
     _poolArwenWeaverOfHope,
     _poolAsgardianCitadel,
     _poolAsgardianInspiration,
+    _poolAshenPowder,
     _poolAshlingRekindled,
     _poolAspiringAeronaut,
     _poolAttackInTheBox,

@@ -8,6 +8,7 @@ import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
 import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
+import _poolAmberPrison from "../pool/amber-prison.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
@@ -610,6 +611,7 @@ const shard: CardShard = {
     _poolAkkiWarPaint,
     _poolAlabornMusketeer,
     _poolAlibansTower,
+    _poolAmberPrison,
     _poolAnafenzaTheForemost,
     _poolAncestralAnger,
     _poolAngelOfGrace,

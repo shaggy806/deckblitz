@@ -39,6 +39,7 @@ import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
+import _poolAsmiraHolyAvenger from "../pool/asmira-holy-avenger.js";
 import _poolAtarkaEfreet from "../pool/atarka-efreet.js";
 import _poolAtarkaPummeler from "../pool/atarka-pummeler.js";
 import _poolAtomize from "../pool/atomize.js";
@@ -680,6 +681,7 @@ const shard: CardShard = {
     _poolArgivianBlacksmith,
     _poolArtificerClass,
     _poolAshcoatBear,
+    _poolAsmiraHolyAvenger,
     _poolAtarkaEfreet,
     _poolAtarkaPummeler,
     _poolAtomize,

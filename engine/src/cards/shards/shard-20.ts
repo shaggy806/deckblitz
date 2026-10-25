@@ -9,6 +9,7 @@ import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolAbstruseInterference from "../pool/abstruse-interference.js";
+import _poolAbyssalHunter from "../pool/abyssal-hunter.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAerialEngineer from "../pool/aerial-engineer.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
@@ -714,6 +715,7 @@ const shard: CardShard = {
     _poolAbolisherOfBloodlines,
     _poolAbsorbingMan,
     _poolAbstruseInterference,
+    _poolAbyssalHunter,
     _poolActOfTreason,
     _poolAerialEngineer,
     _poolAetherChanneler,

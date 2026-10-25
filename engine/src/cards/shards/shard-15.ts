@@ -515,6 +515,7 @@ import _poolTajuruBeastmaster from "../pool/tajuru-beastmaster.js";
 import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
+import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
 import _poolTemporalEddy from "../pool/temporal-eddy.js";
 import _poolTenderize from "../pool/tenderize.js";
@@ -1131,6 +1132,7 @@ const shard: CardShard = {
     _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
     _poolTangleSpider,
+    _poolTelimtorsEdict,
     _poolTemperamentalOozewagg,
     _poolTemporalEddy,
     _poolTenderize,

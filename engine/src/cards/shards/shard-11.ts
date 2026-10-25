@@ -561,6 +561,7 @@ import _poolTatyovaStewardOfTides from "../pool/tatyova-steward-of-tides.js";
 import _poolTchakaVenerableKing from "../pool/tchaka-venerable-king.js";
 import _poolTearAsunder from "../pool/tear-asunder.js";
 import _poolTechnodrome from "../pool/technodrome.js";
+import _poolTeferisIsle from "../pool/teferis-isle.js";
 import _poolTeferisProtection from "../pool/teferis-protection.js";
 import _poolTempestTechnique from "../pool/tempest-technique.js";
 import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolTchakaVenerableKing,
     _poolTearAsunder,
     _poolTechnodrome,
+    _poolTeferisIsle,
     _poolTeferisProtection,
     _poolTempestTechnique,
     _poolTenzaGodosMaul,

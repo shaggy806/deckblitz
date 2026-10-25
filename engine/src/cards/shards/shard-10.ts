@@ -73,6 +73,7 @@ import _poolBlossomingDefense from "../pool/blossoming-defense.js";
 import _poolBogTatters from "../pool/bog-tatters.js";
 import _poolBogardanRager from "../pool/bogardan-rager.js";
 import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
+import _poolBoneHarvest from "../pool/bone-harvest.js";
 import _poolBonecladNecromancer from "../pool/boneclad-necromancer.js";
 import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
@@ -743,6 +744,7 @@ const shard: CardShard = {
     _poolBogTatters,
     _poolBogardanRager,
     _poolBoggartBirthRite,
+    _poolBoneHarvest,
     _poolBonecladNecromancer,
     _poolBoompile,
     _poolBorealDruid,
