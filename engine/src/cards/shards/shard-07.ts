@@ -628,6 +628,7 @@ import _poolZoZuThePunisher from "../pool/zo-zu-the-punisher.js";
 import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
 import _tokensAstartesWarriorToken from "../tokens/astartes-warrior-token.js";
+import _tokensBlackWarriorToken from "../tokens/black-warrior-token.js";
 import _tokensCragflame from "../tokens/cragflame.js";
 import _tokensDrakeToken from "../tokens/drake-token.js";
 import _tokensEggToken from "../tokens/egg-token.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAstartesWarriorToken,
+    _tokensBlackWarriorToken,
     _tokensCragflame,
     _tokensDrakeToken,
     _tokensEggToken,

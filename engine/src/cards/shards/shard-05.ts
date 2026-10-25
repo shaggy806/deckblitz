@@ -15,6 +15,7 @@ import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
 import _poolAgateBladeAssassin from "../pool/agate-blade-assassin.js";
 import _poolAgeOfUltron from "../pool/age-of-ultron.js";
 import _poolAinokBondKin from "../pool/ainok-bond-kin.js";
+import _poolAinokGuide from "../pool/ainok-guide.js";
 import _poolAkoumBoulderfoot from "../pool/akoum-boulderfoot.js";
 import _poolAlBhedSalvagers from "../pool/al-bhed-salvagers.js";
 import _poolAllThatGlitters from "../pool/all-that-glitters.js";
@@ -651,6 +652,7 @@ const shard: CardShard = {
     _poolAgateBladeAssassin,
     _poolAgeOfUltron,
     _poolAinokBondKin,
+    _poolAinokGuide,
     _poolAkoumBoulderfoot,
     _poolAlBhedSalvagers,
     _poolAllThatGlitters,

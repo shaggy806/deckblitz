@@ -155,14 +155,16 @@ section keeps only what to do next.
   batch 152 Oath of the Gatewatch and Commander 2015, on surge and "if that creature would die
   this turn, exile it instead" with its "dealt damage this way" form; batch 153 the rest of
   Battle for Zendikar, on awaken; batch 154 the rest of Magic Origins, on renown; batch 155
-  Dragons of Tarkir, on dash and bolster);
-  **next, Fate Reforged** (103 left) — one batch, 4 agents. Its mechanics are all built
-  already: manifest, delve, bolster and dash (both from batch 155), prowess, and ferocious,
-  raid and outlast as conditions and abilities the pool has. Batch 155's leading blocker: the
-  optional "you may reveal a Dragon card from your hand" additional cost with "if you revealed a
-  Dragon card or controlled a Dragon as you cast this" (`cost:additional-cost-reveal` — 7, six
-  of them the set's own, every one on nothing else; a copy keeps the bonus only from a revealed
-  card, so behold's kicker won't do); then a chosen-colour protection grant
+  Dragons of Tarkir, on dash and bolster; batch 156 the rest of Fate Reforged, no feature built
+  but return-from-graveyard's filter now reads the spell's X);
+  **next, Commander 2014** (26 left) **then Khans of Tarkir** (96) — one batch of ~120, six
+  agents. Khans' mechanics (morph, delve, outlast, prowess, ferocious, raid) are all in the pool;
+  check C14's lieutenant ("as long as you control your commander") before dispatching. Batch
+  156's blockers: a non-Aura enchantment becoming an Aura (`effect:enchantment-becomes-aura` —
+  Cloudform, Lightform, Rageform) and "manifest" recording the card it manifested
+  (`effect:manifested-this-way` — Wildcall, Formless Nurturing), the rest one each. Batch 155's
+  leading blocker: the optional "you may reveal a Dragon card from your hand" additional cost
+  (`cost:additional-cost-reveal` — 7); then a chosen-colour protection grant
   (`effect:grant-protection-choice`, 19 over the pool). Batch 154's blockers are one each, no leader (`docs/card-blockers.md`). Batch 153's leading blocker:
   the processors' "put a card an opponent owns from exile into that player's graveyard"
   (`cost:put-opponent-exiled-card-into-graveyard` — 12, every processor in the set, as a cost

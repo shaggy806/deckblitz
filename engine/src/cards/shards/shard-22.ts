@@ -607,6 +607,7 @@ import _poolWhisperingShade from "../pool/whispering-shade.js";
 import _poolWhoosh from "../pool/whoosh.js";
 import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
+import _poolWillOfTheNaga from "../pool/will-of-the-naga.js";
 import _poolWilyBandar from "../pool/wily-bandar.js";
 import _poolWindbornMuse from "../pool/windborn-muse.js";
 import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
@@ -1243,6 +1244,7 @@ const shard: CardShard = {
     _poolWhoosh,
     _poolWildGriffin,
     _poolWildslayerElves,
+    _poolWillOfTheNaga,
     _poolWilyBandar,
     _poolWindbornMuse,
     _poolWingsOfTheGuard,

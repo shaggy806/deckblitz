@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Fate Reforged, the rest of the set** (batch 156): no feature built — `return-from-graveyard`'s
+  filter now reads the spell's X (Rally the Ancestors) and a filter's `colorless: false` means one
+  or more colours. 83 authored by five `card-author` agents and the lead: Dromoka, the Eternal,
+  Ojutai, Soul of Winter, Shu Yun, the Silent Tempest, Daghatar the Adamant, Yasova Dragonclaw,
+  Temur War Shaman, Mastery of the Unseen, Supplant Form, Write into Being, the Runemarks and the
+  dash and bolster commons; FRF has no card left untriaged. 20 blocked, a non-Aura enchantment
+  becoming an Aura the most shared (2026-10-25).
 - **Eldritch Moon, the rest of the set** (batch 143): **emerge** built (rule 702.119 — an
   alternative cost sacrificing a creature, or an artifact for "emerge from artifact", the total
   cost reduced by its mana value; one cast offer per permanent it could sacrifice), taught to the

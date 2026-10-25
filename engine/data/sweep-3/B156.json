@@ -1,0 +1,732 @@
+{
+  "batch": "B156",
+  "status": "complete",
+  "ranks": "Fate Reforged (FRF, 2015-01-23): the rest of the set; no feature built (return-from-graveyard's filter now reads the spell's X, for Rally the Ancestors)",
+  "authored": [
+    {
+      "name": "Abzan Advantage",
+      "files": [
+        "engine/src/cards/pool/abzan-advantage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Abzan Kin-Guard",
+      "files": [
+        "engine/src/cards/pool/abzan-kin-guard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Abzan Runemark",
+      "files": [
+        "engine/src/cards/pool/abzan-runemark.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Abzan Skycaptain",
+      "files": [
+        "engine/src/cards/pool/abzan-skycaptain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ainok Guide",
+      "files": [
+        "engine/src/cards/pool/ainok-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alesha's Vanguard",
+      "files": [
+        "engine/src/cards/pool/aleshas-vanguard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ambush Krotiq",
+      "files": [
+        "engine/src/cards/pool/ambush-krotiq.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aven Surveyor",
+      "files": [
+        "engine/src/cards/pool/aven-surveyor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Battle Brawler",
+      "files": [
+        "engine/src/cards/pool/battle-brawler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Battlefront Krushok",
+      "files": [
+        "engine/src/cards/pool/battlefront-krushok.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bloodfire Enforcers",
+      "files": [
+        "engine/src/cards/pool/bloodfire-enforcers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Break Through the Line",
+      "files": [
+        "engine/src/cards/pool/break-through-the-line.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cached Defenses",
+      "files": [
+        "engine/src/cards/pool/cached-defenses.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cunning Strike",
+      "files": [
+        "engine/src/cards/pool/cunning-strike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Daghatar the Adamant",
+      "files": [
+        "engine/src/cards/pool/daghatar-the-adamant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Defiant Ogre",
+      "files": [
+        "engine/src/cards/pool/defiant-ogre.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Destructor Dragon",
+      "files": [
+        "engine/src/cards/pool/destructor-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Diplomacy of the Wastes",
+      "files": [
+        "engine/src/cards/pool/diplomacy-of-the-wastes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonrage",
+      "files": [
+        "engine/src/cards/pool/dragonrage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonscale General",
+      "files": [
+        "engine/src/cards/pool/dragonscale-general.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dromoka, the Eternal",
+      "files": [
+        "engine/src/cards/pool/dromoka-the-eternal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ethereal Ambush",
+      "files": [
+        "engine/src/cards/pool/ethereal-ambush.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fascination",
+      "files": [
+        "engine/src/cards/pool/fascination.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fearsome Awakening",
+      "files": [
+        "engine/src/cards/pool/fearsome-awakening.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fierce Invocation",
+      "files": [
+        "engine/src/cards/pool/fierce-invocation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamewake Phoenix",
+      "files": [
+        "engine/src/cards/pool/flamewake-phoenix.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frontier Mastodon",
+      "files": [
+        "engine/src/cards/pool/frontier-mastodon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frost Walker",
+      "files": [
+        "engine/src/cards/pool/frost-walker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fruit of the First Tree",
+      "files": [
+        "engine/src/cards/pool/fruit-of-the-first-tree.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Boom Keg",
+      "files": [
+        "engine/src/cards/pool/goblin-boom-keg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Heelcutter",
+      "files": [
+        "engine/src/cards/pool/goblin-heelcutter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grave Strength",
+      "files": [
+        "engine/src/cards/pool/grave-strength.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gurmag Angler",
+      "files": [
+        "engine/src/cards/pool/gurmag-angler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Harsh Sustenance",
+      "files": [
+        "engine/src/cards/pool/harsh-sustenance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hewed Stone Retainers",
+      "files": [
+        "engine/src/cards/pool/hewed-stone-retainers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Honor's Reward",
+      "files": [
+        "engine/src/cards/pool/honors-reward.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hooded Assassin",
+      "files": [
+        "engine/src/cards/pool/hooded-assassin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jeskai Runemark",
+      "files": [
+        "engine/src/cards/pool/jeskai-runemark.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lightning Shrieker",
+      "files": [
+        "engine/src/cards/pool/lightning-shrieker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Map the Wastes",
+      "files": [
+        "engine/src/cards/pool/map-the-wastes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Marang River Prowler",
+      "files": [
+        "engine/src/cards/pool/marang-river-prowler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mardu Runemark",
+      "files": [
+        "engine/src/cards/pool/mardu-runemark.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mardu Scout",
+      "files": [
+        "engine/src/cards/pool/mardu-scout.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mardu Shadowspear",
+      "files": [
+        "engine/src/cards/pool/mardu-shadowspear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mardu Strike Leader",
+      "files": [
+        "engine/src/cards/pool/mardu-strike-leader.ts",
+        "engine/src/cards/tokens/black-warrior-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mardu Woe-Reaper",
+      "files": [
+        "engine/src/cards/pool/mardu-woe-reaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mastery of the Unseen",
+      "files": [
+        "engine/src/cards/pool/mastery-of-the-unseen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Neutralizing Blast",
+      "files": [
+        "engine/src/cards/pool/neutralizing-blast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ojutai, Soul of Winter",
+      "files": [
+        "engine/src/cards/pool/ojutai-soul-of-winter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Qarsi High Priest",
+      "files": [
+        "engine/src/cards/pool/qarsi-high-priest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rakshasa's Disdain",
+      "files": [
+        "engine/src/cards/pool/rakshasas-disdain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rally the Ancestors",
+      "files": [
+        "engine/src/cards/pool/rally-the-ancestors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reach of Shadows",
+      "files": [
+        "engine/src/cards/pool/reach-of-shadows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Renowned Weaponsmith",
+      "files": [
+        "engine/src/cards/pool/renowned-weaponsmith.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Return to the Earth",
+      "files": [
+        "engine/src/cards/pool/return-to-the-earth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rite of Undoing",
+      "files": [
+        "engine/src/cards/pool/rite-of-undoing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruthless Instincts",
+      "files": [
+        "engine/src/cards/pool/ruthless-instincts.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sage-Eye Avengers",
+      "files": [
+        "engine/src/cards/pool/sage-eye-avengers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sandsteppe Mastodon",
+      "files": [
+        "engine/src/cards/pool/sandsteppe-mastodon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sandsteppe Outcast",
+      "files": [
+        "engine/src/cards/pool/sandsteppe-outcast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scroll of the Masters",
+      "files": [
+        "engine/src/cards/pool/scroll-of-the-masters.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shaman of the Great Hunt",
+      "files": [
+        "engine/src/cards/pool/shaman-of-the-great-hunt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shockmaw Dragon",
+      "files": [
+        "engine/src/cards/pool/shockmaw-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shu Yun, the Silent Tempest",
+      "files": [
+        "engine/src/cards/pool/shu-yun-the-silent-tempest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sibsig Host",
+      "files": [
+        "engine/src/cards/pool/sibsig-host.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sibsig Muckdraggers",
+      "files": [
+        "engine/src/cards/pool/sibsig-muckdraggers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Smoldering Efreet",
+      "files": [
+        "engine/src/cards/pool/smoldering-efreet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul Summons",
+      "files": [
+        "engine/src/cards/pool/soul-summons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sudden Reclamation",
+      "files": [
+        "engine/src/cards/pool/sudden-reclamation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sultai Emissary",
+      "files": [
+        "engine/src/cards/pool/sultai-emissary.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sultai Runemark",
+      "files": [
+        "engine/src/cards/pool/sultai-runemark.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Supplant Form",
+      "files": [
+        "engine/src/cards/pool/supplant-form.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tasigur's Cruelty",
+      "files": [
+        "engine/src/cards/pool/tasigurs-cruelty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Temur Runemark",
+      "files": [
+        "engine/src/cards/pool/temur-runemark.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Temur War Shaman",
+      "files": [
+        "engine/src/cards/pool/temur-war-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ugin's Construct",
+      "files": [
+        "engine/src/cards/pool/ugins-construct.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vaultbreaker",
+      "files": [
+        "engine/src/cards/pool/vaultbreaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wandering Champion",
+      "files": [
+        "engine/src/cards/pool/wandering-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "War Flare",
+      "files": [
+        "engine/src/cards/pool/war-flare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Will of the Naga",
+      "files": [
+        "engine/src/cards/pool/will-of-the-naga.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Winds of Qal Sisma",
+      "files": [
+        "engine/src/cards/pool/winds-of-qal-sisma.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Write into Being",
+      "files": [
+        "engine/src/cards/pool/write-into-being.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yasova Dragonclaw",
+      "files": [
+        "engine/src/cards/pool/yasova-dragonclaw.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Soulfire Grand Master",
+      "needs": [
+        "effect:next-spell-returns-to-hand"
+      ],
+      "why": "\"The next instant or sorcery spell you cast from your hand this turn\" goes to your hand instead of the graveyard: exile-spell-as-it-resolves only exiles."
+    },
+    {
+      "name": "Wardscale Dragon",
+      "needs": [
+        "static:defending-player-cant-cast"
+      ],
+      "why": "\"As long as it's attacking, defending player can't cast spells\": prohibits names only opponents, you or each player, and opponents is wrong in multiplayer (the ruling)."
+    },
+    {
+      "name": "Wildcall",
+      "needs": [
+        "effect:manifested-this-way"
+      ],
+      "why": "manifest records nothing this-way, so the X +1/+1 counters have nothing to go on."
+    },
+    {
+      "name": "Arashin War Beast",
+      "needs": [
+        "trigger:deals-combat-damage-once-per-event"
+      ],
+      "why": "\"Whenever it deals combat damage to one or more blocking creatures\": deals-damage fires once per recipient, so two blockers would trigger it twice."
+    },
+    {
+      "name": "Friendly Fire",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "choose-random-card reads only a graveyard; the card reveals one at random from a creature's controller's hand."
+    },
+    {
+      "name": "Hungering Yeti",
+      "needs": [
+        "effect:self-flash-if-condition"
+      ],
+      "why": "\"As long as you control a green or blue permanent, you may cast this spell as though it had flash\": castAsThoughFlash is a battlefield static only."
+    },
+    {
+      "name": "Soulflayer",
+      "needs": [
+        "static:keywords-of-cards-delved"
+      ],
+      "why": "Nothing records which cards delve exiled, so it can't gain each listed keyword they had."
+    },
+    {
+      "name": "Elite Scaleguard",
+      "needs": [
+        "effect:defending-player-of-trigger-attacker"
+      ],
+      "why": "\"Tap target creature defending player controls\" where the attacker is the trigger object, not the source: defendingPlayerOf reads the ability's source, wrong at 3-4 players."
+    },
+    {
+      "name": "Ghastly Conscription",
+      "needs": [
+        "effect:manifest-from-exile"
+      ],
+      "why": "manifest takes only the top card of a library; this manifests a shuffled face-down pile exiled from a graveyard."
+    },
+    {
+      "name": "Cloudform",
+      "needs": [
+        "effect:enchantment-becomes-aura"
+      ],
+      "why": "Nothing turns a non-Aura enchantment into an Aura with enchant creature to attach to the creature it manifested."
+    },
+    {
+      "name": "Lightform",
+      "needs": [
+        "effect:enchantment-becomes-aura"
+      ],
+      "why": "As Cloudform."
+    },
+    {
+      "name": "Rageform",
+      "needs": [
+        "effect:enchantment-becomes-aura"
+      ],
+      "why": "As Cloudform."
+    },
+    {
+      "name": "Grim Contest",
+      "needs": [
+        "effect:fight-by-toughness"
+      ],
+      "why": "fight uses power; two damage steps wouldn't be simultaneous (wither/infect) nor follow the ruling that neither deals damage if a target is illegal."
+    },
+    {
+      "name": "Warden of the First Tree",
+      "needs": [
+        "effect:set-creature-type"
+      ],
+      "why": "\"Becomes a Human Spirit Warrior with trample and lifelink\" replaces creature types without setting P/T: animate needs P/T and add-types only adds."
+    },
+    {
+      "name": "Torrent Elemental",
+      "needs": [
+        "zone:activate-from-exile"
+      ],
+      "why": "An activated ability's zone can be hand, graveyard or command, not exile."
+    },
+    {
+      "name": "Shifting Loyalties",
+      "needs": [
+        "effect:exchange-control",
+        "effect:targets-share-type"
+      ],
+      "why": "No exchange-control effect, nor a two-targets-share-a-card-type requirement."
+    },
+    {
+      "name": "Wild Slash",
+      "needs": [
+        "static:damage-cant-be-prevented"
+      ],
+      "why": "Ferocious's \"damage can't be prevented this turn\" has no effect in the engine."
+    },
+    {
+      "name": "Channel Harm",
+      "needs": [
+        "replacement:prevent-and-reflect-damage"
+      ],
+      "why": "Prevent all damage sources you don't control would deal to you and your permanents this turn, then deal that much to target creature: not expressible."
+    },
+    {
+      "name": "Formless Nurturing",
+      "needs": [
+        "effect:manifested-this-way"
+      ],
+      "why": "manifest records nothing this-way, so \"put a +1/+1 counter on it\" has nothing to point at."
+    },
+    {
+      "name": "Jeskai Infiltrator",
+      "needs": [
+        "effect:manifest-exiled-pile"
+      ],
+      "why": "Exile it and the top card, shuffle them face down and manifest both: no such effect."
+    }
+  ]
+}

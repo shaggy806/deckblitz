@@ -236,6 +236,7 @@ import _poolGrowthSpiral from "../pool/growth-spiral.js";
 import _poolGryffVanguard from "../pool/gryff-vanguard.js";
 import _poolGuardianOfGhirapur from "../pool/guardian-of-ghirapur.js";
 import _poolGuildlessCommons from "../pool/guildless-commons.js";
+import _poolGurmagAngler from "../pool/gurmag-angler.js";
 import _poolGustOfWind from "../pool/gust-of-wind.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHaggle from "../pool/haggle.js";
@@ -597,6 +598,7 @@ import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
+import _poolWanderingChampion from "../pool/wandering-champion.js";
 import _poolWarpArtifact from "../pool/warp-artifact.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
@@ -879,6 +881,7 @@ const shard: CardShard = {
     _poolGryffVanguard,
     _poolGuardianOfGhirapur,
     _poolGuildlessCommons,
+    _poolGurmagAngler,
     _poolGustOfWind,
     _poolGutlessGhoul,
     _poolHaggle,
@@ -1240,6 +1243,7 @@ const shard: CardShard = {
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
     _poolVulshokFactory,
+    _poolWanderingChampion,
     _poolWarpArtifact,
     _poolWastelandRaider,
     _poolWatcherOfTheWayside,

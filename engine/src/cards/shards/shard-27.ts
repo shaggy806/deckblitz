@@ -310,6 +310,7 @@ import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
 import _poolMarchesasDecree from "../pool/marchesas-decree.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
+import _poolMarduStrikeLeader from "../pool/mardu-strike-leader.js";
 import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
 import _poolMarduWoeReaper from "../pool/mardu-woe-reaper.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolMalleableImpostor,
     _poolMarchesasDecree,
     _poolMarduHordechief,
+    _poolMarduStrikeLeader,
     _poolMarduWarshrieker,
     _poolMarduWoeReaper,
     _poolMasterDecoy,

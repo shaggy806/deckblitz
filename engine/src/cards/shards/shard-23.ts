@@ -424,6 +424,7 @@ import _poolRendingVolley from "../pool/rending-volley.js";
 import _poolRenegadeTactics from "../pool/renegade-tactics.js";
 import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolReprisal from "../pool/reprisal.js";
+import _poolReturnToTheEarth from "../pool/return-to-the-earth.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRicochetTrap from "../pool/ricochet-trap.js";
 import _poolRile from "../pool/rile.js";
@@ -1057,6 +1058,7 @@ const shard: CardShard = {
     _poolRenegadeTactics,
     _poolRenegadeTroops,
     _poolReprisal,
+    _poolReturnToTheEarth,
     _poolRhoxPummeler,
     _poolRicochetTrap,
     _poolRile,

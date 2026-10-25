@@ -480,6 +480,7 @@ import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
 import _poolStormwingDragon from "../pool/stormwing-dragon.js";
 import _poolSubjugatorAngel from "../pool/subjugator-angel.js";
 import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
+import _poolSultaiRunemark from "../pool/sultai-runemark.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
 import _poolSunblastAngel from "../pool/sunblast-angel.js";
 import _poolSunkenCity from "../pool/sunken-city.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolStormwingDragon,
     _poolSubjugatorAngel,
     _poolSulfuricVortex,
+    _poolSultaiRunemark,
     _poolSunbladeAngel,
     _poolSunblastAngel,
     _poolSunkenCity,

@@ -267,6 +267,7 @@ import _poolGrislyRitual from "../pool/grisly-ritual.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
+import _poolHarshSustenance from "../pool/harsh-sustenance.js";
 import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
 import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
@@ -891,6 +892,7 @@ const shard: CardShard = {
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
     _poolHagraCrocodile,
+    _poolHarshSustenance,
     _poolHazardOfTheDunes,
     _poolHazezonShaperOfSand,
     _poolHeartOfRamos,

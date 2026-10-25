@@ -93,6 +93,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Bird Token (Hermes, Overseer of Elpis)",
   "Bird Token (Ominous Roost)",
   "Black Deathtouch Snake Token",
+  "Black Warrior Token",
   "Blood Token",
   "Blue Horror",
   "Blue Thopter Token",
