@@ -263,7 +263,11 @@ const fourPlayer = (name, count, extra) => {
 };
 if (!skip.has("fuzz")) {
   background(() => {
-    late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
+    // On a small machine a 2-player game beside the 4-player runs can pass
+    // the default 30 s too (one took 18 s alone, 2026-10-25).
+    late.push(
+      run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games), ...(SMALL ? ["--timeout", "60"] : [])], ENGINE),
+    );
     late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
   });
 }
