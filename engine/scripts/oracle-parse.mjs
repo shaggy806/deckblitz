@@ -745,6 +745,14 @@ export function parseCost(text) {
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
+    // "Exile the top card of your library" (Royal Herbalist), "the top two
+    // cards" (Whirling Catapult).
+    else if (part === "Exile the top card of your library") cost.exileTop = 1;
+    else if ((m = new RegExp(`^Exile the top ${N} cards of your library$`, "i").exec(part))) {
+      const count = numberOf(m[1]);
+      if (typeof count !== "number") return null;
+      cost.exileTop = count;
+    }
     // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
     else if (part === "Exert ~") cost.exertSelf = true;
     // Blight N (rule 701.68a), chosen as it's paid.
@@ -2097,6 +2105,8 @@ export function parseFace(face, ctx = {}) {
     }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
+    // Bestow [cost] (rule 702.103a): the card's `bestow`.
+    if ((m = /^Bestow ((?:\{[^}]+\})+)$/.exec(line))) { out.bestow = m[1]; continue; }
     // Party (rule 700.8) and domain (207.2c) cost reductions: {1} less for
     // each, unconditionally — the always-true gate Leyline Binding uses.
     const perEach = {
@@ -2520,6 +2530,16 @@ export function parseFace(face, ctx = {}) {
   };
   out.activated.forEach((a, i) => nameThisAbility(a.effect, { activated: i }));
   out.triggered.forEach((a, i) => nameThisAbility(a.effect, { triggered: i }));
+  // A card with bestow can be an Aura: its own "dies" leave-triggers read as
+  // their rules do, "put into a graveyard from the battlefield" (afterlife,
+  // rule 702.135a), so they trigger as an Aura too (Indebted Spirit).
+  if (out.bestow !== undefined) {
+    for (const a of out.triggered) {
+      if (a.trigger?.on === "dies" && a.trigger.who === "self" && /^Afterlife \d+/.test(a.text ?? "")) {
+        a.trigger = { on: "leaves-battlefield", who: "self", to: ["graveyard"] };
+      }
+    }
+  }
   return out;
 }
 

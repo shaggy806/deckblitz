@@ -8,6 +8,7 @@ import _poolAbzanCharm from "../pool/abzan-charm.js";
 import _poolAccursedMarauder from "../pool/accursed-marauder.js";
 import _poolAdelbertSteiner from "../pool/adelbert-steiner.js";
 import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
+import _poolAerialFormation from "../pool/aerial-formation.js";
 import _poolAeromunculus from "../pool/aeromunculus.js";
 import _poolAfflict from "../pool/afflict.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
@@ -53,6 +54,7 @@ import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
+import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
@@ -290,6 +292,7 @@ import _poolKravTheUnredeemed from "../pool/krav-the-unredeemed.js";
 import _poolLaceWithMoonglove from "../pool/lace-with-moonglove.js";
 import _poolLanguish from "../pool/languish.js";
 import _poolLanternSpirit from "../pool/lantern-spirit.js";
+import _poolLatNamsLegacy from "../pool/lat-nams-legacy.js";
 import _poolLatchSeeker from "../pool/latch-seeker.js";
 import _poolLavaSerpent from "../pool/lava-serpent.js";
 import _poolLavaTubes from "../pool/lava-tubes.js";
@@ -569,6 +572,7 @@ import _poolTrackDown from "../pool/track-down.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
+import _poolTritonWavebreaker from "../pool/triton-wavebreaker.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTuskeriFirewalker from "../pool/tuskeri-firewalker.js";
 import _poolTwistedEmbrace from "../pool/twisted-embrace.js";
@@ -657,6 +661,7 @@ const shard: CardShard = {
     _poolAccursedMarauder,
     _poolAdelbertSteiner,
     _poolAdornedCrocodile,
+    _poolAerialFormation,
     _poolAeromunculus,
     _poolAfflict,
     _poolAgathasChampion,
@@ -702,6 +707,7 @@ const shard: CardShard = {
     _poolBladeInstructor,
     _poolBladewingTheRisen,
     _poolBlindObedience,
+    _poolBlindingFlare,
     _poolBloodcrazedNeonate,
     _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
@@ -939,6 +945,7 @@ const shard: CardShard = {
     _poolLaceWithMoonglove,
     _poolLanguish,
     _poolLanternSpirit,
+    _poolLatNamsLegacy,
     _poolLatchSeeker,
     _poolLavaSerpent,
     _poolLavaTubes,
@@ -1218,6 +1225,7 @@ const shard: CardShard = {
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,
+    _poolTritonWavebreaker,
     _poolTunnelOfHate,
     _poolTuskeriFirewalker,
     _poolTwistedEmbrace,

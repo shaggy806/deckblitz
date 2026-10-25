@@ -270,6 +270,7 @@ import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
 import _poolInquisitorsOx from "../pool/inquisitors-ox.js";
 import _poolInsatiableAppetite from "../pool/insatiable-appetite.js";
+import _poolInsidiousBookworms from "../pool/insidious-bookworms.js";
 import _poolInsolentNeonate from "../pool/insolent-neonate.js";
 import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
@@ -420,6 +421,7 @@ import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
+import _poolReturnedReveler from "../pool/returned-reveler.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRideTheRails from "../pool/ride-the-rails.js";
@@ -613,6 +615,7 @@ import _poolWaspLancer from "../pool/wasp-lancer.js";
 import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
 import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWestvaleCultLeader from "../pool/westvale-cult-leader.js";
+import _poolWhitewaterNaiads from "../pool/whitewater-naiads.js";
 import _poolWildAesthir from "../pool/wild-aesthir.js";
 import _poolWildWanderer from "../pool/wild-wanderer.js";
 import _poolWildestDreams from "../pool/wildest-dreams.js";
@@ -633,6 +636,7 @@ import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
 import _poolZombieOutlander from "../pool/zombie-outlander.js";
 import _tokensAlienSalamanderToken from "../tokens/alien-salamander-token.js";
 import _tokensBatToken from "../tokens/bat-token.js";
+import _tokensBlueEnchantmentBirdToken22 from "../tokens/blue-enchantment-bird-token-2-2.js";
 import _tokensClueToken from "../tokens/clue-token.js";
 import _tokensDemonToken from "../tokens/demon-token.js";
 import _tokensDinosaurToken11Haste from "../tokens/dinosaur-token-1-1-haste.js";
@@ -918,6 +922,7 @@ const shard: CardShard = {
     _poolInnocuousRat,
     _poolInquisitorsOx,
     _poolInsatiableAppetite,
+    _poolInsidiousBookworms,
     _poolInsolentNeonate,
     _poolInspiringBard,
     _poolInstantRamen,
@@ -1068,6 +1073,7 @@ const shard: CardShard = {
     _poolRepudiateReplicate,
     _poolResurgentBelief,
     _poolResurrectedCultist,
+    _poolReturnedReveler,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
     _poolRideTheRails,
@@ -1261,6 +1267,7 @@ const shard: CardShard = {
     _poolWeftstalkerArdent,
     _poolWestCoastExpansion,
     _poolWestvaleCultLeader,
+    _poolWhitewaterNaiads,
     _poolWildAesthir,
     _poolWildWanderer,
     _poolWildestDreams,
@@ -1283,6 +1290,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienSalamanderToken,
     _tokensBatToken,
+    _tokensBlueEnchantmentBirdToken22,
     _tokensClueToken,
     _tokensDemonToken,
     _tokensDinosaurToken11Haste,

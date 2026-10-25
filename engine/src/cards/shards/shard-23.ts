@@ -7,6 +7,7 @@ import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
 import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
+import _poolAgentOfErebos from "../pool/agent-of-erebos.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
@@ -199,6 +200,7 @@ import _poolFleetSwallower from "../pool/fleet-swallower.js";
 import _poolFlensermite from "../pool/flensermite.js";
 import _poolFomoriVault from "../pool/fomori-vault.js";
 import _poolFoolishFate from "../pool/foolish-fate.js";
+import _poolForgebornOreads from "../pool/forgeborn-oreads.js";
 import _poolForsakenThresher from "../pool/forsaken-thresher.js";
 import _poolFortifyingDraught from "../pool/fortifying-draught.js";
 import _poolFoulPlay from "../pool/foul-play.js";
@@ -369,6 +371,7 @@ import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
+import _poolOakheartDryads from "../pool/oakheart-dryads.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
 import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
@@ -522,6 +525,7 @@ import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
 import _poolStoneworkPackbeast from "../pool/stonework-packbeast.js";
 import _poolStormHerd from "../pool/storm-herd.js";
+import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
 import _poolStrongarmMonk from "../pool/strongarm-monk.js";
@@ -658,6 +662,7 @@ const shard: CardShard = {
     _poolAccomplishedAlchemist,
     _poolAetherSearcher,
     _poolAgadeemOccultist,
+    _poolAgentOfErebos,
     _poolAgonyWarp,
     _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
@@ -850,6 +855,7 @@ const shard: CardShard = {
     _poolFlensermite,
     _poolFomoriVault,
     _poolFoolishFate,
+    _poolForgebornOreads,
     _poolForsakenThresher,
     _poolFortifyingDraught,
     _poolFoulPlay,
@@ -1020,6 +1026,7 @@ const shard: CardShard = {
     _poolNightMarket,
     _poolNighthowlPursuer,
     _poolNyxLotus,
+    _poolOakheartDryads,
     _poolObNixilisReignited,
     _poolObscuraCharm,
     _poolOchranAssassin,
@@ -1173,6 +1180,7 @@ const shard: CardShard = {
     _poolStitchersGraft,
     _poolStoneworkPackbeast,
     _poolStormHerd,
+    _poolStormchaserChimera,
     _poolStrawSoldiers,
     _poolStripedRiverwinder,
     _poolStrongarmMonk,

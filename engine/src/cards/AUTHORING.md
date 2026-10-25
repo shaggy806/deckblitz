@@ -341,6 +341,7 @@ from the same link.
 | `kicker.keyword: "entwine"` | — | **Entwine [cost]** (rule 702.42 — Tooth and Nail, Kaya's Guile): `kicker: { cost: "{2}", keyword: "entwine" }` with `castModal.kickedModes` set to the number of modes — the entwined cast chooses every mode and pays the extra cost, resolving them in printed order (702.42b). An entwined spell isn't a *kicked* spell to "whenever you cast a kicked spell" (`CardFilter.kicked` counts plain kickers only, as it does gift, bargain and teamwork). The scaffolder reads the line. Copy `pool/gravedig.ts`. |
 | `overload` | `{ cost, effect }` | **Overload** (rule 702.126 — Cyclonic Rift). An alternative cost that *replaces* the mana cost entirely (unlike kicker's additive cost) and takes **no targets** — `effect` is the whole "each ..." version of the card (typically a `-all` `EffectSpec`, e.g. `return-to-hand-all`/`destroy-all`), applied with the printed `targets`/`effect` untouched for the ordinary cast. `legalActions` offers the card twice. |
 | `mutate` | `string` (the cost) | **Mutate** (rule 702.140): `mutate: "{3}{G}"` — an alternative cost (offered as the cast's `overload` variant, labelled "mutate") that targets a non-Human creature with the spell's owner (`MUTATE_TARGET`). Resolving with its target legal, the controller chooses on top or underneath (a mode choice) and it **merges** (rule 730, `GameObject.merged`): the same object, not a new entry (no enters triggers, summoning sickness and counters kept), with the topmost card's characteristics (730.2a) and every card's abilities (702.140e — `rulesTextName` names a combined definition `CardRegistry` builds). With its target gone it's an ordinary creature spell (702.140b). "Whenever this creature mutates" is the trigger `{ on: "mutates", who: "self" }` (every component's fires), "whenever a creature you control mutates" `who: "you-control"`; "the number of times this creature has mutated" the amount `{ timesMutated: "source" }`; "if it has mutate" the filter `hasMutate: true`. Leaving the battlefield, it comes apart: every other card goes to the same zone, a token component ceases to exist (730.3). Not built: casting with mutate from a zone other than the hand (Brokkos), the owner ordering the cards (730.3a), a face-down or double-faced component. `mutate.test.ts`. |
+| `bestow` | `string` (the cost) | **Bestow** (rule 702.103): `bestow: "{3}{B}"` — an alternative cost (offered as the cast's `overload` variant, labelled "bestow") that makes the spell an Aura with enchant creature (`BESTOW_TARGET`, any creature): no creature on the stack or the battlefield, its only subtype Aura (`GameObject.bestowed`, `bestowedDefinition` — the layer fold's starting point, so a "creature spell" filter or counterspell doesn't see it). It enters attached to its target; with that target illegal as it begins resolving it resolves as the creature instead (702.103e). Once unattached — the creature gone, or no longer one it can enchant — it's a creature again where it is, not put into the graveyard (702.103f). Its "enchanted creature gets …" is an ordinary `affects: { scope: "attached" }` static, which reaches nothing while it's a creature; "this creature can't block" a `"self"` one, which is idle while it's an Aura. Not built: bestow with another cost or from the graveyard (Detective's Phoenix), phasing in unattached (702.103g), and protection from creatures read at the cast (a bestowed spell's target is checked against the creature card until it's on the stack). `bestow.test.ts`. |
 | `alternativeCost` | `{ mana, tapCreatures?: { count, filter }, exileFromHand?: { filter, count?, text }, payLife?, condition? }` | an alternative cost that replaces the mana cost (rule 118.9) — Sephara's "pay {W} and tap four untapped creatures you control with flying rather than pay this spell's mana cost" (`tapCreatures`, rule 601.2b), and the **pitch spells**' "[if it's not your turn,] you may [pay 1 life and] exile a blue card from your hand rather than pay this spell's mana cost": `mana: "{0}"`, `exileFromHand: { filter: { colors: ["U"] }, text: "a blue card" }` (`count: 2` for Fury of the Horde's "two red cards"), `payLife: 1` (Force of Will), `condition: { kind: "not", of: { kind: "your-turn" } }` (the MH1 Forces). Offered as a second `cast-spell` variant (`altCost: true`), the same shape `kicked`/`overload`/`free` use, and only when all of it can be paid — never with no *other* such card in hand; the caster picks what it taps, as for `tapOthers`, and which card it exiles once the spell is on the stack (a plain `choose-from-zone` exile, nothing revealed). Copy `pool/force-of-will.ts`. |
 | `castOnlyIf` | `StaticCondition` | "You can't cast this spell unless …" — checked from whatever zone it's cast, the command zone included (Rakdos, Lord of Riots' "unless an opponent lost life this turn" is `{ kind: "turn-stat", stat: "life-lost", who: "opponent", atLeast: 1 }`). An instruction to cast it doesn't get past it. |
 | `splitSecond` | `boolean` | Split second (rule 702.61): while this spell is on the stack, nobody can cast other spells or activate abilities that aren't mana abilities. Put "Split second" in `text`; triggered abilities still trigger. |
@@ -2543,6 +2544,14 @@ tapOthers? }`.
   an ability that adds mana an ordinary one (rule 605.1a; Millikin's ruling):
   it goes on the stack, and the mana arrives as it resolves.
 
+- `exileTop: N` — "Exile the top card (top N cards) of your library" as a
+  cost (Royal Herbalist, Whirling Catapult, Seasoned Tactician): paid the
+  same way as `mill`, face up, never with fewer than N cards there (rule
+  118.3), never a mana ability (605.1a). Nothing reads *which* card it
+  exiled yet — Storm Elemental's "if the exiled card is a snow land" and
+  Phyrexian Devourer's "the exiled card's mana value" wait on
+  `cost:exiled-card-ref`.
+
 - `mana`: a cost string (`"{2}"`) or `null`. May contain `{X}`.
 - `tap: true` adds `{T}`.
 - `sacrifice: "self"` ("Sacrifice this: …"), `"creature-you-control"`, or
@@ -4718,9 +4727,10 @@ Delete an entry in the same commit as the feature that retires it.
   but an `others-enter-battlefield` replacement doesn't hand its filter a
   source to read the choice off. "Is the chosen type in addition to its other
   types" is a static's `addsChosenCreatureType` (Titan of Littjara — §4).
-- **Bestow** (rule 702.103 — Springheart Nantuko), **Embalm** (rule 702.128
-  — Vizier of Many Faces, whose Clone ability has to carry it) and **retrace**
-  (rule 702.81 — Six) are unmodeled alt-cast mechanics (needed-cards P18).
+- **Embalm** (rule 702.128 — Vizier of Many Faces, whose Clone ability has
+  to carry it) and **retrace** (rule 702.81 — Six) are unmodeled alt-cast
+  mechanics (needed-cards P18). Bestow is built (the `bestow` field), but not
+  combined with another cost or cast from the graveyard (Detective's Phoenix).
   **Riot** (rule 702.136) is built for a permanent that has it printed or
   copied (Skarrgan Hellkite — asked before it moves, like any "as this
   enters" choice), not for one a static *grants* it to as it enters (Rhythm of

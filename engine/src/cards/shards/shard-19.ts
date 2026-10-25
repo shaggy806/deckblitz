@@ -213,6 +213,7 @@ import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
+import _poolFontOfIre from "../pool/font-of-ire.js";
 import _poolForerunnerOfSlaughter from "../pool/forerunner-of-slaughter.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
@@ -239,6 +240,7 @@ import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
+import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
@@ -401,6 +403,7 @@ import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
+import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
@@ -651,6 +654,7 @@ import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
+import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensKnightAllyToken from "../tokens/knight-ally-token.js";
@@ -874,6 +878,7 @@ const shard: CardShard = {
     _poolFlipTheSwitch,
     _poolFlowstoneKavu,
     _poolFlyingDolphinFish,
+    _poolFontOfIre,
     _poolForerunnerOfSlaughter,
     _poolForerunnerOfTheEmpire,
     _poolFormidableSpeaker,
@@ -900,6 +905,7 @@ const shard: CardShard = {
     _poolGlistenerElf,
     _poolGoblinGlider,
     _poolGoblinHeelcutter,
+    _poolGoldenhideOx,
     _poolGoliathMassManipulator,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
@@ -1062,6 +1068,7 @@ const shard: CardShard = {
     _poolNimbleTrapfinder,
     _poolNissaResurgentAnimist,
     _poolNorwoodWarrior,
+    _poolNyxbornHydra,
     _poolOathOfChandra,
     _poolOgreBerserker,
     _poolOgreSiegebreaker,
@@ -1314,6 +1321,7 @@ const shard: CardShard = {
     _poolZukosExile,
   ],
   tokens: [
+    _tokensBlueSphinxToken44Flying,
     _tokensHeartwoodToken,
     _tokensJumblebones,
     _tokensKnightAllyToken,

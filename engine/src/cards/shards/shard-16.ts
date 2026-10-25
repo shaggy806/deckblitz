@@ -193,6 +193,7 @@ import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
 import _poolFlickerwisp from "../pool/flickerwisp.js";
+import _poolFloodwaterDam from "../pool/floodwater-dam.js";
 import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
@@ -282,10 +283,12 @@ import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
+import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
+import _poolKiorasDismissal from "../pool/kioras-dismissal.js";
 import _poolKismet from "../pool/kismet.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
@@ -440,6 +443,7 @@ import _poolRipTheSeams from "../pool/rip-the-seams.js";
 import _poolRiptide from "../pool/riptide.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
+import _poolRogueSkycaptain from "../pool/rogue-skycaptain.js";
 import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
@@ -545,6 +549,7 @@ import _poolTemurBanner from "../pool/temur-banner.js";
 import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
+import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLastRonin from "../pool/the-last-ronin.js";
@@ -874,6 +879,7 @@ const shard: CardShard = {
     _poolFleetingImage,
     _poolFleetingMemories,
     _poolFlickerwisp,
+    _poolFloodwaterDam,
     _poolFocusTheMind,
     _poolFolkOfThePines,
     _poolFomoriNomad,
@@ -963,10 +969,12 @@ const shard: CardShard = {
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
+    _poolKaysa,
     _poolKazanduValley,
     _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
+    _poolKiorasDismissal,
     _poolKismet,
     _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
@@ -1121,6 +1129,7 @@ const shard: CardShard = {
     _poolRiptide,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
+    _poolRogueSkycaptain,
     _poolRonomUnicorn,
     _poolRootboundCrag,
     _poolRubblebeltBraggart,
@@ -1226,6 +1235,7 @@ const shard: CardShard = {
     _poolTemurTawnyback,
     _poolTerashisVerdict,
     _poolTerohsFaithful,
+    _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
     _poolTheFalconSamWilson,
     _poolTheLastRonin,

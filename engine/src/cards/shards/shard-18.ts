@@ -26,6 +26,7 @@ import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
 import _poolArclightPhoenix from "../pool/arclight-phoenix.js";
 import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
+import _poolAstrolabe from "../pool/astrolabe.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
@@ -78,6 +79,7 @@ import _poolCelestialRegulator from "../pool/celestial-regulator.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
+import _poolChaosHarlequin from "../pool/chaos-harlequin.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
@@ -481,6 +483,7 @@ import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
 import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
+import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
@@ -529,6 +532,7 @@ import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
 import _poolThoughtflare from "../pool/thoughtflare.js";
+import _poolThoughtrenderLamia from "../pool/thoughtrender-lamia.js";
 import _poolThrashingFrontliner from "../pool/thrashing-frontliner.js";
 import _poolThrashingWumpus from "../pool/thrashing-wumpus.js";
 import _poolThreeBlindMice from "../pool/three-blind-mice.js";
@@ -589,6 +593,7 @@ import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
 import _poolWallCrawl from "../pool/wall-crawl.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
+import _poolWanderingMage from "../pool/wandering-mage.js";
 import _poolWarBalloon from "../pool/war-balloon.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
@@ -669,6 +674,7 @@ const shard: CardShard = {
     _poolArclightPhoenix,
     _poolArdentDustspeaker,
     _poolArgothianTreefolk,
+    _poolAstrolabe,
     _poolAuntiesSentence,
     _poolAvengerOfZendikar,
     _poolAvianChangeling,
@@ -721,6 +727,7 @@ const shard: CardShard = {
     _poolChampionsOfThePerfect,
     _poolChandrasPyreling,
     _poolChangeOfPlans,
+    _poolChaosHarlequin,
     _poolChillingScreech,
     _poolCircleOfProtectionBlack,
     _poolClamorousIronclad,
@@ -1124,6 +1131,7 @@ const shard: CardShard = {
     _poolSphinxOfForgottenLore,
     _poolSpiderManHometownHero,
     _poolSpiketailDrake,
+    _poolSpiteOfMogis,
     _poolStalkingVengeance,
     _poolStandingTroops,
     _poolStarAthlete,
@@ -1172,6 +1180,7 @@ const shard: CardShard = {
     _poolThistledownPlayers,
     _poolThornOfAmethyst,
     _poolThoughtflare,
+    _poolThoughtrenderLamia,
     _poolThrashingFrontliner,
     _poolThrashingWumpus,
     _poolThreeBlindMice,
@@ -1232,6 +1241,7 @@ const shard: CardShard = {
     _poolWakandanTusker,
     _poolWallCrawl,
     _poolWallOfAir,
+    _poolWanderingMage,
     _poolWarBalloon,
     _poolWargate,
     _poolWargling,

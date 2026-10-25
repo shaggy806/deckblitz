@@ -115,6 +115,7 @@ import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
 import _poolConstableOfTheRealm from "../pool/constable-of-the-realm.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolConsumingVapors from "../pool/consuming-vapors.js";
+import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
@@ -261,6 +262,7 @@ import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
+import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
@@ -289,6 +291,7 @@ import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
 import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
+import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
 import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
@@ -394,6 +397,7 @@ import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
+import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
@@ -437,6 +441,7 @@ import _poolRestForTheWeary from "../pool/rest-for-the-weary.js";
 import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
 import _poolReturnedPastcaller from "../pool/returned-pastcaller.js";
+import _poolRevelOfTheFallenGod from "../pool/revel-of-the-fallen-god.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
@@ -446,6 +451,7 @@ import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
 import _poolRiskFactor from "../pool/risk-factor.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
+import _poolRitualOfTheMachine from "../pool/ritual-of-the-machine.js";
 import _poolRiverHoopoe from "../pool/river-hoopoe.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
 import _poolRoamersRoutine from "../pool/roamers-routine.js";
@@ -756,6 +762,7 @@ const shard: CardShard = {
     _poolConstableOfTheRealm,
     _poolConstrictorSage,
     _poolConsumingVapors,
+    _poolContagion,
     _poolContaminatedLandscape,
     _poolCorpsehatch,
     _poolCovetedPeacock,
@@ -902,6 +909,7 @@ const shard: CardShard = {
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
     _poolHermitOfTheNatterknolls,
+    _poolHumblerOfMortals,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
     _poolHydrosurge,
@@ -930,6 +938,7 @@ const shard: CardShard = {
     _poolKataraTheFearless,
     _poolKazanduTuskcaller,
     _poolKazuulsFury,
+    _poolKeeperOfTresserhorn,
     _poolKheruBloodsucker,
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
@@ -1035,6 +1044,7 @@ const shard: CardShard = {
     _poolPersistentNightmare,
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
+    _poolPhyrexianBoon,
     _poolPitilessPlunderer,
     _poolPlanarIncision,
     _poolPloverKnights,
@@ -1078,6 +1088,7 @@ const shard: CardShard = {
     _poolRestartSequence,
     _poolRetrieveTheEsper,
     _poolReturnedPastcaller,
+    _poolRevelOfTheFallenGod,
     _poolReverberatingSummons,
     _poolReverentHoplite,
     _poolReyavMasterSmith,
@@ -1087,6 +1098,7 @@ const shard: CardShard = {
     _poolRiseOfTheEldrazi,
     _poolRiskFactor,
     _poolRiskyShortcut,
+    _poolRitualOfTheMachine,
     _poolRiverHoopoe,
     _poolRiveteersInitiate,
     _poolRoamersRoutine,

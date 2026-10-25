@@ -13,6 +13,7 @@ import _poolActOnImpulse from "../pool/act-on-impulse.js";
 import _poolAerialGuide from "../pool/aerial-guide.js";
 import _poolAethersphereHarvester from "../pool/aethersphere-harvester.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
+import _poolAjanisPresence from "../pool/ajanis-presence.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
 import _poolAllyEncampment from "../pool/ally-encampment.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
@@ -45,6 +46,7 @@ import _poolAvengersTower from "../pool/avengers-tower.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
+import _poolBalduvianWarMakers from "../pool/balduvian-war-makers.js";
 import _poolBallroom from "../pool/ballroom.js";
 import _poolBanshee from "../pool/banshee.js";
 import _poolBaradDur from "../pool/barad-dur.js";
@@ -343,6 +345,7 @@ import _poolKitesail from "../pool/kitesail.js";
 import _poolKithkinDaggerdare from "../pool/kithkin-daggerdare.js";
 import _poolKittKantoMayhemDiva from "../pool/kitt-kanto-mayhem-diva.js";
 import _poolKjeldoranOutrider from "../pool/kjeldoran-outrider.js";
+import _poolKnowledgeAndPower from "../pool/knowledge-and-power.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
@@ -410,6 +413,7 @@ import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
+import _poolNyxbornUnicorn from "../pool/nyxborn-unicorn.js";
 import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
@@ -586,6 +590,7 @@ import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
 import _poolTooEvilToStayDead from "../pool/too-evil-to-stay-dead.js";
 import _poolTorchFiend from "../pool/torch-fiend.js";
+import _poolTormentedThoughts from "../pool/tormented-thoughts.js";
 import _poolTouchTheSpiritRealm from "../pool/touch-the-spirit-realm.js";
 import _poolTowerOfChampions from "../pool/tower-of-champions.js";
 import _poolToweringIndrik from "../pool/towering-indrik.js";
@@ -682,6 +687,7 @@ const shard: CardShard = {
     _poolAerialGuide,
     _poolAethersphereHarvester,
     _poolAirCultElemental,
+    _poolAjanisPresence,
     _poolAkkiBattleSquad,
     _poolAllyEncampment,
     _poolAlongTheCrookedWay,
@@ -714,6 +720,7 @@ const shard: CardShard = {
     _poolAzraSmokeshaper,
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
+    _poolBalduvianWarMakers,
     _poolBallroom,
     _poolBanshee,
     _poolBaradDur,
@@ -1012,6 +1019,7 @@ const shard: CardShard = {
     _poolKithkinDaggerdare,
     _poolKittKantoMayhemDiva,
     _poolKjeldoranOutrider,
+    _poolKnowledgeAndPower,
     _poolKodamaOfTheEastTree,
     _poolKorlessaScaleSinger,
     _poolKotoriPilotProdigy,
@@ -1079,6 +1087,7 @@ const shard: CardShard = {
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
+    _poolNyxbornUnicorn,
     _poolOathOfJace,
     _poolObscuraInterceptor,
     _poolOccultEpiphany,
@@ -1255,6 +1264,7 @@ const shard: CardShard = {
     _poolTombstoneCareerCriminal,
     _poolTooEvilToStayDead,
     _poolTorchFiend,
+    _poolTormentedThoughts,
     _poolTouchTheSpiritRealm,
     _poolTowerOfChampions,
     _poolToweringIndrik,

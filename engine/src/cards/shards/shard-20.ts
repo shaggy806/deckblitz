@@ -279,6 +279,7 @@ import _poolHeroesForHire from "../pool/heroes-for-hire.js";
 import _poolHonorTroll from "../pool/honor-troll.js";
 import _poolHonorsReward from "../pool/honors-reward.js";
 import _poolHookblade from "../pool/hookblade.js";
+import _poolHourOfNeed from "../pool/hour-of-need.js";
 import _poolHoverguardObserver from "../pool/hoverguard-observer.js";
 import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
@@ -475,6 +476,7 @@ import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
+import _poolRouseTheMob from "../pool/rouse-the-mob.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolRuthlessKnave from "../pool/ruthless-knave.js";
 import _poolRuthlessSniper from "../pool/ruthless-sniper.js";
@@ -545,6 +547,7 @@ import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
+import _poolStarfall from "../pool/starfall.js";
 import _poolStargaze from "../pool/stargaze.js";
 import _poolStarnheimAspirant from "../pool/starnheim-aspirant.js";
 import _poolStaticNet from "../pool/static-net.js";
@@ -981,6 +984,7 @@ const shard: CardShard = {
     _poolHonorTroll,
     _poolHonorsReward,
     _poolHookblade,
+    _poolHourOfNeed,
     _poolHoverguardObserver,
     _poolHowlingGiant,
     _poolHowlingMine,
@@ -1177,6 +1181,7 @@ const shard: CardShard = {
     _poolRishkarPeemaRenegade,
     _poolRitualOfSoot,
     _poolRottedHystrix,
+    _poolRouseTheMob,
     _poolRubyMedallion,
     _poolRuthlessKnave,
     _poolRuthlessSniper,
@@ -1247,6 +1252,7 @@ const shard: CardShard = {
     _poolSquash,
     _poolSquirrelSanctuary,
     _poolSquirrelanoids,
+    _poolStarfall,
     _poolStargaze,
     _poolStarnheimAspirant,
     _poolStaticNet,

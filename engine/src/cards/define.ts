@@ -2562,7 +2562,7 @@ export interface CardDefinition {
     readonly cost: string;
     readonly effect: EffectSpec;
     readonly targets?: readonly TargetSpec[];
-    readonly keyword?: "cleave" | "mutate" | "awaken";
+    readonly keyword?: "cleave" | "mutate" | "awaken" | "bestow";
   } | null;
   /**
    * A conditional free-cast permission printed on the spell itself (the CMM
@@ -3401,6 +3401,15 @@ interface CardDraft {
    * `Game.mergeMutatingSpell`); with an illegal one it's an ordinary
    * creature spell (702.140b). */
   mutate?: string;
+  /** Bestow [cost] (rule 702.103a): "as you cast this spell, you may choose
+   * to cast it bestowed. If you do, you pay [cost] rather than its mana
+   * cost" — held as `overload` with `keyword: "bestow"` and
+   * {@link BESTOW_TARGET}. Cast that way it's an Aura spell with enchant
+   * creature (702.103b — `GameObject.bestowed`, {@link bestowedDefinition}),
+   * and the Aura it becomes is a creature again once it's unattached
+   * (702.103e-f). Its "enchanted creature gets …" is an ordinary static with
+   * `affects: { scope: "attached" }`. */
+  bestow?: string;
   freeCastIf?: { readonly condition: StaticCondition };
   alternativeCost?: NonNullable<CardDefinition["alternativeCost"]>;
   convoke?: boolean;
@@ -3507,6 +3516,39 @@ export const MUTATE_TARGET: TargetSpec = {
   filter: { type: "creature", notSubtypes: ["Human"], ownedBy: "you" },
 };
 
+/** A bestowed Aura spell's target (rule 702.103b): the "enchant creature"
+ * it gains — any creature. */
+export const BESTOW_TARGET: TargetSpec = {
+  kind: "permanent",
+  whose: "any",
+  filter: { type: "creature" },
+};
+
+const bestowedDefinitions = new WeakMap<CardDefinition, CardDefinition>();
+
+/**
+ * A card with bestow as a bestowed Aura spell or permanent (rule 702.103b):
+ * "it becomes an Aura enchantment and gains enchant creature" — no longer a
+ * creature, so none of its creature types (205.1a: they went with it), its
+ * only subtype Aura, and its enchant ability {@link BESTOW_TARGET}. What
+ * every Aura question (`Game.canEnchant`, the entering Aura's host) is asked
+ * of for an object whose `bestowed` is set; the layer fold reads the same
+ * types and subtypes as its starting point (`characteristics.ts`). Not a
+ * copiable value (the rulings: a copy of a bestowed Aura is the creature).
+ */
+export function bestowedDefinition(def: CardDefinition): CardDefinition {
+  const known = bestowedDefinitions.get(def);
+  if (known !== undefined) return known;
+  const bestowed: CardDefinition = {
+    ...def,
+    types: def.types.filter((t) => t !== "creature"),
+    subtypes: ["Aura"],
+    targets: [BESTOW_TARGET],
+  };
+  bestowedDefinitions.set(def, bestowed);
+  return bestowed;
+}
+
 export function defineCard(draft: CardDraft): CardDefinition {
   const loyalty = draft.loyalty ?? null;
   // A planeswalker enters with `loyalty` loyalty counters (rule 306.5b) —
@@ -3570,7 +3612,9 @@ export function defineCard(draft: CardDraft): CardDefinition {
         ? { ...draft.cleave, keyword: "cleave" }
         : draft.mutate !== undefined
           ? { cost: draft.mutate, keyword: "mutate", targets: [MUTATE_TARGET], effect: { kind: "sequence", effects: [] } }
-          : null),
+          : draft.bestow !== undefined
+            ? { cost: draft.bestow, keyword: "bestow", targets: [BESTOW_TARGET], effect: { kind: "sequence", effects: [] } }
+            : null),
     freeCastIf: draft.freeCastIf ?? null,
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,

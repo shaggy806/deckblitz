@@ -45,6 +45,7 @@ import _poolBarrageOgre from "../pool/barrage-ogre.js";
 import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
 import _poolBazaarTrademage from "../pool/bazaar-trademage.js";
 import _poolBeaconOfTomorrows from "../pool/beacon-of-tomorrows.js";
+import _poolBearerOfTheHeavens from "../pool/bearer-of-the-heavens.js";
 import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
@@ -115,6 +116,7 @@ import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
 import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
+import _poolCruelFeeding from "../pool/cruel-feeding.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
 import _poolCrypticCoat from "../pool/cryptic-coat.js";
 import _poolCrystalInhumanPrincess from "../pool/crystal-inhuman-princess.js";
@@ -135,6 +137,7 @@ import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
 import _poolDemonicAppetite from "../pool/demonic-appetite.js";
+import _poolDesperateStand from "../pool/desperate-stand.js";
 import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
@@ -220,6 +223,7 @@ import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHackrobat from "../pool/hackrobat.js";
+import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
@@ -497,6 +501,7 @@ import _poolSoltariCrusader from "../pool/soltari-crusader.js";
 import _poolSongOfCreation from "../pool/song-of-creation.js";
 import _poolSouthernElephant from "../pool/southern-elephant.js";
 import _poolSovereignsMacuahuitl from "../pool/sovereigns-macuahuitl.js";
+import _poolSpawnOfThraxes from "../pool/spawn-of-thraxes.js";
 import _poolSpeciesSpecialist from "../pool/species-specialist.js";
 import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
 import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
@@ -645,6 +650,7 @@ import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensMercenaryToken from "../tokens/mercenary-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
 import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
+import _tokensRedMinotaurTokenHaste from "../tokens/red-minotaur-token-haste.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
 import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 import _tokensXXSpiritTokenBlack from "../tokens/x-x-spirit-token-black.js";
@@ -693,6 +699,7 @@ const shard: CardShard = {
     _poolBarrierOfBones,
     _poolBazaarTrademage,
     _poolBeaconOfTomorrows,
+    _poolBearerOfTheHeavens,
     _poolBedeckBedazzle,
     _poolBeeSting,
     _poolBenalishHeralds,
@@ -763,6 +770,7 @@ const shard: CardShard = {
     _poolCreakwoodSafewright,
     _poolCrimsonManticore,
     _poolCrookedCustodian,
+    _poolCruelFeeding,
     _poolCryptSliver,
     _poolCrypticCoat,
     _poolCrystalInhumanPrincess,
@@ -783,6 +791,7 @@ const shard: CardShard = {
     _poolDelugeVirtuoso,
     _poolDemonOfWailingAgonies,
     _poolDemonicAppetite,
+    _poolDesperateStand,
     _poolDireStrainAnarchist,
     _poolDireWolfProwler,
     _poolDispellersCapsule,
@@ -868,6 +877,7 @@ const shard: CardShard = {
     _poolGuadosalamFarplaneGateway,
     _poolGuardianOfPilgrims,
     _poolHackrobat,
+    _poolHailStorm,
     _poolHakodaSelflessCommander,
     _poolHatcherySpider,
     _poolHauntedScreen,
@@ -1145,6 +1155,7 @@ const shard: CardShard = {
     _poolSongOfCreation,
     _poolSouthernElephant,
     _poolSovereignsMacuahuitl,
+    _poolSpawnOfThraxes,
     _poolSpeciesSpecialist,
     _poolSpellgorgerWeird,
     _poolSphinxsRevelation,
@@ -1295,6 +1306,7 @@ const shard: CardShard = {
     _tokensMercenaryToken,
     _tokensPhobos,
     _tokensRatTokenGenkuFutureShaper,
+    _tokensRedMinotaurTokenHaste,
     _tokensSnakeToken,
     _tokensStoneBoulderToken,
     _tokensXXSpiritTokenBlack,

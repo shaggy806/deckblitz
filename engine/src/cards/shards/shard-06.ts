@@ -265,6 +265,7 @@ import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
 import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
+import _poolHypnoticSiren from "../pool/hypnotic-siren.js";
 import _poolIcatianJavelineers from "../pool/icatian-javelineers.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
@@ -333,6 +334,7 @@ import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
 import _poolMischievousCatgeist from "../pool/mischievous-catgeist.js";
+import _poolMishrasGroundbreaker from "../pool/mishras-groundbreaker.js";
 import _poolMistbreathElder from "../pool/mistbreath-elder.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
 import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
@@ -377,6 +379,7 @@ import _poolPartingThoughts from "../pool/parting-thoughts.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
 import _poolPegasusCourser from "../pool/pegasus-courser.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
+import _poolPhalanxFormation from "../pool/phalanx-formation.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
 import _poolPhyrexianArena from "../pool/phyrexian-arena.js";
@@ -465,6 +468,7 @@ import _poolSerumSnare from "../pool/serum-snare.js";
 import _poolServantOfTheConduit from "../pool/servant-of-the-conduit.js";
 import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
+import _poolSetessanTactics from "../pool/setessan-tactics.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
@@ -626,6 +630,7 @@ import _tokensDragonTokenFirebreathing from "../tokens/dragon-token-firebreathin
 import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
 import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
 import _tokensGolemTokenGolemFoundry from "../tokens/golem-token-golem-foundry.js";
+import _tokensGreenHippoToken11 from "../tokens/green-hippo-token-1-1.js";
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
@@ -904,6 +909,7 @@ const shard: CardShard = {
     _poolHowlingGalefang,
     _poolHuatliRadiantChampion,
     _poolHypnoticGrifter,
+    _poolHypnoticSiren,
     _poolIcatianJavelineers,
     _poolImmovableRod,
     _poolImperialAerosaur,
@@ -972,6 +978,7 @@ const shard: CardShard = {
     _poolMinionOfLeshrac,
     _poolMirkoObsessiveTheorist,
     _poolMischievousCatgeist,
+    _poolMishrasGroundbreaker,
     _poolMistbreathElder,
     _poolMisterFantastic,
     _poolMockingbirdBobbiMorse,
@@ -1016,6 +1023,7 @@ const shard: CardShard = {
     _poolPeerIntoTheAbyss,
     _poolPegasusCourser,
     _poolPersistentSpecimen,
+    _poolPhalanxFormation,
     _poolPharikasMender,
     _poolPhenomenonInvestigators,
     _poolPhyrexianArena,
@@ -1104,6 +1112,7 @@ const shard: CardShard = {
     _poolServantOfTheConduit,
     _poolServantOfTheStinger,
     _poolSetessanChampion,
+    _poolSetessanTactics,
     _poolSeymourFlux,
     _poolShambleshark,
     _poolShenanigans,
@@ -1267,6 +1276,7 @@ const shard: CardShard = {
     _tokensEldraziSpawnToken,
     _tokensElementalTokenRekindlingPhoenix,
     _tokensGolemTokenGolemFoundry,
+    _tokensGreenHippoToken11,
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,

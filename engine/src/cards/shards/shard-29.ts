@@ -355,6 +355,7 @@ import _poolNaturesSpiral from "../pool/natures-spiral.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
 import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
+import _poolNessianGameWarden from "../pool/nessian-game-warden.js";
 import _poolNeurokReplica from "../pool/neurok-replica.js";
 import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
@@ -385,6 +386,8 @@ import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
+import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
+import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
 import _poolPlaneboundAccomplice from "../pool/planebound-accomplice.js";
@@ -464,6 +467,7 @@ import _poolScoutTheBorders from "../pool/scout-the-borders.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
+import _poolSeasonedTactician from "../pool/seasoned-tactician.js";
 import _poolSecretPlans from "../pool/secret-plans.js";
 import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
@@ -1008,6 +1012,7 @@ const shard: CardShard = {
     _poolNecroblossomSnarl,
     _poolNecroticSliver,
     _poolNephaliaDrownyard,
+    _poolNessianGameWarden,
     _poolNeurokReplica,
     _poolNeutralizeTheGuards,
     _poolNezumiInformant,
@@ -1038,6 +1043,8 @@ const shard: CardShard = {
     _poolPetAvengers,
     _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
+    _poolPhantasmalSphere,
+    _poolPharikaGodOfAffliction,
     _poolPileatedProvisioner,
     _poolPirateHat,
     _poolPlaneboundAccomplice,
@@ -1117,6 +1124,7 @@ const shard: CardShard = {
     _poolSeaSpirit,
     _poolSeaSprite,
     _poolSeasonedPyromancer,
+    _poolSeasonedTactician,
     _poolSecretPlans,
     _poolSeedOfHope,
     _poolSeekTheBeast,

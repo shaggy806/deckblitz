@@ -87,6 +87,7 @@ import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
+import _poolBurnout from "../pool/burnout.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
@@ -196,6 +197,7 @@ import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
+import _poolFlurryOfHorns from "../pool/flurry-of-horns.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFontOfProgress from "../pool/font-of-progress.js";
 import _poolForebodingStatue from "../pool/foreboding-statue.js";
@@ -215,6 +217,7 @@ import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
 import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
 import _poolGlorifierOfSuffering from "../pool/glorifier-of-suffering.js";
+import _poolGluttonousCyclops from "../pool/gluttonous-cyclops.js";
 import _poolGnarledGrovestrider from "../pool/gnarled-grovestrider.js";
 import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
@@ -450,6 +453,7 @@ import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
 import _poolRootwalla from "../pool/rootwalla.js";
 import _poolRoseTyler from "../pool/rose-tyler.js";
+import _poolRoyalDecree from "../pool/royal-decree.js";
 import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
@@ -515,6 +519,7 @@ import _poolSmittenSwordmaster from "../pool/smitten-swordmaster.js";
 import _poolSmugglersCopter from "../pool/smugglers-copter.js";
 import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
+import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
@@ -652,6 +657,7 @@ import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
+import _tokensRedGreenSatyrTokenHaste from "../tokens/red-green-satyr-token-haste.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
@@ -743,6 +749,7 @@ const shard: CardShard = {
     _poolBrushstrider,
     _poolBullCerodon,
     _poolBurningSunsFury,
+    _poolBurnout,
     _poolCacklingCulprit,
     _poolCalamityBearer,
     _poolCalculatedDismissal,
@@ -852,6 +859,7 @@ const shard: CardShard = {
     _poolFlameChainMauler,
     _poolFleshpulperGiant,
     _poolFlubsTheFool,
+    _poolFlurryOfHorns,
     _poolFollowTheLumarets,
     _poolFontOfProgress,
     _poolForebodingStatue,
@@ -871,6 +879,7 @@ const shard: CardShard = {
     _poolGlasswingGrace,
     _poolGlidediveDuo,
     _poolGlorifierOfSuffering,
+    _poolGluttonousCyclops,
     _poolGnarledGrovestrider,
     _poolGnarlwoodDryad,
     _poolGoblinArtillery,
@@ -1106,6 +1115,7 @@ const shard: CardShard = {
     _poolRootbreakerWurm,
     _poolRootwalla,
     _poolRoseTyler,
+    _poolRoyalDecree,
     _poolRubblebeltRioters,
     _poolRuneclawBear,
     _poolRunehornHellkite,
@@ -1171,6 +1181,7 @@ const shard: CardShard = {
     _poolSmugglersCopter,
     _poolSnareThopter,
     _poolSolTalisman,
+    _poolSoldeviSteamBeast,
     _poolSolitaryCamel,
     _poolSoulsFire,
     _poolSoulstinger,
@@ -1310,6 +1321,7 @@ const shard: CardShard = {
     _tokensLotus,
     _tokensPestTokenAttacks,
     _tokensPhyrexianToken,
+    _tokensRedGreenSatyrTokenHaste,
     _tokensRedHumanToken,
     _tokensSpiderToken21Reach,
     _tokensStoneforgedBladeToken,

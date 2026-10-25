@@ -146,6 +146,7 @@ import _poolDefiantStrike from "../pool/defiant-strike.js";
 import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
 import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
+import _poolDesertersQuarters from "../pool/deserters-quarters.js";
 import _poolDevotedHero from "../pool/devoted-hero.js";
 import _poolDiamondCity from "../pool/diamond-city.js";
 import _poolDiamondValley from "../pool/diamond-valley.js";
@@ -199,6 +200,7 @@ import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
 import _poolFeedback from "../pool/feedback.js";
+import _poolFelhidePetrifier from "../pool/felhide-petrifier.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
 import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
@@ -319,6 +321,7 @@ import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
+import _poolLimDulsPaladin from "../pool/lim-duls-paladin.js";
 import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
 import _poolLonisGeneticsExpert from "../pool/lonis-genetics-expert.js";
 import _poolLoreDrakkis from "../pool/lore-drakkis.js";
@@ -433,6 +436,7 @@ import _poolRevolutionist from "../pool/revolutionist.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
+import _poolRiseOfEagles from "../pool/rise-of-eagles.js";
 import _poolRiteOfUndoing from "../pool/rite-of-undoing.js";
 import _poolRivendell from "../pool/rivendell.js";
 import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js";
@@ -770,6 +774,7 @@ const shard: CardShard = {
     _poolDefiantSurvivor,
     _poolDenProtector,
     _poolDesertOfTheTrue,
+    _poolDesertersQuarters,
     _poolDevotedHero,
     _poolDiamondCity,
     _poolDiamondValley,
@@ -823,6 +828,7 @@ const shard: CardShard = {
     _poolFarfinder,
     _poolFearOfBurningAlive,
     _poolFeedback,
+    _poolFelhidePetrifier,
     _poolFelineSovereign,
     _poolFinchFormation,
     _poolFirebendingLesson,
@@ -943,6 +949,7 @@ const shard: CardShard = {
     _poolLichsCaress,
     _poolLifespringDruid,
     _poolLilianasCaress,
+    _poolLimDulsPaladin,
     _poolLokiTheDeceiver,
     _poolLonisGeneticsExpert,
     _poolLoreDrakkis,
@@ -1057,6 +1064,7 @@ const shard: CardShard = {
     _poolRigoStreetwiseMentor,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,
+    _poolRiseOfEagles,
     _poolRiteOfUndoing,
     _poolRivendell,
     _poolRocksteadyMutantMarauder,

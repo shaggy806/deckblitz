@@ -176,6 +176,7 @@ import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
+import _poolEidolonOfTheGreatRevel from "../pool/eidolon-of-the-great-revel.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
@@ -342,6 +343,7 @@ import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
 import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
 import _poolLonghornSharpshooter from "../pool/longhorn-sharpshooter.js";
+import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
@@ -384,6 +386,7 @@ import _poolMonstrousRage from "../pool/monstrous-rage.js";
 import _poolMonumentalCorruption from "../pool/monumental-corruption.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
+import _poolMortalObstinacy from "../pool/mortal-obstinacy.js";
 import _poolMountedDreadknight from "../pool/mounted-dreadknight.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
 import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
@@ -459,6 +462,7 @@ import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
+import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
@@ -629,6 +633,7 @@ import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
+import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment-spider-token-reach.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
 import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
@@ -812,6 +817,7 @@ const shard: CardShard = {
     _poolEbonDrake,
     _poolEchoOfDeathsWail,
     _poolEdgarMarkov,
+    _poolEidolonOfTheGreatRevel,
     _poolEivorBattleReady,
     _poolEldraziLinebreaker,
     _poolElementalEruption,
@@ -978,6 +984,7 @@ const shard: CardShard = {
     _poolLlanowarElves,
     _poolLocthwainGargoyle,
     _poolLonghornSharpshooter,
+    _poolLordOfTresserhorn,
     _poolLotusRing,
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
@@ -1020,6 +1027,7 @@ const shard: CardShard = {
     _poolMonumentalCorruption,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
+    _poolMortalObstinacy,
     _poolMountedDreadknight,
     _poolMuseumNightwatch,
     _poolMutantChainReaction,
@@ -1095,6 +1103,7 @@ const shard: CardShard = {
     _poolRocketVolley,
     _poolRoilElemental,
     _poolRooftopSaboteurs,
+    _poolRoyalHerbalist,
     _poolRuinousGremlin,
     _poolRunawayCarriage,
     _poolRunawayTrashBot,
@@ -1267,6 +1276,7 @@ const shard: CardShard = {
     _tokensGoblinConstructToken,
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,
+    _tokensGreenEnchantmentSpiderTokenReach,
     _tokensKrakenToken,
     _tokensNinjaTokenKaitoShizuki,
     _tokensScorpionDragonToken,

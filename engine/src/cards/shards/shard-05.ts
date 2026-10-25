@@ -202,6 +202,7 @@ import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
+import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
 import _poolFeed from "../pool/feed.js";
 import _poolFeralInstinct from "../pool/feral-instinct.js";
@@ -231,6 +232,7 @@ import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGiantSlug from "../pool/giant-slug.js";
 import _poolGiantsSkewer from "../pool/giants-skewer.js";
+import _poolGiftOfTheWoods from "../pool/gift-of-the-woods.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
@@ -327,6 +329,7 @@ import _poolKolaghanForerunners from "../pool/kolaghan-forerunners.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLancerSliver from "../pool/lancer-sliver.js";
+import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
@@ -533,6 +536,7 @@ import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSurgeEngine from "../pool/surge-engine.js";
 import _poolSurvive from "../pool/survive.js";
 import _poolSwanSong from "../pool/swan-song.js";
+import _poolSwarmbornGiant from "../pool/swarmborn-giant.js";
 import _poolSwarmingGoblins from "../pool/swarming-goblins.js";
 import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
@@ -848,6 +852,7 @@ const shard: CardShard = {
     _poolEyeblightAssassin,
     _poolFakeYourOwnDeath,
     _poolFateUnraveler,
+    _poolFeastOrFamine,
     _poolFeasterOfFools,
     _poolFeed,
     _poolFeralInstinct,
@@ -877,6 +882,7 @@ const shard: CardShard = {
     _poolGiantOx,
     _poolGiantSlug,
     _poolGiantsSkewer,
+    _poolGiftOfTheWoods,
     _poolGild,
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,
@@ -973,6 +979,7 @@ const shard: CardShard = {
     _poolKozileksShrieker,
     _poolKravenProudPredator,
     _poolLancerSliver,
+    _poolLaunchTheFleet,
     _poolLeapingMaster,
     _poolLeyDruid,
     _poolLightningStrike,
@@ -1179,6 +1186,7 @@ const shard: CardShard = {
     _poolSurgeEngine,
     _poolSurvive,
     _poolSwanSong,
+    _poolSwarmbornGiant,
     _poolSwarmingGoblins,
     _poolSwiftfootBoots,
     _poolSwordDancer,

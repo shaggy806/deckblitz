@@ -10231,8 +10231,104 @@
    "example": "Innocuous Researcher: \"you can't cast spells until your next turn\" — `prohibit` lasts this turn only."
   },
   "amount:times-kicked": {
-   "family": "keyword:multikicker",
-   "example": "Spell Contortion: \"draw a card for each time Spell Contortion was kicked\" — an effect amount reading the multikicker count (built B162: { timesKicked: \"source\" })."
+   "example": "Taste of Paradise",
+   "family": "keyword:multikicker"
+  },
+  "amount:times-regenerated-this-turn": {
+   "example": "Spiny Starfish",
+   "family": "stat:turn-event-tallies"
+  },
+  "condition:regenerated-this-turn": {
+   "example": "Spiny Starfish",
+   "family": "stat:turn-event-tallies"
+  },
+  "condition:dealt-damage-this-turn-by-spell": {
+   "example": "Suffocation",
+   "family": "stat:noncombat-damage-taken-this-turn"
+  },
+  "cost:exile-top-of-library": {
+   "example": "Royal Herbalist",
+   "family": "cost:choose-cards-as-cost"
+  },
+  "cost:optional-additional-mana-cost": {
+   "example": "Undergrowth",
+   "family": "cost:conditional-alternative-cost"
+  },
+  "cost:untap-opponent-tapped-land": {
+   "example": "Benthic Explorers",
+   "family": "cost:mana-ability-complex-costs"
+  },
+  "decision:opponent-chooses-mode": {
+   "example": "Library of Lat-Nam",
+   "family": "effect:choices-by-other-players"
+  },
+  "effect:delayed-trigger-next-cleanup": {
+   "example": "Thawing Glaciers",
+   "family": "effect:delayed-trigger-extensions"
+  },
+  "effect:exile-from-hand-face-down-linked": {
+   "example": "Gustha's Scepter",
+   "family": "zone:exile-face-down"
+  },
+  "effect:search-library-to-exile": {
+   "example": "Foresight",
+   "family": "effect:linked-exiled-card"
+  },
+  "effect:set-pt-from-target": {
+   "example": "Sworn Defender",
+   "family": "static:set-characteristics"
+  },
+  "effect:target-player-shuffles-library": {
+   "example": "Soldier of Fortune",
+   "family": "effect:shuffle-library"
+  },
+  "effect:top-card-of-graveyard": {
+   "example": "Soldevi Digger",
+   "family": "effect:aggregate-over-graveyard"
+  },
+  "effect:triggered-mana-ability-rider": {
+   "example": "Winter's Night",
+   "family": "effect:mana-ability-side-effects"
+  },
+  "filter:player-previously-dealt-damage-by-source": {
+   "example": "Diseased Vermin",
+   "family": "stat:object-damage-history"
+  },
+  "trigger:discarded-by-opponent": {
+   "example": "Guerrilla Tactics",
+   "family": "trigger:discards-extensions"
+  },
+  "trigger:when-regenerates-this-way": {
+   "example": "Soldevi Sentry",
+   "family": "effect:reflexive-trigger"
+  },
+  "cost:cost-reduction-per-creature-targeted": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Battlefield Thaumaturge: 'spells cost {1} less for each creature they target' — costModification.perTarget counts players too"
+  },
+  "effect:become-copy-of-chosen-permanent": {
+   "family": "effect:become-copy",
+   "example": "Polymorphous Rush: 'choose a creature on the battlefield. Any number of target creatures you control each become a copy of it' — the copied creature is chosen on resolution, not targeted"
+  },
+  "filter:attached-to-target": {
+   "family": "condition:filter-attachments",
+   "example": "Hubris: 'return target creature and all Auras attached to it' — a filter for the Auras attached to a target slot's permanent"
+  },
+  "replacement:prevent-damage-by-attached": {
+   "family": "replacement:damage-modification",
+   "example": "Armament of Nyx: 'prevent all damage that would be dealt by enchanted creature' — a damage-prevention replacement scoped to the Aura's host"
+  },
+  "static:ability-cost-increase-attached": {
+   "family": "cost:ability-cost-modification",
+   "example": "Oppressive Rays: 'activated abilities of enchanted creature cost {3} more to activate'"
+  },
+  "effect:put-on-library-dynamic-position": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Quarry Colossus: 'put target creature into its owner's library just beneath the top X cards, where X is the number of Plains you control'"
+  },
+  "keyword:bestow-extensions": {
+   "family": "keyword:bestow",
+   "example": "Detective's Phoenix: a bestow cost with collect evidence, and casting it from the graveyard using its bestow ability"
   },
   "amount:trigger-spell-times-kicked": {
    "family": "keyword:multikicker",
@@ -10249,9 +10345,6 @@
   "static:set-color-attached": {
    "family": "static:static-set-characteristics",
    "example": "Corrupted Zendikon: \"enchanted land is a 3/3 black Ooze creature\" — a static setting colour in layer 5 (built B162: StaticAbility.setColors)."
-  },
-  "effect:search-library-to-exile": {
-   "example": "Selective Memory: search your library for any number of nonland cards and exile them — search-library has no exile destination."
   },
   "effect:reveal-until-rest-to-hand": {
    "example": "Treasure Hunt: reveal cards until a nonland card, put all cards revealed this way into your hand — reveal-until's rest can't go to hand."

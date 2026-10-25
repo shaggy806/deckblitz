@@ -1,0 +1,14 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Interpret the Signs",
+  manaCost: "{5}{U}",
+  colors: ["U"],
+  types: ["sorcery"],
+  text: "Scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom and the rest on top in any order.)",
+  effect: {
+    kind: "scry",
+    amount: 3,
+    then: { kind: "reveal-top", then: { kind: "draw", amount: { manaValueOf: 0 } } },
+  },
+});

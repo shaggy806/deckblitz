@@ -38,6 +38,7 @@ import _poolAustereCommand from "../pool/austere-command.js";
 import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
 import _poolBackdraftHellkite from "../pool/backdraft-hellkite.js";
 import _poolBakeryRaid from "../pool/bakery-raid.js";
+import _poolBalduvianHorde from "../pool/balduvian-horde.js";
 import _poolBanewhipPunisher from "../pool/banewhip-punisher.js";
 import _poolBarTheDoor from "../pool/bar-the-door.js";
 import _poolBardTheBowman from "../pool/bard-the-bowman.js";
@@ -65,6 +66,7 @@ import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
+import _poolBrowse from "../pool/browse.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolBurningAnger from "../pool/burning-anger.js";
@@ -117,6 +119,7 @@ import _poolDarigaazsAttendant from "../pool/darigaazs-attendant.js";
 import _poolDarkBetrayal from "../pool/dark-betrayal.js";
 import _poolDawnGryff from "../pool/dawn-gryff.js";
 import _poolDawn from "../pool/dawn.js";
+import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
@@ -288,6 +291,7 @@ import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
+import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
@@ -515,6 +519,7 @@ import _poolStonebindersFamiliar from "../pool/stonebinders-familiar.js";
 import _poolStormcallersBoon from "../pool/stormcallers-boon.js";
 import _poolStormscapeApprentice from "../pool/stormscape-apprentice.js";
 import _poolStratozeppelid from "../pool/stratozeppelid.js";
+import _poolStrengthFromTheFallen from "../pool/strength-from-the-fallen.js";
 import _poolStrikingPalette from "../pool/striking-palette.js";
 import _poolStromgaldCabal from "../pool/stromgald-cabal.js";
 import _poolSubiraTulzidiCaravanner from "../pool/subira-tulzidi-caravanner.js";
@@ -576,6 +581,7 @@ import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchainedBerserker from "../pool/unchained-berserker.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
 import _poolUndyingEvil from "../pool/undying-evil.js";
+import _poolUnlikelyAlliance from "../pool/unlikely-alliance.js";
 import _poolUnyieldingKrumar from "../pool/unyielding-krumar.js";
 import _poolUrzasRebuff from "../pool/urzas-rebuff.js";
 import _poolUthrosResearchCraft from "../pool/uthros-research-craft.js";
@@ -704,6 +710,7 @@ const shard: CardShard = {
     _poolAvidReclaimer,
     _poolBackdraftHellkite,
     _poolBakeryRaid,
+    _poolBalduvianHorde,
     _poolBanewhipPunisher,
     _poolBarTheDoor,
     _poolBardTheBowman,
@@ -731,6 +738,7 @@ const shard: CardShard = {
     _poolBrilliantSpectrum,
     _poolBrinkOfDisaster,
     _poolBronzebeakMoa,
+    _poolBrowse,
     _poolBullsStrength,
     _poolBurnTheAccursed,
     _poolBurningAnger,
@@ -783,6 +791,7 @@ const shard: CardShard = {
     _poolDarkBetrayal,
     _poolDawnGryff,
     _poolDawn,
+    _poolDawnbringerCharioteers,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
     _poolDefenderOfChaos,
@@ -954,6 +963,7 @@ const shard: CardShard = {
     _poolKumenaTyrantOfOrazca,
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
+    _poolLagonnaBandTrailblazer,
     _poolLashweedLurker,
     _poolLastWord,
     _poolLatNamAdept,
@@ -1181,6 +1191,7 @@ const shard: CardShard = {
     _poolStormcallersBoon,
     _poolStormscapeApprentice,
     _poolStratozeppelid,
+    _poolStrengthFromTheFallen,
     _poolStrikingPalette,
     _poolStromgaldCabal,
     _poolSubiraTulzidiCaravanner,
@@ -1242,6 +1253,7 @@ const shard: CardShard = {
     _poolUnchainedBerserker,
     _poolUnchartedHaven,
     _poolUndyingEvil,
+    _poolUnlikelyAlliance,
     _poolUnyieldingKrumar,
     _poolUrzasRebuff,
     _poolUthrosResearchCraft,

@@ -261,6 +261,7 @@ import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
 import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
+import _poolHallOfTriumph from "../pool/hall-of-triumph.js";
 import _poolHallowedGround from "../pool/hallowed-ground.js";
 import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
@@ -365,6 +366,7 @@ import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecronMonolith from "../pool/necron-monolith.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
 import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
+import _poolNighthowler from "../pool/nighthowler.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
@@ -501,6 +503,7 @@ import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
+import _poolSolGrail from "../pool/sol-grail.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
 import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
@@ -904,6 +907,7 @@ const shard: CardShard = {
     _poolHaazdaOfficer,
     _poolHaliyaGuidedByLight,
     _poolHallOfOracles,
+    _poolHallOfTriumph,
     _poolHallowedGround,
     _poolHandThatFeeds,
     _poolHarrierStrix,
@@ -1008,6 +1012,7 @@ const shard: CardShard = {
     _poolNecronMonolith,
     _poolNecropolisRegent,
     _poolNightMarketAeronaut,
+    _poolNighthowler,
     _poolNightscapeFamiliar,
     _poolNightwhorlHermit,
     _poolNorthernAirTemple,
@@ -1144,6 +1149,7 @@ const shard: CardShard = {
     _poolSmolderingWerewolf,
     _poolSnareTheSkies,
     _poolSnowHound,
+    _poolSolGrail,
     _poolSoltariTrooper,
     _poolSongOfEarendil,
     _poolSophiaDoggedDetective,

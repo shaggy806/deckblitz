@@ -428,6 +428,7 @@
   "keyword:level-up",
   "keyword:umbra-armor",
   "keyword:parley",
+  "cost:exile-top-of-library",
   "amount:times-kicked",
   "static:set-color-attached"
  ],

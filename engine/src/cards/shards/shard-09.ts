@@ -226,6 +226,7 @@ import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
+import _poolGnarledScarhide from "../pool/gnarled-scarhide.js";
 import _poolGoatnap from "../pool/goatnap.js";
 import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
@@ -450,6 +451,7 @@ import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
+import _poolRiptideChimera from "../pool/riptide-chimera.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
 import _poolRocCharger from "../pool/roc-charger.js";
@@ -887,6 +889,7 @@ const shard: CardShard = {
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
+    _poolGnarledScarhide,
     _poolGoatnap,
     _poolGoblinGloryChaser,
     _poolGoblinTown,
@@ -1111,6 +1114,7 @@ const shard: CardShard = {
     _poolRetrieve,
     _poolRetrofittedTransmogrant,
     _poolRidgetopRaptor,
+    _poolRiptideChimera,
     _poolRiteOfTheDragoncaller,
     _poolRiveteersRequisitioner,
     _poolRocCharger,

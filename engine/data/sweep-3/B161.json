@@ -1,0 +1,809 @@
+{
+  "batch": "B161",
+  "status": "complete",
+  "ranks": "Journey into Nyx (JOU, 2014-05-02): the rest of the set (newest-first walk); with the eleven earlier bestow cards bestow unblocked",
+  "authored": [
+    {
+      "name": "Aerial Formation",
+      "files": [
+        "engine/src/cards/pool/aerial-formation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Agent of Erebos",
+      "files": [
+        "engine/src/cards/pool/agent-of-erebos.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ajani's Presence",
+      "files": [
+        "engine/src/cards/pool/ajanis-presence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Akroan Line Breaker",
+      "files": [
+        "engine/src/cards/pool/akroan-line-breaker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bearer of the Heavens",
+      "files": [
+        "engine/src/cards/pool/bearer-of-the-heavens.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blinding Flare",
+      "files": [
+        "engine/src/cards/pool/blinding-flare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cast into Darkness",
+      "files": [
+        "engine/src/cards/pool/cast-into-darkness.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Colossal Heroics",
+      "files": [
+        "engine/src/cards/pool/colossal-heroics.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Consign to Dust",
+      "files": [
+        "engine/src/cards/pool/consign-to-dust.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cruel Feeding",
+      "files": [
+        "engine/src/cards/pool/cruel-feeding.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crystalline Nautilus",
+      "files": [
+        "engine/src/cards/pool/crystalline-nautilus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dakra Mystic",
+      "files": [
+        "engine/src/cards/pool/dakra-mystic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dawnbringer Charioteers",
+      "files": [
+        "engine/src/cards/pool/dawnbringer-charioteers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deserter's Quarters",
+      "files": [
+        "engine/src/cards/pool/deserters-quarters.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Desperate Stand",
+      "files": [
+        "engine/src/cards/pool/desperate-stand.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dreadbringer Lampads",
+      "files": [
+        "engine/src/cards/pool/dreadbringer-lampads.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eidolon of Countless Battles",
+      "files": [
+        "engine/src/cards/pool/eidolon-of-countless-battles.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eidolon of the Great Revel",
+      "files": [
+        "engine/src/cards/pool/eidolon-of-the-great-revel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feast of Dreams",
+      "files": [
+        "engine/src/cards/pool/feast-of-dreams.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Felhide Petrifier",
+      "files": [
+        "engine/src/cards/pool/felhide-petrifier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamespeaker's Will",
+      "files": [
+        "engine/src/cards/pool/flamespeakers-will.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fleetfeather Cockatrice",
+      "files": [
+        "engine/src/cards/pool/fleetfeather-cockatrice.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flurry of Horns",
+      "files": [
+        "engine/src/cards/pool/flurry-of-horns.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Font of Ire",
+      "files": [
+        "engine/src/cards/pool/font-of-ire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Font of Return",
+      "files": [
+        "engine/src/cards/pool/font-of-return.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forgeborn Oreads",
+      "files": [
+        "engine/src/cards/pool/forgeborn-oreads.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gluttonous Cyclops",
+      "files": [
+        "engine/src/cards/pool/gluttonous-cyclops.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glyph Elemental",
+      "files": [
+        "engine/src/cards/pool/glyph-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gnarled Scarhide",
+      "files": [
+        "engine/src/cards/pool/gnarled-scarhide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goldenhide Ox",
+      "files": [
+        "engine/src/cards/pool/goldenhide-ox.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hall of Triumph",
+      "files": [
+        "engine/src/cards/pool/hall-of-triumph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harness by Force",
+      "files": [
+        "engine/src/cards/pool/harness-by-force.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harvestguard Alseids",
+      "files": [
+        "engine/src/cards/pool/harvestguard-alseids.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hour of Need",
+      "files": [
+        "engine/src/cards/pool/hour-of-need.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Humbler of Mortals",
+      "files": [
+        "engine/src/cards/pool/humbler-of-mortals.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hypnotic Siren",
+      "files": [
+        "engine/src/cards/pool/hypnotic-siren.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Indebted Spirit",
+      "files": [
+        "engine/src/cards/pool/indebted-spirit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Interpret the Signs",
+      "files": [
+        "engine/src/cards/pool/interpret-the-signs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kestia, the Cultivator",
+      "files": [
+        "engine/src/cards/pool/kestia-the-cultivator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "King Macar, the Gold-Cursed",
+      "files": [
+        "engine/src/cards/pool/king-macar-the-gold-cursed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kiora's Dismissal",
+      "files": [
+        "engine/src/cards/pool/kioras-dismissal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knowledge and Power",
+      "files": [
+        "engine/src/cards/pool/knowledge-and-power.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kruphix's Insight",
+      "files": [
+        "engine/src/cards/pool/kruphixs-insight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lagonna-Band Trailblazer",
+      "files": [
+        "engine/src/cards/pool/lagonna-band-trailblazer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Launch the Fleet",
+      "files": [
+        "engine/src/cards/pool/launch-the-fleet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leonin Iconoclast",
+      "files": [
+        "engine/src/cards/pool/leonin-iconoclast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mogis's Warhound",
+      "files": [
+        "engine/src/cards/pool/mogiss-warhound.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mortal Obstinacy",
+      "files": [
+        "engine/src/cards/pool/mortal-obstinacy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nature's Panoply",
+      "files": [
+        "engine/src/cards/pool/natures-panoply.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nessian Game Warden",
+      "files": [
+        "engine/src/cards/pool/nessian-game-warden.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nighthowler",
+      "files": [
+        "engine/src/cards/pool/nighthowler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nightmarish End",
+      "files": [
+        "engine/src/cards/pool/nightmarish-end.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nyx Infusion",
+      "files": [
+        "engine/src/cards/pool/nyx-infusion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nyxborn Hydra",
+      "files": [
+        "engine/src/cards/pool/nyxborn-hydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nyxborn Unicorn",
+      "files": [
+        "engine/src/cards/pool/nyxborn-unicorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oakheart Dryads",
+      "files": [
+        "engine/src/cards/pool/oakheart-dryads.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phalanx Formation",
+      "files": [
+        "engine/src/cards/pool/phalanx-formation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pharika, God of Affliction",
+      "files": [
+        "engine/src/cards/pool/pharika-god-of-affliction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pheres-Band Thunderhoof",
+      "files": [
+        "engine/src/cards/pool/pheres-band-thunderhoof.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pheres-Band Warchief",
+      "files": [
+        "engine/src/cards/pool/pheres-band-warchief.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prophetic Flamespeaker",
+      "files": [
+        "engine/src/cards/pool/prophetic-flamespeaker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pull from the Deep",
+      "files": [
+        "engine/src/cards/pool/pull-from-the-deep.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ravenous Leucrocota",
+      "files": [
+        "engine/src/cards/pool/ravenous-leucrocota.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Renowned Weaver",
+      "files": [
+        "engine/src/cards/pool/renowned-weaver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Returned Reveler",
+      "files": [
+        "engine/src/cards/pool/returned-reveler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Revel of the Fallen God",
+      "files": [
+        "engine/src/cards/pool/revel-of-the-fallen-god.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Riptide Chimera",
+      "files": [
+        "engine/src/cards/pool/riptide-chimera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rise of Eagles",
+      "files": [
+        "engine/src/cards/pool/rise-of-eagles.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ritual of the Returned",
+      "files": [
+        "engine/src/cards/pool/ritual-of-the-returned.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rouse the Mob",
+      "files": [
+        "engine/src/cards/pool/rouse-the-mob.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Satyr Hoplite",
+      "files": [
+        "engine/src/cards/pool/satyr-hoplite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Setessan Tactics",
+      "files": [
+        "engine/src/cards/pool/setessan-tactics.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skybind",
+      "files": [
+        "engine/src/cards/pool/skybind.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spawn of Thraxes",
+      "files": [
+        "engine/src/cards/pool/spawn-of-thraxes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spite of Mogis",
+      "files": [
+        "engine/src/cards/pool/spite-of-mogis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spiteful Blow",
+      "files": [
+        "engine/src/cards/pool/spiteful-blow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Springheart Nantuko",
+      "files": [
+        "engine/src/cards/pool/springheart-nantuko.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Squelching Leeches",
+      "files": [
+        "engine/src/cards/pool/squelching-leeches.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Starfall",
+      "files": [
+        "engine/src/cards/pool/starfall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stormchaser Chimera",
+      "files": [
+        "engine/src/cards/pool/stormchaser-chimera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Strength from the Fallen",
+      "files": [
+        "engine/src/cards/pool/strength-from-the-fallen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Swarmborn Giant",
+      "files": [
+        "engine/src/cards/pool/swarmborn-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tethmos High Priest",
+      "files": [
+        "engine/src/cards/pool/tethmos-high-priest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thassa's Devourer",
+      "files": [
+        "engine/src/cards/pool/thassas-devourer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thassa's Ire",
+      "files": [
+        "engine/src/cards/pool/thassas-ire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thoughtrender Lamia",
+      "files": [
+        "engine/src/cards/pool/thoughtrender-lamia.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tormented Thoughts",
+      "files": [
+        "engine/src/cards/pool/tormented-thoughts.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Triton Cavalry",
+      "files": [
+        "engine/src/cards/pool/triton-cavalry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Triton Wavebreaker",
+      "files": [
+        "engine/src/cards/pool/triton-wavebreaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Underworld Coinsmith",
+      "files": [
+        "engine/src/cards/pool/underworld-coinsmith.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "War-Wing Siren",
+      "files": [
+        "engine/src/cards/pool/war-wing-siren.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Whitewater Naiads",
+      "files": [
+        "engine/src/cards/pool/whitewater-naiads.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wildfire Cerberus",
+      "files": [
+        "engine/src/cards/pool/wildfire-cerberus.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Battlefield Thaumaturge",
+      "needs": [
+        "cost:cost-reduction-per-creature-targeted"
+      ],
+      "why": "'costs {1} less for each creature it targets' — perTarget counts players too"
+    },
+    {
+      "name": "Disciple of Deceit",
+      "needs": [
+        "effect:discard-filtered"
+      ],
+      "why": "'you may discard a nonland card' — discard takes no filter"
+    },
+    {
+      "name": "Godhunter Octopus",
+      "needs": [
+        "static:attack-restriction-defending-player-condition"
+      ],
+      "why": "'can't attack unless defending player controls an enchantment or an enchanted permanent'"
+    },
+    {
+      "name": "Countermand",
+      "needs": [
+        "effect:mill-controller-of-target"
+      ],
+      "why": "'its controller mills four' — mill has no target-controller player"
+    },
+    {
+      "name": "Polymorphous Rush",
+      "needs": [
+        "effect:become-copy-of-chosen-permanent"
+      ],
+      "why": "the copied creature is chosen on resolution, not targeted"
+    },
+    {
+      "name": "Deicide",
+      "needs": [
+        "effect:extract-same-name"
+      ],
+      "why": "'if the exiled card is a God card, search its controller's graveyard, hand and library for cards with that name'"
+    },
+    {
+      "name": "Stonewise Fortifier",
+      "needs": [
+        "replacement:prevent-damage-by-target-this-turn"
+      ],
+      "why": "'prevent all damage that would be dealt to this creature by target creature this turn'"
+    },
+    {
+      "name": "Worst Fears",
+      "needs": [
+        "mechanic:control-player"
+      ],
+      "why": "'you control target player during that player's next turn'"
+    },
+    {
+      "name": "Hubris",
+      "needs": [
+        "filter:attached-to-target"
+      ],
+      "why": "'return target creature and all Auras attached to it'"
+    },
+    {
+      "name": "Silence the Believers",
+      "needs": [
+        "filter:attached-to-target"
+      ],
+      "why": "strive is built; 'exile any number of target creatures and all Auras attached to them'"
+    },
+    {
+      "name": "Bloodcrazed Hoplite",
+      "needs": [
+        "trigger:counters-put-each-counter"
+      ],
+      "why": "triggers once per +1/+1 counter (the ruling), each with its own target"
+    },
+    {
+      "name": "Daring Thief",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "'exchange control of target nonland permanent you control and target permanent an opponent controls that shares a card type with it'"
+    },
+    {
+      "name": "Market Festival",
+      "needs": [
+        "effect:mana-any-combination-choice"
+      ],
+      "why": "'two mana in any combination of colors' from a tapped-for-mana trigger"
+    },
+    {
+      "name": "Armament of Nyx",
+      "needs": [
+        "replacement:prevent-damage-by-attached"
+      ],
+      "why": "'prevent all damage that would be dealt by enchanted creature' while it isn't an enchantment"
+    },
+    {
+      "name": "Brain Maggot",
+      "needs": [
+        "effect:exile-from-hand-until-source-leaves"
+      ],
+      "why": "the Tidehollow Sculler shape"
+    },
+    {
+      "name": "Oppressive Rays",
+      "needs": [
+        "static:attack-cost-for-creature",
+        "static:ability-cost-increase-attached"
+      ],
+      "why": "'can't attack or block unless its controller pays {3}' and its activated abilities cost {3} more"
+    },
+    {
+      "name": "Quarry Colossus",
+      "needs": [
+        "effect:put-on-library-dynamic-position"
+      ],
+      "why": "'beneath the top X cards, where X is the number of Plains you control'"
+    },
+    {
+      "name": "Spirespine",
+      "needs": [
+        "static:must-block-each-combat"
+      ],
+      "why": "bestow is built; 'this creature blocks each combat if able' isn't"
+    },
+    {
+      "name": "Sightless Brawler",
+      "needs": [
+        "static:cant-attack-alone"
+      ],
+      "why": "bestow is built; 'can't attack alone' isn't"
+    },
+    {
+      "name": "Detective's Phoenix",
+      "needs": [
+        "keyword:bestow-extensions"
+      ],
+      "why": "a bestow cost with collect evidence, cast from the graveyard"
+    },
+    {
+      "name": "Trickster's Elk",
+      "needs": [
+        "static:static-lose-all-abilities",
+        "static:static-set-characteristics"
+      ],
+      "why": "bestow is built; 'enchanted creature loses all abilities and is a green Elk with base P/T 3/3' isn't a static"
+    }
+  ]
+}

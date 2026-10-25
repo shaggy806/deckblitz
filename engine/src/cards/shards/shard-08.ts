@@ -388,6 +388,7 @@ import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
+import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
@@ -414,6 +415,7 @@ import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
 import _poolPhantomMonster from "../pool/phantom-monster.js";
 import _poolPharikasCure from "../pool/pharikas-cure.js";
+import _poolPhyrexianWarBeast from "../pool/phyrexian-war-beast.js";
 import _poolPicnicRuiner from "../pool/picnic-ruiner.js";
 import _poolPierceStrider from "../pool/pierce-strider.js";
 import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
@@ -1069,6 +1071,7 @@ const shard: CardShard = {
     _poolNeighborhoodGuardian,
     _poolNevinyrralsDisk,
     _poolNightmaresThirst,
+    _poolNightmarishEnd,
     _poolNightveilPredator,
     _poolNinjasBlades,
     _poolNorthPolePatrol,
@@ -1095,6 +1098,7 @@ const shard: CardShard = {
     _poolPerniciousDeed,
     _poolPhantomMonster,
     _poolPharikasCure,
+    _poolPhyrexianWarBeast,
     _poolPicnicRuiner,
     _poolPierceStrider,
     _poolPilgrimOfTheFires,

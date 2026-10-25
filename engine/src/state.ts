@@ -813,6 +813,15 @@ export interface GameObject {
    * targets, so `resolveTopOfStack` applies `CardDefinition.overload.effect`.
    * Absent otherwise; cleared on any zone change. */
   overloaded?: boolean;
+  /** Cast bestowed (rule 702.103b — `CardDefinition.bestow`): a bestowed
+   * Aura spell, and then the bestowed Aura it resolves into — its
+   * characteristics `bestowedDefinition`'s, not a creature. Kept from the
+   * stack onto the battlefield and cleared by every other zone change; and
+   * cleared when it becomes unattached or is attached to something it can't
+   * enchant (702.103f — a creature again, where it is), or when its target
+   * is illegal as it begins resolving (702.103e — it resolves as a creature
+   * spell). A copy of the spell has it too (702.103c). */
+  bestowed?: boolean;
   /** The alternative permission this spell was cast under while it's on the
    * stack (ROADMAP Phase 6). `"flashback"` (rule 702.34) additionally means it
    * is exiled instead of going anywhere else from the stack. `null` / absent
@@ -1200,6 +1209,7 @@ export interface SpellSnapshot {
   readonly kicked?: boolean;
   readonly timesKicked?: number;
   readonly overloaded?: boolean;
+  readonly bestowed?: boolean;
   readonly evokePaid?: boolean;
   readonly spectaclePaid?: boolean;
   readonly surgePaid?: boolean;

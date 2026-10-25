@@ -137,6 +137,7 @@ import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
 import _poolDrakewingKrasis from "../pool/drakewing-krasis.js";
+import _poolDreadbringerLampads from "../pool/dreadbringer-lampads.js";
 import _poolDrizztDourden from "../pool/drizzt-dourden.js";
 import _poolDrogskolArmaments from "../pool/drogskol-armaments.js";
 import _poolDromokaDunecaster from "../pool/dromoka-dunecaster.js";
@@ -186,6 +187,7 @@ import _poolFinishingBlow from "../pool/finishing-blow.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
+import _poolFleetfeatherCockatrice from "../pool/fleetfeather-cockatrice.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
 import _poolFlopsieBumisBuddy from "../pool/flopsie-bumis-buddy.js";
 import _poolFlowOfMaggots from "../pool/flow-of-maggots.js";
@@ -238,6 +240,7 @@ import _poolHammerheim from "../pool/hammerheim.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
+import _poolHarvestguardAlseids from "../pool/harvestguard-alseids.js";
 import _poolHarvestriteHost from "../pool/harvestrite-host.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
 import _poolHeapGate from "../pool/heap-gate.js";
@@ -285,8 +288,10 @@ import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
+import _poolKestiaTheCultivator from "../pool/kestia-the-cultivator.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
+import _poolKingMacarTheGoldCursed from "../pool/king-macar-the-gold-cursed.js";
 import _poolKitnap from "../pool/kitnap.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
@@ -517,6 +522,7 @@ import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSureStrike from "../pool/sure-strike.js";
+import _poolSwampMosquito from "../pool/swamp-mosquito.js";
 import _poolSwat from "../pool/swat.js";
 import _poolSwiftgearDrake from "../pool/swiftgear-drake.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
@@ -771,6 +777,7 @@ const shard: CardShard = {
     _poolDragonFodder,
     _poolDragonlordDromoka,
     _poolDrakewingKrasis,
+    _poolDreadbringerLampads,
     _poolDrizztDourden,
     _poolDrogskolArmaments,
     _poolDromokaDunecaster,
@@ -820,6 +827,7 @@ const shard: CardShard = {
     _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,
+    _poolFleetfeatherCockatrice,
     _poolFleetfootDancer,
     _poolFlopsieBumisBuddy,
     _poolFlowOfMaggots,
@@ -872,6 +880,7 @@ const shard: CardShard = {
     _poolHarbingerOfTheHunt,
     _poolHarmoniousGrovestrider,
     _poolHarmonizedTrio,
+    _poolHarvestguardAlseids,
     _poolHarvestriteHost,
     _poolHavocSower,
     _poolHeapGate,
@@ -919,8 +928,10 @@ const shard: CardShard = {
     _poolKederektCreeper,
     _poolKefkaCourtMage,
     _poolKelsFightFixer,
+    _poolKestiaTheCultivator,
     _poolKhalniAmbush,
     _poolKinTreeSeverance,
+    _poolKingMacarTheGoldCursed,
     _poolKitnap,
     _poolKnife,
     _poolKnightsOfDolAmroth,
@@ -1151,6 +1162,7 @@ const shard: CardShard = {
     _poolStromkirkCondemned,
     _poolSummitSentinel,
     _poolSureStrike,
+    _poolSwampMosquito,
     _poolSwat,
     _poolSwiftgearDrake,
     _poolTajuruBlightblade,

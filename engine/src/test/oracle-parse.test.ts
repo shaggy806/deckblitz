@@ -88,6 +88,8 @@ describe("costs and triggers", () => {
     expect(parseCost("{1}, Discard a card")).toBeNull();
     // Exert as a cost (rule 701.43 — Steward of Solidarity).
     expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, exertSelf: true });
+    expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, exileTop: 1 });
+    expect(parseCost("{3}, Exile the top four cards of your library").cost).toEqual({ mana: "{3}", tap: false, exileTop: 4 });
   });
 
   it("reads parley's three sentences as one reveal-top, the effect scaled by the cards revealed", () => {
@@ -606,6 +608,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         "Emerge from artifact {5}{B}{B} (You may cast this spell by sacrificing an artifact and paying the emerge cost reduced by that artifact's mana value.)",
       ).emerge,
     ).toEqual({ cost: "{5}{B}{B}", from: { type: "artifact" } });
+    // Bestow (rule 702.103a).
+    const bestower = face(
+      "Bestow {3}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)",
+    );
+    expect(bestower.bestow).toBe("{3}{B}");
+    expect(bestower.complete).toBe(true);
+    // Its afterlife triggers as an Aura too: "put into a graveyard from the
+    // battlefield" (rule 702.135a), not "dies" (Indebted Spirit).
+    const spirit = face(
+      "Bestow {2}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nAfterlife 1 (When this permanent is put into a graveyard from the battlefield, create a 1/1 white and black Spirit creature token with flying.)",
+    );
+    expect(spirit.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "self", to: ["graveyard"] });
     // Dash (rule 702.109a).
     const dasher = face(
       "Dash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)",

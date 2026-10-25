@@ -598,6 +598,7 @@ import _poolVialOfPoison from "../pool/vial-of-poison.js";
 import _poolVibrantCityscape from "../pool/vibrant-cityscape.js";
 import _poolViciousBattlerager from "../pool/vicious-battlerager.js";
 import _poolVineglimmerSnarl from "../pool/vineglimmer-snarl.js";
+import _poolVisceridDrone from "../pool/viscerid-drone.js";
 import _poolVitoFanaticOfAclazotz from "../pool/vito-fanatic-of-aclazotz.js";
 import _poolVituGhaziTheCityTree from "../pool/vitu-ghazi-the-city-tree.js";
 import _poolVodalianArcanist from "../pool/vodalian-arcanist.js";
@@ -1242,6 +1243,7 @@ const shard: CardShard = {
     _poolVibrantCityscape,
     _poolViciousBattlerager,
     _poolVineglimmerSnarl,
+    _poolVisceridDrone,
     _poolVitoFanaticOfAclazotz,
     _poolVituGhaziTheCityTree,
     _poolVodalianArcanist,

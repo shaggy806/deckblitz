@@ -221,6 +221,7 @@ import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
 import _poolHaplessResearcher from "../pool/hapless-researcher.js";
+import _poolHarnessByForce from "../pool/harness-by-force.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
 import _poolHarvestSeason from "../pool/harvest-season.js";
 import _poolHasteMagic from "../pool/haste-magic.js";
@@ -332,6 +333,7 @@ import _poolMurderousCut from "../pool/murderous-cut.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
+import _poolNaturesPanoply from "../pool/natures-panoply.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecrogoyf from "../pool/necrogoyf.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
@@ -407,6 +409,7 @@ import _poolSaguWildling from "../pool/sagu-wildling.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
 import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
+import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScavengedBlade from "../pool/scavenged-blade.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
@@ -538,6 +541,7 @@ import _poolTurnTheTide from "../pool/turn-the-tide.js";
 import _poolTurnToFrog from "../pool/turn-to-frog.js";
 import _poolTwinferno from "../pool/twinferno.js";
 import _poolUndercityDireRat from "../pool/undercity-dire-rat.js";
+import _poolUnderworldCoinsmith from "../pool/underworld-coinsmith.js";
 import _poolUpdraft from "../pool/updraft.js";
 import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
 import _poolUtopiaTree from "../pool/utopia-tree.js";
@@ -590,6 +594,7 @@ import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifa
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
 import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
+import _tokensOrbToken from "../tokens/orb-token.js";
 import _tokensOxToken from "../tokens/ox-token.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js";
@@ -817,6 +822,7 @@ const shard: CardShard = {
     _poolHalimarDepths,
     _poolHammerDropper,
     _poolHaplessResearcher,
+    _poolHarnessByForce,
     _poolHarrierNaga,
     _poolHarvestSeason,
     _poolHasteMagic,
@@ -928,6 +934,7 @@ const shard: CardShard = {
     _poolNadirKraken,
     _poolNajalTheStormRunner,
     _poolNaruMehaMasterWizard,
+    _poolNaturesPanoply,
     _poolNecraDisciple,
     _poolNecrogoyf,
     _poolNecronDeathmark,
@@ -1003,6 +1010,7 @@ const shard: CardShard = {
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
     _poolSanitariumSkeleton,
+    _poolSatyrHoplite,
     _poolScamperingSurveyor,
     _poolScavengedBlade,
     _poolScrapTrawler,
@@ -1134,6 +1142,7 @@ const shard: CardShard = {
     _poolTurnToFrog,
     _poolTwinferno,
     _poolUndercityDireRat,
+    _poolUnderworldCoinsmith,
     _poolUpdraft,
     _poolUrbanDaggertooth,
     _poolUtopiaTree,
@@ -1188,6 +1197,7 @@ const shard: CardShard = {
     _tokensElfDruidToken,
     _tokensMutagenToken,
     _tokensMutantToken,
+    _tokensOrbToken,
     _tokensOxToken,
     _tokensPlantToken,
     _tokensSpiritTokenWhiteBlack,

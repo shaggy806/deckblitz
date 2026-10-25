@@ -15,6 +15,7 @@ import _poolAirborneAid from "../pool/airborne-aid.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
+import _poolAkroanLineBreaker from "../pool/akroan-line-breaker.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
@@ -43,6 +44,7 @@ import _poolAttendedSocialite from "../pool/attended-socialite.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
 import _poolBadlandsRevival from "../pool/badlands-revival.js";
+import _poolBalduvianDead from "../pool/balduvian-dead.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
 import _poolBalinLoremaster from "../pool/balin-loremaster.js";
 import _poolBarrageTyrant from "../pool/barrage-tyrant.js";
@@ -179,6 +181,7 @@ import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
+import _poolFalseDemise from "../pool/false-demise.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
@@ -191,6 +194,7 @@ import _poolFieryConclusion from "../pool/fiery-conclusion.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
+import _poolFlamespeakersWill from "../pool/flamespeakers-will.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
@@ -392,6 +396,7 @@ import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
 import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
+import _poolPheresBandWarchief from "../pool/pheres-band-warchief.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
@@ -427,6 +432,7 @@ import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
+import _poolRenownedWeaver from "../pool/renowned-weaver.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
 import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
@@ -629,6 +635,7 @@ import _poolZombify from "../pool/zombify.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
+import _tokensBlackGreenEnchantmentSnakeToken from "../tokens/black-green-enchantment-snake-token.js";
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
 import _tokensConstructTokenKaylasCommand from "../tokens/construct-token-kaylas-command.js";
 import _tokensDarkstar from "../tokens/darkstar.js";
@@ -661,6 +668,7 @@ const shard: CardShard = {
     _poolAjaniAdversaryOfTyrants,
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
+    _poolAkroanLineBreaker,
     _poolAlabornCavalier,
     _poolAleshasVanguard,
     _poolAloraMerryThief,
@@ -689,6 +697,7 @@ const shard: CardShard = {
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
     _poolBadlandsRevival,
+    _poolBalduvianDead,
     _poolBalefireLiege,
     _poolBalinLoremaster,
     _poolBarrageTyrant,
@@ -825,6 +834,7 @@ const shard: CardShard = {
     _poolExplosiveApparatus,
     _poolFaebloomTrick,
     _poolFaerieVandal,
+    _poolFalseDemise,
     _poolFandanielTelophoroiAscian,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
@@ -837,6 +847,7 @@ const shard: CardShard = {
     _poolFireNationAttacks,
     _poolFixWhatsBroken,
     _poolFlameSpirit,
+    _poolFlamespeakersWill,
     _poolFleetingFlight,
     _poolFleetwheelCruiser,
     _poolForerunnerOfTheLegion,
@@ -1038,6 +1049,7 @@ const shard: CardShard = {
     _poolPeregrineDrake,
     _poolPestilentSouleater,
     _poolPharaohRamaTut,
+    _poolPheresBandWarchief,
     _poolPhyrexianBloodstock,
     _poolPhyrexianPegasus,
     _poolPhyrexianVault,
@@ -1073,6 +1085,7 @@ const shard: CardShard = {
     _poolRecuperate,
     _poolRedMagesRapier,
     _poolRelmsSketching,
+    _poolRenownedWeaver,
     _poolResoluteWatchdog,
     _poolRestlessBloodseeker,
     _poolRestlessBones,
@@ -1277,6 +1290,7 @@ const shard: CardShard = {
     _tokensAngelToken33White,
     _tokensAvatarTokenAwakenTheBloodAvatar,
     _tokensBeastToken,
+    _tokensBlackGreenEnchantmentSnakeToken,
     _tokensCatBeastToken,
     _tokensConstructTokenKaylasCommand,
     _tokensDarkstar,

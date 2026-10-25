@@ -90,6 +90,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   multikicker count as an effect amount — Spell Contortion, Wolfbriar Elemental, Bloodhusk Ritualist,
   Deathforge Shaman, Lightkeeper of Emeria) and `StaticAbility.setColors` (layer 5 — the five colored
   Zendikons) built. 60 authored by four `card-author` agents and the lead; 16 blocked (`B162.json`).
+- **Journey into Nyx, the rest of the set** (batch 161, the newest-first walk, 2026-10-25):
+  **bestow** built (rule 702.103 — `bestow` on the card, an `overload` variant labelled "bestow";
+  `GameObject.bestowed` and `bestowedDefinition`, the scaffolder's "Bestow {cost}"). 84 of the
+  set's 103 authored by five `card-author` agents and the lead — Eidolon of the Great Revel,
+  Launch the Fleet, Pharika, God of Affliction, King Macar, the Gold-Cursed, Hypnotic Siren,
+  Spawn of Thraxes and 78 more — and nine older bestow cards a sixth agent took (Nyxborn Hydra,
+  Eidolon of Countless Battles, Nighthowler, Springheart Nantuko, Kestia, the Cultivator and four
+  more); 21 blocked, none on any one feature but "all Auras attached to it" (2).
 - **Rise of the Eldrazi, whole** (batch 159, the middle walk, 2026-10-25): level up and umbra armor
   built (`levelUp`/`levelBand`/`levelStatic`, the `umbra-armor` keyword, both taught to the
   scaffolder). 102 authored by five `card-author` agents and the lead — Vengevine, Student of
@@ -103,6 +111,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Portal, Dack's Duplicate, Selvala's Charge and the four older parley cards it unblocked
   (Selvala, Explorer Returned, Phabine, Boss's Confidant, Storm Fleet Negotiator, Cutthroat
   Negotiator); 27 blocked, "last turn" life loss (2) the most shared (2026-10-25).
+- **Alliances, whole** (batch 163, the oldest-first walk): **built** the `exileTop` cost ("Exile
+  the top N cards of your library"). 48 of its last 117 authored by five `card-author` agents and
+  the lead — Gorilla Shaman, Contagion, Phelddagrif, Lord of Tresserhorn, Royal Decree, Gargantuan
+  Gorilla, Exile, Dystopia, Browse, Royal Herbalist; 69 blocked, the lands' "sacrifice a … instead"
+  entry and banding (4 each) the most shared (2026-10-25).
 - **Homelands, whole** (batch 160, the oldest-first walk): no feature built. 46 of its last 79
   authored by five `card-author` agents — Koskun Falls, Primal Order, Chain Stasis, Serrated
   Arrows, Feroz's Ban, Drudge Spell, Sengir Autocrat, Truce, Didgeridoo, Rashka the Slayer; 33

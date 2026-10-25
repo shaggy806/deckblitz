@@ -79,6 +79,7 @@ import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCocoon from "../pool/cocoon.js";
+import _poolColossalHeroics from "../pool/colossal-heroics.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolConfiscationCoup from "../pool/confiscation-coup.js";
@@ -92,6 +93,7 @@ import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
+import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
@@ -136,6 +138,7 @@ import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
+import _poolDystopia from "../pool/dystopia.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
 import _poolEbonyRhino from "../pool/ebony-rhino.js";
@@ -200,6 +203,7 @@ import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
 import _poolGlacialCrasher from "../pool/glacial-crasher.js";
 import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
+import _poolGlyphElemental from "../pool/glyph-elemental.js";
 import _poolGoForBlood from "../pool/go-for-blood.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
 import _poolGoblinDeathraiders from "../pool/goblin-deathraiders.js";
@@ -292,6 +296,7 @@ import _poolKokushoTheEveningStar from "../pool/kokusho-the-evening-star.js";
 import _poolKorLineSlinger from "../pool/kor-line-slinger.js";
 import _poolKorvoldFaeCursedKing from "../pool/korvold-fae-cursed-king.js";
 import _poolKozileksChanneler from "../pool/kozileks-channeler.js";
+import _poolKruphixsInsight from "../pool/kruphixs-insight.js";
 import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
@@ -330,6 +335,7 @@ import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
+import _poolMogissWarhound from "../pool/mogiss-warhound.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
@@ -373,6 +379,7 @@ import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPatricianGeist from "../pool/patrician-geist.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPestilenceDemon from "../pool/pestilence-demon.js";
+import _poolPheresBandThunderhoof from "../pool/pheres-band-thunderhoof.js";
 import _poolPhyrexianAwakening from "../pool/phyrexian-awakening.js";
 import _poolPhyrexianCrusader from "../pool/phyrexian-crusader.js";
 import _poolPhyrexianGhoul from "../pool/phyrexian-ghoul.js";
@@ -488,6 +495,7 @@ import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
+import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
 import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
 import _poolSqueesToy from "../pool/squees-toy.js";
@@ -706,6 +714,7 @@ const shard: CardShard = {
     _poolChillOfTheGrave,
     _poolCleverConjurer,
     _poolCocoon,
+    _poolColossalHeroics,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
     _poolConfiscationCoup,
@@ -719,6 +728,7 @@ const shard: CardShard = {
     _poolCrimsonCaravaneer,
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
+    _poolCrystallineNautilus,
     _poolCubwarden,
     _poolCultistOfTheAbsolute,
     _poolCurseOfVitality,
@@ -763,6 +773,7 @@ const shard: CardShard = {
     _poolDrownedDiner,
     _poolDrySpell,
     _poolDungeonShade,
+    _poolDystopia,
     _poolEarthRumble,
     _poolEasternPaladin,
     _poolEbonyRhino,
@@ -827,6 +838,7 @@ const shard: CardShard = {
     _poolGlacialCrasher,
     _poolGlassOfTheGuildpact,
     _poolGlenElendraArchmage,
+    _poolGlyphElemental,
     _poolGoForBlood,
     _poolGoblinAnarchomancer,
     _poolGoblinDeathraiders,
@@ -919,6 +931,7 @@ const shard: CardShard = {
     _poolKorLineSlinger,
     _poolKorvoldFaeCursedKing,
     _poolKozileksChanneler,
+    _poolKruphixsInsight,
     _poolKudoKingAmongBears,
     _poolKuldothaCackler,
     _poolLampadOfDeathsVigil,
@@ -957,6 +970,7 @@ const shard: CardShard = {
     _poolMindfulBiomancer,
     _poolMistfireWeaver,
     _poolMockingbirdAceAgent,
+    _poolMogissWarhound,
     _poolMomentOfValor,
     _poolMoonriseIntruder,
     _poolMoonshadow,
@@ -1000,6 +1014,7 @@ const shard: CardShard = {
     _poolPatricianGeist,
     _poolPestMascot,
     _poolPestilenceDemon,
+    _poolPheresBandThunderhoof,
     _poolPhyrexianAwakening,
     _poolPhyrexianCrusader,
     _poolPhyrexianGhoul,
@@ -1115,6 +1130,7 @@ const shard: CardShard = {
     _poolSpiritOfTheAldergard,
     _poolSpitFlame,
     _poolSplatterTechnique,
+    _poolSpringheartNantuko,
     _poolSpringleafDrum,
     _poolSproutingThrinax,
     _poolSqueesToy,
