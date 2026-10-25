@@ -1,0 +1,60 @@
+import { defineCard } from "../define.js";
+
+// EDHREC rank 10733.
+//
+// The tapped trigger is a `may` with an {X} cost (Stark's Ingenuity's shape):
+// X is what was paid, and every Dwarf and Vehicle card among the X revealed
+// goes to hand (`min`/`max` X, capped at the matches).
+
+const DWARVES = "Other Dwarves you control get +1/+1.";
+const VEHICLES = "Each Vehicle you control gets +1/+1 as long as it's a creature.";
+const TAPPED =
+  "Whenever Depala becomes tapped, you may pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order.";
+
+export default defineCard({
+  name: "Depala, Pilot Exemplar",
+  manaCost: "{1}{R}{W}",
+  colors: ["W", "R"],
+  supertypes: ["legendary"],
+  types: ["creature"],
+  subtypes: ["Dwarf", "Pilot"],
+  power: 3,
+  toughness: 3,
+  text: `${DWARVES}\n${VEHICLES}\n${TAPPED}`,
+  static: [
+    {
+      affects: { scope: "creatures-you-control", excludeSelf: true, subtype: "Dwarf" },
+      grantPt: [1, 1],
+      text: DWARVES,
+    },
+    {
+      affects: { scope: "filter", filter: { subtype: "Vehicle", type: "creature", controlledBy: "you" } },
+      grantPt: [1, 1],
+      text: VEHICLES,
+    },
+  ],
+  triggered: [
+    {
+      trigger: { on: "becomes-tapped", who: "self" },
+      targets: [],
+      effect: {
+        kind: "may",
+        prompt: "Pay {X} to reveal the top X cards and take every Dwarf and Vehicle card among them?",
+        cost: "{X}",
+        effect: {
+          kind: "look-and-choose",
+          zone: "library",
+          count: "x",
+          reveal: true,
+          min: "x",
+          max: "x",
+          filter: { subtypes: ["Dwarf", "Vehicle"] },
+          destination: "hand",
+          leftover: "bottom-random",
+        },
+      },
+      resolve: null,
+      text: TAPPED,
+    },
+  ],
+});
