@@ -8,13 +8,15 @@
 //      everything below (they need only the build): the fuzzer at 2 and 4
 //      players, the fuzzer with every card this change adds (or `--with`
 //      names) forced in — each 4-player run as two processes over halves of
-//      its seeds — and the bot gate
+//      its seeds — and the bot gate (on 4 cores or fewer, after the engine
+//      suite instead, each 4-player run one process)
 //   3. the backlog lists re-marked against the build and any sample-deck
 //      stand-in for a card now in the pool dropped
 //   4. typecheck (the engine's tests included — vitest never type-checks a
 //      test, so a wrong chooser signature or a cast could make one pass
 //      without testing) + lint, side by side
-//   5. the engine suite (8 workers), then server + client side by side
+//   5. the engine suite (a worker per core, at most 8), then server + client
+//      side by side
 //   6. card:verify against the Oracle snapshot (offline)
 //
 // Steps 1, 2, 4 and 5 stop the run on failure (later results would mean
@@ -172,11 +174,27 @@ await stopOnFailure(await run("build", "npm", ["run", "build"]));
 // games that finish.
 const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
 const late = [];
+// A small machine (a 4-core cloud session) can't hold the engine suite's
+// workers beside five fuzz and gate processes: the suite was killed for memory
+// there (2026-10-25). Its background runs wait for the engine suite instead,
+// and a 4-player run stays one process.
+const CORES = os.availableParallelism();
+const SMALL = CORES <= 4;
+let startLate = () => {};
+const background = (start) => {
+  if (SMALL) {
+    const before = startLate;
+    startLate = () => {
+      before();
+      start();
+    };
+  } else start();
+};
 /** A 4-player run of `count` games, as two processes over halves of its
  * seeds (`--start`): the same games, in about half the time — it's the
  * longest step, and the machine has the cores. */
 const fourPlayer = (name, count, extra) => {
-  const half = Math.ceil(count / 2);
+  const half = SMALL ? count : Math.ceil(count / 2);
   return [
     [1, half],
     [half + 1, count - half],
@@ -184,7 +202,7 @@ const fourPlayer = (name, count, extra) => {
     .filter(([, n]) => n > 0)
     .map(([start, n], i) =>
       run(
-        `${name} (${i + 1} of 2)`,
+        SMALL ? name : `${name} (${i + 1} of 2)`,
         "node",
         ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...FOUR_PLAYER_TIMEOUT, ...extra],
         ENGINE,
@@ -192,20 +210,24 @@ const fourPlayer = (name, count, extra) => {
     );
 };
 if (!skip.has("fuzz")) {
-  late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
-  late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
+  background(() => {
+    late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
+    late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
+  });
 }
 if (!skip.has("fuzzwith") && cards.length > 0) {
-  late.push(
-    ...fourPlayer(
-      "fuzz with new cards",
-      40,
-      // A long list goes in a file: a command line has a length limit.
-      cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]),
+  background(() =>
+    late.push(
+      ...fourPlayer(
+        "fuzz with new cards",
+        40,
+        // A long list goes in a file: a command line has a length limit.
+        cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]),
+      ),
     ),
   );
 }
-if (!skip.has("gate")) late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"]));
+if (!skip.has("gate")) background(() => late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"])));
 
 if (!skip.has("marks")) {
   const marks = await Promise.all([
@@ -225,9 +247,10 @@ await stopOnFailure(
   ])),
 );
 
-const engineTests = await run("engine tests", "npx", ["vitest", "run", "--maxWorkers=8"], ENGINE);
+const engineTests = await run("engine tests", "npx", ["vitest", "run", `--maxWorkers=${Math.min(8, CORES)}`], ENGINE);
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
+startLate();
 const others = await Promise.all([
   ...(skip.has("server") ? [] : [run("server tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "server"))]),
   ...(skip.has("client") ? [] : [run("client tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "client"))]),
