@@ -138,6 +138,7 @@ import _poolDemolitionStomper from "../pool/demolition-stomper.js";
 import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
 import _poolDesperateSentry from "../pool/desperate-sentry.js";
+import _poolDestructorDragon from "../pool/destructor-dragon.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDissensionInTheRanks from "../pool/dissension-in-the-ranks.js";
 import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-planner.js";
@@ -562,6 +563,7 @@ import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymaretChosenFromDeath from "../pool/tymaret-chosen-from-death.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
+import _poolUginsConstruct from "../pool/ugins-construct.js";
 import _poolUlrichsKindred from "../pool/ulrichs-kindred.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
 import _poolUnassumingSage from "../pool/unassuming-sage.js";
@@ -594,6 +596,7 @@ import _poolVraskasFinisher from "../pool/vraskas-finisher.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
 import _poolWallOfOneThousandCuts from "../pool/wall-of-one-thousand-cuts.js";
 import _poolWanderersStrike from "../pool/wanderers-strike.js";
+import _poolWarFlare from "../pool/war-flare.js";
 import _poolWarhostsFrenzy from "../pool/warhosts-frenzy.js";
 import _poolWaterServant from "../pool/water-servant.js";
 import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
@@ -776,6 +779,7 @@ const shard: CardShard = {
     _poolDesertDrake,
     _poolDesolationTwin,
     _poolDesperateSentry,
+    _poolDestructorDragon,
     _poolDispellingExhale,
     _poolDissensionInTheRanks,
     _poolDoctorOctopusMasterPlanner,
@@ -1200,6 +1204,7 @@ const shard: CardShard = {
     _poolTymaretChosenFromDeath,
     _poolTymnaTheWeaver,
     _poolUSAgentJohnWalker,
+    _poolUginsConstruct,
     _poolUlrichsKindred,
     _poolUlvenwaldBear,
     _poolUnassumingSage,
@@ -1232,6 +1237,7 @@ const shard: CardShard = {
     _poolWallOfIce,
     _poolWallOfOneThousandCuts,
     _poolWanderersStrike,
+    _poolWarFlare,
     _poolWarhostsFrenzy,
     _poolWaterServant,
     _poolWeakstonesSubjugation,

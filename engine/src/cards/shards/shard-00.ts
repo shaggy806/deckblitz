@@ -60,6 +60,7 @@ import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
 import _poolBrainInAJar from "../pool/brain-in-a-jar.js";
 import _poolBrainstone from "../pool/brainstone.js";
 import _poolBrandedHowler from "../pool/branded-howler.js";
+import _poolBreakThroughTheLine from "../pool/break-through-the-line.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
 import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
 import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
@@ -404,6 +405,7 @@ import _poolReleaseTheDogs from "../pool/release-the-dogs.js";
 import _poolRelicAxe from "../pool/relic-axe.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
+import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
@@ -697,6 +699,7 @@ const shard: CardShard = {
     _poolBrainInAJar,
     _poolBrainstone,
     _poolBrandedHowler,
+    _poolBreakThroughTheLine,
     _poolBreechesEagerPillager,
     _poolBrightfieldGlider,
     _poolBrigidClachansHeart,
@@ -1041,6 +1044,7 @@ const shard: CardShard = {
     _poolRelicAxe,
     _poolReliquaryMonk,
     _poolReliquaryTower,
+    _poolRenownedWeaponsmith,
     _poolReset,
     _poolRestlessFortress,
     _poolRevelInRiches,

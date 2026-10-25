@@ -158,6 +158,7 @@ import _poolExcavatingAnurid from "../pool/excavating-anurid.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
+import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
@@ -350,6 +351,7 @@ import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
+import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
@@ -788,6 +790,7 @@ const shard: CardShard = {
     _poolExpandingOoze,
     _poolExpansion,
     _poolExperimentalConfectioner,
+    _poolFascination,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
     _poolFeralMaaka,
@@ -980,6 +983,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
+    _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,
     _poolOnwardVictory,
     _poolOranRiefInvoker,

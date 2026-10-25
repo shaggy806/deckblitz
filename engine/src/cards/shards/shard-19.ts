@@ -127,6 +127,7 @@ import _poolCryptolithRite from "../pool/cryptolith-rite.js";
 import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js";
 import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
 import _poolCuboidColony from "../pool/cuboid-colony.js";
+import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
@@ -775,6 +776,7 @@ const shard: CardShard = {
     _poolCrystalSkullIsuSpyglass,
     _poolCrystallineResonance,
     _poolCuboidColony,
+    _poolCunningStrike,
     _poolCunningSurvivor,
     _poolDaringApprentice,
     _poolDarkRemedy,

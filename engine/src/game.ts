@@ -22202,7 +22202,7 @@ export class Game {
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
       aggregate: (spec, except) => this.aggregateBattlefield(controller, spec, except),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
-        this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, opts),
+        this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber) =>
         this.discardByEffect(target, amount, random === true, undefined, unlessOne, anyNumber === true),
       discardChosen: (target, filter, lookOnly, optional) =>
@@ -31782,6 +31782,8 @@ export class Game {
       readonly attachTo?: ObjectId | null;
       readonly upTo?: boolean;
       readonly totalManaValueAtMost?: number;
+      /** The spell's X, for a filter that reads it (Rally the Ancestors). */
+      readonly x?: number;
     } = {},
   ): boolean {
     const graveyards =
@@ -31804,7 +31806,7 @@ export class Game {
           })
         : [];
     const eligible = [...graveyards, ...milledElsewhere].filter((id) =>
-      matchesFilter(this.state, this.registry, id, filter, { you: player }),
+      matchesFilter(this.state, this.registry, id, filter, { you: player, x: opts.x ?? 0 }),
     );
     if (eligible.length === 0) return false;
     const enterAs = destination === "battlefield" ? opts.enterAs : undefined;

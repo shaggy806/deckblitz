@@ -212,6 +212,8 @@ import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
+import _poolFrostWalker from "../pool/frost-walker.js";
+import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
@@ -305,6 +307,7 @@ import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
+import _poolJeskaiRunemark from "../pool/jeskai-runemark.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
 import _poolKamberThePlunderer from "../pool/kamber-the-plunderer.js";
 import _poolKaslaTheBrokenHalo from "../pool/kasla-the-broken-halo.js";
@@ -458,6 +461,7 @@ import _poolScabClanCharger from "../pool/scab-clan-charger.js";
 import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
+import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
@@ -844,6 +848,8 @@ const shard: CardShard = {
     _poolFleshlessGladiator,
     _poolFlightOfEquenauts,
     _poolFrenziedDevils,
+    _poolFrostWalker,
+    _poolFruitOfTheFirstTree,
     _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaleSwooper,
@@ -937,6 +943,7 @@ const shard: CardShard = {
     _poolJacesSanctum,
     _poolJasmineBoreal,
     _poolJeskaiRevelation,
+    _poolJeskaiRunemark,
     _poolJuganDefendsTheTemple,
     _poolKamberThePlunderer,
     _poolKaslaTheBrokenHalo,
@@ -1090,6 +1097,7 @@ const shard: CardShard = {
     _poolScarwoodHag,
     _poolScoriaElemental,
     _poolScourgeWolf,
+    _poolScrollOfTheMasters,
     _poolScythecatCub,
     _poolSeasonedWarrenguard,
     _poolSeekerOfSkybreak,

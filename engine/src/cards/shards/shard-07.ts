@@ -471,6 +471,8 @@ import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
+import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
+import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
 import _poolSkullStorm from "../pool/skull-storm.js";
 import _poolSkyboxFerry from "../pool/skybox-ferry.js";
@@ -1119,6 +1121,8 @@ const shard: CardShard = {
     _poolShiarSoldier,
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
+    _poolShuYunTheSilentTempest,
+    _poolSibsigMuckdraggers,
     _poolSimicCharm,
     _poolSkullStorm,
     _poolSkyboxFerry,

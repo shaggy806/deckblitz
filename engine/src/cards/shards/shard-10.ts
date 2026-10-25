@@ -537,6 +537,7 @@ import _poolStriderHarness from "../pool/strider-harness.js";
 import _poolStrongboxRaider from "../pool/strongbox-raider.js";
 import _poolSuddenBreakthrough from "../pool/sudden-breakthrough.js";
 import _poolSummonTitan from "../pool/summon-titan.js";
+import _poolSupplantForm from "../pool/supplant-form.js";
 import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room.js";
 import _poolSurveillingSprite from "../pool/surveilling-sprite.js";
 import _poolSustenance from "../pool/sustenance.js";
@@ -555,6 +556,7 @@ import _poolTalonsOfWildwood from "../pool/talons-of-wildwood.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
+import _poolTemurWarShaman from "../pool/temur-war-shaman.js";
 import _poolTendershootDryad from "../pool/tendershoot-dryad.js";
 import _poolTerritoryForge from "../pool/territory-forge.js";
 import _poolTheBloodskyMassacre from "../pool/the-bloodsky-massacre.js";
@@ -1197,6 +1199,7 @@ const shard: CardShard = {
     _poolStrongboxRaider,
     _poolSuddenBreakthrough,
     _poolSummonTitan,
+    _poolSupplantForm,
     _poolSurgicalSuiteHospitalRoom,
     _poolSurveillingSprite,
     _poolSustenance,
@@ -1215,6 +1218,7 @@ const shard: CardShard = {
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
+    _poolTemurWarShaman,
     _poolTendershootDryad,
     _poolTerritoryForge,
     _poolTheBloodskyMassacre,

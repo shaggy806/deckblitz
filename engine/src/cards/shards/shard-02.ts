@@ -425,6 +425,7 @@ import _poolRevolutionist from "../pool/revolutionist.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
+import _poolRiteOfUndoing from "../pool/rite-of-undoing.js";
 import _poolRivendell from "../pool/rivendell.js";
 import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js";
 import _poolRookieMistake from "../pool/rookie-mistake.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolRigoStreetwiseMentor,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,
+    _poolRiteOfUndoing,
     _poolRivendell,
     _poolRocksteadyMutantMarauder,
     _poolRookieMistake,

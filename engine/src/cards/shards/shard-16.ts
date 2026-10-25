@@ -322,6 +322,7 @@ import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarshViper from "../pool/marsh-viper.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
+import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
 import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
@@ -636,6 +637,7 @@ import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWildOnslaught from "../pool/wild-onslaught.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
+import _poolWindsOfQalSisma from "../pool/winds-of-qal-sisma.js";
 import _poolWingCommando from "../pool/wing-commando.js";
 import _poolWintersRest from "../pool/winters-rest.js";
 import _poolWitchsWeb from "../pool/witchs-web.js";
@@ -995,6 +997,7 @@ const shard: CardShard = {
     _poolMarshViper,
     _poolMarwynTheClearcutter,
     _poolMasterTrinketeer,
+    _poolMasteryOfTheUnseen,
     _poolMawOfKozilek,
     _poolMegatonsFate,
     _poolMeltstriderEulogist,
@@ -1309,6 +1312,7 @@ const shard: CardShard = {
     _poolWildOnslaught,
     _poolWillOTheWisp,
     _poolWillOfTheTemur,
+    _poolWindsOfQalSisma,
     _poolWingCommando,
     _poolWintersRest,
     _poolWitchsWeb,

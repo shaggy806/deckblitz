@@ -494,6 +494,7 @@ import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
 import _poolSkywiseTeachings from "../pool/skywise-teachings.js";
 import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
+import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
@@ -1122,6 +1123,7 @@ const shard: CardShard = {
     _poolSkywiseTeachings,
     _poolSleepParalysis,
     _poolSmaugTheMagnificent,
+    _poolSmolderingEfreet,
     _poolSmugglersSurprise,
     _poolSneeringShadewriter,
     _poolSoltariPriest,

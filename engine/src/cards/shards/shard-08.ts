@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbnormalEndurance from "../pool/abnormal-endurance.js";
 import _poolAbrade from "../pool/abrade.js";
+import _poolAbzanRunemark from "../pool/abzan-runemark.js";
 import _poolAcademicAscent from "../pool/academic-ascent.js";
 import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
 import _poolAdmiralBrassUnsinkable from "../pool/admiral-brass-unsinkable.js";
@@ -236,6 +237,7 @@ import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
+import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
 import _poolGoblinOriflamme from "../pool/goblin-oriflamme.js";
 import _poolGoblinPicker from "../pool/goblin-picker.js";
 import _poolGoldenTailDisciple from "../pool/golden-tail-disciple.js";
@@ -425,6 +427,7 @@ import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
+import _poolReachOfShadows from "../pool/reach-of-shadows.js";
 import _poolRealitySmasher from "../pool/reality-smasher.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
@@ -666,6 +669,7 @@ const shard: CardShard = {
   pool: [
     _poolAbnormalEndurance,
     _poolAbrade,
+    _poolAbzanRunemark,
     _poolAcademicAscent,
     _poolAcrobaticManeuver,
     _poolAdmiralBrassUnsinkable,
@@ -897,6 +901,7 @@ const shard: CardShard = {
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
     _poolGlasspoolShore,
+    _poolGoblinBoomKeg,
     _poolGoblinOriflamme,
     _poolGoblinPicker,
     _poolGoldenTailDisciple,
@@ -1086,6 +1091,7 @@ const shard: CardShard = {
     _poolRangingRaptors,
     _poolRaphaelTheMuscle,
     _poolRaucousTheater,
+    _poolReachOfShadows,
     _poolRealitySmasher,
     _poolRealmScorcherHellkite,
     _poolReapersScythe,

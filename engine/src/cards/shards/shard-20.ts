@@ -662,6 +662,7 @@ import _poolWrench from "../pool/wrench.js";
 import _poolWretchedAnurid from "../pool/wretched-anurid.js";
 import _poolWrithingNecromass from "../pool/writhing-necromass.js";
 import _poolYargleGoliathOfOtaria from "../pool/yargle-goliath-of-otaria.js";
+import _poolYasovaDragonclaw from "../pool/yasova-dragonclaw.js";
 import _poolYoungNecromancer from "../pool/young-necromancer.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolWretchedAnurid,
     _poolWrithingNecromass,
     _poolYargleGoliathOfOtaria,
+    _poolYasovaDragonclaw,
     _poolYoungNecromancer,
     _poolZagothCrystal,
     _poolZellDincht,

@@ -121,6 +121,7 @@ import _poolDeepfathomEcho from "../pool/deepfathom-echo.js";
 import _poolDeface from "../pool/deface.js";
 import _poolDefacedGallery from "../pool/defaced-gallery.js";
 import _poolDefenestrate from "../pool/defenestrate.js";
+import _poolDefiantOgre from "../pool/defiant-ogre.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDemonBolt from "../pool/demon-bolt.js";
 import _poolDenyTheDivine from "../pool/deny-the-divine.js";
@@ -239,6 +240,7 @@ import _poolHighScore from "../pool/high-score.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
+import _poolHoodedAssassin from "../pool/hooded-assassin.js";
 import _poolHoodedKavu from "../pool/hooded-kavu.js";
 import _poolHormagauntHorde from "../pool/hormagaunt-horde.js";
 import _poolHornOfRamos from "../pool/horn-of-ramos.js";
@@ -309,6 +311,7 @@ import _poolMalleableImpostor from "../pool/malleable-impostor.js";
 import _poolMarchesasDecree from "../pool/marchesas-decree.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
 import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
+import _poolMarduWoeReaper from "../pool/mardu-woe-reaper.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
 import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
@@ -388,6 +391,7 @@ import _poolRageThrower from "../pool/rage-thrower.js";
 import _poolRainOfDaggers from "../pool/rain-of-daggers.js";
 import _poolRakaDisciple from "../pool/raka-disciple.js";
 import _poolRakdosCluestone from "../pool/rakdos-cluestone.js";
+import _poolRakshasasDisdain from "../pool/rakshasas-disdain.js";
 import _poolRamirezDepietro from "../pool/ramirez-depietro.js";
 import _poolRampagingRendhorn from "../pool/rampaging-rendhorn.js";
 import _poolRangersHawk from "../pool/rangers-hawk.js";
@@ -745,6 +749,7 @@ const shard: CardShard = {
     _poolDeface,
     _poolDefacedGallery,
     _poolDefenestrate,
+    _poolDefiantOgre,
     _poolDefilingDaemogoth,
     _poolDemonBolt,
     _poolDenyTheDivine,
@@ -863,6 +868,7 @@ const shard: CardShard = {
     _poolHobblefiend,
     _poolHomesickness,
     _poolHonedKhopesh,
+    _poolHoodedAssassin,
     _poolHoodedKavu,
     _poolHormagauntHorde,
     _poolHornOfRamos,
@@ -933,6 +939,7 @@ const shard: CardShard = {
     _poolMarchesasDecree,
     _poolMarduHordechief,
     _poolMarduWarshrieker,
+    _poolMarduWoeReaper,
     _poolMasterDecoy,
     _poolMegaFlare,
     _poolMegatog,
@@ -1012,6 +1019,7 @@ const shard: CardShard = {
     _poolRainOfDaggers,
     _poolRakaDisciple,
     _poolRakdosCluestone,
+    _poolRakshasasDisdain,
     _poolRamirezDepietro,
     _poolRampagingRendhorn,
     _poolRangersHawk,

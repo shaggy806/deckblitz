@@ -45,6 +45,7 @@ import _poolBanishingKnack from "../pool/banishing-knack.js";
 import _poolBarbedSextant from "../pool/barbed-sextant.js";
 import _poolBarterInBlood from "../pool/barter-in-blood.js";
 import _poolBasiliskGate from "../pool/basilisk-gate.js";
+import _poolBattleBrawler from "../pool/battle-brawler.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
 import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
 import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
@@ -440,6 +441,7 @@ import _poolRuinationGuide from "../pool/ruination-guide.js";
 import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
+import _poolRuthlessInstincts from "../pool/ruthless-instincts.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
 import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
@@ -670,6 +672,7 @@ const shard: CardShard = {
     _poolBarbedSextant,
     _poolBarterInBlood,
     _poolBasiliskGate,
+    _poolBattleBrawler,
     _poolBattlegroundGeist,
     _poolBayekOfSiwa,
     _poolBearerOfGlory,
@@ -1065,6 +1068,7 @@ const shard: CardShard = {
     _poolRunicArmasaur,
     _poolRuricTharBiomagus,
     _poolRuricThar,
+    _poolRuthlessInstincts,
     _poolRydiaSummonerOfMist,
     _poolSailorOfMeans,
     _poolSanctifierOfSouls,

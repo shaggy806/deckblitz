@@ -114,6 +114,7 @@ import _poolDesperateParry from "../pool/desperate-parry.js";
 import _poolDetectiveOfTheMonth from "../pool/detective-of-the-month.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
+import _poolDiplomacyOfTheWastes from "../pool/diplomacy-of-the-wastes.js";
 import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
@@ -726,6 +727,7 @@ const shard: CardShard = {
     _poolDetectiveOfTheMonth,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,
+    _poolDiplomacyOfTheWastes,
     _poolDireStrainRampage,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,

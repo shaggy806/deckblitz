@@ -47,6 +47,7 @@ import _poolAtalanJackal from "../pool/atalan-jackal.js";
 import _poolAtarkaBeastbreaker from "../pool/atarka-beastbreaker.js";
 import _poolAvacynThePurifier from "../pool/avacyn-the-purifier.js";
 import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
+import _poolAvenSurveyor from "../pool/aven-surveyor.js";
 import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
@@ -148,6 +149,7 @@ import _poolDispersalTechnician from "../pool/dispersal-technician.js";
 import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
+import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
 import _poolDreamstealer from "../pool/dreamstealer.js";
@@ -232,6 +234,7 @@ import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHerdMigration from "../pool/herd-migration.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
+import _poolHewedStoneRetainers from "../pool/hewed-stone-retainers.js";
 import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
 import _poolHighbornVampire from "../pool/highborn-vampire.js";
 import _poolHighwayRobber from "../pool/highway-robber.js";
@@ -307,6 +310,7 @@ import _poolManaCannons from "../pool/mana-cannons.js";
 import _poolManaGeode from "../pool/mana-geode.js";
 import _poolMandroidSquadron from "../pool/mandroid-squadron.js";
 import _poolMaralenFaeAscendant from "../pool/maralen-fae-ascendant.js";
+import _poolMarangRiverProwler from "../pool/marang-river-prowler.js";
 import _poolMarchesaTheBlackRose from "../pool/marchesa-the-black-rose.js";
 import _poolMarionetteApprentice from "../pool/marionette-apprentice.js";
 import _poolMarkOfTheVampire from "../pool/mark-of-the-vampire.js";
@@ -401,6 +405,7 @@ import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
 import _poolProvenCombatant from "../pool/proven-combatant.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
+import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
 import _poolQumulox from "../pool/qumulox.js";
@@ -445,6 +450,7 @@ import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabertoothMauler from "../pool/sabertooth-mauler.js";
 import _poolSabotender from "../pool/sabotender.js";
+import _poolSageEyeAvengers from "../pool/sage-eye-avengers.js";
 import _poolSaguPummeler from "../pool/sagu-pummeler.js";
 import _poolSaid from "../pool/said.js";
 import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
@@ -476,6 +482,7 @@ import _poolShivanZombie from "../pool/shivan-zombie.js";
 import _poolShootDown from "../pool/shoot-down.js";
 import _poolShortSword from "../pool/short-sword.js";
 import _poolShroofusSproutsire from "../pool/shroofus-sproutsire.js";
+import _poolSibsigHost from "../pool/sibsig-host.js";
 import _poolSickleslicer from "../pool/sickleslicer.js";
 import _poolSifsSpearmaster from "../pool/sifs-spearmaster.js";
 import _poolSigardasSummons from "../pool/sigardas-summons.js";
@@ -686,6 +693,7 @@ const shard: CardShard = {
     _poolAtarkaBeastbreaker,
     _poolAvacynThePurifier,
     _poolAvenSmokeweaver,
+    _poolAvenSurveyor,
     _poolAvengingHunter,
     _poolAvishkarRaceway,
     _poolAxgardCavalry,
@@ -787,6 +795,7 @@ const shard: CardShard = {
     _poolDjerusRenunciation,
     _poolDoggedDetective,
     _poolDomrisAmbush,
+    _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
     _poolDreamPillager,
     _poolDreamstealer,
@@ -871,6 +880,7 @@ const shard: CardShard = {
     _poolHeraldOfFaith,
     _poolHerdMigration,
     _poolHermiticHerbalist,
+    _poolHewedStoneRetainers,
     _poolHighSocietyHunter,
     _poolHighbornVampire,
     _poolHighwayRobber,
@@ -946,6 +956,7 @@ const shard: CardShard = {
     _poolManaGeode,
     _poolMandroidSquadron,
     _poolMaralenFaeAscendant,
+    _poolMarangRiverProwler,
     _poolMarchesaTheBlackRose,
     _poolMarionetteApprentice,
     _poolMarkOfTheVampire,
@@ -1040,6 +1051,7 @@ const shard: CardShard = {
     _poolProvenCombatant,
     _poolPryingBlade,
     _poolPygmyPyrosaur,
+    _poolQarsiHighPriest,
     _poolQuagFeast,
     _poolQuarrelsEnd,
     _poolQumulox,
@@ -1084,6 +1096,7 @@ const shard: CardShard = {
     _poolRustedSlasher,
     _poolSabertoothMauler,
     _poolSabotender,
+    _poolSageEyeAvengers,
     _poolSaguPummeler,
     _poolSaid,
     _poolSailIntoTheWest,
@@ -1115,6 +1128,7 @@ const shard: CardShard = {
     _poolShootDown,
     _poolShortSword,
     _poolShroofusSproutsire,
+    _poolSibsigHost,
     _poolSickleslicer,
     _poolSifsSpearmaster,
     _poolSigardasSummons,

@@ -18,6 +18,7 @@ import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
 import _poolAltanakTheThriceCalled from "../pool/altanak-the-thrice-called.js";
 import _poolAmazingAcrobatics from "../pool/amazing-acrobatics.js";
+import _poolAmbushKrotiq from "../pool/ambush-krotiq.js";
 import _poolAncestralReminiscence from "../pool/ancestral-reminiscence.js";
 import _poolAngelOfMercy from "../pool/angel-of-mercy.js";
 import _poolAngelOfTheRuins from "../pool/angel-of-the-ruins.js";
@@ -201,6 +202,7 @@ import _poolFesteringMummy from "../pool/festering-mummy.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
 import _poolFeveredSuspicion from "../pool/fevered-suspicion.js";
 import _poolFiendBinder from "../pool/fiend-binder.js";
+import _poolFierceInvocation from "../pool/fierce-invocation.js";
 import _poolFightAsOne from "../pool/fight-as-one.js";
 import _poolFirdochCore from "../pool/firdoch-core.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
@@ -253,6 +255,7 @@ import _poolGolgariGermination from "../pool/golgari-germination.js";
 import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
 import _poolGrahaTia from "../pool/graha-tia.js";
+import _poolGraveStrength from "../pool/grave-strength.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
@@ -391,6 +394,7 @@ import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNetherVoid from "../pool/nether-void.js";
+import _poolNeutralizingBlast from "../pool/neutralizing-blast.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
@@ -669,6 +673,7 @@ const shard: CardShard = {
     _poolAlphaMyr,
     _poolAltanakTheThriceCalled,
     _poolAmazingAcrobatics,
+    _poolAmbushKrotiq,
     _poolAncestralReminiscence,
     _poolAngelOfMercy,
     _poolAngelOfTheRuins,
@@ -852,6 +857,7 @@ const shard: CardShard = {
     _poolFetidHeath,
     _poolFeveredSuspicion,
     _poolFiendBinder,
+    _poolFierceInvocation,
     _poolFightAsOne,
     _poolFirdochCore,
     _poolFistOfSuns,
@@ -904,6 +910,7 @@ const shard: CardShard = {
     _poolGontisAetherHeart,
     _poolGrabbyGiant,
     _poolGrahaTia,
+    _poolGraveStrength,
     _poolGreatGildedBoat,
     _poolGreenDragon,
     _poolGreenwheelLiberator,
@@ -1042,6 +1049,7 @@ const shard: CardShard = {
     _poolMyojinOfBloomingDawn,
     _poolNebelgastIntruder,
     _poolNetherVoid,
+    _poolNeutralizingBlast,
     _poolNewHorizons,
     _poolNezumiBladeblesser,
     _poolNimReplica,

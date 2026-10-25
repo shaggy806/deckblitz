@@ -150,6 +150,7 @@ import _poolDoublecast from "../pool/doublecast.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDragonlordSilumgar from "../pool/dragonlord-silumgar.js";
+import _poolDragonrage from "../pool/dragonrage.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
@@ -195,6 +196,7 @@ import _poolFortifyingDraught from "../pool/fortifying-draught.js";
 import _poolFoulPlay from "../pool/foul-play.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
+import _poolFrontierMastodon from "../pool/frontier-mastodon.js";
 import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
@@ -456,6 +458,7 @@ import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
+import _poolShamanOfTheGreatHunt from "../pool/shaman-of-the-great-hunt.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
 import _poolShatterstorm from "../pool/shatterstorm.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
@@ -511,6 +514,7 @@ import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
 import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
 import _poolSubmerge from "../pool/submerge.js";
+import _poolSuddenReclamation from "../pool/sudden-reclamation.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
@@ -779,6 +783,7 @@ const shard: CardShard = {
     _poolDragTheCanal,
     _poolDragonflySwarm,
     _poolDragonlordSilumgar,
+    _poolDragonrage,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
     _poolDualStrike,
@@ -824,6 +829,7 @@ const shard: CardShard = {
     _poolFoulPlay,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
+    _poolFrontierMastodon,
     _poolFrontierSiege,
     _poolFuneralCharm,
     _poolFuneralRites,
@@ -1085,6 +1091,7 @@ const shard: CardShard = {
     _poolServoExhibition,
     _poolSetessanTraining,
     _poolShadeOfTrokair,
+    _poolShamanOfTheGreatHunt,
     _poolShamblingGhast,
     _poolShatterstorm,
     _poolShelteringLandscape,
@@ -1140,6 +1147,7 @@ const shard: CardShard = {
     _poolStrongarmMonk,
     _poolSublimeExhalation,
     _poolSubmerge,
+    _poolSuddenReclamation,
     _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSundialDawnTyrant,

@@ -294,6 +294,7 @@ import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
+import _poolLightningShrieker from "../pool/lightning-shrieker.js";
 import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLivingAirship from "../pool/living-airship.js";
@@ -478,6 +479,7 @@ import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
 import _poolSnowVilliers from "../pool/snow-villiers.js";
 import _poolSonarStrike from "../pool/sonar-strike.js";
+import _poolSoulSummons from "../pool/soul-summons.js";
 import _poolSoulSwallower from "../pool/soul-swallower.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
@@ -497,6 +499,7 @@ import _poolStormFleetSwashbuckler from "../pool/storm-fleet-swashbuckler.js";
 import _poolStormKilnArtist from "../pool/storm-kiln-artist.js";
 import _poolSuChiCaveGuard from "../pool/su-chi-cave-guard.js";
 import _poolSubwayTrain from "../pool/subway-train.js";
+import _poolSultaiEmissary from "../pool/sultai-emissary.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSunderShaman from "../pool/sunder-shaman.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
@@ -913,6 +916,7 @@ const shard: CardShard = {
     _poolLathlissDragonQueen,
     _poolLayDownArms,
     _poolLegionsLanding,
+    _poolLightningShrieker,
     _poolLilianasDefeat,
     _poolLingeringTormentor,
     _poolLivingAirship,
@@ -1097,6 +1101,7 @@ const shard: CardShard = {
     _poolSnappingGnarlid,
     _poolSnowVilliers,
     _poolSonarStrike,
+    _poolSoulSummons,
     _poolSoulSwallower,
     _poolSoulboundGuardians,
     _poolSpectralProcession,
@@ -1116,6 +1121,7 @@ const shard: CardShard = {
     _poolStormKilnArtist,
     _poolSuChiCaveGuard,
     _poolSubwayTrain,
+    _poolSultaiEmissary,
     _poolSunbirdsInvocation,
     _poolSunderShaman,
     _poolSundownPass,

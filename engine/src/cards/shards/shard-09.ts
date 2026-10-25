@@ -454,6 +454,7 @@ import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
 import _poolSanctumSpirit from "../pool/sanctum-spirit.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
+import _poolSandsteppeOutcast from "../pool/sandsteppe-outcast.js";
 import _poolSanguineIndulgence from "../pool/sanguine-indulgence.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
@@ -616,6 +617,7 @@ import _poolWolverineRiders from "../pool/wolverine-riders.js";
 import _poolWoodElves from "../pool/wood-elves.js";
 import _poolWoodedFoothills from "../pool/wooded-foothills.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
+import _poolWriteIntoBeing from "../pool/write-into-being.js";
 import _poolYavimayaCradleOfGrowth from "../pool/yavimaya-cradle-of-growth.js";
 import _poolYellowjacketHeartlessMarauder from "../pool/yellowjacket-heartless-marauder.js";
 import _poolYidrisMaelstromWielder from "../pool/yidris-maelstrom-wielder.js";
@@ -1099,6 +1101,7 @@ const shard: CardShard = {
     _poolSamutHazoretsChampion,
     _poolSanctumSpirit,
     _poolSandstalkerMoloch,
+    _poolSandsteppeOutcast,
     _poolSanguineIndulgence,
     _poolSatyrRambler,
     _poolSavageKnuckleblade,
@@ -1261,6 +1264,7 @@ const shard: CardShard = {
     _poolWoodElves,
     _poolWoodedFoothills,
     _poolWrigglingGrub,
+    _poolWriteIntoBeing,
     _poolYavimayaCradleOfGrowth,
     _poolYellowjacketHeartlessMarauder,
     _poolYidrisMaelstromWielder,

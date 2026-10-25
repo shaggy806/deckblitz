@@ -166,6 +166,7 @@ import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
+import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
@@ -797,6 +798,7 @@ const shard: CardShard = {
     _poolEnterTheGodEternals,
     _poolEpharasWarden,
     _poolEtherealAbsolution,
+    _poolEtherealAmbush,
     _poolExhibitionMagician,
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,

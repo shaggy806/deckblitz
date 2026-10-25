@@ -32,6 +32,7 @@ import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
 import _poolAxiomEngraver from "../pool/axiom-engraver.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
+import _poolBattlefrontKrushok from "../pool/battlefront-krushok.js";
 import _poolBeastWithin from "../pool/beast-within.js";
 import _poolBehemothSledge from "../pool/behemoth-sledge.js";
 import _poolBellowingAegisaur from "../pool/bellowing-aegisaur.js";
@@ -159,6 +160,7 @@ import _poolFerociousTigorilla from "../pool/ferocious-tigorilla.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
+import _poolFlamewakePhoenix from "../pool/flamewake-phoenix.js";
 import _poolFlamewaveInvoker from "../pool/flamewave-invoker.js";
 import _poolFlayerHusk from "../pool/flayer-husk.js";
 import _poolFlight from "../pool/flight.js";
@@ -416,6 +418,7 @@ import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
 import _poolSheoldredsHeadcleaver from "../pool/sheoldreds-headcleaver.js";
 import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
+import _poolShockmawDragon from "../pool/shockmaw-dragon.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
 import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
 import _poolSilumgarSpellEater from "../pool/silumgar-spell-eater.js";
@@ -489,6 +492,7 @@ import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTempleOfTheFalseGod from "../pool/temple-of-the-false-god.js";
 import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
 import _poolTemurMonument from "../pool/temur-monument.js";
+import _poolTemurRunemark from "../pool/temur-runemark.js";
 import _poolTerminationFacilitator from "../pool/termination-facilitator.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
 import _poolTetzimocPrimalDeath from "../pool/tetzimoc-primal-death.js";
@@ -605,6 +609,7 @@ const shard: CardShard = {
     _poolAxiomEngraver,
     _poolBakeIntoAPie,
     _poolBaronStruckerHydraOverlord,
+    _poolBattlefrontKrushok,
     _poolBeastWithin,
     _poolBehemothSledge,
     _poolBellowingAegisaur,
@@ -732,6 +737,7 @@ const shard: CardShard = {
     _poolFireFieldOgre,
     _poolFireImp,
     _poolFireSprites,
+    _poolFlamewakePhoenix,
     _poolFlamewaveInvoker,
     _poolFlayerHusk,
     _poolFlight,
@@ -989,6 +995,7 @@ const shard: CardShard = {
     _poolSheoldredsHeadcleaver,
     _poolShimmerdriftVale,
     _poolShivanBranchBurner,
+    _poolShockmawDragon,
     _poolShopkeepersBane,
     _poolSilkweaverElite,
     _poolSilumgarSpellEater,
@@ -1062,6 +1069,7 @@ const shard: CardShard = {
     _poolTempleOfTheFalseGod,
     _poolTemurAscendancy,
     _poolTemurMonument,
+    _poolTemurRunemark,
     _poolTerminationFacilitator,
     _poolTesharAncestorsApostle,
     _poolTetzimocPrimalDeath,
