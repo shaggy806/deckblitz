@@ -3046,12 +3046,14 @@ export class Game {
         // not castable — check again assuming every untapped creature helps,
         // maximally, before giving up on this variant.
         if (!castable && Game.tapsToPay(def)) {
+          // At the X being checked: a library-top cast's X floor (Glarb)
+          // is part of what the creatures must pay.
           const baseCost = this.withFace(card, face ?? 0, () =>
             this.castingCostOf(
               player,
               card,
               def,
-              0,
+              x,
               this.castCostString(
                 card,
                 via,
@@ -3131,7 +3133,7 @@ export class Game {
       // floor everything below is checked at, and the offer's `minX`.
       const leastX =
         via === "library-top" && variantCost !== null && parseManaCost(variantCost).x > 0
-          ? this.libraryTopMinX(player, card, face ?? 0, this.manaCapacity(player))
+          ? this.libraryTopMinX(player, card, face ?? 0, this.xPaymentCeiling(player))
           : 0;
       if (leastX === null) continue;
       const xFloor: number = leastX;
@@ -8392,6 +8394,19 @@ export class Game {
    * `player` cast `cardId` as `face` — 0 for a spell any X will do for, or
    * `null` when none up to `ceiling` does (Glarb's "mana value 4 or
    * greater" on an X spell: an X that gets it there, its ruling). */
+  /** A loose ceiling on the {X} `player` could pay at all: every mana
+   * source at its richest, and besides them each permanent they control
+   * (convoke, improvise, waterbend) and each card in their graveyard
+   * (delve). Only a search bound — whether a given X can really be paid is
+   * the payment's question. */
+  private xPaymentCeiling(player: PlayerId): number {
+    const controlled = this.state.zones.shared.battlefield.reduce(
+      (n, id) => n + (this.state.objects[id]?.controller === player ? (this.state.objects[id].stackCount ?? 1) : 0),
+      0,
+    );
+    return this.manaCapacity(player) + controlled + (this.state.zones.perPlayer[player]?.graveyard.length ?? 0);
+  }
+
   private libraryTopMinX(player: PlayerId, cardId: ObjectId, face: number, ceiling: number): number | null {
     for (let x = 0; x <= ceiling; x += 1) {
       if (this.libraryTopCastPermissions(player, cardId, face, x).length > 0) return x;

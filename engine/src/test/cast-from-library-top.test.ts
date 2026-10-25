@@ -97,6 +97,20 @@ describe("Glarb — lands and mana value 4 or greater from the top", () => {
     expect(game.state.objects[serpent].zone).toBe("battlefield");
   });
 
+  it("an X spell convoke pays for: the least X is found past the mana the lands make", () => {
+    const { game } = mkGame();
+    game.debugSpawn("Glarb, Calamity's Augur", A, "battlefield");
+    for (let i = 0; i < 4; i++) game.debugSpawn("Grizzly Bears", A, "battlefield");
+    // No lands: Chord of Calling's {X}{G}{G}{G} at X 1 (mana value 4) is
+    // paid by convoking four green creatures.
+    const chord = game.debugSpawn("Chord of Calling", A, "library");
+    const offer = offers(game, chord);
+    expect(offer).toHaveLength(1);
+    const cast = offer[0];
+    if (cast.kind !== "cast-spell") throw new Error("expected a cast");
+    expect(cast.xCost?.minX).toBe(1);
+  });
+
   it("an X spell whose targets are tied to X: no count offered below the X floor", () => {
     const { game } = mkGame();
     game.debugSpawn("Glarb, Calamity's Augur", A, "battlefield");

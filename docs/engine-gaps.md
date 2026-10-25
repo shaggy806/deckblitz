@@ -38,9 +38,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`xPlanFor`), so Chord of Calling under Teval, Arbiter of Virtue can't reach the X both would
   pay together, and its offer's convoke proof and delve ranges are each worked out without the
   other. Needs a joint plan: convoke the creatures, delve the rest of the generic.
-- **The least X a top-of-library cast allows is searched only up to the mana a player can make**
-  (`libraryTopMinX`, ceiling `manaCapacity`): an {X} spell that convoke or delve could pay up to
-  Glarb, Calamity's Augur's mana value 4 isn't offered from the top.
 - **Not modeled.** Battles, dungeons/Initiative, banding, Companion, snow *sources* (snow mana
   is generic), and text change that replaces words (612.2: Artificial Evolution, Mind Bend, Magical Hack, New Blood — a rework
   of the card format the user ruled not worth one cycle of cards, 2026-10-09; exchanging text

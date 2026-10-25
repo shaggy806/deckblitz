@@ -239,7 +239,6 @@ there and move this line to `COMPLETED.md`.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
-- **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
 - **Not modeled**: battles, dungeons/Initiative, banding, Companion, snow sources, word-replacing text change (612.2).
 - **Replacement order is chosen for the affected player, never asked** (616.1).
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**
