@@ -183,6 +183,7 @@ import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFoundryHornet from "../pool/foundry-hornet.js";
+import _poolFreneticEfreet from "../pool/frenetic-efreet.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
@@ -832,6 +833,7 @@ const shard: CardShard = {
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFoundryHornet,
+    _poolFreneticEfreet,
     _poolFromFatherToSon,
     _poolFungalPlots,
     _poolFurnaceSkullbomb,

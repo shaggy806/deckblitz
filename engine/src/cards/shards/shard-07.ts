@@ -20,6 +20,7 @@ import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
+import _poolAncestralMemories from "../pool/ancestral-memories.js";
 import _poolAntagonize from "../pool/antagonize.js";
 import _poolAntiquitiesOnTheLoose from "../pool/antiquities-on-the-loose.js";
 import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee.js";
@@ -352,6 +353,7 @@ import _poolMoonstoneHarbinger from "../pool/moonstone-harbinger.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
 import _poolMosstodon from "../pool/mosstodon.js";
+import _poolMtendaGriffin from "../pool/mtenda-griffin.js";
 import _poolMuYanlingCelestialWind from "../pool/mu-yanling-celestial-wind.js";
 import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
@@ -693,6 +695,7 @@ const shard: CardShard = {
     _poolAlterFate,
     _poolAlteredEgo,
     _poolAmbushGigapede,
+    _poolAncestralMemories,
     _poolAntagonize,
     _poolAntiquitiesOnTheLoose,
     _poolAprilOneilKunoichiTrainee,
@@ -1025,6 +1028,7 @@ const shard: CardShard = {
     _poolMordantDragon,
     _poolMossbeardAncient,
     _poolMosstodon,
+    _poolMtendaGriffin,
     _poolMuYanlingCelestialWind,
     _poolMudbuttonCursetosser,
     _poolMultaniYavimayasAvatar,

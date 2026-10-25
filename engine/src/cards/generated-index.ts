@@ -270,6 +270,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Inkling Token",
   "Inkling Token (Emeritus of Truce)",
   "Insect Token",
+  "Insect Token (Black, 0/1)",
   "Insect Token (Black, Flying)",
   "Insect Token (Black-Green)",
   "Insect Token (Canoptek Scarab Swarm)",

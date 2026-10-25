@@ -35,6 +35,7 @@ import _poolAzimaetDrake from "../pool/azimaet-drake.js";
 import _poolBayou from "../pool/bayou.js";
 import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
 import _poolBelbeCorruptedObserver from "../pool/belbe-corrupted-observer.js";
+import _poolBenevolentUnicorn from "../pool/benevolent-unicorn.js";
 import _poolBenthicGiant from "../pool/benthic-giant.js";
 import _poolBetrayersBargain from "../pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
@@ -650,6 +651,7 @@ const shard: CardShard = {
     _poolBayou,
     _poolBeetleHeadedMerchants,
     _poolBelbeCorruptedObserver,
+    _poolBenevolentUnicorn,
     _poolBenthicGiant,
     _poolBetrayersBargain,
     _poolBetrothTheBeast,

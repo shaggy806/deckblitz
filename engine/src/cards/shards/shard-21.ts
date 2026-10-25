@@ -608,6 +608,7 @@ import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
+import _poolZirilanOfTheClaw from "../pool/zirilan-of-the-claw.js";
 import _tokensBearTokenGreen44 from "../tokens/bear-token-green-4-4.js";
 import _tokensBeastTokenRedGreen from "../tokens/beast-token-red-green.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
@@ -1235,6 +1236,7 @@ const shard: CardShard = {
     _poolZaffaiThunderConductor,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,
+    _poolZirilanOfTheClaw,
   ],
   tokens: [
     _tokensBearTokenGreen44,

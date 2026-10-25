@@ -333,6 +333,7 @@ import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
+import _poolMaro from "../pool/maro.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
@@ -979,6 +980,7 @@ const shard: CardShard = {
     _poolManaTithe,
     _poolManifestDread,
     _poolMarbleDiamond,
+    _poolMaro,
     _poolMarwynThePreserver,
     _poolMasterfulReplication,
     _poolMelokuTheCloudedMirror,

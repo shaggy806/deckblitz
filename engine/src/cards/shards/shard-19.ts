@@ -441,6 +441,7 @@ import _poolPlummet from "../pool/plummet.js";
 import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
 import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolarKraken from "../pool/polar-kraken.js";
+import _poolPolymorph from "../pool/polymorph.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
 import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _poolPoeticIngenuity,
     _poolPoisonersApprentice,
     _poolPolarKraken,
+    _poolPolymorph,
     _poolPolyraptor,
     _poolPrideOfConquerors,
     _poolPrizedStatue,

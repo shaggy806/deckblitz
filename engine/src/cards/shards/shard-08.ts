@@ -347,6 +347,7 @@ import _poolLoxodonPartisan from "../pool/loxodon-partisan.js";
 import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
 import _poolLuminollusk from "../pool/luminollusk.js";
+import _poolLureOfPrey from "../pool/lure-of-prey.js";
 import _poolLurkingDeadeye from "../pool/lurking-deadeye.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
@@ -1030,6 +1031,7 @@ const shard: CardShard = {
     _poolLuckyThePizzaDog,
     _poolLumberingFalls,
     _poolLuminollusk,
+    _poolLureOfPrey,
     _poolLurkingDeadeye,
     _poolMaelstromArchangel,
     _poolMagesAttendant,

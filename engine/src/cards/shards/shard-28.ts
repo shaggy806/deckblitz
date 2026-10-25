@@ -525,6 +525,7 @@ import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
+import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,
     _poolSpecimenCollector,
+    _poolSpiritOfTheNight,
     _poolSpitefulSliver,
     _poolSplinterfright,
     _poolSplitUp,

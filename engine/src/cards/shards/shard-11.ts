@@ -474,6 +474,7 @@ import _poolScreechingSoulbreaker from "../pool/screeching-soulbreaker.js";
 import _poolScuteMob from "../pool/scute-mob.js";
 import _poolSeaGodsScorn from "../pool/sea-gods-scorn.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
+import _poolSeedlingCharm from "../pool/seedling-charm.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolScuteMob,
     _poolSeaGodsScorn,
     _poolSearchlightGeist,
+    _poolSeedlingCharm,
     _poolSejiriRefuge,
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
