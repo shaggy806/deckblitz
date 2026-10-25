@@ -27,6 +27,7 @@ import {
   nextTurn,
   pickFromZone,
   pickModes,
+  pickPermanents,
   pickTargets,
   registryOf,
   ref,
@@ -359,5 +360,22 @@ describe("Phyrexian mana paid with life by choice (rule 107.4f)", () => {
     cast(game, ajani, { phyrexianLife: 1 });
     expect(life(game, A)).toBe(18);
     expect(counters(game, ajani, "loyalty")).toBe(2);
+  });
+});
+
+describe("a source of damage may be one only an ability on the stack still refers to (rule 609.7a)", () => {
+  it("Circle of Protection: Red stops a dead creature's dies trigger", () => {
+    const { game, a, b } = table();
+    const circle = spawn(game, "Circle of Protection: Red");
+    const torch = spawn(game, "Mudbutton Torchrunner", B);
+    lands(game, "Plains", 1);
+    pickTargets(b, A);
+    game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [ref(torch)]);
+    game.advanceUntil((s) => s.zones.shared.stack.length > 0 && s.priority.holder === A);
+    expect(zone(game, torch)).toBe("graveyard");
+    const seen = pickPermanents(a, torch);
+    activate(game, circle, 0);
+    expect(seen.offered).toContain(torch);
+    expect(life(game, A)).toBe(20);
   });
 });

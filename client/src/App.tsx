@@ -6191,6 +6191,7 @@ function Table({
           }
           pickedIds={mode === 'choose-permanents' ? new Set<string>(permanentPicks) : pickedObjKeys}
           onTargetClick={(id) => clickPermanent([id])}
+          pickSources={mode === 'choose-permanents'}
           aimed={aim}
           onFocusEntry={setStackFocus}
           seats={game.seats}

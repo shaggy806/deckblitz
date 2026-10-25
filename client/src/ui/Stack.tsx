@@ -39,6 +39,10 @@ export interface StackProps {
   /** Only called for an id that's actually in `targetSlot` (CardTile itself
    * won't dispatch a click otherwise -- see its own `clickable` gate). */
   readonly onTargetClick?: (id: ObjectId) => void
+  /** An ability's entry also picks its source once that has left the
+   * battlefield — a choice of a source of damage (rule 609.7a), which may be
+   * a dead creature whose trigger is waiting. */
+  readonly pickSources?: boolean
   /** Spells the focused stack entry targets (`Table`'s `aim`) and what that
    * entry is called — a counterspell's spell gets the reticle too. */
   readonly aimed?: { readonly by: string; readonly objects: ReadonlySet<ObjectId> } | null
@@ -82,6 +86,7 @@ export function Stack({
   targetSlot = [],
   pickedIds,
   onTargetClick,
+  pickSources = false,
   aimed = null,
   onFocusEntry,
   seats,
@@ -143,7 +148,16 @@ export function Stack({
           const copies = run.reduce((n, member) => n + (view.objects[member]?.stackCount ?? 1), 0)
           // The run's first copy a target slot can take (Stifle): the entry
           // lights up and a click picks that one.
-          const targetId = run.find((member) => isTargetable(member)) ?? id
+          // A source of damage the entry's ability refers to after it left
+          // the battlefield (rule 609.7a — a dead creature's dies trigger):
+          // picked by clicking the ability, since the card isn't on the board.
+          const departedSource =
+            pickSources && obj.kind === 'ability' && obj.sourceObjectId && view.objects[obj.sourceObjectId]?.zone !== 'battlefield'
+              ? obj.sourceObjectId
+              : undefined
+          const targetId =
+            run.find((member) => isTargetable(member)) ??
+            (departedSource !== undefined && isTargetable(departedSource) ? departedSource : id)
           const isTop = depth === 0
           // Only the top entry says whose it is and what it targets (App.css,
           // `.shows-lines`); under a "prompted by" card, which isn't on the
@@ -216,7 +230,11 @@ export function Stack({
                   obj={isGhost ? asCardFace(obj) : faceOf(obj)}
                   badge={obj.isCopy ? 'copy' : undefined}
                   highlight={targetable}
-                  selected={!isGhost && run.some((member) => pickedIds?.has(member) ?? false)}
+                  selected={
+                    !isGhost &&
+                    (run.some((member) => pickedIds?.has(member) ?? false) ||
+                      (departedSource !== undefined && (pickedIds?.has(departedSource) ?? false)))
+                  }
                   aimedBy={!isGhost && aimed !== null && run.some((member) => aimed.objects.has(member)) ? aimed.by : null}
                   onClick={!isGhost && onTargetClick ? () => onTargetClick(targetId) : undefined}
                 />

@@ -2185,7 +2185,10 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  pointer-events: auto;
+  /* The entry's box is as wide as its label, wider than its card: only what
+     it draws takes a click or a hover, so the bare edge of a buried card
+     beside it can be picked (a source of damage, a spell to counter). */
+  pointer-events: none;
   transition:
     top 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
     right 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -2208,6 +2211,9 @@
    the board shown before this one). `Stack` renders inside `<Table>`, which
    remounts every frame, so without that every entry replayed its arrival
    each time anything happened -- once per object in a resolve-all. */
+.stack-entry > * {
+  pointer-events: auto;
+}
 .stack-entry.is-new {
   /* 0.45s rather than the 0.3s this started at, which read as a flinch: the
      point of the beat is that you notice something arrived. Deliberately a

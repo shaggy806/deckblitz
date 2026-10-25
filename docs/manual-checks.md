@@ -5308,3 +5308,7 @@ engine terms. A second thing to check is a second test.
 ### Dismember: pay its Phyrexian mana with life by choice
 - **Do:** Cast Dismember on Bob's Hill Giant. When asked, pick "2 with life (4 life)".
 - **Expect:** You pay 4 life and only one Swamp taps; two stay untapped. The Giant dies.
+
+### Circle of Protection: Red: a dead creature's trigger as the source
+- **Do:** Lightning Bolt Bob's Mudbutton Torchrunner. With its trigger on the stack, activate Circle of Protection: Red and click the trigger's entry on the stack.
+- **Expect:** The trigger's entry lights up and can be picked as the source. When it resolves, its 3 damage to you is prevented.

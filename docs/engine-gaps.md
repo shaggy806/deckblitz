@@ -6,14 +6,11 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **A source of damage is chosen only among permanents and spells.** Rule 609.7a also allows
-  any object an ability on the stack, a waiting replacement or prevention effect or a delayed
-  trigger refers to (a creature that died with its "deals damage" trigger on the stack), and a
-  face-up object in the command zone. `chooseDamageSource` (game.ts, the
-  `prevent-damage-from-chosen-source` effect) offers the battlefield and the stack's spells only,
-  and the client's stack can pick only a spell. **Fix (outline):** offer each stack ability's
-  source when it isn't on the battlefield, and let the client pick it by clicking that ability's
-  stack entry. Circles of Protection, Reverse Damage, Healing Grace.
+- **A source of damage: a waiting effect's object and the command zone.** Rule 609.7a also allows
+  an object a waiting replacement or prevention effect or a delayed trigger refers to, and a
+  face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,
+  and the departed source of an ability on the stack (picked by its stack entry), not those.
+  No pool card is known to need them.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on

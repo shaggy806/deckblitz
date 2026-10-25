@@ -23049,14 +23049,24 @@ export class Game {
         this.emit({ type: "prevention-shield-created", target, amount });
       },
       chooseDamageSource: (filter, then) => {
-        // Rule 609.7a: a permanent, or a spell on the stack. (Objects an
-        // ability on the stack or a waiting effect refers to, and face-up
-        // command-zone objects, aren't offered — docs/engine-gaps.md.)
+        // Rule 609.7a: a permanent, a spell on the stack, or the source of
+        // an ability on the stack that has left the battlefield — a creature
+        // that died with its "deals damage" trigger waiting, read as it last
+        // existed (608.2h). (A waiting replacement or delayed trigger's
+        // object and face-up command-zone objects aren't offered —
+        // docs/engine-gaps.md.)
         const spells = this.state.zones.shared.stack.filter((id) => {
           const object = this.state.objects[id];
           return object?.kind === "card" && matchesFilter(this.state, this.registry, id, filter, { you: controller });
         });
-        const eligible = [...this.battlefieldMatching(controller, filter), ...spells];
+        const departedSources = this.state.zones.shared.stack.flatMap((id) => {
+          const ability = this.state.objects[id];
+          const from = ability?.kind === "ability" ? (ability.sourceObjectId ?? undefined) : undefined;
+          const object = from === undefined ? undefined : this.state.objects[from];
+          if (from === undefined || object === undefined || object.zone === "battlefield" || object.zone === "stack") return [];
+          return matchesFilter(this.state, this.registry, from, filter, { you: controller }) ? [from] : [];
+        });
+        const eligible = [...new Set([...this.battlefieldMatching(controller, filter), ...spells, ...departedSources])];
         if (eligible.length === 0) return;
         this.state.awaiting = {
           kind: "choose-permanents",
@@ -28241,9 +28251,10 @@ export class Game {
       this.withEnterBatch(() => {
         for (const id of chosen) {
           // Re-checked rather than trusted: something may have left since.
-          // A source of damage may be a spell on the stack (rule 609.7a).
+          // A source of damage may be a spell on the stack, or what an
+          // ability on the stack refers to wherever it now is (rule 609.7a).
           const zone = this.state.objects[id]?.zone;
-          if (zone !== "battlefield" && !(awaiting.damageSource === true && zone === "stack")) continue;
+          if (zone === undefined || (zone !== "battlefield" && awaiting.damageSource !== true)) continue;
           // A chosen permanent is read as it last existed there once it
           // has left (rule 608.2h) — "return it, then put counters equal to
           // its power" reads the power it had (First Responder).

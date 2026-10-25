@@ -8147,4 +8147,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  preset(
+    "Circle of Protection: Red: a dead creature's trigger as the source",
+    board({
+      you: { bf: ['Circle of Protection: Red', 'Plains', 'Mountain'], hand: ['Lightning Bolt'] },
+      opp: { bf: ['Mudbutton Torchrunner'] },
+    }),
+  ),
 ]
