@@ -283,6 +283,7 @@ import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
 import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
+import _poolKapshoKitefins from "../pool/kapsho-kitefins.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
@@ -449,6 +450,7 @@ import _poolSecretsOfTheDead from "../pool/secrets-of-the-dead.js";
 import _poolSecureTheWastes from "../pool/secure-the-wastes.js";
 import _poolSeismicSense from "../pool/seismic-sense.js";
 import _poolSelflessSavior from "../pool/selfless-savior.js";
+import _poolSeraphOfTheMasses from "../pool/seraph-of-the-masses.js";
 import _poolSerumSnare from "../pool/serum-snare.js";
 import _poolServantOfTheConduit from "../pool/servant-of-the-conduit.js";
 import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
@@ -907,6 +909,7 @@ const shard: CardShard = {
     _poolJungleLion,
     _poolJusticeVanceAstrovik,
     _poolKamiOfTerribleSecrets,
+    _poolKapshoKitefins,
     _poolKeiTakahashi,
     _poolKelsinkoRanger,
     _poolKindredJudgment,
@@ -1073,6 +1076,7 @@ const shard: CardShard = {
     _poolSecureTheWastes,
     _poolSeismicSense,
     _poolSelflessSavior,
+    _poolSeraphOfTheMasses,
     _poolSerumSnare,
     _poolServantOfTheConduit,
     _poolServantOfTheStinger,

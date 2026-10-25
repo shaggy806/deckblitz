@@ -92,6 +92,8 @@ import _poolCleverLumimancer from "../pool/clever-lumimancer.js";
 import _poolClockworkGnomes from "../pool/clockwork-gnomes.js";
 import _poolCloudKey from "../pool/cloud-key.js";
 import _poolCloudspireCaptain from "../pool/cloudspire-captain.js";
+import _poolCoercivePortal from "../pool/coercive-portal.js";
+import _poolCogworkTracker from "../pool/cogwork-tracker.js";
 import _poolCogworkWrestler from "../pool/cogwork-wrestler.js";
 import _poolColfenorTheLastYew from "../pool/colfenor-the-last-yew.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
@@ -163,6 +165,7 @@ import _poolElementalUprising from "../pool/elemental-uprising.js";
 import _poolElephantGraveyard from "../pool/elephant-graveyard.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
+import _poolEnsoulArtifact from "../pool/ensoul-artifact.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
@@ -375,6 +378,7 @@ import _poolOriginOfThor from "../pool/origin-of-thor.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
+import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
@@ -431,6 +435,7 @@ import _poolRockshardElemental from "../pool/rockshard-elemental.js";
 import _poolRodolfDuskbringer from "../pool/rodolf-duskbringer.js";
 import _poolRollickOfAbandon from "../pool/rollick-of-abandon.js";
 import _poolRootOut from "../pool/root-out.js";
+import _poolRotfeasterMaggot from "../pool/rotfeaster-maggot.js";
 import _poolRovingKeep from "../pool/roving-keep.js";
 import _poolRustMonster from "../pool/rust-monster.js";
 import _poolRuthlessPredation from "../pool/ruthless-predation.js";
@@ -725,6 +730,8 @@ const shard: CardShard = {
     _poolClockworkGnomes,
     _poolCloudKey,
     _poolCloudspireCaptain,
+    _poolCoercivePortal,
+    _poolCogworkTracker,
     _poolCogworkWrestler,
     _poolColfenorTheLastYew,
     _poolCollateralDamage,
@@ -796,6 +803,7 @@ const shard: CardShard = {
     _poolElephantGraveyard,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
+    _poolEnsoulArtifact,
     _poolEnterTheGodEternals,
     _poolEpharasWarden,
     _poolEtherealAbsolution,
@@ -1008,6 +1016,7 @@ const shard: CardShard = {
     _poolOutlawsFury,
     _poolOutriderOfJhess,
     _poolPaladinOfPredation,
+    _poolPalianoTheHighCity,
     _poolPassagewaySeer,
     _poolPathOfTheEnigma,
     _poolPatronOfTheVein,
@@ -1064,6 +1073,7 @@ const shard: CardShard = {
     _poolRodolfDuskbringer,
     _poolRollickOfAbandon,
     _poolRootOut,
+    _poolRotfeasterMaggot,
     _poolRovingKeep,
     _poolRustMonster,
     _poolRuthlessPredation,

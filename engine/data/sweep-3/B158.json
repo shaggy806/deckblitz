@@ -1,0 +1,805 @@
+{
+  "batch": "B158",
+  "status": "complete",
+  "ranks": "Magic 2015 (M15, 2014-07-18) and Conspiracy (CNS, 2014-06-06): the rest of both sets; parley built (and Selvala, Explorer Returned, Phabine, Boss's Confidant, Storm Fleet Negotiator and Cutthroat Negotiator, which it unblocked)",
+  "authored": [
+    {
+      "name": "Profane Memento",
+      "files": [
+        "engine/src/cards/pool/profane-memento.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Garruk, Apex Predator",
+      "files": [
+        "engine/src/cards/pool/garruk-apex-predator.ts",
+        "engine/src/cards/tokens/beast-token-black-deathtouch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nissa, Worldwaker",
+      "files": [
+        "engine/src/cards/pool/nissa-worldwaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hot Soup",
+      "files": [
+        "engine/src/cards/pool/hot-soup.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Perilous Vault",
+      "files": [
+        "engine/src/cards/pool/perilous-vault.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Return to the Ranks",
+      "files": [
+        "engine/src/cards/pool/return-to-the-ranks.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leeching Sliver",
+      "files": [
+        "engine/src/cards/pool/leeching-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hushwing Gryff",
+      "files": [
+        "engine/src/cards/pool/hushwing-gryff.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spirit Bonds",
+      "files": [
+        "engine/src/cards/pool/spirit-bonds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Burning Anger",
+      "files": [
+        "engine/src/cards/pool/burning-anger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kalonian Twingrove",
+      "files": [
+        "engine/src/cards/pool/kalonian-twingrove.ts",
+        "engine/src/cards/tokens/treefolk-warrior-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Belligerent Sliver",
+      "files": [
+        "engine/src/cards/pool/belligerent-sliver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Avarice Amulet",
+      "files": [
+        "engine/src/cards/pool/avarice-amulet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kird Chieftain",
+      "files": [
+        "engine/src/cards/pool/kird-chieftain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jalira, Master Polymorphist",
+      "files": [
+        "engine/src/cards/pool/jalira-master-polymorphist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seraph of the Masses",
+      "files": [
+        "engine/src/cards/pool/seraph-of-the-masses.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Endless Obedience",
+      "files": [
+        "engine/src/cards/pool/endless-obedience.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Paragon of Open Graves",
+      "files": [
+        "engine/src/cards/pool/paragon-of-open-graves.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paragon of Fierce Defiance",
+      "files": [
+        "engine/src/cards/pool/paragon-of-fierce-defiance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul of Innistrad",
+      "files": [
+        "engine/src/cards/pool/soul-of-innistrad.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Act on Impulse",
+      "files": [
+        "engine/src/cards/pool/act-on-impulse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mercurial Pretender",
+      "files": [
+        "engine/src/cards/pool/mercurial-pretender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kurkesh, Onakke Ancient",
+      "files": [
+        "engine/src/cards/pool/kurkesh-onakke-ancient.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ensoul Artifact",
+      "files": [
+        "engine/src/cards/pool/ensoul-artifact.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paragon of Eternal Wilds",
+      "files": [
+        "engine/src/cards/pool/paragon-of-eternal-wilds.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Undergrowth Scavenger",
+      "files": [
+        "engine/src/cards/pool/undergrowth-scavenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Netcaster Spider",
+      "files": [
+        "engine/src/cards/pool/netcaster-spider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Frost Lynx",
+      "files": [
+        "engine/src/cards/pool/frost-lynx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cruel Sadist",
+      "files": [
+        "engine/src/cards/pool/cruel-sadist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunter's Ambush",
+      "files": [
+        "engine/src/cards/pool/hunters-ambush.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kapsho Kitefins",
+      "files": [
+        "engine/src/cards/pool/kapsho-kitefins.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paragon of New Dawns",
+      "files": [
+        "engine/src/cards/pool/paragon-of-new-dawns.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Paragon of Gathering Mists",
+      "files": [
+        "engine/src/cards/pool/paragon-of-gathering-mists.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul of Theros",
+      "files": [
+        "engine/src/cards/pool/soul-of-theros.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unmake the Graves",
+      "files": [
+        "engine/src/cards/pool/unmake-the-graves.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Festergloom",
+      "files": [
+        "engine/src/cards/pool/festergloom.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Invasive Species",
+      "files": [
+        "engine/src/cards/pool/invasive-species.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rotfeaster Maggot",
+      "files": [
+        "engine/src/cards/pool/rotfeaster-maggot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Statute of Denial",
+      "files": [
+        "engine/src/cards/pool/statute-of-denial.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood Host",
+      "files": [
+        "engine/src/cards/pool/blood-host.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scrapyard Mongrel",
+      "files": [
+        "engine/src/cards/pool/scrapyard-mongrel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul of Ravnica",
+      "files": [
+        "engine/src/cards/pool/soul-of-ravnica.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Xathrid Slyblade",
+      "files": [
+        "engine/src/cards/pool/xathrid-slyblade.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Living Totem",
+      "files": [
+        "engine/src/cards/pool/living-totem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aeronaut Tinkerer",
+      "files": [
+        "engine/src/cards/pool/aeronaut-tinkerer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sunblade Elf",
+      "files": [
+        "engine/src/cards/pool/sunblade-elf.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vineweft",
+      "files": [
+        "engine/src/cards/pool/vineweft.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sanctified Charge",
+      "files": [
+        "engine/src/cards/pool/sanctified-charge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chronostutter",
+      "files": [
+        "engine/src/cards/pool/chronostutter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jorubai Murk Lurker",
+      "files": [
+        "engine/src/cards/pool/jorubai-murk-lurker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glacial Crasher",
+      "files": [
+        "engine/src/cards/pool/glacial-crasher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dauntless River Marshal",
+      "files": [
+        "engine/src/cards/pool/dauntless-river-marshal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Warden of the Beyond",
+      "files": [
+        "engine/src/cards/pool/warden-of-the-beyond.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nightfire Giant",
+      "files": [
+        "engine/src/cards/pool/nightfire-giant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Coercive Portal",
+      "files": [
+        "engine/src/cards/pool/coercive-portal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tyrant's Choice",
+      "files": [
+        "engine/src/cards/pool/tyrants-choice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dack's Duplicate",
+      "files": [
+        "engine/src/cards/pool/dacks-duplicate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bite of the Black Rose",
+      "files": [
+        "engine/src/cards/pool/bite-of-the-black-rose.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Muzzio, Visionary Architect",
+      "files": [
+        "engine/src/cards/pool/muzzio-visionary-architect.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Custodi Soulbinders",
+      "files": [
+        "engine/src/cards/pool/custodi-soulbinders.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Predator's Howl",
+      "files": [
+        "engine/src/cards/pool/predators-howl.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Academy Elite",
+      "files": [
+        "engine/src/cards/pool/academy-elite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rousing of Souls",
+      "files": [
+        "engine/src/cards/pool/rousing-of-souls.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ignition Team",
+      "files": [
+        "engine/src/cards/pool/ignition-team.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamewright",
+      "files": [
+        "engine/src/cards/pool/flamewright.ts",
+        "engine/src/cards/tokens/construct-token-defender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Canal Dredger",
+      "files": [
+        "engine/src/cards/pool/canal-dredger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Selvala's Charge",
+      "files": [
+        "engine/src/cards/pool/selvalas-charge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drakestown Forgotten",
+      "files": [
+        "engine/src/cards/pool/drakestown-forgotten.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deal Broker",
+      "files": [
+        "engine/src/cards/pool/deal-broker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Marchesa's Smuggler",
+      "files": [
+        "engine/src/cards/pool/marchesas-smuggler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Selvala's Enforcer",
+      "files": [
+        "engine/src/cards/pool/selvalas-enforcer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paliano, the High City",
+      "files": [
+        "engine/src/cards/pool/paliano-the-high-city.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodvine Elemental",
+      "files": [
+        "engine/src/cards/pool/woodvine-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aether Searcher",
+      "files": [
+        "engine/src/cards/pool/aether-searcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Agent of Acquisitions",
+      "files": [
+        "engine/src/cards/pool/agent-of-acquisitions.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Whispergear Sneak",
+      "files": [
+        "engine/src/cards/pool/whispergear-sneak.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cogwork Librarian",
+      "files": [
+        "engine/src/cards/pool/cogwork-librarian.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cogwork Spy",
+      "files": [
+        "engine/src/cards/pool/cogwork-spy.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cogwork Tracker",
+      "files": [
+        "engine/src/cards/pool/cogwork-tracker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lore Seeker",
+      "files": [
+        "engine/src/cards/pool/lore-seeker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lurking Automaton",
+      "files": [
+        "engine/src/cards/pool/lurking-automaton.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cogwork Grinder",
+      "files": [
+        "engine/src/cards/pool/cogwork-grinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Selvala, Explorer Returned",
+      "files": [
+        "engine/src/cards/pool/selvala-explorer-returned.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phabine, Boss's Confidant",
+      "files": [
+        "engine/src/cards/pool/phabine-bosss-confidant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Storm Fleet Negotiator",
+      "files": [
+        "engine/src/cards/pool/storm-fleet-negotiator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cutthroat Negotiator",
+      "files": [
+        "engine/src/cards/pool/cutthroat-negotiator.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Feast on the Fallen",
+      "needs": [
+        "condition:lost-life-last-turn"
+      ],
+      "why": "\"If an opponent lost life last turn\": the turn-stat conditions read this turn only."
+    },
+    {
+      "name": "Avacyn, Guardian Angel",
+      "needs": [
+        "replacement:prevent-damage-from-colored-sources"
+      ],
+      "why": "Prevent all damage dealt by sources of a colour chosen as it resolves: prevent-damage has no source filter."
+    },
+    {
+      "name": "Might Makes Right",
+      "needs": [
+        "condition:greatest-power-condition"
+      ],
+      "why": "\"If you control each creature with the greatest power\": controls-greatest accepts a tie with an opponent's creature."
+    },
+    {
+      "name": "Master of Predicaments",
+      "needs": [
+        "decision:opponent-guesses-mana-value"
+      ],
+      "why": "An opponent guesses whether a hidden card's mana value is greater than 4."
+    },
+    {
+      "name": "Jace, the Living Guildpact",
+      "needs": [
+        "effect:shuffle-hand-and-graveyard-into-library"
+      ],
+      "why": "The −8 shuffles each player's hand and graveyard into their library; only the graveyard half exists."
+    },
+    {
+      "name": "Stain the Mind",
+      "needs": [
+        "decision:choose-card-name",
+        "effect:extract-same-name"
+      ],
+      "why": "Name a card, then search graveyard, hand and library for it."
+    },
+    {
+      "name": "Magister of Worth",
+      "needs": [
+        "effect:destroy-all-except-source"
+      ],
+      "why": "Council's dilemma's \"destroy all creatures other than this creature\": destroy-all can't leave its source out."
+    },
+    {
+      "name": "Council Guardian",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Protection from each colour with the most votes or tied: no one-shot protection grant, and vote-won is a strict majority."
+    },
+    {
+      "name": "Grenzo's Rebuttal",
+      "needs": [
+        "decision:each-player-chooses-permanents-of-left-player"
+      ],
+      "why": "Each player chooses an artifact, a creature and a land of the player to their left; all are destroyed at once."
+    },
+    {
+      "name": "Phytotitan",
+      "needs": [
+        "effect:delayed-trigger-owners-next-upkeep"
+      ],
+      "why": "Returns at its owner's next upkeep; the delays wait on the ability controller's."
+    },
+    {
+      "name": "Resolute Archangel",
+      "needs": [
+        "effect:life-total-becomes",
+        "amount:starting-life-total"
+      ],
+      "why": "\"Your life total becomes your starting life total\": no amount reads the starting life total."
+    },
+    {
+      "name": "First Response",
+      "needs": [
+        "condition:lost-life-last-turn"
+      ],
+      "why": "\"If you lost life last turn\": the turn-stat conditions read this turn only."
+    },
+    {
+      "name": "Shield of the Avatar",
+      "needs": [
+        "replacement:prevent-n-of-damage"
+      ],
+      "why": "Prevents X of the damage, X your creatures: a damage replacement prevents all or nothing."
+    },
+    {
+      "name": "Grenzo, Dungeon Warden",
+      "needs": [
+        "effect:mill-from-bottom"
+      ],
+      "why": "Puts the bottom card of your library into your graveyard and acts on it."
+    },
+    {
+      "name": "Realm Seekers",
+      "needs": [
+        "amount:entering-card-counts-itself-in-hand"
+      ],
+      "why": "Counts itself when put onto the battlefield from a hand (ruling); the enters-with amount reads after it left."
+    },
+    {
+      "name": "Aggressive Mining",
+      "needs": [
+        "effect:prohibit-land-plays"
+      ],
+      "why": "\"You can't play lands\": prohibits covers spells and abilities only."
+    },
+    {
+      "name": "Goblin Kaboomist",
+      "needs": [
+        "effect:damage-to-source"
+      ],
+      "why": "\"This creature deals 2 damage to itself\": the damage effect's target can't name the source."
+    },
+    {
+      "name": "Siege Dragon",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "\"If defending player controls no Walls\": no condition reads the defending player's permanents."
+    },
+    {
+      "name": "Necromancer's Stockpile",
+      "needs": [
+        "effect:cost-discarded-card-ref"
+      ],
+      "why": "\"If the discarded card was a Zombie card\": the card discarded for the cost isn't readable as the ability resolves."
+    },
+    {
+      "name": "Blastfire Bolt",
+      "needs": [
+        "condition:attached-to-target"
+      ],
+      "why": "\"Destroy all Equipment attached to that creature\": a filter can't point attachedTo at a target slot."
+    },
+    {
+      "name": "Soul of Shandalar",
+      "needs": [
+        "target:controlled-by-target-player"
+      ],
+      "why": "Up to one creature controlled by the player (or planeswalker's controller) the first target names."
+    },
+    {
+      "name": "Brood Keeper",
+      "needs": [
+        "trigger:becomes-attached"
+      ],
+      "why": "\"Whenever an Aura becomes attached to this creature\" — moving onto it too (ruling)."
+    },
+    {
+      "name": "Brago's Representative",
+      "needs": [
+        "static:extra-vote"
+      ],
+      "why": "\"You get an additional vote\" is mandatory; votesAdditionalTime is a may."
+    },
+    {
+      "name": "Grudge Keeper",
+      "needs": [
+        "effect:opponents-who-voted-otherwise-scope"
+      ],
+      "why": "\"Each opponent who voted for a choice you didn't vote for loses 2 life.\""
+    },
+    {
+      "name": "Boonweaver Giant",
+      "needs": [
+        "effect:search-hand-graveyard-library"
+      ],
+      "why": "Searches graveyard, hand and/or library for an Aura; search-library's zones leave out the hand."
+    },
+    {
+      "name": "Custodi Squire",
+      "needs": [
+        "effect:vote-for-card-in-graveyard"
+      ],
+      "why": "Each player votes for an artifact, creature or enchantment card in your graveyard."
+    },
+    {
+      "name": "Innocuous Researcher",
+      "needs": [
+        "effect:prohibit-until-your-next-turn"
+      ],
+      "why": "Re-triaged (B91 had parley alone, built this batch): \"you can't cast spells until your next turn\" — prohibit lasts this turn only."
+    }
+  ]
+}

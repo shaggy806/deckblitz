@@ -45,6 +45,7 @@ import _poolAtzocanArcher from "../pool/atzocan-archer.js";
 import _poolAugmenterPugilist from "../pool/augmenter-pugilist.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
+import _poolAvariceAmulet from "../pool/avarice-amulet.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
@@ -114,6 +115,7 @@ import _poolCrashAndBurn from "../pool/crash-and-burn.js";
 import _poolCreativeOutburst from "../pool/creative-outburst.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
+import _poolCruelSadist from "../pool/cruel-sadist.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
@@ -599,6 +601,7 @@ import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
 import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
 import _poolWelcomeHome from "../pool/welcome-home.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
+import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWindingWay from "../pool/winding-way.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolAugmenterPugilist,
     _poolAuntieOolCursewretch,
     _poolAutonSoldier,
+    _poolAvariceAmulet,
     _poolAwakenTheInferno,
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
@@ -740,6 +744,7 @@ const shard: CardShard = {
     _poolCreativeOutburst,
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
+    _poolCruelSadist,
     _poolCurseOfTheRestlessDead,
     _poolCutIn,
     _poolDargoTheShipwrecker,
@@ -1225,6 +1230,7 @@ const shard: CardShard = {
     _poolWebspinnerCuff,
     _poolWelcomeHome,
     _poolWeldingJar,
+    _poolWhispergearSneak,
     _poolWildRoads,
     _poolWindingWay,
     _poolWingsOfHope,

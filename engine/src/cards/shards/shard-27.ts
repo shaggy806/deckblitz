@@ -248,6 +248,7 @@ import _poolHornOfRamos from "../pool/horn-of-ramos.js";
 import _poolHorrorOfHorrors from "../pool/horror-of-horrors.js";
 import _poolHoundOfGriselbrand from "../pool/hound-of-griselbrand.js";
 import _poolHuatliTheSunsHeart from "../pool/huatli-the-suns-heart.js";
+import _poolHuntersAmbush from "../pool/hunters-ambush.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
 import _poolImpendingDoom from "../pool/impending-doom.js";
@@ -614,6 +615,7 @@ import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
+import _poolXathridSlyblade from "../pool/xathrid-slyblade.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
 import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
 import _poolZendikarsRoil from "../pool/zendikars-roil.js";
@@ -883,6 +885,7 @@ const shard: CardShard = {
     _poolHorrorOfHorrors,
     _poolHoundOfGriselbrand,
     _poolHuatliTheSunsHeart,
+    _poolHuntersAmbush,
     _poolHussarPatrol,
     _poolIdyllicGrange,
     _poolImpendingDoom,
@@ -1249,6 +1252,7 @@ const shard: CardShard = {
     _poolWoodlandCemetery,
     _poolWorldBreaker,
     _poolWrapInVigor,
+    _poolXathridSlyblade,
     _poolYotianMedic,
     _poolYueTheMoonSpirit,
     _poolZendikarsRoil,

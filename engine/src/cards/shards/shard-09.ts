@@ -13,6 +13,7 @@ import _poolAdamantWill from "../pool/adamant-will.js";
 import _poolAdverseConditions from "../pool/adverse-conditions.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
+import _poolAgentOfAcquisitions from "../pool/agent-of-acquisitions.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
 import _poolAkkiRonin from "../pool/akki-ronin.js";
@@ -317,6 +318,7 @@ import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLilianaDeathWielder from "../pool/liliana-death-wielder.js";
+import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
@@ -664,6 +666,7 @@ const shard: CardShard = {
     _poolAdverseConditions,
     _poolAerieAuxiliary,
     _poolAgateInstigator,
+    _poolAgentOfAcquisitions,
     _poolAgrusKosSpiritOfJustice,
     _poolAjaniSleeperAgent,
     _poolAkkiRonin,
@@ -968,6 +971,7 @@ const shard: CardShard = {
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
     _poolLilianaDeathWielder,
+    _poolLivingTotem,
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
     _poolLushPortico,

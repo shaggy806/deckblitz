@@ -15,6 +15,7 @@ import _poolAegisOfTheMeek from "../pool/aegis-of-the-meek.js";
 import _poolAerathiBerserker from "../pool/aerathi-berserker.js";
 import _poolAerialBoost from "../pool/aerial-boost.js";
 import _poolAerialVolley from "../pool/aerial-volley.js";
+import _poolAeronautTinkerer from "../pool/aeronaut-tinkerer.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAetherChaser from "../pool/aether-chaser.js";
 import _poolAetherbornMarauder from "../pool/aetherborn-marauder.js";
@@ -372,6 +373,7 @@ import _poolMorskaUnderseaSleuth from "../pool/morska-undersea-sleuth.js";
 import _poolMossbornHydra from "../pool/mossborn-hydra.js";
 import _poolMosswortBridge from "../pool/mosswort-bridge.js";
 import _poolMountainBandit from "../pool/mountain-bandit.js";
+import _poolMuzzioVisionaryArchitect from "../pool/muzzio-visionary-architect.js";
 import _poolMysticRetrieval from "../pool/mystic-retrieval.js";
 import _poolMythicProportions from "../pool/mythic-proportions.js";
 import _poolNahirisMachinations from "../pool/nahiris-machinations.js";
@@ -515,6 +517,7 @@ import _poolSmelt from "../pool/smelt.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSolidFooting from "../pool/solid-footing.js";
+import _poolSoulOfTheros from "../pool/soul-of-theros.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
@@ -539,6 +542,7 @@ import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
+import _poolSunbladeElf from "../pool/sunblade-elf.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
@@ -682,6 +686,7 @@ const shard: CardShard = {
     _poolAerathiBerserker,
     _poolAerialBoost,
     _poolAerialVolley,
+    _poolAeronautTinkerer,
     _poolAetherAdept,
     _poolAetherChaser,
     _poolAetherbornMarauder,
@@ -1039,6 +1044,7 @@ const shard: CardShard = {
     _poolMossbornHydra,
     _poolMosswortBridge,
     _poolMountainBandit,
+    _poolMuzzioVisionaryArchitect,
     _poolMysticRetrieval,
     _poolMythicProportions,
     _poolNahirisMachinations,
@@ -1182,6 +1188,7 @@ const shard: CardShard = {
     _poolSoaringThoughtThief,
     _poolSokkasHaiku,
     _poolSolidFooting,
+    _poolSoulOfTheros,
     _poolSoulShred,
     _poolSparringRegimen,
     _poolSpeakSecrets,
@@ -1206,6 +1213,7 @@ const shard: CardShard = {
     _poolSulfurousMire,
     _poolSumalaWoodshaper,
     _poolSummonChocoMog,
+    _poolSunbladeElf,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,
     _poolSyphonFuel,

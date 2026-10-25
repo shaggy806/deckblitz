@@ -44,6 +44,7 @@ import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
 import _poolBlight from "../pool/blight.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
+import _poolBloodHost from "../pool/blood-host.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
 import _poolBoggartMischief from "../pool/boggart-mischief.js";
@@ -649,6 +650,7 @@ const shard: CardShard = {
     _poolBlessedHippogriff,
     _poolBlight,
     _poolBlightstepPathway,
+    _poolBloodHost,
     _poolBloodMoney,
     _poolBloodtallowCandle,
     _poolBoggartMischief,

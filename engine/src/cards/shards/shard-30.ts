@@ -210,6 +210,7 @@ import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
+import _poolFrostLynx from "../pool/frost-lynx.js";
 import _poolFrostcliffSiege from "../pool/frostcliff-siege.js";
 import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
 import _poolFuriousForebear from "../pool/furious-forebear.js";
@@ -514,6 +515,7 @@ import _poolSpinedThopter from "../pool/spined-thopter.js";
 import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
+import _poolSpiritBonds from "../pool/spirit-bonds.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -566,8 +568,10 @@ import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
 import _poolTripNoose from "../pool/trip-noose.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
+import _poolTyrantsChoice from "../pool/tyrants-choice.js";
 import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
+import _poolUndergrowthScavenger from "../pool/undergrowth-scavenger.js";
 import _poolUnderhandedDesigns from "../pool/underhanded-designs.js";
 import _poolUnearth from "../pool/unearth.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
@@ -842,6 +846,7 @@ const shard: CardShard = {
     _poolFrenziedRaptor,
     _poolFriendlyNeighborhood,
     _poolFrogSquirrels,
+    _poolFrostLynx,
     _poolFrostcliffSiege,
     _poolFuelTheFlames,
     _poolFuriousForebear,
@@ -1146,6 +1151,7 @@ const shard: CardShard = {
     _poolSpinningWheelKick,
     _poolSpireMonitor,
     _poolSpirePatrol,
+    _poolSpiritBonds,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,
@@ -1198,8 +1204,10 @@ const shard: CardShard = {
     _poolTripNoose,
     _poolTunnelTipster,
     _poolTyrantOfKherRidges,
+    _poolTyrantsChoice,
     _poolUlamogTheInfiniteGyre,
     _poolUmbrisFearManifest,
+    _poolUndergrowthScavenger,
     _poolUnderhandedDesigns,
     _poolUnearth,
     _poolUnexplainedDisappearance,

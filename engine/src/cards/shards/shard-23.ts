@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
+import _poolAetherSearcher from "../pool/aether-searcher.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
@@ -60,6 +61,7 @@ import _poolBilliardRoom from "../pool/billiard-room.js";
 import _poolBindToLife from "../pool/bind-to-life.js";
 import _poolBirchloreRangers from "../pool/birchlore-rangers.js";
 import _poolBirthdayEscape from "../pool/birthday-escape.js";
+import _poolBiteOfTheBlackRose from "../pool/bite-of-the-black-rose.js";
 import _poolBlackDragon from "../pool/black-dragon.js";
 import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
 import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
@@ -110,6 +112,7 @@ import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
 import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
+import _poolCogworkSpy from "../pool/cogwork-spy.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
@@ -169,6 +172,7 @@ import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
+import _poolEndlessObedience from "../pool/endless-obedience.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
 import _poolEnthusiasticMechanaut from "../pool/enthusiastic-mechanaut.js";
 import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
@@ -316,6 +320,7 @@ import _poolMandibleJusticiar from "../pool/mandible-justiciar.js";
 import _poolManticore from "../pool/manticore.js";
 import _poolMaraudingDreadship from "../pool/marauding-dreadship.js";
 import _poolMarchFromTheBlackGate from "../pool/march-from-the-black-gate.js";
+import _poolMarchesasSmuggler from "../pool/marchesas-smuggler.js";
 import _poolMarkOfFury from "../pool/mark-of-fury.js";
 import _poolMartyrsSoul from "../pool/martyrs-soul.js";
 import _poolMassiveRaid from "../pool/massive-raid.js";
@@ -579,6 +584,7 @@ import _poolUlrichOfTheKrallenhorde from "../pool/ulrich-of-the-krallenhorde.js"
 import _poolUndergrowthLeopard from "../pool/undergrowth-leopard.js";
 import _poolUnholyGrotto from "../pool/unholy-grotto.js";
 import _poolUnluckyDrop from "../pool/unlucky-drop.js";
+import _poolUnmakeTheGraves from "../pool/unmake-the-graves.js";
 import _poolUnnaturalRestoration from "../pool/unnatural-restoration.js";
 import _poolUrabraskTheHidden from "../pool/urabrask-the-hidden.js";
 import _poolUrzasSaga from "../pool/urzas-saga.js";
@@ -642,6 +648,7 @@ const shard: CardShard = {
   pool: [
     _poolAatchikEmeraldRadian,
     _poolAccomplishedAlchemist,
+    _poolAetherSearcher,
     _poolAgonyWarp,
     _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
@@ -697,6 +704,7 @@ const shard: CardShard = {
     _poolBindToLife,
     _poolBirchloreRangers,
     _poolBirthdayEscape,
+    _poolBiteOfTheBlackRose,
     _poolBlackDragon,
     _poolBlacksnagBuzzard,
     _poolBladedBattleFan,
@@ -747,6 +755,7 @@ const shard: CardShard = {
     _poolCoalstokeGearhulk,
     _poolCoeurl,
     _poolCogworkAssembler,
+    _poolCogworkSpy,
     _poolCommuneWithLava,
     _poolCongregationGryff,
     _poolCoolButRude,
@@ -806,6 +815,7 @@ const shard: CardShard = {
     _poolEldraziConscription,
     _poolEncampmentKeeper,
     _poolEncouragingAviator,
+    _poolEndlessObedience,
     _poolEnfeeblement,
     _poolEnthusiasticMechanaut,
     _poolErtaiTheCorrupted,
@@ -953,6 +963,7 @@ const shard: CardShard = {
     _poolManticore,
     _poolMaraudingDreadship,
     _poolMarchFromTheBlackGate,
+    _poolMarchesasSmuggler,
     _poolMarkOfFury,
     _poolMartyrsSoul,
     _poolMassiveRaid,
@@ -1216,6 +1227,7 @@ const shard: CardShard = {
     _poolUndergrowthLeopard,
     _poolUnholyGrotto,
     _poolUnluckyDrop,
+    _poolUnmakeTheGraves,
     _poolUnnaturalRestoration,
     _poolUrabraskTheHidden,
     _poolUrzasSaga,

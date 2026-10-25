@@ -110,6 +110,7 @@ import _poolClutchOfCurrents from "../pool/clutch-of-currents.js";
 import _poolCoastalBreach from "../pool/coastal-breach.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
 import _poolCoatiScavenger from "../pool/coati-scavenger.js";
+import _poolCogworkLibrarian from "../pool/cogwork-librarian.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
 import _poolCommuneWithSpirits from "../pool/commune-with-spirits.js";
 import _poolConcealedWeapon from "../pool/concealed-weapon.js";
@@ -281,6 +282,7 @@ import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
 import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
 import _poolJoinTheDance from "../pool/join-the-dance.js";
 import _poolJokulhaups from "../pool/jokulhaups.js";
+import _poolJorubaiMurkLurker from "../pool/jorubai-murk-lurker.js";
 import _poolJourneyersKite from "../pool/journeyers-kite.js";
 import _poolJudgesFamiliar from "../pool/judges-familiar.js";
 import _poolJukaiPreserver from "../pool/jukai-preserver.js";
@@ -306,6 +308,7 @@ import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLeapfrog from "../pool/leapfrog.js";
+import _poolLeechingSliver from "../pool/leeching-sliver.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
@@ -745,6 +748,7 @@ const shard: CardShard = {
     _poolCoastalBreach,
     _poolCoastalTower,
     _poolCoatiScavenger,
+    _poolCogworkLibrarian,
     _poolCommandersInsignia,
     _poolCommuneWithSpirits,
     _poolConcealedWeapon,
@@ -916,6 +920,7 @@ const shard: CardShard = {
     _poolJhoiraWeatherlightCorsair,
     _poolJoinTheDance,
     _poolJokulhaups,
+    _poolJorubaiMurkLurker,
     _poolJourneyersKite,
     _poolJudgesFamiliar,
     _poolJukaiPreserver,
@@ -941,6 +946,7 @@ const shard: CardShard = {
     _poolLandscapePainter,
     _poolLargerThanLife,
     _poolLeapfrog,
+    _poolLeechingSliver,
     _poolLegionLoyalty,
     _poolLeylineDowser,
     _poolLightningHelix,

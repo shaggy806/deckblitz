@@ -508,6 +508,7 @@ import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
 import _poolStationMonitor from "../pool/station-monitor.js";
 import _poolStatureSizeShifter from "../pool/stature-size-shifter.js";
+import _poolStatuteOfDenial from "../pool/statute-of-denial.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
 import _poolStennParanoidPartisan from "../pool/stenn-paranoid-partisan.js";
@@ -1155,6 +1156,7 @@ const shard: CardShard = {
     _poolStarnheimCourser,
     _poolStationMonitor,
     _poolStatureSizeShifter,
+    _poolStatuteOfDenial,
     _poolSteadfastness,
     _poolSteelSeraph,
     _poolStennParanoidPartisan,

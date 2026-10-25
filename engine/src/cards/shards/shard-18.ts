@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAcademyElite from "../pool/academy-elite.js";
 import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
@@ -228,6 +229,7 @@ import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHuntersMark from "../pool/hunters-mark.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
+import _poolHushwingGryff from "../pool/hushwing-gryff.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
@@ -258,6 +260,7 @@ import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
+import _poolKirdChieftain from "../pool/kird-chieftain.js";
 import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
 import _poolKomainuBattleArmor from "../pool/komainu-battle-armor.js";
 import _poolKorCastigator from "../pool/kor-castigator.js";
@@ -378,6 +381,7 @@ import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrecognitionField from "../pool/precognition-field.js";
+import _poolPredatorsHowl from "../pool/predators-howl.js";
 import _poolPredatoryWurm from "../pool/predatory-wurm.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
@@ -637,6 +641,7 @@ import _tokensZombieDruidToken from "../tokens/zombie-druid-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAcademyElite,
     _poolAcererakTheArchlich,
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
@@ -862,6 +867,7 @@ const shard: CardShard = {
     _poolHotshotInvestigators,
     _poolHuntersMark,
     _poolHurskaSweetTooth,
+    _poolHushwingGryff,
     _poolIcetillExplorer,
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
@@ -892,6 +898,7 @@ const shard: CardShard = {
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
     _poolKinsbaileCavalier,
+    _poolKirdChieftain,
     _poolKolaghanWarmonger,
     _poolKomainuBattleArmor,
     _poolKorCastigator,
@@ -1012,6 +1019,7 @@ const shard: CardShard = {
     _poolPossibilityTechnician,
     _poolPouncingCheetah,
     _poolPrecognitionField,
+    _poolPredatorsHowl,
     _poolPredatoryWurm,
     _poolPrimalAmulet,
     _poolProftsEideticMemory,

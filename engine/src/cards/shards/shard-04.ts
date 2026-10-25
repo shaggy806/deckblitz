@@ -194,6 +194,7 @@ import _poolGiantCrab from "../pool/giant-crab.js";
 import _poolGideonsDefeat from "../pool/gideons-defeat.js";
 import _poolGigastormTitan from "../pool/gigastorm-titan.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
+import _poolGlacialCrasher from "../pool/glacial-crasher.js";
 import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
 import _poolGoForBlood from "../pool/go-for-blood.js";
@@ -616,6 +617,7 @@ import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js
 import _tokensSoldierToken from "../tokens/soldier-token.js";
 import _tokensSpawnTokenSpawningPit from "../tokens/spawn-token-spawning-pit.js";
 import _tokensSpiritTokenSaintTraftAndRemKarolus from "../tokens/spirit-token-saint-traft-and-rem-karolus.js";
+import _tokensTreefolkWarriorToken from "../tokens/treefolk-warrior-token.js";
 import _tokensWallToken13 from "../tokens/wall-token-1-3.js";
 import _tokensZombieRogueToken from "../tokens/zombie-rogue-token.js";
 import _tokensZombieTokenGeralfVisionaryStitcher from "../tokens/zombie-token-geralf-visionary-stitcher.js";
@@ -813,6 +815,7 @@ const shard: CardShard = {
     _poolGideonsDefeat,
     _poolGigastormTitan,
     _poolGingerbreadCabin,
+    _poolGlacialCrasher,
     _poolGlassOfTheGuildpact,
     _poolGlenElendraArchmage,
     _poolGoForBlood,
@@ -1237,6 +1240,7 @@ const shard: CardShard = {
     _tokensSoldierToken,
     _tokensSpawnTokenSpawningPit,
     _tokensSpiritTokenSaintTraftAndRemKarolus,
+    _tokensTreefolkWarriorToken,
     _tokensWallToken13,
     _tokensZombieRogueToken,
     _tokensZombieTokenGeralfVisionaryStitcher,
