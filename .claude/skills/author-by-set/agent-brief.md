@@ -41,7 +41,7 @@ From the worktree root:
 ## Checks (all must pass before you commit)
 
 From the worktree root:
-1. `npm run gen:cards -w engine && npm run typecheck -w engine` — one call (the typecheck covers your test file too)
+1. `npm run gen:cards -w engine && npm run typecheck -w engine` — one call (the typecheck covers your test file too). Exit 137 with no type error printed is the out-of-memory killer (the other agents' typechecks run at the same time): just run it again, and don't count it as a failure of yours.
 2. `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/`
 
 The lead runs `oracle-parse` (it reads the engine build, which your worktree doesn't have), `card:verify`, the fuzzer and the full suites after integrating — don't.

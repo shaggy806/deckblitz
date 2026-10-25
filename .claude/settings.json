@@ -10,6 +10,16 @@
             "timeout": 300
           }
         ]
+      },
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/unmerged-branches.mjs\"",
+            "timeout": 60
+          }
+        ]
       }
     ]
   }

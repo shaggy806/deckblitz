@@ -157,8 +157,8 @@ section keeps only what to do next.
   Battle for Zendikar, on awaken; batch 154 the rest of Magic Origins, on renown; batch 155
   Dragons of Tarkir, on dash and bolster; batch 156 the rest of Fate Reforged, no feature built
   but return-from-graveyard's filter now reads the spell's X);
-  **next, Commander 2014** (26 left) **then Khans of Tarkir** (96) — one batch of ~120, six
-  agents. Khans' mechanics (morph, delve, outlast, prowess, ferocious, raid) are all in the pool;
+  **next, Commander 2014** (26 left) **then Khans of Tarkir** (96) — one batch of ~120, five
+  agents on a cloud session. Khans' mechanics (morph, delve, outlast, prowess, ferocious, raid) are all in the pool;
   check C14's lieutenant ("as long as you control your commander") before dispatching. Batch
   156's blockers: a non-Aura enchantment becoming an Aura (`effect:enchantment-becomes-aura` —
   Cloudform, Lightform, Rageform) and "manifest" recording the card it manifested

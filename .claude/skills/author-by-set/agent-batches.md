@@ -10,8 +10,9 @@ it), then hands out the rest.
 
 By the `feedback_agents_only_over_15_cards` memory: ≤15 authorable cards the
 lead does alone; 16–39 one agent; 40+ split into groups of **~18 cards**, as
-many agents as that takes **up to six** — a set's tail of commons (100–150
-cards) is six agents, not four. Smaller groups finish sooner at about the same
+many agents as that takes **up to six** (five on a cloud session — "On a
+cloud session" below) — a set's tail of commons (100–150 cards) is five or
+six agents, not four. Smaller groups finish sooner at about the same
 tokens per card (an agent re-reads its whole context every turn, so a shorter
 list keeps every turn cheaper); past six, the machine's cores set the pace,
 not the agents (B143's four agents of 27 took 14–22 minutes on a 4-core
@@ -37,7 +38,11 @@ six-way contention — so the lead does this once:
    Keep one, named by what it is (`"Kor Warrior Token"`, not `"Kor Warrior
    Token (Nahiri)"`), point the other drafts at it, and commit it with the
    feature — or put it in the one group that makes it.
-4. **Stage each group** in the scratchpad: `group-<x>/scaffold/` (and
+4. **Stage each group** in a staging dir of the batch's own,
+   `<scratchpad>/stage-B<N>/` — never one an earlier batch used:
+   `fill-brief.mjs` briefs every `group-*` it finds there, so a stale group
+   would be dispatched again (after a `/clear` the scratchpad is still the
+   last batch's). In it, `group-<x>/scaffold/` (and
    `review/`) — that group's drafts, **moved** out of the repo, not copied
    (they're untracked, and a `git add -A` would sweep them into your commit;
    `scaffold/winter-cynical-opportunist.ts` is tracked — never delete it). A
@@ -67,6 +72,12 @@ six-way contention — so the lead does this once:
    `BASE_COMMIT` — the lead's HEAD, which the agents bring their worktree to,
    since the harness may branch it from elsewhere — `MAIN_CHECKOUT`,
    `CARD_LIST`). Agent prompt: just the brief's path and its letter.
+
+**On a cloud session** (4 cores, ~15 GB) five agents' typechecks at once
+run the machine out of memory: in batch 156 every agent had one killed (exit
+137) once or twice before it passed. The brief tells them it's that and to
+re-run; it costs them a minute each, so five agents is the cloud session's
+comfortable ceiling, not six.
 
 Agents run gen:cards, the typecheck and their own test file with `pool.test`
 only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
@@ -129,8 +140,12 @@ notification.
 5. **Remove the worktrees** the `feedback_worktree_agents` memory's way:
    unlink each `node_modules` junction (Windows) or symlink (Linux: `rm` the
    link, no trailing slash, after checking `-L`) by absolute path first, and
-   check none is left before `git worktree remove --force`; delete the
-   branches.
+   check none is left before `git worktree remove --force` — a worktree an
+   agent still holds is *locked* (its lock names the agent), and once that
+   agent has reported, `git worktree remove -f -f` is the way; delete the
+   branches after their worktrees are gone (git refuses a checked-out one),
+   then `git worktree list` shows the main checkout alone. Delete the batch's
+   staging dir too.
 
 **A stopped agent can't be resumed** (SendMessage refuses it). Its worktree
 and files stay: start a fresh agent in that worktree with a short

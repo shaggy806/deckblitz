@@ -52,7 +52,15 @@ card is a draft like any other — its templates match sentences, not meaning
   SessionStart hook has already printed it, if there's anything). A branch it
   lists holds commits `main` doesn't — merge it into `main` before authoring,
   or ask the user whether it's abandoned. Starting a batch over it is how five
-  sets were walked twice (2026-10-25).
+  sets were walked twice (2026-10-25). It also says when the checked-out
+  branch is behind `origin/main`: merge it in (`git merge origin/main`) before
+  picking the batch, or `cards:sets` offers cards already done.
+- **After a `/clear`** (the next batch in the same container): the hook runs
+  the unmerged check again, but nothing else from the last batch is cleaned
+  up for you. `git worktree list` shows only the main checkout (a leftover
+  agent worktree is the last batch's — integrate or remove it, Integrating
+  step 5 in `agent-batches.md`), `engine/src/cards/scaffold/` holds only
+  `winter-cynical-opportunist.ts`, and `engine/src/cards/review/` is gone.
 - `git status` clean enough to work on (the `sync-check` skill if on a
   different machine). `npm run build -w engine`.
 - `BACKLOG.md`, "Card backlog": anything to merge or fix first.
@@ -74,7 +82,7 @@ card is a draft like any other — its templates match sentences, not meaning
    untriaged cards, newest set first (the rest of one set, then the next),
    ranked ones first. A set's bottom half is mostly commons and uncommons:
    batches there can run larger — the rest of the set in one batch, up to
-   ~110 cards across six agents of ~18 (`agent-batches.md`) — since most
+   ~110 cards across five or six agents (`agent-batches.md`) — since most
    cards are short.
 3. **Scaffold first**: `npm run card:scaffold -w engine -- "A" "B" …` over the
    batch. Each card in `review/` is nearly done — read it against its Oracle
