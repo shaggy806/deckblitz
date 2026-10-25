@@ -22,6 +22,7 @@ import {
   lands,
   life,
   loyalty,
+  controller,
   counters,
   pt,
   nextTurn,
@@ -377,5 +378,28 @@ describe("a source of damage may be one only an ability on the stack still refer
     activate(game, circle, 0);
     expect(seen.offered).toContain(torch);
     expect(life(game, A)).toBe(20);
+  });
+});
+
+describe("a control effect ends and the default controller has left the game (rule 800.4c)", () => {
+  it("the permanent is exiled, not handed to its owner", () => {
+    const { game } = table({ players: 3 });
+    const bears = spawn(game, "Grizzly Bears");
+    const object = game.state.objects[bears];
+    // Carol put alice's Bears onto the battlefield under her control (her
+    // default control, rule 110.2); bob took it from her until end of turn.
+    object.controlEffects = [
+      { controller: C, timestamp: 1, untilEndOfTurn: false, entered: true },
+      { controller: B, timestamp: 2, untilEndOfTurn: true },
+    ];
+    object.controller = B;
+    object.controlEndsAtCleanup = true;
+    // Carol leaves: bob controls it, so it isn't exiled with her things.
+    game.concede(C);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(controller(game, bears)).toBe(B);
+    // Bob's effect ends; carol, its default controller, has left.
+    nextTurn(game);
+    expect(zone(game, bears)).toBe("exile");
   });
 });

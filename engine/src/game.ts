@@ -30863,6 +30863,9 @@ export class Game {
 
     let changed = false;
     const left = (player: PlayerId): boolean => this.state.players[player]?.hasLost === true;
+    // Rule 800.4c: no effect left giving control to a player still in the
+    // game, and its default controller has left — exiled, not handed back.
+    const orphaned: ObjectId[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       let controller = object.owner;
@@ -30896,6 +30899,14 @@ export class Game {
         }
       }
 
+      if (
+        bestTimestamp === -1 &&
+        object.controller !== controller &&
+        (object.controlEffects ?? []).some((effect) => effect.entered === true && left(effect.controller))
+      ) {
+        orphaned.push(id);
+        continue;
+      }
       if (object.controller !== controller) {
         object.controller = controller;
         object.summoningSick = true;
@@ -30909,6 +30920,12 @@ export class Game {
           controller,
           untilEndOfTurn: false,
         });
+        changed = true;
+      }
+    }
+    for (const id of orphaned) {
+      if (this.moveObject(id, "exile")) {
+        this.emit({ type: "permanent-exiled", object: id });
         changed = true;
       }
     }

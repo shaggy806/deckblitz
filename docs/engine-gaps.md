@@ -64,11 +64,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **Static-effect dependency ordering** (rule 613.8) is implemented only for layer 4's additive
   type grants (Kudo beside Mishra's Factory, `characteristics.ts`). Every other layer applies
   its statics in timestamp order only.
-- **The rest of leaving the game** (rule 800.4). 800.4a is modeled (`leaveGame`), and so is
-  800.4m (a duration tied to a departed player's next turn lasts until it would have begun).
-  Not yet: a decision a departed player would have made (800.4g–h: another player makes it),
-  and an effect ending that hands a permanent back to a departed default controller (800.4c:
-  it's exiled instead).
+- **The rest of leaving the game** (rule 800.4). 800.4a, 800.4c (a control effect ending with the
+  default controller gone exiles the permanent — `recomputeControl`) and 800.4m are modeled, and
+  a conceding player's own pending decision is answered by the server first. Not yet: a choice an
+  effect would ask of a player who has already left (800.4g–h: the object's controller picks
+  another player, or the next in turn order makes it) — the engine skips that player instead.
 - **Dividing among targets: what's left.** A spell's and an ability's fixed "N damage divided as
   you choose" are built (`divided`, the `division` answer), and so is a spell's X total
   (`divided.x` — Fire Covenant). Not yet: "distribute **up to** that many counters" from a
