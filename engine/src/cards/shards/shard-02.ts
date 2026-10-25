@@ -389,6 +389,7 @@ import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
 import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
+import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
@@ -1009,6 +1010,7 @@ const shard: CardShard = {
     _poolPavelMaliki,
     _poolPearlDragon,
     _poolPeculiarLighthouse,
+    _poolPerilousVault,
     _poolPewterGolem,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,

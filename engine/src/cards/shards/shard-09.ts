@@ -13,6 +13,7 @@ import _poolAdamantWill from "../pool/adamant-will.js";
 import _poolAdverseConditions from "../pool/adverse-conditions.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
+import _poolAgentOfAcquisitions from "../pool/agent-of-acquisitions.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
 import _poolAkkiRonin from "../pool/akki-ronin.js";
@@ -321,6 +322,7 @@ import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLilianaDeathWielder from "../pool/liliana-death-wielder.js";
+import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
@@ -480,6 +482,7 @@ import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
+import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
 import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
@@ -668,6 +671,7 @@ const shard: CardShard = {
     _poolAdverseConditions,
     _poolAerieAuxiliary,
     _poolAgateInstigator,
+    _poolAgentOfAcquisitions,
     _poolAgrusKosSpiritOfJustice,
     _poolAjaniSleeperAgent,
     _poolAkkiRonin,
@@ -976,6 +980,7 @@ const shard: CardShard = {
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
     _poolLilianaDeathWielder,
+    _poolLivingTotem,
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
     _poolLushPortico,
@@ -1135,6 +1140,7 @@ const shard: CardShard = {
     _poolSeaLegs,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
+    _poolSelvalaExplorerReturned,
     _poolSephirothPlanetsHeir,
     _poolSeraphOfDawn,
     _poolSerrasSanctum,

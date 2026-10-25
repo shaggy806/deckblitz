@@ -426,7 +426,8 @@
   "keyword:dash",
   "keyword:bolster",
   "keyword:level-up",
-  "keyword:umbra-armor"
+  "keyword:umbra-armor",
+  "keyword:parley"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

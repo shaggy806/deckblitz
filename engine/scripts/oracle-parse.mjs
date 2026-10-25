@@ -1736,7 +1736,33 @@ export function parseEffect(text, outer) {
   const parsed = [];
   const todo = [];
   const hints = [];
+  let skip = 0;
   for (const [i, sentence] of sentences.entries()) {
+    if (skip > 0) {
+      skip -= 1;
+      continue;
+    }
+    // Parley (an ability word): "Each player reveals the top card of their
+    // library. For each nonland card revealed this way, X. Then each player
+    // draws a card." — a `reveal-top` with `who`, X scaled by the cards
+    // revealed this way (the `parley` helper's shape).
+    const parleyM = /^for each (nonland|land) card revealed this way, (?:you )?(.+)\.$/i.exec(sentences[i + 1] ?? "");
+    if (/^each player reveals the top card of their library\.$/i.test(sentence) && parleyM !== null && /^then each player draws a card\.$/i.test(sentences[i + 2] ?? "")) {
+      const amount = { thisWay: "revealed", filter: parleyM[1].toLowerCase() === "land" ? { type: "land" } : { notTypes: ["land"] } };
+      const each = parseSentence(`${parleyM[2][0].toUpperCase()}${parleyM[2].slice(1)}.`, ctx);
+      const scaled = each === null || containsUndefined(each) ? null : scaledBy(each, amount);
+      if (scaled !== null) {
+        const reveal = {
+          kind: "reveal-top",
+          who: "each-player",
+          then: { kind: "sequence", effects: [scaled, { kind: "draw", amount: 1, who: "each-player" }] },
+        };
+        parsed.push(reveal);
+        hints.push({ sentence, effect: reveal });
+        skip = 2;
+        continue;
+      }
+    }
     // "If you do" after "you may discard a card": the draw happens only if a
     // card was discarded (the pool's this-way conditional).
     if (/^if you do, draw (a|one|two|three) cards?\.$/i.test(sentence) && parsed.at(-1)?.kind === "may" && parsed.at(-1).effect.kind === "discard" && parsed.at(-1).effect.target === "you") {
@@ -1840,6 +1866,19 @@ export function parseEffect(text, outer) {
   }
   if (todo.length > 0) return { effect: null, todo, hints };
   return { effect: parsed.length === 1 ? parsed[0] : { kind: "sequence", effects: parsed }, todo: [], hints: [] };
+}
+
+/** A one-unit effect done "for each" of `amount` instead — parley's create a
+ * token, put a counter, +1/+1 to all, add a mana, gain a life — or null. */
+function scaledBy(effect, amount) {
+  if (effect.kind === "create-token" && effect.count === 1) return { ...effect, count: amount };
+  if ((effect.kind === "add-counter" || effect.kind === "add-mana" || effect.kind === "gain-life") && effect.amount === 1) {
+    return { ...effect, amount };
+  }
+  if (effect.kind === "modify-pt-all" && effect.power === 1 && effect.toughness === 1) {
+    return { ...effect, power: amount, toughness: amount };
+  }
+  return null;
 }
 
 /** A template that half-matched: a missing slot, or a number that didn't parse. */

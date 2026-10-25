@@ -23563,6 +23563,9 @@ export class Game {
         // top card of their library".
         const top = this.state.zones.perPlayer[player]?.library[0];
         if (top !== undefined) this.revealCards(player, [top], "library");
+        // Only revealing: parley's `reveal-top` with `who` runs its `then`
+        // once, after every player has.
+        if (then === null) return;
         applyEffectSpec(
           then,
           this.makeResolutionContext(

@@ -376,6 +376,7 @@ import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
+import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
 import _poolPeerlessRopemaster from "../pool/peerless-ropemaster.js";
 import _poolPelakkaPredation from "../pool/pelakka-predation.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
@@ -1022,6 +1023,7 @@ const shard: CardShard = {
     _poolOvergrownEstate,
     _poolPainfulTruths,
     _poolPalaceSiege,
+    _poolParagonOfEternalWilds,
     _poolPeerlessRopemaster,
     _poolPelakkaPredation,
     _poolPerilousMyr,

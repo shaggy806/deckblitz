@@ -189,6 +189,7 @@ import _poolFanaticalFever from "../pool/fanatical-fever.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
+import _poolFestergloom from "../pool/festergloom.js";
 import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
@@ -323,6 +324,7 @@ import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMercurialPretender from "../pool/mercurial-pretender.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
 import _poolMerrowSkyswimmer from "../pool/merrow-skyswimmer.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
@@ -431,6 +433,7 @@ import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
 import _poolResplendentGriffin from "../pool/resplendent-griffin.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
 import _poolRestorationSpecialist from "../pool/restoration-specialist.js";
+import _poolReturnToTheRanks from "../pool/return-to-the-ranks.js";
 import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
@@ -466,6 +469,7 @@ import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
+import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
 import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
@@ -841,6 +845,7 @@ const shard: CardShard = {
     _poolFaunaShaman,
     _poolFearOfMissingOut,
     _poolFelidarCub,
+    _poolFestergloom,
     _poolFestiveFuneral,
     _poolFeySteed,
     _poolFireNationWarship,
@@ -975,6 +980,7 @@ const shard: CardShard = {
     _poolMassAppeal,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMercurialPretender,
     _poolMeriaScholarOfAntiquity,
     _poolMerrowSkyswimmer,
     _poolMidnightTilling,
@@ -1083,6 +1089,7 @@ const shard: CardShard = {
     _poolResplendentGriffin,
     _poolRestlessReef,
     _poolRestorationSpecialist,
+    _poolReturnToTheRanks,
     _poolReveillark,
     _poolReviveTheShire,
     _poolRevokeDemise,
@@ -1118,6 +1125,7 @@ const shard: CardShard = {
     _poolScalebanesElite,
     _poolScaledWurm,
     _poolScarletSpiderKaine,
+    _poolScrapyardMongrel,
     _poolScreamreachBrawler,
     _poolScribeOfTheMindful,
     _poolScuttlingButler,

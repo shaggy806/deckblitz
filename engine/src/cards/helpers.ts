@@ -155,6 +155,21 @@ export const valiant = (effect: EffectSpec, text: string): TriggeredAbility => (
 });
 
 /**
+ * Parley (an ability word — Selvala's Charge): "Each player reveals the top
+ * card of their library. For each nonland card revealed this way, [effect].
+ * Then each player draws a card." `effect` reads the count as
+ * {@link PARLEY_NONLAND} (`PARLEY_LAND` for Phabine's "for each land card");
+ * several effects run in order before the draw.
+ */
+export const PARLEY_NONLAND: EffectAmount = { thisWay: "revealed", filter: { notTypes: ["land"] } };
+export const PARLEY_LAND: EffectAmount = { thisWay: "revealed", filter: { type: "land" } };
+export const parley = (...effects: EffectSpec[]): EffectSpec => ({
+  kind: "reveal-top",
+  who: "each-player",
+  then: { kind: "sequence", effects: [...effects, { kind: "draw", amount: 1, who: "each-player" }] },
+});
+
+/**
  * Impending's two abilities on the battlefield (rule 702.176a): "As long as
  * this permanent's impending cost was paid and it has a time counter on it,
  * it's not a creature" and "At the beginning of your end step, if this

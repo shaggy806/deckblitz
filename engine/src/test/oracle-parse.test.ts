@@ -90,6 +90,30 @@ describe("costs and triggers", () => {
     expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, exertSelf: true });
   });
 
+  it("reads parley's three sentences as one reveal-top, the effect scaled by the cards revealed", () => {
+    const rousing = parseFace(
+      {
+        name: "Rousing of Souls",
+        type_line: "Sorcery",
+        oracle_text:
+          "Parley — Each player reveals the top card of their library. For each nonland card revealed this way, you create a 1/1 white Spirit creature token with flying. Then each player draws a card.",
+      },
+      { tokenFor: () => "Spirit Token" },
+    );
+    expect(rousing.complete).toBe(true);
+    expect(rousing.effect).toEqual({
+      kind: "reveal-top",
+      who: "each-player",
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "create-token", token: "Spirit Token", count: { thisWay: "revealed", filter: { notTypes: ["land"] } } },
+          { kind: "draw", amount: 1, who: "each-player" },
+        ],
+      },
+    });
+  });
+
   it("lines the scaffolder must leave to a person, and what it must get right (the 2026-10-12 review)", () => {
     // Two typecyclings on one line are two abilities; `cycling` holds one.
     const rannet = parseFace({ name: "Valley Rannet", type_line: "Creature — Mount", oracle_text: "Mountaincycling {2}, forestcycling {2}" });

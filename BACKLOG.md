@@ -159,11 +159,16 @@ section keeps only what to do next.
   Battle for Zendikar, on awaken; batch 154 the rest of Magic Origins, on renown; batch 155
   Dragons of Tarkir, on dash and bolster; batch 156 the rest of Fate Reforged, no feature built
   but return-from-graveyard's filter now reads the spell's X; batch 157 the rest of Commander
-  2014 and Khans of Tarkir, no feature built);
-  **next, Magic 2015** (72 left) **then Conspiracy** (36) — one batch of ~110, five agents on a
-  cloud session. **Three walks run in parallel cloud sessions from 2026-10-25**, each owning a
-  range so none walks another's sets: this newest-first walk (Magic 2015 back to Scars of
-  Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
+  2014 and Khans of Tarkir, no feature built; batch 158 the rest of Magic 2015 and Conspiracy,
+  on parley);
+  **next, Journey into Nyx** (103 left) **then Born of the Gods** (104) — two batches, or one of
+  ~110 with Journey into Nyx and the start of Born of the Gods, five agents on a cloud session;
+  then Commander 2013 and Theros. Strive and constellation have pool cards to copy (Twinflame,
+  Archon of Sun's Grace); Born of the Gods' inspired has none yet. Batch 158's blockers are one
+  each but "last turn" life loss (`condition:lost-life-last-turn` — 2); Goblin Kaboomist waits
+  only on the `damage` effect's target type taking `"source"`. **Three walks run in parallel
+  cloud sessions from 2026-10-25**, each owning a range so none walks another's sets: this
+  newest-first walk (Journey into Nyx back to Scars of Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
   of Alara — ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
   and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
   B160 (oldest); after those, take the highest `B<N>` on `origin/main` plus one, checked again

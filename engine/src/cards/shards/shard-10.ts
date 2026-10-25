@@ -129,6 +129,7 @@ import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
+import _poolDauntlessRiverMarshal from "../pool/dauntless-river-marshal.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
@@ -796,6 +797,7 @@ const shard: CardShard = {
     _poolDanithaSwordOfHope,
     _poolDarkness,
     _poolDarksteelSplicer,
+    _poolDauntlessRiverMarshal,
     _poolDavrielsShadowfugue,
     _poolDaybreakCharger,
     _poolDeadbridgeChant,

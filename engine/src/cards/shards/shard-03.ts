@@ -68,6 +68,7 @@ import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
+import _poolChronostutter from "../pool/chronostutter.js";
 import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
@@ -86,6 +87,7 @@ import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
 import _poolCut from "../pool/cut.js";
 import _poolCycloneSire from "../pool/cyclone-sire.js";
 import _poolCystbearer from "../pool/cystbearer.js";
+import _poolDacksDuplicate from "../pool/dacks-duplicate.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
 import _poolDeadlockTrap from "../pool/deadlock-trap.js";
@@ -233,6 +235,7 @@ import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
 import _poolHulkAlwaysAngry from "../pool/hulk-always-angry.js";
 import _poolIchorWellspring from "../pool/ichor-wellspring.js";
+import _poolIgnitionTeam from "../pool/ignition-team.js";
 import _poolImminentDoom from "../pool/imminent-doom.js";
 import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
@@ -275,6 +278,7 @@ import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
+import _poolKurkeshOnakkeAncient from "../pool/kurkesh-onakke-ancient.js";
 import _poolKytheonsIrregulars from "../pool/kytheons-irregulars.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
@@ -356,6 +360,7 @@ import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
 import _poolPredationSteward from "../pool/predation-steward.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
+import _poolProfaneMemento from "../pool/profane-memento.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
 import _poolProwlingSerpopard from "../pool/prowling-serpopard.js";
 import _poolPsionicPulse from "../pool/psionic-pulse.js";
@@ -538,6 +543,7 @@ import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
 import _poolVariableChaser from "../pool/variable-chaser.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
 import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
+import _poolVineweft from "../pool/vineweft.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVolleyVeteran from "../pool/volley-veteran.js";
@@ -656,6 +662,7 @@ const shard: CardShard = {
     _poolChitterspitter,
     _poolChivalricAlliance,
     _poolChocoboCamp,
+    _poolChronostutter,
     _poolChubToad,
     _poolCinderBarrens,
     _poolCleverConcealment,
@@ -674,6 +681,7 @@ const shard: CardShard = {
     _poolCut,
     _poolCycloneSire,
     _poolCystbearer,
+    _poolDacksDuplicate,
     _poolDalekSquadron,
     _poolDarkBargain,
     _poolDeadlockTrap,
@@ -821,6 +829,7 @@ const shard: CardShard = {
     _poolHowlingFury,
     _poolHulkAlwaysAngry,
     _poolIchorWellspring,
+    _poolIgnitionTeam,
     _poolImminentDoom,
     _poolImperialLancer,
     _poolImperiousPerfect,
@@ -863,6 +872,7 @@ const shard: CardShard = {
     _poolKrarkClanStoker,
     _poolKraulForagers,
     _poolKravensCats,
+    _poolKurkeshOnakkeAncient,
     _poolKytheonsIrregulars,
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
@@ -944,6 +954,7 @@ const shard: CardShard = {
     _poolPoxwalkers,
     _poolPredationSteward,
     _poolPrismariTheInspiration,
+    _poolProfaneMemento,
     _poolProsshSkyraiderOfKher,
     _poolProwlingSerpopard,
     _poolPsionicPulse,
@@ -1126,6 +1137,7 @@ const shard: CardShard = {
     _poolVariableChaser,
     _poolVeneratedRotpriest,
     _poolVialSmasherGleefulGrenadier,
+    _poolVineweft,
     _poolViridianLongbow,
     _poolVoiceOfTruth,
     _poolVolleyVeteran,

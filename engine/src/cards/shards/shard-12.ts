@@ -107,6 +107,7 @@ import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
+import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
@@ -129,6 +130,7 @@ import _poolDawntreaderElk from "../pool/dawntreader-elk.js";
 import _poolDeadDrop from "../pool/dead-drop.js";
 import _poolDeadeyeRigHauler from "../pool/deadeye-rig-hauler.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
+import _poolDealBroker from "../pool/deal-broker.js";
 import _poolDeathlessAncient from "../pool/deathless-ancient.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
@@ -219,6 +221,7 @@ import _poolFreyalisesCharm from "../pool/freyalises-charm.js";
 import _poolFrilledDeathspitter from "../pool/frilled-deathspitter.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
+import _poolGarrukApexPredator from "../pool/garruk-apex-predator.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
@@ -746,6 +749,7 @@ const shard: CardShard = {
     _poolClickslither,
     _poolCloudPirates,
     _poolCloudcrownOak,
+    _poolCogworkGrinder,
     _poolConciliatorsDuelist,
     _poolConflux,
     _poolConsumingAetherborn,
@@ -768,6 +772,7 @@ const shard: CardShard = {
     _poolDeadDrop,
     _poolDeadeyeRigHauler,
     _poolDeadlyBrew,
+    _poolDealBroker,
     _poolDeathlessAncient,
     _poolDedicatedCommons,
     _poolDefiantGreatmaw,
@@ -858,6 +863,7 @@ const shard: CardShard = {
     _poolFrilledDeathspitter,
     _poolFrolickingFamiliar,
     _poolGalionElvenkingsButler,
+    _poolGarrukApexPredator,
     _poolGarrukWildspeaker,
     _poolGatecreeperVine,
     _poolGeologicalAppraiser,

@@ -43,6 +43,7 @@ import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
+import _poolBelligerentSliver from "../pool/belligerent-sliver.js";
 import _poolBenalishTrapper from "../pool/benalish-trapper.js";
 import _poolBenefactionOfRhonas from "../pool/benefaction-of-rhonas.js";
 import _poolBewilder from "../pool/bewilder.js";
@@ -78,6 +79,7 @@ import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js"
 import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCagedZombie from "../pool/caged-zombie.js";
+import _poolCanalDredger from "../pool/canal-dredger.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
 import _poolCarnelianOrbOfDragonkind from "../pool/carnelian-orb-of-dragonkind.js";
@@ -412,6 +414,7 @@ import _poolOverwhelmingDenial from "../pool/overwhelming-denial.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
+import _poolParagonOfNewDawns from "../pool/paragon-of-new-dawns.js";
 import _poolPatientRebuilding from "../pool/patient-rebuilding.js";
 import _poolPeerReview from "../pool/peer-review.js";
 import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
@@ -419,6 +422,7 @@ import _poolPerilousLandscape from "../pool/perilous-landscape.js";
 import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
 import _poolPettyLarceny from "../pool/petty-larceny.js";
+import _poolPhabineBosssConfidant from "../pool/phabine-bosss-confidant.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPineWalker from "../pool/pine-walker.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
@@ -698,6 +702,7 @@ const shard: CardShard = {
     _poolBarbarianHorde,
     _poolBedheadBeastie,
     _poolBelleOfTheBrawl,
+    _poolBelligerentSliver,
     _poolBenalishTrapper,
     _poolBenefactionOfRhonas,
     _poolBewilder,
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
     _poolCagedZombie,
+    _poolCanalDredger,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
     _poolCarnelianOrbOfDragonkind,
@@ -1067,6 +1073,7 @@ const shard: CardShard = {
     _poolOwlbear,
     _poolPackRat,
     _poolPaleRiderOfTrostad,
+    _poolParagonOfNewDawns,
     _poolPatientRebuilding,
     _poolPeerReview,
     _poolPendulumOfPatterns,
@@ -1074,6 +1081,7 @@ const shard: CardShard = {
     _poolPerilousSnare,
     _poolPestilentWolf,
     _poolPettyLarceny,
+    _poolPhabineBosssConfidant,
     _poolPhenaxGodOfDeception,
     _poolPineWalker,
     _poolPiratePeddlers,

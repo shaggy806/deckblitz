@@ -262,6 +262,7 @@ import _poolHobgoblinMantledMarauder from "../pool/hobgoblin-mantled-marauder.js
 import _poolHonoredHeirloom from "../pool/honored-heirloom.js";
 import _poolHookHauntDrifter from "../pool/hook-haunt-drifter.js";
 import _poolHootingMandrills from "../pool/hooting-mandrills.js";
+import _poolHotSoup from "../pool/hot-soup.js";
 import _poolHovermyr from "../pool/hovermyr.js";
 import _poolHowlpackResurgence from "../pool/howlpack-resurgence.js";
 import _poolHullBreach from "../pool/hull-breach.js";
@@ -502,6 +503,7 @@ import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
+import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
 import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
@@ -914,6 +916,7 @@ const shard: CardShard = {
     _poolHonoredHeirloom,
     _poolHookHauntDrifter,
     _poolHootingMandrills,
+    _poolHotSoup,
     _poolHovermyr,
     _poolHowlpackResurgence,
     _poolHullBreach,
@@ -1154,6 +1157,7 @@ const shard: CardShard = {
     _poolSomnomancer,
     _poolSongOfFreyalise,
     _poolSorinRavenousNeonate,
+    _poolSoulOfInnistrad,
     _poolSowingMycospawn,
     _poolSpectralInterference,
     _poolSphinxOfFalseConclusions,

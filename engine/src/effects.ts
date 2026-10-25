@@ -995,7 +995,13 @@ export type ThisWayKind =
   /** Permanents it put a counter on — Ripples of Potential's "permanents you
    * control that had a counter put on them this way", after a proliferate.
    * A player isn't one. */
-  | "counters-put";
+  | "counters-put"
+  /** Cards it revealed from a library — parley's "for each nonland card
+   * revealed this way" (an ability word, rule 207.2c), a `reveal-top` with
+   * `who` and this
+   * with `filter: { notTypes: ["land"] }`. Counted by the player who
+   * revealed them. */
+  | "revealed";
 
 export type PlayerScope =
   | "each-player"
@@ -5324,6 +5330,17 @@ export type EffectSpec =
       readonly kind: "reveal-top";
       readonly then: EffectSpec;
       readonly of?: { readonly ownerOfTarget: number };
+      /**
+       * **Each player in this scope** reveals the top card of their library
+       * (rule 701.20a), all of them before `then`, which runs once with no
+       * targets and reads the cards through the `{ thisWay: "revealed" }`
+       * amount — parley's "each player reveals the top card of their
+       * library. For each nonland card revealed this way, …": `then` is a
+       * `sequence` of that effect (its amount `{ thisWay: "revealed", filter:
+       * { notTypes: ["land"] } }`) and `{ kind: "draw", amount: 1, who:
+       * "each-player" }`. A player with an empty library reveals nothing.
+       */
+      readonly who?: PlayerScope;
     }
   | {
       /**
@@ -7001,7 +7018,7 @@ export interface EffectApi {
   ): void;
   /** See the `"reveal-top"` {@link EffectSpec}. `player` is whose library
    * (the effect's controller's when omitted). */
-  revealTop(then: EffectSpec, player?: PlayerId): void;
+  revealTop(then: EffectSpec | null, player?: PlayerId): void;
   /** See the `"shuffle-into-library"` {@link EffectSpec}. */
   shuffleIntoLibrary(target: TargetRef): void;
   /** Who owns the object `target` names — as it last existed, if it has
@@ -10869,6 +10886,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.scry(amountValue(spec.amount, ctx), false, spec.then);
       return;
     case "reveal-top": {
+      if (spec.who !== undefined) {
+        for (const player of ctx.playersInScope(spec.who)) ctx.revealTop(null, player);
+        applyEffectSpec(spec.then, ctx);
+        return;
+      }
       if (spec.of === undefined) {
         ctx.revealTop(spec.then);
         return;

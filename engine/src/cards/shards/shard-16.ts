@@ -111,6 +111,7 @@ import _poolCrossbonesMaliciousMercenary from "../pool/crossbones-malicious-merc
 import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
 import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
+import _poolCustodiSoulbinders from "../pool/custodi-soulbinders.js";
 import _poolCyanVengefulSamurai from "../pool/cyan-vengeful-samurai.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
@@ -308,6 +309,7 @@ import _poolLivingHistory from "../pool/living-history.js";
 import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
+import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
@@ -382,6 +384,7 @@ import _poolPackMastiff from "../pool/pack-mastiff.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
 import _poolParadoxZone from "../pool/paradox-zone.js";
+import _poolParagonOfOpenGraves from "../pool/paragon-of-open-graves.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
 import _poolPartTheWaterveil from "../pool/part-the-waterveil.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
@@ -788,6 +791,7 @@ const shard: CardShard = {
     _poolCruxOfFate,
     _poolCunningSparkmage,
     _poolCurseMarredDemon,
+    _poolCustodiSoulbinders,
     _poolCyanVengefulSamurai,
     _poolCybermanPatrol,
     _poolDawnCharm,
@@ -985,6 +989,7 @@ const shard: CardShard = {
     _poolLodestoneGolem,
     _poolLokisScepter,
     _poolLongtuskCub,
+    _poolLoreSeeker,
     _poolLoxodonLineBreaker,
     _poolLunarRejection,
     _poolLynx,
@@ -1059,6 +1064,7 @@ const shard: CardShard = {
     _poolPainDistributor,
     _poolPalladiumMyr,
     _poolParadoxZone,
+    _poolParagonOfOpenGraves,
     _poolPardicCollaborator,
     _poolPartTheWaterveil,
     _poolPawpatchFormation,

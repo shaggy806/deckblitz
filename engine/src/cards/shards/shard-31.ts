@@ -9,6 +9,7 @@ import _poolAbbeyGargoyles from "../pool/abbey-gargoyles.js";
 import _poolAberrantMindSorcerer from "../pool/aberrant-mind-sorcerer.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
+import _poolActOnImpulse from "../pool/act-on-impulse.js";
 import _poolAerialGuide from "../pool/aerial-guide.js";
 import _poolAethersphereHarvester from "../pool/aethersphere-harvester.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
@@ -329,6 +330,7 @@ import _poolJukaiTrainee from "../pool/jukai-trainee.js";
 import _poolJungleBarrier from "../pool/jungle-barrier.js";
 import _poolJunkbladeBruiser from "../pool/junkblade-bruiser.js";
 import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
+import _poolKalonianTwingrove from "../pool/kalonian-twingrove.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
@@ -402,6 +404,7 @@ import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNinthBridgePatrol from "../pool/ninth-bridge-patrol.js";
+import _poolNissaWorldwaker from "../pool/nissa-worldwaker.js";
 import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
@@ -468,6 +471,7 @@ import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRoilingWaters from "../pool/roiling-waters.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRootlessYew from "../pool/rootless-yew.js";
+import _poolRousingOfSouls from "../pool/rousing-of-souls.js";
 import _poolRubble from "../pool/rubble.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRufusShinra from "../pool/rufus-shinra.js";
@@ -479,6 +483,7 @@ import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
 import _poolRysorianBadger from "../pool/rysorian-badger.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
+import _poolSanctifiedCharge from "../pool/sanctified-charge.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
 import _poolSapseepForest from "../pool/sapseep-forest.js";
@@ -518,6 +523,7 @@ import _poolSmokespewInvoker from "../pool/smokespew-invoker.js";
 import _poolSnarespinner from "../pool/snarespinner.js";
 import _poolSnowfieldSinkhole from "../pool/snowfield-sinkhole.js";
 import _poolSoulManipulation from "../pool/soul-manipulation.js";
+import _poolSoulOfRavnica from "../pool/soul-of-ravnica.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
@@ -670,6 +676,7 @@ const shard: CardShard = {
     _poolAberrantMindSorcerer,
     _poolAbzanBanner,
     _poolAcolyteOfAclazotz,
+    _poolActOnImpulse,
     _poolAerialGuide,
     _poolAethersphereHarvester,
     _poolAirCultElemental,
@@ -990,6 +997,7 @@ const shard: CardShard = {
     _poolJungleBarrier,
     _poolJunkbladeBruiser,
     _poolKaitoCunningInfiltrator,
+    _poolKalonianTwingrove,
     _poolKarplusanForest,
     _poolKathariScreecher,
     _poolKazanduRefuge,
@@ -1063,6 +1071,7 @@ const shard: CardShard = {
     _poolNezumiBladeblesser,
     _poolNimReplica,
     _poolNinthBridgePatrol,
+    _poolNissaWorldwaker,
     _poolNissasZendikon,
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
@@ -1129,6 +1138,7 @@ const shard: CardShard = {
     _poolRoilingWaters,
     _poolRollingTemblor,
     _poolRootlessYew,
+    _poolRousingOfSouls,
     _poolRubble,
     _poolRubblebeltMaaka,
     _poolRufusShinra,
@@ -1140,6 +1150,7 @@ const shard: CardShard = {
     _poolRysorianBadger,
     _poolSHIELDFlyingCar,
     _poolSamuraisKatana,
+    _poolSanctifiedCharge,
     _poolSandbarSerpent,
     _poolSanguinaryPriest,
     _poolSapseepForest,
@@ -1179,6 +1190,7 @@ const shard: CardShard = {
     _poolSnarespinner,
     _poolSnowfieldSinkhole,
     _poolSoulManipulation,
+    _poolSoulOfRavnica,
     _poolSowerOfTemptation,
     _poolSparkSpray,
     _poolSparringDummy,

@@ -10197,6 +10197,38 @@
   "static:prohibit-tap-abilities-of-attached": {
    "family": "effect:cast-and-activate-restrictions",
    "example": "Serra Bestiary: 'its activated abilities with {T} in their costs can't be activated' (mana abilities included)."
+  },
+  "decision:each-player-chooses-permanents-of-left-player": {
+   "family": "effect:choices-by-other-players",
+   "example": "Grenzo's Rebuttal: each player chooses an artifact, a creature and a land among the permanents of the player to their left, then all chosen are destroyed at once."
+  },
+  "effect:delayed-trigger-owners-next-upkeep": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Phytotitan: return it to the battlefield tapped under its owner's control at the beginning of its owner's next upkeep — the delay waits on the owner's upkeep, not the ability controller's."
+  },
+  "amount:starting-life-total": {
+   "family": "effect:amount-new-variants",
+   "example": "Resolute Archangel: \"your life total becomes your starting life total\" — no amount reads the format's starting life (20 or 40)."
+  },
+  "effect:mill-from-bottom": {
+   "family": "effect:amount-new-variants",
+   "example": "Grenzo, Dungeon Warden: put the bottom card of your library into your graveyard, then act on that card (put it onto the battlefield if its power is low enough)."
+  },
+  "amount:entering-card-counts-itself-in-hand": {
+   "family": "static:enters-replacement-for-others",
+   "example": "Realm Seekers: \"enters with X counters, where X is the number of cards in all players' hands\" counts itself when put onto the battlefield from a hand (ruling); the enters-with amount reads after it left the hand."
+  },
+  "effect:opponents-who-voted-otherwise-scope": {
+   "family": "mechanic:voting",
+   "example": "Grudge Keeper: \"each opponent who voted for a choice you didn't vote for loses 2 life\" — no player scope picks those opponents."
+  },
+  "effect:vote-for-card-in-graveyard": {
+   "family": "mechanic:voting",
+   "example": "Custodi Squire: each player votes for an artifact, creature or enchantment card in your graveyard — a vote over cards in a graveyard, not named options, permanents or players."
+  },
+  "effect:prohibit-until-your-next-turn": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Innocuous Researcher: \"you can't cast spells until your next turn\" — `prohibit` lasts this turn only."
   }
  }
 }

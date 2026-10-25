@@ -66,6 +66,7 @@ import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
+import _poolBurningAnger from "../pool/burning-anger.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
@@ -106,6 +107,7 @@ import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
 import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
+import _poolCutthroatNegotiator from "../pool/cutthroat-negotiator.js";
 import _poolDaggersailAeronaut from "../pool/daggersail-aeronaut.js";
 import _poolDanceOfTheSkywise from "../pool/dance-of-the-skywise.js";
 import _poolDancingScimitar from "../pool/dancing-scimitar.js";
@@ -638,6 +640,7 @@ import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
 import _tokensAstartesWarriorToken from "../tokens/astartes-warrior-token.js";
 import _tokensBlackWarriorToken from "../tokens/black-warrior-token.js";
+import _tokensConstructTokenDefender from "../tokens/construct-token-defender.js";
 import _tokensCragflame from "../tokens/cragflame.js";
 import _tokensDrakeToken from "../tokens/drake-token.js";
 import _tokensEggToken from "../tokens/egg-token.js";
@@ -727,6 +730,7 @@ const shard: CardShard = {
     _poolBronzebeakMoa,
     _poolBullsStrength,
     _poolBurnTheAccursed,
+    _poolBurningAnger,
     _poolCaligoSkinWitch,
     _poolCallTheScions,
     _poolCallousInspector,
@@ -767,6 +771,7 @@ const shard: CardShard = {
     _poolCurate,
     _poolCuratorOfSunsCreation,
     _poolCuriousPair,
+    _poolCutthroatNegotiator,
     _poolDaggersailAeronaut,
     _poolDanceOfTheSkywise,
     _poolDancingScimitar,
@@ -1301,6 +1306,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAstartesWarriorToken,
     _tokensBlackWarriorToken,
+    _tokensConstructTokenDefender,
     _tokensCragflame,
     _tokensDrakeToken,
     _tokensEggToken,

@@ -268,6 +268,7 @@ import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
 import _poolIntrepidProvisioner from "../pool/intrepid-provisioner.js";
+import _poolInvasiveSpecies from "../pool/invasive-species.js";
 import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
 import _poolJunkWinder from "../pool/junk-winder.js";
@@ -615,6 +616,7 @@ import _tokens32ShapeshifterToken from "../tokens/3-2-shapeshifter-token.js";
 import _tokensAngelToken44 from "../tokens/angel-token-4-4.js";
 import _tokensAngelVigilanceToken from "../tokens/angel-vigilance-token.js";
 import _tokensBeastToken42 from "../tokens/beast-token-4-2.js";
+import _tokensBeastTokenBlackDeathtouch from "../tokens/beast-token-black-deathtouch.js";
 import _tokensBlackGreenElfToken from "../tokens/black-green-elf-token.js";
 import _tokensDevilToken from "../tokens/devil-token.js";
 import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
@@ -897,6 +899,7 @@ const shard: CardShard = {
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
     _poolIntrepidProvisioner,
+    _poolInvasiveSpecies,
     _poolIrresistiblePrey,
     _poolJoriEnRuinDiver,
     _poolJunkWinder,
@@ -1246,6 +1249,7 @@ const shard: CardShard = {
     _tokensAngelToken44,
     _tokensAngelVigilanceToken,
     _tokensBeastToken42,
+    _tokensBeastTokenBlackDeathtouch,
     _tokensBlackGreenElfToken,
     _tokensDevilToken,
     _tokensFrogLizardToken,

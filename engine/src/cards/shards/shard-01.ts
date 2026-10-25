@@ -125,6 +125,7 @@ import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
+import _poolDrakestownForgotten from "../pool/drakestown-forgotten.js";
 import _poolDreamEater from "../pool/dream-eater.js";
 import _poolDromokaMonument from "../pool/dromoka-monument.js";
 import _poolDukharaScavenger from "../pool/dukhara-scavenger.js";
@@ -365,6 +366,8 @@ import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
+import _poolParagonOfFierceDefiance from "../pool/paragon-of-fierce-defiance.js";
+import _poolParagonOfGatheringMists from "../pool/paragon-of-gathering-mists.js";
 import _poolPatchworkBeastie from "../pool/patchwork-beastie.js";
 import _poolPathOfDiscovery from "../pool/path-of-discovery.js";
 import _poolPatronOfTheArts from "../pool/patron-of-the-arts.js";
@@ -583,6 +586,7 @@ import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWantedGriffin from "../pool/wanted-griffin.js";
 import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWarTrainedSlasher from "../pool/war-trained-slasher.js";
+import _poolWardenOfTheBeyond from "../pool/warden-of-the-beyond.js";
 import _poolWarrantWarden from "../pool/warrant-warden.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWavesifter from "../pool/wavesifter.js";
@@ -742,6 +746,7 @@ const shard: CardShard = {
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
+    _poolDrakestownForgotten,
     _poolDreamEater,
     _poolDromokaMonument,
     _poolDukharaScavenger,
@@ -982,6 +987,8 @@ const shard: CardShard = {
     _poolOverTheEdge,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,
+    _poolParagonOfFierceDefiance,
+    _poolParagonOfGatheringMists,
     _poolPatchworkBeastie,
     _poolPathOfDiscovery,
     _poolPatronOfTheArts,
@@ -1200,6 +1207,7 @@ const shard: CardShard = {
     _poolWantedGriffin,
     _poolWarSqueak,
     _poolWarTrainedSlasher,
+    _poolWardenOfTheBeyond,
     _poolWarrantWarden,
     _poolWastewoodVerge,
     _poolWavesifter,

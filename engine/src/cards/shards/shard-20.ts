@@ -300,6 +300,7 @@ import _poolIrmaPartTimeMutant from "../pool/irma-part-time-mutant.js";
 import _poolItllQuenchYa from "../pool/itll-quench-ya.js";
 import _poolIzzetBoilerworks from "../pool/izzet-boilerworks.js";
 import _poolJackhammer from "../pool/jackhammer.js";
+import _poolJaliraMasterPolymorphist from "../pool/jalira-master-polymorphist.js";
 import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
 import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
@@ -380,6 +381,7 @@ import _poolNaturesRhythm from "../pool/natures-rhythm.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
 import _poolNehebDreadhordeChampion from "../pool/neheb-dreadhorde-champion.js";
 import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
+import _poolNightfireGiant from "../pool/nightfire-giant.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
 import _poolNissasTriumph from "../pool/nissas-triumph.js";
 import _poolNivixBarrier from "../pool/nivix-barrier.js";
@@ -998,6 +1000,7 @@ const shard: CardShard = {
     _poolItllQuenchYa,
     _poolIzzetBoilerworks,
     _poolJackhammer,
+    _poolJaliraMasterPolymorphist,
     _poolJawboneSkulkin,
     _poolJaxisTheTroublemaker,
     _poolJhessianInfiltrator,
@@ -1078,6 +1081,7 @@ const shard: CardShard = {
     _poolNecroskitter,
     _poolNehebDreadhordeChampion,
     _poolNemesisOfReason,
+    _poolNightfireGiant,
     _poolNinjaOfTheDeepHours,
     _poolNissasTriumph,
     _poolNivixBarrier,

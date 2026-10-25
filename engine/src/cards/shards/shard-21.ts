@@ -188,6 +188,7 @@ import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
 import _poolFlamethrowerSonata from "../pool/flamethrower-sonata.js";
+import _poolFlamewright from "../pool/flamewright.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
 import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
 import _poolForumFamiliar from "../pool/forum-familiar.js";
@@ -303,6 +304,7 @@ import _poolLoxodonSergeant from "../pool/loxodon-sergeant.js";
 import _poolLukeCageHeroForHire from "../pool/luke-cage-hero-for-hire.js";
 import _poolLullmagesFamiliar from "../pool/lullmages-familiar.js";
 import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
+import _poolLurkingAutomaton from "../pool/lurking-automaton.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
@@ -345,6 +347,7 @@ import _poolNarcolepsy from "../pool/narcolepsy.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNecrosquito from "../pool/necrosquito.js";
+import _poolNetcasterSpider from "../pool/netcaster-spider.js";
 import _poolNexusOfFate from "../pool/nexus-of-fate.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
@@ -440,6 +443,7 @@ import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicElemental from "../pool/seismic-elemental.js";
 import _poolSeismicShudder from "../pool/seismic-shudder.js";
 import _poolSelesnyaLocket from "../pool/selesnya-locket.js";
+import _poolSelvalasEnforcer from "../pool/selvalas-enforcer.js";
 import _poolSeparatistVoidmage from "../pool/separatist-voidmage.js";
 import _poolSereneSteward from "../pool/serene-steward.js";
 import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
@@ -800,6 +804,7 @@ const shard: CardShard = {
     _poolFlameOfAnor,
     _poolFlameshape,
     _poolFlamethrowerSonata,
+    _poolFlamewright,
     _poolFleetingEffigy,
     _poolFlowerfootSwordmaster,
     _poolForumFamiliar,
@@ -915,6 +920,7 @@ const shard: CardShard = {
     _poolLukeCageHeroForHire,
     _poolLullmagesFamiliar,
     _poolLuminousRebuke,
+    _poolLurkingAutomaton,
     _poolLysAlanaHuntmaster,
     _poolMalevolentWhispers,
     _poolMangaraTheDiplomat,
@@ -957,6 +963,7 @@ const shard: CardShard = {
     _poolNashiSearcherInTheDark,
     _poolNebulaDragon,
     _poolNecrosquito,
+    _poolNetcasterSpider,
     _poolNexusOfFate,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
@@ -1052,6 +1059,7 @@ const shard: CardShard = {
     _poolSeismicElemental,
     _poolSeismicShudder,
     _poolSelesnyaLocket,
+    _poolSelvalasEnforcer,
     _poolSeparatistVoidmage,
     _poolSereneSteward,
     _poolSerpentBladeAssailant,

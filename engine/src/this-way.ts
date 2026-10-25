@@ -219,6 +219,13 @@ export function thisWayEntries(
           }
         }
         break;
+      case "revealed":
+        // From a library (parley's "each player reveals the top card of
+        // their library"), counted by the player who revealed it.
+        if (event.type === "cards-revealed" && event.from === "library") {
+          for (const id of event.objects) add(id, event.player, false);
+        }
+        break;
       case "put-onto-battlefield":
         // Moved there from a zone — not a token created, nor a permanent
         // spell resolving.

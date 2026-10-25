@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3791 already implemented / 1209 missing (marks refreshed 2026-10-25)
+3792 already implemented / 1208 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2115,7 +2115,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2122  Reckless Impulse                         {1}{R}           Sorcery
 [x]  2123  Universal Automaton                      {1}              Artifact Creature — Shapeshifter
 [x]  2124  Hydra's Growth                           {2}{G}           Enchantment — Aura
-[ ]  2125  Selvala, Explorer Returned               {1}{G}{W}        Legendary Creature — Elf Scout
+[x]  2125  Selvala, Explorer Returned               {1}{G}{W}        Legendary Creature — Elf Scout
 [x]  2126  Crackling Doom                           {R}{W}{B}        Instant
 [x]  2127  Agent of Treachery                       {5}{U}{U}        Creature — Human Rogue
 [x]  2128  Diregraf Colossus                        {2}{B}           Creature — Zombie Giant

@@ -472,6 +472,7 @@ import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
 import _poolSeismicMonstrosaur from "../pool/seismic-monstrosaur.js";
 import _poolSelesnyaEvangel from "../pool/selesnya-evangel.js";
+import _poolSelvalasCharge from "../pool/selvalas-charge.js";
 import _poolSentinelSarahLyons from "../pool/sentinel-sarah-lyons.js";
 import _poolSeraphOfNewCapenna from "../pool/seraph-of-new-capenna.js";
 import _poolSeraphOfTheScales from "../pool/seraph-of-the-scales.js";
@@ -613,6 +614,7 @@ import _poolWindriderPatrol from "../pool/windrider-patrol.js";
 import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
 import _poolWolfsQuarry from "../pool/wolfs-quarry.js";
 import _poolWoodlandWanderer from "../pool/woodland-wanderer.js";
+import _poolWoodvineElemental from "../pool/woodvine-elemental.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolWretchedCamel from "../pool/wretched-camel.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
@@ -1116,6 +1118,7 @@ const shard: CardShard = {
     _poolSeekerOfSkybreak,
     _poolSeismicMonstrosaur,
     _poolSelesnyaEvangel,
+    _poolSelvalasCharge,
     _poolSentinelSarahLyons,
     _poolSeraphOfNewCapenna,
     _poolSeraphOfTheScales,
@@ -1257,6 +1260,7 @@ const shard: CardShard = {
     _poolWinterMisanthropicGuide,
     _poolWolfsQuarry,
     _poolWoodlandWanderer,
+    _poolWoodvineElemental,
     _poolWorldMap,
     _poolWretchedCamel,
     _poolYoshimaru,
