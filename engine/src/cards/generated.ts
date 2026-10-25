@@ -1283,6 +1283,7 @@ import _poolBattershieldWarrior from "./pool/battershield-warrior.js";
 import _poolBatterskull from "./pool/batterskull.js";
 import _poolBatteryBearer from "./pool/battery-bearer.js";
 import _poolBattleAtTheBridge from "./pool/battle-at-the-bridge.js";
+import _poolBattleCry from "./pool/battle-cry.js";
 import _poolBattleDisplay from "./pool/battle-display.js";
 import _poolBattleFrenzy from "./pool/battle-frenzy.js";
 import _poolBattleHurda from "./pool/battle-hurda.js";
@@ -10312,6 +10313,7 @@ import _poolMotivatedPony from "./pool/motivated-pony.js";
 import _poolMountVelusManticore from "./pool/mount-velus-manticore.js";
 import _poolMountainBandit from "./pool/mountain-bandit.js";
 import _poolMountainGoat from "./pool/mountain-goat.js";
+import _poolMountainTitan from "./pool/mountain-titan.js";
 import _poolMountainValley from "./pool/mountain-valley.js";
 import _poolMountainYeti from "./pool/mountain-yeti.js";
 import _poolMountain from "./pool/mountain.js";
@@ -20322,6 +20324,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBatterskull,
   _poolBatteryBearer,
   _poolBattleAtTheBridge,
+  _poolBattleCry,
   _poolBattleDisplay,
   _poolBattleFrenzy,
   _poolBattleHurda,
@@ -29351,6 +29354,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMountVelusManticore,
   _poolMountainBandit,
   _poolMountainGoat,
+  _poolMountainTitan,
   _poolMountainValley,
   _poolMountainYeti,
   _poolMountain,
@@ -39374,6 +39378,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/batterskull": _poolBatterskull,
   "pool/battery-bearer": _poolBatteryBearer,
   "pool/battle-at-the-bridge": _poolBattleAtTheBridge,
+  "pool/battle-cry": _poolBattleCry,
   "pool/battle-display": _poolBattleDisplay,
   "pool/battle-frenzy": _poolBattleFrenzy,
   "pool/battle-hurda": _poolBattleHurda,
@@ -48403,6 +48408,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mount-velus-manticore": _poolMountVelusManticore,
   "pool/mountain-bandit": _poolMountainBandit,
   "pool/mountain-goat": _poolMountainGoat,
+  "pool/mountain-titan": _poolMountainTitan,
   "pool/mountain-valley": _poolMountainValley,
   "pool/mountain-yeti": _poolMountainYeti,
   "pool/mountain": _poolMountain,

@@ -187,6 +187,7 @@ import type {
   CastNowOptions,
   DamageFrom,
   DelayedNextSpell,
+  DelayedWhenever,
   EffectAmount,
   EffectSpec,
   ManaSplitAsk,
@@ -307,6 +308,7 @@ import type {
   ControlEffect,
   DelayedCastWatch,
   DelayedDamageWatch,
+  DelayedEventWatch,
   DelayedLeaveWatch,
   DelayedUnblockedWatch,
   DelayedTrigger,
@@ -18237,6 +18239,7 @@ export class Game {
     }
     if (event.type === "damage-dealt") this.fireDamageWatchers(event);
     if (event.type === "attacker-unblocked") this.fireUnblockedWatchers(event.attacker);
+    this.fireWheneverWatchers(event);
   }
 
   /** Has `object`'s `oncePerTurn` triggered ability `index` triggered yet
@@ -29728,7 +29731,8 @@ export class Game {
         }
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
-      | { readonly attacksUnblocked: ObjectId },
+      | { readonly attacksUnblocked: ObjectId }
+      | DelayedWhenever,
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -29741,8 +29745,11 @@ export class Game {
       | DelayedLeaveWatch
       | DelayedCastWatch
       | DelayedDamageWatch
-      | DelayedUnblockedWatch;
-    if (typeof at === "object" && "nextSpell" in at) {
+      | DelayedUnblockedWatch
+      | DelayedEventWatch;
+    if (typeof at === "object" && "whenever" in at) {
+      when = { whenever: at.whenever, turn: this.state.turn.number };
+    } else if (typeof at === "object" && "nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
         ...(at.orNextAbility !== undefined ? { orNextAbility: at.orNextAbility } : {}),
@@ -30027,6 +30034,43 @@ export class Game {
         lastKnownRefs: { triggerObject: stint },
         delayed: trigger,
       });
+    }
+  }
+
+  /**
+   * The "until end of turn, whenever …" delayed triggers `event` matches (see
+   * `DelayedEventWatch`): each fires each time, read as an ordinary trigger
+   * from its source with its own controller, and stays until the turn ends.
+   * A counted stack's combat damage is every token's (`sources`), as for a
+   * permanent's own trigger.
+   */
+  private fireWheneverWatchers(event: GameEvent): void {
+    if (this.state.delayedTriggers.length === 0) return;
+    for (const trigger of this.state.delayedTriggers) {
+      if (typeof trigger.at !== "object" || !("whenever" in trigger.at) || trigger.at.turn !== this.state.turn.number) {
+        continue;
+      }
+      const spec = trigger.at.whenever;
+      const source = this.state.objects[trigger.source];
+      if (source === undefined) continue;
+      const self = source.controller === trigger.controller ? source : { ...source, controller: trigger.controller };
+      if (!this.triggerMatches(spec, event, self)) continue;
+      const triggerObject = this.eventTriggerObject(spec, event);
+      const watched = triggerObject === undefined ? undefined : this.state.objects[triggerObject];
+      const times = event.type === "damage-dealt" ? (event.sources ?? 1) : 1;
+      for (let i = 0; i < times; i++) {
+        this.state.pendingTriggers.push({
+          sourceObjectId: trigger.source,
+          cardName: trigger.sourceName,
+          abilityIndex: 0,
+          controller: trigger.controller,
+          ...(triggerObject !== undefined && watched !== undefined
+            ? { triggerObject, lastKnownRefs: { triggerObject: watched.zoneChangeCount ?? 0 } }
+            : {}),
+          ...(event.type === "damage-dealt" ? { triggerValue: event.amount / times } : {}),
+          delayed: trigger,
+        });
+      }
     }
   }
 

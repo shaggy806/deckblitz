@@ -318,6 +318,7 @@ import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
 import _poolMorcantsLoyalist from "../pool/morcants-loyalist.js";
 import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
+import _poolMountainTitan from "../pool/mountain-titan.js";
 import _poolMourning from "../pool/mourning.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
@@ -928,6 +929,7 @@ const shard: CardShard = {
     _poolMorcantsLoyalist,
     _poolMordorTrebuchet,
     _poolMortivore,
+    _poolMountainTitan,
     _poolMourning,
     _poolNaliaDearnise,
     _poolNaturesLore,

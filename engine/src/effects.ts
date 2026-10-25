@@ -8,7 +8,7 @@
  * into the spell's or ability's chosen targets, or the literal `"source"`.
  */
 
-import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
+import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
   CardType,
@@ -229,6 +229,17 @@ export interface DelayedCombatDamage {
  * player the trigger player. */
 export interface DelayedUnblocked {
   readonly attacksUnblocked: EffectTargetRef;
+}
+
+/** "Until end of turn, whenever [event], [effect]" (rule 603.7c — Dovin,
+ * Grand Arbiter's +1, Mountain Titan, Battle Cry): a delayed triggered
+ * ability with a duration, waiting on `whenever` — an ordinary trigger, read
+ * from the creating ability's source with the delayed trigger's controller,
+ * so "a creature you control" is theirs. It belongs to no permanent, so
+ * nothing that happens to the source ends it; it fires each time and lapses
+ * with the turn. The event's object is its trigger object. */
+export interface DelayedWhenever {
+  readonly whenever: TriggerSpec;
 }
 
 /** How a `flicker` returns what it exiled — the non-target half of its
@@ -2410,7 +2421,13 @@ export type EffectSpec =
        * card** to the battlefield at the beginning of the next end step" —
        * Shirei, Shizo's Caretaker) is the delayed ability's too, unless the
        * spell it waits for is. */
-      readonly at: DelayedTriggerTiming | DelayedLeaves | DelayedNextSpell | DelayedCombatDamage | DelayedUnblocked;
+      readonly at:
+        | DelayedTriggerTiming
+        | DelayedLeaves
+        | DelayedNextSpell
+        | DelayedCombatDamage
+        | DelayedUnblocked
+        | DelayedWhenever;
       readonly effect: EffectSpec;
       /** Text for the log and the stack. */
       readonly text: string;
@@ -6015,7 +6032,8 @@ export interface EffectApi {
         }
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
-      | { readonly attacksUnblocked: ObjectId },
+      | { readonly attacksUnblocked: ObjectId }
+      | DelayedWhenever,
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
@@ -9195,6 +9213,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const watched = resolveEffectTarget(spec.at.dealsCombatDamage, ctx);
         if (watched?.kind !== "object") return;
         ctx.delayTrigger({ dealsCombatDamage: watched.object }, spec.effect, spec.text, controller);
+        return;
+      }
+      if (typeof spec.at === "object" && "whenever" in spec.at) {
+        ctx.delayTrigger({ whenever: spec.at.whenever }, spec.effect, spec.text, controller);
         return;
       }
       if (typeof spec.at === "object" && "attacksUnblocked" in spec.at) {

@@ -18,6 +18,9 @@ import {
   graveyard,
   lands,
   life,
+  loyalty,
+  counters,
+  pt,
   nextTurn,
   pickModes,
   pickTargets,
@@ -147,5 +150,49 @@ describe("a conditional grant's leaves-the-battlefield ability looks back in tim
     settle(game);
     expect(zone(game, cleric)).toBe("graveyard");
     expect(life(game, B)).toBe(19);
+  });
+});
+
+describe("\"until end of turn, whenever …\" is a delayed trigger (rule 603.7c)", () => {
+  it("Dovin, Grand Arbiter: +1 then two creatures connect — two loyalty counters", () => {
+    const { game, a } = table();
+    const dovin = spawn(game, "Dovin, Grand Arbiter");
+    const bears = spawn(game, "Grizzly Bears");
+    const lions = spawn(game, "Savannah Lions");
+    loyalty(game, dovin, 1);
+    expect(counters(game, dovin, "loyalty")).toBe(4);
+    attack(game, a, [bears, lions]);
+    expect(counters(game, dovin, "loyalty")).toBe(6);
+    expect(life(game, B)).toBe(16);
+    // It lapses with the turn.
+    nextTurn(game);
+    nextTurn(game);
+    attack(game, a, [bears]);
+    expect(counters(game, dovin, "loyalty")).toBe(6);
+  });
+
+  it("Mountain Titan: a counter for each black spell cast this turn, and none for another colour", () => {
+    const { game } = table();
+    const titan = spawn(game, "Mountain Titan");
+    lands(game, "Mountain", 3);
+    activate(game, titan, 0);
+    lands(game, "Swamp", 1);
+    cast(game, toHand(game, "Dark Ritual"));
+    expect(counters(game, titan)).toBe(1);
+    lands(game, "Mountain", 1);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)] });
+    expect(counters(game, titan)).toBe(1);
+  });
+
+  it("Battle Cry: each creature that blocks this turn gets +0/+1", () => {
+    const { game, a, b } = table();
+    const giant = spawn(game, "Hill Giant");
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Plains", 3);
+    cast(game, toHand(game, "Battle Cry"));
+    a.declareAttackersFn = () => [{ attacker: giant, defender: B }];
+    b.declareBlockersFn = () => [{ blocker: bears, attacker: giant }];
+    game.advanceUntil((s) => s.turn.step === "declare-blockers" && s.zones.shared.stack.length === 0 && s.pendingTriggers.length === 0 && s.awaiting === null);
+    expect(pt(game, bears)).toEqual({ power: 2, toughness: 3 });
   });
 });
