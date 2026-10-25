@@ -8,6 +8,7 @@ const DESTROY = {
   kind: "delayed-trigger",
   at: "end-of-combat",
   effect: { kind: "destroy", target: "source" },
+  text: "Destroy this creature.",
 } as const;
 
 export default defineCard({
