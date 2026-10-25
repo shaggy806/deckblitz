@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-445 already implemented / 55 missing
+446 already implemented / 54 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -376,7 +376,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  370  The Unbeatable Squirrel Girl                    7751 decks  {1}{G}{G}{G}     Legendary Creature — Squirrel Human Hero
 [x]  371  Ultima, Origin of Oblivion                      7742 decks  {5}              Legendary Creature — God
 [x]  372  Yuma, Proud Protector                           7725 decks  {5}{R}{G}{W}     Legendary Creature — Human Ranger
-[ ]  373  Lathiel, the Bounteous Dawn                     7718 decks  {2}{G}{W}        Legendary Creature — Unicorn
+[x]  373  Lathiel, the Bounteous Dawn                     7718 decks  {2}{G}{W}        Legendary Creature — Unicorn
 [x]  374  Extus, Oriq Overlord                            7704 decks  {1}{W}{B}{B}     Legendary Creature — Human Warlock // Sorcery
 [x]  375  Tifa, Martial Artist                            7684 decks  {1}{R}{G}{W}     Legendary Creature — Human Monk
 [x]  376  Kardur, Doomscourge                             7660 decks  {2}{B}{R}        Legendary Creature — Demon Berserker

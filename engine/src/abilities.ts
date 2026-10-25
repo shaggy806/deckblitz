@@ -1914,8 +1914,20 @@ export interface TriggeredAbility {
    * `any-number` group — share `total`, split as the ability is put on the
    * stack (rule 603.3d: the `choose-targets` answer's `division`, at least 1
    * each) and dealt by a `damage-divided` effect. A target gone illegal loses
-   * its share. */
-  readonly divided?: { readonly total: number; readonly slot: number; readonly of?: string };
+   * its share. The total, in place of `total`: `byTriggerValue`, the value
+   * it triggered with; `byTurnStat`, its controller's running total of that
+   * stat this turn as it goes on the stack (Lathiel's "that many" — the life
+   * gained this turn; more gained in response changes nothing, the ruling).
+   * `upTo`: "distribute **up to** that many", so the shares may add up to
+   * less. */
+  readonly divided?: {
+    readonly total: number;
+    readonly slot: number;
+    readonly of?: string;
+    readonly byTriggerValue?: true;
+    readonly byTurnStat?: TurnStat;
+    readonly upTo?: true;
+  };
   readonly text: string;
 }
 

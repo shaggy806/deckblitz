@@ -5312,3 +5312,7 @@ engine terms. A second thing to check is a second test.
 ### Circle of Protection: Red: a dead creature's trigger as the source
 - **Do:** Lightning Bolt Bob's Mudbutton Torchrunner. With its trigger on the stack, activate Circle of Protection: Red and click the trigger's entry on the stack.
 - **Expect:** The trigger's entry lights up and can be picked as the source. When it resolves, its 3 damage to you is prevented.
+
+### Lathiel, the Bounteous Dawn: up to that many counters
+- **Do:** Cast Chaplain's Blessing (gain 5 life). Pass to your end step. Target Grizzly Bears and Hill Giant, and give them 1 and 2.
+- **Expect:** The division step reads "Divide up to 5 +1/+1 counters", and Cast works at 3 of 5. The Bears get one counter and the Giant two.

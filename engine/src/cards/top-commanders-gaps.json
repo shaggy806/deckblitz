@@ -411,7 +411,8 @@
   "effect:delayed-trigger-rest-of-turn",
   "effect:look-and-choose-total-mana-value",
   "condition:during-your-combat-phase",
-  "effect:delayed-trigger-for-chosen-player"
+  "effect:delayed-trigger-for-chosen-player",
+  "effect:divide-among-targets"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

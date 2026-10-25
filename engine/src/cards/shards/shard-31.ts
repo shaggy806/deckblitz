@@ -318,6 +318,7 @@ import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
+import _poolLathielTheBounteousDawn from "../pool/lathiel-the-bounteous-dawn.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
@@ -931,6 +932,7 @@ const shard: CardShard = {
     _poolLagomosHandOfHatred,
     _poolLakeTownToymaker,
     _poolLanternOfTheLost,
+    _poolLathielTheBounteousDawn,
     _poolLeoninLightbringer,
     _poolLilianasSpoils,
     _poolLilysplashMentor,

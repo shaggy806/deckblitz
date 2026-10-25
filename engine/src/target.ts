@@ -507,7 +507,7 @@ export type ResolvedTargets = readonly (TargetRef | undefined)[];
  * divide nothing. A string says what's wrong.
  */
 export function divisionOf(
-  divided: { readonly total: number; readonly slot: number },
+  divided: { readonly total: number; readonly slot: number; readonly upTo?: true },
   targets: ResolvedTargets,
   chosen: readonly number[] | undefined,
 ): readonly number[] | string {
@@ -520,7 +520,10 @@ export function divisionOf(
   }
   if (chosen.length !== members) return `the division names ${chosen.length} shares for ${members} targets`;
   if (chosen.some((n) => !Number.isInteger(n) || n < 1)) return "each target must get at least 1";
-  if (chosen.reduce((a, b) => a + b, 0) !== divided.total) return `the division must total ${divided.total}`;
+  const sum = chosen.reduce((a, b) => a + b, 0);
+  if (divided.upTo === true ? sum > divided.total : sum !== divided.total) {
+    return divided.upTo === true ? `the division may total at most ${divided.total}` : `the division must total ${divided.total}`;
+  }
   return [...chosen];
 }
 

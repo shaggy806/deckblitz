@@ -2863,7 +2863,7 @@ export type AwaitingDecision =
        * `divided` group (rule 603.3d — Dragonlord Atarka): `total` shared by
        * the answer's targets from `slot` on (an index into the answer, not
        * the ability's own slots), split as the answer's `division` says. */
-      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string };
+      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly upTo?: true };
       /** What's being asked, when it isn't a copy's or a trigger's targets —
        * "Change the target of Lightning Bolt" (`GameState.pendingRetarget`). */
       readonly prompt?: string;

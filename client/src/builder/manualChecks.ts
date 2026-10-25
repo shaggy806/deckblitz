@@ -8154,4 +8154,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Mudbutton Torchrunner'] },
     }),
   ),
+  preset(
+    'Lathiel, the Bounteous Dawn: up to that many counters',
+    board({
+      you: { bf: ['Lathiel, the Bounteous Dawn', 'Grizzly Bears', 'Hill Giant', 'Plains'], hand: ["Chaplain's Blessing"] },
+    }),
+  ),
 ]

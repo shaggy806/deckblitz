@@ -8914,6 +8914,7 @@ import _poolLasydProwler from "./pool/lasyd-prowler.js";
 import _poolLatNamAdept from "./pool/lat-nam-adept.js";
 import _poolLatchSeeker from "./pool/latch-seeker.js";
 import _poolLateToDinner from "./pool/late-to-dinner.js";
+import _poolLathielTheBounteousDawn from "./pool/lathiel-the-bounteous-dawn.js";
 import _poolLathlissDragonQueen from "./pool/lathliss-dragon-queen.js";
 import _poolLathnuSailback from "./pool/lathnu-sailback.js";
 import _poolLathrilBladeOfTheElves from "./pool/lathril-blade-of-the-elves.js";
@@ -27959,6 +27960,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLatNamAdept,
   _poolLatchSeeker,
   _poolLateToDinner,
+  _poolLathielTheBounteousDawn,
   _poolLathlissDragonQueen,
   _poolLathnuSailback,
   _poolLathrilBladeOfTheElves,
@@ -47017,6 +47019,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lat-nam-adept": _poolLatNamAdept,
   "pool/latch-seeker": _poolLatchSeeker,
   "pool/late-to-dinner": _poolLateToDinner,
+  "pool/lathiel-the-bounteous-dawn": _poolLathielTheBounteousDawn,
   "pool/lathliss-dragon-queen": _poolLathlissDragonQueen,
   "pool/lathnu-sailback": _poolLathnuSailback,
   "pool/lathril-blade-of-the-elves": _poolLathrilBladeOfTheElves,

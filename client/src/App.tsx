@@ -403,7 +403,13 @@ interface Targeting {
   /** The cast or ability divides `total` among the targets from slot `slot`
    * on (rules 601.2d, 603.3d — Magma Opus, Dragonlord Atarka): asked once
    * they're chosen, before it goes out. */
-  readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true }
+  readonly divide?: {
+    readonly total: number
+    readonly slot: number
+    readonly of?: string
+    readonly x?: true
+    readonly upTo?: true
+  }
   /** How many of its cost's Phyrexian pips could be paid with 2 life each
    * (rule 107.4f): asked once the targets are in, before it goes out. */
   readonly phyrexianPips?: number
@@ -1583,6 +1589,8 @@ function Table({
     readonly total: number
     /** What's divided — damage, or "+1/+1 counters" (`divide.of`). */
     readonly of: string
+    /** "Distribute **up to** that many" (Lathiel): less than all may go out. */
+    readonly upTo?: boolean
     readonly targets: readonly TargetRef[]
     readonly shares: readonly number[]
     readonly resume: (division: readonly number[]) => void
@@ -2206,6 +2214,7 @@ function Table({
         setPendingDivision({
           total,
           of: t.divide.of ?? 'damage',
+          upTo: t.divide.upTo === true,
           targets: members,
           shares: members.map((_m, i) => base + (i < total % members.length ? 1 : 0)),
           // Back into this with the split: everything it needs is in the
@@ -4412,12 +4421,13 @@ function Table({
   } else if (mode === 'choose-division' && pendingDivision) {
     // At least 1 each, all of it (rule 601.2d): a share can grow only by what
     // the others can spare (game/divideShares.ts).
-    const { total, of: dividing, targets: divTargets, shares, resume } = pendingDivision
+    const { total, of: dividing, upTo, targets: divTargets, shares, resume } = pendingDivision
     const sum = shares.reduce((a, b) => a + b, 0)
     controls = (
       <div className="controls">
         <span>
-          Divide {total} {dividing} — {sum}/{total}
+          Divide {upTo ? 'up to ' : ''}
+          {total} {dividing} — {sum}/{total}
         </span>
         <span className="stack-counts">
           {divTargets.map((ref, i) => (
@@ -4437,7 +4447,7 @@ function Table({
         </span>
         <button
           type="button"
-          disabled={sum !== total}
+          disabled={upTo ? sum > total : sum !== total}
           onClick={() => {
             setPendingDivision(null)
             resume(shares)

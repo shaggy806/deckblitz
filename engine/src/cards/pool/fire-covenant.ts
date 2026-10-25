@@ -12,7 +12,7 @@ export default defineCard({
     "As an additional cost to cast this spell, pay X life.\n" +
     "Fire Covenant deals X damage divided as you choose among any number of target creatures.",
   additionalCost: { payLifeX: true },
-  targets: [{ kind: "any-number", of: "creature" }],
+  targets: [{ kind: "any-number", of: "creature", max: "x" }],
   divided: { total: 0, slot: 0, x: true },
   effect: { kind: "damage-divided", from: 0 },
 });

@@ -69,11 +69,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
   effect would ask of a player who has already left (800.4g–h: the object's controller picks
   another player, or the next in turn order makes it) — the engine skips that player instead.
-- **Dividing among targets: what's left.** A spell's and an ability's fixed "N damage divided as
-  you choose" are built (`divided`, the `division` answer), and so is a spell's X total
-  (`divided.x` — Fire Covenant). Not yet: "distribute **up to** that many counters" from a
-  trigger (Lathiel's total is its trigger's value, and fewer may be given). See
-  `neededCards-features.md`, "Unbounded targeting".
 - **A token copy isn't asked its "as this enters" choice** (a token copy of Clone, Morophon or
   Urza's Incubator), though the gaps list marks `bug:as-enters-choices-any-entry` built. See
   AUTHORING §15.

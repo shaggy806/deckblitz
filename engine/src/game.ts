@@ -20171,7 +20171,7 @@ export class Game {
       if (trigger.modes !== undefined) this.state.objects[abilityId].chosenModes = [...trigger.modes];
       // A divided amount with nothing to choose (rule 603.3d): all of it on
       // the one target, or nothing among none.
-      const dividedNow = (ability as TriggeredAbility).divided;
+      const dividedNow = this.triggerDivided(ability as TriggeredAbility, trigger.triggerValue, trigger.controller);
       if (dividedNow !== undefined) {
         const shares = spellDivision(dividedNow, targets, undefined);
         if (typeof shares !== "string") this.state.objects[abilityId].division = shares;
@@ -20203,7 +20203,7 @@ export class Game {
     };
     // A divided amount (rule 603.3d): its group is the last slot, so in the
     // answer it starts after the chooser's other slots.
-    const divided = (ability as TriggeredAbility).divided;
+    const divided = this.triggerDivided(ability as TriggeredAbility, trigger.triggerValue, trigger.controller);
     const group = anyNumberSlot(specs);
     const answerSlot = group < 0 ? -1 : slots.slice(0, group).filter((s) => "spec" in s).length;
     this.state.awaiting = {
@@ -20211,13 +20211,41 @@ export class Game {
       player: trigger.controller,
       source: trigger.sourceObjectId,
       cardName: trigger.cardName,
-      specs: chooserSlots.map((s) => s.spec),
+      // A divided total caps its group: at least 1 to each target (rule
+      // 601.2d) — Lathiel with 2 life gained takes two targets at most.
+      specs: chooserSlots.map((s, i) =>
+        divided !== undefined && i === answerSlot && typeof s.spec === "object" && s.spec.kind === "any-number"
+          ? { ...s.spec, max: Math.min(typeof s.spec.max === "number" ? s.spec.max : Infinity, divided.total) }
+          : s.spec,
+      ),
       options: chooserSlots.map((s) => [...s.options]),
       ...(divided !== undefined && answerSlot >= 0
-        ? { divide: { total: divided.total, slot: answerSlot, ...(divided.of !== undefined ? { of: divided.of } : {}) } }
+        ? {
+            divide: {
+              total: divided.total,
+              slot: answerSlot,
+              ...(divided.of !== undefined ? { of: divided.of } : {}),
+              ...(divided.upTo === true ? { upTo: true as const } : {}),
+            },
+          }
         : {}),
     };
     return "paused";
+  }
+
+  /** A triggered ability's `divided`, its total read: the value it
+   * triggered with for `byTriggerValue` (Lathiel's "that many"). */
+  private triggerDivided(
+    ability: TriggeredAbility,
+    triggerValue: number | undefined,
+    controller: PlayerId,
+  ): TriggeredAbility["divided"] {
+    const divided = ability.divided;
+    if (divided?.byTurnStat !== undefined) {
+      return { ...divided, total: turnStatOf(this.state, controller, divided.byTurnStat) };
+    }
+    if (divided?.byTriggerValue !== true) return divided;
+    return { ...divided, total: triggerValue ?? 0 };
   }
 
   /**

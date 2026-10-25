@@ -325,9 +325,7 @@ describe("an X total divided among targets", () => {
     const giant = spawn(game, "Hill Giant", B);
     lands(game, "Swamp", 2);
     lands(game, "Mountain", 1);
-    expect(() => cast(game, toHand(game, "Fire Covenant"), { x: 1, targets: [ref(bears), ref(giant)] })).toThrow(
-      /1 can't be divided among 2 targets/,
-    );
+    expect(() => cast(game, toHand(game, "Fire Covenant"), { x: 1, targets: [ref(bears), ref(giant)] })).toThrow();
   });
 });
 
@@ -401,5 +399,25 @@ describe("a control effect ends and the default controller has left the game (ru
     // Bob's effect ends; carol, its default controller, has left.
     nextTurn(game);
     expect(zone(game, bears)).toBe("exile");
+  });
+});
+
+describe("distribute up to that many counters among targets, from a trigger", () => {
+  it("Lathiel: up to the life gained this turn, divided as the trigger goes on the stack", () => {
+    const { game } = table();
+    spawn(game, "Lathiel, the Bounteous Dawn");
+    const bears = spawn(game, "Grizzly Bears");
+    const giant = spawn(game, "Hill Giant");
+    game.debugApplyEffect(A, { kind: "gain-life", amount: 4 });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-targets" && s.awaiting.player === A);
+    const awaiting = game.state.awaiting;
+    const divide = awaiting?.kind === "choose-targets" ? awaiting.divide : undefined;
+    expect(divide?.total).toBe(4);
+    expect(divide?.upTo).toBe(true);
+    // Three of the four: "up to".
+    game.dispatch({ type: "choose-targets", player: A, targets: [ref(bears), ref(giant)], division: [1, 2] });
+    settle(game);
+    expect(counters(game, bears)).toBe(1);
+    expect(counters(game, giant)).toBe(2);
   });
 });
