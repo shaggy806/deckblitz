@@ -226,6 +226,7 @@ import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
 import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
+import _poolHellionEruption from "../pool/hellion-eruption.js";
 import _poolHerdGnarr from "../pool/herd-gnarr.js";
 import _poolHeroOfGomaFada from "../pool/hero-of-goma-fada.js";
 import _poolHeroOfPrecinctOne from "../pool/hero-of-precinct-one.js";
@@ -604,6 +605,7 @@ import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
+import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
@@ -845,6 +847,7 @@ const shard: CardShard = {
     _poolHealerOfThePride,
     _poolHeapDoll,
     _poolHeartwoodTreefolk,
+    _poolHellionEruption,
     _poolHerdGnarr,
     _poolHeroOfGomaFada,
     _poolHeroOfPrecinctOne,
@@ -1223,6 +1226,7 @@ const shard: CardShard = {
     _poolYoungBlueDragon,
     _poolZephyrFalcon,
     _poolZofBloodbog,
+    _poolZulaportEnforcer,
   ],
   tokens: [
     _tokens55ElephantToken,

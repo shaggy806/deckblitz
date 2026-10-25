@@ -106,6 +106,7 @@ import _poolCombatThresher from "../pool/combat-thresher.js";
 import _poolCompanyCommander from "../pool/company-commander.js";
 import _poolCompelledDuel from "../pool/compelled-duel.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
+import _poolConqueringManticore from "../pool/conquering-manticore.js";
 import _poolConsecrate from "../pool/consecrate.js";
 import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
@@ -236,6 +237,7 @@ import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
 import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
+import _poolGigantomancer from "../pool/gigantomancer.js";
 import _poolGladeWatcher from "../pool/glade-watcher.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
@@ -524,6 +526,7 @@ import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSunstone from "../pool/sunstone.js";
 import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
+import _poolSurrealMemoir from "../pool/surreal-memoir.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
 import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
 import _poolSwordOfTheMeek from "../pool/sword-of-the-meek.js";
@@ -558,6 +561,7 @@ import _poolTrainedJackal from "../pool/trained-jackal.js";
 import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
 import _poolTreasureKeeper from "../pool/treasure-keeper.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
+import _poolTreefolkUmbra from "../pool/treefolk-umbra.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
 import _poolTroveWarden from "../pool/trove-warden.js";
@@ -736,6 +740,7 @@ const shard: CardShard = {
     _poolCompanyCommander,
     _poolCompelledDuel,
     _poolConiferStrider,
+    _poolConqueringManticore,
     _poolConsecrate,
     _poolConservatory,
     _poolConsultTheNecrosages,
@@ -866,6 +871,7 @@ const shard: CardShard = {
     _poolGhostsOfTheDamned,
     _poolGideonsCompany,
     _poolGiftOfTusks,
+    _poolGigantomancer,
     _poolGladeWatcher,
     _poolGliderStaff,
     _poolGlimpseTheCore,
@@ -1154,6 +1160,7 @@ const shard: CardShard = {
     _poolSunstone,
     _poolSurgicalSkullbomb,
     _poolSurrakarBanisher,
+    _poolSurrealMemoir,
     _poolSuspiciousShambler,
     _poolSwaggeringCorsair,
     _poolSwordOfTheMeek,
@@ -1188,6 +1195,7 @@ const shard: CardShard = {
     _poolTranceKujaFateDefied,
     _poolTreasureKeeper,
     _poolTreasureTrove,
+    _poolTreefolkUmbra,
     _poolTributaryVaulter,
     _poolTributeMage,
     _poolTroveWarden,

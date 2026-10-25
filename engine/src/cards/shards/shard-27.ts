@@ -634,6 +634,7 @@ import _tokensShrineToken from "../tokens/shrine-token.js";
 import _tokensSpiritWarriorToken from "../tokens/spirit-warrior-token.js";
 import _tokensVampireKnightToken from "../tokens/vampire-knight-token.js";
 import _tokensVarmintToken from "../tokens/varmint-token.js";
+import _tokensXXRedElementalToken from "../tokens/x-x-red-elemental-token.js";
 import _tokensZombieMutantToken from "../tokens/zombie-mutant-token.js";
 
 const shard: CardShard = {
@@ -1271,6 +1272,7 @@ const shard: CardShard = {
     _tokensSpiritWarriorToken,
     _tokensVampireKnightToken,
     _tokensVarmintToken,
+    _tokensXXRedElementalToken,
     _tokensZombieMutantToken,
   ],
 };

@@ -193,6 +193,7 @@ import _poolFoodComa from "../pool/food-coma.js";
 import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
 import _poolForceOfWill from "../pool/force-of-will.js";
+import _poolForkedBolt from "../pool/forked-bolt.js";
 import _poolForktailSweep from "../pool/forktail-sweep.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
 import _poolFoulWatcher from "../pool/foul-watcher.js";
@@ -307,6 +308,7 @@ import _poolKoboldsOfKherKeep from "../pool/kobolds-of-kher-keep.js";
 import _poolKolaghanSkirmisher from "../pool/kolaghan-skirmisher.js";
 import _poolKollTheForgemaster from "../pool/koll-the-forgemaster.js";
 import _poolKorBladewhirl from "../pool/kor-bladewhirl.js";
+import _poolKozileksPredator from "../pool/kozileks-predator.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
@@ -371,6 +373,7 @@ import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNighthaze from "../pool/nighthaze.js";
 import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
 import _poolNogiDracoZealot from "../pool/nogi-draco-zealot.js";
+import _poolNullChampion from "../pool/null-champion.js";
 import _poolNullElementalBlast from "../pool/null-elemental-blast.js";
 import _poolNutrientBlock from "../pool/nutrient-block.js";
 import _poolOakenform from "../pool/oakenform.js";
@@ -841,6 +844,7 @@ const shard: CardShard = {
     _poolFoodFight,
     _poolForatog,
     _poolForceOfWill,
+    _poolForkedBolt,
     _poolForktailSweep,
     _poolForsakenDrifters,
     _poolFoulWatcher,
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolKolaghanSkirmisher,
     _poolKollTheForgemaster,
     _poolKorBladewhirl,
+    _poolKozileksPredator,
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLegionConquistador,
@@ -1019,6 +1024,7 @@ const shard: CardShard = {
     _poolNighthaze,
     _poolNivMizzetTheFiremind,
     _poolNogiDracoZealot,
+    _poolNullChampion,
     _poolNullElementalBlast,
     _poolNutrientBlock,
     _poolOakenform,

@@ -274,6 +274,7 @@ import _poolJubilation from "../pool/jubilation.js";
 import _poolJukaiMessenger from "../pool/jukai-messenger.js";
 import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
 import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
+import _poolKabiraVindicator from "../pool/kabira-vindicator.js";
 import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
 import _poolKeeperOfTheCadence from "../pool/keeper-of-the-cadence.js";
 import _poolKellanInquisitiveProdigy from "../pool/kellan-inquisitive-prodigy.js";
@@ -334,6 +335,7 @@ import _poolMountainTitan from "../pool/mountain-titan.js";
 import _poolMourning from "../pool/mourning.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
+import _poolNearDeathExperience from "../pool/near-death-experience.js";
 import _poolNessianHornbeetle from "../pool/nessian-hornbeetle.js";
 import _poolNettlecyst from "../pool/nettlecyst.js";
 import _poolNevaStalkedByNightmares from "../pool/neva-stalked-by-nightmares.js";
@@ -916,6 +918,7 @@ const shard: CardShard = {
     _poolJukaiMessenger,
     _poolJuniperOrderDruid,
     _poolKabiraCrossroads,
+    _poolKabiraVindicator,
     _poolKayasOnslaught,
     _poolKeeperOfTheCadence,
     _poolKellanInquisitiveProdigy,
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolMourning,
     _poolNaliaDearnise,
     _poolNaturesLore,
+    _poolNearDeathExperience,
     _poolNessianHornbeetle,
     _poolNettlecyst,
     _poolNevaStalkedByNightmares,

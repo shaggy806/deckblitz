@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Rise of the Eldrazi, whole** (batch 159, the middle walk, 2026-10-25): level up and umbra armor
+  built (`levelUp`/`levelBand`/`levelStatic`, the `umbra-armor` keyword, both taught to the
+  scaffolder). 102 authored by five `card-author` agents and the lead — Vengevine, Student of
+  Warfare, Bear Umbra, Ancient Stirrings, Estrid, the Masked, Drana, Kalastria Bloodchief,
+  Lighthouse Chronologist and 95 more, among them nine umbras, Estrid and two levelers earlier batches
+  had blocked; 34 blocked, none on any one feature.
 - **Commander 2014 and Khans of Tarkir, the rest of both sets** (batch 157): no feature built. 90
   authored by five `card-author` agents and the lead: Murderous Cut, Wingmate Roc, Nahiri, the
   Lithomancer, Sorin, Solemn Visitor, End Hostilities, See the Unwritten, Angel of the Dire Hour,

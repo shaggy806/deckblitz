@@ -248,6 +248,7 @@ import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
 import _poolHardEvidence from "../pool/hard-evidence.js";
 import _poolHardenedScales from "../pool/hardened-scales.js";
+import _poolHarmlessAssault from "../pool/harmless-assault.js";
 import _poolHarmonicSliver from "../pool/harmonic-sliver.js";
 import _poolHarriedDronesmith from "../pool/harried-dronesmith.js";
 import _poolHauntedFengraf from "../pool/haunted-fengraf.js";
@@ -900,6 +901,7 @@ const shard: CardShard = {
     _poolHarbinVanguardAviator,
     _poolHardEvidence,
     _poolHardenedScales,
+    _poolHarmlessAssault,
     _poolHarmonicSliver,
     _poolHarriedDronesmith,
     _poolHauntedFengraf,

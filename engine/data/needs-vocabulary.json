@@ -10149,6 +10149,30 @@
   "trigger:activates-this-ability": {
    "family": "trigger:combat-trigger-extensions",
    "example": "Herald of Anafenza: 'Whenever you activate this creature's outlast ability' — activates-ability can't be narrowed to the source's own ability."
+  },
+  "filter:has-level-up": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Venerated Teacher: 'each creature you control with level up' — no filter clause matches a permanent with the level up ability (levelUp() adds no keyword)."
+  },
+  "decision:umbra-armor-choose-aura": {
+   "family": "decision:choose-permanent",
+   "example": "Umbra Mystic: 'Auras you control have umbra armor' — with several umbras on one creature its controller chooses which is destroyed (616.1); Game.umbraArmorInstead picks the least mana value."
+  },
+  "effect:prevent-all-combat-damage-except-source": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "Haze Frog: 'Prevent all combat damage that other creatures would deal this turn' — prevent-all-combat-damage's filter can't leave out the source."
+  },
+  "static:grant-pt-equal-attached-mana-value": {
+   "family": "static:pt-per-amount",
+   "example": "Hedron Matrix: 'Equipped creature gets +X/+X, where X is its mana value' — no amount reads the equipped creature's own mana value."
+  },
+  "effect:chosen-hand-card-shuffle-into-library": {
+   "family": "effect:choices-by-other-players",
+   "example": "Perish the Thought: 'You choose a card from it. That player shuffles that card into their library' — discard-chosen has no destination but the graveyard."
+  },
+  "effect:look-at-top-of-target-players-library": {
+   "family": "effect:target-spec-additions",
+   "example": "Merfolk Observer: 'look at the top card of target player's library' — no private look at another player's library top."
   }
  }
 }

@@ -28,6 +28,7 @@ import _poolAncestralMask from "../pool/ancestral-mask.js";
 import _poolAncestralVision from "../pool/ancestral-vision.js";
 import _poolAnchovyBananaPizza from "../pool/anchovy-banana-pizza.js";
 import _poolAncientAnimus from "../pool/ancient-animus.js";
+import _poolAncientStirrings from "../pool/ancient-stirrings.js";
 import _poolAngelicFieldMarshal from "../pool/angelic-field-marshal.js";
 import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
@@ -169,6 +170,7 @@ import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
 import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
 import _poolEnchantresssPresence from "../pool/enchantresss-presence.js";
+import _poolEnclaveCryptologist from "../pool/enclave-cryptologist.js";
 import _poolEngulfingEruption from "../pool/engulfing-eruption.js";
 import _poolEnlightenedAscetic from "../pool/enlightened-ascetic.js";
 import _poolEnterTheUnknown from "../pool/enter-the-unknown.js";
@@ -300,6 +302,7 @@ import _poolLoamLarva from "../pool/loam-larva.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
+import _poolLustForWar from "../pool/lust-for-war.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
 import _poolMageHuntersOnslaught from "../pool/mage-hunters-onslaught.js";
 import _poolMagicMissile from "../pool/magic-missile.js";
@@ -677,6 +680,7 @@ const shard: CardShard = {
     _poolAncestralVision,
     _poolAnchovyBananaPizza,
     _poolAncientAnimus,
+    _poolAncientStirrings,
     _poolAngelicFieldMarshal,
     _poolAngelicObserver,
     _poolAniktheaHandOfErebos,
@@ -818,6 +822,7 @@ const shard: CardShard = {
     _poolElvishPiper,
     _poolEmberEyeWolf,
     _poolEnchantresssPresence,
+    _poolEnclaveCryptologist,
     _poolEngulfingEruption,
     _poolEnlightenedAscetic,
     _poolEnterTheUnknown,
@@ -949,6 +954,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
+    _poolLustForWar,
     _poolLuxurySuite,
     _poolMageHuntersOnslaught,
     _poolMagicMissile,

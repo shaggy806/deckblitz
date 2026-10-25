@@ -161,6 +161,7 @@ import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
 import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
 import _poolDragonsHoard from "../pool/dragons-hoard.js";
 import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
+import _poolDranaKalastriaBloodchief from "../pool/drana-kalastria-bloodchief.js";
 import _poolDraugrsHelm from "../pool/draugrs-helm.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
@@ -360,6 +361,7 @@ import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
+import _poolNestInvader from "../pool/nest-invader.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
 import _poolNinjaOfTheNewMoon from "../pool/ninja-of-the-new-moon.js";
@@ -487,6 +489,7 @@ import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
 import _poolSoulRead from "../pool/soul-read.js";
+import _poolSpawningBreath from "../pool/spawning-breath.js";
 import _poolSpectralLynx from "../pool/spectral-lynx.js";
 import _poolSpidersilkNet from "../pool/spidersilk-net.js";
 import _poolSpikeJester from "../pool/spike-jester.js";
@@ -511,6 +514,7 @@ import _poolSultaiFlayer from "../pool/sultai-flayer.js";
 import _poolSummonEsperRamuh from "../pool/summon-esper-ramuh.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSunpearlKirin from "../pool/sunpearl-kirin.js";
+import _poolSurrakarSpellblade from "../pool/surrakar-spellblade.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
 import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
 import _poolSvyelunitePriest from "../pool/svyelunite-priest.js";
@@ -775,6 +779,7 @@ const shard: CardShard = {
     _poolDragonbornLooter,
     _poolDragonsHoard,
     _poolDragonstormGlobe,
+    _poolDranaKalastriaBloodchief,
     _poolDraugrsHelm,
     _poolDreadReaper,
     _poolDrogskolReinforcements,
@@ -974,6 +979,7 @@ const shard: CardShard = {
     _poolNarsetsReversal,
     _poolNavigatorsRuin,
     _poolNeckSnap,
+    _poolNestInvader,
     _poolNicolBolasTheArisen,
     _poolNightmareSower,
     _poolNinjaOfTheNewMoon,
@@ -1101,6 +1107,7 @@ const shard: CardShard = {
     _poolSongOfTotentanz,
     _poolSorinTheMirthless,
     _poolSoulRead,
+    _poolSpawningBreath,
     _poolSpectralLynx,
     _poolSpidersilkNet,
     _poolSpikeJester,
@@ -1125,6 +1132,7 @@ const shard: CardShard = {
     _poolSummonEsperRamuh,
     _poolSunmanePegasus,
     _poolSunpearlKirin,
+    _poolSurrakarSpellblade,
     _poolSurtlandFrostpyre,
     _poolSvellaIceShaper,
     _poolSvyelunitePriest,

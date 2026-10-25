@@ -48,6 +48,7 @@ import _poolBalothPrime from "../pool/baloth-prime.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBasriDevotedPaladin from "../pool/basri-devoted-paladin.js";
+import _poolBattleRattleShaman from "../pool/battle-rattle-shaman.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBelligerentRegisaur from "../pool/belligerent-regisaur.js";
@@ -77,6 +78,7 @@ import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
+import _poolBrimstoneMage from "../pool/brimstone-mage.js";
 import _poolBrimstoneVandal from "../pool/brimstone-vandal.js";
 import _poolBroodbirthViper from "../pool/broodbirth-viper.js";
 import _poolBruvacTheGrandiloquent from "../pool/bruvac-the-grandiloquent.js";
@@ -157,6 +159,7 @@ import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
+import _poolDomestication from "../pool/domestication.js";
 import _poolDomriCitySmasher from "../pool/domri-city-smasher.js";
 import _poolDomrisNodorog from "../pool/domris-nodorog.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
@@ -243,6 +246,7 @@ import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
+import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -393,6 +397,7 @@ import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
 import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRadjanSpirit from "../pool/radjan-spirit.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
+import _poolRageNimbus from "../pool/rage-nimbus.js";
 import _poolRaggadraggaGoregutsBoss from "../pool/raggadragga-goreguts-boss.js";
 import _poolRagingGoblin from "../pool/raging-goblin.js";
 import _poolRainOfThorns from "../pool/rain-of-thorns.js";
@@ -672,6 +677,7 @@ const shard: CardShard = {
     _poolBantBattlemage,
     _poolBaralsExpertise,
     _poolBasriDevotedPaladin,
+    _poolBattleRattleShaman,
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
     _poolBelligerentRegisaur,
@@ -701,6 +707,7 @@ const shard: CardShard = {
     _poolBottomlessPit,
     _poolBountifulPromenade,
     _poolBrazenUpstart,
+    _poolBrimstoneMage,
     _poolBrimstoneVandal,
     _poolBroodbirthViper,
     _poolBruvacTheGrandiloquent,
@@ -781,6 +788,7 @@ const shard: CardShard = {
     _poolDivineSmite,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
+    _poolDomestication,
     _poolDomriCitySmasher,
     _poolDomrisNodorog,
     _poolDoomsTimePlatform,
@@ -867,6 +875,7 @@ const shard: CardShard = {
     _poolGuacMarshmallowPizza,
     _poolGuardDuty,
     _poolGuidelightOptimizer,
+    _poolGuulDrazAssassin,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,
@@ -1017,6 +1026,7 @@ const shard: CardShard = {
     _poolRadiantStrike,
     _poolRadjanSpirit,
     _poolRaffinesInformant,
+    _poolRageNimbus,
     _poolRaggadraggaGoregutsBoss,
     _poolRagingGoblin,
     _poolRainOfThorns,

@@ -113,7 +113,9 @@ import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
 import _poolConstableOfTheRealm from "../pool/constable-of-the-realm.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
+import _poolConsumingVapors from "../pool/consuming-vapors.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
+import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
 import _poolCrackInTime from "../pool/crack-in-time.js";
 import _poolCraftyPathmage from "../pool/crafty-pathmage.js";
@@ -283,6 +285,7 @@ import _poolJununEfreet from "../pool/junun-efreet.js";
 import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
+import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
@@ -746,7 +749,9 @@ const shard: CardShard = {
     _poolConductorOfCacophony,
     _poolConstableOfTheRealm,
     _poolConstrictorSage,
+    _poolConsumingVapors,
     _poolContaminatedLandscape,
+    _poolCorpsehatch,
     _poolCovetedPeacock,
     _poolCrackInTime,
     _poolCraftyPathmage,
@@ -916,6 +921,7 @@ const shard: CardShard = {
     _poolKaleidostone,
     _poolKarametrasFavor,
     _poolKataraTheFearless,
+    _poolKazanduTuskcaller,
     _poolKazuulsFury,
     _poolKheruBloodsucker,
     _poolKinTreeWarden,

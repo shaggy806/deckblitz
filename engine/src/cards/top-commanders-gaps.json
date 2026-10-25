@@ -424,7 +424,9 @@
   "effect:damage-to-trigger-object",
   "keyword:renown",
   "keyword:dash",
-  "keyword:bolster"
+  "keyword:bolster",
+  "keyword:level-up",
+  "keyword:umbra-armor"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

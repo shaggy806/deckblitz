@@ -392,6 +392,7 @@ import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolNimbusChampion from "../pool/nimbus-champion.js";
 import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
+import _poolNomadsAssembly from "../pool/nomads-assembly.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
@@ -509,6 +510,7 @@ import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
 import _poolSpectralHuntCaller from "../pool/spectral-hunt-caller.js";
 import _poolSpellbindingSoprano from "../pool/spellbinding-soprano.js";
+import _poolSphinxBoneWand from "../pool/sphinx-bone-wand.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
@@ -582,6 +584,7 @@ import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
+import _poolVentSentinel from "../pool/vent-sentinel.js";
 import _poolVermiculos from "../pool/vermiculos.js";
 import _poolVialOfPoison from "../pool/vial-of-poison.js";
 import _poolVibrantCityscape from "../pool/vibrant-cityscape.js";
@@ -1025,6 +1028,7 @@ const shard: CardShard = {
     _poolNimbusChampion,
     _poolNishobaBrawler,
     _poolNobody,
+    _poolNomadsAssembly,
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
@@ -1142,6 +1146,7 @@ const shard: CardShard = {
     _poolSpawningKraken,
     _poolSpectralHuntCaller,
     _poolSpellbindingSoprano,
+    _poolSphinxBoneWand,
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,
@@ -1215,6 +1220,7 @@ const shard: CardShard = {
     _poolVault75MiddleSchool,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
+    _poolVentSentinel,
     _poolVermiculos,
     _poolVialOfPoison,
     _poolVibrantCityscape,

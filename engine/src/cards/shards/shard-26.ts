@@ -27,6 +27,7 @@ import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
 import _poolAncestralKatana from "../pool/ancestral-katana.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
+import _poolAngelheartVial from "../pool/angelheart-vial.js";
 import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
@@ -159,6 +160,7 @@ import _poolEntrancingLyre from "../pool/entrancing-lyre.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
+import _poolEstridTheMasked from "../pool/estrid-the-masked.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExpeditionRaptor from "../pool/expedition-raptor.js";
@@ -573,6 +575,7 @@ import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVaultPlunderer from "../pool/vault-plunderer.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
+import _poolVengevine from "../pool/vengevine.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
 import _poolViashinoWarrior from "../pool/viashino-warrior.js";
@@ -653,6 +656,7 @@ const shard: CardShard = {
     _poolAncestralKatana,
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
+    _poolAngelheartVial,
     _poolAnointerOfValor,
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
@@ -785,6 +789,7 @@ const shard: CardShard = {
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
     _poolErrandRiderOfGondor,
+    _poolEstridTheMasked,
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
     _poolExpeditionRaptor,
@@ -1199,6 +1204,7 @@ const shard: CardShard = {
     _poolVaultOfTheArchangel,
     _poolVaultPlunderer,
     _poolVedalkenMesmerist,
+    _poolVengevine,
     _poolVenomousWords,
     _poolViashinoSlasher,
     _poolViashinoWarrior,

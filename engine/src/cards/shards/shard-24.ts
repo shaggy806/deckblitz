@@ -268,6 +268,7 @@ import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
 import _poolIntrepidProvisioner from "../pool/intrepid-provisioner.js";
+import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
 import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
@@ -376,6 +377,7 @@ import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
 import _poolPuncturingBlow from "../pool/puncturing-blow.js";
+import _poolPuncturingLight from "../pool/puncturing-light.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
@@ -388,6 +390,7 @@ import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRankRat from "../pool/rank-rat.js";
+import _poolRapaciousOne from "../pool/rapacious-one.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
 import _poolRedcapRaiders from "../pool/redcap-raiders.js";
 import _poolRedemptionArc from "../pool/redemption-arc.js";
@@ -471,6 +474,7 @@ import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
+import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpoilsOfBlood from "../pool/spoils-of-blood.js";
@@ -891,6 +895,7 @@ const shard: CardShard = {
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
     _poolIntrepidProvisioner,
+    _poolIrresistiblePrey,
     _poolJoriEnRuinDiver,
     _poolJunkWinder,
     _poolJwarIsleRefuge,
@@ -999,6 +1004,7 @@ const shard: CardShard = {
     _poolProwlingFelidar,
     _poolPullFromTheGrave,
     _poolPuncturingBlow,
+    _poolPuncturingLight,
     _poolPurifyTheGrave,
     _poolPyrogoyf,
     _poolPyrrhicBlast,
@@ -1011,6 +1017,7 @@ const shard: CardShard = {
     _poolRakdosLordOfRiots,
     _poolRampagingFerocidon,
     _poolRankRat,
+    _poolRapaciousOne,
     _poolRecklessDetective,
     _poolRedcapRaiders,
     _poolRedemptionArc,
@@ -1094,6 +1101,7 @@ const shard: CardShard = {
     _poolSolsticeZealot,
     _poolSoothsayerAdept,
     _poolSorinsVengeance,
+    _poolSphinxOfMagosi,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
     _poolSpoilsOfBlood,

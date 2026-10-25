@@ -32,6 +32,7 @@ import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
+import _poolAuraFinesse from "../pool/aura-finesse.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
 import _poolAustereCommand from "../pool/austere-command.js";
 import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
@@ -210,12 +211,14 @@ import _poolGoldmaneGriffin from "../pool/goldmane-griffin.js";
 import _poolGollumsBite from "../pool/gollums-bite.js";
 import _poolGothmogMorgulLieutenant from "../pool/gothmog-morgul-lieutenant.js";
 import _poolGravityNegator from "../pool/gravity-negator.js";
+import _poolGravityWell from "../pool/gravity-well.js";
 import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
 import _poolGryffRider from "../pool/gryff-rider.js";
 import _poolGylwainCastingDirector from "../pool/gylwain-casting-director.js";
+import _poolHadaSpyPatrol from "../pool/hada-spy-patrol.js";
 import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
 import _poolHalfElfMonk from "../pool/half-elf-monk.js";
 import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
@@ -265,6 +268,7 @@ import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
 import _poolKabutoMoth from "../pool/kabuto-moth.js";
 import _poolKappaCannoneer from "../pool/kappa-cannoneer.js";
+import _poolKarganDragonlord from "../pool/kargan-dragonlord.js";
 import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
 import _poolKarma from "../pool/karma.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
@@ -355,6 +359,7 @@ import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNutCollector from "../pool/nut-collector.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOcelotPride from "../pool/ocelot-pride.js";
+import _poolOctopusUmbra from "../pool/octopus-umbra.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
@@ -687,6 +692,7 @@ const shard: CardShard = {
     _poolAspiringChampion,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
+    _poolAuraFinesse,
     _poolAuriokChampion,
     _poolAustereCommand,
     _poolAvidReclaimer,
@@ -865,12 +871,14 @@ const shard: CardShard = {
     _poolGollumsBite,
     _poolGothmogMorgulLieutenant,
     _poolGravityNegator,
+    _poolGravityWell,
     _poolGreaterBasilisk,
     _poolGreenhouseRicketyGazebo,
     _poolGrindingStation,
     _poolGrizzlyBears,
     _poolGryffRider,
     _poolGylwainCastingDirector,
+    _poolHadaSpyPatrol,
     _poolHaldirLorienLieutenant,
     _poolHalfElfMonk,
     _poolHaliyaAscendantCadet,
@@ -920,6 +928,7 @@ const shard: CardShard = {
     _poolKabiraPlateau,
     _poolKabutoMoth,
     _poolKappaCannoneer,
+    _poolKarganDragonlord,
     _poolKariZevSkyshipRaider,
     _poolKarma,
     _poolKarvanistaLoyalLupari,
@@ -1010,6 +1019,7 @@ const shard: CardShard = {
     _poolNutCollector,
     _poolNyleaKeenEyed,
     _poolOcelotPride,
+    _poolOctopusUmbra,
     _poolOldGrowthEducator,
     _poolOldOneEye,
     _poolOnTheTrail,

@@ -85,6 +85,8 @@ import _poolBridgeworksBattle from "../pool/bridgeworks-battle.js";
 import _poolBrightbladeStoat from "../pool/brightblade-stoat.js";
 import _poolBrightclimbPathway from "../pool/brightclimb-pathway.js";
 import _poolBrightwoodTracker from "../pool/brightwood-tracker.js";
+import _poolBroodBirthing from "../pool/brood-birthing.js";
+import _poolBroodwarden from "../pool/broodwarden.js";
 import _poolBrotherhoodsEnd from "../pool/brotherhoods-end.js";
 import _poolBrownOuphe from "../pool/brown-ouphe.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
@@ -115,6 +117,7 @@ import _poolComparativeAnalysis from "../pool/comparative-analysis.js";
 import _poolConcertedDefense from "../pool/concerted-defense.js";
 import _poolConduitOfStorms from "../pool/conduit-of-storms.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
+import _poolConsumeTheMeek from "../pool/consume-the-meek.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
 import _poolCoordinatedManeuver from "../pool/coordinated-maneuver.js";
 import _poolCopperMyr from "../pool/copper-myr.js";
@@ -254,6 +257,7 @@ import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
 import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
+import _poolGuardGomazoa from "../pool/guard-gomazoa.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
 import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
@@ -329,6 +333,7 @@ import _poolLightningSpear from "../pool/lightning-spear.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
 import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
+import _poolLordOfShatterskullPass from "../pool/lord-of-shatterskull-pass.js";
 import _poolLostLeonin from "../pool/lost-leonin.js";
 import _poolLuckyClover from "../pool/lucky-clover.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
@@ -362,6 +367,7 @@ import _poolMonasteryMentor from "../pool/monastery-mentor.js";
 import _poolMooglesValor from "../pool/moogles-valor.js";
 import _poolMorningApparition from "../pool/morning-apparition.js";
 import _poolMoroii from "../pool/moroii.js";
+import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
@@ -589,6 +595,7 @@ import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedst
 import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThornThallid from "../pool/thorn-thallid.js";
+import _poolThoughtGorger from "../pool/thought-gorger.js";
 import _poolThoughtHarvester from "../pool/thought-harvester.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
 import _poolThrabenFoulbloods from "../pool/thraben-foulbloods.js";
@@ -774,6 +781,8 @@ const shard: CardShard = {
     _poolBrightbladeStoat,
     _poolBrightclimbPathway,
     _poolBrightwoodTracker,
+    _poolBroodBirthing,
+    _poolBroodwarden,
     _poolBrotherhoodsEnd,
     _poolBrownOuphe,
     _poolBullHippo,
@@ -804,6 +813,7 @@ const shard: CardShard = {
     _poolConcertedDefense,
     _poolConduitOfStorms,
     _poolConsulateDreadnought,
+    _poolConsumeTheMeek,
     _poolContagionClasp,
     _poolCoordinatedManeuver,
     _poolCopperMyr,
@@ -943,6 +953,7 @@ const shard: CardShard = {
     _poolGrimWanderer,
     _poolGrislyAnglerfish,
     _poolGrizzledOutrider,
+    _poolGuardGomazoa,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
     _poolHairStrungKoto,
@@ -1018,6 +1029,7 @@ const shard: CardShard = {
     _poolLochKorrigan,
     _poolLongGoodbye,
     _poolLongLakeNuisance,
+    _poolLordOfShatterskullPass,
     _poolLostLeonin,
     _poolLuckyClover,
     _poolLushOasis,
@@ -1051,6 +1063,7 @@ const shard: CardShard = {
     _poolMooglesValor,
     _poolMorningApparition,
     _poolMoroii,
+    _poolMorticianBeetle,
     _poolMoxJasper,
     _poolMysticMeditation,
     _poolMysticSnake,
@@ -1278,6 +1291,7 @@ const shard: CardShard = {
     _poolThiefsKnife,
     _poolThorOdinson,
     _poolThornThallid,
+    _poolThoughtGorger,
     _poolThoughtHarvester,
     _poolThoughtVessel,
     _poolThrabenFoulbloods,

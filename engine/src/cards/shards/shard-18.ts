@@ -137,6 +137,7 @@ import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
 import _poolEastfarthingFarmer from "../pool/eastfarthing-farmer.js";
+import _poolEchoMage from "../pool/echo-mage.js";
 import _poolEerieSoultender from "../pool/eerie-soultender.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
 import _poolEldraziRavager from "../pool/eldrazi-ravager.js";
@@ -772,6 +773,7 @@ const shard: CardShard = {
     _poolDutyBoundDead,
     _poolEagerCadet,
     _poolEastfarthingFarmer,
+    _poolEchoMage,
     _poolEerieSoultender,
     _poolElderGargaroth,
     _poolEldraziRavager,

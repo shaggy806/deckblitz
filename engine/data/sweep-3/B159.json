@@ -1,0 +1,961 @@
+{
+  "batch": "B159",
+  "status": "complete",
+  "ranks": "Rise of the Eldrazi (ROE, 2010-04-23): whole set, with level up and umbra armor built, and the umbras and levelers earlier batches blocked on them",
+  "authored": [
+    {
+      "name": "Ancient Stirrings",
+      "files": [
+        "engine/src/cards/pool/ancient-stirrings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Angelheart Vial",
+      "files": [
+        "engine/src/cards/pool/angelheart-vial.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aura Finesse",
+      "files": [
+        "engine/src/cards/pool/aura-finesse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aura Gnarlid",
+      "files": [
+        "engine/src/cards/pool/aura-gnarlid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Baneful Omen",
+      "files": [
+        "engine/src/cards/pool/baneful-omen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Battle-Rattle Shaman",
+      "files": [
+        "engine/src/cards/pool/battle-rattle-shaman.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bear Umbra",
+      "files": [
+        "engine/src/cards/pool/bear-umbra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Beastbreaker of Bala Ged",
+      "files": [
+        "engine/src/cards/pool/beastbreaker-of-bala-ged.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Boar Umbra",
+      "files": [
+        "engine/src/cards/pool/boar-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brimstone Mage",
+      "files": [
+        "engine/src/cards/pool/brimstone-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brood Birthing",
+      "files": [
+        "engine/src/cards/pool/brood-birthing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Broodwarden",
+      "files": [
+        "engine/src/cards/pool/broodwarden.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Caravan Escort",
+      "files": [
+        "engine/src/cards/pool/caravan-escort.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Conquering Manticore",
+      "files": [
+        "engine/src/cards/pool/conquering-manticore.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Consume the Meek",
+      "files": [
+        "engine/src/cards/pool/consume-the-meek.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Consuming Vapors",
+      "files": [
+        "engine/src/cards/pool/consuming-vapors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coralhelm Commander",
+      "files": [
+        "engine/src/cards/pool/coralhelm-commander.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corpsehatch",
+      "files": [
+        "engine/src/cards/pool/corpsehatch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crab Umbra",
+      "files": [
+        "engine/src/cards/pool/crab-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Demonic Appetite",
+      "files": [
+        "engine/src/cards/pool/demonic-appetite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Devastating Summons",
+      "files": [
+        "engine/src/cards/pool/devastating-summons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dog Umbra",
+      "files": [
+        "engine/src/cards/pool/dog-umbra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Domestication",
+      "files": [
+        "engine/src/cards/pool/domestication.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drake Umbra",
+      "files": [
+        "engine/src/cards/pool/drake-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Drana, Kalastria Bloodchief",
+      "files": [
+        "engine/src/cards/pool/drana-kalastria-bloodchief.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dread Drone",
+      "files": [
+        "engine/src/cards/pool/dread-drone.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Echo Mage",
+      "files": [
+        "engine/src/cards/pool/echo-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eel Umbra",
+      "files": [
+        "engine/src/cards/pool/eel-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eland Umbra",
+      "files": [
+        "engine/src/cards/pool/eland-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Enclave Cryptologist",
+      "files": [
+        "engine/src/cards/pool/enclave-cryptologist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Escaped Null",
+      "files": [
+        "engine/src/cards/pool/escaped-null.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Essence Feed",
+      "files": [
+        "engine/src/cards/pool/essence-feed.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Estrid, the Masked",
+      "files": [
+        "engine/src/cards/pool/estrid-the-masked.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Felidar Umbra",
+      "files": [
+        "engine/src/cards/pool/felidar-umbra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forked Bolt",
+      "files": [
+        "engine/src/cards/pool/forked-bolt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gigantomancer",
+      "files": [
+        "engine/src/cards/pool/gigantomancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Arsonist",
+      "files": [
+        "engine/src/cards/pool/goblin-arsonist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gravity Well",
+      "files": [
+        "engine/src/cards/pool/gravity-well.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guard Gomazoa",
+      "files": [
+        "engine/src/cards/pool/guard-gomazoa.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Guul Draz Assassin",
+      "files": [
+        "engine/src/cards/pool/guul-draz-assassin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hada Spy Patrol",
+      "files": [
+        "engine/src/cards/pool/hada-spy-patrol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Halimar Wavewatch",
+      "files": [
+        "engine/src/cards/pool/halimar-wavewatch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harmless Assault",
+      "files": [
+        "engine/src/cards/pool/harmless-assault.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hellion Eruption",
+      "files": [
+        "engine/src/cards/pool/hellion-eruption.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hexdrinker",
+      "files": [
+        "engine/src/cards/pool/hexdrinker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hyena Umbra",
+      "files": [
+        "engine/src/cards/pool/hyena-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ikiral Outrider",
+      "files": [
+        "engine/src/cards/pool/ikiral-outrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Irresistible Prey",
+      "files": [
+        "engine/src/cards/pool/irresistible-prey.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jaddi Lifestrider",
+      "files": [
+        "engine/src/cards/pool/jaddi-lifestrider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Joraga Treespeaker",
+      "files": [
+        "engine/src/cards/pool/joraga-treespeaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kabira Vindicator",
+      "files": [
+        "engine/src/cards/pool/kabira-vindicator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kargan Dragonlord",
+      "files": [
+        "engine/src/cards/pool/kargan-dragonlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kazandu Tuskcaller",
+      "files": [
+        "engine/src/cards/pool/kazandu-tuskcaller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Keening Stone",
+      "files": [
+        "engine/src/cards/pool/keening-stone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knight of Cliffhaven",
+      "files": [
+        "engine/src/cards/pool/knight-of-cliffhaven.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kozilek's Predator",
+      "files": [
+        "engine/src/cards/pool/kozileks-predator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lighthouse Chronologist",
+      "files": [
+        "engine/src/cards/pool/lighthouse-chronologist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lord of Shatterskull Pass",
+      "files": [
+        "engine/src/cards/pool/lord-of-shatterskull-pass.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Luminous Wake",
+      "files": [
+        "engine/src/cards/pool/luminous-wake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lust for War",
+      "files": [
+        "engine/src/cards/pool/lust-for-war.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mammoth Umbra",
+      "files": [
+        "engine/src/cards/pool/mammoth-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mortician Beetle",
+      "files": [
+        "engine/src/cards/pool/mortician-beetle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Narcolepsy",
+      "files": [
+        "engine/src/cards/pool/narcolepsy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Near-Death Experience",
+      "files": [
+        "engine/src/cards/pool/near-death-experience.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nest Invader",
+      "files": [
+        "engine/src/cards/pool/nest-invader.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nirkana Cutthroat",
+      "files": [
+        "engine/src/cards/pool/nirkana-cutthroat.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nomads' Assembly",
+      "files": [
+        "engine/src/cards/pool/nomads-assembly.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Null Champion",
+      "files": [
+        "engine/src/cards/pool/null-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Octopus Umbra",
+      "files": [
+        "engine/src/cards/pool/octopus-umbra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oust",
+      "files": [
+        "engine/src/cards/pool/oust.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pennon Blade",
+      "files": [
+        "engine/src/cards/pool/pennon-blade.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Phantasmal Abomination",
+      "files": [
+        "engine/src/cards/pool/phantasmal-abomination.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Puncturing Light",
+      "files": [
+        "engine/src/cards/pool/puncturing-light.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rage Nimbus",
+      "files": [
+        "engine/src/cards/pool/rage-nimbus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rapacious One",
+      "files": [
+        "engine/src/cards/pool/rapacious-one.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Renegade Doppelganger",
+      "files": [
+        "engine/src/cards/pool/renegade-doppelganger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Repel the Darkness",
+      "files": [
+        "engine/src/cards/pool/repel-the-darkness.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "See Beyond",
+      "files": [
+        "engine/src/cards/pool/see-beyond.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skywatcher Adept",
+      "files": [
+        "engine/src/cards/pool/skywatcher-adept.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Snake Umbra",
+      "files": [
+        "engine/src/cards/pool/snake-umbra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spawning Breath",
+      "files": [
+        "engine/src/cards/pool/spawning-breath.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sphinx-Bone Wand",
+      "files": [
+        "engine/src/cards/pool/sphinx-bone-wand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sphinx of Magosi",
+      "files": [
+        "engine/src/cards/pool/sphinx-of-magosi.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spider Umbra",
+      "files": [
+        "engine/src/cards/pool/spider-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Student of Warfare",
+      "files": [
+        "engine/src/cards/pool/student-of-warfare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Surrakar Spellblade",
+      "files": [
+        "engine/src/cards/pool/surrakar-spellblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Surreal Memoir",
+      "files": [
+        "engine/src/cards/pool/surreal-memoir.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thought Gorger",
+      "files": [
+        "engine/src/cards/pool/thought-gorger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Time of Heroes",
+      "files": [
+        "engine/src/cards/pool/time-of-heroes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Traitorous Instinct",
+      "files": [
+        "engine/src/cards/pool/traitorous-instinct.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Transcendent Master",
+      "files": [
+        "engine/src/cards/pool/transcendent-master.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Treefolk Umbra",
+      "files": [
+        "engine/src/cards/pool/treefolk-umbra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tuktuk the Explorer",
+      "files": [
+        "engine/src/cards/pool/tuktuk-the-explorer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vengevine",
+      "files": [
+        "engine/src/cards/pool/vengevine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vent Sentinel",
+      "files": [
+        "engine/src/cards/pool/vent-sentinel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Warmonger's Chariot",
+      "files": [
+        "engine/src/cards/pool/warmongers-chariot.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wrap in Flames",
+      "files": [
+        "engine/src/cards/pool/wrap-in-flames.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zulaport Enforcer",
+      "files": [
+        "engine/src/cards/pool/zulaport-enforcer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Arrogant Bloodlord",
+      "files": [
+        "engine/src/cards/pool/arrogant-bloodlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soulsurge Elemental",
+      "files": [
+        "engine/src/cards/pool/soulsurge-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Champion's Drake",
+      "files": [
+        "engine/src/cards/pool/champions-drake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grotag Siege-Runner",
+      "files": [
+        "engine/src/cards/pool/grotag-siege-runner.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Emerge Unscathed",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "\"Target creature you control gains protection from the color of your choice until end of turn\": no effect grants protection from a colour chosen as it resolves."
+    },
+    {
+      "name": "Disaster Radius",
+      "needs": [
+        "cost:reveal-card-as-additional-cost"
+      ],
+      "why": "\"As an additional cost to cast this spell, reveal a creature card from your hand\" with damage equal to its mana value: no reveal additional cost an amount can read."
+    },
+    {
+      "name": "Shared Discovery",
+      "needs": [
+        "cost:additional-cost-tap-permanents"
+      ],
+      "why": "\"As an additional cost to cast this spell, tap four untapped creatures you control\": a spell has no tap-creatures additional cost."
+    },
+    {
+      "name": "Valakut Fireboar",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "\"Whenever this creature attacks, switch its power and toughness until end of turn\": switching power and toughness (layer 7d) isn't modeled."
+    },
+    {
+      "name": "Tajuru Preserver",
+      "needs": [
+        "static:opponent-cant-cause-sacrifice"
+      ],
+      "why": "\"Spells and abilities your opponents control can't cause you to sacrifice permanents\": no such rule-changing static."
+    },
+    {
+      "name": "Hellcarver Demon",
+      "needs": [
+        "effect:sacrifice-all-except-source"
+      ],
+      "why": "\"Sacrifice all other permanents you control and discard your hand\": sacrifice-all has no exceptSource."
+    },
+    {
+      "name": "Cast Through Time",
+      "needs": [
+        "effect:grant-rebound-to-spell"
+      ],
+      "why": "\"Instant and sorcery spells you control have rebound\": grantsToSpells has no rebound field."
+    },
+    {
+      "name": "Mul Daya Channelers",
+      "needs": [
+        "static:players-play-with-library-top-revealed"
+      ],
+      "why": "\"Play with the top card of your library revealed\": no such static (what the top card is can be read, but the revealed-library rule isn't modeled)."
+    },
+    {
+      "name": "Dormant Gomazoa",
+      "needs": [
+        "trigger:player-becomes-target"
+      ],
+      "why": "\"Whenever you become the target of a spell, you may untap this creature\": becomes-target fires only for permanents."
+    },
+    {
+      "name": "Spawnsire of Ulamog",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "\"{20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs\": no outside-the-game zone."
+    },
+    {
+      "name": "Suffer the Past",
+      "needs": [
+        "target:cards-from-targeted-players-graveyard"
+      ],
+      "why": "\"Exile X target cards from target player's graveyard\": a graveyard card target can't name the player chosen in another target slot."
+    },
+    {
+      "name": "Explosive Revelation",
+      "needs": [
+        "effect:reveal-until-rest-bottom-any-order"
+      ],
+      "why": "\"…then put all cards revealed this way on the bottom of your library in any order\": reveal-until's rest goes in random order only, which would make the player's ordering choice for them."
+    },
+    {
+      "name": "Induce Despair",
+      "needs": [
+        "cost:reveal-card-as-additional-cost"
+      ],
+      "why": "\"As an additional cost to cast this spell, reveal a creature card from your hand\" with -X/-X where X is its mana value: no reveal additional cost an amount can read."
+    },
+    {
+      "name": "Venerated Teacher",
+      "needs": [
+        "filter:has-level-up"
+      ],
+      "why": "\"Put two level counters on each creature you control with level up\": no filter picks out a permanent with level up."
+    },
+    {
+      "name": "Umbra Mystic",
+      "needs": [
+        "decision:umbra-armor-choose-aura"
+      ],
+      "why": "\"Auras you control have umbra armor\": several Auras on one creature would then routinely each have umbra armor, and the engine picks which is destroyed rather than asking the creature's controller (616.1, the rulings; docs/engine-gaps.md)."
+    },
+    {
+      "name": "Recurring Insight",
+      "needs": [
+        "effect:cards-in-target-player-hand"
+      ],
+      "why": "\"Draw cards equal to the number of cards in target opponent's hand\": the cardsInHand amount takes a player scope, not a target slot."
+    },
+    {
+      "name": "Haze Frog",
+      "needs": [
+        "effect:prevent-all-combat-damage-except-source"
+      ],
+      "why": "\"Prevent all combat damage that other creatures would deal this turn\": prevent-all-combat-damage's filter can't leave out the Frog itself."
+    },
+    {
+      "name": "Reality Spasm",
+      "needs": [
+        "decision:any-number-targets-in-mode"
+      ],
+      "why": "\"Choose one — Tap X target permanents; or Untap X target permanents\": a castModal mode can't hold an any-number target group."
+    },
+    {
+      "name": "Khalni Hydra",
+      "needs": [
+        "cost:self-cost-reduction-colored"
+      ],
+      "why": "\"This spell costs {G} less to cast for each green creature you control\": selfCostReduction reduces generic mana only."
+    },
+    {
+      "name": "Hedron Matrix",
+      "needs": [
+        "static:grant-pt-equal-attached-mana-value"
+      ],
+      "why": "\"Equipped creature gets +X/+X, where X is its mana value\": no amount reads the equipped creature's own mana value."
+    },
+    {
+      "name": "Sarkhan the Mad",
+      "needs": [
+        "effect:each-creature-deals-power-damage-to-target"
+      ],
+      "why": "\"−4: Each Dragon creature you control deals damage equal to its power to target player or planeswalker\": no effect has each of several creatures deal its own power in damage."
+    },
+    {
+      "name": "Hedron-Field Purists",
+      "needs": [
+        "replacement:prevent-n-of-damage"
+      ],
+      "why": "\"If a source would deal damage to you or a creature you control, prevent 1 of that damage\": the would-deal-damage replacement prevents all of it or adds, never just N."
+    },
+    {
+      "name": "Deprive",
+      "needs": [
+        "cost:return-permanent-additional-cost"
+      ],
+      "why": "\"As an additional cost to cast this spell, return a land you control to its owner's hand\": additionalCost has no return-to-hand option."
+    },
+    {
+      "name": "Lightmine Field",
+      "needs": [
+        "effect:attack-batch-those-creatures"
+      ],
+      "why": "\"Whenever one or more creatures attack, this enchantment deals damage to each of those creatures equal to the number of attacking creatures\": the trigger can't name the declared attackers; filtering on attacking at resolution is wrong for a creature removed from combat or put onto the battlefield attacking (the rulings)."
+    },
+    {
+      "name": "Hand of Emrakul",
+      "needs": [
+        "cost:alt-cost-sacrifice"
+      ],
+      "why": "\"You may sacrifice four Eldrazi Spawn rather than pay this spell's mana cost\": alternativeCost has no sacrifice option."
+    },
+    {
+      "name": "Survival Cache",
+      "needs": [
+        "condition:you-more-life-than-an-opponent"
+      ],
+      "why": "\"Then if you have more life than an opponent, draw a card\": no condition compares your life with an opponent's."
+    },
+    {
+      "name": "Unified Will",
+      "needs": [
+        "condition:that-player-controls-more"
+      ],
+      "why": "\"Counter target spell if you control more creatures than that spell's controller\": no condition compares your creature count with the spell's controller's."
+    },
+    {
+      "name": "Contaminated Ground",
+      "needs": [
+        "static:land-type-setting"
+      ],
+      "why": "\"Enchanted land is a Swamp\": setting a land's basic type (rule 305.7, losing its other abilities) isn't modeled."
+    },
+    {
+      "name": "Curse of Wizardry",
+      "needs": [
+        "filter:chosen-color"
+      ],
+      "why": "\"Whenever a player casts a spell of the chosen color\": a cast trigger can't filter on the colour chosen as it entered."
+    },
+    {
+      "name": "Lay Bare",
+      "needs": [
+        "effect:look-at-target-player-hand"
+      ],
+      "why": "\"Counter target spell. Look at its controller's hand\": there's no plain look-at-hand effect for a player who isn't a target."
+    },
+    {
+      "name": "Reinforced Bulwark",
+      "needs": [
+        "effect:prevent-next-n-damage-to-you"
+      ],
+      "why": "\"Prevent the next 1 damage that would be dealt to you this turn\": prevent-damage takes only a target slot, not \"you\"."
+    },
+    {
+      "name": "Perish the Thought",
+      "needs": [
+        "effect:chosen-hand-card-shuffle-into-library"
+      ],
+      "why": "\"Target opponent reveals their hand. You choose a card from it. That player shuffles that card into their library\": discard-chosen only discards; no destination for the chosen card."
+    },
+    {
+      "name": "Merfolk Observer",
+      "needs": [
+        "effect:look-at-top-of-target-players-library"
+      ],
+      "why": "\"Look at the top card of target player's library\": reveal-top shows your own library or a target's owner's, and there's no private look at a target player's."
+    },
+    {
+      "name": "Living Destiny",
+      "needs": [
+        "cost:reveal-card-as-additional-cost"
+      ],
+      "why": "\"As an additional cost to cast this spell, reveal a creature card from your hand. You gain life equal to the revealed card's mana value\": no reveal additional cost an amount can read."
+    }
+  ]
+}

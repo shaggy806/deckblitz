@@ -272,6 +272,7 @@ import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
 import _poolItThatHeraldsTheEnd from "../pool/it-that-heralds-the-end.js";
 import _poolJaceArcaneStrategist from "../pool/jace-arcane-strategist.js";
 import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
+import _poolJaddiLifestrider from "../pool/jaddi-lifestrider.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
@@ -947,6 +948,7 @@ const shard: CardShard = {
     _poolItThatHeraldsTheEnd,
     _poolJaceArcaneStrategist,
     _poolJaceWielderOfMysteries,
+    _poolJaddiLifestrider,
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
     _poolJungleWeaver,

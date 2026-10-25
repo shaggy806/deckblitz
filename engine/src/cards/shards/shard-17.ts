@@ -141,6 +141,7 @@ import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
 import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
 import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
+import _poolDreadDrone from "../pool/dread-drone.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
 import _poolDrossProwler from "../pool/dross-prowler.js";
@@ -228,6 +229,7 @@ import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
+import _poolGrotagSiegeRunner from "../pool/grotag-siege-runner.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
@@ -774,6 +776,7 @@ const shard: CardShard = {
     _poolDovinsAutomaton,
     _poolDragonlordOjutai,
     _poolDraugrRecruiter,
+    _poolDreadDrone,
     _poolDrogskolReaver,
     _poolDromadPurebred,
     _poolDrossProwler,
@@ -861,6 +864,7 @@ const shard: CardShard = {
     _poolGrimBounty,
     _poolGrimReapersSprint,
     _poolGrizzlyGhoul,
+    _poolGrotagSiegeRunner,
     _poolGroundchuckDirtbag,
     _poolGroundskeeper,
     _poolGuardianOfTazeem,

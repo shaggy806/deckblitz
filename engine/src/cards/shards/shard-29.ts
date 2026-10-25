@@ -229,6 +229,7 @@ import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
+import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
@@ -558,6 +559,7 @@ import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
 import _poolToweringWaveMystic from "../pool/towering-wave-mystic.js";
+import _poolTraitorousInstinct from "../pool/traitorous-instinct.js";
 import _poolTrialOfStrength from "../pool/trial-of-strength.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTroveTracker from "../pool/trove-tracker.js";
@@ -876,6 +878,7 @@ const shard: CardShard = {
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
     _poolGnottvoldSlumbermound,
+    _poolGoblinArsonist,
     _poolGoblinOffensive,
     _poolGodPharaohsStatue,
     _poolGravelgillScoundrel,
@@ -1205,6 +1208,7 @@ const shard: CardShard = {
     _poolTormodTheDesecrator,
     _poolTorturePit,
     _poolToweringWaveMystic,
+    _poolTraitorousInstinct,
     _poolTrialOfStrength,
     _poolTriumphantAdventurer,
     _poolTroveTracker,

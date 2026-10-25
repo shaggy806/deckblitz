@@ -427,6 +427,7 @@ import _poolReconCraftTheta from "../pool/recon-craft-theta.js";
 import _poolRekiTheHistoryOfKamigawa from "../pool/reki-the-history-of-kamigawa.js";
 import _poolRelentlessPursuit from "../pool/relentless-pursuit.js";
 import _poolRelentlessRohirrim from "../pool/relentless-rohirrim.js";
+import _poolRenegadeDoppelganger from "../pool/renegade-doppelganger.js";
 import _poolRenegadesGetaway from "../pool/renegades-getaway.js";
 import _poolReptilianRecruiter from "../pool/reptilian-recruiter.js";
 import _poolResplendentAngel from "../pool/resplendent-angel.js";
@@ -1090,6 +1091,7 @@ const shard: CardShard = {
     _poolRekiTheHistoryOfKamigawa,
     _poolRelentlessPursuit,
     _poolRelentlessRohirrim,
+    _poolRenegadeDoppelganger,
     _poolRenegadesGetaway,
     _poolReptilianRecruiter,
     _poolResplendentAngel,

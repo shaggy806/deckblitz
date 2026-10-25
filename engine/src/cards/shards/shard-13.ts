@@ -378,6 +378,7 @@ import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPaladinElizabethTaggerdy from "../pool/paladin-elizabeth-taggerdy.js";
 import _poolPathOfPeril from "../pool/path-of-peril.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
+import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
 import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
@@ -407,6 +408,7 @@ import _poolRearingEmbermare from "../pool/rearing-embermare.js";
 import _poolReclusiveTaxidermist from "../pool/reclusive-taxidermist.js";
 import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
+import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
@@ -1015,6 +1017,7 @@ const shard: CardShard = {
     _poolPaladinElizabethTaggerdy,
     _poolPathOfPeril,
     _poolPersonalTutor,
+    _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
     _poolPhyrexianIronworks,
@@ -1044,6 +1047,7 @@ const shard: CardShard = {
     _poolReclusiveTaxidermist,
     _poolReconstruction,
     _poolRedGhostIntangibleGenius,
+    _poolRepelTheDarkness,
     _poolRepudiateReplicate,
     _poolResurgentBelief,
     _poolResurrectedCultist,

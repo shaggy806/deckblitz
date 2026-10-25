@@ -77,6 +77,7 @@ import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
 import _poolChainwhipCyclops from "../pool/chainwhip-cyclops.js";
+import _poolChampionsDrake from "../pool/champions-drake.js";
 import _poolChance from "../pool/chance.js";
 import _poolChargingBandits from "../pool/charging-bandits.js";
 import _poolCinderStorm from "../pool/cinder-storm.js";
@@ -306,6 +307,7 @@ import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
+import _poolLuminousWake from "../pool/luminous-wake.js";
 import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
 import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
 import _poolMakindiStampede from "../pool/makindi-stampede.js";
@@ -474,6 +476,7 @@ import _poolSolemnRecruit from "../pool/solemn-recruit.js";
 import _poolSoulFeast from "../pool/soul-feast.js";
 import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
 import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
+import _poolSoulsurgeElemental from "../pool/soulsurge-elemental.js";
 import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolCauldronsGift,
     _poolCetaDisciple,
     _poolChainwhipCyclops,
+    _poolChampionsDrake,
     _poolChance,
     _poolChargingBandits,
     _poolCinderStorm,
@@ -920,6 +924,7 @@ const shard: CardShard = {
     _poolLoreholdCampus,
     _poolLoxodonWayfarer,
     _poolLuminousBonds,
+    _poolLuminousWake,
     _poolMach1SwoopingScoundrel,
     _poolMakindiAeronaut,
     _poolMakindiStampede,
@@ -1088,6 +1093,7 @@ const shard: CardShard = {
     _poolSoulFeast,
     _poolSoulOfWindgrace,
     _poolSoulOfZendikar,
+    _poolSoulsurgeElemental,
     _poolSparktongueDragon,
     _poolSpectralRider,
     _poolSpellSwindle,

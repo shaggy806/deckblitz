@@ -133,6 +133,7 @@ import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
+import _poolDemonicAppetite from "../pool/demonic-appetite.js";
 import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
@@ -260,6 +261,7 @@ import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
 import _poolJadelightRanger from "../pool/jadelight-ranger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
+import _poolJoragaTreespeaker from "../pool/joraga-treespeaker.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleCreeper from "../pool/jungle-creeper.js";
@@ -288,6 +290,7 @@ import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
 import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
+import _poolLighthouseChronologist from "../pool/lighthouse-chronologist.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
 import _poolLilianasMastery from "../pool/lilianas-mastery.js";
 import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-marvel.js";
@@ -368,6 +371,7 @@ import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
 import _poolOrderOfTheMirror from "../pool/order-of-the-mirror.js";
 import _poolOtepecHuntmaster from "../pool/otepec-huntmaster.js";
 import _poolOtterballAntics from "../pool/otterball-antics.js";
+import _poolOust from "../pool/oust.js";
 import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
@@ -484,6 +488,7 @@ import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
 import _poolSmolderingEgg from "../pool/smoldering-egg.js";
+import _poolSnakeUmbra from "../pool/snake-umbra.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
 import _poolSolitaryCell from "../pool/solitary-cell.js";
 import _poolSoltariCrusader from "../pool/soltari-crusader.js";
@@ -773,6 +778,7 @@ const shard: CardShard = {
     _poolDeathsHeadBuzzard,
     _poolDelugeVirtuoso,
     _poolDemonOfWailingAgonies,
+    _poolDemonicAppetite,
     _poolDireStrainAnarchist,
     _poolDireWolfProwler,
     _poolDispellersCapsule,
@@ -900,6 +906,7 @@ const shard: CardShard = {
     _poolIsarethTheAwakener,
     _poolJadelightRanger,
     _poolJeskaiDevotee,
+    _poolJoragaTreespeaker,
     _poolJourneyToOblivion,
     _poolJukaiNaturalist,
     _poolJungleCreeper,
@@ -928,6 +935,7 @@ const shard: CardShard = {
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
     _poolLifecraftAwakening,
+    _poolLighthouseChronologist,
     _poolLightningJavelin,
     _poolLilianasMastery,
     _poolLivingBrainMechanicalMarvel,
@@ -1008,6 +1016,7 @@ const shard: CardShard = {
     _poolOrderOfTheMirror,
     _poolOtepecHuntmaster,
     _poolOtterballAntics,
+    _poolOust,
     _poolOutcasterGreenblade,
     _poolOvergrownEstate,
     _poolPainfulTruths,
@@ -1124,6 +1133,7 @@ const shard: CardShard = {
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
     _poolSmolderingEgg,
+    _poolSnakeUmbra,
     _poolSnowCoveredForest,
     _poolSolitaryCell,
     _poolSoltariCrusader,

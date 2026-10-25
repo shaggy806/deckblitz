@@ -173,7 +173,9 @@ import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
 import _poolEruptingDreadwolf from "../pool/erupting-dreadwolf.js";
+import _poolEscapedNull from "../pool/escaped-null.js";
 import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
+import _poolEssenceFeed from "../pool/essence-feed.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
@@ -261,6 +263,7 @@ import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
+import _poolHexdrinker from "../pool/hexdrinker.js";
 import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
@@ -564,6 +567,7 @@ import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
+import _poolTimeOfHeroes from "../pool/time-of-heroes.js";
 import _poolTomakulHonorGuard from "../pool/tomakul-honor-guard.js";
 import _poolTopanAscetic from "../pool/topan-ascetic.js";
 import _poolTowerDrake from "../pool/tower-drake.js";
@@ -824,7 +828,9 @@ const shard: CardShard = {
     _poolEnslavedDwarf,
     _poolErhnamDjinn,
     _poolEruptingDreadwolf,
+    _poolEscapedNull,
     _poolEsgarothGarrison,
+    _poolEssenceFeed,
     _poolEssenceknitScholar,
     _poolEternalOfHarshTruths,
     _poolEusocialEngineering,
@@ -912,6 +918,7 @@ const shard: CardShard = {
     _poolHawkeaterMoth,
     _poolHelmutZemoMastermind,
     _poolHeraldOfDromoka,
+    _poolHexdrinker,
     _poolHibernationSliver,
     _poolHiddenVolcano,
     _poolHieroglyphicIllumination,
@@ -1215,6 +1222,7 @@ const shard: CardShard = {
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
     _poolThrabenHeretic,
+    _poolTimeOfHeroes,
     _poolTomakulHonorGuard,
     _poolTopanAscetic,
     _poolTowerDrake,

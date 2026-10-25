@@ -42,6 +42,7 @@ import _poolAssaultOnOsgiliath from "../pool/assault-on-osgiliath.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
+import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
@@ -402,6 +403,7 @@ import _poolPapercraftDecoy from "../pool/papercraft-decoy.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
 import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
+import _poolPennonBlade from "../pool/pennon-blade.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
@@ -569,6 +571,7 @@ import _poolTraverseEternity from "../pool/traverse-eternity.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
 import _poolTrystansCommand from "../pool/trystans-command.js";
+import _poolTuktukTheExplorer from "../pool/tuktuk-the-explorer.js";
 import _poolTwentyToedToad from "../pool/twenty-toed-toad.js";
 import _poolTwinbladeSlasher from "../pool/twinblade-slasher.js";
 import _poolTwoHeadedHellkite from "../pool/two-headed-hellkite.js";
@@ -637,6 +640,7 @@ import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
 import _tokensSorcererRoleToken from "../tokens/sorcerer-role-token.js";
 import _tokensSpiritTokenPhantomInterference from "../tokens/spirit-token-phantom-interference.js";
+import _tokensTuktukTheReturned from "../tokens/tuktuk-the-returned.js";
 import _tokensWolfTokenKessigWolfrider from "../tokens/wolf-token-kessig-wolfrider.js";
 import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
@@ -682,6 +686,7 @@ const shard: CardShard = {
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
     _poolAudaciousThief,
+    _poolAuraGnarlid,
     _poolAvacynAngelOfHorror,
     _poolAvacynsPilgrim,
     _poolAvenReedstalker,
@@ -1042,6 +1047,7 @@ const shard: CardShard = {
     _poolPathmakerInitiate,
     _poolPeemaTrailblazer,
     _poolPeggyCarterSecretAgent,
+    _poolPennonBlade,
     _poolPermissionDenied,
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
@@ -1209,6 +1215,7 @@ const shard: CardShard = {
     _poolTraxosAcademyGuardian,
     _poolTriskelion,
     _poolTrystansCommand,
+    _poolTuktukTheExplorer,
     _poolTwentyToedToad,
     _poolTwinbladeSlasher,
     _poolTwoHeadedHellkite,
@@ -1279,6 +1286,7 @@ const shard: CardShard = {
     _tokensRobotVillainToken,
     _tokensSorcererRoleToken,
     _tokensSpiritTokenPhantomInterference,
+    _tokensTuktukTheReturned,
     _tokensWolfTokenKessigWolfrider,
     _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,

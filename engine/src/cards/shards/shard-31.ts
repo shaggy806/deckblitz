@@ -146,6 +146,7 @@ import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
 import _poolDesolateMire from "../pool/desolate-mire.js";
+import _poolDevastatingSummons from "../pool/devastating-summons.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
@@ -267,6 +268,7 @@ import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolGuildSummit from "../pool/guild-summit.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
 import _poolHalberdier from "../pool/halberdier.js";
+import _poolHalimarWavewatch from "../pool/halimar-wavewatch.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHallarTheFirefletcher from "../pool/hallar-the-firefletcher.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
@@ -613,6 +615,7 @@ import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
 import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
+import _poolWarmongersChariot from "../pool/warmongers-chariot.js";
 import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
@@ -801,6 +804,7 @@ const shard: CardShard = {
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
     _poolDesolateMire,
+    _poolDevastatingSummons,
     _poolDevouringSugarmaw,
     _poolDewdropCure,
     _poolDiabolicMachine,
@@ -922,6 +926,7 @@ const shard: CardShard = {
     _poolGuildSummit,
     _poolGysahlGreens,
     _poolHalberdier,
+    _poolHalimarWavewatch,
     _poolHallOfTagsin,
     _poolHallarTheFirefletcher,
     _poolHammerheadTyrant,
@@ -1268,6 +1273,7 @@ const shard: CardShard = {
     _poolWallOfMist,
     _poolWallOfWood,
     _poolWarmakerGunship,
+    _poolWarmongersChariot,
     _poolWaspOfTheBitterEnd,
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,

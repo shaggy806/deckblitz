@@ -26,6 +26,7 @@ import _poolArdenvalePaladin from "../pool/ardenvale-paladin.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolArmadilloCloak from "../pool/armadillo-cloak.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
+import _poolArrogantBloodlord from "../pool/arrogant-bloodlord.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
 import _poolArwensGift from "../pool/arwens-gift.js";
 import _poolAshmouthBlade from "../pool/ashmouth-blade.js";
@@ -147,6 +148,7 @@ import _poolDisenchant from "../pool/disenchant.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
 import _poolDivination from "../pool/divination.js";
 import _poolDjinnOfFoolsFall from "../pool/djinn-of-fools-fall.js";
+import _poolDogUmbra from "../pool/dog-umbra.js";
 import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
@@ -610,6 +612,7 @@ import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
+import _poolWrapInFlames from "../pool/wrap-in-flames.js";
 import _poolWrathOfMaritLage from "../pool/wrath-of-marit-lage.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
@@ -659,6 +662,7 @@ const shard: CardShard = {
     _poolArgivianRestoration,
     _poolArmadilloCloak,
     _poolArmoryPaladin,
+    _poolArrogantBloodlord,
     _poolArtifistAcumen,
     _poolArwensGift,
     _poolAshmouthBlade,
@@ -780,6 +784,7 @@ const shard: CardShard = {
     _poolDisorderInTheCourt,
     _poolDivination,
     _poolDjinnOfFoolsFall,
+    _poolDogUmbra,
     _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
     _poolDragonHatchling,
@@ -1243,6 +1248,7 @@ const shard: CardShard = {
     _poolWitheringCurse,
     _poolWolfbat,
     _poolWolfridersSaddle,
+    _poolWrapInFlames,
     _poolWrathOfMaritLage,
     _poolWreckingBeast,
     _poolWretchedDoll,

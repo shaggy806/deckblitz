@@ -38,6 +38,7 @@ import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
 import _poolBalustradeWurm from "../pool/balustrade-wurm.js";
+import _poolBanefulOmen from "../pool/baneful-omen.js";
 import _poolBanishToAnotherUniverse from "../pool/banish-to-another-universe.js";
 import _poolBarbedSpike from "../pool/barbed-spike.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
@@ -277,6 +278,7 @@ import _poolKarplusanGiant from "../pool/karplusan-giant.js";
 import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
+import _poolKeeningStone from "../pool/keening-stone.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKeldonStrikeTeam from "../pool/keldon-strike-team.js";
 import _poolKembasBanner from "../pool/kembas-banner.js";
@@ -451,6 +453,7 @@ import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScrollboost from "../pool/scrollboost.js";
+import _poolSeeBeyond from "../pool/see-beyond.js";
 import _poolSeeRed from "../pool/see-red.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
 import _poolSelesnyaEulogist from "../pool/selesnya-eulogist.js";
@@ -675,6 +678,7 @@ const shard: CardShard = {
     _poolAzoriusKnightArbiter,
     _poolBackInTown,
     _poolBalustradeWurm,
+    _poolBanefulOmen,
     _poolBanishToAnotherUniverse,
     _poolBarbedSpike,
     _poolBarkformHarvester,
@@ -914,6 +918,7 @@ const shard: CardShard = {
     _poolKavaronSkywarden,
     _poolKaylasReconstruction,
     _poolKeeningApparition,
+    _poolKeeningStone,
     _poolKeldonRaider,
     _poolKeldonStrikeTeam,
     _poolKembasBanner,
@@ -1088,6 +1093,7 @@ const shard: CardShard = {
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
     _poolScrollboost,
+    _poolSeeBeyond,
     _poolSeeRed,
     _poolSeizedFromSlumber,
     _poolSelesnyaEulogist,
