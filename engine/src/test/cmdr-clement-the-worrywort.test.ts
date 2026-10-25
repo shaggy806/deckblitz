@@ -174,8 +174,9 @@ describe("Clement, the Worrywort — the entering creature has left (rule 608.2h
     game.advanceUntil(atMain);
     const clement = spawn(game, CLEMENT);
     // A Clone entering as a Craw Wurm: mana value 6 while it's a Wurm.
-    const clone = enter(game, "Grizzly Bears");
+    const clone = game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
     game.state.objects[clone].copyOf = "Craw Wurm";
+    game.debugAnnounceEntry(clone);
     expect(targetOffer(game)).toContain(clement);
     choose(game, clement);
 

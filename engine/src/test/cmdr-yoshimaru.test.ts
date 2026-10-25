@@ -191,12 +191,10 @@ describe("Yoshimaru, Ever Faithful", () => {
     const yoshi = game.debugSpawn(YOSHIMARU, A, "battlefield", { summoningSick: false });
 
     const krenko = game.debugSpawn("Krenko, Mob Boss", A, "battlefield", { announceEntry: true });
-    // The trigger waits to be placed, then goes on the stack as an ability
-    // Yoshimaru is the source of — it isn't applied as the permanent enters.
-    expect(game.state.pendingTriggers).toHaveLength(1);
+    // The trigger goes on the stack as an ability Yoshimaru is the source
+    // of — it isn't applied as the permanent enters.
+    expect(game.state.zones.shared.stack).toHaveLength(1);
     expect(counters(game, yoshi)).toBe(0);
-
-    game.advanceUntil((s) => s.zones.shared.stack.length > 0);
     const trigger = game.state.objects[game.state.zones.shared.stack[0]];
     expect(trigger.kind).toBe("ability");
     expect(trigger.sourceObjectId).toBe(yoshi);

@@ -5629,9 +5629,22 @@ export class Game {
       // `announceEntry` opts in when the entry itself is what's under test.
       if (opts.announceEntry === true) {
         this.emit({ type: "permanent-entered-battlefield", object: id });
+        this.debugPlaceTriggers();
       }
     }
     return id;
+  }
+
+  /**
+   * **Debug only** — announce that permanent `id`, already on the
+   * battlefield (a silent {@link debugSpawn}), has entered, as
+   * `announceEntry` would have: for a test that changes it first (a copy
+   * effect set by hand) and then wants its entry seen.
+   */
+  debugAnnounceEntry(id: ObjectId): void {
+    if (this.state.objects[id]?.zone !== "battlefield") return;
+    this.emit({ type: "permanent-entered-battlefield", object: id });
+    this.debugPlaceTriggers();
   }
 
   /**
@@ -5682,7 +5695,28 @@ export class Game {
     if (this.state.awaiting === null && (this.state.pendingEnterAttacking?.length ?? 0) > 0) {
       this.promptNextEnterAttacking();
     }
-    if (!this.decisionOutstanding()) this.endResolutionIfDone();
+    if (!this.decisionOutstanding()) {
+      this.endResolutionIfDone();
+      this.debugPlaceTriggers();
+    }
+  }
+
+  /**
+   * After a debug entry or effect: what it triggered goes on the stack the
+   * next time a player would receive priority (rule 117.5) — now, when
+   * someone holds priority with nothing resolving, as after any action,
+   * rather than waiting for the step to end.
+   */
+  private debugPlaceTriggers(): void {
+    const holder = this.state.priority.holder;
+    if (
+      holder !== null &&
+      this.state.awaiting === null &&
+      this.state.suspendedResolutions.length === 0 &&
+      this.state.pendingTriggers.length > 0
+    ) {
+      this.prepareForPriority(holder);
+    }
   }
 
   // --- turn / step progression --------------------------------------

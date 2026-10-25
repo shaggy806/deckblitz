@@ -117,8 +117,3 @@ that needs it is authored.
   which ends with the turn anyway, keeping the lasting counter — the better choice unless being
   tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
   on purpose (found 2026-10-19, building shield counters).
-- **A debug entry's enters trigger waits a priority round.** `debugSpawn(..., { announceEntry:
-  true })` (the harness's `enter()`) made while a player holds priority leaves the trigger
-  pending through both players' priority; the step ends and it goes on the stack in the next
-  one. Rule 117.5 puts it on the stack as the next player receives priority. Real entries come
-  through `dispatch`, so this may be the debug path only — tests work around it.

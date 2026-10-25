@@ -131,6 +131,7 @@ describe("Omnath, Locus of Creation", () => {
     expect(life(game, A)).toBe(START + 4);
 
     game.debugApplyEffect(A, { kind: "flicker", target: 0 }, [{ kind: "object", object: omnath }]);
+    game.advanceUntil(quiet);
     playLand(game);
     // First resolution for the new Omnath: 4 life, not the third-time damage.
     expect(life(game, A)).toBe(START + 8);

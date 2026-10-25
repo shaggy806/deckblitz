@@ -181,6 +181,21 @@ const shield = (game: Game, target: TargetRef, amount: number): void =>
 const damageEvents = (game: Game, source: ObjectId) =>
   game.state.eventLog.filter((e) => e.type === "damage-dealt" && e.source === source);
 
+
+/** How many of `source`'s triggered abilities are waiting or on the stack —
+ * a debug effect's triggers go on the stack at once (rule 117.5), each
+ * queued or stacked entry standing for its identical copies. */
+function triggersOf(game: Game, source: ObjectId): number {
+  const pending = game.state.pendingTriggers
+    .filter((t) => t.sourceObjectId === source)
+    .reduce((n, t) => n + (t.copies ?? 1), 0);
+  const stacked = game.state.zones.shared.stack
+    .map((id) => game.state.objects[id])
+    .filter((o) => o?.kind === "ability" && o.sourceObjectId === source)
+    .reduce((n, o) => n + (o.stackCount ?? 1), 0);
+  return pending + stacked;
+}
+
 describe("deals-damage — Niv-Mizzet, Visionary", () => {
   it("draws the noncombat damage a source you control deals an opponent", () => {
     const { game } = setUp();
@@ -225,8 +240,7 @@ describe("deals-damage — Niv-Mizzet, Visionary", () => {
     const bears = spawn(game, "Grizzly Bears");
     const before = hand(game, A);
     game.debugApplyEffect(A, { kind: "damage", amount: 2, who: "each-opponent" }, [], { source: bears });
-    const triggered = game.state.pendingTriggers.filter((t) => t.sourceObjectId === niv).length;
-    expect(triggered).toBe(3);
+    expect(triggersOf(game, niv)).toBe(3);
     settle(game);
     expect(hand(game, A)).toBe(before + 6);
   });
@@ -288,7 +302,7 @@ describe("deals-damage — Ghyrson Starn's exactly-1 trigger", () => {
       [],
       { source: bears },
     );
-    expect(game.state.pendingTriggers.filter((t) => t.sourceObjectId === ghyrson)).toHaveLength(3);
+    expect(triggersOf(game, ghyrson)).toBe(3);
     settle(game);
     for (const id of giants) expect(game.state.objects[id].zone).toBe("graveyard");
   });
@@ -316,11 +330,7 @@ describe("deals-damage — Ghyrson Starn's exactly-1 trigger", () => {
       { source: bears },
     );
     // Ten triggers — one queued entry standing for all ten identical ones.
-    expect(
-      game.state.pendingTriggers
-        .filter((t) => t.sourceObjectId === ghyrson)
-        .reduce((n, t) => n + (t.copies ?? 1), 0),
-    ).toBe(10);
+    expect(triggersOf(game, ghyrson)).toBe(10);
     settle(game);
     expect(game.battlefield.filter((id) => game.state.objects[id].cardName === "3/3 Beast Token")).toHaveLength(0);
   });

@@ -131,11 +131,10 @@ describe("answering identical may triggers together", () => {
     const [bottom, next] = awaiting.trigger.alike;
     game.dispatch({ type: "choose-modes", player: A, modes: [0], forAll: true });
     // A second land. Its triggers go on the stack as Alice next gets
-    // priority, after the Gladehart trigger on top has resolved with her
-    // answer; then three new Gladehart triggers and a Lifegift trigger sit
-    // over the last old one. Something new on the stack ends the shortcut
-    // (rule 732.2b): every new one is asked, and so is the old one under
-    // them.
+    // priority (rule 117.5) — over both old Gladehart triggers: three new
+    // Gladehart triggers and a Lifegift trigger. Something new on the stack
+    // ends the shortcut (rule 732.2b): every new one is asked, and so are
+    // the old ones under them.
     enters(game, "Forest");
     const whose: string[] = [];
     game.advanceUntil((s) => {
@@ -145,9 +144,8 @@ describe("answering identical may triggers together", () => {
       }
       return quiet(s);
     });
-    expect(whose).not.toContain(next);
-    expect(whose.at(-1)).toBe(bottom);
-    expect(asked.filter((text) => text === "Gain 2 life?")).toHaveLength(3 + 1);
+    expect(whose.slice(-2)).toEqual([next, bottom]);
+    expect(asked.filter((text) => text === "Gain 2 life?")).toHaveLength(3 + 2);
     expect(game.state.standingModeAnswers).toBeUndefined();
   });
 });
