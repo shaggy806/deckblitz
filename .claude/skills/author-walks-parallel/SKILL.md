@@ -77,19 +77,18 @@ merge).
 
 ## 3. Start the sessions
 
-First make the **report-in trigger**: one `mcp__claude-code-remote__create_trigger` with no
-`cron_expression` and no `run_once_at` (a poke-only scheduled task that never fires on its
-own), bound to this session (the default), `initiation: "own_followup"`, named "Set-walk
-children report in", its prompt "A set-walk child reports in (its words follow): note it,
-check its batch on origin/main, and report to the user once the last child is in." A child
-can't `send_message` this session, but it can `fire_trigger` that trigger with its report as
-`text`, which wakes this session with it. Its `trig_…` id goes in every child's prompt.
+There is **no report-in trigger**: a child can't `send_message` this session, and firing a
+trigger bound to it doesn't wake it either. A fired trigger starts a fresh, repo-less session
+of its own (round three, 2026-10-25: the B164 child's `fire_trigger` minted
+`⚡ Set-walk children report in`, which pushed the user a confused notification and woke
+nothing here; rounds two and three lost every report-in that way). The timed safety net in
+step 4 is how this session learns a child is done.
 
 Fill `child-prompt.md` beside this file once per child (its placeholders: `SKILL` —
 `author-by-set` or `author-by-set-oldest`; `WALK` — "the newest-first walk", "the middle
 walk", "the oldest-first walk"; `RANGE` — the range as recorded; `BATCH_SETS` — this batch's
 sets with their left counts; `HOW_TO_PICK` — for a middle walk the `--set <code>` sentence,
-else empty; `BATCHNUM`; `TRIGGER_ID` — the report-in trigger's id). Start all of them in **one message**:
+else empty; `BATCHNUM`). Start all of them in **one message**:
 
 ```
 mcp__claude-code-remote__create_session({
@@ -106,31 +105,22 @@ The environment is inherited from this session (its setup hook installs and buil
 
 ## 4. Watch them
 
-Each child **reports in** as its last act, by firing the report-in trigger: that wakes this
-session once per child, with the child's own summary, and costs one turn each, against a
-turn per timed check-in whatever the children are doing. Don't poll: each turn here
-re-reads the coordinator's whole context.
-
-The report-in can be lost: in the second round (B161–B163) the children fired it on landing,
-but the trigger recorded no run and the coordinator, idle with its container reclaimed, never
-woke; the user noticed first. So the safety net is the check you count on, not a backstop.
-A child that crashes, stalls or runs out of budget never reports either, so arm **one safety
-net** with `mcp__claude-code-remote__send_later` about 90 minutes out (round two's batches
-landed 55, 69 and 89 minutes after their start: setup, scaffolding, 20–25 minutes of agents,
-integrating, `verify`, landing), naming every
-child's session id and batch. When a report or the safety net arrives, read as little as
-answers the question:
+Arm **one safety net** with `mcp__claude-code-remote__send_later` about 90 minutes out,
+naming every child's session id and batch (round two's batches landed 55, 69 and 89 minutes
+after their start; round three's 47, 57 and 118, the last held up by a fuzzer-found engine
+bug). Don't poll in between: each turn here re-reads the coordinator's whole context. When it
+fires, read as little as answers the question:
 
 - `git fetch origin main && git log --oneline origin/main` shows which batches landed.
-- Only for a child that hasn't reported by the safety net: `get_session` (`status_bucket`
+- Only for a child whose batch isn't on `main`: `get_session` (`status_bucket`
   `failed` means its last turn errored; `idle` with no landed batch means it stopped early),
   then its last words — `list_events` with `kinds: ["assistant", "result"]` and `limit: 20`,
   never the whole transcript.
 - A stalled or failed child: `send_message` it a correction (it continues with its context),
   or tell the user what blocks it. Don't redo its batch here. Re-arm the safety net 30 minutes
   out while one is still working.
-- When the last child is in: cancel the safety net (`delete_trigger` on its id) and the
-  report-in trigger, and report to the user.
+- When the last child is in: cancel any pending safety net (`delete_trigger` on its id), and
+  report to the user.
 
 ## 5. Report and close
 
