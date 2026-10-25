@@ -76,11 +76,19 @@ merge).
 
 ## 3. Start the sessions
 
+First make the **report-in trigger**: one `mcp__claude-code-remote__create_trigger` with no
+`cron_expression` and no `run_once_at` (a poke-only scheduled task that never fires on its
+own), bound to this session (the default), `initiation: "own_followup"`, named "Set-walk
+children report in", its prompt "A set-walk child reports in (its words follow): note it,
+check its batch on origin/main, and report to the user once the last child is in." A child
+can't `send_message` this session, but it can `fire_trigger` that trigger with its report as
+`text`, which wakes this session with it. Its `trig_…` id goes in every child's prompt.
+
 Fill `child-prompt.md` beside this file once per child (its placeholders: `SKILL` —
 `author-by-set` or `author-by-set-oldest`; `WALK` — "the newest-first walk", "the middle
 walk", "the oldest-first walk"; `RANGE` — the range as recorded; `BATCH_SETS` — this batch's
 sets with their left counts; `HOW_TO_PICK` — for a middle walk the `--set <code>` sentence,
-else empty; `BATCHNUM`). Start all of them in **one message**:
+else empty; `BATCHNUM`; `TRIGGER_ID` — the report-in trigger's id). Start all of them in **one message**:
 
 ```
 mcp__claude-code-remote__create_session({
@@ -97,22 +105,27 @@ The environment is inherited from this session (its setup hook installs and buil
 
 ## 4. Watch them
 
-A child that finishes cleanly **doesn't report back**. Arm one check-in with
-`mcp__claude-code-remote__send_later` about 50 minutes out (a batch takes 60–90 minutes:
-setup, scaffolding, 20–25 minutes of agents, integrating, `verify`, landing), naming every
-child's session id and batch; re-arm 30 minutes apart after that. Never poll in between:
-each check-in is a turn over the coordinator's whole context. When it fires, read as little
-as answers the question:
+Each child **reports in** as its last act, by firing the report-in trigger: that wakes this
+session once per child, with the child's own summary, and costs one turn each, against a
+turn per timed check-in whatever the children are doing. Don't poll: each turn here
+re-reads the coordinator's whole context.
 
-- `get_session` each: `status_bucket` `failed` means its last turn errored; `idle` with no
-  landed batch means it stopped early. Only for a child that failed or stopped, its last
-  words: `list_events` with `kinds: ["assistant", "result"]` and `limit: 20`, never the
-  whole transcript.
+A child that crashes, stalls or runs out of budget never reports, so arm **one safety net**
+with `mcp__claude-code-remote__send_later` about 2 hours out (a batch takes 60–90 minutes:
+setup, scaffolding, 20–25 minutes of agents, integrating, `verify`, landing), naming every
+child's session id and batch. When a report or the safety net arrives, read as little as
+answers the question:
+
 - `git fetch origin main && git log --oneline origin/main` shows which batches landed.
-- A stalled or failed child: read why, then `send_message` it a correction (it continues
-  with its context), or tell the user what blocks it. Don't redo its batch here.
-- Re-arm while any child is still working; report to the user in a few lines when the last
-  one lands.
+- Only for a child that hasn't reported by the safety net: `get_session` (`status_bucket`
+  `failed` means its last turn errored; `idle` with no landed batch means it stopped early),
+  then its last words — `list_events` with `kinds: ["assistant", "result"]` and `limit: 20`,
+  never the whole transcript.
+- A stalled or failed child: `send_message` it a correction (it continues with its context),
+  or tell the user what blocks it. Don't redo its batch here. Re-arm the safety net 30 minutes
+  out while one is still working.
+- When the last child is in: cancel the safety net (`delete_trigger` on its id) and the
+  report-in trigger, and report to the user.
 
 ## 5. Report and close
 
