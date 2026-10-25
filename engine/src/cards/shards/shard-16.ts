@@ -285,6 +285,7 @@ import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
+import _poolKiorasDismissal from "../pool/kioras-dismissal.js";
 import _poolKismet from "../pool/kismet.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
@@ -544,6 +545,7 @@ import _poolTemurBanner from "../pool/temur-banner.js";
 import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
+import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLastRonin from "../pool/the-last-ronin.js";
@@ -965,6 +967,7 @@ const shard: CardShard = {
     _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
+    _poolKiorasDismissal,
     _poolKismet,
     _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
@@ -1224,6 +1227,7 @@ const shard: CardShard = {
     _poolTemurTawnyback,
     _poolTerashisVerdict,
     _poolTerohsFaithful,
+    _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
     _poolTheFalconSamWilson,
     _poolTheLastRonin,

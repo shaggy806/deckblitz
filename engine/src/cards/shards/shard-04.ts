@@ -79,6 +79,7 @@ import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCocoon from "../pool/cocoon.js";
+import _poolColossalHeroics from "../pool/colossal-heroics.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolConfiscationCoup from "../pool/confiscation-coup.js";
@@ -292,6 +293,7 @@ import _poolKokushoTheEveningStar from "../pool/kokusho-the-evening-star.js";
 import _poolKorLineSlinger from "../pool/kor-line-slinger.js";
 import _poolKorvoldFaeCursedKing from "../pool/korvold-fae-cursed-king.js";
 import _poolKozileksChanneler from "../pool/kozileks-channeler.js";
+import _poolKruphixsInsight from "../pool/kruphixs-insight.js";
 import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
@@ -374,6 +376,7 @@ import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPatricianGeist from "../pool/patrician-geist.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPestilenceDemon from "../pool/pestilence-demon.js";
+import _poolPheresBandThunderhoof from "../pool/pheres-band-thunderhoof.js";
 import _poolPhyrexianAwakening from "../pool/phyrexian-awakening.js";
 import _poolPhyrexianCrusader from "../pool/phyrexian-crusader.js";
 import _poolPhyrexianGhoul from "../pool/phyrexian-ghoul.js";
@@ -707,6 +710,7 @@ const shard: CardShard = {
     _poolChillOfTheGrave,
     _poolCleverConjurer,
     _poolCocoon,
+    _poolColossalHeroics,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
     _poolConfiscationCoup,
@@ -920,6 +924,7 @@ const shard: CardShard = {
     _poolKorLineSlinger,
     _poolKorvoldFaeCursedKing,
     _poolKozileksChanneler,
+    _poolKruphixsInsight,
     _poolKudoKingAmongBears,
     _poolKuldothaCackler,
     _poolLampadOfDeathsVigil,
@@ -1002,6 +1007,7 @@ const shard: CardShard = {
     _poolPatricianGeist,
     _poolPestMascot,
     _poolPestilenceDemon,
+    _poolPheresBandThunderhoof,
     _poolPhyrexianAwakening,
     _poolPhyrexianCrusader,
     _poolPhyrexianGhoul,

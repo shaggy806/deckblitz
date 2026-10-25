@@ -594,6 +594,7 @@ import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
 import _poolWhirOfInvention from "../pool/whir-of-invention.js";
 import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
+import _poolWildfireCerberus from "../pool/wildfire-cerberus.js";
 import _poolWildgrowthWalker from "../pool/wildgrowth-walker.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
@@ -1225,6 +1226,7 @@ const shard: CardShard = {
     _poolWhirOfInvention,
     _poolWildPackSquad,
     _poolWildShape,
+    _poolWildfireCerberus,
     _poolWildgrowthWalker,
     _poolWillowWind,
     _poolWindbriskHeights,

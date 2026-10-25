@@ -418,6 +418,7 @@ import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
+import _poolReturnedReveler from "../pool/returned-reveler.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRideTheRails from "../pool/ride-the-rails.js";
@@ -610,6 +611,7 @@ import _poolWaspLancer from "../pool/wasp-lancer.js";
 import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
 import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWestvaleCultLeader from "../pool/westvale-cult-leader.js";
+import _poolWhitewaterNaiads from "../pool/whitewater-naiads.js";
 import _poolWildAesthir from "../pool/wild-aesthir.js";
 import _poolWildWanderer from "../pool/wild-wanderer.js";
 import _poolWildestDreams from "../pool/wildest-dreams.js";
@@ -1064,6 +1066,7 @@ const shard: CardShard = {
     _poolRepudiateReplicate,
     _poolResurgentBelief,
     _poolResurrectedCultist,
+    _poolReturnedReveler,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
     _poolRideTheRails,
@@ -1256,6 +1259,7 @@ const shard: CardShard = {
     _poolWeftstalkerArdent,
     _poolWestCoastExpansion,
     _poolWestvaleCultLeader,
+    _poolWhitewaterNaiads,
     _poolWildAesthir,
     _poolWildWanderer,
     _poolWildestDreams,

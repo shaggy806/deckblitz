@@ -85,6 +85,7 @@ import _poolCamaraderie from "../pool/camaraderie.js";
 import _poolCapashenTemplar from "../pool/capashen-templar.js";
 import _poolCaptainVargusWrath from "../pool/captain-vargus-wrath.js";
 import _poolCarnivorousCultivator from "../pool/carnivorous-cultivator.js";
+import _poolCastIntoDarkness from "../pool/cast-into-darkness.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolCavePeople from "../pool/cave-people.js";
 import _poolCensor from "../pool/censor.js";
@@ -179,6 +180,7 @@ import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFanaticalFirebrand from "../pool/fanatical-firebrand.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
+import _poolFeastOfDreams from "../pool/feast-of-dreams.js";
 import _poolFetidGargantua from "../pool/fetid-gargantua.js";
 import _poolFeywildCaretaker from "../pool/feywild-caretaker.js";
 import _poolFiendArtisan from "../pool/fiend-artisan.js";
@@ -316,6 +318,7 @@ import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inve
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
 import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
+import _poolLeoninIconoclast from "../pool/leonin-iconoclast.js";
 import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
 import _poolLeshracsRite from "../pool/leshracs-rite.js";
 import _poolLightTheWay from "../pool/light-the-way.js";
@@ -429,6 +432,7 @@ import _poolRakdosSignet from "../pool/rakdos-signet.js";
 import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
 import _poolRambunctiousMutt from "../pool/rambunctious-mutt.js";
 import _poolRamroller from "../pool/ramroller.js";
+import _poolRavenousLeucrocota from "../pool/ravenous-leucrocota.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
@@ -739,6 +743,7 @@ const shard: CardShard = {
     _poolCapashenTemplar,
     _poolCaptainVargusWrath,
     _poolCarnivorousCultivator,
+    _poolCastIntoDarkness,
     _poolCathedralSanctifier,
     _poolCavePeople,
     _poolCensor,
@@ -833,6 +838,7 @@ const shard: CardShard = {
     _poolFanaticalFirebrand,
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
+    _poolFeastOfDreams,
     _poolFetidGargantua,
     _poolFeywildCaretaker,
     _poolFiendArtisan,
@@ -970,6 +976,7 @@ const shard: CardShard = {
     _poolLegionConquistador,
     _poolLegolasGreenleaf,
     _poolLeonardoBigBrother,
+    _poolLeoninIconoclast,
     _poolLeoninSkyhunter,
     _poolLeshracsRite,
     _poolLightTheWay,
@@ -1083,6 +1090,7 @@ const shard: CardShard = {
     _poolRallyTheRanks,
     _poolRambunctiousMutt,
     _poolRamroller,
+    _poolRavenousLeucrocota,
     _poolRavineRaider,
     _poolRazorSwine,
     _poolRecumbentBliss,

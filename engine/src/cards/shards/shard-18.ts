@@ -479,6 +479,7 @@ import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
 import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
+import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
@@ -527,6 +528,7 @@ import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
 import _poolThoughtflare from "../pool/thoughtflare.js";
+import _poolThoughtrenderLamia from "../pool/thoughtrender-lamia.js";
 import _poolThrashingFrontliner from "../pool/thrashing-frontliner.js";
 import _poolThrashingWumpus from "../pool/thrashing-wumpus.js";
 import _poolThreeBlindMice from "../pool/three-blind-mice.js";
@@ -1120,6 +1122,7 @@ const shard: CardShard = {
     _poolSphinxOfForgottenLore,
     _poolSpiderManHometownHero,
     _poolSpiketailDrake,
+    _poolSpiteOfMogis,
     _poolStalkingVengeance,
     _poolStandingTroops,
     _poolStarAthlete,
@@ -1168,6 +1171,7 @@ const shard: CardShard = {
     _poolThistledownPlayers,
     _poolThornOfAmethyst,
     _poolThoughtflare,
+    _poolThoughtrenderLamia,
     _poolThrashingFrontliner,
     _poolThrashingWumpus,
     _poolThreeBlindMice,

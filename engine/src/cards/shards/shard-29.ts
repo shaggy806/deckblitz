@@ -355,6 +355,7 @@ import _poolNaturesSpiral from "../pool/natures-spiral.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
 import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
+import _poolNessianGameWarden from "../pool/nessian-game-warden.js";
 import _poolNeurokReplica from "../pool/neurok-replica.js";
 import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
@@ -385,6 +386,7 @@ import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
+import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
 import _poolPlaneboundAccomplice from "../pool/planebound-accomplice.js";
@@ -1007,6 +1009,7 @@ const shard: CardShard = {
     _poolNecroblossomSnarl,
     _poolNecroticSliver,
     _poolNephaliaDrownyard,
+    _poolNessianGameWarden,
     _poolNeurokReplica,
     _poolNeutralizeTheGuards,
     _poolNezumiInformant,
@@ -1037,6 +1040,7 @@ const shard: CardShard = {
     _poolPetAvengers,
     _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
+    _poolPharikaGodOfAffliction,
     _poolPileatedProvisioner,
     _poolPirateHat,
     _poolPlaneboundAccomplice,

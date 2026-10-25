@@ -14,6 +14,7 @@ import _poolAirborneAid from "../pool/airborne-aid.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
+import _poolAkroanLineBreaker from "../pool/akroan-line-breaker.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
@@ -190,6 +191,7 @@ import _poolFieryConclusion from "../pool/fiery-conclusion.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
+import _poolFlamespeakersWill from "../pool/flamespeakers-will.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
@@ -389,6 +391,7 @@ import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
 import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
+import _poolPheresBandWarchief from "../pool/pheres-band-warchief.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
@@ -424,6 +427,7 @@ import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
+import _poolRenownedWeaver from "../pool/renowned-weaver.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
 import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
@@ -657,6 +661,7 @@ const shard: CardShard = {
     _poolAjaniAdversaryOfTyrants,
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
+    _poolAkroanLineBreaker,
     _poolAlabornCavalier,
     _poolAleshasVanguard,
     _poolAloraMerryThief,
@@ -833,6 +838,7 @@ const shard: CardShard = {
     _poolFireNationAttacks,
     _poolFixWhatsBroken,
     _poolFlameSpirit,
+    _poolFlamespeakersWill,
     _poolFleetingFlight,
     _poolFleetwheelCruiser,
     _poolForerunnerOfTheLegion,
@@ -1032,6 +1038,7 @@ const shard: CardShard = {
     _poolPeregrineDrake,
     _poolPestilentSouleater,
     _poolPharaohRamaTut,
+    _poolPheresBandWarchief,
     _poolPhyrexianBloodstock,
     _poolPhyrexianPegasus,
     _poolPhyrexianVault,
@@ -1067,6 +1074,7 @@ const shard: CardShard = {
     _poolRecuperate,
     _poolRedMagesRapier,
     _poolRelmsSketching,
+    _poolRenownedWeaver,
     _poolResoluteWatchdog,
     _poolRestlessBloodseeker,
     _poolRestlessBones,

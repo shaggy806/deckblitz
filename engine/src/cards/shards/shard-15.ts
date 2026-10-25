@@ -379,6 +379,7 @@ import _poolNoxiousGhoul from "../pool/noxious-ghoul.js";
 import _poolNoxiousGroodion from "../pool/noxious-groodion.js";
 import _poolNyleaGodOfTheHunt from "../pool/nylea-god-of-the-hunt.js";
 import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
+import _poolNyxInfusion from "../pool/nyx-infusion.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
 import _poolOilGorgerTroll from "../pool/oil-gorger-troll.js";
 import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
@@ -409,6 +410,7 @@ import _poolPrimalBellow from "../pool/primal-bellow.js";
 import _poolPrismArray from "../pool/prism-array.js";
 import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
+import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
@@ -480,10 +482,12 @@ import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
+import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
 import _poolSquareUp from "../pool/square-up.js";
+import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStatus from "../pool/status.js";
@@ -987,6 +991,7 @@ const shard: CardShard = {
     _poolNoxiousGroodion,
     _poolNyleaGodOfTheHunt,
     _poolNyxFleeceRam,
+    _poolNyxInfusion,
     _poolObscuraInitiate,
     _poolOilGorgerTroll,
     _poolOlogHaiCrusher,
@@ -1017,6 +1022,7 @@ const shard: CardShard = {
     _poolPrismArray,
     _poolPrizedAmalgam,
     _poolPrizefight,
+    _poolPropheticFlamespeaker,
     _poolPsionicSnoop,
     _poolPyreticRebirth,
     _poolPyrotechnicPerformer,
@@ -1088,10 +1094,12 @@ const shard: CardShard = {
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
     _poolSpiresideInfiltrator,
+    _poolSpitefulBlow,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
     _poolSquareUp,
+    _poolSquelchingLeeches,
     _poolStampedingHorncrest,
     _poolStatureYoungAvenger,
     _poolStatus,

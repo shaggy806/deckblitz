@@ -109,6 +109,7 @@ import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
 import _poolCultistsStaff from "../pool/cultists-staff.js";
 import _poolCunningNightbonder from "../pool/cunning-nightbonder.js";
+import _poolDakraMystic from "../pool/dakra-mystic.js";
 import _poolDamnablePact from "../pool/damnable-pact.js";
 import _poolDarkDwellerOracle from "../pool/dark-dweller-oracle.js";
 import _poolDarkHatchling from "../pool/dark-hatchling.js";
@@ -256,6 +257,7 @@ import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInfuse from "../pool/infuse.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
+import _poolInterpretTheSigns from "../pool/interpret-the-signs.js";
 import _poolInvadingManticore from "../pool/invading-manticore.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
@@ -422,6 +424,7 @@ import _poolRibskiff from "../pool/ribskiff.js";
 import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
 import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
 import _poolRishadanAirship from "../pool/rishadan-airship.js";
+import _poolRitualOfTheReturned from "../pool/ritual-of-the-returned.js";
 import _poolRiverHeraldScout from "../pool/river-herald-scout.js";
 import _poolRiverHeraldsBoon from "../pool/river-heralds-boon.js";
 import _poolRiverMerfolk from "../pool/river-merfolk.js";
@@ -747,6 +750,7 @@ const shard: CardShard = {
     _poolCryptRipper,
     _poolCultistsStaff,
     _poolCunningNightbonder,
+    _poolDakraMystic,
     _poolDamnablePact,
     _poolDarkDwellerOracle,
     _poolDarkHatchling,
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolInfernalPhantom,
     _poolInfuse,
     _poolInspiredTethermage,
+    _poolInterpretTheSigns,
     _poolInvadingManticore,
     _poolIronLeagueSteed,
     _poolIronManTitanOfInnovation,
@@ -1060,6 +1065,7 @@ const shard: CardShard = {
     _poolRipclawWrangler,
     _poolRiseOfTheDeathbringer,
     _poolRishadanAirship,
+    _poolRitualOfTheReturned,
     _poolRiverHeraldScout,
     _poolRiverHeraldsBoon,
     _poolRiverMerfolk,

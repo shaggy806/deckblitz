@@ -10229,6 +10229,34 @@
   "effect:prohibit-until-your-next-turn": {
    "family": "effect:cast-and-activate-restrictions",
    "example": "Innocuous Researcher: \"you can't cast spells until your next turn\" — `prohibit` lasts this turn only."
+  },
+  "cost:cost-reduction-per-creature-targeted": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Battlefield Thaumaturge: 'spells cost {1} less for each creature they target' — costModification.perTarget counts players too"
+  },
+  "effect:become-copy-of-chosen-permanent": {
+   "family": "effect:become-copy",
+   "example": "Polymorphous Rush: 'choose a creature on the battlefield. Any number of target creatures you control each become a copy of it' — the copied creature is chosen on resolution, not targeted"
+  },
+  "filter:attached-to-target": {
+   "family": "condition:filter-attachments",
+   "example": "Hubris: 'return target creature and all Auras attached to it' — a filter for the Auras attached to a target slot's permanent"
+  },
+  "replacement:prevent-damage-by-attached": {
+   "family": "replacement:damage-modification",
+   "example": "Armament of Nyx: 'prevent all damage that would be dealt by enchanted creature' — a damage-prevention replacement scoped to the Aura's host"
+  },
+  "static:ability-cost-increase-attached": {
+   "family": "cost:ability-cost-modification",
+   "example": "Oppressive Rays: 'activated abilities of enchanted creature cost {3} more to activate'"
+  },
+  "effect:put-on-library-dynamic-position": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Quarry Colossus: 'put target creature into its owner's library just beneath the top X cards, where X is the number of Plains you control'"
+  },
+  "keyword:bestow-extensions": {
+   "family": "keyword:bestow",
+   "example": "Detective's Phoenix: a bestow cost with collect evidence, and casting it from the graveyard using its bestow ability"
   }
  }
 }

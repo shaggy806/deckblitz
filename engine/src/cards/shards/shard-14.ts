@@ -176,6 +176,7 @@ import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
+import _poolEidolonOfTheGreatRevel from "../pool/eidolon-of-the-great-revel.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
@@ -384,6 +385,7 @@ import _poolMonstrousRage from "../pool/monstrous-rage.js";
 import _poolMonumentalCorruption from "../pool/monumental-corruption.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
+import _poolMortalObstinacy from "../pool/mortal-obstinacy.js";
 import _poolMountedDreadknight from "../pool/mounted-dreadknight.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
 import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
@@ -812,6 +814,7 @@ const shard: CardShard = {
     _poolEbonDrake,
     _poolEchoOfDeathsWail,
     _poolEdgarMarkov,
+    _poolEidolonOfTheGreatRevel,
     _poolEivorBattleReady,
     _poolEldraziLinebreaker,
     _poolElementalEruption,
@@ -1020,6 +1023,7 @@ const shard: CardShard = {
     _poolMonumentalCorruption,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
+    _poolMortalObstinacy,
     _poolMountedDreadknight,
     _poolMuseumNightwatch,
     _poolMutantChainReaction,

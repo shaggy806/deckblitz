@@ -261,6 +261,7 @@ import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
 import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
+import _poolHallOfTriumph from "../pool/hall-of-triumph.js";
 import _poolHallowedGround from "../pool/hallowed-ground.js";
 import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
@@ -903,6 +904,7 @@ const shard: CardShard = {
     _poolHaazdaOfficer,
     _poolHaliyaGuidedByLight,
     _poolHallOfOracles,
+    _poolHallOfTriumph,
     _poolHallowedGround,
     _poolHandThatFeeds,
     _poolHarrierStrix,

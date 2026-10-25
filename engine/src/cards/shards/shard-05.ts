@@ -327,6 +327,7 @@ import _poolKolaghanForerunners from "../pool/kolaghan-forerunners.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLancerSliver from "../pool/lancer-sliver.js";
+import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
@@ -533,6 +534,7 @@ import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSurgeEngine from "../pool/surge-engine.js";
 import _poolSurvive from "../pool/survive.js";
 import _poolSwanSong from "../pool/swan-song.js";
+import _poolSwarmbornGiant from "../pool/swarmborn-giant.js";
 import _poolSwarmingGoblins from "../pool/swarming-goblins.js";
 import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
@@ -973,6 +975,7 @@ const shard: CardShard = {
     _poolKozileksShrieker,
     _poolKravenProudPredator,
     _poolLancerSliver,
+    _poolLaunchTheFleet,
     _poolLeapingMaster,
     _poolLeyDruid,
     _poolLightningStrike,
@@ -1179,6 +1182,7 @@ const shard: CardShard = {
     _poolSurgeEngine,
     _poolSurvive,
     _poolSwanSong,
+    _poolSwarmbornGiant,
     _poolSwarmingGoblins,
     _poolSwiftfootBoots,
     _poolSwordDancer,

@@ -216,6 +216,7 @@ import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
 import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
 import _poolGlorifierOfSuffering from "../pool/glorifier-of-suffering.js";
+import _poolGluttonousCyclops from "../pool/gluttonous-cyclops.js";
 import _poolGnarledGrovestrider from "../pool/gnarled-grovestrider.js";
 import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
@@ -874,6 +875,7 @@ const shard: CardShard = {
     _poolGlasswingGrace,
     _poolGlidediveDuo,
     _poolGlorifierOfSuffering,
+    _poolGluttonousCyclops,
     _poolGnarledGrovestrider,
     _poolGnarlwoodDryad,
     _poolGoblinArtillery,

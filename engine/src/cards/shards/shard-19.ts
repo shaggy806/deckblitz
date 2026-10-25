@@ -211,6 +211,7 @@ import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
+import _poolFontOfIre from "../pool/font-of-ire.js";
 import _poolForerunnerOfSlaughter from "../pool/forerunner-of-slaughter.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
@@ -237,6 +238,7 @@ import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
+import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
@@ -871,6 +873,7 @@ const shard: CardShard = {
     _poolFlipTheSwitch,
     _poolFlowstoneKavu,
     _poolFlyingDolphinFish,
+    _poolFontOfIre,
     _poolForerunnerOfSlaughter,
     _poolForerunnerOfTheEmpire,
     _poolFormidableSpeaker,
@@ -897,6 +900,7 @@ const shard: CardShard = {
     _poolGlistenerElf,
     _poolGoblinGlider,
     _poolGoblinHeelcutter,
+    _poolGoldenhideOx,
     _poolGoliathMassManipulator,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,

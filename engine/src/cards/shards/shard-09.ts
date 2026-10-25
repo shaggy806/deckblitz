@@ -450,6 +450,7 @@ import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
+import _poolRiptideChimera from "../pool/riptide-chimera.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
 import _poolRocCharger from "../pool/roc-charger.js";
@@ -1109,6 +1110,7 @@ const shard: CardShard = {
     _poolRetrieve,
     _poolRetrofittedTransmogrant,
     _poolRidgetopRaptor,
+    _poolRiptideChimera,
     _poolRiteOfTheDragoncaller,
     _poolRiveteersRequisitioner,
     _poolRocCharger,

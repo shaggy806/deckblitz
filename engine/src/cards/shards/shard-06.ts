@@ -375,6 +375,7 @@ import _poolPartingThoughts from "../pool/parting-thoughts.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
 import _poolPegasusCourser from "../pool/pegasus-courser.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
+import _poolPhalanxFormation from "../pool/phalanx-formation.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
 import _poolPhyrexianArena from "../pool/phyrexian-arena.js";
@@ -463,6 +464,7 @@ import _poolSerumSnare from "../pool/serum-snare.js";
 import _poolServantOfTheConduit from "../pool/servant-of-the-conduit.js";
 import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
+import _poolSetessanTactics from "../pool/setessan-tactics.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
@@ -1010,6 +1012,7 @@ const shard: CardShard = {
     _poolPeerIntoTheAbyss,
     _poolPegasusCourser,
     _poolPersistentSpecimen,
+    _poolPhalanxFormation,
     _poolPharikasMender,
     _poolPhenomenonInvestigators,
     _poolPhyrexianArena,
@@ -1098,6 +1101,7 @@ const shard: CardShard = {
     _poolServantOfTheConduit,
     _poolServantOfTheStinger,
     _poolSetessanChampion,
+    _poolSetessanTactics,
     _poolSeymourFlux,
     _poolShambleshark,
     _poolShenanigans,

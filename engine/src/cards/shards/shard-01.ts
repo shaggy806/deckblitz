@@ -176,6 +176,7 @@ import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFlashFlood from "../pool/flash-flood.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFlyingCraneTechnique from "../pool/flying-crane-technique.js";
+import _poolFontOfReturn from "../pool/font-of-return.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
 import _poolForceOfDespair from "../pool/force-of-despair.js";
 import _poolForerunnerOfTheCoalition from "../pool/forerunner-of-the-coalition.js";
@@ -797,6 +798,7 @@ const shard: CardShard = {
     _poolFlashFlood,
     _poolFloodedGrove,
     _poolFlyingCraneTechnique,
+    _poolFontOfReturn,
     _poolFootlightFiend,
     _poolForceOfDespair,
     _poolForerunnerOfTheCoalition,

@@ -260,6 +260,7 @@ import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
+import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
@@ -435,6 +436,7 @@ import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
 import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
 import _poolReturnedPastcaller from "../pool/returned-pastcaller.js";
+import _poolRevelOfTheFallenGod from "../pool/revel-of-the-fallen-god.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
@@ -898,6 +900,7 @@ const shard: CardShard = {
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
     _poolHermitOfTheNatterknolls,
+    _poolHumblerOfMortals,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
     _poolHydrosurge,
@@ -1073,6 +1076,7 @@ const shard: CardShard = {
     _poolRestartSequence,
     _poolRetrieveTheEsper,
     _poolReturnedPastcaller,
+    _poolRevelOfTheFallenGod,
     _poolReverberatingSummons,
     _poolReverentHoplite,
     _poolReyavMasterSmith,
