@@ -467,6 +467,7 @@ import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
+import _poolSapphireCharm from "../pool/sapphire-charm.js";
 import _poolSaprolingMigration from "../pool/saproling-migration.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
@@ -1130,6 +1131,7 @@ const shard: CardShard = {
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSandstormCrasher,
+    _poolSapphireCharm,
     _poolSaprolingMigration,
     _poolSavedByTheShell,
     _poolSawbladeScamp,

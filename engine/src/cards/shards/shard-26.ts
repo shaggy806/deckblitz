@@ -100,6 +100,7 @@ import _poolChandler from "../pool/chandler.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
+import _poolCircleOfDespair from "../pool/circle-of-despair.js";
 import _poolCircleOfProtectionGreen from "../pool/circle-of-protection-green.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
 import _poolClaimThePrecious from "../pool/claim-the-precious.js";
@@ -238,6 +239,7 @@ import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolGuulDrazOverseer from "../pool/guul-draz-overseer.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHagraConstrictor from "../pool/hagra-constrictor.js";
+import _poolHammerOfBogardan from "../pool/hammer-of-bogardan.js";
 import _poolHammerheim from "../pool/hammerheim.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
@@ -742,6 +744,7 @@ const shard: CardShard = {
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
+    _poolCircleOfDespair,
     _poolCircleOfProtectionGreen,
     _poolCityOfBrass,
     _poolClaimThePrecious,
@@ -880,6 +883,7 @@ const shard: CardShard = {
     _poolGuulDrazOverseer,
     _poolHaakonStromgaldScourge,
     _poolHagraConstrictor,
+    _poolHammerOfBogardan,
     _poolHammerheim,
     _poolHarbingerOfTheHunt,
     _poolHarmoniousGrovestrider,

@@ -96,8 +96,10 @@ import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
+import _poolChaosphere from "../pool/chaosphere.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
 import _poolCharringBite from "../pool/charring-bite.js";
+import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolClawsOut from "../pool/claws-out.js";
@@ -535,6 +537,7 @@ import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
+import _poolSpittingEarth from "../pool/spitting-earth.js";
 import _poolSporebackWolf from "../pool/sporeback-wolf.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
@@ -762,8 +765,10 @@ const shard: CardShard = {
     _poolChanceMetElves,
     _poolChandrasIgnition,
     _poolChangelingSentinel,
+    _poolChaosphere,
     _poolChargingMonstrosaur,
     _poolCharringBite,
+    _poolChokingSands,
     _poolChromeHostHulk,
     _poolChromeMox,
     _poolClawsOut,
@@ -1201,6 +1206,7 @@ const shard: CardShard = {
     _poolSpaceMarineScout,
     _poolSpellPierce,
     _poolSpiderWomanStunningSavior,
+    _poolSpittingEarth,
     _poolSporebackWolf,
     _poolSquirmingEmergence,
     _poolSramSeniorEdificer,

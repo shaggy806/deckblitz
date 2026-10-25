@@ -161,6 +161,7 @@ import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
 import _poolDrannithHealer from "../pool/drannith-healer.js";
 import _poolDrannithRuins from "../pool/drannith-ruins.js";
 import _poolDreadwurm from "../pool/dreadwurm.js";
+import _poolDreamCache from "../pool/dream-cache.js";
 import _poolDromokaTheEternal from "../pool/dromoka-the-eternal.js";
 import _poolDrossCrocodile from "../pool/dross-crocodile.js";
 import _poolDrossforgeBridge from "../pool/drossforge-bridge.js";
@@ -803,6 +804,7 @@ const shard: CardShard = {
     _poolDrannithHealer,
     _poolDrannithRuins,
     _poolDreadwurm,
+    _poolDreamCache,
     _poolDromokaTheEternal,
     _poolDrossCrocodile,
     _poolDrossforgeBridge,
