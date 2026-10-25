@@ -7,12 +7,14 @@ import { describe, expect, it } from "vitest";
 
 import { matchesFilter } from "../filter.js";
 import type { Game } from "../game.js";
+import type { ObjectId } from "../primitives.js";
 import {
   A,
   B,
   activate,
   attack,
   cast,
+  destroy,
   graveyard,
   lands,
   life,
@@ -102,7 +104,7 @@ describe("\"whenever this deals damage\" triggers once per damage event", () => 
 });
 
 describe("a merged permanent is a token only if its topmost component is (rule 730.2d)", () => {
-  const isToken = (game: Game, id: string): boolean =>
+  const isToken = (game: Game, id: ObjectId): boolean =>
     matchesFilter(game.state, registryOf(game), id, { token: true }, { you: A });
 
   it("a card mutated on top of a token is no token; a token under a card stays one", () => {
@@ -120,5 +122,30 @@ describe("a merged permanent is a token only if its topmost component is (rule 7
     expect(isToken(game, top)).toBe(false);
     expect(isToken(game, under)).toBe(true);
     expect(game.viewFor(A).objects[top]?.isToken).toBe(false);
+  });
+});
+
+describe("a conditional grant's leaves-the-battlefield ability looks back in time (rule 603.10a)", () => {
+  it("Relic Vial: its only Cleric dying still triggers the granted dies ability", () => {
+    const { game } = table();
+    spawn(game, "Relic Vial");
+    const cleric = spawn(game, "Abbey Matron");
+    destroy(game, cleric);
+    expect(life(game, A)).toBe(21);
+    expect(life(game, B)).toBe(19);
+    // No Cleric now: another creature dying triggers nothing.
+    destroy(game, spawn(game, "Grizzly Bears"));
+    expect(life(game, A)).toBe(21);
+  });
+
+  it("Relic Vial: sacrificing the only Cleric to its own ability triggers it (the ruling)", () => {
+    const { game } = table();
+    const vial = spawn(game, "Relic Vial");
+    const cleric = spawn(game, "Abbey Matron");
+    lands(game, "Plains", 2);
+    game.dispatch({ type: "activate-ability", player: A, source: vial, abilityIndex: 0, targets: [], sacrifice: cleric });
+    settle(game);
+    expect(zone(game, cleric)).toBe("graveyard");
+    expect(life(game, B)).toBe(19);
   });
 });

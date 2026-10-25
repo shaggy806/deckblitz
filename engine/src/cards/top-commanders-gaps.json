@@ -406,7 +406,8 @@
   "replacement:prevent-once-per-damage-event",
   "effect:grant-activated-dynamic-target-filter",
   "trigger:deals-damage-once-per-event",
-  "trigger:deals-combat-damage-once-per-event"
+  "trigger:deals-combat-damage-once-per-event",
+  "trigger:conditional-grant-look-back"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

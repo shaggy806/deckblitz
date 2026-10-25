@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3773 already implemented / 1227 missing (marks refreshed 2026-10-24)
+3774 already implemented / 1226 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3083,7 +3083,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3090  Elspeth Conquers Death                   {3}{W}{W}        Enchantment — Saga
 [x]  3091  Splash Portal                            {U}              Sorcery
 [x]  3092  Crawling Sensation                       {2}{G}           Enchantment
-[ ]  3093  Spirit Link                              {W}              Enchantment — Aura
+[x]  3093  Spirit Link                              {W}              Enchantment — Aura
 [x]  3094  Mirrorworks                              {5}              Artifact
 [ ]  3095  Biomancer's Familiar                     {G}{U}           Creature — Mutant
 [ ]  3096  Double Major                             {G}{U}           Instant

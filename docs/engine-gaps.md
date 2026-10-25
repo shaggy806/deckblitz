@@ -118,13 +118,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
-- **A granted leaves-the-battlefield trigger doesn't look back for its grant.** Rule 603.10a:
-  a leaves-the-battlefield ability triggers on the game as it was just before the event. A
-  conditional `grantsTriggered` ("as long as you control a Cleric, this artifact has 'Whenever a
-  creature you control dies, …'") is read after the move, so when the dying creature was the one
-  meeting the condition the ability doesn't trigger — Relic Vial's ruling says it does (batch
-  114, blocked as `trigger:conditional-grant-look-back`). A dying creature's *own* granted dies
-  trigger is fine: the leave snapshots it first (Expedition Diviner).
 - **"Enters untapped" always beats "enters tapped".** When an enters-the-battlefield replacement
   that makes a permanent enter untapped meets one that makes it enter tapped, the engine applies
   the untapped one last, so the permanent enters untapped (`game.ts`, where the enters

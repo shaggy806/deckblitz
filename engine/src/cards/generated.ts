@@ -12462,6 +12462,7 @@ import _poolRelicRetriever from "./pool/relic-retriever.js";
 import _poolRelicRobber from "./pool/relic-robber.js";
 import _poolRelicRunner from "./pool/relic-runner.js";
 import _poolRelicSloth from "./pool/relic-sloth.js";
+import _poolRelicVial from "./pool/relic-vial.js";
 import _poolRelicsRoar from "./pool/relics-roar.js";
 import _poolReliquaryMonk from "./pool/reliquary-monk.js";
 import _poolReliquaryTower from "./pool/reliquary-tower.js";
@@ -31500,6 +31501,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRelicRobber,
   _poolRelicRunner,
   _poolRelicSloth,
+  _poolRelicVial,
   _poolRelicsRoar,
   _poolReliquaryMonk,
   _poolReliquaryTower,
@@ -50551,6 +50553,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/relic-robber": _poolRelicRobber,
   "pool/relic-runner": _poolRelicRunner,
   "pool/relic-sloth": _poolRelicSloth,
+  "pool/relic-vial": _poolRelicVial,
   "pool/relics-roar": _poolRelicsRoar,
   "pool/reliquary-monk": _poolReliquaryMonk,
   "pool/reliquary-tower": _poolReliquaryTower,

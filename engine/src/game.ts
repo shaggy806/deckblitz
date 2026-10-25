@@ -835,6 +835,18 @@ function dealsDamageOncePerEvent(trigger: TriggerSpec): boolean {
   );
 }
 
+/** Whether two granted abilities are the same static's same ability. */
+function sameGrantRef(a: GrantedAbilityRef | undefined, b: GrantedAbilityRef | undefined): boolean {
+  return (
+    a?.kind === "static" &&
+    b?.kind === "static" &&
+    a.cardName === b.cardName &&
+    a.staticIndex === b.staticIndex &&
+    a.list === b.list &&
+    a.index === b.index
+  );
+}
+
 function withoutTriggerPlayer(trigger: PendingTrigger): PendingTrigger {
   const refs = trigger.lastKnownRefs;
   if (refs?.player === undefined) return trigger;
@@ -1160,6 +1172,18 @@ export class Game {
    * move first. See {@link withLeaveBatch}. Not game state: it only ever
    * spans one synchronous call; a deferred commander carries the list on its
    * own pending move (`leftWith`). */
+  /** The leaves-the-battlefield abilities conditional statics granted just
+   * before the latest leave — the whole of a simultaneous one (`batch`, its
+   * `leaveBatch`) — per permanent they reached. Rule 603.10a: such an ability
+   * looks back to then, so it still triggers when the permanent that met
+   * the condition is the one leaving (Relic Vial's only Cleric dying). See
+   * {@link takeGrantLookBack}. Not game state: read only by the leave
+   * events the move emits at once. */
+  private grantLookBack: {
+    readonly batch: object | null;
+    readonly entries: ReadonlyMap<ObjectId, readonly TriggeredEntry[]>;
+  } | null = null;
+
   private leaveBatch: {
     readonly left: ObjectId[];
     readonly deferred: ObjectId[];
@@ -17698,10 +17722,17 @@ export class Game {
       // not to keep playing: their triggers stop firing. They leave play rather
       // than view — see the note in `matchesFilter`.
       if (this.state.players[object.controller]?.hasLost === true) continue;
-      const entries =
+      const current =
         lastSeen !== undefined
           ? this.departedTriggeredEntries(lastSeen)
           : this.effectiveTriggeredEntries(id, triggerGrantors);
+      // A conditional grant's leaves-the-battlefield ability it had just
+      // before the event and has since lost with the condition (603.10a).
+      const lookedBack = leaving ? this.grantLookBack?.entries.get(id) : undefined;
+      const entries =
+        lookedBack === undefined
+          ? current
+          : [...current, ...lookedBack.filter((e) => !current.some((c) => sameGrantRef(c.ref, e.ref)))];
       entries.forEach(({ ability, ref, lost }, index) => {
         // Layer 6 — a printed ability it has lost doesn't trigger.
         if (lost === true) return;
@@ -34586,9 +34617,34 @@ export class Game {
    * taking its own. Only the event's own victims, and only for the length of
    * the batch.
    */
+  /**
+   * Record {@link grantLookBack}: for each permanent, the leaves-the-
+   * battlefield abilities (`LOOK_BACK_TRIGGERS`) a static with a condition
+   * grants it right now. Only those: an unconditional grant from a source
+   * still on the battlefield is still there to read, and one whose source
+   * left too is read from that source's own snapshot.
+   */
+  private takeGrantLookBack(): void {
+    const sources = this.triggeredGrantSources().filter(
+      ({ ability, abilities }) =>
+        ability.condition !== undefined && abilities.some((a) => LOOK_BACK_TRIGGERS.has(a.trigger.on)),
+    );
+    const entries = new Map<ObjectId, TriggeredEntry[]>();
+    if (sources.length > 0) {
+      for (const id of this.state.zones.shared.battlefield) {
+        const granted = this.effectiveTriggeredEntries(id, sources).filter(
+          (e) => e.ref?.kind === "static" && e.lost !== true && LOOK_BACK_TRIGGERS.has(e.ability.trigger.on),
+        );
+        if (granted.length > 0) entries.set(id, granted);
+      }
+    }
+    this.grantLookBack = { batch: this.leaveBatch, entries };
+  }
+
   private snapshotLeaving(ids: Iterable<ObjectId>): void {
     const batch = this.leaveBatch;
     if (batch === null) return;
+    if (this.grantLookBack?.batch !== batch) this.takeGrantLookBack();
     // A pure read of a board nothing has moved on yet, so one cache region
     // shares the static-ability scan across every victim.
     withComputedCache(() => {
@@ -34832,6 +34888,9 @@ export class Game {
     // owner took to answer, and a second event reaching it while it waits
     // doesn't redirect it.
     if (leavingBattlefield) {
+      // Before anything has moved in a simultaneous event, or before this
+      // lone move.
+      if (this.leaveBatch === null || this.grantLookBack?.batch !== this.leaveBatch) this.takeGrantLookBack();
       const stint = object.zoneChangeCount ?? 0;
       const commanderWaiting =
         object.isCommander &&
