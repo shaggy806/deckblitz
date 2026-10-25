@@ -5,6 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { matchesFilter } from "../filter.js";
 import type { Game } from "../game.js";
 import {
   A,
@@ -16,7 +17,9 @@ import {
   lands,
   life,
   nextTurn,
+  pickModes,
   pickTargets,
+  registryOf,
   ref,
   settle,
   spawn,
@@ -95,5 +98,27 @@ describe("\"whenever this deals damage\" triggers once per damage event", () => 
     pickTargets(a, B);
     attack(game, a, [mystic]);
     expect(graveyard(game, B).length).toBe(2);
+  });
+});
+
+describe("a merged permanent is a token only if its topmost component is (rule 730.2d)", () => {
+  const isToken = (game: Game, id: string): boolean =>
+    matchesFilter(game.state, registryOf(game), id, { token: true }, { you: A });
+
+  it("a card mutated on top of a token is no token; a token under a card stays one", () => {
+    const { game, a } = table();
+    const top = spawn(game, "Bear Token");
+    const under = spawn(game, "Wolf Token");
+    // `spawn` puts a token's card on the battlefield; these are tokens.
+    game.state.objects[top].isToken = true;
+    game.state.objects[under].isToken = true;
+    lands(game, "Forest", 8);
+    pickModes(a, 0);
+    cast(game, toHand(game, "Glowstone Recluse"), { overload: true, targets: [ref(top)] });
+    pickModes(a, 1);
+    cast(game, toHand(game, "Glowstone Recluse"), { overload: true, targets: [ref(under)] });
+    expect(isToken(game, top)).toBe(false);
+    expect(isToken(game, under)).toBe(true);
+    expect(game.viewFor(A).objects[top]?.isToken).toBe(false);
   });
 });

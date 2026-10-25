@@ -118,12 +118,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
-- **A merged permanent's token status is its own object's.** Rule 730.2d: a merged permanent is a
-  token only if its topmost component is. `GameObject.isToken` stays the original object's, so a
-  card mutated on top of a token still reads as a token ("nontoken creature" filters, token
-  counts), and a token mutated on top of a card as a card. Leaving the battlefield is right either
-  way: each card component goes to the zone and each token component ceases to exist
-  (`scatterMergedComponents`). A token-ness read through `merged` would close it.
 - **A granted leaves-the-battlefield trigger doesn't look back for its grant.** Rule 603.10a:
   a leaves-the-battlefield ability triggers on the game as it was just before the event. A
   conditional `grantsTriggered` ("as long as you control a Cleric, this artifact has 'Whenever a

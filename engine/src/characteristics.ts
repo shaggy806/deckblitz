@@ -52,6 +52,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import {
   activePlayerOf,
   attackedYouDuringTheirLastTurn,
+  isTokenNow,
   manaCostOverride,
   permanentCount,
   printedCardName,
@@ -2282,7 +2283,7 @@ export function staticAffects(
   if (affects.excludeSelf && source.id === target.id) return false;
   if (target.controller !== source.controller) return false;
   if (!isCreatureNow()) return false;
-  if (affects.tokenOnly === true && target.isToken !== true) return false;
+  if (affects.tokenOnly === true && !isTokenNow(target)) return false;
   if (affects.withKeyword !== undefined && !hasKeyword(affects.withKeyword)) return false;
   if (affects.chosenColorOnly === true) {
     const chosen = source.chosenOnEnter;

@@ -31,7 +31,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { activePlayerOf, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
+import { activePlayerOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { hasSubtype } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
@@ -162,7 +162,7 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
   // A token copy's own "except it isn't legendary", over what it copied.
   if (object.notLegendary === true) withoutLegendary();
   if (
-    object.isToken === true &&
+    isTokenNow(object) &&
     object.zone === "battlefield" &&
     def.static.some((ability) => ability.notLegendaryIfToken === true)
   ) {
@@ -1151,7 +1151,7 @@ export function matchesFilter(
     if (tapped !== filter.tapped) return false;
   }
   if (filter.token !== undefined) {
-    const token = live !== undefined ? live.isToken : lki!.isToken;
+    const token = live !== undefined ? isTokenNow(live) : lki!.isToken;
     if (token !== filter.token) return false;
   }
   if (filter.isCommander !== undefined) {

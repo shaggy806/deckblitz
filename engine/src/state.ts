@@ -4356,6 +4356,15 @@ export const FACE_DOWN_CARDS: Readonly<Record<FaceDownKind, string>> = {
   disguise: "Face-Down Creature (Ward {2})",
 };
 
+/** Whether a permanent is a token (rule 111.1): a merged permanent is one
+ * only if its topmost component is (730.2d), whatever the object it is was —
+ * a card mutated onto a token is no token, a token mutated onto a card is
+ * one. Leaving the battlefield goes by each component's own (730.3). */
+export const isTokenNow = (object: Pick<GameObject, "isToken" | "merged">): boolean => {
+  const top = object.merged?.components[0];
+  return top === undefined || "self" in top ? object.isToken : top.token;
+};
+
 /** One card or token of a merged permanent (`GameObject.merged`). */
 export type MergedComponent =
   | { readonly self: true }

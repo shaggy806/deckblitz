@@ -47,6 +47,7 @@ import { hasRingBearerDesignation } from "./ring.js";
 import {
   activePlayerOf,
   faceName,
+  isTokenNow,
   manaCostOverride,
   nameOf,
   phasedOutIds,
@@ -651,7 +652,7 @@ function visible(
         ? null
         : object.targets.filter((t): t is TargetRef => t !== undefined),
     xValue: object.xValue,
-    isToken: object.isToken,
+    isToken: isTokenNow(object),
     stackCount: object.stackCount ?? null,
     isCopy: object.isCopy ?? false,
     suspended: object.suspended ?? false,
