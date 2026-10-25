@@ -9746,6 +9746,18 @@
   "condition:source-monstrous": {
    "family": "keyword:monstrosity",
    "example": "Domesticated Hydra: \"as long as this creature is monstrous\" — built B142 (the `monstrous` filter)."
+  },
+  "effect:discard-chosen-several-filters": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "example": "Distended Mindbender: from a revealed hand the caster chooses one card for each of two filters (a nonland card with mana value 3 or less and a card with mana value 4 or greater), and that player discards them together — discard-chosen takes one filter and one card."
+  },
+  "static:grant-emerge": {
+   "family": "keyword:emerge",
+   "example": "Herigast, Erupting Nullkite: 'Each creature spell you cast has emerge. The emerge cost is equal to its mana cost.' — emerge is built as a card's own alternativeCost only."
+  },
+  "condition:self-emerge-paid": {
+   "family": "keyword:emerge",
+   "example": "Adipose Offspring: 'If this creature's emerge cost was paid, instead create X of those tokens, where X is the sacrificed creature's toughness' — no record of an emerge payment on the permanent, nor its sacrifice."
   }
  }
 }
