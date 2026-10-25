@@ -179,6 +179,7 @@ import _poolFamishedForagers from "../pool/famished-foragers.js";
 import _poolFarewell from "../pool/farewell.js";
 import _poolFatefulAbsence from "../pool/fateful-absence.js";
 import _poolFecundGreenshell from "../pool/fecund-greenshell.js";
+import _poolFelhideSpiritbinder from "../pool/felhide-spiritbinder.js";
 import _poolFelidarRetreat from "../pool/felidar-retreat.js";
 import _poolFestivalCrasher from "../pool/festival-crasher.js";
 import _poolFestival from "../pool/festival.js";
@@ -285,6 +286,7 @@ import _poolKhalniHeartExpedition from "../pool/khalni-heart-expedition.js";
 import _poolKhorvathBrightflame from "../pool/khorvath-brightflame.js";
 import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
+import _poolKragmaButcher from "../pool/kragma-butcher.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
 import _poolKrovodHaunch from "../pool/krovod-haunch.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
@@ -357,6 +359,7 @@ import _poolNiallSilvain from "../pool/niall-silvain.js";
 import _poolNicolBolasTheDeceiver from "../pool/nicol-bolas-the-deceiver.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
 import _poolNimbleBrigand from "../pool/nimble-brigand.js";
+import _poolNobleQuarry from "../pool/noble-quarry.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousAssault from "../pool/noxious-assault.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
@@ -538,6 +541,7 @@ import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
 import _poolThrashOfRaptors from "../pool/thrash-of-raptors.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
+import _poolThunderBrute from "../pool/thunder-brute.js";
 import _poolTideforceElemental from "../pool/tideforce-elemental.js";
 import _poolTitanicBrawl from "../pool/titanic-brawl.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
@@ -805,6 +809,7 @@ const shard: CardShard = {
     _poolFarewell,
     _poolFatefulAbsence,
     _poolFecundGreenshell,
+    _poolFelhideSpiritbinder,
     _poolFelidarRetreat,
     _poolFestivalCrasher,
     _poolFestival,
@@ -911,6 +916,7 @@ const shard: CardShard = {
     _poolKhorvathBrightflame,
     _poolKiorasDambreaker,
     _poolKodamaOfTheNorthTree,
+    _poolKragmaButcher,
     _poolKreeCommandos,
     _poolKrovodHaunch,
     _poolKrumarBondKin,
@@ -983,6 +989,7 @@ const shard: CardShard = {
     _poolNicolBolasTheDeceiver,
     _poolNightmareShepherd,
     _poolNimbleBrigand,
+    _poolNobleQuarry,
     _poolNovaHellkite,
     _poolNoxiousAssault,
     _poolNoxiousRevival,
@@ -1164,6 +1171,7 @@ const shard: CardShard = {
     _poolThoughtErasure,
     _poolThrashOfRaptors,
     _poolThrivingGrove,
+    _poolThunderBrute,
     _poolTideforceElemental,
     _poolTitanicBrawl,
     _poolTobiasDoomedConqueror,

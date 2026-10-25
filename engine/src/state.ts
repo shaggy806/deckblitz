@@ -129,6 +129,9 @@ export interface GameObject {
    * kept across the move as `enteredSpectacle` is — Reckless Bushwhacker's
    * "if its surge cost was paid". */
   enteredSurge?: boolean;
+  /** Tribute wasn't paid as it entered (rule 702.104b — `tribute-not-paid`):
+   * set by the entry, gone with its next move. */
+  tributeUnpaid?: true;
   /** How many times its spell was kicked, for a multikicker spell (rule
    * 702.33c) — `timesKicked` carried across the stack-to-battlefield move
    * the way `enteredKicked` is, for "enters with a charge counter on it for
@@ -713,6 +716,11 @@ export interface GameObject {
     /** The protector its controller chose for it as it was about to enter
      * (rule 310.9a — a Siege's, among their opponents, 310.12a). */
     readonly protector?: PlayerId;
+    /** Tribute (rule 702.104a): the opponent its controller chose as it was
+     * about to enter (`null` with none to choose), then whether that player
+     * put the counters on it. */
+    readonly tributeFrom?: PlayerId | null;
+    readonly tributePaid?: boolean;
   };
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10), by name,
    * front first — copied from `CardDefinition.faces` when the object is
@@ -1521,6 +1529,8 @@ export interface LastKnownInfo {
   readonly enteredSpectacle?: boolean;
   /** Its spell was cast for its surge cost — `enteredSurge`. */
   readonly enteredSurge?: boolean;
+  /** Tribute wasn't paid as it entered — `tributeUnpaid`. */
+  readonly tributeUnpaid?: true;
   /** How many times its spell's multikicker or squad cost was paid —
    * `enteredTimesKicked`, so squad's copies are still made once it has left
    * (rule 702.157a). */
@@ -2568,6 +2578,13 @@ export type AwaitingDecision =
        * already on the battlefield gets a new one — 310.11). */
       readonly protector?: true;
       readonly protectorFor?: ObjectId;
+      /** Tribute as `source` is about to enter (rule 702.104a): `"opponent"`
+       * — its controller chooses the opponent among `options`; `"pay"` —
+       * that opponent answers whether to put the counters on it (the first
+       * option pays). */
+      readonly tribute?: "opponent" | "pay";
+      /** What the choice is, in words, for a menu that needs saying. */
+      readonly prompt?: string;
       readonly then?: EffectSpec;
       readonly targets?: ResolvedTargets;
       readonly x?: number;

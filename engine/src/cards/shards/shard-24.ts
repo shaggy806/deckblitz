@@ -59,6 +59,7 @@ import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
 import _poolBirthingHulk from "../pool/birthing-hulk.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
+import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
@@ -178,6 +179,7 @@ import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolExtusOriqOverlord from "../pool/extus-oriq-overlord.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
+import _poolFatedRetribution from "../pool/fated-retribution.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
 import _poolFeedTheCauldron from "../pool/feed-the-cauldron.js";
 import _poolFellGravship from "../pool/fell-gravship.js";
@@ -317,6 +319,7 @@ import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
 import _poolMeganticSliver from "../pool/megantic-sliver.js";
+import _poolMeletisAstronomer from "../pool/meletis-astronomer.js";
 import _poolMemnarch from "../pool/memnarch.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
@@ -367,6 +370,7 @@ import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPhantasmalForces from "../pool/phantasmal-forces.js";
+import _poolPillarOfWar from "../pool/pillar-of-war.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPlagueEngineer from "../pool/plague-engineer.js";
 import _poolPointedDiscussion from "../pool/pointed-discussion.js";
@@ -696,6 +700,7 @@ const shard: CardShard = {
     _poolBirthingHulk,
     _poolBitterbowSharpshooters,
     _poolBlackBoltInhumanKing,
+    _poolBlackOakOfOdunos,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
     _poolBlinkOfAnEye,
@@ -815,6 +820,7 @@ const shard: CardShard = {
     _poolExtusOriqOverlord,
     _poolEyeOfJace,
     _poolEzioBrashNovice,
+    _poolFatedRetribution,
     _poolFatefulTempest,
     _poolFeedTheCauldron,
     _poolFellGravship,
@@ -954,6 +960,7 @@ const shard: CardShard = {
     _poolMausoleumGuard,
     _poolMausoleumSecrets,
     _poolMeganticSliver,
+    _poolMeletisAstronomer,
     _poolMemnarch,
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
@@ -1004,6 +1011,7 @@ const shard: CardShard = {
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
     _poolPhantasmalForces,
+    _poolPillarOfWar,
     _poolPitilessGorgon,
     _poolPlagueEngineer,
     _poolPointedDiscussion,

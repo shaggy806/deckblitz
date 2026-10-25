@@ -1271,6 +1271,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("tribute (rule 702.104): the keyword and its \"if tribute wasn't paid\" trigger", () => {
+    const giant = face(
+      "Tribute 2 (As this creature enters, an opponent of your choice may put two +1/+1 counters on it.)\nWhen this creature enters, if tribute wasn't paid, this creature deals 5 damage to each opponent.",
+      "Creature — Giant",
+    );
+    expect(giant.tribute).toBe(2);
+    expect(giant.triggered[0].condition).toEqual({ kind: "tribute-not-paid" });
+    expect(giant.complete).toBe(true);
+  });
+
   it("awaken (rule 702.113a): the spell's own targets and effect, then the land's", () => {
     const clutch = face(
       "Return target creature to its owner's hand.\nAwaken 3—{4}{U} (If you cast this spell for {4}{U}, also put three +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)",

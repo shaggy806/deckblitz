@@ -229,6 +229,7 @@ import _poolGigantoad from "../pool/gigantoad.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
+import _poolGodFavoredGeneral from "../pool/god-favored-general.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
 import _poolGripOfTheRoil from "../pool/grip-of-the-roil.js";
 import _poolGroveRumbler from "../pool/grove-rumbler.js";
@@ -348,6 +349,7 @@ import _poolMindstab from "../pool/mindstab.js";
 import _poolMinscBelovedRanger from "../pool/minsc-beloved-ranger.js";
 import _poolMirkwood from "../pool/mirkwood.js";
 import _poolMirrorRoom from "../pool/mirror-room.js";
+import _poolMischiefAndMayhem from "../pool/mischief-and-mayhem.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
 import _poolModeration from "../pool/moderation.js";
@@ -370,6 +372,7 @@ import _poolNoiseMarine from "../pool/noise-marine.js";
 import _poolNomadicElf from "../pool/nomadic-elf.js";
 import _poolNormanOsborn from "../pool/norman-osborn.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
+import _poolNyxbornShieldmate from "../pool/nyxborn-shieldmate.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
 import _poolOhabiCaleria from "../pool/ohabi-caleria.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
@@ -458,6 +461,7 @@ import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
 import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js";
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
+import _poolSatyrNyxSmith from "../pool/satyr-nyx-smith.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolScionSummoner from "../pool/scion-summoner.js";
@@ -881,6 +885,7 @@ const shard: CardShard = {
     _poolGoblinBalloonBrigade,
     _poolGoblinDarkDwellers,
     _poolGoblinPiker,
+    _poolGodFavoredGeneral,
     _poolGreatHornKrushok,
     _poolGripOfTheRoil,
     _poolGroveRumbler,
@@ -1000,6 +1005,7 @@ const shard: CardShard = {
     _poolMinscBelovedRanger,
     _poolMirkwood,
     _poolMirrorRoom,
+    _poolMischiefAndMayhem,
     _poolMishrasFactory,
     _poolMithrilCoat,
     _poolModeration,
@@ -1022,6 +1028,7 @@ const shard: CardShard = {
     _poolNomadicElf,
     _poolNormanOsborn,
     _poolNoviceDissector,
+    _poolNyxbornShieldmate,
     _poolOakenBoon,
     _poolOhabiCaleria,
     _poolOkinaTempleToTheGrandfathers,
@@ -1110,6 +1117,7 @@ const shard: CardShard = {
     _poolSaradocMasterOfBuckland,
     _poolSarevoksTome,
     _poolSarumansTrickery,
+    _poolSatyrNyxSmith,
     _poolSawtuskDemolisher,
     _poolScarwoodGoblins,
     _poolScionSummoner,

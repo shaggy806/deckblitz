@@ -5379,3 +5379,14 @@ engine terms. A second thing to check is a second test.
 ### Gnarled Scarhide: bestowed, it's an Aura, and a creature again once the host dies
 - **Do:** Cast Gnarled Scarhide the "(bestow)" way onto your Grizzly Bears. Then cast Murder on the Bears.
 - **Expect:** The Scarhide sits on the Bears as an Aura (they're 4/3 and can't block). When the Bears die, the Scarhide stays on the battlefield as a 2/1 creature, not in the graveyard.
+
+## Tribute (2026-10-25, Born of the Gods)
+
+### Pharagax Giant: the opponent decides whether to pay tribute
+- **Do:** Cast Pharagax Giant. When Bob is asked, choose "Don't".
+- **Expect:** Bob's banner reads "Pharagax Giant — Tribute 2: you may put 2 +1/+1 counters on it", with "Put 2 +1/+1 counters on it" and "Don't". The Giant enters as a 3/3 and deals 5 damage to Bob.
+- **Not a bug:** Choosing "Put 2 +1/+1 counters on it" instead has it enter as a 5/5 and deal no damage.
+
+### Snake of the Golden Grove: with two opponents, you choose who decides tribute
+- **Do:** Cast Snake of the Golden Grove. Choose Carol when asked.
+- **Expect:** Your banner reads "Snake of the Golden Grove — Tribute 3: choose an opponent", with Bob and Carol as buttons. Then Carol, not Bob, is asked whether to put 3 +1/+1 counters on it.

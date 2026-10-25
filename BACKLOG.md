@@ -164,10 +164,15 @@ section keeps only what to do next.
   but return-from-graveyard's filter now reads the spell's X; batch 157 the rest of Commander
   2014 and Khans of Tarkir, no feature built; batch 158 the rest of Magic 2015 and Conspiracy,
   on parley; batch 161 the rest of Journey into Nyx, on bestow, with the eleven earlier bestow
-  cards it unblocked);
-  **next, Born of the Gods** (104 left), then Commander 2013 and Theros. Bestow has pool cards to
-  copy now (Gnarled Scarhide, Hypnotic Siren, Nyxborn Hydra with an {X}); Born of the Gods'
-  inspired has none yet, nor does tribute. Batch 161's blockers are one or two each ("all Auras
+  cards it unblocked; batch 164 the rest of Born of the Gods, on tribute);
+  **next, Commander 2013** (35 left) **and Theros** (111 left) — one batch of ~146 is past five
+  agents, so Commander 2013 with Theros's top ~75, the rest of Theros the batch after. Theros's
+  mechanics are all in the pool now: bestow, heroic (Brigone, Soldier of Meletis), monstrosity
+  ("is monstrous"), devotion amounts, and inspired is just `becomes-untapped` (Pain Seer).
+  Batch 164's blockers are one each (`B164.json`); Kraken of the Straits found a silent gap — a
+  block restriction's `{ amount }` other than the source's own power, toughness or mana value
+  reads as NaN in `goad.ts`'s `sourceAmount`, so the restriction never applies, with no error.
+  Batch 161's blockers are one or two each ("all Auras
   attached to it", `filter:attached-to-target` — 2); bestow's unbuilt forms
   (`keyword:bestow-extensions` — Detective's Phoenix). Batch 158's: "last turn" life loss
   (`condition:lost-life-last-turn` — 2); Goblin Kaboomist waits
@@ -176,7 +181,7 @@ section keeps only what to do next.
   newest-first walk (Journey into Nyx back to Scars of Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
   of Alara — ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
   and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
-  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods), B165 (middle: Zendikar) and B166 (oldest: Mirage's first half, its ~110 most-played); after those, take the highest `B<N>` on `origin/main` plus one, checked again
+  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar) and B166 (oldest: Mirage's first half, its ~110 most-played); after those, take the highest `B<N>` on `origin/main` plus one, checked again
   just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); **next, Zendikar** (113 left), then Magic 2010 (36), Alara Reborn (84), Conflux (69) and Shards of Alara (94), each by `cards:sets -- --set <code>`. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
   157's leading blocker: a morph cost that reveals a card (`cost:morph-reveal-card` — 5), then
   "blocks this turn if able" (`effect:must-block-this-turn`) and looking at face-down

@@ -560,6 +560,7 @@ import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
+import _poolThunderousMight from "../pool/thunderous-might.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
 import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
@@ -633,6 +634,7 @@ import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
+import _tokensGreenEnchantmentCentaurToken33 from "../tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
 import _tokensMinotaurToken from "../tokens/minotaur-token.js";
@@ -1207,6 +1209,7 @@ const shard: CardShard = {
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThunderStrike,
+    _poolThunderousMight,
     _poolTimeElemental,
     _poolTitanHunter,
     _poolTophEarthbendingMaster,
@@ -1282,6 +1285,7 @@ const shard: CardShard = {
     _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
+    _tokensGreenEnchantmentCentaurToken33,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensKavuTokenJaredCarthalion,
     _tokensMinotaurToken,

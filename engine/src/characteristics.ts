@@ -877,6 +877,8 @@ function evalStaticCondition(
         source.spectaclePaid === true ||
         opts.sourceLastKnown?.enteredSpectacle === true
       );
+    case "tribute-not-paid":
+      return source.tributeUnpaid === true || opts.sourceLastKnown?.tributeUnpaid === true;
     case "self-surge-paid":
       return (
         source.enteredSurge === true ||

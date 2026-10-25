@@ -363,6 +363,7 @@ import _poolNoEscape from "../pool/no-escape.js";
 import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
+import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
@@ -527,6 +528,7 @@ import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
 import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
+import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
@@ -991,6 +993,7 @@ const shard: CardShard = {
     _poolNoOneLeftBehind,
     _poolNoWayOut,
     _poolNornsWellspring,
+    _poolNyxbornWolf,
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
@@ -1155,6 +1158,7 @@ const shard: CardShard = {
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
     _poolThaliaTheSurvivor,
+    _poolThassasRebuff,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,

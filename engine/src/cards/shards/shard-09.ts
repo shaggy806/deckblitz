@@ -161,6 +161,7 @@ import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
+import _poolEpharasRadiance from "../pool/epharas-radiance.js";
 import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
@@ -259,6 +260,7 @@ import _poolHauntedRidge from "../pool/haunted-ridge.js";
 import _poolHavocDemon from "../pool/havoc-demon.js";
 import _poolHeavyInfantry from "../pool/heavy-infantry.js";
 import _poolHellToPay from "../pool/hell-to-pay.js";
+import _poolHeraldOfTorment from "../pool/herald-of-torment.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
 import _poolHistorianOfZhalfir from "../pool/historian-of-zhalfir.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
@@ -644,6 +646,7 @@ import _poolZofShade from "../pool/zof-shade.js";
 import _tokensArmyToken from "../tokens/army-token.js";
 import _tokensAssassinToken from "../tokens/assassin-token.js";
 import _tokensBirdTokenHermesOverseerOfElpis from "../tokens/bird-token-hermes-overseer-of-elpis.js";
+import _tokensBlackEnchantmentZombieToken22 from "../tokens/black-enchantment-zombie-token-2-2.js";
 import _tokensBoarTokenWolfsQuarry from "../tokens/boar-token-wolfs-quarry.js";
 import _tokensDoombot from "../tokens/doombot.js";
 import _tokensElementalTokenAllColors from "../tokens/elemental-token-all-colors.js";
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
+    _poolEpharasRadiance,
     _poolEronTheRelentless,
     _poolErrantStreetArtist,
     _poolErstwhileTrooper,
@@ -922,6 +926,7 @@ const shard: CardShard = {
     _poolHavocDemon,
     _poolHeavyInfantry,
     _poolHellToPay,
+    _poolHeraldOfTorment,
     _poolHeroOfBladehold,
     _poolHistorianOfZhalfir,
     _poolHogMonkey,
@@ -1309,6 +1314,7 @@ const shard: CardShard = {
     _tokensArmyToken,
     _tokensAssassinToken,
     _tokensBirdTokenHermesOverseerOfElpis,
+    _tokensBlackEnchantmentZombieToken22,
     _tokensBoarTokenWolfsQuarry,
     _tokensDoombot,
     _tokensElementalTokenAllColors,

@@ -220,6 +220,7 @@ function faceSource(face, ctx) {
     improvise: parsed.improvise,
     toxic: parsed.toxic,
     devour: parsed.devour,
+    tribute: parsed.tribute,
     compleated: parsed.compleated,
     readAhead: parsed.readAhead,
     castFromGraveyardIf: parsed.castFromGraveyardIf,

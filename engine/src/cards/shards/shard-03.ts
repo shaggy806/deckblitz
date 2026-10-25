@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbyssalGatekeeper from "../pool/abyssal-gatekeeper.js";
 import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
+import _poolAerieWorshippers from "../pool/aerie-worshippers.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
 import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
@@ -68,6 +69,7 @@ import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
+import _poolChromanticore from "../pool/chromanticore.js";
 import _poolChronostutter from "../pool/chronostutter.js";
 import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
@@ -130,6 +132,7 @@ import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
+import _poolEliteSkirmisher from "../pool/elite-skirmisher.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
 import _poolEmbalmedAscendant from "../pool/embalmed-ascendant.js";
@@ -150,6 +153,7 @@ import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
+import _poolEyeGouge from "../pool/eye-gouge.js";
 import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
@@ -427,6 +431,7 @@ import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSerumSovereign from "../pool/serum-sovereign.js";
+import _poolSetessanStarbreaker from "../pool/setessan-starbreaker.js";
 import _poolSettleTheScore from "../pool/settle-the-score.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
@@ -456,6 +461,7 @@ import _poolSleightOfHand from "../pool/sleight-of-hand.js";
 import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
+import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
@@ -606,6 +612,7 @@ const shard: CardShard = {
   pool: [
     _poolAbyssalGatekeeper,
     _poolAdricMathematicalGenius,
+    _poolAerieWorshippers,
     _poolAkkiWarPaint,
     _poolAlabornMusketeer,
     _poolAlibansTower,
@@ -669,6 +676,7 @@ const shard: CardShard = {
     _poolChitterspitter,
     _poolChivalricAlliance,
     _poolChocoboCamp,
+    _poolChromanticore,
     _poolChronostutter,
     _poolChubToad,
     _poolCinderBarrens,
@@ -731,6 +739,7 @@ const shard: CardShard = {
     _poolDwarvenWeaponsmith,
     _poolEdenSeatOfTheSanctum,
     _poolElementalSummoning,
+    _poolEliteSkirmisher,
     _poolEloiseNephaliaSleuth,
     _poolElvishRejuvenator,
     _poolEmbalmedAscendant,
@@ -751,6 +760,7 @@ const shard: CardShard = {
     _poolEvidenceExaminer,
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
+    _poolEyeGouge,
     _poolEyelessWatcher,
     _poolFaerieDuelist,
     _poolFallOfTheThran,
@@ -1028,6 +1038,7 @@ const shard: CardShard = {
     _poolSeraphicSteed,
     _poolSerrasEmbrace,
     _poolSerumSovereign,
+    _poolSetessanStarbreaker,
     _poolSettleTheScore,
     _poolSewerdreg,
     _poolShamblingGhoul,
@@ -1057,6 +1068,7 @@ const shard: CardShard = {
     _poolSlitheringCryptid,
     _poolSmeagolHelpfulGuide,
     _poolSmokebraider,
+    _poolSnakeOfTheGoldenGrove,
     _poolSolemnOffering,
     _poolSomberwaldAlpha,
     _poolSoulOfTheRapids,

@@ -88,6 +88,7 @@ import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
 import _poolChainToMemory from "../pool/chain-to-memory.js";
+import _poolChampionOfStraySouls from "../pool/champion-of-stray-souls.js";
 import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
@@ -95,6 +96,7 @@ import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
 import _poolCitadelCastellan from "../pool/citadel-castellan.js";
 import _poolCitadelGate from "../pool/citadel-gate.js";
+import _poolClaimOfErebos from "../pool/claim-of-erebos.js";
 import _poolClawsOfValakut from "../pool/claws-of-valakut.js";
 import _poolClearShot from "../pool/clear-shot.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
@@ -331,6 +333,7 @@ import _poolLavaCoil from "../pool/lava-coil.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
+import _poolLightningVolley from "../pool/lightning-volley.js";
 import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
@@ -418,6 +421,7 @@ import _poolOverprotect from "../pool/overprotect.js";
 import _poolPalazzoArchers from "../pool/palazzo-archers.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
+import _poolPeregrination from "../pool/peregrination.js";
 import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
@@ -427,6 +431,7 @@ import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPitilessHorde from "../pool/pitiless-horde.js";
 import _poolPlasmaJockey from "../pool/plasma-jockey.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
+import _poolPleaForGuidance from "../pool/plea-for-guidance.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPollywogSymbiote from "../pool/pollywog-symbiote.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolCelestialForce,
     _poolCemeteryTampering,
     _poolChainToMemory,
+    _poolChampionOfStraySouls,
     _poolChannelerInitiate,
     _poolChariotOfVictory,
     _poolChartoothCougar,
@@ -740,6 +746,7 @@ const shard: CardShard = {
     _poolChromiumTheMutable,
     _poolCitadelCastellan,
     _poolCitadelGate,
+    _poolClaimOfErebos,
     _poolClawsOfValakut,
     _poolClearShot,
     _poolClockOfOmens,
@@ -976,6 +983,7 @@ const shard: CardShard = {
     _poolLavaglidePathway,
     _poolLeylineBinding,
     _poolLightOfHope,
+    _poolLightningVolley,
     _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
     _poolLitaLittleOrphanAmphibian,
@@ -1063,6 +1071,7 @@ const shard: CardShard = {
     _poolPalazzoArchers,
     _poolPanharmonicon,
     _poolPantherWarriors,
+    _poolPeregrination,
     _poolPestilentSpirit,
     _poolPhantasmalShieldback,
     _poolPiaDeterminedRebuilder,
@@ -1072,6 +1081,7 @@ const shard: CardShard = {
     _poolPitilessHorde,
     _poolPlasmaJockey,
     _poolPlazaOfHeroes,
+    _poolPleaForGuidance,
     _poolPollutedDead,
     _poolPollywogSymbiote,
     _poolPolygoyf,

@@ -178,6 +178,7 @@ import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
 import _poolEnduringSliver from "../pool/enduring-sliver.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
 import _poolEntropicCloud from "../pool/entropic-cloud.js";
+import _poolEpharasEnlightenment from "../pool/epharas-enlightenment.js";
 import _poolEssenceDepleter from "../pool/essence-depleter.js";
 import _poolEssenceWarden from "../pool/essence-warden.js";
 import _poolEurekaMoment from "../pool/eureka-moment.js";
@@ -425,6 +426,7 @@ import _poolRampagingGrowth from "../pool/rampaging-growth.js";
 import _poolRanAndShaw from "../pool/ran-and-shaw.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
 import _poolRealmwalker from "../pool/realmwalker.js";
+import _poolReapWhatIsSown from "../pool/reap-what-is-sown.js";
 import _poolReconCraftTheta from "../pool/recon-craft-theta.js";
 import _poolRekiTheHistoryOfKamigawa from "../pool/reki-the-history-of-kamigawa.js";
 import _poolRelentlessPursuit from "../pool/relentless-pursuit.js";
@@ -475,6 +477,7 @@ import _poolScuttlegator from "../pool/scuttlegator.js";
 import _poolSeaGateBanneret from "../pool/sea-gate-banneret.js";
 import _poolSealAway from "../pool/seal-away.js";
 import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
+import _poolSearingBlood from "../pool/searing-blood.js";
 import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSeeker from "../pool/seeker.js";
@@ -847,6 +850,7 @@ const shard: CardShard = {
     _poolEnduringSliver,
     _poolEnragedFlamecaster,
     _poolEntropicCloud,
+    _poolEpharasEnlightenment,
     _poolEssenceDepleter,
     _poolEssenceWarden,
     _poolEurekaMoment,
@@ -1094,6 +1098,7 @@ const shard: CardShard = {
     _poolRanAndShaw,
     _poolRavenousRats,
     _poolRealmwalker,
+    _poolReapWhatIsSown,
     _poolReconCraftTheta,
     _poolRekiTheHistoryOfKamigawa,
     _poolRelentlessPursuit,
@@ -1144,6 +1149,7 @@ const shard: CardShard = {
     _poolSeaGateBanneret,
     _poolSealAway,
     _poolSearchForAzcanta,
+    _poolSearingBlood,
     _poolSeasonedConsultant,
     _poolSeeTheTruth,
     _poolSeeker,

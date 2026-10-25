@@ -39,6 +39,7 @@ import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
+import _poolAshioksAdept from "../pool/ashioks-adept.js";
 import _poolAtarkaEfreet from "../pool/atarka-efreet.js";
 import _poolAtarkaPummeler from "../pool/atarka-pummeler.js";
 import _poolAtomize from "../pool/atomize.js";
@@ -634,6 +635,7 @@ import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
+import _tokensRedEnchantmentElementalToken31Haste from "../tokens/red-enchantment-elemental-token-3-1-haste.js";
 import _tokensRhinoWarriorToken from "../tokens/rhino-warrior-token.js";
 import _tokensRobotToken from "../tokens/robot-token.js";
 import _tokensSnakeToken54 from "../tokens/snake-token-5-4.js";
@@ -679,6 +681,7 @@ const shard: CardShard = {
     _poolArgivianBlacksmith,
     _poolArtificerClass,
     _poolAshcoatBear,
+    _poolAshioksAdept,
     _poolAtarkaEfreet,
     _poolAtarkaPummeler,
     _poolAtomize,
@@ -1276,6 +1279,7 @@ const shard: CardShard = {
     _tokensOozeToken33,
     _tokensPegasusToken,
     _tokensRebelToken,
+    _tokensRedEnchantmentElementalToken31Haste,
     _tokensRhinoWarriorToken,
     _tokensRobotToken,
     _tokensSnakeToken54,

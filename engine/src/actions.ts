@@ -1478,6 +1478,8 @@ export type LegalAction =
       /** `options` is the full creature-type catalog (a search picker), not a
        * short fixed menu (buttons). See `AwaitingDecision`. */
       readonly catalog: boolean;
+      /** What the choice is, in words (tribute's), when set. */
+      readonly prompt?: string;
       /**
        * The creature types most represented among the chooser's own cards
        * (hand, library, graveyard, command zone) and everything on the

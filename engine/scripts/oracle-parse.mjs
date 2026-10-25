@@ -388,6 +388,8 @@ function keywordPart(part) {
     return { static: [...v.static], triggered: [...v.triggered] };
   }
   if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
+  // Tribute N (rule 702.104a): the opponent's counters, asked as it enters.
+  if ((m = /^tribute (\d+)$/i.exec(p))) return { card: { tribute: Number(m[1]) } };
   // Devour N, devour land N, devour Food N (rule 702.82): what may be eaten.
   if ((m = /^devour (?:(land|food) )?(\d+)$/i.exec(p))) {
     const quality = m[1]?.toLowerCase();
@@ -2672,6 +2674,8 @@ const INTERVENING_IFS = {
   // Rule 702.117a: the permanent's spell was cast for its surge cost.
   "if its surge cost was paid,": { kind: "self-surge-paid" },
   "if ~'s surge cost was paid,": { kind: "self-surge-paid" },
+  // Rule 702.104b: the chosen opponent didn't pay the tribute.
+  "if tribute wasn't paid,": { kind: "tribute-not-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },

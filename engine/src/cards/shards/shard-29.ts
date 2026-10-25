@@ -194,6 +194,7 @@ import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
+import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendlash from "../pool/fiendlash.js";
 import _poolFightWithFire from "../pool/fight-with-fire.js";
@@ -371,6 +372,7 @@ import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOraclesVault from "../pool/oracles-vault.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
+import _poolOreskosSunGuide from "../pool/oreskos-sun-guide.js";
 import _poolOsaiVultures from "../pool/osai-vultures.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
@@ -851,6 +853,7 @@ const shard: CardShard = {
     _poolFalkenrathMarauders,
     _poolFallOfTheTitans,
     _poolFangrenMarauder,
+    _poolFatedReturn,
     _poolFertileGround,
     _poolFiendlash,
     _poolFightWithFire,
@@ -1028,6 +1031,7 @@ const shard: CardShard = {
     _poolOraclesVault,
     _poolOrbitalPlunge,
     _poolOrcishMedicine,
+    _poolOreskosSunGuide,
     _poolOsaiVultures,
     _poolOtharriSunsGlory,
     _poolOutcasterTrailblazer,

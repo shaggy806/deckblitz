@@ -663,6 +663,7 @@ import _tokensTheAtropal from "../tokens/the-atropal.js";
 import _tokensTiny from "../tokens/tiny.js";
 import _tokensTyranidGargoyleToken from "../tokens/tyranid-gargoyle-token.js";
 import _tokensWarriorTokenVigilance from "../tokens/warrior-token-vigilance.js";
+import _tokensWhiteEnchantmentSoldierToken from "../tokens/white-enchantment-soldier-token.js";
 import _tokensWolfTokenGarrukCursedHuntsman from "../tokens/wolf-token-garruk-cursed-huntsman.js";
 import _tokensXXBlueRedWeirdToken from "../tokens/x-x-blue-red-weird-token.js";
 
@@ -1330,6 +1331,7 @@ const shard: CardShard = {
     _tokensTiny,
     _tokensTyranidGargoyleToken,
     _tokensWarriorTokenVigilance,
+    _tokensWhiteEnchantmentSoldierToken,
     _tokensWolfTokenGarrukCursedHuntsman,
     _tokensXXBlueRedWeirdToken,
   ],

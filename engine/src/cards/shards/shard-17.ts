@@ -182,6 +182,7 @@ import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFalseDemise from "../pool/false-demise.js";
+import _poolFanaticOfXenagos from "../pool/fanatic-of-xenagos.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
@@ -366,6 +367,8 @@ import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js
 import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
+import _poolNessianDemolok from "../pool/nessian-demolok.js";
+import _poolNessianWildsRavager from "../pool/nessian-wilds-ravager.js";
 import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNettleDrone from "../pool/nettle-drone.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
@@ -380,6 +383,7 @@ import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
+import _poolOraclesInsight from "../pool/oracles-insight.js";
 import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrchardElemental from "../pool/orchard-elemental.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
@@ -583,6 +587,7 @@ import _poolUnderworldDreams from "../pool/underworld-dreams.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
+import _poolVanguardOfBrimaz from "../pool/vanguard-of-brimaz.js";
 import _poolVedalkenInfiltrator from "../pool/vedalken-infiltrator.js";
 import _poolVeiledShade from "../pool/veiled-shade.js";
 import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
@@ -835,6 +840,7 @@ const shard: CardShard = {
     _poolFaebloomTrick,
     _poolFaerieVandal,
     _poolFalseDemise,
+    _poolFanaticOfXenagos,
     _poolFandanielTelophoroiAscian,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
@@ -1019,6 +1025,8 @@ const shard: CardShard = {
     _poolNayaPanorama,
     _poolNecroticWound,
     _poolNemaSiltlurker,
+    _poolNessianDemolok,
+    _poolNessianWildsRavager,
     _poolNestRobber,
     _poolNettleDrone,
     _poolNiambiFaithfulHealer,
@@ -1033,6 +1041,7 @@ const shard: CardShard = {
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
+    _poolOraclesInsight,
     _poolOrahSkyclaveHierophant,
     _poolOrchardElemental,
     _poolOrcishArtillery,
@@ -1236,6 +1245,7 @@ const shard: CardShard = {
     _poolUnholyOfficiant,
     _poolUnknownShores,
     _poolUnsummon,
+    _poolVanguardOfBrimaz,
     _poolVedalkenInfiltrator,
     _poolVeiledShade,
     _poolVeinwitchCoven,

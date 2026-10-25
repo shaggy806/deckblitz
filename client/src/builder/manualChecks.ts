@@ -8233,4 +8233,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Gnarled Scarhide: bestowed, it's an Aura, and a creature again once the host dies",
     board({ you: { bf: ['Swamp*7', 'Grizzly Bears'], hand: ['Gnarled Scarhide', 'Murder'] } }),
   ),
+  preset(
+    'Pharagax Giant: the opponent decides whether to pay tribute',
+    board({ you: { bf: ['Mountain*5'], hand: ['Pharagax Giant'] }, opp: { human: true } }),
+  ),
+  preset(
+    'Snake of the Golden Grove: with two opponents, you choose who decides tribute',
+    board({ you: { bf: ['Forest*5'], hand: ['Snake of the Golden Grove'] }, opp: [{ human: true }, { human: true }] }),
+  ),
 ]

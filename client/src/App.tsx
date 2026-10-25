@@ -4024,9 +4024,10 @@ function Table({
       <div className="controls">
         <span>
           {game.nameOf(creatureTypeChoiceAction.source)} —{' '}
-          {creatureTypeChoiceAction.options.every((t) => view.turnOrder.includes(t as PlayerId))
-            ? 'choose its protector'
-            : 'choose one'}
+          {creatureTypeChoiceAction.prompt ??
+            (creatureTypeChoiceAction.options.every((t) => view.turnOrder.includes(t as PlayerId))
+              ? 'choose its protector'
+              : 'choose one')}
         </span>
         {creatureTypeChoiceAction.options.map((t) => (
           <button

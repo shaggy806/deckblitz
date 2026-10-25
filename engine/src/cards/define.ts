@@ -1130,6 +1130,11 @@ export type StaticCondition =
    * "If its surge cost was paid" (Reckless Bushwhacker, Crush of Tentacles);
    * read like `self-spectacle-paid`. */
   | { readonly kind: "self-surge-paid" }
+  /** Tribute (rule 702.104b): "if tribute wasn't paid" — the opponent chosen
+   * as the ability's own source entered didn't have it enter with its
+   * tribute's +1/+1 counters (`CardDefinition.tribute`). Read from the
+   * permanent, or as it last existed once it has left. */
+  | { readonly kind: "tribute-not-paid" }
   /**
    * How many counters the ability's own source has — Undying's "**if it had
    * no +1/+1 counters on it**".
@@ -2755,6 +2760,14 @@ export interface CardDefinition {
    * battlefield. `null` for none.
    */
   readonly devour: { readonly multiplier: number; readonly filter: CardFilter } | null;
+  /**
+   * Tribute N (rule 702.104a): "As this creature enters, choose an opponent.
+   * That player may put an additional N +1/+1 counters on it as it enters."
+   * Asked as it's about to enter (rule 614.12): its controller picks the
+   * opponent, who answers; "if tribute wasn't paid" is the `tribute-not-paid`
+   * condition. `null` for none.
+   */
+  readonly tribute: number | null;
   /** "As this enters, choose a creature type" (Urza's Incubator — needed-cards
    * P14). The permanent's `chosenCreatureType` is set once its controller
    * answers; a `costModification.matchesChosenCreatureType` reads it back. */
@@ -3234,6 +3247,7 @@ const PRINTED_ABILITY: {
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
   shufflesIntoLibraryInstead: (def) => def.shufflesIntoLibraryInstead,
   devour: (def) => def.devour !== null,
+  tribute: (def) => def.tribute !== null,
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   loyalty: false,
@@ -3439,6 +3453,7 @@ interface CardDraft {
   exchangeTextOnEnter?: CardFilter;
   shufflesIntoLibraryInstead?: boolean;
   devour?: { readonly multiplier: number; readonly filter: CardFilter };
+  tribute?: number;
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
   loyalty?: number;
@@ -3639,6 +3654,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,
     shufflesIntoLibraryInstead: draft.shufflesIntoLibraryInstead ?? false,
     devour: draft.devour ?? null,
+    tribute: draft.tribute ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     loyalty,

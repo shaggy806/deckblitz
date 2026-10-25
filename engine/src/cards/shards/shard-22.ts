@@ -487,6 +487,7 @@ import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
+import _poolSkyreaping from "../pool/skyreaping.js";
 import _poolSlipperyBogle from "../pool/slippery-bogle.js";
 import _poolSlipperyScoundrel from "../pool/slippery-scoundrel.js";
 import _poolSlithAscendant from "../pool/slith-ascendant.js";
@@ -522,6 +523,7 @@ import _poolStormReading from "../pool/storm-reading.js";
 import _poolStormcatchMentor from "../pool/stormcatch-mentor.js";
 import _poolStranglingSpores from "../pool/strangling-spores.js";
 import _poolStrategicIntervention from "../pool/strategic-intervention.js";
+import _poolStratusWalk from "../pool/stratus-walk.js";
 import _poolStressDream from "../pool/stress-dream.js";
 import _poolStrongholdZeppelin from "../pool/stronghold-zeppelin.js";
 import _poolStruggleSurvive from "../pool/struggle-survive.js";
@@ -589,6 +591,7 @@ import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
+import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
@@ -1141,6 +1144,7 @@ const shard: CardShard = {
     _poolSkirkProspector,
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,
+    _poolSkyreaping,
     _poolSlipperyBogle,
     _poolSlipperyScoundrel,
     _poolSlithAscendant,
@@ -1176,6 +1180,7 @@ const shard: CardShard = {
     _poolStormcatchMentor,
     _poolStranglingSpores,
     _poolStrategicIntervention,
+    _poolStratusWalk,
     _poolStressDream,
     _poolStrongholdZeppelin,
     _poolStruggleSurvive,
@@ -1243,6 +1248,7 @@ const shard: CardShard = {
     _poolUltimaOriginOfOblivion,
     _poolUnburden,
     _poolUncannySpeed,
+    _poolUnravelTheAether,
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
     _poolUtvaraScalper,

@@ -206,6 +206,7 @@ import _poolGhituChronicler from "../pool/ghitu-chronicler.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
 import _poolGiantKoi from "../pool/giant-koi.js";
 import _poolGilaCourser from "../pool/gila-courser.js";
+import _poolGlimpseTheSunGod from "../pool/glimpse-the-sun-god.js";
 import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
@@ -487,6 +488,7 @@ import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
+import _poolShrikeHarpy from "../pool/shrike-harpy.js";
 import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
 import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
@@ -524,6 +526,7 @@ import _poolStrikingPalette from "../pool/striking-palette.js";
 import _poolStromgaldCabal from "../pool/stromgald-cabal.js";
 import _poolSubiraTulzidiCaravanner from "../pool/subira-tulzidi-caravanner.js";
 import _poolSubtlety from "../pool/subtlety.js";
+import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
@@ -878,6 +881,7 @@ const shard: CardShard = {
     _poolGhorClanWrecker,
     _poolGiantKoi,
     _poolGilaCourser,
+    _poolGlimpseTheSunGod,
     _poolGlissasScorn,
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
@@ -1159,6 +1163,7 @@ const shard: CardShard = {
     _poolShiarSoldier,
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
+    _poolShrikeHarpy,
     _poolShuYunTheSilentTempest,
     _poolSibsigMuckdraggers,
     _poolSimicCharm,
@@ -1196,6 +1201,7 @@ const shard: CardShard = {
     _poolStromgaldCabal,
     _poolSubiraTulzidiCaravanner,
     _poolSubtlety,
+    _poolSuddenStorm,
     _poolSuddenStrength,
     _poolSunSentinel,
     _poolSungracePegasus,

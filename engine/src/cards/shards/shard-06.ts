@@ -37,6 +37,7 @@ import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolArtificersEpiphany from "../pool/artificers-epiphany.js";
 import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
+import _poolAspectOfHydra from "../pool/aspect-of-hydra.js";
 import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
@@ -107,6 +108,7 @@ import _poolChillingTrap from "../pool/chilling-trap.js";
 import _poolChimilTheInnerSun from "../pool/chimil-the-inner-sun.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
+import _poolChorusOfTheTides from "../pool/chorus-of-the-tides.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
 import _poolClatteringSkeletons from "../pool/clattering-skeletons.js";
 import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
@@ -187,6 +189,7 @@ import _poolEvilReawakened from "../pool/evil-reawakened.js";
 import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
+import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
 import _poolFeastingTrollKing from "../pool/feasting-troll-king.js";
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolArmoredScrapgorger,
     _poolArtificersEpiphany,
     _poolAshnodsTransmogrant,
+    _poolAspectOfHydra,
     _poolAssureAssemble,
     _poolAtog,
     _poolAugmentingAutomaton,
@@ -751,6 +755,7 @@ const shard: CardShard = {
     _poolChimilTheInnerSun,
     _poolChimneyRabble,
     _poolChordOfCalling,
+    _poolChorusOfTheTides,
     _poolClanDefiance,
     _poolClatteringSkeletons,
     _poolCleopatraExiledPharaoh,
@@ -831,6 +836,7 @@ const shard: CardShard = {
     _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
+    _poolFatedIntervention,
     _poolFateshaperAspirant,
     _poolFavorOfTheOverbeing,
     _poolFeastingTrollKing,

@@ -400,6 +400,7 @@ import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
 import _poolNuclearFallout from "../pool/nuclear-fallout.js";
+import _poolNullify from "../pool/nullify.js";
 import _poolOasis from "../pool/oasis.js";
 import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
@@ -476,6 +477,7 @@ import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
 import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
 import _poolScornBladeBerserker from "../pool/scorn-blade-berserker.js";
+import _poolScourgeOfSkolaVale from "../pool/scourge-of-skola-vale.js";
 import _poolScourgemark from "../pool/scourgemark.js";
 import _poolScoutTheWilderness from "../pool/scout-the-wilderness.js";
 import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
@@ -1041,6 +1043,7 @@ const shard: CardShard = {
     _poolNivMizzetParun,
     _poolNoMercy,
     _poolNuclearFallout,
+    _poolNullify,
     _poolOasis,
     _poolObeliskOfNaya,
     _poolOldFlitterfang,
@@ -1117,6 +1120,7 @@ const shard: CardShard = {
     _poolScalesOfShale,
     _poolScavengerRegent,
     _poolScornBladeBerserker,
+    _poolScourgeOfSkolaVale,
     _poolScourgemark,
     _poolScoutTheWilderness,
     _poolScrapyardRecombiner,

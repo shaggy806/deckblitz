@@ -719,6 +719,9 @@ interface EnteringReplacement {
   /** Riot (rule 702.136a) gives it haste: its controller didn't have it
    * enter with the +1/+1 counter. */
   readonly riotHaste: boolean;
+  /** Tribute (rule 702.104b): it has tribute and the chosen opponent didn't
+   * have it enter with the counters. */
+  readonly tributeUnpaid: boolean;
   /** It enters prepared (rule 722.3a — its own `prepared` replacement). */
   readonly prepared: boolean;
 }
@@ -727,6 +730,12 @@ interface EnteringReplacement {
  * offers them — see `Game.askEnterChoice`. */
 const RIOT_COUNTER = "+1/+1 counter";
 const RIOT_OPTIONS: readonly string[] = [RIOT_COUNTER, "Haste"];
+
+/** Tribute's two answers for the chosen opponent (rule 702.104a), paying
+ * first — see `Game.askEnterChoice`. */
+function tributeOptions(amount: number): readonly string[] {
+  return [`Put ${amount} +1/+1 counter${amount === 1 ? "" : "s"} on it`, "Don't"];
+}
 
 /**
  * What a condition about a spell's or ability's source is asked of once that
@@ -5001,6 +5010,11 @@ export class Game {
         // A battle on the battlefield getting a new protector (rule 310.11).
         const battle = this.state.objects[awaiting.protectorFor];
         if (battle?.zone === "battlefield") battle.protector = creatureType as PlayerId;
+      } else if (awaiting.tribute === "opponent") {
+        source.enterChoice = { ...source.enterChoice, tributeFrom: creatureType as PlayerId };
+      } else if (awaiting.tribute === "pay") {
+        // The first option pays (`tributeOptions`).
+        source.enterChoice = { ...source.enterChoice, tributePaid: creatureType === awaiting.options[0] };
       } else {
         source.enterChoice =
           awaiting.protector === true
@@ -8768,6 +8782,7 @@ export class Game {
     | { readonly kind: "reveal"; readonly subtypes: readonly string[] }
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
     | { readonly kind: "riot" }
+    | { readonly kind: "tribute"; readonly amount: number }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
     | { readonly kind: "devour"; readonly filter: CardFilter }
     | { readonly kind: "protector"; readonly siege: boolean }
@@ -8800,6 +8815,12 @@ export class Game {
     // additional +1/+1 counter on it" — a printed (or copied) riot. One
     // granted by another permanent isn't asked (AUTHORING §15).
     if (answered?.riot === undefined && becoming.keywords.includes("riot")) return { kind: "riot" };
+    // Tribute N (rule 702.104a): "as this creature enters, choose an
+    // opponent. That player may put an additional N +1/+1 counters on it" —
+    // printed, or a copy's.
+    if (answered?.tributePaid === undefined && becoming.tribute !== null) {
+      return { kind: "tribute", amount: becoming.tribute };
+    }
     if (becoming.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
       return { kind: "enchant", as: becoming };
     }
@@ -8927,6 +8948,43 @@ export class Game {
           options: RIOT_OPTIONS,
           catalog: false,
           riot: true,
+        };
+        return true;
+      }
+      if (next.kind === "tribute") {
+        // Its controller chooses the opponent (asked only among two or
+        // more); with none left in the game, nobody can pay it.
+        if (object.enterChoice?.tributeFrom === undefined) {
+          const opponents = this.state.turnOrder.filter(
+            (p) => p !== chooser && this.state.players[p]?.hasLost === false,
+          );
+          if (opponents.length > 1) {
+            this.state.awaiting = {
+              kind: "choose-creature-type",
+              player: chooser,
+              source: id,
+              options: opponents,
+              catalog: false,
+              tribute: "opponent",
+              prompt: `Tribute ${next.amount}: choose an opponent`,
+            };
+            return true;
+          }
+          object.enterChoice = { ...object.enterChoice, tributeFrom: opponents[0] ?? null };
+        }
+        const from = object.enterChoice?.tributeFrom ?? null;
+        if (from === null) {
+          object.enterChoice = { ...object.enterChoice, tributePaid: false };
+          continue;
+        }
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player: from,
+          source: id,
+          options: tributeOptions(next.amount),
+          catalog: false,
+          tribute: "pay",
+          prompt: `Tribute ${next.amount}: you may put ${next.amount} +1/+1 counter${next.amount === 1 ? "" : "s"} on it`,
         };
         return true;
       }
@@ -25979,6 +26037,7 @@ export class Game {
         (this.state.objects[id].counters[c.kind] ?? 0) + c.amount;
     }
     if (entering.riotHaste) this.gainRiotHaste(id);
+    if (entering.tributeUnpaid) this.state.objects[id].tributeUnpaid = true;
     if (count > 1) this.state.objects[id].stackCount = count;
     if (!skipBattlefield) {
       this.state.timestampSeq += 1;
@@ -34662,12 +34721,13 @@ export class Game {
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
     riot?: "counter" | "haste",
     devoured?: number,
+    tributePaid?: boolean,
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
     // devotion that decides whether it's a creature (a Theros God's ruling).
     const entering = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
-      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured),
+      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured, tributePaid),
     );
     this.enterBatch?.add(id);
     // "Counters can't be put on" it (Solemnity): it enters without them —
@@ -34687,6 +34747,7 @@ export class Game {
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
     riot?: "counter" | "haste",
     devoured?: number,
+    tributePaid?: boolean,
   ): EnteringReplacement {
     const object = this.state.objects[id];
     const def = this.registry.get(printedCardName(object));
@@ -34783,6 +34844,14 @@ export class Game {
       if (riot === "counter") addCounters("+1/+1", 1);
       else riotHaste = true;
     }
+    // Tribute (rule 702.104a): the counters the chosen opponent put on it as
+    // it was about to enter (`askEnterChoice`). Entering some way that never
+    // asked (a token copy), nobody paid it.
+    let tributeUnpaid = false;
+    if (def.tribute !== null) {
+      if (tributePaid === true) addCounters("+1/+1", def.tribute);
+      else tributeUnpaid = true;
+    }
     // Incubate (rule 701.53a): the Incubator enters with its counters.
     if (this.incubating !== null && object.isToken && printedCardName(object) === "Incubator Token") {
       addCounters("+1/+1", this.incubating);
@@ -34834,6 +34903,7 @@ export class Game {
       painIfUntapped: tapped ? 0 : painIfUntapped,
       mayPayLife: tapped || untapped ? 0 : mayPayLife,
       riotHaste,
+      tributeUnpaid,
       prepared,
     };
   }
@@ -35222,6 +35292,7 @@ export class Game {
       ...(object.enteredKicked === true ? { enteredKicked: true } : {}),
       ...(object.enteredSpectacle === true ? { enteredSpectacle: true } : {}),
       ...(object.enteredSurge === true ? { enteredSurge: true } : {}),
+      ...(object.tributeUnpaid === true ? { tributeUnpaid: true as const } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
@@ -36092,6 +36163,7 @@ export class Game {
     object.enteredKicked = enteringKicked;
     object.enteredSpectacle = enteringSpectacle;
     object.enteredSurge = enteringSurge;
+    delete object.tributeUnpaid;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
@@ -36213,12 +36285,14 @@ export class Game {
         enterChoice?.copyOf !== undefined && enterChoice.copyOf !== null ? enterChoice.copyEnter : undefined,
         enterChoice?.riot,
         enterChoice?.devoured,
+        enterChoice?.tributePaid,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {
         object.counters[c.kind] = (object.counters[c.kind] ?? 0) + c.amount;
       }
       if (entering.riotHaste) this.gainRiotHaste(id);
+      if (entering.tributeUnpaid) object.tributeUnpaid = true;
       if (entering.painIfUntapped > 0) {
         this.dealDamage(
           id,

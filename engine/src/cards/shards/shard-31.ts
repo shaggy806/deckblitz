@@ -215,6 +215,7 @@ import _poolFlameJavelin from "../pool/flame-javelin.js";
 import _poolFlameRift from "../pool/flame-rift.js";
 import _poolFlameshadowConjuring from "../pool/flameshadow-conjuring.js";
 import _poolFlickeringHound from "../pool/flickering-hound.js";
+import _poolFlitterstepEidolon from "../pool/flitterstep-eidolon.js";
 import _poolFloralEvoker from "../pool/floral-evoker.js";
 import _poolFlourishingStrike from "../pool/flourishing-strike.js";
 import _poolFogBank from "../pool/fog-bank.js";
@@ -413,6 +414,8 @@ import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
+import _poolNyxbornEidolon from "../pool/nyxborn-eidolon.js";
+import _poolNyxbornTriton from "../pool/nyxborn-triton.js";
 import _poolNyxbornUnicorn from "../pool/nyxborn-unicorn.js";
 import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
@@ -423,6 +426,7 @@ import _poolOliviasDragoon from "../pool/olivias-dragoon.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
+import _poolOracleOfBones from "../pool/oracle-of-bones.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
@@ -441,6 +445,7 @@ import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
+import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
@@ -501,6 +506,7 @@ import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
+import _poolServantOfTymaret from "../pool/servant-of-tymaret.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
@@ -656,6 +662,7 @@ import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensAngelo from "../tokens/angelo.js";
+import _tokensCatSoldierTokenVigilance from "../tokens/cat-soldier-token-vigilance.js";
 import _tokensDalekToken from "../tokens/dalek-token.js";
 import _tokensFoxToken from "../tokens/fox-token.js";
 import _tokensGiantToken from "../tokens/giant-token.js";
@@ -889,6 +896,7 @@ const shard: CardShard = {
     _poolFlameRift,
     _poolFlameshadowConjuring,
     _poolFlickeringHound,
+    _poolFlitterstepEidolon,
     _poolFloralEvoker,
     _poolFlourishingStrike,
     _poolFogBank,
@@ -1087,6 +1095,8 @@ const shard: CardShard = {
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
+    _poolNyxbornEidolon,
+    _poolNyxbornTriton,
     _poolNyxbornUnicorn,
     _poolOathOfJace,
     _poolObscuraInterceptor,
@@ -1097,6 +1107,7 @@ const shard: CardShard = {
     _poolOltecMatterweaver,
     _poolOmenspeaker,
     _poolOnduGreathorn,
+    _poolOracleOfBones,
     _poolOranRiefOoze,
     _poolOrcishVandal,
     _poolOrderOfTheSacredTorch,
@@ -1115,6 +1126,7 @@ const shard: CardShard = {
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
+    _poolPinnacleOfRage,
     _poolPonderingMage,
     _poolPriestsOfNorn,
     _poolPromiseOfAclazotz,
@@ -1175,6 +1187,7 @@ const shard: CardShard = {
     _poolSeaGateLoremaster,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
+    _poolServantOfTymaret,
     _poolSeveredLegion,
     _poolShardlessAgent,
     _poolSheHulkJenniferWalters,
@@ -1332,6 +1345,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienWarriorToken,
     _tokensAngelo,
+    _tokensCatSoldierTokenVigilance,
     _tokensDalekToken,
     _tokensFoxToken,
     _tokensGiantToken,

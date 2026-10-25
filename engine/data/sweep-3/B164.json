@@ -1,0 +1,739 @@
+{
+ "batch": "B164",
+ "status": "complete",
+ "ranks": "Born of the Gods (BNG, 2014-02-07): the rest of the set (newest-first walk), on tribute",
+ "authored": [
+  {
+   "name": "Aerie Worshippers",
+   "files": [
+    "engine/src/cards/pool/aerie-worshippers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akroan Conscriptor",
+   "files": [
+    "engine/src/cards/pool/akroan-conscriptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akroan Skyguard",
+   "files": [
+    "engine/src/cards/pool/akroan-skyguard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ashiok's Adept",
+   "files": [
+    "engine/src/cards/pool/ashioks-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aspect of Hydra",
+   "files": [
+    "engine/src/cards/pool/aspect-of-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Oak of Odunos",
+   "files": [
+    "engine/src/cards/pool/black-oak-of-odunos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champion of Stray Souls",
+   "files": [
+    "engine/src/cards/pool/champion-of-stray-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chorus of the Tides",
+   "files": [
+    "engine/src/cards/pool/chorus-of-the-tides.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chromanticore",
+   "files": [
+    "engine/src/cards/pool/chromanticore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Claim of Erebos",
+   "files": [
+    "engine/src/cards/pool/claim-of-erebos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deepwater Hypnotist",
+   "files": [
+    "engine/src/cards/pool/deepwater-hypnotist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eater of Hope",
+   "files": [
+    "engine/src/cards/pool/eater-of-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elite Skirmisher",
+   "files": [
+    "engine/src/cards/pool/elite-skirmisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ephara's Enlightenment",
+   "files": [
+    "engine/src/cards/pool/epharas-enlightenment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ephara's Radiance",
+   "files": [
+    "engine/src/cards/pool/epharas-radiance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Epiphany Storm",
+   "files": [
+    "engine/src/cards/pool/epiphany-storm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Evanescent Intellect",
+   "files": [
+    "engine/src/cards/pool/evanescent-intellect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everflame Eidolon",
+   "files": [
+    "engine/src/cards/pool/everflame-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eye Gouge",
+   "files": [
+    "engine/src/cards/pool/eye-gouge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fall of the Hammer",
+   "files": [
+    "engine/src/cards/pool/fall-of-the-hammer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fanatic of Xenagos",
+   "files": [
+    "engine/src/cards/pool/fanatic-of-xenagos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fated Conflagration",
+   "files": [
+    "engine/src/cards/pool/fated-conflagration.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fated Infatuation",
+   "files": [
+    "engine/src/cards/pool/fated-infatuation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fated Intervention",
+   "files": [
+    "engine/src/cards/pool/fated-intervention.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fated Retribution",
+   "files": [
+    "engine/src/cards/pool/fated-retribution.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fated Return",
+   "files": [
+    "engine/src/cards/pool/fated-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Felhide Brawler",
+   "files": [
+    "engine/src/cards/pool/felhide-brawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Felhide Spiritbinder",
+   "files": [
+    "engine/src/cards/pool/felhide-spiritbinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flame-Wreathed Phoenix",
+   "files": [
+    "engine/src/cards/pool/flame-wreathed-phoenix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flitterstep Eidolon",
+   "files": [
+    "engine/src/cards/pool/flitterstep-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forlorn Pseudamma",
+   "files": [
+    "engine/src/cards/pool/forlorn-pseudamma.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghostblade Eidolon",
+   "files": [
+    "engine/src/cards/pool/ghostblade-eidolon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glimpse the Sun God",
+   "files": [
+    "engine/src/cards/pool/glimpse-the-sun-god.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "God-Favored General",
+   "files": [
+    "engine/src/cards/pool/god-favored-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graverobber Spider",
+   "files": [
+    "engine/src/cards/pool/graverobber-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of Torment",
+   "files": [
+    "engine/src/cards/pool/herald-of-torment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hero of Leina Tower",
+   "files": [
+    "engine/src/cards/pool/hero-of-leina-tower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kragma Butcher",
+   "files": [
+    "engine/src/cards/pool/kragma-butcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Volley",
+   "files": [
+    "engine/src/cards/pool/lightning-volley.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marshmist Titan",
+   "files": [
+    "engine/src/cards/pool/marshmist-titan.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Meletis Astronomer",
+   "files": [
+    "engine/src/cards/pool/meletis-astronomer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mischief and Mayhem",
+   "files": [
+    "engine/src/cards/pool/mischief-and-mayhem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nessian Demolok",
+   "files": [
+    "engine/src/cards/pool/nessian-demolok.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nessian Wilds Ravager",
+   "files": [
+    "engine/src/cards/pool/nessian-wilds-ravager.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Noble Quarry",
+   "files": [
+    "engine/src/cards/pool/noble-quarry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nullify",
+   "files": [
+    "engine/src/cards/pool/nullify.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nyxborn Eidolon",
+   "files": [
+    "engine/src/cards/pool/nyxborn-eidolon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nyxborn Rollicker",
+   "files": [
+    "engine/src/cards/pool/nyxborn-rollicker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nyxborn Shieldmate",
+   "files": [
+    "engine/src/cards/pool/nyxborn-shieldmate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nyxborn Triton",
+   "files": [
+    "engine/src/cards/pool/nyxborn-triton.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nyxborn Wolf",
+   "files": [
+    "engine/src/cards/pool/nyxborn-wolf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oracle of Bones",
+   "files": [
+    "engine/src/cards/pool/oracle-of-bones.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oracle's Insight",
+   "files": [
+    "engine/src/cards/pool/oracles-insight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oreskos Sun Guide",
+   "files": [
+    "engine/src/cards/pool/oreskos-sun-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ornitharch",
+   "files": [
+    "engine/src/cards/pool/ornitharch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pain Seer",
+   "files": [
+    "engine/src/cards/pool/pain-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peregrination",
+   "files": [
+    "engine/src/cards/pool/peregrination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pharagax Giant",
+   "files": [
+    "engine/src/cards/pool/pharagax-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pheres-Band Raiders",
+   "files": [
+    "engine/src/cards/pool/pheres-band-raiders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pheres-Band Tromper",
+   "files": [
+    "engine/src/cards/pool/pheres-band-tromper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pillar of War",
+   "files": [
+    "engine/src/cards/pool/pillar-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pinnacle of Rage",
+   "files": [
+    "engine/src/cards/pool/pinnacle-of-rage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plea for Guidance",
+   "files": [
+    "engine/src/cards/pool/plea-for-guidance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ragemonger",
+   "files": [
+    "engine/src/cards/pool/ragemonger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raised by Wolves",
+   "files": [
+    "engine/src/cards/pool/raised-by-wolves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reap What Is Sown",
+   "files": [
+    "engine/src/cards/pool/reap-what-is-sown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanguimancy",
+   "files": [
+    "engine/src/cards/pool/sanguimancy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Satyr Firedancer",
+   "files": [
+    "engine/src/cards/pool/satyr-firedancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Satyr Nyx-Smith",
+   "files": [
+    "engine/src/cards/pool/satyr-nyx-smith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scourge of Skola Vale",
+   "files": [
+    "engine/src/cards/pool/scourge-of-skola-vale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Searing Blood",
+   "files": [
+    "engine/src/cards/pool/searing-blood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Servant of Tymaret",
+   "files": [
+    "engine/src/cards/pool/servant-of-tymaret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Setessan Oathsworn",
+   "files": [
+    "engine/src/cards/pool/setessan-oathsworn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Setessan Starbreaker",
+   "files": [
+    "engine/src/cards/pool/setessan-starbreaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shrike Harpy",
+   "files": [
+    "engine/src/cards/pool/shrike-harpy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Siren of the Fanged Coast",
+   "files": [
+    "engine/src/cards/pool/siren-of-the-fanged-coast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Siren of the Silent Song",
+   "files": [
+    "engine/src/cards/pool/siren-of-the-silent-song.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siren Song Lyre",
+   "files": [
+    "engine/src/cards/pool/siren-song-lyre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyreaping",
+   "files": [
+    "engine/src/cards/pool/skyreaping.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snake of the Golden Grove",
+   "files": [
+    "engine/src/cards/pool/snake-of-the-golden-grove.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sphinx's Disciple",
+   "files": [
+    "engine/src/cards/pool/sphinxs-disciple.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spiteful Returned",
+   "files": [
+    "engine/src/cards/pool/spiteful-returned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stratus Walk",
+   "files": [
+    "engine/src/cards/pool/stratus-walk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sudden Storm",
+   "files": [
+    "engine/src/cards/pool/sudden-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunbond",
+   "files": [
+    "engine/src/cards/pool/sunbond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thassa's Rebuff",
+   "files": [
+    "engine/src/cards/pool/thassas-rebuff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunder Brute",
+   "files": [
+    "engine/src/cards/pool/thunder-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderous Might",
+   "files": [
+    "engine/src/cards/pool/thunderous-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unravel the Aether",
+   "files": [
+    "engine/src/cards/pool/unravel-the-aether.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vanguard of Brimaz",
+   "files": [
+    "engine/src/cards/pool/vanguard-of-brimaz.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warchanter of Mogis",
+   "files": [
+    "engine/src/cards/pool/warchanter-of-mogis.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Whims of the Fates",
+   "needs": [
+    "decision:separate-into-piles",
+    "effect:random-choice"
+   ],
+   "why": "each player separates their permanents into three piles, then sacrifices a pile chosen at random"
+  },
+  {
+   "name": "Fearsome Temper",
+   "needs": [
+    "effect:target-cant-block-source-this-turn"
+   ],
+   "why": "'target creature can't block this creature this turn' — restrict has no 'can't block this one creature'"
+  },
+  {
+   "name": "Floodtide Serpent",
+   "needs": [
+    "cost:attack-cost-return-permanent"
+   ],
+   "why": "'can't attack unless you return an enchantment you control to its owner's hand' — attackTax takes only mana or life"
+  },
+  {
+   "name": "Acolyte's Reward",
+   "needs": [
+    "replacement:prevent-and-reflect-damage"
+   ],
+   "why": "prevent the next X damage, and deal the damage prevented this way to a second target"
+  },
+  {
+   "name": "Loyal Pegasus",
+   "needs": [
+    "static:cant-attack-or-block-alone"
+   ],
+   "why": "'can't attack or block alone'"
+  },
+  {
+   "name": "Culling Mark",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "'target creature blocks this turn if able'"
+  },
+  {
+   "name": "Vortex Elemental",
+   "needs": [
+    "filter:blocking-or-blocked-by-source",
+    "effect:forced-block-this-combat"
+   ],
+   "why": "each creature blocking or blocked by it, and 'blocks it this combat if able'"
+  },
+  {
+   "name": "Mindreaver",
+   "needs": [
+    "filter:same-name-as-exiled-with-source"
+   ],
+   "why": "counter target spell with the same name as a card exiled with it"
+  },
+  {
+   "name": "Arbiter of the Ideal",
+   "needs": [
+    "replacement:enters-with-additional-card-type"
+   ],
+   "why": "'that permanent is an enchantment in addition to its other types' as it enters (it triggers constellation) — enterAs adds no card type"
+  },
+  {
+   "name": "Kraken of the Straits",
+   "needs": [
+    "static:cant-be-blocked-by-power-less-than-count"
+   ],
+   "why": "block restriction's amount reads only the source's own power/toughness/mana value, not a count of Islands"
+  },
+  {
+   "name": "Bile Blight",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "'and all other creatures with the same name as that creature'"
+  },
+  {
+   "name": "Crypsis",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "'gains protection from creatures your opponents control until end of turn' — protection is only a static"
+  },
+  {
+   "name": "Forgestoker Dragon",
+   "needs": [
+    "effect:restrict-this-combat"
+   ],
+   "why": "'that creature can't block this combat' — restrict lasts the turn, not the combat"
+  }
+ ]
+}
