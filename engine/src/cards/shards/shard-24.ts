@@ -351,6 +351,7 @@ import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObliteratingBolt from "../pool/obliterating-bolt.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
+import _poolObsidianFireheart from "../pool/obsidian-fireheart.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
 import _poolOjutaisCommand from "../pool/ojutais-command.js";
@@ -988,6 +989,7 @@ const shard: CardShard = {
     _poolOakhameAdversary,
     _poolObliteratingBolt,
     _poolObscuraStorefront,
+    _poolObsidianFireheart,
     _poolOgreSlumlord,
     _poolOgreWarrior,
     _poolOjutaisCommand,

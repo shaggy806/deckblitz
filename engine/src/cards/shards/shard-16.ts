@@ -207,6 +207,7 @@ import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
+import _poolGatekeeperOfMalakir from "../pool/gatekeeper-of-malakir.js";
 import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
@@ -285,6 +286,7 @@ import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
+import _poolKazuulWarlord from "../pool/kazuul-warlord.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
@@ -501,6 +503,7 @@ import _poolSlurrkAllIngesting from "../pool/slurrk-all-ingesting.js";
 import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
+import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
 import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
 import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
@@ -893,6 +896,7 @@ const shard: CardShard = {
     _poolFurycalmSnarl,
     _poolFutureFlight,
     _poolGalestrike,
+    _poolGatekeeperOfMalakir,
     _poolGearsmithGuardian,
     _poolGenghisFrog,
     _poolGeomancersGambit,
@@ -971,6 +975,7 @@ const shard: CardShard = {
     _poolKataraHeroicHealer,
     _poolKaysa,
     _poolKazanduValley,
+    _poolKazuulWarlord,
     _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
@@ -1187,6 +1192,7 @@ const shard: CardShard = {
     _poolSmaugTheGreatCalamity,
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
+    _poolSphinxOfLostTruths,
     _poolSphinxOfTheGuildpact,
     _poolSpinedKarok,
     _poolSpinningWheel,

@@ -230,6 +230,7 @@ import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
 import _poolGoblinFreerunner from "../pool/goblin-freerunner.js";
+import _poolGoblinGuide from "../pool/goblin-guide.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinMorningstar from "../pool/goblin-morningstar.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
@@ -899,6 +900,7 @@ const shard: CardShard = {
     _poolGlittermonger,
     _poolGloryBoundInitiate,
     _poolGoblinFreerunner,
+    _poolGoblinGuide,
     _poolGoblinHero,
     _poolGoblinMorningstar,
     _poolGoblinReplica,

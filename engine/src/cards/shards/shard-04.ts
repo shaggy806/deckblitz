@@ -268,6 +268,7 @@ import _poolInferno from "../pool/inferno.js";
 import _poolInsurrection from "../pool/insurrection.js";
 import _poolIntrepidHero from "../pool/intrepid-hero.js";
 import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
+import _poolIorRuinExpedition from "../pool/ior-ruin-expedition.js";
 import _poolIrascibleWolverine from "../pool/irascible-wolverine.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
@@ -565,6 +566,7 @@ import _poolTrueheartTwins from "../pool/trueheart-twins.js";
 import _poolTrufflesnout from "../pool/trufflesnout.js";
 import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
+import _poolTuktukGrunts from "../pool/tuktuk-grunts.js";
 import _poolTundraFumarole from "../pool/tundra-fumarole.js";
 import _poolTwilightMire from "../pool/twilight-mire.js";
 import _poolUlamogTheCeaselessHunger from "../pool/ulamog-the-ceaseless-hunger.js";
@@ -903,6 +905,7 @@ const shard: CardShard = {
     _poolInsurrection,
     _poolIntrepidHero,
     _poolIntroductionToProphecy,
+    _poolIorRuinExpedition,
     _poolIrascibleWolverine,
     _poolIroassChampion,
     _poolIroncladKrovod,
@@ -1200,6 +1203,7 @@ const shard: CardShard = {
     _poolTrufflesnout,
     _poolTrumpetingCarnosaur,
     _poolTrustyPackbeast,
+    _poolTuktukGrunts,
     _poolTundraFumarole,
     _poolTwilightMire,
     _poolUlamogTheCeaselessHunger,

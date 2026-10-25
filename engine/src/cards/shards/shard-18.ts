@@ -26,6 +26,7 @@ import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
 import _poolArclightPhoenix from "../pool/arclight-phoenix.js";
 import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
+import _poolArrowVolleyTrap from "../pool/arrow-volley-trap.js";
 import _poolAstrolabe from "../pool/astrolabe.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
@@ -99,6 +100,7 @@ import _poolCommodoreGuff from "../pool/commodore-guff.js";
 import _poolCompanionOfTheTrials from "../pool/companion-of-the-trials.js";
 import _poolCongregate from "../pool/congregate.js";
 import _poolConquerorsFoothold from "../pool/conquerors-foothold.js";
+import _poolConquerorsPledge from "../pool/conquerors-pledge.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
@@ -674,6 +676,7 @@ const shard: CardShard = {
     _poolArclightPhoenix,
     _poolArdentDustspeaker,
     _poolArgothianTreefolk,
+    _poolArrowVolleyTrap,
     _poolAstrolabe,
     _poolAuntiesSentence,
     _poolAvengerOfZendikar,
@@ -747,6 +750,7 @@ const shard: CardShard = {
     _poolCompanionOfTheTrials,
     _poolCongregate,
     _poolConquerorsFoothold,
+    _poolConquerorsPledge,
     _poolCopperlineGorge,
     _poolCosmiumKiln,
     _poolCourserOfKruphix,

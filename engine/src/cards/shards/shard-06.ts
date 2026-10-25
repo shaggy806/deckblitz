@@ -11,6 +11,7 @@ import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js
 import _poolAdmonitionAngel from "../pool/admonition-angel.js";
 import _poolAdventurousImpulse from "../pool/adventurous-impulse.js";
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
+import _poolAetherFigment from "../pool/aether-figment.js";
 import _poolAetherize from "../pool/aetherize.js";
 import _poolAetherjacket from "../pool/aetherjacket.js";
 import _poolAkawalliTheSeethingTower from "../pool/akawalli-the-seething-tower.js";
@@ -655,6 +656,7 @@ const shard: CardShard = {
     _poolAdmonitionAngel,
     _poolAdventurousImpulse,
     _poolAegisSculptor,
+    _poolAetherFigment,
     _poolAetherize,
     _poolAetherjacket,
     _poolAkawalliTheSeethingTower,

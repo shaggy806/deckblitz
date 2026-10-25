@@ -64,6 +64,7 @@ import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
 import _poolBodyCount from "../pool/body-count.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBojukaBrigand from "../pool/bojuka-brigand.js";
+import _poolBoldDefense from "../pool/bold-defense.js";
 import _poolBoneDragon from "../pool/bone-dragon.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
@@ -266,6 +267,7 @@ import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
 import _poolJadelightRanger from "../pool/jadelight-ranger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
+import _poolJoragaBard from "../pool/joraga-bard.js";
 import _poolJoragaTreespeaker from "../pool/joraga-treespeaker.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
@@ -353,6 +355,7 @@ import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNightmare from "../pool/nightmare.js";
 import _poolNissaNaturesArtisan from "../pool/nissa-natures-artisan.js";
+import _poolNissaRevane from "../pool/nissa-revane.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
 import _poolNissaVoiceOfZendikar from "../pool/nissa-voice-of-zendikar.js";
 import _poolNivMizzetGhostCounsel from "../pool/niv-mizzet-ghost-counsel.js";
@@ -718,6 +721,7 @@ const shard: CardShard = {
     _poolBodyCount,
     _poolBogInitiate,
     _poolBojukaBrigand,
+    _poolBoldDefense,
     _poolBoneDragon,
     _poolBoneclubBerserker,
     _poolBoulderbranchGolem,
@@ -920,6 +924,7 @@ const shard: CardShard = {
     _poolIsarethTheAwakener,
     _poolJadelightRanger,
     _poolJeskaiDevotee,
+    _poolJoragaBard,
     _poolJoragaTreespeaker,
     _poolJourneyToOblivion,
     _poolJukaiNaturalist,
@@ -1007,6 +1012,7 @@ const shard: CardShard = {
     _poolNexusWardens,
     _poolNightmare,
     _poolNissaNaturesArtisan,
+    _poolNissaRevane,
     _poolNissaSageAnimist,
     _poolNissaVoiceOfZendikar,
     _poolNivMizzetGhostCounsel,

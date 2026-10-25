@@ -159,6 +159,7 @@ import _poolDynavoltTower from "../pool/dynavolt-tower.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
+import _poolElementalAppeal from "../pool/elemental-appeal.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenBow from "../pool/elven-bow.js";
@@ -297,6 +298,7 @@ import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
 import _poolKeldonOverseer from "../pool/keldon-overseer.js";
 import _poolKessigWolf from "../pool/kessig-wolf.js";
+import _poolKhalniGem from "../pool/khalni-gem.js";
 import _poolKjeldoranDead from "../pool/kjeldoran-dead.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
@@ -369,6 +371,7 @@ import _poolOldGhastbark from "../pool/old-ghastbark.js";
 import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOraclesVault from "../pool/oracles-vault.js";
+import _poolOranRiefRecluse from "../pool/oran-rief-recluse.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOsaiVultures from "../pool/osai-vultures.js";
@@ -477,6 +480,7 @@ import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
+import _poolShoalSerpent from "../pool/shoal-serpent.js";
 import _poolShockingSharpshooter from "../pool/shocking-sharpshooter.js";
 import _poolShorelineLooter from "../pool/shoreline-looter.js";
 import _poolSiegebreakerGiant from "../pool/siegebreaker-giant.js";
@@ -656,6 +660,7 @@ import _tokensRatToken from "../tokens/rat-token.js";
 import _tokensSaprolingToken from "../tokens/saproling-token.js";
 import _tokensSpawnToken from "../tokens/spawn-token.js";
 import _tokensWallTokenTheFantasticFour from "../tokens/wall-token-the-fantastic-four.js";
+import _tokensXXVampireTokenBlack from "../tokens/x-x-vampire-token-black.js";
 import _tokensZombieTokenGhoulishProcession from "../tokens/zombie-token-ghoulish-procession.js";
 
 const shard: CardShard = {
@@ -816,6 +821,7 @@ const shard: CardShard = {
     _poolEarthKingdomProtectors,
     _poolEchoInspector,
     _poolEdgewallInnkeeper,
+    _poolElementalAppeal,
     _poolElementalMascot,
     _poolEleshNornMotherOfMachines,
     _poolElvenBow,
@@ -954,6 +960,7 @@ const shard: CardShard = {
     _poolKazarovSengirPureblood,
     _poolKeldonOverseer,
     _poolKessigWolf,
+    _poolKhalniGem,
     _poolKjeldoranDead,
     _poolKnightLuminary,
     _poolKnightlyValor,
@@ -1026,6 +1033,7 @@ const shard: CardShard = {
     _poolOminousSeas,
     _poolOnyxMage,
     _poolOraclesVault,
+    _poolOranRiefRecluse,
     _poolOrbitalPlunge,
     _poolOrcishMedicine,
     _poolOsaiVultures,
@@ -1134,6 +1142,7 @@ const shard: CardShard = {
     _poolSerpentSpecialist,
     _poolShadowcloakVampire,
     _poolShimmercreep,
+    _poolShoalSerpent,
     _poolShockingSharpshooter,
     _poolShorelineLooter,
     _poolSiegebreakerGiant,
@@ -1315,6 +1324,7 @@ const shard: CardShard = {
     _tokensSaprolingToken,
     _tokensSpawnToken,
     _tokensWallTokenTheFantasticFour,
+    _tokensXXVampireTokenBlack,
     _tokensZombieTokenGhoulishProcession,
   ],
 };

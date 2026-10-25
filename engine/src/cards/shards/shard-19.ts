@@ -94,6 +94,7 @@ import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
+import _poolChandraAblaze from "../pool/chandra-ablaze.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
@@ -267,6 +268,7 @@ import _poolHardbristleBandit from "../pool/hardbristle-bandit.js";
 import _poolHauntedHellride from "../pool/haunted-hellride.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
+import _poolHeartstabberMosquito from "../pool/heartstabber-mosquito.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
 import _poolHexdrinker from "../pool/hexdrinker.js";
@@ -361,6 +363,7 @@ import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
+import _poolMarkOfMutiny from "../pool/mark-of-mutiny.js";
 import _poolMarkovPurifier from "../pool/markov-purifier.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
@@ -368,6 +371,7 @@ import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
 import _poolMelekIzzetParagon from "../pool/melek-izzet-paragon.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
+import _poolMerfolkSeastalkers from "../pool/merfolk-seastalkers.js";
 import _poolMetalspinnersPuzzleknot from "../pool/metalspinners-puzzleknot.js";
 import _poolMeticulousArchive from "../pool/meticulous-archive.js";
 import _poolMiaraThornOfTheGlade from "../pool/miara-thorn-of-the-glade.js";
@@ -458,6 +462,7 @@ import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
+import _poolRelicCrush from "../pool/relic-crush.js";
 import _poolRenegadeBull from "../pool/renegade-bull.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
@@ -759,6 +764,7 @@ const shard: CardShard = {
     _poolCephalidInkmage,
     _poolChallengerTroll,
     _poolChanceMetElves,
+    _poolChandraAblaze,
     _poolChandrasIgnition,
     _poolChangelingSentinel,
     _poolChargingMonstrosaur,
@@ -932,6 +938,7 @@ const shard: CardShard = {
     _poolHauntedHellride,
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
+    _poolHeartstabberMosquito,
     _poolHelmutZemoMastermind,
     _poolHeraldOfDromoka,
     _poolHexdrinker,
@@ -1026,6 +1033,7 @@ const shard: CardShard = {
     _poolManicVandal,
     _poolMarcusMutantMayor,
     _poolMarduHeartPiercer,
+    _poolMarkOfMutiny,
     _poolMarkovPurifier,
     _poolMaskedMeower,
     _poolMasterOfDarkRites,
@@ -1033,6 +1041,7 @@ const shard: CardShard = {
     _poolMazeSkullbomb,
     _poolMelekIzzetParagon,
     _poolMercilessExecutioner,
+    _poolMerfolkSeastalkers,
     _poolMetalspinnersPuzzleknot,
     _poolMeticulousArchive,
     _poolMiaraThornOfTheGlade,
@@ -1123,6 +1132,7 @@ const shard: CardShard = {
     _poolRaptorHatchling,
     _poolRecklessBrute,
     _poolRedElementalBlast,
+    _poolRelicCrush,
     _poolRenegadeBull,
     _poolRepulsiveMutation,
     _poolResupply,

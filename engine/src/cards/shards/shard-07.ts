@@ -410,6 +410,7 @@ import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
+import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
 import _poolQuestForTheGoblinLord from "../pool/quest-for-the-goblin-lord.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
 import _poolRakshasaGravecaller from "../pool/rakshasa-gravecaller.js";
@@ -563,6 +564,7 @@ import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
 import _poolTidalTerror from "../pool/tidal-terror.js";
 import _poolTimberShredder from "../pool/timber-shredder.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
+import _poolTimbermawLarva from "../pool/timbermaw-larva.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
@@ -672,6 +674,7 @@ import _tokensWraithToken from "../tokens/wraith-token.js";
 import _tokensWurmTokenTrample from "../tokens/wurm-token-trample.js";
 import _tokensXXGolemTokenHaste from "../tokens/x-x-golem-token-haste.js";
 import _tokensZombieBerserkerToken from "../tokens/zombie-berserker-token.js";
+import _tokensZombieGiantToken from "../tokens/zombie-giant-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -1082,6 +1085,7 @@ const shard: CardShard = {
     _poolPsychicPickpocket,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
+    _poolQuestForAncientSecrets,
     _poolQuestForTheGoblinLord,
     _poolRakdosTheMuscle,
     _poolRakshasaGravecaller,
@@ -1235,6 +1239,7 @@ const shard: CardShard = {
     _poolTidalTerror,
     _poolTimberShredder,
     _poolTimberlandGuide,
+    _poolTimbermawLarva,
     _poolTimeWipe,
     _poolTomeShredder,
     _poolToothyImaginaryFriend,
@@ -1346,6 +1351,7 @@ const shard: CardShard = {
     _tokensWurmTokenTrample,
     _tokensXXGolemTokenHaste,
     _tokensZombieBerserkerToken,
+    _tokensZombieGiantToken,
   ],
 };
 

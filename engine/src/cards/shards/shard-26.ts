@@ -433,6 +433,7 @@ import _poolRovingHarper from "../pool/roving-harper.js";
 import _poolRowdySnowballers from "../pool/rowdy-snowballers.js";
 import _poolRubblebeltBoar from "../pool/rubblebelt-boar.js";
 import _poolRuinousUltimatum from "../pool/ruinous-ultimatum.js";
+import _poolRuneflareTrap from "../pool/runeflare-trap.js";
 import _poolRyanSinclair from "../pool/ryan-sinclair.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
@@ -568,6 +569,7 @@ import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
@@ -1073,6 +1075,7 @@ const shard: CardShard = {
     _poolRowdySnowballers,
     _poolRubblebeltBoar,
     _poolRuinousUltimatum,
+    _poolRuneflareTrap,
     _poolRyanSinclair,
     _poolSHIELDHelicarrier,
     _poolSafeholdElite,
@@ -1208,6 +1211,7 @@ const shard: CardShard = {
     _poolTrevasCharm,
     _poolTribuneOfRot,
     _poolTritonShorestalker,
+    _poolTurntimberRanger,
     _poolTurretOgre,
     _poolTwinshotSniper,
     _poolTwistedFates,

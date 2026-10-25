@@ -274,6 +274,7 @@ import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
+import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
@@ -283,6 +284,7 @@ import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
 import _poolKolaghanMonument from "../pool/kolaghan-monument.js";
 import _poolKolaghanStormsinger from "../pool/kolaghan-stormsinger.js";
+import _poolKorDuelist from "../pool/kor-duelist.js";
 import _poolKorHalberd from "../pool/kor-halberd.js";
 import _poolKothFireOfResistance from "../pool/koth-fire-of-resistance.js";
 import _poolKothTheGeomancer from "../pool/koth-the-geomancer.js";
@@ -314,6 +316,7 @@ import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
 import _poolLuminousWake from "../pool/luminous-wake.js";
 import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
+import _poolMagmaRift from "../pool/magma-rift.js";
 import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
 import _poolMakindiStampede from "../pool/makindi-stampede.js";
 import _poolMalakirFamiliar from "../pool/malakir-familiar.js";
@@ -340,6 +343,7 @@ import _poolMeteoricMace from "../pool/meteoric-mace.js";
 import _poolMightBeyondReason from "../pool/might-beyond-reason.js";
 import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
+import _poolMindlessNull from "../pool/mindless-null.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
 import _poolMogMoogleWarrior from "../pool/mog-moogle-warrior.js";
@@ -354,6 +358,7 @@ import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
+import _poolNarrowEscape from "../pool/narrow-escape.js";
 import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNestingGrounds from "../pool/nesting-grounds.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
@@ -610,6 +615,7 @@ import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
+import _poolWorldQueller from "../pool/world-queller.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
 import _poolXandersLounge from "../pool/xanders-lounge.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
@@ -902,6 +908,7 @@ const shard: CardShard = {
     _poolKaradorGhostChieftain,
     _poolKarakas,
     _poolKavuGlider,
+    _poolKazanduBlademaster,
     _poolKeldonWarlord,
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,
@@ -911,6 +918,7 @@ const shard: CardShard = {
     _poolKodamaOfTheWestTree,
     _poolKolaghanMonument,
     _poolKolaghanStormsinger,
+    _poolKorDuelist,
     _poolKorHalberd,
     _poolKothFireOfResistance,
     _poolKothTheGeomancer,
@@ -942,6 +950,7 @@ const shard: CardShard = {
     _poolLuminousBonds,
     _poolLuminousWake,
     _poolMach1SwoopingScoundrel,
+    _poolMagmaRift,
     _poolMakindiAeronaut,
     _poolMakindiStampede,
     _poolMalakirFamiliar,
@@ -968,6 +977,7 @@ const shard: CardShard = {
     _poolMightBeyondReason,
     _poolMightformHarmonizer,
     _poolMindRavel,
+    _poolMindlessNull,
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,
     _poolMogMoogleWarrior,
@@ -982,6 +992,7 @@ const shard: CardShard = {
     _poolMysticOfTheHiddenWay,
     _poolNamazuTrader,
     _poolNarnamRenegade,
+    _poolNarrowEscape,
     _poolNeglectedManor,
     _poolNestingGrounds,
     _poolNightscapeMaster,
@@ -1238,6 +1249,7 @@ const shard: CardShard = {
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
     _poolWorkshopElders,
+    _poolWorldQueller,
     _poolWrennsResolve,
     _poolXandersLounge,
     _poolYavimayaHollow,

@@ -229,6 +229,7 @@ import _poolGlorybringer from "../pool/glorybringer.js";
 import _poolGnarledScarhide from "../pool/gnarled-scarhide.js";
 import _poolGoatnap from "../pool/goatnap.js";
 import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
+import _poolGoblinRuinblaster from "../pool/goblin-ruinblaster.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
 import _poolGoblinWarDrums from "../pool/goblin-war-drums.js";
 import _poolGodEternalOketra from "../pool/god-eternal-oketra.js";
@@ -392,6 +393,7 @@ import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
 import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
 import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolOverwhelmingEncounter from "../pool/overwhelming-encounter.js";
+import _poolParalyzingGrasp from "../pool/paralyzing-grasp.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
@@ -429,6 +431,7 @@ import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
+import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
@@ -441,6 +444,7 @@ import _poolRebuffTheWicked from "../pool/rebuff-the-wicked.js";
 import _poolRebuke from "../pool/rebuke.js";
 import _poolRecklessCharge from "../pool/reckless-charge.js";
 import _poolRecklessFireweaver from "../pool/reckless-fireweaver.js";
+import _poolRecklessScholar from "../pool/reckless-scholar.js";
 import _poolReigningVictor from "../pool/reigning-victor.js";
 import _poolRekindlingPhoenix from "../pool/rekindling-phoenix.js";
 import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js";
@@ -542,6 +546,7 @@ import _poolStreamHopper from "../pool/stream-hopper.js";
 import _poolStudiousFirstYear from "../pool/studious-first-year.js";
 import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
+import _poolSummonersBane from "../pool/summoners-bane.js";
 import _poolSunCrownedHunters from "../pool/sun-crowned-hunters.js";
 import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
@@ -552,6 +557,7 @@ import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
 import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
+import _poolTajuruArcher from "../pool/tajuru-archer.js";
 import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
@@ -892,6 +898,7 @@ const shard: CardShard = {
     _poolGnarledScarhide,
     _poolGoatnap,
     _poolGoblinGloryChaser,
+    _poolGoblinRuinblaster,
     _poolGoblinTown,
     _poolGoblinWarDrums,
     _poolGodEternalOketra,
@@ -1055,6 +1062,7 @@ const shard: CardShard = {
     _poolOutlawStitcher,
     _poolOverlordOfTheBalemurk,
     _poolOverwhelmingEncounter,
+    _poolParalyzingGrasp,
     _poolParapetWatchers,
     _poolParhelionPatrol,
     _poolPawnOfUlamog,
@@ -1092,6 +1100,7 @@ const shard: CardShard = {
     _poolPsychicSymbiont,
     _poolPterodonKnight,
     _poolPunySnack,
+    _poolQuestForTheGemblades,
     _poolQuilledCharger,
     _poolRageReflection,
     _poolRainSlickedCopse,
@@ -1104,6 +1113,7 @@ const shard: CardShard = {
     _poolRebuke,
     _poolRecklessCharge,
     _poolRecklessFireweaver,
+    _poolRecklessScholar,
     _poolReigningVictor,
     _poolRekindlingPhoenix,
     _poolRenariMerchantOfMarvels,
@@ -1205,6 +1215,7 @@ const shard: CardShard = {
     _poolStudiousFirstYear,
     _poolSubterfuge,
     _poolSummonIxion,
+    _poolSummonersBane,
     _poolSunCrownedHunters,
     _poolSunlitHoplite,
     _poolSurvivorsEncampment,
@@ -1215,6 +1226,7 @@ const shard: CardShard = {
     _poolSylvanScrying,
     _poolSythisHarvestsHand,
     _poolTabletOfEpityr,
+    _poolTajuruArcher,
     _poolTangletrap,
     _poolTanukiTransplanter,
     _poolTaxiDriver,

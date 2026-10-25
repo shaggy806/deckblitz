@@ -372,6 +372,7 @@ import _poolPyreticCharge from "../pool/pyretic-charge.js";
 import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
 import _poolPyrohemia from "../pool/pyrohemia.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
+import _poolQuestForTheGravelord from "../pool/quest-for-the-gravelord.js";
 import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRaidersKarve from "../pool/raiders-karve.js";
@@ -534,6 +535,7 @@ import _poolThrullChampion from "../pool/thrull-champion.js";
 import _poolTidings from "../pool/tidings.js";
 import _poolTitanicBulvox from "../pool/titanic-bulvox.js";
 import _poolTitanicUltimatum from "../pool/titanic-ultimatum.js";
+import _poolTorchSlinger from "../pool/torch-slinger.js";
 import _poolTreetopSentries from "../pool/treetop-sentries.js";
 import _poolTriumphantSurge from "../pool/triumphant-surge.js";
 import _poolTrumpetingHerd from "../pool/trumpeting-herd.js";
@@ -973,6 +975,7 @@ const shard: CardShard = {
     _poolPyroclasticElemental,
     _poolPyrohemia,
     _poolQueenBrahne,
+    _poolQuestForTheGravelord,
     _poolQuickbeamUpstartEnt,
     _poolRagingRegisaur,
     _poolRaidersKarve,
@@ -1135,6 +1138,7 @@ const shard: CardShard = {
     _poolTidings,
     _poolTitanicBulvox,
     _poolTitanicUltimatum,
+    _poolTorchSlinger,
     _poolTreetopSentries,
     _poolTriumphantSurge,
     _poolTrumpetingHerd,

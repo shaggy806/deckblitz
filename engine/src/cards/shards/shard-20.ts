@@ -541,6 +541,7 @@ import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
+import _poolSpireBarrage from "../pool/spire-barrage.js";
 import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolSourbreadAuntie,
     _poolSpaceTimeAnomaly,
     _poolSpearbreakerBehemoth,
+    _poolSpireBarrage,
     _poolSpirePhantasm,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,

@@ -305,6 +305,7 @@ import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
 import _poolKnightOfThePilgrimsRoad from "../pool/knight-of-the-pilgrims-road.js";
+import _poolKorAeronaut from "../pool/kor-aeronaut.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
@@ -424,6 +425,7 @@ import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
+import _poolPunishingFire from "../pool/punishing-fire.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
@@ -469,6 +471,7 @@ import _poolSavor from "../pool/savor.js";
 import _poolScarletWitchWandaMaximoff from "../pool/scarlet-witch-wanda-maximoff.js";
 import _poolScrollThief from "../pool/scroll-thief.js";
 import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
+import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
@@ -951,6 +954,7 @@ const shard: CardShard = {
     _poolKeldonNecropolis,
     _poolKillersMask,
     _poolKnightOfThePilgrimsRoad,
+    _poolKorAeronaut,
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
     _poolKunLunWarrior,
@@ -1070,6 +1074,7 @@ const shard: CardShard = {
     _poolProtegesAwakening,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
+    _poolPunishingFire,
     _poolPyroceratops,
     _poolRabbitResponse,
     _poolRadhaCoalitionWarlord,
@@ -1115,6 +1120,7 @@ const shard: CardShard = {
     _poolScarletWitchWandaMaximoff,
     _poolScrollThief,
     _poolSeaGateWreckage,
+    _poolSeascapeAerialist,
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
     _poolSelvalasStampede,

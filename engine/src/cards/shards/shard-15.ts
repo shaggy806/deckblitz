@@ -353,6 +353,7 @@ import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
+import _poolMoldShambler from "../pool/mold-shambler.js";
 import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
 import _poolMonicaRambeau from "../pool/monica-rambeau.js";
@@ -515,6 +516,7 @@ import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
+import _poolTempestOwl from "../pool/tempest-owl.js";
 import _poolTemporalEddy from "../pool/temporal-eddy.js";
 import _poolTenderize from "../pool/tenderize.js";
 import _poolTenementCrasher from "../pool/tenement-crasher.js";
@@ -968,6 +970,7 @@ const shard: CardShard = {
     _poolMischievousChimera,
     _poolMisshapenFiend,
     _poolMoaningSpirit,
+    _poolMoldShambler,
     _poolMoltenCoreMaestro,
     _poolMomentousFall,
     _poolMonicaRambeau,
@@ -1130,6 +1133,7 @@ const shard: CardShard = {
     _poolTalismanOfCreativity,
     _poolTangleSpider,
     _poolTemperamentalOozewagg,
+    _poolTempestOwl,
     _poolTemporalEddy,
     _poolTenderize,
     _poolTenementCrasher,

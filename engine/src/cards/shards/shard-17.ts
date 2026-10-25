@@ -304,6 +304,7 @@ import _poolKhabalGhoul from "../pool/khabal-ghoul.js";
 import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
+import _poolKorOutfitter from "../pool/kor-outfitter.js";
 import _poolKrarkClanGrunt from "../pool/krark-clan-grunt.js";
 import _poolKratosStoicFather from "../pool/kratos-stoic-father.js";
 import _poolKrosanConstrictor from "../pool/krosan-constrictor.js";
@@ -370,6 +371,7 @@ import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNettleDrone from "../pool/nettle-drone.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
+import _poolNimanaSellSword from "../pool/nimana-sell-sword.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
@@ -574,6 +576,7 @@ import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
+import _poolUmaraRaptor from "../pool/umara-raptor.js";
 import _poolUnconventionalTactics from "../pool/unconventional-tactics.js";
 import _poolUndercellarMyconid from "../pool/undercellar-myconid.js";
 import _poolUndercityTroll from "../pool/undercity-troll.js";
@@ -613,6 +616,7 @@ import _poolWhiptailMoloch from "../pool/whiptail-moloch.js";
 import _poolWhirlerVirtuoso from "../pool/whirler-virtuoso.js";
 import _poolWildColos from "../pool/wild-colos.js";
 import _poolWillowFaerie from "../pool/willow-faerie.js";
+import _poolWindborneCharge from "../pool/windborne-charge.js";
 import _poolWindreaperFalcon from "../pool/windreaper-falcon.js";
 import _poolWinterSoldierBuckyBarnes from "../pool/winter-soldier-bucky-barnes.js";
 import _poolWirewoodChanneler from "../pool/wirewood-channeler.js";
@@ -957,6 +961,7 @@ const shard: CardShard = {
     _poolKickoffCelebrations,
     _poolKilnFiend,
     _poolKishlaSkimmer,
+    _poolKorOutfitter,
     _poolKrarkClanGrunt,
     _poolKratosStoicFather,
     _poolKrosanConstrictor,
@@ -1023,6 +1028,7 @@ const shard: CardShard = {
     _poolNettleDrone,
     _poolNiambiFaithfulHealer,
     _poolNightOfTheSweetsRevenge,
+    _poolNimanaSellSword,
     _poolNimanaSkydancer,
     _poolNissaGenesisMage,
     _poolNornsInquisitor,
@@ -1227,6 +1233,7 @@ const shard: CardShard = {
     _poolTyranidPrime,
     _poolUktabiFaerie,
     _poolUlvenwaldBehemoth,
+    _poolUmaraRaptor,
     _poolUnconventionalTactics,
     _poolUndercellarMyconid,
     _poolUndercityTroll,
@@ -1266,6 +1273,7 @@ const shard: CardShard = {
     _poolWhirlerVirtuoso,
     _poolWildColos,
     _poolWillowFaerie,
+    _poolWindborneCharge,
     _poolWindreaperFalcon,
     _poolWinterSoldierBuckyBarnes,
     _poolWirewoodChanneler,

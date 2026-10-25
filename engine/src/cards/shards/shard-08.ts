@@ -149,6 +149,7 @@ import _poolDevastate from "../pool/devastate.js";
 import _poolDevilsPlayground from "../pool/devils-playground.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
+import _poolDevoutLightcaster from "../pool/devout-lightcaster.js";
 import _poolDisciplesOfGix from "../pool/disciples-of-gix.js";
 import _poolDispersingOrb from "../pool/dispersing-orb.js";
 import _poolDisruptingScepter from "../pool/disrupting-scepter.js";
@@ -326,6 +327,7 @@ import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKnightOfTheLastBreath from "../pool/knight-of-the-last-breath.js";
 import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
+import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
 import _poolLagonnaBandStoryteller from "../pool/lagonna-band-storyteller.js";
@@ -832,6 +834,7 @@ const shard: CardShard = {
     _poolDevilsPlayground,
     _poolDevkarinDissident,
     _poolDevouringDeep,
+    _poolDevoutLightcaster,
     _poolDisciplesOfGix,
     _poolDispersingOrb,
     _poolDisruptingScepter,
@@ -1009,6 +1012,7 @@ const shard: CardShard = {
     _poolKnightOfTheLastBreath,
     _poolKoboldDrillSergeant,
     _poolKomodoRhino,
+    _poolKorHookmaster,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
     _poolLagonnaBandStoryteller,

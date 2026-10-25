@@ -10351,6 +10351,30 @@
   },
   "amount:power-before-move": {
    "example": "Dead Reckoning: \"damage equal to that card's power\" after it's put on top of the library — the ruling reads the power it had in the graveyard (Tarmogoyf, Lord of Extinction); powerOf reads it after the move. Lie in Wait shares the gap."
+  },
+  "replacement:double-damage-from-your-sources-this-turn": {
+   "example": "Quest for Pure Flame: \"If a source you control would deal damage to a permanent or player this turn, it deals double that damage instead\" — player-effect's damageTo doubles damage from every source, not only yours."
+  },
+  "condition:creature-spell-countered-by-opponent-this-turn": {
+   "example": "Summoning Trap: its alternative cost needs \"a creature spell you cast this turn was countered by a spell or ability an opponent controlled\" — no turn history records a countered spell."
+  },
+  "condition:opponent-hand-size": {
+   "example": "Guul Draz Specter: \"as long as an opponent has no cards in hand\" — hand-size covers only you or each player."
+  },
+  "replacement:dies-to-library-bottom": {
+   "example": "Nissa's Chosen: \"If this creature would die, put it on the bottom of its owner's library instead\" — the only dies redirect is to exile."
+  },
+  "condition:noncreature-permanent-destroyed-by-opponent-this-turn": {
+   "example": "Cobra Trap: \"if a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled\" — turn history keeps no destroyed list, nor who destroyed it."
+  },
+  "trigger:opponent-shuffles-library": {
+   "example": "Cosi's Trickster: \"Whenever an opponent shuffles their library\" — no shuffle trigger."
+  },
+  "filter:same-name-as-card-in-graveyard": {
+   "example": "Pyromancer Ascension: \"a spell that has the same name as a card in your graveyard\" — only nameUnlike (the opposite) exists."
+  },
+  "condition:turn-history-per-player": {
+   "example": "Lavaball Trap: \"if an opponent had two or more lands enter the battlefield under their control this turn\" — turn-history with who: opponent sums across all opponents, so it must count one opponent at a time."
   }
  }
 }

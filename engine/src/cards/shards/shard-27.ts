@@ -225,6 +225,7 @@ import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolGuiltfeeder from "../pool/guiltfeeder.js";
 import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
+import _poolHaloHunter from "../pool/halo-hunter.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHarvestHand from "../pool/harvest-hand.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
@@ -350,6 +351,7 @@ import _poolNahiriTheLithomancer from "../pool/nahiri-the-lithomancer.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
+import _poolNeedlebiteTrap from "../pool/needlebite-trap.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
@@ -630,6 +632,7 @@ import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
 import _tokensDwarfBerserkerToken from "../tokens/dwarf-berserker-token.js";
+import _tokensElementalToken71TrampleHaste from "../tokens/elemental-token-7-1-trample-haste.js";
 import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensOozeToken from "../tokens/ooze-token.js";
@@ -867,6 +870,7 @@ const shard: CardShard = {
     _poolGuidelightSynergist,
     _poolGuiltfeeder,
     _poolGyrusWakerOfCorpses,
+    _poolHaloHunter,
     _poolHarvestGwyllion,
     _poolHarvestHand,
     _poolHavenwoodBattleground,
@@ -992,6 +996,7 @@ const shard: CardShard = {
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNaturalObsolescence,
+    _poolNeedlebiteTrap,
     _poolNegate,
     _poolNicolBolas,
     _poolNightScythe,
@@ -1274,6 +1279,7 @@ const shard: CardShard = {
     _tokensConstructTokenTheFantasticar,
     _tokensDinosaurToken,
     _tokensDwarfBerserkerToken,
+    _tokensElementalToken71TrampleHaste,
     _tokensFractalToken,
     _tokensHumanToken,
     _tokensOozeToken,

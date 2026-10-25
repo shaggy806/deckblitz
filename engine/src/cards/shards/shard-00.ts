@@ -302,6 +302,7 @@ import _poolLeave from "../pool/leave.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
+import _poolLethargyTrap from "../pool/lethargy-trap.js";
 import _poolLiciaSanguineTribune from "../pool/licia-sanguine-tribune.js";
 import _poolLifetap from "../pool/lifetap.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
@@ -326,6 +327,7 @@ import _poolMesaCavalier from "../pool/mesa-cavalier.js";
 import _poolMidnightGuard from "../pool/midnight-guard.js";
 import _poolMinasTirithGarrison from "../pool/minas-tirith-garrison.js";
 import _poolMindwhisker from "../pool/mindwhisker.js";
+import _poolMireBlight from "../pool/mire-blight.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
@@ -339,6 +341,7 @@ import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
 import _poolMountainTitan from "../pool/mountain-titan.js";
 import _poolMourning from "../pool/mourning.js";
+import _poolMurasaPyromancer from "../pool/murasa-pyromancer.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
 import _poolNearDeathExperience from "../pool/near-death-experience.js";
@@ -384,6 +387,7 @@ import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
+import _poolPredatoryUrge from "../pool/predatory-urge.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
 import _poolPrimordialGnawer from "../pool/primordial-gnawer.js";
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolLedevGuardian,
     _poolLeelaSevateemWarrior,
     _poolLetTheGalaxyBurn,
+    _poolLethargyTrap,
     _poolLiciaSanguineTribune,
     _poolLifetap,
     _poolLightningAngel,
@@ -979,6 +984,7 @@ const shard: CardShard = {
     _poolMidnightGuard,
     _poolMinasTirithGarrison,
     _poolMindwhisker,
+    _poolMireBlight,
     _poolMirrormereGuardian,
     _poolMjolnirsMight,
     _poolMoatPiranhas,
@@ -992,6 +998,7 @@ const shard: CardShard = {
     _poolMortivore,
     _poolMountainTitan,
     _poolMourning,
+    _poolMurasaPyromancer,
     _poolNaliaDearnise,
     _poolNaturesLore,
     _poolNearDeathExperience,
@@ -1037,6 +1044,7 @@ const shard: CardShard = {
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
     _poolPowerFist,
+    _poolPredatoryUrge,
     _poolPriestOfForgottenGods,
     _poolPrimalVisitation,
     _poolPrimordialGnawer,

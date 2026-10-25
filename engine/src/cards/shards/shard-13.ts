@@ -185,6 +185,7 @@ import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
+import _poolFeastOfBlood from "../pool/feast-of-blood.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
 import _poolFeralThallid from "../pool/feral-thallid.js";
@@ -837,6 +838,7 @@ const shard: CardShard = {
     _poolFatalFumes,
     _poolFatestitcher,
     _poolFearOfBeingHunted,
+    _poolFeastOfBlood,
     _poolFelhideMinotaur,
     _poolFelidarGuardian,
     _poolFeralThallid,

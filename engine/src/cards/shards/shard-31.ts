@@ -272,6 +272,7 @@ import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-condui
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolGuildSummit from "../pool/guild-summit.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
+import _poolHagraDiabolist from "../pool/hagra-diabolist.js";
 import _poolHalberdier from "../pool/halberdier.js";
 import _poolHalimarWavewatch from "../pool/halimar-wavewatch.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
@@ -534,6 +535,7 @@ import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpelunking from "../pool/spelunking.js";
+import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
@@ -552,6 +554,7 @@ import _poolSuddenSpinnerets from "../pool/sudden-spinnerets.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
 import _poolSummonUndead from "../pool/summon-undead.js";
 import _poolSunBlessedMount from "../pool/sun-blessed-mount.js";
+import _poolSunspringExpedition from "../pool/sunspring-expedition.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
@@ -615,6 +618,7 @@ import _poolValiantVeteran from "../pool/valiant-veteran.js";
 import _poolValkyriesSword from "../pool/valkyries-sword.js";
 import _poolValorSinger from "../pool/valor-singer.js";
 import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
+import _poolVampiresBite from "../pool/vampires-bite.js";
 import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
@@ -946,6 +950,7 @@ const shard: CardShard = {
     _poolGuidingBolt,
     _poolGuildSummit,
     _poolGysahlGreens,
+    _poolHagraDiabolist,
     _poolHalberdier,
     _poolHalimarWavewatch,
     _poolHallOfTagsin,
@@ -1208,6 +1213,7 @@ const shard: CardShard = {
     _poolSparkSpray,
     _poolSparringDummy,
     _poolSpelunking,
+    _poolSphinxOfJwarIsle,
     _poolSpinelessThug,
     _poolSpitfireBastion,
     _poolSpreadingInsurrection,
@@ -1226,6 +1232,7 @@ const shard: CardShard = {
     _poolSummerBloom,
     _poolSummonUndead,
     _poolSunBlessedMount,
+    _poolSunspringExpedition,
     _poolSuperAdaptoid,
     _poolSurrakDragonclaw,
     _poolSwarmyard,
@@ -1289,6 +1296,7 @@ const shard: CardShard = {
     _poolValkyriesSword,
     _poolValorSinger,
     _poolVampireCutthroat,
+    _poolVampiresBite,
     _poolVanguardSuppressor,
     _poolVaultOfCatlacan,
     _poolVengefulCreeper,
