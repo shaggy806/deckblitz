@@ -345,6 +345,11 @@ function keywordPart(part) {
     convoke: () => ({ card: { convoke: true } }),
     // Improvise (rule 702.126a): convoke's machinery, artifacts paying generic mana.
     improvise: () => ({ card: { improvise: true } }),
+    // Undaunted (rule 702.125a): {1} less for each opponent, the always-true
+    // gate the party and domain reductions use.
+    undaunted: () => ({
+      card: { selfCostReduction: { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { opponents: true } } },
+    }),
     // Compleated (rule 702.150a): the loyalty it enters with.
     compleated: () => ({ card: { compleated: true } }),
     // Read ahead (rule 702.155): its chapter choice comes from `defineCard`.
@@ -1959,6 +1964,7 @@ export function parseFace(face, ctx = {}) {
     const perEach = {
       "~ costs {1} less to cast for each creature in your party.": { partySize: "you" },
       "~ costs {1} less to cast for each basic land type among lands you control.": { basicLandTypes: "you" },
+      "~ costs {1} less to cast for each opponent you have.": { opponents: true },
     }[line];
     if (perEach !== undefined) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };

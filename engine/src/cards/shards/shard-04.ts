@@ -59,6 +59,7 @@ import _poolBrainstorm from "../pool/brainstorm.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
+import _poolBuiltToSmash from "../pool/built-to-smash.js";
 import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
@@ -75,6 +76,7 @@ import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
+import _poolConfiscationCoup from "../pool/confiscation-coup.js";
 import _poolConiferWurm from "../pool/conifer-wurm.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
@@ -129,6 +131,7 @@ import _poolEbonyRhino from "../pool/ebony-rhino.js";
 import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElderfangRitualist from "../pool/elderfang-ritualist.js";
+import _poolElectrostaticPummeler from "../pool/electrostatic-pummeler.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
 import _poolEmberethVeteran from "../pool/embereth-veteran.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
@@ -170,6 +173,7 @@ import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
 import _poolFractalize from "../pool/fractalize.js";
 import _poolFreeTheFae from "../pool/free-the-fae.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
+import _poolFuriousReprisal from "../pool/furious-reprisal.js";
 import _poolFuryStorm from "../pool/fury-storm.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
@@ -207,6 +211,7 @@ import _poolHarabazDruid from "../pool/harabaz-druid.js";
 import _poolHaraldKingOfSkemfar from "../pool/harald-king-of-skemfar.js";
 import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
 import _poolHardlightContainment from "../pool/hardlight-containment.js";
+import _poolHazardousConditions from "../pool/hazardous-conditions.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
@@ -640,6 +645,7 @@ const shard: CardShard = {
     _poolBristlingBackwoods,
     _poolBruteStrength,
     _poolBucolicRanch,
+    _poolBuiltToSmash,
     _poolBurningSunCavalry,
     _poolCaprichrome,
     _poolCarnageTyrant,
@@ -656,6 +662,7 @@ const shard: CardShard = {
     _poolCocoon,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
+    _poolConfiscationCoup,
     _poolConiferWurm,
     _poolContradict,
     _poolConverterBeast,
@@ -710,6 +717,7 @@ const shard: CardShard = {
     _poolEidolonOfAstralWinds,
     _poolElderfangDisciple,
     _poolElderfangRitualist,
+    _poolElectrostaticPummeler,
     _poolElvishWarrior,
     _poolEmberethVeteran,
     _poolEmergeFromTheCocoon,
@@ -751,6 +759,7 @@ const shard: CardShard = {
     _poolFractalize,
     _poolFreeTheFae,
     _poolFromBeyond,
+    _poolFuriousReprisal,
     _poolFuryStorm,
     _poolGaeasCradle,
     _poolGalacticWayfarer,
@@ -788,6 +797,7 @@ const shard: CardShard = {
     _poolHaraldKingOfSkemfar,
     _poolHardHittingQuestion,
     _poolHardlightContainment,
+    _poolHazardousConditions,
     _poolHazeriderDrake,
     _poolHealerOfThePride,
     _poolHeapDoll,

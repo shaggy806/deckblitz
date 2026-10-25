@@ -11,6 +11,7 @@ import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
 import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
+import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
 import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAjanisComrade from "../pool/ajanis-comrade.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
@@ -39,6 +40,7 @@ import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
+import _poolAviaryMechanic from "../pool/aviary-mechanic.js";
 import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBadMoon from "../pool/bad-moon.js";
@@ -284,6 +286,7 @@ import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
+import _poolLiberatingCombustion from "../pool/liberating-combustion.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
@@ -302,6 +305,7 @@ import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
 import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
+import _poolMalfunction from "../pool/malfunction.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
 import _poolMaritLagesSlumber from "../pool/marit-lages-slumber.js";
@@ -615,6 +619,7 @@ const shard: CardShard = {
     _poolAbundantCountryside,
     _poolAchillesDavenport,
     _poolAethergeodeMiner,
+    _poolAetherstormRoc,
     _poolAislingLeprechaun,
     _poolAjanisComrade,
     _poolAlchemistsTalent,
@@ -643,6 +648,7 @@ const shard: CardShard = {
     _poolAvenWindGuide,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
+    _poolAviaryMechanic,
     _poolAzraOddsmaker,
     _poolBaSingSe,
     _poolBadMoon,
@@ -888,6 +894,7 @@ const shard: CardShard = {
     _poolLeafkinDruid,
     _poolLeatherArmor,
     _poolLeechCollector,
+    _poolLiberatingCombustion,
     _poolLifecraftCavalry,
     _poolLightOfPromise,
     _poolLightfootTechnique,
@@ -906,6 +913,7 @@ const shard: CardShard = {
     _poolMaiJadedEdge,
     _poolMaladyInvoker,
     _poolMalevolentChandelier,
+    _poolMalfunction,
     _poolMantisRider,
     _poolMaraudingBoneslasher,
     _poolMaritLagesSlumber,

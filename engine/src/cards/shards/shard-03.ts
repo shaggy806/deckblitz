@@ -83,6 +83,7 @@ import _poolCut from "../pool/cut.js";
 import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
+import _poolDeadlockTrap from "../pool/deadlock-trap.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
 import _poolDeathBegetsLife from "../pool/death-begets-life.js";
@@ -140,6 +141,7 @@ import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
 import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
+import _poolFatefulShowdown from "../pool/fateful-showdown.js";
 import _poolFeebleness from "../pool/feebleness.js";
 import _poolFeedTheInfection from "../pool/feed-the-infection.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
@@ -624,6 +626,7 @@ const shard: CardShard = {
     _poolCystbearer,
     _poolDalekSquadron,
     _poolDarkBargain,
+    _poolDeadlockTrap,
     _poolDeadlyDerision,
     _poolDeadlyVisit,
     _poolDeathBegetsLife,
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolFanBearer,
     _poolFanaticalStrength,
     _poolFateOfTheSunCryst,
+    _poolFatefulShowdown,
     _poolFeebleness,
     _poolFeedTheInfection,
     _poolFellHorseman,

@@ -8,6 +8,7 @@ import _poolAbomination from "../pool/abomination.js";
 import _poolAdrixAndNev from "../pool/adrix-and-nev.js";
 import _poolAdvancedHoverguard from "../pool/advanced-hoverguard.js";
 import _poolAerialManeuver from "../pool/aerial-maneuver.js";
+import _poolAetherMeltdown from "../pool/aether-meltdown.js";
 import _poolAhnCropInvader from "../pool/ahn-crop-invader.js";
 import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
 import _poolAirServant from "../pool/air-servant.js";
@@ -157,10 +158,12 @@ import _poolDreadReaper from "../pool/dread-reaper.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
+import _poolDurableHandicraft from "../pool/durable-handicraft.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
+import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
@@ -193,6 +196,7 @@ import _poolFortressCyclops from "../pool/fortress-cyclops.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
 import _poolFreewindFalcon from "../pool/freewind-falcon.js";
 import _poolFreezeInPlace from "../pool/freeze-in-place.js";
+import _poolFrenziedFugue from "../pool/frenzied-fugue.js";
 import _poolFreyaliseSupplicant from "../pool/freyalise-supplicant.js";
 import _poolFrilledMystic from "../pool/frilled-mystic.js";
 import _poolFrodoBaggins from "../pool/frodo-baggins.js";
@@ -318,6 +322,7 @@ import _poolMidnightCharm from "../pool/midnight-charm.js";
 import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
 import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMindTwist from "../pool/mind-twist.js";
+import _poolMinisterOfInquiries from "../pool/minister-of-inquiries.js";
 import _poolMinwuWhiteMage from "../pool/minwu-white-mage.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
@@ -578,6 +583,7 @@ const shard: CardShard = {
     _poolAdrixAndNev,
     _poolAdvancedHoverguard,
     _poolAerialManeuver,
+    _poolAetherMeltdown,
     _poolAhnCropInvader,
     _poolAinokStrikeLeader,
     _poolAirServant,
@@ -727,10 +733,12 @@ const shard: CardShard = {
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
     _poolDuneBeetle,
+    _poolDurableHandicraft,
     _poolDuskmantleHouseOfShadow,
     _poolEarthblighter,
     _poolEbondeathDracolich,
     _poolEccentricApprentice,
+    _poolEddytrailHawk,
     _poolEidolonOfBlossoms,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
@@ -763,6 +771,7 @@ const shard: CardShard = {
     _poolFranticSearch,
     _poolFreewindFalcon,
     _poolFreezeInPlace,
+    _poolFrenziedFugue,
     _poolFreyaliseSupplicant,
     _poolFrilledMystic,
     _poolFrodoBaggins,
@@ -888,6 +897,7 @@ const shard: CardShard = {
     _poolMightyMutanimals,
     _poolMindSpring,
     _poolMindTwist,
+    _poolMinisterOfInquiries,
     _poolMinwuWhiteMage,
     _poolMishrasOnslaught,
     _poolMistbladeShinobi,

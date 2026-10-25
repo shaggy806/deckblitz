@@ -83,6 +83,7 @@ import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
+import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
 import _poolChitinousGraspling from "../pool/chitinous-graspling.js";
 import _poolChokedEstuary from "../pool/choked-estuary.js";
 import _poolChompingChangeling from "../pool/chomping-changeling.js";
@@ -175,6 +176,7 @@ import _poolFellStinger from "../pool/fell-stinger.js";
 import _poolFieryEncore from "../pool/fiery-encore.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
+import _poolFireforgersPuzzleknot from "../pool/fireforgers-puzzleknot.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
@@ -317,6 +319,7 @@ import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
 import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNightmare from "../pool/nightmare.js";
+import _poolNissaNaturesArtisan from "../pool/nissa-natures-artisan.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
 import _poolNissaVoiceOfZendikar from "../pool/nissa-voice-of-zendikar.js";
 import _poolNivMizzetGhostCounsel from "../pool/niv-mizzet-ghost-counsel.js";
@@ -680,6 +683,7 @@ const shard: CardShard = {
     _poolCartographersHawk,
     _poolCatharticReunion,
     _poolChameleonColossus,
+    _poolChargingCinderhorn,
     _poolChitinousGraspling,
     _poolChokedEstuary,
     _poolChompingChangeling,
@@ -772,6 +776,7 @@ const shard: CardShard = {
     _poolFieryEncore,
     _poolFightingDrake,
     _poolFirebirdBlazingRanger,
+    _poolFireforgersPuzzleknot,
     _poolFlickerOfFate,
     _poolFlowstoneShambler,
     _poolFontOfVigor,
@@ -914,6 +919,7 @@ const shard: CardShard = {
     _poolNevThePracticalDean,
     _poolNexusWardens,
     _poolNightmare,
+    _poolNissaNaturesArtisan,
     _poolNissaSageAnimist,
     _poolNissaVoiceOfZendikar,
     _poolNivMizzetGhostCounsel,

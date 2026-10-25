@@ -689,7 +689,12 @@ largest, 700.8b — Malakir Blood-Priest; the same form is a
 Iona; `grantPtPerCount: { partySize: true }` is Ravager's Mace's "+1/+0 for
 each creature in your party"; "if you have a full party" (700.8c) is the
 condition `{ kind: "full-party" }`, Linvala, Shield of Sea Gate's
-intervening if), `{ greatestCommanderManaValue: true }`
+intervening if), **undaunted** (rule 702.125a — Coastal Breach, Curtains'
+Call: "costs {1} less to cast for each opponent you have") is the
+`selfCostReduction` amount `{ opponents: true }` under the always-true gate
+`{ kind: "controls", filter: {}, atLeast: 0 }`, the opponents still in the
+game (702.125b); the scaffolder reads the keyword line,
+`{ greatestCommanderManaValue: true }`
 (the greatest mana value among your commanders, wherever they are — Cactus
 Preserve's X/X), `{ creaturesDiedThisTurn: true }`
 (per *player*, unlike `GameState`'s global counter — Liliana's Standard

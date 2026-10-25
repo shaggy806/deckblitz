@@ -155,6 +155,7 @@ import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
 import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
+import _poolEvolutionaryEscalation from "../pool/evolutionary-escalation.js";
 import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
@@ -309,6 +310,7 @@ import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
 import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
+import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
@@ -774,6 +776,7 @@ const shard: CardShard = {
     _poolEtheriumSpinner,
     _poolEverquillPhoenix,
     _poolEvolutionCharm,
+    _poolEvolutionaryEscalation,
     _poolExclude,
     _poolExcoriate,
     _poolExpensiveTaste,
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _poolMammothBellow,
     _poolManaGeyser,
     _poolManaLeak,
+    _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
     _poolMemoryWorm,
     _poolMerfolkPupil,

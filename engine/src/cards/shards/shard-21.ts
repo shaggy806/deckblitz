@@ -82,6 +82,7 @@ import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCementShoes from "../pool/cement-shoes.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
+import _poolCeremoniousRejection from "../pool/ceremonious-rejection.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
 import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
@@ -154,6 +155,7 @@ import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
 import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
+import _poolEraOfInnovation from "../pool/era-of-innovation.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
@@ -195,6 +197,7 @@ import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGimlisAxe from "../pool/gimlis-axe.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGliderKids from "../pool/glider-kids.js";
+import _poolGlintNestCrane from "../pool/glint-nest-crane.js";
 import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGnarledProfessor from "../pool/gnarled-professor.js";
@@ -660,6 +663,7 @@ const shard: CardShard = {
     _poolCarnivorousPlant,
     _poolCementShoes,
     _poolCephalidFacetaker,
+    _poolCeremoniousRejection,
     _poolChainReaction,
     _poolChampionOfTheWeird,
     _poolChandrasMagmutt,
@@ -732,6 +736,7 @@ const shard: CardShard = {
     _poolEmissaryGreen,
     _poolEmmessiTome,
     _poolEmperorMihailIi,
+    _poolEraOfInnovation,
     _poolErase,
     _poolEriettesTemptingApple,
     _poolEscapedExperiment,
@@ -773,6 +778,7 @@ const shard: CardShard = {
     _poolGimlisAxe,
     _poolGlarbCalamitysAugur,
     _poolGliderKids,
+    _poolGlintNestCrane,
     _poolGlintWeaver,
     _poolGloriousCharge,
     _poolGnarledProfessor,

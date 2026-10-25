@@ -93,6 +93,7 @@ import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
+import _poolConsulsShieldguard from "../pool/consuls-shieldguard.js";
 import _poolContaminatedAquifer from "../pool/contaminated-aquifer.js";
 import _poolContrabandKingpin from "../pool/contraband-kingpin.js";
 import _poolConvertToSlime from "../pool/convert-to-slime.js";
@@ -174,11 +175,13 @@ import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
+import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
+import _poolFretworkColony from "../pool/fretwork-colony.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
 import _poolFrostAugur from "../pool/frost-augur.js";
@@ -234,6 +237,7 @@ import _poolHeraldOfTheForgotten from "../pool/herald-of-the-forgotten.js";
 import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
 import _poolHexgoldSlash from "../pool/hexgold-slash.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
+import _poolHijack from "../pool/hijack.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
 import _poolHomaridSpawningBed from "../pool/homarid-spawning-bed.js";
 import _poolHomesteadCourage from "../pool/homestead-courage.js";
@@ -248,6 +252,7 @@ import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
+import _poolIncendiarySabotage from "../pool/incendiary-sabotage.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
 import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
@@ -684,6 +689,7 @@ const shard: CardShard = {
     _poolColossalCollision,
     _poolComposerOfSpring,
     _poolConcordiaPegasus,
+    _poolConsulsShieldguard,
     _poolContaminatedAquifer,
     _poolContrabandKingpin,
     _poolConvertToSlime,
@@ -765,11 +771,13 @@ const shard: CardShard = {
     _poolFixWhatsBroken,
     _poolFlameSpirit,
     _poolFleetingFlight,
+    _poolFleetwheelCruiser,
     _poolForerunnerOfTheLegion,
     _poolForgeBoss,
     _poolForlornFlats,
     _poolFoulmireKnight,
     _poolFowlStrike,
+    _poolFretworkColony,
     _poolFriendlyGhost,
     _poolFromTheCatacombs,
     _poolFrostAugur,
@@ -825,6 +833,7 @@ const shard: CardShard = {
     _poolHerbologyInstructor,
     _poolHexgoldSlash,
     _poolHighspireBellRinger,
+    _poolHijack,
     _poolHollowDogs,
     _poolHomaridSpawningBed,
     _poolHomesteadCourage,
@@ -839,6 +848,7 @@ const shard: CardShard = {
     _poolImodaneThePyrohammer,
     _poolImodanesRecruiter,
     _poolImpsMischief,
+    _poolIncendiarySabotage,
     _poolIndulgentTormentor,
     _poolInfernalGrasp,
     _poolInjectorCrocodile,

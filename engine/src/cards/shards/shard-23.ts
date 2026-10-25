@@ -29,6 +29,7 @@ import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
+import _poolAttuneWithAether from "../pool/attune-with-aether.js";
 import _poolAuraShards from "../pool/aura-shards.js";
 import _poolAwokenDemon from "../pool/awoken-demon.js";
 import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
@@ -133,6 +134,7 @@ import _poolDemolitionField from "../pool/demolition-field.js";
 import _poolDemonOfLoathing from "../pool/demon-of-loathing.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
+import _poolDhundOperative from "../pool/dhund-operative.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
@@ -487,6 +489,7 @@ import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
 import _poolStrongarmMonk from "../pool/strongarm-monk.js";
+import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
 import _poolSubmerge from "../pool/submerge.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
@@ -556,6 +559,7 @@ import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
 import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
+import _poolVerdurousGearhulk from "../pool/verdurous-gearhulk.js";
 import _poolVertigo from "../pool/vertigo.js";
 import _poolVeteransPowerblade from "../pool/veterans-powerblade.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolArrestersZeal,
     _poolAtlasSizableStooge,
     _poolAttercop,
+    _poolAttuneWithAether,
     _poolAuraShards,
     _poolAwokenDemon,
     _poolAzizaMageTowerCaptain,
@@ -730,6 +735,7 @@ const shard: CardShard = {
     _poolDemonOfLoathing,
     _poolDesperateMeasures,
     _poolDespoil,
+    _poolDhundOperative,
     _poolDisciplinedDuelist,
     _poolDisinformationCampaign,
     _poolDistinguishedConjurer,
@@ -1084,6 +1090,7 @@ const shard: CardShard = {
     _poolStrawSoldiers,
     _poolStripedRiverwinder,
     _poolStrongarmMonk,
+    _poolSublimeExhalation,
     _poolSubmerge,
     _poolSunBlessedHealer,
     _poolSunTitan,
@@ -1153,6 +1160,7 @@ const shard: CardShard = {
     _poolVelvetwingButterflies,
     _poolVentureForth,
     _poolVerdantKraken,
+    _poolVerdurousGearhulk,
     _poolVertigo,
     _poolVeteransPowerblade,
     _poolVibraniumEnergyDaggers,

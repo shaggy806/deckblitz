@@ -223,6 +223,7 @@ import _poolGoblinRally from "../pool/goblin-rally.js";
 import _poolGoblinTrashmaster from "../pool/goblin-trashmaster.js";
 import _poolGoblinTurncoat from "../pool/goblin-turncoat.js";
 import _poolGraftSurgeon from "../pool/graft-surgeon.js";
+import _poolGraveUpheaval from "../pool/grave-upheaval.js";
 import _poolGravitationalShift from "../pool/gravitational-shift.js";
 import _poolGreenScarab from "../pool/green-scarab.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
@@ -260,6 +261,7 @@ import _poolInsatiableAvarice from "../pool/insatiable-avarice.js";
 import _poolIntoTheRoil from "../pool/into-the-roil.js";
 import _poolInvasionOfBelenon from "../pool/invasion-of-belenon.js";
 import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
+import _poolInventorsGoggles from "../pool/inventors-goggles.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolIroncladRevolutionary from "../pool/ironclad-revolutionary.js";
 import _poolIvoryCup from "../pool/ivory-cup.js";
@@ -346,6 +348,7 @@ import _poolOwlbearShepherd from "../pool/owlbear-shepherd.js";
 import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
+import _poolPartingThoughts from "../pool/parting-thoughts.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
 import _poolPegasusCourser from "../pool/pegasus-courser.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
@@ -430,6 +433,7 @@ import _poolSecureTheWastes from "../pool/secure-the-wastes.js";
 import _poolSeismicSense from "../pool/seismic-sense.js";
 import _poolSelflessSavior from "../pool/selfless-savior.js";
 import _poolSerumSnare from "../pool/serum-snare.js";
+import _poolServantOfTheConduit from "../pool/servant-of-the-conduit.js";
 import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
@@ -820,6 +824,7 @@ const shard: CardShard = {
     _poolGoblinTrashmaster,
     _poolGoblinTurncoat,
     _poolGraftSurgeon,
+    _poolGraveUpheaval,
     _poolGravitationalShift,
     _poolGreenScarab,
     _poolGretaSweettoothScourge,
@@ -857,6 +862,7 @@ const shard: CardShard = {
     _poolIntoTheRoil,
     _poolInvasionOfBelenon,
     _poolInvasiveManeuvers,
+    _poolInventorsGoggles,
     _poolIronApprentice,
     _poolIroncladRevolutionary,
     _poolIvoryCup,
@@ -943,6 +949,7 @@ const shard: CardShard = {
     _poolPacksFavor,
     _poolPaladinOfTheBloodstained,
     _poolPardicWanderer,
+    _poolPartingThoughts,
     _poolPeerIntoTheAbyss,
     _poolPegasusCourser,
     _poolPersistentSpecimen,
@@ -1027,6 +1034,7 @@ const shard: CardShard = {
     _poolSeismicSense,
     _poolSelflessSavior,
     _poolSerumSnare,
+    _poolServantOfTheConduit,
     _poolServantOfTheStinger,
     _poolSetessanChampion,
     _poolSeymourFlux,

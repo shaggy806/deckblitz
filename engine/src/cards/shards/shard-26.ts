@@ -374,6 +374,7 @@ import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
 import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
 import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
+import _poolRenegadeFreighter from "../pool/renegade-freighter.js";
 import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
 import _poolRevengeOfTheDrowned from "../pool/revenge-of-the-drowned.js";
@@ -415,6 +416,7 @@ import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
 import _poolSequenceEngine from "../pool/sequence-engine.js";
+import _poolSequesteredStash from "../pool/sequestered-stash.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
 import _poolSeraphicGreatsword from "../pool/seraphic-greatsword.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
@@ -474,6 +476,7 @@ import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwat from "../pool/swat.js";
 import _poolSwiftgearDrake from "../pool/swiftgear-drake.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
+import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
@@ -496,6 +499,7 @@ import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
+import _poolThrivingRats from "../pool/thriving-rats.js";
 import _poolThroneOfBone from "../pool/throne-of-bone.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolThunderingDjinn from "../pool/thundering-djinn.js";
@@ -954,6 +958,7 @@ const shard: CardShard = {
     _poolReclamationSage,
     _poolReconstructedThopter,
     _poolReluctantDounguard,
+    _poolRenegadeFreighter,
     _poolReshapeTheEarth,
     _poolRetrievalAgent,
     _poolRevengeOfTheDrowned,
@@ -995,6 +1000,7 @@ const shard: CardShard = {
     _poolSelesnyaCharm,
     _poolSenateGuildmage,
     _poolSequenceEngine,
+    _poolSequesteredStash,
     _poolSeraphSanctuary,
     _poolSeraphicGreatsword,
     _poolSerpentineAmbush,
@@ -1054,6 +1060,7 @@ const shard: CardShard = {
     _poolSwat,
     _poolSwiftgearDrake,
     _poolTajuruBlightblade,
+    _poolTakeDown,
     _poolTakeItBack,
     _poolTakeTheFall,
     _poolTalismanOfProgress,
@@ -1076,6 +1083,7 @@ const shard: CardShard = {
     _poolThornhideWolves,
     _poolThranTemporalGateway,
     _poolThrissNantukoPrimus,
+    _poolThrivingRats,
     _poolThroneOfBone,
     _poolThunderSalvo,
     _poolThunderingDjinn,

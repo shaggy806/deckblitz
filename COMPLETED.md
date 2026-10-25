@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2016 and Kaladesh, whole** (batch 141): **undaunted** (rule 702.125a, the
+  `selfCostReduction` amount `{ opponents: true }`; the scaffolder reads it, and improvise's
+  keyword line) built; 120 authored by five `card-author` agents and the lead — Saheeli Rai,
+  Verdurous Gearhulk, Confiscation Coup, Depala, Pilot Exemplar, Akiri, Line-Slinger, Ludevic,
+  Divergent Transformations and the other undaunted cards (Curtains' Call among them), with eight
+  earlier improvise cards rechecked (Whir of Invention, Organic Extinction, Kappa Cannoneer,
+  Bottle-Cap Blast and four more); C16 and KLD have no card left untriaged. 34 blocked, "crews a
+  Vehicle" the most shared (2026-10-25).
 - **Aether Revolt, whole** (batch 140): **improvise** (rule 702.126a, on convoke's machinery —
   artifacts, generic mana only, the client's bar saying so) built; 99 authored by five
   `card-author` agents and the lead — Herald of Anguish, Reverse Engineer, Metallic Rebuke,

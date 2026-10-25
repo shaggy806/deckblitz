@@ -145,6 +145,7 @@ import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
 import _poolDissectionPractice from "../pool/dissection-practice.js";
+import _poolDivergentTransformations from "../pool/divergent-transformations.js";
 import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
@@ -359,6 +360,7 @@ import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
 import _poolNarsetOfTheAncientWay from "../pool/narset-of-the-ancient-way.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
+import _poolNaturesWay from "../pool/natures-way.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
 import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
@@ -563,6 +565,7 @@ import _poolVaultguardTrooper from "../pool/vaultguard-trooper.js";
 import _poolVectorImperialCapital from "../pool/vector-imperial-capital.js";
 import _poolVengefulDevil from "../pool/vengeful-devil.js";
 import _poolVengefulVampire from "../pool/vengeful-vampire.js";
+import _poolVerdantCrescendo from "../pool/verdant-crescendo.js";
 import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
 import _poolVigilance from "../pool/vigilance.js";
 import _poolVillageElder from "../pool/village-elder.js";
@@ -582,6 +585,7 @@ import _poolWartimeProtestors from "../pool/wartime-protestors.js";
 import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
 import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
 import _poolWaywardSwordtooth from "../pool/wayward-swordtooth.js";
+import _poolWeldingSparks from "../pool/welding-sparks.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
@@ -761,6 +765,7 @@ const shard: CardShard = {
     _poolDismiss,
     _poolDisruptivePitmage,
     _poolDissectionPractice,
+    _poolDivergentTransformations,
     _poolDiversionSpecialist,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
@@ -975,6 +980,7 @@ const shard: CardShard = {
     _poolNanoformSentinel,
     _poolNarsetOfTheAncientWay,
     _poolNaturalReclamation,
+    _poolNaturesWay,
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
     _poolNekusarTheMindrazer,
@@ -1179,6 +1185,7 @@ const shard: CardShard = {
     _poolVectorImperialCapital,
     _poolVengefulDevil,
     _poolVengefulVampire,
+    _poolVerdantCrescendo,
     _poolViashinoLashclaw,
     _poolVigilance,
     _poolVillageElder,
@@ -1198,6 +1205,7 @@ const shard: CardShard = {
     _poolWaterbenderAscension,
     _poolWayOfTheParadox,
     _poolWaywardSwordtooth,
+    _poolWeldingSparks,
     _poolWhelmingWave,
     _poolWhirlwindOfThought,
     _poolWhiskAway,

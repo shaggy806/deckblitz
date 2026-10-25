@@ -340,6 +340,7 @@ import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
 import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
+import _poolMultiformWonder from "../pool/multiform-wonder.js";
 import _poolMultiversalRecruitment from "../pool/multiversal-recruitment.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
 import _poolNamelessConqueror from "../pool/nameless-conqueror.js";
@@ -450,6 +451,7 @@ import _poolSpellstutterSprite from "../pool/spellstutter-sprite.js";
 import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
+import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
@@ -485,6 +487,7 @@ import _poolTenthDistrictGuard from "../pool/tenth-district-guard.js";
 import _poolTerrainElemental from "../pool/terrain-elemental.js";
 import _poolTerrasymbiosis from "../pool/terrasymbiosis.js";
 import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
+import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
@@ -913,6 +916,7 @@ const shard: CardShard = {
     _poolMothriderPatrol,
     _poolMoxEmerald,
     _poolMuldrothaTheGravetide,
+    _poolMultiformWonder,
     _poolMultiversalRecruitment,
     _poolMysteriosPhantasm,
     _poolNamelessConqueror,
@@ -1023,6 +1027,7 @@ const shard: CardShard = {
     _poolSpiderUk,
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
+    _poolSpiresideInfiltrator,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
@@ -1058,6 +1063,7 @@ const shard: CardShard = {
     _poolTerrainElemental,
     _poolTerrasymbiosis,
     _poolTerritorialHammerskull,
+    _poolTezzeretsAmbition,
     _poolTheHungerTideRises,
     _poolTheNightOfTheDoctor,
     _poolTheTerrorOfSerpentsPass,

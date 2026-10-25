@@ -4243,6 +4243,10 @@
    "family": "static:grant-abilities-to-spells",
    "example": "Hoarding Broodlord: 'Spells you cast from exile have convoke'."
   },
+  "static:grant-undaunted-to-exiled-spell": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Durnan of the Yawning Portal: 'For as long as that card remains exiled, you may cast it. That spell has undaunted.'"
+  },
   "static:grant-improvise": {
    "family": "static:grant-abilities-to-spells",
    "example": "Inspiring Statuary: 'Nonartifact spells you cast have improvise' (Ironheart, Clever Champion: noncreature spells)."
@@ -4330,6 +4334,10 @@
   "static:next-spell-uncounterable": {
    "family": "static:grant-abilities-to-spells",
    "example": "Overmaster: No effect making the next instant/sorcery cast uncounterable as it's cast (a delayed trigger leaves a window)"
+  },
+  "static:max-hand-size-equal-to-count": {
+   "family": "static:max-hand-size",
+   "example": "Midnight Oil: 'Your maximum hand size is equal to the number of hour counters on this enchantment' — maxHandSize takes only a fixed set less a count"
   },
   "static:no-max-hand-size-for-game": {
    "family": "static:max-hand-size",
@@ -9019,6 +9027,9 @@
   },
   "effect:damage-all-except-target": {
    "example": "Flames of the Raze-Boar"
+  },
+  "effect:damage-all-controller-of-target": {
+   "example": "Chandra, Pyrogenius: −10 'deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls' — damage-all's controlledByTarget does nothing when the slot holds a permanent"
   },
   "trigger:becomes-blocked-attacked-recipient": {
    "family": "trigger:trigger-recipient-ref",

@@ -349,6 +349,7 @@ import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
+import _poolOrnamentalCourage from "../pool/ornamental-courage.js";
 import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOverwhelmedArchivist from "../pool/overwhelmed-archivist.js";
@@ -405,6 +406,7 @@ import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolRevitalize from "../pool/revitalize.js";
+import _poolRevolutionaryRebuff from "../pool/revolutionary-rebuff.js";
 import _poolRiggingRunner from "../pool/rigging-runner.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
@@ -942,6 +944,7 @@ const shard: CardShard = {
     _poolOphidianEye,
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
+    _poolOrnamentalCourage,
     _poolOverlordOfTheHauntwoods,
     _poolOverwhelm,
     _poolOverwhelmedArchivist,
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolResearchThief,
     _poolRestlessDead,
     _poolRevitalize,
+    _poolRevolutionaryRebuff,
     _poolRiggingRunner,
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,

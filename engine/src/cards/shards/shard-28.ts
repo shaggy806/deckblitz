@@ -197,6 +197,7 @@ import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
+import _poolGlassblowersPuzzleknot from "../pool/glassblowers-puzzleknot.js";
 import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
 import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
@@ -269,6 +270,7 @@ import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
 import _poolKumanoFacesKakkazan from "../pool/kumano-faces-kakkazan.js";
 import _poolLakeTownLookout from "../pool/lake-town-lookout.js";
+import _poolLathnuHellion from "../pool/lathnu-hellion.js";
 import _poolLeechriddenSwamp from "../pool/leechridden-swamp.js";
 import _poolLegionExtruder from "../pool/legion-extruder.js";
 import _poolLegolasCounterOfKills from "../pool/legolas-counter-of-kills.js";
@@ -520,10 +522,12 @@ import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
 import _poolThreefoldThunderhulk from "../pool/threefold-thunderhulk.js";
+import _poolThrivingIbex from "../pool/thriving-ibex.js";
 import _poolThrunBreakerOfSilence from "../pool/thrun-breaker-of-silence.js";
 import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
 import _poolTickedOff from "../pool/ticked-off.js";
+import _poolTidyConclusion from "../pool/tidy-conclusion.js";
 import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
 import _poolTimeBomb from "../pool/time-bomb.js";
 import _poolTishanasWayfinder from "../pool/tishanas-wayfinder.js";
@@ -804,6 +808,7 @@ const shard: CardShard = {
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
     _poolGildedPinions,
+    _poolGlassblowersPuzzleknot,
     _poolGlasspoolMimic,
     _poolGlasswingGrace,
     _poolGlidediveDuo,
@@ -876,6 +881,7 @@ const shard: CardShard = {
     _poolKnotvineMystic,
     _poolKumanoFacesKakkazan,
     _poolLakeTownLookout,
+    _poolLathnuHellion,
     _poolLeechriddenSwamp,
     _poolLegionExtruder,
     _poolLegolasCounterOfKills,
@@ -1127,10 +1133,12 @@ const shard: CardShard = {
     _poolThoughtseize,
     _poolThreeTreeCity,
     _poolThreefoldThunderhulk,
+    _poolThrivingIbex,
     _poolThrunBreakerOfSilence,
     _poolThunderclapWyvern,
     _poolThundermawHellkite,
     _poolTickedOff,
+    _poolTidyConclusion,
     _poolTillerOfFlesh,
     _poolTimeBomb,
     _poolTishanasWayfinder,

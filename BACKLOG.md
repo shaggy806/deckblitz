@@ -144,10 +144,17 @@ section keeps only what to do next.
   Rivals of Ixalan, on ascend; batch 137 Ixalan and Commander 2017, no engine change; batch 138
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
-  untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise);
-  **next, Commander 2016** (20 left), then Kaladesh (121 left). Eleven earlier improvise
-  cards wait for a recheck (`cards:needs -- --feature keyword:improvise`, `docs/card-blockers.md`
-  batch 140). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
+  untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise;
+  batch 141 the rest of Commander 2016 and Kaladesh, on undaunted);
+  **next, Conspiracy: Take the Crown** (52 left), then Eldritch Moon (130 left). Leads from
+  batch 141: "whenever this creature crews a Vehicle" (`trigger:crews-or-saddles` — Speedway
+  Fanatic, Veteran Motorist, Gearshift Ace), "whenever you get one or more {E}"
+  (`trigger:energy-gained` — Territorial Gorger, Fabrication Module), "pay any amount of {E}"
+  (`cost:pay-any-amount-of-energy` — Harnessed Lightning, Die Young), granting improvise
+  (`static:grant-improvise` — Inspiring Statuary, Ironheart; Archway of Innovation's next-spell
+  form), and `damage-all`'s `controlledByTarget` doing nothing on a planeswalker target
+  (`effect:damage-all-controller-of-target`, Chandra, Pyrogenius — `docs/card-blockers.md`
+  batch 141). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
   Kinetic Augur already does it as a 0/1/2 modal count, so it may already be expressible), "choose a card name" (`decision:choose-card-name`
   — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an
   additional creature" (`static:block-additional-creature` — 4), "your life total becomes N"

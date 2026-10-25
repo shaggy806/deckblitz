@@ -118,6 +118,7 @@ import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDreamEater from "../pool/dream-eater.js";
+import _poolDukharaScavenger from "../pool/dukhara-scavenger.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
 import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
@@ -194,6 +195,7 @@ import _poolGrenzoHavocRaiser from "../pool/grenzo-havoc-raiser.js";
 import _poolGrimGuardian from "../pool/grim-guardian.js";
 import _poolGrimReapersScythe from "../pool/grim-reapers-scythe.js";
 import _poolGrimdancer from "../pool/grimdancer.js";
+import _poolGripOfPhyresis from "../pool/grip-of-phyresis.js";
 import _poolGrotesqueDemise from "../pool/grotesque-demise.js";
 import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
@@ -237,6 +239,7 @@ import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJadeAvenger from "../pool/jade-avenger.js";
+import _poolJanjeetSentry from "../pool/janjeet-sentry.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
 import _poolJoustingLance from "../pool/jousting-lance.js";
@@ -692,6 +695,7 @@ const shard: CardShard = {
     _poolDragonSniper,
     _poolDragonStyleTwins,
     _poolDreamEater,
+    _poolDukharaScavenger,
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
     _poolDuskRoseReliquary,
@@ -768,6 +772,7 @@ const shard: CardShard = {
     _poolGrimGuardian,
     _poolGrimReapersScythe,
     _poolGrimdancer,
+    _poolGripOfPhyresis,
     _poolGrotesqueDemise,
     _poolGrowingRitesOfItlimoc,
     _poolGuardiansOfAkrasa,
@@ -811,6 +816,7 @@ const shard: CardShard = {
     _poolIvoryCharm,
     _poolJaddiOffshoot,
     _poolJadeAvenger,
+    _poolJanjeetSentry,
     _poolJenaraAsuraOfWar,
     _poolJhessianLookout,
     _poolJoustingLance,

@@ -555,6 +555,11 @@ export type CostReductionAmount =
    * creature in your party". `characteristics.ts`'s
    * `partySizeOf`; see the `EffectAmount` of the same name. */
   | { readonly partySize: "you" }
+  /** Undaunted (rule 702.125a) — {1} less for each opponent its controller
+   * has: Coastal Breach's "This spell costs {1} less to cast for each
+   * opponent you have". Players who have left the game don't count
+   * (702.125b). */
+  | { readonly opponents: true }
   /** Devotion (rule 700.5) — {1} less for each mana symbol of the colors among
    * the mana costs of permanents its controller controls — Drag to the
    * Underworld's "This spell costs {X} less to cast, where X is your devotion

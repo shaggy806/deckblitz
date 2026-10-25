@@ -1,0 +1,1090 @@
+{
+ "batch": "B141",
+ "status": "complete",
+ "ranks": "Commander 2016 (C16, 2016-11-11): the rest of the set; Kaladesh (KLD, 2016-09-30): the rest of the set, whole; and the earlier-triaged improvise cards; and the earlier undaunted cards",
+ "authored": [
+  {
+   "name": "Aether Meltdown",
+   "files": [
+    "engine/src/cards/pool/aether-meltdown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aether Theorist",
+   "files": [
+    "engine/src/cards/pool/aether-theorist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetherborn Marauder",
+   "files": [
+    "engine/src/cards/pool/aetherborn-marauder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetherstorm Roc",
+   "files": [
+    "engine/src/cards/pool/aetherstorm-roc.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aethertorch Renegade",
+   "files": [
+    "engine/src/cards/pool/aethertorch-renegade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Akiri, Line-Slinger",
+   "files": [
+    "engine/src/cards/pool/akiri-line-slinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancient Excavation",
+   "files": [
+    "engine/src/cards/pool/ancient-excavation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arc Reactor",
+   "files": [
+    "engine/src/cards/pool/arc-reactor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Architect of the Untamed",
+   "files": [
+    "engine/src/cards/pool/architect-of-the-untamed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attune with Aether",
+   "files": [
+    "engine/src/cards/pool/attune-with-aether.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aviary Mechanic",
+   "files": [
+    "engine/src/cards/pool/aviary-mechanic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Benefactor's Draught",
+   "files": [
+    "engine/src/cards/pool/benefactors-draught.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bottle-Cap Blast",
+   "files": [
+    "engine/src/cards/pool/bottle-cap-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bristling Hydra",
+   "files": [
+    "engine/src/cards/pool/bristling-hydra.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Built to Last",
+   "files": [
+    "engine/src/cards/pool/built-to-last.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Built to Smash",
+   "files": [
+    "engine/src/cards/pool/built-to-smash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ceremonious Rejection",
+   "files": [
+    "engine/src/cards/pool/ceremonious-rejection.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chandra's Pyrohelix",
+   "files": [
+    "engine/src/cards/pool/chandras-pyrohelix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Charging Cinderhorn",
+   "files": [
+    "engine/src/cards/pool/charging-cinderhorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coastal Breach",
+   "files": [
+    "engine/src/cards/pool/coastal-breach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confiscation Coup",
+   "files": [
+    "engine/src/cards/pool/confiscation-coup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consul's Shieldguard",
+   "files": [
+    "engine/src/cards/pool/consuls-shieldguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cultivator of Blades",
+   "files": [
+    "engine/src/cards/pool/cultivator-of-blades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curtains' Call",
+   "files": [
+    "engine/src/cards/pool/curtains-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadlock Trap",
+   "files": [
+    "engine/src/cards/pool/deadlock-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demon of Dark Schemes",
+   "files": [
+    "engine/src/cards/pool/demon-of-dark-schemes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Depala, Pilot Exemplar",
+   "files": [
+    "engine/src/cards/pool/depala-pilot-exemplar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dhund Operative",
+   "files": [
+    "engine/src/cards/pool/dhund-operative.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divergent Transformations",
+   "files": [
+    "engine/src/cards/pool/divergent-transformations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dukhara Scavenger",
+   "files": [
+    "engine/src/cards/pool/dukhara-scavenger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Durable Handicraft",
+   "files": [
+    "engine/src/cards/pool/durable-handicraft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dynavolt Tower",
+   "files": [
+    "engine/src/cards/pool/dynavolt-tower.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eager Construct",
+   "files": [
+    "engine/src/cards/pool/eager-construct.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eddytrail Hawk",
+   "files": [
+    "engine/src/cards/pool/eddytrail-hawk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Electrostatic Pummeler",
+   "files": [
+    "engine/src/cards/pool/electrostatic-pummeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embraal Bruiser",
+   "files": [
+    "engine/src/cards/pool/embraal-bruiser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Empyreal Voyager",
+   "files": [
+    "engine/src/cards/pool/empyreal-voyager.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Engineered Might",
+   "files": [
+    "engine/src/cards/pool/engineered-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Era of Innovation",
+   "files": [
+    "engine/src/cards/pool/era-of-innovation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evolutionary Escalation",
+   "files": [
+    "engine/src/cards/pool/evolutionary-escalation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fairgrounds Warden",
+   "files": [
+    "engine/src/cards/pool/fairgrounds-warden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fateful Showdown",
+   "files": [
+    "engine/src/cards/pool/fateful-showdown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fireforger's Puzzleknot",
+   "files": [
+    "engine/src/cards/pool/fireforgers-puzzleknot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fleetwheel Cruiser",
+   "files": [
+    "engine/src/cards/pool/fleetwheel-cruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foundry Screecher",
+   "files": [
+    "engine/src/cards/pool/foundry-screecher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frenzied Fugue",
+   "files": [
+    "engine/src/cards/pool/frenzied-fugue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fretwork Colony",
+   "files": [
+    "engine/src/cards/pool/fretwork-colony.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Furious Reprisal",
+   "files": [
+    "engine/src/cards/pool/furious-reprisal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glassblower's Puzzleknot",
+   "files": [
+    "engine/src/cards/pool/glassblowers-puzzleknot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glint-Nest Crane",
+   "files": [
+    "engine/src/cards/pool/glint-nest-crane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Upheaval",
+   "files": [
+    "engine/src/cards/pool/grave-upheaval.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grip of Phyresis",
+   "files": [
+    "engine/src/cards/pool/grip-of-phyresis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian of the Great Conduit",
+   "files": [
+    "engine/src/cards/pool/guardian-of-the-great-conduit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Harsh Scrutiny",
+   "files": [
+    "engine/src/cards/pool/harsh-scrutiny.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hazardous Conditions",
+   "files": [
+    "engine/src/cards/pool/hazardous-conditions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hightide Hermit",
+   "files": [
+    "engine/src/cards/pool/hightide-hermit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hijack",
+   "files": [
+    "engine/src/cards/pool/hijack.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Incendiary Sabotage",
+   "files": [
+    "engine/src/cards/pool/incendiary-sabotage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Insidious Will",
+   "files": [
+    "engine/src/cards/pool/insidious-will.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inventor's Apprentice",
+   "files": [
+    "engine/src/cards/pool/inventors-apprentice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inventor's Goggles",
+   "files": [
+    "engine/src/cards/pool/inventors-goggles.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Janjeet Sentry",
+   "files": [
+    "engine/src/cards/pool/janjeet-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kappa Cannoneer",
+   "files": [
+    "engine/src/cards/pool/kappa-cannoneer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lathnu Hellion",
+   "files": [
+    "engine/src/cards/pool/lathnu-hellion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liberating Combustion",
+   "files": [
+    "engine/src/cards/pool/liberating-combustion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Live Fast",
+   "files": [
+    "engine/src/cards/pool/live-fast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ludevic, Necro-Alchemist",
+   "files": [
+    "engine/src/cards/pool/ludevic-necro-alchemist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malfunction",
+   "files": [
+    "engine/src/cards/pool/malfunction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master Trinketeer",
+   "files": [
+    "engine/src/cards/pool/master-trinketeer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maulfist Doorbuster",
+   "files": [
+    "engine/src/cards/pool/maulfist-doorbuster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minister of Inquiries",
+   "files": [
+    "engine/src/cards/pool/minister-of-inquiries.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morbid Curiosity",
+   "files": [
+    "engine/src/cards/pool/morbid-curiosity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Multiform Wonder",
+   "files": [
+    "engine/src/cards/pool/multiform-wonder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nature's Way",
+   "files": [
+    "engine/src/cards/pool/natures-way.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Night Market Lookout",
+   "files": [
+    "engine/src/cards/pool/night-market-lookout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ninth Bridge Patrol",
+   "files": [
+    "engine/src/cards/pool/ninth-bridge-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa, Nature's Artisan",
+   "files": [
+    "engine/src/cards/pool/nissa-natures-artisan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Organic Extinction",
+   "files": [
+    "engine/src/cards/pool/organic-extinction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ornamental Courage",
+   "files": [
+    "engine/src/cards/pool/ornamental-courage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ovalchase Daredevil",
+   "files": [
+    "engine/src/cards/pool/ovalchase-daredevil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oviya Pashiri, Sage Lifecrafter",
+   "files": [
+    "engine/src/cards/pool/oviya-pashiri-sage-lifecrafter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parting Thoughts",
+   "files": [
+    "engine/src/cards/pool/parting-thoughts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prismatic Geoscope",
+   "files": [
+    "engine/src/cards/pool/prismatic-geoscope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Firebrand",
+   "files": [
+    "engine/src/cards/pool/renegade-firebrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Freighter",
+   "files": [
+    "engine/src/cards/pool/renegade-freighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revolutionary Rebuff",
+   "files": [
+    "engine/src/cards/pool/revolutionary-rebuff.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Riparian Tiger",
+   "files": [
+    "engine/src/cards/pool/riparian-tiger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sage of Shaila's Claim",
+   "files": [
+    "engine/src/cards/pool/sage-of-shailas-claim.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Saheeli Rai",
+   "files": [
+    "engine/src/cards/pool/saheeli-rai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saheeli's Artistry",
+   "files": [
+    "engine/src/cards/pool/saheelis-artistry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saheeli's Directive",
+   "files": [
+    "engine/src/cards/pool/saheelis-directive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrapheap Scrounger",
+   "files": [
+    "engine/src/cards/pool/scrapheap-scrounger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seeds of Renewal",
+   "files": [
+    "engine/src/cards/pool/seeds-of-renewal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Self-Assembler",
+   "files": [
+    "engine/src/cards/pool/self-assembler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sequestered Stash",
+   "files": [
+    "engine/src/cards/pool/sequestered-stash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Servant of the Conduit",
+   "files": [
+    "engine/src/cards/pool/servant-of-the-conduit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spireside Infiltrator",
+   "files": [
+    "engine/src/cards/pool/spireside-infiltrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spontaneous Artist",
+   "files": [
+    "engine/src/cards/pool/spontaneous-artist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sublime Exhalation",
+   "files": [
+    "engine/src/cards/pool/sublime-exhalation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Syndicate Trafficker",
+   "files": [
+    "engine/src/cards/pool/syndicate-trafficker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Synth Infiltrator",
+   "files": [
+    "engine/src/cards/pool/synth-infiltrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take Down",
+   "files": [
+    "engine/src/cards/pool/take-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tezzeret's Ambition",
+   "files": [
+    "engine/src/cards/pool/tezzerets-ambition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thriving Grubs",
+   "files": [
+    "engine/src/cards/pool/thriving-grubs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thriving Ibex",
+   "files": [
+    "engine/src/cards/pool/thriving-ibex.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thriving Rats",
+   "files": [
+    "engine/src/cards/pool/thriving-rats.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thriving Rhino",
+   "files": [
+    "engine/src/cards/pool/thriving-rhino.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thriving Turtle",
+   "files": [
+    "engine/src/cards/pool/thriving-turtle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tidy Conclusion",
+   "files": [
+    "engine/src/cards/pool/tidy-conclusion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Toolcraft Exemplar",
+   "files": [
+    "engine/src/cards/pool/toolcraft-exemplar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Underhanded Designs",
+   "files": [
+    "engine/src/cards/pool/underhanded-designs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Universal Surveillance",
+   "files": [
+    "engine/src/cards/pool/universal-surveillance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verdant Crescendo",
+   "files": [
+    "engine/src/cards/pool/verdant-crescendo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verdurous Gearhulk",
+   "files": [
+    "engine/src/cards/pool/verdurous-gearhulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voltaic Brawler",
+   "files": [
+    "engine/src/cards/pool/voltaic-brawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Welding Sparks",
+   "files": [
+    "engine/src/cards/pool/welding-sparks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whir of Invention",
+   "files": [
+    "engine/src/cards/pool/whir-of-invention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildest Dreams",
+   "files": [
+    "engine/src/cards/pool/wildest-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wispweaver Angel",
+   "files": [
+    "engine/src/cards/pool/wispweaver-angel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Woodweaver's Puzzleknot",
+   "files": [
+    "engine/src/cards/pool/woodweavers-puzzleknot.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Territorial Gorger",
+   "needs": [
+    "trigger:energy-gained"
+   ],
+   "why": "No \"whenever you get one or more {E}\" trigger: get-energy fires nothing a trigger can watch."
+  },
+  {
+   "name": "Ghirapur Guide",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "No effect gives one target \"can't be blocked by creatures with power 2 or less this turn\"; cantBeBlockedBy is static-only."
+  },
+  {
+   "name": "Treacherous Terrain",
+   "needs": [
+    "amount:count-that-player-controls"
+   ],
+   "why": "countOf can't count \"lands that player controls\" per opponent inside a for-each-player."
+  },
+  {
+   "name": "Manifold Insights",
+   "needs": [
+    "decision:opponent-chooses-card"
+   ],
+   "why": "Each opponent in turn picks a different nonland card from the revealed cards."
+  },
+  {
+   "name": "Consulate Surveillance",
+   "needs": [
+    "replacement:prevent-damage-from-chosen-source"
+   ],
+   "why": "prevent-damage-from-chosen-source takes only next-time or a number, not all damage this turn."
+  },
+  {
+   "name": "Midnight Oil",
+   "needs": [
+    "static:max-hand-size-equal-to-count"
+   ],
+   "why": "Maximum hand size equal to the number of hour counters on it."
+  },
+  {
+   "name": "Disappearing Act",
+   "needs": [
+    "cost:return-permanent-additional-cost"
+   ],
+   "why": "additionalCost has no \"return a permanent you control to its owner's hand\"."
+  },
+  {
+   "name": "Fairgrounds Trumpeter",
+   "needs": [
+    "condition:counters-put-by-you-this-turn"
+   ],
+   "why": "No turn stat records that a +1/+1 counter was put on a permanent you control this turn."
+  },
+  {
+   "name": "Madcap Experiment",
+   "needs": [
+    "amount:cards-revealed-this-way"
+   ],
+   "why": "reveal-until doesn't expose how many cards it revealed."
+  },
+  {
+   "name": "Die Young",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "Pay any amount of {E}, a per-energy effect."
+  },
+  {
+   "name": "Trusty Companion",
+   "needs": [
+    "static:cant-attack-alone"
+   ],
+   "why": "No \"can't attack alone\" restriction."
+  },
+  {
+   "name": "Cruel Entertainment",
+   "needs": [
+    "mechanic:control-player"
+   ],
+   "why": "Controlling another player's next turn."
+  },
+  {
+   "name": "Fabrication Module",
+   "needs": [
+    "trigger:energy-gained"
+   ],
+   "why": "No \"whenever you get one or more {E}\" trigger."
+  },
+  {
+   "name": "Start Your Engines",
+   "needs": [
+    "effect:add-types-all"
+   ],
+   "why": "No mass add-types: animate-all would overwrite the Vehicles' printed P/T."
+  },
+  {
+   "name": "Commencement of Festivities",
+   "needs": [
+    "replacement:prevent-combat-damage-to-filter"
+   ],
+   "why": "prevent-all-combat-damage filters the source only, not the recipient (players)."
+  },
+  {
+   "name": "Harnessed Lightning",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "Pay any amount of {E}, that much damage."
+  },
+  {
+   "name": "Lost Legacy",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "Choose a nonartifact, nonland card name; search graveyard, hand and library by it."
+  },
+  {
+   "name": "Shrewd Negotiation",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "Exchange control of an artifact you control and a target permanent."
+  },
+  {
+   "name": "Revoke Privileges",
+   "needs": [
+    "static:cant-crew"
+   ],
+   "why": "No \"can't crew Vehicles\" restriction."
+  },
+  {
+   "name": "Magus of the Will",
+   "needs": [
+    "effect:player-effect-play-lands-from-graveyard",
+    "replacement:graveyard-to-exile-this-turn"
+   ],
+   "why": "Playing lands from the graveyard this turn, and this turn's \"exile it instead\"."
+  },
+  {
+   "name": "Bomat Courier",
+   "needs": [
+    "effect:exile-top-face-down-linked"
+   ],
+   "why": "exile-from-library has no face-down, linked exile for the later return."
+  },
+  {
+   "name": "Speedway Fanatic",
+   "needs": [
+    "trigger:crews-or-saddles"
+   ],
+   "why": "No \"whenever this creature crews a Vehicle\" trigger."
+  },
+  {
+   "name": "Veteran Motorist",
+   "needs": [
+    "trigger:crews-or-saddles"
+   ],
+   "why": "No \"whenever this creature crews a Vehicle\" trigger."
+  },
+  {
+   "name": "Dovin Baan",
+   "needs": [
+    "effect:prohibit-abilities-until-your-next-turn",
+    "static:untap-step-limit"
+   ],
+   "why": "prohibit lasts only until end of turn; an emblem's static can only be an anthem."
+  },
+  {
+   "name": "Chandra, Pyrogenius",
+   "needs": [
+    "effect:damage-all-controller-of-target"
+   ],
+   "why": "damage-all's controlledByTarget does nothing when the slot holds a planeswalker (−10)."
+  },
+  {
+   "name": "Captured by the Consulate",
+   "needs": [
+    "effect:change-targets-trigger-spell"
+   ],
+   "why": "change-targets needs a target slot and can't redirect to the enchanted creature."
+  },
+  {
+   "name": "Dubious Challenge",
+   "needs": [
+    "effect:opponent-chooses-exiled"
+   ],
+   "why": "The target opponent picks one exiled card to put onto the battlefield under their control; you get the rest."
+  },
+  {
+   "name": "Curse of Vengeance",
+   "needs": [
+    "trigger:enchanted-player-casts",
+    "trigger:player-loses-game-trigger"
+   ],
+   "why": "No \"enchanted player casts\" trigger or \"when enchanted player loses the game\" trigger."
+  },
+  {
+   "name": "Spark of Creativity",
+   "needs": [
+    "zone:play-exiled-this-way-after-choice"
+   ],
+   "why": "A play permission (lands included) granted only after the damage choice."
+  },
+  {
+   "name": "Gearshift Ace",
+   "needs": [
+    "trigger:crews-or-saddles"
+   ],
+   "why": "No \"whenever this creature crews a Vehicle\" trigger."
+  },
+  {
+   "name": "Archway of Innovation",
+   "needs": [
+    "static:grant-improvise-next-spell"
+   ],
+   "why": "\"The next spell you cast this turn has improvise.\""
+  },
+  {
+   "name": "Inspiring Statuary",
+   "needs": [
+    "static:grant-improvise"
+   ],
+   "why": "\"Nonartifact spells you cast have improvise.\""
+  },
+  {
+   "name": "Ironheart, Clever Champion",
+   "needs": [
+    "static:grant-improvise"
+   ],
+   "why": "\"Noncreature spells you cast have improvise.\""
+  },
+  {
+   "name": "Durnan of the Yawning Portal",
+   "needs": [
+    "static:grant-undaunted-to-exiled-spell"
+   ],
+   "why": "Undaunted is built; \"for as long as that card remains exiled, you may cast it. That spell has undaunted\" grants it to a spell cast from exile."
+  }
+ ]
+}
