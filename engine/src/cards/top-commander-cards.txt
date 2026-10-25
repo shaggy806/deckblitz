@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3787 already implemented / 1213 missing (marks refreshed 2026-10-25)
+3789 already implemented / 1211 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -876,7 +876,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   880  Elvish Archdruid                         {1}{G}{G}        Creature — Elf Druid
 [ ]   881  Thousand-Year Elixir                     {3}              Artifact
 [x]   882  Myr Retriever                            {2}              Artifact Creature — Myr
-[ ]   883  Bear Umbra                               {2}{G}{G}        Enchantment — Aura
+[x]   883  Bear Umbra                               {2}{G}{G}        Enchantment — Aura
 [x]   884  Witch's Cottage                          {0}              Land — Swamp
 [ ]   885  Throne of Eldraine                       {5}              Legendary Artifact
 [x]   886  Descent into Avernus                     {2}{R}           Enchantment
@@ -2694,7 +2694,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2701  Camellia, the Seedmiser                  {1}{B}{G}        Legendary Creature — Squirrel Warlock
 [x]  2702  Murmuring Bosk                           {0}              Land — Forest
 [ ]  2703  Heroes' Podium                           {5}              Legendary Artifact
-[ ]  2704  Hyena Umbra                              {W}              Enchantment — Aura
+[x]  2704  Hyena Umbra                              {W}              Enchantment — Aura
 [ ]  2705  Cloudstone Curio                         {3}              Artifact
 [ ]  2706  Loading Zone                             {3}{G}           Enchantment
 [x]  2707  Transpose                                {2}{B}           Instant
