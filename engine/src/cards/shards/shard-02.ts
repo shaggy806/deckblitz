@@ -138,6 +138,7 @@ import _poolDauntlessAven from "../pool/dauntless-aven.js";
 import _poolDauntlessEscort from "../pool/dauntless-escort.js";
 import _poolDaybreakChaplain from "../pool/daybreak-chaplain.js";
 import _poolDeadlyComplication from "../pool/deadly-complication.js";
+import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
 import _poolDeerDog from "../pool/deer-dog.js";
@@ -301,6 +302,7 @@ import _poolKessigRecluse from "../pool/kessig-recluse.js";
 import _poolKherKeep from "../pool/kher-keep.js";
 import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
+import _poolKitesailApprentice from "../pool/kitesail-apprentice.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
 import _poolKomasFaithful from "../pool/komas-faithful.js";
@@ -361,6 +363,7 @@ import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
+import _poolNemesisTrap from "../pool/nemesis-trap.js";
 import _poolNestInvader from "../pool/nest-invader.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
@@ -759,6 +762,7 @@ const shard: CardShard = {
     _poolDauntlessEscort,
     _poolDaybreakChaplain,
     _poolDeadlyComplication,
+    _poolDeathforgeShaman,
     _poolDeathleaperTerrorWeapon,
     _poolDebilitatingInjury,
     _poolDeerDog,
@@ -922,6 +926,7 @@ const shard: CardShard = {
     _poolKherKeep,
     _poolKillianDecisiveMentor,
     _poolKingOfThePride,
+    _poolKitesailApprentice,
     _poolKnightOfStromgald,
     _poolKnighthood,
     _poolKomasFaithful,
@@ -982,6 +987,7 @@ const shard: CardShard = {
     _poolNarsetsReversal,
     _poolNavigatorsRuin,
     _poolNeckSnap,
+    _poolNemesisTrap,
     _poolNestInvader,
     _poolNicolBolasTheArisen,
     _poolNightmareSower,

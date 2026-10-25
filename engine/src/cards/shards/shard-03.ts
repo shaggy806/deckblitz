@@ -273,6 +273,7 @@ import _poolKoalaSheep from "../pool/koala-sheep.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
 import _poolKonstrariCharm from "../pool/konstrari-charm.js";
 import _poolKorCartographer from "../pool/kor-cartographer.js";
+import _poolKorFirewalker from "../pool/kor-firewalker.js";
 import _poolKorScythemaster from "../pool/kor-scythemaster.js";
 import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
@@ -417,6 +418,7 @@ import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
 import _poolSecretDoor from "../pool/secret-door.js";
 import _poolSeekThrills from "../pool/seek-thrills.js";
 import _poolSeekerOfInsight from "../pool/seeker-of-insight.js";
+import _poolSejiriMerfolk from "../pool/sejiri-merfolk.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
@@ -867,6 +869,7 @@ const shard: CardShard = {
     _poolKolaghansCommand,
     _poolKonstrariCharm,
     _poolKorCartographer,
+    _poolKorFirewalker,
     _poolKorScythemaster,
     _poolKozilekButcherOfTruth,
     _poolKrarkClanStoker,
@@ -1011,6 +1014,7 @@ const shard: CardShard = {
     _poolSecretDoor,
     _poolSeekThrills,
     _poolSeekerOfInsight,
+    _poolSejiriMerfolk,
     _poolSeleniaDarkAngel,
     _poolSendInThePest,
     _poolSeraphicSteed,

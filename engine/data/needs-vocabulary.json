@@ -10229,6 +10229,35 @@
   "effect:prohibit-until-your-next-turn": {
    "family": "effect:cast-and-activate-restrictions",
    "example": "Innocuous Researcher: \"you can't cast spells until your next turn\" — `prohibit` lasts this turn only."
+  },
+  "amount:times-kicked": {
+   "family": "keyword:multikicker",
+   "example": "Spell Contortion: \"draw a card for each time Spell Contortion was kicked\" — an effect amount reading the multikicker count (built B162: { timesKicked: \"source\" })."
+  },
+  "amount:trigger-spell-times-kicked": {
+   "family": "keyword:multikicker",
+   "example": "Rumbling Aftershocks: damage \"equal to the number of times that spell was kicked\" — the triggering spell's count, read as it last existed if it has left the stack."
+  },
+  "target:up-to-x-times-kicked": {
+   "family": "keyword:multikicker",
+   "example": "Voyager Drake: \"up to X target creatures … where X is the number of times this creature was kicked\" — a target bound read from the kick count."
+  },
+  "keyword:multikicker-target-per-kick": {
+   "family": "keyword:multikicker",
+   "example": "Strength of the Tajuru: \"choose target creature, then choose another target creature for each time this spell was kicked\"."
+  },
+  "static:set-color-attached": {
+   "family": "static:static-set-characteristics",
+   "example": "Corrupted Zendikon: \"enchanted land is a 3/3 black Ooze creature\" — a static setting colour in layer 5 (built B162: StaticAbility.setColors)."
+  },
+  "effect:search-library-to-exile": {
+   "example": "Selective Memory: search your library for any number of nonland cards and exile them — search-library has no exile destination."
+  },
+  "effect:reveal-until-rest-to-hand": {
+   "example": "Treasure Hunt: reveal cards until a nonland card, put all cards revealed this way into your hand — reveal-until's rest can't go to hand."
+  },
+  "amount:power-before-move": {
+   "example": "Dead Reckoning: \"damage equal to that card's power\" after it's put on top of the library — the ruling reads the power it had in the graveyard (Tarmogoyf, Lord of Extinction); powerOf reads it after the move. Lie in Wait shares the gap."
   }
  }
 }

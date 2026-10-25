@@ -232,6 +232,7 @@ import _poolGrixisPanorama from "../pool/grixis-panorama.js";
 import _poolGrotagThrasher from "../pool/grotag-thrasher.js";
 import _poolGruulWarChant from "../pool/gruul-war-chant.js";
 import _poolGuardianAutomaton from "../pool/guardian-automaton.js";
+import _poolGuardianZendikon from "../pool/guardian-zendikon.js";
 import _poolGustWalker from "../pool/gust-walker.js";
 import _poolGwaihirTheWindlord from "../pool/gwaihir-the-windlord.js";
 import _poolGyreSage from "../pool/gyre-sage.js";
@@ -533,6 +534,7 @@ import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTenacity from "../pool/tenacity.js";
 import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
+import _poolTerraEternal from "../pool/terra-eternal.js";
 import _poolTerrificTeamUp from "../pool/terrific-team-up.js";
 import _poolTerritorialBoar from "../pool/territorial-boar.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
@@ -879,6 +881,7 @@ const shard: CardShard = {
     _poolGrotagThrasher,
     _poolGruulWarChant,
     _poolGuardianAutomaton,
+    _poolGuardianZendikon,
     _poolGustWalker,
     _poolGwaihirTheWindlord,
     _poolGyreSage,
@@ -1180,6 +1183,7 @@ const shard: CardShard = {
     _poolTemporalManipulation,
     _poolTenacity,
     _poolTeoSpiritedGlider,
+    _poolTerraEternal,
     _poolTerrificTeamUp,
     _poolTerritorialBoar,
     _poolTerritorialHellkite,

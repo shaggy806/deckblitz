@@ -404,6 +404,7 @@ import _poolPunctureBlast from "../pool/puncture-blast.js";
 import _poolQarsiSadist from "../pool/qarsi-sadist.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
+import _poolQuestForUlasTemple from "../pool/quest-for-ulas-temple.js";
 import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
 import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRadiantSolar from "../pool/radiant-solar.js";
@@ -1056,6 +1057,7 @@ const shard: CardShard = {
     _poolQarsiSadist,
     _poolQilinsBlessing,
     _poolQuaketuskBoar,
+    _poolQuestForUlasTemple,
     _poolQuickDrawKatana,
     _poolQuietusSpike,
     _poolRadiantSolar,

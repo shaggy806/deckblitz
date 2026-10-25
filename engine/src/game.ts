@@ -17413,7 +17413,7 @@ export class Game {
     }
     for (const id of ids) {
       const object = this.state.objects[id];
-      if (object !== undefined) for (const color of effectiveColors(this.registry, object)) types.add(color);
+      if (object !== undefined) for (const color of effectiveColors(this.state, this.registry, object)) types.add(color);
     }
     return COLORS.filter((c) => types.has(c));
   }
@@ -21310,7 +21310,7 @@ export class Game {
         const lki = lastKnownOf(target);
         if (lki !== undefined) return lki.colors;
         const object = this.state.objects[target.object];
-        return object === undefined ? [] : [...effectiveColors(this.registry, object)];
+        return object === undefined ? [] : [...effectiveColors(this.state, this.registry, object)];
       },
       colorsAmong: (filter, except) =>
         colorsAmongPermanents(this.state, this.registry, controller, filter, except),
@@ -23043,6 +23043,9 @@ export class Game {
       sourceTimesKicked: () => {
         const live = this.state.objects[source];
         if (live?.zone === "battlefield") return live.enteredTimesKicked ?? 0;
+        // A resolving multikicker spell (Spell Contortion's "for each time
+        // Spell Contortion was kicked").
+        if (live?.zone === "stack" && refs.source === undefined) return live.timesKicked ?? 0;
         return departedSource()?.enteredTimesKicked ?? 0;
       },
       becomePlotted: (card) => {

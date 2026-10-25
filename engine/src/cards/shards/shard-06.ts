@@ -57,6 +57,7 @@ import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
 import _poolBessSoulNourisher from "../pool/bess-soul-nourisher.js";
 import _poolBessieTheDoctorsRoadster from "../pool/bessie-the-doctors-roadster.js";
+import _poolBestialMenace from "../pool/bestial-menace.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
@@ -176,6 +177,7 @@ import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
+import _poolEnclaveElite from "../pool/enclave-elite.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
 import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
@@ -247,6 +249,7 @@ import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
+import _poolHalimarExcavator from "../pool/halimar-excavator.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -546,6 +549,7 @@ import _poolTimeSieve from "../pool/time-sieve.js";
 import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
 import _poolToTheSlaughter from "../pool/to-the-slaughter.js";
+import _poolTombHex from "../pool/tomb-hex.js";
 import _poolTomeboundLich from "../pool/tomebound-lich.js";
 import _poolTormodsCryptkeeper from "../pool/tormods-cryptkeeper.js";
 import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
@@ -603,6 +607,7 @@ import _poolWinterBlast from "../pool/winter-blast.js";
 import _poolWinterSoldierRebornAvenger from "../pool/winter-soldier-reborn-avenger.js";
 import _poolWitchstalkerFrenzy from "../pool/witchstalker-frenzy.js";
 import _poolWizardReplica from "../pool/wizard-replica.js";
+import _poolWolfbriarElemental from "../pool/wolfbriar-elemental.js";
 import _poolWolfkinBond from "../pool/wolfkin-bond.js";
 import _poolWolfkinOutcast from "../pool/wolfkin-outcast.js";
 import _poolWoodlandMystic from "../pool/woodland-mystic.js";
@@ -691,6 +696,7 @@ const shard: CardShard = {
     _poolBenthicCriminologists,
     _poolBessSoulNourisher,
     _poolBessieTheDoctorsRoadster,
+    _poolBestialMenace,
     _poolBifurMelodicRider,
     _poolBigApple3AM,
     _poolBlessedOrator,
@@ -810,6 +816,7 @@ const shard: CardShard = {
     _poolEarthenAlly,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,
+    _poolEnclaveElite,
     _poolEntrustTheSpark,
     _poolEshkiTemursRoar,
     _poolEternalThirst,
@@ -881,6 +888,7 @@ const shard: CardShard = {
     _poolGuardDuty,
     _poolGuidelightOptimizer,
     _poolGuulDrazAssassin,
+    _poolHalimarExcavator,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,
@@ -1180,6 +1188,7 @@ const shard: CardShard = {
     _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
     _poolToTheSlaughter,
+    _poolTombHex,
     _poolTomeboundLich,
     _poolTormodsCryptkeeper,
     _poolTotentanzSwarmPiper,
@@ -1237,6 +1246,7 @@ const shard: CardShard = {
     _poolWinterSoldierRebornAvenger,
     _poolWitchstalkerFrenzy,
     _poolWizardReplica,
+    _poolWolfbriarElemental,
     _poolWolfkinBond,
     _poolWolfkinOutcast,
     _poolWoodlandMystic,

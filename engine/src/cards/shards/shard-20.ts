@@ -524,6 +524,7 @@ import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
 import _poolSkyshroudTroll from "../pool/skyshroud-troll.js";
 import _poolSkysnareSpider from "../pool/skysnare-spider.js";
+import _poolSlaveringNulls from "../pool/slavering-nulls.js";
 import _poolSlayingFire from "../pool/slaying-fire.js";
 import _poolSlipThroughSpace from "../pool/slip-through-space.js";
 import _poolSmashingSpree from "../pool/smashing-spree.js";
@@ -646,6 +647,7 @@ import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVesselOfNascency from "../pool/vessel-of-nascency.js";
+import _poolVeteransReflexes from "../pool/veterans-reflexes.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
 import _poolVillageWatch from "../pool/village-watch.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
@@ -1224,6 +1226,7 @@ const shard: CardShard = {
     _poolSkyshipStalker,
     _poolSkyshroudTroll,
     _poolSkysnareSpider,
+    _poolSlaveringNulls,
     _poolSlayingFire,
     _poolSlipThroughSpace,
     _poolSmashingSpree,
@@ -1346,6 +1349,7 @@ const shard: CardShard = {
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
     _poolVesselOfNascency,
+    _poolVeteransReflexes,
     _poolVileMutilator,
     _poolVillageWatch,
     _poolViridianAcolyte,

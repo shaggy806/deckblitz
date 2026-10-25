@@ -1270,6 +1270,14 @@ export interface StaticAbility {
    */
   readonly setSubtypes?: readonly string[];
   /**
+   * Layer 5 — the affected permanents' colours become exactly these (rule
+   * 105.3): a Zendikon's "enchanted land is a 3/3 black Ooze creature" is
+   * `setColors: ["B"]` beside its `addTypes`/`addSubtypes`/`setBasePt`.
+   * Applied in timestamp order with the permanents' own colour modifiers
+   * (`effectiveColors`).
+   */
+  readonly setColors?: readonly Color[];
+  /**
    * Layer 7b — sets the affected permanents' base power and/or toughness
    * (Kudo: "have base power and toughness 2/2"; a lone `toughness` is "have
    * base toughness 1"). After characteristic-defining abilities, in

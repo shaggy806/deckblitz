@@ -423,6 +423,12 @@ export type EffectAmount =
    * in exile, with suspend, with a time counter): Rose Tyler's "a time
    * counter on it for each suspended card you own". */
   | { readonly suspendedCardsYouOwn: true }
+  /** How many times the source's spell was kicked, for a multikicker spell
+   * (rule 702.33c): "draw a card for each time Spell Contortion was kicked"
+   * as the spell resolves, and a permanent's "when this enters, … for each
+   * time it was kicked" (Wolfbriar Elemental) as it entered — as it last
+   * existed if it has left. 0 when it wasn't kicked or wasn't cast. */
+  | { readonly timesKicked: "source" }
   /** The current power of whatever an {@link AmountRef} points at — Unleash
    * Fury's "double the power of target creature" is a `modify-pt` that adds
    * this; "it deals damage equal to its power" from a dies trigger reads the
@@ -6723,7 +6729,8 @@ export interface EffectApi {
   becomePlotted(card: ObjectId): void;
   /** How many times the source's spell paid its multikicker or squad cost
    * (rule 702.157a), as it entered — as it last existed there if it has
-   * left; 0 for one not cast that way. */
+   * left; a spell on the stack (resolving, or a copy of one) reads its own
+   * count; 0 for one not cast that way. */
   sourceTimesKicked(): number;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
   finishExiledAsItResolves(spell: ObjectId, feather: boolean): void;
@@ -7869,6 +7876,7 @@ function signedAmountValue(
   }
   if ("countInGraveyard" in amount) return ctx.countInGraveyard(amount.countInGraveyard);
   if ("suspendedCardsYouOwn" in amount) return ctx.suspendedCardsYouOwn?.() ?? 0;
+  if ("timesKicked" in amount) return ctx.sourceTimesKicked();
   if ("ifCondition" in amount) {
     return signedAmountValue(ctx.conditionMet(amount.ifCondition) ? amount.then : amount.else, ctx, each);
   }

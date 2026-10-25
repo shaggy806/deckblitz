@@ -9,6 +9,7 @@ import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
 import _poolAerialModification from "../pool/aerial-modification.js";
 import _poolAetherMembrane from "../pool/aether-membrane.js";
+import _poolAetherTradewinds from "../pool/aether-tradewinds.js";
 import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAirborneAid from "../pool/airborne-aid.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
@@ -216,6 +217,7 @@ import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
 import _poolGlistenerSeer from "../pool/glistener-seer.js";
 import _poolGlitteringMassif from "../pool/glittering-massif.js";
 import _poolGloomPangolin from "../pool/gloom-pangolin.js";
+import _poolGnarlidPack from "../pool/gnarlid-pack.js";
 import _poolGoblinBanneret from "../pool/goblin-banneret.js";
 import _poolGoblinRingleader from "../pool/goblin-ringleader.js";
 import _poolGoblinSurveyor from "../pool/goblin-surveyor.js";
@@ -311,6 +313,7 @@ import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
 import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
+import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
 import _poolLoneRider from "../pool/lone-rider.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
@@ -525,6 +528,7 @@ import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolSynchronizedSpellcraft from "../pool/synchronized-spellcraft.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
+import _poolTalusPaladin from "../pool/talus-paladin.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
@@ -651,6 +655,7 @@ const shard: CardShard = {
     _poolAdewaleBreakerOfChains,
     _poolAerialModification,
     _poolAetherMembrane,
+    _poolAetherTradewinds,
     _poolAirbendersReversal,
     _poolAirborneAid,
     _poolAjaniAdversaryOfTyrants,
@@ -858,6 +863,7 @@ const shard: CardShard = {
     _poolGlistenerSeer,
     _poolGlitteringMassif,
     _poolGloomPangolin,
+    _poolGnarlidPack,
     _poolGoblinBanneret,
     _poolGoblinRingleader,
     _poolGoblinSurveyor,
@@ -953,6 +959,7 @@ const shard: CardShard = {
     _poolLetterOfAcceptance,
     _poolLifeFromTheLoam,
     _poolLifeblood,
+    _poolLightkeeperOfEmeria,
     _poolLithoformEngine,
     _poolLoneRider,
     _poolLostToLegend,
@@ -1167,6 +1174,7 @@ const shard: CardShard = {
     _poolSynchronizedSpellcraft,
     _poolTaintedIsle,
     _poolTallymanOfNurgle,
+    _poolTalusPaladin,
     _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,

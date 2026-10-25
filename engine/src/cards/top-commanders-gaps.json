@@ -427,7 +427,9 @@
   "keyword:bolster",
   "keyword:level-up",
   "keyword:umbra-armor",
-  "keyword:parley"
+  "keyword:parley",
+  "amount:times-kicked",
+  "static:set-color-attached"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

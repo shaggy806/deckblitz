@@ -320,6 +320,7 @@ import _poolLilianasElite from "../pool/lilianas-elite.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
 import _poolLivingTwister from "../pool/living-twister.js";
 import _poolLizardBlades from "../pool/lizard-blades.js";
+import _poolLoamLion from "../pool/loam-lion.js";
 import _poolLodestoneMyr from "../pool/lodestone-myr.js";
 import _poolLongFengGrandSecretariat from "../pool/long-feng-grand-secretariat.js";
 import _poolLongbowArcher from "../pool/longbow-archer.js";
@@ -962,6 +963,7 @@ const shard: CardShard = {
     _poolLilianasScorn,
     _poolLivingTwister,
     _poolLizardBlades,
+    _poolLoamLion,
     _poolLodestoneMyr,
     _poolLongFengGrandSecretariat,
     _poolLongbowArcher,

@@ -465,6 +465,7 @@ import _poolRiverwheelSweep from "../pool/riverwheel-sweep.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
+import _poolRuinGhost from "../pool/ruin-ghost.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
 import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.js";
 import _poolSalvageDrone from "../pool/salvage-drone.js";
@@ -525,6 +526,7 @@ import _poolSoulOfTheros from "../pool/soul-of-theros.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
+import _poolSpellContortion from "../pool/spell-contortion.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
 import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
@@ -614,6 +616,7 @@ import _poolValkyrieAerialUnit from "../pool/valkyrie-aerial-unit.js";
 import _poolVampireWarlord from "../pool/vampire-warlord.js";
 import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
 import _poolVantressVisions from "../pool/vantress-visions.js";
+import _poolVastwoodZendikon from "../pool/vastwood-zendikon.js";
 import _poolVedalkenAethermage from "../pool/vedalken-aethermage.js";
 import _poolVenatHeartOfHydaelyn from "../pool/venat-heart-of-hydaelyn.js";
 import _poolVerdigris from "../pool/verdigris.js";
@@ -1143,6 +1146,7 @@ const shard: CardShard = {
     _poolRockyRoads,
     _poolRoilsRetribution,
     _poolRoofstalkerWight,
+    _poolRuinGhost,
     _poolSageOfTheMaze,
     _poolSaheeliConsulOfOversight,
     _poolSalvageDrone,
@@ -1203,6 +1207,7 @@ const shard: CardShard = {
     _poolSoulShred,
     _poolSparringRegimen,
     _poolSpeakSecrets,
+    _poolSpellContortion,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,
     _poolSpiderManNewChampion,
@@ -1292,6 +1297,7 @@ const shard: CardShard = {
     _poolVampireWarlord,
     _poolVantressTransmuter,
     _poolVantressVisions,
+    _poolVastwoodZendikon,
     _poolVedalkenAethermage,
     _poolVenatHeartOfHydaelyn,
     _poolVerdigris,

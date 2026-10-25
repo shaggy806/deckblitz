@@ -437,6 +437,7 @@ import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
+import _poolRuthlessCullblade from "../pool/ruthless-cullblade.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
 import _poolSanctuaryWall from "../pool/sanctuary-wall.js";
@@ -538,6 +539,7 @@ import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
 import _poolTruckToss from "../pool/truck-toss.js";
+import _poolTuktukScrapper from "../pool/tuktuk-scrapper.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTwinbladeGeist from "../pool/twinblade-geist.js";
@@ -1045,6 +1047,7 @@ const shard: CardShard = {
     _poolRuneboggle,
     _poolRuneforgeChampion,
     _poolRushOfAdrenaline,
+    _poolRuthlessCullblade,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,
     _poolSanctuaryWall,
@@ -1146,6 +1149,7 @@ const shard: CardShard = {
     _poolTreasonousOgre,
     _poolTreasureCruise,
     _poolTruckToss,
+    _poolTuktukScrapper,
     _poolTundraWolves,
     _poolTurbulentCrater,
     _poolTwinbladeGeist,

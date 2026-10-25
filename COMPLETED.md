@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Worldwake, whole** (batch 162, the middle walk, 2026-10-25): `{ timesKicked: "source" }` (a
+  multikicker count as an effect amount — Spell Contortion, Wolfbriar Elemental, Bloodhusk Ritualist,
+  Deathforge Shaman, Lightkeeper of Emeria) and `StaticAbility.setColors` (layer 5 — the five colored
+  Zendikons) built. 60 authored by four `card-author` agents and the lead; 16 blocked (`B162.json`).
 - **Rise of the Eldrazi, whole** (batch 159, the middle walk, 2026-10-25): level up and umbra armor
   built (`levelUp`/`levelBand`/`levelStatic`, the `umbra-armor` keyword, both taught to the
   scaffolder). 102 authored by five `card-author` agents and the lead — Vengevine, Student of

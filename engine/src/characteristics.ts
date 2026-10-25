@@ -1969,18 +1969,71 @@ export function effectiveTypes(
   return layerFour(state, registry, object).types;
 }
 
+/** Objects whose layer 5 is being folded — a colour static's scope or
+ * condition that asks about colours again reads the object without statics
+ * rather than looping (as `layer4InProgress` does for layer 4). */
+const layer5InProgress = new Set<ObjectId>();
+
 /** A permanent's current colours: printed → layer 5 (`setColors` replaces,
- * `addColors` unions), in modifier order. */
+ * `addColors` unions), in timestamp order (rule 613.7) — its own modifiers
+ * and, on the battlefield, every static with a `setColors` whose scope
+ * reaches it (a Zendikon's "enchanted land is a 3/3 black Ooze creature").
+ * `state` is what finds those statics; without it only the modifiers apply. */
 export function effectiveColors(
+  state: GameState | null,
   registry: CardRegistry,
   object: GameObject,
 ): Set<Color> {
   let colors = new Set<Color>(registry.get(printedCardName(object)).colors);
-  for (const m of object.modifiers) {
-    if (m.setColors) colors = new Set(m.setColors);
-    if (m.addColors) for (const c of m.addColors) colors.add(c);
+  const sources =
+    state !== null && object.zone === "battlefield" && !layer5InProgress.has(object.id)
+      ? colorSetSources(state, registry)
+      : NO_STATICS;
+  if (sources.length === 0) {
+    for (const m of object.modifiers) {
+      if (m.setColors) colors = new Set(m.setColors);
+      if (m.addColors) for (const c of m.addColors) colors.add(c);
+    }
+    return colors;
+  }
+  const steps: LayerFourStep[] = [];
+  for (const grant of sources) steps.push({ key: grant.source.timestamp, grant });
+  for (const modifier of object.modifiers) steps.push({ key: modifierKey(modifier), modifier });
+  steps.sort((a, b) => a.key - b.key);
+  layer5InProgress.add(object.id);
+  try {
+    for (const step of steps) {
+      if ("modifier" in step) {
+        if (step.modifier.setColors) colors = new Set(step.modifier.setColors);
+        if (step.modifier.addColors) for (const c of step.modifier.addColors) colors.add(c);
+        continue;
+      }
+      const { source, ability } = step.grant;
+      if (!staticAffects(state!, registry, ability.affects, source, object)) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state!, registry, source, ability.condition)) continue;
+      colors = new Set(ability.setColors);
+    }
+  } finally {
+    layer5InProgress.delete(object.id);
   }
   return colors;
+}
+
+/** Every battlefield static with a `setColors`, in battlefield order —
+ * usually none. Memoized in the active cache region. */
+function colorSetSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
+  return computedCacheMemo("color-set-sources", () => {
+    let out: ContributingStatic[] | null = null;
+    for (const sourceId of state.zones.shared.battlefield) {
+      const source = state.objects[sourceId];
+      const layer5 = staticsOf(registry, rulesTextName(source)).layer5;
+      if (layer5.length === 0) continue;
+      // As in `typeGrantSources`: a departed controller's permanent grants nothing.
+      if (state.players[source.controller]?.hasLost === true) continue;
+      for (const ability of layer5) (out ??= []).push({ source, ability });
+    }
+    return out ?? NO_STATICS;
+  });
 }
 
 /**
@@ -2025,7 +2078,7 @@ export function colorsAmongPermanents(
     except,
   );
   for (const { id } of matches) {
-    for (const color of effectiveColors(registry, state.objects[id])) colors.add(color);
+    for (const color of effectiveColors(state, registry, state.objects[id])) colors.add(color);
   }
   return colors.size;
 }
@@ -2302,7 +2355,7 @@ export function staticAffects(
   if (affects.chosenColorOnly === true) {
     const chosen = source.chosenOnEnter;
     if (chosen == null) return false;
-    if (!effectiveColors(registry, target).has(chosen as Color)) return false;
+    if (!effectiveColors(state, registry, target).has(chosen as Color)) return false;
   }
   if (affects.withCounter !== undefined) {
     const kind = affects.withCounter.kind;
@@ -2796,6 +2849,8 @@ interface StaticsInfo {
   readonly fromGraveyard: readonly StaticAbility[];
   /** What {@link typeGrantSources} takes (`hasLayerFourPart`). */
   readonly layer4: readonly StaticAbility[];
+  /** What {@link colorSetSources} takes (a `setColors`). */
+  readonly layer5: readonly StaticAbility[];
   /** What {@link abilityGrantSources} takes. */
   readonly grants: readonly StaticAbility[];
 }
@@ -2818,6 +2873,7 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     contributing: statics.filter((a) => a.fromGraveyard !== true && contributesToCharacteristics(a)),
     fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
     layer4: statics.filter(hasLayerFourPart),
+    layer5: statics.filter((a) => a.setColors !== undefined),
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
   };
   byName.set(name, info);
@@ -3255,9 +3311,9 @@ function computeCharacteristicsUncached(
   // prototyped spell's — rule 718.3b); elsewhere off the battlefield only
   // copiable values change them.
   const colors: ReadonlySet<Color> = onBattlefield || object.zone === "stack"
-    ? effectiveColors(registry, object)
+    ? effectiveColors(state, registry, object)
     : object.modifiers.some((m) => m.copiable === true)
-      ? effectiveColors(registry, { ...object, modifiers: object.modifiers.filter((m) => m.copiable === true) })
+      ? effectiveColors(null, registry, { ...object, modifiers: object.modifiers.filter((m) => m.copiable === true) })
       : new Set(def.colors);
 
   const staticEffects = onBattlefield

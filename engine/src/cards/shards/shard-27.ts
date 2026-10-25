@@ -99,6 +99,7 @@ import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolConvictedKiller from "../pool/convicted-killer.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
+import _poolCosisRavager from "../pool/cosis-ravager.js";
 import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
@@ -737,6 +738,7 @@ const shard: CardShard = {
     _poolConsumptiveGoo,
     _poolConvictedKiller,
     _poolCorruptEunuchs,
+    _poolCosisRavager,
     _poolCosmicEpiphany,
     _poolCourageInCrisis,
     _poolCourtOfIre,

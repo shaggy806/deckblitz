@@ -248,6 +248,7 @@ import _poolGraspingCurrent from "../pool/grasping-current.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
 import _poolGravenAbomination from "../pool/graven-abomination.js";
 import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
+import _poolGraypeltHunter from "../pool/graypelt-hunter.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
 import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
@@ -432,6 +433,7 @@ import _poolRemoveEnchantments from "../pool/remove-enchantments.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
+import _poolRestForTheWeary from "../pool/rest-for-the-weary.js";
 import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
 import _poolReturnedPastcaller from "../pool/returned-pastcaller.js";
@@ -581,6 +583,7 @@ import _poolUrzaChiefArtificer from "../pool/urza-chief-artificer.js";
 import _poolVampireAristocrat from "../pool/vampire-aristocrat.js";
 import _poolVampireNeonate from "../pool/vampire-neonate.js";
 import _poolVampiricRites from "../pool/vampiric-rites.js";
+import _poolVastwoodAnimist from "../pool/vastwood-animist.js";
 import _poolVedalkenArchmage from "../pool/vedalken-archmage.js";
 import _poolVensersSliver from "../pool/vensers-sliver.js";
 import _poolVerdantAutomaton from "../pool/verdant-automaton.js";
@@ -886,6 +889,7 @@ const shard: CardShard = {
     _poolGraspingLongneck,
     _poolGravenAbomination,
     _poolGravitonFundamentalForce,
+    _poolGraypeltHunter,
     _poolGreatHallOfTheBiblioplex,
     _poolGrimFlayer,
     _poolGuardiansOfOboro,
@@ -1070,6 +1074,7 @@ const shard: CardShard = {
     _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolRescuerChwinga,
+    _poolRestForTheWeary,
     _poolRestartSequence,
     _poolRetrieveTheEsper,
     _poolReturnedPastcaller,
@@ -1219,6 +1224,7 @@ const shard: CardShard = {
     _poolVampireAristocrat,
     _poolVampireNeonate,
     _poolVampiricRites,
+    _poolVastwoodAnimist,
     _poolVedalkenArchmage,
     _poolVensersSliver,
     _poolVerdantAutomaton,

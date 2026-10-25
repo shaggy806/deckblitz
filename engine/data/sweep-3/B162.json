@@ -1,0 +1,543 @@
+{
+  "batch": "B162",
+  "status": "complete",
+  "ranks": "Worldwake (WWK, 2010-02-05): the rest of the set (whole set), with multikicker's \"for each time it was kicked\" as an effect amount and a static's colour setting (the Zendikons) built",
+  "authored": [
+    {
+      "name": "Aether Tradewinds",
+      "files": [
+        "engine/src/cards/pool/aether-tradewinds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Agadeem Occultist",
+      "files": [
+        "engine/src/cards/pool/agadeem-occultist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Akoum Battlesinger",
+      "files": [
+        "engine/src/cards/pool/akoum-battlesinger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Apex Hawks",
+      "files": [
+        "engine/src/cards/pool/apex-hawks.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bestial Menace",
+      "files": [
+        "engine/src/cards/pool/bestial-menace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bloodhusk Ritualist",
+      "files": [
+        "engine/src/cards/pool/bloodhusk-ritualist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bojuka Brigand",
+      "files": [
+        "engine/src/cards/pool/bojuka-brigand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brink of Disaster",
+      "files": [
+        "engine/src/cards/pool/brink-of-disaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Caustic Crawler",
+      "files": [
+        "engine/src/cards/pool/caustic-crawler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Claws of Valakut",
+      "files": [
+        "engine/src/cards/pool/claws-of-valakut.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corrupted Zendikon",
+      "files": [
+        "engine/src/cards/pool/corrupted-zendikon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cosi's Ravager",
+      "files": [
+        "engine/src/cards/pool/cosis-ravager.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crusher Zendikon",
+      "files": [
+        "engine/src/cards/pool/crusher-zendikon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deathforge Shaman",
+      "files": [
+        "engine/src/cards/pool/deathforge-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dread Statuary",
+      "files": [
+        "engine/src/cards/pool/dread-statuary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enclave Elite",
+      "files": [
+        "engine/src/cards/pool/enclave-elite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gnarlid Pack",
+      "files": [
+        "engine/src/cards/pool/gnarlid-pack.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Graypelt Hunter",
+      "files": [
+        "engine/src/cards/pool/graypelt-hunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Groundswell",
+      "files": [
+        "engine/src/cards/pool/groundswell.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guardian Zendikon",
+      "files": [
+        "engine/src/cards/pool/guardian-zendikon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hada Freeblade",
+      "files": [
+        "engine/src/cards/pool/hada-freeblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Halimar Excavator",
+      "files": [
+        "engine/src/cards/pool/halimar-excavator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hammer of Ruin",
+      "files": [
+        "engine/src/cards/pool/hammer-of-ruin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Horizon Drake",
+      "files": [
+        "engine/src/cards/pool/horizon-drake.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Join the Ranks",
+      "files": [
+        "engine/src/cards/pool/join-the-ranks.ts",
+        "engine/src/cards/tokens/soldier-ally-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jwari Shapeshifter",
+      "files": [
+        "engine/src/cards/pool/jwari-shapeshifter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kalastria Highborn",
+      "files": [
+        "engine/src/cards/pool/kalastria-highborn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kitesail Apprentice",
+      "files": [
+        "engine/src/cards/pool/kitesail-apprentice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Firewalker",
+      "files": [
+        "engine/src/cards/pool/kor-firewalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightkeeper of Emeria",
+      "files": [
+        "engine/src/cards/pool/lightkeeper-of-emeria.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loam Lion",
+      "files": [
+        "engine/src/cards/pool/loam-lion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mysteries of the Deep",
+      "files": [
+        "engine/src/cards/pool/mysteries-of-the-deep.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nemesis Trap",
+      "files": [
+        "engine/src/cards/pool/nemesis-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Permafrost Trap",
+      "files": [
+        "engine/src/cards/pool/permafrost-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quag Vampires",
+      "files": [
+        "engine/src/cards/pool/quag-vampires.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quest for Ula's Temple",
+      "files": [
+        "engine/src/cards/pool/quest-for-ulas-temple.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rest for the Weary",
+      "files": [
+        "engine/src/cards/pool/rest-for-the-weary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruin Ghost",
+      "files": [
+        "engine/src/cards/pool/ruin-ghost.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruthless Cullblade",
+      "files": [
+        "engine/src/cards/pool/ruthless-cullblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scrib Nibblers",
+      "files": [
+        "engine/src/cards/pool/scrib-nibblers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sejiri Merfolk",
+      "files": [
+        "engine/src/cards/pool/sejiri-merfolk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shoreline Salvager",
+      "files": [
+        "engine/src/cards/pool/shoreline-salvager.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skitter of Lizards",
+      "files": [
+        "engine/src/cards/pool/skitter-of-lizards.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slavering Nulls",
+      "files": [
+        "engine/src/cards/pool/slavering-nulls.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slingbow Trap",
+      "files": [
+        "engine/src/cards/pool/slingbow-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spell Contortion",
+      "files": [
+        "engine/src/cards/pool/spell-contortion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stone Idol Trap",
+      "files": [
+        "engine/src/cards/pool/stone-idol-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Summit Apes",
+      "files": [
+        "engine/src/cards/pool/summit-apes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Talus Paladin",
+      "files": [
+        "engine/src/cards/pool/talus-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Terra Eternal",
+      "files": [
+        "engine/src/cards/pool/terra-eternal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tideforce Elemental",
+      "files": [
+        "engine/src/cards/pool/tideforce-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tomb Hex",
+      "files": [
+        "engine/src/cards/pool/tomb-hex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tuktuk Scrapper",
+      "files": [
+        "engine/src/cards/pool/tuktuk-scrapper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urge to Feed",
+      "files": [
+        "engine/src/cards/pool/urge-to-feed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vapor Snare",
+      "files": [
+        "engine/src/cards/pool/vapor-snare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vastwood Animist",
+      "files": [
+        "engine/src/cards/pool/vastwood-animist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vastwood Zendikon",
+      "files": [
+        "engine/src/cards/pool/vastwood-zendikon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Veteran's Reflexes",
+      "files": [
+        "engine/src/cards/pool/veterans-reflexes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wind Zendikon",
+      "files": [
+        "engine/src/cards/pool/wind-zendikon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wolfbriar Elemental",
+      "files": [
+        "engine/src/cards/pool/wolfbriar-elemental.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Dead Reckoning",
+      "needs": [
+        "amount:power-before-move"
+      ],
+      "why": "\"Damage equal to that card's power\" is read after the card has gone to the library; the ruling reads the power it had in the graveyard (Tarmogoyf, Lord of Extinction)."
+    },
+    {
+      "name": "Rumbling Aftershocks",
+      "needs": [
+        "amount:trigger-spell-times-kicked"
+      ],
+      "why": "The damage is the triggering spell's kick count, read as it last existed if that spell has left the stack; only the source's count is an amount."
+    },
+    {
+      "name": "Voyager Drake",
+      "needs": [
+        "target:up-to-x-times-kicked"
+      ],
+      "why": "\"Up to X target creatures, where X is the number of times this creature was kicked\": no target bound reads the kick count."
+    },
+    {
+      "name": "Strength of the Tajuru",
+      "needs": [
+        "keyword:multikicker-target-per-kick"
+      ],
+      "why": "One more target for each time it was kicked."
+    },
+    {
+      "name": "Novablast Wurm",
+      "needs": [
+        "effect:destroy-all-except-source"
+      ],
+      "why": "\"Destroy all other creatures\" — destroy-all has no except-source; a name filter would spare a second Wurm (the ruling)."
+    },
+    {
+      "name": "Searing Blaze",
+      "needs": [
+        "target:controlled-by-target-player"
+      ],
+      "why": "The creature target must be controlled by the first target player (or that planeswalker's controller)."
+    },
+    {
+      "name": "Roiling Terrain",
+      "needs": [
+        "effect:count-in-target-player-graveyard"
+      ],
+      "why": "Counts land cards in the destroyed land's controller's graveyard."
+    },
+    {
+      "name": "Selective Memory",
+      "needs": [
+        "effect:search-library-to-exile"
+      ],
+      "why": "Search for any number of nonland cards and exile them: search-library has no exile destination."
+    },
+    {
+      "name": "Treasure Hunt",
+      "needs": [
+        "effect:reveal-until-rest-to-hand"
+      ],
+      "why": "All cards revealed go to hand: reveal-until's rest can't go to hand."
+    },
+    {
+      "name": "Refraction Trap",
+      "needs": [
+        "amount:damage-prevented-this-way",
+        "replacement:damage-prevented-to-filter"
+      ],
+      "why": "Prevents the next 3 damage a chosen source would deal to you and/or permanents you control, then deals that much to any target."
+    },
+    {
+      "name": "Sejiri Steppe",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Protection from a colour chosen as the ability resolves."
+    },
+    {
+      "name": "Feral Contest",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "\"Another target creature blocks it this turn if able\"."
+    },
+    {
+      "name": "Razor Boomerang",
+      "needs": [
+        "cost:unattach-cost"
+      ],
+      "why": "The granted ability costs \"Unattach Razor Boomerang\"."
+    },
+    {
+      "name": "Mire's Toll",
+      "needs": [
+        "effect:reveal-n-from-hand-you-choose-discard"
+      ],
+      "why": "The player reveals N cards of their choice (N = Swamps you control), and you choose one to discard."
+    },
+    {
+      "name": "Quest for the Nihil Stone",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "\"If that player has no cards in hand\" — the opponent whose upkeep it is; hand-size checks only you or each player."
+    },
+    {
+      "name": "Calcite Snapper",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "Landfall: switch its power and toughness until end of turn."
+    }
+  ]
+}

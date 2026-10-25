@@ -558,6 +558,7 @@ import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
 import _poolUnshakableTail from "../pool/unshakable-tail.js";
 import _poolUpheaval from "../pool/upheaval.js";
+import _poolUrgeToFeed from "../pool/urge-to-feed.js";
 import _poolUrzaPowerstoneProdigy from "../pool/urza-powerstone-prodigy.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
@@ -1179,6 +1180,7 @@ const shard: CardShard = {
     _poolUnseenWalker,
     _poolUnshakableTail,
     _poolUpheaval,
+    _poolUrgeToFeed,
     _poolUrzaPowerstoneProdigy,
     _poolUrzasPowerPlant,
     _poolValakutTheMoltenPinnacle,

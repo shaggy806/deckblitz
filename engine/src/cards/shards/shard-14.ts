@@ -430,6 +430,7 @@ import _poolProwlingCaracal from "../pool/prowling-caracal.js";
 import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
+import _poolQuagVampires from "../pool/quag-vampires.js";
 import _poolQuandrixApprentice from "../pool/quandrix-apprentice.js";
 import _poolQuandrixCultivator from "../pool/quandrix-cultivator.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
@@ -1065,6 +1066,7 @@ const shard: CardShard = {
     _poolPublicThoroughfare,
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
+    _poolQuagVampires,
     _poolQuandrixApprentice,
     _poolQuandrixCultivator,
     _poolRabbleRousing,

@@ -995,7 +995,7 @@ export function matchesFilter(
     filter.multicolored !== undefined
   ) {
     const colors: ReadonlySet<Color> =
-      live !== undefined ? effectiveColors(registry, live) : new Set(lki!.colors);
+      live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
     if (filter.colors !== undefined && !filter.colors.every((col) => colors.has(col))) {
       return false;
     }

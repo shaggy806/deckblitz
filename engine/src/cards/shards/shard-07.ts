@@ -63,6 +63,7 @@ import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
+import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
@@ -485,6 +486,7 @@ import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
 import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
 import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
+import _poolSkitterOfLizards from "../pool/skitter-of-lizards.js";
 import _poolSkullStorm from "../pool/skull-storm.js";
 import _poolSkyboxFerry from "../pool/skybox-ferry.js";
 import _poolSkyshroudClaim from "../pool/skyshroud-claim.js";
@@ -727,6 +729,7 @@ const shard: CardShard = {
     _poolBoonOfBoseiju,
     _poolBountyAgent,
     _poolBrilliantSpectrum,
+    _poolBrinkOfDisaster,
     _poolBronzebeakMoa,
     _poolBullsStrength,
     _poolBurnTheAccursed,
@@ -1149,6 +1152,7 @@ const shard: CardShard = {
     _poolShuYunTheSilentTempest,
     _poolSibsigMuckdraggers,
     _poolSimicCharm,
+    _poolSkitterOfLizards,
     _poolSkullStorm,
     _poolSkyboxFerry,
     _poolSkyshroudClaim,

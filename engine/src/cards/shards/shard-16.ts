@@ -278,6 +278,7 @@ import _poolJaddiLifestrider from "../pool/jaddi-lifestrider.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
+import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
@@ -958,6 +959,7 @@ const shard: CardShard = {
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
     _poolJungleWeaver,
+    _poolJwariShapeshifter,
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,

@@ -565,6 +565,7 @@ import _poolUrzasTower from "../pool/urzas-tower.js";
 import _poolVampireOpportunist from "../pool/vampire-opportunist.js";
 import _poolVampireSocialite from "../pool/vampire-socialite.js";
 import _poolVanguardSeraph from "../pool/vanguard-seraph.js";
+import _poolVaporSnare from "../pool/vapor-snare.js";
 import _poolVastwoodGorger from "../pool/vastwood-gorger.js";
 import _poolVastwoodSurge from "../pool/vastwood-surge.js";
 import _poolVerdantForce from "../pool/verdant-force.js";
@@ -628,6 +629,7 @@ import _tokensMinorDemonToken from "../tokens/minor-demon-token.js";
 import _tokensOrnithopterToken from "../tokens/ornithopter-token.js";
 import _tokensPestToken from "../tokens/pest-token.js";
 import _tokensRhinoToken from "../tokens/rhino-token.js";
+import _tokensSoldierAllyToken from "../tokens/soldier-ally-token.js";
 import _tokensSquidToken from "../tokens/squid-token.js";
 import _tokensStormCrowToken from "../tokens/storm-crow-token.js";
 import _tokensWallTokenArtifactDefender from "../tokens/wall-token-artifact-defender.js";
@@ -1196,6 +1198,7 @@ const shard: CardShard = {
     _poolVampireOpportunist,
     _poolVampireSocialite,
     _poolVanguardSeraph,
+    _poolVaporSnare,
     _poolVastwoodGorger,
     _poolVastwoodSurge,
     _poolVerdantForce,
@@ -1261,6 +1264,7 @@ const shard: CardShard = {
     _tokensOrnithopterToken,
     _tokensPestToken,
     _tokensRhinoToken,
+    _tokensSoldierAllyToken,
     _tokensSquidToken,
     _tokensStormCrowToken,
     _tokensWallTokenArtifactDefender,

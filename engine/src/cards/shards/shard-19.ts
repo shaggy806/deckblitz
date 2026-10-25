@@ -119,12 +119,14 @@ import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCoralSword from "../pool/coral-sword.js";
 import _poolCorpseweft from "../pool/corpseweft.js";
+import _poolCorruptedZendikon from "../pool/corrupted-zendikon.js";
 import _poolCourageousGoblin from "../pool/courageous-goblin.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
 import _poolCovetedPrize from "../pool/coveted-prize.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
 import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
 import _poolCreakwoodGhoul from "../pool/creakwood-ghoul.js";
+import _poolCrusherZendikon from "../pool/crusher-zendikon.js";
 import _poolCryptolithRite from "../pool/cryptolith-rite.js";
 import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js";
 import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
@@ -778,12 +780,14 @@ const shard: CardShard = {
     _poolContractKilling,
     _poolCoralSword,
     _poolCorpseweft,
+    _poolCorruptedZendikon,
     _poolCourageousGoblin,
     _poolCourierGriffin,
     _poolCovetedPrize,
     _poolCowlProwler,
     _poolCrawlingBarrens,
     _poolCreakwoodGhoul,
+    _poolCrusherZendikon,
     _poolCryptolithRite,
     _poolCrystalSkullIsuSpyglass,
     _poolCrystallineResonance,

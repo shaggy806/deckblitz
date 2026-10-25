@@ -265,6 +265,7 @@ import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
 import _poolHopefulVigil from "../pool/hopeful-vigil.js";
+import _poolHorizonDrake from "../pool/horizon-drake.js";
 import _poolHorriblyAwry from "../pool/horribly-awry.js";
 import _poolHoundOfTheFarbogs from "../pool/hound-of-the-farbogs.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
@@ -476,6 +477,7 @@ import _poolScourFromExistence from "../pool/scour-from-existence.js";
 import _poolScourTheDesert from "../pool/scour-the-desert.js";
 import _poolScouringSwarm from "../pool/scouring-swarm.js";
 import _poolScoutTheCity from "../pool/scout-the-city.js";
+import _poolScribNibblers from "../pool/scrib-nibblers.js";
 import _poolScrybRanger from "../pool/scryb-ranger.js";
 import _poolScuttletide from "../pool/scuttletide.js";
 import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
@@ -493,6 +495,7 @@ import _poolShadowheartDarkJusticiar from "../pool/shadowheart-dark-justiciar.js
 import _poolShardingSphinx from "../pool/sharding-sphinx.js";
 import _poolShikoAndNarsetUnified from "../pool/shiko-and-narset-unified.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
+import _poolShorelineSalvager from "../pool/shoreline-salvager.js";
 import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
@@ -923,6 +926,7 @@ const shard: CardShard = {
     _poolHollowhengeScavenger,
     _poolHopeEnderCoatl,
     _poolHopefulVigil,
+    _poolHorizonDrake,
     _poolHorriblyAwry,
     _poolHoundOfTheFarbogs,
     _poolHowlingBanshee,
@@ -1134,6 +1138,7 @@ const shard: CardShard = {
     _poolScourTheDesert,
     _poolScouringSwarm,
     _poolScoutTheCity,
+    _poolScribNibblers,
     _poolScrybRanger,
     _poolScuttletide,
     _poolScuzzbackScrounger,
@@ -1151,6 +1156,7 @@ const shard: CardShard = {
     _poolShardingSphinx,
     _poolShikoAndNarsetUnified,
     _poolShizoDeathsStorehouse,
+    _poolShorelineSalvager,
     _poolSidisisPet,
     _poolSilkguard,
     _poolSimicAscendancy,

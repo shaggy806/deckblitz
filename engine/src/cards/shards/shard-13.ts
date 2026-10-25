@@ -237,6 +237,7 @@ import _poolGuidedStrike from "../pool/guided-strike.js";
 import _poolGulpingScraptrap from "../pool/gulping-scraptrap.js";
 import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
+import _poolHadaFreeblade from "../pool/hada-freeblade.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
 import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
@@ -284,6 +285,7 @@ import _poolJayaFieryNegotiator from "../pool/jaya-fiery-negotiator.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
 import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
 import _poolJoinTheDance from "../pool/join-the-dance.js";
+import _poolJoinTheRanks from "../pool/join-the-ranks.js";
 import _poolJokulhaups from "../pool/jokulhaups.js";
 import _poolJorubaiMurkLurker from "../pool/jorubai-murk-lurker.js";
 import _poolJourneyersKite from "../pool/journeyers-kite.js";
@@ -486,6 +488,7 @@ import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
+import _poolSlingbowTrap from "../pool/slingbow-trap.js";
 import _poolSlitherwisp from "../pool/slitherwisp.js";
 import _poolSnaremasterSprite from "../pool/snaremaster-sprite.js";
 import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
@@ -882,6 +885,7 @@ const shard: CardShard = {
     _poolGulpingScraptrap,
     _poolGurmagDrowner,
     _poolHaazdaVigilante,
+    _poolHadaFreeblade,
     _poolHajarLoyalBodyguard,
     _poolHarnesserOfStorms,
     _poolHauntedLibrary,
@@ -929,6 +933,7 @@ const shard: CardShard = {
     _poolJewelEyedCobra,
     _poolJhoiraWeatherlightCorsair,
     _poolJoinTheDance,
+    _poolJoinTheRanks,
     _poolJokulhaups,
     _poolJorubaiMurkLurker,
     _poolJourneyersKite,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
+    _poolSlingbowTrap,
     _poolSlitherwisp,
     _poolSnaremasterSprite,
     _poolSnowslopeHunter,

@@ -62,6 +62,7 @@ import _poolBloomingBlast from "../pool/blooming-blast.js";
 import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
 import _poolBodyCount from "../pool/body-count.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
+import _poolBojukaBrigand from "../pool/bojuka-brigand.js";
 import _poolBoneDragon from "../pool/bone-dragon.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
@@ -709,6 +710,7 @@ const shard: CardShard = {
     _poolBlotOutTheSky,
     _poolBodyCount,
     _poolBogInitiate,
+    _poolBojukaBrigand,
     _poolBoneDragon,
     _poolBoneclubBerserker,
     _poolBoulderbranchGolem,

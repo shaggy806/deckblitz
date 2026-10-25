@@ -24,6 +24,7 @@ import _poolAncientExcavation from "../pool/ancient-excavation.js";
 import _poolAngelOfDespair from "../pool/angel-of-despair.js";
 import _poolAnticognition from "../pool/anticognition.js";
 import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
+import _poolApexHawks from "../pool/apex-hawks.js";
 import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
@@ -59,6 +60,7 @@ import _poolBladeSplicer from "../pool/blade-splicer.js";
 import _poolBlaze from "../pool/blaze.js";
 import _poolBlitzballShot from "../pool/blitzball-shot.js";
 import _poolBloodVassal from "../pool/blood-vassal.js";
+import _poolBloodhuskRitualist from "../pool/bloodhusk-ritualist.js";
 import _poolBloodmarkMentor from "../pool/bloodmark-mentor.js";
 import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
@@ -525,6 +527,7 @@ import _poolSterlingSupplier from "../pool/sterling-supplier.js";
 import _poolStoicSphinx from "../pool/stoic-sphinx.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
+import _poolStoneIdolTrap from "../pool/stone-idol-trap.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
@@ -678,6 +681,7 @@ const shard: CardShard = {
     _poolAngelOfDespair,
     _poolAnticognition,
     _poolAnuridMurkdiver,
+    _poolApexHawks,
     _poolAquaticAlchemist,
     _poolArcboundRavager,
     _poolArcboundStinger,
@@ -713,6 +717,7 @@ const shard: CardShard = {
     _poolBlaze,
     _poolBlitzballShot,
     _poolBloodVassal,
+    _poolBloodhuskRitualist,
     _poolBloodmarkMentor,
     _poolBloodsoakedReveler,
     _poolBlueSunsZenith,
@@ -1179,6 +1184,7 @@ const shard: CardShard = {
     _poolStoicSphinx,
     _poolStomperCub,
     _poolStoneBySunlight,
+    _poolStoneIdolTrap,
     _poolStormfistCrusader,
     _poolStreetbreakerWurm,
     _poolStrengthOfTheHarvest,

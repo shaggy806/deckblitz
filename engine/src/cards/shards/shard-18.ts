@@ -13,6 +13,7 @@ import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equal
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
+import _poolAkoumBattlesinger from "../pool/akoum-battlesinger.js";
 import _poolAnHavvaConstable from "../pool/an-havva-constable.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
@@ -210,6 +211,7 @@ import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
 import _poolHall from "../pool/hall.js";
+import _poolHammerOfRuin from "../pool/hammer-of-ruin.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
 import _poolHardenedTactician from "../pool/hardened-tactician.js";
 import _poolHarvesterTroll from "../pool/harvester-troll.js";
@@ -654,6 +656,7 @@ const shard: CardShard = {
     _poolAkkiBlizzardHerder,
     _poolAkkiDrillmaster,
     _poolAkkiScrapchomper,
+    _poolAkoumBattlesinger,
     _poolAnHavvaConstable,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
     _poolHall,
+    _poolHammerOfRuin,
     _poolHamzaGuardianOfArashin,
     _poolHardenedTactician,
     _poolHarvesterTroll,

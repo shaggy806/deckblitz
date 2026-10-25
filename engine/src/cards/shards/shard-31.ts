@@ -263,6 +263,7 @@ import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
+import _poolGroundswell from "../pool/groundswell.js";
 import _poolGrovetenderDruids from "../pool/grovetender-druids.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-conduit.js";
@@ -432,6 +433,7 @@ import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
+import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
@@ -930,6 +932,7 @@ const shard: CardShard = {
     _poolGreenDragon,
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
+    _poolGroundswell,
     _poolGrovetenderDruids,
     _poolGrowExtraArms,
     _poolGuardianOfTheGreatConduit,
@@ -1099,6 +1102,7 @@ const shard: CardShard = {
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,
+    _poolPermafrostTrap,
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,

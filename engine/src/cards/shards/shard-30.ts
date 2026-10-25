@@ -95,6 +95,7 @@ import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
 import _poolCitadelCastellan from "../pool/citadel-castellan.js";
 import _poolCitadelGate from "../pool/citadel-gate.js";
+import _poolClawsOfValakut from "../pool/claws-of-valakut.js";
 import _poolClearShot from "../pool/clear-shot.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
 import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
@@ -304,6 +305,7 @@ import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolJodahsCodex from "../pool/jodahs-codex.js";
 import _poolJohtullWurm from "../pool/johtull-wurm.js";
 import _poolJoust from "../pool/joust.js";
+import _poolKalastriaHighborn from "../pool/kalastria-highborn.js";
 import _poolKalemnesCaptain from "../pool/kalemnes-captain.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
@@ -383,6 +385,7 @@ import _poolMurasaBrute from "../pool/murasa-brute.js";
 import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
 import _poolMyriadConstruct from "../pool/myriad-construct.js";
+import _poolMysteriesOfTheDeep from "../pool/mysteries-of-the-deep.js";
 import _poolNahirisStoneblades from "../pool/nahiris-stoneblades.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
@@ -736,6 +739,7 @@ const shard: CardShard = {
     _poolChromiumTheMutable,
     _poolCitadelCastellan,
     _poolCitadelGate,
+    _poolClawsOfValakut,
     _poolClearShot,
     _poolClockOfOmens,
     _poolCloudOfDarkness,
@@ -945,6 +949,7 @@ const shard: CardShard = {
     _poolJodahsCodex,
     _poolJohtullWurm,
     _poolJoust,
+    _poolKalastriaHighborn,
     _poolKalemnesCaptain,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,
@@ -1024,6 +1029,7 @@ const shard: CardShard = {
     _poolMuseSeeker,
     _poolMyrMoonvessel,
     _poolMyriadConstruct,
+    _poolMysteriesOfTheDeep,
     _poolNahirisStoneblades,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,

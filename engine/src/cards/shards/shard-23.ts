@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
+import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
@@ -99,6 +100,7 @@ import _poolCartographersCompanion from "../pool/cartographers-companion.js";
 import _poolCastleVantress from "../pool/castle-vantress.js";
 import _poolCatacombCrocodile from "../pool/catacomb-crocodile.js";
 import _poolCatapultSquad from "../pool/catapult-squad.js";
+import _poolCausticCrawler from "../pool/caustic-crawler.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
@@ -526,6 +528,7 @@ import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
 import _poolSubmerge from "../pool/submerge.js";
 import _poolSuddenReclamation from "../pool/sudden-reclamation.js";
+import _poolSummitApes from "../pool/summit-apes.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
@@ -624,6 +627,7 @@ import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
 import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
+import _poolWindZendikon from "../pool/wind-zendikon.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
 import _poolWingShredder from "../pool/wing-shredder.js";
@@ -653,6 +657,7 @@ const shard: CardShard = {
     _poolAatchikEmeraldRadian,
     _poolAccomplishedAlchemist,
     _poolAetherSearcher,
+    _poolAgadeemOccultist,
     _poolAgonyWarp,
     _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
@@ -746,6 +751,7 @@ const shard: CardShard = {
     _poolCastleVantress,
     _poolCatacombCrocodile,
     _poolCatapultSquad,
+    _poolCausticCrawler,
     _poolCenoteScout,
     _poolCephalidScout,
     _poolCerebralDownload,
@@ -1173,6 +1179,7 @@ const shard: CardShard = {
     _poolSublimeExhalation,
     _poolSubmerge,
     _poolSuddenReclamation,
+    _poolSummitApes,
     _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSundialDawnTyrant,
@@ -1271,6 +1278,7 @@ const shard: CardShard = {
     _poolWhack,
     _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,
+    _poolWindZendikon,
     _poolWindriderEel,
     _poolWindurstFederationCenter,
     _poolWingShredder,

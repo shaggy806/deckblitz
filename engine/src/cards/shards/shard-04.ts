@@ -130,6 +130,7 @@ import _poolDragonThroneOfTarkir from "../pool/dragon-throne-of-tarkir.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDranasSilencer from "../pool/dranas-silencer.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
+import _poolDreadStatuary from "../pool/dread-statuary.js";
 import _poolDreadhordeButcher from "../pool/dreadhorde-butcher.js";
 import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
@@ -756,6 +757,7 @@ const shard: CardShard = {
     _poolDrakeHatchling,
     _poolDranasSilencer,
     _poolDreadPresence,
+    _poolDreadStatuary,
     _poolDreadhordeButcher,
     _poolDrossHarvester,
     _poolDrownedDiner,
