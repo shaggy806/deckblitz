@@ -644,6 +644,7 @@ import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensMercenaryToken from "../tokens/mercenary-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
 import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
+import _tokensRedMinotaurTokenHaste from "../tokens/red-minotaur-token-haste.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
 import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 import _tokensXXSpiritTokenBlack from "../tokens/x-x-spirit-token-black.js";
@@ -1293,6 +1294,7 @@ const shard: CardShard = {
     _tokensMercenaryToken,
     _tokensPhobos,
     _tokensRatTokenGenkuFutureShaper,
+    _tokensRedMinotaurTokenHaste,
     _tokensSnakeToken,
     _tokensStoneBoulderToken,
     _tokensXXSpiritTokenBlack,

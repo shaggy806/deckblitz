@@ -196,6 +196,7 @@ import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
+import _poolFlurryOfHorns from "../pool/flurry-of-horns.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFontOfProgress from "../pool/font-of-progress.js";
 import _poolForebodingStatue from "../pool/foreboding-statue.js";
@@ -652,6 +653,7 @@ import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
+import _tokensRedGreenSatyrTokenHaste from "../tokens/red-green-satyr-token-haste.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
@@ -852,6 +854,7 @@ const shard: CardShard = {
     _poolFlameChainMauler,
     _poolFleshpulperGiant,
     _poolFlubsTheFool,
+    _poolFlurryOfHorns,
     _poolFollowTheLumarets,
     _poolFontOfProgress,
     _poolForebodingStatue,
@@ -1310,6 +1313,7 @@ const shard: CardShard = {
     _tokensLotus,
     _tokensPestTokenAttacks,
     _tokensPhyrexianToken,
+    _tokensRedGreenSatyrTokenHaste,
     _tokensRedHumanToken,
     _tokensSpiderToken21Reach,
     _tokensStoneforgedBladeToken,

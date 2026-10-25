@@ -628,6 +628,7 @@ import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
+import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment-spider-token-reach.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
 import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _tokensGoblinConstructToken,
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,
+    _tokensGreenEnchantmentSpiderTokenReach,
     _tokensKrakenToken,
     _tokensNinjaTokenKaitoShizuki,
     _tokensScorpionDragonToken,

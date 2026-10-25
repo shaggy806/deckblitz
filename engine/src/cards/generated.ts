@@ -6192,6 +6192,7 @@ import _poolFlowstoneWall from "./pool/flowstone-wall.js";
 import _poolFlowstoneWyvern from "./pool/flowstone-wyvern.js";
 import _poolFlubsTheFool from "./pool/flubs-the-fool.js";
 import _poolFlumph from "./pool/flumph.js";
+import _poolFlurryOfHorns from "./pool/flurry-of-horns.js";
 import _poolFlushOut from "./pool/flush-out.js";
 import _poolFlusterstorm from "./pool/flusterstorm.js";
 import _poolFlutterfox from "./pool/flutterfox.js";
@@ -20051,12 +20052,15 @@ import _tokensBirdTokenWhite34 from "./tokens/bird-token-white-3-4.js";
 import _tokensBirdToken from "./tokens/bird-token.js";
 import _tokensBlackDeathtouchSnakeToken from "./tokens/black-deathtouch-snake-token.js";
 import _tokensBlackGreenElfToken from "./tokens/black-green-elf-token.js";
+import _tokensBlackGreenEnchantmentSnakeToken from "./tokens/black-green-enchantment-snake-token.js";
 import _tokensBlackWarriorToken from "./tokens/black-warrior-token.js";
 import _tokensBloodToken from "./tokens/blood-token.js";
 import _tokensBlueBirdToken from "./tokens/blue-bird-token.js";
 import _tokensBlueBlackFaerieToken from "./tokens/blue-black-faerie-token.js";
+import _tokensBlueEnchantmentBirdToken22 from "./tokens/blue-enchantment-bird-token-2-2.js";
 import _tokensBlueHorror from "./tokens/blue-horror.js";
 import _tokensBlueRedElementalToken44 from "./tokens/blue-red-elemental-token-4-4.js";
+import _tokensBlueSphinxToken44Flying from "./tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensBlueThopterToken from "./tokens/blue-thopter-token.js";
 import _tokensBoarTokenRuralRecruit from "./tokens/boar-token-rural-recruit.js";
 import _tokensBoarTokenWolfsQuarry from "./tokens/boar-token-wolfs-quarry.js";
@@ -20193,6 +20197,7 @@ import _tokensGolemTrampleToken from "./tokens/golem-trample-token.js";
 import _tokensGolemVigilanceToken from "./tokens/golem-vigilance-token.js";
 import _tokensGreenCatToken11 from "./tokens/green-cat-token-1-1.js";
 import _tokensGreenElementalToken22 from "./tokens/green-elemental-token-2-2.js";
+import _tokensGreenEnchantmentSpiderTokenReach from "./tokens/green-enchantment-spider-token-reach.js";
 import _tokensGreenOxToken44 from "./tokens/green-ox-token-4-4.js";
 import _tokensGreenPlantToken11 from "./tokens/green-plant-token-1-1.js";
 import _tokensGreenSpiderTokenReach from "./tokens/green-spider-token-reach.js";
@@ -20359,7 +20364,9 @@ import _tokensRatToken from "./tokens/rat-token.js";
 import _tokensRebelToken from "./tokens/rebel-token.js";
 import _tokensRedElementalToken11 from "./tokens/red-elemental-token-1-1.js";
 import _tokensRedElementalToken31 from "./tokens/red-elemental-token-3-1.js";
+import _tokensRedGreenSatyrTokenHaste from "./tokens/red-green-satyr-token-haste.js";
 import _tokensRedHumanToken from "./tokens/red-human-token.js";
+import _tokensRedMinotaurTokenHaste from "./tokens/red-minotaur-token-haste.js";
 import _tokensRedSpiritTokenMenace from "./tokens/red-spirit-token-menace.js";
 import _tokensRedWarriorToken from "./tokens/red-warrior-token.js";
 import _tokensRedWhiteSoldierHasteToken from "./tokens/red-white-soldier-haste-token.js";
@@ -26729,6 +26736,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlowstoneWyvern,
   _poolFlubsTheFool,
   _poolFlumph,
+  _poolFlurryOfHorns,
   _poolFlushOut,
   _poolFlusterstorm,
   _poolFlutterfox,
@@ -40594,12 +40602,15 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensBirdToken,
   _tokensBlackDeathtouchSnakeToken,
   _tokensBlackGreenElfToken,
+  _tokensBlackGreenEnchantmentSnakeToken,
   _tokensBlackWarriorToken,
   _tokensBloodToken,
   _tokensBlueBirdToken,
   _tokensBlueBlackFaerieToken,
+  _tokensBlueEnchantmentBirdToken22,
   _tokensBlueHorror,
   _tokensBlueRedElementalToken44,
+  _tokensBlueSphinxToken44Flying,
   _tokensBlueThopterToken,
   _tokensBoarTokenRuralRecruit,
   _tokensBoarTokenWolfsQuarry,
@@ -40736,6 +40747,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGolemVigilanceToken,
   _tokensGreenCatToken11,
   _tokensGreenElementalToken22,
+  _tokensGreenEnchantmentSpiderTokenReach,
   _tokensGreenOxToken44,
   _tokensGreenPlantToken11,
   _tokensGreenSpiderTokenReach,
@@ -40902,7 +40914,9 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensRebelToken,
   _tokensRedElementalToken11,
   _tokensRedElementalToken31,
+  _tokensRedGreenSatyrTokenHaste,
   _tokensRedHumanToken,
+  _tokensRedMinotaurTokenHaste,
   _tokensRedSpiritTokenMenace,
   _tokensRedWarriorToken,
   _tokensRedWhiteSoldierHasteToken,
@@ -47279,6 +47293,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flowstone-wyvern": _poolFlowstoneWyvern,
   "pool/flubs-the-fool": _poolFlubsTheFool,
   "pool/flumph": _poolFlumph,
+  "pool/flurry-of-horns": _poolFlurryOfHorns,
   "pool/flush-out": _poolFlushOut,
   "pool/flusterstorm": _poolFlusterstorm,
   "pool/flutterfox": _poolFlutterfox,
@@ -61138,12 +61153,15 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/bird-token": _tokensBirdToken,
   "tokens/black-deathtouch-snake-token": _tokensBlackDeathtouchSnakeToken,
   "tokens/black-green-elf-token": _tokensBlackGreenElfToken,
+  "tokens/black-green-enchantment-snake-token": _tokensBlackGreenEnchantmentSnakeToken,
   "tokens/black-warrior-token": _tokensBlackWarriorToken,
   "tokens/blood-token": _tokensBloodToken,
   "tokens/blue-bird-token": _tokensBlueBirdToken,
   "tokens/blue-black-faerie-token": _tokensBlueBlackFaerieToken,
+  "tokens/blue-enchantment-bird-token-2-2": _tokensBlueEnchantmentBirdToken22,
   "tokens/blue-horror": _tokensBlueHorror,
   "tokens/blue-red-elemental-token-4-4": _tokensBlueRedElementalToken44,
+  "tokens/blue-sphinx-token-4-4-flying": _tokensBlueSphinxToken44Flying,
   "tokens/blue-thopter-token": _tokensBlueThopterToken,
   "tokens/boar-token-rural-recruit": _tokensBoarTokenRuralRecruit,
   "tokens/boar-token-wolfs-quarry": _tokensBoarTokenWolfsQuarry,
@@ -61280,6 +61298,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/golem-vigilance-token": _tokensGolemVigilanceToken,
   "tokens/green-cat-token-1-1": _tokensGreenCatToken11,
   "tokens/green-elemental-token-2-2": _tokensGreenElementalToken22,
+  "tokens/green-enchantment-spider-token-reach": _tokensGreenEnchantmentSpiderTokenReach,
   "tokens/green-ox-token-4-4": _tokensGreenOxToken44,
   "tokens/green-plant-token-1-1": _tokensGreenPlantToken11,
   "tokens/green-spider-token-reach": _tokensGreenSpiderTokenReach,
@@ -61446,7 +61465,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/rebel-token": _tokensRebelToken,
   "tokens/red-elemental-token-1-1": _tokensRedElementalToken11,
   "tokens/red-elemental-token-3-1": _tokensRedElementalToken31,
+  "tokens/red-green-satyr-token-haste": _tokensRedGreenSatyrTokenHaste,
   "tokens/red-human-token": _tokensRedHumanToken,
+  "tokens/red-minotaur-token-haste": _tokensRedMinotaurTokenHaste,
   "tokens/red-spirit-token-menace": _tokensRedSpiritTokenMenace,
   "tokens/red-warrior-token": _tokensRedWarriorToken,
   "tokens/red-white-soldier-haste-token": _tokensRedWhiteSoldierHasteToken,

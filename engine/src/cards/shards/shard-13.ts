@@ -630,6 +630,7 @@ import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
 import _poolZombieOutlander from "../pool/zombie-outlander.js";
 import _tokensAlienSalamanderToken from "../tokens/alien-salamander-token.js";
 import _tokensBatToken from "../tokens/bat-token.js";
+import _tokensBlueEnchantmentBirdToken22 from "../tokens/blue-enchantment-bird-token-2-2.js";
 import _tokensClueToken from "../tokens/clue-token.js";
 import _tokensDemonToken from "../tokens/demon-token.js";
 import _tokensDinosaurToken11Haste from "../tokens/dinosaur-token-1-1-haste.js";
@@ -1277,6 +1278,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienSalamanderToken,
     _tokensBatToken,
+    _tokensBlueEnchantmentBirdToken22,
     _tokensClueToken,
     _tokensDemonToken,
     _tokensDinosaurToken11Haste,
