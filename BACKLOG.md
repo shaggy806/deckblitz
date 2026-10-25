@@ -246,7 +246,7 @@ there and move this line to `COMPLETED.md`.
 - **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4c, 800.4g–h).
-- **Dividing among targets: what's left** — an X total, distributing counters.
+- **Dividing among targets: what's left** — "distribute up to that many counters" from a trigger (Lathiel).
 - **A token copy isn't asked its "as this enters" choice.**
 - **Proliferate over a token stack** gives every member a counter.
 - **Distinct targets in one token stack** can't take two tokens of one stack.

@@ -8133,4 +8133,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true },
     }),
   ),
+  preset(
+    'Fire Covenant: X life, X damage divided',
+    board({
+      you: { bf: ['Swamp*2', 'Mountain'], hand: ['Fire Covenant'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
 ]

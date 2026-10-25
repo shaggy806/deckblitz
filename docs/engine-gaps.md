@@ -81,10 +81,10 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   and an effect ending that hands a permanent back to a departed default controller (800.4c:
   it's exiled instead).
 - **Dividing among targets: what's left.** A spell's and an ability's fixed "N damage divided as
-  you choose" are built (`divided`, the `division` answer). Not yet: an X total (Fire Covenant),
-  and "distribute N counters among" in general (Lathiel; Earth Crystal's "two counters among
-  one or two" runs through a `target-chosen` conditional). See `neededCards-features.md`,
-  "Unbounded targeting".
+  you choose" are built (`divided`, the `division` answer), and so is a spell's X total
+  (`divided.x` — Fire Covenant). Not yet: "distribute **up to** that many counters" from a
+  trigger (Lathiel's total is its trigger's value, and fewer may be given). See
+  `neededCards-features.md`, "Unbounded targeting".
 - **A token copy isn't asked its "as this enters" choice** (a token copy of Clone, Morophon or
   Urza's Incubator), though the gaps list marks `bug:as-enters-choices-any-entry` built. See
   AUTHORING §15.

@@ -12130,7 +12130,14 @@ export class Game {
       this.cardSource(def, cardId, chosenX),
     );
     if (badTarget !== null) throw new Error(badTarget);
-    const chosenDivision = def.divided === null ? undefined : spellDivision(def.divided, targets, division);
+    const chosenDivision =
+      def.divided === null
+        ? undefined
+        : spellDivision(
+            def.divided.x === true ? { ...def.divided, total: chosenX } : def.divided,
+            targets,
+            division,
+          );
     if (typeof chosenDivision === "string") throw new Error(`${def.name}: ${chosenDivision}`);
 
     const castingFromCommand = this.isCastableCommander(player, cardId);

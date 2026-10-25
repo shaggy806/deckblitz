@@ -5511,6 +5511,7 @@ import _poolFinneasAceArcher from "./pool/finneas-ace-archer.js";
 import _poolFirbolgFlutist from "./pool/firbolg-flutist.js";
 import _poolFirdochCore from "./pool/firdoch-core.js";
 import _poolFireAmbush from "./pool/fire-ambush.js";
+import _poolFireCovenant from "./pool/fire-covenant.js";
 import _poolFireDiamond from "./pool/fire-diamond.js";
 import _poolFireDrake from "./pool/fire-drake.js";
 import _poolFireElemental from "./pool/fire-elemental.js";
@@ -24555,6 +24556,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirbolgFlutist,
   _poolFirdochCore,
   _poolFireAmbush,
+  _poolFireCovenant,
   _poolFireDiamond,
   _poolFireDrake,
   _poolFireElemental,
@@ -43612,6 +43614,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/firbolg-flutist": _poolFirbolgFlutist,
   "pool/firdoch-core": _poolFirdochCore,
   "pool/fire-ambush": _poolFireAmbush,
+  "pool/fire-covenant": _poolFireCovenant,
   "pool/fire-diamond": _poolFireDiamond,
   "pool/fire-drake": _poolFireDrake,
   "pool/fire-elemental": _poolFireElemental,

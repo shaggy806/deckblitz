@@ -303,3 +303,28 @@ describe("\"each player may\": everyone chooses, then it all happens (rule 101.4
     expect(life(game, B)).toBe(15);
   });
 });
+
+describe("an X total divided among targets", () => {
+  it("Fire Covenant: X life paid, X damage divided as chosen", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    lands(game, "Swamp", 2);
+    lands(game, "Mountain", 1);
+    cast(game, toHand(game, "Fire Covenant"), { x: 5, targets: [ref(bears), ref(giant)], division: [2, 3] });
+    expect(life(game, A)).toBe(15);
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, giant)).toBe("graveyard");
+  });
+
+  it("Fire Covenant: no more targets than X", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    lands(game, "Swamp", 2);
+    lands(game, "Mountain", 1);
+    expect(() => cast(game, toHand(game, "Fire Covenant"), { x: 1, targets: [ref(bears), ref(giant)] })).toThrow(
+      /1 can't be divided among 2 targets/,
+    );
+  });
+});

@@ -5300,3 +5300,7 @@ engine terms. A second thing to check is a second test.
 ### Will of the Jeskai: Bob chooses before your hand is discarded
 - **Do:** Cast Will of the Jeskai, wheel mode. Answer yes. As Bob, look at your hand before answering yes.
 - **Expect:** When Bob is asked, your Grizzly Bears is still in your hand. Once he answers, both hands go to the graveyards and each of you draws five.
+
+### Fire Covenant: X life, X damage divided
+- **Do:** Cast Fire Covenant with X = 5, targeting Bob's Grizzly Bears and Hill Giant. Give the Bears 2 and the Giant 3.
+- **Expect:** The division step shares out 5 (the X you chose), you pay 5 life, and both creatures die.

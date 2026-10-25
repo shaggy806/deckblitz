@@ -402,7 +402,7 @@ interface Targeting {
   /** The cast or ability divides `total` among the targets from slot `slot`
    * on (rules 601.2d, 603.3d — Magma Opus, Dragonlord Atarka): asked once
    * they're chosen, before it goes out. */
-  readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string }
+  readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true }
   /** New targets for a copy of a spell (Twincast, Shiko and Narset): the
    * target each slot has now, which a Keep button takes — it may not be on
    * the board to click any more. */
@@ -2183,7 +2183,8 @@ function Table({
           ? []
           : targets.slice(t.divide.slot).filter((r): r is TargetRef => r !== null)
       if (t.divide !== undefined && division === undefined && members.length >= 2) {
-        const total = t.divide.total
+        // "X damage divided" (Fire Covenant): the X just chosen.
+        const total = t.divide.x === true ? (t.xValue ?? 0) : t.divide.total
         const base = Math.floor(total / members.length)
         setPendingDivision({
           total,

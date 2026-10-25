@@ -860,7 +860,7 @@ export type LegalAction =
       readonly targetOptions: readonly (readonly TargetRef[])[];
       /** The card divides `total` among the targets of the group at target
        * slot `slot` — the cast's `division` says how (Magma Opus). */
-      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string };
+      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true };
       /** A harmonize variant (rule 702.180a): the creature it taps, whose
        * power comes off the cost — the cast echoes it as `tap: [object]`.
        * Absent on the variant that taps none. */
@@ -1185,7 +1185,7 @@ export type LegalAction =
       /** The ability divides `total` among the targets of the group at target
        * slot `slot` — the activation's `division` says how (Skarrgan
        * Hellkite). */
-      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string };
+      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true };
     }
   | {
       readonly kind: "declare-attackers";
@@ -1602,7 +1602,7 @@ export type LegalAction =
       /** The ability divides `total` among the targets of the group at
        * answer slot `slot` — the answer's `division` says how (Dragonlord
        * Atarka). */
-      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string };
+      readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true };
       /** What's being asked, when it isn't a copy's or a trigger's targets
        * ("Change the target of Lightning Bolt") — see the decision's. */
       readonly prompt?: string;
