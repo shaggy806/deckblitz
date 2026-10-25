@@ -80,6 +80,7 @@ export const chooseCreatureType = defineDecision({
       source: awaiting.source,
       options: [...awaiting.options],
       catalog: awaiting.catalog,
+      ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
       // Only a catalog choice needs suggestions; a short fixed list is
       // already its own menu.
       suggested: awaiting.catalog

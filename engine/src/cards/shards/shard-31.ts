@@ -413,6 +413,8 @@ import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
+import _poolNyxbornEidolon from "../pool/nyxborn-eidolon.js";
+import _poolNyxbornTriton from "../pool/nyxborn-triton.js";
 import _poolNyxbornUnicorn from "../pool/nyxborn-unicorn.js";
 import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
@@ -423,6 +425,7 @@ import _poolOliviasDragoon from "../pool/olivias-dragoon.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
+import _poolOracleOfBones from "../pool/oracle-of-bones.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
@@ -656,6 +659,7 @@ import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensAngelo from "../tokens/angelo.js";
+import _tokensCatSoldierTokenVigilance from "../tokens/cat-soldier-token-vigilance.js";
 import _tokensDalekToken from "../tokens/dalek-token.js";
 import _tokensFoxToken from "../tokens/fox-token.js";
 import _tokensGiantToken from "../tokens/giant-token.js";
@@ -1087,6 +1091,8 @@ const shard: CardShard = {
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
+    _poolNyxbornEidolon,
+    _poolNyxbornTriton,
     _poolNyxbornUnicorn,
     _poolOathOfJace,
     _poolObscuraInterceptor,
@@ -1097,6 +1103,7 @@ const shard: CardShard = {
     _poolOltecMatterweaver,
     _poolOmenspeaker,
     _poolOnduGreathorn,
+    _poolOracleOfBones,
     _poolOranRiefOoze,
     _poolOrcishVandal,
     _poolOrderOfTheSacredTorch,
@@ -1332,6 +1339,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienWarriorToken,
     _tokensAngelo,
+    _tokensCatSoldierTokenVigilance,
     _tokensDalekToken,
     _tokensFoxToken,
     _tokensGiantToken,

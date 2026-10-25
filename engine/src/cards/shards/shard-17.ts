@@ -182,6 +182,7 @@ import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFalseDemise from "../pool/false-demise.js";
+import _poolFanaticOfXenagos from "../pool/fanatic-of-xenagos.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
@@ -366,6 +367,8 @@ import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js
 import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
+import _poolNessianDemolok from "../pool/nessian-demolok.js";
+import _poolNessianWildsRavager from "../pool/nessian-wilds-ravager.js";
 import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNettleDrone from "../pool/nettle-drone.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
@@ -835,6 +838,7 @@ const shard: CardShard = {
     _poolFaebloomTrick,
     _poolFaerieVandal,
     _poolFalseDemise,
+    _poolFanaticOfXenagos,
     _poolFandanielTelophoroiAscian,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
@@ -1019,6 +1023,8 @@ const shard: CardShard = {
     _poolNayaPanorama,
     _poolNecroticWound,
     _poolNemaSiltlurker,
+    _poolNessianDemolok,
+    _poolNessianWildsRavager,
     _poolNestRobber,
     _poolNettleDrone,
     _poolNiambiFaithfulHealer,

@@ -456,6 +456,7 @@ import _poolSleightOfHand from "../pool/sleight-of-hand.js";
 import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
+import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
@@ -1057,6 +1058,7 @@ const shard: CardShard = {
     _poolSlitheringCryptid,
     _poolSmeagolHelpfulGuide,
     _poolSmokebraider,
+    _poolSnakeOfTheGoldenGrove,
     _poolSolemnOffering,
     _poolSomberwaldAlpha,
     _poolSoulOfTheRapids,

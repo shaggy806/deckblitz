@@ -363,6 +363,7 @@ import _poolNoEscape from "../pool/no-escape.js";
 import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
+import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
@@ -991,6 +992,7 @@ const shard: CardShard = {
     _poolNoOneLeftBehind,
     _poolNoWayOut,
     _poolNornsWellspring,
+    _poolNyxbornWolf,
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,

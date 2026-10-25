@@ -351,6 +351,7 @@ import _poolNightshadeStinger from "../pool/nightshade-stinger.js";
 import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
 import _poolNoviceKnight from "../pool/novice-knight.js";
 import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
+import _poolNyxbornRollicker from "../pool/nyxborn-rollicker.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOkosHospitality from "../pool/okos-hospitality.js";
 import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
@@ -1004,6 +1005,7 @@ const shard: CardShard = {
     _poolNimblewrightSchematic,
     _poolNoviceKnight,
     _poolNyleasForerunner,
+    _poolNyxbornRollicker,
     _poolOinTheBrave,
     _poolOkosHospitality,
     _poolOmegaHeartlessEvolution,

@@ -633,6 +633,7 @@ import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
+import _tokensGreenEnchantmentCentaurToken33 from "../tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
 import _tokensMinotaurToken from "../tokens/minotaur-token.js";
@@ -1282,6 +1283,7 @@ const shard: CardShard = {
     _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
+    _tokensGreenEnchantmentCentaurToken33,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensKavuTokenJaredCarthalion,
     _tokensMinotaurToken,

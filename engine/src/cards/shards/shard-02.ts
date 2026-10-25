@@ -206,6 +206,7 @@ import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlameBlessedBolt from "../pool/flame-blessed-bolt.js";
+import _poolFlameWreathedPhoenix from "../pool/flame-wreathed-phoenix.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
 import _poolFly from "../pool/fly.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
@@ -232,6 +233,7 @@ import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
 import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
+import _poolGhostbladeEidolon from "../pool/ghostblade-eidolon.js";
 import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
 import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
@@ -397,6 +399,7 @@ import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
+import _poolPharagaxGiant from "../pool/pharagax-giant.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
@@ -834,6 +837,7 @@ const shard: CardShard = {
     _poolFirebendingLesson,
     _poolFistsOfFlame,
     _poolFlameBlessedBolt,
+    _poolFlameWreathedPhoenix,
     _poolFlamingSword,
     _poolFly,
     _poolForbiddenLore,
@@ -860,6 +864,7 @@ const shard: CardShard = {
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
     _poolGertAndOldLaceRunaways,
+    _poolGhostbladeEidolon,
     _poolGhoulcallersHarvest,
     _poolGiantAnkheg,
     _poolGlaringFleshraker,
@@ -1025,6 +1030,7 @@ const shard: CardShard = {
     _poolPeculiarLighthouse,
     _poolPerilousVault,
     _poolPewterGolem,
+    _poolPharagaxGiant,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,
     _poolPlacidRottentail,

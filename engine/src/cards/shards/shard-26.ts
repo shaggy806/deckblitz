@@ -634,6 +634,7 @@ import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
+import _tokensRedEnchantmentElementalToken31Haste from "../tokens/red-enchantment-elemental-token-3-1-haste.js";
 import _tokensRhinoWarriorToken from "../tokens/rhino-warrior-token.js";
 import _tokensRobotToken from "../tokens/robot-token.js";
 import _tokensSnakeToken54 from "../tokens/snake-token-5-4.js";
@@ -1276,6 +1277,7 @@ const shard: CardShard = {
     _tokensOozeToken33,
     _tokensPegasusToken,
     _tokensRebelToken,
+    _tokensRedEnchantmentElementalToken31Haste,
     _tokensRhinoWarriorToken,
     _tokensRobotToken,
     _tokensSnakeToken54,

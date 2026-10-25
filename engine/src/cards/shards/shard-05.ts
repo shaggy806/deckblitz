@@ -398,6 +398,7 @@ import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
 import _poolOrcishOriflamme from "../pool/orcish-oriflamme.js";
 import _poolOrganicExtinction from "../pool/organic-extinction.js";
+import _poolOrnitharch from "../pool/ornitharch.js";
 import _poolOverwhelmingRemorse from "../pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
@@ -495,6 +496,7 @@ import _poolShriekdiver from "../pool/shriekdiver.js";
 import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
 import _poolSilvergillMentor from "../pool/silvergill-mentor.js";
 import _poolSipOfHemlock from "../pool/sip-of-hemlock.js";
+import _poolSirenOfTheFangedCoast from "../pool/siren-of-the-fanged-coast.js";
 import _poolSkeletonArcher from "../pool/skeleton-archer.js";
 import _poolSkorpekhLord from "../pool/skorpekh-lord.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
@@ -1048,6 +1050,7 @@ const shard: CardShard = {
     _poolOraclesGift,
     _poolOrcishOriflamme,
     _poolOrganicExtinction,
+    _poolOrnitharch,
     _poolOverwhelmingRemorse,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
@@ -1145,6 +1148,7 @@ const shard: CardShard = {
     _poolSifterOfSkulls,
     _poolSilvergillMentor,
     _poolSipOfHemlock,
+    _poolSirenOfTheFangedCoast,
     _poolSkeletonArcher,
     _poolSkorpekhLord,
     _poolSkyTheaterStrix,

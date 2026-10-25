@@ -370,6 +370,7 @@ import _poolNoiseMarine from "../pool/noise-marine.js";
 import _poolNomadicElf from "../pool/nomadic-elf.js";
 import _poolNormanOsborn from "../pool/norman-osborn.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
+import _poolNyxbornShieldmate from "../pool/nyxborn-shieldmate.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
 import _poolOhabiCaleria from "../pool/ohabi-caleria.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
@@ -1022,6 +1023,7 @@ const shard: CardShard = {
     _poolNomadicElf,
     _poolNormanOsborn,
     _poolNoviceDissector,
+    _poolNyxbornShieldmate,
     _poolOakenBoon,
     _poolOhabiCaleria,
     _poolOkinaTempleToTheGrandfathers,
