@@ -441,6 +441,7 @@ import _poolSamiWildcatCaptain from "../pool/sami-wildcat-captain.js";
 import _poolSanctuaryCat from "../pool/sanctuary-cat.js";
 import _poolSanctumOfShatteredHeights from "../pool/sanctum-of-shattered-heights.js";
 import _poolSandSilos from "../pool/sand-silos.js";
+import _poolSandsteppeMastodon from "../pool/sandsteppe-mastodon.js";
 import _poolSandstormVerge from "../pool/sandstorm-verge.js";
 import _poolSarythTheVipersFang from "../pool/saryth-the-vipers-fang.js";
 import _poolSavaiTriome from "../pool/savai-triome.js";
@@ -1078,6 +1079,7 @@ const shard: CardShard = {
     _poolSanctuaryCat,
     _poolSanctumOfShatteredHeights,
     _poolSandSilos,
+    _poolSandsteppeMastodon,
     _poolSandstormVerge,
     _poolSarythTheVipersFang,
     _poolSavaiTriome,

@@ -333,6 +333,7 @@ import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
+import _poolMarduScout from "../pool/mardu-scout.js";
 import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
@@ -992,6 +993,7 @@ const shard: CardShard = {
     _poolManifoldKey,
     _poolMarduDevotee,
     _poolMarduHateblade,
+    _poolMarduScout,
     _poolMascotInterception,
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,

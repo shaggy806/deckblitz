@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonReason from "../pool/abandon-reason.js";
 import _poolAbjure from "../pool/abjure.js";
+import _poolAbzanSkycaptain from "../pool/abzan-skycaptain.js";
 import _poolAcidRain from "../pool/acid-rain.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
 import _poolAdmonitionAngel from "../pool/admonition-angel.js";
@@ -623,6 +624,7 @@ const shard: CardShard = {
   pool: [
     _poolAbandonReason,
     _poolAbjure,
+    _poolAbzanSkycaptain,
     _poolAcidRain,
     _poolAdelineResplendentCathar,
     _poolAdmonitionAngel,

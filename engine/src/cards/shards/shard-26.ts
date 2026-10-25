@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbradedBluffs from "../pool/abraded-bluffs.js";
+import _poolAbzanAdvantage from "../pool/abzan-advantage.js";
 import _poolAbzanBattlePriest from "../pool/abzan-battle-priest.js";
 import _poolAccessDenied from "../pool/access-denied.js";
 import _poolAdaptiveSporesinger from "../pool/adaptive-sporesinger.js";
@@ -625,6 +626,7 @@ import _tokensZombieToken from "../tokens/zombie-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbradedBluffs,
+    _poolAbzanAdvantage,
     _poolAbzanBattlePriest,
     _poolAccessDenied,
     _poolAdaptiveSporesinger,

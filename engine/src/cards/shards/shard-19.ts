@@ -231,6 +231,7 @@ import _poolGlassGolem from "../pool/glass-golem.js";
 import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
+import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
@@ -878,6 +879,7 @@ const shard: CardShard = {
     _poolGlimpseOfFreedom,
     _poolGlistenerElf,
     _poolGoblinGlider,
+    _poolGoblinHeelcutter,
     _poolGoliathMassManipulator,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,

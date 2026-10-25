@@ -15,6 +15,7 @@ import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js"
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
+import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
 import _poolAmaranthineWall from "../pool/amaranthine-wall.js";
 import _poolAmbushViper from "../pool/ambush-viper.js";
@@ -315,6 +316,7 @@ import _poolMagmaJet from "../pool/magma-jet.js";
 import _poolMagmaOpus from "../pool/magma-opus.js";
 import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
 import _poolManamorphose from "../pool/manamorphose.js";
+import _poolMapTheWastes from "../pool/map-the-wastes.js";
 import _poolMarket from "../pool/market.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
 import _poolMaskOfRiddles from "../pool/mask-of-riddles.js";
@@ -644,6 +646,7 @@ const shard: CardShard = {
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
     _poolAlabornCavalier,
+    _poolAleshasVanguard,
     _poolAloraMerryThief,
     _poolAmaranthineWall,
     _poolAmbushViper,
@@ -944,6 +947,7 @@ const shard: CardShard = {
     _poolMagmaOpus,
     _poolMagmaticSprinter,
     _poolManamorphose,
+    _poolMapTheWastes,
     _poolMarket,
     _poolMarketwatchPhantom,
     _poolMaskOfRiddles,

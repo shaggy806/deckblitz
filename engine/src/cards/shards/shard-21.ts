@@ -305,6 +305,7 @@ import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
+import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMaskOfImmolation from "../pool/mask-of-immolation.js";
@@ -553,6 +554,7 @@ import _poolValiantKnight from "../pool/valiant-knight.js";
 import _poolValorousSteed from "../pool/valorous-steed.js";
 import _poolValorsReachTagTeam from "../pool/valors-reach-tag-team.js";
 import _poolVaporkin from "../pool/vaporkin.js";
+import _poolVaultbreaker from "../pool/vaultbreaker.js";
 import _poolVedalkenBlademaster from "../pool/vedalken-blademaster.js";
 import _poolVeilOfAssimilation from "../pool/veil-of-assimilation.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
@@ -910,6 +912,7 @@ const shard: CardShard = {
     _poolLysAlanaHuntmaster,
     _poolMalevolentWhispers,
     _poolMangaraTheDiplomat,
+    _poolMarduShadowspear,
     _poolMarkovBaron,
     _poolMarwynTheNurturer,
     _poolMaskOfImmolation,
@@ -1158,6 +1161,7 @@ const shard: CardShard = {
     _poolValorousSteed,
     _poolValorsReachTagTeam,
     _poolVaporkin,
+    _poolVaultbreaker,
     _poolVedalkenBlademaster,
     _poolVeilOfAssimilation,
     _poolVengefulRegrowth,
