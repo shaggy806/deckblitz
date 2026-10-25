@@ -276,6 +276,7 @@ import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-ma
 import _poolLivingTempest from "../pool/living-tempest.js";
 import _poolLochDragon from "../pool/loch-dragon.js";
 import _poolLockeCole from "../pool/locke-cole.js";
+import _poolLongRoadHome from "../pool/long-road-home.js";
 import _poolLorcanWarlockCollector from "../pool/lorcan-warlock-collector.js";
 import _poolLordOfLineage from "../pool/lord-of-lineage.js";
 import _poolLordOfTheAccursed from "../pool/lord-of-the-accursed.js";
@@ -493,6 +494,7 @@ import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolSyphonEssence from "../pool/syphon-essence.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
+import _poolTakeInventory from "../pool/take-inventory.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
@@ -879,6 +881,7 @@ const shard: CardShard = {
     _poolLivingTempest,
     _poolLochDragon,
     _poolLockeCole,
+    _poolLongRoadHome,
     _poolLorcanWarlockCollector,
     _poolLordOfLineage,
     _poolLordOfTheAccursed,
@@ -1096,6 +1099,7 @@ const shard: CardShard = {
     _poolSyphonEssence,
     _poolTaigamsScheming,
     _poolTaintedField,
+    _poolTakeInventory,
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
     _poolTattermungeManiac,

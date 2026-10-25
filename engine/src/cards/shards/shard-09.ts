@@ -486,6 +486,7 @@ import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
+import _poolSpontaneousMutation from "../pool/spontaneous-mutation.js";
 import _poolSpringLeafAvenger from "../pool/spring-leaf-avenger.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
@@ -1109,6 +1110,7 @@ const shard: CardShard = {
     _poolSpireMechcycle,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,
+    _poolSpontaneousMutation,
     _poolSpringLeafAvenger,
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,

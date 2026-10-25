@@ -130,6 +130,7 @@ import _poolDemandAnswers from "../pool/demand-answers.js";
 import _poolDemolitionStomper from "../pool/demolition-stomper.js";
 import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
+import _poolDesperateSentry from "../pool/desperate-sentry.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-planner.js";
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
@@ -732,6 +733,7 @@ const shard: CardShard = {
     _poolDemolitionStomper,
     _poolDesertDrake,
     _poolDesolationTwin,
+    _poolDesperateSentry,
     _poolDispellingExhale,
     _poolDoctorOctopusMasterPlanner,
     _poolDouserOfLights,

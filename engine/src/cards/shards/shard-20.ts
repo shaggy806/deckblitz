@@ -104,6 +104,7 @@ import _poolCoiledTinviper from "../pool/coiled-tinviper.js";
 import _poolColosYearling from "../pool/colos-yearling.js";
 import _poolColossalBadger from "../pool/colossal-badger.js";
 import _poolConcertedDefense from "../pool/concerted-defense.js";
+import _poolConduitOfStorms from "../pool/conduit-of-storms.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
 import _poolCoordinatedManeuver from "../pool/coordinated-maneuver.js";
@@ -479,6 +480,7 @@ import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
 import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js";
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
+import _poolSinuousPredator from "../pool/sinuous-predator.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
 import _poolSkitteringCrustacean from "../pool/skittering-crustacean.js";
@@ -754,6 +756,7 @@ const shard: CardShard = {
     _poolColosYearling,
     _poolColossalBadger,
     _poolConcertedDefense,
+    _poolConduitOfStorms,
     _poolConsulateDreadnought,
     _poolContagionClasp,
     _poolCoordinatedManeuver,
@@ -1129,6 +1132,7 @@ const shard: CardShard = {
     _poolSilenceTheEcho,
     _poolSilvarDevourerOfTheFree,
     _poolSinisterSabotage,
+    _poolSinuousPredator,
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,
     _poolSkitteringCrustacean,

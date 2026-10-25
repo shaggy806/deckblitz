@@ -85,6 +85,7 @@ import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
+import _poolConduitOfEmrakul from "../pool/conduit-of-emrakul.js";
 import _poolConquerorsGalleon from "../pool/conquerors-galleon.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
@@ -703,6 +704,7 @@ const shard: CardShard = {
     _poolCollectorOuphe,
     _poolColossapede,
     _poolConclaveCavalier,
+    _poolConduitOfEmrakul,
     _poolConquerorsGalleon,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,

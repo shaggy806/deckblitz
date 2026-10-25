@@ -112,6 +112,7 @@ import _poolCreativeTechnique from "../pool/creative-technique.js";
 import _poolCrystalBall from "../pool/crystal-ball.js";
 import _poolCultivatorOfBlades from "../pool/cultivator-of-blades.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
+import _poolCuriousHomunculus from "../pool/curious-homunculus.js";
 import _poolCurseOfMaritLage from "../pool/curse-of-marit-lage.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
 import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
@@ -703,6 +704,7 @@ const shard: CardShard = {
     _poolCrystalBall,
     _poolCultivatorOfBlades,
     _poolCuriousAltisaur,
+    _poolCuriousHomunculus,
     _poolCurseOfMaritLage,
     _poolCyberdriveAwakener,
     _poolCyclopsOfEternalFury,

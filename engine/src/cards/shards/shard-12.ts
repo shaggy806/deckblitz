@@ -65,6 +65,7 @@ import _poolBookOfRass from "../pool/book-of-rass.js";
 import _poolBootleggersStash from "../pool/bootleggers-stash.js";
 import _poolBorisDevilboon from "../pool/boris-devilboon.js";
 import _poolBorosCluestone from "../pool/boros-cluestone.js";
+import _poolBorrowedHostility from "../pool/borrowed-hostility.js";
 import _poolBoseijuReachesSkyward from "../pool/boseiju-reaches-skyward.js";
 import _poolBottomlessPoolLockerRoom from "../pool/bottomless-pool-locker-room.js";
 import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
@@ -422,6 +423,7 @@ import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
+import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
@@ -661,6 +663,7 @@ const shard: CardShard = {
     _poolBootleggersStash,
     _poolBorisDevilboon,
     _poolBorosCluestone,
+    _poolBorrowedHostility,
     _poolBoseijuReachesSkyward,
     _poolBottomlessPoolLockerRoom,
     _poolBraidsConjurerAdept,
@@ -1018,6 +1021,7 @@ const shard: CardShard = {
     _poolRuricThar,
     _poolRydiaSummonerOfMist,
     _poolSailorOfMeans,
+    _poolSanctifierOfSouls,
     _poolSanctumOfCalmWaters,
     _poolSanctumOfUgin,
     _poolSarpadianSimulacrum,

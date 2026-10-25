@@ -86,6 +86,7 @@ import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
 import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
+import _poolCertainDeath from "../pool/certain-death.js";
 import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
@@ -376,6 +377,7 @@ import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNinthBridgePatrol from "../pool/ninth-bridge-patrol.js";
 import _poolNissasZendikon from "../pool/nissas-zendikon.js";
+import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
@@ -708,6 +710,7 @@ const shard: CardShard = {
     _poolCatalystElemental,
     _poolCatapultFodder,
     _poolCelestialEnforcer,
+    _poolCertainDeath,
     _poolChandrasDefeat,
     _poolChaosTerminatorLord,
     _poolChargeOfTheMites,
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolNimReplica,
     _poolNinthBridgePatrol,
     _poolNissasZendikon,
+    _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
     _poolObscuraInterceptor,

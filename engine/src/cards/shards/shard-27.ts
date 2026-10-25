@@ -421,6 +421,7 @@ import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
 import _poolShowOfConfidence from "../pool/show-of-confidence.js";
+import _poolShredsOfSanity from "../pool/shreds-of-sanity.js";
 import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
@@ -556,6 +557,7 @@ import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
 import _poolVolcanicSalvo from "../pool/volcanic-salvo.js";
+import _poolVoraciousReader from "../pool/voracious-reader.js";
 import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
@@ -1011,6 +1013,7 @@ const shard: CardShard = {
     _poolShivanDevastator,
     _poolShivanOasis,
     _poolShowOfConfidence,
+    _poolShredsOfSanity,
     _poolSigardianSavior,
     _poolSilverShroudCostume,
     _poolSilverbackElder,
@@ -1146,6 +1149,7 @@ const shard: CardShard = {
     _poolVodalianMerchant,
     _poolVolcanicFissure,
     _poolVolcanicSalvo,
+    _poolVoraciousReader,
     _poolVoyagerGlidecar,
     _poolVraskaSchemingGorgon,
     _poolWallOfStone,

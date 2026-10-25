@@ -295,6 +295,7 @@ import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
 import _poolMadRatter from "../pool/mad-ratter.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
+import _poolMakeMischief from "../pool/make-mischief.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolMadRatter,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
+    _poolMakeMischief,
     _poolMalametBrawler,
     _poolMalametVeteran,
     _poolMaraudingBrinefang,
