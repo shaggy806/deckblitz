@@ -1393,8 +1393,11 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(student.complete).toBe(true);
     // A band's line that isn't a keyword is a person's.
     const ruled = face("Level up {1}\nLEVEL 1-3\n2/2\nWhenever this creature attacks, draw a card.\nLEVEL 4+\n3/3", "Creature — Human");
-    expect(ruled.todo).toEqual(["Whenever this creature attacks, draw a card."]);
-    expect(ruled.static).toHaveLength(2);
+    expect(ruled.todo).toEqual(["LEVEL 1-3", "2/2", "Whenever this creature attacks, draw a card."]);
+    expect(ruled.static).toHaveLength(1);
+    // A keyword line's reminder text is dropped before it's read.
+    const wave = face("Level up {2}\nLEVEL 5+\n6/6\nIslandwalk (This creature can't be blocked as long as defending player controls an Island.)", "Creature — Merfolk");
+    expect(wave.static[0]).toMatchObject({ grantKeywords: ["islandwalk"], setBasePt: { power: 6, toughness: 6 } });
     expect(face("Enchant creature\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)", "Enchantment — Aura").keywords).toEqual(["umbra-armor"]);
   });
 

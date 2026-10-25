@@ -1877,7 +1877,9 @@ export function parseFace(face, ctx = {}) {
   let level = null;
   const flushLevel = () => {
     if (level === null) return;
-    if (level.pt === null) out.todo.push(level.text[0]);
+    // A band with a line no template reads is a person's, whole: its static
+    // and that line's ability each carry the band.
+    if (level.pt === null || level.unread) out.todo.push(...level.text.map(printed));
     else out.static.push(levelStatic(levelBand(level.min, level.max), level.pt[0], level.pt[1], level.text.join("\n"), level.keywords));
     level = null;
   };
@@ -1892,9 +1894,9 @@ export function parseFace(face, ctx = {}) {
     if (level !== null) {
       level.text.push(raw);
       if (level.pt === null && (lv = /^(\d+)\/(\d+)$/.exec(raw))) { level.pt = [Number(lv[1]), Number(lv[2])]; continue; }
-      const kws = raw.split(/,\s*/).map((p) => KEYWORDS[p.toLowerCase()]);
+      const kws = printed(raw).split(/,\s*/).map((p) => KEYWORDS[p.toLowerCase()]);
       if (kws.every((k) => k !== undefined)) { level.keywords.push(...kws); continue; }
-      out.todo.push(printed(raw));
+      level.unread = true;
       continue;
     }
     if (/^\d+\+ \| /.test(raw)) inStriation = true;

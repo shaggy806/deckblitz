@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3789 already implemented / 1211 missing (marks refreshed 2026-10-25)
+3791 already implemented / 1209 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1495,7 +1495,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1502  Sneak Attack                             {3}{R}           Enchantment
 [ ]  1503  Heliod's Intervention                    {X}{W}{W}        Instant
 [x]  1504  Guide of Souls                           {W}              Creature — Human Cleric
-[ ]  1505  Snake Umbra                              {2}{G}           Enchantment — Aura
+[x]  1505  Snake Umbra                              {2}{G}           Enchantment — Aura
 [x]  1506  Meren of Clan Nel Toth                   {2}{B}{G}        Legendary Creature — Human Shaman
 [ ]  1507  Patriarch's Bidding                      {3}{B}{B}        Sorcery
 [x]  1508  Copperline Gorge                         {0}              Land
@@ -4161,7 +4161,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4168  Kopala, Warden of Waves                  {1}{U}{U}        Legendary Creature — Merfolk Wizard
 [x]  4169  Séance Board                             {2}              Artifact
 [ ]  4170  Sorin Markov                             {3}{B}{B}{B}     Legendary Planeswalker — Sorin
-[ ]  4171  Joraga Treespeaker                       {G}              Creature — Elf Druid
+[x]  4171  Joraga Treespeaker                       {G}              Creature — Elf Druid
 [x]  4172  Shoot the Sheriff                        {1}{B}           Instant
 [x]  4173  Grand Coliseum                           {0}              Land
 [x]  4174  Erebos, Bleak-Hearted                    {3}{B}           Legendary Enchantment Creature — God
