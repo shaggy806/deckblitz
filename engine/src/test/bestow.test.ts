@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  A,
   B,
   cast,
   controller,
@@ -39,6 +40,16 @@ describe("casting bestowed", () => {
     expect(game.state.objects[scarhide].attachedTo).toBe(bears);
     expect(types(game, scarhide)).toEqual(["enchantment"]);
     expect(pt(game, bears)).toEqual({ power: 4, toughness: 3 });
+  });
+
+  it("creature-only mana can't pay its bestow cost, but pays its mana cost (702.103b)", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Ancient Ziggurat", 4);
+    const scarhide = toHand(game, "Gnarled Scarhide");
+    const bestowed = { type: "cast-spell", player: A, card: scarhide, targets: [ref(bears)], overload: true } as const;
+    expect(game.canDispatch(bestowed)).not.toBeNull();
+    expect(game.canDispatch({ type: "cast-spell", player: A, card: scarhide, targets: [] })).toBeNull();
   });
 
   it("cast for its mana cost, it's the creature", () => {
