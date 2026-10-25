@@ -492,22 +492,6 @@ export const spectacle = (mana: string): NonNullable<CardDefinition["alternative
 });
 
 /**
- * Emerge [cost] (rule 702.119a): "You may cast this spell by sacrificing a
- * creature and paying the emerge cost reduced by that creature's mana
- * value" — the card's `alternativeCost`. `filter` is what "emerge from
- * [quality]" sacrifices instead (702.119b — Crabomination's artifact). Put
- * "Emerge [cost]" in `text` as well.
- */
-export const emerge = (
-  mana: string,
-  filter: CardFilter = { type: "creature" },
-): NonNullable<CardDefinition["alternativeCost"]> => ({
-  mana,
-  keyword: "emerge",
-  emerge: { filter },
-});
-
-/**
  * Melee (rule 702.121): "Whenever this creature attacks, it gets +1/+1 until
  * end of turn for each opponent you attacked with a creature this combat."
  * Each instance triggers on its own. Put "Melee" in `text` as well.

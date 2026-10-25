@@ -33,7 +33,6 @@ import {
   mentor,
   crew,
   dethrone,
-  emerge,
   evolve,
   extort,
   increment,
@@ -157,12 +156,6 @@ function keywordPart(part) {
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
   // Spectacle [cost] (rule 702.137a): an alternative cost.
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
-  // Emerge [cost] (rule 702.119a), and "emerge from artifact" (702.119b):
-  // an alternative cost sacrificing a creature or artifact.
-  if ((m = new RegExp(`^emerge ${COST}$`, "i").exec(p))) return { card: { alternativeCost: emerge(m[1]) } };
-  if ((m = new RegExp(`^emerge from artifact ${COST}$`, "i").exec(p))) {
-    return { card: { alternativeCost: emerge(m[1], { type: "artifact" }) } };
-  }
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };

@@ -1167,10 +1167,6 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       condition: { kind: "turn-stat", stat: "life-lost", who: "opponent", atLeast: 1 },
     });
     expect(demon.triggered[0].condition).toEqual({ kind: "self-spectacle-paid" });
-    const fiend = face("Flash\nEmerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)", "Creature — Eldrazi Octopus");
-    expect(fiend.alternativeCost).toEqual({ mana: "{5}{U}{U}", keyword: "emerge", emerge: { filter: { type: "creature" } } });
-    const crab = face("Emerge from artifact {5}{B}{B} (You may cast this spell by sacrificing an artifact and paying the emerge cost reduced by that artifact's mana value.)", "Creature — Eldrazi Crab");
-    expect(crab.alternativeCost).toEqual({ mana: "{5}{B}{B}", keyword: "emerge", emerge: { filter: { type: "artifact" } } });
     const eel = face("{2}{U}: Adapt 2.", "Creature — Fish");
     expect(eel.activated[0].effect).toEqual({
       kind: "conditional",

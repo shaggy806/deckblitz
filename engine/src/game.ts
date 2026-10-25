@@ -2839,8 +2839,6 @@ export class Game {
       kickCount?: number;
       /** A harmonize variant's creature to tap (rule 702.180a). */
       harmonizeTap?: ObjectId;
-      /** An emerge variant's permanent to sacrifice (rule 702.119a). */
-      emergeSacrifice?: ObjectId;
     }[] = [{ kicked: false, overload: false, free: false }];
     // Multikicker (rule 702.33c — Everflowing Chalice): one variant per
     // number of times, up to as many as the player's mana could pay for at
@@ -2964,19 +2962,7 @@ export class Game {
         variants.push(v, ...creatures.map((harmonizeTap) => ({ ...v, harmonizeTap })));
       }
     }
-    // Emerge (rule 702.119a): the permanent sacrificed is chosen with the
-    // cost (702.119c), so each one is its own variant, priced with its mana
-    // value off.
-    const emergeFilter = this.emergeSacrificeFilter(def, true);
-    if (emergeFilter !== undefined) {
-      const victims = this.eligibleSacrifices(player, emergeFilter, card);
-      const emerging = variants.filter((v) => v.altCost === true);
-      const others = variants.filter((v) => v.altCost !== true);
-      variants.length = 0;
-      variants.push(...others);
-      for (const v of emerging) variants.push(...victims.map((emergeSacrifice) => ({ ...v, emergeSacrifice })));
-    }
-    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, costOption, prototype, offspring, evoke, harmonizeTap, emergeSacrifice } of variants) {
+    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, costOption, prototype, offspring, evoke, harmonizeTap } of variants) {
       // A multikicker variant passes its count where `kicked` goes.
       const kicked: boolean | number = kickCount ?? kickedFlag;
       const kickKey = `${free}|${altCost}|${costOption}|${prototype}|${offspring}|${evoke}`;
@@ -2987,8 +2973,6 @@ export class Game {
       const undoPrototype = prototype === true ? this.applyPrototype(card) : () => {};
       // A harmonize variant is priced, X and all, with its creature's power off.
       const undoHarmonize = via === "harmonize" ? this.enterHarmonizeTap(harmonizeTap) : () => {};
-      // An emerge variant is priced with its sacrifice's mana value off.
-      const undoEmerge = emergeSacrifice !== undefined ? this.enterEmergeReduction(card, emergeSacrifice) : () => {};
       // A kicked variant's own reduction (a bargained Ice Out's {1}).
       const undoKickedReduction = this.enterKickedReduction(card, def, kicked);
       try {
@@ -3301,15 +3285,12 @@ export class Game {
               : paidBase;
       // An additional "waterbend {X}" makes it an {X} spell (rule 701.67a).
       const cost = costBeforeWaterbend === null ? null : costBeforeWaterbend + Game.waterbendCostString(def);
-      const sacrifices =
-        emergeSacrifice !== undefined
-          ? [emergeSacrifice]
-          : this.additionalCostSacrifices(
-              player,
-              def,
-              costOption,
-              this.graveyardPermissionSacrifice(player, card, face ?? 0, via, graveyardGrant),
-            );
+      const sacrifices = this.additionalCostSacrifices(
+        player,
+        def,
+        costOption,
+        this.graveyardPermissionSacrifice(player, card, face ?? 0, via, graveyardGrant),
+      );
       const xPlan =
         parseManaCost(cost).x > 0 ? this.xPlanFor(player, card, def, cost, face ?? 0, pricedAt) : null;
       // "Sacrifice X creatures" (Eliminate the Competition): an X the mana
@@ -3408,12 +3389,6 @@ export class Game {
                 `exile ${def.alternativeCost.exileFromHand.text} from your hand`,
               ].join(", "),
             }
-          : altCost === true && emergeSacrifice !== undefined && def.alternativeCost !== null
-            ? {
-                altCostText: `emerge ${def.alternativeCost.mana}, sacrificing ${printedCardName(
-                  this.state.objects[emergeSacrifice],
-                )} (−${this.emergeReduction?.generic ?? 0})`,
-              }
           : altCost === true && def.alternativeCost?.keyword !== undefined
             ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
             : {}),
@@ -3643,7 +3618,6 @@ export class Game {
       } finally {
         undoPrototype();
         undoHarmonize();
-        undoEmerge();
         undoKickedReduction();
         if (kickCount !== undefined && out.length === offeredBefore) kickFailed.add(kickKey);
       }
@@ -9550,9 +9524,7 @@ export class Game {
     let reduction =
       mods.reduceGeneric +
       this.harmonizePower +
-      (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0) +
-      // Emerge's sacrifice (rule 702.119a), likewise probed.
-      (this.emergeReduction?.card === cardId ? this.emergeReduction.generic : 0);
+      (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
     if (
       def.selfCostReduction !== null &&
       staticConditionMet(this.state, this.registry, this.state.objects[cardId], def.selfCostReduction.condition)
@@ -10754,20 +10726,6 @@ export class Game {
         restore();
       }
     }
-    // Emerge (rule 702.119a): priced with the sacrifice's mana value off.
-    const emergeVictim = this.state.objects[cardId] === undefined
-      ? undefined
-      : this.emergeVictimToPrice(player, cardId, this.faceDef(cardId, face), altCost, sacrifice);
-    if (emergeVictim !== undefined) {
-      const restore = this.enterEmergeReduction(cardId, emergeVictim);
-      try {
-        return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve,
-          targets);
-      } finally {
-        restore();
-      }
-    }
     // Cast because a resolving spell or ability says so: no priority needed,
     // but only the card it offered, by the player it offered it to.
     const offered = via === "effect" ? this.castNowOffer(player, cardId) : null;
@@ -11186,9 +11144,7 @@ export class Game {
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once
     // the driver has named one — that permanent must actually qualify.
-    const permissionSacrifice =
-      this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant) ??
-      this.emergeSacrificeFilter(def, altCost);
+    const permissionSacrifice = this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant);
     if (permissionSacrifice !== undefined) {
       const candidates = this.additionalCostSacrifices(player, def, costOption, permissionSacrifice);
       if (candidates.length === 0) return `${player} has nothing to sacrifice to cast ${def.name} this way`;
@@ -11812,48 +11768,6 @@ export class Game {
     const have = this.kickedCostReduction?.card === card ? this.kickedCostReduction.generic : 0;
     return want !== have;
   }
-  /**
-   * The generic mana an emerge cast's sacrifice takes off its total cost —
-   * that permanent's mana value (rule 702.119a) — while that cast is priced,
-   * checked or paid; `castingCostOf` subtracts it from that card's total
-   * cost after increases (601.2f). `null` otherwise.
-   */
-  private emergeReduction: { readonly card: ObjectId; readonly victim: ObjectId; readonly generic: number } | null = null;
-  /** Price whatever runs next for `card` as emerged by sacrificing `victim`
-   * — see {@link emergeReduction}. Returns the restore. */
-  private enterEmergeReduction(card: ObjectId, victim: ObjectId): () => void {
-    const before = this.emergeReduction;
-    const object = this.state.objects[victim];
-    this.emergeReduction =
-      object === undefined ? null : { card, victim, generic: manaValueOfObject(this.registry, object) };
-    return () => {
-      this.emergeReduction = before;
-    };
-  }
-  /** What an emerge cast of `def` sacrifices (rule 702.119a, b), when it's
-   * cast for its alternative cost (`altCost`) and that cost is emerge. */
-  private emergeSacrificeFilter(def: CardDefinition, altCost: boolean): CardFilter | undefined {
-    return altCost && def.alternativeCost?.keyword === "emerge" ? def.alternativeCost.emerge?.filter : undefined;
-  }
-  /** The permanent an emerge cast of `cardId` sacrifices when {@link
-   * emergeReduction} isn't already pricing it for that one: the one named,
-   * or the first that could be — `undefined` when it already is, or when
-   * this cast doesn't emerge. */
-  private emergeVictimToPrice(
-    player: PlayerId,
-    cardId: ObjectId,
-    def: CardDefinition,
-    altCost: boolean,
-    sacrifice: ObjectId | undefined,
-  ): ObjectId | undefined {
-    const filter = this.emergeSacrificeFilter(def, altCost);
-    if (filter === undefined) return undefined;
-    const probe = this.emergeReduction;
-    if (probe !== null && probe.card === cardId && (sacrifice === undefined || probe.victim === sacrifice)) {
-      return undefined;
-    }
-    return sacrifice ?? this.eligibleSacrifices(player, filter, cardId)[0];
-  }
   /** Set while {@link withHarmonizeTap} is pricing a harmonize cast, so the
    * casting check and the cast don't re-enter it. */
   private harmonizeProbed = false;
@@ -12154,20 +12068,6 @@ export class Game {
       );
       return;
     }
-    // Emerge (rule 702.119a): likewise, with the sacrifice's mana value off.
-    const emergeVictim = this.state.objects[cardId] === undefined
-      ? undefined
-      : this.emergeVictimToPrice(player, cardId, this.faceDef(cardId, face), altCost, sacrifice);
-    if (emergeVictim !== undefined) {
-      const restore = this.enterEmergeReduction(cardId, emergeVictim);
-      try {
-        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, emergeVictim, overload, free,
-          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve);
-      } finally {
-        restore();
-      }
-      return;
-    }
     if (prototype && !this.prototypeApplied(cardId)) {
       if (this.faceDef(cardId, face).prototype === null) throw new Error(`${this.faceDef(cardId, face).name} has no prototype`);
       this.withPrototype(cardId, () =>
@@ -12283,8 +12183,7 @@ export class Game {
       player,
       def,
       costOption,
-      this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant) ??
-        this.emergeSacrificeFilter(def, altCost),
+      this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant),
     );
     const sacrificeVictim =
       sacrificeCandidates.length === 0 ? undefined : (sacrifice ?? sacrificeCandidates[0]);
