@@ -564,6 +564,7 @@ import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
 import _poolTrainTroops from "../pool/train-troops.js";
+import _poolTranscendentMaster from "../pool/transcendent-master.js";
 import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
@@ -1203,6 +1204,7 @@ const shard: CardShard = {
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,
     _poolTrainTroops,
+    _poolTranscendentMaster,
     _poolTraumaticRevelation,
     _poolTravelersAmulet,
     _poolTreeguardDuo,

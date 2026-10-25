@@ -55,6 +55,7 @@ import _poolBarkhideMauler from "../pool/barkhide-mauler.js";
 import _poolBaruWurmspeaker from "../pool/baru-wurmspeaker.js";
 import _poolBatheInDragonfire from "../pool/bathe-in-dragonfire.js";
 import _poolBearCub from "../pool/bear-cub.js";
+import _poolBeastbreakerOfBalaGed from "../pool/beastbreaker-of-bala-ged.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
 import _poolBedeck from "../pool/bedeck.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
@@ -265,6 +266,7 @@ import _poolHorriblyAwry from "../pool/horribly-awry.js";
 import _poolHoundOfTheFarbogs from "../pool/hound-of-the-farbogs.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
+import _poolHyenaUmbra from "../pool/hyena-umbra.js";
 import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
 import _poolIceStorm from "../pool/ice-storm.js";
 import _poolIcequake from "../pool/icequake.js";
@@ -705,6 +707,7 @@ const shard: CardShard = {
     _poolBaruWurmspeaker,
     _poolBatheInDragonfire,
     _poolBearCub,
+    _poolBeastbreakerOfBalaGed,
     _poolBecomeBrutes,
     _poolBedeck,
     _poolBewilderingBlizzard,
@@ -915,6 +918,7 @@ const shard: CardShard = {
     _poolHoundOfTheFarbogs,
     _poolHowlingBanshee,
     _poolHyenaPack,
+    _poolHyenaUmbra,
     _poolIcatianLieutenant,
     _poolIceStorm,
     _poolIcequake,

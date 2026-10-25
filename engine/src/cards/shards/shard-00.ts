@@ -55,6 +55,7 @@ import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
+import _poolBoarUmbra from "../pool/boar-umbra.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
 import _poolBrainInAJar from "../pool/brain-in-a-jar.js";
@@ -696,6 +697,7 @@ const shard: CardShard = {
     _poolBloodcrazedNeonate,
     _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
+    _poolBoarUmbra,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
     _poolBrainInAJar,

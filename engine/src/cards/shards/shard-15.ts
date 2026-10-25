@@ -64,6 +64,7 @@ import _poolCanoptekSpyder from "../pool/canoptek-spyder.js";
 import _poolCanopyBaloth from "../pool/canopy-baloth.js";
 import _poolCanyonSlough from "../pool/canyon-slough.js";
 import _poolCapashenKnight from "../pool/capashen-knight.js";
+import _poolCaravanEscort from "../pool/caravan-escort.js";
 import _poolCarnassid from "../pool/carnassid.js";
 import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
@@ -132,6 +133,7 @@ import _poolDoranBesiegedByTime from "../pool/doran-besieged-by-time.js";
 import _poolDragToTheUnderworld from "../pool/drag-to-the-underworld.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
+import _poolDrakeUmbra from "../pool/drake-umbra.js";
 import _poolDrannithStinger from "../pool/drannith-stinger.js";
 import _poolDrawnFromDreams from "../pool/drawn-from-dreams.js";
 import _poolDreamstoneHedron from "../pool/dreamstone-hedron.js";
@@ -669,6 +671,7 @@ const shard: CardShard = {
     _poolCanopyBaloth,
     _poolCanyonSlough,
     _poolCapashenKnight,
+    _poolCaravanEscort,
     _poolCarnassid,
     _poolCarrionScreecher,
     _poolCarrionWall,
@@ -737,6 +740,7 @@ const shard: CardShard = {
     _poolDragToTheUnderworld,
     _poolDragonTrainer,
     _poolDragonmasterOutcast,
+    _poolDrakeUmbra,
     _poolDrannithStinger,
     _poolDrawnFromDreams,
     _poolDreamstoneHedron,

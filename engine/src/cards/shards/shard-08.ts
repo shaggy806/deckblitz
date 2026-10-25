@@ -166,6 +166,7 @@ import _poolDusk from "../pool/dusk.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
 import _poolEgoDrain from "../pool/ego-drain.js";
+import _poolElandUmbra from "../pool/eland-umbra.js";
 import _poolElderDeepFiend from "../pool/elder-deep-fiend.js";
 import _poolElderSpawn from "../pool/elder-spawn.js";
 import _poolElderleafMentor from "../pool/elderleaf-mentor.js";
@@ -660,6 +661,7 @@ import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
 import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.js";
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
+import _tokensMaskToken from "../tokens/mask-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
@@ -833,6 +835,7 @@ const shard: CardShard = {
     _poolDwarvenProvisioner,
     _poolEclipsedKithkin,
     _poolEgoDrain,
+    _poolElandUmbra,
     _poolElderDeepFiend,
     _poolElderSpawn,
     _poolElderleafMentor,
@@ -1329,6 +1332,7 @@ const shard: CardShard = {
     _tokensJellyfishToken,
     _tokensKnightTokenGuardedHeir,
     _tokensLeviathanToken,
+    _tokensMaskToken,
     _tokensOtterToken,
     _tokensTheBlackjack,
     _tokensThopterToken,

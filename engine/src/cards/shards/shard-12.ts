@@ -163,6 +163,7 @@ import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
 import _poolEarthTremor from "../pool/earth-tremor.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
 import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
+import _poolEelUmbra from "../pool/eel-umbra.js";
 import _poolEffortlessMaster from "../pool/effortless-master.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
@@ -795,6 +796,7 @@ const shard: CardShard = {
     _poolEarthTremor,
     _poolEarthshakingSi,
     _poolEdeaPossessedSorceress,
+    _poolEelUmbra,
     _poolEffortlessMaster,
     _poolEladamrisCall,
     _poolElectrify,

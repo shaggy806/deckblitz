@@ -288,6 +288,7 @@ import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKitsuneAce from "../pool/kitsune-ace.js";
+import _poolKnightOfCliffhaven from "../pool/knight-of-cliffhaven.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKoboldOverlord from "../pool/kobold-overlord.js";
 import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
@@ -505,6 +506,7 @@ import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
 import _poolSpectacleMage from "../pool/spectacle-mage.js";
 import _poolSpectacularPileup from "../pool/spectacular-pileup.js";
 import _poolSpiderManBrooklynVisionary from "../pool/spider-man-brooklyn-visionary.js";
+import _poolSpiderUmbra from "../pool/spider-umbra.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
@@ -919,6 +921,7 @@ const shard: CardShard = {
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
     _poolKitsuneAce,
+    _poolKnightOfCliffhaven,
     _poolKnightOfNewBenalia,
     _poolKoboldOverlord,
     _poolKraulWhipcracker,
@@ -1136,6 +1139,7 @@ const shard: CardShard = {
     _poolSpectacleMage,
     _poolSpectacularPileup,
     _poolSpiderManBrooklynVisionary,
+    _poolSpiderUmbra,
     _poolSpineOfIshSah,
     _poolSpinedBasher,
     _poolSpireOfIndustry,

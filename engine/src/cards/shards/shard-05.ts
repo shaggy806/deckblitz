@@ -382,6 +382,7 @@ import _poolNetworkDisruptor from "../pool/network-disruptor.js";
 import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
+import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolNiblisOfFrost,
     _poolNicoMinoruRunaway,
     _poolNightbladeBrigade,
+    _poolNirkanaCutthroat,
     _poolNobleHierarch,
     _poolNorinTheWary,
     _poolNoviceOccultist,

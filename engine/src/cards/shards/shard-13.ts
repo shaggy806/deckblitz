@@ -255,6 +255,7 @@ import _poolHuntingPack from "../pool/hunting-pack.js";
 import _poolHydrolash from "../pool/hydrolash.js";
 import _poolIcefeatherAven from "../pool/icefeather-aven.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
+import _poolIkiralOutrider from "../pool/ikiral-outrider.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
 import _poolImpactTremors from "../pool/impact-tremors.js";
 import _poolImperialSeal from "../pool/imperial-seal.js";
@@ -627,6 +628,7 @@ import _tokensDinosaurToken11Haste from "../tokens/dinosaur-token-1-1-haste.js";
 import _tokensEldraziHorrorToken from "../tokens/eldrazi-horror-token.js";
 import _tokensFeatherToken from "../tokens/feather-token.js";
 import _tokensGolemTrampleToken from "../tokens/golem-trample-token.js";
+import _tokensHellionToken from "../tokens/hellion-token.js";
 import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
 import _tokensMonkTokenCrescentIslandTemple from "../tokens/monk-token-crescent-island-temple.js";
@@ -890,6 +892,7 @@ const shard: CardShard = {
     _poolHydrolash,
     _poolIcefeatherAven,
     _poolIchorclawMyr,
+    _poolIkiralOutrider,
     _poolIlluminatedWings,
     _poolImpactTremors,
     _poolImperialSeal,
@@ -1264,6 +1267,7 @@ const shard: CardShard = {
     _tokensEldraziHorrorToken,
     _tokensFeatherToken,
     _tokensGolemTrampleToken,
+    _tokensHellionToken,
     _tokensHumanWarriorToken,
     _tokensMerfolkTokenSilvergillMentor,
     _tokensMonkTokenCrescentIslandTemple,

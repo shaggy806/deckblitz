@@ -295,6 +295,7 @@ import _poolMachinesmithAutomaton from "../pool/machinesmith-automaton.js";
 import _poolMahadiEmporiumMaster from "../pool/mahadi-emporium-master.js";
 import _poolMakindiMesas from "../pool/makindi-mesas.js";
 import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
+import _poolMammothUmbra from "../pool/mammoth-umbra.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
 import _poolMarduBlazebringer from "../pool/mardu-blazebringer.js";
@@ -879,6 +880,7 @@ const shard: CardShard = {
     _poolMahadiEmporiumMaster,
     _poolMakindiMesas,
     _poolMalevolentAwakening,
+    _poolMammothUmbra,
     _poolMandibularKite,
     _poolMapTheFrontier,
     _poolMarduBlazebringer,
