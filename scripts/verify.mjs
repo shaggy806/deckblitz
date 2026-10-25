@@ -8,8 +8,8 @@
 //      everything below (they need only the build): the fuzzer at 2 and 4
 //      players, the fuzzer with every card this change adds (or `--with`
 //      names) forced in — each 4-player run as two processes over halves of
-//      its seeds — and the bot gate (on 4 cores or fewer, after the engine
-//      suite instead, each 4-player run one process)
+//      its seeds — and the bot gate (on 4 cores or fewer, after the test
+//      suites instead, each 4-player run one process)
 //   3. the backlog lists re-marked against the build and any sample-deck
 //      stand-in for a card now in the pool dropped
 //   4. typecheck (the engine's tests included — vitest never type-checks a
@@ -176,8 +176,9 @@ const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
 const late = [];
 // A small machine (a 4-core cloud session) can't hold the engine suite's
 // workers beside five fuzz and gate processes: the suite was killed for memory
-// there (2026-10-25). Its background runs wait for the engine suite instead,
-// and a 4-player run stays one process.
+// there (2026-10-25), and the server suite's timed tests timed out beside
+// them. The background runs wait for the three suites instead, and a
+// 4-player run stays one process.
 const CORES = os.availableParallelism();
 const SMALL = CORES <= 4;
 let startLate = () => {};
@@ -250,13 +251,13 @@ await stopOnFailure(
 const engineTests = await run("engine tests", "npx", ["vitest", "run", `--maxWorkers=${Math.min(8, CORES)}`], ENGINE);
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
-startLate();
 const others = await Promise.all([
   ...(skip.has("server") ? [] : [run("server tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "server"))]),
   ...(skip.has("client") ? [] : [run("client tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "client"))]),
 ]);
 for (const r of others) report(r, grab(r.out, /^\s*Tests\s/));
 if (others.some((r) => !r.ok)) stop();
+startLate();
 
 if (!skip.has("cardverify")) {
   const r = await run("card:verify", "node", ["scripts/verify-cards.mjs", "--offline"], ENGINE);
