@@ -55,6 +55,7 @@ import _poolBladedAmbassador from "../pool/bladed-ambassador.js";
 import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
 import _poolBlessing from "../pool/blessing.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
+import _poolBlindingLight from "../pool/blinding-light.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
 import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
@@ -643,6 +644,7 @@ import _poolWashAway from "../pool/wash-away.js";
 import _poolWatchfulNaga from "../pool/watchful-naga.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
+import _poolWellspring from "../pool/wellspring.js";
 import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
@@ -744,6 +746,7 @@ const shard: CardShard = {
     _poolBlessedGhoul,
     _poolBlessing,
     _poolBlindPhantasm,
+    _poolBlindingLight,
     _poolBloodfellCaves,
     _poolBloodthirstyAerialist,
     _poolBlossomCladWerewolf,
@@ -1332,6 +1335,7 @@ const shard: CardShard = {
     _poolWatchfulNaga,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
+    _poolWellspring,
     _poolWerewolfOfAncientHunger,
     _poolWhenWeWereYoung,
     _poolWhiplashWordsmith,

@@ -254,6 +254,7 @@ import _poolGoblinBerserker from "../pool/goblin-berserker.js";
 import _poolGoblinBombardment from "../pool/goblin-bombardment.js";
 import _poolGoblinGlasswright from "../pool/goblin-glasswright.js";
 import _poolGoblinSkiPatrol from "../pool/goblin-ski-patrol.js";
+import _poolGoblinSoothsayer from "../pool/goblin-soothsayer.js";
 import _poolGodlessShrine from "../pool/godless-shrine.js";
 import _poolGoldenglowMoth from "../pool/goldenglow-moth.js";
 import _poolGolgariGermination from "../pool/golgari-germination.js";
@@ -654,6 +655,7 @@ import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
+import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
 import _poolZedruuTheGreathearted from "../pool/zedruu-the-greathearted.js";
 import _poolZulaportChainmage from "../pool/zulaport-chainmage.js";
 import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
@@ -932,6 +934,7 @@ const shard: CardShard = {
     _poolGoblinBombardment,
     _poolGoblinGlasswright,
     _poolGoblinSkiPatrol,
+    _poolGoblinSoothsayer,
     _poolGodlessShrine,
     _poolGoldenglowMoth,
     _poolGolgariGermination,
@@ -1332,6 +1335,7 @@ const shard: CardShard = {
     _poolWreckRemover,
     _poolYavimayaSapherd,
     _poolYusriFortunesFlame,
+    _poolZebraUnicorn,
     _poolZedruuTheGreathearted,
     _poolZulaportChainmage,
     _poolZurTheEnchanter,

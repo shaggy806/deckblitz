@@ -21,6 +21,7 @@ import _poolAjanisResponse from "../pool/ajanis-response.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
 import _poolAlabasterHostIntercessor from "../pool/alabaster-host-intercessor.js";
 import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
+import _poolAlarum from "../pool/alarum.js";
 import _poolAlchemistsAssistant from "../pool/alchemists-assistant.js";
 import _poolAltarsLight from "../pool/altars-light.js";
 import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
@@ -674,6 +675,7 @@ const shard: CardShard = {
     _poolAkroanMastiff,
     _poolAlabasterHostIntercessor,
     _poolAlandraSkyDreamer,
+    _poolAlarum,
     _poolAlchemistsAssistant,
     _poolAltarsLight,
     _poolAminatouTheFateshifter,

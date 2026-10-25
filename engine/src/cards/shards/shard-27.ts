@@ -408,6 +408,7 @@ import _poolRampagingRendhorn from "../pool/rampaging-rendhorn.js";
 import _poolRangersHawk from "../pool/rangers-hawk.js";
 import _poolRavenousGiant from "../pool/ravenous-giant.js";
 import _poolRazorgrassField from "../pool/razorgrass-field.js";
+import _poolRealityRipple from "../pool/reality-ripple.js";
 import _poolRecover from "../pool/recover.js";
 import _poolRediscoverTheWay from "../pool/rediscover-the-way.js";
 import _poolRedrockSentinel from "../pool/redrock-sentinel.js";
@@ -1053,6 +1054,7 @@ const shard: CardShard = {
     _poolRangersHawk,
     _poolRavenousGiant,
     _poolRazorgrassField,
+    _poolRealityRipple,
     _poolRecover,
     _poolRediscoverTheWay,
     _poolRedrockSentinel,

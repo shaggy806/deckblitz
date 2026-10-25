@@ -409,6 +409,7 @@ import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
+import _poolPrismaticLace from "../pool/prismatic-lace.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
 import _poolProfessorOfSymbology from "../pool/professor-of-symbology.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
@@ -541,6 +542,7 @@ import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTanglesap from "../pool/tanglesap.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
+import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
@@ -627,6 +629,7 @@ import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
 import _poolZombieOgre from "../pool/zombie-ogre.js";
+import _poolZuberiGoldenFeather from "../pool/zuberi-golden-feather.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
 import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
@@ -1044,6 +1047,7 @@ const shard: CardShard = {
     _poolPressTheAdvantage,
     _poolPrimaryResearch,
     _poolPrimordialSage,
+    _poolPrismaticLace,
     _poolPrizedGriffin,
     _poolProfessorOfSymbology,
     _poolPsychicCorrosion,
@@ -1176,6 +1180,7 @@ const shard: CardShard = {
     _poolTangle,
     _poolTanglesap,
     _poolTauntingKobold,
+    _poolTeekasDragon,
     _poolTeferiMasterOfTime,
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
@@ -1262,6 +1267,7 @@ const shard: CardShard = {
     _poolZephidsEmbrace,
     _poolZiatorasEnvoy,
     _poolZombieOgre,
+    _poolZuberiGoldenFeather,
   ],
   tokens: [
     _tokens22RedDwarfToken,

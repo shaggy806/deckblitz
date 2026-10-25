@@ -40,6 +40,10 @@ describe("art pins", () => {
 // name): nothing to pin, so they draw as a text panel.
 const NO_TOKEN_PRINTING = new Set([
   "Banana Token",
+  // Goblin Scouts (MIR) never had a token printing.
+  "Goblin Scout Token",
+  // Carrion (MIR)'s 0/1 black Insects were never printed as a token.
+  "Insect Token (Black, 0/1)",
   "Jellyfish Token",
   "Jumblebones",
   "Nymph Token",

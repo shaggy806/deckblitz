@@ -10352,6 +10352,51 @@
   "amount:power-before-move": {
    "example": "Dead Reckoning: \"damage equal to that card's power\" after it's put on top of the library — the ruling reads the power it had in the graveyard (Tarmogoyf, Lord of Extinction); powerOf reads it after the move. Lie in Wait shares the gap."
   },
+  "replacement:draw-replacement-return-from-graveyard-or-lose": {
+   "example": "Forbidden Crypt: \"if you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game\"."
+  },
+  "effect:life-bidding": {
+   "example": "Illicit Auction: each player may bid life in turn order for control of target creature."
+  },
+  "cost:life-per-target": {
+   "example": "Phyrexian Purge: \"as an additional cost, pay 3 life for each target\"."
+  },
+  "cost:exile-card-from-hand": {
+   "example": "Cadaverous Bloom: \"Exile a card from your hand: Add {B}{B} or {G}{G}\" — an activated ability cost exiling a card from hand."
+  },
+  "static:spells-targeting-this-spell-cost-more": {
+   "example": "Kaervek's Torch: while it's on the stack, spells that target it cost {2} more — a static working from the stack."
+  },
+  "effect:if-sacrificed-token-for-sacrificer": {
+   "example": "Basalt Golem: the blocking creature's controller sacrifices it at end of combat, and if they do, they create a 0/2 Wall artifact token."
+  },
+  "static:spend-mana-only-as-colorless": {
+   "example": "Celestial Dawn: \"you may spend white mana as though it were mana of any color; you may spend other mana only as though it were colorless\"."
+  },
+  "static:color-cards-outside-battlefield": {
+   "example": "Celestial Dawn: spells and nonland cards you own that aren't on the battlefield are white."
+  },
+  "effect:cant-phase-out": {
+   "example": "Spatial Binding: \"target permanent can't phase out until the beginning of your next upkeep\"."
+  },
+  "replacement:damage-multiplier-this-turn": {
+   "example": "Blind Fury: \"if a creature would deal combat damage to a creature this turn, it deals double that damage instead\" — a one-shot, this-turn doubling."
+  },
+  "condition:each-player-may-asked-player-controls": {
+   "example": "Natural Balance: inside each-player-may, \"each player who controls four or fewer lands may search\" — the `controls` condition reads the caster, not the player asked."
+  },
+  "effect:top-creature-card-of-graveyard": {
+   "example": "Shallow Grave: \"return the top creature card of your graveyard to the battlefield\" — needs graveyard order."
+  },
+  "mechanic:face-down-pile": {
+   "example": "Mangara's Tome: search your library for five cards and exile them in a face-down pile."
+  },
+  "replacement:next-draw-from-exiled-pile": {
+   "example": "Mangara's Tome: \"the next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand\"."
+  },
+  "cost:x-spend-only-color": {
+   "example": "Crimson Hellkite: \"{X}, {T}: … Spend only red mana on X\" in an activated ability."
+  },
   "replacement:double-damage-from-your-sources-this-turn": {
    "example": "Quest for Pure Flame: \"If a source you control would deal damage to a permanent or player this turn, it deals double that damage instead\" — player-effect's damageTo doubles damage from every source, not only yours."
   },

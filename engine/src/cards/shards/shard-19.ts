@@ -97,8 +97,10 @@ import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandraAblaze from "../pool/chandra-ablaze.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
+import _poolChaosphere from "../pool/chaosphere.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
 import _poolCharringBite from "../pool/charring-bite.js";
+import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolClawsOut from "../pool/claws-out.js";
@@ -445,6 +447,7 @@ import _poolPlummet from "../pool/plummet.js";
 import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
 import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolarKraken from "../pool/polar-kraken.js";
+import _poolPolymorph from "../pool/polymorph.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
 import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
@@ -539,6 +542,7 @@ import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
+import _poolSpittingEarth from "../pool/spitting-earth.js";
 import _poolSporebackWolf from "../pool/sporeback-wolf.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
@@ -767,8 +771,10 @@ const shard: CardShard = {
     _poolChandraAblaze,
     _poolChandrasIgnition,
     _poolChangelingSentinel,
+    _poolChaosphere,
     _poolChargingMonstrosaur,
     _poolCharringBite,
+    _poolChokingSands,
     _poolChromeHostHulk,
     _poolChromeMox,
     _poolClawsOut,
@@ -1115,6 +1121,7 @@ const shard: CardShard = {
     _poolPoeticIngenuity,
     _poolPoisonersApprentice,
     _poolPolarKraken,
+    _poolPolymorph,
     _poolPolyraptor,
     _poolPrideOfConquerors,
     _poolPrizedStatue,
@@ -1209,6 +1216,7 @@ const shard: CardShard = {
     _poolSpaceMarineScout,
     _poolSpellPierce,
     _poolSpiderWomanStunningSavior,
+    _poolSpittingEarth,
     _poolSporebackWolf,
     _poolSquirmingEmergence,
     _poolSramSeniorEdificer,

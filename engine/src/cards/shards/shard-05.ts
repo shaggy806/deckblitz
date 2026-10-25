@@ -180,6 +180,7 @@ import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
 import _poolDwarvenSong from "../pool/dwarven-song.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
+import _poolEarlyHarvest from "../pool/early-harvest.js";
 import _poolEasyPickings from "../pool/easy-pickings.js";
 import _poolEchoStorm from "../pool/echo-storm.js";
 import _poolElegantEntourage from "../pool/elegant-entourage.js";
@@ -531,6 +532,7 @@ import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
 import _poolSuddenEdict from "../pool/sudden-edict.js";
 import _poolSugarRush from "../pool/sugar-rush.js";
 import _poolSunscorchedDesert from "../pool/sunscorched-desert.js";
+import _poolSunweb from "../pool/sunweb.js";
 import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
@@ -831,6 +833,7 @@ const shard: CardShard = {
     _poolDwarvenLieutenant,
     _poolDwarvenSong,
     _poolDwynenGiltLeafDaen,
+    _poolEarlyHarvest,
     _poolEasyPickings,
     _poolEchoStorm,
     _poolElegantEntourage,
@@ -1182,6 +1185,7 @@ const shard: CardShard = {
     _poolSuddenEdict,
     _poolSugarRush,
     _poolSunscorchedDesert,
+    _poolSunweb,
     _poolSuperStrength,
     _poolSupplyRunners,
     _poolSupremeVerdict,

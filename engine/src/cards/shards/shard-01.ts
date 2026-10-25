@@ -421,6 +421,7 @@ import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRegentsAuthority from "../pool/regents-authority.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
+import _poolReparations from "../pool/reparations.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
 import _poolRescueSkiff from "../pool/rescue-skiff.js";
@@ -1055,6 +1056,7 @@ const shard: CardShard = {
     _poolRedwoodTreefolk,
     _poolRegentsAuthority,
     _poolRemnantElemental,
+    _poolReparations,
     _poolRepercussion,
     _poolRepulse,
     _poolRescueSkiff,

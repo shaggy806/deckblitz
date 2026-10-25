@@ -1,0 +1,785 @@
+{
+  "batch": "B166",
+  "status": "complete",
+  "ranks": "Mirage (MIR, 1996-10-08): first half — its 110 most-played cards left (oldest-first walk)",
+  "authored": [
+    {
+      "name": "Abyssal Hunter",
+      "files": [
+        "engine/src/cards/pool/abyssal-hunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Afiya Grove",
+      "files": [
+        "engine/src/cards/pool/afiya-grove.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Afterlife",
+      "files": [
+        "engine/src/cards/pool/afterlife.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Agility",
+      "files": [
+        "engine/src/cards/pool/agility.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alarum",
+      "files": [
+        "engine/src/cards/pool/alarum.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aleatory",
+      "files": [
+        "engine/src/cards/pool/aleatory.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Amber Prison",
+      "files": [
+        "engine/src/cards/pool/amber-prison.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ancestral Memories",
+      "files": [
+        "engine/src/cards/pool/ancestral-memories.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ashen Powder",
+      "files": [
+        "engine/src/cards/pool/ashen-powder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Asmira, Holy Avenger",
+      "files": [
+        "engine/src/cards/pool/asmira-holy-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Benevolent Unicorn",
+      "files": [
+        "engine/src/cards/pool/benevolent-unicorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Binding Agony",
+      "files": [
+        "engine/src/cards/pool/binding-agony.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blinding Light",
+      "files": [
+        "engine/src/cards/pool/blinding-light.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bone Harvest",
+      "files": [
+        "engine/src/cards/pool/bone-harvest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Builder's Bane",
+      "files": [
+        "engine/src/cards/pool/builders-bane.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carrion",
+      "files": [
+        "engine/src/cards/pool/carrion.ts",
+        "engine/src/cards/tokens/insect-token-black-0-1.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chaos Charm",
+      "files": [
+        "engine/src/cards/pool/chaos-charm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chaosphere",
+      "files": [
+        "engine/src/cards/pool/chaosphere.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Choking Sands",
+      "files": [
+        "engine/src/cards/pool/choking-sands.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Circle of Despair",
+      "files": [
+        "engine/src/cards/pool/circle-of-despair.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cloak of Invisibility",
+      "files": [
+        "engine/src/cards/pool/cloak-of-invisibility.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dream Cache",
+      "files": [
+        "engine/src/cards/pool/dream-cache.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Early Harvest",
+      "files": [
+        "engine/src/cards/pool/early-harvest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Floodgate",
+      "files": [
+        "engine/src/cards/pool/floodgate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forsaken Wastes",
+      "files": [
+        "engine/src/cards/pool/forsaken-wastes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frenetic Efreet",
+      "files": [
+        "engine/src/cards/pool/frenetic-efreet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Scouts",
+      "files": [
+        "engine/src/cards/pool/goblin-scouts.ts",
+        "engine/src/cards/tokens/goblin-scout-token.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Soothsayer",
+      "files": [
+        "engine/src/cards/pool/goblin-soothsayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grim Feast",
+      "files": [
+        "engine/src/cards/pool/grim-feast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hammer of Bogardan",
+      "files": [
+        "engine/src/cards/pool/hammer-of-bogardan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harbinger of Night",
+      "files": [
+        "engine/src/cards/pool/harbinger-of-night.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Illumination",
+      "files": [
+        "engine/src/cards/pool/illumination.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infernal Contract",
+      "files": [
+        "engine/src/cards/pool/infernal-contract.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jolt",
+      "files": [
+        "engine/src/cards/pool/jolt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kukemssa Pirates",
+      "files": [
+        "engine/src/cards/pool/kukemssa-pirates.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lure of Prey",
+      "files": [
+        "engine/src/cards/pool/lure-of-prey.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maro",
+      "files": [
+        "engine/src/cards/pool/maro.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mind Harness",
+      "files": [
+        "engine/src/cards/pool/mind-harness.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mtenda Griffin",
+      "files": [
+        "engine/src/cards/pool/mtenda-griffin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Tribute",
+      "files": [
+        "engine/src/cards/pool/phyrexian-tribute.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Polymorph",
+      "files": [
+        "engine/src/cards/pool/polymorph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prismatic Lace",
+      "files": [
+        "engine/src/cards/pool/prismatic-lace.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Quirion Elves",
+      "files": [
+        "engine/src/cards/pool/quirion-elves.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reality Ripple",
+      "files": [
+        "engine/src/cards/pool/reality-ripple.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reparations",
+      "files": [
+        "engine/src/cards/pool/reparations.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Roots of Life",
+      "files": [
+        "engine/src/cards/pool/roots-of-life.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sacred Mesa",
+      "files": [
+        "engine/src/cards/pool/sacred-mesa.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sapphire Charm",
+      "files": [
+        "engine/src/cards/pool/sapphire-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seedling Charm",
+      "files": [
+        "engine/src/cards/pool/seedling-charm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Seeds of Innocence",
+      "files": [
+        "engine/src/cards/pool/seeds-of-innocence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shauku, Endbringer",
+      "files": [
+        "engine/src/cards/pool/shauku-endbringer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shimmer",
+      "files": [
+        "engine/src/cards/pool/shimmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soulshriek",
+      "files": [
+        "engine/src/cards/pool/soulshriek.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spirit of the Night",
+      "files": [
+        "engine/src/cards/pool/spirit-of-the-night.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spitting Earth",
+      "files": [
+        "engine/src/cards/pool/spitting-earth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stupor",
+      "files": [
+        "engine/src/cards/pool/stupor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sunweb",
+      "files": [
+        "engine/src/cards/pool/sunweb.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Taniwha",
+      "files": [
+        "engine/src/cards/pool/taniwha.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Teeka's Dragon",
+      "files": [
+        "engine/src/cards/pool/teekas-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Teferi's Curse",
+      "files": [
+        "engine/src/cards/pool/teferis-curse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Teferi's Isle",
+      "files": [
+        "engine/src/cards/pool/teferis-isle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Telim'Tor's Edict",
+      "files": [
+        "engine/src/cards/pool/telimtors-edict.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Uktabi Wildcats",
+      "files": [
+        "engine/src/cards/pool/uktabi-wildcats.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Unyaro Griffin",
+      "files": [
+        "engine/src/cards/pool/unyaro-griffin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vigilant Martyr",
+      "files": [
+        "engine/src/cards/pool/vigilant-martyr.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wall of Resistance",
+      "files": [
+        "engine/src/cards/pool/wall-of-resistance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wellspring",
+      "files": [
+        "engine/src/cards/pool/wellspring.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zebra Unicorn",
+      "files": [
+        "engine/src/cards/pool/zebra-unicorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zirilan of the Claw",
+      "files": [
+        "engine/src/cards/pool/zirilan-of-the-claw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zuberi, Golden Feather",
+      "files": [
+        "engine/src/cards/pool/zuberi-golden-feather.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Forbidden Crypt",
+      "needs": [
+        "replacement:draw-replacement-return-from-graveyard-or-lose"
+      ],
+      "why": "\"if you would draw, return a card from your graveyard to your hand instead; if you can't, you lose\" — would-draw can't replace a draw with that"
+    },
+    {
+      "name": "Favorable Destiny",
+      "needs": [
+        "condition:attached-host-condition"
+      ],
+      "why": "shroud as long as the enchanted creature's controller controls another creature"
+    },
+    {
+      "name": "Meddle",
+      "needs": [
+        "effect:change-target"
+      ],
+      "why": "change the target of a spell with a single target that's a creature to another creature"
+    },
+    {
+      "name": "Sewer Rats",
+      "needs": [
+        "cost:activate-no-more-than-n-times-each-turn"
+      ],
+      "why": "activate no more than three times each turn"
+    },
+    {
+      "name": "Paupers' Cage",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "the active player's hand size, not yours or each player's"
+    },
+    {
+      "name": "Illicit Auction",
+      "needs": [
+        "effect:life-bidding"
+      ],
+      "why": "a life auction in turn order"
+    },
+    {
+      "name": "Misers' Cage",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "the active player's hand size"
+    },
+    {
+      "name": "Sabertooth Cobra",
+      "needs": [
+        "effect:pay-before-delayed-deadline"
+      ],
+      "why": "\"unless they pay {2} before that step\" can be paid any time before the upkeep"
+    },
+    {
+      "name": "Suq'Ata Firewalker",
+      "needs": [
+        "static:cant-be-targeted-by-filter"
+      ],
+      "why": "can't be the target of red spells or abilities from red sources, its controller's included"
+    },
+    {
+      "name": "Phyrexian Purge",
+      "needs": [
+        "cost:life-per-target"
+      ],
+      "why": "3 life for each target, as an additional cost"
+    },
+    {
+      "name": "Grinning Totem",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "search an opponent's library, exile it, play it until your next upkeep, else to the graveyard"
+    },
+    {
+      "name": "Waiting in the Weeds",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "each player makes a Cat for each untapped Forest they control"
+    },
+    {
+      "name": "Ward of Lights",
+      "needs": [
+        "effect:flash-cast-sacrifice",
+        "effect:grant-protection-choice"
+      ],
+      "why": "cast as though it had flash, sacrificed at the next cleanup if it was"
+    },
+    {
+      "name": "Lightning Reflexes",
+      "needs": [
+        "effect:flash-cast-sacrifice"
+      ],
+      "why": "cast as though it had flash, sacrificed at the next cleanup if it was"
+    },
+    {
+      "name": "Teremko Griffin",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "banding"
+    },
+    {
+      "name": "Noble Elephant",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "banding"
+    },
+    {
+      "name": "Null Chamber",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "you and an opponent each name a card; the named cards can't be played"
+    },
+    {
+      "name": "Tombstone Stairwell",
+      "needs": [
+        "effect:tokens-created-with-source"
+      ],
+      "why": "destroy all tokens created with this enchantment, also when it leaves the battlefield"
+    },
+    {
+      "name": "Delirium",
+      "needs": [
+        "effect:prevent-combat-damage-to-and-by-target"
+      ],
+      "why": "prevent all combat damage dealt to and by one creature this turn"
+    },
+    {
+      "name": "Mind Bend",
+      "needs": [
+        "effect:text-change-color-or-land-words"
+      ],
+      "why": "text-changing (rule 612.2)"
+    },
+    {
+      "name": "Cadaverous Bloom",
+      "needs": [
+        "cost:exile-card-from-hand"
+      ],
+      "why": "exile a card from your hand as an activated ability's cost"
+    },
+    {
+      "name": "Kaervek's Torch",
+      "needs": [
+        "static:spells-targeting-this-spell-cost-more"
+      ],
+      "why": "a static that works while the card is a spell on the stack"
+    },
+    {
+      "name": "Soul Echo",
+      "needs": [
+        "static:dont-lose-for-zero-life",
+        "replacement:damage-redirection"
+      ],
+      "why": "you don't lose for 0 life; an opponent turns damage to you into echo counters removed"
+    },
+    {
+      "name": "Basalt Golem",
+      "needs": [
+        "effect:if-sacrificed-token-for-sacrificer"
+      ],
+      "why": "the sacrificed blocker's controller makes a 0/2 Wall artifact token (no token printing either)"
+    },
+    {
+      "name": "Phyrexian Dreadnought",
+      "needs": [
+        "decision:choose-total-power-subset"
+      ],
+      "why": "sacrifice any number of creatures with total power 12 or greater"
+    },
+    {
+      "name": "Hall of Gemstone",
+      "needs": [
+        "replacement:land-mana-type-replacement"
+      ],
+      "why": "lands tapped for mana produce the colour chosen each upkeep instead"
+    },
+    {
+      "name": "Celestial Dawn",
+      "needs": [
+        "static:spend-mana-only-as-colorless",
+        "static:color-cards-outside-battlefield"
+      ],
+      "why": "lands are Plains; nonland cards everywhere are white; other mana spent only as colourless"
+    },
+    {
+      "name": "Political Trickery",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "exchange control of two lands (rule 701.12b)"
+    },
+    {
+      "name": "Reflect Damage",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "redirect a chosen source's damage to that source's controller"
+    },
+    {
+      "name": "Spatial Binding",
+      "needs": [
+        "effect:cant-phase-out"
+      ],
+      "why": "target permanent can't phase out until your next upkeep"
+    },
+    {
+      "name": "Blind Fury",
+      "needs": [
+        "replacement:damage-multiplier-this-turn"
+      ],
+      "why": "creatures deal double combat damage to creatures this turn"
+    },
+    {
+      "name": "Natural Balance",
+      "needs": [
+        "condition:each-player-may-asked-player-controls"
+      ],
+      "why": "inside each-player-may, `controls` reads the caster, not the player asked"
+    },
+    {
+      "name": "Shallow Grave",
+      "needs": [
+        "effect:top-creature-card-of-graveyard"
+      ],
+      "why": "the top creature card of your graveyard (graveyard order)"
+    },
+    {
+      "name": "Ebony Charm",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "up to three target cards from a single graveyard"
+    },
+    {
+      "name": "Prismatic Boon",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "X target creatures gain protection from the colour of your choice until end of turn"
+    },
+    {
+      "name": "Mangara's Tome",
+      "needs": [
+        "mechanic:face-down-pile",
+        "replacement:next-draw-from-exiled-pile"
+      ],
+      "why": "five cards exiled face down; the next draw is replaced by putting one of them into your hand"
+    },
+    {
+      "name": "Goblin Tinkerer",
+      "needs": [
+        "effect:damage-to-source"
+      ],
+      "why": "the artifact deals damage equal to its mana value to this creature"
+    },
+    {
+      "name": "Mindbender Spores",
+      "needs": [
+        "effect:grant-static-to-permanent"
+      ],
+      "why": "the creature gains a static \"doesn't untap while it has a fungus counter\""
+    },
+    {
+      "name": "Wall of Corpses",
+      "needs": [
+        "effect:target-creature-source-is-blocking"
+      ],
+      "why": "destroy target creature this creature is blocking"
+    },
+    {
+      "name": "Crimson Hellkite",
+      "needs": [
+        "cost:x-spend-only-color"
+      ],
+      "why": "spend only red mana on X in an activated ability"
+    }
+  ]
+}

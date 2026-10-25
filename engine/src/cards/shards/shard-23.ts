@@ -300,6 +300,7 @@ import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
+import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
@@ -958,6 +959,7 @@ const shard: CardShard = {
     _poolKongmingSleepingDragon,
     _poolKorCelebrant,
     _poolKorSkyfisher,
+    _poolKukemssaPirates,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
