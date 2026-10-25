@@ -179,6 +179,7 @@ import _poolFeastOfSuccession from "../pool/feast-of-succession.js";
 import _poolFeldonsCane from "../pool/feldons-cane.js";
 import _poolFelisaFangOfSilverquill from "../pool/felisa-fang-of-silverquill.js";
 import _poolFeralFerocity from "../pool/feral-ferocity.js";
+import _poolFerozsBan from "../pool/ferozs-ban.js";
 import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
 import _poolFireSages from "../pool/fire-sages.js";
@@ -854,6 +855,7 @@ const shard: CardShard = {
     _poolFeldonsCane,
     _poolFelisaFangOfSilverquill,
     _poolFeralFerocity,
+    _poolFerozsBan,
     _poolFertilidsFavor,
     _poolFerventCathar,
     _poolFireSages,

@@ -106,6 +106,7 @@ import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
 import _poolDestinedLead from "../pool/destined-lead.js";
+import _poolDidgeridoo from "../pool/didgeridoo.js";
 import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
@@ -375,6 +376,7 @@ import _poolRealityShift from "../pool/reality-shift.js";
 import _poolRegalForce from "../pool/regal-force.js";
 import _poolRejuvenatingSprings from "../pool/rejuvenating-springs.js";
 import _poolRelentlessAssault from "../pool/relentless-assault.js";
+import _poolRenewal from "../pool/renewal.js";
 import _poolReplicationTechnique from "../pool/replication-technique.js";
 import _poolResculpt from "../pool/resculpt.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
@@ -689,6 +691,7 @@ const shard: CardShard = {
     _poolDesmondMiles,
     _poolDespair,
     _poolDestinedLead,
+    _poolDidgeridoo,
     _poolDigDeep,
     _poolDinosaurStampede,
     _poolDiscipleOfTheOldWays,
@@ -958,6 +961,7 @@ const shard: CardShard = {
     _poolRegalForce,
     _poolRejuvenatingSprings,
     _poolRelentlessAssault,
+    _poolRenewal,
     _poolReplicationTechnique,
     _poolResculpt,
     _poolRestlessApparition,

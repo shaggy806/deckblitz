@@ -336,6 +336,7 @@ import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMycoloth from "../pool/mycoloth.js";
 import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
+import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
@@ -372,6 +373,7 @@ import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPrepareFight from "../pool/prepare-fight.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
+import _poolPrimalOrder from "../pool/primal-order.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
@@ -959,6 +961,7 @@ const shard: CardShard = {
     _poolMurkfiendLiege,
     _poolMycoloth,
     _poolMyrGalvanizer,
+    _poolMysticDecree,
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
     _poolNibelheimAflame,
@@ -995,6 +998,7 @@ const shard: CardShard = {
     _poolPrepareFight,
     _poolPressurePoint,
     _poolPrideOfThePerfect,
+    _poolPrimalOrder,
     _poolPrologueToPhyresis,
     _poolProwlingFelidar,
     _poolPullFromTheGrave,

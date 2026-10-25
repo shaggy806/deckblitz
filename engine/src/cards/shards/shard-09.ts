@@ -159,6 +159,7 @@ import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
+import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
@@ -479,6 +480,7 @@ import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
 import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
+import _poolSerratedArrows from "../pool/serrated-arrows.js";
 import _poolSettleBeyondReality from "../pool/settle-beyond-reality.js";
 import _poolShadowRider from "../pool/shadow-rider.js";
 import _poolShadowheartDarkJusticiar from "../pool/shadowheart-dark-justiciar.js";
@@ -809,6 +811,7 @@ const shard: CardShard = {
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
+    _poolEronTheRelentless,
     _poolErrantStreetArtist,
     _poolErstwhileTrooper,
     _poolEshkiDragonclaw,
@@ -1129,6 +1132,7 @@ const shard: CardShard = {
     _poolSephirothPlanetsHeir,
     _poolSeraphOfDawn,
     _poolSerrasSanctum,
+    _poolSerratedArrows,
     _poolSettleBeyondReality,
     _poolShadowRider,
     _poolShadowheartDarkJusticiar,

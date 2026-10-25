@@ -12,6 +12,7 @@ import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equal
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
+import _poolAnHavvaConstable from "../pool/an-havva-constable.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
 import _poolAncientCornucopia from "../pool/ancient-cornucopia.js";
@@ -646,6 +647,7 @@ const shard: CardShard = {
     _poolAkkiBlizzardHerder,
     _poolAkkiDrillmaster,
     _poolAkkiScrapchomper,
+    _poolAnHavvaConstable,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
     _poolAncientCornucopia,

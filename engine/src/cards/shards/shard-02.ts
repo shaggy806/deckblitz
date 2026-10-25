@@ -431,6 +431,7 @@ import _poolRiteOfUndoing from "../pool/rite-of-undoing.js";
 import _poolRivendell from "../pool/rivendell.js";
 import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js";
 import _poolRookieMistake from "../pool/rookie-mistake.js";
+import _poolRoots from "../pool/roots.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
 import _poolRuinRaider from "../pool/ruin-raider.js";
@@ -550,6 +551,7 @@ import _poolTransitMage from "../pool/transit-mage.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
+import _poolTruce from "../pool/truce.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
 import _poolTwinBlades from "../pool/twin-blades.js";
 import _poolTwinBolt from "../pool/twin-bolt.js";
@@ -1045,6 +1047,7 @@ const shard: CardShard = {
     _poolRivendell,
     _poolRocksteadyMutantMarauder,
     _poolRookieMistake,
+    _poolRoots,
     _poolRootwaterCommando,
     _poolRoughRhinoCavalry,
     _poolRuinRaider,
@@ -1164,6 +1167,7 @@ const shard: CardShard = {
     _poolTributeToTheWild,
     _poolTritonShorethief,
     _poolTropicalIsland,
+    _poolTruce,
     _poolTrystanCallousCultivator,
     _poolTwinBlades,
     _poolTwinBolt,

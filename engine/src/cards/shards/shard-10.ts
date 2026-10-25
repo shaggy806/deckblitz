@@ -17,6 +17,7 @@ import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
+import _poolAnHavvaInn from "../pool/an-havva-inn.js";
 import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
@@ -443,6 +444,7 @@ import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
+import _poolRootSpider from "../pool/root-spider.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
@@ -619,6 +621,7 @@ import _poolVrynWingmare from "../pool/vryn-wingmare.js";
 import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js";
+import _poolWallOfKelp from "../pool/wall-of-kelp.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
@@ -680,6 +683,7 @@ const shard: CardShard = {
     _poolAlpineGuide,
     _poolAmazingSpiderGirl,
     _poolAmphinCutthroat,
+    _poolAnHavvaInn,
     _poolAnafenzaUnyieldingLineage,
     _poolAncestralCraving,
     _poolAncestralVengeance,
@@ -1106,6 +1110,7 @@ const shard: CardShard = {
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
     _poolRootManipulation,
+    _poolRootSpider,
     _poolRotatingFireplace,
     _poolRottenheartGhoul,
     _poolRumblingSentry,
@@ -1282,6 +1287,7 @@ const shard: CardShard = {
     _poolWallOfBrambles,
     _poolWallOfFire,
     _poolWallOfForgottenPharaohs,
+    _poolWallOfKelp,
     _poolWandOfOrcus,
     _poolWanderingMusicians,
     _poolWarhornBlast,

@@ -39,6 +39,7 @@ import _poolAvenFlock from "../pool/aven-flock.js";
 import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "../pool/aven-gagglemaster.js";
 import _poolAvoidFate from "../pool/avoid-fate.js";
+import _poolAysenHighway from "../pool/aysen-highway.js";
 import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
@@ -206,6 +207,7 @@ import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
 import _poolFlywheelRacer from "../pool/flywheel-racer.js";
 import _poolForceOfNegation from "../pool/force-of-negation.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
+import _poolForget from "../pool/forget.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
 import _poolFreedFromTheReal from "../pool/freed-from-the-real.js";
@@ -461,6 +463,7 @@ import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
+import _poolSengirAutocrat from "../pool/sengir-autocrat.js";
 import _poolSettlementBlacksmith from "../pool/settlement-blacksmith.js";
 import _poolSevenTailMentor from "../pool/seven-tail-mentor.js";
 import _poolShacklegeist from "../pool/shacklegeist.js";
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolAvenFogbringer,
     _poolAvenGagglemaster,
     _poolAvoidFate,
+    _poolAysenHighway,
     _poolAzoriusSkyguard,
     _poolBalaGedScorpion,
     _poolBanishingKnack,
@@ -838,6 +842,7 @@ const shard: CardShard = {
     _poolFlywheelRacer,
     _poolForceOfNegation,
     _poolForcedFruition,
+    _poolForget,
     _poolForumsFavor,
     _poolFoulRoads,
     _poolFreedFromTheReal,
@@ -1093,6 +1098,7 @@ const shard: CardShard = {
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
     _poolSelvalasStampede,
+    _poolSengirAutocrat,
     _poolSettlementBlacksmith,
     _poolSevenTailMentor,
     _poolShacklegeist,

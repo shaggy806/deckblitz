@@ -639,6 +639,7 @@ import _tokensPhobos from "../tokens/phobos.js";
 import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
 import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
+import _tokensXXSpiritTokenBlack from "../tokens/x-x-spirit-token-black.js";
 
 const shard: CardShard = {
   pool: [
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _tokensRatTokenGenkuFutureShaper,
     _tokensSnakeToken,
     _tokensStoneBoulderToken,
+    _tokensXXSpiritTokenBlack,
   ],
 };
 

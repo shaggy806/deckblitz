@@ -85,6 +85,7 @@ import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
 import _poolBristlingBoar from "../pool/bristling-boar.js";
+import _poolBrokenVisage from "../pool/broken-visage.js";
 import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
 import _poolBubbleSmuggler from "../pool/bubble-smuggler.js";
 import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
@@ -601,6 +602,7 @@ import _poolWildsearScouringMaw from "../pool/wildsear-scouring-maw.js";
 import _poolWindcragSiege from "../pool/windcrag-siege.js";
 import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
 import _poolWinterEladrin from "../pool/winter-eladrin.js";
+import _poolWinterSky from "../pool/winter-sky.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWolverinePack from "../pool/wolverine-pack.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
@@ -716,6 +718,7 @@ const shard: CardShard = {
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
     _poolBristlingBoar,
+    _poolBrokenVisage,
     _poolBrotherhoodSpy,
     _poolBubbleSmuggler,
     _poolBumbleflowersSharepot,
@@ -1232,6 +1235,7 @@ const shard: CardShard = {
     _poolWindcragSiege,
     _poolWindgracesJudgment,
     _poolWinterEladrin,
+    _poolWinterSky,
     _poolWintersGrasp,
     _poolWolverinePack,
     _poolWondrousRevival,

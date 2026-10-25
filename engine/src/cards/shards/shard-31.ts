@@ -87,6 +87,7 @@ import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainRipleyVance from "../pool/captain-ripley-vance.js";
 import _poolCaptainsCall from "../pool/captains-call.js";
+import _poolCarapace from "../pool/carapace.js";
 import _poolCarefulCultivation from "../pool/careful-cultivation.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
@@ -473,6 +474,7 @@ import _poolRuin from "../pool/ruin.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
 import _poolRumblingRuin from "../pool/rumbling-ruin.js";
 import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
+import _poolRysorianBadger from "../pool/rysorian-badger.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
@@ -578,6 +580,7 @@ import _poolTouchTheSpiritRealm from "../pool/touch-the-spirit-realm.js";
 import _poolTowerOfChampions from "../pool/tower-of-champions.js";
 import _poolToweringIndrik from "../pool/towering-indrik.js";
 import _poolToxinAnalysis from "../pool/toxin-analysis.js";
+import _poolTradeCaravan from "../pool/trade-caravan.js";
 import _poolTrawlerDrake from "../pool/trawler-drake.js";
 import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
@@ -742,6 +745,7 @@ const shard: CardShard = {
     _poolCandelabraOfTawnos,
     _poolCaptainRipleyVance,
     _poolCaptainsCall,
+    _poolCarapace,
     _poolCarefulCultivation,
     _poolCargoShip,
     _poolCastleSengir,
@@ -1128,6 +1132,7 @@ const shard: CardShard = {
     _poolRuinousRampage,
     _poolRumblingRuin,
     _poolRunadiBehemothCaller,
+    _poolRysorianBadger,
     _poolSHIELDFlyingCar,
     _poolSamuraisKatana,
     _poolSandbarSerpent,
@@ -1233,6 +1238,7 @@ const shard: CardShard = {
     _poolTowerOfChampions,
     _poolToweringIndrik,
     _poolToxinAnalysis,
+    _poolTradeCaravan,
     _poolTrawlerDrake,
     _poolTreasureCove,
     _poolTreasureDredger,

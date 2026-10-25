@@ -18,6 +18,7 @@ import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
 import _poolAlloyMyr from "../pool/alloy-myr.js";
 import _poolAmbitiousAetherborn from "../pool/ambitious-aetherborn.js";
+import _poolAnabaSpiritCrafter from "../pool/anaba-spirit-crafter.js";
 import _poolAncientSpider from "../pool/ancient-spider.js";
 import _poolAncientStoneIdol from "../pool/ancient-stone-idol.js";
 import _poolAngelheartProtector from "../pool/angelheart-protector.js";
@@ -281,6 +282,7 @@ import _poolKindledFury from "../pool/kindled-fury.js";
 import _poolKingSolomonsFrogs from "../pool/king-solomons-frogs.js";
 import _poolKithkinShielddare from "../pool/kithkin-shielddare.js";
 import _poolKnucklesTheEchidna from "../pool/knuckles-the-echidna.js";
+import _poolKoskunFalls from "../pool/koskun-falls.js";
 import _poolKravTheUnredeemed from "../pool/krav-the-unredeemed.js";
 import _poolLaceWithMoonglove from "../pool/lace-with-moonglove.js";
 import _poolLanguish from "../pool/languish.js";
@@ -557,6 +559,7 @@ import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
 import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
+import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
@@ -659,6 +662,7 @@ const shard: CardShard = {
     _poolAlliesAtLast,
     _poolAlloyMyr,
     _poolAmbitiousAetherborn,
+    _poolAnabaSpiritCrafter,
     _poolAncientSpider,
     _poolAncientStoneIdol,
     _poolAngelheartProtector,
@@ -922,6 +926,7 @@ const shard: CardShard = {
     _poolKingSolomonsFrogs,
     _poolKithkinShielddare,
     _poolKnucklesTheEchidna,
+    _poolKoskunFalls,
     _poolKravTheUnredeemed,
     _poolLaceWithMoonglove,
     _poolLanguish,
@@ -1198,6 +1203,7 @@ const shard: CardShard = {
     _poolTooGreedilyTooDeep,
     _poolToothOfRamos,
     _poolTorchDrake,
+    _poolTorture,
     _poolTrackDown,
     _poolTranspose,
     _poolTrenoDarkCity,

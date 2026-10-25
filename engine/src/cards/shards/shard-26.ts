@@ -46,6 +46,7 @@ import _poolAugmenterPugilist from "../pool/augmenter-pugilist.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
+import _poolAysenCrusader from "../pool/aysen-crusader.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
 import _poolAzraBladeseeker from "../pool/azra-bladeseeker.js";
@@ -62,6 +63,7 @@ import _poolBecomeImmense from "../pool/become-immense.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
 import _poolBellowingMauler from "../pool/bellowing-mauler.js";
+import _poolBlackCarriage from "../pool/black-carriage.js";
 import _poolBlackManaBattery from "../pool/black-mana-battery.js";
 import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
 import _poolBladeOfTheBloodchief from "../pool/blade-of-the-bloodchief.js";
@@ -672,6 +674,7 @@ const shard: CardShard = {
     _poolAuntieOolCursewretch,
     _poolAutonSoldier,
     _poolAwakenTheInferno,
+    _poolAysenCrusader,
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
     _poolAzraBladeseeker,
@@ -688,6 +691,7 @@ const shard: CardShard = {
     _poolBedlam,
     _poolBefuddle,
     _poolBellowingMauler,
+    _poolBlackCarriage,
     _poolBlackManaBattery,
     _poolBlackWidowDaringOperative,
     _poolBladeOfTheBloodchief,

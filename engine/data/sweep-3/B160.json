@@ -1,0 +1,575 @@
+{
+  "batch": "B160",
+  "status": "complete",
+  "ranks": "Homelands (HML, 1995-10-01): whole set (oldest-first walk)",
+  "authored": [
+    {
+      "name": "Ambush",
+      "files": [
+        "engine/src/cards/pool/ambush.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "An-Havva Constable",
+      "files": [
+        "engine/src/cards/pool/an-havva-constable.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "An-Havva Inn",
+      "files": [
+        "engine/src/cards/pool/an-havva-inn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "An-Zerrin Ruins",
+      "files": [
+        "engine/src/cards/pool/an-zerrin-ruins.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Anaba Ancestor",
+      "files": [
+        "engine/src/cards/pool/anaba-ancestor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Anaba Spirit Crafter",
+      "files": [
+        "engine/src/cards/pool/anaba-spirit-crafter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aysen Crusader",
+      "files": [
+        "engine/src/cards/pool/aysen-crusader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aysen Highway",
+      "files": [
+        "engine/src/cards/pool/aysen-highway.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Black Carriage",
+      "files": [
+        "engine/src/cards/pool/black-carriage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Broken Visage",
+      "files": [
+        "engine/src/cards/pool/broken-visage.ts",
+        "engine/src/cards/tokens/x-x-spirit-token-black.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carapace",
+      "files": [
+        "engine/src/cards/pool/carapace.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chain Stasis",
+      "files": [
+        "engine/src/cards/pool/chain-stasis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coral Reef",
+      "files": [
+        "engine/src/cards/pool/coral-reef.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dark Maze",
+      "files": [
+        "engine/src/cards/pool/dark-maze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Didgeridoo",
+      "files": [
+        "engine/src/cards/pool/didgeridoo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drudge Spell",
+      "files": [
+        "engine/src/cards/pool/drudge-spell.ts",
+        "engine/src/cards/tokens/skeleton-regenerating-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwarven Pony",
+      "files": [
+        "engine/src/cards/pool/dwarven-pony.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eron the Relentless",
+      "files": [
+        "engine/src/cards/pool/eron-the-relentless.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Evaporate",
+      "files": [
+        "engine/src/cards/pool/evaporate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Faerie Noble",
+      "files": [
+        "engine/src/cards/pool/faerie-noble.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feroz's Ban",
+      "files": [
+        "engine/src/cards/pool/ferozs-ban.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forget",
+      "files": [
+        "engine/src/cards/pool/forget.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Funeral March",
+      "files": [
+        "engine/src/cards/pool/funeral-march.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghost Hounds",
+      "files": [
+        "engine/src/cards/pool/ghost-hounds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heart Wolf",
+      "files": [
+        "engine/src/cards/pool/heart-wolf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hungry Mist",
+      "files": [
+        "engine/src/cards/pool/hungry-mist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Irini Sengir",
+      "files": [
+        "engine/src/cards/pool/irini-sengir.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Koskun Falls",
+      "files": [
+        "engine/src/cards/pool/koskun-falls.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mammoth Harness",
+      "files": [
+        "engine/src/cards/pool/mammoth-harness.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mystic Decree",
+      "files": [
+        "engine/src/cards/pool/mystic-decree.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Primal Order",
+      "files": [
+        "engine/src/cards/pool/primal-order.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rashka the Slayer",
+      "files": [
+        "engine/src/cards/pool/rashka-the-slayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reef Pirates",
+      "files": [
+        "engine/src/cards/pool/reef-pirates.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Renewal",
+      "files": [
+        "engine/src/cards/pool/renewal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Root Spider",
+      "files": [
+        "engine/src/cards/pool/root-spider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Roots",
+      "files": [
+        "engine/src/cards/pool/roots.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rysorian Badger",
+      "files": [
+        "engine/src/cards/pool/rysorian-badger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sengir Autocrat",
+      "files": [
+        "engine/src/cards/pool/sengir-autocrat.ts",
+        "engine/src/cards/tokens/serf-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Serra Aviary",
+      "files": [
+        "engine/src/cards/pool/serra-aviary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Serrated Arrows",
+      "files": [
+        "engine/src/cards/pool/serrated-arrows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Torture",
+      "files": [
+        "engine/src/cards/pool/torture.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trade Caravan",
+      "files": [
+        "engine/src/cards/pool/trade-caravan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Truce",
+      "files": [
+        "engine/src/cards/pool/truce.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Veldrane of Sengir",
+      "files": [
+        "engine/src/cards/pool/veldrane-of-sengir.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wall of Kelp",
+      "files": [
+        "engine/src/cards/pool/wall-of-kelp.ts",
+        "engine/src/cards/tokens/kelp-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Winter Sky",
+      "files": [
+        "engine/src/cards/pool/winter-sky.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Aether Storm",
+      "needs": [
+        "cost:any-player-may-activate"
+      ],
+      "why": "'any player may activate this ability'"
+    },
+    {
+      "name": "Apocalypse Chime",
+      "needs": [
+        "filter:originally-printed-in-set"
+      ],
+      "why": "needs a card's original printing set"
+    },
+    {
+      "name": "Autumn Willow",
+      "needs": [
+        "effect:targetable-despite-shroud-by-player"
+      ],
+      "why": "one player may target it as though it didn't have shroud"
+    },
+    {
+      "name": "Baki's Curse",
+      "needs": [
+        "effect:damage-all-per-object",
+        "amount:auras-attached-to-self"
+      ],
+      "why": "damage to each creature scaled by the Auras attached to that creature"
+    },
+    {
+      "name": "Baron Sengir",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source",
+        "filter:damaged-this-turn-by-source"
+      ],
+      "why": "'a creature dealt damage by Baron Sengir this turn dies'"
+    },
+    {
+      "name": "Beast Walkers",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "gains banding"
+    },
+    {
+      "name": "Clockwork Steed",
+      "needs": [
+        "decision:choose-number",
+        "static:counter-cap",
+        "condition:attacked-or-blocked-this-combat"
+      ],
+      "why": "'up to X' counters capped at four in total; 'if it attacked or blocked this combat' at end of combat"
+    },
+    {
+      "name": "Clockwork Swarm",
+      "needs": [
+        "decision:choose-number",
+        "static:counter-cap",
+        "condition:attacked-or-blocked-this-combat"
+      ],
+      "why": "'up to X' counters capped at four in total; 'if it attacked or blocked this combat' at end of combat"
+    },
+    {
+      "name": "Daughter of Autumn",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "redirects the next 1 damage to itself"
+    },
+    {
+      "name": "Dwarven Sea Clan",
+      "needs": [
+        "filter:controller-controls-filter"
+      ],
+      "why": "target 'creature whose controller controls an Island'"
+    },
+    {
+      "name": "Giant Albatross",
+      "needs": [
+        "filter:dealt-damage-to-source-this-turn"
+      ],
+      "why": "each creature that dealt damage to it this turn, destroyed unless its controller pays 2 life"
+    },
+    {
+      "name": "Giant Oyster",
+      "needs": [
+        "effect:duration-while-source-tapped",
+        "effect:delayed-trigger-while-source-tapped"
+      ],
+      "why": "a draw-step -1/-1 trigger lasting while it stays tapped, and removing those counters when it leaves or untaps"
+    },
+    {
+      "name": "Greater Werewolf",
+      "needs": [
+        "filter:blocking-or-blocked-by-source"
+      ],
+      "why": "each creature blocking or blocked by it, at end of combat"
+    },
+    {
+      "name": "Hazduhr the Abbot",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "redirects the next X damage to itself"
+    },
+    {
+      "name": "Ironclaw Curse",
+      "needs": [
+        "filter:block-restriction-relative-to-attached-toughness"
+      ],
+      "why": "can't block creatures with power at least the enchanted creature's toughness"
+    },
+    {
+      "name": "Jinx",
+      "needs": [
+        "decision:choose-land-type-on-resolution"
+      ],
+      "why": "a target land becomes the basic land type of your choice until end of turn"
+    },
+    {
+      "name": "Joven's Ferrets",
+      "needs": [
+        "filter:blocked-source-this-turn"
+      ],
+      "why": "no filter for 'all creatures that blocked this creature this turn'"
+    },
+    {
+      "name": "Joven's Tools",
+      "needs": [
+        "effect:grant-static-to-permanent"
+      ],
+      "why": "'can't be blocked this turn except by Walls' as an effect"
+    },
+    {
+      "name": "Leeches",
+      "needs": [
+        "effect:counters-removed-this-way"
+      ],
+      "why": "'that much' is the poison counters removed"
+    },
+    {
+      "name": "Marjhan",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "can't attack unless defending player controls an Island"
+    },
+    {
+      "name": "Orcish Mine",
+      "needs": [
+        "effect:attached-controller-player-scope"
+      ],
+      "why": "damage to the enchanted land's controller"
+    },
+    {
+      "name": "Prophecy",
+      "needs": [
+        "effect:reveal-top-any-library"
+      ],
+      "why": "reveals a target opponent's top card, then that player shuffles"
+    },
+    {
+      "name": "Retribution",
+      "needs": [
+        "effect:targets-same-controller",
+        "effect:opponent-chooses-among-targets"
+      ],
+      "why": "two targets controlled by the same opponent, who chooses which to sacrifice"
+    },
+    {
+      "name": "Reveka, Wizard Savant",
+      "needs": [
+        "effect:doesnt-untap-your-next-untap-step"
+      ],
+      "why": "the skipped untap step is the activator's, not the next controller's (ruling)"
+    },
+    {
+      "name": "Roterothopter",
+      "needs": [
+        "cost:activate-no-more-than-n-times-each-turn"
+      ],
+      "why": "'activate no more than twice each turn'"
+    },
+    {
+      "name": "Samite Alchemist",
+      "needs": [
+        "effect:doesnt-untap-your-next-untap-step"
+      ],
+      "why": "doesn't untap during *your* next untap step"
+    },
+    {
+      "name": "Sea Troll",
+      "needs": [
+        "filter:blocked-or-blocked-by-filter-this-turn"
+      ],
+      "why": "'only if it blocked or was blocked by a blue creature this turn'"
+    },
+    {
+      "name": "Sengir Bats",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source"
+      ],
+      "why": "'a creature dealt damage by this creature this turn dies'"
+    },
+    {
+      "name": "Serra Bestiary",
+      "needs": [
+        "static:prohibit-tap-abilities-of-attached"
+      ],
+      "why": "only the enchanted creature's {T} abilities can't be activated"
+    },
+    {
+      "name": "Serra Inquisitors",
+      "needs": [
+        "trigger:one-or-more-become-blocked-batch"
+      ],
+      "why": "'blocks or becomes blocked by one or more black creatures' triggers once"
+    },
+    {
+      "name": "Soraya the Falconer",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "grants banding"
+    },
+    {
+      "name": "Spectral Bears",
+      "needs": [
+        "condition:defending-player-controls",
+        "effect:doesnt-untap-your-next-untap-step"
+      ],
+      "why": "'if defending player controls no black nontoken permanents'; doesn't untap during *your* next untap step"
+    },
+    {
+      "name": "Willow Priestess",
+      "needs": [
+        "effect:grant-protection-temporary"
+      ],
+      "why": "grants protection from black until end of turn"
+    }
+  ]
+}

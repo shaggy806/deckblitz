@@ -11,6 +11,16 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,
   and the departed source of an ability on the stack (picked by its stack entry), not those.
   No pool card is known to need them.
+- **`each-player-may` with `choices` drops the controller's own choice.** The `choices` form
+  hands each chooser a `choose-modes` decision with `modesController: controller`
+  (game.ts, the `each-player-may` resolver), but `beginModesChoice` keeps `modesController`
+  only when it differs from the chooser (`ability.modesController !== controller`). For the
+  controller's own choice it is dropped, so the resolution context gets no `player` in
+  `lastKnownRefs` and an option's `"that-player"` names no one: the controller's chosen option
+  does nothing. Every pool card using `choices` today is `each-opponent` (Sycorax Commander),
+  so none hits it; Truce (batch 160) is authored on the `effect` form around it. The likely fix
+  is to keep `modesController` whenever it's set; it needs a test with an `each-player`
+  `choices` spell.
 - **A mana-value cast prohibition reads an X spell before X is chosen.** On the stack an X
   spell's mana value counts the X chosen (rule 202.3e), and Sanctum Prelate's ruling has X
   chosen before its mana value is checked. `whyProhibitedFromCasting` (game.ts) matches a

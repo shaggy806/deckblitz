@@ -13,6 +13,7 @@ import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
 import _poolAlelaCunningConqueror from "../pool/alela-cunning-conqueror.js";
 import _poolAltarOfTheGoyf from "../pool/altar-of-the-goyf.js";
 import _poolAmazingSpiderMan from "../pool/amazing-spider-man.js";
+import _poolAnZerrinRuins from "../pool/an-zerrin-ruins.js";
 import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
 import _poolAngryMob from "../pool/angry-mob.js";
@@ -84,6 +85,7 @@ import _poolConfiscationCoup from "../pool/confiscation-coup.js";
 import _poolConiferWurm from "../pool/conifer-wurm.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
+import _poolCoralReef from "../pool/coral-reef.js";
 import _poolCoronationOfChaos from "../pool/coronation-of-chaos.js";
 import _poolCranialPlating from "../pool/cranial-plating.js";
 import _poolCrawlingSensation from "../pool/crawling-sensation.js";
@@ -445,6 +447,7 @@ import _poolSeedguideAsh from "../pool/seedguide-ash.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
+import _poolSerraAviary from "../pool/serra-aviary.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolAlelaCunningConqueror,
     _poolAltarOfTheGoyf,
     _poolAmazingSpiderMan,
+    _poolAnZerrinRuins,
     _poolAngelicChorus,
     _poolAngelsGrace,
     _poolAngryMob,
@@ -703,6 +707,7 @@ const shard: CardShard = {
     _poolConiferWurm,
     _poolContradict,
     _poolConverterBeast,
+    _poolCoralReef,
     _poolCoronationOfChaos,
     _poolCranialPlating,
     _poolCrawlingSensation,
@@ -1064,6 +1069,7 @@ const shard: CardShard = {
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
     _poolSelfDestruct,
+    _poolSerraAviary,
     _poolShadowRift,
     _poolShadowyBackstreet,
     _poolShamelessCharlatan,
