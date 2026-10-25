@@ -128,6 +128,7 @@ import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
+import _poolEmrakulsInfluence from "../pool/emrakuls-influence.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
@@ -193,6 +194,7 @@ import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
+import _poolGrizzledAngler from "../pool/grizzled-angler.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
@@ -677,6 +679,7 @@ const shard: CardShard = {
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
+    _poolEmrakulsInfluence,
     _poolEndlessOne,
     _poolEndriderCatalyzer,
     _poolEphemerate,
@@ -742,6 +745,7 @@ const shard: CardShard = {
     _poolGravkill,
     _poolGrimServant,
     _poolGrislySurvivor,
+    _poolGrizzledAngler,
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGutsplitterGang,

@@ -459,6 +459,7 @@ import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
 import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
+import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
@@ -1059,6 +1060,7 @@ const shard: CardShard = {
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,
     _poolSkemfarAvenger,
+    _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
     _poolSlateOfAncestry,

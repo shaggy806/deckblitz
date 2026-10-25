@@ -146,10 +146,16 @@ section keeps only what to do next.
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise;
   batch 141 the rest of Commander 2016 and Kaladesh, on undaunted; batch 142 Conspiracy: Take
-  the Crown, on "is monstrous", its draft-matters cards played as outside a draft);
-  **next, Eldritch Moon** (122 left), then Shadows over Innistrad (168 left). Leads from batch 142: "whenever you
+  the Crown, on "is monstrous", its draft-matters cards played as outside a draft; batch 143
+  the rest of Eldritch Moon, on emerge);
+  **next, Shadows over Innistrad** (168 left), then Oath of the Gatewatch. Leads from batch 143:
+  the old werewolf transform, "if no spells were cast last turn" (`condition:werewolf-transform-spells-last-turn`
+  — Ulrich of the Krallenhorde; ~30 Innistrad and Shadows over Innistrad werewolves, so build it
+  first for SOI), meld (`mechanic:meld` — EMN's three pairs), emerge's unbuilt forms (granting it —
+  Herigast; "if its emerge cost was paid" — Adipose Offspring; Foul Emissary's "when you sacrifice
+  this creature while casting a spell with emerge"). Leads from batch 142: "whenever you
   become the monarch" (`trigger:becomes-monarch` — Custodi Lich, Knights of the Black Rose),
-  emerge (`keyword:emerge` — Elder Deep-Fiend; EMN has more), a mana-value prohibition read
+  a mana-value prohibition read
   before X is announced (Sanctum Prelate — see Engine rules gaps). Leads from
   batch 141: "whenever this creature crews a Vehicle" (`trigger:crews-or-saddles` — Speedway
   Fanatic, Veteran Motorist, Gearshift Ace), "whenever you get one or more {E}"

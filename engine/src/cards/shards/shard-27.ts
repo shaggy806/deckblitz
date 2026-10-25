@@ -7,6 +7,7 @@ import _poolAIMBot from "../pool/a-i-m-bot.js";
 import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brute.js";
 import _poolAbzanGuide from "../pool/abzan-guide.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
+import _poolAdvancedStitchwing from "../pool/advanced-stitchwing.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
@@ -324,6 +325,7 @@ import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
+import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
@@ -599,6 +601,7 @@ const shard: CardShard = {
     _poolAbominationIrradiatedBrute,
     _poolAbzanGuide,
     _poolAdaptiveTrainingPost,
+    _poolAdvancedStitchwing,
     _poolAdventurersAirship,
     _poolAeolipile,
     _poolAerieMystics,
@@ -916,6 +919,7 @@ const shard: CardShard = {
     _poolNegate,
     _poolNicolBolas,
     _poolNightScythe,
+    _poolNoosegrafMob,
     _poolNurglesRot,
     _poolOblivion,
     _poolObsianusGolem,

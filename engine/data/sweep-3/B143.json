@@ -1,0 +1,916 @@
+{
+  "batch": "B143",
+  "status": "complete",
+  "ranks": "Eldritch Moon (EMN, 2016-07-22): the rest of the set, whole; and the emerge cards elsewhere it unblocked (Twisted Riddlekeeper, MH3; Cresting Mosasaurus, REX)",
+  "authored": [
+    {
+      "name": "Abundant Maw",
+      "files": [
+        "engine/src/cards/pool/abundant-maw.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cresting Mosasaurus",
+      "files": [
+        "engine/src/cards/pool/cresting-mosasaurus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Decimator of the Provinces",
+      "files": [
+        "engine/src/cards/pool/decimator-of-the-provinces.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drownyard Behemoth",
+      "files": [
+        "engine/src/cards/pool/drownyard-behemoth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Elder Deep-Fiend",
+      "files": [
+        "engine/src/cards/pool/elder-deep-fiend.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "It of the Horrid Swarm",
+      "files": [
+        "engine/src/cards/pool/it-of-the-horrid-swarm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lashweed Lurker",
+      "files": [
+        "engine/src/cards/pool/lashweed-lurker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mockery of Nature",
+      "files": [
+        "engine/src/cards/pool/mockery-of-nature.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Twisted Riddlekeeper",
+      "files": [
+        "engine/src/cards/pool/twisted-riddlekeeper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vexing Scuttler",
+      "files": [
+        "engine/src/cards/pool/vexing-scuttler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wretched Gryff",
+      "files": [
+        "engine/src/cards/pool/wretched-gryff.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blessed Alliance",
+      "files": [
+        "engine/src/cards/pool/blessed-alliance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Borrowed Hostility",
+      "files": [
+        "engine/src/cards/pool/borrowed-hostility.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Certain Death",
+      "files": [
+        "engine/src/cards/pool/certain-death.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conduit of Storms // Conduit of Emrakul",
+      "files": [
+        "engine/src/cards/pool/conduit-of-emrakul.ts",
+        "engine/src/cards/pool/conduit-of-storms.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Courageous Outrider",
+      "files": [
+        "engine/src/cards/pool/courageous-outrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Curious Homunculus // Voracious Reader",
+      "files": [
+        "engine/src/cards/pool/curious-homunculus.ts",
+        "engine/src/cards/pool/voracious-reader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Desperate Sentry",
+      "files": [
+        "engine/src/cards/pool/desperate-sentry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Furyblade Vampire",
+      "files": [
+        "engine/src/cards/pool/furyblade-vampire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kessig Prowler // Sinuous Predator",
+      "files": [
+        "engine/src/cards/pool/kessig-prowler.ts",
+        "engine/src/cards/pool/sinuous-predator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Long Road Home",
+      "files": [
+        "engine/src/cards/pool/long-road-home.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Make Mischief",
+      "files": [
+        "engine/src/cards/pool/make-mischief.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Noose Constrictor",
+      "files": [
+        "engine/src/cards/pool/noose-constrictor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Otherworldly Outburst",
+      "files": [
+        "engine/src/cards/pool/otherworldly-outburst.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Prophetic Ravings",
+      "files": [
+        "engine/src/cards/pool/prophetic-ravings.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sanctifier of Souls",
+      "files": [
+        "engine/src/cards/pool/sanctifier-of-souls.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shreds of Sanity",
+      "files": [
+        "engine/src/cards/pool/shreds-of-sanity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spontaneous Mutation",
+      "files": [
+        "engine/src/cards/pool/spontaneous-mutation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Take Inventory",
+      "files": [
+        "engine/src/cards/pool/take-inventory.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Abandon Reason",
+      "files": [
+        "engine/src/cards/pool/abandon-reason.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Voldaren Pariah // Abolisher of Bloodlines",
+      "files": [
+        "engine/src/cards/pool/abolisher-of-bloodlines.ts",
+        "engine/src/cards/pool/voldaren-pariah.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Backwoods Survivalists",
+      "files": [
+        "engine/src/cards/pool/backwoods-survivalists.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bloodhall Priest",
+      "files": [
+        "engine/src/cards/pool/bloodhall-priest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Borrowed Malevolence",
+      "files": [
+        "engine/src/cards/pool/borrowed-malevolence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cemetery Recruitment",
+      "files": [
+        "engine/src/cards/pool/cemetery-recruitment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chilling Grasp",
+      "files": [
+        "engine/src/cards/pool/chilling-grasp.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Choking Restraints",
+      "files": [
+        "engine/src/cards/pool/choking-restraints.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smoldering Werewolf // Erupting Dreadwolf",
+      "files": [
+        "engine/src/cards/pool/erupting-dreadwolf.ts",
+        "engine/src/cards/pool/smoldering-werewolf.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Geist of the Lonely Vigil",
+      "files": [
+        "engine/src/cards/pool/geist-of-the-lonely-vigil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Graf Harvest",
+      "files": [
+        "engine/src/cards/pool/graf-harvest.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grim Flayer",
+      "files": [
+        "engine/src/cards/pool/grim-flayer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Haunted Dead",
+      "files": [
+        "engine/src/cards/pool/haunted-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lone Rider // It That Rides as One",
+      "files": [
+        "engine/src/cards/pool/it-that-rides-as-one.ts",
+        "engine/src/cards/pool/lone-rider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana's Elite",
+      "files": [
+        "engine/src/cards/pool/lilianas-elite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lunar Force",
+      "files": [
+        "engine/src/cards/pool/lunar-force.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lunarch Mantle",
+      "files": [
+        "engine/src/cards/pool/lunarch-mantle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Markov Crusader",
+      "files": [
+        "engine/src/cards/pool/markov-crusader.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mournwillow",
+      "files": [
+        "engine/src/cards/pool/mournwillow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Olivia's Dragoon",
+      "files": [
+        "engine/src/cards/pool/olivias-dragoon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scour the Laboratory",
+      "files": [
+        "engine/src/cards/pool/scour-the-laboratory.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sigardian Priest",
+      "files": [
+        "engine/src/cards/pool/sigardian-priest.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spirit of the Hunt",
+      "files": [
+        "engine/src/cards/pool/spirit-of-the-hunt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stromkirk Occultist",
+      "files": [
+        "engine/src/cards/pool/stromkirk-occultist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thraben Foulbloods",
+      "files": [
+        "engine/src/cards/pool/thraben-foulbloods.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ulvenwald Observer",
+      "files": [
+        "engine/src/cards/pool/ulvenwald-observer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bedlam Reveler",
+      "files": [
+        "engine/src/cards/pool/bedlam-reveler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Borrowed Grace",
+      "files": [
+        "engine/src/cards/pool/borrowed-grace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clear Shot",
+      "files": [
+        "engine/src/cards/pool/clear-shot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crossroads Consecrator",
+      "files": [
+        "engine/src/cards/pool/crossroads-consecrator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Emrakul's Influence",
+      "files": [
+        "engine/src/cards/pool/emrakuls-influence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fogwalker",
+      "files": [
+        "engine/src/cards/pool/fogwalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Geist-Fueled Scarecrow",
+      "files": [
+        "engine/src/cards/pool/geist-fueled-scarecrow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grizzled Angler // Grisly Anglerfish",
+      "files": [
+        "engine/src/cards/pool/grisly-anglerfish.ts",
+        "engine/src/cards/pool/grizzled-angler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heron's Grace Champion",
+      "files": [
+        "engine/src/cards/pool/herons-grace-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ironclad Slayer",
+      "files": [
+        "engine/src/cards/pool/ironclad-slayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nebelgast Herald",
+      "files": [
+        "engine/src/cards/pool/nebelgast-herald.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Noosegraf Mob",
+      "files": [
+        "engine/src/cards/pool/noosegraf-mob.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oath of Liliana",
+      "files": [
+        "engine/src/cards/pool/oath-of-liliana.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Somberwald Stag",
+      "files": [
+        "engine/src/cards/pool/somberwald-stag.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spreading Flames",
+      "files": [
+        "engine/src/cards/pool/spreading-flames.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stensia Banquet",
+      "files": [
+        "engine/src/cards/pool/stensia-banquet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stensia Innkeeper",
+      "files": [
+        "engine/src/cards/pool/stensia-innkeeper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Strange Augmentation",
+      "files": [
+        "engine/src/cards/pool/strange-augmentation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Subjugator Angel",
+      "files": [
+        "engine/src/cards/pool/subjugator-angel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Advanced Stitchwing",
+      "files": [
+        "engine/src/cards/pool/advanced-stitchwing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alchemist's Greeting",
+      "files": [
+        "engine/src/cards/pool/alchemists-greeting.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Campaign of Vengeance",
+      "files": [
+        "engine/src/cards/pool/campaign-of-vengeance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crop Sigil",
+      "files": [
+        "engine/src/cards/pool/crop-sigil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deploy the Gatewatch",
+      "files": [
+        "engine/src/cards/pool/deploy-the-gatewatch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Distemper of the Blood",
+      "files": [
+        "engine/src/cards/pool/distemper-of-the-blood.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dusk Feaster",
+      "files": [
+        "engine/src/cards/pool/dusk-feaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Extricator of Sin // Extricator of Flesh",
+      "files": [
+        "engine/src/cards/pool/extricator-of-flesh.ts",
+        "engine/src/cards/pool/extricator-of-sin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Faith Unbroken",
+      "files": [
+        "engine/src/cards/pool/faith-unbroken.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fiend Binder",
+      "files": [
+        "engine/src/cards/pool/fiend-binder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Galvanic Bombardment",
+      "files": [
+        "engine/src/cards/pool/galvanic-bombardment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shrill Howler // Howling Chorus",
+      "files": [
+        "engine/src/cards/pool/howling-chorus.ts",
+        "engine/src/cards/pool/shrill-howler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Identity Thief",
+      "files": [
+        "engine/src/cards/pool/identity-thief.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Insatiable Gorgers",
+      "files": [
+        "engine/src/cards/pool/insatiable-gorgers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lupine Prototype",
+      "files": [
+        "engine/src/cards/pool/lupine-prototype.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruthless Disposal",
+      "files": [
+        "engine/src/cards/pool/ruthless-disposal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skirsdag Supplicant",
+      "files": [
+        "engine/src/cards/pool/skirsdag-supplicant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stromkirk Condemned",
+      "files": [
+        "engine/src/cards/pool/stromkirk-condemned.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Succumb to Temptation",
+      "files": [
+        "engine/src/cards/pool/succumb-to-temptation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thraben Standard Bearer",
+      "files": [
+        "engine/src/cards/pool/thraben-standard-bearer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Waxing Moon",
+      "files": [
+        "engine/src/cards/pool/waxing-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Weirded Vampire",
+      "files": [
+        "engine/src/cards/pool/weirded-vampire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Whispers of Emrakul",
+      "files": [
+        "engine/src/cards/pool/whispers-of-emrakul.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Distended Mindbender",
+      "needs": [
+        "effect:discard-chosen-several-filters"
+      ],
+      "why": "Nothing has the caster choose one card for each of two filters from a revealed hand and discard them together."
+    },
+    {
+      "name": "Herigast, Erupting Nullkite",
+      "needs": [
+        "static:grant-emerge"
+      ],
+      "why": "Emerge is built; giving each creature spell you cast emerge at its mana cost isn't."
+    },
+    {
+      "name": "Crabomination",
+      "needs": [
+        "effect:cast-during-resolution"
+      ],
+      "why": "Emerge from artifact is built; casting one of the exiled cards during resolution isn't."
+    },
+    {
+      "name": "Adipose Offspring",
+      "needs": [
+        "condition:self-emerge-paid"
+      ],
+      "why": "Emerge is built; \"if its emerge cost was paid\" and the sacrificed creature's toughness on the permanent aren't."
+    },
+    {
+      "name": "Graf Rats",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "why": "Meld isn't built."
+    },
+    {
+      "name": "Midnight Scavengers",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "why": "Meld isn't built."
+    },
+    {
+      "name": "Chittering Host",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "why": "Meld isn't built."
+    },
+    {
+      "name": "Brisela, Voice of Nightmares",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "why": "Meld isn't built."
+    },
+    {
+      "name": "Hanweir, the Writhing Township",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "why": "Meld isn't built."
+    },
+    {
+      "name": "Ulrich of the Krallenhorde",
+      "needs": [
+        "condition:werewolf-transform-spells-last-turn"
+      ],
+      "why": "Both faces transform on the upkeep check of spells cast last turn, which isn't built."
+    },
+    {
+      "name": "Spell Queller",
+      "needs": [
+        "effect:exile-target-spell"
+      ],
+      "why": "Nothing exiles a spell without countering it (an uncounterable spell can still be exiled, the ruling), nor links it to its exiler."
+    },
+    {
+      "name": "Collective Brutality",
+      "needs": [
+        "cost:escalate-nonmana"
+      ],
+      "why": "Escalate's per-mode cost is mana only; this one discards a card."
+    },
+    {
+      "name": "Repel the Abominable",
+      "needs": [
+        "replacement:prevent-all-damage-by-filter"
+      ],
+      "why": "Preventing all damage, not just combat damage, from non-Human sources isn't built."
+    },
+    {
+      "name": "Soul Separator",
+      "needs": [
+        "mechanic:double-faced-token"
+      ],
+      "why": "A token copy of a double-faced creature card must be double-faced (the ruling)."
+    },
+    {
+      "name": "Tangleclaw Werewolf",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "\"Can block an additional creature each combat\" isn't built."
+    },
+    {
+      "name": "Providence",
+      "needs": [
+        "mechanic:leyline-opening-hand"
+      ],
+      "why": "Nothing acts from the opening hand."
+    },
+    {
+      "name": "Thirsting Axe",
+      "needs": [
+        "filter:dealt-combat-damage-to-creature-this-turn"
+      ],
+      "why": "Only \"dealt damage to a creature this turn\" exists, not combat damage alone."
+    },
+    {
+      "name": "Slayer's Cleaver",
+      "needs": [
+        "static:must-be-blocked-by-filter"
+      ],
+      "why": "\"Must be blocked by an Eldrazi if able\" isn't built."
+    },
+    {
+      "name": "Assembled Alphas",
+      "needs": [
+        "effect:damage-to-trigger-object"
+      ],
+      "why": "\"Deals 3 damage to that creature\" (the creature it blocks or that blocks it) needs untargeted damage to the trigger's object."
+    },
+    {
+      "name": "Nephalia Academy",
+      "needs": [
+        "replacement:discard-to-library-replacement"
+      ],
+      "why": "Nothing replaces an opponent-caused discard with putting the card on top of the library."
+    },
+    {
+      "name": "Fortune's Favor",
+      "needs": [
+        "mechanic:face-down-piles-opponent-chooses",
+        "decision:separate-into-piles"
+      ],
+      "why": "No opponent separates cards into a face-down and a face-up pile."
+    },
+    {
+      "name": "Emrakul's Evangel",
+      "needs": [
+        "effect:sacrifice-any-number",
+        "cost:sacrifice-self-and-another"
+      ],
+      "why": "A cost holds one sacrifice part: \"this creature and any number of other non-Eldrazi creatures\" can't be said."
+    },
+    {
+      "name": "Nahiri's Wrath",
+      "needs": [
+        "cost:discard-x-cost"
+      ],
+      "why": "The discard additional cost is a fixed count, and nothing reads the discarded cards' total mana value."
+    },
+    {
+      "name": "Permeating Mass",
+      "needs": [
+        "trigger:trigger-recipient-ref"
+      ],
+      "why": "become-copy can't name the creature it dealt combat damage to."
+    },
+    {
+      "name": "Give No Ground",
+      "needs": [
+        "effect:block-any-number-this-turn"
+      ],
+      "why": "No effect lets a creature block any number of creatures this turn."
+    },
+    {
+      "name": "Incendiary Flow",
+      "needs": [
+        "replacement:dealt-damage-this-way-exile-if-dies"
+      ],
+      "why": "No \"if a creature dealt damage this way would die this turn, exile it instead\"."
+    },
+    {
+      "name": "Foul Emissary",
+      "needs": [
+        "trigger:sacrificed-while-casting-emerge"
+      ],
+      "why": "Emerge is built; no trigger for \"when you sacrifice this creature while casting a spell with emerge\"."
+    },
+    {
+      "name": "Savage Alliance",
+      "needs": [
+        "effect:grant-keyword-all-target-player"
+      ],
+      "why": "grant-keyword-all has no controlledByTarget: \"creatures target player controls gain trample\" can't be said."
+    },
+    {
+      "name": "Impetuous Devils",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "Nothing makes a target creature block this creature this combat if able."
+    },
+    {
+      "name": "Coax from the Blind Eternities",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "No outside-the-game zone or sideboard."
+    },
+    {
+      "name": "Prying Questions",
+      "needs": [
+        "effect:target-player-hand-card-to-library-top"
+      ],
+      "why": "Nothing has a target opponent put a card of their choice from hand on top of their library."
+    }
+  ]
+}

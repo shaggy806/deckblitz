@@ -192,6 +192,7 @@ import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
 import _poolFlyingCarpet from "../pool/flying-carpet.js";
 import _poolFogOfGnats from "../pool/fog-of-gnats.js";
+import _poolFogwalker from "../pool/fogwalker.js";
 import _poolFoulImp from "../pool/foul-imp.js";
 import _poolFountainOfYouth from "../pool/fountain-of-youth.js";
 import _poolFractalMascot from "../pool/fractal-mascot.js";
@@ -481,6 +482,7 @@ import _poolStompingGround from "../pool/stomping-ground.js";
 import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
 import _poolStormSeeker from "../pool/storm-seeker.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
+import _poolStrangeAugmentation from "../pool/strange-augmentation.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
@@ -791,6 +793,7 @@ const shard: CardShard = {
     _poolFlowstoneHellion,
     _poolFlyingCarpet,
     _poolFogOfGnats,
+    _poolFogwalker,
     _poolFoulImp,
     _poolFountainOfYouth,
     _poolFractalMascot,
@@ -1080,6 +1083,7 @@ const shard: CardShard = {
     _poolStormFleetArsonist,
     _poolStormSeeker,
     _poolStrandsOfNight,
+    _poolStrangeAugmentation,
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,
     _poolStromkirkBloodthief,

@@ -343,6 +343,7 @@ import _poolNagaVitalist from "../pool/naga-vitalist.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNascentMetamorph from "../pool/nascent-metamorph.js";
 import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
+import _poolNebelgastHerald from "../pool/nebelgast-herald.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
@@ -589,6 +590,7 @@ import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
+import _poolWaxingMoon from "../pool/waxing-moon.js";
 import _poolWeddingAnnouncement from "../pool/wedding-announcement.js";
 import _poolWelcomingVampire from "../pool/welcoming-vampire.js";
 import _poolWhetwheel from "../pool/whetwheel.js";
@@ -969,6 +971,7 @@ const shard: CardShard = {
     _poolNantukoShade,
     _poolNascentMetamorph,
     _poolNastyLittleRabbit,
+    _poolNebelgastHerald,
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
@@ -1215,6 +1218,7 @@ const shard: CardShard = {
     _poolWarhornBlast,
     _poolWarrenInstigator,
     _poolWaterspoutWarden,
+    _poolWaxingMoon,
     _poolWeddingAnnouncement,
     _poolWelcomingVampire,
     _poolWhetwheel,

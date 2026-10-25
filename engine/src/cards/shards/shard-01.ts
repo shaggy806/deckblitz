@@ -39,6 +39,7 @@ import _poolBantCharm from "../pool/bant-charm.js";
 import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
+import _poolBedlamReveler from "../pool/bedlam-reveler.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
@@ -173,6 +174,7 @@ import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.
 import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolFury from "../pool/fury.js";
+import _poolGalvanicBombardment from "../pool/galvanic-bombardment.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
@@ -453,6 +455,7 @@ import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
+import _poolStensiaInnkeeper from "../pool/stensia-innkeeper.js";
 import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
@@ -619,6 +622,7 @@ const shard: CardShard = {
     _poolBarrageOfExpendables,
     _poolBattleHymn,
     _poolBeastWhisperer,
+    _poolBedlamReveler,
     _poolBelenonWarAnthem,
     _poolBellowsLizard,
     _poolBespokeBo,
@@ -753,6 +757,7 @@ const shard: CardShard = {
     _poolFrillscareMentor,
     _poolFumingEffigy,
     _poolFury,
+    _poolGalvanicBombardment,
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
@@ -1033,6 +1038,7 @@ const shard: CardShard = {
     _poolStab,
     _poolStarbreachWhale,
     _poolStartingColumn,
+    _poolStensiaInnkeeper,
     _poolStingbladeAssassin,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,

@@ -132,6 +132,7 @@ import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
 import _poolDemonOfDarkSchemes from "../pool/demon-of-dark-schemes.js";
 import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
+import _poolDeployTheGatewatch from "../pool/deploy-the-gatewatch.js";
 import _poolDepthDefiler from "../pool/depth-defiler.js";
 import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
@@ -190,6 +191,7 @@ import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFesteringMummy from "../pool/festering-mummy.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
 import _poolFeveredSuspicion from "../pool/fevered-suspicion.js";
+import _poolFiendBinder from "../pool/fiend-binder.js";
 import _poolFightAsOne from "../pool/fight-as-one.js";
 import _poolFirdochCore from "../pool/firdoch-core.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
@@ -534,6 +536,7 @@ import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
 import _poolThievingOtter from "../pool/thieving-otter.js";
 import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
+import _poolThrabenStandardBearer from "../pool/thraben-standard-bearer.js";
 import _poolThranSpider from "../pool/thran-spider.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
@@ -757,6 +760,7 @@ const shard: CardShard = {
     _poolDematerialize,
     _poolDemonOfDarkSchemes,
     _poolDependableQuinjet,
+    _poolDeployTheGatewatch,
     _poolDepthDefiler,
     _poolDerangedWhelp,
     _poolDesertOfTheGlorified,
@@ -815,6 +819,7 @@ const shard: CardShard = {
     _poolFesteringMummy,
     _poolFetidHeath,
     _poolFeveredSuspicion,
+    _poolFiendBinder,
     _poolFightAsOne,
     _poolFirdochCore,
     _poolFistOfSuns,
@@ -1159,6 +1164,7 @@ const shard: CardShard = {
     _poolTheyCameFromThePipes,
     _poolThievingOtter,
     _poolThorinsLastStand,
+    _poolThrabenStandardBearer,
     _poolThranSpider,
     _poolThunderingChariot,
     _poolThunderkinAwakener,

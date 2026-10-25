@@ -76,6 +76,7 @@ import _poolBrushfireElemental from "../pool/brushfire-elemental.js";
 import _poolBulette from "../pool/bulette.js";
 import _poolBulkUp from "../pool/bulk-up.js";
 import _poolCabalCoffers from "../pool/cabal-coffers.js";
+import _poolCampaignOfVengeance from "../pool/campaign-of-vengeance.js";
 import _poolCaptivatingCave from "../pool/captivating-cave.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCastDown from "../pool/cast-down.js";
@@ -239,6 +240,7 @@ import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
 import _poolHeraldOfHadar from "../pool/herald-of-hadar.js";
 import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
+import _poolHeronsGraceChampion from "../pool/herons-grace-champion.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
@@ -454,6 +456,7 @@ import _poolSmileAtDeath from "../pool/smile-at-death.js";
 import _poolSnowCoveredIsland from "../pool/snow-covered-island.js";
 import _poolSoldierOfTheGreyHost from "../pool/soldier-of-the-grey-host.js";
 import _poolSomberwaldBeastmaster from "../pool/somberwald-beastmaster.js";
+import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
 import _poolSoulRead from "../pool/soul-read.js";
@@ -554,6 +557,7 @@ import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
+import _poolWhispersOfEmrakul from "../pool/whispers-of-emrakul.js";
 import _poolWhiteAuracite from "../pool/white-auracite.js";
 import _poolWhiteShieldCrusader from "../pool/white-shield-crusader.js";
 import _poolWildCelebrants from "../pool/wild-celebrants.js";
@@ -653,6 +657,7 @@ const shard: CardShard = {
     _poolBulette,
     _poolBulkUp,
     _poolCabalCoffers,
+    _poolCampaignOfVengeance,
     _poolCaptivatingCave,
     _poolCastAwayDoubt,
     _poolCastDown,
@@ -816,6 +821,7 @@ const shard: CardShard = {
     _poolHelionaut,
     _poolHeraldOfHadar,
     _poolHeroOfTheDunes,
+    _poolHeronsGraceChampion,
     _poolHiddenCourtyard,
     _poolHobblingZombie,
     _poolHollowhengeBeast,
@@ -1031,6 +1037,7 @@ const shard: CardShard = {
     _poolSnowCoveredIsland,
     _poolSoldierOfTheGreyHost,
     _poolSomberwaldBeastmaster,
+    _poolSomberwaldStag,
     _poolSongOfTotentanz,
     _poolSorinTheMirthless,
     _poolSoulRead,
@@ -1131,6 +1138,7 @@ const shard: CardShard = {
     _poolWarriorsSword,
     _poolWhipOfErebos,
     _poolWhiptailWurm,
+    _poolWhispersOfEmrakul,
     _poolWhiteAuracite,
     _poolWhiteShieldCrusader,
     _poolWildCelebrants,

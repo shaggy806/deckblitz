@@ -284,6 +284,7 @@ import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
+import _poolLupinePrototype from "../pool/lupine-prototype.js";
 import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
@@ -473,6 +474,7 @@ import _poolStockUp from "../pool/stock-up.js";
 import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
+import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwat from "../pool/swat.js";
@@ -870,6 +872,7 @@ const shard: CardShard = {
     _poolLothlorienLookout,
     _poolLoyalGryff,
     _poolLumengridSentinel,
+    _poolLupinePrototype,
     _poolMacabreReconstruction,
     _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,
@@ -1059,6 +1062,7 @@ const shard: CardShard = {
     _poolStoneOfErech,
     _poolStormboundGeist,
     _poolStrokeOfMidnight,
+    _poolStromkirkCondemned,
     _poolSummitSentinel,
     _poolSureStrike,
     _poolSwat,

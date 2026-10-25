@@ -225,6 +225,7 @@ import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
+import _poolInsatiableGorgers from "../pool/insatiable-gorgers.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
 import _poolInvigoratingSurge from "../pool/invigorating-surge.js";
@@ -458,6 +459,7 @@ import _poolStarstorm from "../pool/starstorm.js";
 import _poolStaticPrison from "../pool/static-prison.js";
 import _poolStealArtifact from "../pool/steal-artifact.js";
 import _poolStealthMission from "../pool/stealth-mission.js";
+import _poolStensiaBanquet from "../pool/stensia-banquet.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
@@ -831,6 +833,7 @@ const shard: CardShard = {
     _poolIndependentTroops,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
+    _poolInsatiableGorgers,
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
     _poolInvigoratingSurge,
@@ -1064,6 +1067,7 @@ const shard: CardShard = {
     _poolStaticPrison,
     _poolStealArtifact,
     _poolStealthMission,
+    _poolStensiaBanquet,
     _poolStepThrough,
     _poolStewardOfTheHarvest,
     _poolStirringBard,

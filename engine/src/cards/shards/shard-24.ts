@@ -456,6 +456,7 @@ import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
+import _poolSubjugatorAngel from "../pool/subjugator-angel.js";
 import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
 import _poolSunblastAngel from "../pool/sunblast-angel.js";
@@ -1045,6 +1046,7 @@ const shard: CardShard = {
     _poolSteelWall,
     _poolStormFleetSpy,
     _poolStormshriekFeral,
+    _poolSubjugatorAngel,
     _poolSulfuricVortex,
     _poolSunbladeAngel,
     _poolSunblastAngel,

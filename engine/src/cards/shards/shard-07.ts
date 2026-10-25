@@ -94,6 +94,7 @@ import _poolCourtOfVantress from "../pool/court-of-vantress.js";
 import _poolCrashOfRhinoBeetles from "../pool/crash-of-rhino-beetles.js";
 import _poolCrazedSkirge from "../pool/crazed-skirge.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
+import _poolCrossroadsConsecrator from "../pool/crossroads-consecrator.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
 import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
@@ -713,6 +714,7 @@ const shard: CardShard = {
     _poolCrashOfRhinoBeetles,
     _poolCrazedSkirge,
     _poolCreosoteHeath,
+    _poolCrossroadsConsecrator,
     _poolCrushOfWurms,
     _poolCurate,
     _poolCuratorOfSunsCreation,

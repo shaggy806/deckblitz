@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Eldritch Moon, the rest of the set** (batch 143): **emerge** built (rule 702.119 — an
+  alternative cost sacrificing a creature, or an artifact for "emerge from artifact", the total
+  cost reduced by its mana value; one cast offer per permanent it could sacrifice), taught to the
+  scaffolder; 97 authored by four `card-author` agents and the lead — Elder Deep-Fiend, Decimator
+  of the Provinces, Identity Thief, Voldaren Pariah, Lone Rider, Oath of Liliana, Blessed
+  Alliance, Curious Homunculus and 89 more, with Twisted Riddlekeeper (MH3) and Cresting
+  Mosasaurus (REX), which emerge also unblocked; 31 blocked (`B143.json`) (2026-10-25).
 - **Conspiracy: Take the Crown, whole** (batch 142): the `monstrous` filter clause (rule
   701.37b — "as long as this creature is monstrous": Domesticated Hydra, Skittering Crustacean,
   Sinuous Vermin, Chillerpillar) built, and melee's count fixed to the opponents attacked as

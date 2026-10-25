@@ -9,6 +9,7 @@ import _poolAccelerate from "../pool/accelerate.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
 import _poolAladdin from "../pool/aladdin.js";
+import _poolAlchemistsGreeting from "../pool/alchemists-greeting.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
 import _poolAmbuscade from "../pool/ambuscade.js";
@@ -129,6 +130,7 @@ import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
 import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDub from "../pool/dub.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
+import _poolDuskFeaster from "../pool/dusk-feaster.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
@@ -654,6 +656,7 @@ const shard: CardShard = {
     _poolAesiTyrantOfGyreStrait,
     _poolAkroanJailer,
     _poolAladdin,
+    _poolAlchemistsGreeting,
     _poolAliriosEnraptured,
     _poolAlmightyBrushwagg,
     _poolAmbuscade,
@@ -774,6 +777,7 @@ const shard: CardShard = {
     _poolDredgingClaw,
     _poolDub,
     _poolDuelForDominance,
+    _poolDuskFeaster,
     _poolDuskwielder,
     _poolDwarvenArmorer,
     _poolDwarvenTrader,

@@ -5316,3 +5316,9 @@ engine terms. A second thing to check is a second test.
 ### Lathiel, the Bounteous Dawn: up to that many counters
 - **Do:** Cast Chaplain's Blessing (gain 5 life). Pass to your end step. Target Grizzly Bears and Hill Giant, and give them 1 and 2.
 - **Expect:** The division step reads "Divide up to 5 +1/+1 counters", and Cast works at 3 of 5. The Bears get one counter and the Giant two.
+
+## Emerge (2026-10-25)
+
+### Wretched Gryff: one emerge cast per creature, priced with its mana value off
+- **Do:** Click Wretched Gryff in your hand.
+- **Expect:** Two casts are offered, "emerge {5}{U}, sacrificing Hill Giant (−4)" and "emerge {5}{U}, sacrificing Grizzly Bears (−2)", and no cast for {7}. Take the Hill Giant one: the Giant is sacrificed, two Islands tap, and you draw a card before the Gryff enters.

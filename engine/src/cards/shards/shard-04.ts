@@ -114,6 +114,7 @@ import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
+import _poolDistemperOfTheBlood from "../pool/distemper-of-the-blood.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
@@ -332,6 +333,7 @@ import _poolNotionThief from "../pool/notion-thief.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
+import _poolOathOfLiliana from "../pool/oath-of-liliana.js";
 import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
@@ -703,6 +705,7 @@ const shard: CardShard = {
     _poolDireStrainRampage,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
+    _poolDistemperOfTheBlood,
     _poolDistortedCuriosity,
     _poolDoomsServoGuards,
     _poolDoseOfDawnglow,
@@ -921,6 +924,7 @@ const shard: CardShard = {
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,
+    _poolOathOfLiliana,
     _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
     _poolOjutaiInterceptor,

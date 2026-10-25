@@ -208,6 +208,7 @@ import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGavonyDawnguard from "../pool/gavony-dawnguard.js";
+import _poolGeistFueledScarecrow from "../pool/geist-fueled-scarecrow.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
@@ -240,6 +241,7 @@ import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
+import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
@@ -862,6 +864,7 @@ const shard: CardShard = {
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
     _poolGavonyDawnguard,
+    _poolGeistFueledScarecrow,
     _poolGenerousRevival,
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolGrimCaptainsCall,
     _poolGrimDiscovery,
     _poolGrimWanderer,
+    _poolGrislyAnglerfish,
     _poolGrizzledOutrider,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,

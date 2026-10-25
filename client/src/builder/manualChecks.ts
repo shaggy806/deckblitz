@@ -8160,4 +8160,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Lathiel, the Bounteous Dawn', 'Grizzly Bears', 'Hill Giant', 'Plains'], hand: ["Chaplain's Blessing"] },
     }),
   ),
+  preset(
+    'Wretched Gryff: one emerge cast per creature, priced with its mana value off',
+    board({
+      you: { bf: ['Island*4', 'Hill Giant', 'Grizzly Bears'], hand: ['Wretched Gryff'] },
+    }),
+  ),
 ]
