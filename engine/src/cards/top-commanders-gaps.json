@@ -424,7 +424,8 @@
   "effect:damage-to-trigger-object",
   "keyword:renown",
   "keyword:dash",
-  "keyword:bolster"
+  "keyword:bolster",
+  "keyword:parley"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

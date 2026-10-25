@@ -476,6 +476,7 @@ import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
+import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
 import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
@@ -1126,6 +1127,7 @@ const shard: CardShard = {
     _poolSeaLegs,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
+    _poolSelvalaExplorerReturned,
     _poolSephirothPlanetsHeir,
     _poolSeraphOfDawn,
     _poolSerrasSanctum,

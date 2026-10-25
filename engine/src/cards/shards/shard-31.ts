@@ -465,6 +465,7 @@ import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRoilingWaters from "../pool/roiling-waters.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRootlessYew from "../pool/rootless-yew.js";
+import _poolRousingOfSouls from "../pool/rousing-of-souls.js";
 import _poolRubble from "../pool/rubble.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRufusShinra from "../pool/rufus-shinra.js";
@@ -1120,6 +1121,7 @@ const shard: CardShard = {
     _poolRoilingWaters,
     _poolRollingTemblor,
     _poolRootlessYew,
+    _poolRousingOfSouls,
     _poolRubble,
     _poolRubblebeltMaaka,
     _poolRufusShinra,
