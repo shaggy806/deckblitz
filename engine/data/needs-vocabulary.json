@@ -10080,7 +10080,6 @@
    "example": "Cloudform, Lightform, Rageform: a non-Aura enchantment becomes an Aura with enchant creature and attaches to the creature it manifested"
   },
   "effect:fight-by-toughness": {
-   "family": "effect:fight",
    "example": "Grim Contest: each deals damage equal to its toughness to the other, simultaneously"
   },
   "effect:manifest-exiled-pile": {
