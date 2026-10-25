@@ -10101,6 +10101,54 @@
   "static:keywords-of-cards-delved": {
    "family": "keyword:delve",
    "example": "Soulflayer: has each listed keyword if a card exiled with its delve had it"
+  },
+  "amount:greatest-damage-by-one-source-this-turn": {
+   "family": "effect:amount-new-variants",
+   "example": "Impact Resonance: 'X is the greatest amount of damage dealt by a source to a permanent or player this turn' — no amount reads one source's largest single damage this turn."
+  },
+  "amount:this-way-total-power-of-cards": {
+   "family": "effect:this-way-results",
+   "example": "Stitcher Geralf: 'the total power of the cards exiled this way' — powerAmong reads a card off the battlefield as 0 power (it reads mana value in public zones, not power or toughness)."
+  },
+  "cost:ability-cost-increase-per-count": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Loreseeker's Stone: 'This ability costs {1} more to activate for each card in your hand' — an activated ability's costReduction only reduces."
+  },
+  "cost:morph-reveal-card": {
+   "family": "mechanic:face-down",
+   "example": "Watcher of the Roost, Temur Charger, Horde Ambusher, Ruthless Ripper, Dragon's Eye Savants: 'Morph—Reveal a <color> card in your hand' — a morph cost that isn't mana."
+  },
+  "decision:opponent-chooses-target": {
+   "family": "effect:choices-by-other-players",
+   "example": "Volcanic Offering: an opponent you pick as you cast it chooses two of the spell's targets."
+  },
+  "effect:damage-cant-be-prevented": {
+   "family": "replacement:damage-modification",
+   "example": "Arrow Storm: 'Raid — … this damage can't be prevented' — a one-shot damage effect whose damage can't be prevented (the static form is static:damage-cant-be-prevented)."
+  },
+  "effect:delayed-return-attacking-next-turn": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Meandering Towershell: exiled as it attacks, it returns tapped and attacking at your next turn's declare-attackers step, attacking a player or planeswalker chosen then."
+  },
+  "effect:exile-graveyard-of-trigger-object-controller": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Burn Away: 'When that creature dies this turn, exile its controller's graveyard' — exiling a graveyard needs a player target or scope, not the trigger object's controller."
+  },
+  "effect:put-onto-battlefield-face-down": {
+   "family": "mechanic:face-down",
+   "example": "Ashcloud Phoenix: 'When this creature dies, return it to the battlefield face down under your control' — put-onto-battlefield can't return a card face down."
+  },
+  "filter:player-other-than-owner": {
+   "family": "effect:target-spec-additions",
+   "example": "Crown of Doom: 'Target player other than this artifact's owner gains control of it' — a player target can't exclude the source's owner."
+  },
+  "replacement:chosen-players-damage-doubling": {
+   "family": "replacement:damage-modification",
+   "example": "Bitter Feud: 'If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, it deals double that damage instead.'"
+  },
+  "trigger:activates-this-ability": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Herald of Anafenza: 'Whenever you activate this creature's outlast ability' — activates-ability can't be narrowed to the source's own ability."
   }
  }
 }

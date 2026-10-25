@@ -111,6 +111,7 @@ import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
+import _poolCratersClaws from "../pool/craters-claws.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
@@ -123,6 +124,7 @@ import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
 import _poolDawnrayArcher from "../pool/dawnray-archer.js";
 import _poolDawntreaderElk from "../pool/dawntreader-elk.js";
+import _poolDeadDrop from "../pool/dead-drop.js";
 import _poolDeadeyeRigHauler from "../pool/deadeye-rig-hauler.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDeathlessAncient from "../pool/deathless-ancient.js";
@@ -267,6 +269,7 @@ import _poolIllusionaryForces from "../pool/illusionary-forces.js";
 import _poolImpetuousProtege from "../pool/impetuous-protege.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolInfernalIdol from "../pool/infernal-idol.js";
+import _poolInfernalOffering from "../pool/infernal-offering.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
@@ -449,6 +452,7 @@ import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
 import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
+import _poolSavagePunch from "../pool/savage-punch.js";
 import _poolSavaiSabertooth from "../pool/savai-sabertooth.js";
 import _poolSavor from "../pool/savor.js";
 import _poolScarletWitchWandaMaximoff from "../pool/scarlet-witch-wanda-maximoff.js";
@@ -586,6 +590,7 @@ import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
 import _poolWaterwindScout from "../pool/waterwind-scout.js";
+import _poolWaveOfVitriol from "../pool/wave-of-vitriol.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
 import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
 import _poolWeaponRack from "../pool/weapon-rack.js";
@@ -738,6 +743,7 @@ const shard: CardShard = {
     _poolCopperTablet,
     _poolCorruptedGrafstone,
     _poolCrackdownConstruct,
+    _poolCratersClaws,
     _poolCreepingTarPit,
     _poolCrewCaptain,
     _poolCrossoverCollaboration,
@@ -750,6 +756,7 @@ const shard: CardShard = {
     _poolDarksteelGargoyle,
     _poolDawnrayArcher,
     _poolDawntreaderElk,
+    _poolDeadDrop,
     _poolDeadeyeRigHauler,
     _poolDeadlyBrew,
     _poolDeathlessAncient,
@@ -894,6 +901,7 @@ const shard: CardShard = {
     _poolImpetuousProtege,
     _poolIncreasingDevotion,
     _poolInfernalIdol,
+    _poolInfernalOffering,
     _poolInfernalRebirth,
     _poolIngotChewer,
     _poolInspiringVantage,
@@ -1076,6 +1084,7 @@ const shard: CardShard = {
     _poolSanctumOfUgin,
     _poolSarpadianSimulacrum,
     _poolSatyaAetherfluxGenius,
+    _poolSavagePunch,
     _poolSavaiSabertooth,
     _poolSavor,
     _poolScarletWitchWandaMaximoff,
@@ -1213,6 +1222,7 @@ const shard: CardShard = {
     _poolWarMammoth,
     _poolWasteland,
     _poolWaterwindScout,
+    _poolWaveOfVitriol,
     _poolWayOfThePyromancer,
     _poolWaywardGuideBeast,
     _poolWeaponRack,

@@ -1,0 +1,865 @@
+{
+  "batch": "B157",
+  "status": "complete",
+  "ranks": "Commander 2014 (C14, 2014-11-07) and Khans of Tarkir (KTK, 2014-09-26): the rest of both sets; no feature built",
+  "authored": [
+    {
+      "name": "Wake the Dead",
+      "files": [
+        "engine/src/cards/pool/wake-the-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Angel of the Dire Hour",
+      "files": [
+        "engine/src/cards/pool/angel-of-the-dire-hour.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Malicious Affliction",
+      "files": [
+        "engine/src/cards/pool/malicious-affliction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nahiri, the Lithomancer",
+      "files": [
+        "engine/src/cards/pool/nahiri-the-lithomancer.ts",
+        "engine/src/cards/tokens/kor-soldier-token.ts",
+        "engine/src/cards/tokens/stoneforged-blade-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Breaching Leviathan",
+      "files": [
+        "engine/src/cards/pool/breaching-leviathan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infernal Offering",
+      "files": [
+        "engine/src/cards/pool/infernal-offering.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wave of Vitriol",
+      "files": [
+        "engine/src/cards/pool/wave-of-vitriol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Warmonger Hellkite",
+      "files": [
+        "engine/src/cards/pool/warmonger-hellkite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Demon of Wailing Agonies",
+      "files": [
+        "engine/src/cards/pool/demon-of-wailing-agonies.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spoils of Blood",
+      "files": [
+        "engine/src/cards/pool/spoils-of-blood.ts",
+        "engine/src/cards/tokens/horror-token-black-0-0.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Raving Dead",
+      "files": [
+        "engine/src/cards/pool/raving-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flesh Carver",
+      "files": [
+        "engine/src/cards/pool/flesh-carver.ts",
+        "engine/src/cards/tokens/horror-token-black-0-0.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Creeperhulk",
+      "files": [
+        "engine/src/cards/pool/creeperhulk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Murderous Cut",
+      "files": [
+        "engine/src/cards/pool/murderous-cut.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wingmate Roc",
+      "files": [
+        "engine/src/cards/pool/wingmate-roc.ts",
+        "engine/src/cards/tokens/bird-token-white-3-4.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jeskai Charm",
+      "files": [
+        "engine/src/cards/pool/jeskai-charm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Secret Plans",
+      "files": [
+        "engine/src/cards/pool/secret-plans.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Become Immense",
+      "files": [
+        "engine/src/cards/pool/become-immense.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblinslide",
+      "files": [
+        "engine/src/cards/pool/goblinslide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sorin, Solemn Visitor",
+      "files": [
+        "engine/src/cards/pool/sorin-solemn-visitor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Longshot Squad",
+      "files": [
+        "engine/src/cards/pool/longshot-squad.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "See the Unwritten",
+      "files": [
+        "engine/src/cards/pool/see-the-unwritten.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Icefeather Aven",
+      "files": [
+        "engine/src/cards/pool/icefeather-aven.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mer-Ek Nightblade",
+      "files": [
+        "engine/src/cards/pool/mer-ek-nightblade.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Barrage of Boulders",
+      "files": [
+        "engine/src/cards/pool/barrage-of-boulders.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Savage Punch",
+      "files": [
+        "engine/src/cards/pool/savage-punch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "End Hostilities",
+      "files": [
+        "engine/src/cards/pool/end-hostilities.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feed the Clan",
+      "files": [
+        "engine/src/cards/pool/feed-the-clan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Swarm of Bloodflies",
+      "files": [
+        "engine/src/cards/pool/swarm-of-bloodflies.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Howl of the Horde",
+      "files": [
+        "engine/src/cards/pool/howl-of-the-horde.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Briber's Purse",
+      "files": [
+        "engine/src/cards/pool/bribers-purse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hooting Mandrills",
+      "files": [
+        "engine/src/cards/pool/hooting-mandrills.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Raiders' Spoils",
+      "files": [
+        "engine/src/cards/pool/raiders-spoils.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Empty the Pits",
+      "files": [
+        "engine/src/cards/pool/empty-the-pits.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cranial Archive",
+      "files": [
+        "engine/src/cards/pool/cranial-archive.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mindswipe",
+      "files": [
+        "engine/src/cards/pool/mindswipe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flying Crane Technique",
+      "files": [
+        "engine/src/cards/pool/flying-crane-technique.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "High Sentinels of Arashin",
+      "files": [
+        "engine/src/cards/pool/high-sentinels-of-arashin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trap Essence",
+      "files": [
+        "engine/src/cards/pool/trap-essence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crater's Claws",
+      "files": [
+        "engine/src/cards/pool/craters-claws.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jeering Instigator",
+      "files": [
+        "engine/src/cards/pool/jeering-instigator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heir of the Wilds",
+      "files": [
+        "engine/src/cards/pool/heir-of-the-wilds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mardu Charm",
+      "files": [
+        "engine/src/cards/pool/mardu-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bitter Revelation",
+      "files": [
+        "engine/src/cards/pool/bitter-revelation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Master the Way",
+      "files": [
+        "engine/src/cards/pool/master-the-way.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ivorytusk Fortress",
+      "files": [
+        "engine/src/cards/pool/ivorytusk-fortress.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pearl Lake Ancient",
+      "files": [
+        "engine/src/cards/pool/pearl-lake-ancient.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dutiful Return",
+      "files": [
+        "engine/src/cards/pool/dutiful-return.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dead Drop",
+      "files": [
+        "engine/src/cards/pool/dead-drop.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistfire Weaver",
+      "files": [
+        "engine/src/cards/pool/mistfire-weaver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jeskai Elder",
+      "files": [
+        "engine/src/cards/pool/jeskai-elder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quiet Contemplation",
+      "files": [
+        "engine/src/cards/pool/quiet-contemplation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heart-Piercer Bow",
+      "files": [
+        "engine/src/cards/pool/heart-piercer-bow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kin-Tree Invocation",
+      "files": [
+        "engine/src/cards/pool/kin-tree-invocation.ts",
+        "engine/src/cards/tokens/spirit-warrior-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghostfire Blade",
+      "files": [
+        "engine/src/cards/pool/ghostfire-blade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Master of Pearls",
+      "files": [
+        "engine/src/cards/pool/master-of-pearls.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Force Away",
+      "files": [
+        "engine/src/cards/pool/force-away.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Suspension Field",
+      "files": [
+        "engine/src/cards/pool/suspension-field.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Butcher of the Horde",
+      "files": [
+        "engine/src/cards/pool/butcher-of-the-horde.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonscale Boon",
+      "files": [
+        "engine/src/cards/pool/dragonscale-boon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scout the Borders",
+      "files": [
+        "engine/src/cards/pool/scout-the-borders.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kheru Bloodsucker",
+      "files": [
+        "engine/src/cards/pool/kheru-bloodsucker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rush of Battle",
+      "files": [
+        "engine/src/cards/pool/rush-of-battle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Molting Snakeskin",
+      "files": [
+        "engine/src/cards/pool/molting-snakeskin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Set Adrift",
+      "files": [
+        "engine/src/cards/pool/set-adrift.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Singing Bell Strike",
+      "files": [
+        "engine/src/cards/pool/singing-bell-strike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Death Frenzy",
+      "files": [
+        "engine/src/cards/pool/death-frenzy.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sultai Flayer",
+      "files": [
+        "engine/src/cards/pool/sultai-flayer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pine Walker",
+      "files": [
+        "engine/src/cards/pool/pine-walker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sultai Soothsayer",
+      "files": [
+        "engine/src/cards/pool/sultai-soothsayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ponyback Brigade",
+      "files": [
+        "engine/src/cards/pool/ponyback-brigade.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swift Kick",
+      "files": [
+        "engine/src/cards/pool/swift-kick.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rakshasa's Secret",
+      "files": [
+        "engine/src/cards/pool/rakshasas-secret.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kheru Dreadmaw",
+      "files": [
+        "engine/src/cards/pool/kheru-dreadmaw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "War-Name Aspirant",
+      "files": [
+        "engine/src/cards/pool/war-name-aspirant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kheru Lich Lord",
+      "files": [
+        "engine/src/cards/pool/kheru-lich-lord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Timely Hordemate",
+      "files": [
+        "engine/src/cards/pool/timely-hordemate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shambling Attendants",
+      "files": [
+        "engine/src/cards/pool/shambling-attendants.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Abomination of Gudul",
+      "files": [
+        "engine/src/cards/pool/abomination-of-gudul.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rakshasa Vizier",
+      "files": [
+        "engine/src/cards/pool/rakshasa-vizier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bear's Companion",
+      "files": [
+        "engine/src/cards/pool/bears-companion.ts",
+        "engine/src/cards/tokens/bear-token-green-4-4.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sultai Scavenger",
+      "files": [
+        "engine/src/cards/pool/sultai-scavenger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Armament Corps",
+      "files": [
+        "engine/src/cards/pool/armament-corps.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bring Low",
+      "files": [
+        "engine/src/cards/pool/bring-low.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bellowing Saddlebrute",
+      "files": [
+        "engine/src/cards/pool/bellowing-saddlebrute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rite of the Serpent",
+      "files": [
+        "engine/src/cards/pool/rite-of-the-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Waterwhirl",
+      "files": [
+        "engine/src/cards/pool/waterwhirl.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mardu Blazebringer",
+      "files": [
+        "engine/src/cards/pool/mardu-blazebringer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Efreet Weaponmaster",
+      "files": [
+        "engine/src/cards/pool/efreet-weaponmaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scaldkin",
+      "files": [
+        "engine/src/cards/pool/scaldkin.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Crown of Doom",
+      "needs": [
+        "filter:player-other-than-owner"
+      ],
+      "why": "\"Target player other than this artifact's owner gains control of it\": a player target can't exclude the source's owner (OtherThan covers only source, trigger object, trigger player and slots)."
+    },
+    {
+      "name": "Impact Resonance",
+      "needs": [
+        "amount:greatest-damage-by-one-source-this-turn"
+      ],
+      "why": "No amount reads the greatest damage a single source dealt to one permanent or player this turn; X is fixed as it's cast for the division (rulings)."
+    },
+    {
+      "name": "Meandering Towershell",
+      "needs": [
+        "effect:delayed-return-attacking-next-turn"
+      ],
+      "why": "Nothing returns an exiled card tapped and attacking at your next turn's declare-attackers step, attacking a player or planeswalker chosen then."
+    },
+    {
+      "name": "Watcher of the Roost",
+      "needs": [
+        "cost:morph-reveal-card"
+      ],
+      "why": "Its morph cost is \"Reveal a white card in your hand\": a morph cost that isn't mana isn't modeled."
+    },
+    {
+      "name": "Wolfcaller's Howl",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "\"The number of your opponents with four or more cards in hand\": countPlayers takes no filter and hand-size reads only you or each player."
+    },
+    {
+      "name": "Volcanic Offering",
+      "needs": [
+        "decision:opponent-chooses-target"
+      ],
+      "why": "Two of its targets are chosen by an opponent you pick as you cast it; nothing models an opponent choosing a spell's targets."
+    },
+    {
+      "name": "Bitter Feud",
+      "needs": [
+        "decision:choose-player-on-enter",
+        "replacement:chosen-players-damage-doubling"
+      ],
+      "why": "\"As this enters, choose two players\" isn't modeled, nor doubling damage only between the two chosen players."
+    },
+    {
+      "name": "Incite Rebellion",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "Inside for-each-player nothing counts \"creatures that player controls\"."
+    },
+    {
+      "name": "Feat of Resistance",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "No one-shot \"gains protection from the color of your choice until end of turn\" effect; protection is a static only."
+    },
+    {
+      "name": "Smoke Teller",
+      "needs": [
+        "effect:look-at-face-down-permanents"
+      ],
+      "why": "No effect for \"look at target face-down creature\"."
+    },
+    {
+      "name": "Domineering Will",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "The restrictions have no \"blocks this turn if able\" requirement."
+    },
+    {
+      "name": "Grave Sifter",
+      "needs": [
+        "effect:each-player-chooses-creature-type"
+      ],
+      "why": "choose-creature-type always asks the effect's controller; each player can't choose their own type."
+    },
+    {
+      "name": "Ashcloud Phoenix",
+      "needs": [
+        "effect:put-onto-battlefield-face-down"
+      ],
+      "why": "put-onto-battlefield can't return a card face down."
+    },
+    {
+      "name": "Temur Charger",
+      "needs": [
+        "cost:morph-reveal-card"
+      ],
+      "why": "Its morph cost is \"Reveal a green card in your hand\": not mana."
+    },
+    {
+      "name": "Horde Ambusher",
+      "needs": [
+        "cost:morph-reveal-card"
+      ],
+      "why": "Its morph cost is \"Reveal a red card in your hand\": not mana."
+    },
+    {
+      "name": "Herald of Anafenza",
+      "needs": [
+        "trigger:activates-this-ability"
+      ],
+      "why": "activates-ability can't be narrowed to this creature's own outlast ability; folding the token into outlast's effect would change when it can be responded to."
+    },
+    {
+      "name": "Arrow Storm",
+      "needs": [
+        "effect:damage-cant-be-prevented"
+      ],
+      "why": "The damage effect has no \"can't be prevented\" option for the raid mode."
+    },
+    {
+      "name": "Stitcher Geralf",
+      "needs": [
+        "amount:this-way-total-power-of-cards"
+      ],
+      "why": "\"The total power of the cards exiled this way\": sumOf reads 0 power for a card off the battlefield (powerAmong reads mana value in public zones but not power), so the Zombie would enter 0/0."
+    },
+    {
+      "name": "Dulcet Sirens",
+      "needs": [
+        "effect:target-attacks-target-player-this-turn"
+      ],
+      "why": "Nothing makes a creature attack one chosen player this turn if able."
+    },
+    {
+      "name": "Zurgo Helmsmasher",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source"
+      ],
+      "why": "The dealt-damage-this-turn filter names a source only by type, subtype or controller, not \"this creature\"."
+    },
+    {
+      "name": "Thousand Winds",
+      "needs": [
+        "effect:return-to-hand-all-except-source"
+      ],
+      "why": "The mass bounce can't leave out its own source (\"all other tapped creatures\")."
+    },
+    {
+      "name": "Ruthless Ripper",
+      "needs": [
+        "cost:morph-reveal-card"
+      ],
+      "why": "Its morph cost is \"Reveal a black card in your hand\": not mana."
+    },
+    {
+      "name": "Dragon's Eye Savants",
+      "needs": [
+        "cost:morph-reveal-card",
+        "effect:look-at-target-player-hand"
+      ],
+      "why": "Morph by revealing a blue card, and no \"look at target opponent's hand\" effect."
+    },
+    {
+      "name": "Lens of Clarity",
+      "needs": [
+        "effect:look-at-face-down-permanents"
+      ],
+      "why": "Looking at the top card is expressible; looking at opponents' face-down creatures isn't."
+    },
+    {
+      "name": "Burn Away",
+      "needs": [
+        "effect:exile-graveyard-of-trigger-object-controller"
+      ],
+      "why": "The delayed trigger can't reach \"its controller's graveyard\": exiling a graveyard needs a player target or scope."
+    },
+    {
+      "name": "Siege Behemoth",
+      "needs": [
+        "static:assign-damage-as-though-unblocked"
+      ],
+      "why": "No way to say \"you may have each creature assign its combat damage as though it weren't blocked\"."
+    },
+    {
+      "name": "Ob Nixilis of the Black Oath",
+      "needs": [
+        "effect:emblem-grants-activated"
+      ],
+      "why": "create-emblem carries statics and triggered abilities, not the −8 emblem's activated ability."
+    },
+    {
+      "name": "Loreseeker's Stone",
+      "needs": [
+        "cost:ability-cost-increase-per-count"
+      ],
+      "why": "An ability's costReduction only reduces: \"costs {1} more for each card in your hand\" can't be said."
+    },
+    {
+      "name": "Ride Down",
+      "needs": [
+        "filter:blocked-or-blocked-by-filter-this-turn"
+      ],
+      "why": "Nothing picks out \"creatures that were blocked by that creature this combat\" to give them trample."
+    },
+    {
+      "name": "Dragon Grip",
+      "needs": [
+        "effect:self-flash-if-condition"
+      ],
+      "why": "No card-level \"you may cast this spell as though it had flash if [ferocious]\"."
+    },
+    {
+      "name": "Avalanche Tusker",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "No restriction for \"target creature blocks this creature this combat if able\"."
+    }
+  ]
+}

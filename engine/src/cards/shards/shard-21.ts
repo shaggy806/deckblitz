@@ -163,6 +163,7 @@ import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
 import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
+import _poolEmptyThePits from "../pool/empty-the-pits.js";
 import _poolEraOfInnovation from "../pool/era-of-innovation.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
@@ -321,6 +322,7 @@ import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
 import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
 import _poolMindWhip from "../pool/mind-whip.js";
+import _poolMindswipe from "../pool/mindswipe.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMinistrantOfObligation from "../pool/ministrant-of-obligation.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
@@ -484,6 +486,7 @@ import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
+import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
 import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
 import _poolSylvokBattleChair from "../pool/sylvok-battle-chair.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
@@ -589,6 +592,7 @@ import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
+import _tokensBearTokenGreen44 from "../tokens/bear-token-green-4-4.js";
 import _tokensBeastTokenRedGreen from "../tokens/beast-token-red-green.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensBoarTokenRuralRecruit from "../tokens/boar-token-rural-recruit.js";
@@ -770,6 +774,7 @@ const shard: CardShard = {
     _poolEmissaryGreen,
     _poolEmmessiTome,
     _poolEmperorMihailIi,
+    _poolEmptyThePits,
     _poolEraOfInnovation,
     _poolErase,
     _poolEriettesTemptingApple,
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolMicromancer,
     _poolMigratoryGreathorn,
     _poolMindWhip,
+    _poolMindswipe,
     _poolMinionsReturn,
     _poolMinistrantOfObligation,
     _poolMirrorEntity,
@@ -1091,6 +1097,7 @@ const shard: CardShard = {
     _poolSunastianFalconer,
     _poolSunsetStrikemaster,
     _poolSuperSuit,
+    _poolSwarmOfBloodflies,
     _poolSwordOfFeastAndFamine,
     _poolSylvokBattleChair,
     _poolSylvokReplica,
@@ -1198,6 +1205,7 @@ const shard: CardShard = {
     _poolZhentarimBandit,
   ],
   tokens: [
+    _tokensBearTokenGreen44,
     _tokensBeastTokenRedGreen,
     _tokensBirdTokenGwaihirGreatestOfTheEagles,
     _tokensBoarTokenRuralRecruit,

@@ -322,6 +322,7 @@ import _poolMarket from "../pool/market.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
 import _poolMaskOfRiddles from "../pool/mask-of-riddles.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
+import _poolMasterOfPearls from "../pool/master-of-pearls.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
 import _poolMazemindTome from "../pool/mazemind-tome.js";
 import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
@@ -954,6 +955,7 @@ const shard: CardShard = {
     _poolMarketwatchPhantom,
     _poolMaskOfRiddles,
     _poolMasterApothecary,
+    _poolMasterOfPearls,
     _poolMasterworkOfIngenuity,
     _poolMazemindTome,
     _poolMechanShieldmate,

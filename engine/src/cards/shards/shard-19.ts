@@ -417,6 +417,7 @@ import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
 import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
+import _poolPineWalker from "../pool/pine-walker.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPiratesCutlass from "../pool/pirates-cutlass.js";
 import _poolPitilessFists from "../pool/pitiless-fists.js";
@@ -485,6 +486,7 @@ import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
 import _poolSerraZealot from "../pool/serra-zealot.js";
+import _poolSetAdrift from "../pool/set-adrift.js";
 import _poolShadowInTheWarp from "../pool/shadow-in-the-warp.js";
 import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
 import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
@@ -1066,6 +1068,7 @@ const shard: CardShard = {
     _poolPestilentWolf,
     _poolPettyLarceny,
     _poolPhenaxGodOfDeception,
+    _poolPineWalker,
     _poolPiratePeddlers,
     _poolPiratesCutlass,
     _poolPitilessFists,
@@ -1134,6 +1137,7 @@ const shard: CardShard = {
     _poolSerpentsPass,
     _poolSerraPaladin,
     _poolSerraZealot,
+    _poolSetAdrift,
     _poolShadowInTheWarp,
     _poolShadowTheHedgehog,
     _poolShadowmageInfiltrator,

@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2014 and Khans of Tarkir, the rest of both sets** (batch 157): no feature built. 90
+  authored by five `card-author` agents and the lead: Murderous Cut, Wingmate Roc, Nahiri, the
+  Lithomancer, Sorin, Solemn Visitor, End Hostilities, See the Unwritten, Angel of the Dire Hour,
+  Butcher of the Horde and 82 more; 31 blocked, the leader a morph cost that reveals a card
+  (`cost:morph-reveal-card` — five) (2026-10-25).
 - **Fate Reforged, the rest of the set** (batch 156): no feature built — `return-from-graveyard`'s
   filter now reads the spell's X (Rally the Ancestors) and a filter's `colorless: false` means one
   or more colours. 83 authored by five `card-author` agents and the lead: Dromoka, the Eternal,

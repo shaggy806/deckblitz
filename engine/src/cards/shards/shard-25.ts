@@ -284,6 +284,7 @@ import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
+import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKitsuneAce from "../pool/kitsune-ace.js";
@@ -914,6 +915,7 @@ const shard: CardShard = {
     _poolKarametrasFavor,
     _poolKataraTheFearless,
     _poolKazuulsFury,
+    _poolKheruBloodsucker,
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
     _poolKitsuneAce,

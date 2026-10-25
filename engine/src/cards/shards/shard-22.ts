@@ -132,6 +132,7 @@ import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
+import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
 import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
@@ -271,6 +272,7 @@ import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKessigNaturalist from "../pool/kessig-naturalist.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
+import _poolKinTreeInvocation from "../pool/kin-tree-invocation.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
@@ -769,6 +771,7 @@ const shard: CardShard = {
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
     _poolDelugeVirtuoso,
+    _poolDemonOfWailingAgonies,
     _poolDireStrainAnarchist,
     _poolDireWolfProwler,
     _poolDispellersCapsule,
@@ -908,6 +911,7 @@ const shard: CardShard = {
     _poolKessDissidentMage,
     _poolKessigNaturalist,
     _poolKikiJikiMirrorBreaker,
+    _poolKinTreeInvocation,
     _poolKindredDominance,
     _poolKithkinHealer,
     _poolKlawMasterOfSound,

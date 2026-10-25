@@ -26,6 +26,7 @@ import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
 import _poolAncientSpring from "../pool/ancient-spring.js";
 import _poolAndurilNarsilReforged from "../pool/anduril-narsil-reforged.js";
+import _poolAngelOfTheDireHour from "../pool/angel-of-the-dire-hour.js";
 import _poolAngelicDestiny from "../pool/angelic-destiny.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
@@ -89,6 +90,7 @@ import _poolBrownOuphe from "../pool/brown-ouphe.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
 import _poolBumiBash from "../pool/bumi-bash.js";
 import _poolBurnBright from "../pool/burn-bright.js";
+import _poolButcherOfTheHorde from "../pool/butcher-of-the-horde.js";
 import _poolCabalTrainee from "../pool/cabal-trainee.js";
 import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
 import _poolCanopyVista from "../pool/canopy-vista.js";
@@ -440,6 +442,7 @@ import _poolRavagingHorde from "../pool/ravaging-horde.js";
 import _poolRavenClanWarAxe from "../pool/raven-clan-war-axe.js";
 import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRavenousSailback from "../pool/ravenous-sailback.js";
+import _poolRavingDead from "../pool/raving-dead.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolRebelSalvo from "../pool/rebel-salvo.js";
@@ -472,6 +475,7 @@ import _poolSandstorm from "../pool/sandstorm.js";
 import _poolSanguineGuard from "../pool/sanguine-guard.js";
 import _poolSarulfRealmEater from "../pool/sarulf-realm-eater.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
+import _poolScaldkin from "../pool/scaldkin.js";
 import _poolScaleDeflection from "../pool/scale-deflection.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
 import _poolScathingShadelock from "../pool/scathing-shadelock.js";
@@ -644,6 +648,7 @@ import _poolVoraciousHydra from "../pool/voracious-hydra.js";
 import _poolVorpalSword from "../pool/vorpal-sword.js";
 import _poolVoyagingSatyr from "../pool/voyaging-satyr.js";
 import _poolVulshokBerserker from "../pool/vulshok-berserker.js";
+import _poolWakeTheDead from "../pool/wake-the-dead.js";
 import _poolWallOfFrost from "../pool/wall-of-frost.js";
 import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
 import _poolWeddingFestivity from "../pool/wedding-festivity.js";
@@ -676,6 +681,7 @@ import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
+import _tokensKorSoldierToken from "../tokens/kor-soldier-token.js";
 import _tokensMaritLageToken from "../tokens/marit-lage-token.js";
 import _tokensRabbitToken from "../tokens/rabbit-token.js";
 import _tokensReliquaryDragon from "../tokens/reliquary-dragon.js";
@@ -709,6 +715,7 @@ const shard: CardShard = {
     _poolAncestorsProphet,
     _poolAncientSpring,
     _poolAndurilNarsilReforged,
+    _poolAngelOfTheDireHour,
     _poolAngelicDestiny,
     _poolAnnihilate,
     _poolAntQueen,
@@ -772,6 +779,7 @@ const shard: CardShard = {
     _poolBullHippo,
     _poolBumiBash,
     _poolBurnBright,
+    _poolButcherOfTheHorde,
     _poolCabalTrainee,
     _poolCallTheCavalry,
     _poolCanopyVista,
@@ -1123,6 +1131,7 @@ const shard: CardShard = {
     _poolRavenClanWarAxe,
     _poolRavenousAmulet,
     _poolRavenousSailback,
+    _poolRavingDead,
     _poolRaybladeTrooper,
     _poolRazzleDazzler,
     _poolRebelSalvo,
@@ -1155,6 +1164,7 @@ const shard: CardShard = {
     _poolSanguineGuard,
     _poolSarulfRealmEater,
     _poolSazhsChocobo,
+    _poolScaldkin,
     _poolScaleDeflection,
     _poolScarecrowGuide,
     _poolScathingShadelock,
@@ -1327,6 +1337,7 @@ const shard: CardShard = {
     _poolVorpalSword,
     _poolVoyagingSatyr,
     _poolVulshokBerserker,
+    _poolWakeTheDead,
     _poolWallOfFrost,
     _poolWaytaTrainerProdigy,
     _poolWeddingFestivity,
@@ -1361,6 +1372,7 @@ const shard: CardShard = {
     _tokensGiantWizardToken,
     _tokensIllusionTokenMinn,
     _tokensInsectTokenBlackGreen,
+    _tokensKorSoldierToken,
     _tokensMaritLageToken,
     _tokensRabbitToken,
     _tokensReliquaryDragon,

@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolALittleChat from "../pool/a-little-chat.js";
 import _poolAberrant from "../pool/aberrant.js";
+import _poolAbominationOfGudul from "../pool/abomination-of-gudul.js";
 import _poolAbsorbVis from "../pool/absorb-vis.js";
 import _poolAeronautsWings from "../pool/aeronauts-wings.js";
 import _poolAetherHerder from "../pool/aether-herder.js";
@@ -43,6 +44,7 @@ import _poolBagOfTricks from "../pool/bag-of-tricks.js";
 import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
 import _poolBardClass from "../pool/bard-class.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
+import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
@@ -66,6 +68,7 @@ import _poolBontusMonument from "../pool/bontus-monument.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
 import _poolBoulderDash from "../pool/boulder-dash.js";
 import _poolBraveBrawler from "../pool/brave-brawler.js";
+import _poolBreachingLeviathan from "../pool/breaching-leviathan.js";
 import _poolBreakAsunder from "../pool/break-asunder.js";
 import _poolBriarpackAlpha from "../pool/briarpack-alpha.js";
 import _poolBrushland from "../pool/brushland.js";
@@ -372,6 +375,7 @@ import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
 import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMoltenNursery from "../pool/molten-nursery.js";
+import _poolMoltingSnakeskin from "../pool/molting-snakeskin.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
 import _poolMonstrousRage from "../pool/monstrous-rage.js";
 import _poolMonumentalCorruption from "../pool/monumental-corruption.js";
@@ -630,6 +634,7 @@ const shard: CardShard = {
   pool: [
     _poolALittleChat,
     _poolAberrant,
+    _poolAbominationOfGudul,
     _poolAbsorbVis,
     _poolAeronautsWings,
     _poolAetherHerder,
@@ -668,6 +673,7 @@ const shard: CardShard = {
     _poolBanishFromEdoras,
     _poolBardClass,
     _poolBarkOfDoran,
+    _poolBarrageOfBoulders,
     _poolBartizanBats,
     _poolBastPantherGoddess,
     _poolBattleMastery,
@@ -691,6 +697,7 @@ const shard: CardShard = {
     _poolBorosSignet,
     _poolBoulderDash,
     _poolBraveBrawler,
+    _poolBreachingLeviathan,
     _poolBreakAsunder,
     _poolBriarpackAlpha,
     _poolBrushland,
@@ -997,6 +1004,7 @@ const shard: CardShard = {
     _poolMoldgrafMillipede,
     _poolMoltenDuplication,
     _poolMoltenNursery,
+    _poolMoltingSnakeskin,
     _poolMonkRealist,
     _poolMonstrousRage,
     _poolMonumentalCorruption,

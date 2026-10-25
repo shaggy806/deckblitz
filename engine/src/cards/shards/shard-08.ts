@@ -298,6 +298,7 @@ import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
 import _poolJechtReluctantGuardian from "../pool/jecht-reluctant-guardian.js";
 import _poolJenniferWalters from "../pool/jennifer-walters.js";
+import _poolJeskaiElder from "../pool/jeskai-elder.js";
 import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js";
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
@@ -569,6 +570,7 @@ import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThroneWarden from "../pool/throne-warden.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
+import _poolTimelyHordemate from "../pool/timely-hordemate.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
 import _poolTowerWorker from "../pool/tower-worker.js";
 import _poolTownSentry from "../pool/town-sentry.js";
@@ -963,6 +965,7 @@ const shard: CardShard = {
     _poolJazalGoldmane,
     _poolJechtReluctantGuardian,
     _poolJenniferWalters,
+    _poolJeskaiElder,
     _poolJonIrenicusShatteredOne,
     _poolJunkJet,
     _poolJwariScuttler,
@@ -1234,6 +1237,7 @@ const shard: CardShard = {
     _poolThroneWarden,
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,
+    _poolTimelyHordemate,
     _poolTocasiasDigSite,
     _poolTowerWorker,
     _poolTownSentry,

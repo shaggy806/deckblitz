@@ -198,6 +198,7 @@ import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
+import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
 import _poolForceVoid from "../pool/force-void.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
@@ -355,6 +356,7 @@ import _poolMassacreGirl from "../pool/massacre-girl.js";
 import _poolMasterfulFlourish from "../pool/masterful-flourish.js";
 import _poolMeditationPools from "../pool/meditation-pools.js";
 import _poolMeldedMoxite from "../pool/melded-moxite.js";
+import _poolMerEkNightblade from "../pool/mer-ek-nightblade.js";
 import _poolMerfolkAssassin from "../pool/merfolk-assassin.js";
 import _poolMessengerFalcons from "../pool/messenger-falcons.js";
 import _poolMetalhead from "../pool/metalhead.js";
@@ -457,6 +459,7 @@ import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolRubiniaSoulsinger from "../pool/rubinia-soulsinger.js";
+import _poolRushOfBattle from "../pool/rush-of-battle.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
 import _poolRydiasReturn from "../pool/rydias-return.js";
 import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
@@ -827,6 +830,7 @@ const shard: CardShard = {
     _poolFloodfarmVerge,
     _poolFlourishingFox,
     _poolFogwellsGym,
+    _poolForceAway,
     _poolForceOfVirtue,
     _poolForceVoid,
     _poolForensicResearcher,
@@ -984,6 +988,7 @@ const shard: CardShard = {
     _poolMasterfulFlourish,
     _poolMeditationPools,
     _poolMeldedMoxite,
+    _poolMerEkNightblade,
     _poolMerfolkAssassin,
     _poolMessengerFalcons,
     _poolMetalhead,
@@ -1086,6 +1091,7 @@ const shard: CardShard = {
     _poolRoverBlades,
     _poolRoyalTalonFighterJet,
     _poolRubiniaSoulsinger,
+    _poolRushOfBattle,
     _poolRustrazorButcher,
     _poolRydiasReturn,
     _poolSageOfLatNam,

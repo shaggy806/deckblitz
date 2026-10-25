@@ -125,6 +125,7 @@ import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDorotheasRetribution from "../pool/dorotheas-retribution.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
+import _poolDragonscaleBoon from "../pool/dragonscale-boon.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
 import _poolDreamStrix from "../pool/dream-strix.js";
@@ -361,6 +362,7 @@ import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
+import _poolPearlLakeAncient from "../pool/pearl-lake-ancient.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
 import _poolPentagramOfTheAges from "../pool/pentagram-of-the-ages.js";
@@ -757,6 +759,7 @@ const shard: CardShard = {
     _poolDorotheasRetribution,
     _poolDragonBlood,
     _poolDragonlordsServant,
+    _poolDragonscaleBoon,
     _poolDragonwingGlider,
     _poolDreadmawsIre,
     _poolDreamStrix,
@@ -993,6 +996,7 @@ const shard: CardShard = {
     _poolOzolithTheShatteredSpire,
     _poolPatchedPlaything,
     _poolPatchworkAutomaton,
+    _poolPearlLakeAncient,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,
     _poolPentagramOfTheAges,

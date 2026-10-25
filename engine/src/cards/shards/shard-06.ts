@@ -218,6 +218,7 @@ import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
 import _poolGhiredMirrorOfTheWilds from "../pool/ghired-mirror-of-the-wilds.js";
 import _poolGhituLavarunner from "../pool/ghitu-lavarunner.js";
+import _poolGhostfireBlade from "../pool/ghostfire-blade.js";
 import _poolGhostfireSlice from "../pool/ghostfire-slice.js";
 import _poolGhostlyPrison from "../pool/ghostly-prison.js";
 import _poolGirdForBattle from "../pool/gird-for-battle.js";
@@ -504,6 +505,7 @@ import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSunderShaman from "../pool/sunder-shaman.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
+import _poolSwiftKick from "../pool/swift-kick.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
 import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
@@ -840,6 +842,7 @@ const shard: CardShard = {
     _poolGhaltaTheUnstoppable,
     _poolGhiredMirrorOfTheWilds,
     _poolGhituLavarunner,
+    _poolGhostfireBlade,
     _poolGhostfireSlice,
     _poolGhostlyPrison,
     _poolGirdForBattle,
@@ -1126,6 +1129,7 @@ const shard: CardShard = {
     _poolSunderShaman,
     _poolSundownPass,
     _poolSunkenRuins,
+    _poolSwiftKick,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
     _poolSyndicateMessenger,

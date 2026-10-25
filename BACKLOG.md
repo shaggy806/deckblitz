@@ -156,10 +156,20 @@ section keeps only what to do next.
   this turn, exile it instead" with its "dealt damage this way" form; batch 153 the rest of
   Battle for Zendikar, on awaken; batch 154 the rest of Magic Origins, on renown; batch 155
   Dragons of Tarkir, on dash and bolster; batch 156 the rest of Fate Reforged, no feature built
-  but return-from-graveyard's filter now reads the spell's X);
-  **next, Commander 2014** (26 left) **then Khans of Tarkir** (96) — one batch of ~120, five
-  agents on a cloud session. Khans' mechanics (morph, delve, outlast, prowess, ferocious, raid) are all in the pool;
-  check C14's lieutenant ("as long as you control your commander") before dispatching. Batch
+  but return-from-graveyard's filter now reads the spell's X; batch 157 the rest of Commander
+  2014 and Khans of Tarkir, no feature built);
+  **next, Magic 2015** (72 left) **then Conspiracy** (36) — one batch of ~110, five agents on a
+  cloud session. **Three walks run in parallel cloud sessions from 2026-10-25**, each owning a
+  range so none walks another's sets: this newest-first walk (Magic 2015 back to Scars of
+  Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
+  of Alara — ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
+  and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
+  B160 (oldest); after those, take the highest `B<N>` on `origin/main` plus one, checked again
+  just before landing (rename the record and test files if another walk took it). Batch
+  157's leading blocker: a morph cost that reveals a card (`cost:morph-reveal-card` — 5), then
+  "blocks this turn if able" (`effect:must-block-this-turn`) and looking at face-down
+  permanents (`effect:look-at-face-down-permanents`), two each; Stitcher Geralf waits on
+  `powerAmong` reading a card off the battlefield as 0 power. Batch
   156's blockers: a non-Aura enchantment becoming an Aura (`effect:enchantment-becomes-aura` —
   Cloudform, Lightform, Rageform) and "manifest" recording the card it manifested
   (`effect:manifested-this-way` — Wildcall, Formless Nurturing), the rest one each. Batch 155's

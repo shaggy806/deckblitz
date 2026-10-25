@@ -259,6 +259,7 @@ import _poolHoardSmelterDragon from "../pool/hoard-smelter-dragon.js";
 import _poolHobgoblinMantledMarauder from "../pool/hobgoblin-mantled-marauder.js";
 import _poolHonoredHeirloom from "../pool/honored-heirloom.js";
 import _poolHookHauntDrifter from "../pool/hook-haunt-drifter.js";
+import _poolHootingMandrills from "../pool/hooting-mandrills.js";
 import _poolHovermyr from "../pool/hovermyr.js";
 import _poolHowlpackResurgence from "../pool/howlpack-resurgence.js";
 import _poolHullBreach from "../pool/hull-breach.js";
@@ -478,6 +479,7 @@ import _poolSidarKondoOfJamuraa from "../pool/sidar-kondo-of-jamuraa.js";
 import _poolSiegeMastodon from "../pool/siege-mastodon.js";
 import _poolSiegeVeteran from "../pool/siege-veteran.js";
 import _poolSigilOfSleep from "../pool/sigil-of-sleep.js";
+import _poolSingingBellStrike from "../pool/singing-bell-strike.js";
 import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
@@ -599,6 +601,7 @@ import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
 import _poolWanderingChampion from "../pool/wandering-champion.js";
+import _poolWarmongerHellkite from "../pool/warmonger-hellkite.js";
 import _poolWarpArtifact from "../pool/warp-artifact.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
@@ -904,6 +907,7 @@ const shard: CardShard = {
     _poolHobgoblinMantledMarauder,
     _poolHonoredHeirloom,
     _poolHookHauntDrifter,
+    _poolHootingMandrills,
     _poolHovermyr,
     _poolHowlpackResurgence,
     _poolHullBreach,
@@ -1123,6 +1127,7 @@ const shard: CardShard = {
     _poolSiegeMastodon,
     _poolSiegeVeteran,
     _poolSigilOfSleep,
+    _poolSingingBellStrike,
     _poolSireOfSevenDeaths,
     _poolSirenReaver,
     _poolSistersOfTheFlame,
@@ -1244,6 +1249,7 @@ const shard: CardShard = {
     _poolVolcanicSubmersion,
     _poolVulshokFactory,
     _poolWanderingChampion,
+    _poolWarmongerHellkite,
     _poolWarpArtifact,
     _poolWastelandRaider,
     _poolWatcherOfTheWayside,

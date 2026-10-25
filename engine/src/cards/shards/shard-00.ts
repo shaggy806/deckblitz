@@ -390,6 +390,7 @@ import _poolRadiantFountain from "../pool/radiant-fountain.js";
 import _poolRagefire from "../pool/ragefire.js";
 import _poolRagostDeftGastronaut from "../pool/ragost-deft-gastronaut.js";
 import _poolRakishScoundrel from "../pool/rakish-scoundrel.js";
+import _poolRakshasaVizier from "../pool/rakshasa-vizier.js";
 import _poolRalAndTheImplicitMaze from "../pool/ral-and-the-implicit-maze.js";
 import _poolRallyOfWings from "../pool/rally-of-wings.js";
 import _poolRalsOutburst from "../pool/rals-outburst.js";
@@ -416,6 +417,7 @@ import _poolRimefireTorque from "../pool/rimefire-torque.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheAnts from "../pool/rise-of-the-ants.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
+import _poolRiteOfTheSerpent from "../pool/rite-of-the-serpent.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
 import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
 import _poolRocOfKherRidges from "../pool/roc-of-kher-ridges.js";
@@ -1029,6 +1031,7 @@ const shard: CardShard = {
     _poolRagefire,
     _poolRagostDeftGastronaut,
     _poolRakishScoundrel,
+    _poolRakshasaVizier,
     _poolRalAndTheImplicitMaze,
     _poolRallyOfWings,
     _poolRalsOutburst,
@@ -1055,6 +1058,7 @@ const shard: CardShard = {
     _poolRiotPiker,
     _poolRiseOfTheAnts,
     _poolRiseOfTheDreadMarn,
+    _poolRiteOfTheSerpent,
     _poolRitualChamber,
     _poolRoadsideBlowout,
     _poolRocOfKherRidges,

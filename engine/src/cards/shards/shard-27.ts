@@ -237,6 +237,7 @@ import _poolHeraldOfTheHost from "../pool/herald-of-the-host.js";
 import _poolHighAlert from "../pool/high-alert.js";
 import _poolHighFaeNegotiator from "../pool/high-fae-negotiator.js";
 import _poolHighScore from "../pool/high-score.js";
+import _poolHighSentinelsOfArashin from "../pool/high-sentinels-of-arashin.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
@@ -270,6 +271,7 @@ import _poolKabiraOutrider from "../pool/kabira-outrider.js";
 import _poolKaijinOfTheVanishingTouch from "../pool/kaijin-of-the-vanishing-touch.js";
 import _poolKalamaxTheStormsire from "../pool/kalamax-the-stormsire.js";
 import _poolKelinoreBat from "../pool/kelinore-bat.js";
+import _poolKheruDreadmaw from "../pool/kheru-dreadmaw.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
 import _poolKillShot from "../pool/kill-shot.js";
 import _poolKindledHeroism from "../pool/kindled-heroism.js";
@@ -309,6 +311,7 @@ import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
 import _poolMarchesasDecree from "../pool/marchesas-decree.js";
+import _poolMarduCharm from "../pool/mardu-charm.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
 import _poolMarduStrikeLeader from "../pool/mardu-strike-leader.js";
 import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
@@ -339,6 +342,7 @@ import _poolMyrCustodian from "../pool/myr-custodian.js";
 import _poolMythosOfBrokkos from "../pool/mythos-of-brokkos.js";
 import _poolMythosOfNethroi from "../pool/mythos-of-nethroi.js";
 import _poolNahiriTheHarbinger from "../pool/nahiri-the-harbinger.js";
+import _poolNahiriTheLithomancer from "../pool/nahiri-the-lithomancer.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
@@ -511,6 +515,7 @@ import _poolStormOfSouls from "../pool/storm-of-souls.js";
 import _poolStormSpirit from "../pool/storm-spirit.js";
 import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
+import _poolSultaiScavenger from "../pool/sultai-scavenger.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
@@ -626,6 +631,7 @@ import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
+import _tokensSpiritWarriorToken from "../tokens/spirit-warrior-token.js";
 import _tokensVampireKnightToken from "../tokens/vampire-knight-token.js";
 import _tokensVarmintToken from "../tokens/varmint-token.js";
 import _tokensZombieMutantToken from "../tokens/zombie-mutant-token.js";
@@ -866,6 +872,7 @@ const shard: CardShard = {
     _poolHighAlert,
     _poolHighFaeNegotiator,
     _poolHighScore,
+    _poolHighSentinelsOfArashin,
     _poolHobblefiend,
     _poolHomesickness,
     _poolHonedKhopesh,
@@ -899,6 +906,7 @@ const shard: CardShard = {
     _poolKaijinOfTheVanishingTouch,
     _poolKalamaxTheStormsire,
     _poolKelinoreBat,
+    _poolKheruDreadmaw,
     _poolKillMaimBurn,
     _poolKillShot,
     _poolKindledHeroism,
@@ -938,6 +946,7 @@ const shard: CardShard = {
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,
     _poolMarchesasDecree,
+    _poolMarduCharm,
     _poolMarduHordechief,
     _poolMarduStrikeLeader,
     _poolMarduWarshrieker,
@@ -968,6 +977,7 @@ const shard: CardShard = {
     _poolMythosOfBrokkos,
     _poolMythosOfNethroi,
     _poolNahiriTheHarbinger,
+    _poolNahiriTheLithomancer,
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNaturalObsolescence,
@@ -1140,6 +1150,7 @@ const shard: CardShard = {
     _poolStormSpirit,
     _poolStormscapeFamiliar,
     _poolStrengthOfThePack,
+    _poolSultaiScavenger,
     _poolSunderFromWithin,
     _poolSuperVillainLockup,
     _poolSwashbucklersWhip,
@@ -1257,6 +1268,7 @@ const shard: CardShard = {
     _tokensRaccoonToken,
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
+    _tokensSpiritWarriorToken,
     _tokensVampireKnightToken,
     _tokensVarmintToken,
     _tokensZombieMutantToken,

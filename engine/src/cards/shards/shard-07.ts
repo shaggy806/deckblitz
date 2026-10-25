@@ -98,6 +98,7 @@ import _poolCorporealProjection from "../pool/corporeal-projection.js";
 import _poolCourtOfVantress from "../pool/court-of-vantress.js";
 import _poolCrashOfRhinoBeetles from "../pool/crash-of-rhino-beetles.js";
 import _poolCrazedSkirge from "../pool/crazed-skirge.js";
+import _poolCreeperhulk from "../pool/creeperhulk.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrossroadsConsecrator from "../pool/crossroads-consecrator.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
@@ -255,6 +256,8 @@ import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
 import _poolJacesRuse from "../pool/jaces-ruse.js";
 import _poolJaggedScarArchers from "../pool/jagged-scar-archers.js";
+import _poolJeeringInstigator from "../pool/jeering-instigator.js";
+import _poolJeskaiCharm from "../pool/jeskai-charm.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
 import _poolJoragaAuxiliary from "../pool/joraga-auxiliary.js";
 import _poolJubilantMascot from "../pool/jubilant-mascot.js";
@@ -634,6 +637,7 @@ import _tokensDrakeToken from "../tokens/drake-token.js";
 import _tokensEggToken from "../tokens/egg-token.js";
 import _tokensElfToken from "../tokens/elf-token.js";
 import _tokensGoblinTokenGoblinSpymaster from "../tokens/goblin-token-goblin-spymaster.js";
+import _tokensHorrorTokenBlack00 from "../tokens/horror-token-black-0-0.js";
 import _tokensHorseToken from "../tokens/horse-token.js";
 import _tokensIllusionTokenSkyclave from "../tokens/illusion-token-skyclave.js";
 import _tokensIllusionToken from "../tokens/illusion-token.js";
@@ -749,6 +753,7 @@ const shard: CardShard = {
     _poolCourtOfVantress,
     _poolCrashOfRhinoBeetles,
     _poolCrazedSkirge,
+    _poolCreeperhulk,
     _poolCreosoteHeath,
     _poolCrossroadsConsecrator,
     _poolCrushOfWurms,
@@ -906,6 +911,8 @@ const shard: CardShard = {
     _poolItsClobberinTime,
     _poolJacesRuse,
     _poolJaggedScarArchers,
+    _poolJeeringInstigator,
+    _poolJeskaiCharm,
     _poolJetmirsGarden,
     _poolJoragaAuxiliary,
     _poolJubilantMascot,
@@ -1287,6 +1294,7 @@ const shard: CardShard = {
     _tokensEggToken,
     _tokensElfToken,
     _tokensGoblinTokenGoblinSpymaster,
+    _tokensHorrorTokenBlack00,
     _tokensHorseToken,
     _tokensIllusionTokenSkyclave,
     _tokensIllusionToken,

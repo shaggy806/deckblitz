@@ -253,6 +253,7 @@ import _poolHundroog from "../pool/hundroog.js";
 import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolHuntingPack from "../pool/hunting-pack.js";
 import _poolHydrolash from "../pool/hydrolash.js";
+import _poolIcefeatherAven from "../pool/icefeather-aven.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
 import _poolImpactTremors from "../pool/impact-tremors.js";
@@ -456,6 +457,7 @@ import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
 import _poolSecretIdentity from "../pool/secret-identity.js";
+import _poolSeeTheUnwritten from "../pool/see-the-unwritten.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
@@ -886,6 +888,7 @@ const shard: CardShard = {
     _poolHungryGhoul,
     _poolHuntingPack,
     _poolHydrolash,
+    _poolIcefeatherAven,
     _poolIchorclawMyr,
     _poolIlluminatedWings,
     _poolImpactTremors,
@@ -1089,6 +1092,7 @@ const shard: CardShard = {
     _poolSealOfRemoval,
     _poolSecludedCourtyard,
     _poolSecretIdentity,
+    _poolSeeTheUnwritten,
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSenselessRage,

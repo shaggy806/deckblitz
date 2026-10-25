@@ -33,6 +33,7 @@ import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
 import _poolArcticFlats from "../pool/arctic-flats.js";
 import _poolArgivianArchaeologist from "../pool/argivian-archaeologist.js";
+import _poolArmamentCorps from "../pool/armament-corps.js";
 import _poolArmorOfFaith from "../pool/armor-of-faith.js";
 import _poolArmorThrull from "../pool/armor-thrull.js";
 import _poolArwenMortalQueen from "../pool/arwen-mortal-queen.js";
@@ -130,6 +131,7 @@ import _poolDauntlessCathar from "../pool/dauntless-cathar.js";
 import _poolDaybreakChimera from "../pool/daybreak-chimera.js";
 import _poolDeadlyAlliance from "../pool/deadly-alliance.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
+import _poolDeathFrenzy from "../pool/death-frenzy.js";
 import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
@@ -681,6 +683,7 @@ const shard: CardShard = {
     _poolArchonOfSunsGrace,
     _poolArcticFlats,
     _poolArgivianArchaeologist,
+    _poolArmamentCorps,
     _poolArmorOfFaith,
     _poolArmorThrull,
     _poolArwenMortalQueen,
@@ -778,6 +781,7 @@ const shard: CardShard = {
     _poolDaybreakChimera,
     _poolDeadlyAlliance,
     _poolDeadlyRecluse,
+    _poolDeathFrenzy,
     _poolDeathInTheFamily,
     _poolDefiantKhenra,
     _poolDescentOfTheDragons,

@@ -137,6 +137,7 @@ import _poolContagiousNim from "../pool/contagious-nim.js";
 import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
+import _poolCranialArchive from "../pool/cranial-archive.js";
 import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
 import _poolCrocodileOfTheCrossing from "../pool/crocodile-of-the-crossing.js";
 import _poolCryptCreeper from "../pool/crypt-creeper.js";
@@ -621,6 +622,7 @@ import _tokensAssassinTokenAyaOfAlexandria from "../tokens/assassin-token-aya-of
 import _tokensAssassinTokenVraskaTheUnseen from "../tokens/assassin-token-vraska-the-unseen.js";
 import _tokensBananaToken from "../tokens/banana-token.js";
 import _tokensBirdTokenOminousRoost from "../tokens/bird-token-ominous-roost.js";
+import _tokensBirdTokenWhite34 from "../tokens/bird-token-white-3-4.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
 import _tokensDetectiveToken from "../tokens/detective-token.js";
 import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
@@ -774,6 +776,7 @@ const shard: CardShard = {
     _poolContentiousPlan,
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
+    _poolCranialArchive,
     _poolCrimestopperSprite,
     _poolCrocodileOfTheCrossing,
     _poolCryptCreeper,
@@ -1260,6 +1263,7 @@ const shard: CardShard = {
     _tokensAssassinTokenVraskaTheUnseen,
     _tokensBananaToken,
     _tokensBirdTokenOminousRoost,
+    _tokensBirdTokenWhite34,
     _tokensDeathtouchSnakeToken,
     _tokensDetectiveToken,
     _tokensDinosaurSoldierToken,

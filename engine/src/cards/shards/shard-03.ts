@@ -36,6 +36,7 @@ import _poolBattlefrontKrushok from "../pool/battlefront-krushok.js";
 import _poolBeastWithin from "../pool/beast-within.js";
 import _poolBehemothSledge from "../pool/behemoth-sledge.js";
 import _poolBellowingAegisaur from "../pool/bellowing-aegisaur.js";
+import _poolBellowingSaddlebrute from "../pool/bellowing-saddlebrute.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
@@ -134,6 +135,7 @@ import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEmrakulsInfluence from "../pool/emrakuls-influence.js";
+import _poolEndHostilities from "../pool/end-hostilities.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
@@ -197,6 +199,7 @@ import _poolGoblinBushwhacker from "../pool/goblin-bushwhacker.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
 import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
+import _poolGoblinslide from "../pool/goblinslide.js";
 import _poolGoldlustTriad from "../pool/goldlust-triad.js";
 import _poolGoldmeadowHarrier from "../pool/goldmeadow-harrier.js";
 import _poolGontiCannyAcquisitor from "../pool/gonti-canny-acquisitor.js";
@@ -237,6 +240,7 @@ import _poolIntoTheFloodMaw from "../pool/into-the-flood-maw.js";
 import _poolIntoTheTimeVortex from "../pool/into-the-time-vortex.js";
 import _poolIrrigationDitch from "../pool/irrigation-ditch.js";
 import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
+import _poolIvorytuskFortress from "../pool/ivorytusk-fortress.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
 import _poolIxhelScionOfAtraxa from "../pool/ixhel-scion-of-atraxa.js";
 import _poolJacesProjection from "../pool/jaces-projection.js";
@@ -293,6 +297,7 @@ import _poolMakindiMesas from "../pool/makindi-mesas.js";
 import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
+import _poolMarduBlazebringer from "../pool/mardu-blazebringer.js";
 import _poolMartonStromgald from "../pool/marton-stromgald.js";
 import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
@@ -315,6 +320,7 @@ import _poolMossKami from "../pool/moss-kami.js";
 import _poolMossViper from "../pool/moss-viper.js";
 import _poolMoxPearl from "../pool/mox-pearl.js";
 import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
+import _poolMurderousCut from "../pool/murderous-cut.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
@@ -613,6 +619,7 @@ const shard: CardShard = {
     _poolBeastWithin,
     _poolBehemothSledge,
     _poolBellowingAegisaur,
+    _poolBellowingSaddlebrute,
     _poolBelovedPrincess,
     _poolBenalishCavalry,
     _poolBenevolentHydra,
@@ -711,6 +718,7 @@ const shard: CardShard = {
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
     _poolEmrakulsInfluence,
+    _poolEndHostilities,
     _poolEndlessOne,
     _poolEndriderCatalyzer,
     _poolEphemerate,
@@ -774,6 +782,7 @@ const shard: CardShard = {
     _poolGoblinCannon,
     _poolGoblinNegotiation,
     _poolGoblinTunneler,
+    _poolGoblinslide,
     _poolGoldlustTriad,
     _poolGoldmeadowHarrier,
     _poolGontiCannyAcquisitor,
@@ -814,6 +823,7 @@ const shard: CardShard = {
     _poolIntoTheTimeVortex,
     _poolIrrigationDitch,
     _poolIsshinTwoHeavensAsOne,
+    _poolIvorytuskFortress,
     _poolIvyGleefulSpellthief,
     _poolIxhelScionOfAtraxa,
     _poolJacesProjection,
@@ -870,6 +880,7 @@ const shard: CardShard = {
     _poolMalevolentAwakening,
     _poolMandibularKite,
     _poolMapTheFrontier,
+    _poolMarduBlazebringer,
     _poolMartonStromgald,
     _poolMassMutiny,
     _poolMassOfMysteries,
@@ -892,6 +903,7 @@ const shard: CardShard = {
     _poolMossViper,
     _poolMoxPearl,
     _poolMurasaSproutling,
+    _poolMurderousCut,
     _poolNadirKraken,
     _poolNajalTheStormRunner,
     _poolNaruMehaMasterWizard,

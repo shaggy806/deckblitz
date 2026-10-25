@@ -571,6 +571,7 @@ import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
 import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
+import _poolTrapEssence from "../pool/trap-essence.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTremor from "../pool/tremor.js";
@@ -613,6 +614,7 @@ import _poolWarmWelcome from "../pool/warm-welcome.js";
 import _poolWaryThespian from "../pool/wary-thespian.js";
 import _poolWastelandViper from "../pool/wasteland-viper.js";
 import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
+import _poolWaterwhirl from "../pool/waterwhirl.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
 import _poolWestgateRegent from "../pool/westgate-regent.js";
@@ -645,6 +647,7 @@ import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
+import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
 import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeaker.js";
 
 const shard: CardShard = {
@@ -1217,6 +1220,7 @@ const shard: CardShard = {
     _poolTrainedArmodon,
     _poolTramwayStation,
     _poolTransmograntsCrown,
+    _poolTrapEssence,
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTremor,
@@ -1259,6 +1263,7 @@ const shard: CardShard = {
     _poolWaryThespian,
     _poolWastelandViper,
     _poolWaterloggedHulk,
+    _poolWaterwhirl,
     _poolWeaverOfCurrents,
     _poolWeaverOfHarmony,
     _poolWestgateRegent,
@@ -1293,6 +1298,7 @@ const shard: CardShard = {
     _tokensPhyrexianToken,
     _tokensRedHumanToken,
     _tokensSpiderToken21Reach,
+    _tokensStoneforgedBladeToken,
     _tokensWurmTokenBaruWurmspeaker,
   ],
 };

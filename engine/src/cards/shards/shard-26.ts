@@ -58,6 +58,7 @@ import _poolBatteringKrasis from "../pool/battering-krasis.js";
 import _poolBattleMammoth from "../pool/battle-mammoth.js";
 import _poolBearerOfSilence from "../pool/bearer-of-silence.js";
 import _poolBeastieBeatdown from "../pool/beastie-beatdown.js";
+import _poolBecomeImmense from "../pool/become-immense.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
 import _poolBellowingMauler from "../pool/bellowing-mauler.js";
@@ -374,6 +375,7 @@ import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPlanarAtlas from "../pool/planar-atlas.js";
+import _poolPonybackBrigade from "../pool/ponyback-brigade.js";
 import _poolPorcuparrot from "../pool/porcuparrot.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
@@ -389,6 +391,7 @@ import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
 import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
+import _poolRaidersSpoils from "../pool/raiders-spoils.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolBattleMammoth,
     _poolBearerOfSilence,
     _poolBeastieBeatdown,
+    _poolBecomeImmense,
     _poolBedlam,
     _poolBefuddle,
     _poolBellowingMauler,
@@ -997,6 +1001,7 @@ const shard: CardShard = {
     _poolPillarOfTheParuns,
     _poolPixieQueen,
     _poolPlanarAtlas,
+    _poolPonybackBrigade,
     _poolPorcuparrot,
     _poolPortTown,
     _poolPostmortemProfessor,
@@ -1012,6 +1017,7 @@ const shard: CardShard = {
     _poolQueensAgent,
     _poolRadiantDestiny,
     _poolRaftSecurityOfficer,
+    _poolRaidersSpoils,
     _poolRallyTheAncestors,
     _poolRasputinTheOneiromancer,
     _poolRavagingBlaze,

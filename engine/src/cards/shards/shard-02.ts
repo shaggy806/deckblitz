@@ -168,6 +168,7 @@ import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
+import _poolDutifulReturn from "../pool/dutiful-return.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
@@ -506,6 +507,7 @@ import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
 import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
+import _poolSultaiFlayer from "../pool/sultai-flayer.js";
 import _poolSummonEsperRamuh from "../pool/summon-esper-ramuh.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSunpearlKirin from "../pool/sunpearl-kirin.js";
@@ -780,6 +782,7 @@ const shard: CardShard = {
     _poolDuneBeetle,
     _poolDurableHandicraft,
     _poolDuskmantleHouseOfShadow,
+    _poolDutifulReturn,
     _poolEarthblighter,
     _poolEbondeathDracolich,
     _poolEccentricApprentice,
@@ -1118,6 +1121,7 @@ const shard: CardShard = {
     _poolSubtleStrike,
     _poolSukiKyoshiWarrior,
     _poolSulfurFalls,
+    _poolSultaiFlayer,
     _poolSummonEsperRamuh,
     _poolSunmanePegasus,
     _poolSunpearlKirin,

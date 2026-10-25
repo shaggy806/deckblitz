@@ -41,6 +41,7 @@ import _poolBashToBits from "../pool/bash-to-bits.js";
 import _poolBattlewandOak from "../pool/battlewand-oak.js";
 import _poolBedrockTortoise from "../pool/bedrock-tortoise.js";
 import _poolBiliousSkulldweller from "../pool/bilious-skulldweller.js";
+import _poolBitterRevelation from "../pool/bitter-revelation.js";
 import _poolBlackSunsZenith from "../pool/black-suns-zenith.js";
 import _poolBlackWaltzNo3 from "../pool/black-waltz-no-3.js";
 import _poolBlightSickle from "../pool/blight-sickle.js";
@@ -311,6 +312,7 @@ import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
 import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.js";
+import _poolMaliciousAffliction from "../pool/malicious-affliction.js";
 import _poolManaConfluence from "../pool/mana-confluence.js";
 import _poolMarkovRetribution from "../pool/markov-retribution.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
@@ -321,6 +323,7 @@ import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
+import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
@@ -468,6 +471,7 @@ import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSonicAssault from "../pool/sonic-assault.js";
 import _poolSonicShrieker from "../pool/sonic-shrieker.js";
+import _poolSorinSolemnVisitor from "../pool/sorin-solemn-visitor.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralBinding from "../pool/spectral-binding.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
@@ -491,6 +495,7 @@ import _poolStonehands from "../pool/stonehands.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
 import _poolSultaiSkullkeeper from "../pool/sultai-skullkeeper.js";
+import _poolSultaiSoothsayer from "../pool/sultai-soothsayer.js";
 import _poolSummitIntimidator from "../pool/summit-intimidator.js";
 import _poolSummonBahamut from "../pool/summon-bahamut.js";
 import _poolSunDappledCelebrant from "../pool/sun-dappled-celebrant.js";
@@ -655,6 +660,7 @@ const shard: CardShard = {
     _poolBattlewandOak,
     _poolBedrockTortoise,
     _poolBiliousSkulldweller,
+    _poolBitterRevelation,
     _poolBlackSunsZenith,
     _poolBlackWaltzNo3,
     _poolBlightSickle,
@@ -925,6 +931,7 @@ const shard: CardShard = {
     _poolMacabreWaltz,
     _poolMagnifyingGlass,
     _poolMalcolmKeenEyedNavigator,
+    _poolMaliciousAffliction,
     _poolManaConfluence,
     _poolMarkovRetribution,
     _poolMarneusCalgar,
@@ -935,6 +942,7 @@ const shard: CardShard = {
     _poolMemnarchTheWarden,
     _poolMentalNote,
     _poolMindfulBiomancer,
+    _poolMistfireWeaver,
     _poolMockingbirdAceAgent,
     _poolMomentOfValor,
     _poolMoonriseIntruder,
@@ -1082,6 +1090,7 @@ const shard: CardShard = {
     _poolSongMadTreachery,
     _poolSonicAssault,
     _poolSonicShrieker,
+    _poolSorinSolemnVisitor,
     _poolSparringMummy,
     _poolSpectralBinding,
     _poolSpectralDenial,
@@ -1105,6 +1114,7 @@ const shard: CardShard = {
     _poolStreamOfLife,
     _poolStrifeScholar,
     _poolSultaiSkullkeeper,
+    _poolSultaiSoothsayer,
     _poolSummitIntimidator,
     _poolSummonBahamut,
     _poolSunDappledCelebrant,

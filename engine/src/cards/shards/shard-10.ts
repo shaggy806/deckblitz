@@ -187,6 +187,7 @@ import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
 import _poolFathomFleetCutthroat from "../pool/fathom-fleet-cutthroat.js";
 import _poolFearlessFledgling from "../pool/fearless-fledgling.js";
 import _poolFecundity from "../pool/fecundity.js";
+import _poolFeedTheClan from "../pool/feed-the-clan.js";
 import _poolFeedTheSwarm from "../pool/feed-the-swarm.js";
 import _poolFeralAbomination from "../pool/feral-abomination.js";
 import _poolFestivalOfEmbers from "../pool/festival-of-embers.js";
@@ -849,6 +850,7 @@ const shard: CardShard = {
     _poolFathomFleetCutthroat,
     _poolFearlessFledgling,
     _poolFecundity,
+    _poolFeedTheClan,
     _poolFeedTheSwarm,
     _poolFeralAbomination,
     _poolFestivalOfEmbers,

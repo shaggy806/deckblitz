@@ -68,6 +68,7 @@ import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js
 import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
 import _poolBreakTheSpell from "../pool/break-the-spell.js";
 import _poolBrimstoneRoundup from "../pool/brimstone-roundup.js";
+import _poolBringLow from "../pool/bring-low.js";
 import _poolBroadcastRambler from "../pool/broadcast-rambler.js";
 import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
@@ -309,6 +310,7 @@ import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
 import _poolLightwalker from "../pool/lightwalker.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
+import _poolLongshotSquad from "../pool/longshot-squad.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
 import _poolLurkingRoper from "../pool/lurking-roper.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
@@ -407,6 +409,7 @@ import _poolRagavanNimblePilferer from "../pool/ragavan-nimble-pilferer.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakdosFirewheeler from "../pool/rakdos-firewheeler.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
+import _poolRakshasasSecret from "../pool/rakshasas-secret.js";
 import _poolRattlechains from "../pool/rattlechains.js";
 import _poolRavenousBloodseeker from "../pool/ravenous-bloodseeker.js";
 import _poolReconnaissance from "../pool/reconnaissance.js";
@@ -453,9 +456,11 @@ import _poolScatterRay from "../pool/scatter-ray.js";
 import _poolScavengingGhoul from "../pool/scavenging-ghoul.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
+import _poolScoutTheBorders from "../pool/scout-the-borders.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
+import _poolSecretPlans from "../pool/secret-plans.js";
 import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
@@ -597,6 +602,7 @@ import _poolWallOfIce from "../pool/wall-of-ice.js";
 import _poolWallOfOneThousandCuts from "../pool/wall-of-one-thousand-cuts.js";
 import _poolWanderersStrike from "../pool/wanderers-strike.js";
 import _poolWarFlare from "../pool/war-flare.js";
+import _poolWarNameAspirant from "../pool/war-name-aspirant.js";
 import _poolWarhostsFrenzy from "../pool/warhosts-frenzy.js";
 import _poolWaterServant from "../pool/water-servant.js";
 import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
@@ -709,6 +715,7 @@ const shard: CardShard = {
     _poolBothersomeNoisemaker,
     _poolBreakTheSpell,
     _poolBrimstoneRoundup,
+    _poolBringLow,
     _poolBroadcastRambler,
     _poolBruseTarlBoorishHerder,
     _poolBurgeoning,
@@ -950,6 +957,7 @@ const shard: CardShard = {
     _poolLightwalker,
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
+    _poolLongshotSquad,
     _poolLoxodonAnchorite,
     _poolLurkingRoper,
     _poolLyraArchangelOfDawn,
@@ -1048,6 +1056,7 @@ const shard: CardShard = {
     _poolRagingPoltergeist,
     _poolRakdosFirewheeler,
     _poolRakishHeir,
+    _poolRakshasasSecret,
     _poolRattlechains,
     _poolRavenousBloodseeker,
     _poolReconnaissance,
@@ -1094,9 +1103,11 @@ const shard: CardShard = {
     _poolScavengingGhoul,
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,
+    _poolScoutTheBorders,
     _poolSeaSpirit,
     _poolSeaSprite,
     _poolSeasonedPyromancer,
+    _poolSecretPlans,
     _poolSeedOfHope,
     _poolSeekTheBeast,
     _poolSegmentedKrotiq,
@@ -1238,6 +1249,7 @@ const shard: CardShard = {
     _poolWallOfOneThousandCuts,
     _poolWanderersStrike,
     _poolWarFlare,
+    _poolWarNameAspirant,
     _poolWarhostsFrenzy,
     _poolWaterServant,
     _poolWeakstonesSubjugation,
