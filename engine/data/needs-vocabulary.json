@@ -10230,6 +10230,78 @@
    "family": "effect:cast-and-activate-restrictions",
    "example": "Innocuous Researcher: \"you can't cast spells until your next turn\" — `prohibit` lasts this turn only."
   },
+  "amount:times-kicked": {
+   "example": "Taste of Paradise",
+   "family": "keyword:multikicker"
+  },
+  "amount:times-regenerated-this-turn": {
+   "example": "Spiny Starfish",
+   "family": "stat:turn-event-tallies"
+  },
+  "condition:regenerated-this-turn": {
+   "example": "Spiny Starfish",
+   "family": "stat:turn-event-tallies"
+  },
+  "condition:dealt-damage-this-turn-by-spell": {
+   "example": "Suffocation",
+   "family": "stat:noncombat-damage-taken-this-turn"
+  },
+  "cost:exile-top-of-library": {
+   "example": "Royal Herbalist",
+   "family": "cost:choose-cards-as-cost"
+  },
+  "cost:optional-additional-mana-cost": {
+   "example": "Undergrowth",
+   "family": "cost:conditional-alternative-cost"
+  },
+  "cost:untap-opponent-tapped-land": {
+   "example": "Benthic Explorers",
+   "family": "cost:mana-ability-complex-costs"
+  },
+  "decision:opponent-chooses-mode": {
+   "example": "Library of Lat-Nam",
+   "family": "effect:choices-by-other-players"
+  },
+  "effect:delayed-trigger-next-cleanup": {
+   "example": "Thawing Glaciers",
+   "family": "effect:delayed-trigger-extensions"
+  },
+  "effect:exile-from-hand-face-down-linked": {
+   "example": "Gustha's Scepter",
+   "family": "zone:exile-face-down"
+  },
+  "effect:search-library-to-exile": {
+   "example": "Foresight",
+   "family": "effect:linked-exiled-card"
+  },
+  "effect:set-pt-from-target": {
+   "example": "Sworn Defender",
+   "family": "static:set-characteristics"
+  },
+  "effect:target-player-shuffles-library": {
+   "example": "Soldier of Fortune",
+   "family": "effect:shuffle-library"
+  },
+  "effect:top-card-of-graveyard": {
+   "example": "Soldevi Digger",
+   "family": "effect:aggregate-over-graveyard"
+  },
+  "effect:triggered-mana-ability-rider": {
+   "example": "Winter's Night",
+   "family": "effect:mana-ability-side-effects"
+  },
+  "filter:player-previously-dealt-damage-by-source": {
+   "example": "Diseased Vermin",
+   "family": "stat:object-damage-history"
+  },
+  "trigger:discarded-by-opponent": {
+   "example": "Guerrilla Tactics",
+   "family": "trigger:discards-extensions"
+  },
+  "trigger:when-regenerates-this-way": {
+   "example": "Soldevi Sentry",
+   "family": "effect:reflexive-trigger"
+  },
   "cost:cost-reduction-per-creature-targeted": {
    "family": "cost:cost-modification-extensions",
    "example": "Battlefield Thaumaturge: 'spells cost {1} less for each creature they target' — costModification.perTarget counts players too"

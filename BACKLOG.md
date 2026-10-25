@@ -106,7 +106,10 @@ section keeps only what to do next.
   on existing features only; batch 135 Fallen Empires, on "attacks and isn't blocked", removing
   any number of counters as a cost, and state triggers; batch 136 Ice Age whole, on cumulative
   upkeep; batch 160 Homelands whole, no feature built (33 blocked, "doesn't untap during your
-  next untap step" leading with 3). **Next, Alliances** (118 left), then Mirage. This walk's range
+  next untap step" leading with 3); batch 163 Alliances whole, on the `exileTop` cost (69 blocked,
+  the lands' "if this would enter, sacrifice a … instead" — `replacement:enter-replacement-sacrifice`
+  — and banding leading with 4 each, an opponent choosing the mode with 3). **Next, Mirage** (220
+  left: two batches of ~110, five agents each), then Visions (113) and Weatherlight. This walk's range
   ends at Shadowmoor/Eventide (the middle walk owns Shards of Alara on). Leads over the whole pool now:
   banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
   (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana

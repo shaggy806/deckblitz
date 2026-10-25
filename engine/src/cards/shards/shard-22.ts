@@ -222,6 +222,7 @@ import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHackrobat from "../pool/hackrobat.js";
+import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
@@ -874,6 +875,7 @@ const shard: CardShard = {
     _poolGuadosalamFarplaneGateway,
     _poolGuardianOfPilgrims,
     _poolHackrobat,
+    _poolHailStorm,
     _poolHakodaSelflessCommander,
     _poolHatcherySpider,
     _poolHauntedScreen,

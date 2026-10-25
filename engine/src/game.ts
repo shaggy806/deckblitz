@@ -14104,6 +14104,10 @@ export class Game {
     if (ability.cost.mill !== undefined && this.state.zones.perPlayer[player].library.length < ability.cost.mill) {
       return `${player} has too few cards in their library to mill for ${def.name}'s cost`;
     }
+    // Likewise exiling cards from the top (rule 118.3).
+    if (ability.cost.exileTop !== undefined && this.state.zones.perPlayer[player].library.length < ability.cost.exileTop) {
+      return `${player} has too few cards in their library to exile for ${def.name}'s cost`;
+    }
     const costReturn = ability.cost.returnToHand;
     if (costReturn !== undefined) {
       // The choice waits on the stack (see `activateAbility`): a mana ability
@@ -14362,6 +14366,11 @@ export class Game {
     // "Mill a card" as a cost (Millikin): paid now, and stands even if the
     // ability is countered.
     if (ability.cost.mill !== undefined) this.millByEffect({ kind: "player", player }, ability.cost.mill);
+    // "Exile the top card of your library" as a cost (Royal Herbalist): paid
+    // now, the same way.
+    if (ability.cost.exileTop !== undefined) {
+      this.exileFromLibraryByEffect({ kind: "player", player }, { top: ability.cost.exileTop }, player);
+    }
     // Paid *before* the ability resolves, which is what makes Slate of
     // Ancestry's "discard your hand, then draw a card for each creature"
     // work out as a refill rather than a discard of what it drew.

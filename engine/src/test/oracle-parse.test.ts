@@ -88,6 +88,8 @@ describe("costs and triggers", () => {
     expect(parseCost("{1}, Discard a card")).toBeNull();
     // Exert as a cost (rule 701.43 — Steward of Solidarity).
     expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, exertSelf: true });
+    expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, exileTop: 1 });
+    expect(parseCost("{3}, Exile the top four cards of your library").cost).toEqual({ mana: "{3}", tap: false, exileTop: 4 });
   });
 
   it("reads parley's three sentences as one reveal-top, the effect scaled by the cards revealed", () => {

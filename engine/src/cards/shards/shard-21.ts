@@ -159,6 +159,7 @@ import _poolEidolonOfCountlessBattles from "../pool/eidolon-of-countless-battles
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElspethsNightmare from "../pool/elspeths-nightmare.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
+import _poolElvishBard from "../pool/elvish-bard.js";
 import _poolElvishClancaller from "../pool/elvish-clancaller.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
 import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
@@ -482,6 +483,7 @@ import _poolStallionOfAshmouth from "../pool/stallion-of-ashmouth.js";
 import _poolStampedingScurryfoot from "../pool/stampeding-scurryfoot.js";
 import _poolStandFirm from "../pool/stand-firm.js";
 import _poolStandingStones from "../pool/standing-stones.js";
+import _poolStenchOfDecay from "../pool/stench-of-decay.js";
 import _poolStoneDocent from "../pool/stone-docent.js";
 import _poolStormTheVault from "../pool/storm-the-vault.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
@@ -782,6 +784,7 @@ const shard: CardShard = {
     _poolElanorGardner,
     _poolElspethsNightmare,
     _poolElvenFarsight,
+    _poolElvishBard,
     _poolElvishClancaller,
     _poolElvishDoomsayer,
     _poolEmeritusOfAbundance,
@@ -1105,6 +1108,7 @@ const shard: CardShard = {
     _poolStampedingScurryfoot,
     _poolStandFirm,
     _poolStandingStones,
+    _poolStenchOfDecay,
     _poolStoneDocent,
     _poolStormTheVault,
     _poolStormcallerOfKeranos,

@@ -2537,6 +2537,14 @@ tapOthers? }`.
   an ability that adds mana an ordinary one (rule 605.1a; Millikin's ruling):
   it goes on the stack, and the mana arrives as it resolves.
 
+- `exileTop: N` — "Exile the top card (top N cards) of your library" as a
+  cost (Royal Herbalist, Whirling Catapult, Seasoned Tactician): paid the
+  same way as `mill`, face up, never with fewer than N cards there (rule
+  118.3), never a mana ability (605.1a). Nothing reads *which* card it
+  exiled yet — Storm Elemental's "if the exiled card is a snow land" and
+  Phyrexian Devourer's "the exiled card's mana value" wait on
+  `cost:exiled-card-ref`.
+
 - `mana`: a cost string (`"{2}"`) or `null`. May contain `{X}`.
 - `tap: true` adds `{T}`.
 - `sacrifice: "self"` ("Sacrifice this: …"), `"creature-you-control"`, or

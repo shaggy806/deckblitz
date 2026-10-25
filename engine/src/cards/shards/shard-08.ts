@@ -415,6 +415,7 @@ import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
 import _poolPhantomMonster from "../pool/phantom-monster.js";
 import _poolPharikasCure from "../pool/pharikas-cure.js";
+import _poolPhyrexianWarBeast from "../pool/phyrexian-war-beast.js";
 import _poolPicnicRuiner from "../pool/picnic-ruiner.js";
 import _poolPierceStrider from "../pool/pierce-strider.js";
 import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolPerniciousDeed,
     _poolPhantomMonster,
     _poolPharikasCure,
+    _poolPhyrexianWarBeast,
     _poolPicnicRuiner,
     _poolPierceStrider,
     _poolPilgrimOfTheFires,

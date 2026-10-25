@@ -58,6 +58,9 @@ const NO_TOKEN_PRINTING = new Set([
   "Snake Token (artifact, poison)",
   // Boris Devilboon lists none.
   "Minor Demon Token",
+  // Phelddagrif's 1/1 Hippo and Phantasmal Sphere's X/X Orb list none (the Oracle snapshot, 2026-10-25).
+  "1/1 Green Hippo Token",
+  "Orb Token",
   // Broken Visage lists none (the Oracle snapshot, 2026-10-25).
   "X/X Spirit Token (Black)",
   // Wall of Kelp lists none.

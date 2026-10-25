@@ -193,6 +193,7 @@ import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
 import _poolFlickerwisp from "../pool/flickerwisp.js";
+import _poolFloodwaterDam from "../pool/floodwater-dam.js";
 import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
@@ -281,6 +282,7 @@ import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
+import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
@@ -440,6 +442,7 @@ import _poolRipTheSeams from "../pool/rip-the-seams.js";
 import _poolRiptide from "../pool/riptide.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
+import _poolRogueSkycaptain from "../pool/rogue-skycaptain.js";
 import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
@@ -875,6 +878,7 @@ const shard: CardShard = {
     _poolFleetingImage,
     _poolFleetingMemories,
     _poolFlickerwisp,
+    _poolFloodwaterDam,
     _poolFocusTheMind,
     _poolFolkOfThePines,
     _poolFomoriNomad,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
+    _poolKaysa,
     _poolKazanduValley,
     _poolKineticAugur,
     _poolKinjallisCaller,
@@ -1122,6 +1127,7 @@ const shard: CardShard = {
     _poolRiptide,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
+    _poolRogueSkycaptain,
     _poolRonomUnicorn,
     _poolRootboundCrag,
     _poolRubblebeltBraggart,

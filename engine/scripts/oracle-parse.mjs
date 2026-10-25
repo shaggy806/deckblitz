@@ -745,6 +745,14 @@ export function parseCost(text) {
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
+    // "Exile the top card of your library" (Royal Herbalist), "the top two
+    // cards" (Whirling Catapult).
+    else if (part === "Exile the top card of your library") cost.exileTop = 1;
+    else if ((m = new RegExp(`^Exile the top ${N} cards of your library$`, "i").exec(part))) {
+      const count = numberOf(m[1]);
+      if (typeof count !== "number") return null;
+      cost.exileTop = count;
+    }
     // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
     else if (part === "Exert ~") cost.exertSelf = true;
     // Blight N (rule 701.68a), chosen as it's paid.

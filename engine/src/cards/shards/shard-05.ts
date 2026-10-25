@@ -202,6 +202,7 @@ import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
+import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
 import _poolFeed from "../pool/feed.js";
 import _poolFeralInstinct from "../pool/feral-instinct.js";
@@ -231,6 +232,7 @@ import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGiantSlug from "../pool/giant-slug.js";
 import _poolGiantsSkewer from "../pool/giants-skewer.js";
+import _poolGiftOfTheWoods from "../pool/gift-of-the-woods.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
@@ -850,6 +852,7 @@ const shard: CardShard = {
     _poolEyeblightAssassin,
     _poolFakeYourOwnDeath,
     _poolFateUnraveler,
+    _poolFeastOrFamine,
     _poolFeasterOfFools,
     _poolFeed,
     _poolFeralInstinct,
@@ -879,6 +882,7 @@ const shard: CardShard = {
     _poolGiantOx,
     _poolGiantSlug,
     _poolGiantsSkewer,
+    _poolGiftOfTheWoods,
     _poolGild,
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,

@@ -46,7 +46,8 @@ first check-in.
   with `origin/main` (`git fetch origin main && git status -sb`). A batch of this session's
   own still in flight lands first.
 - `mcp__claude-code-remote__list_sessions` (tag `set-walk`): no earlier child still running.
-  One that is still running owns its range until it lands; leave that range out.
+  One that is still running owns its range until it lands; leave that range out. One left
+  idle by an earlier round, its batch on `main`, was never archived: archive it now.
 - Read `BACKLOG.md`'s set-walk lines: where each walk stands and the ranges already recorded.
 
 ## 1. Choose the walks and their ranges
@@ -131,5 +132,7 @@ answers the question:
 
 When every child has landed: the batches and their sets, cards authored and blocked per
 batch (each child's commit message has them), any feature built and by whom, any merge that
-needed a fix. `archive_session` each finished child only once the user has acknowledged
-the results. Offer the next round, with each walk's next sets, but don't start it unasked.
+needed a fix. Then `archive_session` each child whose batch is on `main` (the user's standing
+call, 2026-10-25: archiving is part of the wrap-up, not a separate ask; it frees the child's
+container, and its transcript stays readable). Leave open a child that stopped without landing:
+its context is what a correction or a resumed batch needs. Offer the next round, with each walk's next sets, but don't start it unasked.

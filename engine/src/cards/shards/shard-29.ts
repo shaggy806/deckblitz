@@ -386,6 +386,7 @@ import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
+import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
 import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
@@ -465,6 +466,7 @@ import _poolScoutTheBorders from "../pool/scout-the-borders.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
+import _poolSeasonedTactician from "../pool/seasoned-tactician.js";
 import _poolSecretPlans from "../pool/secret-plans.js";
 import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
@@ -1040,6 +1042,7 @@ const shard: CardShard = {
     _poolPetAvengers,
     _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
+    _poolPhantasmalSphere,
     _poolPharikaGodOfAffliction,
     _poolPileatedProvisioner,
     _poolPirateHat,
@@ -1119,6 +1122,7 @@ const shard: CardShard = {
     _poolSeaSpirit,
     _poolSeaSprite,
     _poolSeasonedPyromancer,
+    _poolSeasonedTactician,
     _poolSecretPlans,
     _poolSeedOfHope,
     _poolSeekTheBeast,

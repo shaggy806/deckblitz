@@ -427,7 +427,8 @@
   "keyword:bolster",
   "keyword:level-up",
   "keyword:umbra-armor",
-  "keyword:parley"
+  "keyword:parley",
+  "cost:exile-top-of-library"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

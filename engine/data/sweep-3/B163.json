@@ -1,0 +1,839 @@
+{
+  "batch": "B163",
+  "status": "complete",
+  "ranks": "Alliances (ALL, 1996-06-10): whole set (oldest-first walk)",
+  "authored": [
+    {
+      "name": "Astrolabe",
+      "files": [
+        "engine/src/cards/pool/astrolabe.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Balduvian Dead",
+      "files": [
+        "engine/src/cards/pool/balduvian-dead.ts",
+        "engine/src/cards/tokens/graveborn-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Balduvian Horde",
+      "files": [
+        "engine/src/cards/pool/balduvian-horde.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Balduvian War-Makers",
+      "files": [
+        "engine/src/cards/pool/balduvian-war-makers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bestial Fury",
+      "files": [
+        "engine/src/cards/pool/bestial-fury.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Browse",
+      "files": [
+        "engine/src/cards/pool/browse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Burnout",
+      "files": [
+        "engine/src/cards/pool/burnout.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chaos Harlequin",
+      "files": [
+        "engine/src/cards/pool/chaos-harlequin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Contagion",
+      "files": [
+        "engine/src/cards/pool/contagion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dystopia",
+      "files": [
+        "engine/src/cards/pool/dystopia.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elvish Bard",
+      "files": [
+        "engine/src/cards/pool/elvish-bard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Exile",
+      "files": [
+        "engine/src/cards/pool/exile.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "False Demise",
+      "files": [
+        "engine/src/cards/pool/false-demise.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Feast or Famine",
+      "files": [
+        "engine/src/cards/pool/feast-or-famine.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Floodwater Dam",
+      "files": [
+        "engine/src/cards/pool/floodwater-dam.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gargantuan Gorilla",
+      "files": [
+        "engine/src/cards/pool/gargantuan-gorilla.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gift of the Woods",
+      "files": [
+        "engine/src/cards/pool/gift-of-the-woods.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gorilla Shaman",
+      "files": [
+        "engine/src/cards/pool/gorilla-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gorilla War Cry",
+      "files": [
+        "engine/src/cards/pool/gorilla-war-cry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hail Storm",
+      "files": [
+        "engine/src/cards/pool/hail-storm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Inheritance",
+      "files": [
+        "engine/src/cards/pool/inheritance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Insidious Bookworms",
+      "files": [
+        "engine/src/cards/pool/insidious-bookworms.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Juniper Order Advocate",
+      "files": [
+        "engine/src/cards/pool/juniper-order-advocate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kaysa",
+      "files": [
+        "engine/src/cards/pool/kaysa.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Keeper of Tresserhorn",
+      "files": [
+        "engine/src/cards/pool/keeper-of-tresserhorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lat-Nam's Legacy",
+      "files": [
+        "engine/src/cards/pool/lat-nams-legacy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lim-Dûl's Paladin",
+      "files": [
+        "engine/src/cards/pool/lim-duls-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lord of Tresserhorn",
+      "files": [
+        "engine/src/cards/pool/lord-of-tresserhorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mishra's Groundbreaker",
+      "files": [
+        "engine/src/cards/pool/mishras-groundbreaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantasmal Sphere",
+      "files": [
+        "engine/src/cards/pool/phantasmal-sphere.ts",
+        "engine/src/cards/tokens/orb-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phelddagrif",
+      "files": [
+        "engine/src/cards/pool/phelddagrif.ts",
+        "engine/src/cards/tokens/green-hippo-token-1-1.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Boon",
+      "files": [
+        "engine/src/cards/pool/phyrexian-boon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian War Beast",
+      "files": [
+        "engine/src/cards/pool/phyrexian-war-beast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ritual of the Machine",
+      "files": [
+        "engine/src/cards/pool/ritual-of-the-machine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rogue Skycaptain",
+      "files": [
+        "engine/src/cards/pool/rogue-skycaptain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Royal Decree",
+      "files": [
+        "engine/src/cards/pool/royal-decree.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Royal Herbalist",
+      "files": [
+        "engine/src/cards/pool/royal-herbalist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seasoned Tactician",
+      "files": [
+        "engine/src/cards/pool/seasoned-tactician.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sol Grail",
+      "files": [
+        "engine/src/cards/pool/sol-grail.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soldevi Heretic",
+      "files": [
+        "engine/src/cards/pool/soldevi-heretic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soldevi Steam Beast",
+      "files": [
+        "engine/src/cards/pool/soldevi-steam-beast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stench of Decay",
+      "files": [
+        "engine/src/cards/pool/stench-of-decay.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swamp Mosquito",
+      "files": [
+        "engine/src/cards/pool/swamp-mosquito.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unlikely Alliance",
+      "files": [
+        "engine/src/cards/pool/unlikely-alliance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Viscerid Drone",
+      "files": [
+        "engine/src/cards/pool/viscerid-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wandering Mage",
+      "files": [
+        "engine/src/cards/pool/wandering-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Whirling Catapult",
+      "files": [
+        "engine/src/cards/pool/whirling-catapult.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yavimaya Ants",
+      "files": [
+        "engine/src/cards/pool/yavimaya-ants.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Ashnod's Cylix",
+      "needs": [
+        "new:look-at-target-player-library-top"
+      ],
+      "why": "target player looks at their top three, puts one back, exiles the rest"
+    },
+    {
+      "name": "Awesome Presence",
+      "needs": [
+        "static:block-tax"
+      ],
+      "why": "can't be blocked unless defending player pays {3} for each creature blocking it"
+    },
+    {
+      "name": "Balduvian Trading Post",
+      "needs": [
+        "replacement:enter-replacement-sacrifice"
+      ],
+      "why": "the same with an untapped Mountain"
+    },
+    {
+      "name": "Benthic Explorers",
+      "needs": [
+        "cost:untap-opponent-tapped-land"
+      ],
+      "why": "untap a tapped land an opponent controls as a cost; mana of any type that land could produce"
+    },
+    {
+      "name": "Bounty of the Hunt",
+      "needs": [
+        "effect:delayed-trigger-next-cleanup"
+      ],
+      "why": "distribute three +1/+1 counters, removed at the beginning of the next cleanup step"
+    },
+    {
+      "name": "Casting of Bones",
+      "needs": [
+        "effect:discard-one-of-drawn"
+      ],
+      "why": "draw three cards, then discard one of them"
+    },
+    {
+      "name": "Death Spark",
+      "needs": [
+        "condition:creature-cards-above-in-graveyard"
+      ],
+      "why": "'if ~ is in your graveyard with a creature card directly above it'"
+    },
+    {
+      "name": "Diminishing Returns",
+      "needs": [
+        "new:shuffle-hand-and-graveyard-into-library",
+        "decision:choose-number"
+      ],
+      "why": "shuffle hand and graveyard into library; each player draws up to seven"
+    },
+    {
+      "name": "Diseased Vermin",
+      "needs": [
+        "filter:player-previously-dealt-damage-by-source"
+      ],
+      "why": "'target opponent previously dealt damage by it', ever"
+    },
+    {
+      "name": "Energy Arc",
+      "needs": [
+        "effect:prevent-combat-damage-to-and-by-target"
+      ],
+      "why": "prevent all combat damage dealt to and by any number of target creatures this turn"
+    },
+    {
+      "name": "Errand of Duty",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "a 1/1 Knight token with banding"
+    },
+    {
+      "name": "Fatal Lore",
+      "needs": [
+        "decision:opponent-chooses-mode",
+        "decision:any-number-targets-in-mode"
+      ],
+      "why": "an opponent chooses the mode; the destroy mode's targets are chosen after it"
+    },
+    {
+      "name": "Foresight",
+      "needs": [
+        "effect:search-library-to-exile"
+      ],
+      "why": "search your library for three cards and exile them"
+    },
+    {
+      "name": "Fyndhorn Druid",
+      "needs": [
+        "filter:blocked-this-turn"
+      ],
+      "why": "'When it dies, if it was blocked this turn'"
+    },
+    {
+      "name": "Gorilla Berserkers",
+      "needs": [
+        "static:cant-be-blocked-except-by-n"
+      ],
+      "why": "'can't be blocked except by three or more creatures'"
+    },
+    {
+      "name": "Guerrilla Tactics",
+      "needs": [
+        "trigger:discarded-by-opponent"
+      ],
+      "why": "'when a spell or ability an opponent controls causes you to discard this card'"
+    },
+    {
+      "name": "Gustha's Scepter",
+      "needs": [
+        "mechanic:face-down",
+        "effect:exile-from-hand-face-down-linked"
+      ],
+      "why": "exile a card from hand face down, linked, lookable; 'when you lose control' trigger"
+    },
+    {
+      "name": "Heart of Yavimaya",
+      "needs": [
+        "replacement:enter-replacement-sacrifice"
+      ],
+      "why": "'if this would enter, sacrifice a Forest instead'"
+    },
+    {
+      "name": "Helm of Obedience",
+      "needs": [
+        "effect:repeat-process"
+      ],
+      "why": "mill one at a time until a creature card or X cards"
+    },
+    {
+      "name": "Ivory Gargoyle",
+      "needs": [
+        "static:skip-draw-step"
+      ],
+      "why": "'When it dies, return it ... and skip your next draw step'"
+    },
+    {
+      "name": "Kjeldoran Escort",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "banding"
+    },
+    {
+      "name": "Kjeldoran Home Guard",
+      "needs": [
+        "condition:attacked-or-blocked-this-combat"
+      ],
+      "why": "at end of combat, if it attacked or blocked this combat"
+    },
+    {
+      "name": "Kjeldoran Outpost",
+      "needs": [
+        "replacement:enter-replacement-sacrifice"
+      ],
+      "why": "'if this would enter, sacrifice a Plains instead; if you do, put it onto the battlefield, otherwise into the graveyard'"
+    },
+    {
+      "name": "Kjeldoran Pride",
+      "needs": [
+        "condition:not-attached-to-source"
+      ],
+      "why": "'target creature other than enchanted creature'"
+    },
+    {
+      "name": "Krovikan Horror",
+      "needs": [
+        "condition:creature-cards-above-in-graveyard"
+      ],
+      "why": "'if ~ is in your graveyard with a creature card directly above it'"
+    },
+    {
+      "name": "Krovikan Plague",
+      "needs": [
+        "cost:tap-enchanted-permanent"
+      ],
+      "why": "'Tap enchanted creature' as a cost"
+    },
+    {
+      "name": "Library of Lat-Nam",
+      "needs": [
+        "decision:opponent-chooses-mode"
+      ],
+      "why": "an opponent chooses the mode as the spell is cast (rule 700.2e)"
+    },
+    {
+      "name": "Lodestone Bauble",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "up to four basic land targets all from one player's graveyard, put on top in any order; that player draws at the next upkeep even with no targets"
+    },
+    {
+      "name": "Martyrdom",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "damage to any target is dealt to the creature instead"
+    },
+    {
+      "name": "Misfortune",
+      "needs": [
+        "decision:opponent-chooses-mode"
+      ],
+      "why": "an opponent chooses one (rule 700.2e)"
+    },
+    {
+      "name": "Misinformation",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "up to three target cards from one opponent's graveyard"
+    },
+    {
+      "name": "Mystic Compass",
+      "needs": [
+        "decision:choose-land-type-on-resolution"
+      ],
+      "why": "target land becomes the basic land type of your choice until end of turn"
+    },
+    {
+      "name": "Nature's Blessing",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "banding is one of its grant options"
+    },
+    {
+      "name": "Nature's Wrath",
+      "needs": [
+        "trigger:player-puts-onto-battlefield"
+      ],
+      "why": "the player who put the Island or blue permanent onto the battlefield sacrifices (ruling)"
+    },
+    {
+      "name": "Omen of Fire",
+      "needs": [
+        "amount:count-per-player"
+      ],
+      "why": "each player sacrifices a Mountain or red permanent for each white permanent they control"
+    },
+    {
+      "name": "Phantasmal Fiend",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "switch this creature's power and toughness until end of turn"
+    },
+    {
+      "name": "Phyrexian Devourer",
+      "needs": [
+        "cost:exiled-card-ref"
+      ],
+      "why": "'Exile the top card of your library: put +1/+1 counters equal to the exiled card's mana value' — the exileTop cost is built, reading the exiled card isn't"
+    },
+    {
+      "name": "Phyrexian Portal",
+      "needs": [
+        "mechanic:face-down-piles-opponent-chooses",
+        "decision:separate-into-piles"
+      ],
+      "why": "an opponent separates the top ten into two face-down piles"
+    },
+    {
+      "name": "Primitive Justice",
+      "needs": [
+        "cost:multiple-alternative-costs"
+      ],
+      "why": "two different any-number-of-times additional costs, each adding a target"
+    },
+    {
+      "name": "Reinforcements",
+      "needs": [
+        "decision:library-ordering"
+      ],
+      "why": "up to three target creature cards on top of the library in any order"
+    },
+    {
+      "name": "Scarab of the Unseen",
+      "needs": [
+        "condition:attached-to-target"
+      ],
+      "why": "return each Aura attached to target permanent"
+    },
+    {
+      "name": "Scars of the Veteran",
+      "needs": [
+        "amount:damage-prevented-this-way"
+      ],
+      "why": "+0/+1 counters for each damage prevented this way, at the next end step"
+    },
+    {
+      "name": "Sheltered Valley",
+      "needs": [
+        "new:enters-sacrifice-instead"
+      ],
+      "why": "'if this would enter, instead sacrifice each other permanent named ~ you control, then put it onto the battlefield'"
+    },
+    {
+      "name": "Soldevi Digger",
+      "needs": [
+        "effect:top-card-of-graveyard"
+      ],
+      "why": "the top card of your graveyard (graveyard order)"
+    },
+    {
+      "name": "Soldevi Excavations",
+      "needs": [
+        "replacement:enter-replacement-sacrifice"
+      ],
+      "why": "'if this would enter, sacrifice an untapped Island instead'"
+    },
+    {
+      "name": "Soldevi Sage",
+      "needs": [
+        "effect:discard-one-of-drawn"
+      ],
+      "why": "draw three cards, then discard one of them"
+    },
+    {
+      "name": "Soldevi Sentry",
+      "needs": [
+        "trigger:when-regenerates-this-way"
+      ],
+      "why": "'when it regenerates this way, that player may draw a card'"
+    },
+    {
+      "name": "Soldier of Fortune",
+      "needs": [
+        "effect:target-player-shuffles-library"
+      ],
+      "why": "'target player shuffles their library'"
+    },
+    {
+      "name": "Spiny Starfish",
+      "needs": [
+        "condition:regenerated-this-turn",
+        "amount:times-regenerated-this-turn"
+      ],
+      "why": "at end of turn, if it regenerated this turn, a 0/1 Starfish for each time"
+    },
+    {
+      "name": "Splintering Wind",
+      "needs": [
+        "effect:created-token-reference"
+      ],
+      "why": "a delayed 'when it leaves the battlefield' trigger watching the created token"
+    },
+    {
+      "name": "Storm Cauldron",
+      "needs": [
+        "trigger:tapped-for-mana-nonmana-trigger"
+      ],
+      "why": "'whenever a land is tapped for mana, return it to its owner's hand' uses the stack; tapped-for-mana triggers run only as mana abilities"
+    },
+    {
+      "name": "Storm Elemental",
+      "needs": [
+        "cost:exiled-card-ref"
+      ],
+      "why": "'if the exiled card is a snow land' reads the exileTop cost's card"
+    },
+    {
+      "name": "Stromgald Spy",
+      "needs": [
+        "static:play-with-hand-revealed"
+      ],
+      "why": "defending player plays with their hand revealed for as long as ~ remains on the battlefield"
+    },
+    {
+      "name": "Suffocation",
+      "needs": [
+        "condition:dealt-damage-this-turn-by-spell"
+      ],
+      "why": "'if you were dealt damage this turn by a red instant or sorcery spell', naming its controller"
+    },
+    {
+      "name": "Surge of Strength",
+      "needs": [
+        "cost:additional-cost-discard-filter"
+      ],
+      "why": "'As an additional cost, discard a red or green card'"
+    },
+    {
+      "name": "Sustaining Spirit",
+      "needs": [
+        "static:damage-life-floor"
+      ],
+      "why": "damage can't reduce your life below 1, as a static"
+    },
+    {
+      "name": "Sworn Defender",
+      "needs": [
+        "filter:blocking-or-blocked-by-source",
+        "effect:set-pt-from-target"
+      ],
+      "why": "base P/T set from a creature blocking or blocked by it"
+    },
+    {
+      "name": "Taste of Paradise",
+      "needs": [
+        "keyword:multikicker",
+        "amount:times-kicked"
+      ],
+      "why": "gain 3 life plus 3 for each additional {1}{G} paid"
+    },
+    {
+      "name": "Thawing Glaciers",
+      "needs": [
+        "effect:delayed-trigger-next-cleanup"
+      ],
+      "why": "'return this land to its owner's hand at the beginning of the next cleanup step'"
+    },
+    {
+      "name": "Thought Lash",
+      "needs": [
+        "keyword:cumulative-upkeep"
+      ],
+      "why": "cumulative upkeep: exile the top card of your library (a non-mana form); 'when a player doesn't pay' exiles their library"
+    },
+    {
+      "name": "Tidal Control",
+      "needs": [
+        "cost:any-player-may-activate"
+      ],
+      "why": "'any player may activate this ability'"
+    },
+    {
+      "name": "Tornado",
+      "needs": [
+        "cost:dynamic-life-cost"
+      ],
+      "why": "'Pay 3 life for each velocity counter' as an activation cost"
+    },
+    {
+      "name": "Undergrowth",
+      "needs": [
+        "condition:additional-cost-option-paid",
+        "cost:optional-additional-mana-cost"
+      ],
+      "why": "'As an additional cost, you may pay {2}{R}' changes the effect; not kicker"
+    },
+    {
+      "name": "Urza's Engine",
+      "needs": [
+        "keyword:banding"
+      ],
+      "why": "gains banding; bands with other"
+    },
+    {
+      "name": "Varchild's Crusader",
+      "needs": [
+        "effect:grant-cant-be-blocked-except"
+      ],
+      "why": "'can't be blocked this turn except by Walls' as a one-shot"
+    },
+    {
+      "name": "Varchild's War-Riders",
+      "needs": [
+        "keyword:cumulative-upkeep"
+      ],
+      "why": "cumulative upkeep: have an opponent create a Survivor token per age counter, each possibly a different opponent"
+    },
+    {
+      "name": "Veteran's Voice",
+      "needs": [
+        "cost:tap-enchanted-permanent"
+      ],
+      "why": "'Tap enchanted creature' as a cost"
+    },
+    {
+      "name": "Whip Vine",
+      "needs": [
+        "filter:creature-source-is-blocking"
+      ],
+      "why": "'target creature with flying blocked by this creature'"
+    },
+    {
+      "name": "Winter's Night",
+      "needs": [
+        "effect:triggered-mana-ability-rider"
+      ],
+      "why": "a triggered mana ability adding mana plus 'that land doesn't untap during its controller's next untap step'"
+    }
+  ]
+}

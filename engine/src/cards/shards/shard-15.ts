@@ -235,6 +235,7 @@ import _poolGolgariCharm from "../pool/golgari-charm.js";
 import _poolGolgariGraveTroll from "../pool/golgari-grave-troll.js";
 import _poolGolgariLonglegs from "../pool/golgari-longlegs.js";
 import _poolGolgariRotFarm from "../pool/golgari-rot-farm.js";
+import _poolGorillaWarCry from "../pool/gorilla-war-cry.js";
 import _poolGraduationDay from "../pool/graduation-day.js";
 import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
@@ -847,6 +848,7 @@ const shard: CardShard = {
     _poolGolgariGraveTroll,
     _poolGolgariLonglegs,
     _poolGolgariRotFarm,
+    _poolGorillaWarCry,
     _poolGraduationDay,
     _poolGraftedButcher,
     _poolGraniteGargoyle,

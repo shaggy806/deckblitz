@@ -319,6 +319,7 @@ import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
+import _poolLimDulsPaladin from "../pool/lim-duls-paladin.js";
 import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
 import _poolLonisGeneticsExpert from "../pool/lonis-genetics-expert.js";
 import _poolLoreDrakkis from "../pool/lore-drakkis.js";
@@ -943,6 +944,7 @@ const shard: CardShard = {
     _poolLichsCaress,
     _poolLifespringDruid,
     _poolLilianasCaress,
+    _poolLimDulsPaladin,
     _poolLokiTheDeceiver,
     _poolLonisGeneticsExpert,
     _poolLoreDrakkis,

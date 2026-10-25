@@ -87,6 +87,7 @@ import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
+import _poolBurnout from "../pool/burnout.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
@@ -452,6 +453,7 @@ import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
 import _poolRootwalla from "../pool/rootwalla.js";
 import _poolRoseTyler from "../pool/rose-tyler.js";
+import _poolRoyalDecree from "../pool/royal-decree.js";
 import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
@@ -517,6 +519,7 @@ import _poolSmittenSwordmaster from "../pool/smitten-swordmaster.js";
 import _poolSmugglersCopter from "../pool/smugglers-copter.js";
 import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
+import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
@@ -746,6 +749,7 @@ const shard: CardShard = {
     _poolBrushstrider,
     _poolBullCerodon,
     _poolBurningSunsFury,
+    _poolBurnout,
     _poolCacklingCulprit,
     _poolCalamityBearer,
     _poolCalculatedDismissal,
@@ -1111,6 +1115,7 @@ const shard: CardShard = {
     _poolRootbreakerWurm,
     _poolRootwalla,
     _poolRoseTyler,
+    _poolRoyalDecree,
     _poolRubblebeltRioters,
     _poolRuneclawBear,
     _poolRunehornHellkite,
@@ -1176,6 +1181,7 @@ const shard: CardShard = {
     _poolSmugglersCopter,
     _poolSnareThopter,
     _poolSolTalisman,
+    _poolSoldeviSteamBeast,
     _poolSolitaryCamel,
     _poolSoulsFire,
     _poolSoulstinger,

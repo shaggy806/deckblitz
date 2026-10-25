@@ -269,6 +269,7 @@ import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
 import _poolInquisitorsOx from "../pool/inquisitors-ox.js";
 import _poolInsatiableAppetite from "../pool/insatiable-appetite.js";
+import _poolInsidiousBookworms from "../pool/insidious-bookworms.js";
 import _poolInsolentNeonate from "../pool/insolent-neonate.js";
 import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
@@ -917,6 +918,7 @@ const shard: CardShard = {
     _poolInnocuousRat,
     _poolInquisitorsOx,
     _poolInsatiableAppetite,
+    _poolInsidiousBookworms,
     _poolInsolentNeonate,
     _poolInspiringBard,
     _poolInstantRamen,

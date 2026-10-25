@@ -331,6 +331,7 @@ import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
 import _poolMischievousCatgeist from "../pool/mischievous-catgeist.js";
+import _poolMishrasGroundbreaker from "../pool/mishras-groundbreaker.js";
 import _poolMistbreathElder from "../pool/mistbreath-elder.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
 import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
@@ -624,6 +625,7 @@ import _tokensDragonTokenFirebreathing from "../tokens/dragon-token-firebreathin
 import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
 import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
 import _tokensGolemTokenGolemFoundry from "../tokens/golem-token-golem-foundry.js";
+import _tokensGreenHippoToken11 from "../tokens/green-hippo-token-1-1.js";
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
@@ -968,6 +970,7 @@ const shard: CardShard = {
     _poolMinionOfLeshrac,
     _poolMirkoObsessiveTheorist,
     _poolMischievousCatgeist,
+    _poolMishrasGroundbreaker,
     _poolMistbreathElder,
     _poolMisterFantastic,
     _poolMockingbirdBobbiMorse,
@@ -1263,6 +1266,7 @@ const shard: CardShard = {
     _tokensEldraziSpawnToken,
     _tokensElementalTokenRekindlingPhoenix,
     _tokensGolemTokenGolemFoundry,
+    _tokensGreenHippoToken11,
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,

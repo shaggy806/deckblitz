@@ -43,6 +43,7 @@ import _poolAttendedSocialite from "../pool/attended-socialite.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
 import _poolBadlandsRevival from "../pool/badlands-revival.js";
+import _poolBalduvianDead from "../pool/balduvian-dead.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
 import _poolBalinLoremaster from "../pool/balin-loremaster.js";
 import _poolBarrageTyrant from "../pool/barrage-tyrant.js";
@@ -179,6 +180,7 @@ import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
+import _poolFalseDemise from "../pool/false-demise.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
@@ -690,6 +692,7 @@ const shard: CardShard = {
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
     _poolBadlandsRevival,
+    _poolBalduvianDead,
     _poolBalefireLiege,
     _poolBalinLoremaster,
     _poolBarrageTyrant,
@@ -826,6 +829,7 @@ const shard: CardShard = {
     _poolExplosiveApparatus,
     _poolFaebloomTrick,
     _poolFaerieVandal,
+    _poolFalseDemise,
     _poolFandanielTelophoroiAscian,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,

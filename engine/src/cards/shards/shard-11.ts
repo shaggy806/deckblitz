@@ -206,6 +206,7 @@ import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
 import _poolGaeasProtector from "../pool/gaeas-protector.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGandalfsSanction from "../pool/gandalfs-sanction.js";
+import _poolGargantuanGorilla from "../pool/gargantuan-gorilla.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
 import _poolGavonySilversmith from "../pool/gavony-silversmith.js";
 import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
@@ -281,6 +282,7 @@ import _poolInevitableDefeat from "../pool/inevitable-defeat.js";
 import _poolInfernalMedusa from "../pool/infernal-medusa.js";
 import _poolInfinityFormula from "../pool/infinity-formula.js";
 import _poolIngaRuneEyes from "../pool/inga-rune-eyes.js";
+import _poolInheritance from "../pool/inheritance.js";
 import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
@@ -622,6 +624,7 @@ import _poolWaywardGiant from "../pool/wayward-giant.js";
 import _poolWeddingSecurity from "../pool/wedding-security.js";
 import _poolWedgelightRammer from "../pool/wedgelight-rammer.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
+import _poolWhirlingCatapult from "../pool/whirling-catapult.js";
 import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
 import _poolWieldingTheGreenDragon from "../pool/wielding-the-green-dragon.js";
 import _poolWildFieldScarecrow from "../pool/wild-field-scarecrow.js";
@@ -865,6 +868,7 @@ const shard: CardShard = {
     _poolGaeasProtector,
     _poolGaiusVanBaelsar,
     _poolGandalfsSanction,
+    _poolGargantuanGorilla,
     _poolGarruksGorehorn,
     _poolGavonySilversmith,
     _poolGearbaneOrangutan,
@@ -940,6 +944,7 @@ const shard: CardShard = {
     _poolInfernalMedusa,
     _poolInfinityFormula,
     _poolIngaRuneEyes,
+    _poolInheritance,
     _poolInquisitionOfKozilek,
     _poolInspiringOverseer,
     _poolIntoTheNorth,
@@ -1281,6 +1286,7 @@ const shard: CardShard = {
     _poolWeddingSecurity,
     _poolWedgelightRammer,
     _poolWhiptongueHydra,
+    _poolWhirlingCatapult,
     _poolWhirlwindTechnique,
     _poolWieldingTheGreenDragon,
     _poolWildFieldScarecrow,

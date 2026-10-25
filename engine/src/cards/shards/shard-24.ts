@@ -170,6 +170,7 @@ import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
 import _poolExecute from "../pool/execute.js";
+import _poolExile from "../pool/exile.js";
 import _poolExpeditionMap from "../pool/expedition-map.js";
 import _poolExplosiveWelcome from "../pool/explosive-welcome.js";
 import _poolExpressiveIteration from "../pool/expressive-iteration.js";
@@ -607,6 +608,7 @@ import _poolWorldShaper from "../pool/world-shaper.js";
 import _poolWorldgorgerDragon from "../pool/worldgorger-dragon.js";
 import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
 import _poolWrensRunHydra from "../pool/wrens-run-hydra.js";
+import _poolYavimayaAnts from "../pool/yavimaya-ants.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
 import _poolZenithSeeker from "../pool/zenith-seeker.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
@@ -621,6 +623,7 @@ import _tokensBeastTokenBlackDeathtouch from "../tokens/beast-token-black-deatht
 import _tokensBlackGreenElfToken from "../tokens/black-green-elf-token.js";
 import _tokensDevilToken from "../tokens/devil-token.js";
 import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
+import _tokensGravebornToken from "../tokens/graveborn-token.js";
 import _tokensHeroToken from "../tokens/hero-token.js";
 import _tokensIllusionTokenFreezingBlocker from "../tokens/illusion-token-freezing-blocker.js";
 import _tokensKorWarriorToken from "../tokens/kor-warrior-token.js";
@@ -802,6 +805,7 @@ const shard: CardShard = {
     _poolEntsFury,
     _poolErode,
     _poolExecute,
+    _poolExile,
     _poolExpeditionMap,
     _poolExplosiveWelcome,
     _poolExpressiveIteration,
@@ -1239,6 +1243,7 @@ const shard: CardShard = {
     _poolWorldgorgerDragon,
     _poolWranglerOfTheDamned,
     _poolWrensRunHydra,
+    _poolYavimayaAnts,
     _poolYotianDissident,
     _poolZenithSeeker,
     _poolZephyrSprite,
@@ -1255,6 +1260,7 @@ const shard: CardShard = {
     _tokensBlackGreenElfToken,
     _tokensDevilToken,
     _tokensFrogLizardToken,
+    _tokensGravebornToken,
     _tokensHeroToken,
     _tokensIllusionTokenFreezingBlocker,
     _tokensKorWarriorToken,

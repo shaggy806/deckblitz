@@ -708,7 +708,44 @@ export function auraPolarity(def: CardDefinition): Polarity {
     if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
     if (ability.prohibits !== undefined) harm = true;
   }
+  // Nothing in its statics: what its own "enchanted creature" triggers do to
+  // that creature — Bestial Fury's "+4/+0 and trample when it becomes
+  // blocked", False Demise's "return that card under your control".
+  if (!harm && !help) {
+    for (const ability of def.triggered ?? []) {
+      if (!("who" in ability.trigger) || ability.trigger.who !== "attached") continue;
+      const lean = attachedTriggerLean(ability.effect);
+      if (lean === "help") help = true;
+      else if (lean === "harm") harm = true;
+    }
+  }
   return harm === help ? "either" : harm ? "harm" : "help";
+}
+
+/** Which way an Aura's `who: "attached"` trigger leans on the enchanted
+ * creature (its trigger object), or null when it doesn't touch it. */
+function attachedTriggerLean(effect: EffectSpec | null): "help" | "harm" | null {
+  if (effect === null) return null;
+  if (effect.kind === "sequence") {
+    const leans = effect.effects.map(attachedTriggerLean).filter((l) => l !== null);
+    return leans.length > 0 && leans.every((l) => l === leans[0]) ? leans[0] : null;
+  }
+  if (!("target" in effect) || effect.target !== "trigger-object") return null;
+  switch (effect.kind) {
+    case "modify-pt": {
+      const sum = (typeof effect.power === "number" ? effect.power : 0) + (typeof effect.toughness === "number" ? effect.toughness : 0);
+      return sum > 0 ? "help" : sum < 0 ? "harm" : null;
+    }
+    case "grant-keyword":
+      return effect.keyword === "defender" ? "harm" : "help";
+    case "put-onto-battlefield":
+      return "help";
+    case "destroy":
+    case "tap":
+      return "harm";
+    default:
+      return null;
+  }
 }
 
 /** Memos for one bias (or none): every definition reads the same under it,

@@ -137,6 +137,7 @@ import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
+import _poolDystopia from "../pool/dystopia.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
 import _poolEbonyRhino from "../pool/ebony-rhino.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolDrownedDiner,
     _poolDrySpell,
     _poolDungeonShade,
+    _poolDystopia,
     _poolEarthRumble,
     _poolEasternPaladin,
     _poolEbonyRhino,

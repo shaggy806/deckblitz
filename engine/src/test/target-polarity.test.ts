@@ -90,6 +90,12 @@ describe("slot polarity", () => {
     expect(cast("Acquired Mutation")).toEqual(["harm"]);
   });
 
+  it("reads an Aura's enchanted-creature triggers when its statics say nothing", () => {
+    expect(cast("Bestial Fury")).toEqual(["help"]);
+    expect(cast("Gift of the Woods")).toEqual(["help"]);
+    expect(cast("False Demise")).toEqual(["help"]);
+  });
+
   it("reads activated and triggered abilities", () => {
     expect(activated("Garruk Wildspeaker", 0)).toEqual(["help", "help"]);
     expect(activated("Ajani, Caller of the Pride", 0)).toEqual(["help"]);

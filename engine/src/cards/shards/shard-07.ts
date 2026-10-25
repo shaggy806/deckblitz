@@ -38,6 +38,7 @@ import _poolAustereCommand from "../pool/austere-command.js";
 import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
 import _poolBackdraftHellkite from "../pool/backdraft-hellkite.js";
 import _poolBakeryRaid from "../pool/bakery-raid.js";
+import _poolBalduvianHorde from "../pool/balduvian-horde.js";
 import _poolBanewhipPunisher from "../pool/banewhip-punisher.js";
 import _poolBarTheDoor from "../pool/bar-the-door.js";
 import _poolBardTheBowman from "../pool/bard-the-bowman.js";
@@ -64,6 +65,7 @@ import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
+import _poolBrowse from "../pool/browse.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolBurningAnger from "../pool/burning-anger.js";
@@ -577,6 +579,7 @@ import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchainedBerserker from "../pool/unchained-berserker.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
 import _poolUndyingEvil from "../pool/undying-evil.js";
+import _poolUnlikelyAlliance from "../pool/unlikely-alliance.js";
 import _poolUnyieldingKrumar from "../pool/unyielding-krumar.js";
 import _poolUrzasRebuff from "../pool/urzas-rebuff.js";
 import _poolUthrosResearchCraft from "../pool/uthros-research-craft.js";
@@ -705,6 +708,7 @@ const shard: CardShard = {
     _poolAvidReclaimer,
     _poolBackdraftHellkite,
     _poolBakeryRaid,
+    _poolBalduvianHorde,
     _poolBanewhipPunisher,
     _poolBarTheDoor,
     _poolBardTheBowman,
@@ -731,6 +735,7 @@ const shard: CardShard = {
     _poolBountyAgent,
     _poolBrilliantSpectrum,
     _poolBronzebeakMoa,
+    _poolBrowse,
     _poolBullsStrength,
     _poolBurnTheAccursed,
     _poolBurningAnger,
@@ -1244,6 +1249,7 @@ const shard: CardShard = {
     _poolUnchainedBerserker,
     _poolUnchartedHaven,
     _poolUndyingEvil,
+    _poolUnlikelyAlliance,
     _poolUnyieldingKrumar,
     _poolUrzasRebuff,
     _poolUthrosResearchCraft,
