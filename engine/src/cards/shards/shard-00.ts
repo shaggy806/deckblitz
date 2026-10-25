@@ -289,6 +289,7 @@ import _poolKravTheUnredeemed from "../pool/krav-the-unredeemed.js";
 import _poolLaceWithMoonglove from "../pool/lace-with-moonglove.js";
 import _poolLanguish from "../pool/languish.js";
 import _poolLanternSpirit from "../pool/lantern-spirit.js";
+import _poolLatNamsLegacy from "../pool/lat-nams-legacy.js";
 import _poolLatchSeeker from "../pool/latch-seeker.js";
 import _poolLavaSerpent from "../pool/lava-serpent.js";
 import _poolLavaTubes from "../pool/lava-tubes.js";
@@ -936,6 +937,7 @@ const shard: CardShard = {
     _poolLaceWithMoonglove,
     _poolLanguish,
     _poolLanternSpirit,
+    _poolLatNamsLegacy,
     _poolLatchSeeker,
     _poolLavaSerpent,
     _poolLavaTubes,

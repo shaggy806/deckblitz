@@ -25,6 +25,7 @@ import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
 import _poolArclightPhoenix from "../pool/arclight-phoenix.js";
 import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
+import _poolAstrolabe from "../pool/astrolabe.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
@@ -77,6 +78,7 @@ import _poolCelestialRegulator from "../pool/celestial-regulator.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
+import _poolChaosHarlequin from "../pool/chaos-harlequin.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
@@ -587,6 +589,7 @@ import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
 import _poolWallCrawl from "../pool/wall-crawl.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
+import _poolWanderingMage from "../pool/wandering-mage.js";
 import _poolWarBalloon from "../pool/war-balloon.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
@@ -666,6 +669,7 @@ const shard: CardShard = {
     _poolArclightPhoenix,
     _poolArdentDustspeaker,
     _poolArgothianTreefolk,
+    _poolAstrolabe,
     _poolAuntiesSentence,
     _poolAvengerOfZendikar,
     _poolAvianChangeling,
@@ -718,6 +722,7 @@ const shard: CardShard = {
     _poolChampionsOfThePerfect,
     _poolChandrasPyreling,
     _poolChangeOfPlans,
+    _poolChaosHarlequin,
     _poolChillingScreech,
     _poolCircleOfProtectionBlack,
     _poolClamorousIronclad,
@@ -1228,6 +1233,7 @@ const shard: CardShard = {
     _poolWakandanTusker,
     _poolWallCrawl,
     _poolWallOfAir,
+    _poolWanderingMage,
     _poolWarBalloon,
     _poolWargate,
     _poolWargling,

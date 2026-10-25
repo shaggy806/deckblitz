@@ -45,6 +45,7 @@ import _poolAvengersTower from "../pool/avengers-tower.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
+import _poolBalduvianWarMakers from "../pool/balduvian-war-makers.js";
 import _poolBallroom from "../pool/ballroom.js";
 import _poolBanshee from "../pool/banshee.js";
 import _poolBaradDur from "../pool/barad-dur.js";
@@ -712,6 +713,7 @@ const shard: CardShard = {
     _poolAzraSmokeshaper,
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
+    _poolBalduvianWarMakers,
     _poolBallroom,
     _poolBanshee,
     _poolBaradDur,

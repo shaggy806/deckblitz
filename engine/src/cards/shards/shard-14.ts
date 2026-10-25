@@ -342,6 +342,7 @@ import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
 import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
 import _poolLonghornSharpshooter from "../pool/longhorn-sharpshooter.js";
+import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
@@ -458,6 +459,7 @@ import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
+import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
@@ -977,6 +979,7 @@ const shard: CardShard = {
     _poolLlanowarElves,
     _poolLocthwainGargoyle,
     _poolLonghornSharpshooter,
+    _poolLordOfTresserhorn,
     _poolLotusRing,
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
@@ -1093,6 +1096,7 @@ const shard: CardShard = {
     _poolRocketVolley,
     _poolRoilElemental,
     _poolRooftopSaboteurs,
+    _poolRoyalHerbalist,
     _poolRuinousGremlin,
     _poolRunawayCarriage,
     _poolRunawayTrashBot,

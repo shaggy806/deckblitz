@@ -588,6 +588,7 @@ import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifa
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
 import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
+import _tokensOrbToken from "../tokens/orb-token.js";
 import _tokensOxToken from "../tokens/ox-token.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js";
@@ -1184,6 +1185,7 @@ const shard: CardShard = {
     _tokensElfDruidToken,
     _tokensMutagenToken,
     _tokensMutantToken,
+    _tokensOrbToken,
     _tokensOxToken,
     _tokensPlantToken,
     _tokensSpiritTokenWhiteBlack,

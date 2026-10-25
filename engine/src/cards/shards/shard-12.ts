@@ -500,6 +500,7 @@ import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
+import _poolSolGrail from "../pool/sol-grail.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
 import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
@@ -1142,6 +1143,7 @@ const shard: CardShard = {
     _poolSmolderingWerewolf,
     _poolSnareTheSkies,
     _poolSnowHound,
+    _poolSolGrail,
     _poolSoltariTrooper,
     _poolSongOfEarendil,
     _poolSophiaDoggedDetective,

@@ -517,6 +517,7 @@ import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSureStrike from "../pool/sure-strike.js";
+import _poolSwampMosquito from "../pool/swamp-mosquito.js";
 import _poolSwat from "../pool/swat.js";
 import _poolSwiftgearDrake from "../pool/swiftgear-drake.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
@@ -1151,6 +1152,7 @@ const shard: CardShard = {
     _poolStromkirkCondemned,
     _poolSummitSentinel,
     _poolSureStrike,
+    _poolSwampMosquito,
     _poolSwat,
     _poolSwiftgearDrake,
     _poolTajuruBlightblade,

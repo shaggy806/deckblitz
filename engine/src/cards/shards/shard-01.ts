@@ -47,6 +47,7 @@ import _poolBeholdTheBeyond from "../pool/behold-the-beyond.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
+import _poolBestialFury from "../pool/bestial-fury.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
@@ -203,6 +204,7 @@ import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
 import _poolGorgonFlail from "../pool/gorgon-flail.js";
+import _poolGorillaShaman from "../pool/gorilla-shaman.js";
 import _poolGougedZealot from "../pool/gouged-zealot.js";
 import _poolGracefulTakedown from "../pool/graceful-takedown.js";
 import _poolGraspingGiant from "../pool/grasping-giant.js";
@@ -264,6 +266,7 @@ import _poolJanjeetSentry from "../pool/janjeet-sentry.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
 import _poolJoustingLance from "../pool/jousting-lance.js";
+import _poolJuniperOrderAdvocate from "../pool/juniper-order-advocate.js";
 import _poolJunktroller from "../pool/junktroller.js";
 import _poolJuzamDjinn from "../pool/juzam-djinn.js";
 import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
@@ -374,6 +377,7 @@ import _poolPatronOfTheArts from "../pool/patron-of-the-arts.js";
 import _poolPegasusCharger from "../pool/pegasus-charger.js";
 import _poolPeterParkersCamera from "../pool/peter-parkers-camera.js";
 import _poolPharikasLibation from "../pool/pharikas-libation.js";
+import _poolPhelddagrif from "../pool/phelddagrif.js";
 import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPlanarOutburst from "../pool/planar-outburst.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
@@ -475,6 +479,7 @@ import _poolSlogurkTheOverslime from "../pool/slogurk-the-overslime.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
 import _poolSmugglersBuggy from "../pool/smugglers-buggy.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
+import _poolSoldeviHeretic from "../pool/soldevi-heretic.js";
 import _poolSolemnRecruit from "../pool/solemn-recruit.js";
 import _poolSoulFeast from "../pool/soul-feast.js";
 import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
@@ -668,6 +673,7 @@ const shard: CardShard = {
     _poolBelenonWarAnthem,
     _poolBellowsLizard,
     _poolBespokeBo,
+    _poolBestialFury,
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBlacklanceParagon,
@@ -824,6 +830,7 @@ const shard: CardShard = {
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
     _poolGorgonFlail,
+    _poolGorillaShaman,
     _poolGougedZealot,
     _poolGracefulTakedown,
     _poolGraspingGiant,
@@ -885,6 +892,7 @@ const shard: CardShard = {
     _poolJenaraAsuraOfWar,
     _poolJhessianLookout,
     _poolJoustingLance,
+    _poolJuniperOrderAdvocate,
     _poolJunktroller,
     _poolJuzamDjinn,
     _poolKaitosPursuit,
@@ -995,6 +1003,7 @@ const shard: CardShard = {
     _poolPegasusCharger,
     _poolPeterParkersCamera,
     _poolPharikasLibation,
+    _poolPhelddagrif,
     _poolPillardropWarden,
     _poolPlanarOutburst,
     _poolPlanarPortal,
@@ -1096,6 +1105,7 @@ const shard: CardShard = {
     _poolSmolderingSpires,
     _poolSmugglersBuggy,
     _poolSnowCoveredSwamp,
+    _poolSoldeviHeretic,
     _poolSolemnRecruit,
     _poolSoulFeast,
     _poolSoulOfWindgrace,

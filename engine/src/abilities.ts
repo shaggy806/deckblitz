@@ -233,6 +233,13 @@ export interface AbilityCost {
    * that adds mana from being a mana ability (rule 605.1a), so it uses the
    * stack. Automatic, like `payLife`. */
   readonly mill?: number;
+  /** Exile this many cards from the top of your library as part of the cost
+   * (Royal Herbalist: "{2}, Exile the top card of your library: You gain 1
+   * life"; Whirling Catapult's "Exile the top two cards"). Like `mill`: can't
+   * be paid with fewer cards than that in the library (rule 118.3), it moves
+   * cards from a library so an ability with it is never a mana ability (rule
+   * 605.1a), and it's automatic. */
+  readonly exileTop?: number;
   /** Exile the source itself as part of the cost (Hanged Executioner:
    * "{3}{W}, Exile this creature: Exile target creature"). Distinct from
    * `sacrifice: "self"` — the source doesn't reach a graveyard, so nothing
@@ -1969,6 +1976,7 @@ export function isManaAbility(ability: ActivatedAbility): boolean {
     // Rule 605.1a: a cost that moves a card from a library (Millikin's "Mill
     // a card") makes it an ordinary activated ability, on the stack.
     ability.cost.mill === undefined &&
+    ability.cost.exileTop === undefined &&
     // Whatever else it costs (605.1a asks of a cost only that it move no
     // card to or from a library): a sacrifice of itself (Treasure) or of a
     // chosen permanent (Kykar's "Sacrifice a Spirit"), life, counters
