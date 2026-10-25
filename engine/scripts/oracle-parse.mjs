@@ -343,6 +343,8 @@ function keywordPart(part) {
       triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" }],
     }),
     convoke: () => ({ card: { convoke: true } }),
+    // Improvise (rule 702.126a): convoke's machinery, artifacts paying generic mana.
+    improvise: () => ({ card: { improvise: true } }),
     // Compleated (rule 702.150a): the loyalty it enters with.
     compleated: () => ({ card: { compleated: true } }),
     // Read ahead (rule 702.155): its chapter choice comes from `defineCard`.
