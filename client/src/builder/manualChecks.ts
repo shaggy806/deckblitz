@@ -8126,4 +8126,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*4'], hand: ['Lively Dirge'], gy: ['Hill Giant', 'Grizzly Bears', 'Savannah Lions'] },
     }),
   ),
+  preset(
+    'Will of the Jeskai: Bob chooses before your hand is discarded',
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Will of the Jeskai', 'Grizzly Bears'] },
+      opp: { human: true },
+    }),
+  ),
 ]

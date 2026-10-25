@@ -135,7 +135,7 @@ describe("each player may", () => {
     expect(life(game, B)).toBe(20);
   });
 
-  it("asks one player at a time, from the active player, each after the last one's choice is done", () => {
+  it("asks one player at a time, from the active player, and they all draw once everyone has chosen (rule 101.4)", () => {
     const { game, controllers } = setUp([A, B, C]);
     for (const p of [A, B, C]) controllers[p].chooseModesFn = yes;
     const handA = hand(game, A);
@@ -145,12 +145,14 @@ describe("each player may", () => {
     game.advanceUntil((s) => {
       if (s.awaiting?.kind === "choose-modes" && askedInTurn.at(-1) !== s.awaiting.player) {
         askedInTurn.push(s.awaiting.player);
-        // Alice has drawn by the time Bob is asked.
-        if (s.awaiting.player === B) expect(hand(game, A)).toBe(handA + 1);
+        // Alice hasn't drawn yet when Bob is asked: the draws wait for the
+        // last answer.
+        if (s.awaiting.player === B) expect(hand(game, A)).toBe(handA);
       }
       return quiet(s);
     });
     expect(askedInTurn).toEqual([A, B, C]);
+    expect(hand(game, A)).toBe(handA + 1);
     for (const p of [A, B, C]) expect(life(game, p)).toBe(21);
   });
 

@@ -18,6 +18,7 @@ import {
   cast,
   destroy,
   graveyard,
+  hand,
   lands,
   life,
   loyalty,
@@ -255,5 +256,50 @@ describe("\"whenever a creature you control deals combat damage to that player t
     toStep(game, "postcombat-main");
     expect(tokensNamed(game, "Treasure Token")).toBe(2);
     expect(game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === "Treasure Token").every((id) => game.state.objects[id].tapped)).toBe(true);
+  });
+});
+
+describe("\"each player may\": everyone chooses, then it all happens (rule 101.4)", () => {
+  it("Will of the Jeskai: bob chooses before alice's hand is discarded, then both wheel", () => {
+    const { game, a, b } = table();
+    const kept = toHand(game, "Grizzly Bears");
+    lands(game, "Mountain", 4);
+    const spell = toHand(game, "Will of the Jeskai");
+    pickModes(a, 0);
+    let aliceHandWhenBobChose: readonly string[] | undefined;
+    b.chooseModesFn = () => {
+      aliceHandWhenBobChose = [...hand(game, A)];
+      return [0];
+    };
+    cast(game, spell, { modes: [0] });
+    expect(aliceHandWhenBobChose).toContain(kept);
+    expect(zone(game, kept)).toBe("graveyard");
+    expect(hand(game, A)).toHaveLength(5);
+    expect(hand(game, B)).toHaveLength(5);
+  });
+
+  it("Kwain, Itinerant Meddler: whoever drew gains 1 life; who declined neither draws nor gains", () => {
+    const { game, a, b } = table();
+    const kwain = spawn(game, "Kwain, Itinerant Meddler");
+    pickModes(a, 0);
+    b.chooseModesFn = () => [];
+    const before = { a: hand(game, A).length, b: hand(game, B).length };
+    activate(game, kwain, 0);
+    expect(hand(game, A)).toHaveLength(before.a + 1);
+    expect(hand(game, B)).toHaveLength(before.b);
+    expect(life(game, A)).toBe(21);
+    expect(life(game, B)).toBe(20);
+  });
+
+  it("Snort: both wheel, and only the opponent who did is dealt 5", () => {
+    const { game, a, b } = table();
+    lands(game, "Mountain", 4);
+    pickModes(a, 0);
+    pickModes(b, 0);
+    cast(game, toHand(game, "Snort"));
+    expect(hand(game, A)).toHaveLength(5);
+    expect(hand(game, B)).toHaveLength(5);
+    expect(life(game, A)).toBe(20);
+    expect(life(game, B)).toBe(15);
   });
 });

@@ -14430,6 +14430,7 @@ import _poolSneakingGuide from "./pool/sneaking-guide.js";
 import _poolSneakySnacker from "./pool/sneaky-snacker.js";
 import _poolSneeringShadewriter from "./pool/sneering-shadewriter.js";
 import _poolSnoopingPage from "./pool/snooping-page.js";
+import _poolSnort from "./pool/snort.js";
 import _poolSnortingGahr from "./pool/snorting-gahr.js";
 import _poolSnowCoveredForest from "./pool/snow-covered-forest.js";
 import _poolSnowCoveredIsland from "./pool/snow-covered-island.js";
@@ -33473,6 +33474,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSneakySnacker,
   _poolSneeringShadewriter,
   _poolSnoopingPage,
+  _poolSnort,
   _poolSnortingGahr,
   _poolSnowCoveredForest,
   _poolSnowCoveredIsland,
@@ -52529,6 +52531,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sneaky-snacker": _poolSneakySnacker,
   "pool/sneering-shadewriter": _poolSneeringShadewriter,
   "pool/snooping-page": _poolSnoopingPage,
+  "pool/snort": _poolSnort,
   "pool/snorting-gahr": _poolSnortingGahr,
   "pool/snow-covered-forest": _poolSnowCoveredForest,
   "pool/snow-covered-island": _poolSnowCoveredIsland,

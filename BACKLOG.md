@@ -244,7 +244,7 @@ there and move this line to `COMPLETED.md`.
 - **Replacement order is chosen for the affected player, never asked** (616.1).
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**
 - **Toxic's last two shapes** (Skrelv, Defector Mite; Skrelv's Hive).
-- **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape** — Will of the Jeskai, Kwain, Black Mage's Rod.
+- **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4c, 800.4g–h).
 - **Dividing among targets: what's left** — an X total, distributing counters.

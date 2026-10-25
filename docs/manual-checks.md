@@ -5296,3 +5296,7 @@ engine terms. A second thing to check is a second test.
 ### Lively Dirge: two creature cards with total mana value 4 or less
 - **Do:** Cast Lively Dirge choosing only its second mode ({2}). Pick Hill Giant and Grizzly Bears.
 - **Expect:** The prompt reads "up to 2 cards with total mana value 4 or less", and Hill Giant with Grizzly Bears (6 together) can't be confirmed. Grizzly Bears with Savannah Lions can.
+
+### Will of the Jeskai: Bob chooses before your hand is discarded
+- **Do:** Cast Will of the Jeskai, wheel mode. Answer yes. As Bob, look at your hand before answering yes.
+- **Expect:** When Bob is asked, your Grizzly Bears is still in your hand. Once he answers, both hands go to the graveyards and each of you draws five.

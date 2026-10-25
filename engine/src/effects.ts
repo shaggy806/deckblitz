@@ -6448,7 +6448,16 @@ export interface EffectApi {
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
-  askEachPlayerMay(player: PlayerId, spec: Extract<EffectSpec, { kind: "each-player-may" }>): void;
+  askEachPlayerMay(
+    player: PlayerId,
+    spec: Extract<EffectSpec, { kind: "each-player-may" }>,
+    /** Only ask: the answer is recorded and the effect done later, by
+     * {@link applyEachPlayerMayAs} (rule 101.4). */
+    askOnly?: boolean,
+  ): void;
+  /** `effect` as `player`'s own — what they said yes to in an
+   * `"each-player-may"` asked with `askOnly`. */
+  applyEachPlayerMayAs(player: PlayerId, effect: EffectSpec): void;
   /** Rule 101.4: hold the discards and sacrifices the players of an
    * `"each-player-may"` choose until every one of them has chosen
    * (`GameState.heldChoices`) — a no-op when already held. */
@@ -7330,6 +7339,20 @@ function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): Bou
  * something — parks the rest as a copy carrying its `progress`, beneath
  * whatever that step parked of its own, so it all happens in order.
  */
+/** Effects an `"each-player-may"` can do after everyone has answered: none
+ * of them asks the player anything more. */
+const ASKS_NOTHING: ReadonlySet<EffectSpec["kind"]> = new Set<EffectSpec["kind"]>([
+  "draw",
+  "discard-hand",
+  "gain-life",
+  "lose-life",
+]);
+
+function asksNothing(effect: EffectSpec): boolean {
+  if (effect.kind === "sequence") return effect.effects.every(asksNothing);
+  return ASKS_NOTHING.has(effect.kind);
+}
+
 function applyEachPlayerMay(
   spec: Extract<EffectSpec, { kind: "each-player-may" }>,
   ctx: ResolutionContext,
@@ -7339,6 +7362,12 @@ function applyEachPlayerMay(
   let toAsk = spec.progress?.toAsk ?? eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true);
   const park = (progress: EachPlayerMayProgress, below: number): void =>
     ctx.resumeAfterDecisions({ ...spec, progress }, below);
+  // An effect that asks nothing more of the player — draw, discard their
+  // hand, gain life — is only asked about, then done for everyone who said
+  // yes at once (rule 101.4): a later player doesn't see an earlier one's
+  // discarded hand or drawn cards before choosing (Will of the Jeskai).
+  const deferred =
+    spec.effect !== undefined && spec.options === undefined && spec.choices === undefined && asksNothing(spec.effect);
   // One question at a time, each answered before the next is asked, and
   // then what they chose happens at once (rule 101.4): a discard or a
   // sacrifice a player chooses waits, the discarded cards hidden in hand
@@ -7350,13 +7379,22 @@ function applyEachPlayerMay(
     toAsk = toAsk.slice(1);
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
-    ctx.askEachPlayerMay(player, spec);
+    ctx.askEachPlayerMay(player, spec, deferred);
     if (!pendingBefore && ctx.decisionPending()) {
       park({ since, asked, toAsk }, parked);
       return;
     }
   }
-  if (spec.progress?.results === undefined) ctx.releaseHeldChoices();
+  if (spec.progress?.results === undefined) {
+    ctx.releaseHeldChoices();
+    if (deferred && spec.effect !== undefined) {
+      const effect = spec.effect;
+      const yes = asked.filter((player) => ctx.tookEachPlayerMay(player, since));
+      ctx.simultaneously(() => {
+        for (const player of yes) ctx.applyEachPlayerMayAs(player, effect);
+      });
+    }
+  }
   if (spec.ifDid === undefined && spec.ifDidnt === undefined) return;
   let results =
     spec.progress?.results ??

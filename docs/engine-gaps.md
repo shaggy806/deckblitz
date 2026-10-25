@@ -69,14 +69,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   Skrelv, Defector Mite, which also needs hexproof from a colour) and a static scoped to
   "creatures with toxic" (Skrelv's Hive: toxic is folded in the layer such a scope would have
   to wait for).
-- **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape.** Each reviewer
-  flagged these while blocking a new card for the same reason; none was re-run, so check each:
-  - `each-player-may` holds only discards and sacrifices until every player has chosen (rule
-    101.4, `GameState.heldChoices` — batch 109); anything else a player chose is still done before
-    the next is asked: Will of the Jeskai's wheel mode, Kwain, Itinerant Meddler's draw. Snort,
-    Ruin Grinder (a whole-hand discard and draw), Tempt with Discovery (searches) and Innocent
-    Traveler ("if no one does") stay blocked on it.
-  - `attach` to a "created" token picks one when a doubler makes two (Black Mage's Rod).
+- **"Each player may" with a choice inside it.** Rule 101.4: every player chooses, then it all
+  happens at once. `each-player-may` holds discards and sacrifices until the last answer
+  (`GameState.heldChoices`), and an effect that asks nothing more (draw, discard a hand, gain or
+  lose life — `asksNothing`) is done for everyone who said yes after the last answer. One that
+  asks something else, a search above all, is still done before the next player is asked: Tempt
+  with Discovery stays blocked on it, and so does Innocent Traveler ("if no one does").
 - **Static-effect dependency ordering** (rule 613.8) is implemented only for layer 4's additive
   type grants (Kudo beside Mishra's Factory, `characteristics.ts`). Every other layer applies
   its statics in timestamp order only.

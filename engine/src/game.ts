@@ -22028,12 +22028,12 @@ export class Game {
           targetZones,
           triggerController: refs.triggerSpellController ?? triggerLastKnown()?.controller,
         }),
-      askEachPlayerMay: (player, spec) =>
+      askEachPlayerMay: (player, spec, askOnly) =>
         this.askEachPlayerMay(
           source,
           controller,
           player,
-          spec,
+          askOnly === true && spec.effect !== undefined ? { ...spec, effect: { kind: "sequence", effects: [] } } : spec,
           x,
           targets,
           triggerValue,
@@ -22041,6 +22041,13 @@ export class Game {
           refs,
           targetZones,
         ),
+      applyEachPlayerMayAs: (player, effect) => {
+        if (this.state.players[player]?.hasLost !== false) return;
+        applyEffectSpec(
+          effect,
+          this.makeResolutionContext(source, player, targets, x, triggerValue, triggerObject, 1, 0, targetZones, refs),
+        );
+      },
       holdChoices: () => {
         this.state.heldChoices ??= { discards: [] };
       },
