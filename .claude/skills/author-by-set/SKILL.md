@@ -48,6 +48,11 @@ card is a draft like any other — its templates match sentences, not meaning
 
 ## 0. Orient
 
+- **Unmerged work first**: `node scripts/unmerged-branches.mjs` (the
+  SessionStart hook has already printed it, if there's anything). A branch it
+  lists holds commits `main` doesn't — merge it into `main` before authoring,
+  or ask the user whether it's abandoned. Starting a batch over it is how five
+  sets were walked twice (2026-10-25).
 - `git status` clean enough to work on (the `sync-check` skill if on a
   different machine). `npm run build -w engine`.
 - `BACKLOG.md`, "Card backlog": anything to merge or fix first.
@@ -122,6 +127,10 @@ As `author-top-cards` steps 3–6, with these differences:
 - **Commit**: `Cards: <Set name> — <three or four headline cards> and <count>
   more` (or `Engine, Cards: <the feature>, and <Set name>'s …` when one was
   built), the set and share, and any engine or scaffolder change with why.
+- **Land it on `main`** (a cloud session): push the session branch, then
+  `git fetch origin main && git merge origin/main && git push origin HEAD:main`
+  — the next session starts from `main`, and a batch left on a session branch
+  gets walked again.
 
 ## 4. Report and offer the next
 

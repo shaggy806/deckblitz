@@ -43,6 +43,11 @@ nothing; a wrong one lies at the table. When in doubt, it's blocked.
 
 ## 0. Orient (read, don't skim)
 
+- **Unmerged work first**: `node scripts/unmerged-branches.mjs` (the
+  SessionStart hook has already printed it, if there's anything). A branch it
+  lists holds commits `main` doesn't — merge it into `main` before authoring,
+  or ask the user whether it's abandoned. Starting a batch over it is how five
+  sets were walked twice (2026-10-25).
 - `git status` clean enough to work on (the `sync-check` skill if on a
   different machine than last time). `npm run build -w engine`.
 - `BACKLOG.md`, "Card backlog": the counts, the line marked **Next**,

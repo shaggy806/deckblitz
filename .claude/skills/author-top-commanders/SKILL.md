@@ -16,6 +16,11 @@ wrong is worse than one substituted — the deck is built around it.
 
 ## 0. Orient
 
+- **Unmerged work first**: `node scripts/unmerged-branches.mjs` (the
+  SessionStart hook has already printed it, if there's anything). A branch it
+  lists holds commits `main` doesn't — merge it into `main` before authoring,
+  or ask the user whether it's abandoned. Starting a batch over it is how five
+  sets were walked twice (2026-10-25).
 - `git status`; `npm run build -w engine`.
 - `BACKLOG.md`, "Commander gap": the count, the greedy order, the UI-bound
   list, the dropped commanders.

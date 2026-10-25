@@ -49,7 +49,8 @@ takes a few minutes.
 
 ## 0. Orient
 
-As `author-by-set` step 0: `git status`, `npm run build -w engine`,
+As `author-by-set` step 0 — unmerged branches first (`node
+scripts/unmerged-branches.mjs`: merge whatever it lists before authoring), then `git status`, `npm run build -w engine`,
 `BACKLOG.md`'s "Card backlog" (its line for this walk says which set is
 next), AUTHORING.md §0-1 and §15 if they're not in context yet. The old sets
 are all in the Oracle snapshot.

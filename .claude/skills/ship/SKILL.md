@@ -62,8 +62,11 @@ git on purpose; edit it with the Edit tool, which keeps its CRLF and NUL).
 Split unrelated work into separate commits the way `git log` does ("Bots:
 …", "Engine: …", "Client: …", "Cards: …"). Message: what changed and why,
 with the numbers that justify it, ending with the attribution lines the
-session gives. Then `git push origin main` (a cloud session pushes its
-`claude/…` branch instead). No force-push, no history rewrite, no
+session gives. Then `git push origin main`. A cloud session pushes its
+own branch, **then lands it on `main` too**: `git fetch origin main && git
+merge origin/main` (re-run the checks if that brought anything in), then `git
+push origin HEAD:main` — a session branch alone is invisible to the next
+session, which starts from `main` (CLAUDE.md, "Cloud sessions"). No force-push, no history rewrite, no
 `--no-verify`, ever without asking.
 
 ## 6. Report
