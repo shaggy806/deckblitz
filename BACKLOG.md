@@ -235,7 +235,6 @@ there and move this line to `COMPLETED.md`.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
-- **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).

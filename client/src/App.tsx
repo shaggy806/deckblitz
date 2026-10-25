@@ -253,6 +253,7 @@ const castExtras = (cast: CastAction) => ({
   ...(cast.webSlingingReturn !== undefined ? { webSlingingReturn: cast.webSlingingReturn.object } : {}),
   // "4 damage divided as you choose" (Magma Opus): asked once the targets are in.
   ...(cast.divide !== undefined ? { divide: cast.divide } : {}),
+  ...(cast.phyrexianPips !== undefined ? { phyrexianPips: cast.phyrexianPips } : {}),
   // Not echoed either: how many distinct targets are affordable, which the
   // targeting steps keep inside (`currentSlotOptions`).
   ...(cast.targetCount !== undefined ? { targetCount: cast.targetCount } : {}),
@@ -403,6 +404,9 @@ interface Targeting {
    * on (rules 601.2d, 603.3d — Magma Opus, Dragonlord Atarka): asked once
    * they're chosen, before it goes out. */
   readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true }
+  /** How many of its cost's Phyrexian pips could be paid with 2 life each
+   * (rule 107.4f): asked once the targets are in, before it goes out. */
+  readonly phyrexianPips?: number
   /** New targets for a copy of a spell (Twincast, Shiko and Narset): the
    * target each slot has now, which a Keep button takes — it may not be on
    * the board to click any more. */
@@ -1583,6 +1587,12 @@ function Table({
     readonly shares: readonly number[]
     readonly resume: (division: readonly number[]) => void
   } | null>(null)
+  // A cast or ability whose targets are in, waiting on how many of its
+  // Phyrexian pips the player pays with life (rule 107.4f).
+  const [pendingPhyrexian, setPendingPhyrexian] = useState<{
+    readonly pips: number
+    readonly resume: (life: number) => void
+  } | null>(null)
   const [pendingConvoke, setPendingConvoke] = useState<{
     readonly action: Action
     readonly offer: ConvokeOffer
@@ -1995,6 +2005,7 @@ function Table({
     | 'choose-convoke'
     | 'choose-waterbend'
     | 'choose-division'
+    | 'choose-phyrexian'
     | 'assign-combat-damage'
     | 'targeting'
     | 'cast-now'
@@ -2062,6 +2073,8 @@ function Table({
                       ? 'choose-waterbend'
                     : pendingDivision
                       ? 'choose-division'
+                    : pendingPhyrexian
+                      ? 'choose-phyrexian'
                     : pendingManaSplit
                       ? 'split-mana'
                     : activeTargeting
@@ -2125,9 +2138,11 @@ function Table({
         | 'convokeOffer'
         | 'waterbendOffer'
         | 'divide'
+        | 'phyrexianPips'
       >,
       targets: readonly (TargetRef | null)[],
       division?: readonly number[],
+      phyrexianLife?: number,
     ): void {
       const action: Action =
         t.kind === 'choose-targets'
@@ -2164,6 +2179,7 @@ function Table({
                 ...(t.sneakReturn !== undefined ? { sneakReturn: t.sneakReturn } : {}),
                 ...(t.webSlingingReturn !== undefined ? { webSlingingReturn: t.webSlingingReturn } : {}),
                 ...(division !== undefined ? { division: [...division] } : {}),
+                ...(phyrexianLife !== undefined && phyrexianLife > 0 ? { phyrexianLife } : {}),
               }
             : {
                 type: 'activate-ability',
@@ -2175,6 +2191,7 @@ function Table({
                 ...(t.xValue !== undefined ? { xValue: t.xValue } : {}),
                 ...(t.manaColors !== undefined ? { manaColors: t.manaColors } : {}),
                 ...(division !== undefined ? { division: [...division] } : {}),
+                ...(phyrexianLife !== undefined && phyrexianLife > 0 ? { phyrexianLife } : {}),
               }
       // Two or more targets to divide among: ask how, then carry on from here
       // with the answer. One takes it all, which the engine works out itself.
@@ -2194,6 +2211,20 @@ function Table({
           // Back into this with the split: everything it needs is in the
           // arguments, so an earlier render's copy does as well.
           resume: (chosen) => finish(t, targets, chosen),
+        })
+        return
+      }
+      // Phyrexian mana (rule 107.4f): how many pips to pay with life, the
+      // caster's call. Asked once, then on with the answer.
+      if (
+        t.phyrexianPips !== undefined &&
+        t.phyrexianPips > 0 &&
+        phyrexianLife === undefined &&
+        action.type !== 'choose-targets'
+      ) {
+        setPendingPhyrexian({
+          pips: t.phyrexianPips,
+          resume: (n) => finish(t, targets, division, n),
         })
         return
       }
@@ -2440,6 +2471,7 @@ function Table({
           ? { waterbendOffer: action.waterbend }
           : {}),
         ...(action.divide !== undefined ? { divide: action.divide } : {}),
+        ...(action.phyrexianPips !== undefined ? { phyrexianPips: action.phyrexianPips } : {}),
       })
     },
     [beginTargeting],
@@ -2486,6 +2518,7 @@ function Table({
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
         ...(ab.divide !== undefined ? { divide: ab.divide } : {}),
+        ...(ab.phyrexianPips !== undefined ? { phyrexianPips: ab.phyrexianPips } : {}),
       })
     },
     [beginTargeting],
@@ -4413,6 +4446,30 @@ function Table({
           Cast
         </button>
         <button type="button" onClick={() => setPendingDivision(null)}>
+          Cancel
+        </button>
+      </div>
+    )
+  } else if (mode === 'choose-phyrexian' && pendingPhyrexian) {
+    // Each Phyrexian pip: its colour, or 2 life (rule 107.4f). Paying with
+    // mana still pays life for a pip mana can't cover.
+    const { pips, resume } = pendingPhyrexian
+    controls = (
+      <div className="controls">
+        <span>Phyrexian mana — pay with life?</span>
+        {Array.from({ length: pips + 1 }, (_unused, n) => (
+          <button
+            key={n}
+            type="button"
+            onClick={() => {
+              setPendingPhyrexian(null)
+              resume(n)
+            }}
+          >
+            {n === 0 ? 'Mana' : `${n} with life (${2 * n} life)`}
+          </button>
+        ))}
+        <button type="button" onClick={() => setPendingPhyrexian(null)}>
           Cancel
         </button>
       </div>

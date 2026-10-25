@@ -446,6 +446,11 @@ export type Action =
       /** For `via: "graveyard-permission"`: which permission pays for it —
        * see {@link GraveyardGrant}. Echoed back from the variant. */
       readonly graveyardGrant?: GraveyardGrant;
+      /** How many of the cost's Phyrexian pips to pay with 2 life each
+       * rather than mana (rule 107.4f) — at most the offer's
+       * `phyrexianPips`, and only as many as the player's life covers.
+       * Omitted, life pays a Phyrexian pip only when mana can't. */
+      readonly phyrexianLife?: number;
     }
   | {
       readonly type: "activate-ability";
@@ -467,6 +472,11 @@ export type Action =
        * `[]` pays it all with mana; omitted, the engine taps the offer's
        * `proof` — see {@link WaterbendOffer}. */
       readonly waterbend?: readonly ObjectId[];
+      /** How many of the cost's Phyrexian pips to pay with 2 life each
+       * rather than mana (rule 107.4f) — at most the offer's
+       * `phyrexianPips`, and only as many as the player's life covers.
+       * Omitted, life pays a Phyrexian pip only when mana can't. */
+      readonly phyrexianLife?: number;
       /** The chosen value for `{X}` in the ability's mana cost (ROADMAP Phase
        * 11 EG-3). Required (and only meaningful) when the cost contains `{X}`;
        * ignored otherwise. Folded into the generic portion when paid and
@@ -854,6 +864,11 @@ export type LegalAction =
     }
   | {
       readonly kind: "cast-spell";
+      /** How many Phyrexian pips its cost has that the player could pay
+       * with 2 life each instead (rule 107.4f) — a driver may send
+       * `phyrexianLife` up to this. Absent when there are none or the player
+       * can't pay life. */
+      readonly phyrexianPips?: number;
       readonly card: ObjectId;
       readonly cardName: string;
       readonly targetSpecs: readonly TargetSpec[];
@@ -1129,6 +1144,11 @@ export type LegalAction =
     }
   | {
       readonly kind: "activate-ability";
+      /** How many Phyrexian pips its cost has that the player could pay
+       * with 2 life each instead (rule 107.4f) — a driver may send
+       * `phyrexianLife` up to this. Absent when there are none or the player
+       * can't pay life. */
+      readonly phyrexianPips?: number;
       readonly source: ObjectId;
       readonly abilityIndex: number;
       readonly cardName: string;

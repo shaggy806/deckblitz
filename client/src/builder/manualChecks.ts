@@ -8140,4 +8140,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  preset(
+    'Dismember: pay its Phyrexian mana with life by choice',
+    board({
+      you: { bf: ['Swamp*3'], hand: ['Dismember'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]

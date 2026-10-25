@@ -1592,6 +1592,7 @@ export class Game {
       case "cast-spell":
         this.sneakReturnChoice = action.sneakReturn;
         this.webSlingingReturnChoice = action.webSlingingReturn;
+        this.phyrexianLifeChoice = action.phyrexianLife;
         try {
           this.withWaterbendChoice(action.card, action.waterbend, () =>
             this.castSpell(
@@ -1622,6 +1623,7 @@ export class Game {
         } finally {
           this.sneakReturnChoice = undefined;
           this.webSlingingReturnChoice = undefined;
+          this.phyrexianLifeChoice = undefined;
         }
         break;
       case "activate-ability": {
@@ -1635,19 +1637,24 @@ export class Game {
             source = this.splitOneFromStack(source);
           }
         }
-        this.withWaterbendChoice(source, action.waterbend, () =>
-          this.activateAbility(
-            action.player,
-            source,
-            action.abilityIndex,
-            normalizeTargets(action.targets),
-            action.sacrifice,
-            action.xValue ?? 0,
-            action.manaColors,
-            action.tap,
-            action.division,
-          ),
-        );
+        this.phyrexianLifeChoice = action.phyrexianLife;
+        try {
+          this.withWaterbendChoice(source, action.waterbend, () =>
+            this.activateAbility(
+              action.player,
+              source,
+              action.abilityIndex,
+              normalizeTargets(action.targets),
+              action.sacrifice,
+              action.xValue ?? 0,
+              action.manaColors,
+              action.tap,
+              action.division,
+            ),
+          );
+        } finally {
+          this.phyrexianLifeChoice = undefined;
+        }
         break;
       }
       default:
@@ -2478,6 +2485,7 @@ export class Game {
           ...(manaSplit !== undefined ? { manaSplit } : {}),
           targetSpecs,
           targetOptions,
+          ...this.phyrexianPipsOffer(player, ability.cost.mana),
           // One permanent, named on the action. A cost of several is chosen
           // as it's paid, with a `sacrifice` decision — nothing to offer here.
           ...(ability.cost.sacrifice !== undefined &&
@@ -3338,6 +3346,7 @@ export class Game {
         // group tied to it is fixed there.
         targetSpecs: payableX === undefined ? specsAtX(specs, 0) : specs,
         targetOptions: options,
+        ...this.phyrexianPipsOffer(player, variantCost),
         ...(def.divided !== null ? { divide: def.divided } : {}),
         ...(via !== undefined ? { via } : {}),
         ...(graveyardGrant !== undefined ? { graveyardGrant } : {}),
@@ -8407,6 +8416,15 @@ export class Game {
     return this.manaCapacity(player) + controlled + (this.state.zones.perPlayer[player]?.graveyard.length ?? 0);
   }
 
+  /** An offer's `phyrexianPips`: the Phyrexian pips in `cost` the player
+   * could choose to pay with life (rule 107.4f), when there are any and
+   * they can pay 2 life. */
+  private phyrexianPipsOffer(player: PlayerId, cost: string | null): { phyrexianPips?: number } {
+    if (cost === null || !cost.includes("/P")) return {};
+    const pips = parseManaCost(cost).hybrid.filter((pip) => pip.some((o) => o.kind === "phyrexian")).length;
+    return pips > 0 && this.canPayLife(player, 2) ? { phyrexianPips: pips } : {};
+  }
+
   private libraryTopMinX(player: PlayerId, cardId: ObjectId, face: number, ceiling: number): number | null {
     for (let x = 0; x <= ceiling; x += 1) {
       if (this.libraryTopCastPermissions(player, cardId, face, x).length > 0) return x;
@@ -11711,6 +11729,9 @@ export class Game {
   /** The `sneakReturn` of the `cast-spell` being dispatched (rule 702.190a),
    * read as its cost is paid; unset otherwise. */
   private sneakReturnChoice: ObjectId | undefined = undefined;
+  /** The `phyrexianLife` of the `cast-spell` or `activate-ability` being
+   * dispatched (rule 107.4f), read as its cost is paid; unset otherwise. */
+  private phyrexianLifeChoice: number | undefined = undefined;
   /** The `webSlingingReturn` of the `cast-spell` being dispatched (rule
    * 702.188a), read as its cost is paid; unset otherwise. */
   private webSlingingReturnChoice: ObjectId | undefined = undefined;
@@ -15197,6 +15218,7 @@ export class Game {
       pool: this.state.players[player].manaPool,
       life: this.state.players[player].life - reserved,
       ...(playerCantLoseLife(this.state, player) ? { cantPayLife: true } : {}),
+      ...(this.phyrexianLifeChoice !== undefined && purpose !== null ? { phyrexianLife: this.phyrexianLifeChoice } : {}),
       sources: arrange === undefined ? sources : arrangeManaSources(sources, arrange),
       canPay: (unit) => this.manaUnitCanPay(player, unit, purpose),
       preferred: this.deckColors(player),

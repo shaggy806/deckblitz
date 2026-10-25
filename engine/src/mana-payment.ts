@@ -254,6 +254,11 @@ export interface ManaPlanningView {
    * option is taken. A painland's damage is still fine — it's dealt, and
    * simply changes nothing. */
   readonly cantPayLife?: boolean;
+  /** How many Phyrexian pips the payer chose to pay with 2 life each (rule
+   * 107.4f — the action's `phyrexianLife`), taken before any mana is
+   * tried for them; as many as their life allows. Absent: life pays a
+   * Phyrexian pip only when mana can't. */
+  readonly phyrexianLife?: number;
   /** Every permanent that could produce mana right now. */
   readonly sources: readonly ManaSource[];
   /** Rule 106.6b: may this unit pay for what this payment is for? Closes over
@@ -570,7 +575,20 @@ export function resolveHybridCost(
   const spare = cost.twobridReduction ?? 0;
   if (spare > 0) return resolveReducedTwobrid(view, cost, concrete, spare, avoid, exclude);
 
+  let lifeFirst = view.phyrexianLife ?? 0;
   for (const pip of cost.hybrid) {
+    // Paid with life by choice (rule 107.4f): any life they have, down to 0
+    // if they choose (119.4).
+    if (
+      lifeFirst > 0 &&
+      pip.some((o) => o.kind === "phyrexian") &&
+      view.cantPayLife !== true &&
+      startingLife - life >= 2
+    ) {
+      life += 2;
+      lifeFirst -= 1;
+      continue;
+    }
     let chosen: ManaCost | null = null;
     for (const option of pip) {
       if (option.kind !== "color") continue;

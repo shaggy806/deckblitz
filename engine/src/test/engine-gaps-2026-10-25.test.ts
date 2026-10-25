@@ -328,3 +328,36 @@ describe("an X total divided among targets", () => {
     );
   });
 });
+
+describe("Phyrexian mana paid with life by choice (rule 107.4f)", () => {
+  it("Dismember: both Phyrexian pips paid with life keep two Swamps untapped", () => {
+    const { game } = table();
+    const giant = spawn(game, "Hill Giant", B);
+    const swamps = lands(game, "Swamp", 3);
+    const card = toHand(game, "Dismember");
+    const offer = game.legalActions(A).find((o) => o.kind === "cast-spell" && o.card === card);
+    expect(offer?.kind === "cast-spell" && offer.phyrexianPips).toBe(2);
+    cast(game, card, { targets: [ref(giant)], phyrexianLife: 2 });
+    expect(life(game, A)).toBe(16);
+    expect(swamps.filter((id) => game.state.objects[id].tapped)).toHaveLength(1);
+    expect(zone(game, giant)).toBe("graveyard");
+  });
+
+  it("Dismember: without the choice, mana pays what it can", () => {
+    const { game } = table();
+    const giant = spawn(game, "Hill Giant", B);
+    lands(game, "Swamp", 3);
+    cast(game, toHand(game, "Dismember"), { targets: [ref(giant)] });
+    expect(life(game, A)).toBe(20);
+  });
+
+  it("Ajani, Sleeper Agent: compleated, cast with life by choice, enters with two fewer loyalty", () => {
+    const { game } = table();
+    lands(game, "Forest", 2);
+    lands(game, "Plains", 2);
+    const ajani = toHand(game, "Ajani, Sleeper Agent");
+    cast(game, ajani, { phyrexianLife: 1 });
+    expect(life(game, A)).toBe(18);
+    expect(counters(game, ajani, "loyalty")).toBe(2);
+  });
+});

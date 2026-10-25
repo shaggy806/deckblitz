@@ -6,14 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **Phyrexian mana is paid with life only when mana can't pay it.** Rule 107.4f lets a Phyrexian
-  symbol be paid with one mana of its colour or 2 life, the player's choice. `mana-payment.ts`'s
-  pip resolution (`resolveHybridCost` and `resolveReducedTwobrid`) pays 2 life for a Phyrexian pip only when no mana can
-  pay it, and `Action` has no way to ask for life instead — so a player can't keep mana open by
-  paying life, and a compleated planeswalker (702.150a) is never cast with life while mana could
-  pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
-  to pay with life), honoured by the planner first, offered by the client beside the convoke
-  picker.
 - **A source of damage is chosen only among permanents and spells.** Rule 609.7a also allows
   any object an ability on the stack, a waiting replacement or prevention effect or a delayed
   trigger refers to (a creature that died with its "deals damage" trigger on the stack), and a
