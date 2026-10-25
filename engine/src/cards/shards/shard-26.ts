@@ -255,6 +255,7 @@ import _poolJaceIngeniousMindMage from "../pool/jace-ingenious-mind-mage.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
+import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
@@ -839,6 +840,7 @@ const shard: CardShard = {
     _poolJaceUnravelerOfSecrets,
     _poolJaredCarthalion,
     _poolJeditOjanen,
+    _poolJeeringHomunculus,
     _poolJosuVessLichKnight,
     _poolKangeeSkyWarden,
     _poolKardursViciousReturn,

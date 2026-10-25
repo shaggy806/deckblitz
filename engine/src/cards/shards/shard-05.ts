@@ -364,6 +364,7 @@ import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
 import _poolNefCropEntangler from "../pool/nef-crop-entangler.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
+import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
@@ -976,6 +977,7 @@ const shard: CardShard = {
     _poolNefCropEntangler,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
+    _poolNiblisOfFrost,
     _poolNicoMinoruRunaway,
     _poolNightbladeBrigade,
     _poolNobleHierarch,

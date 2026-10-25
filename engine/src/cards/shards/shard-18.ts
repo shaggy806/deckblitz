@@ -298,6 +298,7 @@ import _poolMasterSkald from "../pool/master-skald.js";
 import _poolMechanozoa from "../pool/mechanozoa.js";
 import _poolMelancholicPoet from "../pool/melancholic-poet.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
+import _poolMenagerieLiberator from "../pool/menagerie-liberator.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
 import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11.js";
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
@@ -902,6 +903,7 @@ const shard: CardShard = {
     _poolMechanozoa,
     _poolMelancholicPoet,
     _poolMemorialToFolly,
+    _poolMenagerieLiberator,
     _poolMichelangeloTheHeart,
     _poolMichelangeloWeirdnessTo11,
     _poolMichikosReignOfTruth,

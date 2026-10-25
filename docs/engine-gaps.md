@@ -11,6 +11,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,
   and the departed source of an ability on the stack (picked by its stack entry), not those.
   No pool card is known to need them.
+- **A mana-value cast prohibition reads an X spell before X is chosen.** On the stack an X
+  spell's mana value counts the X chosen (rule 202.3e), and Sanctum Prelate's ruling has X
+  chosen before its mana value is checked. `whyProhibitedFromCasting` (game.ts) matches a
+  `prohibits.spells` filter against the card in hand, X as 0, so a `manaValue` prohibition bars
+  an X spell at every X or none. No pool card's prohibition reads mana value today; Sanctum
+  Prelate (`static:cant-cast-chosen-mana-value-with-x`, `B142.json`) waits on it.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on

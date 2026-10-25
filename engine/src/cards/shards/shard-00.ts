@@ -448,6 +448,7 @@ import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
 import _poolSilvanussInvoker from "../pool/silvanuss-invoker.js";
 import _poolSinewDancer from "../pool/sinew-dancer.js";
+import _poolSinuousVermin from "../pool/sinuous-vermin.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSlickSequence from "../pool/slick-sequence.js";
@@ -1060,6 +1061,7 @@ const shard: CardShard = {
     _poolSierraNukasBiggestFan,
     _poolSilvanussInvoker,
     _poolSinewDancer,
+    _poolSinuousVermin,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,
     _poolSlickSequence,

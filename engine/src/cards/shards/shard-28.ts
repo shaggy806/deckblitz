@@ -48,6 +48,7 @@ import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
 import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
+import _poolBallotBroker from "../pool/ballot-broker.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
 import _poolBattleAtTheBridge from "../pool/battle-at-the-bridge.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
@@ -55,6 +56,7 @@ import _poolBearerOfMemory from "../pool/bearer-of-memory.js";
 import _poolBelloBardOfTheBrambles from "../pool/bello-bard-of-the-brambles.js";
 import _poolBelovedBeggar from "../pool/beloved-beggar.js";
 import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
+import _poolBesmirch from "../pool/besmirch.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
 import _poolBiogenicOoze from "../pool/biogenic-ooze.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
@@ -203,6 +205,7 @@ import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
 import _poolGlorifierOfSuffering from "../pool/glorifier-of-suffering.js";
 import _poolGnarledGrovestrider from "../pool/gnarled-grovestrider.js";
+import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
@@ -659,6 +662,7 @@ const shard: CardShard = {
     _poolAvengingHunter,
     _poolAvishkarRaceway,
     _poolAxgardCavalry,
+    _poolBallotBroker,
     _poolBartolomeDelPresidio,
     _poolBattleAtTheBridge,
     _poolBazaarOfBaghdad,
@@ -666,6 +670,7 @@ const shard: CardShard = {
     _poolBelloBardOfTheBrambles,
     _poolBelovedBeggar,
     _poolBeneathTheSands,
+    _poolBesmirch,
     _poolBilbosDeadlySlice,
     _poolBiogenicOoze,
     _poolBiomassMutation,
@@ -814,6 +819,7 @@ const shard: CardShard = {
     _poolGlidediveDuo,
     _poolGlorifierOfSuffering,
     _poolGnarledGrovestrider,
+    _poolGnarlwoodDryad,
     _poolGoblinArtillery,
     _poolGoblinWarPaint,
     _poolGodEternalRhonas,

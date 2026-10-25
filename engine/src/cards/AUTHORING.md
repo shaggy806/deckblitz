@@ -1915,7 +1915,7 @@ ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
 enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
-putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, hasManaAbility, hasAbilities,
+putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, monstrous, saddledSource, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
@@ -1951,7 +1951,9 @@ matching `others`, and no graveyard card matching `graveyard`, shares its
 name — asked as it last existed, whatever now has its id is another object.
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
-701.60's designation and `saddled` rule 702.171b's; one that has left the battlefield is asked as it last
+701.60's designation, `saddled` rule 702.171b's and `monstrous` rule 701.37b's ("as long as this
+creature is monstrous, it has trample" — a static's `condition: { kind: "source", filter: {
+monstrous: true } }`, Domesticated Hydra); one that has left the battlefield is asked as it last
 was — Baeloth Barrityl's "whenever a goaded attacking or blocking creature
 dies" is a `dies` trigger's `{ type: "creature", goaded: true, anyOf: [{
 attacking: true }, { blocking: true }] }`. `saddledSource: true` is "a creature

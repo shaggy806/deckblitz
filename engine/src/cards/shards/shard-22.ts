@@ -84,6 +84,7 @@ import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
+import _poolChillerpillar from "../pool/chillerpillar.js";
 import _poolChitinousGraspling from "../pool/chitinous-graspling.js";
 import _poolChokedEstuary from "../pool/choked-estuary.js";
 import _poolChompingChangeling from "../pool/chomping-changeling.js";
@@ -115,6 +116,7 @@ import _poolCullingRitual from "../pool/culling-ritual.js";
 import _poolCurseOfDisturbance from "../pool/curse-of-disturbance.js";
 import _poolCursedMirror from "../pool/cursed-mirror.js";
 import _poolCynicalLoner from "../pool/cynical-loner.js";
+import _poolDarkSalvation from "../pool/dark-salvation.js";
 import _poolDaruLancer from "../pool/daru-lancer.js";
 import _poolDashingBloodsucker from "../pool/dashing-bloodsucker.js";
 import _poolDeadlyTempest from "../pool/deadly-tempest.js";
@@ -574,6 +576,7 @@ import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
 import _poolWilyBandar from "../pool/wily-bandar.js";
 import _poolWindbornMuse from "../pool/windborn-muse.js";
+import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
 import _poolWirewoodLodge from "../pool/wirewood-lodge.js";
 import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
@@ -684,6 +687,7 @@ const shard: CardShard = {
     _poolCatharticReunion,
     _poolChameleonColossus,
     _poolChargingCinderhorn,
+    _poolChillerpillar,
     _poolChitinousGraspling,
     _poolChokedEstuary,
     _poolChompingChangeling,
@@ -715,6 +719,7 @@ const shard: CardShard = {
     _poolCurseOfDisturbance,
     _poolCursedMirror,
     _poolCynicalLoner,
+    _poolDarkSalvation,
     _poolDaruLancer,
     _poolDashingBloodsucker,
     _poolDeadlyTempest,
@@ -1174,6 +1179,7 @@ const shard: CardShard = {
     _poolWildslayerElves,
     _poolWilyBandar,
     _poolWindbornMuse,
+    _poolWingsOfTheGuard,
     _poolWirewoodLodge,
     _poolWitnessOfTheAges,
     _poolWrathfulJailbreaker,

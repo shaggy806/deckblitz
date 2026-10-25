@@ -145,8 +145,12 @@ section keeps only what to do next.
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise;
-  batch 141 the rest of Commander 2016 and Kaladesh, on undaunted);
-  **next, Conspiracy: Take the Crown** (52 left), then Eldritch Moon (130 left). Leads from
+  batch 141 the rest of Commander 2016 and Kaladesh, on undaunted; batch 142 Conspiracy: Take
+  the Crown, on "is monstrous", its draft-matters cards played as outside a draft);
+  **next, Eldritch Moon** (122 left), then Shadows over Innistrad (168 left). Leads from batch 142: "whenever you
+  become the monarch" (`trigger:becomes-monarch` — Custodi Lich, Knights of the Black Rose),
+  emerge (`keyword:emerge` — Elder Deep-Fiend; EMN has more), a mana-value prohibition read
+  before X is announced (Sanctum Prelate — see Engine rules gaps). Leads from
   batch 141: "whenever this creature crews a Vehicle" (`trigger:crews-or-saddles` — Speedway
   Fanatic, Veteran Motorist, Gearshift Ace), "whenever you get one or more {E}"
   (`trigger:energy-gained` — Territorial Gorger, Fabrication Module), "pay any amount of {E}"
@@ -239,6 +243,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.
+- **A mana-value cast prohibition reads an X spell before X is chosen** (202.3e): Sanctum Prelate waits on it.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).

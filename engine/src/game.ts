@@ -7563,6 +7563,17 @@ export class Game {
           combat: { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 },
           player: this.state.players[defender as PlayerId] !== undefined ? (defender as PlayerId) : null,
         };
+        // Melee's "each opponent you attacked this combat" (702.121a) — kept
+        // past the attacker leaving combat.
+        if (object.lastAttack.player !== null) {
+          const combat = object.lastAttack.combat;
+          const before = this.state.players[player].attackedThisCombat;
+          const same = before !== undefined && before.combat.turn === combat.turn && before.combat.phase === combat.phase;
+          const players = same ? before.players : [];
+          if (!players.includes(object.lastAttack.player)) {
+            this.state.players[player].attackedThisCombat = { combat, players: [...players, object.lastAttack.player] };
+          }
+        }
         // "During any turn you attacked with a commander" (Neriv).
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
         const taps = !this.objHasKeyword(id, "vigilance");
@@ -21161,14 +21172,13 @@ export class Game {
         }),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
       opponentsAttacked: () => {
-        const attacked = new Set<PlayerId>();
-        for (const id of this.state.zones.shared.battlefield) {
-          const object = this.state.objects[id];
-          const at = object.attacking;
-          if (object.controller !== controller || at === null) continue;
-          if (this.state.players[at as PlayerId] !== undefined && at !== controller) attacked.add(at as PlayerId);
-        }
-        return attacked.size;
+        // Who the controller declared attacks on this combat (702.121a), not
+        // who their creatures attack now — one removed since still counts.
+        const record = this.state.players[controller]?.attackedThisCombat;
+        const turn = this.state.turn;
+        if (record === undefined || PHASE_OF_STEP[turn.step] !== "combat") return 0;
+        if (record.combat.turn !== turn.number || record.combat.phase !== (turn.combatPhases ?? 1)) return 0;
+        return record.players.filter((p) => p !== controller).length;
       },
       creaturesAttacking: (player) =>
         permanentCount(
@@ -34812,6 +34822,7 @@ export class Game {
       ...(goaders.length > 0 ? { goaders: [...goaders] } : {}),
       ...(object.suspectedAt !== undefined ? { suspected: true } : {}),
       ...(object.saddled === true ? { saddled: true } : {}),
+      ...(object.monstrous === true ? { monstrous: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
       ...(textNameOf(object) !== undefined ? { textName: textNameOf(object) } : {}),

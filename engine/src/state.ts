@@ -1536,6 +1536,8 @@ export interface LastKnownInfo {
   /** It was saddled (rule 702.171b) — Caustic Bronco's "if this creature
    * isn't saddled", read as it last existed once it has left (its ruling). */
   readonly saddled?: boolean;
+  /** It was monstrous (rule 701.37b). */
+  readonly monstrous?: boolean;
   /** It had lost all its abilities (layer 6 — Turn to Frog), so none of its
    * own leaves-the-battlefield abilities trigger. */
   readonly lostAbilities: boolean;
@@ -2030,6 +2032,12 @@ export interface PlayerState {
    * Hellkite). Set as each beginning of combat step of their turn starts. */
   currentCombat?: CombatId;
   previousCombat?: CombatId;
+  /** The players this player declared a creature attacking in combat
+   * `combat` (a planeswalker isn't its controller) — melee's "each opponent
+   * you attacked with a creature this combat" (rule 702.121a), which an
+   * attacker leaving combat afterwards doesn't undo, and a creature put onto
+   * the battlefield attacking never adds to. */
+  attackedThisCombat?: { readonly combat: CombatId; readonly players: readonly PlayerId[] };
   /**
    * Which printing of each card this player brought, keyed by card name — a
    * Scryfall reference in the same shapes {@link CardDefinition.art} accepts

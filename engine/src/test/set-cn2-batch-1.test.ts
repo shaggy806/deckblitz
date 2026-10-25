@@ -1,11 +1,12 @@
 /**
  * Batch 142's lead cards: Conspiracy: Take the Crown's draft-matters cards,
  * as they play outside a draft — nothing noted, revealed or exiled, so each
- * one's rulings' "you didn't draft one" case (a noted number of 0, no names).
+ * one's rulings' "you didn't draft one" case (a noted number of 0, no names);
+ * and the `monstrous` filter, built for this batch (Domesticated Hydra).
  */
 import { describe, expect, it } from "vitest";
 
-import { B, activate, cast, lands, ref, spawn, table, toHand, zone } from "./harness.js";
+import { B, activate, cast, keywords, lands, ref, spawn, table, toHand, zone } from "./harness.js";
 
 describe("Pyretic Hunter", () => {
   it("enters with no counters and dies a 0/0", () => {
@@ -58,5 +59,17 @@ describe("Volatile Chimera", () => {
     const chimera = spawn(game, "Volatile Chimera");
     activate(game, chimera, 0);
     expect(game.state.objects[chimera].cardName).toBe("Volatile Chimera");
+  });
+});
+
+describe("Domesticated Hydra", () => {
+  it("has trample only once it's monstrous", () => {
+    const { game } = table();
+    lands(game, "Forest", 5);
+    const hydra = spawn(game, "Domesticated Hydra");
+    expect(keywords(game, hydra).has("trample")).toBe(false);
+    activate(game, hydra, 0, { x: 2 });
+    expect(game.state.objects[hydra].counters["+1/+1"]).toBe(2);
+    expect(keywords(game, hydra).has("trample")).toBe(true);
   });
 });

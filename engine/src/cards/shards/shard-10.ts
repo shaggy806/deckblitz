@@ -199,6 +199,7 @@ import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
 import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
+import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
 import _poolGemrazer from "../pool/gemrazer.js";
@@ -485,6 +486,7 @@ import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
+import _poolSpectralGrasp from "../pool/spectral-grasp.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
@@ -823,6 +825,7 @@ const shard: CardShard = {
     _poolFruitOfTizerus,
     _poolFurious,
     _poolGaeasSkyfolk,
+    _poolGarrulousSycophant,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
     _poolGemrazer,
@@ -1109,6 +1112,7 @@ const shard: CardShard = {
     _poolSozinsComet,
     _poolSpatialContortion,
     _poolSpectacularSkywhale,
+    _poolSpectralGrasp,
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,
     _poolSpiderManMilesMorales,

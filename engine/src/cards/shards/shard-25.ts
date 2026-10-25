@@ -110,6 +110,7 @@ import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
+import _poolCovetedPeacock from "../pool/coveted-peacock.js";
 import _poolCrackInTime from "../pool/crack-in-time.js";
 import _poolCraftyPathmage from "../pool/crafty-pathmage.js";
 import _poolCrawGiant from "../pool/craw-giant.js";
@@ -136,6 +137,7 @@ import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
+import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
 import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
@@ -318,6 +320,7 @@ import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
 import _poolMerfolkFalconer from "../pool/merfolk-falconer.js";
 import _poolMesmerizingBenthid from "../pool/mesmerizing-benthid.js";
+import _poolMessengerJays from "../pool/messenger-jays.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
@@ -718,6 +721,7 @@ const shard: CardShard = {
     _poolConductorOfCacophony,
     _poolConstrictorSage,
     _poolContaminatedLandscape,
+    _poolCovetedPeacock,
     _poolCrackInTime,
     _poolCraftyPathmage,
     _poolCrawGiant,
@@ -744,6 +748,7 @@ const shard: CardShard = {
     _poolDimirKeyrune,
     _poolDissectionTools,
     _poolDoggedPursuit,
+    _poolDomesticatedHydra,
     _poolDonAndresTheRenegade,
     _poolDonatelloTurtleTechie,
     _poolDovinsVeto,
@@ -926,6 +931,7 @@ const shard: CardShard = {
     _poolMemoryGuardian,
     _poolMerfolkFalconer,
     _poolMesmerizingBenthid,
+    _poolMessengerJays,
     _poolMineRaider,
     _poolMinotaurAbomination,
     _poolMirrorOfTheForebears,

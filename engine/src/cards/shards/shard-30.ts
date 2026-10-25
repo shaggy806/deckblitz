@@ -232,6 +232,7 @@ import _poolGreasewrenchGoblin from "../pool/greasewrench-goblin.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGreenWard from "../pool/green-ward.js";
+import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
@@ -313,6 +314,7 @@ import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
+import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
@@ -829,6 +831,7 @@ const shard: CardShard = {
     _poolGreatIntelligencesPlan,
     _poolGreaterForgeling,
     _poolGreenWard,
+    _poolGrenzosRuffians,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
     _poolGruesomeRealization,
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _poolLavaglidePathway,
     _poolLeylineBinding,
     _poolLightOfHope,
+    _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
     _poolLitaLittleOrphanAmphibian,
     _poolLonelyArroyo,

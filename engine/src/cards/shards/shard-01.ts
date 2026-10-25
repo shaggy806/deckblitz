@@ -456,6 +456,7 @@ import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
 import _poolStun from "../pool/stun.js";
+import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
@@ -1033,6 +1034,7 @@ const shard: CardShard = {
     _poolStormChargedSlasher,
     _poolStormTheSeedcore,
     _poolStun,
+    _poolSubterraneanTremors,
     _poolSunderflock,
     _poolSungrassPrairie,
     _poolSunscapeMaster,

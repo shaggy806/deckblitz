@@ -479,6 +479,7 @@ import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
+import _poolSplittingSlime from "../pool/splitting-slime.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
@@ -1080,6 +1081,7 @@ const shard: CardShard = {
     _poolSpecimenFreighter,
     _poolSpiderwigBoggart,
     _poolSpiritShackle,
+    _poolSplittingSlime,
     _poolSporecapSpider,
     _poolSpringbloomDruid,
     _poolSteelDromedary,

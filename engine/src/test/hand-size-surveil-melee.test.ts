@@ -146,4 +146,19 @@ describe("melee", () => {
     expect(game.characteristics(tifa).power).toBe(4);
     expect(game.characteristics(tifa).toughness).toBe(4);
   });
+
+  it("still counts an opponent whose attacker left before the trigger resolved", () => {
+    const { game, controllers } = setUp([A, B, C]);
+    const tifa = game.debugSpawn(TIFA, A, "battlefield", { summoningSick: false });
+    const bears = game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
+    controllers[A].declareAttackersFn = () => [
+      { attacker: tifa, defender: B },
+      { attacker: bears, defender: C },
+    ];
+    game.advanceUntil((s) => s.zones.shared.stack.length > 0);
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [{ kind: "object", object: bears }]);
+    game.advanceUntil((s) => s.turn.step === "declare-blockers");
+    expect(game.state.zones.shared.battlefield).not.toContain(bears);
+    expect(game.characteristics(tifa).power).toBe(4);
+  });
 });

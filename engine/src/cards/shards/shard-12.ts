@@ -169,6 +169,7 @@ import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
 import _poolFanaticOfTheHarrowing from "../pool/fanatic-of-the-harrowing.js";
+import _poolFangOfThePack from "../pool/fang-of-the-pack.js";
 import _poolFarmstead from "../pool/farmstead.js";
 import _poolFearOfInfinity from "../pool/fear-of-infinity.js";
 import _poolFeatherTheRedeemed from "../pool/feather-the-redeemed.js";
@@ -764,6 +765,7 @@ const shard: CardShard = {
     _poolFalkenrathReaver,
     _poolFallenAskari,
     _poolFanaticOfTheHarrowing,
+    _poolFangOfThePack,
     _poolFarmstead,
     _poolFearOfInfinity,
     _poolFeatherTheRedeemed,

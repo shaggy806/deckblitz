@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Conspiracy: Take the Crown, whole** (batch 142): the `monstrous` filter clause (rule
+  701.37b — "as long as this creature is monstrous": Domesticated Hydra, Skittering Crustacean,
+  Sinuous Vermin, Chillerpillar) built, and melee's count fixed to the opponents attacked as
+  declared (702.121a), not those still attacked; 45 authored by two `card-author` agents and the
+  lead — Liliana, the Last Hope, Kaya, Ghost Assassin, Besmirch, Grenzo's Ruffians, Custodi
+  Soulcaller, the council's dilemma cards, and the fifteen draft-matters cards as they play
+  outside a draft (their rulings' "you didn't draft one" case: Archdemon of Paliano, Pyretic
+  Hunter, Garbage Fire, Regicide and eleven more); CN2 has no card left untriaged. 16 blocked,
+  "whenever you become the monarch" the most shared (2026-10-25).
 - **Commander 2016 and Kaladesh, whole** (batch 141): **undaunted** (rule 702.125a, the
   `selfCostReduction` amount `{ opponents: true }`; the scaffolder reads it, and improvise's
   keyword line) built; 120 authored by five `card-author` agents and the lead — Saheeli Rai,

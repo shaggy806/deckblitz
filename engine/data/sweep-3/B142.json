@@ -1,0 +1,439 @@
+{
+ "batch": "B142",
+ "status": "complete",
+ "ranks": "Conspiracy: Take the Crown (CN2, 2016-08-26): the rest of the set, whole; Eldritch Moon (EMN, 2016-07-22): its first eight by EDHREC rank; and Chillerpillar (KHM), unblocked by the monstrous filter",
+ "authored": [
+  {
+   "name": "Archdemon of Paliano",
+   "files": [
+    "engine/src/cards/pool/archdemon-of-paliano.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Illusionary Informant",
+   "files": [
+    "engine/src/cards/pool/illusionary-informant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leovold's Operative",
+   "files": [
+    "engine/src/cards/pool/leovolds-operative.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Animus of Predation",
+   "files": [
+    "engine/src/cards/pool/animus-of-predation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Paliano Vanguard",
+   "files": [
+    "engine/src/cards/pool/paliano-vanguard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Noble Banneret",
+   "files": [
+    "engine/src/cards/pool/noble-banneret.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spire Phantasm",
+   "files": [
+    "engine/src/cards/pool/spire-phantasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Smuggler Captain",
+   "files": [
+    "engine/src/cards/pool/smuggler-captain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcane Savant",
+   "files": [
+    "engine/src/cards/pool/arcane-savant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Caller of the Untamed",
+   "files": [
+    "engine/src/cards/pool/caller-of-the-untamed.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Volatile Chimera",
+   "files": [
+    "engine/src/cards/pool/volatile-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyretic Hunter",
+   "files": [
+    "engine/src/cards/pool/pyretic-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garbage Fire",
+   "files": [
+    "engine/src/cards/pool/garbage-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Custodi Peacekeeper",
+   "files": [
+    "engine/src/cards/pool/custodi-peacekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regicide",
+   "files": [
+    "engine/src/cards/pool/regicide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ballot Broker",
+   "files": [
+    "engine/src/cards/pool/ballot-broker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Besmirch",
+   "files": [
+    "engine/src/cards/pool/besmirch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borderland Explorer",
+   "files": [
+    "engine/src/cards/pool/borderland-explorer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coveted Peacock",
+   "files": [
+    "engine/src/cards/pool/coveted-peacock.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jeering Homunculus",
+   "files": [
+    "engine/src/cards/pool/jeering-homunculus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Custodi Soulcaller",
+   "files": [
+    "engine/src/cards/pool/custodi-soulcaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deputized Protester",
+   "files": [
+    "engine/src/cards/pool/deputized-protester.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Menagerie Liberator",
+   "files": [
+    "engine/src/cards/pool/menagerie-liberator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wings of the Guard",
+   "files": [
+    "engine/src/cards/pool/wings-of-the-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fang of the Pack",
+   "files": [
+    "engine/src/cards/pool/fang-of-the-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garrulous Sycophant",
+   "files": [
+    "engine/src/cards/pool/garrulous-sycophant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gnarlwood Dryad",
+   "files": [
+    "engine/src/cards/pool/gnarlwood-dryad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grenzo's Ruffians",
+   "files": [
+    "engine/src/cards/pool/grenzos-ruffians.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lieutenants of the Guard",
+   "files": [
+    "engine/src/cards/pool/lieutenants-of-the-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Messenger Jays",
+   "files": [
+    "engine/src/cards/pool/messenger-jays.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaya, Ghost Assassin",
+   "files": [
+    "engine/src/cards/pool/kaya-ghost-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Subterranean Tremors",
+   "files": [
+    "engine/src/cards/pool/subterranean-tremors.ts",
+    "engine/src/cards/tokens/lizard-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splitting Slime",
+   "files": [
+    "engine/src/cards/pool/splitting-slime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Grasp",
+   "files": [
+    "engine/src/cards/pool/spectral-grasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Throne Warden",
+   "files": [
+    "engine/src/cards/pool/throne-warden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orchard Elemental",
+   "files": [
+    "engine/src/cards/pool/orchard-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Racketeer",
+   "files": [
+    "engine/src/cards/pool/goblin-racketeer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Salvation",
+   "files": [
+    "engine/src/cards/pool/dark-salvation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana, the Last Hope",
+   "files": [
+    "engine/src/cards/pool/liliana-the-last-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niblis of Frost",
+   "files": [
+    "engine/src/cards/pool/niblis-of-frost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keeper of Keys",
+   "files": [
+    "engine/src/cards/pool/keeper-of-keys.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Domesticated Hydra",
+   "files": [
+    "engine/src/cards/pool/domesticated-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skittering Crustacean",
+   "files": [
+    "engine/src/cards/pool/skittering-crustacean.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sinuous Vermin",
+   "files": [
+    "engine/src/cards/pool/sinuous-vermin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chillerpillar",
+   "files": [
+    "engine/src/cards/pool/chillerpillar.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Illusion of Choice",
+   "needs": [
+    "effect:choose-how-each-player-votes"
+   ],
+   "why": "Nothing lets one player cast every player's votes for the turn."
+  },
+  {
+   "name": "Custodi Lich",
+   "needs": [
+    "trigger:becomes-monarch"
+   ],
+   "why": "No \"whenever you become the monarch\" trigger."
+  },
+  {
+   "name": "Knights of the Black Rose",
+   "needs": [
+    "trigger:becomes-monarch",
+    "condition:was-monarch-as-turn-began"
+   ],
+   "why": "No trigger on an opponent becoming the monarch, and nothing records who was the monarch as the turn began."
+  },
+  {
+   "name": "Collective Defiance",
+   "needs": [
+    "effect:discard-hand-target-player"
+   ],
+   "why": "Escalate is fine (costPerExtraMode), but discard-hand takes only a player scope, not a target: \"target player discards all the cards in their hand, then draws that many\"."
+  },
+  {
+   "name": "Elder Deep-Fiend",
+   "needs": [
+    "keyword:emerge"
+   ],
+   "why": "Emerge isn't in the engine."
+  },
+  {
+   "name": "Summary Dismissal",
+   "needs": [
+    "effect:counter-all-spells",
+    "effect:counter-all-abilities"
+   ],
+   "why": "No effect exiles every other spell on the stack or counters every ability."
+  },
+  {
+   "name": "Capital Punishment",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "Each opponent sacrifices a creature per death vote at once; sacrifice's count is a fixed number, and N separate sacrifices aren't simultaneous."
+  },
+  {
+   "name": "Sanctum Prelate",
+   "needs": [
+    "static:cant-cast-chosen-mana-value-with-x"
+   ],
+   "why": "The choice is any number, and a mana-value prohibition is matched against the card before X is announced, so an X spell would be barred at every X."
+  },
+  {
+   "name": "Daretti, Ingenious Iconoclast",
+   "needs": [
+    "target:artifact-card-in-graveyard-or-on-battlefield"
+   ],
+   "why": "The -6 needs one target slot that is a graveyard card or a permanent."
+  },
+  {
+   "name": "Protector of the Crown",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "Redirecting damage dealt to you to a creature isn't supported."
+  },
+  {
+   "name": "Entourage of Trest",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "No \"can block an additional creature\" static."
+  },
+  {
+   "name": "Spy Kit",
+   "needs": [
+    "static:has-all-nonlegendary-creature-names"
+   ],
+   "why": "An object can't have more than one name."
+  },
+  {
+   "name": "Deadly Designs",
+   "needs": [
+    "cost:any-player-may-activate"
+   ],
+   "why": "No \"any player may activate this ability\" (only the opponents-only form)."
+  },
+  {
+   "name": "Canal Courier",
+   "needs": [
+    "trigger:attacks-with-another-at-different-player"
+   ],
+   "why": "No trigger for \"this creature and another creature attack different players\"."
+  },
+  {
+   "name": "Crown-Hunter Hireling",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "\"Can't attack unless defending player is the monarch.\""
+  },
+  {
+   "name": "Mirrorwing Dragon",
+   "needs": [
+    "effect:copy-spell-for-other-player"
+   ],
+   "why": "The copies are the caster's, for each other creature the caster controls the spell could target; forEachItCouldTarget reads the Dragon controller's side and can't hand the copies to the caster."
+  }
+ ]
+}

@@ -221,6 +221,7 @@ import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
 import _poolGnarlbackRhino from "../pool/gnarlback-rhino.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
+import _poolGoblinRacketeer from "../pool/goblin-racketeer.js";
 import _poolGoblinWarParty from "../pool/goblin-war-party.js";
 import _poolGoblinWizardry from "../pool/goblin-wizardry.js";
 import _poolGoldwardensHelm from "../pool/goldwardens-helm.js";
@@ -300,6 +301,7 @@ import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
+import _poolLieutenantsOfTheGuard from "../pool/lieutenants-of-the-guard.js";
 import _poolLifeGoesOn from "../pool/life-goes-on.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
@@ -478,6 +480,7 @@ import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
+import _poolSkitteringCrustacean from "../pool/skittering-crustacean.js";
 import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
 import _poolSkyshroudTroll from "../pool/skyshroud-troll.js";
@@ -867,6 +870,7 @@ const shard: CardShard = {
     _poolGnarlbackRhino,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
+    _poolGoblinRacketeer,
     _poolGoblinWarParty,
     _poolGoblinWizardry,
     _poolGoldwardensHelm,
@@ -946,6 +950,7 @@ const shard: CardShard = {
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,
+    _poolLieutenantsOfTheGuard,
     _poolLifeGoesOn,
     _poolLifesLegacy,
     _poolLightningSpear,
@@ -1124,6 +1129,7 @@ const shard: CardShard = {
     _poolSinisterSabotage,
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,
+    _poolSkitteringCrustacean,
     _poolSkullknockerOgre,
     _poolSkyshipStalker,
     _poolSkyshroudTroll,

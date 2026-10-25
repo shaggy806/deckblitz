@@ -121,6 +121,7 @@ import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
 import _poolCurryFavor from "../pool/curry-favor.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCursedLand from "../pool/cursed-land.js";
+import _poolCustodiSoulcaller from "../pool/custodi-soulcaller.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolDakkonBlackblade from "../pool/dakkon-blackblade.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
@@ -580,6 +581,7 @@ import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
 import _tokensHeroToken from "../tokens/hero-token.js";
 import _tokensIllusionTokenFreezingBlocker from "../tokens/illusion-token-freezing-blocker.js";
 import _tokensKorWarriorToken from "../tokens/kor-warrior-token.js";
+import _tokensLizardToken from "../tokens/lizard-token.js";
 import _tokensMinorDemonToken from "../tokens/minor-demon-token.js";
 import _tokensOrnithopterToken from "../tokens/ornithopter-token.js";
 import _tokensPestToken from "../tokens/pest-token.js";
@@ -708,6 +710,7 @@ const shard: CardShard = {
     _poolCurryFavor,
     _poolCurseOfClingingWebs,
     _poolCursedLand,
+    _poolCustodiSoulcaller,
     _poolCylianElf,
     _poolDakkonBlackblade,
     _poolDarkLeoShredder,
@@ -1169,6 +1172,7 @@ const shard: CardShard = {
     _tokensHeroToken,
     _tokensIllusionTokenFreezingBlocker,
     _tokensKorWarriorToken,
+    _tokensLizardToken,
     _tokensMinorDemonToken,
     _tokensOrnithopterToken,
     _tokensPestToken,

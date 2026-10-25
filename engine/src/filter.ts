@@ -281,6 +281,11 @@ export interface CardFilter {
    * the source), "if this creature is saddled". One that has left the
    * battlefield is asked as it last was (Caustic Bronco's ruling). */
   readonly saddled?: boolean;
+  /** Is (or isn't) **monstrous** (rule 701.37b — `GameObject.monstrous`):
+   * "as long as this creature is monstrous, it has trample" (a static's
+   * `condition: { kind: "source", filter: { monstrous: true } }`). One that
+   * has left the battlefield is asked as it last was. */
+  readonly monstrous?: boolean;
   /**
    * It **saddled** the permanent applying the filter this turn (rule
    * 702.171c — `GameObject.saddledThisTurn`): Giant Beaver's "target
@@ -1034,6 +1039,10 @@ export function matchesFilter(
   if (filter.saddled !== undefined) {
     const saddled = live !== undefined ? live.zone === "battlefield" && live.saddled === true : lki!.saddled === true;
     if (saddled !== filter.saddled) return false;
+  }
+  if (filter.monstrous !== undefined) {
+    const monstrous = live !== undefined ? live.zone === "battlefield" && live.monstrous === true : lki!.monstrous === true;
+    if (monstrous !== filter.monstrous) return false;
   }
   if (filter.saddledSource !== undefined || filter.saddledBy !== undefined) {
     // Rule 702.171c: only a creature on the battlefield now can have saddled

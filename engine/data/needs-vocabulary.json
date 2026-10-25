@@ -9710,6 +9710,42 @@
   "effect:reveal-until-per-destroyed-this-way": {
    "family": "effect:reveal-until-count",
    "example": "Indomitable Creativity: for each permanent destroyed this way, its controller reveals until an artifact or creature card, and all of them enter at once."
+  },
+  "effect:choose-how-each-player-votes": {
+   "family": "mechanic:voting",
+   "example": "Illusion of Choice: Nothing lets one player cast every player's votes for the turn."
+  },
+  "condition:was-monarch-as-turn-began": {
+   "family": "trigger:becomes-monarch",
+   "example": "Knights of the Black Rose: nothing records who was the monarch as the turn began."
+  },
+  "effect:discard-hand-target-player": {
+   "family": "effect:discard-filtered",
+   "example": "Collective Defiance: discard-hand takes a player scope, not a target."
+  },
+  "static:cant-cast-chosen-mana-value-with-x": {
+   "family": "static:prohibit-cast-from-graveyard-or-library",
+   "example": "Sanctum Prelate: any chosen number, and an X spell's mana value read after X is announced."
+  },
+  "target:artifact-card-in-graveyard-or-on-battlefield": {
+   "family": "target:cards-from-targeted-players-graveyard",
+   "example": "Daretti, Ingenious Iconoclast: one target slot that is a graveyard card or a permanent."
+  },
+  "static:has-all-nonlegendary-creature-names": {
+   "family": "decision:name-a-card",
+   "example": "Spy Kit: an object with every nonlegendary creature card's name."
+  },
+  "cost:any-player-may-activate": {
+   "family": "effect:opponents-may-activate",
+   "example": "Deadly Designs: \"Any player may activate this ability.\""
+  },
+  "trigger:attacks-with-another-at-different-player": {
+   "family": "trigger:attacks-player-filter",
+   "example": "Canal Courier: this creature and another attack different players."
+  },
+  "condition:source-monstrous": {
+   "family": "keyword:monstrosity",
+   "example": "Domesticated Hydra: \"as long as this creature is monstrous\" — built B142 (the `monstrous` filter)."
   }
  }
 }
