@@ -5562,6 +5562,7 @@ import _poolFireshrieker from "./pool/fireshrieker.js";
 import _poolFireslinger from "./pool/fireslinger.js";
 import _poolFirespitterWhelp from "./pool/firespitter-whelp.js";
 import _poolFirjaJudgeOfValor from "./pool/firja-judge-of-valor.js";
+import _poolFirjasRetribution from "./pool/firjas-retribution.js";
 import _poolFirmamentSage from "./pool/firmament-sage.js";
 import _poolFirstResponder from "./pool/first-responder.js";
 import _poolFirstSliversChosen from "./pool/first-slivers-chosen.js";
@@ -24593,6 +24594,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFireslinger,
   _poolFirespitterWhelp,
   _poolFirjaJudgeOfValor,
+  _poolFirjasRetribution,
   _poolFirmamentSage,
   _poolFirstResponder,
   _poolFirstSliversChosen,
@@ -43637,6 +43639,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fireslinger": _poolFireslinger,
   "pool/firespitter-whelp": _poolFirespitterWhelp,
   "pool/firja-judge-of-valor": _poolFirjaJudgeOfValor,
+  "pool/firjas-retribution": _poolFirjasRetribution,
   "pool/firmament-sage": _poolFirmamentSage,
   "pool/first-responder": _poolFirstResponder,
   "pool/first-slivers-chosen": _poolFirstSliversChosen,

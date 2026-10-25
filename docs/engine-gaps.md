@@ -140,16 +140,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   its own "enters tapped" the engine makes that player's choice for them — the one they'd make
   almost always, which is why the card is authored. A choice asked of the controller would close
   it.
-- **A granted ability's dynamic filter is fixed when it's granted.** `bindDynamicCompares`
-  (`effects.ts`) binds every `{ amount }` operand in an effect as it applies, skipping only the
-  keys under which an effect nests another (`NESTED_EFFECT_KEYS`) — and `ability` (a
-  `grant-activated`/`grant-triggered` effect's granted ability) isn't one, nor is an emblem's
-  `triggered`. So a granted ability's target filter like "power less than **this creature's**
-  power" is read once, at grant time, against the granting source. Firja's Retribution's chapter II
-  ("Angels you control gain '{T}: Destroy target creature with power less than this creature's
-  power'") is blocked on it (`effect:grant-activated-dynamic-target-filter`, batch 112); no pool card
-  has such a filter yet. The fix is likely adding those keys, after checking that a granted
-  ability's targets bind against its own source when it's activated or triggers.
 - **`deals-damage` fires once per recipient.** Its docs say so on purpose, but an unqualified
   "whenever ~ deals damage" triggers once per simultaneous damage event, however many things it hit
   (Armadillo Cloak's ruling — rule 603.2c): a trampler or a creature dealing damage to several

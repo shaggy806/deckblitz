@@ -5,7 +5,7 @@
 import { describe, expect, it } from "vitest";
 
 import { printedCardName } from "../state.js";
-import { A, B, activate, cast, counters, destroy, keywords, lands, named, pt, ref, settle, spawn, table, toHand, types } from "./harness.js";
+import { A, B, activate, attack, cast, counters, destroy, keywords, lands, named, pt, ref, settle, spawn, table, toGraveyard, toHand, types, zone } from "./harness.js";
 
 describe("incubate", () => {
   it("makes an Incubator token with N +1/+1 counters that {2} transforms into an N/N Phyrexian artifact creature", () => {
@@ -60,6 +60,21 @@ describe("backup", () => {
     game.advanceUntil((s) => s.turn.number === 2);
     expect(keywords(game, bears).has("flying")).toBe(false);
     expect(counters(game, bears)).toBe(1);
+  });
+
+  it("a granted ability's \"this creature's power\" is the creature that has it (Guardian Scalelord)", () => {
+    const { game, a } = table();
+    const giant = spawn(game, "Hill Giant");
+    a.chooseTargetsFn = () => [ref(giant)];
+    lands(game, "Plains", 5);
+    cast(game, toHand(game, "Guardian Scalelord"));
+    expect(counters(game, giant)).toBe(1);
+    // The Giant is 4/4 and the Scalelord 3/4: X is the Giant's power, so a
+    // mana value 4 card is in reach.
+    const back = toGraveyard(game, "Hill Giant");
+    a.chooseTargetsFn = (_view, _source, _specs, legal) => [legal[0]?.find((r) => r.kind === "object" && r.object === back) ?? null];
+    attack(game, a, [giant]);
+    expect(zone(game, back)).toBe("battlefield");
   });
 
   it("on itself: only the counter", () => {

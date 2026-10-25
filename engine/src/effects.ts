@@ -8023,6 +8023,14 @@ const NESTED_EFFECT_KEYS: ReadonlySet<string> = new Set([
   // controller sacrificed in answer, which only exists by then.
   "ifDid",
   "ifDidnt",
+  // A granted ability (`grant-activated`, `grant-triggered`, their `-all`
+  // forms) and an emblem's: each is bound when *it* triggers or is
+  // activated, against its own source — Guardian Scalelord's "mana value X
+  // or less, where X is this creature's power" on the creature backup gave
+  // it to reads that creature, not the Scalelord.
+  "ability",
+  "triggered",
+  "activated",
 ]);
 
 /** Is this a `NumCompare` whose `n` is an `{ amount }` operand? Written out

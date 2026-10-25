@@ -403,7 +403,8 @@
   "effect:search-library-and-graveyard-named-set",
   "trigger:loyalty-counters-removed",
   "amount:mana-ability-sacrificed-object",
-  "replacement:prevent-once-per-damage-event"
+  "replacement:prevent-once-per-damage-event",
+  "effect:grant-activated-dynamic-target-filter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -185,6 +185,7 @@ import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
+import _poolFirjasRetribution from "../pool/firjas-retribution.js";
 import _poolFirmamentSage from "../pool/firmament-sage.js";
 import _poolFissure from "../pool/fissure.js";
 import _poolFlamekinHerald from "../pool/flamekin-herald.js";
@@ -827,6 +828,7 @@ const shard: CardShard = {
     _poolFierceWitchstalker,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
+    _poolFirjasRetribution,
     _poolFirmamentSage,
     _poolFissure,
     _poolFlamekinHerald,
