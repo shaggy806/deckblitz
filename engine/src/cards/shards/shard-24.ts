@@ -15,6 +15,7 @@ import _poolAgentOfStromgald from "../pool/agent-of-stromgald.js";
 import _poolAgentOfTreachery from "../pool/agent-of-treachery.js";
 import _poolAggressiveMammoth from "../pool/aggressive-mammoth.js";
 import _poolAggressiveUrge from "../pool/aggressive-urge.js";
+import _poolAgility from "../pool/agility.js";
 import _poolAgoraphobia from "../pool/agoraphobia.js";
 import _poolAirbendingLesson from "../pool/airbending-lesson.js";
 import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
@@ -354,6 +355,7 @@ import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObliteratingBolt from "../pool/obliterating-bolt.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
+import _poolObsidianFireheart from "../pool/obsidian-fireheart.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
 import _poolOjutaisCommand from "../pool/ojutais-command.js";
@@ -563,6 +565,7 @@ import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUntamedPup from "../pool/untamed-pup.js";
 import _poolUntamedWilds from "../pool/untamed-wilds.js";
+import _poolUnyaroGriffin from "../pool/unyaro-griffin.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
@@ -575,6 +578,7 @@ import _poolVastwoodGorger from "../pool/vastwood-gorger.js";
 import _poolVastwoodSurge from "../pool/vastwood-surge.js";
 import _poolVerdantForce from "../pool/verdant-force.js";
 import _poolVeteranArmorer from "../pool/veteran-armorer.js";
+import _poolVigilantMartyr from "../pool/vigilant-martyr.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
 import _poolVineMare from "../pool/vine-mare.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
@@ -656,6 +660,7 @@ const shard: CardShard = {
     _poolAgentOfTreachery,
     _poolAggressiveMammoth,
     _poolAggressiveUrge,
+    _poolAgility,
     _poolAgoraphobia,
     _poolAirbendingLesson,
     _poolAlaniaDivergentStorm,
@@ -995,6 +1000,7 @@ const shard: CardShard = {
     _poolOakhameAdversary,
     _poolObliteratingBolt,
     _poolObscuraStorefront,
+    _poolObsidianFireheart,
     _poolOgreSlumlord,
     _poolOgreWarrior,
     _poolOjutaisCommand,
@@ -1204,6 +1210,7 @@ const shard: CardShard = {
     _poolUnrootedAncestor,
     _poolUntamedPup,
     _poolUntamedWilds,
+    _poolUnyaroGriffin,
     _poolUproot,
     _poolUrGolemsEye,
     _poolUrtetRemnantOfMemnarch,
@@ -1216,6 +1223,7 @@ const shard: CardShard = {
     _poolVastwoodSurge,
     _poolVerdantForce,
     _poolVeteranArmorer,
+    _poolVigilantMartyr,
     _poolVildinPackOutcast,
     _poolVineMare,
     _poolViridianClaw,

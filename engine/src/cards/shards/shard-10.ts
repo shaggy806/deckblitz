@@ -13,6 +13,7 @@ import _poolAetherTheorist from "../pool/aether-theorist.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
+import _poolAleatory from "../pool/aleatory.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
@@ -72,6 +73,7 @@ import _poolBlossomingDefense from "../pool/blossoming-defense.js";
 import _poolBogTatters from "../pool/bog-tatters.js";
 import _poolBogardanRager from "../pool/bogardan-rager.js";
 import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
+import _poolBoneHarvest from "../pool/bone-harvest.js";
 import _poolBonecladNecromancer from "../pool/boneclad-necromancer.js";
 import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
@@ -231,6 +233,7 @@ import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
 import _poolGoblinFreerunner from "../pool/goblin-freerunner.js";
+import _poolGoblinGuide from "../pool/goblin-guide.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinMorningstar from "../pool/goblin-morningstar.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
@@ -685,6 +688,7 @@ const shard: CardShard = {
     _poolAgentPhilCoulson,
     _poolAhnCropChampion,
     _poolAjaniOutlandChaperone,
+    _poolAleatory,
     _poolAlpharaelStonechosen,
     _poolAlpineGuide,
     _poolAmazingSpiderGirl,
@@ -744,6 +748,7 @@ const shard: CardShard = {
     _poolBogTatters,
     _poolBogardanRager,
     _poolBoggartBirthRite,
+    _poolBoneHarvest,
     _poolBonecladNecromancer,
     _poolBoompile,
     _poolBorealDruid,
@@ -903,6 +908,7 @@ const shard: CardShard = {
     _poolGlittermonger,
     _poolGloryBoundInitiate,
     _poolGoblinFreerunner,
+    _poolGoblinGuide,
     _poolGoblinHero,
     _poolGoblinMorningstar,
     _poolGoblinReplica,

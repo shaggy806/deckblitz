@@ -40,6 +40,7 @@ import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAshioksAdept from "../pool/ashioks-adept.js";
+import _poolAsmiraHolyAvenger from "../pool/asmira-holy-avenger.js";
 import _poolAtarkaEfreet from "../pool/atarka-efreet.js";
 import _poolAtarkaPummeler from "../pool/atarka-pummeler.js";
 import _poolAtomize from "../pool/atomize.js";
@@ -80,6 +81,7 @@ import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
+import _poolBuildersBane from "../pool/builders-bane.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolBurnTogether from "../pool/burn-together.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
@@ -99,6 +101,7 @@ import _poolChandler from "../pool/chandler.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
+import _poolCircleOfDespair from "../pool/circle-of-despair.js";
 import _poolCircleOfProtectionGreen from "../pool/circle-of-protection-green.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
 import _poolClaimThePrecious from "../pool/claim-the-precious.js";
@@ -237,6 +240,7 @@ import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolGuulDrazOverseer from "../pool/guul-draz-overseer.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHagraConstrictor from "../pool/hagra-constrictor.js";
+import _poolHammerOfBogardan from "../pool/hammer-of-bogardan.js";
 import _poolHammerheim from "../pool/hammerheim.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
@@ -434,6 +438,7 @@ import _poolRovingHarper from "../pool/roving-harper.js";
 import _poolRowdySnowballers from "../pool/rowdy-snowballers.js";
 import _poolRubblebeltBoar from "../pool/rubblebelt-boar.js";
 import _poolRuinousUltimatum from "../pool/ruinous-ultimatum.js";
+import _poolRuneflareTrap from "../pool/runeflare-trap.js";
 import _poolRyanSinclair from "../pool/ryan-sinclair.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
@@ -569,6 +574,7 @@ import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
@@ -682,6 +688,7 @@ const shard: CardShard = {
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAshioksAdept,
+    _poolAsmiraHolyAvenger,
     _poolAtarkaEfreet,
     _poolAtarkaPummeler,
     _poolAtomize,
@@ -722,6 +729,7 @@ const shard: CardShard = {
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
+    _poolBuildersBane,
     _poolBulwarkOx,
     _poolBurnTogether,
     _poolByrkeLongEarOfTheLaw,
@@ -741,6 +749,7 @@ const shard: CardShard = {
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
+    _poolCircleOfDespair,
     _poolCircleOfProtectionGreen,
     _poolCityOfBrass,
     _poolClaimThePrecious,
@@ -879,6 +888,7 @@ const shard: CardShard = {
     _poolGuulDrazOverseer,
     _poolHaakonStromgaldScourge,
     _poolHagraConstrictor,
+    _poolHammerOfBogardan,
     _poolHammerheim,
     _poolHarbingerOfTheHunt,
     _poolHarmoniousGrovestrider,
@@ -1076,6 +1086,7 @@ const shard: CardShard = {
     _poolRowdySnowballers,
     _poolRubblebeltBoar,
     _poolRuinousUltimatum,
+    _poolRuneflareTrap,
     _poolRyanSinclair,
     _poolSHIELDHelicarrier,
     _poolSafeholdElite,
@@ -1211,6 +1222,7 @@ const shard: CardShard = {
     _poolTrevasCharm,
     _poolTribuneOfRot,
     _poolTritonShorestalker,
+    _poolTurntimberRanger,
     _poolTurretOgre,
     _poolTwinshotSniper,
     _poolTwistedFates,

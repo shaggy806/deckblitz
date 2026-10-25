@@ -108,8 +108,10 @@ section keeps only what to do next.
   upkeep; batch 160 Homelands whole, no feature built (33 blocked, "doesn't untap during your
   next untap step" leading with 3); batch 163 Alliances whole, on the `exileTop` cost (69 blocked,
   the lands' "if this would enter, sacrifice a … instead" — `replacement:enter-replacement-sacrifice`
-  — and banding leading with 4 each, an opponent choosing the mode with 3). **Next, Mirage** (220
-  left: two batches of ~110, five agents each), then Visions (113) and Weatherlight. This walk's range
+  — and banding leading with 4 each, an opponent choosing the mode with 3); batch 166 Mirage's
+  first half (its 110 most-played left), no feature built (70 authored, 40 blocked, nothing
+  shared by more than two). **Next, the rest of Mirage** (110 left: one batch, five agents),
+  then Visions (113) and Weatherlight. This walk's range
   ends at Shadowmoor/Eventide (the middle walk owns Shards of Alara on). Leads over the whole pool now:
   banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
   (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana
@@ -181,8 +183,8 @@ section keeps only what to do next.
   newest-first walk (Journey into Nyx back to Scars of Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
   of Alara — ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
   and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
-  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar) and B166 (oldest: Mirage's first half, its ~110 most-played); after those, take the highest `B<N>` on `origin/main` plus one, checked again
-  just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); **next, Zendikar** (113 left), then Magic 2010 (36), Alara Reborn (84), Conflux (69) and Shards of Alara (94), each by `cards:sets -- --set <code>`. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
+  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played); after those, take the highest `B<N>` on `origin/main` plus one, checked again
+  just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); batch 165 Zendikar whole, no feature built (26 blocked, "blocks this turn if able" — `effect:must-block-this-turn` — leading with two); **next, Magic 2010** (36 left: small enough for the lead alone or one agent), then Alara Reborn (84), Alara Reborn (84), Conflux (69) and Shards of Alara (94), each by `cards:sets -- --set <code>`. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
   157's leading blocker: a morph cost that reveals a card (`cost:morph-reveal-card` — 5), then
   "blocks this turn if able" (`effect:must-block-this-turn`) and looking at face-down
   permanents (`effect:look-at-face-down-permanents`), two each; Stitcher Geralf waits on

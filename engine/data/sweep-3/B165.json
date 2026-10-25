@@ -1,0 +1,802 @@
+{
+  "batch": "B165",
+  "status": "complete",
+  "ranks": "Zendikar (ZEN, 2009-10-02): the rest of the set (whole set), no engine feature built",
+  "authored": [
+    {
+      "name": "Aether Figment",
+      "files": [
+        "engine/src/cards/pool/aether-figment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arrow Volley Trap",
+      "files": [
+        "engine/src/cards/pool/arrow-volley-trap.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Baloth Cage Trap",
+      "files": [
+        "engine/src/cards/pool/baloth-cage-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bold Defense",
+      "files": [
+        "engine/src/cards/pool/bold-defense.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chandra Ablaze",
+      "files": [
+        "engine/src/cards/pool/chandra-ablaze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conqueror's Pledge",
+      "files": [
+        "engine/src/cards/pool/conquerors-pledge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devout Lightcaster",
+      "files": [
+        "engine/src/cards/pool/devout-lightcaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Electropotence",
+      "files": [
+        "engine/src/cards/pool/electropotence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elemental Appeal",
+      "files": [
+        "engine/src/cards/pool/elemental-appeal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eternity Vessel",
+      "files": [
+        "engine/src/cards/pool/eternity-vessel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feast of Blood",
+      "files": [
+        "engine/src/cards/pool/feast-of-blood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gatekeeper of Malakir",
+      "files": [
+        "engine/src/cards/pool/gatekeeper-of-malakir.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gigantiform",
+      "files": [
+        "engine/src/cards/pool/gigantiform.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Guide",
+      "files": [
+        "engine/src/cards/pool/goblin-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Ruinblaster",
+      "files": [
+        "engine/src/cards/pool/goblin-ruinblaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Guul Draz Vampire",
+      "files": [
+        "engine/src/cards/pool/guul-draz-vampire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hagra Diabolist",
+      "files": [
+        "engine/src/cards/pool/hagra-diabolist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Halo Hunter",
+      "files": [
+        "engine/src/cards/pool/halo-hunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heartstabber Mosquito",
+      "files": [
+        "engine/src/cards/pool/heartstabber-mosquito.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Highland Berserker",
+      "files": [
+        "engine/src/cards/pool/highland-berserker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ior Ruin Expedition",
+      "files": [
+        "engine/src/cards/pool/ior-ruin-expedition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Joraga Bard",
+      "files": [
+        "engine/src/cards/pool/joraga-bard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Journey to Nowhere",
+      "files": [
+        "engine/src/cards/pool/journey-to-nowhere.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kalitas, Bloodchief of Ghet",
+      "files": [
+        "engine/src/cards/pool/kalitas-bloodchief-of-ghet.ts",
+        "engine/src/cards/tokens/x-x-vampire-token-black.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kazandu Blademaster",
+      "files": [
+        "engine/src/cards/pool/kazandu-blademaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kazuul Warlord",
+      "files": [
+        "engine/src/cards/pool/kazuul-warlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Khalni Gem",
+      "files": [
+        "engine/src/cards/pool/khalni-gem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Aeronaut",
+      "files": [
+        "engine/src/cards/pool/kor-aeronaut.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kor Duelist",
+      "files": [
+        "engine/src/cards/pool/kor-duelist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Hookmaster",
+      "files": [
+        "engine/src/cards/pool/kor-hookmaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kor Outfitter",
+      "files": [
+        "engine/src/cards/pool/kor-outfitter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Skyfisher",
+      "files": [
+        "engine/src/cards/pool/kor-skyfisher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Landbind Ritual",
+      "files": [
+        "engine/src/cards/pool/landbind-ritual.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lethargy Trap",
+      "files": [
+        "engine/src/cards/pool/lethargy-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Living Tsunami",
+      "files": [
+        "engine/src/cards/pool/living-tsunami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Magma Rift",
+      "files": [
+        "engine/src/cards/pool/magma-rift.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Makindi Shieldmate",
+      "files": [
+        "engine/src/cards/pool/makindi-shieldmate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mark of Mutiny",
+      "files": [
+        "engine/src/cards/pool/mark-of-mutiny.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Marsh Casualties",
+      "files": [
+        "engine/src/cards/pool/marsh-casualties.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Merfolk Seastalkers",
+      "files": [
+        "engine/src/cards/pool/merfolk-seastalkers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Merfolk Wayfinder",
+      "files": [
+        "engine/src/cards/pool/merfolk-wayfinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mindless Null",
+      "files": [
+        "engine/src/cards/pool/mindless-null.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mire Blight",
+      "files": [
+        "engine/src/cards/pool/mire-blight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mold Shambler",
+      "files": [
+        "engine/src/cards/pool/mold-shambler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Murasa Pyromancer",
+      "files": [
+        "engine/src/cards/pool/murasa-pyromancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Narrow Escape",
+      "files": [
+        "engine/src/cards/pool/narrow-escape.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Needlebite Trap",
+      "files": [
+        "engine/src/cards/pool/needlebite-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nimana Sell-Sword",
+      "files": [
+        "engine/src/cards/pool/nimana-sell-sword.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nissa Revane",
+      "files": [
+        "engine/src/cards/pool/nissa-revane.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Obsidian Fireheart",
+      "files": [
+        "engine/src/cards/pool/obsidian-fireheart.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oran-Rief Recluse",
+      "files": [
+        "engine/src/cards/pool/oran-rief-recluse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Oran-Rief Survivalist",
+      "files": [
+        "engine/src/cards/pool/oran-rief-survivalist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paralyzing Grasp",
+      "files": [
+        "engine/src/cards/pool/paralyzing-grasp.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pitfall Trap",
+      "files": [
+        "engine/src/cards/pool/pitfall-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Predatory Urge",
+      "files": [
+        "engine/src/cards/pool/predatory-urge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Punishing Fire",
+      "files": [
+        "engine/src/cards/pool/punishing-fire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quest for Ancient Secrets",
+      "files": [
+        "engine/src/cards/pool/quest-for-ancient-secrets.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quest for the Gemblades",
+      "files": [
+        "engine/src/cards/pool/quest-for-the-gemblades.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quest for the Gravelord",
+      "files": [
+        "engine/src/cards/pool/quest-for-the-gravelord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quest for the Holy Relic",
+      "files": [
+        "engine/src/cards/pool/quest-for-the-holy-relic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reckless Scholar",
+      "files": [
+        "engine/src/cards/pool/reckless-scholar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Relic Crush",
+      "files": [
+        "engine/src/cards/pool/relic-crush.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruinous Minotaur",
+      "files": [
+        "engine/src/cards/pool/ruinous-minotaur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Runeflare Trap",
+      "files": [
+        "engine/src/cards/pool/runeflare-trap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Savage Silhouette",
+      "files": [
+        "engine/src/cards/pool/savage-silhouette.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scythe Tiger",
+      "files": [
+        "engine/src/cards/pool/scythe-tiger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seascape Aerialist",
+      "files": [
+        "engine/src/cards/pool/seascape-aerialist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shoal Serpent",
+      "files": [
+        "engine/src/cards/pool/shoal-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul Stair Expedition",
+      "files": [
+        "engine/src/cards/pool/soul-stair-expedition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sphinx of Jwar Isle",
+      "files": [
+        "engine/src/cards/pool/sphinx-of-jwar-isle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sphinx of Lost Truths",
+      "files": [
+        "engine/src/cards/pool/sphinx-of-lost-truths.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spire Barrage",
+      "files": [
+        "engine/src/cards/pool/spire-barrage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Summoner's Bane",
+      "files": [
+        "engine/src/cards/pool/summoners-bane.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sunspring Expedition",
+      "files": [
+        "engine/src/cards/pool/sunspring-expedition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tajuru Archer",
+      "files": [
+        "engine/src/cards/pool/tajuru-archer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tanglesap",
+      "files": [
+        "engine/src/cards/pool/tanglesap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tempest Owl",
+      "files": [
+        "engine/src/cards/pool/tempest-owl.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Timbermaw Larva",
+      "files": [
+        "engine/src/cards/pool/timbermaw-larva.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Torch Slinger",
+      "files": [
+        "engine/src/cards/pool/torch-slinger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tuktuk Grunts",
+      "files": [
+        "engine/src/cards/pool/tuktuk-grunts.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Turntimber Ranger",
+      "files": [
+        "engine/src/cards/pool/turntimber-ranger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Umara Raptor",
+      "files": [
+        "engine/src/cards/pool/umara-raptor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vampire Lacerator",
+      "files": [
+        "engine/src/cards/pool/vampire-lacerator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vampire's Bite",
+      "files": [
+        "engine/src/cards/pool/vampires-bite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Windborne Charge",
+      "files": [
+        "engine/src/cards/pool/windborne-charge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "World Queller",
+      "files": [
+        "engine/src/cards/pool/world-queller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zektar Shrine Expedition",
+      "files": [
+        "engine/src/cards/pool/zektar-shrine-expedition.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Quest for Pure Flame",
+      "needs": [
+        "replacement:double-damage-from-your-sources-this-turn"
+      ],
+      "why": "\"If a source you control would deal damage this turn, it deals double\" — player-effect damageTo doubles damage from any source, not only yours."
+    },
+    {
+      "name": "Summoning Trap",
+      "needs": [
+        "condition:creature-spell-countered-by-opponent-this-turn"
+      ],
+      "why": "No turn history records a creature spell of yours countered by an opponent, so the trap's condition can't be stated."
+    },
+    {
+      "name": "Guul Draz Specter",
+      "needs": [
+        "condition:opponent-hand-size"
+      ],
+      "why": "\"As long as an opponent has no cards in hand\" — hand-size covers only you or each player."
+    },
+    {
+      "name": "Bala Ged Thief",
+      "needs": [
+        "effect:reveal-n-from-hand-you-choose-discard"
+      ],
+      "why": "The target player chooses N cards to reveal, then you choose one of those to discard."
+    },
+    {
+      "name": "Blazing Torch",
+      "needs": [
+        "cost:granted-ability-sacrifice-granter"
+      ],
+      "why": "The granted ability sacrifices the Equipment, and the damage's source is the Equipment."
+    },
+    {
+      "name": "Armament Master",
+      "needs": [
+        "effect:count-equipment-attached-to-source"
+      ],
+      "why": "Its bonus counts the Equipment attached to it; grantPtPerCount can't count those."
+    },
+    {
+      "name": "Magosi, the Waterveil",
+      "needs": [
+        "replacement:skip-turn"
+      ],
+      "why": "No \"skip your next turn\" effect."
+    },
+    {
+      "name": "Turntimber Basilisk",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "No effect makes a target creature block this creature this turn if able."
+    },
+    {
+      "name": "Nissa's Chosen",
+      "needs": [
+        "replacement:dies-to-library-bottom"
+      ],
+      "why": "\"If this would die, put it on the bottom of its owner's library instead\" — the only dies redirect is to exile."
+    },
+    {
+      "name": "Unstable Footing",
+      "needs": [
+        "effect:damage-cant-be-prevented"
+      ],
+      "why": "No \"damage can't be prevented this turn\" effect."
+    },
+    {
+      "name": "Desecrated Earth",
+      "needs": [
+        "effect:discard-controller-of-target"
+      ],
+      "why": "\"Its controller discards a card\" — discard can't name the target's controller."
+    },
+    {
+      "name": "Trapfinder's Trick",
+      "needs": [
+        "effect:discard-all-matching"
+      ],
+      "why": "No effect discards every card in a hand matching a filter."
+    },
+    {
+      "name": "Gomazoa",
+      "needs": [
+        "filter:creature-source-is-blocking"
+      ],
+      "why": "Shuffling each creature it's blocking along with it needs a \"blocked by this\" scope."
+    },
+    {
+      "name": "Vampire Hexmage",
+      "needs": [
+        "effect:remove-all-counters"
+      ],
+      "why": "Removing every counter of every kind; remove-counter names one kind."
+    },
+    {
+      "name": "Grappling Hook",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "No effect makes a target creature block the equipped creature this turn if able."
+    },
+    {
+      "name": "Cobra Trap",
+      "needs": [
+        "condition:noncreature-permanent-destroyed-by-opponent-this-turn"
+      ],
+      "why": "Turn history keeps no record of permanents destroyed or who controlled the destroying spell or ability."
+    },
+    {
+      "name": "Inferno Trap",
+      "needs": [
+        "stat:filter-dealt-damage-to-you-this-turn"
+      ],
+      "why": "No count of how many different creatures dealt you damage this turn."
+    },
+    {
+      "name": "Kabira Evangel",
+      "needs": [
+        "decision:choose-color-on-resolution",
+        "effect:grant-protection-temporary"
+      ],
+      "why": "Protection from a colour chosen as it resolves, until end of turn — protection is only a static."
+    },
+    {
+      "name": "Cosi's Trickster",
+      "needs": [
+        "trigger:opponent-shuffles-library"
+      ],
+      "why": "No trigger for a player shuffling their library."
+    },
+    {
+      "name": "Sadistic Sacrament",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "Searching a target player's library and exiling what's found."
+    },
+    {
+      "name": "Ravenous Trap",
+      "needs": [
+        "condition:put-into-graveyard-this-turn-any-zone"
+      ],
+      "why": "No turn stat counts cards put into an opponent's graveyard from anywhere this turn."
+    },
+    {
+      "name": "Hellfire Mongrel",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "The intervening-if checks the active opponent's hand; hand-size covers only you or each player."
+    },
+    {
+      "name": "Lullmage Mentor",
+      "needs": [
+        "trigger:counters-a-spell-trigger"
+      ],
+      "why": "No \"whenever a spell or ability you control counters a spell\" trigger."
+    },
+    {
+      "name": "Spreading Seas",
+      "needs": [
+        "static:land-type-setting"
+      ],
+      "why": "\"Enchanted land is an Island\" must remove the land's own abilities (rule 305.7); setSubtypes doesn't."
+    },
+    {
+      "name": "Pyromancer Ascension",
+      "needs": [
+        "filter:same-name-as-card-in-graveyard"
+      ],
+      "why": "\"A spell that has the same name as a card in your graveyard\" — only nameUnlike exists, the opposite."
+    },
+    {
+      "name": "Lavaball Trap",
+      "needs": [
+        "condition:turn-history-per-player"
+      ],
+      "why": "\"An opponent had two or more lands enter\" must be one opponent; turn-history with who: opponent sums across all opponents."
+    }
+  ]
+}

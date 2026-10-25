@@ -9,6 +9,7 @@ import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolAbstruseInterference from "../pool/abstruse-interference.js";
+import _poolAbyssalHunter from "../pool/abyssal-hunter.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAerialEngineer from "../pool/aerial-engineer.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
@@ -508,6 +509,7 @@ import _poolShamanicRevelation from "../pool/shamanic-revelation.js";
 import _poolShardlessOutlander from "../pool/shardless-outlander.js";
 import _poolSheoldredsEdict from "../pool/sheoldreds-edict.js";
 import _poolShimmerMyr from "../pool/shimmer-myr.js";
+import _poolShimmer from "../pool/shimmer.js";
 import _poolShreddedSails from "../pool/shredded-sails.js";
 import _poolShuDefender from "../pool/shu-defender.js";
 import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
@@ -542,6 +544,7 @@ import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
+import _poolSpireBarrage from "../pool/spire-barrage.js";
 import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
@@ -715,6 +718,7 @@ const shard: CardShard = {
     _poolAbolisherOfBloodlines,
     _poolAbsorbingMan,
     _poolAbstruseInterference,
+    _poolAbyssalHunter,
     _poolActOfTreason,
     _poolAerialEngineer,
     _poolAetherChanneler,
@@ -1214,6 +1218,7 @@ const shard: CardShard = {
     _poolShardlessOutlander,
     _poolSheoldredsEdict,
     _poolShimmerMyr,
+    _poolShimmer,
     _poolShreddedSails,
     _poolShuDefender,
     _poolShuriTheBlackPanther,
@@ -1248,6 +1253,7 @@ const shard: CardShard = {
     _poolSourbreadAuntie,
     _poolSpaceTimeAnomaly,
     _poolSpearbreakerBehemoth,
+    _poolSpireBarrage,
     _poolSpirePhantasm,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,

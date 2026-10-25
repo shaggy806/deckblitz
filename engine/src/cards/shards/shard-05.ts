@@ -181,6 +181,7 @@ import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
 import _poolDwarvenSong from "../pool/dwarven-song.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
+import _poolEarlyHarvest from "../pool/early-harvest.js";
 import _poolEasyPickings from "../pool/easy-pickings.js";
 import _poolEchoStorm from "../pool/echo-storm.js";
 import _poolElegantEntourage from "../pool/elegant-entourage.js";
@@ -279,6 +280,7 @@ import _poolHelpfulHunter from "../pool/helpful-hunter.js";
 import _poolHerdHeirloom from "../pool/herd-heirloom.js";
 import _poolHeritageReclamation from "../pool/heritage-reclamation.js";
 import _poolHeroOfTheNyxborn from "../pool/hero-of-the-nyxborn.js";
+import _poolHighlandBerserker from "../pool/highland-berserker.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
 import _poolHomarid from "../pool/homarid.js";
@@ -533,6 +535,7 @@ import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
 import _poolSuddenEdict from "../pool/sudden-edict.js";
 import _poolSugarRush from "../pool/sugar-rush.js";
 import _poolSunscorchedDesert from "../pool/sunscorched-desert.js";
+import _poolSunweb from "../pool/sunweb.js";
 import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
@@ -834,6 +837,7 @@ const shard: CardShard = {
     _poolDwarvenLieutenant,
     _poolDwarvenSong,
     _poolDwynenGiltLeafDaen,
+    _poolEarlyHarvest,
     _poolEasyPickings,
     _poolEchoStorm,
     _poolElegantEntourage,
@@ -932,6 +936,7 @@ const shard: CardShard = {
     _poolHerdHeirloom,
     _poolHeritageReclamation,
     _poolHeroOfTheNyxborn,
+    _poolHighlandBerserker,
     _poolHinderingLight,
     _poolHireACrew,
     _poolHomarid,
@@ -1186,6 +1191,7 @@ const shard: CardShard = {
     _poolSuddenEdict,
     _poolSugarRush,
     _poolSunscorchedDesert,
+    _poolSunweb,
     _poolSuperStrength,
     _poolSupplyRunners,
     _poolSupremeVerdict,

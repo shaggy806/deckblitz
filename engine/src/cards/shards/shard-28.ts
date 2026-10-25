@@ -212,6 +212,7 @@ import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
+import _poolGigantiform from "../pool/gigantiform.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
 import _poolGlassblowersPuzzleknot from "../pool/glassblowers-puzzleknot.js";
 import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
@@ -314,6 +315,7 @@ import _poolMagicMissile from "../pool/magic-missile.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
 import _poolMaiScornfulStriker from "../pool/mai-scornful-striker.js";
 import _poolMakeAStand from "../pool/make-a-stand.js";
+import _poolMakindiShieldmate from "../pool/makindi-shieldmate.js";
 import _poolManaCannons from "../pool/mana-cannons.js";
 import _poolManaGeode from "../pool/mana-geode.js";
 import _poolMandroidSquadron from "../pool/mandroid-squadron.js";
@@ -468,6 +470,7 @@ import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
+import _poolSapphireCharm from "../pool/sapphire-charm.js";
 import _poolSaprolingMigration from "../pool/saproling-migration.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
@@ -526,6 +529,7 @@ import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
+import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
@@ -655,6 +659,7 @@ import _tokensClericToken from "../tokens/cleric-token.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensElkToken from "../tokens/elk-token.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
+import _tokensIllusionToken22 from "../tokens/illusion-token-2-2.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
@@ -876,6 +881,7 @@ const shard: CardShard = {
     _poolGenesisStorm,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
+    _poolGigantiform,
     _poolGildedPinions,
     _poolGlassblowersPuzzleknot,
     _poolGlasspoolMimic,
@@ -978,6 +984,7 @@ const shard: CardShard = {
     _poolMagusOfTheCoffers,
     _poolMaiScornfulStriker,
     _poolMakeAStand,
+    _poolMakindiShieldmate,
     _poolManaCannons,
     _poolManaGeode,
     _poolMandroidSquadron,
@@ -1132,6 +1139,7 @@ const shard: CardShard = {
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSandstormCrasher,
+    _poolSapphireCharm,
     _poolSaprolingMigration,
     _poolSavedByTheShell,
     _poolSawbladeScamp,
@@ -1190,6 +1198,7 @@ const shard: CardShard = {
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,
     _poolSpecimenCollector,
+    _poolSpiritOfTheNight,
     _poolSpitefulSliver,
     _poolSplinterfright,
     _poolSplitUp,
@@ -1321,6 +1330,7 @@ const shard: CardShard = {
     _tokensElementalTokenWildfireAwakener,
     _tokensElkToken,
     _tokensHumanMonkToken,
+    _tokensIllusionToken22,
     _tokensKithkinToken,
     _tokensLotus,
     _tokensPestTokenAttacks,

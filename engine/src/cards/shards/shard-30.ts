@@ -326,6 +326,7 @@ import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
+import _poolLandbindRitual from "../pool/landbind-ritual.js";
 import _poolLatticeBladeMantis from "../pool/lattice-blade-mantis.js";
 import _poolLaunchMishap from "../pool/launch-mishap.js";
 import _poolLaunchParty from "../pool/launch-party.js";
@@ -424,6 +425,7 @@ import _poolPantherWarriors from "../pool/panther-warriors.js";
 import _poolPeregrination from "../pool/peregrination.js";
 import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
+import _poolPhyrexianTribute from "../pool/phyrexian-tribute.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiety from "../pool/piety.js";
 import _poolPilferingHawk from "../pool/pilfering-hawk.js";
@@ -593,6 +595,7 @@ import _poolUnifiedFront from "../pool/unified-front.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolUnnaturalEndurance from "../pool/unnatural-endurance.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
+import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
     _poolLaeliaTheBladeReforged,
+    _poolLandbindRitual,
     _poolLatticeBladeMantis,
     _poolLaunchMishap,
     _poolLaunchParty,
@@ -1074,6 +1078,7 @@ const shard: CardShard = {
     _poolPeregrination,
     _poolPestilentSpirit,
     _poolPhantasmalShieldback,
+    _poolPhyrexianTribute,
     _poolPiaDeterminedRebuilder,
     _poolPiety,
     _poolPilferingHawk,
@@ -1243,6 +1248,7 @@ const shard: CardShard = {
     _poolUniversityCampus,
     _poolUnnaturalEndurance,
     _poolValleyFlamecaller,
+    _poolVampireLacerator,
     _poolVaporSnag,
     _poolVault75MiddleSchool,
     _poolVedalkenEngineer,

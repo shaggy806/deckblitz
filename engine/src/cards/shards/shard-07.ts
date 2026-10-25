@@ -20,6 +20,7 @@ import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
+import _poolAncestralMemories from "../pool/ancestral-memories.js";
 import _poolAntagonize from "../pool/antagonize.js";
 import _poolAntiquitiesOnTheLoose from "../pool/antiquities-on-the-loose.js";
 import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee.js";
@@ -353,6 +354,7 @@ import _poolMoonstoneHarbinger from "../pool/moonstone-harbinger.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
 import _poolMosstodon from "../pool/mosstodon.js";
+import _poolMtendaGriffin from "../pool/mtenda-griffin.js";
 import _poolMuYanlingCelestialWind from "../pool/mu-yanling-celestial-wind.js";
 import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
@@ -411,6 +413,7 @@ import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
+import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
 import _poolQuestForTheGoblinLord from "../pool/quest-for-the-goblin-lord.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
 import _poolRakshasaGravecaller from "../pool/rakshasa-gravecaller.js";
@@ -545,6 +548,7 @@ import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
 import _poolTabletOfCompleation from "../pool/tablet-of-compleation.js";
 import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
 import _poolTamiyosImmobilizer from "../pool/tamiyos-immobilizer.js";
+import _poolTaniwha from "../pool/taniwha.js";
 import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
@@ -566,6 +570,7 @@ import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
 import _poolTidalTerror from "../pool/tidal-terror.js";
 import _poolTimberShredder from "../pool/timber-shredder.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
+import _poolTimbermawLarva from "../pool/timbermaw-larva.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
@@ -609,6 +614,7 @@ import _poolWakandanDroneFlock from "../pool/wakandan-drone-flock.js";
 import _poolWakingTheTrolls from "../pool/waking-the-trolls.js";
 import _poolWallOfLimbs from "../pool/wall-of-limbs.js";
 import _poolWallOfRazors from "../pool/wall-of-razors.js";
+import _poolWallOfResistance from "../pool/wall-of-resistance.js";
 import _poolWallOfResurgence from "../pool/wall-of-resurgence.js";
 import _poolWallOfTears from "../pool/wall-of-tears.js";
 import _poolWallOfVines from "../pool/wall-of-vines.js";
@@ -675,6 +681,7 @@ import _tokensWraithToken from "../tokens/wraith-token.js";
 import _tokensWurmTokenTrample from "../tokens/wurm-token-trample.js";
 import _tokensXXGolemTokenHaste from "../tokens/x-x-golem-token-haste.js";
 import _tokensZombieBerserkerToken from "../tokens/zombie-berserker-token.js";
+import _tokensZombieGiantToken from "../tokens/zombie-giant-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -695,6 +702,7 @@ const shard: CardShard = {
     _poolAlterFate,
     _poolAlteredEgo,
     _poolAmbushGigapede,
+    _poolAncestralMemories,
     _poolAntagonize,
     _poolAntiquitiesOnTheLoose,
     _poolAprilOneilKunoichiTrainee,
@@ -1028,6 +1036,7 @@ const shard: CardShard = {
     _poolMordantDragon,
     _poolMossbeardAncient,
     _poolMosstodon,
+    _poolMtendaGriffin,
     _poolMuYanlingCelestialWind,
     _poolMudbuttonCursetosser,
     _poolMultaniYavimayasAvatar,
@@ -1086,6 +1095,7 @@ const shard: CardShard = {
     _poolPsychicPickpocket,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
+    _poolQuestForAncientSecrets,
     _poolQuestForTheGoblinLord,
     _poolRakdosTheMuscle,
     _poolRakshasaGravecaller,
@@ -1220,6 +1230,7 @@ const shard: CardShard = {
     _poolTabletOfCompleation,
     _poolTalismanOfDominance,
     _poolTamiyosImmobilizer,
+    _poolTaniwha,
     _poolTatteredHaunter,
     _poolTchallaTheBlackPanther,
     _poolTempestHarvester,
@@ -1241,6 +1252,7 @@ const shard: CardShard = {
     _poolTidalTerror,
     _poolTimberShredder,
     _poolTimberlandGuide,
+    _poolTimbermawLarva,
     _poolTimeWipe,
     _poolTomeShredder,
     _poolToothyImaginaryFriend,
@@ -1284,6 +1296,7 @@ const shard: CardShard = {
     _poolWakingTheTrolls,
     _poolWallOfLimbs,
     _poolWallOfRazors,
+    _poolWallOfResistance,
     _poolWallOfResurgence,
     _poolWallOfTears,
     _poolWallOfVines,
@@ -1352,6 +1365,7 @@ const shard: CardShard = {
     _tokensWurmTokenTrample,
     _tokensXXGolemTokenHaste,
     _tokensZombieBerserkerToken,
+    _tokensZombieGiantToken,
   ],
 };
 

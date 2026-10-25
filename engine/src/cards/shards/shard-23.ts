@@ -232,6 +232,7 @@ import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
 import _poolGrimDraugr from "../pool/grim-draugr.js";
 import _poolGuma from "../pool/guma.js";
 import _poolGustSkimmer from "../pool/gust-skimmer.js";
+import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
@@ -299,6 +300,8 @@ import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
+import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
+import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
@@ -312,6 +315,7 @@ import _poolLhurgoyf from "../pool/lhurgoyf.js";
 import _poolLifeFindsAWay from "../pool/life-finds-a-way.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
+import _poolLivingTsunami from "../pool/living-tsunami.js";
 import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
 import _poolLoxodonLifechanter from "../pool/loxodon-lifechanter.js";
@@ -888,6 +892,7 @@ const shard: CardShard = {
     _poolGrimDraugr,
     _poolGuma,
     _poolGustSkimmer,
+    _poolGuulDrazVampire,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
     _poolHavocJester,
@@ -955,6 +960,8 @@ const shard: CardShard = {
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
     _poolKorCelebrant,
+    _poolKorSkyfisher,
+    _poolKukemssaPirates,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
@@ -968,6 +975,7 @@ const shard: CardShard = {
     _poolLifeFindsAWay,
     _poolLightningBlast,
     _poolLightningBlow,
+    _poolLivingTsunami,
     _poolLostLegion,
     _poolLotusGuardian,
     _poolLoxodonLifechanter,

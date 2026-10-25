@@ -93,6 +93,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   paid"). 91 of the set's 104 left authored by five `card-author` agents and the lead — Pharagax
   Giant, Nessian Wilds Ravager, Felhide Spiritbinder, Pain Seer, Champion of Stray Souls, Searing
   Blood and 85 more; BNG is whole. 13 blocked, one each.
+- **Zendikar, whole** (batch 165, the middle walk, 2026-10-25): no engine change. 87 authored — 8
+  finished by the scaffolder, 79 by five `card-author` agents (Journey to Nowhere, Goblin Guide, Kor
+  Skyfisher, Nissa Revane, Chandra Ablaze, Punishing Fire, Kalitas, Bloodchief of Ghet, the Expeditions
+  and Quests, nine Traps); 26 blocked (`B165.json`).
 - **Worldwake, whole** (batch 162, the middle walk, 2026-10-25): `{ timesKicked: "source" }` (a
   multikicker count as an effect amount — Spell Contortion, Wolfbriar Elemental, Bloodhusk Ritualist,
   Deathforge Shaman, Lightkeeper of Emeria) and `StaticAbility.setColors` (layer 5 — the five colored

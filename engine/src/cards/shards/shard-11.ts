@@ -10,6 +10,7 @@ import _poolAetherHub from "../pool/aether-hub.js";
 import _poolAetherSwooper from "../pool/aether-swooper.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
+import _poolAfterlife from "../pool/afterlife.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAkoumFirebird from "../pool/akoum-firebird.js";
 import _poolAlchemistsVial from "../pool/alchemists-vial.js";
@@ -473,6 +474,7 @@ import _poolScreechingSoulbreaker from "../pool/screeching-soulbreaker.js";
 import _poolScuteMob from "../pool/scute-mob.js";
 import _poolSeaGodsScorn from "../pool/sea-gods-scorn.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
+import _poolSeedlingCharm from "../pool/seedling-charm.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
@@ -559,6 +561,7 @@ import _poolTatyovaStewardOfTides from "../pool/tatyova-steward-of-tides.js";
 import _poolTchakaVenerableKing from "../pool/tchaka-venerable-king.js";
 import _poolTearAsunder from "../pool/tear-asunder.js";
 import _poolTechnodrome from "../pool/technodrome.js";
+import _poolTeferisIsle from "../pool/teferis-isle.js";
 import _poolTeferisProtection from "../pool/teferis-protection.js";
 import _poolTempestTechnique from "../pool/tempest-technique.js";
 import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
@@ -676,6 +679,7 @@ const shard: CardShard = {
     _poolAetherSwooper,
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
+    _poolAfterlife,
     _poolAkkiRockspeaker,
     _poolAkoumFirebird,
     _poolAlchemistsVial,
@@ -1139,6 +1143,7 @@ const shard: CardShard = {
     _poolScuteMob,
     _poolSeaGodsScorn,
     _poolSearchlightGeist,
+    _poolSeedlingCharm,
     _poolSejiriRefuge,
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
@@ -1225,6 +1230,7 @@ const shard: CardShard = {
     _poolTchakaVenerableKing,
     _poolTearAsunder,
     _poolTechnodrome,
+    _poolTeferisIsle,
     _poolTeferisProtection,
     _poolTempestTechnique,
     _poolTenzaGodosMaul,

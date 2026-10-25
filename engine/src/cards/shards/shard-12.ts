@@ -212,6 +212,7 @@ import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
+import _poolFloodgate from "../pool/floodgate.js";
 import _poolFlywheelRacer from "../pool/flywheel-racer.js";
 import _poolForceOfNegation from "../pool/force-of-negation.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
@@ -308,6 +309,7 @@ import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
 import _poolKnightOfThePilgrimsRoad from "../pool/knight-of-the-pilgrims-road.js";
+import _poolKorAeronaut from "../pool/kor-aeronaut.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
@@ -336,6 +338,7 @@ import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
+import _poolMaro from "../pool/maro.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
@@ -427,6 +430,7 @@ import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
+import _poolPunishingFire from "../pool/punishing-fire.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
@@ -472,6 +476,7 @@ import _poolSavor from "../pool/savor.js";
 import _poolScarletWitchWandaMaximoff from "../pool/scarlet-witch-wanda-maximoff.js";
 import _poolScrollThief from "../pool/scroll-thief.js";
 import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
+import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
@@ -863,6 +868,7 @@ const shard: CardShard = {
     _poolFlamekinSpitfire,
     _poolFlaxenIntruder,
     _poolFlayerOfTheHatebound,
+    _poolFloodgate,
     _poolFlywheelRacer,
     _poolForceOfNegation,
     _poolForcedFruition,
@@ -959,6 +965,7 @@ const shard: CardShard = {
     _poolKeldonNecropolis,
     _poolKillersMask,
     _poolKnightOfThePilgrimsRoad,
+    _poolKorAeronaut,
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
     _poolKunLunWarrior,
@@ -987,6 +994,7 @@ const shard: CardShard = {
     _poolManaTithe,
     _poolManifestDread,
     _poolMarbleDiamond,
+    _poolMaro,
     _poolMarwynThePreserver,
     _poolMasterfulReplication,
     _poolMelokuTheCloudedMirror,
@@ -1078,6 +1086,7 @@ const shard: CardShard = {
     _poolProtegesAwakening,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
+    _poolPunishingFire,
     _poolPyroceratops,
     _poolRabbitResponse,
     _poolRadhaCoalitionWarlord,
@@ -1123,6 +1132,7 @@ const shard: CardShard = {
     _poolScarletWitchWandaMaximoff,
     _poolScrollThief,
     _poolSeaGateWreckage,
+    _poolSeascapeAerialist,
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
     _poolSelvalasStampede,

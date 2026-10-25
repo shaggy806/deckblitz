@@ -268,6 +268,7 @@ import _poolInferno from "../pool/inferno.js";
 import _poolInsurrection from "../pool/insurrection.js";
 import _poolIntrepidHero from "../pool/intrepid-hero.js";
 import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
+import _poolIorRuinExpedition from "../pool/ior-ruin-expedition.js";
 import _poolIrascibleWolverine from "../pool/irascible-wolverine.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
@@ -455,6 +456,7 @@ import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
+import _poolSeedsOfInnocence from "../pool/seeds-of-innocence.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
@@ -566,6 +568,7 @@ import _poolTrueheartTwins from "../pool/trueheart-twins.js";
 import _poolTrufflesnout from "../pool/trufflesnout.js";
 import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
+import _poolTuktukGrunts from "../pool/tuktuk-grunts.js";
 import _poolTundraFumarole from "../pool/tundra-fumarole.js";
 import _poolTwilightMire from "../pool/twilight-mire.js";
 import _poolUlamogTheCeaselessHunger from "../pool/ulamog-the-ceaseless-hunger.js";
@@ -626,6 +629,7 @@ import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js"
 import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
+import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
@@ -904,6 +908,7 @@ const shard: CardShard = {
     _poolInsurrection,
     _poolIntrepidHero,
     _poolIntroductionToProphecy,
+    _poolIorRuinExpedition,
     _poolIrascibleWolverine,
     _poolIroassChampion,
     _poolIroncladKrovod,
@@ -1091,6 +1096,7 @@ const shard: CardShard = {
     _poolScorchmark,
     _poolSeafloorOracle,
     _poolSeedguideAsh,
+    _poolSeedsOfInnocence,
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
     _poolSelfDestruct,
@@ -1202,6 +1208,7 @@ const shard: CardShard = {
     _poolTrufflesnout,
     _poolTrumpetingCarnosaur,
     _poolTrustyPackbeast,
+    _poolTuktukGrunts,
     _poolTundraFumarole,
     _poolTwilightMire,
     _poolUlamogTheCeaselessHunger,
@@ -1264,6 +1271,7 @@ const shard: CardShard = {
     _tokensEldraziAngelToken,
     _tokensGoblinWizardToken,
     _tokensGremlinToken,
+    _tokensInsectTokenBlack01,
     _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,

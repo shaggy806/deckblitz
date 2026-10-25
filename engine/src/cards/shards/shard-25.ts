@@ -465,6 +465,7 @@ import _poolRowdyResearch from "../pool/rowdy-research.js";
 import _poolRoyalAssassin from "../pool/royal-assassin.js";
 import _poolRoyalWarden from "../pool/royal-warden.js";
 import _poolRuinousIntrusion from "../pool/ruinous-intrusion.js";
+import _poolRuinousMinotaur from "../pool/ruinous-minotaur.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
 import _poolRumblingRockslide from "../pool/rumbling-rockslide.js";
 import _poolSalvationColossus from "../pool/salvation-colossus.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolRoyalAssassin,
     _poolRoyalWarden,
     _poolRuinousIntrusion,
+    _poolRuinousMinotaur,
     _poolRumblingBaloth,
     _poolRumblingRockslide,
     _poolSalvationColossus,
