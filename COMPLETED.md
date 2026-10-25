@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Magic 2015 and Conspiracy, the rest of both sets** (batch 158): **parley** built (a
+  `reveal-top` with `who` and the `{ thisWay: "revealed" }` amount; the `parley` helper and a
+  scaffolder template). 86 authored by five `card-author` agents and the lead — Garruk, Apex
+  Predator, Nissa, Worldwaker, Muzzio, Visionary Architect, Kurkesh, Onakke Ancient, Coercive
+  Portal, Dack's Duplicate, Selvala's Charge and the four older parley cards it unblocked
+  (Selvala, Explorer Returned, Phabine, Boss's Confidant, Storm Fleet Negotiator, Cutthroat
+  Negotiator); 27 blocked, "last turn" life loss (2) the most shared (2026-10-25).
 - **Homelands, whole** (batch 160, the oldest-first walk): no feature built. 46 of its last 79
   authored by five `card-author` agents — Koskun Falls, Primal Order, Chain Stasis, Serrated
   Arrows, Feroz's Ban, Drudge Spell, Sengir Autocrat, Truce, Didgeridoo, Rashka the Slayer; 33
