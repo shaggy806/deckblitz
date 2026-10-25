@@ -154,6 +154,13 @@ that needs it is authored.
   its snapshot (`DelayedTrigger.triggerObjectCeased` — Esoteric Duplicator copying a Clue
   sacrificed in an end step, at the next turn's end step), but anything else reading a ceased
   token on a later turn still loses it. Latent: no other pool card is known to.
+- **Umbra armor's Aura is picked, and goes after the other shields.** With several Auras with
+  umbra armor on one permanent (rule 702.89a), or a regeneration shield or a shield counter
+  beside one, the permanent's controller chooses which replacement applies (616.1, the
+  rulings); `Game.umbraArmorInstead` destroys the umbra of least mana value (the newest of
+  equals), and `Game.destroyByEffect` tries it only after the regeneration shield and the
+  shield counter — keeping the Aura's bonus, which usually matters more. Latent: no pool deck
+  stacks umbras on purpose (found 2026-10-25, building umbra armor).
 - **A regeneration shield goes before a shield counter.** Both replace "this permanent would
   be destroyed" (rules 701.15a, 122.1c), so with both on it the permanent's controller chooses
   which applies (616.1); `Game.destroyByEffect` always spends the regeneration shield first,

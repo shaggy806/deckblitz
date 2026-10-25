@@ -215,6 +215,14 @@ export type Keyword =
    * to a creature is that many -1/-1 counters instead of marked damage
    * (120.3d); damage to a player is life loss as usual. */
   | "wither"
+  /** Umbra armor (rule 702.89a — totem armor on older printings), on an
+   * Aura: "If enchanted permanent would be destroyed, instead remove all
+   * damage marked on it and destroy this Aura." A replacement read off the
+   * Aura's current keywords at every destruction, an effect's and the
+   * lethal-damage and deathtouch state-based actions' (`Game.umbraArmorInstead`);
+   * not regeneration, so "can't be regenerated" doesn't stop it, and the
+   * permanent stays untapped and in combat (the rulings). */
+  | "umbra-armor"
   /** Landwalk (rule 702.14) — can't be blocked as long as the defending
    * player controls a land of that type. One keyword per land type a card
    * prints: the five basic types, and Desert (Hazezon, Shaper of Sand). The

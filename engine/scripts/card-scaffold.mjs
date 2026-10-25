@@ -293,7 +293,7 @@ function wrap(text, prefix) {
 }
 
 const LAYOUT_FLAG = { transform: "transform", adventure: "adventure", modal_dfc: null };
-const SUPPORTED_LAYOUTS = new Set(["normal", "transform", "modal_dfc", "adventure", "saga", "token", "mutate"]);
+const SUPPORTED_LAYOUTS = new Set(["normal", "transform", "modal_dfc", "adventure", "saga", "token", "mutate", "leveler"]);
 
 // ------------------------------------------------------------------ tokens
 

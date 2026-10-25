@@ -28735,12 +28735,53 @@ export class Game {
       this.emit({ type: "permanent-destroy-prevented", object: id, reason: "a shield counter removed instead" });
       return;
     }
+    // Umbra armor (rule 702.89a): the effect destroys the Aura instead — the
+    // spell or ability is what destroys it (the rulings), so it goes through
+    // this same path, indestructible and all.
+    const umbra = this.umbraArmorInstead(id);
+    if (umbra !== null) {
+      this.destroyByEffect({ kind: "object", object: umbra }, false);
+      return;
+    }
     if (!this.moveObject(id, "graveyard")) return;
     this.emit({
       type: "permanent-destroyed",
       object: id,
       reason: "destroyed",
     });
+  }
+
+  /**
+   * Umbra armor (rule 702.89a): if an Aura with umbra armor is attached to
+   * `id`, remove all damage marked on `id` and return that Aura, which the
+   * caller destroys instead; `null` if none is. Not regeneration (the
+   * rulings): `id` isn't tapped or removed from combat, and "can't be
+   * regenerated" doesn't stop it. With several, the permanent's controller
+   * picks which one goes (616.1); the engine picks for them — the one of
+   * least mana value, then the newest (docs/engine-gaps.md).
+   */
+  private umbraArmorInstead(id: ObjectId): ObjectId | null {
+    let best: ObjectId | null = null;
+    let bestValue = Infinity;
+    for (const auraId of this.state.zones.shared.battlefield) {
+      const aura = this.state.objects[auraId];
+      if (aura.attachedTo !== id || !this.objHasKeyword(auraId, "umbra-armor")) continue;
+      const value = manaValueOfObject(this.registry, aura);
+      if (value <= bestValue) {
+        best = auraId;
+        bestValue = value;
+      }
+    }
+    if (best === null) return null;
+    const object = this.state.objects[id];
+    if (object.damageMarked !== 0 || object.markedByDeathtouch) {
+      object.damageMarked = 0;
+      object.markedByDeathtouch = false;
+      this.emit({ type: "damage-cleared", objects: [id] });
+    }
+    invalidateComputedCache();
+    this.emit({ type: "permanent-destroy-prevented", object: id, reason: "umbra armor" });
+    return best;
   }
 
   /** A regeneration shield on `target` (rule 701.15a — see the
@@ -34041,6 +34082,18 @@ export class Game {
         // shield replaces (701.15a); 0 toughness doesn't.
         if (reason !== null && reason !== "toughness is 0 or less" && this.regenerateInstead(id)) {
           reason = null;
+        }
+        // So does umbra armor (702.89a) — once for every check at once (the
+        // rulings) — and the game rules destroy the Aura instead, unless it
+        // can't be.
+        if (reason !== null && reason !== "toughness is 0 or less") {
+          const umbra = this.umbraArmorInstead(id);
+          if (umbra !== null) {
+            reason = null;
+            if (!this.objHasKeyword(umbra, "indestructible") && !this.regenerateInstead(umbra)) {
+              add(umbra, { type: "permanent-destroyed", object: umbra, reason: "umbra armor" });
+            }
+          }
         }
         if (reason !== null) add(id, { type: "permanent-destroyed", object: id, reason });
       }

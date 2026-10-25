@@ -70,6 +70,7 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   // No wither icon anywhere in the font; it deals damage as -1/-1
   // counters, so the -1/-1 counter's.
   wither: '', // ms-counter-minus
+  'umbra-armor': '', // ms-ability-totem-armor
   // No phasing icon anywhere in the font; fading's — a permanent going
   // out of the game for a while — reads closest.
   phasing: '', // ms-ability-fading

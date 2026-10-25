@@ -1433,6 +1433,7 @@ import _poolBeanstalkWurm from "./pool/beanstalk-wurm.js";
 import _poolBearCub from "./pool/bear-cub.js";
 import _poolBearDown from "./pool/bear-down.js";
 import _poolBearTrap from "./pool/bear-trap.js";
+import _poolBearUmbra from "./pool/bear-umbra.js";
 import _poolBeardedAxe from "./pool/bearded-axe.js";
 import _poolBearerOfGlory from "./pool/bearer-of-glory.js";
 import _poolBearerOfMemory from "./pool/bearer-of-memory.js";
@@ -16290,6 +16291,7 @@ import _poolStruggle from "./pool/struggle.js";
 import _poolStubbornBurrowfiend from "./pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "./pool/stubborn-denial.js";
 import _poolStudentOfOjutai from "./pool/student-of-ojutai.js";
+import _poolStudentOfWarfare from "./pool/student-of-warfare.js";
 import _poolStudiousFirstYear from "./pool/studious-first-year.js";
 import _poolStudyBreak from "./pool/study-break.js";
 import _poolStudyHall from "./pool/study-hall.js";
@@ -21725,6 +21727,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBearCub,
   _poolBearDown,
   _poolBearTrap,
+  _poolBearUmbra,
   _poolBeardedAxe,
   _poolBearerOfGlory,
   _poolBearerOfMemory,
@@ -36582,6 +36585,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStubbornBurrowfiend,
   _poolStubbornDenial,
   _poolStudentOfOjutai,
+  _poolStudentOfWarfare,
   _poolStudiousFirstYear,
   _poolStudyBreak,
   _poolStudyHall,
@@ -42030,6 +42034,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bear-cub": _poolBearCub,
   "pool/bear-down": _poolBearDown,
   "pool/bear-trap": _poolBearTrap,
+  "pool/bear-umbra": _poolBearUmbra,
   "pool/bearded-axe": _poolBeardedAxe,
   "pool/bearer-of-glory": _poolBearerOfGlory,
   "pool/bearer-of-memory": _poolBearerOfMemory,
@@ -56887,6 +56892,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stubborn-burrowfiend": _poolStubbornBurrowfiend,
   "pool/stubborn-denial": _poolStubbornDenial,
   "pool/student-of-ojutai": _poolStudentOfOjutai,
+  "pool/student-of-warfare": _poolStudentOfWarfare,
   "pool/studious-first-year": _poolStudiousFirstYear,
   "pool/study-break": _poolStudyBreak,
   "pool/study-hall": _poolStudyHall,

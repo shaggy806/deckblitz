@@ -1370,6 +1370,34 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(consul.triggered[0].condition).toEqual({ kind: "source", filter: { renowned: true } });
   });
 
+  it("level up (rule 702.87a) and a leveler's level symbols (rule 711.2), and umbra armor (702.89a)", () => {
+    const student = face(
+      "Level up {W} ({W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-6\n3/3\nFirst strike\nLEVEL 7+\n4/4\nDouble strike",
+      "Creature — Human Knight",
+    );
+    expect(student.activated[0]).toMatchObject({
+      cost: { mana: "{W}", tap: false },
+      sorcerySpeed: true,
+      effect: { kind: "add-counter", target: "source", counter: "level", amount: 1 },
+    });
+    expect(student.static[0]).toMatchObject({
+      condition: { kind: "all" },
+      setBasePt: { power: 3, toughness: 3 },
+      grantKeywords: ["first-strike"],
+      text: "LEVEL 2-6\n3/3\nFirst strike",
+    });
+    expect(student.static[1]).toMatchObject({
+      condition: { kind: "self-counters", counter: "level", compare: { op: "gte", n: 7 } },
+      setBasePt: { power: 4, toughness: 4 },
+    });
+    expect(student.complete).toBe(true);
+    // A band's line that isn't a keyword is a person's.
+    const ruled = face("Level up {1}\nLEVEL 1-3\n2/2\nWhenever this creature attacks, draw a card.\nLEVEL 4+\n3/3", "Creature — Human");
+    expect(ruled.todo).toEqual(["Whenever this creature attacks, draw a card."]);
+    expect(ruled.static).toHaveLength(2);
+    expect(face("Enchant creature\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)", "Enchantment — Aura").keywords).toEqual(["umbra-armor"]);
+  });
+
   it("'attacks and isn't blocked' (rule 509.3g) and 'if you do, ~ assigns no combat damage this turn'", () => {
     const ophidian = face(
       "Whenever this creature attacks and isn't blocked, you may draw a card. If you do, this creature assigns no combat damage this turn.",

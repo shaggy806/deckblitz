@@ -47,6 +47,7 @@ import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
+import _poolBearUmbra from "../pool/bear-umbra.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
 import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
@@ -679,6 +680,7 @@ const shard: CardShard = {
     _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
     _poolBazaarTrader,
+    _poolBearUmbra,
     _poolBeetleformMage,
     _poolBelunaGrandsquall,
     _poolBenevolentRiverSpirit,

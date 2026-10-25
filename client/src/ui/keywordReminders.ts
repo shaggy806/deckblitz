@@ -71,6 +71,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
   },
   decayed: { name: 'Decayed', text: "Can't block. When it attacks, it's sacrificed at end of combat." },
   wither: { name: 'Wither', text: 'Deals damage to creatures in the form of -1/-1 counters.' },
+  'umbra-armor': {
+    name: 'Umbra armor',
+    text: 'If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.',
+  },
   phasing: {
     name: 'Phasing',
     text: "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.",

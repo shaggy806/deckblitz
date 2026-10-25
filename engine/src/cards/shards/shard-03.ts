@@ -476,6 +476,7 @@ import _poolStrengthOfSolidarity from "../pool/strength-of-solidarity.js";
 import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
+import _poolStudentOfWarfare from "../pool/student-of-warfare.js";
 import _poolStunningStrike from "../pool/stunning-strike.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
 import _poolSumalaSentry from "../pool/sumala-sentry.js";
@@ -1059,6 +1060,7 @@ const shard: CardShard = {
     _poolStromgaldCrusader,
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
+    _poolStudentOfWarfare,
     _poolStunningStrike,
     _poolSulfurVent,
     _poolSumalaSentry,

@@ -32,6 +32,9 @@ import {
   cumulativeUpkeep,
   annihilator,
   awaken,
+  levelBand,
+  levelStatic,
+  levelUp,
   mentor,
   crew,
   dethrone,
@@ -118,7 +121,7 @@ export const KEYWORDS = {
   deathtouch: "deathtouch", lifelink: "lifelink", menace: "menace", indestructible: "indestructible",
   hexproof: "hexproof", shroud: "shroud", flash: "flash", fear: "fear", intimidate: "intimidate", skulk: "skulk", riot: "riot", storied: "storied", ascend: "ascend",
   "start your engines!": "start-your-engines",
-  infect: "infect", wither: "wither",
+  infect: "infect", wither: "wither", "umbra armor": "umbra-armor", "totem armor": "umbra-armor",
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
   mountainwalk: "mountainwalk", forestwalk: "forestwalk", desertwalk: "desertwalk",
   changeling: "changeling", daybound: "daybound", nightbound: "nightbound", shadow: "shadow",
@@ -168,6 +171,8 @@ function keywordPart(part) {
   // they're read (`parseFace`).
   if ((m = new RegExp(`^awaken (\\d+)—${COST}$`, "i").exec(p))) return { card: { awakenKeyword: { n: Number(m[1]), cost: m[2] } } };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
+  // Level up [cost] (rule 702.87a): its sorcery-speed level counter.
+  if ((m = new RegExp(`^level up ${COST}$`, "i").exec(p))) return { activated: [levelUp(m[1])] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
   if ((m = new RegExp(`^unearth ${COST}$`, "i").exec(p))) return { activated: [unearth(m[1])] };
@@ -1866,8 +1871,32 @@ export function parseFace(face, ctx = {}) {
   // symbol's, not the card's own, and a person authors it as a
   // `stationBand`.
   let inStriation = false;
+  // A level symbol ("LEVEL 2-6", "LEVEL 7+") opens a leveler's striation
+  // (rule 711.2): its P/T line and keyword lines become one `levelStatic`;
+  // any other line in it is a person's (an ability carrying `levelBand`).
+  let level = null;
+  const flushLevel = () => {
+    if (level === null) return;
+    if (level.pt === null) out.todo.push(level.text[0]);
+    else out.static.push(levelStatic(levelBand(level.min, level.max), level.pt[0], level.pt[1], level.text.join("\n"), level.keywords));
+    level = null;
+  };
   for (let i = 0; i < lines.length; i += 1) {
     const raw = lines[i];
+    let lv;
+    if ((lv = /^LEVEL (\d+)(?:-(\d+)|\+)$/.exec(raw))) {
+      flushLevel();
+      level = { min: Number(lv[1]), max: lv[2] === undefined ? undefined : Number(lv[2]), pt: null, keywords: [], text: [raw] };
+      continue;
+    }
+    if (level !== null) {
+      level.text.push(raw);
+      if (level.pt === null && (lv = /^(\d+)\/(\d+)$/.exec(raw))) { level.pt = [Number(lv[1]), Number(lv[2])]; continue; }
+      const kws = raw.split(/,\s*/).map((p) => KEYWORDS[p.toLowerCase()]);
+      if (kws.every((k) => k !== undefined)) { level.keywords.push(...kws); continue; }
+      out.todo.push(printed(raw));
+      continue;
+    }
     if (/^\d+\+ \| /.test(raw)) inStriation = true;
     if (inStriation) { out.todo.push(printed(raw)); continue; }
     const whole = normalize(raw, face.name);
@@ -2333,6 +2362,7 @@ export function parseFace(face, ctx = {}) {
     }
     out.todo.push(printed(raw));
   }
+  flushLevel();
 
   // A spell: its lines are one effect (a modal one if it opens "Choose …").
   if (out.spellLines) {

@@ -762,6 +762,61 @@ export const annihilator = (n: number): TriggeredAbility => ({
 });
 
 /**
+ * Level up [cost] (rule 702.87a): "[Cost]: Put a level counter on this
+ * permanent. Activate only as a sorcery." A leveler has it at all times
+ * (711.4). Its level symbols are {@link levelBand} conditions on the
+ * statics, and on any triggered (`whileCondition`) or activated
+ * (`condition`) ability printed in a band. The `text` is the printed line
+ * with its reminder.
+ */
+export const levelUp = (cost: string): ActivatedAbility => ({
+  cost: { mana: cost, tap: false },
+  targets: [],
+  effect: { kind: "add-counter", target: "source", counter: "level", amount: 1 },
+  resolve: null,
+  sorcerySpeed: true,
+  text: `Level up ${cost} (${cost}: Put a level counter on this. Level up only as a sorcery.)`,
+});
+
+/**
+ * A leveler's level symbol (rule 711.2): `levelBand(2, 6)` is "LEVEL 2-6" —
+ * at least 2 level counters and no more than 6 (711.2a); `levelBand(7)` is
+ * "LEVEL 7+" (711.2b). Counted off the permanent's current counters, so
+ * counters added or removed any other way change its level too (the rulings).
+ */
+export const levelBand = (min: number, max?: number): StaticCondition => {
+  const atLeast: StaticCondition = { kind: "self-counters", counter: "level", compare: { op: "gte", n: min } };
+  if (max === undefined) return atLeast;
+  return {
+    kind: "all",
+    of: [atLeast, { kind: "self-counters", counter: "level", compare: { op: "lte", n: max } }],
+  };
+};
+
+/**
+ * A level symbol's static (rule 711.2a-b): "as long as it has [band] level
+ * counters, it has base power and toughness [P/T] and has [keywords]" — layer
+ * 7b, with the leveler's own timestamp, so pumps and counters still apply on
+ * top (the rulings). Below the first band it has its printed P/T (711.5).
+ * Abilities in the band other than keywords are their own entries carrying
+ * `levelBand(…)`. `text` is the band as printed, e.g. "LEVEL 2-6\n3/3\nFirst
+ * strike".
+ */
+export const levelStatic = (
+  band: StaticCondition,
+  power: number,
+  toughness: number,
+  text: string,
+  keywords?: readonly Keyword[],
+): StaticAbility => ({
+  affects: { scope: "self" },
+  condition: band,
+  setBasePt: { power, toughness },
+  ...(keywords !== undefined && keywords.length > 0 ? { grantKeywords: keywords } : {}),
+  text,
+});
+
+/**
  * Dethrone (rule 702.105a): "Whenever this creature attacks the player with
  * the most life or tied for most life, put a +1/+1 counter on this
  * creature." Every player in the game is compared, you included, and a
