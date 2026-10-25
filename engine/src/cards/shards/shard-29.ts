@@ -232,6 +232,7 @@ import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
+import _poolGoblinScouts from "../pool/goblin-scouts.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
@@ -445,6 +446,7 @@ import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
 import _poolSacredArmory from "../pool/sacred-armory.js";
+import _poolSacredMesa from "../pool/sacred-mesa.js";
 import _poolSaddleOfTheCavalier from "../pool/saddle-of-the-cavalier.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
 import _poolSaintTraftAndRemKarolus from "../pool/saint-traft-and-rem-karolus.js";
@@ -889,6 +891,7 @@ const shard: CardShard = {
     _poolGnottvoldSlumbermound,
     _poolGoblinArsonist,
     _poolGoblinOffensive,
+    _poolGoblinScouts,
     _poolGodPharaohsStatue,
     _poolGravelgillScoundrel,
     _poolGraveshifter,
@@ -1102,6 +1105,7 @@ const shard: CardShard = {
     _poolRunedServitor,
     _poolRustlerRampage,
     _poolSacredArmory,
+    _poolSacredMesa,
     _poolSaddleOfTheCavalier,
     _poolSaheeliRadiantCreator,
     _poolSaintTraftAndRemKarolus,

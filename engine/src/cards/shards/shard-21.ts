@@ -326,6 +326,7 @@ import _poolMetathranZombie from "../pool/metathran-zombie.js";
 import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
 import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
+import _poolMindHarness from "../pool/mind-harness.js";
 import _poolMindWhip from "../pool/mind-whip.js";
 import _poolMindswipe from "../pool/mindswipe.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
@@ -607,6 +608,7 @@ import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
+import _poolZirilanOfTheClaw from "../pool/zirilan-of-the-claw.js";
 import _tokensBearTokenGreen44 from "../tokens/bear-token-green-4-4.js";
 import _tokensBeastTokenRedGreen from "../tokens/beast-token-red-green.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
@@ -952,6 +954,7 @@ const shard: CardShard = {
     _poolMethodsOfTheMighty,
     _poolMicromancer,
     _poolMigratoryGreathorn,
+    _poolMindHarness,
     _poolMindWhip,
     _poolMindswipe,
     _poolMinionsReturn,
@@ -1233,6 +1236,7 @@ const shard: CardShard = {
     _poolZaffaiThunderConductor,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,
+    _poolZirilanOfTheClaw,
   ],
   tokens: [
     _tokensBearTokenGreen44,

@@ -267,6 +267,7 @@ import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolHypnoticSiren from "../pool/hypnotic-siren.js";
 import _poolIcatianJavelineers from "../pool/icatian-javelineers.js";
+import _poolIllumination from "../pool/illumination.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
@@ -514,6 +515,7 @@ import _poolStoicFarmer from "../pool/stoic-farmer.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
 import _poolStormFleetSwashbuckler from "../pool/storm-fleet-swashbuckler.js";
 import _poolStormKilnArtist from "../pool/storm-kiln-artist.js";
+import _poolStupor from "../pool/stupor.js";
 import _poolSuChiCaveGuard from "../pool/su-chi-cave-guard.js";
 import _poolSubwayTrain from "../pool/subway-train.js";
 import _poolSultaiEmissary from "../pool/sultai-emissary.js";
@@ -911,6 +913,7 @@ const shard: CardShard = {
     _poolHypnoticGrifter,
     _poolHypnoticSiren,
     _poolIcatianJavelineers,
+    _poolIllumination,
     _poolImmovableRod,
     _poolImperialAerosaur,
     _poolImprovisedArmor,
@@ -1158,6 +1161,7 @@ const shard: CardShard = {
     _poolStoneGiantOfHighPass,
     _poolStormFleetSwashbuckler,
     _poolStormKilnArtist,
+    _poolStupor,
     _poolSuChiCaveGuard,
     _poolSubwayTrain,
     _poolSultaiEmissary,

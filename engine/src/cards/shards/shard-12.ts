@@ -209,6 +209,7 @@ import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
+import _poolFloodgate from "../pool/floodgate.js";
 import _poolFlywheelRacer from "../pool/flywheel-racer.js";
 import _poolForceOfNegation from "../pool/force-of-negation.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
@@ -333,6 +334,7 @@ import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
+import _poolMaro from "../pool/maro.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
@@ -855,6 +857,7 @@ const shard: CardShard = {
     _poolFlamekinSpitfire,
     _poolFlaxenIntruder,
     _poolFlayerOfTheHatebound,
+    _poolFloodgate,
     _poolFlywheelRacer,
     _poolForceOfNegation,
     _poolForcedFruition,
@@ -979,6 +982,7 @@ const shard: CardShard = {
     _poolManaTithe,
     _poolManifestDread,
     _poolMarbleDiamond,
+    _poolMaro,
     _poolMarwynThePreserver,
     _poolMasterfulReplication,
     _poolMelokuTheCloudedMirror,

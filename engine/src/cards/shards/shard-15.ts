@@ -35,6 +35,7 @@ import _poolAzimaetDrake from "../pool/azimaet-drake.js";
 import _poolBayou from "../pool/bayou.js";
 import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
 import _poolBelbeCorruptedObserver from "../pool/belbe-corrupted-observer.js";
+import _poolBenevolentUnicorn from "../pool/benevolent-unicorn.js";
 import _poolBenthicGiant from "../pool/benthic-giant.js";
 import _poolBetrayersBargain from "../pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
@@ -82,6 +83,7 @@ import _poolCircleOfElders from "../pool/circle-of-elders.js";
 import _poolClaim from "../pool/claim.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
+import _poolCloakOfInvisibility from "../pool/cloak-of-invisibility.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
@@ -437,6 +439,7 @@ import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
+import _poolRootsOfLife from "../pool/roots-of-life.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
@@ -514,6 +517,7 @@ import _poolTajuruBeastmaster from "../pool/tajuru-beastmaster.js";
 import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
+import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
 import _poolTemporalEddy from "../pool/temporal-eddy.js";
 import _poolTenderize from "../pool/tenderize.js";
@@ -650,6 +654,7 @@ const shard: CardShard = {
     _poolBayou,
     _poolBeetleHeadedMerchants,
     _poolBelbeCorruptedObserver,
+    _poolBenevolentUnicorn,
     _poolBenthicGiant,
     _poolBetrayersBargain,
     _poolBetrothTheBeast,
@@ -697,6 +702,7 @@ const shard: CardShard = {
     _poolClaim,
     _poolClearTheMind,
     _poolCliffsideLookout,
+    _poolCloakOfInvisibility,
     _poolCodieRavenousCodex,
     _poolCollectedCompany,
     _poolCollision,
@@ -1052,6 +1058,7 @@ const shard: CardShard = {
     _poolRiverBoa,
     _poolRockSoldiers,
     _poolRoilCartographer,
+    _poolRootsOfLife,
     _poolRuneboggle,
     _poolRuneforgeChampion,
     _poolRushOfAdrenaline,
@@ -1129,6 +1136,7 @@ const shard: CardShard = {
     _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
     _poolTangleSpider,
+    _poolTelimtorsEdict,
     _poolTemperamentalOozewagg,
     _poolTemporalEddy,
     _poolTenderize,

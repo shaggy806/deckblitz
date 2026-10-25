@@ -467,6 +467,7 @@ import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
+import _poolSapphireCharm from "../pool/sapphire-charm.js";
 import _poolSaprolingMigration from "../pool/saproling-migration.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
@@ -525,6 +526,7 @@ import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
+import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
@@ -1129,6 +1131,7 @@ const shard: CardShard = {
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSandstormCrasher,
+    _poolSapphireCharm,
     _poolSaprolingMigration,
     _poolSavedByTheShell,
     _poolSawbladeScamp,
@@ -1187,6 +1190,7 @@ const shard: CardShard = {
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,
     _poolSpecimenCollector,
+    _poolSpiritOfTheNight,
     _poolSpitefulSliver,
     _poolSplinterfright,
     _poolSplitUp,

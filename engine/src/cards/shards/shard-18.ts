@@ -42,6 +42,7 @@ import _poolBedevil from "../pool/bedevil.js";
 import _poolBehindTheMask from "../pool/behind-the-mask.js";
 import _poolBelonging from "../pool/belonging.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
+import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
@@ -182,6 +183,7 @@ import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFoundryHornet from "../pool/foundry-hornet.js";
+import _poolFreneticEfreet from "../pool/frenetic-efreet.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
@@ -514,6 +516,7 @@ import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
+import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
@@ -690,6 +693,7 @@ const shard: CardShard = {
     _poolBehindTheMask,
     _poolBelonging,
     _poolBighornerRancher,
+    _poolBindingAgony,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
     _poolBlindingMage,
@@ -830,6 +834,7 @@ const shard: CardShard = {
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFoundryHornet,
+    _poolFreneticEfreet,
     _poolFromFatherToSon,
     _poolFungalPlots,
     _poolFurnaceSkullbomb,
@@ -1162,6 +1167,7 @@ const shard: CardShard = {
     _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
     _poolTarnationVista,
+    _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTerastodon,
     _poolTerraHeraldOfHope,

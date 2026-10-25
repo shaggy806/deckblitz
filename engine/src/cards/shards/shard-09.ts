@@ -41,6 +41,7 @@ import _poolArwenMortalQueen from "../pool/arwen-mortal-queen.js";
 import _poolArwenWeaverOfHope from "../pool/arwen-weaver-of-hope.js";
 import _poolAsgardianCitadel from "../pool/asgardian-citadel.js";
 import _poolAsgardianInspiration from "../pool/asgardian-inspiration.js";
+import _poolAshenPowder from "../pool/ashen-powder.js";
 import _poolAshlingRekindled from "../pool/ashling-rekindled.js";
 import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
@@ -97,6 +98,7 @@ import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
+import _poolCarrion from "../pool/carrion.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
 import _poolCeruleanDrake from "../pool/cerulean-drake.js";
 import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
@@ -200,6 +202,7 @@ import _poolForebearsBlade from "../pool/forebears-blade.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolForsakenMiner from "../pool/forsaken-miner.js";
+import _poolForsakenWastes from "../pool/forsaken-wastes.js";
 import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
 import _poolFourthBridgeProwler from "../pool/fourth-bridge-prowler.js";
 import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
@@ -242,6 +245,7 @@ import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGraspOfTheHieromancer from "../pool/grasp-of-the-hieromancer.js";
 import _poolGraspingThrull from "../pool/grasping-thrull.js";
 import _poolGravebladeMarauder from "../pool/graveblade-marauder.js";
+import _poolGrimFeast from "../pool/grim-feast.js";
 import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
@@ -704,6 +708,7 @@ const shard: CardShard = {
     _poolArwenWeaverOfHope,
     _poolAsgardianCitadel,
     _poolAsgardianInspiration,
+    _poolAshenPowder,
     _poolAshlingRekindled,
     _poolAspiringAeronaut,
     _poolAttackInTheBox,
@@ -760,6 +765,7 @@ const shard: CardShard = {
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
+    _poolCarrion,
     _poolCatlikeCuriosity,
     _poolCeruleanDrake,
     _poolChaplainOfAlms,
@@ -863,6 +869,7 @@ const shard: CardShard = {
     _poolForebodingLandscape,
     _poolForgottenAncient,
     _poolForsakenMiner,
+    _poolForsakenWastes,
     _poolForumNecroscribe,
     _poolFourthBridgeProwler,
     _poolFranticFirebolt,
@@ -905,6 +912,7 @@ const shard: CardShard = {
     _poolGraspOfTheHieromancer,
     _poolGraspingThrull,
     _poolGravebladeMarauder,
+    _poolGrimFeast,
     _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,

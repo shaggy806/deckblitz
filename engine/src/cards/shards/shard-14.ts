@@ -161,6 +161,7 @@ import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
 import _poolDrannithHealer from "../pool/drannith-healer.js";
 import _poolDrannithRuins from "../pool/drannith-ruins.js";
 import _poolDreadwurm from "../pool/dreadwurm.js";
+import _poolDreamCache from "../pool/dream-cache.js";
 import _poolDromokaTheEternal from "../pool/dromoka-the-eternal.js";
 import _poolDrossCrocodile from "../pool/dross-crocodile.js";
 import _poolDrossforgeBridge from "../pool/drossforge-bridge.js";
@@ -318,6 +319,7 @@ import _poolJJonahJameson from "../pool/j-jonah-jameson.js";
 import _poolJeditsDragoons from "../pool/jedits-dragoons.js";
 import _poolJinGitaxiasCoreAugur from "../pool/jin-gitaxias-core-augur.js";
 import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
+import _poolJolt from "../pool/jolt.js";
 import _poolJoragaWarcaller from "../pool/joraga-warcaller.js";
 import _poolJoustingDummy from "../pool/jousting-dummy.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
@@ -802,6 +804,7 @@ const shard: CardShard = {
     _poolDrannithHealer,
     _poolDrannithRuins,
     _poolDreadwurm,
+    _poolDreamCache,
     _poolDromokaTheEternal,
     _poolDrossCrocodile,
     _poolDrossforgeBridge,
@@ -959,6 +962,7 @@ const shard: CardShard = {
     _poolJeditsDragoons,
     _poolJinGitaxiasCoreAugur,
     _poolJolraelsCentaur,
+    _poolJolt,
     _poolJoragaWarcaller,
     _poolJoustingDummy,
     _poolKaitoShizuki,

@@ -101,6 +101,7 @@ import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
+import _poolChaosCharm from "../pool/chaos-charm.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChillbringer from "../pool/chillbringer.js";
@@ -285,6 +286,7 @@ import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
+import _poolInfernalContract from "../pool/infernal-contract.js";
 import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
@@ -347,6 +349,7 @@ import _poolLoxodonPartisan from "../pool/loxodon-partisan.js";
 import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
 import _poolLuminollusk from "../pool/luminollusk.js";
+import _poolLureOfPrey from "../pool/lure-of-prey.js";
 import _poolLurkingDeadeye from "../pool/lurking-deadeye.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
@@ -784,6 +787,7 @@ const shard: CardShard = {
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
     _poolCatharCommando,
+    _poolChaosCharm,
     _poolCharmedStray,
     _poolChelonianTackle,
     _poolChillbringer,
@@ -968,6 +972,7 @@ const shard: CardShard = {
     _poolImmaculateMagistrate,
     _poolImmoralBargain,
     _poolIndomitableAncients,
+    _poolInfernalContract,
     _poolInfest,
     _poolInformedInkwright,
     _poolInnerDemon,
@@ -1030,6 +1035,7 @@ const shard: CardShard = {
     _poolLuckyThePizzaDog,
     _poolLumberingFalls,
     _poolLuminollusk,
+    _poolLureOfPrey,
     _poolLurkingDeadeye,
     _poolMaelstromArchangel,
     _poolMagesAttendant,
