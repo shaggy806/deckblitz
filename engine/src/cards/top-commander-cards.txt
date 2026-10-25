@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3774 already implemented / 1226 missing (marks refreshed 2026-10-25)
+3784 already implemented / 1216 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -931,7 +931,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   935  Bastion Protector                        {2}{W}           Creature — Human Soldier
 [x]   936  Evendo, Waking Haven                     {0}              Land — Planet
 [x]   937  Pull from Tomorrow                       {X}{U}{U}        Instant
-[ ]   938  Kappa Cannoneer                          {5}{U}           Artifact Creature — Turtle Warrior
+[x]   938  Kappa Cannoneer                          {5}{U}           Artifact Creature — Turtle Warrior
 [x]   939  Bloodfell Caves                          {0}              Land
 [x]   940  Thopter Spy Network                      {2}{U}{U}        Enchantment
 [x]   941  Thoughtcast                              {4}{U}           Sorcery
@@ -1109,7 +1109,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1114  Cragcrown Pathway // Timbercrown Pathway {0}              Land // Land
 [x]  1115  Herd Heirloom                            {1}{G}           Artifact
 [x]  1116  Up the Beanstalk                         {1}{G}           Enchantment
-[ ]  1117  Great Train Heist                        {R}              Instant
+[x]  1117  Great Train Heist                        {R}              Instant
 [x]  1118  Kozilek, Butcher of Truth                {10}             Legendary Creature — Eldrazi
 [x]  1119  Vivi Ornitier                            {1}{U}{R}        Legendary Creature — Wizard
 [x]  1120  Drakuseth, Maw of Flames                 {4}{R}{R}{R}     Legendary Creature — Dragon
@@ -1310,11 +1310,11 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1317  Valakut, the Molten Pinnacle             {0}              Land
 [x]  1318  Dragonspeaker Shaman                     {1}{R}{R}        Creature — Human Barbarian Shaman
 [x]  1319  Halimar Depths                           {0}              Land
-[ ]  1320  Whir of Invention                        {X}{U}{U}{U}     Instant
+[x]  1320  Whir of Invention                        {X}{U}{U}{U}     Instant
 [x]  1321  Uthros, Titanic Godcore                  {0}              Land — Planet
 [x]  1322  Krark-Clan Ironworks                     {4}              Artifact
 [x]  1323  Awaken the Woods                         {X}{G}{G}        Sorcery
-[ ]  1324  Organic Extinction                       {8}{W}{W}        Sorcery
+[x]  1324  Organic Extinction                       {8}{W}{W}        Sorcery
 [x]  1325  Experimental Augury                      {1}{U}           Instant
 [x]  1326  Umbral Collar Zealot                     {1}{B}           Creature — Human Cleric
 [x]  1327  Key to the City                          {2}              Artifact
@@ -1687,7 +1687,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1694  Reforge the Soul                         {3}{R}{R}        Sorcery
 [x]  1695  Simulacrum Synthesizer                   {2}{U}           Artifact
 [x]  1696  Kher Keep                                {0}              Legendary Land
-[ ]  1697  Lively Dirge                             {1}{B}           Sorcery
+[x]  1697  Lively Dirge                             {1}{B}           Sorcery
 [x]  1698  Massacre Girl, Known Killer              {2}{B}{B}        Legendary Creature — Human Assassin
 [x]  1699  Spirit Mantle                            {1}{W}           Enchantment — Aura
 [x]  1700  Glen Elendra Archmage                    {3}{U}           Creature — Faerie Wizard
@@ -2703,7 +2703,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2710  Bloodsoaked Insight // Sanguine Morass   {7}              Sorcery // Land
 [x]  2711  Harmonized Crescendo                     {4}{U}{U}        Instant
 [x]  2712  Skysovereign, Consul Flagship            {5}              Legendary Artifact — Vehicle
-[ ]  2713  Fire Covenant                            {1}{B}{R}        Instant
+[x]  2713  Fire Covenant                            {1}{B}{R}        Instant
 [x]  2714  Vega, the Watcher                        {1}{W}{U}        Legendary Creature — Bird Spirit
 [x]  2715  Blade Historian                          {R/W}{R/W}{R/W}{R/W} Creature — Human Cleric
 [x]  2716  Sword of War and Peace                   {3}              Artifact — Equipment
@@ -3382,7 +3382,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3389  Daybreak Coronet                         {W}{W}           Enchantment — Aura
 [x]  3390  Rocky Tar Pit                            {0}              Land
 [x]  3391  Vizier of Tumbling Sands                 {2}{U}           Creature — Human Cleric
-[ ]  3392  Lathiel, the Bounteous Dawn              {2}{G}{W}        Legendary Creature — Unicorn
+[x]  3392  Lathiel, the Bounteous Dawn              {2}{G}{W}        Legendary Creature — Unicorn
 [ ]  3393  Winter Orb                               {2}              Artifact
 [ ]  3394  O'aka, Traveling Merchant                {1}{U}           Legendary Creature — Human Citizen
 [x]  3395  Hooded Hydra                             {X}{G}{G}        Creature — Snake Hydra
@@ -3516,7 +3516,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3523  Dihada, Binder of Wills                  {1}{R}{W}{B}     Legendary Planeswalker — Dihada
 [x]  3524  Fervor                                   {2}{R}           Enchantment
 [x]  3525  Maja, Bretagard Protector                {2}{G}{W}{W}     Legendary Creature — Human Warrior
-[ ]  3526  Curtains' Call                           {5}{B}           Instant
+[x]  3526  Curtains' Call                           {5}{B}           Instant
 [x]  3527  Good-Fortune Unicorn                     {1}{G}{W}        Creature — Unicorn
 [x]  3528  Shadow in the Warp                       {1}{R}{G}        Enchantment
 [ ]  3529  Titan's Presence                         {3}              Instant
@@ -4030,7 +4030,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4037  Will of the Temur                        {5}{U}           Sorcery
 [x]  4038  Canoptek Scarab Swarm                    {4}              Artifact Creature — Insect
 [x]  4039  Titania's Command                        {4}{G}{G}        Sorcery
-[ ]  4040  Bottle-Cap Blast                         {4}{R}           Instant
+[x]  4040  Bottle-Cap Blast                         {4}{R}           Instant
 [x]  4041  Spell Stutter                            {1}{U}           Instant
 [ ]  4042  Scroll of Fate                           {3}              Artifact
 [x]  4043  Desolation Twin                          {10}             Creature — Eldrazi
@@ -4854,7 +4854,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4861  Helm of the Gods                         {1}              Artifact — Equipment
 [x]  4862  Adriana, Captain of the Guard            {3}{R}{W}        Legendary Creature — Human Knight
 [x]  4863  Ultima Weapon                            {7}              Legendary Artifact — Equipment
-[ ]  4864  Snort                                    {3}{R}           Sorcery
+[x]  4864  Snort                                    {3}{R}           Sorcery
 [ ]  4865  Platinum Emperion                        {8}              Artifact Creature — Golem
 [x]  4866  Sword of Once and Future                 {3}              Artifact — Equipment
 [x]  4867  Primal Rage                              {1}{G}           Enchantment
