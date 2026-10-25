@@ -684,6 +684,10 @@ export function auraPolarity(def: CardDefinition): Polarity {
     // Goad is the point of an Aura that goads: its pump is the consolation
     // that sends the creature at someone else (Psychic Impetus).
     if (ability.goads === true) return "harm";
+    // A Zendikon's "enchanted land is a 3/3 black Ooze creature": a land
+    // made a creature fights for its controller, whatever it can't do —
+    // Guardian Zendikon's defender is a wall's, not a penalty.
+    if ((ability.addTypes ?? []).includes("creature") && ability.setBasePt !== undefined) return "help";
     for (const restriction of ability.restrictions ?? []) {
       if (restriction === "must-be-blocked" || restriction === "must-be-blocked-if-able") help = true;
       else harm = true;
