@@ -24,9 +24,13 @@
 // code is 1 if anything failed. Logs go to the OS temp dir, one per step,
 // named in the output.
 //
-// "Cards this change adds" are the pool files not yet on the upstream branch
-// — committed since it, or not committed at all — so a batch committed
-// locally before verifying is still forced into the fuzzer.
+// "Cards this change adds" are the pool files not yet on `origin/main` (the
+// upstream branch where there's no `origin/main`) — committed since it, or not
+// committed at all — so a batch committed locally before verifying is still
+// forced into the fuzzer. Main, not the upstream: a cloud session pushes its
+// own branch after every commit (the stop hook asks it to), so by the time it
+// verifies, its upstream already holds the batch and nothing would count as
+// new (batch 156's first verify skipped the new-cards fuzzer that way).
 //
 // **Full or quick.** A full run every few card batches is enough: on its
 // own, `verify` decides. It reads the batch number of the last full run from
@@ -135,8 +139,17 @@ function stop() {
   process.exit(1);
 }
 
+/** What "this change" is measured from: `origin/main`, else the upstream
+ * branch, else `null`. */
+function baseRef() {
+  for (const ref of ["origin/main", "@{upstream}"]) {
+    if (spawnSync("git", ["rev-parse", "--verify", "--quiet", ref], { cwd: ROOT }).status === 0) return ref;
+  }
+  return null;
+}
+
 /** Pool cards this change adds: files under engine/src/cards/pool not on the
- * upstream branch — added in a commit since it, or not committed yet. */
+ * base (`baseRef`) — added in a commit since it, or not committed yet. */
 function addedCards() {
   const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
   const pool = "engine/src/cards/pool";
@@ -144,9 +157,9 @@ function addedCards() {
     .stdout.split("\n")
     .filter((line) => /^(\?\?|A )/.test(line))
     .map((line) => line.slice(3).trim());
-  const upstream = git("rev-parse", "--verify", "--quiet", "@{upstream}");
-  if (upstream.status === 0) {
-    files.push(...git("diff", "--name-only", "--diff-filter=A", "@{upstream}", "HEAD", "--", pool).stdout.split("\n"));
+  const base = baseRef();
+  if (base !== null) {
+    files.push(...git("diff", "--name-only", "--diff-filter=A", `${base}...HEAD`, "--", pool).stdout.split("\n"));
   }
   const names = [];
   for (const rel of new Set(files.map((f) => f.trim()).filter(Boolean))) {
@@ -173,13 +186,14 @@ function addedCards() {
 
 // ------------------------------------------------------------------ run
 
-/** Files this change touches: uncommitted, or committed since the upstream
- * branch — `null` with no upstream (then everything counts as touched). */
+/** Files this change touches: uncommitted, or committed since the base
+ * (`baseRef`) — `null` with no base (then everything counts as touched). */
 function changedFiles() {
   const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
-  if (git("rev-parse", "--verify", "--quiet", "@{upstream}").status !== 0) return null;
+  const base = baseRef();
+  if (base === null) return null;
   const files = git("status", "--porcelain").stdout.split("\n").map((l) => l.slice(3).trim());
-  files.push(...git("diff", "--name-only", "@{upstream}", "HEAD").stdout.split("\n"));
+  files.push(...git("diff", "--name-only", `${base}...HEAD`).stdout.split("\n"));
   return [...new Set(files.filter(Boolean))];
 }
 

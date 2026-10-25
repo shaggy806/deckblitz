@@ -134,8 +134,8 @@ whoever writes it:
   this batch).
 - While authoring, run only the touched tests (`npx vitest run
   top10000-batch-<N> pool.test` from `engine/`).
-- Then **`npm run verify`** (in the background, before pushing — it finds the
-  batch's new cards against the upstream branch): the build, typecheck (tests
+- Then **`npm run verify`** (in the background, before landing on `main` — it
+  finds the batch's new cards against `origin/main`, so pushing the session branch first is fine): the build, typecheck (tests
   included), the engine suite, card:verify and the fuzzer with every card the
   batch adds forced in, every time; **every third batch** it decides on its own
   to run the full set — both fuzzer table sizes, the bot gate, the server and
