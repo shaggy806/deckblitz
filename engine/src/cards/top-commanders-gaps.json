@@ -415,7 +415,16 @@
   "effect:look-and-choose-total-mana-value",
   "condition:during-your-combat-phase",
   "effect:delayed-trigger-for-chosen-player",
-  "effect:divide-among-targets"
+  "effect:divide-among-targets",
+  "keyword:surge",
+  "replacement:target-exile-if-dies-this-turn",
+  "replacement:dealt-damage-this-way-exile-if-dies",
+  "effect:delayed-trigger-own-targets",
+  "condition:werewolf-transform-spells-last-turn",
+  "effect:damage-to-trigger-object",
+  "keyword:renown",
+  "keyword:dash",
+  "keyword:bolster"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

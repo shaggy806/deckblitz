@@ -72,6 +72,30 @@ Agents run gen:cards, the typecheck and their own test file with `pool.test`
 only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
 reads `dist/`); the lead runs those and the suites after integrating.
 
+## One batch per session
+
+The lead's context is the batch's biggest cost, not the agents': every lead
+turn re-reads the whole conversation. Measured 2026-10-23, a session that ran
+six batches back to back averaged ~480K tokens a turn over 536 turns — 256M
+input, more than its 15 agents together (153M for 471 cards). So:
+
+- **One batch per session.** Ship it, report, and stop: the next batch is the
+  next session's (`/author-by-set` again), which starts under 100K. Before
+  stopping, leave the hand-off in `BACKLOG.md`'s line for the skill: the next
+  set and its left count, and any feature already researched for it (its
+  cards' count, the code sites to mirror). The next session reads that line
+  in step 0 and needs nothing from this one.
+- **Wait, don't poll.** A long run (the checks, an agent) gets one
+  background wait — `until grep -q DONE <log>; do sleep 5; done` with
+  `run_in_background` — and its notification; never a turn spent asking
+  whether it's done yet.
+- **Nothing rebuilds while a check runs.** `card:scaffold` runs `npm run
+  build` first, and a build rewrites `engine/dist` under a running fuzzer or
+  server test, which then fails for no reason of the batch's (two reruns on
+  2026-10-23). Scaffold the next batch before starting the checks, or after
+  them.
+- **Read flags, not files** (Integrating step 2).
+
 ## While they run
 
 The lead's own work that doesn't touch their files: the batch record's lead
@@ -84,9 +108,17 @@ notification.
 
 1. **Cherry-pick** each branch onto `main` (after checking each commit
    touches only `cards/pool/`, `cards/tokens/` and its own test file).
-2. **Read every file** against its Oracle text and rulings — `card:brief`
-   and the scratchpad's review script; a rulings line often decides a card.
-   Fix or drop what's wrong. Check each agent's BLOCKED list too: a card
+2. **Review** with `node scripts/batch-review.mjs --since <the commit before
+   the batch> --out <scratchpad>/review.txt` (from `engine/`): it writes every
+   card file beside its Oracle text to the file and prints only the cards
+   worth reading in full — untested ones with a condition, a replacement, a
+   cost paid as it resolves, a delayed trigger, a library choice or several
+   target slots; dense tested ones; any stats or cost that disagree with
+   Oracle. Read those from the file (`grep -A40 "=== <path>"`) against their
+   rulings (`card:brief`); a rulings line often decides a card. Read the
+   agents' reports for the calls they flagged themselves. Don't print the
+   whole batch into the conversation — that was ~360 card files in one
+   2026-10-23 session. Fix or drop what's wrong. Check each agent's BLOCKED list too: a card
    blocked for a reason the digest answers is authorable, and its need key
    must exist in `needs-vocabulary.json` (add proposed ones with a `family`).
 3. **Check `tokens/`** for two files making the same token (merge them into

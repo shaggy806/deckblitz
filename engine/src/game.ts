@@ -308,9 +308,9 @@ import type {
   ControlEffect,
   DelayedCastWatch,
   DelayedDamageWatch,
-  DelayedEventWatch,
   DelayedLeaveWatch,
   DelayedUnblockedWatch,
+  DelayedWheneverWatch,
   DelayedTrigger,
   EnterAttackingChoice,
   EntryRecord,
@@ -1957,6 +1957,17 @@ export class Game {
               }),
             );
           }
+          // Dash (rule 702.109a) — from the hand, for its dash cost.
+          const dashCost = this.dashCostOf(card, def, player);
+          if (dashCost !== null) {
+            out.push(
+              ...this.castSpellActions(player, card, cardName, def, {
+                ...faceProp,
+                via: "dash",
+                costString: dashCost,
+              }),
+            );
+          }
           // Impending (rule 702.176a) — for its impending cost, an
           // alternative cost.
           if (def.impending !== null) {
@@ -2000,6 +2011,33 @@ export class Game {
                     webSlingingReturn: { object: returned, cardName: this.state.objects[returned].cardName },
                   });
                 }
+              }
+            }
+          }
+          // Emerge (rule 702.119a) — for its emerge cost, one offer per
+          // creature that could be sacrificed, each priced with that
+          // creature's mana value off (so one too small to make it
+          // affordable isn't offered). Normal timing.
+          if (def.emerge !== null) {
+            for (const victim of this.emergeSacrifices(player, def)) {
+              const offers = this.withEmergeSacrifice(victim, () =>
+                this.castSpellActions(player, card, cardName, def, {
+                  ...faceProp,
+                  via: "emerge",
+                  costString: def.emerge?.cost ?? null,
+                }),
+              );
+              for (const offer of offers) {
+                if (offer.kind !== "cast-spell") continue;
+                out.push({
+                  ...offer,
+                  sacrifice: { choices: [victim] },
+                  emergeSacrifice: {
+                    object: victim,
+                    cardName: printedCardName(this.state.objects[victim]),
+                    manaValue: manaValueOfObject(this.registry, this.state.objects[victim]),
+                  },
+                });
               }
             }
           }
@@ -2870,13 +2908,15 @@ export class Game {
     // with warp, itself an alternative cost (rule 118.9a: only one applies).
     // Blitz is an alternative cost from the hand too (rule 702.152a), and so
     // is web-slinging (702.188a; its ruling: never with "without paying its
-    // mana cost"), and airbend's {2} from exile (701.65a).
+    // mana cost"), emerge (702.119a), and airbend's {2} from exile (701.65a).
     const warp =
       via === "warp" ||
       via === "blitz" ||
+      via === "dash" ||
       via === "impending" ||
       via === "freerunning" ||
       via === "web-slinging" ||
+      via === "emerge" ||
       via === "airbend";
     if (def.overload !== null && impulseFree !== "only" && !warp) {
       variants.push({ kicked: false, overload: true, free: false });
@@ -3289,7 +3329,7 @@ export class Game {
         player,
         def,
         costOption,
-        this.graveyardPermissionSacrifice(player, card, face ?? 0, via, graveyardGrant),
+        this.castRouteSacrifice(player, card, face ?? 0, via, graveyardGrant),
       );
       const xPlan =
         parseManaCost(cost).x > 0 ? this.xPlanFor(player, card, def, cost, face ?? 0, pricedAt) : null;
@@ -5746,9 +5786,13 @@ export class Game {
     delete this.state.modesChosenThisTurn;
     this.state.preventionShields = [];
     // "When that creature dies this turn" watches no longer, nor does "when
-    // you next cast a spell this turn".
+    // you next cast a spell this turn", nor "until end of turn, whenever …".
+    // "Until your next turn, whenever …" waits for whose turn this is (below).
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
-      (t) => typeof t.at !== "object" || ("leaves" in t.at && t.at.thisTurn !== true),
+      (t) =>
+        typeof t.at !== "object" ||
+        ("leaves" in t.at && t.at.thisTurn !== true) ||
+        ("whenever" in t.at && t.at.untilYourNextTurn === true),
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
@@ -5757,6 +5801,12 @@ export class Game {
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
     }
     this.state.extraCombats = 0;
+    // The turn that just ended, for "if no spells were cast last turn" (the
+    // werewolves): read before the counts reset.
+    this.state.spellsCastLastTurn = {
+      total: this.state.spellsCastThisTurn,
+      mostByOnePlayer: Math.max(0, ...Object.values(this.state.players).map((p) => p.spellsCastThisTurn)),
+    };
     this.state.spellsCastThisTurn = 0;
     delete this.state.turnRestrictions;
     delete this.state.turnDefenderAttacks;
@@ -5883,6 +5933,10 @@ export class Game {
         else object.goadedBy = left;
       }
     }
+    // So does "until your next turn, whenever …" (Vraska the Unseen's +1).
+    this.state.delayedTriggers = this.state.delayedTriggers.filter(
+      (t) => !(typeof t.at === "object" && "whenever" in t.at && beginningFor.includes(t.controller)),
+    );
     // So do attack-requirement rules (Kardur, Doomscourge's "until your next
     // turn, creatures your opponents control attack each combat …").
     const rules = this.state.attackRequirements;
@@ -9521,9 +9575,11 @@ export class Game {
     const mods = this.costModificationFor(player, cardId, targetCount);
     // Harmonize's tapped creature (rule 702.180a), probed by the caller.
     // A bargained Ice Out's {1} (`kicker.reduceGeneric`), likewise probed.
+    // So is emerge's sacrificed creature's mana value (rule 702.119a).
     let reduction =
       mods.reduceGeneric +
       this.harmonizePower +
+      this.emergeManaValue +
       (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
     if (
       def.selfCostReduction !== null &&
@@ -10508,6 +10564,8 @@ export class Game {
           ? (def.sneak?.cost ?? null)
         : via === "web-slinging"
           ? this.webSlingingCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
+        : via === "emerge"
+          ? (def.emerge?.cost ?? null)
         : // Airbend (rule 701.65a): {2} rather than its mana cost.
           via === "airbend"
           ? Game.AIRBEND_COST
@@ -10519,6 +10577,8 @@ export class Game {
               ? this.warpCostOfCaster(cardId, def, caster)
               : via === "blitz"
               ? this.blitzCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
+              : via === "dash"
+              ? this.dashCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
               : via === "impending"
               ? (def.impending?.cost ?? null)
               : via === "freerunning"
@@ -10599,19 +10659,36 @@ export class Game {
     return this.eligibleSacrifices(player, filter);
   }
 
-  /** What a cast under a graveyard permission sacrifices on top of its other
-   * costs — Exploration Broodship's "by sacrificing a land in addition to
-   * paying its other costs" (`castFromGraveyard.sacrifice`); `undefined` for
-   * any other cast. */
-  private graveyardPermissionSacrifice(
+  /** What a cast's route sacrifices beside its other costs: under a graveyard
+   * permission, Exploration Broodship's "by sacrificing a land in addition
+   * to paying its other costs" (`castFromGraveyard.sacrifice`); for emerge,
+   * the creature its cost sacrifices (rule 702.119a — `emerge.from` for
+   * "emerge from [quality]", 702.119b). `undefined` for any other cast. */
+  private castRouteSacrifice(
     player: PlayerId,
     card: ObjectId,
     face: number,
     via: CastVia | undefined,
     grant: GraveyardGrant | undefined,
   ): CardFilter | undefined {
+    if (via === "emerge") {
+      const emerge = this.faceDef(card, face).emerge;
+      return emerge === null ? undefined : Game.emergeFilter(emerge);
+    }
     if (via !== "graveyard-permission") return undefined;
     return this.findGraveyardGrant(player, card, face, grant)?.permission?.sacrifice;
+  }
+
+  /** What emerge sacrifices (rule 702.119): a creature, or a permanent of
+   * "emerge from [quality]"'s quality. */
+  private static emergeFilter(emerge: NonNullable<CardDefinition["emerge"]>): CardFilter {
+    return emerge.from ?? { type: "creature" };
+  }
+
+  /** The permanents `player` could sacrifice to pay `def`'s emerge cost
+   * (rule 702.119a). */
+  private emergeSacrifices(player: PlayerId, def: CardDefinition): ObjectId[] {
+    return def.emerge === null ? [] : this.eligibleSacrifices(player, Game.emergeFilter(def.emerge));
   }
 
   /** The most modes `card` may be cast with: its `maxModesIf`'s count while
@@ -10895,6 +10972,34 @@ export class Game {
       if (this.webSlingingReturns(player).length === 0) {
         return `${def.name}'s web-slinging returns a tapped creature you control, and ${player} controls none`;
       }
+    } else if (via === "emerge") {
+      // Rule 702.119a — from the hand (or a commander from the command zone),
+      // sacrificing a creature: an alternative cost (118.9a). Timing is the
+      // spell's own.
+      if (def.emerge === null) return `${def.name} doesn't have emerge`;
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (overload || free || altCost || evoke !== null) {
+        return `emerge is an alternative cost, and can't be combined with another`;
+      }
+      // Emerge's sacrifice rides the cast's one `sacrifice`: a card with an
+      // additional sacrifice of its own as well isn't supported.
+      if (def.additionalCost?.sacrifice !== undefined || def.additionalCost?.options?.some((o) => o.sacrifice !== undefined)) {
+        return `${def.name}'s emerge can't be paid beside a sacrifice of its own`;
+      }
+      const victims = this.emergeSacrifices(player, def);
+      const victim = sacrifice ?? this.emergeProbed ?? victims[0];
+      if (victim === undefined) return `${def.name}'s emerge sacrifices a creature, and ${player} controls none`;
+      if (!victims.includes(victim)) return `that permanent cannot be sacrificed for ${def.name}'s emerge`;
+      // Priced with the sacrificed creature's mana value off.
+      if (this.emergeProbed !== victim) {
+        return this.withEmergeSacrifice(victim, () =>
+          this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, victim, overload, free, convoke,
+            altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve,
+            targets),
+        );
+      }
     } else if (via === "prepared") {
       // Rule 722.3c — a prepared permanent's copy of its prepare spell, cast
       // from exile by that permanent's controller while the link holds.
@@ -10958,6 +11063,14 @@ export class Game {
       }
       if (this.blitzCostOf(cardId, def, player) === null) return `${def.name} does not have blitz`;
       if (overload || free || altCost) return `blitz is an alternative cost, and can't be combined with another`;
+    } else if (via === "dash") {
+      // Rule 702.109a — for its dash cost, from the hand or a commander from
+      // the command zone: an alternative cost (118.9a).
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (this.dashCostOf(cardId, def, player) === null) return `${def.name} does not have dash`;
+      if (overload || free || altCost) return `dash is an alternative cost, and can't be combined with another`;
     } else if (via === "impending") {
       // Rule 702.176a — for its impending cost, from the hand or a commander
       // from the command zone: an alternative cost (118.9a).
@@ -11144,7 +11257,7 @@ export class Game {
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once
     // the driver has named one — that permanent must actually qualify.
-    const permissionSacrifice = this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant);
+    const permissionSacrifice = this.castRouteSacrifice(player, cardId, face, via, graveyardGrant);
     if (permissionSacrifice !== undefined) {
       const candidates = this.additionalCostSacrifices(player, def, costOption, permissionSacrifice);
       if (candidates.length === 0) return `${player} has nothing to sacrifice to cast ${def.name} this way`;
@@ -11272,9 +11385,13 @@ export class Game {
     const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
-    // So is an artifact or creature tapped to waterbend (rule 701.67a).
+    // So is an artifact or creature tapped to waterbend (rule 701.67a), and
+    // harmonize's creature (rule 702.180b), as `castSpell` pays it — the
+    // one chosen, or the one an offer is being priced with.
+    const harmonized =
+      via !== "harmonize" ? [] : (tap ?? (this.harmonizeCreature !== null ? [this.harmonizeCreature] : []));
     const arrangementWith = (tapped: Iterable<ObjectId>): ManaSourceArrangement | undefined => {
-      const withheld = new Set([...convoked.map((p) => p.creature), ...tapped]);
+      const withheld = new Set([...convoked.map((p) => p.creature), ...harmonized, ...tapped]);
       return withheld.size === 0 && sacrificeCandidates === undefined
         ? undefined
         : {
@@ -11771,6 +11888,33 @@ export class Game {
   /** Set while {@link withHarmonizeTap} is pricing a harmonize cast, so the
    * casting check and the cast don't re-enter it. */
   private harmonizeProbed = false;
+  /**
+   * The generic mana an emerge cast's sacrificed creature takes off its
+   * total cost — its mana value (rule 702.119a) — while that cast is priced,
+   * checked or paid; `castingCostOf` subtracts it after increases (601.2f).
+   * 0 otherwise. {@link emergeProbed} is the creature it was read from.
+   */
+  private emergeManaValue = 0;
+  /** The creature {@link withEmergeSacrifice} is pricing an emerge cast
+   * with, so the casting check and the cast don't re-enter it; `null`
+   * otherwise. */
+  private emergeProbed: ObjectId | null = null;
+
+  /** Price what `fn` prices as an emerge cast sacrificing `victim`: its mana
+   * value as it is now. Restores the probe after. */
+  private withEmergeSacrifice<T>(victim: ObjectId, fn: () => T): T {
+    const valueBefore = this.emergeManaValue;
+    const probedBefore = this.emergeProbed;
+    const object = this.state.objects[victim];
+    this.emergeManaValue = object === undefined ? 0 : manaValueOfObject(this.registry, object);
+    this.emergeProbed = victim;
+    try {
+      return fn();
+    } finally {
+      this.emergeManaValue = valueBefore;
+      this.emergeProbed = probedBefore;
+    }
+  }
   /** The `sneakReturn` of the `cast-spell` being dispatched (rule 702.190a),
    * read as its cost is paid; unset otherwise. */
   private sneakReturnChoice: ObjectId | undefined = undefined;
@@ -12068,6 +12212,18 @@ export class Game {
       );
       return;
     }
+    // Emerge (rule 702.119a): every cost below is priced with the sacrificed
+    // creature's mana value off — the one named, else the first that could be.
+    if (via === "emerge") {
+      const victim = sacrifice ?? this.emergeSacrifices(player, this.faceDef(cardId, face))[0];
+      if (victim !== undefined && this.emergeProbed !== victim) {
+        this.withEmergeSacrifice(victim, () =>
+          this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, victim, overload, free,
+            convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+        );
+        return;
+      }
+    }
     if (prototype && !this.prototypeApplied(cardId)) {
       if (this.faceDef(cardId, face).prototype === null) throw new Error(`${this.faceDef(cardId, face).name} has no prototype`);
       this.withPrototype(cardId, () =>
@@ -12183,7 +12339,7 @@ export class Game {
       player,
       def,
       costOption,
-      this.graveyardPermissionSacrifice(player, cardId, face, via, graveyardGrant),
+      this.castRouteSacrifice(player, cardId, face, via, graveyardGrant),
     );
     const sacrificeVictim =
       sacrificeCandidates.length === 0 ? undefined : (sacrifice ?? sacrificeCandidates[0]);
@@ -12450,6 +12606,7 @@ export class Game {
     if (offspring) object.offspringGrantPaid = true;
     if (evoke !== null) object.evokePaid = true;
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
+    if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
     if (overload) object.overloaded = true;
     this.executePayment(player, payment);
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
@@ -16501,6 +16658,7 @@ export class Game {
     const impendingWith = object.castVia === "impending" ? def.impending?.count : undefined;
     const warped = object.castVia === "warp";
     const blitzed = object.castVia === "blitz";
+    const dashed = object.castVia === "dash";
     // "That creature enters with two additional +1/+1 counters" (Yuna).
     const extraCounters = object.entersWithCounters;
     // Read before the move, which ends it with the stack.
@@ -16623,6 +16781,28 @@ export class Game {
         "next-end-step",
         { kind: "sacrifice-source" },
         "Blitz — sacrifice it at the beginning of the next end step.",
+        [],
+      );
+    }
+    // Dash (rule 702.109a): its dash cost was paid, so as long as it stays
+    // this permanent it has haste — a modifier, which a copy doesn't copy —
+    // and it returns to its owner's hand at the beginning of the next end
+    // step, by a delayed trigger that finds nothing once it has left.
+    if (dashed && this.state.objects[id]?.zone === "battlefield") {
+      this.state.objects[id].modifiers.push({
+        timestamp: this.state.timestampSeq,
+        power: 0,
+        toughness: 0,
+        keywords: ["haste"],
+        untilEndOfTurn: false,
+      });
+      invalidateComputedCache();
+      this.createDelayedTrigger(
+        id,
+        object.controller,
+        "next-end-step",
+        { kind: "return-to-hand", target: "source" },
+        "Dash — return it to its owner's hand at the beginning of the next end step.",
         [],
       );
     }
@@ -17672,6 +17852,210 @@ export class Game {
 
   // --- triggered abilities ------------------------------------
 
+  /**
+   * A numeric quantity the triggering event supplies, snapshotted as the
+   * ability triggers — for an `EffectAmount` `{ triggerValue: true }`: the
+   * entering / attacking creature's power (Terror of the Peaks), or the
+   * combat damage a creature just dealt a player (Old Gnawbone). ROADMAP P4b.
+   * `object` is the ability's source, as the trigger is matched against it.
+   */
+  private triggerValueOf(trigger: TriggerSpec, event: GameEvent, object: GameObject): number | undefined {
+    const powerOfId =
+      event.type === "permanent-entered-battlefield"
+        ? event.object
+        : event.type === "attacker-declared"
+          ? event.attacker
+          : undefined;
+    return (
+      // "That much": how many permanents of the entry matched.
+      trigger.on === "enters-battlefield" &&
+        trigger.batched === true &&
+        event.type === "permanent-entered-battlefield"
+        ? this.enterBatchMatches(trigger, event, object)
+        : event.type === "dice-rolled"
+        ? event.results.reduce((n, r) => n + r, 0)
+        : powerOfId !== undefined && this.state.objects[powerOfId] !== undefined
+        ? computeCharacteristics(this.state, this.registry, powerOfId).power
+        : (trigger.on === "deals-combat-damage-to-player" || trigger.on === "deals-damage") &&
+            event.type === "damage-dealt"
+          ? // Each source's own: a counted stack's tokens share the event.
+            event.amount / (event.sources ?? 1)
+          : trigger.on === "dealt-damage" && event.type === "damage-dealt"
+          ? event.amount
+          : // A batched attack trigger's value is *how many* matched,
+            // which is what "draw that many cards" reads.
+            trigger.on === "attacks-batch" && event.type === "attackers-declared"
+            ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
+            : // How many creatures attack that player.
+              trigger.on === "attacks-player" && event.type === "player-attacked"
+            ? this.creatureCount(event.attackers)
+            : // How many cards left the graveyard, for "that many".
+              trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
+              ? this.graveyardLeavers(trigger, event.objects, object).length
+              : // How many cards were put into the graveyard.
+                trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
+              ? this.graveyardArrivals(trigger, event.arrivals, object).length
+              : trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
+              ? this.exileArrivals(trigger, event.arrivals, object).length
+              : // "…for each card discarded this way".
+                trigger.on === "discards" && event.type === "cards-discarded"
+              ? this.discardedMatching(trigger, event.objects, object).length
+              : // "Deals that much damage": how many counters were put.
+                trigger.on === "counters-put" && event.type === "counter-added"
+              ? event.amount
+              : trigger.on === "counters-removed" && event.type === "counter-removed"
+              ? event.amount
+              : // "The number of cards looked at while scrying this way".
+                trigger.on === "scries" && event.type === "scried"
+              ? event.looked
+              : // "Discover again for the same value" (Curator of Sun's Creation).
+                trigger.on === "discovers" && event.type === "discovered"
+              ? event.amount
+              : // The N it became monstrous with (rule 701.37c's X).
+                trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
+              ? event.amount
+              : // "The number of times you chose a mode for that spell".
+                trigger.on === "cast-spell" && trigger.modal === true && event.type === "spell-cast"
+              ? (this.state.objects[event.object]?.chosenModes?.length ?? 0)
+              : // "Draw that many cards": how many targets the spell has.
+                trigger.on === "cast-spell" && trigger.withTargets === true && event.type === "spell-cast"
+              ? this.spellTargetCount(event.object)
+              : // "For each other instant and sorcery spell you've cast
+                // before it this turn" (Thousand-Year Storm).
+                trigger.on === "cast-spell" && trigger.countCastBefore !== undefined && event.type === "spell-cast"
+                ? this.castBefore(event.player, event.object, trigger.countCastBefore, object.controller)
+                : // "Loses that much life" (Sanguine Bond, Exquisite Blood):
+                  // how much the life total moved.
+                  (trigger.on === "gains-life" || trigger.on === "loses-life") && event.type === "life-changed"
+                  ? Math.abs(event.delta)
+                  : undefined
+    );
+  }
+
+  /**
+   * How many times `event` fires a trigger watching it from `id`, for the
+   * token stacks in it (rule 603.2: each token its own permanent). `id` is
+   * the watcher; its own stack scales by its `stackCount` elsewhere, so an
+   * event about it isn't counted again here.
+   */
+  private eventMultiplier(trigger: TriggerSpec, event: GameEvent, id: ObjectId): number {
+    // A compacted stack that left play is that many permanents leaving,
+    // each its own event: Zulaport Cutthroat drains once per Goblin in
+    // a stack a wrath kills.
+    const departed =
+      (event.type === "permanent-left-battlefield" ||
+        event.type === "permanent-destroyed" ||
+        event.type === "permanent-sacrificed") &&
+      event.object !== id
+        ? (this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    // Damage dealt to a token stack was dealt to every token in it, each
+    // its own permanent: a watcher fires once per token (a stack's own
+    // `dealt-damage` already scales by its `stackCount`). Each firing that
+    // deals damage to "that permanent" peels one token off
+    // (`splitTargetRef`), so ten tokens dealt 1 are each dealt 2 more.
+    const recipients =
+      (trigger.on === "deals-damage" || trigger.on === "dealt-damage") &&
+      !dealsDamageOncePerEvent(trigger) &&
+      event.type === "damage-dealt" &&
+      event.target.kind === "object" &&
+      event.target.object !== id
+        ? (this.state.objects[event.target.object]?.stackCount ?? 1)
+        : 1;
+    // A counted attacking stack (`attackingStackPart`) is every token in
+    // it attacking, and its combat damage every token's: "whenever a
+    // creature you control attacks" or "deals combat damage" fires
+    // once per token.
+    const attacked =
+      event.type === "attacker-declared" && event.attacker !== id
+        ? (this.state.objects[event.attacker]?.stackCount ?? 1)
+        : 1;
+    const dealtBy =
+      event.type === "damage-dealt" &&
+      event.source !== id &&
+      (trigger.on === "deals-damage" || trigger.on === "deals-combat-damage-to-player")
+        ? (event.sources ?? 1)
+        : 1;
+    // A compacted stack untapping is every token in it untapping, each
+    // its own permanent: Mesmeric Orb mills once per token. Tapping
+    // likewise (a tap-all over a stack, or attacking with a declared
+    // count of it): Magda makes a Treasure per Dwarf (rule 701.26a).
+    const turned =
+      (event.type === "permanent-untapped" || event.type === "permanent-tapped") && event.object !== id
+        ? (this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    // Counters put on a token stack were put on every token in it
+    // (Basri's Solidarity, proliferate, Black Sun's Zenith), each its
+    // own permanent: "whenever one or more counters are put on a
+    // creature" fires once per token — Simic Ascendancy grows by ten
+    // for a stack of ten, Hapatra makes ten Snakes. A batch entering
+    // with counters into a stack already there names how many it was.
+    const countered =
+      trigger.on === "counters-put" && event.type === "counter-added" && event.object !== id
+        ? (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
+        : 1;
+    const entered = event.type === "permanent-entered-battlefield" ? (event.count ?? 1) : 1;
+    return departed * recipients * attacked * dealtBy * turned * countered * entered;
+  }
+
+  /**
+   * The "until end of turn, whenever …" delayed triggers `event` answers
+   * (`DelayedWheneverWatch`, rule 603.7c): each matched like a printed
+   * trigger, its controller as "you" and the object that set it up as
+   * "self" — while that is still the object it was (rule 400.7). Not used
+   * up: each fires every time, until its duration ends. One with targets of
+   * its own is queued as an ability that chooses them as it goes on the
+   * stack; one without acts on the creating ability's.
+   */
+  private fireWheneverWatchers(event: GameEvent): void {
+    for (const trigger of this.state.delayedTriggers) {
+      const at = trigger.at;
+      if (typeof at !== "object" || !("whenever" in at)) continue;
+      if (at.untilYourNextTurn !== true && at.turn !== this.state.turn.number) continue;
+      if (this.state.players[trigger.controller]?.hasLost !== false) continue;
+      const source = this.state.objects[trigger.source];
+      if (source === undefined) continue;
+      const aboutSelf =
+        ("who" in at.whenever && at.whenever.who === "self") || ("to" in at.whenever && at.whenever.to === "self");
+      if (aboutSelf && (source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== trigger.sourceStint)) {
+        continue;
+      }
+      // "...deals combat damage to that player this turn" (Great Train
+      // Heist): only damage dealt to the player it was set up for.
+      if (
+        at.player !== undefined &&
+        !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === at.player)
+      ) {
+        continue;
+      }
+      const object = source.controller === trigger.controller ? source : { ...source, controller: trigger.controller };
+      if (!this.triggerMatches(at.whenever, event, object)) continue;
+      const triggerObject = this.eventTriggerObject(at.whenever, event);
+      const triggerValue = this.triggerValueOf(at.whenever, event, object);
+      const refs = this.refsAtTrigger(source, undefined, event, triggerObject);
+      const pending: PendingTrigger = {
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
+        controller: trigger.controller,
+        ...(triggerObject !== undefined ? { triggerObject } : {}),
+        ...(triggerValue !== undefined ? { triggerValue } : {}),
+        ...(refs !== undefined ? { lastKnownRefs: refs } : {}),
+        ...(at.targets !== undefined
+          ? {
+              grantedAbility: {
+                kind: "modifier" as const,
+                ability: { trigger: at.whenever, targets: at.targets, effect: trigger.effect, resolve: null, text: trigger.text },
+              },
+            }
+          : { delayed: trigger }),
+      };
+      // A token stack in the event is a permanent per token (rule 603.2).
+      const times = Math.min(this.eventMultiplier(at.whenever, event, trigger.source), Game.MAX_EFFECT_INSTANCES);
+      for (let i = 0; i < times; i += 1) this.state.pendingTriggers.push(pending);
+    }
+  }
+
   /** Scan for triggered abilities that just fired and queue them. */
   private detectTriggers(event: GameEvent): void {
     // A departing player's cards leaving the stack left the game — nothing
@@ -17905,86 +18289,7 @@ export class Game {
           // The object whose entering / attacking / etc. fired this trigger —
           // for `create-token-copy` `of: "trigger-object"` (Miirym). P5b.
           const triggerObject = this.eventTriggerObject(ability.trigger, event);
-          const powerOfId =
-            event.type === "permanent-entered-battlefield"
-              ? event.object
-              : event.type === "attacker-declared"
-                ? event.attacker
-                : undefined;
-          const triggerValue =
-            // "That much": how many permanents of the entry matched.
-            ability.trigger.on === "enters-battlefield" &&
-            ability.trigger.batched === true &&
-            event.type === "permanent-entered-battlefield"
-              ? this.enterBatchMatches(ability.trigger, event, object)
-              : event.type === "dice-rolled"
-              ? event.results.reduce((n, r) => n + r, 0)
-              : powerOfId !== undefined && this.state.objects[powerOfId] !== undefined
-              ? computeCharacteristics(this.state, this.registry, powerOfId).power
-              : (ability.trigger.on === "deals-combat-damage-to-player" ||
-                    ability.trigger.on === "deals-damage") &&
-                  event.type === "damage-dealt"
-                ? // Each source's own: a counted stack's tokens share the event.
-                  event.amount / (event.sources ?? 1)
-                : ability.trigger.on === "dealt-damage" && event.type === "damage-dealt"
-                ? event.amount
-                : // A batched attack trigger's value is *how many* matched,
-                  // which is what "draw that many cards" reads.
-                  ability.trigger.on === "attacks-batch" &&
-                    event.type === "attackers-declared"
-                  ? this.creatureCount(this.batchedAttackers(ability.trigger, event.attackers, object))
-                  : // How many creatures attack that player.
-                    ability.trigger.on === "attacks-player" && event.type === "player-attacked"
-                  ? this.creatureCount(event.attackers)
-                  : // How many cards left the graveyard, for "that many".
-                    ability.trigger.on === "leaves-graveyard" &&
-                      event.type === "cards-left-graveyard"
-                    ? this.graveyardLeavers(ability.trigger, event.objects, object).length
-                    : // How many cards were put into the graveyard.
-                    ability.trigger.on === "put-into-graveyard" &&
-                      event.type === "cards-put-into-graveyard"
-                    ? this.graveyardArrivals(ability.trigger, event.arrivals, object).length
-                    : ability.trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
-                    ? this.exileArrivals(ability.trigger, event.arrivals, object).length
-                    : // "…for each card discarded this way".
-                    ability.trigger.on === "discards" && event.type === "cards-discarded"
-                    ? this.discardedMatching(ability.trigger, event.objects, object).length
-                    : // "Deals that much damage": how many counters were put.
-                    ability.trigger.on === "counters-put" && event.type === "counter-added"
-                    ? event.amount
-                    : ability.trigger.on === "counters-removed" && event.type === "counter-removed"
-                    ? event.amount
-                    : // "The number of cards looked at while scrying this way".
-                    ability.trigger.on === "scries" && event.type === "scried"
-                    ? event.looked
-                    : // "Discover again for the same value" (Curator of Sun's Creation).
-                    ability.trigger.on === "discovers" && event.type === "discovered"
-                    ? event.amount
-                    : // The N it became monstrous with (rule 701.37c's X).
-                    ability.trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
-                    ? event.amount
-                    : // "The number of times you chose a mode for that spell".
-                    ability.trigger.on === "cast-spell" &&
-                      ability.trigger.modal === true &&
-                      event.type === "spell-cast"
-                    ? (this.state.objects[event.object]?.chosenModes?.length ?? 0)
-                    : // "Draw that many cards": how many targets the spell has.
-                    ability.trigger.on === "cast-spell" &&
-                      ability.trigger.withTargets === true &&
-                      event.type === "spell-cast"
-                    ? this.spellTargetCount(event.object)
-                    : // "For each other instant and sorcery spell you've cast
-                      // before it this turn" (Thousand-Year Storm).
-                      ability.trigger.on === "cast-spell" &&
-                        ability.trigger.countCastBefore !== undefined &&
-                        event.type === "spell-cast"
-                      ? this.castBefore(event.player, event.object, ability.trigger.countCastBefore, object.controller)
-                    : // "Loses that much life" (Sanguine Bond, Exquisite Blood):
-                      // how much the life total moved.
-                      (ability.trigger.on === "gains-life" || ability.trigger.on === "loses-life") &&
-                        event.type === "life-changed"
-                      ? Math.abs(event.delta)
-                      : undefined;
+          const triggerValue = this.triggerValueOf(ability.trigger, event, object);
           // Rule 107.3m: an enters ability of a permanent cast with X, or a
           // cast trigger, snapshots that X now (`triggerCastX`).
           const castX = this.triggerCastX(ability.trigger, event, object);
@@ -18071,62 +18376,6 @@ export class Game {
                 : 0) +
               this.causeTriggerDoublers(object.controller, event) +
               this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined);
-          // A compacted stack that left play is that many permanents leaving,
-          // each its own event: Zulaport Cutthroat drains once per Goblin in
-          // a stack a wrath kills. The stack's own abilities already scale by
-          // `object.stackCount` just below, so it isn't counted twice.
-          const departed =
-            (event.type === "permanent-left-battlefield" ||
-              event.type === "permanent-destroyed" ||
-              event.type === "permanent-sacrificed") &&
-            event.object !== id
-              ? (this.state.objects[event.object]?.stackCount ?? 1)
-              : 1;
-          // Damage dealt to a token stack was dealt to every token in it, each
-          // its own permanent: a watcher fires once per token (a stack's own
-          // `dealt-damage` already scales by `object.stackCount` above). Each
-          // firing that deals damage to "that permanent" peels one token off
-          // (`splitTargetRef`), so ten tokens dealt 1 are each dealt 2 more.
-          const recipients =
-            (ability.trigger.on === "deals-damage" || ability.trigger.on === "dealt-damage") &&
-            !dealsDamageOncePerEvent(ability.trigger) &&
-            event.type === "damage-dealt" &&
-            event.target.kind === "object" &&
-            event.target.object !== id
-              ? (this.state.objects[event.target.object]?.stackCount ?? 1)
-              : 1;
-          // A counted attacking stack (`attackingStackPart`) is every token in
-          // it attacking, and its combat damage every token's: "whenever a
-          // creature you control attacks" or "deals combat damage" fires
-          // once per token. Its own abilities already scale by `stackCount`.
-          const attacked =
-            event.type === "attacker-declared" && event.attacker !== id
-              ? (this.state.objects[event.attacker]?.stackCount ?? 1)
-              : 1;
-          const dealtBy =
-            event.type === "damage-dealt" &&
-            event.source !== id &&
-            (ability.trigger.on === "deals-damage" || ability.trigger.on === "deals-combat-damage-to-player")
-              ? (event.sources ?? 1)
-              : 1;
-          // A compacted stack untapping is every token in it untapping, each
-          // its own permanent: Mesmeric Orb mills once per token. Tapping
-          // likewise (a tap-all over a stack, or attacking with a declared
-          // count of it): Magda makes a Treasure per Dwarf (rule 701.26a).
-          const turned =
-            (event.type === "permanent-untapped" || event.type === "permanent-tapped") && event.object !== id
-              ? (this.state.objects[event.object]?.stackCount ?? 1)
-              : 1;
-          // Counters put on a token stack were put on every token in it
-          // (Basri's Solidarity, proliferate, Black Sun's Zenith), each its
-          // own permanent: "whenever one or more counters are put on a
-          // creature" fires once per token — Simic Ascendancy grows by ten
-          // for a stack of ten, Hapatra makes ten Snakes. A batch entering
-          // with counters into a stack already there names how many it was.
-          const countered =
-            ability.trigger.on === "counters-put" && event.type === "counter-added" && event.object !== id
-              ? (event.count ?? this.state.objects[event.object]?.stackCount ?? 1)
-              : 1;
           // "Triggers only once each turn": this firing is the one, whatever
           // the stack size or batch count would otherwise multiply it to.
           if (ability.oncePerTurn === true) {
@@ -18153,15 +18402,7 @@ export class Game {
               : (object.stackCount ?? 1);
           const multiplier =
             watchers *
-            (ability.oncePerTurn === true || batchedEntry
-              ? 1
-              : departed *
-                recipients *
-                attacked *
-                dealtBy *
-                turned *
-                countered *
-                (event.type === "permanent-entered-battlefield" ? (event.count ?? 1) : 1)) *
+            (ability.oncePerTurn === true || batchedEntry ? 1 : this.eventMultiplier(ability.trigger, event, id)) *
             (1 + entryDoublers);
           // Damage dealt all at once is dealt to a permanent once, however
           // many sources dealt it (rule 510.2 — the two creatures blocking an
@@ -18328,7 +18569,8 @@ export class Game {
     }
     if (event.type === "damage-dealt") this.fireDamageWatchers(event);
     if (event.type === "attacker-unblocked") this.fireUnblockedWatchers(event.attacker);
-    this.fireWheneverWatchers(event);
+    // "Until end of turn, whenever …" — any event a trigger can name.
+    if (this.state.delayedTriggers.length > 0) this.fireWheneverWatchers(event);
   }
 
   /** Has `object`'s `oncePerTurn` triggered ability `index` triggered yet
@@ -19041,6 +19283,12 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
+      case "becomes-renowned":
+        return (
+          event.type === "became-renowned" &&
+          this.matchesWho(spec.who, event.object, self) &&
+          this.triggerFilterOk(spec.filter, event.object, self)
+        );
       case "becomes-saddled":
         return (
           event.type === "became-saddled" &&
@@ -19462,6 +19710,7 @@ export class Game {
       event.type === "permanent-transformed" ||
       event.type === "permanent-mutated" ||
       event.type === "became-monstrous" ||
+      event.type === "became-renowned" ||
       event.type === "became-saddled" ||
       event.type === "permanent-exerted" ||
       // "Whenever a creature you control explores, … it" — the explorer.
@@ -19625,12 +19874,16 @@ export class Game {
     // The recipient.
     const target = event.target;
     if (target.kind === "player") {
-      if (spec.to === "permanent" || spec.to === "creature" || spec.to === "planeswalker") return false;
+      if (spec.to === "permanent" || spec.to === "creature" || spec.to === "planeswalker" || spec.to === "self") {
+        return false;
+      }
       if (spec.toFilter !== undefined) return false;
       if (spec.to === "opponent" && target.player === self.controller) return false;
       if (spec.to === "you" && target.player !== self.controller) return false;
     } else {
       if (spec.to === "player" || spec.to === "opponent" || spec.to === "you") return false;
+      // "Deals combat damage to Vraska": the ability's own source.
+      if (spec.to === "self" && target.object !== self.id) return false;
       if (spec.to === "creature" || spec.to === "planeswalker") {
         if (this.state.objects[target.object] === undefined) return false;
         const types = computeCharacteristics(this.state, this.registry, target.object).types;
@@ -19979,7 +20232,8 @@ export class Game {
         "triggered",
         0,
         trigger.delayed.targets,
-        undefined,
+        // "That many" of an "until end of turn, whenever …" (Basri Ket).
+        trigger.triggerValue,
         trigger.triggerObject,
       );
       this.state.objects[id].delayedTrigger = trigger.delayed;
@@ -21098,6 +21352,19 @@ export class Game {
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
+      exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
+        // Every permanent this resolution has dealt damage to so far — damage
+        // prevented was never dealt (rule 615.1) — or only the creatures
+        // among them. A token stack dealt damage as one object is every
+        // token in it, each dealt damage.
+        for (const event of eventLogSince(this.state, since)) {
+          if (event.type !== "damage-dealt" || event.target.kind !== "object") continue;
+          const object = this.state.objects[event.target.object];
+          if (object?.zone !== "battlefield") continue;
+          if (creaturesOnly && !effectiveTypes(this.state, this.registry, object).includes("creature")) continue;
+          object.exileIfDiesTurn = this.state.turn.number;
+        }
+      },
       foraged: () => this.emit({ type: "foraged", player: controller }),
       craftReturn: () => {
         // The card its cost exiled, still in exile from that move (rule
@@ -21171,6 +21438,9 @@ export class Game {
           land: result.land,
         }),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
+      // The opponents attacked as attackers were declared this combat
+      // (rule 702.121a), whether or not those creatures still attack (the
+      // melee rulings) — none outside the combat it was declared in.
       opponentsAttacked: () => {
         // Who the controller declared attacks on this combat (702.121a), not
         // who their creatures attack now — one removed since still counts.
@@ -21254,7 +21524,7 @@ export class Game {
           this.regenerateByEffect({ kind: "object", object: id });
         }
       },
-      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter),
+      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x),
       exileAll: (filter, airbend, except, untilSourceLeaves, linked, scopeTo) => {
         if (untilSourceLeaves !== true) {
           // "Exile … with this" (rule 607.2a): linked to the stint the
@@ -21990,6 +22260,17 @@ export class Game {
         object.monstrous = true;
         this.emit({ type: "became-monstrous", object: source, amount });
       },
+      renown: (amount) => {
+        // Rule 702.112a: "if it isn't renowned" — monstrosity's shape. A
+        // second instance of renown resolving finds it renowned (702.112c).
+        const object = this.state.objects[source];
+        if (opts.sourceLost === true || object === undefined || object.zone !== "battlefield") return;
+        if (refs.source !== undefined && (object.zoneChangeCount ?? 0) !== refs.source) return;
+        if (object.renowned === true) return;
+        this.addCounter({ kind: "object", object: source }, "+1/+1", amount, false, controller);
+        object.renowned = true;
+        this.emit({ type: "became-renowned", object: source, amount });
+      },
       populate: () => this.populate(controller, source, x),
       encore: () => this.encore(controller, source),
       chosenColorOfSource: () => {
@@ -22218,6 +22499,13 @@ export class Game {
         if (counter === undefined) return Object.values(counters).reduce((n, k) => n + k, 0);
         return counters[counter] ?? 0;
       },
+      exileIfDiesThisTurn: (target) => {
+        if (target.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        if (object === undefined || object.zone !== "battlefield") return;
+        object.exileIfDiesTurn = this.state.turn.number;
+      },
       putOnBottomOfLibrary: (target) => {
         if (target.kind !== "object") return;
         const id = this.splitOneFromStack(target.object);
@@ -22256,6 +22544,7 @@ export class Game {
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except) =>
         this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true, except),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
+      bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
       canBehold: (spec) => this.canBehold(controller, spec),
       canBlight: (player) => this.canBlight(player),
@@ -25717,6 +26006,7 @@ export class Game {
       ...(object.overloaded === true ? { overloaded: true } : {}),
       ...(object.evokePaid === true ? { evokePaid: true } : {}),
       ...(object.spectaclePaid === true ? { spectaclePaid: true } : {}),
+      ...(object.surgePaid === true ? { surgePaid: true } : {}),
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
@@ -25783,6 +26073,7 @@ export class Game {
       ...(spell.overloaded === true ? { overloaded: true } : {}),
       ...(spell.evokePaid === true ? { evokePaid: true } : {}),
       ...(spell.spectaclePaid === true ? { spectaclePaid: true } : {}),
+      ...(spell.surgePaid === true ? { surgePaid: true } : {}),
       ...(spell.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       // "If you copy a spell for which the gift was promised, the gift was
       // also promised to the same opponent for the copy" (the ruling).
@@ -26883,9 +27174,9 @@ export class Game {
 
   /** Which battlefield permanents a mass P/T / keyword effect (Overrun) hits —
    * `matchesFilter` from the effect's controller's perspective. */
-  private battlefieldMatching(you: PlayerId, filter: CardFilter): ObjectId[] {
+  private battlefieldMatching(you: PlayerId, filter: CardFilter, x?: number): ObjectId[] {
     return this.state.zones.shared.battlefield.filter((id) =>
-      matchesFilter(this.state, this.registry, id, filter, { you }),
+      matchesFilter(this.state, this.registry, id, filter, { you, x }),
     );
   }
 
@@ -27914,6 +28205,41 @@ export class Game {
   }
 
   /**
+   * Bolster N (rule 701.39a): `player` chooses a creature they control with
+   * the least toughness, or tied for it, among creatures they control, and
+   * puts `amount` +1/+1 counters on it — chosen as the effect resolves, not
+   * targeted. Which of the tied creatures is the `choose-permanents`
+   * decision; with one to choose from (a token stack is one — its tokens are
+   * identical) it's that one, unasked. No creature, nothing.
+   */
+  private beginBolster(player: PlayerId, source: ObjectId, amount: number, x: number): void {
+    if (this.state.players[player]?.hasLost !== false || amount <= 0) return;
+    const creatures = this.battlefieldMatching(player, { type: "creature", controlledBy: "you" });
+    if (creatures.length === 0) return;
+    const toughness = new Map(creatures.map((id) => [id, this.characteristics(id).toughness]));
+    const least = Math.min(...toughness.values());
+    const eligible = creatures.filter((id) => toughness.get(id) === least);
+    const then: EffectSpec = { kind: "add-counter", target: 0, counter: "+1/+1", amount };
+    if (eligible.length === 1) {
+      const one = this.splitOneFromStack(eligible[0]);
+      applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x));
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-permanents",
+      player,
+      eligible,
+      min: 1,
+      max: 1,
+      prompt: `Bolster ${amount} — put ${amount === 1 ? "a +1/+1 counter" : `${amount} +1/+1 counters`} on a creature you control with the least toughness`,
+      then,
+      source,
+      x,
+      bolster: amount,
+    };
+  }
+
+  /**
    * What `player` could behold for `spec` (rule 701.4a): the cards in their
    * hand and the permanents they control that match its quality — each read
    * where it is, so a changeling card is a Dragon card (rule 702.73a works
@@ -28303,12 +28629,13 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
       return;
     }
-    const { then, source, x, priorityTo, costOf, blight } = awaiting;
+    const { then, source, x, priorityTo, costOf, blight, bolster } = awaiting;
     this.state.awaiting = null;
     if (costOf !== undefined) for (const id of chosen) this.recordReturnedAttacking(costOf, id);
     // A blight's creature is singled out of its stack before the counters
-    // go on, so its `then` reads the blighted one (rule 701.68c).
-    if (blight !== undefined) {
+    // go on, so its `then` reads the blighted one (rule 701.68c) — and a
+    // bolstered one, so only that token gets them (701.39a).
+    if (blight !== undefined || bolster !== undefined) {
       const id = chosen[0];
       if (id !== undefined && this.state.objects[id]?.zone === "battlefield") {
         const one = this.splitOneFromStack(id);
@@ -28732,12 +29059,13 @@ export class Game {
     });
   }
 
-  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter): void {
+  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0): void {
     // One event, so each bounced permanent's leaves-the-battlefield ability
     // sees the rest go too (rule 603.10a). Snapshot: `returnToHandByEffect`
-    // mutates the battlefield array as it goes.
+    // mutates the battlefield array as it goes. `x`: a filter's "mana value X
+    // or less" (Displacement Wave), as `destroyAllByEffect` reads it.
     this.withLeaveBatch(() => {
-      const victims = this.battlefieldMatching(you, filter);
+      const victims = this.battlefieldMatching(you, filter, x);
       this.snapshotLeaving(victims);
       for (const id of victims) {
         this.returnToHandByEffect({ kind: "object", object: id }, false);
@@ -29867,7 +30195,7 @@ export class Game {
       | DelayedNextSpell
       | { readonly dealsCombatDamage: ObjectId }
       | { readonly attacksUnblocked: ObjectId }
-      | { readonly whenever: DelayedWhenever["whenever"]; readonly player?: PlayerId },
+      | (DelayedWhenever & { readonly player?: PlayerId }),
     effect: EffectSpec,
     text: string,
     targets: ResolvedTargets,
@@ -29881,10 +30209,12 @@ export class Game {
       | DelayedCastWatch
       | DelayedDamageWatch
       | DelayedUnblockedWatch
-      | DelayedEventWatch;
+      | DelayedWheneverWatch;
     if (typeof at === "object" && "whenever" in at) {
       when = {
         whenever: at.whenever,
+        ...(at.targets !== undefined ? { targets: at.targets } : {}),
+        ...(at.until === "your-next-turn" ? { untilYourNextTurn: true as const } : {}),
         ...(at.player !== undefined ? { player: at.player } : {}),
         turn: this.state.turn.number,
       };
@@ -30173,50 +30503,6 @@ export class Game {
         lastKnownRefs: { triggerObject: stint },
         delayed: trigger,
       });
-    }
-  }
-
-  /**
-   * The "until end of turn, whenever …" delayed triggers `event` matches (see
-   * `DelayedEventWatch`): each fires each time, read as an ordinary trigger
-   * from its source with its own controller, and stays until the turn ends.
-   * A counted stack's combat damage is every token's (`sources`), as for a
-   * permanent's own trigger.
-   */
-  private fireWheneverWatchers(event: GameEvent): void {
-    if (this.state.delayedTriggers.length === 0) return;
-    for (const trigger of this.state.delayedTriggers) {
-      if (typeof trigger.at !== "object" || !("whenever" in trigger.at) || trigger.at.turn !== this.state.turn.number) {
-        continue;
-      }
-      const spec = trigger.at.whenever;
-      const toPlayer = trigger.at.player;
-      if (
-        toPlayer !== undefined &&
-        !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === toPlayer)
-      ) {
-        continue;
-      }
-      const source = this.state.objects[trigger.source];
-      if (source === undefined) continue;
-      const self = source.controller === trigger.controller ? source : { ...source, controller: trigger.controller };
-      if (!this.triggerMatches(spec, event, self)) continue;
-      const triggerObject = this.eventTriggerObject(spec, event);
-      const watched = triggerObject === undefined ? undefined : this.state.objects[triggerObject];
-      const times = event.type === "damage-dealt" ? (event.sources ?? 1) : 1;
-      for (let i = 0; i < times; i++) {
-        this.state.pendingTriggers.push({
-          sourceObjectId: trigger.source,
-          cardName: trigger.sourceName,
-          abilityIndex: 0,
-          controller: trigger.controller,
-          ...(triggerObject !== undefined && watched !== undefined
-            ? { triggerObject, lastKnownRefs: { triggerObject: watched.zoneChangeCount ?? 0 } }
-            : {}),
-          ...(event.type === "damage-dealt" ? { triggerValue: event.amount / times } : {}),
-          delayed: trigger,
-        });
-      }
     }
   }
 
@@ -30813,6 +31099,19 @@ export class Game {
     if (discounts === 0) return cost;
     const casts = Object.values(this.state.players[player].commanderCastCounts).reduce((n, c) => n + c, 0);
     return reduceGenericInCost(cost, casts * discounts);
+  }
+
+  /**
+   * The dash cost `player` may cast `cardId` for (rule 702.109a): from their
+   * hand, or as a commander from the command zone (its tax still added).
+   * `null` when it has none, or isn't where it may be cast from that way.
+   */
+  private dashCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
+    if (def.dash === null || this.state.players[player] === undefined) return null;
+    if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+      return null;
+    }
+    return def.dash.cost;
   }
 
   private warpCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
@@ -34794,11 +35093,14 @@ export class Game {
       tapped: object.tapped,
       ...(object.enteredKicked === true ? { enteredKicked: true } : {}),
       ...(object.enteredSpectacle === true ? { enteredSpectacle: true } : {}),
+      ...(object.enteredSurge === true ? { enteredSurge: true } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
+      ...(object.monstrous === true ? { monstrous: true as const } : {}),
+      ...(object.renowned === true ? { renowned: true as const } : {}),
       ...(object.entry !== undefined ? { entry: object.entry } : {}),
       ...(object.attackedThisTurn === true ? { attackedOnTurn: this.state.turn.number } : {}),
       ...(object.damageThisTurn !== undefined ? { damageThisTurn: object.damageThisTurn } : {}),
@@ -35082,8 +35384,16 @@ export class Game {
     // An instant or sorcery card that would enter the battlefield stays where
     // it was (rule 400.4a) — unless it enters face down, as a 2/2 creature
     // with no other characteristics (rules 701.40a, 708.2a): manifested,
-    // cloaked or manifested dread, it stays face down for good (701.40b).
-    if (to === "battlefield" && object.zone !== "battlefield" && enter.faceDown === undefined) {
+    // cloaked or manifested dread, it stays face down for good (701.40b) —
+    // or a double-faced card told to enter transformed, which enters back
+    // face up (rule 712.14a): Startled Awake's ruling returns it as Persistent
+    // Nightmare. No transforming card's back face is an instant or sorcery.
+    if (
+      to === "battlefield" &&
+      object.zone !== "battlefield" &&
+      enter.faceDown === undefined &&
+      !(enter.transformed === true && this.isDoubleFacedCard(id))
+    ) {
       const types = computeCharacteristics(this.state, this.registry, id).types;
       if (types.includes("instant") || types.includes("sorcery")) return false;
     }
@@ -35192,7 +35502,15 @@ export class Game {
     let exileCounters: { readonly kind: string; readonly amount: number } | undefined;
     const exilesItself = to === "graveyard" && this.exilesItselfInstead(object);
     if (to === "graveyard") {
-      const finality = leavingBattlefield && (object.counters["finality"] ?? 0) > 0;
+      // "If that creature would die this turn, exile it instead" (Lava Coil)
+      // is the same shape: a battlefield-to-graveyard move only, while the
+      // turn it was said on lasts and the permanent is still a creature or
+      // planeswalker — what dying is (rule 700.4).
+      const finality =
+        leavingBattlefield &&
+        ((object.counters["finality"] ?? 0) > 0 ||
+          (object.exileIfDiesTurn === this.state.turn.number &&
+            effectiveTypes(this.state, this.registry, object).some((t) => t === "creature" || t === "planeswalker")));
       const replaced = this.graveyardExileReplacements(id, leavingBattlefield);
       if (finality || replaced.length > 0) {
         to = "exile";
@@ -35350,6 +35668,7 @@ export class Game {
     // flag on the *next* move, so a Verix that dies and returns is unkicked.
     const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
     const enteringSpectacle = object.zone === "stack" && to === "battlefield" && object.spectaclePaid === true;
+    const enteringSurge = object.zone === "stack" && to === "battlefield" && object.surgePaid === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
@@ -35490,6 +35809,8 @@ export class Game {
     // Monstrous lasts until the permanent leaves the battlefield (701.37b);
     // being exerted, until it's a new object.
     delete object.monstrous;
+    // So does renowned (702.112b).
+    delete object.renowned;
     // So does saddled (702.171b); what it saddled was the old object's (400.7).
     delete object.saddled;
     delete object.saddledThisTurn;
@@ -35634,6 +35955,7 @@ export class Game {
     object.giftTo = undefined;
     object.evokePaid = undefined;
     object.spectaclePaid = undefined;
+    object.surgePaid = undefined;
     // "That spell can't be countered" was about this casting, so it ends when
     // the spell leaves the stack (Cavern of Souls). So does what the casting
     // sacrificed ("the sacrificed creature" — see `LastKnownRefs`).
@@ -35641,6 +35963,7 @@ export class Game {
     object.lastKnownRefs = undefined;
     object.enteredKicked = enteringKicked;
     object.enteredSpectacle = enteringSpectacle;
+    object.enteredSurge = enteringSurge;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
@@ -35678,6 +36001,7 @@ export class Game {
     // Its "exile it if it would leave" replacement was about the permanent
     // that just left (rule 400.7).
     object.exileIfItWouldLeave = undefined;
+    object.exileIfDiesTurn = undefined;
     // So was having transformed (rule 701.28f) — and entering transformed
     // isn't transforming.
     object.transformedAtSeq = undefined;

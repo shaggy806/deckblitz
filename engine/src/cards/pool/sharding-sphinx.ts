@@ -24,7 +24,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Create a 1/1 blue Thopter artifact creature token with flying?",
-        effect: { kind: "create-token", token: "Thopter Token", count: 1 },
+        effect: { kind: "create-token", token: "Blue Thopter Token", count: 1 },
       },
       resolve: null,
       text:

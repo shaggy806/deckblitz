@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 21388. Eldritch Moon.
+// EDHREC rank 21388.
 
 export default defineCard({
   name: "Wretched Gryff",
@@ -11,7 +11,7 @@ export default defineCard({
   power: 3,
   toughness: 4,
   keywords: ["flying"],
-  alternativeCost: { mana: "{5}{U}", keyword: "emerge", emerge: { filter: { type: "creature" } } },
+  emerge: { cost: "{5}{U}" },
   text: "Emerge {5}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, draw a card.\nFlying",
   triggered: [
     {

@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 17405. Eldritch Moon.
+// EDHREC rank 17405.
 
 export default defineCard({
   name: "Vexing Scuttler",
@@ -10,7 +10,7 @@ export default defineCard({
   subtypes: ["Eldrazi", "Crab"],
   power: 4,
   toughness: 5,
-  alternativeCost: { mana: "{6}{U}", keyword: "emerge", emerge: { filter: { type: "creature" } } },
+  emerge: { cost: "{6}{U}" },
   text: "Emerge {6}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, you may return target instant or sorcery card from your graveyard to your hand.",
   triggered: [
     {

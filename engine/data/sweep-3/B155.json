@@ -1,0 +1,1073 @@
+{
+  "batch": "B155",
+  "status": "complete",
+  "ranks": "Dragons of Tarkir (DTK, 2015-03-27): whole set; with dash and bolster built (and Ragavan, Nimble Pilferer, Flamerush Rider, Kolaghan, the Storm's Fury, Riders of Rohan, Death-Greeter's Champion, Treetop Ambusher, Anafenza, Kin-Tree Spirit and Sandsteppe War Riders, which waited only on them)",
+  "authored": [
+    {
+      "name": "Stratus Dancer",
+      "files": [
+        "engine/src/cards/pool/stratus-dancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sight of the Scalelords",
+      "files": [
+        "engine/src/cards/pool/sight-of-the-scalelords.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Learn from the Past",
+      "files": [
+        "engine/src/cards/pool/learn-from-the-past.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Foul-Tongue Shriek",
+      "files": [
+        "engine/src/cards/pool/foul-tongue-shriek.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silumgar Assassin",
+      "files": [
+        "engine/src/cards/pool/silumgar-assassin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Collected Company",
+      "files": [
+        "engine/src/cards/pool/collected-company.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Twin Bolt",
+      "files": [
+        "engine/src/cards/pool/twin-bolt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Descent of the Dragons",
+      "files": [
+        "engine/src/cards/pool/descent-of-the-dragons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragon-Scarred Bear",
+      "files": [
+        "engine/src/cards/pool/dragon-scarred-bear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Herald of Dromoka",
+      "files": [
+        "engine/src/cards/pool/herald-of-dromoka.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood-Chin Rager",
+      "files": [
+        "engine/src/cards/pool/blood-chin-rager.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mirror Mockery",
+      "files": [
+        "engine/src/cards/pool/mirror-mockery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rending Volley",
+      "files": [
+        "engine/src/cards/pool/rending-volley.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Profaner of the Dead",
+      "files": [
+        "engine/src/cards/pool/profaner-of-the-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dutiful Attendant",
+      "files": [
+        "engine/src/cards/pool/dutiful-attendant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ojutai's Command",
+      "files": [
+        "engine/src/cards/pool/ojutais-command.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zurgo Bellstriker",
+      "files": [
+        "engine/src/cards/pool/zurgo-bellstriker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Epic Confrontation",
+      "files": [
+        "engine/src/cards/pool/epic-confrontation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ojutai Exemplars",
+      "files": [
+        "engine/src/cards/pool/ojutai-exemplars.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hidden Dragonslayer",
+      "files": [
+        "engine/src/cards/pool/hidden-dragonslayer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Servant of the Scale",
+      "files": [
+        "engine/src/cards/pool/servant-of-the-scale.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sheltered Aerie",
+      "files": [
+        "engine/src/cards/pool/sheltered-aerie.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Avatar of the Resolute",
+      "files": [
+        "engine/src/cards/pool/avatar-of-the-resolute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Virulent Plague",
+      "files": [
+        "engine/src/cards/pool/virulent-plague.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Roast",
+      "files": [
+        "engine/src/cards/pool/roast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Arashin Foremost",
+      "files": [
+        "engine/src/cards/pool/arashin-foremost.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magmatic Chasm",
+      "files": [
+        "engine/src/cards/pool/magmatic-chasm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sidisi's Faithful",
+      "files": [
+        "engine/src/cards/pool/sidisis-faithful.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Foul Renewal",
+      "files": [
+        "engine/src/cards/pool/foul-renewal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Necromaster Dragon",
+      "files": [
+        "engine/src/cards/pool/necromaster-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elusive Spellfist",
+      "files": [
+        "engine/src/cards/pool/elusive-spellfist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kolaghan Monument",
+      "files": [
+        "engine/src/cards/pool/kolaghan-monument.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Radiant Purge",
+      "files": [
+        "engine/src/cards/pool/radiant-purge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Butcher's Glee",
+      "files": [
+        "engine/src/cards/pool/butchers-glee.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dragon Whisperer",
+      "files": [
+        "engine/src/cards/pool/dragon-whisperer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silumgar Monument",
+      "files": [
+        "engine/src/cards/pool/silumgar-monument.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silumgar Sorcerer",
+      "files": [
+        "engine/src/cards/pool/silumgar-sorcerer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Taigam's Strike",
+      "files": [
+        "engine/src/cards/pool/taigams-strike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ojutai Monument",
+      "files": [
+        "engine/src/cards/pool/ojutai-monument.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stormrider Rig",
+      "files": [
+        "engine/src/cards/pool/stormrider-rig.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood-Chin Fanatic",
+      "files": [
+        "engine/src/cards/pool/blood-chin-fanatic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Belltoll Dragon",
+      "files": [
+        "engine/src/cards/pool/belltoll-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightning Berserker",
+      "files": [
+        "engine/src/cards/pool/lightning-berserker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blessed Reincarnation",
+      "files": [
+        "engine/src/cards/pool/blessed-reincarnation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Acid-Spewer Dragon",
+      "files": [
+        "engine/src/cards/pool/acid-spewer-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skywise Teachings",
+      "files": [
+        "engine/src/cards/pool/skywise-teachings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stampeding Elk Herd",
+      "files": [
+        "engine/src/cards/pool/stampeding-elk-herd.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vulturous Aven",
+      "files": [
+        "engine/src/cards/pool/vulturous-aven.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ojutai's Breath",
+      "files": [
+        "engine/src/cards/pool/ojutais-breath.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Herdchaser Dragon",
+      "files": [
+        "engine/src/cards/pool/herdchaser-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swift Warkite",
+      "files": [
+        "engine/src/cards/pool/swift-warkite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tail Slash",
+      "files": [
+        "engine/src/cards/pool/tail-slash.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Illusory Gains",
+      "files": [
+        "engine/src/cards/pool/illusory-gains.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ambuscade Shaman",
+      "files": [
+        "engine/src/cards/pool/ambuscade-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lose Calm",
+      "files": [
+        "engine/src/cards/pool/lose-calm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dromoka Monument",
+      "files": [
+        "engine/src/cards/pool/dromoka-monument.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kolaghan Forerunners",
+      "files": [
+        "engine/src/cards/pool/kolaghan-forerunners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silumgar Spell-Eater",
+      "files": [
+        "engine/src/cards/pool/silumgar-spell-eater.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scale Blessing",
+      "files": [
+        "engine/src/cards/pool/scale-blessing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ire Shaman",
+      "files": [
+        "engine/src/cards/pool/ire-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pitiless Horde",
+      "files": [
+        "engine/src/cards/pool/pitiless-horde.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reckless Imp",
+      "files": [
+        "engine/src/cards/pool/reckless-imp.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Circle of Elders",
+      "files": [
+        "engine/src/cards/pool/circle-of-elders.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corpseweft",
+      "files": [
+        "engine/src/cards/pool/corpseweft.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sibsig Icebreakers",
+      "files": [
+        "engine/src/cards/pool/sibsig-icebreakers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Arashin Sovereign",
+      "files": [
+        "engine/src/cards/pool/arashin-sovereign.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shieldhide Dragon",
+      "files": [
+        "engine/src/cards/pool/shieldhide-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ainok Artillerist",
+      "files": [
+        "engine/src/cards/pool/ainok-artillerist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Qarsi Sadist",
+      "files": [
+        "engine/src/cards/pool/qarsi-sadist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Volcanic Rush",
+      "files": [
+        "engine/src/cards/pool/volcanic-rush.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rakshasa Gravecaller",
+      "files": [
+        "engine/src/cards/pool/rakshasa-gravecaller.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stormwing Dragon",
+      "files": [
+        "engine/src/cards/pool/stormwing-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sarkhan's Rage",
+      "files": [
+        "engine/src/cards/pool/sarkhans-rage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sunbringer's Touch",
+      "files": [
+        "engine/src/cards/pool/sunbringers-touch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Monastery Loremaster",
+      "files": [
+        "engine/src/cards/pool/monastery-loremaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mystic Meditation",
+      "files": [
+        "engine/src/cards/pool/mystic-meditation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tapestry of the Ages",
+      "files": [
+        "engine/src/cards/pool/tapestry-of-the-ages.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dromoka Captain",
+      "files": [
+        "engine/src/cards/pool/dromoka-captain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vial of Dragonfire",
+      "files": [
+        "engine/src/cards/pool/vial-of-dragonfire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Minister of Pain",
+      "files": [
+        "engine/src/cards/pool/minister-of-pain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sight Beyond Sight",
+      "files": [
+        "engine/src/cards/pool/sight-beyond-sight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Atarka Pummeler",
+      "files": [
+        "engine/src/cards/pool/atarka-pummeler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Screamreach Brawler",
+      "files": [
+        "engine/src/cards/pool/screamreach-brawler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonloft Idol",
+      "files": [
+        "engine/src/cards/pool/dragonloft-idol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deadly Wanderings",
+      "files": [
+        "engine/src/cards/pool/deadly-wanderings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guardian Shield-Bearer",
+      "files": [
+        "engine/src/cards/pool/guardian-shield-bearer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echoes of the Kin Tree",
+      "files": [
+        "engine/src/cards/pool/echoes-of-the-kin-tree.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ojutai's Summons",
+      "files": [
+        "engine/src/cards/pool/ojutais-summons.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kolaghan Stormsinger",
+      "files": [
+        "engine/src/cards/pool/kolaghan-stormsinger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silkwrap",
+      "files": [
+        "engine/src/cards/pool/silkwrap.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dromoka's Gift",
+      "files": [
+        "engine/src/cards/pool/dromokas-gift.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightwalker",
+      "files": [
+        "engine/src/cards/pool/lightwalker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dromoka Dunecaster",
+      "files": [
+        "engine/src/cards/pool/dromoka-dunecaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Encase in Ice",
+      "files": [
+        "engine/src/cards/pool/encase-in-ice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enduring Victory",
+      "files": [
+        "engine/src/cards/pool/enduring-victory.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aven Tactician",
+      "files": [
+        "engine/src/cards/pool/aven-tactician.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gurmag Drowner",
+      "files": [
+        "engine/src/cards/pool/gurmag-drowner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sprinting Warbrute",
+      "files": [
+        "engine/src/cards/pool/sprinting-warbrute.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dance of the Skywise",
+      "files": [
+        "engine/src/cards/pool/dance-of-the-skywise.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reduce in Stature",
+      "files": [
+        "engine/src/cards/pool/reduce-in-stature.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sandsteppe Scavenger",
+      "files": [
+        "engine/src/cards/pool/sandsteppe-scavenger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Atarka Efreet",
+      "files": [
+        "engine/src/cards/pool/atarka-efreet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silumgar Butcher",
+      "files": [
+        "engine/src/cards/pool/silumgar-butcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sandcrafter Mage",
+      "files": [
+        "engine/src/cards/pool/sandcrafter-mage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Salt Road Quartermasters",
+      "files": [
+        "engine/src/cards/pool/salt-road-quartermasters.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Press the Advantage",
+      "files": [
+        "engine/src/cards/pool/press-the-advantage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sabertooth Outrider",
+      "files": [
+        "engine/src/cards/pool/sabertooth-outrider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pinion Feast",
+      "files": [
+        "engine/src/cards/pool/pinion-feast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Atarka Beastbreaker",
+      "files": [
+        "engine/src/cards/pool/atarka-beastbreaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kolaghan Aspirant",
+      "files": [
+        "engine/src/cards/pool/kolaghan-aspirant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glade Watcher",
+      "files": [
+        "engine/src/cards/pool/glade-watcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Surge of Righteousness",
+      "files": [
+        "engine/src/cards/pool/surge-of-righteousness.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Self-Inflicted Wound",
+      "files": [
+        "engine/src/cards/pool/self-inflicted-wound.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kolaghan Skirmisher",
+      "files": [
+        "engine/src/cards/pool/kolaghan-skirmisher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "files": [
+        "engine/src/cards/pool/ragavan-nimble-pilferer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamerush Rider",
+      "files": [
+        "engine/src/cards/pool/flamerush-rider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kolaghan, the Storm's Fury",
+      "files": [
+        "engine/src/cards/pool/kolaghan-the-storms-fury.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Riders of Rohan",
+      "files": [
+        "engine/src/cards/pool/riders-of-rohan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Death-Greeter's Champion",
+      "files": [
+        "engine/src/cards/pool/death-greeters-champion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Treetop Ambusher",
+      "files": [
+        "engine/src/cards/pool/treetop-ambusher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Anafenza, Kin-Tree Spirit",
+      "files": [
+        "engine/src/cards/pool/anafenza-kin-tree-spirit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sandsteppe War Riders",
+      "files": [
+        "engine/src/cards/pool/sandsteppe-war-riders.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Warbringer",
+      "needs": [
+        "static:dash-cost-reduction"
+      ],
+      "why": "\"Dash costs you pay cost {2} less\": discounting the dash cost string before commander tax is added would take off too little from a dashed commander, so it needs a reduction applied to the whole cost."
+    },
+    {
+      "name": "Salt Road Ambushers",
+      "needs": [
+        "trigger:turned-face-up-other"
+      ],
+      "why": "\"Whenever another permanent you control is turned face up\": the `turned-face-up` trigger has no `otherOnly`, so it would fire for itself too."
+    },
+    {
+      "name": "Silumgar's Scorn",
+      "needs": [
+        "cost:additional-cost-reveal"
+      ],
+      "why": "\"As an additional cost, you may reveal a Dragon card from your hand\" isn't a spell cost; behold differs for copies and for a Dragon lost mid-cast (the rulings)."
+    },
+    {
+      "name": "Scaleguard Sentinels",
+      "needs": [
+        "cost:additional-cost-reveal"
+      ],
+      "why": "Same optional Dragon reveal, and \"if you revealed a Dragon card or controlled a Dragon as you cast this\"."
+    },
+    {
+      "name": "Gleam of Authority",
+      "needs": [
+        "static:pt-per-counters-among-permanents"
+      ],
+      "why": "+1/+1 for each +1/+1 counter on other creatures you control: `grantPtPerCount` counts counters only on the source or the affected creature."
+    },
+    {
+      "name": "Display of Dominance",
+      "needs": [
+        "static:cant-be-targeted-by-filter"
+      ],
+      "why": "Mode 2: blue or black spells your opponents control can't target permanents you control this turn, later arrivals included — no such turn-long rule."
+    },
+    {
+      "name": "Qarsi Deceiver",
+      "needs": [
+        "cost:spend-only-turn-face-up"
+      ],
+      "why": "Mana spendable only on face-down spells, morph costs and turning manifests face up — the last two are special actions."
+    },
+    {
+      "name": "Gate Smasher",
+      "needs": [
+        "static:equip-only-to-filter"
+      ],
+      "why": "\"Equip only to a creature with toughness 4 or greater\" — no equip restriction, nor its unattach."
+    },
+    {
+      "name": "Crater Elemental",
+      "needs": [
+        "effect:set-base-power-only"
+      ],
+      "why": "\"Has base power 8\" alone: `animate` sets base power and toughness together."
+    },
+    {
+      "name": "Obscuring Aether",
+      "needs": [
+        "effect:turn-face-down"
+      ],
+      "why": "\"Turn this enchantment face down\": nothing turns a permanent face down but manifest and cloak."
+    },
+    {
+      "name": "Hedonist's Trove",
+      "needs": [
+        "static:play-from-linked-exile-once-per-turn"
+      ],
+      "why": "Play from among cards exiled with it, spells only once each turn: `playFromExile` can't say \"exiled with this\" or limit the spells."
+    },
+    {
+      "name": "Risen Executioner",
+      "needs": [
+        "cost:self-graveyard-cast-cost-increase"
+      ],
+      "why": "Castable from your graveyard for {1} more per other creature card there: `castFromGraveyardIf` takes only a condition."
+    },
+    {
+      "name": "Graceblade Artisan",
+      "needs": [
+        "amount:auras-attached-to-self"
+      ],
+      "why": "+2/+2 for each Aura attached to it: `grantPtPerCount` can't count the Auras on the creature itself."
+    },
+    {
+      "name": "Dragon Hunter",
+      "needs": [
+        "static:block-as-though-reach-filter"
+      ],
+      "why": "\"Can block Dragons as though it had reach\": blocking a flier looks only at the reach keyword."
+    },
+    {
+      "name": "Lurking Arynx",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "\"Target creature blocks this creature this turn if able\": `restrict` has no such restriction."
+    },
+    {
+      "name": "Qal Sisma Behemoth",
+      "needs": [
+        "cost:attack-block-cost-self"
+      ],
+      "why": "Can't block or attack unless its controller pays {1}: `attackTax` is only the Propaganda kind."
+    },
+    {
+      "name": "Enduring Scalelord",
+      "needs": [
+        "trigger:counters-put-other"
+      ],
+      "why": "\"Whenever one or more +1/+1 counters are put on another creature you control\": `counters-put` has no `otherOnly`."
+    },
+    {
+      "name": "Icefall Regent",
+      "needs": [
+        "cost:cost-increase-if-targets"
+      ],
+      "why": "Spells that target it cost {2} more: `targetedBySpellsCost` takes only life."
+    },
+    {
+      "name": "Myth Realized",
+      "needs": [
+        "effect:animate-with-cda-pt"
+      ],
+      "why": "Its P/T while animated tracks its lore counters: `animate` reads P/T once."
+    },
+    {
+      "name": "Draconic Roar",
+      "needs": [
+        "cost:additional-cost-reveal"
+      ],
+      "why": "The optional Dragon reveal as an additional cost."
+    },
+    {
+      "name": "Foul-Tongue Invocation",
+      "needs": [
+        "cost:additional-cost-reveal"
+      ],
+      "why": "The optional Dragon reveal as an additional cost."
+    },
+    {
+      "name": "Revealing Wind",
+      "needs": [
+        "effect:look-at-face-down-permanents"
+      ],
+      "why": "\"Look at each face-down creature that's attacking or blocking\" — nothing lets a player look at another's face-down permanents."
+    },
+    {
+      "name": "Keeper of the Lens",
+      "needs": [
+        "effect:look-at-face-down-permanents"
+      ],
+      "why": "\"You may look at face-down creatures you don't control any time.\""
+    },
+    {
+      "name": "Shorecrasher Elemental",
+      "needs": [
+        "effect:flicker-return-face-down"
+      ],
+      "why": "\"Exile this creature, then return it face down\": `flicker` has no face-down return."
+    },
+    {
+      "name": "Orator of Ojutai",
+      "needs": [
+        "cost:additional-cost-reveal"
+      ],
+      "why": "The optional Dragon reveal; behold's bonus would carry to a copy where the ruling says only a revealed card does."
+    },
+    {
+      "name": "Dragonlord's Prerogative",
+      "needs": [
+        "cost:additional-cost-reveal"
+      ],
+      "why": "The optional Dragon reveal, with \"can't be countered\" riding on it."
+    },
+    {
+      "name": "Center Soul",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Protection from a colour chosen as it resolves: protection exists only as a static."
+    },
+    {
+      "name": "Pristine Skywise",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "The same chosen-colour protection on its cast trigger."
+    },
+    {
+      "name": "Living Lore",
+      "needs": [
+        "replacement:as-enters-exile-from-graveyard"
+      ],
+      "why": "\"As this enters, exile an instant or sorcery card from your graveyard\" — as an enters trigger the 0/0 would die first."
+    },
+    {
+      "name": "Hardened Berserker",
+      "needs": [
+        "effect:next-spell-cost-reduction"
+      ],
+      "why": "\"The next spell you cast this turn costs {1} less\": a player's `reduceSpells` lowers every spell for the rest of the turn."
+    }
+  ]
+}

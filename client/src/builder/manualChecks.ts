@@ -8161,9 +8161,65 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
-    'Wretched Gryff: one emerge cast per creature, priced with its mana value off',
+    'Wretched Gryff: emerge, sacrificing a creature to pay less',
     board({
-      you: { bf: ['Island*4', 'Hill Giant', 'Grizzly Bears'], hand: ['Wretched Gryff'] },
+      you: { bf: ['Island*2', 'Hill Giant', 'Grizzly Bears'], hand: ['Wretched Gryff'] },
     }),
+  ),
+  preset(
+    "Sinuous Vermin: menace once it's monstrous",
+    board({
+      you: { bf: ['Sinuous Vermin', 'Swamp*5'] },
+    }),
+  ),
+  preset(
+    'Hinterland Logger: transforms after a turn with no spells',
+    board({
+      you: { bf: ['Hinterland Logger', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Startled Awake: comes back from the graveyard as Persistent Nightmare',
+    board({
+      you: { bf: ['Island*5'], gy: ['Startled Awake'] },
+    }),
+  ),
+  preset(
+    'Boulder Salvo: its surge cost is offered after you cast another spell',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Shock', 'Boulder Salvo'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Lava Coil: a creature that survives it is exiled when it dies later that turn',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Lava Coil', 'Shock'] },
+      opp: { bf: ['Colossal Dreadmaw'] },
+    }),
+  ),
+  preset(
+    "Goblin Glory Chaser: menace once it's renowned",
+    board({
+      you: { bf: ['Goblin Glory Chaser'] },
+    }),
+  ),
+  preset(
+    "Aragorn, Hornburg Hero: the hit that makes a creature renowned doesn't double its counters",
+    board({
+      you: { bf: ['Aragorn, Hornburg Hero', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Screamreach Brawler: dashed in, it attacks at once and comes back to your hand',
+    board({ you: { bf: ['Mountain*3'], hand: ['Screamreach Brawler'] } }),
+  ),
+  preset(
+    'Ragavan, Nimble Pilferer: the command zone offers both ways to cast it',
+    board({ you: { cmd: ['Ragavan, Nimble Pilferer'], bf: ['Mountain*2'] } }),
+  ),
+  preset(
+    "Dromoka's Gift: bolster asks only between the creatures tied for least toughness",
+    board({ you: { bf: ['Grizzly Bears', 'Grizzly Bears', 'Craw Wurm', 'Forest*5'], hand: ["Dromoka's Gift"] } }),
   ),
 ]

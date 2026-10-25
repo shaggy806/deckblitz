@@ -10,7 +10,7 @@ export default defineCard({
   subtypes: ["Dinosaur"],
   power: 4,
   toughness: 8,
-  alternativeCost: { mana: "{6}{U}", keyword: "emerge", emerge: { filter: { type: "creature" } } },
+  emerge: { cost: "{6}{U}" },
   text: "Emerge {6}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen this creature enters, if you cast it, return each non-Dinosaur creature to its owner's hand.",
   triggered: [
     {

@@ -1,0 +1,551 @@
+{
+  "batch": "B144",
+  "status": "complete",
+  "ranks": "EDHREC ranks 7181–7451 (the next 60 untriaged by rank), and the 17 stale records whose recorded blockers — improvise, aftermath, embalm, the next untap step skipped by filter — were built since",
+  "authored": [
+    {
+      "name": "Arc Reactor",
+      "files": [
+        "engine/src/cards/pool/arc-reactor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Icebreaker Kraken",
+      "files": [
+        "engine/src/cards/pool/icebreaker-kraken.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Organic Extinction",
+      "files": [
+        "engine/src/cards/pool/organic-extinction.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Saheeli's Directive",
+      "files": [
+        "engine/src/cards/pool/saheelis-directive.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Embodiment of Insight",
+      "files": [
+        "engine/src/cards/pool/embodiment-of-insight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Druids' Repository",
+      "files": [
+        "engine/src/cards/pool/druids-repository.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonlord Ojutai",
+      "files": [
+        "engine/src/cards/pool/dragonlord-ojutai.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hero of Iroas",
+      "files": [
+        "engine/src/cards/pool/hero-of-iroas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Creeping Renaissance",
+      "files": [
+        "engine/src/cards/pool/creeping-renaissance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corpse Churn",
+      "files": [
+        "engine/src/cards/pool/corpse-churn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dragon Throne of Tarkir",
+      "files": [
+        "engine/src/cards/pool/dragon-throne-of-tarkir.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lull",
+      "files": [
+        "engine/src/cards/pool/lull.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Airborne Aid",
+      "files": [
+        "engine/src/cards/pool/airborne-aid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Novijen, Heart of Progress",
+      "files": [
+        "engine/src/cards/pool/novijen-heart-of-progress.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magus of the Vineyard",
+      "files": [
+        "engine/src/cards/pool/magus-of-the-vineyard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Saheeli's Artistry",
+      "files": [
+        "engine/src/cards/pool/saheelis-artistry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kappa Cannoneer",
+      "files": [
+        "engine/src/cards/pool/kappa-cannoneer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Synth Infiltrator",
+      "files": [
+        "engine/src/cards/pool/synth-infiltrator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Whir of Invention",
+      "files": [
+        "engine/src/cards/pool/whir-of-invention.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leonin Relic-Warder",
+      "files": [
+        "engine/src/cards/pool/leonin-relic-warder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Icy Blast",
+      "files": [
+        "engine/src/cards/pool/icy-blast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lodestone Golem",
+      "files": [
+        "engine/src/cards/pool/lodestone-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spidersilk Armor",
+      "files": [
+        "engine/src/cards/pool/spidersilk-armor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Split Decision",
+      "files": [
+        "engine/src/cards/pool/split-decision.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jeskai Barricade",
+      "files": [
+        "engine/src/cards/pool/jeskai-barricade.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Raphael, the Muscle",
+      "files": [
+        "engine/src/cards/pool/raphael-the-muscle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haunted Fengraf",
+      "files": [
+        "engine/src/cards/pool/haunted-fengraf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sword of the Meek",
+      "files": [
+        "engine/src/cards/pool/sword-of-the-meek.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bottle-Cap Blast",
+      "files": [
+        "engine/src/cards/pool/bottle-cap-blast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Universal Surveillance",
+      "files": [
+        "engine/src/cards/pool/universal-surveillance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Growth Spasm",
+      "files": [
+        "engine/src/cards/pool/growth-spasm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ring of Evos Isle",
+      "files": [
+        "engine/src/cards/pool/ring-of-evos-isle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mass Appeal",
+      "files": [
+        "engine/src/cards/pool/mass-appeal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Casey Jones, Back Alley Brute",
+      "files": [
+        "engine/src/cards/pool/casey-jones-back-alley-brute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shadow Alley Denizen",
+      "files": [
+        "engine/src/cards/pool/shadow-alley-denizen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pattern of Rebirth",
+      "files": [
+        "engine/src/cards/pool/pattern-of-rebirth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grand Architect",
+      "files": [
+        "engine/src/cards/pool/grand-architect.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Horned Sliver",
+      "files": [
+        "engine/src/cards/pool/horned-sliver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Might Sliver",
+      "files": [
+        "engine/src/cards/pool/might-sliver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Primal Bellow",
+      "files": [
+        "engine/src/cards/pool/primal-bellow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scytheclaw",
+      "files": [
+        "engine/src/cards/pool/scytheclaw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vivid Crag",
+      "files": [
+        "engine/src/cards/pool/vivid-crag.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Indulge // Excess",
+      "needs": [
+        "effect:delayed-trigger-rest-of-turn",
+        "amount:creatures-dealt-combat-damage-to-player-this-turn"
+      ],
+      "why": "Aftermath is built; Indulge's trigger lasts the rest of the turn, and Excess counts the creatures you controlled that dealt combat damage to a player this turn, which nothing records."
+    },
+    {
+      "name": "Blazing Archon",
+      "needs": [
+        "static:cant-attack-you-player-only"
+      ],
+      "why": "`cantAttackController` protects your planeswalkers too; the ruling says they can still be attacked."
+    },
+    {
+      "name": "Asylum Visitor",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "\"if that player has no cards in hand\" of the upkeep's active player: the hand-size condition reads only you or each player."
+    },
+    {
+      "name": "Dromoka's Command",
+      "needs": [
+        "replacement:prevent-damage-by-target-this-turn"
+      ],
+      "why": "Mode 1, \"prevent all damage target instant or sorcery spell would deal this turn\", has no vocabulary."
+    },
+    {
+      "name": "Spectra Ward",
+      "needs": [
+        "static:protection-doesnt-remove-source"
+      ],
+      "why": "\"This effect doesn't remove Auras\": protection from each colour would put every coloured Aura on it, itself included, into the graveyard."
+    },
+    {
+      "name": "Bog Witch",
+      "needs": [
+        "cost:mana-ability-discard"
+      ],
+      "why": "A mana ability's activation never pays its discard cost (an engine gap — docs/engine-gaps.md)."
+    },
+    {
+      "name": "Warrior's Oath",
+      "needs": [
+        "effect:extra-turn-scoped-effects"
+      ],
+      "why": "\"At the beginning of that turn's end step, you lose the game\": no delayed trigger scoped to the extra turn."
+    },
+    {
+      "name": "Nicol Bolas, Planeswalker",
+      "needs": [
+        "effect:discard-controller-of-target"
+      ],
+      "why": "The −9's \"that planeswalker's controller discards seven cards, then sacrifices seven permanents\": discard and sacrifice read only a player slot."
+    },
+    {
+      "name": "Delirium Skeins",
+      "needs": [
+        "effect:hidden-simultaneous-choices"
+      ],
+      "why": "Its ruling: each player chooses three cards without seeing the others' choices, then all are discarded at once; a scoped discard discards each player's cards before the next chooses (docs/engine-gaps.md)."
+    },
+    {
+      "name": "Archway of Innovation",
+      "needs": [
+        "static:grant-improvise"
+      ],
+      "why": "\"The next spell you cast this turn has improvise\": improvise is only a printed field."
+    },
+    {
+      "name": "Inspiring Statuary",
+      "needs": [
+        "static:grant-improvise"
+      ],
+      "why": "\"Nonartifact spells you cast have improvise\": improvise is only a printed field."
+    },
+    {
+      "name": "Cursecloth Wrappings",
+      "needs": [
+        "effect:grant-embalm"
+      ],
+      "why": "\"Target creature card in your graveyard gains embalm until end of turn\": `embalmAbility` is printed-only."
+    },
+    {
+      "name": "Plague of Vermin",
+      "needs": [
+        "effect:repeat-process"
+      ],
+      "why": "\"Each player may pay any amount of life. Repeat this process until no one pays life.\""
+    },
+    {
+      "name": "Legion's Initiative",
+      "needs": [
+        "effect:delayed-trigger-next-combat-phase"
+      ],
+      "why": "\"At the beginning of the next combat, return those cards\": no next-combat delayed timing."
+    },
+    {
+      "name": "Whirlpool Warrior",
+      "needs": [
+        "effect:shuffle-hand-draw-that-many"
+      ],
+      "why": "\"Each player shuffles the cards from their hand into their library, then draws that many cards.\""
+    },
+    {
+      "name": "Desertion",
+      "needs": [
+        "effect:counter-into-battlefield"
+      ],
+      "why": "A countered artifact or creature spell onto the battlefield under your control: `counter`'s `into` is a hand or exile."
+    },
+    {
+      "name": "The Blue Spirit",
+      "needs": [
+        "effect:first-creature-spell-flash"
+      ],
+      "why": "\"The first creature spell you cast each turn as though it had flash\": `castAsThoughFlash` has no first-each-turn form."
+    },
+    {
+      "name": "Golem-Skin Gauntlets",
+      "needs": [
+        "effect:count-equipment-attached-to-source"
+      ],
+      "why": "+1/+0 for each Equipment attached to the equipped creature: `grantPtPerCount` can't count those."
+    },
+    {
+      "name": "Ugin's Nexus",
+      "needs": [
+        "replacement:skip-extra-turns"
+      ],
+      "why": "No replacement that skips extra turns, nor \"would be put into a graveyard … instead exile it and take an extra turn\"."
+    },
+    {
+      "name": "Magister Sphinx",
+      "needs": [
+        "effect:life-total-becomes"
+      ],
+      "why": "\"Target player's life total becomes 10\"."
+    },
+    {
+      "name": "Sin Prodder",
+      "needs": [
+        "decision:any-opponent-may"
+      ],
+      "why": "\"Any opponent may …; if a player does\": the first opponent's yes ends it, where `each-player-may` lets each say yes."
+    },
+    {
+      "name": "Mystic Speculation",
+      "needs": [
+        "keyword:buyback"
+      ],
+      "why": "Buyback isn't built."
+    },
+    {
+      "name": "Mindleech Mass",
+      "needs": [
+        "zone:cast-from-opponents-hand"
+      ],
+      "why": "\"You may cast a spell from among those cards\" from the damaged player's hand: `cast-now` can't name an opponent's hand."
+    },
+    {
+      "name": "Commit // Memory",
+      "needs": [
+        "effect:shuffle-hand-and-graveyard-into-library"
+      ],
+      "why": "Aftermath is built; Memory's \"each player shuffles their hand and graveyard into their library\" isn't."
+    },
+    {
+      "name": "Insult // Injury",
+      "needs": [
+        "static:damage-cant-be-prevented"
+      ],
+      "why": "Aftermath is built; Insult's \"damage can't be prevented this turn\" isn't."
+    },
+    {
+      "name": "Ironheart, Clever Champion",
+      "needs": [
+        "static:grant-improvise"
+      ],
+      "why": "\"Noncreature spells you cast have improvise\": improvise is only a printed field."
+    },
+    {
+      "name": "Vizier of Many Faces",
+      "needs": [
+        "replacement:clone-exception-if-embalmed"
+      ],
+      "why": "Embalm is built; the Clone's exception applies only to the embalmed token, and `copyOnEnter` has no such condition."
+    },
+    {
+      "name": "Leonin Arbiter",
+      "needs": [
+        "static:cant-search-library"
+      ],
+      "why": "\"Players can't search libraries\", and the {2} special action each player may pay to ignore it."
+    },
+    {
+      "name": "Colossus of Akros",
+      "needs": [
+        "condition:source-monstrous"
+      ],
+      "why": "\"As long as this creature is monstrous\": nothing reads `monstrous`."
+    },
+    {
+      "name": "Celebr-8000",
+      "needs": [
+        "mechanic:dice-rolls",
+        "condition:dice-rolled-doubles"
+      ],
+      "why": "Two six-sided dice with a result table per die, and \"if you rolled doubles\"."
+    },
+    {
+      "name": "O-Naginata",
+      "needs": [
+        "static:equip-only-to-filter"
+      ],
+      "why": "\"Can be attached only to a creature with power 3 or greater.\""
+    },
+    {
+      "name": "Nature's Chosen",
+      "needs": [
+        "cost:tap-enchanted-permanent"
+      ],
+      "why": "\"Tap enchanted creature\" as a cost, \"activate only if enchanted creature is white and untapped\"."
+    },
+    {
+      "name": "Dragon Broodmother",
+      "needs": [
+        "mechanic:token-devour"
+      ],
+      "why": "Its Dragon tokens have devour 2, and a token is never asked its devour choice as it's created (docs/engine-gaps.md)."
+    },
+    {
+      "name": "Malignus",
+      "needs": [
+        "amount:highest-life-total",
+        "static:damage-cant-be-prevented"
+      ],
+      "why": "Half the highest life total among your opponents, and damage that can't be prevented."
+    },
+    {
+      "name": "Vesuvan Shapeshifter",
+      "needs": [
+        "effect:turn-face-down"
+      ],
+      "why": "Turning itself face down, a copy lasting until then, and the copy choice as it's turned face up."
+    }
+  ]
+}

@@ -58,6 +58,11 @@ export type CastVia =
    * owner's hand (`webSlingingReturn`). An alternative cost (601.2b,
    * 601.2f–h); every timing rule still applies. */
   | "web-slinging"
+  /** For its emerge cost (rule 702.119a): from the hand or the command
+   * zone, sacrificing a creature (the cast's `sacrifice`) whose mana value
+   * comes off the total cost. An alternative cost; every timing rule still
+   * applies. */
+  | "emerge"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
@@ -86,6 +91,10 @@ export type CastVia =
   | "warp"
   /** Blitz (rule 702.152a) — cast from the hand for its blitz cost. */
   | "blitz"
+  /** Dash (rule 702.109a) — cast from the hand (or a commander from the
+   * command zone) for its dash cost: haste, and back to its owner's hand at
+   * the next end step. */
+  | "dash"
   /** Impending (rule 702.176a) — cast from the hand (or a commander from
    * the command zone) for its impending cost, an alternative cost: the
    * permanent enters with N time counters and isn't a creature while it has
@@ -894,6 +903,11 @@ export type LegalAction =
        * one offer per creature that could be, echoed back as
        * `webSlingingReturn`. */
       readonly webSlingingReturn?: { readonly object: ObjectId; readonly cardName: string };
+      /** An emerge variant's creature to sacrifice (rule 702.119a): one offer
+       * per creature that could be, priced with its mana value off and
+       * echoed back as the cast's `sacrifice` (the offer's `sacrifice`
+       * choices are just it). */
+      readonly emergeSacrifice?: { readonly object: ObjectId; readonly cardName: string; readonly manaValue: number };
       /** Set for a *targeted modal* spell (rule 700.2 — ROADMAP Phase 11 EG-2):
        * the driver picks `minModes..maxModes` of `modes` (each a text label +
        * its own target specs), then targets for the chosen modes, then echoes
@@ -1033,8 +1047,9 @@ export type LegalAction =
       readonly overloadCost?: string;
       /** `"cleave"` when this `overload` variant is a cleave (rule 702.148 —
        * `CardDefinition.overload.keyword`), whose `targetSpecs` are the
-       * cleaved text's; for labelling. */
-      readonly overloadKeyword?: "cleave" | "mutate";
+       * cleaved text's; `"awaken"` an awaken cast (rule 702.113), whose
+       * `targetSpecs` add the land; for labelling. */
+      readonly overloadKeyword?: "cleave" | "mutate" | "awaken";
       /** A conditional free-cast permission (`CardDefinition.freeCastIf`) is
        * enumerated **twice** when its condition is currently met — once
        * paying the printed cost, once free — the same "one entry per
@@ -1586,6 +1601,9 @@ export type LegalAction =
       /** Set when it's which creature blights this many (rule 701.68a):
        * exactly one, and the counters go on it. */
       readonly blight?: number;
+      /** Set when it's which of the least-toughness creatures bolsters this
+       * many (rule 701.39a): exactly one, and the +1/+1 counters go on it. */
+      readonly bolster?: number;
     }
   | {
       readonly kind: "scry";

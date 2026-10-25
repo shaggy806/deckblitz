@@ -129,3 +129,10 @@ A few lines: how many of the set's new cards are in now,
 how many blocked and the feature blocking the most, anything built or taught
 to the scaffolder. Then offer the next batch — the rest of the set, or the
 next older set — but don't start it unasked.
+
+**One batch per session** (`agent-batches.md`, "One batch per session"): after
+the push and the report, stop. Leave the hand-off in this skill's `BACKLOG.md`
+line — the next batch, and any feature already researched for it — and offer
+the next batch as a new session (`/author-by-set`), not in this one —
+unless the user asks to carry on here: the lead's growing context costs more
+than the agents do.

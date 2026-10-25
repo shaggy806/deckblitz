@@ -59,10 +59,13 @@ section keeps only what to do next.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
+  untriaged cards by rank: rank 8207 on (batch 148 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
   leading features built alongside in worktrees. The nine other starter precons' 25 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
-- **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
+- **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
+  banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
+  multi-blocking line under the oldest-first walk below), now "until end of turn, whenever …" is
+  built (batch 147). Before it
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
   `cost:remove-counters-from-chosen` (21, 14), `effect:effect-on-enchanted-permanent` (21, 16),
   `decision:variable-target-count` (19, 15), `decision:owner-chooses-top-or-bottom` (19, 18),
@@ -145,49 +148,55 @@ section keeps only what to do next.
   Hour of Devastation, on aftermath, exert as a cost and "shuffle your graveyard into your
   library"; batch 139 Amonkhet, on embalm, "lands you control don't untap during your next
   untap step" and "discard any number of cards"; batch 140 Aether Revolt, on improvise;
-  batch 141 the rest of Commander 2016 and Kaladesh, on undaunted; batch 142 Conspiracy: Take
-  the Crown, on "is monstrous", its draft-matters cards played as outside a draft; batch 143
-  the rest of Eldritch Moon, on emerge);
-  **next, Shadows over Innistrad** (168 left), then Oath of the Gatewatch. Leads from batch 143:
-  the old werewolf transform, "if no spells were cast last turn" (`condition:werewolf-transform-spells-last-turn`
-  — Ulrich of the Krallenhorde; ~30 Innistrad and Shadows over Innistrad werewolves, so build it
-  first for SOI), meld (`mechanic:meld` — EMN's three pairs), emerge's unbuilt forms (granting it —
-  Herigast; "if its emerge cost was paid" — Adipose Offspring; Foul Emissary's "when you sacrifice
-  this creature while casting a spell with emerge"). Leads from batch 142: "whenever you
-  become the monarch" (`trigger:becomes-monarch` — Custodi Lich, Knights of the Black Rose),
-  a mana-value prohibition read
-  before X is announced (Sanctum Prelate — see Engine rules gaps). Leads from
-  batch 141: "whenever this creature crews a Vehicle" (`trigger:crews-or-saddles` — Speedway
-  Fanatic, Veteran Motorist, Gearshift Ace), "whenever you get one or more {E}"
-  (`trigger:energy-gained` — Territorial Gorger, Fabrication Module), "pay any amount of {E}"
-  (`cost:pay-any-amount-of-energy` — Harnessed Lightning, Die Young), granting improvise
-  (`static:grant-improvise` — Inspiring Statuary, Ironheart; Archway of Innovation's next-spell
-  form), and `damage-all`'s `controlledByTarget` doing nothing on a planeswalker target
-  (`effect:damage-all-controller-of-target`, Chandra, Pyrogenius — `docs/card-blockers.md`
-  batch 141). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
+  batches 141-143 and 146-150 Commander 2016, Kaladesh, Conspiracy: Take the Crown and Eldritch
+  Moon, each walked twice on two branches and merged 2026-10-25 (undaunted, "is monstrous",
+  melee's count, emerge and "until end of turn, whenever …" built); batch 151 Shadows over
+  Innistrad, on the werewolves' "if no spells were cast last turn" and damage to a trigger's object;
+  batch 152 Oath of the Gatewatch and Commander 2015, on surge and "if that creature would die
+  this turn, exile it instead" with its "dealt damage this way" form; batch 153 the rest of
+  Battle for Zendikar, on awaken; batch 154 the rest of Magic Origins, on renown; batch 155
+  Dragons of Tarkir, on dash and bolster);
+  **next, Fate Reforged** (103 left) — one batch, 4 agents. Its mechanics are all built
+  already: manifest, delve, bolster and dash (both from batch 155), prowess, and ferocious,
+  raid and outlast as conditions and abilities the pool has. Batch 155's leading blocker: the
+  optional "you may reveal a Dragon card from your hand" additional cost with "if you revealed a
+  Dragon card or controlled a Dragon as you cast this" (`cost:additional-cost-reveal` — 7, six
+  of them the set's own, every one on nothing else; a copy keeps the bonus only from a revealed
+  card, so behold's kicker won't do); then a chosen-colour protection grant
+  (`effect:grant-protection-choice`, 19 over the pool). Batch 154's blockers are one each, no leader (`docs/card-blockers.md`). Batch 153's leading blocker:
+  the processors' "put a card an opponent owns from exile into that player's graveyard"
+  (`cost:put-opponent-exiled-card-into-graveyard` — 12, every processor in the set, as a cost
+  or a "you may … if you do"). Batch 152's leading blockers: "choose the same mode more
+  than once" (`effect:modal-repeat-modes` — the three Confluences), "target opponent exiles
+  cards from their hand" (`effect:target-player-exiles-from-hand` — Mindmelter, Witness the
+  End). Batch 150's leading blockers:
+  meld (`mechanic:meld`, 15 cards now), the Conspiracy draft's own abilities
+  (`mechanic:draft-matters`, 15 — kept blocked, even the two whose draft text leaves a vanilla
+  body), the secret-discard gap (`effect:hidden-simultaneous-choices`, 14) and "can block an
+  additional creature" (`static:block-additional-creature`, 14). Batch 149's: undaunted
+  (`keyword:undaunted`, 6) and "whenever this creature crews a Vehicle"
+  (`trigger:crews-or-saddles`, 5); "pay any amount of {E}" (`cost:pay-any-amount-of-energy`) is
+  at 12. The earlier improvise
+  cards were rechecked in batch 144; three wait on granting it (`static:grant-improvise`). Leads: "discard up to N cards" (Daretti, Scrap Savant, Tersa, Cathartic Pyre —
   Kinetic Augur already does it as a 0/1/2 modal count, so it may already be expressible), "choose a card name" (`decision:choose-card-name`
   — Failure // Comply, Gideon's Intervention, Dispossess, Sorcerous Spyglass), "can block an
   additional creature" (`static:block-additional-creature` — 4), "your life total becomes N"
   (`effect:life-total-becomes` — 7)
-  (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`), and
-  "if that creature would die this turn, exile it instead" five
-  (`replacement:target-exile-if-dies-this-turn` and its kin). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
+  (`npm run cards:sets -w engine -- --next 60`). Counting cards in exile now blocks six (`amount:count-in-exile`). Leading blockers after M20: "you may choose not to untap" (`static:may-choose-not-to-untap`, 4) with "for as
   long as it stays tapped" (`effect:duration-while-source-tapped`, 3), an Aura's lasting "loses
   all abilities" (`static:static-lose-all-abilities`), and "put into a graveyard from the
   battlefield this turn" (`filter:put-into-graveyard-from-battlefield-this-turn` — Salvager of
   Ruin, Gerrard, Weatherlight Hero). The most shared blocks of the last three
-  sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
-  6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
-  Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative
+  sets (the rest-of-turn triggered ability that led them was built in batch 147): the Mastery cycle's "if the alternative
   cost was paid" (`condition:alternative-cost-paid`, 4), "you've discarded a card this turn"
   (`stat:cards-discarded-this-turn`, 4) and an Aura granting the Equipment it enchants a static
   (`static:grant-static-ability`, 3 — the Runes).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
   declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
   Aradesh.
-  The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
+  The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 15 cards:
   the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
-  Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
+  Hanweir Battlements, Bruna, Gisela, Graf Rats and the Eldritch Moon results …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
   Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …).
   Phyrexia: All Will Be One's blocks are
   nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,
@@ -250,9 +259,11 @@ there and move this line to `COMPLETED.md`.
 
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.
 - **A mana-value cast prohibition reads an X spell before X is chosen** (202.3e): Sanctum Prelate waits on it.
+- **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins, Stronghold Rats and Cunning Lethemancer (`effect:hidden-simultaneous-choices`).
+- **A target cost reduction two slots can earn is offered unrestricted** (601.2f): `targetReductionOptions` narrows only a lone earning slot, so This Town Ain't Big Enough under a tax it can pay only reduced is offered two non-earning targets and refused at the cast (fuzzer, batch 151's forced decks, seed 19).
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
-- **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
+- **Blitz, dash, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **Not modeled**: banding, Companion, word-replacing text change (612.2).
@@ -269,8 +280,11 @@ there and move this line to `COMPLETED.md`.
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
 
+- **A mana ability's discard cost is never paid** (605.3b): the mana ability path returns before the discard — Bog Witch waits (`cost:mana-ability-discard`).
+- **A token with devour never devours** (702.82a): token creation never calls `askEnterChoice` — Dragon Broodmother waits (`mechanic:token-devour`).
 - **Convoke with a target-dependent cost.**
 - **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
+- **A double-faced Aura put onto the battlefield transformed is asked what it enchants** (712.14a): `askEnterChoice` reads its front face, so Skin Invasion's back face returns only with something to enchant, unattached; blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`).
 
 ## Bots
 

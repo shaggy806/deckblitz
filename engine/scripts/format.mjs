@@ -43,6 +43,8 @@ export const makeFormatter = (game) => {
         return `${name(e.object)} transforms (now ${e.front ? "front" : "back"} face)`;
       case "became-monstrous":
         return `${name(e.object)} becomes monstrous`;
+      case "became-renowned":
+        return `${name(e.object)} becomes renowned`;
       case "permanent-exerted":
         return `${e.player} exerts ${name(e.object)}`;
       case "gift-promised":

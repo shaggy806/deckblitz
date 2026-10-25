@@ -366,6 +366,9 @@ export type CountSpec =
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
   | "cards-in-your-hand"
+  /** How many cards are in all players' hands together (Werewolf of
+   * Ancient Hunger). */
+  | "cards-in-all-hands"
   /** Battlefield permanents matching a filter, a token stack counting as
    * every token in it (`permanentCount`) — Beanstalk Giant's "the number of
    * lands you control" is `{ countOf: { type: "land", controlledBy: "you" } }`.
@@ -680,6 +683,14 @@ export type StaticCondition =
   /** Who has the initiative (rule 726): you, or any opponent. False while
    * nobody does. */
   | { readonly kind: "initiative"; readonly who: "you" | "opponent" }
+  /** Spells cast during the previous turn, whoever's it was — the Innistrad
+   * werewolves' transform triggers (Hinterland Logger): `none` is "if no
+   * spells were cast last turn", `byOnePlayerAtLeast: 2` "if a player cast
+   * two or more spells last turn" — one player's, never several players'
+   * together (the rulings). It looks at the whole previous turn, wherever the
+   * source was then; on the game's first turn no spells were cast last turn.
+   * Read from `GameState.spellsCastLastTurn`. */
+  | { readonly kind: "spells-cast-last-turn"; readonly none?: true; readonly byOnePlayerAtLeast?: number }
   /** "If you've completed a dungeon" (rule 309.7): you've completed at least
    * one this game. `name` is "if you've completed **Tomb of Annihilation**"
    * (Acererak — under `not` for "haven't"). */
@@ -1107,6 +1118,10 @@ export type StaticCondition =
    * 702.137)? — Rafter Demon's "When this creature enters, **if its
    * spectacle cost was paid**, …"; read like `self-kicked`. */
   | { readonly kind: "self-spectacle-paid" }
+  /** Was the ability's own source cast for its surge cost (rule 702.117a)?
+   * "If its surge cost was paid" (Reckless Bushwhacker, Crush of Tentacles);
+   * read like `self-spectacle-paid`. */
+  | { readonly kind: "self-surge-paid" }
   /**
    * How many counters the ability's own source has — Undying's "**if it had
    * no +1/+1 counters on it**".
@@ -2519,12 +2534,19 @@ export interface CardDefinition {
    * version) and held here with `keyword: "cleave"`. Its `targets` are chosen
    * in place of the printed ones; a copy of a cleaved spell is cleaved too
    * (707.10 — it copies the alternative cost paid), as an overloaded one is.
+   *
+   * Awaken N—[cost] (rule 702.113a) is the same thing again, `keyword:
+   * "awaken"`: cast for [cost] rather than the mana cost, the spell also
+   * puts N +1/+1 counters on target land you control and makes it a 0/0
+   * Elemental creature with haste — its `targets` the printed ones and then
+   * that land, its `effect` the printed one and then that. Written with the
+   * `awaken()` helper.
    */
   readonly overload: {
     readonly cost: string;
     readonly effect: EffectSpec;
     readonly targets?: readonly TargetSpec[];
-    readonly keyword?: "cleave" | "mutate";
+    readonly keyword?: "cleave" | "mutate" | "awaken";
   } | null;
   /**
    * A conditional free-cast permission printed on the spell itself (the CMM
@@ -2561,11 +2583,13 @@ export interface CardDefinition {
    * `keyword: "spectacle"` is **Spectacle [cost]** (rule 702.137a — Skewer
    * the Critics): `{ mana, keyword: "spectacle", condition: SPECTACLE }`,
    * the condition "an opponent lost life this turn"; a spell cast this way
-   * answers `self-spectacle-paid`.
+   * answers `self-spectacle-paid`. `keyword: "surge"` is **Surge [cost]**
+   * (rule 702.117a — Crush of Tentacles): `surge(mana)`, the condition "you
+   * have cast another spell this turn"; it answers `self-surge-paid`.
    */
   readonly alternativeCost: {
     readonly mana: string;
-    readonly keyword?: "spectacle";
+    readonly keyword?: "spectacle" | "surge";
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;
@@ -2783,6 +2807,21 @@ export interface CardDefinition {
    * "web-slinging-mana-value"`). `null` for none.
    */
   readonly webSlinging: { readonly cost: string } | null;
+  /**
+   * Emerge (rule 702.119a) — "you may cast this spell by paying `cost` and
+   * sacrificing a creature rather than paying its mana cost", its total cost
+   * then reduced by an amount of generic mana equal to the sacrificed
+   * creature's mana value (601.2f, after any increase). An alternative cost
+   * (118.9a), from the hand or — a commander — the command zone, under every
+   * normal timing rule. Offered once per creature the caster could sacrifice
+   * (`LegalAction.emergeSacrifice`), each priced with that creature's mana
+   * value off, and echoed back as the cast's `sacrifice`: the creature is
+   * chosen as the cost is chosen (702.119c) and sacrificed as it's paid,
+   * after it has tapped for mana where it can (601.2g). `from` is "Emerge
+   * from [quality]" (702.119b): a permanent matching it rather than a
+   * creature. The spell's `castVia` is `"emerge"`. `null` for none.
+   */
+  readonly emerge: { readonly cost: string; readonly from?: CardFilter } | null;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
    * exiled instead of going anywhere else from the stack. `null` for a card
@@ -2869,6 +2908,16 @@ export interface CardDefinition {
    * rulings). `null` for none.
    */
   readonly blitz: { readonly cost: string } | null;
+  /**
+   * Dash (rule 702.109a — Ragavan, Nimble Pilferer): "You may cast this card
+   * by paying [cost] rather than its mana cost"; a permanent cast that way has
+   * haste for as long as it stays this permanent, and is returned to its
+   * owner's hand at the beginning of the next end step (a delayed trigger). An
+   * alternative cost from the hand, or a commander from the command zone,
+   * offered as its own `cast-spell` (`via: "dash"`). A copy of it gets none
+   * of that. `null` for none.
+   */
+  readonly dash: { readonly cost: string } | null;
   /**
    * Impending (rule 702.176a — Overlord of the Mistmoors: "Impending 4—
    * {2}{W}{W}"): "You may choose to pay [cost] rather than pay this spell's
@@ -3179,12 +3228,14 @@ const PRINTED_ABILITY: {
   aftermath: (def) => def.aftermath,
   sneak: (def) => def.sneak !== null,
   webSlinging: (def) => def.webSlinging !== null,
+  emerge: (def) => def.emerge !== null,
   harmonize: (def) => def.harmonize !== null,
   madness: (def) => def.madness !== null,
   foretell: (def) => def.foretell !== null,
   plot: (def) => def.plot !== null,
   warp: (def) => def.warp !== null,
   blitz: (def) => def.blitz !== null,
+  dash: (def) => def.dash !== null,
   impending: (def) => def.impending !== null,
   freerunning: (def) => def.freerunning !== null,
   evoke: (def) => def.evoke !== null,
@@ -3376,6 +3427,7 @@ interface CardDraft {
   aftermath?: boolean;
   sneak?: { readonly cost: string };
   webSlinging?: { readonly cost: string };
+  emerge?: NonNullable<CardDefinition["emerge"]>;
   flashback?: NonNullable<CardDefinition["flashback"]>;
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };
@@ -3384,6 +3436,7 @@ interface CardDraft {
   plot?: { readonly cost: string };
   warp?: { readonly cost: string };
   blitz?: { readonly cost: string };
+  dash?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
   freerunning?: { readonly cost: string };
   evoke?: NonNullable<CardDefinition["evoke"]>;
@@ -3536,12 +3589,14 @@ export function defineCard(draft: CardDraft): CardDefinition {
     aftermath: draft.aftermath ?? false,
     sneak: draft.sneak ?? null,
     webSlinging: draft.webSlinging ?? null,
+    emerge: draft.emerge ?? null,
     harmonize: draft.harmonize ?? null,
     madness: draft.madness ?? null,
     foretell: draft.foretell ?? null,
     plot: draft.plot ?? null,
     warp: draft.warp ?? null,
     blitz: draft.blitz ?? null,
+    dash: draft.dash ?? null,
     impending: draft.impending ?? null,
     freerunning: draft.freerunning ?? null,
     evoke: draft.evoke ?? null,

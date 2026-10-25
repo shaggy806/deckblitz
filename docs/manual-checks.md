@@ -5317,8 +5317,54 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Chaplain's Blessing (gain 5 life). Pass to your end step. Target Grizzly Bears and Hill Giant, and give them 1 and 2.
 - **Expect:** The division step reads "Divide up to 5 +1/+1 counters", and Cast works at 3 of 5. The Bears get one counter and the Giant two.
 
-## Emerge (2026-10-25)
+## Emerge (2026-10-23)
 
-### Wretched Gryff: one emerge cast per creature, priced with its mana value off
-- **Do:** Click Wretched Gryff in your hand.
-- **Expect:** Two casts are offered, "emerge {5}{U}, sacrificing Hill Giant (−4)" and "emerge {5}{U}, sacrificing Grizzly Bears (−2)", and no cast for {7}. Take the Hill Giant one: the Giant is sacrificed, two Islands tap, and you draw a card before the Gryff enters.
+### Wretched Gryff: emerge, sacrificing a creature to pay less
+- **Do:** Click Wretched Gryff in your hand and look at its ways to cast. Cast it the emerge way.
+- **Expect:** One choice reads "(emerge, sacrificing Hill Giant: −4)"; there's none for Grizzly Bears (it would leave {3}{U}, more than your two Islands). Hill Giant goes to your graveyard, both Islands tap, and you draw a card as the Gryff is cast.
+
+### Sinuous Vermin: menace once it's monstrous
+- **Do:** Activate Sinuous Vermin's monstrosity.
+- **Expect:** It gets three +1/+1 counters and shows menace; it didn't have menace before.
+
+## Werewolves (2026-10-23)
+
+### Hinterland Logger: transforms after a turn with no spells
+- **Do:** Cast nothing and pass the turn.
+- **Expect:** As Bob's turn begins, Hinterland Logger transforms into Timber Shredder (4/2, trample).
+
+### Startled Awake: comes back from the graveyard as Persistent Nightmare
+- **Do:** Activate Startled Awake's ability in your graveyard ({3}{U}{U}).
+- **Expect:** It enters as Persistent Nightmare, a 1/1 with skulk — not as the sorcery, and not left in your graveyard.
+
+### Boulder Salvo: its surge cost is offered after you cast another spell
+- **Do:** Click Boulder Salvo in your hand and look at its ways to cast. Then cast Shock at Bob and look again.
+- **Expect:** At first only its {4}{R} cost is offered (you can't pay it). After Shock, a second choice reads "surge {1}{R}", and casting it that way kills Grizzly Bears.
+
+### Lava Coil: a creature that survives it is exiled when it dies later that turn
+- **Do:** Cast Lava Coil on Bob's Colossal Dreadmaw, then cast Shock on it.
+- **Expect:** The Dreadmaw survives Lava Coil (6/6 with 4 damage). Shock kills it, and it goes to exile, not Bob's graveyard.
+
+## Renown (2026-10-24)
+
+### Goblin Glory Chaser: menace once it's renowned
+- **Do:** Attack Bob with Goblin Glory Chaser.
+- **Expect:** It deals 1 damage, gets a +1/+1 counter and shows menace; it didn't have menace before.
+
+### Aragorn, Hornburg Hero: the hit that makes a creature renowned doesn't double its counters
+- **Do:** Attack Bob with Grizzly Bears. Next turn, attack with it again.
+- **Expect:** The first hit gives the Bears one +1/+1 counter (renown), not two. The second hit doubles it to two counters.
+
+## Dash and bolster (2026-10-24)
+
+### Screamreach Brawler: dashed in, it attacks at once and comes back to your hand
+- **Do:** Click Screamreach Brawler and cast it the "(dash)" way. Attack Bob with it, then pass to your end step.
+- **Expect:** It can attack the turn it arrives. At the beginning of your end step it returns to your hand.
+
+### Ragavan, Nimble Pilferer: the command zone offers both ways to cast it
+- **Do:** Click Ragavan in your command zone.
+- **Expect:** A menu offers "Cast Ragavan, Nimble Pilferer" and "Cast Ragavan, Nimble Pilferer (dash)". The dash one taps both Mountains, and Ragavan can attack this turn.
+
+### Dromoka's Gift: bolster asks only between the creatures tied for least toughness
+- **Do:** Cast Dromoka's Gift.
+- **Expect:** You're asked to choose one of your two Grizzly Bears — Craw Wurm can't be picked. The one you choose gets four +1/+1 counters.

@@ -162,6 +162,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // Its `then` reads the beheld card or permanent as target 0.
   behold: none,
+  bolster: none,
   // Its `then` reads the card it picked as target 0.
   "choose-random-card": none,
   "empower-jace": none,
@@ -185,6 +186,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "become-prepared": (n, v) => v.touch(n.target, "help", MINOR),
   destroy: (n, v) => v.touch(n.target, "harm", DECISIVE),
   "put-on-bottom-of-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
+  "exile-if-dies-this-turn": (n, v) => v.touch(n.target, "harm", MINOR),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   // "… target player controls": that player is the one hurt.
   "destroy-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
@@ -325,6 +327,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   populate: none,
   amass: none,
   monstrosity: none,
+  renown: none,
   // It won't untap: a cost when it's your own, a drawback on someone else's.
   exert: (n, v) => v.touch(n.target, "harm", MINOR),
   proliferate: (n, v) => v.child(n.then),

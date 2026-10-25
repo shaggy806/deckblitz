@@ -1180,6 +1180,17 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
     }
   | {
+      /** A permanent became renowned (rule 702.112 — the `renown` effect):
+       * "when this creature becomes renowned" is `who: "self"` (Relic
+       * Seeker), "whenever a creature you control becomes renowned" `who:
+       * "you-control"` (Valeron Wardens). Never fires for one renowned
+       * already, or that left before its renown trigger resolved (the
+       * rulings). The permanent is the trigger object. */
+      readonly on: "becomes-renowned";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+    }
+  | {
       /** A permanent became saddled (rule 702.171b — the `become-saddled`
        * effect, a saddle ability's or another's: "whenever this creature
        * becomes saddled" is `who: "self"`). Fires again for one already
@@ -1596,8 +1607,10 @@ export type TriggerSpec =
       readonly otherOnly?: boolean;
       /** What the damage was dealt to. Omitted: any permanent or player.
        * `"you"` is this permanent's controller — Mikaeus, the Unhallowed's
-       * "whenever a Human deals damage to you". */
-      readonly to?: "player" | "opponent" | "you" | "permanent" | "creature" | "planeswalker";
+       * "whenever a Human deals damage to you". `"self"` is this permanent
+       * itself — Vraska the Unseen's "whenever a creature deals combat damage
+       * to Vraska". */
+      readonly to?: "player" | "opponent" | "you" | "permanent" | "creature" | "planeswalker" | "self";
       /** A filter on a *permanent* recipient ("deals damage to a creature an
        * opponent controls"). Never matches a player. */
       readonly toFilter?: CardFilter;

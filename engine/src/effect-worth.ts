@@ -262,6 +262,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
         (who === "you" && effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
       );
     }
+    case "bolster":
+      // +1/+1 counters on one of your own creatures (rule 701.39a).
+      return onPlayers(you, typeof effect.amount === "number" ? effect.amount : 1, ctx);
     case "behold":
       // Revealing a card or choosing a permanent costs nothing: what follows
       // is the worth (rule 701.4a).

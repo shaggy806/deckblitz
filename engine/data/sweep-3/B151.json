@@ -1,0 +1,1214 @@
+{
+  "batch": "B151",
+  "status": "complete",
+  "ranks": "Shadows over Innistrad (SOI, 2016-04-08): the rest of the set, whole; with the werewolves' transform condition and damage to a trigger's object built, and the earlier cards they unblocked",
+  "authored": [
+    {
+      "name": "Aberrant Researcher",
+      "files": [
+        "engine/src/cards/pool/aberrant-researcher.ts",
+        "engine/src/cards/pool/perfected-form.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aim High",
+      "files": [
+        "engine/src/cards/pool/aim-high.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Alms of the Vein",
+      "files": [
+        "engine/src/cards/pool/alms-of-the-vein.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Angelic Purge",
+      "files": [
+        "engine/src/cards/pool/angelic-purge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Apothecary Geist",
+      "files": [
+        "engine/src/cards/pool/apothecary-geist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Autumnal Gloom",
+      "files": [
+        "engine/src/cards/pool/autumnal-gloom.ts",
+        "engine/src/cards/pool/ancient-of-the-equinox.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avacynian Missionaries",
+      "files": [
+        "engine/src/cards/pool/avacynian-missionaries.ts",
+        "engine/src/cards/pool/lunarch-inquisitors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Behold the Beyond",
+      "files": [
+        "engine/src/cards/pool/behold-the-beyond.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Biting Rain",
+      "files": [
+        "engine/src/cards/pool/biting-rain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bloodmad Vampire",
+      "files": [
+        "engine/src/cards/pool/bloodmad-vampire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brain in a Jar",
+      "files": [
+        "engine/src/cards/pool/brain-in-a-jar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Breakneck Rider",
+      "files": [
+        "engine/src/cards/pool/breakneck-rider.ts",
+        "engine/src/cards/pool/neck-breaker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Broken Concentration",
+      "files": [
+        "engine/src/cards/pool/broken-concentration.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Call the Bloodline",
+      "files": [
+        "engine/src/cards/pool/call-the-bloodline.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Caltrops",
+      "files": [
+        "engine/src/cards/pool/caltrops.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clip Wings",
+      "files": [
+        "engine/src/cards/pool/clip-wings.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Confirm Suspicions",
+      "files": [
+        "engine/src/cards/pool/confirm-suspicions.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Confront the Unknown",
+      "files": [
+        "engine/src/cards/pool/confront-the-unknown.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Convicted Killer",
+      "files": [
+        "engine/src/cards/pool/convicted-killer.ts",
+        "engine/src/cards/pool/branded-howler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Corrupted Grafstone",
+      "files": [
+        "engine/src/cards/pool/corrupted-grafstone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crow of Dark Tidings",
+      "files": [
+        "engine/src/cards/pool/crow-of-dark-tidings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cult of the Waxing Moon",
+      "files": [
+        "engine/src/cards/pool/cult-of-the-waxing-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dance with Devils",
+      "files": [
+        "engine/src/cards/pool/dance-with-devils.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Daring Sleuth",
+      "files": [
+        "engine/src/cards/pool/daring-sleuth.ts",
+        "engine/src/cards/pool/bearer-of-overwhelming-truths.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deathcap Cultivator",
+      "files": [
+        "engine/src/cards/pool/deathcap-cultivator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deny Existence",
+      "files": [
+        "engine/src/cards/pool/deny-existence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Descend upon the Sinful",
+      "files": [
+        "engine/src/cards/pool/descend-upon-the-sinful.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devils' Playground",
+      "files": [
+        "engine/src/cards/pool/devils-playground.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dissension in the Ranks",
+      "files": [
+        "engine/src/cards/pool/dissension-in-the-ranks.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Drunau Corpse Trawler",
+      "files": [
+        "engine/src/cards/pool/drunau-corpse-trawler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dual Shot",
+      "files": [
+        "engine/src/cards/pool/dual-shot.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Duskwatch Recruiter",
+      "files": [
+        "engine/src/cards/pool/duskwatch-recruiter.ts",
+        "engine/src/cards/pool/krallenhorde-howler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Elusive Tormentor",
+      "files": [
+        "engine/src/cards/pool/elusive-tormentor.ts",
+        "engine/src/cards/pool/insidious-mist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Epitaph Golem",
+      "files": [
+        "engine/src/cards/pool/epitaph-golem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Equestrian Skill",
+      "files": [
+        "engine/src/cards/pool/equestrian-skill.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Explosive Apparatus",
+      "files": [
+        "engine/src/cards/pool/explosive-apparatus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Expose Evil",
+      "files": [
+        "engine/src/cards/pool/expose-evil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flameblade Angel",
+      "files": [
+        "engine/src/cards/pool/flameblade-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gatstaf Arsonists",
+      "files": [
+        "engine/src/cards/pool/gatstaf-arsonists.ts",
+        "engine/src/cards/pool/gatstaf-ravagers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Geier Reach Bandit",
+      "files": [
+        "engine/src/cards/pool/geier-reach-bandit.ts",
+        "engine/src/cards/pool/vildin-pack-alpha.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Geistblast",
+      "files": [
+        "engine/src/cards/pool/geistblast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghoulsteed",
+      "files": [
+        "engine/src/cards/pool/ghoulsteed.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gibbering Fiend",
+      "files": [
+        "engine/src/cards/pool/gibbering-fiend.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gisa's Bidding",
+      "files": [
+        "engine/src/cards/pool/gisas-bidding.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goldnight Castigator",
+      "files": [
+        "engine/src/cards/pool/goldnight-castigator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hanweir Militia Captain",
+      "files": [
+        "engine/src/cards/pool/hanweir-militia-captain.ts",
+        "engine/src/cards/pool/westvale-cult-leader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harvest Hand",
+      "files": [
+        "engine/src/cards/pool/harvest-hand.ts",
+        "engine/src/cards/pool/scrounged-scythe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heir of Falkenrath",
+      "files": [
+        "engine/src/cards/pool/heir-of-falkenrath.ts",
+        "engine/src/cards/pool/heir-to-the-night.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hermit of the Natterknolls",
+      "files": [
+        "engine/src/cards/pool/hermit-of-the-natterknolls.ts",
+        "engine/src/cards/pool/lone-wolf-of-the-natterknolls.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hinterland Logger",
+      "files": [
+        "engine/src/cards/pool/hinterland-logger.ts",
+        "engine/src/cards/pool/timber-shredder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hope Against Hope",
+      "files": [
+        "engine/src/cards/pool/hope-against-hope.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hound of the Farbogs",
+      "files": [
+        "engine/src/cards/pool/hound-of-the-farbogs.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Howlpack Wolf",
+      "files": [
+        "engine/src/cards/pool/howlpack-wolf.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Incorrigible Youths",
+      "files": [
+        "engine/src/cards/pool/incorrigible-youths.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Inexorable Blob",
+      "files": [
+        "engine/src/cards/pool/inexorable-blob.ts",
+        "engine/src/cards/tokens/ooze-token-3-3.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Inner Struggle",
+      "files": [
+        "engine/src/cards/pool/inner-struggle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Inquisitor's Ox",
+      "files": [
+        "engine/src/cards/pool/inquisitors-ox.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Insolent Neonate",
+      "files": [
+        "engine/src/cards/pool/insolent-neonate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Intrepid Provisioner",
+      "files": [
+        "engine/src/cards/pool/intrepid-provisioner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Invocation of Saint Traft",
+      "files": [
+        "engine/src/cards/pool/invocation-of-saint-traft.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Just the Wind",
+      "files": [
+        "engine/src/cards/pool/just-the-wind.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kessig Dire Swine",
+      "files": [
+        "engine/src/cards/pool/kessig-dire-swine.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kessig Forgemaster",
+      "files": [
+        "engine/src/cards/pool/kessig-forgemaster.ts",
+        "engine/src/cards/pool/flameheart-werewolf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kindly Stranger",
+      "files": [
+        "engine/src/cards/pool/kindly-stranger.ts",
+        "engine/src/cards/pool/demon-possessed-witch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lambholt Pacifist",
+      "files": [
+        "engine/src/cards/pool/lambholt-pacifist.ts",
+        "engine/src/cards/pool/lambholt-butcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lamplighter of Selhoff",
+      "files": [
+        "engine/src/cards/pool/lamplighter-of-selhoff.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana's Indignation",
+      "files": [
+        "engine/src/cards/pool/lilianas-indignation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Malevolent Whispers",
+      "files": [
+        "engine/src/cards/pool/malevolent-whispers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Manic Scribe",
+      "files": [
+        "engine/src/cards/pool/manic-scribe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Markov Dreadknight",
+      "files": [
+        "engine/src/cards/pool/markov-dreadknight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Merciless Resolve",
+      "files": [
+        "engine/src/cards/pool/merciless-resolve.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Might Beyond Reason",
+      "files": [
+        "engine/src/cards/pool/might-beyond-reason.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Militant Inquisitor",
+      "files": [
+        "engine/src/cards/pool/militant-inquisitor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mindwrack Demon",
+      "files": [
+        "engine/src/cards/pool/mindwrack-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moldgraf Scavenger",
+      "files": [
+        "engine/src/cards/pool/moldgraf-scavenger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Moorland Drifter",
+      "files": [
+        "engine/src/cards/pool/moorland-drifter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Morkrut Necropod",
+      "files": [
+        "engine/src/cards/pool/morkrut-necropod.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Murderer's Axe",
+      "files": [
+        "engine/src/cards/pool/murderers-axe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Murderous Compulsion",
+      "files": [
+        "engine/src/cards/pool/murderous-compulsion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nagging Thoughts",
+      "files": [
+        "engine/src/cards/pool/nagging-thoughts.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nahiri, the Harbinger",
+      "files": [
+        "engine/src/cards/pool/nahiri-the-harbinger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Neglected Heirloom",
+      "files": [
+        "engine/src/cards/pool/neglected-heirloom.ts",
+        "engine/src/cards/pool/ashmouth-blade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Not Forgotten",
+      "files": [
+        "engine/src/cards/pool/not-forgotten.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Obsessive Skinner",
+      "files": [
+        "engine/src/cards/pool/obsessive-skinner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Olivia's Bloodsworn",
+      "files": [
+        "engine/src/cards/pool/olivias-bloodsworn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Olivia, Mobilized for War",
+      "files": [
+        "engine/src/cards/pool/olivia-mobilized-for-war.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ongoing Investigation",
+      "files": [
+        "engine/src/cards/pool/ongoing-investigation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ornery Goblin",
+      "files": [
+        "engine/src/cards/pool/ornery-goblin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Palazzo Archers",
+      "files": [
+        "engine/src/cards/pool/palazzo-archers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Paranoid Parish-Blade",
+      "files": [
+        "engine/src/cards/pool/paranoid-parish-blade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pieces of the Puzzle",
+      "files": [
+        "engine/src/cards/pool/pieces-of-the-puzzle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pious Evangel",
+      "files": [
+        "engine/src/cards/pool/pious-evangel.ts",
+        "engine/src/cards/pool/wayward-disciple.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pore Over the Pages",
+      "files": [
+        "engine/src/cards/pool/pore-over-the-pages.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Press for Answers",
+      "files": [
+        "engine/src/cards/pool/press-for-answers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Prized Amalgam",
+      "files": [
+        "engine/src/cards/pool/prized-amalgam.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rattlechains",
+      "files": [
+        "engine/src/cards/pool/rattlechains.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ravenous Bloodseeker",
+      "files": [
+        "engine/src/cards/pool/ravenous-bloodseeker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reaper of Flight Moonsilver",
+      "files": [
+        "engine/src/cards/pool/reaper-of-flight-moonsilver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Runaway Carriage",
+      "files": [
+        "engine/src/cards/pool/runaway-carriage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sage of Ancient Lore",
+      "files": [
+        "engine/src/cards/pool/sage-of-ancient-lore.ts",
+        "engine/src/cards/pool/werewolf-of-ancient-hunger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sanitarium Skeleton",
+      "files": [
+        "engine/src/cards/pool/sanitarium-skeleton.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scourge Wolf",
+      "files": [
+        "engine/src/cards/pool/scourge-wolf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Senseless Rage",
+      "files": [
+        "engine/src/cards/pool/senseless-rage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shard of Broken Glass",
+      "files": [
+        "engine/src/cards/pool/shard-of-broken-glass.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sigarda, Heron's Grace",
+      "files": [
+        "engine/src/cards/pool/sigarda-herons-grace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silburlind Snapper",
+      "files": [
+        "engine/src/cards/pool/silburlind-snapper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sinister Concoction",
+      "files": [
+        "engine/src/cards/pool/sinister-concoction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skeleton Key",
+      "files": [
+        "engine/src/cards/pool/skeleton-key.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slayer's Plate",
+      "files": [
+        "engine/src/cards/pool/slayers-plate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sleep Paralysis",
+      "files": [
+        "engine/src/cards/pool/sleep-paralysis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Solitary Hunter",
+      "files": [
+        "engine/src/cards/pool/solitary-hunter.ts",
+        "engine/src/cards/pool/one-of-the-pack.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul Swallower",
+      "files": [
+        "engine/src/cards/pool/soul-swallower.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spectral Shepherd",
+      "files": [
+        "engine/src/cards/pool/spectral-shepherd.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stallion of Ashmouth",
+      "files": [
+        "engine/src/cards/pool/stallion-of-ashmouth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Startled Awake",
+      "files": [
+        "engine/src/cards/pool/startled-awake.ts",
+        "engine/src/cards/pool/persistent-nightmare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stern Constable",
+      "files": [
+        "engine/src/cards/pool/stern-constable.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stitched Mangler",
+      "files": [
+        "engine/src/cards/pool/stitched-mangler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stitchwing Skaab",
+      "files": [
+        "engine/src/cards/pool/stitchwing-skaab.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Storm, Queen of Wakanda",
+      "files": [
+        "engine/src/cards/pool/storm-queen-of-wakanda.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Strength of Arms",
+      "files": [
+        "engine/src/cards/pool/strength-of-arms.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stromkirk Mentor",
+      "files": [
+        "engine/src/cards/pool/stromkirk-mentor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Structural Distortion",
+      "files": [
+        "engine/src/cards/pool/structural-distortion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tenacity",
+      "files": [
+        "engine/src/cards/pool/tenacity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "To the Slaughter",
+      "files": [
+        "engine/src/cards/pool/to-the-slaughter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tooth Collector",
+      "files": [
+        "engine/src/cards/pool/tooth-collector.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Topplegeist",
+      "files": [
+        "engine/src/cards/pool/topplegeist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "True-Faith Censer",
+      "files": [
+        "engine/src/cards/pool/true-faith-censer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Twins of Maurer Estate",
+      "files": [
+        "engine/src/cards/pool/twins-of-maurer-estate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ulrich of the Krallenhorde",
+      "files": [
+        "engine/src/cards/pool/ulrich-of-the-krallenhorde.ts",
+        "engine/src/cards/pool/ulrich-uncontested-alpha.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ulrich's Kindred",
+      "files": [
+        "engine/src/cards/pool/ulrichs-kindred.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Uninvited Geist",
+      "files": [
+        "engine/src/cards/pool/uninvited-geist.ts",
+        "engine/src/cards/pool/unimpeded-trespasser.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vessel of Nascency",
+      "files": [
+        "engine/src/cards/pool/vessel-of-nascency.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Veteran Cathar",
+      "files": [
+        "engine/src/cards/pool/veteran-cathar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Village Messenger",
+      "files": [
+        "engine/src/cards/pool/village-messenger.ts",
+        "engine/src/cards/pool/moonrise-intruder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Weirding Wood",
+      "files": [
+        "engine/src/cards/pool/weirding-wood.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wild-Field Scarecrow",
+      "files": [
+        "engine/src/cards/pool/wild-field-scarecrow.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wolf of Devil's Breach",
+      "files": [
+        "engine/src/cards/pool/wolf-of-devils-breach.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Arlinn Kord",
+      "needs": [
+        "effect:emblem-grants-activated"
+      ],
+      "why": "The back face's −6 emblem gives creatures a '{T}: deal damage' ability: emblems fold only an anthem."
+    },
+    {
+      "name": "Sorin, Grim Nemesis",
+      "needs": [
+        "cost:loyalty-x"
+      ],
+      "why": "The −X loyalty cost isn't modelled."
+    },
+    {
+      "name": "Epiphany at the Drownyard",
+      "needs": [
+        "decision:separate-into-piles"
+      ],
+      "why": "An opponent separates the cards into two piles."
+    },
+    {
+      "name": "Declaration in Stone",
+      "needs": [
+        "condition:same-name-as-target"
+      ],
+      "why": "'And all other creatures its controller controls with the same name as that creature'."
+    },
+    {
+      "name": "Pack Guardian",
+      "needs": [
+        "effect:discard-filtered"
+      ],
+      "why": "'You may discard a land card': `discard` has no card filter."
+    },
+    {
+      "name": "From Under the Floorboards",
+      "needs": [
+        "condition:alternative-cost-paid"
+      ],
+      "why": "'If this spell's madness cost was paid': nothing reads it."
+    },
+    {
+      "name": "Accursed Witch",
+      "needs": [
+        "static:static-over-enchanted-player"
+      ],
+      "why": "The back face's 'spells you cast that target enchanted player cost {1} less'."
+    },
+    {
+      "name": "Triskaidekaphobia",
+      "needs": [
+        "scope:each-player-with-life-total"
+      ],
+      "why": "'Each player with exactly 13 life loses the game' — no such scope, and the losses at once (a draw when all have 13)."
+    },
+    {
+      "name": "Bound by Moonsilver",
+      "needs": [
+        "static:cant-transform"
+      ],
+      "why": "'Can't attack, block, or transform': no can't-transform restriction."
+    },
+    {
+      "name": "Angel of Deliverance",
+      "needs": [
+        "trigger:deals-damage-once-per-event"
+      ],
+      "why": "'Whenever it deals damage' once per event, not per recipient (the ruling)."
+    },
+    {
+      "name": "Vessel of Malignity",
+      "needs": [
+        "effect:target-player-exiles-from-hand"
+      ],
+      "why": "'Target opponent exiles two cards from their hand' of their choice."
+    },
+    {
+      "name": "Seasons Past",
+      "needs": [
+        "effect:targets-different-mana-values"
+      ],
+      "why": "'Any number of cards with different mana values' from your graveyard."
+    },
+    {
+      "name": "Creeping Dread",
+      "needs": [
+        "effect:hidden-simultaneous-choices",
+        "filter:shares-card-type-with-discarded"
+      ],
+      "why": "Each player discards at once, hidden; then each opponent compared with your discard."
+    },
+    {
+      "name": "Briarbridge Patrol",
+      "needs": [
+        "trigger:deals-damage-once-per-event"
+      ],
+      "why": "'Whenever it deals damage to one or more creatures' once per damage event (the ruling)."
+    },
+    {
+      "name": "Harness the Storm",
+      "needs": [
+        "filter:same-name-as-trigger-spell"
+      ],
+      "why": "'Target card with the same name as that spell'."
+    },
+    {
+      "name": "Geralf's Masterpiece",
+      "needs": [
+        "static:pt-per-cards-in-hand"
+      ],
+      "why": "'-1/-1 for each card in your hand': no hand count in `grantPtPerCount`."
+    },
+    {
+      "name": "Reduce to Ashes",
+      "needs": [
+        "replacement:target-exile-if-dies-this-turn"
+      ],
+      "why": "'If that creature would die this turn, exile it instead'."
+    },
+    {
+      "name": "Pick the Brain",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand",
+        "effect:extract-same-name"
+      ],
+      "why": "Exile the chosen card, and with delirium the same-name search."
+    },
+    {
+      "name": "Silverfur Partisan",
+      "needs": [
+        "trigger:becomes-target-by-spell-type"
+      ],
+      "why": "'Becomes the target of an instant or sorcery spell': no spell-type narrowing."
+    },
+    {
+      "name": "Watcher in the Web",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "'Can block an additional seven creatures each combat'."
+    },
+    {
+      "name": "Falkenrath Gorger",
+      "needs": [
+        "static:grant-madness"
+      ],
+      "why": "Granting madness to Vampire cards you own."
+    },
+    {
+      "name": "Fork in the Road",
+      "needs": [
+        "effect:search-split-to-graveyard"
+      ],
+      "why": "Search for two basics, one to hand and the other to the graveyard."
+    },
+    {
+      "name": "Welcome to the Fold",
+      "needs": [
+        "condition:alternative-cost-paid"
+      ],
+      "why": "'If this spell's madness cost was paid'."
+    },
+    {
+      "name": "Invasive Surgery",
+      "needs": [
+        "effect:extract-same-name"
+      ],
+      "why": "The delirium search of graveyard, hand and library for the spell's name."
+    },
+    {
+      "name": "Skin Invasion",
+      "needs": [
+        "bug:aura-enters-transformed-asks-enchant"
+      ],
+      "why": "Authored, then dropped: entering transformed, the Aura is still asked what it enchants."
+    },
+    {
+      "name": "Moonlight Hunt",
+      "needs": [
+        "effect:each-creature-deals-power-damage-to-target"
+      ],
+      "why": "'Each Wolf and Werewolf you control deals damage equal to its power to that creature'."
+    },
+    {
+      "name": "Ever After",
+      "needs": [
+        "effect:return-with-added-color"
+      ],
+      "why": "Return them as black Zombies in addition to their other colours and types: no added colour on a targeted return."
+    },
+    {
+      "name": "Avacyn's Judgment",
+      "needs": [
+        "effect:divided-dynamic-total"
+      ],
+      "why": "'X damage divided' when the madness cost was paid: `divided.total` is fixed."
+    },
+    {
+      "name": "Burn from Within",
+      "needs": [
+        "replacement:target-exile-if-dies-this-turn"
+      ],
+      "why": "'If a creature dealt damage this way would die this turn, exile it instead'."
+    },
+    {
+      "name": "Compelling Deterrence",
+      "needs": [
+        "effect:owner-of-target-player-ref"
+      ],
+      "why": "'Then that player discards a card' — the bounced permanent's owner."
+    },
+    {
+      "name": "Assembled Alphas",
+      "needs": [
+        "effect:damage-to-trigger-object-controller"
+      ],
+      "why": "Damage to the trigger object is built; '3 damage to that creature's controller' isn't."
+    }
+  ]
+}

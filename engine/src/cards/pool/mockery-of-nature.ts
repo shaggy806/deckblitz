@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 19998. Eldritch Moon.
+// EDHREC rank 19998.
 
 export default defineCard({
   name: "Mockery of Nature",
@@ -10,7 +10,7 @@ export default defineCard({
   subtypes: ["Eldrazi", "Beast"],
   power: 6,
   toughness: 5,
-  alternativeCost: { mana: "{7}{G}", keyword: "emerge", emerge: { filter: { type: "creature" } } },
+  emerge: { cost: "{7}{G}" },
   text: "Emerge {7}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, you may destroy target artifact or enchantment.",
   triggered: [
     {

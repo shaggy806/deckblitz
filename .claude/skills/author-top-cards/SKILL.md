@@ -167,3 +167,10 @@ and any engine fix found on the way, each with why.
 A few lines: how many authored (with the rank range), how many blocked and
 the feature blocking the most of them, anything built or fixed. Then offer the
 next batch — don't start it unasked.
+
+**One batch per session** (`.claude/skills/author-by-set/agent-batches.md`, "One batch per session"): after
+the push and the report, stop. Leave the hand-off in this skill's `BACKLOG.md`
+line — the next batch, and any feature already researched for it — and offer
+the next batch as a new session (`/author-top-cards`), not in this one —
+unless the user asks to carry on here: the lead's growing context costs more
+than the agents do.

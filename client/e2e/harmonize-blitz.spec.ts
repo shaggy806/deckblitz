@@ -2,9 +2,10 @@ import { expect, test, type APIRequestContext, type Page } from '@playwright/tes
 import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 
-// Harmonize and blitz, each a cast variant of its own: Zenith Festival cast
-// from the graveyard tapping a creature (HARMN), and Star Athlete cast for its
-// blitz cost from the hand (BLITZ). With E2E_SHOTS_DIR set, each menu and its
+// Harmonize, blitz and emerge, each a cast variant of its own: Zenith Festival
+// cast from the graveyard tapping a creature (HARMN), Star Athlete cast for
+// its blitz cost from the hand (BLITZ), and Wretched Gryff emerged from the
+// hand, sacrificing a creature for less (EMRGE). With E2E_SHOTS_DIR set, each menu and its
 // result are saved at 1366x768, 1920x1080 and 2560x1440.
 
 const CONTROL = `http://127.0.0.1:${process.env.E2E_CONTROL_PORT ?? 4099}`
@@ -136,4 +137,29 @@ test('BLITZ: Star Athlete is offered for its blitz cost, then attacks at once', 
     }, paced)
     .toBe(true)
   await shots(page, 'BLITZ-done')
+})
+
+test('EMRGE: emerge is offered per creature it makes affordable, and sacrifices the one chosen', async ({ page, request }) => {
+  test.setTimeout(120_000)
+  const state = await openRoom(page, request, 'EMRGE')
+  const [gryff] = idsOf(state, 'alice', 'Wretched Gryff')
+  await ready(page)
+  const card = page.locator(`.hand-card[data-obj-id="${gryff}"]`)
+  const emerge = card.getByRole('button', { name: /emerge, sacrificing Hill Giant: −4/ })
+  await expect(emerge).toBeVisible()
+  // Grizzly Bears (mana value 2) would leave {3}{U}: not offered.
+  await expect(card.getByRole('button', { name: /sacrificing Grizzly Bears/ })).toHaveCount(0)
+  await card.locator('.card-tile').hover({ force: true })
+  await shots(page, 'EMRGE-menu')
+  await emerge.dispatchEvent('click')
+  await expect
+    .poll(async () => {
+      const now = await control<RoomState>(request, { op: 'state', room: 'EMRGE' })
+      return {
+        giant: linesOf(now, 'alice', 'Hill Giant').length,
+        gryff: now.players.alice.battlefield.some((l) => l.includes('Wretched Gryff')),
+      }
+    }, paced)
+    .toEqual({ giant: 0, gryff: true })
+  await shots(page, 'EMRGE-done')
 })

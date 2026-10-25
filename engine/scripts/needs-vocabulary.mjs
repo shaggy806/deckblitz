@@ -263,10 +263,12 @@ function main() {
     // A card's newest record wins: it was triaged against a later engine.
     // Picked before asking what's been built, so an older record can't
     // stand in for a newer one that has nothing built since.
+    // Keyed by the front face, so a split card's record by its full name
+    // ("Commit // Memory") supersedes an older one by its first half.
     const newest = new Map();
     for (const r of waiting) {
-      const prev = newest.get(r.name);
-      if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) newest.set(r.name, r);
+      const prev = newest.get(frontName(r.name));
+      if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) newest.set(frontName(r.name), r);
     }
     const byCard = new Map();
     for (const r of newest.values()) {
@@ -294,8 +296,8 @@ function main() {
   const onlyNeed = new Map();
   const latest = new Map();
   for (const r of waiting) {
-    const prev = latest.get(r.name);
-    if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) latest.set(r.name, r);
+    const prev = latest.get(frontName(r.name));
+    if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) latest.set(frontName(r.name), r);
   }
   for (const r of latest.values()) {
     const open = [...new Set(openNeeds(r, vocab))];

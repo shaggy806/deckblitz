@@ -537,6 +537,18 @@ export default {
     bots: { bob: {} },
   },
 
+  EMRGE: {
+    about:
+      "2p. Emerge: Wretched Gryff in alice's hand with two Islands, a Hill Giant and a Grizzly " +
+      "Bears. Its hand tile offers \"(emerge, sacrificing Hill Giant: −4)\" — {1}{U}, both " +
+      "Islands — and none for the Bears ({3}{U}, more than two Islands pay). Cast, the Giant " +
+      "goes to the graveyard and the cast trigger draws a card.",
+    players: ["alice", "bob"],
+    battlefield: { alice: ["Island", "Island", "Hill Giant", "Grizzly Bears"], bob: ["Plains"] },
+    hand: { alice: ["Wretched Gryff"] },
+    bots: { bob: {} },
+  },
+
   CAESR: {
     about:
       "2p. Caesar, Legion's Emperor: attack with Caesar and say yes to sacrificing another " +
