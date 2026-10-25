@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3784 already implemented / 1216 missing (marks refreshed 2026-10-25)
+3787 already implemented / 1213 missing (marks refreshed 2026-10-25)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -277,7 +277,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   278  Exsanguinate                             {X}{B}{B}        Sorcery
 [x]   279  Inspiring Call                           {2}{G}           Instant
 [x]   280  Haunted Ridge                            {0}              Land
-[ ]   281  Ragavan, Nimble Pilferer                 {R}              Legendary Creature — Monkey Pirate
+[x]   281  Ragavan, Nimble Pilferer                 {R}              Legendary Creature — Monkey Pirate
 [x]   282  Rugged Prairie                           {0}              Land
 [x]   283  Reality Shift                            {1}{U}           Instant
 [x]   284  Darksteel Citadel                        {0}              Artifact Land
@@ -1714,7 +1714,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1721  Overlord of the Hauntwoods               {3}{G}{G}        Enchantment Creature — Avatar Horror
 [x]  1722  Fate Unraveler                           {3}{B}           Enchantment Creature — Hag
 [x]  1723  Impulsive Pilferer                       {R}              Creature — Goblin Pirate
-[ ]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
+[x]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
 [x]  1725  Nyx Weaver                               {1}{B}{G}        Enchantment Creature — Spider
 [x]  1726  Intruder Alarm                           {2}{U}           Enchantment
 [x]  1727  Slither Blade                            {U}              Creature — Snake Rogue
@@ -4821,7 +4821,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4828  Atzocan Seer                             {1}{G}{W}        Creature — Human Druid
 [x]  4829  Neriv, Heart of the Storm                {1}{R}{W}{B}     Legendary Creature — Spirit Dragon
 [x]  4830  Brotherhood Vertibird                    {3}              Artifact — Vehicle
-[ ]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
+[x]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
 [x]  4832  Brainstone                               {1}              Artifact
 [x]  4833  Short Bow                                {2}              Artifact — Equipment
 [x]  4834  Norman Osborn // Green Goblin            {2}              Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain
