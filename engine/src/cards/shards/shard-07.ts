@@ -710,6 +710,7 @@ import _tokensDrakeToken from "../tokens/drake-token.js";
 import _tokensEggToken from "../tokens/egg-token.js";
 import _tokensElfToken from "../tokens/elf-token.js";
 import _tokensGoblinTokenGoblinSpymaster from "../tokens/goblin-token-goblin-spymaster.js";
+import _tokensGreenElementalToken44 from "../tokens/green-elemental-token-4-4.js";
 import _tokensHorrorTokenBlack00 from "../tokens/horror-token-black-0-0.js";
 import _tokensHorseToken from "../tokens/horse-token.js";
 import _tokensIllusionTokenSkyclave from "../tokens/illusion-token-skyclave.js";
@@ -724,6 +725,7 @@ import _tokensSpiderToken21BlackMenaceReach from "../tokens/spider-token-2-1-bla
 import _tokensSpiritTokenQuintorius from "../tokens/spirit-token-quintorius.js";
 import _tokensVampireDemonToken from "../tokens/vampire-demon-token.js";
 import _tokensWaspToken from "../tokens/wasp-token.js";
+import _tokensWhiteGiantWarriorToken55 from "../tokens/white-giant-warrior-token-5-5.js";
 import _tokensWraithToken from "../tokens/wraith-token.js";
 import _tokensWurmTokenTrample from "../tokens/wurm-token-trample.js";
 import _tokensXXGolemTokenHaste from "../tokens/x-x-golem-token-haste.js";
@@ -1441,6 +1443,7 @@ const shard: CardShard = {
     _tokensEggToken,
     _tokensElfToken,
     _tokensGoblinTokenGoblinSpymaster,
+    _tokensGreenElementalToken44,
     _tokensHorrorTokenBlack00,
     _tokensHorseToken,
     _tokensIllusionTokenSkyclave,
@@ -1455,6 +1458,7 @@ const shard: CardShard = {
     _tokensSpiritTokenQuintorius,
     _tokensVampireDemonToken,
     _tokensWaspToken,
+    _tokensWhiteGiantWarriorToken55,
     _tokensWraithToken,
     _tokensWurmTokenTrample,
     _tokensXXGolemTokenHaste,

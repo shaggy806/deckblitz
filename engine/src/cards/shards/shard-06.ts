@@ -507,6 +507,7 @@ import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
+import _poolShinewend from "../pool/shinewend.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
@@ -690,6 +691,7 @@ import _tokensShardToken from "../tokens/shard-token.js";
 import _tokensSkeletonRegeneratingToken from "../tokens/skeleton-regenerating-token.js";
 import _tokensSpiderToken21MenaceReach from "../tokens/spider-token-2-1-menace-reach.js";
 import _tokensTheVoid from "../tokens/the-void.js";
+import _tokensTreefolkShamanToken from "../tokens/treefolk-shaman-token.js";
 import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
 
 const shard: CardShard = {
@@ -1198,6 +1200,7 @@ const shard: CardShard = {
     _poolShambleshark,
     _poolShenanigans,
     _poolSheriffOfSafePassage,
+    _poolShinewend,
     _poolShortcutSeeker,
     _poolShroudstomper,
     _poolSidarJabariOfZhalfir,
@@ -1383,6 +1386,7 @@ const shard: CardShard = {
     _tokensSkeletonRegeneratingToken,
     _tokensSpiderToken21MenaceReach,
     _tokensTheVoid,
+    _tokensTreefolkShamanToken,
     _tokensWizardTokenGuff,
   ],
 };

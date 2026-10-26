@@ -712,6 +712,7 @@ import _tokensForestDryadToken from "../tokens/forest-dryad-token.js";
 import _tokensGoblinTokenHaste from "../tokens/goblin-token-haste.js";
 import _tokensGolemToken99 from "../tokens/golem-token-9-9.js";
 import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestation-sage.js";
+import _tokensMerfolkWizardToken from "../tokens/merfolk-wizard-token.js";
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
@@ -1437,6 +1438,7 @@ const shard: CardShard = {
     _tokensGoblinTokenHaste,
     _tokensGolemToken99,
     _tokensInsectTokenInfestationSage,
+    _tokensMerfolkWizardToken,
     _tokensMouseToken,
     _tokensMowu,
     _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,

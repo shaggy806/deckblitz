@@ -356,6 +356,7 @@ import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecrogoyf from "../pool/necrogoyf.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
+import _poolNevermaker from "../pool/nevermaker.js";
 import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
 import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
@@ -992,6 +993,7 @@ const shard: CardShard = {
     _poolNecrogoyf,
     _poolNecronDeathmark,
     _poolNettleSwine,
+    _poolNevermaker,
     _poolNezumiRoadCaptain,
     _poolNicanzilCurrentConductor,
     _poolNimbusWings,

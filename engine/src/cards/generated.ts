@@ -12546,6 +12546,7 @@ import _poolNevThePracticalDean from "./pool/nev-the-practical-dean.js";
 import _poolNevaStalkedByNightmares from "./pool/neva-stalked-by-nightmares.js";
 import _poolNeverReturn from "./pool/never-return.js";
 import _poolNever from "./pool/never.js";
+import _poolNevermaker from "./pool/nevermaker.js";
 import _poolNeverwinterDryad from "./pool/neverwinter-dryad.js";
 import _poolNevinyrralUrborgTyrant from "./pool/nevinyrral-urborg-tyrant.js";
 import _poolNevinyrralsDisk from "./pool/nevinyrrals-disk.js";
@@ -12897,6 +12898,7 @@ import _poolOdricsOutrider from "./pool/odrics-outrider.js";
 import _poolOdunosRiverTrawler from "./pool/odunos-river-trawler.js";
 import _poolOdylicWraith from "./pool/odylic-wraith.js";
 import _poolOfOneMind from "./pool/of-one-mind.js";
+import _poolOffalsnout from "./pool/offalsnout.js";
 import _poolOffenderAtLarge from "./pool/offender-at-large.js";
 import _poolOfferImmortality from "./pool/offer-immortality.js";
 import _poolOfferingToAsha from "./pool/offering-to-asha.js";
@@ -16457,6 +16459,7 @@ import _poolShinenOfFurysFire from "./pool/shinen-of-furys-fire.js";
 import _poolShinenOfStarsLight from "./pool/shinen-of-stars-light.js";
 import _poolShineshadowSnarl from "./pool/shineshadow-snarl.js";
 import _poolShinestriker from "./pool/shinestriker.js";
+import _poolShinewend from "./pool/shinewend.js";
 import _poolShiningAerosaur from "./pool/shining-aerosaur.js";
 import _poolShiningArmor from "./pool/shining-armor.js";
 import _poolShinkaTheBloodsoakedKeep from "./pool/shinka-the-bloodsoaked-keep.js";
@@ -17841,6 +17844,7 @@ import _poolStingingLicid from "./pool/stinging-licid.js";
 import _poolStingingLionfish from "./pool/stinging-lionfish.js";
 import _poolStingingShot from "./pool/stinging-shot.js";
 import _poolStingingVitriol from "./pool/stinging-vitriol.js";
+import _poolStingmoggie from "./pool/stingmoggie.js";
 import _poolStinkweedImp from "./pool/stinkweed-imp.js";
 import _poolStirTheSands from "./pool/stir-the-sands.js";
 import _poolStirUpTrouble from "./pool/stir-up-trouble.js";
@@ -22043,6 +22047,7 @@ import _tokensGlimmerToken from "./tokens/glimmer-token.js";
 import _tokensGnomeToken from "./tokens/gnome-token.js";
 import _tokensGoatToken from "./tokens/goat-token.js";
 import _tokensGoblinConstructToken from "./tokens/goblin-construct-token.js";
+import _tokensGoblinRogueToken from "./tokens/goblin-rogue-token.js";
 import _tokensGoblinScoutToken from "./tokens/goblin-scout-token.js";
 import _tokensGoblinShamanToken from "./tokens/goblin-shaman-token.js";
 import _tokensGoblinSoldierToken from "./tokens/goblin-soldier-token.js";
@@ -22066,6 +22071,7 @@ import _tokensGravebornToken from "./tokens/graveborn-token.js";
 import _tokensGreenCatToken11 from "./tokens/green-cat-token-1-1.js";
 import _tokensGreenDogToken11 from "./tokens/green-dog-token-1-1.js";
 import _tokensGreenElementalToken22 from "./tokens/green-elemental-token-2-2.js";
+import _tokensGreenElementalToken44 from "./tokens/green-elemental-token-4-4.js";
 import _tokensGreenEnchantmentCentaurToken33 from "./tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensGreenEnchantmentSpiderTokenReach from "./tokens/green-enchantment-spider-token-reach.js";
 import _tokensGreenHippoToken11 from "./tokens/green-hippo-token-1-1.js";
@@ -22164,6 +22170,7 @@ import _tokensMercenaryToken from "./tokens/mercenary-token.js";
 import _tokensMerfolkTokenDeeprootWaters from "./tokens/merfolk-token-deeproot-waters.js";
 import _tokensMerfolkTokenSilvergillMentor from "./tokens/merfolk-token-silvergill-mentor.js";
 import _tokensMerfolkToken from "./tokens/merfolk-token.js";
+import _tokensMerfolkWizardToken from "./tokens/merfolk-wizard-token.js";
 import _tokensMeteoriteToken from "./tokens/meteorite-token.js";
 import _tokensMinorDemonToken from "./tokens/minor-demon-token.js";
 import _tokensMinotaurToken from "./tokens/minotaur-token.js";
@@ -22354,6 +22361,7 @@ import _tokensThopterToken from "./tokens/thopter-token.js";
 import _tokensThrullToken from "./tokens/thrull-token.js";
 import _tokensTiny from "./tokens/tiny.js";
 import _tokensTreasureToken from "./tokens/treasure-token.js";
+import _tokensTreefolkShamanToken from "./tokens/treefolk-shaman-token.js";
 import _tokensTreefolkTokenSylvanOffering from "./tokens/treefolk-token-sylvan-offering.js";
 import _tokensTreefolkToken from "./tokens/treefolk-token.js";
 import _tokensTreefolkWarriorToken from "./tokens/treefolk-warrior-token.js";
@@ -22392,6 +22400,7 @@ import _tokensWhaleToken from "./tokens/whale-token.js";
 import _tokensWhiteCitizenToken from "./tokens/white-citizen-token.js";
 import _tokensWhiteDogToken11 from "./tokens/white-dog-token-1-1.js";
 import _tokensWhiteEnchantmentSoldierToken from "./tokens/white-enchantment-soldier-token.js";
+import _tokensWhiteGiantWarriorToken55 from "./tokens/white-giant-warrior-token-5-5.js";
 import _tokensWickedRoleToken from "./tokens/wicked-role-token.js";
 import _tokensWizardTokenGuff from "./tokens/wizard-token-guff.js";
 import _tokensWizardTokenKuja from "./tokens/wizard-token-kuja.js";
@@ -34985,6 +34994,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNevaStalkedByNightmares,
   _poolNeverReturn,
   _poolNever,
+  _poolNevermaker,
   _poolNeverwinterDryad,
   _poolNevinyrralUrborgTyrant,
   _poolNevinyrralsDisk,
@@ -35336,6 +35346,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOdunosRiverTrawler,
   _poolOdylicWraith,
   _poolOfOneMind,
+  _poolOffalsnout,
   _poolOffenderAtLarge,
   _poolOfferImmortality,
   _poolOfferingToAsha,
@@ -38896,6 +38907,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShinenOfStarsLight,
   _poolShineshadowSnarl,
   _poolShinestriker,
+  _poolShinewend,
   _poolShiningAerosaur,
   _poolShiningArmor,
   _poolShinkaTheBloodsoakedKeep,
@@ -40280,6 +40292,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStingingLionfish,
   _poolStingingShot,
   _poolStingingVitriol,
+  _poolStingmoggie,
   _poolStinkweedImp,
   _poolStirTheSands,
   _poolStirUpTrouble,
@@ -44488,6 +44501,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGnomeToken,
   _tokensGoatToken,
   _tokensGoblinConstructToken,
+  _tokensGoblinRogueToken,
   _tokensGoblinScoutToken,
   _tokensGoblinShamanToken,
   _tokensGoblinSoldierToken,
@@ -44511,6 +44525,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGreenCatToken11,
   _tokensGreenDogToken11,
   _tokensGreenElementalToken22,
+  _tokensGreenElementalToken44,
   _tokensGreenEnchantmentCentaurToken33,
   _tokensGreenEnchantmentSpiderTokenReach,
   _tokensGreenHippoToken11,
@@ -44609,6 +44624,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensMerfolkTokenDeeprootWaters,
   _tokensMerfolkTokenSilvergillMentor,
   _tokensMerfolkToken,
+  _tokensMerfolkWizardToken,
   _tokensMeteoriteToken,
   _tokensMinorDemonToken,
   _tokensMinotaurToken,
@@ -44799,6 +44815,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensThrullToken,
   _tokensTiny,
   _tokensTreasureToken,
+  _tokensTreefolkShamanToken,
   _tokensTreefolkTokenSylvanOffering,
   _tokensTreefolkToken,
   _tokensTreefolkWarriorToken,
@@ -44837,6 +44854,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensWhiteCitizenToken,
   _tokensWhiteDogToken11,
   _tokensWhiteEnchantmentSoldierToken,
+  _tokensWhiteGiantWarriorToken55,
   _tokensWickedRoleToken,
   _tokensWizardTokenGuff,
   _tokensWizardTokenKuja,
@@ -57437,6 +57455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/neva-stalked-by-nightmares": _poolNevaStalkedByNightmares,
   "pool/never-return": _poolNeverReturn,
   "pool/never": _poolNever,
+  "pool/nevermaker": _poolNevermaker,
   "pool/neverwinter-dryad": _poolNeverwinterDryad,
   "pool/nevinyrral-urborg-tyrant": _poolNevinyrralUrborgTyrant,
   "pool/nevinyrrals-disk": _poolNevinyrralsDisk,
@@ -57788,6 +57807,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/odunos-river-trawler": _poolOdunosRiverTrawler,
   "pool/odylic-wraith": _poolOdylicWraith,
   "pool/of-one-mind": _poolOfOneMind,
+  "pool/offalsnout": _poolOffalsnout,
   "pool/offender-at-large": _poolOffenderAtLarge,
   "pool/offer-immortality": _poolOfferImmortality,
   "pool/offering-to-asha": _poolOfferingToAsha,
@@ -61348,6 +61368,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shinen-of-stars-light": _poolShinenOfStarsLight,
   "pool/shineshadow-snarl": _poolShineshadowSnarl,
   "pool/shinestriker": _poolShinestriker,
+  "pool/shinewend": _poolShinewend,
   "pool/shining-aerosaur": _poolShiningAerosaur,
   "pool/shining-armor": _poolShiningArmor,
   "pool/shinka-the-bloodsoaked-keep": _poolShinkaTheBloodsoakedKeep,
@@ -62732,6 +62753,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stinging-lionfish": _poolStingingLionfish,
   "pool/stinging-shot": _poolStingingShot,
   "pool/stinging-vitriol": _poolStingingVitriol,
+  "pool/stingmoggie": _poolStingmoggie,
   "pool/stinkweed-imp": _poolStinkweedImp,
   "pool/stir-the-sands": _poolStirTheSands,
   "pool/stir-up-trouble": _poolStirUpTrouble,
@@ -66934,6 +66956,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/gnome-token": _tokensGnomeToken,
   "tokens/goat-token": _tokensGoatToken,
   "tokens/goblin-construct-token": _tokensGoblinConstructToken,
+  "tokens/goblin-rogue-token": _tokensGoblinRogueToken,
   "tokens/goblin-scout-token": _tokensGoblinScoutToken,
   "tokens/goblin-shaman-token": _tokensGoblinShamanToken,
   "tokens/goblin-soldier-token": _tokensGoblinSoldierToken,
@@ -66957,6 +66980,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/green-cat-token-1-1": _tokensGreenCatToken11,
   "tokens/green-dog-token-1-1": _tokensGreenDogToken11,
   "tokens/green-elemental-token-2-2": _tokensGreenElementalToken22,
+  "tokens/green-elemental-token-4-4": _tokensGreenElementalToken44,
   "tokens/green-enchantment-centaur-token-3-3": _tokensGreenEnchantmentCentaurToken33,
   "tokens/green-enchantment-spider-token-reach": _tokensGreenEnchantmentSpiderTokenReach,
   "tokens/green-hippo-token-1-1": _tokensGreenHippoToken11,
@@ -67055,6 +67079,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/merfolk-token-deeproot-waters": _tokensMerfolkTokenDeeprootWaters,
   "tokens/merfolk-token-silvergill-mentor": _tokensMerfolkTokenSilvergillMentor,
   "tokens/merfolk-token": _tokensMerfolkToken,
+  "tokens/merfolk-wizard-token": _tokensMerfolkWizardToken,
   "tokens/meteorite-token": _tokensMeteoriteToken,
   "tokens/minor-demon-token": _tokensMinorDemonToken,
   "tokens/minotaur-token": _tokensMinotaurToken,
@@ -67245,6 +67270,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/thrull-token": _tokensThrullToken,
   "tokens/tiny": _tokensTiny,
   "tokens/treasure-token": _tokensTreasureToken,
+  "tokens/treefolk-shaman-token": _tokensTreefolkShamanToken,
   "tokens/treefolk-token-sylvan-offering": _tokensTreefolkTokenSylvanOffering,
   "tokens/treefolk-token": _tokensTreefolkToken,
   "tokens/treefolk-warrior-token": _tokensTreefolkWarriorToken,
@@ -67283,6 +67309,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/white-citizen-token": _tokensWhiteCitizenToken,
   "tokens/white-dog-token-1-1": _tokensWhiteDogToken11,
   "tokens/white-enchantment-soldier-token": _tokensWhiteEnchantmentSoldierToken,
+  "tokens/white-giant-warrior-token-5-5": _tokensWhiteGiantWarriorToken55,
   "tokens/wicked-role-token": _tokensWickedRoleToken,
   "tokens/wizard-token-guff": _tokensWizardTokenGuff,
   "tokens/wizard-token-kuja": _tokensWizardTokenKuja,

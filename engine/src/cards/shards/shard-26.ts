@@ -409,6 +409,7 @@ import _poolNorwoodRanger from "../pool/norwood-ranger.js";
 import _poolNothic from "../pool/nothic.js";
 import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
+import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
 import _poolOnward from "../pool/onward.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _poolNothic,
     _poolNoxiousToad,
     _poolObyrasAttendants,
+    _poolOffalsnout,
     _poolOgreErrant,
     _poolOmnathLocusOfTheRoil,
     _poolOnward,
