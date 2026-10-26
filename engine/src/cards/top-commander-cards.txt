@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3810 already implemented / 1190 missing (marks refreshed 2026-10-26)
+3811 already implemented / 1189 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4263,7 +4263,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4270  Sandstone Oracle                         {7}              Artifact Creature — Sphinx
 [x]  4271  Ninja Pizza                              {2}{G}           Enchantment
 [x]  4272  Remote Isle                              {0}              Land
-[ ]  4273  Notorious Throng                         {3}{U}           Kindred Sorcery — Rogue
+[x]  4273  Notorious Throng                         {3}{U}           Kindred Sorcery — Rogue
 [x]  4274  Vraan, Executioner Thane                 {1}{B}           Legendary Creature — Phyrexian Vampire
 [x]  4275  Baeloth Barrityl, Entertainer            {4}{R}           Legendary Creature — Elf Shaman
 [x]  4276  Tavern Brawler                           {2}{R}           Legendary Enchantment — Background

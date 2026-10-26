@@ -271,7 +271,17 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "return-from-graveyard": none,
   // A delayed ability acts on the targets its creator chose (rule 603.7c): it
   // has none of its own, its text not saying "target" (115.10a).
-  "delayed-trigger": (n, v) => v.child(n.effect),
+  // One watching a target leave and bringing it back ("when that creature
+  // dies this turn, return that card to the battlefield" — Graceful
+  // Reprieve) is a save for that slot.
+  "delayed-trigger": (n, v) => {
+    const at = n.at;
+    if (typeof at === "object" && "leaves" in at && typeof at.leaves === "number") {
+      const back = n.effect.kind === "put-onto-battlefield" || n.effect.kind === "return-to-hand";
+      if (back) v.touch(at.leaves, "help", MAJOR);
+    }
+    v.child(n.effect);
+  },
   "enters-with-counters": (n, v) => v.touch(n.target, "help", MINOR),
   "allow-cast-from-exile": (n, v) => v.touch(n.target, "take", MAJOR),
   "cast-now": (n, v) => {
@@ -305,7 +315,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "grant-keyword-all": none,
   "add-counter": (n, v) =>
     v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MAJOR),
-  "add-counter-all": none,
+  // "On each creature target player controls" (Meadowboon): that player's.
+  "add-counter-all": (n, v) =>
+    v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
   // The reverse of `add-counter`: losing a harmful counter helps.
   "remove-counter": (n, v) =>
     v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR),

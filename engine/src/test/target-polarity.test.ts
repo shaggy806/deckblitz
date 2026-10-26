@@ -132,6 +132,10 @@ describe("slot polarity", () => {
     expect(cast("Dying Wish")).toEqual(["help"]);
   });
 
+  it("reads a delayed 'when it dies, return it' as a save", () => {
+    expect(cast("Graceful Reprieve")).toEqual(["help"]);
+  });
+
   it("classifies nearly every targeted slot in the pool", () => {
     // A ratchet, not a target: 98.6% when this was written (1,771 slots).
     // What's left is genuinely the board's call — a transform, an animated
