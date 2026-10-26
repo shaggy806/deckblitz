@@ -5,6 +5,7 @@ const DIES = "When this token dies, target creature gets -1/-1 until end of turn
 /** 1/1 black Zombie Goblin named Festering Goblin — Skirk Ridge Exhumer's token. */
 export default defineCard({
   name: "Festering Goblin Token",
+  tokenName: "Festering Goblin",
   colors: ["B"],
   types: ["creature"],
   subtypes: ["Zombie", "Goblin"],

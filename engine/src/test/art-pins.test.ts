@@ -42,6 +42,8 @@ const NO_TOKEN_PRINTING = new Set([
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",
+  // Skirk Ridge Exhumer (FUT)'s Festering Goblin was never printed as a token.
+  "Festering Goblin Token",
   // Goblin Scouts (MIR) never had a token printing.
   "Goblin Scout Token",
   // Carrion (MIR)'s 0/1 black Insects were never printed as a token.
