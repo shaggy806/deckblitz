@@ -41,6 +41,7 @@ import _poolBaneOfHanweir from "../pool/bane-of-hanweir.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBanishingStroke from "../pool/banishing-stroke.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
+import _poolBaruFistOfKrosa from "../pool/baru-fist-of-krosa.js";
 import _poolBattlefieldButcher from "../pool/battlefield-butcher.js";
 import _poolBaxterFlyInTheOintment from "../pool/baxter-fly-in-the-ointment.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
@@ -61,6 +62,7 @@ import _poolBloomHulk from "../pool/bloom-hulk.js";
 import _poolBlurOfHeroism from "../pool/blur-of-heroism.js";
 import _poolBodyOfKnowledge from "../pool/body-of-knowledge.js";
 import _poolBogBadger from "../pool/bog-badger.js";
+import _poolBogardanLancer from "../pool/bogardan-lancer.js";
 import _poolBomatBazaarBarge from "../pool/bomat-bazaar-barge.js";
 import _poolBonePitBrute from "../pool/bone-pit-brute.js";
 import _poolBoneSaw from "../pool/bone-saw.js";
@@ -205,6 +207,7 @@ import _poolFlowstoneFlood from "../pool/flowstone-flood.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolFogOnTheBarrowDowns from "../pool/fog-on-the-barrow-downs.js";
 import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
+import _poolForesee from "../pool/foresee.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFoundryHornet from "../pool/foundry-hornet.js";
@@ -768,6 +771,7 @@ const shard: CardShard = {
     _poolBanishingBetrayal,
     _poolBanishingStroke,
     _poolBarbedBattlegear,
+    _poolBaruFistOfKrosa,
     _poolBattlefieldButcher,
     _poolBaxterFlyInTheOintment,
     _poolBebopRocksteady,
@@ -788,6 +792,7 @@ const shard: CardShard = {
     _poolBlurOfHeroism,
     _poolBodyOfKnowledge,
     _poolBogBadger,
+    _poolBogardanLancer,
     _poolBomatBazaarBarge,
     _poolBonePitBrute,
     _poolBoneSaw,
@@ -932,6 +937,7 @@ const shard: CardShard = {
     _poolFodderCannon,
     _poolFogOnTheBarrowDowns,
     _poolForerunnerOfTheHeralds,
+    _poolForesee,
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFoundryHornet,

@@ -571,6 +571,7 @@ import _poolSkyspearCavalry from "../pool/skyspear-cavalry.js";
 import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
 import _poolSlimefootTheStowaway from "../pool/slimefoot-the-stowaway.js";
 import _poolSlithFirewalker from "../pool/slith-firewalker.js";
+import _poolSnakeCultInitiation from "../pool/snake-cult-initiation.js";
 import _poolSnakeform from "../pool/snakeform.js";
 import _poolSneakingGuide from "../pool/sneaking-guide.js";
 import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
@@ -668,6 +669,7 @@ import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
+import _poolUnblinkingBleb from "../pool/unblinking-bleb.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
 import _poolUnleashShell from "../pool/unleash-shell.js";
 import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
@@ -1320,6 +1322,7 @@ const shard: CardShard = {
     _poolSlaveringBranchsnapper,
     _poolSlimefootTheStowaway,
     _poolSlithFirewalker,
+    _poolSnakeCultInitiation,
     _poolSnakeform,
     _poolSneakingGuide,
     _poolSnubhornSentry,
@@ -1417,6 +1420,7 @@ const shard: CardShard = {
     _poolTyvarsStand,
     _poolUlvenwaldObserver,
     _poolUnauthorizedExit,
+    _poolUnblinkingBleb,
     _poolUnclaimedTerritory,
     _poolUnleashShell,
     _poolUnrulyKrasis,

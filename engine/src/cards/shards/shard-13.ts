@@ -736,6 +736,7 @@ import _tokensSatyrToken from "../tokens/satyr-token.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
 import _tokensVillainToken from "../tokens/villain-token.js";
 import _tokensWoodToken from "../tokens/wood-token.js";
+import _tokensWurmTokenBaruFistOfKrosa from "../tokens/wurm-token-baru-fist-of-krosa.js";
 
 const shard: CardShard = {
   pool: [
@@ -1474,6 +1475,7 @@ const shard: CardShard = {
     _tokensSpiritToken,
     _tokensVillainToken,
     _tokensWoodToken,
+    _tokensWurmTokenBaruFistOfKrosa,
   ],
 };
 

@@ -78,6 +78,7 @@ import _poolBramblefortFink from "../pool/bramblefort-fink.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
+import _poolBridgeFromBelow from "../pool/bridge-from-below.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBrushwagg from "../pool/brushwagg.js";
@@ -783,6 +784,7 @@ const shard: CardShard = {
     _poolBrawnAmadeusCho,
     _poolBrazenBlademaster,
     _poolBreathOfTheSleepless,
+    _poolBridgeFromBelow,
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
     _poolBrushwagg,

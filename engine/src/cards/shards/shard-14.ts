@@ -136,6 +136,7 @@ import _poolCultivatorOfBlades from "../pool/cultivator-of-blades.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
 import _poolCuriousHomunculus from "../pool/curious-homunculus.js";
 import _poolCurseOfMaritLage from "../pool/curse-of-marit-lage.js";
+import _poolCutthroatIlDal from "../pool/cutthroat-il-dal.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
 import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
 import _poolDaiLiAgents from "../pool/dai-li-agents.js";
@@ -250,6 +251,7 @@ import _poolForestBear from "../pool/forest-bear.js";
 import _poolFortifiedRampart from "../pool/fortified-rampart.js";
 import _poolFortifyingProvisions from "../pool/fortifying-provisions.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
+import _poolFrenzySliver from "../pool/frenzy-sliver.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
 import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
 import _poolFromTheAshes from "../pool/from-the-ashes.js";
@@ -728,10 +730,12 @@ import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-toke
 import _tokensElfKnightToken from "../tokens/elf-knight-token.js";
 import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
+import _tokensGoldmeadowHarrierToken from "../tokens/goldmeadow-harrier-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
 import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment-spider-token-reach.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
+import _tokensMetallicSliverToken from "../tokens/metallic-sliver-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
 import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
 import _tokensSpiritTokenGhostlyDancers from "../tokens/spirit-token-ghostly-dancers.js";
@@ -874,6 +878,7 @@ const shard: CardShard = {
     _poolCuriousAltisaur,
     _poolCuriousHomunculus,
     _poolCurseOfMaritLage,
+    _poolCutthroatIlDal,
     _poolCyberdriveAwakener,
     _poolCyclopsOfEternalFury,
     _poolDaiLiAgents,
@@ -988,6 +993,7 @@ const shard: CardShard = {
     _poolFortifiedRampart,
     _poolFortifyingProvisions,
     _poolFrenziedArynx,
+    _poolFrenzySliver,
     _poolFreshVolunteers,
     _poolFrogtosserBanneret,
     _poolFromTheAshes,
@@ -1468,10 +1474,12 @@ const shard: CardShard = {
     _tokensElfKnightToken,
     _tokensFishToken,
     _tokensGoblinConstructToken,
+    _tokensGoldmeadowHarrierToken,
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,
     _tokensGreenEnchantmentSpiderTokenReach,
     _tokensKrakenToken,
+    _tokensMetallicSliverToken,
     _tokensNinjaTokenKaitoShizuki,
     _tokensScorpionDragonToken,
     _tokensSpiritTokenGhostlyDancers,

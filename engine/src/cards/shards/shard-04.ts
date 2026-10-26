@@ -291,6 +291,7 @@ import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
 import _poolImpelledGiant from "../pool/impelled-giant.js";
+import _poolImperialMask from "../pool/imperial-mask.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImpromptuRaid from "../pool/impromptu-raid.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
@@ -448,6 +449,7 @@ import _poolPucasCovenant from "../pool/pucas-covenant.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
 import _poolPyricSalamander from "../pool/pyric-salamander.js";
+import _poolPyromancersSwath from "../pool/pyromancers-swath.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
 import _poolRadhasFirebrand from "../pool/radhas-firebrand.js";
 import _poolRagingRedcap from "../pool/raging-redcap.js";
@@ -530,6 +532,7 @@ import _poolSigiledSkink from "../pool/sigiled-skink.js";
 import _poolSimicManipulator from "../pool/simic-manipulator.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkilledAnimator from "../pool/skilled-animator.js";
+import _poolSkirkRidgeExhumer from "../pool/skirk-ridge-exhumer.js";
 import _poolSkitteringSkirge from "../pool/skittering-skirge.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
 import _poolSkybladesBoon from "../pool/skyblades-boon.js";
@@ -592,6 +595,7 @@ import _poolSyphonMind from "../pool/syphon-mind.js";
 import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTahCropElite from "../pool/tah-crop-elite.js";
+import _poolTakePossession from "../pool/take-possession.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTasigursCruelty from "../pool/tasigurs-cruelty.js";
@@ -1008,6 +1012,7 @@ const shard: CardShard = {
     _poolIceOut,
     _poolIllusionistsStratagem,
     _poolImpelledGiant,
+    _poolImperialMask,
     _poolImposingVantasaur,
     _poolImpromptuRaid,
     _poolImskirIronEater,
@@ -1165,6 +1170,7 @@ const shard: CardShard = {
     _poolPutridLeech,
     _poolPyreticRitual,
     _poolPyricSalamander,
+    _poolPyromancersSwath,
     _poolQuandrixCampus,
     _poolRadhasFirebrand,
     _poolRagingRedcap,
@@ -1247,6 +1253,7 @@ const shard: CardShard = {
     _poolSimicManipulator,
     _poolSisterHospitaller,
     _poolSkilledAnimator,
+    _poolSkirkRidgeExhumer,
     _poolSkitteringSkirge,
     _poolSkyTerror,
     _poolSkybladesBoon,
@@ -1309,6 +1316,7 @@ const shard: CardShard = {
     _poolSyrArmontTheRedeemer,
     _poolSzarekhTheSilentKing,
     _poolTahCropElite,
+    _poolTakePossession,
     _poolTamsResistance,
     _poolTangledFlorahedron,
     _poolTasigursCruelty,

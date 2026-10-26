@@ -134,6 +134,15 @@ describe("slot polarity", () => {
     expect(cast("Dying Wish")).toEqual(["help"]);
   });
 
+  it("reads an Aura that taps, untaps, steals or may destroy what it enchants", () => {
+    expect(cast("Narcolepsy")).toEqual(["harm"]);
+    expect(cast("Pemmin's Aura")).toEqual(["help"]);
+    expect(cast("Second Wind")).toEqual(["either"]);
+    expect(cast("Frenzied Fugue")).toEqual(["harm"]);
+    expect(cast("Wellspring")).toEqual(["harm"]);
+    expect(cast("Quiet Disrepair")).toEqual(["harm"]);
+  });
+
   it("reads an Aura that hurts its permanent's controller each upkeep, and one that arms its creature", () => {
     expect(cast("Parasitic Bond")).toEqual(["harm"]);
     expect(cast("Power Taint")).toEqual(["harm"]);

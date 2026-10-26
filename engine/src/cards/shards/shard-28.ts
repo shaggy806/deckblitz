@@ -344,6 +344,7 @@ import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
+import _poolLlanowarMentor from "../pool/llanowar-mentor.js";
 import _poolLoamLarva from "../pool/loam-larva.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
@@ -416,6 +417,7 @@ import _poolNorthernPaladin from "../pool/northern-paladin.js";
 import _poolNoyanDarRoilShaper from "../pool/noyan-dar-roil-shaper.js";
 import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
 import _poolOakenSiren from "../pool/oaken-siren.js";
+import _poolOblivionCrown from "../pool/oblivion-crown.js";
 import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
@@ -479,6 +481,7 @@ import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
+import _poolRavagingRiftwurm from "../pool/ravaging-riftwurm.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
 import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
@@ -537,6 +540,7 @@ import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarecrow from "../pool/scarecrow.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
+import _poolScourgeOfKherRidges from "../pool/scourge-of-kher-ridges.js";
 import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
 import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
@@ -1098,6 +1102,7 @@ const shard: CardShard = {
     _poolLightningCloud,
     _poolLivingWall,
     _poolLlanowarKnight,
+    _poolLlanowarMentor,
     _poolLoamLarva,
     _poolLucentLiminid,
     _poolLuciusTheEternal,
@@ -1170,6 +1175,7 @@ const shard: CardShard = {
     _poolNoyanDarRoilShaper,
     _poolNyamiClassMotherShip,
     _poolOakenSiren,
+    _poolOblivionCrown,
     _poolOctomancer,
     _poolOctopusForm,
     _poolOmnathLocusOfCreation,
@@ -1233,6 +1239,7 @@ const shard: CardShard = {
     _poolRamunapExcavator,
     _poolRapaciousGuest,
     _poolRapierWit,
+    _poolRavagingRiftwurm,
     _poolRazortideBridge,
     _poolRazortrapGorge,
     _poolRazorvergeThicket,
@@ -1291,6 +1298,7 @@ const shard: CardShard = {
     _poolScaledWurm,
     _poolScarecrow,
     _poolScarletSpiderKaine,
+    _poolScourgeOfKherRidges,
     _poolScrapyardMongrel,
     _poolScreamreachBrawler,
     _poolScribeOfTheMindful,

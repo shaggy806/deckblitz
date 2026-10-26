@@ -187,6 +187,7 @@ import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
 import _poolElectricRevelation from "../pool/electric-revelation.js";
 import _poolEliminate from "../pool/eliminate.js";
 import _poolElvishRegrower from "../pool/elvish-regrower.js";
+import _poolEmberwildeAugur from "../pool/emberwilde-augur.js";
 import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnchantedEvening from "../pool/enchanted-evening.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
@@ -926,6 +927,7 @@ const shard: CardShard = {
     _poolElectricRevelation,
     _poolEliminate,
     _poolElvishRegrower,
+    _poolEmberwildeAugur,
     _poolEmeritusOfWoe,
     _poolEnchantedEvening,
     _poolEnduringCourage,

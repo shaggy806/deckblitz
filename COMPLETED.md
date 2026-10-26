@@ -97,6 +97,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   cumulative upkeeps as a hybrid cost — by five `card-author` agents and the lead; 33 blocked
   (`B196.json`), cumulative upkeep's other costs (six) and the Martyrs' reveal cost (five)
   leading. Coldsnap is whole. `ripple-recover.test.ts`.
+- **Future Sight, whole** (batch 195, the middle walk's second range, 2026-10-26): no feature
+  built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below,
+  Narcomoeba, Storm Entity, Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67
+  more — and 45 blocked (`B195.json`), fateseal and targets in exile leading with two each.
 - **Epic, and Saviors of Kamigawa's 100 most-played left** (batch 197, the third middle walk,
   2026-10-26, `keyword:epic`): **built** epic (rule 702.50 — the `epic` effect, last in the
   spell's sequence: its controller can't cast spells for the rest of the game,

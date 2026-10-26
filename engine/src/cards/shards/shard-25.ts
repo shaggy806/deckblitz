@@ -284,6 +284,7 @@ import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
+import _poolHenchfiendOfUkor from "../pool/henchfiend-of-ukor.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
 import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
@@ -348,6 +349,7 @@ import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
 import _poolLightningAxe from "../pool/lightning-axe.js";
 import _poolLilianasStandardBearer from "../pool/lilianas-standard-bearer.js";
+import _poolLogicKnot from "../pool/logic-knot.js";
 import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
 import _poolLookoutsDispersal from "../pool/lookouts-dispersal.js";
 import _poolLoomingAltisaur from "../pool/looming-altisaur.js";
@@ -996,6 +998,7 @@ const shard: CardShard = {
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
+    _poolHenchfiendOfUkor,
     _poolHermitOfTheNatterknolls,
     _poolHordeOfBoggarts,
     _poolHumblerOfMortals,
@@ -1060,6 +1063,7 @@ const shard: CardShard = {
     _poolLightfootTechnique,
     _poolLightningAxe,
     _poolLilianasStandardBearer,
+    _poolLogicKnot,
     _poolLonesomeUnicorn,
     _poolLookoutsDispersal,
     _poolLoomingAltisaur,
