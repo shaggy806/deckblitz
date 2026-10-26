@@ -259,6 +259,7 @@ import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
+import _poolHiddenHerd from "../pool/hidden-herd.js";
 import _poolHideOnTheCeiling from "../pool/hide-on-the-ceiling.js";
 import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
@@ -414,6 +415,7 @@ import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPacksDisdain from "../pool/packs-disdain.js";
+import _poolParasiticBond from "../pool/parasitic-bond.js";
 import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
@@ -984,6 +986,7 @@ const shard: CardShard = {
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
     _poolHeronBlessedGeist,
+    _poolHiddenHerd,
     _poolHideOnTheCeiling,
     _poolHighStride,
     _poolHillGiantHerdgorger,
@@ -1139,6 +1142,7 @@ const shard: CardShard = {
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
     _poolPacksDisdain,
+    _poolParasiticBond,
     _poolParoxysm,
     _poolPatchedPlaything,
     _poolPatchworkAutomaton,

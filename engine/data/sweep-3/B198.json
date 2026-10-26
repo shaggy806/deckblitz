@@ -1,0 +1,613 @@
+{
+ "batch": "B198",
+ "status": "complete",
+ "ranks": "Urza's Saga (USG, 1998-10-12): the rest of the set, its 81 cards left (oldest-first walk); built \"look at target player's hand\" (the look-at-hand effect) and discard-chosen's upTo (\"choose up to X cards from it\"), with Glasses of Urza, Clairvoyance, Sorcerous Sight, Talas Explorer and Ingenious Thief from batches 130, 136 and 190",
+ "authored": [
+  {
+   "name": "Antagonism",
+   "files": [
+    "engine/src/cards/pool/antagonism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bereavement",
+   "files": [
+    "engine/src/cards/pool/bereavement.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bulwark",
+   "files": [
+    "engine/src/cards/pool/bulwark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cave Tiger",
+   "files": [
+    "engine/src/cards/pool/cave-tiger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Child of Gaea",
+   "files": [
+    "engine/src/cards/pool/child-of-gaea.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chimeric Staff",
+   "files": [
+    "engine/src/cards/pool/chimeric-staff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clairvoyance",
+   "files": [
+    "engine/src/cards/pool/clairvoyance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crosswinds",
+   "files": [
+    "engine/src/cards/pool/crosswinds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Discordant Dirge",
+   "files": [
+    "engine/src/cards/pool/discordant-dirge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drifting Djinn",
+   "files": [
+    "engine/src/cards/pool/drifting-djinn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dromosaur",
+   "files": [
+    "engine/src/cards/pool/dromosaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Electryte",
+   "files": [
+    "engine/src/cards/pool/electryte.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endless Wurm",
+   "files": [
+    "engine/src/cards/pool/endless-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endoskeleton",
+   "files": [
+    "engine/src/cards/pool/endoskeleton.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glasses of Urza",
+   "files": [
+    "engine/src/cards/pool/glasses-of-urza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Headlong Rush",
+   "files": [
+    "engine/src/cards/pool/headlong-rush.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hidden Ancients",
+   "files": [
+    "engine/src/cards/pool/hidden-ancients.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hidden Guerrillas",
+   "files": [
+    "engine/src/cards/pool/hidden-guerrillas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Herd",
+   "files": [
+    "engine/src/cards/pool/hidden-herd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Predators",
+   "files": [
+    "engine/src/cards/pool/hidden-predators.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imaginary Pet",
+   "files": [
+    "engine/src/cards/pool/imaginary-pet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ingenious Thief",
+   "files": [
+    "engine/src/cards/pool/ingenious-thief.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mana Leech",
+   "files": [
+    "engine/src/cards/pool/mana-leech.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Midsummer Revel",
+   "files": [
+    "engine/src/cards/pool/midsummer-revel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mishra's Helix",
+   "files": [
+    "engine/src/cards/pool/mishras-helix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mobile Fort",
+   "files": [
+    "engine/src/cards/pool/mobile-fort.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Opal Archangel",
+   "files": [
+    "engine/src/cards/pool/opal-archangel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Opal Caryatid",
+   "files": [
+    "engine/src/cards/pool/opal-caryatid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Opal Gargoyle",
+   "files": [
+    "engine/src/cards/pool/opal-gargoyle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Parasitic Bond",
+   "files": [
+    "engine/src/cards/pool/parasitic-bond.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Power Taint",
+   "files": [
+    "engine/src/cards/pool/power-taint.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reclusive Wight",
+   "files": [
+    "engine/src/cards/pool/reclusive-wight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redeem",
+   "files": [
+    "engine/src/cards/pool/redeem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retaliation",
+   "files": [
+    "engine/src/cards/pool/retaliation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retromancer",
+   "files": [
+    "engine/src/cards/pool/retromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rune of Protection: Artifacts",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-artifacts.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rune of Protection: Black",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-black.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rune of Protection: Blue",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-blue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rune of Protection: Green",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-green.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rune of Protection: Lands",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-lands.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rune of Protection: Red",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-red.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sanctum Guardian",
+   "files": [
+    "engine/src/cards/pool/sanctum-guardian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skittering Skirge",
+   "files": [
+    "engine/src/cards/pool/skittering-skirge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Somnophore",
+   "files": [
+    "engine/src/cards/pool/somnophore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorcerous Sight",
+   "files": [
+    "engine/src/cards/pool/sorcerous-sight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spined Fluke",
+   "files": [
+    "engine/src/cards/pool/spined-fluke.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sulfuric Vapors",
+   "files": [
+    "engine/src/cards/pool/sulfuric-vapors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Symbiosis",
+   "files": [
+    "engine/src/cards/pool/symbiosis.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Talas Explorer",
+   "files": [
+    "engine/src/cards/pool/talas-explorer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torch Song",
+   "files": [
+    "engine/src/cards/pool/torch-song.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treetop Rangers",
+   "files": [
+    "engine/src/cards/pool/treetop-rangers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vebulid",
+   "files": [
+    "engine/src/cards/pool/vebulid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veil of Birds",
+   "files": [
+    "engine/src/cards/pool/veil-of-birds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Veiled Sentry",
+   "files": [
+    "engine/src/cards/pool/veiled-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venomous Fangs",
+   "files": [
+    "engine/src/cards/pool/venomous-fangs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viashino Sandswimmer",
+   "files": [
+    "engine/src/cards/pool/viashino-sandswimmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viashino Weaponsmith",
+   "files": [
+    "engine/src/cards/pool/viashino-weaponsmith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "War Dance",
+   "files": [
+    "engine/src/cards/pool/war-dance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waylay",
+   "files": [
+    "engine/src/cards/pool/waylay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wirecat",
+   "files": [
+    "engine/src/cards/pool/wirecat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wizard Mentor",
+   "files": [
+    "engine/src/cards/pool/wizard-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yawgmoth's Edict",
+   "files": [
+    "engine/src/cards/pool/yawgmoths-edict.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Lingering Mirage",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "\"Enchanted land is an Island\" (rule 305.7)"
+  },
+  {
+   "name": "Academy Researchers",
+   "needs": [
+    "effect:put-aura-cards-onto-battlefield-attached-to-self"
+   ],
+   "why": "put an Aura card from your hand onto the battlefield attached to it"
+  },
+  {
+   "name": "Scald",
+   "needs": [
+    "trigger:tapped-for-mana-nonmana-trigger"
+   ],
+   "why": "\"whenever a player taps an Island for mana\" with a non-mana effect"
+  },
+  {
+   "name": "Rumbling Crescendo",
+   "needs": [
+    "decision:x-targets"
+   ],
+   "why": "\"up to X target lands\", X the verse counters"
+  },
+  {
+   "name": "Soul Sculptor",
+   "needs": [
+    "effect:set-types-temporary",
+    "duration:until-a-player-casts-creature-spell"
+   ],
+   "why": "becomes an enchantment and loses all abilities until a player casts a creature spell (duration new)"
+  },
+  {
+   "name": "Hidden Stag",
+   "needs": [
+    "effect:set-types-temporary"
+   ],
+   "why": "\"it becomes an enchantment\" (no longer a creature)"
+  },
+  {
+   "name": "Opal Acrolith",
+   "needs": [
+    "effect:set-types-temporary"
+   ],
+   "why": "\"{0}: This permanent becomes an enchantment.\""
+  },
+  {
+   "name": "Wild Dogs",
+   "needs": [
+    "effect:gain-control-to-player-with-most-life"
+   ],
+   "why": "gain-control can't name \"the player with the most life\""
+  },
+  {
+   "name": "Recantation",
+   "needs": [
+    "decision:x-targets"
+   ],
+   "why": "\"up to X target permanents\", X the verse counters"
+  },
+  {
+   "name": "Lurking Evil",
+   "needs": [
+    "cost:dynamic-life-cost"
+   ],
+   "why": "\"pay half your life, rounded up\" as a cost"
+  },
+  {
+   "name": "Purging Scythe",
+   "needs": [
+    "filter:least-toughness-among-all-creatures"
+   ],
+   "why": "untargeted creature with least toughness on the battlefield, controller breaks ties (new)"
+  },
+  {
+   "name": "Disorder",
+   "needs": [
+    "condition:that-player-controls"
+   ],
+   "why": "\"each player who controls a white creature\""
+  },
+  {
+   "name": "Veiled Apparition",
+   "needs": [
+    "effect:animate-grants-triggered"
+   ],
+   "why": "animate can't grant its own upkeep trigger"
+  },
+  {
+   "name": "Serra's Liturgy",
+   "needs": [
+    "decision:x-targets"
+   ],
+   "why": "\"up to X target artifacts and/or enchantments\", X the verse counters"
+  },
+  {
+   "name": "Opal Titan",
+   "needs": [
+    "effect:protection-from-target-colors"
+   ],
+   "why": "protection from each of that spell's colors, chosen at resolution"
+  },
+  {
+   "name": "Songstitcher",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent all combat damage dealt by target attacking creature"
+  },
+  {
+   "name": "Metrognome",
+   "needs": [
+    "trigger:discarded-by-opponent"
+   ],
+   "why": "\"when a spell or ability an opponent controls causes you to discard this card\""
+  },
+  {
+   "name": "Greener Pastures",
+   "needs": [
+    "condition:player-controls-most"
+   ],
+   "why": "\"if that player controls more lands than each other player\""
+  },
+  {
+   "name": "Serra's Hymn",
+   "needs": [
+    "effect:prevention-divided"
+   ],
+   "why": "prevent the next X damage divided among any number of targets"
+  },
+  {
+   "name": "Veiled Crocodile",
+   "needs": [
+    "trigger:state-trigger-hand-change"
+   ],
+   "why": "\"when a player has no cards in hand\" — state triggers aren't rechecked after hand changes mid-resolution (new)"
+  },
+  {
+   "name": "Okk",
+   "needs": [
+    "static:cant-attack-block-unless-greater-power-joins"
+   ],
+   "why": "\"can't attack/block unless a creature with greater power also attacks/blocks\" (new)"
+  },
+  {
+   "name": "Vampiric Embrace",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "\"whenever a creature dealt damage by enchanted creature this turn dies\""
+  },
+  {
+   "name": "Pendrell Flux",
+   "needs": [
+    "effect:sacrifice-unless-pay-its-mana-cost"
+   ],
+   "why": "granted \"sacrifice unless you pay its mana cost\" (new)"
+  },
+  {
+   "name": "Veiled Serpent",
+   "needs": [
+    "static:cant-attack-unless-defender-controls",
+    "effect:animate-grants-conditional-static"
+   ],
+   "why": "animate can't grant \"can't attack unless defending player controls an Island\""
+  }
+ ]
+}

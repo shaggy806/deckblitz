@@ -1166,6 +1166,10 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) mills ${N} cards?`).exec(s))) {
     return { kind: "mill", target: slot(m[1]), amount: amount(m[2]) };
   }
+  // "Look at target player's hand" (Glasses of Urza): a look alone.
+  if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
+    return { kind: "look-at-hand", target: slot(m[1]) };
+  }
   if ((m = re(`each opponent mills ${N} cards?`).exec(s))) {
     return { kind: "mill", target: "each-opponent", amount: amount(m[1]) };
   }

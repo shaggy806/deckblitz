@@ -183,6 +183,7 @@ import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDregMangler from "../pool/dreg-mangler.js";
+import _poolDromosaur from "../pool/dromosaur.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
@@ -939,6 +940,7 @@ const shard: CardShard = {
     _poolDramaticFinale,
     _poolDreadFugue,
     _poolDregMangler,
+    _poolDromosaur,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,

@@ -5478,6 +5478,16 @@ engine terms. A second thing to check is a second test.
 - **Do:** Pass the turn. When the opponent's Hill Giant attacks you, cast Just Fate on it in the declare attackers step.
 - **Expect:** Just Fate isn't castable in your own main phase, nor on the opponent's turn before attackers are declared. Once the Giant attacks you it is, and the Giant is destroyed before blocks.
 
+## Looking at a player's hand (2026-10-26, Urza's Saga)
+
+### Sorcerous Sight: looking at an opponent's hand
+- **Do:** Cast Sorcerous Sight targeting the opponent.
+- **Expect:** A popup titled "Looking at Bob's hand" shows every card in their hand, with nothing to pick and a "Done" button. Closing it draws you a card; the opponent's hand is unchanged.
+
+### Discordant Dirge: choose up to as many cards as its verse counters
+- **Do:** Activate Discordant Dirge (it has 2 verse counters), targeting the opponent.
+- **Expect:** A popup shows the opponent's whole hand and lets you pick up to 2 cards (or none). The cards you pick go to their graveyard.
+
 ## Epic (2026-10-26, Saviors of Kamigawa)
 
 ### Endless Swarm: a copy each upkeep, and no more spells

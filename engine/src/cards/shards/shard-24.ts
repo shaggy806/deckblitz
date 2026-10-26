@@ -191,6 +191,7 @@ import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
 import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
@@ -403,6 +404,7 @@ import _poolOjutaisCommand from "../pool/ojutais-command.js";
 import _poolOkibaReckonerRaid from "../pool/okiba-reckoner-raid.js";
 import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
+import _poolOpalCaryatid from "../pool/opal-caryatid.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
@@ -924,6 +926,7 @@ const shard: CardShard = {
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
     _poolElvishVisionary,
+    _poolEndoskeleton,
     _poolEnergyFlux,
     _poolEntrancingMelody,
     _poolEntsFury,
@@ -1136,6 +1139,7 @@ const shard: CardShard = {
     _poolOkibaReckonerRaid,
     _poolOltecArchaeologists,
     _poolOnTheJob,
+    _poolOpalCaryatid,
     _poolOrazcaPuzzleDoor,
     _poolOrcishHellraiser,
     _poolOrderOfYawgmoth,

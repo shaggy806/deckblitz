@@ -23009,8 +23009,8 @@ export class Game {
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber) =>
         this.discardByEffect(target, amount, random === true, undefined, unlessOne, anyNumber === true),
-      discardChosen: (target, filter, lookOnly, optional) =>
-        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional),
+      discardChosen: (target, filter, lookOnly, optional, upTo) =>
+        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo),
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
       modifyPtAll: (filter, power, toughness, duration, exceptSource, scopeTo) =>
@@ -24597,7 +24597,10 @@ export class Game {
    * (rule 701.20) — or only looked at by `chooser` — and a `choose-from-zone`
    * over it for `chooser`, whose answer `target` discards. A card the
    * chooser may pick is one matching `filter` read from the chooser's side
-   * ("a nonland card with mana value 3 or less"). */
+   * ("a nonland card with mana value 3 or less"). `upTo` is "up to that
+   * many" instead of one (Discordant Dirge); 0 is a look alone ("look at
+   * target player's hand" — Glasses of Urza), asked with nothing to pick so
+   * its viewer closes it. */
   private beginDiscardChosen(
     chooser: PlayerId,
     source: ObjectId,
@@ -24605,6 +24608,7 @@ export class Game {
     filter: CardFilter | undefined,
     lookOnly: boolean,
     optional: boolean,
+    upTo?: number,
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -24612,19 +24616,24 @@ export class Game {
     const hand = this.state.zones.perPlayer[player].hand;
     if (hand.length === 0) return;
     if (!lookOnly) this.revealCards(player, [...hand], "hand");
-    const eligible = hand.filter(
-      (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
-    );
+    const max = upTo ?? 1;
+    const eligible =
+      max === 0
+        ? []
+        : hand.filter(
+            (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
+          );
     // Nothing it could be: everyone has seen the hand, and nothing is asked.
-    if (eligible.length === 0) return;
+    // A look still shows the hand to the one looking.
+    if (eligible.length === 0 && !lookOnly) return;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player: chooser,
       ...(chooser !== player ? { forPlayer: player } : {}),
       ids: [...hand],
       eligible,
-      min: optional ? 0 : 1,
-      max: 1,
+      min: optional || upTo !== undefined || eligible.length === 0 ? 0 : 1,
+      max: Math.min(max, eligible.length),
       destination: "discard",
       leftover: "stay",
     };

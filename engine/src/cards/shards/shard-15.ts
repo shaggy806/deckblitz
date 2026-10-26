@@ -635,6 +635,7 @@ import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVectorGlider from "../pool/vector-glider.js";
 import _poolVedalkenHeretic from "../pool/vedalken-heretic.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
+import _poolVeiledSentry from "../pool/veiled-sentry.js";
 import _poolVenarianGold from "../pool/venarian-gold.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
 import _poolViashinoSkeleton from "../pool/viashino-skeleton.js";
@@ -1330,6 +1331,7 @@ const shard: CardShard = {
     _poolVectorGlider,
     _poolVedalkenHeretic,
     _poolVegaTheWatcher,
+    _poolVeiledSentry,
     _poolVenarianGold,
     _poolViashinoGrappler,
     _poolViashinoSkeleton,

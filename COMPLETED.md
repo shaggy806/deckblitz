@@ -95,6 +95,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   authored — Sekki, Seasons' Guide, Kiyomaro, Iname as One, Skyfire Kirin, Measure of Wickedness,
   Barrel Down Sokenzan (sweep) and 61 more — by five `card-author` agents and the lead; 33 blocked
   (`B197.json`), splice onto Arcane leading with four. `keyword-epic.test.ts`.
+- **"Look at target player's hand", and the rest of Urza's Saga — Urza's Saga is whole** (batch
+  198, the oldest-first walk, 2026-10-26, `effect:look-at-target-player-hand`): **built** the
+  `look-at-hand` effect (the hand shown to its looker alone, a `choose-from-zone` with nothing to
+  pick, closed with Done) and `discard-chosen`'s `upTo` ("choose up to X cards from it"), taught
+  to the scaffolder; with them Glasses of Urza, Clairvoyance, Sorcerous Sight, Talas Explorer,
+  Ingenious Thief and Discordant Dirge. 57 of the set's last 81 authored — Somnophore, Electryte,
+  Midsummer Revel, Torch Song, the Runes of Protection and the Hidden, Opal and Veiled enchantments
+  among them — and 24 blocked (`B198.json`), "up to X targets" (`decision:x-targets`) and "becomes
+  an enchantment" (`effect:set-types-temporary`) leading with three each.
 - **The rest of Lorwyn — Lorwyn is whole** (batch 192, the middle walk's second range, 2026-10-26):
   **built** a "whenever you clash" trigger (rule 701.30, `trigger:clash` — each clashing player
   clashes, a `clashed` event apiece once the cards have moved, whoever started it; `won: true` for

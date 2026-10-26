@@ -323,6 +323,7 @@ import _poolIllusoryGains from "../pool/illusory-gains.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
+import _poolIngeniousThief from "../pool/ingenious-thief.js";
 import _poolInnerFlameAcolyte from "../pool/inner-flame-acolyte.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
@@ -1102,6 +1103,7 @@ const shard: CardShard = {
     _poolImmersturmSkullcairn,
     _poolImpulse,
     _poolIncorrigibleYouths,
+    _poolIngeniousThief,
     _poolInnerFlameAcolyte,
     _poolInnovativeCommons,
     _poolInvigoratingHotSpring,

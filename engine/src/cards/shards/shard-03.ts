@@ -440,6 +440,7 @@ import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
 import _poolRunAfoul from "../pool/run-afoul.js";
 import _poolRuneCervinRider from "../pool/rune-cervin-rider.js";
+import _poolRuneOfProtectionLands from "../pool/rune-of-protection-lands.js";
 import _poolRunnersBane from "../pool/runners-bane.js";
 import _poolRushwoodElemental from "../pool/rushwood-elemental.js";
 import _poolSacredPrey from "../pool/sacred-prey.js";
@@ -626,6 +627,7 @@ import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWingcrafter from "../pool/wingcrafter.js";
 import _poolWingspanMentor from "../pool/wingspan-mentor.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
+import _poolWizardMentor from "../pool/wizard-mentor.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
 import _poolWoodlandChasm from "../pool/woodland-chasm.js";
@@ -1096,6 +1098,7 @@ const shard: CardShard = {
     _poolRumbleArena,
     _poolRunAfoul,
     _poolRuneCervinRider,
+    _poolRuneOfProtectionLands,
     _poolRunnersBane,
     _poolRushwoodElemental,
     _poolSacredPrey,
@@ -1282,6 +1285,7 @@ const shard: CardShard = {
     _poolWingcrafter,
     _poolWingspanMentor,
     _poolWittyRoastmaster,
+    _poolWizardMentor,
     _poolWoeStrider,
     _poolWondrousCrucible,
     _poolWoodlandChasm,

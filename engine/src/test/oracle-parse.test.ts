@@ -1479,6 +1479,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseCost("{1}{W}, {Q}").cost).toEqual({ mana: "{1}{W}", tap: false, untap: true });
   });
 
+  it("look at target player's hand (Glasses of Urza, Sorcerous Sight)", () => {
+    const glasses = face("{T}: Look at target player's hand.", "Artifact");
+    expect(glasses.activated[0].targets).toEqual(["player"]);
+    expect(glasses.activated[0].effect).toEqual({ kind: "look-at-hand", target: 0 });
+    expect(glasses.complete).toBe(true);
+    const sight = face("Look at target opponent's hand.\nDraw a card.", "Sorcery");
+    expect(sight.complete).toBe(true);
+  });
+
   it("conspire (rule 702.78)", () => {
     const trail = face("Target player mills four cards.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)", "Sorcery");
     expect(trail.conspire).toBe(true);

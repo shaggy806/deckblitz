@@ -155,6 +155,7 @@ import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
 import _poolDingusStaff from "../pool/dingus-staff.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
+import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
@@ -394,6 +395,7 @@ import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
+import _poolMishrasHelix from "../pool/mishras-helix.js";
 import _poolMoggWarMarshal from "../pool/mogg-war-marshal.js";
 import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
@@ -914,6 +916,7 @@ const shard: CardShard = {
     _poolDictateOfHeliod,
     _poolDingusStaff,
     _poolDireFleetCaptain,
+    _poolDiscordantDirge,
     _poolDisfigure,
     _poolDisplacerKitten,
     _poolDivineResilience,
@@ -1153,6 +1156,7 @@ const shard: CardShard = {
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMirrodinAvenged,
+    _poolMishrasHelix,
     _poolMoggWarMarshal,
     _poolMoldgrafScavenger,
     _poolMoltenFrame,
