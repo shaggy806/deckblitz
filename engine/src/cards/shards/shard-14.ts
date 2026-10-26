@@ -484,6 +484,7 @@ import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
+import _poolRecklessWaif from "../pool/reckless-waif.js";
 import _poolRegenesis from "../pool/regenesis.js";
 import _poolRegress from "../pool/regress.js";
 import _poolRelicRunner from "../pool/relic-runner.js";
@@ -1190,6 +1191,7 @@ const shard: CardShard = {
     _poolRancidRats,
     _poolRayOfEnfeeblement,
     _poolRecklessAbandon,
+    _poolRecklessWaif,
     _poolRegenesis,
     _poolRegress,
     _poolRelicRunner,

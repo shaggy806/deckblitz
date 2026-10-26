@@ -110,6 +110,7 @@ import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolChronicFlooding from "../pool/chronic-flooding.js";
+import _poolClaustrophobia from "../pool/claustrophobia.js";
 import _poolClawsOut from "../pool/claws-out.js";
 import _poolCleansingWildfire from "../pool/cleansing-wildfire.js";
 import _poolClearTheStage from "../pool/clear-the-stage.js";
@@ -855,6 +856,7 @@ const shard: CardShard = {
     _poolChromeHostHulk,
     _poolChromeMox,
     _poolChronicFlooding,
+    _poolClaustrophobia,
     _poolClawsOut,
     _poolCleansingWildfire,
     _poolClearTheStage,

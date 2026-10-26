@@ -2569,6 +2569,7 @@ import _poolBumiEclecticEarthbender from "./pool/bumi-eclectic-earthbender.js";
 import _poolBumpInTheNight from "./pool/bump-in-the-night.js";
 import _poolBuoyancy from "./pool/buoyancy.js";
 import _poolBurakosPartyLeader from "./pool/burakos-party-leader.js";
+import _poolBurdenOfGuilt from "./pool/burden-of-guilt.js";
 import _poolBurdenOfProof from "./pool/burden-of-proof.js";
 import _poolBurdenedAerialist from "./pool/burdened-aerialist.js";
 import _poolBurgeoning from "./pool/burgeoning.js";
@@ -3316,6 +3317,7 @@ import _poolClashOfTitans from "./pool/clash-of-titans.js";
 import _poolClashOfWills from "./pool/clash-of-wills.js";
 import _poolClatteringAugur from "./pool/clattering-augur.js";
 import _poolClatteringSkeletons from "./pool/clattering-skeletons.js";
+import _poolClaustrophobia from "./pool/claustrophobia.js";
 import _poolClavilenoFirstOfTheBlessed from "./pool/clavileno-first-of-the-blessed.js";
 import _poolClawingTorment from "./pool/clawing-torment.js";
 import _poolClawsOfGix from "./pool/claws-of-gix.js";
@@ -4348,6 +4350,7 @@ import _poolDaybreakChaplain from "./pool/daybreak-chaplain.js";
 import _poolDaybreakCharger from "./pool/daybreak-charger.js";
 import _poolDaybreakChimera from "./pool/daybreak-chimera.js";
 import _poolDaybreakCombatants from "./pool/daybreak-combatants.js";
+import _poolDaybreakRanger from "./pool/daybreak-ranger.js";
 import _poolDaydream from "./pool/daydream.js";
 import _poolDaysquadMarshal from "./pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "./pool/dazzling-angel.js";
@@ -11730,6 +11733,7 @@ import _poolMercilessEviction from "./pool/merciless-eviction.js";
 import _poolMercilessExecutioner from "./pool/merciless-executioner.js";
 import _poolMercilessHarlequin from "./pool/merciless-harlequin.js";
 import _poolMercilessJavelineer from "./pool/merciless-javelineer.js";
+import _poolMercilessPredator from "./pool/merciless-predator.js";
 import _poolMercilessRepurposing from "./pool/merciless-repurposing.js";
 import _poolMercilessResolve from "./pool/merciless-resolve.js";
 import _poolMercurialGeists from "./pool/mercurial-geists.js";
@@ -12723,6 +12727,7 @@ import _poolNightOfTheSweetsRevenge from "./pool/night-of-the-sweets-revenge.js"
 import _poolNightScythe from "./pool/night-scythe.js";
 import _poolNightbladeBrigade from "./pool/nightblade-brigade.js";
 import _poolNightdrinkerMoroii from "./pool/nightdrinker-moroii.js";
+import _poolNightfallPredator from "./pool/nightfall-predator.js";
 import _poolNightfireGiant from "./pool/nightfire-giant.js";
 import _poolNightguardPatrol from "./pool/nightguard-patrol.js";
 import _poolNighthawkDarkDefender from "./pool/nighthawk-dark-defender.js";
@@ -14775,6 +14780,7 @@ import _poolRecklessReveler from "./pool/reckless-reveler.js";
 import _poolRecklessScholar from "./pool/reckless-scholar.js";
 import _poolRecklessSpite from "./pool/reckless-spite.js";
 import _poolRecklessStormseeker from "./pool/reckless-stormseeker.js";
+import _poolRecklessWaif from "./pool/reckless-waif.js";
 import _poolReckonerBankbuster from "./pool/reckoner-bankbuster.js";
 import _poolReckonerShakedown from "./pool/reckoner-shakedown.js";
 import _poolReckonersBargain from "./pool/reckoners-bargain.js";
@@ -25256,6 +25262,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBumpInTheNight,
   _poolBuoyancy,
   _poolBurakosPartyLeader,
+  _poolBurdenOfGuilt,
   _poolBurdenOfProof,
   _poolBurdenedAerialist,
   _poolBurgeoning,
@@ -26003,6 +26010,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClashOfWills,
   _poolClatteringAugur,
   _poolClatteringSkeletons,
+  _poolClaustrophobia,
   _poolClavilenoFirstOfTheBlessed,
   _poolClawingTorment,
   _poolClawsOfGix,
@@ -27035,6 +27043,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDaybreakCharger,
   _poolDaybreakChimera,
   _poolDaybreakCombatants,
+  _poolDaybreakRanger,
   _poolDaydream,
   _poolDaysquadMarshal,
   _poolDazzlingAngel,
@@ -34417,6 +34426,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMercilessExecutioner,
   _poolMercilessHarlequin,
   _poolMercilessJavelineer,
+  _poolMercilessPredator,
   _poolMercilessRepurposing,
   _poolMercilessResolve,
   _poolMercurialGeists,
@@ -35410,6 +35420,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNightScythe,
   _poolNightbladeBrigade,
   _poolNightdrinkerMoroii,
+  _poolNightfallPredator,
   _poolNightfireGiant,
   _poolNightguardPatrol,
   _poolNighthawkDarkDefender,
@@ -37462,6 +37473,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRecklessScholar,
   _poolRecklessSpite,
   _poolRecklessStormseeker,
+  _poolRecklessWaif,
   _poolReckonerBankbuster,
   _poolReckonerShakedown,
   _poolReckonersBargain,
@@ -47956,6 +47968,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bump-in-the-night": _poolBumpInTheNight,
   "pool/buoyancy": _poolBuoyancy,
   "pool/burakos-party-leader": _poolBurakosPartyLeader,
+  "pool/burden-of-guilt": _poolBurdenOfGuilt,
   "pool/burden-of-proof": _poolBurdenOfProof,
   "pool/burdened-aerialist": _poolBurdenedAerialist,
   "pool/burgeoning": _poolBurgeoning,
@@ -48703,6 +48716,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clash-of-wills": _poolClashOfWills,
   "pool/clattering-augur": _poolClatteringAugur,
   "pool/clattering-skeletons": _poolClatteringSkeletons,
+  "pool/claustrophobia": _poolClaustrophobia,
   "pool/clavileno-first-of-the-blessed": _poolClavilenoFirstOfTheBlessed,
   "pool/clawing-torment": _poolClawingTorment,
   "pool/claws-of-gix": _poolClawsOfGix,
@@ -49735,6 +49749,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/daybreak-charger": _poolDaybreakCharger,
   "pool/daybreak-chimera": _poolDaybreakChimera,
   "pool/daybreak-combatants": _poolDaybreakCombatants,
+  "pool/daybreak-ranger": _poolDaybreakRanger,
   "pool/daydream": _poolDaydream,
   "pool/daysquad-marshal": _poolDaysquadMarshal,
   "pool/dazzling-angel": _poolDazzlingAngel,
@@ -57117,6 +57132,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/merciless-executioner": _poolMercilessExecutioner,
   "pool/merciless-harlequin": _poolMercilessHarlequin,
   "pool/merciless-javelineer": _poolMercilessJavelineer,
+  "pool/merciless-predator": _poolMercilessPredator,
   "pool/merciless-repurposing": _poolMercilessRepurposing,
   "pool/merciless-resolve": _poolMercilessResolve,
   "pool/mercurial-geists": _poolMercurialGeists,
@@ -58110,6 +58126,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/night-scythe": _poolNightScythe,
   "pool/nightblade-brigade": _poolNightbladeBrigade,
   "pool/nightdrinker-moroii": _poolNightdrinkerMoroii,
+  "pool/nightfall-predator": _poolNightfallPredator,
   "pool/nightfire-giant": _poolNightfireGiant,
   "pool/nightguard-patrol": _poolNightguardPatrol,
   "pool/nighthawk-dark-defender": _poolNighthawkDarkDefender,
@@ -60162,6 +60179,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reckless-scholar": _poolRecklessScholar,
   "pool/reckless-spite": _poolRecklessSpite,
   "pool/reckless-stormseeker": _poolRecklessStormseeker,
+  "pool/reckless-waif": _poolRecklessWaif,
   "pool/reckoner-bankbuster": _poolReckonerBankbuster,
   "pool/reckoner-shakedown": _poolReckonerShakedown,
   "pool/reckoners-bargain": _poolReckonersBargain,

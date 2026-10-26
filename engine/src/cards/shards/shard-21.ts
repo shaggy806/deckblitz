@@ -139,6 +139,7 @@ import _poolDarajaGriffin from "../pool/daraja-griffin.js";
 import _poolDaredevilManWithoutFear from "../pool/daredevil-man-without-fear.js";
 import _poolDarkFavor from "../pool/dark-favor.js";
 import _poolDarkNourishment from "../pool/dark-nourishment.js";
+import _poolDaybreakRanger from "../pool/daybreak-ranger.js";
 import _poolDeathWard from "../pool/death-ward.js";
 import _poolDeathgreeter from "../pool/deathgreeter.js";
 import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
@@ -823,6 +824,7 @@ const shard: CardShard = {
     _poolDaredevilManWithoutFear,
     _poolDarkFavor,
     _poolDarkNourishment,
+    _poolDaybreakRanger,
     _poolDeathWard,
     _poolDeathgreeter,
     _poolDeceptiveFrostkite,

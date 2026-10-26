@@ -409,6 +409,7 @@ import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
+import _poolNightfallPredator from "../pool/nightfall-predator.js";
 import _poolNighthaze from "../pool/nighthaze.js";
 import _poolNightskyMimic from "../pool/nightsky-mimic.js";
 import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolNessianCourser,
     _poolNeurokStealthsuit,
     _poolNightdrinkerMoroii,
+    _poolNightfallPredator,
     _poolNighthaze,
     _poolNightskyMimic,
     _poolNivMizzetTheFiremind,
