@@ -8326,4 +8326,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Endless Swarm: a copy each upkeep, and no more spells',
     board({ you: { bf: ['Forest*9'], hand: ['Endless Swarm', 'Grizzly Bears', 'Forest', 'Forest'] } }),
   ),
+  preset(
+    'Desperate Ritual: splicing Spiritual Visit onto it',
+    board({ you: { bf: ['Mountain*2', 'Plains'], hand: ['Desperate Ritual', 'Spiritual Visit'] } }),
+  ),
 ]

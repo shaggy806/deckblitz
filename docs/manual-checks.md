@@ -5499,3 +5499,9 @@ engine terms. A second thing to check is a second test.
 ### Endless Swarm: a copy each upkeep, and no more spells
 - **Do:** Cast Endless Swarm, then try to cast Grizzly Bears. Pass the turn and come back to your upkeep.
 - **Expect:** You get a Snake for each card in your hand, and an emblem appears. Grizzly Bears can't be cast any more. At your upkeep a copy of Endless Swarm resolves and makes more Snakes; still only one emblem.
+
+## Splice (2026-10-26, Betrayers of Kamigawa)
+
+### Desperate Ritual: splicing Spiritual Visit onto it
+- **Do:** Click Desperate Ritual in your hand and pick the way to cast it that says "splicing Spiritual Visit {W}".
+- **Expect:** All three lands are tapped for it. Spiritual Visit is shown revealed and stays in your hand. You get a 1/1 Spirit token and {R}{R}{R} in your mana pool.
