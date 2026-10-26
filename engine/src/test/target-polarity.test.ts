@@ -120,6 +120,13 @@ describe("slot polarity", () => {
     expect(cast("Hate Mirage")).toEqual(["take", "take"]);
   });
 
+  it("reads an Aura's triggers on what it enchants, and an Aura only for your own", () => {
+    expect(cast("Forced Adaptation")).toEqual(["help"]);
+    expect(cast("Verdant Haven")).toEqual(["help"]);
+    expect(cast("Murder Investigation")).toEqual(["help"]);
+    expect(cast("Dying Wish")).toEqual(["help"]);
+  });
+
   it("classifies nearly every targeted slot in the pool", () => {
     // A ratchet, not a target: 98.6% when this was written (1,771 slots).
     // What's left is genuinely the board's call — a transform, an animated

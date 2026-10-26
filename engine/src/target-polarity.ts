@@ -729,6 +729,19 @@ export function auraPolarity(def: CardDefinition): Polarity {
       else if (lean === "harm") harm = true;
     }
   }
+  // Still nothing: what its triggers give the enchanted permanent whatever
+  // sets them off — Forced Adaptation's upkeep +1/+1 counter, Verdant
+  // Haven's extra mana — and, failing that, an Aura that may enchant only
+  // its caster's own permanent (Dying Wish, Murder Investigation).
+  if (!harm && !help) {
+    for (const ability of def.triggered ?? []) {
+      const effect = ability.effect;
+      if (effect?.kind === "add-counter" && effect.target === "attached" && effect.counter === "+1/+1") help = true;
+      if (effect?.kind === "add-mana" && "who" in ability.trigger && ability.trigger.who === "attached") help = true;
+    }
+    const slot = def.targets[0];
+    if (slot === "creature-you-control" || (typeof slot === "object" && "whose" in slot && slot.whose === "you")) help = true;
+  }
   return harm === help ? "either" : harm ? "harm" : "help";
 }
 
