@@ -162,6 +162,10 @@ describe("slot polarity", () => {
     expect(cast("Graceful Reprieve")).toEqual(["help"]);
   });
 
+  it("reads a Magemark's 'creatures you control that are enchanted' as help", () => {
+    expect(cast("Fencer's Magemark")).toEqual(["help"]);
+  });
+
   it("reads haunt's target as the opponent's creature, the one likelier to die", () => {
     expect(abilityPolarities(haunt())).toEqual(["harm"]);
   });

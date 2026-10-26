@@ -719,7 +719,14 @@ export function auraPolarity(def: CardDefinition): Polarity {
   let harm = false;
   let help = false;
   for (const ability of def.static ?? []) {
-    if (ability.affects.scope !== "attached") continue;
+    // The Magemarks' "creatures you control that are enchanted get …": the
+    // Aura's own creature is one of them only while it's yours, so it reads
+    // as an Aura on what it enchants.
+    const ownEnchanted =
+      ability.affects.scope === "filter" &&
+      ability.affects.filter.enchanted === true &&
+      ability.affects.filter.controlledBy === "you";
+    if (ability.affects.scope !== "attached" && !ownEnchanted) continue;
     // Goad is the point of an Aura that goads: its pump is the consolation
     // that sends the creature at someone else (Psychic Impetus).
     if (ability.goads === true) return "harm";
