@@ -123,6 +123,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **Damage redirection, one-shot shields** (rule 614.9 — batch 184, the oldest-first walk,
+  2026-10-26): `prevent-damage`'s and `prevent-damage-from-chosen-source`'s `redirectTo` — the
+  damage dealt to another creature, planeswalker or player by the same source, doing nothing
+  while that recipient is gone or no longer a creature; a scaffolder template;
+  `damage-redirection.test.ts`. The five en-Kor creatures, Daughter of Autumn, Hazduhr the Abbot,
+  Zhalfirin Crusader and Jade Monolith. Static redirections (Palisade Giant, Veteran Bodyguard)
+  are still `replacement:damage-redirection`.
+- **Stronghold, whole** (batch 184, the oldest-first walk, 2026-10-26): 53 of its last 77
+  authored — Crovax the Cursed, Change of Heart, Shard Phoenix, Mind Games, the spikes, the
+  en-Kor creatures, Hornet Cannon (a colorless Hornet token) and Spike Breeder (a Spike token,
+  never printed) among them, by four `card-author` agents and the lead — 24 blocked (`B184.json`).
 - **Licids** (batch 181, the oldest-first walk, 2026-10-26): the `become-licid-aura` effect
   (`GameObject.licid` — an Aura enchantment at its timestamp, without that ability, attached to
   the target) and the `end-licid-effect` special action (rule 116.2c), in the client's ability

@@ -1,0 +1,579 @@
+{
+ "batch": "B184",
+ "status": "complete",
+ "ranks": "Stronghold (STH, 1998-03-02): whole set, the 77 cards left (oldest-first walk); damage redirection built (one-shot shields, rule 614.9), with the four earlier-batch cards it unblocked (Daughter of Autumn, Hazduhr the Abbot, Zhalfirin Crusader, Jade Monolith)",
+ "authored": [
+  {
+   "name": "Acidic Sliver",
+   "files": [
+    "engine/src/cards/pool/acidic-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Awakening",
+   "files": [
+    "engine/src/cards/pool/awakening.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brush with Death",
+   "files": [
+    "engine/src/cards/pool/brush-with-death.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bullwhip",
+   "files": [
+    "engine/src/cards/pool/bullwhip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Change of Heart",
+   "files": [
+    "engine/src/cards/pool/change-of-heart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contempt",
+   "files": [
+    "engine/src/cards/pool/contempt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crovax the Cursed",
+   "files": [
+    "engine/src/cards/pool/crovax-the-cursed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daughter of Autumn",
+   "files": [
+    "engine/src/cards/pool/daughter-of-autumn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Prowler",
+   "files": [
+    "engine/src/cards/pool/dream-prowler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elven Rite",
+   "files": [
+    "engine/src/cards/pool/elven-rite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Endangered Armodon",
+   "files": [
+    "engine/src/cards/pool/endangered-armodon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fanning the Flames",
+   "files": [
+    "engine/src/cards/pool/fanning-the-flames.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flowstone Blade",
+   "files": [
+    "engine/src/cards/pool/flowstone-blade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hazduhr the Abbot",
+   "files": [
+    "engine/src/cards/pool/hazduhr-the-abbot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heat of Battle",
+   "files": [
+    "engine/src/cards/pool/heat-of-battle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hesitation",
+   "files": [
+    "engine/src/cards/pool/hesitation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hornet Cannon",
+   "files": [
+    "engine/src/cards/pool/hornet-cannon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jade Monolith",
+   "files": [
+    "engine/src/cards/pool/jade-monolith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jinxed Ring",
+   "files": [
+    "engine/src/cards/pool/jinxed-ring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lab Rats",
+   "files": [
+    "engine/src/cards/pool/lab-rats.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lancers en-Kor",
+   "files": [
+    "engine/src/cards/pool/lancers-en-kor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Games",
+   "files": [
+    "engine/src/cards/pool/mind-games.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Peel",
+   "files": [
+    "engine/src/cards/pool/mind-peel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mindwarper",
+   "files": [
+    "engine/src/cards/pool/mindwarper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mob Justice",
+   "files": [
+    "engine/src/cards/pool/mob-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Bombers",
+   "files": [
+    "engine/src/cards/pool/mogg-bombers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Maniac",
+   "files": [
+    "engine/src/cards/pool/mogg-maniac.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mortuary",
+   "files": [
+    "engine/src/cards/pool/mortuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nomads en-Kor",
+   "files": [
+    "engine/src/cards/pool/nomads-en-kor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revenant",
+   "files": [
+    "engine/src/cards/pool/revenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rolling Stones",
+   "files": [
+    "engine/src/cards/pool/rolling-stones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruination",
+   "files": [
+    "engine/src/cards/pool/ruination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samite Blessing",
+   "files": [
+    "engine/src/cards/pool/samite-blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scapegoat",
+   "files": [
+    "engine/src/cards/pool/scapegoat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seething Anger",
+   "files": [
+    "engine/src/cards/pool/seething-anger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shaman en-Kor",
+   "files": [
+    "engine/src/cards/pool/shaman-en-kor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shard Phoenix",
+   "files": [
+    "engine/src/cards/pool/shard-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shifting Wall",
+   "files": [
+    "engine/src/cards/pool/shifting-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smite",
+   "files": [
+    "engine/src/cards/pool/smite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spike Breeder",
+   "files": [
+    "engine/src/cards/pool/spike-breeder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spike Colony",
+   "files": [
+    "engine/src/cards/pool/spike-colony.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spike Feeder",
+   "files": [
+    "engine/src/cards/pool/spike-feeder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spike Soldier",
+   "files": [
+    "engine/src/cards/pool/spike-soldier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spike Worker",
+   "files": [
+    "engine/src/cards/pool/spike-worker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spindrift Drake",
+   "files": [
+    "engine/src/cards/pool/spindrift-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit en-Kor",
+   "files": [
+    "engine/src/cards/pool/spirit-en-kor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spitting Hydra",
+   "files": [
+    "engine/src/cards/pool/spitting-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stronghold Taskmaster",
+   "files": [
+    "engine/src/cards/pool/stronghold-taskmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thalakos Deceiver",
+   "files": [
+    "engine/src/cards/pool/thalakos-deceiver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verdant Touch",
+   "files": [
+    "engine/src/cards/pool/verdant-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Victual Sliver",
+   "files": [
+    "engine/src/cards/pool/victual-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Dream",
+   "files": [
+    "engine/src/cards/pool/walking-dream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Essence",
+   "files": [
+    "engine/src/cards/pool/wall-of-essence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Souls",
+   "files": [
+    "engine/src/cards/pool/wall-of-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warrior Angel",
+   "files": [
+    "engine/src/cards/pool/warrior-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warrior en-Kor",
+   "files": [
+    "engine/src/cards/pool/warrior-en-kor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zhalfirin Crusader",
+   "files": [
+    "engine/src/cards/pool/zhalfirin-crusader.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Amok",
+   "needs": [
+    "cost:discard-at-random"
+   ],
+   "why": "discard a card at random as an activation cost"
+  },
+  {
+   "name": "Cannibalize",
+   "needs": [
+    "effect:targets-same-controller"
+   ],
+   "why": "two target creatures controlled by the same player; on resolution choose which is exiled"
+  },
+  {
+   "name": "Dream Halls",
+   "needs": [
+    "cost:alternative-cost-for-all-spells"
+   ],
+   "why": "the alternative cost for all spells takes mana only; no 'discard a card that shares a color with that spell'"
+  },
+  {
+   "name": "Duct Crawler",
+   "needs": [
+    "effect:target-cant-block-source-this-turn"
+   ],
+   "why": "target creature can't block this creature this turn"
+  },
+  {
+   "name": "Flame Wave",
+   "needs": [
+    "effect:damage-all-scoped-to-target-planeswalker-controller"
+   ],
+   "why": "4 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls"
+  },
+  {
+   "name": "Hammerhead Shark",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Hidden Retreat",
+   "needs": [
+    "cost:put-card-from-hand-on-library-top",
+    "replacement:prevent-damage-by-target-spell"
+   ],
+   "why": "a card from hand on top of your library as a cost; prevent all damage target instant or sorcery spell would deal"
+  },
+  {
+   "name": "Invasion Plans",
+   "needs": [
+    "static:must-block-each-combat",
+    "decision:attacker-chooses-blocks"
+   ],
+   "why": "all creatures block each combat if able, and the attacking player declares the blocks"
+  },
+  {
+   "name": "Lowland Basilisk",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "'destroy that creature at end of combat' — a delayed trigger doesn't carry the damage recipient"
+  },
+  {
+   "name": "Mask of the Mimic",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "search for a card with the same name as target creature"
+  },
+  {
+   "name": "Mogg Flunkies",
+   "needs": [
+    "static:cant-attack-or-block-alone"
+   ],
+   "why": "can't attack or block alone"
+  },
+  {
+   "name": "Portcullis",
+   "needs": [
+    "condition:condition-count-all-permanents"
+   ],
+   "why": "two or more other creatures on the battlefield — every player's"
+  },
+  {
+   "name": "Provoke",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "untap target creature you don't control; it blocks this turn if able"
+  },
+  {
+   "name": "Pursuit of Knowledge",
+   "needs": [
+    "replacement:draw-replacement-counters"
+   ],
+   "why": "if you would draw a card, you may put a study counter on this instead"
+  },
+  {
+   "name": "Ransack",
+   "needs": [
+    "effect:look-at-target-player-library-reorder"
+   ],
+   "why": "look at target player's top five, any number to the bottom, the rest on top in any order"
+  },
+  {
+   "name": "Rebound",
+   "needs": [
+    "effect:change-target"
+   ],
+   "why": "target spell that targets only a player; its new target must be a player"
+  },
+  {
+   "name": "Sacred Ground",
+   "needs": [
+    "trigger:put-into-graveyard-caused-by-opponent"
+   ],
+   "why": "a land put into your graveyard by a spell or ability an opponent controls"
+  },
+  {
+   "name": "Silver Wyvern",
+   "needs": [
+    "effect:change-target"
+   ],
+   "why": "change the target of a spell or ability that targets only this creature; the new target must be a creature"
+  },
+  {
+   "name": "Skeleton Scavengers",
+   "needs": [
+    "cost:mana-per-counter-on-source",
+    "trigger:regenerated-this-way"
+   ],
+   "why": "{1} for each +1/+1 counter on it; 'when it regenerates this way, put a +1/+1 counter on it'"
+  },
+  {
+   "name": "Spined Sliver",
+   "needs": [
+    "amount:creatures-blocking-it"
+   ],
+   "why": "a Sliver's becomes-blocked +1/+1 for each creature blocking it — blockersOf reads only the source"
+  },
+  {
+   "name": "Temper",
+   "needs": [
+    "replacement:prevention-then-per-damage"
+   ],
+   "why": "prevent the next X damage, then a +1/+1 counter for each 1 damage prevented this way"
+  },
+  {
+   "name": "Tidal Warrior",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "target land becomes an Island until end of turn"
+  },
+  {
+   "name": "Volrath's Laboratory",
+   "needs": [
+    "effect:token-of-chosen-color-and-type"
+   ],
+   "why": "a 2/2 token of the color and creature type chosen as it entered"
+  },
+  {
+   "name": "Volrath's Shapeshifter",
+   "needs": [
+    "static:has-full-text-of-graveyard-top-creature"
+   ],
+   "why": "has the full text of the top creature card of your graveyard"
+  }
+ ]
+}
