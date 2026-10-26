@@ -524,6 +524,7 @@ import _poolSigilOfDistinction from "../pool/sigil-of-distinction.js";
 import _poolSigilOfValor from "../pool/sigil-of-valor.js";
 import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
+import _poolSireOfInsanity from "../pool/sire-of-insanity.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
@@ -570,6 +571,7 @@ import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
+import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
@@ -1200,6 +1202,7 @@ const shard: CardShard = {
     _poolSigilOfValor,
     _poolSilumgarSorcerer,
     _poolSilverflameRitual,
+    _poolSireOfInsanity,
     _poolSkitteringCicada,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
@@ -1246,6 +1249,7 @@ const shard: CardShard = {
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
     _poolTaintedSigil,
+    _poolTajicBladeOfTheLegion,
     _poolTajuruStalwart,
     _poolTangleMantis,
     _poolTeleport,

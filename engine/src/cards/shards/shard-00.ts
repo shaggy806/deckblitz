@@ -10,6 +10,7 @@ import _poolAdelbertSteiner from "../pool/adelbert-steiner.js";
 import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
 import _poolAerialFormation from "../pool/aerial-formation.js";
 import _poolAeromunculus from "../pool/aeromunculus.js";
+import _poolAetherling from "../pool/aetherling.js";
 import _poolAfflict from "../pool/afflict.js";
 import _poolAfiyaGrove from "../pool/afiya-grove.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
@@ -685,6 +686,7 @@ const shard: CardShard = {
     _poolAdornedCrocodile,
     _poolAerialFormation,
     _poolAeromunculus,
+    _poolAetherling,
     _poolAfflict,
     _poolAfiyaGrove,
     _poolAgathasChampion,

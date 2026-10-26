@@ -600,6 +600,7 @@ import _poolTrostaniSelesnyasVoice from "../pool/trostani-selesnyas-voice.js";
 import _poolTuinvaleGuide from "../pool/tuinvale-guide.js";
 import _poolTuinvaleTreefolk from "../pool/tuinvale-treefolk.js";
 import _poolTwitchingDoll from "../pool/twitching-doll.js";
+import _poolUbulSarGatekeepers from "../pool/ubul-sar-gatekeepers.js";
 import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchainedBerserker from "../pool/unchained-berserker.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
@@ -667,6 +668,7 @@ import _poolYotianSoldier from "../pool/yotian-soldier.js";
 import _poolYsgardsCall from "../pool/ysgards-call.js";
 import _poolZacamaPrimalCalamity from "../pool/zacama-primal-calamity.js";
 import _poolZephyrScribe from "../pool/zephyr-scribe.js";
+import _poolZhurTaaAncient from "../pool/zhur-taa-ancient.js";
 import _poolZoZuThePunisher from "../pool/zo-zu-the-punisher.js";
 import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
@@ -1297,6 +1299,7 @@ const shard: CardShard = {
     _poolTuinvaleGuide,
     _poolTuinvaleTreefolk,
     _poolTwitchingDoll,
+    _poolUbulSarGatekeepers,
     _poolUlvenwaldCaptive,
     _poolUnchainedBerserker,
     _poolUnchartedHaven,
@@ -1364,6 +1367,7 @@ const shard: CardShard = {
     _poolYsgardsCall,
     _poolZacamaPrimalCalamity,
     _poolZephyrScribe,
+    _poolZhurTaaAncient,
     _poolZoZuThePunisher,
     _poolZodiacDog,
     _poolZukoFirebendingMaster,

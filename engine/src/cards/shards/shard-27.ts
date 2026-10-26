@@ -330,6 +330,7 @@ import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
 import _poolMarduWoeReaper from "../pool/mardu-woe-reaper.js";
 import _poolMarshmistTitan from "../pool/marshmist-titan.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
+import _poolMazeAbomination from "../pool/maze-abomination.js";
 import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
 import _poolMemoryErosion from "../pool/memory-erosion.js";
@@ -478,6 +479,7 @@ import _poolShieldhideDragon from "../pool/shieldhide-dragon.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
 import _poolShowOfConfidence from "../pool/show-of-confidence.js";
+import _poolShowstopper from "../pool/showstopper.js";
 import _poolShredsOfSanity from "../pool/shreds-of-sanity.js";
 import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
@@ -498,6 +500,7 @@ import _poolSleepCursedFaerie from "../pool/sleep-cursed-faerie.js";
 import _poolSleepMagic from "../pool/sleep-magic.js";
 import _poolSlickshotVaultBuster from "../pool/slickshot-vault-buster.js";
 import _poolSlinkingSkirge from "../pool/slinking-skirge.js";
+import _poolSmeltWardGatekeepers from "../pool/smelt-ward-gatekeepers.js";
 import _poolSmeltWardIgnus from "../pool/smelt-ward-ignus.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
@@ -995,6 +998,7 @@ const shard: CardShard = {
     _poolMarduWoeReaper,
     _poolMarshmistTitan,
     _poolMasterDecoy,
+    _poolMazeAbomination,
     _poolMegaFlare,
     _poolMegatog,
     _poolMemoryErosion,
@@ -1143,6 +1147,7 @@ const shard: CardShard = {
     _poolShivanDevastator,
     _poolShivanOasis,
     _poolShowOfConfidence,
+    _poolShowstopper,
     _poolShredsOfSanity,
     _poolSigardianSavior,
     _poolSilverShroudCostume,
@@ -1163,6 +1168,7 @@ const shard: CardShard = {
     _poolSleepMagic,
     _poolSlickshotVaultBuster,
     _poolSlinkingSkirge,
+    _poolSmeltWardGatekeepers,
     _poolSmeltWardIgnus,
     _poolSnappingCreeper,
     _poolSokkaLateralStrategist,

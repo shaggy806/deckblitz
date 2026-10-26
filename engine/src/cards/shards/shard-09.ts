@@ -479,6 +479,7 @@ import _poolRocCharger from "../pool/roc-charger.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
 import _poolRoilEruption from "../pool/roil-eruption.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
+import _poolRotFarmSkeleton from "../pool/rot-farm-skeleton.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolRockfaceVillage,
     _poolRoilEruption,
     _poolRootwiseSurvivor,
+    _poolRotFarmSkeleton,
     _poolRubbleSlinger,
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,

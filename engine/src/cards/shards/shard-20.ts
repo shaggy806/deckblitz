@@ -64,6 +64,7 @@ import _poolBitterDownfall from "../pool/bitter-downfall.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingBomb from "../pool/blazing-bomb.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
+import _poolBloodBaronOfVizkopa from "../pool/blood-baron-of-vizkopa.js";
 import _poolBloodletting from "../pool/bloodletting.js";
 import _poolBloodsoakedAltar from "../pool/bloodsoaked-altar.js";
 import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
@@ -378,6 +379,7 @@ import _poolMorningApparition from "../pool/morning-apparition.js";
 import _poolMoroii from "../pool/moroii.js";
 import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
+import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
@@ -404,6 +406,7 @@ import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
 import _poolOnyxTalisman from "../pool/onyx-talisman.js";
+import _poolOpalLakeGatekeepers from "../pool/opal-lake-gatekeepers.js";
 import _poolOrazcaRelic from "../pool/orazca-relic.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
@@ -499,6 +502,7 @@ import _poolScaleDeflection from "../pool/scale-deflection.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
 import _poolScathingShadelock from "../pool/scathing-shadelock.js";
 import _poolScavengingHarpy from "../pool/scavenging-harpy.js";
+import _poolScionOfVituGhazi from "../pool/scion-of-vitu-ghazi.js";
 import _poolScragnoth from "../pool/scragnoth.js";
 import _poolSearchForDagger from "../pool/search-for-dagger.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
@@ -787,6 +791,7 @@ const shard: CardShard = {
     _poolBlanchwoodTreefolk,
     _poolBlazingBomb,
     _poolBlazingFiresinger,
+    _poolBloodBaronOfVizkopa,
     _poolBloodletting,
     _poolBloodsoakedAltar,
     _poolBloodsoakedInsight,
@@ -1101,6 +1106,7 @@ const shard: CardShard = {
     _poolMoroii,
     _poolMorticianBeetle,
     _poolMoxJasper,
+    _poolMutantsPrey,
     _poolMysticMeditation,
     _poolMysticSnake,
     _poolNantukoTracer,
@@ -1127,6 +1133,7 @@ const shard: CardShard = {
     _poolOmniCheesePizza,
     _poolOneirophage,
     _poolOnyxTalisman,
+    _poolOpalLakeGatekeepers,
     _poolOrazcaRelic,
     _poolOrcishCannonade,
     _poolOrcishMechanics,
@@ -1222,6 +1229,7 @@ const shard: CardShard = {
     _poolScarecrowGuide,
     _poolScathingShadelock,
     _poolScavengingHarpy,
+    _poolScionOfVituGhazi,
     _poolScragnoth,
     _poolSearchForDagger,
     _poolSearingFlesh,

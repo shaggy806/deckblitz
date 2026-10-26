@@ -145,6 +145,7 @@ import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
+import _poolDeputyOfAcquittals from "../pool/deputy-of-acquittals.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
 import _poolDesynchronize from "../pool/desynchronize.js";
 import _poolDetectivesSatchel from "../pool/detectives-satchel.js";
@@ -846,6 +847,7 @@ const shard: CardShard = {
     _poolDeathsprout,
     _poolDeception,
     _poolDenziloreFatehold,
+    _poolDeputyOfAcquittals,
     _poolDesertCerodon,
     _poolDesynchronize,
     _poolDetectivesSatchel,

@@ -179,6 +179,7 @@ import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
 import _poolDreambornMuse from "../pool/dreamborn-muse.js";
+import _poolDrownInFilth from "../pool/drown-in-filth.js";
 import _poolDruidsRepository from "../pool/druids-repository.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
@@ -463,6 +464,7 @@ import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
+import _poolPunishTheEnemy from "../pool/punish-the-enemy.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
 import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
@@ -661,6 +663,7 @@ import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
 import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
+import _poolWeaponSurge from "../pool/weapon-surge.js";
 import _poolWearyPrisoner from "../pool/weary-prisoner.js";
 import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
@@ -880,6 +883,7 @@ const shard: CardShard = {
     _poolDreadReturn,
     _poolDreamSpoilers,
     _poolDreambornMuse,
+    _poolDrownInFilth,
     _poolDruidsRepository,
     _poolDungeonDescent,
     _poolDunlandCrebain,
@@ -1164,6 +1168,7 @@ const shard: CardShard = {
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
     _poolPsychomancer,
+    _poolPunishTheEnemy,
     _poolRabidBite,
     _poolRaidingNightstalker,
     _poolRallyForTheThrone,
@@ -1362,6 +1367,7 @@ const shard: CardShard = {
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,
     _poolWayOfTheDeathbringer,
+    _poolWeaponSurge,
     _poolWearyPrisoner,
     _poolWeatherseedFaeries,
     _poolWeddingCrasher,

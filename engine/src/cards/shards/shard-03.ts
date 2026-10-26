@@ -43,6 +43,7 @@ import _poolBellowingSaddlebrute from "../pool/bellowing-saddlebrute.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
+import _poolBlazeCommando from "../pool/blaze-commando.js";
 import _poolBlessedRespite from "../pool/blessed-respite.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBlinkDog from "../pool/blink-dog.js";
@@ -262,6 +263,7 @@ import _poolJacesProjection from "../pool/jaces-projection.js";
 import _poolJadedSellSword from "../pool/jaded-sell-sword.js";
 import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
 import _poolJavelinOfLightning from "../pool/javelin-of-lightning.js";
+import _poolJelennSphinx from "../pool/jelenn-sphinx.js";
 import _poolJoven from "../pool/joven.js";
 import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
@@ -414,6 +416,7 @@ import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
 import _poolRunAfoul from "../pool/run-afoul.js";
 import _poolRuneCervinRider from "../pool/rune-cervin-rider.js";
+import _poolRunnersBane from "../pool/runners-bane.js";
 import _poolRushwoodElemental from "../pool/rushwood-elemental.js";
 import _poolSacredPrey from "../pool/sacred-prey.js";
 import _poolSadisticHypnotist from "../pool/sadistic-hypnotist.js";
@@ -664,6 +667,7 @@ const shard: CardShard = {
     _poolBelovedPrincess,
     _poolBenalishCavalry,
     _poolBenevolentHydra,
+    _poolBlazeCommando,
     _poolBlessedRespite,
     _poolBlightedCataract,
     _poolBlinkDog,
@@ -883,6 +887,7 @@ const shard: CardShard = {
     _poolJadedSellSword,
     _poolJandorsSaddlebags,
     _poolJavelinOfLightning,
+    _poolJelennSphinx,
     _poolJoven,
     _poolKaZarOfTheSavageLand,
     _poolKamiOfTwistedReflection,
@@ -1035,6 +1040,7 @@ const shard: CardShard = {
     _poolRumbleArena,
     _poolRunAfoul,
     _poolRuneCervinRider,
+    _poolRunnersBane,
     _poolRushwoodElemental,
     _poolSacredPrey,
     _poolSadisticHypnotist,

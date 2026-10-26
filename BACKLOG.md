@@ -172,10 +172,16 @@ section keeps only what to do next.
   cards it unblocked; batch 164 the rest of Born of the Gods, on tribute; batch 167 Commander
   2013 whole and Theros's 76 most-played left, on the Ordeals' "when you sacrifice this Aura");
   batch 170 the rest of Theros and Magic 2014 whole, no feature built (79 authored, 16 blocked,
-  one or two each — `B170.json`); **next, Dragon's Maze** (83 left: five agents) — its
-  Ravnica mechanics are in the pool from the earlier top-half pass (`cards:sets -- --set DGM`);
-  then Gatecrash (116), Return to Ravnica (122), Magic 2013 and on down to Scars of Mirrodin,
-  stopping before Magic 2011. Batch 167's blockers are one or two each (`B167.json`): "whenever a creature
+  one or two each — `B170.json`); batch 173 the rest of Dragon's Maze, on fuse (62 authored, 21
+  blocked — `B173.json`); **next, Gatecrash** (116 left: five agents, `cards:sets -- --set GTC`),
+  then Return to Ravnica (122), Magic 2013 and on down to Scars of Mirrodin, stopping before
+  Magic 2011. Not every Ravnica mechanic is in the pool: **unleash** (`keyword:unleash`, rule
+  702.98 — an optional "enters with a +1/+1 counter" plus "can't block while it has one") and
+  **detain** (`keyword:detain`, rule 701.35 — can't attack, block or activate abilities until
+  your next turn; `prohibit` has no until-your-next-turn duration) are unbuilt, three triaged
+  cards each, and Return to Ravnica holds most of the rest (~8 unleash, ~6 detain): worth
+  building for that batch. Scavenge, evolve, extort, bloodrush, battalion, populate, overload
+  and cipher are built. Batch 167's blockers are one or two each (`B167.json`): "whenever a creature
   attacks enchanted player" (`trigger:creature-attacks-enchanted-player` — the Curses of
   Predation and the Forsaken) and the tempting offers' simultaneity
   (`new:each-player-may-simultaneous` — Tempt with Immortality, beside Tempt with Discovery) lead
@@ -191,7 +197,7 @@ section keeps only what to do next.
   newest-first walk (Journey into Nyx back to Scars of Mirrodin, stopping before Magic 2011), a **middle walk** (Magic 2011 and Rise of the Eldrazi back to Shards
   of Alara — M11, ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
   and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
-  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played — landed); the fourth round's (2026-10-26) are B167 (this walk: Commander 2013 and Theros's ~75 most-played — landed), B168 (middle: Magic 2010 and Alara Reborn — landed) and B169 (oldest: the rest of Mirage — landed); the fifth round's (2026-10-26) are B170 (this walk: the rest of Theros and Magic 2014), B171 (middle: Conflux whole and Shards of Alara's ~40 most-played — landed) and B172 (oldest: Visions whole — landed); the sixth round's (2026-10-26) are B173 (this walk: Dragon's Maze), B174 (middle: the rest of Shards of Alara and Magic 2011, which the two walks' ranges had left between them) and B175 (oldest: Weatherlight); after those, take the highest `B<N>` on `origin/main` plus one, checked again
+  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played — landed); the fourth round's (2026-10-26) are B167 (this walk: Commander 2013 and Theros's ~75 most-played — landed), B168 (middle: Magic 2010 and Alara Reborn — landed) and B169 (oldest: the rest of Mirage — landed); the fifth round's (2026-10-26) are B170 (this walk: the rest of Theros and Magic 2014), B171 (middle: Conflux whole and Shards of Alara's ~40 most-played — landed) and B172 (oldest: Visions whole — landed); the sixth round's (2026-10-26) are B173 (this walk: Dragon's Maze — landed), B174 (middle: the rest of Shards of Alara and Magic 2011, which the two walks' ranges had left between them) and B175 (oldest: Weatherlight); after those, take the highest `B<N>` on `origin/main` plus one, checked again
   just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); batch 165 Zendikar whole, no feature built (26 blocked, "blocks this turn if able" — `effect:must-block-this-turn` — leading with two); batch 168 Magic 2010 and Alara Reborn (the rest of each), no feature built (38 blocked, led by the five Borderposts' "return a basic land" alternative cost — `cost:alt-cost-return-lands`, 7 cards with Daze and Gush: worth building if Conflux or Shards adds to it — they added none); batch 171 Conflux whole and Shards of Alara's 40 most-played left, no feature built (29 blocked, the devour count read back — `amount:creatures-devoured`, 4 cards with Marrow Chomper — leading); **next, the rest of Shards of Alara** (54 left, by `cards:sets -- --set ALA`) and Magic 2011 (37, `--set M11`) — the last of this walk's range, which then ends. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
   157's leading blocker: a morph cost that reveals a card (`cost:morph-reveal-card` — 5), then
   "blocks this turn if able" (`effect:must-block-this-turn`) and looking at face-down
@@ -297,6 +303,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.
+- **Flashback never offers a split card's halves** (702.34a, 709.3): Snapcaster Mage or Past in Flames on Wear // Tear, Expansion // Explosion offers nothing.
 - **A mana-value cast prohibition reads an X spell before X is chosen** (202.3e): Sanctum Prelate waits on it.
 - **"Each player discards" isn't chosen in secret** (101.4): a scoped discard discards each player's cards before the next chooses, where the rulings hide the choices and discard them together — Miasmic Mummy and Neheb, the Worthy run on it; blocks Delirium Skeins, Stronghold Rats and Cunning Lethemancer (`effect:hidden-simultaneous-choices`).
 - **`each-player-may` with `choices` drops the controller's own choice**: when the spell's controller is one of the choosers, `"that-player"` in their option resolves to no one (found authoring Truce, batch 160).

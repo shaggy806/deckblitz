@@ -175,6 +175,7 @@ import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
 import _poolEmergentGrowth from "../pool/emergent-growth.js";
+import _poolEmmaraTandris from "../pool/emmara-tandris.js";
 import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
 import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEnduringVictory from "../pool/enduring-victory.js";
@@ -838,6 +839,7 @@ const shard: CardShard = {
     _poolElvenLyre,
     _poolElvishHexhunter,
     _poolEmergentGrowth,
+    _poolEmmaraTandris,
     _poolEmptyTheWarrens,
     _poolEndlessRanksOfHydra,
     _poolEnduringVictory,

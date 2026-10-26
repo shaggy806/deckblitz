@@ -10640,6 +10640,14 @@
   "replacement:enters-under-your-control-instead": {
    "family": "effect:gain-control-spell",
    "example": "Gather Specimens: \"If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.\""
+  },
+  "replacement:draw-replacement-life-loss": {
+   "family": "replacement:new-event-replacements",
+   "example": "Blood Scrivener: \"If you would draw a card while you have no cards in hand, instead you draw two cards and you lose 1 life\" — the would-draw replacement can't draw two and lose life, gated on each single draw."
+  },
+  "static:grant-scavenge-to-graveyard": {
+   "family": "keyword:scavenge",
+   "example": "Varolz, the Scar-Striped: each creature card in your graveyard has scavenge — grantsToGraveyard can grant flashback, escape, mayhem and dredge, not scavenge."
   }
  }
 }

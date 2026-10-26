@@ -348,6 +348,7 @@ import _poolMasterTheWay from "../pool/master-the-way.js";
 import _poolMastermindPlum from "../pool/mastermind-plum.js";
 import _poolMastersCall from "../pool/masters-call.js";
 import _poolMastersRebuke from "../pool/masters-rebuke.js";
+import _poolMazeRusher from "../pool/maze-rusher.js";
 import _poolMazesMantle from "../pool/mazes-mantle.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolMastermindPlum,
     _poolMastersCall,
     _poolMastersRebuke,
+    _poolMazeRusher,
     _poolMazesMantle,
     _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,

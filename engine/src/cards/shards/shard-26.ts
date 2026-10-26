@@ -80,6 +80,7 @@ import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
+import _poolBorosMastiff from "../pool/boros-mastiff.js";
 import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
@@ -347,6 +348,7 @@ import _poolMarrowGnawer from "../pool/marrow-gnawer.js";
 import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterOfWaves from "../pool/master-of-waves.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
+import _poolMazeSentinel from "../pool/maze-sentinel.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
@@ -541,6 +543,7 @@ import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
+import _poolSunspireGatekeepers from "../pool/sunspire-gatekeepers.js";
 import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwampMosquito from "../pool/swamp-mosquito.js";
 import _poolSwat from "../pool/swat.js";
@@ -743,6 +746,7 @@ const shard: CardShard = {
     _poolBondOfRevival,
     _poolBoneyardLurker,
     _poolBorealShelf,
+    _poolBorosMastiff,
     _poolBrassTalonChimera,
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
@@ -1010,6 +1014,7 @@ const shard: CardShard = {
     _poolMassiveMight,
     _poolMasterOfWaves,
     _poolMasterTransmuter,
+    _poolMazeSentinel,
     _poolMeatLocker,
     _poolMechanNavigator,
     _poolMeglonoth,
@@ -1204,6 +1209,7 @@ const shard: CardShard = {
     _poolStrokeOfMidnight,
     _poolStromkirkCondemned,
     _poolSummitSentinel,
+    _poolSunspireGatekeepers,
     _poolSureStrike,
     _poolSwampMosquito,
     _poolSwat,

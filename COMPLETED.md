@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Dragon's Maze, the rest of the set** (batch 173, the newest-first walk, 2026-10-26):
+  **built** fuse (rule 702.102, `keyword:fuse` — `fuse: true` on a split card's whole: from the
+  hand it is cast as both halves for both costs, the left half's targets then the right's,
+  resolved half by half), and authored all fifteen of its cards but Give // Take — Wear // Tear,
+  Turn // Burn, Catch // Release, Beck // Call and ten more, with Gallifrey Falls // No More and
+  Double Jump // Flying Kick from other sets. 62 of its 83 left authored — Voice of Resurgence,
+  Aetherling, Blood Baron of Vizkopa, Tajic, Blade of the Legion, Emmara Tandris, Sire of
+  Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
+  `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
+  detain two each.
 - **Visions, whole** (batch 172, the oldest-first walk, 2026-10-26): **built** the Mirage block's
   "you may cast this spell as though it had flash … sacrifices it at the beginning of the next
   cleanup step" (`flashThenSacrifice`, `effect:flash-cast-sacrifice`) and the cleanup step's

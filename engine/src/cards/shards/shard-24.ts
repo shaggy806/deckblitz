@@ -109,6 +109,7 @@ import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
+import _poolClearAPath from "../pool/clear-a-path.js";
 import _poolCleaveShadows from "../pool/cleave-shadows.js";
 import _poolCliffThreader from "../pool/cliff-threader.js";
 import _poolCoilingOracle from "../pool/coiling-oracle.js";
@@ -775,6 +776,7 @@ const shard: CardShard = {
     _poolClandestineMeddler,
     _poolClawsOfGix,
     _poolClayStatue,
+    _poolClearAPath,
     _poolCleaveShadows,
     _poolCliffThreader,
     _poolCoilingOracle,

@@ -81,6 +81,7 @@ import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
+import _poolCarnageGladiator from "../pool/carnage-gladiator.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCartoucheOfAmbition from "../pool/cartouche-of-ambition.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
@@ -762,6 +763,7 @@ const shard: CardShard = {
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
     _poolCapennaExpress,
+    _poolCarnageGladiator,
     _poolCarrionLocust,
     _poolCartoucheOfAmbition,
     _poolCascadeBluffs,

@@ -253,6 +253,7 @@ import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
+import _poolHaunterOfNightveil from "../pool/haunter-of-nightveil.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
 import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
@@ -350,6 +351,7 @@ import _poolMarvelousMelee from "../pool/marvelous-melee.js";
 import _poolMascotExhibition from "../pool/mascot-exhibition.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
 import _poolMaximizeAltitude from "../pool/maximize-altitude.js";
+import _poolMazeGlider from "../pool/maze-glider.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
@@ -466,6 +468,7 @@ import _poolSangromancer from "../pool/sangromancer.js";
 import _poolSaplingNursery from "../pool/sapling-nursery.js";
 import _poolSarkhansCatharsis from "../pool/sarkhans-catharsis.js";
 import _poolSavageHunger from "../pool/savage-hunger.js";
+import _poolSavagebornHydra from "../pool/savageborn-hydra.js";
 import _poolScionOfUgin from "../pool/scion-of-ugin.js";
 import _poolScroungingSkyray from "../pool/scrounging-skyray.js";
 import _poolSealOfCleansing from "../pool/seal-of-cleansing.js";
@@ -564,6 +567,7 @@ import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
+import _poolTrostanisSummoner from "../pool/trostanis-summoner.js";
 import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTuktukScrapper from "../pool/tuktuk-scrapper.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
@@ -893,6 +897,7 @@ const shard: CardShard = {
     _poolGuruPathik,
     _poolHamatoNinpo,
     _poolHaruHiddenTalent,
+    _poolHaunterOfNightveil,
     _poolHavenOfTheSpiritDragon,
     _poolHavengulVampire,
     _poolHawkeyesBow,
@@ -990,6 +995,7 @@ const shard: CardShard = {
     _poolMascotExhibition,
     _poolMasterPiandao,
     _poolMaximizeAltitude,
+    _poolMazeGlider,
     _poolMeagerMeal,
     _poolMeanderingRiver,
     _poolMercilessHarlequin,
@@ -1106,6 +1112,7 @@ const shard: CardShard = {
     _poolSaplingNursery,
     _poolSarkhansCatharsis,
     _poolSavageHunger,
+    _poolSavagebornHydra,
     _poolScionOfUgin,
     _poolScroungingSkyray,
     _poolSealOfCleansing,
@@ -1204,6 +1211,7 @@ const shard: CardShard = {
     _poolTransguildPromenade,
     _poolTreasonousOgre,
     _poolTreasureCruise,
+    _poolTrostanisSummoner,
     _poolTruckToss,
     _poolTuktukScrapper,
     _poolTundraWolves,

@@ -610,6 +610,7 @@ import _poolVivienOfTheArkbow from "../pool/vivien-of-the-arkbow.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
 import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
+import _poolWakeTheReflections from "../pool/wake-the-reflections.js";
 import _poolWallOfJunk from "../pool/wall-of-junk.js";
 import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
@@ -1263,6 +1264,7 @@ const shard: CardShard = {
     _poolVoiceOfTheProvinces,
     _poolVoiceOfVictory,
     _poolVoltaicServant,
+    _poolWakeTheReflections,
     _poolWallOfJunk,
     _poolWallOfPineNeedles,
     _poolWallOfTorches,

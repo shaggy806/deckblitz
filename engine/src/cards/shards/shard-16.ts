@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbzanMonument from "../pool/abzan-monument.js";
 import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
+import _poolAdventOfTheWurm from "../pool/advent-of-the-wurm.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAkroanCrusader from "../pool/akroan-crusader.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
@@ -42,6 +43,7 @@ import _poolAuramancer from "../pool/auramancer.js";
 import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
 import _poolAvenArcher from "../pool/aven-archer.js";
 import _poolAvenRedeemer from "../pool/aven-redeemer.js";
+import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
 import _poolBaldinCenturyHerdmaster from "../pool/baldin-century-herdmaster.js";
@@ -349,6 +351,7 @@ import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
+import _poolMazeBehemoth from "../pool/maze-behemoth.js";
 import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
@@ -724,6 +727,7 @@ const shard: CardShard = {
     _poolAbzanMonument,
     _poolAcademyRector,
     _poolAccelerate,
+    _poolAdventOfTheWurm,
     _poolAesiTyrantOfGyreStrait,
     _poolAkroanCrusader,
     _poolAkroanJailer,
@@ -760,6 +764,7 @@ const shard: CardShard = {
     _poolAutarchMammoth,
     _poolAvenArcher,
     _poolAvenRedeemer,
+    _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,
     _poolBaldinCenturyHerdmaster,
@@ -1067,6 +1072,7 @@ const shard: CardShard = {
     _poolMasterTrinketeer,
     _poolMasteryOfTheUnseen,
     _poolMawOfKozilek,
+    _poolMazeBehemoth,
     _poolMegatonsFate,
     _poolMeltstriderEulogist,
     _poolMemoryPlunder,

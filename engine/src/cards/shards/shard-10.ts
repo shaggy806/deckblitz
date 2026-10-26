@@ -372,6 +372,7 @@ import _poolMoonshaePixie from "../pool/moonshae-pixie.js";
 import _poolMoonsilverKey from "../pool/moonsilver-key.js";
 import _poolMoonsnareSpecialist from "../pool/moonsnare-specialist.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
+import _poolMorgueBurst from "../pool/morgue-burst.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolNagaVitalist from "../pool/naga-vitalist.js";
@@ -385,6 +386,7 @@ import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
 import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
+import _poolNivixCyclops from "../pool/nivix-cyclops.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
 import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
 import _poolOashraCultivator from "../pool/oashra-cultivator.js";
@@ -1062,6 +1064,7 @@ const shard: CardShard = {
     _poolMoonsilverKey,
     _poolMoonsnareSpecialist,
     _poolMoorFiend,
+    _poolMorgueBurst,
     _poolMouserMarkIii,
     _poolMulch,
     _poolNagaVitalist,
@@ -1075,6 +1078,7 @@ const shard: CardShard = {
     _poolNightMarketLookout,
     _poolNimbleBirdsticker,
     _poolNimbusMaze,
+    _poolNivixCyclops,
     _poolNorthPoleGates,
     _poolNullpriestOfOblivion,
     _poolOashraCultivator,

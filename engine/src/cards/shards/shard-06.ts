@@ -501,6 +501,7 @@ import _poolSilentObserver from "../pool/silent-observer.js";
 import _poolSilumgarsCommand from "../pool/silumgars-command.js";
 import _poolSilvergillPeddler from "../pool/silvergill-peddler.js";
 import _poolSilverquillCampus from "../pool/silverquill-campus.js";
+import _poolSinisterPossession from "../pool/sinister-possession.js";
 import _poolSizzle from "../pool/sizzle.js";
 import _poolSkillfulLunge from "../pool/skillful-lunge.js";
 import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
@@ -592,6 +593,7 @@ import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUginsConjurant from "../pool/ugins-conjurant.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
+import _poolUncoveredClues from "../pool/uncovered-clues.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
@@ -1166,6 +1168,7 @@ const shard: CardShard = {
     _poolSilumgarsCommand,
     _poolSilvergillPeddler,
     _poolSilverquillCampus,
+    _poolSinisterPossession,
     _poolSizzle,
     _poolSkillfulLunge,
     _poolSkirsdagFlayer,
@@ -1257,6 +1260,7 @@ const shard: CardShard = {
     _poolUchuulon,
     _poolUginsConjurant,
     _poolUnbreathingHorde,
+    _poolUncoveredClues,
     _poolUndercityScrounger,
     _poolUnfinishedBusiness,
     _poolUnnerve,

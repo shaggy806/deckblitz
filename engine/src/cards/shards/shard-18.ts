@@ -620,6 +620,7 @@ import _poolWanderingMage from "../pool/wandering-mage.js";
 import _poolWarBalloon from "../pool/war-balloon.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
+import _poolWarpedPhysique from "../pool/warped-physique.js";
 import _poolWarrenElder from "../pool/warren-elder.js";
 import _poolWaryOkapi from "../pool/wary-okapi.js";
 import _poolWastes from "../pool/wastes.js";
@@ -1291,6 +1292,7 @@ const shard: CardShard = {
     _poolWarBalloon,
     _poolWargate,
     _poolWargling,
+    _poolWarpedPhysique,
     _poolWarrenElder,
     _poolWaryOkapi,
     _poolWastes,

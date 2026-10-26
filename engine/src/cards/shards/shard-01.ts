@@ -434,6 +434,7 @@ import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRegentsAuthority from "../pool/regents-authority.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
+import _poolRenounceTheGuilds from "../pool/renounce-the-guilds.js";
 import _poolReparations from "../pool/reparations.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
@@ -458,6 +459,7 @@ import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
+import _poolSaruliGatekeepers from "../pool/saruli-gatekeepers.js";
 import _poolSautekhImmortal from "../pool/sautekh-immortal.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
@@ -1090,6 +1092,7 @@ const shard: CardShard = {
     _poolRedwoodTreefolk,
     _poolRegentsAuthority,
     _poolRemnantElemental,
+    _poolRenounceTheGuilds,
     _poolReparations,
     _poolRepercussion,
     _poolRepulse,
@@ -1114,6 +1117,7 @@ const shard: CardShard = {
     _poolSanctumOfTranquilLight,
     _poolSarevokDeathbringer,
     _poolSarkhansWhelp,
+    _poolSaruliGatekeepers,
     _poolSautekhImmortal,
     _poolSavageMansion,
     _poolSavannah,

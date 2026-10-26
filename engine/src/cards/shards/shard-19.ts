@@ -57,6 +57,7 @@ import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBladeJuggler from "../pool/blade-juggler.js";
 import _poolBladestitchedSkaab from "../pool/bladestitched-skaab.js";
 import _poolBlanketOfNight from "../pool/blanket-of-night.js";
+import _poolBlastOfGenius from "../pool/blast-of-genius.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlazingRootwalla from "../pool/blazing-rootwalla.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
@@ -470,6 +471,7 @@ import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
+import _poolPyrewildShaman from "../pool/pyrewild-shaman.js";
 import _poolQiqirnMerchant from "../pool/qiqirn-merchant.js";
 import _poolQuestingDruid from "../pool/questing-druid.js";
 import _poolRabarooTroop from "../pool/rabaroo-troop.js";
@@ -753,6 +755,7 @@ const shard: CardShard = {
     _poolBladeJuggler,
     _poolBladestitchedSkaab,
     _poolBlanketOfNight,
+    _poolBlastOfGenius,
     _poolBlastingStation,
     _poolBlazingRootwalla,
     _poolBlightsowerThallid,
@@ -1166,6 +1169,7 @@ const shard: CardShard = {
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
+    _poolPyrewildShaman,
     _poolQiqirnMerchant,
     _poolQuestingDruid,
     _poolRabarooTroop,
