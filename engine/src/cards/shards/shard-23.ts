@@ -133,6 +133,7 @@ import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCropSigil from "../pool/crop-sigil.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
+import _poolCrownOfFlames from "../pool/crown-of-flames.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolCryptidInspector from "../pool/cryptid-inspector.js";
 import _poolDanceWithDevils from "../pool/dance-with-devils.js";
@@ -812,6 +813,7 @@ const shard: CardShard = {
     _poolCropSigil,
     _poolCrossbowAmbush,
     _poolCrowdedCrypt,
+    _poolCrownOfFlames,
     _poolCryptOfTheEternals,
     _poolCryptidInspector,
     _poolDanceWithDevils,

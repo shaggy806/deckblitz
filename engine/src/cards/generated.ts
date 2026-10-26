@@ -3804,6 +3804,7 @@ import _poolCrowOfDarkTidings from "./pool/crow-of-dark-tidings.js";
 import _poolCrowdFavorites from "./pool/crowd-favorites.js";
 import _poolCrowdedCrypt from "./pool/crowded-crypt.js";
 import _poolCrowdsFavor from "./pool/crowds-favor.js";
+import _poolCrownOfFlames from "./pool/crown-of-flames.js";
 import _poolCrownOfSkemfar from "./pool/crown-of-skemfar.js";
 import _poolCrucibleOfFire from "./pool/crucible-of-fire.js";
 import _poolCrucibleOfWorlds from "./pool/crucible-of-worlds.js";
@@ -6229,6 +6230,7 @@ import _poolFetidHeath from "./pool/fetid-heath.js";
 import _poolFetidHorror from "./pool/fetid-horror.js";
 import _poolFetidImp from "./pool/fetid-imp.js";
 import _poolFetidPools from "./pool/fetid-pools.js";
+import _poolFeveredConvulsions from "./pool/fevered-convulsions.js";
 import _poolFeveredStrength from "./pool/fevered-strength.js";
 import _poolFeveredSuspicion from "./pool/fevered-suspicion.js";
 import _poolFeySteed from "./pool/fey-steed.js";
@@ -25522,6 +25524,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrowdFavorites,
   _poolCrowdedCrypt,
   _poolCrowdsFavor,
+  _poolCrownOfFlames,
   _poolCrownOfSkemfar,
   _poolCrucibleOfFire,
   _poolCrucibleOfWorlds,
@@ -27947,6 +27950,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFetidHorror,
   _poolFetidImp,
   _poolFetidPools,
+  _poolFeveredConvulsions,
   _poolFeveredStrength,
   _poolFeveredSuspicion,
   _poolFeySteed,
@@ -47253,6 +47257,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crowd-favorites": _poolCrowdFavorites,
   "pool/crowded-crypt": _poolCrowdedCrypt,
   "pool/crowds-favor": _poolCrowdsFavor,
+  "pool/crown-of-flames": _poolCrownOfFlames,
   "pool/crown-of-skemfar": _poolCrownOfSkemfar,
   "pool/crucible-of-fire": _poolCrucibleOfFire,
   "pool/crucible-of-worlds": _poolCrucibleOfWorlds,
@@ -49678,6 +49683,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fetid-horror": _poolFetidHorror,
   "pool/fetid-imp": _poolFetidImp,
   "pool/fetid-pools": _poolFetidPools,
+  "pool/fevered-convulsions": _poolFeveredConvulsions,
   "pool/fevered-strength": _poolFeveredStrength,
   "pool/fevered-suspicion": _poolFeveredSuspicion,
   "pool/fey-steed": _poolFeySteed,
