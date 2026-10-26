@@ -6,12 +6,14 @@
  * (`isTokenCard`) doesn't import every token to find out. */
 export const TOKEN_NAMES: readonly string[] = [
   "0/1 Black Cleric Token",
+  "1/0 Blue Elemental Token",
   "1/1 Blue Bird Token",
   "1/1 Green Cat Token",
   "1/1 Green Hippo Token",
   "1/1 Green Plant Token",
   "1/1 Red Dinosaur Token (Haste)",
   "1/1 Red Elemental Token",
+  "1/1 Red Soldier Token",
   "1/1 Robot Hero Token",
   "1/1 Vampire Token",
   "1/1 White Dog Token",
@@ -61,6 +63,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "5/5 Djinn Artifact Token",
   "5/5 Elemental Token",
   "5/5 Elephant Token",
+  "5/5 Green Beast Token (Trample)",
   "5/5 Tyranid Token",
   "6/6 Beast Artifact Token",
   "6/6 Black Demon Token (Flying, Trample, Upkeep Sacrifice)",

@@ -68,6 +68,7 @@ import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
+import _poolBoonSatyr from "../pool/boon-satyr.js";
 import _poolBorborygmos from "../pool/borborygmos.js";
 import _poolBountyOfTheLuxa from "../pool/bounty-of-the-luxa.js";
 import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
@@ -713,6 +714,7 @@ const shard: CardShard = {
     _poolBlur,
     _poolBoggartShenanigans,
     _poolBonesplitter,
+    _poolBoonSatyr,
     _poolBorborygmos,
     _poolBountyOfTheLuxa,
     _poolBrambleweftBehemoth,

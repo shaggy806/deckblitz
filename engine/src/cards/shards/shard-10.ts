@@ -41,6 +41,7 @@ import _poolAysenAbbey from "../pool/aysen-abbey.js";
 import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
+import _poolBalefulEidolon from "../pool/baleful-eidolon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
 import _poolBaneLordOfDarkness from "../pool/bane-lord-of-darkness.js";
 import _poolBanishIntoFable from "../pool/banish-into-fable.js";
@@ -97,6 +98,7 @@ import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
 import _poolCaptivatingGyre from "../pool/captivating-gyre.js";
 import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
+import _poolCelestialArchon from "../pool/celestial-archon.js";
 import _poolCelestialMessenger from "../pool/celestial-messenger.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
@@ -716,6 +718,7 @@ const shard: CardShard = {
     _poolBadlands,
     _poolBalduvianBears,
     _poolBalefireDragon,
+    _poolBalefulEidolon,
     _poolBalmorBattlemageCaptain,
     _poolBaneLordOfDarkness,
     _poolBanishIntoFable,
@@ -772,6 +775,7 @@ const shard: CardShard = {
     _poolCapitalGuard,
     _poolCaptivatingGyre,
     _poolCaseyJonesVigilante,
+    _poolCelestialArchon,
     _poolCelestialMessenger,
     _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,

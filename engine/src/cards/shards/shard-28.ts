@@ -666,6 +666,7 @@ import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
 import _tokensRedGreenSatyrTokenHaste from "../tokens/red-green-satyr-token-haste.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
+import _tokensSoldierTokenRed11 from "../tokens/soldier-token-red-1-1.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
 import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeaker.js";
@@ -1337,6 +1338,7 @@ const shard: CardShard = {
     _tokensPhyrexianToken,
     _tokensRedGreenSatyrTokenHaste,
     _tokensRedHumanToken,
+    _tokensSoldierTokenRed11,
     _tokensSpiderToken21Reach,
     _tokensStoneforgedBladeToken,
     _tokensWurmTokenBaruWurmspeaker,

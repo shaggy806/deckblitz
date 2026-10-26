@@ -308,6 +308,7 @@ import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
 import _poolLeadersTalent from "../pool/leaders-talent.js";
+import _poolLeafcrownDryad from "../pool/leafcrown-dryad.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLesserMasticore from "../pool/lesser-masticore.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
@@ -948,6 +949,7 @@ const shard: CardShard = {
     _poolLaughingJasperFlint,
     _poolLavaDart,
     _poolLeadersTalent,
+    _poolLeafcrownDryad,
     _poolLeavesFromTheVine,
     _poolLesserMasticore,
     _poolLichsRelic,

@@ -414,6 +414,7 @@ import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
+import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
@@ -667,6 +668,7 @@ import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
+import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
@@ -1092,6 +1094,7 @@ const shard: CardShard = {
     _poolNorwoodWarrior,
     _poolNyxbornHydra,
     _poolOathOfChandra,
+    _poolObservantAlseid,
     _poolOgreBerserker,
     _poolOgreSiegebreaker,
     _poolOrderOfTheWhiteShield,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolZukosExile,
   ],
   tokens: [
+    _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
     _tokensHeartwoodToken,
     _tokensJumblebones,
