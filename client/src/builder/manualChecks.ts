@@ -8267,4 +8267,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Mountain*4', 'Wort, the Raidmother', 'Raging Goblin', 'Goblin Piker', 'Goblin Warrior Token'], hand: ['Burn Trail'] },
     }),
   ),
+  preset(
+    'Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking',
+    board({ you: { bf: ['Mountain*2'], hand: ['Gore-House Chainwalker'] }, opp: { bf: ['Grizzly Bears'] } }),
+  ),
+  preset(
+    "Azorius Arrester: a detained creature can't use its abilities until your next turn",
+    board({ you: { bf: ['Plains*2'], hand: ['Azorius Arrester'] }, opp: { bf: ['Prodigal Sorcerer'] } }),
+  ),
 ]

@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Return to Ravnica, the rest of the set** (batch 179, the newest-first walk, 2026-10-26):
+  **built** unleash (rule 702.98a, `keyword:unleash` — asked as it's about to enter, as riot is,
+  and a `cant-block` restriction while it has any +1/+1 counter) and detain (rule 701.35a,
+  `keyword:detain` — the `detain` effect: can't attack or block and no activated abilities until
+  your next turn), with the set's twenty cards with either and three triaged earlier on them
+  alone (Rakdos Drake, Exava, Rakdos Blood Witch, Lyev Decree). 97 of its 122 left authored —
+  Niv-Mizzet, Dracogenius, Desecration Demon, Archon of the Triumvirate, Hypersonic Dragon,
+  Firemind's Foresight and 92 more — and 25 blocked, one or two cards a need (`B179.json`).
+  Return to Ravnica is whole.
 - **Gatecrash, the rest of the set** (batch 176, the newest-first walk, 2026-10-26):
   **built** cipher (rule 702.99, `keyword:cipher` — `cipher: true`: as the spell's last step its
   controller may exile it encoded on a creature they control, which then casts a free copy

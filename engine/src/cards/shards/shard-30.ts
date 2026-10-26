@@ -32,8 +32,10 @@ import _poolAnointerPriest from "../pool/anointer-priest.js";
 import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
+import _poolArchonOfTheTriumvirate from "../pool/archon-of-the-triumvirate.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArmedDangerous from "../pool/armed-dangerous.js";
+import _poolArmoryGuard from "../pool/armory-guard.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
@@ -96,6 +98,7 @@ import _poolChainToMemory from "../pool/chain-to-memory.js";
 import _poolChainbreaker from "../pool/chainbreaker.js";
 import _poolChampionOfStraySouls from "../pool/champion-of-stray-souls.js";
 import _poolChannelerInitiate from "../pool/channeler-initiate.js";
+import _poolChaosImps from "../pool/chaos-imps.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
@@ -135,6 +138,7 @@ import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDawnfeatherEagle from "../pool/dawnfeather-eagle.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
+import _poolDeadbridgeGoliath from "../pool/deadbridge-goliath.js";
 import _poolDeathlace from "../pool/deathlace.js";
 import _poolDeathlessPilot from "../pool/deathless-pilot.js";
 import _poolDeathsOasis from "../pool/deaths-oasis.js";
@@ -475,6 +479,7 @@ import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQuicksand from "../pool/quicksand.js";
 import _poolQuirionDruid from "../pool/quirion-druid.js";
 import _poolRadiantEssence from "../pool/radiant-essence.js";
+import _poolRakdosKeyrune from "../pool/rakdos-keyrune.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
@@ -728,8 +733,10 @@ const shard: CardShard = {
     _poolAragornKingOfGondor,
     _poolArcaneBombardment,
     _poolArcboundCondor,
+    _poolArchonOfTheTriumvirate,
     _poolArgothianEnchantress,
     _poolArmedDangerous,
+    _poolArmoryGuard,
     _poolArtfulDodge,
     _poolAshioksForerunner,
     _poolAspectOfGorgon,
@@ -792,6 +799,7 @@ const shard: CardShard = {
     _poolChainbreaker,
     _poolChampionOfStraySouls,
     _poolChannelerInitiate,
+    _poolChaosImps,
     _poolChariotOfVictory,
     _poolChartoothCougar,
     _poolChromaticSphere,
@@ -831,6 +839,7 @@ const shard: CardShard = {
     _poolDawnbringerCleric,
     _poolDawnfeatherEagle,
     _poolDayOfJudgment,
+    _poolDeadbridgeGoliath,
     _poolDeathlace,
     _poolDeathlessPilot,
     _poolDeathsOasis,
@@ -1171,6 +1180,7 @@ const shard: CardShard = {
     _poolQuicksand,
     _poolQuirionDruid,
     _poolRadiantEssence,
+    _poolRakdosKeyrune,
     _poolRakdosPatronOfChaos,
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,

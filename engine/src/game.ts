@@ -749,6 +749,8 @@ interface EnteringReplacement {
  * offers them — see `Game.askEnterChoice`. */
 const RIOT_COUNTER = "+1/+1 counter";
 const RIOT_OPTIONS: readonly string[] = [RIOT_COUNTER, "Haste"];
+/** Unleash's choice (rule 702.98a): the first option takes the counter. */
+const UNLEASH_OPTIONS: readonly string[] = [RIOT_COUNTER, "No counter"];
 
 /** A bestow cast's mana purpose (rule 702.103b): the spell is an Aura, not a
  * creature, so a restriction reads it bestowed — "spend this mana only to
@@ -5119,7 +5121,9 @@ export class Game {
             ? { ...source.enterChoice, protector: creatureType as PlayerId }
             : awaiting.riot === true
               ? { ...source.enterChoice, riot: creatureType === RIOT_COUNTER ? "counter" : "haste" }
-              : { ...source.enterChoice, chosen: creatureType };
+              : awaiting.unleash === true
+                ? { ...source.enterChoice, unleash: creatureType === UNLEASH_OPTIONS[0] }
+                : { ...source.enterChoice, chosen: creatureType };
       }
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
@@ -8928,6 +8932,7 @@ export class Game {
     | { readonly kind: "reveal"; readonly subtypes: readonly string[] }
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
     | { readonly kind: "riot" }
+    | { readonly kind: "unleash" }
     | { readonly kind: "tribute"; readonly amount: number }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
     | { readonly kind: "devour"; readonly filter: CardFilter }
@@ -8961,6 +8966,9 @@ export class Game {
     // additional +1/+1 counter on it" — a printed (or copied) riot. One
     // granted by another permanent isn't asked (AUTHORING §15).
     if (answered?.riot === undefined && becoming.keywords.includes("riot")) return { kind: "riot" };
+    // Unleash (rule 702.98a): "you may have this permanent enter with an
+    // additional +1/+1 counter on it" — printed or copied, as riot.
+    if (answered?.unleash === undefined && becoming.keywords.includes("unleash")) return { kind: "unleash" };
     // Tribute N (rule 702.104a): "as this creature enters, choose an
     // opponent. That player may put an additional N +1/+1 counters on it" —
     // printed, or a copy's.
@@ -9094,6 +9102,17 @@ export class Game {
           options: RIOT_OPTIONS,
           catalog: false,
           riot: true,
+        };
+        return true;
+      }
+      if (next.kind === "unleash") {
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player: chooser,
+          source: id,
+          options: UNLEASH_OPTIONS,
+          catalog: false,
+          unleash: true,
         };
         return true;
       }
@@ -23135,6 +23154,7 @@ export class Game {
       },
       restrict: (target, filter, restrictions, duration) =>
         this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn")),
+      detain: (target) => this.detain(controller, target),
       attackDespiteDefender: (target, filter) => {
         if (filter !== undefined) {
           (this.state.turnDefenderAttacks ??= []).push({ filter, you: controller });
@@ -27551,6 +27571,8 @@ export class Game {
   /** Whether `player` is barred from activating `source`'s activated
    * abilities — mana abilities included — this turn or by a static. */
   private abilitiesProhibited(player: PlayerId, source: GameObject): boolean {
+    // Detained (rule 701.35a) — the modifier is gone once its duration ends.
+    if (source.modifiers.some((m) => m.abilitiesCantBeActivated === true)) return true;
     const turn = this.state.turnProhibitions;
     if (turn !== undefined) {
       if (turn.players.some((p) => p.player === player && p.abilities)) return true;
@@ -27698,6 +27720,40 @@ export class Game {
       restrictions: [...restrictions],
       ...(duration === "end-of-turn" ? {} : { duration }),
     });
+  }
+
+  /**
+   * `detainer` detains `target` (rule 701.35a): until `detainer`'s next turn
+   * it can't attack or block and its activated abilities can't be activated
+   * — one modifier, ended with the other "until your next turn" ones as that
+   * turn begins (or would have, once `detainer` has left the game — rule
+   * 800.4m). Any permanent can be: a noncreature one that becomes a
+   * creature later still can't attack or block (the ruling).
+   */
+  private detain(detainer: PlayerId, target: TargetRef): void {
+    if (target.kind !== "object") return;
+    const id = this.splitOneFromStack(target.object);
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield") return;
+    const restrictions: CombatRestriction[] = ["cant-attack", "cant-block"];
+    object.modifiers.push({
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      restrictions,
+      abilitiesCantBeActivated: true,
+      untilEndOfTurn: false,
+      untilTurnOf: detainer,
+    });
+    invalidateComputedCache();
+    this.emit({
+      type: "restrictions-imposed",
+      object: id,
+      player: detainer,
+      restrictions: [...restrictions],
+      duration: { untilTurnOf: detainer },
+    });
+    this.emit({ type: "prohibition-imposed", players: [], object: id, spells: false, abilities: true });
   }
 
   /**
@@ -35210,12 +35266,13 @@ export class Game {
     riot?: "counter" | "haste",
     devoured?: number,
     tributePaid?: boolean,
+    unleash?: boolean,
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
     // devotion that decides whether it's a creature (a Theros God's ruling).
     const entering = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
-      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured, tributePaid),
+      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured, tributePaid, unleash),
     );
     this.enterBatch?.add(id);
     // "Counters can't be put on" it (Solemnity): it enters without them —
@@ -35236,6 +35293,7 @@ export class Game {
     riot?: "counter" | "haste",
     devoured?: number,
     tributePaid?: boolean,
+    unleash?: boolean,
   ): EnteringReplacement {
     const object = this.state.objects[id];
     const def = this.registry.get(printedCardName(object));
@@ -35332,6 +35390,10 @@ export class Game {
       if (riot === "counter") addCounters("+1/+1", 1);
       else riotHaste = true;
     }
+    // Unleash (rule 702.98a): the +1/+1 counter its controller chose as it
+    // was about to enter. Entering some way that never asked (a token copy),
+    // nobody had it enter with the counter.
+    if (def.keywords.includes("unleash") && unleash === true) addCounters("+1/+1", 1);
     // Tribute (rule 702.104a): the counters the chosen opponent put on it as
     // it was about to enter (`askEnterChoice`). Entering some way that never
     // asked (a token copy), nobody paid it.
@@ -36777,6 +36839,7 @@ export class Game {
         enterChoice?.riot,
         enterChoice?.devoured,
         enterChoice?.tributePaid,
+        enterChoice?.unleash,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {

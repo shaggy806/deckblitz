@@ -25,6 +25,7 @@ import _poolAmberGristleOmaul from "../pool/amber-gristle-omaul.js";
 import _poolAmrouKithkin from "../pool/amrou-kithkin.js";
 import _poolAncientGrudge from "../pool/ancient-grudge.js";
 import _poolAnimatingFaerie from "../pool/animating-faerie.js";
+import _poolAnnihilatingFire from "../pool/annihilating-fire.js";
 import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
 import _poolAquusSteed from "../pool/aquus-steed.js";
 import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
@@ -522,6 +523,7 @@ import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
 import _poolSkophosWarleader from "../pool/skophos-warleader.js";
+import _poolSkullRend from "../pool/skull-rend.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
 import _poolSkyCrier from "../pool/sky-crier.js";
 import _poolSkystreakEngineer from "../pool/skystreak-engineer.js";
@@ -652,6 +654,7 @@ import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
 import _poolWretchedThrong from "../pool/wretched-throng.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
+import _poolZanikevLocust from "../pool/zanikev-locust.js";
 import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
 import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
@@ -704,6 +707,7 @@ const shard: CardShard = {
     _poolAmrouKithkin,
     _poolAncientGrudge,
     _poolAnimatingFaerie,
+    _poolAnnihilatingFire,
     _poolApprenticeNecromancer,
     _poolAquusSteed,
     _poolArcaneEncyclopedia,
@@ -1201,6 +1205,7 @@ const shard: CardShard = {
     _poolSinuousStriker,
     _poolSirensRuse,
     _poolSkophosWarleader,
+    _poolSkullRend,
     _poolSkullclamp,
     _poolSkyCrier,
     _poolSkystreakEngineer,
@@ -1331,6 +1336,7 @@ const shard: CardShard = {
     _poolWoodedBastion,
     _poolWretchedThrong,
     _poolWurmcoilLarva,
+    _poolZanikevLocust,
     _poolZephyrSentinel,
     _poolZoeticGlyph,
   ],

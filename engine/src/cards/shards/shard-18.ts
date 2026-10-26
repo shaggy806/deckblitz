@@ -386,6 +386,7 @@ import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
+import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
@@ -479,6 +480,7 @@ import _poolScientistSupremeOfAIM from "../pool/scientist-supreme-of-a-i-m.js";
 import _poolScourgeOfTheUndercity from "../pool/scourge-of-the-undercity.js";
 import _poolScrap from "../pool/scrap.js";
 import _poolSeaGodsRevenge from "../pool/sea-gods-revenge.js";
+import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
@@ -1077,6 +1079,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
+    _poolOgreJailbreaker,
     _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,
     _poolOnwardVictory,
@@ -1170,6 +1173,7 @@ const shard: CardShard = {
     _poolScourgeOfTheUndercity,
     _poolScrap,
     _poolSeaGodsRevenge,
+    _poolSelesnyaKeyrune,
     _poolSentinelSpider,
     _poolSeveredStrands,
     _poolShalaisAcolyte,

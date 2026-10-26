@@ -391,6 +391,7 @@ import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
+import _poolNewPrahvGuildmage from "../pool/new-prahv-guildmage.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
@@ -536,6 +537,7 @@ import _poolSkyboxFerry from "../pool/skybox-ferry.js";
 import _poolSkyshroudClaim from "../pool/skyshroud-claim.js";
 import _poolSkyshroudPoacher from "../pool/skyshroud-poacher.js";
 import _poolSkywhalersShot from "../pool/skywhalers-shot.js";
+import _poolSlimeMolding from "../pool/slime-molding.js";
 import _poolSlimefootAndSquee from "../pool/slimefoot-and-squee.js";
 import _poolSmeltedChargebug from "../pool/smelted-chargebug.js";
 import _poolSnowhornRider from "../pool/snowhorn-rider.js";
@@ -585,6 +587,7 @@ import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
 import _poolTamiyosImmobilizer from "../pool/tamiyos-immobilizer.js";
 import _poolTaniwha from "../pool/taniwha.js";
 import _poolTatteredHaunter from "../pool/tattered-haunter.js";
+import _poolTavernSwindler from "../pool/tavern-swindler.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
@@ -1113,6 +1116,7 @@ const shard: CardShard = {
     _poolNaturalState,
     _poolNecroticHex,
     _poolNestOfScarabs,
+    _poolNewPrahvGuildmage,
     _poolNightpackAmbusher,
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
@@ -1258,6 +1262,7 @@ const shard: CardShard = {
     _poolSkyshroudClaim,
     _poolSkyshroudPoacher,
     _poolSkywhalersShot,
+    _poolSlimeMolding,
     _poolSlimefootAndSquee,
     _poolSmeltedChargebug,
     _poolSnowhornRider,
@@ -1307,6 +1312,7 @@ const shard: CardShard = {
     _poolTamiyosImmobilizer,
     _poolTaniwha,
     _poolTatteredHaunter,
+    _poolTavernSwindler,
     _poolTchallaTheBlackPanther,
     _poolTempestHarvester,
     _poolTemporalAdept,

@@ -402,6 +402,7 @@ import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasEncouragement from "../pool/nissas-encouragement.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
+import _poolNivixGuildmage from "../pool/nivix-guildmage.js";
 import _poolNobleBanneret from "../pool/noble-banneret.js";
 import _poolNotionRain from "../pool/notion-rain.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
@@ -1079,6 +1080,7 @@ const shard: CardShard = {
     _poolNissaVitalForce,
     _poolNissasEncouragement,
     _poolNissasExpedition,
+    _poolNivixGuildmage,
     _poolNobleBanneret,
     _poolNotionRain,
     _poolNoviceInspector,

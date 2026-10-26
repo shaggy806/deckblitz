@@ -654,6 +654,7 @@ import _poolWasteNot from "../pool/waste-not.js";
 import _poolWatchwingScarecrow from "../pool/watchwing-scarecrow.js";
 import _poolWateryGrasp from "../pool/watery-grasp.js";
 import _poolWaveskimmerAven from "../pool/waveskimmer-aven.js";
+import _poolWayfaringTemple from "../pool/wayfaring-temple.js";
 import _poolWeeDragonauts from "../pool/wee-dragonauts.js";
 import _poolWhipcorder from "../pool/whipcorder.js";
 import _poolWhisperOfTheDross from "../pool/whisper-of-the-dross.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolWatchwingScarecrow,
     _poolWateryGrasp,
     _poolWaveskimmerAven,
+    _poolWayfaringTemple,
     _poolWeeDragonauts,
     _poolWhipcorder,
     _poolWhisperOfTheDross,

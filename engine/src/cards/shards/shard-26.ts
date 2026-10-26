@@ -281,6 +281,7 @@ import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
 import _poolHulkSmash from "../pool/hulk-smash.js";
 import _poolHumbleDefector from "../pool/humble-defector.js";
 import _poolHungryMegasloth from "../pool/hungry-megasloth.js";
+import _poolHypersonicDragon from "../pool/hypersonic-dragon.js";
 import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
 import _poolIchorRats from "../pool/ichor-rats.js";
@@ -299,6 +300,7 @@ import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
 import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
 import _poolItThatRidesAsOne from "../pool/it-that-rides-as-one.js";
+import _poolIzzetKeyrune from "../pool/izzet-keyrune.js";
 import _poolJaceIngeniousMindMage from "../pool/jace-ingenious-mind-mage.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJacesPhantasm from "../pool/jaces-phantasm.js";
@@ -963,6 +965,7 @@ const shard: CardShard = {
     _poolHulkSmash,
     _poolHumbleDefector,
     _poolHungryMegasloth,
+    _poolHypersonicDragon,
     _poolIcatianScout,
     _poolIceTunnel,
     _poolIchorRats,
@@ -981,6 +984,7 @@ const shard: CardShard = {
     _poolInvasionOfKarsus,
     _poolIronGiant,
     _poolItThatRidesAsOne,
+    _poolIzzetKeyrune,
     _poolJaceIngeniousMindMage,
     _poolJaceUnravelerOfSecrets,
     _poolJacesPhantasm,

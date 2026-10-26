@@ -185,6 +185,7 @@ import _poolExplosiveCrystal from "../pool/explosive-crystal.js";
 import _poolExquisiteBlood from "../pool/exquisite-blood.js";
 import _poolEyeOfMalcator from "../pool/eye-of-malcator.js";
 import _poolFaerieDreamthief from "../pool/faerie-dreamthief.js";
+import _poolFaerieImpostor from "../pool/faerie-impostor.js";
 import _poolFailedInspection from "../pool/failed-inspection.js";
 import _poolFallenAngel from "../pool/fallen-angel.js";
 import _poolFangDragon from "../pool/fang-dragon.js";
@@ -236,6 +237,7 @@ import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
+import _poolHavocFestival from "../pool/havoc-festival.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
@@ -427,6 +429,7 @@ import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolPteramander from "../pool/pteramander.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
 import _poolPyramidOfThePantheon from "../pool/pyramid-of-the-pantheon.js";
+import _poolPyroconvergence from "../pool/pyroconvergence.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
@@ -880,6 +883,7 @@ const shard: CardShard = {
     _poolExquisiteBlood,
     _poolEyeOfMalcator,
     _poolFaerieDreamthief,
+    _poolFaerieImpostor,
     _poolFailedInspection,
     _poolFallenAngel,
     _poolFangDragon,
@@ -931,6 +935,7 @@ const shard: CardShard = {
     _poolHakodaSelflessCommander,
     _poolHatcherySpider,
     _poolHauntedScreen,
+    _poolHavocFestival,
     _poolHeavyBallista,
     _poolHeirloomAuntie,
     _poolHeirloomBlade,
@@ -1122,6 +1127,7 @@ const shard: CardShard = {
     _poolPteramander,
     _poolPurphorossIntervention,
     _poolPyramidOfThePantheon,
+    _poolPyroconvergence,
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
     _poolRadhaHeartOfKeld,

@@ -144,6 +144,7 @@ import _poolDirty from "../pool/dirty.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
+import _poolDoorkeeper from "../pool/doorkeeper.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
@@ -597,6 +598,7 @@ import _poolToweringViewpoint from "../pool/towering-viewpoint.js";
 import _poolTragicSlip from "../pool/tragic-slip.js";
 import _poolTranscendentDragon from "../pool/transcendent-dragon.js";
 import _poolTransformingFlourish from "../pool/transforming-flourish.js";
+import _poolTreasuredFind from "../pool/treasured-find.js";
 import _poolTreeOfTales from "../pool/tree-of-tales.js";
 import _poolTrenchStalker from "../pool/trench-stalker.js";
 import _poolTriadOfFates from "../pool/triad-of-fates.js";
@@ -825,6 +827,7 @@ const shard: CardShard = {
     _poolDisruptiveStudent,
     _poolDocksideChef,
     _poolDonatellosTechnique,
+    _poolDoorkeeper,
     _poolDragonCursedHalls,
     _poolDragonEgg,
     _poolDrillworksMole,
@@ -1278,6 +1281,7 @@ const shard: CardShard = {
     _poolTragicSlip,
     _poolTranscendentDragon,
     _poolTransformingFlourish,
+    _poolTreasuredFind,
     _poolTreeOfTales,
     _poolTrenchStalker,
     _poolTriadOfFates,

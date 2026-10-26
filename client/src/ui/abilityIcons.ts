@@ -66,6 +66,9 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   // combat-condition one.
   flanking: '', // ms-ability-combat-condition
   riot: '', // ms-ability-riot
+  // No unleash icon anywhere in the font; it's riot's sibling (an optional
+  // +1/+1 counter as it enters), so riot's.
+  unleash: '', // ms-ability-riot
   infect: '', // ms-ability-infect
   // No wither icon anywhere in the font; it deals damage as -1/-1
   // counters, so the -1/-1 counter's.

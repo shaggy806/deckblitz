@@ -5425,3 +5425,13 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Burn Trail at Bob. Accept both conspire prompts, tapping two creatures for each.
 - **Expect:** Two conspire prompts, one after the other, and two copies: Bob goes to 11.
 - **Not a bug:** Wort and the Goblin Warrior token can be tapped for it: they're red too.
+
+## Unleash and detain (2026-10-26, Return to Ravnica)
+
+### Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking
+- **Do:** Cast Gore-House Chainwalker and pick '+1/+1 counter'. Pass to Bob's turn and let his Grizzly Bears attack.
+- **Expect:** 'Gore-House Chainwalker - choose one [+1/+1 counter] [No counter]' appears before it enters. It's a 3/2, and when Bob attacks it isn't offered as a blocker.
+
+### Azorius Arrester: a detained creature can't use its abilities until your next turn
+- **Do:** Cast Azorius Arrester and target Bob's Prodigal Sorcerer. Pass to Bob's turn, switch to Bob and try to activate the Sorcerer.
+- **Expect:** The Sorcerer's ability can't be activated and it can't attack. On your next turn, it can be activated again.

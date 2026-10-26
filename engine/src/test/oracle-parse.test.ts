@@ -1201,6 +1201,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(chill.complete).toBe(true);
   });
 
+  it("unleash is a keyword line and detain a targeted effect (rules 702.98a, 701.35a)", () => {
+    const cackler = face("Unleash (You may have this creature enter with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)", "Creature — Devil");
+    expect(cackler.keywords).toContain("unleash");
+    expect(cackler.complete).toBe(true);
+    const arrester = face(
+      "When this creature enters, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)",
+      "Creature — Human Soldier",
+    );
+    expect(arrester.triggered[0].effect).toEqual({ kind: "detain", target: 0 });
+    expect(arrester.complete).toBe(true);
+  });
+
   it("\"enchanted creature\" in an Aura's trigger is the attached permanent (Starlit Mantle)", () => {
     const mantle = face(
       "Enchant creature you control\nWhen this Aura enters, enchanted creature gains hexproof until end of turn.\nEnchanted creature gets +1/+1.",

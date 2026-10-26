@@ -65,6 +65,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     text: "If you control ten or more permanents, you get the city's blessing for the rest of the game.",
   },
   riot: { name: 'Riot', text: 'Enters with your choice of a +1/+1 counter or haste.' },
+  unleash: {
+    name: 'Unleash',
+    text: "You may have it enter with a +1/+1 counter. It can't block as long as it has a +1/+1 counter.",
+  },
   infect: {
     name: 'Infect',
     text: 'Deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.',

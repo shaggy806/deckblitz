@@ -38,6 +38,7 @@ import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolArtificersEpiphany from "../pool/artificers-epiphany.js";
+import _poolAshZealot from "../pool/ash-zealot.js";
 import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAspectOfHydra from "../pool/aspect-of-hydra.js";
 import _poolAssureAssemble from "../pool/assure-assemble.js";
@@ -719,6 +720,7 @@ const shard: CardShard = {
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
     _poolArtificersEpiphany,
+    _poolAshZealot,
     _poolAshnodsTransmogrant,
     _poolAspectOfHydra,
     _poolAssureAssemble,
