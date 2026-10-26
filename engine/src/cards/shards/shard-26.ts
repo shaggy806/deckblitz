@@ -185,6 +185,7 @@ import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFaithOfTheDevoted from "../pool/faith-of-the-devoted.js";
+import _poolFarAway from "../pool/far-away.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
@@ -321,6 +322,7 @@ import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLands from "../pool/living-lands.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLivingPlane from "../pool/living-plane.js";
+import _poolLoss from "../pool/loss.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
@@ -586,6 +588,7 @@ import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTurn from "../pool/turn.js";
 import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
@@ -845,6 +848,7 @@ const shard: CardShard = {
     _poolExtinguishTheLight,
     _poolFadingHope,
     _poolFaithOfTheDevoted,
+    _poolFarAway,
     _poolFblthpImpossiblyLost,
     _poolFblthpTheLost,
     _poolFearOfDeath,
@@ -981,6 +985,7 @@ const shard: CardShard = {
     _poolLivingLands,
     _poolLivingLightning,
     _poolLivingPlane,
+    _poolLoss,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
     _poolLoyalGryff,
@@ -1246,6 +1251,7 @@ const shard: CardShard = {
     _poolTrevasCharm,
     _poolTribuneOfRot,
     _poolTritonShorestalker,
+    _poolTurn,
     _poolTurntimberRanger,
     _poolTurretOgre,
     _poolTwinshotSniper,

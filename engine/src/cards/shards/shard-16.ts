@@ -13,6 +13,7 @@ import _poolAkroanSergeant from "../pool/akroan-sergeant.js";
 import _poolAladdin from "../pool/aladdin.js";
 import _poolAlchemistsGreeting from "../pool/alchemists-greeting.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
+import _poolAliveWell from "../pool/alive-well.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
 import _poolAmbuscade from "../pool/ambuscade.js";
 import _poolAmonkhetRaceway from "../pool/amonkhet-raceway.js";
@@ -75,6 +76,7 @@ import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
+import _poolBreaking from "../pool/breaking.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
@@ -729,6 +731,7 @@ const shard: CardShard = {
     _poolAladdin,
     _poolAlchemistsGreeting,
     _poolAliriosEnraptured,
+    _poolAliveWell,
     _poolAlmightyBrushwagg,
     _poolAmbuscade,
     _poolAmonkhetRaceway,
@@ -791,6 +794,7 @@ const shard: CardShard = {
     _poolBoulderRush,
     _poolBoundingFelidar,
     _poolBrassclawOrcs,
+    _poolBreaking,
     _poolBrokersInitiate,
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,

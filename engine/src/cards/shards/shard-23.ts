@@ -102,6 +102,7 @@ import _poolCartographersCompanion from "../pool/cartographers-companion.js";
 import _poolCastleVantress from "../pool/castle-vantress.js";
 import _poolCatacombCrocodile from "../pool/catacomb-crocodile.js";
 import _poolCatapultSquad from "../pool/catapult-squad.js";
+import _poolCatchRelease from "../pool/catch-release.js";
 import _poolCausticCrawler from "../pool/caustic-crawler.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
@@ -774,6 +775,7 @@ const shard: CardShard = {
     _poolCastleVantress,
     _poolCatacombCrocodile,
     _poolCatapultSquad,
+    _poolCatchRelease,
     _poolCausticCrawler,
     _poolCenoteScout,
     _poolCephalidScout,

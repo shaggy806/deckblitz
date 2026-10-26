@@ -41,6 +41,7 @@ import _poolArcboundLancer from "../pool/arcbound-lancer.js";
 import _poolArcboundMouser from "../pool/arcbound-mouser.js";
 import _poolArchfiendOfTheDross from "../pool/archfiend-of-the-dross.js";
 import _poolArgothianSwine from "../pool/argothian-swine.js";
+import _poolArmed from "../pool/armed.js";
 import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolAssassinate from "../pool/assassinate.js";
 import _poolAssertPerfection from "../pool/assert-perfection.js";
@@ -213,6 +214,7 @@ import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
 import _poolFrostGiant from "../pool/frost-giant.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
+import _poolGallifreyFalls from "../pool/gallifrey-falls.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
 import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
@@ -725,6 +727,7 @@ const shard: CardShard = {
     _poolArcboundMouser,
     _poolArchfiendOfTheDross,
     _poolArgothianSwine,
+    _poolArmed,
     _poolArnoDorian,
     _poolAssassinate,
     _poolAssertPerfection,
@@ -897,6 +900,7 @@ const shard: CardShard = {
     _poolFrostGiant,
     _poolFusionElemental,
     _poolGallantCavalry,
+    _poolGallifreyFalls,
     _poolGalvanicArc,
     _poolGelatinousGenesis,
     _poolGenesisStorm,

@@ -129,6 +129,7 @@ import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
+import _poolDoubleJump from "../pool/double-jump.js";
 import _poolDragonThroneOfTarkir from "../pool/dragon-throne-of-tarkir.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDranasSilencer from "../pool/dranas-silencer.js";
@@ -183,6 +184,7 @@ import _poolFlayedOne from "../pool/flayed-one.js";
 import _poolFleshformer from "../pool/fleshformer.js";
 import _poolFlowerFlourish from "../pool/flower-flourish.js";
 import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
+import _poolFlyingKick from "../pool/flying-kick.js";
 import _poolForceOfNature from "../pool/force-of-nature.js";
 import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
@@ -780,6 +782,7 @@ const shard: CardShard = {
     _poolDoomsServoGuards,
     _poolDoseOfDawnglow,
     _poolDoubleDown,
+    _poolDoubleJump,
     _poolDragonThroneOfTarkir,
     _poolDrakeHatchling,
     _poolDranasSilencer,
@@ -834,6 +837,7 @@ const shard: CardShard = {
     _poolFleshformer,
     _poolFlowerFlourish,
     _poolFlowstoneCharger,
+    _poolFlyingKick,
     _poolForceOfNature,
     _poolForgingTheTyriteSword,
     _poolForsakeTheWorldly,

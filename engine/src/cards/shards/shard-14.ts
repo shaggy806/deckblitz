@@ -211,6 +211,7 @@ import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
 import _poolFame from "../pool/fame.js";
 import _poolFangbladeBrigand from "../pool/fangblade-brigand.js";
+import _poolFar from "../pool/far.js";
 import _poolFarrelsZealot from "../pool/farrels-zealot.js";
 import _poolFathomFleetSwordjack from "../pool/fathom-fleet-swordjack.js";
 import _poolFeatherbrainedFilcher from "../pool/featherbrained-filcher.js";
@@ -444,6 +445,7 @@ import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfanerOfTheDead from "../pool/profaner-of-the-dead.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
+import _poolProfitLoss from "../pool/profit-loss.js";
 import _poolProtectTheNegotiators from "../pool/protect-the-negotiators.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
@@ -876,6 +878,7 @@ const shard: CardShard = {
     _poolFaerieFormation,
     _poolFame,
     _poolFangbladeBrigand,
+    _poolFar,
     _poolFarrelsZealot,
     _poolFathomFleetSwordjack,
     _poolFeatherbrainedFilcher,
@@ -1109,6 +1112,7 @@ const shard: CardShard = {
     _poolPrismite,
     _poolProfanerOfTheDead,
     _poolProfessionalFaceBreaker,
+    _poolProfitLoss,
     _poolProtectTheNegotiators,
     _poolProwessOfTheFair,
     _poolProwlingCaracal,

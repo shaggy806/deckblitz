@@ -52,6 +52,7 @@ import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
 import _poolBattlefieldPromotion from "../pool/battlefield-promotion.js";
 import _poolBattlegrowth from "../pool/battlegrowth.js";
+import _poolBeckCall from "../pool/beck-call.js";
 import _poolBeginTheInvasion from "../pool/begin-the-invasion.js";
 import _poolBelligerentGuest from "../pool/belligerent-guest.js";
 import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
@@ -83,6 +84,7 @@ import _poolBronzeSable from "../pool/bronze-sable.js";
 import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
 import _poolBubbleUp from "../pool/bubble-up.js";
 import _poolBuildersTalent from "../pool/builders-talent.js";
+import _poolBurn from "../pool/burn.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
 import _poolCampusGuide from "../pool/campus-guide.js";
@@ -569,6 +571,7 @@ import _poolTransmogrifyingWand from "../pool/transmogrifying-wand.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTrollbredGuardian from "../pool/trollbred-guardian.js";
+import _poolTrouble from "../pool/trouble.js";
 import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
@@ -715,6 +718,7 @@ const shard: CardShard = {
     _poolBattershieldWarrior,
     _poolBattlefieldPromotion,
     _poolBattlegrowth,
+    _poolBeckCall,
     _poolBeginTheInvasion,
     _poolBelligerentGuest,
     _poolBelligerentWhiptail,
@@ -746,6 +750,7 @@ const shard: CardShard = {
     _poolBroodmateTyrant,
     _poolBubbleUp,
     _poolBuildersTalent,
+    _poolBurn,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
     _poolCampusGuide,
@@ -1232,6 +1237,7 @@ const shard: CardShard = {
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
     _poolTrollbredGuardian,
+    _poolTrouble,
     _poolTvaBureaucrat,
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,

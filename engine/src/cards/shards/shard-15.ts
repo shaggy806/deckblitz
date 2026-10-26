@@ -386,6 +386,7 @@ import _poolNeurokInvisimancer from "../pool/neurok-invisimancer.js";
 import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
 import _poolNimbusOfTheIsles from "../pool/nimbus-of-the-isles.js";
+import _poolNoMore from "../pool/no-more.js";
 import _poolNourish from "../pool/nourish.js";
 import _poolNoxiousGhoul from "../pool/noxious-ghoul.js";
 import _poolNoxiousGroodion from "../pool/noxious-groodion.js";
@@ -1025,6 +1026,7 @@ const shard: CardShard = {
     _poolNeyamShaiMurad,
     _poolNiblisOfTheUrn,
     _poolNimbusOfTheIsles,
+    _poolNoMore,
     _poolNourish,
     _poolNoxiousGhoul,
     _poolNoxiousGroodion,

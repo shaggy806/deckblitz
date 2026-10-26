@@ -30,6 +30,7 @@ import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
+import _poolArmedDangerous from "../pool/armed-dangerous.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
@@ -471,6 +472,7 @@ import _poolRecklessBushwhacker from "../pool/reckless-bushwhacker.js";
 import _poolRedWard from "../pool/red-ward.js";
 import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
+import _poolRelease from "../pool/release.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
@@ -588,6 +590,7 @@ import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
 import _poolTocasiasOnulet from "../pool/tocasias-onulet.js";
+import _poolToilTrouble from "../pool/toil-trouble.js";
 import _poolTopazDragon from "../pool/topaz-dragon.js";
 import _poolTophTheFirstMetalbender from "../pool/toph-the-first-metalbender.js";
 import _poolTourachDreadCantor from "../pool/tourach-dread-cantor.js";
@@ -647,6 +650,7 @@ import _poolWaterWhip from "../pool/water-whip.js";
 import _poolWaterbendingScroll from "../pool/waterbending-scroll.js";
 import _poolWateryGrave from "../pool/watery-grave.js";
 import _poolWavebreakHippocamp from "../pool/wavebreak-hippocamp.js";
+import _poolWear from "../pool/wear.js";
 import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
 import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
 import _poolWildRicochet from "../pool/wild-ricochet.js";
@@ -702,6 +706,7 @@ const shard: CardShard = {
     _poolArcaneBombardment,
     _poolArcboundCondor,
     _poolArgothianEnchantress,
+    _poolArmedDangerous,
     _poolArtfulDodge,
     _poolAshioksForerunner,
     _poolAspectOfGorgon,
@@ -1143,6 +1148,7 @@ const shard: CardShard = {
     _poolRedWard,
     _poolRegnaTheRedeemer,
     _poolRejuvenate,
+    _poolRelease,
     _poolRelentlessAdvance,
     _poolReluctantRoleModel,
     _poolRepairAndRecharge,
@@ -1260,6 +1266,7 @@ const shard: CardShard = {
     _poolTigerSeal,
     _poolTitansGrave,
     _poolTocasiasOnulet,
+    _poolToilTrouble,
     _poolTopazDragon,
     _poolTophTheFirstMetalbender,
     _poolTourachDreadCantor,
@@ -1319,6 +1326,7 @@ const shard: CardShard = {
     _poolWaterbendingScroll,
     _poolWateryGrave,
     _poolWavebreakHippocamp,
+    _poolWear,
     _poolWhiteSunsTwilight,
     _poolWightOfTheReliquary,
     _poolWildRicochet,

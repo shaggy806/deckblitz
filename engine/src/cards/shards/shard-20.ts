@@ -81,6 +81,7 @@ import _poolBrambleSovereign from "../pool/bramble-sovereign.js";
 import _poolBrassSecretary from "../pool/brass-secretary.js";
 import _poolBreOfClanStoutarm from "../pool/bre-of-clan-stoutarm.js";
 import _poolBreakDown from "../pool/break-down.js";
+import _poolBreakingEntering from "../pool/breaking-entering.js";
 import _poolBriaRiptideRogue from "../pool/bria-riptide-rogue.js";
 import _poolBridgeworksBattle from "../pool/bridgeworks-battle.js";
 import _poolBrightbladeStoat from "../pool/brightblade-stoat.js";
@@ -460,6 +461,7 @@ import _poolRavenousSailback from "../pool/ravenous-sailback.js";
 import _poolRavingDead from "../pool/raving-dead.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
+import _poolReady from "../pool/ready.js";
 import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRecklessRage from "../pool/reckless-rage.js";
@@ -504,6 +506,7 @@ import _poolSecondHarvest from "../pool/second-harvest.js";
 import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
+import _poolServe from "../pool/serve.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
 import _poolShadowsOfThePast from "../pool/shadows-of-the-past.js";
 import _poolShalaiAndHallar from "../pool/shalai-and-hallar.js";
@@ -680,6 +683,7 @@ import _poolVulshokBerserker from "../pool/vulshok-berserker.js";
 import _poolWakeTheDead from "../pool/wake-the-dead.js";
 import _poolWallOfFrost from "../pool/wall-of-frost.js";
 import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
+import _poolWearTear from "../pool/wear-tear.js";
 import _poolWeddingFestivity from "../pool/wedding-festivity.js";
 import _poolWeldfastEngineer from "../pool/weldfast-engineer.js";
 import _poolWellRested from "../pool/well-rested.js";
@@ -800,6 +804,7 @@ const shard: CardShard = {
     _poolBrassSecretary,
     _poolBreOfClanStoutarm,
     _poolBreakDown,
+    _poolBreakingEntering,
     _poolBriaRiptideRogue,
     _poolBridgeworksBattle,
     _poolBrightbladeStoat,
@@ -1179,6 +1184,7 @@ const shard: CardShard = {
     _poolRavingDead,
     _poolRaybladeTrooper,
     _poolRazzleDazzler,
+    _poolReady,
     _poolRebelSalvo,
     _poolRecklessAssault,
     _poolRecklessRage,
@@ -1223,6 +1229,7 @@ const shard: CardShard = {
     _poolSeismicShift,
     _poolSelectForInspection,
     _poolSerendibEfreet,
+    _poolServe,
     _poolSevinnesReclamation,
     _poolShadowsOfThePast,
     _poolShalaiAndHallar,
@@ -1399,6 +1406,7 @@ const shard: CardShard = {
     _poolWakeTheDead,
     _poolWallOfFrost,
     _poolWaytaTrainerProdigy,
+    _poolWearTear,
     _poolWeddingFestivity,
     _poolWeldfastEngineer,
     _poolWellRested,

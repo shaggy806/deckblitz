@@ -423,6 +423,7 @@ import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.j
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
+import _poolReadyWilling from "../pool/ready-willing.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
 import _poolReclusiveArtificer from "../pool/reclusive-artificer.js";
 import _poolRedHulk from "../pool/red-hulk.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolRavenousBaboons,
     _poolRazorclawBear,
     _poolRazorkinHordecaller,
+    _poolReadyWilling,
     _poolReapingTheGraves,
     _poolReclusiveArtificer,
     _poolRedHulk,

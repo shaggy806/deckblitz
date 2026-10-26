@@ -18,6 +18,7 @@ import _poolAkawalliTheSeethingTower from "../pool/akawalli-the-seething-tower.j
 import _poolAlabasterHostSanctifier from "../pool/alabaster-host-sanctifier.js";
 import _poolAlexiosDeimosOfKosmos from "../pool/alexios-deimos-of-kosmos.js";
 import _poolAlibouAncientWitness from "../pool/alibou-ancient-witness.js";
+import _poolAlive from "../pool/alive.js";
 import _poolAlleyStrangler from "../pool/alley-strangler.js";
 import _poolAllureOfPower from "../pool/allure-of-power.js";
 import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
@@ -682,6 +683,7 @@ const shard: CardShard = {
     _poolAlabasterHostSanctifier,
     _poolAlexiosDeimosOfKosmos,
     _poolAlibouAncientWitness,
+    _poolAlive,
     _poolAlleyStrangler,
     _poolAllureOfPower,
     _poolAlphaDeathclaw,

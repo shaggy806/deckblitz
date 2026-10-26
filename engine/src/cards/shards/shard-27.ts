@@ -38,6 +38,7 @@ import _poolAstrologiansPlanisphere from "../pool/astrologians-planisphere.js";
 import _poolAtraxiWarden from "../pool/atraxi-warden.js";
 import _poolAutomatedAssemblyLine from "../pool/automated-assembly-line.js";
 import _poolAvatarRoku from "../pool/avatar-roku.js";
+import _poolAway from "../pool/away.js";
 import _poolBahamutWardenOfLight from "../pool/bahamut-warden-of-light.js";
 import _poolBakersbaneDuo from "../pool/bakersbane-duo.js";
 import _poolBallistaWatcher from "../pool/ballista-watcher.js";
@@ -135,6 +136,7 @@ import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
 import _poolDetentionChariot from "../pool/detention-chariot.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
+import _poolDirty from "../pool/dirty.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
@@ -701,6 +703,7 @@ const shard: CardShard = {
     _poolAtraxiWarden,
     _poolAutomatedAssemblyLine,
     _poolAvatarRoku,
+    _poolAway,
     _poolBahamutWardenOfLight,
     _poolBakersbaneDuo,
     _poolBallistaWatcher,
@@ -798,6 +801,7 @@ const shard: CardShard = {
     _poolDetentionChariot,
     _poolDevoutMonk,
     _poolDigThroughTime,
+    _poolDirty,
     _poolDisruptiveStudent,
     _poolDocksideChef,
     _poolDonatellosTechnique,

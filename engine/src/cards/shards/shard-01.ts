@@ -412,6 +412,7 @@ import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
 import _poolPrognosticSphinx from "../pool/prognostic-sphinx.js";
 import _poolPropheticRavings from "../pool/prophetic-ravings.js";
+import _poolProtectServe from "../pool/protect-serve.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
@@ -536,6 +537,7 @@ import _poolTannukSteadfastSecond from "../pool/tannuk-steadfast-second.js";
 import _poolTasteOfBlood from "../pool/taste-of-blood.js";
 import _poolTaureanMauler from "../pool/taurean-mauler.js";
 import _poolTeachersPest from "../pool/teachers-pest.js";
+import _poolTear from "../pool/tear.js";
 import _poolTearsOfValakut from "../pool/tears-of-valakut.js";
 import _poolTeferisDrake from "../pool/teferis-drake.js";
 import _poolTeleportationCircle from "../pool/teleportation-circle.js";
@@ -564,6 +566,7 @@ import _poolTicketBooth from "../pool/ticket-booth.js";
 import _poolTidebinderMage from "../pool/tidebinder-mage.js";
 import _poolTinWingChimera from "../pool/tin-wing-chimera.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
+import _poolToil from "../pool/toil.js";
 import _poolTolarianKraken from "../pool/tolarian-kraken.js";
 import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolTookReaper from "../pool/took-reaper.js";
@@ -1065,6 +1068,7 @@ const shard: CardShard = {
     _poolPrizefighterConstruct,
     _poolPrognosticSphinx,
     _poolPropheticRavings,
+    _poolProtectServe,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
     _poolPummelerForHire,
@@ -1189,6 +1193,7 @@ const shard: CardShard = {
     _poolTasteOfBlood,
     _poolTaureanMauler,
     _poolTeachersPest,
+    _poolTear,
     _poolTearsOfValakut,
     _poolTeferisDrake,
     _poolTeleportationCircle,
@@ -1217,6 +1222,7 @@ const shard: CardShard = {
     _poolTidebinderMage,
     _poolTinWingChimera,
     _poolTitaniaProtectorOfArgoth,
+    _poolToil,
     _poolTolarianKraken,
     _poolTolarianTerror,
     _poolTookReaper,

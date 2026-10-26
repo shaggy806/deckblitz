@@ -57,6 +57,7 @@ import _poolBlizzardBrawl from "../pool/blizzard-brawl.js";
 import _poolBlizzard from "../pool/blizzard.js";
 import _poolBloodCelebrant from "../pool/blood-celebrant.js";
 import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
+import _poolBlood from "../pool/blood.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
@@ -419,6 +420,7 @@ import _poolPriestOfGix from "../pool/priest-of-gix.js";
 import _poolPrimevalLight from "../pool/primeval-light.js";
 import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
 import _poolPrizePig from "../pool/prize-pig.js";
+import _poolProfit from "../pool/profit.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
@@ -752,6 +754,7 @@ const shard: CardShard = {
     _poolBlizzard,
     _poolBloodCelebrant,
     _poolBloodTollHarpy,
+    _poolBlood,
     _poolBloodsoakedChampion,
     _poolBlueSunsTwilight,
     _poolBojukaBog,
@@ -1114,6 +1117,7 @@ const shard: CardShard = {
     _poolPrimevalLight,
     _poolPrimordialPachyderm,
     _poolPrizePig,
+    _poolProfit,
     _poolProtectiveParents,
     _poolProvisionsMerchant,
     _poolPsychicPickpocket,

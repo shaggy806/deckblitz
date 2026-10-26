@@ -138,6 +138,7 @@ import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
 import _poolCuboidColony from "../pool/cuboid-colony.js";
 import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
+import _poolDangerous from "../pool/dangerous.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
@@ -183,6 +184,7 @@ import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
+import _poolEntering from "../pool/entering.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
 import _poolEruptingDreadwolf from "../pool/erupting-dreadwolf.js";
 import _poolEscapedNull from "../pool/escaped-null.js";
@@ -661,6 +663,7 @@ import _poolWhiskAway from "../pool/whisk-away.js";
 import _poolWhiteTigerAvaAyala from "../pool/white-tiger-ava-ayala.js";
 import _poolWickerWitch from "../pool/wicker-witch.js";
 import _poolWillOfTheAllHunter from "../pool/will-of-the-all-hunter.js";
+import _poolWilling from "../pool/willing.js";
 import _poolWilsonRefinedGrizzly from "../pool/wilson-refined-grizzly.js";
 import _poolWindScarredCrag from "../pool/wind-scarred-crag.js";
 import _poolWingSnare from "../pool/wing-snare.js";
@@ -831,6 +834,7 @@ const shard: CardShard = {
     _poolCuboidColony,
     _poolCunningStrike,
     _poolCunningSurvivor,
+    _poolDangerous,
     _poolDaringApprentice,
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
@@ -876,6 +880,7 @@ const shard: CardShard = {
     _poolElvishHealer,
     _poolEmrakulsMessenger,
     _poolEnslavedDwarf,
+    _poolEntering,
     _poolErhnamDjinn,
     _poolEruptingDreadwolf,
     _poolEscapedNull,
@@ -1354,6 +1359,7 @@ const shard: CardShard = {
     _poolWhiteTigerAvaAyala,
     _poolWickerWitch,
     _poolWillOfTheAllHunter,
+    _poolWilling,
     _poolWilsonRefinedGrizzly,
     _poolWindScarredCrag,
     _poolWingSnare,

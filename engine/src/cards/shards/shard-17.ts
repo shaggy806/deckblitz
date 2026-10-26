@@ -148,6 +148,7 @@ import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
+import _poolDoubleJumpFlyingKick from "../pool/double-jump-flying-kick.js";
 import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
 import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
@@ -202,6 +203,7 @@ import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolFlamespeakersWill from "../pool/flamespeakers-will.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
+import _poolFleshBlood from "../pool/flesh-blood.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
@@ -827,6 +829,7 @@ const shard: CardShard = {
     _poolDoctorSpectrum,
     _poolDone,
     _poolDoomwakeGiant,
+    _poolDoubleJumpFlyingKick,
     _poolDovinsAutomaton,
     _poolDragonlordOjutai,
     _poolDraugrRecruiter,
@@ -881,6 +884,7 @@ const shard: CardShard = {
     _poolFlamespeakersWill,
     _poolFleetingFlight,
     _poolFleetwheelCruiser,
+    _poolFleshBlood,
     _poolForerunnerOfTheLegion,
     _poolForgeBoss,
     _poolForlornFlats,

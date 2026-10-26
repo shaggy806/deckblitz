@@ -2814,6 +2814,16 @@ export interface CardDefinition {
    */
   readonly aftermath: boolean;
   /**
+   * Fuse (rule 702.102), on a split card's whole (face 0, `split`): cast from
+   * its owner's hand, the card may be cast as both halves at once — a fused
+   * split spell with the whole card's characteristics (702.102b), for both
+   * halves' mana costs (702.102c). The whole's `targets` are the left half's
+   * then the right half's, and its `effect` follows the left half's
+   * instructions then the right's (702.102d), each reading its own target
+   * slots. Each half is still cast on its own as well (rule 709.3).
+   */
+  readonly fuse: boolean;
+  /**
    * Sneak (rule 702.190) — "any time you could cast an instant during your
    * declare blockers step, you may cast this spell by paying `cost` and
    * returning an unblocked creature you control to its owner's hand rather
@@ -3166,7 +3176,8 @@ export interface CardDefinition {
    * halves' characteristics combined (709.4: both names, the combined mana
    * cost, both colours and types) — and is never cast; casting picks a half,
    * face 1 or 2, and only that half exists on the stack (709.3). `true` on
-   * all three definitions. Fuse isn't modelled.
+   * all three definitions. A whole with `fuse` is also cast whole, from a
+   * hand, as a fused split spell.
    */
   readonly split: boolean;
   /**
@@ -3268,6 +3279,7 @@ const PRINTED_ABILITY: {
   mayhem: (def) => def.mayhem !== null,
   rebound: (def) => def.rebound,
   aftermath: (def) => def.aftermath,
+  fuse: (def) => def.fuse,
   sneak: (def) => def.sneak !== null,
   webSlinging: (def) => def.webSlinging !== null,
   emerge: (def) => def.emerge !== null,
@@ -3478,6 +3490,7 @@ interface CardDraft {
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
   aftermath?: boolean;
+  fuse?: boolean;
   sneak?: { readonly cost: string };
   webSlinging?: { readonly cost: string };
   emerge?: NonNullable<CardDefinition["emerge"]>;
@@ -3678,6 +3691,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     mayhem: draft.mayhem ?? null,
     rebound: draft.rebound ?? false,
     aftermath: draft.aftermath ?? false,
+    fuse: draft.fuse ?? false,
     sneak: draft.sneak ?? null,
     webSlinging: draft.webSlinging ?? null,
     emerge: draft.emerge ?? null,

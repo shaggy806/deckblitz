@@ -147,6 +147,7 @@ import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDjerusResolve from "../pool/djerus-resolve.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
+import _poolDown from "../pool/down.js";
 import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDreamFighter from "../pool/dream-fighter.js";
@@ -800,6 +801,7 @@ const shard: CardShard = {
     _poolDjeruAndHazoret,
     _poolDjerusResolve,
     _poolDocOckSinisterScientist,
+    _poolDown,
     _poolDragonsparkReactor,
     _poolDranasChosen,
     _poolDreamFighter,
