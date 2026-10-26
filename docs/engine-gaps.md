@@ -6,6 +6,16 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Flashback never offers a split card's halves.** A split instant or sorcery in a graveyard
+  that has or gains flashback (Snapcaster Mage, Past in Flames — rule 702.34a) may be cast as
+  either half for that half's flashback cost (709.3: only the half cast is evaluated; Past in
+  Flames' "equal to its mana cost" is the half's). The flashback offer loop in
+  `Game.legalActions` (game.ts, "Flashback (rule 702.34)") casts `cardName` — the whole card,
+  face 0 — rather than each of `castableFaces`, so no half is offered, and the whole is
+  refused. Found 2026-10-26 while testing fuse (B173): nothing is cast wrongly, the cast is just
+  never offered. The fix offers each half with its own cost when the grant's cost is
+  `"mana-cost"`.
+
 - **A source of damage: a waiting effect's object and the command zone.** Rule 609.7a also allows
   an object a waiting replacement or prevention effect or a delayed trigger refers to, and a
   face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,

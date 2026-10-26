@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbzanMonument from "../pool/abzan-monument.js";
 import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
+import _poolAdventOfTheWurm from "../pool/advent-of-the-wurm.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAkroanCrusader from "../pool/akroan-crusader.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
@@ -13,6 +14,7 @@ import _poolAkroanSergeant from "../pool/akroan-sergeant.js";
 import _poolAladdin from "../pool/aladdin.js";
 import _poolAlchemistsGreeting from "../pool/alchemists-greeting.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
+import _poolAliveWell from "../pool/alive-well.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
 import _poolAmbuscade from "../pool/ambuscade.js";
 import _poolAmonkhetRaceway from "../pool/amonkhet-raceway.js";
@@ -41,6 +43,7 @@ import _poolAuramancer from "../pool/auramancer.js";
 import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
 import _poolAvenArcher from "../pool/aven-archer.js";
 import _poolAvenRedeemer from "../pool/aven-redeemer.js";
+import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
 import _poolBaldinCenturyHerdmaster from "../pool/baldin-century-herdmaster.js";
@@ -75,6 +78,8 @@ import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
+import _poolBreaking from "../pool/breaking.js";
+import _poolBriarShield from "../pool/briar-shield.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
@@ -348,6 +353,7 @@ import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
+import _poolMazeBehemoth from "../pool/maze-behemoth.js";
 import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
@@ -599,6 +605,7 @@ import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
+import _poolTolarianDrake from "../pool/tolarian-drake.js";
 import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
@@ -724,6 +731,7 @@ const shard: CardShard = {
     _poolAbzanMonument,
     _poolAcademyRector,
     _poolAccelerate,
+    _poolAdventOfTheWurm,
     _poolAesiTyrantOfGyreStrait,
     _poolAkroanCrusader,
     _poolAkroanJailer,
@@ -731,6 +739,7 @@ const shard: CardShard = {
     _poolAladdin,
     _poolAlchemistsGreeting,
     _poolAliriosEnraptured,
+    _poolAliveWell,
     _poolAlmightyBrushwagg,
     _poolAmbuscade,
     _poolAmonkhetRaceway,
@@ -759,6 +768,7 @@ const shard: CardShard = {
     _poolAutarchMammoth,
     _poolAvenArcher,
     _poolAvenRedeemer,
+    _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,
     _poolBaldinCenturyHerdmaster,
@@ -793,6 +803,8 @@ const shard: CardShard = {
     _poolBoulderRush,
     _poolBoundingFelidar,
     _poolBrassclawOrcs,
+    _poolBreaking,
+    _poolBriarShield,
     _poolBrokersInitiate,
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,
@@ -1066,6 +1078,7 @@ const shard: CardShard = {
     _poolMasterTrinketeer,
     _poolMasteryOfTheUnseen,
     _poolMawOfKozilek,
+    _poolMazeBehemoth,
     _poolMegatonsFate,
     _poolMeltstriderEulogist,
     _poolMemoryPlunder,
@@ -1317,6 +1330,7 @@ const shard: CardShard = {
     _poolTitheDrinker,
     _poolToadstoolAdmirer,
     _poolTogetherForever,
+    _poolTolarianDrake,
     _poolTomBertAndWilliam,
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,

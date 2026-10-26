@@ -12,6 +12,7 @@ import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
+import _poolAetherFlash from "../pool/aether-flash.js";
 import _poolAgentsToolkit from "../pool/agents-toolkit.js";
 import _poolAjaniWiseCounselor from "../pool/ajani-wise-counselor.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
@@ -31,6 +32,7 @@ import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
+import _poolArmedDangerous from "../pool/armed-dangerous.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
@@ -226,6 +228,7 @@ import _poolFrogSquirrels from "../pool/frog-squirrels.js";
 import _poolFrostLynx from "../pool/frost-lynx.js";
 import _poolFrostcliffSiege from "../pool/frostcliff-siege.js";
 import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
+import _poolFungusElemental from "../pool/fungus-elemental.js";
 import _poolFuriousForebear from "../pool/furious-forebear.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
@@ -418,6 +421,7 @@ import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
+import _poolOdylicWraith from "../pool/odylic-wraith.js";
 import _poolOffenderAtLarge from "../pool/offender-at-large.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
@@ -472,6 +476,7 @@ import _poolRecklessBushwhacker from "../pool/reckless-bushwhacker.js";
 import _poolRedWard from "../pool/red-ward.js";
 import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
+import _poolRelease from "../pool/release.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
@@ -523,6 +528,7 @@ import _poolSigilOfDistinction from "../pool/sigil-of-distinction.js";
 import _poolSigilOfValor from "../pool/sigil-of-valor.js";
 import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
+import _poolSireOfInsanity from "../pool/sire-of-insanity.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
@@ -569,6 +575,7 @@ import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
+import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
@@ -589,6 +596,7 @@ import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
 import _poolTocasiasOnulet from "../pool/tocasias-onulet.js";
+import _poolToilTrouble from "../pool/toil-trouble.js";
 import _poolTopazDragon from "../pool/topaz-dragon.js";
 import _poolTophTheFirstMetalbender from "../pool/toph-the-first-metalbender.js";
 import _poolTourachDreadCantor from "../pool/tourach-dread-cantor.js";
@@ -648,6 +656,7 @@ import _poolWaterWhip from "../pool/water-whip.js";
 import _poolWaterbendingScroll from "../pool/waterbending-scroll.js";
 import _poolWateryGrave from "../pool/watery-grave.js";
 import _poolWavebreakHippocamp from "../pool/wavebreak-hippocamp.js";
+import _poolWear from "../pool/wear.js";
 import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
 import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
 import _poolWildRicochet from "../pool/wild-ricochet.js";
@@ -685,6 +694,7 @@ const shard: CardShard = {
     _poolAdventurersInn,
     _poolAegisTurtle,
     _poolAeronautCavalry,
+    _poolAetherFlash,
     _poolAgentsToolkit,
     _poolAjaniWiseCounselor,
     _poolAlabasterWall,
@@ -704,6 +714,7 @@ const shard: CardShard = {
     _poolArcaneBombardment,
     _poolArcboundCondor,
     _poolArgothianEnchantress,
+    _poolArmedDangerous,
     _poolArtfulDodge,
     _poolAshioksForerunner,
     _poolAspectOfGorgon,
@@ -899,6 +910,7 @@ const shard: CardShard = {
     _poolFrostLynx,
     _poolFrostcliffSiege,
     _poolFuelTheFlames,
+    _poolFungusElemental,
     _poolFuriousForebear,
     _poolFurtiveAnalyst,
     _poolGaladhrimGuide,
@@ -1091,6 +1103,7 @@ const shard: CardShard = {
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
+    _poolOdylicWraith,
     _poolOffenderAtLarge,
     _poolOfferImmortality,
     _poolOildeepGearhulk,
@@ -1145,6 +1158,7 @@ const shard: CardShard = {
     _poolRedWard,
     _poolRegnaTheRedeemer,
     _poolRejuvenate,
+    _poolRelease,
     _poolRelentlessAdvance,
     _poolReluctantRoleModel,
     _poolRepairAndRecharge,
@@ -1196,6 +1210,7 @@ const shard: CardShard = {
     _poolSigilOfValor,
     _poolSilumgarSorcerer,
     _poolSilverflameRitual,
+    _poolSireOfInsanity,
     _poolSkitteringCicada,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
@@ -1242,6 +1257,7 @@ const shard: CardShard = {
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
     _poolTaintedSigil,
+    _poolTajicBladeOfTheLegion,
     _poolTajuruStalwart,
     _poolTangleMantis,
     _poolTeleport,
@@ -1262,6 +1278,7 @@ const shard: CardShard = {
     _poolTigerSeal,
     _poolTitansGrave,
     _poolTocasiasOnulet,
+    _poolToilTrouble,
     _poolTopazDragon,
     _poolTophTheFirstMetalbender,
     _poolTourachDreadCantor,
@@ -1321,6 +1338,7 @@ const shard: CardShard = {
     _poolWaterbendingScroll,
     _poolWateryGrave,
     _poolWavebreakHippocamp,
+    _poolWear,
     _poolWhiteSunsTwilight,
     _poolWightOfTheReliquary,
     _poolWildRicochet,

@@ -87,6 +87,7 @@ import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
 import _poolCallOfTheFullMoon from "../pool/call-of-the-full-moon.js";
+import _poolCallOfTheWild from "../pool/call-of-the-wild.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
 import _poolCaltrops from "../pool/caltrops.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
@@ -179,6 +180,7 @@ import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
 import _poolDreambornMuse from "../pool/dreamborn-muse.js";
+import _poolDrownInFilth from "../pool/drown-in-filth.js";
 import _poolDruidsRepository from "../pool/druids-repository.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
@@ -373,6 +375,7 @@ import _poolLivaanCultistOfTiamat from "../pool/livaan-cultist-of-tiamat.js";
 import _poolLivingArmor from "../pool/living-armor.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
+import _poolLlanowarDruid from "../pool/llanowar-druid.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
 import _poolLoathsomeCatoblepas from "../pool/loathsome-catoblepas.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
@@ -464,6 +467,7 @@ import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
+import _poolPunishTheEnemy from "../pool/punish-the-enemy.js";
 import _poolPuppetConjurer from "../pool/puppet-conjurer.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
@@ -515,6 +519,7 @@ import _poolSanctifiedCharge from "../pool/sanctified-charge.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
 import _poolSapseepForest from "../pool/sapseep-forest.js";
+import _poolSawtoothOgre from "../pool/sawtooth-ogre.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
@@ -665,6 +670,7 @@ import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
 import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
+import _poolWeaponSurge from "../pool/weapon-surge.js";
 import _poolWearyPrisoner from "../pool/weary-prisoner.js";
 import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
@@ -792,6 +798,7 @@ const shard: CardShard = {
     _poolBrotherhoodAmbushers,
     _poolBurnFromWithin,
     _poolCallOfTheFullMoon,
+    _poolCallOfTheWild,
     _poolCallousDismissal,
     _poolCaltrops,
     _poolCampusCrier,
@@ -884,6 +891,7 @@ const shard: CardShard = {
     _poolDreadReturn,
     _poolDreamSpoilers,
     _poolDreambornMuse,
+    _poolDrownInFilth,
     _poolDruidsRepository,
     _poolDungeonDescent,
     _poolDunlandCrebain,
@@ -1078,6 +1086,7 @@ const shard: CardShard = {
     _poolLivingArmor,
     _poolLivingLightningChargedUp,
     _poolLizardWarrior,
+    _poolLlanowarDruid,
     _poolLlanowarReborn,
     _poolLoathsomeCatoblepas,
     _poolLockjawSlobberingTeleporter,
@@ -1169,6 +1178,7 @@ const shard: CardShard = {
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
     _poolPsychomancer,
+    _poolPunishTheEnemy,
     _poolPuppetConjurer,
     _poolRabidBite,
     _poolRaidingNightstalker,
@@ -1220,6 +1230,7 @@ const shard: CardShard = {
     _poolSandbarSerpent,
     _poolSanguinaryPriest,
     _poolSapseepForest,
+    _poolSawtoothOgre,
     _poolSazhKatzroy,
     _poolScaledBehemoth,
     _poolScavengingOoze,
@@ -1370,6 +1381,7 @@ const shard: CardShard = {
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,
     _poolWayOfTheDeathbringer,
+    _poolWeaponSurge,
     _poolWearyPrisoner,
     _poolWeatherseedFaeries,
     _poolWeddingCrasher,

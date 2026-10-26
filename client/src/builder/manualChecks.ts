@@ -8245,4 +8245,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Spider Climb: cast at instant speed, it's sacrificed in the cleanup step",
     board({ you: { bf: ['Forest', 'Grizzly Bears'], hand: ['Spider Climb'] } }),
   ),
+  preset(
+    'Turn // Burn: cast fused, both halves resolve, left first',
+    board({ you: { bf: ['Island*3', 'Mountain*2'], hand: ['Turn // Burn'] }, opp: { bf: ['Hill Giant'] } }),
+  ),
 ]

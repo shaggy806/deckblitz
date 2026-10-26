@@ -1,0 +1,643 @@
+{
+  "batch": "B173",
+  "status": "complete",
+  "ranks": "Dragon's Maze (DGM, 2013-05-03): the rest of the set — its 83 cards left, with Wear // Tear and fuse's two cards from other sets (newest-first walk)",
+  "authored": [
+    {
+      "name": "Zhur-Taa Ancient",
+      "files": [
+        "engine/src/cards/pool/zhur-taa-ancient.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Emmara Tandris",
+      "files": [
+        "engine/src/cards/pool/emmara-tandris.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mutant's Prey",
+      "files": [
+        "engine/src/cards/pool/mutants-prey.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aetherling",
+      "files": [
+        "engine/src/cards/pool/aetherling.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blood Baron of Vizkopa",
+      "files": [
+        "engine/src/cards/pool/blood-baron-of-vizkopa.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Weapon Surge",
+      "files": [
+        "engine/src/cards/pool/weapon-surge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blaze Commando",
+      "files": [
+        "engine/src/cards/pool/blaze-commando.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Boros Mastiff",
+      "files": [
+        "engine/src/cards/pool/boros-mastiff.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Showstopper",
+      "files": [
+        "engine/src/cards/pool/showstopper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Renounce the Guilds",
+      "files": [
+        "engine/src/cards/pool/renounce-the-guilds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Opal Lake Gatekeepers",
+      "files": [
+        "engine/src/cards/pool/opal-lake-gatekeepers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Awe for the Guilds",
+      "files": [
+        "engine/src/cards/pool/awe-for-the-guilds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maze Rusher",
+      "files": [
+        "engine/src/cards/pool/maze-rusher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Runner's Bane",
+      "files": [
+        "engine/src/cards/pool/runners-bane.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haunter of Nightveil",
+      "files": [
+        "engine/src/cards/pool/haunter-of-nightveil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sire of Insanity",
+      "files": [
+        "engine/src/cards/pool/sire-of-insanity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Savageborn Hydra",
+      "files": [
+        "engine/src/cards/pool/savageborn-hydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wake the Reflections",
+      "files": [
+        "engine/src/cards/pool/wake-the-reflections.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Drown in Filth",
+      "files": [
+        "engine/src/cards/pool/drown-in-filth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sinister Possession",
+      "files": [
+        "engine/src/cards/pool/sinister-possession.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carnage Gladiator",
+      "files": [
+        "engine/src/cards/pool/carnage-gladiator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jelenn Sphinx",
+      "files": [
+        "engine/src/cards/pool/jelenn-sphinx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Morgue Burst",
+      "files": [
+        "engine/src/cards/pool/morgue-burst.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Uncovered Clues",
+      "files": [
+        "engine/src/cards/pool/uncovered-clues.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maze Glider",
+      "files": [
+        "engine/src/cards/pool/maze-glider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ubul Sar Gatekeepers",
+      "files": [
+        "engine/src/cards/pool/ubul-sar-gatekeepers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sunspire Gatekeepers",
+      "files": [
+        "engine/src/cards/pool/sunspire-gatekeepers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tajic, Blade of the Legion",
+      "files": [
+        "engine/src/cards/pool/tajic-blade-of-the-legion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blast of Genius",
+      "files": [
+        "engine/src/cards/pool/blast-of-genius.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deputy of Acquittals",
+      "files": [
+        "engine/src/cards/pool/deputy-of-acquittals.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rot Farm Skeleton",
+      "files": [
+        "engine/src/cards/pool/rot-farm-skeleton.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nivix Cyclops",
+      "files": [
+        "engine/src/cards/pool/nivix-cyclops.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Saruli Gatekeepers",
+      "files": [
+        "engine/src/cards/pool/saruli-gatekeepers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smelt-Ward Gatekeepers",
+      "files": [
+        "engine/src/cards/pool/smelt-ward-gatekeepers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maze Abomination",
+      "files": [
+        "engine/src/cards/pool/maze-abomination.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thrashing Mossdog",
+      "files": [
+        "engine/src/cards/pool/thrashing-mossdog.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Punish the Enemy",
+      "files": [
+        "engine/src/cards/pool/punish-the-enemy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haazda Snare Squad",
+      "files": [
+        "engine/src/cards/pool/haazda-snare-squad.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clear a Path",
+      "files": [
+        "engine/src/cards/pool/clear-a-path.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Voice of Resurgence",
+      "files": [
+        "engine/src/cards/pool/voice-of-resurgence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Species Gorger",
+      "files": [
+        "engine/src/cards/pool/species-gorger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trostani's Summoner",
+      "files": [
+        "engine/src/cards/pool/trostanis-summoner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pyrewild Shaman",
+      "files": [
+        "engine/src/cards/pool/pyrewild-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scion of Vitu-Ghazi",
+      "files": [
+        "engine/src/cards/pool/scion-of-vitu-ghazi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maze Behemoth",
+      "files": [
+        "engine/src/cards/pool/maze-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maze Sentinel",
+      "files": [
+        "engine/src/cards/pool/maze-sentinel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Warped Physique",
+      "files": [
+        "engine/src/cards/pool/warped-physique.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Advent of the Wurm",
+      "files": [
+        "engine/src/cards/pool/advent-of-the-wurm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wear // Tear",
+      "files": [
+        "engine/src/cards/pool/wear-tear.ts",
+        "engine/src/cards/pool/wear.ts",
+        "engine/src/cards/pool/tear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Turn // Burn",
+      "files": [
+        "engine/src/cards/pool/turn-burn.ts",
+        "engine/src/cards/pool/turn.ts",
+        "engine/src/cards/pool/burn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Toil // Trouble",
+      "files": [
+        "engine/src/cards/pool/toil-trouble.ts",
+        "engine/src/cards/pool/toil.ts",
+        "engine/src/cards/pool/trouble.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flesh // Blood",
+      "files": [
+        "engine/src/cards/pool/flesh-blood.ts",
+        "engine/src/cards/pool/flesh.ts",
+        "engine/src/cards/pool/blood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Catch // Release",
+      "files": [
+        "engine/src/cards/pool/catch-release.ts",
+        "engine/src/cards/pool/catch.ts",
+        "engine/src/cards/pool/release.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Breaking // Entering",
+      "files": [
+        "engine/src/cards/pool/breaking-entering.ts",
+        "engine/src/cards/pool/breaking.ts",
+        "engine/src/cards/pool/entering.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Beck // Call",
+      "files": [
+        "engine/src/cards/pool/beck-call.ts",
+        "engine/src/cards/pool/beck.ts",
+        "engine/src/cards/pool/call.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alive // Well",
+      "files": [
+        "engine/src/cards/pool/alive-well.ts",
+        "engine/src/cards/pool/alive.ts",
+        "engine/src/cards/pool/well.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Armed // Dangerous",
+      "files": [
+        "engine/src/cards/pool/armed-dangerous.ts",
+        "engine/src/cards/pool/armed.ts",
+        "engine/src/cards/pool/dangerous.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Down // Dirty",
+      "files": [
+        "engine/src/cards/pool/down-dirty.ts",
+        "engine/src/cards/pool/down.ts",
+        "engine/src/cards/pool/dirty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Far // Away",
+      "files": [
+        "engine/src/cards/pool/far-away.ts",
+        "engine/src/cards/pool/far.ts",
+        "engine/src/cards/pool/away.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Profit // Loss",
+      "files": [
+        "engine/src/cards/pool/profit-loss.ts",
+        "engine/src/cards/pool/profit.ts",
+        "engine/src/cards/pool/loss.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Protect // Serve",
+      "files": [
+        "engine/src/cards/pool/protect-serve.ts",
+        "engine/src/cards/pool/protect.ts",
+        "engine/src/cards/pool/serve.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ready // Willing",
+      "files": [
+        "engine/src/cards/pool/ready-willing.ts",
+        "engine/src/cards/pool/ready.ts",
+        "engine/src/cards/pool/willing.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Double Jump // Flying Kick",
+      "files": [
+        "engine/src/cards/pool/double-jump-flying-kick.ts",
+        "engine/src/cards/pool/double-jump.ts",
+        "engine/src/cards/pool/flying-kick.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gallifrey Falls // No More",
+      "files": [
+        "engine/src/cards/pool/gallifrey-falls-no-more.ts",
+        "engine/src/cards/pool/gallifrey-falls.ts",
+        "engine/src/cards/pool/no-more.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Krasis Incubation",
+      "needs": [
+        "static:enchanted-abilities-cant-be-activated"
+      ],
+      "why": "a static's prohibits.abilitiesOf can't name the creature this Aura enchants (Arrest's clause)"
+    },
+    {
+      "name": "Rakdos Drake",
+      "needs": [
+        "keyword:unleash"
+      ],
+      "why": "unleash (rule 702.98) isn't built"
+    },
+    {
+      "name": "Exava, Rakdos Blood Witch",
+      "needs": [
+        "keyword:unleash"
+      ],
+      "why": "unleash (rule 702.98) isn't built"
+    },
+    {
+      "name": "Blood Scrivener",
+      "needs": [
+        "replacement:draw-replacement-life-loss"
+      ],
+      "why": "the would-draw replacement can't draw two and lose 1 life, gated on each single draw with an empty hand"
+    },
+    {
+      "name": "Boros Battleshaper",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "'attacks or blocks this combat if able': restrict has must-attack but no must-block"
+    },
+    {
+      "name": "Lyev Decree",
+      "needs": [
+        "keyword:detain"
+      ],
+      "why": "detain isn't built: prohibit (no activated abilities) has no until-your-next-turn duration"
+    },
+    {
+      "name": "Lavinia of the Tenth",
+      "needs": [
+        "keyword:detain"
+      ],
+      "why": "detain isn't built"
+    },
+    {
+      "name": "Scab-Clan Giant",
+      "needs": [
+        "effect:random-target"
+      ],
+      "why": "no target chosen at random"
+    },
+    {
+      "name": "Goblin Test Pilot",
+      "needs": [
+        "effect:random-target"
+      ],
+      "why": "no target chosen at random"
+    },
+    {
+      "name": "Hired Torturer",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "choose-random-card reads only a graveyard, not an opponent's hand"
+    },
+    {
+      "name": "Mirko Vosk, Mind Drinker",
+      "needs": [
+        "effect:reveal-until-count"
+      ],
+      "why": "reveal-until-count reveals only from the controller's library and can't put every revealed card into the graveyard"
+    },
+    {
+      "name": "Varolz, the Scar-Striped",
+      "needs": [
+        "static:grant-scavenge-to-graveyard"
+      ],
+      "why": "grantsToGraveyard can grant flashback, escape, mayhem and dredge, not scavenge"
+    },
+    {
+      "name": "Renegade Krasis",
+      "needs": [
+        "trigger:evolves-trigger"
+      ],
+      "why": "no 'whenever this creature evolves' trigger"
+    },
+    {
+      "name": "Sin Collector",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "nothing exiles a card you choose from an opponent's revealed hand"
+    },
+    {
+      "name": "Korozda Gorgon",
+      "needs": [
+        "cost:remove-counters-from-chosen"
+      ],
+      "why": "the removeCounter cost removes counters only from the ability's own source"
+    },
+    {
+      "name": "Trait Doctoring",
+      "needs": [
+        "effect:text-change-color-or-land-words"
+      ],
+      "why": "word-replacing text changes (rule 612.2) aren't built"
+    },
+    {
+      "name": "Dragonshift",
+      "needs": [
+        "effect:animate-all-lose-abilities"
+      ],
+      "why": "the overloaded half needs animate-all with setColors, setSubtypes and loseAbilities"
+    },
+    {
+      "name": "Restore the Peace",
+      "needs": [
+        "stat:filter-dealt-damage-this-turn"
+      ],
+      "why": "a filter can say 'dealt damage to a creature this turn', not 'dealt damage this turn'"
+    },
+    {
+      "name": "Council of the Absolute",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "no 'choose a card name' as it enters"
+    },
+    {
+      "name": "Fluxcharger",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "the layer system has no power/toughness switch"
+    },
+    {
+      "name": "Reap Intellect",
+      "needs": [
+        "effect:extract-same-name"
+      ],
+      "why": "no search of a player's graveyard, hand and library for cards with the same name"
+    },
+    {
+      "name": "Give // Take",
+      "needs": [
+        "effect:counters-removed-this-way"
+      ],
+      "why": "Take's 'draw that many' after removing every +1/+1 counter: no amount reads the counters removed this way"
+    }
+  ]
+}

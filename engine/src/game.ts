@@ -1933,10 +1933,13 @@ export class Game {
       // Each face of a *modal* multi-face card is a separately-playable option
       // (rule 712 — ROADMAP Phase 10a); a single-faced card, and a transforming
       // DFC (which is only ever cast as its front face — 10b), has just one.
+      // A split card's whole is cast only as a fused split spell, from the
+      // hand (rule 702.102a).
       const cardFaces = ownDef.transform ? null : ownDef.faces;
+      const fusable = ownDef.fuse && this.state.zones.perPlayer[player].hand.includes(card);
       const faceList: readonly (readonly [number | undefined, string])[] =
         cardFaces !== null
-          ? cardFaces.flatMap((n, i) => (ownDef.split && i === 0 ? [] : [[i, n] as const]))
+          ? cardFaces.flatMap((n, i) => (ownDef.split && i === 0 && !fusable ? [] : [[i, n] as const]))
           : [[undefined, ownName] as const];
       for (const [face, cardName] of faceList) {
         const def = this.faceDef(card, face ?? 0);
@@ -10775,6 +10778,12 @@ export class Game {
     return grant === null ? withKicker : withKicker + grant;
   }
 
+  /** A fuse card's two halves, left then right (rule 702.102) — `def` is the
+   * whole card. */
+  private fusedHalves(def: CardDefinition): readonly CardDefinition[] {
+    return (def.faces ?? []).slice(1).map((name) => this.registry.get(name));
+  }
+
   /** The concrete target specs of a spell — its own, the kicked ones if it was
    * kicked into a different target (Tear Asunder), or (for a targeted modal
    * spell) the concatenation of the chosen modes' specs, in mode order. */
@@ -10788,6 +10797,9 @@ export class Game {
     // (702.148a) chooses the targets of its rewritten text instead.
     if (overload) return def.overload?.targets ?? [];
     if (kicked && def.kicker?.targets !== undefined) return def.kicker.targets;
+    // A fused split spell (rule 702.102b): the left half's targets, then the
+    // right half's.
+    if (def.fuse) return this.fusedHalves(def).flatMap((half) => half.targets);
     if (def.castModal === null || modes === undefined) return def.targets;
     return [...modes]
       .sort((a, b) => a - b)
@@ -10984,6 +10996,14 @@ export class Game {
     // from any zone other than a graveyard" — whatever else would allow it.
     if (def.aftermath && this.state.objects[cardId]?.zone !== "graveyard") {
       return `${def.name} can only be cast from a graveyard (aftermath)`;
+    }
+    // A split card is cast as one half (rule 709.3), or — with fuse, from
+    // its caster's hand — as both, the whole card (702.102a).
+    if (def.split && face === 0 && def.faces?.[0] === def.name) {
+      if (!def.fuse) return `${def.name} is cast as one of its halves`;
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId)) {
+        return `${def.name} can be cast fused only from a hand`;
+      }
     }
     // "By discarding a card rather than paying its mana cost" (Cruelclaw):
     // a card to discard, besides any the spell's own costs take.
@@ -12202,7 +12222,9 @@ export class Game {
             ? ownDef.transform && ownDef.faces !== null && ownDef.faces.length > 1
               ? [1]
               : []
-            : castableFaces(ownDef);
+            : ownDef.fuse && this.state.zones.perPlayer[player].hand.includes(cardId)
+              ? [0, ...castableFaces(ownDef)]
+              : castableFaces(ownDef);
         for (const face of faces) {
           const def = this.faceDef(cardId, face ?? 0);
           // A land is played, never cast (rule 305.9) — and only by an
@@ -17234,7 +17256,15 @@ export class Game {
       if (!this.isPermanentSpell(def) && computeCharacteristics(this.state, this.registry, id).keywords.has("ascend")) {
         this.ascend(object.controller);
       }
-      if (chosenModes !== undefined && def.castModal !== null) {
+      // A fused split spell (rule 702.102d) follows the left half's
+      // instructions, then the right half's — each half as a mode is.
+      const parts: readonly ({ readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec } | undefined)[] | null =
+        chosenModes !== undefined && def.castModal !== null
+          ? chosenModes.map((mi) => def.castModal?.modes[mi])
+          : def.fuse
+            ? this.fusedHalves(def).map((half) => (half.effect === null ? undefined : { targets: half.targets, effect: half.effect }))
+            : null;
+      if (parts !== null) {
         // A targeted modal spell (rule 700.2 — ROADMAP Phase 11 EG-2): each
         // chosen mode applies with its own slice of `targets`, a target gone
         // illegal blanked in it like any other (608.2b) — so a mode still does
@@ -17242,9 +17272,11 @@ export class Game {
         // chose is illegal does nothing happen, target-less modes included.
         let offset = 0;
         const steps: { effect: EffectSpec; ctx: ResolutionContext }[] = [];
-        for (const mi of chosenModes) {
-          const mode = def.castModal.modes[mi];
-          const count = mode?.targets?.length ?? 0;
+        for (const [k, mode] of parts.entries()) {
+          // An "any number of target …" group is always the last slot of its
+          // list, one flat target per member, so the last part's slice runs
+          // to the end of the list.
+          const count = k === parts.length - 1 ? targets.length - offset : (mode?.targets?.length ?? 0);
           const slice = targets.slice(offset, offset + count);
           const zoneSlice = (object.targetZones ?? []).slice(offset, offset + count);
           const illegal = legality.illegal.filter((i) => i >= offset && i < offset + count).map((i) => i - offset);

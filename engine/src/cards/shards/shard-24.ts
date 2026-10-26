@@ -22,6 +22,7 @@ import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAlleyAssailant from "../pool/alley-assailant.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
+import _poolAncestralKnowledge from "../pool/ancestral-knowledge.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
@@ -52,6 +53,7 @@ import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
 import _poolBattlefieldPromotion from "../pool/battlefield-promotion.js";
 import _poolBattlegrowth from "../pool/battlegrowth.js";
+import _poolBeckCall from "../pool/beck-call.js";
 import _poolBeginTheInvasion from "../pool/begin-the-invasion.js";
 import _poolBelligerentGuest from "../pool/belligerent-guest.js";
 import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
@@ -83,6 +85,7 @@ import _poolBronzeSable from "../pool/bronze-sable.js";
 import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
 import _poolBubbleUp from "../pool/bubble-up.js";
 import _poolBuildersTalent from "../pool/builders-talent.js";
+import _poolBurn from "../pool/burn.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
 import _poolCampusGuide from "../pool/campus-guide.js";
@@ -107,6 +110,7 @@ import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
+import _poolClearAPath from "../pool/clear-a-path.js";
 import _poolCleaveShadows from "../pool/cleave-shadows.js";
 import _poolCliffThreader from "../pool/cliff-threader.js";
 import _poolCoilingOracle from "../pool/coiling-oracle.js";
@@ -117,6 +121,7 @@ import _poolColossification from "../pool/colossification.js";
 import _poolCombustionTechnique from "../pool/combustion-technique.js";
 import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
+import _poolConeOfFlame from "../pool/cone-of-flame.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
 import _poolContainmentMembrane from "../pool/containment-membrane.js";
@@ -531,6 +536,7 @@ import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
+import _poolTeferisVeil from "../pool/teferis-veil.js";
 import _poolTempestDjinn from "../pool/tempest-djinn.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTemporalIntervention from "../pool/temporal-intervention.js";
@@ -570,6 +576,7 @@ import _poolTransmogrifyingWand from "../pool/transmogrifying-wand.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTrollbredGuardian from "../pool/trollbred-guardian.js";
+import _poolTrouble from "../pool/trouble.js";
 import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
@@ -686,6 +693,7 @@ const shard: CardShard = {
     _poolAlchemistsApprentice,
     _poolAlleyAssailant,
     _poolAncestorsAid,
+    _poolAncestralKnowledge,
     _poolAngelsMercy,
     _poolAnnihilatingGlare,
     _poolAnotherChance,
@@ -716,6 +724,7 @@ const shard: CardShard = {
     _poolBattershieldWarrior,
     _poolBattlefieldPromotion,
     _poolBattlegrowth,
+    _poolBeckCall,
     _poolBeginTheInvasion,
     _poolBelligerentGuest,
     _poolBelligerentWhiptail,
@@ -747,6 +756,7 @@ const shard: CardShard = {
     _poolBroodmateTyrant,
     _poolBubbleUp,
     _poolBuildersTalent,
+    _poolBurn,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
     _poolCampusGuide,
@@ -771,6 +781,7 @@ const shard: CardShard = {
     _poolClandestineMeddler,
     _poolClawsOfGix,
     _poolClayStatue,
+    _poolClearAPath,
     _poolCleaveShadows,
     _poolCliffThreader,
     _poolCoilingOracle,
@@ -781,6 +792,7 @@ const shard: CardShard = {
     _poolCombustionTechnique,
     _poolCommandTheStorm,
     _poolCommanderSofiaDaguerre,
+    _poolConeOfFlame,
     _poolConfidenceFromStrength,
     _poolConjurersMantle,
     _poolContainmentMembrane,
@@ -1195,6 +1207,7 @@ const shard: CardShard = {
     _poolTangledVale,
     _poolTavernBrawler,
     _poolTeferisProtege,
+    _poolTeferisVeil,
     _poolTempestDjinn,
     _poolTemporalFissure,
     _poolTemporalIntervention,
@@ -1234,6 +1247,7 @@ const shard: CardShard = {
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
     _poolTrollbredGuardian,
+    _poolTrouble,
     _poolTvaBureaucrat,
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,

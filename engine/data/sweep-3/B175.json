@@ -1,0 +1,845 @@
+{
+ "batch": "B175",
+ "status": "complete",
+ "ranks": "Weatherlight (WTH, 1997-06-09): whole set — its 119 cards left (oldest-first walk)",
+ "authored": [
+  {
+   "name": "Abduction",
+   "files": [
+    "engine/src/cards/pool/abduction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Flash",
+   "files": [
+    "engine/src/cards/pool/aether-flash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancestral Knowledge",
+   "files": [
+    "engine/src/cards/pool/ancestral-knowledge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Renewal",
+   "files": [
+    "engine/src/cards/pool/angelic-renewal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apathy",
+   "files": [
+    "engine/src/cards/pool/apathy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arctic Wolves",
+   "files": [
+    "engine/src/cards/pool/arctic-wolves.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blossoming Wreath",
+   "files": [
+    "engine/src/cards/pool/blossoming-wreath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boiling Blood",
+   "files": [
+    "engine/src/cards/pool/boiling-blood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Briar Shield",
+   "files": [
+    "engine/src/cards/pool/briar-shield.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bubble Matrix",
+   "files": [
+    "engine/src/cards/pool/bubble-matrix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call of the Wild",
+   "files": [
+    "engine/src/cards/pool/call-of-the-wild.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chimeric Sphere",
+   "files": [
+    "engine/src/cards/pool/chimeric-sphere.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinder Giant",
+   "files": [
+    "engine/src/cards/pool/cinder-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinder Wall",
+   "files": [
+    "engine/src/cards/pool/cinder-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cone of Flame",
+   "files": [
+    "engine/src/cards/pool/cone-of-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dingus Staff",
+   "files": [
+    "engine/src/cards/pool/dingus-staff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Downdraft",
+   "files": [
+    "engine/src/cards/pool/downdraft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Berserker",
+   "files": [
+    "engine/src/cards/pool/dwarven-berserker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Familiar Ground",
+   "files": [
+    "engine/src/cards/pool/familiar-ground.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fatal Blow",
+   "files": [
+    "engine/src/cards/pool/fatal-blow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festering Evil",
+   "files": [
+    "engine/src/cards/pool/festering-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Whip",
+   "files": [
+    "engine/src/cards/pool/fire-whip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fog Elemental",
+   "files": [
+    "engine/src/cards/pool/fog-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fungus Elemental",
+   "files": [
+    "engine/src/cards/pool/fungus-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gallowbraid",
+   "files": [
+    "engine/src/cards/pool/gallowbraid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gerrard's Wisdom",
+   "files": [
+    "engine/src/cards/pool/gerrards-wisdom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Bomb",
+   "files": [
+    "engine/src/cards/pool/goblin-bomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Grenadiers",
+   "files": [
+    "engine/src/cards/pool/goblin-grenadiers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Vandal",
+   "files": [
+    "engine/src/cards/pool/goblin-vandal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harvest Wurm",
+   "files": [
+    "engine/src/cards/pool/harvest-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inner Sanctum",
+   "files": [
+    "engine/src/cards/pool/inner-sanctum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jabari's Banner",
+   "files": [
+    "engine/src/cards/pool/jabaris-banner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jangling Automaton",
+   "files": [
+    "engine/src/cards/pool/jangling-automaton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lava Hounds",
+   "files": [
+    "engine/src/cards/pool/lava-hounds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lava Storm",
+   "files": [
+    "engine/src/cards/pool/lava-storm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Llanowar Druid",
+   "files": [
+    "engine/src/cards/pool/llanowar-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Llanowar Sentinel",
+   "files": [
+    "engine/src/cards/pool/llanowar-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Chains",
+   "files": [
+    "engine/src/cards/pool/mana-chains.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maraxus of Keld",
+   "files": [
+    "engine/src/cards/pool/maraxus-of-keld.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morinfen",
+   "files": [
+    "engine/src/cards/pool/morinfen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Noble Benefactor",
+   "files": [
+    "engine/src/cards/pool/noble-benefactor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Null Rod",
+   "files": [
+    "engine/src/cards/pool/null-rod.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Odylic Wraith",
+   "files": [
+    "engine/src/cards/pool/odylic-wraith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ophidian",
+   "files": [
+    "engine/src/cards/pool/ophidian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orcish Settlers",
+   "files": [
+    "engine/src/cards/pool/orcish-settlers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paradigm Shift",
+   "files": [
+    "engine/src/cards/pool/paradigm-shift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peacekeeper",
+   "files": [
+    "engine/src/cards/pool/peacekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pendrell Mists",
+   "files": [
+    "engine/src/cards/pool/pendrell-mists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Wings",
+   "files": [
+    "engine/src/cards/pool/phantom-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revered Unicorn",
+   "files": [
+    "engine/src/cards/pool/revered-unicorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roc Hatchling",
+   "files": [
+    "engine/src/cards/pool/roc-hatchling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rogue Elephant",
+   "files": [
+    "engine/src/cards/pool/rogue-elephant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage Owl",
+   "files": [
+    "engine/src/cards/pool/sage-owl.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sawtooth Ogre",
+   "files": [
+    "engine/src/cards/pool/sawtooth-ogre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serenity",
+   "files": [
+    "engine/src/cards/pool/serenity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serrated Biskelion",
+   "files": [
+    "engine/src/cards/pool/serrated-biskelion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shattered Crypt",
+   "files": [
+    "engine/src/cards/pool/shattered-crypt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Shepherd",
+   "files": [
+    "engine/src/cards/pool/soul-shepherd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Southern Paladin",
+   "files": [
+    "engine/src/cards/pool/southern-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Straw Golem",
+   "files": [
+    "engine/src/cards/pool/straw-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Hierophant",
+   "files": [
+    "engine/src/cards/pool/sylvan-hierophant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi's Veil",
+   "files": [
+    "engine/src/cards/pool/teferis-veil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Forge",
+   "files": [
+    "engine/src/cards/pool/thran-forge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timid Drake",
+   "files": [
+    "engine/src/cards/pool/timid-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolarian Drake",
+   "files": [
+    "engine/src/cards/pool/tolarian-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tolarian Entrancer",
+   "files": [
+    "engine/src/cards/pool/tolarian-entrancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uktabi Efreet",
+   "files": [
+    "engine/src/cards/pool/uktabi-efreet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urborg Stalker",
+   "files": [
+    "engine/src/cards/pool/urborg-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vodalian Illusionist",
+   "files": [
+    "engine/src/cards/pool/vodalian-illusionist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wave of Terror",
+   "files": [
+    "engine/src/cards/pool/wave-of-terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xanthic Statue",
+   "files": [
+    "engine/src/cards/pool/xanthic-statue.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Necratog",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "cost 'exile the top creature card of your graveyard' (graveyard order, with rule 404.3's simultaneous arrivals)"
+  },
+  {
+   "name": "Zombie Scavengers",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "cost 'exile the top creature card of your graveyard: regenerate this creature' (graveyard order)"
+  },
+  {
+   "name": "Barrow Ghoul",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "upkeep 'sacrifice this creature unless you exile the top creature card of your graveyard' (graveyard order)"
+  },
+  {
+   "name": "Circling Vultures",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "the same upkeep cost as Barrow Ghoul (graveyard order); 'you may discard this card any time you could cast an instant' is also unbuilt"
+  },
+  {
+   "name": "Mistmoon Griffin",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "dies: 'exile it, then return the top creature card of your graveyard to the battlefield' (graveyard order)"
+  },
+  {
+   "name": "Bone Dancer",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "'put the top creature card of defending player's graveyard onto the battlefield under your control' (graveyard order, the defending player ordering simultaneous arrivals)"
+  },
+  {
+   "name": "Alms",
+   "needs": [
+    "effect:top-card-of-graveyard"
+   ],
+   "why": "cost 'exile the top card of your graveyard' (graveyard order)"
+  },
+  {
+   "name": "Nature's Kiss",
+   "needs": [
+    "effect:top-card-of-graveyard"
+   ],
+   "why": "cost 'exile the top card of your graveyard' (graveyard order)"
+  },
+  {
+   "name": "Spinning Darkness",
+   "needs": [
+    "effect:top-card-of-graveyard"
+   ],
+   "why": "alternative cost 'exile the top three black cards of your graveyard' (graveyard order)"
+  },
+  {
+   "name": "Phyrexian Furnace",
+   "needs": [
+    "effect:top-card-of-graveyard"
+   ],
+   "why": "'exile the bottom card of target player's graveyard' (graveyard order)"
+  },
+  {
+   "name": "Bösium Strip",
+   "needs": [
+    "effect:top-card-of-graveyard"
+   ],
+   "why": "'you may cast instant and sorcery spells from the top of your graveyard' until end of turn, exiled instead (graveyard order)"
+  },
+  {
+   "name": "Abeyance",
+   "needs": [
+    "effect:prohibit-non-mana-abilities"
+   ],
+   "why": "'can't activate abilities that aren't mana abilities' — prohibit's abilities flag includes mana abilities"
+  },
+  {
+   "name": "Debt of Loyalty",
+   "needs": [
+    "effect:regenerate-gain-control"
+   ],
+   "why": "'you gain control of that creature if it regenerates this way' — no follow-up tied to this regeneration shield"
+  },
+  {
+   "name": "Urborg Justice",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "sacrifices a creature for each creature put into your graveyard from the battlefield this turn — sacrifice.count is fixed"
+  },
+  {
+   "name": "Benalish Infantry",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Barishi",
+   "needs": [
+    "effect:shuffle-graveyard-filter-into-library"
+   ],
+   "why": "shuffle only the creature cards of your graveyard into your library"
+  },
+  {
+   "name": "Betrothed of Fire",
+   "needs": [
+    "cost:sacrifice-enchanted-creature"
+   ],
+   "why": "'Sacrifice enchanted creature' as a cost"
+  },
+  {
+   "name": "Thran Tome",
+   "needs": [
+    "decision:opponent-chooses-card",
+    "effect:look-and-choose-revealed-card-destination"
+   ],
+   "why": "an opponent picks one of three revealed cards to go to the graveyard"
+  },
+  {
+   "name": "Empyrial Armor",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "+1/+1 for each card in your hand — grantPtPerCount has no cards-in-hand count"
+  },
+  {
+   "name": "Heat Stroke",
+   "needs": [
+    "filter:blocked-this-turn"
+   ],
+   "why": "destroy each creature that blocked or was blocked this turn, removed from combat or not"
+  },
+  {
+   "name": "Liege of the Hollows",
+   "needs": [
+    "new:pay-any-amount-of-mana"
+   ],
+   "why": "each player may pay any amount of mana, then tokens for what each paid"
+  },
+  {
+   "name": "Nature's Resurgence",
+   "needs": [
+    "amount:count-per-player"
+   ],
+   "why": "each player draws for the creature cards in their own graveyard"
+  },
+  {
+   "name": "Choking Vines",
+   "needs": [
+    "effect:becomes-blocked"
+   ],
+   "why": "X target attacking creatures become blocked"
+  },
+  {
+   "name": "Agonizing Memories",
+   "needs": [
+    "effect:target-player-hand-card-to-library-top"
+   ],
+   "why": "choose two cards from target player's hand and put them on top of their library"
+  },
+  {
+   "name": "Heart of Bogardan",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "'when a player doesn't pay this enchantment's cumulative upkeep' trigger"
+  },
+  {
+   "name": "Fallow Wurm",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "sacrifice it unless you discard a land card — unless's discard has no filter"
+  },
+  {
+   "name": "Firestorm",
+   "needs": [
+    "cost:discard-x-cost"
+   ],
+   "why": "additional cost 'discard X cards'"
+  },
+  {
+   "name": "Desperate Gambit",
+   "needs": [
+    "replacement:double-damage-from-your-sources-this-turn"
+   ],
+   "why": "a chosen source's next damage doubled or prevented on a coin flip"
+  },
+  {
+   "name": "Well of Knowledge",
+   "needs": [
+    "cost:any-player-may-activate"
+   ],
+   "why": "any player may activate this ability during their draw step"
+  },
+  {
+   "name": "Kithkin Armor",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "prevent the next damage a chosen source would deal to the enchanted creature"
+  },
+  {
+   "name": "Tariff",
+   "needs": [
+    "effect:sacrifice-greatest-unless-pay-its-mana-cost"
+   ],
+   "why": "each player sacrifices their greatest-mana-value creature unless they pay its mana cost"
+  },
+  {
+   "name": "Coils of the Medusa",
+   "needs": [
+    "filter:blocking-specific-creature"
+   ],
+   "why": "destroy all non-Wall creatures blocking the enchanted creature"
+  },
+  {
+   "name": "Hidden Horror",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "sacrifice it unless you discard a creature card"
+  },
+  {
+   "name": "Volunteer Reserves",
+   "needs": [
+    "keyword:banding"
+   ],
+   "why": "banding"
+  },
+  {
+   "name": "Master of Arms",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "tap target creature blocking this creature"
+  },
+  {
+   "name": "Mana Web",
+   "needs": [
+    "filter:land-could-produce-mana-type"
+   ],
+   "why": "tap the lands that could produce a type of mana the tapped land could"
+  },
+  {
+   "name": "Psychic Vortex",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep — draw a card"
+  },
+  {
+   "name": "Aboroth",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep — put a -1/-1 counter on this creature"
+  },
+  {
+   "name": "Dense Foliage",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "creatures can't be the targets of spells, anyone's"
+  },
+  {
+   "name": "Tranquil Grove",
+   "needs": [
+    "effect:destroy-all-except-source"
+   ],
+   "why": "destroy all other enchantments — destroy-all has no exceptSource"
+  },
+  {
+   "name": "Benalish Missionary",
+   "needs": [
+    "effect:prevent-combat-damage-by-target",
+    "condition:blocked-creature-filter"
+   ],
+   "why": "prevent all combat damage target blocked creature would deal"
+  },
+  {
+   "name": "Dwarven Thaumaturgist",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switch target creature's power and toughness"
+  },
+  {
+   "name": "Manta Ray",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Mwonvuli Ooze",
+   "needs": [
+    "static:cda-counters-on-self"
+   ],
+   "why": "P/T each 1 plus twice its age counters (a characteristic-defining ability)"
+  },
+  {
+   "name": "Ertai's Familiar",
+   "needs": [
+    "trigger:phases-out",
+    "effect:cant-phase-out"
+   ],
+   "why": "'when this creature phases out' and '{U}: can't phase out until your next upkeep'"
+  },
+  {
+   "name": "Haunting Misery",
+   "needs": [
+    "cost:exile-x-cards-cost"
+   ],
+   "why": "additional cost 'exile X creature cards from your graveyard'"
+  },
+  {
+   "name": "Avizoa",
+   "needs": [
+    "effect:skip-next-untap-step"
+   ],
+   "why": "'you skip your next untap step' — skip-next-untap only keeps permanents tapped"
+  },
+  {
+   "name": "Foriysian Brigade",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature each combat"
+  }
+ ]
+}

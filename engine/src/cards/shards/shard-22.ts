@@ -22,6 +22,7 @@ import _poolAngelicSellSword from "../pool/angelic-sell-sword.js";
 import _poolAnkhOfMishra from "../pool/ankh-of-mishra.js";
 import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
+import _poolApathy from "../pool/apathy.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolAppeal from "../pool/appeal.js";
 import _poolArcboundJavelineer from "../pool/arcbound-javelineer.js";
@@ -47,6 +48,7 @@ import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
 import _poolBazaarTrademage from "../pool/bazaar-trademage.js";
 import _poolBeaconOfTomorrows from "../pool/beacon-of-tomorrows.js";
 import _poolBearerOfTheHeavens from "../pool/bearer-of-the-heavens.js";
+import _poolBeck from "../pool/beck.js";
 import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
@@ -193,6 +195,7 @@ import _poolFearsomeAwakening from "../pool/fearsome-awakening.js";
 import _poolFeedTheFlames from "../pool/feed-the-flames.js";
 import _poolFelidarSavior from "../pool/felidar-savior.js";
 import _poolFellStinger from "../pool/fell-stinger.js";
+import _poolFesteringEvil from "../pool/festering-evil.js";
 import _poolFieryEncore from "../pool/fiery-encore.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
@@ -699,6 +702,7 @@ const shard: CardShard = {
     _poolAnkhOfMishra,
     _poolAnnoyedAltisaur,
     _poolAnowonTheRuinSage,
+    _poolApathy,
     _poolAppaLoyalSkyBison,
     _poolAppeal,
     _poolArcboundJavelineer,
@@ -724,6 +728,7 @@ const shard: CardShard = {
     _poolBazaarTrademage,
     _poolBeaconOfTomorrows,
     _poolBearerOfTheHeavens,
+    _poolBeck,
     _poolBedeckBedazzle,
     _poolBeeSting,
     _poolBenalishHeralds,
@@ -870,6 +875,7 @@ const shard: CardShard = {
     _poolFeedTheFlames,
     _poolFelidarSavior,
     _poolFellStinger,
+    _poolFesteringEvil,
     _poolFieryEncore,
     _poolFightingDrake,
     _poolFirebirdBlazingRanger,

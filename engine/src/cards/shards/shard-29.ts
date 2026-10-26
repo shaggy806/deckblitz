@@ -147,6 +147,7 @@ import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDissensionInTheRanks from "../pool/dissension-in-the-ranks.js";
 import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-planner.js";
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
+import _poolDownDirty from "../pool/down-dirty.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
 import _poolDragonsRageChanneler from "../pool/dragons-rage-channeler.js";
 import _poolDramaticRescue from "../pool/dramatic-rescue.js";
@@ -530,6 +531,7 @@ import _poolSoulSeparator from "../pool/soul-separator.js";
 import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
+import _poolSpeciesGorger from "../pool/species-gorger.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
@@ -585,6 +587,7 @@ import _poolTheUrDragon from "../pool/the-ur-dragon.js";
 import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
 import _poolThorncasterSliver from "../pool/thorncaster-sliver.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
+import _poolThrashingMossdog from "../pool/thrashing-mossdog.js";
 import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
 import _poolThwartTheGrave from "../pool/thwart-the-grave.js";
@@ -837,6 +840,7 @@ const shard: CardShard = {
     _poolDissensionInTheRanks,
     _poolDoctorOctopusMasterPlanner,
     _poolDouserOfLights,
+    _poolDownDirty,
     _poolDrafnaFounderOfLatNam,
     _poolDragonsRageChanneler,
     _poolDramaticRescue,
@@ -1220,6 +1224,7 @@ const shard: CardShard = {
     _poolSoulcipherBoard,
     _poolSoulcoilViper,
     _poolSoulknifeSpy,
+    _poolSpeciesGorger,
     _poolSpiketailHatchling,
     _poolSpinedTyrranax,
     _poolSpiritualGuardian,
@@ -1275,6 +1280,7 @@ const shard: CardShard = {
     _poolTheWaspWinsomeAvenger,
     _poolThorncasterSliver,
     _poolThoughtCourier,
+    _poolThrashingMossdog,
     _poolThreadbindClique,
     _poolThrottle,
     _poolThwartTheGrave,

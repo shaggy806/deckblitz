@@ -81,6 +81,7 @@ import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
+import _poolCarnageGladiator from "../pool/carnage-gladiator.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCarrionThrash from "../pool/carrion-thrash.js";
 import _poolCartoucheOfAmbition from "../pool/cartouche-of-ambition.js";
@@ -149,6 +150,7 @@ import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
+import _poolDoubleJumpFlyingKick from "../pool/double-jump-flying-kick.js";
 import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
 import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
@@ -203,6 +205,7 @@ import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolFlamespeakersWill from "../pool/flamespeakers-will.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolFleetwheelCruiser from "../pool/fleetwheel-cruiser.js";
+import _poolFleshBlood from "../pool/flesh-blood.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
@@ -298,6 +301,7 @@ import _poolIronWill from "../pool/iron-will.js";
 import _poolIrontreadCrusher from "../pool/irontread-crusher.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
+import _poolJanglingAutomaton from "../pool/jangling-automaton.js";
 import _poolJeskaiMonument from "../pool/jeskai-monument.js";
 import _poolJhovallRider from "../pool/jhovall-rider.js";
 import _poolJolenePlunderingPugilist from "../pool/jolene-plundering-pugilist.js";
@@ -389,6 +393,7 @@ import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
+import _poolNullRod from "../pool/null-rod.js";
 import _poolNyleasColossus from "../pool/nyleas-colossus.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
@@ -400,6 +405,7 @@ import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrchardElemental from "../pool/orchard-elemental.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
+import _poolOrcishSettlers from "../pool/orcish-settlers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOriginOfThor from "../pool/origin-of-thor.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
@@ -464,6 +470,7 @@ import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
 import _poolRisingMiasma from "../pool/rising-miasma.js";
 import _poolRiverBear from "../pool/river-bear.js";
 import _poolRiverKelpie from "../pool/river-kelpie.js";
+import _poolRocHatchling from "../pool/roc-hatchling.js";
 import _poolRockSlide from "../pool/rock-slide.js";
 import _poolRockshardElemental from "../pool/rockshard-elemental.js";
 import _poolRodolfDuskbringer from "../pool/rodolf-duskbringer.js";
@@ -582,6 +589,7 @@ import _poolTideDrifter from "../pool/tide-drifter.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
 import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
+import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
@@ -765,6 +773,7 @@ const shard: CardShard = {
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
     _poolCapennaExpress,
+    _poolCarnageGladiator,
     _poolCarrionLocust,
     _poolCarrionThrash,
     _poolCartoucheOfAmbition,
@@ -833,6 +842,7 @@ const shard: CardShard = {
     _poolDoctorSpectrum,
     _poolDone,
     _poolDoomwakeGiant,
+    _poolDoubleJumpFlyingKick,
     _poolDovinsAutomaton,
     _poolDragonlordOjutai,
     _poolDraugrRecruiter,
@@ -887,6 +897,7 @@ const shard: CardShard = {
     _poolFlamespeakersWill,
     _poolFleetingFlight,
     _poolFleetwheelCruiser,
+    _poolFleshBlood,
     _poolForerunnerOfTheLegion,
     _poolForgeBoss,
     _poolForlornFlats,
@@ -982,6 +993,7 @@ const shard: CardShard = {
     _poolIrontreadCrusher,
     _poolItlimocCradleOfTheSun,
     _poolIzzetGuildgate,
+    _poolJanglingAutomaton,
     _poolJeskaiMonument,
     _poolJhovallRider,
     _poolJolenePlunderingPugilist,
@@ -1073,6 +1085,7 @@ const shard: CardShard = {
     _poolNissaGenesisMage,
     _poolNornsInquisitor,
     _poolNoxiousGrasp,
+    _poolNullRod,
     _poolNyleasColossus,
     _poolNyleasIntervention,
     _poolObyraDreamingDuelist,
@@ -1084,6 +1097,7 @@ const shard: CardShard = {
     _poolOrchardElemental,
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
+    _poolOrcishSettlers,
     _poolOrderOfSacredDusk,
     _poolOriginOfThor,
     _poolOutlawsFury,
@@ -1148,6 +1162,7 @@ const shard: CardShard = {
     _poolRisingMiasma,
     _poolRiverBear,
     _poolRiverKelpie,
+    _poolRocHatchling,
     _poolRockSlide,
     _poolRockshardElemental,
     _poolRodolfDuskbringer,
@@ -1266,6 +1281,7 @@ const shard: CardShard = {
     _poolTideSkimmer,
     _poolTitanOfEternalFire,
     _poolTitaniaNaturesForce,
+    _poolTolarianEntrancer,
     _poolTombRobber,
     _poolTragicLesson,
     _poolTransdimensionalBovine,

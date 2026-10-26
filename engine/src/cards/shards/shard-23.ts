@@ -28,6 +28,7 @@ import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
 import _poolArcRunner from "../pool/arc-runner.js";
 import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
+import _poolArcticWolves from "../pool/arctic-wolves.js";
 import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArisenGorgon from "../pool/arisen-gorgon.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
@@ -102,6 +103,7 @@ import _poolCartographersCompanion from "../pool/cartographers-companion.js";
 import _poolCastleVantress from "../pool/castle-vantress.js";
 import _poolCatacombCrocodile from "../pool/catacomb-crocodile.js";
 import _poolCatapultSquad from "../pool/catapult-squad.js";
+import _poolCatchRelease from "../pool/catch-release.js";
 import _poolCausticCrawler from "../pool/caustic-crawler.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
@@ -241,6 +243,7 @@ import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
+import _poolHarvestWurm from "../pool/harvest-wurm.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
 import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
@@ -349,6 +352,7 @@ import _poolMasterTheWay from "../pool/master-the-way.js";
 import _poolMastermindPlum from "../pool/mastermind-plum.js";
 import _poolMastersCall from "../pool/masters-call.js";
 import _poolMastersRebuke from "../pool/masters-rebuke.js";
+import _poolMazeRusher from "../pool/maze-rusher.js";
 import _poolMazesMantle from "../pool/mazes-mantle.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
@@ -492,6 +496,7 @@ import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
 import _poolShamanOfTheGreatHunt from "../pool/shaman-of-the-great-hunt.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
+import _poolShatteredCrypt from "../pool/shattered-crypt.js";
 import _poolShatterstorm from "../pool/shatterstorm.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
@@ -702,6 +707,7 @@ const shard: CardShard = {
     _poolArcRunner,
     _poolArchaeologicalDig,
     _poolArchfiendOfSorrows,
+    _poolArcticWolves,
     _poolAridMesa,
     _poolArisenGorgon,
     _poolArmoredSkaab,
@@ -776,6 +782,7 @@ const shard: CardShard = {
     _poolCastleVantress,
     _poolCatacombCrocodile,
     _poolCatapultSquad,
+    _poolCatchRelease,
     _poolCausticCrawler,
     _poolCenoteScout,
     _poolCephalidScout,
@@ -915,6 +922,7 @@ const shard: CardShard = {
     _poolGuulDrazVampire,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
+    _poolHarvestWurm,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
     _poolHazardrootHerbalist,
@@ -1023,6 +1031,7 @@ const shard: CardShard = {
     _poolMastermindPlum,
     _poolMastersCall,
     _poolMastersRebuke,
+    _poolMazeRusher,
     _poolMazesMantle,
     _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,
@@ -1166,6 +1175,7 @@ const shard: CardShard = {
     _poolShadeOfTrokair,
     _poolShamanOfTheGreatHunt,
     _poolShamblingGhast,
+    _poolShatteredCrypt,
     _poolShatterstorm,
     _poolShelteringLandscape,
     _poolShilgengarSireOfFamine,

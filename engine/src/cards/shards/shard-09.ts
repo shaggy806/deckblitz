@@ -95,6 +95,7 @@ import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
 import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
+import _poolCall from "../pool/call.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
@@ -482,6 +483,7 @@ import _poolRocCharger from "../pool/roc-charger.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
 import _poolRoilEruption from "../pool/roil-eruption.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
+import _poolRotFarmSkeleton from "../pool/rot-farm-skeleton.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
@@ -614,6 +616,7 @@ import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
+import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
@@ -651,6 +654,7 @@ import _poolWaveElemental from "../pool/wave-elemental.js";
 import _poolWaveWingElemental from "../pool/wave-wing-elemental.js";
 import _poolWebShooters from "../pool/web-shooters.js";
 import _poolWeiInfantry from "../pool/wei-infantry.js";
+import _poolWell from "../pool/well.js";
 import _poolWhirlingStrike from "../pool/whirling-strike.js";
 import _poolWhiteLotusHideout from "../pool/white-lotus-hideout.js";
 import _poolWickerboughElder from "../pool/wickerbough-elder.js";
@@ -791,6 +795,7 @@ const shard: CardShard = {
     _poolBushmasterCoiledHenchman,
     _poolCacophonyScamp,
     _poolCaldaiaGuardian,
+    _poolCall,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
@@ -1178,6 +1183,7 @@ const shard: CardShard = {
     _poolRockfaceVillage,
     _poolRoilEruption,
     _poolRootwiseSurvivor,
+    _poolRotFarmSkeleton,
     _poolRubbleSlinger,
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,
@@ -1310,6 +1316,7 @@ const shard: CardShard = {
     _poolTrailOfMystery,
     _poolTraxosScourgeEternal,
     _poolTrenchpost,
+    _poolTurnBurn,
     _poolTyvarsStand,
     _poolUlvenwaldObserver,
     _poolUnauthorizedExit,
@@ -1347,6 +1354,7 @@ const shard: CardShard = {
     _poolWaveWingElemental,
     _poolWebShooters,
     _poolWeiInfantry,
+    _poolWell,
     _poolWhirlingStrike,
     _poolWhiteLotusHideout,
     _poolWickerboughElder,

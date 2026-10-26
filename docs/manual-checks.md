@@ -5397,3 +5397,9 @@ engine terms. A second thing to check is a second test.
 - **Do:** Pass to your end step, then cast Spider Climb on your Grizzly Bears. Keep passing.
 - **Expect:** The Bears are 2/5 with reach for the rest of the turn. As the turn ends, "Sacrifice Spider Climb at the beginning of the next cleanup step." goes on the stack and resolves: Spider Climb is in your graveyard and the Bears are 2/2 when Bob's turn begins.
 - **Not a bug:** Cast in your main phase with nothing on the stack, Spider Climb stays.
+
+## Fuse (2026-10-26, Dragon's Maze)
+
+### Turn // Burn: cast fused, both halves resolve, left first
+- **Do:** Click Turn // Burn in your hand and choose "Cast Turn // Burn". Target bob's Hill Giant for Turn, then the same Hill Giant for Burn.
+- **Expect:** The card offers three casts: Turn, Burn and Turn // Burn. Cast fused, it taps five lands, and the Giant becomes a 0/1 and then dies to Burn's 2 damage.

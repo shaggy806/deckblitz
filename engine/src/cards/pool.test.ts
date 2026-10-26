@@ -271,6 +271,27 @@ describe("deckbuilding flags", () => {
     const named = new Set(POOL_CARDS.map((def) => def.prepareSpell));
     expect(POOL_CARDS.filter((def) => def.prepareSpellOnly && !named.has(def.name)).map((d) => d.name)).toEqual([]);
   });
+
+  it("a split card's whole has no effect of its own, and a fused one's halves are each one plain effect", () => {
+    // Rule 702.102d: a fused split spell resolves as its halves, left then
+    // right, each with its own targets — the halves' effects alone.
+    const registry = createDefaultRegistry();
+    const wholes = POOL_CARDS.filter((def) => def.split && def.faces?.[0] === def.name);
+    const wrong = wholes.flatMap((def) => {
+      if (def.effect !== null || def.resolve !== null || def.targets.length > 0) return [`${def.name}: the whole has an effect`];
+      if (!def.fuse) return [];
+      return def.faces!.slice(1).flatMap((name) => {
+        const half = registry.get(name);
+        // Only the right half may end in an "any number of target …" group,
+        // which must be the fused spell's last slot.
+        const grouped = name === def.faces![1] && half.targets.some((t) => typeof t === "object" && t.kind === "any-number");
+        const plain = half.effect !== null && half.resolve === null && half.castModal === null && half.kicker === null && !grouped;
+        return plain && !(half.manaCost ?? "").includes("{X}") ? [] : [`${name}: not a plain half`];
+      });
+    });
+    expect(wrong).toEqual([]);
+    expect(POOL_CARDS.filter((def) => def.fuse && !wholes.includes(def)).map((d) => d.name)).toEqual([]);
+  });
 });
 
 describe("classify", () => {

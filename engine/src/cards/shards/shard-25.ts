@@ -77,6 +77,7 @@ import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
 import _poolBloodmadVampire from "../pool/bloodmad-vampire.js";
 import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
 import _poolBodyLaunderer from "../pool/body-launderer.js";
+import _poolBoilingBlood from "../pool/boiling-blood.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
 import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
@@ -176,6 +177,7 @@ import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
 import _poolEmergentGrowth from "../pool/emergent-growth.js";
+import _poolEmmaraTandris from "../pool/emmara-tandris.js";
 import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
 import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEnduringVictory from "../pool/enduring-victory.js";
@@ -742,6 +744,7 @@ const shard: CardShard = {
     _poolBloodmadVampire,
     _poolBloodtitheHarvester,
     _poolBodyLaunderer,
+    _poolBoilingBlood,
     _poolBrambleWurm,
     _poolBrambleguardCaptain,
     _poolBranchOfBoseiju,
@@ -841,6 +844,7 @@ const shard: CardShard = {
     _poolElvenLyre,
     _poolElvishHexhunter,
     _poolEmergentGrowth,
+    _poolEmmaraTandris,
     _poolEmptyTheWarrens,
     _poolEndlessRanksOfHydra,
     _poolEnduringVictory,

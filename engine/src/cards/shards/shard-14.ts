@@ -211,6 +211,7 @@ import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
 import _poolFame from "../pool/fame.js";
 import _poolFangbladeBrigand from "../pool/fangblade-brigand.js";
+import _poolFar from "../pool/far.js";
 import _poolFarrelsZealot from "../pool/farrels-zealot.js";
 import _poolFathomFleetSwordjack from "../pool/fathom-fleet-swordjack.js";
 import _poolFeatherbrainedFilcher from "../pool/featherbrained-filcher.js";
@@ -258,6 +259,7 @@ import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
 import _poolGlitchInterpreter from "../pool/glitch-interpreter.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
+import _poolGoblinBomb from "../pool/goblin-bomb.js";
 import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
 import _poolGoblinChariot from "../pool/goblin-chariot.js";
 import _poolGoblinInstigator from "../pool/goblin-instigator.js";
@@ -444,6 +446,7 @@ import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfanerOfTheDead from "../pool/profaner-of-the-dead.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
+import _poolProfitLoss from "../pool/profit-loss.js";
 import _poolProtectTheNegotiators from "../pool/protect-the-negotiators.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
@@ -609,6 +612,7 @@ import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
 import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
+import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
@@ -878,6 +882,7 @@ const shard: CardShard = {
     _poolFaerieFormation,
     _poolFame,
     _poolFangbladeBrigand,
+    _poolFar,
     _poolFarrelsZealot,
     _poolFathomFleetSwordjack,
     _poolFeatherbrainedFilcher,
@@ -925,6 +930,7 @@ const shard: CardShard = {
     _poolGlitchInterpreter,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
+    _poolGoblinBomb,
     _poolGoblinChainwhirler,
     _poolGoblinChariot,
     _poolGoblinInstigator,
@@ -1111,6 +1117,7 @@ const shard: CardShard = {
     _poolPrismite,
     _poolProfanerOfTheDead,
     _poolProfessionalFaceBreaker,
+    _poolProfitLoss,
     _poolProtectTheNegotiators,
     _poolProwessOfTheFair,
     _poolProwlingCaracal,
@@ -1276,6 +1283,7 @@ const shard: CardShard = {
     _poolUnnaturalGrowth,
     _poolUnravel,
     _poolUpTheBeanstalk,
+    _poolUrborgStalker,
     _poolUrzasCave,
     _poolUrzasIncubator,
     _poolVampireNighthawk,

@@ -57,6 +57,7 @@ import _poolBlizzardBrawl from "../pool/blizzard-brawl.js";
 import _poolBlizzard from "../pool/blizzard.js";
 import _poolBloodCelebrant from "../pool/blood-celebrant.js";
 import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
+import _poolBlood from "../pool/blood.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
@@ -139,6 +140,7 @@ import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
+import _poolDingusStaff from "../pool/dingus-staff.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
@@ -405,6 +407,7 @@ import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
+import _poolPeacekeeper from "../pool/peacekeeper.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
@@ -422,6 +425,7 @@ import _poolPriestOfGix from "../pool/priest-of-gix.js";
 import _poolPrimevalLight from "../pool/primeval-light.js";
 import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
 import _poolPrizePig from "../pool/prize-pig.js";
+import _poolProfit from "../pool/profit.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
@@ -601,6 +605,7 @@ import _poolTrostaniSelesnyasVoice from "../pool/trostani-selesnyas-voice.js";
 import _poolTuinvaleGuide from "../pool/tuinvale-guide.js";
 import _poolTuinvaleTreefolk from "../pool/tuinvale-treefolk.js";
 import _poolTwitchingDoll from "../pool/twitching-doll.js";
+import _poolUbulSarGatekeepers from "../pool/ubul-sar-gatekeepers.js";
 import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchainedBerserker from "../pool/unchained-berserker.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
@@ -668,6 +673,7 @@ import _poolYotianSoldier from "../pool/yotian-soldier.js";
 import _poolYsgardsCall from "../pool/ysgards-call.js";
 import _poolZacamaPrimalCalamity from "../pool/zacama-primal-calamity.js";
 import _poolZephyrScribe from "../pool/zephyr-scribe.js";
+import _poolZhurTaaAncient from "../pool/zhur-taa-ancient.js";
 import _poolZoZuThePunisher from "../pool/zo-zu-the-punisher.js";
 import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
@@ -755,6 +761,7 @@ const shard: CardShard = {
     _poolBlizzard,
     _poolBloodCelebrant,
     _poolBloodTollHarpy,
+    _poolBlood,
     _poolBloodsoakedChampion,
     _poolBlueSunsTwilight,
     _poolBojukaBog,
@@ -837,6 +844,7 @@ const shard: CardShard = {
     _poolDestructiveDigger,
     _poolDevilsPlay,
     _poolDictateOfHeliod,
+    _poolDingusStaff,
     _poolDireFleetCaptain,
     _poolDisfigure,
     _poolDisplacerKitten,
@@ -1103,6 +1111,7 @@ const shard: CardShard = {
     _poolOverzealousMuscle,
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
+    _poolPeacekeeper,
     _poolPerilousVoyage,
     _poolPhantasmalDreadmaw,
     _poolPilferingImp,
@@ -1120,6 +1129,7 @@ const shard: CardShard = {
     _poolPrimevalLight,
     _poolPrimordialPachyderm,
     _poolPrizePig,
+    _poolProfit,
     _poolProtectiveParents,
     _poolProvisionsMerchant,
     _poolPsychicPickpocket,
@@ -1299,6 +1309,7 @@ const shard: CardShard = {
     _poolTuinvaleGuide,
     _poolTuinvaleTreefolk,
     _poolTwitchingDoll,
+    _poolUbulSarGatekeepers,
     _poolUlvenwaldCaptive,
     _poolUnchainedBerserker,
     _poolUnchartedHaven,
@@ -1366,6 +1377,7 @@ const shard: CardShard = {
     _poolYsgardsCall,
     _poolZacamaPrimalCalamity,
     _poolZephyrScribe,
+    _poolZhurTaaAncient,
     _poolZoZuThePunisher,
     _poolZodiacDog,
     _poolZukoFirebendingMaster,

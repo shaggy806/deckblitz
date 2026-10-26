@@ -105,6 +105,7 @@ import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
+import _poolCinderGiant from "../pool/cinder-giant.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
@@ -167,6 +168,7 @@ import _poolDualSunAdepts from "../pool/dual-sun-adepts.js";
 import _poolDungeonCrawler from "../pool/dungeon-crawler.js";
 import _poolDuskanaTheRageMother from "../pool/duskana-the-rage-mother.js";
 import _poolDuskriderFalcon from "../pool/duskrider-falcon.js";
+import _poolDwarvenBerserker from "../pool/dwarven-berserker.js";
 import _poolEarthKingdomJailer from "../pool/earth-kingdom-jailer.js";
 import _poolEddieBrock from "../pool/eddie-brock.js";
 import _poolElderLandWurm from "../pool/elder-land-wurm.js";
@@ -205,6 +207,7 @@ import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
 import _poolFlashCounter from "../pool/flash-counter.js";
 import _poolFlensingRaptor from "../pool/flensing-raptor.js";
+import _poolFlesh from "../pool/flesh.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
@@ -334,6 +337,7 @@ import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
+import _poolLlanowarSentinel from "../pool/llanowar-sentinel.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
@@ -495,6 +499,7 @@ import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
 import _poolSereneHeart from "../pool/serene-heart.js";
+import _poolSerratedBiskelion from "../pool/serrated-biskelion.js";
 import _poolShadowbornDemon from "../pool/shadowborn-demon.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
@@ -520,6 +525,7 @@ import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
+import _poolSoulShepherd from "../pool/soul-shepherd.js";
 import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
 import _poolSpawningPit from "../pool/spawning-pit.js";
@@ -590,6 +596,7 @@ import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
+import _poolTimidDrake from "../pool/timid-drake.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
@@ -639,6 +646,7 @@ import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
 import _poolWarriorsCharge from "../pool/warriors-charge.js";
 import _poolWarshipScout from "../pool/warship-scout.js";
 import _poolWaspLancer from "../pool/wasp-lancer.js";
+import _poolWaveOfTerror from "../pool/wave-of-terror.js";
 import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
 import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWestvaleCultLeader from "../pool/westvale-cult-leader.js";
@@ -787,6 +795,7 @@ const shard: CardShard = {
     _poolChainedToTheRocks,
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
+    _poolCinderGiant,
     _poolClamorShaman,
     _poolCleavingSliver,
     _poolCloakwoodHermit,
@@ -849,6 +858,7 @@ const shard: CardShard = {
     _poolDungeonCrawler,
     _poolDuskanaTheRageMother,
     _poolDuskriderFalcon,
+    _poolDwarvenBerserker,
     _poolEarthKingdomJailer,
     _poolEddieBrock,
     _poolElderLandWurm,
@@ -887,6 +897,7 @@ const shard: CardShard = {
     _poolFlaringCinder,
     _poolFlashCounter,
     _poolFlensingRaptor,
+    _poolFlesh,
     _poolFlexibleWaterbender,
     _poolFlightDeckCoordinator,
     _poolFlowstoneHellion,
@@ -1016,6 +1027,7 @@ const shard: CardShard = {
     _poolLightningHelix,
     _poolLightningReflexes,
     _poolLilianasIndignation,
+    _poolLlanowarSentinel,
     _poolLoathsomeCurator,
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
@@ -1177,6 +1189,7 @@ const shard: CardShard = {
     _poolSelflessCathar,
     _poolSenselessRage,
     _poolSereneHeart,
+    _poolSerratedBiskelion,
     _poolShadowbornDemon,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
@@ -1202,6 +1215,7 @@ const shard: CardShard = {
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
+    _poolSoulShepherd,
     _poolSoulStrikeTechnique,
     _poolSoulstoneSanctuary,
     _poolSpawningPit,
@@ -1272,6 +1286,7 @@ const shard: CardShard = {
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,
+    _poolTimidDrake,
     _poolTitanothRex,
     _poolTogetherAsOne,
     _poolTomeOfLegends,
@@ -1321,6 +1336,7 @@ const shard: CardShard = {
     _poolWarriorsCharge,
     _poolWarshipScout,
     _poolWaspLancer,
+    _poolWaveOfTerror,
     _poolWeftstalkerArdent,
     _poolWestCoastExpansion,
     _poolWestvaleCultLeader,

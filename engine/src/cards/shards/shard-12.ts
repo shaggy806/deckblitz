@@ -90,6 +90,7 @@ import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
+import _poolCatch from "../pool/catch.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
@@ -436,6 +437,7 @@ import _poolPrismariPianist from "../pool/prismari-pianist.js";
 import _poolProphetOfThePeak from "../pool/prophet-of-the-peak.js";
 import _poolProsperity from "../pool/prosperity.js";
 import _poolProstheticInjector from "../pool/prosthetic-injector.js";
+import _poolProtect from "../pool/protect.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
@@ -460,6 +462,7 @@ import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
+import _poolReveredUnicorn from "../pool/revered-unicorn.js";
 import _poolRevitalize from "../pool/revitalize.js";
 import _poolRevolutionaryRebuff from "../pool/revolutionary-rebuff.js";
 import _poolRiggingRunner from "../pool/rigging-runner.js";
@@ -766,6 +769,7 @@ const shard: CardShard = {
     _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
+    _poolCatch,
     _poolCelebrateTheMountainKing,
     _poolChampionOfDusan,
     _poolChampionOfDusk,
@@ -1112,6 +1116,7 @@ const shard: CardShard = {
     _poolProphetOfThePeak,
     _poolProsperity,
     _poolProstheticInjector,
+    _poolProtect,
     _poolProtegesAwakening,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
@@ -1136,6 +1141,7 @@ const shard: CardShard = {
     _poolRemnantOfTheRisingStar,
     _poolResearchThief,
     _poolRestlessDead,
+    _poolReveredUnicorn,
     _poolRevitalize,
     _poolRevolutionaryRebuff,
     _poolRiggingRunner,

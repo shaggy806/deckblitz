@@ -18,6 +18,7 @@ import _poolAkawalliTheSeethingTower from "../pool/akawalli-the-seething-tower.j
 import _poolAlabasterHostSanctifier from "../pool/alabaster-host-sanctifier.js";
 import _poolAlexiosDeimosOfKosmos from "../pool/alexios-deimos-of-kosmos.js";
 import _poolAlibouAncientWitness from "../pool/alibou-ancient-witness.js";
+import _poolAlive from "../pool/alive.js";
 import _poolAlleyStrangler from "../pool/alley-strangler.js";
 import _poolAllureOfPower from "../pool/allure-of-power.js";
 import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
@@ -318,6 +319,7 @@ import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
+import _poolLavaHounds from "../pool/lava-hounds.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
@@ -504,6 +506,7 @@ import _poolSilentObserver from "../pool/silent-observer.js";
 import _poolSilumgarsCommand from "../pool/silumgars-command.js";
 import _poolSilvergillPeddler from "../pool/silvergill-peddler.js";
 import _poolSilverquillCampus from "../pool/silverquill-campus.js";
+import _poolSinisterPossession from "../pool/sinister-possession.js";
 import _poolSizzle from "../pool/sizzle.js";
 import _poolSkillfulLunge from "../pool/skillful-lunge.js";
 import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
@@ -547,6 +550,7 @@ import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSwiftKick from "../pool/swift-kick.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
+import _poolSylvanHierophant from "../pool/sylvan-hierophant.js";
 import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakeHeart from "../pool/take-heart.js";
@@ -595,6 +599,7 @@ import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUginsConjurant from "../pool/ugins-conjurant.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
+import _poolUncoveredClues from "../pool/uncovered-clues.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
@@ -687,6 +692,7 @@ const shard: CardShard = {
     _poolAlabasterHostSanctifier,
     _poolAlexiosDeimosOfKosmos,
     _poolAlibouAncientWitness,
+    _poolAlive,
     _poolAlleyStrangler,
     _poolAllureOfPower,
     _poolAlphaDeathclaw,
@@ -987,6 +993,7 @@ const shard: CardShard = {
     _poolLagoonBreach,
     _poolLaidToRest,
     _poolLathlissDragonQueen,
+    _poolLavaHounds,
     _poolLayDownArms,
     _poolLegionsLanding,
     _poolLeylineOfVitality,
@@ -1173,6 +1180,7 @@ const shard: CardShard = {
     _poolSilumgarsCommand,
     _poolSilvergillPeddler,
     _poolSilverquillCampus,
+    _poolSinisterPossession,
     _poolSizzle,
     _poolSkillfulLunge,
     _poolSkirsdagFlayer,
@@ -1216,6 +1224,7 @@ const shard: CardShard = {
     _poolSwiftKick,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
+    _poolSylvanHierophant,
     _poolSyndicateMessenger,
     _poolTackleArtist,
     _poolTakeHeart,
@@ -1264,6 +1273,7 @@ const shard: CardShard = {
     _poolUchuulon,
     _poolUginsConjurant,
     _poolUnbreathingHorde,
+    _poolUncoveredClues,
     _poolUndercityScrounger,
     _poolUnfinishedBusiness,
     _poolUnnerve,

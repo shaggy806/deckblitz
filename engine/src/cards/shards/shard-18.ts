@@ -394,6 +394,7 @@ import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
 import _poolPentagramOfTheAges from "../pool/pentagram-of-the-ages.js";
 import _poolPeopleOfTheWoods from "../pool/people-of-the-woods.js";
 import _poolPhantomNinja from "../pool/phantom-ninja.js";
+import _poolPhantomWings from "../pool/phantom-wings.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
 import _poolPileOn from "../pool/pile-on.js";
@@ -425,6 +426,7 @@ import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.j
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
+import _poolReadyWilling from "../pool/ready-willing.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
 import _poolReclusiveArtificer from "../pool/reclusive-artificer.js";
 import _poolRedHulk from "../pool/red-hulk.js";
@@ -496,6 +498,7 @@ import _poolSoltariChampion from "../pool/soltari-champion.js";
 import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulTether from "../pool/soul-tether.js";
+import _poolSouthernPaladin from "../pool/southern-paladin.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
@@ -622,6 +625,7 @@ import _poolWanderingMage from "../pool/wandering-mage.js";
 import _poolWarBalloon from "../pool/war-balloon.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
+import _poolWarpedPhysique from "../pool/warped-physique.js";
 import _poolWarrenElder from "../pool/warren-elder.js";
 import _poolWaryOkapi from "../pool/wary-okapi.js";
 import _poolWastes from "../pool/wastes.js";
@@ -1067,6 +1071,7 @@ const shard: CardShard = {
     _poolPentagramOfTheAges,
     _poolPeopleOfTheWoods,
     _poolPhantomNinja,
+    _poolPhantomWings,
     _poolPhyrexianDragonEngine,
     _poolPhyrexiasCore,
     _poolPileOn,
@@ -1098,6 +1103,7 @@ const shard: CardShard = {
     _poolRavenousBaboons,
     _poolRazorclawBear,
     _poolRazorkinHordecaller,
+    _poolReadyWilling,
     _poolReapingTheGraves,
     _poolReclusiveArtificer,
     _poolRedHulk,
@@ -1169,6 +1175,7 @@ const shard: CardShard = {
     _poolSongsOfTheDamned,
     _poolSorinImperiousBloodlord,
     _poolSoulTether,
+    _poolSouthernPaladin,
     _poolSpawnbinderMage,
     _poolSpeakeasyServer,
     _poolSpectrumSentinel,
@@ -1295,6 +1302,7 @@ const shard: CardShard = {
     _poolWarBalloon,
     _poolWargate,
     _poolWargling,
+    _poolWarpedPhysique,
     _poolWarrenElder,
     _poolWaryOkapi,
     _poolWastes,

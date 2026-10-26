@@ -22,6 +22,7 @@ import _poolAnHavvaInn from "../pool/an-havva-inn.js";
 import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
+import _poolAngelicRenewal from "../pool/angelic-renewal.js";
 import _poolAngusMackenzie from "../pool/angus-mackenzie.js";
 import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
 import _poolAnointedProcession from "../pool/anointed-procession.js";
@@ -373,6 +374,7 @@ import _poolMoonshaePixie from "../pool/moonshae-pixie.js";
 import _poolMoonsilverKey from "../pool/moonsilver-key.js";
 import _poolMoonsnareSpecialist from "../pool/moonsnare-specialist.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
+import _poolMorgueBurst from "../pool/morgue-burst.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolNagaVitalist from "../pool/naga-vitalist.js";
@@ -386,6 +388,7 @@ import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
 import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
+import _poolNivixCyclops from "../pool/nivix-cyclops.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
 import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
 import _poolOashraCultivator from "../pool/oashra-cultivator.js";
@@ -714,6 +717,7 @@ const shard: CardShard = {
     _poolAnafenzaUnyieldingLineage,
     _poolAncestralCraving,
     _poolAncestralVengeance,
+    _poolAngelicRenewal,
     _poolAngusMackenzie,
     _poolAnimarSoulOfElements,
     _poolAnointedProcession,
@@ -1065,6 +1069,7 @@ const shard: CardShard = {
     _poolMoonsilverKey,
     _poolMoonsnareSpecialist,
     _poolMoorFiend,
+    _poolMorgueBurst,
     _poolMouserMarkIii,
     _poolMulch,
     _poolNagaVitalist,
@@ -1078,6 +1083,7 @@ const shard: CardShard = {
     _poolNightMarketLookout,
     _poolNimbleBirdsticker,
     _poolNimbusMaze,
+    _poolNivixCyclops,
     _poolNorthPoleGates,
     _poolNullpriestOfOblivion,
     _poolOashraCultivator,

@@ -383,6 +383,7 @@ import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOphidian from "../pool/ophidian.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -413,6 +414,7 @@ import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
 import _poolPrognosticSphinx from "../pool/prognostic-sphinx.js";
 import _poolPropheticRavings from "../pool/prophetic-ravings.js";
+import _poolProtectServe from "../pool/protect-serve.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
@@ -434,6 +436,7 @@ import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRegentsAuthority from "../pool/regents-authority.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
+import _poolRenounceTheGuilds from "../pool/renounce-the-guilds.js";
 import _poolReparations from "../pool/reparations.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
@@ -458,6 +461,7 @@ import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
+import _poolSaruliGatekeepers from "../pool/saruli-gatekeepers.js";
 import _poolSautekhImmortal from "../pool/sautekh-immortal.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
@@ -538,6 +542,7 @@ import _poolTannukSteadfastSecond from "../pool/tannuk-steadfast-second.js";
 import _poolTasteOfBlood from "../pool/taste-of-blood.js";
 import _poolTaureanMauler from "../pool/taurean-mauler.js";
 import _poolTeachersPest from "../pool/teachers-pest.js";
+import _poolTear from "../pool/tear.js";
 import _poolTearsOfValakut from "../pool/tears-of-valakut.js";
 import _poolTeferisDrake from "../pool/teferis-drake.js";
 import _poolTeleportationCircle from "../pool/teleportation-circle.js";
@@ -556,6 +561,7 @@ import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
+import _poolThranForge from "../pool/thran-forge.js";
 import _poolThranVigil from "../pool/thran-vigil.js";
 import _poolThreat from "../pool/threat.js";
 import _poolThreatsAroundEveryCorner from "../pool/threats-around-every-corner.js";
@@ -566,6 +572,7 @@ import _poolTicketBooth from "../pool/ticket-booth.js";
 import _poolTidebinderMage from "../pool/tidebinder-mage.js";
 import _poolTinWingChimera from "../pool/tin-wing-chimera.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
+import _poolToil from "../pool/toil.js";
 import _poolTolarianKraken from "../pool/tolarian-kraken.js";
 import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolTookReaper from "../pool/took-reaper.js";
@@ -1038,6 +1045,7 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOphidian,
     _poolOssuaryRats,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
@@ -1068,6 +1076,7 @@ const shard: CardShard = {
     _poolPrizefighterConstruct,
     _poolPrognosticSphinx,
     _poolPropheticRavings,
+    _poolProtectServe,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
     _poolPummelerForHire,
@@ -1089,6 +1098,7 @@ const shard: CardShard = {
     _poolRedwoodTreefolk,
     _poolRegentsAuthority,
     _poolRemnantElemental,
+    _poolRenounceTheGuilds,
     _poolReparations,
     _poolRepercussion,
     _poolRepulse,
@@ -1113,6 +1123,7 @@ const shard: CardShard = {
     _poolSanctumOfTranquilLight,
     _poolSarevokDeathbringer,
     _poolSarkhansWhelp,
+    _poolSaruliGatekeepers,
     _poolSautekhImmortal,
     _poolSavageMansion,
     _poolSavannah,
@@ -1193,6 +1204,7 @@ const shard: CardShard = {
     _poolTasteOfBlood,
     _poolTaureanMauler,
     _poolTeachersPest,
+    _poolTear,
     _poolTearsOfValakut,
     _poolTeferisDrake,
     _poolTeleportationCircle,
@@ -1211,6 +1223,7 @@ const shard: CardShard = {
     _poolThievesGuildEnforcer,
     _poolThoughtShucker,
     _poolThoughtcast,
+    _poolThranForge,
     _poolThranVigil,
     _poolThreat,
     _poolThreatsAroundEveryCorner,
@@ -1221,6 +1234,7 @@ const shard: CardShard = {
     _poolTidebinderMage,
     _poolTinWingChimera,
     _poolTitaniaProtectorOfArgoth,
+    _poolToil,
     _poolTolarianKraken,
     _poolTolarianTerror,
     _poolTookReaper,

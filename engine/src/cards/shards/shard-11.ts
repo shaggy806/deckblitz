@@ -628,6 +628,7 @@ import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
+import _poolVoiceOfResurgence from "../pool/voice-of-resurgence.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
@@ -1309,6 +1310,7 @@ const shard: CardShard = {
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,
     _poolVodalianHypnotist,
+    _poolVoiceOfResurgence,
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
     _poolVulshokFactory,

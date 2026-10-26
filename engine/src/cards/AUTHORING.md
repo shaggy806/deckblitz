@@ -4387,7 +4387,15 @@ vocabulary before adding one back.
   709.4b — `card:verify` joins Scryfall's two), no effect, never cast. Each
   half is an ordinary instant or sorcery, and casting offers each half on its
   own (rule 709.3). `expansion-explosion.ts`, `expansion.ts`, `explosion.ts`.
-  Fuse isn't modelled. **Aftermath** (rule 702.127a) is `aftermath: true` on
+  **Fuse** (rule 702.102) is `fuse: true` on the whole card alone, which then
+  stays effect-less: from its owner's hand it is also offered as face 0, a
+  fused split spell for both costs, whose targets are the left half's then
+  the right's and which follows the left half's effect, then the right's,
+  each reading its own target slots from 0 (as a modal spell's chosen modes
+  do). Each half is an ordinary instant or sorcery with one plain `effect`
+  (no `resolve`, modes, kicker or X — `pool.test.ts` checks). From any other
+  zone only a half is cast. `wear-tear.ts`, `wear.ts`, `tear.ts`;
+  `fuse.test.ts`. **Aftermath** (rule 702.127a) is `aftermath: true` on
   the half that has it (Amonkhet's second halves): that half is offered from
   its owner's graveyard (`via: "aftermath"`, for its mana cost), refused from
   every other zone whatever would allow it, and exiled whenever it would leave
