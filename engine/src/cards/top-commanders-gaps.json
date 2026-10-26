@@ -444,7 +444,8 @@
   "cost:untap-symbol-cost",
   "keyword:buyback",
   "keyword:licid",
-  "keyword:miracle"
+  "keyword:miracle",
+  "keyword:soulbond"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

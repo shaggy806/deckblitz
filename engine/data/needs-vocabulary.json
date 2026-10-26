@@ -10934,6 +10934,46 @@
   "trigger:regenerated-this-way": {
    "family": "trigger:damage-trigger-extensions",
    "example": "Skeleton Scavengers: 'when it regenerates this way, put a +1/+1 counter on it'"
+  },
+  "condition:paired-with-soulbond-creature": {
+   "family": "keyword:soulbond",
+   "example": "Flowering Lumberknot: \"can't attack or block unless it's paired with a creature with soulbond\" — soulbond isn't a Keyword, so nothing reads whether the partner has it."
+  },
+  "effect:paired-creature-of-target": {
+   "family": "keyword:soulbond",
+   "example": "Joint Assault: \"if it's paired with a creature, that creature also gets +2/+2\" — no effect target is the creature a target is paired with."
+  },
+  "trigger:paired-creature-dealt-damage": {
+   "family": "keyword:soulbond",
+   "example": "Donna Noble: \"whenever Donna Noble or a creature it's paired with is dealt damage\"."
+  },
+  "effect:delayed-return-from-graveyard-your-next-upkeep": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Breathkeeper Seraph's granted \"when this creature dies, you may return it to the battlefield under its owner's control at the beginning of your next upkeep\"."
+  },
+  "effect:copy-exception-loses-ability": {
+   "family": "effect:copy-exceptions",
+   "example": "Mirage Phalanx: a token copy \"except it has haste and loses soulbond\"."
+  },
+  "effect:each-player-exiles-permanents-or-hand-cards": {
+   "family": "effect:each-player-choice",
+   "example": "Descent into Madness: each player exiles X from among the permanents they control and the cards in their hand, all at once."
+  },
+  "condition:enchanted-controller-controls-no-other-creatures": {
+   "family": "condition:that-player-controls-more",
+   "example": "Predator's Gambit: \"if its controller controls no non-Human creatures\" — the enchanted creature's controller."
+  },
+  "effect:prevent-combat-damage-to-and-by-source": {
+   "family": "replacement:damage-modification",
+   "example": "Moonlight Geist: \"prevent all combat damage that would be dealt to and dealt by this creature this turn\"."
+  },
+  "filter:shares-creature-type-with-attached": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Call to the Kindred: \"a creature card that shares a creature type with enchanted creature\"."
+  },
+  "effect:player-protection-from-color": {
+   "family": "effect:temporary-player-effect",
+   "example": "Faith's Shield's fateful hour: \"you gain protection from the color of your choice until end of turn\"."
   }
  }
 }

@@ -123,3 +123,11 @@ chip just moves and the panel's "Undercity 2/5" ticks over. Separately, the scen
 `ScenarioSpec` (`protocol/src/scenario.ts`) has no field for the initiative or a dungeon
 position. "Edit from here" drops both, so a manual check has to reach them in play: cast an
 initiative card.
+
+**A soulbond pairing isn't drawn on the board**
+
+Soulbond (rule 702.95, batch 185) pairs two creatures; the engine's view gives each a
+`pairedWith` naming the other, absent when unpaired. The board shows only what the pairing
+grants (Silverblade Paladin's double strike on both), not which two are paired, which matters
+when two soulbond creatures are out or a partner is about to leave. A small link marker on both
+cards (hovering one highlights the other, as an Aura's host is) would do.
