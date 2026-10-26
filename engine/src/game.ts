@@ -17220,6 +17220,7 @@ export class Game {
             ...(next.abilityKey !== undefined ? { abilityKey: next.abilityKey } : {}),
             ...(next.transformSince !== undefined ? { transformSince: next.transformSince } : {}),
             ...(next.illegalTargets !== undefined ? { illegalTargets: next.illegalTargets } : {}),
+            ...(next.division !== undefined ? { division: next.division } : {}),
           },
         ),
       );
@@ -21869,6 +21870,7 @@ export class Game {
           ...(opts.sourceLost === true ? { sourceLost: true } : {}),
           ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
           ...(opts.transformSince !== undefined ? { transformSince: opts.transformSince } : {}),
+          ...(opts.division !== undefined ? { division: [...opts.division] } : {}),
           ...(timestamp !== null ? { sourceTimestamp: timestamp } : {}),
           decisionSource: this.state.decisionSource,
         });

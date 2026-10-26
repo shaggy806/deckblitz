@@ -3598,6 +3598,9 @@ export interface ParkedSteps {
   /** The `eventSeq` after which its source transforming stops the ability
    * transforming it (rule 701.28f) — see `GameObject.stackedAtSeq`. */
   readonly transformSince?: number;
+  /** See `ResolutionContext.division`: the split chosen as it went on the
+   * stack, so a divided amount after a decision still deals its shares. */
+  readonly division?: readonly number[];
   /** The timestamp the source had when the ability went on the stack, so
    * "exile ~" still skips a source that has become a new object. */
   readonly sourceTimestamp?: number;
