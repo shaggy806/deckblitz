@@ -527,6 +527,7 @@ import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
 import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
+import _poolSpiritAway from "../pool/spirit-away.js";
 import _poolSpiritOfTheHearth from "../pool/spirit-of-the-hearth.js";
 import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
@@ -566,6 +567,7 @@ import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
+import _poolThatcherRevolt from "../pool/thatcher-revolt.js";
 import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheElderspell from "../pool/the-elderspell.js";
@@ -1228,6 +1230,7 @@ const shard: CardShard = {
     _poolSphinxOfForgottenLore,
     _poolSpiderManHometownHero,
     _poolSpiketailDrake,
+    _poolSpiritAway,
     _poolSpiritOfTheHearth,
     _poolSpiteOfMogis,
     _poolStalkingVengeance,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,
     _poolThassaDeepDwelling,
+    _poolThatcherRevolt,
     _poolTheCrystalsChosen,
     _poolTheEarthCrystal,
     _poolTheElderspell,

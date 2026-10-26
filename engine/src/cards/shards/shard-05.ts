@@ -11,6 +11,7 @@ import _poolAdaptiveSnapjaw from "../pool/adaptive-snapjaw.js";
 import _poolAdherentOfHope from "../pool/adherent-of-hope.js";
 import _poolAegisAngel from "../pool/aegis-angel.js";
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
+import _poolAfflictedDeserter from "../pool/afflicted-deserter.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
 import _poolAftershock from "../pool/aftershock.js";
 import _poolAgateBladeAssassin from "../pool/agate-blade-assassin.js";
@@ -357,6 +358,7 @@ import _poolKnightedMyr from "../pool/knighted-myr.js";
 import _poolKolaghanForerunners from "../pool/kolaghan-forerunners.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
+import _poolLairDelve from "../pool/lair-delve.js";
 import _poolLancerSliver from "../pool/lancer-sliver.js";
 import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
@@ -706,6 +708,7 @@ const shard: CardShard = {
     _poolAdherentOfHope,
     _poolAegisAngel,
     _poolAetherworksMarvel,
+    _poolAfflictedDeserter,
     _poolAftermathAnalyst,
     _poolAftershock,
     _poolAgateBladeAssassin,
@@ -1052,6 +1055,7 @@ const shard: CardShard = {
     _poolKolaghanForerunners,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
+    _poolLairDelve,
     _poolLancerSliver,
     _poolLaunchTheFleet,
     _poolLeapingMaster,

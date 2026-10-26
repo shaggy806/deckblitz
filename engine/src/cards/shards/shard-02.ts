@@ -178,6 +178,7 @@ import _poolDreadWarlock from "../pool/dread-warlock.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
+import _poolDungeonGeists from "../pool/dungeon-geists.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolDuskmantleSeer from "../pool/duskmantle-seer.js";
@@ -301,6 +302,7 @@ import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolInkfathomInfiltrator from "../pool/inkfathom-infiltrator.js";
 import _poolInquisitorGreyfax from "../pool/inquisitor-greyfax.js";
 import _poolInsideSource from "../pool/inside-source.js";
+import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
@@ -511,6 +513,7 @@ import _poolShadowstorm from "../pool/shadowstorm.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShardConvergence from "../pool/shard-convergence.js";
+import _poolShatteredPerception from "../pool/shattered-perception.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
@@ -683,6 +686,7 @@ import _tokensGolemToken from "../tokens/golem-token.js";
 import _tokensKnightTokenChivalricAlliance from "../tokens/knight-token-chivalric-alliance.js";
 import _tokensKorAllyToken from "../tokens/kor-ally-token.js";
 import _tokensPilotTokenCrewsVehicles from "../tokens/pilot-token-crews-vehicles.js";
+import _tokensRedHumanTokenHaste from "../tokens/red-human-token-haste.js";
 import _tokensSalamanderWarriorToken from "../tokens/salamander-warrior-token.js";
 
 const shard: CardShard = {
@@ -862,6 +866,7 @@ const shard: CardShard = {
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
     _poolDuneBeetle,
+    _poolDungeonGeists,
     _poolDurableHandicraft,
     _poolDuskmantleHouseOfShadow,
     _poolDuskmantleSeer,
@@ -985,6 +990,7 @@ const shard: CardShard = {
     _poolInkfathomInfiltrator,
     _poolInquisitorGreyfax,
     _poolInsideSource,
+    _poolIntoTheVoid,
     _poolInvasionOfKaladesh,
     _poolInventorsAxe,
     _poolInvisibleWoman,
@@ -1195,6 +1201,7 @@ const shard: CardShard = {
     _poolShakedownHeavy,
     _poolShalaiVoiceOfPlenty,
     _poolShardConvergence,
+    _poolShatteredPerception,
     _poolShatterskullGiant,
     _poolShepherdOfTheClouds,
     _poolShiftingCeratops,
@@ -1369,6 +1376,7 @@ const shard: CardShard = {
     _tokensKnightTokenChivalricAlliance,
     _tokensKorAllyToken,
     _tokensPilotTokenCrewsVehicles,
+    _tokensRedHumanTokenHaste,
     _tokensSalamanderWarriorToken,
   ],
 };

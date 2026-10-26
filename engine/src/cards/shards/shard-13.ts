@@ -681,6 +681,7 @@ import _poolWolfirSilverheart from "../pool/wolfir-silverheart.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolWorthyCause from "../pool/worthy-cause.js";
 import _poolYaroksFenlurker from "../pool/yaroks-fenlurker.js";
+import _poolYewSpirit from "../pool/yew-spirit.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZenithFlare from "../pool/zenith-flare.js";
 import _poolZephid from "../pool/zephid.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolWoodlandPatrol,
     _poolWorthyCause,
     _poolYaroksFenlurker,
+    _poolYewSpirit,
     _poolYouSeeAPairOfGoblins,
     _poolZenithFlare,
     _poolZephid,

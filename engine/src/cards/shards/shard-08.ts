@@ -124,6 +124,7 @@ import _poolContemplation from "../pool/contemplation.js";
 import _poolCoralCommando from "../pool/coral-commando.js";
 import _poolCoralhelmCommander from "../pool/coralhelm-commander.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
+import _poolCorpseTraders from "../pool/corpse-traders.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
 import _poolCourageousOutrider from "../pool/courageous-outrider.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
@@ -169,6 +170,7 @@ import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
+import _poolDrogskolCaptain from "../pool/drogskol-captain.js";
 import _poolDromokasGift from "../pool/dromokas-gift.js";
 import _poolDrownInSorrow from "../pool/drown-in-sorrow.js";
 import _poolDrudgeReavers from "../pool/drudge-reavers.js";
@@ -352,6 +354,7 @@ import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
 import _poolLagonnaBandStoryteller from "../pool/lagonna-band-storyteller.js";
+import _poolLambholtElder from "../pool/lambholt-elder.js";
 import _poolLanternBearer from "../pool/lantern-bearer.js";
 import _poolLastCaress from "../pool/last-caress.js";
 import _poolLavabellySliver from "../pool/lavabelly-sliver.js";
@@ -857,6 +860,7 @@ const shard: CardShard = {
     _poolCoralCommando,
     _poolCoralhelmCommander,
     _poolCorpseBlockade,
+    _poolCorpseTraders,
     _poolCorrodingDragonstorm,
     _poolCourageousOutrider,
     _poolCourtOfBounty,
@@ -902,6 +906,7 @@ const shard: CardShard = {
     _poolDowsingDevice,
     _poolDragonflySuit,
     _poolDrixFatemaker,
+    _poolDrogskolCaptain,
     _poolDromokasGift,
     _poolDrownInSorrow,
     _poolDrudgeReavers,
@@ -1085,6 +1090,7 @@ const shard: CardShard = {
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
     _poolLagonnaBandStoryteller,
+    _poolLambholtElder,
     _poolLanternBearer,
     _poolLastCaress,
     _poolLavabellySliver,

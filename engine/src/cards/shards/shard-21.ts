@@ -281,6 +281,7 @@ import _poolHighlandForest from "../pool/highland-forest.js";
 import _poolHillcomberGiant from "../pool/hillcomber-giant.js";
 import _poolHissingQuagmire from "../pool/hissing-quagmire.js";
 import _poolHolyDay from "../pool/holy-day.js";
+import _poolHolyJusticiar from "../pool/holy-justiciar.js";
 import _poolHoneyMammoth from "../pool/honey-mammoth.js";
 import _poolHourglassOfTheLost from "../pool/hourglass-of-the-lost.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
@@ -369,6 +370,7 @@ import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
 import _poolMob from "../pool/mob.js";
 import _poolMoldAdder from "../pool/mold-adder.js";
 import _poolMonaLisaScienceGeek from "../pool/mona-lisa-science-geek.js";
+import _poolMondronenShaman from "../pool/mondronen-shaman.js";
 import _poolMonoistSentry from "../pool/monoist-sentry.js";
 import _poolMorkrutBanshee from "../pool/morkrut-banshee.js";
 import _poolMorphicPool from "../pool/morphic-pool.js";
@@ -409,6 +411,7 @@ import _poolOrcishSquatters from "../pool/orcish-squatters.js";
 import _poolOrneryTumblewagg from "../pool/ornery-tumblewagg.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
 import _poolOsseousExhale from "../pool/osseous-exhale.js";
+import _poolOutwit from "../pool/outwit.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
 import _poolOvergrowthElemental from "../pool/overgrowth-elemental.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
@@ -592,6 +595,7 @@ import _poolTollOfTheInvasion from "../pool/toll-of-the-invasion.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
 import _poolTopplegeist from "../pool/topplegeist.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
+import _poolTormentorsTrident from "../pool/tormentors-trident.js";
 import _poolTorrentSculptor from "../pool/torrent-sculptor.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
 import _poolTortoiseFormation from "../pool/tortoise-formation.js";
@@ -647,6 +651,7 @@ import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWithercrown from "../pool/withercrown.js";
+import _poolWolfbittenCaptive from "../pool/wolfbitten-captive.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
@@ -957,6 +962,7 @@ const shard: CardShard = {
     _poolHillcomberGiant,
     _poolHissingQuagmire,
     _poolHolyDay,
+    _poolHolyJusticiar,
     _poolHoneyMammoth,
     _poolHourglassOfTheLost,
     _poolHugsGrislyGuardian,
@@ -1045,6 +1051,7 @@ const shard: CardShard = {
     _poolMob,
     _poolMoldAdder,
     _poolMonaLisaScienceGeek,
+    _poolMondronenShaman,
     _poolMonoistSentry,
     _poolMorkrutBanshee,
     _poolMorphicPool,
@@ -1085,6 +1092,7 @@ const shard: CardShard = {
     _poolOrneryTumblewagg,
     _poolOrzhovSignet,
     _poolOsseousExhale,
+    _poolOutwit,
     _poolOvalchaseDragster,
     _poolOvergrowthElemental,
     _poolOverwriteTheMultiverse,
@@ -1268,6 +1276,7 @@ const shard: CardShard = {
     _poolTomBombadil,
     _poolTopplegeist,
     _poolTorgalAFineHound,
+    _poolTormentorsTrident,
     _poolTorrentSculptor,
     _poolTorstenVonUrsus,
     _poolTortoiseFormation,
@@ -1323,6 +1332,7 @@ const shard: CardShard = {
     _poolWhiteDragon,
     _poolWillOfTheSultai,
     _poolWithercrown,
+    _poolWolfbittenCaptive,
     _poolWoodworkProdigy,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,

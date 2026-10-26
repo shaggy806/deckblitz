@@ -36,6 +36,7 @@ import _poolAridArchway from "../pool/arid-archway.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
+import _poolAvacynsCollar from "../pool/avacyns-collar.js";
 import _poolAvenEternal from "../pool/aven-eternal.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
@@ -280,6 +281,7 @@ import _poolHighFlyingAce from "../pool/high-flying-ace.js";
 import _poolHightideHermit from "../pool/hightide-hermit.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
+import _poolHomicidalSeclusion from "../pool/homicidal-seclusion.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
@@ -319,6 +321,7 @@ import _poolLaboratoryBrute from "../pool/laboratory-brute.js";
 import _poolLeadenMyr from "../pool/leaden-myr.js";
 import _poolLeafDancer from "../pool/leaf-dancer.js";
 import _poolLeafGilder from "../pool/leaf-gilder.js";
+import _poolLeapOfFaith from "../pool/leap-of-faith.js";
 import _poolLedevChampion from "../pool/ledev-champion.js";
 import _poolLeechGauntlet from "../pool/leech-gauntlet.js";
 import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
@@ -730,6 +733,7 @@ const shard: CardShard = {
     _poolAshlingsCommand,
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
+    _poolAvacynsCollar,
     _poolAvenEternal,
     _poolAvenSquire,
     _poolAwakenTheSkyTyrant,
@@ -974,6 +978,7 @@ const shard: CardShard = {
     _poolHightideHermit,
     _poolHiveStirrings,
     _poolHollowmurkSiege,
+    _poolHomicidalSeclusion,
     _poolHondenOfLifesWeb,
     _poolHotDogCart,
     _poolHotfootGnome,
@@ -1013,6 +1018,7 @@ const shard: CardShard = {
     _poolLeadenMyr,
     _poolLeafDancer,
     _poolLeafGilder,
+    _poolLeapOfFaith,
     _poolLedevChampion,
     _poolLeechGauntlet,
     _poolLegionLieutenant,

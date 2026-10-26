@@ -348,6 +348,7 @@ import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dra
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
 import _poolMalakirBloodwitch from "../pool/malakir-bloodwitch.js";
+import _poolMaliciousIntent from "../pool/malicious-intent.js";
 import _poolManaplasm from "../pool/manaplasm.js";
 import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
@@ -1067,6 +1068,7 @@ const shard: CardShard = {
     _poolMagesGuile,
     _poolMagmaticForce,
     _poolMalakirBloodwitch,
+    _poolMaliciousIntent,
     _poolManaplasm,
     _poolManholeMissile,
     _poolManorGate,

@@ -227,6 +227,7 @@ import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
 import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
+import _poolGeistSnatch from "../pool/geist-snatch.js";
 import _poolGemrazer from "../pool/gemrazer.js";
 import _poolGenerousStray from "../pool/generous-stray.js";
 import _poolGenesisWave from "../pool/genesis-wave.js";
@@ -293,6 +294,7 @@ import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
+import _poolIncreasingConfusion from "../pool/increasing-confusion.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
@@ -613,6 +615,7 @@ import _poolThisTownAintBigEnough from "../pool/this-town-aint-big-enough.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
 import _poolThoughtScour from "../pool/thought-scour.js";
 import _poolThoughtboundPhantasm from "../pool/thoughtbound-phantasm.js";
+import _poolThrabenDoomsayer from "../pool/thraben-doomsayer.js";
 import _poolThunderbolt from "../pool/thunderbolt.js";
 import _poolTigereyeCameo from "../pool/tigereye-cameo.js";
 import _poolTinkersTote from "../pool/tinkers-tote.js";
@@ -938,6 +941,7 @@ const shard: CardShard = {
     _poolGatstafRavagers,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
+    _poolGeistSnatch,
     _poolGemrazer,
     _poolGenerousStray,
     _poolGenesisWave,
@@ -1004,6 +1008,7 @@ const shard: CardShard = {
     _poolIdolOfOblivion,
     _poolIllGottenInheritance,
     _poolImperialCosmographer,
+    _poolIncreasingConfusion,
     _poolIndathaCrystal,
     _poolIndestructibility,
     _poolInescapableBlaze,
@@ -1324,6 +1329,7 @@ const shard: CardShard = {
     _poolThopterArchitect,
     _poolThoughtScour,
     _poolThoughtboundPhantasm,
+    _poolThrabenDoomsayer,
     _poolThunderbolt,
     _poolTigereyeCameo,
     _poolTinkersTote,

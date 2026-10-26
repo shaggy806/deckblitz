@@ -116,6 +116,7 @@ import _poolChimericSphere from "../pool/chimeric-sphere.js";
 import _poolChitteringHarvester from "../pool/chittering-harvester.js";
 import _poolCinderWall from "../pool/cinder-wall.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
+import _poolClingingMists from "../pool/clinging-mists.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCloakOfConfusion from "../pool/cloak-of-confusion.js";
@@ -361,6 +362,7 @@ import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMentalAgony from "../pool/mental-agony.js";
 import _poolMercurialPretender from "../pool/mercurial-pretender.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
 import _poolMerrowSkyswimmer from "../pool/merrow-skyswimmer.js";
@@ -523,6 +525,7 @@ import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
 import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
 import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
+import _poolScrollOfGriselbrand from "../pool/scroll-of-griselbrand.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSeedcradleWitch from "../pool/seedcradle-witch.js";
@@ -692,6 +695,7 @@ import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWildInstincts from "../pool/wild-instincts.js";
+import _poolWildwoodGeist from "../pool/wildwood-geist.js";
 import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
@@ -838,6 +842,7 @@ const shard: CardShard = {
     _poolChitteringHarvester,
     _poolCinderWall,
     _poolCleonMerryChampion,
+    _poolClingingMists,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
     _poolCloakOfConfusion,
@@ -1083,6 +1088,7 @@ const shard: CardShard = {
     _poolMassAppeal,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMentalAgony,
     _poolMercurialPretender,
     _poolMeriaScholarOfAntiquity,
     _poolMerrowSkyswimmer,
@@ -1245,6 +1251,7 @@ const shard: CardShard = {
     _poolScrapyardMongrel,
     _poolScreamreachBrawler,
     _poolScribeOfTheMindful,
+    _poolScrollOfGriselbrand,
     _poolScuttlingButler,
     _poolSecuritronSquadron,
     _poolSeedcradleWitch,
@@ -1414,6 +1421,7 @@ const shard: CardShard = {
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
     _poolWildInstincts,
+    _poolWildwoodGeist,
     _poolWillScholarOfFrost,
     _poolWillowSatyr,
     _poolWindswiftSlice,
