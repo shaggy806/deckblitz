@@ -3515,7 +3515,9 @@ export class Game {
         // caster's choice, between the fewest mana needs and one per generic.
         ...(delvePool.length > 0
           ? (() => {
-              const generic = this.castingCostOf(player, card, def, 0, cost, pricedAt).generic;
+              // The total cost (702.66a): a chosen additional cost's mana
+              // too (Bayou Groff's "or pay {3}"), as `fewestDelved` prices it.
+              const generic = this.castingCostOf(player, card, def, 0, variantCost, pricedAt).generic;
               const maxCards = Math.min(delvePool.length, generic);
               // An {X} spell may have nothing generic at X=0 ({X}{R}) and
               // still delve for X: its ranges per X decide.
@@ -3529,7 +3531,7 @@ export class Game {
               for (let x = 0; x <= xPlan.maxX; x += 1) {
                 const most = Math.min(
                   delvePool.length,
-                  this.castingCostOf(player, card, def, x, cost, pricedAt).generic,
+                  this.castingCostOf(player, card, def, x, variantCost, pricedAt).generic,
                 );
                 // Below a permission's least X (Glarb) nothing is castable:
                 // that X isn't on offer, so it mustn't raise the count.

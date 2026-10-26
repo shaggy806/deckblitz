@@ -114,4 +114,18 @@ describe("delve", () => {
       game.dispatch({ type: "cast-spell", player: A, card: concentrate, targets: [], delve: yard.slice(0, 1) }),
     ).toThrow(/does not have delve/);
   });
+  it("counts a chosen additional cost's mana as generic it may pay (702.66a: the total cost)", () => {
+    // Teval gives Bayou Groff delve; its "or pay {3}" branch makes {4}{G}.
+    const { game, yard } = setUp(0, 4);
+    game.debugSpawn("Teval, Arbiter of Virtue", A, "battlefield");
+    game.debugSpawn("Forest", A, "battlefield");
+    const groff = game.debugSpawn("Bayou Groff", A, "hand");
+    const pay3 = game
+      .legalActions(A)
+      .find((l): l is Extract<LegalAction, { kind: "cast-spell" }> => l.kind === "cast-spell" && l.card === groff && l.costOption === 1);
+    expect(pay3?.delve).toMatchObject({ minCards: 4, maxCards: 4 });
+    game.dispatch({ type: "cast-spell", player: A, card: groff, targets: [], costOption: 1, delve: yard });
+    settle(game);
+    expect(game.state.objects[groff].zone).toBe("battlefield");
+  });
 });
