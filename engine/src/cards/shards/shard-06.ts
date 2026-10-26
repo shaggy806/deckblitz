@@ -218,6 +218,7 @@ import _poolEvilReawakened from "../pool/evil-reawakened.js";
 import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
+import _poolFallenIdeal from "../pool/fallen-ideal.js";
 import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
@@ -515,6 +516,7 @@ import _poolRuneOfProtectionRed from "../pool/rune-of-protection-red.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
 import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
 import _poolSaidDone from "../pool/said-done.js";
+import _poolSaltcrustedSteppe from "../pool/saltcrusted-steppe.js";
 import _poolSalvageScuttler from "../pool/salvage-scuttler.js";
 import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
@@ -961,6 +963,7 @@ const shard: CardShard = {
     _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
+    _poolFallenIdeal,
     _poolFatedIntervention,
     _poolFateshaperAspirant,
     _poolFavorOfTheOverbeing,
@@ -1258,6 +1261,7 @@ const shard: CardShard = {
     _poolRushOfVitality,
     _poolSabertoothNishoba,
     _poolSaidDone,
+    _poolSaltcrustedSteppe,
     _poolSalvageScuttler,
     _poolSandbarMerfolk,
     _poolSavageGorilla,

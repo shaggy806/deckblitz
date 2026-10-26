@@ -361,6 +361,7 @@ import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
+import _poolMangaraOfCorondor from "../pool/mangara-of-corondor.js";
 import _poolMarchesasDecree from "../pool/marchesas-decree.js";
 import _poolMarduCharm from "../pool/mardu-charm.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
@@ -707,6 +708,7 @@ import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
+import _poolWordOfSeizing from "../pool/word-of-seizing.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
 import _poolWuScout from "../pool/wu-scout.js";
@@ -1097,6 +1099,7 @@ const shard: CardShard = {
     _poolMalachOfTheDawn,
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,
+    _poolMangaraOfCorondor,
     _poolMarchesasDecree,
     _poolMarduCharm,
     _poolMarduHordechief,
@@ -1443,6 +1446,7 @@ const shard: CardShard = {
     _poolWillowduskEssenceSeer,
     _poolWitheringTorment,
     _poolWoodlandCemetery,
+    _poolWordOfSeizing,
     _poolWorldBreaker,
     _poolWrapInVigor,
     _poolWuScout,

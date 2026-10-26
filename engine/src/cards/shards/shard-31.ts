@@ -624,6 +624,7 @@ import _poolSoulOfRavnica from "../pool/soul-of-ravnica.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
+import _poolSpellBurst from "../pool/spell-burst.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
@@ -1422,6 +1423,7 @@ const shard: CardShard = {
     _poolSowerOfTemptation,
     _poolSparkSpray,
     _poolSparringDummy,
+    _poolSpellBurst,
     _poolSpelunking,
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,

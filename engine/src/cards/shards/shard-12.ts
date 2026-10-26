@@ -117,6 +117,7 @@ import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
+import _poolCloudchaserKestrel from "../pool/cloudchaser-kestrel.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
@@ -610,6 +611,7 @@ import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
 import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
+import _poolSuddenDeath from "../pool/sudden-death.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
 import _poolSunClasp from "../pool/sun-clasp.js";
@@ -665,6 +667,7 @@ import _poolTyrantGuard from "../pool/tyrant-guard.js";
 import _poolUlvenwaldOddity from "../pool/ulvenwald-oddity.js";
 import _poolUnburialRites from "../pool/unburial-rites.js";
 import _poolUncleIroh from "../pool/uncle-iroh.js";
+import _poolUndyingRage from "../pool/undying-rage.js";
 import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
 import _poolValeronWardens from "../pool/valeron-wardens.js";
@@ -857,6 +860,7 @@ const shard: CardShard = {
     _poolClericOfTheForwardOrder,
     _poolClickslither,
     _poolCloudPirates,
+    _poolCloudchaserKestrel,
     _poolCloudcrownOak,
     _poolCloudseeder,
     _poolCogworkGrinder,
@@ -1350,6 +1354,7 @@ const shard: CardShard = {
     _poolSturdyHatchling,
     _poolSturmgeist,
     _poolSubterraneanSpirit,
+    _poolSuddenDeath,
     _poolSummonAnima,
     _poolSummonedDromedary,
     _poolSunClasp,
@@ -1405,6 +1410,7 @@ const shard: CardShard = {
     _poolUlvenwaldOddity,
     _poolUnburialRites,
     _poolUncleIroh,
+    _poolUndyingRage,
     _poolUneasyPartings,
     _poolUntamedHunger,
     _poolValeronWardens,

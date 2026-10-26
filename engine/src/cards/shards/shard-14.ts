@@ -485,6 +485,7 @@ import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPatrolSignaler from "../pool/patrol-signaler.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
+import _poolPenumbraSpider from "../pool/penumbra-spider.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
 import _poolPhantomGeneral from "../pool/phantom-general.js";
 import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
@@ -1244,6 +1245,7 @@ const shard: CardShard = {
     _poolPatrolSignaler,
     _poolPearledUnicorn,
     _poolPegasusGuardian,
+    _poolPenumbraSpider,
     _poolPerilousShadow,
     _poolPhantomGeneral,
     _poolPhyrexianSwarmlord,

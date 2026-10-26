@@ -46,6 +46,7 @@ import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
+import _poolBasalSliver from "../pool/basal-sliver.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
 import _poolBelligerentSliver from "../pool/belligerent-sliver.js";
@@ -73,6 +74,7 @@ import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
 import _poolBodyOfResearch from "../pool/body-of-research.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
+import _poolBonesplitterSliver from "../pool/bonesplitter-sliver.js";
 import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
 import _poolBoneyardScourge from "../pool/boneyard-scourge.js";
 import _poolBonfireOfTheDamned from "../pool/bonfire-of-the-damned.js";
@@ -829,6 +831,7 @@ const shard: CardShard = {
     _poolBallynockCohort,
     _poolBanishingSlash,
     _poolBarbarianHorde,
+    _poolBasalSliver,
     _poolBedheadBeastie,
     _poolBelleOfTheBrawl,
     _poolBelligerentSliver,
@@ -856,6 +859,7 @@ const shard: CardShard = {
     _poolBodyOfResearch,
     _poolBogNaughty,
     _poolBoldwyrAggressor,
+    _poolBonesplitterSliver,
     _poolBoneyardDesecrator,
     _poolBoneyardScourge,
     _poolBonfireOfTheDamned,

@@ -563,6 +563,7 @@ import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
+import _poolSquallLine from "../pool/squall-line.js";
 import _poolSquareUp from "../pool/square-up.js";
 import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
@@ -1276,6 +1277,7 @@ const shard: CardShard = {
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
+    _poolSquallLine,
     _poolSquareUp,
     _poolSquelchingLeeches,
     _poolStampedingHorncrest,

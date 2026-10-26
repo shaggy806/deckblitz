@@ -47,6 +47,7 @@ import _poolAzcantaTheSunkenRuin from "../pool/azcanta-the-sunken-ruin.js";
 import _poolAzoriusCluestone from "../pool/azorius-cluestone.js";
 import _poolBalladOfTheBlackFlag from "../pool/ballad-of-the-black-flag.js";
 import _poolBanesContingency from "../pool/banes-contingency.js";
+import _poolBarbedShocker from "../pool/barbed-shocker.js";
 import _poolBardsBow from "../pool/bards-bow.js";
 import _poolBarkshellBlessing from "../pool/barkshell-blessing.js";
 import _poolBasaltMonolith from "../pool/basalt-monolith.js";
@@ -207,6 +208,7 @@ import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
 import _poolFirefiendElemental from "../pool/firefiend-elemental.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
+import _poolFirewakeSliver from "../pool/firewake-sliver.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
 import _poolFlayerDrone from "../pool/flayer-drone.js";
 import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
@@ -281,6 +283,7 @@ import _poolHeavyFog from "../pool/heavy-fog.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
+import _poolHivestone from "../pool/hivestone.js";
 import _poolHopeCharm from "../pool/hope-charm.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
@@ -806,6 +809,7 @@ const shard: CardShard = {
     _poolAzoriusCluestone,
     _poolBalladOfTheBlackFlag,
     _poolBanesContingency,
+    _poolBarbedShocker,
     _poolBardsBow,
     _poolBarkshellBlessing,
     _poolBasaltMonolith,
@@ -966,6 +970,7 @@ const shard: CardShard = {
     _poolFillWithFright,
     _poolFirefiendElemental,
     _poolFireshrieker,
+    _poolFirewakeSliver,
     _poolFishingGear,
     _poolFlayerDrone,
     _poolFloodpitsDrowner,
@@ -1040,6 +1045,7 @@ const shard: CardShard = {
     _poolHellkiteCourser,
     _poolHellsCaretaker,
     _poolHiredClaw,
+    _poolHivestone,
     _poolHopeCharm,
     _poolHornetHarasser,
     _poolHowlsquadHeavy,

@@ -378,6 +378,7 @@ import _poolMadProphet from "../pool/mad-prophet.js";
 import _poolMageHunter from "../pool/mage-hunter.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
+import _poolMagusOfTheDisk from "../pool/magus-of-the-disk.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
 import _poolManOWar from "../pool/man-o-war.js";
 import _poolManaReflection from "../pool/mana-reflection.js";
@@ -614,6 +615,7 @@ import _poolSubtlety from "../pool/subtlety.js";
 import _poolSubversion from "../pool/subversion.js";
 import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
+import _poolSulfurousBlast from "../pool/sulfurous-blast.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
 import _poolSunscour from "../pool/sunscour.js";
@@ -1160,6 +1162,7 @@ const shard: CardShard = {
     _poolMageHunter,
     _poolMagicPot,
     _poolMagnificentEnd,
+    _poolMagusOfTheDisk,
     _poolMakindiGriffin,
     _poolManOWar,
     _poolManaReflection,
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolSubversion,
     _poolSuddenStorm,
     _poolSuddenStrength,
+    _poolSulfurousBlast,
     _poolSunSentinel,
     _poolSungracePegasus,
     _poolSunscour,

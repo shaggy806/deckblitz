@@ -232,6 +232,7 @@ import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFlurryOfHorns from "../pool/flurry-of-horns.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFontOfProgress from "../pool/font-of-progress.js";
+import _poolFoolsDemise from "../pool/fools-demise.js";
 import _poolForebodingStatue from "../pool/foreboding-statue.js";
 import _poolFoulSpirit from "../pool/foul-spirit.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
@@ -614,6 +615,7 @@ import _poolSplitUp from "../pool/split-up.js";
 import _poolSpoilsOfAdventure from "../pool/spoils-of-adventure.js";
 import _poolSporeBurst from "../pool/spore-burst.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
+import _poolSporesowerThallid from "../pool/sporesower-thallid.js";
 import _poolSproutSwarm from "../pool/sprout-swarm.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
@@ -624,6 +626,7 @@ import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
+import _poolSuddenShock from "../pool/sudden-shock.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
@@ -1001,6 +1004,7 @@ const shard: CardShard = {
     _poolFlurryOfHorns,
     _poolFollowTheLumarets,
     _poolFontOfProgress,
+    _poolFoolsDemise,
     _poolForebodingStatue,
     _poolFoulSpirit,
     _poolFriendlyTeddy,
@@ -1383,6 +1387,7 @@ const shard: CardShard = {
     _poolSpoilsOfAdventure,
     _poolSporeBurst,
     _poolSporeFrog,
+    _poolSporesowerThallid,
     _poolSproutSwarm,
     _poolStarWhale,
     _poolSteelburrChampion,
@@ -1393,6 +1398,7 @@ const shard: CardShard = {
     _poolStormwildCapridor,
     _poolStrixhavenStadium,
     _poolStruggleForSkemfar,
+    _poolSuddenShock,
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,

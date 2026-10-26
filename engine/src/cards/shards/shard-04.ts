@@ -91,6 +91,7 @@ import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
+import _poolClockworkHydra from "../pool/clockwork-hydra.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolColossalHeroics from "../pool/colossal-heroics.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
@@ -157,6 +158,7 @@ import _poolDranasSilencer from "../pool/dranas-silencer.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
 import _poolDreadStatuary from "../pool/dread-statuary.js";
 import _poolDreadhordeButcher from "../pool/dreadhorde-butcher.js";
+import _poolDreamStalker from "../pool/dream-stalker.js";
 import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
@@ -395,6 +397,7 @@ import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
+import _poolMwonvuliAcidMoss from "../pool/mwonvuli-acid-moss.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
@@ -714,6 +717,7 @@ import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
 import _poolWoodlandChampion from "../pool/woodland-champion.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
+import _poolWurmcalling from "../pool/wurmcalling.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
@@ -829,6 +833,7 @@ const shard: CardShard = {
     _poolChillOfTheGrave,
     _poolCitanulCentaurs,
     _poolCleverConjurer,
+    _poolClockworkHydra,
     _poolCocoon,
     _poolColossalHeroics,
     _poolCompleatedHuntmaster,
@@ -895,6 +900,7 @@ const shard: CardShard = {
     _poolDreadPresence,
     _poolDreadStatuary,
     _poolDreadhordeButcher,
+    _poolDreamStalker,
     _poolDrossHarvester,
     _poolDrownedDiner,
     _poolDrySpell,
@@ -1133,6 +1139,7 @@ const shard: CardShard = {
     _poolMoxJet,
     _poolMukotaiAmbusher,
     _poolMultanisAcolyte,
+    _poolMwonvuliAcidMoss,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
@@ -1452,6 +1459,7 @@ const shard: CardShard = {
     _poolWoodlandChampion,
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
+    _poolWurmcalling,
     _poolYavimayaBarbarian,
     _poolYomijiWhoBarsTheWay,
     _poolYoungBlueDragon,

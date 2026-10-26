@@ -554,6 +554,7 @@ import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
+import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
@@ -602,6 +603,7 @@ import _poolSphinxBoneWand from "../pool/sphinx-bone-wand.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
+import _poolSpinneretSliver from "../pool/spinneret-sliver.js";
 import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
@@ -1303,6 +1305,7 @@ const shard: CardShard = {
     _poolSavageGorger,
     _poolSavageLands,
     _poolSavageSwipe,
+    _poolSavageThallid,
     _poolScarredVinebreeder,
     _poolSeedsOfRenewal,
     _poolSelflessSafewright,
@@ -1351,6 +1354,7 @@ const shard: CardShard = {
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,
+    _poolSpinneretSliver,
     _poolSpinningWheelKick,
     _poolSpireMonitor,
     _poolSpirePatrol,

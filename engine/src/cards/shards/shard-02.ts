@@ -245,6 +245,7 @@ import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
 import _poolFrostTrickster from "../pool/frost-trickster.js";
 import _poolFungalFortitude from "../pool/fungal-fortitude.js";
+import _poolFungusSliver from "../pool/fungus-sliver.js";
 import _poolFuriousSpinesplitter from "../pool/furious-spinesplitter.js";
 import _poolFurnaceStrider from "../pool/furnace-strider.js";
 import _poolGalinasKnight from "../pool/galinas-knight.js";
@@ -973,6 +974,7 @@ const shard: CardShard = {
     _poolFrontlineRebel,
     _poolFrostTrickster,
     _poolFungalFortitude,
+    _poolFungusSliver,
     _poolFuriousSpinesplitter,
     _poolFurnaceStrider,
     _poolGalinasKnight,

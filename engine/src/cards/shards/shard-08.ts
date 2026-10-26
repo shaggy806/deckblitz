@@ -181,6 +181,7 @@ import _poolDivest from "../pool/divest.js";
 import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
+import _poolDrainingWhelk from "../pool/draining-whelk.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
 import _poolDrogskolCaptain from "../pool/drogskol-captain.js";
 import _poolDromokasGift from "../pool/dromokas-gift.js";
@@ -623,6 +624,7 @@ import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSpiritualSanctuary from "../pool/spiritual-sanctuary.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
+import _poolSpriteNoble from "../pool/sprite-noble.js";
 import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
 import _poolStealTheShow from "../pool/steal-the-show.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
@@ -745,6 +747,7 @@ import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
 import _poolWildfireWickerfolk from "../pool/wildfire-wickerfolk.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
 import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
+import _poolWipeAway from "../pool/wipe-away.js";
 import _poolWitchOfTheMoors from "../pool/witch-of-the-moors.js";
 import _poolWitherbloomApprentice from "../pool/witherbloom-apprentice.js";
 import _poolWojekHalberdiers from "../pool/wojek-halberdiers.js";
@@ -964,6 +967,7 @@ const shard: CardShard = {
     _poolDocOcksHenchmen,
     _poolDowsingDevice,
     _poolDragonflySuit,
+    _poolDrainingWhelk,
     _poolDrixFatemaker,
     _poolDrogskolCaptain,
     _poolDromokasGift,
@@ -1406,6 +1410,7 @@ const shard: CardShard = {
     _poolSpiritualSanctuary,
     _poolSplashPortal,
     _poolSporewebWeaver,
+    _poolSpriteNoble,
     _poolSproutingRenewal,
     _poolStealTheShow,
     _poolSteamclaw,
@@ -1528,6 +1533,7 @@ const shard: CardShard = {
     _poolWildfireWickerfolk,
     _poolWindSpirit,
     _poolWingnutBatOnTheBelfry,
+    _poolWipeAway,
     _poolWitchOfTheMoors,
     _poolWitherbloomApprentice,
     _poolWojekHalberdiers,

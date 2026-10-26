@@ -545,6 +545,7 @@ import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
 import _poolScrapyardSalvo from "../pool/scrapyard-salvo.js";
+import _poolScreechingSliver from "../pool/screeching-sliver.js";
 import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
@@ -1289,6 +1290,7 @@ const shard: CardShard = {
     _poolScoriaElemental,
     _poolScourgeWolf,
     _poolScrapyardSalvo,
+    _poolScreechingSliver,
     _poolScrollOfTheMasters,
     _poolScythecatCub,
     _poolSearingTouch,

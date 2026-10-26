@@ -104,6 +104,7 @@ import _poolBurningProphet from "../pool/burning-prophet.js";
 import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
 import _poolBurstOfEnergy from "../pool/burst-of-energy.js";
 import _poolBywayBarterer from "../pool/byway-barterer.js";
+import _poolCalciformPools from "../pool/calciform-pools.js";
 import _poolCallASurpriseWitness from "../pool/call-a-surprise-witness.js";
 import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
@@ -211,6 +212,7 @@ import _poolEssenceWarden from "../pool/essence-warden.js";
 import _poolEurekaMoment from "../pool/eureka-moment.js";
 import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
+import _poolEvilEyeOfUrborg from "../pool/evil-eye-of-urborg.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
 import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
@@ -859,6 +861,7 @@ const shard: CardShard = {
     _poolBurningShieldAskari,
     _poolBurstOfEnergy,
     _poolBywayBarterer,
+    _poolCalciformPools,
     _poolCallASurpriseWitness,
     _poolCanyonMinotaur,
     _poolCapitalGuard,
@@ -966,6 +969,7 @@ const shard: CardShard = {
     _poolEurekaMoment,
     _poolEvacuation,
     _poolEverflowingChalice,
+    _poolEvilEyeOfUrborg,
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
     _poolFairgroundsWarden,

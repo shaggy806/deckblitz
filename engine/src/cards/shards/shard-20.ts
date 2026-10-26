@@ -288,6 +288,7 @@ import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
+import _poolGriffinGuide from "../pool/griffin-guide.js";
 import _poolGriffinRider from "../pool/griffin-rider.js";
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
@@ -1085,6 +1086,7 @@ const shard: CardShard = {
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
+    _poolGriffinGuide,
     _poolGriffinRider,
     _poolGrimCaptainsCall,
     _poolGrimDiscovery,

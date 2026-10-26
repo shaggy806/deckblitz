@@ -74,6 +74,7 @@ import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
 import _poolBogImp from "../pool/bog-imp.js";
+import _poolBogardanHellkite from "../pool/bogardan-hellkite.js";
 import _poolBoggartBrute from "../pool/boggart-brute.js";
 import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
@@ -362,6 +363,7 @@ import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
+import _poolLivingEnd from "../pool/living-end.js";
 import _poolLlanowarSentinel from "../pool/llanowar-sentinel.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
@@ -828,6 +830,7 @@ const shard: CardShard = {
     _poolBloodPact,
     _poolBloodfireExpert,
     _poolBogImp,
+    _poolBogardanHellkite,
     _poolBoggartBrute,
     _poolBoilingRockPrison,
     _poolBoneDevourer,
@@ -1116,6 +1119,7 @@ const shard: CardShard = {
     _poolLightningHelix,
     _poolLightningReflexes,
     _poolLilianasIndignation,
+    _poolLivingEnd,
     _poolLlanowarSentinel,
     _poolLoathsomeCurator,
     _poolLordSkittersButcher,

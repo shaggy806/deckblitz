@@ -35,6 +35,7 @@ import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArisenGorgon from "../pool/arisen-gorgon.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
+import _poolAspectOfMongoose from "../pool/aspect-of-mongoose.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAttuneWithAether from "../pool/attune-with-aether.js";
@@ -104,6 +105,7 @@ import _poolButterburBreeInnkeeper from "../pool/butterbur-bree-innkeeper.js";
 import _poolCabalInitiate from "../pool/cabal-initiate.js";
 import _poolCalmingLicid from "../pool/calming-licid.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
+import _poolCarefulConsideration from "../pool/careful-consideration.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
 import _poolCartographersCompanion from "../pool/cartographers-companion.js";
 import _poolCastleVantress from "../pool/castle-vantress.js";
@@ -601,6 +603,7 @@ import _poolStarkeOfRath from "../pool/starke-of-rath.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
 import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
+import _poolStonewoodInvocation from "../pool/stonewood-invocation.js";
 import _poolStoneworkPackbeast from "../pool/stonework-packbeast.js";
 import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
@@ -632,6 +635,7 @@ import _poolTarPitWarrior from "../pool/tar-pit-warrior.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
 import _poolTectonicRift from "../pool/tectonic-rift.js";
+import _poolTelekineticSliver from "../pool/telekinetic-sliver.js";
 import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
 import _poolTemporaryLockdown from "../pool/temporary-lockdown.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
@@ -777,6 +781,7 @@ const shard: CardShard = {
     _poolArisenGorgon,
     _poolArmoredSkaab,
     _poolArrestersZeal,
+    _poolAspectOfMongoose,
     _poolAtlasSizableStooge,
     _poolAttercop,
     _poolAttuneWithAether,
@@ -846,6 +851,7 @@ const shard: CardShard = {
     _poolCabalInitiate,
     _poolCalmingLicid,
     _poolCapashenStandard,
+    _poolCarefulConsideration,
     _poolCarmenCruelSkymarcher,
     _poolCartographersCompanion,
     _poolCastleVantress,
@@ -1343,6 +1349,7 @@ const shard: CardShard = {
     _poolSteelDromedary,
     _poolStensiaUprising,
     _poolStitchersGraft,
+    _poolStonewoodInvocation,
     _poolStoneworkPackbeast,
     _poolStormHerd,
     _poolStormbloodBerserker,
@@ -1374,6 +1381,7 @@ const shard: CardShard = {
     _poolTasseledDromedary,
     _poolTeamTransmitter,
     _poolTectonicRift,
+    _poolTelekineticSliver,
     _poolTempleOfTheDragonQueen,
     _poolTemporaryLockdown,
     _poolTerraStomper,

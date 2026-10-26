@@ -238,6 +238,7 @@ import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGraftedSkullcap from "../pool/grafted-skullcap.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGreenhiltTrainee from "../pool/greenhilt-trainee.js";
+import _poolGreenseeker from "../pool/greenseeker.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
@@ -362,6 +363,7 @@ import _poolMistIntruder from "../pool/mist-intruder.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
+import _poolMoonlace from "../pool/moonlace.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
@@ -917,6 +919,7 @@ const shard: CardShard = {
     _poolGraftedSkullcap,
     _poolGravkill,
     _poolGreenhiltTrainee,
+    _poolGreenseeker,
     _poolGridMonitor,
     _poolGrimServant,
     _poolGrislySurvivor,
@@ -1041,6 +1044,7 @@ const shard: CardShard = {
     _poolMoltenExhale,
     _poolMoltenMonstrosity,
     _poolMonasteryLoremaster,
+    _poolMoonlace,
     _poolMorbidHunger,
     _poolMortify,
     _poolMossKami,

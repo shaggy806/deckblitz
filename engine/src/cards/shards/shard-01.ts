@@ -396,6 +396,7 @@ import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
 import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
+import _poolMysticalTeachings from "../pool/mystical-teachings.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNarrowEscape from "../pool/narrow-escape.js";
@@ -1127,6 +1128,7 @@ const shard: CardShard = {
     _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
+    _poolMysticalTeachings,
     _poolNamazuTrader,
     _poolNarnamRenegade,
     _poolNarrowEscape,

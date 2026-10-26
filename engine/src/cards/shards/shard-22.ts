@@ -707,6 +707,7 @@ import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
+import _poolWatcherSliver from "../pool/watcher-sliver.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
 import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
@@ -1467,6 +1468,7 @@ const shard: CardShard = {
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
     _poolWarehouseTabby,
+    _poolWatcherSliver,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
     _poolWavesOfAggression,
