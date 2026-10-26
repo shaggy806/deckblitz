@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3817 already implemented / 1183 missing (marks refreshed 2026-10-26)
+3818 already implemented / 1182 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -949,7 +949,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   953  Dusk // Dawn                             {2}{W}{W} // {3}{W}{W} Sorcery // Sorcery
 [x]   954  Phyrexian Reclamation                    {B}              Enchantment
 [x]   955  Taurean Mauler                           {2}{R}           Creature — Shapeshifter
-[ ]   956  Desperate Ritual                         {1}{R}           Instant — Arcane
+[x]   956  Desperate Ritual                         {1}{R}           Instant — Arcane
 [x]   957  Unearth                                  {B}              Sorcery
 [ ]   958  Sejiri Shelter // Sejiri Glacier         {2}              Instant // Land
 [ ]   959  Agadeem's Awakening // Agadeem, the Undercrypt {3}              Sorcery // Land
