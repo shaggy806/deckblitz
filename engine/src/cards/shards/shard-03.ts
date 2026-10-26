@@ -240,6 +240,7 @@ import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
 import _poolHulkAlwaysAngry from "../pool/hulk-always-angry.js";
+import _poolHythoniaTheCruel from "../pool/hythonia-the-cruel.js";
 import _poolIchorWellspring from "../pool/ichor-wellspring.js";
 import _poolIgnitionTeam from "../pool/ignition-team.js";
 import _poolImminentDoom from "../pool/imminent-doom.js";
@@ -851,6 +852,7 @@ const shard: CardShard = {
     _poolHourOfDefeat,
     _poolHowlingFury,
     _poolHulkAlwaysAngry,
+    _poolHythoniaTheCruel,
     _poolIchorWellspring,
     _poolIgnitionTeam,
     _poolImminentDoom,

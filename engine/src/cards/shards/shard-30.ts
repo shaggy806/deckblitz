@@ -121,6 +121,7 @@ import _poolCrushDissent from "../pool/crush-dissent.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCuriousHerd from "../pool/curious-herd.js";
+import _poolCurseOfChaos from "../pool/curse-of-chaos.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolCutRibbons from "../pool/cut-ribbons.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
@@ -191,6 +192,7 @@ import _poolFalseFloor from "../pool/false-floor.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
 import _poolFastFurious from "../pool/fast-furious.js";
+import _poolFateForetold from "../pool/fate-foretold.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralGhoul from "../pool/feral-ghoul.js";
@@ -412,6 +414,7 @@ import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
+import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOtherworldlyOutburst from "../pool/otherworldly-outburst.js";
@@ -774,6 +777,7 @@ const shard: CardShard = {
     _poolCryptGhast,
     _poolCuriousFarmAnimals,
     _poolCuriousHerd,
+    _poolCurseOfChaos,
     _poolCutADeal,
     _poolCutRibbons,
     _poolDaringDiscovery,
@@ -844,6 +848,7 @@ const shard: CardShard = {
     _poolFangGuardian,
     _poolFangOfShigeki,
     _poolFastFurious,
+    _poolFateForetold,
     _poolFearsomeGoblinPair,
     _poolFencingAce,
     _poolFeralGhoul,
@@ -1065,6 +1070,7 @@ const shard: CardShard = {
     _poolOmenOfTheSun,
     _poolOnduInversion,
     _poolOrcishBowmasters,
+    _poolOrdealOfHeliod,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
     _poolOtherworldlyOutburst,

@@ -976,6 +976,10 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (you lose|an opponent loses) life$/.exec(c))) {
     return [{ on: "loses-life", who: m[1] === "you lose" ? "you" : "opponent" }];
   }
+  // The Theros Ordeals: however it's sacrificed (their ruling).
+  if (/^When you sacrifice (?:~|this (?:Aura|enchantment|artifact|creature|permanent))$/.test(c)) {
+    return [{ on: "sacrifice", who: "you", selfOnly: true }];
+  }
   if ((m = /^Whenever you sacrifice (a|an|another) (.+)$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;

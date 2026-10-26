@@ -199,6 +199,7 @@ import _poolFirstDayOfClass from "../pool/first-day-of-class.js";
 import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
 import _poolFlatline from "../pool/flatline.js";
+import _poolFleecemaneLion from "../pool/fleecemane-lion.js";
 import _poolFleshCarver from "../pool/flesh-carver.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
@@ -379,6 +380,8 @@ import _poolPlagueEngineer from "../pool/plague-engineer.js";
 import _poolPointedDiscussion from "../pool/pointed-discussion.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
+import _poolPolukranosWorldEater from "../pool/polukranos-world-eater.js";
+import _poolPortentOfBetrayal from "../pool/portent-of-betrayal.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPrepareFight from "../pool/prepare-fight.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
@@ -458,6 +461,7 @@ import _poolSentinelTotem from "../pool/sentinel-totem.js";
 import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
 import _poolShamblingAttendants from "../pool/shambling-attendants.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
+import _poolShattergangBrothers from "../pool/shattergang-brothers.js";
 import _poolShepherdOfTheCosmos from "../pool/shepherd-of-the-cosmos.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
 import _poolShinechaser from "../pool/shinechaser.js";
@@ -545,6 +549,7 @@ import _poolThrunTheLastTroll from "../pool/thrun-the-last-troll.js";
 import _poolThud from "../pool/thud.js";
 import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
+import _poolTidalForce from "../pool/tidal-force.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonyStark from "../pool/tony-stark.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
@@ -845,6 +850,7 @@ const shard: CardShard = {
     _poolFlameOn,
     _poolFlameSweep,
     _poolFlatline,
+    _poolFleecemaneLion,
     _poolFleshCarver,
     _poolFootSoldiers,
     _poolFoulTongueShriek,
@@ -1025,6 +1031,8 @@ const shard: CardShard = {
     _poolPointedDiscussion,
     _poolPoisonArrow,
     _poolPolliwallop,
+    _poolPolukranosWorldEater,
+    _poolPortentOfBetrayal,
     _poolPramikonSkyRampart,
     _poolPrepareFight,
     _poolPressurePoint,
@@ -1104,6 +1112,7 @@ const shard: CardShard = {
     _poolShadowedCaravel,
     _poolShamblingAttendants,
     _poolShantottoTacticianMagician,
+    _poolShattergangBrothers,
     _poolShepherdOfTheCosmos,
     _poolShepherdingSpirits,
     _poolShinechaser,
@@ -1191,6 +1200,7 @@ const shard: CardShard = {
     _poolThud,
     _poolTianaShipsCaretaker,
     _poolTibaltsRager,
+    _poolTidalForce,
     _poolTolariaWest,
     _poolTonyStark,
     _poolToskiBearerOfSecrets,

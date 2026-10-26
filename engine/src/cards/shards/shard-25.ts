@@ -96,6 +96,7 @@ import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
 import _poolCastle from "../pool/castle.js";
+import _poolCavalryPegasus from "../pool/cavalry-pegasus.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
@@ -746,6 +747,7 @@ const shard: CardShard = {
     _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
     _poolCastle,
+    _poolCavalryPegasus,
     _poolCeaselessConflict,
     _poolChamberedNautilus,
     _poolChampionOfArashin,

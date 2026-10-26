@@ -289,6 +289,7 @@ import _poolKnightOfTheTusk from "../pool/knight-of-the-tusk.js";
 import _poolKnightWatch from "../pool/knight-watch.js";
 import _poolKnightsPledge from "../pool/knights-pledge.js";
 import _poolKorBlademaster from "../pool/kor-blademaster.js";
+import _poolKragmaWarcaller from "../pool/kragma-warcaller.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
@@ -971,6 +972,7 @@ const shard: CardShard = {
     _poolKnightWatch,
     _poolKnightsPledge,
     _poolKorBlademaster,
+    _poolKragmaWarcaller,
     _poolKrarkClanShaman,
     _poolKumenaTyrantOfOrazca,
     _poolKyoshiWarriorGuard,

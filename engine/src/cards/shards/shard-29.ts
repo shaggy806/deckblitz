@@ -32,6 +32,7 @@ import _poolArdbert from "../pool/ardbert.js";
 import _poolArgentumArmor from "../pool/argentum-armor.js";
 import _poolArgothianOpportunist from "../pool/argothian-opportunist.js";
 import _poolArmageddon from "../pool/armageddon.js";
+import _poolArtisanOfForms from "../pool/artisan-of-forms.js";
 import _poolArwenUndomiel from "../pool/arwen-undomiel.js";
 import _poolAshPartyCrasher from "../pool/ash-party-crasher.js";
 import _poolAstralWingspan from "../pool/astral-wingspan.js";
@@ -376,6 +377,7 @@ import _poolOraclesVault from "../pool/oracles-vault.js";
 import _poolOranRiefRecluse from "../pool/oran-rief-recluse.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
+import _poolOrdealOfThassa from "../pool/ordeal-of-thassa.js";
 import _poolOreskosSunGuide from "../pool/oreskos-sun-guide.js";
 import _poolOsaiVultures from "../pool/osai-vultures.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
@@ -572,6 +574,7 @@ import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimeWalk from "../pool/time-walk.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
+import _poolTormentedHero from "../pool/tormented-hero.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
 import _poolToweringWaveMystic from "../pool/towering-wave-mystic.js";
@@ -622,6 +625,7 @@ import _poolWanderersStrike from "../pool/wanderers-strike.js";
 import _poolWarFlare from "../pool/war-flare.js";
 import _poolWarNameAspirant from "../pool/war-name-aspirant.js";
 import _poolWarhostsFrenzy from "../pool/warhosts-frenzy.js";
+import _poolWarriorsLesson from "../pool/warriors-lesson.js";
 import _poolWaterServant from "../pool/water-servant.js";
 import _poolWeakstonesSubjugation from "../pool/weakstones-subjugation.js";
 import _poolWeaponizeTheMonsters from "../pool/weaponize-the-monsters.js";
@@ -698,6 +702,7 @@ const shard: CardShard = {
     _poolArgentumArmor,
     _poolArgothianOpportunist,
     _poolArmageddon,
+    _poolArtisanOfForms,
     _poolArwenUndomiel,
     _poolAshPartyCrasher,
     _poolAstralWingspan,
@@ -1042,6 +1047,7 @@ const shard: CardShard = {
     _poolOranRiefRecluse,
     _poolOrbitalPlunge,
     _poolOrcishMedicine,
+    _poolOrdealOfThassa,
     _poolOreskosSunGuide,
     _poolOsaiVultures,
     _poolOtharriSunsGlory,
@@ -1238,6 +1244,7 @@ const shard: CardShard = {
     _poolTimeWalk,
     _poolTorWauki,
     _poolTorchBreath,
+    _poolTormentedHero,
     _poolTormodTheDesecrator,
     _poolTorturePit,
     _poolToweringWaveMystic,
@@ -1288,6 +1295,7 @@ const shard: CardShard = {
     _poolWarFlare,
     _poolWarNameAspirant,
     _poolWarhostsFrenzy,
+    _poolWarriorsLesson,
     _poolWaterServant,
     _poolWeakstonesSubjugation,
     _poolWeaponizeTheMonsters,

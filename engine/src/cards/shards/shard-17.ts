@@ -73,6 +73,7 @@ import _poolBondedFetch from "../pool/bonded-fetch.js";
 import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
 import _poolBotBashingTime from "../pool/bot-bashing-time.js";
+import _poolBreachingHippocamp from "../pool/breaching-hippocamp.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
 import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
@@ -442,6 +443,7 @@ import _poolRenownedWeaver from "../pool/renowned-weaver.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
 import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
+import _poolRestore from "../pool/restore.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
 import _poolRhoxMaulers from "../pool/rhox-maulers.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
@@ -623,6 +625,7 @@ import _poolWildColos from "../pool/wild-colos.js";
 import _poolWillowFaerie from "../pool/willow-faerie.js";
 import _poolWindborneCharge from "../pool/windborne-charge.js";
 import _poolWindreaperFalcon from "../pool/windreaper-falcon.js";
+import _poolWingsteedRider from "../pool/wingsteed-rider.js";
 import _poolWinterSoldierBuckyBarnes from "../pool/winter-soldier-bucky-barnes.js";
 import _poolWirewoodChanneler from "../pool/wirewood-channeler.js";
 import _poolWitchsFamiliar from "../pool/witchs-familiar.js";
@@ -736,6 +739,7 @@ const shard: CardShard = {
     _poolBondedHerdbeast,
     _poolBorosCharm,
     _poolBotBashingTime,
+    _poolBreachingHippocamp,
     _poolBroodguardElite,
     _poolBuddingInsurgent,
     _poolBuriedInTheGarden,
@@ -1105,6 +1109,7 @@ const shard: CardShard = {
     _poolResoluteWatchdog,
     _poolRestlessBloodseeker,
     _poolRestlessBones,
+    _poolRestore,
     _poolReturnToTheLightRealms,
     _poolRhoxMaulers,
     _poolRimekinRecluse,
@@ -1286,6 +1291,7 @@ const shard: CardShard = {
     _poolWillowFaerie,
     _poolWindborneCharge,
     _poolWindreaperFalcon,
+    _poolWingsteedRider,
     _poolWinterSoldierBuckyBarnes,
     _poolWirewoodChanneler,
     _poolWitchsFamiliar,

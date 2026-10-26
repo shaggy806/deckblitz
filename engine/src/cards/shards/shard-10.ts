@@ -113,6 +113,7 @@ import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
+import _poolCoordinatedAssault from "../pool/coordinated-assault.js";
 import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
@@ -452,6 +453,7 @@ import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
+import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRootSpider from "../pool/root-spider.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
@@ -790,6 +792,7 @@ const shard: CardShard = {
     _poolCivicWayfinder,
     _poolCompellingArgument,
     _poolConniveConcoct,
+    _poolCoordinatedAssault,
     _poolCoralhelmGuide,
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
@@ -1129,6 +1132,7 @@ const shard: CardShard = {
     _poolRobTheArchives,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
+    _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
     _poolRootSpider,
     _poolRotatingFireplace,

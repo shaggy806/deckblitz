@@ -96,6 +96,7 @@ import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
 import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
+import _poolCurseOfShallowGraves from "../pool/curse-of-shallow-graves.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
 import _poolCursedCourtier from "../pool/cursed-courtier.js";
 import _poolCustodiPeacekeeper from "../pool/custodi-peacekeeper.js";
@@ -737,6 +738,7 @@ const shard: CardShard = {
     _poolCrystallineNautilus,
     _poolCubwarden,
     _poolCultistOfTheAbsolute,
+    _poolCurseOfShallowGraves,
     _poolCurseOfVitality,
     _poolCursedCourtier,
     _poolCustodiPeacekeeper,

@@ -19386,6 +19386,7 @@ export class Game {
           event.type === "permanent-sacrificed" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           !(spec.otherOnly === true && event.object === self.id) &&
+          !(spec.selfOnly === true && event.object !== self.id) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
       case "tapped-for-mana":

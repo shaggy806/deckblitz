@@ -253,6 +253,7 @@ import _poolHornOfRamos from "../pool/horn-of-ramos.js";
 import _poolHorrorOfHorrors from "../pool/horror-of-horrors.js";
 import _poolHoundOfGriselbrand from "../pool/hound-of-griselbrand.js";
 import _poolHuatliTheSunsHeart from "../pool/huatli-the-suns-heart.js";
+import _poolHuntTheHunter from "../pool/hunt-the-hunter.js";
 import _poolHuntersAmbush from "../pool/hunters-ambush.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
@@ -367,6 +368,8 @@ import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
 import _poolOketrasAvenger from "../pool/oketras-avenger.js";
 import _poolOneWithTheStars from "../pool/one-with-the-stars.js";
+import _poolOrdealOfErebos from "../pool/ordeal-of-erebos.js";
+import _poolOrdealOfPurphoros from "../pool/ordeal-of-purphoros.js";
 import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
 import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
@@ -572,6 +575,7 @@ import _poolTranscendentDragon from "../pool/transcendent-dragon.js";
 import _poolTransformingFlourish from "../pool/transforming-flourish.js";
 import _poolTreeOfTales from "../pool/tree-of-tales.js";
 import _poolTrenchStalker from "../pool/trench-stalker.js";
+import _poolTriadOfFates from "../pool/triad-of-fates.js";
 import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
@@ -903,6 +907,7 @@ const shard: CardShard = {
     _poolHorrorOfHorrors,
     _poolHoundOfGriselbrand,
     _poolHuatliTheSunsHeart,
+    _poolHuntTheHunter,
     _poolHuntersAmbush,
     _poolHussarPatrol,
     _poolIdyllicGrange,
@@ -1017,6 +1022,8 @@ const shard: CardShard = {
     _poolOctaviaLivingThesis,
     _poolOketrasAvenger,
     _poolOneWithTheStars,
+    _poolOrdealOfErebos,
+    _poolOrdealOfPurphoros,
     _poolOrderOfLeitbur,
     _poolOreskosSwiftclaw,
     _poolOriginOfTheHulk,
@@ -1222,6 +1229,7 @@ const shard: CardShard = {
     _poolTransformingFlourish,
     _poolTreeOfTales,
     _poolTrenchStalker,
+    _poolTriadOfFates,
     _poolTriskaidekaphile,
     _poolTrophyMage,
     _poolTrueConviction,

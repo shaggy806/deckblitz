@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander 2013, whole, and Theros's most-played** (batch 167, the newest-first walk,
+  2026-10-26): the `sacrifice` trigger's `selfOnly` — "when you sacrifice this Aura", however it's
+  sacrificed (the Ordeals' ruling; the scaffolder's "When you sacrifice this …"). 78 of the 111
+  authored — Master of Waves, Polukranos, World Eater, Fleecemane Lion, Prognostic Sphinx,
+  Shipbreaker Kraken, four Ordeals, Daxos of Meletis, Sydri, Galvanic Genius and 67 more: nine
+  bestow creatures finished by the scaffolder, four Ordeals by the lead, 65 by five `card-author`
+  agents. C13 is whole; 35 of Theros left. 33 blocked (`B167.json`).
 - **Born of the Gods, the rest of the set** (batch 164, the newest-first walk, 2026-10-25):
   **tribute** built (rule 702.104 — `tribute: N` on the card, asked as it's about to enter on the
   `choose-creature-type` decision with a prompt the client shows; the `tribute-not-paid`

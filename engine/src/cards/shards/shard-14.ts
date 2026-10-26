@@ -21,6 +21,7 @@ import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
+import _poolArborColossus from "../pool/arbor-colossus.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
 import _poolArchaeomancer from "../pool/archaeomancer.js";
 import _poolArchangelAvacyn from "../pool/archangel-avacyn.js";
@@ -227,6 +228,7 @@ import _poolFortifyingProvisions from "../pool/fortifying-provisions.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
 import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
+import _poolFromTheAshes from "../pool/from-the-ashes.js";
 import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
 import _poolFullBore from "../pool/full-bore.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
@@ -672,6 +674,7 @@ const shard: CardShard = {
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
     _poolArbiterOfWoe,
+    _poolArborColossus,
     _poolArborealGrazer,
     _poolArchaeomancer,
     _poolArchangelAvacyn,
@@ -878,6 +881,7 @@ const shard: CardShard = {
     _poolFrenziedArynx,
     _poolFreshVolunteers,
     _poolFrogtosserBanneret,
+    _poolFromTheAshes,
     _poolFuelForTheCause,
     _poolFullBore,
     _poolFuturistForge,

@@ -180,6 +180,7 @@ import _poolFalseSummoning from "../pool/false-summoning.js";
 import _poolFamishedForagers from "../pool/famished-foragers.js";
 import _poolFarewell from "../pool/farewell.js";
 import _poolFatefulAbsence from "../pool/fateful-absence.js";
+import _poolFavoredHoplite from "../pool/favored-hoplite.js";
 import _poolFecundGreenshell from "../pool/fecund-greenshell.js";
 import _poolFelhideSpiritbinder from "../pool/felhide-spiritbinder.js";
 import _poolFelidarRetreat from "../pool/felidar-retreat.js";
@@ -190,6 +191,7 @@ import _poolFieryCannonade from "../pool/fiery-cannonade.js";
 import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
+import _poolFiredrinkerSatyr from "../pool/firedrinker-satyr.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
@@ -366,6 +368,7 @@ import _poolNobleQuarry from "../pool/noble-quarry.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousAssault from "../pool/noxious-assault.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
+import _poolNyleasPresence from "../pool/nyleas-presence.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
 import _poolOgreHeadHelm from "../pool/ogre-head-helm.js";
@@ -814,6 +817,7 @@ const shard: CardShard = {
     _poolFamishedForagers,
     _poolFarewell,
     _poolFatefulAbsence,
+    _poolFavoredHoplite,
     _poolFecundGreenshell,
     _poolFelhideSpiritbinder,
     _poolFelidarRetreat,
@@ -824,6 +828,7 @@ const shard: CardShard = {
     _poolFiligreeAttendant,
     _poolFireLitThicket,
     _poolFirebendingStudent,
+    _poolFiredrinkerSatyr,
     _poolFiveHundredYearDiary,
     _poolFlameOfAnor,
     _poolFlameshape,
@@ -1000,6 +1005,7 @@ const shard: CardShard = {
     _poolNovaHellkite,
     _poolNoxiousAssault,
     _poolNoxiousRevival,
+    _poolNyleasPresence,
     _poolNymrisOonasTrickster,
     _poolObeliskOfGrixis,
     _poolOgreHeadHelm,

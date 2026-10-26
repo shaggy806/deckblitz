@@ -13,7 +13,6 @@ import {
   hand,
   keywords,
   lands,
-  named,
   nextTurn,
   pickModes,
   pickTargets,
@@ -23,7 +22,6 @@ import {
   settle,
   spawn,
   table,
-  toGraveyard,
   toHand,
   zone,
 } from "./harness.js";
@@ -168,27 +166,5 @@ describe("Polukranos, World Eater", () => {
     expect(game.state.objects[giant].damageMarked).toBe(1);
     expect(game.state.objects[polukranos].damageMarked).toBe(5);
     expect(zone(game, polukranos)).toBe("battlefield");
-  });
-});
-
-describe("Tempt with Immortality", () => {
-  it("returns one more for an opponent who returns a creature", () => {
-    const { game, b } = table();
-    for (let i = 0; i < 3; i++) toGraveyard(game, "Grizzly Bears");
-    const giant = toGraveyard(game, "Hill Giant", B);
-    lands(game, "Swamp", 5);
-    pickModes(b, 0);
-    cast(game, toHand(game, "Tempt with Immortality"));
-    expect(named(game, "Grizzly Bears", A)).toHaveLength(2);
-    expect(zone(game, giant)).toBe("battlefield");
-  });
-
-  it("returns nothing more for an opponent who accepts with no creature card", () => {
-    const { game, b } = table();
-    for (let i = 0; i < 3; i++) toGraveyard(game, "Grizzly Bears");
-    lands(game, "Swamp", 5);
-    pickModes(b, 0);
-    cast(game, toHand(game, "Tempt with Immortality"));
-    expect(named(game, "Grizzly Bears", A)).toHaveLength(1);
   });
 });

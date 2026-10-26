@@ -10436,6 +10436,26 @@
   },
   "condition:turn-history-per-player": {
    "example": "Lavaball Trap: \"if an opponent had two or more lands enter the battlefield under their control this turn\" — turn-history with who: opponent sums across all opponents, so it must count one opponent at a time."
+  },
+  "effect:rechoose-direction-each-upkeep": {
+   "family": "static:attack-limit",
+   "example": "Mystic Barrier: \"at the beginning of your upkeep … choose left or right\" — a direction is only chosen as a permanent enters (Pramikon's chooseOnEnter)."
+  },
+  "trigger:creature-attacks-enchanted-player": {
+   "family": "trigger:attacks-player-filter",
+   "example": "Curse of Predation / Curse of the Forsaken: \"whenever a creature attacks enchanted player\" — attacks-player fires once per attacked player, not once per creature."
+  },
+  "effect:delayed-return-target-and-sacrificed-card": {
+   "family": "effect:sacrificed-object-lki",
+   "example": "Rescue from the Underworld: the delayed trigger returns the target card and the creature sacrificed as the spell's cost; a delayed trigger can't name the sacrificed card."
+  },
+  "effect:exchange-power": {
+   "family": "effect:exchange-control",
+   "example": "Serene Master: \"exchange its power and the power of target creature it's blocking until end of combat\" — switch-pt swaps one creature's own power and toughness."
+  },
+  "static:players-no-max-hand-size": {
+   "family": "static:max-hand-size",
+   "example": "Price of Knowledge: \"players have no maximum hand size\" — noMaxHandSize applies only to its controller."
   }
  }
 }

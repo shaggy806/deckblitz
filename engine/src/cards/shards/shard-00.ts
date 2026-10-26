@@ -583,6 +583,7 @@ import _poolTrackDown from "../pool/track-down.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
+import _poolTritonFortuneHunter from "../pool/triton-fortune-hunter.js";
 import _poolTritonWavebreaker from "../pool/triton-wavebreaker.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTuskeriFirewalker from "../pool/tuskeri-firewalker.js";
@@ -1248,6 +1249,7 @@ const shard: CardShard = {
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,
+    _poolTritonFortuneHunter,
     _poolTritonWavebreaker,
     _poolTunnelOfHate,
     _poolTuskeriFirewalker,

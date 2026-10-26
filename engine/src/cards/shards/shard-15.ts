@@ -17,6 +17,7 @@ import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
+import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
@@ -258,6 +259,7 @@ import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeartfire from "../pool/heartfire.js";
 import _poolHeavensGate from "../pool/heavens-gate.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
+import _poolHeliodsEmissary from "../pool/heliods-emissary.js";
 import _poolHerdchaserDragon from "../pool/herdchaser-dragon.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
@@ -640,6 +642,7 @@ const shard: CardShard = {
     _poolAlabasterKirin,
     _poolAlexWilderRunaway,
     _poolAlignedHedronNetwork,
+    _poolAnaxAndCymede,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
     _poolAnglerDrake,
@@ -881,6 +884,7 @@ const shard: CardShard = {
     _poolHeartfire,
     _poolHeavensGate,
     _poolHeirloomMirror,
+    _poolHeliodsEmissary,
     _poolHerdchaserDragon,
     _poolHiddenFootblade,
     _poolHighlandWeald,

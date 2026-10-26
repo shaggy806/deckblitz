@@ -583,6 +583,7 @@ import _poolThunderousOrator from "../pool/thunderous-orator.js";
 import _poolTimberlineRidge from "../pool/timberline-ridge.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
 import _poolTimeOfNeed from "../pool/time-of-need.js";
+import _poolTimeToFeed from "../pool/time-to-feed.js";
 import _poolTineShrike from "../pool/tine-shrike.js";
 import _poolTirelessHauler from "../pool/tireless-hauler.js";
 import _poolTombOfTheSpiritDragon from "../pool/tomb-of-the-spirit-dragon.js";
@@ -1252,6 +1253,7 @@ const shard: CardShard = {
     _poolTimberlineRidge,
     _poolTimeEbb,
     _poolTimeOfNeed,
+    _poolTimeToFeed,
     _poolTineShrike,
     _poolTirelessHauler,
     _poolTombOfTheSpiritDragon,

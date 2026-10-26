@@ -14,6 +14,7 @@ import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
 import _poolAkoumBattlesinger from "../pool/akoum-battlesinger.js";
+import _poolAkroanHoplite from "../pool/akroan-hoplite.js";
 import _poolAnHavvaConstable from "../pool/an-havva-constable.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
@@ -120,6 +121,7 @@ import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
+import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiligentExcavator from "../pool/diligent-excavator.js";
@@ -484,6 +486,7 @@ import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
 import _poolSpellbookVendor from "../pool/spellbook-vendor.js";
+import _poolSpellheartChimera from "../pool/spellheart-chimera.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
 import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
@@ -669,6 +672,7 @@ const shard: CardShard = {
     _poolAkkiDrillmaster,
     _poolAkkiScrapchomper,
     _poolAkoumBattlesinger,
+    _poolAkroanHoplite,
     _poolAnHavvaConstable,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
@@ -775,6 +779,7 @@ const shard: CardShard = {
     _poolDeeprootChampion,
     _poolDeposeDeploy,
     _poolDesperateCharge,
+    _poolDestructiveRevelry,
     _poolDevotedDruid,
     _poolDevoutChaplain,
     _poolDiligentExcavator,
@@ -1139,6 +1144,7 @@ const shard: CardShard = {
     _poolSpeakeasyServer,
     _poolSpectrumSentinel,
     _poolSpellbookVendor,
+    _poolSpellheartChimera,
     _poolSpellkeeperWeird,
     _poolSpellruneHowler,
     _poolSphinxOfForgottenLore,

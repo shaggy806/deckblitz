@@ -391,6 +391,7 @@ import _poolNaturesClaim from "../pool/natures-claim.js";
 import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
+import _poolNemesisOfMortals from "../pool/nemesis-of-mortals.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
@@ -529,10 +530,12 @@ import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
+import _poolSoldierOfThePantheon from "../pool/soldier-of-the-pantheon.js";
 import _poolSolidFooting from "../pool/solid-footing.js";
 import _poolSoulOfTheros from "../pool/soul-of-theros.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
+import _poolSpawningGrounds from "../pool/spawning-grounds.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
 import _poolSpellContortion from "../pool/spell-contortion.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
@@ -1080,6 +1083,7 @@ const shard: CardShard = {
     _poolNecroduality,
     _poolNecrogenesis,
     _poolNeighborhoodGuardian,
+    _poolNemesisOfMortals,
     _poolNevinyrralsDisk,
     _poolNightmaresThirst,
     _poolNightmarishEnd,
@@ -1218,10 +1222,12 @@ const shard: CardShard = {
     _poolSmelt,
     _poolSoaringThoughtThief,
     _poolSokkasHaiku,
+    _poolSoldierOfThePantheon,
     _poolSolidFooting,
     _poolSoulOfTheros,
     _poolSoulShred,
     _poolSparringRegimen,
+    _poolSpawningGrounds,
     _poolSpeakSecrets,
     _poolSpellContortion,
     _poolSphereGrid,

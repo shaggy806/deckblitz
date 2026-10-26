@@ -198,6 +198,7 @@ import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGiltLeafWinnower from "../pool/gilt-leaf-winnower.js";
 import _poolGladehartCavalry from "../pool/gladehart-cavalry.js";
+import _poolGlareOfHeresy from "../pool/glare-of-heresy.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
@@ -400,6 +401,7 @@ import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
 import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
+import _poolPrognosticSphinx from "../pool/prognostic-sphinx.js";
 import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
@@ -835,6 +837,7 @@ const shard: CardShard = {
     _poolGiftOfStrands,
     _poolGiltLeafWinnower,
     _poolGladehartCavalry,
+    _poolGlareOfHeresy,
     _poolGlareOfSubdual,
     _poolGleamingBastion,
     _poolGluttonousGuest,
@@ -1037,6 +1040,7 @@ const shard: CardShard = {
     _poolPrismaticLens,
     _poolPrivateEye,
     _poolPrizefighterConstruct,
+    _poolPrognosticSphinx,
     _poolPropheticRavings,
     _poolProtectiveResponse,
     _poolPsychicMembrane,

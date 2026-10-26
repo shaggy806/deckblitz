@@ -402,6 +402,7 @@ import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
+import _poolPhalanxLeader from "../pool/phalanx-leader.js";
 import _poolPharagaxGiant from "../pool/pharagax-giant.js";
 import _poolPheresBandRaiders from "../pool/pheres-band-raiders.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
@@ -468,6 +469,7 @@ import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
+import _poolSatyrPiper from "../pool/satyr-piper.js";
 import _poolSavaiThundermane from "../pool/savai-thundermane.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolSchemaThief from "../pool/schema-thief.js";
@@ -550,6 +552,7 @@ import _poolTanglesap from "../pool/tanglesap.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
+import _poolTemptWithGlory from "../pool/tempt-with-glory.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolPeculiarLighthouse,
     _poolPerilousVault,
     _poolPewterGolem,
+    _poolPhalanxLeader,
     _poolPharagaxGiant,
     _poolPheresBandRaiders,
     _poolPhyrexianPlaguelord,
@@ -1112,6 +1116,7 @@ const shard: CardShard = {
     _poolSandstoneWarrior,
     _poolSangriteSurge,
     _poolSapphireMedallion,
+    _poolSatyrPiper,
     _poolSavaiThundermane,
     _poolScavengedWeaponry,
     _poolSchemaThief,
@@ -1194,6 +1199,7 @@ const shard: CardShard = {
     _poolTauntingKobold,
     _poolTeekasDragon,
     _poolTeferiMasterOfTime,
+    _poolTemptWithGlory,
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
     _poolTheFantasticar,

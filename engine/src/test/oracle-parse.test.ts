@@ -169,6 +169,7 @@ describe("costs and triggers", () => {
       { on: "cast-spell", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
     ]);
     expect(parseTrigger("Whenever you cycle or discard another card")).toBeNull();
+    expect(parseTrigger("When you sacrifice this Aura")).toEqual([{ on: "sacrifice", who: "you", selfOnly: true }]);
   });
 
   it("an 'or' between whole phrases isn't one filter", () => {

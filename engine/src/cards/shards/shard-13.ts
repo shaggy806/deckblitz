@@ -101,6 +101,7 @@ import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
 import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
 import _poolCavernWhisperer from "../pool/cavern-whisperer.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
+import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
@@ -151,6 +152,7 @@ import _poolDiabolicEdict from "../pool/diabolic-edict.js";
 import _poolDigUpTheBody from "../pool/dig-up-the-body.js";
 import _poolDimensionalExile from "../pool/dimensional-exile.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
+import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
@@ -334,6 +336,7 @@ import _poolMakeMischief from "../pool/make-mischief.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
+import _poolMarchOfTheReturned from "../pool/march-of-the-returned.js";
 import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
 import _poolMarshalsPathcruiser from "../pool/marshals-pathcruiser.js";
@@ -482,6 +485,7 @@ import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
+import _poolShipbreakerKraken from "../pool/shipbreaker-kraken.js";
 import _poolShorikaiGenesisEngine from "../pool/shorikai-genesis-engine.js";
 import _poolShortBow from "../pool/short-bow.js";
 import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
@@ -759,6 +763,7 @@ const shard: CardShard = {
     _poolCavernOfSouls,
     _poolCavernWhisperer,
     _poolCelestialUnicorn,
+    _poolChainedToTheRocks,
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
     _poolClamorShaman,
@@ -809,6 +814,7 @@ const shard: CardShard = {
     _poolDigUpTheBody,
     _poolDimensionalExile,
     _poolDivergentEquation,
+    _poolDivinerSpirit,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
     _poolDragonlordAtarka,
@@ -992,6 +998,7 @@ const shard: CardShard = {
     _poolMalametBrawler,
     _poolMalametVeteran,
     _poolMaraudingBrinefang,
+    _poolMarchOfTheReturned,
     _poolMarduAscendancy,
     _poolMarshGas,
     _poolMarshalsPathcruiser,
@@ -1140,6 +1147,7 @@ const shard: CardShard = {
     _poolSenselessRage,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
+    _poolShipbreakerKraken,
     _poolShorikaiGenesisEngine,
     _poolShortBow,
     _poolShredderUnrelenting,
