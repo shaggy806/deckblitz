@@ -206,6 +206,7 @@ import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExcavator from "../pool/excavator.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
+import _poolExhumerThrull from "../pool/exhumer-thrull.js";
 import _poolExperimentOne from "../pool/experiment-one.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
 import _poolExuberantFuseling from "../pool/exuberant-fuseling.js";
@@ -954,6 +955,7 @@ const shard: CardShard = {
     _poolEverythingPizza,
     _poolExcavator,
     _poolExecutionersHood,
+    _poolExhumerThrull,
     _poolExperimentOne,
     _poolExplorersCache,
     _poolExuberantFuseling,

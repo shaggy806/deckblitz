@@ -57,6 +57,7 @@ import _poolBayFalcon from "../pool/bay-falcon.js";
 import _poolBeardedAxe from "../pool/bearded-axe.js";
 import _poolBeastKinRanger from "../pool/beast-kin-ranger.js";
 import _poolBeetlebackChief from "../pool/beetleback-chief.js";
+import _poolBelfrySpirit from "../pool/belfry-spirit.js";
 import _poolBelladonnaTook from "../pool/belladonna-took.js";
 import _poolBishopsSoldier from "../pool/bishops-soldier.js";
 import _poolBlackMarketTycoon from "../pool/black-market-tycoon.js";
@@ -856,6 +857,7 @@ const shard: CardShard = {
     _poolBeardedAxe,
     _poolBeastKinRanger,
     _poolBeetlebackChief,
+    _poolBelfrySpirit,
     _poolBelladonnaTook,
     _poolBishopsSoldier,
     _poolBlackMarketTycoon,

@@ -556,6 +556,7 @@ import _poolShivanPhoenix from "../pool/shivan-phoenix.js";
 import _poolShoalSerpent from "../pool/shoal-serpent.js";
 import _poolShockingSharpshooter from "../pool/shocking-sharpshooter.js";
 import _poolShorelineLooter from "../pool/shoreline-looter.js";
+import _poolSiegeOfTowers from "../pool/siege-of-towers.js";
 import _poolSiegebreakerGiant from "../pool/siegebreaker-giant.js";
 import _poolSigiledSwordOfValeron from "../pool/sigiled-sword-of-valeron.js";
 import _poolSilverKnight from "../pool/silver-knight.js";
@@ -688,6 +689,7 @@ import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
 import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
+import _poolVacuumelt from "../pool/vacuumelt.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
 import _poolVault12TheNecropolis from "../pool/vault-12-the-necropolis.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
@@ -1316,6 +1318,7 @@ const shard: CardShard = {
     _poolShoalSerpent,
     _poolShockingSharpshooter,
     _poolShorelineLooter,
+    _poolSiegeOfTowers,
     _poolSiegebreakerGiant,
     _poolSigiledSwordOfValeron,
     _poolSilverKnight,
@@ -1448,6 +1451,7 @@ const shard: CardShard = {
     _poolUnsparingBoltcaster,
     _poolUnstoppableOgre,
     _poolUroTitanOfNaturesWrath,
+    _poolVacuumelt,
     _poolVampiricTouch,
     _poolVault12TheNecropolis,
     _poolVenomSliver,

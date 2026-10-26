@@ -139,6 +139,7 @@ import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
 import _poolCrevasse from "../pool/crevasse.js";
 import _poolCripplingBlight from "../pool/crippling-blight.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
+import _poolCryOfContrition from "../pool/cry-of-contrition.js";
 import _poolCryptoplasm from "../pool/cryptoplasm.js";
 import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
 import _poolCunningRhetoric from "../pool/cunning-rhetoric.js";
@@ -668,6 +669,7 @@ import _poolTomeOfTheGuildpact from "../pool/tome-of-the-guildpact.js";
 import _poolTophGreatestEarthbender from "../pool/toph-greatest-earthbender.js";
 import _poolTowerOfCalamities from "../pool/tower-of-calamities.js";
 import _poolTowerWinder from "../pool/tower-winder.js";
+import _poolTrainOfThought from "../pool/train-of-thought.js";
 import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
@@ -893,6 +895,7 @@ const shard: CardShard = {
     _poolCrevasse,
     _poolCripplingBlight,
     _poolCripplingFear,
+    _poolCryOfContrition,
     _poolCryptoplasm,
     _poolCrystallineCrawler,
     _poolCunningRhetoric,
@@ -1422,6 +1425,7 @@ const shard: CardShard = {
     _poolTophGreatestEarthbender,
     _poolTowerOfCalamities,
     _poolTowerWinder,
+    _poolTrainOfThought,
     _poolTrainedOrgg,
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,

@@ -254,6 +254,7 @@ import _poolGiantBadger from "../pool/giant-badger.js";
 import _poolGiantKiller from "../pool/giant-killer.js";
 import _poolGiantTortoise from "../pool/giant-tortoise.js";
 import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
+import _poolGigadrowse from "../pool/gigadrowse.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
@@ -560,6 +561,7 @@ import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
+import _poolSeizeTheSoul from "../pool/seize-the-soul.js";
 import _poolSekkiSeasonsGuide from "../pool/sekki-seasons-guide.js";
 import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
 import _poolSensorSplicer from "../pool/sensor-splicer.js";
@@ -1025,6 +1027,7 @@ const shard: CardShard = {
     _poolGiantKiller,
     _poolGiantTortoise,
     _poolGiftOfCompleation,
+    _poolGigadrowse,
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
@@ -1331,6 +1334,7 @@ const shard: CardShard = {
     _poolSeaLegs,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
+    _poolSeizeTheSoul,
     _poolSekkiSeasonsGuide,
     _poolSelvalaExplorerReturned,
     _poolSensorSplicer,

@@ -2324,6 +2324,26 @@ export function parseFace(face, ctx = {}) {
       out.kicker = { ...out.kicker, reduceGeneric: Number(m[1]) };
       continue;
     }
+    // Replicate [cost] (rule 702.56a): a multikicker by another name; the
+    // engine copies the spell once per payment as it's cast.
+    if (isSpell && (m = /^Replicate ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.kicker = { cost: m[1], keyword: "replicate", multi: true };
+      continue;
+    }
+    // Haunt (rule 702.55a): the `haunt()` / `hauntSpell()` helpers' trigger.
+    // Its "when the creature it haunts dies" sentence stays a person's.
+    if (line === "Haunt") {
+      out.triggered.push({
+        trigger: isSpell ? { on: "this-resolved-into-graveyard" } : { on: "dies", who: "self" },
+        targets: ["creature"],
+        effect: { kind: "exile", target: "trigger-object", haunting: 0 },
+        resolve: null,
+        text: isSpell
+          ? "Haunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)"
+          : "Haunt (When this creature dies, exile it haunting target creature.)",
+      });
+      continue;
+    }
     // Squad [cost] (rule 702.157a): a multikicker by another name, and its enters trigger (`squadTrigger`).
     if ((m = /^Squad ((?:\{[^}]+\})+)$/.exec(line))) {
       out.kicker = { cost: m[1], multi: true, keyword: "squad" };

@@ -572,6 +572,23 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(squad.kicker).toEqual({ cost: "{2}", multi: true, keyword: "squad" });
     expect(squad.triggered[0].effect).toEqual({ kind: "create-token-copy", of: "source", count: 1, perTimeKicked: true });
+    // Replicate (rule 702.56a): a multikicker the engine copies the spell for.
+    expect(
+      face(
+        "Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)",
+        "Instant",
+        {},
+      ).kicker,
+    ).toEqual({ cost: "{1}{R}", keyword: "replicate", multi: true });
+    // Haunt (rule 702.55a): the dies trigger, or the resolved spell's.
+    expect(face("Haunt (When this creature dies, exile it haunting target creature.)").triggered[0]).toMatchObject({
+      trigger: { on: "dies", who: "self" },
+      effect: { kind: "exile", target: "trigger-object", haunting: 0 },
+    });
+    expect(
+      face("Haunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)", "Sorcery", {})
+        .triggered[0].trigger,
+    ).toEqual({ on: "this-resolved-into-graveyard" });
     // Rad counters (rule 728).
     expect(face("When this creature enters, target player gets two rad counters.").triggered[0].effect).toEqual({
       kind: "add-player-counters",

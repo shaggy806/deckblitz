@@ -580,6 +580,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Warrior Token (Valor's Reach Tag Team)",
   "Warrior Token (Vigilance)",
   "Wasp Token",
+  "Weird Token",
   "Whale Token (Reef Worm)",
   "White Citizen Token",
   "Wicked Role Token",

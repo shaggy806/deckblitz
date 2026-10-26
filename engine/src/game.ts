@@ -13403,6 +13403,7 @@ export class Game {
       );
     }
     if (kicked && def.kicker?.keyword === "gift") this.queueGift(player, cardId, priorityTo);
+    if (kicked && def.kicker?.keyword === "replicate") this.queueReplicate(player, cardId);
     this.queueCasualty(player, cardId, priorityTo);
     this.queueConspire(player, cardId, priorityTo);
     this.afterPlayerAction(priorityTo);
@@ -13584,7 +13585,7 @@ export class Game {
    * targets for the copy" (rules 702.153a, 702.78a), triggered as the cost
    * is paid. It's of no card's ability list, so it carries its own record,
    * as a mana-spend rider does. */
-  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string): void {
+  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string, count = 1): void {
     this.state.pendingTriggers.push({
       sourceObjectId: spell.id,
       cardName: printedCardName(spell),
@@ -13603,10 +13604,26 @@ export class Game {
         source: spell.id,
         sourceName: printedCardName(spell),
         targets: [],
-        effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true },
+        effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true, ...(count !== 1 ? { count } : {}) },
         text,
       },
     });
+  }
+
+  /**
+   * Replicate (rule 702.56a): "when you cast this spell, if a replicate cost
+   * was paid for it, copy it for each time its replicate cost was paid. If
+   * the spell has any targets, you may choose new targets for any of the
+   * copies" — one trigger making every copy, the count the multikicker-style
+   * cost's (`timesKicked`), fixed as it was paid.
+   */
+  private queueReplicate(player: PlayerId, spellId: ObjectId): void {
+    const spell = this.state.objects[spellId];
+    if (spell === undefined || spell.zone !== "stack") return;
+    const times = spell.timesKicked ?? 1;
+    if (times <= 0) return;
+    const text = `Replicate — copy ${nameOf(spell)} for each time its replicate cost was paid (${times}). You may choose new targets for the copies.`;
+    this.queuePaidCostCopy(spell, player, text, `replicate-${this.state.nextObjectSeq}`, times);
   }
 
   /**
@@ -18074,10 +18091,37 @@ export class Game {
         // flashback too, it's exiled instead (`moveObject`, 702.34a).
         this.moveObject(id, "hand");
       } else {
+        const controller = object.controller;
         this.moveObject(id, def.exileOnResolve ? "exile" : "graveyard");
+        if (this.state.objects[id]?.zone === "graveyard") this.queueHauntSpell(id, controller);
       }
       object.targets = null;
     }
+  }
+
+  /**
+   * Haunt on an instant or sorcery (rule 702.55a): "when this spell is put
+   * into a graveyard during its resolution, exile it haunting target
+   * creature" — its `this-resolved-into-graveyard` ability, queued as the
+   * card lands there, controlled by whoever controlled the spell. The card
+   * is its trigger object in that graveyard stint (rule 400.7: a card that
+   * has left the graveyard by then isn't exiled).
+   */
+  private queueHauntSpell(id: ObjectId, controller: PlayerId): void {
+    const card = this.state.objects[id];
+    if (card === undefined) return;
+    const name = printedCardName(card);
+    this.registry.get(name).triggered.forEach((ability, abilityIndex) => {
+      if (ability.trigger.on !== "this-resolved-into-graveyard") return;
+      this.state.pendingTriggers.push({
+        sourceObjectId: id,
+        cardName: name,
+        abilityIndex,
+        controller,
+        triggerObject: id,
+        lastKnownRefs: { triggerObjectAfterLeaving: card.zoneChangeCount ?? 0 },
+      });
+    });
   }
 
   /**
@@ -19050,6 +19094,16 @@ export class Game {
         graveyardOnly.add(id);
       }
     }
+    // Haunt (rule 702.55c): a card exiled haunting a creature watches for
+    // that creature's death from exile, with that ability alone.
+    const hauntOnly = new Set<ObjectId>();
+    if (event.type === "permanent-left-battlefield") {
+      for (const id of this.state.zones.shared.exile) {
+        if (this.state.objects[id]?.haunting === undefined) continue;
+        candidates.add(id);
+        hauntOnly.add(id);
+      }
+    }
     const leaving = isLeaveEvent(event);
     for (const id of candidates) {
       const live = this.state.objects[id];
@@ -19106,6 +19160,7 @@ export class Game {
         if (lost === true) return;
         if (onlyEminence && ability.fromCommandZone !== true) return;
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
+        if (hauntOnly.has(id) !== (ability.trigger.on === "haunted-dies")) return;
         if (onlyThisCast && ability.trigger.on !== "this-cast") return;
         if (onlyThisCycled && ability.trigger.on !== "this-cycled") return;
         if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
@@ -20517,6 +20572,20 @@ export class Game {
         );
       case "this-plotted":
         return event.type === "card-plotted" && event.object === self.id;
+      case "haunted-dies": {
+        // Rule 702.55b: the object its haunt ability targeted, in the stint
+        // it was haunted in, put into a graveyard from the battlefield.
+        const haunted = self.zone === "exile" ? self.haunting : undefined;
+        return (
+          haunted !== undefined &&
+          event.type === "permanent-left-battlefield" &&
+          event.toZone === "graveyard" &&
+          event.object === haunted.object &&
+          this.state.objects[haunted.object]?.lastKnown?.zoneChangeCount === haunted.zoneChangeCount
+        );
+      }
+      case "this-resolved-into-graveyard":
+        return false;
       case "evidence-collected":
         return event.type === "evidence-collected" && event.player === self.controller;
       case "discovers":
@@ -22739,6 +22808,12 @@ export class Game {
         }
         this.returnToHandByEffect(target, true, from ?? "battlefield", source);
       },
+      markHaunting: (card, creature) => {
+        const exiled = this.state.objects[card];
+        const haunted = this.state.objects[creature];
+        if (exiled?.zone !== "exile" || haunted === undefined) return;
+        exiled.haunting = { object: creature, zoneChangeCount: haunted.zoneChangeCount ?? 0 };
+      },
       exileObject: (target, untilSourceLeaves, withCounters, mayCast, linked, airbend) => {
         if (untilSourceLeaves === true) {
           // Rule 610.3a/b: exiled "until" something that has already happened
@@ -24147,8 +24222,10 @@ export class Game {
         // a creature mustn't change what the filter matches mid-loop), and a
         // token stack is animated whole, like any mass effect's.
         const timestamp = this.freshTimestamp();
-        const kept = { ...opts, duration: lastingHere(opts.duration) };
+        const { exceptSource, ...rest } = opts;
+        const kept = { ...rest, duration: lastingHere(opts.duration) };
         for (const id of this.battlefieldMatching(controller, filter)) {
+          if (exceptSource === true && id === source) continue;
           this.animate({ kind: "object", object: id }, kept, false, timestamp);
         }
       },
@@ -37403,6 +37480,8 @@ export class Game {
     object.exiledUntil = undefined;
     // And who exiled it ("cards you exiled" — Haldan): that was this stint.
     object.exiledByPlayer = undefined;
+    // And the creature it haunted (rule 702.55b).
+    delete object.haunting;
     // Likewise a delayed flicker return's link (Norin the Wary, rule 610.3).
     object.flickerLink = undefined;
     object.entersWithCounters = undefined;

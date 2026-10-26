@@ -1880,6 +1880,23 @@ export type TriggerSpec =
        * exile, where plotting put it, and only for this card. */
       readonly on: "this-plotted";
     }
+  | {
+      /** Haunt (rule 702.55): "when **the creature it haunts** dies" — the
+       * creature this card was exiled haunting (`GameObject.haunting`), put
+       * into a graveyard from the battlefield in that stint, whether or not
+       * it's still a creature (702.55b). It triggers from exile, and only
+       * there (702.55c); a card of this kind contributes nothing else from
+       * exile. */
+      readonly on: "haunted-dies";
+    }
+  | {
+      /** Haunt on an instant or sorcery (rule 702.55a): "when this spell is
+       * put into a graveyard during its resolution" — not when it's
+       * countered or fizzles. Never matched off an event: the engine queues
+       * it as the resolved spell lands in its owner's graveyard. The
+       * `hauntSpell()` helper. */
+      readonly on: "this-resolved-into-graveyard";
+    }
   /** Escape hatch: match the raw event yourself. */
   | { readonly on: "predicate"; readonly match: (event: GameEvent) => boolean };
 

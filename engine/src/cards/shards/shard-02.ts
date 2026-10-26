@@ -470,6 +470,7 @@ import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPsychicWhorl from "../pool/psychic-whorl.js";
 import _poolPulseTracker from "../pool/pulse-tracker.js";
 import _poolPyromancersAssault from "../pool/pyromancers-assault.js";
+import _poolPyromatics from "../pool/pyromatics.js";
 import _poolPyrotechnics from "../pool/pyrotechnics.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuestForTheHolyRelic from "../pool/quest-for-the-holy-relic.js";
@@ -1198,6 +1199,7 @@ const shard: CardShard = {
     _poolPsychicWhorl,
     _poolPulseTracker,
     _poolPyromancersAssault,
+    _poolPyromatics,
     _poolPyrotechnics,
     _poolQuantumEntanglement,
     _poolQuestForTheHolyRelic,

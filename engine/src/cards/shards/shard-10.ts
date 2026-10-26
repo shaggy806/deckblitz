@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _pool2Mace from "../pool/2-mace.js";
+import _poolAbsolverThrull from "../pool/absolver-thrull.js";
 import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
@@ -71,6 +72,7 @@ import _poolBlasphemousAct from "../pool/blasphemous-act.js";
 import _poolBleedDry from "../pool/bleed-dry.js";
 import _poolBlightbellyRat from "../pool/blightbelly-rat.js";
 import _poolBlightedGorge from "../pool/blighted-gorge.js";
+import _poolBlindHunter from "../pool/blind-hunter.js";
 import _poolBlisteringFirecat from "../pool/blistering-firecat.js";
 import _poolBlizzardElemental from "../pool/blizzard-elemental.js";
 import _poolBloodOgre from "../pool/blood-ogre.js";
@@ -759,6 +761,7 @@ import _tokensVehicleToken from "../tokens/vehicle-token.js";
 const shard: CardShard = {
   pool: [
     _pool2Mace,
+    _poolAbsolverThrull,
     _poolAbsorbIdentity,
     _poolAbstergoEntertainment,
     _poolAbzanBeastmaster,
@@ -826,6 +829,7 @@ const shard: CardShard = {
     _poolBleedDry,
     _poolBlightbellyRat,
     _poolBlightedGorge,
+    _poolBlindHunter,
     _poolBlisteringFirecat,
     _poolBlizzardElemental,
     _poolBloodOgre,

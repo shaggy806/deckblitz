@@ -67,6 +67,7 @@ import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingElk from "../pool/bellowing-elk.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
+import _poolBenedictionOfMoons from "../pool/benediction-of-moons.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
 import _poolBiomanticMastery from "../pool/biomantic-mastery.js";
 import _poolBitterDownfall from "../pool/bitter-downfall.js";
@@ -454,6 +455,7 @@ import _poolOrcishVeteran from "../pool/orcish-veteran.js";
 import _poolOrderOfTheAlabasterHost from "../pool/order-of-the-alabaster-host.js";
 import _poolOrneryDilophosaur from "../pool/ornery-dilophosaur.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
+import _poolOrzhovEuthanist from "../pool/orzhov-euthanist.js";
 import _poolOrzhovKeyrune from "../pool/orzhov-keyrune.js";
 import _poolOssification from "../pool/ossification.js";
 import _poolOutOfAir from "../pool/out-of-air.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolBelbesPercher,
     _poolBellowingElk,
     _poolBellowingTanglewurm,
+    _poolBenedictionOfMoons,
     _poolBillowingShriekmass,
     _poolBiomanticMastery,
     _poolBitterDownfall,
@@ -1251,6 +1254,7 @@ const shard: CardShard = {
     _poolOrderOfTheAlabasterHost,
     _poolOrneryDilophosaur,
     _poolOrochiLeafcaller,
+    _poolOrzhovEuthanist,
     _poolOrzhovKeyrune,
     _poolOssification,
     _poolOutOfAir,

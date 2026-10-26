@@ -298,6 +298,7 @@ import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
 import _poolGrahaTia from "../pool/graha-tia.js";
 import _poolGraveStrength from "../pool/grave-strength.js";
+import _poolGravenDominator from "../pool/graven-dominator.js";
 import _poolGravetillerWurm from "../pool/gravetiller-wurm.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolGrabbyGiant,
     _poolGrahaTia,
     _poolGraveStrength,
+    _poolGravenDominator,
     _poolGravetillerWurm,
     _poolGreatGildedBoat,
     _poolGreenDragon,

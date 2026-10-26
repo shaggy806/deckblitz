@@ -742,6 +742,7 @@ import _tokensRedElementalToken31Haste from "../tokens/red-elemental-token-3-1-h
 import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
 import _tokensSwordToken from "../tokens/sword-token.js";
 import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
+import _tokensWeirdToken from "../tokens/weird-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -1486,6 +1487,7 @@ const shard: CardShard = {
     _tokensSpellgorgerWeirdToken,
     _tokensSwordToken,
     _tokensVampireToken11,
+    _tokensWeirdToken,
   ],
 };
 

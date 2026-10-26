@@ -188,6 +188,14 @@ export interface GameObject {
    */
   exiledByPlayer?: PlayerId;
   /**
+   * Haunt (rule 702.55b): this card is in exile haunting this creature — the
+   * one its haunt ability targeted, in that battlefield stint — and its
+   * "when the creature it haunts dies" ability watches for it (the
+   * `haunted-dies` trigger). Set by an `exile` effect's `haunting` after its
+   * move, and cleared by `moveObject` like `exiledByPlayer`.
+   */
+  haunting?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  /**
    * This card is in exile because of a `flicker` whose return is delayed
    * (Norin the Wary), and this names that particular exile — the key its
    * `return-flickered` delayed trigger looks for (rule 610.3). Cleared by

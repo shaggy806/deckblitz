@@ -627,6 +627,7 @@ import _poolThirstingBloodlord from "../pool/thirsting-bloodlord.js";
 import _poolThorGuardianOfMidgard from "../pool/thor-guardian-of-midgard.js";
 import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
+import _poolThunderheads from "../pool/thunderheads.js";
 import _poolThunderingSparkmage from "../pool/thundering-sparkmage.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
 import _poolTillingTreefolk from "../pool/tilling-treefolk.js";
@@ -1364,6 +1365,7 @@ const shard: CardShard = {
     _poolThorGuardianOfMidgard,
     _poolThorinOakenshield,
     _poolThrorsMap,
+    _poolThunderheads,
     _poolThunderingSparkmage,
     _poolTigerClaws,
     _poolTillingTreefolk,

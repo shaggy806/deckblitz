@@ -2939,3 +2939,33 @@ export const godDevotion = (colors: readonly Color[], lessThan: number, text: st
   removeTypes: ["creature"],
   text,
 });
+
+/**
+ * Haunt on a permanent (rule 702.55a): "When this creature dies, exile it
+ * haunting target creature." The card, still that object in the graveyard
+ * it went to (rule 400.7), is exiled and then haunts the target (702.55b —
+ * `GameObject.haunting`); its `haunted-dies` abilities watch for that
+ * creature's death from exile (702.55c). No creature to target, and it
+ * stays in the graveyard.
+ */
+export const haunt = (): TriggeredAbility => ({
+  trigger: { on: "dies", who: "self" },
+  targets: ["creature"],
+  effect: { kind: "exile", target: "trigger-object", haunting: 0 },
+  resolve: null,
+  text: "Haunt (When this creature dies, exile it haunting target creature.)",
+});
+
+/**
+ * Haunt on an instant or sorcery (rule 702.55a): "When this spell card is
+ * put into a graveyard after resolving, exile it haunting target creature" —
+ * queued as the resolved spell lands in its owner's graveyard, never when
+ * it's countered.
+ */
+export const hauntSpell = (): TriggeredAbility => ({
+  trigger: { on: "this-resolved-into-graveyard" },
+  targets: ["creature"],
+  effect: { kind: "exile", target: "trigger-object", haunting: 0 },
+  resolve: null,
+  text: "Haunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)",
+});

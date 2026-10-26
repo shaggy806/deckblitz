@@ -2048,6 +2048,14 @@ export type EffectSpec =
        * as it's exiled, there. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
       /**
+       * Haunt (rule 702.55a): "exile it **haunting target creature**" — the
+       * creature in this target slot, which the exiled card then haunts
+       * (702.55b — `GameObject.haunting`, read by its `haunted-dies`
+       * trigger). With `"trigger-object"` (a creature's dies trigger, the
+       * `haunt()` helper) or the resolved spell card (`hauntSpell()`).
+       */
+      readonly haunting?: number;
+      /**
        * Exile **until this source leaves the battlefield** (Banishing Light,
        * Conclave Tribunal — rule 610.3): the card returns, under its owner's
        * control, as a one-shot effect right after the source leaves — no
@@ -4309,6 +4317,9 @@ export type EffectSpec =
       readonly addSubtypes?: readonly string[];
       readonly keywords?: readonly Keyword[];
       readonly duration: PtDuration;
+      /** "Each **other** creature" — not the effect's own permanent (Graven
+       * Dominator). Read from exile (a haunt trigger), nothing is left out. */
+      readonly exceptSource?: boolean;
     }
   | {
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
@@ -6283,6 +6294,10 @@ export interface EffectApi {
     /** Airbend it (rule 701.65a) — see the `exile` effect's `airbend`. */
     airbend?: boolean,
   ): void;
+  /** Haunt (rule 702.55b): `card`, just exiled by this effect, haunts
+   * `creature` — in the battlefield stint it's in now. Nothing unless the
+   * card is in exile. */
+  markHaunting(card: ObjectId, creature: ObjectId): void;
   /** See the `"return-exiled-by-source"` {@link EffectSpec}.
    * Returns `true` when it stopped to ask an "as this enters" choice first
    * (rule 614.12 — a Clone's copy): nothing has moved, and the step runs
@@ -6983,6 +6998,7 @@ export interface EffectApi {
       readonly addSubtypes: readonly string[];
       readonly keywords: readonly Keyword[];
       readonly duration: PtDuration;
+      readonly exceptSource?: boolean;
     },
   ): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
@@ -9475,6 +9491,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) {
         ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true,
           spec.airbend === true);
+        const haunted = spec.haunting === undefined ? undefined : ctx.targets[spec.haunting];
+        if (haunted?.kind === "object" && target.kind === "object") ctx.markHaunting(target.object, haunted.object);
       }
       return;
     }
@@ -10672,6 +10690,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         addSubtypes: spec.addSubtypes ?? [],
         keywords: spec.keywords ?? [],
         duration: spec.duration,
+        ...(spec.exceptSource === true ? { exceptSource: true } : {}),
       });
       return;
     case "create-token":

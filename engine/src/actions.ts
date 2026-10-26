@@ -1069,7 +1069,7 @@ export type LegalAction =
        * variant that waterbends, with `kickerCost` its `{N}`), `"bargain"`
        * (702.166a: the variant that sacrifices an artifact, enchantment or
        * token — which, asked once it's cast; `kickerCost` empty). */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback";
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate";
       /** A variant that pays a granted offspring cost as well (Zinnia) —
        * echoed back as the action's `offspring`; `offspringCost` for
        * labelling. */

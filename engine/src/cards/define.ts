@@ -2576,8 +2576,17 @@ export interface CardDefinition {
      * resolves": the kicked variant pays it, and the spell goes to its
      * owner's hand instead of the graveyard as it resolves — not when it's
      * countered or fizzles (it doesn't resolve). A mana cost only.
+     *
+     * `"replicate"` (rule 702.56a) is "as an additional cost to cast this
+     * spell, you may pay [cost] any number of times" and "when you cast this
+     * spell, if a replicate cost was paid for it, copy it for each time its
+     * replicate cost was paid. If the spell has any targets, you may choose
+     * new targets for any of the copies": with `multi: true` (the count is
+     * multikicker's), and no `targets` / `effect` of its own — the copies are
+     * the whole difference. The one copy trigger is queued as the spell is
+     * cast (`queueReplicate`).
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -3579,7 +3588,7 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly flash?: boolean;
