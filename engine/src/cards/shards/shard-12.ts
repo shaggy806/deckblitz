@@ -38,6 +38,7 @@ import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
+import _poolAuriokEdgewright from "../pool/auriok-edgewright.js";
 import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
@@ -480,6 +481,7 @@ import _poolProsperity from "../pool/prosperity.js";
 import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtect from "../pool/protect.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
+import _poolPsychicMiasma from "../pool/psychic-miasma.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPunishIgnorance from "../pool/punish-ignorance.js";
@@ -502,6 +504,7 @@ import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
 import _poolRecklessHandling from "../pool/reckless-handling.js";
 import _poolRecklessWurm from "../pool/reckless-wurm.js";
 import _poolReclaim from "../pool/reclaim.js";
+import _poolReduceToDreams from "../pool/reduce-to-dreams.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
@@ -779,6 +782,7 @@ const shard: CardShard = {
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
     _poolAuratog,
+    _poolAuriokEdgewright,
     _poolAuronsInspiration,
     _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
@@ -1221,6 +1225,7 @@ const shard: CardShard = {
     _poolProstheticInjector,
     _poolProtect,
     _poolProtegesAwakening,
+    _poolPsychicMiasma,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
     _poolPunishIgnorance,
@@ -1243,6 +1248,7 @@ const shard: CardShard = {
     _poolRecklessHandling,
     _poolRecklessWurm,
     _poolReclaim,
+    _poolReduceToDreams,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
     _poolResearchThief,

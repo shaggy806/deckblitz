@@ -426,10 +426,12 @@ import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
+import _poolNagaoBoundByHonor from "../pool/nagao-bound-by-honor.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
 import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
 import _poolNaturesChant from "../pool/natures-chant.js";
+import _poolNecrogenCenser from "../pool/necrogen-censer.js";
 import _poolNefaroxOverlordOfGrixis from "../pool/nefarox-overlord-of-grixis.js";
 import _poolNellyBorcaImpulsiveAccuser from "../pool/nelly-borca-impulsive-accuser.js";
 import _poolNessianWanderer from "../pool/nessian-wanderer.js";
@@ -686,6 +688,7 @@ import _poolTradingPost from "../pool/trading-post.js";
 import _poolTragicFall from "../pool/tragic-fall.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTrialOfKnowledge from "../pool/trial-of-knowledge.js";
+import _poolTrigonOfRage from "../pool/trigon-of-rage.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
 import _poolTrueFaithCenser from "../pool/true-faith-censer.js";
@@ -1228,10 +1231,12 @@ const shard: CardShard = {
     _poolMusesEncouragement,
     _poolMyrSire,
     _poolMyrTurbine,
+    _poolNagaoBoundByHonor,
     _poolNajeelaTheBladeBlossom,
     _poolNaomiPillarOfOrder,
     _poolNaturalize,
     _poolNaturesChant,
+    _poolNecrogenCenser,
     _poolNefaroxOverlordOfGrixis,
     _poolNellyBorcaImpulsiveAccuser,
     _poolNessianWanderer,
@@ -1488,6 +1493,7 @@ const shard: CardShard = {
     _poolTragicFall,
     _poolTreeOfPerdition,
     _poolTrialOfKnowledge,
+    _poolTrigonOfRage,
     _poolTriplicateTitan,
     _poolTroopOfPonies,
     _poolTrueFaithCenser,

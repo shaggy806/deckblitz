@@ -84,6 +84,7 @@ import _poolBoggartTrawler from "../pool/boggart-trawler.js";
 import _poolBoldwyrHeavyweights from "../pool/boldwyr-heavyweights.js";
 import _poolBolgOfTheNorth from "../pool/bolg-of-the-north.js";
 import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
+import _poolBondsOfQuicksilver from "../pool/bonds-of-quicksilver.js";
 import _poolBoonReflection from "../pool/boon-reflection.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
 import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
@@ -260,6 +261,7 @@ import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
+import _poolGhalmasWarden from "../pool/ghalmas-warden.js";
 import _poolGhostfire from "../pool/ghostfire.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGiltLeafAmbush from "../pool/gilt-leaf-ambush.js";
@@ -350,6 +352,7 @@ import _poolJuniperOrderRootweaver from "../pool/juniper-order-rootweaver.js";
 import _poolJunkyardGenius from "../pool/junkyard-genius.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
+import _poolKamiOfTheHonoredDead from "../pool/kami-of-the-honored-dead.js";
 import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
 import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
@@ -419,6 +422,7 @@ import _poolMoroii from "../pool/moroii.js";
 import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
+import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
@@ -766,6 +770,7 @@ import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWindSail from "../pool/wind-sail.js";
+import _poolWingPuncture from "../pool/wing-puncture.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchesEye from "../pool/witches-eye.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
@@ -884,6 +889,7 @@ const shard: CardShard = {
     _poolBoldwyrHeavyweights,
     _poolBolgOfTheNorth,
     _poolBoltOfKeranos,
+    _poolBondsOfQuicksilver,
     _poolBoonReflection,
     _poolBorosLocket,
     _poolBothersomeQuasit,
@@ -1060,6 +1066,7 @@ const shard: CardShard = {
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
     _poolGerminateRecruits,
+    _poolGhalmasWarden,
     _poolGhostfire,
     _poolGildedSentinel,
     _poolGiltLeafAmbush,
@@ -1150,6 +1157,7 @@ const shard: CardShard = {
     _poolJunkyardGenius,
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
+    _poolKamiOfTheHonoredDead,
     _poolKarametrasAcolyte,
     _poolKastralTheWindcrested,
     _poolKataraBendingProdigy,
@@ -1219,6 +1227,7 @@ const shard: CardShard = {
     _poolMorticianBeetle,
     _poolMoxJasper,
     _poolMutantsPrey,
+    _poolMyojinOfSeeingWinds,
     _poolMysticMeditation,
     _poolMysticSnake,
     _poolNantukoTracer,
@@ -1566,6 +1575,7 @@ const shard: CardShard = {
     _poolWildCantor,
     _poolWillowrushVerge,
     _poolWindSail,
+    _poolWingPuncture,
     _poolWirewoodGuardian,
     _poolWitchesEye,
     _poolWitchsVengeance,

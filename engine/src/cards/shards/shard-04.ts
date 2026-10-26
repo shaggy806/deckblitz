@@ -228,6 +228,7 @@ import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
 import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
+import _poolGenjuOfTheFalls from "../pool/genju-of-the-falls.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
@@ -315,6 +316,7 @@ import _poolIrascibleWolverine from "../pool/irascible-wolverine.js";
 import _poolIreOfKaminari from "../pool/ire-of-kaminari.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
+import _poolIshiIshiAkkiCrackshot from "../pool/ishi-ishi-akki-crackshot.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
 import _poolJovialEvil from "../pool/jovial-evil.js";
@@ -345,6 +347,7 @@ import _poolKozileksChanneler from "../pool/kozileks-channeler.js";
 import _poolKruphixsInsight from "../pool/kruphixs-insight.js";
 import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
+import _poolKuonsEssence from "../pool/kuons-essence.js";
 import _poolLabRats from "../pool/lab-rats.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
@@ -363,6 +366,7 @@ import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
+import _poolLongForgottenGohei from "../pool/long-forgotten-gohei.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
 import _poolLotlethTroll from "../pool/lotleth-troll.js";
@@ -506,6 +510,8 @@ import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
 import _poolRuination from "../pool/ruination.js";
 import _poolRunOver from "../pool/run-over.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
+import _poolRuneTailKitsuneAscendant from "../pool/rune-tail-kitsune-ascendant.js";
+import _poolRustTick from "../pool/rust-tick.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSagesRowDenizen from "../pool/sages-row-denizen.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
@@ -535,6 +541,7 @@ import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
 import _poolShapersSanctuary from "../pool/shapers-sanctuary.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
+import _poolShidakoBroodmistress from "../pool/shidako-broodmistress.js";
 import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
@@ -967,6 +974,7 @@ const shard: CardShard = {
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
     _poolGatekeeperGargoyle,
+    _poolGenjuOfTheFalls,
     _poolGeodeRager,
     _poolGhostQuarter,
     _poolGiantCrab,
@@ -1054,6 +1062,7 @@ const shard: CardShard = {
     _poolIreOfKaminari,
     _poolIroassChampion,
     _poolIroncladKrovod,
+    _poolIshiIshiAkkiCrackshot,
     _poolJenovaAncientCalamity,
     _poolJeongJeongTheDeserter,
     _poolJovialEvil,
@@ -1084,6 +1093,7 @@ const shard: CardShard = {
     _poolKruphixsInsight,
     _poolKudoKingAmongBears,
     _poolKuldothaCackler,
+    _poolKuonsEssence,
     _poolLabRats,
     _poolLampadOfDeathsVigil,
     _poolLance,
@@ -1102,6 +1112,7 @@ const shard: CardShard = {
     _poolLivingPhone,
     _poolLoathsomeTroll,
     _poolLongFinnedSkywhale,
+    _poolLongForgottenGohei,
     _poolLoomingSpires,
     _poolLordWindgrace,
     _poolLotlethTroll,
@@ -1245,6 +1256,8 @@ const shard: CardShard = {
     _poolRuination,
     _poolRunOver,
     _poolRuneSealedWall,
+    _poolRuneTailKitsuneAscendant,
+    _poolRustTick,
     _poolSHIELDSpyKit,
     _poolSagesRowDenizen,
     _poolSaiMasterThopterist,
@@ -1274,6 +1287,7 @@ const shard: CardShard = {
     _poolShamelessCharlatan,
     _poolShapersSanctuary,
     _poolShelobsAmbush,
+    _poolShidakoBroodmistress,
     _poolShieldWall,
     _poolShimmeringWings,
     _poolShivanReef,

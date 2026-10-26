@@ -17,6 +17,7 @@ import _poolAfiyaGrove from "../pool/afiya-grove.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
 import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
+import _poolAkkiRaider from "../pool/akki-raider.js";
 import _poolAkoumFlameseeker from "../pool/akoum-flameseeker.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
@@ -62,6 +63,7 @@ import _poolBlackCat from "../pool/black-cat.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
+import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
@@ -309,6 +311,7 @@ import _poolIvyDancer from "../pool/ivy-dancer.js";
 import _poolIzoniThousandEyed from "../pool/izoni-thousand-eyed.js";
 import _poolJacesIngenuity from "../pool/jaces-ingenuity.js";
 import _poolJadeheartAttendant from "../pool/jadeheart-attendant.js";
+import _poolJarakuTheInterloper from "../pool/jaraku-the-interloper.js";
 import _poolJayasFirenado from "../pool/jayas-firenado.js";
 import _poolJoinTheDead from "../pool/join-the-dead.js";
 import _poolJubilation from "../pool/jubilation.js";
@@ -378,6 +381,7 @@ import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
 import _poolMoltenRavager from "../pool/molten-ravager.js";
+import _poolMoltenTailMasticore from "../pool/molten-tail-masticore.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
 import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
@@ -424,6 +428,7 @@ import _poolOverwhelmingIntellect from "../pool/overwhelming-intellect.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPainSeer from "../pool/pain-seer.js";
+import _poolPainsmith from "../pool/painsmith.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
@@ -777,6 +782,7 @@ const shard: CardShard = {
     _poolAgathasChampion,
     _poolAgentOfTheIronThrone,
     _poolAirliftChaplain,
+    _poolAkkiRaider,
     _poolAkoumFlameseeker,
     _poolAleshaWhoLaughsAtFate,
     _poolAlliesAtLast,
@@ -822,6 +828,7 @@ const shard: CardShard = {
     _poolBlackWidowAgileAvenger,
     _poolBladeInstructor,
     _poolBladewingTheRisen,
+    _poolBleakCovenVampires,
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodcrazedNeonate,
@@ -1069,6 +1076,7 @@ const shard: CardShard = {
     _poolIzoniThousandEyed,
     _poolJacesIngenuity,
     _poolJadeheartAttendant,
+    _poolJarakuTheInterloper,
     _poolJayasFirenado,
     _poolJoinTheDead,
     _poolJubilation,
@@ -1138,6 +1146,7 @@ const shard: CardShard = {
     _poolMjolnirsMight,
     _poolMoatPiranhas,
     _poolMoltenRavager,
+    _poolMoltenTailMasticore,
     _poolMongooseLizard,
     _poolMonstrousGrowth,
     _poolMoonCircuitHacker,
@@ -1184,6 +1193,7 @@ const shard: CardShard = {
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,
     _poolPainSeer,
+    _poolPainsmith,
     _poolPakoArcaneRetriever,
     _poolParadiseDruid,
     _poolParadoxGardens,

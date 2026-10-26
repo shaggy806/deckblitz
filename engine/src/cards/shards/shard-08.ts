@@ -309,6 +309,7 @@ import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
 import _poolHighspireMantis from "../pool/highspire-mantis.js";
 import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
 import _poolHinterlandSanctifier from "../pool/hinterland-sanctifier.js";
+import _poolHiredMuscle from "../pool/hired-muscle.js";
 import _poolHitMonkey from "../pool/hit-monkey.js";
 import _poolHollowhengeHuntmaster from "../pool/hollowhenge-huntmaster.js";
 import _poolHolyCow from "../pool/holy-cow.js";
@@ -354,6 +355,7 @@ import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js"
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
+import _poolKaisoMemoryOfLoyalty from "../pool/kaiso-memory-of-loyalty.js";
 import _poolKalemneDiscipleOfIroas from "../pool/kalemne-disciple-of-iroas.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
@@ -379,6 +381,8 @@ import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
+import _poolKuonOgreAscendant from "../pool/kuon-ogre-ascendant.js";
+import _poolKuroPitlord from "../pool/kuro-pitlord.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
 import _poolLagonnaBandStoryteller from "../pool/lagonna-band-storyteller.js";
@@ -469,6 +473,7 @@ import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
 import _poolOrderOfWhiteclay from "../pool/order-of-whiteclay.js";
 import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
 import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
+import _poolOtherworldlyJourney from "../pool/otherworldly-journey.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
@@ -686,6 +691,7 @@ import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
 import _poolTsunami from "../pool/tsunami.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
+import _poolTumbleMagnet from "../pool/tumble-magnet.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
@@ -1092,6 +1098,7 @@ const shard: CardShard = {
     _poolHighspireMantis,
     _poolHinterlandHarbor,
     _poolHinterlandSanctifier,
+    _poolHiredMuscle,
     _poolHitMonkey,
     _poolHollowhengeHuntmaster,
     _poolHolyCow,
@@ -1137,6 +1144,7 @@ const shard: CardShard = {
     _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,
+    _poolKaisoMemoryOfLoyalty,
     _poolKalemneDiscipleOfIroas,
     _poolKapow,
     _poolKarganDragonrider,
@@ -1162,6 +1170,8 @@ const shard: CardShard = {
     _poolKomodoRhino,
     _poolKorHookmaster,
     _poolKuldothaFlamefiend,
+    _poolKuonOgreAscendant,
+    _poolKuroPitlord,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
     _poolLagonnaBandStoryteller,
@@ -1252,6 +1262,7 @@ const shard: CardShard = {
     _poolOrderOfWhiteclay,
     _poolOrokuSakiShredderRising,
     _poolOtherworldAtlas,
+    _poolOtherworldlyJourney,
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
@@ -1469,6 +1480,7 @@ const shard: CardShard = {
     _poolTrustworthyScout,
     _poolTsunami,
     _poolTuktukRubblefort,
+    _poolTumbleMagnet,
     _poolTurbulentWilderness,
     _poolTwistReality,
     _poolUltimateGreenGoblin,

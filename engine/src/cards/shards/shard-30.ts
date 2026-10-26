@@ -90,9 +90,11 @@ import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolBuryInBooks from "../pool/bury-in-books.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
 import _poolCallerOfTheUntamed from "../pool/caller-of-the-untamed.js";
+import _poolCallowJushi from "../pool/callow-jushi.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
+import _poolCarapaceForger from "../pool/carapace-forger.js";
 import _poolCastOut from "../pool/cast-out.js";
 import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
@@ -210,6 +212,7 @@ import _poolExhumerThrull from "../pool/exhumer-thrull.js";
 import _poolExperimentOne from "../pool/experiment-one.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
 import _poolExuberantFuseling from "../pool/exuberant-fuseling.js";
+import _poolEzurisBrigade from "../pool/ezuris-brigade.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
 import _poolFalseFloor from "../pool/false-floor.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
@@ -583,6 +586,7 @@ import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
 import _poolSireOfInsanity from "../pool/sire-of-insanity.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
+import _poolSkullmaneBaku from "../pool/skullmane-baku.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
@@ -842,9 +846,11 @@ const shard: CardShard = {
     _poolBuryInBooks,
     _poolCacklingCounterpart,
     _poolCallerOfTheUntamed,
+    _poolCallowJushi,
     _poolCameraLauncher,
     _poolCandyTrail,
     _poolCapsizingWave,
+    _poolCarapaceForger,
     _poolCastOut,
     _poolCaveSense,
     _poolCelestialForce,
@@ -962,6 +968,7 @@ const shard: CardShard = {
     _poolExperimentOne,
     _poolExplorersCache,
     _poolExuberantFuseling,
+    _poolEzurisBrigade,
     _poolFallowEarth,
     _poolFalseFloor,
     _poolFangGuardian,
@@ -1335,6 +1342,7 @@ const shard: CardShard = {
     _poolSilverflameRitual,
     _poolSireOfInsanity,
     _poolSkitteringCicada,
+    _poolSkullmaneBaku,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,

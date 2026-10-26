@@ -36,7 +36,8 @@ export function otherFaceOf(obj: VisibleObject, lookup: FaceLookup): VisibleObje
   return {
     ...defToVisible(other, ownersPrinting ? obj.art : other.art),
     faceName: other.name,
-    faceIsBack: otherIndex > 0,
+    // A flip card's halves share one printed image (rule 710.1).
+    faceIsBack: otherIndex > 0 && !front.flip,
   }
 }
 

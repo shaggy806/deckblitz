@@ -77,6 +77,7 @@ import _poolBrimstoneRoundup from "../pool/brimstone-roundup.js";
 import _poolBringLow from "../pool/bring-low.js";
 import _poolBroadcastRambler from "../pool/broadcast-rambler.js";
 import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
+import _poolBudokaPupil from "../pool/budoka-pupil.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
 import _poolBuriedAlive from "../pool/buried-alive.js";
 import _poolBurningFields from "../pool/burning-fields.js";
@@ -319,6 +320,7 @@ import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInnerChamberGuard from "../pool/inner-chamber-guard.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
+import _poolInstillInfection from "../pool/instill-infection.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
@@ -692,6 +694,7 @@ import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolVacuumelt from "../pool/vacuumelt.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
 import _poolVault12TheNecropolis from "../pool/vault-12-the-necropolis.js";
+import _poolVedalkenCertarch from "../pool/vedalken-certarch.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
 import _poolVenserFerventForger from "../pool/venser-fervent-forger.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
@@ -839,6 +842,7 @@ const shard: CardShard = {
     _poolBringLow,
     _poolBroadcastRambler,
     _poolBruseTarlBoorishHerder,
+    _poolBudokaPupil,
     _poolBurgeoning,
     _poolBuriedAlive,
     _poolBurningFields,
@@ -1081,6 +1085,7 @@ const shard: CardShard = {
     _poolIngeniousArtillerist,
     _poolInnerChamberGuard,
     _poolInspiredFire,
+    _poolInstillInfection,
     _poolInterdisciplinaryMascot,
     _poolInundatedArchive,
     _poolInvasionOfXerex,
@@ -1454,6 +1459,7 @@ const shard: CardShard = {
     _poolVacuumelt,
     _poolVampiricTouch,
     _poolVault12TheNecropolis,
+    _poolVedalkenCertarch,
     _poolVenomSliver,
     _poolVenserFerventForger,
     _poolViciousConquistador,

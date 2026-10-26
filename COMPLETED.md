@@ -86,6 +86,23 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Flip cards, the rest of Betrayers of Kamigawa — Betrayers is whole — and Champions of
+  Kamigawa's 52 most-played** (batch 207, the third middle walk, 2026-10-26,
+  `mechanic:flip-cards`): **built** flip cards (rule 710 — `flip: true` halves, the `flip` effect,
+  the flipped status a copy reads by its own status, 707.3; `put-onto-battlefield`'s `flipped`;
+  `flip-cards.test.ts`), taught to the scaffolder, and authored 14 of the 20 flip cards across
+  Saviors, Betrayers and Champions (the ki cycle, Jushi Apprentice, Budoka Gardener, Orochi
+  Eggwatcher, Initiate of Blood, Akki Lavarunner, Student of Elements, Homura, Kuon, Rune-Tail).
+  80 authored with Iname, Death Aspect, the Myojin of Seeing Winds, Night's Reach, Life's Web and
+  Infinite Rage, Night of Souls' Betrayal and Uyo, by five `card-author` agents and the lead; 39
+  blocked (`B207.json`), splice's non-mana costs and temporary protection leading.
+- **The rest of Scars of Mirrodin — Scars of Mirrodin is whole, and the newest-first walk's range
+  with it** (batch 204, the newest-first walk, 2026-10-26): no feature built; an engine fix: a
+  static's metalcraft condition counts its own artifact (Chrome Steed, Etched Champion and
+  Razorfield Rhino needed three *other* artifacts). 40 of the 48 left authored — Rusted Relic,
+  Molten-Tail Masticore, Tumble Magnet, the Trigons, Painsmith, Embersmith, Lifesmith, Rust Tick,
+  Heavy Arbalest, Psychic Miasma, Glint Hawk Idol — by three `card-author` agents; 8 blocked
+  (`B204.json`). Every set from Reality Fracture back to Scars of Mirrodin is whole.
 - **Mirrodin Besieged whole and Scars of Mirrodin's next 50** (batch 199, the newest-first walk,
   2026-10-26): no feature built; a divided amount now survives a decision mid-resolution (Kuldotha
   Flamefiend), and Ashmouth Hound and Inferno Elemental trigger when blocked too. 82 of 104

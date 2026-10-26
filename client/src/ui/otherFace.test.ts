@@ -92,6 +92,15 @@ describe('otherFaceOf', () => {
     expect(otherFaceOf(defToVisible(fireIce), more)).toBeNull()
   })
 
+  it("shows a flip card's other half from the same printed image (rule 710.1)", () => {
+    const faces = ['Jushi Apprentice', 'Tomoya the Revealer']
+    const jushi = card('Jushi Apprentice', { faces, flip: true })
+    const tomoya = card('Tomoya the Revealer', { faces, flip: true, supertypes: ['legendary'] })
+    const other = otherFaceOf({ ...defToVisible(jushi), faceName: 'Jushi Apprentice' }, lookupOf(jushi, tomoya))
+    expect(other?.faceName).toBe('Tomoya the Revealer')
+    expect(other?.faceIsBack).toBe(false)
+  })
+
   it('is null for a one-faced card, a copy, and before the faces have loaded', () => {
     expect(otherFaceOf(defToVisible(card('Grizzly Bears')), lookup)).toBeNull()
     expect(otherFaceOf(showing(delver, 0, { copyOf: 'Grizzly Bears' }), lookup)).toBeNull()

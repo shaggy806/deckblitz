@@ -761,6 +761,17 @@ export interface GameObject {
    * a DFC has only its front face's characteristics while not on the
    * battlefield or stack). */
   face?: number;
+  /** The flipped status (rules 110.5, 710): set by a `flip` effect, one way
+   * (710.4), and kept through copy effects (110.5c); gone when the permanent
+   * leaves the battlefield. It matters only while its copiable values are a
+   * flip card's — then {@link flippedName} says which half it shows. */
+  flipped?: true;
+  /** While {@link flipped} and its copiable values are a flip card (its own,
+   * a copy effect's or a merged topmost card's), that card's alternative
+   * half (rule 710.1b; 707.3 — a copy's values are modified by the copy's
+   * own status). Recomputed by `Game` whenever it flips or its copiable
+   * values change; {@link printedCardName} reads it first. */
+  flippedName?: string;
   /** The value chosen for `{X}` when this spell was cast (rule 601.2b). Set on
    * the stack object and preserved onto the permanent it becomes, because the
    * permanent's own enters-the-battlefield replacement ("enters with X
@@ -4585,9 +4596,9 @@ export const faceName = (object: GameObject): string => {
   return faces[object.face ?? 0] ?? object.cardName;
 };
 
-/** The card name whose printed characteristics this object currently has — the
- * one it's a copy of (rule 707 / layer 1), else its up face (rule 712), else
- * its own. Every `registry.get` for an object's name, cost, colors, types or
+/** The card name whose printed characteristics this object currently has — a
+ * flipped flip card's alternative half (rule 710.1b), else the one it's a copy
+ * of (rule 707 / layer 1), else its up face (rule 712), else its own. Every `registry.get` for an object's name, cost, colors, types or
  * P/T goes through this; one for its abilities goes through
  * {@link rulesTextName}. */
 export const printedCardName = (object: GameObject): string =>
@@ -4595,7 +4606,7 @@ export const printedCardName = (object: GameObject): string =>
     ? FACE_DOWN_CARDS[object.faceDown.kind]
     : object.doors !== undefined && !object.doors.left && !object.doors.right
       ? LOCKED_ROOM
-      : (mergedTopName(object) ?? object.copyOf ?? faceName(object));
+      : (object.flippedName ?? mergedTopName(object) ?? object.copyOf ?? faceName(object));
 
 /** A merged permanent's topmost component's name, when that isn't its own
  * card (rule 730.2a). */

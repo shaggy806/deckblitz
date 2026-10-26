@@ -196,6 +196,7 @@ import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolElementalMastery from "../pool/elemental-mastery.js";
+import _poolEmbersmith from "../pool/embersmith.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
@@ -240,6 +241,7 @@ import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGarzasAssassin from "../pool/garzas-assassin.js";
+import _poolGenjuOfTheFields from "../pool/genju-of-the-fields.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
@@ -529,6 +531,7 @@ import _poolSandStrangler from "../pool/sand-strangler.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
+import _poolScaledHulk from "../pool/scaled-hulk.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
@@ -943,6 +946,7 @@ const shard: CardShard = {
     _poolElderAuntie,
     _poolEldraziConscription,
     _poolElementalMastery,
+    _poolEmbersmith,
     _poolEncampmentKeeper,
     _poolEncouragingAviator,
     _poolEndlessObedience,
@@ -987,6 +991,7 @@ const shard: CardShard = {
     _poolFuneralRites,
     _poolGandalfGoblinsBane,
     _poolGarzasAssassin,
+    _poolGenjuOfTheFields,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
     _poolGhirapurGearcrafter,
@@ -1276,6 +1281,7 @@ const shard: CardShard = {
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
+    _poolScaledHulk,
     _poolScapeshift,
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,

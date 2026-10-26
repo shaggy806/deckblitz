@@ -125,6 +125,7 @@ import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
+import _poolCrawlingFilth from "../pool/crawling-filth.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
@@ -378,6 +379,7 @@ import _poolMerrowLevitator from "../pool/merrow-levitator.js";
 import _poolMesmericGlare from "../pool/mesmeric-glare.js";
 import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
+import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
@@ -518,6 +520,7 @@ import _poolScanTheClouds from "../pool/scan-the-clouds.js";
 import _poolScholarOfStars from "../pool/scholar-of-stars.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
+import _poolScreechingSilcaw from "../pool/screeching-silcaw.js";
 import _poolScroungedScythe from "../pool/scrounged-scythe.js";
 import _poolScurridColony from "../pool/scurrid-colony.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolCourageInCrisis,
     _poolCourtOfIre,
     _poolCowabunga,
+    _poolCrawlingFilth,
     _poolCrimsonHonorGuard,
     _poolCrosissCharm,
     _poolCruelAlliance,
@@ -1116,6 +1120,7 @@ const shard: CardShard = {
     _poolMesmericGlare,
     _poolMidnightHaunting,
     _poolMilitiaBugler,
+    _poolMinamoSightbender,
     _poolMindsDilation,
     _poolMischievousPup,
     _poolMishrasSelfReplicator,
@@ -1256,6 +1261,7 @@ const shard: CardShard = {
     _poolScholarOfStars,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
+    _poolScreechingSilcaw,
     _poolScroungedScythe,
     _poolScurridColony,
     _poolScuzzbackScrapper,

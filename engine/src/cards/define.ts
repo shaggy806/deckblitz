@@ -810,7 +810,8 @@ export type StaticCondition =
    * Wizard among the creatures you control, each a different creature (a
    * changeling fills any one role). `characteristics.ts`'s `partySizeOf`. */
   | { readonly kind: "full-party" }
-  /** Metalcraft (rule 702.44) — you control three or more artifacts. */
+  /** Metalcraft — you control three or more artifacts, the source among
+   * them when it is one (a static counts its own permanent here). */
   | { readonly kind: "metalcraft" }
   /**
    * A per-turn running total reached `atLeast` (Y'shtola: "if a player lost
@@ -3300,6 +3301,16 @@ export interface CardDefinition {
    * "enters transformed" clause. A modal DFC (`faces` set, `transform` false)
    * is cast by choosing a face and never turns over. Set on both faces. */
   readonly transform: boolean;
+  /** A flip card (rule 710): `faces` is its normal half then its alternative
+   * (upside-down) half, each its own `CardDefinition` with this flag. It is
+   * cast and lives everywhere as its normal half (710.2); a `flip` effect
+   * gives the permanent the flipped status (`GameObject.flipped`), and from
+   * then on it has the alternative half's name, text, type line and P/T
+   * (710.1b). The alternative half is authored with the normal half's mana
+   * cost and colors, which don't change (710.1c). It is not double-faced and
+   * never transforms (a `transform` effect does nothing to it). Set on both
+   * halves. */
+  readonly flip: boolean;
   /** Disturb (rule 702.150 — ROADMAP Phase 10) — a transforming DFC whose back
    * face may be cast from the graveyard for `cost`; a spell so cast is exiled
    * instead of going anywhere else (like flashback), and a permanent back face
@@ -3482,6 +3493,7 @@ const PRINTED_ABILITY: {
   shuffleIntoLibraryOnResolve: (def) => def.shuffleIntoLibraryOnResolve,
   countersPersistAcrossZones: (def) => def.countersPersistAcrossZones,
   transform: false,
+  flip: false,
   disturb: (def) => def.disturb !== null,
   adventure: false,
   omen: false,
@@ -3710,6 +3722,8 @@ interface CardDraft {
   shuffleIntoLibraryOnResolve?: boolean;
   countersPersistAcrossZones?: boolean;
   transform?: boolean;
+  /** See {@link CardDefinition.flip}. */
+  flip?: true;
   split?: boolean;
   divided?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true };
   disturb?: { readonly cost: string };
@@ -3928,6 +3942,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     shuffleIntoLibraryOnResolve: draft.shuffleIntoLibraryOnResolve ?? false,
     countersPersistAcrossZones: draft.countersPersistAcrossZones ?? false,
     transform: draft.transform ?? false,
+    flip: draft.flip === true,
     disturb: draft.disturb ?? null,
     adventure: draft.adventure ?? false,
     omen: draft.omen ?? false,

@@ -223,6 +223,7 @@ import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
 import _poolFlashCounter from "../pool/flash-counter.js";
 import _poolFlensingRaptor from "../pool/flensing-raptor.js";
+import _poolFleshAllergy from "../pool/flesh-allergy.js";
 import _poolFlesh from "../pool/flesh.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
@@ -292,6 +293,7 @@ import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolHuntingPack from "../pool/hunting-pack.js";
 import _poolHydrolash from "../pool/hydrolash.js";
 import _poolIcefeatherAven from "../pool/icefeather-aven.js";
+import _poolIchigaWhoTopplesOaks from "../pool/ichiga-who-topples-oaks.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
 import _poolIkiralOutrider from "../pool/ikiral-outrider.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
@@ -634,11 +636,13 @@ import _poolSylvanReclamation from "../pool/sylvan-reclamation.js";
 import _poolSylvanScavenging from "../pool/sylvan-scavenging.js";
 import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
+import _poolTakenosCavalry from "../pool/takenos-cavalry.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
 import _poolTeferisHonorGuard from "../pool/teferis-honor-guard.js";
+import _poolTelJiladFallen from "../pool/tel-jilad-fallen.js";
 import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
@@ -701,6 +705,7 @@ import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
+import _poolVulshokReplica from "../pool/vulshok-replica.js";
 import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
 import _poolWarOracle from "../pool/war-oracle.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
@@ -980,6 +985,7 @@ const shard: CardShard = {
     _poolFlaringCinder,
     _poolFlashCounter,
     _poolFlensingRaptor,
+    _poolFleshAllergy,
     _poolFlesh,
     _poolFlexibleWaterbender,
     _poolFlightDeckCoordinator,
@@ -1049,6 +1055,7 @@ const shard: CardShard = {
     _poolHuntingPack,
     _poolHydrolash,
     _poolIcefeatherAven,
+    _poolIchigaWhoTopplesOaks,
     _poolIchorclawMyr,
     _poolIkiralOutrider,
     _poolIlluminatedWings,
@@ -1391,11 +1398,13 @@ const shard: CardShard = {
     _poolSylvanScavenging,
     _poolSynchronizedCharge,
     _poolSyrGwynHeroOfAshvale,
+    _poolTakenosCavalry,
     _poolTamiyosJournal,
     _poolTarPitcher,
     _poolTeamAvatar,
     _poolTectonicGiant,
     _poolTeferisHonorGuard,
+    _poolTelJiladFallen,
     _poolTeleminPerformance,
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
@@ -1458,6 +1467,7 @@ const shard: CardShard = {
     _poolVoltaicWhip,
     _poolVowToErebor,
     _poolVulshokMorningstar,
+    _poolVulshokReplica,
     _poolWarMachineAvengingArsenal,
     _poolWarOracle,
     _poolWardenOfEvosIsle,

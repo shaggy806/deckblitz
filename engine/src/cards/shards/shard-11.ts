@@ -95,6 +95,7 @@ import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
 import _poolCabalPaladin from "../pool/cabal-paladin.js";
 import _poolCabalRitual from "../pool/cabal-ritual.js";
 import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
+import _poolCallToGlory from "../pool/call-to-glory.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
 import _poolCamaraderie from "../pool/camaraderie.js";
 import _poolCapashenTemplar from "../pool/capashen-templar.js";
@@ -119,6 +120,7 @@ import _poolCitanulFlute from "../pool/citanul-flute.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
 import _poolCivicStalwart from "../pool/civic-stalwart.js";
 import _poolClamavus from "../pool/clamavus.js";
+import _poolClashOfRealities from "../pool/clash-of-realities.js";
 import _poolClayRevenant from "../pool/clay-revenant.js";
 import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
 import _poolCloakedCadet from "../pool/cloaked-cadet.js";
@@ -588,6 +590,7 @@ import _poolSoldeviGolem from "../pool/soldevi-golem.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
+import _poolSoratamiMirrorMage from "../pool/soratami-mirror-mage.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
@@ -693,6 +696,7 @@ import _poolUrabrasksForge from "../pool/urabrasks-forge.js";
 import _poolUrborgElf from "../pool/urborg-elf.js";
 import _poolUrnOfGodfire from "../pool/urn-of-godfire.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
+import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
 import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
@@ -852,6 +856,7 @@ const shard: CardShard = {
     _poolCabalPaladin,
     _poolCabalRitual,
     _poolCabarettiCourtyard,
+    _poolCallToGlory,
     _poolCallerOfGales,
     _poolCamaraderie,
     _poolCapashenTemplar,
@@ -876,6 +881,7 @@ const shard: CardShard = {
     _poolCitanulStalwart,
     _poolCivicStalwart,
     _poolClamavus,
+    _poolClashOfRealities,
     _poolClayRevenant,
     _poolClifftopRetreat,
     _poolCloakedCadet,
@@ -1345,6 +1351,7 @@ const shard: CardShard = {
     _poolSolkanarTheSwampKing,
     _poolSomnomancer,
     _poolSongOfFreyalise,
+    _poolSoratamiMirrorMage,
     _poolSorinRavenousNeonate,
     _poolSoulOfInnistrad,
     _poolSowingMycospawn,
@@ -1450,6 +1457,7 @@ const shard: CardShard = {
     _poolUrborgElf,
     _poolUrnOfGodfire,
     _poolUthrosTitanicGodcore,
+    _poolUyoSilentProphet,
     _poolVaultOfWhispers,
     _poolVedalkenOutlander,
     _poolVengeantEarth,

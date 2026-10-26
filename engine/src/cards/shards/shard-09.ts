@@ -642,6 +642,7 @@ import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSwiftWarkite from "../pool/swift-warkite.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
+import _poolSylvokLifestaff from "../pool/sylvok-lifestaff.js";
 import _poolSynchronousSliver from "../pool/synchronous-sliver.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
 import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
@@ -1416,6 +1417,7 @@ const shard: CardShard = {
     _poolSwiftWarkite,
     _poolSylvanAwakening,
     _poolSylvanScrying,
+    _poolSylvokLifestaff,
     _poolSynchronousSliver,
     _poolSythisHarvestsHand,
     _poolTabletOfEpityr,
