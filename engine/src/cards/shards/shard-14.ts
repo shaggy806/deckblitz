@@ -252,6 +252,7 @@ import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
 import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
 import _poolGigantomancer from "../pool/gigantomancer.js";
+import _poolGilderBairn from "../pool/gilder-bairn.js";
 import _poolGladeWatcher from "../pool/glade-watcher.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
@@ -431,6 +432,7 @@ import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick
 import _poolPanacea from "../pool/panacea.js";
 import _poolParasiticGrasp from "../pool/parasitic-grasp.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
+import _poolPatrolSignaler from "../pool/patrol-signaler.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
@@ -923,6 +925,7 @@ const shard: CardShard = {
     _poolGideonsCompany,
     _poolGiftOfTusks,
     _poolGigantomancer,
+    _poolGilderBairn,
     _poolGladeWatcher,
     _poolGliderStaff,
     _poolGlimpseTheCore,
@@ -1102,6 +1105,7 @@ const shard: CardShard = {
     _poolPanacea,
     _poolParasiticGrasp,
     _poolParasiticImpetus,
+    _poolPatrolSignaler,
     _poolPearledUnicorn,
     _poolPegasusGuardian,
     _poolPerilousShadow,

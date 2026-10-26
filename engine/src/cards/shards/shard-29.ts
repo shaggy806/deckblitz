@@ -207,6 +207,7 @@ import _poolFiligreeAngel from "../pool/filigree-angel.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
 import _poolFirebreathing from "../pool/firebreathing.js";
+import _poolFlameJab from "../pool/flame-jab.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
 import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
@@ -900,6 +901,7 @@ const shard: CardShard = {
     _poolFinalDeath,
     _poolFinalVengeance,
     _poolFirebreathing,
+    _poolFlameJab,
     _poolFlamebraider,
     _poolFlamecacheGecko,
     _poolFlayerOfLoyalties,

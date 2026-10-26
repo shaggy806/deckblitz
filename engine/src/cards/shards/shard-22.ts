@@ -345,6 +345,7 @@ import _poolMitoticSlime from "../pool/mitotic-slime.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMonsoon from "../pool/monsoon.js";
+import _poolMonstrify from "../pool/monstrify.js";
 import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
 import _poolMouthFeed from "../pool/mouth-feed.js";
@@ -467,6 +468,7 @@ import _poolSacrifice from "../pool/sacrifice.js";
 import _poolSakashimasStudent from "../pool/sakashimas-student.js";
 import _poolSamwiseGamgee from "../pool/samwise-gamgee.js";
 import _poolSanguineStatuette from "../pool/sanguine-statuette.js";
+import _poolSavageConception from "../pool/savage-conception.js";
 import _poolSavvyHunter from "../pool/savvy-hunter.js";
 import _poolSawItComing from "../pool/saw-it-coming.js";
 import _poolScaleTheHeights from "../pool/scale-the-heights.js";
@@ -637,6 +639,7 @@ import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
+import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
@@ -1026,6 +1029,7 @@ const shard: CardShard = {
     _poolMizziumMortars,
     _poolMoltenVortex,
     _poolMonsoon,
+    _poolMonstrify,
     _poolMourningPatrol,
     _poolMouseTrapper,
     _poolMouthFeed,
@@ -1148,6 +1152,7 @@ const shard: CardShard = {
     _poolSakashimasStudent,
     _poolSamwiseGamgee,
     _poolSanguineStatuette,
+    _poolSavageConception,
     _poolSavvyHunter,
     _poolSawItComing,
     _poolScaleTheHeights,
@@ -1318,6 +1323,7 @@ const shard: CardShard = {
     _poolWarehouseTabby,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
+    _poolWavesOfAggression,
     _poolWebUp,
     _poolWelkinTern,
     _poolWhisperingShade,

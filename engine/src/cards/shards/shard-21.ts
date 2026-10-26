@@ -437,6 +437,7 @@ import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
 import _poolRaphLeoSiblingRivals from "../pool/raph-leo-sibling-rivals.js";
 import _poolRaphaelTheNightwatcher from "../pool/raphael-the-nightwatcher.js";
 import _poolRathiTrapper from "../pool/rathi-trapper.js";
+import _poolRavensCrime from "../pool/ravens-crime.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolRaphLeoSiblingRivals,
     _poolRaphaelTheNightwatcher,
     _poolRathiTrapper,
+    _poolRavensCrime,
     _poolRazortoothRats,
     _poolReaveSoul,
     _poolRedHerring,

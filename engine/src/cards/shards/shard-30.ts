@@ -555,6 +555,7 @@ import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
 import _poolSpiritBonds from "../pool/spirit-bonds.js";
+import _poolSpittingImage from "../pool/spitting-image.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -574,6 +575,7 @@ import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
+import _poolSyphonLife from "../pool/syphon-life.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
 import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
@@ -1237,6 +1239,7 @@ const shard: CardShard = {
     _poolSpireMonitor,
     _poolSpirePatrol,
     _poolSpiritBonds,
+    _poolSpittingImage,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,
@@ -1256,6 +1259,7 @@ const shard: CardShard = {
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
+    _poolSyphonLife,
     _poolTaintedSigil,
     _poolTajicBladeOfTheLegion,
     _poolTajuruStalwart,

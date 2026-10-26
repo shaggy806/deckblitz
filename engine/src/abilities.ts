@@ -192,6 +192,11 @@ export interface AbilityCost {
   readonly mana: string | null;
   /** Whether `{T}` (tap this permanent) is part of the cost. */
   readonly tap: boolean;
+  /** Whether `{Q}` (untap this permanent — rule 107.6) is part of the cost:
+   * payable only while the source is tapped, and a creature's only once it
+   * has been under its controller's control since their most recent turn
+   * began (302.6). Not for mana abilities, whose payment never untaps. */
+  readonly untap?: boolean;
   /** A sacrifice that is part of the cost, or `undefined` for none. */
   readonly sacrifice?: SacrificeCost;
   /** Life to pay as part of the cost (Greed: "Pay 2 life"). Rule 118.4 — a

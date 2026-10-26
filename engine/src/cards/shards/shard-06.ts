@@ -103,6 +103,7 @@ import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
 import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
+import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
@@ -777,6 +778,7 @@ const shard: CardShard = {
     _poolCaradoraHeartOfAlacria,
     _poolCasualtiesOfWar,
     _poolCazurRuthlessStalker,
+    _poolCennsEnlistment,
     _poolCentaurHealer,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,

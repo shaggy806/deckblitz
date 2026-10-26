@@ -2183,6 +2183,15 @@ export class Game {
       out.push(...this.castSpellActions(player, card, cardName, def, { via: "harmonize", costString: def.harmonize.cost }));
     }
 
+    // Retrace (rule 702.81a) — a card with retrace in this player's
+    // graveyard, for its mana cost and a land card discarded from hand.
+    for (const card of this.state.zones.perPlayer[player].graveyard) {
+      const cardName = this.state.objects[card].cardName;
+      const def = this.registry.get(cardName);
+      if (!def.retrace) continue;
+      out.push(...this.castSpellActions(player, card, cardName, def, { via: "retrace", costString: def.manaCost }));
+    }
+
     // Aftermath (rule 702.127a) — a split card's aftermath half may be cast
     // from its owner's graveyard, for its mana cost.
     for (const card of this.state.zones.perPlayer[player].graveyard) {
@@ -3456,7 +3465,9 @@ export class Game {
         // Jump-start rides the flashback cast: label it as printed.
         ...(via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "jump-start"
           ? { altCostText: "jump-start, discarding a card" }
-          : {}),
+          : via === "retrace"
+            ? { altCostText: "retrace, discarding a land card" }
+            : {}),
         ...(free ? { free: true } : {}),
         ...(harmonizeTap !== undefined
           ? {
@@ -4032,6 +4043,9 @@ export class Game {
   /** What an airbended card is cast for "rather than paying its mana cost"
    * (rule 701.65a). */
   static readonly AIRBEND_COST = "{2}";
+
+  /** The card retrace discards (rule 702.81a): "a land card". */
+  static readonly RETRACE_DISCARD: CardFilter = { types: ["land"] };
 
   /** How many earlier departures' snapshots a card keeps besides its
    * latest (`GameObject.earlierLastKnown`): enough for an ability to outlive
@@ -10726,6 +10740,8 @@ export class Game {
         ? (this.flashbackOf(cardId, graveyardGrant)?.cost ?? null)
         : via === "harmonize"
         ? (def.harmonize?.cost ?? null)
+        : via === "retrace"
+        ? def.manaCost
         : // Mayhem (rule 702.187b): its cost; with none, its mana cost (702.187c).
           via === "mayhem"
           ? (this.mayhemCostOf(cardId) ?? def.manaCost)
@@ -11035,7 +11051,16 @@ export class Game {
         return `${def.name} isn't a spell this lets ${player} cast`;
       }
     }
-    if (via === "harmonize") {
+    if (via === "retrace") {
+      // Rule 702.81a — from the caster's graveyard, discarding a land card.
+      if (!def.retrace) return `${def.name} does not have retrace`;
+      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+        return `${def.name} is not in ${player}'s graveyard`;
+      }
+      if (this.discardCandidates(player, Game.RETRACE_DISCARD).length === 0) {
+        return `${player} has no land card to discard for ${def.name}'s retrace`;
+      }
+    } else if (via === "harmonize") {
       if (def.harmonize === null) return `${def.name} does not have harmonize`;
       if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
@@ -12698,6 +12723,7 @@ export class Game {
     if (
       via === "flashback" ||
       via === "harmonize" ||
+      via === "retrace" ||
       via === "escape" ||
       via === "disturb" ||
       via === "graveyard-permission" ||
@@ -12977,6 +13003,13 @@ export class Game {
         this.discardByEffect({ kind: "player", player }, flashbackDiscard);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
+    }
+    // Retrace's land card (rule 702.81a), chosen as the cost is paid.
+    if (via === "retrace") {
+      this.withDecisionSource(cardId, () => {
+        this.discardByEffect({ kind: "player", player }, 1, false, Game.RETRACE_DISCARD);
+      });
+      this.costDiscardPriorityTo(player);
     }
     const costDiscard = def.additionalCost?.discard;
     if (costDiscard !== undefined) {
@@ -14158,6 +14191,18 @@ export class Game {
         return `${def.name} has summoning sickness`;
       }
     }
+    // {Q} (rule 107.6): only a tapped permanent can be untapped to pay it,
+    // and a creature's only once 302.6's summoning sickness is past.
+    if (ability.cost.untap === true) {
+      if (isManaAbility(ability)) return `${def.name}'s {Q} mana ability isn't supported`;
+      if (!source.tapped) return `${def.name} is already untapped`;
+      // A stun counter would replace the untap (rule 122.1d), leaving the
+      // cost unpaid: refused rather than read either way.
+      if ((source.counters.stun ?? 0) > 0) return `${def.name} has a stun counter`;
+      if (this.tapAbilityBlockedBySickness(source)) {
+        return `${def.name} has summoning sickness`;
+      }
+    }
     if (ability.sorcerySpeed) {
       const timing = this.whyNotSorcerySpeed(player, `activate ${def.name}'s ability`);
       if (timing !== null) return timing;
@@ -14520,6 +14565,8 @@ export class Game {
       source.tapped = true;
       this.emit({ type: "permanent-tapped", object: sourceId });
     }
+    // {Q} (rule 107.6): a stunned source was refused above.
+    if (ability.cost.untap === true) this.untapUnlessStunned(sourceId);
     this.tapForWaterbend(waterbent);
     // "Tap five untapped Zombies you control" — see `AbilityCost.tapOthers`.
     // A cost that tapped one permanent remembers it: "the tapped creature's
@@ -15207,6 +15254,8 @@ export class Game {
         ) {
           return;
         }
+        // {Q} isn't paid by a mana payment (`AbilityCost.untap`).
+        if (ability.cost.untap === true) return;
         if (ability.cost.tap) {
           if (!canTap) return;
         } else if (ability.oncePerTurn !== true && (ability.cost.mana === null || ability.cost.sacrifice !== undefined)) {

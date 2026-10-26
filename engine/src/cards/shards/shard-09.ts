@@ -95,6 +95,7 @@ import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
 import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
+import _poolCallTheSkybreaker from "../pool/call-the-skybreaker.js";
 import _poolCall from "../pool/call.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
@@ -795,6 +796,7 @@ const shard: CardShard = {
     _poolBushmasterCoiledHenchman,
     _poolCacophonyScamp,
     _poolCaldaiaGuardian,
+    _poolCallTheSkybreaker,
     _poolCall,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,

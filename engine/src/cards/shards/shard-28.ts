@@ -391,6 +391,7 @@ import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
 import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
+import _poolOonasGrace from "../pool/oonas-grace.js";
 import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
 import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
@@ -1084,6 +1085,7 @@ const shard: CardShard = {
     _poolOctopusForm,
     _poolOmnathLocusOfCreation,
     _poolOonasBlackguard,
+    _poolOonasGrace,
     _poolOozePatrol,
     _poolOrderOfTheEbonHand,
     _poolOsseousSticktwister,
