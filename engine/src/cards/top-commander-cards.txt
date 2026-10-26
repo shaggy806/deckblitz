@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3796 already implemented / 1204 missing (marks refreshed 2026-10-26)
+3798 already implemented / 1202 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -741,7 +741,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   742  Spelunking                               {2}{G}           Enchantment
 [ ]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
 [ ]   744  Champion's Helm                          {3}              Artifact — Equipment
-[ ]   745  Leyline of Anticipation                  {2}{U}{U}        Enchantment
+[x]   745  Leyline of Anticipation                  {2}{U}{U}        Enchantment
 [ ]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
 [x]   747  Thought Monitor                          {6}{U}           Artifact Creature — Construct
 [x]   748  Hellkite Tyrant                          {4}{R}{R}        Creature — Dragon
@@ -3463,7 +3463,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3470  K-9, Mark I                              {U}              Legendary Artifact Creature — Robot Dog
 [x]  3471  Caustic Caterpillar                      {G}              Creature — Insect
 [x]  3472  Alela, Cunning Conqueror                 {2}{U}{B}        Legendary Creature — Faerie Warlock
-[ ]  3473  Leyline of the Void                      {2}{B}{B}        Enchantment
+[x]  3473  Leyline of the Void                      {2}{B}{B}        Enchantment
 [ ]  3474  Didn't Say Please                        {1}{U}{U}        Instant
 [x]  3475  Blasting Station                         {3}              Artifact
 [ ]  3476  Burning Inquiry                          {R}              Sorcery

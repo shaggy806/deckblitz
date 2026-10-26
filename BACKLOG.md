@@ -460,6 +460,7 @@ delete its detail there and move this line to `COMPLETED.md`.
   were built for, but review the first card that uses each. The list is in
   `neededCards-features.md`, "Built ahead", recounted 2026-10-09: about 11 pieces and 14
   optional fields remain. `painIfUntapped` is the one no real card can use.
+- **Phoenix Fleet Airship doubles without end under random play** (2026-10-26, batch 174's `npm run verify`): its end-step "create a token that's a copy of this Vehicle" copies every Airship, so a random controller who sacrifices something each turn (Miren, the Moaning Well) runs the fleet to 161 by turn 109, with 160 copy triggers on the stack each end step and a crew activation per Airship; the new-cards fuzzer's four-player seed 24 (that batch's forced decks) times out past 600 s. The card is right; the fuzzer needs a ceiling (a token-count cap per seat, or `Game.MAX_EFFECT_INSTANCES` counting copies across triggers), or the copy trigger a cheaper path.
 - **Prohibition scans are quadratic.** `abilitiesProhibited`/`prohibitionsOn` rescan the whole
   battlefield on every call, per permanent, and `recomputeControl` rescans for control Auras per
   permanent once anything has a control effect. On a land-heavy board they were 31% of a
