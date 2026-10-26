@@ -164,8 +164,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Its `then` reads the beheld card or permanent as target 0.
   behold: none,
   bolster: none,
-  // Its `then` reads the card it picked as target 0.
-  "choose-random-card": none,
+  // Its `then` reads the card it picked as target 0. A card taken from a
+  // targeted player's graveyard onto your battlefield costs that player it —
+  // Tariel, Reckoner of Souls.
+  "choose-random-card": (n, v) => {
+    if (typeof n.whose === "number" && n.then.kind === "put-onto-battlefield" && n.then.underYourControl === true) {
+      v.touch(n.whose, "harm", MINOR);
+    }
+  },
   "empower-jace": none,
   damage: (n, v) => {
     v.touch(n.target, "harm", MAJOR);
@@ -703,6 +709,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
   if ((def.subtypes ?? []).includes("Curse")) return "harm";
   let harm = false;
   let help = false;
+  let vowed = false;
   for (const ability of def.static ?? []) {
     if (ability.affects.scope !== "attached") continue;
     // Goad is the point of an Aura that goads: its pump is the consolation
@@ -737,17 +744,25 @@ export function auraPolarity(def: CardDefinition): Polarity {
     }
     if (ability.grantPtPerCount !== undefined) help = true;
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
-    if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
+    if (ability.doesntUntap === true) harm = true;
+    if (ability.cantAttackController === true) vowed = true;
     if (ability.prohibits !== undefined) harm = true;
   }
+  // "Can't attack you" costs nothing on your own creature, so it harms only
+  // an Aura that gives nothing else: a Vow's +2/+2 and keyword make it yours
+  // to put on your own (Vow of Duty, Vow of Flight).
+  if (vowed && !help) harm = true;
   // Nothing in its statics: what its own "enchanted creature" triggers do to
   // that creature — Bestial Fury's "+4/+0 and trample when it becomes
   // blocked", False Demise's "return that card under your control".
   if (!harm && !help) {
     for (const ability of def.triggered ?? []) {
       // Any trigger that destroys what it enchants — Yoke of the Damned's
-      // "when a creature dies, destroy enchanted creature".
-      if (ability.effect?.kind === "destroy" && ability.effect.target === "attached") harm = true;
+      // "when a creature dies, destroy enchanted creature" — or has its
+      // controller sacrifice it, among other things: Parasitic Implant's upkeep
+      // "enchanted creature's controller sacrifices it and you create a Myr".
+      const steps = ability.effect?.kind === "sequence" ? ability.effect.effects : ability.effect ? [ability.effect] : [];
+      if (steps.some((e) => (e.kind === "destroy" || e.kind === "sacrifice-target") && e.target === "attached")) harm = true;
       if (!("who" in ability.trigger) || ability.trigger.who !== "attached") continue;
       // The enchanted permanent's controller pays — Corrupted Roots' "whenever
       // enchanted land becomes tapped, its controller loses 2 life".

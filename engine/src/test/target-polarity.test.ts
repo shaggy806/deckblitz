@@ -132,6 +132,16 @@ describe("slot polarity", () => {
     expect(cast("Verdant Haven")).toEqual(["help"]);
     expect(cast("Murder Investigation")).toEqual(["help"]);
     expect(cast("Dying Wish")).toEqual(["help"]);
+    // A sacrifice of what it enchants inside a sequence.
+    expect(cast("Parasitic Implant")).toEqual(["harm"]);
+    // "Can't attack you" costs nothing on your own creature: a Vow is help,
+    // an Aura that gives nothing with it (Spectral Grasp) harm.
+    expect(cast("Vow of Flight")).toEqual(["help"]);
+    expect(cast("Spectral Grasp")).toEqual(["harm"]);
+  });
+
+  it("reads a random card taken from a player's graveyard onto your battlefield as harm to them", () => {
+    expect(activated("Tariel, Reckoner of Souls", 0)).toEqual(["harm"]);
   });
 
   it("reads a delayed 'when it dies, return it' as a save", () => {
