@@ -1,0 +1,673 @@
+{
+ "batch": "B181",
+ "status": "complete",
+ "ranks": "Tempest (TMP, 1997-10-14): the rest of the set, 88 cards (oldest-first walk); Licids built, with Stronghold's six Licids it unblocked",
+ "authored": [
+  {
+   "name": "Angelic Protector",
+   "files": [
+    "engine/src/cards/pool/angelic-protector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anoint",
+   "files": [
+    "engine/src/cards/pool/anoint.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Apes of Rath",
+   "files": [
+    "engine/src/cards/pool/apes-of-rath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armor Sliver",
+   "files": [
+    "engine/src/cards/pool/armor-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avenging Angel",
+   "files": [
+    "engine/src/cards/pool/avenging-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barbed Sliver",
+   "files": [
+    "engine/src/cards/pool/barbed-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bellowing Fiend",
+   "files": [
+    "engine/src/cards/pool/bellowing-fiend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calming Licid",
+   "files": [
+    "engine/src/cards/pool/calming-licid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of Protection: Shadow",
+   "files": [
+    "engine/src/cards/pool/circle-of-protection-shadow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Commander Greven il-Vec",
+   "files": [
+    "engine/src/cards/pool/commander-greven-il-vec.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Convulsing Licid",
+   "files": [
+    "engine/src/cards/pool/convulsing-licid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Corrupting Licid",
+   "files": [
+    "engine/src/cards/pool/corrupting-licid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crazed Armodon",
+   "files": [
+    "engine/src/cards/pool/crazed-armodon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadshot",
+   "files": [
+    "engine/src/cards/pool/deadshot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dominating Licid",
+   "files": [
+    "engine/src/cards/pool/dominating-licid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread of Night",
+   "files": [
+    "engine/src/cards/pool/dread-of-night.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enraging Licid",
+   "files": [
+    "engine/src/cards/pool/enraging-licid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Excavator",
+   "files": [
+    "engine/src/cards/pool/excavator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flailing Drake",
+   "files": [
+    "engine/src/cards/pool/flailing-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flowstone Sculpture",
+   "files": [
+    "engine/src/cards/pool/flowstone-sculpture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fool's Tome",
+   "files": [
+    "engine/src/cards/pool/fools-tome.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fylamarid",
+   "files": [
+    "engine/src/cards/pool/fylamarid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gliding Licid",
+   "files": [
+    "engine/src/cards/pool/gliding-licid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Havoc",
+   "files": [
+    "engine/src/cards/pool/havoc.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imps' Taunt",
+   "files": [
+    "engine/src/cards/pool/imps-taunt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invulnerability",
+   "files": [
+    "engine/src/cards/pool/invulnerability.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kezzerdrix",
+   "files": [
+    "engine/src/cards/pool/kezzerdrix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kindle",
+   "files": [
+    "engine/src/cards/pool/kindle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krakilin",
+   "files": [
+    "engine/src/cards/pool/krakilin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leeching Licid",
+   "files": [
+    "engine/src/cards/pool/leeching-licid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magmasaur",
+   "files": [
+    "engine/src/cards/pool/magmasaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindwhip Sliver",
+   "files": [
+    "engine/src/cards/pool/mindwhip-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Cannon",
+   "files": [
+    "engine/src/cards/pool/mogg-cannon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Conscripts",
+   "files": [
+    "engine/src/cards/pool/mogg-conscripts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Hollows",
+   "files": [
+    "engine/src/cards/pool/mogg-hollows.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mogg Squad",
+   "files": [
+    "engine/src/cards/pool/mogg-squad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nurturing Licid",
+   "files": [
+    "engine/src/cards/pool/nurturing-licid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Opportunist",
+   "files": [
+    "engine/src/cards/pool/opportunist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pegasus Refuge",
+   "files": [
+    "engine/src/cards/pool/pegasus-refuge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quickening Licid",
+   "files": [
+    "engine/src/cards/pool/quickening-licid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rathi Dragon",
+   "files": [
+    "engine/src/cards/pool/rathi-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reality Anchor",
+   "files": [
+    "engine/src/cards/pool/reality-anchor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Renegade Warlord",
+   "files": [
+    "engine/src/cards/pool/renegade-warlord.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sarcomancy",
+   "files": [
+    "engine/src/cards/pool/sarcomancy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scalding Tongs",
+   "files": [
+    "engine/src/cards/pool/scalding-tongs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Segmented Wurm",
+   "files": [
+    "engine/src/cards/pool/segmented-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serene Offering",
+   "files": [
+    "engine/src/cards/pool/serene-offering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Servant of Volrath",
+   "files": [
+    "engine/src/cards/pool/servant-of-volrath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shadowstorm",
+   "files": [
+    "engine/src/cards/pool/shadowstorm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyshroud Condor",
+   "files": [
+    "engine/src/cards/pool/skyshroud-condor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyshroud Vampire",
+   "files": [
+    "engine/src/cards/pool/skyshroud-vampire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spike Drone",
+   "files": [
+    "engine/src/cards/pool/spike-drone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spinal Graft",
+   "files": [
+    "engine/src/cards/pool/spinal-graft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit Mirror",
+   "files": [
+    "engine/src/cards/pool/spirit-mirror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stinging Licid",
+   "files": [
+    "engine/src/cards/pool/stinging-licid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tahngarth's Rage",
+   "files": [
+    "engine/src/cards/pool/tahngarths-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempting Licid",
+   "files": [
+    "engine/src/cards/pool/tempting-licid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thalakos Dreamsower",
+   "files": [
+    "engine/src/cards/pool/thalakos-dreamsower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thalakos Lowlands",
+   "files": [
+    "engine/src/cards/pool/thalakos-lowlands.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thalakos Mistfolk",
+   "files": [
+    "engine/src/cards/pool/thalakos-mistfolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thumbscrews",
+   "files": [
+    "engine/src/cards/pool/thumbscrews.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unstable Shapeshifter",
+   "files": [
+    "engine/src/cards/pool/unstable-shapeshifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vec Townships",
+   "files": [
+    "engine/src/cards/pool/vec-townships.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warmth",
+   "files": [
+    "engine/src/cards/pool/warmth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Wurm",
+   "files": [
+    "engine/src/cards/pool/wild-wurm.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Meditate",
+   "needs": [
+    "effect:skip-next-turn"
+   ],
+   "why": "\"You skip your next turn\" — nothing makes a player skip a turn"
+  },
+  {
+   "name": "Dracoplasm",
+   "needs": [
+    "effect:sacrifice-any-number",
+    "static:pt-from-sacrificed-total"
+   ],
+   "why": "sacrifice any number of creatures as it enters, its P/T their total power and toughness"
+  },
+  {
+   "name": "Essence Bottle",
+   "needs": [
+    "cost:remove-all-counters"
+   ],
+   "why": "remove all the counters as a cost — removeCounter's count is a number or x, which could remove fewer"
+  },
+  {
+   "name": "Knight of Dawn",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "protection from the color of your choice until end of turn"
+  },
+  {
+   "name": "No Quarter",
+   "needs": [
+    "filter:power-relative-to-trigger-creature"
+   ],
+   "why": "a blocker with lesser power than the creature it blocks — blocked-by takes a fixed number"
+  },
+  {
+   "name": "Wall of Diffusion",
+   "needs": [
+    "static:block-as-though-shadow"
+   ],
+   "why": "can block creatures with shadow as though it had shadow"
+  },
+  {
+   "name": "Sea Monster",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless the defending player controls an Island"
+  },
+  {
+   "name": "Escaped Shapeshifter",
+   "needs": [
+    "filter:has-protection-from-color"
+   ],
+   "why": "protection from any color an opponent's creature has protection from — no filter for a creature's protection"
+  },
+  {
+   "name": "Pallimud",
+   "needs": [
+    "amount:count-for-chosen-player"
+   ],
+   "why": "power the number of tapped lands the opponent chosen as it enters controls"
+  },
+  {
+   "name": "Duplicity",
+   "needs": [
+    "effect:exile-top-face-down-linked",
+    "effect:exile-from-hand-face-down-linked",
+    "trigger:lose-control-trigger"
+   ],
+   "why": "face-down linked exile, the hand swap with it, and \"when you lose control of this\""
+  },
+  {
+   "name": "Soltari Guerrillas",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "its next combat damage to an opponent dealt to target creature instead"
+  },
+  {
+   "name": "Volrath's Curse",
+   "needs": [
+    "mechanic:sacrifice-to-ignore-effect"
+   ],
+   "why": "the enchanted creature's controller may sacrifice a permanent to ignore this Aura until end of turn"
+  },
+  {
+   "name": "Watchdog",
+   "needs": [
+    "static:must-block-each-combat",
+    "condition:creature-attacking-you"
+   ],
+   "why": "blocks each combat if able; creatures attacking you get -1/-0 while it's untapped"
+  },
+  {
+   "name": "Cursed Scroll",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a card, then reveal one at random from your hand"
+  },
+  {
+   "name": "Pit Imp",
+   "needs": [
+    "cost:activate-no-more-than-n-times-each-turn"
+   ],
+   "why": "activate no more than twice each turn"
+  },
+  {
+   "name": "Heartwood Dryad",
+   "needs": [
+    "static:block-as-though-shadow"
+   ],
+   "why": "can block creatures with shadow as though it had shadow"
+  },
+  {
+   "name": "Hand to Hand",
+   "needs": [
+    "effect:prohibit-non-mana-abilities"
+   ],
+   "why": "no instants or non-mana activated abilities during combat — the prohibition would stop mana abilities too"
+  },
+  {
+   "name": "Phyrexian Grimoire",
+   "needs": [
+    "effect:top-card-of-graveyard",
+    "effect:opponent-chooses-from-graveyard"
+   ],
+   "why": "an opponent chooses one of the top two cards of your graveyard"
+  },
+  {
+   "name": "Lobotomy",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "exile every card with the chosen card's name from graveyard, hand and library"
+  },
+  {
+   "name": "Fugitive Druid",
+   "needs": [
+    "trigger:becomes-target-by-aura-spell"
+   ],
+   "why": "whenever it becomes the target of an Aura spell"
+  },
+  {
+   "name": "Trumpeting Armodon",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "target creature blocks this creature this turn if able"
+  },
+  {
+   "name": "Flowstone Salamander",
+   "needs": [
+    "effect:target-creature-blocking-source"
+   ],
+   "why": "target creature blocking it — CardFilter.blocking means blocking anything"
+  },
+  {
+   "name": "Precognition",
+   "needs": [
+    "effect:look-at-top-of-target-players-library"
+   ],
+   "why": "look at the top card of target opponent's library, may put it on the bottom"
+  },
+  {
+   "name": "Echo Chamber",
+   "needs": [
+    "decision:opponent-chooses-target"
+   ],
+   "why": "an opponent chooses target creature they control"
+  },
+  {
+   "name": "Scorched Earth",
+   "needs": [
+    "cost:discard-x-cost",
+    "cost:additional-cost-discard-filter"
+   ],
+   "why": "as an additional cost, discard X land cards"
+  },
+  {
+   "name": "Sacred Guide",
+   "needs": [
+    "effect:reveal-until-rest-exile"
+   ],
+   "why": "reveal until a white card, exile the rest"
+  },
+  {
+   "name": "Mounted Archers",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature this turn"
+  },
+  {
+   "name": "Safeguard",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent all combat damage target creature would deal this turn"
+  },
+  {
+   "name": "Canyon Drake",
+   "needs": [
+    "cost:discard-at-random"
+   ],
+   "why": "discard a card at random as a cost"
+  }
+ ]
+}

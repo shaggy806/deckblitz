@@ -117,9 +117,11 @@ section keeps only what to do next.
   leading with 11 — `docs/card-blockers.md`'s batch 175 has the 404.3 design question); batch 178
   Tempest's first half (its 90 most-played of 178 left), on buyback (`kicker.keyword: "buyback"`,
   mana costs only; 69 authored with six buyback cards from earlier batches, 30 blocked, nothing
-  shared by more than two). **Next, the rest of Tempest** (88 left, ranked last: five agents —
-  shadow and buyback are built; licids aren't, `mechanic:licid`), then Stronghold (82) and
-  Exodus (93); Portal (1997-05-01, 63 left, Portal Second Age 50) sits in this range too and was
+  shared by more than two); batch 181 the rest of Tempest (88), on Licids (`become-licid-aura`
+  and the `end-licid-effect` special action; 59 authored with Stronghold's six Licids, 29 blocked,
+  "can block as though it had shadow" the only need shared, by two). Tempest is whole. **Next,
+  Stronghold** (77 left: shadow, buyback and Licids are built; spikes are plain +1/+1-counter
+  cards), then Exodus (93); Portal (1997-05-01, 63 left, Portal Second Age 50) sits in this range too and was
   never named here — take it when the walk passes it or say why not. This walk's range
   ends at Coldsnap (2006-07-21; from 2026-10-26 the middle walk owns Time Spiral on). Leads over the whole pool now:
   graveyard order (`effect:top-creature-card-of-graveyard`/`effect:top-card-of-graveyard` — 14, with rule 404.3's

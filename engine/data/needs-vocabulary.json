@@ -10756,6 +10756,36 @@
   "cost:untap-others": {
    "family": "cost:choose-cards-as-cost",
    "example": "Crackleburr: '{U/R}{U/R}, {Q}, Untap two tapped blue creatures you control' — untapping other permanents as a cost."
+  },
+  "effect:skip-next-turn": {
+   "family": "condition:extra-turn",
+   "example": "Meditate: \"Draw four cards. You skip your next turn.\" — nothing makes a player skip a turn (Time Vault's replacement is another thing)."
+  },
+  "static:pt-from-sacrificed-total": {
+   "family": "effect:sacrifice-any-number",
+   "example": "Dracoplasm: \"As this enters, you may sacrifice any number of creatures. Its power is the total power of the creatures sacrificed this way and its toughness the total toughness.\""
+  },
+  "filter:power-relative-to-trigger-creature": {
+   "family": "bug:trigger-relative-target-filter",
+   "example": "No Quarter: \"Whenever a creature becomes blocked by a creature with lesser power, destroy the blocking creature.\" — the blocked-by filter takes a fixed number only."
+  },
+  "static:block-as-though-shadow": {
+   "family": "keyword:shadow",
+   "example": "Heartwood Dryad, Wall of Diffusion: \"can block creatures with shadow as though it had shadow\" — the shadow block check has no exception."
+  },
+  "filter:has-protection-from-color": {
+   "family": "effect:grant-protection-choice",
+   "example": "Escaped Shapeshifter: \"has … protection from any color as long as an opponent controls a creature with … protection from that color\"."
+  },
+  "mechanic:sacrifice-to-ignore-effect": {
+   "example": "Volrath's Curse: the enchanted creature's controller may sacrifice a permanent to ignore this Aura until end of turn (a special action, rule 116.2d)."
+  },
+  "effect:reveal-until-rest-exile": {
+   "family": "effect:reveal-until",
+   "example": "Sacred Guide: reveal until a white card, put it in your hand and exile the rest — `reveal-until`'s `rest` has no exile."
+  },
+  "keyword:licid": {
+   "example": "The Licids (Tempest, Stronghold): \"{cost}, {T}: This creature loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {cost} to end this effect.\" — built in batch 181 (`become-licid-aura`)."
   }
  }
 }
