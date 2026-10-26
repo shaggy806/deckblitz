@@ -1299,8 +1299,36 @@ export function fitCastTargets(
   options: readonly (readonly TargetRef[])[],
   specs: readonly TargetSpec[],
 ): (TargetRef | null)[] | null {
-  if (legal.targetCount === undefined) return [...chosen];
-  return fitTargetCount(chosen, options, specs, legal.targetCount);
+  const fitted = legal.targetCount === undefined ? [...chosen] : fitTargetCount(chosen, options, specs, legal.targetCount);
+  return fitted === null || legal.reducingTargets === undefined
+    ? fitted
+    : withReducingTarget(fitted, options, legal.reducingTargets);
+}
+
+/**
+ * `chosen` with one of `reducing` among its targets — a spell offered only at
+ * the price its `targetCostReduction` earns (`LegalAction.reducingTargets`):
+ * as it stands if one already is, else the first slot that can take one not
+ * already chosen elsewhere gets the first such. `null` when none can.
+ */
+function withReducingTarget(
+  chosen: (TargetRef | null)[],
+  options: readonly (readonly TargetRef[])[],
+  reducing: readonly ObjectId[],
+): (TargetRef | null)[] | null {
+  const earns = (ref: TargetRef | null): boolean => ref?.kind === "object" && reducing.includes(ref.object);
+  if (chosen.some(earns)) return chosen;
+  const taken = (ref: TargetRef): boolean =>
+    chosen.some((c) => c?.kind === "object" && ref.kind === "object" && c.object === ref.object);
+  for (let i = 0; i < options.length; i += 1) {
+    const pick = options[i].find((ref) => earns(ref) && !taken(ref));
+    if (pick === undefined) continue;
+    const out = [...chosen];
+    while (out.length < i) out.push(null);
+    out[i] = pick;
+    return out;
+  }
+  return null;
 }
 
 function castExtras(

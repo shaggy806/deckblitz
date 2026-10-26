@@ -3360,6 +3360,7 @@ export class Game {
         this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card))),
         () => castableAt(pricedAt).castable,
       );
+      const reducingTargets = this.reducingTargetsNeeded(def, player, card, options, () => castableAt(pricedAt).castable);
       // Rule 601.2c — a spell can't be cast without a legal target for every
       // slot that demands one. An *optional* slot ("up to one target
       // creature") with nothing to point at is simply skipped, so it never
@@ -3670,6 +3671,7 @@ export class Game {
           : {}),
         ...(targetCount !== undefined ? { targetCount } : {}),
         ...(xGroup !== null ? { targetCount: xGroup.targetCount } : {}),
+        ...(reducingTargets !== undefined ? { reducingTargets } : {}),
         ...(xPlan !== null
           ? {
               xCost:
@@ -10006,6 +10008,36 @@ export class Game {
     }
     if (full) return all;
     return all.map((slot, i) => (i === slots[0] ? earning[i] : slot));
+  }
+
+  /** The offered targets that earn `def`'s `targetCostReduction`, when the
+   * spell is affordable only with it (`LegalAction.reducingTargets`): one of
+   * the cast's targets must be among them. Nothing when the full price is
+   * affordable or no target earns it. */
+  private reducingTargetsNeeded(
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    options: readonly (readonly TargetRef[])[],
+    fullPriceCastable: () => boolean,
+  ): ObjectId[] | undefined {
+    if (def.targetCostReduction === null) return undefined;
+    const earning = [
+      ...new Set(
+        options
+          .flat()
+          .flatMap((ref) => (ref.kind === "object" && this.targetsEarnReduction(def, player, cardId, [ref]) ? [ref.object] : [])),
+      ),
+    ];
+    if (earning.length === 0) return undefined;
+    this.targetCostReductionOff = true;
+    let full: boolean;
+    try {
+      full = fullPriceCastable();
+    } finally {
+      this.targetCostReductionOff = false;
+    }
+    return full ? undefined : earning;
   }
 
   /** Whether what `player` would pay for `cardId` depends on how many
