@@ -82,6 +82,7 @@ import _poolBullRushBruiser from "../pool/bull-rush-bruiser.js";
 import _poolBurakosPartyLeader from "../pool/burakos-party-leader.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
 import _poolBuyYourSilence from "../pool/buy-your-silence.js";
+import _poolCacheRaiders from "../pool/cache-raiders.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
@@ -95,6 +96,7 @@ import _poolChainReaction from "../pool/chain-reaction.js";
 import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
 import _poolChaosSpewer from "../pool/chaos-spewer.js";
+import _poolChaoticBacklash from "../pool/chaotic-backlash.js";
 import _poolChargingPaladin from "../pool/charging-paladin.js";
 import _poolChargingTuskodon from "../pool/charging-tuskodon.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
@@ -438,6 +440,7 @@ import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
 import _poolRaphLeoSiblingRivals from "../pool/raph-leo-sibling-rivals.js";
 import _poolRaphaelTheNightwatcher from "../pool/raphael-the-nightwatcher.js";
 import _poolRathiTrapper from "../pool/rathi-trapper.js";
+import _poolRavensCrime from "../pool/ravens-crime.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
@@ -466,6 +469,7 @@ import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
 import _poolScionOfOpulence from "../pool/scion-of-opulence.js";
+import _poolScourgeOfTheNobilis from "../pool/scourge-of-the-nobilis.js";
 import _poolScreamingShield from "../pool/screaming-shield.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
@@ -740,6 +744,7 @@ const shard: CardShard = {
     _poolBurakosPartyLeader,
     _poolBurstOfSpeed,
     _poolBuyYourSilence,
+    _poolCacheRaiders,
     _poolCacklingFiend,
     _poolCadricSoulKindler,
     _poolCanonizedInBlood,
@@ -753,6 +758,7 @@ const shard: CardShard = {
     _poolChampionOfTheWeird,
     _poolChandrasMagmutt,
     _poolChaosSpewer,
+    _poolChaoticBacklash,
     _poolChargingPaladin,
     _poolChargingTuskodon,
     _poolChartACourse,
@@ -1096,6 +1102,7 @@ const shard: CardShard = {
     _poolRaphLeoSiblingRivals,
     _poolRaphaelTheNightwatcher,
     _poolRathiTrapper,
+    _poolRavensCrime,
     _poolRazortoothRats,
     _poolReaveSoul,
     _poolRedHerring,
@@ -1124,6 +1131,7 @@ const shard: CardShard = {
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
     _poolScionOfOpulence,
+    _poolScourgeOfTheNobilis,
     _poolScreamingShield,
     _poolScrubland,
     _poolSculptingSteel,

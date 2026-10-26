@@ -148,6 +148,7 @@ import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
+import _poolDeityOfScars from "../pool/deity-of-scars.js";
 import _poolDeputizedProtester from "../pool/deputized-protester.js";
 import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
@@ -386,6 +387,7 @@ import _poolNaturesEmbrace from "../pool/natures-embrace.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
 import _poolNehebTheWorthy from "../pool/neheb-the-worthy.js";
 import _poolNervousGardener from "../pool/nervous-gardener.js";
+import _poolNettleSentinel from "../pool/nettle-sentinel.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
 import _poolNissaAscendedAnimist from "../pool/nissa-ascended-animist.js";
@@ -452,6 +454,7 @@ import _poolRideTheRails from "../pool/ride-the-rails.js";
 import _poolRimewoodFalls from "../pool/rimewood-falls.js";
 import _poolRipscalePredator from "../pool/ripscale-predator.js";
 import _poolRiseFromTheWreck from "../pool/rise-from-the-wreck.js";
+import _poolRiseOfTheHobgoblins from "../pool/rise-of-the-hobgoblins.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRixMaadiReveler from "../pool/rix-maadi-reveler.js";
@@ -839,6 +842,7 @@ const shard: CardShard = {
     _poolDebtToTheDeathless,
     _poolDeepwoodDenizen,
     _poolDefyGravity,
+    _poolDeityOfScars,
     _poolDeputizedProtester,
     _poolDesertOfTheMindful,
     _poolDesperateLunge,
@@ -1077,6 +1081,7 @@ const shard: CardShard = {
     _poolNeedletoothPack,
     _poolNehebTheWorthy,
     _poolNervousGardener,
+    _poolNettleSentinel,
     _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
     _poolNissaAscendedAnimist,
@@ -1143,6 +1148,7 @@ const shard: CardShard = {
     _poolRimewoodFalls,
     _poolRipscalePredator,
     _poolRiseFromTheWreck,
+    _poolRiseOfTheHobgoblins,
     _poolRitesOfFlourishing,
     _poolRivenTurnbull,
     _poolRixMaadiReveler,

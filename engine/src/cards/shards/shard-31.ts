@@ -429,6 +429,7 @@ import _poolNissaWorldwaker from "../pool/nissa-worldwaker.js";
 import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
+import _poolNucklavee from "../pool/nucklavee.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolNyxbornEidolon from "../pool/nyxborn-eidolon.js";
 import _poolNyxbornTriton from "../pool/nyxborn-triton.js";
@@ -447,6 +448,7 @@ import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
+import _poolOverbeingOfMyth from "../pool/overbeing-of-myth.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
 import _poolPaladinsShield from "../pool/paladins-shield.js";
@@ -588,6 +590,7 @@ import _poolSunspringExpedition from "../pool/sunspring-expedition.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
+import _poolSwirlingSpriggan from "../pool/swirling-spriggan.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
 import _poolSyrFarenTheHengehammer from "../pool/syr-faren-the-hengehammer.js";
 import _poolT45PowerArmor from "../pool/t-45-power-armor.js";
@@ -683,6 +686,7 @@ import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
+import _poolWormHarvest from "../pool/worm-harvest.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
@@ -1142,6 +1146,7 @@ const shard: CardShard = {
     _poolNissasZendikon,
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
+    _poolNucklavee,
     _poolNyxbornBehemoth,
     _poolNyxbornEidolon,
     _poolNyxbornTriton,
@@ -1160,6 +1165,7 @@ const shard: CardShard = {
     _poolOrcishVandal,
     _poolOrderOfTheSacredTorch,
     _poolOrochiSustainer,
+    _poolOverbeingOfMyth,
     _poolOverkill,
     _poolPacifism,
     _poolPaladinsShield,
@@ -1301,6 +1307,7 @@ const shard: CardShard = {
     _poolSuperAdaptoid,
     _poolSurrakDragonclaw,
     _poolSwarmyard,
+    _poolSwirlingSpriggan,
     _poolSylvanSafekeeper,
     _poolSyrFarenTheHengehammer,
     _poolT45PowerArmor,
@@ -1396,6 +1403,7 @@ const shard: CardShard = {
     _poolWipeClean,
     _poolWispweaverAngel,
     _poolWoodlandLiege,
+    _poolWormHarvest,
     _poolWormwoodTreefolk,
     _poolWreckRemover,
     _poolYavimayaSapherd,

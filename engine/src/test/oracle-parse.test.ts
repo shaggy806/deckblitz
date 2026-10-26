@@ -1410,6 +1410,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(stalwart.complete).toBe(true);
   });
 
+  it("retrace and the untap symbol (rules 702.81, 107.6)", () => {
+    const crime = face("Target player discards a card.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)", "Sorcery");
+    expect(crime.retrace).toBe(true);
+    expect(crime.complete).toBe(true);
+    expect(parseCost("{1}{W}, {Q}").cost).toEqual({ mana: "{1}{W}", tap: false, untap: true });
+  });
+
   it("a source of your choice (rule 609.7) and a colour set (layer 5) — Alpha's Circles and Laces", () => {
     const circle = face("{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.", "Enchantment");
     expect(circle.activated[0].effect).toEqual({

@@ -98,6 +98,7 @@ import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
+import _poolCinderPyromancer from "../pool/cinder-pyromancer.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
@@ -268,6 +269,7 @@ import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHanweirMilitiaCaptain from "../pool/hanweir-militia-captain.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
+import _poolHateflayer from "../pool/hateflayer.js";
 import _poolHazoretsFavor from "../pool/hazorets-favor.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
@@ -526,6 +528,7 @@ import _poolSoldierOfTheGreyHost from "../pool/soldier-of-the-grey-host.js";
 import _poolSomberwaldBeastmaster from "../pool/somberwald-beastmaster.js";
 import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
+import _poolSootImp from "../pool/soot-imp.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
 import _poolSoulRead from "../pool/soul-read.js";
 import _poolSoulStairExpedition from "../pool/soul-stair-expedition.js";
@@ -536,6 +539,7 @@ import _poolSpikeJester from "../pool/spike-jester.js";
 import _poolSpinehornMinotaur from "../pool/spinehorn-minotaur.js";
 import _poolSpittingDrake from "../pool/spitting-drake.js";
 import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
+import _poolSpringjackShepherd from "../pool/springjack-shepherd.js";
 import _poolSproutbackTrudge from "../pool/sproutback-trudge.js";
 import _poolStarksIngenuity from "../pool/starks-ingenuity.js";
 import _poolStayHiddenStaySilent from "../pool/stay-hidden-stay-silent.js";
@@ -763,6 +767,7 @@ const shard: CardShard = {
     _poolChandraFlamesCatalyst,
     _poolChangelingOutcast,
     _poolCharitableLevy,
+    _poolCinderPyromancer,
     _poolCinderStrike,
     _poolCircleOfProtectionArtifacts,
     _poolCircleOfTheLandDruid,
@@ -933,6 +938,7 @@ const shard: CardShard = {
     _poolHangarScrounger,
     _poolHanweirMilitiaCaptain,
     _poolHarvesttideInfiltrator,
+    _poolHateflayer,
     _poolHazoretsFavor,
     _poolHeartstringPuller,
     _poolHelionaut,
@@ -1191,6 +1197,7 @@ const shard: CardShard = {
     _poolSomberwaldBeastmaster,
     _poolSomberwaldStag,
     _poolSongOfTotentanz,
+    _poolSootImp,
     _poolSorinTheMirthless,
     _poolSoulRead,
     _poolSoulStairExpedition,
@@ -1201,6 +1208,7 @@ const shard: CardShard = {
     _poolSpinehornMinotaur,
     _poolSpittingDrake,
     _poolSplinterHamatoYoshi,
+    _poolSpringjackShepherd,
     _poolSproutbackTrudge,
     _poolStarksIngenuity,
     _poolStayHiddenStaySilent,

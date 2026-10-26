@@ -209,6 +209,7 @@ import _poolFiligreeAngel from "../pool/filigree-angel.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
 import _poolFirebreathing from "../pool/firebreathing.js";
+import _poolFlameJab from "../pool/flame-jab.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
 import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
@@ -542,6 +543,7 @@ import _poolSpeciesGorger from "../pool/species-gorger.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
+import _poolSpitemare from "../pool/spitemare.js";
 import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpontaneousArtist from "../pool/spontaneous-artist.js";
 import _poolSporeFlower from "../pool/spore-flower.js";
@@ -622,6 +624,7 @@ import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUginsConstruct from "../pool/ugins-construct.js";
 import _poolUlrichsKindred from "../pool/ulrichs-kindred.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
+import _poolUmbralMantle from "../pool/umbral-mantle.js";
 import _poolUnassumingSage from "../pool/unassuming-sage.js";
 import _poolUndercoverCrocodelf from "../pool/undercover-crocodelf.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _poolFinalDeath,
     _poolFinalVengeance,
     _poolFirebreathing,
+    _poolFlameJab,
     _poolFlamebraider,
     _poolFlamecacheGecko,
     _poolFlayerOfLoyalties,
@@ -1243,6 +1247,7 @@ const shard: CardShard = {
     _poolSpiketailHatchling,
     _poolSpinedTyrranax,
     _poolSpiritualGuardian,
+    _poolSpitemare,
     _poolSpittingGourna,
     _poolSpontaneousArtist,
     _poolSporeFlower,
@@ -1323,6 +1328,7 @@ const shard: CardShard = {
     _poolUginsConstruct,
     _poolUlrichsKindred,
     _poolUlvenwaldBear,
+    _poolUmbralMantle,
     _poolUnassumingSage,
     _poolUndercoverCrocodelf,
     _poolUnderseaInvader,

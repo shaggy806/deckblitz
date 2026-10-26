@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
+import _poolAerieOuphes from "../pool/aerie-ouphes.js";
 import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
 import _poolAetherSwooper from "../pool/aether-swooper.js";
@@ -94,6 +95,7 @@ import _poolCaptainVargusWrath from "../pool/captain-vargus-wrath.js";
 import _poolCarnivorousCultivator from "../pool/carnivorous-cultivator.js";
 import _poolCastIntoDarkness from "../pool/cast-into-darkness.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
+import _poolCauldronHaze from "../pool/cauldron-haze.js";
 import _poolCavePeople from "../pool/cave-people.js";
 import _poolCensor from "../pool/censor.js";
 import _poolCerebralConfiscation from "../pool/cerebral-confiscation.js";
@@ -361,6 +363,7 @@ import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
 import _poolMindDrain from "../pool/mind-drain.js";
+import _poolMindwrackLiege from "../pool/mindwrack-liege.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMisterGutsy from "../pool/mister-gutsy.js";
@@ -393,6 +396,7 @@ import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNighthaze from "../pool/nighthaze.js";
+import _poolNightskyMimic from "../pool/nightsky-mimic.js";
 import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
 import _poolNogiDracoZealot from "../pool/nogi-draco-zealot.js";
 import _poolNullChampion from "../pool/null-champion.js";
@@ -691,6 +695,7 @@ const shard: CardShard = {
   pool: [
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
+    _poolAerieOuphes,
     _poolAetherGust,
     _poolAetherHub,
     _poolAetherSwooper,
@@ -780,6 +785,7 @@ const shard: CardShard = {
     _poolCarnivorousCultivator,
     _poolCastIntoDarkness,
     _poolCathedralSanctifier,
+    _poolCauldronHaze,
     _poolCavePeople,
     _poolCensor,
     _poolCerebralConfiscation,
@@ -1047,6 +1053,7 @@ const shard: CardShard = {
     _poolMeticulousCommons,
     _poolMinasMorgulDarkFortress,
     _poolMindDrain,
+    _poolMindwrackLiege,
     _poolMirrorImage,
     _poolMistcutterHydra,
     _poolMisterGutsy,
@@ -1079,6 +1086,7 @@ const shard: CardShard = {
     _poolNeurokStealthsuit,
     _poolNightdrinkerMoroii,
     _poolNighthaze,
+    _poolNightskyMimic,
     _poolNivMizzetTheFiremind,
     _poolNogiDracoZealot,
     _poolNullChampion,

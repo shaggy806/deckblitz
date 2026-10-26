@@ -723,6 +723,8 @@ export function parseCost(text) {
     let m;
     if (MANA.test(part)) cost.mana = part;
     else if (part === "{T}") cost.tap = true;
+    // {Q}, the untap symbol (rule 107.6).
+    else if (part === "{Q}") cost.untap = true;
     else if (part === "Sacrifice ~") cost.sacrifice = "self";
     else if ((m = /^Sacrifice (a|an|another) (.+)$/.exec(part))) {
       const filter = parseTypePhrase(m[2]);
@@ -2145,6 +2147,8 @@ export function parseFace(face, ctx = {}) {
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Cipher (rule 702.99a) — Gatecrash's encoded instants and sorceries.
     if (isSpell && line === "Cipher") { out.cipher = true; continue; }
+    // Retrace (rule 702.81a): cast from the graveyard, discarding a land card.
+    if (isSpell && line === "Retrace") { out.retrace = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
     if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }
     // Sneak [cost] (rule 702.190): an alternative cost in the declare blockers step.

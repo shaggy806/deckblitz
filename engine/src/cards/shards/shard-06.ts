@@ -103,6 +103,7 @@ import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
 import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
+import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
@@ -522,6 +523,7 @@ import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
 import _poolSnowVilliers from "../pool/snow-villiers.js";
 import _poolSonarStrike from "../pool/sonar-strike.js";
+import _poolSoulReap from "../pool/soul-reap.js";
 import _poolSoulSummons from "../pool/soul-summons.js";
 import _poolSoulSwallower from "../pool/soul-swallower.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
@@ -779,6 +781,7 @@ const shard: CardShard = {
     _poolCaradoraHeartOfAlacria,
     _poolCasualtiesOfWar,
     _poolCazurRuthlessStalker,
+    _poolCennsEnlistment,
     _poolCentaurHealer,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,
@@ -1198,6 +1201,7 @@ const shard: CardShard = {
     _poolSnappingGnarlid,
     _poolSnowVilliers,
     _poolSonarStrike,
+    _poolSoulReap,
     _poolSoulSummons,
     _poolSoulSwallower,
     _poolSoulboundGuardians,

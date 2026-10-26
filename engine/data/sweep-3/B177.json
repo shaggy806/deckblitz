@@ -1,0 +1,886 @@
+{
+ "batch": "B177",
+ "status": "complete",
+ "ranks": "Eventide (EVE, 2008-07-25): the rest of the set — its 119 cards left (middle walk, Eventide back to Time Spiral); plus the six cards elsewhere that only retrace or {Q} blocked",
+ "authored": [
+  {
+   "name": "Aerie Ouphes",
+   "files": [
+    "engine/src/cards/pool/aerie-ouphes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Altar Golem",
+   "files": [
+    "engine/src/cards/pool/altar-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Antler Skulkin",
+   "files": [
+    "engine/src/cards/pool/antler-skulkin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ashling, the Extinguisher",
+   "files": [
+    "engine/src/cards/pool/ashling-the-extinguisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ballynock Trapper",
+   "files": [
+    "engine/src/cards/pool/ballynock-trapper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Battlegate Mimic",
+   "files": [
+    "engine/src/cards/pool/battlegate-mimic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Belligerent Hatchling",
+   "files": [
+    "engine/src/cards/pool/belligerent-hatchling.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bloodied Ghost",
+   "files": [
+    "engine/src/cards/pool/bloodied-ghost.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cache Raiders",
+   "files": [
+    "engine/src/cards/pool/cache-raiders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Call the Skybreaker",
+   "files": [
+    "engine/src/cards/pool/call-the-skybreaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cankerous Thirst",
+   "files": [
+    "engine/src/cards/pool/cankerous-thirst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cauldron Haze",
+   "files": [
+    "engine/src/cards/pool/cauldron-haze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cenn's Enlistment",
+   "files": [
+    "engine/src/cards/pool/cenns-enlistment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chaotic Backlash",
+   "files": [
+    "engine/src/cards/pool/chaotic-backlash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinder Pyromancer",
+   "files": [
+    "engine/src/cards/pool/cinder-pyromancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deity of Scars",
+   "files": [
+    "engine/src/cards/pool/deity-of-scars.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divinity of Pride",
+   "files": [
+    "engine/src/cards/pool/divinity-of-pride.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dominus of Fealty",
+   "files": [
+    "engine/src/cards/pool/dominus-of-fealty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomgape",
+   "files": [
+    "engine/src/cards/pool/doomgape.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Thief",
+   "files": [
+    "engine/src/cards/pool/dream-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duergar Assailant",
+   "files": [
+    "engine/src/cards/pool/duergar-assailant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Duergar Hedge-Mage",
+   "files": [
+    "engine/src/cards/pool/duergar-hedge-mage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Duergar Mine-Captain",
+   "files": [
+    "engine/src/cards/pool/duergar-mine-captain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Edge of the Divinity",
+   "files": [
+    "engine/src/cards/pool/edge-of-the-divinity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fable of Wolf and Owl",
+   "files": [
+    "engine/src/cards/pool/fable-of-wolf-and-owl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Figure of Destiny",
+   "files": [
+    "engine/src/cards/pool/figure-of-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire at Will",
+   "files": [
+    "engine/src/cards/pool/fire-at-will.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flame Jab",
+   "files": [
+    "engine/src/cards/pool/flame-jab.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gift of the Deity",
+   "files": [
+    "engine/src/cards/pool/gift-of-the-deity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilder Bairn",
+   "files": [
+    "engine/src/cards/pool/gilder-bairn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Groundling Pouncer",
+   "files": [
+    "engine/src/cards/pool/groundling-pouncer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gwyllion Hedge-Mage",
+   "files": [
+    "engine/src/cards/pool/gwyllion-hedge-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hag Hedge-Mage",
+   "files": [
+    "engine/src/cards/pool/hag-hedge-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hatchet Bully",
+   "files": [
+    "engine/src/cards/pool/hatchet-bully.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hateflayer",
+   "files": [
+    "engine/src/cards/pool/hateflayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartlash Cinder",
+   "files": [
+    "engine/src/cards/pool/heartlash-cinder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hotheaded Giant",
+   "files": [
+    "engine/src/cards/pool/hotheaded-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Idle Thoughts",
+   "files": [
+    "engine/src/cards/pool/idle-thoughts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impelled Giant",
+   "files": [
+    "engine/src/cards/pool/impelled-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inundate",
+   "files": [
+    "engine/src/cards/pool/inundate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invert the Skies",
+   "files": [
+    "engine/src/cards/pool/invert-the-skies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkin Zealot",
+   "files": [
+    "engine/src/cards/pool/kithkin-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leering Emblem",
+   "files": [
+    "engine/src/cards/pool/leering-emblem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Loyal Gyrfalcon",
+   "files": [
+    "engine/src/cards/pool/loyal-gyrfalcon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Marshdrinker Giant",
+   "files": [
+    "engine/src/cards/pool/marshdrinker-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merrow Levitator",
+   "files": [
+    "engine/src/cards/pool/merrow-levitator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mindwrack Liege",
+   "files": [
+    "engine/src/cards/pool/mindwrack-liege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirror Sheen",
+   "files": [
+    "engine/src/cards/pool/mirror-sheen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monstrify",
+   "files": [
+    "engine/src/cards/pool/monstrify.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Needle Specter",
+   "files": [
+    "engine/src/cards/pool/needle-specter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nettle Sentinel",
+   "files": [
+    "engine/src/cards/pool/nettle-sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nightsky Mimic",
+   "files": [
+    "engine/src/cards/pool/nightsky-mimic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nobilis of War",
+   "files": [
+    "engine/src/cards/pool/nobilis-of-war.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Noggle Bandit",
+   "files": [
+    "engine/src/cards/pool/noggle-bandit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noggle Bridgebreaker",
+   "files": [
+    "engine/src/cards/pool/noggle-bridgebreaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Noggle Hedge-Mage",
+   "files": [
+    "engine/src/cards/pool/noggle-hedge-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noggle Ransacker",
+   "files": [
+    "engine/src/cards/pool/noggle-ransacker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noxious Hatchling",
+   "files": [
+    "engine/src/cards/pool/noxious-hatchling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nucklavee",
+   "files": [
+    "engine/src/cards/pool/nucklavee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oona's Grace",
+   "files": [
+    "engine/src/cards/pool/oonas-grace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Outrage Shaman",
+   "files": [
+    "engine/src/cards/pool/outrage-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overbeing of Myth",
+   "files": [
+    "engine/src/cards/pool/overbeing-of-myth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Patrol Signaler",
+   "files": [
+    "engine/src/cards/pool/patrol-signaler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primalcrux",
+   "files": [
+    "engine/src/cards/pool/primalcrux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven's Crime",
+   "files": [
+    "engine/src/cards/pool/ravens-crime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razorfin Abolisher",
+   "files": [
+    "engine/src/cards/pool/razorfin-abolisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise of the Hobgoblins",
+   "files": [
+    "engine/src/cards/pool/rise-of-the-hobgoblins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riverfall Mimic",
+   "files": [
+    "engine/src/cards/pool/riverfall-mimic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Savage Conception",
+   "files": [
+    "engine/src/cards/pool/savage-conception.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scourge of the Nobilis",
+   "files": [
+    "engine/src/cards/pool/scourge-of-the-nobilis.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Selkie Hedge-Mage",
+   "files": [
+    "engine/src/cards/pool/selkie-hedge-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shorecrasher Mimic",
+   "files": [
+    "engine/src/cards/pool/shorecrasher-mimic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Snakeform",
+   "files": [
+    "engine/src/cards/pool/snakeform.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soot Imp",
+   "files": [
+    "engine/src/cards/pool/soot-imp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Reap",
+   "files": [
+    "engine/src/cards/pool/soul-reap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit of the Hearth",
+   "files": [
+    "engine/src/cards/pool/spirit-of-the-hearth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spitemare",
+   "files": [
+    "engine/src/cards/pool/spitemare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spitting Image",
+   "files": [
+    "engine/src/cards/pool/spitting-image.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Springjack Shepherd",
+   "files": [
+    "engine/src/cards/pool/springjack-shepherd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sturdy Hatchling",
+   "files": [
+    "engine/src/cards/pool/sturdy-hatchling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swirling Spriggan",
+   "files": [
+    "engine/src/cards/pool/swirling-spriggan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Syphon Life",
+   "files": [
+    "engine/src/cards/pool/syphon-life.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Talara's Battalion",
+   "files": [
+    "engine/src/cards/pool/talaras-battalion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderblust",
+   "files": [
+    "engine/src/cards/pool/thunderblust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tilling Treefolk",
+   "files": [
+    "engine/src/cards/pool/tilling-treefolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unnerving Assault",
+   "files": [
+    "engine/src/cards/pool/unnerving-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unwilling Recruit",
+   "files": [
+    "engine/src/cards/pool/unwilling-recruit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voracious Hatchling",
+   "files": [
+    "engine/src/cards/pool/voracious-hatchling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wake Thrasher",
+   "files": [
+    "engine/src/cards/pool/wake-thrasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waves of Aggression",
+   "files": [
+    "engine/src/cards/pool/waves-of-aggression.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wilderness Hypnotist",
+   "files": [
+    "engine/src/cards/pool/wilderness-hypnotist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Woodlurker Mimic",
+   "files": [
+    "engine/src/cards/pool/woodlurker-mimic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worm Harvest",
+   "files": [
+    "engine/src/cards/pool/worm-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Formless Genesis",
+   "files": [
+    "engine/src/cards/pool/formless-genesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Throes of Chaos",
+   "files": [
+    "engine/src/cards/pool/throes-of-chaos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Embrace the Unknown",
+   "files": [
+    "engine/src/cards/pool/embrace-the-unknown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Decaying Time Loop",
+   "files": [
+    "engine/src/cards/pool/decaying-time-loop.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Farmstead Gleaner",
+   "files": [
+    "engine/src/cards/pool/farmstead-gleaner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Umbral Mantle",
+   "files": [
+    "engine/src/cards/pool/umbral-mantle.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Quillspike",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "'Remove a -1/-1 counter from a creature you control' as a cost — removeCounter only takes counters from the source"
+  },
+  {
+   "name": "Merrow Bonegnawer",
+   "needs": [
+    "effect:target-player-exiles-from-graveyard"
+   ],
+   "why": "'target player exiles a card from their graveyard' — the player's own choice of a graveyard card can't be aimed at a target slot"
+  },
+  {
+   "name": "Endure",
+   "needs": [
+    "replacement:prevent-damage-to-you-and-your-other-permanents"
+   ],
+   "why": "'prevent all damage that would be dealt to you and permanents you control this turn' — no one-shot prevention over a player and their permanents"
+  },
+  {
+   "name": "Desecrator Hag",
+   "needs": [
+    "condition:greatest-power-condition"
+   ],
+   "why": "'return the creature card in your graveyard with the greatest power' — untargeted, ties chosen; nothing picks it"
+  },
+  {
+   "name": "Evershrike",
+   "needs": [
+    "amount:auras-attached-to-self",
+    "effect:aura-returns-attached"
+   ],
+   "why": "+2/+2 per Aura attached to it, and putting an Aura from hand onto the battlefield attached to it (else exile it)"
+  },
+  {
+   "name": "Fiery Bombardment",
+   "needs": [
+    "amount:chroma-of-cards"
+   ],
+   "why": "chroma of the sacrificed creature's mana cost — not devotion"
+  },
+  {
+   "name": "Hallowed Burial",
+   "needs": [
+    "effect:put-on-bottom-of-library-all"
+   ],
+   "why": "'put all creatures on the bottom of their owners' libraries' — no mass bottom-of-library move"
+  },
+  {
+   "name": "Inside Out",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switch target creature's power and toughness (layer 7d)"
+  },
+  {
+   "name": "Sanity Grinding",
+   "needs": [
+    "amount:chroma-of-cards"
+   ],
+   "why": "chroma of the ten revealed cards — not devotion"
+  },
+  {
+   "name": "Canker Abomination",
+   "needs": [
+    "decision:choose-opponent",
+    "effect:enters-with-counters-dynamic"
+   ],
+   "why": "'as this enters, choose an opponent' feeding enters-with-counters by that player's creature count"
+  },
+  {
+   "name": "Indigo Faerie",
+   "needs": [
+    "effect:add-color-until-eot"
+   ],
+   "why": "target permanent becomes blue 'in addition to its other colors' — become-color replaces"
+  },
+  {
+   "name": "Springjack Pasture",
+   "needs": [
+    "cost:sacrifice-x-mana-ability"
+   ],
+   "why": "'{T}, Sacrifice X Goats: Add X mana of any one color' — a mana ability can't sacrifice several permanents"
+  },
+  {
+   "name": "Talara's Bane",
+   "needs": [
+    "amount:toughness-of-chosen-card"
+   ],
+   "why": "gain life equal to the toughness of the card chosen from the revealed hand, read while in hand"
+  },
+  {
+   "name": "Ward of Bones",
+   "needs": [
+    "static:prohibit-per-opponent-comparison"
+   ],
+   "why": "each opponent who controls more creatures/artifacts/enchantments/lands than you can't cast/play them — a per-opponent comparison"
+  },
+  {
+   "name": "Endless Horizons",
+   "needs": [
+    "effect:search-to-linked-exile"
+   ],
+   "why": "search for Plains, exile them, put one into hand each upkeep — search can't exile and link"
+  },
+  {
+   "name": "Nightmare Incursion",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search target player's library and exile X cards — search can't name a target player"
+  },
+  {
+   "name": "Light from Within",
+   "needs": [
+    "amount:chroma-of-cards"
+   ],
+   "why": "each creature enters with counters equal to its own chroma — not devotion"
+  },
+  {
+   "name": "Umbra Stalker",
+   "needs": [
+    "amount:chroma-of-cards"
+   ],
+   "why": "chroma of the cards in your graveyard — not devotion"
+  },
+  {
+   "name": "Pyrrhic Revival",
+   "needs": [
+    "effect:return-all-graveyards-under-owners-control"
+   ],
+   "why": "each player's creature cards return under their owners' control at once, with -1/-1 counters"
+  },
+  {
+   "name": "Shrewd Hatchling",
+   "needs": [
+    "effect:target-cant-block-source-this-turn"
+   ],
+   "why": "'{U/R}: target creature can't block this creature this turn' — only a plain cant-block exists"
+  },
+  {
+   "name": "Rekindled Flame",
+   "needs": [
+    "condition:opponent-hand-size"
+   ],
+   "why": "upkeep return 'if an opponent has no cards in hand' — hand-size condition can't say 'an opponent'"
+  },
+  {
+   "name": "Crag Puca",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switch this creature's power and toughness until end of turn (layer 7d)"
+  },
+  {
+   "name": "Stigma Lasher",
+   "needs": [
+    "effect:player-cant-gain-life-for-game"
+   ],
+   "why": "the damaged player can't gain life for the rest of the game — player effects only last a turn"
+  },
+  {
+   "name": "Moonhold",
+   "needs": [
+    "effect:prohibit-land-plays"
+   ],
+   "why": "target player can't play lands this turn — prohibit covers spells and abilities only"
+  },
+  {
+   "name": "Glamerdye",
+   "needs": [
+    "effect:text-change-color-or-land-words"
+   ],
+   "why": "change the text of a spell or permanent, one colour word for another"
+  },
+  {
+   "name": "Crackleburr",
+   "needs": [
+    "cost:untap-others"
+   ],
+   "why": "'Untap two tapped blue creatures you control' as a cost"
+  }
+ ]
+}

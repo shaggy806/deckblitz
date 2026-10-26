@@ -34,6 +34,7 @@ import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
 import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
+import _poolBallynockTrapper from "../pool/ballynock-trapper.js";
 import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
 import _poolBarricadeBreaker from "../pool/barricade-breaker.js";
@@ -175,6 +176,7 @@ import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
+import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
 import _poolFiremindsResearch from "../pool/fireminds-research.js";
 import _poolFlameLash from "../pool/flame-lash.js";
@@ -265,6 +267,7 @@ import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
+import _poolImpelledGiant from "../pool/impelled-giant.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
@@ -354,6 +357,7 @@ import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
+import _poolNeedleSpecter from "../pool/needle-specter.js";
 import _poolNeedletoothRaptor from "../pool/needletooth-raptor.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimanaSkitterSneak from "../pool/nimana-skitter-sneak.js";
@@ -362,6 +366,7 @@ import _poolNimbleHobbit from "../pool/nimble-hobbit.js";
 import _poolNineFingersKeene from "../pool/nine-fingers-keene.js";
 import _poolNirkanaAssassin from "../pool/nirkana-assassin.js";
 import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
+import _poolNobilisOfWar from "../pool/nobilis-of-war.js";
 import _poolNotionThief from "../pool/notion-thief.js";
 import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
@@ -475,6 +480,7 @@ import _poolSeedsOfInnocence from "../pool/seeds-of-innocence.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
+import _poolSelkieHedgeMage from "../pool/selkie-hedge-mage.js";
 import _poolSerraAviary from "../pool/serra-aviary.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
@@ -563,6 +569,7 @@ import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
 import _poolThunderingSparkmage from "../pool/thundering-sparkmage.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
+import _poolTillingTreefolk from "../pool/tilling-treefolk.js";
 import _poolTipTheScales from "../pool/tip-the-scales.js";
 import _poolTitaniasCommand from "../pool/titanias-command.js";
 import _poolTithingBlade from "../pool/tithing-blade.js";
@@ -693,6 +700,7 @@ const shard: CardShard = {
     _poolAysenBureaucrats,
     _poolBackOnTrack,
     _poolBaelothBarritylEntertainer,
+    _poolBallynockTrapper,
     _poolBarlsCage,
     _poolBaronyVampire,
     _poolBarricadeBreaker,
@@ -834,6 +842,7 @@ const shard: CardShard = {
     _poolFemerefHealer,
     _poolFieldSurgeon,
     _poolFierceEmpath,
+    _poolFigureOfDestiny,
     _poolFiligreeCrawler,
     _poolFiremindsResearch,
     _poolFlameLash,
@@ -924,6 +933,7 @@ const shard: CardShard = {
     _poolHymnToTourach,
     _poolIceOut,
     _poolIllusionistsStratagem,
+    _poolImpelledGiant,
     _poolImposingVantasaur,
     _poolImskirIronEater,
     _poolIndrikStomphowler,
@@ -1013,6 +1023,7 @@ const shard: CardShard = {
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
+    _poolNeedleSpecter,
     _poolNeedletoothRaptor,
     _poolNeverwinterDryad,
     _poolNimanaSkitterSneak,
@@ -1021,6 +1032,7 @@ const shard: CardShard = {
     _poolNineFingersKeene,
     _poolNirkanaAssassin,
     _poolNivMizzetVisionary,
+    _poolNobilisOfWar,
     _poolNotionThief,
     _poolNovijenHeartOfProgress,
     _poolNyxWeaver,
@@ -1134,6 +1146,7 @@ const shard: CardShard = {
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
     _poolSelfDestruct,
+    _poolSelkieHedgeMage,
     _poolSerraAviary,
     _poolShadowRift,
     _poolShadowyBackstreet,
@@ -1222,6 +1235,7 @@ const shard: CardShard = {
     _poolThrorsMap,
     _poolThunderingSparkmage,
     _poolTigerClaws,
+    _poolTillingTreefolk,
     _poolTipTheScales,
     _poolTitaniasCommand,
     _poolTithingBlade,

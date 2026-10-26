@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3799 already implemented / 1201 missing (marks refreshed 2026-10-26)
+3800 already implemented / 1200 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2283,7 +2283,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2290  Shire Terrace                            {0}              Land
 [ ]  2291  Riot Control                             {2}{W}           Instant
 [ ]  2292  Plargg and Nassari                       {3}{R}{R}        Legendary Creature — Orc Efreet
-[ ]  2293  Umbral Mantle                            {3}              Artifact — Equipment
+[x]  2293  Umbral Mantle                            {3}              Artifact — Equipment
 [x]  2294  Lightning Strike                         {1}{R}           Instant
 [ ]  2295  The Cabbage Merchant                     {2}{G}           Legendary Creature — Human Citizen
 [x]  2296  Nexus of Fate                            {5}{U}{U}        Instant

@@ -17,6 +17,7 @@ import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
+import _poolAltarGolem from "../pool/altar-golem.js";
 import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
@@ -162,6 +163,7 @@ import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolElderDruid from "../pool/elder-druid.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
+import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
@@ -277,6 +279,7 @@ import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIdentityThief from "../pool/identity-thief.js";
+import _poolIdleThoughts from "../pool/idle-thoughts.js";
 import _poolImpedeMomentum from "../pool/impede-momentum.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
@@ -392,6 +395,7 @@ import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
 import _poolNimbusOfTheIsles from "../pool/nimbus-of-the-isles.js";
 import _poolNoMore from "../pool/no-more.js";
+import _poolNoggleHedgeMage from "../pool/noggle-hedge-mage.js";
 import _poolNourish from "../pool/nourish.js";
 import _poolNoxiousGhoul from "../pool/noxious-ghoul.js";
 import _poolNoxiousGroodion from "../pool/noxious-groodion.js";
@@ -556,6 +560,7 @@ import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js
 import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
+import _poolThroesOfChaos from "../pool/throes-of-chaos.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
@@ -666,6 +671,7 @@ const shard: CardShard = {
     _poolAlabasterKirin,
     _poolAlexWilderRunaway,
     _poolAlignedHedronNetwork,
+    _poolAltarGolem,
     _poolAnaxAndCymede,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
@@ -811,6 +817,7 @@ const shard: CardShard = {
     _poolElderDruid,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
+    _poolEmbraceTheUnknown,
     _poolErinisGloomStalker,
     _poolEssenceCapture,
     _poolEssenceDrain,
@@ -926,6 +933,7 @@ const shard: CardShard = {
     _poolHystrodon,
     _poolIcemanAndFirestar,
     _poolIdentityThief,
+    _poolIdleThoughts,
     _poolImpedeMomentum,
     _poolImpossibleInferno,
     _poolImprovisedClub,
@@ -1041,6 +1049,7 @@ const shard: CardShard = {
     _poolNiblisOfTheUrn,
     _poolNimbusOfTheIsles,
     _poolNoMore,
+    _poolNoggleHedgeMage,
     _poolNourish,
     _poolNoxiousGhoul,
     _poolNoxiousGroodion,
@@ -1205,6 +1214,7 @@ const shard: CardShard = {
     _poolThermokarst,
     _poolThinkTwice,
     _poolThornLieutenant,
+    _poolThroesOfChaos,
     _poolThunderwolfCavalry,
     _poolTidepoolTurtle,
     _poolTitansVanguard,

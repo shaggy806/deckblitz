@@ -147,6 +147,7 @@ import _poolDeathWatch from "../pool/death-watch.js";
 import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
 import _poolDebtorsTransport from "../pool/debtors-transport.js";
+import _poolDecayingTimeLoop from "../pool/decaying-time-loop.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
@@ -252,6 +253,7 @@ import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
 import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
 import _poolGigantomancer from "../pool/gigantomancer.js";
+import _poolGilderBairn from "../pool/gilder-bairn.js";
 import _poolGladeWatcher from "../pool/glade-watcher.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
@@ -287,6 +289,7 @@ import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
+import _poolGwyllionHedgeMage from "../pool/gwyllion-hedge-mage.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
 import _poolHarshSustenance from "../pool/harsh-sustenance.js";
 import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
@@ -308,6 +311,7 @@ import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHonoredHydra from "../pool/honored-hydra.js";
+import _poolHotheadedGiant from "../pool/hotheaded-giant.js";
 import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
@@ -432,6 +436,7 @@ import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick
 import _poolPanacea from "../pool/panacea.js";
 import _poolParasiticGrasp from "../pool/parasitic-grasp.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
+import _poolPatrolSignaler from "../pool/patrol-signaler.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
@@ -820,6 +825,7 @@ const shard: CardShard = {
     _poolDeathbloomThallid,
     _poolDeathcapCultivator,
     _poolDebtorsTransport,
+    _poolDecayingTimeLoop,
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,
@@ -925,6 +931,7 @@ const shard: CardShard = {
     _poolGideonsCompany,
     _poolGiftOfTusks,
     _poolGigantomancer,
+    _poolGilderBairn,
     _poolGladeWatcher,
     _poolGliderStaff,
     _poolGlimpseTheCore,
@@ -960,6 +967,7 @@ const shard: CardShard = {
     _poolGrislyRitual,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
+    _poolGwyllionHedgeMage,
     _poolHagraCrocodile,
     _poolHarshSustenance,
     _poolHazardOfTheDunes,
@@ -981,6 +989,7 @@ const shard: CardShard = {
     _poolHollowScavenger,
     _poolHomicideInvestigator,
     _poolHonoredHydra,
+    _poolHotheadedGiant,
     _poolHowlpackWolf,
     _poolHulldrifter,
     _poolHumbleBudoka,
@@ -1105,6 +1114,7 @@ const shard: CardShard = {
     _poolPanacea,
     _poolParasiticGrasp,
     _poolParasiticImpetus,
+    _poolPatrolSignaler,
     _poolPearledUnicorn,
     _poolPegasusGuardian,
     _poolPerilousShadow,

@@ -169,6 +169,7 @@ import _poolDismissIntoDream from "../pool/dismiss-into-dream.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
 import _poolDivineOffering from "../pool/divine-offering.js";
+import _poolDivinityOfPride from "../pool/divinity-of-pride.js";
 import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.js";
 import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
@@ -903,6 +904,7 @@ const shard: CardShard = {
     _poolDispel,
     _poolDistortionStrike,
     _poolDivineOffering,
+    _poolDivinityOfPride,
     _poolDonatelloWayWithMachines,
     _poolDoraMilajeElite,
     _poolDoubleCleave,

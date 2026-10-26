@@ -24,7 +24,7 @@ modal spells, mass effects (wraths, edicts) and tutors/scry/surveil, a rich effe
 (bounce/exile/mill/discard, fight, counter, control-change, clone, animate,
 count-scaled and trigger-supplied amounts, token-for-target and token-copy effects, conditional
 effects, sacrifice costs incl. filtered ones, additional costs & kicker), planeswalkers, alternate
-casting zones (flashback, suspend, foretell, plot, escape, disturb, adventure, MDFCs, transforming DFCs
+casting zones (flashback, retrace, suspend, foretell, plot, escape, disturb, adventure, MDFCs, transforming DFCs
 + Day/Night, Channel from hand, Overload, a conditional free-cast permission, Convoke), extra
 turns/combats, cascade/storm/spell-copying, Sagas, station cards (Spacecraft — rule 702.184, 721), the Monarch/Energy/Emblems, damage-prevention
 shields, and a color-identity-aware Commander deck validator (`identity.ts`, `deck-validation.ts`).

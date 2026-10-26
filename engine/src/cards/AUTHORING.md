@@ -371,6 +371,7 @@ from the same link.
 | `warp` | `{ cost }` | **Warp** (rule 702.185 — Starfield Vocalist): an alternative cost from the hand, offered as a `cast-spell` with `via: "warp"`. The permanent it becomes gets a delayed trigger exiling it at the beginning of the next end step (it finds nothing if the permanent left and came back), and its owner may cast the exiled card for its mana cost from the next turn on, for as long as it stays exiled. |
 | `evoke` | `{ cost }` | **Evoke** (rule 702.74 — Mulldrifter): an alternative cost, offered as the cast's `evoke` variant (echoed back with its `evokeCost`) wherever the card may be cast for its mana cost — the hand, the command zone, an impulse or graveyard permission — beside kicker or an additional cost's branch, never beside overload, a free cast or another alternative cost (118.9a). Paid, the permanent it becomes gets "when this permanent enters, its controller sacrifices it" as it enters. That trigger goes on the stack before its controller's other triggers of the moment (`TriggeredAbility.stackFirst`), so the creature's own enters abilities resolve first, while it's still there — the order the rulings describe; the engine doesn't yet ask (`decision:trigger-order`), so don't author an evoke card whose enters ability would want the other order. The Incarnations' "Evoke—Exile a white card from your hand" is `{ cost: "", exileFromHand: { filter: { colors: ["W"] }, text: "a white card" } }` (`pool/solitude.ts`): the evoke offered only with another white card in hand, which is chosen and exiled as the cost is paid. Put the printed evoke line in `text`. |
 | `flashback.discard`, `flashback.keyword: "jump-start"` | — | **Jump-start** (rule 702.133 — Radical Idea): `flashback: { cost: "<the card's mana cost>", discard: 1, keyword: "jump-start" }` — the graveyard cast pays the card's own mana cost and discards a card (offered only with a card in hand, chosen as the cost is paid), and the spell is exiled as it leaves the stack. It rides the flashback cast (`via: "flashback"`, labelled "jump-start"): nothing in the pool tells a jump-started spell from a flashed-back one. The scaffolder reads the line. |
+| `retrace` | `true` | **Retrace** (rule 702.81a — Raven's Crime, Worm Harvest): cast from its owner's graveyard for its normal costs plus discarding a land card (offered only with a land card in hand, chosen as the cost is paid). Its own cast, `via: "retrace"` (labelled "retrace, discarding a land card"), not flashback's: nothing exiles it, so it goes back to the graveyard to be cast again. A granted retrace (Deeproot Historian, `static:retrace-grant`) isn't built. The scaffolder reads the line. |
 | `triggered: [mentor()]` | helper | **Mentor** (rule 702.134 — Legion Warboss): a +1/+1 counter on target attacking creature with lesser power. The scaffolder reads the line. |
 | `alternativeCost: spectacle(cost)` | helper | **Spectacle [cost]** (rule 702.137 — Skewer the Critics): `alternativeCost: spectacle("{R}")` (`helpers.ts`), an alternative cost offered only once an opponent has lost life this turn, labelled "spectacle {R}". "When this creature enters, **if its spectacle cost was paid**, …" (Rafter Demon) is the `self-spectacle-paid` condition, read like `self-kicked` (the spell's `spectaclePaid`, the permanent's `enteredSpectacle`; a copy keeps it, 707.10). The scaffolder reads both. |
 | `alternativeCost: surge(cost)` | helper | **Surge [cost]** (rule 702.117a — Crush of Tentacles, Reckless Bushwhacker): `alternativeCost: surge("{1}{R}")` (`helpers.ts`), an alternative cost offered only once its caster has cast another spell this turn (the condition `{ kind: "cast-this-turn", who: "you", atLeast: 1 }`, read before the spell being cast counts), labelled "surge {1}{R}". No teammates in a free-for-all. "**If its surge cost was paid**, …" / "If this spell's surge cost was paid" is the `self-surge-paid` condition, read like `self-spectacle-paid` (`surgePaid`, `enteredSurge`). The scaffolder reads the keyword line and the trigger condition. |
@@ -2524,7 +2525,14 @@ activated: [
 
 **`AbilityCost`** (`abilities.ts`): `{ mana?, tap?, sacrifice?, payLife?,
 removeCounter?, addCounter?, payEnergy?, mill?, discardHand?, discard?,
-tapOthers? }`.
+tapOthers?, untap? }`.
+
+- `untap: true` — **{Q}**, the untap symbol (rule 107.6 — Patrol Signaler,
+  Hateflayer): payable only while the source is tapped, and a creature's
+  only past summoning sickness (302.6); refused while it has a stun counter.
+  Not on a mana ability (refused: the mana payer never untaps). "Untap two
+  tapped blue creatures you control" as a cost (Crackleburr) isn't built
+  (`cost:untap-others`). The scaffolder reads `{Q}`.
 
 - `addCounter: { kind, count }` — "Put a -0/-1 counter on this creature: Add
   {G}" (Wall of Roots), "Put a -1/-1 counter on this creature: Untap this
@@ -4740,8 +4748,8 @@ Delete an entry in the same commit as the feature that retires it.
   source to read the choice off. "Is the chosen type in addition to its other
   types" is a static's `addsChosenCreatureType` (Titan of Littjara — §4).
 - **Embalm** (rule 702.128 — Vizier of Many Faces, whose Clone ability has
-  to carry it) and **retrace** (rule 702.81 — Six) are unmodeled alt-cast
-  mechanics (needed-cards P18). Bestow is built (the `bestow` field), but not
+  to carry it) is an unmodeled alt-cast mechanic (needed-cards P18); retrace
+  is built (the `retrace` field) but not granted (Six). Bestow is built (the `bestow` field), but not
   combined with another cost or cast from the graveyard (Detective's Phoenix).
   **Riot** (rule 702.136) is built for a permanent that has it printed or
   copied (Skarrgan Hellkite — asked before it moves, like any "as this

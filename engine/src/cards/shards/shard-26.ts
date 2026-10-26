@@ -32,6 +32,7 @@ import _poolAngelheartVial from "../pool/angelheart-vial.js";
 import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
+import _poolAntlerSkulkin from "../pool/antler-skulkin.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
 import _poolApocalypseHydra from "../pool/apocalypse-hydra.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
@@ -97,6 +98,7 @@ import _poolCalamitousCaveIn from "../pool/calamitous-cave-in.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCallousSellSword from "../pool/callous-sell-sword.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
+import _poolCankerousThirst from "../pool/cankerous-thirst.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
 import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
@@ -165,6 +167,7 @@ import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
 import _poolEbonPraetor from "../pool/ebon-praetor.js";
 import _poolEchoingEquation from "../pool/echoing-equation.js";
 import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
+import _poolEdgeOfTheDivinity from "../pool/edge-of-the-divinity.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
 import _poolElvenRiders from "../pool/elven-riders.js";
 import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
@@ -199,6 +202,7 @@ import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
 import _poolFinishingBlow from "../pool/finishing-blow.js";
+import _poolFireAtWill from "../pool/fire-at-will.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
@@ -635,6 +639,7 @@ import _poolVolatileFjord from "../pool/volatile-fjord.js";
 import _poolVolcanicRush from "../pool/volcanic-rush.js";
 import _poolVoltaicKey from "../pool/voltaic-key.js";
 import _poolVoraciousGreatshark from "../pool/voracious-greatshark.js";
+import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
 import _poolVorracBattlehorns from "../pool/vorrac-battlehorns.js";
 import _poolWallOfLight from "../pool/wall-of-light.js";
 import _poolWanderersTwig from "../pool/wanderers-twig.js";
@@ -705,6 +710,7 @@ const shard: CardShard = {
     _poolAnointerOfValor,
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
+    _poolAntlerSkulkin,
     _poolApexDevastator,
     _poolApocalypseHydra,
     _poolAranaHeartOfTheSpider,
@@ -770,6 +776,7 @@ const shard: CardShard = {
     _poolCallToTheFeast,
     _poolCallousSellSword,
     _poolCampusComposer,
+    _poolCankerousThirst,
     _poolCanyonJerboa,
     _poolCarnageInterpreter,
     _poolCarrionCruiser,
@@ -838,6 +845,7 @@ const shard: CardShard = {
     _poolEbonPraetor,
     _poolEchoingEquation,
     _poolEdgarCharmedGroom,
+    _poolEdgeOfTheDivinity,
     _poolEliteArrester,
     _poolElvenRiders,
     _poolElvishArchdruid,
@@ -872,6 +880,7 @@ const shard: CardShard = {
     _poolFetidPools,
     _poolFieryEmancipation,
     _poolFinishingBlow,
+    _poolFireAtWill,
     _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,
@@ -1308,6 +1317,7 @@ const shard: CardShard = {
     _poolVolcanicRush,
     _poolVoltaicKey,
     _poolVoraciousGreatshark,
+    _poolVoraciousHatchling,
     _poolVorracBattlehorns,
     _poolWallOfLight,
     _poolWanderersTwig,

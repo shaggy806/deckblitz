@@ -239,6 +239,7 @@ import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
+import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
@@ -559,6 +560,7 @@ import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
 import _poolSpiritBonds from "../pool/spirit-bonds.js";
+import _poolSpittingImage from "../pool/spitting-image.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -578,6 +580,7 @@ import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
+import _poolSyphonLife from "../pool/syphon-life.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
 import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
@@ -673,6 +676,7 @@ import _poolWinterTormentedLoner from "../pool/winter-tormented-loner.js";
 import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
+import _poolWoodlurkerMimic from "../pool/woodlurker-mimic.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
@@ -925,6 +929,7 @@ const shard: CardShard = {
     _poolGargadon,
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
+    _poolGiftOfTheDeity,
     _poolGimlisRecklessMight,
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
@@ -1245,6 +1250,7 @@ const shard: CardShard = {
     _poolSpireMonitor,
     _poolSpirePatrol,
     _poolSpiritBonds,
+    _poolSpittingImage,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,
@@ -1264,6 +1270,7 @@ const shard: CardShard = {
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
+    _poolSyphonLife,
     _poolTaintedSigil,
     _poolTajicBladeOfTheLegion,
     _poolTajuruStalwart,
@@ -1359,6 +1366,7 @@ const shard: CardShard = {
     _poolWizardClass,
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,
+    _poolWoodlurkerMimic,
     _poolWordsOfWisdom,
     _poolYathanRoadwatcher,
     _poolZahidDjinnOfTheLamp,

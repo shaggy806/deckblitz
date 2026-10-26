@@ -211,6 +211,7 @@ function faceSource(face, ctx) {
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
     cipher: parsed.cipher,
+    retrace: parsed.retrace,
     becomesDayAsEnters: parsed.becomesDayAsEnters,
     sneak: parsed.sneak,
     webSlinging: parsed.webSlinging,

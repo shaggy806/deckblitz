@@ -54,6 +54,7 @@ import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
 import _poolBattleMenu from "../pool/battle-menu.js";
 import _poolBattlefieldForge from "../pool/battlefield-forge.js";
 import _poolBeastriderVanguard from "../pool/beastrider-vanguard.js";
+import _poolBelligerentHatchling from "../pool/belligerent-hatchling.js";
 import _poolBenalishVeteran from "../pool/benalish-veteran.js";
 import _poolBespokeBattlewagon from "../pool/bespoke-battlewagon.js";
 import _poolBidentOfThassa from "../pool/bident-of-thassa.js";
@@ -689,6 +690,7 @@ import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensHydraTokenBlackGreen from "../tokens/hydra-token-black-green.js";
+import _tokensKithkinSoldierToken from "../tokens/kithkin-soldier-token.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
@@ -750,6 +752,7 @@ const shard: CardShard = {
     _poolBattleMenu,
     _poolBattlefieldForge,
     _poolBeastriderVanguard,
+    _poolBelligerentHatchling,
     _poolBenalishVeteran,
     _poolBespokeBattlewagon,
     _poolBidentOfThassa,
@@ -1387,6 +1390,7 @@ const shard: CardShard = {
     _tokensDragonToken66,
     _tokensEverywhereToken,
     _tokensHydraTokenBlackGreen,
+    _tokensKithkinSoldierToken,
     _tokensKomasCoil,
     _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,

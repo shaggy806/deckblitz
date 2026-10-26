@@ -68,6 +68,11 @@ export type CastVia =
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
    * cost, tapping up to one creature (`harmonizeTap`). */
   | "harmonize"
+  /** Retrace (rule 702.81a) — cast from the caster's graveyard for its
+   * normal costs plus discarding a land card, an additional cost. Nothing
+   * exiles it afterwards: it goes back to the graveyard and can be cast
+   * again. */
+  | "retrace"
   /** Aftermath (rule 702.127a) — the aftermath half of a split card, from
    * the caster's graveyard, for its mana cost; exiled whenever it would
    * leave the stack. */
