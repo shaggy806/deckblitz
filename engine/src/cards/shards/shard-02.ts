@@ -598,6 +598,7 @@ import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
+import _poolThopterSquadron from "../pool/thopter-squadron.js";
 import _poolThornwatchScarecrow from "../pool/thornwatch-scarecrow.js";
 import _poolThoughtweftGambit from "../pool/thoughtweft-gambit.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
@@ -1281,6 +1282,7 @@ const shard: CardShard = {
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
     _poolThopterArrest,
+    _poolThopterSquadron,
     _poolThornwatchScarecrow,
     _poolThoughtweftGambit,
     _poolThousandMoonsInfantry,

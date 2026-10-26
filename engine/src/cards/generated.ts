@@ -444,6 +444,7 @@ import _poolAllFatesStalker from "./pool/all-fates-stalker.js";
 import _poolAllIsDust from "./pool/all-is-dust.js";
 import _poolAllOfHistoryAllAtOnce from "./pool/all-of-history-all-at-once.js";
 import _poolAllThatGlitters from "./pool/all-that-glitters.js";
+import _poolAllay from "./pool/allay.js";
 import _poolAlleyAssailant from "./pool/alley-assailant.js";
 import _poolAlleyEvasion from "./pool/alley-evasion.js";
 import _poolAlleyStrangler from "./pool/alley-strangler.js";
@@ -4887,6 +4888,7 @@ import _poolDivingGriffin from "./pool/diving-griffin.js";
 import _poolDiviningDuelist from "./pool/divining-duelist.js";
 import _poolDivinityOfPride from "./pool/divinity-of-pride.js";
 import _poolDizzySpell from "./pool/dizzy-spell.js";
+import _poolDizzyingGaze from "./pool/dizzying-gaze.js";
 import _poolDizzyingSwoop from "./pool/dizzying-swoop.js";
 import _poolDjeruAndHazoret from "./pool/djeru-and-hazoret.js";
 import _poolDjerusRenunciation from "./pool/djerus-renunciation.js";
@@ -16277,6 +16279,7 @@ import _poolSeymourFlux from "./pool/seymour-flux.js";
 import _poolShabrazTheSkyshark from "./pool/shabraz-the-skyshark.js";
 import _poolShackleSlinger from "./pool/shackle-slinger.js";
 import _poolShacklegeist from "./pool/shacklegeist.js";
+import _poolShackles from "./pool/shackles.js";
 import _poolShadeOfTrokair from "./pool/shade-of-trokair.js";
 import _poolShadewingLaureate from "./pool/shadewing-laureate.js";
 import _poolShadowAlleyDenizen from "./pool/shadow-alley-denizen.js";
@@ -16374,6 +16377,7 @@ import _poolShatteredWings from "./pool/shattered-wings.js";
 import _poolShatteredYard from "./pool/shattered-yard.js";
 import _poolShattergangBrothers from "./pool/shattergang-brothers.js";
 import _poolShatteringBlow from "./pool/shattering-blow.js";
+import _poolShatteringPulse from "./pool/shattering-pulse.js";
 import _poolShatterskullCharger from "./pool/shatterskull-charger.js";
 import _poolShatterskullGiant from "./pool/shatterskull-giant.js";
 import _poolShatterskullMinotaur from "./pool/shatterskull-minotaur.js";
@@ -17454,6 +17458,7 @@ import _poolSpikeBreeder from "./pool/spike-breeder.js";
 import _poolSpikeColony from "./pool/spike-colony.js";
 import _poolSpikeDrone from "./pool/spike-drone.js";
 import _poolSpikeFeeder from "./pool/spike-feeder.js";
+import _poolSpikeHatcher from "./pool/spike-hatcher.js";
 import _poolSpikeJester from "./pool/spike-jester.js";
 import _poolSpikeSoldier from "./pool/spike-soldier.js";
 import _poolSpikeWorker from "./pool/spike-worker.js";
@@ -19098,6 +19103,7 @@ import _poolThopterFoundry from "./pool/thopter-foundry.js";
 import _poolThopterMechanic from "./pool/thopter-mechanic.js";
 import _poolThopterShop from "./pool/thopter-shop.js";
 import _poolThopterSpyNetwork from "./pool/thopter-spy-network.js";
+import _poolThopterSquadron from "./pool/thopter-squadron.js";
 import _poolThorGuardianOfMidgard from "./pool/thor-guardian-of-midgard.js";
 import _poolThorOdinson from "./pool/thor-odinson.js";
 import _poolThorinOakenshield from "./pool/thorin-oakenshield.js";
@@ -21548,6 +21554,7 @@ import _poolWoollyThoctar from "./pool/woolly-thoctar.js";
 import _poolWordOfBinding from "./pool/word-of-binding.js";
 import _poolWordOfBlasting from "./pool/word-of-blasting.js";
 import _poolWordsOfWisdom from "./pool/words-of-wisdom.js";
+import _poolWorkhorse from "./pool/workhorse.js";
 import _poolWorkshopAssistant from "./pool/workshop-assistant.js";
 import _poolWorkshopElders from "./pool/workshop-elders.js";
 import _poolWorkshopWarchief from "./pool/workshop-warchief.js";
@@ -22883,6 +22890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAllIsDust,
   _poolAllOfHistoryAllAtOnce,
   _poolAllThatGlitters,
+  _poolAllay,
   _poolAlleyAssailant,
   _poolAlleyEvasion,
   _poolAlleyStrangler,
@@ -27326,6 +27334,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiviningDuelist,
   _poolDivinityOfPride,
   _poolDizzySpell,
+  _poolDizzyingGaze,
   _poolDizzyingSwoop,
   _poolDjeruAndHazoret,
   _poolDjerusRenunciation,
@@ -38716,6 +38725,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShabrazTheSkyshark,
   _poolShackleSlinger,
   _poolShacklegeist,
+  _poolShackles,
   _poolShadeOfTrokair,
   _poolShadewingLaureate,
   _poolShadowAlleyDenizen,
@@ -38813,6 +38823,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShatteredYard,
   _poolShattergangBrothers,
   _poolShatteringBlow,
+  _poolShatteringPulse,
   _poolShatterskullCharger,
   _poolShatterskullGiant,
   _poolShatterskullMinotaur,
@@ -39893,6 +39904,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpikeColony,
   _poolSpikeDrone,
   _poolSpikeFeeder,
+  _poolSpikeHatcher,
   _poolSpikeJester,
   _poolSpikeSoldier,
   _poolSpikeWorker,
@@ -41537,6 +41549,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThopterMechanic,
   _poolThopterShop,
   _poolThopterSpyNetwork,
+  _poolThopterSquadron,
   _poolThorGuardianOfMidgard,
   _poolThorOdinson,
   _poolThorinOakenshield,
@@ -43987,6 +44000,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWordOfBinding,
   _poolWordOfBlasting,
   _poolWordsOfWisdom,
+  _poolWorkhorse,
   _poolWorkshopAssistant,
   _poolWorkshopElders,
   _poolWorkshopWarchief,
@@ -45335,6 +45349,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/all-is-dust": _poolAllIsDust,
   "pool/all-of-history-all-at-once": _poolAllOfHistoryAllAtOnce,
   "pool/all-that-glitters": _poolAllThatGlitters,
+  "pool/allay": _poolAllay,
   "pool/alley-assailant": _poolAlleyAssailant,
   "pool/alley-evasion": _poolAlleyEvasion,
   "pool/alley-strangler": _poolAlleyStrangler,
@@ -49778,6 +49793,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/divining-duelist": _poolDiviningDuelist,
   "pool/divinity-of-pride": _poolDivinityOfPride,
   "pool/dizzy-spell": _poolDizzySpell,
+  "pool/dizzying-gaze": _poolDizzyingGaze,
   "pool/dizzying-swoop": _poolDizzyingSwoop,
   "pool/djeru-and-hazoret": _poolDjeruAndHazoret,
   "pool/djerus-renunciation": _poolDjerusRenunciation,
@@ -61168,6 +61184,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shabraz-the-skyshark": _poolShabrazTheSkyshark,
   "pool/shackle-slinger": _poolShackleSlinger,
   "pool/shacklegeist": _poolShacklegeist,
+  "pool/shackles": _poolShackles,
   "pool/shade-of-trokair": _poolShadeOfTrokair,
   "pool/shadewing-laureate": _poolShadewingLaureate,
   "pool/shadow-alley-denizen": _poolShadowAlleyDenizen,
@@ -61265,6 +61282,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shattered-yard": _poolShatteredYard,
   "pool/shattergang-brothers": _poolShattergangBrothers,
   "pool/shattering-blow": _poolShatteringBlow,
+  "pool/shattering-pulse": _poolShatteringPulse,
   "pool/shatterskull-charger": _poolShatterskullCharger,
   "pool/shatterskull-giant": _poolShatterskullGiant,
   "pool/shatterskull-minotaur": _poolShatterskullMinotaur,
@@ -62345,6 +62363,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spike-colony": _poolSpikeColony,
   "pool/spike-drone": _poolSpikeDrone,
   "pool/spike-feeder": _poolSpikeFeeder,
+  "pool/spike-hatcher": _poolSpikeHatcher,
   "pool/spike-jester": _poolSpikeJester,
   "pool/spike-soldier": _poolSpikeSoldier,
   "pool/spike-worker": _poolSpikeWorker,
@@ -63989,6 +64008,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thopter-mechanic": _poolThopterMechanic,
   "pool/thopter-shop": _poolThopterShop,
   "pool/thopter-spy-network": _poolThopterSpyNetwork,
+  "pool/thopter-squadron": _poolThopterSquadron,
   "pool/thor-guardian-of-midgard": _poolThorGuardianOfMidgard,
   "pool/thor-odinson": _poolThorOdinson,
   "pool/thorin-oakenshield": _poolThorinOakenshield,
@@ -66439,6 +66459,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/word-of-binding": _poolWordOfBinding,
   "pool/word-of-blasting": _poolWordOfBlasting,
   "pool/words-of-wisdom": _poolWordsOfWisdom,
+  "pool/workhorse": _poolWorkhorse,
   "pool/workshop-assistant": _poolWorkshopAssistant,
   "pool/workshop-elders": _poolWorkshopElders,
   "pool/workshop-warchief": _poolWorkshopWarchief,

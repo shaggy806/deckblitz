@@ -661,6 +661,7 @@ import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
 import _poolWolfsQuarry from "../pool/wolfs-quarry.js";
 import _poolWoodlandWanderer from "../pool/woodland-wanderer.js";
 import _poolWoodvineElemental from "../pool/woodvine-elemental.js";
+import _poolWorkhorse from "../pool/workhorse.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolWretchedCamel from "../pool/wretched-camel.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
@@ -1356,6 +1357,7 @@ const shard: CardShard = {
     _poolWolfsQuarry,
     _poolWoodlandWanderer,
     _poolWoodvineElemental,
+    _poolWorkhorse,
     _poolWorldMap,
     _poolWretchedCamel,
     _poolYoshimaru,

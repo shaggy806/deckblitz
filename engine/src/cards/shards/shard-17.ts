@@ -513,6 +513,7 @@ import _poolSeraphOfNewPhyrexia from "../pool/seraph-of-new-phyrexia.js";
 import _poolSevinneTheChronoclasm from "../pool/sevinne-the-chronoclasm.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
 import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
+import _poolShackles from "../pool/shackles.js";
 import _poolShadowProphecy from "../pool/shadow-prophecy.js";
 import _poolShadowsLair from "../pool/shadows-lair.js";
 import _poolShatterwingPegasus from "../pool/shatterwing-pegasus.js";
@@ -1222,6 +1223,7 @@ const shard: CardShard = {
     _poolSevinneTheChronoclasm,
     _poolSewnEyeDrake,
     _poolShabrazTheSkyshark,
+    _poolShackles,
     _poolShadowProphecy,
     _poolShadowsLair,
     _poolShatterwingPegasus,

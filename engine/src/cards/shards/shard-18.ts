@@ -15,6 +15,7 @@ import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
 import _poolAkoumBattlesinger from "../pool/akoum-battlesinger.js";
 import _poolAkroanHoplite from "../pool/akroan-hoplite.js";
+import _poolAllay from "../pool/allay.js";
 import _poolAnHavvaConstable from "../pool/an-havva-constable.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
@@ -716,6 +717,7 @@ const shard: CardShard = {
     _poolAkkiScrapchomper,
     _poolAkoumBattlesinger,
     _poolAkroanHoplite,
+    _poolAllay,
     _poolAnHavvaConstable,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,

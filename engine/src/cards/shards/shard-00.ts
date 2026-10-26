@@ -156,6 +156,7 @@ import _poolDiresight from "../pool/diresight.js";
 import _poolDiscerningFinancier from "../pool/discerning-financier.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
 import _poolDiversionUnit from "../pool/diversion-unit.js";
+import _poolDizzyingGaze from "../pool/dizzying-gaze.js";
 import _poolDominusOfFealty from "../pool/dominus-of-fealty.js";
 import _poolDoomedDissenter from "../pool/doomed-dissenter.js";
 import _poolDoomedTraveler from "../pool/doomed-traveler.js";
@@ -855,6 +856,7 @@ const shard: CardShard = {
     _poolDiscerningFinancier,
     _poolDiscipleOfTheVault,
     _poolDiversionUnit,
+    _poolDizzyingGaze,
     _poolDominusOfFealty,
     _poolDoomedDissenter,
     _poolDoomedTraveler,
