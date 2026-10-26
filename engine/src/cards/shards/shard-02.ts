@@ -20,6 +20,7 @@ import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolAnsweredPrayers from "../pool/answered-prayers.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
+import _poolApocalypse from "../pool/apocalypse.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
 import _poolArcaneInfusion from "../pool/arcane-infusion.js";
 import _poolArgivianAvenger from "../pool/argivian-avenger.js";
@@ -682,6 +683,7 @@ const shard: CardShard = {
     _poolAnsweredPrayers,
     _poolApexAltisaur,
     _poolApexWitchstalker,
+    _poolApocalypse,
     _poolArcaneDenial,
     _poolArcaneInfusion,
     _poolArgivianAvenger,

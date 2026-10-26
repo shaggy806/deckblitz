@@ -3365,6 +3365,34 @@
   "keyword:buyback": {
    "example": "Constant Mists: Buyback — sacrifice a land."
   },
+  "effect:exile-spell-with-delay-counters": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Ertai's Meddling: exile target spell with X delay counters, removing one each upkeep and putting it back on the stack as an uncast copy at the last"
+  },
+  "trigger:chosen-player-draws-named-card": {
+   "family": "decision:name-a-card",
+   "example": "Booby Trap: the chosen player reveals each card they draw; when they draw the named card, sacrifice this and deal 10 damage to them"
+  },
+  "filter:aura-enchant-restriction": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Rootwater Shaman: \"Aura spells with enchant creature\" \u2014 no CardFilter field reads an Aura's enchant restriction"
+  },
+  "static:magnet-counter-attack-block-requirement": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Magnetic Web: a creature with a magnet counter attacking forces each other magnet creature to block it if able"
+  },
+  "effect:destroy-those-that-didnt-attack": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Maddening Imp: destroy each of the creatures fixed as it resolved that didn't attack this turn (a filter at the end step also catches later arrivals)"
+  },
+  "decision:choose-keyword-as-cost": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Phyrexian Splicer: choose flying, ground (sic) \u2014 a keyword chosen as part of the cost, both targets' filters depending on it"
+  },
+  "cost:remove-all-counters": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Torture Chamber: \"remove all pain counters from this artifact\" as a cost, and \"the number of counters removed this way\""
+  },
   "cost:buyback-non-mana": {
    "family": "keyword:buyback",
    "example": "Forbid: \"Buyback—Discard two cards\" — buyback (a kicker keyword) takes a mana cost only; Constant Mists' and Walk the Aeons' sacrifices too."

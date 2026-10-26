@@ -277,6 +277,7 @@ import _poolHarrierStrix from "../pool/harrier-strix.js";
 import _poolHeadsplitter from "../pool/headsplitter.js";
 import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
 import _poolHecatomb from "../pool/hecatomb.js";
+import _poolHelmOfPossession from "../pool/helm-of-possession.js";
 import _poolHiddenPath from "../pool/hidden-path.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
@@ -414,6 +415,7 @@ import _poolPatternOfRebirth from "../pool/pattern-of-rebirth.js";
 import _poolPemminsAura from "../pool/pemmins-aura.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
 import _poolPerilousPredicament from "../pool/perilous-predicament.js";
+import _poolPerish from "../pool/perish.js";
 import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
 import _poolPhaseDolphin from "../pool/phase-dolphin.js";
@@ -956,6 +958,7 @@ const shard: CardShard = {
     _poolHeadsplitter,
     _poolHearthhullTheWorldseed,
     _poolHecatomb,
+    _poolHelmOfPossession,
     _poolHiddenPath,
     _poolHonorboundPage,
     _poolHornetSting,
@@ -1093,6 +1096,7 @@ const shard: CardShard = {
     _poolPemminsAura,
     _poolPendrellDrake,
     _poolPerilousPredicament,
+    _poolPerish,
     _poolPestControl,
     _poolPetrifiedPlating,
     _poolPhaseDolphin,

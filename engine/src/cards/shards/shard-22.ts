@@ -346,6 +346,7 @@ import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMitoticSlime from "../pool/mitotic-slime.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
+import _poolMongrelPack from "../pool/mongrel-pack.js";
 import _poolMonsoon from "../pool/monsoon.js";
 import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
@@ -1028,6 +1029,7 @@ const shard: CardShard = {
     _poolMitoticSlime,
     _poolMizziumMortars,
     _poolMoltenVortex,
+    _poolMongrelPack,
     _poolMonsoon,
     _poolMourningPatrol,
     _poolMouseTrapper,

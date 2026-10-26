@@ -143,6 +143,7 @@ import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js
 import _poolDaringWaverider from "../pool/daring-waverider.js";
 import _poolDavenantTrapper from "../pool/davenant-trapper.js";
 import _poolDawnEvangel from "../pool/dawn-evangel.js";
+import _poolDeathPitsOfRath from "../pool/death-pits-of-rath.js";
 import _poolDeceit from "../pool/deceit.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
@@ -620,6 +621,7 @@ import _poolTilonallisSkinshifter from "../pool/tilonallis-skinshifter.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
 import _poolTooEvilToStayDead from "../pool/too-evil-to-stay-dead.js";
+import _poolToothAndClaw from "../pool/tooth-and-claw.js";
 import _poolTorchFiend from "../pool/torch-fiend.js";
 import _poolTormentedThoughts from "../pool/tormented-thoughts.js";
 import _poolTouchTheSpiritRealm from "../pool/touch-the-spirit-realm.js";
@@ -854,6 +856,7 @@ const shard: CardShard = {
     _poolDaringWaverider,
     _poolDavenantTrapper,
     _poolDawnEvangel,
+    _poolDeathPitsOfRath,
     _poolDeceit,
     _poolDeepwoodGhoul,
     _poolDematerialize,
@@ -1331,6 +1334,7 @@ const shard: CardShard = {
     _poolTimbercrownPathway,
     _poolTombstoneCareerCriminal,
     _poolTooEvilToStayDead,
+    _poolToothAndClaw,
     _poolTorchFiend,
     _poolTormentedThoughts,
     _poolTouchTheSpiritRealm,

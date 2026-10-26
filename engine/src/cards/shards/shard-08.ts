@@ -87,6 +87,7 @@ import _poolBombadilsSong from "../pool/bombadils-song.js";
 import _poolBonecallerCleric from "../pool/bonecaller-cleric.js";
 import _poolBountifulHarvest from "../pool/bountiful-harvest.js";
 import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
+import _poolBountyHunter from "../pool/bounty-hunter.js";
 import _poolBraidwoodCup from "../pool/braidwood-cup.js";
 import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
 import _poolBrightfieldMustang from "../pool/brightfield-mustang.js";
@@ -485,6 +486,7 @@ import _poolRiverwheelSweep from "../pool/riverwheel-sweep.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
+import _poolRootMaze from "../pool/root-maze.js";
 import _poolRuinGhost from "../pool/ruin-ghost.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
 import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.js";
@@ -794,6 +796,7 @@ const shard: CardShard = {
     _poolBonecallerCleric,
     _poolBountifulHarvest,
     _poolBountifulLandscape,
+    _poolBountyHunter,
     _poolBraidwoodCup,
     _poolBranchloftPathway,
     _poolBrightfieldMustang,
@@ -1192,6 +1195,7 @@ const shard: CardShard = {
     _poolRockyRoads,
     _poolRoilsRetribution,
     _poolRoofstalkerWight,
+    _poolRootMaze,
     _poolRuinGhost,
     _poolSageOfTheMaze,
     _poolSaheeliConsulOfOversight,

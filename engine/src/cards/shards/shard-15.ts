@@ -144,6 +144,7 @@ import _poolDrakeUmbra from "../pool/drake-umbra.js";
 import _poolDrannithStinger from "../pool/drannith-stinger.js";
 import _poolDrawnFromDreams from "../pool/drawn-from-dreams.js";
 import _poolDreamstoneHedron from "../pool/dreamstone-hedron.js";
+import _poolDregsOfSorrow from "../pool/dregs-of-sorrow.js";
 import _poolDromarsAttendant from "../pool/dromars-attendant.js";
 import _poolDrownInShapelessness from "../pool/drown-in-shapelessness.js";
 import _poolDryadGreenseeker from "../pool/dryad-greenseeker.js";
@@ -791,6 +792,7 @@ const shard: CardShard = {
     _poolDrannithStinger,
     _poolDrawnFromDreams,
     _poolDreamstoneHedron,
+    _poolDregsOfSorrow,
     _poolDromarsAttendant,
     _poolDrownInShapelessness,
     _poolDryadGreenseeker,

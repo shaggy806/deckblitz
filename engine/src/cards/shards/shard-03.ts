@@ -613,6 +613,7 @@ import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensBoo from "../tokens/boo.js";
 import _tokensCamaridToken from "../tokens/camarid-token.js";
 import _tokensCaribouToken from "../tokens/caribou-token.js";
+import _tokensCarnivoreToken from "../tokens/carnivore-token.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
@@ -1241,6 +1242,7 @@ const shard: CardShard = {
     _tokensBoo,
     _tokensCamaridToken,
     _tokensCaribouToken,
+    _tokensCarnivoreToken,
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,

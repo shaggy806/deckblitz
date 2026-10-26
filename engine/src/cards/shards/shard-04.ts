@@ -149,6 +149,7 @@ import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElderfangRitualist from "../pool/elderfang-ritualist.js";
 import _poolElectrostaticPummeler from "../pool/electrostatic-pummeler.js";
+import _poolElvenWarhounds from "../pool/elven-warhounds.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
 import _poolEmberethVeteran from "../pool/embereth-veteran.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
@@ -805,6 +806,7 @@ const shard: CardShard = {
     _poolElderfangDisciple,
     _poolElderfangRitualist,
     _poolElectrostaticPummeler,
+    _poolElvenWarhounds,
     _poolElvishWarrior,
     _poolEmberethVeteran,
     _poolEmergeFromTheCocoon,

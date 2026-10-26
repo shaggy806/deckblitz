@@ -104,6 +104,7 @@ import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
+import _poolClotSliver from "../pool/clot-sliver.js";
 import _poolCloudpost from "../pool/cloudpost.js";
 import _poolCobbledWings from "../pool/cobbled-wings.js";
 import _poolColdCaseCracker from "../pool/cold-case-cracker.js";
@@ -196,6 +197,7 @@ import _poolFeralFerocity from "../pool/feral-ferocity.js";
 import _poolFerozsBan from "../pool/ferozs-ban.js";
 import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
+import _poolFieldOfSouls from "../pool/field-of-souls.js";
 import _poolFireSages from "../pool/fire-sages.js";
 import _poolFiremantleMage from "../pool/firemantle-mage.js";
 import _poolFirespitterWhelp from "../pool/firespitter-whelp.js";
@@ -366,6 +368,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
+import _poolMnemonicSliver from "../pool/mnemonic-sliver.js";
 import _poolMobileGarrison from "../pool/mobile-garrison.js";
 import _poolMogissFavor from "../pool/mogiss-favor.js";
 import _poolMolderhulk from "../pool/molderhulk.js";
@@ -830,6 +833,7 @@ const shard: CardShard = {
     _poolChildOfNight,
     _poolChillingGrasp,
     _poolCityPigeon,
+    _poolClotSliver,
     _poolCloudpost,
     _poolCobbledWings,
     _poolColdCaseCracker,
@@ -922,6 +926,7 @@ const shard: CardShard = {
     _poolFerozsBan,
     _poolFertilidsFavor,
     _poolFerventCathar,
+    _poolFieldOfSouls,
     _poolFireSages,
     _poolFiremantleMage,
     _poolFirespitterWhelp,
@@ -1092,6 +1097,7 @@ const shard: CardShard = {
     _poolMirranBardiche,
     _poolMirrorpool,
     _poolMiserysShadow,
+    _poolMnemonicSliver,
     _poolMobileGarrison,
     _poolMogissFavor,
     _poolMolderhulk,

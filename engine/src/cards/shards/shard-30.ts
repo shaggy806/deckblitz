@@ -540,6 +540,7 @@ import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
+import _poolSoltariLancer from "../pool/soltari-lancer.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
@@ -578,6 +579,7 @@ import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
 import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
+import _poolTalonSliver from "../pool/talon-sliver.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
@@ -1223,6 +1225,7 @@ const shard: CardShard = {
     _poolSmolderingEfreet,
     _poolSmugglersSurprise,
     _poolSneeringShadewriter,
+    _poolSoltariLancer,
     _poolSoltariPriest,
     _poolSoulbladeRenewer,
     _poolSoulcatchersAerie,
@@ -1261,6 +1264,7 @@ const shard: CardShard = {
     _poolTaintedSigil,
     _poolTajicBladeOfTheLegion,
     _poolTajuruStalwart,
+    _poolTalonSliver,
     _poolTangleMantis,
     _poolTeleport,
     _poolTempleOfMalice,

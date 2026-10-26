@@ -92,6 +92,7 @@ import _poolCamaraderie from "../pool/camaraderie.js";
 import _poolCapashenTemplar from "../pool/capashen-templar.js";
 import _poolCaptainVargusWrath from "../pool/captain-vargus-wrath.js";
 import _poolCarnivorousCultivator from "../pool/carnivorous-cultivator.js";
+import _poolCarrionette from "../pool/carrionette.js";
 import _poolCastIntoDarkness from "../pool/cast-into-darkness.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolCavePeople from "../pool/cave-people.js";
@@ -777,6 +778,7 @@ const shard: CardShard = {
     _poolCapashenTemplar,
     _poolCaptainVargusWrath,
     _poolCarnivorousCultivator,
+    _poolCarrionette,
     _poolCastIntoDarkness,
     _poolCathedralSanctifier,
     _poolCavePeople,

@@ -114,6 +114,7 @@ import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolCharnelhoardWurm from "../pool/charnelhoard-wurm.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
+import _poolChoke from "../pool/choke.js";
 import _poolChopDown from "../pool/chop-down.js";
 import _poolCliffrunnerBehemoth from "../pool/cliffrunner-behemoth.js";
 import _poolClipWings from "../pool/clip-wings.js";
@@ -288,6 +289,7 @@ import _poolIvoryTower from "../pool/ivory-tower.js";
 import _poolJaceBeleren from "../pool/jace-beleren.js";
 import _poolJamesWanderingDad from "../pool/james-wandering-dad.js";
 import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
+import _poolJinxedIdol from "../pool/jinxed-idol.js";
 import _poolJirinaKudro from "../pool/jirina-kudro.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJoyfulStormsculptor from "../pool/joyful-stormsculptor.js";
@@ -443,6 +445,7 @@ import _poolRally from "../pool/rally.js";
 import _poolRalsStaticaster from "../pool/rals-staticaster.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
+import _poolRatsOfRath from "../pool/rats-of-rath.js";
 import _poolRavenOfFellOmens from "../pool/raven-of-fell-omens.js";
 import _poolRavenousNecrotitan from "../pool/ravenous-necrotitan.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
@@ -795,6 +798,7 @@ const shard: CardShard = {
     _poolCharnelhoardWurm,
     _poolChatterOfTheSquirrel,
     _poolChildOfTheVolcano,
+    _poolChoke,
     _poolChopDown,
     _poolCliffrunnerBehemoth,
     _poolClipWings,
@@ -969,6 +973,7 @@ const shard: CardShard = {
     _poolJaceBeleren,
     _poolJamesWanderingDad,
     _poolJetFreedomFighter,
+    _poolJinxedIdol,
     _poolJirinaKudro,
     _poolJooDeeOneOfMany,
     _poolJoyfulStormsculptor,
@@ -1124,6 +1129,7 @@ const shard: CardShard = {
     _poolRalsStaticaster,
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
+    _poolRatsOfRath,
     _poolRavenOfFellOmens,
     _poolRavenousNecrotitan,
     _poolRazakethTheFoulblooded,

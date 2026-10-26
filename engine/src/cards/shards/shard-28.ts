@@ -471,6 +471,7 @@ import _poolRiseOfTheVarmints from "../pool/rise-of-the-varmints.js";
 import _poolRobeOfMirrors from "../pool/robe-of-mirrors.js";
 import _poolRockalanche from "../pool/rockalanche.js";
 import _poolRocksteadyCrashCourser from "../pool/rocksteady-crash-courser.js";
+import _poolRollingThunder from "../pool/rolling-thunder.js";
 import _poolRoostSeek from "../pool/roost-seek.js";
 import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
@@ -1164,6 +1165,7 @@ const shard: CardShard = {
     _poolRobeOfMirrors,
     _poolRockalanche,
     _poolRocksteadyCrashCourser,
+    _poolRollingThunder,
     _poolRoostSeek,
     _poolRootKinAlly,
     _poolRootbreakerWurm,

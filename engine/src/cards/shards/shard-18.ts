@@ -447,10 +447,12 @@ import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
 import _poolRoadOfReturn from "../pool/road-of-return.js";
 import _poolRookTurret from "../pool/rook-turret.js";
+import _poolRootwaterDepths from "../pool/rootwater-depths.js";
 import _poolRootwireAmalgam from "../pool/rootwire-amalgam.js";
 import _poolRunewing from "../pool/runewing.js";
 import _poolRunicShot from "../pool/runic-shot.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
+import _poolSadisticGlee from "../pool/sadistic-glee.js";
 import _poolSadisticObsession from "../pool/sadistic-obsession.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
@@ -1127,10 +1129,12 @@ const shard: CardShard = {
     _poolRiverguardsReflexes,
     _poolRoadOfReturn,
     _poolRookTurret,
+    _poolRootwaterDepths,
     _poolRootwireAmalgam,
     _poolRunewing,
     _poolRunicShot,
     _poolRuthlessWaterbender,
+    _poolSadisticGlee,
     _poolSadisticObsession,
     _poolSalivatingGremlins,
     _poolSaltMarsh,

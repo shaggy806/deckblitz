@@ -424,6 +424,7 @@ import _poolPrimevalProtector from "../pool/primeval-protector.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
 import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
+import _poolPuppetStrings from "../pool/puppet-strings.js";
 import _poolPurifyingDragon from "../pool/purifying-dragon.js";
 import _poolPymTechnologies from "../pool/pym-technologies.js";
 import _poolPyroclasm from "../pool/pyroclasm.js";
@@ -1092,6 +1093,7 @@ const shard: CardShard = {
     _poolPrimocEscapee,
     _poolPrismariCampus,
     _poolProdigalPyromancer,
+    _poolPuppetStrings,
     _poolPurifyingDragon,
     _poolPymTechnologies,
     _poolPyroclasm,

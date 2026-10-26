@@ -129,6 +129,7 @@ import _poolDarkProphecy from "../pool/dark-prophecy.js";
 import _poolDarklingStalker from "../pool/darkling-stalker.js";
 import _poolDarksteelAngel from "../pool/darksteel-angel.js";
 import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
+import _poolDauthiGhoul from "../pool/dauthi-ghoul.js";
 import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
 import _poolDebrisBeetle from "../pool/debris-beetle.js";
@@ -396,6 +397,7 @@ import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
+import _poolPatchworkGnomes from "../pool/patchwork-gnomes.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
 import _poolPatientInstructor from "../pool/patient-instructor.js";
 import _poolPawpatchRecruit from "../pool/pawpatch-recruit.js";
@@ -822,6 +824,7 @@ const shard: CardShard = {
     _poolDarklingStalker,
     _poolDarksteelAngel,
     _poolDaughterOfTheDeep,
+    _poolDauthiGhoul,
     _poolDawnstrikeVanguard,
     _poolDazzlingDenial,
     _poolDebrisBeetle,
@@ -1089,6 +1092,7 @@ const shard: CardShard = {
     _poolPain101,
     _poolParalyze,
     _poolParhelionIi,
+    _poolPatchworkGnomes,
     _poolPathOfAnnihilation,
     _poolPatientInstructor,
     _poolPawpatchRecruit,
