@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3799 already implemented / 1201 missing (marks refreshed 2026-10-26)
+3801 already implemented / 1199 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2550,7 +2550,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2557  Saheeli, Sublime Artificer               {1}{U/R}{U/R}    Legendary Planeswalker — Saheeli
 [ ]  2558  PuPu UFO                                 {2}              Artifact Creature — Construct Alien
 [x]  2559  Black Dragon Gate                        {0}              Land — Gate
-[ ]  2560  Reiterate                                {1}{R}{R}        Instant
+[x]  2560  Reiterate                                {1}{R}{R}        Instant
 [x]  2561  Baldur's Gate                            {0}              Legendary Land — Gate
 [ ]  2562  Mari, the Killing Quill                  {1}{B}{B}        Legendary Creature — Vampire Assassin
 [x]  2563  Somberwald Sage                          {2}{G}           Creature — Human Druid
@@ -4481,7 +4481,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4488  Helix Pinnacle                           {G}              Enchantment
 [x]  4489  Agonasaur Rex                            {3}{G}{G}        Creature — Dinosaur
 [x]  4490  Baron, Airship Kingdom                   {0}              Land — Town
-[ ]  4491  Haze of Rage                             {1}{R}           Sorcery
+[x]  4491  Haze of Rage                             {1}{R}           Sorcery
 [x]  4492  Éowyn, Shieldmaiden                      {2}{U}{R}{W}     Legendary Creature — Human Knight
 [ ]  4493  Peek                                     {U}              Instant
 [x]  4494  Noxious Ghoul                            {3}{B}{B}        Creature — Zombie
