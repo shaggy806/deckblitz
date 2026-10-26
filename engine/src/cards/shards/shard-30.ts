@@ -178,6 +178,7 @@ import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
 import _poolErosion from "../pool/erosion.js";
 import _poolErraticApparition from "../pool/erratic-apparition.js";
+import _poolEsperzoa from "../pool/esperzoa.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEssenceBurn from "../pool/essence-burn.js";
 import _poolEtaliPrimalSickness from "../pool/etali-primal-sickness.js";
@@ -330,6 +331,7 @@ import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
+import _poolKreshTheBloodbraided from "../pool/kresh-the-bloodbraided.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLandbindRitual from "../pool/landbind-ritual.js";
 import _poolLatticeBladeMantis from "../pool/lattice-blade-mantis.js";
@@ -509,6 +511,7 @@ import _poolShreddingWinds from "../pool/shredding-winds.js";
 import _poolShrineOfTheForsakenGods from "../pool/shrine-of-the-forsaken-gods.js";
 import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
 import _poolSightOfTheScalelords from "../pool/sight-of-the-scalelords.js";
+import _poolSigilOfDistinction from "../pool/sigil-of-distinction.js";
 import _poolSigilOfValor from "../pool/sigil-of-valor.js";
 import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
@@ -840,6 +843,7 @@ const shard: CardShard = {
     _poolEriettesLullaby,
     _poolErosion,
     _poolErraticApparition,
+    _poolEsperzoa,
     _poolEssenceAnchor,
     _poolEssenceBurn,
     _poolEtaliPrimalSickness,
@@ -992,6 +996,7 @@ const shard: CardShard = {
     _poolKnowledgeSeeker,
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
+    _poolKreshTheBloodbraided,
     _poolLaeliaTheBladeReforged,
     _poolLandbindRitual,
     _poolLatticeBladeMantis,
@@ -1171,6 +1176,7 @@ const shard: CardShard = {
     _poolShrineOfTheForsakenGods,
     _poolShuSoldierFarmers,
     _poolSightOfTheScalelords,
+    _poolSigilOfDistinction,
     _poolSigilOfValor,
     _poolSilumgarSorcerer,
     _poolSilverflameRitual,

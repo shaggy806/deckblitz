@@ -109,9 +109,11 @@ import _poolCerebralDownload from "../pool/cerebral-download.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
 import _poolChaosWarp from "../pool/chaos-warp.js";
 import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
+import _poolCharnelhoardWurm from "../pool/charnelhoard-wurm.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
 import _poolChopDown from "../pool/chop-down.js";
+import _poolCliffrunnerBehemoth from "../pool/cliffrunner-behemoth.js";
 import _poolClipWings from "../pool/clip-wings.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
@@ -664,6 +666,7 @@ import _tokensBlueHorror from "../tokens/blue-horror.js";
 import _tokensBlueRedElementalToken44 from "../tokens/blue-red-elemental-token-4-4.js";
 import _tokensConstructTokenMetallurgicSummonings from "../tokens/construct-token-metallurgic-summonings.js";
 import _tokensPlainKnightToken from "../tokens/plain-knight-token.js";
+import _tokensRedElementalToken31Haste from "../tokens/red-elemental-token-3-1-haste.js";
 import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
 import _tokensSwordToken from "../tokens/sword-token.js";
 import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
@@ -776,9 +779,11 @@ const shard: CardShard = {
     _poolChaosWand,
     _poolChaosWarp,
     _poolCharismaBobblehead,
+    _poolCharnelhoardWurm,
     _poolChatterOfTheSquirrel,
     _poolChildOfTheVolcano,
     _poolChopDown,
+    _poolCliffrunnerBehemoth,
     _poolClipWings,
     _poolCloudboundMoogle,
     _poolCoalstokeGearhulk,
@@ -1333,6 +1338,7 @@ const shard: CardShard = {
     _tokensBlueRedElementalToken44,
     _tokensConstructTokenMetallurgicSummonings,
     _tokensPlainKnightToken,
+    _tokensRedElementalToken31Haste,
     _tokensSpellgorgerWeirdToken,
     _tokensSwordToken,
     _tokensVampireToken11,

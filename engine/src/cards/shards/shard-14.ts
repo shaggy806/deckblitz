@@ -89,6 +89,7 @@ import _poolCatharsCompanion from "../pool/cathars-companion.js";
 import _poolCauldronOfEssence from "../pool/cauldron-of-essence.js";
 import _poolCavalierOfFlame from "../pool/cavalier-of-flame.js";
 import _poolCavalryDrillmaster from "../pool/cavalry-drillmaster.js";
+import _poolCelestialPurge from "../pool/celestial-purge.js";
 import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
 import _poolChalkOutline from "../pool/chalk-outline.js";
 import _poolChandrasOutburst from "../pool/chandras-outburst.js";
@@ -185,6 +186,7 @@ import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEidolonOfTheGreatRevel from "../pool/eidolon-of-the-great-revel.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
+import _poolElderMastery from "../pool/elder-mastery.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
 import _poolElephantRat from "../pool/elephant-rat.js";
@@ -475,6 +477,7 @@ import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
+import _poolRottingRats from "../pool/rotting-rats.js";
 import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
@@ -748,6 +751,7 @@ const shard: CardShard = {
     _poolCauldronOfEssence,
     _poolCavalierOfFlame,
     _poolCavalryDrillmaster,
+    _poolCelestialPurge,
     _poolCephalidPathmage,
     _poolChalkOutline,
     _poolChandrasOutburst,
@@ -844,6 +848,7 @@ const shard: CardShard = {
     _poolEdgarMarkov,
     _poolEidolonOfTheGreatRevel,
     _poolEivorBattleReady,
+    _poolElderMastery,
     _poolEldraziLinebreaker,
     _poolElementalEruption,
     _poolElephantRat,
@@ -1134,6 +1139,7 @@ const shard: CardShard = {
     _poolRocketVolley,
     _poolRoilElemental,
     _poolRooftopSaboteurs,
+    _poolRottingRats,
     _poolRoyalHerbalist,
     _poolRuinousGremlin,
     _poolRunawayCarriage,

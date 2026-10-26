@@ -104,6 +104,7 @@ import _poolCorpseChurn from "../pool/corpse-churn.js";
 import _poolCourierBat from "../pool/courier-bat.js";
 import _poolCovertCutpurse from "../pool/covert-cutpurse.js";
 import _poolCradleOfSafety from "../pool/cradle-of-safety.js";
+import _poolCradleOfVitality from "../pool/cradle-of-vitality.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
@@ -551,6 +552,7 @@ import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTovolarsHuntmaster from "../pool/tovolars-huntmaster.js";
 import _poolTownGreeter from "../pool/town-greeter.js";
+import _poolToxicIguanar from "../pool/toxic-iguanar.js";
 import _poolTragicBanshee from "../pool/tragic-banshee.js";
 import _poolTrailtrackerScout from "../pool/trailtracker-scout.js";
 import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
@@ -622,6 +624,7 @@ import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
 import _tokensIllusionTokenSacrificedWhenTargeted from "../tokens/illusion-token-sacrificed-when-targeted.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
 import _tokensPhyrexianHorrorTokenNissaAscendedAnimist from "../tokens/phyrexian-horror-token-nissa-ascended-animist.js";
+import _tokensRedGreenWhiteBeastToken88 from "../tokens/red-green-white-beast-token-8-8.js";
 import _tokensRedWarriorToken from "../tokens/red-warrior-token.js";
 import _tokensRedwing from "../tokens/redwing.js";
 import _tokensSlugToken from "../tokens/slug-token.js";
@@ -734,6 +737,7 @@ const shard: CardShard = {
     _poolCourierBat,
     _poolCovertCutpurse,
     _poolCradleOfSafety,
+    _poolCradleOfVitality,
     _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrowdFavorites,
@@ -1181,6 +1185,7 @@ const shard: CardShard = {
     _poolTovolarTheMidnightScourge,
     _poolTovolarsHuntmaster,
     _poolTownGreeter,
+    _poolToxicIguanar,
     _poolTragicBanshee,
     _poolTrailtrackerScout,
     _poolTranscendentArchaic,
@@ -1254,6 +1259,7 @@ const shard: CardShard = {
     _tokensIllusionTokenSacrificedWhenTargeted,
     _tokensMonkToken,
     _tokensPhyrexianHorrorTokenNissaAscendedAnimist,
+    _tokensRedGreenWhiteBeastToken88,
     _tokensRedWarriorToken,
     _tokensRedwing,
     _tokensSlugToken,

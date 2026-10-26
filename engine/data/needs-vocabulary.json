@@ -10552,6 +10552,14 @@
   "trigger:chosen-player-upkeep": {
    "family": "decision:choose-player",
    "example": "Energy Vortex: \"At the beginning of the chosen player's upkeep\""
+  },
+  "static:grant-pt-per-domain": {
+   "family": "static:pt-per-amount",
+   "example": "Manaforce Mace: \"Equipped creature gets +1/+1 for each basic land type among lands you control\" — a granted P/T bonus scaling with domain."
+  },
+  "replacement:enters-under-your-control-instead": {
+   "family": "effect:gain-control-spell",
+   "example": "Gather Specimens: \"If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.\""
   }
  }
 }

@@ -459,6 +459,7 @@ import _poolPolarKraken from "../pool/polar-kraken.js";
 import _poolPolymorph from "../pool/polymorph.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
 import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
+import _poolPrinceOfThralls from "../pool/prince-of-thralls.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
@@ -550,6 +551,7 @@ import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
 import _poolSoldeviSimulacrum from "../pool/soldevi-simulacrum.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
+import _poolSoulsMight from "../pool/souls-might.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
@@ -1145,6 +1147,7 @@ const shard: CardShard = {
     _poolPolymorph,
     _poolPolyraptor,
     _poolPrideOfConquerors,
+    _poolPrinceOfThralls,
     _poolPrizedStatue,
     _poolProdigysPrototype,
     _poolProsperousPirates,
@@ -1236,6 +1239,7 @@ const shard: CardShard = {
     _poolSokkaTenaciousTactician,
     _poolSoldeviSimulacrum,
     _poolSomberwaldDryad,
+    _poolSoulsMight,
     _poolSpaceMarineScout,
     _poolSpellPierce,
     _poolSpiderWomanStunningSavior,

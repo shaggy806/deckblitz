@@ -125,6 +125,7 @@ import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
+import _poolCumberStone from "../pool/cumber-stone.js";
 import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
 import _poolCurryFavor from "../pool/curry-favor.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
@@ -783,6 +784,7 @@ const shard: CardShard = {
     _poolCruelTruths,
     _poolCrystacean,
     _poolCullingTheWeak,
+    _poolCumberStone,
     _poolCunningGeysermage,
     _poolCurryFavor,
     _poolCurseOfClingingWebs,

@@ -225,6 +225,7 @@ import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGnarledProfessor from "../pool/gnarled-professor.js";
 import _poolGnottvoldHermit from "../pool/gnottvold-hermit.js";
 import _poolGoBlank from "../pool/go-blank.js";
+import _poolGoblinAssault from "../pool/goblin-assault.js";
 import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
@@ -285,6 +286,7 @@ import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
 import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
 import _poolJumpScare from "../pool/jump-scare.js";
+import _poolJundCharm from "../pool/jund-charm.js";
 import _poolJundPanorama from "../pool/jund-panorama.js";
 import _poolKayaGeistHunter from "../pool/kaya-geist-hunter.js";
 import _poolKayasGuile from "../pool/kayas-guile.js";
@@ -604,6 +606,7 @@ import _poolVictory from "../pool/victory.js";
 import _poolVileRebirth from "../pool/vile-rebirth.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
+import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
 import _poolWarrenSoultrader from "../pool/warren-soultrader.js";
 import _poolWaterElemental from "../pool/water-elemental.js";
@@ -868,6 +871,7 @@ const shard: CardShard = {
     _poolGnarledProfessor,
     _poolGnottvoldHermit,
     _poolGoBlank,
+    _poolGoblinAssault,
     _poolGoblinBlastRunner,
     _poolGoblinChampion,
     _poolGoblinKing,
@@ -928,6 +932,7 @@ const shard: CardShard = {
     _poolJetmirNexusOfRevels,
     _poolJumboCactuar,
     _poolJumpScare,
+    _poolJundCharm,
     _poolJundPanorama,
     _poolKayaGeistHunter,
     _poolKayasGuile,
@@ -1247,6 +1252,7 @@ const shard: CardShard = {
     _poolVileRebirth,
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
+    _poolVoicesFromTheVoid,
     _poolVoraciousNull,
     _poolWarrenSoultrader,
     _poolWaterElemental,

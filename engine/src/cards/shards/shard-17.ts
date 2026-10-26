@@ -431,6 +431,7 @@ import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
+import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
 import _poolRattleclawMystic from "../pool/rattleclaw-mystic.js";
 import _poolRaucousCarnival from "../pool/raucous-carnival.js";
@@ -639,6 +640,7 @@ import _poolWizenedCenn from "../pool/wizened-cenn.js";
 import _poolWolfsbaneHighlandHero from "../pool/wolfsbane-highland-hero.js";
 import _poolWoodlandDruid from "../pool/woodland-druid.js";
 import _poolWoodlandWeavemaster from "../pool/woodland-weavemaster.js";
+import _poolWretchedBanquet from "../pool/wretched-banquet.js";
 import _poolWrongTurn from "../pool/wrong-turn.js";
 import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
@@ -1103,6 +1105,7 @@ const shard: CardShard = {
     _poolQueenMarchesa,
     _poolQuickStudy,
     _poolRaffineSchemingSeer,
+    _poolRafiqOfTheMany,
     _poolRainOfTears,
     _poolRattleclawMystic,
     _poolRaucousCarnival,
@@ -1311,6 +1314,7 @@ const shard: CardShard = {
     _poolWolfsbaneHighlandHero,
     _poolWoodlandDruid,
     _poolWoodlandWeavemaster,
+    _poolWretchedBanquet,
     _poolWrongTurn,
     _poolYahenniUndyingPartisan,
     _poolYawningFissure,

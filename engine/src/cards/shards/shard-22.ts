@@ -110,6 +110,7 @@ import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
+import _poolCorruptedRoots from "../pool/corrupted-roots.js";
 import _poolCouncilOfAdvisors from "../pool/council-of-advisors.js";
 import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
@@ -469,6 +470,7 @@ import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSearchThePremises from "../pool/search-the-premises.js";
 import _poolSearingLight from "../pool/searing-light.js";
+import _poolSedraxisAlchemist from "../pool/sedraxis-alchemist.js";
 import _poolSeedpodSquire from "../pool/seedpod-squire.js";
 import _poolSeekTheHeart from "../pool/seek-the-heart.js";
 import _poolSeekersFolly from "../pool/seekers-folly.js";
@@ -646,6 +648,7 @@ import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
 import _poolYipYip from "../pool/yip-yip.js";
+import _poolYokeOfTheDamned from "../pool/yoke-of-the-damned.js";
 import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZagothMamba from "../pool/zagoth-mamba.js";
@@ -773,6 +776,7 @@ const shard: CardShard = {
     _poolCombatCourier,
     _poolConclaveEvangelist,
     _poolConsign,
+    _poolCorruptedRoots,
     _poolCouncilOfAdvisors,
     _poolCountryRoads,
     _poolCovenantOfBlood,
@@ -1132,6 +1136,7 @@ const shard: CardShard = {
     _poolSealOfStrength,
     _poolSearchThePremises,
     _poolSearingLight,
+    _poolSedraxisAlchemist,
     _poolSeedpodSquire,
     _poolSeekTheHeart,
     _poolSeekersFolly,
@@ -1309,6 +1314,7 @@ const shard: CardShard = {
     _poolYavimayaElder,
     _poolYawgmothThranPhysician,
     _poolYipYip,
+    _poolYokeOfTheDamned,
     _poolYotiaDeclaresWar,
     _poolYurikoTheTigersShadow,
     _poolZagothMamba,

@@ -150,6 +150,7 @@ import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
+import _poolDragDown from "../pool/drag-down.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
 import _poolDreadSpecter from "../pool/dread-specter.js";
 import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
@@ -447,6 +448,7 @@ import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
+import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
@@ -563,6 +565,7 @@ import _poolSunCrownedHunters from "../pool/sun-crowned-hunters.js";
 import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
+import _poolSwerve from "../pool/swerve.js";
 import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSwiftWarkite from "../pool/swift-warkite.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
@@ -835,6 +838,7 @@ const shard: CardShard = {
     _poolDivideByZero,
     _poolDoomWhisperer,
     _poolDoomskar,
+    _poolDragDown,
     _poolDragonRoost,
     _poolDreadSpecter,
     _poolDreadedBatCloud,
@@ -1132,6 +1136,7 @@ const shard: CardShard = {
     _poolQuilledCharger,
     _poolRageReflection,
     _poolRainSlickedCopse,
+    _poolRakkaMar,
     _poolRakshasasBargain,
     _poolRallyThePeasants,
     _poolRayOfRevelation,
@@ -1248,6 +1253,7 @@ const shard: CardShard = {
     _poolSunlitHoplite,
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
+    _poolSwerve,
     _poolSwiftSpiral,
     _poolSwiftWarkite,
     _poolSylvanAwakening,
