@@ -283,6 +283,7 @@ import _poolHeronOfHope from "../pool/heron-of-hope.js";
 import _poolHerosHeirloom from "../pool/heros-heirloom.js";
 import _poolHexhavenInvigorator from "../pool/hexhaven-invigorator.js";
 import _poolHexingSquelcher from "../pool/hexing-squelcher.js";
+import _poolHibernation from "../pool/hibernation.js";
 import _poolHiddenGrotto from "../pool/hidden-grotto.js";
 import _poolHiddenHerbalists from "../pool/hidden-herbalists.js";
 import _poolHighFlyingAce from "../pool/high-flying-ace.js";
@@ -401,6 +402,7 @@ import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
+import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
@@ -676,6 +678,7 @@ import _poolWeaponsVendor from "../pool/weapons-vendor.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
+import _poolWhetstone from "../pool/whetstone.js";
 import _poolWhirOfInvention from "../pool/whir-of-invention.js";
 import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
@@ -1006,6 +1009,7 @@ const shard: CardShard = {
     _poolHerosHeirloom,
     _poolHexhavenInvigorator,
     _poolHexingSquelcher,
+    _poolHibernation,
     _poolHiddenGrotto,
     _poolHiddenHerbalists,
     _poolHighFlyingAce,
@@ -1124,6 +1128,7 @@ const shard: CardShard = {
     _poolOnTheJob,
     _poolOrazcaPuzzleDoor,
     _poolOrcishHellraiser,
+    _poolOrderOfYawgmoth,
     _poolOriginOfCaptainAmerica,
     _poolOverlordOfTheFloodpits,
     _poolOviyaPashiriSageLifecrafter,
@@ -1399,6 +1404,7 @@ const shard: CardShard = {
     _poolWeaselbackRedcap,
     _poolWeaverOfBlossoms,
     _poolWerefoxBodyguard,
+    _poolWhetstone,
     _poolWhirOfInvention,
     _poolWildPackSquad,
     _poolWildShape,

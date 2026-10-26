@@ -125,6 +125,7 @@ import _poolConcealedWeapon from "../pool/concealed-weapon.js";
 import _poolConstrictingSliver from "../pool/constricting-sliver.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCooperate from "../pool/cooperate.js";
+import _poolCopperGnomes from "../pool/copper-gnomes.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
 import _poolCoreProwler from "../pool/core-prowler.js";
 import _poolCoruscationMage from "../pool/coruscation-mage.js";
@@ -206,6 +207,7 @@ import _poolFelidarGuardian from "../pool/felidar-guardian.js";
 import _poolFeralThallid from "../pool/feral-thallid.js";
 import _poolFieldCreeper from "../pool/field-creeper.js";
 import _poolFieryHellhound from "../pool/fiery-hellhound.js";
+import _poolFieryMantle from "../pool/fiery-mantle.js";
 import _poolFinaleOfEternity from "../pool/finale-of-eternity.js";
 import _poolFireNationSentinels from "../pool/fire-nation-sentinels.js";
 import _poolFireslinger from "../pool/fireslinger.js";
@@ -436,6 +438,7 @@ import _poolPinionFeast from "../pool/pinion-feast.js";
 import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
+import _poolPlanarVoid from "../pool/planar-void.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
@@ -457,6 +460,7 @@ import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
 import _poolReefPirates from "../pool/reef-pirates.js";
 import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
+import _poolReprocess from "../pool/reprocess.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
@@ -623,8 +627,10 @@ import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
+import _poolThranTurbine from "../pool/thran-turbine.js";
 import _poolTidalSurge from "../pool/tidal-surge.js";
 import _poolTimidDrake from "../pool/timid-drake.js";
+import _poolTitaniasChosen from "../pool/titanias-chosen.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
@@ -848,6 +854,7 @@ const shard: CardShard = {
     _poolConstrictingSliver,
     _poolConsumedByGreed,
     _poolCooperate,
+    _poolCopperGnomes,
     _poolCopyEnchantment,
     _poolCoreProwler,
     _poolCoruscationMage,
@@ -929,6 +936,7 @@ const shard: CardShard = {
     _poolFeralThallid,
     _poolFieldCreeper,
     _poolFieryHellhound,
+    _poolFieryMantle,
     _poolFinaleOfEternity,
     _poolFireNationSentinels,
     _poolFireslinger,
@@ -1159,6 +1167,7 @@ const shard: CardShard = {
     _poolPiousInterdiction,
     _poolPiranhaFly,
     _poolPlanarAlly,
+    _poolPlanarVoid,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolPrisonRealm,
@@ -1180,6 +1189,7 @@ const shard: CardShard = {
     _poolRedGhostIntangibleGenius,
     _poolReefPirates,
     _poolRepelTheDarkness,
+    _poolReprocess,
     _poolRepudiateReplicate,
     _poolResurgentBelief,
     _poolResurrectedCultist,
@@ -1346,8 +1356,10 @@ const shard: CardShard = {
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,
+    _poolThranTurbine,
     _poolTidalSurge,
     _poolTimidDrake,
+    _poolTitaniasChosen,
     _poolTitanothRex,
     _poolTogetherAsOne,
     _poolTomeOfLegends,

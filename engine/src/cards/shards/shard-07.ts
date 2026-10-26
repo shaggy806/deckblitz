@@ -216,6 +216,7 @@ import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
+import _poolFortitude from "../pool/fortitude.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolFloweringOfTheWhiteTree,
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
+    _poolFortitude,
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
     _poolFuriousStrength,

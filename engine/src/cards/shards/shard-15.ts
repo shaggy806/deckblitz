@@ -122,6 +122,7 @@ import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
 import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
 import _poolDaredevilsBillyClub from "../pool/daredevils-billy-club.js";
+import _poolDarkestHour from "../pool/darkest-hour.js";
 import _poolDauntlessOnslaught from "../pool/dauntless-onslaught.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDeathTyrant from "../pool/death-tyrant.js";
@@ -280,6 +281,7 @@ import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHeliodsEmissary from "../pool/heliods-emissary.js";
 import _poolHellraiserGoblin from "../pool/hellraiser-goblin.js";
 import _poolHerdchaserDragon from "../pool/herdchaser-dragon.js";
+import _poolHermeticStudy from "../pool/hermetic-study.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
@@ -808,6 +810,7 @@ const shard: CardShard = {
     _poolCybermenSquadron,
     _poolCynetteJellyDrover,
     _poolDaredevilsBillyClub,
+    _poolDarkestHour,
     _poolDauntlessOnslaught,
     _poolDeathBomb,
     _poolDeathTyrant,
@@ -966,6 +969,7 @@ const shard: CardShard = {
     _poolHeliodsEmissary,
     _poolHellraiserGoblin,
     _poolHerdchaserDragon,
+    _poolHermeticStudy,
     _poolHiddenFootblade,
     _poolHighlandWeald,
     _poolHillGiant,

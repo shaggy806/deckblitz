@@ -123,6 +123,7 @@ import _poolCommanderGrevenIlVec from "../pool/commander-greven-il-vec.js";
 import _poolCompositeGolem from "../pool/composite-golem.js";
 import _poolConduitGoblin from "../pool/conduit-goblin.js";
 import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
+import _poolConfiscate from "../pool/confiscate.js";
 import _poolConsulsLieutenant from "../pool/consuls-lieutenant.js";
 import _poolContemplation from "../pool/contemplation.js";
 import _poolCoralCommando from "../pool/coral-commando.js";
@@ -224,6 +225,7 @@ import _poolEyeOfVecna from "../pool/eye-of-vecna.js";
 import _poolEzuriRenegadeLeader from "../pool/ezuri-renegade-leader.js";
 import _poolFaerieConclave from "../pool/faerie-conclave.js";
 import _poolFaerieTauntings from "../pool/faerie-tauntings.js";
+import _poolFaithHealer from "../pool/faith-healer.js";
 import _poolFallajiChaindancer from "../pool/fallaji-chaindancer.js";
 import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
@@ -345,6 +347,7 @@ import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKalemneDiscipleOfIroas from "../pool/kalemne-disciple-of-iroas.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
+import _poolKarnSilverGolem from "../pool/karn-silver-golem.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
@@ -879,6 +882,7 @@ const shard: CardShard = {
     _poolCompositeGolem,
     _poolConduitGoblin,
     _poolConduitOfRuin,
+    _poolConfiscate,
     _poolConsulsLieutenant,
     _poolContemplation,
     _poolCoralCommando,
@@ -980,6 +984,7 @@ const shard: CardShard = {
     _poolEzuriRenegadeLeader,
     _poolFaerieConclave,
     _poolFaerieTauntings,
+    _poolFaithHealer,
     _poolFallajiChaindancer,
     _poolFallajiExcavation,
     _poolFallajiVanguard,
@@ -1101,6 +1106,7 @@ const shard: CardShard = {
     _poolKalemneDiscipleOfIroas,
     _poolKapow,
     _poolKarganDragonrider,
+    _poolKarnSilverGolem,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
     _poolKaylasCommand,

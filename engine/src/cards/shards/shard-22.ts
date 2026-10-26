@@ -75,6 +75,7 @@ import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
 import _poolBrambleguardVeteran from "../pool/brambleguard-veteran.js";
 import _poolBranchOfVituGhazi from "../pool/branch-of-vitu-ghazi.js";
+import _poolBrand from "../pool/brand.js";
 import _poolBrazenBuccaneers from "../pool/brazen-buccaneers.js";
 import _poolBrazenCollector from "../pool/brazen-collector.js";
 import _poolBridledBighorn from "../pool/bridled-bighorn.js";
@@ -254,6 +255,7 @@ import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeroOfIroas from "../pool/hero-of-iroas.js";
 import _poolHeroesBane from "../pool/heroes-bane.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
+import _poolHiddenSpider from "../pool/hidden-spider.js";
 import _poolHighlandGame from "../pool/highland-game.js";
 import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
@@ -518,6 +520,7 @@ import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
 import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
+import _poolShowerOfSparks from "../pool/shower-of-sparks.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
 import _poolSigardaHeronsGrace from "../pool/sigarda-herons-grace.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
@@ -792,6 +795,7 @@ const shard: CardShard = {
     _poolBrainFreeze,
     _poolBrambleguardVeteran,
     _poolBranchOfVituGhazi,
+    _poolBrand,
     _poolBrazenBuccaneers,
     _poolBrazenCollector,
     _poolBridledBighorn,
@@ -971,6 +975,7 @@ const shard: CardShard = {
     _poolHeroOfIroas,
     _poolHeroesBane,
     _poolHeronbladeElite,
+    _poolHiddenSpider,
     _poolHighlandGame,
     _poolHiveOfTheEyeTyrant,
     _poolHomunculusHorde,
@@ -1235,6 +1240,7 @@ const shard: CardShard = {
     _poolShinraReinforcements,
     _poolShireTerrace,
     _poolShockerUnshakable,
+    _poolShowerOfSparks,
     _poolSiegeGangCommander,
     _poolSigardaHeronsGrace,
     _poolSightlessGhoul,

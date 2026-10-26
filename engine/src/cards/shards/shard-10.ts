@@ -218,6 +218,7 @@ import _poolFinalReward from "../pool/final-reward.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFlamerushRider from "../pool/flamerush-rider.js";
 import _poolFlashfires from "../pool/flashfires.js";
+import _poolFleshReaver from "../pool/flesh-reaver.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
 import _poolFogOfWar from "../pool/fog-of-war.js";
@@ -660,6 +661,7 @@ import _poolVampiricTutor from "../pool/vampiric-tutor.js";
 import _poolVedalkenOrrery from "../pool/vedalken-orrery.js";
 import _poolVenom from "../pool/venom.js";
 import _poolVenomthrope from "../pool/venomthrope.js";
+import _poolVernalBloom from "../pool/vernal-bloom.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
@@ -943,6 +945,7 @@ const shard: CardShard = {
     _poolFixerTechnoTerror,
     _poolFlamerushRider,
     _poolFlashfires,
+    _poolFleshReaver,
     _poolFleshbagMarauder,
     _poolFloodedStrand,
     _poolFogOfWar,
@@ -1385,6 +1388,7 @@ const shard: CardShard = {
     _poolVedalkenOrrery,
     _poolVenom,
     _poolVenomthrope,
+    _poolVernalBloom,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
     _poolVigorsporeWurm,

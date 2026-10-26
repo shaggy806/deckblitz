@@ -113,6 +113,7 @@ import _poolChosenByHeliod from "../pool/chosen-by-heliod.js";
 import _poolCinderslashRavager from "../pool/cinderslash-ravager.js";
 import _poolCircleOfPower from "../pool/circle-of-power.js";
 import _poolCircleOfProtectionShadow from "../pool/circle-of-protection-shadow.js";
+import _poolCitanulFlute from "../pool/citanul-flute.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
 import _poolCivicStalwart from "../pool/civic-stalwart.js";
 import _poolClamavus from "../pool/clamavus.js";
@@ -157,6 +158,7 @@ import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
 import _poolDemystify from "../pool/demystify.js";
 import _poolDepartedSoulkeeper from "../pool/departed-soulkeeper.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
+import _poolDespondency from "../pool/despondency.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
@@ -839,6 +841,7 @@ const shard: CardShard = {
     _poolCinderslashRavager,
     _poolCircleOfPower,
     _poolCircleOfProtectionShadow,
+    _poolCitanulFlute,
     _poolCitanulStalwart,
     _poolCivicStalwart,
     _poolClamavus,
@@ -883,6 +886,7 @@ const shard: CardShard = {
     _poolDemystify,
     _poolDepartedSoulkeeper,
     _poolDepthChargeColossus,
+    _poolDespondency,
     _poolDevoteeOfStrength,
     _poolDevouringTendrils,
     _poolDimirGuildmage,

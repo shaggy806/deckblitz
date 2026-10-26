@@ -38,6 +38,7 @@ import _poolArcboundTracker from "../pool/arcbound-tracker.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
+import _poolArgothianWurm from "../pool/argothian-wurm.js";
 import _poolArmorOfThorns from "../pool/armor-of-thorns.js";
 import _poolArniSlaysTheTroll from "../pool/arni-slays-the-troll.js";
 import _poolAscendantDustspeaker from "../pool/ascendant-dustspeaker.js";
@@ -323,6 +324,7 @@ import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumbleNaturalist from "../pool/humble-naturalist.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
+import _poolHush from "../pool/hush.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
 import _poolIcingdeathFrostTyrant from "../pool/icingdeath-frost-tyrant.js";
 import _poolImoenMysticTrickster from "../pool/imoen-mystic-trickster.js";
@@ -369,6 +371,7 @@ import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
+import _poolLiltingRefrain from "../pool/lilting-refrain.js";
 import _poolLithatog from "../pool/lithatog.js";
 import _poolLlanowarCavalry from "../pool/llanowar-cavalry.js";
 import _poolLlanowarScout from "../pool/llanowar-scout.js";
@@ -745,6 +748,7 @@ const shard: CardShard = {
     _poolArchangelOfThune,
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
+    _poolArgothianWurm,
     _poolArmorOfThorns,
     _poolArniSlaysTheTroll,
     _poolAscendantDustspeaker,
@@ -1030,6 +1034,7 @@ const shard: CardShard = {
     _poolHumbleNaturalist,
     _poolHumblingElder,
     _poolHuntersBow,
+    _poolHush,
     _poolIceCreamKitty,
     _poolIcingdeathFrostTyrant,
     _poolImoenMysticTrickster,
@@ -1076,6 +1081,7 @@ const shard: CardShard = {
     _poolLeapingMaster,
     _poolLeyDruid,
     _poolLightningStrike,
+    _poolLiltingRefrain,
     _poolLithatog,
     _poolLlanowarCavalry,
     _poolLlanowarScout,

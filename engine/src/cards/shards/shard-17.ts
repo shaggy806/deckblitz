@@ -184,6 +184,7 @@ import _poolElementalUprising from "../pool/elemental-uprising.js";
 import _poolElephantGraveyard from "../pool/elephant-graveyard.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
+import _poolEnergyField from "../pool/energy-field.js";
 import _poolEnsoulArtifact from "../pool/ensoul-artifact.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEntreatTheAngels from "../pool/entreat-the-angels.js";
@@ -909,6 +910,7 @@ const shard: CardShard = {
     _poolElephantGraveyard,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
+    _poolEnergyField,
     _poolEnsoulArtifact,
     _poolEnterTheGodEternals,
     _poolEntreatTheAngels,

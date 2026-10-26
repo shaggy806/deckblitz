@@ -213,6 +213,7 @@ import _poolEvangelOfHeliod from "../pool/evangel-of-heliod.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
+import _poolExpunge from "../pool/expunge.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
@@ -963,6 +964,7 @@ const shard: CardShard = {
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
+    _poolExpunge,
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
     _poolFabledPassage,

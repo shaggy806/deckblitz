@@ -126,6 +126,7 @@ import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
+import _poolCrystalChimes from "../pool/crystal-chimes.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
 import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
 import _poolCuriousObsession from "../pool/curious-obsession.js";
@@ -829,6 +830,7 @@ const shard: CardShard = {
     _poolCremate,
     _poolCribSwap,
     _poolCruelReality,
+    _poolCrystalChimes,
     _poolCudgelTroll,
     _poolCulminationOfStudies,
     _poolCuriousObsession,

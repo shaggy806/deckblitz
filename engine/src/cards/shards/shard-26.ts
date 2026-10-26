@@ -301,6 +301,7 @@ import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
 import _poolIchorRats from "../pool/ichor-rats.js";
 import _poolIdolOfFalseGods from "../pool/idol-of-false-gods.js";
+import _poolIllGottenGains from "../pool/ill-gotten-gains.js";
 import _poolIllusionsOfGrandeur from "../pool/illusions-of-grandeur.js";
 import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
@@ -1016,6 +1017,7 @@ const shard: CardShard = {
     _poolIceTunnel,
     _poolIchorRats,
     _poolIdolOfFalseGods,
+    _poolIllGottenGains,
     _poolIllusionsOfGrandeur,
     _poolImmolation,
     _poolImpetuousSunchaser,

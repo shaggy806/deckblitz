@@ -108,6 +108,7 @@ import _poolCongregate from "../pool/congregate.js";
 import _poolConquerorsFoothold from "../pool/conquerors-foothold.js";
 import _poolConquerorsPledge from "../pool/conquerors-pledge.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
+import _poolCorrupt from "../pool/corrupt.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
@@ -682,6 +683,7 @@ import _poolWiltLeafCavaliers from "../pool/wilt-leaf-cavaliers.js";
 import _poolWingedSliver from "../pool/winged-sliver.js";
 import _poolWirewoodSavage from "../pool/wirewood-savage.js";
 import _poolWistfulness from "../pool/wistfulness.js";
+import _poolWitchEngine from "../pool/witch-engine.js";
 import _poolWrackWithMadness from "../pool/wrack-with-madness.js";
 import _poolWrathOfGod from "../pool/wrath-of-god.js";
 import _poolXiraArien from "../pool/xira-arien.js";
@@ -825,6 +827,7 @@ const shard: CardShard = {
     _poolConquerorsFoothold,
     _poolConquerorsPledge,
     _poolCopperlineGorge,
+    _poolCorrupt,
     _poolCosmiumKiln,
     _poolCourserOfKruphix,
     _poolCrashingFootfalls,
@@ -1399,6 +1402,7 @@ const shard: CardShard = {
     _poolWingedSliver,
     _poolWirewoodSavage,
     _poolWistfulness,
+    _poolWitchEngine,
     _poolWrackWithMadness,
     _poolWrathOfGod,
     _poolXiraArien,

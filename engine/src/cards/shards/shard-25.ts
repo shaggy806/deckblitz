@@ -29,6 +29,7 @@ import _poolAnimatingFaerie from "../pool/animating-faerie.js";
 import _poolAnnihilatingFire from "../pool/annihilating-fire.js";
 import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
 import _poolAquusSteed from "../pool/aquus-steed.js";
+import _poolArcLightning from "../pool/arc-lightning.js";
 import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
 import _poolArcboundReclaimer from "../pool/arcbound-reclaimer.js";
 import _poolArcboundWorker from "../pool/arcbound-worker.js";
@@ -348,6 +349,7 @@ import _poolLootThePathfinder from "../pool/loot-the-pathfinder.js";
 import _poolLordOfTheNazgul from "../pool/lord-of-the-nazgul.js";
 import _poolLordOfThePit from "../pool/lord-of-the-pit.js";
 import _poolLoreholdCommand from "../pool/lorehold-command.js";
+import _poolLotusBlossom from "../pool/lotus-blossom.js";
 import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
@@ -727,6 +729,7 @@ const shard: CardShard = {
     _poolAnnihilatingFire,
     _poolApprenticeNecromancer,
     _poolAquusSteed,
+    _poolArcLightning,
     _poolArcaneEncyclopedia,
     _poolArcboundReclaimer,
     _poolArcboundWorker,
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolLordOfTheNazgul,
     _poolLordOfThePit,
     _poolLoreholdCommand,
+    _poolLotusBlossom,
     _poolLotusCobra,
     _poolLoyalApprentice,
     _poolMachinistsArsenal,

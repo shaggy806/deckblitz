@@ -182,6 +182,7 @@ import _poolDizzySpell from "../pool/dizzy-spell.js";
 import _poolDizzyingSwoop from "../pool/dizzying-swoop.js";
 import _poolDoomskarTitan from "../pool/doomskar-titan.js";
 import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
+import _poolDouse from "../pool/douse.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
 import _poolDragonMoose from "../pool/dragon-moose.js";
 import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
@@ -215,7 +216,9 @@ import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
 import _poolFalkenrathPitFighter from "../pool/falkenrath-pit-fighter.js";
 import _poolFallenShinobi from "../pool/fallen-shinobi.js";
+import _poolFalter from "../pool/falter.js";
 import _poolFatalPush from "../pool/fatal-push.js";
+import _poolFaultLine from "../pool/fault-line.js";
 import _poolFearOfFalling from "../pool/fear-of-falling.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
 import _poolFencerClique from "../pool/fencer-clique.js";
@@ -631,6 +634,7 @@ import _poolSwirlingSpriggan from "../pool/swirling-spriggan.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
 import _poolSyrFarenTheHengehammer from "../pool/syr-faren-the-hengehammer.js";
 import _poolT45PowerArmor from "../pool/t-45-power-armor.js";
+import _poolTaintedAether from "../pool/tainted-aether.js";
 import _poolTalasLookout from "../pool/talas-lookout.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
@@ -941,6 +945,7 @@ const shard: CardShard = {
     _poolDizzyingSwoop,
     _poolDoomskarTitan,
     _poolDorotheaVengefulVictim,
+    _poolDouse,
     _poolDrMadisonLi,
     _poolDragonMoose,
     _poolDragonlairSpider,
@@ -974,7 +979,9 @@ const shard: CardShard = {
     _poolFaithfulPikemaster,
     _poolFalkenrathPitFighter,
     _poolFallenShinobi,
+    _poolFalter,
     _poolFatalPush,
+    _poolFaultLine,
     _poolFearOfFalling,
     _poolFellwarStone,
     _poolFencerClique,
@@ -1390,6 +1397,7 @@ const shard: CardShard = {
     _poolSylvanSafekeeper,
     _poolSyrFarenTheHengehammer,
     _poolT45PowerArmor,
+    _poolTaintedAether,
     _poolTalasLookout,
     _poolTatteredMummy,
     _poolTazriBeaconOfUnity,
