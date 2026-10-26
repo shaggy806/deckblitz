@@ -264,6 +264,7 @@ import _poolGrowingDread from "../pool/growing-dread.js";
 import _poolGryffwingCavalry from "../pool/gryffwing-cavalry.js";
 import _poolGuardianAugmenter from "../pool/guardian-augmenter.js";
 import _poolHammerOfNazahn from "../pool/hammer-of-nazahn.js";
+import _poolHanweirLancer from "../pool/hanweir-lancer.js";
 import _poolHardenedEscort from "../pool/hardened-escort.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
 import _poolHaveABite from "../pool/have-a-bite.js";
@@ -974,6 +975,7 @@ const shard: CardShard = {
     _poolGryffwingCavalry,
     _poolGuardianAugmenter,
     _poolHammerOfNazahn,
+    _poolHanweirLancer,
     _poolHardenedEscort,
     _poolHarriedArtisan,
     _poolHaveABite,

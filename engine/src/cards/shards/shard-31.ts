@@ -170,6 +170,7 @@ import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
 import _poolDireUndercurrents from "../pool/dire-undercurrents.js";
+import _poolDiregrafEscort from "../pool/diregraf-escort.js";
 import _poolDirgeBat from "../pool/dirge-bat.js";
 import _poolDiscerningPeddler from "../pool/discerning-peddler.js";
 import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
@@ -908,6 +909,7 @@ const shard: CardShard = {
     _poolDinotomaton,
     _poolDiplomaticImmunity,
     _poolDireUndercurrents,
+    _poolDiregrafEscort,
     _poolDirgeBat,
     _poolDiscerningPeddler,
     _poolDiscreetRetreat,

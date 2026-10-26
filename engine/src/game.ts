@@ -107,6 +107,7 @@ import {
   exemptFromLegendRule,
   hasAnyAbility,
   hasLostAbilities,
+  pairedPartner,
   hasExileIfLeavesAbility,
   hasLayerFourPart,
   abilitiesLostAt,
@@ -4287,6 +4288,8 @@ export class Game {
       o.controlEffects !== undefined ||
       // Each prepared token has its own prepare spell's copy (rule 722.3c).
       o.prepared !== undefined ||
+      // A paired token is paired by itself (rule 702.95d).
+      o.pairedWith !== undefined ||
       !this.isStackableTokenName(printedCardName(o)) ||
       // A vanilla token that's been *granted* an activated ability
       // (Cryptolith Rite) has to be tapped one at a time — until there are
@@ -24046,6 +24049,25 @@ export class Game {
         // It's legendary now (701.54c): the legend rule may apply.
         invalidateComputedCache();
       },
+      pairWithSource: (id) => {
+        // Rule 702.95c: both still creatures on the battlefield under the
+        // soulbond ability's controller, or neither becomes paired; 702.95d:
+        // each pairs with one creature only.
+        const fits = (o: GameObject | undefined): o is GameObject =>
+          o !== undefined &&
+          o.zone === "battlefield" &&
+          o.controller === controller &&
+          pairedPartner(this.state, o) === undefined &&
+          effectiveTypes(this.state, this.registry, o).includes("creature");
+        const self = this.state.objects[source];
+        if (id === source || !fits(self) || !fits(this.state.objects[id])) return;
+        // A token in a stack is paired by itself.
+        const one = this.splitOneFromStack(source);
+        const other = this.splitOneFromStack(id);
+        this.state.objects[one].pairedWith = other;
+        this.state.objects[other].pairedWith = one;
+        invalidateComputedCache();
+      },
       ringTemptFinish: () => {
         const player = this.state.players[controller];
         const count = (player.ringTemptations ?? 0) + 1;
@@ -34331,6 +34353,33 @@ export class Game {
     return removed;
   }
 
+  /**
+   * Ends every soulbond pairing rule 702.95e has broken — either creature
+   * left the battlefield, another player gained control of one, or one
+   * stopped being a creature — clearing both halves, so it stays unpaired
+   * if it's a creature again (it isn't a state-based action, but nothing
+   * reads a pairing between checks without `pairedPartner`'s own guard).
+   */
+  private unpairBrokenPairs(): void {
+    let unpaired = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object?.pairedWith === undefined) continue;
+      const partner = pairedPartner(this.state, object);
+      if (
+        partner !== undefined &&
+        effectiveTypes(this.state, this.registry, object).includes("creature") &&
+        effectiveTypes(this.state, this.registry, partner).includes("creature")
+      ) {
+        continue;
+      }
+      delete object.pairedWith;
+      if (partner !== undefined) delete partner.pairedWith;
+      unpaired = true;
+    }
+    if (unpaired) invalidateComputedCache();
+  }
+
   private runStateBasedActionsUncached(): void {
     let changed = true;
     while (changed) {
@@ -34367,6 +34416,10 @@ export class Game {
       // a creature — a God whose devotion fell — is removed from combat, and
       // doesn't rejoin it if it's a creature again (the Gods' ruling).
       if (this.removeNoncreaturesFromCombat()) changed = true;
+
+      // Rule 702.95e: a soulbond pairing ends for good once either creature
+      // leaves, changes control or stops being a creature.
+      this.unpairBrokenPairs();
 
       // Rule 704.5aa: a player who controls a permanent with start your
       // engines! and has no speed gets a speed of 1.
@@ -36798,6 +36851,9 @@ export class Game {
     object.modifiers = keptPrototype;
     object.attachedTo = null;
     delete object.attachedToPlayer;
+    // Leaving the battlefield unpairs it (rule 702.95e); its partner's half
+    // goes at the next state-based check (`unpairBrokenPairs`).
+    delete object.pairedWith;
     // A permanent that leaves the battlefield reverts to its owner's control
     // (rule 110.2 / 400.3) — so a stolen creature that dies or is bounced goes
     // to its owner, not the thief.

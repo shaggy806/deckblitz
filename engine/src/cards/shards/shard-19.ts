@@ -370,6 +370,7 @@ import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
+import _poolLightningMauler from "../pool/lightning-mauler.js";
 import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
@@ -604,6 +605,7 @@ import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
 import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
+import _poolStonewright from "../pool/stonewright.js";
 import _poolStonyStrength from "../pool/stony-strength.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
@@ -1102,6 +1104,7 @@ const shard: CardShard = {
     _poolLecturingScornmage,
     _poolLifecraftersBestiary,
     _poolLifelink,
+    _poolLightningMauler,
     _poolLoranDiscipleOfHistory,
     _poolLoreWeaver,
     _poolLoreholdCharm,
@@ -1336,6 +1339,7 @@ const shard: CardShard = {
     _poolSteelWreckingBall,
     _poolStirringHopesinger,
     _poolStoneboundMentor,
+    _poolStonewright,
     _poolStonyStrength,
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,

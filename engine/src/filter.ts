@@ -22,6 +22,7 @@ import {
   hasAnyAbility,
   hasLostAbilities,
   hasManaAbility,
+  pairedPartner,
 } from "./characteristics.js";
 import type { CastVia } from "./actions.js";
 import type { CardRegistry, CardType, Keyword, Supertype } from "./cards.js";
@@ -443,6 +444,10 @@ export interface CardFilter {
    * `"any"` is any player's Ring-bearer — Lord of the Nazgûl's "protection
    * from **Ring-bearers**". */
   readonly ringBearer?: boolean | "any";
+  /** Is (or isn't) paired with another creature by soulbond (rule 702.95b) —
+   * soulbond's "if … both are **unpaired**" is `paired: false`. Read on the
+   * battlefield only: off it, never paired. */
+  readonly paired?: boolean;
   /** Is (or isn't) prepared (rule 722.3a) — Woodwork Prodigy's "if this
    * creature isn't prepared". Read on the battlefield only: off it, never. */
   readonly prepared?: boolean;
@@ -1267,6 +1272,10 @@ export function matchesFilter(
     (live !== undefined && isRingBearer(state, ctx.you, id)) !== filter.ringBearer
   ) {
     return false;
+  }
+  if (filter.paired !== undefined) {
+    const paired = live !== undefined && pairedPartner(state, live) !== undefined;
+    if (paired !== filter.paired) return false;
   }
   if (filter.prepared !== undefined) {
     const prepared = live !== undefined && live.zone === "battlefield" && live.prepared !== undefined;

@@ -475,6 +475,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "the-ring-tempts-you": none,
   // Slot 0 is the creature chosen, not the enclosing ability's target.
   "become-ring-bearer": none,
+  pair: none,
   "ring-tempted": none,
   // Poison and rad counters hurt their player (rad mills and drains, rule
   // 728.1); experience helps.

@@ -379,6 +379,7 @@ import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
 import _poolNahiriHeirOfTheAncients from "../pool/nahiri-heir-of-the-ancients.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
+import _poolNearheathPilgrim from "../pool/nearheath-pilgrim.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
 import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
@@ -1097,6 +1098,7 @@ const shard: CardShard = {
     _poolMurdocksCrusade,
     _poolNahiriHeirOfTheAncients,
     _poolNaturesSpiral,
+    _poolNearheathPilgrim,
     _poolNecroblossomSnarl,
     _poolNecroticSliver,
     _poolNephaliaDrownyard,

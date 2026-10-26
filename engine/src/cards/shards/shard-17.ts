@@ -136,6 +136,7 @@ import _poolDarkDepths from "../pool/dark-depths.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
 import _poolDeadOfWinter from "../pool/dead-of-winter.js";
 import _poolDeadapult from "../pool/deadapult.js";
+import _poolDeadeyeNavigator from "../pool/deadeye-navigator.js";
 import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
@@ -845,6 +846,7 @@ const shard: CardShard = {
     _poolDarkthicketWolf,
     _poolDeadOfWinter,
     _poolDeadapult,
+    _poolDeadeyeNavigator,
     _poolDeadlyEmbrace,
     _poolDeathBaron,
     _poolDeceptiveLandscape,

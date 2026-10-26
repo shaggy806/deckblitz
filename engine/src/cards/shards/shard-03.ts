@@ -374,6 +374,7 @@ import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
 import _poolOvercome from "../pool/overcome.js";
 import _poolPalianoVanguard from "../pool/paliano-vanguard.js";
 import _poolPalladiaMors from "../pool/palladia-mors.js";
+import _poolPathbreakerWurm from "../pool/pathbreaker-wurm.js";
 import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
@@ -604,6 +605,7 @@ import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
 import _poolWidowsBite from "../pool/widows-bite.js";
 import _poolWingIt from "../pool/wing-it.js";
 import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
+import _poolWingcrafter from "../pool/wingcrafter.js";
 import _poolWingspanMentor from "../pool/wingspan-mentor.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
@@ -1010,6 +1012,7 @@ const shard: CardShard = {
     _poolOvercome,
     _poolPalianoVanguard,
     _poolPalladiaMors,
+    _poolPathbreakerWurm,
     _poolPenregonStrongbull,
     _poolPersist,
     _poolPiggyBank,
@@ -1240,6 +1243,7 @@ const shard: CardShard = {
     _poolWidowsBite,
     _poolWingIt,
     _poolWingbladeDisciple,
+    _poolWingcrafter,
     _poolWingspanMentor,
     _poolWittyRoastmaster,
     _poolWoeStrider,

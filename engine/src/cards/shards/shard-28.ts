@@ -176,6 +176,7 @@ import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
 import _poolDrowned from "../pool/drowned.js";
+import _poolDruidsFamiliar from "../pool/druids-familiar.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolDuskMangler from "../pool/dusk-mangler.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
@@ -395,6 +396,7 @@ import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
 import _poolNightmareUnmaking from "../pool/nightmare-unmaking.js";
 import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
+import _poolNightshadePeddler from "../pool/nightshade-peddler.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
 import _poolNorthernPaladin from "../pool/northern-paladin.js";
@@ -896,6 +898,7 @@ const shard: CardShard = {
     _poolDrossRipper,
     _poolDrownInDreams,
     _poolDrowned,
+    _poolDruidsFamiliar,
     _poolDunedainBlade,
     _poolDuskMangler,
     _poolEarthrumbler,
@@ -1115,6 +1118,7 @@ const shard: CardShard = {
     _poolNightguardPatrol,
     _poolNightmareUnmaking,
     _poolNightscapeApprentice,
+    _poolNightshadePeddler,
     _poolNightwindGlider,
     _poolNissasPilgrimage,
     _poolNorthernPaladin,

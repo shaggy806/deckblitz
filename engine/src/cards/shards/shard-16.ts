@@ -144,6 +144,7 @@ import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDomriRade from "../pool/domri-rade.js";
+import _poolDoomWeaver from "../pool/doom-weaver.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
@@ -895,6 +896,7 @@ const shard: CardShard = {
     _poolDiscipleOfMalice,
     _poolDivineGambit,
     _poolDomriRade,
+    _poolDoomWeaver,
     _poolDoorOfDestinies,
     _poolDragonTempest,
     _poolDragonTurtle,
