@@ -386,7 +386,8 @@ export interface LifeGainReplacement {
  * `source` is a filter on the source of the damage, from this permanent's
  * controller's side (a departed source as it last existed); `to` narrows
  * the recipient: `"opponent"` (an opponent), `"opponent-side"` (an opponent
- * or a permanent an opponent controls), `"you"`, `"self"` (this permanent).
+ * or a permanent an opponent controls), `"you"`, `"player"` (any player —
+ * Tok-Tok, Volcano Born), `"self"` (this permanent).
  * Omitted: anyone's damage, to anything.
  *
  * Applied in `Game.dealDamage` in a fixed order — every multiplier, then
@@ -420,7 +421,7 @@ export interface DamageMultiplierReplacement {
   /** Only damage **this permanent** would deal — Wolverine, Best There
    * Is's "double all damage Wolverine would deal". */
   readonly fromSelf?: boolean;
-  readonly to?: "opponent" | "opponent-side" | "you" | "self";
+  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "self";
   /** Only damage to a permanent matching this filter, from this permanent's
    * controller's side, as it is when the damage would be dealt — Iroas, God
    * of Victory's "prevent all damage that would be dealt to attacking

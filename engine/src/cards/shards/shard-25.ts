@@ -308,6 +308,7 @@ import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
 import _poolImpendingFlux from "../pool/impending-flux.js";
 import _poolImplementsOfSacrifice from "../pool/implements-of-sacrifice.js";
 import _poolImposingSovereign from "../pool/imposing-sovereign.js";
+import _poolInameDeathAspect from "../pool/iname-death-aspect.js";
 import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
 import _poolInfernoElemental from "../pool/inferno-elemental.js";
@@ -1043,6 +1044,7 @@ const shard: CardShard = {
     _poolImpendingFlux,
     _poolImplementsOfSacrifice,
     _poolImposingSovereign,
+    _poolInameDeathAspect,
     _poolIndomitableWill,
     _poolInfantryShield,
     _poolInfernoElemental,

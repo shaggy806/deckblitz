@@ -293,6 +293,7 @@ import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolHuntingPack from "../pool/hunting-pack.js";
 import _poolHydrolash from "../pool/hydrolash.js";
 import _poolIcefeatherAven from "../pool/icefeather-aven.js";
+import _poolIchigaWhoTopplesOaks from "../pool/ichiga-who-topples-oaks.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
 import _poolIkiralOutrider from "../pool/ikiral-outrider.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
@@ -634,6 +635,7 @@ import _poolSylvanReclamation from "../pool/sylvan-reclamation.js";
 import _poolSylvanScavenging from "../pool/sylvan-scavenging.js";
 import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
+import _poolTakenosCavalry from "../pool/takenos-cavalry.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
@@ -1052,6 +1054,7 @@ const shard: CardShard = {
     _poolHuntingPack,
     _poolHydrolash,
     _poolIcefeatherAven,
+    _poolIchigaWhoTopplesOaks,
     _poolIchorclawMyr,
     _poolIkiralOutrider,
     _poolIlluminatedWings,
@@ -1393,6 +1396,7 @@ const shard: CardShard = {
     _poolSylvanScavenging,
     _poolSynchronizedCharge,
     _poolSyrGwynHeroOfAshvale,
+    _poolTakenosCavalry,
     _poolTamiyosJournal,
     _poolTarPitcher,
     _poolTeamAvatar,

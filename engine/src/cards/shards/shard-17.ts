@@ -527,6 +527,7 @@ import _poolRustMonster from "../pool/rust-monster.js";
 import _poolRuthlessPredation from "../pool/ruthless-predation.js";
 import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
 import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
+import _poolSamuraiOfThePaleCurtain from "../pool/samurai-of-the-pale-curtain.js";
 import _poolSanctifierEnVec from "../pool/sanctifier-en-vec.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
 import _poolSawbackManticore from "../pool/sawback-manticore.js";
@@ -1284,6 +1285,7 @@ const shard: CardShard = {
     _poolRuthlessPredation,
     _poolSabertoothWyvern,
     _poolSabretoothTiger,
+    _poolSamuraiOfThePaleCurtain,
     _poolSanctifierEnVec,
     _poolSarkhanDragonAscendant,
     _poolSawbackManticore,

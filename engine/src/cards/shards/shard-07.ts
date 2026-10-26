@@ -125,6 +125,7 @@ import _poolCreeperhulk from "../pool/creeperhulk.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrossroadsConsecrator from "../pool/crossroads-consecrator.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
+import _poolCunningBandit from "../pool/cunning-bandit.js";
 import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
@@ -293,6 +294,7 @@ import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
 import _poolHolyLight from "../pool/holy-light.js";
+import _poolHomuraHumanAscendant from "../pool/homura-human-ascendant.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHydroform from "../pool/hydroform.js";
@@ -424,6 +426,7 @@ import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolMycologist from "../pool/mycologist.js";
+import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
@@ -481,6 +484,7 @@ import _poolProfit from "../pool/profit.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
+import _poolPusKami from "../pool/pus-kami.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
@@ -909,6 +913,7 @@ const shard: CardShard = {
     _poolCreosoteHeath,
     _poolCrossroadsConsecrator,
     _poolCrushOfWurms,
+    _poolCunningBandit,
     _poolCurate,
     _poolCuratorOfSunsCreation,
     _poolCuriousPair,
@@ -1077,6 +1082,7 @@ const shard: CardShard = {
     _poolHiddenNecropolis,
     _poolHighlandLake,
     _poolHolyLight,
+    _poolHomuraHumanAscendant,
     _poolHookhandMariner,
     _poolHydraBroodmaster,
     _poolHydroform,
@@ -1208,6 +1214,7 @@ const shard: CardShard = {
     _poolMummyParamount,
     _poolMurderousRider,
     _poolMycologist,
+    _poolMyojinOfInfiniteRage,
     _poolMysticSpeculation,
     _poolNaturalState,
     _poolNecroticHex,
@@ -1265,6 +1272,7 @@ const shard: CardShard = {
     _poolProtectiveParents,
     _poolProvisionsMerchant,
     _poolPsychicPickpocket,
+    _poolPusKami,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
     _poolQuestForAncientSecrets,

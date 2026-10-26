@@ -5523,3 +5523,9 @@ engine terms. A second thing to check is a second test.
 ### Greater Gargadon: sacrificing to it from exile
 - **Do:** Suspend Greater Gargadon from your hand. Open your exile, click Activate under the Gargadon, pick its ability and sacrifice Grizzly Bears.
 - **Expect:** The Gargadon goes to exile with 10 time counters. Its ability is offered there (not before it's suspended), and once it resolves it has 9 time counters and the Bears are in your graveyard.
+
+## Flip cards (2026-10-26, Champions and Betrayers of Kamigawa)
+
+### Callow Jushi: flips into Jaraku at the end step
+- **Do:** Pass to your end step and say yes when asked to flip Callow Jushi.
+- **Expect:** The card now reads Jaraku the Interloper, a legendary 3/4 Spirit, still with its two ki counters. Hovering it shows Callow Jushi beside it, the same picture.

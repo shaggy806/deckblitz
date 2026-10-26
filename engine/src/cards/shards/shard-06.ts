@@ -81,6 +81,7 @@ import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloodmistInfiltrator from "../pool/bloodmist-infiltrator.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
 import _poolBlueElementalBlast from "../pool/blue-elemental-blast.js";
+import _poolBodyOfJukai from "../pool/body-of-jukai.js";
 import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
 import _poolBombard from "../pool/bombard.js";
 import _poolBonepickerSkirge from "../pool/bonepicker-skirge.js";
@@ -831,6 +832,7 @@ const shard: CardShard = {
     _poolBloodmistInfiltrator,
     _poolBloomingStinger,
     _poolBlueElementalBlast,
+    _poolBodyOfJukai,
     _poolBoilerbilgesRipper,
     _poolBombard,
     _poolBonepickerSkirge,

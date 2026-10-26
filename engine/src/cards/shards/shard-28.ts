@@ -244,6 +244,7 @@ import _poolGallifreyFalls from "../pool/gallifrey-falls.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
 import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
+import _poolGenjuOfTheFens from "../pool/genju-of-the-fens.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
 import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
@@ -408,6 +409,7 @@ import _poolMurderInvestigation from "../pool/murder-investigation.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
+import _poolMyojinOfLifesWeb from "../pool/myojin-of-lifes-web.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
@@ -550,6 +552,7 @@ import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarecrow from "../pool/scarecrow.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
+import _poolScarmaker from "../pool/scarmaker.js";
 import _poolScourgeOfKherRidges from "../pool/scourge-of-kher-ridges.js";
 import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
 import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
@@ -1016,6 +1019,7 @@ const shard: CardShard = {
     _poolGalvanicArc,
     _poolGelatinousGenesis,
     _poolGenesisStorm,
+    _poolGenjuOfTheFens,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
     _poolGideonChampionOfJustice,
@@ -1180,6 +1184,7 @@ const shard: CardShard = {
     _poolMurderousRedcap,
     _poolMutableExplorer,
     _poolMutantTownMusicians,
+    _poolMyojinOfLifesWeb,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
     _poolNazarTheVelvetFang,
@@ -1322,6 +1327,7 @@ const shard: CardShard = {
     _poolScaledWurm,
     _poolScarecrow,
     _poolScarletSpiderKaine,
+    _poolScarmaker,
     _poolScourgeOfKherRidges,
     _poolScrapyardMongrel,
     _poolScreamreachBrawler,

@@ -1560,6 +1560,8 @@ export function parseSentence(sentence, ctx) {
   if (re("regenerate ~").test(s)) return { kind: "regenerate", target: "source" };
   if ((m = re(`regenerate (${TARGET})`).exec(s))) return { kind: "regenerate", target: slot(m[1]) };
   if (re("transform ~").test(s)) return { kind: "transform", target: "source" };
+  // "Flip this creature" (rule 710 — a flip card's normal half).
+  if (re("flip (?:~|it)").test(s)) return { kind: "flip", target: "source" };
   // Becoming a copy (rules 707.2, 707.4): the source, of a target — for good
   // (rule 611.2a) or until end of turn — with "this ability" (707.9a). "Have
   // ~ become …" is what "you may" wraps; "another" target is one other than

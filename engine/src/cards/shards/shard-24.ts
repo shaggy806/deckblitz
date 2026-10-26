@@ -324,6 +324,7 @@ import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
 import _poolKalonianBehemoth from "../pool/kalonian-behemoth.js";
 import _poolKamahlHeartOfKrosa from "../pool/kamahl-heart-of-krosa.js";
+import _poolKamiOfTatteredShoji from "../pool/kami-of-tattered-shoji.js";
 import _poolKamiOfWhisperedHopes from "../pool/kami-of-whispered-hopes.js";
 import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js";
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
@@ -402,6 +403,7 @@ import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
+import _poolNezumiShadowWatcher from "../pool/nezumi-shadow-watcher.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
 import _poolNightsoilKami from "../pool/nightsoil-kami.js";
@@ -424,6 +426,7 @@ import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
+import _poolOrochiEggwatcher from "../pool/orochi-eggwatcher.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
@@ -1082,6 +1085,7 @@ const shard: CardShard = {
     _poolJwarIsleRefuge,
     _poolKalonianBehemoth,
     _poolKamahlHeartOfKrosa,
+    _poolKamiOfTatteredShoji,
     _poolKamiOfWhisperedHopes,
     _poolKarlovOfTheGhostCouncil,
     _poolKarnsTemporalSundering,
@@ -1160,6 +1164,7 @@ const shard: CardShard = {
     _poolMysticDecree,
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
+    _poolNezumiShadowWatcher,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
     _poolNightsoilKami,
@@ -1182,6 +1187,7 @@ const shard: CardShard = {
     _poolOrcishHellraiser,
     _poolOrderOfYawgmoth,
     _poolOriginOfCaptainAmerica,
+    _poolOrochiEggwatcher,
     _poolOverlordOfTheFloodpits,
     _poolOviyaPashiriSageLifecrafter,
     _poolPairedTactician,

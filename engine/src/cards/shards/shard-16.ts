@@ -425,6 +425,7 @@ import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
+import _poolNagaoBoundByHonor from "../pool/nagao-bound-by-honor.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
 import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolMusesEncouragement,
     _poolMyrSire,
     _poolMyrTurbine,
+    _poolNagaoBoundByHonor,
     _poolNajeelaTheBladeBlossom,
     _poolNaomiPillarOfOrder,
     _poolNaturalize,
