@@ -686,6 +686,7 @@ import _poolWelcomeToSweettooth from "../pool/welcome-to-sweettooth.js";
 import _poolWellOfIdeas from "../pool/well-of-ideas.js";
 import _poolWerebear from "../pool/werebear.js";
 import _poolWetlandSambar from "../pool/wetland-sambar.js";
+import _poolWheelOfTorture from "../pool/wheel-of-torture.js";
 import _poolWhispersOfTheMuse from "../pool/whispers-of-the-muse.js";
 import _poolWhiteSunsZenith from "../pool/white-suns-zenith.js";
 import _poolWillOfTheJeskai from "../pool/will-of-the-jeskai.js";
@@ -1417,6 +1418,7 @@ const shard: CardShard = {
     _poolWellOfIdeas,
     _poolWerebear,
     _poolWetlandSambar,
+    _poolWheelOfTorture,
     _poolWhispersOfTheMuse,
     _poolWhiteSunsZenith,
     _poolWillOfTheJeskai,

@@ -387,6 +387,7 @@ import _poolMorselhoarder from "../pool/morselhoarder.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
+import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolMortalsResolve,
     _poolMoxJet,
     _poolMukotaiAmbusher,
+    _poolMultanisAcolyte,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,

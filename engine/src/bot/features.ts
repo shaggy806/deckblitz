@@ -284,6 +284,7 @@ const EVASION: readonly Keyword[] = [
   "intimidate",
   "skulk",
   "shadow",
+  "horsemanship",
   "unblockable",
 ];
 

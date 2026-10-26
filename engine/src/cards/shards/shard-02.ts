@@ -255,6 +255,7 @@ import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
 import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
+import _poolGhituFireEater from "../pool/ghitu-fire-eater.js";
 import _poolGhostbladeEidolon from "../pool/ghostblade-eidolon.js";
 import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
@@ -681,6 +682,7 @@ import _poolWallOfFaith from "../pool/wall-of-faith.js";
 import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
 import _poolWarrenScourgeElf from "../pool/warren-scourge-elf.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
+import _poolWeiScout from "../pool/wei-scout.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
 import _poolWhispersOfEmrakul from "../pool/whispers-of-emrakul.js";
@@ -968,6 +970,7 @@ const shard: CardShard = {
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
     _poolGertAndOldLaceRunaways,
+    _poolGhituFireEater,
     _poolGhostbladeEidolon,
     _poolGhoulcallersHarvest,
     _poolGiantAnkheg,
@@ -1394,6 +1397,7 @@ const shard: CardShard = {
     _poolWardenOfTheChained,
     _poolWarrenScourgeElf,
     _poolWarriorsSword,
+    _poolWeiScout,
     _poolWhipOfErebos,
     _poolWhiptailWurm,
     _poolWhispersOfEmrakul,

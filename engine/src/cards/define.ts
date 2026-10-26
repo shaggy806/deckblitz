@@ -168,6 +168,9 @@ export type Keyword =
   /** Shadow (rule 702.28) — can be blocked only by creatures with shadow,
    * and can block only creatures with shadow (Dauthi Voidwalker). */
   | "shadow"
+  /** Horsemanship (rule 702.31) — can't be blocked by creatures without
+   * horsemanship; it blocks anything (Portal Three Kingdoms' Shu Cavalry). */
+  | "horsemanship"
   /** Start your engines! (rule 702.179a) — a static ability: a player who
    * controls a permanent with it and has no speed gets a speed of 1, as a
    * state-based action (704.5aa — `Game.startEngines`; see

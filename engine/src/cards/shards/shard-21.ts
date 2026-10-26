@@ -14,6 +14,7 @@ import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAncientHellkite from "../pool/ancient-hellkite.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
+import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -254,6 +255,7 @@ import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
+import _poolGoblinMedics from "../pool/goblin-medics.js";
 import _poolGoblinShrine from "../pool/goblin-shrine.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
@@ -722,6 +724,7 @@ const shard: CardShard = {
     _poolAmyRose,
     _poolAncientHellkite,
     _poolAngelOfSanctions,
+    _poolAngelsTrumpet,
     _poolAnointedDeacon,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -962,6 +965,7 @@ const shard: CardShard = {
     _poolGoblinChampion,
     _poolGoblinKing,
     _poolGoblinLackey,
+    _poolGoblinMedics,
     _poolGoblinShrine,
     _poolGoblinSurprise,
     _poolGoblinWarchief,

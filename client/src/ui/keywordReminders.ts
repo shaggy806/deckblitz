@@ -48,6 +48,7 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
   },
   skulk: { name: 'Skulk', text: "Can't be blocked by creatures with greater power." },
   shadow: { name: 'Shadow', text: 'Can block or be blocked by only creatures with shadow.' },
+  horsemanship: { name: 'Horsemanship', text: "Can't be blocked except by creatures with horsemanship." },
   'start-your-engines': {
     name: 'Start your engines!',
     text: 'If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.',

@@ -131,6 +131,7 @@ import _poolConsecratedByBlood from "../pool/consecrated-by-blood.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
+import _poolControlOfTheCourt from "../pool/control-of-the-court.js";
 import _poolCoralSword from "../pool/coral-sword.js";
 import _poolCorpseweft from "../pool/corpseweft.js";
 import _poolCorruptedZendikon from "../pool/corrupted-zendikon.js";
@@ -277,6 +278,7 @@ import _poolGoblinRimerunner from "../pool/goblin-rimerunner.js";
 import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
+import _poolGraniteGrip from "../pool/granite-grip.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
 import _poolGraveRobbers from "../pool/grave-robbers.js";
@@ -897,6 +899,7 @@ const shard: CardShard = {
     _poolConsumingSinkhole,
     _poolContactOtherPlane,
     _poolContractKilling,
+    _poolControlOfTheCourt,
     _poolCoralSword,
     _poolCorpseweft,
     _poolCorruptedZendikon,
@@ -1043,6 +1046,7 @@ const shard: CardShard = {
     _poolGoldenhideOx,
     _poolGoldmeadowLookout,
     _poolGoliathMassManipulator,
+    _poolGraniteGrip,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
     _poolGraveRobbers,

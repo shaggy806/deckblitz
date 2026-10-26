@@ -46,6 +46,7 @@ import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
+import _poolAuraFlux from "../pool/aura-flux.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvacynianMissionaries from "../pool/avacynian-missionaries.js";
 import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
@@ -238,6 +239,7 @@ import _poolFurnaceOfRath from "../pool/furnace-of-rath.js";
 import _poolFurnaceWhelp from "../pool/furnace-whelp.js";
 import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
+import _poolGangOfElk from "../pool/gang-of-elk.js";
 import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
 import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
 import _poolGatesOfIstfell from "../pool/gates-of-istfell.js";
@@ -634,6 +636,7 @@ import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
 import _poolThranTurbine from "../pool/thran-turbine.js";
+import _poolTickingGnomes from "../pool/ticking-gnomes.js";
 import _poolTidalSurge from "../pool/tidal-surge.js";
 import _poolTimidDrake from "../pool/timid-drake.js";
 import _poolTitaniasChosen from "../pool/titanias-chosen.js";
@@ -784,6 +787,7 @@ const shard: CardShard = {
     _poolAstridPeth,
     _poolAttendedHealer,
     _poolAudaciousInfiltrator,
+    _poolAuraFlux,
     _poolAuthorityOfTheConsuls,
     _poolAvacynianMissionaries,
     _poolAvengingHuntbonder,
@@ -976,6 +980,7 @@ const shard: CardShard = {
     _poolFurnaceWhelp,
     _poolFyndhornBrownie,
     _poolGalewindMoose,
+    _poolGangOfElk,
     _poolGarnaBloodfistOfKeld,
     _poolGarrisonExcavator,
     _poolGatesOfIstfell,
@@ -1372,6 +1377,7 @@ const shard: CardShard = {
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,
     _poolThranTurbine,
+    _poolTickingGnomes,
     _poolTidalSurge,
     _poolTimidDrake,
     _poolTitaniasChosen,

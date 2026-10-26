@@ -523,6 +523,7 @@ import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
 import _poolScrollboost from "../pool/scrollboost.js";
+import _poolSecondChance from "../pool/second-chance.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
 import _poolSeeRed from "../pool/see-red.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
@@ -1255,6 +1256,7 @@ const shard: CardShard = {
     _poolScorchedGeyser,
     _poolScourgeOfGeierReach,
     _poolScrollboost,
+    _poolSecondChance,
     _poolSeeBeyond,
     _poolSeeRed,
     _poolSeizedFromSlumber,

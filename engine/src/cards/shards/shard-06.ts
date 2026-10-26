@@ -106,6 +106,7 @@ import _poolBurrowing from "../pool/burrowing.js";
 import _poolCactuar from "../pool/cactuar.js";
 import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
+import _poolCaoCaoLordOfWei from "../pool/cao-cao-lord-of-wei.js";
 import _poolCapitalCity from "../pool/capital-city.js";
 import _poolCapriciousSliver from "../pool/capricious-sliver.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
@@ -424,6 +425,7 @@ import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
 import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
 import _poolOpalArchangel from "../pool/opal-archangel.js";
+import _poolOpalChampion from "../pool/opal-champion.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
 import _poolOutpostSiege from "../pool/outpost-siege.js";
@@ -835,6 +837,7 @@ const shard: CardShard = {
     _poolCactuar,
     _poolCallToMind,
     _poolCanopySpider,
+    _poolCaoCaoLordOfWei,
     _poolCapitalCity,
     _poolCapriciousSliver,
     _poolCaptureOfJingzhou,
@@ -1153,6 +1156,7 @@ const shard: CardShard = {
     _poolOkibaSalvage,
     _poolOminousAsylum,
     _poolOpalArchangel,
+    _poolOpalChampion,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,
     _poolOutpostSiege,
