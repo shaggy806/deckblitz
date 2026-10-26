@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Forecast, and Dissension whole** (batch 201, the second middle walk, 2026-10-26,
+  `mechanic:forecast`): **built** forecast (rule 702.57 — the `forecast(ability)` helper: an
+  ability of the card in its owner's hand, revealed, in their upkeep and once each turn; a
+  card's once-each-turn record in a hand is now cleared each turn), taught to the scaffolder.
+  85 of Dissension's 131 left authored — Momir Vig, Simic Visionary, Dovescape, Spell Snare,
+  Skyscribing, Supply // Demand and the other split cards that run whole, the graft creatures and
+  the Eidolons — by five `card-author` agents and the lead, with Piercing Rays and Spirit en-Dal
+  from earlier batches; 46 blocked (`B201.json`), nothing shared by more than two. Dissension is
+  whole. `forecast.test.ts`.
 - **Ripple and recover, and Coldsnap whole** (batch 196, the second middle walk, 2026-10-26,
   `keyword:ripple`): **built** ripple (rule 702.60 — the `ripple(n, name)`
   helper: a `this-cast` trigger, a `may` reveal and a repeating free `cast-now` from the library

@@ -11347,6 +11347,58 @@
   "filter:phyrexian-mana-in-cost": {
    "family": "condition:filter-card-property-clauses",
    "example": "Rage Extractor: whenever you cast a spell with {P} in its mana cost, it deals damage equal to that spell's mana value"
+  },
+  "effect:delayed-trigger-target-deals-damage": {
+   "family": "effect:grant-triggered-to-target",
+   "example": "Paladin of Prahv: forecast's 'whenever target creature deals damage this turn, you gain that much life' — a delayed trigger keyed to a target creature, for the activator; grant-triggered gives the creature's controller the life."
+  },
+  "replacement:gain-life-from-spell-or-ability": {
+   "family": "replacement:gain-life-becomes-loss",
+   "example": "Rain of Gore: 'if a spell or ability would cause its controller to gain life' — the would-gain-life replacement can't tell a spell's or ability's gain from lifelink (the ruling excludes lifelink)."
+  },
+  "effect:other-spells-cant-be-countered-this-turn": {
+   "family": "new:grant-uncounterable",
+   "example": "Bound // Determined: 'other spells you control can't be countered this turn', spells already on the stack included."
+  },
+  "amount:colors-of-sacrificed": {
+   "family": "amount:colors-of-sacrificed",
+   "example": "Bound // Determined: 'up to X cards, where X is the number of colors the sacrificed creature was'."
+  },
+  "filter:same-name-as-revealed-card": {
+   "family": "effect:may-reveal-from-hand",
+   "example": "Infernal Tutor: search for a card with the same name as the card revealed from your hand."
+  },
+  "decision:choose-card-type": {
+   "family": "decision:choose-card-name",
+   "example": "Fertile Imagination: 'choose a card type' as the spell resolves."
+  },
+  "amount:revealed-hand-cards-of-chosen-type": {
+   "family": "decision:choose-card-name",
+   "example": "Fertile Imagination: a Saproling for each card of the chosen type revealed from target opponent's hand."
+  },
+  "effect:reveal-random-from-hand-discard-filtered": {
+   "family": "effect:reveal-random-from-hand-discard-filtered",
+   "example": "Rise // Fall: Fall reveals two cards at random from target player's hand, then that player discards each nonland card revealed — two picks without repeats."
+  },
+  "replacement:next-damage-destroy-instead": {
+   "family": "replacement:next-damage-destroy-instead",
+   "example": "Kill-Suit Cultist: 'the next time damage would be dealt to target creature this turn, destroy that creature instead'."
+  },
+  "effect:add-mana-of-attached-mana-cost": {
+   "family": "effect:add-mana-of-attached-mana-cost",
+   "example": "Elemental Resonance: 'add mana equal to enchanted permanent's mana cost', a choice per hybrid symbol."
+  },
+  "static:enchanted-blocks-despite-landwalk": {
+   "family": "static:enchanted-blocks-despite-landwalk",
+   "example": "Street Savvy: the enchanted creature can block creatures with landwalk as though they didn't have it — blockableDespiteLandwalk ignores affects and works for every blocker."
+  },
+  "effect:set-color-all": {
+   "family": "effect:set-color-effect",
+   "example": "Nightcreep: until end of turn, all creatures become black — become-color takes one target."
+  },
+  "effect:set-land-types-all": {
+   "family": "effect:add-land-types-all",
+   "example": "Nightcreep: until end of turn, all lands become Swamps — setting their land types, for the lands there as it resolves."
   }
  }
 }

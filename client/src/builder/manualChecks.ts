@@ -8326,4 +8326,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Endless Swarm: a copy each upkeep, and no more spells',
     board({ you: { bf: ['Forest*9'], hand: ['Endless Swarm', 'Grizzly Bears', 'Forest', 'Forest'] } }),
   ),
+  preset(
+    'Skyscribing: forecast from your hand in your upkeep, once a turn',
+    board({ you: { bf: ['Island*6'], hand: ['Skyscribing'] } }),
+  ),
 ]

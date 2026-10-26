@@ -5499,3 +5499,9 @@ engine terms. A second thing to check is a second test.
 ### Endless Swarm: a copy each upkeep, and no more spells
 - **Do:** Cast Endless Swarm, then try to cast Grizzly Bears. Pass the turn and come back to your upkeep.
 - **Expect:** You get a Snake for each card in your hand, and an emblem appears. Grizzly Bears can't be cast any more. At your upkeep a copy of Endless Swarm resolves and makes more Snakes; still only one emblem.
+
+## Forecast (2026-10-26, Dissension)
+
+### Skyscribing: forecast from your hand in your upkeep, once a turn
+- **Do:** In your main phase, look for Skyscribing's forecast ability, then pass the turn and come back to your upkeep. Use it there, then try it again.
+- **Expect:** It isn't offered in your main phase. In your upkeep it is: everyone draws a card, the card is shown to the table, and Skyscribing stays in your hand. It isn't offered a second time that upkeep; it is again at your next upkeep.
