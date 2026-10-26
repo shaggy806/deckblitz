@@ -189,6 +189,9 @@ describe("costs and triggers", () => {
     expect(parseTrigger("At the beginning of combat on your turn")).toEqual([
       { on: "step-begins", step: "begin-combat", who: "you" },
     ]);
+    expect(parseTrigger("At the beginning of enchanted player's upkeep")).toEqual([
+      { on: "step-begins", step: "upkeep", who: "attached" },
+    ]);
     expect(parseTrigger("Whenever you cast an instant or sorcery spell")).toEqual([
       { on: "cast-spell", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
     ]);

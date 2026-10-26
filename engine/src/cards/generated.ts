@@ -3968,6 +3968,7 @@ import _poolCruelCelebrant from "./pool/cruel-celebrant.js";
 import _poolCruelEdict from "./pool/cruel-edict.js";
 import _poolCruelFeeding from "./pool/cruel-feeding.js";
 import _poolCruelFinality from "./pool/cruel-finality.js";
+import _poolCruelReality from "./pool/cruel-reality.js";
 import _poolCruelRevival from "./pool/cruel-revival.js";
 import _poolCruelSadist from "./pool/cruel-sadist.js";
 import _poolCruelSomnophage from "./pool/cruel-somnophage.js";
@@ -4091,10 +4092,14 @@ import _poolCurseOfChaos from "./pool/curse-of-chaos.js";
 import _poolCurseOfClingingWebs from "./pool/curse-of-clinging-webs.js";
 import _poolCurseOfDisturbance from "./pool/curse-of-disturbance.js";
 import _poolCurseOfMaritLage from "./pool/curse-of-marit-lage.js";
+import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
+import _poolCurseOfObsession from "./pool/curse-of-obsession.js";
 import _poolCurseOfOpulence from "./pool/curse-of-opulence.js";
 import _poolCurseOfShallowGraves from "./pool/curse-of-shallow-graves.js";
+import _poolCurseOfTheBloodyTome from "./pool/curse-of-the-bloody-tome.js";
 import _poolCurseOfTheRestlessDead from "./pool/curse-of-the-restless-dead.js";
 import _poolCurseOfTheSwine from "./pool/curse-of-the-swine.js";
+import _poolCurseOfUnbinding from "./pool/curse-of-unbinding.js";
 import _poolCurseOfVerbosity from "./pool/curse-of-verbosity.js";
 import _poolCurseOfVitality from "./pool/curse-of-vitality.js";
 import _poolCursebreak from "./pool/cursebreak.js";
@@ -19707,6 +19712,7 @@ import _poolTorchTheWitness from "./pool/torch-the-witness.js";
 import _poolTorensFistOfTheAngels from "./pool/torens-fist-of-the-angels.js";
 import _poolTorgalAFineHound from "./pool/torgal-a-fine-hound.js";
 import _poolToriDavenantFuryRider from "./pool/tori-davenant-fury-rider.js";
+import _poolTormentOfScarabs from "./pool/torment-of-scarabs.js";
 import _poolTorment from "./pool/torment.js";
 import _poolTormentedAngel from "./pool/tormented-angel.js";
 import _poolTormentedHero from "./pool/tormented-hero.js";
@@ -26661,6 +26667,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCruelEdict,
   _poolCruelFeeding,
   _poolCruelFinality,
+  _poolCruelReality,
   _poolCruelRevival,
   _poolCruelSadist,
   _poolCruelSomnophage,
@@ -26784,10 +26791,14 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfClingingWebs,
   _poolCurseOfDisturbance,
   _poolCurseOfMaritLage,
+  _poolCurseOfOblivion,
+  _poolCurseOfObsession,
   _poolCurseOfOpulence,
   _poolCurseOfShallowGraves,
+  _poolCurseOfTheBloodyTome,
   _poolCurseOfTheRestlessDead,
   _poolCurseOfTheSwine,
+  _poolCurseOfUnbinding,
   _poolCurseOfVerbosity,
   _poolCurseOfVitality,
   _poolCursebreak,
@@ -42400,6 +42411,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorensFistOfTheAngels,
   _poolTorgalAFineHound,
   _poolToriDavenantFuryRider,
+  _poolTormentOfScarabs,
   _poolTorment,
   _poolTormentedAngel,
   _poolTormentedHero,
@@ -49367,6 +49379,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cruel-edict": _poolCruelEdict,
   "pool/cruel-feeding": _poolCruelFeeding,
   "pool/cruel-finality": _poolCruelFinality,
+  "pool/cruel-reality": _poolCruelReality,
   "pool/cruel-revival": _poolCruelRevival,
   "pool/cruel-sadist": _poolCruelSadist,
   "pool/cruel-somnophage": _poolCruelSomnophage,
@@ -49490,10 +49503,14 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-clinging-webs": _poolCurseOfClingingWebs,
   "pool/curse-of-disturbance": _poolCurseOfDisturbance,
   "pool/curse-of-marit-lage": _poolCurseOfMaritLage,
+  "pool/curse-of-oblivion": _poolCurseOfOblivion,
+  "pool/curse-of-obsession": _poolCurseOfObsession,
   "pool/curse-of-opulence": _poolCurseOfOpulence,
   "pool/curse-of-shallow-graves": _poolCurseOfShallowGraves,
+  "pool/curse-of-the-bloody-tome": _poolCurseOfTheBloodyTome,
   "pool/curse-of-the-restless-dead": _poolCurseOfTheRestlessDead,
   "pool/curse-of-the-swine": _poolCurseOfTheSwine,
+  "pool/curse-of-unbinding": _poolCurseOfUnbinding,
   "pool/curse-of-verbosity": _poolCurseOfVerbosity,
   "pool/curse-of-vitality": _poolCurseOfVitality,
   "pool/cursebreak": _poolCursebreak,
@@ -65106,6 +65123,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/torens-fist-of-the-angels": _poolTorensFistOfTheAngels,
   "pool/torgal-a-fine-hound": _poolTorgalAFineHound,
   "pool/tori-davenant-fury-rider": _poolToriDavenantFuryRider,
+  "pool/torment-of-scarabs": _poolTormentOfScarabs,
   "pool/torment": _poolTorment,
   "pool/tormented-angel": _poolTormentedAngel,
   "pool/tormented-hero": _poolTormentedHero,

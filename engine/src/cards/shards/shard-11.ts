@@ -137,6 +137,7 @@ import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
 import _poolCunningRhetoric from "../pool/cunning-rhetoric.js";
 import _poolCuratorsWard from "../pool/curators-ward.js";
 import _poolCuriosityCrafter from "../pool/curiosity-crafter.js";
+import _poolCurseOfTheBloodyTome from "../pool/curse-of-the-bloody-tome.js";
 import _poolCursecatcher from "../pool/cursecatcher.js";
 import _poolDakmorPlague from "../pool/dakmor-plague.js";
 import _poolDaringSaboteur from "../pool/daring-saboteur.js";
@@ -850,6 +851,7 @@ const shard: CardShard = {
     _poolCunningRhetoric,
     _poolCuratorsWard,
     _poolCuriosityCrafter,
+    _poolCurseOfTheBloodyTome,
     _poolCursecatcher,
     _poolDakmorPlague,
     _poolDaringSaboteur,

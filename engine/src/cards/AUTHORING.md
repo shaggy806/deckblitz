@@ -974,8 +974,12 @@ Commander 2017 Curses' "[do X]. Each opponent attacking that player does the
 same": you, then each of your opponents controlling a creature attacking the
 trigger player as it resolves (just you, once none are). A Curse's trigger
 whose event names no player names **the enchanted player** as its trigger
-player (Trespasser's Curse's "that player loses 1 life"). None of these is a
-target, so hexproof doesn't stop them.
+player (Trespasser's Curse's "that player loses 1 life"). "At the beginning of
+**enchanted player's** upkeep / draw step / end step" is a `step-begins` trigger
+with `who: "attached"`: it fires only in that player's own step, so "that
+player" is `"active-player"` (Curse of the Bloody Tome, Cruel Reality, Torment
+of Scarabs' `unless` with `chooser: "active-player"`); the scaffolder reads the
+trigger clause. None of these is a target, so hexproof doesn't stop them.
 
 ### Movement / removal
 

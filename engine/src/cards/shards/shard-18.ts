@@ -116,6 +116,7 @@ import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
 import _poolCrushOfTentacles from "../pool/crush-of-tentacles.js";
 import _poolCrystallineGiant from "../pool/crystalline-giant.js";
+import _poolCurseOfUnbinding from "../pool/curse-of-unbinding.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
@@ -824,6 +825,7 @@ const shard: CardShard = {
     _poolCruelTutor,
     _poolCrushOfTentacles,
     _poolCrystallineGiant,
+    _poolCurseOfUnbinding,
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,

@@ -637,7 +637,11 @@ export type TriggerWho =
    * controls it. The trigger is still the Equipment's or Aura's, and its
    * controller's. A host that has left ("equipped creature dies") is matched
    * by the host its source had then — remembered by a source that left at
-   * the same time (`LastKnownInfo.attachedTo`).
+   * the same time (`LastKnownInfo.attachedTo`). On a Curse (an Aura on a
+   * player) it is the **enchanted player**: "whenever enchanted player is
+   * attacked", and a `step-begins` trigger's "at the beginning of enchanted
+   * player's upkeep" (Curse of the Bloody Tome), whose step belongs to them —
+   * that player is then the `"active-player"`.
    */
   | "attached"
   /** A permanent the player this Aura is attached to controls — a Curse's

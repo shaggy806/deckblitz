@@ -662,6 +662,7 @@ import _poolTolarianGeyser from "../pool/tolarian-geyser.js";
 import _poolTollsOfWar from "../pool/tolls-of-war.js";
 import _poolTomeBlast from "../pool/tome-blast.js";
 import _poolToppleTheStatue from "../pool/topple-the-statue.js";
+import _poolTormentOfScarabs from "../pool/torment-of-scarabs.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
 import _poolTourachsCanticle from "../pool/tourachs-canticle.js";
 import _poolTrailOfCrumbs from "../pool/trail-of-crumbs.js";
@@ -1414,6 +1415,7 @@ const shard: CardShard = {
     _poolTollsOfWar,
     _poolTomeBlast,
     _poolToppleTheStatue,
+    _poolTormentOfScarabs,
     _poolTormodsCrypt,
     _poolTourachsCanticle,
     _poolTrailOfCrumbs,

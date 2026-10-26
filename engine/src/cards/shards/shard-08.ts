@@ -138,6 +138,7 @@ import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrypticSerpent from "../pool/cryptic-serpent.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCrystalRod from "../pool/crystal-rod.js";
+import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
@@ -881,6 +882,7 @@ const shard: CardShard = {
     _poolCrypticSerpent,
     _poolCrystalGrotto,
     _poolCrystalRod,
+    _poolCurseOfOblivion,
     _poolCursebreak,
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
