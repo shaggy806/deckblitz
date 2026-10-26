@@ -5451,3 +5451,9 @@ engine terms. A second thing to check is a second test.
 ### Thunderous Wrath: keeping a miracle hidden
 - **Do:** Cast Divination and choose Keep hidden for Thunderous Wrath, then switch to Bob.
 - **Expect:** No trigger goes on the stack and Wrath stays in your hand. Bob's view never names it; while you were asked, Bob's banner only said you were deciding on a miracle.
+
+## Buyback with a non-mana cost (2026-10-26, Exodus)
+
+### Pegasus Stampede: buyback sacrifices a land
+- **Do:** Cast Pegasus Stampede with buyback and sacrifice a Plains when asked.
+- **Expect:** A second cast offer reads "buyback Sacrifice a land" beside the plain cast. A 1/1 flying Pegasus enters, the Plains goes to your graveyard and Pegasus Stampede comes back to your hand.

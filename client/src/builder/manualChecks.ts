@@ -8287,4 +8287,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Thunderous Wrath: keeping a miracle hidden',
     board({ you: { bf: ['Island*3', 'Mountain'], hand: ['Divination'], lib: ['Thunderous Wrath', 'Island'] } }),
   ),
+  preset(
+    'Pegasus Stampede: buyback sacrifices a land',
+    board({ you: { bf: ['Plains*3'], hand: ['Pegasus Stampede'] } }),
+  ),
 ]

@@ -138,6 +138,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **Random-discard costs, buyback's non-mana costs, the compared-opponent target** (batch 187,
+  the oldest-first walk, 2026-10-26, `cost:discard-at-random`, `cost:buyback-non-mana`,
+  `target:opponent-compared`): an activated ability's `cost.discard.random` and a spell's
+  `additionalCost.discardAtRandom` (Mage il-Vec, Ogre Shaman, Sonic Burst, Coral Helm, Draconian
+  Cylix, Stormbind, Canyon Drake, Amok); `kicker.also` — a kicker's life, discard or sacrifice
+  beside its mana, so buyback's non-mana costs (Slaughter, Pegasus Stampede, Reaping the Rewards,
+  Flowstone Flood, Forbid, Constant Mists, Walk the Aeons); `{ kind: "opponent-compared", stat,
+  by }` — "target opponent who has more life than you do as you activate this ability", judged
+  only as chosen (Keeper of the Flame, Light, Mind and Beasts). Scaffolder templates for both
+  costs; `set-exo-batch-1.test.ts`.
+- **Exodus, whole** (batch 187, the oldest-first walk, 2026-10-26): 61 of its 92 left authored —
+  Sphere of Resistance, Equilibrium, Slaughter, the Keepers, Mirozel, Manabond, Paroxysm, the
+  spikes, Thopter Squadron and more — by five `card-author` agents and the lead; 31 blocked
+  (`B187.json`). Exodus is whole.
 - **Damage redirection, one-shot shields** (rule 614.9 — batch 184, the oldest-first walk,
   2026-10-26): `prevent-damage`'s and `prevent-damage-from-chosen-source`'s `redirectTo` — the
   damage dealt to another creature, planeswalker or player by the same source, doing nothing

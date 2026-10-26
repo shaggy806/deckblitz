@@ -1,0 +1,713 @@
+{
+ "batch": "B187",
+ "status": "complete",
+ "ranks": "Exodus (EXO, 1998-06-15): whole set, the 92 cards left (oldest-first walk); three costs and a target built — a random discard as a cost, buyback's non-mana costs (kicker.also) and the opponent-compared target (the Keepers) — with the eight earlier-batch cards they unblocked (Forbid, Constant Mists, Walk the Aeons, Coral Helm, Draconian Cylix, Stormbind, Canyon Drake, Amok)",
+ "authored": [
+  {
+   "name": "Allay",
+   "files": [
+    "engine/src/cards/pool/allay.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Amok",
+   "files": [
+    "engine/src/cards/pool/amok.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Avenging Druid",
+   "files": [
+    "engine/src/cards/pool/avenging-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bequeathal",
+   "files": [
+    "engine/src/cards/pool/bequeathal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Canyon Drake",
+   "files": [
+    "engine/src/cards/pool/canyon-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Carnophage",
+   "files": [
+    "engine/src/cards/pool/carnophage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinder Crawler",
+   "files": [
+    "engine/src/cards/pool/cinder-crawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Constant Mists",
+   "files": [
+    "engine/src/cards/pool/constant-mists.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Convalescence",
+   "files": [
+    "engine/src/cards/pool/convalescence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coral Helm",
+   "files": [
+    "engine/src/cards/pool/coral-helm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cunning",
+   "files": [
+    "engine/src/cards/pool/cunning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dauthi Cutthroat",
+   "files": [
+    "engine/src/cards/pool/dauthi-cutthroat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dauthi Warlord",
+   "files": [
+    "engine/src/cards/pool/dauthi-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death's Duet",
+   "files": [
+    "engine/src/cards/pool/deaths-duet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Draconian Cylix",
+   "files": [
+    "engine/src/cards/pool/draconian-cylix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elvish Berserker",
+   "files": [
+    "engine/src/cards/pool/elvish-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ephemeron",
+   "files": [
+    "engine/src/cards/pool/ephemeron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Equilibrium",
+   "files": [
+    "engine/src/cards/pool/equilibrium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erratic Portal",
+   "files": [
+    "engine/src/cards/pool/erratic-portal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flowstone Flood",
+   "files": [
+    "engine/src/cards/pool/flowstone-flood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forbid",
+   "files": [
+    "engine/src/cards/pool/forbid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grollub",
+   "files": [
+    "engine/src/cards/pool/grollub.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jackalope Herd",
+   "files": [
+    "engine/src/cards/pool/jackalope-herd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keeper of the Beasts",
+   "files": [
+    "engine/src/cards/pool/keeper-of-the-beasts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keeper of the Flame",
+   "files": [
+    "engine/src/cards/pool/keeper-of-the-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keeper of the Light",
+   "files": [
+    "engine/src/cards/pool/keeper-of-the-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keeper of the Mind",
+   "files": [
+    "engine/src/cards/pool/keeper-of-the-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mage il-Vec",
+   "files": [
+    "engine/src/cards/pool/mage-il-vec.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Manabond",
+   "files": [
+    "engine/src/cards/pool/manabond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maniacal Rage",
+   "files": [
+    "engine/src/cards/pool/maniacal-rage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Medicine Bag",
+   "files": [
+    "engine/src/cards/pool/medicine-bag.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirozel",
+   "files": [
+    "engine/src/cards/pool/mirozel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necrologia",
+   "files": [
+    "engine/src/cards/pool/necrologia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ogre Shaman",
+   "files": [
+    "engine/src/cards/pool/ogre-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paroxysm",
+   "files": [
+    "engine/src/cards/pool/paroxysm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peace of Mind",
+   "files": [
+    "engine/src/cards/pool/peace-of-mind.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pegasus Stampede",
+   "files": [
+    "engine/src/cards/pool/pegasus-stampede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plaguebearer",
+   "files": [
+    "engine/src/cards/pool/plaguebearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Predatory Hunger",
+   "files": [
+    "engine/src/cards/pool/predatory-hunger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pygmy Troll",
+   "files": [
+    "engine/src/cards/pool/pygmy-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabid Wolverines",
+   "files": [
+    "engine/src/cards/pool/rabid-wolverines.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reaping the Rewards",
+   "files": [
+    "engine/src/cards/pool/reaping-the-rewards.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Ogre",
+   "files": [
+    "engine/src/cards/pool/reckless-ogre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resuscitate",
+   "files": [
+    "engine/src/cards/pool/resuscitate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scalding Salamander",
+   "files": [
+    "engine/src/cards/pool/scalding-salamander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "School of Piranha",
+   "files": [
+    "engine/src/cards/pool/school-of-piranha.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seismic Assault",
+   "files": [
+    "engine/src/cards/pool/seismic-assault.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shackles",
+   "files": [
+    "engine/src/cards/pool/shackles.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shattering Pulse",
+   "files": [
+    "engine/src/cards/pool/shattering-pulse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skyshroud Elite",
+   "files": [
+    "engine/src/cards/pool/skyshroud-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slaughter",
+   "files": [
+    "engine/src/cards/pool/slaughter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soltari Visionary",
+   "files": [
+    "engine/src/cards/pool/soltari-visionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Song of Serenity",
+   "files": [
+    "engine/src/cards/pool/song-of-serenity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sonic Burst",
+   "files": [
+    "engine/src/cards/pool/sonic-burst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphere of Resistance",
+   "files": [
+    "engine/src/cards/pool/sphere-of-resistance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spike Hatcher",
+   "files": [
+    "engine/src/cards/pool/spike-hatcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spike Weaver",
+   "files": [
+    "engine/src/cards/pool/spike-weaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormbind",
+   "files": [
+    "engine/src/cards/pool/stormbind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thalakos Drifters",
+   "files": [
+    "engine/src/cards/pool/thalakos-drifters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thalakos Scout",
+   "files": [
+    "engine/src/cards/pool/thalakos-scout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thopter Squadron",
+   "files": [
+    "engine/src/cards/pool/thopter-squadron.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thrull Surgeon",
+   "files": [
+    "engine/src/cards/pool/thrull-surgeon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transmogrifying Licid",
+   "files": [
+    "engine/src/cards/pool/transmogrifying-licid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampire Hounds",
+   "files": [
+    "engine/src/cards/pool/vampire-hounds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Walk the Aeons",
+   "files": [
+    "engine/src/cards/pool/walk-the-aeons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wayward Soul",
+   "files": [
+    "engine/src/cards/pool/wayward-soul.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Welkin Hawk",
+   "files": [
+    "engine/src/cards/pool/welkin-hawk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Workhorse",
+   "files": [
+    "engine/src/cards/pool/workhorse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zealots en-Dal",
+   "files": [
+    "engine/src/cards/pool/zealots-en-dal.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aether Tide",
+   "needs": [
+    "cost:discard-x-cost",
+    "cost:additional-cost-discard-filter"
+   ],
+   "why": "an additional cost of discarding X creature cards"
+  },
+  {
+   "name": "Cataclysm",
+   "needs": [
+    "decision:choose-one-of-each-type-sacrifice-rest"
+   ],
+   "why": "each player keeps one artifact, creature, enchantment and land and sacrifices the rest"
+  },
+  {
+   "name": "Crashing Boars",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "the defending player chooses an untapped creature that must block it this turn"
+  },
+  {
+   "name": "Dizzying Gaze",
+   "needs": [
+    "effect:damage-from-attached"
+   ],
+   "why": "the enchanted creature as the damage source"
+  },
+  {
+   "name": "Entropic Specter",
+   "needs": [
+    "decision:choose-player",
+    "amount:count-for-chosen-player"
+   ],
+   "why": "P/T equal to the hand size of an opponent chosen as it enters"
+  },
+  {
+   "name": "Exalted Dragon",
+   "needs": [
+    "cost:attack-cost-sacrifice"
+   ],
+   "why": "can't attack unless you sacrifice a land"
+  },
+  {
+   "name": "Fade Away",
+   "needs": [
+    "effect:per-creature-sacrifice-unless-pay"
+   ],
+   "why": "for each creature, its controller sacrifices a permanent unless they pay {1}"
+  },
+  {
+   "name": "Fighting Chance",
+   "needs": [
+    "effect:for-each-permanent-coin-flip"
+   ],
+   "why": "a coin flip per blocking creature, each preventing that creature's combat damage"
+  },
+  {
+   "name": "Furnace Brood",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "\"target creature can't be regenerated this turn\" as a status, not a destroy flag"
+  },
+  {
+   "name": "High Ground",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "each creature you control can block an additional creature"
+  },
+  {
+   "name": "Keeper of the Dead",
+   "needs": [
+    "target:permanent-controlled-by-target-slot"
+   ],
+   "why": "\"destroy target nonblack creature that player controls\": a permanent slot bound to the opponent an earlier slot targets (the compared-opponent target itself is built)"
+  },
+  {
+   "name": "Kor Chant",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "all damage a chosen source would deal this turn to one target creature is dealt to another instead — not a one-shot shield"
+  },
+  {
+   "name": "Mana Breach",
+   "needs": [
+    "effect:that-player-returns-land"
+   ],
+   "why": "the casting player chooses a land of their own to return"
+  },
+  {
+   "name": "Memory Crystal",
+   "needs": [
+    "cost:buyback-cost-reduction"
+   ],
+   "why": "\"buyback costs cost {2} less\""
+  },
+  {
+   "name": "Mind Maggots",
+   "needs": [
+    "effect:discard-any-number-filtered"
+   ],
+   "why": "discard any number of creature cards"
+  },
+  {
+   "name": "Mogg Assassin",
+   "needs": [
+    "decision:opponent-chooses-target"
+   ],
+   "why": "the opponent chooses the second target"
+  },
+  {
+   "name": "Monstrous Hound",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "static:block-restriction-attacking-player-condition"
+   ],
+   "why": "can't attack / block unless you control more lands than the defending / attacking player"
+  },
+  {
+   "name": "Oath of Druids",
+   "needs": [
+    "target:opponent-comparison-chosen-by-active-player"
+   ],
+   "why": "the active player chooses the target (an opponent with more creatures) and the \"may\""
+  },
+  {
+   "name": "Oath of Ghouls",
+   "needs": [
+    "target:opponent-comparison-chosen-by-active-player"
+   ],
+   "why": "the active player chooses the target (an opponent with fewer creature cards in their graveyard) and the \"may\""
+  },
+  {
+   "name": "Oath of Lieges",
+   "needs": [
+    "target:opponent-comparison-chosen-by-active-player"
+   ],
+   "why": "the active player chooses the target (an opponent with more lands) and the \"may\""
+  },
+  {
+   "name": "Oath of Mages",
+   "needs": [
+    "target:opponent-comparison-chosen-by-active-player"
+   ],
+   "why": "the active player chooses the target (an opponent with more life) and the \"may\""
+  },
+  {
+   "name": "Oath of Scholars",
+   "needs": [
+    "target:opponent-comparison-chosen-by-active-player"
+   ],
+   "why": "the active player chooses the target (an opponent with more cards in hand) and makes the \"may\", not the Oath's controller"
+  },
+  {
+   "name": "Pandemonium",
+   "needs": [
+    "decision:trigger-object-controller-chooses-target"
+   ],
+   "why": "the entering creature's controller chooses the \"may\" and the target, not the enchantment's controller"
+  },
+  {
+   "name": "Penance",
+   "needs": [
+    "cost:put-card-from-hand-on-library-top"
+   ],
+   "why": "a cost of putting a card from hand on top of the library"
+  },
+  {
+   "name": "Pit Spawn",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "exile the creature it dealt damage to: exile takes no trigger recipient"
+  },
+  {
+   "name": "Rootwater Mystic",
+   "needs": [
+    "effect:look-at-top-of-target-players-library"
+   ],
+   "why": "a private look at the top of another player's library"
+  },
+  {
+   "name": "Skyshroud War Beast",
+   "needs": [
+    "decision:choose-player",
+    "amount:count-for-chosen-player"
+   ],
+   "why": "P/T from the nonbasic lands of an opponent chosen as it enters"
+  },
+  {
+   "name": "Spike Cannibal",
+   "needs": [
+    "effect:move-counters-from-all"
+   ],
+   "why": "move all +1/+1 counters from all creatures onto it"
+  },
+  {
+   "name": "Spike Rogue",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "\"remove a +1/+1 counter from a creature you control\" as a cost"
+  },
+  {
+   "name": "Volrath's Dungeon",
+   "needs": [
+    "cost:any-player-may-activate"
+   ],
+   "why": "\"any player may activate this ability but only during their turn\""
+  },
+  {
+   "name": "Wall of Nets",
+   "needs": [
+    "filter:blocked-by-source"
+   ],
+   "why": "exile all creatures blocked by this creature at end of combat"
+  }
+ ]
+}

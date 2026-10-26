@@ -3395,7 +3395,7 @@
   },
   "cost:buyback-non-mana": {
    "family": "keyword:buyback",
-   "example": "Forbid: \"Buyback—Discard two cards\" — buyback (a kicker keyword) takes a mana cost only; Constant Mists' and Walk the Aeons' sacrifices too."
+   "example": "Forbid: \"Buyback—Discard two cards\" — buyback (a kicker keyword) takes a mana cost only; Constant Mists' and Walk the Aeons' sacrifices too. Built 2026-10-26 (B187): kicker.also."
   },
   "keyword:channel": {
    "example": "Shigeki, Jukai Visionary: Returning itself to hand as a cost, and channel."
@@ -9320,7 +9320,7 @@
    "example": "Drafna's Restoration"
   },
   "cost:discard-at-random": {
-   "example": "Coral Helm"
+   "example": "Coral Helm Built 2026-10-26 (B187): cost.discard.random, additionalCost.discardAtRandom."
   },
   "decision:pay-per-chosen-permanent": {
    "example": "Magnetic Mountain"
@@ -10934,6 +10934,48 @@
   "trigger:regenerated-this-way": {
    "family": "trigger:damage-trigger-extensions",
    "example": "Skeleton Scavengers: 'when it regenerates this way, put a +1/+1 counter on it'"
+  },
+  "cost:buyback-cost-reduction": {
+   "family": "keyword:buyback",
+   "example": "Memory Crystal: \"Buyback costs cost {2} less\" — no cost modification reaches a buyback kicker."
+  },
+  "cost:remove-counters-from-chosen": {
+   "example": "Spike Rogue: \"Remove a +1/+1 counter from a creature you control\" as a cost — removeCounter only takes them from the source."
+  },
+  "decision:trigger-object-controller-chooses-target": {
+   "family": "effect:choices-by-other-players",
+   "example": "Pandemonium: the entering creature's controller chooses the \"may\" and the target of the enchantment's trigger."
+  },
+  "effect:discard-any-number-filtered": {
+   "example": "Mind Maggots: \"discard any number of creature cards\" — discard's anyNumber takes no filter."
+  },
+  "effect:for-each-permanent-coin-flip": {
+   "family": "effect:random-choice",
+   "example": "Fighting Chance: a coin flip per blocking creature, each preventing that creature's combat damage this turn."
+  },
+  "effect:move-counters-from-all": {
+   "example": "Spike Cannibal: \"move all +1/+1 counters from all creatures onto it\" — move-counters takes one source."
+  },
+  "effect:per-creature-sacrifice-unless-pay": {
+   "family": "effect:choices-by-other-players",
+   "example": "Fade Away: for each creature, its controller sacrifices a permanent unless they pay {1}."
+  },
+  "filter:blocked-by-source": {
+   "example": "Wall of Nets: \"exile all creatures blocked by this creature\" at end of combat."
+  },
+  "static:block-restriction-attacking-player-condition": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Monstrous Hound: \"can't block unless you control more lands than attacking player\"."
+  },
+  "target:opponent-comparison-chosen-by-active-player": {
+   "family": "effect:choices-by-other-players",
+   "example": "The Oaths (Oath of Druids, Lieges, Mages, Scholars, Ghouls): \"At the beginning of each player's upkeep, that player chooses target player who … and is their opponent\" — the active player, not the Oath's controller, chooses the target and the \"may\". The comparison itself is the built opponent-compared target."
+  },
+  "target:permanent-controlled-by-target-slot": {
+   "example": "Keeper of the Dead: \"destroy target nonblack creature that player controls\" — a permanent slot bound to the player an earlier slot targets."
+  },
+  "target:opponent-compared": {
+   "example": "Keeper of the Flame: \"target opponent who has more life than you do as you activate this ability\". Built 2026-10-26 (B187): the opponent-compared target."
   }
  }
 }

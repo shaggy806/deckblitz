@@ -444,7 +444,10 @@
   "cost:untap-symbol-cost",
   "keyword:buyback",
   "keyword:licid",
-  "keyword:miracle"
+  "keyword:miracle",
+  "cost:buyback-non-mana",
+  "cost:discard-at-random",
+  "target:opponent-compared"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
