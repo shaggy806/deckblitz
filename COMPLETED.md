@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Horsemanship, Urza's Legacy whole and Portal Three Kingdoms' 30 most-played — Urza's Legacy
+  is whole** (batch 203, the oldest-first walk, 2026-10-26, `keyword:horsemanship`): **built**
+  horsemanship (rule 702.31: blocked only by creatures with it, blocks anything), in block
+  legality, the bots' block math and evasion count, the scaffolder and the client's reminder;
+  `horsemanship.test.ts`. 90 authored — Deranged Hermit, Bone Shredder, Second Chance, Thran Lens,
+  Sun Quan, Lu Xun, Guan Yu among them, with Rolling Earthquake, Herald of Hoofbeats and The Girl in
+  the Fireplace from batches 146, 30 and 93 — and 16 blocked (`B203.json`).
 - **Ripple and recover, and Coldsnap whole** (batch 196, the second middle walk, 2026-10-26,
   `keyword:ripple`): **built** ripple (rule 702.60 — the `ripple(n, name)`
   helper: a `this-cast` trigger, a `may` reveal and a repeating free `cast-now` from the library

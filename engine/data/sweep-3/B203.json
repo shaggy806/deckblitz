@@ -1,0 +1,776 @@
+{
+ "batch": "B203",
+ "status": "complete",
+ "ranks": "Urza's Legacy (ULG, 1999-02-15): whole set, its 76 cards left, and Portal Three Kingdoms (PTK, 1999-05-01): its 30 most-played (oldest-first walk); built horsemanship (rule 702.31), which 17 of the batch's PTK cards have, with Rolling Earthquake, Herald of Hoofbeats and The Girl in the Fireplace from batches 146, 30 and 93",
+ "authored": [
+  {
+   "name": "Angelic Curator",
+   "files": [
+    "engine/src/cards/pool/angelic-curator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Angel's Trumpet",
+   "files": [
+    "engine/src/cards/pool/angels-trumpet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anthroplasm",
+   "files": [
+    "engine/src/cards/pool/anthroplasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aura Flux",
+   "files": [
+    "engine/src/cards/pool/aura-flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avalanche Riders",
+   "files": [
+    "engine/src/cards/pool/avalanche-riders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Beast of Burden",
+   "files": [
+    "engine/src/cards/pool/beast-of-burden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bone Shredder",
+   "files": [
+    "engine/src/cards/pool/bone-shredder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brink of Madness",
+   "files": [
+    "engine/src/cards/pool/brink-of-madness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broken Dam",
+   "files": [
+    "engine/src/cards/pool/broken-dam.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cao Cao, Lord of Wei",
+   "files": [
+    "engine/src/cards/pool/cao-cao-lord-of-wei.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cessation",
+   "files": [
+    "engine/src/cards/pool/cessation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Control of the Court",
+   "files": [
+    "engine/src/cards/pool/control-of-the-court.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deranged Hermit",
+   "files": [
+    "engine/src/cards/pool/deranged-hermit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devout Harpist",
+   "files": [
+    "engine/src/cards/pool/devout-harpist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dong Zhou, the Tyrant",
+   "files": [
+    "engine/src/cards/pool/dong-zhou-the-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Engineered Plague",
+   "files": [
+    "engine/src/cards/pool/engineered-plague.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expendable Troops",
+   "files": [
+    "engine/src/cards/pool/expendable-troops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Forbidding Watchtower",
+   "files": [
+    "engine/src/cards/pool/forbidding-watchtower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gang of Elk",
+   "files": [
+    "engine/src/cards/pool/gang-of-elk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghitu Encampment",
+   "files": [
+    "engine/src/cards/pool/ghitu-encampment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghitu Fire-Eater",
+   "files": [
+    "engine/src/cards/pool/ghitu-fire-eater.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghitu Slinger",
+   "files": [
+    "engine/src/cards/pool/ghitu-slinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Medics",
+   "files": [
+    "engine/src/cards/pool/goblin-medics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Granite Grip",
+   "files": [
+    "engine/src/cards/pool/granite-grip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guan Yu, Sainted Warrior",
+   "files": [
+    "engine/src/cards/pool/guan-yu-sainted-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heavy Fog",
+   "files": [
+    "engine/src/cards/pool/heavy-fog.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hidden Gibbons",
+   "files": [
+    "engine/src/cards/pool/hidden-gibbons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hope and Glory",
+   "files": [
+    "engine/src/cards/pool/hope-and-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hua Tuo, Honored Physician",
+   "files": [
+    "engine/src/cards/pool/hua-tuo-honored-physician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunting Cheetah",
+   "files": [
+    "engine/src/cards/pool/hunting-cheetah.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intervene",
+   "files": [
+    "engine/src/cards/pool/intervene.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Maiden",
+   "files": [
+    "engine/src/cards/pool/iron-maiden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Last-Ditch Effort",
+   "files": [
+    "engine/src/cards/pool/last-ditch-effort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liu Bei, Lord of Shu",
+   "files": [
+    "engine/src/cards/pool/liu-bei-lord-of-shu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loyal Retainers",
+   "files": [
+    "engine/src/cards/pool/loyal-retainers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lu Bu, Master-at-Arms",
+   "files": [
+    "engine/src/cards/pool/lu-bu-master-at-arms.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lu Xun, Scholar General",
+   "files": [
+    "engine/src/cards/pool/lu-xun-scholar-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lurking Skirge",
+   "files": [
+    "engine/src/cards/pool/lurking-skirge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Multani, Maro-Sorcerer",
+   "files": [
+    "engine/src/cards/pool/multani-maro-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Multani's Acolyte",
+   "files": [
+    "engine/src/cards/pool/multanis-acolyte.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Opal Avenger",
+   "files": [
+    "engine/src/cards/pool/opal-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Opal Champion",
+   "files": [
+    "engine/src/cards/pool/opal-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ostracize",
+   "files": [
+    "engine/src/cards/pool/ostracize.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Peace and Quiet",
+   "files": [
+    "engine/src/cards/pool/peace-and-quiet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peach Garden Oath",
+   "files": [
+    "engine/src/cards/pool/peach-garden-oath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purify",
+   "files": [
+    "engine/src/cards/pool/purify.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rack and Ruin",
+   "files": [
+    "engine/src/cards/pool/rack-and-ruin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Radiant, Archangel",
+   "files": [
+    "engine/src/cards/pool/radiant-archangel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radiant's Dragoons",
+   "files": [
+    "engine/src/cards/pool/radiants-dragoons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rank and File",
+   "files": [
+    "engine/src/cards/pool/rank-and-file.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravages of War",
+   "files": [
+    "engine/src/cards/pool/ravages-of-war.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Raven Familiar",
+   "files": [
+    "engine/src/cards/pool/raven-familiar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rebuild",
+   "files": [
+    "engine/src/cards/pool/rebuild.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Riding the Dilu Horse",
+   "files": [
+    "engine/src/cards/pool/riding-the-dilu-horse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ring of Gix",
+   "files": [
+    "engine/src/cards/pool/ring-of-gix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scrapheap",
+   "files": [
+    "engine/src/cards/pool/scrapheap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Second Chance",
+   "files": [
+    "engine/src/cards/pool/second-chance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shivan Phoenix",
+   "files": [
+    "engine/src/cards/pool/shivan-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shu Cavalry",
+   "files": [
+    "engine/src/cards/pool/shu-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sick and Tired",
+   "files": [
+    "engine/src/cards/pool/sick-and-tired.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Simian Grunts",
+   "files": [
+    "engine/src/cards/pool/simian-grunts.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sleeper's Guile",
+   "files": [
+    "engine/src/cards/pool/sleepers-guile.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slow Motion",
+   "files": [
+    "engine/src/cards/pool/slow-motion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sluggishness",
+   "files": [
+    "engine/src/cards/pool/sluggishness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spawning Pool",
+   "files": [
+    "engine/src/cards/pool/spawning-pool.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spoils of Victory",
+   "files": [
+    "engine/src/cards/pool/spoils-of-victory.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Subversion",
+   "files": [
+    "engine/src/cards/pool/subversion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun Ce, Young Conquerer",
+   "files": [
+    "engine/src/cards/pool/sun-ce-young-conquerer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sun Quan, Lord of Wu",
+   "files": [
+    "engine/src/cards/pool/sun-quan-lord-of-wu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taunting Challenge",
+   "files": [
+    "engine/src/cards/pool/taunting-challenge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tethered Skirge",
+   "files": [
+    "engine/src/cards/pool/tethered-skirge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Lens",
+   "files": [
+    "engine/src/cards/pool/thran-lens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran War Machine",
+   "files": [
+    "engine/src/cards/pool/thran-war-machine.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thran Weaponry",
+   "files": [
+    "engine/src/cards/pool/thran-weaponry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ticking Gnomes",
+   "files": [
+    "engine/src/cards/pool/ticking-gnomes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urza's Blueprints",
+   "files": [
+    "engine/src/cards/pool/urzas-blueprints.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Viashino Heretic",
+   "files": [
+    "engine/src/cards/pool/viashino-heretic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Sponge",
+   "files": [
+    "engine/src/cards/pool/walking-sponge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weatherseed Treefolk",
+   "files": [
+    "engine/src/cards/pool/weatherseed-treefolk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wei Night Raiders",
+   "files": [
+    "engine/src/cards/pool/wei-night-raiders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wei Scout",
+   "files": [
+    "engine/src/cards/pool/wei-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wheel of Torture",
+   "files": [
+    "engine/src/cards/pool/wheel-of-torture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wu Light Cavalry",
+   "files": [
+    "engine/src/cards/pool/wu-light-cavalry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wu Scout",
+   "files": [
+    "engine/src/cards/pool/wu-scout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Xiahou Dun, the One-Eyed",
+   "files": [
+    "engine/src/cards/pool/xiahou-dun-the-one-eyed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yavimaya Granger",
+   "files": [
+    "engine/src/cards/pool/yavimaya-granger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yavimaya Scion",
+   "files": [
+    "engine/src/cards/pool/yavimaya-scion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yellow Scarves Cavalry",
+   "files": [
+    "engine/src/cards/pool/yellow-scarves-cavalry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yuan Shao, the Indecisive",
+   "files": [
+    "engine/src/cards/pool/yuan-shao-the-indecisive.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zhang Fei, Fierce Warrior",
+   "files": [
+    "engine/src/cards/pool/zhang-fei-fierce-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rolling Earthquake",
+   "files": [
+    "engine/src/cards/pool/rolling-earthquake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of Hoofbeats",
+   "files": [
+    "engine/src/cards/pool/herald-of-hoofbeats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Girl in the Fireplace",
+   "files": [
+    "engine/src/cards/pool/the-girl-in-the-fireplace.ts",
+    "engine/src/cards/tokens/human-noble-token.ts",
+    "engine/src/cards/tokens/horse-token-the-girl-in-the-fireplace.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Treacherous Link",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "a static \"all damage that would be dealt to enchanted creature is dealt to its controller instead\"; redirection exists only as one-shot shields"
+  },
+  {
+   "name": "Damping Engine",
+   "needs": [
+    "condition:player-controls-most",
+    "mechanic:special-action-sacrifice-to-ignore-effect"
+   ],
+   "why": "\"a player who controls more permanents than each other player\", and a special action sacrificing a permanent to ignore the effect until end of turn"
+  },
+  {
+   "name": "Rivalry",
+   "needs": [
+    "condition:player-controls-most"
+   ],
+   "why": "\"if that player controls more lands than each other player\""
+  },
+  {
+   "name": "Harmonic Convergence",
+   "needs": [
+    "effect:put-on-top-of-library-all",
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "puts every enchantment on top of its owner's library, each owner ordering them"
+  },
+  {
+   "name": "Impending Disaster",
+   "needs": [
+    "condition:condition-count-all-permanents"
+   ],
+   "why": "\"if there are seven or more lands on the battlefield\""
+  },
+  {
+   "name": "Planar Collapse",
+   "needs": [
+    "condition:condition-count-all-permanents"
+   ],
+   "why": "\"if there are four or more creatures on the battlefield\""
+  },
+  {
+   "name": "Multani's Presence",
+   "needs": [
+    "trigger:spell-countered"
+   ],
+   "why": "\"whenever a spell you've cast is countered\""
+  },
+  {
+   "name": "Bouncing Beebles",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "\"can't be blocked as long as defending player controls an artifact\""
+  },
+  {
+   "name": "Pyromancy",
+   "needs": [
+    "effect:cost-discarded-card-ref"
+   ],
+   "why": "damage equal to the mana value of the card discarded at random as a cost"
+  },
+  {
+   "name": "Viashino Bey",
+   "needs": [
+    "static:conditional-attack-requirement"
+   ],
+   "why": "\"if this creature attacks, all creatures you control attack if able\""
+  },
+  {
+   "name": "Repopulate",
+   "needs": [
+    "effect:shuffle-graveyard-filter-into-library"
+   ],
+   "why": "shuffles only the creature cards of a graveyard into its library"
+  },
+  {
+   "name": "Diaochan, Artful Beauty",
+   "needs": [
+    "decision:opponent-chooses-target"
+   ],
+   "why": "the second target is chosen by an opponent"
+  },
+  {
+   "name": "About Face",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switch a creature's power and toughness (layer 7d)"
+  },
+  {
+   "name": "Molten Hydra",
+   "needs": [
+    "cost:remove-all-counters"
+   ],
+   "why": "\"remove all +1/+1 counters from this creature\" as a cost, the damage equal to the number removed"
+  },
+  {
+   "name": "Treefolk Mystic",
+   "needs": [
+    "filter:attached-to-trigger-object"
+   ],
+   "why": "destroy all Auras attached to the creature that blocked it or that it blocked"
+  },
+  {
+   "name": "Empty City Ruse",
+   "needs": [
+    "effect:skip-next-combat-phase"
+   ],
+   "why": "target opponent skips all combat phases of their next turn"
+  }
+ ]
+}

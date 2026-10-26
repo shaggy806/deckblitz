@@ -138,9 +138,14 @@ section keeps only what to do next.
   shared). Batch 198 the rest of Urza's Saga (81), on "look at target player's hand" (`look-at-hand`,
   and `discard-chosen`'s `upTo`; 57 authored with five look-at-hand cards from earlier batches, 24
   blocked, "up to X targets" — `decision:x-targets`, 8 over the pool — and "becomes an enchantment"
-  — `effect:set-types-temporary` — leading with three each). Urza's Saga is whole. **Next, Urza's
-  Legacy** (`cards:sets -- --set ULG`; echo is built, so its echo cards come pre-drafted), then
-  Urza's Destiny; `decision:x-targets` (8) is the feature to build first if a set adds to it. This walk's range
+  — `effect:set-types-temporary` — leading with three each). Urza's Saga is whole. Batch 203 Urza's Legacy
+  whole (76) and Portal Three Kingdoms' 30 most-played, on horsemanship (`keyword:horsemanship`,
+  rule 702.31; 90 authored with Rolling Earthquake, Herald of Hoofbeats and The Girl in the
+  Fireplace from earlier batches, 16 blocked, "controls more … than each other player" and "on the
+  battlefield" counts across all players leading with two each). Urza's Legacy is whole. **Next,
+  the rest of Portal Three Kingdoms** (`cards:sets -- --set PTK`, ~53 left; horsemanship is built,
+  so its horsemanship cards come pre-drafted), then Urza's Destiny; `decision:x-targets` (8) is the
+  feature to build first if a set adds to it. This walk's range
   ends at Scourge (2003-05-26; from 2026-10-26's thirteenth round the third middle walk owns Mirrodin on). Leads over the whole pool now:
   graveyard order (`effect:top-creature-card-of-graveyard`/`effect:top-card-of-graveyard` — 14, with rule 404.3's
   simultaneous arrivals), banding (46 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
