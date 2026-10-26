@@ -8341,4 +8341,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Skyscribing: forecast from your hand in your upkeep, once a turn',
     board({ you: { bf: ['Island*6'], hand: ['Skyscribing'] } }),
   ),
+  preset(
+    'Scent of Ivy: reveal green cards from your hand, which stay there',
+    board({ you: { bf: ['Forest', 'Grizzly Bears'], hand: ['Scent of Ivy', 'Llanowar Elves', 'Giant Growth', 'Lightning Bolt'] } }),
+  ),
 ]

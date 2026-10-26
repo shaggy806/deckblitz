@@ -384,6 +384,10 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       // Behold (rule 701.4a): nothing moves — a hand card is revealed, a
       // permanent is just pointed at.
       return `Choose ${cards} to behold — reveal it from your hand or pick a permanent you control`
+    case 'reveal':
+      // "Reveal any number of green cards in your hand" (the Scents): they
+      // stay in hand.
+      return `Choose any number of cards to reveal from your hand`
     case 'discard':
       // "Look at target player's hand" (Glasses of Urza): nothing to pick.
       if (action.max === 0) return `Looking at ${whose} hand`
@@ -6448,6 +6452,7 @@ function Table({
             onConfirm: confirmZoneChoice,
             // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
+            ...(zoneChoiceAction.destination === 'reveal' ? { noneLabel: 'Reveal none' } : {}),
             ...(zoneChoiceAction.openingHand === true ? { noneLabel: 'Keep them in hand' } : {}),
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),

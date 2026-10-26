@@ -187,6 +187,7 @@ import _poolFelidarUmbra from "../pool/felidar-umbra.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
 import _poolFenHauler from "../pool/fen-hauler.js";
 import _poolFerociousTigorilla from "../pool/ferocious-tigorilla.js";
+import _poolFesteringWound from "../pool/festering-wound.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
@@ -865,6 +866,7 @@ const shard: CardShard = {
     _poolFellHorseman,
     _poolFenHauler,
     _poolFerociousTigorilla,
+    _poolFesteringWound,
     _poolFireFieldOgre,
     _poolFireImp,
     _poolFireSprites,

@@ -353,6 +353,7 @@ import _poolKrovikanWhispers from "../pool/krovikan-whispers.js";
 import _poolKwiaVigorbloom from "../pool/kwia-vigorbloom.js";
 import _poolLambholtPacifist from "../pool/lambholt-pacifist.js";
 import _poolLandTax from "../pool/land-tax.js";
+import _poolLandslide from "../pool/landslide.js";
 import _poolLashOfTheWhip from "../pool/lash-of-the-whip.js";
 import _poolLastKiss from "../pool/last-kiss.js";
 import _poolLayClaim from "../pool/lay-claim.js";
@@ -1107,6 +1108,7 @@ const shard: CardShard = {
     _poolKwiaVigorbloom,
     _poolLambholtPacifist,
     _poolLandTax,
+    _poolLandslide,
     _poolLashOfTheWhip,
     _poolLastKiss,
     _poolLayClaim,

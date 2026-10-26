@@ -5517,3 +5517,9 @@ engine terms. A second thing to check is a second test.
 ### Skyscribing: forecast from your hand in your upkeep, once a turn
 - **Do:** In your main phase, look for Skyscribing's forecast ability, then pass the turn and come back to your upkeep. Use it there, then try it again.
 - **Expect:** It isn't offered in your main phase. In your upkeep it is: everyone draws a card, the card is shown to the table, and Skyscribing stays in your hand. It isn't offered a second time that upkeep; it is again at your next upkeep.
+
+## Revealing cards from your hand (2026-10-26, Urza's Destiny)
+
+### Scent of Ivy: reveal green cards from your hand, which stay there
+- **Do:** Cast Scent of Ivy on your Grizzly Bears. When asked, pick Llanowar Elves and Giant Growth.
+- **Expect:** The prompt reads "Choose any number of cards to reveal from your hand" and offers only the two green cards, not Lightning Bolt. The Bears become 4/4 and both green cards are still in your hand, shown as revealed.

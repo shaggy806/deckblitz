@@ -72,6 +72,7 @@ import _poolBoneSplinters from "../pool/bone-splinters.js";
 import _poolBookOfMazarbul from "../pool/book-of-mazarbul.js";
 import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js";
 import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
+import _poolBraidwoodSextant from "../pool/braidwood-sextant.js";
 import _poolBreakTheSpell from "../pool/break-the-spell.js";
 import _poolBrimstoneRoundup from "../pool/brimstone-roundup.js";
 import _poolBringLow from "../pool/bring-low.js";
@@ -210,6 +211,7 @@ import _poolFalkenrathExterminator from "../pool/falkenrath-exterminator.js";
 import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
+import _poolFalseMourning from "../pool/false-mourning.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFeralLightning from "../pool/feral-lightning.js";
@@ -729,6 +731,7 @@ import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
 import _poolWoodenStake from "../pool/wooden-stake.js";
 import _poolWorldsoulColossus from "../pool/worldsoul-colossus.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
+import _poolXunYuWeiAdvisor from "../pool/xun-yu-wei-advisor.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
 import _poolYoungWolf from "../pool/young-wolf.js";
@@ -832,6 +835,7 @@ const shard: CardShard = {
     _poolBookOfMazarbul,
     _poolBoromirWardenOfTheTower,
     _poolBothersomeNoisemaker,
+    _poolBraidwoodSextant,
     _poolBreakTheSpell,
     _poolBrimstoneRoundup,
     _poolBringLow,
@@ -970,6 +974,7 @@ const shard: CardShard = {
     _poolFalkenrathForebear,
     _poolFalkenrathMarauders,
     _poolFallOfTheTitans,
+    _poolFalseMourning,
     _poolFangrenMarauder,
     _poolFatedReturn,
     _poolFeralLightning,
@@ -1489,6 +1494,7 @@ const shard: CardShard = {
     _poolWoodenStake,
     _poolWorldsoulColossus,
     _poolWortBoggartAuntie,
+    _poolXunYuWeiAdvisor,
     _poolYellowScarvesTroops,
     _poolYoshimaruScrappyStray,
     _poolYoungWolf,

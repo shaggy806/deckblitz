@@ -294,6 +294,7 @@ import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
 import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
+import _poolGuanYus1000LiMarch from "../pool/guan-yus-1-000-li-march.js";
 import _poolGuardGomazoa from "../pool/guard-gomazoa.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
@@ -773,8 +774,10 @@ import _poolWreckingBall from "../pool/wrecking-ball.js";
 import _poolWrench from "../pool/wrench.js";
 import _poolWretchedAnurid from "../pool/wretched-anurid.js";
 import _poolWrithingNecromass from "../pool/writhing-necromass.js";
+import _poolWuEliteCavalry from "../pool/wu-elite-cavalry.js";
 import _poolYargleGoliathOfOtaria from "../pool/yargle-goliath-of-otaria.js";
 import _poolYasovaDragonclaw from "../pool/yasova-dragonclaw.js";
+import _poolYellowScarvesGeneral from "../pool/yellow-scarves-general.js";
 import _poolYoungNecromancer from "../pool/young-necromancer.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
@@ -1091,6 +1094,7 @@ const shard: CardShard = {
     _poolGrimWanderer,
     _poolGrislyAnglerfish,
     _poolGrizzledOutrider,
+    _poolGuanYus1000LiMarch,
     _poolGuardGomazoa,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
@@ -1570,8 +1574,10 @@ const shard: CardShard = {
     _poolWrench,
     _poolWretchedAnurid,
     _poolWrithingNecromass,
+    _poolWuEliteCavalry,
     _poolYargleGoliathOfOtaria,
     _poolYasovaDragonclaw,
+    _poolYellowScarvesGeneral,
     _poolYoungNecromancer,
     _poolZagothCrystal,
     _poolZellDincht,

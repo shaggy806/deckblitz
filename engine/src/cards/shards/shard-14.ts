@@ -74,6 +74,7 @@ import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
 import _poolBoneCairnButcher from "../pool/bone-cairn-butcher.js";
 import _poolBontusMonument from "../pool/bontus-monument.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
+import _poolBorrowingTheEastWind from "../pool/borrowing-the-east-wind.js";
 import _poolBoulderDash from "../pool/boulder-dash.js";
 import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreachingLeviathan from "../pool/breaching-leviathan.js";
@@ -406,6 +407,7 @@ import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
+import _poolLuSuWuAdvisor from "../pool/lu-su-wu-advisor.js";
 import _poolLudevicsAbomination from "../pool/ludevics-abomination.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
 import _poolLurkingLizards from "../pool/lurking-lizards.js";
@@ -833,6 +835,7 @@ const shard: CardShard = {
     _poolBoneCairnButcher,
     _poolBontusMonument,
     _poolBorosSignet,
+    _poolBorrowingTheEastWind,
     _poolBoulderDash,
     _poolBraveBrawler,
     _poolBreachingLeviathan,
@@ -1165,6 +1168,7 @@ const shard: CardShard = {
     _poolLotusRing,
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
+    _poolLuSuWuAdvisor,
     _poolLudevicsAbomination,
     _poolLuminousPhantom,
     _poolLurkingLizards,

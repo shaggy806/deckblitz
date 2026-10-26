@@ -297,6 +297,7 @@ import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
 import _poolIizukaTheRuthless from "../pool/iizuka-the-ruthless.js";
 import _poolImpendingDoom from "../pool/impending-doom.js";
+import _poolIncendiary from "../pool/incendiary.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInfuse from "../pool/infuse.js";
@@ -351,6 +352,7 @@ import _poolLongRangeSensor from "../pool/long-range-sensor.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
 import _poolLordOfTheUnreal from "../pool/lord-of-the-unreal.js";
 import _poolLoseCalm from "../pool/lose-calm.js";
+import _poolLuMengWuGeneral from "../pool/lu-meng-wu-general.js";
 import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
@@ -649,6 +651,7 @@ import _poolTreasuredFind from "../pool/treasured-find.js";
 import _poolTreeOfTales from "../pool/tree-of-tales.js";
 import _poolTrenchStalker from "../pool/trench-stalker.js";
 import _poolTriadOfFates from "../pool/triad-of-fates.js";
+import _poolTripWire from "../pool/trip-wire.js";
 import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTriumphOfCruelty from "../pool/triumph-of-cruelty.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
@@ -709,12 +712,14 @@ import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
+import _poolWuAdmiral from "../pool/wu-admiral.js";
 import _poolWuScout from "../pool/wu-scout.js";
 import _poolXathridSlyblade from "../pool/xathrid-slyblade.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
 import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
 import _poolZealousPersecution from "../pool/zealous-persecution.js";
 import _poolZendikarsRoil from "../pool/zendikars-roil.js";
+import _poolZhugeJinWuStrategist from "../pool/zhuge-jin-wu-strategist.js";
 import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
@@ -1033,6 +1038,7 @@ const shard: CardShard = {
     _poolIdyllicGrange,
     _poolIizukaTheRuthless,
     _poolImpendingDoom,
+    _poolIncendiary,
     _poolIncrementalBlight,
     _poolInfernalPhantom,
     _poolInfuse,
@@ -1087,6 +1093,7 @@ const shard: CardShard = {
     _poolLordOfTheForsaken,
     _poolLordOfTheUnreal,
     _poolLoseCalm,
+    _poolLuMengWuGeneral,
     _poolLumengridWarden,
     _poolLurkingCrocodile,
     _poolLuxCannon,
@@ -1385,6 +1392,7 @@ const shard: CardShard = {
     _poolTreeOfTales,
     _poolTrenchStalker,
     _poolTriadOfFates,
+    _poolTripWire,
     _poolTriskaidekaphile,
     _poolTriumphOfCruelty,
     _poolTrophyMage,
@@ -1445,12 +1453,14 @@ const shard: CardShard = {
     _poolWoodlandCemetery,
     _poolWorldBreaker,
     _poolWrapInVigor,
+    _poolWuAdmiral,
     _poolWuScout,
     _poolXathridSlyblade,
     _poolYotianMedic,
     _poolYueTheMoonSpirit,
     _poolZealousPersecution,
     _poolZendikarsRoil,
+    _poolZhugeJinWuStrategist,
     _poolZhurTaaSwine,
     _poolZiatorasProvingGround,
     _poolZodiacRabbit,

@@ -389,6 +389,7 @@ import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManaMatrix from "../pool/mana-matrix.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
+import _poolMaskOfLawAndGrace from "../pool/mask-of-law-and-grace.js";
 import _poolMasterOfWinds from "../pool/master-of-winds.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMayaelTheAnima from "../pool/mayael-the-anima.js";
@@ -423,6 +424,7 @@ import _poolMossdog from "../pool/mossdog.js";
 import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
 import _poolMugging from "../pool/mugging.js";
+import _poolMultanisDecree from "../pool/multanis-decree.js";
 import _poolMurasaRootgrazer from "../pool/murasa-rootgrazer.js";
 import _poolMurderersAxe from "../pool/murderers-axe.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
@@ -518,6 +520,7 @@ import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
 import _poolRockcasterPlatoon from "../pool/rockcaster-platoon.js";
+import _poolRofellossGift from "../pool/rofelloss-gift.js";
 import _poolRollingEarthquake from "../pool/rolling-earthquake.js";
 import _poolRootriderFaun from "../pool/rootrider-faun.js";
 import _poolRuinCrab from "../pool/ruin-crab.js";
@@ -653,6 +656,7 @@ import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThoughtleech from "../pool/thoughtleech.js";
+import _poolThranFoundry from "../pool/thran-foundry.js";
 import _poolThrash from "../pool/thrash.js";
 import _poolThrullWizard from "../pool/thrull-wizard.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
@@ -1143,6 +1147,7 @@ const shard: CardShard = {
     _poolManaMatrix,
     _poolManifestationSage,
     _poolMaraudingMako,
+    _poolMaskOfLawAndGrace,
     _poolMasterOfWinds,
     _poolMasterPakku,
     _poolMayaelTheAnima,
@@ -1177,6 +1182,7 @@ const shard: CardShard = {
     _poolMoxSapphire,
     _poolMoxTantalite,
     _poolMugging,
+    _poolMultanisDecree,
     _poolMurasaRootgrazer,
     _poolMurderersAxe,
     _poolMusterTheDeparted,
@@ -1272,6 +1278,7 @@ const shard: CardShard = {
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,
     _poolRockcasterPlatoon,
+    _poolRofellossGift,
     _poolRollingEarthquake,
     _poolRootriderFaun,
     _poolRuinCrab,
@@ -1407,6 +1414,7 @@ const shard: CardShard = {
     _poolTheloniteDruid,
     _poolThornscapeApprentice,
     _poolThoughtleech,
+    _poolThranFoundry,
     _poolThrash,
     _poolThrullWizard,
     _poolThunderfootBaloth,

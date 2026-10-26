@@ -145,6 +145,7 @@ import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCrownOfFlames from "../pool/crown-of-flames.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolCryptidInspector from "../pool/cryptid-inspector.js";
+import _poolCunningAdvisor from "../pool/cunning-advisor.js";
 import _poolDanceWithDevils from "../pool/dance-with-devils.js";
 import _poolDapperShieldmate from "../pool/dapper-shieldmate.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
@@ -195,6 +196,7 @@ import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolElementalMastery from "../pool/elemental-mastery.js";
+import _poolEmperorCrocodile from "../pool/emperor-crocodile.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
@@ -333,6 +335,7 @@ import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeeningStone from "../pool/keening-stone.js";
+import _poolKeldonChampion from "../pool/keldon-champion.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKeldonStrikeTeam from "../pool/keldon-strike-team.js";
 import _poolKembasBanner from "../pool/kembas-banner.js";
@@ -508,6 +511,7 @@ import _poolReturnToTheEarth from "../pool/return-to-the-earth.js";
 import _poolReviveTheFallen from "../pool/revive-the-fallen.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRicochetTrap from "../pool/ricochet-trap.js";
+import _poolRidingRedHare from "../pool/riding-red-hare.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRiteOfConsumption from "../pool/rite-of-consumption.js";
@@ -729,6 +733,7 @@ import _poolWrangle from "../pool/wrangle.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
+import _poolZhangHeWeiGeneral from "../pool/zhang-he-wei-general.js";
 import _poolZimoneInfiniteAnalyst from "../pool/zimone-infinite-analyst.js";
 import _poolZofConsumption from "../pool/zof-consumption.js";
 import _poolZurgoBellstriker from "../pool/zurgo-bellstriker.js";
@@ -887,6 +892,7 @@ const shard: CardShard = {
     _poolCrownOfFlames,
     _poolCryptOfTheEternals,
     _poolCryptidInspector,
+    _poolCunningAdvisor,
     _poolDanceWithDevils,
     _poolDapperShieldmate,
     _poolDaringEscape,
@@ -937,6 +943,7 @@ const shard: CardShard = {
     _poolElderAuntie,
     _poolEldraziConscription,
     _poolElementalMastery,
+    _poolEmperorCrocodile,
     _poolEncampmentKeeper,
     _poolEncouragingAviator,
     _poolEndlessObedience,
@@ -1075,6 +1082,7 @@ const shard: CardShard = {
     _poolKaylasReconstruction,
     _poolKeeningApparition,
     _poolKeeningStone,
+    _poolKeldonChampion,
     _poolKeldonRaider,
     _poolKeldonStrikeTeam,
     _poolKembasBanner,
@@ -1250,6 +1258,7 @@ const shard: CardShard = {
     _poolReviveTheFallen,
     _poolRhoxPummeler,
     _poolRicochetTrap,
+    _poolRidingRedHare,
     _poolRile,
     _poolRimefurReindeer,
     _poolRiteOfConsumption,
@@ -1471,6 +1480,7 @@ const shard: CardShard = {
     _poolYoshimaruBelovedCompanion,
     _poolZaskSkitteringSwarmlord,
     _poolZeroPointBallad,
+    _poolZhangHeWeiGeneral,
     _poolZimoneInfiniteAnalyst,
     _poolZofConsumption,
     _poolZurgoBellstriker,

@@ -115,6 +115,7 @@ import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
+import _poolChampionsVictory from "../pool/champions-victory.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
@@ -144,6 +145,7 @@ import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
 import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
+import _poolCovetousDragon from "../pool/covetous-dragon.js";
 import _poolCrabappleCohort from "../pool/crabapple-cohort.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
 import _poolCradleToGrave from "../pool/cradle-to-grave.js";
@@ -692,6 +694,7 @@ import _poolWaterknot from "../pool/waterknot.js";
 import _poolWaylay from "../pool/waylay.js";
 import _poolWeakstone from "../pool/weakstone.js";
 import _poolWeedStrangle from "../pool/weed-strangle.js";
+import _poolWeiEliteCompanions from "../pool/wei-elite-companions.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -858,6 +861,7 @@ const shard: CardShard = {
     _poolCazurRuthlessStalker,
     _poolCennsEnlistment,
     _poolCentaurHealer,
+    _poolChampionsVictory,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,
     _poolCharcoalDiamond,
@@ -887,6 +891,7 @@ const shard: CardShard = {
     _poolCoretapper,
     _poolCorruptCourtOfficial,
     _poolCostOfBrilliance,
+    _poolCovetousDragon,
     _poolCrabappleCohort,
     _poolCrackTheEarth,
     _poolCradleToGrave,
@@ -1435,6 +1440,7 @@ const shard: CardShard = {
     _poolWaylay,
     _poolWeakstone,
     _poolWeedStrangle,
+    _poolWeiEliteCompanions,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

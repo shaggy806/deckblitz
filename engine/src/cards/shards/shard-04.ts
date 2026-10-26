@@ -67,6 +67,7 @@ import _poolBonebreakerGiant from "../pool/bonebreaker-giant.js";
 import _poolBoulderbornDragon from "../pool/boulderborn-dragon.js";
 import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
+import _poolBrineSeer from "../pool/brine-seer.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
@@ -298,6 +299,7 @@ import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
+import _poolImpatience from "../pool/impatience.js";
 import _poolImpelledGiant from "../pool/impelled-giant.js";
 import _poolImperialMask from "../pool/imperial-mask.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
@@ -538,6 +540,7 @@ import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShizukoCallerOfAutumn from "../pool/shizuko-caller-of-autumn.js";
+import _poolShuFarmer from "../pool/shu-farmer.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
@@ -804,6 +807,7 @@ const shard: CardShard = {
     _poolBoulderbornDragon,
     _poolBraingeyser,
     _poolBrainstorm,
+    _poolBrineSeer,
     _poolBristlingBackwoods,
     _poolBruteStrength,
     _poolBucolicRanch,
@@ -1035,6 +1039,7 @@ const shard: CardShard = {
     _poolHymnToTourach,
     _poolIceOut,
     _poolIllusionistsStratagem,
+    _poolImpatience,
     _poolImpelledGiant,
     _poolImperialMask,
     _poolImposingVantasaur,
@@ -1275,6 +1280,7 @@ const shard: CardShard = {
     _poolShimmeringWings,
     _poolShivanReef,
     _poolShizukoCallerOfAutumn,
+    _poolShuFarmer,
     _poolShuGrainCaravan,
     _poolSigardianPriest,
     _poolSigiledSkink,

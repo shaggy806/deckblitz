@@ -196,6 +196,7 @@ import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
 import _poolDurableCoilbug from "../pool/durable-coilbug.js";
 import _poolDutifulGriffin from "../pool/dutiful-griffin.js";
+import _poolDyingWail from "../pool/dying-wail.js";
 import _poolDynacharge from "../pool/dynacharge.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolEarthenArms from "../pool/earthen-arms.js";
@@ -239,6 +240,7 @@ import _poolFeralIncarnation from "../pool/feral-incarnation.js";
 import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
 import _poolFerocityOfTheWilds from "../pool/ferocity-of-the-wilds.js";
 import _poolFerventCharge from "../pool/fervent-charge.js";
+import _poolFireBowman from "../pool/fire-bowman.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
 import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
@@ -571,6 +573,7 @@ import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
 import _poolSatyrFiredancer from "../pool/satyr-firedancer.js";
 import _poolScaretiller from "../pool/scaretiller.js";
 import _poolScavengerGrounds from "../pool/scavenger-grounds.js";
+import _poolScentOfIvy from "../pool/scent-of-ivy.js";
 import _poolScholarOfTheAges from "../pool/scholar-of-the-ages.js";
 import _poolScionOfOona from "../pool/scion-of-oona.js";
 import _poolScorchedRusalka from "../pool/scorched-rusalka.js";
@@ -978,6 +981,7 @@ const shard: CardShard = {
     _poolDungroveElder,
     _poolDurableCoilbug,
     _poolDutifulGriffin,
+    _poolDyingWail,
     _poolDynacharge,
     _poolEarthcraft,
     _poolEarthenArms,
@@ -1021,6 +1025,7 @@ const shard: CardShard = {
     _poolFerocityOfTheHunt,
     _poolFerocityOfTheWilds,
     _poolFerventCharge,
+    _poolFireBowman,
     _poolFireLordZuko,
     _poolFireNationRaider,
     _poolFirstTimeFlyer,
@@ -1353,6 +1358,7 @@ const shard: CardShard = {
     _poolSatyrFiredancer,
     _poolScaretiller,
     _poolScavengerGrounds,
+    _poolScentOfIvy,
     _poolScholarOfTheAges,
     _poolScionOfOona,
     _poolScorchedRusalka,

@@ -194,6 +194,7 @@ import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
 import _poolExplodingBorders from "../pool/exploding-borders.js";
 import _poolExtinction from "../pool/extinction.js";
+import _poolFalseProphet from "../pool/false-prophet.js";
 import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
 import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
@@ -428,6 +429,7 @@ import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPacksDisdain from "../pool/packs-disdain.js";
+import _poolPangTongYoungPhoenix from "../pool/pang-tong-young-phoenix.js";
 import _poolParasiticBond from "../pool/parasitic-bond.js";
 import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
@@ -938,6 +940,7 @@ const shard: CardShard = {
     _poolExperimentalConfectioner,
     _poolExplodingBorders,
     _poolExtinction,
+    _poolFalseProphet,
     _poolFarmsteadGleaner,
     _poolFascination,
     _poolFeastOfTheUnicorn,
@@ -1172,6 +1175,7 @@ const shard: CardShard = {
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
     _poolPacksDisdain,
+    _poolPangTongYoungPhoenix,
     _poolParasiticBond,
     _poolParoxysm,
     _poolPatchedPlaything,

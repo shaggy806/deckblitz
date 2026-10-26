@@ -6941,6 +6941,11 @@ export class Game {
     if (awaiting.reveal === true && chosen.length > 0) {
       this.revealCards(player, chosen, "library");
     }
+    // "Reveal any number of green cards in your hand" (the Scents): revealed
+    // where they are (rule 701.20a), and moved nowhere.
+    if (awaiting.destination === "reveal" && chosen.length > 0) {
+      this.revealCards(player, chosen, "hand");
+    }
 
     this.finishZoneChoice({ kind: "zone-choice", awaiting, player, chosen });
     // A cost's choice hands priority back to whoever activated (rule
@@ -7208,7 +7213,7 @@ export class Game {
       }
       // A behold's answer never reaches here (`applyBehold`): it moves nothing,
       // and a discard's was done above, by the hand's owner.
-      if (to === "behold" || to === "discard") return;
+      if (to === "behold" || to === "discard" || to === "reveal") return;
       if (to === "library-bottom") {
         // In the order chosen: each goes under the one before it.
         const fromHand = this.state.objects[id]?.zone === "hand";
@@ -24674,7 +24679,7 @@ export class Game {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
     leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
@@ -24735,6 +24740,9 @@ export class Game {
     // and naturally ends up unable to choose anything if nothing matches
     // (min/max clamp to 0 along with it), same as the real card whiffing.
     const eligible = ids.filter((id) => this.matchesZoneChoiceFilter(id, filter, player, source));
+    // Revealing from your own hand with nothing in it that matches: there's
+    // nothing to reveal and no one else to show the choice to.
+    if (destination === "reveal" && eligible.length === 0) return;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player: picker ?? player,

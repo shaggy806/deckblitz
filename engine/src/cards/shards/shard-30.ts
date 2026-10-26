@@ -72,6 +72,7 @@ import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
+import _poolBloodshotCyclops from "../pool/bloodshot-cyclops.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
@@ -104,6 +105,7 @@ import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChaosImps from "../pool/chaos-imps.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
+import _poolChimeOfNight from "../pool/chime-of-night.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
 import _poolCitadelCastellan from "../pool/citadel-castellan.js";
@@ -648,6 +650,7 @@ import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
+import _poolThranGolem from "../pool/thran-golem.js";
 import _poolThrowALine from "../pool/throw-a-line.js";
 import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
@@ -820,6 +823,7 @@ const shard: CardShard = {
     _poolBloodArtist,
     _poolBloodPet,
     _poolBloodbraidElf,
+    _poolBloodshotCyclops,
     _poolBogwaterLumaret,
     _poolBolgsCompany,
     _poolBonescytheSliver,
@@ -852,6 +856,7 @@ const shard: CardShard = {
     _poolChaosImps,
     _poolChariotOfVictory,
     _poolChartoothCougar,
+    _poolChimeOfNight,
     _poolChromaticSphere,
     _poolChromiumTheMutable,
     _poolCitadelCastellan,
@@ -1396,6 +1401,7 @@ const shard: CardShard = {
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThousandYearStorm,
+    _poolThranGolem,
     _poolThrowALine,
     _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,

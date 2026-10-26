@@ -196,6 +196,7 @@ import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
+import _poolEncroach from "../pool/encroach.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
@@ -377,6 +378,7 @@ import _poolMaro from "../pool/maro.js";
 import _poolMarshdrinkerGiant from "../pool/marshdrinker-giant.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
+import _poolMasticore from "../pool/masticore.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
@@ -503,6 +505,7 @@ import _poolRecklessWurm from "../pool/reckless-wurm.js";
 import _poolReclaim from "../pool/reclaim.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
+import _poolRescue from "../pool/rescue.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolReveredUnicorn from "../pool/revered-unicorn.js";
@@ -565,6 +568,7 @@ import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
 import _poolSilverpeltWerewolf from "../pool/silverpelt-werewolf.js";
 import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
+import _poolSimaYiWeiFieldMarshal from "../pool/sima-yi-wei-field-marshal.js";
 import _poolSimoon from "../pool/simoon.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
@@ -935,6 +939,7 @@ const shard: CardShard = {
     _poolEmberShot,
     _poolEmberethPaladin,
     _poolEnchantedBeing,
+    _poolEncroach,
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
@@ -1116,6 +1121,7 @@ const shard: CardShard = {
     _poolMarshdrinkerGiant,
     _poolMarwynThePreserver,
     _poolMasterfulReplication,
+    _poolMasticore,
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
     _poolMentorsGuidance,
@@ -1242,6 +1248,7 @@ const shard: CardShard = {
     _poolReclaim,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
+    _poolRescue,
     _poolResearchThief,
     _poolRestlessDead,
     _poolReveredUnicorn,
@@ -1304,6 +1311,7 @@ const shard: CardShard = {
     _poolSilvanRally,
     _poolSilverpeltWerewolf,
     _poolSilverquillPledgemage,
+    _poolSimaYiWeiFieldMarshal,
     _poolSimoon,
     _poolSimulacrumShaper,
     _poolSinewSliver,

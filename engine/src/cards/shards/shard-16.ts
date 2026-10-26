@@ -121,6 +121,7 @@ import _poolColdCaseCracker from "../pool/cold-case-cracker.js";
 import _poolColiseumBehemoth from "../pool/coliseum-behemoth.js";
 import _poolCombatProfessor from "../pool/combat-professor.js";
 import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
+import _poolCompost from "../pool/compost.js";
 import _poolContainmentBreach from "../pool/containment-breach.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
 import _poolCosmotronicWave from "../pool/cosmotronic-wave.js";
@@ -203,6 +204,7 @@ import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExpendableLackey from "../pool/expendable-lackey.js";
 import _poolExplosiveEntry from "../pool/explosive-entry.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
+import _poolExtruder from "../pool/extruder.js";
 import _poolEyesInTheSkies from "../pool/eyes-in-the-skies.js";
 import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
@@ -639,6 +641,7 @@ import _poolTakeVengeance from "../pool/take-vengeance.js";
 import _poolTalasScout from "../pool/talas-scout.js";
 import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
 import _poolTarfire from "../pool/tarfire.js";
+import _poolTauntingElf from "../pool/taunting-elf.js";
 import _poolTavernRuffian from "../pool/tavern-ruffian.js";
 import _poolTempleOfPower from "../pool/temple-of-power.js";
 import _poolTemporalSpring from "../pool/temporal-spring.js";
@@ -772,6 +775,7 @@ import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolWoodweaversPuzzleknot from "../pool/woodweavers-puzzleknot.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
+import _poolYavimayaEnchantress from "../pool/yavimaya-enchantress.js";
 import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
 import _poolYouComeToARiver from "../pool/you-come-to-a-river.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
@@ -920,6 +924,7 @@ const shard: CardShard = {
     _poolColiseumBehemoth,
     _poolCombatProfessor,
     _poolCombineChrysalis,
+    _poolCompost,
     _poolContainmentBreach,
     _poolContaminantGrafter,
     _poolCosmotronicWave,
@@ -1002,6 +1007,7 @@ const shard: CardShard = {
     _poolExpendableLackey,
     _poolExplosiveEntry,
     _poolExtravagantReplication,
+    _poolExtruder,
     _poolEyesInTheSkies,
     _poolEzrimAgencyChief,
     _poolFaerieSeer,
@@ -1438,6 +1444,7 @@ const shard: CardShard = {
     _poolTalasScout,
     _poolTalismanOfResilience,
     _poolTarfire,
+    _poolTauntingElf,
     _poolTavernRuffian,
     _poolTempleOfPower,
     _poolTemporalSpring,
@@ -1571,6 +1578,7 @@ const shard: CardShard = {
     _poolWoodweaversPuzzleknot,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
+    _poolYavimayaEnchantress,
     _poolYouAreAlreadyDead,
     _poolYouComeToARiver,
     _poolZodiacHorse,

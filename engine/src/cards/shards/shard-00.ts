@@ -129,6 +129,7 @@ import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
 import _poolCountNefaria from "../pool/count-nefaria.js";
+import _poolCounterintelligence from "../pool/counterintelligence.js";
 import _poolCradleClearcutter from "../pool/cradle-clearcutter.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
@@ -301,6 +302,7 @@ import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
 import _poolInkDissolver from "../pool/ink-dissolver.js";
 import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
+import _poolIridescentDrake from "../pool/iridescent-drake.js";
 import _poolIronLance from "../pool/iron-lance.js";
 import _poolIronSuitcase from "../pool/iron-suitcase.js";
 import _poolIvyDancer from "../pool/ivy-dancer.js";
@@ -662,6 +664,7 @@ import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
 import _poolTritonFortuneHunter from "../pool/triton-fortune-hunter.js";
 import _poolTritonWavebreaker from "../pool/triton-wavebreaker.js";
+import _poolTrumpetBlast from "../pool/trumpet-blast.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTuskeriFirewalker from "../pool/tuskeri-firewalker.js";
 import _poolTwistedEmbrace from "../pool/twisted-embrace.js";
@@ -886,6 +889,7 @@ const shard: CardShard = {
     _poolConversionApparatus,
     _poolCosmicCube,
     _poolCountNefaria,
+    _poolCounterintelligence,
     _poolCradleClearcutter,
     _poolCraftworkCrusher,
     _poolCraterhoofBehemoth,
@@ -1058,6 +1062,7 @@ const shard: CardShard = {
     _poolInkDissolver,
     _poolInstrumentsOfWar,
     _poolInterceptorShadowsHound,
+    _poolIridescentDrake,
     _poolIronLance,
     _poolIronSuitcase,
     _poolIvyDancer,
@@ -1419,6 +1424,7 @@ const shard: CardShard = {
     _poolTrialOfSolidarity,
     _poolTritonFortuneHunter,
     _poolTritonWavebreaker,
+    _poolTrumpetBlast,
     _poolTunnelOfHate,
     _poolTuskeriFirewalker,
     _poolTwistedEmbrace,

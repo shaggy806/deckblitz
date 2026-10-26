@@ -589,6 +589,7 @@ import _poolSteamClean from "../pool/steam-clean.js";
 import _poolSteamSpitter from "../pool/steam-spitter.js";
 import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
 import _poolStickytongueSentinel from "../pool/stickytongue-sentinel.js";
+import _poolStoneCatapult from "../pool/stone-catapult.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
@@ -610,6 +611,7 @@ import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTanglesap from "../pool/tanglesap.js";
+import _poolTaoistMystic from "../pool/taoist-mystic.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
@@ -1317,6 +1319,7 @@ const shard: CardShard = {
     _poolSteamSpitter,
     _poolSteelOfTheGodhead,
     _poolStickytongueSentinel,
+    _poolStoneCatapult,
     _poolStonecoilSerpent,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
@@ -1338,6 +1341,7 @@ const shard: CardShard = {
     _poolSymbolOfUnsummoning,
     _poolTangle,
     _poolTanglesap,
+    _poolTaoistMystic,
     _poolTauntingKobold,
     _poolTeekasDragon,
     _poolTeferiMasterOfTime,

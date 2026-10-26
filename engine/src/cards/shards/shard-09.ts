@@ -56,6 +56,7 @@ import _poolAyaraFirstOfLocthwain from "../pool/ayara-first-of-locthwain.js";
 import _poolBaithookAngler from "../pool/baithook-angler.js";
 import _poolBanehound from "../pool/banehound.js";
 import _poolBantPanorama from "../pool/bant-panorama.js";
+import _poolBarbarianGeneral from "../pool/barbarian-general.js";
 import _poolBarkhideMauler from "../pool/barkhide-mauler.js";
 import _poolBaruWurmspeaker from "../pool/baru-wurmspeaker.js";
 import _poolBatheInDragonfire from "../pool/bathe-in-dragonfire.js";
@@ -484,6 +485,7 @@ import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
 import _poolPrimordialOoze from "../pool/primordial-ooze.js";
 import _poolPrisonBreak from "../pool/prison-break.js";
+import _poolPrivateResearch from "../pool/private-research.js";
 import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolPromisedKannushi from "../pool/promised-kannushi.js";
@@ -827,6 +829,7 @@ const shard: CardShard = {
     _poolBaithookAngler,
     _poolBanehound,
     _poolBantPanorama,
+    _poolBarbarianGeneral,
     _poolBarkhideMauler,
     _poolBaruWurmspeaker,
     _poolBatheInDragonfire,
@@ -1255,6 +1258,7 @@ const shard: CardShard = {
     _poolPrimalWitchstalker,
     _poolPrimordialOoze,
     _poolPrisonBreak,
+    _poolPrivateResearch,
     _poolProfessorOfZoomancy,
     _poolProfessorZeiAnthropologist,
     _poolPromisedKannushi,

@@ -107,6 +107,7 @@ import _poolCalderaLake from "../pool/caldera-lake.js";
 import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
 import _poolCandlegroveWitch from "../pool/candlegrove-witch.js";
 import _poolCandlestick from "../pool/candlestick.js";
+import _poolCaoRenWeiCommander from "../pool/cao-ren-wei-commander.js";
 import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
@@ -758,6 +759,7 @@ import _poolZealousDisplay from "../pool/zealous-display.js";
 import _poolZealousStrike from "../pool/zealous-strike.js";
 import _poolZephyrWinder from "../pool/zephyr-winder.js";
 import _poolZimoneParadoxSculptor from "../pool/zimone-paradox-sculptor.js";
+import _poolZodiacDragon from "../pool/zodiac-dragon.js";
 import _poolZodiacOx from "../pool/zodiac-ox.js";
 import _poolZoralineCosmosCaller from "../pool/zoraline-cosmos-caller.js";
 import _poolZuranOrb from "../pool/zuran-orb.js";
@@ -889,6 +891,7 @@ const shard: CardShard = {
     _poolCallTheGatewatch,
     _poolCandlegroveWitch,
     _poolCandlestick,
+    _poolCaoRenWeiCommander,
     _poolCapriciousSorcerer,
     _poolCaptiveWeird,
     _poolCarnageAltar,
@@ -1540,6 +1543,7 @@ const shard: CardShard = {
     _poolZealousStrike,
     _poolZephyrWinder,
     _poolZimoneParadoxSculptor,
+    _poolZodiacDragon,
     _poolZodiacOx,
     _poolZoralineCosmosCaller,
     _poolZuranOrb,

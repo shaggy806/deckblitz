@@ -39,6 +39,7 @@ import _poolAsceticism from "../pool/asceticism.js";
 import _poolAshlingThePilgrim from "../pool/ashling-the-pilgrim.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
 import _poolAuguryAdept from "../pool/augury-adept.js";
+import _poolAuraThief from "../pool/aura-thief.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
@@ -179,6 +180,7 @@ import _poolDisorient from "../pool/disorient.js";
 import _poolDisrupt from "../pool/disrupt.js";
 import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
+import _poolDonate from "../pool/donate.js";
 import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
@@ -193,6 +195,7 @@ import _poolDwindle from "../pool/dwindle.js";
 import _poolEccentricFarmer from "../pool/eccentric-farmer.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
+import _poolEightfoldMaze from "../pool/eightfold-maze.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
 import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolAshlingThePilgrim,
     _poolAssassinGauntlet,
     _poolAuguryAdept,
+    _poolAuraThief,
     _poolAuroraShifter,
     _poolAvalanche,
     _poolAvengersQuinjet,
@@ -934,6 +938,7 @@ const shard: CardShard = {
     _poolDisrupt,
     _poolDissolve,
     _poolDivinerOfMist,
+    _poolDonate,
     _poolDovinsDismissal,
     _poolDownInTheValley,
     _poolDragonbackAssault,
@@ -948,6 +953,7 @@ const shard: CardShard = {
     _poolEccentricFarmer,
     _poolEchoOfDusk,
     _poolEclipsedMerrow,
+    _poolEightfoldMaze,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
     _poolElegyAcolyte,

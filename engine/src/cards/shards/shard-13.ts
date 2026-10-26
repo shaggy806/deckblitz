@@ -11,6 +11,7 @@ import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAetherInspector from "../pool/aether-inspector.js";
+import _poolAetherSting from "../pool/aether-sting.js";
 import _poolAethertorchRenegade from "../pool/aethertorch-renegade.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
@@ -765,6 +766,7 @@ const shard: CardShard = {
     _poolAerialDoombot,
     _poolAerialResponder,
     _poolAetherInspector,
+    _poolAetherSting,
     _poolAethertorchRenegade,
     _poolAfterlifeFromTheLoam,
     _poolAfterthoughtSentry,

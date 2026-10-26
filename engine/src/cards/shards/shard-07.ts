@@ -343,6 +343,7 @@ import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKurosTaken from "../pool/kuros-taken.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
+import _poolLadySun from "../pool/lady-sun.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolKurosTaken,
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
+    _poolLadySun,
     _poolLagonnaBandTrailblazer,
     _poolLashweedLurker,
     _poolLastWord,

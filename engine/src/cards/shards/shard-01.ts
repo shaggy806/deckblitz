@@ -211,6 +211,7 @@ import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolFury from "../pool/fury.js";
 import _poolGalvanicBombardment from "../pool/galvanic-bombardment.js";
+import _poolGamekeeper from "../pool/gamekeeper.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
@@ -367,12 +368,14 @@ import _poolMarchOfTheDrowned from "../pool/march-of-the-drowned.js";
 import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
+import _poolMarshalingTheTroops from "../pool/marshaling-the-troops.js";
 import _poolMasterSplicer from "../pool/master-splicer.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
 import _poolMeddlingYouths from "../pool/meddling-youths.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
+import _poolMengHuoBarbarianKing from "../pool/meng-huo-barbarian-king.js";
 import _poolMentalMisstep from "../pool/mental-misstep.js";
 import _poolMerchantOfTheVale from "../pool/merchant-of-the-vale.js";
 import _poolMerenOfClanNelToth from "../pool/meren-of-clan-nel-toth.js";
@@ -437,6 +440,7 @@ import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
 import _poolPopQuiz from "../pool/pop-quiz.js";
+import _poolPowderKeg from "../pool/powder-keg.js";
 import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrecognitivePerception from "../pool/precognitive-perception.js";
 import _poolPressIntoService from "../pool/press-into-service.js";
@@ -940,6 +944,7 @@ const shard: CardShard = {
     _poolFumingEffigy,
     _poolFury,
     _poolGalvanicBombardment,
+    _poolGamekeeper,
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
@@ -1096,12 +1101,14 @@ const shard: CardShard = {
     _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,
+    _poolMarshalingTheTroops,
     _poolMasterSplicer,
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
     _poolMawOfTheMire,
     _poolMeddlingYouths,
     _poolMemorialToGlory,
+    _poolMengHuoBarbarianKing,
     _poolMentalMisstep,
     _poolMerchantOfTheVale,
     _poolMerenOfClanNelToth,
@@ -1166,6 +1173,7 @@ const shard: CardShard = {
     _poolPlanetaryAnnihilation,
     _poolPlunderingBarbarian,
     _poolPopQuiz,
+    _poolPowderKeg,
     _poolPowerBoost,
     _poolPrecognitivePerception,
     _poolPressIntoService,

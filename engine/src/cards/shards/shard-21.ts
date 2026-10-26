@@ -536,6 +536,7 @@ import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
 import _poolShinenOfFlightsWings from "../pool/shinen-of-flights-wings.js";
 import _poolShreddersArmor from "../pool/shredders-armor.js";
 import _poolShriekgeist from "../pool/shriekgeist.js";
+import _poolShuEliteCompanions from "../pool/shu-elite-companions.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
 import _poolSilkwingScout from "../pool/silkwing-scout.js";
 import _poolSimianSling from "../pool/simian-sling.js";
@@ -686,6 +687,7 @@ import _poolWarrenSoultrader from "../pool/warren-soultrader.js";
 import _poolWarriorEnKor from "../pool/warrior-en-kor.js";
 import _poolWaterElemental from "../pool/water-elemental.js";
 import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
+import _poolWeiStrikeForce from "../pool/wei-strike-force.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
@@ -1261,6 +1263,7 @@ const shard: CardShard = {
     _poolShinenOfFlightsWings,
     _poolShreddersArmor,
     _poolShriekgeist,
+    _poolShuEliteCompanions,
     _poolSilentAttendant,
     _poolSilkwingScout,
     _poolSimianSling,
@@ -1411,6 +1414,7 @@ const shard: CardShard = {
     _poolWarriorEnKor,
     _poolWaterElemental,
     _poolWaterloggedGrove,
+    _poolWeiStrikeForce,
     _poolWeightOfMemory,
     _poolWeldfastMonitor,
     _poolWhiskerquillScribe,
