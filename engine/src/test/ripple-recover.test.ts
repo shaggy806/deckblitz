@@ -15,7 +15,7 @@
  */
 import { describe, expect, it } from "vitest";
 import type { ScriptedController } from "../controller.js";
-import type { ObjectId } from "../state.js";
+import type { ObjectId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
 import { A, B, activate, cast, destroy, hand, lands, life, pickFromZone, pickModes, ref, spawn, table, toGraveyard, toHand, toLibrary, zone } from "./harness.js";
 
