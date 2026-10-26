@@ -77,6 +77,7 @@ import _poolBoarQPine from "../pool/boar-q-pine.js";
 import _poolBondOfPassion from "../pool/bond-of-passion.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
+import _poolBrackwaterElemental from "../pool/brackwater-elemental.js";
 import _poolBramblesnap from "../pool/bramblesnap.js";
 import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
@@ -183,6 +184,7 @@ import _poolEternalSkylord from "../pool/eternal-skylord.js";
 import _poolExoticOrchard from "../pool/exotic-orchard.js";
 import _poolExplore from "../pool/explore.js";
 import _poolExplosiveShot from "../pool/explosive-shot.js";
+import _poolExtractorDemon from "../pool/extractor-demon.js";
 import _poolExudeToxin from "../pool/exude-toxin.js";
 import _poolFaeburrowElder from "../pool/faeburrow-elder.js";
 import _poolFaerieSnoop from "../pool/faerie-snoop.js";
@@ -227,6 +229,7 @@ import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
+import _poolGodsire from "../pool/godsire.js";
 import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
@@ -447,6 +450,7 @@ import _poolReturnedPhalanx from "../pool/returned-phalanx.js";
 import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
+import _poolRhoxMeditant from "../pool/rhox-meditant.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingOfEvosIsle from "../pool/ring-of-evos-isle.js";
 import _poolRingOfRenewal from "../pool/ring-of-renewal.js";
@@ -538,6 +542,7 @@ import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
 import _poolSpoilsOfAdventure from "../pool/spoils-of-adventure.js";
+import _poolSporeBurst from "../pool/spore-burst.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
@@ -751,6 +756,7 @@ const shard: CardShard = {
     _poolBondOfPassion,
     _poolBoommobile,
     _poolBountyOfMight,
+    _poolBrackwaterElemental,
     _poolBramblesnap,
     _poolBreachingDragonstorm,
     _poolBrighthearthBanneret,
@@ -857,6 +863,7 @@ const shard: CardShard = {
     _poolExoticOrchard,
     _poolExplore,
     _poolExplosiveShot,
+    _poolExtractorDemon,
     _poolExudeToxin,
     _poolFaeburrowElder,
     _poolFaerieSnoop,
@@ -901,6 +908,7 @@ const shard: CardShard = {
     _poolGoblinArtillery,
     _poolGoblinWarPaint,
     _poolGodEternalRhonas,
+    _poolGodsire,
     _poolGreenSunsZenith,
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
@@ -1121,6 +1129,7 @@ const shard: CardShard = {
     _poolReveillark,
     _poolReviveTheShire,
     _poolRevokeDemise,
+    _poolRhoxMeditant,
     _poolRimeshieldFrostGiant,
     _poolRingOfEvosIsle,
     _poolRingOfRenewal,
@@ -1212,6 +1221,7 @@ const shard: CardShard = {
     _poolSplinterfright,
     _poolSplitUp,
     _poolSpoilsOfAdventure,
+    _poolSporeBurst,
     _poolSporeFrog,
     _poolStarWhale,
     _poolSteelburrChampion,

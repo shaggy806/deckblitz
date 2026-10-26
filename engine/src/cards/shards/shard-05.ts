@@ -139,6 +139,7 @@ import _poolContagiousNim from "../pool/contagious-nim.js";
 import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
+import _poolCourtHomunculus from "../pool/court-homunculus.js";
 import _poolCranialArchive from "../pool/cranial-archive.js";
 import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
 import _poolCrocodileOfTheCrossing from "../pool/crocodile-of-the-crossing.js";
@@ -803,6 +804,7 @@ const shard: CardShard = {
     _poolContentiousPlan,
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
+    _poolCourtHomunculus,
     _poolCranialArchive,
     _poolCrimestopperSprite,
     _poolCrocodileOfTheCrossing,

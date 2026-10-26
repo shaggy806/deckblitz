@@ -13,6 +13,7 @@ import _poolAmberPrison from "../pool/amber-prison.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
+import _poolAngelsong from "../pool/angelsong.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
 import _poolArachnoform from "../pool/arachnoform.js";
@@ -158,6 +159,7 @@ import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
 import _poolEyeGouge from "../pool/eye-gouge.js";
 import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
+import _poolFaerieMechanist from "../pool/faerie-mechanist.js";
 import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
@@ -307,6 +309,7 @@ import _poolLukeCagePowerMan from "../pool/luke-cage-power-man.js";
 import _poolLurchingRotbeast from "../pool/lurching-rotbeast.js";
 import _poolLuxuriousLibation from "../pool/luxurious-libation.js";
 import _poolMachinesmithAutomaton from "../pool/machinesmith-automaton.js";
+import _poolMagmaSpray from "../pool/magma-spray.js";
 import _poolMahadiEmporiumMaster from "../pool/mahadi-emporium-master.js";
 import _poolMakindiMesas from "../pool/makindi-mesas.js";
 import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
@@ -324,6 +327,7 @@ import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMightSliver from "../pool/might-sliver.js";
+import _poolMinionReflector from "../pool/minion-reflector.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
 import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMistIntruder from "../pool/mist-intruder.js";
@@ -629,6 +633,7 @@ const shard: CardShard = {
     _poolAnafenzaTheForemost,
     _poolAncestralAnger,
     _poolAngelOfGrace,
+    _poolAngelsong,
     _poolAnodetLurker,
     _poolAppetiteForTheUnnatural,
     _poolArachnoform,
@@ -774,6 +779,7 @@ const shard: CardShard = {
     _poolEyeGouge,
     _poolEyelessWatcher,
     _poolFaerieDuelist,
+    _poolFaerieMechanist,
     _poolFallOfTheThran,
     _poolFanBearer,
     _poolFanaticalStrength,
@@ -923,6 +929,7 @@ const shard: CardShard = {
     _poolLurchingRotbeast,
     _poolLuxuriousLibation,
     _poolMachinesmithAutomaton,
+    _poolMagmaSpray,
     _poolMahadiEmporiumMaster,
     _poolMakindiMesas,
     _poolMalevolentAwakening,
@@ -940,6 +947,7 @@ const shard: CardShard = {
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMightSliver,
+    _poolMinionReflector,
     _poolMinotaurAggressor,
     _poolMishraExcavationProdigy,
     _poolMistIntruder,

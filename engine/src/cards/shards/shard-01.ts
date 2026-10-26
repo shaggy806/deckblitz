@@ -99,6 +99,7 @@ import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolConsignToThePit from "../pool/consign-to-the-pit.js";
 import _poolConsume from "../pool/consume.js";
 import _poolControlMagic from "../pool/control-magic.js";
+import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
@@ -250,6 +251,7 @@ import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
 import _poolIcebindPillar from "../pool/icebind-pillar.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
+import _poolIgniteDisorder from "../pool/ignite-disorder.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolInOketrasName from "../pool/in-oketras-name.js";
@@ -620,6 +622,7 @@ import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
 import _poolWeftbladeEnhancer from "../pool/weftblade-enhancer.js";
 import _poolWestWindAvatar from "../pool/west-wind-avatar.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
+import _poolWhereAncientsTread from "../pool/where-ancients-tread.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
 import _poolWildHypothesis from "../pool/wild-hypothesis.js";
@@ -746,6 +749,7 @@ const shard: CardShard = {
     _poolConsignToThePit,
     _poolConsume,
     _poolControlMagic,
+    _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
     _poolCrisisOfConscience,
@@ -897,6 +901,7 @@ const shard: CardShard = {
     _poolHypnoticSpecter,
     _poolIcebindPillar,
     _poolIconicShield,
+    _poolIgniteDisorder,
     _poolIgnobleHierarch,
     _poolIllustriousHistorian,
     _poolInOketrasName,
@@ -1267,6 +1272,7 @@ const shard: CardShard = {
     _poolWeftbladeEnhancer,
     _poolWestWindAvatar,
     _poolWestvaleAbbey,
+    _poolWhereAncientsTread,
     _poolWhirlwingStormbrood,
     _poolWhitemaneLion,
     _poolWildHypothesis,

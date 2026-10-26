@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Conflux, whole, and Shards of Alara's most-played** (batch 171, the middle walk, 2026-10-26):
+  no engine change. 80 of the 109 authored — Ranger of Eos, Kresh the Bloodbraided, Rafiq of the
+  Many, Sarkhan Vol, Mayael the Anima, Goblin Assault, Wild Nacatl, Knight-Captain of Eos,
+  Apocalypse Hydra, Invincible Hymn and 70 more: Gluttonous Slime and Magma Spray finished by the
+  scaffolder, 78 by five `card-author` agents. CON is whole; 54 of Shards of Alara left. 29
+  blocked (`B171.json`), the devour count (`amount:creatures-devoured`, 3) the most shared.
 - **Theros, the rest of the set, and Magic 2014, whole** (batch 170, the newest-first walk,
   2026-10-26): no feature built. 79 of the 95 authored — Garruk, Caller of Beasts, Xathrid
   Necromancer, Ring of Three Wishes, Banisher Priest, Imposing Sovereign, Pyromancer's Gauntlet,

@@ -717,7 +717,13 @@ export function auraPolarity(def: CardDefinition): Polarity {
   // blocked", False Demise's "return that card under your control".
   if (!harm && !help) {
     for (const ability of def.triggered ?? []) {
+      // Any trigger that destroys what it enchants — Yoke of the Damned's
+      // "when a creature dies, destroy enchanted creature".
+      if (ability.effect?.kind === "destroy" && ability.effect.target === "attached") harm = true;
       if (!("who" in ability.trigger) || ability.trigger.who !== "attached") continue;
+      // The enchanted permanent's controller pays — Corrupted Roots' "whenever
+      // enchanted land becomes tapped, its controller loses 2 life".
+      if (ability.effect?.kind === "lose-life" && ability.effect.who === "trigger-controller") harm = true;
       const lean = attachedTriggerLean(ability.effect);
       if (lean === "help") help = true;
       else if (lean === "harm") harm = true;

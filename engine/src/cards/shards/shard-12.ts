@@ -351,6 +351,7 @@ import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
 import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
+import _poolMightOfAlara from "../pool/might-of-alara.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
 import _poolMilitaryDiscipline from "../pool/military-discipline.js";
 import _poolMindSculpt from "../pool/mind-sculpt.js";
@@ -445,6 +446,7 @@ import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
 import _poolRagingBattleMouse from "../pool/raging-battle-mouse.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
+import _poolRangerOfEos from "../pool/ranger-of-eos.js";
 import _poolRatOut from "../pool/rat-out.js";
 import _poolRavingVisionary from "../pool/raving-visionary.js";
 import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
@@ -515,6 +517,7 @@ import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
 import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
+import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
@@ -1016,6 +1019,7 @@ const shard: CardShard = {
     _poolMentorsGuidance,
     _poolMerrowReejerey,
     _poolMetamorphicBlast,
+    _poolMightOfAlara,
     _poolMigratoryRoute,
     _poolMilitaryDiscipline,
     _poolMindSculpt,
@@ -1110,6 +1114,7 @@ const shard: CardShard = {
     _poolRagingBattleMouse,
     _poolRaidersWake,
     _poolRamosDragonEngine,
+    _poolRangerOfEos,
     _poolRatOut,
     _poolRavingVisionary,
     _poolRazorfootGriffin,
@@ -1180,6 +1185,7 @@ const shard: CardShard = {
     _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
+    _poolSkywardEyeProphets,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
     _poolSmolderingWerewolf,

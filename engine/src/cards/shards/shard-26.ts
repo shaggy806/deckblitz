@@ -33,6 +33,7 @@ import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
+import _poolApocalypseHydra from "../pool/apocalypse-hydra.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
 import _poolArborealAlliance from "../pool/arboreal-alliance.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
@@ -116,6 +117,7 @@ import _poolCompassionateHealer from "../pool/compassionate-healer.js";
 import _poolCompleatDevotion from "../pool/compleat-devotion.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
 import _poolConquer from "../pool/conquer.js";
+import _poolControlledInstincts from "../pool/controlled-instincts.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
 import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
@@ -351,6 +353,7 @@ import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMirrorMockery from "../pool/mirror-mockery.js";
+import _poolMirrorSigilSergeant from "../pool/mirror-sigil-sergeant.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
@@ -688,6 +691,7 @@ const shard: CardShard = {
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
     _poolApexDevastator,
+    _poolApocalypseHydra,
     _poolAranaHeartOfTheSpider,
     _poolArborealAlliance,
     _poolArcumsAstrolabe,
@@ -771,6 +775,7 @@ const shard: CardShard = {
     _poolCompleatDevotion,
     _poolConclaveEquenaut,
     _poolConquer,
+    _poolControlledInstincts,
     _poolCorpseKnight,
     _poolCountOnLuck,
     _poolCrackedEarthTechnique,
@@ -1006,6 +1011,7 @@ const shard: CardShard = {
     _poolMindMeanderer,
     _poolMirageMockery,
     _poolMirrorMockery,
+    _poolMirrorSigilSergeant,
     _poolMistCloakedHerald,
     _poolMomentumRumbler,
     _poolMoorlandInquisitor,
