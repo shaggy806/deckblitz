@@ -52,6 +52,7 @@ import _poolBeastmasterAscension from "../pool/beastmaster-ascension.js";
 import _poolBeseechTheQueen from "../pool/beseech-the-queen.js";
 import _poolBestialBloodline from "../pool/bestial-bloodline.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
+import _poolBetrayal from "../pool/betrayal.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
@@ -75,6 +76,7 @@ import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBrushwagg from "../pool/brushwagg.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
+import _poolBullElephant from "../pool/bull-elephant.js";
 import _poolBullRushBruiser from "../pool/bull-rush-bruiser.js";
 import _poolBurakosPartyLeader from "../pool/burakos-party-leader.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
@@ -215,6 +217,7 @@ import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
 import _poolGandalfWhiteRider from "../pool/gandalf-white-rider.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
 import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
+import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGimlisAxe from "../pool/gimlis-axe.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
@@ -696,6 +699,7 @@ const shard: CardShard = {
     _poolBeseechTheQueen,
     _poolBestialBloodline,
     _poolBestialIncursion,
+    _poolBetrayal,
     _poolBlackMarketConnections,
     _poolBlightGrenade,
     _poolBloatedContaminator,
@@ -719,6 +723,7 @@ const shard: CardShard = {
     _poolBronzeplateBoar,
     _poolBrushwagg,
     _poolBugenhagenWiseElder,
+    _poolBullElephant,
     _poolBullRushBruiser,
     _poolBurakosPartyLeader,
     _poolBurstOfSpeed,
@@ -859,6 +864,7 @@ const shard: CardShard = {
     _poolGandalfWhiteRider,
     _poolGevScaledScorch,
     _poolGhostlyKeybearer,
+    _poolGiantCaterpillar,
     _poolGiganticBigBear,
     _poolGimlisAxe,
     _poolGlarbCalamitysAugur,

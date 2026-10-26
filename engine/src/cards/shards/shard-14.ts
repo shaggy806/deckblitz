@@ -122,6 +122,7 @@ import _poolCouriersBriefcase from "../pool/couriers-briefcase.js";
 import _poolCrabUmbra from "../pool/crab-umbra.js";
 import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
+import _poolCreepingMold from "../pool/creeping-mold.js";
 import _poolCrystalBall from "../pool/crystal-ball.js";
 import _poolCullingDais from "../pool/culling-dais.js";
 import _poolCultivatorOfBlades from "../pool/cultivator-of-blades.js";
@@ -141,6 +142,7 @@ import _poolDawnhandEulogist from "../pool/dawnhand-eulogist.js";
 import _poolDawnstrikePaladin from "../pool/dawnstrike-paladin.js";
 import _poolDaybreakCombatants from "../pool/daybreak-combatants.js";
 import _poolDeadeyeDuelist from "../pool/deadeye-duelist.js";
+import _poolDeathWatch from "../pool/death-watch.js";
 import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
 import _poolDebtorsTransport from "../pool/debtors-transport.js";
@@ -782,6 +784,7 @@ const shard: CardShard = {
     _poolCrabUmbra,
     _poolCrawlingInfestation,
     _poolCreativeTechnique,
+    _poolCreepingMold,
     _poolCrystalBall,
     _poolCullingDais,
     _poolCultivatorOfBlades,
@@ -801,6 +804,7 @@ const shard: CardShard = {
     _poolDawnstrikePaladin,
     _poolDaybreakCombatants,
     _poolDeadeyeDuelist,
+    _poolDeathWatch,
     _poolDeathbloomThallid,
     _poolDeathcapCultivator,
     _poolDebtorsTransport,

@@ -47,6 +47,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Jellyfish Token",
   "Jumblebones",
   "Nymph Token",
+  // Diamond Kaleidoscope (VIS)'s 0/1 Prisms were never printed as a token.
+  "Prism Token",
   // The only Robot Hero printing is a 2/1 flier.
   "1/1 Robot Hero Token",
   // The only Spawn printings are 3/3 red.

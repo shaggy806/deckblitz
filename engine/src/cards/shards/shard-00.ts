@@ -67,6 +67,7 @@ import _poolBrainstone from "../pool/brainstone.js";
 import _poolBrandedHowler from "../pool/branded-howler.js";
 import _poolBreakThroughTheLine from "../pool/break-through-the-line.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
+import _poolBreezekeeper from "../pool/breezekeeper.js";
 import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
 import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
 import _poolBrigidDounsMind from "../pool/brigid-douns-mind.js";
@@ -431,6 +432,7 @@ import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
 import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
 import _poolRigForWar from "../pool/rig-for-war.js";
+import _poolRighteousAura from "../pool/righteous-aura.js";
 import _poolRimefireTorque from "../pool/rimefire-torque.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheAnts from "../pool/rise-of-the-ants.js";
@@ -735,6 +737,7 @@ const shard: CardShard = {
     _poolBrandedHowler,
     _poolBreakThroughTheLine,
     _poolBreechesEagerPillager,
+    _poolBreezekeeper,
     _poolBrightfieldGlider,
     _poolBrigidClachansHeart,
     _poolBrigidDounsMind,
@@ -1099,6 +1102,7 @@ const shard: CardShard = {
     _poolRhizomeLurcher,
     _poolRideTheShoopuf,
     _poolRigForWar,
+    _poolRighteousAura,
     _poolRimefireTorque,
     _poolRiotPiker,
     _poolRiseOfTheAnts,

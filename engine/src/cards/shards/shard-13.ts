@@ -571,6 +571,7 @@ import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
+import _poolTeferisHonorGuard from "../pool/teferis-honor-guard.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
@@ -1242,6 +1243,7 @@ const shard: CardShard = {
     _poolTarPitcher,
     _poolTeamAvatar,
     _poolTectonicGiant,
+    _poolTeferisHonorGuard,
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
     _poolTevalsJudgment,

@@ -150,6 +150,7 @@ import _poolDespoticScepter from "../pool/despotic-scepter.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
 import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDevotedDuelist from "../pool/devoted-duelist.js";
+import _poolDiamondKaleidoscope from "../pool/diamond-kaleidoscope.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
@@ -160,6 +161,7 @@ import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
 import _poolDreadwingScavenger from "../pool/dreadwing-scavenger.js";
 import _poolDreadwing from "../pool/dreadwing.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
+import _poolDwarvenVigilantes from "../pool/dwarven-vigilantes.js";
 import _poolEarthKingdomSoldier from "../pool/earth-kingdom-soldier.js";
 import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
 import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
@@ -510,6 +512,7 @@ import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
 import _poolStormwingDragon from "../pool/stormwing-dragon.js";
 import _poolSubjugatorAngel from "../pool/subjugator-angel.js";
+import _poolSuleimansLegacy from "../pool/suleimans-legacy.js";
 import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
 import _poolSultaiRunemark from "../pool/sultai-runemark.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolDestructiveForce,
     _poolDevilDinosaur,
     _poolDevotedDuelist,
+    _poolDiamondKaleidoscope,
     _poolDimirInformant,
     _poolDireStrainBrawler,
     _poolDjinnOfTheFountain,
@@ -818,6 +822,7 @@ const shard: CardShard = {
     _poolDreadwingScavenger,
     _poolDreadwing,
     _poolDunesOfTheDead,
+    _poolDwarvenVigilantes,
     _poolEarthKingdomSoldier,
     _poolEarthbendingLesson,
     _poolEclipsedBoggart,
@@ -1168,6 +1173,7 @@ const shard: CardShard = {
     _poolStormshriekFeral,
     _poolStormwingDragon,
     _poolSubjugatorAngel,
+    _poolSuleimansLegacy,
     _poolSulfuricVortex,
     _poolSultaiRunemark,
     _poolSunbladeAngel,

@@ -151,6 +151,7 @@ import _poolDispersalTechnician from "../pool/dispersal-technician.js";
 import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
+import _poolDormantVolcano from "../pool/dormant-volcano.js";
 import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
@@ -305,6 +306,7 @@ import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
+import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLoamLarva from "../pool/loam-larva.js";
@@ -425,6 +427,7 @@ import _poolQuarrelsEnd from "../pool/quarrels-end.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRadiantFlames from "../pool/radiant-flames.js";
 import _poolRagingMinotaur from "../pool/raging-minotaur.js";
+import _poolRainbowEfreet from "../pool/rainbow-efreet.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolDjerusRenunciation,
     _poolDoggedDetective,
     _poolDomrisAmbush,
+    _poolDormantVolcano,
     _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
     _poolDreamPillager,
@@ -978,6 +982,7 @@ const shard: CardShard = {
     _poolLeoninBattlemage,
     _poolLeoninElder,
     _poolLevitatingStatue,
+    _poolLightningCloud,
     _poolLivingWall,
     _poolLlanowarKnight,
     _poolLoamLarva,
@@ -1098,6 +1103,7 @@ const shard: CardShard = {
     _poolQumulox,
     _poolRadiantFlames,
     _poolRagingMinotaur,
+    _poolRainbowEfreet,
     _poolRakdosRagemutt,
     _poolRamunapExcavator,
     _poolRapaciousGuest,

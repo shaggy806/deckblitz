@@ -160,6 +160,7 @@ import _poolDivineFavor from "../pool/divine-favor.js";
 import _poolDivineVisitation from "../pool/divine-visitation.js";
 import _poolDivinersPortent from "../pool/diviners-portent.js";
 import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
+import _poolDragonMask from "../pool/dragon-mask.js";
 import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
 import _poolDragonsHoard from "../pool/dragons-hoard.js";
 import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
@@ -360,6 +361,7 @@ import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMindTwist from "../pool/mind-twist.js";
 import _poolMinisterOfInquiries from "../pool/minister-of-inquiries.js";
 import _poolMinwuWhiteMage from "../pool/minwu-white-mage.js";
+import _poolMiraculousRecovery from "../pool/miraculous-recovery.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
 import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-richards.js";
@@ -810,6 +812,7 @@ const shard: CardShard = {
     _poolDivineVisitation,
     _poolDivinersPortent,
     _poolDoranTheSiegeTower,
+    _poolDragonMask,
     _poolDragonbornLooter,
     _poolDragonsHoard,
     _poolDragonstormGlobe,
@@ -1010,6 +1013,7 @@ const shard: CardShard = {
     _poolMindTwist,
     _poolMinisterOfInquiries,
     _poolMinwuWhiteMage,
+    _poolMiraculousRecovery,
     _poolMishrasOnslaught,
     _poolMistbladeShinobi,
     _poolMisterFantasticReedRichards,

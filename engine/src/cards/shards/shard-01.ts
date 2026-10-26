@@ -177,6 +177,7 @@ import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFlashFlood from "../pool/flash-flood.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
+import _poolFloodedShoreline from "../pool/flooded-shoreline.js";
 import _poolFlyingCraneTechnique from "../pool/flying-crane-technique.js";
 import _poolFontOfReturn from "../pool/font-of-return.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
@@ -319,6 +320,7 @@ import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
 import _poolLuminousWake from "../pool/luminous-wake.js";
 import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
+import _poolMagmaMine from "../pool/magma-mine.js";
 import _poolMagmaPhoenix from "../pool/magma-phoenix.js";
 import _poolMagmaRift from "../pool/magma-rift.js";
 import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
@@ -555,6 +557,7 @@ import _poolThreeTragedies from "../pool/three-tragedies.js";
 import _poolThrummingbird from "../pool/thrummingbird.js";
 import _poolThundersteelColossus from "../pool/thundersteel-colossus.js";
 import _poolTicketBooth from "../pool/ticket-booth.js";
+import _poolTinWingChimera from "../pool/tin-wing-chimera.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
 import _poolTolarianKraken from "../pool/tolarian-kraken.js";
 import _poolTolarianTerror from "../pool/tolarian-terror.js";
@@ -821,6 +824,7 @@ const shard: CardShard = {
     _poolFlametongueKavu,
     _poolFlashFlood,
     _poolFloodedGrove,
+    _poolFloodedShoreline,
     _poolFlyingCraneTechnique,
     _poolFontOfReturn,
     _poolFootlightFiend,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolLuminousBonds,
     _poolLuminousWake,
     _poolMach1SwoopingScoundrel,
+    _poolMagmaMine,
     _poolMagmaPhoenix,
     _poolMagmaRift,
     _poolMakindiAeronaut,
@@ -1199,6 +1204,7 @@ const shard: CardShard = {
     _poolThrummingbird,
     _poolThundersteelColossus,
     _poolTicketBooth,
+    _poolTinWingChimera,
     _poolTitaniaProtectorOfArgoth,
     _poolTolarianKraken,
     _poolTolarianTerror,

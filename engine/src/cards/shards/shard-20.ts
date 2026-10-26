@@ -576,6 +576,7 @@ import _poolSunCollaredRaptor from "../pool/sun-collared-raptor.js";
 import _poolSunkenHollow from "../pool/sunken-hollow.js";
 import _poolSunstreakPhoenix from "../pool/sunstreak-phoenix.js";
 import _poolSuperSkrull from "../pool/super-skrull.js";
+import _poolSuqataAssassin from "../pool/suqata-assassin.js";
 import _poolSureshotSower from "../pool/sureshot-sower.js";
 import _poolSurvivorOfKorlis from "../pool/survivor-of-korlis.js";
 import _poolSvyeluniteTemple from "../pool/svyelunite-temple.js";
@@ -586,6 +587,7 @@ import _poolTaintedObserver from "../pool/tainted-observer.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
 import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
 import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
+import _poolTalruumChampion from "../pool/talruum-champion.js";
 import _poolTamiyosEpiphany from "../pool/tamiyos-epiphany.js";
 import _poolTatyova from "../pool/tatyova.js";
 import _poolTauntingSliver from "../pool/taunting-sliver.js";
@@ -1290,6 +1292,7 @@ const shard: CardShard = {
     _poolSunkenHollow,
     _poolSunstreakPhoenix,
     _poolSuperSkrull,
+    _poolSuqataAssassin,
     _poolSureshotSower,
     _poolSurvivorOfKorlis,
     _poolSvyeluniteTemple,
@@ -1300,6 +1303,7 @@ const shard: CardShard = {
     _poolTalasAirShip,
     _poolTalismanOfHierarchy,
     _poolTalonGatesOfMadara,
+    _poolTalruumChampion,
     _poolTamiyosEpiphany,
     _poolTatyova,
     _poolTauntingSliver,

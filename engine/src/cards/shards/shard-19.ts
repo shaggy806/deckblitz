@@ -56,6 +56,7 @@ import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBladeJuggler from "../pool/blade-juggler.js";
 import _poolBladestitchedSkaab from "../pool/bladestitched-skaab.js";
+import _poolBlanketOfNight from "../pool/blanket-of-night.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlazingRootwalla from "../pool/blazing-rootwalla.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
@@ -177,6 +178,7 @@ import _poolEarthenArms from "../pool/earthen-arms.js";
 import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
+import _poolElvenCache from "../pool/elven-cache.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
@@ -680,6 +682,7 @@ import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensKnightAllyToken from "../tokens/knight-ally-token.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
+import _tokensPrismToken from "../tokens/prism-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
 import _tokensServoToken from "../tokens/servo-token.js";
 import _tokensSnakeTokenArtifactPoison from "../tokens/snake-token-artifact-poison.js";
@@ -742,6 +745,7 @@ const shard: CardShard = {
     _poolBitterReunion,
     _poolBladeJuggler,
     _poolBladestitchedSkaab,
+    _poolBlanketOfNight,
     _poolBlastingStation,
     _poolBlazingRootwalla,
     _poolBlightsowerThallid,
@@ -863,6 +867,7 @@ const shard: CardShard = {
     _poolEldraziSkyspawner,
     _poolElectrozoa,
     _poolElvenAmbush,
+    _poolElvenCache,
     _poolElvenRaftSteerer,
     _poolElvishHealer,
     _poolEmrakulsMessenger,
@@ -1368,6 +1373,7 @@ const shard: CardShard = {
     _tokensJumblebones,
     _tokensKnightAllyToken,
     _tokensPhyrexianMiteToken,
+    _tokensPrismToken,
     _tokensRedElementalToken11,
     _tokensServoToken,
     _tokensSnakeTokenArtifactPoison,

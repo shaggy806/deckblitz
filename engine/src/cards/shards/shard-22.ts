@@ -196,6 +196,7 @@ import _poolFieryEncore from "../pool/fiery-encore.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFireforgersPuzzleknot from "../pool/fireforgers-puzzleknot.js";
+import _poolFirestormHellkite from "../pool/firestorm-hellkite.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
@@ -350,6 +351,7 @@ import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNecromanticSummons from "../pool/necromantic-summons.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
+import _poolNekrataal from "../pool/nekrataal.js";
 import _poolNestedShambler from "../pool/nested-shambler.js";
 import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
 import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
@@ -603,6 +605,7 @@ import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
 import _poolVaevictisAsmadi from "../pool/vaevictis-asmadi.js";
 import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
+import _poolVanishing from "../pool/vanishing.js";
 import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
@@ -633,6 +636,7 @@ import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
 import _poolWillOfTheNaga from "../pool/will-of-the-naga.js";
 import _poolWilyBandar from "../pool/wily-bandar.js";
+import _poolWindShear from "../pool/wind-shear.js";
 import _poolWindbornMuse from "../pool/windborn-muse.js";
 import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
 import _poolWirewoodLodge from "../pool/wirewood-lodge.js";
@@ -654,6 +658,7 @@ import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
+import _tokensGreenSheepToken from "../tokens/green-sheep-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensMercenaryToken from "../tokens/mercenary-token.js";
@@ -859,6 +864,7 @@ const shard: CardShard = {
     _poolFightingDrake,
     _poolFirebirdBlazingRanger,
     _poolFireforgersPuzzleknot,
+    _poolFirestormHellkite,
     _poolFlickerOfFate,
     _poolFlowstoneShambler,
     _poolFontOfVigor,
@@ -1013,6 +1019,7 @@ const shard: CardShard = {
     _poolNavigationOrb,
     _poolNecromanticSummons,
     _poolNeedlethornDrake,
+    _poolNekrataal,
     _poolNestedShambler,
     _poolNettlingNuisance,
     _poolNevThePracticalDean,
@@ -1266,6 +1273,7 @@ const shard: CardShard = {
     _poolUtvaraScalper,
     _poolVaevictisAsmadi,
     _poolValleyMightcaller,
+    _poolVanishing,
     _poolVantressPaladin,
     _poolVectorAsp,
     _poolVenerableKnight,
@@ -1296,6 +1304,7 @@ const shard: CardShard = {
     _poolWildslayerElves,
     _poolWillOfTheNaga,
     _poolWilyBandar,
+    _poolWindShear,
     _poolWindbornMuse,
     _poolWingsOfTheGuard,
     _poolWirewoodLodge,
@@ -1319,6 +1328,7 @@ const shard: CardShard = {
     _tokensAxeToken,
     _tokensDragonEggToken,
     _tokensDwarfToken,
+    _tokensGreenSheepToken,
     _tokensHarpyToken,
     _tokensLifelinkCatToken,
     _tokensMercenaryToken,

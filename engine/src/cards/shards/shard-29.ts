@@ -308,6 +308,7 @@ import _poolKhalniGem from "../pool/khalni-gem.js";
 import _poolKjeldoranDead from "../pool/kjeldoran-dead.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
+import _poolKookus from "../pool/kookus.js";
 import _poolKraulRaider from "../pool/kraul-raider.js";
 import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
 import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
@@ -425,6 +426,7 @@ import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRadiantSolar from "../pool/radiant-solar.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagavanNimblePilferer from "../pool/ragavan-nimble-pilferer.js";
+import _poolRagingGorilla from "../pool/raging-gorilla.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakdosFirewheeler from "../pool/rakdos-firewheeler.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
@@ -984,6 +986,7 @@ const shard: CardShard = {
     _poolKjeldoranDead,
     _poolKnightLuminary,
     _poolKnightlyValor,
+    _poolKookus,
     _poolKraulRaider,
     _poolKrovikanScoundrel,
     _poolKujarSeedsculptor,
@@ -1101,6 +1104,7 @@ const shard: CardShard = {
     _poolRadiantSolar,
     _poolRaffinesTower,
     _poolRagavanNimblePilferer,
+    _poolRagingGorilla,
     _poolRagingPoltergeist,
     _poolRakdosFirewheeler,
     _poolRakishHeir,

@@ -457,6 +457,7 @@ import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
 import _poolRisingMiasma from "../pool/rising-miasma.js";
 import _poolRiverBear from "../pool/river-bear.js";
 import _poolRiverKelpie from "../pool/river-kelpie.js";
+import _poolRockSlide from "../pool/rock-slide.js";
 import _poolRockshardElemental from "../pool/rockshard-elemental.js";
 import _poolRodolfDuskbringer from "../pool/rodolf-duskbringer.js";
 import _poolRollickOfAbandon from "../pool/rollick-of-abandon.js";
@@ -1129,6 +1130,7 @@ const shard: CardShard = {
     _poolRisingMiasma,
     _poolRiverBear,
     _poolRiverKelpie,
+    _poolRockSlide,
     _poolRockshardElemental,
     _poolRodolfDuskbringer,
     _poolRollickOfAbandon,

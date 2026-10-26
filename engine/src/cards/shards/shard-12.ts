@@ -308,6 +308,7 @@ import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
+import _poolKnightOfTheMists from "../pool/knight-of-the-mists.js";
 import _poolKnightOfThePilgrimsRoad from "../pool/knight-of-the-pilgrims-road.js";
 import _poolKorAeronaut from "../pool/kor-aeronaut.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
@@ -502,6 +503,7 @@ import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
 import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
+import _poolSimoon from "../pool/simoon.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
@@ -540,6 +542,7 @@ import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
+import _poolSunClasp from "../pool/sun-clasp.js";
 import _poolSunbakedCanyon from "../pool/sunbaked-canyon.js";
 import _poolSunscapeFamiliar from "../pool/sunscape-familiar.js";
 import _poolSunstarLightsmith from "../pool/sunstar-lightsmith.js";
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolKeensightMentor,
     _poolKeldonNecropolis,
     _poolKillersMask,
+    _poolKnightOfTheMists,
     _poolKnightOfThePilgrimsRoad,
     _poolKorAeronaut,
     _poolKotisTheFangkeeper,
@@ -1163,6 +1167,7 @@ const shard: CardShard = {
     _poolSilence,
     _poolSilvanRally,
     _poolSilverquillPledgemage,
+    _poolSimoon,
     _poolSimulacrumShaper,
     _poolSinewSliver,
     _poolSinisterHideout,
@@ -1201,6 +1206,7 @@ const shard: CardShard = {
     _poolSubterraneanSpirit,
     _poolSummonAnima,
     _poolSummonedDromedary,
+    _poolSunClasp,
     _poolSunbakedCanyon,
     _poolSunscapeFamiliar,
     _poolSunstarLightsmith,

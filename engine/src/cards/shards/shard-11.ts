@@ -79,6 +79,7 @@ import _poolBreechesTheBlastmaker from "../pool/breeches-the-blastmaker.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
 import _poolBriarHydra from "../pool/briar-hydra.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
+import _poolBroodOfCockroaches from "../pool/brood-of-cockroaches.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
 import _poolBurningPalmEfreet from "../pool/burning-palm-efreet.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
@@ -176,6 +177,7 @@ import _poolEnervate from "../pool/enervate.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEther from "../pool/ether.js";
+import _poolEverglades from "../pool/everglades.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
@@ -754,6 +756,7 @@ const shard: CardShard = {
     _poolBreedingPool,
     _poolBriarHydra,
     _poolBrittleEffigy,
+    _poolBroodOfCockroaches,
     _poolBroodWeaver,
     _poolBurningPalmEfreet,
     _poolBurningTreeVandal,
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolEpicureOfBlood,
     _poolEpistolaryLibrarian,
     _poolEther,
+    _poolEverglades,
     _poolExtractPower,
     _poolFacetReader,
     _poolFailedFording,

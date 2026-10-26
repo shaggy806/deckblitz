@@ -79,6 +79,7 @@ import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
+import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
@@ -732,6 +733,7 @@ const shard: CardShard = {
     _poolBondOfRevival,
     _poolBoneyardLurker,
     _poolBorealShelf,
+    _poolBrassTalonChimera,
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,

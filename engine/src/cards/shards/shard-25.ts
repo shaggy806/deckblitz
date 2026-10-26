@@ -15,6 +15,7 @@ import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
 import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAjanisComrade from "../pool/ajanis-comrade.js";
 import _poolAkoumStonewaker from "../pool/akoum-stonewaker.js";
+import _poolAkuDjinn from "../pool/aku-djinn.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlharuSolemnRitualist from "../pool/alharu-solemn-ritualist.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
@@ -195,6 +196,7 @@ import _poolFeastOfSanity from "../pool/feast-of-sanity.js";
 import _poolFeiyiSnake from "../pool/feiyi-snake.js";
 import _poolFeldonRonomExcavator from "../pool/feldon-ronom-excavator.js";
 import _poolFellThePheasant from "../pool/fell-the-pheasant.js";
+import _poolFemerefEnchantress from "../pool/femeref-enchantress.js";
 import _poolFerociousPup from "../pool/ferocious-pup.js";
 import _poolFerventStrike from "../pool/fervent-strike.js";
 import _poolFeveredStrength from "../pool/fevered-strength.js";
@@ -289,6 +291,7 @@ import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
 import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
+import _poolJujuBubble from "../pool/juju-bubble.js";
 import _poolJununEfreet from "../pool/junun-efreet.js";
 import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
@@ -672,6 +675,7 @@ const shard: CardShard = {
     _poolAislingLeprechaun,
     _poolAjanisComrade,
     _poolAkoumStonewaker,
+    _poolAkuDjinn,
     _poolAlchemistsTalent,
     _poolAlharuSolemnRitualist,
     _poolAlrundsEpiphany,
@@ -852,6 +856,7 @@ const shard: CardShard = {
     _poolFeiyiSnake,
     _poolFeldonRonomExcavator,
     _poolFellThePheasant,
+    _poolFemerefEnchantress,
     _poolFerociousPup,
     _poolFerventStrike,
     _poolFeveredStrength,
@@ -946,6 +951,7 @@ const shard: CardShard = {
     _poolJetMedallion,
     _poolJoragaVisionary,
     _poolJudgeMagisterGabranth,
+    _poolJujuBubble,
     _poolJununEfreet,
     _poolKaleidostone,
     _poolKarametrasFavor,

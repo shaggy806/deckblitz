@@ -444,6 +444,7 @@ import _poolRestlessBivouac from "../pool/restless-bivouac.js";
 import _poolRetreatToValakut from "../pool/retreat-to-valakut.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
 import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
+import _poolRighteousWar from "../pool/righteous-war.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
@@ -565,6 +566,7 @@ import _poolTwinbladeGeist from "../pool/twinblade-geist.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
 import _poolTyrsBlessing from "../pool/tyrs-blessing.js";
 import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
+import _poolUndo from "../pool/undo.js";
 import _poolUnholyHunger from "../pool/unholy-hunger.js";
 import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
@@ -1074,6 +1076,7 @@ const shard: CardShard = {
     _poolRetreatToValakut,
     _poolReunionOfTheHouse,
     _poolRiftburstHellion,
+    _poolRighteousWar,
     _poolRiverBoa,
     _poolRockSoldiers,
     _poolRoilCartographer,
@@ -1195,6 +1198,7 @@ const shard: CardShard = {
     _poolTymorasInvoker,
     _poolTyrsBlessing,
     _poolUnderwaterTunnelSlimyAquarium,
+    _poolUndo,
     _poolUnholyHunger,
     _poolUnitedBattlefront,
     _poolUnmarkedGrave,

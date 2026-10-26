@@ -435,6 +435,7 @@ import _poolReject from "../pool/reject.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
 import _poolReplicationSpecialist from "../pool/replication-specialist.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
+import _poolRetributionOfTheMeek from "../pool/retribution-of-the-meek.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolRelicRetriever,
     _poolReplicationSpecialist,
     _poolRestlessAnchorage,
+    _poolRetributionOfTheMeek,
     _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,

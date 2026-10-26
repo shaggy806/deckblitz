@@ -426,6 +426,7 @@ import _poolOutlandBoar from "../pool/outland-boar.js";
 import _poolOutnumber from "../pool/outnumber.js";
 import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
+import _poolOvinomancer from "../pool/ovinomancer.js";
 import _poolPalazzoArchers from "../pool/palazzo-archers.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
@@ -453,6 +454,8 @@ import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
+import _poolQuicksand from "../pool/quicksand.js";
+import _poolQuirionDruid from "../pool/quirion-druid.js";
 import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
@@ -1088,6 +1091,7 @@ const shard: CardShard = {
     _poolOutnumber,
     _poolOutpaceOblivion,
     _poolOverprotect,
+    _poolOvinomancer,
     _poolPalazzoArchers,
     _poolPanharmonicon,
     _poolPantherWarriors,
@@ -1115,6 +1119,8 @@ const shard: CardShard = {
     _poolPugnaciousPugilist,
     _poolPumpkinBombardment,
     _poolPurpleCrystalCrab,
+    _poolQuicksand,
+    _poolQuirionDruid,
     _poolRadiantEssence,
     _poolRakdosPatronOfChaos,
     _poolRavnicaAtWar,

@@ -229,6 +229,7 @@ import _poolHardenedTactician from "../pool/hardened-tactician.js";
 import _poolHarvesterTroll from "../pool/harvester-troll.js";
 import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
+import _poolHearthCharm from "../pool/hearth-charm.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
@@ -894,6 +895,7 @@ const shard: CardShard = {
     _poolHarvesterTroll,
     _poolHauntTheNetwork,
     _poolHauntedCloak,
+    _poolHearthCharm,
     _poolHearthbornBattler,
     _poolHellkiteOverlord,
     _poolHengeWalker,

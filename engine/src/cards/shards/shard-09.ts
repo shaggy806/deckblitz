@@ -667,6 +667,7 @@ import _tokensAssassinToken from "../tokens/assassin-token.js";
 import _tokensBirdTokenHermesOverseerOfElpis from "../tokens/bird-token-hermes-overseer-of-elpis.js";
 import _tokensBlackEnchantmentZombieToken22 from "../tokens/black-enchantment-zombie-token-2-2.js";
 import _tokensBoarTokenWolfsQuarry from "../tokens/boar-token-wolfs-quarry.js";
+import _tokensButterflyToken from "../tokens/butterfly-token.js";
 import _tokensDoombot from "../tokens/doombot.js";
 import _tokensElementalTokenAllColors from "../tokens/elemental-token-all-colors.js";
 import _tokensElephantToken from "../tokens/elephant-token.js";
@@ -1354,6 +1355,7 @@ const shard: CardShard = {
     _tokensBirdTokenHermesOverseerOfElpis,
     _tokensBlackEnchantmentZombieToken22,
     _tokensBoarTokenWolfsQuarry,
+    _tokensButterflyToken,
     _tokensDoombot,
     _tokensElementalTokenAllColors,
     _tokensElephantToken,
