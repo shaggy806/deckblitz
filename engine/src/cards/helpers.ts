@@ -518,6 +518,30 @@ export const cumulativeUpkeep = (
 };
 
 /**
+ * Echo [cost] (rule 702.30a): "At the beginning of your upkeep, if this
+ * permanent came under your control since the beginning of your last upkeep,
+ * sacrifice it unless you pay [cost]." An intervening if (603.4), asked as
+ * it triggers and as it resolves — so it triggers once after the permanent
+ * enters, and again after each change of control to a new player. `cost` is
+ * a mana cost (the Urza block's echo cost is its mana cost, 702.30b:
+ * `echo("{4}{R}{R}")`), or any other {@link UnlessOption}, whose `text` the
+ * keyword line shows ("Echo—Discard a card." is `echo({ discard: 1, text:
+ * "Discard a card" })`). Put the keyword line in `text` as well.
+ */
+export const echo = (cost: string | UnlessOption): TriggeredAbility => {
+  const option: UnlessOption = typeof cost === "string" ? { pay: cost, text: `Pay ${cost}` } : cost;
+  const shown = typeof cost === "string" ? ` ${cost}` : `—${cost.text}.`;
+  return {
+    trigger: { on: "step-begins", step: "upkeep", who: "you" },
+    condition: { kind: "source-came-under-control-since-last-upkeep" },
+    targets: [],
+    effect: { kind: "unless", chooser: "you", options: [option], otherwise: { kind: "sacrifice-source" } },
+    resolve: null,
+    text: `Echo${shown} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)`,
+  };
+};
+
+/**
  * Mentor (rule 702.134a): "Whenever this creature attacks, put a +1/+1
  * counter on target attacking creature with lesser power" — the power
  * compared as the target is chosen and again as it resolves (Legion

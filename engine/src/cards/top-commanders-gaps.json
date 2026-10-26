@@ -452,7 +452,8 @@
   "cost:discard-at-random",
   "target:opponent-compared",
   "mechanic:clash",
-  "keyword:champion"
+  "keyword:champion",
+  "keyword:echo"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

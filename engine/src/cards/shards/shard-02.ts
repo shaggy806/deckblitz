@@ -529,6 +529,7 @@ import _poolShatteredPerception from "../pool/shattered-perception.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
+import _poolShivanRaptor from "../pool/shivan-raptor.js";
 import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
@@ -679,6 +680,7 @@ import _poolWhiteShieldCrusader from "../pool/white-shield-crusader.js";
 import _poolWildCelebrants from "../pool/wild-celebrants.js";
 import _poolWildElephant from "../pool/wild-elephant.js";
 import _poolWildNacatl from "../pool/wild-nacatl.js";
+import _poolWindingWurm from "../pool/winding-wurm.js";
 import _poolWinterthornBlessing from "../pool/winterthorn-blessing.js";
 import _poolWitherbloomCampus from "../pool/witherbloom-campus.js";
 import _poolWitherbloomTheBalancer from "../pool/witherbloom-the-balancer.js";
@@ -1230,6 +1232,7 @@ const shard: CardShard = {
     _poolShatterskullGiant,
     _poolShepherdOfTheClouds,
     _poolShiftingCeratops,
+    _poolShivanRaptor,
     _poolShoulderToShoulder,
     _poolSickleRipper,
     _poolSilhanaWayfinder,
@@ -1380,6 +1383,7 @@ const shard: CardShard = {
     _poolWildCelebrants,
     _poolWildElephant,
     _poolWildNacatl,
+    _poolWindingWurm,
     _poolWinterthornBlessing,
     _poolWitherbloomCampus,
     _poolWitherbloomTheBalancer,

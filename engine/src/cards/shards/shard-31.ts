@@ -502,6 +502,7 @@ import _poolPunishTheEnemy from "../pool/punish-the-enemy.js";
 import _poolPuppetConjurer from "../pool/puppet-conjurer.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
+import _poolRakdosHeadliner from "../pool/rakdos-headliner.js";
 import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
 import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
 import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
@@ -1260,6 +1261,7 @@ const shard: CardShard = {
     _poolPuppetConjurer,
     _poolRabidBite,
     _poolRaidingNightstalker,
+    _poolRakdosHeadliner,
     _poolRallyForTheThrone,
     _poolRamirezDepietroPillager,
     _poolRamosianGreatsword,

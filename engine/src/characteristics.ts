@@ -844,6 +844,13 @@ function evalStaticCondition(
         you,
         ...(opts.sourceLastKnown !== undefined ? { snapshot: opts.sourceLastKnown } : {}),
       });
+    case "source-came-under-control-since-last-upkeep": {
+      // Echo (rule 702.30a): under `you`'s control since before the
+      // upkeep ahead of this one began — or since the game began.
+      if (source.zone !== "battlefield" || source.controller !== you) return false;
+      const previous = state.players[you].previousUpkeepSeq;
+      return previous === undefined || (source.controlSinceSeq ?? -1) >= previous;
+    }
     case "source-zone":
       return (
         condition.zones.includes(source.zone) &&

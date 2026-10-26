@@ -484,6 +484,7 @@ import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPollywogSymbiote from "../pool/pollywog-symbiote.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
 import _poolPortcullisVine from "../pool/portcullis-vine.js";
+import _poolPouncingJaguar from "../pool/pouncing-jaguar.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
@@ -1207,6 +1208,7 @@ const shard: CardShard = {
     _poolPollywogSymbiote,
     _poolPolygoyf,
     _poolPortcullisVine,
+    _poolPouncingJaguar,
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPresumedDead,

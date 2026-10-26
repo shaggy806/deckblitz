@@ -134,6 +134,7 @@ import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
+import _poolCradleGuard from "../pool/cradle-guard.js";
 import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCropSigil from "../pool/crop-sigil.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
@@ -673,6 +674,7 @@ import _poolVirulentSliver from "../pool/virulent-sliver.js";
 import _poolVividCreek from "../pool/vivid-creek.js";
 import _poolVoidSquall from "../pool/void-squall.js";
 import _poolVolcanicVillain from "../pool/volcanic-villain.js";
+import _poolVugLizard from "../pool/vug-lizard.js";
 import _poolWallOfRunes from "../pool/wall-of-runes.js";
 import _poolWarchiefGiant from "../pool/warchief-giant.js";
 import _poolWardenOfGeometries from "../pool/warden-of-geometries.js";
@@ -847,6 +849,7 @@ const shard: CardShard = {
     _poolCoordinatedCharge,
     _poolCostumeCloset,
     _poolCracklingSpellslinger,
+    _poolCradleGuard,
     _poolCreepingBloodsucker,
     _poolCropSigil,
     _poolCrossbowAmbush,
@@ -1386,6 +1389,7 @@ const shard: CardShard = {
     _poolVividCreek,
     _poolVoidSquall,
     _poolVolcanicVillain,
+    _poolVugLizard,
     _poolWallOfRunes,
     _poolWarchiefGiant,
     _poolWardenOfGeometries,

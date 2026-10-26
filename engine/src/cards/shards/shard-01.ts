@@ -107,6 +107,7 @@ import _poolCoordinatedBarrage from "../pool/coordinated-barrage.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
+import _poolCraterHellion from "../pool/crater-hellion.js";
 import _poolCripplingChill from "../pool/crippling-chill.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCroakingCurse from "../pool/croaking-curse.js";
@@ -801,6 +802,7 @@ const shard: CardShard = {
     _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
+    _poolCraterHellion,
     _poolCripplingChill,
     _poolCrisisOfConscience,
     _poolCroakingCurse,

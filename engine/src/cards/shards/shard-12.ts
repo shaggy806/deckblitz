@@ -321,6 +321,7 @@ import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
 import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
+import _poolKarmicGuide from "../pool/karmic-guide.js";
 import _poolKarplusanHound from "../pool/karplusan-hound.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
@@ -1034,6 +1035,7 @@ const shard: CardShard = {
     _poolKaleidoscorch,
     _poolKappaTechWrecker,
     _poolKarlachFuryOfAvernus,
+    _poolKarmicGuide,
     _poolKarplusanHound,
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,

@@ -7,6 +7,7 @@ import _poolAbnormalEndurance from "../pool/abnormal-endurance.js";
 import _poolAbrade from "../pool/abrade.js";
 import _poolAbzanRunemark from "../pool/abzan-runemark.js";
 import _poolAcademicAscent from "../pool/academic-ascent.js";
+import _poolAcridian from "../pool/acridian.js";
 import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
 import _poolAdmiralBrassUnsinkable from "../pool/admiral-brass-unsinkable.js";
 import _poolAdornedPouncer from "../pool/adorned-pouncer.js";
@@ -762,6 +763,7 @@ const shard: CardShard = {
     _poolAbrade,
     _poolAbzanRunemark,
     _poolAcademicAscent,
+    _poolAcridian,
     _poolAcrobaticManeuver,
     _poolAdmiralBrassUnsinkable,
     _poolAdornedPouncer,

@@ -338,6 +338,7 @@ import _poolLichLordOfUnx from "../pool/lich-lord-of-unx.js";
 import _poolLictor from "../pool/lictor.js";
 import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
+import _poolLightningDragon from "../pool/lightning-dragon.js";
 import _poolLightningHounds from "../pool/lightning-hounds.js";
 import _poolLluwenImperfectNaturalist from "../pool/lluwen-imperfect-naturalist.js";
 import _poolLoneWolfOfTheNatterknolls from "../pool/lone-wolf-of-the-natterknolls.js";
@@ -399,6 +400,7 @@ import _poolOkibaReckonerRaid from "../pool/okiba-reckoner-raid.js";
 import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
+import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
@@ -1059,6 +1061,7 @@ const shard: CardShard = {
     _poolLictor,
     _poolLiesaForgottenArchangel,
     _poolLightningBolt,
+    _poolLightningDragon,
     _poolLightningHounds,
     _poolLluwenImperfectNaturalist,
     _poolLoneWolfOfTheNatterknolls,
@@ -1120,6 +1123,7 @@ const shard: CardShard = {
     _poolOltecArchaeologists,
     _poolOnTheJob,
     _poolOrazcaPuzzleDoor,
+    _poolOrcishHellraiser,
     _poolOriginOfCaptainAmerica,
     _poolOverlordOfTheFloodpits,
     _poolOviyaPashiriSageLifecrafter,

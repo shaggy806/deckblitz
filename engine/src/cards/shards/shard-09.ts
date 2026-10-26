@@ -18,6 +18,7 @@ import _poolAgentOfAcquisitions from "../pool/agent-of-acquisitions.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
 import _poolAkkiRonin from "../pool/akki-ronin.js";
+import _poolAlbinoTroll from "../pool/albino-troll.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
@@ -757,6 +758,7 @@ const shard: CardShard = {
     _poolAgrusKosSpiritOfJustice,
     _poolAjaniSleeperAgent,
     _poolAkkiRonin,
+    _poolAlbinoTroll,
     _poolAlleyEvasion,
     _poolAmethystDragon,
     _poolAnUnexpectedParty,

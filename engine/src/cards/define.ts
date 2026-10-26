@@ -1100,6 +1100,15 @@ export type StaticCondition =
    */
   | { readonly kind: "source-on-battlefield" }
   /**
+   * Echo's "if this permanent came under your control since the beginning
+   * of your last upkeep" (rule 702.30a): it entered, or changed control to
+   * you, after your previous upkeep began (`GameObject.controlSinceSeq`
+   * against `PlayerState.previousUpkeepSeq`). Asked during your upkeep, so
+   * "your last upkeep" is the one before this one — any time before your
+   * first upkeep counts. See the `echo()` helper.
+   */
+  | { readonly kind: "source-came-under-control-since-last-upkeep" }
+  /**
    * "If time gets **more votes**" (Plea for Power — rule 701.38): option
    * `option` of the `vote` this resolution held got more votes than each
    * other option. A tie isn't more, so "if knowledge gets more votes **or

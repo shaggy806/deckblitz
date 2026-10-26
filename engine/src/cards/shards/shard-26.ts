@@ -256,6 +256,7 @@ import _poolGloomwidowsFeast from "../pool/gloomwidows-feast.js";
 import _poolGoblinBoarders from "../pool/goblin-boarders.js";
 import _poolGoblinBully from "../pool/goblin-bully.js";
 import _poolGoblinDiggingTeam from "../pool/goblin-digging-team.js";
+import _poolGoblinWarBuggy from "../pool/goblin-war-buggy.js";
 import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
@@ -970,6 +971,7 @@ const shard: CardShard = {
     _poolGoblinBoarders,
     _poolGoblinBully,
     _poolGoblinDiggingTeam,
+    _poolGoblinWarBuggy,
     _poolGolemFoundry,
     _poolGolgariFindbroker,
     _poolGoliathBeetle,

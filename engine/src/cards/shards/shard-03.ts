@@ -248,6 +248,7 @@ import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHellkiteWhelp from "../pool/hellkite-whelp.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
+import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
 import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
@@ -898,6 +899,7 @@ const shard: CardShard = {
     _poolHealersHawk,
     _poolHellkiteWhelp,
     _poolHengeOfRamos,
+    _poolHeraldOfSerra,
     _poolHeraldOfTheDreadhorde,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,

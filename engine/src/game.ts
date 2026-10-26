@@ -6194,6 +6194,15 @@ export class Game {
     // directly): make it before anything can trigger.
     this.ensureMonarchAbility();
     this.ensureInitiativeAbility();
+    if (step === "upkeep") {
+      // Echo's "since the beginning of your last upkeep" (rule 702.30a):
+      // anything that comes under the active player's control from here on
+      // is newer than this upkeep's start.
+      const active = this.state.players[this.activePlayer];
+      this.state.timestampSeq += 1;
+      if (active.lastUpkeepSeq !== undefined) active.previousUpkeepSeq = active.lastUpkeepSeq;
+      active.lastUpkeepSeq = this.state.timestampSeq;
+    }
     this.emit({ type: "step-began", step, phase: PHASE_OF_STEP[step] });
 
     // Delayed triggered abilities waiting on this step (rule 603.7). Before
@@ -26758,6 +26767,7 @@ export class Game {
     if (!skipBattlefield) {
       this.state.timestampSeq += 1;
       this.state.objects[id].timestamp = this.state.timestampSeq;
+      this.state.objects[id].controlSinceSeq = this.state.timestampSeq;
       this.state.zones.shared.battlefield.push(id);
       // Entering with counters is putting them on it (rule 122.6).
       for (const c of entering.counters) {
@@ -32241,6 +32251,7 @@ export class Game {
       if (object.controller !== controller) {
         object.controller = controller;
         object.summoningSick = true;
+        object.controlSinceSeq = this.state.timestampSeq;
         // A change of control removes it from combat (rule 506.4), its
         // attacker's list of blockers included.
         this.removeFromCombat(id);
@@ -32339,6 +32350,7 @@ export class Game {
     if (object.controller === player) return;
     object.controller = player;
     object.summoningSick = true;
+    object.controlSinceSeq = this.state.timestampSeq;
     // A change of control removes it from combat (rule 506.4), its
     // attacker's list of blockers included.
     this.removeFromCombat(id);
@@ -37191,6 +37203,7 @@ export class Game {
       object.summoningSick = true;
       this.state.timestampSeq += 1;
       object.timestamp = this.state.timestampSeq;
+      object.controlSinceSeq = this.state.timestampSeq;
       if (enter.setTypes !== undefined || enter.addSubtypes !== undefined || enter.addColors !== undefined) {
         object.modifiers.push({
           timestamp: object.timestamp,

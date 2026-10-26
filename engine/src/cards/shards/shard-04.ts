@@ -86,6 +86,7 @@ import _poolChangelingBerserker from "../pool/changeling-berserker.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
+import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolColossalHeroics from "../pool/colossal-heroics.js";
@@ -791,6 +792,7 @@ const shard: CardShard = {
     _poolChardalynDragon,
     _poolChasmDrake,
     _poolChillOfTheGrave,
+    _poolCitanulCentaurs,
     _poolCleverConjurer,
     _poolCocoon,
     _poolColossalHeroics,
