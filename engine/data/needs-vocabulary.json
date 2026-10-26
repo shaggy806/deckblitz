@@ -11499,6 +11499,25 @@
   "effect:set-land-types-all": {
    "family": "effect:add-land-types-all",
    "example": "Nightcreep: until end of turn, all lands become Swamps — setting their land types, for the lands there as it resolves."
+  },
+  "effect:put-onto-battlefield-blocking": {
+   "family": "effect:token-enters-blocking",
+   "example": "Aetherplasm: put a creature card from your hand onto the battlefield blocking the attacker this creature was blocking"
+  },
+  "replacement:dies-return-to-hand-instead": {
+   "family": "replacement:dies-return-to-hand-cant-play-until-next-turn",
+   "example": "Necromancer's Magemark: if a creature you control that's enchanted would die, return it to its owner's hand instead"
+  },
+  "amount:power-of-card-exiled-this-way": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Bioplasm: +X/+X where X is the power of the creature card exiled from the top of your library — `thisWay` reads 0 power for a card from the library"
+  },
+  "static:grant-replicate": {
+   "family": "keyword:replicate",
+   "example": "Djinn Illuminatus: each instant and sorcery spell you cast has replicate, the replicate cost equal to its mana cost"
+  },
+  "keyword:haunt": {
+   "example": "Blind Hunter: haunt (rule 702.55) — built in batch 206 (`haunt()`, `hauntSpell()`, the `haunted-dies` trigger)"
   }
  }
 }

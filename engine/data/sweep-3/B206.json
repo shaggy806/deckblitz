@@ -1,0 +1,769 @@
+{
+ "batch": "B206",
+ "status": "complete",
+ "ranks": "Guildpact (GPT, 2006-02-03): whole set, its 106 cards left (second middle walk); built haunt (rule 702.55 \u2014 `haunt()`, `hauntSpell()`, the `haunted-dies` trigger) and replicate (702.56 \u2014 `kicker.keyword: \"replicate\"`), with Shattering Spree and Lose Focus from batches 146 and 110",
+ "authored": [
+  {
+   "name": "Absolver Thrull",
+   "files": [
+    "engine/src/cards/pool/absolver-thrull.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Abyssal Nocturnus",
+   "files": [
+    "engine/src/cards/pool/abyssal-nocturnus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agent of Masks",
+   "files": [
+    "engine/src/cards/pool/agent-of-masks.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Battering Wurm",
+   "files": [
+    "engine/src/cards/pool/battering-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Belfry Spirit",
+   "files": [
+    "engine/src/cards/pool/belfry-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Benediction of Moons",
+   "files": [
+    "engine/src/cards/pool/benediction-of-moons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blind Hunter",
+   "files": [
+    "engine/src/cards/pool/blind-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodscale Prowler",
+   "files": [
+    "engine/src/cards/pool/bloodscale-prowler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning-Tree Shaman",
+   "files": [
+    "engine/src/cards/pool/burning-tree-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cerebral Vortex",
+   "files": [
+    "engine/src/cards/pool/cerebral-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crash Landing",
+   "files": [
+    "engine/src/cards/pool/crash-landing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cry of Contrition",
+   "files": [
+    "engine/src/cards/pool/cry-of-contrition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryptwailing",
+   "files": [
+    "engine/src/cards/pool/cryptwailing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crystal Seer",
+   "files": [
+    "engine/src/cards/pool/crystal-seer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Culling Sun",
+   "files": [
+    "engine/src/cards/pool/culling-sun.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Drowned Rusalka",
+   "files": [
+    "engine/src/cards/pool/drowned-rusalka.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dune-Brood Nephilim",
+   "files": [
+    "engine/src/cards/pool/dune-brood-nephilim.ts",
+    "engine/src/cards/tokens/sand-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Surge",
+   "files": [
+    "engine/src/cards/pool/earth-surge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exhumer Thrull",
+   "files": [
+    "engine/src/cards/pool/exhumer-thrull.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fencer's Magemark",
+   "files": [
+    "engine/src/cards/pool/fencers-magemark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feral Animist",
+   "files": [
+    "engine/src/cards/pool/feral-animist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frazzle",
+   "files": [
+    "engine/src/cards/pool/frazzle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghor-Clan Savage",
+   "files": [
+    "engine/src/cards/pool/ghor-clan-savage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghost Council of Orzhova",
+   "files": [
+    "engine/src/cards/pool/ghost-council-of-orzhova.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gigadrowse",
+   "files": [
+    "engine/src/cards/pool/gigadrowse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glint-Eye Nephilim",
+   "files": [
+    "engine/src/cards/pool/glint-eye-nephilim.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Flectomancer",
+   "files": [
+    "engine/src/cards/pool/goblin-flectomancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Graven Dominator",
+   "files": [
+    "engine/src/cards/pool/graven-dominator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gristleback",
+   "files": [
+    "engine/src/cards/pool/gristleback.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruul Scrapper",
+   "files": [
+    "engine/src/cards/pool/gruul-scrapper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gruul War Plow",
+   "files": [
+    "engine/src/cards/pool/gruul-war-plow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian's Magemark",
+   "files": [
+    "engine/src/cards/pool/guardians-magemark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hatching Plans",
+   "files": [
+    "engine/src/cards/pool/hatching-plans.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hissing Miasma",
+   "files": [
+    "engine/src/cards/pool/hissing-miasma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hypervolt Grasp",
+   "files": [
+    "engine/src/cards/pool/hypervolt-grasp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Infiltrator's Magemark",
+   "files": [
+    "engine/src/cards/pool/infiltrators-magemark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Izzet Guildmage",
+   "files": [
+    "engine/src/cards/pool/izzet-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Killer Instinct",
+   "files": [
+    "engine/src/cards/pool/killer-instinct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leap of Flame",
+   "files": [
+    "engine/src/cards/pool/leap-of-flame.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leyline of Lifeforce",
+   "files": [
+    "engine/src/cards/pool/leyline-of-lifeforce.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leyline of Lightning",
+   "files": [
+    "engine/src/cards/pool/leyline-of-lightning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline of the Meek",
+   "files": [
+    "engine/src/cards/pool/leyline-of-the-meek.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lose Focus",
+   "files": [
+    "engine/src/cards/pool/lose-focus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Martyred Rusalka",
+   "files": [
+    "engine/src/cards/pool/martyred-rusalka.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mizzium Transreliquat",
+   "files": [
+    "engine/src/cards/pool/mizzium-transreliquat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mourning Thrull",
+   "files": [
+    "engine/src/cards/pool/mourning-thrull.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ogre Savant",
+   "files": [
+    "engine/src/cards/pool/ogre-savant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Order of the Stars",
+   "files": [
+    "engine/src/cards/pool/order-of-the-stars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orzhov Euthanist",
+   "files": [
+    "engine/src/cards/pool/orzhov-euthanist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orzhov Guildmage",
+   "files": [
+    "engine/src/cards/pool/orzhov-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orzhov Pontiff",
+   "files": [
+    "engine/src/cards/pool/orzhov-pontiff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parallectric Feedback",
+   "files": [
+    "engine/src/cards/pool/parallectric-feedback.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Petrahydrox",
+   "files": [
+    "engine/src/cards/pool/petrahydrox.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Petrified Wood-Kin",
+   "files": [
+    "engine/src/cards/pool/petrified-wood-kin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pillory of the Sleepless",
+   "files": [
+    "engine/src/cards/pool/pillory-of-the-sleepless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poisonbelly Ogre",
+   "files": [
+    "engine/src/cards/pool/poisonbelly-ogre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyromatics",
+   "files": [
+    "engine/src/cards/pool/pyromatics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabble-Rouser",
+   "files": [
+    "engine/src/cards/pool/rabble-rouser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Repeal",
+   "files": [
+    "engine/src/cards/pool/repeal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanguine Praetor",
+   "files": [
+    "engine/src/cards/pool/sanguine-praetor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scab-Clan Mauler",
+   "files": [
+    "engine/src/cards/pool/scab-clan-mauler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Schismotivate",
+   "files": [
+    "engine/src/cards/pool/schismotivate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seize the Soul",
+   "files": [
+    "engine/src/cards/pool/seize-the-soul.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shadow Lance",
+   "files": [
+    "engine/src/cards/pool/shadow-lance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shattering Spree",
+   "files": [
+    "engine/src/cards/pool/shattering-spree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrieking Grotesque",
+   "files": [
+    "engine/src/cards/pool/shrieking-grotesque.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siege of Towers",
+   "files": [
+    "engine/src/cards/pool/siege-of-towers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silhana Ledgewalker",
+   "files": [
+    "engine/src/cards/pool/silhana-ledgewalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silhana Starfletcher",
+   "files": [
+    "engine/src/cards/pool/silhana-starfletcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sinstriker's Will",
+   "files": [
+    "engine/src/cards/pool/sinstrikers-will.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skarrgan Firebird",
+   "files": [
+    "engine/src/cards/pool/skarrgan-firebird.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skarrgan Pit-Skulk",
+   "files": [
+    "engine/src/cards/pool/skarrgan-pit-skulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skarrgan Skybreaker",
+   "files": [
+    "engine/src/cards/pool/skarrgan-skybreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sky Swallower",
+   "files": [
+    "engine/src/cards/pool/sky-swallower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyrider Trainee",
+   "files": [
+    "engine/src/cards/pool/skyrider-trainee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smogsteed Rider",
+   "files": [
+    "engine/src/cards/pool/smogsteed-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Souls of the Faultless",
+   "files": [
+    "engine/src/cards/pool/souls-of-the-faultless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spelltithe Enforcer",
+   "files": [
+    "engine/src/cards/pool/spelltithe-enforcer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steamcore Weird",
+   "files": [
+    "engine/src/cards/pool/steamcore-weird.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderheads",
+   "files": [
+    "engine/src/cards/pool/thunderheads.ts",
+    "engine/src/cards/tokens/weird-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tibor and Lumia",
+   "files": [
+    "engine/src/cards/pool/tibor-and-lumia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tin Street Hooligan",
+   "files": [
+    "engine/src/cards/pool/tin-street-hooligan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Train of Thought",
+   "files": [
+    "engine/src/cards/pool/train-of-thought.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vacuumelt",
+   "files": [
+    "engine/src/cards/pool/vacuumelt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Witch-Maw Nephilim",
+   "files": [
+    "engine/src/cards/pool/witch-maw-nephilim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wurmweaver Coil",
+   "files": [
+    "engine/src/cards/pool/wurmweaver-coil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yore-Tiller Nephilim",
+   "files": [
+    "engine/src/cards/pool/yore-tiller-nephilim.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Leyline of Singularity",
+   "needs": [
+    "static:static-grant-supertype"
+   ],
+   "why": "no static ability makes permanents legendary; supertypes are added only by copy exceptions"
+  },
+  {
+   "name": "Nivix, Aerie of the Firemind",
+   "needs": [
+    "zone:impulse-permission-options"
+   ],
+   "why": "the permission must end as your next turn begins; `your-next-turn` lasts until it ends"
+  },
+  {
+   "name": "Beastmaster's Magemark",
+   "needs": [
+    "effect:amount-creatures-blocking-it"
+   ],
+   "why": "+1/+1 for each creature blocking the triggering creature \u2014 `blockersOf` reads only the source"
+  },
+  {
+   "name": "Gatherer of Graces",
+   "needs": [
+    "static:count-attached-to-affected"
+   ],
+   "why": "+1/+1 for each Aura attached to it: nothing counts the Auras on the permanent itself"
+  },
+  {
+   "name": "Castigate",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "choose a nonland card from a target opponent's revealed hand and exile it \u2014 `discard-chosen` only discards"
+  },
+  {
+   "name": "Living Inferno",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "an activated ability dividing damage equal to its power: `divided` takes only a fixed total"
+  },
+  {
+   "name": "Ulasht, the Hate Seed",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "a modal activated ability with a targeted mode"
+  },
+  {
+   "name": "Predatory Focus",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "assign combat damage as though they weren't blocked"
+  },
+  {
+   "name": "Conjurer's Ban",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a card; spells with that name can't be cast until your next turn"
+  },
+  {
+   "name": "Revenant Patriarch",
+   "needs": [
+    "effect:skip-next-combat-phase"
+   ],
+   "why": "if {W} was spent, target player skips their next combat phase"
+  },
+  {
+   "name": "Droning Bureaucrats",
+   "needs": [
+    "condition:filter-dynamic-compare"
+   ],
+   "why": "each creature with mana value X can't attack or block \u2014 a stored `restrict` filter doesn't fill in X"
+  },
+  {
+   "name": "Vedalken Plotter",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of target land you control and target land an opponent controls"
+  },
+  {
+   "name": "Dryad Sophisticate",
+   "needs": [
+    "keyword:nonbasic-landwalk"
+   ],
+   "why": "nonbasic landwalk"
+  },
+  {
+   "name": "Aetherplasm",
+   "needs": [
+    "effect:put-onto-battlefield-blocking"
+   ],
+   "why": "put a creature card from your hand onto the battlefield blocking that creature"
+  },
+  {
+   "name": "Burning-Tree Bloodscale",
+   "needs": [
+    "effect:target-cant-block-source-this-turn",
+    "effect:must-block-this-turn"
+   ],
+   "why": "target creature can't block it this turn; target creature blocks it this turn if able"
+  },
+  {
+   "name": "Ink-Treader Nephilim",
+   "needs": [
+    "effect:copy-spell-for-each-by-caster"
+   ],
+   "why": "copy the spell for each other creature it could target \u2014 judged from the original caster's side (the ruling)"
+  },
+  {
+   "name": "Necromancer's Magemark",
+   "needs": [
+    "replacement:dies-return-to-hand-instead"
+   ],
+   "why": "an enchanted creature you control that would die returns to its owner's hand instead"
+  },
+  {
+   "name": "Bioplasm",
+   "needs": [
+    "amount:power-of-card-exiled-this-way"
+   ],
+   "why": "+X/+X equal to the power of the creature card exiled from your library \u2014 `thisWay` reads 0 for a library card"
+  },
+  {
+   "name": "Moratorium Stone",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "exile the target card and every card and permanent with its name"
+  },
+  {
+   "name": "Djinn Illuminatus",
+   "needs": [
+    "static:grant-replicate"
+   ],
+   "why": "each instant and sorcery spell you cast has replicate equal to its mana cost \u2014 a grant the cast offers don't read"
+  },
+  {
+   "name": "Mimeofacture",
+   "needs": [
+    "condition:same-name-as-target",
+    "effect:search-opponent-library"
+   ],
+   "why": "search the target permanent's controller's library for a card with the same name and put it onto the battlefield under your control"
+  }
+ ]
+}

@@ -94,6 +94,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Spellbombs — four finished by the scaffolder, the rest by five `card-author` agents and the lead;
   22 blocked (`B199.json`), "for each Equipment attached" and "can block an additional creature"
   leading with two each. Mirrodin Besieged is whole.
+- **Haunt, replicate, and Guildpact whole** (batch 206, the second middle walk, 2026-10-26,
+  `keyword:haunt`, `keyword:replicate`): **built** haunt (rule 702.55 — the `haunt()` and
+  `hauntSpell()` helpers exile the card haunting a target creature, `GameObject.haunting`; a
+  `haunted-dies` trigger works from exile alone) and replicate (702.56 — a multikicker-style
+  `kicker.keyword: "replicate"`, one cast trigger copying the spell once per payment), both taught
+  to the scaffolder. 85 of Guildpact's 106 left authored — Ghost Council of Orzhova, Leyline of
+  Lightning, Sky Swallower, Blind Hunter, Pyromatics, Gigadrowse, Tibor and Lumia, the Nephilim,
+  the Magemarks and the bloodthirst creatures — by five `card-author` agents and the lead, with
+  Shattering Spree and Lose Focus from earlier batches; 21 blocked (`B206.json`), nothing shared
+  by more than one. Guildpact is whole. `haunt.test.ts`, `replicate.test.ts`.
 - **Forecast, and Dissension whole** (batch 201, the second middle walk, 2026-10-26,
   `mechanic:forecast`): **built** forecast (rule 702.57 — the `forecast(ability)` helper: an
   ability of the card in its owner's hand, revealed, in their upkeep and once each turn; a
