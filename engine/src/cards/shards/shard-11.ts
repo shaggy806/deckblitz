@@ -240,6 +240,7 @@ import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
 import _poolGodPharaohsGift from "../pool/god-pharaohs-gift.js";
 import _poolGoddricCloakedReveler from "../pool/goddric-cloaked-reveler.js";
 import _poolGolbezCrystalCollector from "../pool/golbez-crystal-collector.js";
+import _poolGolgariKeyrune from "../pool/golgari-keyrune.js";
 import _poolGoliathSphinx from "../pool/goliath-sphinx.js";
 import _poolGorillaWarrior from "../pool/gorilla-warrior.js";
 import _poolGraazUnstoppableJuggernaut from "../pool/graaz-unstoppable-juggernaut.js";
@@ -448,6 +449,7 @@ import _poolProteanThaumaturge from "../pool/protean-thaumaturge.js";
 import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
+import _poolRacecourseFury from "../pool/racecourse-fury.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
 import _poolRadiantPurge from "../pool/radiant-purge.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
@@ -934,6 +936,7 @@ const shard: CardShard = {
     _poolGodPharaohsGift,
     _poolGoddricCloakedReveler,
     _poolGolbezCrystalCollector,
+    _poolGolgariKeyrune,
     _poolGoliathSphinx,
     _poolGorillaWarrior,
     _poolGraazUnstoppableJuggernaut,
@@ -1142,6 +1145,7 @@ const shard: CardShard = {
     _poolPsemillaMeletianPoet,
     _poolQuarrel,
     _poolQuilledSlagwurm,
+    _poolRacecourseFury,
     _poolRadiantGrove,
     _poolRadiantPurge,
     _poolRadiantSummit,

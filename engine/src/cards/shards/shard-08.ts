@@ -44,6 +44,7 @@ import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArchdemonOfUnx from "../pool/archdemon-of-unx.js";
 import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
+import _poolArmadaWurm from "../pool/armada-wurm.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
 import _poolAshesToAshes from "../pool/ashes-to-ashes.js";
@@ -546,6 +547,7 @@ import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
 import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
+import _poolSluicewayScorpion from "../pool/sluiceway-scorpion.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
@@ -762,6 +764,7 @@ const shard: CardShard = {
     _poolArchdemonOfUnx,
     _poolArchitectOfTheUntamed,
     _poolArgothianPixies,
+    _poolArmadaWurm,
     _poolArtificersAssistant,
     _poolAshenRider,
     _poolAshesToAshes,
@@ -1264,6 +1267,7 @@ const shard: CardShard = {
     _poolSleep,
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
+    _poolSluicewayScorpion,
     _poolSmelt,
     _poolSoaringThoughtThief,
     _poolSokkasHaiku,

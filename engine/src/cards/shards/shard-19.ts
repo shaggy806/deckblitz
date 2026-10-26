@@ -106,6 +106,7 @@ import _poolCharringBite from "../pool/charring-bite.js";
 import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
+import _poolChronicFlooding from "../pool/chronic-flooding.js";
 import _poolClawsOut from "../pool/claws-out.js";
 import _poolCleansingWildfire from "../pool/cleansing-wildfire.js";
 import _poolClearTheStage from "../pool/clear-the-stage.js";
@@ -154,6 +155,7 @@ import _poolDenyExistence from "../pool/deny-existence.js";
 import _poolDenyReality from "../pool/deny-reality.js";
 import _poolDepower from "../pool/depower.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
+import _poolDesecrationDemon from "../pool/desecration-demon.js";
 import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
@@ -170,11 +172,13 @@ import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
+import _poolDregMangler from "../pool/dreg-mangler.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
 import _poolDurableCoilbug from "../pool/durable-coilbug.js";
 import _poolDutifulGriffin from "../pool/dutiful-griffin.js";
+import _poolDynacharge from "../pool/dynacharge.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolEarthenArms from "../pool/earthen-arms.js";
 import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
@@ -533,6 +537,7 @@ import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
 import _poolSerraZealot from "../pool/serra-zealot.js";
 import _poolSetAdrift from "../pool/set-adrift.js";
+import _poolSewerShambler from "../pool/sewer-shambler.js";
 import _poolShadowInTheWarp from "../pool/shadow-in-the-warp.js";
 import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
 import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
@@ -608,6 +613,7 @@ import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
 import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
+import _poolTeleportal from "../pool/teleportal.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
@@ -631,6 +637,7 @@ import _poolTundraTank from "../pool/tundra-tank.js";
 import _poolTurnIntoAPumpkin from "../pool/turn-into-a-pumpkin.js";
 import _poolTurnabout from "../pool/turnabout.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
+import _poolUltimatePrice from "../pool/ultimate-price.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
 import _poolUnderTheSkin from "../pool/under-the-skin.js";
@@ -815,6 +822,7 @@ const shard: CardShard = {
     _poolChokingSands,
     _poolChromeHostHulk,
     _poolChromeMox,
+    _poolChronicFlooding,
     _poolClawsOut,
     _poolCleansingWildfire,
     _poolClearTheStage,
@@ -863,6 +871,7 @@ const shard: CardShard = {
     _poolDenyReality,
     _poolDepower,
     _poolDerelictAtticWidowsWalk,
+    _poolDesecrationDemon,
     _poolDestinedConfrontation,
     _poolDevilthornFox,
     _poolDeviousCoverUp,
@@ -879,11 +888,13 @@ const shard: CardShard = {
     _poolDragonScarredBear,
     _poolDramaticFinale,
     _poolDreadFugue,
+    _poolDregMangler,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,
     _poolDurableCoilbug,
     _poolDutifulGriffin,
+    _poolDynacharge,
     _poolEarthcraft,
     _poolEarthenArms,
     _poolEldraziSkyspawner,
@@ -1242,6 +1253,7 @@ const shard: CardShard = {
     _poolSerraPaladin,
     _poolSerraZealot,
     _poolSetAdrift,
+    _poolSewerShambler,
     _poolShadowInTheWarp,
     _poolShadowTheHedgehog,
     _poolShadowmageInfiltrator,
@@ -1317,6 +1329,7 @@ const shard: CardShard = {
     _poolTarnishedCitadel,
     _poolTasteOfDeath,
     _poolTazeemRoilmage,
+    _poolTeleportal,
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
@@ -1340,6 +1353,7 @@ const shard: CardShard = {
     _poolTurnIntoAPumpkin,
     _poolTurnabout,
     _poolUlamogsDreadsire,
+    _poolUltimatePrice,
     _poolUltronTheAnnihilator,
     _poolUncoverTheMoonLetters,
     _poolUnderTheSkin,

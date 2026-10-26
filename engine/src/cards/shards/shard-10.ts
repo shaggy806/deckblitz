@@ -490,6 +490,7 @@ import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
 import _poolSapphireDrake from "../pool/sapphire-drake.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
+import _poolSavageSurge from "../pool/savage-surge.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
 import _poolScaleBlessing from "../pool/scale-blessing.js";
 import _poolScavengerDrake from "../pool/scavenger-drake.js";
@@ -555,6 +556,7 @@ import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
+import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
 import _poolSpyglassSiren from "../pool/spyglass-siren.js";
@@ -1194,6 +1196,7 @@ const shard: CardShard = {
     _poolSanguineBond,
     _poolSapphireDrake,
     _poolSarkhansDragonfire,
+    _poolSavageSurge,
     _poolSavageVentmaw,
     _poolScaleBlessing,
     _poolScavengerDrake,
@@ -1259,6 +1262,7 @@ const shard: CardShard = {
     _poolSpiderManMilesMorales,
     _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
+    _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
     _poolSpyglassSiren,

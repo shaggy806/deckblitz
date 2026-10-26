@@ -368,6 +368,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "harm", MINOR);
     v.touch(n.who, "harm", MINOR);
   },
+  detain: (n, v) => v.touch(n.target, "harm", MINOR),
   restrict: (n, v) => {
     const lure = (r: string): boolean => r === "must-be-blocked" || r === "must-be-blocked-if-able";
     const helps = n.restrictions.some(lure);

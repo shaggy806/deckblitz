@@ -705,6 +705,9 @@ export interface GameObject {
     readonly reveal?: ObjectId | null;
     /** Riot's choice (rule 702.136a): an additional +1/+1 counter, or haste. */
     readonly riot?: "counter" | "haste";
+    /** Unleash's choice (rule 702.98a): whether it enters with the
+     * additional +1/+1 counter. */
+    readonly unleash?: boolean;
     /** The permanent it exchanges text boxes with as it enters
      * (`CardDefinition.exchangeTextOnEnter` — Deadpool), or `null` when its
      * controller declined or there was none. */
@@ -1374,6 +1377,10 @@ export interface PtModifier {
    * `attack-despite-defender` effect). A rule about it, not an ability it
    * has, so a loss of abilities doesn't end it. */
   canAttackAsThoughNoDefender?: true;
+  /** Its activated abilities — mana abilities included — can't be activated
+   * (detain, rule 701.35a — the `detain` effect). A rule about it, not an
+   * ability, so a loss of abilities doesn't end it. */
+  abilitiesCantBeActivated?: true;
   /** It assigns combat damage equal to its toughness rather than its power
    * (the `damage-by-toughness` effect, rule 510.1a). Like the above, not an
    * ability. */
@@ -2602,6 +2609,10 @@ export type AwaitingDecision =
        * 702.136a): the answer is recorded as its riot choice rather than as
        * a chosen word. */
       readonly riot?: true;
+      /** Unleash's "you may have it enter with an additional +1/+1 counter"
+       * as `source` is about to enter (rule 702.98a): the first option takes
+       * the counter. */
+      readonly unleash?: true;
       /** A battle's protector, chosen as `source` is about to enter (rule
        * 310.9a) — `options` are the players who may be, and the answer is
        * recorded as its protector (or, with `protectorFor` set, a battle

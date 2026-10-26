@@ -75,6 +75,7 @@ import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
 import _poolCacklingImp from "../pool/cackling-imp.js";
 import _poolCanopyStalker from "../pool/canopy-stalker.js";
+import _poolCarnivalHellsteed from "../pool/carnival-hellsteed.js";
 import _poolCaseyJonesBackAlleyBrute from "../pool/casey-jones-back-alley-brute.js";
 import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
@@ -159,6 +160,7 @@ import _poolEtaliPrimalConqueror from "../pool/etali-primal-conqueror.js";
 import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
+import _poolExavaRakdosBloodWitch from "../pool/exava-rakdos-blood-witch.js";
 import _poolExpel from "../pool/expel.js";
 import _poolEyekite from "../pool/eyekite.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
@@ -446,6 +448,7 @@ import _poolRescueSkiff from "../pool/rescue-skiff.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
+import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
 import _poolRoamingGhostlight from "../pool/roaming-ghostlight.js";
@@ -740,6 +743,7 @@ const shard: CardShard = {
     _poolBurrogBefuddler,
     _poolCacklingImp,
     _poolCanopyStalker,
+    _poolCarnivalHellsteed,
     _poolCaseyJonesBackAlleyBrute,
     _poolCastIntoTheFire,
     _poolCatapultMaster,
@@ -824,6 +828,7 @@ const shard: CardShard = {
     _poolEtheriumAbomination,
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,
+    _poolExavaRakdosBloodWitch,
     _poolExpel,
     _poolEyekite,
     _poolEzekielSimsSpiderTotem,
@@ -1111,6 +1116,7 @@ const shard: CardShard = {
     _poolRestorativeTechnique,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
+    _poolRitesOfReaping,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,
     _poolRoamingGhostlight,

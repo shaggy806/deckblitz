@@ -41,6 +41,8 @@ import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
+import _poolAzoriusKeyrune from "../pool/azorius-keyrune.js";
+import _poolAzorsElocutors from "../pool/azors-elocutors.js";
 import _poolBalaGedSanctuary from "../pool/bala-ged-sanctuary.js";
 import _poolBallistaSquad from "../pool/ballista-squad.js";
 import _poolBallroomBrawlers from "../pool/ballroom-brawlers.js";
@@ -531,6 +533,7 @@ import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
+import _poolSwiftJustice from "../pool/swift-justice.js";
 import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
 import _poolSylvokBattleChair from "../pool/sylvok-battle-chair.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
@@ -703,6 +706,8 @@ const shard: CardShard = {
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
     _poolAzoriusCharm,
+    _poolAzoriusKeyrune,
+    _poolAzorsElocutors,
     _poolBalaGedSanctuary,
     _poolBallistaSquad,
     _poolBallroomBrawlers,
@@ -1193,6 +1198,7 @@ const shard: CardShard = {
     _poolSunsetStrikemaster,
     _poolSuperSuit,
     _poolSwarmOfBloodflies,
+    _poolSwiftJustice,
     _poolSwordOfFeastAndFamine,
     _poolSylvokBattleChair,
     _poolSylvokReplica,

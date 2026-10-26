@@ -543,6 +543,7 @@ import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
 import _poolTemurMonument from "../pool/temur-monument.js";
 import _poolTemurRunemark from "../pool/temur-runemark.js";
 import _poolTerminationFacilitator from "../pool/termination-facilitator.js";
+import _poolTerrusWurm from "../pool/terrus-wurm.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
 import _poolTetzimocPrimalDeath from "../pool/tetzimoc-primal-death.js";
 import _poolTezzeretsStrider from "../pool/tezzerets-strider.js";
@@ -1175,6 +1176,7 @@ const shard: CardShard = {
     _poolTemurMonument,
     _poolTemurRunemark,
     _poolTerminationFacilitator,
+    _poolTerrusWurm,
     _poolTesharAncestorsApostle,
     _poolTetzimocPrimalDeath,
     _poolTezzeretsStrider,

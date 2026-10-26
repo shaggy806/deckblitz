@@ -189,6 +189,13 @@ export type Keyword =
    * a static granting it to others (Rhythm of the Wild) isn't read as they
    * enter (AUTHORING §15). */
   | "riot"
+  /** Unleash (rule 702.98a) — "you may have this permanent enter with an
+   * additional +1/+1 counter on it" and "this permanent can't block as long
+   * as it has a +1/+1 counter on it". The first is asked as it's about to
+   * enter (`Game.askEnterChoice`) when it's printed or copied, as riot's is;
+   * the second is a `cant-block` restriction in the layer fold while it has
+   * the keyword and any +1/+1 counter. */
+  | "unleash"
   /** Storied (rule 702.195a) — a static ability: any time its controller
    * controls three or more permanents that are artifacts, Sagas and/or
    * legendary, they have an enduring story for the rest of the game

@@ -43,6 +43,7 @@ import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "../pool/aven-gagglemaster.js";
 import _poolAvoidFate from "../pool/avoid-fate.js";
 import _poolAysenHighway from "../pool/aysen-highway.js";
+import _poolAzoriusArrester from "../pool/azorius-arrester.js";
 import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
 import _poolBalustradeSpy from "../pool/balustrade-spy.js";
@@ -70,6 +71,7 @@ import _poolBloodDivination from "../pool/blood-divination.js";
 import _poolBloodHustler from "../pool/blood-hustler.js";
 import _poolBloodMist from "../pool/blood-mist.js";
 import _poolBloodbraidMarauder from "../pool/bloodbraid-marauder.js";
+import _poolBloodfrayGiant from "../pool/bloodfray-giant.js";
 import _poolBlurOfBlades from "../pool/blur-of-blades.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
@@ -161,6 +163,7 @@ import _poolDjinnOfFoolsFall from "../pool/djinn-of-fools-fall.js";
 import _poolDogUmbra from "../pool/dog-umbra.js";
 import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
+import _poolDownsize from "../pool/downsize.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
 import _poolDranasEmissary from "../pool/dranas-emissary.js";
@@ -215,6 +218,7 @@ import _poolFightRigging from "../pool/fight-rigging.js";
 import _poolFireNationPalace from "../pool/fire-nation-palace.js";
 import _poolFirefluxSquad from "../pool/fireflux-squad.js";
 import _poolFireglassMentor from "../pool/fireglass-mentor.js";
+import _poolFiremindsForesight from "../pool/fireminds-foresight.js";
 import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
@@ -261,6 +265,7 @@ import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
+import _poolGrimRoustabout from "../pool/grim-roustabout.js";
 import _poolGrotagBugCatcher from "../pool/grotag-bug-catcher.js";
 import _poolGrowthCycle from "../pool/growth-cycle.js";
 import _poolGruesomeScourger from "../pool/gruesome-scourger.js";
@@ -389,6 +394,7 @@ import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNighthowler from "../pool/nighthowler.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
+import _poolNivMizzetDracogenius from "../pool/niv-mizzet-dracogenius.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNotForgotten from "../pool/not-forgotten.js";
 import _poolNoxiousHatchling from "../pool/noxious-hatchling.js";
@@ -451,6 +457,7 @@ import _poolPullUnder from "../pool/pull-under.js";
 import _poolPunishIgnorance from "../pool/punish-ignorance.js";
 import _poolPunishingFire from "../pool/punishing-fire.js";
 import _poolPurphorossEmissary from "../pool/purphoross-emissary.js";
+import _poolPursuitOfFlight from "../pool/pursuit-of-flight.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
 import _poolQuicksilverBrashBlur from "../pool/quicksilver-brash-blur.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
@@ -558,6 +565,7 @@ import _poolStewTheConeys from "../pool/stew-the-coneys.js";
 import _poolStoneHavenOutfitter from "../pool/stone-haven-outfitter.js";
 import _poolStormchaserMage from "../pool/stormchaser-mage.js";
 import _poolStratusDancer from "../pool/stratus-dancer.js";
+import _poolStreetSpasm from "../pool/street-spasm.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
@@ -730,6 +738,7 @@ const shard: CardShard = {
     _poolAvenGagglemaster,
     _poolAvoidFate,
     _poolAysenHighway,
+    _poolAzoriusArrester,
     _poolAzoriusSkyguard,
     _poolBalaGedScorpion,
     _poolBalustradeSpy,
@@ -757,6 +766,7 @@ const shard: CardShard = {
     _poolBloodHustler,
     _poolBloodMist,
     _poolBloodbraidMarauder,
+    _poolBloodfrayGiant,
     _poolBlurOfBlades,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
@@ -848,6 +858,7 @@ const shard: CardShard = {
     _poolDogUmbra,
     _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
+    _poolDownsize,
     _poolDragonHatchling,
     _poolDragonMage,
     _poolDranasEmissary,
@@ -902,6 +913,7 @@ const shard: CardShard = {
     _poolFireNationPalace,
     _poolFirefluxSquad,
     _poolFireglassMentor,
+    _poolFiremindsForesight,
     _poolFistsOfIronwood,
     _poolFlamekinSpitfire,
     _poolFlaxenIntruder,
@@ -948,6 +960,7 @@ const shard: CardShard = {
     _poolGorillaChieftain,
     _poolGreaterAuramancy,
     _poolGremlinTamer,
+    _poolGrimRoustabout,
     _poolGrotagBugCatcher,
     _poolGrowthCycle,
     _poolGruesomeScourger,
@@ -1076,6 +1089,7 @@ const shard: CardShard = {
     _poolNighthowler,
     _poolNightscapeFamiliar,
     _poolNightwhorlHermit,
+    _poolNivMizzetDracogenius,
     _poolNorthernAirTemple,
     _poolNotForgotten,
     _poolNoxiousHatchling,
@@ -1138,6 +1152,7 @@ const shard: CardShard = {
     _poolPunishIgnorance,
     _poolPunishingFire,
     _poolPurphorossEmissary,
+    _poolPursuitOfFlight,
     _poolPyroceratops,
     _poolQuicksilverBrashBlur,
     _poolRabbitResponse,
@@ -1245,6 +1260,7 @@ const shard: CardShard = {
     _poolStoneHavenOutfitter,
     _poolStormchaserMage,
     _poolStratusDancer,
+    _poolStreetSpasm,
     _poolStringOfDisappearances,
     _poolStrixLookout,
     _poolSturdyHatchling,
