@@ -534,6 +534,7 @@ import _poolSkyspearCavalry from "../pool/skyspear-cavalry.js";
 import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
 import _poolSlimefootTheStowaway from "../pool/slimefoot-the-stowaway.js";
 import _poolSlithFirewalker from "../pool/slith-firewalker.js";
+import _poolSnakeform from "../pool/snakeform.js";
 import _poolSneakingGuide from "../pool/sneaking-guide.js";
 import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
@@ -1235,6 +1236,7 @@ const shard: CardShard = {
     _poolSlaveringBranchsnapper,
     _poolSlimefootTheStowaway,
     _poolSlithFirewalker,
+    _poolSnakeform,
     _poolSneakingGuide,
     _poolSnubhornSentry,
     _poolSoaringDrake,

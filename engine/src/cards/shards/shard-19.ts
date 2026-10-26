@@ -276,6 +276,7 @@ import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
+import _poolHagHedgeMage from "../pool/hag-hedge-mage.js";
 import _poolHalanaKessigRanger from "../pool/halana-kessig-ranger.js";
 import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
@@ -314,6 +315,7 @@ import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
 import _poolIntellectualOffering from "../pool/intellectual-offering.js";
 import _poolIntrepidAce from "../pool/intrepid-ace.js";
+import _poolInvertTheSkies from "../pool/invert-the-skies.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
 import _poolInvoluntaryCooldown from "../pool/involuntary-cooldown.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
@@ -669,6 +671,7 @@ import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
 import _poolWhiteTigerAvaAyala from "../pool/white-tiger-ava-ayala.js";
 import _poolWickerWitch from "../pool/wicker-witch.js";
+import _poolWildernessHypnotist from "../pool/wilderness-hypnotist.js";
 import _poolWillOfTheAllHunter from "../pool/will-of-the-all-hunter.js";
 import _poolWilling from "../pool/willing.js";
 import _poolWilsonRefinedGrizzly from "../pool/wilson-refined-grizzly.js";
@@ -979,6 +982,7 @@ const shard: CardShard = {
     _poolGuardiansOfMeletis,
     _poolGutlessPlunderer,
     _poolHadanasClimb,
+    _poolHagHedgeMage,
     _poolHalanaKessigRanger,
     _poolHallowedFountain,
     _poolHandOfSilumgar,
@@ -1017,6 +1021,7 @@ const shard: CardShard = {
     _poolIntangibleVirtue,
     _poolIntellectualOffering,
     _poolIntrepidAce,
+    _poolInvertTheSkies,
     _poolInvisibleForceField,
     _poolInvoluntaryCooldown,
     _poolIraxxaEmpressOfMars,
@@ -1372,6 +1377,7 @@ const shard: CardShard = {
     _poolWhiskAway,
     _poolWhiteTigerAvaAyala,
     _poolWickerWitch,
+    _poolWildernessHypnotist,
     _poolWillOfTheAllHunter,
     _poolWilling,
     _poolWilsonRefinedGrizzly,

@@ -536,6 +536,7 @@ import _poolSpeciesGorger from "../pool/species-gorger.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
+import _poolSpitemare from "../pool/spitemare.js";
 import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpontaneousArtist from "../pool/spontaneous-artist.js";
 import _poolSporeFlower from "../pool/spore-flower.js";
@@ -1230,6 +1231,7 @@ const shard: CardShard = {
     _poolSpiketailHatchling,
     _poolSpinedTyrranax,
     _poolSpiritualGuardian,
+    _poolSpitemare,
     _poolSpittingGourna,
     _poolSpontaneousArtist,
     _poolSporeFlower,

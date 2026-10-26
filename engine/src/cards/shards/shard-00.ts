@@ -152,6 +152,7 @@ import _poolDiresight from "../pool/diresight.js";
 import _poolDiscerningFinancier from "../pool/discerning-financier.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
 import _poolDiversionUnit from "../pool/diversion-unit.js";
+import _poolDominusOfFealty from "../pool/dominus-of-fealty.js";
 import _poolDoomedDissenter from "../pool/doomed-dissenter.js";
 import _poolDoomedTraveler from "../pool/doomed-traveler.js";
 import _poolDoubleVision from "../pool/double-vision.js";
@@ -610,6 +611,7 @@ import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
 import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
+import _poolUnwillingRecruit from "../pool/unwilling-recruit.js";
 import _poolUnwindHistory from "../pool/unwind-history.js";
 import _poolUrDrago from "../pool/ur-drago.js";
 import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
@@ -834,6 +836,7 @@ const shard: CardShard = {
     _poolDiscerningFinancier,
     _poolDiscipleOfTheVault,
     _poolDiversionUnit,
+    _poolDominusOfFealty,
     _poolDoomedDissenter,
     _poolDoomedTraveler,
     _poolDoubleVision,
@@ -1292,6 +1295,7 @@ const shard: CardShard = {
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
     _poolUnstoppableSlasher,
+    _poolUnwillingRecruit,
     _poolUnwindHistory,
     _poolUrDrago,
     _poolUreniOfTheUnwritten,

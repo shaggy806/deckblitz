@@ -346,6 +346,7 @@ import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMaro from "../pool/maro.js";
+import _poolMarshdrinkerGiant from "../pool/marshdrinker-giant.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
@@ -387,6 +388,7 @@ import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNotForgotten from "../pool/not-forgotten.js";
+import _poolNoxiousHatchling from "../pool/noxious-hatchling.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
 import _poolOblivionsHunger from "../pool/oblivions-hunger.js";
@@ -400,6 +402,7 @@ import _poolOphidianEye from "../pool/ophidian-eye.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOrnamentalCourage from "../pool/ornamental-courage.js";
+import _poolOutrageShaman from "../pool/outrage-shaman.js";
 import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOverwhelmedArchivist from "../pool/overwhelmed-archivist.js";
@@ -553,6 +556,7 @@ import _poolStormchaserMage from "../pool/stormchaser-mage.js";
 import _poolStratusDancer from "../pool/stratus-dancer.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
+import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
@@ -1025,6 +1029,7 @@ const shard: CardShard = {
     _poolManifestDread,
     _poolMarbleDiamond,
     _poolMaro,
+    _poolMarshdrinkerGiant,
     _poolMarwynThePreserver,
     _poolMasterfulReplication,
     _poolMelokuTheCloudedMirror,
@@ -1066,6 +1071,7 @@ const shard: CardShard = {
     _poolNightwhorlHermit,
     _poolNorthernAirTemple,
     _poolNotForgotten,
+    _poolNoxiousHatchling,
     _poolNyxbornMarauder,
     _poolOathOfNissa,
     _poolOblivionsHunger,
@@ -1079,6 +1085,7 @@ const shard: CardShard = {
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
     _poolOrnamentalCourage,
+    _poolOutrageShaman,
     _poolOverlordOfTheHauntwoods,
     _poolOverwhelm,
     _poolOverwhelmedArchivist,
@@ -1232,6 +1239,7 @@ const shard: CardShard = {
     _poolStratusDancer,
     _poolStringOfDisappearances,
     _poolStrixLookout,
+    _poolSturdyHatchling,
     _poolSubterraneanSpirit,
     _poolSummonAnima,
     _poolSummonedDromedary,

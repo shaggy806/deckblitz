@@ -163,6 +163,7 @@ import _poolDowndraft from "../pool/downdraft.js";
 import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
+import _poolDreamThief from "../pool/dream-thief.js";
 import _poolDreamstealer from "../pool/dreamstealer.js";
 import _poolDreamtailHeron from "../pool/dreamtail-heron.js";
 import _poolDregRecycler from "../pool/dreg-recycler.js";
@@ -425,6 +426,7 @@ import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
 import _poolPrepare from "../pool/prepare.js";
 import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
+import _poolPrimalcrux from "../pool/primalcrux.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
 import _poolPrismRing from "../pool/prism-ring.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
     _poolDreamPillager,
+    _poolDreamThief,
     _poolDreamstealer,
     _poolDreamtailHeron,
     _poolDregRecycler,
@@ -1119,6 +1122,7 @@ const shard: CardShard = {
     _poolPowerDepot,
     _poolPrepare,
     _poolPresenceOfTheMaster,
+    _poolPrimalcrux,
     _poolPrimarisChaplain,
     _poolPrismRing,
     _poolProcrastinate,

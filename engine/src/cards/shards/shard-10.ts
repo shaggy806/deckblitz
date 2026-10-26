@@ -54,6 +54,7 @@ import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
 import _poolBattleMenu from "../pool/battle-menu.js";
 import _poolBattlefieldForge from "../pool/battlefield-forge.js";
 import _poolBeastriderVanguard from "../pool/beastrider-vanguard.js";
+import _poolBelligerentHatchling from "../pool/belligerent-hatchling.js";
 import _poolBenalishVeteran from "../pool/benalish-veteran.js";
 import _poolBespokeBattlewagon from "../pool/bespoke-battlewagon.js";
 import _poolBidentOfThassa from "../pool/bident-of-thassa.js";
@@ -750,6 +751,7 @@ const shard: CardShard = {
     _poolBattleMenu,
     _poolBattlefieldForge,
     _poolBeastriderVanguard,
+    _poolBelligerentHatchling,
     _poolBenalishVeteran,
     _poolBespokeBattlewagon,
     _poolBidentOfThassa,

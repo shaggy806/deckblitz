@@ -222,6 +222,7 @@ import _poolGrayHarborMerfolk from "../pool/gray-harbor-merfolk.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
 import _poolGreenManaBattery from "../pool/green-mana-battery.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
+import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
 import _poolHall from "../pool/hall.js";
@@ -509,6 +510,7 @@ import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
 import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
+import _poolSpiritOfTheHearth from "../pool/spirit-of-the-hearth.js";
 import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
@@ -899,6 +901,7 @@ const shard: CardShard = {
     _poolGreedyFreebooter,
     _poolGreenManaBattery,
     _poolGrinningDemon,
+    _poolGroundlingPouncer,
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
     _poolHall,
@@ -1186,6 +1189,7 @@ const shard: CardShard = {
     _poolSphinxOfForgottenLore,
     _poolSpiderManHometownHero,
     _poolSpiketailDrake,
+    _poolSpiritOfTheHearth,
     _poolSpiteOfMogis,
     _poolStalkingVengeance,
     _poolStandingTroops,

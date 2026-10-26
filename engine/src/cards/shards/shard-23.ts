@@ -160,6 +160,7 @@ import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
+import _poolDoomgape from "../pool/doomgape.js";
 import _poolDoublecast from "../pool/doublecast.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
@@ -445,6 +446,7 @@ import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRavenOfFellOmens from "../pool/raven-of-fell-omens.js";
 import _poolRavenousNecrotitan from "../pool/ravenous-necrotitan.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
+import _poolRazorfinAbolisher from "../pool/razorfin-abolisher.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
 import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
 import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
@@ -839,6 +841,7 @@ const shard: CardShard = {
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
+    _poolDoomgape,
     _poolDoublecast,
     _poolDragTheCanal,
     _poolDragonflySwarm,
@@ -1124,6 +1127,7 @@ const shard: CardShard = {
     _poolRavenOfFellOmens,
     _poolRavenousNecrotitan,
     _poolRazakethTheFoulblooded,
+    _poolRazorfinAbolisher,
     _poolReachThroughMists,
     _poolRecklessAirStrike,
     _poolReckonerBankbuster,

@@ -465,6 +465,7 @@ import _poolRiskFactor from "../pool/risk-factor.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
 import _poolRitualOfTheMachine from "../pool/ritual-of-the-machine.js";
 import _poolRiverHoopoe from "../pool/river-hoopoe.js";
+import _poolRiverfallMimic from "../pool/riverfall-mimic.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
 import _poolRoamersRoutine from "../pool/roamers-routine.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
@@ -576,6 +577,7 @@ import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
+import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -1133,6 +1135,7 @@ const shard: CardShard = {
     _poolRiskyShortcut,
     _poolRitualOfTheMachine,
     _poolRiverHoopoe,
+    _poolRiverfallMimic,
     _poolRiveteersInitiate,
     _poolRoamersRoutine,
     _poolRockfallVale,
@@ -1244,6 +1247,7 @@ const shard: CardShard = {
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThunderStrike,
+    _poolThunderblust,
     _poolThunderousMight,
     _poolTimeElemental,
     _poolTitanHunter,

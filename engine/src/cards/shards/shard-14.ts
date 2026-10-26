@@ -288,6 +288,7 @@ import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
+import _poolGwyllionHedgeMage from "../pool/gwyllion-hedge-mage.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
 import _poolHarshSustenance from "../pool/harsh-sustenance.js";
 import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
@@ -309,6 +310,7 @@ import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHonoredHydra from "../pool/honored-hydra.js";
+import _poolHotheadedGiant from "../pool/hotheaded-giant.js";
 import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
@@ -961,6 +963,7 @@ const shard: CardShard = {
     _poolGrislyRitual,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
+    _poolGwyllionHedgeMage,
     _poolHagraCrocodile,
     _poolHarshSustenance,
     _poolHazardOfTheDunes,
@@ -982,6 +985,7 @@ const shard: CardShard = {
     _poolHollowScavenger,
     _poolHomicideInvestigator,
     _poolHonoredHydra,
+    _poolHotheadedGiant,
     _poolHowlpackWolf,
     _poolHulldrifter,
     _poolHumbleBudoka,

@@ -610,6 +610,7 @@ import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
+import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
@@ -633,6 +634,7 @@ import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
 import _poolVoraciousVampire from "../pool/voracious-vampire.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
+import _poolWakeThrasher from "../pool/wake-thrasher.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
@@ -1294,6 +1296,7 @@ const shard: CardShard = {
     _poolUltimaOriginOfOblivion,
     _poolUnburden,
     _poolUncannySpeed,
+    _poolUnnervingAssault,
     _poolUnravelTheAether,
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
@@ -1317,6 +1320,7 @@ const shard: CardShard = {
     _poolVoraciousVampire,
     _poolVulshokBattlegear,
     _poolVulshokRefugee,
+    _poolWakeThrasher,
     _poolWalkingDead,
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,

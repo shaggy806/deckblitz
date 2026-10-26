@@ -238,6 +238,7 @@ import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
+import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
@@ -671,6 +672,7 @@ import _poolWinterTormentedLoner from "../pool/winter-tormented-loner.js";
 import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
+import _poolWoodlurkerMimic from "../pool/woodlurker-mimic.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
@@ -922,6 +924,7 @@ const shard: CardShard = {
     _poolGargadon,
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
+    _poolGiftOfTheDeity,
     _poolGimlisRecklessMight,
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
@@ -1355,6 +1358,7 @@ const shard: CardShard = {
     _poolWizardClass,
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,
+    _poolWoodlurkerMimic,
     _poolWordsOfWisdom,
     _poolYathanRoadwatcher,
     _poolZahidDjinnOfTheLamp,

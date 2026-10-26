@@ -156,6 +156,7 @@ import _poolDreadmalkin from "../pool/dreadmalkin.js";
 import _poolDreamdrinkerVampire from "../pool/dreamdrinker-vampire.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
 import _poolDrunauCorpseTrawler from "../pool/drunau-corpse-trawler.js";
+import _poolDuergarAssailant from "../pool/duergar-assailant.js";
 import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
@@ -383,6 +384,7 @@ import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNocturnalRaid from "../pool/nocturnal-raid.js";
+import _poolNoggleBandit from "../pool/noggle-bandit.js";
 import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNutCollector from "../pool/nut-collector.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
@@ -511,6 +513,7 @@ import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
+import _poolShorecrasherMimic from "../pool/shorecrasher-mimic.js";
 import _poolShrikeHarpy from "../pool/shrike-harpy.js";
 import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
 import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
@@ -861,6 +864,7 @@ const shard: CardShard = {
     _poolDreamdrinkerVampire,
     _poolDruidOfTheAnima,
     _poolDrunauCorpseTrawler,
+    _poolDuergarAssailant,
     _poolDwarvenMine,
     _poolDwarvenRuins,
     _poolDwarvenWarriors,
@@ -1088,6 +1092,7 @@ const shard: CardShard = {
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
     _poolNocturnalRaid,
+    _poolNoggleBandit,
     _poolNurturingBristleback,
     _poolNutCollector,
     _poolNyleaKeenEyed,
@@ -1216,6 +1221,7 @@ const shard: CardShard = {
     _poolShiarSoldier,
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
+    _poolShorecrasherMimic,
     _poolShrikeHarpy,
     _poolShuYunTheSilentTempest,
     _poolSibsigMuckdraggers,

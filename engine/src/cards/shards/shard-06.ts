@@ -522,6 +522,7 @@ import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
 import _poolSnowVilliers from "../pool/snow-villiers.js";
 import _poolSonarStrike from "../pool/sonar-strike.js";
+import _poolSoulReap from "../pool/soul-reap.js";
 import _poolSoulSummons from "../pool/soul-summons.js";
 import _poolSoulSwallower from "../pool/soul-swallower.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
@@ -1197,6 +1198,7 @@ const shard: CardShard = {
     _poolSnappingGnarlid,
     _poolSnowVilliers,
     _poolSonarStrike,
+    _poolSoulReap,
     _poolSoulSummons,
     _poolSoulSwallower,
     _poolSoulboundGuardians,

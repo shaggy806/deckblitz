@@ -38,6 +38,7 @@ import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
 import _poolAshayaSoulOfTheWild from "../pool/ashaya-soul-of-the-wild.js";
 import _poolAshioksSkulker from "../pool/ashioks-skulker.js";
+import _poolAshlingTheExtinguisher from "../pool/ashling-the-extinguisher.js";
 import _poolAstralCornucopia from "../pool/astral-cornucopia.js";
 import _poolAtreusImpulsiveSon from "../pool/atreus-impulsive-son.js";
 import _poolAttendedSocialite from "../pool/attended-socialite.js";
@@ -186,6 +187,7 @@ import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
+import _poolFableOfWolfAndOwl from "../pool/fable-of-wolf-and-owl.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFalseDemise from "../pool/false-demise.js";
@@ -336,6 +338,7 @@ import _poolLoneRider from "../pool/lone-rider.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
 import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
 import _poolLoxodonMender from "../pool/loxodon-mender.js";
+import _poolLoyalGyrfalcon from "../pool/loyal-gyrfalcon.js";
 import _poolLuminarchAscension from "../pool/luminarch-ascension.js";
 import _poolMacetailHystrodon from "../pool/macetail-hystrodon.js";
 import _poolMaelstromWanderer from "../pool/maelstrom-wanderer.js";
@@ -730,6 +733,7 @@ const shard: CardShard = {
     _poolAscendantAcolyte,
     _poolAshayaSoulOfTheWild,
     _poolAshioksSkulker,
+    _poolAshlingTheExtinguisher,
     _poolAstralCornucopia,
     _poolAtreusImpulsiveSon,
     _poolAttendedSocialite,
@@ -878,6 +882,7 @@ const shard: CardShard = {
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,
     _poolExplosiveApparatus,
+    _poolFableOfWolfAndOwl,
     _poolFaebloomTrick,
     _poolFaerieVandal,
     _poolFalseDemise,
@@ -1028,6 +1033,7 @@ const shard: CardShard = {
     _poolLostToLegend,
     _poolLothlorienBlade,
     _poolLoxodonMender,
+    _poolLoyalGyrfalcon,
     _poolLuminarchAscension,
     _poolMacetailHystrodon,
     _poolMaelstromWanderer,
