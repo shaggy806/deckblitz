@@ -8253,4 +8253,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Shadow Slice: encoded on a creature, it casts again when that creature hits',
     board({ you: { bf: ['Swamp*5', 'Grizzly Bears'], hand: ['Shadow Slice'] } }),
   ),
+  preset(
+    'Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking',
+    board({ you: { bf: ['Mountain*2'], hand: ['Gore-House Chainwalker'] }, opp: { bf: ['Grizzly Bears'] } }),
+  ),
+  preset(
+    "Azorius Arrester: a detained creature can't use its abilities until your next turn",
+    board({ you: { bf: ['Plains*2'], hand: ['Azorius Arrester'] }, opp: { bf: ['Prodigal Sorcerer'] } }),
+  ),
 ]

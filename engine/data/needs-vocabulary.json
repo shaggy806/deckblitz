@@ -3375,7 +3375,7 @@
   },
   "filter:aura-enchant-restriction": {
    "family": "condition:filter-card-property-clauses",
-   "example": "Rootwater Shaman: \"Aura spells with enchant creature\" \u2014 no CardFilter field reads an Aura's enchant restriction"
+   "example": "Rootwater Shaman: \"Aura spells with enchant creature\" — no CardFilter field reads an Aura's enchant restriction"
   },
   "static:magnet-counter-attack-block-requirement": {
    "family": "static:combat-restriction-extensions",
@@ -3387,7 +3387,7 @@
   },
   "decision:choose-keyword-as-cost": {
    "family": "cost:choose-cards-as-cost",
-   "example": "Phyrexian Splicer: choose flying, ground (sic) \u2014 a keyword chosen as part of the cost, both targets' filters depending on it"
+   "example": "Phyrexian Splicer: choose flying, ground (sic) — a keyword chosen as part of the cost, both targets' filters depending on it"
   },
   "cost:remove-all-counters": {
    "family": "cost:cost-modification-extensions",
@@ -10756,6 +10756,46 @@
   "cost:untap-others": {
    "family": "cost:choose-cards-as-cost",
    "example": "Crackleburr: '{U/R}{U/R}, {Q}, Untap two tapped blue creatures you control' — untapping other permanents as a cost."
+  },
+  "static:grant-pt-per-own-colors": {
+   "family": "static:pt-per-amount",
+   "example": "A static P/T bonus per color of the affected creature itself — 'equipped creature gets +1/+0 for each of its colors' (Civic Saber)."
+  },
+  "amount:cards-shuffled-this-way": {
+   "family": "effect:this-way-results",
+   "example": "The number of cards an effect just shuffled into a library — 'shuffle all cards from your graveyard into your library. Target player mills that many cards' (Psychic Spiral)."
+  },
+  "cost:discard-same-name": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "A discard cost restricted to cards sharing a name — 'Discard two nonland cards with the same name' (Sphinx of the Chimes)."
+  },
+  "effect:fight-between-put-this-way": {
+   "family": "effect:this-way-results",
+   "example": "The two creatures put onto the battlefield this way fight each other (Guild Feud)."
+  },
+  "filter:target-player-lost-life-this-turn": {
+   "family": "condition:filter-this-turn-history",
+   "example": "A player target limited to a player who lost life this turn (Rix Maadi Guildmage)."
+  },
+  "decision:choose-two-colors-on-enter": {
+   "family": "decision:choose-permanent",
+   "example": "Choose two colors as it enters, kept for its other abilities (Tablet of the Guilds)."
+  },
+  "static:untaps-during-others-untap-attached": {
+   "family": "static:may-choose-not-to-untap",
+   "example": "The enchanted permanent — any player's — untaps during each other player's untap step (Urban Burgeoning)."
+  },
+  "effect:prevent-next-damage-to-you": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "An untargeted 'prevent the next N damage that would be dealt to you this turn' (Security Blockade's granted ability)."
+  },
+  "effect:detain-all": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Detain every permanent matching a filter, no target — 'detain each nonland permanent your opponents control with mana value 4 or less' (Lavinia of the Tenth)."
+  },
+  "static:grant-enter-choice-keyword": {
+   "family": "static:enters-replacement-for-others",
+   "example": "A keyword whose 'as it enters' choice (riot, unleash) granted by a static to other permanents and asked as they enter — 'other Dogs you control have unleash' (Tesak)."
   }
  }
 }

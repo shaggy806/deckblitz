@@ -5410,3 +5410,13 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Shadow Slice at Bob. When asked, pick your Grizzly Bears. Attack Bob with the Bears, and when asked, cast the copy at Bob.
 - **Expect:** Bob goes to 17, and your banner reads "Cipher — exile Shadow Slice encoded on a creature you control?". Shadow Slice goes to exile, not your graveyard. After the Bears' 2 damage, "Whenever this creature deals combat damage to a player, you may copy the encoded card (Shadow Slice) …" goes on the stack; casting the copy for free takes Bob to 12. Shadow Slice is still in exile.
 - **Not a bug:** Choosing no creature puts Shadow Slice in your graveyard.
+
+## Unleash and detain (2026-10-26, Return to Ravnica)
+
+### Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking
+- **Do:** Cast Gore-House Chainwalker and pick '+1/+1 counter'. Pass to Bob's turn and let his Grizzly Bears attack.
+- **Expect:** 'Gore-House Chainwalker - choose one [+1/+1 counter] [No counter]' appears before it enters. It's a 3/2, and when Bob attacks it isn't offered as a blocker.
+
+### Azorius Arrester: a detained creature can't use its abilities until your next turn
+- **Do:** Cast Azorius Arrester and target Bob's Prodigal Sorcerer. Pass to Bob's turn, switch to Bob and try to activate the Sorcerer.
+- **Expect:** The Sorcerer's ability can't be activated and it can't attack. On your next turn, it can be activated again.

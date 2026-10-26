@@ -1,0 +1,902 @@
+{
+ "batch": "B179",
+ "status": "complete",
+ "ranks": "Return to Ravnica (RTR, 2012-10-05): the rest of the set — its 122 cards left (newest-first walk), with unleash and detain built; also the cards triaged earlier on either alone (Rakdos Drake, Exava, Rakdos Blood Witch, Lyev Decree authored; Lavinia of the Tenth, Tesak, Judith's Hellhound re-triaged)",
+ "authored": [
+  {
+   "name": "Annihilating Fire",
+   "files": [
+    "engine/src/cards/pool/annihilating-fire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Archon of the Triumvirate",
+   "files": [
+    "engine/src/cards/pool/archon-of-the-triumvirate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armada Wurm",
+   "files": [
+    "engine/src/cards/pool/armada-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armory Guard",
+   "files": [
+    "engine/src/cards/pool/armory-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ash Zealot",
+   "files": [
+    "engine/src/cards/pool/ash-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azorius Arrester",
+   "files": [
+    "engine/src/cards/pool/azorius-arrester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azorius Justiciar",
+   "files": [
+    "engine/src/cards/pool/azorius-justiciar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Azorius Keyrune",
+   "files": [
+    "engine/src/cards/pool/azorius-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Azor's Elocutors",
+   "files": [
+    "engine/src/cards/pool/azors-elocutors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bazaar Krovod",
+   "files": [
+    "engine/src/cards/pool/bazaar-krovod.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blistercoil Weird",
+   "files": [
+    "engine/src/cards/pool/blistercoil-weird.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodfray Giant",
+   "files": [
+    "engine/src/cards/pool/bloodfray-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Call of the Conclave",
+   "files": [
+    "engine/src/cards/pool/call-of-the-conclave.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Carnival Hellsteed",
+   "files": [
+    "engine/src/cards/pool/carnival-hellsteed.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Centaur's Herald",
+   "files": [
+    "engine/src/cards/pool/centaurs-herald.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chaos Imps",
+   "files": [
+    "engine/src/cards/pool/chaos-imps.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chorus of Might",
+   "files": [
+    "engine/src/cards/pool/chorus-of-might.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chronic Flooding",
+   "files": [
+    "engine/src/cards/pool/chronic-flooding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coursers' Accord",
+   "files": [
+    "engine/src/cards/pool/coursers-accord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crosstown Courier",
+   "files": [
+    "engine/src/cards/pool/crosstown-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryptborn Horror",
+   "files": [
+    "engine/src/cards/pool/cryptborn-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark Revenant",
+   "files": [
+    "engine/src/cards/pool/dark-revenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dead Reveler",
+   "files": [
+    "engine/src/cards/pool/dead-reveler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deadbridge Goliath",
+   "files": [
+    "engine/src/cards/pool/deadbridge-goliath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Desecration Demon",
+   "files": [
+    "engine/src/cards/pool/desecration-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Destroy the Evidence",
+   "files": [
+    "engine/src/cards/pool/destroy-the-evidence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deviant Glee",
+   "files": [
+    "engine/src/cards/pool/deviant-glee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doorkeeper",
+   "files": [
+    "engine/src/cards/pool/doorkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Downsize",
+   "files": [
+    "engine/src/cards/pool/downsize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drainpipe Vermin",
+   "files": [
+    "engine/src/cards/pool/drainpipe-vermin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreg Mangler",
+   "files": [
+    "engine/src/cards/pool/dreg-mangler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Drudge Beetle",
+   "files": [
+    "engine/src/cards/pool/drudge-beetle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dryad Militant",
+   "files": [
+    "engine/src/cards/pool/dryad-militant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dynacharge",
+   "files": [
+    "engine/src/cards/pool/dynacharge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence Backlash",
+   "files": [
+    "engine/src/cards/pool/essence-backlash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exava, Rakdos Blood Witch",
+   "files": [
+    "engine/src/cards/pool/exava-rakdos-blood-witch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eyes in the Skies",
+   "files": [
+    "engine/src/cards/pool/eyes-in-the-skies.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Faerie Impostor",
+   "files": [
+    "engine/src/cards/pool/faerie-impostor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firemind's Foresight",
+   "files": [
+    "engine/src/cards/pool/fireminds-foresight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golgari Decoy",
+   "files": [
+    "engine/src/cards/pool/golgari-decoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golgari Keyrune",
+   "files": [
+    "engine/src/cards/pool/golgari-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gore-House Chainwalker",
+   "files": [
+    "engine/src/cards/pool/gore-house-chainwalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Roustabout",
+   "files": [
+    "engine/src/cards/pool/grim-roustabout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grove of the Guardian",
+   "files": [
+    "engine/src/cards/pool/grove-of-the-guardian.ts",
+    "engine/src/cards/tokens/elemental-token-8-8-vigilance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Havoc Festival",
+   "files": [
+    "engine/src/cards/pool/havoc-festival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellhole Flailer",
+   "files": [
+    "engine/src/cards/pool/hellhole-flailer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Horncaller's Chant",
+   "files": [
+    "engine/src/cards/pool/horncallers-chant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hypersonic Dragon",
+   "files": [
+    "engine/src/cards/pool/hypersonic-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inaction Injunction",
+   "files": [
+    "engine/src/cards/pool/inaction-injunction.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Isperia's Skywatch",
+   "files": [
+    "engine/src/cards/pool/isperias-skywatch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Izzet Keyrune",
+   "files": [
+    "engine/src/cards/pool/izzet-keyrune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Korozda Guildmage",
+   "files": [
+    "engine/src/cards/pool/korozda-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Korozda Monitor",
+   "files": [
+    "engine/src/cards/pool/korozda-monitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lobber Crew",
+   "files": [
+    "engine/src/cards/pool/lobber-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lotleth Troll",
+   "files": [
+    "engine/src/cards/pool/lotleth-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lyev Decree",
+   "files": [
+    "engine/src/cards/pool/lyev-decree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lyev Skyknight",
+   "files": [
+    "engine/src/cards/pool/lyev-skyknight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mana Bloom",
+   "files": [
+    "engine/src/cards/pool/mana-bloom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martial Law",
+   "files": [
+    "engine/src/cards/pool/martial-law.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "New Prahv Guildmage",
+   "files": [
+    "engine/src/cards/pool/new-prahv-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niv-Mizzet, Dracogenius",
+   "files": [
+    "engine/src/cards/pool/niv-mizzet-dracogenius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nivix Guildmage",
+   "files": [
+    "engine/src/cards/pool/nivix-guildmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oak Street Innkeeper",
+   "files": [
+    "engine/src/cards/pool/oak-street-innkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ogre Jailbreaker",
+   "files": [
+    "engine/src/cards/pool/ogre-jailbreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom General",
+   "files": [
+    "engine/src/cards/pool/phantom-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pursuit of Flight",
+   "files": [
+    "engine/src/cards/pool/pursuit-of-flight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pyroconvergence",
+   "files": [
+    "engine/src/cards/pool/pyroconvergence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Racecourse Fury",
+   "files": [
+    "engine/src/cards/pool/racecourse-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos Cackler",
+   "files": [
+    "engine/src/cards/pool/rakdos-cackler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rakdos Drake",
+   "files": [
+    "engine/src/cards/pool/rakdos-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rakdos Keyrune",
+   "files": [
+    "engine/src/cards/pool/rakdos-keyrune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos Ringleader",
+   "files": [
+    "engine/src/cards/pool/rakdos-ringleader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rites of Reaping",
+   "files": [
+    "engine/src/cards/pool/rites-of-reaping.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savage Surge",
+   "files": [
+    "engine/src/cards/pool/savage-surge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Selesnya Keyrune",
+   "files": [
+    "engine/src/cards/pool/selesnya-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sewer Shambler",
+   "files": [
+    "engine/src/cards/pool/sewer-shambler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skull Rend",
+   "files": [
+    "engine/src/cards/pool/skull-rend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skymark Roc",
+   "files": [
+    "engine/src/cards/pool/skymark-roc.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slime Molding",
+   "files": [
+    "engine/src/cards/pool/slime-molding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slitherhead",
+   "files": [
+    "engine/src/cards/pool/slitherhead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sluiceway Scorpion",
+   "files": [
+    "engine/src/cards/pool/sluiceway-scorpion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soul Tithe",
+   "files": [
+    "engine/src/cards/pool/soul-tithe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulsworn Spirit",
+   "files": [
+    "engine/src/cards/pool/soulsworn-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spawn of Rix Maadi",
+   "files": [
+    "engine/src/cards/pool/spawn-of-rix-maadi.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Splatter Thug",
+   "files": [
+    "engine/src/cards/pool/splatter-thug.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stab Wound",
+   "files": [
+    "engine/src/cards/pool/stab-wound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Street Spasm",
+   "files": [
+    "engine/src/cards/pool/street-spasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swift Justice",
+   "files": [
+    "engine/src/cards/pool/swift-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tavern Swindler",
+   "files": [
+    "engine/src/cards/pool/tavern-swindler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teleportal",
+   "files": [
+    "engine/src/cards/pool/teleportal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terrus Wurm",
+   "files": [
+    "engine/src/cards/pool/terrus-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thrill-Kill Assassin",
+   "files": [
+    "engine/src/cards/pool/thrill-kill-assassin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treasured Find",
+   "files": [
+    "engine/src/cards/pool/treasured-find.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trostani's Judgment",
+   "files": [
+    "engine/src/cards/pool/trostanis-judgment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultimate Price",
+   "files": [
+    "engine/src/cards/pool/ultimate-price.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vitu-Ghazi Guildmage",
+   "files": [
+    "engine/src/cards/pool/vitu-ghazi-guildmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Volatile Rig",
+   "files": [
+    "engine/src/cards/pool/volatile-rig.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wayfaring Temple",
+   "files": [
+    "engine/src/cards/pool/wayfaring-temple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Beastmaster",
+   "files": [
+    "engine/src/cards/pool/wild-beastmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zanikev Locust",
+   "files": [
+    "engine/src/cards/pool/zanikev-locust.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Detention Sphere",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "exiles all other nonland permanents with the same name as the target"
+  },
+  {
+   "name": "Civic Saber",
+   "needs": [
+    "static:grant-pt-per-own-colors"
+   ],
+   "why": "+1/+0 for each of the equipped creature's own colors — a static's per-count bonus can't count them"
+  },
+  {
+   "name": "Avenging Arrow",
+   "needs": [
+    "condition:filter-dealt-damage-this-turn"
+   ],
+   "why": "'a creature that dealt damage this turn' (to anything) has no filter"
+  },
+  {
+   "name": "Loxodon Smiter",
+   "needs": [
+    "replacement:discarded-by-opponent-to-battlefield"
+   ],
+   "why": "discarded by an opponent's spell or ability: onto the battlefield instead"
+  },
+  {
+   "name": "Street Sweeper",
+   "needs": [
+    "filter:attached-to-target"
+   ],
+   "why": "destroy all Auras attached to target land"
+  },
+  {
+   "name": "Psychic Spiral",
+   "needs": [
+    "amount:cards-shuffled-this-way"
+   ],
+   "why": "mills as many cards as were just shuffled into the library"
+  },
+  {
+   "name": "Rakdos's Return",
+   "needs": [
+    "effect:discard-controller-of-target"
+   ],
+   "why": "a targeted planeswalker's controller discards X"
+  },
+  {
+   "name": "Sphinx of the Chimes",
+   "needs": [
+    "cost:discard-same-name"
+   ],
+   "why": "discard two nonland cards with the same name as a cost"
+  },
+  {
+   "name": "Chemister's Trick",
+   "needs": [
+    "effect:restrict-each-matching-at-resolution"
+   ],
+   "why": "overloaded 'attacks this turn if able' binds only the creatures there as it resolves"
+  },
+  {
+   "name": "Shrieking Affliction",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "intervening-if on the hand of the opponent whose upkeep it is"
+  },
+  {
+   "name": "Guild Feud",
+   "needs": [
+    "effect:reveal-opponent-library-put-onto-battlefield",
+    "effect:fight-between-put-this-way"
+   ],
+   "why": "each player reveals three and puts a creature onto the battlefield, then the two fight"
+  },
+  {
+   "name": "Righteous Authority",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "+1/+1 per card in the enchanted creature's controller's hand"
+  },
+  {
+   "name": "Palisade Giant",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "damage to you or your other permanents is dealt to it instead"
+  },
+  {
+   "name": "Conjured Currency",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of it and a permanent you neither own nor control"
+  },
+  {
+   "name": "Rix Maadi Guildmage",
+   "needs": [
+    "filter:target-player-lost-life-this-turn"
+   ],
+   "why": "target player who lost life this turn"
+  },
+  {
+   "name": "Slaughter Games",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a nonland card, search graveyard, hand and library for it"
+  },
+  {
+   "name": "Search the City",
+   "needs": [
+    "trigger:plays-card-exiled-with-source",
+    "filter:same-name-as-exiled-with-source"
+   ],
+   "why": "playing a card with the same name as one it exiled; an extra turn when it's empty"
+  },
+  {
+   "name": "Tablet of the Guilds",
+   "needs": [
+    "decision:choose-two-colors-on-enter",
+    "filter:chosen-color"
+   ],
+   "why": "choose two colors as it enters; life for each chosen color a spell is"
+  },
+  {
+   "name": "Urban Burgeoning",
+   "needs": [
+    "static:untaps-during-others-untap-attached"
+   ],
+   "why": "the enchanted land, maybe an opponent's, untaps during each other player's untap step"
+  },
+  {
+   "name": "Mercurial Chemister",
+   "needs": [
+    "effect:cost-discarded-card-ref"
+   ],
+   "why": "damage equal to the discarded-as-cost card's mana value"
+  },
+  {
+   "name": "Izzet Staticaster",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "each other creature with the same name as the target"
+  },
+  {
+   "name": "Search Warrant",
+   "needs": [
+    "effect:target-player-reveals-hand"
+   ],
+   "why": "target player reveals their hand to everyone"
+  },
+  {
+   "name": "Assassin's Strike",
+   "needs": [
+    "effect:discard-controller-of-target"
+   ],
+   "why": "the destroyed creature's controller discards"
+  },
+  {
+   "name": "Nivmagus Elemental",
+   "needs": [
+    "cost:exile-spell-you-control"
+   ],
+   "why": "exile an instant or sorcery spell you control as a cost"
+  },
+  {
+   "name": "Security Blockade",
+   "needs": [
+    "effect:prevent-next-damage-to-you"
+   ],
+   "why": "the granted '{T}: prevent the next 1 damage to you' has no untargeted 'you'"
+  },
+  {
+   "name": "Lavinia of the Tenth",
+   "needs": [
+    "effect:detain-all"
+   ],
+   "why": "detain each nonland permanent your opponents control with mana value 4 or less — detain has only a target form (re-triaged now detain is built)"
+  },
+  {
+   "name": "Tesak, Judith's Hellhound",
+   "needs": [
+    "static:grant-enter-choice-keyword"
+   ],
+   "why": "'other Dogs you control have unleash' — a granted unleash isn't asked as they enter (re-triaged now unleash is built)"
+  }
+ ]
+}
