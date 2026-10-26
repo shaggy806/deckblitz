@@ -707,6 +707,8 @@ export function auraPolarity(def: CardDefinition): Polarity {
       if (keyword === "defender") harm = true;
       else help = true;
     }
+    // "Enchanted creature loses flying" (Grounded).
+    if ((ability.loseKeywords ?? []).length > 0) harm = true;
     if ((ability.grantsActivated ?? []).length > 0) help = true;
     for (const granted of ability.grantsTriggered ?? []) {
       if (grantedTriggerHarms(granted)) harm = true;

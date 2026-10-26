@@ -10956,7 +10956,7 @@
    "example": "Mirage Phalanx: a token copy \"except it has haste and loses soulbond\"."
   },
   "effect:each-player-exiles-permanents-or-hand-cards": {
-   "family": "effect:each-player-choice",
+   "family": "effect:each-player-chooses-then-all-act",
    "example": "Descent into Madness: each player exiles X from among the permanents they control and the cards in their hand, all at once."
   },
   "condition:enchanted-controller-controls-no-other-creatures": {
