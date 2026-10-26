@@ -38,6 +38,7 @@ import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
 import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
+import _poolBakuAltar from "../pool/baku-altar.js";
 import _poolBallynockTrapper from "../pool/ballynock-trapper.js";
 import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
@@ -52,6 +53,7 @@ import _poolBitterRevelation from "../pool/bitter-revelation.js";
 import _poolBlackSunsZenith from "../pool/black-suns-zenith.js";
 import _poolBlackWaltzNo3 from "../pool/black-waltz-no-3.js";
 import _poolBlightSickle from "../pool/blight-sickle.js";
+import _poolBlightspeaker from "../pool/blightspeaker.js";
 import _poolBlistergrub from "../pool/blistergrub.js";
 import _poolBloatedToad from "../pool/bloated-toad.js";
 import _poolBloodRites from "../pool/blood-rites.js";
@@ -158,6 +160,7 @@ import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
+import _poolDustElemental from "../pool/dust-elemental.js";
 import _poolDystopia from "../pool/dystopia.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
@@ -308,6 +311,7 @@ import _poolIntrepidHero from "../pool/intrepid-hero.js";
 import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
 import _poolIorRuinExpedition from "../pool/ior-ruin-expedition.js";
 import _poolIrascibleWolverine from "../pool/irascible-wolverine.js";
+import _poolIreOfKaminari from "../pool/ire-of-kaminari.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
@@ -405,6 +409,7 @@ import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
 import _poolNobilisOfWar from "../pool/nobilis-of-war.js";
 import _poolNotionThief from "../pool/notion-thief.js";
 import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
+import _poolNumotTheDevastator from "../pool/numot-the-devastator.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
@@ -532,6 +537,7 @@ import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
 import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
+import _poolShizukoCallerOfAutumn from "../pool/shizuko-caller-of-autumn.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
@@ -578,8 +584,10 @@ import _poolSqueesToy from "../pool/squees-toy.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStartle from "../pool/startle.js";
+import _poolSteelingStance from "../pool/steeling-stance.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
+import _poolStingscourger from "../pool/stingscourger.js";
 import _poolStitchedDrake from "../pool/stitched-drake.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
@@ -706,6 +714,7 @@ import _poolWoodlandChampion from "../pool/woodland-champion.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
+import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
@@ -766,6 +775,7 @@ const shard: CardShard = {
     _poolAysenBureaucrats,
     _poolBackOnTrack,
     _poolBaelothBarritylEntertainer,
+    _poolBakuAltar,
     _poolBallynockTrapper,
     _poolBarlsCage,
     _poolBaronyVampire,
@@ -780,6 +790,7 @@ const shard: CardShard = {
     _poolBlackSunsZenith,
     _poolBlackWaltzNo3,
     _poolBlightSickle,
+    _poolBlightspeaker,
     _poolBlistergrub,
     _poolBloatedToad,
     _poolBloodRites,
@@ -886,6 +897,7 @@ const shard: CardShard = {
     _poolDrownedDiner,
     _poolDrySpell,
     _poolDungeonShade,
+    _poolDustElemental,
     _poolDystopia,
     _poolEarthRumble,
     _poolEasternPaladin,
@@ -1036,6 +1048,7 @@ const shard: CardShard = {
     _poolIntroductionToProphecy,
     _poolIorRuinExpedition,
     _poolIrascibleWolverine,
+    _poolIreOfKaminari,
     _poolIroassChampion,
     _poolIroncladKrovod,
     _poolJenovaAncientCalamity,
@@ -1133,6 +1146,7 @@ const shard: CardShard = {
     _poolNobilisOfWar,
     _poolNotionThief,
     _poolNovijenHeartOfProgress,
+    _poolNumotTheDevastator,
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,
@@ -1260,6 +1274,7 @@ const shard: CardShard = {
     _poolShieldWall,
     _poolShimmeringWings,
     _poolShivanReef,
+    _poolShizukoCallerOfAutumn,
     _poolShuGrainCaravan,
     _poolSigardianPriest,
     _poolSigiledSkink,
@@ -1306,8 +1321,10 @@ const shard: CardShard = {
     _poolSquirrelMob,
     _poolSquirrelNest,
     _poolStartle,
+    _poolSteelingStance,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
+    _poolStingscourger,
     _poolStitchedDrake,
     _poolStokeGenius,
     _poolStonehands,
@@ -1434,6 +1451,7 @@ const shard: CardShard = {
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
     _poolYavimayaBarbarian,
+    _poolYomijiWhoBarsTheWay,
     _poolYoungBlueDragon,
     _poolZephyrFalcon,
     _poolZofBloodbog,

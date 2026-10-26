@@ -86,6 +86,7 @@ import _poolBoneyardWurm from "../pool/boneyard-wurm.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBrackwaterElemental from "../pool/brackwater-elemental.js";
+import _poolBrainGorgers from "../pool/brain-gorgers.js";
 import _poolBramblesnap from "../pool/bramblesnap.js";
 import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
@@ -264,6 +265,7 @@ import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
 import _poolGrowthChamberGuardian from "../pool/growth-chamber-guardian.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
+import _poolHaazdaShieldMate from "../pool/haazda-shield-mate.js";
 import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHardyVeteran from "../pool/hardy-veteran.js";
@@ -343,6 +345,7 @@ import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
+import _poolLifespinner from "../pool/lifespinner.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
@@ -416,6 +419,7 @@ import _poolNightmareUnmaking from "../pool/nightmare-unmaking.js";
 import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
 import _poolNightshadePeddler from "../pool/nightshade-peddler.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
+import _poolNihilisticGlee from "../pool/nihilistic-glee.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
 import _poolNorthernPaladin from "../pool/northern-paladin.js";
 import _poolNoyanDarRoilShaper from "../pool/noyan-dar-roil-shaper.js";
@@ -597,6 +601,7 @@ import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
+import _poolSoratamiMindsweeper from "../pool/soratami-mindsweeper.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
@@ -749,6 +754,7 @@ import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _poolZendikarIncarnate from "../pool/zendikar-incarnate.js";
 import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
 import _tokensClericToken from "../tokens/cleric-token.js";
+import _tokensElementalTokenResearchDevelopment from "../tokens/elemental-token-research-development.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensElkToken from "../tokens/elk-token.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
@@ -849,6 +855,7 @@ const shard: CardShard = {
     _poolBoommobile,
     _poolBountyOfMight,
     _poolBrackwaterElemental,
+    _poolBrainGorgers,
     _poolBramblesnap,
     _poolBreachingDragonstorm,
     _poolBrighthearthBanneret,
@@ -1027,6 +1034,7 @@ const shard: CardShard = {
     _poolGrendelSpawnOfKnull,
     _poolGrowthChamberGuardian,
     _poolGurmagSwiftwing,
+    _poolHaazdaShieldMate,
     _poolHakbalOfTheSurgingSoul,
     _poolHapatraTheDesertFrost,
     _poolHardyVeteran,
@@ -1106,6 +1114,7 @@ const shard: CardShard = {
     _poolLeoninElder,
     _poolLevitatingStatue,
     _poolLiegeOfTheTangle,
+    _poolLifespinner,
     _poolLightningCloud,
     _poolLivingWall,
     _poolLlanowarKnight,
@@ -1179,6 +1188,7 @@ const shard: CardShard = {
     _poolNightscapeApprentice,
     _poolNightshadePeddler,
     _poolNightwindGlider,
+    _poolNihilisticGlee,
     _poolNissasPilgrimage,
     _poolNorthernPaladin,
     _poolNoyanDarRoilShaper,
@@ -1360,6 +1370,7 @@ const shard: CardShard = {
     _poolSolTalisman,
     _poolSoldeviSteamBeast,
     _poolSolitaryCamel,
+    _poolSoratamiMindsweeper,
     _poolSoulsFire,
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,
@@ -1514,6 +1525,7 @@ const shard: CardShard = {
   tokens: [
     _tokens55DjinnArtifactToken,
     _tokensClericToken,
+    _tokensElementalTokenResearchDevelopment,
     _tokensElementalTokenWildfireAwakener,
     _tokensElkToken,
     _tokensHumanMonkToken,

@@ -25,6 +25,7 @@ import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolApathy from "../pool/apathy.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolAppeal from "../pool/appeal.js";
+import _poolAquastrandSpider from "../pool/aquastrand-spider.js";
 import _poolArcboundJavelineer from "../pool/arcbound-javelineer.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArchonOfValorsReach from "../pool/archon-of-valors-reach.js";
@@ -295,6 +296,7 @@ import _poolIncreasingSavagery from "../pool/increasing-savagery.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
+import _poolIntoTheFray from "../pool/into-the-fray.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
@@ -360,6 +362,7 @@ import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
+import _poolMarkOfTheOni from "../pool/mark-of-the-oni.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
@@ -430,6 +433,7 @@ import _poolOust from "../pool/oust.js";
 import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolOversoulOfDusk from "../pool/oversoul-of-dusk.js";
+import _poolOyobiWhoSplitTheHeavens from "../pool/oyobi-who-split-the-heavens.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
@@ -482,6 +486,7 @@ import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolRecklessRacer from "../pool/reckless-racer.js";
 import _poolReclusiveWight from "../pool/reclusive-wight.js";
 import _poolReduceInStature from "../pool/reduce-in-stature.js";
+import _poolReflexSliver from "../pool/reflex-sliver.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
@@ -523,6 +528,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
+import _poolScrollOfOrigins from "../pool/scroll-of-origins.js";
 import _poolScryingSheets from "../pool/scrying-sheets.js";
 import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
@@ -619,6 +625,7 @@ import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
 import _poolTemperedVeteran from "../pool/tempered-veteran.js";
+import _poolTerashisGrasp from "../pool/terashis-grasp.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
 import _poolTergridsShadow from "../pool/tergrids-shadow.js";
 import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
@@ -739,6 +746,7 @@ import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensCloudSpriteToken from "../tokens/cloud-sprite-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
+import _tokensDrakeTokenLeafdrakeRoost from "../tokens/drake-token-leafdrake-roost.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
 import _tokensElementalToken55BlueRedFlying from "../tokens/elemental-token-5-5-blue-red-flying.js";
 import _tokensGreenSheepToken from "../tokens/green-sheep-token.js";
@@ -777,6 +785,7 @@ const shard: CardShard = {
     _poolApathy,
     _poolAppaLoyalSkyBison,
     _poolAppeal,
+    _poolAquastrandSpider,
     _poolArcboundJavelineer,
     _poolArchivist,
     _poolArchonOfValorsReach,
@@ -1047,6 +1056,7 @@ const shard: CardShard = {
     _poolInexorableTide,
     _poolInfestedWerewolf,
     _poolInspireAwe,
+    _poolIntoTheFray,
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
     _poolIntrusivePackbeast,
@@ -1112,6 +1122,7 @@ const shard: CardShard = {
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,
     _poolMarhaultElsdragon,
+    _poolMarkOfTheOni,
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,
     _poolMassManipulation,
@@ -1182,6 +1193,7 @@ const shard: CardShard = {
     _poolOutcasterGreenblade,
     _poolOvergrownEstate,
     _poolOversoulOfDusk,
+    _poolOyobiWhoSplitTheHeavens,
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolParagonOfEternalWilds,
@@ -1234,6 +1246,7 @@ const shard: CardShard = {
     _poolRecklessRacer,
     _poolReclusiveWight,
     _poolReduceInStature,
+    _poolReflexSliver,
     _poolRegeneration,
     _poolReinforcedRonin,
     _poolRelearn,
@@ -1275,6 +1288,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScornEffigy,
     _poolScreechingHarpy,
+    _poolScrollOfOrigins,
     _poolScryingSheets,
     _poolSeafloorStalker,
     _poolSealOfStrength,
@@ -1371,6 +1385,7 @@ const shard: CardShard = {
     _poolTelJiladExile,
     _poolTemmetVizierOfNaktamun,
     _poolTemperedVeteran,
+    _poolTerashisGrasp,
     _poolTergridsLantern,
     _poolTergridsShadow,
     _poolTerrorOfMountVelus,
@@ -1493,6 +1508,7 @@ const shard: CardShard = {
     _tokensAxeToken,
     _tokensCloudSpriteToken,
     _tokensDragonEggToken,
+    _tokensDrakeTokenLeafdrakeRoost,
     _tokensDwarfToken,
     _tokensElementalToken55BlueRedFlying,
     _tokensGreenSheepToken,

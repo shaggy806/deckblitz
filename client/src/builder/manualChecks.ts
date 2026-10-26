@@ -8327,10 +8327,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({ you: { bf: ['Forest*9'], hand: ['Endless Swarm', 'Grizzly Bears', 'Forest', 'Forest'] } }),
   ),
   preset(
+    'Desperate Ritual: splicing Spiritual Visit onto it',
+    board({ you: { bf: ['Mountain*2', 'Plains'], hand: ['Desperate Ritual', 'Spiritual Visit'] } }),
+  ),
+  preset(
     'Shu Cavalry: only horsemanship blocks it',
     board({
       you: { bf: ['Shu Cavalry', 'Grizzly Bears'] },
       opp: { human: true, bf: ['Serra Angel', 'Wei Scout'] },
     }),
+  ),
+  preset(
+    'Skyscribing: forecast from your hand in your upkeep, once a turn',
+    board({ you: { bf: ['Island*6'], hand: ['Skyscribing'] } }),
   ),
 ]

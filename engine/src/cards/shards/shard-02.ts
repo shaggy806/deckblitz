@@ -146,6 +146,7 @@ import _poolDauntlessAven from "../pool/dauntless-aven.js";
 import _poolDauntlessEscort from "../pool/dauntless-escort.js";
 import _poolDauthiMindripper from "../pool/dauthi-mindripper.js";
 import _poolDaybreakChaplain from "../pool/daybreak-chaplain.js";
+import _poolDeadGone from "../pool/dead-gone.js";
 import _poolDeadlyComplication from "../pool/deadly-complication.js";
 import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
@@ -330,6 +331,7 @@ import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
 import _poolKalitasBloodchiefOfGhet from "../pool/kalitas-bloodchief-of-ghet.js";
+import _poolKamiOfTheTendedGarden from "../pool/kami-of-the-tended-garden.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
 import _poolKarfellKennelMaster from "../pool/karfell-kennel-master.js";
 import _poolKateStewart from "../pool/kate-stewart.js";
@@ -374,6 +376,7 @@ import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
 import _poolManorGargoyle from "../pool/manor-gargoyle.js";
+import _poolMantleOfLeadership from "../pool/mantle-of-leadership.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMarshCasualties from "../pool/marsh-casualties.js";
 import _poolMarshFlitter from "../pool/marsh-flitter.js";
@@ -414,6 +417,7 @@ import _poolNeckSnap from "../pool/neck-snap.js";
 import _poolNecropede from "../pool/necropede.js";
 import _poolNemesisTrap from "../pool/nemesis-trap.js";
 import _poolNestInvader from "../pool/nest-invader.js";
+import _poolNettlingCurse from "../pool/nettling-curse.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
 import _poolNinjaOfTheNewMoon from "../pool/ninja-of-the-new-moon.js";
@@ -634,6 +638,7 @@ import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
 import _poolTidespoutTyrant from "../pool/tidespout-tyrant.js";
 import _poolTimeLordRegeneration from "../pool/time-lord-regeneration.js";
+import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
@@ -645,11 +650,14 @@ import _poolTriumphOfFerocity from "../pool/triumph-of-ferocity.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
 import _poolTruce from "../pool/truce.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
+import _poolTumble from "../pool/tumble.js";
 import _poolTwinBlades from "../pool/twin-blades.js";
 import _poolTwinBolt from "../pool/twin-bolt.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
+import _poolUktabiDrake from "../pool/uktabi-drake.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
+import _poolUncheckedGrowth from "../pool/unchecked-growth.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
@@ -671,6 +679,7 @@ import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
 import _poolViashinoSandswimmer from "../pool/viashino-sandswimmer.js";
+import _poolVigeanIntuition from "../pool/vigean-intuition.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
 import _poolVirtusTheVeiled from "../pool/virtus-the-veiled.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
@@ -704,6 +713,7 @@ import _poolWizardsRetort from "../pool/wizards-retort.js";
 import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
+import _poolWritOfPassage from "../pool/writ-of-passage.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
@@ -864,6 +874,7 @@ const shard: CardShard = {
     _poolDauntlessEscort,
     _poolDauthiMindripper,
     _poolDaybreakChaplain,
+    _poolDeadGone,
     _poolDeadlyComplication,
     _poolDeathforgeShaman,
     _poolDeathleaperTerrorWeapon,
@@ -1048,6 +1059,7 @@ const shard: CardShard = {
     _poolKaaliaOfTheVast,
     _poolKaimaTheFracturedCalm,
     _poolKalitasBloodchiefOfGhet,
+    _poolKamiOfTheTendedGarden,
     _poolKaraiFutureOfTheFoot,
     _poolKarfellKennelMaster,
     _poolKateStewart,
@@ -1092,6 +1104,7 @@ const shard: CardShard = {
     _poolMagdaTheHoardmaster,
     _poolMalevolentWitchkite,
     _poolManorGargoyle,
+    _poolMantleOfLeadership,
     _poolMarangRiverSkeleton,
     _poolMarshCasualties,
     _poolMarshFlitter,
@@ -1132,6 +1145,7 @@ const shard: CardShard = {
     _poolNecropede,
     _poolNemesisTrap,
     _poolNestInvader,
+    _poolNettlingCurse,
     _poolNicolBolasTheArisen,
     _poolNightmareSower,
     _poolNinjaOfTheNewMoon,
@@ -1352,6 +1366,7 @@ const shard: CardShard = {
     _poolThrummingHivepool,
     _poolTidespoutTyrant,
     _poolTimeLordRegeneration,
+    _poolToilsOfNightAndDay,
     _poolTomikWielderOfLaw,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
@@ -1363,11 +1378,14 @@ const shard: CardShard = {
     _poolTropicalIsland,
     _poolTruce,
     _poolTrystanCallousCultivator,
+    _poolTumble,
     _poolTwinBlades,
     _poolTwinBolt,
     _poolTyLeeArtfulAcrobat,
+    _poolUktabiDrake,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
+    _poolUncheckedGrowth,
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
     _poolUnscrupulousContractor,
@@ -1389,6 +1407,7 @@ const shard: CardShard = {
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,
     _poolViashinoSandswimmer,
+    _poolVigeanIntuition,
     _poolVinelasherAdept,
     _poolVirtusTheVeiled,
     _poolVisionOfLove,
@@ -1422,6 +1441,7 @@ const shard: CardShard = {
     _poolWoodlandSleuth,
     _poolWoollyLoxodon,
     _poolWoollyThoctar,
+    _poolWritOfPassage,
     _poolZektarShrineExpedition,
     _poolZephidsEmbrace,
     _poolZiatorasEnvoy,

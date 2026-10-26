@@ -50,6 +50,7 @@ import _poolAudaciousThief from "../pool/audacious-thief.js";
 import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
+import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
@@ -113,6 +114,7 @@ import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
 import _poolCarelessCelebrant from "../pool/careless-celebrant.js";
 import _poolCarnageWurm from "../pool/carnage-wurm.js";
+import _poolCarom from "../pool/carom.js";
 import _poolCaseOfTheGorgonsKiss from "../pool/case-of-the-gorgons-kiss.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
@@ -233,6 +235,7 @@ import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFamiliarGround from "../pool/familiar-ground.js";
+import _poolFatalFrenzy from "../pool/fatal-frenzy.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
 import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
@@ -358,9 +361,11 @@ import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
+import _poolIsaoEnlightenedBushi from "../pool/isao-enlightened-bushi.js";
 import _poolIsolationCell from "../pool/isolation-cell.js";
 import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
+import _poolJaggedPoppet from "../pool/jagged-poppet.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJeskaiRunemark from "../pool/jeskai-runemark.js";
@@ -405,12 +410,14 @@ import _poolLupariShield from "../pool/lupari-shield.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMagmaroth from "../pool/magmaroth.js";
+import _poolMagusOfTheLibrary from "../pool/magus-of-the-library.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
 import _poolMammothGrowth from "../pool/mammoth-growth.js";
 import _poolManalith from "../pool/manalith.js";
 import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
 import _poolMarduMonument from "../pool/mardu-monument.js";
+import _poolMarkOfSakiko from "../pool/mark-of-sakiko.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
 import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
@@ -426,6 +433,7 @@ import _poolMightOfOaks from "../pool/might-of-oaks.js";
 import _poolMightOfTheOldWays from "../pool/might-of-the-old-ways.js";
 import _poolMindPeel from "../pool/mind-peel.js";
 import _poolMiresMalice from "../pool/mires-malice.js";
+import _poolMirriTheCursed from "../pool/mirri-the-cursed.js";
 import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
 import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
@@ -450,6 +458,7 @@ import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
+import _poolOcularHalo from "../pool/ocular-halo.js";
 import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOliviasMidnightAmbush from "../pool/olivias-midnight-ambush.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
@@ -504,6 +513,7 @@ import _poolReturnTriumphant from "../pool/return-triumphant.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
 import _poolRiftBolt from "../pool/rift-bolt.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
+import _poolRiptidePilferer from "../pool/riptide-pilferer.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
 import _poolRitualGuardian from "../pool/ritual-guardian.js";
 import _poolRiversRebuke from "../pool/rivers-rebuke.js";
@@ -784,6 +794,7 @@ const shard: CardShard = {
     _poolAuraGnarlid,
     _poolAvacynAngelOfHorror,
     _poolAvacynsPilgrim,
+    _poolAvatarOfDiscord,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
     _poolBairdArgivianRecruiter,
@@ -847,6 +858,7 @@ const shard: CardShard = {
     _poolCaravanHurda,
     _poolCarelessCelebrant,
     _poolCarnageWurm,
+    _poolCarom,
     _poolCaseOfTheGorgonsKiss,
     _poolCastleArdenvale,
     _poolCatharticParting,
@@ -967,6 +979,7 @@ const shard: CardShard = {
     _poolEyeblightAssassin,
     _poolFakeYourOwnDeath,
     _poolFamiliarGround,
+    _poolFatalFrenzy,
     _poolFateUnraveler,
     _poolFeastOrFamine,
     _poolFeasterOfFools,
@@ -1092,9 +1105,11 @@ const shard: CardShard = {
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
+    _poolIsaoEnlightenedBushi,
     _poolIsolationCell,
     _poolIzzetChemister,
     _poolJacesSanctum,
+    _poolJaggedPoppet,
     _poolJasmineBoreal,
     _poolJeskaiRevelation,
     _poolJeskaiRunemark,
@@ -1139,12 +1154,14 @@ const shard: CardShard = {
     _poolLyseHext,
     _poolMadameNullPowerBroker,
     _poolMagmaroth,
+    _poolMagusOfTheLibrary,
     _poolMalachiteGolem,
     _poolMammothGrowth,
     _poolManalith,
     _poolMaraudingSphinx,
     _poolMarbleChalice,
     _poolMarduMonument,
+    _poolMarkOfSakiko,
     _poolMarkovBlademaster,
     _poolMarshalOfTheLost,
     _poolMartyrForTheCause,
@@ -1160,6 +1177,7 @@ const shard: CardShard = {
     _poolMightOfTheOldWays,
     _poolMindPeel,
     _poolMiresMalice,
+    _poolMirriTheCursed,
     _poolMishraEminentOne,
     _poolMoltenPrimordial,
     _poolMoonwingMoth,
@@ -1184,6 +1202,7 @@ const shard: CardShard = {
     _poolNoviceOccultist,
     _poolOakhollowVillage,
     _poolObsidianGiant,
+    _poolOcularHalo,
     _poolOkoShadowmoorScion,
     _poolOliviasMidnightAmbush,
     _poolOperaLoveSong,
@@ -1238,6 +1257,7 @@ const shard: CardShard = {
     _poolRhonassMonument,
     _poolRiftBolt,
     _poolRingOfTheLucii,
+    _poolRiptidePilferer,
     _poolRisingOfTheDay,
     _poolRitualGuardian,
     _poolRiversRebuke,

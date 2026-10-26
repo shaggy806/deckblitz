@@ -148,6 +148,7 @@ import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
 import _poolCyclopsTyrant from "../pool/cyclops-tyrant.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
+import _poolDarkheartSliver from "../pool/darkheart-sliver.js";
 import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
@@ -289,6 +290,7 @@ import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
 import _poolHealTheScars from "../pool/heal-the-scars.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
+import _poolHeliumSquirter from "../pool/helium-squirter.js";
 import _poolHellfire from "../pool/hellfire.js";
 import _poolHellsThunder from "../pool/hells-thunder.js";
 import _poolHemlockVial from "../pool/hemlock-vial.js";
@@ -403,6 +405,7 @@ import _poolMirrorMockery from "../pool/mirror-mockery.js";
 import _poolMirrorSigilSergeant from "../pool/mirror-sigil-sergeant.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
+import _poolMomirVigSimicVisionary from "../pool/momir-vig-simic-visionary.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
 import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
 import _poolMoriokReplica from "../pool/moriok-replica.js";
@@ -591,6 +594,7 @@ import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
+import _poolSpittingSliver from "../pool/spitting-sliver.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpringMind from "../pool/spring-mind.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolCutIn,
     _poolCyclopsTyrant,
     _poolDargoTheShipwrecker,
+    _poolDarkheartSliver,
     _poolDarlingOfTheMasses,
     _poolDauthiJackal,
     _poolDaxosOfMeletis,
@@ -1035,6 +1040,7 @@ const shard: CardShard = {
     _poolHealTheScars,
     _poolHeapGate,
     _poolHeartSliver,
+    _poolHeliumSquirter,
     _poolHellfire,
     _poolHellsThunder,
     _poolHemlockVial,
@@ -1149,6 +1155,7 @@ const shard: CardShard = {
     _poolMirrorSigilSergeant,
     _poolMistCloakedHerald,
     _poolMomentumRumbler,
+    _poolMomirVigSimicVisionary,
     _poolMoorlandInquisitor,
     _poolMorbiusTheLivingVampire,
     _poolMoriokReplica,
@@ -1337,6 +1344,7 @@ const shard: CardShard = {
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
     _poolSpitebellows,
+    _poolSpittingSliver,
     _poolSporeSwarm,
     _poolSpringMind,
     _poolSpringmaneCervin,

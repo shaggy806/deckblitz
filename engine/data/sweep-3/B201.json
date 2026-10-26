@@ -1,0 +1,954 @@
+{
+ "batch": "B201",
+ "status": "complete",
+ "ranks": "Dissension (DIS, 2006-05-05): whole set, its 131 cards left (second middle walk); built forecast (rule 702.57 — the forecast() helper; a hand card's once-each-turn record cleared each turn), with Piercing Rays and Spirit en-Dal from batches 110 and 195",
+ "authored": [
+  {
+   "name": "Aethermage's Touch",
+   "files": [
+    "engine/src/cards/pool/aethermages-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anthem of Rakdos",
+   "files": [
+    "engine/src/cards/pool/anthem-of-rakdos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aquastrand Spider",
+   "files": [
+    "engine/src/cards/pool/aquastrand-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurora Eidolon",
+   "files": [
+    "engine/src/cards/pool/aurora-eidolon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Avatar of Discord",
+   "files": [
+    "engine/src/cards/pool/avatar-of-discord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azorius Aethermage",
+   "files": [
+    "engine/src/cards/pool/azorius-aethermage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azorius First-Wing",
+   "files": [
+    "engine/src/cards/pool/azorius-first-wing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Azorius Guildmage",
+   "files": [
+    "engine/src/cards/pool/azorius-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azorius Herald",
+   "files": [
+    "engine/src/cards/pool/azorius-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biomantic Mastery",
+   "files": [
+    "engine/src/cards/pool/biomantic-mastery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bond of Agony",
+   "files": [
+    "engine/src/cards/pool/bond-of-agony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bronze Bombshell",
+   "files": [
+    "engine/src/cards/pool/bronze-bombshell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cackling Flames",
+   "files": [
+    "engine/src/cards/pool/cackling-flames.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carom",
+   "files": [
+    "engine/src/cards/pool/carom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Court Hussar",
+   "files": [
+    "engine/src/cards/pool/court-hussar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crime // Punishment",
+   "files": [
+    "engine/src/cards/pool/crime-punishment.ts",
+    "engine/src/cards/pool/crime.ts",
+    "engine/src/cards/pool/punishment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cytoplast Manipulator",
+   "files": [
+    "engine/src/cards/pool/cytoplast-manipulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cytoplast Root-Kin",
+   "files": [
+    "engine/src/cards/pool/cytoplast-root-kin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cytospawn Shambler",
+   "files": [
+    "engine/src/cards/pool/cytospawn-shambler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Demon's Jester",
+   "files": [
+    "engine/src/cards/pool/demons-jester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dovescape",
+   "files": [
+    "engine/src/cards/pool/dovescape.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enigma Eidolon",
+   "files": [
+    "engine/src/cards/pool/enigma-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Entropic Eidolon",
+   "files": [
+    "engine/src/cards/pool/entropic-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evolution Vat",
+   "files": [
+    "engine/src/cards/pool/evolution-vat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flame-Kin War Scout",
+   "files": [
+    "engine/src/cards/pool/flame-kin-war-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flaring Flame-Kin",
+   "files": [
+    "engine/src/cards/pool/flaring-flame-kin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freewind Equenaut",
+   "files": [
+    "engine/src/cards/pool/freewind-equenaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnat Alley Creeper",
+   "files": [
+    "engine/src/cards/pool/gnat-alley-creeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gobhobbler Rats",
+   "files": [
+    "engine/src/cards/pool/gobhobbler-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Govern the Guildless",
+   "files": [
+    "engine/src/cards/pool/govern-the-guildless.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guardian of the Guildpact",
+   "files": [
+    "engine/src/cards/pool/guardian-of-the-guildpact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haazda Exonerator",
+   "files": [
+    "engine/src/cards/pool/haazda-exonerator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haazda Shield Mate",
+   "files": [
+    "engine/src/cards/pool/haazda-shield-mate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Helium Squirter",
+   "files": [
+    "engine/src/cards/pool/helium-squirter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellhole Rats",
+   "files": [
+    "engine/src/cards/pool/hellhole-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hit // Run",
+   "files": [
+    "engine/src/cards/pool/hit-run.ts",
+    "engine/src/cards/pool/hit.ts",
+    "engine/src/cards/pool/run.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jagged Poppet",
+   "files": [
+    "engine/src/cards/pool/jagged-poppet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leafdrake Roost",
+   "files": [
+    "engine/src/cards/pool/leafdrake-roost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lyzolda, the Blood Witch",
+   "files": [
+    "engine/src/cards/pool/lyzolda-the-blood-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Might of the Nephilim",
+   "files": [
+    "engine/src/cards/pool/might-of-the-nephilim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Momir Vig, Simic Visionary",
+   "files": [
+    "engine/src/cards/pool/momir-vig-simic-visionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nettling Curse",
+   "files": [
+    "engine/src/cards/pool/nettling-curse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nihilistic Glee",
+   "files": [
+    "engine/src/cards/pool/nihilistic-glee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ocular Halo",
+   "files": [
+    "engine/src/cards/pool/ocular-halo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ogre Gatecrasher",
+   "files": [
+    "engine/src/cards/pool/ogre-gatecrasher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Omnibian",
+   "files": [
+    "engine/src/cards/pool/omnibian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overrule",
+   "files": [
+    "engine/src/cards/pool/overrule.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patagia Viper",
+   "files": [
+    "engine/src/cards/pool/patagia-viper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piercing Rays",
+   "files": [
+    "engine/src/cards/pool/piercing-rays.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plaxmanta",
+   "files": [
+    "engine/src/cards/pool/plaxmanta.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plumes of Peace",
+   "files": [
+    "engine/src/cards/pool/plumes-of-peace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pride of the Clouds",
+   "files": [
+    "engine/src/cards/pool/pride-of-the-clouds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Proclamation of Rebirth",
+   "files": [
+    "engine/src/cards/pool/proclamation-of-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Proper Burial",
+   "files": [
+    "engine/src/cards/pool/proper-burial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pure // Simple",
+   "files": [
+    "engine/src/cards/pool/pure-simple.ts",
+    "engine/src/cards/pool/pure.ts",
+    "engine/src/cards/pool/simple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ragamuffyn",
+   "files": [
+    "engine/src/cards/pool/ragamuffyn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rakdos Guildmage",
+   "files": [
+    "engine/src/cards/pool/rakdos-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos Ickspitter",
+   "files": [
+    "engine/src/cards/pool/rakdos-ickspitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos Pit Dragon",
+   "files": [
+    "engine/src/cards/pool/rakdos-pit-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandstorm Eidolon",
+   "files": [
+    "engine/src/cards/pool/sandstorm-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silkwing Scout",
+   "files": [
+    "engine/src/cards/pool/silkwing-scout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Simic Initiate",
+   "files": [
+    "engine/src/cards/pool/simic-initiate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skullmead Cauldron",
+   "files": [
+    "engine/src/cards/pool/skullmead-cauldron.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sky Hussar",
+   "files": [
+    "engine/src/cards/pool/sky-hussar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyscribing",
+   "files": [
+    "engine/src/cards/pool/skyscribing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slaughterhouse Bouncer",
+   "files": [
+    "engine/src/cards/pool/slaughterhouse-bouncer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slithering Shade",
+   "files": [
+    "engine/src/cards/pool/slithering-shade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spell Snare",
+   "files": [
+    "engine/src/cards/pool/spell-snare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spirit en-Dal",
+   "files": [
+    "engine/src/cards/pool/spirit-en-dal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sporeback Troll",
+   "files": [
+    "engine/src/cards/pool/sporeback-troll.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sprouting Phytohydra",
+   "files": [
+    "engine/src/cards/pool/sprouting-phytohydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squealing Devil",
+   "files": [
+    "engine/src/cards/pool/squealing-devil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steeling Stance",
+   "files": [
+    "engine/src/cards/pool/steeling-stance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stoic Ephemera",
+   "files": [
+    "engine/src/cards/pool/stoic-ephemera.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stomp and Howl",
+   "files": [
+    "engine/src/cards/pool/stomp-and-howl.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Supply // Demand",
+   "files": [
+    "engine/src/cards/pool/demand.ts",
+    "engine/src/cards/pool/supply-demand.ts",
+    "engine/src/cards/pool/supply.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taste for Mayhem",
+   "files": [
+    "engine/src/cards/pool/taste-for-mayhem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transguild Courier",
+   "files": [
+    "engine/src/cards/pool/transguild-courier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Twinstrike",
+   "files": [
+    "engine/src/cards/pool/twinstrike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unliving Psychopath",
+   "files": [
+    "engine/src/cards/pool/unliving-psychopath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Verdant Eidolon",
+   "files": [
+    "engine/src/cards/pool/verdant-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vigean Graftmage",
+   "files": [
+    "engine/src/cards/pool/vigean-graftmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vigean Hydropon",
+   "files": [
+    "engine/src/cards/pool/vigean-hydropon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vigean Intuition",
+   "files": [
+    "engine/src/cards/pool/vigean-intuition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Archive",
+   "files": [
+    "engine/src/cards/pool/walking-archive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wit's End",
+   "files": [
+    "engine/src/cards/pool/wits-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Writ of Passage",
+   "files": [
+    "engine/src/cards/pool/writ-of-passage.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Paladin of Prahv",
+   "needs": [
+    "effect:delayed-trigger-target-deals-damage"
+   ],
+   "why": "its forecast: \"whenever target creature deals damage this turn, you gain that much life\" — a granted trigger gains life for the creature's controller, not the activator"
+  },
+  {
+   "name": "Rakdos the Defiler",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "sacrifice half the non-Demon permanents, rounded up: the sacrifice count is a fixed number"
+  },
+  {
+   "name": "Rain of Gore",
+   "needs": [
+    "replacement:gain-life-from-spell-or-ability"
+   ],
+   "why": "a spell's or ability's life gain, not lifelink's (the ruling): the would-gain-life replacement can't tell them apart"
+  },
+  {
+   "name": "Simic Basilisk",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "destroy the damaged creature at end of combat: a delayed trigger doesn't carry the deals-damage trigger's recipient"
+  },
+  {
+   "name": "Bound // Determined",
+   "needs": [
+    "effect:other-spells-cant-be-countered-this-turn",
+    "amount:colors-of-sacrificed"
+   ],
+   "why": "Determined's one-turn 'other spells can't be countered'; Bound's 'up to X, X the sacrificed creature's colours'"
+  },
+  {
+   "name": "Trial // Error",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "Trial: creatures blocking or blocked by target creature"
+  },
+  {
+   "name": "Shielding Plax",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "can't be the target of spells or abilities your opponents control — the Aura's controller's opponents, not the creature's (the ruling)"
+  },
+  {
+   "name": "Infernal Tutor",
+   "needs": [
+    "effect:may-reveal-from-hand",
+    "filter:same-name-as-revealed-card"
+   ],
+   "why": "reveal a card from your hand, search for one with the same name"
+  },
+  {
+   "name": "Flash Foliage",
+   "needs": [
+    "effect:token-enters-blocking"
+   ],
+   "why": "a Saproling that enters blocking target attacker"
+  },
+  {
+   "name": "Fertile Imagination",
+   "needs": [
+    "decision:choose-card-type",
+    "amount:revealed-hand-cards-of-chosen-type"
+   ],
+   "why": "choose a card type, count the target opponent's revealed hand of it"
+  },
+  {
+   "name": "Weight of Spires",
+   "needs": [
+    "amount:count-for-controller-of-target"
+   ],
+   "why": "damage equal to the nonbasic lands the target creature's controller controls"
+  },
+  {
+   "name": "Kindle the Carnage",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "discard at random, damage by its mana value, repeat any number of times"
+  },
+  {
+   "name": "Brace for Impact",
+   "needs": [
+    "amount:damage-prevented-this-way"
+   ],
+   "why": "a +1/+1 counter for each 1 damage prevented this way"
+  },
+  {
+   "name": "Rise // Fall",
+   "needs": [
+    "effect:reveal-random-from-hand-discard-filtered"
+   ],
+   "why": "Fall: reveal two cards at random from target player's hand, discard each nonland one"
+  },
+  {
+   "name": "Muse Vessel",
+   "needs": [
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "play a card exiled with this artifact this turn"
+  },
+  {
+   "name": "Kill-Suit Cultist",
+   "needs": [
+    "replacement:next-damage-destroy-instead"
+   ],
+   "why": "the next time damage would be dealt to target creature this turn, destroy it instead"
+  },
+  {
+   "name": "Rix Maadi, Dungeon Palace",
+   "needs": [
+    "effect:hidden-simultaneous-choices"
+   ],
+   "why": "each player discards a card: chosen hidden, discarded at once (the ruling)"
+  },
+  {
+   "name": "Pain Magnification",
+   "needs": [
+    "trigger:deals-damage-amount-threshold"
+   ],
+   "why": "whenever an opponent is dealt 3 or more damage by a single source"
+  },
+  {
+   "name": "Demonfire",
+   "needs": [
+    "effect:damage-cant-be-prevented"
+   ],
+   "why": "the damage can't be prevented; hellbent's 'can't be countered' too"
+  },
+  {
+   "name": "Blessing of the Nephilim",
+   "needs": [
+    "static:grant-pt-per-own-colors"
+   ],
+   "why": "+1/+1 for each of the enchanted creature's colours"
+  },
+  {
+   "name": "Palliation Accord",
+   "needs": [
+    "effect:prevent-next-n-damage-to-you"
+   ],
+   "why": "remove a shield counter: prevent the next 1 damage to you — no untargeted 'you'"
+  },
+  {
+   "name": "Elemental Resonance",
+   "needs": [
+    "effect:add-mana-of-attached-mana-cost"
+   ],
+   "why": "add mana equal to the enchanted permanent's mana cost"
+  },
+  {
+   "name": "Hide // Seek",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "Seek searches target opponent's library and exiles the card"
+  },
+  {
+   "name": "Ignorant Bliss",
+   "needs": [
+    "effect:exile-hands-face-down-return-later"
+   ],
+   "why": "exile your hand face down, return it at the next end step"
+  },
+  {
+   "name": "Odds // Ends",
+   "needs": [
+    "mechanic:coin-flip-heads-tails"
+   ],
+   "why": "Odds: heads or tails, with no winner or loser (the ruling)"
+  },
+  {
+   "name": "Azorius Ploy",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent the combat damage target creature would deal"
+  },
+  {
+   "name": "Crypt Champion",
+   "needs": [
+    "bug:each-player-reanimate-simultaneous"
+   ],
+   "why": "each player's creature returns at once; the engine returns them one after another"
+  },
+  {
+   "name": "Windreaver",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "switch its power and toughness"
+  },
+  {
+   "name": "Street Savvy",
+   "needs": [
+    "static:enchanted-blocks-despite-landwalk"
+   ],
+   "why": "only the enchanted creature may block landwalkers; the built one works for every blocker"
+  },
+  {
+   "name": "Dread Slag",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "-4/-4 for each card in your hand"
+  },
+  {
+   "name": "Valor Made Real",
+   "needs": [
+    "effect:block-any-number-this-turn"
+   ],
+   "why": "target creature can block any number of creatures this turn"
+  },
+  {
+   "name": "Isperia the Inscrutable",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a card"
+  },
+  {
+   "name": "Brain Pry",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a nonland card"
+  },
+  {
+   "name": "Simic Guildmage",
+   "needs": [
+    "effect:targets-same-controller",
+    "effect:move-auras-to-chosen-permanent"
+   ],
+   "why": "two creatures the same player controls; move an Aura to another permanent"
+  },
+  {
+   "name": "Novijen Sages",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "remove two +1/+1 counters from among creatures you control"
+  },
+  {
+   "name": "Nightcreep",
+   "needs": [
+    "effect:set-color-all",
+    "effect:set-land-types-all"
+   ],
+   "why": "all creatures become black and all lands become Swamps until end of turn"
+  },
+  {
+   "name": "Rakdos Riteknife",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "sacrifice a permanent for each blood counter"
+  },
+  {
+   "name": "Drekavac",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "sacrifice it unless you discard a noncreature card"
+  },
+  {
+   "name": "Stormscale Anarch",
+   "needs": [
+    "effect:cost-discarded-card-ref"
+   ],
+   "why": "double damage if the card discarded for the cost was multicolored"
+  },
+  {
+   "name": "Experiment Kraj",
+   "needs": [
+    "static:gain-activated-abilities-of-others"
+   ],
+   "why": "has the activated abilities of each other creature with a +1/+1 counter"
+  },
+  {
+   "name": "Psychic Possession",
+   "needs": [
+    "static:skip-draw-step",
+    "trigger:enchanted-player-draws"
+   ],
+   "why": "skip your draw step; draw whenever the enchanted opponent does"
+  },
+  {
+   "name": "Prahv, Spires of Order",
+   "needs": [
+    "replacement:prevent-all-damage-from-chosen-source-this-turn"
+   ],
+   "why": "prevent all damage a source of your choice would deal this turn"
+  },
+  {
+   "name": "Swift Silence",
+   "needs": [
+    "effect:counter-all-spells"
+   ],
+   "why": "counter all other spells; draw for each countered"
+  },
+  {
+   "name": "Cytoshape",
+   "needs": [
+    "effect:become-copy-of-chosen-permanent"
+   ],
+   "why": "the nonlegendary creature to copy is chosen as it resolves, not targeted"
+  },
+  {
+   "name": "Rakdos Augermage",
+   "needs": [
+    "effect:opponent-chooses-cards-from-hand"
+   ],
+   "why": "discard a card of target opponent's choice from your revealed hand"
+  },
+  {
+   "name": "Research // Development",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "Research: cards you own from outside the game"
+  }
+ ]
+}

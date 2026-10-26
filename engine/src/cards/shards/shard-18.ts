@@ -118,6 +118,7 @@ import _poolCorrupt from "../pool/corrupt.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
+import _poolCrimePunishment from "../pool/crime-punishment.js";
 import _poolCrimsonRoc from "../pool/crimson-roc.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
@@ -179,6 +180,7 @@ import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
 import _poolEndlessCockroaches from "../pool/endless-cockroaches.js";
 import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
+import _poolEnshrinedMemories from "../pool/enshrined-memories.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
 import _poolEscapeProtocol from "../pool/escape-protocol.js";
@@ -213,6 +215,7 @@ import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFoundryHornet from "../pool/foundry-hornet.js";
 import _poolFreneticEfreet from "../pool/frenetic-efreet.js";
+import _poolFreneticSliver from "../pool/frenetic-sliver.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
@@ -298,6 +301,7 @@ import _poolIzzetCharm from "../pool/izzet-charm.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
+import _poolJeditOjanenOfEfrava from "../pool/jedit-ojanen-of-efrava.js";
 import _poolJhoiraAgelessInnovator from "../pool/jhoira-ageless-innovator.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJiwariTheEarthAflame from "../pool/jiwari-the-earth-aflame.js";
@@ -308,6 +312,7 @@ import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
+import _poolKeldonMarauders from "../pool/keldon-marauders.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKirdChieftain from "../pool/kird-chieftain.js";
 import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
@@ -332,6 +337,7 @@ import _poolLegionGuildmage from "../pool/legion-guildmage.js";
 import _poolLegionLeadership from "../pool/legion-leadership.js";
 import _poolLevelUp from "../pool/level-up.js";
 import _poolLevitation from "../pool/levitation.js";
+import _poolLifeAndLimb from "../pool/life-and-limb.js";
 import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
@@ -492,6 +498,7 @@ import _poolRunicShot from "../pool/runic-shot.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSadisticGlee from "../pool/sadistic-glee.js";
 import _poolSadisticObsession from "../pool/sadistic-obsession.js";
+import _poolSakikoMotherOfSummer from "../pool/sakiko-mother-of-summer.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
 import _poolSamiteHerbalist from "../pool/samite-herbalist.js";
@@ -588,6 +595,7 @@ import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
+import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTemporalMastery from "../pool/temporal-mastery.js";
@@ -854,6 +862,7 @@ const shard: CardShard = {
     _poolCosmiumKiln,
     _poolCourserOfKruphix,
     _poolCrashingFootfalls,
+    _poolCrimePunishment,
     _poolCrimsonRoc,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
@@ -915,6 +924,7 @@ const shard: CardShard = {
     _poolEndlessCockroaches,
     _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
+    _poolEnshrinedMemories,
     _poolEntishRestoration,
     _poolEntryDenied,
     _poolEscapeProtocol,
@@ -949,6 +959,7 @@ const shard: CardShard = {
     _poolFoulFamiliar,
     _poolFoundryHornet,
     _poolFreneticEfreet,
+    _poolFreneticSliver,
     _poolFromFatherToSon,
     _poolFungalPlots,
     _poolFurnaceSkullbomb,
@@ -1034,6 +1045,7 @@ const shard: CardShard = {
     _poolJagwaspSwarm,
     _poolJamieMccrimmon,
     _poolJeditOjanenMercenary,
+    _poolJeditOjanenOfEfrava,
     _poolJhoiraAgelessInnovator,
     _poolJiangYangguNeverAlone,
     _poolJiwariTheEarthAflame,
@@ -1044,6 +1056,7 @@ const shard: CardShard = {
     _poolKayaIntangibleSlayer,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
+    _poolKeldonMarauders,
     _poolKinsbaileCavalier,
     _poolKirdChieftain,
     _poolKolaghanWarmonger,
@@ -1068,6 +1081,7 @@ const shard: CardShard = {
     _poolLegionLeadership,
     _poolLevelUp,
     _poolLevitation,
+    _poolLifeAndLimb,
     _poolLightbringer,
     _poolLightlessEvangel,
     _poolLightningGreaves,
@@ -1228,6 +1242,7 @@ const shard: CardShard = {
     _poolRuthlessWaterbender,
     _poolSadisticGlee,
     _poolSadisticObsession,
+    _poolSakikoMotherOfSummer,
     _poolSalivatingGremlins,
     _poolSaltMarsh,
     _poolSamiteHerbalist,
@@ -1324,6 +1339,7 @@ const shard: CardShard = {
     _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
     _poolTarnationVista,
+    _poolTeardropKami,
     _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTemporalMastery,

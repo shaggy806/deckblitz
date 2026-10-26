@@ -195,6 +195,7 @@ import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
+import _poolEvolutionVat from "../pool/evolution-vat.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
@@ -214,6 +215,7 @@ import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
 import _poolFervor from "../pool/fervor.js";
 import _poolFestercreep from "../pool/festercreep.js";
 import _poolFetchQuest from "../pool/fetch-quest.js";
+import _poolFiddleheadKami from "../pool/fiddlehead-kami.js";
 import _poolFieryConclusion from "../pool/fiery-conclusion.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
@@ -447,6 +449,7 @@ import _poolOriginOfThor from "../pool/origin-of-thor.js";
 import _poolOstracize from "../pool/ostracize.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
+import _poolOverrule from "../pool/overrule.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
@@ -558,6 +561,7 @@ import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSilklashSpider from "../pool/silklash-spider.js";
 import _poolSinisterConcoction from "../pool/sinister-concoction.js";
 import _poolSkaabRuinator from "../pool/skaab-ruinator.js";
+import _poolSkirkShaman from "../pool/skirk-shaman.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
@@ -566,6 +570,7 @@ import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
+import _poolSophicCentaur from "../pool/sophic-centaur.js";
 import _poolSoulBarrier from "../pool/soul-barrier.js";
 import _poolSoulOfTheHarvest from "../pool/soul-of-the-harvest.js";
 import _poolSoulTransfer from "../pool/soul-transfer.js";
@@ -640,6 +645,7 @@ import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
+import _poolToriiWatchward from "../pool/torii-watchward.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
@@ -943,6 +949,7 @@ const shard: CardShard = {
     _poolEpharasWarden,
     _poolEtherealAbsolution,
     _poolEtherealAmbush,
+    _poolEvolutionVat,
     _poolExhibitionMagician,
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,
@@ -962,6 +969,7 @@ const shard: CardShard = {
     _poolFervor,
     _poolFestercreep,
     _poolFetchQuest,
+    _poolFiddleheadKami,
     _poolFieryConclusion,
     _poolFireNationAttacks,
     _poolFixWhatsBroken,
@@ -1195,6 +1203,7 @@ const shard: CardShard = {
     _poolOstracize,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
+    _poolOverrule,
     _poolPaladinOfPredation,
     _poolPalianoTheHighCity,
     _poolPassagewaySeer,
@@ -1306,6 +1315,7 @@ const shard: CardShard = {
     _poolSilklashSpider,
     _poolSinisterConcoction,
     _poolSkaabRuinator,
+    _poolSkirkShaman,
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,
@@ -1314,6 +1324,7 @@ const shard: CardShard = {
     _poolSoaringSandwing,
     _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
+    _poolSophicCentaur,
     _poolSoulBarrier,
     _poolSoulOfTheHarvest,
     _poolSoulTransfer,
@@ -1388,6 +1399,7 @@ const shard: CardShard = {
     _poolTitaniaNaturesForce,
     _poolTolarianEntrancer,
     _poolTombRobber,
+    _poolToriiWatchward,
     _poolTragicLesson,
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,

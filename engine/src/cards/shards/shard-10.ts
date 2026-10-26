@@ -85,6 +85,8 @@ import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
 import _poolBondsOfFaith from "../pool/bonds-of-faith.js";
 import _poolBoneHarvest from "../pool/bone-harvest.js";
 import _poolBonecladNecromancer from "../pool/boneclad-necromancer.js";
+import _poolBoomBust from "../pool/boom-bust.js";
+import _poolBoom from "../pool/boom.js";
 import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
 import _poolBorosGuildgate from "../pool/boros-guildgate.js";
@@ -131,6 +133,7 @@ import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
 import _poolCorrosiveMentor from "../pool/corrosive-mentor.js";
 import _poolCouncilsJudgment from "../pool/councils-judgment.js";
 import _poolCountervailingWinds from "../pool/countervailing-winds.js";
+import _poolCourtHussar from "../pool/court-hussar.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
@@ -148,6 +151,7 @@ import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
+import _poolDashHopes from "../pool/dash-hopes.js";
 import _poolDauntlessRiverMarshal from "../pool/dauntless-river-marshal.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
@@ -220,6 +224,7 @@ import _poolFestivalOfEmbers from "../pool/festival-of-embers.js";
 import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
+import _poolFirstVolley from "../pool/first-volley.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFlamerushRider from "../pool/flamerush-rider.js";
 import _poolFlashfires from "../pool/flashfires.js";
@@ -289,6 +294,7 @@ import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
 import _poolHex from "../pool/hex.js";
 import _poolHinterlandLogger from "../pool/hinterland-logger.js";
+import _poolHit from "../pool/hit.js";
 import _poolHixusPrisonWarden from "../pool/hixus-prison-warden.js";
 import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
@@ -422,6 +428,7 @@ import _poolOashraCultivator from "../pool/oashra-cultivator.js";
 import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
 import _poolOldRutstein from "../pool/old-rutstein.js";
+import _poolOmnibian from "../pool/omnibian.js";
 import _poolOmnispellAdept from "../pool/omnispell-adept.js";
 import _poolOnduChampion from "../pool/ondu-champion.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
@@ -493,6 +500,7 @@ import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
+import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
 import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRootSpider from "../pool/root-spider.js";
@@ -500,6 +508,7 @@ import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
 import _poolRunAshore from "../pool/run-ashore.js";
+import _poolRun from "../pool/run.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
 import _poolRustElemental from "../pool/rust-elemental.js";
 import _poolRustShieldRampager from "../pool/rust-shield-rampager.js";
@@ -588,6 +597,7 @@ import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
+import _poolSproutingPhytohydra from "../pool/sprouting-phytohydra.js";
 import _poolSpyglassSiren from "../pool/spyglass-siren.js";
 import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
@@ -679,6 +689,7 @@ import _poolVernalBloom from "../pool/vernal-bloom.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
 import _poolViashinoHeretic from "../pool/viashino-heretic.js";
+import _poolVigeanHydropon from "../pool/vigean-hydropon.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
 import _poolVileRedeemer from "../pool/vile-redeemer.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
@@ -730,6 +741,7 @@ import _poolZealousConscripts from "../pool/zealous-conscripts.js";
 import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
+import _tokensBirdTokenWhiteBlue from "../tokens/bird-token-white-blue.js";
 import _tokensBlueThopterToken from "../tokens/blue-thopter-token.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
@@ -828,6 +840,8 @@ const shard: CardShard = {
     _poolBondsOfFaith,
     _poolBoneHarvest,
     _poolBonecladNecromancer,
+    _poolBoomBust,
+    _poolBoom,
     _poolBoompile,
     _poolBorealDruid,
     _poolBorosGuildgate,
@@ -874,6 +888,7 @@ const shard: CardShard = {
     _poolCorrosiveMentor,
     _poolCouncilsJudgment,
     _poolCountervailingWinds,
+    _poolCourtHussar,
     _poolCovertTechnician,
     _poolCrawlingChorus,
     _poolCrescendoOfWar,
@@ -891,6 +906,7 @@ const shard: CardShard = {
     _poolDanithaSwordOfHope,
     _poolDarkness,
     _poolDarksteelSplicer,
+    _poolDashHopes,
     _poolDauntlessRiverMarshal,
     _poolDavrielsShadowfugue,
     _poolDaybreakCharger,
@@ -963,6 +979,7 @@ const shard: CardShard = {
     _poolFieldTrip,
     _poolFinCladeFugitives,
     _poolFinalReward,
+    _poolFirstVolley,
     _poolFixerTechnoTerror,
     _poolFlamerushRider,
     _poolFlashfires,
@@ -1032,6 +1049,7 @@ const shard: CardShard = {
     _poolHeroicIntervention,
     _poolHex,
     _poolHinterlandLogger,
+    _poolHit,
     _poolHixusPrisonWarden,
     _poolHobbitsSting,
     _poolHonoredKnightCaptain,
@@ -1165,6 +1183,7 @@ const shard: CardShard = {
     _poolOdricsOutrider,
     _poolOgreBattledriver,
     _poolOldRutstein,
+    _poolOmnibian,
     _poolOmnispellAdept,
     _poolOnduChampion,
     _poolOnduGiant,
@@ -1236,6 +1255,7 @@ const shard: CardShard = {
     _poolRobTheArchives,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
+    _poolRoninCavekeeper,
     _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
     _poolRootSpider,
@@ -1243,6 +1263,7 @@ const shard: CardShard = {
     _poolRottenheartGhoul,
     _poolRumblingSentry,
     _poolRunAshore,
+    _poolRun,
     _poolRushwoodDryad,
     _poolRustElemental,
     _poolRustShieldRampager,
@@ -1331,6 +1352,7 @@ const shard: CardShard = {
     _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
+    _poolSproutingPhytohydra,
     _poolSpyglassSiren,
     _poolSquirrelSovereign,
     _poolStadiumTidalmage,
@@ -1422,6 +1444,7 @@ const shard: CardShard = {
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
     _poolViashinoHeretic,
+    _poolVigeanHydropon,
     _poolVigorsporeWurm,
     _poolVileRedeemer,
     _poolVilisBrokerOfBlood,
@@ -1475,6 +1498,7 @@ const shard: CardShard = {
   tokens: [
     _tokens11BlueBirdToken,
     _tokensBeastTokenGarrukVeiledButcher,
+    _tokensBirdTokenWhiteBlue,
     _tokensBlueThopterToken,
     _tokensDinosaurToken33,
     _tokensDragonToken66,

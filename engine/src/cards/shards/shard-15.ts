@@ -64,6 +64,7 @@ import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBreakTies from "../pool/break-ties.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
+import _poolBronzeBombshell from "../pool/bronze-bombshell.js";
 import _poolByForce from "../pool/by-force.js";
 import _poolCalamitousTide from "../pool/calamitous-tide.js";
 import _poolCalamitysWake from "../pool/calamitys-wake.js";
@@ -163,6 +164,7 @@ import _poolDryadOfTheIlysianGrove from "../pool/dryad-of-the-ilysian-grove.js";
 import _poolDundoolinWeaver from "../pool/dundoolin-weaver.js";
 import _poolDuneDrifter from "../pool/dune-drifter.js";
 import _poolDuskriderPeregrine from "../pool/duskrider-peregrine.js";
+import _poolDustCorona from "../pool/dust-corona.js";
 import _poolDwarvenMiner from "../pool/dwarven-miner.js";
 import _poolDwarvenNomad from "../pool/dwarven-nomad.js";
 import _poolDynamicSoar from "../pool/dynamic-soar.js";
@@ -444,6 +446,7 @@ import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
 import _poolOverchargedAmalgam from "../pool/overcharged-amalgam.js";
 import _poolPackAPunch from "../pool/pack-a-punch.js";
+import _poolPallidMycoderm from "../pool/pallid-mycoderm.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPatagiaTiger from "../pool/patagia-tiger.js";
@@ -470,6 +473,7 @@ import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
+import _poolPureSimple from "../pool/pure-simple.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
@@ -527,6 +531,7 @@ import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
+import _poolSilverstormSamurai from "../pool/silverstorm-samurai.js";
 import _poolSimianBrawler from "../pool/simian-brawler.js";
 import _poolSirenSongLyre from "../pool/siren-song-lyre.js";
 import _poolSizzlingChangeling from "../pool/sizzling-changeling.js";
@@ -553,6 +558,7 @@ import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
+import _poolSpiritEnDal from "../pool/spirit-en-dal.js";
 import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
@@ -670,6 +676,7 @@ import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWidespreadThieving from "../pool/widespread-thieving.js";
 import _poolWingedPortent from "../pool/winged-portent.js";
+import _poolWistfulThinking from "../pool/wistful-thinking.js";
 import _poolWitchsMist from "../pool/witchs-mist.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
@@ -770,6 +777,7 @@ const shard: CardShard = {
     _poolBrainWeevil,
     _poolBreakTies,
     _poolBrenardGingerSculptor,
+    _poolBronzeBombshell,
     _poolByForce,
     _poolCalamitousTide,
     _poolCalamitysWake,
@@ -869,6 +877,7 @@ const shard: CardShard = {
     _poolDundoolinWeaver,
     _poolDuneDrifter,
     _poolDuskriderPeregrine,
+    _poolDustCorona,
     _poolDwarvenMiner,
     _poolDwarvenNomad,
     _poolDynamicSoar,
@@ -1150,6 +1159,7 @@ const shard: CardShard = {
     _poolOstrichHorse,
     _poolOverchargedAmalgam,
     _poolPackAPunch,
+    _poolPallidMycoderm,
     _poolPantherRobot,
     _poolPashalikMons,
     _poolPatagiaTiger,
@@ -1176,6 +1186,7 @@ const shard: CardShard = {
     _poolPrizefight,
     _poolPropheticFlamespeaker,
     _poolPsionicSnoop,
+    _poolPureSimple,
     _poolPyreticRebirth,
     _poolPyrotechnicPerformer,
     _poolQuakefootCyclops,
@@ -1233,6 +1244,7 @@ const shard: CardShard = {
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,
     _poolSilvercoatLion,
+    _poolSilverstormSamurai,
     _poolSimianBrawler,
     _poolSirenSongLyre,
     _poolSizzlingChangeling,
@@ -1259,6 +1271,7 @@ const shard: CardShard = {
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
     _poolSpiresideInfiltrator,
+    _poolSpiritEnDal,
     _poolSpitefulBlow,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
@@ -1376,6 +1389,7 @@ const shard: CardShard = {
     _poolWebOfLifeAndDestiny,
     _poolWidespreadThieving,
     _poolWingedPortent,
+    _poolWistfulThinking,
     _poolWitchsMist,
     _poolWorthyKnight,
     _poolWurmcoilEngine,

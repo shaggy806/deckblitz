@@ -45,6 +45,7 @@ import _poolAuramancer from "../pool/auramancer.js";
 import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
 import _poolAvenArcher from "../pool/aven-archer.js";
 import _poolAvenRedeemer from "../pool/aven-redeemer.js";
+import _poolAvenRiftwatcher from "../pool/aven-riftwatcher.js";
 import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
@@ -110,6 +111,7 @@ import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
+import _poolChronozoa from "../pool/chronozoa.js";
 import _poolCinderCrawler from "../pool/cinder-crawler.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolClotSliver from "../pool/clot-sliver.js";
@@ -138,6 +140,7 @@ import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
+import _poolDeadwoodTreefolk from "../pool/deadwood-treefolk.js";
 import _poolDeathpactAngel from "../pool/deathpact-angel.js";
 import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
@@ -224,6 +227,7 @@ import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
 import _poolFlamebornHellion from "../pool/flameborn-hellion.js";
 import _poolFlameholdGrappler from "../pool/flamehold-grappler.js";
 import _poolFlamesOfTheFirebrand from "../pool/flames-of-the-firebrand.js";
+import _poolFlaringFlameKin from "../pool/flaring-flame-kin.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
@@ -252,6 +256,7 @@ import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
 import _poolGhituSlinger from "../pool/ghitu-slinger.js";
+import _poolGhostTactician from "../pool/ghost-tactician.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGiantLadybug from "../pool/giant-ladybug.js";
 import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
@@ -374,6 +379,7 @@ import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
+import _poolLyzoldaTheBloodWitch from "../pool/lyzolda-the-blood-witch.js";
 import _poolMaalfeldTwins from "../pool/maalfeld-twins.js";
 import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
 import _poolMachineManModelX51 from "../pool/machine-man-model-x-51.js";
@@ -413,6 +419,7 @@ import _poolMolderhulk from "../pool/molderhulk.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
+import _poolMuckDrubb from "../pool/muck-drubb.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
@@ -459,6 +466,7 @@ import _poolParadoxZone from "../pool/paradox-zone.js";
 import _poolParagonOfOpenGraves from "../pool/paragon-of-open-graves.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
 import _poolPartTheWaterveil from "../pool/part-the-waterveil.js";
+import _poolPatagiaViper from "../pool/patagia-viper.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
@@ -836,6 +844,7 @@ const shard: CardShard = {
     _poolAutarchMammoth,
     _poolAvenArcher,
     _poolAvenRedeemer,
+    _poolAvenRiftwatcher,
     _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,
@@ -901,6 +910,7 @@ const shard: CardShard = {
     _poolChargingWarBoar,
     _poolChildOfNight,
     _poolChillingGrasp,
+    _poolChronozoa,
     _poolCinderCrawler,
     _poolCityPigeon,
     _poolClotSliver,
@@ -929,6 +939,7 @@ const shard: CardShard = {
     _poolDawnglareInvoker,
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
+    _poolDeadwoodTreefolk,
     _poolDeathpactAngel,
     _poolDeepcavernImp,
     _poolDeepmuckDesperado,
@@ -1015,6 +1026,7 @@ const shard: CardShard = {
     _poolFlamebornHellion,
     _poolFlameholdGrappler,
     _poolFlamesOfTheFirebrand,
+    _poolFlaringFlameKin,
     _poolFledglingGriffin,
     _poolFleetingImage,
     _poolFleetingMemories,
@@ -1043,6 +1055,7 @@ const shard: CardShard = {
     _poolGeomancersGambit,
     _poolGeosurge,
     _poolGhituSlinger,
+    _poolGhostTactician,
     _poolGhostlyPilferer,
     _poolGiantLadybug,
     _poolGiantManGargantuanGenius,
@@ -1165,6 +1178,7 @@ const shard: CardShard = {
     _poolLoxodonLineBreaker,
     _poolLunarRejection,
     _poolLynx,
+    _poolLyzoldaTheBloodWitch,
     _poolMaalfeldTwins,
     _poolMachineGodsEffigy,
     _poolMachineManModelX51,
@@ -1204,6 +1218,7 @@ const shard: CardShard = {
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
+    _poolMuckDrubb,
     _poolMundasVanguard,
     _poolMusesEncouragement,
     _poolMyrSire,
@@ -1250,6 +1265,7 @@ const shard: CardShard = {
     _poolParagonOfOpenGraves,
     _poolPardicCollaborator,
     _poolPartTheWaterveil,
+    _poolPatagiaViper,
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,

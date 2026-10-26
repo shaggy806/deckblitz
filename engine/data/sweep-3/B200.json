@@ -1,0 +1,835 @@
+{
+ "batch": "B200",
+ "status": "complete",
+ "ranks": "Planar Chaos (PLC, 2007-02-02): whole set, its 116 cards left (the middle walk); no engine change",
+ "authored": [
+  {
+   "name": "Aven Riftwatcher",
+   "files": [
+    "engine/src/cards/pool/aven-riftwatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battering Sliver",
+   "files": [
+    "engine/src/cards/pool/battering-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blightspeaker",
+   "files": [
+    "engine/src/cards/pool/blightspeaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boom // Bust",
+   "files": [
+    "engine/src/cards/pool/boom-bust.ts",
+    "engine/src/cards/pool/boom.ts",
+    "engine/src/cards/pool/bust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brain Gorgers",
+   "files": [
+    "engine/src/cards/pool/brain-gorgers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calciderm",
+   "files": [
+    "engine/src/cards/pool/calciderm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chronozoa",
+   "files": [
+    "engine/src/cards/pool/chronozoa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Citanul Woodreaders",
+   "files": [
+    "engine/src/cards/pool/citanul-woodreaders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cradle to Grave",
+   "files": [
+    "engine/src/cards/pool/cradle-to-grave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crovax, Ascendant Hero",
+   "files": [
+    "engine/src/cards/pool/crovax-ascendant-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darkheart Sliver",
+   "files": [
+    "engine/src/cards/pool/darkheart-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dash Hopes",
+   "files": [
+    "engine/src/cards/pool/dash-hopes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dead // Gone",
+   "files": [
+    "engine/src/cards/pool/dead-gone.ts",
+    "engine/src/cards/pool/dead.ts",
+    "engine/src/cards/pool/gone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadly Grub",
+   "files": [
+    "engine/src/cards/pool/deadly-grub.ts",
+    "engine/src/cards/tokens/insect-token-green-6-1-shroud.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadwood Treefolk",
+   "files": [
+    "engine/src/cards/pool/deadwood-treefolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dormant Sliver",
+   "files": [
+    "engine/src/cards/pool/dormant-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dust Corona",
+   "files": [
+    "engine/src/cards/pool/dust-corona.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dust Elemental",
+   "files": [
+    "engine/src/cards/pool/dust-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fatal Frenzy",
+   "files": [
+    "engine/src/cards/pool/fatal-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frenetic Sliver",
+   "files": [
+    "engine/src/cards/pool/frenetic-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frozen Aether",
+   "files": [
+    "engine/src/cards/pool/frozen-aether.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gaea's Anthem",
+   "files": [
+    "engine/src/cards/pool/gaeas-anthem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghost Tactician",
+   "files": [
+    "engine/src/cards/pool/ghost-tactician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gossamer Phantasm",
+   "files": [
+    "engine/src/cards/pool/gossamer-phantasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hammerheim Deadeye",
+   "files": [
+    "engine/src/cards/pool/hammerheim-deadeye.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Healing Leaves",
+   "files": [
+    "engine/src/cards/pool/healing-leaves.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hedge Troll",
+   "files": [
+    "engine/src/cards/pool/hedge-troll.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Intet, the Dreamer",
+   "files": [
+    "engine/src/cards/pool/intet-the-dreamer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jedit Ojanen of Efrava",
+   "files": [
+    "engine/src/cards/pool/jedit-ojanen-of-efrava.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kavu Predator",
+   "files": [
+    "engine/src/cards/pool/kavu-predator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keldon Marauders",
+   "files": [
+    "engine/src/cards/pool/keldon-marauders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavacore Elemental",
+   "files": [
+    "engine/src/cards/pool/lavacore-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life and Limb",
+   "files": [
+    "engine/src/cards/pool/life-and-limb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magus of the Library",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-library.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magus of the Tabernacle",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-tabernacle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mantle of Leadership",
+   "files": [
+    "engine/src/cards/pool/mantle-of-leadership.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Melancholy",
+   "files": [
+    "engine/src/cards/pool/melancholy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mirri the Cursed",
+   "files": [
+    "engine/src/cards/pool/mirri-the-cursed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muck Drubb",
+   "files": [
+    "engine/src/cards/pool/muck-drubb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mycologist",
+   "files": [
+    "engine/src/cards/pool/mycologist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Numot, the Devastator",
+   "files": [
+    "engine/src/cards/pool/numot-the-devastator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oros, the Avenger",
+   "files": [
+    "engine/src/cards/pool/oros-the-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ovinize",
+   "files": [
+    "engine/src/cards/pool/ovinize.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pallid Mycoderm",
+   "files": [
+    "engine/src/cards/pool/pallid-mycoderm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantasmagorian",
+   "files": [
+    "engine/src/cards/pool/phantasmagorian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poultice Sliver",
+   "files": [
+    "engine/src/cards/pool/poultice-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pouncing Wurm",
+   "files": [
+    "engine/src/cards/pool/pouncing-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reality Acid",
+   "files": [
+    "engine/src/cards/pool/reality-acid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Wurm",
+   "files": [
+    "engine/src/cards/pool/reckless-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reflex Sliver",
+   "files": [
+    "engine/src/cards/pool/reflex-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ridged Kusite",
+   "files": [
+    "engine/src/cards/pool/ridged-kusite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Riptide Pilferer",
+   "files": [
+    "engine/src/cards/pool/riptide-pilferer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rough // Tumble",
+   "files": [
+    "engine/src/cards/pool/rough-tumble.ts",
+    "engine/src/cards/pool/rough.ts",
+    "engine/src/cards/pool/tumble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saltblast",
+   "files": [
+    "engine/src/cards/pool/saltblast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Serendib Sorcerer",
+   "files": [
+    "engine/src/cards/pool/serendib-sorcerer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Serra's Boon",
+   "files": [
+    "engine/src/cards/pool/serras-boon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shaper Parasite",
+   "files": [
+    "engine/src/cards/pool/shaper-parasite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shivan Wumpus",
+   "files": [
+    "engine/src/cards/pool/shivan-wumpus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skirk Shaman",
+   "files": [
+    "engine/src/cards/pool/skirk-shaman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sophic Centaur",
+   "files": [
+    "engine/src/cards/pool/sophic-centaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spitting Sliver",
+   "files": [
+    "engine/src/cards/pool/spitting-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stingscourger",
+   "files": [
+    "engine/src/cards/pool/stingscourger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stonecloaker",
+   "files": [
+    "engine/src/cards/pool/stonecloaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormfront Riders",
+   "files": [
+    "engine/src/cards/pool/stormfront-riders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sulfur Elemental",
+   "files": [
+    "engine/src/cards/pool/sulfur-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Synchronous Sliver",
+   "files": [
+    "engine/src/cards/pool/synchronous-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teneb, the Harvester",
+   "files": [
+    "engine/src/cards/pool/teneb-the-harvester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uktabi Drake",
+   "files": [
+    "engine/src/cards/pool/uktabi-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Utopia Vow",
+   "files": [
+    "engine/src/cards/pool/utopia-vow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vitaspore Thallid",
+   "files": [
+    "engine/src/cards/pool/vitaspore-thallid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vorosh, the Hunter",
+   "files": [
+    "engine/src/cards/pool/vorosh-the-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waning Wurm",
+   "files": [
+    "engine/src/cards/pool/waning-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wistful Thinking",
+   "files": [
+    "engine/src/cards/pool/wistful-thinking.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aeon Chronicler",
+   "needs": [
+    "mechanic:suspend-x",
+    "trigger:functions-while-suspended"
+   ],
+   "why": "Suspend X, and a trigger on a time counter removed while it's exiled."
+  },
+  {
+   "name": "Ana Battlemage",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "Two kicker costs (AUTHORING §15)."
+  },
+  {
+   "name": "Aquamorph Entity",
+   "needs": [
+    "replacement:as-enters-choose-characteristics"
+   ],
+   "why": "Choosing 5/1 or 1/5 as it enters or is turned face up."
+  },
+  {
+   "name": "Auramancer's Guise",
+   "needs": [
+    "amount:auras-attached-to-enchanted"
+   ],
+   "why": "+2/+2 for each Aura attached to the enchanted creature: the count can't refer to the Aura's host."
+  },
+  {
+   "name": "Benalish Commander",
+   "needs": [
+    "mechanic:suspend-x",
+    "trigger:functions-while-suspended"
+   ],
+   "why": "\"Suspend X—{X}{W}{W}\" (the suspend field takes a fixed n) and the \"time counter removed while exiled\" trigger."
+  },
+  {
+   "name": "Bog Serpent",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "\"Can't attack unless defending player controls an Island.\""
+  },
+  {
+   "name": "Cautery Sliver",
+   "needs": [
+    "target:player-planeswalker-or-filtered-creature"
+   ],
+   "why": "\"Prevent the next 1 damage to target Sliver creature or player\": no slot reads a filtered creature or a player."
+  },
+  {
+   "name": "Circle of Affliction",
+   "needs": [
+    "filter:chosen-color"
+   ],
+   "why": "A deals-damage trigger's filter can't read the colour chosen as it entered."
+  },
+  {
+   "name": "Detritivore",
+   "needs": [
+    "mechanic:suspend-x",
+    "trigger:functions-while-suspended"
+   ],
+   "why": "Suspend X, and a trigger on a time counter removed while it's exiled."
+  },
+  {
+   "name": "Dichotomancy",
+   "needs": [
+    "effect:search-same-name-as-chosen-permanents"
+   ],
+   "why": "One search per tapped nonland permanent, each for a card with that permanent's name."
+  },
+  {
+   "name": "Dismal Failure",
+   "needs": [
+    "effect:discard-controller-of-target"
+   ],
+   "why": "\"Its controller discards a card\" — discard has no controller-of-target recipient."
+  },
+  {
+   "name": "Dunerider Outlaw",
+   "needs": [
+    "condition:source-dealt-damage-to-opponent-this-turn"
+   ],
+   "why": "\"If this creature dealt damage to an opponent this turn.\""
+  },
+  {
+   "name": "Enslave",
+   "needs": [
+    "effect:owner-of-target-player-ref"
+   ],
+   "why": "\"Enchanted creature deals 1 damage to its owner\": damage can't be aimed at the creature's owner rather than its controller."
+  },
+  {
+   "name": "Erratic Mutation",
+   "needs": [
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "reveal-until's rest goes to the bottom in random order, not in any order the player chooses."
+  },
+  {
+   "name": "Extirpate",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "Searching a graveyard, hand and library for the target card's name."
+  },
+  {
+   "name": "Fa'adiyah Seer",
+   "needs": [
+    "effect:discard-drawn-card-if"
+   ],
+   "why": "Revealing the drawn card and discarding that card if it isn't a land."
+  },
+  {
+   "name": "Firefright Mage",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "\"Can't be blocked except by artifact and/or red creatures this turn\" exists only as a static."
+  },
+  {
+   "name": "Fungal Behemoth",
+   "needs": [
+    "trigger:functions-while-suspended"
+   ],
+   "why": "\"Whenever a time counter is removed from this card while it's exiled.\""
+  },
+  {
+   "name": "Fury Charm",
+   "needs": [
+    "target:suspended-card"
+   ],
+   "why": "The third mode targets \"permanent or suspended card\"."
+  },
+  {
+   "name": "Hunting Wilds",
+   "needs": [
+    "effect:animate-add-colors"
+   ],
+   "why": "\"Untap all Forests put onto the battlefield this way; they become 3/3 green creatures\": animate-all can't set colours."
+  },
+  {
+   "name": "Jodah's Avenger",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "\"Gains protection from red until end of turn\" (and its siblings) as a temporary grant."
+  },
+  {
+   "name": "Kor Dirge",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "Redirecting all damage a chosen source would deal this turn."
+  },
+  {
+   "name": "Magus of the Arena",
+   "needs": [
+    "decision:opponent-chooses-target"
+   ],
+   "why": "The second creature is chosen by an opponent."
+  },
+  {
+   "name": "Merfolk Thaumaturgist",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "Switching a creature's power and toughness."
+  },
+  {
+   "name": "Molten Firebird",
+   "needs": [
+    "effect:skip-next-draw-step"
+   ],
+   "why": "No \"you skip your next draw step\" effect."
+  },
+  {
+   "name": "Null Profusion",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "\"Skip your draw step.\""
+  },
+  {
+   "name": "Porphyry Nodes",
+   "needs": [
+    "filter:least-power-among-all-creatures"
+   ],
+   "why": "An untargeted \"the creature with the least power, you choose among ties\"."
+  },
+  {
+   "name": "Primal Plasma",
+   "needs": [
+    "replacement:as-enters-choose-characteristics"
+   ],
+   "why": "\"As it enters, it becomes your choice of\" sets copiable values (rule 707.2)."
+  },
+  {
+   "name": "Riftmarked Knight",
+   "needs": [
+    "trigger:functions-while-suspended"
+   ],
+   "why": "\"When the last time counter is removed from this card while it's exiled.\""
+  },
+  {
+   "name": "Roiling Horror",
+   "needs": [
+    "mechanic:suspend-x",
+    "static:cda-life-total"
+   ],
+   "why": "Suspend X, and a P/T from the difference of two life totals that can go negative."
+  },
+  {
+   "name": "Shrouded Lore",
+   "needs": [
+    "effect:repeat-process",
+    "decision:opponent-chooses-card"
+   ],
+   "why": "\"An opponent chooses a card; you may pay {B}; if you do, repeat with a different card\" can't be expressed."
+  },
+  {
+   "name": "Spellshift",
+   "needs": [
+    "bug:controller-of-target-countered-copy"
+   ],
+   "why": "\"Its controller reveals cards…\": a countered spell copy is deleted at once, so controllerOfTarget finds no player (rule 608.2h wants the spell as it last existed)."
+  },
+  {
+   "name": "Tidewalker",
+   "needs": [
+    "static:cda-counters-on-self"
+   ],
+   "why": "P/T equal to the number of time counters on it."
+  },
+  {
+   "name": "Timbermare",
+   "needs": [
+    "effect:tap-all-except-source"
+   ],
+   "why": "\"Tap all other creatures except those you control\" can't leave out the source (tap-all has no exceptSource)."
+  },
+  {
+   "name": "Timebender",
+   "needs": [
+    "target:suspended-card"
+   ],
+   "why": "No target slot reads \"permanent or suspended card\" (the morph-turned-face-up trigger's target)."
+  },
+  {
+   "name": "Timecrafting",
+   "needs": [
+    "target:suspended-card"
+   ],
+   "why": "No target slot reads \"permanent or suspended card\"."
+  },
+  {
+   "name": "Torchling",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "\"Target creature blocks this creature this turn if able.\""
+  },
+  {
+   "name": "Treacherous Urge",
+   "needs": [
+    "effect:put-from-opponent-hand-onto-battlefield"
+   ],
+   "why": "Choosing a creature card from a target opponent's revealed hand and putting it onto the battlefield under your control."
+  },
+  {
+   "name": "Veiling Oddity",
+   "needs": [
+    "trigger:functions-while-suspended",
+    "effect:cant-be-blocked-rule-this-turn"
+   ],
+   "why": "A trigger from exile, and \"creatures can't be blocked this turn\" as a rule that covers creatures entering later."
+  },
+  {
+   "name": "Venarian Glimmer",
+   "needs": [
+    "bug:x-value-propagation"
+   ],
+   "why": "discard-chosen's filter can't read the spell's X (\"mana value X or less\")."
+  },
+  {
+   "name": "Voidstone Gargoyle",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "Naming a nonland card as it enters."
+  },
+  {
+   "name": "Volcano Hellion",
+   "needs": [
+    "decision:choose-number",
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "Damage of a number chosen as it resolves, and an echo cost equal to your life total."
+  },
+  {
+   "name": "Wild Pair",
+   "needs": [
+    "condition:filter-total-power-toughness"
+   ],
+   "why": "A search for a creature card with the same total power and toughness as the creature that entered."
+  }
+ ]
+}

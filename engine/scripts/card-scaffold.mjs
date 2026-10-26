@@ -222,6 +222,7 @@ function faceSource(face, ctx) {
     impending: parsed.impending,
     freerunning: parsed.freerunning,
     kicker: parsed.kicker,
+    splice: parsed.splice,
     convoke: parsed.convoke,
     improvise: parsed.improvise,
     toxic: parsed.toxic,

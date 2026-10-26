@@ -15,6 +15,7 @@ import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
 import _poolAetherPoisoner from "../pool/aether-poisoner.js";
+import _poolAethermagesTouch from "../pool/aethermages-touch.js";
 import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
@@ -412,6 +413,7 @@ import _poolOblivion from "../pool/oblivion.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolObsidianBattleAxe from "../pool/obsidian-battle-axe.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
+import _poolOgreGatecrasher from "../pool/ogre-gatecrasher.js";
 import _poolOketrasAvenger from "../pool/oketras-avenger.js";
 import _poolOneWithTheStars from "../pool/one-with-the-stars.js";
 import _poolOrdealOfErebos from "../pool/ordeal-of-erebos.js";
@@ -433,6 +435,7 @@ import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPitilessVizier from "../pool/pitiless-vizier.js";
+import _poolPlowThroughReito from "../pool/plow-through-reito.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
@@ -480,6 +483,7 @@ import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
+import _poolRibbonsOfTheReikai from "../pool/ribbons-of-the-reikai.js";
 import _poolRibskiff from "../pool/ribskiff.js";
 import _poolRimescaleDragon from "../pool/rimescale-dragon.js";
 import _poolRimewindCryomancer from "../pool/rimewind-cryomancer.js";
@@ -747,6 +751,7 @@ const shard: CardShard = {
     _poolAeolipile,
     _poolAerieMystics,
     _poolAetherPoisoner,
+    _poolAethermagesTouch,
     _poolAhnCropCrasher,
     _poolAhriman,
     _poolAjanisAnguish,
@@ -1144,6 +1149,7 @@ const shard: CardShard = {
     _poolObsianusGolem,
     _poolObsidianBattleAxe,
     _poolOctaviaLivingThesis,
+    _poolOgreGatecrasher,
     _poolOketrasAvenger,
     _poolOneWithTheStars,
     _poolOrdealOfErebos,
@@ -1165,6 +1171,7 @@ const shard: CardShard = {
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
     _poolPitilessVizier,
+    _poolPlowThroughReito,
     _poolPoisedPractitioner,
     _poolPreordain,
     _poolPreyUpon,
@@ -1212,6 +1219,7 @@ const shard: CardShard = {
     _poolRetaliatorGriffin,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
+    _poolRibbonsOfTheReikai,
     _poolRibskiff,
     _poolRimescaleDragon,
     _poolRimewindCryomancer,

@@ -11364,6 +11364,78 @@
    "family": "effect:linked-exiled-card",
    "example": "Clone Shell: when it dies, turn the exiled card face up; if it is a creature card, put it onto the battlefield"
   },
+  "effect:put-from-opponent-hand-onto-battlefield": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "example": "Treacherous Urge: target opponent reveals their hand; you may put a creature card from it onto the battlefield under your control"
+  },
+  "effect:skip-next-draw-step": {
+   "family": "static:skip-untap-step",
+   "example": "Molten Firebird: when it dies, return it to the battlefield and you skip your next draw step"
+  },
+  "bug:controller-of-target-countered-copy": {
+   "family": "bug:zone-change-object-identity",
+   "example": "Spellshift: a countered spell copy is deleted at once, so \"its controller\" (controllerOfTarget) finds no player; rule 608.2h wants the spell as it last existed"
+  },
+  "mechanic:suspend-x": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Benalish Commander: Suspend X—{X}{W}{W}, X can't be 0 (the suspend field takes a fixed number of counters)"
+  },
+  "filter:least-power-among-all-creatures": {
+   "family": "filter:least-among-its-controller",
+   "example": "Porphyry Nodes: destroy the creature with the least power among all creatures (you choose among ties)"
+  },
+  "target:player-planeswalker-or-filtered-creature": {
+   "family": "effect:target-spec-additions",
+   "example": "Cautery Sliver: prevent the next 1 damage that would be dealt to target Sliver creature or player this turn"
+  },
+  "amount:auras-attached-to-enchanted": {
+   "family": "static:pt-per-amount",
+   "example": "Auramancer's Guise: enchanted creature gets +2/+2 for each Aura attached to it"
+  },
+  "amount:leaves-battlefield-lki-count": {
+   "family": "bug:lki-object-reads",
+   "example": "Kodama of the Center Tree: soulshift X, X the Spirits you controlled as it left, itself included"
+  },
+  "cost:alt-cost-exile-card-sets-x": {
+   "family": "cost:alt-cost-exile-from-hand",
+   "example": "Blazing Shoal: exile a red card with mana value X from your hand rather than pay this spell's mana cost"
+  },
+  "cost:splice-non-mana": {
+   "family": "keyword:splice",
+   "example": "Horobi's Whisper: Splice onto Arcane—Exile four cards from your graveyard"
+  },
+  "decision:that-player-chooses-permanent": {
+   "family": "decision:choose-permanent",
+   "example": "Hokori, Dust Drinker: at the beginning of each player's upkeep, that player untaps a land they control"
+  },
+  "effect:each-opponent-chooses-permanent": {
+   "family": "decision:choose-permanent",
+   "example": "Fell Beast's Shriek: each opponent chooses a creature they control; tap and goad the chosen creatures"
+  },
+  "effect:gain-control-to-player-with-most-cards-in-hand": {
+   "family": "effect:gain-control-to-player-with-most-life",
+   "example": "Sokenzan Renegade: if a player has more cards in hand than each other player, that player gains control of it"
+  },
+  "effect:look-at-trigger-player-hand": {
+   "family": "effect:look-at-target-player-hand",
+   "example": "Walker of Secret Ways: whenever it deals combat damage to a player, look at that player's hand"
+  },
+  "effect:shuffle-permanents-owned-into-library": {
+   "family": "effect:shuffle-hand-and-graveyard-into-library",
+   "example": "Sway of the Stars: each player shuffles their hand, graveyard and permanents they own into their library"
+  },
+  "replacement:double-damage-from-target-this-turn": {
+   "family": "replacement:damage-multiplier-this-turn",
+   "example": "Overblaze: each time target permanent would deal damage this turn, it deals double that damage instead"
+  },
+  "replacement:redirect-chosen-source-any-recipient": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "example": "Opal-Eye, Konda's Yojimbo: the next time a source of your choice would deal damage this turn, it's dealt to Opal-Eye instead"
+  },
+  "static:grant-pt-per-cards-in-hand": {
+   "family": "static:pt-per-cards-in-hand",
+   "example": "Kagemaro's Clutch: enchanted creature gets -X/-X, X the cards in your hand"
+  },
   "trigger:spell-countered": {
    "family": "trigger:counters-a-spell-trigger",
    "example": "Multani's Presence: whenever a spell you've cast is countered, draw a card"
@@ -11375,6 +11447,58 @@
   "mechanic:special-action-sacrifice-to-ignore-effect": {
    "family": "mechanic:special-action-sacrifice-to-ignore-effect",
    "example": "Damping Engine: a player may sacrifice a permanent to ignore this effect until end of turn"
+  },
+  "effect:delayed-trigger-target-deals-damage": {
+   "family": "effect:delayed-trigger-target-deals-damage",
+   "example": "Paladin of Prahv: forecast's 'whenever target creature deals damage this turn, you gain that much life' — a delayed trigger keyed to a target creature, for the activator; grant-triggered gives the creature's controller the life."
+  },
+  "replacement:gain-life-from-spell-or-ability": {
+   "family": "replacement:gain-life-becomes-loss",
+   "example": "Rain of Gore: 'if a spell or ability would cause its controller to gain life' — the would-gain-life replacement can't tell a spell's or ability's gain from lifelink (the ruling excludes lifelink)."
+  },
+  "effect:other-spells-cant-be-countered-this-turn": {
+   "family": "effect:other-spells-cant-be-countered-this-turn",
+   "example": "Bound // Determined: 'other spells you control can't be countered this turn', spells already on the stack included."
+  },
+  "amount:colors-of-sacrificed": {
+   "family": "amount:colors-of-sacrificed",
+   "example": "Bound // Determined: 'up to X cards, where X is the number of colors the sacrificed creature was'."
+  },
+  "filter:same-name-as-revealed-card": {
+   "family": "effect:may-reveal-from-hand",
+   "example": "Infernal Tutor: search for a card with the same name as the card revealed from your hand."
+  },
+  "decision:choose-card-type": {
+   "family": "decision:choose-card-name",
+   "example": "Fertile Imagination: 'choose a card type' as the spell resolves."
+  },
+  "amount:revealed-hand-cards-of-chosen-type": {
+   "family": "decision:choose-card-name",
+   "example": "Fertile Imagination: a Saproling for each card of the chosen type revealed from target opponent's hand."
+  },
+  "effect:reveal-random-from-hand-discard-filtered": {
+   "family": "effect:reveal-random-from-hand-discard-filtered",
+   "example": "Rise // Fall: Fall reveals two cards at random from target player's hand, then that player discards each nonland card revealed — two picks without repeats."
+  },
+  "replacement:next-damage-destroy-instead": {
+   "family": "replacement:next-damage-destroy-instead",
+   "example": "Kill-Suit Cultist: 'the next time damage would be dealt to target creature this turn, destroy that creature instead'."
+  },
+  "effect:add-mana-of-attached-mana-cost": {
+   "family": "effect:add-mana-of-attached-mana-cost",
+   "example": "Elemental Resonance: 'add mana equal to enchanted permanent's mana cost', a choice per hybrid symbol."
+  },
+  "static:enchanted-blocks-despite-landwalk": {
+   "family": "static:enchanted-blocks-despite-landwalk",
+   "example": "Street Savvy: the enchanted creature can block creatures with landwalk as though they didn't have it — blockableDespiteLandwalk ignores affects and works for every blocker."
+  },
+  "effect:set-color-all": {
+   "family": "effect:set-color-effect",
+   "example": "Nightcreep: until end of turn, all creatures become black — become-color takes one target."
+  },
+  "effect:set-land-types-all": {
+   "family": "effect:add-land-types-all",
+   "example": "Nightcreep: until end of turn, all lands become Swamps — setting their land types, for the lands there as it resolves."
   }
  }
 }

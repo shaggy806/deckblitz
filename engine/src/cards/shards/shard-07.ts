@@ -15,6 +15,7 @@ import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
 import _poolAinokSurvivalist from "../pool/ainok-survivalist.js";
 import _poolAjanisMantra from "../pool/ajanis-mantra.js";
+import _poolAkkiUnderling from "../pool/akki-underling.js";
 import _poolAkronLegionnaire from "../pool/akron-legionnaire.js";
 import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js";
 import _poolAlterFate from "../pool/alter-fate.js";
@@ -140,6 +141,7 @@ import _poolDawn from "../pool/dawn.js";
 import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
+import _poolDead from "../pool/dead.js";
 import _poolDeadlyAllure from "../pool/deadly-allure.js";
 import _poolDeadshot from "../pool/deadshot.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
@@ -244,6 +246,7 @@ import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGloomStalker from "../pool/gloom-stalker.js";
+import _poolGobhobblerRats from "../pool/gobhobbler-rats.js";
 import _poolGoblinGathering from "../pool/goblin-gathering.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoblinSwineRider from "../pool/goblin-swine-rider.js";
@@ -418,6 +421,7 @@ import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
+import _poolMycologist from "../pool/mycologist.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
@@ -572,6 +576,7 @@ import _poolSimicCharm from "../pool/simic-charm.js";
 import _poolSkitterOfLizards from "../pool/skitter-of-lizards.js";
 import _poolSkullStorm from "../pool/skull-storm.js";
 import _poolSkyboxFerry from "../pool/skybox-ferry.js";
+import _poolSkyscribing from "../pool/skyscribing.js";
 import _poolSkyshroudClaim from "../pool/skyshroud-claim.js";
 import _poolSkyshroudPoacher from "../pool/skyshroud-poacher.js";
 import _poolSkywhalersShot from "../pool/skywhalers-shot.js";
@@ -637,6 +642,7 @@ import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
 import _poolThallidDevourer from "../pool/thallid-devourer.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
+import _poolThatWhichWasTaken from "../pool/that-which-was-taken.js";
 import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
@@ -790,6 +796,7 @@ const shard: CardShard = {
     _poolAgonasaurRex,
     _poolAinokSurvivalist,
     _poolAjanisMantra,
+    _poolAkkiUnderling,
     _poolAkronLegionnaire,
     _poolAlpharaelDreamingAcolyte,
     _poolAlterFate,
@@ -915,6 +922,7 @@ const shard: CardShard = {
     _poolDawnbringerCharioteers,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
+    _poolDead,
     _poolDeadlyAllure,
     _poolDeadshot,
     _poolDeathcultRogue,
@@ -1019,6 +1027,7 @@ const shard: CardShard = {
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
     _poolGloomStalker,
+    _poolGobhobblerRats,
     _poolGoblinGathering,
     _poolGoblinShortcutter,
     _poolGoblinSwineRider,
@@ -1193,6 +1202,7 @@ const shard: CardShard = {
     _poolMultaniYavimayasAvatar,
     _poolMummyParamount,
     _poolMurderousRider,
+    _poolMycologist,
     _poolMysticSpeculation,
     _poolNaturalState,
     _poolNecroticHex,
@@ -1347,6 +1357,7 @@ const shard: CardShard = {
     _poolSkitterOfLizards,
     _poolSkullStorm,
     _poolSkyboxFerry,
+    _poolSkyscribing,
     _poolSkyshroudClaim,
     _poolSkyshroudPoacher,
     _poolSkywhalersShot,
@@ -1412,6 +1423,7 @@ const shard: CardShard = {
     _poolThaliasGeistcaller,
     _poolThallidDevourer,
     _poolThassasOracle,
+    _poolThatWhichWasTaken,
     _poolThawingGlaciers,
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,

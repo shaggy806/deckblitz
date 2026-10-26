@@ -62,6 +62,7 @@ import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBoilingEarth from "../pool/boiling-earth.js";
+import _poolBondOfAgony from "../pool/bond-of-agony.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
@@ -116,6 +117,7 @@ import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
+import _poolCytospawnShambler from "../pool/cytospawn-shambler.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDailyRegimen from "../pool/daily-regimen.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
@@ -139,6 +141,7 @@ import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDogWalker from "../pool/dog-walker.js";
 import _poolDominatingVampire from "../pool/dominating-vampire.js";
 import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
+import _poolDormantSliver from "../pool/dormant-sliver.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
@@ -325,6 +328,7 @@ import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
 import _poolLeadPipe from "../pool/lead-pipe.js";
+import _poolLeafdrakeRoost from "../pool/leafdrake-roost.js";
 import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
 import _poolLetsPlayAGame from "../pool/lets-play-a-game.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
@@ -339,6 +343,7 @@ import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
 import _poolLittleBear from "../pool/little-bear.js";
+import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
@@ -573,6 +578,7 @@ import _poolStructuralCollapse from "../pool/structural-collapse.js";
 import _poolStructuralDistortion from "../pool/structural-distortion.js";
 import _poolStun from "../pool/stun.js";
 import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
+import _poolSulfurElemental from "../pool/sulfur-elemental.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
@@ -651,6 +657,7 @@ import _poolUpheaval from "../pool/upheaval.js";
 import _poolUrgeToFeed from "../pool/urge-to-feed.js";
 import _poolUrzaPowerstoneProdigy from "../pool/urza-powerstone-prodigy.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
+import _poolUtopiaVow from "../pool/utopia-vow.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
@@ -714,6 +721,7 @@ import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensGoblinWarriorToken from "../tokens/goblin-warrior-token.js";
+import _tokensInsectTokenGreen61Shroud from "../tokens/insect-token-green-6-1-shroud.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensRatRogueTokenTributeToHorobi from "../tokens/rat-rogue-token-tribute-to-horobi.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
@@ -783,6 +791,7 @@ const shard: CardShard = {
     _poolBloodtracker,
     _poolBloomwielderDryads,
     _poolBoilingEarth,
+    _poolBondOfAgony,
     _poolBontusLastReckoning,
     _poolBorealGriffin,
     _poolBorosStrikeCaptain,
@@ -837,6 +846,7 @@ const shard: CardShard = {
     _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolCursedWindbreaker,
+    _poolCytospawnShambler,
     _poolDailyBugleBuilding,
     _poolDailyRegimen,
     _poolDanceOfTheTumbleweeds,
@@ -860,6 +870,7 @@ const shard: CardShard = {
     _poolDogWalker,
     _poolDominatingVampire,
     _poolDoomskarOracle,
+    _poolDormantSliver,
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
@@ -1046,6 +1057,7 @@ const shard: CardShard = {
     _poolLavaFlow,
     _poolLavaSpike,
     _poolLeadPipe,
+    _poolLeafdrakeRoost,
     _poolLeonardosTechnique,
     _poolLetsPlayAGame,
     _poolLeylineTyrant,
@@ -1060,6 +1072,7 @@ const shard: CardShard = {
     _poolLimestoneGolem,
     _poolLindenTheSteadfastQueen,
     _poolLittleBear,
+    _poolLoamDweller,
     _poolLockAndLoad,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,
@@ -1294,6 +1307,7 @@ const shard: CardShard = {
     _poolStructuralDistortion,
     _poolStun,
     _poolSubterraneanTremors,
+    _poolSulfurElemental,
     _poolSunderflock,
     _poolSungrassPrairie,
     _poolSunscapeMaster,
@@ -1372,6 +1386,7 @@ const shard: CardShard = {
     _poolUrgeToFeed,
     _poolUrzaPowerstoneProdigy,
     _poolUrzasPowerPlant,
+    _poolUtopiaVow,
     _poolValakutTheMoltenPinnacle,
     _poolVampireInterloper,
     _poolVampiricFeast,
@@ -1437,6 +1452,7 @@ const shard: CardShard = {
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
     _tokensGoblinWarriorToken,
+    _tokensInsectTokenGreen61Shroud,
     _tokensMutavaultToken,
     _tokensRatRogueTokenTributeToHorobi,
     _tokensTheTigerGod,

@@ -69,6 +69,7 @@ import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
+import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlur from "../pool/blur.js";
@@ -148,6 +149,7 @@ import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCursedLand from "../pool/cursed-land.js";
 import _poolCustodiSoulcaller from "../pool/custodi-soulcaller.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
+import _poolCytoplastManipulator from "../pool/cytoplast-manipulator.js";
 import _poolDakkonBlackblade from "../pool/dakkon-blackblade.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
@@ -195,6 +197,7 @@ import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
+import _poolEnigmaEidolon from "../pool/enigma-eidolon.js";
 import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
@@ -396,6 +399,7 @@ import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
+import _poolNightsoilKami from "../pool/nightsoil-kami.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
 import _poolNissasRevelation from "../pool/nissas-revelation.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
@@ -519,6 +523,7 @@ import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelfAssembler from "../pool/self-assembler.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolSentinelTotem from "../pool/sentinel-totem.js";
+import _poolSerrasBoon from "../pool/serras-boon.js";
 import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
 import _poolShamblingAttendants from "../pool/shambling-attendants.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
@@ -816,6 +821,7 @@ const shard: CardShard = {
     _poolBlackPoplarShaman,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
+    _poolBlessingOfLeeches,
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
     _poolBlur,
@@ -895,6 +901,7 @@ const shard: CardShard = {
     _poolCursedLand,
     _poolCustodiSoulcaller,
     _poolCylianElf,
+    _poolCytoplastManipulator,
     _poolDakkonBlackblade,
     _poolDarkLeoShredder,
     _poolDarkRitual,
@@ -942,6 +949,7 @@ const shard: CardShard = {
     _poolElvishVisionary,
     _poolEndoskeleton,
     _poolEnergyFlux,
+    _poolEnigmaEidolon,
     _poolEntrancingMelody,
     _poolEntsFury,
     _poolErode,
@@ -1143,6 +1151,7 @@ const shard: CardShard = {
     _poolNarstadScrapper,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
+    _poolNightsoilKami,
     _poolNinjaOfTheHand,
     _poolNissasRevelation,
     _poolNovaFlame,
@@ -1266,6 +1275,7 @@ const shard: CardShard = {
     _poolSelfAssembler,
     _poolSelflessPoliceCaptain,
     _poolSentinelTotem,
+    _poolSerrasBoon,
     _poolShadowedCaravel,
     _poolShamblingAttendants,
     _poolShantottoTacticianMagician,

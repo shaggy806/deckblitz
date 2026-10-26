@@ -94,6 +94,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Spellbombs — four finished by the scaffolder, the rest by five `card-author` agents and the lead;
   22 blocked (`B199.json`), "for each Equipment attached" and "can block an additional creature"
   leading with two each. Mirrodin Besieged is whole.
+- **Forecast, and Dissension whole** (batch 201, the second middle walk, 2026-10-26,
+  `mechanic:forecast`): **built** forecast (rule 702.57 — the `forecast(ability)` helper: an
+  ability of the card in its owner's hand, revealed, in their upkeep and once each turn; a
+  card's once-each-turn record in a hand is now cleared each turn), taught to the scaffolder.
+  85 of Dissension's 131 left authored — Momir Vig, Simic Visionary, Dovescape, Spell Snare,
+  Skyscribing, Supply // Demand and the other split cards that run whole, the graft creatures and
+  the Eidolons — by five `card-author` agents and the lead, with Piercing Rays and Spirit en-Dal
+  from earlier batches; 46 blocked (`B201.json`), nothing shared by more than two. Dissension is
+  whole. `forecast.test.ts`.
 - **Horsemanship, Urza's Legacy whole and Portal Three Kingdoms' 30 most-played — Urza's Legacy
   is whole** (batch 203, the oldest-first walk, 2026-10-26, `keyword:horsemanship`): **built**
   horsemanship (rule 702.31: blocked only by creatures with it, blocks anything), in block
@@ -112,10 +121,24 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   cumulative upkeeps as a hybrid cost — by five `card-author` agents and the lead; 33 blocked
   (`B196.json`), cumulative upkeep's other costs (six) and the Martyrs' reveal cost (five)
   leading. Coldsnap is whole. `ripple-recover.test.ts`.
+- **Planar Chaos, whole** (batch 200, the middle walk's second range, 2026-10-26): no feature
+  built. 73 authored — Teneb, the Harvester, Intet, the Dreamer, Life and Limb, Mirri the Cursed,
+  Numot, the Devastator, the three split cards, eight Slivers and 65 more — by five `card-author`
+  agents; 43 blocked (`B200.json`), suspend's exile-zone triggers and Suspend X leading.
 - **Future Sight, whole** (batch 195, the middle walk's second range, 2026-10-26): no feature
   built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below,
   Narcomoeba, Storm Entity, Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67
   more — and 45 blocked (`B195.json`), fateseal and targets in exile leading with two each.
+- **Splice onto Arcane, the rest of Saviors of Kamigawa — Saviors is whole — and Betrayers of
+  Kamigawa's 72 most-played left** (batch 202, the third middle walk, 2026-10-26,
+  `keyword:splice`): **built** splice with a mana cost (rule 702.47 — `CardDefinition.splice`;
+  every set of splice cards in hand is its own cast variant, `splice` on the offer and the cast,
+  the spliced cards' targets after the spell's own and their effects after its own, the cards
+  revealed and left in hand), read by the scaffolder, with Goryo's Vengeance, Desperate Ritual,
+  Everdream, Evermind, Spiritual Visit, Into the Fray and Splicer's Skill. 69 authored —
+  Toshiro Umezawa, Sakiko, Mother of Summer, Shizuko, Caller of Autumn, Yomiji, Who Bars the
+  Way, Oyobi, Who Split the Heavens, Genju of the Cedars and the rest — by five `card-author`
+  agents and the lead; 43 blocked (`B202.json`). `keyword-splice.test.ts`.
 - **Epic, and Saviors of Kamigawa's 100 most-played left** (batch 197, the third middle walk,
   2026-10-26, `keyword:epic`): **built** epic (rule 702.50 — the `epic` effect, last in the
   spell's sequence: its controller can't cast spells for the rest of the game,

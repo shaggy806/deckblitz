@@ -729,13 +729,6 @@
    "why": "the {Q} cost"
   },
   {
-   "name": "Splicer's Skill",
-   "needs": [
-    "keyword:splice"
-   ],
-   "why": "splice isn't modeled"
-  },
-  {
    "name": "Treetop Ambusher",
    "needs": [
     "keyword:dash"
@@ -777,13 +770,6 @@
     "keyword:buyback"
    ],
    "why": "no buyback"
-  },
-  {
-   "name": "Everdream",
-   "needs": [
-    "keyword:splice"
-   ],
-   "why": "no splice"
   },
   {
    "name": "Cabal Therapist",
