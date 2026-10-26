@@ -217,6 +217,7 @@ import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
 import _poolFootNinjas from "../pool/foot-ninjas.js";
+import _poolFootstepsOfTheGoryo from "../pool/footsteps-of-the-goryo.js";
 import _poolForgottenMonument from "../pool/forgotten-monument.js";
 import _poolFountainport from "../pool/fountainport.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
@@ -248,6 +249,7 @@ import _poolHackrobat from "../pool/hackrobat.js";
 import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHamletCaptain from "../pool/hamlet-captain.js";
+import _poolHaruOnna from "../pool/haru-onna.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
@@ -945,6 +947,7 @@ const shard: CardShard = {
     _poolFlowstoneShambler,
     _poolFontOfVigor,
     _poolFootNinjas,
+    _poolFootstepsOfTheGoryo,
     _poolForgottenMonument,
     _poolFountainport,
     _poolFrontlineSage,
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolHailStorm,
     _poolHakodaSelflessCommander,
     _poolHamletCaptain,
+    _poolHaruOnna,
     _poolHatcherySpider,
     _poolHauntedScreen,
     _poolHavocFestival,

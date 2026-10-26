@@ -578,6 +578,7 @@ import _poolSplittingSlime from "../pool/splitting-slime.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
 import _poolSprintingWarbrute from "../pool/sprinting-warbrute.js";
+import _poolStampedingSerow from "../pool/stampeding-serow.js";
 import _poolStarkeOfRath from "../pool/starke-of-rath.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
 import _poolStensiaUprising from "../pool/stensia-uprising.js";
@@ -1300,6 +1301,7 @@ const shard: CardShard = {
     _poolSporecapSpider,
     _poolSpringbloomDruid,
     _poolSprintingWarbrute,
+    _poolStampedingSerow,
     _poolStarkeOfRath,
     _poolSteelDromedary,
     _poolStensiaUprising,

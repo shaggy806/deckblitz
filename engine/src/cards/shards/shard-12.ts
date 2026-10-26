@@ -528,6 +528,7 @@ import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
 import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
+import _poolSeedTheLand from "../pool/seed-the-land.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
 import _poolSengirAutocrat from "../pool/sengir-autocrat.js";
 import _poolSetessanOathsworn from "../pool/setessan-oathsworn.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolSeascapeAerialist,
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
+    _poolSeedTheLand,
     _poolSelvalasStampede,
     _poolSengirAutocrat,
     _poolSetessanOathsworn,

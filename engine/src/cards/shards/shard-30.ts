@@ -552,6 +552,7 @@ import _poolSetessanSkirmisher from "../pool/setessan-skirmisher.js";
 import _poolSettleTheWreckage from "../pool/settle-the-wreckage.js";
 import _poolShadowGlider from "../pool/shadow-glider.js";
 import _poolShanidSleepersScourge from "../pool/shanid-sleepers-scourge.js";
+import _poolShapeStealer from "../pool/shape-stealer.js";
 import _poolShatteringBlow from "../pool/shattering-blow.js";
 import _poolShivanHellkite from "../pool/shivan-hellkite.js";
 import _poolShivsEmbrace from "../pool/shivs-embrace.js";
@@ -1282,6 +1283,7 @@ const shard: CardShard = {
     _poolSettleTheWreckage,
     _poolShadowGlider,
     _poolShanidSleepersScourge,
+    _poolShapeStealer,
     _poolShatteringBlow,
     _poolShivanHellkite,
     _poolShivsEmbrace,

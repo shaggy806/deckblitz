@@ -451,6 +451,7 @@ import _poolOgreChitterlord from "../pool/ogre-chitterlord.js";
 import _poolOkoTheTrickster from "../pool/oko-the-trickster.js";
 import _poolOldManWillow from "../pool/old-man-willow.js";
 import _poolOldThrush from "../pool/old-thrush.js";
+import _poolOniOfWildPlaces from "../pool/oni-of-wild-places.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
 import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
@@ -1213,6 +1214,7 @@ const shard: CardShard = {
     _poolOkoTheTrickster,
     _poolOldManWillow,
     _poolOldThrush,
+    _poolOniOfWildPlaces,
     _poolOpenTheArmory,
     _poolOphiomancer,
     _poolOptimisticScavenger,

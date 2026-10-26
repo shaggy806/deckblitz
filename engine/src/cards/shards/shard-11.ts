@@ -158,6 +158,7 @@ import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
 import _poolDemystify from "../pool/demystify.js";
 import _poolDepartedSoulkeeper from "../pool/departed-soulkeeper.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
+import _poolDescendantOfSoramaro from "../pool/descendant-of-soramaro.js";
 import _poolDespondency from "../pool/despondency.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
@@ -538,6 +539,7 @@ import _poolShaoJun from "../pool/shao-jun.js";
 import _poolSheoldredsRestoration from "../pool/sheoldreds-restoration.js";
 import _poolShieldOfTheOversoul from "../pool/shield-of-the-oversoul.js";
 import _poolShiftingWoodland from "../pool/shifting-woodland.js";
+import _poolShinenOfLifesRoar from "../pool/shinen-of-lifes-roar.js";
 import _poolShiningAerosaur from "../pool/shining-aerosaur.js";
 import _poolShipwreckPatrol from "../pool/shipwreck-patrol.js";
 import _poolShoreUp from "../pool/shore-up.js";
@@ -890,6 +892,7 @@ const shard: CardShard = {
     _poolDemystify,
     _poolDepartedSoulkeeper,
     _poolDepthChargeColossus,
+    _poolDescendantOfSoramaro,
     _poolDespondency,
     _poolDevoteeOfStrength,
     _poolDevouringTendrils,
@@ -1270,6 +1273,7 @@ const shard: CardShard = {
     _poolSheoldredsRestoration,
     _poolShieldOfTheOversoul,
     _poolShiftingWoodland,
+    _poolShinenOfLifesRoar,
     _poolShiningAerosaur,
     _poolShipwreckPatrol,
     _poolShoreUp,

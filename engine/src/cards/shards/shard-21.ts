@@ -319,6 +319,7 @@ import _poolKeeperOfTheAccord from "../pool/keeper-of-the-accord.js";
 import _poolKeeperOfTheNineGales from "../pool/keeper-of-the-nine-gales.js";
 import _poolKhalniHeartExpedition from "../pool/khalni-heart-expedition.js";
 import _poolKhorvathBrightflame from "../pool/khorvath-brightflame.js";
+import _poolKikusShadow from "../pool/kikus-shadow.js";
 import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKragmaButcher from "../pool/kragma-butcher.js";
@@ -348,6 +349,7 @@ import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLurkingAutomaton from "../pool/lurking-automaton.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMadAuntie from "../pool/mad-auntie.js";
+import _poolMagaTraitorToMortals from "../pool/maga-traitor-to-mortals.js";
 import _poolMagmasaur from "../pool/magmasaur.js";
 import _poolMakeshiftMannequin from "../pool/makeshift-mannequin.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolKeeperOfTheNineGales,
     _poolKhalniHeartExpedition,
     _poolKhorvathBrightflame,
+    _poolKikusShadow,
     _poolKiorasDambreaker,
     _poolKodamaOfTheNorthTree,
     _poolKragmaButcher,
@@ -1047,6 +1050,7 @@ const shard: CardShard = {
     _poolLurkingAutomaton,
     _poolLysAlanaHuntmaster,
     _poolMadAuntie,
+    _poolMagaTraitorToMortals,
     _poolMagmasaur,
     _poolMakeshiftMannequin,
     _poolMalevolentWhispers,

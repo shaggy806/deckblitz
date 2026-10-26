@@ -32,6 +32,7 @@ import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolAphoticWisps from "../pool/aphotic-wisps.js";
+import _poolArashiTheSkyAsunder from "../pool/arashi-the-sky-asunder.js";
 import _poolArcadesSabboth from "../pool/arcades-sabboth.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
 import _poolArmsRace from "../pool/arms-race.js";
@@ -288,6 +289,7 @@ import _poolHuntTheHunter from "../pool/hunt-the-hunter.js";
 import _poolHuntersAmbush from "../pool/hunters-ambush.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
+import _poolIizukaTheRuthless from "../pool/iizuka-the-ruthless.js";
 import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
@@ -747,6 +749,7 @@ const shard: CardShard = {
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
     _poolAphoticWisps,
+    _poolArashiTheSkyAsunder,
     _poolArcadesSabboth,
     _poolArcaneFlight,
     _poolArmsRace,
@@ -1003,6 +1006,7 @@ const shard: CardShard = {
     _poolHuntersAmbush,
     _poolHussarPatrol,
     _poolIdyllicGrange,
+    _poolIizukaTheRuthless,
     _poolImpendingDoom,
     _poolIncrementalBlight,
     _poolInfernalPhantom,

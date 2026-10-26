@@ -65,6 +65,7 @@ import _poolBomatBazaarBarge from "../pool/bomat-bazaar-barge.js";
 import _poolBonePitBrute from "../pool/bone-pit-brute.js";
 import _poolBoneSaw from "../pool/bone-saw.js";
 import _poolBoseijuWhoEndures from "../pool/boseiju-who-endures.js";
+import _poolBounteousKirin from "../pool/bounteous-kirin.js";
 import _poolBraskasFinalAeon from "../pool/braskas-final-aeon.js";
 import _poolBrightcapBadger from "../pool/brightcap-badger.js";
 import _poolBrimstoneTrebuchet from "../pool/brimstone-trebuchet.js";
@@ -294,6 +295,7 @@ import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJhoiraAgelessInnovator from "../pool/jhoira-ageless-innovator.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
+import _poolJiwariTheEarthAflame from "../pool/jiwari-the-earth-aflame.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolJustTheWind from "../pool/just-the-wind.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
@@ -693,6 +695,7 @@ import _poolXiraArien from "../pool/xira-arien.js";
 import _poolYiazmatUltimateMark from "../pool/yiazmat-ultimate-mark.js";
 import _poolYoureNotAlone from "../pool/youre-not-alone.js";
 import _poolYshtolaNightsBlessed from "../pool/yshtola-nights-blessed.js";
+import _poolYukiOnna from "../pool/yuki-onna.js";
 import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
 import _poolZodiacRat from "../pool/zodiac-rat.js";
@@ -787,6 +790,7 @@ const shard: CardShard = {
     _poolBonePitBrute,
     _poolBoneSaw,
     _poolBoseijuWhoEndures,
+    _poolBounteousKirin,
     _poolBraskasFinalAeon,
     _poolBrightcapBadger,
     _poolBrimstoneTrebuchet,
@@ -1016,6 +1020,7 @@ const shard: CardShard = {
     _poolJeditOjanenMercenary,
     _poolJhoiraAgelessInnovator,
     _poolJiangYangguNeverAlone,
+    _poolJiwariTheEarthAflame,
     _poolJodahTheUnifier,
     _poolJustTheWind,
     _poolJyotiMoagAncient,
@@ -1415,6 +1420,7 @@ const shard: CardShard = {
     _poolYiazmatUltimateMark,
     _poolYoureNotAlone,
     _poolYshtolaNightsBlessed,
+    _poolYukiOnna,
     _poolZaxaraTheExemplary,
     _poolZimoneAndDina,
     _poolZodiacRat,
