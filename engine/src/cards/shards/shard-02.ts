@@ -166,6 +166,7 @@ import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
 import _poolDranaKalastriaBloodchief from "../pool/drana-kalastria-bloodchief.js";
 import _poolDraugrsHelm from "../pool/draugrs-helm.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
+import _poolDreadWarlock from "../pool/dread-warlock.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
@@ -249,6 +250,7 @@ import _poolGreatWall from "../pool/great-wall.js";
 import _poolGreensleevesMaroSorcerer from "../pool/greensleeves-maro-sorcerer.js";
 import _poolGrimTutor from "../pool/grim-tutor.js";
 import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
+import _poolGrixisGrimblade from "../pool/grixis-grimblade.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
@@ -402,6 +404,7 @@ import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
+import _poolPhalanxLeader from "../pool/phalanx-leader.js";
 import _poolPharagaxGiant from "../pool/pharagax-giant.js";
 import _poolPheresBandRaiders from "../pool/pheres-band-raiders.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
@@ -468,6 +471,7 @@ import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
+import _poolSatyrPiper from "../pool/satyr-piper.js";
 import _poolSavaiThundermane from "../pool/savai-thundermane.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolSchemaThief from "../pool/schema-thief.js";
@@ -551,6 +555,7 @@ import _poolTanglesap from "../pool/tanglesap.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
+import _poolTemptWithGlory from "../pool/tempt-with-glory.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
@@ -811,6 +816,7 @@ const shard: CardShard = {
     _poolDranaKalastriaBloodchief,
     _poolDraugrsHelm,
     _poolDreadReaper,
+    _poolDreadWarlock,
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
     _poolDuneBeetle,
@@ -894,6 +900,7 @@ const shard: CardShard = {
     _poolGreensleevesMaroSorcerer,
     _poolGrimTutor,
     _poolGrimaSarumansFootman,
+    _poolGrixisGrimblade,
     _poolGrizzledLeotau,
     _poolGruulRagebeast,
     _poolGruulSignet,
@@ -1047,6 +1054,7 @@ const shard: CardShard = {
     _poolPeculiarLighthouse,
     _poolPerilousVault,
     _poolPewterGolem,
+    _poolPhalanxLeader,
     _poolPharagaxGiant,
     _poolPheresBandRaiders,
     _poolPhyrexianPlaguelord,
@@ -1113,6 +1121,7 @@ const shard: CardShard = {
     _poolSandstoneWarrior,
     _poolSangriteSurge,
     _poolSapphireMedallion,
+    _poolSatyrPiper,
     _poolSavaiThundermane,
     _poolScavengedWeaponry,
     _poolSchemaThief,
@@ -1196,6 +1205,7 @@ const shard: CardShard = {
     _poolTauntingKobold,
     _poolTeekasDragon,
     _poolTeferiMasterOfTime,
+    _poolTemptWithGlory,
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
     _poolTheFantasticar,

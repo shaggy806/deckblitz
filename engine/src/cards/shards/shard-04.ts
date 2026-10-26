@@ -96,6 +96,7 @@ import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
 import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
+import _poolCurseOfShallowGraves from "../pool/curse-of-shallow-graves.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
 import _poolCursedCourtier from "../pool/cursed-courtier.js";
 import _poolCustodiPeacekeeper from "../pool/custodi-peacekeeper.js";
@@ -292,6 +293,7 @@ import _poolKlauthUnrivaledAncient from "../pool/klauth-unrivaled-ancient.js";
 import _poolKnightErrant from "../pool/knight-errant.js";
 import _poolKnightOfTheNewCoalition from "../pool/knight-of-the-new-coalition.js";
 import _poolKnightOfTheReliquary from "../pool/knight-of-the-reliquary.js";
+import _poolKnotvinePaladin from "../pool/knotvine-paladin.js";
 import _poolKoilosRoc from "../pool/koilos-roc.js";
 import _poolKokushoTheEveningStar from "../pool/kokusho-the-evening-star.js";
 import _poolKorLineSlinger from "../pool/kor-line-slinger.js";
@@ -308,6 +310,7 @@ import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
 import _poolLeadersTalent from "../pool/leaders-talent.js";
+import _poolLeafcrownDryad from "../pool/leafcrown-dryad.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLesserMasticore from "../pool/lesser-masticore.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
@@ -453,6 +456,7 @@ import _poolSanctify from "../pool/sanctify.js";
 import _poolSandworm from "../pool/sandworm.js";
 import _poolSanguimancy from "../pool/sanguimancy.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
+import _poolSanityGnawers from "../pool/sanity-gnawers.js";
 import _poolSarkhansRage from "../pool/sarkhans-rage.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
@@ -740,6 +744,7 @@ const shard: CardShard = {
     _poolCrystallineNautilus,
     _poolCubwarden,
     _poolCultistOfTheAbsolute,
+    _poolCurseOfShallowGraves,
     _poolCurseOfVitality,
     _poolCursedCourtier,
     _poolCustodiPeacekeeper,
@@ -936,6 +941,7 @@ const shard: CardShard = {
     _poolKnightErrant,
     _poolKnightOfTheNewCoalition,
     _poolKnightOfTheReliquary,
+    _poolKnotvinePaladin,
     _poolKoilosRoc,
     _poolKokushoTheEveningStar,
     _poolKorLineSlinger,
@@ -952,6 +958,7 @@ const shard: CardShard = {
     _poolLaughingJasperFlint,
     _poolLavaDart,
     _poolLeadersTalent,
+    _poolLeafcrownDryad,
     _poolLeavesFromTheVine,
     _poolLesserMasticore,
     _poolLichsRelic,
@@ -1097,6 +1104,7 @@ const shard: CardShard = {
     _poolSandworm,
     _poolSanguimancy,
     _poolSanguineMorass,
+    _poolSanityGnawers,
     _poolSarkhansRage,
     _poolSarkhansTriumph,
     _poolScarbladeScout,

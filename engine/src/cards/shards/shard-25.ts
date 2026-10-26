@@ -96,6 +96,7 @@ import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
 import _poolCastle from "../pool/castle.js";
+import _poolCavalryPegasus from "../pool/cavalry-pegasus.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
@@ -235,6 +236,7 @@ import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
 import _poolGlisteningDeluge from "../pool/glistening-deluge.js";
 import _poolGloriousDecay from "../pool/glorious-decay.js";
 import _poolGloryheathLynx from "../pool/gloryheath-lynx.js";
+import _poolGloryscaleViashino from "../pool/gloryscale-viashino.js";
 import _poolGoShintaiOfHiddenCruelty from "../pool/go-shintai-of-hidden-cruelty.js";
 import _poolGoblinMotivator from "../pool/goblin-motivator.js";
 import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
@@ -271,12 +273,14 @@ import _poolIgneousGolem from "../pool/igneous-golem.js";
 import _poolIgneousInspiration from "../pool/igneous-inspiration.js";
 import _poolIhsansShade from "../pool/ihsans-shade.js";
 import _poolIllicitShipment from "../pool/illicit-shipment.js";
+import _poolIllusionaryServant from "../pool/illusionary-servant.js";
 import _poolIllusoryWrappings from "../pool/illusory-wrappings.js";
 import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
 import _poolImpendingFlux from "../pool/impending-flux.js";
 import _poolImplementsOfSacrifice from "../pool/implements-of-sacrifice.js";
 import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
+import _poolInfernoElemental from "../pool/inferno-elemental.js";
 import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
@@ -749,6 +753,7 @@ const shard: CardShard = {
     _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
     _poolCastle,
+    _poolCavalryPegasus,
     _poolCeaselessConflict,
     _poolChamberedNautilus,
     _poolChampionOfArashin,
@@ -888,6 +893,7 @@ const shard: CardShard = {
     _poolGlisteningDeluge,
     _poolGloriousDecay,
     _poolGloryheathLynx,
+    _poolGloryscaleViashino,
     _poolGoShintaiOfHiddenCruelty,
     _poolGoblinMotivator,
     _poolGoldForgedSentinel,
@@ -924,12 +930,14 @@ const shard: CardShard = {
     _poolIgneousInspiration,
     _poolIhsansShade,
     _poolIllicitShipment,
+    _poolIllusionaryServant,
     _poolIllusoryWrappings,
     _poolIllvoiGaleblade,
     _poolImpendingFlux,
     _poolImplementsOfSacrifice,
     _poolIndomitableWill,
     _poolInfantryShield,
+    _poolInfernoElemental,
     _poolIngenuityEngine,
     _poolInkwellLeviathan,
     _poolInnerDemonsGangsters,

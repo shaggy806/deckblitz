@@ -17,6 +17,7 @@ import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
+import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
@@ -258,6 +259,7 @@ import _poolHealingTechnique from "../pool/healing-technique.js";
 import _poolHeartfire from "../pool/heartfire.js";
 import _poolHeavensGate from "../pool/heavens-gate.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
+import _poolHeliodsEmissary from "../pool/heliods-emissary.js";
 import _poolHerdchaserDragon from "../pool/herdchaser-dragon.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
@@ -384,6 +386,7 @@ import _poolNourish from "../pool/nourish.js";
 import _poolNoxiousGhoul from "../pool/noxious-ghoul.js";
 import _poolNoxiousGroodion from "../pool/noxious-groodion.js";
 import _poolNyleaGodOfTheHunt from "../pool/nylea-god-of-the-hunt.js";
+import _poolNyleasEmissary from "../pool/nyleas-emissary.js";
 import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolNyxInfusion from "../pool/nyx-infusion.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
@@ -405,6 +408,7 @@ import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitScorpion from "../pool/pit-scorpion.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
+import _poolPlanarCleansing from "../pool/planar-cleansing.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
 import _poolPopularEntertainer from "../pool/popular-entertainer.js";
@@ -432,6 +436,7 @@ import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
+import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
@@ -569,6 +574,7 @@ import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
 import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVectorGlider from "../pool/vector-glider.js";
+import _poolVedalkenHeretic from "../pool/vedalken-heretic.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolVenarianGold from "../pool/venarian-gold.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
@@ -641,6 +647,7 @@ const shard: CardShard = {
     _poolAlabasterKirin,
     _poolAlexWilderRunaway,
     _poolAlignedHedronNetwork,
+    _poolAnaxAndCymede,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
     _poolAnglerDrake,
@@ -882,6 +889,7 @@ const shard: CardShard = {
     _poolHeartfire,
     _poolHeavensGate,
     _poolHeirloomMirror,
+    _poolHeliodsEmissary,
     _poolHerdchaserDragon,
     _poolHiddenFootblade,
     _poolHighlandWeald,
@@ -1008,6 +1016,7 @@ const shard: CardShard = {
     _poolNoxiousGhoul,
     _poolNoxiousGroodion,
     _poolNyleaGodOfTheHunt,
+    _poolNyleasEmissary,
     _poolNyxFleeceRam,
     _poolNyxInfusion,
     _poolObscuraInitiate,
@@ -1029,6 +1038,7 @@ const shard: CardShard = {
     _poolPiranhaMarsh,
     _poolPitScorpion,
     _poolPitchburnDevils,
+    _poolPlanarCleansing,
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,
     _poolPopularEntertainer,
@@ -1056,6 +1066,7 @@ const shard: CardShard = {
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
     _poolReduceToMemory,
+    _poolRegenerate,
     _poolRegicide,
     _poolRerouteSystems,
     _poolRescind,
@@ -1193,6 +1204,7 @@ const shard: CardShard = {
     _poolVandalsEdit,
     _poolVastlandsScavenger,
     _poolVectorGlider,
+    _poolVedalkenHeretic,
     _poolVegaTheWatcher,
     _poolVenarianGold,
     _poolViashinoGrappler,

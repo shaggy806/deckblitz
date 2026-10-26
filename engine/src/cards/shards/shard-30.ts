@@ -121,6 +121,7 @@ import _poolCrushDissent from "../pool/crush-dissent.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCuriousHerd from "../pool/curious-herd.js";
+import _poolCurseOfChaos from "../pool/curse-of-chaos.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolCutRibbons from "../pool/cut-ribbons.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
@@ -181,6 +182,7 @@ import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEssenceBurn from "../pool/essence-burn.js";
 import _poolEtaliPrimalSickness from "../pool/etali-primal-sickness.js";
 import _poolEtalisFavor from "../pool/etalis-favor.js";
+import _poolEtherwroughtPage from "../pool/etherwrought-page.js";
 import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
@@ -191,6 +193,7 @@ import _poolFalseFloor from "../pool/false-floor.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
 import _poolFastFurious from "../pool/fast-furious.js";
+import _poolFateForetold from "../pool/fate-foretold.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralGhoul from "../pool/feral-ghoul.js";
@@ -202,6 +205,7 @@ import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
+import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
@@ -336,6 +340,7 @@ import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
 import _poolLightningVolley from "../pool/lightning-volley.js";
+import _poolLightwielderPaladin from "../pool/lightwielder-paladin.js";
 import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
@@ -413,6 +418,7 @@ import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
+import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOtherworldlyOutburst from "../pool/otherworldly-outburst.js";
@@ -551,6 +557,7 @@ import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
+import _poolTaintedSigil from "../pool/tainted-sigil.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
@@ -776,6 +783,7 @@ const shard: CardShard = {
     _poolCryptGhast,
     _poolCuriousFarmAnimals,
     _poolCuriousHerd,
+    _poolCurseOfChaos,
     _poolCutADeal,
     _poolCutRibbons,
     _poolDaringDiscovery,
@@ -836,6 +844,7 @@ const shard: CardShard = {
     _poolEssenceBurn,
     _poolEtaliPrimalSickness,
     _poolEtalisFavor,
+    _poolEtherwroughtPage,
     _poolEvaporate,
     _poolEverythingPizza,
     _poolExecutionersHood,
@@ -846,6 +855,7 @@ const shard: CardShard = {
     _poolFangGuardian,
     _poolFangOfShigeki,
     _poolFastFurious,
+    _poolFateForetold,
     _poolFearsomeGoblinPair,
     _poolFencingAce,
     _poolFeralGhoul,
@@ -857,6 +867,7 @@ const shard: CardShard = {
     _poolFleetingReflection,
     _poolFloodfarmVerge,
     _poolFlourishingFox,
+    _poolFlurryOfWings,
     _poolFogwellsGym,
     _poolForceAway,
     _poolForceOfVirtue,
@@ -991,6 +1002,7 @@ const shard: CardShard = {
     _poolLeylineBinding,
     _poolLightOfHope,
     _poolLightningVolley,
+    _poolLightwielderPaladin,
     _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
     _poolLitaLittleOrphanAmphibian,
@@ -1068,6 +1080,7 @@ const shard: CardShard = {
     _poolOmenOfTheSun,
     _poolOnduInversion,
     _poolOrcishBowmasters,
+    _poolOrdealOfHeliod,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
     _poolOtherworldlyOutburst,
@@ -1206,6 +1219,7 @@ const shard: CardShard = {
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
+    _poolTaintedSigil,
     _poolTajuruStalwart,
     _poolTangleMantis,
     _poolTeleport,

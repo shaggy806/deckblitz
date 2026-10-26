@@ -77,6 +77,7 @@ import _poolBombard from "../pool/bombard.js";
 import _poolBonepickerSkirge from "../pool/bonepicker-skirge.js";
 import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
+import _poolBoonOfErebos from "../pool/boon-of-erebos.js";
 import _poolBottleCapBlast from "../pool/bottle-cap-blast.js";
 import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
@@ -335,6 +336,7 @@ import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMayhemPatrol from "../pool/mayhem-patrol.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
+import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
@@ -359,8 +361,10 @@ import _poolMyrsmith from "../pool/myrsmith.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
+import _poolNayaSojourners from "../pool/naya-sojourners.js";
 import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
+import _poolNessianAsp from "../pool/nessian-asp.js";
 import _poolNettletoothDjinn from "../pool/nettletooth-djinn.js";
 import _poolNevinyrralUrborgTyrant from "../pool/nevinyrral-urborg-tyrant.js";
 import _poolNiambiEsteemedSpeaker from "../pool/niambi-esteemed-speaker.js";
@@ -413,6 +417,7 @@ import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRadjanSpirit from "../pool/radjan-spirit.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
 import _poolRageNimbus from "../pool/rage-nimbus.js";
+import _poolRagebloodShaman from "../pool/rageblood-shaman.js";
 import _poolRaggadraggaGoregutsBoss from "../pool/raggadragga-goreguts-boss.js";
 import _poolRagingGoblin from "../pool/raging-goblin.js";
 import _poolRainOfThorns from "../pool/rain-of-thorns.js";
@@ -730,6 +735,7 @@ const shard: CardShard = {
     _poolBonepickerSkirge,
     _poolBoomerangBasics,
     _poolBoonBringerValkyrie,
+    _poolBoonOfErebos,
     _poolBottleCapBlast,
     _poolBottleGolems,
     _poolBottomlessPit,
@@ -988,6 +994,7 @@ const shard: CardShard = {
     _poolMarkedByHonor,
     _poolMayhemPatrol,
     _poolMeetingOfMinds,
+    _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
@@ -1012,8 +1019,10 @@ const shard: CardShard = {
     _poolMysteriousTome,
     _poolMysticMelting,
     _poolNaturalConnection,
+    _poolNayaSojourners,
     _poolNecrogenRotpriest,
     _poolNeedlepeakSpider,
+    _poolNessianAsp,
     _poolNettletoothDjinn,
     _poolNevinyrralUrborgTyrant,
     _poolNiambiEsteemedSpeaker,
@@ -1066,6 +1075,7 @@ const shard: CardShard = {
     _poolRadjanSpirit,
     _poolRaffinesInformant,
     _poolRageNimbus,
+    _poolRagebloodShaman,
     _poolRaggadraggaGoregutsBoss,
     _poolRagingGoblin,
     _poolRainOfThorns,

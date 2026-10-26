@@ -6,12 +6,14 @@
  * (`isTokenCard`) doesn't import every token to find out. */
 export const TOKEN_NAMES: readonly string[] = [
   "0/1 Black Cleric Token",
+  "1/0 Blue Elemental Token",
   "1/1 Blue Bird Token",
   "1/1 Green Cat Token",
   "1/1 Green Hippo Token",
   "1/1 Green Plant Token",
   "1/1 Red Dinosaur Token (Haste)",
   "1/1 Red Elemental Token",
+  "1/1 Red Soldier Token",
   "1/1 Robot Hero Token",
   "1/1 Vampire Token",
   "1/1 White Dog Token",
@@ -28,6 +30,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "2/2 Blue Enchantment Bird Token (Flying)",
   "2/2 Green Cat Token",
   "2/2 Green Elemental Token",
+  "2/2 Green Lizard Token",
   "2/2 Green Spider Token (Reach)",
   "2/2 Gremlin Token",
   "2/2 Pegasus Token",
@@ -61,6 +64,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "5/5 Djinn Artifact Token",
   "5/5 Elemental Token",
   "5/5 Elephant Token",
+  "5/5 Green Beast Token (Trample)",
   "5/5 Tyranid Token",
   "6/6 Beast Artifact Token",
   "6/6 Black Demon Token (Flying, Trample, Upkeep Sacrifice)",
@@ -100,6 +104,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Beast Token (Garruk, Veiled Butcher)",
   "Beast Token (Red-Green)",
   "Bird Illusion Token",
+  "Bird Soldier Token",
   "Bird Token",
   "Bird Token (Gwaihir, Greatest of the Eagles)",
   "Bird Token (Hermes, Overseer of Elpis)",
@@ -214,6 +219,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Fungus Beast Token",
   "Fungus Token (Can't Block)",
   "Galactus",
+  "Gargoyle Token",
   "Giant Token",
   "Giant Wizard Token",
   "Glimmer Token",
@@ -568,6 +574,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Zombie Token (Transmogrant Altar)",
   "Zombie Token (Wilhelt, the Rotcleaver)",
   "Zombie Warrior Token",
+  "Zombie Wizard Token",
 ];
 
 /** Each card's own `art`, for the cards (`pool/`) that pin a printing, so

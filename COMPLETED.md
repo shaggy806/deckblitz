@@ -91,6 +91,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   lead — Catacomb Dragon, Reign of Terror, Kaervek's Hex, Tidal Wave, Reign of Chaos, Mist Dragon,
   Ventifact Bottle, Purraj of Urborg, Jungle Patrol and 58 more (MIR 227 of 312); 43 blocked,
   Mirage's flash-and-sacrifice rider (`effect:flash-cast-sacrifice`, 3) the most shared.
+- **Commander 2013, whole, and Theros's most-played** (batch 167, the newest-first walk,
+  2026-10-26): the `sacrifice` trigger's `selfOnly` — "when you sacrifice this Aura", however it's
+  sacrificed (the Ordeals' ruling; the scaffolder's "When you sacrifice this …"). 78 of the 111
+  authored — Master of Waves, Polukranos, World Eater, Fleecemane Lion, Prognostic Sphinx,
+  Shipbreaker Kraken, four Ordeals, Daxos of Meletis, Sydri, Galvanic Genius and 67 more: nine
+  bestow creatures finished by the scaffolder, four Ordeals by the lead, 65 by five `card-author`
+  agents. C13 is whole; 35 of Theros left. 33 blocked (`B167.json`).
 - **Born of the Gods, the rest of the set** (batch 164, the newest-first walk, 2026-10-25):
   **tribute** built (rule 702.104 — `tribute: N` on the card, asked as it's about to enter on the
   `choose-creature-type` decision with a prompt the client shows; the `tribute-not-paid`
@@ -98,6 +105,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   paid"). 91 of the set's 104 left authored by five `card-author` agents and the lead — Pharagax
   Giant, Nessian Wilds Ravager, Felhide Spiritbinder, Pain Seer, Champion of Stray Souls, Searing
   Blood and 85 more; BNG is whole. 13 blocked, one each.
+- **Magic 2010 and Alara Reborn, the rest of each** (batch 168, the middle walk, 2026-10-26): no
+  engine change. 82 authored — Gorger Wurm finished by the scaffolder, 81 by five `card-author` agents
+  (Thraximundar, Djinn of Wishes, Finest Hour, Karrthus, Slave of Bolas, Spellbreaker Behemoth,
+  Anathemancer, the Sojourners); M10 and ARB are whole. 38 blocked (`B168.json`), the five
+  Borderposts on `cost:alt-cost-return-lands`.
 - **Zendikar, whole** (batch 165, the middle walk, 2026-10-25): no engine change. 87 authored — 8
   finished by the scaffolder, 79 by five `card-author` agents (Journey to Nowhere, Goblin Guide, Kor
   Skyfisher, Nissa Revane, Chandra Ablaze, Punishing Fire, Kalitas, Bloodchief of Ghet, the Expeditions

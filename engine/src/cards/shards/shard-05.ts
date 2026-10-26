@@ -505,6 +505,7 @@ import _poolSirenOfTheFangedCoast from "../pool/siren-of-the-fanged-coast.js";
 import _poolSkeletonArcher from "../pool/skeleton-archer.js";
 import _poolSkorpekhLord from "../pool/skorpekh-lord.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
+import _poolSkyclawThrash from "../pool/skyclaw-thrash.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
@@ -644,6 +645,7 @@ import _tokensBirdTokenWhite34 from "../tokens/bird-token-white-3-4.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
 import _tokensDetectiveToken from "../tokens/detective-token.js";
 import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
+import _tokensElementalToken10Blue from "../tokens/elemental-token-1-0-blue.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
@@ -1163,6 +1165,7 @@ const shard: CardShard = {
     _poolSkeletonArcher,
     _poolSkorpekhLord,
     _poolSkyTheaterStrix,
+    _poolSkyclawThrash,
     _poolSkycoachConductor,
     _poolSkyfirePhoenix,
     _poolSlagdrillScrapper,
@@ -1304,6 +1307,7 @@ const shard: CardShard = {
     _tokensDeathtouchSnakeToken,
     _tokensDetectiveToken,
     _tokensDinosaurSoldierToken,
+    _tokensElementalToken10Blue,
     _tokensGalactus,
     _tokensHalflingToken,
     _tokensHumanSoldierToken,

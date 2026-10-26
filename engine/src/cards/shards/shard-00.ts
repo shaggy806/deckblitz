@@ -223,6 +223,7 @@ import _poolGoblinTrailblazer from "../pool/goblin-trailblazer.js";
 import _poolGoldPan from "../pool/gold-pan.js";
 import _poolGolgariGuildgate from "../pool/golgari-guildgate.js";
 import _poolGolgariRaiders from "../pool/golgari-raiders.js";
+import _poolGorgerWurm from "../pool/gorger-wurm.js";
 import _poolGossipsTalent from "../pool/gossips-talent.js";
 import _poolGourmandsTalent from "../pool/gourmands-talent.js";
 import _poolGrandEntryway from "../pool/grand-entryway.js";
@@ -584,6 +585,7 @@ import _poolTrackDown from "../pool/track-down.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
+import _poolTritonFortuneHunter from "../pool/triton-fortune-hunter.js";
 import _poolTritonWavebreaker from "../pool/triton-wavebreaker.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTuskeriFirewalker from "../pool/tuskeri-firewalker.js";
@@ -889,6 +891,7 @@ const shard: CardShard = {
     _poolGoldPan,
     _poolGolgariGuildgate,
     _poolGolgariRaiders,
+    _poolGorgerWurm,
     _poolGossipsTalent,
     _poolGourmandsTalent,
     _poolGrandEntryway,
@@ -1250,6 +1253,7 @@ const shard: CardShard = {
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,
+    _poolTritonFortuneHunter,
     _poolTritonWavebreaker,
     _poolTunnelOfHate,
     _poolTuskeriFirewalker,

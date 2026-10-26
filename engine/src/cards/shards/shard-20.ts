@@ -473,6 +473,7 @@ import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
 import _poolRevelationOfPower from "../pool/revelation-of-power.js";
 import _poolReverentHowl from "../pool/reverent-howl.js";
+import _poolReverentHunter from "../pool/reverent-hunter.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
@@ -509,6 +510,7 @@ import _poolShamanOfThePack from "../pool/shaman-of-the-pack.js";
 import _poolShamanicRevelation from "../pool/shamanic-revelation.js";
 import _poolShardlessOutlander from "../pool/shardless-outlander.js";
 import _poolSheoldredsEdict from "../pool/sheoldreds-edict.js";
+import _poolShieldOfTheRighteous from "../pool/shield-of-the-righteous.js";
 import _poolShimmerMyr from "../pool/shimmer-myr.js";
 import _poolShimmer from "../pool/shimmer.js";
 import _poolShreddedSails from "../pool/shredded-sails.js";
@@ -578,6 +580,7 @@ import _poolSureshotSower from "../pool/sureshot-sower.js";
 import _poolSurvivorOfKorlis from "../pool/survivor-of-korlis.js";
 import _poolSvyeluniteTemple from "../pool/svyelunite-temple.js";
 import _poolSweettoothWitch from "../pool/sweettooth-witch.js";
+import _poolSydriGalvanicGenius from "../pool/sydri-galvanic-genius.js";
 import _poolSylvanTutor from "../pool/sylvan-tutor.js";
 import _poolTaintedObserver from "../pool/tainted-observer.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
@@ -679,6 +682,7 @@ import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
+import _poolWitchesEye from "../pool/witches-eye.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
 import _poolWoodenSphere from "../pool/wooden-sphere.js";
 import _poolWordOfBlasting from "../pool/word-of-blasting.js";
@@ -1183,6 +1187,7 @@ const shard: CardShard = {
     _poolRevTitheExtractor,
     _poolRevelationOfPower,
     _poolReverentHowl,
+    _poolReverentHunter,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
     _poolRiseToGlory,
@@ -1219,6 +1224,7 @@ const shard: CardShard = {
     _poolShamanicRevelation,
     _poolShardlessOutlander,
     _poolSheoldredsEdict,
+    _poolShieldOfTheRighteous,
     _poolShimmerMyr,
     _poolShimmer,
     _poolShreddedSails,
@@ -1288,6 +1294,7 @@ const shard: CardShard = {
     _poolSurvivorOfKorlis,
     _poolSvyeluniteTemple,
     _poolSweettoothWitch,
+    _poolSydriGalvanicGenius,
     _poolSylvanTutor,
     _poolTaintedObserver,
     _poolTalasAirShip,
@@ -1389,6 +1396,7 @@ const shard: CardShard = {
     _poolWildCantor,
     _poolWillowrushVerge,
     _poolWirewoodGuardian,
+    _poolWitchesEye,
     _poolWitchsVengeance,
     _poolWoodenSphere,
     _poolWordOfBlasting,

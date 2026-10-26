@@ -174,12 +174,17 @@ section keeps only what to do next.
   but return-from-graveyard's filter now reads the spell's X; batch 157 the rest of Commander
   2014 and Khans of Tarkir, no feature built; batch 158 the rest of Magic 2015 and Conspiracy,
   on parley; batch 161 the rest of Journey into Nyx, on bestow, with the eleven earlier bestow
-  cards it unblocked; batch 164 the rest of Born of the Gods, on tribute);
-  **next, Commander 2013** (35 left) **and Theros** (111 left) — one batch of ~146 is past five
-  agents, so Commander 2013 with Theros's top ~75, the rest of Theros the batch after. Theros's
-  mechanics are all in the pool now: bestow, heroic (Brigone, Soldier of Meletis), monstrosity
-  ("is monstrous"), devotion amounts, and inspired is just `becomes-untapped` (Pain Seer).
-  Batch 164's blockers are one each (`B164.json`); Kraken of the Straits found a silent gap — a
+  cards it unblocked; batch 164 the rest of Born of the Gods, on tribute; batch 167 Commander
+  2013 whole and Theros's 76 most-played left, on the Ordeals' "when you sacrifice this Aura");
+  **next, the rest of Theros** (35 left: one or two agents) — Ordeal of Nylea is authorable now
+  (copy `pool/ordeal-of-heliod.ts`, the `sacrifice` trigger's `selfOnly`), and Theros's other
+  mechanics are all in the pool (bestow, heroic, monstrosity, devotion); then Gatecrash, Return
+  to Ravnica and on down to Scars of Mirrodin (`cards:sets -- --set <code>`), stopping before
+  Magic 2011. Batch 167's blockers are one or two each (`B167.json`): "whenever a creature
+  attacks enchanted player" (`trigger:creature-attacks-enchanted-player` — the Curses of
+  Predation and the Forsaken) and the tempting offers' simultaneity
+  (`new:each-player-may-simultaneous` — Tempt with Immortality, beside Tempt with Discovery) lead
+  with two. Batch 164's blockers are one each (`B164.json`); Kraken of the Straits found a silent gap — a
   block restriction's `{ amount }` other than the source's own power, toughness or mana value
   reads as NaN in `goad.ts`'s `sourceAmount`, so the restriction never applies, with no error.
   Batch 161's blockers are one or two each ("all Auras
@@ -191,8 +196,8 @@ section keeps only what to do next.
   newest-first walk (Journey into Nyx back to Scars of Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
   of Alara — ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
   and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
-  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played — landed); the fourth round's (2026-10-26) are B167 (this walk: Commander 2013 and Theros's ~75 most-played), B168 (middle: Magic 2010 and Alara Reborn) and B169 (oldest: the rest of Mirage — landed); after those, take the highest `B<N>` on `origin/main` plus one, checked again
-  just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); batch 165 Zendikar whole, no feature built (26 blocked, "blocks this turn if able" — `effect:must-block-this-turn` — leading with two); **next, Magic 2010** (36 left: small enough for the lead alone or one agent), then Alara Reborn (84), Conflux (69) and Shards of Alara (94), each by `cards:sets -- --set <code>`. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
+  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played — landed); the fourth round's (2026-10-26) are B167 (this walk: Commander 2013 and Theros's ~75 most-played — landed), B168 (middle: Magic 2010 and Alara Reborn) and B169 (oldest: the rest of Mirage — landed); after those, take the highest `B<N>` on `origin/main` plus one, checked again
+  just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); batch 165 Zendikar whole, no feature built (26 blocked, "blocks this turn if able" — `effect:must-block-this-turn` — leading with two); batch 168 Magic 2010 and Alara Reborn (the rest of each), no feature built (38 blocked, led by the five Borderposts' "return a basic land" alternative cost — `cost:alt-cost-return-lands`, 7 cards with Daze and Gush: worth building if Conflux or Shards adds to it); **next, Conflux** (69 left), then Shards of Alara (94), each by `cards:sets -- --set <code>` — the last two sets of this walk's range. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
   157's leading blocker: a morph cost that reveals a card (`cost:morph-reveal-card` — 5), then
   "blocks this turn if able" (`effect:must-block-this-turn`) and looking at face-down
   permanents (`effect:look-at-face-down-permanents`), two each; Stitcher Geralf waits on

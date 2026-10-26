@@ -84,6 +84,7 @@ import _poolBlowOffSteam from "../pool/blow-off-steam.js";
 import _poolBlowYourHouseDown from "../pool/blow-your-house-down.js";
 import _poolBombadilsSong from "../pool/bombadils-song.js";
 import _poolBonecallerCleric from "../pool/bonecaller-cleric.js";
+import _poolBountifulHarvest from "../pool/bountiful-harvest.js";
 import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
 import _poolBraidwoodCup from "../pool/braidwood-cup.js";
 import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
@@ -392,12 +393,14 @@ import _poolNaturesClaim from "../pool/natures-claim.js";
 import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
+import _poolNemesisOfMortals from "../pool/nemesis-of-mortals.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
+import _poolNulltreadGargantuan from "../pool/nulltread-gargantuan.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
@@ -530,10 +533,12 @@ import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
+import _poolSoldierOfThePantheon from "../pool/soldier-of-the-pantheon.js";
 import _poolSolidFooting from "../pool/solid-footing.js";
 import _poolSoulOfTheros from "../pool/soul-of-theros.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
+import _poolSpawningGrounds from "../pool/spawning-grounds.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
 import _poolSpectralGuardian from "../pool/spectral-guardian.js";
 import _poolSpellContortion from "../pool/spell-contortion.js";
@@ -555,6 +560,7 @@ import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
+import _poolStunSniper from "../pool/stun-sniper.js";
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
@@ -628,6 +634,7 @@ import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
 import _poolVantressVisions from "../pool/vantress-visions.js";
 import _poolVastwoodZendikon from "../pool/vastwood-zendikon.js";
 import _poolVedalkenAethermage from "../pool/vedalken-aethermage.js";
+import _poolVedalkenGhoul from "../pool/vedalken-ghoul.js";
 import _poolVenatHeartOfHydaelyn from "../pool/venat-heart-of-hydaelyn.js";
 import _poolVerdigris from "../pool/verdigris.js";
 import _poolVerduranEnchantress from "../pool/verduran-enchantress.js";
@@ -775,6 +782,7 @@ const shard: CardShard = {
     _poolBlowYourHouseDown,
     _poolBombadilsSong,
     _poolBonecallerCleric,
+    _poolBountifulHarvest,
     _poolBountifulLandscape,
     _poolBraidwoodCup,
     _poolBranchloftPathway,
@@ -1083,12 +1091,14 @@ const shard: CardShard = {
     _poolNecroduality,
     _poolNecrogenesis,
     _poolNeighborhoodGuardian,
+    _poolNemesisOfMortals,
     _poolNevinyrralsDisk,
     _poolNightmaresThirst,
     _poolNightmarishEnd,
     _poolNightveilPredator,
     _poolNinjasBlades,
     _poolNorthPolePatrol,
+    _poolNulltreadGargantuan,
     _poolOakhameRanger,
     _poolOathOfGideon,
     _poolObeliskOfEsper,
@@ -1221,10 +1231,12 @@ const shard: CardShard = {
     _poolSmelt,
     _poolSoaringThoughtThief,
     _poolSokkasHaiku,
+    _poolSoldierOfThePantheon,
     _poolSolidFooting,
     _poolSoulOfTheros,
     _poolSoulShred,
     _poolSparringRegimen,
+    _poolSpawningGrounds,
     _poolSpeakSecrets,
     _poolSpectralGuardian,
     _poolSpellContortion,
@@ -1246,6 +1258,7 @@ const shard: CardShard = {
     _poolStormStrike,
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,
+    _poolStunSniper,
     _poolSulfurousMire,
     _poolSumalaWoodshaper,
     _poolSummonChocoMog,
@@ -1319,6 +1332,7 @@ const shard: CardShard = {
     _poolVantressVisions,
     _poolVastwoodZendikon,
     _poolVedalkenAethermage,
+    _poolVedalkenGhoul,
     _poolVenatHeartOfHydaelyn,
     _poolVerdigris,
     _poolVerduranEnchantress,

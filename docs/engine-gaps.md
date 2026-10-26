@@ -87,7 +87,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`GameState.heldChoices`), and an effect that asks nothing more (draw, discard a hand, gain or
   lose life — `asksNothing`) is done for everyone who said yes after the last answer. One that
   asks something else, a search above all, is still done before the next player is asked: Tempt
-  with Discovery stays blocked on it, and so does Innocent Traveler ("if no one does").
+  with Discovery and Tempt with Immortality stay blocked on it, and so does Innocent Traveler ("if no one does").
 - **Static-effect dependency ordering** (rule 613.8) is implemented only for layer 4's additive
   type grants (Kudo beside Mishra's Factory, `characteristics.ts`). Every other layer applies
   its statics in timestamp order only.

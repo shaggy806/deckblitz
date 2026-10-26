@@ -1,0 +1,790 @@
+{
+ "batch": "B167",
+ "status": "complete",
+ "ranks": "Commander 2013 (C13, 2013-11-01): the rest of the set; Theros (THS, 2013-09-27): its 76 most-played left by EDHREC rank (newest-first walk), on \"when you sacrifice this Aura\" (the sacrifice trigger's selfOnly)",
+ "authored": [
+  {
+   "name": "Act of Authority",
+   "files": [
+    "engine/src/cards/pool/act-of-authority.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agent of the Fates",
+   "files": [
+    "engine/src/cards/pool/agent-of-the-fates.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akroan Crusader",
+   "files": [
+    "engine/src/cards/pool/akroan-crusader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akroan Hoplite",
+   "files": [
+    "engine/src/cards/pool/akroan-hoplite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anax and Cymede",
+   "files": [
+    "engine/src/cards/pool/anax-and-cymede.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arbor Colossus",
+   "files": [
+    "engine/src/cards/pool/arbor-colossus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Artisan of Forms",
+   "files": [
+    "engine/src/cards/pool/artisan-of-forms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baleful Eidolon",
+   "files": [
+    "engine/src/cards/pool/baleful-eidolon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boon of Erebos",
+   "files": [
+    "engine/src/cards/pool/boon-of-erebos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boon Satyr",
+   "files": [
+    "engine/src/cards/pool/boon-satyr.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Breaching Hippocamp",
+   "files": [
+    "engine/src/cards/pool/breaching-hippocamp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cavalry Pegasus",
+   "files": [
+    "engine/src/cards/pool/cavalry-pegasus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Archon",
+   "files": [
+    "engine/src/cards/pool/celestial-archon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chained to the Rocks",
+   "files": [
+    "engine/src/cards/pool/chained-to-the-rocks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commune with the Gods",
+   "files": [
+    "engine/src/cards/pool/commune-with-the-gods.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Coordinated Assault",
+   "files": [
+    "engine/src/cards/pool/coordinated-assault.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Curse of Chaos",
+   "files": [
+    "engine/src/cards/pool/curse-of-chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Shallow Graves",
+   "files": [
+    "engine/src/cards/pool/curse-of-shallow-graves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daxos of Meletis",
+   "files": [
+    "engine/src/cards/pool/daxos-of-meletis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Destructive Revelry",
+   "files": [
+    "engine/src/cards/pool/destructive-revelry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Diviner Spirit",
+   "files": [
+    "engine/src/cards/pool/diviner-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fabled Hero",
+   "files": [
+    "engine/src/cards/pool/fabled-hero.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fate Foretold",
+   "files": [
+    "engine/src/cards/pool/fate-foretold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Favored Hoplite",
+   "files": [
+    "engine/src/cards/pool/favored-hoplite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firedrinker Satyr",
+   "files": [
+    "engine/src/cards/pool/firedrinker-satyr.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fleecemane Lion",
+   "files": [
+    "engine/src/cards/pool/fleecemane-lion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "From the Ashes",
+   "files": [
+    "engine/src/cards/pool/from-the-ashes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glare of Heresy",
+   "files": [
+    "engine/src/cards/pool/glare-of-heresy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heliod's Emissary",
+   "files": [
+    "engine/src/cards/pool/heliods-emissary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hopeful Eidolon",
+   "files": [
+    "engine/src/cards/pool/hopeful-eidolon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunt the Hunter",
+   "files": [
+    "engine/src/cards/pool/hunt-the-hunter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hythonia the Cruel",
+   "files": [
+    "engine/src/cards/pool/hythonia-the-cruel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keepsake Gorgon",
+   "files": [
+    "engine/src/cards/pool/keepsake-gorgon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kragma Warcaller",
+   "files": [
+    "engine/src/cards/pool/kragma-warcaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leafcrown Dryad",
+   "files": [
+    "engine/src/cards/pool/leafcrown-dryad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "March of the Returned",
+   "files": [
+    "engine/src/cards/pool/march-of-the-returned.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Master of Waves",
+   "files": [
+    "engine/src/cards/pool/master-of-waves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meletis Charlatan",
+   "files": [
+    "engine/src/cards/pool/meletis-charlatan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nemesis of Mortals",
+   "files": [
+    "engine/src/cards/pool/nemesis-of-mortals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nessian Asp",
+   "files": [
+    "engine/src/cards/pool/nessian-asp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nimbus Naiad",
+   "files": [
+    "engine/src/cards/pool/nimbus-naiad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nylea's Disciple",
+   "files": [
+    "engine/src/cards/pool/nyleas-disciple.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nylea's Emissary",
+   "files": [
+    "engine/src/cards/pool/nyleas-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nylea's Presence",
+   "files": [
+    "engine/src/cards/pool/nyleas-presence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Observant Alseid",
+   "files": [
+    "engine/src/cards/pool/observant-alseid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ordeal of Erebos",
+   "files": [
+    "engine/src/cards/pool/ordeal-of-erebos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ordeal of Heliod",
+   "files": [
+    "engine/src/cards/pool/ordeal-of-heliod.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ordeal of Purphoros",
+   "files": [
+    "engine/src/cards/pool/ordeal-of-purphoros.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ordeal of Thassa",
+   "files": [
+    "engine/src/cards/pool/ordeal-of-thassa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phalanx Leader",
+   "files": [
+    "engine/src/cards/pool/phalanx-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Polis Crusher",
+   "files": [
+    "engine/src/cards/pool/polis-crusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Polukranos, World Eater",
+   "files": [
+    "engine/src/cards/pool/polukranos-world-eater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Portent of Betrayal",
+   "files": [
+    "engine/src/cards/pool/portent-of-betrayal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Prognostic Sphinx",
+   "files": [
+    "engine/src/cards/pool/prognostic-sphinx.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Purphoros's Emissary",
+   "files": [
+    "engine/src/cards/pool/purphoross-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rageblood Shaman",
+   "files": [
+    "engine/src/cards/pool/rageblood-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Restore",
+   "files": [
+    "engine/src/cards/pool/restore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reverent Hunter",
+   "files": [
+    "engine/src/cards/pool/reverent-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roon of the Hidden Realm",
+   "files": [
+    "engine/src/cards/pool/roon-of-the-hidden-realm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Satyr Piper",
+   "files": [
+    "engine/src/cards/pool/satyr-piper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shattergang Brothers",
+   "files": [
+    "engine/src/cards/pool/shattergang-brothers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shipbreaker Kraken",
+   "files": [
+    "engine/src/cards/pool/shipbreaker-kraken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldier of the Pantheon",
+   "files": [
+    "engine/src/cards/pool/soldier-of-the-pantheon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spawning Grounds",
+   "files": [
+    "engine/src/cards/pool/spawning-grounds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spellheart Chimera",
+   "files": [
+    "engine/src/cards/pool/spellheart-chimera.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sydri, Galvanic Genius",
+   "files": [
+    "engine/src/cards/pool/sydri-galvanic-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempt with Glory",
+   "files": [
+    "engine/src/cards/pool/tempt-with-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempt with Reflections",
+   "files": [
+    "engine/src/cards/pool/tempt-with-reflections.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thassa's Emissary",
+   "files": [
+    "engine/src/cards/pool/thassas-emissary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Force",
+   "files": [
+    "engine/src/cards/pool/tidal-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Time to Feed",
+   "files": [
+    "engine/src/cards/pool/time-to-feed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tormented Hero",
+   "files": [
+    "engine/src/cards/pool/tormented-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triad of Fates",
+   "files": [
+    "engine/src/cards/pool/triad-of-fates.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triton Fortune Hunter",
+   "files": [
+    "engine/src/cards/pool/triton-fortune-hunter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tymaret, the Murder King",
+   "files": [
+    "engine/src/cards/pool/tymaret-the-murder-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warriors' Lesson",
+   "files": [
+    "engine/src/cards/pool/warriors-lesson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingsteed Rider",
+   "files": [
+    "engine/src/cards/pool/wingsteed-rider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Witches' Eye",
+   "files": [
+    "engine/src/cards/pool/witches-eye.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Jeleva, Nephalia's Scourge",
+   "needs": [
+    "effect:linked-exiled-card"
+   ],
+   "why": "exile-from-library doesn't link the cards to Jeleva, so 'cast an instant or sorcery card exiled with Jeleva' can't find them"
+  },
+  {
+   "name": "Witch Hunt",
+   "needs": [
+    "effect:random-target"
+   ],
+   "why": "'target opponent chosen at random' — no random target spec"
+  },
+  {
+   "name": "Eye of Doom",
+   "needs": [
+    "effect:each-player-chooses-then-all-act"
+   ],
+   "why": "each player chooses a nonland permanent (mandatory) and doom counters go on all of them"
+  },
+  {
+   "name": "Widespread Panic",
+   "needs": [
+    "trigger:opponent-shuffles-library"
+   ],
+   "why": "whenever a spell or ability causes its controller to shuffle — no shuffle trigger"
+  },
+  {
+   "name": "Defend the Hearth",
+   "needs": [
+    "replacement:prevent-combat-damage-to-filter"
+   ],
+   "why": "prevent all combat damage dealt to players — prevent-all-combat-damage filters only the source"
+  },
+  {
+   "name": "Psychic Intrusion",
+   "needs": [
+    "effect:choose-card-from-hand-or-graveyard"
+   ],
+   "why": "exile a nonland card from the opponent's hand or graveyard, cast it with mana of any colour"
+  },
+  {
+   "name": "Unexpectedly Absent",
+   "needs": [
+    "effect:put-on-library-dynamic-position"
+   ],
+   "why": "put it into its owner's library just beneath the top X cards — put-on-library's fromTop is a fixed number"
+  },
+  {
+   "name": "Naya Soulbeast",
+   "needs": [
+    "amount:cards-revealed-this-way"
+   ],
+   "why": "X is the total mana value of the cards revealed this way; cards left in the library count 0"
+  },
+  {
+   "name": "Steam Augury",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "an opponent separates the revealed cards into two piles, you choose one"
+  },
+  {
+   "name": "Hundred-Handed One",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "while monstrous, can block any number of creatures — no static lets a creature block more than one"
+  },
+  {
+   "name": "Viper's Kiss",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "enchanted creature's activated abilities can't be activated — prohibits.abilitiesOf has no 'the attached creature' filter"
+  },
+  {
+   "name": "True-Name Nemesis",
+   "needs": [
+    "effect:protection-from-player-for-permanent"
+   ],
+   "why": "choose a player as it enters; protection from the chosen player"
+  },
+  {
+   "name": "Mystic Barrier",
+   "needs": [
+    "effect:rechoose-direction-each-upkeep",
+    "static:attack-direction-restriction"
+   ],
+   "why": "direction re-chosen each upkeep; Pramikon's direction is chosen only as it enters"
+  },
+  {
+   "name": "Curse of Predation",
+   "needs": [
+    "trigger:creature-attacks-enchanted-player"
+   ],
+   "why": "'whenever a creature attacks enchanted player' — attacks-player fires once per attacked player, not per creature"
+  },
+  {
+   "name": "Marath, Will of the Wild",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "a modal activated ability whose modes have targets (and X counters removed as cost)"
+  },
+  {
+   "name": "Sudden Demise",
+   "needs": [
+    "decision:choose-color-on-resolution",
+    "filter:chosen-color"
+   ],
+   "why": "choose a colour as it resolves, then damage each creature of that colour an opponent controls"
+  },
+  {
+   "name": "Fell Shepherd",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "return creature cards put into your graveyard from the battlefield this turn"
+  },
+  {
+   "name": "Rescue from the Underworld",
+   "needs": [
+    "effect:delayed-return-target-and-sacrificed-card"
+   ],
+   "why": "the delayed trigger returns the target card and the creature sacrificed as a cost"
+  },
+  {
+   "name": "Gahiji, Honored One",
+   "needs": [
+    "trigger:attacks-your-opponent-per-creature"
+   ],
+   "why": "'whenever a creature attacks one of your opponents or a planeswalker they control' — no such attacks option"
+  },
+  {
+   "name": "Djinn of Infinite Deceits",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of two target nonlegendary creatures"
+  },
+  {
+   "name": "Curse of Inertia",
+   "needs": [
+    "decision:opponent-chooses-target"
+   ],
+   "why": "the attacking player chooses the target of the Curse's controller's trigger"
+  },
+  {
+   "name": "Serene Master",
+   "needs": [
+    "effect:exchange-power"
+   ],
+   "why": "exchange its power with a blocked creature's until end of combat"
+  },
+  {
+   "name": "Terra Ravager",
+   "needs": [
+    "effect:count-defending-player-controls"
+   ],
+   "why": "+X/+0 where X is the number of lands defending player controls"
+  },
+  {
+   "name": "Pyxis of Pandemonium",
+   "needs": [
+    "effect:exile-top-face-down-linked",
+    "zone:exile-face-down"
+   ],
+   "why": "each player exiles their top card face down; later turn them face up and put permanents onto the battlefield"
+  },
+  {
+   "name": "Price of Knowledge",
+   "needs": [
+    "static:players-no-max-hand-size"
+   ],
+   "why": "'players have no maximum hand size' — noMaxHandSize applies only to its controller"
+  },
+  {
+   "name": "Order of Succession",
+   "needs": [
+    "decision:each-player-chooses-permanents-of-left-player"
+   ],
+   "why": "each player chooses a creature of the next player's; rotate-control moves everything that matches"
+  },
+  {
+   "name": "Curse of the Forsaken",
+   "needs": [
+    "trigger:creature-attacks-enchanted-player"
+   ],
+   "why": "'whenever a creature attacks enchanted player' — attacks-player fires once per attacked player, not per creature"
+  },
+  {
+   "name": "Hooded Horror",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "can't be blocked if defending player controls the most creatures — no static condition compares the defender's creature count to others'"
+  },
+  {
+   "name": "Ashiok, Nightmare Weaver",
+   "needs": [
+    "cost:loyalty-x",
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "−X loyalty cost isn't modeled"
+  },
+  {
+   "name": "Mogis's Marauder",
+   "needs": [
+    "decision:variable-target-count"
+   ],
+   "why": "up to X targets, X your devotion to black — an any-number target's max takes only a number or 'x'"
+  },
+  {
+   "name": "Triton Tactics",
+   "needs": [
+    "filter:blocked-or-blocked-by-filter-this-turn"
+   ],
+   "why": "tap the creatures blocking or blocked by those creatures this turn at end of combat"
+  },
+  {
+   "name": "Sealock Monster",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Tempt with Immortality",
+   "needs": [
+    "new:each-player-may-simultaneous"
+   ],
+   "why": "Tempting offer: each accepting opponent chooses and returns a creature card as they answer, before the next opponent is asked; the returns should all happen after everyone has decided (as Tempt with Discovery)."
+  }
+ ]
+}

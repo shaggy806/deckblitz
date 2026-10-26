@@ -24,6 +24,7 @@ import _poolAlquistProftMasterSleuth from "../pool/alquist-proft-master-sleuth.j
 import _poolAmbrosiaWhiteheart from "../pool/ambrosia-whiteheart.js";
 import _poolAmbuscadeShaman from "../pool/ambuscade-shaman.js";
 import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
+import _poolAnathemancer from "../pool/anathemancer.js";
 import _poolAncestralKatana from "../pool/ancestral-katana.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
@@ -128,6 +129,7 @@ import _poolCutIn from "../pool/cut-in.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
 import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
+import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
@@ -335,6 +337,7 @@ import _poolMaraudersAxe from "../pool/marauders-axe.js";
 import _poolMarisisTwinclaws from "../pool/marisis-twinclaws.js";
 import _poolMarrowGnawer from "../pool/marrow-gnawer.js";
 import _poolMassiveMight from "../pool/massive-might.js";
+import _poolMasterOfWaves from "../pool/master-of-waves.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
@@ -674,6 +677,7 @@ const shard: CardShard = {
     _poolAmbrosiaWhiteheart,
     _poolAmbuscadeShaman,
     _poolAnalyzeThePollen,
+    _poolAnathemancer,
     _poolAncestralKatana,
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
@@ -778,6 +782,7 @@ const shard: CardShard = {
     _poolDargoTheShipwrecker,
     _poolDarlingOfTheMasses,
     _poolDauthiJackal,
+    _poolDaxosOfMeletis,
     _poolDecreeOfPain,
     _poolDelifsCone,
     _poolDinaEssenceBrewer,
@@ -985,6 +990,7 @@ const shard: CardShard = {
     _poolMarisisTwinclaws,
     _poolMarrowGnawer,
     _poolMassiveMight,
+    _poolMasterOfWaves,
     _poolMasterTransmuter,
     _poolMeatLocker,
     _poolMechanNavigator,

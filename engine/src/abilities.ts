@@ -1148,11 +1148,15 @@ export type TriggerSpec =
        * `filter` narrows it ("whenever you sacrifice a **nontoken**
        * permanent", "…a Food"), matched against the permanent as it last
        * existed on the battlefield; `otherOnly` is "another". The sacrificed
-       * permanent is the trigger object ("its power", "that creature"). */
+       * permanent is the trigger object ("its power", "that creature").
+       * `selfOnly` is "when you sacrifice **this** permanent" (the Theros
+       * Ordeals): it fires however its own source was sacrificed, looking
+       * back in time to it (rule 603.10a). */
       readonly on: "sacrifice";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+      readonly selfOnly?: boolean;
     }
   | {
       /** A permanent turned over to its other face (rule 712.10 — ROADMAP

@@ -14,6 +14,7 @@ import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
 import _poolAkoumBattlesinger from "../pool/akoum-battlesinger.js";
+import _poolAkroanHoplite from "../pool/akroan-hoplite.js";
 import _poolAnHavvaConstable from "../pool/an-havva-constable.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
@@ -121,6 +122,7 @@ import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
+import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiligentExcavator from "../pool/diligent-excavator.js";
@@ -158,6 +160,7 @@ import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
 import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
+import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
@@ -238,6 +241,7 @@ import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
 import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
+import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHuntersMark from "../pool/hunters-mark.js";
@@ -300,6 +304,7 @@ import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
 import _poolLightningPhoenix from "../pool/lightning-phoenix.js";
+import _poolLightningReaver from "../pool/lightning-reaver.js";
 import _poolLightningSkelemental from "../pool/lightning-skelemental.js";
 import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
@@ -361,6 +366,7 @@ import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
 import _poolNantukoDisciple from "../pool/nantuko-disciple.js";
+import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
@@ -486,6 +492,7 @@ import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
 import _poolSpellbookVendor from "../pool/spellbook-vendor.js";
+import _poolSpellheartChimera from "../pool/spellheart-chimera.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
 import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
@@ -572,6 +579,7 @@ import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUlrichUncontestedAlpha from "../pool/ulrich-uncontested-alpha.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
+import _poolUndeadSlayer from "../pool/undead-slayer.js";
 import _poolUndercoverButler from "../pool/undercover-butler.js";
 import _poolUnderworldFires from "../pool/underworld-fires.js";
 import _poolUnderworldHermit from "../pool/underworld-hermit.js";
@@ -671,6 +679,7 @@ const shard: CardShard = {
     _poolAkkiDrillmaster,
     _poolAkkiScrapchomper,
     _poolAkoumBattlesinger,
+    _poolAkroanHoplite,
     _poolAnHavvaConstable,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
@@ -778,6 +787,7 @@ const shard: CardShard = {
     _poolDeeprootChampion,
     _poolDeposeDeploy,
     _poolDesperateCharge,
+    _poolDestructiveRevelry,
     _poolDevotedDruid,
     _poolDevoutChaplain,
     _poolDiligentExcavator,
@@ -815,6 +825,7 @@ const shard: CardShard = {
     _poolElvishHydromancer,
     _poolEmberhornMinotaur,
     _poolEmberwildeCaliph,
+    _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
     _poolEntishRestoration,
     _poolEntryDenied,
@@ -895,6 +906,7 @@ const shard: CardShard = {
     _poolHinderingTouch,
     _poolHippoCows,
     _poolHoardingRecluse,
+    _poolHopefulEidolon,
     _poolHornOfGondor,
     _poolHotshotInvestigators,
     _poolHuntersMark,
@@ -957,6 +969,7 @@ const shard: CardShard = {
     _poolLightlessEvangel,
     _poolLightningGreaves,
     _poolLightningPhoenix,
+    _poolLightningReaver,
     _poolLightningSkelemental,
     _poolLightningStormkin,
     _poolLilianasShade,
@@ -1018,6 +1031,7 @@ const shard: CardShard = {
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
     _poolNantukoDisciple,
+    _poolNecromancersCovenant,
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
     _poolNineTailWhiteFox,
@@ -1143,6 +1157,7 @@ const shard: CardShard = {
     _poolSpeakeasyServer,
     _poolSpectrumSentinel,
     _poolSpellbookVendor,
+    _poolSpellheartChimera,
     _poolSpellkeeperWeird,
     _poolSpellruneHowler,
     _poolSphinxOfForgottenLore,
@@ -1229,6 +1244,7 @@ const shard: CardShard = {
     _poolUlcerate,
     _poolUlrichUncontestedAlpha,
     _poolUndeadLeotau,
+    _poolUndeadSlayer,
     _poolUndercoverButler,
     _poolUnderworldFires,
     _poolUnderworldHermit,

@@ -21,6 +21,7 @@ import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
+import _poolArborColossus from "../pool/arbor-colossus.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
 import _poolArchaeomancer from "../pool/archaeomancer.js";
 import _poolArchangelAvacyn from "../pool/archangel-avacyn.js";
@@ -35,6 +36,7 @@ import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
 import _poolAspectOfManticore from "../pool/aspect-of-manticore.js";
 import _poolAureliaTheLawAbove from "../pool/aurelia-the-law-above.js";
+import _poolAvenMimeomancer from "../pool/aven-mimeomancer.js";
 import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
@@ -43,6 +45,7 @@ import _poolBadDeal from "../pool/bad-deal.js";
 import _poolBagOfTricks from "../pool/bag-of-tricks.js";
 import _poolBalothCageTrap from "../pool/baloth-cage-trap.js";
 import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
+import _poolBantSojourners from "../pool/bant-sojourners.js";
 import _poolBardClass from "../pool/bard-class.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
@@ -155,12 +158,14 @@ import _poolDireFleetNeckbreaker from "../pool/dire-fleet-neckbreaker.js";
 import _poolDiscoverTheImpossible from "../pool/discover-the-impossible.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
+import _poolDjinnOfWishes from "../pool/djinn-of-wishes.js";
 import _poolDominatorDrone from "../pool/dominator-drone.js";
 import _poolDontMove from "../pool/dont-move.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
 import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
 import _poolDrannithHealer from "../pool/drannith-healer.js";
 import _poolDrannithRuins from "../pool/drannith-ruins.js";
+import _poolDrasticRevelation from "../pool/drastic-revelation.js";
 import _poolDreadwurm from "../pool/dreadwurm.js";
 import _poolDreamCache from "../pool/dream-cache.js";
 import _poolDromokaTheEternal from "../pool/dromoka-the-eternal.js";
@@ -227,6 +232,7 @@ import _poolFortifyingProvisions from "../pool/fortifying-provisions.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
 import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
+import _poolFromTheAshes from "../pool/from-the-ashes.js";
 import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
 import _poolFullBore from "../pool/full-bore.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
@@ -518,6 +524,7 @@ import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
+import _poolSpellboundDragon from "../pool/spellbound-dragon.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
 import _poolSpiderIslanders from "../pool/spider-islanders.js";
 import _poolSpiderManWebSlinger from "../pool/spider-man-web-slinger.js";
@@ -673,6 +680,7 @@ const shard: CardShard = {
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
     _poolArbiterOfWoe,
+    _poolArborColossus,
     _poolArborealGrazer,
     _poolArchaeomancer,
     _poolArchangelAvacyn,
@@ -687,6 +695,7 @@ const shard: CardShard = {
     _poolAshcoatOfTheShadowSwarm,
     _poolAspectOfManticore,
     _poolAureliaTheLawAbove,
+    _poolAvenMimeomancer,
     _poolAvenOfEnduringHope,
     _poolAxebaneGuardian,
     _poolAzureMage,
@@ -695,6 +704,7 @@ const shard: CardShard = {
     _poolBagOfTricks,
     _poolBalothCageTrap,
     _poolBanishFromEdoras,
+    _poolBantSojourners,
     _poolBardClass,
     _poolBarkOfDoran,
     _poolBarrageOfBoulders,
@@ -807,12 +817,14 @@ const shard: CardShard = {
     _poolDiscoverTheImpossible,
     _poolDissentersDeliverance,
     _poolDistractTheGuards,
+    _poolDjinnOfWishes,
     _poolDominatorDrone,
     _poolDontMove,
     _poolDouseInGloom,
     _poolDragonBellMonk,
     _poolDrannithHealer,
     _poolDrannithRuins,
+    _poolDrasticRevelation,
     _poolDreadwurm,
     _poolDreamCache,
     _poolDromokaTheEternal,
@@ -879,6 +891,7 @@ const shard: CardShard = {
     _poolFrenziedArynx,
     _poolFreshVolunteers,
     _poolFrogtosserBanneret,
+    _poolFromTheAshes,
     _poolFuelForTheCause,
     _poolFullBore,
     _poolFuturistForge,
@@ -1170,6 +1183,7 @@ const shard: CardShard = {
     _poolSmashingSuccess,
     _poolSnarlingWarg,
     _poolSparringConstruct,
+    _poolSpellboundDragon,
     _poolSphinxOfTheSteelWind,
     _poolSpiderIslanders,
     _poolSpiderManWebSlinger,

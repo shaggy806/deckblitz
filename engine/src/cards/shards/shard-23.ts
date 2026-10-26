@@ -8,6 +8,7 @@ import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
 import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
 import _poolAgentOfErebos from "../pool/agent-of-erebos.js";
+import _poolAgentOfTheFates from "../pool/agent-of-the-fates.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
@@ -118,6 +119,7 @@ import _poolCoeurl from "../pool/coeurl.js";
 import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
 import _poolCogworkSpy from "../pool/cogwork-spy.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
+import _poolCommuneWithTheGods from "../pool/commune-with-the-gods.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
@@ -192,6 +194,7 @@ import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
+import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
 import _poolFireCovenant from "../pool/fire-covenant.js";
 import _poolFirescreamer from "../pool/firescreamer.js";
@@ -263,6 +266,7 @@ import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolIlluminateHistory from "../pool/illuminate-history.js";
+import _poolIllusoryDemon from "../pool/illusory-demon.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
@@ -377,6 +381,7 @@ import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
+import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
@@ -670,6 +675,7 @@ const shard: CardShard = {
     _poolAetherSearcher,
     _poolAgadeemOccultist,
     _poolAgentOfErebos,
+    _poolAgentOfTheFates,
     _poolAgonyWarp,
     _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
@@ -780,6 +786,7 @@ const shard: CardShard = {
     _poolCogworkAssembler,
     _poolCogworkSpy,
     _poolCommuneWithLava,
+    _poolCommuneWithTheGods,
     _poolCongregationGryff,
     _poolCoolButRude,
     _poolCoordinatedCharge,
@@ -854,6 +861,7 @@ const shard: CardShard = {
     _poolFateholdChronologist,
     _poolFearOfImmobility,
     _poolFiendishDuo,
+    _poolFightToTheDeath,
     _poolFiligreeFamiliar,
     _poolFireCovenant,
     _poolFirescreamer,
@@ -925,6 +933,7 @@ const shard: CardShard = {
     _poolIdyllicTutor,
     _poolIgneousCur,
     _poolIlluminateHistory,
+    _poolIllusoryDemon,
     _poolImmolatingGlare,
     _poolIncandescentAria,
     _poolIncitedRabble,
@@ -1039,6 +1048,7 @@ const shard: CardShard = {
     _poolNezumiLinkbreaker,
     _poolNightMarket,
     _poolNighthowlPursuer,
+    _poolNyleasDisciple,
     _poolNyxLotus,
     _poolOakheartDryads,
     _poolObNixilisReignited,

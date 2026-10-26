@@ -7,6 +7,7 @@ import _poolAbzanMonument from "../pool/abzan-monument.js";
 import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
+import _poolAkroanCrusader from "../pool/akroan-crusader.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
 import _poolAkroanSergeant from "../pool/akroan-sergeant.js";
 import _poolAladdin from "../pool/aladdin.js";
@@ -286,9 +287,11 @@ import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
+import _poolKathariBomber from "../pool/kathari-bomber.js";
 import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKazuulWarlord from "../pool/kazuul-warlord.js";
+import _poolKeepsakeGorgon from "../pool/keepsake-gorgon.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
@@ -410,6 +413,7 @@ import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
 import _poolPlumecreedMentor from "../pool/plumecreed-mentor.js";
+import _poolPolisCrusher from "../pool/polis-crusher.js";
 import _poolPowderGanger from "../pool/powder-ganger.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
@@ -600,7 +604,9 @@ import _poolTurtleSeals from "../pool/turtle-seals.js";
 import _poolTwinSilkSpider from "../pool/twin-silk-spider.js";
 import _poolTwinscrollShaman from "../pool/twinscroll-shaman.js";
 import _poolTwistedExperiment from "../pool/twisted-experiment.js";
+import _poolTymaretTheMurderKing from "../pool/tymaret-the-murder-king.js";
 import _poolUlvenwaldMysteries from "../pool/ulvenwald-mysteries.js";
+import _poolUnbenderTine from "../pool/unbender-tine.js";
 import _poolUndermountainAdventurer from "../pool/undermountain-adventurer.js";
 import _poolUndyingMalice from "../pool/undying-malice.js";
 import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
@@ -677,6 +683,7 @@ import _tokensBirdIllusionToken from "../tokens/bird-illusion-token.js";
 import _tokensBlackDeathtouchSnakeToken from "../tokens/black-deathtouch-snake-token.js";
 import _tokensBlueBlackFaerieToken from "../tokens/blue-black-faerie-token.js";
 import _tokensDinosaurToken31 from "../tokens/dinosaur-token-3-1.js";
+import _tokensGargoyleToken from "../tokens/gargoyle-token.js";
 import _tokensGoblinTokenBoggartMischief from "../tokens/goblin-token-boggart-mischief.js";
 import _tokensInsectTokenRiseOfTheAnts from "../tokens/insect-token-rise-of-the-ants.js";
 import _tokensInsectToken from "../tokens/insect-token.js";
@@ -702,6 +709,7 @@ const shard: CardShard = {
     _poolAcademyRector,
     _poolAccelerate,
     _poolAesiTyrantOfGyreStrait,
+    _poolAkroanCrusader,
     _poolAkroanJailer,
     _poolAkroanSergeant,
     _poolAladdin,
@@ -981,9 +989,11 @@ const shard: CardShard = {
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
+    _poolKathariBomber,
     _poolKaysa,
     _poolKazanduValley,
     _poolKazuulWarlord,
+    _poolKeepsakeGorgon,
     _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
@@ -1105,6 +1115,7 @@ const shard: CardShard = {
     _poolPizzaFaceGastromancer,
     _poolPlatinumAngel,
     _poolPlumecreedMentor,
+    _poolPolisCrusher,
     _poolPowderGanger,
     _poolPredatorySliver,
     _poolPridefulParent,
@@ -1295,7 +1306,9 @@ const shard: CardShard = {
     _poolTwinSilkSpider,
     _poolTwinscrollShaman,
     _poolTwistedExperiment,
+    _poolTymaretTheMurderKing,
     _poolUlvenwaldMysteries,
+    _poolUnbenderTine,
     _poolUndermountainAdventurer,
     _poolUndyingMalice,
     _poolUnlivingLegionnaire,
@@ -1374,6 +1387,7 @@ const shard: CardShard = {
     _tokensBlackDeathtouchSnakeToken,
     _tokensBlueBlackFaerieToken,
     _tokensDinosaurToken31,
+    _tokensGargoyleToken,
     _tokensGoblinTokenBoggartMischief,
     _tokensInsectTokenRiseOfTheAnts,
     _tokensInsectToken,

@@ -355,6 +355,7 @@ import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
 import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNightmare from "../pool/nightmare.js";
+import _poolNimbusNaiad from "../pool/nimbus-naiad.js";
 import _poolNissaNaturesArtisan from "../pool/nissa-natures-artisan.js";
 import _poolNissaRevane from "../pool/nissa-revane.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
@@ -556,6 +557,7 @@ import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
 import _poolThassasBounty from "../pool/thassas-bounty.js";
+import _poolThassasEmissary from "../pool/thassas-emissary.js";
 import _poolTheBiblioplex from "../pool/the-biblioplex.js";
 import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
@@ -1016,6 +1018,7 @@ const shard: CardShard = {
     _poolNevThePracticalDean,
     _poolNexusWardens,
     _poolNightmare,
+    _poolNimbusNaiad,
     _poolNissaNaturesArtisan,
     _poolNissaRevane,
     _poolNissaSageAnimist,
@@ -1217,6 +1220,7 @@ const shard: CardShard = {
     _poolTevalTheBalancedScale,
     _poolThaliaAndTheGitrogMonster,
     _poolThassasBounty,
+    _poolThassasEmissary,
     _poolTheBiblioplex,
     _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,

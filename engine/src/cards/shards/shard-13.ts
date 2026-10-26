@@ -48,6 +48,7 @@ import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvacynianMissionaries from "../pool/avacynian-missionaries.js";
 import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
+import _poolAwakenerDruid from "../pool/awakener-druid.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
@@ -101,6 +102,7 @@ import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
 import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
 import _poolCavernWhisperer from "../pool/cavern-whisperer.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
+import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
@@ -108,6 +110,7 @@ import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
+import _poolClovenCasting from "../pool/cloven-casting.js";
 import _poolClutchOfCurrents from "../pool/clutch-of-currents.js";
 import _poolCoastalBreach from "../pool/coastal-breach.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
@@ -138,6 +141,7 @@ import _poolDarkstarAugur from "../pool/darkstar-augur.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
+import _poolDeathbringerThoctar from "../pool/deathbringer-thoctar.js";
 import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
 import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
@@ -151,6 +155,7 @@ import _poolDiabolicEdict from "../pool/diabolic-edict.js";
 import _poolDigUpTheBody from "../pool/dig-up-the-body.js";
 import _poolDimensionalExile from "../pool/dimensional-exile.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
+import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
@@ -335,6 +340,7 @@ import _poolMakeMischief from "../pool/make-mischief.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
+import _poolMarchOfTheReturned from "../pool/march-of-the-returned.js";
 import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
 import _poolMarshalsPathcruiser from "../pool/marshals-pathcruiser.js";
@@ -484,6 +490,7 @@ import _poolSenselessRage from "../pool/senseless-rage.js";
 import _poolSereneHeart from "../pool/serene-heart.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
+import _poolShipbreakerKraken from "../pool/shipbreaker-kraken.js";
 import _poolShorikaiGenesisEngine from "../pool/shorikai-genesis-engine.js";
 import _poolShortBow from "../pool/short-bow.js";
 import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
@@ -710,6 +717,7 @@ const shard: CardShard = {
     _poolAuthorityOfTheConsuls,
     _poolAvacynianMissionaries,
     _poolAvengingHuntbonder,
+    _poolAwakenerDruid,
     _poolAxegrinderGiant,
     _poolAzulaOnTheHunt,
     _poolBadgermole,
@@ -763,6 +771,7 @@ const shard: CardShard = {
     _poolCavernOfSouls,
     _poolCavernWhisperer,
     _poolCelestialUnicorn,
+    _poolChainedToTheRocks,
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
     _poolClamorShaman,
@@ -770,6 +779,7 @@ const shard: CardShard = {
     _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
+    _poolClovenCasting,
     _poolClutchOfCurrents,
     _poolCoastalBreach,
     _poolCoastalTower,
@@ -800,6 +810,7 @@ const shard: CardShard = {
     _poolDauthiEmbrace,
     _poolDawnhartDisciple,
     _poolDeathSpeakers,
+    _poolDeathbringerThoctar,
     _poolDeathcapMarionette,
     _poolDeathlessKnight,
     _poolDebtToTheDeathless,
@@ -813,6 +824,7 @@ const shard: CardShard = {
     _poolDigUpTheBody,
     _poolDimensionalExile,
     _poolDivergentEquation,
+    _poolDivinerSpirit,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
     _poolDragonlordAtarka,
@@ -997,6 +1009,7 @@ const shard: CardShard = {
     _poolMalametBrawler,
     _poolMalametVeteran,
     _poolMaraudingBrinefang,
+    _poolMarchOfTheReturned,
     _poolMarduAscendancy,
     _poolMarshGas,
     _poolMarshalsPathcruiser,
@@ -1146,6 +1159,7 @@ const shard: CardShard = {
     _poolSereneHeart,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
+    _poolShipbreakerKraken,
     _poolShorikaiGenesisEngine,
     _poolShortBow,
     _poolShredderUnrelenting,

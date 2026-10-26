@@ -9,6 +9,7 @@ import _poolAbzanDevotee from "../pool/abzan-devotee.js";
 import _poolAccomplishedAutomaton from "../pool/accomplished-automaton.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAcrobaticLeap from "../pool/acrobatic-leap.js";
+import _poolActOfAuthority from "../pool/act-of-authority.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
 import _poolAdverseConditions from "../pool/adverse-conditions.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
@@ -181,6 +182,7 @@ import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
 import _poolEyetwitch from "../pool/eyetwitch.js";
+import _poolFabledHero from "../pool/fabled-hero.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
 import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
 import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
@@ -572,6 +574,7 @@ import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
 import _poolTempleOfAclazotz from "../pool/temple-of-aclazotz.js";
+import _poolTemptWithReflections from "../pool/tempt-with-reflections.js";
 import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
 import _poolTerritorialKavu from "../pool/territorial-kavu.js";
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolAccomplishedAutomaton,
     _poolAcolyteOfXathrid,
     _poolAcrobaticLeap,
+    _poolActOfAuthority,
     _poolAdamantWill,
     _poolAdverseConditions,
     _poolAerieAuxiliary,
@@ -863,6 +867,7 @@ const shard: CardShard = {
     _poolExcoriate,
     _poolExpensiveTaste,
     _poolEyetwitch,
+    _poolFabledHero,
     _poolFaerieInvaders,
     _poolFaerieMastermind,
     _poolFalconAndRedwing,
@@ -1254,6 +1259,7 @@ const shard: CardShard = {
     _poolTanukiTransplanter,
     _poolTaxiDriver,
     _poolTempleOfAclazotz,
+    _poolTemptWithReflections,
     _poolTemurBattleRage,
     _poolTergridGodOfFright,
     _poolTerritorialKavu,

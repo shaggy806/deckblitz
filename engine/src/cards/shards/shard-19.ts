@@ -144,6 +144,7 @@ import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
+import _poolDemonspineWhip from "../pool/demonspine-whip.js";
 import _poolDenethorRulingSteward from "../pool/denethor-ruling-steward.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyExistence from "../pool/deny-existence.js";
@@ -260,6 +261,7 @@ import _poolGreelsCaress from "../pool/greels-caress.js";
 import _poolGriffinDreamfinder from "../pool/griffin-dreamfinder.js";
 import _poolGrimBauble from "../pool/grim-bauble.js";
 import _poolGrindDust from "../pool/grind-dust.js";
+import _poolGrixisSojourners from "../pool/grixis-sojourners.js";
 import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
 import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
@@ -317,6 +319,7 @@ import _poolJadedAnalyst from "../pool/jaded-analyst.js";
 import _poolJeskaiBarricade from "../pool/jeskai-barricade.js";
 import _poolJoinShields from "../pool/join-shields.js";
 import _poolJoustThrough from "../pool/joust-through.js";
+import _poolJundHackblade from "../pool/jund-hackblade.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
 import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
@@ -395,6 +398,7 @@ import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
 import _poolMushroomWatchdogs from "../pool/mushroom-watchdogs.js";
+import _poolMycoidShepherd from "../pool/mycoid-shepherd.js";
 import _poolNagaFleshcrafter from "../pool/naga-fleshcrafter.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
@@ -415,6 +419,7 @@ import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
+import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
@@ -524,6 +529,7 @@ import _poolShortcutToMushrooms from "../pool/shortcut-to-mushrooms.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
+import _poolSigilOfTheNayanGods from "../pool/sigil-of-the-nayan-gods.js";
 import _poolSignInBlood from "../pool/sign-in-blood.js";
 import _poolSilvanReveler from "../pool/silvan-reveler.js";
 import _poolSilverDeputy from "../pool/silver-deputy.js";
@@ -668,6 +674,7 @@ import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
+import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
@@ -823,6 +830,7 @@ const shard: CardShard = {
     _poolDecanterOfEndlessWater,
     _poolDeepForestHermit,
     _poolDelversTorch,
+    _poolDemonspineWhip,
     _poolDenethorRulingSteward,
     _poolDenyEntry,
     _poolDenyExistence,
@@ -939,6 +947,7 @@ const shard: CardShard = {
     _poolGriffinDreamfinder,
     _poolGrimBauble,
     _poolGrindDust,
+    _poolGrixisSojourners,
     _poolGrolnokTheOmnivore,
     _poolGuardianOfFaith,
     _poolGuardianProject,
@@ -996,6 +1005,7 @@ const shard: CardShard = {
     _poolJeskaiBarricade,
     _poolJoinShields,
     _poolJoustThrough,
+    _poolJundHackblade,
     _poolJungleTroll,
     _poolKamiOfFalseHope,
     _poolKardurDoomscourge,
@@ -1074,6 +1084,7 @@ const shard: CardShard = {
     _poolMuddleTheMixture,
     _poolMuragandaRaceway,
     _poolMushroomWatchdogs,
+    _poolMycoidShepherd,
     _poolNagaFleshcrafter,
     _poolNaktamunLorespinner,
     _poolNanoformSentinel,
@@ -1094,6 +1105,7 @@ const shard: CardShard = {
     _poolNorwoodWarrior,
     _poolNyxbornHydra,
     _poolOathOfChandra,
+    _poolObservantAlseid,
     _poolOgreBerserker,
     _poolOgreSiegebreaker,
     _poolOrderOfTheWhiteShield,
@@ -1203,6 +1215,7 @@ const shard: CardShard = {
     _poolShuEliteInfantry,
     _poolShuko,
     _poolSift,
+    _poolSigilOfTheNayanGods,
     _poolSignInBlood,
     _poolSilvanReveler,
     _poolSilverDeputy,
@@ -1349,6 +1362,7 @@ const shard: CardShard = {
     _poolZukosExile,
   ],
   tokens: [
+    _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
     _tokensHeartwoodToken,
     _tokensJumblebones,
