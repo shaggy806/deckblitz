@@ -450,6 +450,33 @@ export default {
     bots: { bob: {} },
   },
 
+  MIRAC: {
+    about:
+      "2p. Miracle: cast Divination; its first draw is Thunderous Wrath (on top of alice's " +
+      "library), so alice is asked whether to reveal it (Reveal / Keep hidden). Revealed, its " +
+      "trigger offers the cast for {R} — the one Mountain.",
+    players: ["alice", "bob"],
+    battlefield: { alice: ["Island", "Island", "Island", "Mountain"], bob: ["Plains"] },
+    hand: { alice: ["Divination"] },
+    setup(game) {
+      game.debugSpawn("Thunderous Wrath", "alice", "library");
+      game.state.players.alice.cardsDrawnThisTurn = 0;
+    },
+    bots: { bob: {} },
+  },
+
+  MIRA4: {
+    about: "4p. MIRAC at four players: Divination's first draw, Thunderous Wrath, asks the miracle reveal.",
+    players: ["alice", "bob", "carol", "dave"],
+    battlefield: { alice: ["Island", "Island", "Island", "Mountain"], bob: ["Plains"], carol: ["Plains"], dave: ["Plains"] },
+    hand: { alice: ["Divination"] },
+    setup(game) {
+      game.debugSpawn("Thunderous Wrath", "alice", "library");
+      game.state.players.alice.cardsDrawnThisTurn = 0;
+    },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
+
   POPU4: {
     about:
       "4p. POPUL at four players: Trostani's populate between an Elephant and a Soldier token, " +
