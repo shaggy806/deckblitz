@@ -6,7 +6,7 @@ const FACES = ["Rough // Tumble", "Rough", "Tumble"];
 // tumble.ts are the halves.
 export default defineCard({
   name: "Rough // Tumble",
-  manaCost: "{6}{R}{R}",
+  manaCost: "{1}{R}{5}{R}",
   colors: ["R"],
   types: ["sorcery"],
   text: "Rough deals 2 damage to each creature without flying.\n//\nTumble deals 6 damage to each creature with flying.",

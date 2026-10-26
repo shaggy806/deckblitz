@@ -6,7 +6,7 @@ const FACES = ["Dead // Gone", "Dead", "Gone"];
 // are the halves.
 export default defineCard({
   name: "Dead // Gone",
-  manaCost: "{2}{R}{R}",
+  manaCost: "{R}{2}{R}",
   colors: ["R"],
   types: ["instant"],
   text: "Dead deals 2 damage to target creature.\n//\nReturn target creature you don't control to its owner's hand.",

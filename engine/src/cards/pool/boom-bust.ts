@@ -6,7 +6,7 @@ const FACES = ["Boom // Bust", "Boom", "Bust"];
 // are the halves.
 export default defineCard({
   name: "Boom // Bust",
-  manaCost: "{6}{R}{R}",
+  manaCost: "{1}{R}{5}{R}",
   colors: ["R"],
   types: ["sorcery"],
   text: "Destroy target land you control and target land you don't control.\n//\nDestroy all lands.",
