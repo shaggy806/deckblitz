@@ -450,6 +450,7 @@ import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
+import _poolNihilith from "../pool/nihilith.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNoggleBridgebreaker from "../pool/noggle-bridgebreaker.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolNightmaresThirst,
     _poolNightmarishEnd,
     _poolNightveilPredator,
+    _poolNihilith,
     _poolNinjasBlades,
     _poolNoggleBridgebreaker,
     _poolNorthPolePatrol,

@@ -257,6 +257,7 @@ import _poolGrandEntryway from "../pool/grand-entryway.js";
 import _poolGravelHideGoblin from "../pool/gravel-hide-goblin.js";
 import _poolGravewaker from "../pool/gravewaker.js";
 import _poolGreatDesertProspector from "../pool/great-desert-prospector.js";
+import _poolGreaterGargadon from "../pool/greater-gargadon.js";
 import _poolGreenhouse from "../pool/greenhouse.js";
 import _poolGristleGlutton from "../pool/gristle-glutton.js";
 import _poolGrixisPanorama from "../pool/grixis-panorama.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolGravelHideGoblin,
     _poolGravewaker,
     _poolGreatDesertProspector,
+    _poolGreaterGargadon,
     _poolGreenhouse,
     _poolGristleGlutton,
     _poolGrixisPanorama,

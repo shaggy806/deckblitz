@@ -3137,6 +3137,20 @@ and `"source"` finds the card only if it's the same object when the ability
 resolves (rule 400.7), a "you may" included. Never filter a return on the
 card's own name: that reaches another copy of it.
 
+**`whileSuspended: true`** is a triggered ability that works while its card is
+suspended (rule 702.62b — in exile, with suspend and a time counter), and only
+then: Deep-Sea Kraken's "whenever an opponent casts a spell, if this card is
+suspended, remove a time counter from it" (`remove-counter` of `"source"`,
+`counter: "time"`), Nihilith's (in a `may`). "When the last time counter is
+removed from this card while it's exiled" is `{ on: "counters-removed", who:
+"self", counter: "time", last: true }` with it (Riftmarked Knight); without
+`last`, each removal (Dinosaurs on a Spaceship). The last counter's removal is
+seen though the card then has none; any other trigger needs a time counter on
+it. Its controller is the owner. The activated form is **`zone: "suspended"`**
+on an `activated` entry — "Activate only if this card is suspended" (Greater
+Gargadon): its owner activates it from exile, the cost doesn't move the card,
+and the client offers it from the exile viewer. `while-suspended.test.ts`.
+
 ---
 
 **Ward** (rule 702.21) — `ward(cost)` from `helpers.ts` builds the whole

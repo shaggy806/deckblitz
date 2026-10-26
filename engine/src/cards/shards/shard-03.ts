@@ -668,6 +668,7 @@ import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
 import _tokensHellionTokenHaste from "../tokens/hellion-token-haste.js";
+import _tokensKnightToken22BlackFlanking from "../tokens/knight-token-2-2-black-flanking.js";
 import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOrbToken from "../tokens/orb-token.js";
@@ -1348,6 +1349,7 @@ const shard: CardShard = {
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
     _tokensHellionTokenHaste,
+    _tokensKnightToken22BlackFlanking,
     _tokensMutagenToken,
     _tokensMutantToken,
     _tokensOrbToken,

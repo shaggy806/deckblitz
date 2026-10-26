@@ -157,6 +157,7 @@ import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
 import _poolDingusStaff from "../pool/dingus-staff.js";
+import _poolDinosaursOnASpaceship from "../pool/dinosaurs-on-a-spaceship.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolDevilsPlay,
     _poolDictateOfHeliod,
     _poolDingusStaff,
+    _poolDinosaursOnASpaceship,
     _poolDireFleetCaptain,
     _poolDiscordantDirge,
     _poolDisfigure,

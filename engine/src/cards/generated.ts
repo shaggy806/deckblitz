@@ -4730,6 +4730,7 @@ import _poolDeemWorthy from "./pool/deem-worthy.js";
 import _poolDeepAnalysis from "./pool/deep-analysis.js";
 import _poolDeepForestHermit from "./pool/deep-forest-hermit.js";
 import _poolDeepGoblinSkulltaker from "./pool/deep-goblin-skulltaker.js";
+import _poolDeepSeaKraken from "./pool/deep-sea-kraken.js";
 import _poolDeepSeaTerror from "./pool/deep-sea-terror.js";
 import _poolDeepSight from "./pool/deep-sight.js";
 import _poolDeepSlumberTitan from "./pool/deep-slumber-titan.js";
@@ -5050,6 +5051,7 @@ import _poolDingusStaff from "./pool/dingus-staff.js";
 import _poolDiningRoom from "./pool/dining-room.js";
 import _poolDinosaurHunter from "./pool/dinosaur-hunter.js";
 import _poolDinosaurStampede from "./pool/dinosaur-stampede.js";
+import _poolDinosaursOnASpaceship from "./pool/dinosaurs-on-a-spaceship.js";
 import _poolDinotomaton from "./pool/dinotomaton.js";
 import _poolDionBahamutsDominant from "./pool/dion-bahamuts-dominant.js";
 import _poolDiplomacyOfTheWastes from "./pool/diplomacy-of-the-wastes.js";
@@ -8545,6 +8547,7 @@ import _poolGreatbowDoyen from "./pool/greatbow-doyen.js";
 import _poolGreaterAuramancy from "./pool/greater-auramancy.js";
 import _poolGreaterBasilisk from "./pool/greater-basilisk.js";
 import _poolGreaterForgeling from "./pool/greater-forgeling.js";
+import _poolGreaterGargadon from "./pool/greater-gargadon.js";
 import _poolGreaterGood from "./pool/greater-good.js";
 import _poolGreaterRealmOfPreservation from "./pool/greater-realm-of-preservation.js";
 import _poolGreaterSandwurm from "./pool/greater-sandwurm.js";
@@ -13485,6 +13488,7 @@ import _poolNightwindGlider from "./pool/nightwind-glider.js";
 import _poolNightwingShade from "./pool/nightwing-shade.js";
 import _poolNihilSpellbomb from "./pool/nihil-spellbomb.js";
 import _poolNihilisticGlee from "./pool/nihilistic-glee.js";
+import _poolNihilith from "./pool/nihilith.js";
 import _poolNikaraLairScavenger from "./pool/nikara-lair-scavenger.js";
 import _poolNikkoOnna from "./pool/nikko-onna.js";
 import _poolNikoLightOfHope from "./pool/niko-light-of-hope.js";
@@ -16061,6 +16065,7 @@ import _poolRienneAngelOfRebirth from "./pool/rienne-angel-of-rebirth.js";
 import _poolRiftBolt from "./pool/rift-bolt.js";
 import _poolRiftSower from "./pool/rift-sower.js";
 import _poolRiftburstHellion from "./pool/riftburst-hellion.js";
+import _poolRiftmarkedKnight from "./pool/riftmarked-knight.js";
 import _poolRiftwingCloudskate from "./pool/riftwing-cloudskate.js";
 import _poolRigForWar from "./pool/rig-for-war.js";
 import _poolRiggingRunner from "./pool/rigging-runner.js";
@@ -23486,6 +23491,7 @@ import _tokensDevilToken from "./tokens/devil-token.js";
 import _tokensDinosaurDragonToken from "./tokens/dinosaur-dragon-token.js";
 import _tokensDinosaurSoldierToken from "./tokens/dinosaur-soldier-token.js";
 import _tokensDinosaurToken11Haste from "./tokens/dinosaur-token-1-1-haste.js";
+import _tokensDinosaurToken22FlyingHaste from "./tokens/dinosaur-token-2-2-flying-haste.js";
 import _tokensDinosaurToken31 from "./tokens/dinosaur-token-3-1.js";
 import _tokensDinosaurToken33 from "./tokens/dinosaur-token-3-3.js";
 import _tokensDinosaurToken from "./tokens/dinosaur-token.js";
@@ -23673,6 +23679,7 @@ import _tokensKelpToken from "./tokens/kelp-token.js";
 import _tokensKithkinSoldierToken from "./tokens/kithkin-soldier-token.js";
 import _tokensKithkinToken from "./tokens/kithkin-token.js";
 import _tokensKnightAllyToken from "./tokens/knight-ally-token.js";
+import _tokensKnightToken22BlackFlanking from "./tokens/knight-token-2-2-black-flanking.js";
 import _tokensKnightTokenChivalricAlliance from "./tokens/knight-token-chivalric-alliance.js";
 import _tokensKnightTokenGuardedHeir from "./tokens/knight-token-guarded-heir.js";
 import _tokensKnightTokenRasputinTheOneiromancer from "./tokens/knight-token-rasputin-the-oneiromancer.js";
@@ -28716,6 +28723,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeepAnalysis,
   _poolDeepForestHermit,
   _poolDeepGoblinSkulltaker,
+  _poolDeepSeaKraken,
   _poolDeepSeaTerror,
   _poolDeepSight,
   _poolDeepSlumberTitan,
@@ -29036,6 +29044,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiningRoom,
   _poolDinosaurHunter,
   _poolDinosaurStampede,
+  _poolDinosaursOnASpaceship,
   _poolDinotomaton,
   _poolDionBahamutsDominant,
   _poolDiplomacyOfTheWastes,
@@ -32531,6 +32540,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGreaterAuramancy,
   _poolGreaterBasilisk,
   _poolGreaterForgeling,
+  _poolGreaterGargadon,
   _poolGreaterGood,
   _poolGreaterRealmOfPreservation,
   _poolGreaterSandwurm,
@@ -37471,6 +37481,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNightwingShade,
   _poolNihilSpellbomb,
   _poolNihilisticGlee,
+  _poolNihilith,
   _poolNikaraLairScavenger,
   _poolNikkoOnna,
   _poolNikoLightOfHope,
@@ -40047,6 +40058,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRiftBolt,
   _poolRiftSower,
   _poolRiftburstHellion,
+  _poolRiftmarkedKnight,
   _poolRiftwingCloudskate,
   _poolRigForWar,
   _poolRiggingRunner,
@@ -47478,6 +47490,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDinosaurDragonToken,
   _tokensDinosaurSoldierToken,
   _tokensDinosaurToken11Haste,
+  _tokensDinosaurToken22FlyingHaste,
   _tokensDinosaurToken31,
   _tokensDinosaurToken33,
   _tokensDinosaurToken,
@@ -47665,6 +47678,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensKithkinSoldierToken,
   _tokensKithkinToken,
   _tokensKnightAllyToken,
+  _tokensKnightToken22BlackFlanking,
   _tokensKnightTokenChivalricAlliance,
   _tokensKnightTokenGuardedHeir,
   _tokensKnightTokenRasputinTheOneiromancer,
@@ -52715,6 +52729,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deep-analysis": _poolDeepAnalysis,
   "pool/deep-forest-hermit": _poolDeepForestHermit,
   "pool/deep-goblin-skulltaker": _poolDeepGoblinSkulltaker,
+  "pool/deep-sea-kraken": _poolDeepSeaKraken,
   "pool/deep-sea-terror": _poolDeepSeaTerror,
   "pool/deep-sight": _poolDeepSight,
   "pool/deep-slumber-titan": _poolDeepSlumberTitan,
@@ -53035,6 +53050,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dining-room": _poolDiningRoom,
   "pool/dinosaur-hunter": _poolDinosaurHunter,
   "pool/dinosaur-stampede": _poolDinosaurStampede,
+  "pool/dinosaurs-on-a-spaceship": _poolDinosaursOnASpaceship,
   "pool/dinotomaton": _poolDinotomaton,
   "pool/dion-bahamuts-dominant": _poolDionBahamutsDominant,
   "pool/diplomacy-of-the-wastes": _poolDiplomacyOfTheWastes,
@@ -56530,6 +56546,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/greater-auramancy": _poolGreaterAuramancy,
   "pool/greater-basilisk": _poolGreaterBasilisk,
   "pool/greater-forgeling": _poolGreaterForgeling,
+  "pool/greater-gargadon": _poolGreaterGargadon,
   "pool/greater-good": _poolGreaterGood,
   "pool/greater-realm-of-preservation": _poolGreaterRealmOfPreservation,
   "pool/greater-sandwurm": _poolGreaterSandwurm,
@@ -61470,6 +61487,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nightwing-shade": _poolNightwingShade,
   "pool/nihil-spellbomb": _poolNihilSpellbomb,
   "pool/nihilistic-glee": _poolNihilisticGlee,
+  "pool/nihilith": _poolNihilith,
   "pool/nikara-lair-scavenger": _poolNikaraLairScavenger,
   "pool/nikko-onna": _poolNikkoOnna,
   "pool/niko-light-of-hope": _poolNikoLightOfHope,
@@ -64046,6 +64064,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rift-bolt": _poolRiftBolt,
   "pool/rift-sower": _poolRiftSower,
   "pool/riftburst-hellion": _poolRiftburstHellion,
+  "pool/riftmarked-knight": _poolRiftmarkedKnight,
   "pool/riftwing-cloudskate": _poolRiftwingCloudskate,
   "pool/rig-for-war": _poolRigForWar,
   "pool/rigging-runner": _poolRiggingRunner,
@@ -71471,6 +71490,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/dinosaur-dragon-token": _tokensDinosaurDragonToken,
   "tokens/dinosaur-soldier-token": _tokensDinosaurSoldierToken,
   "tokens/dinosaur-token-1-1-haste": _tokensDinosaurToken11Haste,
+  "tokens/dinosaur-token-2-2-flying-haste": _tokensDinosaurToken22FlyingHaste,
   "tokens/dinosaur-token-3-1": _tokensDinosaurToken31,
   "tokens/dinosaur-token-3-3": _tokensDinosaurToken33,
   "tokens/dinosaur-token": _tokensDinosaurToken,
@@ -71658,6 +71678,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/kithkin-soldier-token": _tokensKithkinSoldierToken,
   "tokens/kithkin-token": _tokensKithkinToken,
   "tokens/knight-ally-token": _tokensKnightAllyToken,
+  "tokens/knight-token-2-2-black-flanking": _tokensKnightToken22BlackFlanking,
   "tokens/knight-token-chivalric-alliance": _tokensKnightTokenChivalricAlliance,
   "tokens/knight-token-guarded-heir": _tokensKnightTokenGuardedHeir,
   "tokens/knight-token-rasputin-the-oneiromancer": _tokensKnightTokenRasputinTheOneiromancer,

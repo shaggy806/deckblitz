@@ -154,6 +154,7 @@ import _poolDeathWard from "../pool/death-ward.js";
 import _poolDeathgreeter from "../pool/deathgreeter.js";
 import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
 import _poolDeduce from "../pool/deduce.js";
+import _poolDeepSeaKraken from "../pool/deep-sea-kraken.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
@@ -879,6 +880,7 @@ const shard: CardShard = {
     _poolDeathgreeter,
     _poolDeceptiveFrostkite,
     _poolDeduce,
+    _poolDeepSeaKraken,
     _poolDeeprootWaters,
     _poolDegaDisciple,
     _poolDemogorgonsClutches,
