@@ -1153,6 +1153,18 @@ export type StaticCondition =
    * "If its surge cost was paid" (Reckless Bushwhacker, Crush of Tentacles);
    * read like `self-spectacle-paid`. */
   | { readonly kind: "self-surge-paid" }
+  /** Was the ability's own source cast for its prowl cost (rule 702.76)?
+   * "If its prowl cost was paid" (Earwig Squad), "if this spell's prowl cost
+   * was paid" (Morsel Theft); read like `self-spectacle-paid`. */
+  | { readonly kind: "self-prowl-paid" }
+  /**
+   * Prowl's condition (rule 702.76a): a player was dealt combat damage this
+   * turn by a source that, as it dealt it, was under your control and had
+   * any of the ability's source's creature types — the source's types read
+   * now (a card in hand, as it's cast). A changeling on either side shares
+   * them all. The `prowl(mana)` helper's alternative cost.
+   */
+  | { readonly kind: "prowl" }
   /** Tribute (rule 702.104b): "if tribute wasn't paid" — the opponent chosen
    * as the ability's own source entered didn't have it enter with its
    * tribute's +1/+1 counters (`CardDefinition.tribute`). Read from the
@@ -2661,10 +2673,12 @@ export interface CardDefinition {
    * answers `self-spectacle-paid`. `keyword: "surge"` is **Surge [cost]**
    * (rule 702.117a — Crush of Tentacles): `surge(mana)`, the condition "you
    * have cast another spell this turn"; it answers `self-surge-paid`.
+   * `keyword: "prowl"` is **Prowl [cost]** (rule 702.76a — Earwig Squad):
+   * `prowl(mana)`, the `prowl` condition; it answers `self-prowl-paid`.
    */
   readonly alternativeCost: {
     readonly mana: string;
-    readonly keyword?: "spectacle" | "surge";
+    readonly keyword?: "spectacle" | "surge" | "prowl";
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;

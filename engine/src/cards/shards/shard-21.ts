@@ -205,6 +205,7 @@ import _poolFestival from "../pool/festival.js";
 import _poolFeywildVisitor from "../pool/feywild-visitor.js";
 import _poolFieryCannonade from "../pool/fiery-cannonade.js";
 import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
+import _poolFinalStingFaerie from "../pool/final-sting-faerie.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
 import _poolFiredrinkerSatyr from "../pool/firedrinker-satyr.js";
@@ -254,6 +255,7 @@ import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
 import _poolGravebornMuse from "../pool/graveborn-muse.js";
 import _poolGraveyardGlutton from "../pool/graveyard-glutton.js";
+import _poolGreatbowDoyen from "../pool/greatbow-doyen.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
 import _poolGrind from "../pool/grind.js";
@@ -887,6 +889,7 @@ const shard: CardShard = {
     _poolFeywildVisitor,
     _poolFieryCannonade,
     _poolFiligreeAttendant,
+    _poolFinalStingFaerie,
     _poolFireLitThicket,
     _poolFirebendingStudent,
     _poolFiredrinkerSatyr,
@@ -936,6 +939,7 @@ const shard: CardShard = {
     _poolGoroGoroDiscipleOfRyusei,
     _poolGravebornMuse,
     _poolGraveyardGlutton,
+    _poolGreatbowDoyen,
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
     _poolGrind,

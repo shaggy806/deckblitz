@@ -333,6 +333,7 @@ import _poolKitnap from "../pool/kitnap.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
 import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
+import _poolLeafCrownedElder from "../pool/leaf-crowned-elder.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
@@ -412,6 +413,7 @@ import _poolNorwoodRanger from "../pool/norwood-ranger.js";
 import _poolNothic from "../pool/nothic.js";
 import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
+import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
 import _poolOnward from "../pool/onward.js";
@@ -557,6 +559,7 @@ import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
+import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpringMind from "../pool/spring-mind.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
@@ -1037,6 +1040,7 @@ const shard: CardShard = {
     _poolKnife,
     _poolKnightsOfDolAmroth,
     _poolKyodaiSoulOfKamigawa,
+    _poolLeafCrownedElder,
     _poolLegacyWeapon,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
@@ -1116,6 +1120,7 @@ const shard: CardShard = {
     _poolNothic,
     _poolNoxiousToad,
     _poolObyrasAttendants,
+    _poolOffalsnout,
     _poolOgreErrant,
     _poolOmnathLocusOfTheRoil,
     _poolOnward,
@@ -1261,6 +1266,7 @@ const shard: CardShard = {
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
+    _poolSpitebellows,
     _poolSporeSwarm,
     _poolSpringMind,
     _poolSpringmaneCervin,

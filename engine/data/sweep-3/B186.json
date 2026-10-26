@@ -1,0 +1,769 @@
+{
+ "batch": "B186",
+ "status": "complete",
+ "ranks": "Morningtide (MOR, 2008-02-01): whole set, the 105 cards left (the middle walk); prowl (rule 702.76a) and kinship built; with Enigma Thief and Notorious Throng from earlier batches (B114, B49), which waited only on prowl",
+ "authored": [
+  {
+   "name": "Auntie's Snitch",
+   "files": [
+    "engine/src/cards/pool/aunties-snitch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ballyrush Banneret",
+   "files": [
+    "engine/src/cards/pool/ballyrush-banneret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boldwyr Heavyweights",
+   "files": [
+    "engine/src/cards/pool/boldwyr-heavyweights.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borderland Behemoth",
+   "files": [
+    "engine/src/cards/pool/borderland-behemoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bosk Banneret",
+   "files": [
+    "engine/src/cards/pool/bosk-banneret.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Burrenton Bombardier",
+   "files": [
+    "engine/src/cards/pool/burrenton-bombardier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cloak and Dagger",
+   "files": [
+    "engine/src/cards/pool/cloak-and-dagger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coordinated Barrage",
+   "files": [
+    "engine/src/cards/pool/coordinated-barrage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Countryside Crusher",
+   "files": [
+    "engine/src/cards/pool/countryside-crusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daily Regimen",
+   "files": [
+    "engine/src/cards/pool/daily-regimen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deglamer",
+   "files": [
+    "engine/src/cards/pool/deglamer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Diviner's Wand",
+   "files": [
+    "engine/src/cards/pool/diviners-wand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthbrawn",
+   "files": [
+    "engine/src/cards/pool/earthbrawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enigma Thief",
+   "files": [
+    "engine/src/cards/pool/enigma-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everbark Shaman",
+   "files": [
+    "engine/src/cards/pool/everbark-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fencer Clique",
+   "files": [
+    "engine/src/cards/pool/fencer-clique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fendeep Summoner",
+   "files": [
+    "engine/src/cards/pool/fendeep-summoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festercreep",
+   "files": [
+    "engine/src/cards/pool/festercreep.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Final-Sting Faerie",
+   "files": [
+    "engine/src/cards/pool/final-sting-faerie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Graceful Reprieve",
+   "files": [
+    "engine/src/cards/pool/graceful-reprieve.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greatbow Doyen",
+   "files": [
+    "engine/src/cards/pool/greatbow-doyen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hostile Realm",
+   "files": [
+    "engine/src/cards/pool/hostile-realm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hunting Triad",
+   "files": [
+    "engine/src/cards/pool/hunting-triad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ink Dissolver",
+   "files": [
+    "engine/src/cards/pool/ink-dissolver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kinsbaile Borderguard",
+   "files": [
+    "engine/src/cards/pool/kinsbaile-borderguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkin Zephyrnaut",
+   "files": [
+    "engine/src/cards/pool/kithkin-zephyrnaut.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Latchkey Faerie",
+   "files": [
+    "engine/src/cards/pool/latchkey-faerie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leaf-Crowned Elder",
+   "files": [
+    "engine/src/cards/pool/leaf-crowned-elder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luminescent Rain",
+   "files": [
+    "engine/src/cards/pool/luminescent-rain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lunk Errant",
+   "files": [
+    "engine/src/cards/pool/lunk-errant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lys Alana Bowmaster",
+   "files": [
+    "engine/src/cards/pool/lys-alana-bowmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meadowboon",
+   "files": [
+    "engine/src/cards/pool/meadowboon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Shatter",
+   "files": [
+    "engine/src/cards/pool/mind-shatter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Morsel Theft",
+   "files": [
+    "engine/src/cards/pool/morsel-theft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mosquito Guard",
+   "files": [
+    "engine/src/cards/pool/mosquito-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mudbutton Clanger",
+   "files": [
+    "engine/src/cards/pool/mudbutton-clanger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nevermaker",
+   "files": [
+    "engine/src/cards/pool/nevermaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nightshade Schemers",
+   "files": [
+    "engine/src/cards/pool/nightshade-schemers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Notorious Throng",
+   "files": [
+    "engine/src/cards/pool/notorious-throng.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obsidian Battle-Axe",
+   "files": [
+    "engine/src/cards/pool/obsidian-battle-axe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Offalsnout",
+   "files": [
+    "engine/src/cards/pool/offalsnout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orchard Warden",
+   "files": [
+    "engine/src/cards/pool/orchard-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Order of the Golden Cricket",
+   "files": [
+    "engine/src/cards/pool/order-of-the-golden-cricket.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pack's Disdain",
+   "files": [
+    "engine/src/cards/pool/packs-disdain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Preeminent Captain",
+   "files": [
+    "engine/src/cards/pool/preeminent-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyroclast Consul",
+   "files": [
+    "engine/src/cards/pool/pyroclast-consul.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rage Forger",
+   "files": [
+    "engine/src/cards/pool/rage-forger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reach of Branches",
+   "files": [
+    "engine/src/cards/pool/reach-of-branches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhys the Exiled",
+   "files": [
+    "engine/src/cards/pool/rhys-the-exiled.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roar of the Crowd",
+   "files": [
+    "engine/src/cards/pool/roar-of-the-crowd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rustic Clachan",
+   "files": [
+    "engine/src/cards/pool/rustic-clachan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage's Dousing",
+   "files": [
+    "engine/src/cards/pool/sages-dousing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarblade Elite",
+   "files": [
+    "engine/src/cards/pool/scarblade-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sensation Gorger",
+   "files": [
+    "engine/src/cards/pool/sensation-gorger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shard Volley",
+   "files": [
+    "engine/src/cards/pool/shard-volley.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shinewend",
+   "files": [
+    "engine/src/cards/pool/shinewend.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sigil Tracer",
+   "files": [
+    "engine/src/cards/pool/sigil-tracer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slithermuse",
+   "files": [
+    "engine/src/cards/pool/slithermuse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spitebellows",
+   "files": [
+    "engine/src/cards/pool/spitebellows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squeaking Pie Grubfellows",
+   "files": [
+    "engine/src/cards/pool/squeaking-pie-grubfellows.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stenchskipper",
+   "files": [
+    "engine/src/cards/pool/stenchskipper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stingmoggie",
+   "files": [
+    "engine/src/cards/pool/stingmoggie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stinkdrinker Bandit",
+   "files": [
+    "engine/src/cards/pool/stinkdrinker-bandit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stomping Slabs",
+   "files": [
+    "engine/src/cards/pool/stomping-slabs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stonybrook Schoolmaster",
+   "files": [
+    "engine/src/cards/pool/stonybrook-schoolmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stream of Unconsciousness",
+   "files": [
+    "engine/src/cards/pool/stream-of-unconsciousness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Swell of Courage",
+   "files": [
+    "engine/src/cards/pool/swell-of-courage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thieves' Fortune",
+   "files": [
+    "engine/src/cards/pool/thieves-fortune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vengeful Firebrand",
+   "files": [
+    "engine/src/cards/pool/vengeful-firebrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran's Armaments",
+   "files": [
+    "engine/src/cards/pool/veterans-armaments.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walker of the Grove",
+   "files": [
+    "engine/src/cards/pool/walker-of-the-grove.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wandering Graybeard",
+   "files": [
+    "engine/src/cards/pool/wandering-graybeard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warren Weirding",
+   "files": [
+    "engine/src/cards/pool/warren-weirding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterspout Weavers",
+   "files": [
+    "engine/src/cards/pool/waterspout-weavers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weed-Pruner Poplar",
+   "files": [
+    "engine/src/cards/pool/weed-pruner-poplar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Weirding Shaman",
+   "files": [
+    "engine/src/cards/pool/weirding-shaman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Winnower Patrol",
+   "files": [
+    "engine/src/cards/pool/winnower-patrol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wolf-Skull Shaman",
+   "files": [
+    "engine/src/cards/pool/wolf-skull-shaman.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Battletide Alchemist",
+   "needs": [
+    "replacement:prevent-n-of-damage"
+   ],
+   "why": "may prevent X of the damage, X the Clerics you control"
+  },
+  {
+   "name": "Cenn's Tactician",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "each creature with a +1/+1 counter can block an additional creature"
+  },
+  {
+   "name": "Declaration of Naught",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "choose a card name as it enters; target spell with the chosen name"
+  },
+  {
+   "name": "Dewdrop Spy",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library"
+   ],
+   "why": "look at the top card of target player's library"
+  },
+  {
+   "name": "Earwig Squad",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search target opponent's library for three cards and exile them"
+  },
+  {
+   "name": "Feudkiller's Verdict",
+   "needs": [
+    "condition:you-more-life-than-an-opponent"
+   ],
+   "why": "if you have more life than an opponent"
+  },
+  {
+   "name": "Fire Juggler",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash"
+  },
+  {
+   "name": "Floodchaser",
+   "needs": [
+    "static:attack-restriction-defending-player-condition",
+    "static:land-type-setting"
+   ],
+   "why": "can't attack unless defending player controls an Island; target land becomes an Island until end of turn"
+  },
+  {
+   "name": "Forfend",
+   "needs": [
+    "replacement:prevent-damage-to-filter-this-turn"
+   ],
+   "why": "prevent all damage to creatures this turn, creatures arriving later included"
+  },
+  {
+   "name": "Gilt-Leaf Archdruid",
+   "needs": [
+    "effect:gain-control-all-target-player"
+   ],
+   "why": "gain control of all lands target player controls"
+  },
+  {
+   "name": "Grimoire Thief",
+   "needs": [
+    "effect:exile-top-face-down-linked",
+    "effect:look-at-face-down-permanents",
+    "effect:counter-all-spells-named-linked-exile"
+   ],
+   "why": "linked face-down exile you may look at; counter all spells with those names"
+  },
+  {
+   "name": "Hunting Velociraptor",
+   "needs": [
+    "static:grant-prowl-to-spells"
+   ],
+   "why": "Dinosaur spells you cast have prowl {2}{R}: prowl granted to other spells (prowl itself is built)"
+  },
+  {
+   "name": "Knowledge Exploitation",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search target opponent's library for an instant or sorcery and cast it free"
+  },
+  {
+   "name": "Lightning Crafter",
+   "needs": [
+    "keyword:champion"
+   ],
+   "why": "champion a Goblin or Shaman"
+  },
+  {
+   "name": "Maralen of the Mornsong",
+   "needs": [
+    "static:players-cant-draw"
+   ],
+   "why": "players can't draw cards, the draw step's draw included"
+  },
+  {
+   "name": "Noggin Whack",
+   "needs": [
+    "effect:reveal-n-from-hand-you-choose-discard"
+   ],
+   "why": "target player reveals three cards of their choice from hand, you choose two to discard"
+  },
+  {
+   "name": "Pulling Teeth",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash"
+  },
+  {
+   "name": "Recross the Paths",
+   "needs": [
+    "mechanic:clash",
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "clash; reveal until a land, the rest on the bottom in any order"
+  },
+  {
+   "name": "Redeem the Lost",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash, and returning itself to hand if you win"
+  },
+  {
+   "name": "Reins of the Vinesteed",
+   "needs": [
+    "effect:aura-returns-attached"
+   ],
+   "why": "return it attached to a creature sharing a creature type with the dead one"
+  },
+  {
+   "name": "Release the Ants",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash"
+  },
+  {
+   "name": "Research the Deep",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash"
+  },
+  {
+   "name": "Revive the Fallen",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash"
+  },
+  {
+   "name": "Rivals' Duel",
+   "needs": [
+    "filter:targets-share-no-creature-type"
+   ],
+   "why": "two target creatures that share no creature types"
+  },
+  {
+   "name": "Sage of Fables",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "remove a +1/+1 counter from a creature you control as a cost"
+  },
+  {
+   "name": "Sunflare Shaman",
+   "needs": [
+    "effect:damage-to-source"
+   ],
+   "why": "deals X damage to any target and X to itself"
+  },
+  {
+   "name": "Supreme Exemplar",
+   "needs": [
+    "keyword:champion"
+   ],
+   "why": "champion an Elemental"
+  },
+  {
+   "name": "Titan's Revenge",
+   "needs": [
+    "mechanic:clash"
+   ],
+   "why": "clash"
+  },
+  {
+   "name": "Unstoppable Ash",
+   "needs": [
+    "keyword:champion"
+   ],
+   "why": "champion a Treefolk or Warrior"
+  },
+  {
+   "name": "Weight of Conscience",
+   "needs": [
+    "cost:tap-creatures-sharing-creature-type"
+   ],
+   "why": "tap two untapped creatures you control that share a creature type"
+  }
+ ]
+}

@@ -382,6 +382,7 @@ import _poolLoreholdCharm from "../pool/lorehold-charm.js";
 import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
 import _poolLoxodonBattlePriest from "../pool/loxodon-battle-priest.js";
 import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
+import _poolLunkErrant from "../pool/lunk-errant.js";
 import _poolLurkingPredators from "../pool/lurking-predators.js";
 import _poolLylaHolographicAssistant from "../pool/lyla-holographic-assistant.js";
 import _poolMODOKEvilIntellect from "../pool/m-o-d-o-k-evil-intellect.js";
@@ -551,6 +552,7 @@ import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
+import _poolSensationGorger from "../pool/sensation-gorger.js";
 import _poolSeraphOfTheSword from "../pool/seraph-of-the-sword.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
@@ -611,6 +613,7 @@ import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
+import _poolStompingSlabs from "../pool/stomping-slabs.js";
 import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
 import _poolStonewright from "../pool/stonewright.js";
 import _poolStonyStrength from "../pool/stony-strength.js";
@@ -1124,6 +1127,7 @@ const shard: CardShard = {
     _poolLossarnachCaptain,
     _poolLoxodonBattlePriest,
     _poolLunarchVeteran,
+    _poolLunkErrant,
     _poolLurkingPredators,
     _poolLylaHolographicAssistant,
     _poolMODOKEvilIntellect,
@@ -1293,6 +1297,7 @@ const shard: CardShard = {
     _poolSeekersSquire,
     _poolSelesnyaSanctuary,
     _poolSelfInflictedWound,
+    _poolSensationGorger,
     _poolSeraphOfTheSword,
     _poolSerpentsPass,
     _poolSerraPaladin,
@@ -1353,6 +1358,7 @@ const shard: CardShard = {
     _poolStartFromScratch,
     _poolSteelWreckingBall,
     _poolStirringHopesinger,
+    _poolStompingSlabs,
     _poolStoneboundMentor,
     _poolStonewright,
     _poolStonyStrength,

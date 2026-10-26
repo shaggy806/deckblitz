@@ -8292,6 +8292,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({ you: { bf: ['Plains*3'], hand: ['Pegasus Stampede'] } }),
   ),
   preset(
+    'Latchkey Faerie: its prowl cost is offered once a Rogue has hit a player',
+    board({ you: { bf: ['Island*4', 'Prickly Boggart'], hand: ['Latchkey Faerie'] } }),
+  ),
+  preset(
+    'Waterspout Weavers: kinship reveals the top card at your upkeep',
+    board({ you: { bf: ['Waterspout Weavers', 'Grizzly Bears'], lib: ['Merrow Witsniper', 'Island'] } }),
+  ),
+  preset(
     'Silverblade Paladin: soulbond pairs it with a creature you choose',
     board({ you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant'], hand: ['Silverblade Paladin'] } }),
   ),

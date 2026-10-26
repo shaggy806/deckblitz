@@ -102,6 +102,7 @@ import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolConsignToThePit from "../pool/consign-to-the-pit.js";
 import _poolConsume from "../pool/consume.js";
 import _poolControlMagic from "../pool/control-magic.js";
+import _poolCoordinatedBarrage from "../pool/coordinated-barrage.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
@@ -112,6 +113,7 @@ import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
+import _poolDailyRegimen from "../pool/daily-regimen.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDawnglowInfusion from "../pool/dawnglow-infusion.js";
@@ -296,6 +298,7 @@ import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
+import _poolKithkinZephyrnaut from "../pool/kithkin-zephyrnaut.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
 import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
@@ -463,6 +466,7 @@ import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRowansBattleguard from "../pool/rowans-battleguard.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
+import _poolRusticClachan from "../pool/rustic-clachan.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
 import _poolSacredCat from "../pool/sacred-cat.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
@@ -660,6 +664,7 @@ import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
 import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
+import _poolWolfSkullShaman from "../pool/wolf-skull-shaman.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
@@ -784,6 +789,7 @@ const shard: CardShard = {
     _poolConsignToThePit,
     _poolConsume,
     _poolControlMagic,
+    _poolCoordinatedBarrage,
     _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
@@ -794,6 +800,7 @@ const shard: CardShard = {
     _poolCryptothrall,
     _poolCursedWindbreaker,
     _poolDailyBugleBuilding,
+    _poolDailyRegimen,
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
     _poolDawnglowInfusion,
@@ -978,6 +985,7 @@ const shard: CardShard = {
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,
     _poolKioraMasterOfTheDepths,
+    _poolKithkinZephyrnaut,
     _poolKitsaOtterballElite,
     _poolKnightOfAutumn,
     _poolKodamaOfTheWestTree,
@@ -1145,6 +1153,7 @@ const shard: CardShard = {
     _poolRottingFensnake,
     _poolRowansBattleguard,
     _poolRummagingWizard,
+    _poolRusticClachan,
     _poolRuthlessDeathfang,
     _poolSacredCat,
     _poolSakashimaOfAThousandFaces,
@@ -1342,6 +1351,7 @@ const shard: CardShard = {
     _poolWildwoodMentor,
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
+    _poolWolfSkullShaman,
     _poolWorkshopElders,
     _poolWorldQueller,
     _poolWrennsResolve,

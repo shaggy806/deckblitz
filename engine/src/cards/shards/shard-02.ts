@@ -388,6 +388,7 @@ import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-rich
 import _poolMistfolk from "../pool/mistfolk.js";
 import _poolMolderingKarok from "../pool/moldering-karok.js";
 import _poolMoleWorms from "../pool/mole-worms.js";
+import _poolMorselTheft from "../pool/morsel-theft.js";
 import _poolMortusStrider from "../pool/mortus-strider.js";
 import _poolMountain from "../pool/mountain.js";
 import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
@@ -1079,6 +1080,7 @@ const shard: CardShard = {
     _poolMistfolk,
     _poolMolderingKarok,
     _poolMoleWorms,
+    _poolMorselTheft,
     _poolMortusStrider,
     _poolMountain,
     _poolMutalithVortexBeast,

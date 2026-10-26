@@ -64,6 +64,7 @@ import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
 import _poolBaldursGate from "../pool/baldurs-gate.js";
 import _poolBalduvianBarbarians from "../pool/balduvian-barbarians.js";
+import _poolBallyrushBanneret from "../pool/ballyrush-banneret.js";
 import _poolBansheeOfTheDreadChoir from "../pool/banshee-of-the-dread-choir.js";
 import _poolBarTheGate from "../pool/bar-the-gate.js";
 import _poolBarbedSliver from "../pool/barbed-sliver.js";
@@ -87,6 +88,7 @@ import _poolBlowOffSteam from "../pool/blow-off-steam.js";
 import _poolBlowYourHouseDown from "../pool/blow-your-house-down.js";
 import _poolBombadilsSong from "../pool/bombadils-song.js";
 import _poolBonecallerCleric from "../pool/bonecaller-cleric.js";
+import _poolBorderlandBehemoth from "../pool/borderland-behemoth.js";
 import _poolBountifulHarvest from "../pool/bountiful-harvest.js";
 import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
 import _poolBountyHunter from "../pool/bounty-hunter.js";
@@ -299,6 +301,7 @@ import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
 import _poolHourOfEternity from "../pool/hour-of-eternity.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
+import _poolHuntingTriad from "../pool/hunting-triad.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
@@ -679,6 +682,7 @@ import _poolVerduranEnchantress from "../pool/verduran-enchantress.js";
 import _poolVernalFen from "../pool/vernal-fen.js";
 import _poolVertigoSpawn from "../pool/vertigo-spawn.js";
 import _poolVeteranGuardmouse from "../pool/veteran-guardmouse.js";
+import _poolVeteransArmaments from "../pool/veterans-armaments.js";
 import _poolVibratingSphere from "../pool/vibrating-sphere.js";
 import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
@@ -803,6 +807,7 @@ const shard: CardShard = {
     _poolBagEndPorter,
     _poolBaldursGate,
     _poolBalduvianBarbarians,
+    _poolBallyrushBanneret,
     _poolBansheeOfTheDreadChoir,
     _poolBarTheGate,
     _poolBarbedSliver,
@@ -826,6 +831,7 @@ const shard: CardShard = {
     _poolBlowYourHouseDown,
     _poolBombadilsSong,
     _poolBonecallerCleric,
+    _poolBorderlandBehemoth,
     _poolBountifulHarvest,
     _poolBountifulLandscape,
     _poolBountyHunter,
@@ -1038,6 +1044,7 @@ const shard: CardShard = {
     _poolHourOfEternity,
     _poolHowlFromBeyond,
     _poolHuatlisSpurring,
+    _poolHuntingTriad,
     _poolHyalopterousLemure,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
@@ -1418,6 +1425,7 @@ const shard: CardShard = {
     _poolVernalFen,
     _poolVertigoSpawn,
     _poolVeteranGuardmouse,
+    _poolVeteransArmaments,
     _poolVibratingSphere,
     _poolVisionSkeins,
     _poolVithianRenegades,

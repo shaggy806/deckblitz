@@ -51,6 +51,7 @@ import _poolBloodhallPriest from "../pool/bloodhall-priest.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBorosChallenger from "../pool/boros-challenger.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
+import _poolBoskBanneret from "../pool/bosk-banneret.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
@@ -137,6 +138,7 @@ import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
+import _poolEarthbrawn from "../pool/earthbrawn.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEliteSkirmisher from "../pool/elite-skirmisher.js";
@@ -357,6 +359,7 @@ import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecrogoyf from "../pool/necrogoyf.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
+import _poolNevermaker from "../pool/nevermaker.js";
 import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
 import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
@@ -397,6 +400,7 @@ import _poolQueenBrahne from "../pool/queen-brahne.js";
 import _poolQuestForTheGravelord from "../pool/quest-for-the-gravelord.js";
 import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
 import _poolQuirionElves from "../pool/quirion-elves.js";
+import _poolRageForger from "../pool/rage-forger.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRalsDispersal from "../pool/rals-dispersal.js";
@@ -405,6 +409,7 @@ import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavagersMace from "../pool/ravagers-mace.js";
 import _poolRavenousSkirge from "../pool/ravenous-skirge.js";
 import _poolRayOfDissolution from "../pool/ray-of-dissolution.js";
+import _poolReachOfBranches from "../pool/reach-of-branches.js";
 import _poolReadTheTides from "../pool/read-the-tides.js";
 import _poolRealityShift from "../pool/reality-shift.js";
 import _poolRegalForce from "../pool/regal-force.js";
@@ -531,6 +536,7 @@ import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
 import _poolSuspend from "../pool/suspend.js";
+import _poolSwellOfCourage from "../pool/swell-of-courage.js";
 import _poolSwiftManeuver from "../pool/swift-maneuver.js";
 import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
 import _poolSylvanMight from "../pool/sylvan-might.js";
@@ -690,6 +696,7 @@ const shard: CardShard = {
     _poolBoggartPrankster,
     _poolBorosChallenger,
     _poolBoroughBackup,
+    _poolBoskBanneret,
     _poolBovineIntervention,
     _poolBranchblightStalker,
     _poolBrotherhoodPatriarch,
@@ -776,6 +783,7 @@ const shard: CardShard = {
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
     _poolDwarvenWeaponsmith,
+    _poolEarthbrawn,
     _poolEdenSeatOfTheSanctum,
     _poolElementalSummoning,
     _poolEliteSkirmisher,
@@ -996,6 +1004,7 @@ const shard: CardShard = {
     _poolNecrogoyf,
     _poolNecronDeathmark,
     _poolNettleSwine,
+    _poolNevermaker,
     _poolNezumiRoadCaptain,
     _poolNicanzilCurrentConductor,
     _poolNimbusWings,
@@ -1036,6 +1045,7 @@ const shard: CardShard = {
     _poolQuestForTheGravelord,
     _poolQuickbeamUpstartEnt,
     _poolQuirionElves,
+    _poolRageForger,
     _poolRagingRegisaur,
     _poolRaidersKarve,
     _poolRalsDispersal,
@@ -1044,6 +1054,7 @@ const shard: CardShard = {
     _poolRavagersMace,
     _poolRavenousSkirge,
     _poolRayOfDissolution,
+    _poolReachOfBranches,
     _poolReadTheTides,
     _poolRealityShift,
     _poolRegalForce,
@@ -1170,6 +1181,7 @@ const shard: CardShard = {
     _poolSupplyLineCranes,
     _poolSurveillanceRoom,
     _poolSuspend,
+    _poolSwellOfCourage,
     _poolSwiftManeuver,
     _poolSwordCoastSerpent,
     _poolSylvanMight,

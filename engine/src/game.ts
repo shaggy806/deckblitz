@@ -6040,6 +6040,7 @@ export class Game {
       this.state.players[player].spellsCastThisTurn = 0;
       this.state.players[player].lifeLostThisTurn = 0;
       this.state.players[player].lifeGainedThisTurn = 0;
+      delete this.state.players[player].combatDamageCreatureTypesThisTurn;
       this.state.players[player].cardsDrawnThisTurn = 0;
       this.state.players[player].drewInDrawStepThisTurn = false;
       this.state.players[player].spellsCastThisTurnAs = [];
@@ -8386,6 +8387,15 @@ export class Game {
         if (!damaged.includes(target.player)) {
           attacker.combatDamagedPlayersThisTurn = [...damaged, target.player];
         }
+        // Prowl (rule 702.76a): the creature types its controller dealt
+        // combat damage to a player with, as the source had them now.
+        const dealer = this.state.players[attacker.controller];
+        const types = effectiveSubtypes(this.state, this.registry, attacker).filter(
+          (s) => s === EVERY_CREATURE_TYPE || isCreatureType(s),
+        );
+        const known = dealer.combatDamageCreatureTypesThisTurn ?? [];
+        const added = types.filter((s) => !known.includes(s));
+        if (added.length > 0) dealer.combatDamageCreatureTypesThisTurn = [...known, ...added];
       }
     }
   }
@@ -12976,6 +12986,7 @@ export class Game {
     if (flashSacrificeOwed) object.flashSacrificeOwed = true;
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
     if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
+    if (altCost && def.alternativeCost?.keyword === "prowl") object.prowlPaid = true;
     if (overload) object.overloaded = true;
     // Cast bestowed: an Aura spell with enchant creature from here on (rule
     // 702.103b), what it targets chosen as an Aura's is.
@@ -26801,6 +26812,7 @@ export class Game {
       ...(object.evokePaid === true ? { evokePaid: true } : {}),
       ...(object.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(object.surgePaid === true ? { surgePaid: true } : {}),
+      ...(object.prowlPaid === true ? { prowlPaid: true } : {}),
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
@@ -26870,6 +26882,7 @@ export class Game {
       ...(spell.evokePaid === true ? { evokePaid: true } : {}),
       ...(spell.spectaclePaid === true ? { spectaclePaid: true } : {}),
       ...(spell.surgePaid === true ? { surgePaid: true } : {}),
+      ...(spell.prowlPaid === true ? { prowlPaid: true } : {}),
       ...(spell.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       // "If you copy a spell for which the gift was promised, the gift was
       // also promised to the same opponent for the copy" (the ruling).
@@ -36180,6 +36193,7 @@ export class Game {
       ...(object.enteredKicked === true ? { enteredKicked: true } : {}),
       ...(object.enteredSpectacle === true ? { enteredSpectacle: true } : {}),
       ...(object.enteredSurge === true ? { enteredSurge: true } : {}),
+      ...(object.enteredProwl === true ? { enteredProwl: true } : {}),
       ...(object.tributeUnpaid === true ? { tributeUnpaid: true as const } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
@@ -36756,6 +36770,7 @@ export class Game {
     const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
     const enteringSpectacle = object.zone === "stack" && to === "battlefield" && object.spectaclePaid === true;
     const enteringSurge = object.zone === "stack" && to === "battlefield" && object.surgePaid === true;
+    const enteringProwl = object.zone === "stack" && to === "battlefield" && object.prowlPaid === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
@@ -37049,6 +37064,7 @@ export class Game {
     object.flashSacrificeOwed = undefined;
     object.spectaclePaid = undefined;
     object.surgePaid = undefined;
+    object.prowlPaid = undefined;
     // "That spell can't be countered" was about this casting, so it ends when
     // the spell leaves the stack (Cavern of Souls). So does what the casting
     // sacrificed ("the sacrificed creature" — see `LastKnownRefs`).
@@ -37057,6 +37073,8 @@ export class Game {
     object.enteredKicked = enteringKicked;
     object.enteredSpectacle = enteringSpectacle;
     object.enteredSurge = enteringSurge;
+    if (enteringProwl) object.enteredProwl = true;
+    else delete object.enteredProwl;
     delete object.tributeUnpaid;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredConvokedBy = enteringConvokedBy;

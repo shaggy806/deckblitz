@@ -401,6 +401,7 @@ import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
+import _poolPacksDisdain from "../pool/packs-disdain.js";
 import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
@@ -545,6 +546,7 @@ import _poolStensiaBanquet from "../pool/stensia-banquet.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolSternConstable from "../pool/stern-constable.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
+import _poolStingmoggie from "../pool/stingmoggie.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
 import _poolStrengthBobblehead from "../pool/strength-bobblehead.js";
@@ -1107,6 +1109,7 @@ const shard: CardShard = {
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
+    _poolPacksDisdain,
     _poolParoxysm,
     _poolPatchedPlaything,
     _poolPatchworkAutomaton,
@@ -1251,6 +1254,7 @@ const shard: CardShard = {
     _poolStepThrough,
     _poolSternConstable,
     _poolStewardOfTheHarvest,
+    _poolStingmoggie,
     _poolStirringBard,
     _poolStormcragElemental,
     _poolStrengthBobblehead,

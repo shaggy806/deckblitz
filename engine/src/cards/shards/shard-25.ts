@@ -395,6 +395,7 @@ import _poolNimrodelWatcher from "../pool/nimrodel-watcher.js";
 import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
+import _poolNotoriousThrong from "../pool/notorious-throng.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
 import _poolOathswornKnight from "../pool/oathsworn-knight.js";
 import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
@@ -642,6 +643,7 @@ import _poolWanderingOnes from "../pool/wandering-ones.js";
 import _poolWanderingTroubadour from "../pool/wandering-troubadour.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
 import _poolWarchanterSkald from "../pool/warchanter-skald.js";
+import _poolWarrenWeirding from "../pool/warren-weirding.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWaywardDisciple from "../pool/wayward-disciple.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
@@ -670,6 +672,7 @@ import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
+import _tokensGoblinRogueToken from "../tokens/goblin-rogue-token.js";
 import _tokensGoblinSoldierToken from "../tokens/goblin-soldier-token.js";
 import _tokensGreenEnchantmentCentaurToken33 from "../tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
@@ -1082,6 +1085,7 @@ const shard: CardShard = {
     _poolNoggleRobber,
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,
+    _poolNotoriousThrong,
     _poolNyxbornSeaguard,
     _poolOathswornKnight,
     _poolObeliskOfUndoing,
@@ -1329,6 +1333,7 @@ const shard: CardShard = {
     _poolWanderingTroubadour,
     _poolWanderlightSpirit,
     _poolWarchanterSkald,
+    _poolWarrenWeirding,
     _poolWastefulHarvest,
     _poolWaywardDisciple,
     _poolWeaveFate,
@@ -1359,6 +1364,7 @@ const shard: CardShard = {
     _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
+    _tokensGoblinRogueToken,
     _tokensGoblinSoldierToken,
     _tokensGreenEnchantmentCentaurToken33,
     _tokensInklingTokenEmeritusOfTruce,

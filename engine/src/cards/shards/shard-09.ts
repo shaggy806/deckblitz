@@ -494,6 +494,7 @@ import _poolRespite from "../pool/respite.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
+import _poolRhysTheExiled from "../pool/rhys-the-exiled.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiptideChimera from "../pool/riptide-chimera.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
@@ -518,6 +519,7 @@ import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
 import _poolScabland from "../pool/scabland.js";
 import _poolScaleOfChissGoria from "../pool/scale-of-chiss-goria.js";
+import _poolScarbladeElite from "../pool/scarblade-elite.js";
 import _poolScionOfStygia from "../pool/scion-of-stygia.js";
 import _poolScourForScrap from "../pool/scour-for-scrap.js";
 import _poolScourFromExistence from "../pool/scour-from-existence.js";
@@ -716,6 +718,7 @@ import _tokensForestDryadToken from "../tokens/forest-dryad-token.js";
 import _tokensGoblinTokenHaste from "../tokens/goblin-token-haste.js";
 import _tokensGolemToken99 from "../tokens/golem-token-9-9.js";
 import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestation-sage.js";
+import _tokensMerfolkWizardToken from "../tokens/merfolk-wizard-token.js";
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
@@ -1221,6 +1224,7 @@ const shard: CardShard = {
     _poolRestorationGearsmith,
     _poolRetrieve,
     _poolRetrofittedTransmogrant,
+    _poolRhysTheExiled,
     _poolRidgetopRaptor,
     _poolRiptideChimera,
     _poolRiteOfTheDragoncaller,
@@ -1245,6 +1249,7 @@ const shard: CardShard = {
     _poolSavaiCrystal,
     _poolScabland,
     _poolScaleOfChissGoria,
+    _poolScarbladeElite,
     _poolScionOfStygia,
     _poolScourForScrap,
     _poolScourFromExistence,
@@ -1445,6 +1450,7 @@ const shard: CardShard = {
     _tokensGoblinTokenHaste,
     _tokensGolemToken99,
     _tokensInsectTokenInfestationSage,
+    _tokensMerfolkWizardToken,
     _tokensMouseToken,
     _tokensMowu,
     _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,

@@ -278,6 +278,7 @@ import _poolGoldspanDragon from "../pool/goldspan-dragon.js";
 import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGoneMissing from "../pool/gone-missing.js";
 import _poolGracefulCat from "../pool/graceful-cat.js";
+import _poolGracefulReprieve from "../pool/graceful-reprieve.js";
 import _poolGracefulRestoration from "../pool/graceful-restoration.js";
 import _poolGrandAbolisher from "../pool/grand-abolisher.js";
 import _poolGrandmotherRaviSengir from "../pool/grandmother-ravi-sengir.js";
@@ -983,6 +984,7 @@ const shard: CardShard = {
     _poolGolosTirelessPilgrim,
     _poolGoneMissing,
     _poolGracefulCat,
+    _poolGracefulReprieve,
     _poolGracefulRestoration,
     _poolGrandAbolisher,
     _poolGrandmotherRaviSengir,

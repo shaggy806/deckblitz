@@ -216,6 +216,7 @@ import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFearOfFalling from "../pool/fear-of-falling.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
+import _poolFencerClique from "../pool/fencer-clique.js";
 import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFesteringMummy from "../pool/festering-mummy.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
@@ -431,6 +432,7 @@ import _poolMoonveilRegent from "../pool/moonveil-regent.js";
 import _poolMorale from "../pool/morale.js";
 import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
+import _poolMosquitoGuard from "../pool/mosquito-guard.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
@@ -598,6 +600,7 @@ import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
 import _poolStingingLicid from "../pool/stinging-licid.js";
+import _poolStinkdrinkerBandit from "../pool/stinkdrinker-bandit.js";
 import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolFatalPush,
     _poolFearOfFalling,
     _poolFellwarStone,
+    _poolFencerClique,
     _poolFesteringGoblin,
     _poolFesteringMummy,
     _poolFetidHeath,
@@ -1175,6 +1179,7 @@ const shard: CardShard = {
     _poolMorale,
     _poolMordorOnTheMarch,
     _poolMortalitySpear,
+    _poolMosquitoGuard,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,
@@ -1342,6 +1347,7 @@ const shard: CardShard = {
     _poolStensiaBloodhall,
     _poolSternLesson,
     _poolStingingLicid,
+    _poolStinkdrinkerBandit,
     _poolStoneGiant,
     _poolStoneskin,
     _poolStormTheFestival,

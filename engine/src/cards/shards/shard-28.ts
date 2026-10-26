@@ -191,6 +191,7 @@ import _poolEnchantresssPresence from "../pool/enchantresss-presence.js";
 import _poolEnclaveCryptologist from "../pool/enclave-cryptologist.js";
 import _poolEndangeredArmodon from "../pool/endangered-armodon.js";
 import _poolEngulfingEruption from "../pool/engulfing-eruption.js";
+import _poolEnigmaThief from "../pool/enigma-thief.js";
 import _poolEnlightenedAscetic from "../pool/enlightened-ascetic.js";
 import _poolEnterTheUnknown from "../pool/enter-the-unknown.js";
 import _poolEnvoyOfTheAncestors from "../pool/envoy-of-the-ancestors.js";
@@ -919,6 +920,7 @@ const shard: CardShard = {
     _poolEnclaveCryptologist,
     _poolEndangeredArmodon,
     _poolEngulfingEruption,
+    _poolEnigmaThief,
     _poolEnlightenedAscetic,
     _poolEnterTheUnknown,
     _poolEnvoyOfTheAncestors,

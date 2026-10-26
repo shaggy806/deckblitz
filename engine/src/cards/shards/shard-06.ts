@@ -322,6 +322,7 @@ import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
+import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
 import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
@@ -356,6 +357,7 @@ import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMayhemPatrol from "../pool/mayhem-patrol.js";
+import _poolMeadowboon from "../pool/meadowboon.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
@@ -432,6 +434,7 @@ import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
 import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
+import _poolPyroclastConsul from "../pool/pyroclast-consul.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
@@ -509,6 +512,7 @@ import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
+import _poolShinewend from "../pool/shinewend.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
@@ -693,6 +697,7 @@ import _tokensShardToken from "../tokens/shard-token.js";
 import _tokensSkeletonRegeneratingToken from "../tokens/skeleton-regenerating-token.js";
 import _tokensSpiderToken21MenaceReach from "../tokens/spider-token-2-1-menace-reach.js";
 import _tokensTheVoid from "../tokens/the-void.js";
+import _tokensTreefolkShamanToken from "../tokens/treefolk-shaman-token.js";
 import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
 
 const shard: CardShard = {
@@ -1016,6 +1021,7 @@ const shard: CardShard = {
     _poolKelsinkoRanger,
     _poolKindredJudgment,
     _poolKingDarienXlviii,
+    _poolKinsbaileBorderguard,
     _poolKinscaerHarpoonist,
     _poolKraulHarpooner,
     _poolKreeSentinel,
@@ -1050,6 +1056,7 @@ const shard: CardShard = {
     _poolMaritimeGuard,
     _poolMarkedByHonor,
     _poolMayhemPatrol,
+    _poolMeadowboon,
     _poolMeetingOfMinds,
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
@@ -1126,6 +1133,7 @@ const shard: CardShard = {
     _poolProwlerClawedThief,
     _poolPursueGlory,
     _poolPutrefax,
+    _poolPyroclastConsul,
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
@@ -1203,6 +1211,7 @@ const shard: CardShard = {
     _poolShambleshark,
     _poolShenanigans,
     _poolSheriffOfSafePassage,
+    _poolShinewend,
     _poolShortcutSeeker,
     _poolShroudstomper,
     _poolSidarJabariOfZhalfir,
@@ -1389,6 +1398,7 @@ const shard: CardShard = {
     _tokensSkeletonRegeneratingToken,
     _tokensSpiderToken21MenaceReach,
     _tokensTheVoid,
+    _tokensTreefolkShamanToken,
     _tokensWizardTokenGuff,
   ],
 };

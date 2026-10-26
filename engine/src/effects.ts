@@ -8383,12 +8383,14 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       // object's creature types as it last existed — the changeling marker
       // included, which `hasSubtype` reads as "any creature type" — ANDed
       // with whatever `anyOf` the filter already had. None: nothing shares.
-      const { sharesCreatureTypeWith: _with, anyOf, ...rest } = walked as CardFilter;
+      // `"source"`: the resolving ability's source (kinship's "this creature").
+      const { sharesCreatureTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
+      const other = withWhat === "source" ? ctx.source : ctx.triggerObject;
       const subtypes =
-        ctx.triggerObject === undefined
+        other === undefined
           ? []
           : ctx
-              .subtypesOf({ kind: "object", object: ctx.triggerObject })
+              .subtypesOf({ kind: "object", object: other })
               .filter((s) => s === EVERY_CREATURE_TYPE || isCreatureType(s));
       const shares: CardFilter = { subtypes, ...(anyOf !== undefined ? { anyOf } : {}) };
       return bindShares({ ...rest, anyOf: [shares] });

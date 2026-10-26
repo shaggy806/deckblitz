@@ -571,6 +571,7 @@ import _poolStirge from "../pool/stirge.js";
 import _poolStitchedAssistant from "../pool/stitched-assistant.js";
 import _poolStitchedMangler from "../pool/stitched-mangler.js";
 import _poolStompingGround from "../pool/stomping-ground.js";
+import _poolStonybrookSchoolmaster from "../pool/stonybrook-schoolmaster.js";
 import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
 import _poolStormSeeker from "../pool/storm-seeker.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
@@ -1283,6 +1284,7 @@ const shard: CardShard = {
     _poolStitchedAssistant,
     _poolStitchedMangler,
     _poolStompingGround,
+    _poolStonybrookSchoolmaster,
     _poolStormFleetArsonist,
     _poolStormSeeker,
     _poolStrandsOfNight,
