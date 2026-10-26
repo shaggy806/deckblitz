@@ -38,6 +38,7 @@ import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
+import _poolAuriokEdgewright from "../pool/auriok-edgewright.js";
 import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
@@ -479,6 +480,7 @@ import _poolProsperity from "../pool/prosperity.js";
 import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtect from "../pool/protect.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
+import _poolPsychicMiasma from "../pool/psychic-miasma.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPunishIgnorance from "../pool/punish-ignorance.js";
@@ -777,6 +779,7 @@ const shard: CardShard = {
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
     _poolAuratog,
+    _poolAuriokEdgewright,
     _poolAuronsInspiration,
     _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
@@ -1218,6 +1221,7 @@ const shard: CardShard = {
     _poolProstheticInjector,
     _poolProtect,
     _poolProtegesAwakening,
+    _poolPsychicMiasma,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
     _poolPunishIgnorance,

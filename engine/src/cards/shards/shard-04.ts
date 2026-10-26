@@ -505,6 +505,7 @@ import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
 import _poolRuination from "../pool/ruination.js";
 import _poolRunOver from "../pool/run-over.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
+import _poolRustTick from "../pool/rust-tick.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSagesRowDenizen from "../pool/sages-row-denizen.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
@@ -1242,6 +1243,7 @@ const shard: CardShard = {
     _poolRuination,
     _poolRunOver,
     _poolRuneSealedWall,
+    _poolRustTick,
     _poolSHIELDSpyKit,
     _poolSagesRowDenizen,
     _poolSaiMasterThopterist,
