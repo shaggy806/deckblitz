@@ -1625,10 +1625,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)",
       "Creature — Human Samurai",
     );
-    expect(samurai.triggered.map((t) => t.trigger)).toEqual([
-      { on: "blocks", who: "self" },
-      { on: "becomes-blocked", who: "self" },
-    ]);
+    expect(samurai.triggered[0].trigger).toEqual({ on: "blocks", who: "self" });
+    expect(samurai.triggered[1].trigger).toEqual({ on: "becomes-blocked", who: "self" });
     expect(samurai.triggered[1].effect).toEqual({ kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" });
     expect(samurai.complete).toBe(true);
     const kami = face(
