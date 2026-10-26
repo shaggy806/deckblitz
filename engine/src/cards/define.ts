@@ -1419,8 +1419,9 @@ export interface StaticAbility {
    * Rampart, with `chooseOnEnter: ["left", "right"]`). A rule for every
    * player, whatever `affects` says. The direction is this permanent's
    * `chosenOnEnter` — left is the next player in turn order, right the one
-   * before, skipping anyone who has left the game — and with several such
-   * permanents the latest one's choice is the one in force. */
+   * before, skipping anyone who has left the game — and several such permanents
+   * all apply at once, so two that disagree leave nobody to attack
+   * (`nearestOpponentRule`; the Pramikon ruling). */
   readonly attackOnlyNearestOpponent?: boolean;
   /**
    * The affected creatures assign combat damage equal to their **toughness**
