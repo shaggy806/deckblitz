@@ -417,6 +417,7 @@ import _poolOminousCemetery from "../pool/ominous-cemetery.js";
 import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
+import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -690,6 +691,7 @@ import _poolWardenOfTheBeyond from "../pool/warden-of-the-beyond.js";
 import _poolWarrantWarden from "../pool/warrant-warden.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWavesifter from "../pool/wavesifter.js";
+import _poolWaxmaneBaku from "../pool/waxmane-baku.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
 import _poolWeftbladeEnhancer from "../pool/weftblade-enhancer.js";
@@ -1146,6 +1148,7 @@ const shard: CardShard = {
     _poolOpalGargoyle,
     _poolOphidian,
     _poolOrdruunVeteran,
+    _poolOrnateKanzashi,
     _poolOssuaryRats,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
@@ -1419,6 +1422,7 @@ const shard: CardShard = {
     _poolWarrantWarden,
     _poolWastewoodVerge,
     _poolWavesifter,
+    _poolWaxmaneBaku,
     _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,
     _poolWeftbladeEnhancer,

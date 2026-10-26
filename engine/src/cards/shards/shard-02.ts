@@ -62,6 +62,7 @@ import _poolBlessedDefiance from "../pool/blessed-defiance.js";
 import _poolBlightMound from "../pool/blight-mound.js";
 import _poolBlightedBlackthorn from "../pool/blighted-blackthorn.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
+import _poolBloodSpeaker from "../pool/blood-speaker.js";
 import _poolBloodboilSorcerer from "../pool/bloodboil-sorcerer.js";
 import _poolBloodfireEnforcers from "../pool/bloodfire-enforcers.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
@@ -85,6 +86,7 @@ import _poolBrushfireElemental from "../pool/brushfire-elemental.js";
 import _poolBulette from "../pool/bulette.js";
 import _poolBulkUp from "../pool/bulk-up.js";
 import _poolCabalCoffers from "../pool/cabal-coffers.js";
+import _poolCallForBlood from "../pool/call-for-blood.js";
 import _poolCampaignOfVengeance from "../pool/campaign-of-vengeance.js";
 import _poolCaptivatingCave from "../pool/captivating-cave.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
@@ -169,6 +171,7 @@ import _poolDisentomb from "../pool/disentomb.js";
 import _poolDivineFavor from "../pool/divine-favor.js";
 import _poolDivineVisitation from "../pool/divine-visitation.js";
 import _poolDivinersPortent from "../pool/diviners-portent.js";
+import _poolDokaiWeaverOfLife from "../pool/dokai-weaver-of-life.js";
 import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
 import _poolDragonMask from "../pool/dragon-mask.js";
 import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
@@ -474,6 +477,7 @@ import _poolPyrotechnics from "../pool/pyrotechnics.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuestForTheHolyRelic from "../pool/quest-for-the-holy-relic.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
+import _poolQuillmaneBaku from "../pool/quillmane-baku.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
@@ -590,6 +594,7 @@ import _poolSteamSpitter from "../pool/steam-spitter.js";
 import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
 import _poolStickytongueSentinel from "../pool/stickytongue-sentinel.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
+import _poolStudentOfElements from "../pool/student-of-elements.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
 import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
@@ -790,6 +795,7 @@ const shard: CardShard = {
     _poolBlightMound,
     _poolBlightedBlackthorn,
     _poolBloodBurglar,
+    _poolBloodSpeaker,
     _poolBloodboilSorcerer,
     _poolBloodfireEnforcers,
     _poolBloodhunterBat,
@@ -813,6 +819,7 @@ const shard: CardShard = {
     _poolBulette,
     _poolBulkUp,
     _poolCabalCoffers,
+    _poolCallForBlood,
     _poolCampaignOfVengeance,
     _poolCaptivatingCave,
     _poolCastAwayDoubt,
@@ -897,6 +904,7 @@ const shard: CardShard = {
     _poolDivineFavor,
     _poolDivineVisitation,
     _poolDivinersPortent,
+    _poolDokaiWeaverOfLife,
     _poolDoranTheSiegeTower,
     _poolDragonMask,
     _poolDragonbornLooter,
@@ -1202,6 +1210,7 @@ const shard: CardShard = {
     _poolQuantumEntanglement,
     _poolQuestForTheHolyRelic,
     _poolQuillBladeLaureate,
+    _poolQuillmaneBaku,
     _poolRacersScoreboard,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
@@ -1318,6 +1327,7 @@ const shard: CardShard = {
     _poolSteelOfTheGodhead,
     _poolStickytongueSentinel,
     _poolStonecoilSerpent,
+    _poolStudentOfElements,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
     _poolSukiKyoshiWarrior,

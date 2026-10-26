@@ -90,6 +90,7 @@ import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolBuryInBooks from "../pool/bury-in-books.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
 import _poolCallerOfTheUntamed from "../pool/caller-of-the-untamed.js";
+import _poolCallowJushi from "../pool/callow-jushi.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
@@ -579,6 +580,7 @@ import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
 import _poolSireOfInsanity from "../pool/sire-of-insanity.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
+import _poolSkullmaneBaku from "../pool/skullmane-baku.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
@@ -838,6 +840,7 @@ const shard: CardShard = {
     _poolBuryInBooks,
     _poolCacklingCounterpart,
     _poolCallerOfTheUntamed,
+    _poolCallowJushi,
     _poolCameraLauncher,
     _poolCandyTrail,
     _poolCapsizingWave,
@@ -1327,6 +1330,7 @@ const shard: CardShard = {
     _poolSilverflameRitual,
     _poolSireOfInsanity,
     _poolSkitteringCicada,
+    _poolSkullmaneBaku,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,

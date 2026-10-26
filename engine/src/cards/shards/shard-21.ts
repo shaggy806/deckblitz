@@ -83,6 +83,7 @@ import _poolBridgeFromBelow from "../pool/bridge-from-below.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBrushwagg from "../pool/brushwagg.js";
+import _poolBudokaGardener from "../pool/budoka-gardener.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
 import _poolBullElephant from "../pool/bull-elephant.js";
 import _poolBullRushBruiser from "../pool/bull-rush-bruiser.js";
@@ -264,6 +265,7 @@ import _poolGoblinShrine from "../pool/goblin-shrine.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
 import _poolGodsHallGuardian from "../pool/gods-hall-guardian.js";
+import _poolGokaTheUnjust from "../pool/goka-the-unjust.js";
 import _poolGoldenDemise from "../pool/golden-demise.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
@@ -468,6 +470,7 @@ import _poolPrimalWellspring from "../pool/primal-wellspring.js";
 import _poolProclamationOfRebirth from "../pool/proclamation-of-rebirth.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
+import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
@@ -632,6 +635,7 @@ import _poolTitanicBrawl from "../pool/titanic-brawl.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
 import _poolTollOfTheInvasion from "../pool/toll-of-the-invasion.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
+import _poolTomoyaTheRevealer from "../pool/tomoya-the-revealer.js";
 import _poolTopplegeist from "../pool/topplegeist.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
 import _poolTormentorsTrident from "../pool/tormentors-trident.js";
@@ -682,6 +686,7 @@ import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
 import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
+import _poolWardOfPiety from "../pool/ward-of-piety.js";
 import _poolWarrenSoultrader from "../pool/warren-soultrader.js";
 import _poolWarriorEnKor from "../pool/warrior-en-kor.js";
 import _poolWaterElemental from "../pool/water-elemental.js";
@@ -808,6 +813,7 @@ const shard: CardShard = {
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
     _poolBrushwagg,
+    _poolBudokaGardener,
     _poolBugenhagenWiseElder,
     _poolBullElephant,
     _poolBullRushBruiser,
@@ -989,6 +995,7 @@ const shard: CardShard = {
     _poolGoblinSurprise,
     _poolGoblinWarchief,
     _poolGodsHallGuardian,
+    _poolGokaTheUnjust,
     _poolGoldenDemise,
     _poolGoldmeadowDodger,
     _poolGormaTheGullet,
@@ -1193,6 +1200,7 @@ const shard: CardShard = {
     _poolProclamationOfRebirth,
     _poolProctorsGaze,
     _poolPromisingVein,
+    _poolPsychicSpear,
     _poolPullFromTheDeep,
     _poolPyreHound,
     _poolPyroclasticHellion,
@@ -1357,6 +1365,7 @@ const shard: CardShard = {
     _poolTobiasDoomedConqueror,
     _poolTollOfTheInvasion,
     _poolTomBombadil,
+    _poolTomoyaTheRevealer,
     _poolTopplegeist,
     _poolTorgalAFineHound,
     _poolTormentorsTrident,
@@ -1407,6 +1416,7 @@ const shard: CardShard = {
     _poolVirtueOfKnowledge,
     _poolVoicesFromTheVoid,
     _poolVoraciousNull,
+    _poolWardOfPiety,
     _poolWarrenSoultrader,
     _poolWarriorEnKor,
     _poolWaterElemental,

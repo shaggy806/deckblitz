@@ -239,6 +239,7 @@ import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGarzasAssassin from "../pool/garzas-assassin.js";
+import _poolGenjuOfTheFields from "../pool/genju-of-the-fields.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
@@ -526,6 +527,7 @@ import _poolSandStrangler from "../pool/sand-strangler.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
+import _poolScaledHulk from "../pool/scaled-hulk.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
@@ -981,6 +983,7 @@ const shard: CardShard = {
     _poolFuneralRites,
     _poolGandalfGoblinsBane,
     _poolGarzasAssassin,
+    _poolGenjuOfTheFields,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
     _poolGhirapurGearcrafter,
@@ -1268,6 +1271,7 @@ const shard: CardShard = {
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
+    _poolScaledHulk,
     _poolScapeshift,
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,

@@ -39,6 +39,7 @@ import _poolAsceticism from "../pool/asceticism.js";
 import _poolAshlingThePilgrim from "../pool/ashling-the-pilgrim.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
 import _poolAuguryAdept from "../pool/augury-adept.js";
+import _poolAuraOfDominion from "../pool/aura-of-dominion.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
@@ -339,6 +340,7 @@ import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
 import _poolKeeperOfProgenitus from "../pool/keeper-of-progenitus.js";
 import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
+import _poolKikuNightsFlower from "../pool/kiku-nights-flower.js";
 import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
@@ -579,6 +581,7 @@ import _poolSnarlSong from "../pool/snarl-song.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
+import _poolSoratamiRainshaper from "../pool/soratami-rainshaper.js";
 import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulBleed from "../pool/soul-bleed.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolAshlingThePilgrim,
     _poolAssassinGauntlet,
     _poolAuguryAdept,
+    _poolAuraOfDominion,
     _poolAuroraShifter,
     _poolAvalanche,
     _poolAvengersQuinjet,
@@ -1094,6 +1098,7 @@ const shard: CardShard = {
     _poolKathariRemnant,
     _poolKeeperOfProgenitus,
     _poolKessigForgemaster,
+    _poolKikuNightsFlower,
     _poolKimahriValiantGuardian,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,
@@ -1334,6 +1339,7 @@ const shard: CardShard = {
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
+    _poolSoratamiRainshaper,
     _poolSorceressQueen,
     _poolSorinsGuide,
     _poolSoulBleed,

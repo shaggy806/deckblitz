@@ -17,6 +17,7 @@ import _poolAfiyaGrove from "../pool/afiya-grove.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
 import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
+import _poolAkkiRaider from "../pool/akki-raider.js";
 import _poolAkoumFlameseeker from "../pool/akoum-flameseeker.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
@@ -307,6 +308,7 @@ import _poolIvyDancer from "../pool/ivy-dancer.js";
 import _poolIzoniThousandEyed from "../pool/izoni-thousand-eyed.js";
 import _poolJacesIngenuity from "../pool/jaces-ingenuity.js";
 import _poolJadeheartAttendant from "../pool/jadeheart-attendant.js";
+import _poolJarakuTheInterloper from "../pool/jaraku-the-interloper.js";
 import _poolJayasFirenado from "../pool/jayas-firenado.js";
 import _poolJoinTheDead from "../pool/join-the-dead.js";
 import _poolJubilation from "../pool/jubilation.js";
@@ -774,6 +776,7 @@ const shard: CardShard = {
     _poolAgathasChampion,
     _poolAgentOfTheIronThrone,
     _poolAirliftChaplain,
+    _poolAkkiRaider,
     _poolAkoumFlameseeker,
     _poolAleshaWhoLaughsAtFate,
     _poolAlliesAtLast,
@@ -1064,6 +1067,7 @@ const shard: CardShard = {
     _poolIzoniThousandEyed,
     _poolJacesIngenuity,
     _poolJadeheartAttendant,
+    _poolJarakuTheInterloper,
     _poolJayasFirenado,
     _poolJoinTheDead,
     _poolJubilation,
