@@ -170,6 +170,7 @@ import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolEnigmaDrake from "../pool/enigma-drake.js";
 import _poolEquestrianSkill from "../pool/equestrian-skill.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
+import _poolEsperStormblade from "../pool/esper-stormblade.js";
 import _poolEternalStudent from "../pool/eternal-student.js";
 import _poolEtherealElk from "../pool/ethereal-elk.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
@@ -199,6 +200,7 @@ import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendlash from "../pool/fiendlash.js";
 import _poolFightWithFire from "../pool/fight-with-fire.js";
+import _poolFiligreeAngel from "../pool/filigree-angel.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
 import _poolFirebreathing from "../pool/firebreathing.js";
@@ -231,6 +233,7 @@ import _poolGladewalkerRitualist from "../pool/gladewalker-ritualist.js";
 import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
+import _poolGloryOfWarfare from "../pool/glory-of-warfare.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
@@ -405,6 +408,7 @@ import _poolPrescientChimera from "../pool/prescient-chimera.js";
 import _poolPreysVengeance from "../pool/preys-vengeance.js";
 import _poolPricklyMarmoset from "../pool/prickly-marmoset.js";
 import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
+import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
@@ -647,6 +651,7 @@ import _poolZhalfirinShapecraft from "../pool/zhalfirin-shapecraft.js";
 import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
+import _tokensBirdSoldierToken from "../tokens/bird-soldier-token.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
@@ -836,6 +841,7 @@ const shard: CardShard = {
     _poolEnigmaDrake,
     _poolEquestrianSkill,
     _poolErietteOfTheCharmedApple,
+    _poolEsperStormblade,
     _poolEternalStudent,
     _poolEtherealElk,
     _poolEtheriumAstrolabe,
@@ -865,6 +871,7 @@ const shard: CardShard = {
     _poolFertileGround,
     _poolFiendlash,
     _poolFightWithFire,
+    _poolFiligreeAngel,
     _poolFinalDeath,
     _poolFinalVengeance,
     _poolFirebreathing,
@@ -897,6 +904,7 @@ const shard: CardShard = {
     _poolGlassworksShatteredYard,
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
+    _poolGloryOfWarfare,
     _poolGnottvoldSlumbermound,
     _poolGoblinArsonist,
     _poolGoblinOffensive,
@@ -1071,6 +1079,7 @@ const shard: CardShard = {
     _poolPreysVengeance,
     _poolPricklyMarmoset,
     _poolPriestOfAncientLore,
+    _poolPrizedUnicorn,
     _poolProsperousPartnership,
     _poolProudPackRhino,
     _poolPsychoticFury,
@@ -1315,6 +1324,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAngelWarriorToken,
+    _tokensBirdSoldierToken,
     _tokensElementalToken53,
     _tokensEtheriumCellToken,
     _tokensFaerieDragonToken,

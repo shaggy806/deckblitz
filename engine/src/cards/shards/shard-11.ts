@@ -41,6 +41,7 @@ import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
 import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
+import _poolBantSureblade from "../pool/bant-sureblade.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
 import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
@@ -364,6 +365,7 @@ import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
 import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
 import _poolMoonsnarePrototype from "../pool/moonsnare-prototype.js";
 import _poolMoonstoneEulogist from "../pool/moonstone-eulogist.js";
+import _poolMorbidBloom from "../pool/morbid-bloom.js";
 import _poolMoriokReaver from "../pool/moriok-reaver.js";
 import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
@@ -494,6 +496,7 @@ import _poolSickleDancer from "../pool/sickle-dancer.js";
 import _poolSidarKondoOfJamuraa from "../pool/sidar-kondo-of-jamuraa.js";
 import _poolSiegeMastodon from "../pool/siege-mastodon.js";
 import _poolSiegeVeteran from "../pool/siege-veteran.js";
+import _poolSigilCaptain from "../pool/sigil-captain.js";
 import _poolSigilOfSleep from "../pool/sigil-of-sleep.js";
 import _poolSingingBellStrike from "../pool/singing-bell-strike.js";
 import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
@@ -710,6 +713,7 @@ const shard: CardShard = {
     _poolAuraExtraction,
     _poolAvacynsMemorial,
     _poolBadgermoleCub,
+    _poolBantSureblade,
     _poolBarbaryApes,
     _poolBarbedBatterfist,
     _poolBarbedServitor,
@@ -1033,6 +1037,7 @@ const shard: CardShard = {
     _poolMoonriseCleric,
     _poolMoonsnarePrototype,
     _poolMoonstoneEulogist,
+    _poolMorbidBloom,
     _poolMoriokReaver,
     _poolMossDiamond,
     _poolMossdog,
@@ -1163,6 +1168,7 @@ const shard: CardShard = {
     _poolSidarKondoOfJamuraa,
     _poolSiegeMastodon,
     _poolSiegeVeteran,
+    _poolSigilCaptain,
     _poolSigilOfSleep,
     _poolSingingBellStrike,
     _poolSireOfSevenDeaths,

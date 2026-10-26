@@ -611,6 +611,7 @@ import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js"
 import _tokensWhaleToken from "../tokens/whale-token.js";
 import _tokensWhiteCitizenToken from "../tokens/white-citizen-token.js";
 import _tokensWormToken from "../tokens/worm-token.js";
+import _tokensZombieWizardToken from "../tokens/zombie-wizard-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -1224,6 +1225,7 @@ const shard: CardShard = {
     _tokensWhaleToken,
     _tokensWhiteCitizenToken,
     _tokensWormToken,
+    _tokensZombieWizardToken,
   ],
 };
 

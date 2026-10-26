@@ -223,6 +223,7 @@ import _poolGoblinTrailblazer from "../pool/goblin-trailblazer.js";
 import _poolGoldPan from "../pool/gold-pan.js";
 import _poolGolgariGuildgate from "../pool/golgari-guildgate.js";
 import _poolGolgariRaiders from "../pool/golgari-raiders.js";
+import _poolGorgerWurm from "../pool/gorger-wurm.js";
 import _poolGossipsTalent from "../pool/gossips-talent.js";
 import _poolGourmandsTalent from "../pool/gourmands-talent.js";
 import _poolGrandEntryway from "../pool/grand-entryway.js";
@@ -888,6 +889,7 @@ const shard: CardShard = {
     _poolGoldPan,
     _poolGolgariGuildgate,
     _poolGolgariRaiders,
+    _poolGorgerWurm,
     _poolGossipsTalent,
     _poolGourmandsTalent,
     _poolGrandEntryway,

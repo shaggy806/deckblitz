@@ -84,6 +84,7 @@ import _poolBlowOffSteam from "../pool/blow-off-steam.js";
 import _poolBlowYourHouseDown from "../pool/blow-your-house-down.js";
 import _poolBombadilsSong from "../pool/bombadils-song.js";
 import _poolBonecallerCleric from "../pool/bonecaller-cleric.js";
+import _poolBountifulHarvest from "../pool/bountiful-harvest.js";
 import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
 import _poolBraidwoodCup from "../pool/braidwood-cup.js";
 import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
@@ -397,6 +398,7 @@ import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
+import _poolNulltreadGargantuan from "../pool/nulltread-gargantuan.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
@@ -553,6 +555,7 @@ import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
+import _poolStunSniper from "../pool/stun-sniper.js";
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
@@ -626,6 +629,7 @@ import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
 import _poolVantressVisions from "../pool/vantress-visions.js";
 import _poolVastwoodZendikon from "../pool/vastwood-zendikon.js";
 import _poolVedalkenAethermage from "../pool/vedalken-aethermage.js";
+import _poolVedalkenGhoul from "../pool/vedalken-ghoul.js";
 import _poolVenatHeartOfHydaelyn from "../pool/venat-heart-of-hydaelyn.js";
 import _poolVerdigris from "../pool/verdigris.js";
 import _poolVerduranEnchantress from "../pool/verduran-enchantress.js";
@@ -773,6 +777,7 @@ const shard: CardShard = {
     _poolBlowYourHouseDown,
     _poolBombadilsSong,
     _poolBonecallerCleric,
+    _poolBountifulHarvest,
     _poolBountifulLandscape,
     _poolBraidwoodCup,
     _poolBranchloftPathway,
@@ -1086,6 +1091,7 @@ const shard: CardShard = {
     _poolNightveilPredator,
     _poolNinjasBlades,
     _poolNorthPolePatrol,
+    _poolNulltreadGargantuan,
     _poolOakhameRanger,
     _poolOathOfGideon,
     _poolObeliskOfEsper,
@@ -1242,6 +1248,7 @@ const shard: CardShard = {
     _poolStormStrike,
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,
+    _poolStunSniper,
     _poolSulfurousMire,
     _poolSumalaWoodshaper,
     _poolSummonChocoMog,
@@ -1315,6 +1322,7 @@ const shard: CardShard = {
     _poolVantressVisions,
     _poolVastwoodZendikon,
     _poolVedalkenAethermage,
+    _poolVedalkenGhoul,
     _poolVenatHeartOfHydaelyn,
     _poolVerdigris,
     _poolVerduranEnchantress,

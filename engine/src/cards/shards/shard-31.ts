@@ -64,6 +64,7 @@ import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
+import _poolBlitzHellion from "../pool/blitz-hellion.js";
 import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
 import _poolBloodCrypt from "../pool/blood-crypt.js";
 import _poolBloodswornKnight from "../pool/bloodsworn-knight.js";
@@ -194,6 +195,7 @@ import _poolEnchantedCarriage from "../pool/enchanted-carriage.js";
 import _poolEnergyRefractor from "../pool/energy-refractor.js";
 import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolEntDraughtBasin from "../pool/ent-draught-basin.js";
+import _poolEntanglingVines from "../pool/entangling-vines.js";
 import _poolExperimentalOverload from "../pool/experimental-overload.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
@@ -231,6 +233,7 @@ import _poolFrostveilAmbush from "../pool/frostveil-ambush.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
+import _poolGargoyleCastle from "../pool/gargoyle-castle.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
@@ -462,6 +465,7 @@ import _poolRampageOfTheClans from "../pool/rampage-of-the-clans.js";
 import _poolRangerCaptainOfEos from "../pool/ranger-captain-of-eos.js";
 import _poolRavenform from "../pool/ravenform.js";
 import _poolReapersTalisman from "../pool/reapers-talisman.js";
+import _poolRebornHope from "../pool/reborn-hope.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
@@ -751,6 +755,7 @@ const shard: CardShard = {
     _poolBlackWidowDeadlyHunter,
     _poolBlightedAgent,
     _poolBlinkmothWell,
+    _poolBlitzHellion,
     _poolBlitzOfTheThunderRaptor,
     _poolBloodCrypt,
     _poolBloodswornKnight,
@@ -881,6 +886,7 @@ const shard: CardShard = {
     _poolEnergyRefractor,
     _poolEnlightenedManiac,
     _poolEntDraughtBasin,
+    _poolEntanglingVines,
     _poolExperimentalOverload,
     _poolFacevaulter,
     _poolFaithfulPikemaster,
@@ -918,6 +924,7 @@ const shard: CardShard = {
     _poolFungalInfection,
     _poolGaeasAvenger,
     _poolGallifreyCouncilChamber,
+    _poolGargoyleCastle,
     _poolGastalThrillseeker,
     _poolGatewatchBeacon,
     _poolGatherTheWhiteLotus,
@@ -1149,6 +1156,7 @@ const shard: CardShard = {
     _poolRangerCaptainOfEos,
     _poolRavenform,
     _poolReapersTalisman,
+    _poolRebornHope,
     _poolRedDragon,
     _poolRegrowth,
     _poolRemorsefulCleric,

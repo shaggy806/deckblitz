@@ -156,6 +156,7 @@ import _poolElspethSunsNemesis from "../pool/elspeth-suns-nemesis.js";
 import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
+import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
@@ -297,6 +298,7 @@ import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
 import _poolLightningPhoenix from "../pool/lightning-phoenix.js";
+import _poolLightningReaver from "../pool/lightning-reaver.js";
 import _poolLightningSkelemental from "../pool/lightning-skelemental.js";
 import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
@@ -358,6 +360,7 @@ import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
 import _poolNantukoDisciple from "../pool/nantuko-disciple.js";
+import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
@@ -569,6 +572,7 @@ import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUlrichUncontestedAlpha from "../pool/ulrich-uncontested-alpha.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
+import _poolUndeadSlayer from "../pool/undead-slayer.js";
 import _poolUndercoverButler from "../pool/undercover-butler.js";
 import _poolUnderworldFires from "../pool/underworld-fires.js";
 import _poolUnderworldHermit from "../pool/underworld-hermit.js";
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolElturgardRanger,
     _poolElvishHydromancer,
     _poolEmberhornMinotaur,
+    _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
     _poolEntishRestoration,
     _poolEntryDenied,
@@ -951,6 +956,7 @@ const shard: CardShard = {
     _poolLightlessEvangel,
     _poolLightningGreaves,
     _poolLightningPhoenix,
+    _poolLightningReaver,
     _poolLightningSkelemental,
     _poolLightningStormkin,
     _poolLilianasShade,
@@ -1012,6 +1018,7 @@ const shard: CardShard = {
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
     _poolNantukoDisciple,
+    _poolNecromancersCovenant,
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
     _poolNineTailWhiteFox,
@@ -1223,6 +1230,7 @@ const shard: CardShard = {
     _poolUlcerate,
     _poolUlrichUncontestedAlpha,
     _poolUndeadLeotau,
+    _poolUndeadSlayer,
     _poolUndercoverButler,
     _poolUnderworldFires,
     _poolUnderworldHermit,

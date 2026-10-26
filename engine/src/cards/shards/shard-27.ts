@@ -426,6 +426,7 @@ import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRelicBind from "../pool/relic-bind.js";
 import _poolRelicSeeker from "../pool/relic-seeker.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
+import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
 import _poolRibskiff from "../pool/ribskiff.js";
@@ -502,6 +503,7 @@ import _poolSparkElemental from "../pool/spark-elemental.js";
 import _poolSpectralSnatcher from "../pool/spectral-snatcher.js";
 import _poolSpellBlast from "../pool/spell-blast.js";
 import _poolSpellbookSeeker from "../pool/spellbook-seeker.js";
+import _poolSpellbreakerBehemoth from "../pool/spellbreaker-behemoth.js";
 import _poolSphinxMindbreaker from "../pool/sphinx-mindbreaker.js";
 import _poolSpiderSense from "../pool/spider-sense.js";
 import _poolSpinalVillain from "../pool/spinal-villain.js";
@@ -601,6 +603,7 @@ import _poolVectisSilencers from "../pool/vectis-silencers.js";
 import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
+import _poolVengefulRebirth from "../pool/vengeful-rebirth.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVeteranCathar from "../pool/veteran-cathar.js";
 import _poolVeteranWarleader from "../pool/veteran-warleader.js";
@@ -629,6 +632,7 @@ import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
 import _poolXathridSlyblade from "../pool/xathrid-slyblade.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
 import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
+import _poolZealousPersecution from "../pool/zealous-persecution.js";
 import _poolZendikarsRoil from "../pool/zendikars-roil.js";
 import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
@@ -1076,6 +1080,7 @@ const shard: CardShard = {
     _poolRelicBind,
     _poolRelicSeeker,
     _poolRestlessCottage,
+    _poolRetaliatorGriffin,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
     _poolRibskiff,
@@ -1152,6 +1157,7 @@ const shard: CardShard = {
     _poolSpectralSnatcher,
     _poolSpellBlast,
     _poolSpellbookSeeker,
+    _poolSpellbreakerBehemoth,
     _poolSphinxMindbreaker,
     _poolSpiderSense,
     _poolSpinalVillain,
@@ -1251,6 +1257,7 @@ const shard: CardShard = {
     _poolVeiledAscension,
     _poolVelaTheNightClad,
     _poolVenerableWarsinger,
+    _poolVengefulRebirth,
     _poolVesselOfVolatility,
     _poolVeteranCathar,
     _poolVeteranWarleader,
@@ -1279,6 +1286,7 @@ const shard: CardShard = {
     _poolXathridSlyblade,
     _poolYotianMedic,
     _poolYueTheMoonSpirit,
+    _poolZealousPersecution,
     _poolZendikarsRoil,
     _poolZhurTaaSwine,
     _poolZiatorasProvingGround,

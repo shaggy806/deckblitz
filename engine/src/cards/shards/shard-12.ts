@@ -368,6 +368,7 @@ import _poolNadierAgentOfTheDuskenel from "../pool/nadier-agent-of-the-duskenel.
 import _poolNantukoHusk from "../pool/nantuko-husk.js";
 import _poolNantukoVigilante from "../pool/nantuko-vigilante.js";
 import _poolNarciFableSinger from "../pool/narci-fable-singer.js";
+import _poolNayaHushblade from "../pool/naya-hushblade.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecronMonolith from "../pool/necron-monolith.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
@@ -595,6 +596,7 @@ import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
 import _poolVarisSilverymoonRanger from "../pool/varis-silverymoon-ranger.js";
 import _poolVaultOfChampions from "../pool/vault-of-champions.js";
+import _poolVectisDominator from "../pool/vectis-dominator.js";
 import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
 import _poolVengefulReaper from "../pool/vengeful-reaper.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
@@ -1024,6 +1026,7 @@ const shard: CardShard = {
     _poolNantukoHusk,
     _poolNantukoVigilante,
     _poolNarciFableSinger,
+    _poolNayaHushblade,
     _poolNecromanticSelection,
     _poolNecronMonolith,
     _poolNecropolisRegent,
@@ -1251,6 +1254,7 @@ const shard: CardShard = {
     _poolValleyRotcaller,
     _poolVarisSilverymoonRanger,
     _poolVaultOfChampions,
+    _poolVectisDominator,
     _poolVengefulBloodwitch,
     _poolVengefulReaper,
     _poolVenserShaperSavant,

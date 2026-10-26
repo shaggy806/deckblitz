@@ -296,6 +296,7 @@ import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
 import _poolJointExploration from "../pool/joint-exploration.js";
 import _poolJudithCarnageConnoisseur from "../pool/judith-carnage-connoisseur.js";
+import _poolJundSojourners from "../pool/jund-sojourners.js";
 import _poolKalakscionHungerTyrant from "../pool/kalakscion-hunger-tyrant.js";
 import _poolKarametrasBlessing from "../pool/karametras-blessing.js";
 import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
@@ -484,6 +485,7 @@ import _poolSearingBlood from "../pool/searing-blood.js";
 import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSeeker from "../pool/seeker.js";
+import _poolSeismicStrike from "../pool/seismic-strike.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
 import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
@@ -521,6 +523,7 @@ import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
 import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
+import _poolSoulBleed from "../pool/soul-bleed.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
@@ -653,6 +656,7 @@ import _poolWinterTeamPlayer from "../pool/winter-team-player.js";
 import _poolWishingWell from "../pool/wishing-well.js";
 import _poolWonder from "../pool/wonder.js";
 import _poolWosePathfinder from "../pool/wose-pathfinder.js";
+import _poolXathridDemon from "../pool/xathrid-demon.js";
 import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
 import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
 import _poolYotianFrontliner from "../pool/yotian-frontliner.js";
@@ -971,6 +975,7 @@ const shard: CardShard = {
     _poolJhoiraWeatherlightCaptain,
     _poolJointExploration,
     _poolJudithCarnageConnoisseur,
+    _poolJundSojourners,
     _poolKalakscionHungerTyrant,
     _poolKarametrasBlessing,
     _poolKarnLegacyReforged,
@@ -1159,6 +1164,7 @@ const shard: CardShard = {
     _poolSeasonedConsultant,
     _poolSeeTheTruth,
     _poolSeeker,
+    _poolSeismicStrike,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
     _poolShadowfaxLordOfHorses,
@@ -1196,6 +1202,7 @@ const shard: CardShard = {
     _poolSootfeatherFlock,
     _poolSorceressQueen,
     _poolSorinsGuide,
+    _poolSoulBleed,
     _poolSoulSnuffers,
     _poolSozinsComet,
     _poolSpatialContortion,
@@ -1328,6 +1335,7 @@ const shard: CardShard = {
     _poolWishingWell,
     _poolWonder,
     _poolWosePathfinder,
+    _poolXathridDemon,
     _poolYarokTheDesecrated,
     _poolYokedPlowbeast,
     _poolYotianFrontliner,

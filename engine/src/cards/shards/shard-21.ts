@@ -118,6 +118,7 @@ import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
+import _poolCrystallization from "../pool/crystallization.js";
 import _poolCullingDrone from "../pool/culling-drone.js";
 import _poolCurseOfBounty from "../pool/curse-of-bounty.js";
 import _poolCurseOfTheSwine from "../pool/curse-of-the-swine.js";
@@ -340,6 +341,7 @@ import _poolMisguidedRage from "../pool/misguided-rage.js";
 import _poolMishrasDomination from "../pool/mishras-domination.js";
 import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
 import _poolMob from "../pool/mob.js";
+import _poolMoldAdder from "../pool/mold-adder.js";
 import _poolMonaLisaScienceGeek from "../pool/mona-lisa-science-geek.js";
 import _poolMonoistSentry from "../pool/monoist-sentry.js";
 import _poolMorkrutBanshee from "../pool/morkrut-banshee.js";
@@ -427,6 +429,7 @@ import _poolRenegadeRallier from "../pool/renegade-rallier.js";
 import _poolRepulsorBlast from "../pool/repulsor-blast.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
+import _poolRhoxPikemaster from "../pool/rhox-pikemaster.js";
 import _poolRiddleform from "../pool/riddleform.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
@@ -752,6 +755,7 @@ const shard: CardShard = {
     _poolCourtOfArdenvale,
     _poolCravenGiant,
     _poolCrystalShard,
+    _poolCrystallization,
     _poolCullingDrone,
     _poolCurseOfBounty,
     _poolCurseOfTheSwine,
@@ -974,6 +978,7 @@ const shard: CardShard = {
     _poolMishrasDomination,
     _poolMisthoofKirin,
     _poolMob,
+    _poolMoldAdder,
     _poolMonaLisaScienceGeek,
     _poolMonoistSentry,
     _poolMorkrutBanshee,
@@ -1061,6 +1066,7 @@ const shard: CardShard = {
     _poolRepulsorBlast,
     _poolRevengeOfRavens,
     _poolRewriteRegrets,
+    _poolRhoxPikemaster,
     _poolRiddleform,
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,

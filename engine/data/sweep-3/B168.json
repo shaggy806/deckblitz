@@ -1,0 +1,850 @@
+{
+  "batch": "B168",
+  "status": "complete",
+  "ranks": "Magic 2010 (M10, 2009-07-17) and Alara Reborn (ARB, 2009-04-30): the rest of each set, whole (middle walk)",
+  "authored": [
+    {
+      "name": "Anathemancer",
+      "files": [
+        "engine/src/cards/pool/anathemancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aven Mimeomancer",
+      "files": [
+        "engine/src/cards/pool/aven-mimeomancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Awakener Druid",
+      "files": [
+        "engine/src/cards/pool/awakener-druid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bant Sojourners",
+      "files": [
+        "engine/src/cards/pool/bant-sojourners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bant Sureblade",
+      "files": [
+        "engine/src/cards/pool/bant-sureblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blitz Hellion",
+      "files": [
+        "engine/src/cards/pool/blitz-hellion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bountiful Harvest",
+      "files": [
+        "engine/src/cards/pool/bountiful-harvest.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brainbite",
+      "files": [
+        "engine/src/cards/pool/brainbite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cloven Casting",
+      "files": [
+        "engine/src/cards/pool/cloven-casting.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crystallization",
+      "files": [
+        "engine/src/cards/pool/crystallization.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deathbringer Thoctar",
+      "files": [
+        "engine/src/cards/pool/deathbringer-thoctar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Defiler of Souls",
+      "files": [
+        "engine/src/cards/pool/defiler-of-souls.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Demonspine Whip",
+      "files": [
+        "engine/src/cards/pool/demonspine-whip.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Djinn of Wishes",
+      "files": [
+        "engine/src/cards/pool/djinn-of-wishes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Double Negative",
+      "files": [
+        "engine/src/cards/pool/double-negative.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drastic Revelation",
+      "files": [
+        "engine/src/cards/pool/drastic-revelation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dread Warlock",
+      "files": [
+        "engine/src/cards/pool/dread-warlock.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Enigma Sphinx",
+      "files": [
+        "engine/src/cards/pool/enigma-sphinx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Entangling Vines",
+      "files": [
+        "engine/src/cards/pool/entangling-vines.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Esper Sojourners",
+      "files": [
+        "engine/src/cards/pool/esper-sojourners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Esper Stormblade",
+      "files": [
+        "engine/src/cards/pool/esper-stormblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Etherwrought Page",
+      "files": [
+        "engine/src/cards/pool/etherwrought-page.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fight to the Death",
+      "files": [
+        "engine/src/cards/pool/fight-to-the-death.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Filigree Angel",
+      "files": [
+        "engine/src/cards/pool/filigree-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Finest Hour",
+      "files": [
+        "engine/src/cards/pool/finest-hour.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flurry of Wings",
+      "files": [
+        "engine/src/cards/pool/flurry-of-wings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gargoyle Castle",
+      "files": [
+        "engine/src/cards/pool/gargoyle-castle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glassdust Hulk",
+      "files": [
+        "engine/src/cards/pool/glassdust-hulk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glory of Warfare",
+      "files": [
+        "engine/src/cards/pool/glory-of-warfare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gloryscale Viashino",
+      "files": [
+        "engine/src/cards/pool/gloryscale-viashino.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Godtracker of Jund",
+      "files": [
+        "engine/src/cards/pool/godtracker-of-jund.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gorger Wurm",
+      "files": [
+        "engine/src/cards/pool/gorger-wurm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grixis Grimblade",
+      "files": [
+        "engine/src/cards/pool/grixis-grimblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grixis Sojourners",
+      "files": [
+        "engine/src/cards/pool/grixis-sojourners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Illusionary Servant",
+      "files": [
+        "engine/src/cards/pool/illusionary-servant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Illusory Demon",
+      "files": [
+        "engine/src/cards/pool/illusory-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Inferno Elemental",
+      "files": [
+        "engine/src/cards/pool/inferno-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jund Hackblade",
+      "files": [
+        "engine/src/cards/pool/jund-hackblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jund Sojourners",
+      "files": [
+        "engine/src/cards/pool/jund-sojourners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Karrthus, Tyrant of Jund",
+      "files": [
+        "engine/src/cards/pool/karrthus-tyrant-of-jund.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kathari Bomber",
+      "files": [
+        "engine/src/cards/pool/kathari-bomber.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knotvine Paladin",
+      "files": [
+        "engine/src/cards/pool/knotvine-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lich Lord of Unx",
+      "files": [
+        "engine/src/cards/pool/lich-lord-of-unx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightning Reaver",
+      "files": [
+        "engine/src/cards/pool/lightning-reaver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightwielder Paladin",
+      "files": [
+        "engine/src/cards/pool/lightwielder-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magma Phoenix",
+      "files": [
+        "engine/src/cards/pool/magma-phoenix.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mold Adder",
+      "files": [
+        "engine/src/cards/pool/mold-adder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Morbid Bloom",
+      "files": [
+        "engine/src/cards/pool/morbid-bloom.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mycoid Shepherd",
+      "files": [
+        "engine/src/cards/pool/mycoid-shepherd.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Naya Hushblade",
+      "files": [
+        "engine/src/cards/pool/naya-hushblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Naya Sojourners",
+      "files": [
+        "engine/src/cards/pool/naya-sojourners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Necromancer's Covenant",
+      "files": [
+        "engine/src/cards/pool/necromancers-covenant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nulltread Gargantuan",
+      "files": [
+        "engine/src/cards/pool/nulltread-gargantuan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Planar Cleansing",
+      "files": [
+        "engine/src/cards/pool/planar-cleansing.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Predatory Advantage",
+      "files": [
+        "engine/src/cards/pool/predatory-advantage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prized Unicorn",
+      "files": [
+        "engine/src/cards/pool/prized-unicorn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reborn Hope",
+      "files": [
+        "engine/src/cards/pool/reborn-hope.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Regenerate",
+      "files": [
+        "engine/src/cards/pool/regenerate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Retaliator Griffin",
+      "files": [
+        "engine/src/cards/pool/retaliator-griffin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhox Pikemaster",
+      "files": [
+        "engine/src/cards/pool/rhox-pikemaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sanity Gnawers",
+      "files": [
+        "engine/src/cards/pool/sanity-gnawers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Seismic Strike",
+      "files": [
+        "engine/src/cards/pool/seismic-strike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shield of the Righteous",
+      "files": [
+        "engine/src/cards/pool/shield-of-the-righteous.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sigil Captain",
+      "files": [
+        "engine/src/cards/pool/sigil-captain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sigil of the Nayan Gods",
+      "files": [
+        "engine/src/cards/pool/sigil-of-the-nayan-gods.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skyclaw Thrash",
+      "files": [
+        "engine/src/cards/pool/skyclaw-thrash.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slave of Bolas",
+      "files": [
+        "engine/src/cards/pool/slave-of-bolas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul Bleed",
+      "files": [
+        "engine/src/cards/pool/soul-bleed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spellbound Dragon",
+      "files": [
+        "engine/src/cards/pool/spellbound-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spellbreaker Behemoth",
+      "files": [
+        "engine/src/cards/pool/spellbreaker-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stun Sniper",
+      "files": [
+        "engine/src/cards/pool/stun-sniper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tainted Sigil",
+      "files": [
+        "engine/src/cards/pool/tainted-sigil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thraximundar",
+      "files": [
+        "engine/src/cards/pool/thraximundar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unbender Tine",
+      "files": [
+        "engine/src/cards/pool/unbender-tine.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Undead Slayer",
+      "files": [
+        "engine/src/cards/pool/undead-slayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vectis Dominator",
+      "files": [
+        "engine/src/cards/pool/vectis-dominator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vedalken Ghoul",
+      "files": [
+        "engine/src/cards/pool/vedalken-ghoul.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vedalken Heretic",
+      "files": [
+        "engine/src/cards/pool/vedalken-heretic.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vengeful Rebirth",
+      "files": [
+        "engine/src/cards/pool/vengeful-rebirth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Windstorm",
+      "files": [
+        "engine/src/cards/pool/windstorm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Xathrid Demon",
+      "files": [
+        "engine/src/cards/pool/xathrid-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zealous Persecution",
+      "files": [
+        "engine/src/cards/pool/zealous-persecution.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Alluring Siren",
+      "needs": [
+        "effect:must-attack-specific-player"
+      ],
+      "why": "target creature an opponent controls attacks you this turn if able"
+    },
+    {
+      "name": "Architects of Will",
+      "needs": [
+        "new:look-at-target-player-library-top"
+      ],
+      "why": "look at the top three cards of target player's library and put them back in any order"
+    },
+    {
+      "name": "Arsenal Thresher",
+      "needs": [
+        "replacement:reveal-from-hand-enters-with-counters"
+      ],
+      "why": "as it enters, reveal any number of other artifact cards from your hand; it enters with that many +1/+1 counters"
+    },
+    {
+      "name": "Capricious Efreet",
+      "needs": [
+        "effect:random-target"
+      ],
+      "why": "destroy one of up to three targets chosen at random"
+    },
+    {
+      "name": "Convincing Mirage",
+      "needs": [
+        "static:land-type-setting",
+        "static:choose-basic-land-type"
+      ],
+      "why": "the enchanted land is the chosen basic land type (losing its other land types and abilities, rule 305.7)"
+    },
+    {
+      "name": "Dragon Appeasement",
+      "needs": [
+        "static:skip-draw-step"
+      ],
+      "why": "skip your draw step"
+    },
+    {
+      "name": "Ethersworn Shieldmage",
+      "needs": [
+        "replacement:prevent-damage-to-filter-this-turn"
+      ],
+      "why": "prevent all damage to artifact creatures this turn, checked as damage is dealt"
+    },
+    {
+      "name": "Fieldmist Borderpost",
+      "needs": [
+        "cost:alt-cost-return-lands"
+      ],
+      "why": "alternative cost: pay {1} and return a basic land you control to its owner's hand"
+    },
+    {
+      "name": "Firewild Borderpost",
+      "needs": [
+        "cost:alt-cost-return-lands"
+      ],
+      "why": "alternative cost: pay {1} and return a basic land you control to its owner's hand"
+    },
+    {
+      "name": "Giant Ambush Beetle",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "target creature blocks this creature this turn if able"
+    },
+    {
+      "name": "Guardian Seraph",
+      "needs": [
+        "replacement:prevent-n-of-damage"
+      ],
+      "why": "prevent 1 of the damage an opponent's source would deal to you"
+    },
+    {
+      "name": "Harm's Way",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "the next 2 damage a source would deal to you or a permanent you control is dealt to any target instead"
+    },
+    {
+      "name": "Ice Cage",
+      "needs": [
+        "static:enchanted-abilities-cant-be-activated"
+      ],
+      "why": "the enchanted creature's activated abilities can't be activated"
+    },
+    {
+      "name": "Identity Crisis",
+      "needs": [
+        "effect:exile-from-hand-by-filter"
+      ],
+      "why": "exile all cards from target player's hand and graveyard"
+    },
+    {
+      "name": "Intimidation Bolt",
+      "needs": [
+        "effect:turn-restriction-except-target"
+      ],
+      "why": "other creatures can't attack this turn — the restriction must leave out the targeted creature and bind creatures that enter later"
+    },
+    {
+      "name": "Jackal Familiar",
+      "needs": [
+        "static:cant-attack-or-block-alone"
+      ],
+      "why": "can't attack or block alone"
+    },
+    {
+      "name": "Lavalanche",
+      "needs": [
+        "effect:damage-all-scoped-to-target-planeswalker-controller"
+      ],
+      "why": "damage to target player or planeswalker and each creature that player or that planeswalker's controller controls — damage-all's controlledByTarget does nothing for a planeswalker target"
+    },
+    {
+      "name": "Magebane Armor",
+      "needs": [
+        "replacement:prevent-damage-to-attached"
+      ],
+      "why": "prevent all noncombat damage that would be dealt to the equipped creature"
+    },
+    {
+      "name": "Marrow Chomper",
+      "needs": [
+        "amount:creatures-devoured"
+      ],
+      "why": "gain 2 life for each creature it devoured"
+    },
+    {
+      "name": "Master of the Wild Hunt",
+      "needs": [
+        "decision:controller-of-target-divides-damage"
+      ],
+      "why": "each Wolf tapped this way deals damage equal to its power; the target's controller divides its damage among those Wolves"
+    },
+    {
+      "name": "Mind Funeral",
+      "needs": [
+        "effect:reveal-until-count"
+      ],
+      "why": "reveal from a target opponent's library until four lands, put all revealed cards into their graveyard"
+    },
+    {
+      "name": "Mirror of Fate",
+      "needs": [
+        "decision:choose-face-up-exiled-card"
+      ],
+      "why": "choose up to seven face-up exiled cards you own, exile your library, put them on top"
+    },
+    {
+      "name": "Mistvein Borderpost",
+      "needs": [
+        "cost:alt-cost-return-lands"
+      ],
+      "why": "alternative cost: pay {1} and return a basic land you control to its owner's hand"
+    },
+    {
+      "name": "Palace Guard",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "can block any number of creatures"
+    },
+    {
+      "name": "Rise from the Grave",
+      "needs": [
+        "effect:return-with-added-color"
+      ],
+      "why": "returns the creature as a black Zombie in addition to its other colors — put-onto-battlefield can't add a colour"
+    },
+    {
+      "name": "Safe Passage",
+      "needs": [
+        "replacement:prevent-damage-to-filter-this-turn"
+      ],
+      "why": "prevent all damage that would be dealt to you and creatures you control this turn, including creatures that arrive later"
+    },
+    {
+      "name": "Sages of the Anima",
+      "needs": [
+        "replacement:draw-replacement-look-and-choose"
+      ],
+      "why": "replaces each draw with reveal three, take the creatures, bottom the rest"
+    },
+    {
+      "name": "Serpent of the Endless Sea",
+      "needs": [
+        "static:attack-restriction-defending-player-condition"
+      ],
+      "why": "can't attack unless defending player controls an Island"
+    },
+    {
+      "name": "Singe-Mind Ogre",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "reveal a random card from a target player's hand and read its mana value"
+    },
+    {
+      "name": "Soulquake",
+      "needs": [
+        "effect:return-all-graveyard-cards-to-owners-hands"
+      ],
+      "why": "returns all creatures on the battlefield and in graveyards to their owners' hands in one event"
+    },
+    {
+      "name": "Sovereigns of Lost Alara",
+      "needs": [
+        "effect:search-library-attach-to-trigger-object"
+      ],
+      "why": "search for an Aura that could enchant the attacking creature and attach it to that creature"
+    },
+    {
+      "name": "Sphinx Ambassador",
+      "needs": [
+        "decision:name-a-card"
+      ],
+      "why": "search the damaged player's library for a card, then that player names a card"
+    },
+    {
+      "name": "Thought Hemorrhage",
+      "needs": [
+        "decision:name-a-card"
+      ],
+      "why": "name a nonland card"
+    },
+    {
+      "name": "Unscythe, Killer of Kings",
+      "needs": [
+        "filter:damaged-this-turn-by-source"
+      ],
+      "why": "a creature dealt damage this turn by the equipped creature — damagedThisTurnBy can't name the equipped creature"
+    },
+    {
+      "name": "Uril, the Miststalker",
+      "needs": [
+        "amount:auras-attached-to-self"
+      ],
+      "why": "+2/+2 for each Aura attached to it"
+    },
+    {
+      "name": "Vampire Nocturnus",
+      "needs": [
+        "condition:top-card-of-library"
+      ],
+      "why": "play with the top card revealed; as long as it's black, Vampires get +2/+1 and flying"
+    },
+    {
+      "name": "Veinfire Borderpost",
+      "needs": [
+        "cost:alt-cost-return-lands"
+      ],
+      "why": "alternative cost: pay {1} and return a basic land you control to its owner's hand"
+    },
+    {
+      "name": "Wildfield Borderpost",
+      "needs": [
+        "cost:alt-cost-return-lands"
+      ],
+      "why": "alternative cost: pay {1} and return a basic land you control to its owner's hand"
+    }
+  ]
+}
