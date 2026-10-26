@@ -1618,6 +1618,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(hellion.complete).toBe(true);
     expect(face(`Echo—Discard a card. ${reminder}`, "Creature — Goblin").triggered[0].effect).toMatchObject({ options: [{ discard: 1 }] });
     expect(face(`Echo—Sacrifice two lands. ${reminder}`, "Creature — Elemental").complete).toBe(true);
+    // Shah of Naar Isle: "when its echo cost is paid" needs an echo that says so.
+    const shah = face(`Echo {0} ${reminder}\nWhen this creature's echo cost is paid, each opponent may draw up to three cards.`, "Creature — Efreet");
+    expect(shah.complete).toBe(false);
+    expect(shah.triggered[0].__todo).toEqual(["its echo has to say when the cost is paid"]);
   });
 
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
