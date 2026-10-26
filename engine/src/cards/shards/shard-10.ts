@@ -688,6 +688,7 @@ import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensHydraTokenBlackGreen from "../tokens/hydra-token-black-green.js";
+import _tokensKithkinSoldierToken from "../tokens/kithkin-soldier-token.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
@@ -1385,6 +1386,7 @@ const shard: CardShard = {
     _tokensDragonToken66,
     _tokensEverywhereToken,
     _tokensHydraTokenBlackGreen,
+    _tokensKithkinSoldierToken,
     _tokensKomasCoil,
     _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,

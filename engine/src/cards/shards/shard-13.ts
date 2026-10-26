@@ -148,6 +148,7 @@ import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
+import _poolDeityOfScars from "../pool/deity-of-scars.js";
 import _poolDeputizedProtester from "../pool/deputized-protester.js";
 import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
@@ -838,6 +839,7 @@ const shard: CardShard = {
     _poolDebtToTheDeathless,
     _poolDeepwoodDenizen,
     _poolDefyGravity,
+    _poolDeityOfScars,
     _poolDeputizedProtester,
     _poolDesertOfTheMindful,
     _poolDesperateLunge,

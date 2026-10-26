@@ -1967,6 +1967,7 @@ import _poolBloodhallPriest from "./pool/bloodhall-priest.js";
 import _poolBloodhazeWolverine from "./pool/bloodhaze-wolverine.js";
 import _poolBloodhunterBat from "./pool/bloodhunter-bat.js";
 import _poolBloodhuskRitualist from "./pool/bloodhusk-ritualist.js";
+import _poolBloodiedGhost from "./pool/bloodied-ghost.js";
 import _poolBloodletting from "./pool/bloodletting.js";
 import _poolBloodlineBidding from "./pool/bloodline-bidding.js";
 import _poolBloodlineCulling from "./pool/bloodline-culling.js";
@@ -4362,6 +4363,7 @@ import _poolDeftDismissal from "./pool/deft-dismissal.js";
 import _poolDeftDuelist from "./pool/deft-duelist.js";
 import _poolDefyGravity from "./pool/defy-gravity.js";
 import _poolDegaDisciple from "./pool/dega-disciple.js";
+import _poolDeityOfScars from "./pool/deity-of-scars.js";
 import _poolDejaVu from "./pool/deja-vu.js";
 import _poolDelayedBlastFireball from "./pool/delayed-blast-fireball.js";
 import _poolDelete from "./pool/delete.js";
@@ -10271,6 +10273,7 @@ import _poolLeechGauntlet from "./pool/leech-gauntlet.js";
 import _poolLeechingSliver from "./pool/leeching-sliver.js";
 import _poolLeechriddenSwamp from "./pool/leechridden-swamp.js";
 import _poolLeelaSevateemWarrior from "./pool/leela-sevateem-warrior.js";
+import _poolLeeringEmblem from "./pool/leering-emblem.js";
 import _poolLeeringGargoyle from "./pool/leering-gargoyle.js";
 import _poolLeeringOnlooker from "./pool/leering-onlooker.js";
 import _poolLegacyWeapon from "./pool/legacy-weapon.js";
@@ -21287,6 +21290,7 @@ import _tokensEldraziToken from "./tokens/eldrazi-token.js";
 import _tokensElementalToken10Blue from "./tokens/elemental-token-1-0-blue.js";
 import _tokensElementalToken33BlueRedFlying from "./tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensElementalToken53 from "./tokens/elemental-token-5-3.js";
+import _tokensElementalToken55BlueRedFlying from "./tokens/elemental-token-5-5-blue-red-flying.js";
 import _tokensElementalToken55 from "./tokens/elemental-token-5-5.js";
 import _tokensElementalToken71TrampleHaste from "./tokens/elemental-token-7-1-trample-haste.js";
 import _tokensElementalTokenAllColors from "./tokens/elemental-token-all-colors.js";
@@ -21334,6 +21338,7 @@ import _tokensGoatToken from "./tokens/goat-token.js";
 import _tokensGoblinConstructToken from "./tokens/goblin-construct-token.js";
 import _tokensGoblinScoutToken from "./tokens/goblin-scout-token.js";
 import _tokensGoblinShamanToken from "./tokens/goblin-shaman-token.js";
+import _tokensGoblinSoldierToken from "./tokens/goblin-soldier-token.js";
 import _tokensGoblinTokenBoggartMischief from "./tokens/goblin-token-boggart-mischief.js";
 import _tokensGoblinTokenGoblinSpymaster from "./tokens/goblin-token-goblin-spymaster.js";
 import _tokensGoblinTokenHaste from "./tokens/goblin-token-haste.js";
@@ -21420,6 +21425,7 @@ import _tokensJunkToken from "./tokens/junk-token.js";
 import _tokensKaroxBladewingToken from "./tokens/karox-bladewing-token.js";
 import _tokensKavuTokenJaredCarthalion from "./tokens/kavu-token-jared-carthalion.js";
 import _tokensKelpToken from "./tokens/kelp-token.js";
+import _tokensKithkinSoldierToken from "./tokens/kithkin-soldier-token.js";
 import _tokensKithkinToken from "./tokens/kithkin-token.js";
 import _tokensKnightAllyToken from "./tokens/knight-ally-token.js";
 import _tokensKnightTokenChivalricAlliance from "./tokens/knight-token-chivalric-alliance.js";
@@ -23685,6 +23691,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodhazeWolverine,
   _poolBloodhunterBat,
   _poolBloodhuskRitualist,
+  _poolBloodiedGhost,
   _poolBloodletting,
   _poolBloodlineBidding,
   _poolBloodlineCulling,
@@ -26080,6 +26087,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeftDuelist,
   _poolDefyGravity,
   _poolDegaDisciple,
+  _poolDeityOfScars,
   _poolDejaVu,
   _poolDelayedBlastFireball,
   _poolDelete,
@@ -31989,6 +31997,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeechingSliver,
   _poolLeechriddenSwamp,
   _poolLeelaSevateemWarrior,
+  _poolLeeringEmblem,
   _poolLeeringGargoyle,
   _poolLeeringOnlooker,
   _poolLegacyWeapon,
@@ -43011,6 +43020,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensElementalToken10Blue,
   _tokensElementalToken33BlueRedFlying,
   _tokensElementalToken53,
+  _tokensElementalToken55BlueRedFlying,
   _tokensElementalToken55,
   _tokensElementalToken71TrampleHaste,
   _tokensElementalTokenAllColors,
@@ -43058,6 +43068,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGoblinConstructToken,
   _tokensGoblinScoutToken,
   _tokensGoblinShamanToken,
+  _tokensGoblinSoldierToken,
   _tokensGoblinTokenBoggartMischief,
   _tokensGoblinTokenGoblinSpymaster,
   _tokensGoblinTokenHaste,
@@ -43144,6 +43155,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensKaroxBladewingToken,
   _tokensKavuTokenJaredCarthalion,
   _tokensKelpToken,
+  _tokensKithkinSoldierToken,
   _tokensKithkinToken,
   _tokensKnightAllyToken,
   _tokensKnightTokenChivalricAlliance,
@@ -45416,6 +45428,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bloodhaze-wolverine": _poolBloodhazeWolverine,
   "pool/bloodhunter-bat": _poolBloodhunterBat,
   "pool/bloodhusk-ritualist": _poolBloodhuskRitualist,
+  "pool/bloodied-ghost": _poolBloodiedGhost,
   "pool/bloodletting": _poolBloodletting,
   "pool/bloodline-bidding": _poolBloodlineBidding,
   "pool/bloodline-culling": _poolBloodlineCulling,
@@ -47811,6 +47824,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deft-duelist": _poolDeftDuelist,
   "pool/defy-gravity": _poolDefyGravity,
   "pool/dega-disciple": _poolDegaDisciple,
+  "pool/deity-of-scars": _poolDeityOfScars,
   "pool/deja-vu": _poolDejaVu,
   "pool/delayed-blast-fireball": _poolDelayedBlastFireball,
   "pool/delete": _poolDelete,
@@ -53720,6 +53734,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leeching-sliver": _poolLeechingSliver,
   "pool/leechridden-swamp": _poolLeechriddenSwamp,
   "pool/leela-sevateem-warrior": _poolLeelaSevateemWarrior,
+  "pool/leering-emblem": _poolLeeringEmblem,
   "pool/leering-gargoyle": _poolLeeringGargoyle,
   "pool/leering-onlooker": _poolLeeringOnlooker,
   "pool/legacy-weapon": _poolLegacyWeapon,
@@ -64736,6 +64751,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/elemental-token-1-0-blue": _tokensElementalToken10Blue,
   "tokens/elemental-token-3-3-blue-red-flying": _tokensElementalToken33BlueRedFlying,
   "tokens/elemental-token-5-3": _tokensElementalToken53,
+  "tokens/elemental-token-5-5-blue-red-flying": _tokensElementalToken55BlueRedFlying,
   "tokens/elemental-token-5-5": _tokensElementalToken55,
   "tokens/elemental-token-7-1-trample-haste": _tokensElementalToken71TrampleHaste,
   "tokens/elemental-token-all-colors": _tokensElementalTokenAllColors,
@@ -64783,6 +64799,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/goblin-construct-token": _tokensGoblinConstructToken,
   "tokens/goblin-scout-token": _tokensGoblinScoutToken,
   "tokens/goblin-shaman-token": _tokensGoblinShamanToken,
+  "tokens/goblin-soldier-token": _tokensGoblinSoldierToken,
   "tokens/goblin-token-boggart-mischief": _tokensGoblinTokenBoggartMischief,
   "tokens/goblin-token-goblin-spymaster": _tokensGoblinTokenGoblinSpymaster,
   "tokens/goblin-token-haste": _tokensGoblinTokenHaste,
@@ -64869,6 +64886,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/karox-bladewing-token": _tokensKaroxBladewingToken,
   "tokens/kavu-token-jared-carthalion": _tokensKavuTokenJaredCarthalion,
   "tokens/kelp-token": _tokensKelpToken,
+  "tokens/kithkin-soldier-token": _tokensKithkinSoldierToken,
   "tokens/kithkin-token": _tokensKithkinToken,
   "tokens/knight-ally-token": _tokensKnightAllyToken,
   "tokens/knight-token-chivalric-alliance": _tokensKnightTokenChivalricAlliance,

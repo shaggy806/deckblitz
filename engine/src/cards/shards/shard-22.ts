@@ -670,6 +670,7 @@ import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
+import _tokensElementalToken55BlueRedFlying from "../tokens/elemental-token-5-5-blue-red-flying.js";
 import _tokensGreenSheepToken from "../tokens/green-sheep-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _tokensAxeToken,
     _tokensDragonEggToken,
     _tokensDwarfToken,
+    _tokensElementalToken55BlueRedFlying,
     _tokensGreenSheepToken,
     _tokensHarpyToken,
     _tokensLifelinkCatToken,
