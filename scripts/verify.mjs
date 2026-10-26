@@ -192,12 +192,17 @@ function baseRef() {
   return null;
 }
 
+/** `spawnSync`'s output limit for git's file lists: its 1 MB default cut
+ * `ls-files` over engine/src off mid-path once the pool passed ~24,000 card
+ * files (2026-10-26), and the cut-off path named a directory. */
+const GIT_MAX_BUFFER = 256 * 1024 * 1024;
+
 /** Pool cards this change adds: files under engine/src/cards/pool not on the
  * base (`baseRef`) — added in a commit since it, or not committed yet. Each
  * card's name, with every file read for it in `addedFiles`. */
 const addedFiles = [];
 function addedCards() {
-  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8", maxBuffer: GIT_MAX_BUFFER });
   const pool = "engine/src/cards/pool";
   const files = git("status", "--porcelain", "--", pool)
     .stdout.split("\n")
@@ -236,7 +241,7 @@ function addedCards() {
 /** Files this change touches: uncommitted, or committed since the base
  * (`baseRef`) — `null` with no base (then everything counts as touched). */
 function changedFiles() {
-  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8", maxBuffer: GIT_MAX_BUFFER });
   const base = baseRef();
   if (base === null) return null;
   const files = git("status", "--porcelain").stdout.split("\n").map((l) => l.slice(3).trim());
@@ -255,7 +260,7 @@ const isEngineCode = (f) =>
  * commit this checkout has. */
 function changedSince(ref) {
   if (typeof ref !== "string" || spawnSync("git", ["cat-file", "-e", `${ref}^{commit}`], { cwd: ROOT }).status !== 0) return null;
-  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" }).stdout.split("\n");
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8", maxBuffer: GIT_MAX_BUFFER }).stdout.split("\n");
   return [...new Set([...git("diff", "--name-only", ref), ...git("ls-files", "--others", "--exclude-standard")].filter(Boolean))];
 }
 
@@ -267,6 +272,7 @@ function fuzzKey(cards) {
   const files = spawnSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "engine/src", "engine/scripts"], {
     cwd: ROOT,
     encoding: "utf8",
+    maxBuffer: GIT_MAX_BUFFER,
   })
     .stdout.split("\n")
     .filter((f) => f && isEngineCode(f));
@@ -489,7 +495,7 @@ All green (${secs(started)}).` : `
 Failed: ${failures.join(", ")} (${secs(started)}).`);
 // A full run that passed is the one the next quick runs count from.
 if (failures.length === 0 && mode === "full" && !userSkipped) {
-  const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).stdout.trim();
+  const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8", maxBuffer: GIT_MAX_BUFFER }).stdout.trim();
   writeFileSync(STATE, JSON.stringify({ lastFullBatch: batch, lastFullCommit: head, date: new Date().toISOString().slice(0, 10) }, null, 1) + "\n");
   console.log(`Recorded a full run at batch ${batch} in scripts/verify-state.json — commit it.`);
 }
