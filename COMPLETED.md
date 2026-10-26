@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Scars of Mirrodin — Scars of Mirrodin is whole, and the newest-first walk's range
+  with it** (batch 204, the newest-first walk, 2026-10-26): no feature built; an engine fix: a
+  static's metalcraft condition counts its own artifact (Chrome Steed, Etched Champion and
+  Razorfield Rhino needed three *other* artifacts). 40 of the 48 left authored — Rusted Relic,
+  Molten-Tail Masticore, Tumble Magnet, the Trigons, Painsmith, Embersmith, Lifesmith, Rust Tick,
+  Heavy Arbalest, Psychic Miasma, Glint Hawk Idol — by three `card-author` agents; 8 blocked
+  (`B204.json`). Every set from Reality Fracture back to Scars of Mirrodin is whole.
 - **Mirrodin Besieged whole and Scars of Mirrodin's next 50** (batch 199, the newest-first walk,
   2026-10-26): no feature built; a divided amount now survives a decision mid-resolution (Kuldotha
   Flamefiend), and Ashmouth Hound and Inferno Elemental trigger when blocked too. 82 of 104
