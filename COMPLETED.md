@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Magic 2013 whole and Avacyn Restored's 60 most-played** (batch 182, the newest-first walk,
+  2026-10-26): **built** miracle (rule 702.94, `keyword:miracle` — `miracle: { cost }`: the first
+  card drawn in a turn may be revealed, a `miracle-reveal` decision hidden from other seats, and
+  its trigger offers the cast from hand for the miracle cost), with AVR's six miracles and nine
+  triaged earlier on it alone (Temporal Mastery, Reforge the Soul, Entreat the Angels and six
+  more); `damage-all` scoped to a targeted planeswalker's controller (Chandra's Fury). 83
+  authored — Bonfire of the Damned, Sublime Archangel, Vexing Devil, Tibalt, Diabolic Revelation
+  and 78 more — and 27 blocked, soulbond the most (`B182.json`). Magic 2013 is whole.
 - **Return to Ravnica, the rest of the set** (batch 179, the newest-first walk, 2026-10-26):
   **built** unleash (rule 702.98a, `keyword:unleash` — asked as it's about to enter, as riot is,
   and a `cant-block` restriction while it has any +1/+1 counter) and detain (rule 701.35a,

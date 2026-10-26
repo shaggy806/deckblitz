@@ -1,0 +1,781 @@
+{
+ "batch": "B182",
+ "status": "complete",
+ "ranks": "Magic 2013 (M13, 2012-07-13): the rest of the set, 41 cards; Avacyn Restored (AVR, 2012-05-04): the 60 most-played left of its 123 (newest-first walk); miracle built, with the 9 other miracle cards it unblocked (Temporal Mastery, Reforge the Soul, Entreat the Angels and more) and Chandra's Fury, unblocked by damage-all's planeswalker scoping",
+ "authored": [
+  {
+   "name": "Amass the Components",
+   "files": [
+    "engine/src/cards/pool/amass-the-components.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angel's Tomb",
+   "files": [
+    "engine/src/cards/pool/angels-tomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcane Melee",
+   "files": [
+    "engine/src/cards/pool/arcane-melee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arctic Aven",
+   "files": [
+    "engine/src/cards/pool/arctic-aven.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Augur of Bolas",
+   "files": [
+    "engine/src/cards/pool/augur-of-bolas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banishing Stroke",
+   "files": [
+    "engine/src/cards/pool/banishing-stroke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bladed Bracers",
+   "files": [
+    "engine/src/cards/pool/bladed-bracers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blessings of Nature",
+   "files": [
+    "engine/src/cards/pool/blessings-of-nature.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blood Reckoning",
+   "files": [
+    "engine/src/cards/pool/blood-reckoning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bonfire of the Damned",
+   "files": [
+    "engine/src/cards/pool/bonfire-of-the-damned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bower Passage",
+   "files": [
+    "engine/src/cards/pool/bower-passage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Builder's Blessing",
+   "files": [
+    "engine/src/cards/pool/builders-blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Call to Serve",
+   "files": [
+    "engine/src/cards/pool/call-to-serve.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain of the Mists",
+   "files": [
+    "engine/src/cards/pool/captain-of-the-mists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Fury",
+   "files": [
+    "engine/src/cards/pool/chandras-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander's Authority",
+   "files": [
+    "engine/src/cards/pool/commanders-authority.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crimson Muckwader",
+   "files": [
+    "engine/src/cards/pool/crimson-muckwader.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crippling Blight",
+   "files": [
+    "engine/src/cards/pool/crippling-blight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crippling Chill",
+   "files": [
+    "engine/src/cards/pool/crippling-chill.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crusader of Odric",
+   "files": [
+    "engine/src/cards/pool/crusader-of-odric.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dangerous Wager",
+   "files": [
+    "engine/src/cards/pool/dangerous-wager.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Death Wind",
+   "files": [
+    "engine/src/cards/pool/death-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defy Death",
+   "files": [
+    "engine/src/cards/pool/defy-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Taskmaster",
+   "files": [
+    "engine/src/cards/pool/demonic-taskmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devastation Tide",
+   "files": [
+    "engine/src/cards/pool/devastation-tide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Diabolic Revelation",
+   "files": [
+    "engine/src/cards/pool/diabolic-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Downpour",
+   "files": [
+    "engine/src/cards/pool/downpour.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadwaters",
+   "files": [
+    "engine/src/cards/pool/dreadwaters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Driver of the Dead",
+   "files": [
+    "engine/src/cards/pool/driver-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dual Casting",
+   "files": [
+    "engine/src/cards/pool/dual-casting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emancipation Angel",
+   "files": [
+    "engine/src/cards/pool/emancipation-angel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Entreat the Angels",
+   "files": [
+    "engine/src/cards/pool/entreat-the-angels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Entreat the Dead",
+   "files": [
+    "engine/src/cards/pool/entreat-the-dead.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Falkenrath Exterminator",
+   "files": [
+    "engine/src/cards/pool/falkenrath-exterminator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firewing Phoenix",
+   "files": [
+    "engine/src/cards/pool/firewing-phoenix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flames of the Firebrand",
+   "files": [
+    "engine/src/cards/pool/flames-of-the-firebrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flinthoof Boar",
+   "files": [
+    "engine/src/cards/pool/flinthoof-boar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gem of Becoming",
+   "files": [
+    "engine/src/cards/pool/gem-of-becoming.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghostform",
+   "files": [
+    "engine/src/cards/pool/ghostform.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghostly Touch",
+   "files": [
+    "engine/src/cards/pool/ghostly-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Battle Jester",
+   "files": [
+    "engine/src/cards/pool/goblin-battle-jester.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goldnight Redeemer",
+   "files": [
+    "engine/src/cards/pool/goldnight-redeemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harbor Bandit",
+   "files": [
+    "engine/src/cards/pool/harbor-bandit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellion Crucible",
+   "files": [
+    "engine/src/cards/pool/hellion-crucible.ts",
+    "engine/src/cards/tokens/hellion-token-haste.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lunar Mystic",
+   "files": [
+    "engine/src/cards/pool/lunar-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metamorphosis Fanatic",
+   "files": [
+    "engine/src/cards/pool/metamorphosis-fanatic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mwonvuli Beast Tracker",
+   "files": [
+    "engine/src/cards/pool/mwonvuli-beast-tracker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necrobite",
+   "files": [
+    "engine/src/cards/pool/necrobite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nefarox, Overlord of Grixis",
+   "files": [
+    "engine/src/cards/pool/nefarox-overlord-of-grixis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nephalia Smuggler",
+   "files": [
+    "engine/src/cards/pool/nephalia-smuggler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pillar of Flame",
+   "files": [
+    "engine/src/cards/pool/pillar-of-flame.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Prized Elephant",
+   "files": [
+    "engine/src/cards/pool/prized-elephant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Redress Fate",
+   "files": [
+    "engine/src/cards/pool/redress-fate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reforge the Soul",
+   "files": [
+    "engine/src/cards/pool/reforge-the-soul.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Revenge of the Hunted",
+   "files": [
+    "engine/src/cards/pool/revenge-of-the-hunted.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ring of Kalonia",
+   "files": [
+    "engine/src/cards/pool/ring-of-kalonia.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ring of Thune",
+   "files": [
+    "engine/src/cards/pool/ring-of-thune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roaring Primadox",
+   "files": [
+    "engine/src/cards/pool/roaring-primadox.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rummaging Goblin",
+   "files": [
+    "engine/src/cards/pool/rummaging-goblin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rush of Blood",
+   "files": [
+    "engine/src/cards/pool/rush-of-blood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scroll of Avacyn",
+   "files": [
+    "engine/src/cards/pool/scroll-of-avacyn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sheltering Word",
+   "files": [
+    "engine/src/cards/pool/sheltering-word.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sister Repentia",
+   "files": [
+    "engine/src/cards/pool/sister-repentia.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slumbering Dragon",
+   "files": [
+    "engine/src/cards/pool/slumbering-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stolen Goods",
+   "files": [
+    "engine/src/cards/pool/stolen-goods.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sublime Archangel",
+   "files": [
+    "engine/src/cards/pool/sublime-archangel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Mastery",
+   "files": [
+    "engine/src/cards/pool/temporal-mastery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderous Wrath",
+   "files": [
+    "engine/src/cards/pool/thunderous-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tibalt, the Fiend-Blooded",
+   "files": [
+    "engine/src/cards/pool/tibalt-the-fiend-blooded.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timberpack Wolf",
+   "files": [
+    "engine/src/cards/pool/timberpack-wolf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Touch of the Eternal",
+   "files": [
+    "engine/src/cards/pool/touch-of-the-eternal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treacherous Pit-Dweller",
+   "files": [
+    "engine/src/cards/pool/treacherous-pit-dweller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tricks of the Trade",
+   "files": [
+    "engine/src/cards/pool/tricks-of-the-trade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Triumph of Ferocity",
+   "files": [
+    "engine/src/cards/pool/triumph-of-ferocity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unhallowed Pact",
+   "files": [
+    "engine/src/cards/pool/unhallowed-pact.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vanishment",
+   "files": [
+    "engine/src/cards/pool/vanishment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Veilborn Ghoul",
+   "files": [
+    "engine/src/cards/pool/veilborn-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vexing Devil",
+   "files": [
+    "engine/src/cards/pool/vexing-devil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Void Stalker",
+   "files": [
+    "engine/src/cards/pool/void-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wandering Wolf",
+   "files": [
+    "engine/src/cards/pool/wandering-wolf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "War Falcon",
+   "files": [
+    "engine/src/cards/pool/war-falcon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Guess",
+   "files": [
+    "engine/src/cards/pool/wild-guess.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zephyrim",
+   "files": [
+    "engine/src/cards/pool/zephyrim.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Angelic Armaments",
+   "needs": [
+    "static:add-color-to-attached"
+   ],
+   "why": "Statics set colours outright; none adds white in addition to the others."
+  },
+  {
+   "name": "Bruna, Light of Alabaster",
+   "needs": [
+    "effect:put-aura-cards-onto-battlefield-attached-to-self"
+   ],
+   "why": "Aura cards from hand or graveyard put onto the battlefield attached to Bruna can't be expressed."
+  },
+  {
+   "name": "Burn at the Stake",
+   "needs": [
+    "cost:additional-cost-tap-permanents"
+   ],
+   "why": "No additional cost of tapping any number of untapped creatures whose count the effect reads."
+  },
+  {
+   "name": "Courtly Provocateur",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "The second ability needs \"blocks this turn if able\"."
+  },
+  {
+   "name": "Dark Impostor",
+   "needs": [
+    "filter:linked-exile-grant-card-type"
+   ],
+   "why": "`grantsActivatedOfLinkedExile` grants every linked card's abilities; only creature cards' should count (an exiled animated land mustn't)."
+  },
+  {
+   "name": "Divine Deflection",
+   "needs": [
+    "replacement:prevent-and-reflect-damage"
+   ],
+   "why": "No \"prevent the next X damage, then deal that much to a target\" shield."
+  },
+  {
+   "name": "Dread Slaver",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "`damagedThisTurnBy` can't say \"dealt damage by this creature\"."
+  },
+  {
+   "name": "Druid's Familiar",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond (rule 702.95) isn't built: pairing, unpairing, and \"as long as paired\" statics."
+  },
+  {
+   "name": "Elderscale Wurm",
+   "needs": [
+    "static:damage-life-floor"
+   ],
+   "why": "The life floor exists only as a player effect until end of turn, not a static gated on 7 or more life."
+  },
+  {
+   "name": "Encrust",
+   "needs": [
+    "static:enchanted-abilities-cant-be-activated"
+   ],
+   "why": "A static `prohibits` takes a filter, and no filter names the enchanted permanent."
+  },
+  {
+   "name": "Infinite Reflection",
+   "needs": [
+    "replacement:others-enter-as-copy"
+   ],
+   "why": "No replacement makes nontoken creatures enter as a copy of the enchanted creature."
+  },
+  {
+   "name": "Lightning Mauler",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond (rule 702.95) isn't built: pairing, unpairing, and \"as long as paired\" statics."
+  },
+  {
+   "name": "Mindclaw Shaman",
+   "needs": [
+    "zone:cast-from-opponents-hand"
+   ],
+   "why": "cast-now can't offer a card from a target opponent's revealed hand."
+  },
+  {
+   "name": "Misthollow Griffin",
+   "needs": [
+    "zone:cast-self-from-exile"
+   ],
+   "why": "No card field lets a card be cast from exile by its own permission."
+  },
+  {
+   "name": "Nightshade Peddler",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond (rule 702.95) isn't built: pairing, unpairing, and \"as long as paired\" statics."
+  },
+  {
+   "name": "Predatory Rampage",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "No \"blocks this turn if able\" restriction."
+  },
+  {
+   "name": "Public Execution",
+   "needs": [
+    "effect:pump-all-except-target"
+   ],
+   "why": "The -2/-0 to the player's other creatures can't leave out the destroyed creature (if it regenerates or is indestructible)."
+  },
+  {
+   "name": "Riders of Gavony",
+   "needs": [
+    "keyword:protection-from-subtype"
+   ],
+   "why": "Protection granted to others can't read the type chosen for Riders: the protection filter knows only the controller, not the granting permanent."
+  },
+  {
+   "name": "Silverblade Paladin",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond (rule 702.95) isn't built: pairing, unpairing, and \"as long as paired\" statics."
+  },
+  {
+   "name": "Switcheroo",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "No effect exchanges control of two permanents."
+  },
+  {
+   "name": "Terrifying Presence",
+   "needs": [
+    "effect:prevent-all-combat-damage-except-target"
+   ],
+   "why": "`prevent-all-combat-damage`'s `by` is a filter; none excludes one targeted creature."
+  },
+  {
+   "name": "Tyrant of Discord",
+   "needs": [
+    "effect:random-permanent"
+   ],
+   "why": "No sacrifice at random, nor the repeat-until-a-land loop."
+  },
+  {
+   "name": "Vanguard's Shield",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "Nothing for \"can block an additional creature\"."
+  },
+  {
+   "name": "Wild Defiance",
+   "needs": [
+    "trigger:becomes-target-by-spell-type"
+   ],
+   "why": "The becomes-target trigger can be limited to spells, not to instant or sorcery spells."
+  },
+  {
+   "name": "Wolfir Silverheart",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond (rule 702.95) isn't built: pairing, unpairing, and \"as long as paired\" statics."
+  },
+  {
+   "name": "Worldfire",
+   "needs": [
+    "effect:exile-all-hands",
+    "effect:life-total-becomes"
+   ],
+   "why": "Exiling every card from every hand has no effect, and \"each player's life total becomes 1\" has no each-player form."
+  },
+  {
+   "name": "Xathrid Gorgon",
+   "needs": [
+    "effect:prohibit-abilities-permanent"
+   ],
+   "why": "`prohibit` lasts until end of turn only; \"its activated abilities can't be activated\" here is permanent."
+  }
+ ]
+}

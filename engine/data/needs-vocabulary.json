@@ -10854,6 +10854,30 @@
   "static:grant-enter-choice-keyword": {
    "family": "static:enters-replacement-for-others",
    "example": "A keyword whose 'as it enters' choice (riot, unleash) granted by a static to other permanents and asked as they enter — 'other Dogs you control have unleash' (Tesak)."
+  },
+  "effect:exile-all-hands": {
+   "family": "effect:target-player-exiles-from-hand",
+   "example": "Worldfire: exile all cards from all hands."
+  },
+  "effect:prohibit-abilities-permanent": {
+   "family": "effect:prohibit-non-mana-abilities",
+   "example": "Xathrid Gorgon: its activated abilities can't be activated, with no duration."
+  },
+  "replacement:others-enter-as-copy": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Infinite Reflection: nontoken creatures you control enter as a copy of the enchanted creature."
+  },
+  "filter:linked-exile-grant-card-type": {
+   "family": "effect:linked-exiled-card",
+   "example": "Dark Impostor: only the exiled creature cards' activated abilities."
+  },
+  "effect:put-aura-cards-onto-battlefield-attached-to-self": {
+   "family": "effect:attach-extensions",
+   "example": "Bruna, Light of Alabaster: Aura cards from hand and graveyard put onto the battlefield attached to it."
+  },
+  "effect:prevent-all-combat-damage-except-target": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "Terrifying Presence: prevent all combat damage but that dealt by the target creature."
   }
  }
 }
