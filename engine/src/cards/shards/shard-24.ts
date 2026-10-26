@@ -144,6 +144,7 @@ import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
 import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
 import _poolDarksteelPlate from "../pool/darksteel-plate.js";
+import _poolDaughterOfAutumn from "../pool/daughter-of-autumn.js";
 import _poolDauthiHorror from "../pool/dauthi-horror.js";
 import _poolDawnsLightArcher from "../pool/dawns-light-archer.js";
 import _poolDeadReveler from "../pool/dead-reveler.js";
@@ -829,6 +830,7 @@ const shard: CardShard = {
     _poolDarkRitual,
     _poolDarksteelJuggernaut,
     _poolDarksteelPlate,
+    _poolDaughterOfAutumn,
     _poolDauthiHorror,
     _poolDawnsLightArcher,
     _poolDeadReveler,

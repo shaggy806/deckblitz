@@ -407,7 +407,14 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} is exiled instead of going to a graveyard`
     case 'leave-replaced-with-exile':
       return `${name(event.object)} is exiled instead of going to ${event.intendedZone === 'hand' ? 'a hand' : event.intendedZone === 'library' ? 'a library' : `the ${event.intendedZone}`}`
+    case 'damage-redirected':
+      return `${name(event.source)}'s ${event.amount} damage to ${tgt(event.from)} is dealt to ${tgt(event.to)} instead`
     case 'prevention-shield-created':
+      if (event.redirectTo !== undefined) {
+        return event.nextTime && event.from !== undefined
+          ? `the next damage ${name(event.from)} would deal to ${tgt(event.target)} this turn will be dealt to ${tgt(event.redirectTo)} instead`
+          : `the next ${event.amount} damage to ${tgt(event.target)} this turn will be dealt to ${tgt(event.redirectTo)} instead`
+      }
       return event.all
         ? `all damage to ${tgt(event.target)} is prevented this turn`
         : event.nextTime && event.from !== undefined

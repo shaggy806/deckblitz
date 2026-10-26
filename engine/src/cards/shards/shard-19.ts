@@ -705,6 +705,7 @@ import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
 import _poolYawgmothsVileOffering from "../pool/yawgmoths-vile-offering.js";
 import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
+import _poolZhalfirinCrusader from "../pool/zhalfirin-crusader.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
@@ -1425,6 +1426,7 @@ const shard: CardShard = {
     _poolYawgmothsVileOffering,
     _poolYouHappenOnAGlade,
     _poolZenithFestival,
+    _poolZhalfirinCrusader,
     _poolZombieGoliath,
     _poolZukosExile,
   ],

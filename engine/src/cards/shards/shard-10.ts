@@ -558,6 +558,7 @@ import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
+import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
@@ -1266,6 +1267,7 @@ const shard: CardShard = {
     _poolSpiderManMilesMorales,
     _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
+    _poolSpiritEnKor,
     _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,

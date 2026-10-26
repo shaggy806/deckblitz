@@ -3575,6 +3575,14 @@ export interface PreventionShield {
   readonly nextTime?: true;
   /** Reverse Damage: this player gains life equal to the damage it prevents. */
   readonly gainLife?: PlayerId;
+  /** A redirection effect (rule 614.9 — the en-Kor creatures' "the next 1
+   * damage that would be dealt to this creature this turn is dealt to target
+   * creature you control instead"): what it takes is dealt to `to` instead
+   * of prevented, by the same source. An object `to` is the one in the stint
+   * it had then (`zoneChangeCount`); while it's off the battlefield, no
+   * longer a creature, planeswalker or battle, or a player `to` has left the
+   * game, the shield does nothing (614.9) and isn't used up. */
+  readonly redirect?: { readonly to: TargetRef; readonly zoneChangeCount?: number };
 }
 
 /**

@@ -338,6 +338,7 @@ import _poolKorBladewhirl from "../pool/kor-bladewhirl.js";
 import _poolKozileksPredator from "../pool/kozileks-predator.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
+import _poolLancersEnKor from "../pool/lancers-en-kor.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
 import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
@@ -1041,6 +1042,7 @@ const shard: CardShard = {
     _poolKozileksPredator,
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
+    _poolLancersEnKor,
     _poolLegionConquistador,
     _poolLegolasGreenleaf,
     _poolLeonardoBigBrother,

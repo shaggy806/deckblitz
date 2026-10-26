@@ -24004,11 +24004,17 @@ export class Game {
         this.state.preventAllCombatDamage = true;
         this.emit({ type: "combat-damage-prevention-set" });
       },
-      preventDamage: (target, amount, combatOnly) => {
+      preventDamage: (target, amount, combatOnly, redirectTo) => {
         if (amount !== "all" && amount <= 0) return;
         // A shield on an object is for that object (rule 400.7): this stint.
         const stint =
           target.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {};
+        if (redirectTo !== undefined && amount !== "all") {
+          const redirect = this.redirectOf(redirectTo);
+          this.state.preventionShields.push({ target, amount, combatOnly, ...stint, redirect });
+          this.emit({ type: "prevention-shield-created", target, amount, redirectTo });
+          return;
+        }
         if (amount === "all") {
           this.state.preventionShields.push({ target, amount: 0, combatOnly, all: true, ...stint });
           this.emit({ type: "prevention-shield-created", target, amount: 0, all: true });
@@ -24050,7 +24056,7 @@ export class Game {
           damageSource: true,
         };
       },
-      preventDamageFrom: (from, protect, amount, filter, gainLifePrevented) => {
+      preventDamageFrom: (from, protect, amount, filter, gainLifePrevented, redirectTo) => {
         if (from.kind !== "object") return;
         const chosen = this.state.objects[from.object];
         if (chosen === undefined) return;
@@ -24070,6 +24076,7 @@ export class Game {
           },
           ...(amount === "next-time" ? { nextTime: true as const } : {}),
           ...(gainLifePrevented ? { gainLife: controller } : {}),
+          ...(redirectTo !== undefined ? { redirect: this.redirectOf(redirectTo) } : {}),
         });
         this.emit({
           type: "prevention-shield-created",
@@ -24077,6 +24084,7 @@ export class Game {
           amount: amount === "next-time" ? 0 : amount,
           from: from.object,
           ...(amount === "next-time" ? { nextTime: true as const } : {}),
+          ...(redirectTo !== undefined ? { redirectTo } : {}),
         });
       },
       becomeColor: (target, colors, duration) => {
@@ -33042,9 +33050,30 @@ export class Game {
     this.discardCards(player, all);
   }
 
-  /** Deal `amount` damage from `source` to `target`. Returns the amount
-   * actually dealt after replacement effects (0 when a Fog-style shield
-   * prevented it). */
+  /** A redirection shield's destination, with an object's stint then (rule
+   * 400.7). */
+  private redirectOf(to: TargetRef): NonNullable<PreventionShield["redirect"]> {
+    return to.kind === "object"
+      ? { to, zoneChangeCount: this.state.objects[to.object]?.zoneChangeCount ?? 0 }
+      : { to };
+  }
+
+  /** Whether a redirection can still send damage to its destination (rule
+   * 614.9): a player still in the game, or the same object still on the
+   * battlefield and still a creature, planeswalker or battle. */
+  private redirectStands(redirect: NonNullable<PreventionShield["redirect"]>): boolean {
+    const to = redirect.to;
+    if (to.kind === "player") {
+      const player = this.state.players[to.player];
+      return player !== undefined && player.hasLost !== true;
+    }
+    const object = this.state.objects[to.object];
+    if (object === undefined || object.zone !== "battlefield") return false;
+    if ((object.zoneChangeCount ?? 0) !== (redirect.zoneChangeCount ?? 0)) return false;
+    const types = computeCharacteristics(this.state, this.registry, to.object).types;
+    return types.includes("creature") || types.includes("planeswalker") || types.includes("battle");
+  }
+
   /** Whether prevention shield `shield` covers a hit on `target` (combat or not). */
   private shieldCovers(
     shield: PreventionShield,
@@ -33067,6 +33096,8 @@ export class Game {
       }
     }
     if (shield.target.kind !== target.kind) return false;
+    // A redirection with nowhere legal to send it does nothing (rule 614.9).
+    if (shield.redirect !== undefined && !this.redirectStands(shield.redirect)) return false;
     if (shield.target.kind === "player") return shield.target.player === (target as { player: PlayerId }).player;
     const object = (target as { object: ObjectId }).object;
     if (shield.target.object !== object) return false;
@@ -33182,7 +33213,10 @@ export class Game {
     const score = (order: readonly DamageStep[]): readonly number[] => {
       const outcome = runDamageSteps(amount, sources, order, shieldLeft);
       const counterSpent = outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0;
-      return [outcome.dealt, counterSpent, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
+      // Damage redirected still lands somewhere (rule 614.9): a shield that
+      // prevents it outright goes first.
+      const redirected = outcome.shields.reduce((n, s) => n + (s.shield.redirect !== undefined ? s.prevented : 0), 0);
+      return [outcome.dealt, redirected, counterSpent, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
     };
     const better = (a: readonly number[], b: readonly number[]): boolean => {
       for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) return a[i]! < b[i]!;
@@ -33377,6 +33411,9 @@ export class Game {
     tally.thisTurn.cardsDrawn += 1;
   }
 
+  /** Deal `amount` damage from `source` to `target`. Returns the amount
+   * actually dealt to `target` after replacement effects (0 when a Fog-style
+   * shield prevented it; damage redirected elsewhere isn't counted). */
   private dealDamage(
     source: ObjectId,
     target: TargetRef,
@@ -33426,14 +33463,25 @@ export class Game {
       const order = this.bestDamageOrder(amount, sources, steps);
       const outcome = runDamageSteps(amount, sources, order, shieldLeft);
       const spent: PreventionShield[] = [];
+      const redirected: { readonly to: TargetRef; readonly amount: number }[] = [];
       for (const { shield, prevented } of outcome.shields) {
         if (shield.nextTime === true) spent.push(shield);
         else if (shield.all !== true) shield.amount -= prevented;
-        this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        if (shield.redirect !== undefined) {
+          this.emit({ type: "damage-redirected", source, from: target, to: shield.redirect.to, amount: prevented });
+          redirected.push({ to: shield.redirect.to, amount: prevented });
+        } else {
+          this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        }
       }
       this.state.preventionShields = this.state.preventionShields.filter(
         (s) => !spent.includes(s) && (s.all === true || s.nextTime === true || s.amount > 0),
       );
+      // Redirected damage (rule 614.9) is dealt to its new recipient by the
+      // same source, as part of the same event — a new hit there, which that
+      // recipient's own replacements and shields see. Each shield is used up
+      // as it applies, so two redirecting at each other can't loop.
+      for (const r of redirected) this.dealDamage(source, r.to, r.amount, combat, sourceLastKnown);
       // Reverse Damage: life equal to what its shield prevented.
       for (const { shield, prevented } of outcome.shields) {
         if (shield.gainLife !== undefined && prevented > 0) this.changeLife(shield.gainLife, prevented);

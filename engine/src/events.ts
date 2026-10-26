@@ -1093,6 +1093,16 @@ export type GameEvent =
       readonly amount: number;
     })
   | (Base & {
+      /** Damage that would have been dealt to `from` is dealt to `to`
+       * instead, by a redirection shield (rule 614.9 — Warrior en-Kor). The
+       * `damage-dealt` to `to` follows. */
+      readonly type: "damage-redirected";
+      readonly source: ObjectId;
+      readonly from: TargetRef;
+      readonly to: TargetRef;
+      readonly amount: number;
+    })
+  | (Base & {
       /** A card that would have gone to a graveyard was exiled instead (Rest
        * in Peace — rule 614). */
       readonly type: "graveyard-replaced-with-exile";
@@ -1126,6 +1136,8 @@ export type GameEvent =
        * `target` (`amount` is 0 then). */
       readonly from?: ObjectId;
       readonly nextTime?: true;
+      /** A redirection (rule 614.9): what it takes is dealt here instead. */
+      readonly redirectTo?: TargetRef;
       /** It prevents all damage to `target` this turn (Gideon Jura's 0);
        * `amount` is 0 then. */
       readonly all?: true;

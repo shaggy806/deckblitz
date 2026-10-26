@@ -268,6 +268,7 @@ import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
 import _poolHarvestguardAlseids from "../pool/harvestguard-alseids.js";
 import _poolHarvestriteHost from "../pool/harvestrite-host.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
+import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
 import _poolHellfire from "../pool/hellfire.js";
@@ -954,6 +955,7 @@ const shard: CardShard = {
     _poolHarvestguardAlseids,
     _poolHarvestriteHost,
     _poolHavocSower,
+    _poolHazduhrTheAbbot,
     _poolHeapGate,
     _poolHeartSliver,
     _poolHellfire,

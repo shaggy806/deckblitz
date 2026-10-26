@@ -634,6 +634,7 @@ import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
 import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
 import _poolWarrenSoultrader from "../pool/warren-soultrader.js";
+import _poolWarriorEnKor from "../pool/warrior-en-kor.js";
 import _poolWaterElemental from "../pool/water-elemental.js";
 import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
@@ -1305,6 +1306,7 @@ const shard: CardShard = {
     _poolVoicesFromTheVoid,
     _poolVoraciousNull,
     _poolWarrenSoultrader,
+    _poolWarriorEnKor,
     _poolWaterElemental,
     _poolWaterloggedGrove,
     _poolWeightOfMemory,

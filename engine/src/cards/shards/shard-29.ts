@@ -384,6 +384,7 @@ import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
 import _poolNikaraLairScavenger from "../pool/nikara-lair-scavenger.js";
 import _poolNipGwyllion from "../pool/nip-gwyllion.js";
+import _poolNomadsEnKor from "../pool/nomads-en-kor.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
 import _poolNullBrooch from "../pool/null-brooch.js";
 import _poolObsidianObelisk from "../pool/obsidian-obelisk.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolNezumiInformant,
     _poolNikaraLairScavenger,
     _poolNipGwyllion,
+    _poolNomadsEnKor,
     _poolNoxiousDragon,
     _poolNullBrooch,
     _poolObsidianObelisk,

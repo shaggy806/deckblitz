@@ -507,6 +507,7 @@ import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
+import _poolShamanEnKor from "../pool/shaman-en-kor.js";
 import _poolShamanOfTheGreatHunt from "../pool/shaman-of-the-great-hunt.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
 import _poolShatteredCrypt from "../pool/shattered-crypt.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolServoExhibition,
     _poolSetessanTraining,
     _poolShadeOfTrokair,
+    _poolShamanEnKor,
     _poolShamanOfTheGreatHunt,
     _poolShamblingGhast,
     _poolShatteredCrypt,

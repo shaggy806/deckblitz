@@ -298,6 +298,7 @@ import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
 import _poolJaceCunningCastaway from "../pool/jace-cunning-castaway.js";
 import _poolJacesDefeat from "../pool/jaces-defeat.js";
+import _poolJadeMonolith from "../pool/jade-monolith.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJayaFieryNegotiator from "../pool/jaya-fiery-negotiator.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
@@ -998,6 +999,7 @@ const shard: CardShard = {
     _poolIzzetLocket,
     _poolJaceCunningCastaway,
     _poolJacesDefeat,
+    _poolJadeMonolith,
     _poolJadecraftArtisan,
     _poolJayaFieryNegotiator,
     _poolJewelEyedCobra,

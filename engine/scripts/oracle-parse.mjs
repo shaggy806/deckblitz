@@ -1507,6 +1507,14 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };
   }
+  // A redirection (rule 614.9): the en-Kor creatures, Daughter of Autumn.
+  if ((m = re(`the next ${N} damage that would be dealt (?:to (~|${TARGET}) this turn|this turn to (~|${TARGET})) is dealt to (~|${TARGET}) instead`).exec(s))) {
+    const from = m[2] ?? m[3];
+    const target = from === "~" ? "source" : slot(from);
+    const redirectTo = m[4] === "~" ? "source" : slot(m[4]);
+    if (target === undefined || redirectTo === undefined) return null;
+    return { kind: "prevent-damage", target, amount: amount(m[1]), redirectTo };
+  }
   // A source of your choice (rule 609.7): the Circles of Protection.
   if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage to you this turn, prevent that damage`).exec(s))) {
     return {
