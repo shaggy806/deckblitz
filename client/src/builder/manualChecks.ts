@@ -8307,4 +8307,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Just Fate: castable only once you've been attacked",
     board({ you: { bf: ['Plains*3'], hand: ['Just Fate'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  preset(
+    'Endless Swarm: a copy each upkeep, and no more spells',
+    board({ you: { bf: ['Forest*9'], hand: ['Endless Swarm', 'Grizzly Bears', 'Forest', 'Forest'] } }),
+  ),
 ]

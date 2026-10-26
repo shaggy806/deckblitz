@@ -5477,3 +5477,9 @@ engine terms. A second thing to check is a second test.
 ### Just Fate: castable only once you've been attacked
 - **Do:** Pass the turn. When the opponent's Hill Giant attacks you, cast Just Fate on it in the declare attackers step.
 - **Expect:** Just Fate isn't castable in your own main phase, nor on the opponent's turn before attackers are declared. Once the Giant attacks you it is, and the Giant is destroyed before blocks.
+
+## Epic (2026-10-26, Saviors of Kamigawa)
+
+### Endless Swarm: a copy each upkeep, and no more spells
+- **Do:** Cast Endless Swarm, then try to cast Grizzly Bears. Pass the turn and come back to your upkeep.
+- **Expect:** You get a Snake for each card in your hand, and an emblem appears. Grizzly Bears can't be cast any more. At your upkeep a copy of Endless Swarm resolves and makes more Snakes; still only one emblem.
