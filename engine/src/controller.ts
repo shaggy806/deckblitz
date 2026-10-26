@@ -1382,6 +1382,19 @@ function idleRepeat(state: GameState, offer: LegalAction): boolean {
   return onStack >= (idleX ? 1 : 3);
 }
 
+/**
+ * The key `RandomController` counts a "{0}:" ability's activations under, or
+ * "" for any other offer. {@link idleRepeat} stops one stacking up, but an
+ * ability that resolves between activations never stacks: Mist Dragon's
+ * "{0}: gains flying" and "{0}: loses flying" went back and forth thousands
+ * of times in one turn (fuzzer seed 20, 2026-10-26), so past three a turn
+ * each waits for the next. Not a rule — a fuzzing guard.
+ */
+function freeKey(offer: LegalAction): string {
+  if (offer.kind !== "activate-ability" || offer.manaAbility === true) return "";
+  return offer.text.startsWith("{0}:") ? `${offer.source}:${offer.abilityIndex}` : "";
+}
+
 export class RandomController extends AutomaticController {
   private readonly random: () => number;
 
@@ -1393,10 +1406,23 @@ export class RandomController extends AutomaticController {
   act(view: ControllerView): Action {
     // What a relation among targets reads, for `pickTargets` below.
     this.facts = view.targetFacts;
-    const options = view.legalActions().filter((o) => !idleRepeat(view.state, o));
+    if (view.state.turn.number !== this.freeTurn) {
+      this.freeTurn = view.state.turn.number;
+      this.freeUses.clear();
+    }
+    const options = view
+      .legalActions()
+      .filter((o) => !idleRepeat(view.state, o) && (this.freeUses.get(freeKey(o)) ?? 0) < 3);
     if (options.length === 0) return passFor(this.playerId);
-    return this.toAction(options[this.pickIndex(options.length)]);
+    const offer = options[this.pickIndex(options.length)];
+    const key = freeKey(offer);
+    if (key !== "") this.freeUses.set(key, (this.freeUses.get(key) ?? 0) + 1);
+    return this.toAction(offer);
   }
+
+  /** {@link freeKey}'s activations this turn — see there. */
+  private readonly freeUses = new Map<string, number>();
+  private freeTurn = -1;
 
   /** The facts of the view being acted on — see `ControllerView.targetFacts`. */
   private facts: TargetFacts | undefined;
