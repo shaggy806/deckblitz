@@ -193,6 +193,7 @@ import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
 import _poolFaithUnbroken from "../pool/faith-unbroken.js";
 import _poolFalconerAdept from "../pool/falconer-adept.js";
+import _poolFalkenrathAristocrat from "../pool/falkenrath-aristocrat.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFanaticalFirebrand from "../pool/fanatical-firebrand.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
@@ -904,6 +905,7 @@ const shard: CardShard = {
     _poolFailedFording,
     _poolFaithUnbroken,
     _poolFalconerAdept,
+    _poolFalkenrathAristocrat,
     _poolFanaticOfRhonas,
     _poolFanaticalFirebrand,
     _poolFaramirStewardOfGondor,

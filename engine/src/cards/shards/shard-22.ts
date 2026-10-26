@@ -145,6 +145,7 @@ import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
 import _poolDemonicAppetite from "../pool/demonic-appetite.js";
+import _poolDemonicRising from "../pool/demonic-rising.js";
 import _poolDesperateStand from "../pool/desperate-stand.js";
 import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
@@ -217,6 +218,7 @@ import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFrostfistStrider from "../pool/frostfist-strider.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
+import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
 import _poolGhostform from "../pool/ghostform.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
@@ -270,6 +272,7 @@ import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
 import _poolIncongruity from "../pool/incongruity.js";
+import _poolIncreasingSavagery from "../pool/increasing-savagery.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
@@ -855,6 +858,7 @@ const shard: CardShard = {
     _poolDelugeVirtuoso,
     _poolDemonOfWailingAgonies,
     _poolDemonicAppetite,
+    _poolDemonicRising,
     _poolDesperateStand,
     _poolDireStrainAnarchist,
     _poolDireWolfProwler,
@@ -927,6 +931,7 @@ const shard: CardShard = {
     _poolFrostfistStrider,
     _poolFulminatorMage,
     _poolGargosViciousWatcher,
+    _poolGatherTheTownsfolk,
     _poolGhostform,
     _poolGlacialFortress,
     _poolGlazeFiend,
@@ -980,6 +985,7 @@ const shard: CardShard = {
     _poolIllvoiLightJammer,
     _poolImpulsivePilferer,
     _poolIncongruity,
+    _poolIncreasingSavagery,
     _poolInexorableTide,
     _poolInfestedWerewolf,
     _poolInspireAwe,

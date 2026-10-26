@@ -34,6 +34,7 @@ import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
 import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
+import _poolArchangelsLight from "../pool/archangels-light.js";
 import _poolArmorOfShadows from "../pool/armor-of-shadows.js";
 import _poolArmoredWarhorse from "../pool/armored-warhorse.js";
 import _poolArmoryOfIroas from "../pool/armory-of-iroas.js";
@@ -569,6 +570,7 @@ import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
+import _poolSpectralPrison from "../pool/spectral-prison.js";
 import _poolSpireBarrage from "../pool/spire-barrage.js";
 import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
@@ -708,6 +710,7 @@ import _poolWearTear from "../pool/wear-tear.js";
 import _poolWeddingFestivity from "../pool/wedding-festivity.js";
 import _poolWeldfastEngineer from "../pool/weldfast-engineer.js";
 import _poolWellRested from "../pool/well-rested.js";
+import _poolWerewolfRansacker from "../pool/werewolf-ransacker.js";
 import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
@@ -779,6 +782,7 @@ const shard: CardShard = {
     _poolAntQueen,
     _poolAphettoAlchemist,
     _poolArborbackStomper,
+    _poolArchangelsLight,
     _poolArmorOfShadows,
     _poolArmoredWarhorse,
     _poolArmoryOfIroas,
@@ -1314,6 +1318,7 @@ const shard: CardShard = {
     _poolSourbreadAuntie,
     _poolSpaceTimeAnomaly,
     _poolSpearbreakerBehemoth,
+    _poolSpectralPrison,
     _poolSpireBarrage,
     _poolSpirePhantasm,
     _poolSpitefulBanditry,
@@ -1453,6 +1458,7 @@ const shard: CardShard = {
     _poolWeddingFestivity,
     _poolWeldfastEngineer,
     _poolWellRested,
+    _poolWerewolfRansacker,
     _poolWidowsWalk,
     _poolWildCantor,
     _poolWillowrushVerge,

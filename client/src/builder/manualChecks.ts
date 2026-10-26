@@ -8291,4 +8291,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Pegasus Stampede: buyback sacrifices a land',
     board({ you: { bf: ['Plains*3'], hand: ['Pegasus Stampede'] } }),
   ),
+  preset(
+    'Silverblade Paladin: soulbond pairs it with a creature you choose',
+    board({ you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant'], hand: ['Silverblade Paladin'] } }),
+  ),
 ]

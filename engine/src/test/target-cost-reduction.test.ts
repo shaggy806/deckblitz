@@ -9,6 +9,7 @@
 
 import { describe, expect, it } from "vitest";
 
+import { fitCastTargets } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { maxXForTargets } from "../target-count.js";
@@ -118,5 +119,24 @@ describe("targetCostReduction", () => {
     expect(game.canDispatch({ ...action, targets: [ref(drake)] })).toBeNull();
     cast(game, torch, { targets: [ref(drake)], x: 4 });
     expect(zone(game, drake)).toBe("graveyard");
+  });
+
+  it("This Town Ain't Big Enough: two optional slots, affordable only with the reduction — the offer names what earns it, and a driver keeps one", () => {
+    const { game } = table();
+    const mine = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Hill Giant", B);
+    const other = spawn(game, "Grizzly Bears", B);
+    lands(game, "Island", 2);
+    const town = toHand(game, "This Town Ain't Big Enough");
+    const offer = game
+      .legalActions(A)
+      .find((l): l is Extract<typeof l, { kind: "cast-spell" }> => l.kind === "cast-spell" && l.card === town)!;
+    expect(offer.reducingTargets).toEqual([mine]);
+    // Aimed at two of Bob's, it can't be paid (the fuzzer crash, batch 185).
+    expect(game.canDispatch({ type: "cast-spell", player: A, card: town, targets: [ref(theirs), ref(other)] })).toMatch(/cannot pay/);
+    const fitted = fitCastTargets(offer, [ref(theirs), ref(other)], offer.targetOptions, offer.targetSpecs)!;
+    expect(fitted.some((t) => t?.kind === "object" && t.object === mine)).toBe(true);
+    cast(game, town, { targets: fitted });
+    expect(zone(game, mine)).toBe("hand");
   });
 });

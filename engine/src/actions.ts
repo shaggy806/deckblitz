@@ -1013,6 +1013,12 @@ export type LegalAction =
        * (Spinning Wheel Kick) it counts from the group's (`from`), so read
        * it through `rangeTargetCount`. */
       readonly targetCount?: TargetCountRange;
+      /** Set when the spell is affordable only with its "costs {N} less if
+       * it targets …" reduction (`targetCostReduction`) and more than one
+       * slot, or an optional one, could earn it: one of the cast's targets
+       * must be among these, or the cast is refused (`fitCastTargets` keeps
+       * one). An X spell says it in `xCost.reducingTargets` instead. */
+      readonly reducingTargets?: readonly ObjectId[];
       /** Present when this is an alternative-permission cast (not from the hand
        * for the printed cost — `"flashback"` / `"escape"` from the graveyard,
        * `"foretell"` from face-down exile). The driver must echo `via` back in

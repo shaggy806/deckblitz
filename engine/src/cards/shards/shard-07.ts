@@ -133,6 +133,7 @@ import _poolDawn from "../pool/dawn.js";
 import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
+import _poolDeadlyAllure from "../pool/deadly-allure.js";
 import _poolDeadshot from "../pool/deadshot.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
 import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
@@ -241,6 +242,7 @@ import _poolGoldhound from "../pool/goldhound.js";
 import _poolGoldmaneGriffin from "../pool/goldmane-griffin.js";
 import _poolGollumsBite from "../pool/gollums-bite.js";
 import _poolGothmogMorgulLieutenant from "../pool/gothmog-morgul-lieutenant.js";
+import _poolGraveExchange from "../pool/grave-exchange.js";
 import _poolGravityNegator from "../pool/gravity-negator.js";
 import _poolGravityWell from "../pool/gravity-well.js";
 import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
@@ -348,6 +350,7 @@ import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
 import _poolLuxknightBreacher from "../pool/luxknight-breacher.js";
+import _poolMadProphet from "../pool/mad-prophet.js";
 import _poolMageHunter from "../pool/mage-hunter.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
@@ -370,6 +373,7 @@ import _poolMemorySluice from "../pool/memory-sluice.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
 import _poolMercilessJavelineer from "../pool/merciless-javelineer.js";
 import _poolMercyKilling from "../pool/mercy-killing.js";
+import _poolMidnightDuelist from "../pool/midnight-duelist.js";
 import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
@@ -865,6 +869,7 @@ const shard: CardShard = {
     _poolDawnbringerCharioteers,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
+    _poolDeadlyAllure,
     _poolDeadshot,
     _poolDeathcultRogue,
     _poolDeepchannelMentor,
@@ -973,6 +978,7 @@ const shard: CardShard = {
     _poolGoldmaneGriffin,
     _poolGollumsBite,
     _poolGothmogMorgulLieutenant,
+    _poolGraveExchange,
     _poolGravityNegator,
     _poolGravityWell,
     _poolGreaterBasilisk,
@@ -1080,6 +1086,7 @@ const shard: CardShard = {
     _poolLure,
     _poolLurkingNightstalker,
     _poolLuxknightBreacher,
+    _poolMadProphet,
     _poolMageHunter,
     _poolMagicPot,
     _poolMagnificentEnd,
@@ -1102,6 +1109,7 @@ const shard: CardShard = {
     _poolMerchantOfSecrets,
     _poolMercilessJavelineer,
     _poolMercyKilling,
+    _poolMidnightDuelist,
     _poolMidnightSnack,
     _poolMightyLeap,
     _poolMindeyeDrake,

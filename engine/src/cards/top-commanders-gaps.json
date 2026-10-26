@@ -445,6 +445,7 @@
   "keyword:buyback",
   "keyword:licid",
   "keyword:miracle",
+  "keyword:soulbond",
   "cost:buyback-non-mana",
   "cost:discard-at-random",
   "target:opponent-compared"

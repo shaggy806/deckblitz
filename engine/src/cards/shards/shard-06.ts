@@ -237,6 +237,7 @@ import _poolGardenize from "../pool/gardenize.js";
 import _poolGatherCourage from "../pool/gather-courage.js";
 import _poolGatheringOfDarkness from "../pool/gathering-of-darkness.js";
 import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
+import _poolGeistTrappers from "../pool/geist-trappers.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
@@ -455,6 +456,7 @@ import _poolReitoSentinel from "../pool/reito-sentinel.js";
 import _poolReject from "../pool/reject.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
 import _poolReplicationSpecialist from "../pool/replication-specialist.js";
+import _poolRequiemAngel from "../pool/requiem-angel.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
 import _poolRetributionOfTheMeek from "../pool/retribution-of-the-meek.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
@@ -536,6 +538,7 @@ import _poolSoulReap from "../pool/soul-reap.js";
 import _poolSoulSummons from "../pool/soul-summons.js";
 import _poolSoulSwallower from "../pool/soul-swallower.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
+import _poolSpectralGateguards from "../pool/spectral-gateguards.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpidersilkArmor from "../pool/spidersilk-armor.js";
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _poolGatherCourage,
     _poolGatheringOfDarkness,
     _poolGeistOfTheArchives,
+    _poolGeistTrappers,
     _poolGenerousEnt,
     _poolGenerousPup,
     _poolGeometersArthropod,
@@ -1146,6 +1150,7 @@ const shard: CardShard = {
     _poolReject,
     _poolRelicRetriever,
     _poolReplicationSpecialist,
+    _poolRequiemAngel,
     _poolRestlessAnchorage,
     _poolRetributionOfTheMeek,
     _poolRiddleGateGargoyle,
@@ -1227,6 +1232,7 @@ const shard: CardShard = {
     _poolSoulSummons,
     _poolSoulSwallower,
     _poolSoulboundGuardians,
+    _poolSpectralGateguards,
     _poolSpectralProcession,
     _poolSpellseeker,
     _poolSpidersilkArmor,

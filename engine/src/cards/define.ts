@@ -322,6 +322,13 @@ export type AffectSpec =
   | { readonly scope: "lands-you-control" }
   | { readonly scope: "attached" }
   /**
+   * Soulbond's "as long as this creature is paired with another creature,
+   * **both creatures** have …" / "**each of those creatures** has …" (rule
+   * 702.95b): this permanent and the creature it's paired with, and nothing
+   * while it's unpaired — the scope carries the "as long as". See `soulbond()`.
+   */
+  | { readonly scope: "paired" }
+  /**
    * Every battlefield permanent matching `filter`, evaluated from the
    * source's controller's perspective — the general scope the fixed ones
    * above are special cases of: "artifacts you control" (`{ type: "artifact",

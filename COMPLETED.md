@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Avacyn Restored and Dark Ascension's 40 most-played** (batch 185, the
+  newest-first walk, 2026-10-26): **built** soulbond (rule 702.95, `keyword:soulbond` —
+  `soulbond()`'s two triggers, a `{ scope: "paired" }` static, the `paired` filter clause, the
+  pairing ended for good by 702.95e), with AVR's eleven soulbond cards and eleven triaged earlier
+  on it alone (Deadeye Navigator, Tandem Lookout, Silverblade Paladin, Wolfir Silverheart and
+  seven more). 89 authored — Falkenrath Aristocrat, Requiem Angel, Drogskol Captain, Ghoultree,
+  Rite of Ruin and 84 more — and 28 blocked, one or two each (`B185.json`). Avacyn Restored is
+  whole.
 - **Magic 2013 whole and Avacyn Restored's 60 most-played** (batch 182, the newest-first walk,
   2026-10-26): **built** miracle (rule 702.94, `keyword:miracle` — `miracle: { cost }`: the first
   card drawn in a turn may be revealed, a `miracle-reveal` decision hidden from other seats, and

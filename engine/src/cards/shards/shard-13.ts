@@ -530,6 +530,7 @@ import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
 import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
+import _poolSilverbladePaladin from "../pool/silverblade-paladin.js";
 import _poolSisterRepentia from "../pool/sister-repentia.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
@@ -679,9 +680,11 @@ import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
+import _poolWolfirSilverheart from "../pool/wolfir-silverheart.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolWorthyCause from "../pool/worthy-cause.js";
 import _poolYaroksFenlurker from "../pool/yaroks-fenlurker.js";
+import _poolYewSpirit from "../pool/yew-spirit.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZenithFlare from "../pool/zenith-flare.js";
 import _poolZephid from "../pool/zephid.js";
@@ -1239,6 +1242,7 @@ const shard: CardShard = {
     _poolSignalingRoar,
     _poolSilentDart,
     _poolSilkenfistOrder,
+    _poolSilverbladePaladin,
     _poolSisterRepentia,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
@@ -1388,9 +1392,11 @@ const shard: CardShard = {
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
     _poolWizardsRockets,
+    _poolWolfirSilverheart,
     _poolWoodlandPatrol,
     _poolWorthyCause,
     _poolYaroksFenlurker,
+    _poolYewSpirit,
     _poolYouSeeAPairOfGoblins,
     _poolZenithFlare,
     _poolZephid,

@@ -319,6 +319,7 @@ import _poolKitsuneAce from "../pool/kitsune-ace.js";
 import _poolKnightOfCliffhaven from "../pool/knight-of-cliffhaven.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKoboldOverlord from "../pool/kobold-overlord.js";
+import _poolKrallenhordeKiller from "../pool/krallenhorde-killer.js";
 import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
 import _poolKrothussLordOfTheDeep from "../pool/krothuss-lord-of-the-deep.js";
@@ -1005,6 +1006,7 @@ const shard: CardShard = {
     _poolKnightOfCliffhaven,
     _poolKnightOfNewBenalia,
     _poolKoboldOverlord,
+    _poolKrallenhordeKiller,
     _poolKraulWhipcracker,
     _poolKrileBaldesion,
     _poolKrothussLordOfTheDeep,

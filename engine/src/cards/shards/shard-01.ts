@@ -368,6 +368,7 @@ import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
 import _poolMogMoogleWarrior from "../pool/mog-moogle-warrior.js";
 import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
+import _poolMoonscarredWerewolf from "../pool/moonscarred-werewolf.js";
 import _poolMoorlandDrifter from "../pool/moorland-drifter.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
@@ -481,6 +482,7 @@ import _poolScaldingTongs from "../pool/scalding-tongs.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
+import _poolScornedVillager from "../pool/scorned-villager.js";
 import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
@@ -597,6 +599,7 @@ import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
+import _poolTrustedForcemage from "../pool/trusted-forcemage.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
@@ -605,6 +608,7 @@ import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
 import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
 import _poolUncleIstvan from "../pool/uncle-istvan.js";
+import _poolUndeadExecutioner from "../pool/undead-executioner.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
 import _poolUnshakableTail from "../pool/unshakable-tail.js";
@@ -1046,6 +1050,7 @@ const shard: CardShard = {
     _poolMogMoogleWarrior,
     _poolMonkGyatso,
     _poolMoonBlessedCleric,
+    _poolMoonscarredWerewolf,
     _poolMoorlandDrifter,
     _poolMorcantsEyes,
     _poolMountainGoat,
@@ -1159,6 +1164,7 @@ const shard: CardShard = {
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,
+    _poolScornedVillager,
     _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
@@ -1275,6 +1281,7 @@ const shard: CardShard = {
     _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,
     _poolTrespassersCurse,
+    _poolTrustedForcemage,
     _poolTunnelRats,
     _poolTurbulentShore,
     _poolTwiceTheRage,
@@ -1283,6 +1290,7 @@ const shard: CardShard = {
     _poolUltronsAuxiliary,
     _poolUlvenwaldTracker,
     _poolUncleIstvan,
+    _poolUndeadExecutioner,
     _poolUnexpectedWindfall,
     _poolUnseenWalker,
     _poolUnshakableTail,

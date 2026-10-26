@@ -287,6 +287,7 @@ import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
+import _poolGuiseOfFire from "../pool/guise-of-fire.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
 import _poolHagHedgeMage from "../pool/hag-hedge-mage.js";
@@ -295,6 +296,7 @@ import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
 import _poolHardbristleBandit from "../pool/hardbristle-bandit.js";
 import _poolHauntedHellride from "../pool/haunted-hellride.js";
+import _poolHavengulSkaab from "../pool/havengul-skaab.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHeartstabberMosquito from "../pool/heartstabber-mosquito.js";
@@ -321,6 +323,7 @@ import _poolIllustriousWanderglyph from "../pool/illustrious-wanderglyph.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
 import _poolImpostorSyndrome from "../pool/impostor-syndrome.js";
+import _poolIncreasingAmbition from "../pool/increasing-ambition.js";
 import _poolInfernoJet from "../pool/inferno-jet.js";
 import _poolInsidiousRoots from "../pool/insidious-roots.js";
 import _poolInspiration from "../pool/inspiration.js";
@@ -372,6 +375,7 @@ import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
+import _poolLightningMauler from "../pool/lightning-mauler.js";
 import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
@@ -417,6 +421,7 @@ import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
 import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
+import _poolMoonveilDragon from "../pool/moonveil-dragon.js";
 import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js";
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
@@ -607,6 +612,7 @@ import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
 import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
+import _poolStonewright from "../pool/stonewright.js";
 import _poolStonyStrength from "../pool/stony-strength.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
@@ -1023,6 +1029,7 @@ const shard: CardShard = {
     _poolGuardianProject,
     _poolGuardianShieldBearer,
     _poolGuardiansOfMeletis,
+    _poolGuiseOfFire,
     _poolGutlessPlunderer,
     _poolHadanasClimb,
     _poolHagHedgeMage,
@@ -1031,6 +1038,7 @@ const shard: CardShard = {
     _poolHandOfSilumgar,
     _poolHardbristleBandit,
     _poolHauntedHellride,
+    _poolHavengulSkaab,
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
     _poolHeartstabberMosquito,
@@ -1057,6 +1065,7 @@ const shard: CardShard = {
     _poolImpale,
     _poolImplode,
     _poolImpostorSyndrome,
+    _poolIncreasingAmbition,
     _poolInfernoJet,
     _poolInsidiousRoots,
     _poolInspiration,
@@ -1108,6 +1117,7 @@ const shard: CardShard = {
     _poolLecturingScornmage,
     _poolLifecraftersBestiary,
     _poolLifelink,
+    _poolLightningMauler,
     _poolLoranDiscipleOfHistory,
     _poolLoreWeaver,
     _poolLoreholdCharm,
@@ -1153,6 +1163,7 @@ const shard: CardShard = {
     _poolMirozel,
     _poolMoldervineReclamation,
     _poolMonoistCircuitFeeder,
+    _poolMoonveilDragon,
     _poolMorlunDevourerOfSpiders,
     _poolMorophonTheBoundless,
     _poolMuckRats,
@@ -1343,6 +1354,7 @@ const shard: CardShard = {
     _poolSteelWreckingBall,
     _poolStirringHopesinger,
     _poolStoneboundMentor,
+    _poolStonewright,
     _poolStonyStrength,
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,

@@ -238,6 +238,7 @@ import _poolFreyalisesCharm from "../pool/freyalises-charm.js";
 import _poolFrilledDeathspitter from "../pool/frilled-deathspitter.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
+import _poolGalvanicAlchemist from "../pool/galvanic-alchemist.js";
 import _poolGarrukApexPredator from "../pool/garruk-apex-predator.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
@@ -293,6 +294,7 @@ import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
+import _poolHuntedGhoul from "../pool/hunted-ghoul.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
 import _poolIllusionaryForces from "../pool/illusionary-forces.js";
 import _poolImpetuousProtege from "../pool/impetuous-protege.js";
@@ -536,6 +538,7 @@ import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
+import _poolSilverpeltWerewolf from "../pool/silverpelt-werewolf.js";
 import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
 import _poolSimoon from "../pool/simoon.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
@@ -944,6 +947,7 @@ const shard: CardShard = {
     _poolFrilledDeathspitter,
     _poolFrolickingFamiliar,
     _poolGalionElvenkingsButler,
+    _poolGalvanicAlchemist,
     _poolGarrukApexPredator,
     _poolGarrukWildspeaker,
     _poolGatecreeperVine,
@@ -999,6 +1003,7 @@ const shard: CardShard = {
     _poolHornetSting,
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
+    _poolHuntedGhoul,
     _poolIcehideGolem,
     _poolIllusionaryForces,
     _poolImpetuousProtege,
@@ -1242,6 +1247,7 @@ const shard: CardShard = {
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
     _poolSilvanRally,
+    _poolSilverpeltWerewolf,
     _poolSilverquillPledgemage,
     _poolSimoon,
     _poolSimulacrumShaper,

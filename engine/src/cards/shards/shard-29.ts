@@ -349,6 +349,7 @@ import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dra
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
 import _poolMalakirBloodwitch from "../pool/malakir-bloodwitch.js";
+import _poolMaliciousIntent from "../pool/malicious-intent.js";
 import _poolManaplasm from "../pool/manaplasm.js";
 import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
@@ -380,6 +381,7 @@ import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
 import _poolNahiriHeirOfTheAncients from "../pool/nahiri-heir-of-the-ancients.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
+import _poolNearheathPilgrim from "../pool/nearheath-pilgrim.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
 import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
@@ -1069,6 +1071,7 @@ const shard: CardShard = {
     _poolMagesGuile,
     _poolMagmaticForce,
     _poolMalakirBloodwitch,
+    _poolMaliciousIntent,
     _poolManaplasm,
     _poolManholeMissile,
     _poolManorGate,
@@ -1100,6 +1103,7 @@ const shard: CardShard = {
     _poolMurdocksCrusade,
     _poolNahiriHeirOfTheAncients,
     _poolNaturesSpiral,
+    _poolNearheathPilgrim,
     _poolNecroblossomSnarl,
     _poolNecroticSliver,
     _poolNephaliaDrownyard,

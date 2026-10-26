@@ -170,6 +170,7 @@ import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
 import _poolDireUndercurrents from "../pool/dire-undercurrents.js";
+import _poolDiregrafEscort from "../pool/diregraf-escort.js";
 import _poolDirgeBat from "../pool/dirge-bat.js";
 import _poolDiscerningPeddler from "../pool/discerning-peddler.js";
 import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
@@ -282,6 +283,7 @@ import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
+import _poolGrounded from "../pool/grounded.js";
 import _poolGroundswell from "../pool/groundswell.js";
 import _poolGrovetenderDruids from "../pool/grovetender-druids.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
@@ -320,6 +322,7 @@ import _poolHorizonExplorer from "../pool/horizon-explorer.js";
 import _poolHornedStoneseeker from "../pool/horned-stoneseeker.js";
 import _poolHouseCartographer from "../pool/house-cartographer.js";
 import _poolHulkingDevil from "../pool/hulking-devil.js";
+import _poolHumanFrailty from "../pool/human-frailty.js";
 import _poolHungryRidgewolf from "../pool/hungry-ridgewolf.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
@@ -359,6 +362,7 @@ import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
 import _poolKazanduStomper from "../pool/kazandu-stomper.js";
 import _poolKellansLightblades from "../pool/kellans-lightblades.js";
+import _poolKessigMalcontents from "../pool/kessig-malcontents.js";
 import _poolKessigWolfrider from "../pool/kessig-wolfrider.js";
 import _poolKiteShield from "../pool/kite-shield.js";
 import _poolKitesail from "../pool/kitesail.js";
@@ -910,6 +914,7 @@ const shard: CardShard = {
     _poolDinotomaton,
     _poolDiplomaticImmunity,
     _poolDireUndercurrents,
+    _poolDiregrafEscort,
     _poolDirgeBat,
     _poolDiscerningPeddler,
     _poolDiscreetRetreat,
@@ -1022,6 +1027,7 @@ const shard: CardShard = {
     _poolGreenDragon,
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
+    _poolGrounded,
     _poolGroundswell,
     _poolGrovetenderDruids,
     _poolGrowExtraArms,
@@ -1060,6 +1066,7 @@ const shard: CardShard = {
     _poolHornedStoneseeker,
     _poolHouseCartographer,
     _poolHulkingDevil,
+    _poolHumanFrailty,
     _poolHungryRidgewolf,
     _poolHuntedHorror,
     _poolHydroelectricLaboratory,
@@ -1099,6 +1106,7 @@ const shard: CardShard = {
     _poolKazanduRefuge,
     _poolKazanduStomper,
     _poolKellansLightblades,
+    _poolKessigMalcontents,
     _poolKessigWolfrider,
     _poolKiteShield,
     _poolKitesail,

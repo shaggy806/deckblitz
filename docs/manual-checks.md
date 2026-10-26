@@ -5452,6 +5452,12 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Divination and choose Keep hidden for Thunderous Wrath, then switch to Bob.
 - **Expect:** No trigger goes on the stack and Wrath stays in your hand. Bob's view never names it; while you were asked, Bob's banner only said you were deciding on a miracle.
 
+## Soulbond (2026-10-26, batch 185)
+
+### Silverblade Paladin: soulbond pairs it with a creature you choose
+- **Do:** Cast Silverblade Paladin. When its soulbond trigger resolves, pick Hill Giant on the board.
+- **Expect:** You're asked to choose one of Grizzly Bears or Hill Giant (or none). Paladin and Hill Giant both have double strike; Grizzly Bears doesn't.
+
 ## Buyback with a non-mana cost (2026-10-26, Exodus)
 
 ### Pegasus Stampede: buyback sacrifices a land

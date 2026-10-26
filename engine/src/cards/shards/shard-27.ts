@@ -137,6 +137,7 @@ import _poolDefenestrate from "../pool/defenestrate.js";
 import _poolDefiantOgre from "../pool/defiant-ogre.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDemonBolt from "../pool/demon-bolt.js";
+import _poolDemonlordOfAshmouth from "../pool/demonlord-of-ashmouth.js";
 import _poolDenyTheDivine from "../pool/deny-the-divine.js";
 import _poolDepartTheRealm from "../pool/depart-the-realm.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
@@ -251,6 +252,7 @@ import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHaloHunter from "../pool/halo-hunter.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHarvestHand from "../pool/harvest-hand.js";
+import _poolHavengulRunebinder from "../pool/havengul-runebinder.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
 import _poolHaystack from "../pool/haystack.js";
 import _poolHazoretsMonument from "../pool/hazorets-monument.js";
@@ -613,6 +615,7 @@ import _poolTreeOfTales from "../pool/tree-of-tales.js";
 import _poolTrenchStalker from "../pool/trench-stalker.js";
 import _poolTriadOfFates from "../pool/triad-of-fates.js";
 import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
+import _poolTriumphOfCruelty from "../pool/triumph-of-cruelty.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
 import _poolTrustyMachete from "../pool/trusty-machete.js";
@@ -832,6 +835,7 @@ const shard: CardShard = {
     _poolDefiantOgre,
     _poolDefilingDaemogoth,
     _poolDemonBolt,
+    _poolDemonlordOfAshmouth,
     _poolDenyTheDivine,
     _poolDepartTheRealm,
     _poolDeployToTheFront,
@@ -946,6 +950,7 @@ const shard: CardShard = {
     _poolHaloHunter,
     _poolHarvestGwyllion,
     _poolHarvestHand,
+    _poolHavengulRunebinder,
     _poolHavenwoodBattleground,
     _poolHaystack,
     _poolHazoretsMonument,
@@ -1308,6 +1313,7 @@ const shard: CardShard = {
     _poolTrenchStalker,
     _poolTriadOfFates,
     _poolTriskaidekaphile,
+    _poolTriumphOfCruelty,
     _poolTrophyMage,
     _poolTrueConviction,
     _poolTrustyMachete,
