@@ -63,6 +63,7 @@ import _poolBloodChinRager from "../pool/blood-chin-rager.js";
 import _poolBloodPetalCelebrant from "../pool/blood-petal-celebrant.js";
 import _poolBloodResearcher from "../pool/blood-researcher.js";
 import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
+import _poolBloodshedFever from "../pool/bloodshed-fever.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBoil from "../pool/boil.js";
@@ -751,6 +752,7 @@ const shard: CardShard = {
     _poolBloodPetalCelebrant,
     _poolBloodResearcher,
     _poolBloodchiefAscension,
+    _poolBloodshedFever,
     _poolBloodstoneGoblin,
     _poolBogstomper,
     _poolBoil,

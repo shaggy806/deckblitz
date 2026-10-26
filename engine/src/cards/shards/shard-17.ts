@@ -402,6 +402,7 @@ import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
 import _poolNullRod from "../pool/null-rod.js";
+import _poolNurturerInitiate from "../pool/nurturer-initiate.js";
 import _poolNyleasColossus from "../pool/nyleas-colossus.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _poolNornsInquisitor,
     _poolNoxiousGrasp,
     _poolNullRod,
+    _poolNurturerInitiate,
     _poolNyleasColossus,
     _poolNyleasIntervention,
     _poolObyraDreamingDuelist,

@@ -265,6 +265,7 @@ import _poolGrandColiseum from "../pool/grand-coliseum.js";
 import _poolGraniticTitan from "../pool/granitic-titan.js";
 import _poolGreaterSandwurm from "../pool/greater-sandwurm.js";
 import _poolGreenweaverDruid from "../pool/greenweaver-druid.js";
+import _poolGriefTyrant from "../pool/grief-tyrant.js";
 import _poolGrief from "../pool/grief.js";
 import _poolGriffinCanyon from "../pool/griffin-canyon.js";
 import _poolGrimReaperLethalLegionnaire from "../pool/grim-reaper-lethal-legionnaire.js";
@@ -996,6 +997,7 @@ const shard: CardShard = {
     _poolGraniticTitan,
     _poolGreaterSandwurm,
     _poolGreenweaverDruid,
+    _poolGriefTyrant,
     _poolGrief,
     _poolGriffinCanyon,
     _poolGrimReaperLethalLegionnaire,

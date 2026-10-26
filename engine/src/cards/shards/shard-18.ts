@@ -121,6 +121,7 @@ import _poolDeathbringerLiege from "../pool/deathbringer-liege.js";
 import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
+import _poolDeepSlumberTitan from "../pool/deep-slumber-titan.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
@@ -816,6 +817,7 @@ const shard: CardShard = {
     _poolDeathknellBerserker,
     _poolDecadentDragon,
     _poolDeepGoblinSkulltaker,
+    _poolDeepSlumberTitan,
     _poolDeeprootChampion,
     _poolDeposeDeploy,
     _poolDesperateCharge,

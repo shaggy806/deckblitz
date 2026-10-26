@@ -296,6 +296,7 @@ import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
 import _poolInspiredInventor from "../pool/inspired-inventor.js";
 import _poolInspiredSprite from "../pool/inspired-sprite.js";
 import _poolInspiritedVanguard from "../pool/inspirited-vanguard.js";
+import _poolIntimidatorInitiate from "../pool/intimidator-initiate.js";
 import _poolInvasionReinforcements from "../pool/invasion-reinforcements.js";
 import _poolInventorsFair from "../pool/inventors-fair.js";
 import _poolInvincibleHymn from "../pool/invincible-hymn.js";
@@ -454,6 +455,7 @@ import _poolPsionicBlast from "../pool/psionic-blast.js";
 import _poolPurelace from "../pool/purelace.js";
 import _poolPurphorosGodOfTheForge from "../pool/purphoros-god-of-the-forge.js";
 import _poolPursueThePast from "../pool/pursue-the-past.js";
+import _poolPutAway from "../pool/put-away.js";
 import _poolPyreSpawn from "../pool/pyre-spawn.js";
 import _poolPyrrhicStrike from "../pool/pyrrhic-strike.js";
 import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
@@ -1042,6 +1044,7 @@ const shard: CardShard = {
     _poolInspiredInventor,
     _poolInspiredSprite,
     _poolInspiritedVanguard,
+    _poolIntimidatorInitiate,
     _poolInvasionReinforcements,
     _poolInventorsFair,
     _poolInvincibleHymn,
@@ -1200,6 +1203,7 @@ const shard: CardShard = {
     _poolPurelace,
     _poolPurphorosGodOfTheForge,
     _poolPursueThePast,
+    _poolPutAway,
     _poolPyreSpawn,
     _poolPyrrhicStrike,
     _poolQuandrixTheProof,

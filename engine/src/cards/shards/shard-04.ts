@@ -38,6 +38,7 @@ import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertaine
 import _poolBallynockTrapper from "../pool/ballynock-trapper.js";
 import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
+import _poolBarrentonCragtreads from "../pool/barrenton-cragtreads.js";
 import _poolBarricadeBreaker from "../pool/barricade-breaker.js";
 import _poolBarrinMasterWizard from "../pool/barrin-master-wizard.js";
 import _poolBashToBits from "../pool/bash-to-bits.js";
@@ -276,6 +277,7 @@ import _poolIceOut from "../pool/ice-out.js";
 import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
 import _poolImpelledGiant from "../pool/impelled-giant.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
+import _poolImpromptuRaid from "../pool/impromptu-raid.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
 import _poolInfectiousHorror from "../pool/infectious-horror.js";
@@ -535,6 +537,7 @@ import _poolSpikeBreeder from "../pool/spike-breeder.js";
 import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
+import _poolSplittingHeadache from "../pool/splitting-headache.js";
 import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
 import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
@@ -720,6 +723,7 @@ const shard: CardShard = {
     _poolBallynockTrapper,
     _poolBarlsCage,
     _poolBaronyVampire,
+    _poolBarrentonCragtreads,
     _poolBarricadeBreaker,
     _poolBarrinMasterWizard,
     _poolBashToBits,
@@ -958,6 +962,7 @@ const shard: CardShard = {
     _poolIllusionistsStratagem,
     _poolImpelledGiant,
     _poolImposingVantasaur,
+    _poolImpromptuRaid,
     _poolImskirIronEater,
     _poolIndrikStomphowler,
     _poolInfectiousHorror,
@@ -1217,6 +1222,7 @@ const shard: CardShard = {
     _poolSpiritOfTheAldergard,
     _poolSpitFlame,
     _poolSplatterTechnique,
+    _poolSplittingHeadache,
     _poolSpringheartNantuko,
     _poolSpringleafDrum,
     _poolSproutingThrinax,

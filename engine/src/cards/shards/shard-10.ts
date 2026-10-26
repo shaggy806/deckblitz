@@ -295,6 +295,7 @@ import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
+import _poolInescapableBrute from "../pool/inescapable-brute.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolInvocationOfSaintTraft from "../pool/invocation-of-saint-traft.js";
 import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
@@ -1004,6 +1005,7 @@ const shard: CardShard = {
     _poolIndathaCrystal,
     _poolIndestructibility,
     _poolInescapableBlaze,
+    _poolInescapableBrute,
     _poolInspiringRoar,
     _poolInvocationOfSaintTraft,
     _poolIrencragPyromancer,

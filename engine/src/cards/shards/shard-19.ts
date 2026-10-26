@@ -40,6 +40,7 @@ import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
 import _poolBackwoodsSurvivalists from "../pool/backwoods-survivalists.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
+import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
@@ -138,6 +139,7 @@ import _poolCryptolithRite from "../pool/cryptolith-rite.js";
 import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js";
 import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
 import _poolCuboidColony from "../pool/cuboid-colony.js";
+import _poolCultbrandCinder from "../pool/cultbrand-cinder.js";
 import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolDangerous from "../pool/dangerous.js";
@@ -763,6 +765,7 @@ const shard: CardShard = {
     _poolAwakenTheWoods,
     _poolBackwoodsSurvivalists,
     _poolBalemurkLeech,
+    _poolBallynockCohort,
     _poolBanishingSlash,
     _poolBarbarianHorde,
     _poolBedheadBeastie,
@@ -861,6 +864,7 @@ const shard: CardShard = {
     _poolCrystalSkullIsuSpyglass,
     _poolCrystallineResonance,
     _poolCuboidColony,
+    _poolCultbrandCinder,
     _poolCunningStrike,
     _poolCunningSurvivor,
     _poolDangerous,

@@ -215,6 +215,7 @@ import _poolFeralGhoul from "../pool/feral-ghoul.js";
 import _poolFeralKrushok from "../pool/feral-krushok.js";
 import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
+import _poolFirespout from "../pool/firespout.js";
 import _poolFitOfRage from "../pool/fit-of-rage.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
@@ -255,6 +256,7 @@ import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
+import _poolGnarledEffigy from "../pool/gnarled-effigy.js";
 import _poolGoblinEliteInfantry from "../pool/goblin-elite-infantry.js";
 import _poolGoblinMaskmaker from "../pool/goblin-maskmaker.js";
 import _poolGoblinSappers from "../pool/goblin-sappers.js";
@@ -472,6 +474,7 @@ import _poolPitilessHorde from "../pool/pitiless-horde.js";
 import _poolPlasmaJockey from "../pool/plasma-jockey.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPleaForGuidance from "../pool/plea-for-guidance.js";
+import _poolPoisonTheWell from "../pool/poison-the-well.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPollywogSymbiote from "../pool/pollywog-symbiote.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
@@ -924,6 +927,7 @@ const shard: CardShard = {
     _poolFeralKrushok,
     _poolFireMagic,
     _poolFirefly,
+    _poolFirespout,
     _poolFitOfRage,
     _poolFleetFootedMonk,
     _poolFleetingReflection,
@@ -964,6 +968,7 @@ const shard: CardShard = {
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
+    _poolGnarledEffigy,
     _poolGoblinEliteInfantry,
     _poolGoblinMaskmaker,
     _poolGoblinSappers,
@@ -1181,6 +1186,7 @@ const shard: CardShard = {
     _poolPlasmaJockey,
     _poolPlazaOfHeroes,
     _poolPleaForGuidance,
+    _poolPoisonTheWell,
     _poolPollutedDead,
     _poolPollywogSymbiote,
     _poolPolygoyf,

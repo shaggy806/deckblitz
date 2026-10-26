@@ -112,6 +112,7 @@ import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
+import _poolDawnglowInfusion from "../pool/dawnglow-infusion.js";
 import _poolDeadBeforeSunrise from "../pool/dead-before-sunrise.js";
 import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
 import _poolDeathbloomRitualist from "../pool/deathbloom-ritualist.js";
@@ -784,6 +785,7 @@ const shard: CardShard = {
     _poolDailyBugleBuilding,
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
+    _poolDawnglowInfusion,
     _poolDeadBeforeSunrise,
     _poolDeathbellowRaider,
     _poolDeathbloomRitualist,

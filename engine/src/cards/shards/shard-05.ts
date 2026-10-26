@@ -82,6 +82,7 @@ import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBlossomingWreath from "../pool/blossoming-wreath.js";
 import _poolBlueMarvelAdamBrashear from "../pool/blue-marvel-adam-brashear.js";
 import _poolBodyDropper from "../pool/body-dropper.js";
+import _poolBoggartArsonists from "../pool/boggart-arsonists.js";
 import _poolBondOfFlourishing from "../pool/bond-of-flourishing.js";
 import _poolBondOfInsight from "../pool/bond-of-insight.js";
 import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
@@ -402,6 +403,7 @@ import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
 import _poolMossMonster from "../pool/moss-monster.js";
 import _poolMostWanted from "../pool/most-wanted.js";
+import _poolMudbrawlerCohort from "../pool/mudbrawler-cohort.js";
 import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
 import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
@@ -495,6 +497,7 @@ import _poolSarkhanDragonsoul from "../pool/sarkhan-dragonsoul.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
 import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
+import _poolScarscaleRitual from "../pool/scarscale-ritual.js";
 import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
@@ -537,6 +540,7 @@ import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
 import _poolSongOfTheWorldsoul from "../pool/song-of-the-worldsoul.js";
+import _poolSootstokeKindler from "../pool/sootstoke-kindler.js";
 import _poolSoulOfEmancipation from "../pool/soul-of-emancipation.js";
 import _poolSoulbrightSeeker from "../pool/soulbright-seeker.js";
 import _poolSovereignsBite from "../pool/sovereigns-bite.js";
@@ -770,6 +774,7 @@ const shard: CardShard = {
     _poolBlossomingWreath,
     _poolBlueMarvelAdamBrashear,
     _poolBodyDropper,
+    _poolBoggartArsonists,
     _poolBondOfFlourishing,
     _poolBondOfInsight,
     _poolBraidsCabalMinion,
@@ -1090,6 +1095,7 @@ const shard: CardShard = {
     _poolMoorlandHaunt,
     _poolMossMonster,
     _poolMostWanted,
+    _poolMudbrawlerCohort,
     _poolMyconidSporeTender,
     _poolMysticSkull,
     _poolMythosOfIlluna,
@@ -1183,6 +1189,7 @@ const shard: CardShard = {
     _poolSarkhanUnbroken,
     _poolSauronTheDarkLord,
     _poolScabClanCharger,
+    _poolScarscaleRitual,
     _poolScarwoodHag,
     _poolScoriaElemental,
     _poolScourgeWolf,
@@ -1225,6 +1232,7 @@ const shard: CardShard = {
     _poolSnapcasterMage,
     _poolSolRing,
     _poolSongOfTheWorldsoul,
+    _poolSootstokeKindler,
     _poolSoulOfEmancipation,
     _poolSoulbrightSeeker,
     _poolSovereignsBite,

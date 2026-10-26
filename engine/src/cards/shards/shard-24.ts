@@ -439,6 +439,7 @@ import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
 import _poolRisenSanctuary from "../pool/risen-sanctuary.js";
+import _poolRiversGrasp from "../pool/rivers-grasp.js";
 import _poolRoadRage from "../pool/road-rage.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
 import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
@@ -451,6 +452,7 @@ import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
 import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
 import _poolSadisticSlash from "../pool/sadistic-slash.js";
 import _poolSafanaCalimportCutthroat from "../pool/safana-calimport-cutthroat.js";
+import _poolSafeholdSentry from "../pool/safehold-sentry.js";
 import _poolSageOfTheSkies from "../pool/sage-of-the-skies.js";
 import _poolSaheeliSublimeArtificer from "../pool/saheeli-sublime-artificer.js";
 import _poolSampleCollector from "../pool/sample-collector.js";
@@ -548,6 +550,7 @@ import _poolSwordOfTheRealms from "../pool/sword-of-the-realms.js";
 import _poolSwordOfWealthAndPower from "../pool/sword-of-wealth-and-power.js";
 import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
+import _poolTattermungeWitch from "../pool/tattermunge-witch.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTeferisVeil from "../pool/teferis-veil.js";
@@ -1127,6 +1130,7 @@ const shard: CardShard = {
     _poolRickJonesDestinedSidekick,
     _poolRikuOfManyPaths,
     _poolRisenSanctuary,
+    _poolRiversGrasp,
     _poolRoadRage,
     _poolRoccoCabarettiCaterer,
     _poolRocketPoweredGoblinGlider,
@@ -1139,6 +1143,7 @@ const shard: CardShard = {
     _poolRoxxonBrutes,
     _poolSadisticSlash,
     _poolSafanaCalimportCutthroat,
+    _poolSafeholdSentry,
     _poolSageOfTheSkies,
     _poolSaheeliSublimeArtificer,
     _poolSampleCollector,
@@ -1236,6 +1241,7 @@ const shard: CardShard = {
     _poolSwordOfWealthAndPower,
     _poolTaintedStrike,
     _poolTangledVale,
+    _poolTattermungeWitch,
     _poolTavernBrawler,
     _poolTeferisProtege,
     _poolTeferisVeil,
