@@ -626,6 +626,7 @@ import _poolVineSnare from "../pool/vine-snare.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
+import _poolVodalianIllusionist from "../pool/vodalian-illusionist.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
@@ -1301,6 +1302,7 @@ const shard: CardShard = {
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
     _poolVizierOfTheTrue,
+    _poolVodalianIllusionist,
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,
     _poolVrock,

@@ -75,6 +75,7 @@ import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
+import _poolBriarShield from "../pool/briar-shield.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
@@ -791,6 +792,7 @@ const shard: CardShard = {
     _poolBoulderRush,
     _poolBoundingFelidar,
     _poolBrassclawOrcs,
+    _poolBriarShield,
     _poolBrokersInitiate,
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,

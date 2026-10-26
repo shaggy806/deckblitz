@@ -344,6 +344,7 @@ import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
+import _poolMorinfen from "../pool/morinfen.js";
 import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
@@ -1007,6 +1008,7 @@ const shard: CardShard = {
     _poolMomoPlayfulPet,
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
+    _poolMorinfen,
     _poolMorkrutNecropod,
     _poolMosscoatGoriak,
     _poolMouserFoundry,

@@ -590,6 +590,7 @@ import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
+import _poolUktabiEfreet from "../pool/uktabi-efreet.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
 import _poolUndercityEliminator from "../pool/undercity-eliminator.js";
@@ -1250,6 +1251,7 @@ const shard: CardShard = {
     _poolTurretOgre,
     _poolTwinshotSniper,
     _poolTwistedFates,
+    _poolUktabiEfreet,
     _poolUktabiOrangutan,
     _poolUltimeciaTemporalThreat,
     _poolUndercityEliminator,

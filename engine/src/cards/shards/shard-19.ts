@@ -233,6 +233,7 @@ import _poolFugue from "../pool/fugue.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolFuryOfTheHorde from "../pool/fury-of-the-horde.js";
 import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
+import _poolGallowbraid from "../pool/gallowbraid.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
@@ -926,6 +927,7 @@ const shard: CardShard = {
     _poolFurtiveCourier,
     _poolFuryOfTheHorde,
     _poolGaladrielOfLothlorien,
+    _poolGallowbraid,
     _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,
     _poolGeneralThunderboltRoss,

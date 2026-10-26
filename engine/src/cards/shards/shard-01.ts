@@ -382,6 +382,7 @@ import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOphidian from "../pool/ophidian.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOphidian,
     _poolOssuaryRats,
     _poolOverTheEdge,
     _poolOwlinShieldmage,

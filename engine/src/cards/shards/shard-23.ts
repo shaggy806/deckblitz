@@ -28,6 +28,7 @@ import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
 import _poolArcRunner from "../pool/arc-runner.js";
 import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
+import _poolArcticWolves from "../pool/arctic-wolves.js";
 import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArisenGorgon from "../pool/arisen-gorgon.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
@@ -700,6 +701,7 @@ const shard: CardShard = {
     _poolArcRunner,
     _poolArchaeologicalDig,
     _poolArchfiendOfSorrows,
+    _poolArcticWolves,
     _poolAridMesa,
     _poolArisenGorgon,
     _poolArmoredSkaab,

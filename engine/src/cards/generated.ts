@@ -848,6 +848,7 @@ import _poolArclightPhoenix from "./pool/arclight-phoenix.js";
 import _poolArcoFlagellant from "./pool/arco-flagellant.js";
 import _poolArcticFlats from "./pool/arctic-flats.js";
 import _poolArcticTreeline from "./pool/arctic-treeline.js";
+import _poolArcticWolves from "./pool/arctic-wolves.js";
 import _poolArcumsAstrolabe from "./pool/arcums-astrolabe.js";
 import _poolArcusAcolyte from "./pool/arcus-acolyte.js";
 import _poolArdbert from "./pool/ardbert.js";
@@ -2305,6 +2306,7 @@ import _poolBrenardGingerSculptor from "./pool/brenard-ginger-sculptor.js";
 import _poolBretagardStronghold from "./pool/bretagard-stronghold.js";
 import _poolBriaRiptideRogue from "./pool/bria-riptide-rogue.js";
 import _poolBriarHydra from "./pool/briar-hydra.js";
+import _poolBriarShield from "./pool/briar-shield.js";
 import _poolBriarbladeAdept from "./pool/briarblade-adept.js";
 import _poolBriarbridgeTracker from "./pool/briarbridge-tracker.js";
 import _poolBriarpackAlpha from "./pool/briarpack-alpha.js";
@@ -6831,6 +6833,7 @@ import _poolGalliaTheMerrymaker from "./pool/gallia-the-merrymaker.js";
 import _poolGalliaTragicHost from "./pool/gallia-tragic-host.js";
 import _poolGallifreyCouncilChamber from "./pool/gallifrey-council-chamber.js";
 import _poolGallifreyStands from "./pool/gallifrey-stands.js";
+import _poolGallowbraid from "./pool/gallowbraid.js";
 import _poolGallowsWarden from "./pool/gallows-warden.js";
 import _poolGalufsFinalAct from "./pool/galufs-final-act.js";
 import _poolGalvanicArc from "./pool/galvanic-arc.js";
@@ -11615,6 +11618,7 @@ import _poolMorgueThrull from "./pool/morgue-thrull.js";
 import _poolMorgueToad from "./pool/morgue-toad.js";
 import _poolMorgulKnifeWound from "./pool/morgul-knife-wound.js";
 import _poolMoriaMarauder from "./pool/moria-marauder.js";
+import _poolMorinfen from "./pool/morinfen.js";
 import _poolMoriokReaver from "./pool/moriok-reaver.js";
 import _poolMoriokScavenger from "./pool/moriok-scavenger.js";
 import _poolMorkrutBanshee from "./pool/morkrut-banshee.js";
@@ -12480,6 +12484,7 @@ import _poolOpenTheGates from "./pool/open-the-gates.js";
 import _poolOpenTheGraves from "./pool/open-the-graves.js";
 import _poolOperaLoveSong from "./pool/opera-love-song.js";
 import _poolOphidianEye from "./pool/ophidian-eye.js";
+import _poolOphidian from "./pool/ophidian.js";
 import _poolOphiomancer from "./pool/ophiomancer.js";
 import _poolOpportunisticDragon from "./pool/opportunistic-dragon.js";
 import _poolOpportunity from "./pool/opportunity.js";
@@ -19056,6 +19061,7 @@ import _poolUginsConstruct from "./pool/ugins-construct.js";
 import _poolUginsInsight from "./pool/ugins-insight.js";
 import _poolUglukOfTheWhiteHand from "./pool/ugluk-of-the-white-hand.js";
 import _poolUkkimaStalkingShadow from "./pool/ukkima-stalking-shadow.js";
+import _poolUktabiEfreet from "./pool/uktabi-efreet.js";
 import _poolUktabiFaerie from "./pool/uktabi-faerie.js";
 import _poolUktabiOrangutan from "./pool/uktabi-orangutan.js";
 import _poolUktabiWildcats from "./pool/uktabi-wildcats.js";
@@ -19794,6 +19800,7 @@ import _poolVodaSeaScavenger from "./pool/voda-sea-scavenger.js";
 import _poolVodalianArcanist from "./pool/vodalian-arcanist.js";
 import _poolVodalianHexcatcher from "./pool/vodalian-hexcatcher.js";
 import _poolVodalianHypnotist from "./pool/vodalian-hypnotist.js";
+import _poolVodalianIllusionist from "./pool/vodalian-illusionist.js";
 import _poolVodalianMage from "./pool/vodalian-mage.js";
 import _poolVodalianMerchant from "./pool/vodalian-merchant.js";
 import _poolVodalianSoldiers from "./pool/vodalian-soldiers.js";
@@ -22327,6 +22334,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArcoFlagellant,
   _poolArcticFlats,
   _poolArcticTreeline,
+  _poolArcticWolves,
   _poolArcumsAstrolabe,
   _poolArcusAcolyte,
   _poolArdbert,
@@ -23784,6 +23792,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBretagardStronghold,
   _poolBriaRiptideRogue,
   _poolBriarHydra,
+  _poolBriarShield,
   _poolBriarbladeAdept,
   _poolBriarbridgeTracker,
   _poolBriarpackAlpha,
@@ -28310,6 +28319,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGalliaTragicHost,
   _poolGallifreyCouncilChamber,
   _poolGallifreyStands,
+  _poolGallowbraid,
   _poolGallowsWarden,
   _poolGalufsFinalAct,
   _poolGalvanicArc,
@@ -33094,6 +33104,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMorgueToad,
   _poolMorgulKnifeWound,
   _poolMoriaMarauder,
+  _poolMorinfen,
   _poolMoriokReaver,
   _poolMoriokScavenger,
   _poolMorkrutBanshee,
@@ -33959,6 +33970,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOpenTheGraves,
   _poolOperaLoveSong,
   _poolOphidianEye,
+  _poolOphidian,
   _poolOphiomancer,
   _poolOpportunisticDragon,
   _poolOpportunity,
@@ -40535,6 +40547,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUginsInsight,
   _poolUglukOfTheWhiteHand,
   _poolUkkimaStalkingShadow,
+  _poolUktabiEfreet,
   _poolUktabiFaerie,
   _poolUktabiOrangutan,
   _poolUktabiWildcats,
@@ -41273,6 +41286,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVodalianArcanist,
   _poolVodalianHexcatcher,
   _poolVodalianHypnotist,
+  _poolVodalianIllusionist,
   _poolVodalianMage,
   _poolVodalianMerchant,
   _poolVodalianSoldiers,
@@ -43819,6 +43833,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arco-flagellant": _poolArcoFlagellant,
   "pool/arctic-flats": _poolArcticFlats,
   "pool/arctic-treeline": _poolArcticTreeline,
+  "pool/arctic-wolves": _poolArcticWolves,
   "pool/arcums-astrolabe": _poolArcumsAstrolabe,
   "pool/arcus-acolyte": _poolArcusAcolyte,
   "pool/ardbert": _poolArdbert,
@@ -45276,6 +45291,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bretagard-stronghold": _poolBretagardStronghold,
   "pool/bria-riptide-rogue": _poolBriaRiptideRogue,
   "pool/briar-hydra": _poolBriarHydra,
+  "pool/briar-shield": _poolBriarShield,
   "pool/briarblade-adept": _poolBriarbladeAdept,
   "pool/briarbridge-tracker": _poolBriarbridgeTracker,
   "pool/briarpack-alpha": _poolBriarpackAlpha,
@@ -49802,6 +49818,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gallia-tragic-host": _poolGalliaTragicHost,
   "pool/gallifrey-council-chamber": _poolGallifreyCouncilChamber,
   "pool/gallifrey-stands": _poolGallifreyStands,
+  "pool/gallowbraid": _poolGallowbraid,
   "pool/gallows-warden": _poolGallowsWarden,
   "pool/galufs-final-act": _poolGalufsFinalAct,
   "pool/galvanic-arc": _poolGalvanicArc,
@@ -54586,6 +54603,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/morgue-toad": _poolMorgueToad,
   "pool/morgul-knife-wound": _poolMorgulKnifeWound,
   "pool/moria-marauder": _poolMoriaMarauder,
+  "pool/morinfen": _poolMorinfen,
   "pool/moriok-reaver": _poolMoriokReaver,
   "pool/moriok-scavenger": _poolMoriokScavenger,
   "pool/morkrut-banshee": _poolMorkrutBanshee,
@@ -55451,6 +55469,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/open-the-graves": _poolOpenTheGraves,
   "pool/opera-love-song": _poolOperaLoveSong,
   "pool/ophidian-eye": _poolOphidianEye,
+  "pool/ophidian": _poolOphidian,
   "pool/ophiomancer": _poolOphiomancer,
   "pool/opportunistic-dragon": _poolOpportunisticDragon,
   "pool/opportunity": _poolOpportunity,
@@ -62027,6 +62046,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ugins-insight": _poolUginsInsight,
   "pool/ugluk-of-the-white-hand": _poolUglukOfTheWhiteHand,
   "pool/ukkima-stalking-shadow": _poolUkkimaStalkingShadow,
+  "pool/uktabi-efreet": _poolUktabiEfreet,
   "pool/uktabi-faerie": _poolUktabiFaerie,
   "pool/uktabi-orangutan": _poolUktabiOrangutan,
   "pool/uktabi-wildcats": _poolUktabiWildcats,
@@ -62765,6 +62785,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vodalian-arcanist": _poolVodalianArcanist,
   "pool/vodalian-hexcatcher": _poolVodalianHexcatcher,
   "pool/vodalian-hypnotist": _poolVodalianHypnotist,
+  "pool/vodalian-illusionist": _poolVodalianIllusionist,
   "pool/vodalian-mage": _poolVodalianMage,
   "pool/vodalian-merchant": _poolVodalianMerchant,
   "pool/vodalian-soldiers": _poolVodalianSoldiers,
