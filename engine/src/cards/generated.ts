@@ -4690,6 +4690,7 @@ import _poolDeathsDuet from "./pool/deaths-duet.js";
 import _poolDeathsHeadBuzzard from "./pool/deaths-head-buzzard.js";
 import _poolDeathsOasis from "./pool/deaths-oasis.js";
 import _poolDeathsPresence from "./pool/deaths-presence.js";
+import _poolDeathsporeThallid from "./pool/deathspore-thallid.js";
 import _poolDeathsprout from "./pool/deathsprout.js";
 import _poolDebilitatingInjury from "./pool/debilitating-injury.js";
 import _poolDebrisBeetle from "./pool/debris-beetle.js";
@@ -4831,6 +4832,7 @@ import _poolDemonPossessedWitch from "./pool/demon-possessed-witch.js";
 import _poolDemonWall from "./pool/demon-wall.js";
 import _poolDemonicAppetite from "./pool/demonic-appetite.js";
 import _poolDemonicBargain from "./pool/demonic-bargain.js";
+import _poolDemonicCollusion from "./pool/demonic-collusion.js";
 import _poolDemonicCounsel from "./pool/demonic-counsel.js";
 import _poolDemonicDread from "./pool/demonic-dread.js";
 import _poolDemonicGifts from "./pool/demonic-gifts.js";
@@ -7815,6 +7817,7 @@ import _poolGhituAmplifier from "./pool/ghitu-amplifier.js";
 import _poolGhituChronicler from "./pool/ghitu-chronicler.js";
 import _poolGhituEncampment from "./pool/ghitu-encampment.js";
 import _poolGhituFireEater from "./pool/ghitu-fire-eater.js";
+import _poolGhituFirebreathing from "./pool/ghitu-firebreathing.js";
 import _poolGhituJourneymage from "./pool/ghitu-journeymage.js";
 import _poolGhituLavarunner from "./pool/ghitu-lavarunner.js";
 import _poolGhituSlinger from "./pool/ghitu-slinger.js";
@@ -14099,6 +14102,7 @@ import _poolOutpaceOblivion from "./pool/outpace-oblivion.js";
 import _poolOutpostSiege from "./pool/outpost-siege.js";
 import _poolOutrageShaman from "./pool/outrage-shaman.js";
 import _poolOutrageousRobbery from "./pool/outrageous-robbery.js";
+import _poolOutriderEnKor from "./pool/outrider-en-kor.js";
 import _poolOutriderOfJhess from "./pool/outrider-of-jhess.js";
 import _poolOutwit from "./pool/outwit.js";
 import _poolOvalchaseDaredevil from "./pool/ovalchase-daredevil.js";
@@ -20150,7 +20154,9 @@ import _poolThaliasLancers from "./pool/thalias-lancers.js";
 import _poolThaliasLieutenant from "./pool/thalias-lieutenant.js";
 import _poolThalisseReverentMedium from "./pool/thalisse-reverent-medium.js";
 import _poolThallidDevourer from "./pool/thallid-devourer.js";
+import _poolThallidGerminator from "./pool/thallid-germinator.js";
 import _poolThallidOmnivore from "./pool/thallid-omnivore.js";
+import _poolThallidShellDweller from "./pool/thallid-shell-dweller.js";
 import _poolThallidSoothsayer from "./pool/thallid-soothsayer.js";
 import _poolThallid from "./pool/thallid.js";
 import _poolThancredWaters from "./pool/thancred-waters.js";
@@ -23852,6 +23858,7 @@ import _tokensSpiderToken21BlackMenaceReach from "./tokens/spider-token-2-1-blac
 import _tokensSpiderToken21MenaceReach from "./tokens/spider-token-2-1-menace-reach.js";
 import _tokensSpiderToken21Reach from "./tokens/spider-token-2-1-reach.js";
 import _tokensSpiderToken22Reach from "./tokens/spider-token-2-2-reach.js";
+import _tokensSpiderToken24BlackReach from "./tokens/spider-token-2-4-black-reach.js";
 import _tokensSpikeToken from "./tokens/spike-token.js";
 import _tokensSpiritClericToken from "./tokens/spirit-cleric-token.js";
 import _tokensSpiritTokenAbzanMonument from "./tokens/spirit-token-abzan-monument.js";
@@ -28669,6 +28676,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeathsHeadBuzzard,
   _poolDeathsOasis,
   _poolDeathsPresence,
+  _poolDeathsporeThallid,
   _poolDeathsprout,
   _poolDebilitatingInjury,
   _poolDebrisBeetle,
@@ -28810,6 +28818,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDemonWall,
   _poolDemonicAppetite,
   _poolDemonicBargain,
+  _poolDemonicCollusion,
   _poolDemonicCounsel,
   _poolDemonicDread,
   _poolDemonicGifts,
@@ -31794,6 +31803,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGhituChronicler,
   _poolGhituEncampment,
   _poolGhituFireEater,
+  _poolGhituFirebreathing,
   _poolGhituJourneymage,
   _poolGhituLavarunner,
   _poolGhituSlinger,
@@ -38078,6 +38088,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOutpostSiege,
   _poolOutrageShaman,
   _poolOutrageousRobbery,
+  _poolOutriderEnKor,
   _poolOutriderOfJhess,
   _poolOutwit,
   _poolOvalchaseDaredevil,
@@ -44129,7 +44140,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThaliasLieutenant,
   _poolThalisseReverentMedium,
   _poolThallidDevourer,
+  _poolThallidGerminator,
   _poolThallidOmnivore,
+  _poolThallidShellDweller,
   _poolThallidSoothsayer,
   _poolThallid,
   _poolThancredWaters,
@@ -47837,6 +47850,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSpiderToken21MenaceReach,
   _tokensSpiderToken21Reach,
   _tokensSpiderToken22Reach,
+  _tokensSpiderToken24BlackReach,
   _tokensSpikeToken,
   _tokensSpiritClericToken,
   _tokensSpiritTokenAbzanMonument,
@@ -52661,6 +52675,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deaths-head-buzzard": _poolDeathsHeadBuzzard,
   "pool/deaths-oasis": _poolDeathsOasis,
   "pool/deaths-presence": _poolDeathsPresence,
+  "pool/deathspore-thallid": _poolDeathsporeThallid,
   "pool/deathsprout": _poolDeathsprout,
   "pool/debilitating-injury": _poolDebilitatingInjury,
   "pool/debris-beetle": _poolDebrisBeetle,
@@ -52802,6 +52817,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/demon-wall": _poolDemonWall,
   "pool/demonic-appetite": _poolDemonicAppetite,
   "pool/demonic-bargain": _poolDemonicBargain,
+  "pool/demonic-collusion": _poolDemonicCollusion,
   "pool/demonic-counsel": _poolDemonicCounsel,
   "pool/demonic-dread": _poolDemonicDread,
   "pool/demonic-gifts": _poolDemonicGifts,
@@ -55786,6 +55802,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ghitu-chronicler": _poolGhituChronicler,
   "pool/ghitu-encampment": _poolGhituEncampment,
   "pool/ghitu-fire-eater": _poolGhituFireEater,
+  "pool/ghitu-firebreathing": _poolGhituFirebreathing,
   "pool/ghitu-journeymage": _poolGhituJourneymage,
   "pool/ghitu-lavarunner": _poolGhituLavarunner,
   "pool/ghitu-slinger": _poolGhituSlinger,
@@ -62070,6 +62087,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/outpost-siege": _poolOutpostSiege,
   "pool/outrage-shaman": _poolOutrageShaman,
   "pool/outrageous-robbery": _poolOutrageousRobbery,
+  "pool/outrider-en-kor": _poolOutriderEnKor,
   "pool/outrider-of-jhess": _poolOutriderOfJhess,
   "pool/outwit": _poolOutwit,
   "pool/ovalchase-daredevil": _poolOvalchaseDaredevil,
@@ -68121,7 +68139,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thalias-lieutenant": _poolThaliasLieutenant,
   "pool/thalisse-reverent-medium": _poolThalisseReverentMedium,
   "pool/thallid-devourer": _poolThallidDevourer,
+  "pool/thallid-germinator": _poolThallidGerminator,
   "pool/thallid-omnivore": _poolThallidOmnivore,
+  "pool/thallid-shell-dweller": _poolThallidShellDweller,
   "pool/thallid-soothsayer": _poolThallidSoothsayer,
   "pool/thallid": _poolThallid,
   "pool/thancred-waters": _poolThancredWaters,
@@ -71823,6 +71843,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/spider-token-2-1-menace-reach": _tokensSpiderToken21MenaceReach,
   "tokens/spider-token-2-1-reach": _tokensSpiderToken21Reach,
   "tokens/spider-token-2-2-reach": _tokensSpiderToken22Reach,
+  "tokens/spider-token-2-4-black-reach": _tokensSpiderToken24BlackReach,
   "tokens/spike-token": _tokensSpikeToken,
   "tokens/spirit-cleric-token": _tokensSpiritClericToken,
   "tokens/spirit-token-abzan-monument": _tokensSpiritTokenAbzanMonument,

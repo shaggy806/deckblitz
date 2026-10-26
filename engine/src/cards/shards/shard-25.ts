@@ -622,6 +622,7 @@ import _poolTemurCharm from "../pool/temur-charm.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
+import _poolThallidGerminator from "../pool/thallid-germinator.js";
 import _poolThatsMine from "../pool/thats-mine.js";
 import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
@@ -1354,6 +1355,7 @@ const shard: CardShard = {
     _poolTerramorphicExpanse,
     _poolTetherTechnician,
     _poolTextbookTabulator,
+    _poolThallidGerminator,
     _poolThatsMine,
     _poolTheDestinedBlackMage,
     _poolTheLegendOfRoku,

@@ -152,6 +152,7 @@ import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDeepwaterHypnotist from "../pool/deepwater-hypnotist.js";
 import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
 import _poolDemonWall from "../pool/demon-wall.js";
+import _poolDemonicCollusion from "../pool/demonic-collusion.js";
 import _poolDemonicPact from "../pool/demonic-pact.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDemonsDue from "../pool/demons-due.js";
@@ -891,6 +892,7 @@ const shard: CardShard = {
     _poolDeepwaterHypnotist,
     _poolDefiantGreatmaw,
     _poolDemonWall,
+    _poolDemonicCollusion,
     _poolDemonicPact,
     _poolDemonicTutor,
     _poolDemonsDue,

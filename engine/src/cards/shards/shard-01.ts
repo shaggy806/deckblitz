@@ -418,6 +418,7 @@ import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
+import _poolOutriderEnKor from "../pool/outrider-en-kor.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
@@ -606,6 +607,7 @@ import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
 import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
+import _poolThallidShellDweller from "../pool/thallid-shell-dweller.js";
 import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
@@ -1147,6 +1149,7 @@ const shard: CardShard = {
     _poolOphidian,
     _poolOrdruunVeteran,
     _poolOssuaryRats,
+    _poolOutriderEnKor,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,
@@ -1335,6 +1338,7 @@ const shard: CardShard = {
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
     _poolThaliaTheSurvivor,
+    _poolThallidShellDweller,
     _poolThassasRebuff,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,

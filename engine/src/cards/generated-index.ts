@@ -43,6 +43,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "2/2 Splitting Ooze Token",
   "2/2 White Knight Token",
   "2/3 Red Minotaur Token (Haste)",
+  "2/4 Black Spider Token (Reach)",
   "3/1 Dinosaur Token",
   "3/1 Red Elemental Token",
   "3/1 Red Elemental Token (Haste)",

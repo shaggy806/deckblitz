@@ -228,6 +228,7 @@ import _poolGallowsAtWillowHill from "../pool/gallows-at-willow-hill.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
 import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
+import _poolGhituFirebreathing from "../pool/ghitu-firebreathing.js";
 import _poolGhituWarCry from "../pool/ghitu-war-cry.js";
 import _poolGitaxianMindstinger from "../pool/gitaxian-mindstinger.js";
 import _poolGixsCaress from "../pool/gixs-caress.js";
@@ -985,6 +986,7 @@ const shard: CardShard = {
     _poolGatewayShade,
     _poolGempalmIncinerator,
     _poolGhaltaPrimalHunger,
+    _poolGhituFirebreathing,
     _poolGhituWarCry,
     _poolGitaxianMindstinger,
     _poolGixsCaress,
