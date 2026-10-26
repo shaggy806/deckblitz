@@ -111,15 +111,10 @@ section keeps only what to do next.
   — and banding leading with 4 each, an opponent choosing the mode with 3); batch 166 Mirage's
   first half (its 110 most-played left), no feature built (70 authored, 40 blocked, nothing
   shared by more than two); batch 169 the rest of Mirage, no feature built (67 authored, 43
-  blocked, its flash-and-sacrifice rider leading with 3). **Next, Visions** (113 left: one batch,
-  five agents), then Weatherlight (119) and Tempest (178). Visions's lead should first build
-  the Mirage block's **"cast as though it had flash; if cast when a sorcery couldn't have been,
-  sacrificed at the beginning of the next cleanup step"** (`effect:flash-cast-sacrifice`: ten cards
-  in the snapshot — Armor of Thorns, Grave Servitude, Soar, Ward of Lights, Lightning Reflexes,
-  Mystic Veil, Parapet, Relic Ward, Spider Climb, and Necromancy's part of it): the spell
-  remembers whether it was cast at sorcery timing, and the permanent it becomes gets a
-  next-cleanup delayed sacrifice (`effect:delayed-trigger-next-cleanup` is the same timing, also
-  unbuilt — Thawing Glaciers). This walk's range
+  blocked, its flash-and-sacrifice rider leading with 3). batch 172 Visions whole, on the Mirage block's flash-and-sacrifice (`flashThenSacrifice`) and
+  "at the beginning of the next cleanup step" (67 authored, 46 blocked, nothing shared by more than
+  two). **Next, Weatherlight** (119 left: one batch, five agents), then Tempest (178). Weatherlight's
+  own flash-and-sacrifice cards now scaffold whole; nothing researched for it yet. This walk's range
   ends at Shadowmoor/Eventide (the middle walk owns Shards of Alara on). Leads over the whole pool now:
   banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
   (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana

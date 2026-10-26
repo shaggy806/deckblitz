@@ -251,6 +251,7 @@ import _poolHealingSalve from "../pool/healing-salve.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
+import _poolHopeCharm from "../pool/hope-charm.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
@@ -921,6 +922,7 @@ const shard: CardShard = {
     _poolHellkiteCourser,
     _poolHellsCaretaker,
     _poolHiredClaw,
+    _poolHopeCharm,
     _poolHornetHarasser,
     _poolHowlsquadHeavy,
     _poolHuatlisFinalStrike,

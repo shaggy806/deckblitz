@@ -5390,3 +5390,10 @@ engine terms. A second thing to check is a second test.
 ### Snake of the Golden Grove: with two opponents, you choose who decides tribute
 - **Do:** Cast Snake of the Golden Grove. Choose Carol when asked.
 - **Expect:** Your banner reads "Snake of the Golden Grove — Tribute 3: choose an opponent", with Bob and Carol as buttons. Then Carol, not Bob, is asked whether to put 3 +1/+1 counters on it.
+
+## Flash, then sacrificed at cleanup (2026-10-26, Visions)
+
+### Spider Climb: cast at instant speed, it's sacrificed in the cleanup step
+- **Do:** Pass to your end step, then cast Spider Climb on your Grizzly Bears. Keep passing.
+- **Expect:** The Bears are 2/5 with reach for the rest of the turn. As the turn ends, "Sacrifice Spider Climb at the beginning of the next cleanup step." goes on the stack and resolves: Spider Climb is in your graveyard and the Bears are 2/2 when Bob's turn begins.
+- **Not a bug:** Cast in your main phase with nothing on the stack, Spider Climb stays.

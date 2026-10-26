@@ -8241,4 +8241,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Snake of the Golden Grove: with two opponents, you choose who decides tribute',
     board({ you: { bf: ['Forest*5'], hand: ['Snake of the Golden Grove'] }, opp: [{ human: true }, { human: true }] }),
   ),
+  preset(
+    "Spider Climb: cast at instant speed, it's sacrificed in the cleanup step",
+    board({ you: { bf: ['Forest', 'Grizzly Bears'], hand: ['Spider Climb'] } }),
+  ),
 ]

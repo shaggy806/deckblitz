@@ -309,6 +309,7 @@ import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
+import _poolLichenthrope from "../pool/lichenthrope.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
 import _poolLionSash from "../pool/lion-sash.js";
@@ -963,6 +964,7 @@ const shard: CardShard = {
     _poolLegacyWeapon,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
+    _poolLichenthrope,
     _poolLiesaShroudOfDusk,
     _poolLinvalaKeeperOfSilence,
     _poolLionSash,

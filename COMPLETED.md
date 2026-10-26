@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Visions, whole** (batch 172, the oldest-first walk, 2026-10-26): **built** the Mirage block's
+  "you may cast this spell as though it had flash … sacrifices it at the beginning of the next
+  cleanup step" (`flashThenSacrifice`, `effect:flash-cast-sacrifice`) and the cleanup step's
+  delayed triggers and priority window (`"next-cleanup"`, rule 514.3a —
+  `effect:delayed-trigger-next-cleanup`), with a scaffolder template. 67 of its last 113 authored
+  by five `card-author` agents and the lead — Nekrataal, Betrayal, Femeref Enchantress, Undo,
+  Bogardan Phoenix, Teferi's Realm, Spider Climb and 60 more (VIS 112 of 167) — plus Mirage's
+  Lightning Reflexes, Armor of Thorns, Grave Servitude and Soar and Alliances' Thawing Glaciers;
+  46 blocked.
 - **Mirage, the rest of the set** (batch 169, the oldest-first walk, 2026-10-26; its first half
   was batch 166): no feature built. 67 of its last 110 authored by five `card-author` agents and the
   lead — Catacomb Dragon, Reign of Terror, Kaervek's Hex, Tidal Wave, Reign of Chaos, Mist Dragon,

@@ -10552,6 +10552,74 @@
   "trigger:chosen-player-upkeep": {
    "family": "decision:choose-player",
    "example": "Energy Vortex: \"At the beginning of the chosen player's upkeep\""
+  },
+  "cost:additional-cost-sacrifice-all-and-discard-hand": {
+   "example": "Kaervek's Spite",
+   "family": "cost:additional-cost-sacrifice-amount"
+  },
+  "cost:unless-pay-mana-and-life": {
+   "example": "Mundungu"
+  },
+  "effect:cant-attack-and-untargetable-two-turns": {
+   "example": "Peace Talks",
+   "family": "effect:player-protection"
+  },
+  "effect:choose-permanents-of-target-player-count": {
+   "example": "Equipoise"
+  },
+  "effect:delayed-move-unplayed-exiled-to-graveyard": {
+   "example": "Three Wishes",
+   "family": "effect:delayed-trigger-extensions"
+  },
+  "effect:delayed-trigger-next-untap-step": {
+   "example": "Undiscovered Paradise",
+   "family": "effect:delayed-trigger-extensions"
+  },
+  "effect:force-mana-abilities-lose-unspent": {
+   "example": "Pygmy Hippo"
+  },
+  "effect:modify-pt-each-creature-blocking-source": {
+   "example": "Knight of Valor",
+   "family": "effect:target-creature-blocking-source"
+  },
+  "effect:phase-in": {
+   "example": "Time and Tide",
+   "family": "mechanic:phasing"
+  },
+  "effect:prevention-divided": {
+   "example": "Remedy"
+  },
+  "filter:mana-value-at-most-own-counters": {
+   "example": "Corrosion"
+  },
+  "filter:same-name-as-another-permanent": {
+   "example": "Eye of Singularity",
+   "family": "filter:same-name-as-card-in-graveyard"
+  },
+  "filter:same-name-as-trigger-object": {
+   "example": "Eye of Singularity",
+   "family": "filter:same-name-as-card-in-graveyard"
+  },
+  "static:lethal-damage-single-source": {
+   "example": "Ogre Enforcer",
+   "family": "static:lethal-damage-by-power"
+  },
+  "static:other-than-attached": {
+   "example": "Vampirism"
+  },
+  "static:prohibit-outside-own-turn": {
+   "example": "City of Solitude",
+   "family": "effect:prohibit-non-mana-abilities"
+  },
+  "static:prohibit-tap-cost-abilities": {
+   "example": "Katabatic Winds",
+   "family": "effect:prohibit-non-mana-abilities"
+  },
+  "static:reveal-first-draw-each-turn-any-turn": {
+   "example": "Rowen"
+  },
+  "trigger:all-non-wall-creatures-attack": {
+   "example": "Mob Mentality"
   }
  }
 }

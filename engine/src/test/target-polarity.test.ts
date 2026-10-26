@@ -94,6 +94,8 @@ describe("slot polarity", () => {
     expect(cast("Bestial Fury")).toEqual(["help"]);
     expect(cast("Gift of the Woods")).toEqual(["help"]);
     expect(cast("False Demise")).toEqual(["help"]);
+    // Its controller loses life when it dies: an Aura for someone else's.
+    expect(cast("Death Watch")).toEqual(["harm"]);
   });
 
   it("reads activated and triggered abilities", () => {

@@ -530,6 +530,7 @@ import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSpitefulReturned from "../pool/spiteful-returned.js";
 import _poolSpring from "../pool/spring.js";
+import _poolStampedingWildebeests from "../pool/stampeding-wildebeests.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
 import _poolSternProctor from "../pool/stern-proctor.js";
@@ -620,6 +621,7 @@ import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
+import _poolWaterspoutDjinn from "../pool/waterspout-djinn.js";
 import _poolWaterwindScout from "../pool/waterwind-scout.js";
 import _poolWaveOfVitriol from "../pool/wave-of-vitriol.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
@@ -1194,6 +1196,7 @@ const shard: CardShard = {
     _poolSpireMangler,
     _poolSpitefulReturned,
     _poolSpring,
+    _poolStampedingWildebeests,
     _poolSteelbaneHydra,
     _poolSternDismissal,
     _poolSternProctor,
@@ -1284,6 +1287,7 @@ const shard: CardShard = {
     _poolWanderingMind,
     _poolWarMammoth,
     _poolWasteland,
+    _poolWaterspoutDjinn,
     _poolWaterwindScout,
     _poolWaveOfVitriol,
     _poolWayOfThePyromancer,

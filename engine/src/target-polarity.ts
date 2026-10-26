@@ -734,6 +734,9 @@ function attachedTriggerLean(effect: EffectSpec | null): "help" | "harm" | null 
     const leans = effect.effects.map(attachedTriggerLean).filter((l) => l !== null);
     return leans.length > 0 && leans.every((l) => l === leans[0]) ? leans[0] : null;
   }
+  // The enchanted creature's controller pays for it — Death Watch's "when
+  // enchanted creature dies, its controller loses life equal to its power".
+  if (effect.kind === "lose-life" && (effect as { who?: unknown }).who === "trigger-controller") return "harm";
   if (!("target" in effect) || effect.target !== "trigger-object") return null;
   switch (effect.kind) {
     case "modify-pt": {

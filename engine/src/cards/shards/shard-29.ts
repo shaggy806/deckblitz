@@ -355,6 +355,7 @@ import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorbidCuriosity from "../pool/morbid-curiosity.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
 import _poolMorkrutBehemoth from "../pool/morkrut-behemoth.js";
+import _poolMortalWound from "../pool/mortal-wound.js";
 import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
@@ -1033,6 +1034,7 @@ const shard: CardShard = {
     _poolMorbidCuriosity,
     _poolMorgueTheft,
     _poolMorkrutBehemoth,
+    _poolMortalWound,
     _poolMountVelusManticore,
     _poolMoxRuby,
     _poolMulldrifter,

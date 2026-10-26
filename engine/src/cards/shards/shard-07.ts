@@ -217,6 +217,7 @@ import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGloomStalker from "../pool/gloom-stalker.js";
 import _poolGoblinGathering from "../pool/goblin-gathering.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
+import _poolGoblinSwineRider from "../pool/goblin-swine-rider.js";
 import _poolGodtrackerOfJund from "../pool/godtracker-of-jund.js";
 import _poolGoldMyr from "../pool/gold-myr.js";
 import _poolGoldhound from "../pool/goldhound.js";
@@ -907,6 +908,7 @@ const shard: CardShard = {
     _poolGloomStalker,
     _poolGoblinGathering,
     _poolGoblinShortcutter,
+    _poolGoblinSwineRider,
     _poolGodtrackerOfJund,
     _poolGoldMyr,
     _poolGoldhound,

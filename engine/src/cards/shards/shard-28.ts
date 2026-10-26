@@ -74,6 +74,7 @@ import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
 import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
+import _poolBogardanPhoenix from "../pool/bogardan-phoenix.js";
 import _poolBondOfPassion from "../pool/bond-of-passion.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
@@ -598,6 +599,7 @@ import _poolTrapEssence from "../pool/trap-essence.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTremor from "../pool/tremor.js";
+import _poolTriangleOfWar from "../pool/triangle-of-war.js";
 import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
 import _poolTributeToUrborg from "../pool/tribute-to-urborg.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
@@ -750,6 +752,7 @@ const shard: CardShard = {
     _poolBloodbraidChallenger,
     _poolBloodtitheCollector,
     _poolBoarQPine,
+    _poolBogardanPhoenix,
     _poolBondOfPassion,
     _poolBoommobile,
     _poolBountyOfMight,
@@ -1274,6 +1277,7 @@ const shard: CardShard = {
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTremor,
+    _poolTriangleOfWar,
     _poolTributeToHorobi,
     _poolTributeToUrborg,
     _poolTrynnChampionOfFreedom,

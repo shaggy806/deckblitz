@@ -1,0 +1,840 @@
+{
+ "batch": "B172",
+ "status": "complete",
+ "ranks": "Visions (VIS, 1997-02-03): whole set — its 113 cards left (oldest-first walk); with the flash-and-sacrifice feature's Mirage and Alliances cards",
+ "authored": [
+  {
+   "name": "Aku Djinn",
+   "files": [
+    "engine/src/cards/pool/aku-djinn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armor of Thorns",
+   "files": [
+    "engine/src/cards/pool/armor-of-thorns.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Betrayal",
+   "files": [
+    "engine/src/cards/pool/betrayal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blanket of Night",
+   "files": [
+    "engine/src/cards/pool/blanket-of-night.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bogardan Phoenix",
+   "files": [
+    "engine/src/cards/pool/bogardan-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brass-Talon Chimera",
+   "files": [
+    "engine/src/cards/pool/brass-talon-chimera.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Breezekeeper",
+   "files": [
+    "engine/src/cards/pool/breezekeeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brood of Cockroaches",
+   "files": [
+    "engine/src/cards/pool/brood-of-cockroaches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bull Elephant",
+   "files": [
+    "engine/src/cards/pool/bull-elephant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creeping Mold",
+   "files": [
+    "engine/src/cards/pool/creeping-mold.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dark Privilege",
+   "files": [
+    "engine/src/cards/pool/dark-privilege.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Death Watch",
+   "files": [
+    "engine/src/cards/pool/death-watch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diamond Kaleidoscope",
+   "files": [
+    "engine/src/cards/pool/diamond-kaleidoscope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dormant Volcano",
+   "files": [
+    "engine/src/cards/pool/dormant-volcano.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon Mask",
+   "files": [
+    "engine/src/cards/pool/dragon-mask.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Vigilantes",
+   "files": [
+    "engine/src/cards/pool/dwarven-vigilantes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elven Cache",
+   "files": [
+    "engine/src/cards/pool/elven-cache.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Everglades",
+   "files": [
+    "engine/src/cards/pool/everglades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Femeref Enchantress",
+   "files": [
+    "engine/src/cards/pool/femeref-enchantress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firestorm Hellkite",
+   "files": [
+    "engine/src/cards/pool/firestorm-hellkite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flooded Shoreline",
+   "files": [
+    "engine/src/cards/pool/flooded-shoreline.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Caterpillar",
+   "files": [
+    "engine/src/cards/pool/giant-caterpillar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Swine-Rider",
+   "files": [
+    "engine/src/cards/pool/goblin-swine-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Servitude",
+   "files": [
+    "engine/src/cards/pool/grave-servitude.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Griffin Canyon",
+   "files": [
+    "engine/src/cards/pool/griffin-canyon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hearth Charm",
+   "files": [
+    "engine/src/cards/pool/hearth-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hope Charm",
+   "files": [
+    "engine/src/cards/pool/hope-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron-Heart Chimera",
+   "files": [
+    "engine/src/cards/pool/iron-heart-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Juju Bubble",
+   "files": [
+    "engine/src/cards/pool/juju-bubble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of the Mists",
+   "files": [
+    "engine/src/cards/pool/knight-of-the-mists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kookus",
+   "files": [
+    "engine/src/cards/pool/kookus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lead-Belly Chimera",
+   "files": [
+    "engine/src/cards/pool/lead-belly-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lichenthrope",
+   "files": [
+    "engine/src/cards/pool/lichenthrope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Cloud",
+   "files": [
+    "engine/src/cards/pool/lightning-cloud.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lightning Reflexes",
+   "files": [
+    "engine/src/cards/pool/lightning-reflexes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Magma Mine",
+   "files": [
+    "engine/src/cards/pool/magma-mine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miraculous Recovery",
+   "files": [
+    "engine/src/cards/pool/miraculous-recovery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mortal Wound",
+   "files": [
+    "engine/src/cards/pool/mortal-wound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Veil",
+   "files": [
+    "engine/src/cards/pool/mystic-veil.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Necrosavant",
+   "files": [
+    "engine/src/cards/pool/necrosavant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nekrataal",
+   "files": [
+    "engine/src/cards/pool/nekrataal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ovinomancer",
+   "files": [
+    "engine/src/cards/pool/ovinomancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parapet",
+   "files": [
+    "engine/src/cards/pool/parapet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pillar Tombs of Aku",
+   "files": [
+    "engine/src/cards/pool/pillar-tombs-of-aku.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksand",
+   "files": [
+    "engine/src/cards/pool/quicksand.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quirion Druid",
+   "files": [
+    "engine/src/cards/pool/quirion-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raging Gorilla",
+   "files": [
+    "engine/src/cards/pool/raging-gorilla.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rainbow Efreet",
+   "files": [
+    "engine/src/cards/pool/rainbow-efreet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Relic Ward",
+   "files": [
+    "engine/src/cards/pool/relic-ward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Retribution of the Meek",
+   "files": [
+    "engine/src/cards/pool/retribution-of-the-meek.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Righteous Aura",
+   "files": [
+    "engine/src/cards/pool/righteous-aura.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Righteous War",
+   "files": [
+    "engine/src/cards/pool/righteous-war.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rock Slide",
+   "files": [
+    "engine/src/cards/pool/rock-slide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Simoon",
+   "files": [
+    "engine/src/cards/pool/simoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soar",
+   "files": [
+    "engine/src/cards/pool/soar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spider Climb",
+   "files": [
+    "engine/src/cards/pool/spider-climb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stampeding Wildebeests",
+   "files": [
+    "engine/src/cards/pool/stampeding-wildebeests.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suleiman's Legacy",
+   "files": [
+    "engine/src/cards/pool/suleimans-legacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun Clasp",
+   "files": [
+    "engine/src/cards/pool/sun-clasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suq'Ata Assassin",
+   "files": [
+    "engine/src/cards/pool/suqata-assassin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Talruum Champion",
+   "files": [
+    "engine/src/cards/pool/talruum-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tar Pit Warrior",
+   "files": [
+    "engine/src/cards/pool/tar-pit-warrior.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Teferi's Honor Guard",
+   "files": [
+    "engine/src/cards/pool/teferis-honor-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Teferi's Realm",
+   "files": [
+    "engine/src/cards/pool/teferis-realm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thawing Glaciers",
+   "files": [
+    "engine/src/cards/pool/thawing-glaciers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tin-Wing Chimera",
+   "files": [
+    "engine/src/cards/pool/tin-wing-chimera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triangle of War",
+   "files": [
+    "engine/src/cards/pool/triangle-of-war.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Undo",
+   "files": [
+    "engine/src/cards/pool/undo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urborg Mindsucker",
+   "files": [
+    "engine/src/cards/pool/urborg-mindsucker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vanishing",
+   "files": [
+    "engine/src/cards/pool/vanishing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterspout Djinn",
+   "files": [
+    "engine/src/cards/pool/waterspout-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wind Shear",
+   "files": [
+    "engine/src/cards/pool/wind-shear.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Undiscovered Paradise",
+   "needs": [
+    "effect:delayed-trigger-next-untap-step"
+   ],
+   "why": "'during your next untap step, as you untap, return it to its owner's hand' — no delayed trigger fires in an untap step"
+  },
+  {
+   "name": "Fireblast",
+   "needs": [
+    "cost:alt-cost-sacrifice"
+   ],
+   "why": "'sacrifice two Mountains rather than pay this spell's mana cost' — alternativeCost has no sacrifice"
+  },
+  {
+   "name": "Rowen",
+   "needs": [
+    "static:reveal-first-draw-each-turn-any-turn"
+   ],
+   "why": "reveals the first card drawn each turn, every turn; revealsFirstDrawEachTurn covers only your own turns"
+  },
+  {
+   "name": "Forbidden Ritual",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "'you may repeat this process any number of times'"
+  },
+  {
+   "name": "Eye of Singularity",
+   "needs": [
+    "filter:same-name-as-trigger-object",
+    "filter:same-name-as-another-permanent"
+   ],
+   "why": "destroy each permanent with the same name as another permanent; then each one entering with that name"
+  },
+  {
+   "name": "Heat Wave",
+   "needs": [
+    "static:block-tax"
+   ],
+   "why": "nonblue creatures can't block unless their controller pays 1 life per blocking creature"
+  },
+  {
+   "name": "Zhalfirin Crusader",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "the next 1 damage dealt to it is dealt to any target instead"
+  },
+  {
+   "name": "Tithe",
+   "needs": [
+    "condition:that-player-controls-more"
+   ],
+   "why": "'if target opponent controls more lands than you' — opponent-controls-more reads any opponent, not the target"
+  },
+  {
+   "name": "City of Solitude",
+   "needs": [
+    "static:prohibit-outside-own-turn"
+   ],
+   "why": "players can cast spells and activate abilities only during their own turns"
+  },
+  {
+   "name": "Vision Charm",
+   "needs": [
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "choose a land type and a basic land type; lands of the first become the second"
+  },
+  {
+   "name": "Chronatog",
+   "needs": [
+    "replacement:skip-turn"
+   ],
+   "why": "'you skip your next turn'"
+  },
+  {
+   "name": "Equipoise",
+   "needs": [
+    "effect:choose-permanents-of-target-player-count"
+   ],
+   "why": "phase out the lands, artifacts and creatures target player controls in excess of yours, chosen per type"
+  },
+  {
+   "name": "Honorable Passage",
+   "needs": [
+    "replacement:prevent-and-reflect-damage"
+   ],
+   "why": "prevent the next damage from a chosen source; if it's red, deal that much to its controller"
+  },
+  {
+   "name": "Pygmy Hippo",
+   "needs": [
+    "effect:force-mana-abilities-lose-unspent"
+   ],
+   "why": "the defending player activates their lands' mana abilities and loses the mana; Hippo's controller adds {C} for each mana lost this way"
+  },
+  {
+   "name": "Vampirism",
+   "needs": [
+    "static:other-than-attached"
+   ],
+   "why": "'each other creature you control' / 'other creatures you control' exclude the enchanted creature, not the Aura"
+  },
+  {
+   "name": "Shimmering Efreet",
+   "needs": [
+    "trigger:phases-in"
+   ],
+   "why": "'whenever this creature phases in, target creature phases out'"
+  },
+  {
+   "name": "Keeper of Kookus",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "'{R}: this creature gains protection from red until end of turn'"
+  },
+  {
+   "name": "Talruum Piper",
+   "needs": [
+    "static:must-be-blocked-by-filter"
+   ],
+   "why": "all creatures with flying able to block it do so"
+  },
+  {
+   "name": "Breathstealer's Crypt",
+   "needs": [
+    "replacement:draw-replacement-reveal"
+   ],
+   "why": "a draw becomes draw-and-reveal; a creature is discarded unless its owner pays 3 life"
+  },
+  {
+   "name": "Mundungu",
+   "needs": [
+    "cost:unless-pay-mana-and-life"
+   ],
+   "why": "'counter target spell unless its controller pays {1} and 1 life' — an unless option can't combine mana and life"
+  },
+  {
+   "name": "Time and Tide",
+   "needs": [
+    "effect:phase-in"
+   ],
+   "why": "simultaneously, all phased-out creatures phase in and all creatures with phasing phase out"
+  },
+  {
+   "name": "Resistance Fighter",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent all combat damage target creature would deal this turn"
+  },
+  {
+   "name": "Solfatara",
+   "needs": [
+    "effect:prohibit-land-plays"
+   ],
+   "why": "target player can't play lands this turn"
+  },
+  {
+   "name": "Infernal Harvest",
+   "needs": [
+    "cost:return-lands-cost"
+   ],
+   "why": "an additional cost of returning X Swamps that sets X"
+  },
+  {
+   "name": "Matopi Golem",
+   "needs": [
+    "trigger:when-regenerates-this-way"
+   ],
+   "why": "'when it regenerates this way, put a -1/-1 counter on it'"
+  },
+  {
+   "name": "Ogre Enforcer",
+   "needs": [
+    "static:lethal-damage-single-source"
+   ],
+   "why": "destroyed by lethal damage only if it all comes from one source"
+  },
+  {
+   "name": "Remedy",
+   "needs": [
+    "effect:prevention-divided"
+   ],
+   "why": "prevent the next 5 damage divided among any number of targets"
+  },
+  {
+   "name": "Sands of Time",
+   "needs": [
+    "static:skip-untap-step"
+   ],
+   "why": "each player skips their untap step; each player's tapped and untapped artifacts, creatures and lands swap at upkeep"
+  },
+  {
+   "name": "Gossamer Chains",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "prevent all combat damage that would be dealt by target unblocked creature this turn"
+  },
+  {
+   "name": "Kaervek's Spite",
+   "needs": [
+    "cost:additional-cost-sacrifice-all-and-discard-hand"
+   ],
+   "why": "an additional cost of sacrificing all permanents you control and discarding your hand"
+  },
+  {
+   "name": "Three Wishes",
+   "needs": [
+    "effect:exile-may-cast-until-your-next-turn",
+    "effect:delayed-move-unplayed-exiled-to-graveyard"
+   ],
+   "why": "play the exiled cards until your next turn; then the rest go to your graveyard at your next upkeep"
+  },
+  {
+   "name": "Peace Talks",
+   "needs": [
+    "effect:cant-attack-and-untargetable-two-turns"
+   ],
+   "why": "this turn and next, creatures can't attack and players and permanents can't be targeted"
+  },
+  {
+   "name": "Song of Blood",
+   "needs": [
+    "effect:delayed-count-done-this-way"
+   ],
+   "why": "whenever a creature attacks this turn, it gets +1/+0 for each creature card milled this way"
+  },
+  {
+   "name": "Knight of Valor",
+   "needs": [
+    "effect:modify-pt-each-creature-blocking-source"
+   ],
+   "why": "each creature blocking it gets -1/-1 until end of turn"
+  },
+  {
+   "name": "Foreshadow",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "choose a card name"
+  },
+  {
+   "name": "Elephant Grass",
+   "needs": [
+    "static:cant-attack-you-player-only",
+    "cost:attack-tax"
+   ],
+   "why": "black creatures can't attack you (but can attack your planeswalkers, the ruling); nonblack ones attack you only if their controller pays {2} each"
+  },
+  {
+   "name": "Desolation",
+   "needs": [
+    "effect:tapped-for-mana-condition"
+   ],
+   "why": "each player who tapped a land for mana this turn sacrifices a land; 2 damage to each who sacrificed a Plains this way"
+  },
+  {
+   "name": "Phyrexian Marauder",
+   "needs": [
+    "cost:attack-tax-per-counters"
+   ],
+   "why": "can't attack or block unless you pay {1} for each +1/+1 counter on it"
+  },
+  {
+   "name": "Dream Tides",
+   "needs": [
+    "decision:pay-per-chosen-untap"
+   ],
+   "why": "choose any number of tapped nongreen creatures and pay {2} for each to untap it"
+  },
+  {
+   "name": "Wand of Denial",
+   "needs": [
+    "effect:look-at-top-of-target-players-library"
+   ],
+   "why": "look at the top card of target player's library; if it's nonland, you may pay 2 life to put it into their graveyard"
+  },
+  {
+   "name": "Elkin Lair",
+   "needs": [
+    "effect:random-card-from-hand",
+    "zone:exile-discarded-play-this-turn"
+   ],
+   "why": "exile a card at random from your hand; you may play it this turn; at the end step, if you didn't, put it into your graveyard"
+  },
+  {
+   "name": "Mob Mentality",
+   "needs": [
+    "trigger:all-non-wall-creatures-attack"
+   ],
+   "why": "'whenever all non-Wall creatures you control attack'"
+  },
+  {
+   "name": "Katabatic Winds",
+   "needs": [
+    "static:prohibit-tap-cost-abilities"
+   ],
+   "why": "creatures with flying can't attack or block, and their activated abilities with {T} in the cost can't be activated"
+  },
+  {
+   "name": "Corrosion",
+   "needs": [
+    "effect:remove-counters-all",
+    "filter:mana-value-at-most-own-counters"
+   ],
+   "why": "destroy each artifact with mana value at most its rust counters; remove all rust counters as it leaves"
+  },
+  {
+   "name": "Guiding Spirit",
+   "needs": [
+    "effect:top-card-of-graveyard"
+   ],
+   "why": "'if the target player's graveyard's top card is a creature card, put it on top of their library'"
+  },
+  {
+   "name": "Kyscu Drake",
+   "needs": [
+    "cost:sacrifice-self-and-another"
+   ],
+   "why": "'sacrifice this creature and a creature named Spitting Drake' as one cost"
+  }
+ ]
+}

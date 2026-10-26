@@ -284,6 +284,7 @@ import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
 import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
 import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
+import _poolIronHeartChimera from "../pool/iron-heart-chimera.js";
 import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
 import _poolIronMyr from "../pool/iron-myr.js";
 import _poolIronscaleHydra from "../pool/ironscale-hydra.js";
@@ -916,6 +917,7 @@ const shard: CardShard = {
     _poolInvasionOfMuraganda,
     _poolInventiveWingsmith,
     _poolIrenicussVileDuplication,
+    _poolIronHeartChimera,
     _poolIronHillsBlacksmith,
     _poolIronMyr,
     _poolIronscaleHydra,
