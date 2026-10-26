@@ -441,11 +441,14 @@ export default {
       "Soldier for each.",
     players: ["alice", "bob"],
     lands: { alice: 10, bob: 5 },
-    battlefield: { alice: ["Trostani, Selesnya's Voice", "Sol Ring", "Grizzly Bears"] },
+    battlefield: { alice: ["Sol Ring", "Grizzly Bears"] },
     hand: { alice: ["Abdel Adrian, Gorion's Ward"] },
     setup(game) {
+      // The tokens first, then Trostani: made after it, each would trigger its
+      // life gain, and the two triggers left on the stack keep Abdel uncastable.
       game.debugApplyEffect("alice", { kind: "create-token", token: "Elephant Token", count: 1 });
       game.debugApplyEffect("alice", { kind: "create-token", token: "Soldier Token", count: 1 });
+      game.debugSpawn("Trostani, Selesnya's Voice", "alice", "battlefield", { summoningSick: false });
     },
     bots: { bob: {} },
   },
@@ -483,11 +486,14 @@ export default {
       "and Abdel Adrian's exile of any number of other nonland permanents.",
     players: ["alice", "bob", "carol", "dave"],
     lands: { alice: 10, bob: 5, carol: 5, dave: 5 },
-    battlefield: { alice: ["Trostani, Selesnya's Voice", "Sol Ring", "Grizzly Bears"] },
+    battlefield: { alice: ["Sol Ring", "Grizzly Bears"] },
     hand: { alice: ["Abdel Adrian, Gorion's Ward"] },
     setup(game) {
+      // The tokens first, then Trostani: made after it, each would trigger its
+      // life gain, and the two triggers left on the stack keep Abdel uncastable.
       game.debugApplyEffect("alice", { kind: "create-token", token: "Elephant Token", count: 1 });
       game.debugApplyEffect("alice", { kind: "create-token", token: "Soldier Token", count: 1 });
+      game.debugSpawn("Trostani, Selesnya's Voice", "alice", "battlefield", { summoningSick: false });
     },
     bots: { bob: {}, carol: {}, dave: {} },
   },

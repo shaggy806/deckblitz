@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     # dev-rooms' rooms on the main thread (0) and on a worker thread (1), as
     # the server's --shards runs them (docs/plans/room-shards.md).
