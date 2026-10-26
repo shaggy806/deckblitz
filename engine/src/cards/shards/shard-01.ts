@@ -338,6 +338,7 @@ import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
 import _poolLittleBear from "../pool/little-bear.js";
+import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
@@ -1054,6 +1055,7 @@ const shard: CardShard = {
     _poolLimestoneGolem,
     _poolLindenTheSteadfastQueen,
     _poolLittleBear,
+    _poolLoamDweller,
     _poolLockAndLoad,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,

@@ -154,6 +154,7 @@ import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
+import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
@@ -263,6 +264,7 @@ import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGerrardsWisdom from "../pool/gerrards-wisdom.js";
 import _poolGeyserDrake from "../pool/geyser-drake.js";
+import _poolGhostLitRaider from "../pool/ghost-lit-raider.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantOpportunity from "../pool/giant-opportunity.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
@@ -541,6 +543,7 @@ import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
+import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
 import _poolRovingActuator from "../pool/roving-actuator.js";
 import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
@@ -920,6 +923,7 @@ const shard: CardShard = {
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
     _poolDawngladeRegent,
+    _poolDeathknellKami,
     _poolDecanterOfEndlessWater,
     _poolDeepForestHermit,
     _poolDelversTorch,
@@ -1029,6 +1033,7 @@ const shard: CardShard = {
     _poolGenesisUltimatum,
     _poolGerrardsWisdom,
     _poolGeyserDrake,
+    _poolGhostLitRaider,
     _poolGiantFly,
     _poolGiantOpportunity,
     _poolGiantSpider,
@@ -1307,6 +1312,7 @@ const shard: CardShard = {
     _poolRoaringEarth,
     _poolRoaringPrimadox,
     _poolRoguesPassage,
+    _poolRoninCliffrider,
     _poolRootwaterAlligator,
     _poolRovingActuator,
     _poolRowanScionOfWar,

@@ -356,6 +356,7 @@ import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
+import _poolMarkOfTheOni from "../pool/mark-of-the-oni.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
@@ -426,6 +427,7 @@ import _poolOust from "../pool/oust.js";
 import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolOversoulOfDusk from "../pool/oversoul-of-dusk.js";
+import _poolOyobiWhoSplitTheHeavens from "../pool/oyobi-who-split-the-heavens.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
@@ -519,6 +521,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
+import _poolScrollOfOrigins from "../pool/scroll-of-origins.js";
 import _poolScryingSheets from "../pool/scrying-sheets.js";
 import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
@@ -613,6 +616,7 @@ import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
 import _poolTemperedVeteran from "../pool/tempered-veteran.js";
+import _poolTerashisGrasp from "../pool/terashis-grasp.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
 import _poolTergridsShadow from "../pool/tergrids-shadow.js";
 import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
@@ -1101,6 +1105,7 @@ const shard: CardShard = {
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,
     _poolMarhaultElsdragon,
+    _poolMarkOfTheOni,
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,
     _poolMassManipulation,
@@ -1171,6 +1176,7 @@ const shard: CardShard = {
     _poolOutcasterGreenblade,
     _poolOvergrownEstate,
     _poolOversoulOfDusk,
+    _poolOyobiWhoSplitTheHeavens,
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolParagonOfEternalWilds,
@@ -1264,6 +1270,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScornEffigy,
     _poolScreechingHarpy,
+    _poolScrollOfOrigins,
     _poolScryingSheets,
     _poolSeafloorStalker,
     _poolSealOfStrength,
@@ -1358,6 +1365,7 @@ const shard: CardShard = {
     _poolTelJiladExile,
     _poolTemmetVizierOfNaktamun,
     _poolTemperedVeteran,
+    _poolTerashisGrasp,
     _poolTergridsLantern,
     _poolTergridsShadow,
     _poolTerrorOfMountVelus,

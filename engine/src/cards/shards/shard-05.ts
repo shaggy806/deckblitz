@@ -356,6 +356,7 @@ import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
+import _poolIsaoEnlightenedBushi from "../pool/isao-enlightened-bushi.js";
 import _poolIsolationCell from "../pool/isolation-cell.js";
 import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
@@ -409,6 +410,7 @@ import _poolManalith from "../pool/manalith.js";
 import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
 import _poolMarduMonument from "../pool/mardu-monument.js";
+import _poolMarkOfSakiko from "../pool/mark-of-sakiko.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
 import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
@@ -1088,6 +1090,7 @@ const shard: CardShard = {
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
+    _poolIsaoEnlightenedBushi,
     _poolIsolationCell,
     _poolIzzetChemister,
     _poolJacesSanctum,
@@ -1141,6 +1144,7 @@ const shard: CardShard = {
     _poolMaraudingSphinx,
     _poolMarbleChalice,
     _poolMarduMonument,
+    _poolMarkOfSakiko,
     _poolMarkovBlademaster,
     _poolMarshalOfTheLost,
     _poolMartyrForTheCause,

@@ -253,6 +253,7 @@ import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGeistTrappers from "../pool/geist-trappers.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
+import _poolGenjuOfTheSpires from "../pool/genju-of-the-spires.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGethsVerdict from "../pool/geths-verdict.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
@@ -448,6 +449,7 @@ import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPowerWordKill from "../pool/power-word-kill.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
+import _poolPresenceOfTheWise from "../pool/presence-of-the-wise.js";
 import _poolPriceOfFame from "../pool/price-of-fame.js";
 import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
@@ -983,6 +985,7 @@ const shard: CardShard = {
     _poolGeistTrappers,
     _poolGenerousEnt,
     _poolGenerousPup,
+    _poolGenjuOfTheSpires,
     _poolGeometersArthropod,
     _poolGethsVerdict,
     _poolGhaltaTheUnstoppable,
@@ -1178,6 +1181,7 @@ const shard: CardShard = {
     _poolPollywogProdigy,
     _poolPowerWordKill,
     _poolPracticedOffense,
+    _poolPresenceOfTheWise,
     _poolPriceOfFame,
     _poolPriestOfTheBloodRite,
     _poolPrimalFrenzy,

@@ -556,6 +556,7 @@ import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
+import _poolSosukesSummons from "../pool/sosukes-summons.js";
 import _poolSoulShepherd from "../pool/soul-shepherd.js";
 import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
+    _poolSosukesSummons,
     _poolSoulShepherd,
     _poolSoulStrikeTechnique,
     _poolSoulstoneSanctuary,

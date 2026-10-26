@@ -187,6 +187,7 @@ import _poolEarthshakingSi from "../pool/earthshaking-si.js";
 import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
 import _poolEelUmbra from "../pool/eel-umbra.js";
 import _poolEffortlessMaster from "../pool/effortless-master.js";
+import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
@@ -270,6 +271,7 @@ import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoblinCaves from "../pool/goblin-caves.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
+import _poolGodsEyeGateToTheReikai from "../pool/gods-eye-gate-to-the-reikai.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoliathTruck from "../pool/goliath-truck.js";
 import _poolGoneFishing from "../pool/gone-fishing.js";
@@ -915,6 +917,7 @@ const shard: CardShard = {
     _poolEdeaPossessedSorceress,
     _poolEelUmbra,
     _poolEffortlessMaster,
+    _poolEiganjoFreeRiders,
     _poolEladamrisCall,
     _poolElectrify,
     _poolElvishGuidance,
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolGoShintaiOfSharedPurpose,
     _poolGoblinCaves,
     _poolGoblinCommando,
+    _poolGodsEyeGateToTheReikai,
     _poolGoldForgedThopteryx,
     _poolGoliathTruck,
     _poolGoneFishing,

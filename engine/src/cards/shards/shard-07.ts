@@ -15,6 +15,7 @@ import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
 import _poolAinokSurvivalist from "../pool/ainok-survivalist.js";
 import _poolAjanisMantra from "../pool/ajanis-mantra.js";
+import _poolAkkiUnderling from "../pool/akki-underling.js";
 import _poolAkronLegionnaire from "../pool/akron-legionnaire.js";
 import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js";
 import _poolAlterFate from "../pool/alter-fate.js";
@@ -632,6 +633,7 @@ import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
 import _poolThallidDevourer from "../pool/thallid-devourer.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
+import _poolThatWhichWasTaken from "../pool/that-which-was-taken.js";
 import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
@@ -782,6 +784,7 @@ const shard: CardShard = {
     _poolAgonasaurRex,
     _poolAinokSurvivalist,
     _poolAjanisMantra,
+    _poolAkkiUnderling,
     _poolAkronLegionnaire,
     _poolAlpharaelDreamingAcolyte,
     _poolAlterFate,
@@ -1399,6 +1402,7 @@ const shard: CardShard = {
     _poolThaliasGeistcaller,
     _poolThallidDevourer,
     _poolThassasOracle,
+    _poolThatWhichWasTaken,
     _poolThawingGlaciers,
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,

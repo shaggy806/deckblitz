@@ -431,6 +431,7 @@ import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPitilessVizier from "../pool/pitiless-vizier.js";
+import _poolPlowThroughReito from "../pool/plow-through-reito.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
@@ -478,6 +479,7 @@ import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
+import _poolRibbonsOfTheReikai from "../pool/ribbons-of-the-reikai.js";
 import _poolRibskiff from "../pool/ribskiff.js";
 import _poolRimescaleDragon from "../pool/rimescale-dragon.js";
 import _poolRimewindCryomancer from "../pool/rimewind-cryomancer.js";
@@ -1159,6 +1161,7 @@ const shard: CardShard = {
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
     _poolPitilessVizier,
+    _poolPlowThroughReito,
     _poolPoisedPractitioner,
     _poolPreordain,
     _poolPreyUpon,
@@ -1206,6 +1209,7 @@ const shard: CardShard = {
     _poolRetaliatorGriffin,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
+    _poolRibbonsOfTheReikai,
     _poolRibskiff,
     _poolRimescaleDragon,
     _poolRimewindCryomancer,

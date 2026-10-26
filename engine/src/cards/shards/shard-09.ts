@@ -525,6 +525,7 @@ import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
+import _poolSakuraTribeSpringcaller from "../pool/sakura-tribe-springcaller.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
 import _poolSanctumSpirit from "../pool/sanctum-spirit.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
@@ -1279,6 +1280,7 @@ const shard: CardShard = {
     _poolSaberclawGolem,
     _poolSacredPeaks,
     _poolSakashimaTheImpostor,
+    _poolSakuraTribeSpringcaller,
     _poolSamutHazoretsChampion,
     _poolSanctumSpirit,
     _poolSandstalkerMoloch,

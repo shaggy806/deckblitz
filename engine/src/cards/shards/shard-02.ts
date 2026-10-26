@@ -329,6 +329,7 @@ import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
 import _poolKalitasBloodchiefOfGhet from "../pool/kalitas-bloodchief-of-ghet.js";
+import _poolKamiOfTheTendedGarden from "../pool/kami-of-the-tended-garden.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
 import _poolKarfellKennelMaster from "../pool/karfell-kennel-master.js";
 import _poolKateStewart from "../pool/kate-stewart.js";
@@ -631,6 +632,7 @@ import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
 import _poolTidespoutTyrant from "../pool/tidespout-tyrant.js";
 import _poolTimeLordRegeneration from "../pool/time-lord-regeneration.js";
+import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
@@ -647,6 +649,7 @@ import _poolTwinBolt from "../pool/twin-bolt.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
+import _poolUncheckedGrowth from "../pool/unchecked-growth.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
@@ -1042,6 +1045,7 @@ const shard: CardShard = {
     _poolKaaliaOfTheVast,
     _poolKaimaTheFracturedCalm,
     _poolKalitasBloodchiefOfGhet,
+    _poolKamiOfTheTendedGarden,
     _poolKaraiFutureOfTheFoot,
     _poolKarfellKennelMaster,
     _poolKateStewart,
@@ -1344,6 +1348,7 @@ const shard: CardShard = {
     _poolThrummingHivepool,
     _poolTidespoutTyrant,
     _poolTimeLordRegeneration,
+    _poolToilsOfNightAndDay,
     _poolTomikWielderOfLaw,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
@@ -1360,6 +1365,7 @@ const shard: CardShard = {
     _poolTyLeeArtfulAcrobat,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
+    _poolUncheckedGrowth,
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
     _poolUnscrupulousContractor,

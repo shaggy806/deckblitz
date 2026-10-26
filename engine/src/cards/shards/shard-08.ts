@@ -500,6 +500,7 @@ import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
+import _poolRavingOniSlave from "../pool/raving-oni-slave.js";
 import _poolReachOfShadows from "../pool/reach-of-shadows.js";
 import _poolRealityAnchor from "../pool/reality-anchor.js";
 import _poolRealitySmasher from "../pool/reality-smasher.js";
@@ -577,6 +578,7 @@ import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilentSkimmer from "../pool/silent-skimmer.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
+import _poolSinkIntoTakenuma from "../pool/sink-into-takenuma.js";
 import _poolSinuousBenthisaur from "../pool/sinuous-benthisaur.js";
 import _poolSkatewingSpy from "../pool/skatewing-spy.js";
 import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
@@ -1268,6 +1270,7 @@ const shard: CardShard = {
     _poolRangingRaptors,
     _poolRaphaelTheMuscle,
     _poolRaucousTheater,
+    _poolRavingOniSlave,
     _poolReachOfShadows,
     _poolRealityAnchor,
     _poolRealitySmasher,
@@ -1345,6 +1348,7 @@ const shard: CardShard = {
     _poolSilentSkimmer,
     _poolSilkenfistFighter,
     _poolSilverMyr,
+    _poolSinkIntoTakenuma,
     _poolSinuousBenthisaur,
     _poolSkatewingSpy,
     _poolSkilledBattlecarver,

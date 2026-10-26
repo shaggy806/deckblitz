@@ -141,6 +141,7 @@ import _poolCultOfTheWaxingMoon from "../pool/cult-of-the-waxing-moon.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
+import _poolCutTheEarthlyBond from "../pool/cut-the-earthly-bond.js";
 import _poolCybermat from "../pool/cybermat.js";
 import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
@@ -546,6 +547,7 @@ import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
 import _poolSnowDevil from "../pool/snow-devil.js";
 import _poolSocialSnub from "../pool/social-snub.js";
+import _poolSokenzanSpellblade from "../pool/sokenzan-spellblade.js";
 import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSolitude from "../pool/solitude.js";
 import _poolSomberwaldSpider from "../pool/somberwald-spider.js";
@@ -643,6 +645,7 @@ import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranspose from "../pool/transpose.js";
+import _poolTraprootKami from "../pool/traproot-kami.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
 import _poolTritonFortuneHunter from "../pool/triton-fortune-hunter.js";
@@ -881,6 +884,7 @@ const shard: CardShard = {
     _poolCunningCoyote,
     _poolCursedMinotaur,
     _poolCursedRecording,
+    _poolCutTheEarthlyBond,
     _poolCybermat,
     _poolCyclopsElectromancer,
     _poolDanithaBenaliasHope,
@@ -1286,6 +1290,7 @@ const shard: CardShard = {
     _poolSnappingDrake,
     _poolSnowDevil,
     _poolSocialSnub,
+    _poolSokenzanSpellblade,
     _poolSoldierMilitaryProgram,
     _poolSolitude,
     _poolSomberwaldSpider,
@@ -1383,6 +1388,7 @@ const shard: CardShard = {
     _poolTrackDown,
     _poolTraitorsRoar,
     _poolTranspose,
+    _poolTraprootKami,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,
     _poolTritonFortuneHunter,

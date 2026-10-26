@@ -341,6 +341,7 @@ import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
+import _poolLifespinner from "../pool/lifespinner.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
@@ -593,6 +594,7 @@ import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
+import _poolSoratamiMindsweeper from "../pool/soratami-mindsweeper.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
@@ -1100,6 +1102,7 @@ const shard: CardShard = {
     _poolLeoninBattlemage,
     _poolLeoninElder,
     _poolLevitatingStatue,
+    _poolLifespinner,
     _poolLightningCloud,
     _poolLivingWall,
     _poolLlanowarKnight,
@@ -1352,6 +1355,7 @@ const shard: CardShard = {
     _poolSolTalisman,
     _poolSoldeviSteamBeast,
     _poolSolitaryCamel,
+    _poolSoratamiMindsweeper,
     _poolSoulsFire,
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,

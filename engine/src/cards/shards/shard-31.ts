@@ -674,6 +674,7 @@ import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
 import _poolThoughtReflection from "../pool/thought-reflection.js";
 import _poolThrabenStandardBearer from "../pool/thraben-standard-bearer.js";
 import _poolThranSpider from "../pool/thran-spider.js";
+import _poolThreadsOfDisloyalty from "../pool/threads-of-disloyalty.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
@@ -1458,6 +1459,7 @@ const shard: CardShard = {
     _poolThoughtReflection,
     _poolThrabenStandardBearer,
     _poolThranSpider,
+    _poolThreadsOfDisloyalty,
     _poolThunderingChariot,
     _poolThunderkinAwakener,
     _poolTidecallerMentor,

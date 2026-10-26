@@ -151,6 +151,7 @@ import _poolDauthiMarauder from "../pool/dauthi-marauder.js";
 import _poolDeadWeight from "../pool/dead-weight.js";
 import _poolDeathCultist from "../pool/death-cultist.js";
 import _poolDeathlessAngel from "../pool/deathless-angel.js";
+import _poolDeathmaskNezumi from "../pool/deathmask-nezumi.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
@@ -629,6 +630,7 @@ import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
 import _poolTopiaryStomper from "../pool/topiary-stomper.js";
 import _poolTorchGauntlet from "../pool/torch-gauntlet.js";
 import _poolTorchTheWitness from "../pool/torch-the-witness.js";
+import _poolToshiroUmezawa from "../pool/toshiro-umezawa.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
@@ -870,6 +872,7 @@ const shard: CardShard = {
     _poolDeadWeight,
     _poolDeathCultist,
     _poolDeathlessAngel,
+    _poolDeathmaskNezumi,
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
@@ -1348,6 +1351,7 @@ const shard: CardShard = {
     _poolTopiaryStomper,
     _poolTorchGauntlet,
     _poolTorchTheWitness,
+    _poolToshiroUmezawa,
     _poolTrailOfEvidence,
     _poolTranquilDomain,
     _poolTreadUpon,

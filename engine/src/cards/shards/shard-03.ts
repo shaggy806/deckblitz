@@ -534,6 +534,7 @@ import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSteelyResolve from "../pool/steely-resolve.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
 import _poolStinkdrinkerDaredevil from "../pool/stinkdrinker-daredevil.js";
+import _poolStirTheGrave from "../pool/stir-the-grave.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
 import _poolStrandwalker from "../pool/strandwalker.js";
@@ -1198,6 +1199,7 @@ const shard: CardShard = {
     _poolSteelyResolve,
     _poolSterlingHound,
     _poolStinkdrinkerDaredevil,
+    _poolStirTheGrave,
     _poolStoneKavu,
     _poolStoneSeederHierophant,
     _poolStrandwalker,

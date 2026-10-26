@@ -443,6 +443,7 @@ import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
+import _poolPetalmaneBaku from "../pool/petalmane-baku.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
 import _poolPhantasmalMount from "../pool/phantasmal-mount.js";
 import _poolPheresBandBrawler from "../pool/pheres-band-brawler.js";
@@ -488,6 +489,7 @@ import _poolRiddleform from "../pool/riddleform.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
+import _poolRoninWarclub from "../pool/ronin-warclub.js";
 import _poolRoostOfDrakes from "../pool/roost-of-drakes.js";
 import _poolRoothaMercurialArtist from "../pool/rootha-mercurial-artist.js";
 import _poolRowdyCrew from "../pool/rowdy-crew.js";
@@ -686,6 +688,7 @@ import _poolXenograft from "../pool/xenograft.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
+import _poolYukoraThePrisoner from "../pool/yukora-the-prisoner.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
@@ -1152,6 +1155,7 @@ const shard: CardShard = {
     _poolPatientNaturalist,
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
+    _poolPetalmaneBaku,
     _poolPhantasmalImage,
     _poolPhantasmalMount,
     _poolPheresBandBrawler,
@@ -1197,6 +1201,7 @@ const shard: CardShard = {
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
+    _poolRoninWarclub,
     _poolRoostOfDrakes,
     _poolRoothaMercurialArtist,
     _poolRowdyCrew,
@@ -1395,6 +1400,7 @@ const shard: CardShard = {
     _poolYavimayaIconoclast,
     _poolYouComeToTheGnollCamp,
     _poolYuanTiFangBlade,
+    _poolYukoraThePrisoner,
     _poolZaffaiThunderConductor,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,

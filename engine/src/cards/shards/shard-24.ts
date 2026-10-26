@@ -69,6 +69,7 @@ import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
+import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlur from "../pool/blur.js";
@@ -814,6 +815,7 @@ const shard: CardShard = {
     _poolBlackPoplarShaman,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
+    _poolBlessingOfLeeches,
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
     _poolBlur,
