@@ -94,6 +94,8 @@ describe("slot polarity", () => {
     expect(cast("Bestial Fury")).toEqual(["help"]);
     expect(cast("Gift of the Woods")).toEqual(["help"]);
     expect(cast("False Demise")).toEqual(["help"]);
+    expect(cast("Yoke of the Damned")).toEqual(["harm"]);
+    expect(cast("Corrupted Roots")).toEqual(["harm"]);
   });
 
   it("reads activated and triggered abilities", () => {
