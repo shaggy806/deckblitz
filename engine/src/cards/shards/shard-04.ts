@@ -316,6 +316,7 @@ import _poolKozileksChanneler from "../pool/kozileks-channeler.js";
 import _poolKruphixsInsight from "../pool/kruphixs-insight.js";
 import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
+import _poolLabRats from "../pool/lab-rats.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
 import _poolLandCap from "../pool/land-cap.js";
@@ -993,6 +994,7 @@ const shard: CardShard = {
     _poolKruphixsInsight,
     _poolKudoKingAmongBears,
     _poolKuldothaCackler,
+    _poolLabRats,
     _poolLampadOfDeathsVigil,
     _poolLance,
     _poolLandCap,

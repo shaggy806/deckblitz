@@ -349,6 +349,7 @@ import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
+import _poolMindwarper from "../pool/mindwarper.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
@@ -513,6 +514,7 @@ import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
+import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpoilsOfBlood from "../pool/spoils-of-blood.js";
@@ -1032,6 +1034,7 @@ const shard: CardShard = {
     _poolMillennialGargoyle,
     _poolMindRot,
     _poolMindcrank,
+    _poolMindwarper,
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
@@ -1196,6 +1199,7 @@ const shard: CardShard = {
     _poolSorinsVengeance,
     _poolSoulTithe,
     _poolSphinxOfMagosi,
+    _poolSpikeFeeder,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
     _poolSpoilsOfBlood,

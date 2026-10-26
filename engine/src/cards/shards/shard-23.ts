@@ -549,6 +549,7 @@ import _poolSoundTheTrumpets from "../pool/sound-the-trumpets.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
+import _poolSpikeSoldier from "../pool/spike-soldier.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
 import _poolSplitDecision from "../pool/split-decision.js";
 import _poolSplittingSlime from "../pool/splitting-slime.js";
@@ -1245,6 +1246,7 @@ const shard: CardShard = {
     _poolSpawningBed,
     _poolSpecimenFreighter,
     _poolSpiderwigBoggart,
+    _poolSpikeSoldier,
     _poolSpiritShackle,
     _poolSplitDecision,
     _poolSplittingSlime,

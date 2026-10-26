@@ -2492,6 +2492,7 @@ import _poolBruceBanner from "./pool/bruce-banner.js";
 import _poolBrudicladTelchorEngineer from "./pool/brudiclad-telchor-engineer.js";
 import _poolBruseTarlBoorishHerder from "./pool/bruse-tarl-boorish-herder.js";
 import _poolBruseTarlRovingRancher from "./pool/bruse-tarl-roving-rancher.js";
+import _poolBrushWithDeath from "./pool/brush-with-death.js";
 import _poolBrushfireElemental from "./pool/brushfire-elemental.js";
 import _poolBrushland from "./pool/brushland.js";
 import _poolBrushstrider from "./pool/brushstrider.js";
@@ -6182,6 +6183,7 @@ import _poolFangkeepersFamiliar from "./pool/fangkeepers-familiar.js";
 import _poolFangornTreeShepherd from "./pool/fangorn-tree-shepherd.js";
 import _poolFangrenHunter from "./pool/fangren-hunter.js";
 import _poolFangrenMarauder from "./pool/fangren-marauder.js";
+import _poolFanningTheFlames from "./pool/fanning-the-flames.js";
 import _poolFantasticBounce from "./pool/fantastic-bounce.js";
 import _poolFantasticElasticity from "./pool/fantastic-elasticity.js";
 import _poolFarAway from "./pool/far-away.js";
@@ -6696,6 +6698,7 @@ import _poolFlowerFlourish from "./pool/flower-flourish.js";
 import _poolFlower from "./pool/flower.js";
 import _poolFlowerfootSwordmaster from "./pool/flowerfoot-swordmaster.js";
 import _poolFloweringOfTheWhiteTree from "./pool/flowering-of-the-white-tree.js";
+import _poolFlowstoneBlade from "./pool/flowstone-blade.js";
 import _poolFlowstoneCharger from "./pool/flowstone-charger.js";
 import _poolFlowstoneCrusher from "./pool/flowstone-crusher.js";
 import _poolFlowstoneGiant from "./pool/flowstone-giant.js";
@@ -10352,6 +10355,7 @@ import _poolKyrenGlider from "./pool/kyren-glider.js";
 import _poolKyrenNegotiations from "./pool/kyren-negotiations.js";
 import _poolKytheonsIrregulars from "./pool/kytheons-irregulars.js";
 import _poolKytheonsTactics from "./pool/kytheons-tactics.js";
+import _poolLabRats from "./pool/lab-rats.js";
 import _poolLaboratoryBrute from "./pool/laboratory-brute.js";
 import _poolLaboratoryDrudge from "./pool/laboratory-drudge.js";
 import _poolLaboratoryManiac from "./pool/laboratory-maniac.js";
@@ -11671,6 +11675,7 @@ import _poolMindHarness from "./pool/mind-harness.js";
 import _poolMindIntoMatter from "./pool/mind-into-matter.js";
 import _poolMindMeanderer from "./pool/mind-meanderer.js";
 import _poolMindOverMatter from "./pool/mind-over-matter.js";
+import _poolMindPeel from "./pool/mind-peel.js";
 import _poolMindRake from "./pool/mind-rake.js";
 import _poolMindRavel from "./pool/mind-ravel.js";
 import _poolMindRoots from "./pool/mind-roots.js";
@@ -11705,6 +11710,7 @@ import _poolMindstabThrull from "./pool/mindstab-thrull.js";
 import _poolMindstab from "./pool/mindstab.js";
 import _poolMindstatic from "./pool/mindstatic.js";
 import _poolMindswipe from "./pool/mindswipe.js";
+import _poolMindwarper from "./pool/mindwarper.js";
 import _poolMindwhipSliver from "./pool/mindwhip-sliver.js";
 import _poolMindwhisker from "./pool/mindwhisker.js";
 import _poolMindwrackDemon from "./pool/mindwrack-demon.js";
@@ -15955,6 +15961,7 @@ import _poolSeekersSquire from "./pool/seekers-squire.js";
 import _poolSeerOfTheLastTomorrow from "./pool/seer-of-the-last-tomorrow.js";
 import _poolSeersLantern from "./pool/seers-lantern.js";
 import _poolSeersSundial from "./pool/seers-sundial.js";
+import _poolSeethingAnger from "./pool/seething-anger.js";
 import _poolSeethingLandscape from "./pool/seething-landscape.js";
 import _poolSeethingPathblazer from "./pool/seething-pathblazer.js";
 import _poolSeethingSong from "./pool/seething-song.js";
@@ -17297,8 +17304,12 @@ import _poolSpidersManHeroicHorde from "./pool/spiders-man-heroic-horde.js";
 import _poolSpidersilkArmor from "./pool/spidersilk-armor.js";
 import _poolSpidersilkNet from "./pool/spidersilk-net.js";
 import _poolSpiderwigBoggart from "./pool/spiderwig-boggart.js";
+import _poolSpikeColony from "./pool/spike-colony.js";
 import _poolSpikeDrone from "./pool/spike-drone.js";
+import _poolSpikeFeeder from "./pool/spike-feeder.js";
 import _poolSpikeJester from "./pool/spike-jester.js";
+import _poolSpikeSoldier from "./pool/spike-soldier.js";
+import _poolSpikeWorker from "./pool/spike-worker.js";
 import _poolSpikedBaloth from "./pool/spiked-baloth.js";
 import _poolSpikedCorridorTorturePit from "./pool/spiked-corridor-torture-pit.js";
 import _poolSpikedCorridor from "./pool/spiked-corridor.js";
@@ -24728,6 +24739,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrudicladTelchorEngineer,
   _poolBruseTarlBoorishHerder,
   _poolBruseTarlRovingRancher,
+  _poolBrushWithDeath,
   _poolBrushfireElemental,
   _poolBrushland,
   _poolBrushstrider,
@@ -28418,6 +28430,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFangornTreeShepherd,
   _poolFangrenHunter,
   _poolFangrenMarauder,
+  _poolFanningTheFlames,
   _poolFantasticBounce,
   _poolFantasticElasticity,
   _poolFarAway,
@@ -28932,6 +28945,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlower,
   _poolFlowerfootSwordmaster,
   _poolFloweringOfTheWhiteTree,
+  _poolFlowstoneBlade,
   _poolFlowstoneCharger,
   _poolFlowstoneCrusher,
   _poolFlowstoneGiant,
@@ -32588,6 +32602,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKyrenNegotiations,
   _poolKytheonsIrregulars,
   _poolKytheonsTactics,
+  _poolLabRats,
   _poolLaboratoryBrute,
   _poolLaboratoryDrudge,
   _poolLaboratoryManiac,
@@ -33907,6 +33922,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMindIntoMatter,
   _poolMindMeanderer,
   _poolMindOverMatter,
+  _poolMindPeel,
   _poolMindRake,
   _poolMindRavel,
   _poolMindRoots,
@@ -33941,6 +33957,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMindstab,
   _poolMindstatic,
   _poolMindswipe,
+  _poolMindwarper,
   _poolMindwhipSliver,
   _poolMindwhisker,
   _poolMindwrackDemon,
@@ -38191,6 +38208,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeerOfTheLastTomorrow,
   _poolSeersLantern,
   _poolSeersSundial,
+  _poolSeethingAnger,
   _poolSeethingLandscape,
   _poolSeethingPathblazer,
   _poolSeethingSong,
@@ -39533,8 +39551,12 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpidersilkArmor,
   _poolSpidersilkNet,
   _poolSpiderwigBoggart,
+  _poolSpikeColony,
   _poolSpikeDrone,
+  _poolSpikeFeeder,
   _poolSpikeJester,
+  _poolSpikeSoldier,
+  _poolSpikeWorker,
   _poolSpikedBaloth,
   _poolSpikedCorridorTorturePit,
   _poolSpikedCorridor,
@@ -46977,6 +46999,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brudiclad-telchor-engineer": _poolBrudicladTelchorEngineer,
   "pool/bruse-tarl-boorish-herder": _poolBruseTarlBoorishHerder,
   "pool/bruse-tarl-roving-rancher": _poolBruseTarlRovingRancher,
+  "pool/brush-with-death": _poolBrushWithDeath,
   "pool/brushfire-elemental": _poolBrushfireElemental,
   "pool/brushland": _poolBrushland,
   "pool/brushstrider": _poolBrushstrider,
@@ -50667,6 +50690,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fangorn-tree-shepherd": _poolFangornTreeShepherd,
   "pool/fangren-hunter": _poolFangrenHunter,
   "pool/fangren-marauder": _poolFangrenMarauder,
+  "pool/fanning-the-flames": _poolFanningTheFlames,
   "pool/fantastic-bounce": _poolFantasticBounce,
   "pool/fantastic-elasticity": _poolFantasticElasticity,
   "pool/far-away": _poolFarAway,
@@ -51181,6 +51205,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flower": _poolFlower,
   "pool/flowerfoot-swordmaster": _poolFlowerfootSwordmaster,
   "pool/flowering-of-the-white-tree": _poolFloweringOfTheWhiteTree,
+  "pool/flowstone-blade": _poolFlowstoneBlade,
   "pool/flowstone-charger": _poolFlowstoneCharger,
   "pool/flowstone-crusher": _poolFlowstoneCrusher,
   "pool/flowstone-giant": _poolFlowstoneGiant,
@@ -54837,6 +54862,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kyren-negotiations": _poolKyrenNegotiations,
   "pool/kytheons-irregulars": _poolKytheonsIrregulars,
   "pool/kytheons-tactics": _poolKytheonsTactics,
+  "pool/lab-rats": _poolLabRats,
   "pool/laboratory-brute": _poolLaboratoryBrute,
   "pool/laboratory-drudge": _poolLaboratoryDrudge,
   "pool/laboratory-maniac": _poolLaboratoryManiac,
@@ -56156,6 +56182,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mind-into-matter": _poolMindIntoMatter,
   "pool/mind-meanderer": _poolMindMeanderer,
   "pool/mind-over-matter": _poolMindOverMatter,
+  "pool/mind-peel": _poolMindPeel,
   "pool/mind-rake": _poolMindRake,
   "pool/mind-ravel": _poolMindRavel,
   "pool/mind-roots": _poolMindRoots,
@@ -56190,6 +56217,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mindstab": _poolMindstab,
   "pool/mindstatic": _poolMindstatic,
   "pool/mindswipe": _poolMindswipe,
+  "pool/mindwarper": _poolMindwarper,
   "pool/mindwhip-sliver": _poolMindwhipSliver,
   "pool/mindwhisker": _poolMindwhisker,
   "pool/mindwrack-demon": _poolMindwrackDemon,
@@ -60440,6 +60468,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/seer-of-the-last-tomorrow": _poolSeerOfTheLastTomorrow,
   "pool/seers-lantern": _poolSeersLantern,
   "pool/seers-sundial": _poolSeersSundial,
+  "pool/seething-anger": _poolSeethingAnger,
   "pool/seething-landscape": _poolSeethingLandscape,
   "pool/seething-pathblazer": _poolSeethingPathblazer,
   "pool/seething-song": _poolSeethingSong,
@@ -61782,8 +61811,12 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spidersilk-armor": _poolSpidersilkArmor,
   "pool/spidersilk-net": _poolSpidersilkNet,
   "pool/spiderwig-boggart": _poolSpiderwigBoggart,
+  "pool/spike-colony": _poolSpikeColony,
   "pool/spike-drone": _poolSpikeDrone,
+  "pool/spike-feeder": _poolSpikeFeeder,
   "pool/spike-jester": _poolSpikeJester,
+  "pool/spike-soldier": _poolSpikeSoldier,
+  "pool/spike-worker": _poolSpikeWorker,
   "pool/spiked-baloth": _poolSpikedBaloth,
   "pool/spiked-corridor-torture-pit": _poolSpikedCorridorTorturePit,
   "pool/spiked-corridor": _poolSpikedCorridor,

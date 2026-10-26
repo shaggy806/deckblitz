@@ -83,6 +83,7 @@ import _poolBriarHydra from "../pool/briar-hydra.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodOfCockroaches from "../pool/brood-of-cockroaches.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
+import _poolBrushWithDeath from "../pool/brush-with-death.js";
 import _poolBurningPalmEfreet from "../pool/burning-palm-efreet.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
 import _poolCabalPaladin from "../pool/cabal-paladin.js";
@@ -502,6 +503,7 @@ import _poolScuteMob from "../pool/scute-mob.js";
 import _poolSeaGodsScorn from "../pool/sea-gods-scorn.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
 import _poolSeedlingCharm from "../pool/seedling-charm.js";
+import _poolSeethingAnger from "../pool/seething-anger.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
@@ -784,6 +786,7 @@ const shard: CardShard = {
     _poolBrittleEffigy,
     _poolBroodOfCockroaches,
     _poolBroodWeaver,
+    _poolBrushWithDeath,
     _poolBurningPalmEfreet,
     _poolBurningTreeVandal,
     _poolCabalPaladin,
@@ -1203,6 +1206,7 @@ const shard: CardShard = {
     _poolSeaGodsScorn,
     _poolSearchlightGeist,
     _poolSeedlingCharm,
+    _poolSeethingAnger,
     _poolSejiriRefuge,
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
