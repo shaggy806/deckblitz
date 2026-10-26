@@ -1,0 +1,862 @@
+{
+  "batch": "B207",
+  "status": "complete",
+  "ranks": "Betrayers of Kamigawa (BOK, 2005-02-04): the rest of the set, 55; Champions of Kamigawa (CHK, 2004-10-01): its 52 most-played left, of 283 (third middle walk); built flip cards (rule 710, mechanic:flip-cards), which the scaffolder now reads, and authored every flip card it unblocks across SOK, BOK and CHK (14 of 20)",
+  "authored": [
+    {
+      "name": "Akki Lavarunner // Tok-Tok, Volcano Born",
+      "files": [
+        "engine/src/cards/pool/akki-lavarunner.ts",
+        "engine/src/cards/pool/tok-tok-volcano-born.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Akki Raider",
+      "files": [
+        "engine/src/cards/pool/akki-raider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aura of Dominion",
+      "files": [
+        "engine/src/cards/pool/aura-of-dominion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blademane Baku",
+      "files": [
+        "engine/src/cards/pool/blademane-baku.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood Speaker",
+      "files": [
+        "engine/src/cards/pool/blood-speaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Body of Jukai",
+      "files": [
+        "engine/src/cards/pool/body-of-jukai.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Budoka Gardener // Dokai, Weaver of Life",
+      "files": [
+        "engine/src/cards/pool/budoka-gardener.ts",
+        "engine/src/cards/pool/dokai-weaver-of-life.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Budoka Pupil // Ichiga, Who Topples Oaks",
+      "files": [
+        "engine/src/cards/pool/budoka-pupil.ts",
+        "engine/src/cards/pool/ichiga-who-topples-oaks.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Call for Blood",
+      "files": [
+        "engine/src/cards/pool/call-for-blood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Call to Glory",
+      "files": [
+        "engine/src/cards/pool/call-to-glory.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Callow Jushi // Jaraku the Interloper",
+      "files": [
+        "engine/src/cards/pool/callow-jushi.ts",
+        "engine/src/cards/pool/jaraku-the-interloper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clash of Realities",
+      "files": [
+        "engine/src/cards/pool/clash-of-realities.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Commune with Nature",
+      "files": [
+        "engine/src/cards/pool/commune-with-nature.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crawling Filth",
+      "files": [
+        "engine/src/cards/pool/crawling-filth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cunning Bandit // Azamuki, Treachery Incarnate",
+      "files": [
+        "engine/src/cards/pool/cunning-bandit.ts",
+        "engine/src/cards/pool/azamuki-treachery-incarnate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Devouring Greed",
+      "files": [
+        "engine/src/cards/pool/devouring-greed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Empty-Shrine Kannushi",
+      "files": [
+        "engine/src/cards/pool/empty-shrine-kannushi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Faithful Squire // Kaiso, Memory of Loyalty",
+      "files": [
+        "engine/src/cards/pool/faithful-squire.ts",
+        "engine/src/cards/pool/kaiso-memory-of-loyalty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Frostling",
+      "files": [
+        "engine/src/cards/pool/frostling.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Genju of the Falls",
+      "files": [
+        "engine/src/cards/pool/genju-of-the-falls.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Genju of the Fens",
+      "files": [
+        "engine/src/cards/pool/genju-of-the-fens.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Genju of the Fields",
+      "files": [
+        "engine/src/cards/pool/genju-of-the-fields.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Cohort",
+      "files": [
+        "engine/src/cards/pool/goblin-cohort.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Heed the Mists",
+      "files": [
+        "engine/src/cards/pool/heed-the-mists.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hired Muscle // Scarmaker",
+      "files": [
+        "engine/src/cards/pool/hired-muscle.ts",
+        "engine/src/cards/pool/scarmaker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Homura, Human Ascendant // Homura's Essence",
+      "files": [
+        "engine/src/cards/pool/homura-human-ascendant.ts",
+        "engine/src/cards/pool/homuras-essence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Horobi, Death's Wail",
+      "files": [
+        "engine/src/cards/pool/horobi-deaths-wail.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iname, Death Aspect",
+      "files": [
+        "engine/src/cards/pool/iname-death-aspect.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Initiate of Blood // Goka the Unjust",
+      "files": [
+        "engine/src/cards/pool/initiate-of-blood.ts",
+        "engine/src/cards/pool/goka-the-unjust.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ishi-Ishi, Akki Crackshot",
+      "files": [
+        "engine/src/cards/pool/ishi-ishi-akki-crackshot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jugan, the Rising Star",
+      "files": [
+        "engine/src/cards/pool/jugan-the-rising-star.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jushi Apprentice // Tomoya the Revealer",
+      "files": [
+        "engine/src/cards/pool/jushi-apprentice.ts",
+        "engine/src/cards/pool/tomoya-the-revealer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kami of Tattered Shoji",
+      "files": [
+        "engine/src/cards/pool/kami-of-tattered-shoji.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kami of the Honored Dead",
+      "files": [
+        "engine/src/cards/pool/kami-of-the-honored-dead.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kiku, Night's Flower",
+      "files": [
+        "engine/src/cards/pool/kiku-nights-flower.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Konda, Lord of Eiganjo",
+      "files": [
+        "engine/src/cards/pool/konda-lord-of-eiganjo.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kuon, Ogre Ascendant // Kuon's Essence",
+      "files": [
+        "engine/src/cards/pool/kuon-ogre-ascendant.ts",
+        "engine/src/cards/pool/kuons-essence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kuro, Pitlord",
+      "files": [
+        "engine/src/cards/pool/kuro-pitlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Long-Forgotten Gohei",
+      "files": [
+        "engine/src/cards/pool/long-forgotten-gohei.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Minamo Sightbender",
+      "files": [
+        "engine/src/cards/pool/minamo-sightbender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Myojin of Infinite Rage",
+      "files": [
+        "engine/src/cards/pool/myojin-of-infinite-rage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Myojin of Life's Web",
+      "files": [
+        "engine/src/cards/pool/myojin-of-lifes-web.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Myojin of Night's Reach",
+      "files": [
+        "engine/src/cards/pool/myojin-of-nights-reach.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Myojin of Seeing Winds",
+      "files": [
+        "engine/src/cards/pool/myojin-of-seeing-winds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nagao, Bound by Honor",
+      "files": [
+        "engine/src/cards/pool/nagao-bound-by-honor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nezumi Shadow-Watcher",
+      "files": [
+        "engine/src/cards/pool/nezumi-shadow-watcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Night of Souls' Betrayal",
+      "files": [
+        "engine/src/cards/pool/night-of-souls-betrayal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ogre Marauder",
+      "files": [
+        "engine/src/cards/pool/ogre-marauder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ogre Recluse",
+      "files": [
+        "engine/src/cards/pool/ogre-recluse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ornate Kanzashi",
+      "files": [
+        "engine/src/cards/pool/ornate-kanzashi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Orochi Eggwatcher // Shidako, Broodmistress",
+      "files": [
+        "engine/src/cards/pool/orochi-eggwatcher.ts",
+        "engine/src/cards/pool/shidako-broodmistress.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Orochi Hatchery",
+      "files": [
+        "engine/src/cards/pool/orochi-hatchery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Otherworldly Journey",
+      "files": [
+        "engine/src/cards/pool/otherworldly-journey.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Peer Through Depths",
+      "files": [
+        "engine/src/cards/pool/peer-through-depths.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Psychic Spear",
+      "files": [
+        "engine/src/cards/pool/psychic-spear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pus Kami",
+      "files": [
+        "engine/src/cards/pool/pus-kami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Quillmane Baku",
+      "files": [
+        "engine/src/cards/pool/quillmane-baku.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reduce to Dreams",
+      "files": [
+        "engine/src/cards/pool/reduce-to-dreams.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rune-Tail, Kitsune Ascendant // Rune-Tail's Essence",
+      "files": [
+        "engine/src/cards/pool/rune-tail-kitsune-ascendant.ts",
+        "engine/src/cards/pool/rune-tails-essence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sachi, Daughter of Seshiro",
+      "files": [
+        "engine/src/cards/pool/sachi-daughter-of-seshiro.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Samurai of the Pale Curtain",
+      "files": [
+        "engine/src/cards/pool/samurai-of-the-pale-curtain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scaled Hulk",
+      "files": [
+        "engine/src/cards/pool/scaled-hulk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scourge of Numai",
+      "files": [
+        "engine/src/cards/pool/scourge-of-numai.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sensei Golden-Tail",
+      "files": [
+        "engine/src/cards/pool/sensei-golden-tail.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shinka Gatekeeper",
+      "files": [
+        "engine/src/cards/pool/shinka-gatekeeper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sire of the Storm",
+      "files": [
+        "engine/src/cards/pool/sire-of-the-storm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skullmane Baku",
+      "files": [
+        "engine/src/cards/pool/skullmane-baku.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soratami Cloudskater",
+      "files": [
+        "engine/src/cards/pool/soratami-cloudskater.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soratami Mirror-Mage",
+      "files": [
+        "engine/src/cards/pool/soratami-mirror-mage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soratami Rainshaper",
+      "files": [
+        "engine/src/cards/pool/soratami-rainshaper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soratami Savant",
+      "files": [
+        "engine/src/cards/pool/soratami-savant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Student of Elements // Tobita, Master of Winds",
+      "files": [
+        "engine/src/cards/pool/student-of-elements.ts",
+        "engine/src/cards/pool/tobita-master-of-winds.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Takeno's Cavalry",
+      "files": [
+        "engine/src/cards/pool/takenos-cavalry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Takenuma Bleeder",
+      "files": [
+        "engine/src/cards/pool/takenuma-bleeder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Through the Breach",
+      "files": [
+        "engine/src/cards/pool/through-the-breach.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Untaidake, the Cloud Keeper",
+      "files": [
+        "engine/src/cards/pool/untaidake-the-cloud-keeper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Uyo, Silent Prophet",
+      "files": [
+        "engine/src/cards/pool/uyo-silent-prophet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vital Surge",
+      "files": [
+        "engine/src/cards/pool/vital-surge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ward of Piety",
+      "files": [
+        "engine/src/cards/pool/ward-of-piety.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Waxmane Baku",
+      "files": [
+        "engine/src/cards/pool/waxmane-baku.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Aura Barbs",
+      "needs": [
+        "effect:damage-from-attached"
+      ],
+      "why": "each Aura dealing damage to the creature it enchants, the Aura the source"
+    },
+    {
+      "name": "Moonlit Strider",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "protection from a colour of your choice until end of turn"
+    },
+    {
+      "name": "Hundred-Talon Strike",
+      "needs": [
+        "cost:splice-non-mana"
+      ],
+      "why": "splice cost: tap an untapped white creature you control"
+    },
+    {
+      "name": "Eight-and-a-Half-Tails",
+      "needs": [
+        "effect:grant-protection-temporary"
+      ],
+      "why": "protection from white until end of turn"
+    },
+    {
+      "name": "Myojin of Cleansing Fire",
+      "needs": [
+        "effect:destroy-all-except-source"
+      ],
+      "why": "destroy all other creatures (destroy-all has no exceptSource)"
+    },
+    {
+      "name": "Reweave",
+      "needs": [
+        "effect:reveal-until-shares-type"
+      ],
+      "why": "sacrifice-target doesn't record what was sacrificed for the reveal-until filter"
+    },
+    {
+      "name": "Flames of the Blood Hand",
+      "needs": [
+        "effect:damage-cant-be-prevented",
+        "effect:target-player-gains-no-life-this-turn"
+      ],
+      "why": "damage that can't be prevented, and one player can't gain life this turn"
+    },
+    {
+      "name": "Roar of Jukai",
+      "needs": [
+        "cost:splice-non-mana"
+      ],
+      "why": "splice cost: an opponent gains 5 life"
+    },
+    {
+      "name": "Patron of the Akki",
+      "needs": [
+        "keyword:offering"
+      ],
+      "why": "Goblin offering"
+    },
+    {
+      "name": "Kumano's Blessing",
+      "needs": [
+        "replacement:exile-if-damaged-by-attached-dies"
+      ],
+      "why": "a creature dealt damage by the enchanted creature is exiled if it would die"
+    },
+    {
+      "name": "Ethereal Haze",
+      "needs": [
+        "replacement:prevent-all-damage-by-filter"
+      ],
+      "why": "prevent all damage (not just combat) dealt by creatures this turn"
+    },
+    {
+      "name": "Oathkeeper, Takeno's Daisho",
+      "needs": [
+        "condition:trigger-card-characteristics-in-new-zone"
+      ],
+      "why": "'if it's a Samurai card' read in the graveyard, per the ruling"
+    },
+    {
+      "name": "Sosuke, Son of Seshiro",
+      "needs": [
+        "trigger:trigger-recipient-ref"
+      ],
+      "why": "a delayed 'destroy that creature at end of combat' can't reach the damaged creature"
+    },
+    {
+      "name": "Mannichi, the Fevered Dream",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "switch power and toughness"
+    },
+    {
+      "name": "Tallowisp",
+      "needs": [
+        "filter:aura-enchant-restriction"
+      ],
+      "why": "search for an Aura card with enchant creature"
+    },
+    {
+      "name": "Torrent of Stone",
+      "needs": [
+        "cost:splice-non-mana"
+      ],
+      "why": "splice cost: sacrifice two Mountains"
+    },
+    {
+      "name": "Shimmering Glasskite",
+      "needs": [
+        "effect:counter-targeting-spell-or-ability"
+      ],
+      "why": "counter the first spell or ability that targets it each turn"
+    },
+    {
+      "name": "Slumbering Tora",
+      "needs": [
+        "effect:cost-discarded-card-ref"
+      ],
+      "why": "X is the discarded card's mana value"
+    },
+    {
+      "name": "Kusari-Gama",
+      "needs": [
+        "effect:damage-all-except-trigger-recipient"
+      ],
+      "why": "damage each other creature defending player controls"
+    },
+    {
+      "name": "Konda's Banner",
+      "needs": [
+        "static:equip-only-to-filter",
+        "condition:shares-creature-type-with-equipped",
+        "filter:shares-color-with-attached"
+      ],
+      "why": "equip only legendary creatures; shares a colour / creature type with the equipped creature"
+    },
+    {
+      "name": "Reverse the Sands",
+      "needs": [
+        "effect:redistribute-life-totals"
+      ],
+      "why": "redistribute life totals"
+    },
+    {
+      "name": "General's Kabuto",
+      "needs": [
+        "replacement:prevent-damage-to-attached"
+      ],
+      "why": "prevent combat damage to the equipped creature"
+    },
+    {
+      "name": "Heart of Light",
+      "needs": [
+        "replacement:prevent-damage-to-attached",
+        "replacement:prevent-damage-by-attached"
+      ],
+      "why": "prevent damage to and by the enchanted creature"
+    },
+    {
+      "name": "Blessed Breath",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "protection from a colour of your choice until end of turn"
+    },
+    {
+      "name": "Hinder",
+      "needs": [
+        "effect:counter-to-library-top-or-bottom"
+      ],
+      "why": "countered spell goes on top or bottom of its owner's library"
+    },
+    {
+      "name": "Tide of War",
+      "needs": [
+        "trigger:one-or-more-creatures-block",
+        "filter:blocked-attacker"
+      ],
+      "why": "once per combat when blocks are declared; each blocked creature"
+    },
+    {
+      "name": "Takeno, Samurai General",
+      "needs": [
+        "amount:bushido-value-of-each"
+      ],
+      "why": "each other Samurai gets +1/+1 for each 1 of its bushido"
+    },
+    {
+      "name": "Uba Mask",
+      "needs": [
+        "replacement:draw-replacement-exile-play"
+      ],
+      "why": "exile drawn cards instead, may play them this turn"
+    },
+    {
+      "name": "Kitsune Palliator",
+      "needs": [
+        "effect:prevent-next-damage-each-creature"
+      ],
+      "why": "prevent the next 1 damage to each creature and each player"
+    },
+    {
+      "name": "Minamo's Meddling",
+      "needs": [
+        "effect:discard-spliced-names"
+      ],
+      "why": "discard cards with the names of the spliced cards"
+    },
+    {
+      "name": "Jetting Glasskite",
+      "needs": [
+        "effect:counter-targeting-spell-or-ability"
+      ],
+      "why": "counter the first spell or ability that targets it each turn"
+    },
+    {
+      "name": "Yosei, the Morning Star",
+      "needs": [
+        "effect:skip-next-untap-step"
+      ],
+      "why": "target player skips their next untap step (stacking)"
+    },
+    {
+      "name": "Masako the Humorless",
+      "needs": [
+        "static:block-while-tapped"
+      ],
+      "why": "tapped creatures you control can block as though untapped"
+    },
+    {
+      "name": "Erayo, Soratami Ascendant // Erayo's Essence",
+      "needs": [
+        "trigger:nth-spell-of-turn-any-player"
+      ],
+      "why": "the fourth spell of a turn, any players' together (flip cards built)"
+    },
+    {
+      "name": "Sasaya, Orochi Ascendant // Sasaya's Essence",
+      "needs": [
+        "effect:mana-produced-per-same-name-land"
+      ],
+      "why": "additional mana of any type the land produced, per other land with its name"
+    },
+    {
+      "name": "Bushi Tenderfoot // Kenzo the Hardhearted",
+      "needs": [
+        "trigger:creature-damaged-by-source-dies"
+      ],
+      "why": "when a creature dealt damage by this creature this turn dies"
+    },
+    {
+      "name": "Kitsune Mystic // Autumn-Tail, Kitsune Sage",
+      "needs": [
+        "filter:auras-attached-count",
+        "effect:attach-aura-to-chosen-creature"
+      ],
+      "why": "enchanted by two or more Auras; attach an Aura to another creature chosen on resolution"
+    },
+    {
+      "name": "Nezumi Graverobber // Nighteyes the Desecrator",
+      "needs": [
+        "condition:target-player-zone-empty"
+      ],
+      "why": "if that (target's) graveyard is empty, flip"
+    },
+    {
+      "name": "Nezumi Shortfang // Stabwhisker the Odious",
+      "needs": [
+        "condition:target-player-zone-empty"
+      ],
+      "why": "if the target opponent has no cards in hand, flip"
+    }
+  ]
+}

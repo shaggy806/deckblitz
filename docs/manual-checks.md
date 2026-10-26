@@ -5517,3 +5517,9 @@ engine terms. A second thing to check is a second test.
 ### Skyscribing: forecast from your hand in your upkeep, once a turn
 - **Do:** In your main phase, look for Skyscribing's forecast ability, then pass the turn and come back to your upkeep. Use it there, then try it again.
 - **Expect:** It isn't offered in your main phase. In your upkeep it is: everyone draws a card, the card is shown to the table, and Skyscribing stays in your hand. It isn't offered a second time that upkeep; it is again at your next upkeep.
+
+## Flip cards (2026-10-26, Champions and Betrayers of Kamigawa)
+
+### Callow Jushi: flips into Jaraku at the end step
+- **Do:** Pass to your end step and say yes when asked to flip Callow Jushi.
+- **Expect:** The card now reads Jaraku the Interloper, a legendary 3/4 Spirit, still with its two ki counters. Hovering it shows Callow Jushi beside it, the same picture.
