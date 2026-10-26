@@ -693,9 +693,12 @@ export function auraPolarity(def: CardDefinition): Polarity {
     // made a creature fights for its controller, whatever it can't do —
     // Guardian Zendikon's defender is a wall's, not a penalty.
     if ((ability.addTypes ?? []).includes("creature") && ability.setBasePt !== undefined) return "help";
+    // "Gets +2/+2 and can't block" (Maniacal Rage): an attacker's Aura — the
+    // pump is the point, the lost block its price.
+    const pumped = ability.grantPt !== undefined && ability.grantPt[0] + ability.grantPt[1] > 0;
     for (const restriction of ability.restrictions ?? []) {
       if (restriction === "must-be-blocked" || restriction === "must-be-blocked-if-able") help = true;
-      else harm = true;
+      else if (!(restriction === "cant-block" && pumped)) harm = true;
     }
     if (ability.grantPt !== undefined) {
       const sum = ability.grantPt[0] + ability.grantPt[1];
@@ -847,6 +850,16 @@ export function castPolarities(def: CardDefinition, bias?: PolarityBias): readon
   return found;
 }
 
+/** A slot nothing touches whose spec is only a gate on which opponent may
+ * be chosen — the Keepers' "target opponent who has more life than you do"
+ * — reads as aimed at that opponent: the card picked the side. */
+function gatedOpponents(specs: readonly TargetSpec[], polarities: readonly Polarity[]): readonly Polarity[] {
+  return polarities.map((p, i) => {
+    const spec = specs[i];
+    return p === "either" && typeof spec === "object" && spec.kind === "opponent-compared" ? "harm" : p;
+  });
+}
+
 /** The polarity of each target slot of an activated or triggered ability. */
 export function abilityPolarities(
   ability: Pick<ActivatedAbility | TriggeredAbility, "targets" | "effect">,
@@ -855,7 +868,7 @@ export function abilityPolarities(
   const memo = memosFor(bias).ability;
   let found = memo.get(ability);
   if (found === undefined) {
-    found = slotPolarities(ability.effect, ability.targets.length, bias);
+    found = gatedOpponents(ability.targets, slotPolarities(ability.effect, ability.targets.length, bias));
     memo.set(ability, found);
   }
   return found;

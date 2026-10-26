@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3810 already implemented / 1190 missing (marks refreshed 2026-10-26)
+3811 already implemented / 1189 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2327,7 +2327,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2334  Thalia, Guardian of Thraben              {1}{W}           Legendary Creature — Human Soldier
 [ ]  2335  Summon: Yojimbo                          {3}{W}           Enchantment Creature — Saga Samurai
 [x]  2336  Verduran Enchantress                     {1}{G}{G}        Creature — Human Druid
-[ ]  2337  Constant Mists                           {1}{G}           Instant
+[x]  2337  Constant Mists                           {1}{G}           Instant
 [x]  2338  Greedy Freebooter                        {B}              Creature — Human Pirate
 [x]  2339  Survival of the Fittest                  {1}{G}           Enchantment
 [x]  2340  Tainted Strike                           {B}              Instant

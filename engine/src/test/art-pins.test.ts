@@ -81,6 +81,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Wood Token",
   "Camarid Token",
   "Caribou Token",
+  // Keeper of the Beasts' 2/2 green Beast: Scryfall has no such token (checked 2026-10-26).
+  "2/2 Beast Token",
 ]);
 
 describe("token art", () => {

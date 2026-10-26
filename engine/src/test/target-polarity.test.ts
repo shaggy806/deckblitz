@@ -11,8 +11,10 @@ import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
+import { licidDefinition } from "../cards/define.js";
 import {
   abilityPolarities,
+  auraPolarity,
   castPolarities,
   onlyWrongSide,
   pendingTargetPolarities,
@@ -142,7 +144,11 @@ describe("slot polarity", () => {
     for (const def of POOL_CARDS) {
       const all = [
         ...(def.targets.length > 0 && def.castModal === null ? castPolarities(def) : []),
-        ...def.activated.flatMap((a) => (a.targets.length > 0 ? abilityPolarities(a) : [])),
+        // A Licid's slot leans as its Aura does, the way `offerPolarities`
+        // reads it for a bot.
+        ...def.activated.flatMap((a) =>
+          a.targets.length === 0 ? [] : a.licid === true ? [auraPolarity(licidDefinition(def))] : abilityPolarities(a),
+        ),
         ...def.triggered.flatMap((t) => (t.targets.length > 0 ? abilityPolarities(t) : [])),
       ];
       slots += all.length;
