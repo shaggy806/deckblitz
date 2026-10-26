@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3814 already implemented / 1186 missing (marks refreshed 2026-10-26)
+3815 already implemented / 1185 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4926,7 +4926,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4933  Nissa, Vital Force                       {3}{G}{G}        Legendary Planeswalker — Nissa
 [ ]  4934  Toby, Beastie Befriender                 {2}{W}           Legendary Creature — Human Wizard
 [ ]  4935  Baneslayer Angel                         {3}{W}{W}        Creature — Angel
-[ ]  4936  Gilt-Leaf Palace                         {0}              Land
+[x]  4936  Gilt-Leaf Palace                         {0}              Land
 [x]  4937  Hedron Detonator                         {2}{R}           Creature — Goblin Artificer
 [x]  4938  Deadly Recluse                           {1}{G}           Creature — Spider
 [x]  4939  Wolfwillow Haven                         {1}{G}           Enchantment — Aura

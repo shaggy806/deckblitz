@@ -17,7 +17,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      targets: [{ kind: "permanent", filter: { type: "creature", controlledBy: "opponent" } }],
+      targets: ["creature-an-opponent-controls"],
       effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
       resolve: null,
       text: ETB_TEXT,
