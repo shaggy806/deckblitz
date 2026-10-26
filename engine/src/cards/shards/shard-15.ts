@@ -551,6 +551,7 @@ import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
+import _poolSpiritEnDal from "../pool/spirit-en-dal.js";
 import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
@@ -1253,6 +1254,7 @@ const shard: CardShard = {
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
     _poolSpiresideInfiltrator,
+    _poolSpiritEnDal,
     _poolSpitefulBlow,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,

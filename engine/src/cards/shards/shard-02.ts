@@ -699,6 +699,7 @@ import _poolWizardsRetort from "../pool/wizards-retort.js";
 import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
+import _poolWritOfPassage from "../pool/writ-of-passage.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
@@ -1412,6 +1413,7 @@ const shard: CardShard = {
     _poolWoodlandSleuth,
     _poolWoollyLoxodon,
     _poolWoollyThoctar,
+    _poolWritOfPassage,
     _poolZektarShrineExpedition,
     _poolZephidsEmbrace,
     _poolZiatorasEnvoy,

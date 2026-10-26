@@ -575,6 +575,7 @@ import _poolSqueesToy from "../pool/squees-toy.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStartle from "../pool/startle.js";
+import _poolSteelingStance from "../pool/steeling-stance.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
 import _poolStitchedDrake from "../pool/stitched-drake.js";
@@ -1300,6 +1301,7 @@ const shard: CardShard = {
     _poolSquirrelMob,
     _poolSquirrelNest,
     _poolStartle,
+    _poolSteelingStance,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
     _poolStitchedDrake,

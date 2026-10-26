@@ -456,6 +456,7 @@ import _poolPlarggDeanOfChaos from "../pool/plargg-dean-of-chaos.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
 import _poolPrimalWellspring from "../pool/primal-wellspring.js";
+import _poolProclamationOfRebirth from "../pool/proclamation-of-rebirth.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
@@ -1164,6 +1165,7 @@ const shard: CardShard = {
     _poolPotionOfHealing,
     _poolPrecipitousDrop,
     _poolPrimalWellspring,
+    _poolProclamationOfRebirth,
     _poolProctorsGaze,
     _poolPromisingVein,
     _poolPullFromTheDeep,

@@ -301,6 +301,21 @@ describe("costs and triggers", () => {
     expect(exhaust.activated[0].exhaust).toBe(true);
     const boast = face("Boast — {1}{R}: This creature deals 1 damage to any target.");
     expect(boast.activated[0].boast).toBe(true);
+    // Forecast (rule 702.57): an ability of the card in the hand, revealed,
+    // in its owner's upkeep only and once each turn — the `forecast()` shape.
+    const forecast = face(
+      "Forecast — {W}, Reveal this card from your hand: Target creature gets +1/+1 until end of turn. (Activate only during your upkeep and only once each turn.)",
+    );
+    expect(forecast.complete).toBe(true);
+    expect(forecast.activated[0]).toMatchObject({
+      cost: { mana: "{W}", tap: false },
+      zone: "hand",
+      staysInZone: true,
+      oncePerTurn: true,
+      condition: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] },
+    });
+    // A forecast cost that doesn't reveal the card isn't read.
+    expect(face("Forecast — {W}: Target creature gets +1/+1 until end of turn.").complete).toBe(false);
     // An ability word still goes.
     expect(face("Landfall — Whenever a land you control enters, you gain 1 life.").complete).toBe(true);
     // Power-up (once only, cheaper the turn it entered) isn't modeled, and a

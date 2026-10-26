@@ -506,6 +506,7 @@ import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
+import _poolPiercingRays from "../pool/piercing-rays.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
+    _poolPiercingRays,
     _poolPinnacleOfRage,
     _poolPonderingMage,
     _poolPriestsOfNorn,

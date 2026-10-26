@@ -96,13 +96,13 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /** Dash labels that aren't ability or flavor words (rule 207.2c-d): each one
  * changes how its line works, and the parser models none of them. Power-up is
  * once only and cheaper the turn it entered, Max speed and a Case's Solved
- * grant their line conditionally, Forecast works only from your hand in your
- * upkeep, and the others are Sagas, Attractions and companions. (Exhaust and
- * Boast are read, as activated-ability flags.) */
+ * grant their line conditionally, and the others are Sagas, Attractions and
+ * companions. (Exhaust and Boast are read, as activated-ability flags, and
+ * Forecast as an ability of the card in the hand.) */
 const KINSHIP =
   /^Kinship — At the beginning of your upkeep, you may look at the top card of your library\. If it shares a creature type with ~, you may reveal it\. If you do, (.+\.)$/;
 
-const MEANINGFUL_LABEL = /^(Power-up|Max speed|Forecast|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
+const MEANINGFUL_LABEL = /^(Power-up|Max speed|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
 
 /** "Add {G}. Draw a card." → its sentences, each ending in its period. A
  * quoted ability ("…with \"Whenever …, draw a card.\"") is part of the
@@ -2075,7 +2075,7 @@ export function parseFace(face, ctx = {}) {
     // (A villainous choice's dash isn't a label either: what comes before it
     // is the trigger or instruction.)
     if (MEANINGFUL_LABEL.test(whole) || / villainous choice — /.test(whole)) { out.todo.push(printed(raw)); continue; }
-    const label = /^(Exhaust|Boast) — /.exec(whole)?.[1];
+    const label = /^(Exhaust|Boast|Forecast) — /.exec(whole)?.[1];
     const line = label ? whole.slice(label.length + 3) : whole.replace(/^[A-Z][\w' ,-]+ — (?=[A-Z~{+−-])/, "");
     if (label && !/^[^:]+: /.test(line)) { out.todo.push(printed(raw)); continue; }
     if (line === "") continue;
@@ -2465,11 +2465,27 @@ export function parseFace(face, ctx = {}) {
     // Activated abilities: "cost: effect".
     const colon = line.indexOf(": ");
     if (colon > 0 && !/^(When|Whenever|At )/.test(line)) {
-      const parsedCost = parseCost(line.slice(0, colon));
+      let costText = line.slice(0, colon);
+      // Forecast (rule 702.57): "[cost], Reveal ~ from your hand: [effect]" —
+      // an ability of the card in its owner's hand, which it stays in,
+      // activatable only in their upkeep and once each turn (`forecast()`).
+      if (label === "Forecast") {
+        if (!/, Reveal ~ from your hand$|^Reveal ~ from your hand$/.test(costText)) { out.todo.push(printed(raw)); continue; }
+        costText = costText.replace(/,? ?Reveal ~ from your hand$/, "");
+      }
+      const parsedCost = costText === "" ? { cost: { mana: null, tap: false }, extra: {} } : parseCost(costText);
       if (parsedCost === null) { out.todo.push(printed(raw)); continue; }
       const ability = { cost: parsedCost.cost, targets: [], effect: null, resolve: null, text: printed(raw), ...parsedCost.extra };
       if (label === "Exhaust") ability.exhaust = true;
       if (label === "Boast") ability.boast = true;
+      if (label === "Forecast") {
+        Object.assign(ability, {
+          zone: "hand",
+          staysInZone: true,
+          oncePerTurn: true,
+          condition: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] },
+        });
+      }
       let rest = line.slice(colon + 2);
       const restrictions = [];
       rest = rest.replace(/ Activate only (as a sorcery|once each turn|during your turn)\.$/, (_x, r) => {

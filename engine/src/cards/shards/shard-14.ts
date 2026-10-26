@@ -486,6 +486,7 @@ import _poolPlagueDogs from "../pool/plague-dogs.js";
 import _poolPlagueSpitter from "../pool/plague-spitter.js";
 import _poolPlaguebearer from "../pool/plaguebearer.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
+import _poolPlumesOfPeace from "../pool/plumes-of-peace.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolPlagueSpitter,
     _poolPlaguebearer,
     _poolPlasmaBolt,
+    _poolPlumesOfPeace,
     _poolPredictivePreparations,
     _poolPrimeSpeakerVannifar,
     _poolPrimevalBounty,

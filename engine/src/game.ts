@@ -6564,6 +6564,15 @@ export class Game {
         untapping.push(id);
       }
     }
+    // A once-each-turn ability activated from a hand (forecast, rule
+    // 702.57b) is once each turn too: the card stays in the hand, so the
+    // record a zone change would clear has to be cleared here.
+    for (const player of this.state.turnOrder) {
+      for (const id of this.state.zones.perPlayer[player].hand) {
+        const object = this.state.objects[id];
+        if (object.abilitiesUsedThisTurn !== undefined) object.abilitiesUsedThisTurn = undefined;
+      }
+    }
     // "You may choose not to untap ~ during your untap step" (rule 502.3):
     // its controller chooses which to leave tapped, without priority
     // (502.4); the step finishes once they have (`applyChoosePermanents`).

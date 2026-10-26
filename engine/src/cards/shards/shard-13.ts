@@ -442,6 +442,7 @@ import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
+import _poolPrideOfTheClouds from "../pool/pride-of-the-clouds.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
@@ -1180,6 +1181,7 @@ const shard: CardShard = {
     _poolPiranhaFly,
     _poolPlanarAlly,
     _poolPlanarVoid,
+    _poolPrideOfTheClouds,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolPrisonRealm,

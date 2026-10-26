@@ -251,6 +251,7 @@ import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
+import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
@@ -983,6 +984,7 @@ const shard: CardShard = {
     _poolGoblinMatron,
     _poolGoblinTraprunner,
     _poolGodtoucher,
+    _poolGovernTheGuildless,
     _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,
