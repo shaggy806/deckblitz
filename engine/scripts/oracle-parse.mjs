@@ -33,6 +33,8 @@ import {
   renown,
   cumulativeUpkeep,
   echo,
+  recover,
+  ripple,
   annihilator,
   awaken,
   levelBand,
@@ -152,7 +154,7 @@ function pitchExile(what) {
  * `Keyword` — what it adds to the face, or `null`. Each shape is the one the
  * pool's own cards use (the helper, or the card field).
  */
-function keywordPart(part) {
+function keywordPart(part, faceName) {
   const p = part.trim();
   let m;
   if ((m = /^crew (\d+)$/i.exec(p))) return { activated: [crew(Number(m[1]))] };
@@ -179,6 +181,10 @@ function keywordPart(part) {
   if (/^echo—sacrifice two lands\.?$/i.test(p)) {
     return { triggered: [echo({ sacrifice: { type: "land" }, count: 2, text: "Sacrifice two lands" })] };
   }
+  // Recover [cost] (rule 702.59a): its trigger from the graveyard.
+  if ((m = new RegExp(`^recover ${COST}$`, "i").exec(p))) return { triggered: [recover(m[1])] };
+  // Ripple N (rule 702.60a): its cast trigger, the name the card's own.
+  if ((m = /^ripple (\d+)$/i.exec(p)) && faceName !== undefined) return { triggered: [ripple(Number(m[1]), faceName)] };
   // Rampage N (rule 702.23a): its becomes-blocked trigger.
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };
   // Renown N (rule 702.112a): its combat-damage trigger, "if it isn't renowned".
@@ -2078,6 +2084,8 @@ export function parseFace(face, ctx = {}) {
     // Keywords, partner abilities, ward, and lines with no behaviour of their own.
     // A keyword line — "Flying, ward {2}" — each part a modeled keyword or a
     // plain ward; one part of anything else leaves the whole line to a person.
+    // Recover's half-life cost has a comma of its own (Garza's Assassin).
+    if (/^Recover—Pay half your life, rounded up\.?$/i.test(line)) { out.triggered.push(recover("half-life")); continue; }
     const parts = line.split(/,\s*|;\s*/);
     const wardOf = (p) => {
       const w = /^ward ((?:\{[0-9WUBRGC]+\})+)$/i.exec(p) ?? /^ward—pay (\d+) life\.?$/i.exec(p);
@@ -2086,10 +2094,10 @@ export function parseFace(face, ctx = {}) {
     };
     const isProwess = (p) => p.toLowerCase() === "prowess";
     const known = (p) =>
-      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p) !== null;
+      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p, face.name) !== null;
     // Two typecyclings on one line ("Mountaincycling {2}, forestcycling {2}")
     // are two abilities, and `cycling` holds one: such a line is a person's.
-    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p)?.card ?? {}) : []));
+    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p, face.name)?.card ?? {}) : []));
     const twice =
       cardFields.some((f, i) => cardFields.indexOf(f) !== i) ||
       // Morph on a land (Zoetic Cavern): a land is played, never cast, and the
@@ -2106,7 +2114,7 @@ export function parseFace(face, ctx = {}) {
         else if (protectionOf(p) !== null) out.static.push(protectionOf(p));
         else if (wardOf(p) !== null) out.triggered.push(wardAbility(wardOf(p)));
         else {
-          const k = keywordPart(p);
+          const k = keywordPart(p, face.name);
           out.keywords.push(...(k.keywords ?? []));
           out.triggered.push(...(k.triggered ?? []));
           out.activated.push(...(k.activated ?? []));

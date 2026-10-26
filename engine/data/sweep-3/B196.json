@@ -1,0 +1,797 @@
+{
+ "batch": "B196",
+ "status": "complete",
+ "ranks": "Coldsnap (CSP, 2006-07-21): whole set, its 112 cards left (second middle walk); built ripple (rule 702.60: the ripple() helper, cast-now's repeat with libraryTop and rest \"bottom-any-order\") and the recover() helper (rule 702.59)",
+ "authored": [
+  {
+   "name": "Adarkar Valkyrie",
+   "files": [
+    "engine/src/cards/pool/adarkar-valkyrie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Adarkar Windform",
+   "files": [
+    "engine/src/cards/pool/adarkar-windform.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Allosaurus Rider",
+   "files": [
+    "engine/src/cards/pool/allosaurus-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arctic Nishoba",
+   "files": [
+    "engine/src/cards/pool/arctic-nishoba.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurochs Herd",
+   "files": [
+    "engine/src/cards/pool/aurochs-herd.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Balduvian Frostwaker",
+   "files": [
+    "engine/src/cards/pool/balduvian-frostwaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balduvian Rage",
+   "files": [
+    "engine/src/cards/pool/balduvian-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boreal Centaur",
+   "files": [
+    "engine/src/cards/pool/boreal-centaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boreal Griffin",
+   "files": [
+    "engine/src/cards/pool/boreal-griffin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brooding Saurian",
+   "files": [
+    "engine/src/cards/pool/brooding-saurian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bull Aurochs",
+   "files": [
+    "engine/src/cards/pool/bull-aurochs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chill to the Bone",
+   "files": [
+    "engine/src/cards/pool/chill-to-the-bone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chilling Shade",
+   "files": [
+    "engine/src/cards/pool/chilling-shade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Controvert",
+   "files": [
+    "engine/src/cards/pool/controvert.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cryoclasm",
+   "files": [
+    "engine/src/cards/pool/cryoclasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathmark",
+   "files": [
+    "engine/src/cards/pool/deathmark.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deepfire Elemental",
+   "files": [
+    "engine/src/cards/pool/deepfire-elemental.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Diamond Faerie",
+   "files": [
+    "engine/src/cards/pool/diamond-faerie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthen Goo",
+   "files": [
+    "engine/src/cards/pool/earthen-goo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feast of Flesh",
+   "files": [
+    "engine/src/cards/pool/feast-of-flesh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Field Marshal",
+   "files": [
+    "engine/src/cards/pool/field-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flashfreeze",
+   "files": [
+    "engine/src/cards/pool/flashfreeze.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Freyalise's Radiance",
+   "files": [
+    "engine/src/cards/pool/freyalises-radiance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frost Raptor",
+   "files": [
+    "engine/src/cards/pool/frost-raptor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frostweb Spider",
+   "files": [
+    "engine/src/cards/pool/frostweb-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garza's Assassin",
+   "files": [
+    "engine/src/cards/pool/garzas-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glacial Plating",
+   "files": [
+    "engine/src/cards/pool/glacial-plating.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Furrier",
+   "files": [
+    "engine/src/cards/pool/goblin-furrier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Rimerunner",
+   "files": [
+    "engine/src/cards/pool/goblin-rimerunner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greater Stone Spirit",
+   "files": [
+    "engine/src/cards/pool/greater-stone-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Harvest",
+   "files": [
+    "engine/src/cards/pool/grim-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heidar, Rimewind Master",
+   "files": [
+    "engine/src/cards/pool/heidar-rimewind-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icefall",
+   "files": [
+    "engine/src/cards/pool/icefall.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jokulmorder",
+   "files": [
+    "engine/src/cards/pool/jokulmorder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jötun Owl Keeper",
+   "files": [
+    "engine/src/cards/pool/jotun-owl-keeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karplusan Wolverine",
+   "files": [
+    "engine/src/cards/pool/karplusan-wolverine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kjeldoran Gargoyle",
+   "files": [
+    "engine/src/cards/pool/kjeldoran-gargoyle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kjeldoran Javelineer",
+   "files": [
+    "engine/src/cards/pool/kjeldoran-javelineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kjeldoran War Cry",
+   "files": [
+    "engine/src/cards/pool/kjeldoran-war-cry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovikan Mist",
+   "files": [
+    "engine/src/cards/pool/krovikan-mist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovikan Rot",
+   "files": [
+    "engine/src/cards/pool/krovikan-rot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krovikan Whispers",
+   "files": [
+    "engine/src/cards/pool/krovikan-whispers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Serpent",
+   "files": [
+    "engine/src/cards/pool/lightning-serpent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lovisa Coldeyes",
+   "files": [
+    "engine/src/cards/pool/lovisa-coldeyes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mouth of Ronom",
+   "files": [
+    "engine/src/cards/pool/mouth-of-ronom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ohran Yeti",
+   "files": [
+    "engine/src/cards/pool/ohran-yeti.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perilous Research",
+   "files": [
+    "engine/src/cards/pool/perilous-research.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phobian Phantasm",
+   "files": [
+    "engine/src/cards/pool/phobian-phantasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phyrexian Etchings",
+   "files": [
+    "engine/src/cards/pool/phyrexian-etchings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Ironfoot",
+   "files": [
+    "engine/src/cards/pool/phyrexian-ironfoot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phyrexian Snowcrusher",
+   "files": [
+    "engine/src/cards/pool/phyrexian-snowcrusher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Resize",
+   "files": [
+    "engine/src/cards/pool/resize.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rimebound Dead",
+   "files": [
+    "engine/src/cards/pool/rimebound-dead.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rimescale Dragon",
+   "files": [
+    "engine/src/cards/pool/rimescale-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rimewind Cryomancer",
+   "files": [
+    "engine/src/cards/pool/rimewind-cryomancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rimewind Taskmage",
+   "files": [
+    "engine/src/cards/pool/rimewind-taskmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ronom Hulk",
+   "files": [
+    "engine/src/cards/pool/ronom-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rune Snag",
+   "files": [
+    "engine/src/cards/pool/rune-snag.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrying Sheets",
+   "files": [
+    "engine/src/cards/pool/scrying-sheets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sek'Kuar, Deathkeeper",
+   "files": [
+    "engine/src/cards/pool/sekkuar-deathkeeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Simian Brawler",
+   "files": [
+    "engine/src/cards/pool/simian-brawler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skred",
+   "files": [
+    "engine/src/cards/pool/skred.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Spike",
+   "files": [
+    "engine/src/cards/pool/soul-spike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sound the Call",
+   "files": [
+    "engine/src/cards/pool/sound-the-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalking Yeti",
+   "files": [
+    "engine/src/cards/pool/stalking-yeti.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun's Bounty",
+   "files": [
+    "engine/src/cards/pool/suns-bounty.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunscour",
+   "files": [
+    "engine/src/cards/pool/sunscour.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surging Aether",
+   "files": [
+    "engine/src/cards/pool/surging-aether.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surging Dementia",
+   "files": [
+    "engine/src/cards/pool/surging-dementia.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surging Flame",
+   "files": [
+    "engine/src/cards/pool/surging-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surging Might",
+   "files": [
+    "engine/src/cards/pool/surging-might.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surging Sentinels",
+   "files": [
+    "engine/src/cards/pool/surging-sentinels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Survivor of the Unseen",
+   "files": [
+    "engine/src/cards/pool/survivor-of-the-unseen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tamanoa",
+   "files": [
+    "engine/src/cards/pool/tamanoa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thermopod",
+   "files": [
+    "engine/src/cards/pool/thermopod.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tresserhorn Skyknight",
+   "files": [
+    "engine/src/cards/pool/tresserhorn-skyknight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ursine Fylgja",
+   "files": [
+    "engine/src/cards/pool/ursine-fylgja.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wilderness Elemental",
+   "files": [
+    "engine/src/cards/pool/wilderness-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woolly Razorback",
+   "files": [
+    "engine/src/cards/pool/woolly-razorback.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Sheltering Ancient",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep of putting a +1/+1 counter on a creature an opponent controls"
+  },
+  {
+   "name": "Vanish into Memory",
+   "needs": [
+    "effect:delayed-return-then-discard-toughness"
+   ],
+   "why": "discard cards equal to the returned creature's toughness, only if it returned"
+  },
+  {
+   "name": "Hibernation's End",
+   "needs": [
+    "trigger:cumulative-upkeep-paid"
+   ],
+   "why": "whenever you pay this enchantment's cumulative upkeep"
+  },
+  {
+   "name": "Balduvian Fallen",
+   "needs": [
+    "trigger:cumulative-upkeep-paid"
+   ],
+   "why": "whenever its cumulative upkeep is paid, +1/+0 for each {B} or {R} spent"
+  },
+  {
+   "name": "Cover of Winter",
+   "needs": [
+    "replacement:prevent-n-damage-from-each-source"
+   ],
+   "why": "prevent X of the combat damage each creature would deal to you and your creatures"
+  },
+  {
+   "name": "Jester's Scepter",
+   "needs": [
+    "zone:exile-face-down",
+    "cost:cost-move-linked-exiled-card"
+   ],
+   "why": "a cost moving one of its face-down exiled cards to the graveyard, countering a spell of that name"
+  },
+  {
+   "name": "Shape of the Wiitigo",
+   "needs": [
+    "condition:attacked-or-blocked-since-last-upkeep"
+   ],
+   "why": "if it attacked or blocked since your last upkeep"
+  },
+  {
+   "name": "Rimehorn Aurochs",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "target creature blocks target creature this turn if able"
+  },
+  {
+   "name": "Ronom Serpent",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "can't attack unless defending player controls a snow land"
+  },
+  {
+   "name": "Martyr of Bones",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "reveal X black cards from your hand as a cost"
+  },
+  {
+   "name": "Martyr of Sands",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "reveal X white cards from your hand as a cost"
+  },
+  {
+   "name": "Martyr of Frost",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "reveal X blue cards from your hand as a cost"
+  },
+  {
+   "name": "Martyr of Spores",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "reveal X green cards from your hand as a cost"
+  },
+  {
+   "name": "Panglacial Wurm",
+   "needs": [
+    "static:cast-while-searching-library"
+   ],
+   "why": "cast it from your library while you're searching it"
+  },
+  {
+   "name": "Jötun Grunt",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep of putting two cards from a single graveyard on the bottom of their owner's library"
+  },
+  {
+   "name": "Garza Zol, Plague Queen",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "whenever a creature dealt damage by it this turn dies"
+  },
+  {
+   "name": "Thermal Flux",
+   "needs": [
+    "effect:animate-add-supertype",
+    "static:lose-supertype"
+   ],
+   "why": "a permanent becomes snow, or stops being snow, until end of turn"
+  },
+  {
+   "name": "Luminesce",
+   "needs": [
+    "replacement:prevent-damage-from-colored-sources"
+   ],
+   "why": "prevent all damage black and red sources would deal this turn, combat or not"
+  },
+  {
+   "name": "Karplusan Strider",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "can't be the target of blue or black spells (any player's; abilities still can)"
+  },
+  {
+   "name": "Magmatic Core",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "damage divided among any number of targets, the total its age counters"
+  },
+  {
+   "name": "Wall of Shards",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep of an opponent gaining 1 life"
+  },
+  {
+   "name": "Herald of Leshrac",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep of gaining control of a land you don't control"
+  },
+  {
+   "name": "Rime Transfusion",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "granted {S}: can't be blocked this turn except by snow creatures"
+  },
+  {
+   "name": "Lightning Storm",
+   "needs": [
+    "static:spell-grants-ability-while-on-stack",
+    "effect:any-player-may-activate"
+   ],
+   "why": "an ability any player may activate while it's on the stack, changing its target"
+  },
+  {
+   "name": "Martyr of Ashes",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "reveal X red cards from your hand as a cost"
+  },
+  {
+   "name": "Karplusan Minotaur",
+   "needs": [
+    "keyword:cumulative-upkeep",
+    "target:chosen-by-other-player"
+   ],
+   "why": "cumulative upkeep of flipping a coin; a lost flip's target is an opponent's choice"
+  },
+  {
+   "name": "Vexing Sphinx",
+   "needs": [
+    "keyword:cumulative-upkeep"
+   ],
+   "why": "cumulative upkeep of discarding a card"
+  },
+  {
+   "name": "Rimefeather Owl",
+   "needs": [
+    "static:static-grant-supertype"
+   ],
+   "why": "permanents with ice counters on them are snow"
+  },
+  {
+   "name": "Blizzard Specter",
+   "needs": [
+    "effect:that-player-returns-permanent"
+   ],
+   "why": "the damaged player returns a permanent of their choice to its owner's hand"
+  },
+  {
+   "name": "Gelid Shackles",
+   "needs": [
+    "static:enchanted-abilities-cant-be-activated"
+   ],
+   "why": "the enchanted creature's activated abilities can't be activated"
+  },
+  {
+   "name": "Void Maw",
+   "needs": [
+    "cost:cost-move-linked-exiled-card"
+   ],
+   "why": "a cost of putting a card it exiled into its owner's graveyard"
+  },
+  {
+   "name": "Balduvian Warlord",
+   "needs": [
+    "effect:remove-blocker-unblock-and-reblock"
+   ],
+   "why": "remove a blocker from combat, then it blocks an attacker of your choice"
+  },
+  {
+   "name": "Zombie Musher",
+   "needs": [
+    "keyword:snow-landwalk"
+   ],
+   "why": "snow landwalk"
+  }
+ ]
+}

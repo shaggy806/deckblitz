@@ -27481,7 +27481,7 @@ export class Game {
   private placeRevealed(
     owner: PlayerId,
     revealed: readonly ObjectId[],
-    rest: Extract<EffectSpec, { kind: "reveal-until" }>["rest"],
+    rest: Extract<EffectSpec, { kind: "reveal-until" }>["rest"] | "bottom-any-order",
     exiled: boolean,
   ): void {
     const zone: ZoneType = exiled ? "exile" : "library";
@@ -27489,6 +27489,14 @@ export class Game {
     switch (rest) {
       case "stay":
         return;
+      case "bottom-any-order": {
+        // Ripple's "on the bottom of your library in any order" (rule
+        // 702.60a): the owner orders them (401.4), when that's a choice.
+        if (exiled) for (const id of still) this.moveObject(id, "library", { libraryPlacement: "bottom" });
+        const inLibrary = still.filter((id) => this.state.objects[id]?.zone === "library");
+        this.beginLibraryOrder(owner, inLibrary, "bottom");
+        return;
+      }
       case "graveyard":
         this.withGraveyardEnterBatch(() => {
           for (const id of still) this.moveObject(id, "graveyard");

@@ -461,8 +461,10 @@ import _poolPerfectedTheory from "../pool/perfected-theory.js";
 import _poolPhantomBlade from "../pool/phantom-blade.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
+import _poolPhobianPhantasm from "../pool/phobian-phantasm.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
+import _poolPhyrexianSnowcrusher from "../pool/phyrexian-snowcrusher.js";
 import _poolPiecesOfThePuzzle from "../pool/pieces-of-the-puzzle.js";
 import _poolPillagingHorde from "../pool/pillaging-horde.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
@@ -1245,8 +1247,10 @@ const shard: CardShard = {
     _poolPhantomBlade,
     _poolPhantomWarrior,
     _poolPharikasSpawn,
+    _poolPhobianPhantasm,
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
+    _poolPhyrexianSnowcrusher,
     _poolPiecesOfThePuzzle,
     _poolPillagingHorde,
     _poolPiratesPillage,

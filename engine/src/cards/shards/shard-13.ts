@@ -207,6 +207,7 @@ import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
 import _poolFeralThallid from "../pool/feral-thallid.js";
 import _poolFieldCreeper from "../pool/field-creeper.js";
+import _poolFieldMarshal from "../pool/field-marshal.js";
 import _poolFieryHellhound from "../pool/fiery-hellhound.js";
 import _poolFieryMantle from "../pool/fiery-mantle.js";
 import _poolFinaleOfEternity from "../pool/finale-of-eternity.js";
@@ -575,6 +576,7 @@ import _poolSpringmantleCleric from "../pool/springmantle-cleric.js";
 import _poolSquadCaptain from "../pool/squad-captain.js";
 import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
+import _poolStalkingYeti from "../pool/stalking-yeti.js";
 import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
 import _poolStarlitMantle from "../pool/starlit-mantle.js";
@@ -604,6 +606,7 @@ import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
+import _poolSurvivorOfTheUnseen from "../pool/survivor-of-the-unseen.js";
 import _poolSvyelunOfSeaAndSky from "../pool/svyelun-of-sea-and-sky.js";
 import _poolSwiftEnd from "../pool/swift-end.js";
 import _poolSwiftReconfiguration from "../pool/swift-reconfiguration.js";
@@ -942,6 +945,7 @@ const shard: CardShard = {
     _poolFelidarGuardian,
     _poolFeralThallid,
     _poolFieldCreeper,
+    _poolFieldMarshal,
     _poolFieryHellhound,
     _poolFieryMantle,
     _poolFinaleOfEternity,
@@ -1310,6 +1314,7 @@ const shard: CardShard = {
     _poolSquadCaptain,
     _poolStagecoachSecurity,
     _poolStaggeringSize,
+    _poolStalkingYeti,
     _poolStallOut,
     _poolStampedingRhino,
     _poolStarlitMantle,
@@ -1339,6 +1344,7 @@ const shard: CardShard = {
     _poolSunBlessedPeak,
     _poolSunlitMarsh,
     _poolSurlyFarrier,
+    _poolSurvivorOfTheUnseen,
     _poolSvyelunOfSeaAndSky,
     _poolSwiftEnd,
     _poolSwiftReconfiguration,

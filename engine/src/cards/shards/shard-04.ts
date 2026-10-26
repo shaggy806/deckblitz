@@ -408,6 +408,7 @@ import _poolOasisGardener from "../pool/oasis-gardener.js";
 import _poolOathOfLiliana from "../pool/oath-of-liliana.js";
 import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
+import _poolOhranYeti from "../pool/ohran-yeti.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
 import _poolOliviasBloodsworn from "../pool/olivias-bloodsworn.js";
 import _poolOnThinIce from "../pool/on-thin-ice.js";
@@ -552,6 +553,7 @@ import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSonicAssault from "../pool/sonic-assault.js";
 import _poolSonicShrieker from "../pool/sonic-shrieker.js";
 import _poolSorinSolemnVisitor from "../pool/sorin-solemn-visitor.js";
+import _poolSoulSpike from "../pool/soul-spike.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralBinding from "../pool/spectral-binding.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
@@ -651,6 +653,7 @@ import _poolUnderfootUnderdogs from "../pool/underfoot-underdogs.js";
 import _poolUnflinchingHortimancer from "../pool/unflinching-hortimancer.js";
 import _poolUnimpededTrespasser from "../pool/unimpeded-trespasser.js";
 import _poolUnstableExperiment from "../pool/unstable-experiment.js";
+import _poolUrsineFylgja from "../pool/ursine-fylgja.js";
 import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
@@ -1130,6 +1133,7 @@ const shard: CardShard = {
     _poolOathOfLiliana,
     _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
+    _poolOhranYeti,
     _poolOjutaiInterceptor,
     _poolOliviasBloodsworn,
     _poolOnThinIce,
@@ -1274,6 +1278,7 @@ const shard: CardShard = {
     _poolSonicAssault,
     _poolSonicShrieker,
     _poolSorinSolemnVisitor,
+    _poolSoulSpike,
     _poolSparringMummy,
     _poolSpectralBinding,
     _poolSpectralDenial,
@@ -1373,6 +1378,7 @@ const shard: CardShard = {
     _poolUnflinchingHortimancer,
     _poolUnimpededTrespasser,
     _poolUnstableExperiment,
+    _poolUrsineFylgja,
     _poolValorOfTheWorthy,
     _poolVampireChampion,
     _poolVaultSkirge,

@@ -181,6 +181,7 @@ import _poolDreamCoat from "../pool/dream-coat.js";
 import _poolDregscapeZombie from "../pool/dregscape-zombie.js";
 import _poolDrivenDespair from "../pool/driven-despair.js";
 import _poolDrownerOfHope from "../pool/drowner-of-hope.js";
+import _poolEarthenGoo from "../pool/earthen-goo.js";
 import _poolEarthlink from "../pool/earthlink.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
@@ -252,6 +253,7 @@ import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
 import _poolGiltLeafSeer from "../pool/gilt-leaf-seer.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
+import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
 import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
@@ -269,6 +271,7 @@ import _poolGrazingWhiptail from "../pool/grazing-whiptail.js";
 import _poolGreatsword from "../pool/greatsword.js";
 import _poolGreenGoblin from "../pool/green-goblin.js";
 import _poolGreenbeltRadical from "../pool/greenbelt-radical.js";
+import _poolGrimHarvest from "../pool/grim-harvest.js";
 import _poolGrowthSpiral from "../pool/growth-spiral.js";
 import _poolGryffVanguard from "../pool/gryff-vanguard.js";
 import _poolGuardianOfGhirapur from "../pool/guardian-of-ghirapur.js";
@@ -337,6 +340,7 @@ import _poolJayasGreeting from "../pool/jayas-greeting.js";
 import _poolJennikasTechnique from "../pool/jennikas-technique.js";
 import _poolJhoirasFamiliar from "../pool/jhoiras-familiar.js";
 import _poolJinSakaiGhostOfTsushima from "../pool/jin-sakai-ghost-of-tsushima.js";
+import _poolJokulmorder from "../pool/jokulmorder.js";
 import _poolJustFate from "../pool/just-fate.js";
 import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
@@ -501,6 +505,7 @@ import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
 import _poolRevengeOfTheRats from "../pool/revenge-of-the-rats.js";
 import _poolRibCageSpider from "../pool/rib-cage-spider.js";
+import _poolRimewindTaskmage from "../pool/rimewind-taskmage.js";
 import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
@@ -919,6 +924,7 @@ const shard: CardShard = {
     _poolDregscapeZombie,
     _poolDrivenDespair,
     _poolDrownerOfHope,
+    _poolEarthenGoo,
     _poolEarthlink,
     _poolEarthquakeDragon,
     _poolEidolonOfPhilosophy,
@@ -990,6 +996,7 @@ const shard: CardShard = {
     _poolGildedGoose,
     _poolGiltLeafSeer,
     _poolGimliCounterOfKills,
+    _poolGlacialPlating,
     _poolGloom,
     _poolGoShintaiOfLifesOrigin,
     _poolGoblinChieftain,
@@ -1007,6 +1014,7 @@ const shard: CardShard = {
     _poolGreatsword,
     _poolGreenGoblin,
     _poolGreenbeltRadical,
+    _poolGrimHarvest,
     _poolGrowthSpiral,
     _poolGryffVanguard,
     _poolGuardianOfGhirapur,
@@ -1075,6 +1083,7 @@ const shard: CardShard = {
     _poolJennikasTechnique,
     _poolJhoirasFamiliar,
     _poolJinSakaiGhostOfTsushima,
+    _poolJokulmorder,
     _poolJustFate,
     _poolJusticiarsPortal,
     _poolKangeesLieutenant,
@@ -1239,6 +1248,7 @@ const shard: CardShard = {
     _poolRevelsongHorn,
     _poolRevengeOfTheRats,
     _poolRibCageSpider,
+    _poolRimewindTaskmage,
     _poolRiseToTheChallenge,
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,

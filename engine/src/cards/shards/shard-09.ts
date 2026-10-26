@@ -125,6 +125,7 @@ import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
+import _poolControvert from "../pool/controvert.js";
 import _poolConvenientTarget from "../pool/convenient-target.js";
 import _poolCopyCatchers from "../pool/copy-catchers.js";
 import _poolCorridorMonitor from "../pool/corridor-monitor.js";
@@ -306,6 +307,7 @@ import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolHyenaUmbra from "../pool/hyena-umbra.js";
 import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
 import _poolIceStorm from "../pool/ice-storm.js";
+import _poolIcefall from "../pool/icefall.js";
 import _poolIcequake from "../pool/icequake.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
@@ -877,6 +879,7 @@ const shard: CardShard = {
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
     _poolConsumingAberration,
+    _poolControvert,
     _poolConvenientTarget,
     _poolCopyCatchers,
     _poolCorridorMonitor,
@@ -1058,6 +1061,7 @@ const shard: CardShard = {
     _poolHyenaUmbra,
     _poolIcatianLieutenant,
     _poolIceStorm,
+    _poolIcefall,
     _poolIcequake,
     _poolIcyReception,
     _poolIllegitimateBusiness,

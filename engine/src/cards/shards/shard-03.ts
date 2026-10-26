@@ -195,6 +195,7 @@ import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
+import _poolFrostRaptor from "../pool/frost-raptor.js";
 import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
 import _poolFyndhornPollen from "../pool/fyndhorn-pollen.js";
@@ -550,6 +551,7 @@ import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
+import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
 import _poolSuspend from "../pool/suspend.js";
 import _poolSwellOfCourage from "../pool/swell-of-courage.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolFlourishingHunter,
     _poolForsakenMonument,
     _poolFrogmyrEnforcer,
+    _poolFrostRaptor,
     _poolFurybladeVampire,
     _poolFyndhornBow,
     _poolFyndhornPollen,
@@ -1212,6 +1215,7 @@ const shard: CardShard = {
     _poolSunderingArchaic,
     _poolSunspireGriffin,
     _poolSupplyLineCranes,
+    _poolSurgingDementia,
     _poolSurveillanceRoom,
     _poolSuspend,
     _poolSwellOfCourage,

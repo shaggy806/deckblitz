@@ -2622,7 +2622,12 @@ export type EffectSpec =
        * declines or none is left. With `from: "exiled-this-way"` — the cards
        * this resolution exiled before the first offer, still in exile (not
        * one exiled later, as a cost of casting one was paid) — or
-       * `"targets"`. Not with `then`, `else` or `rest`.
+       * `"targets"`. Or `libraryTop` with `rest` — ripple (rule 702.60a):
+       * "you may cast any of those cards with the same name as this spell
+       * without paying their mana costs, then put all revealed cards not
+       * cast this way on the bottom of your library in any order", the rest
+       * placed once the player declines or nothing is left to cast. Not with
+       * `then` or `else`.
        */
       readonly repeat?: boolean;
       /**
@@ -2716,8 +2721,11 @@ export type EffectSpec =
       readonly else?: EffectSpec;
       /** With `libraryTop`: "put the rest on the bottom of your library in a
        * random order" — every card looked at and not cast, once `then` or
-       * `else` is done. Without it they stay where they are. */
-      readonly rest?: "bottom-random";
+       * `else` is done (or, with `repeat`, once nothing more is cast).
+       * `"bottom-any-order"` is "…in any order" (ripple, rule 702.60a): the
+       * player orders them (rule 401.4), asked only when the order is a
+       * choice. Without it they stay where they are. */
+      readonly rest?: "bottom-random" | "bottom-any-order";
       /** Set only on the copy parked across the decision. */
       readonly progress?: CastNowProgress;
     }
@@ -6443,7 +6451,7 @@ export interface EffectApi {
   placeRevealed(
     owner: PlayerId,
     revealed: readonly ObjectId[],
-    rest: Extract<EffectSpec, { kind: "reveal-until" }>["rest"],
+    rest: Extract<EffectSpec, { kind: "reveal-until" }>["rest"] | "bottom-any-order",
     exiled: boolean,
   ): void;
   /** This context with other targets — a step applied to cards the
@@ -8033,7 +8041,10 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     }
     progress = { since: ctx.nextEventSeq(), cards, looked };
     if (offerCastNow(spec, progress, ctx)) return;
-    if (spec.repeat === true) return;
+    if (spec.repeat === true) {
+      placeCastNowRest(spec, progress, ctx);
+      return;
+    }
   }
   // "Any number of them": one cast or played, the rest offered again — the
   // cards first offered, less what's on the stack or the battlefield now
@@ -8043,8 +8054,10 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
   // "this way".
   if (spec.repeat === true) {
     if (ctx.castSince(progress.cards, progress.since)) {
-      offerCastNow(spec, { since: ctx.nextEventSeq(), cards: progress.cards, looked: progress.looked }, ctx);
+      const next = { since: ctx.nextEventSeq(), cards: progress.cards, looked: progress.looked };
+      if (offerCastNow(spec, next, ctx)) return;
     }
+    placeCastNowRest(spec, progress, ctx);
     return;
   }
   if (progress.followed !== true) {
@@ -8060,6 +8073,16 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       }
     }
   }
+  placeCastNowRest(spec, progress, ctx);
+}
+
+/** A `cast-now`'s `rest`: the cards it looked at and didn't cast, still in
+ * the library, to its bottom. */
+function placeCastNowRest(
+  spec: Extract<EffectSpec, { kind: "cast-now" }>,
+  progress: CastNowProgress,
+  ctx: ResolutionContext,
+): void {
   if (spec.rest !== undefined && progress.looked.length > 0) {
     ctx.placeRevealed(ctx.controller, progress.looked, spec.rest, false);
   }

@@ -77,6 +77,7 @@ import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBrowse from "../pool/browse.js";
+import _poolBullAurochs from "../pool/bull-aurochs.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolBurningAnger from "../pool/burning-anger.js";
@@ -604,6 +605,7 @@ import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
+import _poolSunscour from "../pool/sunscour.js";
 import _poolSunsetPyramid from "../pool/sunset-pyramid.js";
 import _poolSunshowerDruid from "../pool/sunshower-druid.js";
 import _poolSurgicalPrecision from "../pool/surgical-precision.js";
@@ -842,6 +844,7 @@ const shard: CardShard = {
     _poolBrinkOfDisaster,
     _poolBronzebeakMoa,
     _poolBrowse,
+    _poolBullAurochs,
     _poolBullsStrength,
     _poolBurnTheAccursed,
     _poolBurningAnger,
@@ -1369,6 +1372,7 @@ const shard: CardShard = {
     _poolSuddenStrength,
     _poolSunSentinel,
     _poolSungracePegasus,
+    _poolSunscour,
     _poolSunsetPyramid,
     _poolSunshowerDruid,
     _poolSurgicalPrecision,

@@ -1633,6 +1633,29 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(shah.triggered[0].__todo).toEqual(["its echo has to say when the cost is paid"]);
   });
 
+  it("recover (rule 702.59a) and ripple (702.60a): a graveyard trigger, and a cast trigger naming the card", () => {
+    const recover = face(
+      "Return target creature card from your graveyard to your hand.\nRecover {2}{B} (When a creature is put into your graveyard from the battlefield, you may pay {2}{B}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)",
+      "Instant",
+    );
+    expect(recover.triggered[0]).toMatchObject({
+      fromGraveyard: true,
+      trigger: { on: "dies", filter: { type: "creature", ownedBy: "you" } },
+      effect: { kind: "may", cost: "{2}{B}", else: { kind: "exile", target: "source" } },
+    });
+    expect(recover.complete).toBe(true);
+    expect(face("Recover—Pay half your life, rounded up. (When another creature is put into your graveyard from the battlefield, you may pay half your life, rounded up. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)").triggered[0].effect).toMatchObject({ costLife: { half: { lifeTotal: "you" } } });
+    const ripple = face(
+      "Ripple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast spells with the same name as this spell from among those cards without paying their mana costs. Put the rest on the bottom of your library.)\n~ deals 2 damage to any target.",
+      "Instant",
+    );
+    expect(ripple.triggered[0]).toMatchObject({
+      trigger: { on: "this-cast" },
+      effect: { kind: "may", effect: { kind: "cast-now", from: { libraryTop: 4 }, spell: { name: "Test Card" }, free: true, repeat: true, rest: "bottom-any-order" } },
+    });
+    expect(ripple.complete).toBe(true);
+  });
+
   it("bushido (702.45a) and soulshift (702.46a): Kamigawa's keyword lines, their triggers", () => {
     const samurai = face(
       "Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)",

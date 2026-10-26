@@ -35,6 +35,7 @@ import _poolArcaneOmens from "../pool/arcane-omens.js";
 import _poolArchelosLagoonMystic from "../pool/archelos-lagoon-mystic.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArchfiendsVessel from "../pool/archfiends-vessel.js";
+import _poolArcticNishoba from "../pool/arctic-nishoba.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArenaAthlete from "../pool/arena-athlete.js";
 import _poolArgentDais from "../pool/argent-dais.js";
@@ -781,6 +782,7 @@ import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
+import _tokensWolfTokenSoundTheCall from "../tokens/wolf-token-sound-the-call.js";
 
 const shard: CardShard = {
   pool: [
@@ -816,6 +818,7 @@ const shard: CardShard = {
     _poolArchelosLagoonMystic,
     _poolArchersParapet,
     _poolArchfiendsVessel,
+    _poolArcticNishoba,
     _poolArdentPlea,
     _poolArenaAthlete,
     _poolArgentDais,
@@ -1564,6 +1567,7 @@ const shard: CardShard = {
     _tokensSliverToken,
     _tokensVirtuousRoleToken,
     _tokensWarriorTokenValorsReachTagTeam,
+    _tokensWolfTokenSoundTheCall,
   ],
 };
 

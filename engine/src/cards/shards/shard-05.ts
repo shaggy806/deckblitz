@@ -180,6 +180,7 @@ import _poolDemonsGrasp from "../pool/demons-grasp.js";
 import _poolDesculptingBlast from "../pool/desculpting-blast.js";
 import _poolDevastation from "../pool/devastation.js";
 import _poolDeviantGlee from "../pool/deviant-glee.js";
+import _poolDiamondFaerie from "../pool/diamond-faerie.js";
 import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
@@ -465,6 +466,7 @@ import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPennonBlade from "../pool/pennon-blade.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
+import _poolPhyrexianIronfoot from "../pool/phyrexian-ironfoot.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
@@ -910,6 +912,7 @@ const shard: CardShard = {
     _poolDesculptingBlast,
     _poolDevastation,
     _poolDeviantGlee,
+    _poolDiamondFaerie,
     _poolDigsiteEngineer,
     _poolDireStrainDemolisher,
     _poolDismember,
@@ -1195,6 +1198,7 @@ const shard: CardShard = {
     _poolPeggyCarterSecretAgent,
     _poolPennonBlade,
     _poolPermissionDenied,
+    _poolPhyrexianIronfoot,
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,

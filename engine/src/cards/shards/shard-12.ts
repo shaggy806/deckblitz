@@ -501,6 +501,7 @@ import _poolReveredUnicorn from "../pool/revered-unicorn.js";
 import _poolRevitalize from "../pool/revitalize.js";
 import _poolRevolutionaryRebuff from "../pool/revolutionary-rebuff.js";
 import _poolRiggingRunner from "../pool/rigging-runner.js";
+import _poolRimeboundDead from "../pool/rimebound-dead.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
@@ -535,6 +536,7 @@ import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSeedTheLand from "../pool/seed-the-land.js";
+import _poolSekkuarDeathkeeper from "../pool/sekkuar-deathkeeper.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
 import _poolSengirAutocrat from "../pool/sengir-autocrat.js";
 import _poolSetessanOathsworn from "../pool/setessan-oathsworn.js";
@@ -1226,6 +1228,7 @@ const shard: CardShard = {
     _poolRevitalize,
     _poolRevolutionaryRebuff,
     _poolRiggingRunner,
+    _poolRimeboundDead,
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
     _poolRiseAgain,
@@ -1260,6 +1263,7 @@ const shard: CardShard = {
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
     _poolSeedTheLand,
+    _poolSekkuarDeathkeeper,
     _poolSelvalasStampede,
     _poolSengirAutocrat,
     _poolSetessanOathsworn,

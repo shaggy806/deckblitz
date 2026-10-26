@@ -21,6 +21,7 @@ import _poolAlexiosDeimosOfKosmos from "../pool/alexios-deimos-of-kosmos.js";
 import _poolAlibouAncientWitness from "../pool/alibou-ancient-witness.js";
 import _poolAlive from "../pool/alive.js";
 import _poolAlleyStrangler from "../pool/alley-strangler.js";
+import _poolAllosaurusRider from "../pool/allosaurus-rider.js";
 import _poolAllureOfPower from "../pool/allure-of-power.js";
 import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
 import _poolAmplifire from "../pool/amplifire.js";
@@ -235,6 +236,7 @@ import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
 import _poolFrostMarsh from "../pool/frost-marsh.js";
+import _poolFrostwebSpider from "../pool/frostweb-spider.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFumarole from "../pool/fumarole.js";
 import _poolFurybornHellkite from "../pool/furyborn-hellkite.js";
@@ -748,6 +750,7 @@ const shard: CardShard = {
     _poolAlibouAncientWitness,
     _poolAlive,
     _poolAlleyStrangler,
+    _poolAllosaurusRider,
     _poolAllureOfPower,
     _poolAlphaDeathclaw,
     _poolAmplifire,
@@ -962,6 +965,7 @@ const shard: CardShard = {
     _poolFortify,
     _poolFountainOfRenewal,
     _poolFrostMarsh,
+    _poolFrostwebSpider,
     _poolFrozenShade,
     _poolFumarole,
     _poolFurybornHellkite,

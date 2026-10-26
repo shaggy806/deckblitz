@@ -214,6 +214,7 @@ import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
 import _poolFormationBreaker from "../pool/formation-breaker.js";
 import _poolFormidableCommons from "../pool/formidable-commons.js";
+import _poolFreyalisesRadiance from "../pool/freyalises-radiance.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
@@ -953,6 +954,7 @@ const shard: CardShard = {
     _poolForest,
     _poolFormationBreaker,
     _poolFormidableCommons,
+    _poolFreyalisesRadiance,
     _poolFrontlineRush,
     _poolFuneralLongboat,
     _poolFurnaceReins,

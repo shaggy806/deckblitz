@@ -211,6 +211,7 @@ import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
+import _poolFeastOfFlesh from "../pool/feast-of-flesh.js";
 import _poolFeedThePack from "../pool/feed-the-pack.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
@@ -234,6 +235,7 @@ import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
+import _poolGarzasAssassin from "../pool/garzas-assassin.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
@@ -338,6 +340,7 @@ import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
 import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js";
+import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
@@ -940,6 +943,7 @@ const shard: CardShard = {
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
     _poolFearOfImmobility,
+    _poolFeastOfFlesh,
     _poolFeedThePack,
     _poolFiendishDuo,
     _poolFightToTheDeath,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolFuneralCharm,
     _poolFuneralRites,
     _poolGandalfGoblinsBane,
+    _poolGarzasAssassin,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
     _poolGhirapurGearcrafter,
@@ -1067,6 +1072,7 @@ const shard: CardShard = {
     _poolKorCelebrant,
     _poolKorSkyfisher,
     _poolKorlashHeirToBlackblade,
+    _poolKrovikanMist,
     _poolKukemssaPirates,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,

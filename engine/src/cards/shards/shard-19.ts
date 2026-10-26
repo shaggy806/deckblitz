@@ -41,6 +41,7 @@ import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
 import _poolBackwoodsSurvivalists from "../pool/backwoods-survivalists.js";
+import _poolBalduvianFrostwaker from "../pool/balduvian-frostwaker.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
@@ -272,6 +273,7 @@ import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
+import _poolGoblinRimerunner from "../pool/goblin-rimerunner.js";
 import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
@@ -388,6 +390,7 @@ import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
 import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
+import _poolLovisaColdeyes from "../pool/lovisa-coldeyes.js";
 import _poolLoxodonBattlePriest from "../pool/loxodon-battle-priest.js";
 import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
 import _poolLunkErrant from "../pool/lunk-errant.js";
@@ -644,6 +647,8 @@ import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
 import _poolSunriseSeeker from "../pool/sunrise-seeker.js";
 import _poolSupportiveParents from "../pool/supportive-parents.js";
+import _poolSurgingAether from "../pool/surging-aether.js";
+import _poolSurgingSentinels from "../pool/surging-sentinels.js";
 import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
@@ -802,6 +807,7 @@ const shard: CardShard = {
     _poolAwakenTheAges,
     _poolAwakenTheWoods,
     _poolBackwoodsSurvivalists,
+    _poolBalduvianFrostwaker,
     _poolBalemurkLeech,
     _poolBallynockCohort,
     _poolBanishingSlash,
@@ -1033,6 +1039,7 @@ const shard: CardShard = {
     _poolGlistenerElf,
     _poolGoblinGlider,
     _poolGoblinHeelcutter,
+    _poolGoblinRimerunner,
     _poolGoldenhideOx,
     _poolGoldmeadowLookout,
     _poolGoliathMassManipulator,
@@ -1149,6 +1156,7 @@ const shard: CardShard = {
     _poolLoreWeaver,
     _poolLoreholdCharm,
     _poolLossarnachCaptain,
+    _poolLovisaColdeyes,
     _poolLoxodonBattlePriest,
     _poolLunarchVeteran,
     _poolLunkErrant,
@@ -1405,6 +1413,8 @@ const shard: CardShard = {
     _poolSunbladeSamurai,
     _poolSunriseSeeker,
     _poolSupportiveParents,
+    _poolSurgingAether,
+    _poolSurgingSentinels,
     _poolSurrakarMarauder,
     _poolSweetOblivion,
     _poolSwordOfSinewAndSteel,

@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Ripple and recover, and Coldsnap whole** (batch 196, the second middle walk, 2026-10-26,
+  `keyword:ripple`): **built** ripple (rule 702.60 — the `ripple(n, name)`
+  helper: a `this-cast` trigger, a `may` reveal and a repeating free `cast-now` from the library
+  top limited to the card's name; `cast-now`'s `repeat` now goes with `libraryTop` and `rest`, and
+  `rest: "bottom-any-order"` asks the order, rule 401.4) and recover (rule 702.59 — the
+  `recover(cost)` helper over the `fromGraveyard` dies trigger, a mana cost or half your life),
+  both taught to the scaffolder. 79 of Coldsnap's 112 left authored — Adarkar Valkyrie, Skred,
+  Soul Spike, Allosaurus Rider, Controvert, the five Surging cards and more, the "{G} or {W}"
+  cumulative upkeeps as a hybrid cost — by five `card-author` agents and the lead; 33 blocked
+  (`B196.json`), cumulative upkeep's other costs (six) and the Martyrs' reveal cost (five)
+  leading. Coldsnap is whole. `ripple-recover.test.ts`.
 - **Future Sight, whole** (batch 195, the middle walk's second range, 2026-10-26): no feature
   built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below,
   Narcomoeba, Storm Entity, Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67

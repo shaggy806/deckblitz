@@ -9,6 +9,7 @@ import _poolAbzanRunemark from "../pool/abzan-runemark.js";
 import _poolAcademicAscent from "../pool/academic-ascent.js";
 import _poolAcridian from "../pool/acridian.js";
 import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
+import _poolAdarkarValkyrie from "../pool/adarkar-valkyrie.js";
 import _poolAdmiralBrassUnsinkable from "../pool/admiral-brass-unsinkable.js";
 import _poolAdornedPouncer from "../pool/adorned-pouncer.js";
 import _poolAdunOakenshield from "../pool/adun-oakenshield.js";
@@ -155,6 +156,7 @@ import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
 import _poolDeathPriestOfMyrkul from "../pool/death-priest-of-myrkul.js";
 import _poolDeathbellowWarCry from "../pool/deathbellow-war-cry.js";
 import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
+import _poolDeathmark from "../pool/deathmark.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
@@ -774,6 +776,7 @@ const shard: CardShard = {
     _poolAcademicAscent,
     _poolAcridian,
     _poolAcrobaticManeuver,
+    _poolAdarkarValkyrie,
     _poolAdmiralBrassUnsinkable,
     _poolAdornedPouncer,
     _poolAdunOakenshield,
@@ -920,6 +923,7 @@ const shard: CardShard = {
     _poolDeathPriestOfMyrkul,
     _poolDeathbellowWarCry,
     _poolDeathcurseOgre,
+    _poolDeathmark,
     _poolDeathsprout,
     _poolDeception,
     _poolDenziloreFatehold,

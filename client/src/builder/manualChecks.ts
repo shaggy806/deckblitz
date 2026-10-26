@@ -8308,6 +8308,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({ you: { bf: ['Plains*3'], hand: ['Just Fate'] }, opp: { bf: ['Hill Giant'] } }),
   ),
   preset(
+    'Surging Sentinels: ripple casts the copy it reveals for free',
+    board({ you: { bf: ['Plains*3'], hand: ['Surging Sentinels'], lib: ['Surging Sentinels', 'Grizzly Bears', 'Hill Giant', 'Island'] } }),
+  ),
+  preset(
     "Sorcerous Sight: looking at an opponent's hand",
     board({ you: { bf: ['Island'], hand: ['Sorcerous Sight'] }, opp: { hand: ['Grizzly Bears', 'Lightning Bolt', 'Forest'] } }),
   ),

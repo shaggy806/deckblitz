@@ -40,6 +40,7 @@ import _poolAstralWingspan from "../pool/astral-wingspan.js";
 import _poolAtlanteanCavalry from "../pool/atlantean-cavalry.js";
 import _poolAttendedKnight from "../pool/attended-knight.js";
 import _poolAttentiveSunscribe from "../pool/attentive-sunscribe.js";
+import _poolAurochsHerd from "../pool/aurochs-herd.js";
 import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
 import _poolAvatarOfTheResolute from "../pool/avatar-of-the-resolute.js";
@@ -788,6 +789,7 @@ const shard: CardShard = {
     _poolAtlanteanCavalry,
     _poolAttendedKnight,
     _poolAttentiveSunscribe,
+    _poolAurochsHerd,
     _poolAuspiciousArrival,
     _poolAutochthonWurm,
     _poolAvatarOfTheResolute,

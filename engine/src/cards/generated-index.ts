@@ -579,6 +579,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Wolf Token",
   "Wolf Token (Garruk, Cursed Huntsman)",
   "Wolf Token (Kessig Wolfrider)",
+  "Wolf Token (Sound the Call)",
   "Wood Token",
   "Worm Token",
   "Wraith Token",

@@ -335,7 +335,9 @@ import _poolKinTreeNurturer from "../pool/kin-tree-nurturer.js";
 import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKithkinHarbinger from "../pool/kithkin-harbinger.js";
+import _poolKjeldoranGargoyle from "../pool/kjeldoran-gargoyle.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
+import _poolKrovikanRot from "../pool/krovikan-rot.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
 import _poolLabyrinthChampion from "../pool/labyrinth-champion.js";
 import _poolLambholtButcher from "../pool/lambholt-butcher.js";
@@ -523,6 +525,7 @@ import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
+import _poolSimianBrawler from "../pool/simian-brawler.js";
 import _poolSirenSongLyre from "../pool/siren-song-lyre.js";
 import _poolSizzlingChangeling from "../pool/sizzling-changeling.js";
 import _poolSkallaWolf from "../pool/skalla-wolf.js";
@@ -1034,7 +1037,9 @@ const shard: CardShard = {
     _poolKirinTouchedOrochi,
     _poolKitchen,
     _poolKithkinHarbinger,
+    _poolKjeldoranGargoyle,
     _poolKrallenhordeHowler,
+    _poolKrovikanRot,
     _poolKyoshiIslandPlaza,
     _poolLabyrinthChampion,
     _poolLambholtButcher,
@@ -1222,6 +1227,7 @@ const shard: CardShard = {
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,
     _poolSilvercoatLion,
+    _poolSimianBrawler,
     _poolSirenSongLyre,
     _poolSizzlingChangeling,
     _poolSkallaWolf,
