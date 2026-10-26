@@ -283,6 +283,7 @@ import _poolKheruDreadmaw from "../pool/kheru-dreadmaw.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
 import _poolKillShot from "../pool/kill-shot.js";
 import _poolKindledHeroism from "../pool/kindled-heroism.js";
+import _poolKnightCaptainOfEos from "../pool/knight-captain-of-eos.js";
 import _poolKnightOfSursi from "../pool/knight-of-sursi.js";
 import _poolKnollspineDragon from "../pool/knollspine-dragon.js";
 import _poolKoboldTaskmaster from "../pool/kobold-taskmaster.js";
@@ -537,6 +538,7 @@ import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
 import _poolSwornGuardian from "../pool/sworn-guardian.js";
+import _poolSylvanBounty from "../pool/sylvan-bounty.js";
 import _poolSynapseNecromage from "../pool/synapse-necromage.js";
 import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
 import _poolTaintedTreats from "../pool/tainted-treats.js";
@@ -942,6 +944,7 @@ const shard: CardShard = {
     _poolKillMaimBurn,
     _poolKillShot,
     _poolKindledHeroism,
+    _poolKnightCaptainOfEos,
     _poolKnightOfSursi,
     _poolKnollspineDragon,
     _poolKoboldTaskmaster,
@@ -1196,6 +1199,7 @@ const shard: CardShard = {
     _poolSuperVillainLockup,
     _poolSwashbucklersWhip,
     _poolSwornGuardian,
+    _poolSylvanBounty,
     _poolSynapseNecromage,
     _poolSzarelGenesisShepherd,
     _poolTaintedTreats,

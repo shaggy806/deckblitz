@@ -96,6 +96,8 @@ describe("slot polarity", () => {
     expect(cast("False Demise")).toEqual(["help"]);
     // Its controller loses life when it dies: an Aura for someone else's.
     expect(cast("Death Watch")).toEqual(["harm"]);
+    expect(cast("Yoke of the Damned")).toEqual(["harm"]);
+    expect(cast("Corrupted Roots")).toEqual(["harm"]);
   });
 
   it("reads activated and triggered abilities", () => {

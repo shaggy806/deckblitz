@@ -40,6 +40,7 @@ import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
 import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
+import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBantSureblade from "../pool/bant-sureblade.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
@@ -265,6 +266,7 @@ import _poolHeraldicBanner from "../pool/heraldic-banner.js";
 import _poolHeroOfThePride from "../pool/hero-of-the-pride.js";
 import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
+import _poolHissingIguanar from "../pool/hissing-iguanar.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
 import _poolHoardSmelterDragon from "../pool/hoard-smelter-dragon.js";
@@ -346,6 +348,7 @@ import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMasterOfWinds from "../pool/master-of-winds.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
+import _poolMayaelTheAnima from "../pool/mayael-the-anima.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
 import _poolMeltdown from "../pool/meltdown.js";
 import _poolMemorialVault from "../pool/memorial-vault.js";
@@ -717,6 +720,7 @@ const shard: CardShard = {
     _poolAudacity,
     _poolAuraExtraction,
     _poolAvacynsMemorial,
+    _poolAvenTrailblazer,
     _poolBadgermoleCub,
     _poolBantSureblade,
     _poolBarbaryApes,
@@ -942,6 +946,7 @@ const shard: CardShard = {
     _poolHeroOfThePride,
     _poolHeroicCharge,
     _poolHexhavenDuelingArena,
+    _poolHissingIguanar,
     _poolHitchclawRecluse,
     _poolHoardRobber,
     _poolHoardSmelterDragon,
@@ -1023,6 +1028,7 @@ const shard: CardShard = {
     _poolMaraudingMako,
     _poolMasterOfWinds,
     _poolMasterPakku,
+    _poolMayaelTheAnima,
     _poolMeditationPuzzle,
     _poolMeltdown,
     _poolMemorialVault,

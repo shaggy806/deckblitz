@@ -67,6 +67,7 @@ import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBlitzHellion from "../pool/blitz-hellion.js";
 import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
 import _poolBloodCrypt from "../pool/blood-crypt.js";
+import _poolBloodhallOoze from "../pool/bloodhall-ooze.js";
 import _poolBloodswornKnight from "../pool/bloodsworn-knight.js";
 import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
 import _poolBloodthroneVampire from "../pool/bloodthrone-vampire.js";
@@ -385,6 +386,7 @@ import _poolMarduSkullhunter from "../pool/mardu-skullhunter.js";
 import _poolMarisiBreakerOfTheCoil from "../pool/marisi-breaker-of-the-coil.js";
 import _poolMarkerBeetles from "../pool/marker-beetles.js";
 import _poolMasterOfThePearlTrident from "../pool/master-of-the-pearl-trident.js";
+import _poolMatcaRioters from "../pool/matca-rioters.js";
 import _poolMechHangar from "../pool/mech-hangar.js";
 import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
@@ -440,8 +442,10 @@ import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
 import _poolPaladinsShield from "../pool/paladins-shield.js";
+import _poolPaleoloth from "../pool/paleoloth.js";
 import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
+import _poolParasiticStrix from "../pool/parasitic-strix.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
@@ -635,6 +639,7 @@ import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVampiresBite from "../pool/vampires-bite.js";
 import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
+import _poolVectisAgents from "../pool/vectis-agents.js";
 import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
@@ -761,6 +766,7 @@ const shard: CardShard = {
     _poolBlitzHellion,
     _poolBlitzOfTheThunderRaptor,
     _poolBloodCrypt,
+    _poolBloodhallOoze,
     _poolBloodswornKnight,
     _poolBloodthornTaunter,
     _poolBloodthroneVampire,
@@ -1079,6 +1085,7 @@ const shard: CardShard = {
     _poolMarisiBreakerOfTheCoil,
     _poolMarkerBeetles,
     _poolMasterOfThePearlTrident,
+    _poolMatcaRioters,
     _poolMechHangar,
     _poolMechanizedWarfare,
     _poolMendTheWilds,
@@ -1134,8 +1141,10 @@ const shard: CardShard = {
     _poolOverkill,
     _poolPacifism,
     _poolPaladinsShield,
+    _poolPaleoloth,
     _poolPantherPounce,
     _poolParadoxicalOutcome,
+    _poolParasiticStrix,
     _poolParcelbeast,
     _poolPatriarsSeal,
     _poolPendelhaven,
@@ -1329,6 +1338,7 @@ const shard: CardShard = {
     _poolVampiresBite,
     _poolVanguardSuppressor,
     _poolVaultOfCatlacan,
+    _poolVectisAgents,
     _poolVengefulCreeper,
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,

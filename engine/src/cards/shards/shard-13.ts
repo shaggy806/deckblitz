@@ -233,9 +233,11 @@ import _poolGhoulsteed from "../pool/ghoulsteed.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGigantoad from "../pool/gigantoad.js";
+import _poolGleamOfResistance from "../pool/gleam-of-resistance.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
+import _poolGoblinRazerunners from "../pool/goblin-razerunners.js";
 import _poolGodFavoredGeneral from "../pool/god-favored-general.js";
 import _poolGraveServitude from "../pool/grave-servitude.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
@@ -371,6 +373,7 @@ import _poolMorphling from "../pool/morphling.js";
 import _poolMundaAmbushLeader from "../pool/munda-ambush-leader.js";
 import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolMysticMonstrosity from "../pool/mystic-monstrosity.js";
+import _poolNacatlSavage from "../pool/nacatl-savage.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
 import _poolNaturesEmbrace from "../pool/natures-embrace.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
@@ -572,6 +575,7 @@ import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
 import _poolTeferisHonorGuard from "../pool/teferis-honor-guard.js";
+import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
@@ -635,6 +639,7 @@ import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWestvaleCultLeader from "../pool/westvale-cult-leader.js";
 import _poolWhitewaterNaiads from "../pool/whitewater-naiads.js";
 import _poolWildAesthir from "../pool/wild-aesthir.js";
+import _poolWildLeotau from "../pool/wild-leotau.js";
 import _poolWildWanderer from "../pool/wild-wanderer.js";
 import _poolWildestDreams from "../pool/wildest-dreams.js";
 import _poolWingedHiveTyrant from "../pool/winged-hive-tyrant.js";
@@ -905,9 +910,11 @@ const shard: CardShard = {
     _poolGiantsBoulder,
     _poolGiftOfParadise,
     _poolGigantoad,
+    _poolGleamOfResistance,
     _poolGoblinBalloonBrigade,
     _poolGoblinDarkDwellers,
     _poolGoblinPiker,
+    _poolGoblinRazerunners,
     _poolGodFavoredGeneral,
     _poolGraveServitude,
     _poolGreatHornKrushok,
@@ -1043,6 +1050,7 @@ const shard: CardShard = {
     _poolMundaAmbushLeader,
     _poolMutantSurveyor,
     _poolMysticMonstrosity,
+    _poolNacatlSavage,
     _poolNarsetEnlightenedMaster,
     _poolNaturesEmbrace,
     _poolNeedletoothPack,
@@ -1244,6 +1252,7 @@ const shard: CardShard = {
     _poolTeamAvatar,
     _poolTectonicGiant,
     _poolTeferisHonorGuard,
+    _poolTeleminPerformance,
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
     _poolTevalsJudgment,
@@ -1307,6 +1316,7 @@ const shard: CardShard = {
     _poolWestvaleCultLeader,
     _poolWhitewaterNaiads,
     _poolWildAesthir,
+    _poolWildLeotau,
     _poolWildWanderer,
     _poolWildestDreams,
     _poolWingedHiveTyrant,

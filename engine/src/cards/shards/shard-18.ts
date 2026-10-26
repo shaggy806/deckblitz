@@ -173,6 +173,7 @@ import _poolExcavatingAnurid from "../pool/excavating-anurid.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
+import _poolExplodingBorders from "../pool/exploding-borders.js";
 import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
@@ -481,6 +482,7 @@ import _poolSkyclaveApparition from "../pool/skyclave-apparition.js";
 import _poolSkystrikeOfficer from "../pool/skystrike-officer.js";
 import _poolSkywatcherAdept from "../pool/skywatcher-adept.js";
 import _poolSlimyAquarium from "../pool/slimy-aquarium.js";
+import _poolSludgeStrider from "../pool/sludge-strider.js";
 import _poolSlyRequisitioner from "../pool/sly-requisitioner.js";
 import _poolSmiteTheMonstrous from "../pool/smite-the-monstrous.js";
 import _poolSnakeskinVeil from "../pool/snakeskin-veil.js";
@@ -839,6 +841,7 @@ const shard: CardShard = {
     _poolExpandingOoze,
     _poolExpansion,
     _poolExperimentalConfectioner,
+    _poolExplodingBorders,
     _poolFascination,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
@@ -1147,6 +1150,7 @@ const shard: CardShard = {
     _poolSkystrikeOfficer,
     _poolSkywatcherAdept,
     _poolSlimyAquarium,
+    _poolSludgeStrider,
     _poolSlyRequisitioner,
     _poolSmiteTheMonstrous,
     _poolSnakeskinVeil,

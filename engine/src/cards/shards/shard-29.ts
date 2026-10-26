@@ -235,6 +235,7 @@ import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGloryOfWarfare from "../pool/glory-of-warfare.js";
+import _poolGluttonousSlime from "../pool/gluttonous-slime.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
@@ -332,6 +333,7 @@ import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dra
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
 import _poolMalakirBloodwitch from "../pool/malakir-bloodwitch.js";
+import _poolManaplasm from "../pool/manaplasm.js";
 import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
@@ -914,6 +916,7 @@ const shard: CardShard = {
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
     _poolGloryOfWarfare,
+    _poolGluttonousSlime,
     _poolGnottvoldSlumbermound,
     _poolGoblinArsonist,
     _poolGoblinOffensive,
@@ -1011,6 +1014,7 @@ const shard: CardShard = {
     _poolMagesGuile,
     _poolMagmaticForce,
     _poolMalakirBloodwitch,
+    _poolManaplasm,
     _poolManholeMissile,
     _poolManorGate,
     _poolMantisEngine,

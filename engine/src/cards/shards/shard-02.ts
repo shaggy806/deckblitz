@@ -130,6 +130,7 @@ import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
 import _poolDaggermawMegalodon from "../pool/daggermaw-megalodon.js";
 import _poolDamningVerdict from "../pool/damning-verdict.js";
 import _poolDarkKnightsGreatsword from "../pool/dark-knights-greatsword.js";
+import _poolDarkTemper from "../pool/dark-temper.js";
 import _poolDarklitGargoyle from "../pool/darklit-gargoyle.js";
 import _poolDarksteelPendant from "../pool/darksteel-pendant.js";
 import _poolDarksteelReactor from "../pool/darksteel-reactor.js";
@@ -488,6 +489,7 @@ import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShadowsVerdict from "../pool/shadows-verdict.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
+import _poolShardConvergence from "../pool/shard-convergence.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
@@ -631,6 +633,7 @@ import _poolWhiteAuracite from "../pool/white-auracite.js";
 import _poolWhiteShieldCrusader from "../pool/white-shield-crusader.js";
 import _poolWildCelebrants from "../pool/wild-celebrants.js";
 import _poolWildElephant from "../pool/wild-elephant.js";
+import _poolWildNacatl from "../pool/wild-nacatl.js";
 import _poolWinterthornBlessing from "../pool/winterthorn-blessing.js";
 import _poolWitherbloomCampus from "../pool/witherbloom-campus.js";
 import _poolWitherbloomTheBalancer from "../pool/witherbloom-the-balancer.js";
@@ -782,6 +785,7 @@ const shard: CardShard = {
     _poolDaggermawMegalodon,
     _poolDamningVerdict,
     _poolDarkKnightsGreatsword,
+    _poolDarkTemper,
     _poolDarklitGargoyle,
     _poolDarksteelPendant,
     _poolDarksteelReactor,
@@ -1140,6 +1144,7 @@ const shard: CardShard = {
     _poolShadowsVerdict,
     _poolShakedownHeavy,
     _poolShalaiVoiceOfPlenty,
+    _poolShardConvergence,
     _poolShatterskullGiant,
     _poolShepherdOfTheClouds,
     _poolShiftingCeratops,
@@ -1283,6 +1288,7 @@ const shard: CardShard = {
     _poolWhiteShieldCrusader,
     _poolWildCelebrants,
     _poolWildElephant,
+    _poolWildNacatl,
     _poolWinterthornBlessing,
     _poolWitherbloomCampus,
     _poolWitherbloomTheBalancer,

@@ -1,0 +1,774 @@
+{
+  "batch": "B171",
+  "status": "complete",
+  "ranks": "Conflux (CON, 2009-02-06): whole set — its 69 cards left; Shards of Alara (ALA, 2008-10-03): its 40 most-played left of 94 (middle walk)",
+  "authored": [
+    {
+      "name": "Angelic Benediction",
+      "files": [
+        "engine/src/cards/pool/angelic-benediction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Angelsong",
+      "files": [
+        "engine/src/cards/pool/angelsong.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Apocalypse Hydra",
+      "files": [
+        "engine/src/cards/pool/apocalypse-hydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Asha's Favor",
+      "files": [
+        "engine/src/cards/pool/ashas-favor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aven Trailblazer",
+      "files": [
+        "engine/src/cards/pool/aven-trailblazer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Battlegrace Angel",
+      "files": [
+        "engine/src/cards/pool/battlegrace-angel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bloodhall Ooze",
+      "files": [
+        "engine/src/cards/pool/bloodhall-ooze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brackwater Elemental",
+      "files": [
+        "engine/src/cards/pool/brackwater-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Celestial Purge",
+      "files": [
+        "engine/src/cards/pool/celestial-purge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Charnelhoard Wurm",
+      "files": [
+        "engine/src/cards/pool/charnelhoard-wurm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cliffrunner Behemoth",
+      "files": [
+        "engine/src/cards/pool/cliffrunner-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Controlled Instincts",
+      "files": [
+        "engine/src/cards/pool/controlled-instincts.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corpse Connoisseur",
+      "files": [
+        "engine/src/cards/pool/corpse-connoisseur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corrupted Roots",
+      "files": [
+        "engine/src/cards/pool/corrupted-roots.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Court Homunculus",
+      "files": [
+        "engine/src/cards/pool/court-homunculus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cradle of Vitality",
+      "files": [
+        "engine/src/cards/pool/cradle-of-vitality.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cumber Stone",
+      "files": [
+        "engine/src/cards/pool/cumber-stone.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dark Temper",
+      "files": [
+        "engine/src/cards/pool/dark-temper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drag Down",
+      "files": [
+        "engine/src/cards/pool/drag-down.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elder Mastery",
+      "files": [
+        "engine/src/cards/pool/elder-mastery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ember Weaver",
+      "files": [
+        "engine/src/cards/pool/ember-weaver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Esperzoa",
+      "files": [
+        "engine/src/cards/pool/esperzoa.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Exploding Borders",
+      "files": [
+        "engine/src/cards/pool/exploding-borders.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Extractor Demon",
+      "files": [
+        "engine/src/cards/pool/extractor-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Faerie Mechanist",
+      "files": [
+        "engine/src/cards/pool/faerie-mechanist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Filigree Fracture",
+      "files": [
+        "engine/src/cards/pool/filigree-fracture.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gleam of Resistance",
+      "files": [
+        "engine/src/cards/pool/gleam-of-resistance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gluttonous Slime",
+      "files": [
+        "engine/src/cards/pool/gluttonous-slime.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Assault",
+      "files": [
+        "engine/src/cards/pool/goblin-assault.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Razerunners",
+      "files": [
+        "engine/src/cards/pool/goblin-razerunners.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Godsire",
+      "files": [
+        "engine/src/cards/pool/godsire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hissing Iguanar",
+      "files": [
+        "engine/src/cards/pool/hissing-iguanar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ignite Disorder",
+      "files": [
+        "engine/src/cards/pool/ignite-disorder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Invincible Hymn",
+      "files": [
+        "engine/src/cards/pool/invincible-hymn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jund Charm",
+      "files": [
+        "engine/src/cards/pool/jund-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Keeper of Progenitus",
+      "files": [
+        "engine/src/cards/pool/keeper-of-progenitus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knight-Captain of Eos",
+      "files": [
+        "engine/src/cards/pool/knight-captain-of-eos.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kresh the Bloodbraided",
+      "files": [
+        "engine/src/cards/pool/kresh-the-bloodbraided.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magma Spray",
+      "files": [
+        "engine/src/cards/pool/magma-spray.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Manaplasm",
+      "files": [
+        "engine/src/cards/pool/manaplasm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mark of Asylum",
+      "files": [
+        "engine/src/cards/pool/mark-of-asylum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Matca Rioters",
+      "files": [
+        "engine/src/cards/pool/matca-rioters.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mayael the Anima",
+      "files": [
+        "engine/src/cards/pool/mayael-the-anima.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Might of Alara",
+      "files": [
+        "engine/src/cards/pool/might-of-alara.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Minion Reflector",
+      "files": [
+        "engine/src/cards/pool/minion-reflector.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mirror-Sigil Sergeant",
+      "files": [
+        "engine/src/cards/pool/mirror-sigil-sergeant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nacatl Savage",
+      "files": [
+        "engine/src/cards/pool/nacatl-savage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Paleoloth",
+      "files": [
+        "engine/src/cards/pool/paleoloth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Parasitic Strix",
+      "files": [
+        "engine/src/cards/pool/parasitic-strix.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prince of Thralls",
+      "files": [
+        "engine/src/cards/pool/prince-of-thralls.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rafiq of the Many",
+      "files": [
+        "engine/src/cards/pool/rafiq-of-the-many.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rakka Mar",
+      "files": [
+        "engine/src/cards/pool/rakka-mar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ranger of Eos",
+      "files": [
+        "engine/src/cards/pool/ranger-of-eos.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rhox Meditant",
+      "files": [
+        "engine/src/cards/pool/rhox-meditant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rotting Rats",
+      "files": [
+        "engine/src/cards/pool/rotting-rats.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Salvage Slasher",
+      "files": [
+        "engine/src/cards/pool/salvage-slasher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sarkhan Vol",
+      "files": [
+        "engine/src/cards/pool/sarkhan-vol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scattershot Archer",
+      "files": [
+        "engine/src/cards/pool/scattershot-archer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scourglass",
+      "files": [
+        "engine/src/cards/pool/scourglass.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sedraxis Alchemist",
+      "files": [
+        "engine/src/cards/pool/sedraxis-alchemist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shard Convergence",
+      "files": [
+        "engine/src/cards/pool/shard-convergence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sigil of Distinction",
+      "files": [
+        "engine/src/cards/pool/sigil-of-distinction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyward Eye Prophets",
+      "files": [
+        "engine/src/cards/pool/skyward-eye-prophets.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sludge Strider",
+      "files": [
+        "engine/src/cards/pool/sludge-strider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul's Grace",
+      "files": [
+        "engine/src/cards/pool/souls-grace.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul's Might",
+      "files": [
+        "engine/src/cards/pool/souls-might.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spore Burst",
+      "files": [
+        "engine/src/cards/pool/spore-burst.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Swerve",
+      "files": [
+        "engine/src/cards/pool/swerve.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sylvan Bounty",
+      "files": [
+        "engine/src/cards/pool/sylvan-bounty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Telemin Performance",
+      "files": [
+        "engine/src/cards/pool/telemin-performance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Toxic Iguanar",
+      "files": [
+        "engine/src/cards/pool/toxic-iguanar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vectis Agents",
+      "files": [
+        "engine/src/cards/pool/vectis-agents.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vicious Shadows",
+      "files": [
+        "engine/src/cards/pool/vicious-shadows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Voices from the Void",
+      "files": [
+        "engine/src/cards/pool/voices-from-the-void.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wandering Goblins",
+      "files": [
+        "engine/src/cards/pool/wandering-goblins.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Where Ancients Tread",
+      "files": [
+        "engine/src/cards/pool/where-ancients-tread.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wild Leotau",
+      "files": [
+        "engine/src/cards/pool/wild-leotau.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wild Nacatl",
+      "files": [
+        "engine/src/cards/pool/wild-nacatl.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wretched Banquet",
+      "files": [
+        "engine/src/cards/pool/wretched-banquet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yoke of the Damned",
+      "files": [
+        "engine/src/cards/pool/yoke-of-the-damned.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Blood Cultist",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source"
+      ],
+      "why": "a +1/+1 counter whenever a creature dealt damage by it this turn dies"
+    },
+    {
+      "name": "Blood Tyrant",
+      "needs": [
+        "trigger:player-loses-game-trigger"
+      ],
+      "why": "whenever a player loses the game, put five +1/+1 counters on it"
+    },
+    {
+      "name": "Brilliant Ultimatum",
+      "needs": [
+        "decision:separate-into-piles"
+      ],
+      "why": "an opponent separates the exiled cards into two piles; you may play cards from one pile free"
+    },
+    {
+      "name": "Cylian Sunsinger",
+      "needs": [
+        "condition:filter-same-name-as-source"
+      ],
+      "why": "it and each other creature with the same name get +3/+3"
+    },
+    {
+      "name": "Dragonsoul Knight",
+      "needs": [
+        "effect:set-creature-type"
+      ],
+      "why": "becomes a Dragon until end of turn, replacing its creature types without setting base P/T"
+    },
+    {
+      "name": "Feral Hydra",
+      "needs": [
+        "effect:any-player-may-activate"
+      ],
+      "why": "{3}: put a +1/+1 counter on it — any player may activate this ability"
+    },
+    {
+      "name": "Gather Specimens",
+      "needs": [
+        "replacement:enters-under-your-control-instead"
+      ],
+      "why": "if a creature would enter under an opponent's control this turn, it enters under your control instead"
+    },
+    {
+      "name": "Giltspire Avenger",
+      "needs": [
+        "stat:filter-dealt-damage-to-you-this-turn"
+      ],
+      "why": "destroy target creature that dealt damage to you this turn"
+    },
+    {
+      "name": "Grixis Illusionist",
+      "needs": [
+        "static:land-type-setting"
+      ],
+      "why": "target land you control becomes the basic land type of your choice until end of turn (305.7)"
+    },
+    {
+      "name": "Gwafa Hazid, Profiteer",
+      "needs": [
+        "effect:draw-controller-of-target"
+      ],
+      "why": "that creature's controller draws a card: draw can't name the target's controller"
+    },
+    {
+      "name": "Hellkite Hatchling",
+      "needs": [
+        "amount:creatures-devoured"
+      ],
+      "why": "has flying and trample if it devoured a creature: what it devoured isn't kept after it enters"
+    },
+    {
+      "name": "Immortal Coil",
+      "needs": [
+        "replacement:prevention-then-per-damage"
+      ],
+      "why": "prevent damage to you, then exile a card from your graveyard per damage prevented"
+    },
+    {
+      "name": "Kederekt Leviathan",
+      "needs": [
+        "effect:mass-bounce-except-source"
+      ],
+      "why": "return all other nonland permanents: return-to-hand-all can't exclude its source"
+    },
+    {
+      "name": "Lich's Mirror",
+      "needs": [
+        "replacement:would-lose-game"
+      ],
+      "why": "if you would lose the game, instead shuffle and draw seven: no lose-the-game replacement"
+    },
+    {
+      "name": "Malfegor",
+      "needs": [
+        "new:sacrifice-x-each-player"
+      ],
+      "why": "each opponent sacrifices a creature for each card discarded this way"
+    },
+    {
+      "name": "Manaforce Mace",
+      "needs": [
+        "static:grant-pt-per-domain"
+      ],
+      "why": "equipped creature gets +1/+1 for each basic land type among lands you control"
+    },
+    {
+      "name": "Nacatl Hunt-Pride",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "target creature blocks this turn if able"
+    },
+    {
+      "name": "Nyxathid",
+      "needs": [
+        "decision:choose-player-on-enter",
+        "amount:count-for-chosen-player"
+      ],
+      "why": "as it enters, choose an opponent; -1/-1 for each card in the chosen player's hand"
+    },
+    {
+      "name": "Paragon of the Amesha",
+      "needs": [
+        "effect:set-creature-type"
+      ],
+      "why": "becomes an Angel until end of turn, replacing its creature types without setting base P/T"
+    },
+    {
+      "name": "Qasali Ambusher",
+      "needs": [
+        "condition:creature-attacking-you",
+        "effect:self-flash-if-condition"
+      ],
+      "why": "cast without paying its mana cost as though it had flash if a creature is attacking you and you control a Forest and a Plains"
+    },
+    {
+      "name": "Quenchable Fire",
+      "needs": [
+        "effect:pay-before-delayed-deadline"
+      ],
+      "why": "the player may pay {U} any time before your next upkeep to prevent the delayed 3 damage"
+    },
+    {
+      "name": "Sedris, the Traitor King",
+      "needs": [
+        "static:grant-unearth-to-graveyard"
+      ],
+      "why": "each creature card in your graveyard has unearth {2}{B}"
+    },
+    {
+      "name": "Skullmulcher",
+      "needs": [
+        "amount:creatures-devoured"
+      ],
+      "why": "draw a card for each creature it devoured"
+    },
+    {
+      "name": "Stoic Angel",
+      "needs": [
+        "static:untap-step-limit"
+      ],
+      "why": "players can't untap more than one creature during their untap steps"
+    },
+    {
+      "name": "Suicidal Charge",
+      "needs": [
+        "effect:restrict-each-matching-at-resolution"
+      ],
+      "why": "creatures your opponents control get -1/-1 and attack this turn if able: the set is fixed at resolution"
+    },
+    {
+      "name": "Unstable Frontier",
+      "needs": [
+        "static:land-type-setting"
+      ],
+      "why": "target land becomes the basic land type of your choice: no land-type-setting effect that leaves P/T alone and strips the land's abilities (305.7)"
+    },
+    {
+      "name": "View from Above",
+      "needs": [
+        "effect:spell-returns-itself-to-hand"
+      ],
+      "why": "if you control a white permanent, return it to its owner's hand instead of the graveyard as it resolves"
+    },
+    {
+      "name": "Voracious Dragon",
+      "needs": [
+        "amount:creatures-devoured"
+      ],
+      "why": "deals twice the number of Goblins it devoured: no amount reads which creatures were devoured"
+    },
+    {
+      "name": "Worldheart Phoenix",
+      "needs": [
+        "new:cast-self-from-graveyard"
+      ],
+      "why": "may cast it from your graveyard by paying {W}{U}{B}{R}{G}; it enters with two +1/+1 counters if you do"
+    }
+  ]
+}

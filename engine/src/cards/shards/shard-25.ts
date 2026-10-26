@@ -484,6 +484,7 @@ import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
+import _poolScourglass from "../pool/scourglass.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
 import _poolScuttlingSliver from "../pool/scuttling-sliver.js";
 import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
@@ -1144,6 +1145,7 @@ const shard: CardShard = {
     _poolSauronDinoDevotee,
     _poolScorchRider,
     _poolScourgeOfFleets,
+    _poolScourglass,
     _poolScuteSwarm,
     _poolScuttlingSliver,
     _poolSeaGateStormcaller,

@@ -458,6 +458,7 @@ import _poolSamsDesperateRescue from "../pool/sams-desperate-rescue.js";
 import _poolSamutVoiceOfDissent from "../pool/samut-voice-of-dissent.js";
 import _poolSanctumGargoyle from "../pool/sanctum-gargoyle.js";
 import _poolSarkhanSoulAflame from "../pool/sarkhan-soul-aflame.js";
+import _poolSarkhanVol from "../pool/sarkhan-vol.js";
 import _poolSarulfsPackmate from "../pool/sarulfs-packmate.js";
 import _poolSatyrHedonist from "../pool/satyr-hedonist.js";
 import _poolScaldingDevil from "../pool/scalding-devil.js";
@@ -1129,6 +1130,7 @@ const shard: CardShard = {
     _poolSamutVoiceOfDissent,
     _poolSanctumGargoyle,
     _poolSarkhanSoulAflame,
+    _poolSarkhanVol,
     _poolSarulfsPackmate,
     _poolSatyrHedonist,
     _poolScaldingDevil,
