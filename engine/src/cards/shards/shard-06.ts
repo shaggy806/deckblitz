@@ -321,6 +321,7 @@ import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
+import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
 import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
@@ -355,6 +356,7 @@ import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMayhemPatrol from "../pool/mayhem-patrol.js";
+import _poolMeadowboon from "../pool/meadowboon.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
@@ -1015,6 +1017,7 @@ const shard: CardShard = {
     _poolKelsinkoRanger,
     _poolKindredJudgment,
     _poolKingDarienXlviii,
+    _poolKinsbaileBorderguard,
     _poolKinscaerHarpoonist,
     _poolKraulHarpooner,
     _poolKreeSentinel,
@@ -1049,6 +1052,7 @@ const shard: CardShard = {
     _poolMaritimeGuard,
     _poolMarkedByHonor,
     _poolMayhemPatrol,
+    _poolMeadowboon,
     _poolMeetingOfMinds,
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,

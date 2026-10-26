@@ -165,6 +165,7 @@ import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDiamondKaleidoscope from "../pool/diamond-kaleidoscope.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
 import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
@@ -456,6 +457,7 @@ import _poolSadisticSlash from "../pool/sadistic-slash.js";
 import _poolSafanaCalimportCutthroat from "../pool/safana-calimport-cutthroat.js";
 import _poolSafeholdSentry from "../pool/safehold-sentry.js";
 import _poolSageOfTheSkies from "../pool/sage-of-the-skies.js";
+import _poolSagesDousing from "../pool/sages-dousing.js";
 import _poolSaheeliSublimeArtificer from "../pool/saheeli-sublime-artificer.js";
 import _poolSampleCollector from "../pool/sample-collector.js";
 import _poolSanctumCustodian from "../pool/sanctum-custodian.js";
@@ -488,6 +490,7 @@ import _poolSentinelTotem from "../pool/sentinel-totem.js";
 import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
 import _poolShamblingAttendants from "../pool/shambling-attendants.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
+import _poolShardVolley from "../pool/shard-volley.js";
 import _poolShattergangBrothers from "../pool/shattergang-brothers.js";
 import _poolShepherdOfTheCosmos from "../pool/shepherd-of-the-cosmos.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
@@ -859,6 +862,7 @@ const shard: CardShard = {
     _poolDiamondKaleidoscope,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDivinersWand,
     _poolDjinnOfTheFountain,
     _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
@@ -1150,6 +1154,7 @@ const shard: CardShard = {
     _poolSafanaCalimportCutthroat,
     _poolSafeholdSentry,
     _poolSageOfTheSkies,
+    _poolSagesDousing,
     _poolSaheeliSublimeArtificer,
     _poolSampleCollector,
     _poolSanctumCustodian,
@@ -1182,6 +1187,7 @@ const shard: CardShard = {
     _poolShadowedCaravel,
     _poolShamblingAttendants,
     _poolShantottoTacticianMagician,
+    _poolShardVolley,
     _poolShattergangBrothers,
     _poolShepherdOfTheCosmos,
     _poolShepherdingSpirits,

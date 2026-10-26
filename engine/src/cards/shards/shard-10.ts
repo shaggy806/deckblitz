@@ -281,6 +281,7 @@ import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
 import _poolHoodedHydra from "../pool/hooded-hydra.js";
 import _poolHopeEstheim from "../pool/hope-estheim.js";
+import _poolHostileRealm from "../pool/hostile-realm.js";
 import _poolHouseGuildmage from "../pool/house-guildmage.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
@@ -345,6 +346,7 @@ import _poolLivingDeath from "../pool/living-death.js";
 import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLull from "../pool/lull.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
+import _poolLuminescentRain from "../pool/luminescent-rain.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMaddeningWind from "../pool/maddening-wind.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
@@ -991,6 +993,7 @@ const shard: CardShard = {
     _poolHonoredKnightCaptain,
     _poolHoodedHydra,
     _poolHopeEstheim,
+    _poolHostileRealm,
     _poolHouseGuildmage,
     _poolHullbreakerHorror,
     _poolHuntedWitness,
@@ -1055,6 +1058,7 @@ const shard: CardShard = {
     _poolLordOfExtinction,
     _poolLull,
     _poolLuminarchAspirant,
+    _poolLuminescentRain,
     _poolLyraDawnbringer,
     _poolMaddeningWind,
     _poolMagistratesScepter,

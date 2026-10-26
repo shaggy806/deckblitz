@@ -376,6 +376,7 @@ import _poolLoreholdCharm from "../pool/lorehold-charm.js";
 import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
 import _poolLoxodonBattlePriest from "../pool/loxodon-battle-priest.js";
 import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
+import _poolLunkErrant from "../pool/lunk-errant.js";
 import _poolLurkingPredators from "../pool/lurking-predators.js";
 import _poolLylaHolographicAssistant from "../pool/lyla-holographic-assistant.js";
 import _poolMODOKEvilIntellect from "../pool/m-o-d-o-k-evil-intellect.js";
@@ -604,6 +605,7 @@ import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
+import _poolStompingSlabs from "../pool/stomping-slabs.js";
 import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
 import _poolStonyStrength from "../pool/stony-strength.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
@@ -1109,6 +1111,7 @@ const shard: CardShard = {
     _poolLossarnachCaptain,
     _poolLoxodonBattlePriest,
     _poolLunarchVeteran,
+    _poolLunkErrant,
     _poolLurkingPredators,
     _poolLylaHolographicAssistant,
     _poolMODOKEvilIntellect,
@@ -1337,6 +1340,7 @@ const shard: CardShard = {
     _poolStartFromScratch,
     _poolSteelWreckingBall,
     _poolStirringHopesinger,
+    _poolStompingSlabs,
     _poolStoneboundMentor,
     _poolStonyStrength,
     _poolStonyVoicedGoblins,

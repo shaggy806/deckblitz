@@ -122,6 +122,7 @@ import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
 import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
+import _poolDeglamer from "../pool/deglamer.js";
 import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
 import _poolDemonicLore from "../pool/demonic-lore.js";
 import _poolDesertNomads from "../pool/desert-nomads.js";
@@ -421,6 +422,7 @@ import _poolPlatedGeopede from "../pool/plated-geopede.js";
 import _poolPlazaOfHarmony from "../pool/plaza-of-harmony.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
+import _poolPreeminentCaptain from "../pool/preeminent-captain.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
 import _poolPriestOfTheCrossing from "../pool/priest-of-the-crossing.js";
 import _poolPrimalHuntbeast from "../pool/primal-huntbeast.js";
@@ -642,6 +644,7 @@ import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
 import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
 import _poolWakeTheReflections from "../pool/wake-the-reflections.js";
+import _poolWalkerOfTheGrove from "../pool/walker-of-the-grove.js";
 import _poolWallOfJunk from "../pool/wall-of-junk.js";
 import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
@@ -810,6 +813,7 @@ const shard: CardShard = {
     _poolDeafeningClarion,
     _poolDefile,
     _poolDefiledCrypt,
+    _poolDeglamer,
     _poolDelneyStreetwiseLookout,
     _poolDemonicLore,
     _poolDesertNomads,
@@ -1109,6 +1113,7 @@ const shard: CardShard = {
     _poolPlazaOfHarmony,
     _poolPoisonTipArcher,
     _poolPowerstoneEngineer,
+    _poolPreeminentCaptain,
     _poolPrideGuardian,
     _poolPriestOfTheCrossing,
     _poolPrimalHuntbeast,
@@ -1330,6 +1335,7 @@ const shard: CardShard = {
     _poolVoiceOfVictory,
     _poolVoltaicServant,
     _poolWakeTheReflections,
+    _poolWalkerOfTheGrove,
     _poolWallOfJunk,
     _poolWallOfPineNeedles,
     _poolWallOfTorches,

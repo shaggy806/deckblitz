@@ -102,6 +102,7 @@ import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolConsignToThePit from "../pool/consign-to-the-pit.js";
 import _poolConsume from "../pool/consume.js";
 import _poolControlMagic from "../pool/control-magic.js";
+import _poolCoordinatedBarrage from "../pool/coordinated-barrage.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
@@ -112,6 +113,7 @@ import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
+import _poolDailyRegimen from "../pool/daily-regimen.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDawnglowInfusion from "../pool/dawnglow-infusion.js";
@@ -463,6 +465,7 @@ import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRowansBattleguard from "../pool/rowans-battleguard.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
+import _poolRusticClachan from "../pool/rustic-clachan.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
 import _poolSacredCat from "../pool/sacred-cat.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
@@ -782,6 +785,7 @@ const shard: CardShard = {
     _poolConsignToThePit,
     _poolConsume,
     _poolControlMagic,
+    _poolCoordinatedBarrage,
     _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
@@ -792,6 +796,7 @@ const shard: CardShard = {
     _poolCryptothrall,
     _poolCursedWindbreaker,
     _poolDailyBugleBuilding,
+    _poolDailyRegimen,
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
     _poolDawnglowInfusion,
@@ -1143,6 +1148,7 @@ const shard: CardShard = {
     _poolRottingFensnake,
     _poolRowansBattleguard,
     _poolRummagingWizard,
+    _poolRusticClachan,
     _poolRuthlessDeathfang,
     _poolSacredCat,
     _poolSakashimaOfAThousandFaces,

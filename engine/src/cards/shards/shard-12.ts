@@ -489,6 +489,7 @@ import _poolRiggingRunner from "../pool/rigging-runner.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
+import _poolRoarOfTheCrowd from "../pool/roar-of-the-crowd.js";
 import _poolRogueRefiner from "../pool/rogue-refiner.js";
 import _poolRorixBladewing from "../pool/rorix-bladewing.js";
 import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
@@ -1194,6 +1195,7 @@ const shard: CardShard = {
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
     _poolRiseAgain,
+    _poolRoarOfTheCrowd,
     _poolRogueRefiner,
     _poolRorixBladewing,
     _poolRoseRoomTreasurer,

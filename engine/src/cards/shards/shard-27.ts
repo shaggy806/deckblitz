@@ -186,6 +186,7 @@ import _poolEsperCharm from "../pool/esper-charm.js";
 import _poolEsperPanorama from "../pool/esper-panorama.js";
 import _poolEssenceScatter from "../pool/essence-scatter.js";
 import _poolEssenceSymbiote from "../pool/essence-symbiote.js";
+import _poolEverbarkShaman from "../pool/everbark-shaman.js";
 import _poolEvolvedSpinoderm from "../pool/evolved-spinoderm.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
@@ -389,6 +390,7 @@ import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
+import _poolObsidianBattleAxe from "../pool/obsidian-battle-axe.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
 import _poolOketrasAvenger from "../pool/oketras-avenger.js";
 import _poolOneWithTheStars from "../pool/one-with-the-stars.js";
@@ -877,6 +879,7 @@ const shard: CardShard = {
     _poolEsperPanorama,
     _poolEssenceScatter,
     _poolEssenceSymbiote,
+    _poolEverbarkShaman,
     _poolEvolvedSpinoderm,
     _poolExpansionExplosion,
     _poolExpedite,
@@ -1080,6 +1083,7 @@ const shard: CardShard = {
     _poolNurglesRot,
     _poolOblivion,
     _poolObsianusGolem,
+    _poolObsidianBattleAxe,
     _poolOctaviaLivingThesis,
     _poolOketrasAvenger,
     _poolOneWithTheStars,

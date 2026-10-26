@@ -72,6 +72,7 @@ import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
 import _poolBloombrute from "../pool/bloombrute.js";
 import _poolBlurredMongoose from "../pool/blurred-mongoose.js";
 import _poolBoggartTrawler from "../pool/boggart-trawler.js";
+import _poolBoldwyrHeavyweights from "../pool/boldwyr-heavyweights.js";
 import _poolBolgOfTheNorth from "../pool/bolg-of-the-north.js";
 import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
 import _poolBoonReflection from "../pool/boon-reflection.js";
@@ -212,6 +213,7 @@ import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
 import _poolFellFlagship from "../pool/fell-flagship.js";
+import _poolFendeepSummoner from "../pool/fendeep-summoner.js";
 import _poolFerocification from "../pool/ferocification.js";
 import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
@@ -541,6 +543,7 @@ import _poolSidequestCardCollection from "../pool/sidequest-card-collection.js";
 import _poolSiegeStriker from "../pool/siege-striker.js";
 import _poolSiegfriedFamedSwordsman from "../pool/siegfried-famed-swordsman.js";
 import _poolSightBeyondSight from "../pool/sight-beyond-sight.js";
+import _poolSigilTracer from "../pool/sigil-tracer.js";
 import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
 import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js";
@@ -683,6 +686,7 @@ import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
 import _poolVancesBlastingCannons from "../pool/vances-blasting-cannons.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
+import _poolVengefulFirebrand from "../pool/vengeful-firebrand.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVesselOfNascency from "../pool/vessel-of-nascency.js";
@@ -817,6 +821,7 @@ const shard: CardShard = {
     _poolBloombrute,
     _poolBlurredMongoose,
     _poolBoggartTrawler,
+    _poolBoldwyrHeavyweights,
     _poolBolgOfTheNorth,
     _poolBoltOfKeranos,
     _poolBoonReflection,
@@ -957,6 +962,7 @@ const shard: CardShard = {
     _poolFaultRiders,
     _poolFavorOfJukai,
     _poolFellFlagship,
+    _poolFendeepSummoner,
     _poolFerocification,
     _poolFeywildTrickster,
     _poolFierceWitchstalker,
@@ -1286,6 +1292,7 @@ const shard: CardShard = {
     _poolSiegeStriker,
     _poolSiegfriedFamedSwordsman,
     _poolSightBeyondSight,
+    _poolSigilTracer,
     _poolSigiledBehemoth,
     _poolSilenceTheEcho,
     _poolSilvarDevourerOfTheFree,
@@ -1428,6 +1435,7 @@ const shard: CardShard = {
     _poolValentinaAllegraDeFontaine,
     _poolVancesBlastingCannons,
     _poolVeloheartBike,
+    _poolVengefulFirebrand,
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
     _poolVesselOfNascency,

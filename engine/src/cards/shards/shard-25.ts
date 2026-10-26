@@ -640,6 +640,7 @@ import _poolWanderingOnes from "../pool/wandering-ones.js";
 import _poolWanderingTroubadour from "../pool/wandering-troubadour.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
 import _poolWarchanterSkald from "../pool/warchanter-skald.js";
+import _poolWarrenWeirding from "../pool/warren-weirding.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWaywardDisciple from "../pool/wayward-disciple.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolWanderingTroubadour,
     _poolWanderlightSpirit,
     _poolWarchanterSkald,
+    _poolWarrenWeirding,
     _poolWastefulHarvest,
     _poolWaywardDisciple,
     _poolWeaveFate,

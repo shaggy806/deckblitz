@@ -215,6 +215,7 @@ import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFearOfFalling from "../pool/fear-of-falling.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
+import _poolFencerClique from "../pool/fencer-clique.js";
 import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFesteringMummy from "../pool/festering-mummy.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
@@ -426,6 +427,7 @@ import _poolMoonveilRegent from "../pool/moonveil-regent.js";
 import _poolMorale from "../pool/morale.js";
 import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
+import _poolMosquitoGuard from "../pool/mosquito-guard.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
@@ -954,6 +956,7 @@ const shard: CardShard = {
     _poolFatalPush,
     _poolFearOfFalling,
     _poolFellwarStone,
+    _poolFencerClique,
     _poolFesteringGoblin,
     _poolFesteringMummy,
     _poolFetidHeath,
@@ -1165,6 +1168,7 @@ const shard: CardShard = {
     _poolMorale,
     _poolMordorOnTheMarch,
     _poolMortalitySpear,
+    _poolMosquitoGuard,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,

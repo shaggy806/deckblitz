@@ -399,6 +399,7 @@ import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOraclesVault from "../pool/oracles-vault.js";
 import _poolOranRiefRecluse from "../pool/oran-rief-recluse.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
+import _poolOrchardWarden from "../pool/orchard-warden.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOrdealOfThassa from "../pool/ordeal-of-thassa.js";
 import _poolOreskosSunGuide from "../pool/oreskos-sun-guide.js";
@@ -1118,6 +1119,7 @@ const shard: CardShard = {
     _poolOraclesVault,
     _poolOranRiefRecluse,
     _poolOrbitalPlunge,
+    _poolOrchardWarden,
     _poolOrcishMedicine,
     _poolOrdealOfThassa,
     _poolOreskosSunGuide,

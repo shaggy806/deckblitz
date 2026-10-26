@@ -412,6 +412,7 @@ import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOminousSphinx from "../pool/ominous-sphinx.js";
+import _poolOrderOfTheGoldenCricket from "../pool/order-of-the-golden-cricket.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
 import _poolOrneryGoblin from "../pool/ornery-goblin.js";
 import _poolOutCold from "../pool/out-cold.js";
@@ -1115,6 +1116,7 @@ const shard: CardShard = {
     _poolOhranFrostfang,
     _poolOmenOfTheForge,
     _poolOminousSphinx,
+    _poolOrderOfTheGoldenCricket,
     _poolOrdruunMentor,
     _poolOrneryGoblin,
     _poolOutCold,

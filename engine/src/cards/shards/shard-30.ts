@@ -121,6 +121,7 @@ import _poolContaminatedDrink from "../pool/contaminated-drink.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
 import _poolCosmiumBlast from "../pool/cosmium-blast.js";
+import _poolCountrysideCrusher from "../pool/countryside-crusher.js";
 import _poolCrawlFromTheCellar from "../pool/crawl-from-the-cellar.js";
 import _poolCrossbowInfantry from "../pool/crossbow-infantry.js";
 import _poolCrossroadsVillage from "../pool/crossroads-village.js";
@@ -594,6 +595,7 @@ import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
 import _poolStonefury from "../pool/stonefury.js";
 import _poolStormWorld from "../pool/storm-world.js";
+import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
@@ -834,6 +836,7 @@ const shard: CardShard = {
     _poolCorneredByBlackMages,
     _poolCosmicHunger,
     _poolCosmiumBlast,
+    _poolCountrysideCrusher,
     _poolCrawlFromTheCellar,
     _poolCrossbowInfantry,
     _poolCrossroadsVillage,
@@ -1307,6 +1310,7 @@ const shard: CardShard = {
     _poolStockpilingCelebrant,
     _poolStonefury,
     _poolStormWorld,
+    _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,

@@ -205,6 +205,7 @@ import _poolFatesReversal from "../pool/fates-reversal.js";
 import _poolFearOfSurveillance from "../pool/fear-of-surveillance.js";
 import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
 import _poolFervor from "../pool/fervor.js";
+import _poolFestercreep from "../pool/festercreep.js";
 import _poolFetchQuest from "../pool/fetch-quest.js";
 import _poolFieryConclusion from "../pool/fiery-conclusion.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
@@ -655,6 +656,7 @@ import _poolWayfarersBauble from "../pool/wayfarers-bauble.js";
 import _poolWeaponcraftEnthusiast from "../pool/weaponcraft-enthusiast.js";
 import _poolWeatherTheStorm from "../pool/weather-the-storm.js";
 import _poolWeb from "../pool/web.js";
+import _poolWeedPrunerPoplar from "../pool/weed-pruner-poplar.js";
 import _poolWeldfastWingsmith from "../pool/weldfast-wingsmith.js";
 import _poolWhaleboneGlider from "../pool/whalebone-glider.js";
 import _poolWheelOfFate from "../pool/wheel-of-fate.js";
@@ -914,6 +916,7 @@ const shard: CardShard = {
     _poolFearOfSurveillance,
     _poolFeatherOfFlight,
     _poolFervor,
+    _poolFestercreep,
     _poolFetchQuest,
     _poolFieryConclusion,
     _poolFireNationAttacks,
@@ -1364,6 +1367,7 @@ const shard: CardShard = {
     _poolWeaponcraftEnthusiast,
     _poolWeatherTheStorm,
     _poolWeb,
+    _poolWeedPrunerPoplar,
     _poolWeldfastWingsmith,
     _poolWhaleboneGlider,
     _poolWheelOfFate,
