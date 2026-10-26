@@ -86,6 +86,7 @@ import _poolBolaSlinger from "../pool/bola-slinger.js";
 import _poolBomburGentleDreamer from "../pool/bombur-gentle-dreamer.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBorrowing100000Arrows from "../pool/borrowing-100-000-arrows.js";
+import _poolBramblecrush from "../pool/bramblecrush.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
 import _poolBrawlBashOgre from "../pool/brawl-bash-ogre.js";
 import _poolBreatheYourLast from "../pool/breathe-your-last.js";
@@ -233,6 +234,7 @@ import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
 import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
+import _poolGhoulcallersChant from "../pool/ghoulcallers-chant.js";
 import _poolGiantCockroach from "../pool/giant-cockroach.js";
 import _poolGleefulDemolition from "../pool/gleeful-demolition.js";
 import _poolGlintHornBuccaneer from "../pool/glint-horn-buccaneer.js";
@@ -793,6 +795,7 @@ const shard: CardShard = {
     _poolBomburGentleDreamer,
     _poolBorderlandMinotaur,
     _poolBorrowing100000Arrows,
+    _poolBramblecrush,
     _poolBrasssBounty,
     _poolBrawlBashOgre,
     _poolBreatheYourLast,
@@ -940,6 +943,7 @@ const shard: CardShard = {
     _poolGerminatingWurm,
     _poolGhirapurGearcrafter,
     _poolGhostLitRedeemer,
+    _poolGhoulcallersChant,
     _poolGiantCockroach,
     _poolGleefulDemolition,
     _poolGlintHornBuccaneer,

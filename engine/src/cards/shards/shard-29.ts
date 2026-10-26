@@ -277,6 +277,7 @@ import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
 import _poolHiddenHideout from "../pool/hidden-hideout.js";
 import _poolHiddenNursery from "../pool/hidden-nursery.js";
 import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
+import _poolHinterlandHermit from "../pool/hinterland-hermit.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
@@ -1001,6 +1002,7 @@ const shard: CardShard = {
     _poolHiddenHideout,
     _poolHiddenNursery,
     _poolHideousTaskmaster,
+    _poolHinterlandHermit,
     _poolHithlainKnots,
     _poolHobbitHole,
     _poolHowToStartARiot,

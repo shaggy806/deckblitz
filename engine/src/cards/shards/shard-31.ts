@@ -257,6 +257,7 @@ import _poolGeistflameReservoir from "../pool/geistflame-reservoir.js";
 import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
+import _poolGhastlyHaunting from "../pool/ghastly-haunting.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
@@ -280,6 +281,7 @@ import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
 import _poolGrahaTia from "../pool/graha-tia.js";
 import _poolGraveStrength from "../pool/grave-strength.js";
+import _poolGravetillerWurm from "../pool/gravetiller-wurm.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
@@ -399,6 +401,7 @@ import _poolLockjawSnapper from "../pool/lockjaw-snapper.js";
 import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
+import _poolLostInTheWoods from "../pool/lost-in-the-woods.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
@@ -547,6 +550,7 @@ import _poolSawtoothOgre from "../pool/sawtooth-ogre.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
+import _poolScorchTheFields from "../pool/scorch-the-fields.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
@@ -1004,6 +1008,7 @@ const shard: CardShard = {
     _poolGeneralKudroOfDrannith,
     _poolGenesisChamber,
     _poolGhastlyDiscovery,
+    _poolGhastlyHaunting,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
     _poolGideonsLawkeeper,
@@ -1027,6 +1032,7 @@ const shard: CardShard = {
     _poolGrabbyGiant,
     _poolGrahaTia,
     _poolGraveStrength,
+    _poolGravetillerWurm,
     _poolGreatGildedBoat,
     _poolGreenDragon,
     _poolGreenwheelLiberator,
@@ -1146,6 +1152,7 @@ const shard: CardShard = {
     _poolLoftyDreams,
     _poolLongshotRebelBowman,
     _poolLoomingHoverguard,
+    _poolLostInTheWoods,
     _poolLuckyOffering,
     _poolLudevicNecroAlchemist,
     _poolMageDuel,
@@ -1294,6 +1301,7 @@ const shard: CardShard = {
     _poolSazhKatzroy,
     _poolScaledBehemoth,
     _poolScavengingOoze,
+    _poolScorchTheFields,
     _poolScornfulAetherLich,
     _poolScrapMastery,
     _poolSeaGateLoremaster,

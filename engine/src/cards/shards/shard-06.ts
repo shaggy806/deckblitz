@@ -280,6 +280,7 @@ import _poolHiddenDragonslayer from "../pool/hidden-dragonslayer.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
+import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
@@ -644,6 +645,7 @@ import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWanderbrineRootcutters from "../pool/wanderbrine-rootcutters.js";
 import _poolWantedScoundrels from "../pool/wanted-scoundrels.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
+import _poolWardenOfTheWall from "../pool/warden-of-the-wall.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWarmindInfantry from "../pool/warmind-infantry.js";
 import _poolWarrant from "../pool/warrant.js";
@@ -979,6 +981,7 @@ const shard: CardShard = {
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
     _poolHigureTheStillWind,
+    _poolHinterlandScourge,
     _poolHoardingOgre,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
@@ -1343,6 +1346,7 @@ const shard: CardShard = {
     _poolWanderbrineRootcutters,
     _poolWantedScoundrels,
     _poolWarMachineLegacyOfIron,
+    _poolWardenOfTheWall,
     _poolWarlockClass,
     _poolWarmindInfantry,
     _poolWarrant,

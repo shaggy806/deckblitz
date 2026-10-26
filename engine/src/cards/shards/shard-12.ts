@@ -582,6 +582,7 @@ import _poolStreetSpasm from "../pool/street-spasm.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
+import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
@@ -1292,6 +1293,7 @@ const shard: CardShard = {
     _poolStringOfDisappearances,
     _poolStrixLookout,
     _poolSturdyHatchling,
+    _poolSturmgeist,
     _poolSubterraneanSpirit,
     _poolSummonAnima,
     _poolSummonedDromedary,

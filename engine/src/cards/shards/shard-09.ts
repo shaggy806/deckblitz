@@ -476,6 +476,7 @@ import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
 import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
+import _poolRavenousDemon from "../pool/ravenous-demon.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
 import _poolRealityHemorrhage from "../pool/reality-hemorrhage.js";
 import _poolReaperOfTheWilds from "../pool/reaper-of-the-wilds.js";
@@ -610,6 +611,7 @@ import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
 import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
 import _poolTajuruArcher from "../pool/tajuru-archer.js";
+import _poolTalonsOfFalkenrath from "../pool/talons-of-falkenrath.js";
 import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
@@ -1208,6 +1210,7 @@ const shard: CardShard = {
     _poolRakkaMar,
     _poolRakshasasBargain,
     _poolRallyThePeasants,
+    _poolRavenousDemon,
     _poolRayOfRevelation,
     _poolRealityHemorrhage,
     _poolReaperOfTheWilds,
@@ -1342,6 +1345,7 @@ const shard: CardShard = {
     _poolSythisHarvestsHand,
     _poolTabletOfEpityr,
     _poolTajuruArcher,
+    _poolTalonsOfFalkenrath,
     _poolTangletrap,
     _poolTanukiTransplanter,
     _poolTaxiDriver,

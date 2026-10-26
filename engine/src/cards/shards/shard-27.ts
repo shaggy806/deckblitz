@@ -25,6 +25,7 @@ import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
 import _poolAngelOfRenewal from "../pool/angel-of-renewal.js";
+import _poolAngelicOverseer from "../pool/angelic-overseer.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
@@ -93,6 +94,7 @@ import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
 import _poolChainflailCentipede from "../pool/chainflail-centipede.js";
 import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
+import _poolChillOfForeboding from "../pool/chill-of-foreboding.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
 import _poolCinderHellion from "../pool/cinder-hellion.js";
 import _poolCinderMarsh from "../pool/cinder-marsh.js";
@@ -223,6 +225,7 @@ import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
 import _poolFriendlyRivalry from "../pool/friendly-rivalry.js";
 import _poolFrostTitan from "../pool/frost-titan.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
+import _poolFurorOfTheBitten from "../pool/furor-of-the-bitten.js";
 import _poolFuturistSentinel from "../pool/futurist-sentinel.js";
 import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
@@ -725,6 +728,7 @@ const shard: CardShard = {
     _poolAmbushWolf,
     _poolAmuletOfVigor,
     _poolAngelOfRenewal,
+    _poolAngelicOverseer,
     _poolAngelicSleuth,
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
@@ -793,6 +797,7 @@ const shard: CardShard = {
     _poolChainflailCentipede,
     _poolChameleonMasterOfDisguise,
     _poolChantOfTheSkifsang,
+    _poolChillOfForeboding,
     _poolChromeCat,
     _poolCinderHellion,
     _poolCinderMarsh,
@@ -923,6 +928,7 @@ const shard: CardShard = {
     _poolFriendlyRivalry,
     _poolFrostTitan,
     _poolFumeSpitter,
+    _poolFurorOfTheBitten,
     _poolFuturistSentinel,
     _poolGaladrielElvenQueen,
     _poolGarrukCursedHuntsman,

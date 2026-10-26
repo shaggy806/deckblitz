@@ -260,6 +260,7 @@ import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "../pool/hannas-custody.js";
 import _poolHarbingerOfNight from "../pool/harbinger-of-night.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
+import _poolHarrowingJourney from "../pool/harrowing-journey.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
@@ -310,6 +311,7 @@ import _poolKithkinShielddare from "../pool/kithkin-shielddare.js";
 import _poolKnucklesTheEchidna from "../pool/knuckles-the-echidna.js";
 import _poolKoskunFalls from "../pool/koskun-falls.js";
 import _poolKravTheUnredeemed from "../pool/krav-the-unredeemed.js";
+import _poolKruinOutlaw from "../pool/kruin-outlaw.js";
 import _poolLaceWithMoonglove from "../pool/lace-with-moonglove.js";
 import _poolLanguish from "../pool/languish.js";
 import _poolLanternSpirit from "../pool/lantern-spirit.js";
@@ -974,6 +976,7 @@ const shard: CardShard = {
     _poolHannasCustody,
     _poolHarbingerOfNight,
     _poolHarmonizedCrescendo,
+    _poolHarrowingJourney,
     _poolHaughtyDjinn,
     _poolHeadlessSpecter,
     _poolHealingSalve,
@@ -1024,6 +1027,7 @@ const shard: CardShard = {
     _poolKnucklesTheEchidna,
     _poolKoskunFalls,
     _poolKravTheUnredeemed,
+    _poolKruinOutlaw,
     _poolLaceWithMoonglove,
     _poolLanguish,
     _poolLanternSpirit,

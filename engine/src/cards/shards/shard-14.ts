@@ -154,6 +154,7 @@ import _poolDecayingTimeLoop from "../pool/decaying-time-loop.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
+import _poolDesperateRavings from "../pool/desperate-ravings.js";
 import _poolDevotedCropMate from "../pool/devoted-crop-mate.js";
 import _poolDevourIntellect from "../pool/devour-intellect.js";
 import _poolDevouringLight from "../pool/devouring-light.js";
@@ -162,6 +163,7 @@ import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
 import _poolDimirSignet from "../pool/dimir-signet.js";
 import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
 import _poolDireFleetNeckbreaker from "../pool/dire-fleet-neckbreaker.js";
+import _poolDiscipleOfGriselbrand from "../pool/disciple-of-griselbrand.js";
 import _poolDiscoverTheImpossible from "../pool/discover-the-impossible.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
@@ -214,6 +216,7 @@ import _poolExocrine from "../pool/exocrine.js";
 import _poolExplorationBroodship from "../pool/exploration-broodship.js";
 import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
+import _poolFalkenrathTorturer from "../pool/falkenrath-torturer.js";
 import _poolFame from "../pool/fame.js";
 import _poolFangbladeBrigand from "../pool/fangblade-brigand.js";
 import _poolFar from "../pool/far.js";
@@ -253,6 +256,7 @@ import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
 import _poolGangOfDevils from "../pool/gang-of-devils.js";
 import _poolGarrukUnleashed from "../pool/garruk-unleashed.js";
 import _poolGatebreakerRam from "../pool/gatebreaker-ram.js";
+import _poolGavonyIronwright from "../pool/gavony-ironwright.js";
 import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
@@ -377,6 +381,7 @@ import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
+import _poolLudevicsAbomination from "../pool/ludevics-abomination.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
 import _poolLurkingLizards from "../pool/lurking-lizards.js";
 import _poolLuxaRiverShrine from "../pool/luxa-river-shrine.js";
@@ -861,6 +866,7 @@ const shard: CardShard = {
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,
+    _poolDesperateRavings,
     _poolDevotedCropMate,
     _poolDevourIntellect,
     _poolDevouringLight,
@@ -869,6 +875,7 @@ const shard: CardShard = {
     _poolDimirSignet,
     _poolDiplomaticRelations,
     _poolDireFleetNeckbreaker,
+    _poolDiscipleOfGriselbrand,
     _poolDiscoverTheImpossible,
     _poolDissentersDeliverance,
     _poolDistractTheGuards,
@@ -921,6 +928,7 @@ const shard: CardShard = {
     _poolExplorationBroodship,
     _poolExplosiveImpact,
     _poolFaerieFormation,
+    _poolFalkenrathTorturer,
     _poolFame,
     _poolFangbladeBrigand,
     _poolFar,
@@ -960,6 +968,7 @@ const shard: CardShard = {
     _poolGangOfDevils,
     _poolGarrukUnleashed,
     _poolGatebreakerRam,
+    _poolGavonyIronwright,
     _poolGeistwave,
     _poolGhostsOfTheDamned,
     _poolGideonsCompany,
@@ -1084,6 +1093,7 @@ const shard: CardShard = {
     _poolLotusRing,
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
+    _poolLudevicsAbomination,
     _poolLuminousPhantom,
     _poolLurkingLizards,
     _poolLuxaRiverShrine,

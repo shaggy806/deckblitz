@@ -129,6 +129,7 @@ import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
 import _poolDemonicGifts from "../pool/demonic-gifts.js";
 import _poolDemonicVigor from "../pool/demonic-vigor.js";
+import _poolDemonmailHauberk from "../pool/demonmail-hauberk.js";
 import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDestined from "../pool/destined.js";
@@ -398,6 +399,7 @@ import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
 import _poolMultiformWonder from "../pool/multiform-wonder.js";
 import _poolMultiversalRecruitment from "../pool/multiversal-recruitment.js";
 import _poolMurasaRanger from "../pool/murasa-ranger.js";
+import _poolMurderOfCrows from "../pool/murder-of-crows.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
 import _poolNamelessConqueror from "../pool/nameless-conqueror.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
@@ -657,6 +659,7 @@ import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
+import _tokensBlackWolfTokenDeathtouch from "../tokens/black-wolf-token-deathtouch.js";
 import _tokensCatDragonToken from "../tokens/cat-dragon-token.js";
 import _tokensDemonToken66FlyingTrampleUpkeepSacrifice from "../tokens/demon-token-6-6-flying-trample-upkeep-sacrifice.js";
 import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolDemonicCounsel,
     _poolDemonicGifts,
     _poolDemonicVigor,
+    _poolDemonmailHauberk,
     _poolDenyTheWitch,
     _poolDespark,
     _poolDestined,
@@ -1077,6 +1081,7 @@ const shard: CardShard = {
     _poolMultiformWonder,
     _poolMultiversalRecruitment,
     _poolMurasaRanger,
+    _poolMurderOfCrows,
     _poolMysteriosPhantasm,
     _poolNamelessConqueror,
     _poolNaturalEnd,
@@ -1338,6 +1343,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBadgerToken,
+    _tokensBlackWolfTokenDeathtouch,
     _tokensCatDragonToken,
     _tokensDemonToken66FlyingTrampleUpkeepSacrifice,
     _tokensDragonToken55,

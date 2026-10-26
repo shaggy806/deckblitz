@@ -352,6 +352,7 @@ import _poolLostToLegend from "../pool/lost-to-legend.js";
 import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
 import _poolLoxodonMender from "../pool/loxodon-mender.js";
 import _poolLoyalGyrfalcon from "../pool/loyal-gyrfalcon.js";
+import _poolLudevicsTestSubject from "../pool/ludevics-test-subject.js";
 import _poolLuminarchAscension from "../pool/luminarch-ascension.js";
 import _poolMacetailHystrodon from "../pool/macetail-hystrodon.js";
 import _poolMaelstromWanderer from "../pool/maelstrom-wanderer.js";
@@ -1069,6 +1070,7 @@ const shard: CardShard = {
     _poolLothlorienBlade,
     _poolLoxodonMender,
     _poolLoyalGyrfalcon,
+    _poolLudevicsTestSubject,
     _poolLuminarchAscension,
     _poolMacetailHystrodon,
     _poolMaelstromWanderer,

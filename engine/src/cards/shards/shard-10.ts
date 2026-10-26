@@ -77,6 +77,7 @@ import _poolBlossomingDefense from "../pool/blossoming-defense.js";
 import _poolBogTatters from "../pool/bog-tatters.js";
 import _poolBogardanRager from "../pool/bogardan-rager.js";
 import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
+import _poolBondsOfFaith from "../pool/bonds-of-faith.js";
 import _poolBoneHarvest from "../pool/bone-harvest.js";
 import _poolBonecladNecromancer from "../pool/boneclad-necromancer.js";
 import _poolBoompile from "../pool/boompile.js";
@@ -147,6 +148,7 @@ import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDeadeyePlunderers from "../pool/deadeye-plunderers.js";
 import _poolDeadeyeQuartermaster from "../pool/deadeye-quartermaster.js";
 import _poolDeathlessBehemoth from "../pool/deathless-behemoth.js";
+import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
@@ -223,6 +225,7 @@ import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
 import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
+import _poolGarrukRelentless from "../pool/garruk-relentless.js";
 import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
 import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
@@ -410,6 +413,7 @@ import _poolOldRutstein from "../pool/old-rutstein.js";
 import _poolOmnispellAdept from "../pool/omnispell-adept.js";
 import _poolOnduChampion from "../pool/ondu-champion.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
+import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
@@ -793,6 +797,7 @@ const shard: CardShard = {
     _poolBogTatters,
     _poolBogardanRager,
     _poolBoggartBirthRite,
+    _poolBondsOfFaith,
     _poolBoneHarvest,
     _poolBonecladNecromancer,
     _poolBoompile,
@@ -863,6 +868,7 @@ const shard: CardShard = {
     _poolDeadeyePlunderers,
     _poolDeadeyeQuartermaster,
     _poolDeathlessBehemoth,
+    _poolDeathsCaress,
     _poolDecodeTransmissions,
     _poolDefendTheCelestus,
     _poolDefensiveStance,
@@ -939,6 +945,7 @@ const shard: CardShard = {
     _poolFruitOfTizerus,
     _poolFurious,
     _poolGaeasSkyfolk,
+    _poolGarrukRelentless,
     _poolGarrulousSycophant,
     _poolGatstafRavagers,
     _poolGavonyUnhallowed,
@@ -1126,6 +1133,7 @@ const shard: CardShard = {
     _poolOmnispellAdept,
     _poolOnduChampion,
     _poolOnduGiant,
+    _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
     _poolOzaisCruelty,

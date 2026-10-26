@@ -285,6 +285,7 @@ import _poolHemlockVial from "../pool/hemlock-vial.js";
 import _poolHerbalPoultice from "../pool/herbal-poultice.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
+import _poolHollowhengeSpirit from "../pool/hollowhenge-spirit.js";
 import _poolHoofSkulkin from "../pool/hoof-skulkin.js";
 import _poolHostileInvestigator from "../pool/hostile-investigator.js";
 import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
@@ -512,6 +513,7 @@ import _poolScornfulEgotist from "../pool/scornful-egotist.js";
 import _poolScrapCompactor from "../pool/scrap-compactor.js";
 import _poolSeahunter from "../pool/seahunter.js";
 import _poolSealOfDoom from "../pool/seal-of-doom.js";
+import _poolSeance from "../pool/seance.js";
 import _poolSear from "../pool/sear.js";
 import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
@@ -992,6 +994,7 @@ const shard: CardShard = {
     _poolHerbalPoultice,
     _poolHitTheMotherLode,
     _poolHollowhengeOverlord,
+    _poolHollowhengeSpirit,
     _poolHoofSkulkin,
     _poolHostileInvestigator,
     _poolHostileMinotaur,
@@ -1219,6 +1222,7 @@ const shard: CardShard = {
     _poolScrapCompactor,
     _poolSeahunter,
     _poolSealOfDoom,
+    _poolSeance,
     _poolSear,
     _poolSeedSuture,
     _poolSelesnyaCharm,

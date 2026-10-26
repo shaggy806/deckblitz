@@ -196,6 +196,7 @@ import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
+import _poolFavorOfTheWoods from "../pool/favor-of-the-woods.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
 import _poolFeastOfBlood from "../pool/feast-of-blood.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
@@ -476,6 +477,7 @@ import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRuneboundWolf from "../pool/runebound-wolf.js";
+import _poolRunechantersPike from "../pool/runechanters-pike.js";
 import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRushbladeCommander from "../pool/rushblade-commander.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
@@ -635,6 +637,7 @@ import _poolUndeadServant from "../pool/undead-servant.js";
 import _poolUndercitysEmbrace from "../pool/undercitys-embrace.js";
 import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
+import _poolUnhallowedCathar from "../pool/unhallowed-cathar.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolUsherToSafety from "../pool/usher-to-safety.js";
@@ -681,6 +684,7 @@ import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
+import _poolWolfhuntersQuiver from "../pool/wolfhunters-quiver.js";
 import _poolWolfirSilverheart from "../pool/wolfir-silverheart.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolWorthyCause from "../pool/worthy-cause.js";
@@ -909,6 +913,7 @@ const shard: CardShard = {
     _poolFamishedWorldsire,
     _poolFatalFumes,
     _poolFatestitcher,
+    _poolFavorOfTheWoods,
     _poolFearOfBeingHunted,
     _poolFeastOfBlood,
     _poolFelhideMinotaur,
@@ -1189,6 +1194,7 @@ const shard: CardShard = {
     _poolRulikMonsWarrenChief,
     _poolRunThePlay,
     _poolRuneboundWolf,
+    _poolRunechantersPike,
     _poolRuralRecruit,
     _poolRushbladeCommander,
     _poolRussetWolves,
@@ -1348,6 +1354,7 @@ const shard: CardShard = {
     _poolUndercitysEmbrace,
     _poolUneasyAlliance,
     _poolUnexpectedFangs,
+    _poolUnhallowedCathar,
     _poolUnhinge,
     _poolUnswervingSloth,
     _poolUsherToSafety,
@@ -1394,6 +1401,7 @@ const shard: CardShard = {
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
     _poolWizardsRockets,
+    _poolWolfhuntersQuiver,
     _poolWolfirSilverheart,
     _poolWoodlandPatrol,
     _poolWorthyCause,

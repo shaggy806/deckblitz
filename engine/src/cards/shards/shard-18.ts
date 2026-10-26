@@ -159,6 +159,7 @@ import _poolEastfarthingFarmer from "../pool/eastfarthing-farmer.js";
 import _poolEchoMage from "../pool/echo-mage.js";
 import _poolEerieSoultender from "../pool/eerie-soultender.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
+import _poolElderOfLaurels from "../pool/elder-of-laurels.js";
 import _poolEldraziRavager from "../pool/eldrazi-ravager.js";
 import _poolElektraDaughterOfTheHand from "../pool/elektra-daughter-of-the-hand.js";
 import _poolElfReplica from "../pool/elf-replica.js";
@@ -260,6 +261,7 @@ import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
 import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
+import _poolHowlpackAlpha from "../pool/howlpack-alpha.js";
 import _poolHuntersMark from "../pool/hunters-mark.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolHushwingGryff from "../pool/hushwing-gryff.js";
@@ -520,6 +522,7 @@ import _poolSolariumSentry from "../pool/solarium-sentry.js";
 import _poolSoltariChampion from "../pool/soltari-champion.js";
 import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
+import _poolSoulSeizer from "../pool/soul-seizer.js";
 import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSouthernPaladin from "../pool/southern-paladin.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
@@ -675,6 +678,7 @@ import _poolWiltLeafCavaliers from "../pool/wilt-leaf-cavaliers.js";
 import _poolWingedSliver from "../pool/winged-sliver.js";
 import _poolWirewoodSavage from "../pool/wirewood-savage.js";
 import _poolWistfulness from "../pool/wistfulness.js";
+import _poolWrackWithMadness from "../pool/wrack-with-madness.js";
 import _poolWrathOfGod from "../pool/wrath-of-god.js";
 import _poolXiraArien from "../pool/xira-arien.js";
 import _poolYiazmatUltimateMark from "../pool/yiazmat-ultimate-mark.js";
@@ -868,6 +872,7 @@ const shard: CardShard = {
     _poolEchoMage,
     _poolEerieSoultender,
     _poolElderGargaroth,
+    _poolElderOfLaurels,
     _poolEldraziRavager,
     _poolElektraDaughterOfTheHand,
     _poolElfReplica,
@@ -969,6 +974,7 @@ const shard: CardShard = {
     _poolHopefulEidolon,
     _poolHornOfGondor,
     _poolHotshotInvestigators,
+    _poolHowlpackAlpha,
     _poolHuntersMark,
     _poolHurskaSweetTooth,
     _poolHushwingGryff,
@@ -1229,6 +1235,7 @@ const shard: CardShard = {
     _poolSoltariChampion,
     _poolSongsOfTheDamned,
     _poolSorinImperiousBloodlord,
+    _poolSoulSeizer,
     _poolSoulTether,
     _poolSouthernPaladin,
     _poolSpawnbinderMage,
@@ -1384,6 +1391,7 @@ const shard: CardShard = {
     _poolWingedSliver,
     _poolWirewoodSavage,
     _poolWistfulness,
+    _poolWrackWithMadness,
     _poolWrathOfGod,
     _poolXiraArien,
     _poolYiazmatUltimateMark,

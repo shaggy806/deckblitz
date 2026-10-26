@@ -213,6 +213,7 @@ import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
+import _poolFeelingOfDread from "../pool/feeling-of-dread.js";
 import _poolFellFlagship from "../pool/fell-flagship.js";
 import _poolFendeepSummoner from "../pool/fendeep-summoner.js";
 import _poolFerocification from "../pool/ferocification.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFavorOfJukai,
+    _poolFeelingOfDread,
     _poolFellFlagship,
     _poolFendeepSummoner,
     _poolFerocification,
