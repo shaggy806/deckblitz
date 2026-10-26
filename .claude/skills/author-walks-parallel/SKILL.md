@@ -35,14 +35,21 @@ first check-in.
 - **The assignment lands on `main` first.** A child starts from `main` and reads its range off
   `BACKLOG.md`; a range that exists only in this session's head is invisible to it.
 - **Each child lands its own batch, under the landing lock** (`scripts/landing-lock.mjs`,
-  from 2026-10-26): it takes the lock, merges `origin/main`, runs its one verify, pushes to
-  `main` and releases, so nothing lands under a verify. Before the lock, every batch that
-  landed while a child verified cost it a merge and a `verify --only fuzzwith` re-check:
-  round thirteen's five sessions paid five, B194 three merges over half an hour. The lock is a
-  branch, `landing-lock`, moved by compare-and-swap pushes (the cloud proxy refuses tag pushes
-  and branch deletions); `node scripts/landing-lock.mjs status` says who holds it. With
-  landings in a row, each merging the last one's `scripts/verify-state.json`, a plain
-  `npm run verify` picks full or quick correctly: no child needs a mode assigned.
+  from 2026-10-26), **and verifies before taking it** (from round fifteen): it merges
+  `origin/main` and runs its one plain `npm run verify` on its own branch, beside the other
+  children's; then it takes the lock, merges `origin/main` again, runs the short
+  `npm run verify -- --only marks,fuzzwith` if the merge brought anything (the new-cards fuzzer
+  re-runs only for engine code, its stamp skipping it otherwise), pushes to `main` and
+  releases. Holds are a few minutes. Round thirteen, without the lock, paid nine merges and five
+  `--only fuzzwith` re-checks (B194 three merges over half an hour); round fourteen, verifying
+  whole *under* the lock, paid none, but its five batches, ready within 20 minutes of each
+  other, landed one after another at 9-20 minutes a hold: the round took 121 minutes to round
+  thirteen's 93, all of it in landing (the audit, 2026-10-26). The lock is a branch,
+  `landing-lock`, moved by compare-and-swap pushes (the cloud proxy refuses tag pushes and
+  branch deletions); `node scripts/landing-lock.mjs status` says who holds it. Each child's
+  verify picks full or quick from its own branch's `scripts/verify-state.json` and batch
+  number, so with consecutive numbers the later children run full, in parallel; the merges
+  keep the higher `lastFullBatch`. No child needs a mode assigned.
 - **One engine feature, built once.** A child about to build a feature first checks
   `git log origin/main` for another walk having built it.
 - **One batch per child.** It ships, updates its walk's hand-off line and stops.
@@ -70,8 +77,8 @@ column; build `engine` first). From it:
    it stops before the middle range starts.
 
 Each child's batch is ~80–120 cards: one set, or two small ones. Three sessions was the size
-through round twelve, five from round thirteen (2026-10-26): with the landing lock, more
-sessions cost waiting for the lock, not re-checks. Split the oldest-first walk's long range
+through round twelve, five from round thirteen (2026-10-26): with the landing lock and the
+verify run before it, more sessions cost a few minutes' wait each, not re-checks. Split the oldest-first walk's long range
 for the extra middle walks.
 
 ## 2. Record the assignment and land it
