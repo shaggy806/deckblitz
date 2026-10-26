@@ -87,7 +87,9 @@ import _poolBuyYourSilence from "../pool/buy-your-silence.js";
 import _poolCacheRaiders from "../pool/cache-raiders.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
+import _poolCallToServe from "../pool/call-to-serve.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
+import _poolCaptainOfTheMists from "../pool/captain-of-the-mists.js";
 import _poolCaptainsClaws from "../pool/captains-claws.js";
 import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
@@ -381,6 +383,7 @@ import _poolNarcolepsy from "../pool/narcolepsy.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNecrosquito from "../pool/necrosquito.js";
+import _poolNephaliaSmuggler from "../pool/nephalia-smuggler.js";
 import _poolNetcasterSpider from "../pool/netcaster-spider.js";
 import _poolNexusOfFate from "../pool/nexus-of-fate.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
@@ -464,6 +467,7 @@ import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRoostOfDrakes from "../pool/roost-of-drakes.js";
 import _poolRoothaMercurialArtist from "../pool/rootha-mercurial-artist.js";
 import _poolRowdyCrew from "../pool/rowdy-crew.js";
+import _poolRummagingGoblin from "../pool/rummaging-goblin.js";
 import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
@@ -758,7 +762,9 @@ const shard: CardShard = {
     _poolCacheRaiders,
     _poolCacklingFiend,
     _poolCadricSoulKindler,
+    _poolCallToServe,
     _poolCanonizedInBlood,
+    _poolCaptainOfTheMists,
     _poolCaptainsClaws,
     _poolCapturedByLagacs,
     _poolCarnivorousPlant,
@@ -1052,6 +1058,7 @@ const shard: CardShard = {
     _poolNashiSearcherInTheDark,
     _poolNebulaDragon,
     _poolNecrosquito,
+    _poolNephaliaSmuggler,
     _poolNetcasterSpider,
     _poolNexusOfFate,
     _poolNezahalPrimalTide,
@@ -1135,6 +1142,7 @@ const shard: CardShard = {
     _poolRoostOfDrakes,
     _poolRoothaMercurialArtist,
     _poolRowdyCrew,
+    _poolRummagingGoblin,
     _poolRunOutOfTown,
     _poolRunawayBoulder,
     _poolRustwingFalcon,

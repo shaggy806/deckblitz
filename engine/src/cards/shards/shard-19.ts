@@ -26,6 +26,7 @@ import _poolAngrathCaptainOfChaos from "../pool/angrath-captain-of-chaos.js";
 import _poolApexOfPower from "../pool/apex-of-power.js";
 import _poolArashinCleric from "../pool/arashin-cleric.js";
 import _poolArboretumElemental from "../pool/arboretum-elemental.js";
+import _poolArcaneMelee from "../pool/arcane-melee.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
@@ -70,6 +71,7 @@ import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
 import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
 import _poolBoneyardScourge from "../pool/boneyard-scourge.js";
+import _poolBonfireOfTheDamned from "../pool/bonfire-of-the-damned.js";
 import _poolBoomerScrapper from "../pool/boomer-scrapper.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
@@ -148,6 +150,7 @@ import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
+import _poolDemonicTaskmaster from "../pool/demonic-taskmaster.js";
 import _poolDemonspineWhip from "../pool/demonspine-whip.js";
 import _poolDenethorRulingSteward from "../pool/denethor-ruling-steward.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
@@ -157,6 +160,7 @@ import _poolDepower from "../pool/depower.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
 import _poolDesecrationDemon from "../pool/desecration-demon.js";
 import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
+import _poolDevastationTide from "../pool/devastation-tide.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
 import _poolDimensionX from "../pool/dimension-x.js";
@@ -498,6 +502,7 @@ import _poolRenegadeBull from "../pool/renegade-bull.js";
 import _poolRenegadeWarlord from "../pool/renegade-warlord.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
+import _poolRevengeOfTheHunted from "../pool/revenge-of-the-hunted.js";
 import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
@@ -505,6 +510,7 @@ import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
 import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
+import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
 import _poolRovingActuator from "../pool/roving-actuator.js";
@@ -666,6 +672,7 @@ import _poolVillageElder from "../pool/village-elder.js";
 import _poolViridianCorrupter from "../pool/viridian-corrupter.js";
 import _poolVirtueOfLoyalty from "../pool/virtue-of-loyalty.js";
 import _poolVisceridArmor from "../pool/viscerid-armor.js";
+import _poolVoidStalker from "../pool/void-stalker.js";
 import _poolVolcanicDragon from "../pool/volcanic-dragon.js";
 import _poolVoyagesEnd from "../pool/voyages-end.js";
 import _poolVulshokHeartstoker from "../pool/vulshok-heartstoker.js";
@@ -746,6 +753,7 @@ const shard: CardShard = {
     _poolApexOfPower,
     _poolArashinCleric,
     _poolArboretumElemental,
+    _poolArcaneMelee,
     _poolArcboundSlasher,
     _poolArgothSanctumOfNature,
     _poolArmillarySphere,
@@ -790,6 +798,7 @@ const shard: CardShard = {
     _poolBoldwyrAggressor,
     _poolBoneyardDesecrator,
     _poolBoneyardScourge,
+    _poolBonfireOfTheDamned,
     _poolBoomerScrapper,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
@@ -868,6 +877,7 @@ const shard: CardShard = {
     _poolDecanterOfEndlessWater,
     _poolDeepForestHermit,
     _poolDelversTorch,
+    _poolDemonicTaskmaster,
     _poolDemonspineWhip,
     _poolDenethorRulingSteward,
     _poolDenyEntry,
@@ -877,6 +887,7 @@ const shard: CardShard = {
     _poolDerelictAtticWidowsWalk,
     _poolDesecrationDemon,
     _poolDestinedConfrontation,
+    _poolDevastationTide,
     _poolDevilthornFox,
     _poolDeviousCoverUp,
     _poolDimensionX,
@@ -1218,6 +1229,7 @@ const shard: CardShard = {
     _poolRenegadeWarlord,
     _poolRepulsiveMutation,
     _poolResupply,
+    _poolRevengeOfTheHunted,
     _poolRibtrussRoaster,
     _poolRighteousCharge,
     _poolRipClanCrasher,
@@ -1225,6 +1237,7 @@ const shard: CardShard = {
     _poolRiteOfFlame,
     _poolRiveteersOverlook,
     _poolRoaringEarth,
+    _poolRoaringPrimadox,
     _poolRoguesPassage,
     _poolRootwaterAlligator,
     _poolRovingActuator,
@@ -1386,6 +1399,7 @@ const shard: CardShard = {
     _poolViridianCorrupter,
     _poolVirtueOfLoyalty,
     _poolVisceridArmor,
+    _poolVoidStalker,
     _poolVolcanicDragon,
     _poolVoyagesEnd,
     _poolVulshokHeartstoker,

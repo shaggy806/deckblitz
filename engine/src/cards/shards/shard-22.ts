@@ -215,6 +215,7 @@ import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFrostfistStrider from "../pool/frostfist-strider.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
+import _poolGhostform from "../pool/ghostform.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
 import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
@@ -522,6 +523,7 @@ import _poolSlipperyBogle from "../pool/slippery-bogle.js";
 import _poolSlipperyScoundrel from "../pool/slippery-scoundrel.js";
 import _poolSlithAscendant from "../pool/slith-ascendant.js";
 import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
+import _poolSlumberingDragon from "../pool/slumbering-dragon.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
 import _poolSmolderingEgg from "../pool/smoldering-egg.js";
@@ -623,6 +625,7 @@ import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
+import _poolUnhallowedPact from "../pool/unhallowed-pact.js";
 import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
@@ -634,6 +637,7 @@ import _poolVanishing from "../pool/vanishing.js";
 import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
+import _poolVexingDevil from "../pool/vexing-devil.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
 import _poolVillagePillagers from "../pool/village-pillagers.js";
@@ -915,6 +919,7 @@ const shard: CardShard = {
     _poolFrostfistStrider,
     _poolFulminatorMage,
     _poolGargosViciousWatcher,
+    _poolGhostform,
     _poolGlacialFortress,
     _poolGlazeFiend,
     _poolGlintwingInvoker,
@@ -1222,6 +1227,7 @@ const shard: CardShard = {
     _poolSlipperyScoundrel,
     _poolSlithAscendant,
     _poolSlumberingCerberus,
+    _poolSlumberingDragon,
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
     _poolSmolderingEgg,
@@ -1323,6 +1329,7 @@ const shard: CardShard = {
     _poolUltimaOriginOfOblivion,
     _poolUnburden,
     _poolUncannySpeed,
+    _poolUnhallowedPact,
     _poolUnnervingAssault,
     _poolUnravelTheAether,
     _poolUnwindingClock,
@@ -1334,6 +1341,7 @@ const shard: CardShard = {
     _poolVantressPaladin,
     _poolVectorAsp,
     _poolVenerableKnight,
+    _poolVexingDevil,
     _poolViashinoRacketeer,
     _poolViciousKavu,
     _poolVillagePillagers,

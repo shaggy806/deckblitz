@@ -1597,6 +1597,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(fiend.complete).toBe(false);
   });
 
+  it("miracle (rule 702.94a): the keyword line's cost", () => {
+    const wrath = face(
+      "Thunderous Wrath deals 5 damage to any target.\nMiracle {R} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)",
+      "Instant",
+    );
+    expect(wrath.miracle).toEqual({ cost: "{R}" });
+    expect(wrath.complete).toBe(true);
+  });
+
   it("learn (rule 701.48a): the rummage alone, as `learn()` writes it — no sideboard, so no Lesson to fetch", () => {
     expect(parseSentence("Learn.", ctx())).toEqual(learn());
     const eyetwitch = face(

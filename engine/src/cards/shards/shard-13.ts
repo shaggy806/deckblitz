@@ -523,6 +523,7 @@ import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
 import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
+import _poolSisterRepentia from "../pool/sister-repentia.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
 import _poolSlingbowTrap from "../pool/slingbow-trap.js";
@@ -572,6 +573,7 @@ import _poolStrongholdConfessor from "../pool/stronghold-confessor.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
+import _poolSublimeArchangel from "../pool/sublime-archangel.js";
 import _poolSuitUp from "../pool/suit-up.js";
 import _poolSummaryJudgment from "../pool/summary-judgment.js";
 import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
@@ -1222,6 +1224,7 @@ const shard: CardShard = {
     _poolSignalingRoar,
     _poolSilentDart,
     _poolSilkenfistOrder,
+    _poolSisterRepentia,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
     _poolSlingbowTrap,
@@ -1271,6 +1274,7 @@ const shard: CardShard = {
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,
+    _poolSublimeArchangel,
     _poolSuitUp,
     _poolSummaryJudgment,
     _poolSunBlessedGuardian,

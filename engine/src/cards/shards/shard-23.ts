@@ -166,6 +166,7 @@ import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
 import _poolDoomgape from "../pool/doomgape.js";
 import _poolDoublecast from "../pool/doublecast.js";
+import _poolDownpour from "../pool/downpour.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDragonlordSilumgar from "../pool/dragonlord-silumgar.js";
@@ -464,6 +465,8 @@ import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
 import _poolRedTigerMechan from "../pool/red-tiger-mechan.js";
 import _poolRedXiiiProudWarrior from "../pool/red-xiii-proud-warrior.js";
 import _poolRedemptionChoir from "../pool/redemption-choir.js";
+import _poolRedressFate from "../pool/redress-fate.js";
+import _poolReforgeTheSoul from "../pool/reforge-the-soul.js";
 import _poolRegalBloodlord from "../pool/regal-bloodlord.js";
 import _poolRegisaurAlpha from "../pool/regisaur-alpha.js";
 import _poolRelicBarrier from "../pool/relic-barrier.js";
@@ -862,6 +865,7 @@ const shard: CardShard = {
     _poolDokuchiShadowWalker,
     _poolDoomgape,
     _poolDoublecast,
+    _poolDownpour,
     _poolDragTheCanal,
     _poolDragonflySwarm,
     _poolDragonlordSilumgar,
@@ -1160,6 +1164,8 @@ const shard: CardShard = {
     _poolRedTigerMechan,
     _poolRedXiiiProudWarrior,
     _poolRedemptionChoir,
+    _poolRedressFate,
+    _poolReforgeTheSoul,
     _poolRegalBloodlord,
     _poolRegisaurAlpha,
     _poolRelicBarrier,

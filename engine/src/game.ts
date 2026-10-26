@@ -69,6 +69,7 @@ import { ninjutsu } from "./cards/helpers.js";
 import { bestowedDefinition, licidDefinition } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
+import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
 import { INITIATIVE_CARD } from "./cards/initiative.js";
 import { MONARCH_CARD } from "./cards/monarch.js";
 import { RAD_CARD } from "./cards/rad.js";
@@ -155,6 +156,7 @@ import { choosePermanents } from "./decisions/choose-permanents.js";
 import { enterAttacking } from "./decisions/enter-attacking.js";
 import { legendRule } from "./decisions/legend-rule.js";
 import { orderTriggers as orderTriggersDecision } from "./decisions/order-triggers.js";
+import { miracleReveal as miracleRevealDecision } from "./decisions/miracle-reveal.js";
 import { mulligan } from "./decisions/mulligan.js";
 import { mulliganCardsOwed } from "./decisions/shared/mulligan-math.js";
 import { subsetsBetween } from "./decisions/shared/subsets.js";
@@ -1073,6 +1075,8 @@ interface CastNowAsk {
   readonly byDiscarding?: true;
   /** The madness cost paid rather than the mana cost (rule 702.35a). */
   readonly madness?: string;
+  /** The miracle cost paid rather than the mana cost (rule 702.94a). */
+  readonly miracle?: string;
   readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
@@ -1357,6 +1361,7 @@ export class Game {
     };
     this.decisionHost = {
       applyPayLifeForUntapped: (player, pay) => this.applyPayLifeForUntapped(player, pay),
+      applyMiracleReveal: (player, reveal) => this.applyMiracleReveal(player, reveal),
       applyRevealForUntapped: (player, reveal) => this.applyRevealForUntapped(player, reveal),
       applyCopyChoice: (player, copy) => this.applyCopyChoice(player, copy),
       applyEnchantChoice: (player, enchant) => this.applyEnchantChoice(player, enchant),
@@ -3006,9 +3011,11 @@ export class Game {
       variants.push({ kicked: false, overload: false, free: true });
       if (def.kicker !== null) variants.push(...kickedVariants(true));
     }
-    // Madness's cast (rule 702.35a, b): for the madness cost, an alternative
-    // cost and so the only one, with kicker on top if it has one.
-    if (via === "effect" && this.castNowOffer(player, card)?.madness !== undefined) {
+    // Madness's cast (rule 702.35a, b) and miracle's (702.94a): for that
+    // cost, an alternative cost and so the only one, with kicker on top if
+    // it has one.
+    const altOffer = via === "effect" ? this.castNowOffer(player, card) : null;
+    if (altOffer?.madness !== undefined || altOffer?.miracle !== undefined) {
       variants.length = 0;
       variants.push({ kicked: false, overload: false, free: false });
       if (def.kicker !== null) variants.push(...kickedVariants(false));
@@ -10791,9 +10798,10 @@ export class Game {
     // Overload (rule 702.126b) *replaces* the mana cost entirely, unlike
     // kicker's additive cost.
     if (!freeCast && overload && def.overload !== null) return def.overload.cost;
-    // Madness's cast (rule 702.35a): the madness cost rather than the mana cost.
-    const madnessCost =
-      via === "effect" ? this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId)?.madness : undefined;
+    // Madness's cast (rule 702.35a), miracle's (702.94a): that cost rather
+    // than the mana cost.
+    const altOffer = via === "effect" ? this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId) : null;
+    const madnessCost = altOffer?.madness ?? altOffer?.miracle;
     const base = freeCast
       ? "{0}"
       : madnessCost !== undefined
@@ -11106,6 +11114,9 @@ export class Game {
       }
       if (offered.madness !== undefined && (free || altCost || overload || evoke !== null)) {
         return `${def.name} may only be cast for its madness cost`;
+      }
+      if (offered.miracle !== undefined && (free || altCost || overload || evoke !== null)) {
+        return `${def.name} may only be cast for its miracle cost`;
       }
       const spell = offered.spell;
       if (
@@ -12259,6 +12270,7 @@ export class Game {
             free: awaiting.free,
             ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
             ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
+            ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
             exileAfter: awaiting.exileAfter,
             ...(awaiting.spell !== undefined ? { spell: awaiting.spell } : {}),
             ...(awaiting.freeCastOf !== undefined ? { freeCastOf: awaiting.freeCastOf } : {}),
@@ -12287,12 +12299,21 @@ export class Game {
         ? this.registry.get(this.state.objects[cards[0]]?.cardName ?? "").madness?.cost
         : undefined;
     if (options.madness === true && madness === undefined) return;
+    // Miracle's cast (rule 702.94a): its one card, still in hand, for its
+    // miracle cost.
+    const miracleCard = options.miracle === true && cards.length === 1 ? this.state.objects[cards[0]] : undefined;
+    const miracle =
+      miracleCard?.zone === "hand" && this.registry.has(miracleCard.cardName)
+        ? (this.registry.get(miracleCard.cardName).miracle?.cost ?? undefined)
+        : undefined;
+    if (options.miracle === true && miracle === undefined) return;
     this.castNowProbe = {
       player,
       cards,
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
+      ...(miracle !== undefined ? { miracle } : {}),
       exileAfter: options.exileAfter,
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -12357,6 +12378,7 @@ export class Game {
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
+      ...(miracle !== undefined ? { miracle } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       exileAfter: options.exileAfter,
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -20623,6 +20645,8 @@ export class Game {
    * (`order-triggers`), that the decision was raised. */
   private placePendingTriggers(): boolean {
     if (this.state.pendingTriggers.length === 0) return false;
+    if (this.askMiracleReveal()) return true;
+    if (this.state.pendingTriggers.length === 0) return false;
     const pending = this.state.pendingTriggers;
     this.state.pendingTriggers = [];
 
@@ -20765,6 +20789,57 @@ export class Game {
   }
 
   /**
+   * Miracle (rule 702.94a): before a drawn miracle card's trigger is placed,
+   * its owner says whether to reveal the card (`miracle-reveal`). Returns
+   * whether that was asked. A card no longer in its owner's hand as it was
+   * drawn (400.7) isn't asked about: its trigger couldn't cast it, so it's
+   * dropped.
+   */
+  private askMiracleReveal(): boolean {
+    for (;;) {
+      const index = this.state.pendingTriggers.findIndex((t) => t.miracle?.revealed === false);
+      if (index < 0) return false;
+      const trigger = this.state.pendingTriggers[index];
+      const card = this.state.objects[trigger.sourceObjectId];
+      const cost =
+        card?.zone === "hand" && (card.zoneChangeCount ?? 0) === trigger.miracle?.stint
+          ? this.registry.get(card.cardName).miracle?.cost
+          : undefined;
+      if (cost === undefined) {
+        this.state.pendingTriggers.splice(index, 1);
+        continue;
+      }
+      this.state.awaiting = { kind: "miracle-reveal", player: trigger.controller, source: trigger.sourceObjectId, cost };
+      return true;
+    }
+  }
+
+  /** Answers a pending `miracle-reveal` decision: revealed, the card is shown
+   * to every player (rule 701.20a) and its trigger placed with the rest;
+   * kept hidden, its trigger is dropped. */
+  private applyMiracleReveal(player: PlayerId, reveal: boolean): void {
+    const why = miracleRevealDecision.whyCannot(this.decisionCtx, { type: "miracle-reveal", player, reveal }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "miracle-reveal") throw new Error("no miracle reveal pending");
+    const card = awaiting.source;
+    this.state.awaiting = null;
+    const index = this.state.pendingTriggers.findIndex(
+      (t) => t.sourceObjectId === card && t.miracle?.revealed === false,
+    );
+    if (index >= 0) {
+      const trigger = this.state.pendingTriggers[index];
+      if (reveal && trigger.miracle !== undefined) {
+        this.state.pendingTriggers[index] = { ...trigger, miracle: { ...trigger.miracle, revealed: true } };
+        this.revealCards(player, [card], "hand");
+      } else {
+        this.state.pendingTriggers.splice(index, 1);
+      }
+    }
+    this.prepareForPriority(this.activePlayer);
+  }
+
+  /**
    * Answers a pending `order-triggers` decision (rule 603.3b): `order` lists
    * the player's waiting triggers, as offered, in the order they're to
    * resolve. They go on the stack in reverse, marked ordered so they're
@@ -20809,6 +20884,8 @@ export class Game {
     readonly reflexive?: ReflexiveTrigger;
     /** See `PendingTrigger.modes`. */
     readonly modes?: readonly number[];
+    /** See `PendingTrigger.miracle`. */
+    readonly miracle?: { readonly stint: number; readonly revealed: boolean };
   }): "done" | "paused" {
     // A self-contained ability record (a mana-spend rider) has no card
     // ability to look up — mint it carrying its own record, exactly as
@@ -21023,6 +21100,8 @@ export class Game {
       );
       if ((trigger.copies ?? 1) > 1) this.state.objects[abilityId].stackCount = trigger.copies;
       if (trigger.modes !== undefined) this.state.objects[abilityId].chosenModes = [...trigger.modes];
+      // Miracle's trigger casts only the card as it was drawn (rule 400.7).
+      if (trigger.miracle !== undefined) this.state.objects[abilityId].sourceZoneChangeCount = trigger.miracle.stint;
       // A divided amount with nothing to choose (rule 603.3d): all of it on
       // the one target, or nothing among none.
       const dividedNow = this.triggerDivided(ability as TriggeredAbility, trigger.triggerValue, trigger.controller);
@@ -35291,7 +35370,26 @@ export class Game {
     if (seat.cardsDrawnThisTurn === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) {
       this.revealCards(player, [id], "hand");
     }
+    if (seat.cardsDrawnThisTurn === 1) this.queueMiracle(player, id);
     this.tallyDraw(player);
+  }
+
+  /** Miracle (rule 702.94a): `card`, the first card `player` has drawn this
+   * turn, has miracle — queue its trigger, unrevealed until they say
+   * (`miracle-reveal`, asked as it would be placed). Its source is the card
+   * in hand, as it is now (400.7). */
+  private queueMiracle(player: PlayerId, card: ObjectId): void {
+    const object = this.state.objects[card];
+    if (object?.zone !== "hand" || !this.registry.has(object.cardName)) return;
+    if (this.registry.get(object.cardName).miracle === null) return;
+    this.state.pendingTriggers.push({
+      sourceObjectId: card,
+      cardName: object.cardName,
+      abilityIndex: 0,
+      controller: player,
+      reflexive: { targets: [], effect: MIRACLE_EFFECT, text: MIRACLE_TEXT },
+      miracle: { stint: object.zoneChangeCount ?? 0, revealed: false },
+    });
   }
 
   /** Whether `player` controls a permanent that reveals the first card they

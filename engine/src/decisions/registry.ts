@@ -44,6 +44,7 @@ import { blockers } from "./blockers.js";
 import { chooseTargets } from "./choose-targets.js";
 import { castNow } from "./cast-now.js";
 import { scry } from "./scry.js";
+import { miracleReveal } from "./miracle-reveal.js";
 
 export { defineDecision } from "./define.js";
 
@@ -74,6 +75,7 @@ export const DECISIONS: Record<DecisionKind, AnyDecisionModule> = {
   "choose-targets": chooseTargets,
   "cast-now": castNow,
   scry,
+  "miracle-reveal": miracleReveal,
 };
 
 /** The module for `kind`. Total, so this cannot fail. */

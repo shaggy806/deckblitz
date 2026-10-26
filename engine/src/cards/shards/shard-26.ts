@@ -160,6 +160,7 @@ import _poolDrizztDourden from "../pool/drizzt-dourden.js";
 import _poolDrogskolArmaments from "../pool/drogskol-armaments.js";
 import _poolDromokaDunecaster from "../pool/dromoka-dunecaster.js";
 import _poolDrownerOfSecrets from "../pool/drowner-of-secrets.js";
+import _poolDualCasting from "../pool/dual-casting.js";
 import _poolDuskshellCrawler from "../pool/duskshell-crawler.js";
 import _poolDwarvenHammer from "../pool/dwarven-hammer.js";
 import _poolDwarvenReinforcements from "../pool/dwarven-reinforcements.js";
@@ -624,6 +625,7 @@ import _poolUrenisRebuff from "../pool/urenis-rebuff.js";
 import _poolUrsineMonstrosity from "../pool/ursine-monstrosity.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolValleyRally from "../pool/valley-rally.js";
+import _poolVanishment from "../pool/vanishment.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVaultPlunderer from "../pool/vault-plunderer.js";
@@ -651,6 +653,7 @@ import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
 import _poolVorracBattlehorns from "../pool/vorrac-battlehorns.js";
 import _poolWallOfLight from "../pool/wall-of-light.js";
 import _poolWanderersTwig from "../pool/wanderers-twig.js";
+import _poolWarFalcon from "../pool/war-falcon.js";
 import _poolWarSpikeChangeling from "../pool/war-spike-changeling.js";
 import _poolWarpingWail from "../pool/warping-wail.js";
 import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
@@ -846,6 +849,7 @@ const shard: CardShard = {
     _poolDrogskolArmaments,
     _poolDromokaDunecaster,
     _poolDrownerOfSecrets,
+    _poolDualCasting,
     _poolDuskshellCrawler,
     _poolDwarvenHammer,
     _poolDwarvenReinforcements,
@@ -1310,6 +1314,7 @@ const shard: CardShard = {
     _poolUrsineMonstrosity,
     _poolUtopiaSprawl,
     _poolValleyRally,
+    _poolVanishment,
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,
     _poolVaultPlunderer,
@@ -1337,6 +1342,7 @@ const shard: CardShard = {
     _poolVorracBattlehorns,
     _poolWallOfLight,
     _poolWanderersTwig,
+    _poolWarFalcon,
     _poolWarSpikeChangeling,
     _poolWarpingWail,
     _poolWarriorsOfWakanda,

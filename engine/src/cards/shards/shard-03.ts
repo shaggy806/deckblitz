@@ -413,6 +413,7 @@ import _poolReplicationTechnique from "../pool/replication-technique.js";
 import _poolResculpt from "../pool/resculpt.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
+import _poolRingOfKalonia from "../pool/ring-of-kalonia.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
 import _poolRiverDelta from "../pool/river-delta.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
@@ -623,6 +624,7 @@ import _tokensCarnivoreToken from "../tokens/carnivore-token.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
+import _tokensHellionTokenHaste from "../tokens/hellion-token-haste.js";
 import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOrbToken from "../tokens/orb-token.js";
@@ -1046,6 +1048,7 @@ const shard: CardShard = {
     _poolResculpt,
     _poolRestlessApparition,
     _poolRighteousBlow,
+    _poolRingOfKalonia,
     _poolRithsAttendant,
     _poolRiverDelta,
     _poolRoarOfEndlessSong,
@@ -1258,6 +1261,7 @@ const shard: CardShard = {
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
+    _tokensHellionTokenHaste,
     _tokensMutagenToken,
     _tokensMutantToken,
     _tokensOrbToken,

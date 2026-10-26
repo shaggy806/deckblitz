@@ -25,6 +25,7 @@ import _poolAnglerDrake from "../pool/angler-drake.js";
 import _poolAnjesRavager from "../pool/anjes-ravager.js";
 import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
+import _poolArcticAven from "../pool/arctic-aven.js";
 import _poolArdenvaleTactician from "../pool/ardenvale-tactician.js";
 import _poolArenaTrickster from "../pool/arena-trickster.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
@@ -146,6 +147,7 @@ import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
 import _poolDrakeUmbra from "../pool/drake-umbra.js";
 import _poolDrannithStinger from "../pool/drannith-stinger.js";
 import _poolDrawnFromDreams from "../pool/drawn-from-dreams.js";
+import _poolDreadwaters from "../pool/dreadwaters.js";
 import _poolDreamstoneHedron from "../pool/dreamstone-hedron.js";
 import _poolDregsOfSorrow from "../pool/dregs-of-sorrow.js";
 import _poolDromarsAttendant from "../pool/dromars-attendant.js";
@@ -260,6 +262,7 @@ import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
 import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
+import _poolHarborBandit from "../pool/harbor-bandit.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
 import _poolHaunterOfNightveil from "../pool/haunter-of-nightveil.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
@@ -577,6 +580,7 @@ import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
 import _poolTolsimirFriendToWolves from "../pool/tolsimir-friend-to-wolves.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
+import _poolTouchOfTheEternal from "../pool/touch-of-the-eternal.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTovolarsHuntmaster from "../pool/tovolars-huntmaster.js";
 import _poolTownGreeter from "../pool/town-greeter.js";
@@ -690,6 +694,7 @@ const shard: CardShard = {
     _poolAnjesRavager,
     _poolAqueousAria,
     _poolArcboundWhelp,
+    _poolArcticAven,
     _poolArdenvaleTactician,
     _poolArenaTrickster,
     _poolAresGodOfWar,
@@ -811,6 +816,7 @@ const shard: CardShard = {
     _poolDrakeUmbra,
     _poolDrannithStinger,
     _poolDrawnFromDreams,
+    _poolDreadwaters,
     _poolDreamstoneHedron,
     _poolDregsOfSorrow,
     _poolDromarsAttendant,
@@ -925,6 +931,7 @@ const shard: CardShard = {
     _poolGuardianScalelord,
     _poolGuruPathik,
     _poolHamatoNinpo,
+    _poolHarborBandit,
     _poolHaruHiddenTalent,
     _poolHaunterOfNightveil,
     _poolHavenOfTheSpiritDragon,
@@ -1242,6 +1249,7 @@ const shard: CardShard = {
     _poolTitansVanguard,
     _poolTolsimirFriendToWolves,
     _poolTouchOfDeath,
+    _poolTouchOfTheEternal,
     _poolTovolarTheMidnightScourge,
     _poolTovolarsHuntmaster,
     _poolTownGreeter,

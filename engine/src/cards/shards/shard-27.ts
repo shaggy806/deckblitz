@@ -151,6 +151,7 @@ import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDriven from "../pool/driven.js";
+import _poolDriverOfTheDead from "../pool/driver-of-the-dead.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDuelingCoach from "../pool/dueling-coach.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
@@ -631,6 +632,7 @@ import _poolVanquishTheFoul from "../pool/vanquish-the-foul.js";
 import _poolVaporousDjinn from "../pool/vaporous-djinn.js";
 import _poolVatOfRebirth from "../pool/vat-of-rebirth.js";
 import _poolVectisSilencers from "../pool/vectis-silencers.js";
+import _poolVeilbornGhoul from "../pool/veilborn-ghoul.js";
 import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
@@ -836,6 +838,7 @@ const shard: CardShard = {
     _poolDragonEgg,
     _poolDrillworksMole,
     _poolDriven,
+    _poolDriverOfTheDead,
     _poolDrumhunter,
     _poolDuelingCoach,
     _poolDukharaPeafowl,
@@ -1316,6 +1319,7 @@ const shard: CardShard = {
     _poolVaporousDjinn,
     _poolVatOfRebirth,
     _poolVectisSilencers,
+    _poolVeilbornGhoul,
     _poolVeiledAscension,
     _poolVelaTheNightClad,
     _poolVenerableWarsinger,

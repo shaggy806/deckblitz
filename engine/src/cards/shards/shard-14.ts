@@ -108,6 +108,7 @@ import _poolCobaltGolem from "../pool/cobalt-golem.js";
 import _poolCollectiveInferno from "../pool/collective-inferno.js";
 import _poolCollectorsCage from "../pool/collectors-cage.js";
 import _poolCombatThresher from "../pool/combat-thresher.js";
+import _poolCommandersAuthority from "../pool/commanders-authority.js";
 import _poolCompanyCommander from "../pool/company-commander.js";
 import _poolCompelledDuel from "../pool/compelled-duel.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
@@ -455,6 +456,7 @@ import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
+import _poolPrizedElephant from "../pool/prized-elephant.js";
 import _poolProfanerOfTheDead from "../pool/profaner-of-the-dead.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
 import _poolProfitLoss from "../pool/profit-loss.js";
@@ -524,6 +526,7 @@ import _poolShardOfTheVoidDragon from "../pool/shard-of-the-void-dragon.js";
 import _poolShatterTheSource from "../pool/shatter-the-source.js";
 import _poolShatter from "../pool/shatter.js";
 import _poolShelteringLight from "../pool/sheltering-light.js";
+import _poolShelteringWord from "../pool/sheltering-word.js";
 import _poolShieldedByFaith from "../pool/shielded-by-faith.js";
 import _poolShivanGorge from "../pool/shivan-gorge.js";
 import _poolShivanMeteor from "../pool/shivan-meteor.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolCollectiveInferno,
     _poolCollectorsCage,
     _poolCombatThresher,
+    _poolCommandersAuthority,
     _poolCompanyCommander,
     _poolCompelledDuel,
     _poolConiferStrider,
@@ -1141,6 +1145,7 @@ const shard: CardShard = {
     _poolPrimeSpeakerVannifar,
     _poolPrimevalBounty,
     _poolPrismite,
+    _poolPrizedElephant,
     _poolProfanerOfTheDead,
     _poolProfessionalFaceBreaker,
     _poolProfitLoss,
@@ -1210,6 +1215,7 @@ const shard: CardShard = {
     _poolShatterTheSource,
     _poolShatter,
     _poolShelteringLight,
+    _poolShelteringWord,
     _poolShieldedByFaith,
     _poolShivanGorge,
     _poolShivanMeteor,

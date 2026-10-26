@@ -1834,6 +1834,12 @@ export interface PendingTrigger {
   /** Which battlefield stint of its source and triggering object the ability
    * refers to, recorded as it triggers — see {@link LastKnownRefs}. */
   readonly lastKnownRefs?: LastKnownRefs;
+  /** Miracle's trigger (rule 702.94a), its card's `zoneChangeCount` in hand
+   * as it was drawn: the ability can cast only that object (400.7 —
+   * `sourceLost` once it has left the hand). `revealed` is false until its
+   * owner has chosen to reveal it (the `miracle-reveal` decision, asked as
+   * it would be placed); declined, the trigger is dropped. */
+  readonly miracle?: { readonly stint: number; readonly revealed: boolean };
   /**
    * A whole ability record rather than an index into a card's `triggered`
    * list — a mana-spend rider (Path of Ancestry), which is an ability of no
@@ -2551,6 +2557,16 @@ export type AwaitingDecision =
       readonly life: number;
     }
   | {
+      /** Miracle (rule 702.94a): `player` drew `source`, a card with
+       * miracle, as the first card they drew this turn — reveal it, so its
+       * trigger goes on the stack and may cast it for `cost`? Asked as the
+       * trigger would be placed (`decisions/miracle-reveal.ts`). */
+      readonly kind: "miracle-reveal";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly cost: string;
+    }
+  | {
       /** A "reveal land" (Port Town: "As this land enters, you may reveal a
        * Plains or Island card from your hand. If you don't, this land enters
        * tapped") is about to enter; its controller picks which of `options`,
@@ -3051,6 +3067,8 @@ export type AwaitingDecision =
       readonly byDiscarding?: true;
       /** …for its madness cost instead (rule 702.35a) — the cost. */
       readonly madness?: string;
+      /** …for its miracle cost instead (rule 702.94a) — the cost. */
+      readonly miracle?: string;
       /** What the spell must be, matched as it's cast — see the effect's
        * `spell`, bound when it was raised. */
       readonly spell?: CardFilter;

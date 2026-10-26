@@ -239,6 +239,13 @@ export interface PlayerController {
    */
   payLifeForUntapped(view: ControllerView, source: ObjectId, life: number): boolean;
   /**
+   * `card`, a card with miracle, was just drawn as this player's first card
+   * this turn — return `true` to reveal it, putting its miracle trigger on
+   * the stack (which offers the cast for `cost` as it resolves), `false` to
+   * keep it hidden (rule 702.94a).
+   */
+  revealMiracle(view: ControllerView, card: ObjectId, cost: string): boolean;
+  /**
    * A reveal land (`source`) is about to enter — return which of `options`,
    * the qualifying cards in hand, to reveal so it enters untapped, or `null`
    * to reveal nothing and have it enter tapped.
@@ -609,6 +616,12 @@ export class AutomaticController implements PlayerController {
     );
   }
 
+  revealMiracle(_view: ControllerView, _card: ObjectId, _cost: string): boolean {
+    // Revealing only offers the cast, which is asked again as the trigger
+    // resolves.
+    return true;
+  }
+
   payLifeForUntapped(_view: ControllerView, _source: ObjectId, _life: number): boolean {
     // Conservative default: never bleed life for an untapped land (declining
     // is always legal). Tests that care override via a ScriptedController.
@@ -958,6 +971,7 @@ export class ScriptedController implements PlayerController {
   commanderReplacementFn: CommanderReplacementChooser = () => true;
   payLifeForUntappedFn: (view: ControllerView, source: ObjectId, life: number) => boolean =
     () => false;
+  revealMiracleFn: (view: ControllerView, card: ObjectId, cost: string) => boolean = () => true;
   revealForUntappedFn: CopyChooser = (_view, _source, options) => options[0] ?? null;
   chooseCopyFn: CopyChooser =(_view, _source, options) => options[0] ?? null;
   chooseEnchantFn: (
@@ -1111,6 +1125,10 @@ export class ScriptedController implements PlayerController {
 
   payLifeForUntapped(view: ControllerView, source: ObjectId, life: number): boolean {
     return this.payLifeForUntappedFn(view, source, life);
+  }
+
+  revealMiracle(view: ControllerView, card: ObjectId, cost: string): boolean {
+    return this.revealMiracleFn(view, card, cost);
   }
 
   revealForUntapped(

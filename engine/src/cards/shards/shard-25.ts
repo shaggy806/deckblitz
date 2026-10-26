@@ -73,6 +73,7 @@ import _poolBitterbladeWarrior from "../pool/bitterblade-warrior.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
+import _poolBloodReckoning from "../pool/blood-reckoning.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
 import _poolBloodmadVampire from "../pool/bloodmad-vampire.js";
@@ -212,6 +213,7 @@ import _poolFinaleOfDevastation from "../pool/finale-of-devastation.js";
 import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
 import _poolFirebrandArcher from "../pool/firebrand-archer.js";
+import _poolFirewingPhoenix from "../pool/firewing-phoenix.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
 import _poolFlameheartWerewolf from "../pool/flameheart-werewolf.js";
 import _poolFleetingDistraction from "../pool/fleeting-distraction.js";
@@ -755,6 +757,7 @@ const shard: CardShard = {
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
+    _poolBloodReckoning,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
     _poolBloodmadVampire,
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolFirbolgFlutist,
     _poolFireDiamond,
     _poolFirebrandArcher,
+    _poolFirewingPhoenix,
     _poolFlameSlash,
     _poolFlameheartWerewolf,
     _poolFleetingDistraction,

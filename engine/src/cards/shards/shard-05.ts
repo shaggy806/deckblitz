@@ -73,6 +73,7 @@ import _poolBlanchwoodArmor from "../pool/blanchwood-armor.js";
 import _poolBlastedLandscape from "../pool/blasted-landscape.js";
 import _poolBleachboneVerge from "../pool/bleachbone-verge.js";
 import _poolBlessedLight from "../pool/blessed-light.js";
+import _poolBlessingsOfNature from "../pool/blessings-of-nature.js";
 import _poolBlightPile from "../pool/blight-pile.js";
 import _poolBlightning from "../pool/blightning.js";
 import _poolBlisterpod from "../pool/blisterpod.js";
@@ -153,6 +154,7 @@ import _poolCryptCreeper from "../pool/crypt-creeper.js";
 import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
+import _poolDangerousWager from "../pool/dangerous-wager.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
 import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
 import _poolDauntlessDismantler from "../pool/dauntless-dismantler.js";
@@ -161,6 +163,7 @@ import _poolDealGoneBad from "../pool/deal-gone-bad.js";
 import _poolDeathgrip from "../pool/deathgrip.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
+import _poolDefyDeath from "../pool/defy-death.js";
 import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
@@ -760,6 +763,7 @@ const shard: CardShard = {
     _poolBlastedLandscape,
     _poolBleachboneVerge,
     _poolBlessedLight,
+    _poolBlessingsOfNature,
     _poolBlightPile,
     _poolBlightning,
     _poolBlisterpod,
@@ -840,6 +844,7 @@ const shard: CardShard = {
     _poolCryptbreaker,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
+    _poolDangerousWager,
     _poolDarkConfidant,
     _poolDarksteelColossus,
     _poolDauntlessDismantler,
@@ -848,6 +853,7 @@ const shard: CardShard = {
     _poolDeathgrip,
     _poolDeeprootWarrior,
     _poolDefiantElf,
+    _poolDefyDeath,
     _poolDelugeOfTheDead,
     _poolDemonsDisciple,
     _poolDemonsGrasp,

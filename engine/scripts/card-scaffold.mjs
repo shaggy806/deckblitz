@@ -203,6 +203,7 @@ function faceSource(face, ctx) {
     flashback: parsed.flashback,
     plot: parsed.plot,
     madness: parsed.madness,
+    miracle: parsed.miracle,
     evoke: parsed.evoke,
     alternativeCost: parsed.alternativeCost,
     mutate: parsed.mutate,

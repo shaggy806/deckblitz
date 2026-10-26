@@ -100,6 +100,7 @@ function offerOf(awaiting: Extract<AwaitingDecision, { kind: "cast-now" }>): Ext
     free: awaiting.free,
     ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
     ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
+    ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
     casts: [...awaiting.offers],
     ...(awaiting.lands !== undefined ? { lands: [...awaiting.lands] } : {}),
   };

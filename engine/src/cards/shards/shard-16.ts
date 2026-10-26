@@ -79,6 +79,7 @@ import _poolBorrowedMalevolence from "../pool/borrowed-malevolence.js";
 import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
+import _poolBowerPassage from "../pool/bower-passage.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBreaking from "../pool/breaking.js";
 import _poolBriarShield from "../pool/briar-shield.js";
@@ -211,6 +212,7 @@ import _poolFirespitterWhelp from "../pool/firespitter-whelp.js";
 import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
 import _poolFlamebornHellion from "../pool/flameborn-hellion.js";
 import _poolFlameholdGrappler from "../pool/flamehold-grappler.js";
+import _poolFlamesOfTheFirebrand from "../pool/flames-of-the-firebrand.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
@@ -395,6 +397,7 @@ import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
 import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
 import _poolNaturesChant from "../pool/natures-chant.js";
+import _poolNefaroxOverlordOfGrixis from "../pool/nefarox-overlord-of-grixis.js";
 import _poolNellyBorcaImpulsiveAccuser from "../pool/nelly-borca-impulsive-accuser.js";
 import _poolNessianWanderer from "../pool/nessian-wanderer.js";
 import _poolNestingDragon from "../pool/nesting-dragon.js";
@@ -825,6 +828,7 @@ const shard: CardShard = {
     _poolBottleOfSuleiman,
     _poolBoulderRush,
     _poolBoundingFelidar,
+    _poolBowerPassage,
     _poolBrassclawOrcs,
     _poolBreaking,
     _poolBriarShield,
@@ -957,6 +961,7 @@ const shard: CardShard = {
     _poolFistsOfTheAnvil,
     _poolFlamebornHellion,
     _poolFlameholdGrappler,
+    _poolFlamesOfTheFirebrand,
     _poolFledglingGriffin,
     _poolFleetingImage,
     _poolFleetingMemories,
@@ -1141,6 +1146,7 @@ const shard: CardShard = {
     _poolNaomiPillarOfOrder,
     _poolNaturalize,
     _poolNaturesChant,
+    _poolNefaroxOverlordOfGrixis,
     _poolNellyBorcaImpulsiveAccuser,
     _poolNessianWanderer,
     _poolNestingDragon,

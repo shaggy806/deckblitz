@@ -2950,6 +2950,12 @@ export interface CardDefinition {
    * doesn't, they put this card into their graveyard." `cost` is the madness
    * cost. `null` for a card without madness. */
   readonly madness: { readonly cost: string } | null;
+  /** Miracle (rule 702.94a) — "You may reveal this card from your hand as
+   * you draw it if it's the first card you've drawn this turn. When you
+   * reveal this card this way, you may cast it by paying [cost] rather than
+   * its mana cost." `cost` is the miracle cost; `Game` queues the trigger as
+   * the card is drawn (`cards/miracle.ts`). `null` for a card without it. */
+  readonly miracle: { readonly cost: string } | null;
   /**
    * "You may cast this card from your graveyard as long as [condition]"
    * (Gravecrawler: "as long as you control a Zombie") — an ability that
@@ -3338,6 +3344,7 @@ const PRINTED_ABILITY: {
   harmonize: (def) => def.harmonize !== null,
   retrace: (def) => def.retrace,
   madness: (def) => def.madness !== null,
+  miracle: (def) => def.miracle !== null,
   foretell: (def) => def.foretell !== null,
   plot: (def) => def.plot !== null,
   warp: (def) => def.warp !== null,
@@ -3556,6 +3563,7 @@ interface CardDraft {
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
+  miracle?: { readonly cost: string };
   foretell?: { readonly cost: string };
   plot?: { readonly cost: string };
   warp?: { readonly cost: string };
@@ -3777,6 +3785,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     harmonize: draft.harmonize ?? null,
     retrace: draft.retrace ?? false,
     madness: draft.madness ?? null,
+    miracle: draft.miracle ?? null,
     foretell: draft.foretell ?? null,
     plot: draft.plot ?? null,
     warp: draft.warp ?? null,

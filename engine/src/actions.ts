@@ -572,6 +572,13 @@ export type Action =
       readonly pay: boolean;
     }
   | {
+      /** Answers a pending miracle reveal (rule 702.94a): `reveal` = reveal
+       * the drawn card, putting its miracle trigger on the stack. */
+      readonly type: "miracle-reveal";
+      readonly player: PlayerId;
+      readonly reveal: boolean;
+    }
+  | {
       /** Answers a pending reveal-land decision: `reveal` is the card, one of
        * the offered options, revealed from hand so the land enters untapped,
        * or `null` to reveal nothing and have it enter tapped. */
@@ -1457,6 +1464,13 @@ export type LegalAction =
       readonly life: number;
     }
   | {
+      /** A card with miracle was just drawn as its owner's first this turn —
+       * reveal it to cast it for `cost`? (rule 702.94a) */
+      readonly kind: "miracle-reveal";
+      readonly source: ObjectId;
+      readonly cost: string;
+    }
+  | {
       /** A reveal land is about to enter — reveal one of `options` from hand
        * to have it enter untapped, or nothing to have it enter tapped. */
       readonly kind: "reveal-for-untapped";
@@ -1662,6 +1676,8 @@ export type LegalAction =
       /** …for its madness cost rather than its mana cost (rule 702.35a): the
        * madness cost, the only way offered. */
       readonly madness?: string;
+      /** …for its miracle cost rather than its mana cost (rule 702.94a). */
+      readonly miracle?: string;
       readonly casts: readonly CastSpellOffer[];
       /** "You may **play**" (hideaway): each land card on offer, as the face
        * it'd be played as — played during the resolution, it uses a land

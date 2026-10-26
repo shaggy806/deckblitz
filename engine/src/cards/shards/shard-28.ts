@@ -215,6 +215,7 @@ import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFireServant from "../pool/fire-servant.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
+import _poolFlinthoofBoar from "../pool/flinthoof-boar.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFlurryOfHorns from "../pool/flurry-of-horns.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
@@ -385,6 +386,7 @@ import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
+import _poolNecrobite from "../pool/necrobite.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
 import _poolNetherbornAltar from "../pool/netherborn-altar.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
@@ -496,6 +498,7 @@ import _poolRoyalDecree from "../pool/royal-decree.js";
 import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
+import _poolRushOfBlood from "../pool/rush-of-blood.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabertoothMauler from "../pool/sabertooth-mauler.js";
 import _poolSabotender from "../pool/sabotender.js";
@@ -668,6 +671,7 @@ import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWalkingWall from "../pool/walking-wall.js";
 import _poolWallOfPutridFlesh from "../pool/wall-of-putrid-flesh.js";
 import _poolWallOff from "../pool/wall-off.js";
+import _poolWanderingWolf from "../pool/wandering-wolf.js";
 import _poolWarchanterOfMogis from "../pool/warchanter-of-mogis.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
 import _poolWarmWelcome from "../pool/warm-welcome.js";
@@ -928,6 +932,7 @@ const shard: CardShard = {
     _poolFireServant,
     _poolFlameChainMauler,
     _poolFleshpulperGiant,
+    _poolFlinthoofBoar,
     _poolFlubsTheFool,
     _poolFlurryOfHorns,
     _poolFollowTheLumarets,
@@ -1098,6 +1103,7 @@ const shard: CardShard = {
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
     _poolNazarTheVelvetFang,
+    _poolNecrobite,
     _poolNestingBot,
     _poolNetherbornAltar,
     _poolNezumiProwler,
@@ -1209,6 +1215,7 @@ const shard: CardShard = {
     _poolRubblebeltRioters,
     _poolRuneclawBear,
     _poolRunehornHellkite,
+    _poolRushOfBlood,
     _poolRustedSlasher,
     _poolSabertoothMauler,
     _poolSabotender,
@@ -1381,6 +1388,7 @@ const shard: CardShard = {
     _poolWalkingWall,
     _poolWallOfPutridFlesh,
     _poolWallOff,
+    _poolWanderingWolf,
     _poolWarchanterOfMogis,
     _poolWarclampMastiff,
     _poolWarmWelcome,

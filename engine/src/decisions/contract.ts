@@ -90,6 +90,7 @@ export const DECISION_ACTIONS = {
   mulligan: ["mulligan", "put-on-bottom"],
   "commander-replacement": ["commander-replacement"],
   "pay-life-for-untapped": ["pay-life-for-untapped"],
+  "miracle-reveal": ["miracle-reveal"],
   "reveal-for-untapped": ["reveal-for-untapped"],
   "choose-copy": ["choose-copy"],
   "choose-enchant": ["choose-enchant"],
@@ -128,6 +129,7 @@ export const DECISION_OFFERS = {
   mulligan: ["mulligan", "put-on-bottom"],
   "commander-replacement": ["commander-replacement"],
   "pay-life-for-untapped": ["pay-life-for-untapped"],
+  "miracle-reveal": ["miracle-reveal"],
   "reveal-for-untapped": ["reveal-for-untapped"],
   "choose-copy": ["choose-copy"],
   "choose-enchant": ["choose-enchant"],
@@ -229,6 +231,7 @@ export interface DecisionReadCtx {
  */
 export interface DecisionHost {
   readonly applyPayLifeForUntapped: (player: PlayerId, pay: boolean) => void;
+  readonly applyMiracleReveal: (player: PlayerId, reveal: boolean) => void;
   readonly applyRevealForUntapped: (player: PlayerId, reveal: ObjectId | null) => void;
   readonly applyCopyChoice: (player: PlayerId, copy: ObjectId | null) => void;
   readonly applyEnchantChoice: (player: PlayerId, enchant: ObjectId | PlayerId) => void;

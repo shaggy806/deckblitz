@@ -83,6 +83,7 @@ import _poolBriarHydra from "../pool/briar-hydra.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodOfCockroaches from "../pool/brood-of-cockroaches.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
+import _poolBuildersBlessing from "../pool/builders-blessing.js";
 import _poolBurningPalmEfreet from "../pool/burning-palm-efreet.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
 import _poolCabalPaladin from "../pool/cabal-paladin.js";
@@ -129,6 +130,7 @@ import _poolCounterpoint from "../pool/counterpoint.js";
 import _poolCrashTheParty from "../pool/crash-the-party.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
 import _poolCrevasse from "../pool/crevasse.js";
+import _poolCripplingBlight from "../pool/crippling-blight.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
 import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
 import _poolCunningRhetoric from "../pool/cunning-rhetoric.js";
@@ -498,6 +500,7 @@ import _poolScorchwalker from "../pool/scorchwalker.js";
 import _poolScourgeOfTheThrone from "../pool/scourge-of-the-throne.js";
 import _poolScrawlingCrawler from "../pool/scrawling-crawler.js";
 import _poolScreechingSoulbreaker from "../pool/screeching-soulbreaker.js";
+import _poolScrollOfAvacyn from "../pool/scroll-of-avacyn.js";
 import _poolScuteMob from "../pool/scute-mob.js";
 import _poolSeaGodsScorn from "../pool/sea-gods-scorn.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
@@ -623,6 +626,7 @@ import _poolTowerWinder from "../pool/tower-winder.js";
 import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
+import _poolTricksOfTheTrade from "../pool/tricks-of-the-trade.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
 import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
@@ -784,6 +788,7 @@ const shard: CardShard = {
     _poolBrittleEffigy,
     _poolBroodOfCockroaches,
     _poolBroodWeaver,
+    _poolBuildersBlessing,
     _poolBurningPalmEfreet,
     _poolBurningTreeVandal,
     _poolCabalPaladin,
@@ -830,6 +835,7 @@ const shard: CardShard = {
     _poolCrashTheParty,
     _poolCrashTheRamparts,
     _poolCrevasse,
+    _poolCripplingBlight,
     _poolCripplingFear,
     _poolCrystallineCrawler,
     _poolCunningRhetoric,
@@ -1199,6 +1205,7 @@ const shard: CardShard = {
     _poolScourgeOfTheThrone,
     _poolScrawlingCrawler,
     _poolScreechingSoulbreaker,
+    _poolScrollOfAvacyn,
     _poolScuteMob,
     _poolSeaGodsScorn,
     _poolSearchlightGeist,
@@ -1324,6 +1331,7 @@ const shard: CardShard = {
     _poolTrainedOrgg,
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,
+    _poolTricksOfTheTrade,
     _poolTundraWall,
     _poolTwilightProphet,
     _poolTwinbladeInvocation,

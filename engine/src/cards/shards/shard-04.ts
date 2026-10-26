@@ -97,6 +97,7 @@ import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
+import _poolCrusaderOfOdric from "../pool/crusader-of-odric.js";
 import _poolCryptbornHorror from "../pool/cryptborn-horror.js";
 import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
@@ -648,6 +649,7 @@ import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
 import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
 import _poolWickedVisitor from "../pool/wicked-visitor.js";
+import _poolWildGuess from "../pool/wild-guess.js";
 import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
@@ -774,6 +776,7 @@ const shard: CardShard = {
     _poolCrimsonCaravaneer,
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
+    _poolCrusaderOfOdric,
     _poolCryptbornHorror,
     _poolCrystallineNautilus,
     _poolCubwarden,
@@ -1325,6 +1328,7 @@ const shard: CardShard = {
     _poolWhispersilkCloak,
     _poolWhiteGloveGourmand,
     _poolWickedVisitor,
+    _poolWildGuess,
     _poolWildwoodTracker,
     _poolWistfulSelkie,
     _poolWitherAndBloom,

@@ -8279,4 +8279,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Azorius Arrester: a detained creature can't use its abilities until your next turn",
     board({ you: { bf: ['Plains*2'], hand: ['Azorius Arrester'] }, opp: { bf: ['Prodigal Sorcerer'] } }),
   ),
+  preset(
+    'Thunderous Wrath: reveal and cast for its miracle cost',
+    board({ you: { bf: ['Island*3', 'Mountain'], hand: ['Divination'], lib: ['Thunderous Wrath', 'Island'] } }),
+  ),
+  preset(
+    'Thunderous Wrath: keeping a miracle hidden',
+    board({ you: { bf: ['Island*3', 'Mountain'], hand: ['Divination'], lib: ['Thunderous Wrath', 'Island'] } }),
+  ),
 ]

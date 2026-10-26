@@ -2112,6 +2112,8 @@ export function parseFace(face, ctx = {}) {
     // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8
     // life" isn't read).
     if ((m = /^Madness ((?:\{[^}]+\})+)$/.exec(line))) { out.madness = { cost: m[1] }; continue; }
+    // Miracle [cost] (rule 702.94a) — a mana cost.
+    if ((m = /^Miracle ((?:\{[^}]+\})+)$/.exec(line))) { out.miracle = { cost: m[1] }; continue; }
     // Evoke [cost] (rule 702.74a), and the Incarnations' "Evoke—Exile a white
     // card from your hand." — an evoke whose cost is that exile.
     if ((m = /^Evoke ((?:\{[^}]+\})+)$/.exec(line))) { out.evoke = { cost: m[1] }; continue; }

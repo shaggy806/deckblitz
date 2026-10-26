@@ -265,6 +265,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Harpy Token",
   "Heartwood Token",
   "Hellion Token",
+  "Hellion Token (Haste)",
   "Hero Token",
   "Hero Token (Black Mage's Rod)",
   "Hippo Token",

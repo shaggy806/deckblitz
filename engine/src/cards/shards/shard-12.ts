@@ -351,6 +351,7 @@ import _poolLooterIlKor from "../pool/looter-il-kor.js";
 import _poolLordDreggInsectInvader from "../pool/lord-dregg-insect-invader.js";
 import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
+import _poolLunarMystic from "../pool/lunar-mystic.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolLordDreggInsectInvader,
     _poolLorescaleCoatl,
     _poolLosDiablosMissileBase,
+    _poolLunarMystic,
     _poolLysAlanaInformant,
     _poolManaTithe,
     _poolManifestDread,

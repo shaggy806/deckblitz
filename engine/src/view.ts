@@ -980,7 +980,11 @@ function viewForUncached(
             // until one is actually revealed.
             state.awaiting?.kind === "reveal-for-untapped" && state.awaiting.player !== viewer
             ? { ...state.awaiting, options: [] }
-            : // A search's set rule tags each library card with its land
+            : // A miracle not yet revealed is a hidden card (rule 702.94a):
+              // its cost would say which.
+              state.awaiting?.kind === "miracle-reveal" && state.awaiting.player !== viewer
+              ? { ...state.awaiting, cost: "" }
+              : // A search's set rule tags each library card with its land
               // types: only the searcher sees them.
               state.awaiting?.kind === "choose-from-zone" &&
                 state.awaiting.together !== undefined &&

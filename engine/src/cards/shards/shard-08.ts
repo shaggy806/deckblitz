@@ -246,6 +246,7 @@ import _poolGarbageFire from "../pool/garbage-fire.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
 import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
+import _poolGhostlyTouch from "../pool/ghostly-touch.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
@@ -975,6 +976,7 @@ const shard: CardShard = {
     _poolGargoyleFlock,
     _poolGarruksWarsteed,
     _poolGeneralLeoCristophe,
+    _poolGhostlyTouch,
     _poolGhoulcallersBell,
     _poolGildedScuttler,
     _poolGiltgroveStalker,

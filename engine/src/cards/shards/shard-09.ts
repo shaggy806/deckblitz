@@ -46,6 +46,7 @@ import _poolAshenPowder from "../pool/ashen-powder.js";
 import _poolAshlingRekindled from "../pool/ashling-rekindled.js";
 import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
+import _poolAugurOfBolas from "../pool/augur-of-bolas.js";
 import _poolAuraMutation from "../pool/aura-mutation.js";
 import _poolAvatarKyoshi from "../pool/avatar-kyoshi.js";
 import _poolAvenTactician from "../pool/aven-tactician.js";
@@ -387,6 +388,7 @@ import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
 import _poolMouserAttack from "../pool/mouser-attack.js";
 import _poolMudbuttonTorchrunner from "../pool/mudbutton-torchrunner.js";
+import _poolMwonvuliBeastTracker from "../pool/mwonvuli-beast-tracker.js";
 import _poolMyojinOfRoaringBlades from "../pool/myojin-of-roaring-blades.js";
 import _poolMysteryKey from "../pool/mystery-key.js";
 import _poolMysticRedaction from "../pool/mystic-redaction.js";
@@ -631,6 +633,7 @@ import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
+import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
@@ -762,6 +765,7 @@ const shard: CardShard = {
     _poolAshlingRekindled,
     _poolAspiringAeronaut,
     _poolAttackInTheBox,
+    _poolAugurOfBolas,
     _poolAuraMutation,
     _poolAvatarKyoshi,
     _poolAvenTactician,
@@ -1103,6 +1107,7 @@ const shard: CardShard = {
     _poolMoonSprite,
     _poolMouserAttack,
     _poolMudbuttonTorchrunner,
+    _poolMwonvuliBeastTracker,
     _poolMyojinOfRoaringBlades,
     _poolMysteryKey,
     _poolMysticRedaction,
@@ -1347,6 +1352,7 @@ const shard: CardShard = {
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
     _poolTraxosScourgeEternal,
+    _poolTreacherousPitDweller,
     _poolTrenchpost,
     _poolTurnBurn,
     _poolTyvarsStand,

@@ -199,6 +199,7 @@ import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
 import _poolFairgroundsPatrol from "../pool/fairgrounds-patrol.js";
 import _poolFalconAbomination from "../pool/falcon-abomination.js";
 import _poolFalconWingedWonder from "../pool/falcon-winged-wonder.js";
+import _poolFalkenrathExterminator from "../pool/falkenrath-exterminator.js";
 import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
@@ -266,6 +267,7 @@ import _poolHeartWolf from "../pool/heart-wolf.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
 import _poolHellcatUndyingVigilante from "../pool/hellcat-undying-vigilante.js";
+import _poolHellionCrucible from "../pool/hellion-crucible.js";
 import _poolHenrikaInfernalSeer from "../pool/henrika-infernal-seer.js";
 import _poolHenzieToolboxTorre from "../pool/henzie-toolbox-torre.js";
 import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
@@ -416,6 +418,7 @@ import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
 import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
+import _poolPillarOfFlame from "../pool/pillar-of-flame.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
 import _poolPlaneboundAccomplice from "../pool/planebound-accomplice.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
@@ -607,6 +610,7 @@ import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
 import _poolThwartTheGrave from "../pool/thwart-the-grave.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
+import _poolTimberpackWolf from "../pool/timberpack-wolf.js";
 import _poolTimeWalk from "../pool/time-walk.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
@@ -909,6 +913,7 @@ const shard: CardShard = {
     _poolFairgroundsPatrol,
     _poolFalconAbomination,
     _poolFalconWingedWonder,
+    _poolFalkenrathExterminator,
     _poolFalkenrathForebear,
     _poolFalkenrathMarauders,
     _poolFallOfTheTitans,
@@ -976,6 +981,7 @@ const shard: CardShard = {
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,
     _poolHellcatUndyingVigilante,
+    _poolHellionCrucible,
     _poolHenrikaInfernalSeer,
     _poolHenzieToolboxTorre,
     _poolHeraldOfSecretStreams,
@@ -1126,6 +1132,7 @@ const shard: CardShard = {
     _poolPhantasmalSphere,
     _poolPharikaGodOfAffliction,
     _poolPileatedProvisioner,
+    _poolPillarOfFlame,
     _poolPirateHat,
     _poolPlaneboundAccomplice,
     _poolPlatedSlagwurm,
@@ -1317,6 +1324,7 @@ const shard: CardShard = {
     _poolThrottle,
     _poolThwartTheGrave,
     _poolTigerDillo,
+    _poolTimberpackWolf,
     _poolTimeWalk,
     _poolTorWauki,
     _poolTorchBreath,

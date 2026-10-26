@@ -122,6 +122,7 @@ import _poolCourtOfGrace from "../pool/court-of-grace.js";
 import _poolCrackedSkull from "../pool/cracked-skull.js";
 import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCrashThrough from "../pool/crash-through.js";
+import _poolCrimsonMuckwader from "../pool/crimson-muckwader.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
 import _poolCrushTheWeak from "../pool/crush-the-weak.js";
 import _poolCrystalGolem from "../pool/crystal-golem.js";
@@ -182,6 +183,8 @@ import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnsoulArtifact from "../pool/ensoul-artifact.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
+import _poolEntreatTheAngels from "../pool/entreat-the-angels.js";
+import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
@@ -224,6 +227,7 @@ import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
+import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
@@ -825,6 +829,7 @@ const shard: CardShard = {
     _poolCrackedSkull,
     _poolCraftWithPride,
     _poolCrashThrough,
+    _poolCrimsonMuckwader,
     _poolCrosissAttendant,
     _poolCrushTheWeak,
     _poolCrystalGolem,
@@ -885,6 +890,8 @@ const shard: CardShard = {
     _poolEmblemOfTheWarmind,
     _poolEnsoulArtifact,
     _poolEnterTheGodEternals,
+    _poolEntreatTheAngels,
+    _poolEntreatTheDead,
     _poolEpharasWarden,
     _poolEtherealAbsolution,
     _poolEtherealAmbush,
@@ -927,6 +934,7 @@ const shard: CardShard = {
     _poolGallowsWarden,
     _poolGarenbrigPaladin,
     _poolGavonyTrapper,
+    _poolGemOfBecoming,
     _poolGenesisHydra,
     _poolGhostLitWarder,
     _poolGiantGrowth,

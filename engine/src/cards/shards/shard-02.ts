@@ -613,6 +613,7 @@ import _poolToweringBaloth from "../pool/towering-baloth.js";
 import _poolTransitMage from "../pool/transit-mage.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
+import _poolTriumphOfFerocity from "../pool/triumph-of-ferocity.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
 import _poolTruce from "../pool/truce.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolTransitMage,
     _poolTributeToTheWild,
     _poolTritonShorethief,
+    _poolTriumphOfFerocity,
     _poolTropicalIsland,
     _poolTruce,
     _poolTrystanCallousCultivator,

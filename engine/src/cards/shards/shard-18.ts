@@ -37,6 +37,7 @@ import _poolAyaOfAlexandria from "../pool/aya-of-alexandria.js";
 import _poolAyarasOathsworn from "../pool/ayaras-oathsworn.js";
 import _poolAzoriusSignet from "../pool/azorius-signet.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
+import _poolBanishingStroke from "../pool/banishing-stroke.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
 import _poolBattlefieldButcher from "../pool/battlefield-butcher.js";
 import _poolBaxterFlyInTheOintment from "../pool/baxter-fly-in-the-ointment.js";
@@ -219,6 +220,7 @@ import _poolGoblinFirebomb from "../pool/goblin-firebomb.js";
 import _poolGoblinSharpshooter from "../pool/goblin-sharpshooter.js";
 import _poolGoblinWarrens from "../pool/goblin-warrens.js";
 import _poolGoldenBear from "../pool/golden-bear.js";
+import _poolGoldnightRedeemer from "../pool/goldnight-redeemer.js";
 import _poolGorbagOfMinasMorgul from "../pool/gorbag-of-minas-morgul.js";
 import _poolGrandmotherSengir from "../pool/grandmother-sengir.js";
 import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
@@ -449,6 +451,7 @@ import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolResoundingSilence from "../pool/resounding-silence.js";
 import _poolRiftSower from "../pool/rift-sower.js";
+import _poolRingOfThune from "../pool/ring-of-thune.js";
 import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiseFromTheTides from "../pool/rise-from-the-tides.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
@@ -556,6 +559,7 @@ import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
+import _poolTemporalMastery from "../pool/temporal-mastery.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
@@ -582,6 +586,7 @@ import _poolThrullRetainer from "../pool/thrull-retainer.js";
 import _poolThunderheadGunner from "../pool/thunderhead-gunner.js";
 import _poolThunderingCeratok from "../pool/thundering-ceratok.js";
 import _poolThunderousVelocipede from "../pool/thunderous-velocipede.js";
+import _poolThunderousWrath from "../pool/thunderous-wrath.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
@@ -730,6 +735,7 @@ const shard: CardShard = {
     _poolAyarasOathsworn,
     _poolAzoriusSignet,
     _poolBanishingBetrayal,
+    _poolBanishingStroke,
     _poolBarbedBattlegear,
     _poolBattlefieldButcher,
     _poolBaxterFlyInTheOintment,
@@ -912,6 +918,7 @@ const shard: CardShard = {
     _poolGoblinSharpshooter,
     _poolGoblinWarrens,
     _poolGoldenBear,
+    _poolGoldnightRedeemer,
     _poolGorbagOfMinasMorgul,
     _poolGrandmotherSengir,
     _poolGrangerGuildmage,
@@ -1142,6 +1149,7 @@ const shard: CardShard = {
     _poolResoluteRider,
     _poolResoundingSilence,
     _poolRiftSower,
+    _poolRingOfThune,
     _poolRipApart,
     _poolRiseFromTheTides,
     _poolRiskyResearch,
@@ -1249,6 +1257,7 @@ const shard: CardShard = {
     _poolTarnationVista,
     _poolTeferisCurse,
     _poolTeferisTimeTwist,
+    _poolTemporalMastery,
     _poolTerastodon,
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,
@@ -1275,6 +1284,7 @@ const shard: CardShard = {
     _poolThunderheadGunner,
     _poolThunderingCeratok,
     _poolThunderousVelocipede,
+    _poolThunderousWrath,
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,

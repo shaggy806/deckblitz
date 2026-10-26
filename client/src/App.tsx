@@ -318,6 +318,7 @@ type MulliganAction = Extract<LegalAction, { kind: 'mulligan' }>
 type BottomAction = Extract<LegalAction, { kind: 'put-on-bottom' }>
 type CommanderChoiceAction = Extract<LegalAction, { kind: 'commander-replacement' }>
 type ShockChoiceAction = Extract<LegalAction, { kind: 'pay-life-for-untapped' }>
+type MiracleChoiceAction = Extract<LegalAction, { kind: 'miracle-reveal' }>
 type RevealChoiceAction = Extract<LegalAction, { kind: 'reveal-for-untapped' }>
 type CopyChoiceAction = Extract<LegalAction, { kind: 'choose-copy' }>
 type EnchantChoiceAction = Extract<LegalAction, { kind: 'choose-enchant' }>
@@ -597,6 +598,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   mulligan: 'decide on a mulligan',
   'commander-replacement': 'decide where their commander goes',
   'pay-life-for-untapped': 'decide on a shock land',
+  'miracle-reveal': 'decide on a miracle',
   'reveal-for-untapped': 'decide on a reveal land',
   'choose-copy': 'choose what to copy',
   'choose-enchant': 'choose what an Aura enchants',
@@ -1887,6 +1889,9 @@ function Table({
   const shockChoiceAction = actions.find(
     (a): a is ShockChoiceAction => a.kind === 'pay-life-for-untapped',
   )
+  const miracleChoiceAction = actions.find(
+    (a): a is MiracleChoiceAction => a.kind === 'miracle-reveal',
+  )
   const revealChoiceAction = actions.find(
     (a): a is RevealChoiceAction => a.kind === 'reveal-for-untapped',
   )
@@ -2003,6 +2008,7 @@ function Table({
     | 'put-on-bottom'
     | 'commander-replacement'
     | 'pay-life-for-untapped'
+    | 'miracle-reveal'
     | 'reveal-for-untapped'
     | 'choose-copy'
     | 'choose-enchant'
@@ -2036,6 +2042,8 @@ function Table({
       ? 'commander-replacement'
     : shockChoiceAction
       ? 'pay-life-for-untapped'
+    : miracleChoiceAction
+      ? 'miracle-reveal'
     : revealChoiceAction
       ? 'reveal-for-untapped'
       : copyChoiceAction
@@ -4725,6 +4733,9 @@ function Table({
       <div className="controls">
         <span>
           {verb} {ways[0]?.cardName ?? landWays[0]?.cardName ?? game.nameOf(card)}
+          {castNowAction.miracle !== undefined && ways.length > 0 ? (
+            <> for its miracle cost, <Symbols text={castNowAction.miracle} /></>
+          ) : null}
           {castNowAction.madness !== undefined && ways.length > 0 ? (
             <> for its madness cost, <Symbols text={castNowAction.madness} /></>
           ) : castNowAction.byDiscarding === true && ways.length > 0
@@ -4760,6 +4771,9 @@ function Table({
               </>
             ) : null}
             {c.costOptionText ? <> (<Symbols text={c.costOptionText} />)</> : null}
+            {castNowAction.miracle !== undefined ? (
+              <> (miracle <Symbols text={castNowAction.miracle} />)</>
+            ) : null}
             {castNowAction.madness !== undefined ? (
               <> (madness <Symbols text={castNowAction.madness} />)</>
             ) : castNowAction.byDiscarding === true ? ' (discard a card)' : c.free ? ' (free)' : ''}
@@ -4800,6 +4814,29 @@ function Table({
           }
         >
           Enter tapped
+        </button>
+      </div>
+    )
+  } else if (mode === 'miracle-reveal' && miracleChoiceAction) {
+    // Rule 702.94a: revealing puts the miracle trigger on the stack, which
+    // offers the cast as it resolves.
+    controls = (
+      <div className="controls">
+        <span>
+          Miracle — reveal {game.nameOf(miracleChoiceAction.source)} to cast it for{' '}
+          <Symbols text={miracleChoiceAction.cost} />?
+        </span>
+        <button
+          type="button"
+          onClick={() => game.dispatch({ type: 'miracle-reveal', player: seat, reveal: true })}
+        >
+          Reveal
+        </button>
+        <button
+          type="button"
+          onClick={() => game.dispatch({ type: 'miracle-reveal', player: seat, reveal: false })}
+        >
+          Keep hidden
         </button>
       </div>
     )

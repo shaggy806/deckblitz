@@ -10,6 +10,7 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   mulligan: 'deciding on a mulligan',
   'commander-replacement': 'moving their commander',
   'pay-life-for-untapped': 'deciding on a shock land',
+  'miracle-reveal': 'deciding on a miracle',
   'reveal-for-untapped': 'deciding on a reveal land',
   'choose-copy': 'choosing what to copy',
   'choose-enchant': 'choosing what to enchant',

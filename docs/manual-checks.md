@@ -5441,3 +5441,13 @@ engine terms. A second thing to check is a second test.
 ### Azorius Arrester: a detained creature can't use its abilities until your next turn
 - **Do:** Cast Azorius Arrester and target Bob's Prodigal Sorcerer. Pass to Bob's turn, switch to Bob and try to activate the Sorcerer.
 - **Expect:** The Sorcerer's ability can't be activated and it can't attack. On your next turn, it can be activated again.
+
+## Miracle (2026-10-26)
+
+### Thunderous Wrath: reveal and cast for its miracle cost
+- **Do:** Cast Divination. When asked about Thunderous Wrath, choose Reveal, then cast it at Bob for {R}.
+- **Expect:** The banner reads "Miracle — reveal Thunderous Wrath to cast it for {R}?" with Reveal and Keep hidden. A "Miracle" trigger goes on the stack, then the cast offer says "for its miracle cost, {R}". Bob goes to 15; only the Mountain taps for it.
+
+### Thunderous Wrath: keeping a miracle hidden
+- **Do:** Cast Divination and choose Keep hidden for Thunderous Wrath, then switch to Bob.
+- **Expect:** No trigger goes on the stack and Wrath stays in your hand. Bob's view never names it; while you were asked, Bob's banner only said you were deciding on a miracle.

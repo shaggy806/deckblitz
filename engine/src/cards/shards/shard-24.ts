@@ -104,6 +104,7 @@ import _poolChampionOfLambholt from "../pool/champion-of-lambholt.js";
 import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
 import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
+import _poolChandrasFury from "../pool/chandras-fury.js";
 import _poolChandrasPyrohelix from "../pool/chandras-pyrohelix.js";
 import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
 import _poolChromeCourier from "../pool/chrome-courier.js";
@@ -343,6 +344,7 @@ import _poolMeletisAstronomer from "../pool/meletis-astronomer.js";
 import _poolMemnarch from "../pool/memnarch.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
+import _poolMetamorphosisFanatic from "../pool/metamorphosis-fanatic.js";
 import _poolMeteorSword from "../pool/meteor-sword.js";
 import _poolMidnightRecovery from "../pool/midnight-recovery.js";
 import _poolMijaeDjinn from "../pool/mijae-djinn.js";
@@ -524,6 +526,7 @@ import _poolStampedeRider from "../pool/stampede-rider.js";
 import _poolStarwinder from "../pool/starwinder.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelWall from "../pool/steel-wall.js";
+import _poolStolenGoods from "../pool/stolen-goods.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
@@ -787,6 +790,7 @@ const shard: CardShard = {
     _poolChampionOfThePerished,
     _poolChanceEncounter,
     _poolChandraFlameshaper,
+    _poolChandrasFury,
     _poolChandrasPyrohelix,
     _poolChitteringSkitterling,
     _poolChromeCourier,
@@ -1026,6 +1030,7 @@ const shard: CardShard = {
     _poolMemnarch,
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
+    _poolMetamorphosisFanatic,
     _poolMeteorSword,
     _poolMidnightRecovery,
     _poolMijaeDjinn,
@@ -1207,6 +1212,7 @@ const shard: CardShard = {
     _poolStarwinder,
     _poolSteelHellkite,
     _poolSteelWall,
+    _poolStolenGoods,
     _poolStormFleetSpy,
     _poolStormQueenOfWakanda,
     _poolStormshriekFeral,

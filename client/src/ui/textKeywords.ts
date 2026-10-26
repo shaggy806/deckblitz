@@ -167,6 +167,12 @@ const TERMS: readonly TextTerm[] = [
     text: 'If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.',
   },
   {
+    key: 'miracle',
+    name: 'Miracle',
+    pattern: /\bmiracle\b/i,
+    text: "If this is the first card you draw in a turn, you may reveal it as you draw it. Then you may cast it for its miracle cost, even when you couldn't normally cast it.",
+  },
+  {
     key: 'escape',
     name: 'Escape',
     pattern: /\bescape—/i,

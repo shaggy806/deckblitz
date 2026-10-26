@@ -1162,6 +1162,9 @@ export interface CastNowOptions {
   /** Paying the card's madness cost rather than its mana cost — see the
    * `cast-now` effect's `madness`. */
   readonly madness?: boolean;
+  /** Paying the card's miracle cost rather than its mana cost — see the
+   * `cast-now` effect's `miracle`. */
+  readonly miracle?: boolean;
   readonly exileAfter: boolean | "instants-and-sorceries";
   readonly spell?: CardFilter;
   /** The library cards the player looks at to choose among, shown to them
@@ -2664,6 +2667,12 @@ export type EffectSpec =
        * cost as an alternative cost (702.35b), the only way offered — the
        * madness trigger's cast (`cards/madness.ts`). */
       readonly madness?: boolean;
+      /** "You may cast it **by paying [its miracle cost]** rather than its
+       * mana cost" (rule 702.94a): the card's own miracle cost as an
+       * alternative cost, the only way offered, and only while the card is
+       * still in its owner's hand — the miracle trigger's cast
+       * (`cards/miracle.ts`). */
+      readonly miracle?: boolean;
       /** "If that spell would be put into your graveyard, exile it instead."
        * `"instants-and-sorceries"` is Scholar of the Lost Trove's "if an
        * instant or sorcery spell cast this way would be put into your
@@ -7743,6 +7752,7 @@ function offerCastNow(
       free: spec.free === true || spec.byDiscarding === true,
       ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
       ...(spec.madness === true ? { madness: true } : {}),
+      ...(spec.miracle === true ? { miracle: true } : {}),
       exileAfter: spec.exileAfter ?? false,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
@@ -9060,9 +9070,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "damage-all": {
       let players = spec.whose === undefined ? undefined : ctx.playersInScope(spec.whose);
       if (spec.controlledByTarget !== undefined) {
-        const target = ctx.targets[spec.controlledByTarget];
-        if (target?.kind !== "player") return;
-        players = [target.player];
+        // A player, or a permanent's controller — "each creature that player
+        // or that planeswalker's controller controls" (Bonfire of the Damned).
+        const scoped = scopedController(spec.controlledByTarget, ctx);
+        if (scoped === undefined) return;
+        players = [scoped];
       }
       ctx.damageAll(spec.filter, amountValue(spec.amount, ctx), spec.exceptSource === true, players, spec.from);
       return;

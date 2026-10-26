@@ -17,6 +17,7 @@ import _poolAlchemistsGift from "../pool/alchemists-gift.js";
 import _poolAlgaeGharial from "../pool/algae-gharial.js";
 import _poolAltarOfTheBrood from "../pool/altar-of-the-brood.js";
 import _poolAmarethTheLustrous from "../pool/amareth-the-lustrous.js";
+import _poolAmassTheComponents from "../pool/amass-the-components.js";
 import _poolAngelOfFinality from "../pool/angel-of-finality.js";
 import _poolAngelfireIgnition from "../pool/angelfire-ignition.js";
 import _poolAngelicEdict from "../pool/angelic-edict.js";
@@ -104,6 +105,7 @@ import _poolControlMagic from "../pool/control-magic.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
+import _poolCripplingChill from "../pool/crippling-chill.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
@@ -113,6 +115,7 @@ import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDeadBeforeSunrise from "../pool/dead-before-sunrise.js";
+import _poolDeathWind from "../pool/death-wind.js";
 import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
 import _poolDeathbloomRitualist from "../pool/deathbloom-ritualist.js";
 import _poolDefabricate from "../pool/defabricate.js";
@@ -209,6 +212,7 @@ import _poolGlareOfHeresy from "../pool/glare-of-heresy.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
+import _poolGoblinBattleJester from "../pool/goblin-battle-jester.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
@@ -659,6 +663,7 @@ import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
+import _poolZephyrim from "../pool/zephyrim.js";
 import _tokensAlienToken from "../tokens/alien-token.js";
 import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
@@ -688,6 +693,7 @@ const shard: CardShard = {
     _poolAlgaeGharial,
     _poolAltarOfTheBrood,
     _poolAmarethTheLustrous,
+    _poolAmassTheComponents,
     _poolAngelOfFinality,
     _poolAngelfireIgnition,
     _poolAngelicEdict,
@@ -775,6 +781,7 @@ const shard: CardShard = {
     _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
+    _poolCripplingChill,
     _poolCrisisOfConscience,
     _poolCroakingCurse,
     _poolCryotheoryAdept,
@@ -784,6 +791,7 @@ const shard: CardShard = {
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
     _poolDeadBeforeSunrise,
+    _poolDeathWind,
     _poolDeathbellowRaider,
     _poolDeathbloomRitualist,
     _poolDefabricate,
@@ -880,6 +888,7 @@ const shard: CardShard = {
     _poolGlareOfSubdual,
     _poolGleamingBastion,
     _poolGluttonousGuest,
+    _poolGoblinBattleJester,
     _poolGoblinRaider,
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
@@ -1330,6 +1339,7 @@ const shard: CardShard = {
     _poolYgraEaterOfAll,
     _poolYoureAmbushedOnTheRoad,
     _poolZadasCommando,
+    _poolZephyrim,
   ],
   tokens: [
     _tokensAlienToken,

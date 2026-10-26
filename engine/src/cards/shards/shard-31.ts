@@ -63,6 +63,7 @@ import _poolBigBertha from "../pool/big-bertha.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
 import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
+import _poolBladedBracers from "../pool/bladed-bracers.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBlitzHellion from "../pool/blitz-hellion.js";
@@ -162,6 +163,7 @@ import _poolDevastatingSummons from "../pool/devastating-summons.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
+import _poolDiabolicRevelation from "../pool/diabolic-revelation.js";
 import _poolDiamondLion from "../pool/diamond-lion.js";
 import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
 import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
@@ -796,6 +798,7 @@ const shard: CardShard = {
     _poolBindingTheOldGods,
     _poolBionicBlow,
     _poolBlackWidowDeadlyHunter,
+    _poolBladedBracers,
     _poolBlightedAgent,
     _poolBlinkmothWell,
     _poolBlitzHellion,
@@ -895,6 +898,7 @@ const shard: CardShard = {
     _poolDevouringSugarmaw,
     _poolDewdropCure,
     _poolDiabolicMachine,
+    _poolDiabolicRevelation,
     _poolDiamondLion,
     _poolDiffusionSliver,
     _poolDimirHouseGuard,

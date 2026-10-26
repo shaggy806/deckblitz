@@ -443,7 +443,8 @@
   "keyword:conspire",
   "cost:untap-symbol-cost",
   "keyword:buyback",
-  "keyword:licid"
+  "keyword:licid",
+  "keyword:miracle"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
