@@ -1119,9 +1119,9 @@
   {
    "name": "Fell Beast's Shriek",
    "needs": [
-    "keyword:splice"
+    "effect:each-opponent-chooses-permanent"
    ],
-   "why": "Splice onto instant or sorcery isn't modeled (also \"each opponent chooses a creature they control. Tap and goad the chosen creatures\")"
+   "why": "rechecked after splice (B202): splice onto instant or sorcery is built; nothing has each opponent choose a creature they control, then taps and goads the chosen ones"
   },
   {
    "name": "Barrow-Blade",

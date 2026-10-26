@@ -101,6 +101,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below,
   Narcomoeba, Storm Entity, Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67
   more — and 45 blocked (`B195.json`), fateseal and targets in exile leading with two each.
+- **Splice onto Arcane, the rest of Saviors of Kamigawa — Saviors is whole — and Betrayers of
+  Kamigawa's 72 most-played left** (batch 202, the third middle walk, 2026-10-26,
+  `keyword:splice`): **built** splice with a mana cost (rule 702.47 — `CardDefinition.splice`;
+  every set of splice cards in hand is its own cast variant, `splice` on the offer and the cast,
+  the spliced cards' targets after the spell's own and their effects after its own, the cards
+  revealed and left in hand), read by the scaffolder, with Goryo's Vengeance, Desperate Ritual,
+  Everdream, Evermind, Spiritual Visit, Into the Fray and Splicer's Skill. 69 authored —
+  Toshiro Umezawa, Sakiko, Mother of Summer, Shizuko, Caller of Autumn, Yomiji, Who Bars the
+  Way, Oyobi, Who Split the Heavens, Genju of the Cedars and the rest — by five `card-author`
+  agents and the lead; 43 blocked (`B202.json`). `keyword-splice.test.ts`.
 - **Epic, and Saviors of Kamigawa's 100 most-played left** (batch 197, the third middle walk,
   2026-10-26, `keyword:epic`): **built** epic (rule 702.50 — the `epic` effect, last in the
   spell's sequence: its controller can't cast spells for the rest of the game,

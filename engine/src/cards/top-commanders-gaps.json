@@ -458,7 +458,8 @@
   "keyword:echo",
   "keyword:ripple",
   "keyword:epic",
-  "effect:look-at-target-player-hand"
+  "effect:look-at-target-player-hand",
+  "keyword:splice"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

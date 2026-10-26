@@ -1,0 +1,797 @@
+{
+  "batch": "B202",
+  "status": "complete",
+  "ranks": "Saviors of Kamigawa (SOK, 2005-06-03): the rest of the set, 34; Betrayers of Kamigawa (BOK, 2005-02-04): its 72 most-played left, of 127 (third middle walk); built splice onto Arcane and onto instant or sorcery with a mana cost (rule 702.47, keyword:splice), which the scaffolder now reads, and authored six splice cards triaged earlier (Desperate Ritual, Everdream, Evermind, Spiritual Visit, Into the Fray, Splicer's Skill)",
+  "authored": [
+    {
+      "name": "Akki Underling",
+      "files": [
+        "engine/src/cards/pool/akki-underling.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Baku Altar",
+      "files": [
+        "engine/src/cards/pool/baku-altar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blessing of Leeches",
+      "files": [
+        "engine/src/cards/pool/blessing-of-leeches.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cut the Earthly Bond",
+      "files": [
+        "engine/src/cards/pool/cut-the-earthly-bond.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deathknell Kami",
+      "files": [
+        "engine/src/cards/pool/deathknell-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deathmask Nezumi",
+      "files": [
+        "engine/src/cards/pool/deathmask-nezumi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Desperate Ritual",
+      "files": [
+        "engine/src/cards/pool/desperate-ritual.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eiganjo Free-Riders",
+      "files": [
+        "engine/src/cards/pool/eiganjo-free-riders.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enshrined Memories",
+      "files": [
+        "engine/src/cards/pool/enshrined-memories.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Everdream",
+      "files": [
+        "engine/src/cards/pool/everdream.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Evermind",
+      "files": [
+        "engine/src/cards/pool/evermind.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feral Lightning",
+      "files": [
+        "engine/src/cards/pool/feral-lightning.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fiddlehead Kami",
+      "files": [
+        "engine/src/cards/pool/fiddlehead-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "First Volley",
+      "files": [
+        "engine/src/cards/pool/first-volley.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Floodbringer",
+      "files": [
+        "engine/src/cards/pool/floodbringer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forked-Branch Garami",
+      "files": [
+        "engine/src/cards/pool/forked-branch-garami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Genju of the Cedars",
+      "files": [
+        "engine/src/cards/pool/genju-of-the-cedars.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Genju of the Spires",
+      "files": [
+        "engine/src/cards/pool/genju-of-the-spires.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghost-Lit Raider",
+      "files": [
+        "engine/src/cards/pool/ghost-lit-raider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gods' Eye, Gate to the Reikai",
+      "files": [
+        "engine/src/cards/pool/gods-eye-gate-to-the-reikai.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goryo's Vengeance",
+      "files": [
+        "engine/src/cards/pool/goryos-vengeance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harbinger of Spring",
+      "files": [
+        "engine/src/cards/pool/harbinger-of-spring.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "In the Web of War",
+      "files": [
+        "engine/src/cards/pool/in-the-web-of-war.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Indebted Samurai",
+      "files": [
+        "engine/src/cards/pool/indebted-samurai.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Into the Fray",
+      "files": [
+        "engine/src/cards/pool/into-the-fray.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ire of Kaminari",
+      "files": [
+        "engine/src/cards/pool/ire-of-kaminari.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Isao, Enlightened Bushi",
+      "files": [
+        "engine/src/cards/pool/isao-enlightened-bushi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kami of the Tended Garden",
+      "files": [
+        "engine/src/cards/pool/kami-of-the-tended-garden.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lifespinner",
+      "files": [
+        "engine/src/cards/pool/lifespinner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loam Dweller",
+      "files": [
+        "engine/src/cards/pool/loam-dweller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mark of Sakiko",
+      "files": [
+        "engine/src/cards/pool/mark-of-sakiko.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mark of the Oni",
+      "files": [
+        "engine/src/cards/pool/mark-of-the-oni.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Minamo Scrollkeeper",
+      "files": [
+        "engine/src/cards/pool/minamo-scrollkeeper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nightsoil Kami",
+      "files": [
+        "engine/src/cards/pool/nightsoil-kami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Okiba-Gang Shinobi",
+      "files": [
+        "engine/src/cards/pool/okiba-gang-shinobi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Orb of Dreams",
+      "files": [
+        "engine/src/cards/pool/orb-of-dreams.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oyobi, Who Split the Heavens",
+      "files": [
+        "engine/src/cards/pool/oyobi-who-split-the-heavens.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Petalmane Baku",
+      "files": [
+        "engine/src/cards/pool/petalmane-baku.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Plow Through Reito",
+      "files": [
+        "engine/src/cards/pool/plow-through-reito.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Presence of the Wise",
+      "files": [
+        "engine/src/cards/pool/presence-of-the-wise.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Raving Oni-Slave",
+      "files": [
+        "engine/src/cards/pool/raving-oni-slave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Razorjaw Oni",
+      "files": [
+        "engine/src/cards/pool/razorjaw-oni.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ribbons of the Reikai",
+      "files": [
+        "engine/src/cards/pool/ribbons-of-the-reikai.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ronin Cavekeeper",
+      "files": [
+        "engine/src/cards/pool/ronin-cavekeeper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ronin Cliffrider",
+      "files": [
+        "engine/src/cards/pool/ronin-cliffrider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ronin Warclub",
+      "files": [
+        "engine/src/cards/pool/ronin-warclub.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sakiko, Mother of Summer",
+      "files": [
+        "engine/src/cards/pool/sakiko-mother-of-summer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sakura-Tribe Springcaller",
+      "files": [
+        "engine/src/cards/pool/sakura-tribe-springcaller.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scroll of Origins",
+      "files": [
+        "engine/src/cards/pool/scroll-of-origins.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shizuko, Caller of Autumn",
+      "files": [
+        "engine/src/cards/pool/shizuko-caller-of-autumn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silverstorm Samurai",
+      "files": [
+        "engine/src/cards/pool/silverstorm-samurai.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sink into Takenuma",
+      "files": [
+        "engine/src/cards/pool/sink-into-takenuma.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sokenzan Spellblade",
+      "files": [
+        "engine/src/cards/pool/sokenzan-spellblade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soratami Mindsweeper",
+      "files": [
+        "engine/src/cards/pool/soratami-mindsweeper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sosuke's Summons",
+      "files": [
+        "engine/src/cards/pool/sosukes-summons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spiritual Visit",
+      "files": [
+        "engine/src/cards/pool/spiritual-visit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Splicer's Skill",
+      "files": [
+        "engine/src/cards/pool/splicers-skill.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stir the Grave",
+      "files": [
+        "engine/src/cards/pool/stir-the-grave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Teardrop Kami",
+      "files": [
+        "engine/src/cards/pool/teardrop-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Terashi's Grasp",
+      "files": [
+        "engine/src/cards/pool/terashis-grasp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "That Which Was Taken",
+      "files": [
+        "engine/src/cards/pool/that-which-was-taken.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Threads of Disloyalty",
+      "files": [
+        "engine/src/cards/pool/threads-of-disloyalty.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Toils of Night and Day",
+      "files": [
+        "engine/src/cards/pool/toils-of-night-and-day.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Torii Watchward",
+      "files": [
+        "engine/src/cards/pool/torii-watchward.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Toshiro Umezawa",
+      "files": [
+        "engine/src/cards/pool/toshiro-umezawa.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Traproot Kami",
+      "files": [
+        "engine/src/cards/pool/traproot-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unchecked Growth",
+      "files": [
+        "engine/src/cards/pool/unchecked-growth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yomiji, Who Bars the Way",
+      "files": [
+        "engine/src/cards/pool/yomiji-who-bars-the-way.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yukora, the Prisoner",
+      "files": [
+        "engine/src/cards/pool/yukora-the-prisoner.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Rushing-Tide Zubera",
+      "needs": [
+        "amount:damage-dealt-to-source-this-turn-by-filter"
+      ],
+      "why": "nothing reads how much damage a permanent took this turn"
+    },
+    {
+      "name": "Kagemaro's Clutch",
+      "needs": [
+        "static:grant-pt-per-cards-in-hand"
+      ],
+      "why": "grantPtPerCount can't count cards in hand"
+    },
+    {
+      "name": "Walker of Secret Ways",
+      "needs": [
+        "effect:look-at-trigger-player-hand"
+      ],
+      "why": "look-at-hand needs a target slot; the trigger's player isn't targeted"
+    },
+    {
+      "name": "Matsu-Tribe Sniper",
+      "needs": [
+        "trigger:trigger-recipient-ref"
+      ],
+      "why": "tap can't name the creature dealt the damage"
+    },
+    {
+      "name": "Neko-Te",
+      "needs": [
+        "trigger:trigger-recipient-ref",
+        "effect:doesnt-untap-while-you-control-source"
+      ],
+      "why": "tap that creature, and it doesn't untap while you control Neko-Te"
+    },
+    {
+      "name": "Chisei, Heart of Oceans",
+      "needs": [
+        "cost:remove-counter-any-kind"
+      ],
+      "why": "\"unless you remove a counter\" of any kind"
+    },
+    {
+      "name": "Twist Allegiance",
+      "needs": [
+        "effect:exchange-control-all-with-target-opponent"
+      ],
+      "why": "swap control of creatures with a target opponent"
+    },
+    {
+      "name": "Nourishing Shoal",
+      "needs": [
+        "cost:alt-cost-exile-card-sets-x"
+      ],
+      "why": "X from the exiled card's mana value"
+    },
+    {
+      "name": "Matsu-Tribe Birdstalker",
+      "needs": [
+        "trigger:trigger-recipient-ref"
+      ],
+      "why": "tap can't reach a deals-damage trigger's recipient"
+    },
+    {
+      "name": "Pure Intentions",
+      "needs": [
+        "trigger:discarded-by-opponent-effect"
+      ],
+      "why": "\"a spell or ability an opponent controls causes you to discard\""
+    },
+    {
+      "name": "Godo's Irregulars",
+      "needs": [
+        "effect:target-creature-blocking-source"
+      ],
+      "why": "no target spec for \"target creature blocking it\""
+    },
+    {
+      "name": "Burning-Eye Zubera",
+      "needs": [
+        "amount:damage-dealt-to-source-this-turn-by-filter"
+      ],
+      "why": "\"if 4 or more damage was dealt to it this turn\""
+    },
+    {
+      "name": "Hokori, Dust Drinker",
+      "needs": [
+        "decision:that-player-chooses-permanent"
+      ],
+      "why": "the active player chooses the land they untap"
+    },
+    {
+      "name": "Opal-Eye, Konda's Yojimbo",
+      "needs": [
+        "replacement:redirect-chosen-source-any-recipient"
+      ],
+      "why": "redirect damage a chosen source would deal to any recipient"
+    },
+    {
+      "name": "Kentaro, the Smiling Cat",
+      "needs": [
+        "cost:alternative-cost-for-spells-limits"
+      ],
+      "why": "{X} where X is that spell's mana value"
+    },
+    {
+      "name": "Patron of the Kitsune",
+      "needs": [
+        "keyword:offering"
+      ],
+      "why": "Fox offering"
+    },
+    {
+      "name": "Kodama of the Center Tree",
+      "needs": [
+        "amount:leaves-battlefield-lki-count"
+      ],
+      "why": "soulshift X counted as it left, itself included"
+    },
+    {
+      "name": "Kitsune Bonesetter",
+      "needs": [
+        "condition:more-cards-in-hand-than-each-opponent"
+      ],
+      "why": "compares your hand with each opponent's"
+    },
+    {
+      "name": "Exile into Darkness",
+      "needs": [
+        "condition:more-cards-in-hand-than-each-opponent"
+      ],
+      "why": "the upkeep return's intervening-if"
+    },
+    {
+      "name": "Secretkeeper",
+      "needs": [
+        "condition:more-cards-in-hand-than-each-opponent"
+      ],
+      "why": "the static's condition"
+    },
+    {
+      "name": "Okina Nightwatch",
+      "needs": [
+        "condition:more-cards-in-hand-than-each-opponent"
+      ],
+      "why": "the static's condition"
+    },
+    {
+      "name": "Iwamori of the Open Fist",
+      "needs": [
+        "effect:each-player-chooses-then-all-act"
+      ],
+      "why": "each opponent chooses in turn, then all enter at once"
+    },
+    {
+      "name": "Patron of the Nezumi",
+      "needs": [
+        "keyword:offering"
+      ],
+      "why": "Rat offering"
+    },
+    {
+      "name": "Sickening Shoal",
+      "needs": [
+        "cost:alt-cost-exile-card-sets-x"
+      ],
+      "why": "X from the exiled card's mana value"
+    },
+    {
+      "name": "Stream of Consciousness",
+      "needs": [
+        "effect:targets-from-target-players-graveyard",
+        "effect:shuffle-graveyard-targets-into-library"
+      ],
+      "why": "card targets tied to the target player's graveyard"
+    },
+    {
+      "name": "Soratami Cloud Chariot",
+      "needs": [
+        "effect:prevent-combat-damage-to-and-by-target"
+      ],
+      "why": "prevent combat damage dealt to and by target creature this turn"
+    },
+    {
+      "name": "Patron of the Moon",
+      "needs": [
+        "keyword:offering"
+      ],
+      "why": "Moonfolk offering"
+    },
+    {
+      "name": "Blazing Shoal",
+      "needs": [
+        "cost:alt-cost-exile-card-sets-x"
+      ],
+      "why": "X from the exiled card's mana value"
+    },
+    {
+      "name": "Shining Shoal",
+      "needs": [
+        "cost:alt-cost-exile-card-sets-x"
+      ],
+      "why": "X from the exiled card's mana value"
+    },
+    {
+      "name": "Blinding Powder",
+      "needs": [
+        "cost:unattach-cost"
+      ],
+      "why": "unattach the Equipment as a cost"
+    },
+    {
+      "name": "Tomorrow, Azami's Familiar",
+      "needs": [
+        "replacement:draw-replacement-look-and-choose"
+      ],
+      "why": "replace a draw with look at three, keep one"
+    },
+    {
+      "name": "Sokenzan Renegade",
+      "needs": [
+        "amount:most-cards-in-hand-among-players",
+        "effect:gain-control-to-player-with-most-cards-in-hand"
+      ],
+      "why": "the player with the most cards in hand gains control"
+    },
+    {
+      "name": "Descendant of Masumaro",
+      "needs": [
+        "effect:cards-in-target-player-hand"
+      ],
+      "why": "cards in target opponent's hand"
+    },
+    {
+      "name": "Descendant of Kiyomaro",
+      "needs": [
+        "condition:more-cards-in-hand-than-each-opponent"
+      ],
+      "why": "compares your hand with each opponent's"
+    },
+    {
+      "name": "Disrupting Shoal",
+      "needs": [
+        "cost:alt-cost-exile-card-sets-x"
+      ],
+      "why": "X from the exiled card's mana value"
+    },
+    {
+      "name": "Kyoki, Sanity's Eclipse",
+      "needs": [
+        "effect:target-player-exiles-from-hand"
+      ],
+      "why": "target opponent exiles a card from their hand"
+    },
+    {
+      "name": "Patron of the Orochi",
+      "needs": [
+        "keyword:offering"
+      ],
+      "why": "Snake offering"
+    },
+    {
+      "name": "Sway of the Stars",
+      "needs": [
+        "effect:shuffle-hand-and-graveyard-into-library",
+        "effect:shuffle-permanents-owned-into-library"
+      ],
+      "why": "each player shuffles hand, graveyard and permanents into library"
+    },
+    {
+      "name": "Genju of the Realm",
+      "needs": [
+        "effect:animate-add-supertype"
+      ],
+      "why": "animate can't make the land legendary"
+    },
+    {
+      "name": "Shuriken",
+      "needs": [
+        "cost:unattach-cost"
+      ],
+      "why": "unattach as a cost, and gains control unless unattached from a Ninja"
+    },
+    {
+      "name": "Horobi's Whisper",
+      "needs": [
+        "cost:splice-non-mana"
+      ],
+      "why": "splice cost: exile four cards from your graveyard"
+    },
+    {
+      "name": "Veil of Secrecy",
+      "needs": [
+        "cost:splice-non-mana"
+      ],
+      "why": "splice cost: return a blue creature you control"
+    },
+    {
+      "name": "Overblaze",
+      "needs": [
+        "replacement:double-damage-from-target-this-turn"
+      ],
+      "why": "double the damage target permanent deals this turn"
+    }
+  ]
+}
