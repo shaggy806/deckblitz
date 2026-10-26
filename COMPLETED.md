@@ -87,8 +87,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 ## Card backlog
 
 - **Future Sight, whole** (batch 195, the middle walk's second range, 2026-10-26): no feature
-  built. 75 authored — Korlash, Heir to Blackblade, Bridge from Below, Narcomoeba, Storm Entity,
-  Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67 more — and 46 blocked
+  built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below, Narcomoeba, Storm Entity,
+  Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67 more — and 45 blocked
   (`B195.json`), fateseal and targets in exile leading with two each.
 - **The rest of Lorwyn — Lorwyn is whole** (batch 192, the middle walk's second range, 2026-10-26):
   **built** a "whenever you clash" trigger (rule 701.30, `trigger:clash` — each clashing player

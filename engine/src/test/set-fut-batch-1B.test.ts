@@ -16,6 +16,7 @@ import {
   enter,
   hand,
   lands,
+  named,
   pickFromZone,
   pickModes,
   pt,
@@ -165,5 +166,31 @@ describe("Maelstrom Djinn", () => {
     toStep(game, "upkeep");
     settle(game);
     expect(zone(game, djinn)).toBe("graveyard");
+  });
+});
+
+describe("Baru, Fist of Krosa", () => {
+  it("pumps your green creatures when any Forest enters", () => {
+    const { game } = table();
+    spawn(game, "Baru, Fist of Krosa");
+    const bears = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    enter(game, "Forest", B);
+    settle(game);
+    expect(pt(game, bears)).toEqual({ power: 3, toughness: 3 });
+    expect(pt(game, theirs)).toEqual({ power: 2, toughness: 2 });
+  });
+
+  it("grandeur makes an X/X Wurm, X your lands", () => {
+    const { game } = table();
+    const baru = spawn(game, "Baru, Fist of Krosa");
+    lands(game, "Forest", 3);
+    expect(() => activate(game, baru, 0)).toThrow();
+    const other = toHand(game, "Baru, Fist of Krosa");
+    activate(game, baru, 0);
+    expect(zone(game, other)).toBe("graveyard");
+    expect(tokensNamed(game, "Wurm Token (Baru, Fist of Krosa)")).toBe(1);
+    const [wurm] = named(game, "Wurm Token (Baru, Fist of Krosa)");
+    expect(pt(game, wurm!)).toEqual({ power: 3, toughness: 3 });
   });
 });

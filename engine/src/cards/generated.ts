@@ -1516,6 +1516,7 @@ import _poolBarrowinOfClanUndurr from "./pool/barrowin-of-clan-undurr.js";
 import _poolBarterInBlood from "./pool/barter-in-blood.js";
 import _poolBartizanBats from "./pool/bartizan-bats.js";
 import _poolBartolomeDelPresidio from "./pool/bartolome-del-presidio.js";
+import _poolBaruFistOfKrosa from "./pool/baru-fist-of-krosa.js";
 import _poolBaruWurmspeaker from "./pool/baru-wurmspeaker.js";
 import _poolBasalThrull from "./pool/basal-thrull.js";
 import _poolBasaltMonolith from "./pool/basalt-monolith.js";
@@ -23240,6 +23241,7 @@ import _tokensWoodToken from "./tokens/wood-token.js";
 import _tokensWormToken from "./tokens/worm-token.js";
 import _tokensWraithToken from "./tokens/wraith-token.js";
 import _tokensWurmToken66 from "./tokens/wurm-token-6-6.js";
+import _tokensWurmTokenBaruFistOfKrosa from "./tokens/wurm-token-baru-fist-of-krosa.js";
 import _tokensWurmTokenBaruWurmspeaker from "./tokens/wurm-token-baru-wurmspeaker.js";
 import _tokensWurmTokenTrample from "./tokens/wurm-token-trample.js";
 import _tokensWurmToken from "./tokens/wurm-token.js";
@@ -24792,6 +24794,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBarterInBlood,
   _poolBartizanBats,
   _poolBartolomeDelPresidio,
+  _poolBaruFistOfKrosa,
   _poolBaruWurmspeaker,
   _poolBasalThrull,
   _poolBasaltMonolith,
@@ -46522,6 +46525,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensWormToken,
   _tokensWraithToken,
   _tokensWurmToken66,
+  _tokensWurmTokenBaruFistOfKrosa,
   _tokensWurmTokenBaruWurmspeaker,
   _tokensWurmTokenTrample,
   _tokensWurmToken,
@@ -48081,6 +48085,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/barter-in-blood": _poolBarterInBlood,
   "pool/bartizan-bats": _poolBartizanBats,
   "pool/bartolome-del-presidio": _poolBartolomeDelPresidio,
+  "pool/baru-fist-of-krosa": _poolBaruFistOfKrosa,
   "pool/baru-wurmspeaker": _poolBaruWurmspeaker,
   "pool/basal-thrull": _poolBasalThrull,
   "pool/basalt-monolith": _poolBasaltMonolith,
@@ -69805,6 +69810,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/worm-token": _tokensWormToken,
   "tokens/wraith-token": _tokensWraithToken,
   "tokens/wurm-token-6-6": _tokensWurmToken66,
+  "tokens/wurm-token-baru-fist-of-krosa": _tokensWurmTokenBaruFistOfKrosa,
   "tokens/wurm-token-baru-wurmspeaker": _tokensWurmTokenBaruWurmspeaker,
   "tokens/wurm-token-trample": _tokensWurmTokenTrample,
   "tokens/wurm-token": _tokensWurmToken,

@@ -44,6 +44,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Banana Token",
   // Skirk Ridge Exhumer (FUT)'s Festering Goblin was never printed as a token.
   "Festering Goblin Token",
+  // Baru, Fist of Krosa (FUT)'s X/X Wurm was never printed as a token.
+  "Wurm Token (Baru, Fist of Krosa)",
   // Goblin Scouts (MIR) never had a token printing.
   "Goblin Scout Token",
   // Carrion (MIR)'s 0/1 black Insects were never printed as a token.

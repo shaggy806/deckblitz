@@ -583,6 +583,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Worm Token",
   "Wraith Token",
   "Wurm Token",
+  "Wurm Token (Baru, Fist of Krosa)",
   "Wurm Token (Baru, Wurmspeaker)",
   "Wurm Token (Trample)",
   "X/1 Elemental Token (Trample, Haste)",

@@ -11201,10 +11201,6 @@
    "family": "static:skip-untap-step",
    "example": "Gibbering Descent: hellbent — skip your upkeep step"
   },
-  "cost:discard-card-named-self": {
-   "family": "cost:discard-card-named-self",
-   "example": "Baru, Fist of Krosa: grandeur — discard another card named this"
-  },
   "effect:prevent-next-damage-each-creature": {
    "family": "replacement:damage-prevented-to-filter",
    "example": "Samite Censer-Bearer: prevent the next 1 damage to each creature you control"
