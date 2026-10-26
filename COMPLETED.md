@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Shadowmoor, the rest of the set** (batch 183, the middle walk's second range, 2026-10-26,
+  `2c35e3ea`): no feature built — hybrid mana, {Q}, -1/-1 counters, wither, persist and conspire
+  (batch 180's) were all in. 60 of its last 80 authored by four `card-author` agents and the
+  scaffolder — Wild Swing, Firespout, Demigod of Revenge, Tyrannize, Isleback Spawn, the Duos,
+  Cohorts and Initiates and 50 more — and 20 blocked, one card a need but "attached to target
+  creature" (`filter:attached-to-target`, two) (`B183.json`). With batch 180's half, Shadowmoor
+  is whole.
 - **Return to Ravnica, the rest of the set** (batch 179, the newest-first walk, 2026-10-26):
   **built** unleash (rule 702.98a, `keyword:unleash` — asked as it's about to enter, as riot is,
   and a `cant-block` restriction while it has any +1/+1 counter) and detain (rule 701.35a,
