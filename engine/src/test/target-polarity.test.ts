@@ -158,6 +158,10 @@ describe("slot polarity", () => {
     expect(cast("Venomous Fangs")).toEqual(["help"]);
   });
 
+  it("reads the creature a prevented damage is redirected to as taking the hit", () => {
+    expect(abilityPolarities(registry.get("Outrider en-Kor").activated[0])).toEqual(["harm"]);
+  });
+
   it("reads a delayed 'when it dies, return it' as a save", () => {
     expect(cast("Graceful Reprieve")).toEqual(["help"]);
   });

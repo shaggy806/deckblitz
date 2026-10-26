@@ -107,6 +107,7 @@ import _poolCalderaLake from "../pool/caldera-lake.js";
 import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
 import _poolCandlegroveWitch from "../pool/candlegrove-witch.js";
 import _poolCandlestick from "../pool/candlestick.js";
+import _poolCaoRenWeiCommander from "../pool/cao-ren-wei-commander.js";
 import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
@@ -181,6 +182,7 @@ import _poolDivest from "../pool/divest.js";
 import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
+import _poolDrainingWhelk from "../pool/draining-whelk.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
 import _poolDrogskolCaptain from "../pool/drogskol-captain.js";
 import _poolDromokasGift from "../pool/dromokas-gift.js";
@@ -454,6 +456,7 @@ import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
+import _poolNihilith from "../pool/nihilith.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNoggleBridgebreaker from "../pool/noggle-bridgebreaker.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
@@ -628,6 +631,7 @@ import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSpiritualSanctuary from "../pool/spiritual-sanctuary.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
+import _poolSpriteNoble from "../pool/sprite-noble.js";
 import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
 import _poolStealTheShow from "../pool/steal-the-show.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
@@ -751,6 +755,7 @@ import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
 import _poolWildfireWickerfolk from "../pool/wildfire-wickerfolk.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
 import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
+import _poolWipeAway from "../pool/wipe-away.js";
 import _poolWitchOfTheMoors from "../pool/witch-of-the-moors.js";
 import _poolWitherbloomApprentice from "../pool/witherbloom-apprentice.js";
 import _poolWojekHalberdiers from "../pool/wojek-halberdiers.js";
@@ -765,6 +770,7 @@ import _poolZealousDisplay from "../pool/zealous-display.js";
 import _poolZealousStrike from "../pool/zealous-strike.js";
 import _poolZephyrWinder from "../pool/zephyr-winder.js";
 import _poolZimoneParadoxSculptor from "../pool/zimone-paradox-sculptor.js";
+import _poolZodiacDragon from "../pool/zodiac-dragon.js";
 import _poolZodiacOx from "../pool/zodiac-ox.js";
 import _poolZoralineCosmosCaller from "../pool/zoraline-cosmos-caller.js";
 import _poolZuranOrb from "../pool/zuran-orb.js";
@@ -896,6 +902,7 @@ const shard: CardShard = {
     _poolCallTheGatewatch,
     _poolCandlegroveWitch,
     _poolCandlestick,
+    _poolCaoRenWeiCommander,
     _poolCapriciousSorcerer,
     _poolCaptiveWeird,
     _poolCarnageAltar,
@@ -970,6 +977,7 @@ const shard: CardShard = {
     _poolDocOcksHenchmen,
     _poolDowsingDevice,
     _poolDragonflySuit,
+    _poolDrainingWhelk,
     _poolDrixFatemaker,
     _poolDrogskolCaptain,
     _poolDromokasGift,
@@ -1243,6 +1251,7 @@ const shard: CardShard = {
     _poolNightmaresThirst,
     _poolNightmarishEnd,
     _poolNightveilPredator,
+    _poolNihilith,
     _poolNinjasBlades,
     _poolNoggleBridgebreaker,
     _poolNorthPolePatrol,
@@ -1417,6 +1426,7 @@ const shard: CardShard = {
     _poolSpiritualSanctuary,
     _poolSplashPortal,
     _poolSporewebWeaver,
+    _poolSpriteNoble,
     _poolSproutingRenewal,
     _poolStealTheShow,
     _poolSteamclaw,
@@ -1540,6 +1550,7 @@ const shard: CardShard = {
     _poolWildfireWickerfolk,
     _poolWindSpirit,
     _poolWingnutBatOnTheBelfry,
+    _poolWipeAway,
     _poolWitchOfTheMoors,
     _poolWitherbloomApprentice,
     _poolWojekHalberdiers,
@@ -1554,6 +1565,7 @@ const shard: CardShard = {
     _poolZealousStrike,
     _poolZephyrWinder,
     _poolZimoneParadoxSculptor,
+    _poolZodiacDragon,
     _poolZodiacOx,
     _poolZoralineCosmosCaller,
     _poolZuranOrb,

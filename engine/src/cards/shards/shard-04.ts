@@ -67,6 +67,7 @@ import _poolBonebreakerGiant from "../pool/bonebreaker-giant.js";
 import _poolBoulderbornDragon from "../pool/boulderborn-dragon.js";
 import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
+import _poolBrineSeer from "../pool/brine-seer.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
@@ -91,6 +92,7 @@ import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
+import _poolClockworkHydra from "../pool/clockwork-hydra.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolColossalHeroics from "../pool/colossal-heroics.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
@@ -128,6 +130,7 @@ import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
 import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
+import _poolDeathsporeThallid from "../pool/deathspore-thallid.js";
 import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
 import _poolDeglamer from "../pool/deglamer.js";
@@ -156,6 +159,7 @@ import _poolDranasSilencer from "../pool/dranas-silencer.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
 import _poolDreadStatuary from "../pool/dread-statuary.js";
 import _poolDreadhordeButcher from "../pool/dreadhorde-butcher.js";
+import _poolDreamStalker from "../pool/dream-stalker.js";
 import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
@@ -299,6 +303,7 @@ import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolHymnToTourach from "../pool/hymn-to-tourach.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolIllusionistsStratagem from "../pool/illusionists-stratagem.js";
+import _poolImpatience from "../pool/impatience.js";
 import _poolImpelledGiant from "../pool/impelled-giant.js";
 import _poolImperialMask from "../pool/imperial-mask.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
@@ -399,6 +404,7 @@ import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
+import _poolMwonvuliAcidMoss from "../pool/mwonvuli-acid-moss.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
@@ -546,6 +552,7 @@ import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShizukoCallerOfAutumn from "../pool/shizuko-caller-of-autumn.js";
+import _poolShuFarmer from "../pool/shu-farmer.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
@@ -722,6 +729,7 @@ import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
 import _poolWoodlandChampion from "../pool/woodland-champion.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
+import _poolWurmcalling from "../pool/wurmcalling.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
@@ -813,6 +821,7 @@ const shard: CardShard = {
     _poolBoulderbornDragon,
     _poolBraingeyser,
     _poolBrainstorm,
+    _poolBrineSeer,
     _poolBristlingBackwoods,
     _poolBruteStrength,
     _poolBucolicRanch,
@@ -837,6 +846,7 @@ const shard: CardShard = {
     _poolChillOfTheGrave,
     _poolCitanulCentaurs,
     _poolCleverConjurer,
+    _poolClockworkHydra,
     _poolCocoon,
     _poolColossalHeroics,
     _poolCompleatedHuntmaster,
@@ -874,6 +884,7 @@ const shard: CardShard = {
     _poolDauntlessSurvivor,
     _poolDeadbridgeShaman,
     _poolDeafeningClarion,
+    _poolDeathsporeThallid,
     _poolDefile,
     _poolDefiledCrypt,
     _poolDeglamer,
@@ -902,6 +913,7 @@ const shard: CardShard = {
     _poolDreadPresence,
     _poolDreadStatuary,
     _poolDreadhordeButcher,
+    _poolDreamStalker,
     _poolDrossHarvester,
     _poolDrownedDiner,
     _poolDrySpell,
@@ -1045,6 +1057,7 @@ const shard: CardShard = {
     _poolHymnToTourach,
     _poolIceOut,
     _poolIllusionistsStratagem,
+    _poolImpatience,
     _poolImpelledGiant,
     _poolImperialMask,
     _poolImposingVantasaur,
@@ -1145,6 +1158,7 @@ const shard: CardShard = {
     _poolMoxJet,
     _poolMukotaiAmbusher,
     _poolMultanisAcolyte,
+    _poolMwonvuliAcidMoss,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
@@ -1292,6 +1306,7 @@ const shard: CardShard = {
     _poolShimmeringWings,
     _poolShivanReef,
     _poolShizukoCallerOfAutumn,
+    _poolShuFarmer,
     _poolShuGrainCaravan,
     _poolSigardianPriest,
     _poolSigiledSkink,
@@ -1468,6 +1483,7 @@ const shard: CardShard = {
     _poolWoodlandChampion,
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
+    _poolWurmcalling,
     _poolYavimayaBarbarian,
     _poolYomijiWhoBarsTheWay,
     _poolYoungBlueDragon,

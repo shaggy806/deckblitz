@@ -966,7 +966,7 @@
     {
       "name": "Metalworker",
       "needs": [
-        "new:reveal-any-number-from-hand"
+        "effect:reveal-from-hand-in-mana-ability"
       ],
       "why": "mana scaled by revealing any number of artifact cards from hand"
     },

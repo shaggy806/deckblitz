@@ -119,6 +119,7 @@ import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
+import _poolChampionsVictory from "../pool/champions-victory.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
@@ -148,6 +149,7 @@ import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
 import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
+import _poolCovetousDragon from "../pool/covetous-dragon.js";
 import _poolCrabappleCohort from "../pool/crabapple-cohort.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
 import _poolCradleToGrave from "../pool/cradle-to-grave.js";
@@ -222,6 +224,7 @@ import _poolEvilReawakened from "../pool/evil-reawakened.js";
 import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
+import _poolFallenIdeal from "../pool/fallen-ideal.js";
 import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
@@ -522,6 +525,7 @@ import _poolRuneOfProtectionRed from "../pool/rune-of-protection-red.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
 import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
 import _poolSaidDone from "../pool/said-done.js";
+import _poolSaltcrustedSteppe from "../pool/saltcrusted-steppe.js";
 import _poolSalvageScuttler from "../pool/salvage-scuttler.js";
 import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
@@ -700,6 +704,7 @@ import _poolWaterknot from "../pool/waterknot.js";
 import _poolWaylay from "../pool/waylay.js";
 import _poolWeakstone from "../pool/weakstone.js";
 import _poolWeedStrangle from "../pool/weed-strangle.js";
+import _poolWeiEliteCompanions from "../pool/wei-elite-companions.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -870,6 +875,7 @@ const shard: CardShard = {
     _poolCazurRuthlessStalker,
     _poolCennsEnlistment,
     _poolCentaurHealer,
+    _poolChampionsVictory,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,
     _poolCharcoalDiamond,
@@ -899,6 +905,7 @@ const shard: CardShard = {
     _poolCoretapper,
     _poolCorruptCourtOfficial,
     _poolCostOfBrilliance,
+    _poolCovetousDragon,
     _poolCrabappleCohort,
     _poolCrackTheEarth,
     _poolCradleToGrave,
@@ -973,6 +980,7 @@ const shard: CardShard = {
     _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
+    _poolFallenIdeal,
     _poolFatedIntervention,
     _poolFateshaperAspirant,
     _poolFavorOfTheOverbeing,
@@ -1273,6 +1281,7 @@ const shard: CardShard = {
     _poolRushOfVitality,
     _poolSabertoothNishoba,
     _poolSaidDone,
+    _poolSaltcrustedSteppe,
     _poolSalvageScuttler,
     _poolSandbarMerfolk,
     _poolSavageGorilla,
@@ -1451,6 +1460,7 @@ const shard: CardShard = {
     _poolWaylay,
     _poolWeakstone,
     _poolWeedStrangle,
+    _poolWeiEliteCompanions,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

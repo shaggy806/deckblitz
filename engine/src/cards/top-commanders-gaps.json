@@ -463,7 +463,9 @@
   "keyword:splice",
   "keyword:horsemanship",
   "keyword:replicate",
-  "keyword:haunt"
+  "keyword:haunt",
+  "trigger:functions-while-suspended",
+  "cost:reveal-any-number-from-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

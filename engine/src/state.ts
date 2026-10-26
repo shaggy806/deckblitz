@@ -2473,6 +2473,9 @@ export type AwaitingDecision =
         | "library-bottom"
         | "graveyard"
         | "behold"
+        /** The chosen cards are revealed (rule 701.20a) and stay in the hand
+         * — `look-and-choose`'s `"reveal"` (the Scents). */
+        | "reveal"
         /** The hand's owner (`forPlayer`) discards the chosen cards — the
          * `discard-chosen` effect (Duress). */
         | "discard";

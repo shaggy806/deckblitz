@@ -1002,7 +1002,7 @@ export type ThisWayKind =
    * control that had a counter put on them this way", after a proliferate.
    * A player isn't one. */
   | "counters-put"
-  /** Cards it revealed from a library — parley's "for each nonland card
+  /** Cards it revealed from a library or a hand — parley's "for each nonland card
    * revealed this way" (an ability word, rule 207.2c), a `reveal-top` with
    * `who` and this
    * with `filter: { notTypes: ["land"] }`. Counted by the player who
@@ -5714,8 +5714,16 @@ export type EffectSpec =
        *
        * `"exile"` is the same link, face up — imprint's "you may exile a
        * nonartifact, nonland card from your hand" (Chrome Mox), whose "the
-       * exiled card" is every player's to see. */
-      readonly destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "exile-face-down" | "exile" | "manifest";
+       * exiled card" is every player's to see.
+       *
+       * `"reveal"` with `zone: "hand"` moves nothing: the chosen cards are
+       * revealed to every player (rule 701.20a) and stay in the hand — the
+       * Urza's Destiny Scents' "reveal any number of green cards in your
+       * hand" (`min: 0`, `max: { cardsInHand: "you" }`, the colour as
+       * `filter`), whose "for each card revealed this way" a later effect of
+       * the same `sequence` reads as `{ thisWay: "revealed" }`. With nothing
+       * in the hand matching, nothing is asked. */
+      readonly destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "exile-face-down" | "exile" | "manifest" | "reveal";
       /** `"exile"` without the link (rule 607.2a): a card exiled by an effect
        * that isn't one of a linked pair — Shadow Kin's "you may exile a
        * creature card from among them", which no "the exiled card" of its
@@ -7274,7 +7282,7 @@ export interface EffectApi {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
     leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped?: boolean,

@@ -212,6 +212,7 @@ import _poolFirehoofCavalry from "../pool/firehoof-cavalry.js";
 import _poolFirstSphereGargantua from "../pool/first-sphere-gargantua.js";
 import _poolFlameJet from "../pool/flame-jet.js";
 import _poolFleshEaterImp from "../pool/flesh-eater-imp.js";
+import _poolFlicker from "../pool/flicker.js";
 import _poolFloodhound from "../pool/floodhound.js";
 import _poolFlowstoneEmbrace from "../pool/flowstone-embrace.js";
 import _poolFlowstoneGiant from "../pool/flowstone-giant.js";
@@ -411,6 +412,7 @@ import _poolMoggFanatic from "../pool/mogg-fanatic.js";
 import _poolMoldShambler from "../pool/mold-shambler.js";
 import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
+import _poolMomentum from "../pool/momentum.js";
 import _poolMonicaRambeau from "../pool/monica-rambeau.js";
 import _poolMoongloveChangeling from "../pool/moonglove-changeling.js";
 import _poolMortarpod from "../pool/mortarpod.js";
@@ -505,6 +507,7 @@ import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRighteousWar from "../pool/righteous-war.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
+import _poolRockslideAmbush from "../pool/rockslide-ambush.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRootsOfLife from "../pool/roots-of-life.js";
 import _poolRoughshodMentor from "../pool/roughshod-mentor.js";
@@ -568,6 +571,7 @@ import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
+import _poolSquallLine from "../pool/squall-line.js";
 import _poolSquareUp from "../pool/square-up.js";
 import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
@@ -932,6 +936,7 @@ const shard: CardShard = {
     _poolFirstSphereGargantua,
     _poolFlameJet,
     _poolFleshEaterImp,
+    _poolFlicker,
     _poolFloodhound,
     _poolFlowstoneEmbrace,
     _poolFlowstoneGiant,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolMoldShambler,
     _poolMoltenCoreMaestro,
     _poolMomentousFall,
+    _poolMomentum,
     _poolMonicaRambeau,
     _poolMoongloveChangeling,
     _poolMortarpod,
@@ -1225,6 +1231,7 @@ const shard: CardShard = {
     _poolRighteousWar,
     _poolRiverBoa,
     _poolRockSoldiers,
+    _poolRockslideAmbush,
     _poolRoilCartographer,
     _poolRootsOfLife,
     _poolRoughshodMentor,
@@ -1288,6 +1295,7 @@ const shard: CardShard = {
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
+    _poolSquallLine,
     _poolSquareUp,
     _poolSquelchingLeeches,
     _poolStampedingHorncrest,

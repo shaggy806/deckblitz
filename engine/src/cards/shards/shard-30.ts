@@ -72,6 +72,7 @@ import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
+import _poolBloodshotCyclops from "../pool/bloodshot-cyclops.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
@@ -106,6 +107,7 @@ import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChaosImps from "../pool/chaos-imps.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
+import _poolChimeOfNight from "../pool/chime-of-night.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
 import _poolCitadelCastellan from "../pool/citadel-castellan.js";
@@ -561,6 +563,7 @@ import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
+import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
@@ -610,6 +613,7 @@ import _poolSphinxBoneWand from "../pool/sphinx-bone-wand.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
+import _poolSpinneretSliver from "../pool/spinneret-sliver.js";
 import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
@@ -656,6 +660,7 @@ import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
+import _poolThranGolem from "../pool/thran-golem.js";
 import _poolThrowALine from "../pool/throw-a-line.js";
 import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
@@ -751,6 +756,7 @@ import _poolZodiacTiger from "../pool/zodiac-tiger.js";
 import _poolZulAshurLichLord from "../pool/zul-ashur-lich-lord.js";
 import _tokensBearToken from "../tokens/bear-token.js";
 import _tokensBeastToken22 from "../tokens/beast-token-2-2.js";
+import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flying-haste.js";
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
@@ -828,6 +834,7 @@ const shard: CardShard = {
     _poolBloodArtist,
     _poolBloodPet,
     _poolBloodbraidElf,
+    _poolBloodshotCyclops,
     _poolBogwaterLumaret,
     _poolBolgsCompany,
     _poolBonescytheSliver,
@@ -862,6 +869,7 @@ const shard: CardShard = {
     _poolChaosImps,
     _poolChariotOfVictory,
     _poolChartoothCougar,
+    _poolChimeOfNight,
     _poolChromaticSphere,
     _poolChromiumTheMutable,
     _poolCitadelCastellan,
@@ -1317,6 +1325,7 @@ const shard: CardShard = {
     _poolSavageGorger,
     _poolSavageLands,
     _poolSavageSwipe,
+    _poolSavageThallid,
     _poolScarredVinebreeder,
     _poolSeedsOfRenewal,
     _poolSelflessSafewright,
@@ -1366,6 +1375,7 @@ const shard: CardShard = {
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,
+    _poolSpinneretSliver,
     _poolSpinningWheelKick,
     _poolSpireMonitor,
     _poolSpirePatrol,
@@ -1412,6 +1422,7 @@ const shard: CardShard = {
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThousandYearStorm,
+    _poolThranGolem,
     _poolThrowALine,
     _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,
@@ -1509,6 +1520,7 @@ const shard: CardShard = {
   tokens: [
     _tokensBearToken,
     _tokensBeastToken22,
+    _tokensDinosaurToken22FlyingHaste,
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,

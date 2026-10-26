@@ -122,6 +122,7 @@ import _poolColdCaseCracker from "../pool/cold-case-cracker.js";
 import _poolColiseumBehemoth from "../pool/coliseum-behemoth.js";
 import _poolCombatProfessor from "../pool/combat-professor.js";
 import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
+import _poolCompost from "../pool/compost.js";
 import _poolContainmentBreach from "../pool/containment-breach.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
 import _poolCosmotronicWave from "../pool/cosmotronic-wave.js";
@@ -204,6 +205,7 @@ import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExpendableLackey from "../pool/expendable-lackey.js";
 import _poolExplosiveEntry from "../pool/explosive-entry.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
+import _poolExtruder from "../pool/extruder.js";
 import _poolEyesInTheSkies from "../pool/eyes-in-the-skies.js";
 import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
@@ -247,6 +249,7 @@ import _poolFrilledSandwalla from "../pool/frilled-sandwalla.js";
 import _poolFrondlandFelidar from "../pool/frondland-felidar.js";
 import _poolFrontlineWarRager from "../pool/frontline-war-rager.js";
 import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
+import _poolFurySliver from "../pool/fury-sliver.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
@@ -562,6 +565,7 @@ import _poolSenateCourier from "../pool/senate-courier.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
 import _poolSentinelsMark from "../pool/sentinels-mark.js";
 import _poolSeshirosLivingLegacy from "../pool/seshiros-living-legacy.js";
+import _poolShadowSliver from "../pool/shadow-sliver.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
@@ -643,6 +647,7 @@ import _poolTakeVengeance from "../pool/take-vengeance.js";
 import _poolTalasScout from "../pool/talas-scout.js";
 import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
 import _poolTarfire from "../pool/tarfire.js";
+import _poolTauntingElf from "../pool/taunting-elf.js";
 import _poolTavernRuffian from "../pool/tavern-ruffian.js";
 import _poolTempleOfPower from "../pool/temple-of-power.js";
 import _poolTemporalSpring from "../pool/temporal-spring.js";
@@ -778,6 +783,7 @@ import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolWoodweaversPuzzleknot from "../pool/woodweavers-puzzleknot.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
+import _poolYavimayaEnchantress from "../pool/yavimaya-enchantress.js";
 import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
 import _poolYouComeToARiver from "../pool/you-come-to-a-river.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
@@ -927,6 +933,7 @@ const shard: CardShard = {
     _poolColiseumBehemoth,
     _poolCombatProfessor,
     _poolCombineChrysalis,
+    _poolCompost,
     _poolContainmentBreach,
     _poolContaminantGrafter,
     _poolCosmotronicWave,
@@ -1009,6 +1016,7 @@ const shard: CardShard = {
     _poolExpendableLackey,
     _poolExplosiveEntry,
     _poolExtravagantReplication,
+    _poolExtruder,
     _poolEyesInTheSkies,
     _poolEzrimAgencyChief,
     _poolFaerieSeer,
@@ -1052,6 +1060,7 @@ const shard: CardShard = {
     _poolFrondlandFelidar,
     _poolFrontlineWarRager,
     _poolFrostbitePyromental,
+    _poolFurySliver,
     _poolFurycalmSnarl,
     _poolFutureFlight,
     _poolGalestrike,
@@ -1367,6 +1376,7 @@ const shard: CardShard = {
     _poolSentinelOfTheNamelessCity,
     _poolSentinelsMark,
     _poolSeshirosLivingLegacy,
+    _poolShadowSliver,
     _poolShadowUrchin,
     _poolShadrixSilverquill,
     _poolShatteredSanctum,
@@ -1448,6 +1458,7 @@ const shard: CardShard = {
     _poolTalasScout,
     _poolTalismanOfResilience,
     _poolTarfire,
+    _poolTauntingElf,
     _poolTavernRuffian,
     _poolTempleOfPower,
     _poolTemporalSpring,
@@ -1583,6 +1594,7 @@ const shard: CardShard = {
     _poolWoodweaversPuzzleknot,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
+    _poolYavimayaEnchantress,
     _poolYouAreAlreadyDead,
     _poolYouComeToARiver,
     _poolZodiacHorse,

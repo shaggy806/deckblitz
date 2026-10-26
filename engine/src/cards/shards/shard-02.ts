@@ -250,6 +250,7 @@ import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
 import _poolFrostTrickster from "../pool/frost-trickster.js";
 import _poolFungalFortitude from "../pool/fungal-fortitude.js";
+import _poolFungusSliver from "../pool/fungus-sliver.js";
 import _poolFuriousSpinesplitter from "../pool/furious-spinesplitter.js";
 import _poolFurnaceStrider from "../pool/furnace-strider.js";
 import _poolGalinasKnight from "../pool/galinas-knight.js";
@@ -601,6 +602,7 @@ import _poolSteamClean from "../pool/steam-clean.js";
 import _poolSteamSpitter from "../pool/steam-spitter.js";
 import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
 import _poolStickytongueSentinel from "../pool/stickytongue-sentinel.js";
+import _poolStoneCatapult from "../pool/stone-catapult.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolStudentOfElements from "../pool/student-of-elements.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
@@ -623,6 +625,7 @@ import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTanglesap from "../pool/tanglesap.js";
+import _poolTaoistMystic from "../pool/taoist-mystic.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
@@ -991,6 +994,7 @@ const shard: CardShard = {
     _poolFrontlineRebel,
     _poolFrostTrickster,
     _poolFungalFortitude,
+    _poolFungusSliver,
     _poolFuriousSpinesplitter,
     _poolFurnaceStrider,
     _poolGalinasKnight,
@@ -1342,6 +1346,7 @@ const shard: CardShard = {
     _poolSteamSpitter,
     _poolSteelOfTheGodhead,
     _poolStickytongueSentinel,
+    _poolStoneCatapult,
     _poolStonecoilSerpent,
     _poolStudentOfElements,
     _poolSublimeEpiphany,
@@ -1364,6 +1369,7 @@ const shard: CardShard = {
     _poolSymbolOfUnsummoning,
     _poolTangle,
     _poolTanglesap,
+    _poolTaoistMystic,
     _poolTauntingKobold,
     _poolTeekasDragon,
     _poolTeferiMasterOfTime,

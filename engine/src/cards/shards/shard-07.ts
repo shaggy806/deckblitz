@@ -158,6 +158,7 @@ import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
 import _poolDingusStaff from "../pool/dingus-staff.js";
+import _poolDinosaursOnASpaceship from "../pool/dinosaurs-on-a-spaceship.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
@@ -345,6 +346,7 @@ import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKurosTaken from "../pool/kuros-taken.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
+import _poolLadySun from "../pool/lady-sun.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
@@ -379,6 +381,7 @@ import _poolMadProphet from "../pool/mad-prophet.js";
 import _poolMageHunter from "../pool/mage-hunter.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
+import _poolMagusOfTheDisk from "../pool/magus-of-the-disk.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
 import _poolManOWar from "../pool/man-o-war.js";
 import _poolManaReflection from "../pool/mana-reflection.js";
@@ -618,6 +621,7 @@ import _poolSubtlety from "../pool/subtlety.js";
 import _poolSubversion from "../pool/subversion.js";
 import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
+import _poolSulfurousBlast from "../pool/sulfurous-blast.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
 import _poolSunscour from "../pool/sunscour.js";
@@ -944,6 +948,7 @@ const shard: CardShard = {
     _poolDevilsPlay,
     _poolDictateOfHeliod,
     _poolDingusStaff,
+    _poolDinosaursOnASpaceship,
     _poolDireFleetCaptain,
     _poolDiscordantDirge,
     _poolDisfigure,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolKurosTaken,
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
+    _poolLadySun,
     _poolLagonnaBandTrailblazer,
     _poolLashweedLurker,
     _poolLastWord,
@@ -1165,6 +1171,7 @@ const shard: CardShard = {
     _poolMageHunter,
     _poolMagicPot,
     _poolMagnificentEnd,
+    _poolMagusOfTheDisk,
     _poolMakindiGriffin,
     _poolManOWar,
     _poolManaReflection,
@@ -1404,6 +1411,7 @@ const shard: CardShard = {
     _poolSubversion,
     _poolSuddenStorm,
     _poolSuddenStrength,
+    _poolSulfurousBlast,
     _poolSunSentinel,
     _poolSungracePegasus,
     _poolSunscour,

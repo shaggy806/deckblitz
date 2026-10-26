@@ -195,6 +195,7 @@ import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
 import _poolExplodingBorders from "../pool/exploding-borders.js";
 import _poolExtinction from "../pool/extinction.js";
+import _poolFalseProphet from "../pool/false-prophet.js";
 import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
 import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
@@ -424,12 +425,14 @@ import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
+import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPacksDisdain from "../pool/packs-disdain.js";
+import _poolPangTongYoungPhoenix from "../pool/pang-tong-young-phoenix.js";
 import _poolParasiticBond from "../pool/parasitic-bond.js";
 import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
@@ -602,6 +605,7 @@ import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTemporalMastery from "../pool/temporal-mastery.js";
+import _poolTendrilsOfCorruption from "../pool/tendrils-of-corruption.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
@@ -943,6 +947,7 @@ const shard: CardShard = {
     _poolExperimentalConfectioner,
     _poolExplodingBorders,
     _poolExtinction,
+    _poolFalseProphet,
     _poolFarmsteadGleaner,
     _poolFascination,
     _poolFeastOfTheUnicorn,
@@ -1172,12 +1177,14 @@ const shard: CardShard = {
     _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,
     _poolOnwardVictory,
+    _poolOpalineSliver,
     _poolOranRiefInvoker,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
     _poolPacksDisdain,
+    _poolPangTongYoungPhoenix,
     _poolParasiticBond,
     _poolParoxysm,
     _poolPatchedPlaything,
@@ -1350,6 +1357,7 @@ const shard: CardShard = {
     _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTemporalMastery,
+    _poolTendrilsOfCorruption,
     _poolTerastodon,
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,

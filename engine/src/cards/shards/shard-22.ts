@@ -240,6 +240,7 @@ import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
 import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
 import _poolGlorifierOfDusk from "../pool/glorifier-of-dusk.js";
+import _poolGoblinFestival from "../pool/goblin-festival.js";
 import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
 import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
@@ -373,6 +374,7 @@ import _poolMasterOfDeath from "../pool/master-of-death.js";
 import _poolMathasFiendSeeker from "../pool/mathas-fiend-seeker.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
 import _poolMeldwebStrider from "../pool/meldweb-strider.js";
+import _poolMentalDiscipline from "../pool/mental-discipline.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
@@ -713,6 +715,7 @@ import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
+import _poolWatcherSliver from "../pool/watcher-sliver.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
 import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
@@ -1006,6 +1009,7 @@ const shard: CardShard = {
     _poolGlazeFiend,
     _poolGlintwingInvoker,
     _poolGlorifierOfDusk,
+    _poolGoblinFestival,
     _poolGoblinKites,
     _poolGoblinRabblemaster,
     _poolGoblinSkyRaider,
@@ -1139,6 +1143,7 @@ const shard: CardShard = {
     _poolMathasFiendSeeker,
     _poolMazirekKraulDeathPriest,
     _poolMeldwebStrider,
+    _poolMentalDiscipline,
     _poolMidnightMayhem,
     _poolMindscourDragon,
     _poolMinersBane,
@@ -1479,6 +1484,7 @@ const shard: CardShard = {
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
     _poolWarehouseTabby,
+    _poolWatcherSliver,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
     _poolWavesOfAggression,

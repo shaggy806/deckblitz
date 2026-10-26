@@ -221,8 +221,9 @@ export function thisWayEntries(
         break;
       case "revealed":
         // From a library (parley's "each player reveals the top card of
-        // their library"), counted by the player who revealed it.
-        if (event.type === "cards-revealed" && event.from === "library") {
+        // their library") or a hand (the Scents' "reveal any number of green
+        // cards in your hand"), counted by the player who revealed it.
+        if (event.type === "cards-revealed" && (event.from === "library" || event.from === "hand")) {
           for (const id of event.objects) add(id, event.player, false);
         }
         break;

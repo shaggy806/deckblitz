@@ -11,6 +11,7 @@ import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAetherInspector from "../pool/aether-inspector.js";
+import _poolAetherSting from "../pool/aether-sting.js";
 import _poolAethertorchRenegade from "../pool/aethertorch-renegade.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
@@ -74,6 +75,7 @@ import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
 import _poolBogImp from "../pool/bog-imp.js";
+import _poolBogardanHellkite from "../pool/bogardan-hellkite.js";
 import _poolBoggartBrute from "../pool/boggart-brute.js";
 import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
@@ -365,6 +367,7 @@ import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
+import _poolLivingEnd from "../pool/living-end.js";
 import _poolLlanowarSentinel from "../pool/llanowar-sentinel.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
@@ -773,6 +776,7 @@ const shard: CardShard = {
     _poolAerialDoombot,
     _poolAerialResponder,
     _poolAetherInspector,
+    _poolAetherSting,
     _poolAethertorchRenegade,
     _poolAfterlifeFromTheLoam,
     _poolAfterthoughtSentry,
@@ -836,6 +840,7 @@ const shard: CardShard = {
     _poolBloodPact,
     _poolBloodfireExpert,
     _poolBogImp,
+    _poolBogardanHellkite,
     _poolBoggartBrute,
     _poolBoilingRockPrison,
     _poolBoneDevourer,
@@ -1127,6 +1132,7 @@ const shard: CardShard = {
     _poolLightningHelix,
     _poolLightningReflexes,
     _poolLilianasIndignation,
+    _poolLivingEnd,
     _poolLlanowarSentinel,
     _poolLoathsomeCurator,
     _poolLordSkittersButcher,

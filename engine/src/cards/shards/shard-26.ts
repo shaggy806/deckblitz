@@ -398,6 +398,7 @@ import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
+import _poolMightOfOldKrosa from "../pool/might-of-old-krosa.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
 import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMilitiasPride from "../pool/militias-pride.js";
@@ -573,6 +574,7 @@ import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
 import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
+import _poolSidewinderSliver from "../pool/sidewinder-sliver.js";
 import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
@@ -1157,6 +1159,7 @@ const shard: CardShard = {
     _poolMeglonoth,
     _poolMetalworkColossus,
     _poolMidnightScavengers,
+    _poolMightOfOldKrosa,
     _poolMightOfTheMasses,
     _poolMilitantInquisitor,
     _poolMilitiasPride,
@@ -1332,6 +1335,7 @@ const shard: CardShard = {
     _poolShrapnelSlinger,
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,
+    _poolSidewinderSliver,
     _poolSilumgarButcher,
     _poolSilverErne,
     _poolSilverbeakGriffin,

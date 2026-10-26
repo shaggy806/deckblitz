@@ -1430,6 +1430,9 @@ export type LegalAction =
         | "library-bottom"
         | "graveyard"
         | "behold"
+        /** The chosen cards are revealed and stay in the hand (the Scents'
+         * "reveal any number of green cards in your hand"). */
+        | "reveal"
         /** `forPlayer` discards the chosen cards from their hand (Duress). */
         | "discard";
       /** A behold (rule 701.4a): `ids` are cards in the chooser's hand and

@@ -1744,7 +1744,19 @@
    "example": "Chthonian Nightmare: Pay X {E} and return this enchantment to its owner's hand as costs."
   },
   "cost:reveal-any-number-from-hand": {
-   "example": "Metalworker: mana scaled by revealing any number of artifact cards from hand"
+   "example": "Scent of Ivy: reveal any number of green cards in your hand as it resolves; built 2026-10-26 (B208) as look-and-choose's \"reveal\" destination"
+  },
+  "effect:reveal-from-hand-in-mana-ability": {
+   "family": "cost:reveal-any-number-from-hand",
+   "example": "Metalworker: a mana ability adding mana for each artifact card revealed from hand — a mana ability resolves at once (rule 605.3b), and the engine's can't stop to ask for a choice"
+  },
+  "effect:gain-life-owner-of-target": {
+   "family": "effect:amount-new-variants",
+   "example": "Misfortune's Gain: destroy target creature; its owner (not its controller) gains 4 life"
+  },
+  "decision:choose-number-on-resolution": {
+   "family": "decision:choose-color-on-resolution",
+   "example": "Scrying Glass: choose a number and a colour as it resolves"
   },
   "cost:reveal-card-as-additional-cost": {
    "example": "Calamity of the Titans: Reveal a colorless creature card as an additional cost, then exile by MV below the revealed card's"
@@ -11518,6 +11530,34 @@
   },
   "keyword:haunt": {
    "example": "Blind Hunter: haunt (rule 702.55) — built in batch 206 (`haunt()`, `hauntSpell()`, the `haunted-dies` trigger)"
+  },
+  "replacement:prevent-damage-dealt-by-enchanted": {
+   "family": "replacement:damage-modification",
+   "example": "Temporal Isolation: prevent all damage that would be dealt by enchanted creature."
+  },
+  "replacement:graveyard-to-library-top-optional": {
+   "family": "replacement:new-event-replacements",
+   "example": "Pulmonic Sliver: All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\""
+  },
+  "cost:exile-from-any-graveyard": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Thelon of Havenwood: \"Exile a Fungus card from a graveyard\" — any player's."
+  },
+  "effect:search-put-under-target-player-control": {
+   "family": "mechanic:search-library-control",
+   "example": "Yavimaya Dryad: the forest found enters tapped under target player's control."
+  },
+  "target:permanent-or-suspended-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Jhoira's Timebug: target permanent you control or suspended card you own."
+  },
+  "decision:choose-from-hand-and-library-top": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Psychotic Episode: one card chosen from a revealed hand plus the library's top card, put on the bottom."
+  },
+  "effect:add-time-counters-suspended-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Curse of the Cabal: \"put two time counters on this card\" while it's suspended in exile."
   },
   "effect:target-player-gains-no-life-this-turn": {
    "family": "effect:temporary-player-effect",

@@ -272,6 +272,7 @@ import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
 import _poolGrotagSiegeRunner from "../pool/grotag-siege-runner.js";
+import _poolGroundRift from "../pool/ground-rift.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundshakerSliver from "../pool/groundshaker-sliver.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
@@ -353,6 +354,7 @@ import _poolKrovikanWhispers from "../pool/krovikan-whispers.js";
 import _poolKwiaVigorbloom from "../pool/kwia-vigorbloom.js";
 import _poolLambholtPacifist from "../pool/lambholt-pacifist.js";
 import _poolLandTax from "../pool/land-tax.js";
+import _poolLandslide from "../pool/landslide.js";
 import _poolLashOfTheWhip from "../pool/lash-of-the-whip.js";
 import _poolLastKiss from "../pool/last-kiss.js";
 import _poolLayClaim from "../pool/lay-claim.js";
@@ -461,6 +463,7 @@ import _poolPeregrineDrake from "../pool/peregrine-drake.js";
 import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
 import _poolPheresBandWarchief from "../pool/pheres-band-warchief.js";
+import _poolPhthisis from "../pool/phthisis.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
@@ -600,6 +603,7 @@ import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
 import _poolStormCaller from "../pool/storm-caller.js";
+import _poolStrengthInNumbers from "../pool/strength-in-numbers.js";
 import _poolStromkirkOccultist from "../pool/stromkirk-occultist.js";
 import _poolStudyBreak from "../pool/study-break.js";
 import _poolSubterraneanScout from "../pool/subterranean-scout.js";
@@ -1028,6 +1032,7 @@ const shard: CardShard = {
     _poolGrimReapersSprint,
     _poolGrizzlyGhoul,
     _poolGrotagSiegeRunner,
+    _poolGroundRift,
     _poolGroundchuckDirtbag,
     _poolGroundshakerSliver,
     _poolGroundskeeper,
@@ -1109,6 +1114,7 @@ const shard: CardShard = {
     _poolKwiaVigorbloom,
     _poolLambholtPacifist,
     _poolLandTax,
+    _poolLandslide,
     _poolLashOfTheWhip,
     _poolLastKiss,
     _poolLayClaim,
@@ -1217,6 +1223,7 @@ const shard: CardShard = {
     _poolPestilentSouleater,
     _poolPharaohRamaTut,
     _poolPheresBandWarchief,
+    _poolPhthisis,
     _poolPhyrexianBloodstock,
     _poolPhyrexianPegasus,
     _poolPhyrexianVault,
@@ -1356,6 +1363,7 @@ const shard: CardShard = {
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
     _poolStormCaller,
+    _poolStrengthInNumbers,
     _poolStromkirkOccultist,
     _poolStudyBreak,
     _poolSubterraneanScout,

@@ -1865,6 +1865,43 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // The Urza's Destiny Scents: "Reveal any number of green cards in your
+    // hand." — a `look-and-choose` over the hand that moves nothing — and
+    // the next sentence's "… for each card revealed this way" scaled by
+    // `{ thisWay: "revealed" }` when it's a life gain, a "pays {1}" or one
+    // `scaledBy` knows.
+    const revealM = /^reveal any number of (white|blue|black|red|green) cards in your hand\.$/i.exec(sentence);
+    if (revealM !== null) {
+      const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[revealM[1].toLowerCase()];
+      const reveal = {
+        kind: "look-and-choose",
+        zone: "hand",
+        min: 0,
+        max: { cardsInHand: "you" },
+        filter: { colors: [color] },
+        destination: "reveal",
+        leftover: "stay",
+      };
+      parsed.push(reveal);
+      hints.push({ sentence, effect: reveal });
+      const eachM = /^(.+) for each card revealed this way\.$/i.exec(sentences[i + 1] ?? "");
+      const each = eachM === null ? null : parseSentence(`${eachM[1]}.`, ctx);
+      if (each !== null && !containsUndefined(each)) {
+        const amount = { thisWay: "revealed", who: "you" };
+        const scaled =
+          each.kind === "gain-life" && typeof each.amount === "number"
+            ? { ...each, amount: each.amount === 1 ? amount : { product: [each.amount, amount] } }
+            : each.kind === "unless" && each.options.length === 1 && each.options[0].pay === "{1}"
+              ? { ...each, options: [{ payGeneric: amount, text: "Pay {1} for each card revealed" }] }
+              : scaledBy(each, amount);
+        if (scaled !== null) {
+          parsed.push(scaled);
+          hints.push({ sentence: sentences[i + 1], effect: scaled });
+          skip = 1;
+        }
+      }
+      continue;
+    }
     // "If you do" after "you may discard a card": the draw happens only if a
     // card was discarded (the pool's this-way conditional).
     if (/^if you do, draw (a|one|two|three) cards?\.$/i.test(sentence) && parsed.at(-1)?.kind === "may" && parsed.at(-1).effect.kind === "discard" && parsed.at(-1).effect.target === "you") {

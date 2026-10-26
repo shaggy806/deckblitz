@@ -2708,6 +2708,25 @@ export class Game {
         if (ability.zone === "command") pushActivateAbility(card, def.name, ability, index);
       });
     }
+    // Exile is shared too: the suspended cards `player` owns, for an ability
+    // that works only while its card is suspended (Greater Gargadon).
+    for (const card of this.state.zones.shared.exile) {
+      if (onlySource !== undefined && card !== onlySource) continue;
+      const object = this.state.objects[card];
+      if (object === undefined || object.owner !== player || object.kind !== "card" || !this.isSuspended(card)) continue;
+      const def = this.registry.get(object.cardName);
+      this.effectiveActivated(card).forEach((ability, index) => {
+        if (ability.zone === "suspended") pushActivateAbility(card, def.name, ability, index);
+      });
+    }
+  }
+
+  /** Whether `id` is suspended: in exile, with a time counter, and suspend
+   * (rule 702.62b — the engine's `suspended` mark, set as it was suspended
+   * and cleared once its free cast is passed up). */
+  private isSuspended(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    return object !== undefined && object.zone === "exile" && object.suspended === true && (object.counters.time ?? 0) > 0;
   }
 
   /**
@@ -6944,6 +6963,11 @@ export class Game {
     if (awaiting.reveal === true && chosen.length > 0) {
       this.revealCards(player, chosen, "library");
     }
+    // "Reveal any number of green cards in your hand" (the Scents): revealed
+    // where they are (rule 701.20a), and moved nowhere.
+    if (awaiting.destination === "reveal" && chosen.length > 0) {
+      this.revealCards(player, chosen, "hand");
+    }
 
     this.finishZoneChoice({ kind: "zone-choice", awaiting, player, chosen });
     // A cost's choice hands priority back to whoever activated (rule
@@ -7211,7 +7235,7 @@ export class Game {
       }
       // A behold's answer never reaches here (`applyBehold`): it moves nothing,
       // and a discard's was done above, by the hand's owner.
-      if (to === "behold" || to === "discard") return;
+      if (to === "behold" || to === "discard" || to === "reveal") return;
       if (to === "library-bottom") {
         // In the order chosen: each goes under the one before it.
         const fromHand = this.state.objects[id]?.zone === "hand";
@@ -14086,6 +14110,14 @@ export class Game {
     return has;
   }
 
+  /** Whether `id` is a card with a triggered ability that works while it's
+   * suspended (`TriggeredAbility.whileSuspended`). */
+  private hasSuspendedTrigger(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.kind !== "card") return false;
+    return this.registry.get(printedCardName(object)).triggered.some((ability) => ability.whileSuspended === true);
+  }
+
   /**
    * `objectId`'s printed `triggered` abilities plus any currently granted to
    * it — by a `grantsTriggered` static (Tyrant's Familiar's Lieutenant
@@ -14589,8 +14621,10 @@ export class Game {
       // Channel (702.51a) from hand, a graveyard ability or a command-zone
       // one (Derevi) — activatable only from that zone, never as a
       // permanent's.
-      if (source.zone !== ability.zone) {
-        return `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
+      if (ability.zone === "suspended" ? !this.isSuspended(sourceId) : source.zone !== ability.zone) {
+        return ability.zone === "suspended"
+          ? "that card is not suspended"
+          : `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
       }
       if (source.owner !== player) return `${player} does not own that card`;
     } else {
@@ -15316,7 +15350,7 @@ export class Game {
         ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
       };
     }
-    if (ability.zone === "command" || ability.staysInZone === true) {
+    if (ability.zone === "command" || ability.zone === "suspended" || ability.staysInZone === true) {
       // The source is still sitting in that zone — remember which object it
       // is, so a round trip before this resolves reads as a new one (rule
       // 400.7). See `resolveAbility`.
@@ -19110,6 +19144,16 @@ export class Game {
         hauntOnly.add(id);
       }
     }
+    // Likewise a suspended card's abilities that work only while it's
+    // suspended (`TriggeredAbility.whileSuspended` — Deep-Sea Kraken).
+    const suspendedOnly = new Set<ObjectId>();
+    // Marked suspended rather than "has a time counter": the last one coming
+    // off is seen by its own "when the last time counter is removed".
+    for (const id of this.state.zones.shared.exile) {
+      if (this.state.objects[id]?.suspended !== true || !this.hasSuspendedTrigger(id)) continue;
+      candidates.add(id);
+      suspendedOnly.add(id);
+    }
     const leaving = isLeaveEvent(event);
     for (const id of candidates) {
       const live = this.state.objects[id];
@@ -19167,6 +19211,10 @@ export class Game {
         if (onlyEminence && ability.fromCommandZone !== true) return;
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
         if (hauntOnly.has(id) !== (ability.trigger.on === "haunted-dies")) return;
+        if ((ability.whileSuspended === true) !== suspendedOnly.has(id)) return;
+        // Any other trigger needs it still suspended, a time counter on it
+        // (rule 702.62b): Deep-Sea Kraken's "if this card is suspended".
+        if (suspendedOnly.has(id) && ability.trigger.on !== "counters-removed" && !this.isSuspended(id)) return;
         if (onlyThisCast && ability.trigger.on !== "this-cast") return;
         if (onlyThisCycled && ability.trigger.on !== "this-cycled") return;
         if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
@@ -20049,6 +20097,16 @@ export class Game {
           (spec.byYou !== true || event.by === self.controller)
         );
       case "counters-removed":
+        // A suspended card's own time counters coming off in exile, seen by
+        // its `whileSuspended` abilities alone (Riftmarked Knight).
+        if (event.type === "time-counter-removed") {
+          return (
+            spec.who === "self" &&
+            event.object === self.id &&
+            (spec.counter === undefined || spec.counter === "time") &&
+            (spec.last !== true || event.remaining === 0)
+          );
+        }
         return (
           event.type === "counter-removed" &&
           event.amount > 0 &&
@@ -24761,7 +24819,7 @@ export class Game {
     count: number | undefined,
     min: number,
     max: number,
-    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest",
+    destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
     leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
@@ -24822,6 +24880,9 @@ export class Game {
     // and naturally ends up unable to choose anything if nothing matches
     // (min/max clamp to 0 along with it), same as the real card whiffing.
     const eligible = ids.filter((id) => this.matchesZoneChoiceFilter(id, filter, player, source));
+    // Revealing from your own hand with nothing in it that matches: there's
+    // nothing to reveal and no one else to show the choice to.
+    if (destination === "reveal" && eligible.length === 0) return;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player: picker ?? player,

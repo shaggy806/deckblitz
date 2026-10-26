@@ -188,6 +188,7 @@ import _poolFelidarUmbra from "../pool/felidar-umbra.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
 import _poolFenHauler from "../pool/fen-hauler.js";
 import _poolFerociousTigorilla from "../pool/ferocious-tigorilla.js";
+import _poolFesteringWound from "../pool/festering-wound.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
@@ -240,6 +241,7 @@ import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGraftedSkullcap from "../pool/grafted-skullcap.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGreenhiltTrainee from "../pool/greenhilt-trainee.js";
+import _poolGreenseeker from "../pool/greenseeker.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
@@ -365,6 +367,7 @@ import _poolMizziumTransreliquat from "../pool/mizzium-transreliquat.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
+import _poolMoonlace from "../pool/moonlace.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
@@ -674,6 +677,7 @@ import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
 import _tokensHellionTokenHaste from "../tokens/hellion-token-haste.js";
+import _tokensKnightToken22BlackFlanking from "../tokens/knight-token-2-2-black-flanking.js";
 import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOrbToken from "../tokens/orb-token.js";
@@ -872,6 +876,7 @@ const shard: CardShard = {
     _poolFellHorseman,
     _poolFenHauler,
     _poolFerociousTigorilla,
+    _poolFesteringWound,
     _poolFireFieldOgre,
     _poolFireImp,
     _poolFireSprites,
@@ -924,6 +929,7 @@ const shard: CardShard = {
     _poolGraftedSkullcap,
     _poolGravkill,
     _poolGreenhiltTrainee,
+    _poolGreenseeker,
     _poolGridMonitor,
     _poolGrimServant,
     _poolGrislySurvivor,
@@ -1049,6 +1055,7 @@ const shard: CardShard = {
     _poolMoltenExhale,
     _poolMoltenMonstrosity,
     _poolMonasteryLoremaster,
+    _poolMoonlace,
     _poolMorbidHunger,
     _poolMortify,
     _poolMossKami,
@@ -1360,6 +1367,7 @@ const shard: CardShard = {
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
     _tokensHellionTokenHaste,
+    _tokensKnightToken22BlackFlanking,
     _tokensMutagenToken,
     _tokensMutantToken,
     _tokensOrbToken,

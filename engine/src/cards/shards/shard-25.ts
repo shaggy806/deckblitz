@@ -563,6 +563,7 @@ import _poolShipwreckSinger from "../pool/shipwreck-singer.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
 import _poolShrineOfBoundlessGrowth from "../pool/shrine-of-boundless-growth.js";
+import _poolShuGeneral from "../pool/shu-general.js";
 import _poolSidarJabari from "../pool/sidar-jabari.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
@@ -626,6 +627,7 @@ import _poolTemurCharm from "../pool/temur-charm.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
+import _poolThallidGerminator from "../pool/thallid-germinator.js";
 import _poolThatsMine from "../pool/thats-mine.js";
 import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
@@ -710,6 +712,7 @@ import _poolWretchedThrong from "../pool/wretched-throng.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
 import _poolZanikevLocust from "../pool/zanikev-locust.js";
 import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
+import _poolZhaoZilongTigerGeneral from "../pool/zhao-zilong-tiger-general.js";
 import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensClericToken01Black from "../tokens/cleric-token-0-1-black.js";
@@ -1300,6 +1303,7 @@ const shard: CardShard = {
     _poolShireShirriff,
     _poolShivanDragon,
     _poolShrineOfBoundlessGrowth,
+    _poolShuGeneral,
     _poolSidarJabari,
     _poolSilundiVision,
     _poolSimicRagworm,
@@ -1363,6 +1367,7 @@ const shard: CardShard = {
     _poolTerramorphicExpanse,
     _poolTetherTechnician,
     _poolTextbookTabulator,
+    _poolThallidGerminator,
     _poolThatsMine,
     _poolTheDestinedBlackMage,
     _poolTheLegendOfRoku,
@@ -1447,6 +1452,7 @@ const shard: CardShard = {
     _poolWurmcoilLarva,
     _poolZanikevLocust,
     _poolZephyrSentinel,
+    _poolZhaoZilongTigerGeneral,
     _poolZoeticGlyph,
   ],
   tokens: [

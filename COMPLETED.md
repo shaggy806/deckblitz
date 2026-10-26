@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Reveal any number of cards from your hand, the rest of Portal Three Kingdoms and Urza's
+  Destiny's 60 most-played — Portal Three Kingdoms is whole** (batch 208, the oldest-first walk,
+  2026-10-26, `cost:reveal-any-number-from-hand`): **built** "reveal any number of green cards in
+  your hand" (rule 701.20a) — `look-and-choose`'s `"reveal"` destination over the hand, with
+  `{ thisWay: "revealed" }` counting cards revealed from a hand — in the engine, the client's
+  prompt, the scaffolder and `reveal-from-hand.test.ts`. 85 authored — Masticore, Donate, Flicker,
+  Yavimaya Enchantress, Carnival of Souls, the Scents of Ivy, Jasmine and Brine, Lady Sun, Sima Yi
+  among them — and 28 blocked (`B208.json`).
+- **Time Spiral's first half, and abilities that work while a card is suspended** (batch 205, the
+  middle walk, 2026-10-26; `trigger:functions-while-suspended`, rule 702.62b): `whileSuspended`
+  triggers and `zone: "suspended"` activations — Greater Gargadon, Deep-Sea Kraken, Nihilith,
+  Riftmarked Knight, Dinosaurs on a Spaceship — and the exile viewer's Activate. 70 of the set's
+  95 most-played left authored (Draining Whelk, Living End, Bogardan Hellkite, the Slivers), 25
+  blocked (`B205.json`).
 - **Flip cards, the rest of Betrayers of Kamigawa — Betrayers is whole — and Champions of
   Kamigawa's 52 most-played** (batch 207, the third middle walk, 2026-10-26,
   `mechanic:flip-cards`): **built** flip cards (rule 710 — `flip: true` halves, the `flip` effect,

@@ -384,6 +384,10 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       // Behold (rule 701.4a): nothing moves — a hand card is revealed, a
       // permanent is just pointed at.
       return `Choose ${cards} to behold — reveal it from your hand or pick a permanent you control`
+    case 'reveal':
+      // "Reveal any number of green cards in your hand" (the Scents): they
+      // stay in hand.
+      return `Choose any number of cards to reveal from your hand`
     case 'discard':
       // "Look at target player's hand" (Glasses of Urza): nothing to pick.
       if (action.max === 0) return `Looking at ${whose} hand`
@@ -6366,12 +6370,15 @@ function Table({
           onClose={() => setZoneView(null)}
           castable={{
             // Flashback/escape/… casts from the graveyard (Phase 6), plus a
-            // land playable from the graveyard (Ramunap Excavator — P2B).
+            // land playable from the graveyard (Ramunap Excavator — P2B), and
+            // an ability that works from here (a graveyard ability, or one of
+            // a suspended card's — Greater Gargadon), which opens its menu.
             ids: zoneView.ids.filter(
-              (id) => castByCard.get(id)?.via !== undefined || landByCard.has(id),
+              (id) => castByCard.get(id)?.via !== undefined || landByCard.has(id) || abilitiesBySource.has(id),
             ),
             label: (id) => {
               const c = castByCard.get(id)
+              if (c?.via === undefined && !landByCard.has(id) && abilitiesBySource.has(id)) return 'Activate'
               // Most routes read fine as their own name ("flashback", "escape");
               // a permission granted by another permanent doesn't.
               if (c?.via === 'graveyard-permission') return 'Cast from graveyard'
@@ -6384,6 +6391,8 @@ function Table({
               const c = castByCard.get(id)
               setZoneView(null)
               if (land) playFace(land)
+              else if (c?.via !== undefined) beginCast(c)
+              else if (abilitiesBySource.has(id)) setSelectedSource(id)
               else if (c) beginCast(c)
             },
             // Several ways to play one card from here: which Muldrotha type
@@ -6448,6 +6457,7 @@ function Table({
             onConfirm: confirmZoneChoice,
             // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
+            ...(zoneChoiceAction.destination === 'reveal' ? { noneLabel: 'Reveal none' } : {}),
             ...(zoneChoiceAction.openingHand === true ? { noneLabel: 'Keep them in hand' } : {}),
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),

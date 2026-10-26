@@ -8341,9 +8341,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Skyscribing: forecast from your hand in your upkeep, once a turn',
     board({ you: { bf: ['Island*6'], hand: ['Skyscribing'] } }),
   ),
+  preset(
+    'Greater Gargadon: sacrificing to it from exile',
+    board({ you: { bf: ['Mountain', 'Grizzly Bears', 'Forest'], hand: ['Greater Gargadon'] } }),
+  ),
   // --- Flip cards (2026-10-26, Champions and Betrayers of Kamigawa) --------
   preset(
     'Callow Jushi: flips into Jaraku at the end step',
     board({ you: { bf: [{ name: 'Callow Jushi', counters: { ki: 2 } }, 'Island*3'] } }),
+  ),
+  preset(
+    'Scent of Ivy: reveal green cards from your hand, which stay there',
+    board({ you: { bf: ['Forest', 'Grizzly Bears'], hand: ['Scent of Ivy', 'Llanowar Elves', 'Giant Growth', 'Lightning Bolt'] } }),
   ),
 ]

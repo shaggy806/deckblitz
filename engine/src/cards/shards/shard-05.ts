@@ -554,6 +554,7 @@ import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
 import _poolScrapyardSalvo from "../pool/scrapyard-salvo.js";
+import _poolScreechingSliver from "../pool/screeching-sliver.js";
 import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
@@ -721,6 +722,7 @@ import _poolWoodvineElemental from "../pool/woodvine-elemental.js";
 import _poolWorkhorse from "../pool/workhorse.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolWretchedCamel from "../pool/wretched-camel.js";
+import _poolWuLongbowman from "../pool/wu-longbowman.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
 import _poolYouthfulScholar from "../pool/youthful-scholar.js";
 import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js";
@@ -1308,6 +1310,7 @@ const shard: CardShard = {
     _poolScoriaElemental,
     _poolScourgeWolf,
     _poolScrapyardSalvo,
+    _poolScreechingSliver,
     _poolScrollOfTheMasters,
     _poolScythecatCub,
     _poolSearingTouch,
@@ -1475,6 +1478,7 @@ const shard: CardShard = {
     _poolWorkhorse,
     _poolWorldMap,
     _poolWretchedCamel,
+    _poolWuLongbowman,
     _poolYoshimaru,
     _poolYouthfulScholar,
     _poolZagrasThiefOfHeartbeats,

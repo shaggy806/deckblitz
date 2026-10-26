@@ -118,6 +118,7 @@ import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
+import _poolCloudchaserKestrel from "../pool/cloudchaser-kestrel.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
@@ -154,6 +155,7 @@ import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDeepwaterHypnotist from "../pool/deepwater-hypnotist.js";
 import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
 import _poolDemonWall from "../pool/demon-wall.js";
+import _poolDemonicCollusion from "../pool/demonic-collusion.js";
 import _poolDemonicPact from "../pool/demonic-pact.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDemonsDue from "../pool/demons-due.js";
@@ -198,6 +200,7 @@ import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
+import _poolEncroach from "../pool/encroach.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
@@ -379,6 +382,7 @@ import _poolMaro from "../pool/maro.js";
 import _poolMarshdrinkerGiant from "../pool/marshdrinker-giant.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
+import _poolMasticore from "../pool/masticore.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
@@ -507,6 +511,7 @@ import _poolReclaim from "../pool/reclaim.js";
 import _poolReduceToDreams from "../pool/reduce-to-dreams.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
+import _poolRescue from "../pool/rescue.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolReveredUnicorn from "../pool/revered-unicorn.js";
@@ -570,6 +575,7 @@ import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
 import _poolSilverpeltWerewolf from "../pool/silverpelt-werewolf.js";
 import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
+import _poolSimaYiWeiFieldMarshal from "../pool/sima-yi-wei-field-marshal.js";
 import _poolSimoon from "../pool/simoon.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
@@ -614,6 +620,7 @@ import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
 import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
+import _poolSuddenDeath from "../pool/sudden-death.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
 import _poolSunClasp from "../pool/sun-clasp.js";
@@ -669,6 +676,7 @@ import _poolTyrantGuard from "../pool/tyrant-guard.js";
 import _poolUlvenwaldOddity from "../pool/ulvenwald-oddity.js";
 import _poolUnburialRites from "../pool/unburial-rites.js";
 import _poolUncleIroh from "../pool/uncle-iroh.js";
+import _poolUndyingRage from "../pool/undying-rage.js";
 import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
 import _poolValeronWardens from "../pool/valeron-wardens.js";
@@ -862,6 +870,7 @@ const shard: CardShard = {
     _poolClericOfTheForwardOrder,
     _poolClickslither,
     _poolCloudPirates,
+    _poolCloudchaserKestrel,
     _poolCloudcrownOak,
     _poolCloudseeder,
     _poolCogworkGrinder,
@@ -898,6 +907,7 @@ const shard: CardShard = {
     _poolDeepwaterHypnotist,
     _poolDefiantGreatmaw,
     _poolDemonWall,
+    _poolDemonicCollusion,
     _poolDemonicPact,
     _poolDemonicTutor,
     _poolDemonsDue,
@@ -942,6 +952,7 @@ const shard: CardShard = {
     _poolEmberShot,
     _poolEmberethPaladin,
     _poolEnchantedBeing,
+    _poolEncroach,
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
@@ -1123,6 +1134,7 @@ const shard: CardShard = {
     _poolMarshdrinkerGiant,
     _poolMarwynThePreserver,
     _poolMasterfulReplication,
+    _poolMasticore,
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
     _poolMentorsGuidance,
@@ -1251,6 +1263,7 @@ const shard: CardShard = {
     _poolReduceToDreams,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
+    _poolRescue,
     _poolResearchThief,
     _poolRestlessDead,
     _poolReveredUnicorn,
@@ -1314,6 +1327,7 @@ const shard: CardShard = {
     _poolSilvanRally,
     _poolSilverpeltWerewolf,
     _poolSilverquillPledgemage,
+    _poolSimaYiWeiFieldMarshal,
     _poolSimoon,
     _poolSimulacrumShaper,
     _poolSinewSliver,
@@ -1358,6 +1372,7 @@ const shard: CardShard = {
     _poolSturdyHatchling,
     _poolSturmgeist,
     _poolSubterraneanSpirit,
+    _poolSuddenDeath,
     _poolSummonAnima,
     _poolSummonedDromedary,
     _poolSunClasp,
@@ -1413,6 +1428,7 @@ const shard: CardShard = {
     _poolUlvenwaldOddity,
     _poolUnburialRites,
     _poolUncleIroh,
+    _poolUndyingRage,
     _poolUneasyPartings,
     _poolUntamedHunger,
     _poolValeronWardens,

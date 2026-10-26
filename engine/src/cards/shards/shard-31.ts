@@ -350,6 +350,7 @@ import _poolHulkingDevil from "../pool/hulking-devil.js";
 import _poolHumanFrailty from "../pool/human-frailty.js";
 import _poolHungryRidgewolf from "../pool/hungry-ridgewolf.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
+import _poolHuntingMoa from "../pool/hunting-moa.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcehideTroll from "../pool/icehide-troll.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
@@ -400,6 +401,7 @@ import _poolKjeldoranOutrider from "../pool/kjeldoran-outrider.js";
 import _poolKnowledgeAndPower from "../pool/knowledge-and-power.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKondaLordOfEiganjo from "../pool/konda-lord-of-eiganjo.js";
+import _poolKongmingsContraptions from "../pool/kongmings-contraptions.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
@@ -587,6 +589,7 @@ import _poolSawtoothOgre from "../pool/sawtooth-ogre.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
+import _poolScentOfBrine from "../pool/scent-of-brine.js";
 import _poolScorchTheFields from "../pool/scorch-the-fields.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
@@ -635,6 +638,7 @@ import _poolSoulOfRavnica from "../pool/soul-of-ravnica.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
+import _poolSpellBurst from "../pool/spell-burst.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
@@ -678,6 +682,7 @@ import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
 import _poolTerrorBallista from "../pool/terror-ballista.js";
+import _poolTetheredGriffin from "../pool/tethered-griffin.js";
 import _poolThalakosDreamsower from "../pool/thalakos-dreamsower.js";
 import _poolThaumaticCompass from "../pool/thaumatic-compass.js";
 import _poolTheApprenticesFolly from "../pool/the-apprentices-folly.js";
@@ -1160,6 +1165,7 @@ const shard: CardShard = {
     _poolHumanFrailty,
     _poolHungryRidgewolf,
     _poolHuntedHorror,
+    _poolHuntingMoa,
     _poolHydroelectricLaboratory,
     _poolIcehideTroll,
     _poolIcewindElemental,
@@ -1210,6 +1216,7 @@ const shard: CardShard = {
     _poolKnowledgeAndPower,
     _poolKodamaOfTheEastTree,
     _poolKondaLordOfEiganjo,
+    _poolKongmingsContraptions,
     _poolKorlessaScaleSinger,
     _poolKorozdaMonitor,
     _poolKotoriPilotProdigy,
@@ -1397,6 +1404,7 @@ const shard: CardShard = {
     _poolSazhKatzroy,
     _poolScaledBehemoth,
     _poolScavengingOoze,
+    _poolScentOfBrine,
     _poolScorchTheFields,
     _poolScornfulAetherLich,
     _poolScrapMastery,
@@ -1445,6 +1453,7 @@ const shard: CardShard = {
     _poolSowerOfTemptation,
     _poolSparkSpray,
     _poolSparringDummy,
+    _poolSpellBurst,
     _poolSpelunking,
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,
@@ -1488,6 +1497,7 @@ const shard: CardShard = {
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,
     _poolTerrorBallista,
+    _poolTetheredGriffin,
     _poolThalakosDreamsower,
     _poolThaumaticCompass,
     _poolTheApprenticesFolly,

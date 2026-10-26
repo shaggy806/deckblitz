@@ -116,6 +116,38 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads a Scent's reveal from hand, the next sentence scaled by the cards revealed", () => {
+    const jasmine = parseFace({
+      name: "Scent of Jasmine",
+      type_line: "Instant",
+      oracle_text: "Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.",
+    });
+    expect(jasmine.complete).toBe(true);
+    expect(jasmine.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "look-and-choose",
+          zone: "hand",
+          min: 0,
+          max: { cardsInHand: "you" },
+          filter: { colors: ["W"] },
+          destination: "reveal",
+          leftover: "stay",
+        },
+        { kind: "gain-life", amount: { product: [2, { thisWay: "revealed", who: "you" }] } },
+      ],
+    });
+    // "Where X is the number of cards revealed this way" isn't read: left to author.
+    const ivy = parseFace({
+      name: "Scent of Ivy",
+      type_line: "Instant",
+      oracle_text:
+        "Reveal any number of green cards in your hand. Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way.",
+    });
+    expect(ivy.complete).toBe(false);
+  });
+
   it("reads a Leyline's opening-hand line (rule 103.6a)", () => {
     const leyline = parseFace({
       name: "Leyline of Sanctity",

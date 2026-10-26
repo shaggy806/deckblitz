@@ -211,6 +211,7 @@ import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolFury from "../pool/fury.js";
 import _poolGalvanicBombardment from "../pool/galvanic-bombardment.js";
+import _poolGamekeeper from "../pool/gamekeeper.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
@@ -368,12 +369,14 @@ import _poolMarchOfTheDrowned from "../pool/march-of-the-drowned.js";
 import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
+import _poolMarshalingTheTroops from "../pool/marshaling-the-troops.js";
 import _poolMasterSplicer from "../pool/master-splicer.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
 import _poolMeddlingYouths from "../pool/meddling-youths.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
+import _poolMengHuoBarbarianKing from "../pool/meng-huo-barbarian-king.js";
 import _poolMentalMisstep from "../pool/mental-misstep.js";
 import _poolMerchantOfTheVale from "../pool/merchant-of-the-vale.js";
 import _poolMerenOfClanNelToth from "../pool/meren-of-clan-nel-toth.js";
@@ -397,6 +400,7 @@ import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
 import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
+import _poolMysticalTeachings from "../pool/mystical-teachings.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNarrowEscape from "../pool/narrow-escape.js";
@@ -420,6 +424,7 @@ import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
+import _poolOutriderEnKor from "../pool/outrider-en-kor.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
@@ -439,6 +444,7 @@ import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
 import _poolPopQuiz from "../pool/pop-quiz.js";
+import _poolPowderKeg from "../pool/powder-keg.js";
 import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrecognitivePerception from "../pool/precognitive-perception.js";
 import _poolPressIntoService from "../pool/press-into-service.js";
@@ -608,6 +614,7 @@ import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
 import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
+import _poolThallidShellDweller from "../pool/thallid-shell-dweller.js";
 import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
@@ -943,6 +950,7 @@ const shard: CardShard = {
     _poolFumingEffigy,
     _poolFury,
     _poolGalvanicBombardment,
+    _poolGamekeeper,
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
@@ -1100,12 +1108,14 @@ const shard: CardShard = {
     _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,
+    _poolMarshalingTheTroops,
     _poolMasterSplicer,
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
     _poolMawOfTheMire,
     _poolMeddlingYouths,
     _poolMemorialToGlory,
+    _poolMengHuoBarbarianKing,
     _poolMentalMisstep,
     _poolMerchantOfTheVale,
     _poolMerenOfClanNelToth,
@@ -1129,6 +1139,7 @@ const shard: CardShard = {
     _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
+    _poolMysticalTeachings,
     _poolNamazuTrader,
     _poolNarnamRenegade,
     _poolNarrowEscape,
@@ -1152,6 +1163,7 @@ const shard: CardShard = {
     _poolOrdruunVeteran,
     _poolOrnateKanzashi,
     _poolOssuaryRats,
+    _poolOutriderEnKor,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,
@@ -1171,6 +1183,7 @@ const shard: CardShard = {
     _poolPlanetaryAnnihilation,
     _poolPlunderingBarbarian,
     _poolPopQuiz,
+    _poolPowderKeg,
     _poolPowerBoost,
     _poolPrecognitivePerception,
     _poolPressIntoService,
@@ -1340,6 +1353,7 @@ const shard: CardShard = {
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
     _poolThaliaTheSurvivor,
+    _poolThallidShellDweller,
     _poolThassasRebuff,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
