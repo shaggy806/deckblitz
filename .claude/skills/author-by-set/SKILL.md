@@ -62,7 +62,8 @@ card is a draft like any other — its templates match sentences, not meaning
   step 5 in `agent-batches.md`), `engine/src/cards/scaffold/` holds only
   `winter-cynical-opportunist.ts`, and `engine/src/cards/review/` is gone.
 - `git status` clean enough to work on (the `sync-check` skill if on a
-  different machine). `npm run build -w engine`.
+  different machine). `npm run build -w engine` — except at the start of a
+  cloud session, whose start hook has just built it.
 - `BACKLOG.md`, "Card backlog": anything to merge or fix first.
 - `engine/src/cards/AUTHORING.md` §0-1 and §15 if not already in context
   this session.
@@ -78,7 +79,9 @@ card is a draft like any other — its templates match sentences, not meaning
 
 1. `npm run cards:sets -w engine -- --sets` — where the walk is: the newest
    set with cards left.
-2. `npm run cards:sets -w engine -- --next 60` — the batch: the next 60
+2. `npm run cards:sets -w engine -- --next 60` — the batch (when the
+   hand-off names the set, `-- --set <code>` lists it in seconds, where a
+   large `--next` can run past a two-minute Bash timeout): the next 60
    untriaged cards, newest set first (the rest of one set, then the next),
    ranked ones first. A set's bottom half is mostly commons and uncommons:
    batches there can run larger — the rest of the set in one batch, up to
@@ -137,10 +140,15 @@ As `author-top-cards` steps 3–6, with these differences:
 - **Commit**: `Cards: <Set name> — <three or four headline cards> and <count>
   more` (or `Engine, Cards: <the feature>, and <Set name>'s …` when one was
   built), the set and share, and any engine or scaffolder change with why.
+- **Verify** as `agent-batches.md`'s Integrating step 4 says: the new-cards
+  fuzzer early (`npm run verify -- --fuzz-new`, beside the docs), then merge
+  `origin/main`, then one `npm run verify`, then `--only <step>` after a fix.
 - **Land it on `main`** (a cloud session): push the session branch, then
   `git fetch origin main && git merge origin/main && git push origin HEAD:main`
   — the next session starts from `main`, and a batch left on a session branch
-  gets walked again.
+  gets walked again. If `main` moved during the verify and the merge brings
+  engine code, `npm run verify -- --only fuzzwith`; only other batches' cards
+  and docs need just `gen:cards` and the build to come out clean.
 
 ## 4. Report and offer the next
 

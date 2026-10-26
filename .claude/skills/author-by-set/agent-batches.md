@@ -117,7 +117,11 @@ in OOM kills, heap tweaks and retry loops. So agents typecheck through
 (one slot per ~7 GB of RAM beyond 3 GB: one on a cloud session, more on a
 bigger machine; `TYPECHECK_SLOTS` overrides it), and wait their turn instead
 of fighting. Five agents stay the cloud session's ceiling: a typecheck is
-~55 s, so the queue costs an agent a few minutes at worst.
+~40 s since it became one pass (2026-10-26: the engine's `typecheck` was a
+source pass and then a tests pass over the same source, ~70 s), and each
+agent typechecks once its tests pass rather than after every fix. Two slots
+on a cloud session would not fit: one typecheck peaks at 6.2-6.6 GB resident
+even with a smaller heap limit (measured 2026-10-26).
 
 Agents run gen:cards, the typecheck and their own test file with `pool.test`
 only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
@@ -175,9 +179,34 @@ notification.
    must exist in `needs-vocabulary.json` (add proposed ones with a `family`).
 3. **Check `tokens/`** for two files making the same token (merge them into
    one and repoint the cards).
-4. `gen:cards`, the whole engine suite, `card:verify -- --offline`,
-   `card:parse-check`, then the skill's own record, docs and `npm run
-   verify`. **Squash** the group commits into the batch commit.
+4. **Verify once, and start its slow step early** (the 2026-10-26 audit of
+   batches 173-175: verify took 10-34 minutes a batch on a cloud session's 4
+   cores, a third of B175's whole session, and only its new-cards fuzzer ever
+   found anything):
+   - `gen:cards`, **squash** the group commits into the batch commit, then
+     start **`npm run verify -- --fuzz-new`** in the background — the
+     new-cards fuzzer alone, on the cards just committed — and write the
+     skill's record and docs while it runs. Don't run the engine suite,
+     `card:verify` or a build of your own first: verify runs them minutes
+     later (`card:parse-check` too: `oracle-parse.test.ts` is in the suite).
+     Your own test file you've already run while reviewing.
+   - Once it passes: commit the docs, **then** `git fetch origin main && git
+     merge origin/main` — before verifying, not after: a merge after a green
+     verify meant a second whole run (B174) — and then **`npm run verify`**,
+     once. It skips the new-cards fuzzer when the merge brought no engine code
+     and you changed no card since. Commit what it rewrites (the re-marked
+     lists, `scripts/verify-state.json`) in one commit.
+   - **A step fails**: fix it with its own test, then **`npm run verify --
+     --only <step>`** (`--only fuzzwith` for a fuzzer find): gen:cards, build,
+     typecheck and the engine suite always run, the rest only as named. Not
+     the whole run again for a six-line fix; CI runs everything on the push.
+   - **A fuzzer game times out**: its line says where the game was ("last
+     seen at turn 109 …, 161x Phoenix Fleet Airship …"). A turn in the
+     hundreds or a battlefield of one card's copies is a game running long,
+     not a hang: if no card of this batch is in that picture, record it in
+     `BACKLOG.md` and go on. Never replay it at a longer `--timeout` to find
+     out — B174 waited ten minutes that way to learn what the first line
+     says.
 5. **Remove the worktrees** the `feedback_worktree_agents` memory's way:
    unlink each `node_modules` junction (Windows) or symlink (Linux: `rm` the
    link, no trailing slash, after checking `-L`) by absolute path first, and

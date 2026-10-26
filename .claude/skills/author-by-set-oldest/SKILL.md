@@ -51,7 +51,7 @@ takes a few minutes.
 
 As `author-by-set` step 0 — unmerged branches first (`node
 scripts/unmerged-branches.mjs`: merge whatever it lists before authoring, and `origin/main`
-if it says the branch is behind), the leftovers check after a `/clear`, then `git status`, `npm run build -w engine`,
+if it says the branch is behind), the leftovers check after a `/clear`, then `git status`, `npm run build -w engine` (not at a cloud session's start: its hook built it),
 `BACKLOG.md`'s "Card backlog" (its line for this walk says which set is
 next), AUTHORING.md §0-1 and §15 if they're not in context yet. The old sets
 are all in the Oracle snapshot.
@@ -60,7 +60,9 @@ are all in the Oracle snapshot.
 
 1. `npm run cards:sets -w engine -- --oldest --sets 30`: where the walk is,
    the oldest set with cards left.
-2. `npm run cards:sets -w engine -- --oldest --next 60`: the batch. An old
+2. `npm run cards:sets -w engine -- --oldest --next 60`: the batch (or
+   `-- --set <code>` for the set the hand-off names: seconds, where a large
+   `--next` can outrun a two-minute Bash timeout). An old
    expansion is often 100–250 cards left. Take **one whole set per batch**
    (the `feedback_whole_set_batches` memory) across 4–5 agents of ~25 cards
    each, or split a 250-card set into two batches.
@@ -100,9 +102,13 @@ As `author-by-set` step 3, with this walk's labels:
 - **Commit**: `Cards: <Set name> — <three or four headline cards> and <count>
   more`, or `Engine, Cards: <the feature>, and <Set name>'s …` when a feature
   was built.
-- Run `npm run verify` before pushing each batch: it runs the full set only
-  every third batch on its own (`scripts/verify-state.json`, commit it when it
-  changes) and a quick one in between, so a cleared session keeps the cadence.
+- Verify as `author-by-set` does (`agent-batches.md`, Integrating step 4):
+  `npm run verify -- --fuzz-new` in the background as soon as the batch is
+  committed, the record and docs meanwhile, then merge `origin/main`, then one
+  `npm run verify`, and `-- --only <step>` after fixing what a step found. It
+  runs the full set only every third batch on its own (`scripts/verify-state.json`,
+  commit it when it changes) and a quick one in between, so a cleared session
+  keeps the cadence.
 
 ## 4. Report and offer the next
 
