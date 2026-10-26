@@ -1,0 +1,860 @@
+{
+ "batch": "B195",
+ "status": "complete",
+ "ranks": "Future Sight (FUT, 2007-05-04): whole set, its 121 cards left (the middle walk) — no feature built",
+ "authored": [
+  {
+   "name": "Arc Blade",
+   "files": [
+    "engine/src/cards/pool/arc-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Augur il-Vec",
+   "files": [
+    "engine/src/cards/pool/augur-il-vec.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Augur of Skulls",
+   "files": [
+    "engine/src/cards/pool/augur-of-skulls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aven Augur",
+   "files": [
+    "engine/src/cards/pool/aven-augur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barren Glory",
+   "files": [
+    "engine/src/cards/pool/barren-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodshot Trainee",
+   "files": [
+    "engine/src/cards/pool/bloodshot-trainee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bogardan Lancer",
+   "files": [
+    "engine/src/cards/pool/bogardan-lancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bridge from Below",
+   "files": [
+    "engine/src/cards/pool/bridge-from-below.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Centaur Omenreader",
+   "files": [
+    "engine/src/cards/pool/centaur-omenreader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Char-Rumbler",
+   "files": [
+    "engine/src/cards/pool/char-rumbler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cloudseeder",
+   "files": [
+    "engine/src/cards/pool/cloudseeder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryptic Annelid",
+   "files": [
+    "engine/src/cards/pool/cryptic-annelid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cutthroat il-Dal",
+   "files": [
+    "engine/src/cards/pool/cutthroat-il-dal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cyclical Evolution",
+   "files": [
+    "engine/src/cards/pool/cyclical-evolution.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Death Rattle",
+   "files": [
+    "engine/src/cards/pool/death-rattle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deepcavern Imp",
+   "files": [
+    "engine/src/cards/pool/deepcavern-imp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Emberwilde Augur",
+   "files": [
+    "engine/src/cards/pool/emberwilde-augur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Epochrasite",
+   "files": [
+    "engine/src/cards/pool/epochrasite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festering March",
+   "files": [
+    "engine/src/cards/pool/festering-march.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flowstone Embrace",
+   "files": [
+    "engine/src/cards/pool/flowstone-embrace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Foresee",
+   "files": [
+    "engine/src/cards/pool/foresee.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frenzy Sliver",
+   "files": [
+    "engine/src/cards/pool/frenzy-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghostfire",
+   "files": [
+    "engine/src/cards/pool/ghostfire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goldmeadow Lookout",
+   "files": [
+    "engine/src/cards/pool/goldmeadow-lookout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Peril",
+   "files": [
+    "engine/src/cards/pool/grave-peril.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grinning Ignus",
+   "files": [
+    "engine/src/cards/pool/grinning-ignus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Henchfiend of Ukor",
+   "files": [
+    "engine/src/cards/pool/henchfiend-of-ukor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ichor Slick",
+   "files": [
+    "engine/src/cards/pool/ichor-slick.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Imperial Mask",
+   "files": [
+    "engine/src/cards/pool/imperial-mask.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Intervention Pact",
+   "files": [
+    "engine/src/cards/pool/intervention-pact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Primarch",
+   "files": [
+    "engine/src/cards/pool/kavu-primarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keldon Megaliths",
+   "files": [
+    "engine/src/cards/pool/keldon-megaliths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Korlash, Heir to Blackblade",
+   "files": [
+    "engine/src/cards/pool/korlash-heir-to-blackblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leaden Fists",
+   "files": [
+    "engine/src/cards/pool/leaden-fists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Llanowar Augur",
+   "files": [
+    "engine/src/cards/pool/llanowar-augur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Llanowar Empath",
+   "files": [
+    "engine/src/cards/pool/llanowar-empath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Llanowar Mentor",
+   "files": [
+    "engine/src/cards/pool/llanowar-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Logic Knot",
+   "files": [
+    "engine/src/cards/pool/logic-knot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lost Auramancers",
+   "files": [
+    "engine/src/cards/pool/lost-auramancers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lumithread Field",
+   "files": [
+    "engine/src/cards/pool/lumithread-field.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maelstrom Djinn",
+   "files": [
+    "engine/src/cards/pool/maelstrom-djinn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magus of the Future",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-future.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Marshaling Cry",
+   "files": [
+    "engine/src/cards/pool/marshaling-cry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Minions' Murmurs",
+   "files": [
+    "engine/src/cards/pool/minions-murmurs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mistmeadow Skulk",
+   "files": [
+    "engine/src/cards/pool/mistmeadow-skulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Narcomoeba",
+   "files": [
+    "engine/src/cards/pool/narcomoeba.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nix",
+   "files": [
+    "engine/src/cards/pool/nix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oblivion Crown",
+   "files": [
+    "engine/src/cards/pool/oblivion-crown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pact of the Titan",
+   "files": [
+    "engine/src/cards/pool/pact-of-the-titan.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Patrician's Scorn",
+   "files": [
+    "engine/src/cards/pool/patricians-scorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pooling Venom",
+   "files": [
+    "engine/src/cards/pool/pooling-venom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Putrid Cyclops",
+   "files": [
+    "engine/src/cards/pool/putrid-cyclops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyromancer's Swath",
+   "files": [
+    "engine/src/cards/pool/pyromancers-swath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quiet Disrepair",
+   "files": [
+    "engine/src/cards/pool/quiet-disrepair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ramosian Revivalist",
+   "files": [
+    "engine/src/cards/pool/ramosian-revivalist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ravaging Riftwurm",
+   "files": [
+    "engine/src/cards/pool/ravaging-riftwurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reality Strobe",
+   "files": [
+    "engine/src/cards/pool/reality-strobe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saltskitter",
+   "files": [
+    "engine/src/cards/pool/saltskitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scourge of Kher Ridges",
+   "files": [
+    "engine/src/cards/pool/scourge-of-kher-ridges.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Second Wind",
+   "files": [
+    "engine/src/cards/pool/second-wind.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shah of Naar Isle",
+   "files": [
+    "engine/src/cards/pool/shah-of-naar-isle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skirk Ridge Exhumer",
+   "files": [
+    "engine/src/cards/pool/skirk-ridge-exhumer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skizzik Surger",
+   "files": [
+    "engine/src/cards/pool/skizzik-surger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sliversmith",
+   "files": [
+    "engine/src/cards/pool/sliversmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snake Cult Initiation",
+   "files": [
+    "engine/src/cards/pool/snake-cult-initiation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soultether Golem",
+   "files": [
+    "engine/src/cards/pool/soultether-golem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sparkspitter",
+   "files": [
+    "engine/src/cards/pool/sparkspitter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sporoloth Ancient",
+   "files": [
+    "engine/src/cards/pool/sporoloth-ancient.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm Entity",
+   "files": [
+    "engine/src/cards/pool/storm-entity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take Possession",
+   "files": [
+    "engine/src/cards/pool/take-possession.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tarox Bladewing",
+   "files": [
+    "engine/src/cards/pool/tarox-bladewing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderblade Charge",
+   "files": [
+    "engine/src/cards/pool/thunderblade-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tombstalker",
+   "files": [
+    "engine/src/cards/pool/tombstalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unblinking Bleb",
+   "files": [
+    "engine/src/cards/pool/unblinking-bleb.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Witch's Mist",
+   "files": [
+    "engine/src/cards/pool/witchs-mist.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Rift Elemental",
+   "needs": [
+    "cost:remove-counter-from-other-permanent-or-suspended-card"
+   ],
+   "why": "remove a time counter from a permanent you control or a suspended card you own as a cost — the only remove-counter cost takes them from the source"
+  },
+  {
+   "name": "Molten Disaster",
+   "needs": [
+    "static:split-second-if-kicked"
+   ],
+   "why": "split second only if kicked — a card's splitSecond is a plain boolean"
+  },
+  {
+   "name": "Boldwyr Intimidator",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "\"target creature becomes a Coward\" — no effect sets a creature's subtypes without setting P/T"
+  },
+  {
+   "name": "Nihilith",
+   "needs": [
+    "trigger:functions-while-suspended"
+   ],
+   "why": "a trigger that works while the card is suspended in exile"
+  },
+  {
+   "name": "Riddle of Lightning",
+   "needs": [
+    "effect:reveal-top-keeps-spell-targets"
+   ],
+   "why": "inside reveal-top's then, target 0 is the revealed card, so the damage can't reach the spell's own target"
+  },
+  {
+   "name": "Imperiosaur",
+   "needs": [
+    "cost:spend-only-mana-from-basic-lands"
+   ],
+   "why": "spend only mana produced by basic lands to cast it"
+  },
+  {
+   "name": "Fatal Attraction",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "damage to the enchanted creature — damage takes no \"attached\" ref"
+  },
+  {
+   "name": "Lost Hours",
+   "needs": [
+    "effect:target-player-hand-card-to-library-top",
+    "effect:put-nth-from-top"
+   ],
+   "why": "you choose a card from a target player's hand and they put it third from the top"
+  },
+  {
+   "name": "Riftsweeper",
+   "needs": [
+    "effect:target-card-in-exile"
+   ],
+   "why": "no target spec for a face-up exiled card"
+  },
+  {
+   "name": "Fleshwrither",
+   "needs": [
+    "mechanic:transfigure"
+   ],
+   "why": "transfigure — sacrifice to search for a creature card with the same mana value"
+  },
+  {
+   "name": "Scout's Warning",
+   "needs": [
+    "effect:next-creature-spell-flash-this-turn"
+   ],
+   "why": "the next creature card you play this turn has flash — a one-shot flash permission"
+  },
+  {
+   "name": "Seht's Tiger",
+   "needs": [
+    "effect:player-protection-from-color"
+   ],
+   "why": "you gain protection from the chosen colour — player-effect has only protection from everything"
+  },
+  {
+   "name": "Shivan Sand-Mage",
+   "needs": [
+    "effect:target-card-in-exile",
+    "effect:remove-time-counters-chosen-suspended"
+   ],
+   "why": "target permanent or suspended card"
+  },
+  {
+   "name": "Spellweaver Volute",
+   "needs": [
+    "mechanic:enchant-card-in-graveyard"
+   ],
+   "why": "an Aura enchanting an instant card in a graveyard"
+  },
+  {
+   "name": "Spin into Myth",
+   "needs": [
+    "effect:fateseal"
+   ],
+   "why": "fateseal — you look at and choose from an opponent's library"
+  },
+  {
+   "name": "Judge Unworthy",
+   "needs": [
+    "amount:revealed-card-mana-value-keep-targets"
+   ],
+   "why": "damage equal to a revealed card's mana value to the spell's own target — reveal-top's then replaces the targets"
+  },
+  {
+   "name": "Yixlid Jailer",
+   "needs": [
+    "static:graveyard-cards-lose-abilities"
+   ],
+   "why": "cards in graveyards lose all abilities"
+  },
+  {
+   "name": "Shimian Specter",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "search graveyard, hand and library for every card with a chosen card's name"
+  },
+  {
+   "name": "Quagnoth",
+   "needs": [
+    "trigger:discarded-by-opponent-effect"
+   ],
+   "why": "a discard caused by an opponent's spell or ability, firing from the graveyard"
+  },
+  {
+   "name": "Muraganda Petroglyphs",
+   "needs": [
+    "condition:no-abilities-filter"
+   ],
+   "why": "a static's affects filter can't read hasAbilities inside the layer fold"
+  },
+  {
+   "name": "Nacatl War-Pride",
+   "needs": [
+    "static:must-be-blocked-by-exactly-one"
+   ],
+   "why": "no \"must be blocked by exactly one creature if able\" requirement"
+  },
+  {
+   "name": "Chronomantic Escape",
+   "needs": [
+    "effect:creatures-cant-attack-you-until-next-turn"
+   ],
+   "why": "no \"creatures can't attack you\" for a duration (a cant-attack restriction would also stop attacks on your planeswalkers)"
+  },
+  {
+   "name": "Bitter Ordeal",
+   "needs": [
+    "keyword:gravestorm"
+   ],
+   "why": "gravestorm isn't modelled"
+  },
+  {
+   "name": "Gibbering Descent",
+   "needs": [
+    "static:skip-step"
+   ],
+   "why": "hellbent's \"skip your upkeep step\" can't be expressed"
+  },
+  {
+   "name": "Spellwild Ouphe",
+   "needs": [
+    "cost:cost-reduction-if-targets"
+   ],
+   "why": "a cost reduction for spells that target it — costModification is checked before targets and gets no source"
+  },
+  {
+   "name": "Spirit en-Dal",
+   "needs": [
+    "mechanic:forecast"
+   ],
+   "why": "forecast isn't modelled"
+  },
+  {
+   "name": "Baru, Fist of Krosa",
+   "needs": [
+    "cost:discard-card-named-self"
+   ],
+   "why": "grandeur — discard another card with this name as a cost"
+  },
+  {
+   "name": "Glittering Wish",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "cards from outside the game"
+  },
+  {
+   "name": "Samite Censer-Bearer",
+   "needs": [
+    "effect:prevent-next-damage-each-creature"
+   ],
+   "why": "prevent the next 1 damage to each creature you control — prevent-damage takes only a target slot"
+  },
+  {
+   "name": "Steamflogger Boss",
+   "needs": [
+    "mechanic:assemble-contraptions"
+   ],
+   "why": "Contraptions and assemble aren't modelled"
+  },
+  {
+   "name": "Grave Scrabbler",
+   "needs": [
+    "condition:self-madness-paid"
+   ],
+   "why": "nothing records that a spell was cast for its madness cost"
+  },
+  {
+   "name": "Dust of Moments",
+   "needs": [
+    "mechanic:suspend-and-time-counters"
+   ],
+   "why": "no effect adds or removes time counters on suspended cards in exile"
+  },
+  {
+   "name": "Mesmeric Sliver",
+   "needs": [
+    "effect:fateseal"
+   ],
+   "why": "fateseal — you look at and choose from an opponent's library"
+  },
+  {
+   "name": "Lymph Sliver",
+   "needs": [
+    "static:absorb"
+   ],
+   "why": "absorb — prevent a fixed N of each source's damage (prevention, not a replacement)"
+  },
+  {
+   "name": "Darksteel Garrison",
+   "needs": [
+    "keyword:fortify"
+   ],
+   "why": "fortify isn't modelled"
+  },
+  {
+   "name": "Oriss, Samite Guardian",
+   "needs": [
+    "effect:restrict-controlled-by-target"
+   ],
+   "why": "grandeur half: \"creatures that player controls can't attack\" — restrict can't name a target player's creatures"
+  },
+  {
+   "name": "Shapeshifter's Marrow",
+   "needs": [
+    "effect:become-copy-of-card"
+   ],
+   "why": "becomes a copy of a revealed library card"
+  },
+  {
+   "name": "Venser's Diffusion",
+   "needs": [
+    "mechanic:suspend-and-time-counters",
+    "target:suspended-card"
+   ],
+   "why": "target a nonland permanent or a suspended card"
+  },
+  {
+   "name": "Linessa, Zephyr Mage",
+   "needs": [
+    "effect:each-player-returns-own-permanent"
+   ],
+   "why": "grandeur half: the target player chooses and returns a creature, then an artifact, an enchantment and a land"
+  },
+  {
+   "name": "Veilstone Amulet",
+   "needs": [
+    "static:untargetable-by-casters-opponents"
+   ],
+   "why": "creatures you control can't be the targets of spells or abilities your opponents control this turn — a rule over the player's creatures, later arrivals included, not granted hexproof"
+  },
+  {
+   "name": "Angel of Salvation",
+   "needs": [
+    "effect:prevention-divided"
+   ],
+   "why": "prevent the next 5 damage divided among any number of targets"
+  },
+  {
+   "name": "Magus of the Abyss",
+   "needs": [
+    "decision:active-player-chooses-target"
+   ],
+   "why": "the player whose upkeep it is chooses the target of the Magus's controller's ability"
+  },
+  {
+   "name": "Even the Odds",
+   "needs": [
+    "condition:controls-fewer-than-each-opponent"
+   ],
+   "why": "fewer creatures than each opponent"
+  },
+  {
+   "name": "Arcanum Wings",
+   "needs": [
+    "mechanic:aura-swap"
+   ],
+   "why": "aura swap isn't modelled"
+  },
+  {
+   "name": "Gathan Raiders",
+   "needs": [
+    "cost:morph-discard-card"
+   ],
+   "why": "Morph—Discard a card: morph costs are mana only"
+  },
+  {
+   "name": "Phosphorescent Feast",
+   "needs": [
+    "cost:reveal-any-number-from-hand",
+    "amount:chroma-of-cards"
+   ],
+   "why": "reveal any number of green cards from hand and count their green symbols"
+  }
+ ]
+}
