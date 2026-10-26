@@ -116,6 +116,7 @@ import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
+import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
@@ -195,6 +196,7 @@ import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
+import _poolEpochrasite from "../pool/epochrasite.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
@@ -457,6 +459,7 @@ import _poolPiracyCharm from "../pool/piracy-charm.js";
 import _poolPlagueBelcher from "../pool/plague-belcher.js";
 import _poolPlatedKilnbeast from "../pool/plated-kilnbeast.js";
 import _poolPolukranosEngineOfRuin from "../pool/polukranos-engine-of-ruin.js";
+import _poolPoolingVenom from "../pool/pooling-venom.js";
 import _poolPortableHole from "../pool/portable-hole.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
@@ -834,6 +837,7 @@ const shard: CardShard = {
     _poolClickslither,
     _poolCloudPirates,
     _poolCloudcrownOak,
+    _poolCloudseeder,
     _poolCogworkGrinder,
     _poolConciliatorsDuelist,
     _poolConflux,
@@ -913,6 +917,7 @@ const shard: CardShard = {
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
+    _poolEpochrasite,
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
@@ -1175,6 +1180,7 @@ const shard: CardShard = {
     _poolPlagueBelcher,
     _poolPlatedKilnbeast,
     _poolPolukranosEngineOfRuin,
+    _poolPoolingVenom,
     _poolPortableHole,
     _poolPortalToPhyrexia,
     _poolPreciseStrike,

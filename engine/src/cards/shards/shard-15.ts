@@ -661,6 +661,7 @@ import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWidespreadThieving from "../pool/widespread-thieving.js";
 import _poolWingedPortent from "../pool/winged-portent.js";
+import _poolWitchsMist from "../pool/witchs-mist.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
@@ -1357,6 +1358,7 @@ const shard: CardShard = {
     _poolWebOfLifeAndDestiny,
     _poolWidespreadThieving,
     _poolWingedPortent,
+    _poolWitchsMist,
     _poolWorthyKnight,
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,

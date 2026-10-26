@@ -122,6 +122,7 @@ import _poolCeruleanWyvern from "../pool/cerulean-wyvern.js";
 import _poolChampionOfTheParish from "../pool/champion-of-the-parish.js";
 import _poolChandraBoldPyromancer from "../pool/chandra-bold-pyromancer.js";
 import _poolChapelShieldgeist from "../pool/chapel-shieldgeist.js";
+import _poolCharRumbler from "../pool/char-rumbler.js";
 import _poolChargingGriffin from "../pool/charging-griffin.js";
 import _poolCharismaticVanguard from "../pool/charismatic-vanguard.js";
 import _poolChiefOfTheFoundry from "../pool/chief-of-the-foundry.js";
@@ -166,6 +167,7 @@ import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
 import _poolDauntlessDismantler from "../pool/dauntless-dismantler.js";
 import _poolDawnToDusk from "../pool/dawn-to-dusk.js";
 import _poolDealGoneBad from "../pool/deal-gone-bad.js";
+import _poolDeathRattle from "../pool/death-rattle.js";
 import _poolDeathgrip from "../pool/deathgrip.js";
 import _poolDeathrender from "../pool/deathrender.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
@@ -453,6 +455,7 @@ import _poolPactOfNegation from "../pool/pact-of-negation.js";
 import _poolPaladinsArms from "../pool/paladins-arms.js";
 import _poolPapercraftDecoy from "../pool/papercraft-decoy.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
+import _poolPatriciansScorn from "../pool/patricians-scorn.js";
 import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPennonBlade from "../pool/pennon-blade.js";
@@ -571,6 +574,7 @@ import _poolSpellskite from "../pool/spellskite.js";
 import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
+import _poolSporolothAncient from "../pool/sporoloth-ancient.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
 import _poolStatusStatue from "../pool/status-statue.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
@@ -839,6 +843,7 @@ const shard: CardShard = {
     _poolChampionOfTheParish,
     _poolChandraBoldPyromancer,
     _poolChapelShieldgeist,
+    _poolCharRumbler,
     _poolChargingGriffin,
     _poolCharismaticVanguard,
     _poolChiefOfTheFoundry,
@@ -883,6 +888,7 @@ const shard: CardShard = {
     _poolDauntlessDismantler,
     _poolDawnToDusk,
     _poolDealGoneBad,
+    _poolDeathRattle,
     _poolDeathgrip,
     _poolDeathrender,
     _poolDeeprootWarrior,
@@ -1170,6 +1176,7 @@ const shard: CardShard = {
     _poolPaladinsArms,
     _poolPapercraftDecoy,
     _poolPathmakerInitiate,
+    _poolPatriciansScorn,
     _poolPeemaTrailblazer,
     _poolPeggyCarterSecretAgent,
     _poolPennonBlade,
@@ -1288,6 +1295,7 @@ const shard: CardShard = {
     _poolSpinewoodsArmadillo,
     _poolSpiritSummoning,
     _poolSpitefulBully,
+    _poolSporolothAncient,
     _poolStarOfExtinction,
     _poolStatusStatue,
     _poolStealerOfSecrets,

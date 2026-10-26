@@ -44,6 +44,7 @@ import _poolAstralCornucopia from "../pool/astral-cornucopia.js";
 import _poolAtreusImpulsiveSon from "../pool/atreus-impulsive-son.js";
 import _poolAttendedSocialite from "../pool/attended-socialite.js";
 import _poolAuspiciousAncestor from "../pool/auspicious-ancestor.js";
+import _poolAvenAugur from "../pool/aven-augur.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
 import _poolBadlandsRevival from "../pool/badlands-revival.js";
@@ -534,6 +535,7 @@ import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
 import _poolShackles from "../pool/shackles.js";
 import _poolShadowProphecy from "../pool/shadow-prophecy.js";
 import _poolShadowsLair from "../pool/shadows-lair.js";
+import _poolShahOfNaarIsle from "../pool/shah-of-naar-isle.js";
 import _poolShatterwingPegasus from "../pool/shatterwing-pegasus.js";
 import _poolShelldockIsle from "../pool/shelldock-isle.js";
 import _poolShieldWallSentinel from "../pool/shield-wall-sentinel.js";
@@ -777,6 +779,7 @@ const shard: CardShard = {
     _poolAtreusImpulsiveSon,
     _poolAttendedSocialite,
     _poolAuspiciousAncestor,
+    _poolAvenAugur,
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
     _poolBadlandsRevival,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolShackles,
     _poolShadowProphecy,
     _poolShadowsLair,
+    _poolShahOfNaarIsle,
     _poolShatterwingPegasus,
     _poolShelldockIsle,
     _poolShieldWallSentinel,

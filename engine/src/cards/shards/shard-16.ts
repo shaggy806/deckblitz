@@ -418,6 +418,7 @@ import _poolNestingDragon from "../pool/nesting-dragon.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
+import _poolNix from "../pool/nix.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
 import _poolOakStreetInnkeeper from "../pool/oak-street-innkeeper.js";
@@ -1193,6 +1194,7 @@ const shard: CardShard = {
     _poolNiblisOfDusk,
     _poolNightClubber,
     _poolNighthawkScavenger,
+    _poolNix,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
     _poolOakStreetInnkeeper,

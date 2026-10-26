@@ -352,6 +352,7 @@ import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarnSilverGolem from "../pool/karn-silver-golem.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
+import _poolKavuPrimarch from "../pool/kavu-primarch.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
 import _poolKenkuArtificer from "../pool/kenku-artificer.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolKarnSilverGolem,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
+    _poolKavuPrimarch,
     _poolKaylasCommand,
     _poolKellanJoinsUp,
     _poolKenkuArtificer,

@@ -24,6 +24,7 @@ import _poolAngelicPurge from "../pool/angelic-purge.js";
 import _poolApothecaryGeist from "../pool/apothecary-geist.js";
 import _poolAppealAuthority from "../pool/appeal-authority.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
+import _poolArcBlade from "../pool/arc-blade.js";
 import _poolArcOfFortune from "../pool/arc-of-fortune.js";
 import _poolArcReactor from "../pool/arc-reactor.js";
 import _poolArchitectOfRestoration from "../pool/architect-of-restoration.js";
@@ -347,6 +348,7 @@ import _poolLightwalker from "../pool/lightwalker.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLongshotSquad from "../pool/longshot-squad.js";
+import _poolLostAuramancers from "../pool/lost-auramancers.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
 import _poolLuminatePrimordial from "../pool/luminate-primordial.js";
 import _poolLurkingRoper from "../pool/lurking-roper.js";
@@ -373,6 +375,7 @@ import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
+import _poolMistmeadowSkulk from "../pool/mistmeadow-skulk.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMiteOverseer from "../pool/mite-overseer.js";
 import _poolMizziumMeddler from "../pool/mizzium-meddler.js";
@@ -504,6 +507,7 @@ import _poolSacredMesa from "../pool/sacred-mesa.js";
 import _poolSaddleOfTheCavalier from "../pool/saddle-of-the-cavalier.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
 import _poolSaintTraftAndRemKarolus from "../pool/saint-traft-and-rem-karolus.js";
+import _poolSaltskitter from "../pool/saltskitter.js";
 import _poolSamiWildcatCaptain from "../pool/sami-wildcat-captain.js";
 import _poolSanctuaryCat from "../pool/sanctuary-cat.js";
 import _poolSanctumOfShatteredHeights from "../pool/sanctum-of-shattered-heights.js";
@@ -763,6 +767,7 @@ const shard: CardShard = {
     _poolApothecaryGeist,
     _poolAppealAuthority,
     _poolApproachOfTheSecondSun,
+    _poolArcBlade,
     _poolArcOfFortune,
     _poolArcReactor,
     _poolArchitectOfRestoration,
@@ -1086,6 +1091,7 @@ const shard: CardShard = {
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
     _poolLongshotSquad,
+    _poolLostAuramancers,
     _poolLoxodonAnchorite,
     _poolLuminatePrimordial,
     _poolLurkingRoper,
@@ -1112,6 +1118,7 @@ const shard: CardShard = {
     _poolMishrasResearchDesk,
     _poolMistLeopard,
     _poolMisthiossFury,
+    _poolMistmeadowSkulk,
     _poolMistvaultBridge,
     _poolMiteOverseer,
     _poolMizziumMeddler,
@@ -1243,6 +1250,7 @@ const shard: CardShard = {
     _poolSaddleOfTheCavalier,
     _poolSaheeliRadiantCreator,
     _poolSaintTraftAndRemKarolus,
+    _poolSaltskitter,
     _poolSamiWildcatCaptain,
     _poolSanctuaryCat,
     _poolSanctumOfShatteredHeights,

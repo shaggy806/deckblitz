@@ -257,6 +257,7 @@ import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
 import _poolGrimFlowering from "../pool/grim-flowering.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
+import _poolGrinningIgnus from "../pool/grinning-ignus.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
 import _poolGryffRider from "../pool/gryff-rider.js";
 import _poolGuardianOfCloverdell from "../pool/guardian-of-cloverdell.js";
@@ -376,6 +377,7 @@ import _poolMarchOfTheCanonized from "../pool/march-of-the-canonized.js";
 import _poolMarduRoughrider from "../pool/mardu-roughrider.js";
 import _poolMarinaVendrell from "../pool/marina-vendrell.js";
 import _poolMarshThreader from "../pool/marsh-threader.js";
+import _poolMarshalingCry from "../pool/marshaling-cry.js";
 import _poolMartyrsCause from "../pool/martyrs-cause.js";
 import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
 import _poolMasterThief from "../pool/master-thief.js";
@@ -632,6 +634,7 @@ import _poolThornglintBridge from "../pool/thornglint-bridge.js";
 import _poolThorntoothWitch from "../pool/thorntooth-witch.js";
 import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
+import _poolThunderbladeCharge from "../pool/thunderblade-charge.js";
 import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
 import _poolTidalTerror from "../pool/tidal-terror.js";
 import _poolTimberShredder from "../pool/timber-shredder.js";
@@ -1013,6 +1016,7 @@ const shard: CardShard = {
     _poolGreenhouseRicketyGazebo,
     _poolGrimFlowering,
     _poolGrindingStation,
+    _poolGrinningIgnus,
     _poolGrizzlyBears,
     _poolGryffRider,
     _poolGuardianOfCloverdell,
@@ -1132,6 +1136,7 @@ const shard: CardShard = {
     _poolMarduRoughrider,
     _poolMarinaVendrell,
     _poolMarshThreader,
+    _poolMarshalingCry,
     _poolMartyrsCause,
     _poolMaskOfGriselbrand,
     _poolMasterThief,
@@ -1388,6 +1393,7 @@ const shard: CardShard = {
     _poolThorntoothWitch,
     _poolThousandMoonsCrackshot,
     _poolThunderWall,
+    _poolThunderbladeCharge,
     _poolThundertrapTrainer,
     _poolTidalTerror,
     _poolTimberShredder,

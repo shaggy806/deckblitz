@@ -337,9 +337,11 @@ import _poolLiciaSanguineTribune from "../pool/licia-sanguine-tribune.js";
 import _poolLifetap from "../pool/lifetap.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
+import _poolLlanowarEmpath from "../pool/llanowar-empath.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
 import _poolLysAlanaBowmaster from "../pool/lys-alana-bowmaster.js";
+import _poolMaelstromDjinn from "../pool/maelstrom-djinn.js";
 import _poolMagmaticChasm from "../pool/magmatic-chasm.js";
 import _poolMagnify from "../pool/magnify.js";
 import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
@@ -360,6 +362,7 @@ import _poolMidnightGuard from "../pool/midnight-guard.js";
 import _poolMinasTirithGarrison from "../pool/minas-tirith-garrison.js";
 import _poolMindShatter from "../pool/mind-shatter.js";
 import _poolMindwhisker from "../pool/mindwhisker.js";
+import _poolMinionsMurmurs from "../pool/minions-murmurs.js";
 import _poolMireBlight from "../pool/mire-blight.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
@@ -437,6 +440,7 @@ import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolPunishingPunch from "../pool/punishing-punch.js";
 import _poolPurgeTheProfane from "../pool/purge-the-profane.js";
+import _poolPutridCyclops from "../pool/putrid-cyclops.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuickeningLicid from "../pool/quickening-licid.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
@@ -449,6 +453,7 @@ import _poolRalAndTheImplicitMaze from "../pool/ral-and-the-implicit-maze.js";
 import _poolRallyOfWings from "../pool/rally-of-wings.js";
 import _poolRalsOutburst from "../pool/rals-outburst.js";
 import _poolRamblingPossum from "../pool/rambling-possum.js";
+import _poolRamosianRevivalist from "../pool/ramosian-revivalist.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
 import _poolRapturousMoment from "../pool/rapturous-moment.js";
 import _poolRavensRunDragoon from "../pool/ravens-run-dragoon.js";
@@ -1065,9 +1070,11 @@ const shard: CardShard = {
     _poolLifetap,
     _poolLightningAngel,
     _poolLightningMare,
+    _poolLlanowarEmpath,
     _poolLluwenExchangeStudent,
     _poolLostInSpace,
     _poolLysAlanaBowmaster,
+    _poolMaelstromDjinn,
     _poolMagmaticChasm,
     _poolMagnify,
     _poolMahaItsFeathersNight,
@@ -1088,6 +1095,7 @@ const shard: CardShard = {
     _poolMinasTirithGarrison,
     _poolMindShatter,
     _poolMindwhisker,
+    _poolMinionsMurmurs,
     _poolMireBlight,
     _poolMirrormereGuardian,
     _poolMjolnirsMight,
@@ -1165,6 +1173,7 @@ const shard: CardShard = {
     _poolPryingEyes,
     _poolPunishingPunch,
     _poolPurgeTheProfane,
+    _poolPutridCyclops,
     _poolQuakestriderCeratops,
     _poolQuickeningLicid,
     _poolQuietPurity,
@@ -1177,6 +1186,7 @@ const shard: CardShard = {
     _poolRallyOfWings,
     _poolRalsOutburst,
     _poolRamblingPossum,
+    _poolRamosianRevivalist,
     _poolRangerEnVec,
     _poolRapturousMoment,
     _poolRavensRunDragoon,

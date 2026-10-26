@@ -149,6 +149,7 @@ import _poolCrypticCommand from "../pool/cryptic-command.js";
 import _poolCultHealer from "../pool/cult-healer.js";
 import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
 import _poolCuriosity from "../pool/curiosity.js";
+import _poolCyclicalEvolution from "../pool/cyclical-evolution.js";
 import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
 import _poolDaiLiCensor from "../pool/dai-li-censor.js";
 import _poolDainLordOfTheIronHills from "../pool/dain-lord-of-the-iron-hills.js";
@@ -329,6 +330,7 @@ import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
 import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
 import _poolKapshoKitefins from "../pool/kapsho-kitefins.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
+import _poolKeldonMegaliths from "../pool/keldon-megaliths.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
@@ -863,6 +865,7 @@ const shard: CardShard = {
     _poolCultHealer,
     _poolCultivatorsCaravan,
     _poolCuriosity,
+    _poolCyclicalEvolution,
     _poolDaggerclawImp,
     _poolDaiLiCensor,
     _poolDainLordOfTheIronHills,
@@ -1043,6 +1046,7 @@ const shard: CardShard = {
     _poolKamiOfTerribleSecrets,
     _poolKapshoKitefins,
     _poolKeiTakahashi,
+    _poolKeldonMegaliths,
     _poolKelsinkoRanger,
     _poolKindredJudgment,
     _poolKingDarienXlviii,

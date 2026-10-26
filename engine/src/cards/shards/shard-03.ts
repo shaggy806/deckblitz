@@ -72,6 +72,7 @@ import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
+import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
@@ -727,6 +728,7 @@ const shard: CardShard = {
     _poolCavesOfKoilos,
     _poolCemeteryRecruitment,
     _poolCentaurBattlemaster,
+    _poolCentaurOmenreader,
     _poolChangelingTitan,
     _poolCharmedClothier,
     _poolChitterspitter,
