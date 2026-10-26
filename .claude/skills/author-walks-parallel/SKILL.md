@@ -34,8 +34,15 @@ first check-in.
   landing and renumbers if another walk took it.
 - **The assignment lands on `main` first.** A child starts from `main` and reads its range off
   `BACKLOG.md`; a range that exists only in this session's head is invisible to it.
-- **Each child lands its own batch**, one at a time on `main`: merge `origin/main`, regenerate
-  the card files, re-run `verify` if anything came in, push, and repeat if `main` moved again.
+- **Each child lands its own batch, under the landing lock** (`scripts/landing-lock.mjs`,
+  from 2026-10-26): it takes the lock, merges `origin/main`, runs its one verify, pushes to
+  `main` and releases, so nothing lands under a verify. Before the lock, every batch that
+  landed while a child verified cost it a merge and a `verify --only fuzzwith` re-check:
+  round thirteen's five sessions paid five, B194 three merges over half an hour. The lock is a
+  branch, `landing-lock`, moved by compare-and-swap pushes (the cloud proxy refuses tag pushes
+  and branch deletions); `node scripts/landing-lock.mjs status` says who holds it. With
+  landings in a row, each merging the last one's `scripts/verify-state.json`, a plain
+  `npm run verify` picks full or quick correctly: no child needs a mode assigned.
 - **One engine feature, built once.** A child about to build a feature first checks
   `git log origin/main` for another walk having built it.
 - **One batch per child.** It ships, updates its walk's hand-off line and stops.
@@ -62,9 +69,10 @@ column; build `engine` first). From it:
    **closed range** (a named first and last set), and shrink the newest-first walk's range so
    it stops before the middle range starts.
 
-Each child's batch is ~80–120 cards: one set, or two small ones. Three sessions is the tested
-size; more works the same way, but each lands through the same merge, so expect more
-merge-and-recheck rounds.
+Each child's batch is ~80–120 cards: one set, or two small ones. Three sessions was the size
+through round twelve, five from round thirteen (2026-10-26): with the landing lock, more
+sessions cost waiting for the lock, not re-checks. Split the oldest-first walk's long range
+for the extra middle walks.
 
 ## 2. Record the assignment and land it
 
@@ -111,7 +119,9 @@ after their start; round three's 47, 57 and 118, the last held up by a fuzzer-fo
 bug). Don't poll in between: each turn here re-reads the coordinator's whole context. When it
 fires, read as little as answers the question:
 
-- `git fetch origin main && git log --oneline origin/main` shows which batches landed.
+- `git fetch origin main && git log --oneline origin/main` shows which batches landed;
+  `node scripts/landing-lock.mjs status` who is landing now. A lock held by a child that
+  has stopped is taken over by the next child after 45 minutes.
 - Only for a child whose batch isn't on `main`: `get_session` (`status_bucket`
   `failed` means its last turn errored; `idle` with no landed batch means it stopped early),
   then its last words — `list_events` with `kinds: ["assistant", "result"]` and `limit: 20`,

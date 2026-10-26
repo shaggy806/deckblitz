@@ -31,7 +31,8 @@ if (git("rev-parse", "--verify", "--quiet", MAIN) === null) process.exit(0);
 const current = git("rev-parse", "--abbrev-ref", "HEAD");
 const branches = (git("for-each-ref", "--format=%(refname:short)", "refs/remotes/origin") ?? "")
   .split("\n")
-  .filter((b) => b && b !== MAIN && b !== "origin/HEAD" && b !== "origin");
+  // landing-lock: the parallel walks' lock (scripts/landing-lock.mjs), not work.
+  .filter((b) => b && b !== MAIN && b !== "origin/HEAD" && b !== "origin" && b !== "origin/landing-lock");
 
 const unmerged = [];
 const unrelated = [];
