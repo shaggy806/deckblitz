@@ -110,7 +110,7 @@ section keeps only what to do next.
   the lands' "if this would enter, sacrifice a … instead" — `replacement:enter-replacement-sacrifice`
   — and banding leading with 4 each, an opponent choosing the mode with 3); batch 166 Mirage's
   first half (its 110 most-played left), no feature built (70 authored, 40 blocked, nothing
-  shared by more than two); batch 169 the rest of Mirage, no feature built (65 authored, 45
+  shared by more than two); batch 169 the rest of Mirage, no feature built (67 authored, 43
   blocked, its flash-and-sacrifice rider leading with 3). **Next, Visions** (113 left: one batch,
   five agents), then Weatherlight (119) and Tempest (178). Visions's lead should first build
   the Mirage block's **"cast as though it had flash; if cast when a sorcery couldn't have been,
