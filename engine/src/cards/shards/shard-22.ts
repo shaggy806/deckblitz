@@ -714,6 +714,7 @@ import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
 import _tokens11OozeToken from "../tokens/1-1-ooze-token.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
 import _tokensAxeToken from "../tokens/axe-token.js";
+import _tokensCloudSpriteToken from "../tokens/cloud-sprite-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
 import _tokensElementalToken55BlueRedFlying from "../tokens/elemental-token-5-5-blue-red-flying.js";
@@ -725,6 +726,7 @@ import _tokensPhobos from "../tokens/phobos.js";
 import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
 import _tokensRedMinotaurTokenHaste from "../tokens/red-minotaur-token-haste.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
+import _tokensSparkElementalToken from "../tokens/spark-elemental-token.js";
 import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 import _tokensXXSpiritTokenBlack from "../tokens/x-x-spirit-token-black.js";
 
@@ -1443,6 +1445,7 @@ const shard: CardShard = {
     _tokens11OozeToken,
     _tokensAlienTokenAlienInvasion,
     _tokensAxeToken,
+    _tokensCloudSpriteToken,
     _tokensDragonEggToken,
     _tokensDwarfToken,
     _tokensElementalToken55BlueRedFlying,
@@ -1454,6 +1457,7 @@ const shard: CardShard = {
     _tokensRatTokenGenkuFutureShaper,
     _tokensRedMinotaurTokenHaste,
     _tokensSnakeToken,
+    _tokensSparkElementalToken,
     _tokensStoneBoulderToken,
     _tokensXXSpiritTokenBlack,
   ],

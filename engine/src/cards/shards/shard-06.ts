@@ -538,6 +538,7 @@ import _poolSizzle from "../pool/sizzle.js";
 import _poolSkillfulLunge from "../pool/skillful-lunge.js";
 import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
 import _poolSkitteringInvasion from "../pool/skittering-invasion.js";
+import _poolSkizzikSurger from "../pool/skizzik-surger.js";
 import _poolSkyknightSquire from "../pool/skyknight-squire.js";
 import _poolSkylineScout from "../pool/skyline-scout.js";
 import _poolSlaughterCry from "../pool/slaughter-cry.js";
@@ -1251,6 +1252,7 @@ const shard: CardShard = {
     _poolSkillfulLunge,
     _poolSkirsdagFlayer,
     _poolSkitteringInvasion,
+    _poolSkizzikSurger,
     _poolSkyknightSquire,
     _poolSkylineScout,
     _poolSlaughterCry,

@@ -760,6 +760,7 @@ import _tokensMoonfolkToken from "../tokens/moonfolk-token.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensPhyrexianWurmToken from "../tokens/phyrexian-wurm-token.js";
+import _tokensRedGiantToken44 from "../tokens/red-giant-token-4-4.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
@@ -1527,6 +1528,7 @@ const shard: CardShard = {
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,
     _tokensPhyrexianWurmToken,
+    _tokensRedGiantToken44,
     _tokensRedWhiteSoldierHasteToken,
     _tokensSkeletonToken,
     _tokensSliverToken,

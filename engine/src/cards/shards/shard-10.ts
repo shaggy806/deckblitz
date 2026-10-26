@@ -567,6 +567,7 @@ import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulBleed from "../pool/soul-bleed.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
+import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
@@ -1296,6 +1297,7 @@ const shard: CardShard = {
     _poolSorinsGuide,
     _poolSoulBleed,
     _poolSoulSnuffers,
+    _poolSoultetherGolem,
     _poolSozinsComet,
     _poolSpatialContortion,
     _poolSpectacularSkywhale,

@@ -138,6 +138,7 @@ import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
 import _poolDeathpactAngel from "../pool/deathpact-angel.js";
+import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
 import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
     _poolDeathpactAngel,
+    _poolDeepcavernImp,
     _poolDeepmuckDesperado,
     _poolDeeprootElite,
     _poolDeepwoodTantiv,

@@ -522,6 +522,7 @@ import _poolScreamerKiller from "../pool/screamer-killer.js";
 import _poolSeafloorDebris from "../pool/seafloor-debris.js";
 import _poolSearslicerGoblin from "../pool/searslicer-goblin.js";
 import _poolSecondThoughts from "../pool/second-thoughts.js";
+import _poolSecondWind from "../pool/second-wind.js";
 import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSeismicWave from "../pool/seismic-wave.js";
@@ -1254,6 +1255,7 @@ const shard: CardShard = {
     _poolSeafloorDebris,
     _poolSearslicerGoblin,
     _poolSecondThoughts,
+    _poolSecondWind,
     _poolSeedshipAgrarian,
     _poolSeethingLandscape,
     _poolSeismicWave,

@@ -210,6 +210,7 @@ import _poolFirstSphereGargantua from "../pool/first-sphere-gargantua.js";
 import _poolFlameJet from "../pool/flame-jet.js";
 import _poolFleshEaterImp from "../pool/flesh-eater-imp.js";
 import _poolFloodhound from "../pool/floodhound.js";
+import _poolFlowstoneEmbrace from "../pool/flowstone-embrace.js";
 import _poolFlowstoneGiant from "../pool/flowstone-giant.js";
 import _poolFodderTosser from "../pool/fodder-tosser.js";
 import _poolForebodingRuins from "../pool/foreboding-ruins.js";
@@ -905,6 +906,7 @@ const shard: CardShard = {
     _poolFlameJet,
     _poolFleshEaterImp,
     _poolFloodhound,
+    _poolFlowstoneEmbrace,
     _poolFlowstoneGiant,
     _poolFodderTosser,
     _poolForebodingRuins,
