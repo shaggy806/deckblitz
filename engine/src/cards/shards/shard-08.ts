@@ -191,6 +191,7 @@ import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEmeraldCharm from "../pool/emerald-charm.js";
 import _poolEmissaryOfSunrise from "../pool/emissary-of-sunrise.js";
 import _poolEndlessRanksOfTheDead from "../pool/endless-ranks-of-the-dead.js";
+import _poolEnergyBolt from "../pool/energy-bolt.js";
 import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
 import _poolErdwalRipper from "../pool/erdwal-ripper.js";
 import _poolEruditeWizard from "../pool/erudite-wizard.js";
@@ -534,6 +535,7 @@ import _poolSoulOfTheros from "../pool/soul-of-theros.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
+import _poolSpectralGuardian from "../pool/spectral-guardian.js";
 import _poolSpellContortion from "../pool/spell-contortion.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
@@ -880,6 +882,7 @@ const shard: CardShard = {
     _poolEmeraldCharm,
     _poolEmissaryOfSunrise,
     _poolEndlessRanksOfTheDead,
+    _poolEnergyBolt,
     _poolEntrapmentManeuver,
     _poolErdwalRipper,
     _poolEruditeWizard,
@@ -1223,6 +1226,7 @@ const shard: CardShard = {
     _poolSoulShred,
     _poolSparringRegimen,
     _poolSpeakSecrets,
+    _poolSpectralGuardian,
     _poolSpellContortion,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,

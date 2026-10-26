@@ -108,6 +108,7 @@ import _poolChemistersInsight from "../pool/chemisters-insight.js";
 import _poolChokingRestraints from "../pool/choking-restraints.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
+import _poolCinderCloud from "../pool/cinder-cloud.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
@@ -143,11 +144,13 @@ import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
+import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
+import _poolDreadSpecter from "../pool/dread-specter.js";
 import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
 import _poolDreadfeastDemon from "../pool/dreadfeast-demon.js";
 import _poolDreamTrawler from "../pool/dream-trawler.js";
@@ -341,6 +344,7 @@ import _poolMagebaneLizard from "../pool/magebane-lizard.js";
 import _poolMagicDamper from "../pool/magic-damper.js";
 import _poolMagmabloodArchaic from "../pool/magmablood-archaic.js";
 import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
+import _poolMalignantGrowth from "../pool/malignant-growth.js";
 import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
@@ -579,6 +583,7 @@ import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
+import _poolThirst from "../pool/thirst.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
 import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
@@ -629,6 +634,7 @@ import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
 import _poolWardedBattlements from "../pool/warded-battlements.js";
 import _poolWatchfulAutomaton from "../pool/watchful-automaton.js";
+import _poolWaveElemental from "../pool/wave-elemental.js";
 import _poolWaveWingElemental from "../pool/wave-wing-elemental.js";
 import _poolWebShooters from "../pool/web-shooters.js";
 import _poolWeiInfantry from "../pool/wei-infantry.js";
@@ -784,6 +790,7 @@ const shard: CardShard = {
     _poolChokingRestraints,
     _poolChromeCompanion,
     _poolChulane,
+    _poolCinderCloud,
     _poolCitanulDruid,
     _poolClarionConqueror,
     _poolClericClass,
@@ -819,11 +826,13 @@ const shard: CardShard = {
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
+    _poolDiscordantSpirit,
     _poolDisownedAncestor,
     _poolDivideByZero,
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragonRoost,
+    _poolDreadSpecter,
     _poolDreadedBatCloud,
     _poolDreadfeastDemon,
     _poolDreamTrawler,
@@ -1017,6 +1026,7 @@ const shard: CardShard = {
     _poolMagicDamper,
     _poolMagmabloodArchaic,
     _poolMagusOfTheWheel,
+    _poolMalignantGrowth,
     _poolMammothBellow,
     _poolManaGeyser,
     _poolManaLeak,
@@ -1255,6 +1265,7 @@ const shard: CardShard = {
     _poolTheElderDragonWar,
     _poolTheLunarWhale,
     _poolThermalNavigator,
+    _poolThirst,
     _poolThopterMechanic,
     _poolThoroughInvestigation,
     _poolThoseWhoServe,
@@ -1305,6 +1316,7 @@ const shard: CardShard = {
     _poolWarEffort,
     _poolWardedBattlements,
     _poolWatchfulAutomaton,
+    _poolWaveElemental,
     _poolWaveWingElemental,
     _poolWebShooters,
     _poolWeiInfantry,

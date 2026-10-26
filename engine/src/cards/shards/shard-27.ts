@@ -596,6 +596,7 @@ import _poolUthrosPsionicist from "../pool/uthros-psionicist.js";
 import _poolValgavothsLair from "../pool/valgavoths-lair.js";
 import _poolVanishFromSight from "../pool/vanish-from-sight.js";
 import _poolVanquishTheFoul from "../pool/vanquish-the-foul.js";
+import _poolVaporousDjinn from "../pool/vaporous-djinn.js";
 import _poolVatOfRebirth from "../pool/vat-of-rebirth.js";
 import _poolVectisSilencers from "../pool/vectis-silencers.js";
 import _poolVeiledAscension from "../pool/veiled-ascension.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolValgavothsLair,
     _poolVanishFromSight,
     _poolVanquishTheFoul,
+    _poolVaporousDjinn,
     _poolVatOfRebirth,
     _poolVectisSilencers,
     _poolVeiledAscension,

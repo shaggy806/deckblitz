@@ -483,6 +483,7 @@ import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
+import _poolStalkingTiger from "../pool/stalking-tiger.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStartledAwake from "../pool/startled-awake.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolSpitefulSquad,
     _poolSplendidReclamation,
     _poolStaffOfTheAges,
+    _poolStalkingTiger,
     _poolStarlitAngel,
     _poolStartledAwake,
     _poolStaunchCrewmate,

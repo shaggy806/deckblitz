@@ -468,6 +468,7 @@ import _poolSailorOfMeans from "../pool/sailor-of-means.js";
 import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
+import _poolSandbarCrocodile from "../pool/sandbar-crocodile.js";
 import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
 import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
 import _poolSavagePunch from "../pool/savage-punch.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolSanctifierOfSouls,
     _poolSanctumOfCalmWaters,
     _poolSanctumOfUgin,
+    _poolSandbarCrocodile,
     _poolSarpadianSimulacrum,
     _poolSatyaAetherfluxGenius,
     _poolSavagePunch,

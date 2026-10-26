@@ -142,6 +142,7 @@ import _poolDeadeyeTormentor from "../pool/deadeye-tormentor.js";
 import _poolDeadpoolTradingCard from "../pool/deadpool-trading-card.js";
 import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
 import _poolDeceiveTheMessenger from "../pool/deceive-the-messenger.js";
+import _poolDecomposition from "../pool/decomposition.js";
 import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDespoticScepter from "../pool/despotic-scepter.js";
@@ -787,6 +788,7 @@ const shard: CardShard = {
     _poolDeadpoolTradingCard,
     _poolDeathgazeCockatrice,
     _poolDeceiveTheMessenger,
+    _poolDecomposition,
     _poolDemonOfCatastrophes,
     _poolDesertOfTheFervent,
     _poolDespoticScepter,

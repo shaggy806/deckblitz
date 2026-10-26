@@ -256,6 +256,7 @@ import _poolHopeTender from "../pool/hope-tender.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
 import _poolHornbashMentor from "../pool/hornbash-mentor.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
+import _poolHorribleHordes from "../pool/horrible-hordes.js";
 import _poolHulkingRaptor from "../pool/hulking-raptor.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
 import _poolIcatianPriest from "../pool/icatian-priest.js";
@@ -282,6 +283,7 @@ import _poolJoyfulStormsculptor from "../pool/joyful-stormsculptor.js";
 import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
 import _poolJunktown from "../pool/junktown.js";
 import _poolKaervekThePunisher from "../pool/kaervek-the-punisher.js";
+import _poolKaerveksHex from "../pool/kaerveks-hex.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
 import _poolKarnsBastion from "../pool/karns-bastion.js";
 import _poolKarplusanGiant from "../pool/karplusan-giant.js";
@@ -916,6 +918,7 @@ const shard: CardShard = {
     _poolHorizonSeeker,
     _poolHornbashMentor,
     _poolHornetQueen,
+    _poolHorribleHordes,
     _poolHulkingRaptor,
     _poolHungrySpriggan,
     _poolIcatianPriest,
@@ -942,6 +945,7 @@ const shard: CardShard = {
     _poolJunjiTheMidnightSky,
     _poolJunktown,
     _poolKaervekThePunisher,
+    _poolKaerveksHex,
     _poolKamiOfTheCrescentMoon,
     _poolKarnsBastion,
     _poolKarplusanGiant,

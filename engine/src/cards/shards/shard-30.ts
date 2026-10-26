@@ -231,6 +231,7 @@ import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
+import _poolGoblinEliteInfantry from "../pool/goblin-elite-infantry.js";
 import _poolGoblinMaskmaker from "../pool/goblin-maskmaker.js";
 import _poolGoblinSappers from "../pool/goblin-sappers.js";
 import _poolGoblinSmuggler from "../pool/goblin-smuggler.js";
@@ -446,6 +447,7 @@ import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
+import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
@@ -884,6 +886,7 @@ const shard: CardShard = {
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
+    _poolGoblinEliteInfantry,
     _poolGoblinMaskmaker,
     _poolGoblinSappers,
     _poolGoblinSmuggler,
@@ -1099,6 +1102,7 @@ const shard: CardShard = {
     _poolPugnaciousPugilist,
     _poolPumpkinBombardment,
     _poolPurpleCrystalCrab,
+    _poolRadiantEssence,
     _poolRakdosPatronOfChaos,
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,

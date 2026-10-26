@@ -97,6 +97,7 @@ import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
 import _poolCaptivatingGyre from "../pool/captivating-gyre.js";
 import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
+import _poolCatacombDragon from "../pool/catacomb-dragon.js";
 import _poolCelestialMessenger from "../pool/celestial-messenger.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
@@ -121,6 +122,7 @@ import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
 import _poolCrushContraband from "../pool/crush-contraband.js";
+import _poolCryptCobra from "../pool/crypt-cobra.js";
 import _poolCryptOfAgadeem from "../pool/crypt-of-agadeem.js";
 import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
@@ -176,6 +178,7 @@ import _poolElektraFemmeFatale from "../pool/elektra-femme-fatale.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolEllivereOfTheWildCourt from "../pool/ellivere-of-the-wild-court.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
+import _poolEmberwildeDjinn from "../pool/emberwilde-djinn.js";
 import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
 import _poolEnduringSliver from "../pool/enduring-sliver.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
@@ -606,6 +609,7 @@ import _poolTwiningTwins from "../pool/twining-twins.js";
 import _poolUltimeciaTimeSorceress from "../pool/ultimecia-time-sorceress.js";
 import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
+import _poolUnerringSling from "../pool/unerring-sling.js";
 import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
 import _poolVampireOfTheDireMoon from "../pool/vampire-of-the-dire-moon.js";
 import _poolVampiricTutor from "../pool/vampiric-tutor.js";
@@ -772,6 +776,7 @@ const shard: CardShard = {
     _poolCapitalGuard,
     _poolCaptivatingGyre,
     _poolCaseyJonesVigilante,
+    _poolCatacombDragon,
     _poolCelestialMessenger,
     _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,
@@ -796,6 +801,7 @@ const shard: CardShard = {
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
     _poolCrushContraband,
+    _poolCryptCobra,
     _poolCryptOfAgadeem,
     _poolCrystallineSliver,
     _poolCultConscript,
@@ -851,6 +857,7 @@ const shard: CardShard = {
     _poolElementalistAdept,
     _poolEllivereOfTheWildCourt,
     _poolElvenkingsHarper,
+    _poolEmberwildeDjinn,
     _poolEndlessFootAssault,
     _poolEnduringSliver,
     _poolEnragedFlamecaster,
@@ -1281,6 +1288,7 @@ const shard: CardShard = {
     _poolUltimeciaTimeSorceress,
     _poolUmbralExpanse,
     _poolUndeadButler,
+    _poolUnerringSling,
     _poolUnyaroBeeSting,
     _poolVampireOfTheDireMoon,
     _poolVampiricTutor,

@@ -41,6 +41,7 @@ import _poolAshioksSkulker from "../pool/ashioks-skulker.js";
 import _poolAstralCornucopia from "../pool/astral-cornucopia.js";
 import _poolAtreusImpulsiveSon from "../pool/atreus-impulsive-son.js";
 import _poolAttendedSocialite from "../pool/attended-socialite.js";
+import _poolAuspiciousAncestor from "../pool/auspicious-ancestor.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
 import _poolBadlandsRevival from "../pool/badlands-revival.js";
@@ -117,6 +118,7 @@ import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCrashThrough from "../pool/crash-through.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
 import _poolCrushTheWeak from "../pool/crush-the-weak.js";
+import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
@@ -296,6 +298,7 @@ import _poolJeskaiMonument from "../pool/jeskai-monument.js";
 import _poolJhovallRider from "../pool/jhovall-rider.js";
 import _poolJolenePlunderingPugilist from "../pool/jolene-plundering-pugilist.js";
 import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
+import _poolKaerveksPurge from "../pool/kaerveks-purge.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
 import _poolKangPrime from "../pool/kang-prime.js";
@@ -345,6 +348,7 @@ import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
+import _poolMerfolkRaiders from "../pool/merfolk-raiders.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
@@ -418,6 +422,7 @@ import _poolProsperousThief from "../pool/prosperous-thief.js";
 import _poolPsychicVenom from "../pool/psychic-venom.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
 import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
+import _poolPurrajOfUrborg from "../pool/purraj-of-urborg.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
 import _poolPyreticHunter from "../pool/pyretic-hunter.js";
 import _poolPyrokinesis from "../pool/pyrokinesis.js";
@@ -462,6 +467,7 @@ import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
 import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
 import _poolSanctifierEnVec from "../pool/sanctifier-en-vec.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
+import _poolSawbackManticore from "../pool/sawback-manticore.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
 import _poolScouredBarrens from "../pool/scoured-barrens.js";
 import _poolScreamerKiller from "../pool/screamer-killer.js";
@@ -704,6 +710,7 @@ const shard: CardShard = {
     _poolAstralCornucopia,
     _poolAtreusImpulsiveSon,
     _poolAttendedSocialite,
+    _poolAuspiciousAncestor,
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
     _poolBadlandsRevival,
@@ -780,6 +787,7 @@ const shard: CardShard = {
     _poolCrashThrough,
     _poolCrosissAttendant,
     _poolCrushTheWeak,
+    _poolCrystalGolem,
     _poolCurioVendor,
     _poolCursedFlesh,
     _poolCutYourLosses,
@@ -959,6 +967,7 @@ const shard: CardShard = {
     _poolJhovallRider,
     _poolJolenePlunderingPugilist,
     _poolKadenaSlinkingSorcerer,
+    _poolKaerveksPurge,
     _poolKamahlPitFighter,
     _poolKambalProfiteeringMayor,
     _poolKangPrime,
@@ -1008,6 +1017,7 @@ const shard: CardShard = {
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
     _poolMerfolkBranchwalker,
+    _poolMerfolkRaiders,
     _poolMeriasOutrider,
     _poolMessengerHawk,
     _poolMiasmicMummy,
@@ -1081,6 +1091,7 @@ const shard: CardShard = {
     _poolPsychicVenom,
     _poolPullFromTomorrow,
     _poolPurestrainGenestealer,
+    _poolPurrajOfUrborg,
     _poolPyreCharger,
     _poolPyreticHunter,
     _poolPyrokinesis,
@@ -1125,6 +1136,7 @@ const shard: CardShard = {
     _poolSabretoothTiger,
     _poolSanctifierEnVec,
     _poolSarkhanDragonAscendant,
+    _poolSawbackManticore,
     _poolScarwoodTreefolk,
     _poolScouredBarrens,
     _poolScreamerKiller,

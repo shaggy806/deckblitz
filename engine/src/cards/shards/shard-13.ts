@@ -318,6 +318,7 @@ import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLeapfrog from "../pool/leapfrog.js";
 import _poolLeechingSliver from "../pool/leeching-sliver.js";
+import _poolLeeringGargoyle from "../pool/leering-gargoyle.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
@@ -480,6 +481,7 @@ import _poolSeeTheUnwritten from "../pool/see-the-unwritten.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
+import _poolSereneHeart from "../pool/serene-heart.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
 import _poolShorikaiGenesisEngine from "../pool/shorikai-genesis-engine.js";
@@ -639,6 +641,7 @@ import _poolZephid from "../pool/zephid.js";
 import _poolZephyrCharge from "../pool/zephyr-charge.js";
 import _poolZephyrSinger from "../pool/zephyr-singer.js";
 import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
+import _poolZombieMob from "../pool/zombie-mob.js";
 import _poolZombieOutlander from "../pool/zombie-outlander.js";
 import _tokensAlienSalamanderToken from "../tokens/alien-salamander-token.js";
 import _tokensBatToken from "../tokens/bat-token.js";
@@ -658,6 +661,7 @@ import _tokensPirateTokenNettlingNuisance from "../tokens/pirate-token-nettling-
 import _tokensSatyrToken from "../tokens/satyr-token.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
 import _tokensVillainToken from "../tokens/villain-token.js";
+import _tokensWoodToken from "../tokens/wood-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -976,6 +980,7 @@ const shard: CardShard = {
     _poolLargerThanLife,
     _poolLeapfrog,
     _poolLeechingSliver,
+    _poolLeeringGargoyle,
     _poolLegionLoyalty,
     _poolLeylineDowser,
     _poolLightningHelix,
@@ -1138,6 +1143,7 @@ const shard: CardShard = {
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSenselessRage,
+    _poolSereneHeart,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
     _poolShorikaiGenesisEngine,
@@ -1297,6 +1303,7 @@ const shard: CardShard = {
     _poolZephyrCharge,
     _poolZephyrSinger,
     _poolZndrspltEyeOfWisdom,
+    _poolZombieMob,
     _poolZombieOutlander,
   ],
   tokens: [
@@ -1318,6 +1325,7 @@ const shard: CardShard = {
     _tokensSatyrToken,
     _tokensSpiritToken,
     _tokensVillainToken,
+    _tokensWoodToken,
   ],
 };
 

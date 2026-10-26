@@ -212,6 +212,7 @@ import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
 import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
+import _poolFlameElemental from "../pool/flame-elemental.js";
 import _poolFlametongueYearling from "../pool/flametongue-yearling.js";
 import _poolFlamingFistOfficer from "../pool/flaming-fist-officer.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
@@ -317,6 +318,7 @@ import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJeskaiRunemark from "../pool/jeskai-runemark.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
+import _poolJungleWurm from "../pool/jungle-wurm.js";
 import _poolKamberThePlunderer from "../pool/kamber-the-plunderer.js";
 import _poolKaslaTheBrokenHalo from "../pool/kasla-the-broken-halo.js";
 import _poolKatsumasaTheAnimator from "../pool/katsumasa-the-animator.js";
@@ -868,6 +870,7 @@ const shard: CardShard = {
     _poolFiligreeSages,
     _poolFinneasAceArcher,
     _poolFireNavyTrebuchet,
+    _poolFlameElemental,
     _poolFlametongueYearling,
     _poolFlamingFistOfficer,
     _poolFlawlessManeuver,
@@ -973,6 +976,7 @@ const shard: CardShard = {
     _poolJeskaiRevelation,
     _poolJeskaiRunemark,
     _poolJuganDefendsTheTemple,
+    _poolJungleWurm,
     _poolKamberThePlunderer,
     _poolKaslaTheBrokenHalo,
     _poolKatsumasaTheAnimator,

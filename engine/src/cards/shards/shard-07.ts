@@ -366,6 +366,7 @@ import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
+import _poolNocturnalRaid from "../pool/nocturnal-raid.js";
 import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNutCollector from "../pool/nut-collector.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
@@ -423,6 +424,7 @@ import _poolRampagingSpiketail from "../pool/rampaging-spiketail.js";
 import _poolRampantRejuvenator from "../pool/rampant-rejuvenator.js";
 import _poolRapidHybridization from "../pool/rapid-hybridization.js";
 import _poolRaptorCompanion from "../pool/raptor-companion.js";
+import _poolRashidaScalebane from "../pool/rashida-scalebane.js";
 import _poolRaugrinTriome from "../pool/raugrin-triome.js";
 import _poolRavenhillFlock from "../pool/ravenhill-flock.js";
 import _poolRavenousRobots from "../pool/ravenous-robots.js";
@@ -1048,6 +1050,7 @@ const shard: CardShard = {
     _poolNightpackAmbusher,
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
+    _poolNocturnalRaid,
     _poolNurturingBristleback,
     _poolNutCollector,
     _poolNyleaKeenEyed,
@@ -1105,6 +1108,7 @@ const shard: CardShard = {
     _poolRampantRejuvenator,
     _poolRapidHybridization,
     _poolRaptorCompanion,
+    _poolRashidaScalebane,
     _poolRaugrinTriome,
     _poolRavenhillFlock,
     _poolRavenousRobots,

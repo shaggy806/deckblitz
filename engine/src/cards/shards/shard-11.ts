@@ -79,6 +79,7 @@ import _poolBreedingPool from "../pool/breeding-pool.js";
 import _poolBriarHydra from "../pool/briar-hydra.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
+import _poolBurningPalmEfreet from "../pool/burning-palm-efreet.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
 import _poolCabalPaladin from "../pool/cabal-paladin.js";
 import _poolCabalRitual from "../pool/cabal-ritual.js";
@@ -443,6 +444,7 @@ import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolRefuseToYield from "../pool/refuse-to-yield.js";
+import _poolReignOfChaos from "../pool/reign-of-chaos.js";
 import _poolRendclawTrow from "../pool/rendclaw-trow.js";
 import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
@@ -748,6 +750,7 @@ const shard: CardShard = {
     _poolBriarHydra,
     _poolBrittleEffigy,
     _poolBroodWeaver,
+    _poolBurningPalmEfreet,
     _poolBurningTreeVandal,
     _poolCabalPaladin,
     _poolCabalRitual,
@@ -1112,6 +1115,7 @@ const shard: CardShard = {
     _poolRazorSwine,
     _poolRecumbentBliss,
     _poolRefuseToYield,
+    _poolReignOfChaos,
     _poolRendclawTrow,
     _poolRepulsorBots,
     _poolRevelsongHorn,

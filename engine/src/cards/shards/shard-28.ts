@@ -247,6 +247,7 @@ import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
 import _poolHighbornVampire from "../pool/highborn-vampire.js";
 import _poolHighwayRobber from "../pool/highway-robber.js";
 import _poolHiredPoisoner from "../pool/hired-poisoner.js";
+import _poolHivisOfTheScale from "../pool/hivis-of-the-scale.js";
 import _poolHolyArmor from "../pool/holy-armor.js";
 import _poolHordewingSkaab from "../pool/hordewing-skaab.js";
 import _poolHorizonCanopy from "../pool/horizon-canopy.js";
@@ -916,6 +917,7 @@ const shard: CardShard = {
     _poolHighbornVampire,
     _poolHighwayRobber,
     _poolHiredPoisoner,
+    _poolHivisOfTheScale,
     _poolHolyArmor,
     _poolHordewingSkaab,
     _poolHorizonCanopy,

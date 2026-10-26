@@ -495,6 +495,7 @@ import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSirenOfTheSilentSong from "../pool/siren-of-the-silent-song.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
+import _poolSkulkingGhost from "../pool/skulking-ghost.js";
 import _poolSkullsnatcher from "../pool/skullsnatcher.js";
 import _poolSkyDiamond from "../pool/sky-diamond.js";
 import _poolSkyhunterPatrol from "../pool/skyhunter-patrol.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolSinisterStarfish,
     _poolSirenOfTheSilentSong,
     _poolSkeletalSnake,
+    _poolSkulkingGhost,
     _poolSkullsnatcher,
     _poolSkyDiamond,
     _poolSkyhunterPatrol,

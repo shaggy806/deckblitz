@@ -13,6 +13,7 @@ import _poolAlenaKessigTrapper from "../pool/alena-kessig-trapper.js";
 import _poolAllOfHistoryAllAtOnce from "../pool/all-of-history-all-at-once.js";
 import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
+import _poolAmuletOfUnmaking from "../pool/amulet-of-unmaking.js";
 import _poolAncestralBlade from "../pool/ancestral-blade.js";
 import _poolAngelOfFlightAlabaster from "../pool/angel-of-flight-alabaster.js";
 import _poolAngelOfTheGodPharaoh from "../pool/angel-of-the-god-pharaoh.js";
@@ -673,6 +674,7 @@ const shard: CardShard = {
     _poolAllOfHistoryAllAtOnce,
     _poolAlmostPerfect,
     _poolAmateurHero,
+    _poolAmuletOfUnmaking,
     _poolAncestralBlade,
     _poolAngelOfFlightAlabaster,
     _poolAngelOfTheGodPharaoh,

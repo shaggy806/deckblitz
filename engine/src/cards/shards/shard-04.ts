@@ -333,6 +333,7 @@ import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
+import _poolMerfolkSeer from "../pool/merfolk-seer.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
@@ -402,6 +403,7 @@ import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
 import _poolPucasCovenant from "../pool/pucas-covenant.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
+import _poolPyricSalamander from "../pool/pyric-salamander.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
 import _poolRadhasFirebrand from "../pool/radhas-firebrand.js";
 import _poolRagingRedcap from "../pool/raging-redcap.js";
@@ -411,6 +413,7 @@ import _poolRallyTheMonastery from "../pool/rally-the-monastery.js";
 import _poolRampagingGeoderm from "../pool/rampaging-geoderm.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
+import _poolRavenousVampire from "../pool/ravenous-vampire.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
@@ -432,6 +435,7 @@ import _poolRhinosRampage from "../pool/rhinos-rampage.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
+import _poolRockBasilisk from "../pool/rock-basilisk.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
 import _poolRoilmagesTrick from "../pool/roilmages-trick.js";
 import _poolRootSliver from "../pool/root-sliver.js";
@@ -973,6 +977,7 @@ const shard: CardShard = {
     _poolMeetingOfTheFive,
     _poolMemnarchTheWarden,
     _poolMentalNote,
+    _poolMerfolkSeer,
     _poolMindfulBiomancer,
     _poolMistfireWeaver,
     _poolMockingbirdAceAgent,
@@ -1042,6 +1047,7 @@ const shard: CardShard = {
     _poolPucasCovenant,
     _poolPutridLeech,
     _poolPyreticRitual,
+    _poolPyricSalamander,
     _poolQuandrixCampus,
     _poolRadhasFirebrand,
     _poolRagingRedcap,
@@ -1051,6 +1057,7 @@ const shard: CardShard = {
     _poolRampagingGeoderm,
     _poolRangersLongbow,
     _poolRaucousEntertainer,
+    _poolRavenousVampire,
     _poolRazeTheEffigy,
     _poolRecklessAmplimancer,
     _poolReckonersBargain,
@@ -1072,6 +1079,7 @@ const shard: CardShard = {
     _poolRhovanionRampager,
     _poolRidgeRannet,
     _poolRitualOfSteel,
+    _poolRockBasilisk,
     _poolRohgahhKherKeepOverlord,
     _poolRoilmagesTrick,
     _poolRootSliver,

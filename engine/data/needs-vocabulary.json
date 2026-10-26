@@ -10436,6 +10436,74 @@
   },
   "condition:turn-history-per-player": {
    "example": "Lavaball Trap: \"if an opponent had two or more lands enter the battlefield under their control this turn\" — turn-history with who: opponent sums across all opponents, so it must count one opponent at a time."
+  },
+  "bug:count-for-target-illegal-not-zero": {
+   "family": "effect:amount-new-variants",
+   "example": "Superior Numbers: countOf.forTarget on a player slot that became illegal reads 0 rather than failing (rule 608.2b), so a difference grows"
+  },
+  "condition:before-blockers-first-combat": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Acidic Dagger: \"Activate only before blockers are declared\""
+  },
+  "condition:that-player-life-intervening-if": {
+   "family": "condition:player-state-thresholds",
+   "example": "Razor Pendulum: \"at the beginning of each player's end step, if that player has 5 or less life\" — a life-total condition for that-player reads false as the trigger checks"
+  },
+  "cost:sacrifice-named-permanents": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Urborg Panther: \"Sacrifice creatures named Feral Shadow, Breathstealer, and Urborg Panther\""
+  },
+  "cost:unless-pay-generic-per-counter": {
+   "family": "effect:choices-by-other-players",
+   "example": "Energy Vortex: \"unless that player pays {1} for each vortex counter on this enchantment\""
+  },
+  "decision:look-then-optional-sacrifice-and-pay": {
+   "family": "effect:this-way-results",
+   "example": "Preferred Selection: look at the top two, then you may sacrifice this and pay {2}{G}{G}; if you do, take one"
+  },
+  "decision:per-card-discard-unless-pay-life": {
+   "family": "effect:choices-by-other-players",
+   "example": "Sirocco: reveal a hand; for each blue instant in it, its owner discards it unless they pay 4 life"
+  },
+  "effect:becomes-blocked": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Dazzling Beauty: \"target unblocked attacking creature becomes blocked\""
+  },
+  "effect:delayed-trigger-keyed-to-target": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Barreling Attack: \"When that creature becomes blocked this turn, it gets +1/+1 …\" — a delayed trigger that follows a target, not its source"
+  },
+  "effect:prevent-combat-damage-by-source": {
+   "family": "replacement:damage-modification",
+   "example": "Mtenda Lion: \"prevent all combat damage that would be dealt by this creature this turn\""
+  },
+  "effect:spell-color-change-carries-to-permanent": {
+   "family": "effect:target-spec-additions",
+   "example": "Ersatz Gnomes: a creature spell made colourless enters colourless and stays so (its ruling)"
+  },
+  "effect:unless-put-card-from-hand-on-top": {
+   "family": "effect:choices-by-other-players",
+   "example": "Tainted Specter: \"discards a card unless they put a card from their hand on top of their library\""
+  },
+  "filter:attacked-you-this-turn": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Jabari's Influence: \"target nonartifact, nonblack creature that attacked you this turn\" — attackedThisTurn counts any defender"
+  },
+  "replacement:dies-to-library-top": {
+   "family": "replacement:new-event-replacements",
+   "example": "Gravebane Zombie: \"If this creature would die, put it on top of its owner's library instead\" — the twin of dies-to-library-bottom"
+  },
+  "static:attacks-if-another-creature-attacks": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Ekundu Cyclops: \"If a creature you control attacks, this creature also attacks if able\""
+  },
+  "static:spell-grants-ability-while-on-stack": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Torrent of Lava: \"As long as this spell is on the stack, each creature has '{T}: Prevent the next 1 damage that would be dealt to this creature by this spell this turn.'\""
+  },
+  "trigger:chosen-player-upkeep": {
+   "family": "decision:choose-player",
+   "example": "Energy Vortex: \"At the beginning of the chosen player's upkeep\""
   }
  }
 }

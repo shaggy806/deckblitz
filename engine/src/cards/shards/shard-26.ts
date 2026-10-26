@@ -220,6 +220,7 @@ import _poolGetThePoint from "../pool/get-the-point.js";
 import _poolGeyadroneDihada from "../pool/geyadrone-dihada.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
+import _poolGibberingHyenas from "../pool/gibbering-hyenas.js";
 import _poolGitaxianRaptor from "../pool/gitaxian-raptor.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
 import _poolGlimpseTheUnthinkable from "../pool/glimpse-the-unthinkable.js";
@@ -287,6 +288,7 @@ import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
+import _poolJunglePatrol from "../pool/jungle-patrol.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
@@ -868,6 +870,7 @@ const shard: CardShard = {
     _poolGeyadroneDihada,
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
+    _poolGibberingHyenas,
     _poolGitaxianRaptor,
     _poolGleefulArsonist,
     _poolGlimpseTheUnthinkable,
@@ -935,6 +938,7 @@ const shard: CardShard = {
     _poolJeditOjanen,
     _poolJeeringHomunculus,
     _poolJosuVessLichKnight,
+    _poolJunglePatrol,
     _poolKangeeSkyWarden,
     _poolKardursViciousReturn,
     _poolKataraWaterTribesHope,

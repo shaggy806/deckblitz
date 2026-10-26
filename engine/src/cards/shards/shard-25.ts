@@ -494,6 +494,7 @@ import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
+import _poolSidarJabari from "../pool/sidar-jabari.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
@@ -569,6 +570,7 @@ import _poolTopiaryStomper from "../pool/topiary-stomper.js";
 import _poolTorchGauntlet from "../pool/torch-gauntlet.js";
 import _poolTorchTheWitness from "../pool/torch-the-witness.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
+import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
@@ -648,6 +650,7 @@ import _tokensSheepToken from "../tokens/sheep-token.js";
 import _tokensSoldierTokenWhite22 from "../tokens/soldier-token-white-2-2.js";
 import _tokensSpiritClericToken from "../tokens/spirit-cleric-token.js";
 import _tokensSpiritTokenDorotheasRetribution from "../tokens/spirit-token-dorotheas-retribution.js";
+import _tokensWallToken55BlueDefender from "../tokens/wall-token-5-5-blue-defender.js";
 import _tokensWizardTokenKuja from "../tokens/wizard-token-kuja.js";
 import _tokensWurmToken from "../tokens/wurm-token.js";
 
@@ -1144,6 +1147,7 @@ const shard: CardShard = {
     _poolShipwreckDowser,
     _poolShireShirriff,
     _poolShivanDragon,
+    _poolSidarJabari,
     _poolSilundiVision,
     _poolSimicRagworm,
     _poolSinuousStriker,
@@ -1219,6 +1223,7 @@ const shard: CardShard = {
     _poolTorchGauntlet,
     _poolTorchTheWitness,
     _poolTrailOfEvidence,
+    _poolTranquilDomain,
     _poolTreadUpon,
     _poolTrygonPrime,
     _poolTuskguardCaptain,
@@ -1300,6 +1305,7 @@ const shard: CardShard = {
     _tokensSoldierTokenWhite22,
     _tokensSpiritClericToken,
     _tokensSpiritTokenDorotheasRetribution,
+    _tokensWallToken55BlueDefender,
     _tokensWizardTokenKuja,
     _tokensWurmToken,
   ],

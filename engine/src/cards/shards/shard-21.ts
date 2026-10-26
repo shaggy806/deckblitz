@@ -73,6 +73,7 @@ import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
+import _poolBrushwagg from "../pool/brushwagg.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
 import _poolBullRushBruiser from "../pool/bull-rush-bruiser.js";
 import _poolBurakosPartyLeader from "../pool/burakos-party-leader.js";
@@ -145,6 +146,7 @@ import _poolDjerusResolve from "../pool/djerus-resolve.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
 import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
+import _poolDreamFighter from "../pool/dream-fighter.js";
 import _poolDrogskolInfantry from "../pool/drogskol-infantry.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
@@ -174,6 +176,7 @@ import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
 import _poolEstwaldShieldbasher from "../pool/estwald-shieldbasher.js";
 import _poolEternityVessel from "../pool/eternity-vessel.js";
+import _poolEtherWell from "../pool/ether-well.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
@@ -707,6 +710,7 @@ const shard: CardShard = {
     _poolBreathOfTheSleepless,
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
+    _poolBrushwagg,
     _poolBugenhagenWiseElder,
     _poolBullRushBruiser,
     _poolBurakosPartyLeader,
@@ -779,6 +783,7 @@ const shard: CardShard = {
     _poolDocOckSinisterScientist,
     _poolDragonsparkReactor,
     _poolDranasChosen,
+    _poolDreamFighter,
     _poolDrogskolInfantry,
     _poolDuress,
     _poolDuskLegionZealot,
@@ -808,6 +813,7 @@ const shard: CardShard = {
     _poolEscapedExperiment,
     _poolEstwaldShieldbasher,
     _poolEternityVessel,
+    _poolEtherWell,
     _poolExperimentalSynthesizer,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,

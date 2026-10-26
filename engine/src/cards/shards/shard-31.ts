@@ -464,6 +464,7 @@ import _poolRavenform from "../pool/ravenform.js";
 import _poolReapersTalisman from "../pool/reapers-talisman.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
+import _poolReignOfTerror from "../pool/reign-of-terror.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
 import _poolRenegadeFirebrand from "../pool/renegade-firebrand.js";
 import _poolRenegadeSilent from "../pool/renegade-silent.js";
@@ -1151,6 +1152,7 @@ const shard: CardShard = {
     _poolReapersTalisman,
     _poolRedDragon,
     _poolRegrowth,
+    _poolReignOfTerror,
     _poolRemorsefulCleric,
     _poolRenegadeFirebrand,
     _poolRenegadeSilent,

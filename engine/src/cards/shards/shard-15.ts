@@ -313,6 +313,7 @@ import _poolLarderZombie from "../pool/larder-zombie.js";
 import _poolLavabrinkFloodgates from "../pool/lavabrink-floodgates.js";
 import _poolLawlessBroker from "../pool/lawless-broker.js";
 import _poolLazotepReaver from "../pool/lazotep-reaver.js";
+import _poolLeadGolem from "../pool/lead-golem.js";
 import _poolLead from "../pool/lead.js";
 import _poolLegionStronghold from "../pool/legion-stronghold.js";
 import _poolLeoninWarleader from "../pool/leonin-warleader.js";
@@ -354,6 +355,7 @@ import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
+import _poolMistDragon from "../pool/mist-dragon.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
 import _poolMoldShambler from "../pool/mold-shambler.js";
 import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
@@ -935,6 +937,7 @@ const shard: CardShard = {
     _poolLavabrinkFloodgates,
     _poolLawlessBroker,
     _poolLazotepReaver,
+    _poolLeadGolem,
     _poolLead,
     _poolLegionStronghold,
     _poolLeoninWarleader,
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolMirrormade,
     _poolMischievousChimera,
     _poolMisshapenFiend,
+    _poolMistDragon,
     _poolMoaningSpirit,
     _poolMoldShambler,
     _poolMoltenCoreMaestro,

@@ -110,8 +110,16 @@ section keeps only what to do next.
   the lands' "if this would enter, sacrifice a … instead" — `replacement:enter-replacement-sacrifice`
   — and banding leading with 4 each, an opponent choosing the mode with 3); batch 166 Mirage's
   first half (its 110 most-played left), no feature built (70 authored, 40 blocked, nothing
-  shared by more than two). **Next, the rest of Mirage** (110 left: one batch, five agents),
-  then Visions (113) and Weatherlight. This walk's range
+  shared by more than two); batch 169 the rest of Mirage, no feature built (65 authored, 45
+  blocked, its flash-and-sacrifice rider leading with 3). **Next, Visions** (113 left: one batch,
+  five agents), then Weatherlight (119) and Tempest (178). Visions's lead should first build
+  the Mirage block's **"cast as though it had flash; if cast when a sorcery couldn't have been,
+  sacrificed at the beginning of the next cleanup step"** (`effect:flash-cast-sacrifice`: ten cards
+  in the snapshot — Armor of Thorns, Grave Servitude, Soar, Ward of Lights, Lightning Reflexes,
+  Mystic Veil, Parapet, Relic Ward, Spider Climb, and Necromancy's part of it): the spell
+  remembers whether it was cast at sorcery timing, and the permanent it becomes gets a
+  next-cleanup delayed sacrifice (`effect:delayed-trigger-next-cleanup` is the same timing, also
+  unbuilt — Thawing Glaciers). This walk's range
   ends at Shadowmoor/Eventide (the middle walk owns Shards of Alara on). Leads over the whole pool now:
   banding (36 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms
   (`keyword:cumulative-upkeep` — 15: granted to other permanents, combined costs, mana
@@ -183,7 +191,7 @@ section keeps only what to do next.
   newest-first walk (Journey into Nyx back to Scars of Mirrodin, stopping before Magic 2011), a **middle walk** (Rise of the Eldrazi back to Shards
   of Alara — ROE, WWK, ZEN, M10, ARB, CON, ALA — newest first, by `cards:sets -- --set <code>`)
   and the oldest-first walk above. Their first batches are B158 (this walk), B159 (middle) and
-  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played — landed); the fourth round's (2026-10-26) are B167 (this walk: Commander 2013 and Theros's ~75 most-played), B168 (middle: Magic 2010 and Alara Reborn) and B169 (oldest: the rest of Mirage); after those, take the highest `B<N>` on `origin/main` plus one, checked again
+  B160 (oldest); the second round's are B161 (this walk: Journey into Nyx — landed), B162 (middle: Worldwake — landed) and B163 (oldest: Alliances — landed); the third round's are B164 (this walk: Born of the Gods — landed), B165 (middle: Zendikar — landed) and B166 (oldest: Mirage's first half, its ~110 most-played — landed); the fourth round's (2026-10-26) are B167 (this walk: Commander 2013 and Theros's ~75 most-played), B168 (middle: Magic 2010 and Alara Reborn) and B169 (oldest: the rest of Mirage — landed); after those, take the highest `B<N>` on `origin/main` plus one, checked again
   just before landing (rename the record and test files if another walk took it). **The middle walk**: batch 159 took Rise of the Eldrazi whole, building level up and umbra armor (and authoring the umbras and levelers earlier batches had blocked on them); batch 162 Worldwake whole, building multikicker's "for each time it was kicked" as an amount and a static's colour setting (the Zendikons); batch 165 Zendikar whole, no feature built (26 blocked, "blocks this turn if able" — `effect:must-block-this-turn` — leading with two); **next, Magic 2010** (36 left: small enough for the lead alone or one agent), then Alara Reborn (84), Conflux (69) and Shards of Alara (94), each by `cards:sets -- --set <code>`. Its leftovers: Umbra Mystic and Lion Umbra (the umbra choice, `decision:umbra-armor-choose-aura`; enchant modified) and Venerated Teacher (`filter:has-level-up`). Batch
   157's leading blocker: a morph cost that reveals a card (`cost:morph-reveal-card` — 5), then
   "blocks this turn if able" (`effect:must-block-this-turn`) and looking at face-down

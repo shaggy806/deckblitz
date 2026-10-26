@@ -69,6 +69,8 @@ const NO_TOKEN_PRINTING = new Set([
   "X/X Spirit Token (Black)",
   // Wall of Kelp lists none.
   "Kelp Token",
+  // Jungle Patrol's Wood lists none.
+  "Wood Token",
   "Camarid Token",
   "Caribou Token",
 ]);

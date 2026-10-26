@@ -1,0 +1,787 @@
+{
+  "batch": "B169",
+  "status": "complete",
+  "ranks": "Mirage (MIR, 1996-10-08): the rest of the set — its 110 cards left after B166 (oldest-first walk)",
+  "authored": [
+    {
+      "name": "Amulet of Unmaking",
+      "files": [
+        "engine/src/cards/pool/amulet-of-unmaking.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Auspicious Ancestor",
+      "files": [
+        "engine/src/cards/pool/auspicious-ancestor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Barbed Foliage",
+      "files": [
+        "engine/src/cards/pool/barbed-foliage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brushwagg",
+      "files": [
+        "engine/src/cards/pool/brushwagg.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Burning Palm Efreet",
+      "files": [
+        "engine/src/cards/pool/burning-palm-efreet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Canopy Dragon",
+      "files": [
+        "engine/src/cards/pool/canopy-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Catacomb Dragon",
+      "files": [
+        "engine/src/cards/pool/catacomb-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cinder Cloud",
+      "files": [
+        "engine/src/cards/pool/cinder-cloud.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crimson Roc",
+      "files": [
+        "engine/src/cards/pool/crimson-roc.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crypt Cobra",
+      "files": [
+        "engine/src/cards/pool/crypt-cobra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crystal Golem",
+      "files": [
+        "engine/src/cards/pool/crystal-golem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Decomposition",
+      "files": [
+        "engine/src/cards/pool/decomposition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Discordant Spirit",
+      "files": [
+        "engine/src/cards/pool/discordant-spirit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Divine Retribution",
+      "files": [
+        "engine/src/cards/pool/divine-retribution.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dread Specter",
+      "files": [
+        "engine/src/cards/pool/dread-specter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dream Fighter",
+      "files": [
+        "engine/src/cards/pool/dream-fighter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emberwilde Caliph",
+      "files": [
+        "engine/src/cards/pool/emberwilde-caliph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emberwilde Djinn",
+      "files": [
+        "engine/src/cards/pool/emberwilde-djinn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Energy Bolt",
+      "files": [
+        "engine/src/cards/pool/energy-bolt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ether Well",
+      "files": [
+        "engine/src/cards/pool/ether-well.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ethereal Champion",
+      "files": [
+        "engine/src/cards/pool/ethereal-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flame Elemental",
+      "files": [
+        "engine/src/cards/pool/flame-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gibbering Hyenas",
+      "files": [
+        "engine/src/cards/pool/gibbering-hyenas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Elite Infantry",
+      "files": [
+        "engine/src/cards/pool/goblin-elite-infantry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harbor Guardian",
+      "files": [
+        "engine/src/cards/pool/harbor-guardian.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hivis of the Scale",
+      "files": [
+        "engine/src/cards/pool/hivis-of-the-scale.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Horrible Hordes",
+      "files": [
+        "engine/src/cards/pool/horrible-hordes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jungle Patrol",
+      "files": [
+        "engine/src/cards/pool/jungle-patrol.ts",
+        "engine/src/cards/tokens/wood-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jungle Wurm",
+      "files": [
+        "engine/src/cards/pool/jungle-wurm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kaervek's Hex",
+      "files": [
+        "engine/src/cards/pool/kaerveks-hex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kaervek's Purge",
+      "files": [
+        "engine/src/cards/pool/kaerveks-purge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lead Golem",
+      "files": [
+        "engine/src/cards/pool/lead-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leering Gargoyle",
+      "files": [
+        "engine/src/cards/pool/leering-gargoyle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Malignant Growth",
+      "files": [
+        "engine/src/cards/pool/malignant-growth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Merfolk Raiders",
+      "files": [
+        "engine/src/cards/pool/merfolk-raiders.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Merfolk Seer",
+      "files": [
+        "engine/src/cards/pool/merfolk-seer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mist Dragon",
+      "files": [
+        "engine/src/cards/pool/mist-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nocturnal Raid",
+      "files": [
+        "engine/src/cards/pool/nocturnal-raid.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Purraj of Urborg",
+      "files": [
+        "engine/src/cards/pool/purraj-of-urborg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pyric Salamander",
+      "files": [
+        "engine/src/cards/pool/pyric-salamander.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Radiant Essence",
+      "files": [
+        "engine/src/cards/pool/radiant-essence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Raging Spirit",
+      "files": [
+        "engine/src/cards/pool/raging-spirit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rashida Scalebane",
+      "files": [
+        "engine/src/cards/pool/rashida-scalebane.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ravenous Vampire",
+      "files": [
+        "engine/src/cards/pool/ravenous-vampire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reign of Chaos",
+      "files": [
+        "engine/src/cards/pool/reign-of-chaos.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reign of Terror",
+      "files": [
+        "engine/src/cards/pool/reign-of-terror.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rock Basilisk",
+      "files": [
+        "engine/src/cards/pool/rock-basilisk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sandbar Crocodile",
+      "files": [
+        "engine/src/cards/pool/sandbar-crocodile.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sawback Manticore",
+      "files": [
+        "engine/src/cards/pool/sawback-manticore.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Serene Heart",
+      "files": [
+        "engine/src/cards/pool/serene-heart.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sidar Jabari",
+      "files": [
+        "engine/src/cards/pool/sidar-jabari.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skulking Ghost",
+      "files": [
+        "engine/src/cards/pool/skulking-ghost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul Rend",
+      "files": [
+        "engine/src/cards/pool/soul-rend.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spectral Guardian",
+      "files": [
+        "engine/src/cards/pool/spectral-guardian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stalking Tiger",
+      "files": [
+        "engine/src/cards/pool/stalking-tiger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Teferi's Drake",
+      "files": [
+        "engine/src/cards/pool/teferis-drake.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Telim'Tor",
+      "files": [
+        "engine/src/cards/pool/telimtor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thirst",
+      "files": [
+        "engine/src/cards/pool/thirst.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tidal Wave",
+      "files": [
+        "engine/src/cards/pool/tidal-wave.ts",
+        "engine/src/cards/tokens/wall-token-5-5-blue-defender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tranquil Domain",
+      "files": [
+        "engine/src/cards/pool/tranquil-domain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unerring Sling",
+      "files": [
+        "engine/src/cards/pool/unerring-sling.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vaporous Djinn",
+      "files": [
+        "engine/src/cards/pool/vaporous-djinn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ventifact Bottle",
+      "files": [
+        "engine/src/cards/pool/ventifact-bottle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vitalizing Cascade",
+      "files": [
+        "engine/src/cards/pool/vitalizing-cascade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wave Elemental",
+      "files": [
+        "engine/src/cards/pool/wave-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zhalfirin Commander",
+      "files": [
+        "engine/src/cards/pool/zhalfirin-commander.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Zombie Mob",
+      "files": [
+        "engine/src/cards/pool/zombie-mob.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Armor of Thorns",
+      "needs": [
+        "effect:flash-cast-sacrifice"
+      ],
+      "why": "cast as though it had flash; sacrificed at the next cleanup if cast when a sorcery couldn't have been"
+    },
+    {
+      "name": "Grave Servitude",
+      "needs": [
+        "effect:flash-cast-sacrifice"
+      ],
+      "why": "the same Mirage flash-and-sacrifice rider"
+    },
+    {
+      "name": "Soar",
+      "needs": [
+        "effect:flash-cast-sacrifice"
+      ],
+      "why": "the same Mirage flash-and-sacrifice rider"
+    },
+    {
+      "name": "Gravebane Zombie",
+      "needs": [
+        "replacement:dies-to-library-top"
+      ],
+      "why": "if it would die, put it on top of its owner's library instead"
+    },
+    {
+      "name": "Purgatory",
+      "needs": [
+        "effect:choose-card-exiled-with-source"
+      ],
+      "why": "return one chosen card exiled with it, not all of them"
+    },
+    {
+      "name": "Urborg Panther",
+      "needs": [
+        "effect:target-creature-blocking-source",
+        "cost:sacrifice-named-permanents"
+      ],
+      "why": "destroy a creature blocking it; sacrifice three named creatures as a cost"
+    },
+    {
+      "name": "Teferi's Imp",
+      "needs": [
+        "trigger:phases-out",
+        "trigger:phases-in"
+      ],
+      "why": "whenever it phases out / phases in"
+    },
+    {
+      "name": "Warping Wurm",
+      "needs": [
+        "trigger:phases-in"
+      ],
+      "why": "whenever it phases in, put a +1/+1 counter on it"
+    },
+    {
+      "name": "Tropical Storm",
+      "needs": [
+        "effect:damage-all-per-object"
+      ],
+      "why": "X to each flyer plus 1 more to each blue one, as one damage event per creature"
+    },
+    {
+      "name": "Tainted Specter",
+      "needs": [
+        "effect:unless-put-card-from-hand-on-top"
+      ],
+      "why": "discard a card unless they put a card from hand on top of their library"
+    },
+    {
+      "name": "Chariot of the Sun",
+      "needs": [
+        "effect:set-base-toughness-only"
+      ],
+      "why": "base toughness 1, power unchanged"
+    },
+    {
+      "name": "Yare",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "can block up to two additional creatures this turn"
+    },
+    {
+      "name": "Barbed-Back Wurm",
+      "needs": [
+        "effect:target-creature-blocking-source"
+      ],
+      "why": "target green creature blocking it gets -1/-1"
+    },
+    {
+      "name": "Painful Memories",
+      "needs": [
+        "effect:target-player-hand-card-to-library-top"
+      ],
+      "why": "put a chosen card from an opponent's hand on top of their library"
+    },
+    {
+      "name": "Sirocco",
+      "needs": [
+        "decision:per-card-discard-unless-pay-life"
+      ],
+      "why": "reveal a hand; each blue instant is discarded unless its owner pays 4 life"
+    },
+    {
+      "name": "Ersatz Gnomes",
+      "needs": [
+        "effect:spell-color-change-carries-to-permanent"
+      ],
+      "why": "a spell made colourless enters colourless (its ruling)"
+    },
+    {
+      "name": "Consuming Ferocity",
+      "needs": [
+        "effect:damage-from-attached"
+      ],
+      "why": "enchanted creature deals 1 damage to its controller"
+    },
+    {
+      "name": "Preferred Selection",
+      "needs": [
+        "decision:look-then-optional-sacrifice-and-pay"
+      ],
+      "why": "look at the top two, then may sacrifice it and pay {2}{G}{G}"
+    },
+    {
+      "name": "Razor Pendulum",
+      "needs": [
+        "condition:that-player-life-intervening-if"
+      ],
+      "why": "intervening-if on the end-step player's life total"
+    },
+    {
+      "name": "Prismatic Circle",
+      "needs": [
+        "filter:chosen-color"
+      ],
+      "why": "prevent damage from a source of the chosen colour"
+    },
+    {
+      "name": "Mangara's Equity",
+      "needs": [
+        "filter:chosen-color"
+      ],
+      "why": "a creature of the chosen colour deals damage"
+    },
+    {
+      "name": "Jabari's Influence",
+      "needs": [
+        "filter:attacked-you-this-turn"
+      ],
+      "why": "target creature that attacked you this turn"
+    },
+    {
+      "name": "Coral Fighters",
+      "needs": [
+        "effect:look-at-top-of-target-players-library"
+      ],
+      "why": "look at the top of defending player's library, may put it on the bottom"
+    },
+    {
+      "name": "Sealed Fate",
+      "needs": [
+        "effect:look-and-choose-target-opponent-library"
+      ],
+      "why": "look at an opponent's top X, exile one, reorder the rest"
+    },
+    {
+      "name": "Shadowbane",
+      "needs": [
+        "replacement:prevent-damage-from-chosen-source"
+      ],
+      "why": "protects you and/or creatures you control; gain life only for a black source"
+    },
+    {
+      "name": "Ekundu Cyclops",
+      "needs": [
+        "static:attacks-if-another-creature-attacks"
+      ],
+      "why": "attacks if able when another creature you control attacks"
+    },
+    {
+      "name": "Psychic Transfer",
+      "needs": [
+        "effect:exchange-life-totals"
+      ],
+      "why": "exchange life totals if they differ by 5 or less"
+    },
+    {
+      "name": "Reckless Embermage",
+      "needs": [
+        "effect:damage-source-itself"
+      ],
+      "why": "1 damage to any target and 1 damage to itself"
+    },
+    {
+      "name": "Mtenda Lion",
+      "needs": [
+        "effect:prevent-combat-damage-by-source"
+      ],
+      "why": "unless they pay {U}, prevent its combat damage this turn"
+    },
+    {
+      "name": "Superior Numbers",
+      "needs": [
+        "bug:count-for-target-illegal-not-zero"
+      ],
+      "why": "the count for an illegal opponent target reads 0 instead of failing (rule 608.2b)"
+    },
+    {
+      "name": "Hakim, Loreweaver",
+      "needs": [
+        "filter:attached-to-source"
+      ],
+      "why": "destroy all Auras attached to it"
+    },
+    {
+      "name": "Energy Vortex",
+      "needs": [
+        "decision:choose-player-on-enter",
+        "trigger:chosen-player-upkeep",
+        "cost:unless-pay-generic-per-counter"
+      ],
+      "why": "choose an opponent; their upkeep; pay {1} per vortex counter"
+    },
+    {
+      "name": "Dazzling Beauty",
+      "needs": [
+        "effect:becomes-blocked"
+      ],
+      "why": "target unblocked attacker becomes blocked"
+    },
+    {
+      "name": "Torrent of Lava",
+      "needs": [
+        "static:spell-grants-ability-while-on-stack"
+      ],
+      "why": "creatures gain an ability to prevent this spell's damage while it's on the stack"
+    },
+    {
+      "name": "Cycle of Life",
+      "needs": [
+        "duration:until-your-next-upkeep"
+      ],
+      "why": "base 0/1 until your next upkeep"
+    },
+    {
+      "name": "Kukemssa Serpent",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "can't attack unless defending player controls an Island"
+    },
+    {
+      "name": "Mangara's Blessing",
+      "needs": [
+        "trigger:discarded-by-opponent"
+      ],
+      "why": "when an opponent's spell or ability makes you discard it"
+    },
+    {
+      "name": "Sand Golem",
+      "needs": [
+        "trigger:discarded-by-opponent"
+      ],
+      "why": "when an opponent's spell or ability makes you discard it"
+    },
+    {
+      "name": "Bazaar of Wonders",
+      "needs": [
+        "filter:same-name-as-card-in-graveyard",
+        "mechanic:world-rule"
+      ],
+      "why": "counter a spell sharing a name with a card in a graveyard or a permanent"
+    },
+    {
+      "name": "Bone Mask",
+      "needs": [
+        "amount:damage-prevented-this-way"
+      ],
+      "why": "exile a card from your library for each 1 damage prevented"
+    },
+    {
+      "name": "Haunting Apparition",
+      "needs": [
+        "amount:count-for-chosen-player"
+      ],
+      "why": "power equals the chosen opponent's green creature cards in graveyard"
+    },
+    {
+      "name": "Barreling Attack",
+      "needs": [
+        "effect:delayed-trigger-keyed-to-target"
+      ],
+      "why": "when that creature becomes blocked this turn"
+    },
+    {
+      "name": "Acidic Dagger",
+      "needs": [
+        "effect:delayed-trigger-keyed-to-target",
+        "condition:before-blockers-first-combat"
+      ],
+      "why": "whenever target creature deals combat damage to a non-Wall this turn; before blockers"
+    }
+  ]
+}

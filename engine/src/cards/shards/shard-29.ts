@@ -509,6 +509,7 @@ import _poolSnortingGahr from "../pool/snorting-gahr.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
 import _poolSoulNet from "../pool/soul-net.js";
+import _poolSoulRend from "../pool/soul-rend.js";
 import _poolSoulSeparator from "../pool/soul-separator.js";
 import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
@@ -1175,6 +1176,7 @@ const shard: CardShard = {
     _poolSolarTransformer,
     _poolSonicScrewdriver,
     _poolSoulNet,
+    _poolSoulRend,
     _poolSoulSeparator,
     _poolSoulcipherBoard,
     _poolSoulcoilViper,

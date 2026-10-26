@@ -106,6 +106,7 @@ import _poolCopperlineGorge from "../pool/copperline-gorge.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
+import _poolCrimsonRoc from "../pool/crimson-roc.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
 import _poolCrushOfTentacles from "../pool/crush-of-tentacles.js";
@@ -156,6 +157,7 @@ import _poolElspethSunsNemesis from "../pool/elspeth-suns-nemesis.js";
 import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
+import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
@@ -219,6 +221,7 @@ import _poolGuildpactInformant from "../pool/guildpact-informant.js";
 import _poolHall from "../pool/hall.js";
 import _poolHammerOfRuin from "../pool/hammer-of-ruin.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
+import _poolHarborGuardian from "../pool/harbor-guardian.js";
 import _poolHardenedTactician from "../pool/hardened-tactician.js";
 import _poolHarvesterTroll from "../pool/harvester-troll.js";
 import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
@@ -760,6 +763,7 @@ const shard: CardShard = {
     _poolCosmiumKiln,
     _poolCourserOfKruphix,
     _poolCrashingFootfalls,
+    _poolCrimsonRoc,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
     _poolCrushOfTentacles,
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolElturgardRanger,
     _poolElvishHydromancer,
     _poolEmberhornMinotaur,
+    _poolEmberwildeCaliph,
     _poolEnragedRevolutionary,
     _poolEntishRestoration,
     _poolEntryDenied,
@@ -873,6 +878,7 @@ const shard: CardShard = {
     _poolHall,
     _poolHammerOfRuin,
     _poolHamzaGuardianOfArashin,
+    _poolHarborGuardian,
     _poolHardenedTactician,
     _poolHarvesterTroll,
     _poolHauntTheNetwork,

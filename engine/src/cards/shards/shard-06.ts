@@ -49,6 +49,7 @@ import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
+import _poolBarbedFoliage from "../pool/barbed-foliage.js";
 import _poolBasriDevotedPaladin from "../pool/basri-devoted-paladin.js";
 import _poolBattleRattleShaman from "../pool/battle-rattle-shaman.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
@@ -184,6 +185,7 @@ import _poolEnclaveElite from "../pool/enclave-elite.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
 import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
+import _poolEtherealChampion from "../pool/ethereal-champion.js";
 import _poolEtheriumSculptor from "../pool/etherium-sculptor.js";
 import _poolEverybodyLives from "../pool/everybody-lives.js";
 import _poolEvilReawakened from "../pool/evil-reawakened.js";
@@ -537,6 +539,7 @@ import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
+import _poolTelimtor from "../pool/telimtor.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTempestHart from "../pool/tempest-hart.js";
 import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
@@ -699,6 +702,7 @@ const shard: CardShard = {
     _poolBalothPrime,
     _poolBantBattlemage,
     _poolBaralsExpertise,
+    _poolBarbedFoliage,
     _poolBasriDevotedPaladin,
     _poolBattleRattleShaman,
     _poolBeamtownBeatstick,
@@ -834,6 +838,7 @@ const shard: CardShard = {
     _poolEntrustTheSpark,
     _poolEshkiTemursRoar,
     _poolEternalThirst,
+    _poolEtherealChampion,
     _poolEtheriumSculptor,
     _poolEverybodyLives,
     _poolEvilReawakened,
@@ -1187,6 +1192,7 @@ const shard: CardShard = {
     _poolTanufelRimespeaker,
     _poolTeachingsOfTheKirin,
     _poolTeeterpeakAmbusher,
+    _poolTelimtor,
     _poolTelimtorsDarts,
     _poolTempestHart,
     _poolTenuredOilcaster,

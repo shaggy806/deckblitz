@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Mirage, the rest of the set** (batch 169, the oldest-first walk, 2026-10-26; its first half
+  was batch 166): no feature built. 65 of its last 110 authored by five `card-author` agents and the
+  lead — Catacomb Dragon, Reign of Terror, Kaervek's Hex, Tidal Wave, Reign of Chaos, Mist Dragon,
+  Ventifact Bottle, Purraj of Urborg, Jungle Patrol and 56 more (MIR 227 of 312); 45 blocked,
+  Mirage's flash-and-sacrifice rider (`effect:flash-cast-sacrifice`, 3) the most shared.
 - **Born of the Gods, the rest of the set** (batch 164, the newest-first walk, 2026-10-25):
   **tribute** built (rule 702.104 — `tribute: N` on the card, asked as it's about to enter on the
   `choose-creature-type` decision with a prompt the client shows; the `tribute-not-paid`

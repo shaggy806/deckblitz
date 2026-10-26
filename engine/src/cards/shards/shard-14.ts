@@ -631,6 +631,7 @@ import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
+import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
@@ -1282,6 +1283,7 @@ const shard: CardShard = {
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
     _poolZealousLorecaster,
+    _poolZhalfirinCommander,
     _poolZopandrelHungerDominus,
     _poolZukosOffense,
   ],

@@ -426,6 +426,7 @@ import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
 import _poolRagingBull from "../pool/raging-bull.js";
+import _poolRagingSpirit from "../pool/raging-spirit.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
@@ -623,6 +624,7 @@ import _poolVindictiveLich from "../pool/vindictive-lich.js";
 import _poolViridianEmissary from "../pool/viridian-emissary.js";
 import _poolVisageOfBolas from "../pool/visage-of-bolas.js";
 import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
+import _poolVitalizingCascade from "../pool/vitalizing-cascade.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
 import _poolVoiceOfTheVermin from "../pool/voice-of-the-vermin.js";
@@ -1119,6 +1121,7 @@ const shard: CardShard = {
     _poolRabanastreRoyalCity,
     _poolRaffWeatherlightStalwart,
     _poolRagingBull,
+    _poolRagingSpirit,
     _poolRampartHunter,
     _poolRansackTheLab,
     _poolRazeToTheGround,
@@ -1316,6 +1319,7 @@ const shard: CardShard = {
     _poolViridianEmissary,
     _poolVisageOfBolas,
     _poolVisceridDeepwalker,
+    _poolVitalizingCascade,
     _poolVividGrove,
     _poolVivisection,
     _poolVoiceOfTheVermin,

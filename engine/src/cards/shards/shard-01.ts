@@ -526,6 +526,7 @@ import _poolTasteOfBlood from "../pool/taste-of-blood.js";
 import _poolTaureanMauler from "../pool/taurean-mauler.js";
 import _poolTeachersPest from "../pool/teachers-pest.js";
 import _poolTearsOfValakut from "../pool/tears-of-valakut.js";
+import _poolTeferisDrake from "../pool/teferis-drake.js";
 import _poolTeleportationCircle from "../pool/teleportation-circle.js";
 import _poolTelethopter from "../pool/telethopter.js";
 import _poolTempleOfEpiphany from "../pool/temple-of-epiphany.js";
@@ -583,6 +584,7 @@ import _poolVaultGuardsman from "../pool/vault-guardsman.js";
 import _poolVedalkenEntrancer from "../pool/vedalken-entrancer.js";
 import _poolVengefulDead from "../pool/vengeful-dead.js";
 import _poolVengefulPossession from "../pool/vengeful-possession.js";
+import _poolVentifactBottle from "../pool/ventifact-bottle.js";
 import _poolVeteranCavalier from "../pool/veteran-cavalier.js";
 import _poolVirusBeetle from "../pool/virus-beetle.js";
 import _poolVisaraTheDreadful from "../pool/visara-the-dreadful.js";
@@ -1163,6 +1165,7 @@ const shard: CardShard = {
     _poolTaureanMauler,
     _poolTeachersPest,
     _poolTearsOfValakut,
+    _poolTeferisDrake,
     _poolTeleportationCircle,
     _poolTelethopter,
     _poolTempleOfEpiphany,
@@ -1220,6 +1223,7 @@ const shard: CardShard = {
     _poolVedalkenEntrancer,
     _poolVengefulDead,
     _poolVengefulPossession,
+    _poolVentifactBottle,
     _poolVeteranCavalier,
     _poolVirusBeetle,
     _poolVisaraTheDreadful,
