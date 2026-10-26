@@ -648,6 +648,7 @@
   {
    "name": "Fungal Behemoth",
    "needs": [
+    "mechanic:suspend-x",
     "trigger:functions-while-suspended"
    ],
    "why": "\"Whenever a time counter is removed from this card while it's exiled.\""

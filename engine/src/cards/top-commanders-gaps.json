@@ -460,7 +460,8 @@
   "keyword:epic",
   "effect:look-at-target-player-hand",
   "keyword:splice",
-  "keyword:horsemanship"
+  "keyword:horsemanship",
+  "trigger:functions-while-suspended"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -11499,6 +11499,34 @@
   "effect:set-land-types-all": {
    "family": "effect:add-land-types-all",
    "example": "Nightcreep: until end of turn, all lands become Swamps — setting their land types, for the lands there as it resolves."
+  },
+  "replacement:prevent-damage-dealt-by-enchanted": {
+   "family": "replacement:damage-modification",
+   "example": "Temporal Isolation: prevent all damage that would be dealt by enchanted creature."
+  },
+  "replacement:graveyard-to-library-top-optional": {
+   "family": "replacement:new-event-replacements",
+   "example": "Pulmonic Sliver: All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\""
+  },
+  "cost:exile-from-any-graveyard": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Thelon of Havenwood: \"Exile a Fungus card from a graveyard\" — any player's."
+  },
+  "effect:search-put-under-target-player-control": {
+   "family": "mechanic:search-library-control",
+   "example": "Yavimaya Dryad: the forest found enters tapped under target player's control."
+  },
+  "target:permanent-or-suspended-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Jhoira's Timebug: target permanent you control or suspended card you own."
+  },
+  "decision:choose-from-hand-and-library-top": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Psychotic Episode: one card chosen from a revealed hand plus the library's top card, put on the bottom."
+  },
+  "effect:add-time-counters-suspended-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Curse of the Cabal: \"put two time counters on this card\" while it's suspended in exile."
   }
  }
 }

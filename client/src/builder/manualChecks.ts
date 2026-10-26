@@ -8341,4 +8341,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Skyscribing: forecast from your hand in your upkeep, once a turn',
     board({ you: { bf: ['Island*6'], hand: ['Skyscribing'] } }),
   ),
+  preset(
+    'Greater Gargadon: sacrificing to it from exile',
+    board({ you: { bf: ['Mountain', 'Grizzly Bears', 'Forest'], hand: ['Greater Gargadon'] } }),
+  ),
 ]

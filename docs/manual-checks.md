@@ -5517,3 +5517,9 @@ engine terms. A second thing to check is a second test.
 ### Skyscribing: forecast from your hand in your upkeep, once a turn
 - **Do:** In your main phase, look for Skyscribing's forecast ability, then pass the turn and come back to your upkeep. Use it there, then try it again.
 - **Expect:** It isn't offered in your main phase. In your upkeep it is: everyone draws a card, the card is shown to the table, and Skyscribing stays in your hand. It isn't offered a second time that upkeep; it is again at your next upkeep.
+
+## Abilities while suspended (2026-10-26, Time Spiral)
+
+### Greater Gargadon: sacrificing to it from exile
+- **Do:** Suspend Greater Gargadon from your hand. Open your exile, click Activate under the Gargadon, pick its ability and sacrifice Grizzly Bears.
+- **Expect:** The Gargadon goes to exile with 10 time counters. Its ability is offered there (not before it's suspended), and once it resolves it has 9 time counters and the Bears are in your graveyard.

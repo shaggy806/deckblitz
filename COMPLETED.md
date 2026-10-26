@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Time Spiral's first half, and abilities that work while a card is suspended** (batch 205, the
+  middle walk, 2026-10-26; `trigger:functions-while-suspended`, rule 702.62b): `whileSuspended`
+  triggers and `zone: "suspended"` activations — Greater Gargadon, Deep-Sea Kraken, Nihilith,
+  Riftmarked Knight, Dinosaurs on a Spaceship — and the exile viewer's Activate. 70 of the set's
+  95 most-played left authored (Draining Whelk, Living End, Bogardan Hellkite, the Slivers), 25
+  blocked (`B205.json`).
 - **Mirrodin Besieged whole and Scars of Mirrodin's next 50** (batch 199, the newest-first walk,
   2026-10-26): no feature built; a divided amount now survives a decision mid-resolution (Kuldotha
   Flamefiend), and Ashmouth Hound and Inferno Elemental trigger when blocked too. 82 of 104
