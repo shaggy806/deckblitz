@@ -415,6 +415,7 @@ import _poolMetamorphosis from "../pool/metamorphosis.js";
 import _poolMeteorCrater from "../pool/meteor-crater.js";
 import _poolMetropolisAngel from "../pool/metropolis-angel.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
+import _poolMightOfTheNephilim from "../pool/might-of-the-nephilim.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
 import _poolMindStone from "../pool/mind-stone.js";
 import _poolMineExcavation from "../pool/mine-excavation.js";
@@ -586,6 +587,7 @@ import _poolSkyshroudForest from "../pool/skyshroud-forest.js";
 import _poolSkyshroudRanger from "../pool/skyshroud-ranger.js";
 import _poolSkyswirlHarrier from "../pool/skyswirl-harrier.js";
 import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
+import _poolSlaughterhouseBouncer from "../pool/slaughterhouse-bouncer.js";
 import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
@@ -1184,6 +1186,7 @@ const shard: CardShard = {
     _poolMeteorCrater,
     _poolMetropolisAngel,
     _poolMidnightReaper,
+    _poolMightOfTheNephilim,
     _poolMilitantMonk,
     _poolMindStone,
     _poolMineExcavation,
@@ -1355,6 +1358,7 @@ const shard: CardShard = {
     _poolSkyshroudRanger,
     _poolSkyswirlHarrier,
     _poolSlagwurmArmor,
+    _poolSlaughterhouseBouncer,
     _poolSleep,
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,

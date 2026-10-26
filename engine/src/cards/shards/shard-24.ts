@@ -148,6 +148,7 @@ import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCursedLand from "../pool/cursed-land.js";
 import _poolCustodiSoulcaller from "../pool/custodi-soulcaller.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
+import _poolCytoplastManipulator from "../pool/cytoplast-manipulator.js";
 import _poolDakkonBlackblade from "../pool/dakkon-blackblade.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
@@ -195,6 +196,7 @@ import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
+import _poolEnigmaEidolon from "../pool/enigma-eidolon.js";
 import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
@@ -892,6 +894,7 @@ const shard: CardShard = {
     _poolCursedLand,
     _poolCustodiSoulcaller,
     _poolCylianElf,
+    _poolCytoplastManipulator,
     _poolDakkonBlackblade,
     _poolDarkLeoShredder,
     _poolDarkRitual,
@@ -939,6 +942,7 @@ const shard: CardShard = {
     _poolElvishVisionary,
     _poolEndoskeleton,
     _poolEnergyFlux,
+    _poolEnigmaEidolon,
     _poolEntrancingMelody,
     _poolEntsFury,
     _poolErode,

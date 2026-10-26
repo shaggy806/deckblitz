@@ -288,6 +288,7 @@ import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
 import _poolHealTheScars from "../pool/heal-the-scars.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
+import _poolHeliumSquirter from "../pool/helium-squirter.js";
 import _poolHellfire from "../pool/hellfire.js";
 import _poolHellsThunder from "../pool/hells-thunder.js";
 import _poolHemlockVial from "../pool/hemlock-vial.js";
@@ -401,6 +402,7 @@ import _poolMirrorMockery from "../pool/mirror-mockery.js";
 import _poolMirrorSigilSergeant from "../pool/mirror-sigil-sergeant.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
+import _poolMomirVigSimicVisionary from "../pool/momir-vig-simic-visionary.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
 import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
@@ -1024,6 +1026,7 @@ const shard: CardShard = {
     _poolHealTheScars,
     _poolHeapGate,
     _poolHeartSliver,
+    _poolHeliumSquirter,
     _poolHellfire,
     _poolHellsThunder,
     _poolHemlockVial,
@@ -1137,6 +1140,7 @@ const shard: CardShard = {
     _poolMirrorSigilSergeant,
     _poolMistCloakedHerald,
     _poolMomentumRumbler,
+    _poolMomirVigSimicVisionary,
     _poolMoorlandInquisitor,
     _poolMorbiusTheLivingVampire,
     _poolMossfireValley,

@@ -412,6 +412,7 @@ import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
 import _poolNemesisTrap from "../pool/nemesis-trap.js";
 import _poolNestInvader from "../pool/nest-invader.js";
+import _poolNettlingCurse from "../pool/nettling-curse.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
 import _poolNinjaOfTheNewMoon from "../pool/ninja-of-the-new-moon.js";
@@ -667,6 +668,7 @@ import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
 import _poolViashinoSandswimmer from "../pool/viashino-sandswimmer.js";
+import _poolVigeanIntuition from "../pool/vigean-intuition.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
 import _poolVirtusTheVeiled from "../pool/virtus-the-veiled.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
@@ -1126,6 +1128,7 @@ const shard: CardShard = {
     _poolNeckSnap,
     _poolNemesisTrap,
     _poolNestInvader,
+    _poolNettlingCurse,
     _poolNicolBolasTheArisen,
     _poolNightmareSower,
     _poolNinjaOfTheNewMoon,
@@ -1381,6 +1384,7 @@ const shard: CardShard = {
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,
     _poolViashinoSandswimmer,
+    _poolVigeanIntuition,
     _poolVinelasherAdept,
     _poolVirtusTheVeiled,
     _poolVisionOfLove,

@@ -134,6 +134,7 @@ import _poolCorneredCrook from "../pool/cornered-crook.js";
 import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
+import _poolCrime from "../pool/crime.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
 import _poolCrystallization from "../pool/crystallization.js";
 import _poolCullingDrone from "../pool/culling-drone.js";
@@ -526,8 +527,10 @@ import _poolShinenOfFlightsWings from "../pool/shinen-of-flights-wings.js";
 import _poolShreddersArmor from "../pool/shredders-armor.js";
 import _poolShriekgeist from "../pool/shriekgeist.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
+import _poolSilkwingScout from "../pool/silkwing-scout.js";
 import _poolSimianSling from "../pool/simian-sling.js";
 import _poolSisterOfSilence from "../pool/sister-of-silence.js";
+import _poolSkullmeadCauldron from "../pool/skullmead-cauldron.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSkybind from "../pool/skybind.js";
 import _poolSkyshroudVampire from "../pool/skyshroud-vampire.js";
@@ -843,6 +846,7 @@ const shard: CardShard = {
     _poolCouriersCapsule,
     _poolCourtOfArdenvale,
     _poolCravenGiant,
+    _poolCrime,
     _poolCrystalShard,
     _poolCrystallization,
     _poolCullingDrone,
@@ -1235,8 +1239,10 @@ const shard: CardShard = {
     _poolShreddersArmor,
     _poolShriekgeist,
     _poolSilentAttendant,
+    _poolSilkwingScout,
     _poolSimianSling,
     _poolSisterOfSilence,
+    _poolSkullmeadCauldron,
     _poolSkyRuinDrake,
     _poolSkybind,
     _poolSkyshroudVampire,

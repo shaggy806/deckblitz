@@ -97,6 +97,7 @@ import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
+import _poolCacklingFlames from "../pool/cackling-flames.js";
 import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
 import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
 import _poolCallTheSkybreaker from "../pool/call-the-skybreaker.js";
@@ -292,6 +293,7 @@ import _poolHellToPay from "../pool/hell-to-pay.js";
 import _poolHeraldOfTorment from "../pool/herald-of-torment.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
 import _poolHistorianOfZhalfir from "../pool/historian-of-zhalfir.js";
+import _poolHitRun from "../pool/hit-run.js";
 import _poolHoardersGreed from "../pool/hoarders-greed.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
@@ -669,6 +671,7 @@ import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
+import _poolTwinstrike from "../pool/twinstrike.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolBurnBurnTreeAndFern,
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
+    _poolCacklingFlames,
     _poolCacophonyScamp,
     _poolCaldaiaGuardian,
     _poolCallTheSkybreaker,
@@ -1046,6 +1050,7 @@ const shard: CardShard = {
     _poolHeraldOfTorment,
     _poolHeroOfBladehold,
     _poolHistorianOfZhalfir,
+    _poolHitRun,
     _poolHoardersGreed,
     _poolHogMonkey,
     _poolHoldAtBay,
@@ -1423,6 +1428,7 @@ const shard: CardShard = {
     _poolTreacherousPitDweller,
     _poolTrenchpost,
     _poolTurnBurn,
+    _poolTwinstrike,
     _poolTyvarsStand,
     _poolUlvenwaldObserver,
     _poolUnauthorizedExit,

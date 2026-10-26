@@ -194,6 +194,7 @@ import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
+import _poolEvolutionVat from "../pool/evolution-vat.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
@@ -443,6 +444,7 @@ import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOriginOfThor from "../pool/origin-of-thor.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
+import _poolOverrule from "../pool/overrule.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
@@ -936,6 +938,7 @@ const shard: CardShard = {
     _poolEpharasWarden,
     _poolEtherealAbsolution,
     _poolEtherealAmbush,
+    _poolEvolutionVat,
     _poolExhibitionMagician,
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,
@@ -1185,6 +1188,7 @@ const shard: CardShard = {
     _poolOriginOfThor,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
+    _poolOverrule,
     _poolPaladinOfPredation,
     _poolPalianoTheHighCity,
     _poolPassagewaySeer,

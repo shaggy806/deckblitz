@@ -118,6 +118,7 @@ import _poolCorrupt from "../pool/corrupt.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
+import _poolCrimePunishment from "../pool/crime-punishment.js";
 import _poolCrimsonRoc from "../pool/crimson-roc.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
@@ -849,6 +850,7 @@ const shard: CardShard = {
     _poolCosmiumKiln,
     _poolCourserOfKruphix,
     _poolCrashingFootfalls,
+    _poolCrimePunishment,
     _poolCrimsonRoc,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,

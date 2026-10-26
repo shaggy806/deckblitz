@@ -153,6 +153,7 @@ import _poolDefeat from "../pool/defeat.js";
 import _poolDefendTheRider from "../pool/defend-the-rider.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
 import _poolDeliberate from "../pool/deliberate.js";
+import _poolDemand from "../pool/demand.js";
 import _poolDemolish from "../pool/demolish.js";
 import _poolDemonicBargain from "../pool/demonic-bargain.js";
 import _poolDeploy from "../pool/deploy.js";
@@ -890,6 +891,7 @@ const shard: CardShard = {
     _poolDefendTheRider,
     _poolDeftDuelist,
     _poolDeliberate,
+    _poolDemand,
     _poolDemolish,
     _poolDemonicBargain,
     _poolDeploy,

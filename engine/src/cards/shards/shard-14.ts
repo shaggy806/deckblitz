@@ -619,6 +619,7 @@ import _poolStrongholdTaskmaster from "../pool/stronghold-taskmaster.js";
 import _poolStudy from "../pool/study.js";
 import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSunstone from "../pool/sunstone.js";
+import _poolSupply from "../pool/supply.js";
 import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSurrealMemoir from "../pool/surreal-memoir.js";
@@ -674,6 +675,7 @@ import _poolUndercityNecrolisk from "../pool/undercity-necrolisk.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
+import _poolUnlivingPsychopath from "../pool/unliving-psychopath.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
 import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
@@ -1362,6 +1364,7 @@ const shard: CardShard = {
     _poolStudy,
     _poolSunsetSaboteur,
     _poolSunstone,
+    _poolSupply,
     _poolSurgicalSkullbomb,
     _poolSurrakarBanisher,
     _poolSurrealMemoir,
@@ -1417,6 +1420,7 @@ const shard: CardShard = {
     _poolUndermine,
     _poolUnexpectedAssistance,
     _poolUnionOfTheThirdPath,
+    _poolUnlivingPsychopath,
     _poolUnnaturalGrowth,
     _poolUnravel,
     _poolUpTheBeanstalk,

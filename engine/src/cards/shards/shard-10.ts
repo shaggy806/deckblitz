@@ -130,6 +130,7 @@ import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
 import _poolCorrosiveMentor from "../pool/corrosive-mentor.js";
 import _poolCouncilsJudgment from "../pool/councils-judgment.js";
 import _poolCountervailingWinds from "../pool/countervailing-winds.js";
+import _poolCourtHussar from "../pool/court-hussar.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
@@ -288,6 +289,7 @@ import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
 import _poolHex from "../pool/hex.js";
 import _poolHinterlandLogger from "../pool/hinterland-logger.js";
+import _poolHit from "../pool/hit.js";
 import _poolHixusPrisonWarden from "../pool/hixus-prison-warden.js";
 import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
@@ -421,6 +423,7 @@ import _poolOashraCultivator from "../pool/oashra-cultivator.js";
 import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
 import _poolOldRutstein from "../pool/old-rutstein.js";
+import _poolOmnibian from "../pool/omnibian.js";
 import _poolOmnispellAdept from "../pool/omnispell-adept.js";
 import _poolOnduChampion from "../pool/ondu-champion.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
@@ -498,6 +501,7 @@ import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
 import _poolRunAshore from "../pool/run-ashore.js";
+import _poolRun from "../pool/run.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
 import _poolRustElemental from "../pool/rust-elemental.js";
 import _poolRustShieldRampager from "../pool/rust-shield-rampager.js";
@@ -586,6 +590,7 @@ import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
+import _poolSproutingPhytohydra from "../pool/sprouting-phytohydra.js";
 import _poolSpyglassSiren from "../pool/spyglass-siren.js";
 import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
@@ -871,6 +876,7 @@ const shard: CardShard = {
     _poolCorrosiveMentor,
     _poolCouncilsJudgment,
     _poolCountervailingWinds,
+    _poolCourtHussar,
     _poolCovertTechnician,
     _poolCrawlingChorus,
     _poolCrescendoOfWar,
@@ -1029,6 +1035,7 @@ const shard: CardShard = {
     _poolHeroicIntervention,
     _poolHex,
     _poolHinterlandLogger,
+    _poolHit,
     _poolHixusPrisonWarden,
     _poolHobbitsSting,
     _poolHonoredKnightCaptain,
@@ -1162,6 +1169,7 @@ const shard: CardShard = {
     _poolOdricsOutrider,
     _poolOgreBattledriver,
     _poolOldRutstein,
+    _poolOmnibian,
     _poolOmnispellAdept,
     _poolOnduChampion,
     _poolOnduGiant,
@@ -1239,6 +1247,7 @@ const shard: CardShard = {
     _poolRottenheartGhoul,
     _poolRumblingSentry,
     _poolRunAshore,
+    _poolRun,
     _poolRushwoodDryad,
     _poolRustElemental,
     _poolRustShieldRampager,
@@ -1327,6 +1336,7 @@ const shard: CardShard = {
     _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
+    _poolSproutingPhytohydra,
     _poolSpyglassSiren,
     _poolSquirrelSovereign,
     _poolStadiumTidalmage,

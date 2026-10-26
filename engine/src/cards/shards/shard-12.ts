@@ -580,6 +580,7 @@ import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
 import _poolSouvenirSnatcher from "../pool/souvenir-snatcher.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
+import _poolSpellSnare from "../pool/spell-snare.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpiderFood from "../pool/spider-food.js";
@@ -701,6 +702,7 @@ import _poolWindcallerAven from "../pool/windcaller-aven.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
+import _poolWitsEnd from "../pool/wits-end.js";
 import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
 import _poolWrapInFlames from "../pool/wrap-in-flames.js";
@@ -1307,6 +1309,7 @@ const shard: CardShard = {
     _poolSophiaDoggedDetective,
     _poolSouvenirSnatcher,
     _poolSpectacularSpiderMan,
+    _poolSpellSnare,
     _poolSpellbook,
     _poolSpellgyre,
     _poolSpiderFood,
@@ -1428,6 +1431,7 @@ const shard: CardShard = {
     _poolWitchBlessedMeadow,
     _poolWitherbloomCommand,
     _poolWitheringCurse,
+    _poolWitsEnd,
     _poolWolfbat,
     _poolWolfridersSaddle,
     _poolWrapInFlames,

@@ -47,6 +47,7 @@ import _poolAugurIlVec from "../pool/augur-il-vec.js";
 import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
+import _poolAzoriusGuildmage from "../pool/azorius-guildmage.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
@@ -597,6 +598,7 @@ import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSimicInitiate from "../pool/simic-initiate.js";
+import _poolSimple from "../pool/simple.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
@@ -692,6 +694,7 @@ import _poolTowerOfChampions from "../pool/tower-of-champions.js";
 import _poolToweringIndrik from "../pool/towering-indrik.js";
 import _poolToxinAnalysis from "../pool/toxin-analysis.js";
 import _poolTradeCaravan from "../pool/trade-caravan.js";
+import _poolTransguildCourier from "../pool/transguild-courier.js";
 import _poolTrawlerDrake from "../pool/trawler-drake.js";
 import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
@@ -832,6 +835,7 @@ const shard: CardShard = {
     _poolAuntieBlyteBadInfluence,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
+    _poolAzoriusGuildmage,
     _poolAzraSmokeshaper,
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
@@ -1382,6 +1386,7 @@ const shard: CardShard = {
     _poolSilentClearing,
     _poolSilentHallcreeper,
     _poolSimicInitiate,
+    _poolSimple,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
     _poolSkyclavePlunder,
@@ -1477,6 +1482,7 @@ const shard: CardShard = {
     _poolToweringIndrik,
     _poolToxinAnalysis,
     _poolTradeCaravan,
+    _poolTransguildCourier,
     _poolTrawlerDrake,
     _poolTreasureCove,
     _poolTreasureDredger,

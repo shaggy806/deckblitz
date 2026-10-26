@@ -164,6 +164,7 @@ import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
 import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
+import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
@@ -277,6 +278,7 @@ import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.
 import _poolGreaterStoneSpirit from "../pool/greater-stone-spirit.js";
 import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
+import _poolHaazdaExonerator from "../pool/haazda-exonerator.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
@@ -461,6 +463,7 @@ import _poolPyroclasm from "../pool/pyroclasm.js";
 import _poolQuakebringer from "../pool/quakebringer.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
 import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
+import _poolRakdosIckspitter from "../pool/rakdos-ickspitter.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
@@ -882,6 +885,7 @@ const shard: CardShard = {
     _poolDomesticatedHydra,
     _poolDonAndresTheRenegade,
     _poolDonatelloTurtleTechie,
+    _poolDovescape,
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,
@@ -995,6 +999,7 @@ const shard: CardShard = {
     _poolGreaterStoneSpirit,
     _poolGrimFlayer,
     _poolGuardiansOfOboro,
+    _poolHaazdaExonerator,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
     _poolHarnessedSnubhorn,
@@ -1179,6 +1184,7 @@ const shard: CardShard = {
     _poolQuakebringer,
     _poolQuilledWolf,
     _poolRadagastWizardOfWilds,
+    _poolRakdosIckspitter,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
     _poolRampartArchitect,

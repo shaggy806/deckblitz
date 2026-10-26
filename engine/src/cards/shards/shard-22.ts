@@ -25,6 +25,7 @@ import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolApathy from "../pool/apathy.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolAppeal from "../pool/appeal.js";
+import _poolAquastrandSpider from "../pool/aquastrand-spider.js";
 import _poolArcboundJavelineer from "../pool/arcbound-javelineer.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArchonOfValorsReach from "../pool/archon-of-valors-reach.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolApathy,
     _poolAppaLoyalSkyBison,
     _poolAppeal,
+    _poolAquastrandSpider,
     _poolArcboundJavelineer,
     _poolArchivist,
     _poolArchonOfValorsReach,

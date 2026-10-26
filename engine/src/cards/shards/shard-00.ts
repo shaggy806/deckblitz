@@ -440,6 +440,7 @@ import _poolPrimalVisitation from "../pool/primal-visitation.js";
 import _poolPrimordialGnawer from "../pool/primordial-gnawer.js";
 import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
+import _poolProperBurial from "../pool/proper-burial.js";
 import _poolProsperityTycoon from "../pool/prosperity-tycoon.js";
 import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
@@ -504,6 +505,7 @@ import _poolSamisCuriosity from "../pool/samis-curiosity.js";
 import _poolSamsDesperateRescue from "../pool/sams-desperate-rescue.js";
 import _poolSamutVoiceOfDissent from "../pool/samut-voice-of-dissent.js";
 import _poolSanctumGargoyle from "../pool/sanctum-gargoyle.js";
+import _poolSandstormEidolon from "../pool/sandstorm-eidolon.js";
 import _poolSarkhanSoulAflame from "../pool/sarkhan-soul-aflame.js";
 import _poolSarkhanVol from "../pool/sarkhan-vol.js";
 import _poolSarulfsPackmate from "../pool/sarulfs-packmate.js";
@@ -560,6 +562,7 @@ import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
+import _poolSquealingDevil from "../pool/squealing-devil.js";
 import _poolStaffOfTheWildMagus from "../pool/staff-of-the-wild-magus.js";
 import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
@@ -1180,6 +1183,7 @@ const shard: CardShard = {
     _poolPrimordialGnawer,
     _poolProfessorDellianFel,
     _poolProfessorHulk,
+    _poolProperBurial,
     _poolProsperityTycoon,
     _poolPrudentFateseer,
     _poolPryingEyes,
@@ -1244,6 +1248,7 @@ const shard: CardShard = {
     _poolSamsDesperateRescue,
     _poolSamutVoiceOfDissent,
     _poolSanctumGargoyle,
+    _poolSandstormEidolon,
     _poolSarkhanSoulAflame,
     _poolSarkhanVol,
     _poolSarulfsPackmate,
@@ -1300,6 +1305,7 @@ const shard: CardShard = {
     _poolSpellStutter,
     _poolSpinedMegalodon,
     _poolSpringLoadedSawblades,
+    _poolSquealingDevil,
     _poolStaffOfTheWildMagus,
     _poolStandUpForYourself,
     _poolStarfieldMystic,

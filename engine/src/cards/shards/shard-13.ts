@@ -46,11 +46,13 @@ import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
+import _poolAuroraEidolon from "../pool/aurora-eidolon.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvacynianMissionaries from "../pool/avacynian-missionaries.js";
 import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
 import _poolAwakenerDruid from "../pool/awakener-druid.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
+import _poolAzoriusAethermage from "../pool/azorius-aethermage.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
@@ -449,6 +451,7 @@ import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRadiantEpicure from "../pool/radiant-epicure.js";
+import _poolRagamuffyn from "../pool/ragamuffyn.js";
 import _poolRainbowVale from "../pool/rainbow-vale.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
@@ -785,11 +788,13 @@ const shard: CardShard = {
     _poolAstridPeth,
     _poolAttendedHealer,
     _poolAudaciousInfiltrator,
+    _poolAuroraEidolon,
     _poolAuthorityOfTheConsuls,
     _poolAvacynianMissionaries,
     _poolAvengingHuntbonder,
     _poolAwakenerDruid,
     _poolAxegrinderGiant,
+    _poolAzoriusAethermage,
     _poolAzulaOnTheHunt,
     _poolBadgermole,
     _poolBagOfHolding,
@@ -1188,6 +1193,7 @@ const shard: CardShard = {
     _poolProtectionMagic,
     _poolRabidAttack,
     _poolRadiantEpicure,
+    _poolRagamuffyn,
     _poolRainbowVale,
     _poolRakdosGuildgate,
     _poolRampantGrowth,

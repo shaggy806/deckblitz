@@ -244,6 +244,7 @@ import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGloomStalker from "../pool/gloom-stalker.js";
+import _poolGobhobblerRats from "../pool/gobhobbler-rats.js";
 import _poolGoblinGathering from "../pool/goblin-gathering.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoblinSwineRider from "../pool/goblin-swine-rider.js";
@@ -1012,6 +1013,7 @@ const shard: CardShard = {
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
     _poolGloomStalker,
+    _poolGobhobblerRats,
     _poolGoblinGathering,
     _poolGoblinShortcutter,
     _poolGoblinSwineRider,
