@@ -780,6 +780,7 @@ import _tokensRedGiantToken44 from "../tokens/red-giant-token-4-4.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
+import _tokensSpiritTokenWhite33Flying from "../tokens/spirit-token-white-3-3-flying.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
 import _tokensWolfTokenSoundTheCall from "../tokens/wolf-token-sound-the-call.js";
@@ -1565,6 +1566,7 @@ const shard: CardShard = {
     _tokensRedWhiteSoldierHasteToken,
     _tokensSkeletonToken,
     _tokensSliverToken,
+    _tokensSpiritTokenWhite33Flying,
     _tokensVirtuousRoleToken,
     _tokensWarriorTokenValorsReachTagTeam,
     _tokensWolfTokenSoundTheCall,

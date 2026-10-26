@@ -7198,6 +7198,7 @@ import _poolForgottenCreation from "./pool/forgotten-creation.js";
 import _poolForgottenMonument from "./pool/forgotten-monument.js";
 import _poolForgottenSentinel from "./pool/forgotten-sentinel.js";
 import _poolForkedBolt from "./pool/forked-bolt.js";
+import _poolForkedBranchGarami from "./pool/forked-branch-garami.js";
 import _poolForkedLightning from "./pool/forked-lightning.js";
 import _poolForktailSweep from "./pool/forktail-sweep.js";
 import _poolForlornFlats from "./pool/forlorn-flats.js";
@@ -9751,6 +9752,7 @@ import _poolIncurableOgre from "./pool/incurable-ogre.js";
 import _poolIncursionSpecialist from "./pool/incursion-specialist.js";
 import _poolIndathaCrystal from "./pool/indatha-crystal.js";
 import _poolIndathaTriome from "./pool/indatha-triome.js";
+import _poolIndebtedSamurai from "./pool/indebted-samurai.js";
 import _poolIndebtedSpirit from "./pool/indebted-spirit.js";
 import _poolIndependentTroops from "./pool/independent-troops.js";
 import _poolIndestructibility from "./pool/indestructibility.js";
@@ -13259,6 +13261,7 @@ import _poolNightshadeSchemers from "./pool/nightshade-schemers.js";
 import _poolNightshadeStinger from "./pool/nightshade-stinger.js";
 import _poolNightskyMimic from "./pool/nightsky-mimic.js";
 import _poolNightsnare from "./pool/nightsnare.js";
+import _poolNightsoilKami from "./pool/nightsoil-kami.js";
 import _poolNightsquadCommando from "./pool/nightsquad-commando.js";
 import _poolNightstalkerEngine from "./pool/nightstalker-engine.js";
 import _poolNightveilPredator from "./pool/nightveil-predator.js";
@@ -16010,6 +16013,7 @@ import _poolRollingThunder from "./pool/rolling-thunder.js";
 import _poolRomanaIi from "./pool/romana-ii.js";
 import _poolRomanticRendezvous from "./pool/romantic-rendezvous.js";
 import _poolRonasVortex from "./pool/ronas-vortex.js";
+import _poolRoninCavekeeper from "./pool/ronin-cavekeeper.js";
 import _poolRonomHulk from "./pool/ronom-hulk.js";
 import _poolRonomUnicorn from "./pool/ronom-unicorn.js";
 import _poolRoofstalkerWight from "./pool/roofstalker-wight.js";
@@ -17542,6 +17546,7 @@ import _poolSilverquillLecturer from "./pool/silverquill-lecturer.js";
 import _poolSilverquillPledgemage from "./pool/silverquill-pledgemage.js";
 import _poolSilverquillTheDisputant from "./pool/silverquill-the-disputant.js";
 import _poolSilversmoteGhoul from "./pool/silversmote-ghoul.js";
+import _poolSilverstormSamurai from "./pool/silverstorm-samurai.js";
 import _poolSilverstrike from "./pool/silverstrike.js";
 import _poolSilverwingSquadron from "./pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "./pool/silvos-rogue-elemental.js";
@@ -20462,6 +20467,7 @@ import _poolTorchTheWitness from "./pool/torch-the-witness.js";
 import _poolTorensFistOfTheAngels from "./pool/torens-fist-of-the-angels.js";
 import _poolTorgalAFineHound from "./pool/torgal-a-fine-hound.js";
 import _poolToriDavenantFuryRider from "./pool/tori-davenant-fury-rider.js";
+import _poolToriiWatchward from "./pool/torii-watchward.js";
 import _poolTormentOfScarabs from "./pool/torment-of-scarabs.js";
 import _poolTorment from "./pool/torment.js";
 import _poolTormentedAngel from "./pool/tormented-angel.js";
@@ -23442,6 +23448,7 @@ import _tokensSpiritTokenQuintorius from "./tokens/spirit-token-quintorius.js";
 import _tokensSpiritTokenRedWhite22 from "./tokens/spirit-token-red-white-2-2.js";
 import _tokensSpiritTokenSaintTraftAndRemKarolus from "./tokens/spirit-token-saint-traft-and-rem-karolus.js";
 import _tokensSpiritTokenUnwillingVessel from "./tokens/spirit-token-unwilling-vessel.js";
+import _tokensSpiritTokenWhite33Flying from "./tokens/spirit-token-white-3-3-flying.js";
 import _tokensSpiritTokenWhiteBlack from "./tokens/spirit-token-white-black.js";
 import _tokensSpiritToken from "./tokens/spirit-token.js";
 import _tokensSpiritWarriorToken from "./tokens/spirit-warrior-token.js";
@@ -30749,6 +30756,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForgottenMonument,
   _poolForgottenSentinel,
   _poolForkedBolt,
+  _poolForkedBranchGarami,
   _poolForkedLightning,
   _poolForktailSweep,
   _poolForlornFlats,
@@ -33302,6 +33310,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIncursionSpecialist,
   _poolIndathaCrystal,
   _poolIndathaTriome,
+  _poolIndebtedSamurai,
   _poolIndebtedSpirit,
   _poolIndependentTroops,
   _poolIndestructibility,
@@ -36810,6 +36819,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNightshadeStinger,
   _poolNightskyMimic,
   _poolNightsnare,
+  _poolNightsoilKami,
   _poolNightsquadCommando,
   _poolNightstalkerEngine,
   _poolNightveilPredator,
@@ -39561,6 +39571,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRomanaIi,
   _poolRomanticRendezvous,
   _poolRonasVortex,
+  _poolRoninCavekeeper,
   _poolRonomHulk,
   _poolRonomUnicorn,
   _poolRoofstalkerWight,
@@ -41093,6 +41104,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilverquillPledgemage,
   _poolSilverquillTheDisputant,
   _poolSilversmoteGhoul,
+  _poolSilverstormSamurai,
   _poolSilverstrike,
   _poolSilverwingSquadron,
   _poolSilvosRogueElemental,
@@ -44013,6 +44025,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorensFistOfTheAngels,
   _poolTorgalAFineHound,
   _poolToriDavenantFuryRider,
+  _poolToriiWatchward,
   _poolTormentOfScarabs,
   _poolTorment,
   _poolTormentedAngel,
@@ -46999,6 +47012,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSpiritTokenRedWhite22,
   _tokensSpiritTokenSaintTraftAndRemKarolus,
   _tokensSpiritTokenUnwillingVessel,
+  _tokensSpiritTokenWhite33Flying,
   _tokensSpiritTokenWhiteBlack,
   _tokensSpiritToken,
   _tokensSpiritWarriorToken,
@@ -54313,6 +54327,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/forgotten-monument": _poolForgottenMonument,
   "pool/forgotten-sentinel": _poolForgottenSentinel,
   "pool/forked-bolt": _poolForkedBolt,
+  "pool/forked-branch-garami": _poolForkedBranchGarami,
   "pool/forked-lightning": _poolForkedLightning,
   "pool/forktail-sweep": _poolForktailSweep,
   "pool/forlorn-flats": _poolForlornFlats,
@@ -56866,6 +56881,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/incursion-specialist": _poolIncursionSpecialist,
   "pool/indatha-crystal": _poolIndathaCrystal,
   "pool/indatha-triome": _poolIndathaTriome,
+  "pool/indebted-samurai": _poolIndebtedSamurai,
   "pool/indebted-spirit": _poolIndebtedSpirit,
   "pool/independent-troops": _poolIndependentTroops,
   "pool/indestructibility": _poolIndestructibility,
@@ -60374,6 +60390,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nightshade-stinger": _poolNightshadeStinger,
   "pool/nightsky-mimic": _poolNightskyMimic,
   "pool/nightsnare": _poolNightsnare,
+  "pool/nightsoil-kami": _poolNightsoilKami,
   "pool/nightsquad-commando": _poolNightsquadCommando,
   "pool/nightstalker-engine": _poolNightstalkerEngine,
   "pool/nightveil-predator": _poolNightveilPredator,
@@ -63125,6 +63142,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/romana-ii": _poolRomanaIi,
   "pool/romantic-rendezvous": _poolRomanticRendezvous,
   "pool/ronas-vortex": _poolRonasVortex,
+  "pool/ronin-cavekeeper": _poolRoninCavekeeper,
   "pool/ronom-hulk": _poolRonomHulk,
   "pool/ronom-unicorn": _poolRonomUnicorn,
   "pool/roofstalker-wight": _poolRoofstalkerWight,
@@ -64657,6 +64675,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silverquill-pledgemage": _poolSilverquillPledgemage,
   "pool/silverquill-the-disputant": _poolSilverquillTheDisputant,
   "pool/silversmote-ghoul": _poolSilversmoteGhoul,
+  "pool/silverstorm-samurai": _poolSilverstormSamurai,
   "pool/silverstrike": _poolSilverstrike,
   "pool/silverwing-squadron": _poolSilverwingSquadron,
   "pool/silvos-rogue-elemental": _poolSilvosRogueElemental,
@@ -67577,6 +67596,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/torens-fist-of-the-angels": _poolTorensFistOfTheAngels,
   "pool/torgal-a-fine-hound": _poolTorgalAFineHound,
   "pool/tori-davenant-fury-rider": _poolToriDavenantFuryRider,
+  "pool/torii-watchward": _poolToriiWatchward,
   "pool/torment-of-scarabs": _poolTormentOfScarabs,
   "pool/torment": _poolTorment,
   "pool/tormented-angel": _poolTormentedAngel,
@@ -70557,6 +70577,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/spirit-token-red-white-2-2": _tokensSpiritTokenRedWhite22,
   "tokens/spirit-token-saint-traft-and-rem-karolus": _tokensSpiritTokenSaintTraftAndRemKarolus,
   "tokens/spirit-token-unwilling-vessel": _tokensSpiritTokenUnwillingVessel,
+  "tokens/spirit-token-white-3-3-flying": _tokensSpiritTokenWhite33Flying,
   "tokens/spirit-token-white-black": _tokensSpiritTokenWhiteBlack,
   "tokens/spirit-token": _tokensSpiritToken,
   "tokens/spirit-warrior-token": _tokensSpiritWarriorToken,

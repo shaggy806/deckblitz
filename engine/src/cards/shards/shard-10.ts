@@ -491,6 +491,7 @@ import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
+import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
 import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRootSpider from "../pool/root-spider.js";
@@ -1230,6 +1231,7 @@ const shard: CardShard = {
     _poolRobTheArchives,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
+    _poolRoninCavekeeper,
     _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
     _poolRootSpider,

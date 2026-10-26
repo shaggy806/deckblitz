@@ -518,6 +518,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Spirit Token (Red-White)",
   "Spirit Token (Saint Traft and Rem Karolus)",
   "Spirit Token (Unwilling Vessel)",
+  "Spirit Token (White 3/3 Flying)",
   "Spirit Token (White-Black)",
   "Spirit Warrior Token",
   "Squid Token",

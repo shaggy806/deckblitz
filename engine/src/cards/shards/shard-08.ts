@@ -321,6 +321,7 @@ import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
+import _poolIndebtedSamurai from "../pool/indebted-samurai.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfernalContract from "../pool/infernal-contract.js";
 import _poolInfest from "../pool/infest.js";
@@ -1088,6 +1089,7 @@ const shard: CardShard = {
     _poolIlhargTheRazeBoar,
     _poolImmaculateMagistrate,
     _poolImmoralBargain,
+    _poolIndebtedSamurai,
     _poolIndomitableAncients,
     _poolInfernalContract,
     _poolInfest,

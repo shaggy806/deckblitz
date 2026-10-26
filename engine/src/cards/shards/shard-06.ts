@@ -232,6 +232,7 @@ import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolForceOfRage from "../pool/force-of-rage.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
+import _poolForkedBranchGarami from "../pool/forked-branch-garami.js";
 import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
@@ -961,6 +962,7 @@ const shard: CardShard = {
     _poolFoggySwampSpiritKeeper,
     _poolForceOfRage,
     _poolForgottenCreation,
+    _poolForkedBranchGarami,
     _poolFormAPosse,
     _poolFortify,
     _poolFountainOfRenewal,

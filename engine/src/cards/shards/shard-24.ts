@@ -395,6 +395,7 @@ import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
+import _poolNightsoilKami from "../pool/nightsoil-kami.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
 import _poolNissasRevelation from "../pool/nissas-revelation.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolNarstadScrapper,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
+    _poolNightsoilKami,
     _poolNinjaOfTheHand,
     _poolNissasRevelation,
     _poolNovaFlame,

@@ -635,6 +635,7 @@ import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
+import _poolToriiWatchward from "../pool/torii-watchward.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
@@ -1377,6 +1378,7 @@ const shard: CardShard = {
     _poolTitaniaNaturesForce,
     _poolTolarianEntrancer,
     _poolTombRobber,
+    _poolToriiWatchward,
     _poolTragicLesson,
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
