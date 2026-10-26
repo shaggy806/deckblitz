@@ -7121,8 +7121,9 @@ export interface EffectApi {
   /** See the `"reveal-top"` {@link EffectSpec}. `player` is whose library
    * (the effect's controller's when omitted). */
   revealTop(then: EffectSpec | null, player?: PlayerId): void;
-  /** See the `"shuffle-into-library"` {@link EffectSpec}. */
-  shuffleIntoLibrary(target: TargetRef): void;
+  /** See the `"shuffle-into-library"` {@link EffectSpec}. `ownerOnly`: the
+   * object is gone, so its owner only shuffles their library. */
+  shuffleIntoLibrary(target: TargetRef, ownerOnly?: boolean): void;
   /** Who owns the object `target` names — as it last existed, if it has
    * ceased to exist — or the player itself. */
   ownerOf(target: TargetRef): PlayerId | undefined;
@@ -11056,6 +11057,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "shuffle-into-library": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.shuffleIntoLibrary(target);
+      // "When this creature dies, shuffle it into its owner's library" with
+      // the card gone from the graveyard since: it stays where it is, and its
+      // owner shuffles all the same (Angel of Fury's ruling).
+      else if (spec.target === "trigger-object" && ctx.triggerObject !== undefined) {
+        ctx.shuffleIntoLibrary({ kind: "object", object: ctx.triggerObject }, true);
+      }
       return;
     }
     case "surveil":

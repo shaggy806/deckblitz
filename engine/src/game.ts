@@ -352,6 +352,7 @@ import {
   concreteTargetSpecs,
   differentControllerOf,
   divisionOf as spellDivision,
+  groupBounds,
   groupPowerExceeded,
   groupReadsX,
   otherThanSlots,
@@ -21135,6 +21136,12 @@ export class Game {
         continue;
       }
       const options = legalTargets(this.state, this.registry, spec, trigger.controller, triggerSource);
+      // "Two target lands you control" as one group (`any-number`, `min:
+      // 2`) with one land to point at: no legal choice (rule 603.3d).
+      if (options.length < groupBounds(spec).min) {
+        this.emit({ type: "trigger-removed", source: trigger.sourceObjectId, reason: "no legal targets" });
+        return "done";
+      }
       if (options.length === 0) {
         // "Up to one" or "any number of" with nothing to point at: none is
         // a legal choice, so the ability still goes on the stack (rule
@@ -22778,9 +22785,18 @@ export class Game {
       putOnLibrary: (target, position) => {
         if (target.kind === "object") this.putOnLibrary(target.object, position);
       },
-      shuffleIntoLibrary: (target) => {
+      shuffleIntoLibrary: (target, ownerOnly) => {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
+        // Gone from the zone it was in (a new object, rule 400.7): it stays
+        // where it is, and its owner shuffles their library all the same
+        // (Angel of Fury's ruling: "it will remain in its zone when its owner
+        // shuffles their library").
+        if (ownerOnly === true) {
+          const owner = object?.owner ?? lastKnownOf(target)?.owner;
+          if (owner !== undefined && this.state.players[owner]?.hasLost === false) this.shuffleLibraryOf(owner);
+          return;
+        }
         // A permanent, or a card in a graveyard: Worldspine Wurm's "shuffle
         // it into its owner's library" as it's put there.
         if (object === undefined || (object.zone !== "battlefield" && object.zone !== "graveyard")) return;

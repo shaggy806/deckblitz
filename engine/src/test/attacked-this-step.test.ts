@@ -8,7 +8,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, C, activate, cast, hand, lands, life, nextTurn, pt, ref, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, C, activate, cast, enter, pickModes, pickTargets, settle, hand, lands, life, nextTurn, pt, ref, spawn, table, toHand, zone } from "./harness.js";
 import type { ScriptedController } from "../controller.js";
 
 /** Bob's turn, his creatures declared attacking as given, alice holding
@@ -139,5 +139,38 @@ describe("prevent-damage-to-you", () => {
     activate(game, scarecrow);
     game.advanceUntil((s) => s.turn.step === "postcombat-main" && s.awaiting === null);
     expect(life(game, A)).toBe(17);
+  });
+});
+
+describe("Sea Drake", () => {
+  it("returns two lands you control", () => {
+    const { game, a } = table();
+    const [one, two] = lands(game, "Island", 2);
+    pickTargets(a, one, two);
+    enter(game, "Sea Drake");
+    expect(zone(game, one)).toBe("hand");
+    expect(zone(game, two)).toBe("hand");
+  });
+
+  it("is removed from the stack with only one land to target (rule 603.3d)", () => {
+    const { game } = table();
+    const [only] = lands(game, "Island", 1);
+    enter(game, "Sea Drake");
+    expect(zone(game, only)).toBe("battlefield");
+    expect(game.eventsOfType("trigger-removed").length).toBeGreaterThan(0);
+  });
+});
+
+describe("shuffle-into-library", () => {
+  it("has the owner shuffle though the card left the graveyard first (Angel of Fury's ruling)", () => {
+    const { game, a } = table();
+    const angel = spawn(game, "Angel of Fury");
+    pickModes(a, 0);
+    game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [ref(angel)]);
+    const card = game.state.zones.perPlayer[A].graveyard.find((id) => game.state.objects[id].cardName === "Angel of Fury")!;
+    game.debugApplyEffect(A, { kind: "exile", target: 0 }, [ref(card)]);
+    settle(game);
+    expect(zone(game, card)).toBe("exile");
+    expect(game.eventsOfType("library-shuffled").some((e) => e.player === A)).toBe(true);
   });
 });
