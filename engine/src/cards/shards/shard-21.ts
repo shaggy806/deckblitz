@@ -650,6 +650,7 @@ import _poolValorsReachTagTeam from "../pool/valors-reach-tag-team.js";
 import _poolVaporkin from "../pool/vaporkin.js";
 import _poolVaultbreaker from "../pool/vaultbreaker.js";
 import _poolVedalkenBlademaster from "../pool/vedalken-blademaster.js";
+import _poolVedalkenInfuser from "../pool/vedalken-infuser.js";
 import _poolVeilOfAssimilation from "../pool/veil-of-assimilation.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
@@ -1358,6 +1359,7 @@ const shard: CardShard = {
     _poolVaporkin,
     _poolVaultbreaker,
     _poolVedalkenBlademaster,
+    _poolVedalkenInfuser,
     _poolVeilOfAssimilation,
     _poolVengefulRegrowth,
     _poolVensersJournal,

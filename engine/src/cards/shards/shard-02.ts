@@ -410,6 +410,7 @@ import _poolMysticGenesis from "../pool/mystic-genesis.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
+import _poolNecropede from "../pool/necropede.js";
 import _poolNemesisTrap from "../pool/nemesis-trap.js";
 import _poolNestInvader from "../pool/nest-invader.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
@@ -1123,6 +1124,7 @@ const shard: CardShard = {
     _poolNarsetsReversal,
     _poolNavigatorsRuin,
     _poolNeckSnap,
+    _poolNecropede,
     _poolNemesisTrap,
     _poolNestInvader,
     _poolNicolBolasTheArisen,

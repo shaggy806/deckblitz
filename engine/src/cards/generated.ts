@@ -4169,6 +4169,7 @@ import _poolCrypticSerpent from "./pool/cryptic-serpent.js";
 import _poolCrypticTrilobite from "./pool/cryptic-trilobite.js";
 import _poolCryptidInspector from "./pool/cryptid-inspector.js";
 import _poolCryptolithRite from "./pool/cryptolith-rite.js";
+import _poolCryptoplasm from "./pool/cryptoplasm.js";
 import _poolCryptothrall from "./pool/cryptothrall.js";
 import _poolCrystacean from "./pool/crystacean.js";
 import _poolCrystalBall from "./pool/crystal-ball.js";
@@ -13093,6 +13094,7 @@ import _poolNecromasterDragon from "./pool/necromaster-dragon.js";
 import _poolNecronDeathmark from "./pool/necron-deathmark.js";
 import _poolNecronMonolith from "./pool/necron-monolith.js";
 import _poolNecropanther from "./pool/necropanther.js";
+import _poolNecropede from "./pool/necropede.js";
 import _poolNecropolisFiend from "./pool/necropolis-fiend.js";
 import _poolNecropolisRegent from "./pool/necropolis-regent.js";
 import _poolNecropouncer from "./pool/necropouncer.js";
@@ -17366,6 +17368,7 @@ import _poolShriekRaptor from "./pool/shriek-raptor.js";
 import _poolShriekTreblemaker from "./pool/shriek-treblemaker.js";
 import _poolShriekdiver from "./pool/shriekdiver.js";
 import _poolShriekgeist from "./pool/shriekgeist.js";
+import _poolShriekhorn from "./pool/shriekhorn.js";
 import _poolShriekingDrake from "./pool/shrieking-drake.js";
 import _poolShriekmaw from "./pool/shriekmaw.js";
 import _poolShrikeForce from "./pool/shrike-force.js";
@@ -21379,6 +21382,7 @@ import _poolVedalkenGhoul from "./pool/vedalken-ghoul.js";
 import _poolVedalkenHeretic from "./pool/vedalken-heretic.js";
 import _poolVedalkenHumiliator from "./pool/vedalken-humiliator.js";
 import _poolVedalkenInfiltrator from "./pool/vedalken-infiltrator.js";
+import _poolVedalkenInfuser from "./pool/vedalken-infuser.js";
 import _poolVedalkenMesmerist from "./pool/vedalken-mesmerist.js";
 import _poolVedalkenOrrery from "./pool/vedalken-orrery.js";
 import _poolVedalkenOutlander from "./pool/vedalken-outlander.js";
@@ -27720,6 +27724,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrypticTrilobite,
   _poolCryptidInspector,
   _poolCryptolithRite,
+  _poolCryptoplasm,
   _poolCryptothrall,
   _poolCrystacean,
   _poolCrystalBall,
@@ -36644,6 +36649,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNecronDeathmark,
   _poolNecronMonolith,
   _poolNecropanther,
+  _poolNecropede,
   _poolNecropolisFiend,
   _poolNecropolisRegent,
   _poolNecropouncer,
@@ -40917,6 +40923,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShriekTreblemaker,
   _poolShriekdiver,
   _poolShriekgeist,
+  _poolShriekhorn,
   _poolShriekingDrake,
   _poolShriekmaw,
   _poolShrikeForce,
@@ -44930,6 +44937,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVedalkenHeretic,
   _poolVedalkenHumiliator,
   _poolVedalkenInfiltrator,
+  _poolVedalkenInfuser,
   _poolVedalkenMesmerist,
   _poolVedalkenOrrery,
   _poolVedalkenOutlander,
@@ -51284,6 +51292,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cryptic-trilobite": _poolCrypticTrilobite,
   "pool/cryptid-inspector": _poolCryptidInspector,
   "pool/cryptolith-rite": _poolCryptolithRite,
+  "pool/cryptoplasm": _poolCryptoplasm,
   "pool/cryptothrall": _poolCryptothrall,
   "pool/crystacean": _poolCrystacean,
   "pool/crystal-ball": _poolCrystalBall,
@@ -60208,6 +60217,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/necron-deathmark": _poolNecronDeathmark,
   "pool/necron-monolith": _poolNecronMonolith,
   "pool/necropanther": _poolNecropanther,
+  "pool/necropede": _poolNecropede,
   "pool/necropolis-fiend": _poolNecropolisFiend,
   "pool/necropolis-regent": _poolNecropolisRegent,
   "pool/necropouncer": _poolNecropouncer,
@@ -64481,6 +64491,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shriek-treblemaker": _poolShriekTreblemaker,
   "pool/shriekdiver": _poolShriekdiver,
   "pool/shriekgeist": _poolShriekgeist,
+  "pool/shriekhorn": _poolShriekhorn,
   "pool/shrieking-drake": _poolShriekingDrake,
   "pool/shriekmaw": _poolShriekmaw,
   "pool/shrike-force": _poolShrikeForce,
@@ -68494,6 +68505,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vedalken-heretic": _poolVedalkenHeretic,
   "pool/vedalken-humiliator": _poolVedalkenHumiliator,
   "pool/vedalken-infiltrator": _poolVedalkenInfiltrator,
+  "pool/vedalken-infuser": _poolVedalkenInfuser,
   "pool/vedalken-mesmerist": _poolVedalkenMesmerist,
   "pool/vedalken-orrery": _poolVedalkenOrrery,
   "pool/vedalken-outlander": _poolVedalkenOutlander,
