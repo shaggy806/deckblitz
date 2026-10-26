@@ -20,5 +20,13 @@ export default defineCard({
       resolve: null,
       text: "Whenever this creature blocks or becomes blocked by a creature, this creature deals 3 damage to that creature.",
     },
+    {
+      trigger: { on: "blocked-by", who: "self" },
+      sameAbilityAs: 0,
+      targets: [],
+      effect: { kind: "damage", amount: 3, target: "trigger-object" },
+      resolve: null,
+      text: "Whenever this creature blocks or becomes blocked by a creature, this creature deals 3 damage to that creature.",
+    },
   ],
 });

@@ -23,5 +23,13 @@ export default defineCard({
       resolve: null,
       text: TEXT,
     },
+    {
+      trigger: { on: "blocked-by", who: "self" },
+      sameAbilityAs: 0,
+      targets: [],
+      effect: { kind: "damage", amount: 1, target: "trigger-object" },
+      resolve: null,
+      text: TEXT,
+    },
   ],
 });
