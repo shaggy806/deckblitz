@@ -5477,3 +5477,9 @@ engine terms. A second thing to check is a second test.
 ### Just Fate: castable only once you've been attacked
 - **Do:** Pass the turn. When the opponent's Hill Giant attacks you, cast Just Fate on it in the declare attackers step.
 - **Expect:** Just Fate isn't castable in your own main phase, nor on the opponent's turn before attackers are declared. Once the Giant attacks you it is, and the Giant is destroyed before blocks.
+
+## Ripple (2026-10-26, Coldsnap)
+
+### Surging Sentinels: ripple casts the copy it reveals for free
+- **Do:** Cast Surging Sentinels. Say yes to revealing the top four cards, cast the second Surging Sentinels offered, then order the other three cards when asked.
+- **Expect:** Only the Surging Sentinels among the four is offered, cast without paying. Both Sentinels end up on the battlefield, and Grizzly Bears, Hill Giant and Island go to the bottom of your library in the order you picked. The second Sentinels asks to reveal again.

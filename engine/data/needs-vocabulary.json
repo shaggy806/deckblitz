@@ -11147,6 +11147,26 @@
   "trigger:blocks-two-or-more": {
    "family": "static:block-additional-creature",
    "example": "Lairwatch Giant: whenever this blocks two or more creatures, it gains first strike until end of turn"
+  },
+  "condition:attacked-or-blocked-since-last-upkeep": {
+   "family": "condition:blocked-or-was-blocked-since-last-upkeep",
+   "example": "Shape of the Wiitigo: at the beginning of your upkeep, put a +1/+1 counter on enchanted creature if it attacked or blocked since your last upkeep; otherwise remove one"
+  },
+  "effect:delayed-return-then-discard-toughness": {
+   "family": "effect:flicker-generalized",
+   "example": "Vanish into Memory: exile target creature, draw cards equal to its power; at your next upkeep return it, and if you do, discard cards equal to its toughness"
+  },
+  "effect:that-player-returns-permanent": {
+   "family": "effect:that-player-returns-land",
+   "example": "Blizzard Specter: whenever it deals combat damage to a player, choose one — that player returns a permanent they control to its owner's hand; or that player discards a card"
+  },
+  "static:cast-while-searching-library": {
+   "family": "zone:cast-from-library-top-grants-trigger",
+   "example": "Panglacial Wurm: while you're searching your library, you may cast this card from your library"
+  },
+  "trigger:cumulative-upkeep-paid": {
+   "family": "keyword:cumulative-upkeep",
+   "example": "Hibernation's End: whenever you pay this enchantment's cumulative upkeep, you may search for a creature card with mana value equal to its age counters"
   }
  }
 }

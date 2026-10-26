@@ -8307,4 +8307,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Just Fate: castable only once you've been attacked",
     board({ you: { bf: ['Plains*3'], hand: ['Just Fate'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  preset(
+    'Surging Sentinels: ripple casts the copy it reveals for free',
+    board({ you: { bf: ['Plains*3'], hand: ['Surging Sentinels'], lib: ['Surging Sentinels', 'Grizzly Bears', 'Hill Giant', 'Island'] } }),
+  ),
 ]
