@@ -502,6 +502,7 @@ import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShadowsVerdict from "../pool/shadows-verdict.js";
+import _poolShadowstorm from "../pool/shadowstorm.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShardConvergence from "../pool/shard-convergence.js";
@@ -539,6 +540,7 @@ import _poolSpawningBreath from "../pool/spawning-breath.js";
 import _poolSpectralLynx from "../pool/spectral-lynx.js";
 import _poolSpidersilkNet from "../pool/spidersilk-net.js";
 import _poolSpikeJester from "../pool/spike-jester.js";
+import _poolSpinalGraft from "../pool/spinal-graft.js";
 import _poolSpinehornMinotaur from "../pool/spinehorn-minotaur.js";
 import _poolSpittingDrake from "../pool/spitting-drake.js";
 import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
@@ -577,8 +579,10 @@ import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeekasDragon from "../pool/teekas-dragon.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
 import _poolTemptWithGlory from "../pool/tempt-with-glory.js";
+import _poolTemptingLicid from "../pool/tempting-licid.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
+import _poolThalakosLowlands from "../pool/thalakos-lowlands.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheFireNationDrill from "../pool/the-fire-nation-drill.js";
 import _poolThePrimaVista from "../pool/the-prima-vista.js";
@@ -1174,6 +1178,7 @@ const shard: CardShard = {
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
     _poolShadowsVerdict,
+    _poolShadowstorm,
     _poolShakedownHeavy,
     _poolShalaiVoiceOfPlenty,
     _poolShardConvergence,
@@ -1211,6 +1216,7 @@ const shard: CardShard = {
     _poolSpectralLynx,
     _poolSpidersilkNet,
     _poolSpikeJester,
+    _poolSpinalGraft,
     _poolSpinehornMinotaur,
     _poolSpittingDrake,
     _poolSplinterHamatoYoshi,
@@ -1249,8 +1255,10 @@ const shard: CardShard = {
     _poolTeekasDragon,
     _poolTeferiMasterOfTime,
     _poolTemptWithGlory,
+    _poolTemptingLicid,
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
+    _poolThalakosLowlands,
     _poolTheFantasticar,
     _poolTheFireNationDrill,
     _poolThePrimaVista,

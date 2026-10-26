@@ -107,6 +107,7 @@ import _poolChaseSteinRunaway from "../pool/chase-stein-runaway.js";
 import _poolChosenByHeliod from "../pool/chosen-by-heliod.js";
 import _poolCinderslashRavager from "../pool/cinderslash-ravager.js";
 import _poolCircleOfPower from "../pool/circle-of-power.js";
+import _poolCircleOfProtectionShadow from "../pool/circle-of-protection-shadow.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
 import _poolCivicStalwart from "../pool/civic-stalwart.js";
 import _poolClamavus from "../pool/clamavus.js";
@@ -373,6 +374,7 @@ import _poolMisterGutsy from "../pool/mister-gutsy.js";
 import _poolMistfordRiverTurtle from "../pool/mistford-river-turtle.js";
 import _poolMistyPalmsOasis from "../pool/misty-palms-oasis.js";
 import _poolMmmenonUthrosExile from "../pool/mmmenon-uthros-exile.js";
+import _poolMoggHollows from "../pool/mogg-hollows.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
@@ -543,6 +545,7 @@ import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
+import _poolSpiritMirror from "../pool/spirit-mirror.js";
 import _poolSplashySpellcaster from "../pool/splashy-spellcaster.js";
 import _poolSplitskinDoll from "../pool/splitskin-doll.js";
 import _poolSporecrownThallid from "../pool/sporecrown-thallid.js";
@@ -801,6 +804,7 @@ const shard: CardShard = {
     _poolChosenByHeliod,
     _poolCinderslashRavager,
     _poolCircleOfPower,
+    _poolCircleOfProtectionShadow,
     _poolCitanulStalwart,
     _poolCivicStalwart,
     _poolClamavus,
@@ -1067,6 +1071,7 @@ const shard: CardShard = {
     _poolMistfordRiverTurtle,
     _poolMistyPalmsOasis,
     _poolMmmenonUthrosExile,
+    _poolMoggHollows,
     _poolMondrakGloryDominus,
     _poolMonologueTax,
     _poolMonssGoblinRaiders,
@@ -1237,6 +1242,7 @@ const shard: CardShard = {
     _poolSphinxOfFalseConclusions,
     _poolSpinnerOfSouls,
     _poolSpiritMantle,
+    _poolSpiritMirror,
     _poolSplashySpellcaster,
     _poolSplitskinDoll,
     _poolSporecrownThallid,

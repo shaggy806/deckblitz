@@ -577,6 +577,7 @@ import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
+import _poolStingingLicid from "../pool/stinging-licid.js";
 import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
@@ -603,6 +604,7 @@ import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
 import _poolTerrorBallista from "../pool/terror-ballista.js";
+import _poolThalakosDreamsower from "../pool/thalakos-dreamsower.js";
 import _poolThaumaticCompass from "../pool/thaumatic-compass.js";
 import _poolTheApprenticesFolly from "../pool/the-apprentices-folly.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
@@ -1296,6 +1298,7 @@ const shard: CardShard = {
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,
     _poolSternLesson,
+    _poolStingingLicid,
     _poolStoneGiant,
     _poolStoneskin,
     _poolStormTheFestival,
@@ -1322,6 +1325,7 @@ const shard: CardShard = {
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,
     _poolTerrorBallista,
+    _poolThalakosDreamsower,
     _poolThaumaticCompass,
     _poolTheApprenticesFolly,
     _poolTheBattleOfBywater,

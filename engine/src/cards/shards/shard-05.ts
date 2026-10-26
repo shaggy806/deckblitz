@@ -506,6 +506,7 @@ import _poolSelvalasCharge from "../pool/selvalas-charge.js";
 import _poolSentinelSarahLyons from "../pool/sentinel-sarah-lyons.js";
 import _poolSeraphOfNewCapenna from "../pool/seraph-of-new-capenna.js";
 import _poolSeraphOfTheScales from "../pool/seraph-of-the-scales.js";
+import _poolSereneOffering from "../pool/serene-offering.js";
 import _poolSerpentAssassin from "../pool/serpent-assassin.js";
 import _poolSerraAdvocate from "../pool/serra-advocate.js";
 import _poolSerraAngel from "../pool/serra-angel.js";
@@ -1190,6 +1191,7 @@ const shard: CardShard = {
     _poolSentinelSarahLyons,
     _poolSeraphOfNewCapenna,
     _poolSeraphOfTheScales,
+    _poolSereneOffering,
     _poolSerpentAssassin,
     _poolSerraAdvocate,
     _poolSerraAngel,

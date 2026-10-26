@@ -97,6 +97,7 @@ import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
 import _poolButterburBreeInnkeeper from "../pool/butterbur-bree-innkeeper.js";
 import _poolCabalInitiate from "../pool/cabal-initiate.js";
+import _poolCalmingLicid from "../pool/calming-licid.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
 import _poolCartographersCompanion from "../pool/cartographers-companion.js";
@@ -326,6 +327,7 @@ import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
 import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
+import _poolLeechingLicid from "../pool/leeching-licid.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
@@ -785,6 +787,7 @@ const shard: CardShard = {
     _poolBushyBodyguard,
     _poolButterburBreeInnkeeper,
     _poolCabalInitiate,
+    _poolCalmingLicid,
     _poolCapashenStandard,
     _poolCarmenCruelSkymarcher,
     _poolCartographersCompanion,
@@ -1014,6 +1017,7 @@ const shard: CardShard = {
     _poolLarvalScoutlander,
     _poolLavaAxe,
     _poolLeafkinAvenger,
+    _poolLeechingLicid,
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
     _poolLeylineInvocation,

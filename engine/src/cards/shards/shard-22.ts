@@ -118,6 +118,7 @@ import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
 import _poolCracklingPerimeter from "../pool/crackling-perimeter.js";
 import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
+import _poolCrazedArmodon from "../pool/crazed-armodon.js";
 import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
@@ -592,6 +593,7 @@ import _poolThornling from "../pool/thornling.js";
 import _poolThrabenCharm from "../pool/thraben-charm.js";
 import _poolThrillOfPossibility from "../pool/thrill-of-possibility.js";
 import _poolThroneOfDeath from "../pool/throne-of-death.js";
+import _poolThumbscrews from "../pool/thumbscrews.js";
 import _poolThunderMagic from "../pool/thunder-magic.js";
 import _poolThunderclapDrake from "../pool/thunderclap-drake.js";
 import _poolThunderingGiant from "../pool/thundering-giant.js";
@@ -811,6 +813,7 @@ const shard: CardShard = {
     _poolCovenantOfBlood,
     _poolCracklingPerimeter,
     _poolCradleOfTheAccursed,
+    _poolCrazedArmodon,
     _poolCreakwoodSafewright,
     _poolCrimsonManticore,
     _poolCrookedCustodian,
@@ -1285,6 +1288,7 @@ const shard: CardShard = {
     _poolThrabenCharm,
     _poolThrillOfPossibility,
     _poolThroneOfDeath,
+    _poolThumbscrews,
     _poolThunderMagic,
     _poolThunderclapDrake,
     _poolThunderingGiant,

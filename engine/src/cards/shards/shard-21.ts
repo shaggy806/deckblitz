@@ -178,6 +178,7 @@ import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolEmptyThePits from "../pool/empty-the-pits.js";
 import _poolEnlarge from "../pool/enlarge.js";
+import _poolEnragingLicid from "../pool/enraging-licid.js";
 import _poolEraOfInnovation from "../pool/era-of-innovation.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
@@ -331,6 +332,7 @@ import _poolLullmagesFamiliar from "../pool/lullmages-familiar.js";
 import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLurkingAutomaton from "../pool/lurking-automaton.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
+import _poolMagmasaur from "../pool/magmasaur.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
@@ -495,6 +497,7 @@ import _poolSimianSling from "../pool/simian-sling.js";
 import _poolSisterOfSilence from "../pool/sister-of-silence.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSkybind from "../pool/skybind.js";
+import _poolSkyshroudVampire from "../pool/skyshroud-vampire.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
@@ -840,6 +843,7 @@ const shard: CardShard = {
     _poolEmperorMihailIi,
     _poolEmptyThePits,
     _poolEnlarge,
+    _poolEnragingLicid,
     _poolEraOfInnovation,
     _poolErase,
     _poolEriettesTemptingApple,
@@ -993,6 +997,7 @@ const shard: CardShard = {
     _poolLuminousRebuke,
     _poolLurkingAutomaton,
     _poolLysAlanaHuntmaster,
+    _poolMagmasaur,
     _poolMalevolentWhispers,
     _poolMangaraTheDiplomat,
     _poolMaraxusOfKeld,
@@ -1157,6 +1162,7 @@ const shard: CardShard = {
     _poolSisterOfSilence,
     _poolSkyRuinDrake,
     _poolSkybind,
+    _poolSkyshroudVampire,
     _poolSlashingTiger,
     _poolSlinkingSerpent,
     _poolSlumberingKeepguard,

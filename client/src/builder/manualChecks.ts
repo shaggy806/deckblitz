@@ -8253,4 +8253,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Shadow Slice: encoded on a creature, it casts again when that creature hits',
     board({ you: { bf: ['Swamp*5', 'Grizzly Bears'], hand: ['Shadow Slice'] } }),
   ),
+  preset(
+    'Enraging Licid: it becomes an Aura, and you can pay to make it a creature again',
+    board({ you: { bf: ['Mountain*3', 'Enraging Licid', 'Grizzly Bears'] } }),
+  ),
 ]

@@ -66,7 +66,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { ninjutsu } from "./cards/helpers.js";
-import { bestowedDefinition } from "./cards/define.js";
+import { bestowedDefinition, licidDefinition } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { INITIATIVE_CARD } from "./cards/initiative.js";
@@ -1621,6 +1621,9 @@ export class Game {
       case "unlock-door":
         this.payToUnlock(action.player, action.permanent, action.door);
         break;
+      case "end-licid-effect":
+        this.endLicidEffect(action.player, action.permanent);
+        break;
       case "cycle":
         this.cycleCard(action.player, action.card);
         break;
@@ -1827,6 +1830,8 @@ export class Game {
         return this.whyCannotTurnFaceUp(action.player, action.permanent, action.morph === true);
       case "unlock-door":
         return this.whyCannotUnlock(action.player, action.permanent, action.door);
+      case "end-licid-effect":
+        return this.whyCannotEndLicidEffect(action.player, action.permanent);
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
@@ -2483,6 +2488,15 @@ export class Game {
           cost: this.unlockCostText(player, id, door),
         });
       }
+    }
+
+    // Ending a Licid's Aura effect (rule 116.2c) — a special action any
+    // time its player has priority, whoever controls the Aura now.
+    for (const id of this.state.zones.shared.battlefield) {
+      const licid = this.state.objects[id].licid;
+      if (licid === undefined || licid.controller !== player) continue;
+      if (this.whyCannotEndLicidEffect(player, id) !== null) continue;
+      out.push({ kind: "end-licid-effect", permanent: id, cardName: printedCardName(this.state.objects[id]), cost: licid.endCost });
     }
 
     this.pushActivations(player, out);
@@ -14146,6 +14160,8 @@ export class Game {
       if (abilityIndex < this.registry.get(rulesTextName(source)).activated.length && hasLostAbilities(source)) {
         return `${def.name} has lost its abilities`;
       }
+      // A Licid that became an Aura "loses this ability".
+      if (ability.licid === true && source.licid !== undefined) return `${def.name} has lost that ability`;
       if (inactiveStandIn(this.state, this.registry, source, abilityIndex)) {
         return `${def.name} no longer has the land type that ability comes from`;
       }
@@ -23703,6 +23719,17 @@ export class Game {
         invalidateComputedCache();
         this.emit({ type: "permanent-unattached", object: target.object, from });
       },
+      becomeLicidAura: (target, endCost) => {
+        const object = this.state.objects[source];
+        if (object === undefined || object.zone !== "battlefield") return;
+        // "Loses this ability and becomes an Aura enchantment with enchant
+        // creature" — a layer-4 and a layer-6 effect from now (rule 613.7),
+        // then "attach it to target creature".
+        this.state.timestampSeq += 1;
+        object.licid = { controller, endCost, at: this.state.timestampSeq };
+        invalidateComputedCache();
+        this.attachPermanent(source, target);
+      },
       attach: (target, attachment) => {
         if (attachment === undefined) {
           this.attachPermanent(source, target);
@@ -27170,8 +27197,14 @@ export class Game {
     if (sourceObject === undefined || sourceObject.zone !== "battlefield") return;
     if (sourceObject.attachedTo === targetId) return;
     const printed = this.registry.get(printedCardName(sourceObject));
-    // A bestowed Aura moves as an Aura (rule 702.103b).
-    const def = sourceObject.bestowed === true ? bestowedDefinition(printed) : printed;
+    // A bestowed Aura moves as an Aura (rule 702.103b), and so does a Licid
+    // that became one.
+    const def =
+      sourceObject.bestowed === true
+        ? bestowedDefinition(printed)
+        : sourceObject.licid !== undefined
+          ? licidDefinition(printed)
+          : printed;
     const legal = def.subtypes.includes("Aura")
       ? this.canEnchant(source, targetId, sourceObject.controller, def)
       : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true);
@@ -30258,6 +30291,38 @@ export class Game {
     if (morph) return card.morph?.cost ?? null;
     if (object.faceDown.kind === "morph" || object.faceDown.kind === "disguise") return null;
     return card.types.includes("creature") ? card.manaCost : null;
+  }
+
+  /** Why `player` can't end the Licid `id`'s Aura effect now: it isn't one,
+   * it isn't theirs to end (the "you" of its ability), or they can't pay. */
+  private whyCannotEndLicidEffect(player: PlayerId, id: ObjectId): string | null {
+    const blocked = this.whyCannotAct(player);
+    if (blocked !== null) return blocked;
+    const licid = this.state.objects[id]?.licid;
+    if (licid === undefined || this.state.objects[id].zone !== "battlefield") return "that isn't a Licid's Aura";
+    if (licid.controller !== player) return `${player} can't end that effect`;
+    if (this.payMana(player, parseManaCost(licid.endCost)) === null) return `${player} cannot pay ${licid.endCost}`;
+    return null;
+  }
+
+  /** "You may pay [cost] to end this effect" (a Licid): a special action, so
+   * nothing can respond (rule 116.2c) and the player keeps priority
+   * (116.3). Pay the cost; it's no longer an Aura — a creature again, with
+   * its ability back — and unattached, as 704.5p would leave it. */
+  private endLicidEffect(player: PlayerId, id: ObjectId): void {
+    const why = this.whyCannotEndLicidEffect(player, id);
+    if (why !== null) throw new Error(why);
+    const object = this.state.objects[id];
+    const cost = object.licid?.endCost ?? "";
+    const payment = this.payMana(player, parseManaCost(cost));
+    if (payment === null) throw new Error(`${player} cannot pay ${cost}`);
+    this.executePayment(player, payment);
+    delete object.licid;
+    const from = object.attachedTo;
+    object.attachedTo = null;
+    invalidateComputedCache();
+    if (from !== null) this.emit({ type: "permanent-unattached", object: id, from });
+    this.afterPlayerAction(player);
   }
 
   /** Turn a face-down permanent face up (rules 701.40b, 702.37e): show
@@ -34131,7 +34196,7 @@ export class Game {
         }
         if (object.attachedTo === null || !this.inGame(object)) continue;
         const subtypes = this.registry.get(printedCardName(object)).subtypes;
-        if (subtypes.includes("Aura")) continue;
+        if (subtypes.includes("Aura") || object.licid !== undefined) continue;
         if (subtypes.includes("Equipment") && this.canEquip(id, object.attachedTo)) continue;
         const from = object.attachedTo;
         object.attachedTo = null;
@@ -34614,7 +34679,9 @@ export class Game {
     // check — as it would at a table.
     for (const id of battlefield) {
       const object = this.state.objects[id];
-      const def = this.registry.get(printedCardName(object));
+      const printed = this.registry.get(printedCardName(object));
+      // A Licid that became an Aura (`GameObject.licid`) is one like any other.
+      const def = object.licid !== undefined ? licidDefinition(printed) : printed;
       if (!def.subtypes.includes("Aura")) continue;
       if (object.attachedTo !== null && this.canEnchant(id, object.attachedTo, object.controller, def)) continue;
       // A Curse on a player who has left the game, or one it can no longer
@@ -36538,6 +36605,8 @@ export class Game {
     // A bestowed Aura spell becomes a bestowed Aura (rule 702.103b); any
     // other move ends it.
     if (!(previousZone === "stack" && to === "battlefield")) object.bestowed = undefined;
+    // A Licid's Aura effect was this permanent's (rule 400.7).
+    delete object.licid;
     // Graveyard permissions: a card's own "you may cast it this turn" belongs
     // to that object in that graveyard, and a grantor's spent allowances to
     // that object on the battlefield — a card that comes back is a new object

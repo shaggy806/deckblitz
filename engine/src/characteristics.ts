@@ -1686,11 +1686,33 @@ function reconfiguredModifier(object: GameObject): PtModifier | null {
   };
 }
 
-/** The object's layer-4 modifiers, reconfigure's among them, in timestamp order. */
+/**
+ * A Licid's "becomes an Aura enchantment with enchant creature"
+ * (`GameObject.licid`): an enchantment, no longer a creature (and so none of
+ * its creature types, 205.1a), with the subtype Aura, at the timestamp its
+ * ability resolved (613.7) — until the effect is ended or it leaves.
+ */
+function licidModifier(object: GameObject): PtModifier | null {
+  if (object.licid === undefined) return null;
+  return {
+    power: 0,
+    toughness: 0,
+    keywords: [],
+    untilEndOfTurn: false,
+    setTypes: ["enchantment"],
+    addSubtypes: ["Aura"],
+    timestamp: object.licid.at,
+  };
+}
+
+/** The object's layer-4 modifiers, reconfigure's and a Licid's among them,
+ * in timestamp order. */
 function typeModifiers(object: GameObject): readonly PtModifier[] {
   const reconfigured = reconfiguredModifier(object);
-  if (reconfigured === null) return object.modifiers;
-  return [...object.modifiers, reconfigured].sort((a, b) => modifierKey(a) - modifierKey(b));
+  const licid = licidModifier(object);
+  if (reconfigured === null && licid === null) return object.modifiers;
+  const extra = [reconfigured, licid].filter((m): m is PtModifier => m !== null);
+  return [...object.modifiers, ...extra].sort((a, b) => modifierKey(a) - modifierKey(b));
 }
 
 function modifierKey(modifier: PtModifier): number {

@@ -514,6 +514,7 @@ import _poolScragnoth from "../pool/scragnoth.js";
 import _poolSearchForDagger from "../pool/search-for-dagger.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
 import _poolSecondHarvest from "../pool/second-harvest.js";
+import _poolSegmentedWurm from "../pool/segmented-wurm.js";
 import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
@@ -545,6 +546,7 @@ import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
 import _poolSkitteringCrustacean from "../pool/skittering-crustacean.js";
 import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
+import _poolSkyshroudCondor from "../pool/skyshroud-condor.js";
 import _poolSkyshroudTroll from "../pool/skyshroud-troll.js";
 import _poolSkysnareSpider from "../pool/skysnare-spider.js";
 import _poolSlaveringNulls from "../pool/slavering-nulls.js";
@@ -1250,6 +1252,7 @@ const shard: CardShard = {
     _poolSearchForDagger,
     _poolSearingFlesh,
     _poolSecondHarvest,
+    _poolSegmentedWurm,
     _poolSeismicShift,
     _poolSelectForInspection,
     _poolSerendibEfreet,
@@ -1281,6 +1284,7 @@ const shard: CardShard = {
     _poolSkitteringCrustacean,
     _poolSkullknockerOgre,
     _poolSkyshipStalker,
+    _poolSkyshroudCondor,
     _poolSkyshroudTroll,
     _poolSkysnareSpider,
     _poolSlaveringNulls,

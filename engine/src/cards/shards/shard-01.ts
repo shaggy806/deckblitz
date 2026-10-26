@@ -461,6 +461,7 @@ import _poolSaltRoadPackbeast from "../pool/salt-road-packbeast.js";
 import _poolSaltRoadPatrol from "../pool/salt-road-patrol.js";
 import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
+import _poolSarcomancy from "../pool/sarcomancy.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
 import _poolSaruliGatekeepers from "../pool/saruli-gatekeepers.js";
@@ -468,6 +469,7 @@ import _poolSautekhImmortal from "../pool/sautekh-immortal.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
 import _poolScaldingTarn from "../pool/scalding-tarn.js";
+import _poolScaldingTongs from "../pool/scalding-tongs.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
@@ -1126,6 +1128,7 @@ const shard: CardShard = {
     _poolSaltRoadPatrol,
     _poolSamutTyrantOfNaktamun,
     _poolSanctumOfTranquilLight,
+    _poolSarcomancy,
     _poolSarevokDeathbringer,
     _poolSarkhansWhelp,
     _poolSaruliGatekeepers,
@@ -1133,6 +1136,7 @@ const shard: CardShard = {
     _poolSavageMansion,
     _poolSavannah,
     _poolScaldingTarn,
+    _poolScaldingTongs,
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,

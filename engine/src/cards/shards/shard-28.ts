@@ -292,6 +292,7 @@ import _poolIntegrity from "../pool/integrity.js";
 import _poolIntervention from "../pool/intervention.js";
 import _poolIntoTheFire from "../pool/into-the-fire.js";
 import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
+import _poolInvulnerability from "../pool/invulnerability.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
@@ -996,6 +997,7 @@ const shard: CardShard = {
     _poolIntervention,
     _poolIntoTheFire,
     _poolIntrepidRabbit,
+    _poolInvulnerability,
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,

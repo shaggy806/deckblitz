@@ -126,6 +126,7 @@ import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
 import _poolContainmentMembrane from "../pool/containment-membrane.js";
 import _poolConvolute from "../pool/convolute.js";
+import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
@@ -207,6 +208,7 @@ import _poolFireElemental from "../pool/fire-elemental.js";
 import _poolFireball from "../pool/fireball.js";
 import _poolFirebladeArtist from "../pool/fireblade-artist.js";
 import _poolFirstDayOfClass from "../pool/first-day-of-class.js";
+import _poolFlailingDrake from "../pool/flailing-drake.js";
 import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
 import _poolFlatline from "../pool/flatline.js";
@@ -801,6 +803,7 @@ const shard: CardShard = {
     _poolConjurersMantle,
     _poolContainmentMembrane,
     _poolConvolute,
+    _poolConvulsingLicid,
     _poolCoralEel,
     _poolCracklingCyclops,
     _poolCruelTruths,
@@ -882,6 +885,7 @@ const shard: CardShard = {
     _poolFireball,
     _poolFirebladeArtist,
     _poolFirstDayOfClass,
+    _poolFlailingDrake,
     _poolFlameOn,
     _poolFlameSweep,
     _poolFlatline,

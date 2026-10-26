@@ -216,6 +216,7 @@ import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFloriferousVinewall from "../pool/floriferous-vinewall.js";
+import _poolFlowstoneSculpture from "../pool/flowstone-sculpture.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
@@ -577,6 +578,7 @@ import _poolSunbringersTouch from "../pool/sunbringers-touch.js";
 import _poolSunscorchedDivide from "../pool/sunscorched-divide.js";
 import _poolSurveyTheWreckage from "../pool/survey-the-wreckage.js";
 import _poolSylvanCaryatid from "../pool/sylvan-caryatid.js";
+import _poolTahngarthsRage from "../pool/tahngarths-rage.js";
 import _poolTaiga from "../pool/taiga.js";
 import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
 import _poolTalionsMessenger from "../pool/talions-messenger.js";
@@ -922,6 +924,7 @@ const shard: CardShard = {
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
     _poolFloriferousVinewall,
+    _poolFlowstoneSculpture,
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolForTheFamily,
@@ -1283,6 +1286,7 @@ const shard: CardShard = {
     _poolSunscorchedDivide,
     _poolSurveyTheWreckage,
     _poolSylvanCaryatid,
+    _poolTahngarthsRage,
     _poolTaiga,
     _poolTakeUpTheShield,
     _poolTalionsMessenger,

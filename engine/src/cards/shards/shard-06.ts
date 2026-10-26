@@ -612,6 +612,7 @@ import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
 import _poolUrgorosTheEmptyOne from "../pool/urgoros-the-empty-one.js";
 import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
+import _poolVecTownships from "../pool/vec-townships.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
 import _poolVerdantEmbrace from "../pool/verdant-embrace.js";
@@ -634,6 +635,7 @@ import _poolWeakstone from "../pool/weakstone.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
+import _poolWildWurm from "../pool/wild-wurm.js";
 import _poolWilfredMott from "../pool/wilfred-mott.js";
 import _poolWillScionOfPeace from "../pool/will-scion-of-peace.js";
 import _poolWindDrake from "../pool/wind-drake.js";
@@ -1291,6 +1293,7 @@ const shard: CardShard = {
     _poolUpdraftElemental,
     _poolUrgorosTheEmptyOne,
     _poolVault11VotersDilemma,
+    _poolVecTownships,
     _poolVenomLethalProtector,
     _poolVenomcrawler,
     _poolVerdantEmbrace,
@@ -1313,6 +1316,7 @@ const shard: CardShard = {
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,
+    _poolWildWurm,
     _poolWilfredMott,
     _poolWillScionOfPeace,
     _poolWindDrake,

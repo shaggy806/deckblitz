@@ -349,6 +349,14 @@ export type Action =
       readonly door: "left" | "right";
     }
   | {
+      /** End a Licid's Aura effect (its "you may pay [cost] to end this
+       * effect"): a special action any time you have priority (rule
+       * 116.2c), paying that cost — it's a creature again, unattached. */
+      readonly type: "end-licid-effect";
+      readonly player: PlayerId;
+      readonly permanent: ObjectId;
+    }
+  | {
       /** Cycle a card from hand (rule 702.29): pay its cycling cost, discard
        * it, draw a card. Any time you could cast an instant. */
       readonly type: "cycle";
@@ -867,6 +875,13 @@ export type LegalAction =
       readonly permanent: ObjectId;
       readonly door: "left" | "right";
       readonly doorName: string;
+      readonly cost: string;
+    }
+  | {
+      /** A Licid's Aura effect you may end (rule 116.2c) by paying `cost`. */
+      readonly kind: "end-licid-effect";
+      readonly permanent: ObjectId;
+      readonly cardName: string;
       readonly cost: string;
     }
   | {

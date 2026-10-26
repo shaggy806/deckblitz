@@ -245,6 +245,7 @@ import _poolGhostTown from "../pool/ghost-town.js";
 import _poolGhostlyVisit from "../pool/ghostly-visit.js";
 import _poolGiantSpectacle from "../pool/giant-spectacle.js";
 import _poolGlenElendraLiege from "../pool/glen-elendra-liege.js";
+import _poolGlidingLicid from "../pool/gliding-licid.js";
 import _poolGlimpseOfNature from "../pool/glimpse-of-nature.js";
 import _poolGlintSleeveSiphoner from "../pool/glint-sleeve-siphoner.js";
 import _poolGloryBearers from "../pool/glory-bearers.js";
@@ -932,6 +933,7 @@ const shard: CardShard = {
     _poolGhostlyVisit,
     _poolGiantSpectacle,
     _poolGlenElendraLiege,
+    _poolGlidingLicid,
     _poolGlimpseOfNature,
     _poolGlintSleeveSiphoner,
     _poolGloryBearers,

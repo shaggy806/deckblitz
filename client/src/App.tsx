@@ -1741,6 +1741,13 @@ function Table({
     }
     return m
   }, [actions, view.objects])
+  // A Licid's Aura effect its player may end (rule 116.2c): a special
+  // action, offered in the Aura's own ability menu.
+  const licidEndBySource = useMemo(() => {
+    const m = new Map<ObjectId, Extract<LegalAction, { kind: 'end-licid-effect' }>>()
+    for (const a of actions) if (a.kind === 'end-licid-effect') m.set(a.permanent, a)
+    return m
+  }, [actions])
   // Every way to turn each face-down permanent face up: its mana cost, its
   // morph or disguise cost, or both (a manifested card with morph).
   const faceUpBySource = useMemo(() => {
@@ -2999,7 +3006,11 @@ function Table({
       }
       if (
         mode === 'priority' &&
-        (abilitiesBySource.has(id) || faceUpBySource.has(id) || unlockBySource.has(id) || preparedCastsBySource.has(id))
+        (abilitiesBySource.has(id) ||
+          faceUpBySource.has(id) ||
+          unlockBySource.has(id) ||
+          licidEndBySource.has(id) ||
+          preparedCastsBySource.has(id))
       ) {
         setSelectedSource((cur) => (cur === id ? null : id))
       }
@@ -3008,6 +3019,7 @@ function Table({
       abilitiesBySource,
       faceUpBySource,
       unlockBySource,
+      licidEndBySource,
       preparedCastsBySource,
       assignDamageAction,
       attackAction,
@@ -3374,7 +3386,12 @@ function Table({
       selected = picked
     } else if (mode === 'priority' && ownerSeat === seat) {
       activatable = ids.some(
-        (i) => abilitiesBySource.has(i) || faceUpBySource.has(i) || unlockBySource.has(i) || preparedCastsBySource.has(i),
+        (i) =>
+          abilitiesBySource.has(i) ||
+          faceUpBySource.has(i) ||
+          unlockBySource.has(i) ||
+          licidEndBySource.has(i) ||
+          preparedCastsBySource.has(i),
       )
       selected = selectedSource !== null && ids.includes(selectedSource)
     }
@@ -5488,6 +5505,7 @@ function Table({
     : []
   const selectedFaceUp = selectedSource ? faceUpBySource.get(selectedSource) : undefined
   const selectedUnlocks = selectedSource ? (unlockBySource.get(selectedSource) ?? []) : []
+  const selectedLicidEnd = selectedSource ? licidEndBySource.get(selectedSource) : undefined
   const selectedPreparedCasts = selectedSource ? (preparedCastsBySource.get(selectedSource) ?? []) : []
   // A commander whose tile opened the menu (it has an ability that works from
   // the command zone) is still cast from it.
@@ -6133,6 +6151,7 @@ function Table({
         selectedCastOpts.length > 1 ||
         selectedFaceUp !== undefined ||
         selectedUnlocks.length > 0 ||
+        selectedLicidEnd !== undefined ||
         selectedPreparedCasts.length > 0) ? (
         <AbilityMenu
           source={selectedSource}
@@ -6183,6 +6202,18 @@ function Table({
                 game.dispatch({ type: 'unlock-door', player: seat, permanent: u.permanent, door: u.door })
               },
             })),
+            ...(selectedLicidEnd !== undefined
+              ? [
+                  {
+                    key: 'end-licid-effect',
+                    label: `End the effect — pay ${selectedLicidEnd.cost}`,
+                    onSelect: () => {
+                      setSelectedSource(null)
+                      game.dispatch({ type: 'end-licid-effect', player: seat, permanent: selectedLicidEnd.permanent })
+                    },
+                  },
+                ]
+              : []),
             ...(selectedFaceUp ?? []).map((up) => ({
               key: `turn-face-up:${up.morph ?? 'cost'}`,
               label: `Turn face up — ${up.cardName}, ${up.morph !== undefined ? `${up.morph} ` : ''}${up.cost}`,

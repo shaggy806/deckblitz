@@ -5410,3 +5410,9 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Shadow Slice at Bob. When asked, pick your Grizzly Bears. Attack Bob with the Bears, and when asked, cast the copy at Bob.
 - **Expect:** Bob goes to 17, and your banner reads "Cipher — exile Shadow Slice encoded on a creature you control?". Shadow Slice goes to exile, not your graveyard. After the Bears' 2 damage, "Whenever this creature deals combat damage to a player, you may copy the encoded card (Shadow Slice) …" goes on the stack; casting the copy for free takes Bob to 12. Shadow Slice is still in exile.
 - **Not a bug:** Choosing no creature puts Shadow Slice in your graveyard.
+
+## Licids (2026-10-26, batch 181)
+
+### Enraging Licid: it becomes an Aura, and you can pay to make it a creature again
+- **Do:** Click Enraging Licid and use its ability on your Grizzly Bears. Then click the Licid (now on the Bears) and choose "End the effect — pay {R}".
+- **Expect:** The Licid attaches to the Bears as an Aura and the Bears have haste. After paying {R} it's a 1/1 creature again on its own, and the Bears lose haste.

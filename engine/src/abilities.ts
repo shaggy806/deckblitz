@@ -385,6 +385,10 @@ export interface ActivatedAbility {
   /** One of reconfigure's two abilities (rule 702.151a — the `reconfigure`
    * helper): what lets an Equipment that's a creature equip (301.5c). */
   readonly reconfigure?: "attach" | "unattach";
+  /** A Licid's "~ loses this ability and becomes an Aura enchantment with
+   * enchant creature" ability (`licid: true`): while the effect lasts
+   * (`GameObject.licid`) the permanent doesn't have it. */
+  readonly licid?: true;
   /** This is a station ability (rule 702.184a — `cards/helpers.ts`'s
    * `station()`), which makes its card a station card (702.184b): one whose
    * printed power and toughness belong to a station symbol (721.2b). */

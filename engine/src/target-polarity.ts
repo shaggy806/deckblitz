@@ -34,7 +34,7 @@ import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
-import { bestowedDefinition } from "./cards/define.js";
+import { bestowedDefinition, licidDefinition } from "./cards/define.js";
 import { computeCharacteristics, playerCantLoseGame, playerCantLoseLife } from "./characteristics.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
@@ -453,6 +453,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // Reconfigure's unattach is its own source: no target to place.
   unattach: none,
+  // A Licid's: which way depends on what the Aura does — `offerPolarities`
+  // reads its statics for that (`auraPolarity`).
+  "become-licid-aura": (n, v) => v.touch(n.target, "either", MINOR),
   transform: (n, v) => v.touch(n.target, "either", MINOR),
   // What becomes the copy, and what it copies: either may be anyone's
   // (Mirage Mirror copies an opponent's best; Shuri, two of your own). What
@@ -876,7 +879,11 @@ export function offerPolarities(
   const def = registry.get(offer.cardName);
   if (offer.kind === "activate-ability") {
     const ability = def.activated[offer.abilityIndex];
-    return ability === undefined ? null : abilityPolarities(ability, bias);
+    if (ability === undefined) return null;
+    // A Licid's ability makes it the Aura on its target: that slot leans as
+    // the Aura's "enchanted creature" abilities do.
+    if (ability.licid === true) return [auraPolarity(licidDefinition(def))];
+    return abilityPolarities(ability, bias);
   }
   if (offer.castModal !== undefined) return null;
   // Cast bestowed, it's an Aura with enchant creature (rule 702.103b): its

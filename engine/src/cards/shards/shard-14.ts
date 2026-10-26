@@ -395,6 +395,7 @@ import _poolMidnightAssassin from "../pool/midnight-assassin.js";
 import _poolMimic from "../pool/mimic.js";
 import _poolMindRake from "../pool/mind-rake.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
+import _poolMindwhipSliver from "../pool/mindwhip-sliver.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
 import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
 import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
@@ -430,6 +431,7 @@ import _poolOldFlitterfang from "../pool/old-flitterfang.js";
 import _poolOnAlert from "../pool/on-alert.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
 import _poolOonasGatewarden from "../pool/oonas-gatewarden.js";
+import _poolOpportunist from "../pool/opportunist.js";
 import _poolOranRiefSurvivalist from "../pool/oran-rief-survivalist.js";
 import _poolOxDrover from "../pool/ox-drover.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
@@ -1074,6 +1076,7 @@ const shard: CardShard = {
     _poolMimic,
     _poolMindRake,
     _poolMindSpiral,
+    _poolMindwhipSliver,
     _poolMirranSpy,
     _poolMirrorOfGaladriel,
     _poolMischievousSneakling,
@@ -1109,6 +1112,7 @@ const shard: CardShard = {
     _poolOnAlert,
     _poolOnyxGoblet,
     _poolOonasGatewarden,
+    _poolOpportunist,
     _poolOranRiefSurvivalist,
     _poolOxDrover,
     _poolPactdollTerror,
