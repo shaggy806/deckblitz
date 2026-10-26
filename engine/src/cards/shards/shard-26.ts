@@ -32,6 +32,7 @@ import _poolAngelheartVial from "../pool/angelheart-vial.js";
 import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
+import _poolAntagonism from "../pool/antagonism.js";
 import _poolAntlerSkulkin from "../pool/antler-skulkin.js";
 import _poolApesOfRath from "../pool/apes-of-rath.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
@@ -140,6 +141,7 @@ import _poolCrashAndBurn from "../pool/crash-and-burn.js";
 import _poolCreativeOutburst from "../pool/creative-outburst.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
+import _poolCrosswinds from "../pool/crosswinds.js";
 import _poolCruelSadist from "../pool/cruel-sadist.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
@@ -330,6 +332,7 @@ import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
+import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
@@ -451,10 +454,12 @@ import _poolPonybackBrigade from "../pool/ponyback-brigade.js";
 import _poolPorcuparrot from "../pool/porcuparrot.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
+import _poolPowerTaint from "../pool/power-taint.js";
 import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolPredatorsHour from "../pool/predators-hour.js";
 import _poolPriestOfTheHauntedEdge from "../pool/priest-of-the-haunted-edge.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
+import _poolPromiseOfBunrei from "../pool/promise-of-bunrei.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPunctureBolt from "../pool/puncture-bolt.js";
@@ -663,6 +668,7 @@ import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVaultPlunderer from "../pool/vault-plunderer.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
+import _poolVeilOfBirds from "../pool/veil-of-birds.js";
 import _poolVengevine from "../pool/vengevine.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
@@ -697,6 +703,7 @@ import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWindingWay from "../pool/winding-way.js";
+import _poolWineOfBloodAndIron from "../pool/wine-of-blood-and-iron.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
@@ -755,6 +762,7 @@ const shard: CardShard = {
     _poolAnointerOfValor,
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
+    _poolAntagonism,
     _poolAntlerSkulkin,
     _poolApesOfRath,
     _poolApexDevastator,
@@ -863,6 +871,7 @@ const shard: CardShard = {
     _poolCreativeOutburst,
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
+    _poolCrosswinds,
     _poolCruelSadist,
     _poolCurseOfTheRestlessDead,
     _poolCutIn,
@@ -1053,6 +1062,7 @@ const shard: CardShard = {
     _poolJunglePatrol,
     _poolKangeeSkyWarden,
     _poolKardursViciousReturn,
+    _poolKatakiWarsWage,
     _poolKataraWaterTribesHope,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
@@ -1174,10 +1184,12 @@ const shard: CardShard = {
     _poolPorcuparrot,
     _poolPortTown,
     _poolPostmortemProfessor,
+    _poolPowerTaint,
     _poolPrayerOfBinding,
     _poolPredatorsHour,
     _poolPriestOfTheHauntedEdge,
     _poolProdigalSorcerer,
+    _poolPromiseOfBunrei,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
     _poolPunctureBolt,
@@ -1386,6 +1398,7 @@ const shard: CardShard = {
     _poolVaultOfTheArchangel,
     _poolVaultPlunderer,
     _poolVedalkenMesmerist,
+    _poolVeilOfBirds,
     _poolVengevine,
     _poolVenomousWords,
     _poolViashinoSlasher,
@@ -1420,6 +1433,7 @@ const shard: CardShard = {
     _poolWhispergearSneak,
     _poolWildRoads,
     _poolWindingWay,
+    _poolWineOfBloodAndIron,
     _poolWingsOfHope,
     _poolWitchEnchanter,
     _poolWolfCoveVillager,

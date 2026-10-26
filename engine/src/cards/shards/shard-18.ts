@@ -66,6 +66,7 @@ import _poolBomatBazaarBarge from "../pool/bomat-bazaar-barge.js";
 import _poolBonePitBrute from "../pool/bone-pit-brute.js";
 import _poolBoneSaw from "../pool/bone-saw.js";
 import _poolBoseijuWhoEndures from "../pool/boseiju-who-endures.js";
+import _poolBounteousKirin from "../pool/bounteous-kirin.js";
 import _poolBraskasFinalAeon from "../pool/braskas-final-aeon.js";
 import _poolBrightcapBadger from "../pool/brightcap-badger.js";
 import _poolBrimstoneTrebuchet from "../pool/brimstone-trebuchet.js";
@@ -259,6 +260,7 @@ import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
+import _poolHiddenHerd from "../pool/hidden-herd.js";
 import _poolHideOnTheCeiling from "../pool/hide-on-the-ceiling.js";
 import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
@@ -295,6 +297,7 @@ import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJhoiraAgelessInnovator from "../pool/jhoira-ageless-innovator.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
+import _poolJiwariTheEarthAflame from "../pool/jiwari-the-earth-aflame.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolJustTheWind from "../pool/just-the-wind.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
@@ -413,6 +416,7 @@ import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPacksDisdain from "../pool/packs-disdain.js";
+import _poolParasiticBond from "../pool/parasitic-bond.js";
 import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
@@ -694,6 +698,7 @@ import _poolXiraArien from "../pool/xira-arien.js";
 import _poolYiazmatUltimateMark from "../pool/yiazmat-ultimate-mark.js";
 import _poolYoureNotAlone from "../pool/youre-not-alone.js";
 import _poolYshtolaNightsBlessed from "../pool/yshtola-nights-blessed.js";
+import _poolYukiOnna from "../pool/yuki-onna.js";
 import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
 import _poolZodiacRat from "../pool/zodiac-rat.js";
@@ -789,6 +794,7 @@ const shard: CardShard = {
     _poolBonePitBrute,
     _poolBoneSaw,
     _poolBoseijuWhoEndures,
+    _poolBounteousKirin,
     _poolBraskasFinalAeon,
     _poolBrightcapBadger,
     _poolBrimstoneTrebuchet,
@@ -982,6 +988,7 @@ const shard: CardShard = {
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
     _poolHeronBlessedGeist,
+    _poolHiddenHerd,
     _poolHideOnTheCeiling,
     _poolHighStride,
     _poolHillGiantHerdgorger,
@@ -1018,6 +1025,7 @@ const shard: CardShard = {
     _poolJeditOjanenMercenary,
     _poolJhoiraAgelessInnovator,
     _poolJiangYangguNeverAlone,
+    _poolJiwariTheEarthAflame,
     _poolJodahTheUnifier,
     _poolJustTheWind,
     _poolJyotiMoagAncient,
@@ -1136,6 +1144,7 @@ const shard: CardShard = {
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
     _poolPacksDisdain,
+    _poolParasiticBond,
     _poolParoxysm,
     _poolPatchedPlaything,
     _poolPatchworkAutomaton,
@@ -1417,6 +1426,7 @@ const shard: CardShard = {
     _poolYiazmatUltimateMark,
     _poolYoureNotAlone,
     _poolYshtolaNightsBlessed,
+    _poolYukiOnna,
     _poolZaxaraTheExemplary,
     _poolZimoneAndDina,
     _poolZodiacRat,

@@ -2892,6 +2892,20 @@ export type EffectSpec =
       readonly filter?: CardFilter;
       readonly lookOnly?: true;
       readonly optional?: true;
+      /** "Choose **up to X** cards from it" (Discordant Dirge): any number
+       * from none to this many, read as it resolves, instead of one. */
+      readonly upTo?: EffectAmount;
+    }
+  | {
+      /**
+       * "Look at target player's hand" (Glasses of Urza, Sorcerous Sight,
+       * Ingenious Thief): the effect's controller sees the hand of the player
+       * in slot `target` and nothing else happens — nothing is revealed to
+       * anyone else. Asked as a `choose-from-zone` with nothing to pick
+       * (`max: 0`), so the look waits for its viewer to close it.
+       */
+      readonly kind: "look-at-hand";
+      readonly target: number;
     }
   | {
       /** Target player discards `amount` cards (their choice, unless it's the
@@ -4880,6 +4894,21 @@ export type EffectSpec =
       readonly to?: number;
     }
   | {
+      /**
+       * Epic (rule 702.50a), the last part of the spell's effect: "For the
+       * rest of the game, you can't cast spells" and "at the beginning of
+       * each of your upkeeps for the rest of the game, copy this spell except
+       * for its epic ability. If the spell has any targets, you may choose new
+       * targets for the copy." The spell is captured as it resolves — its
+       * targets, {X} and choices — and its controller gets an emblem holding
+       * the upkeep trigger, so the delayed ability shows on the table. A copy
+       * made that way has no epic ability, so this does nothing on it; a copy
+       * made otherwise (Twincast) has it, as part of the copied text (rule
+       * 707.2), and sets up its own.
+       */
+      readonly kind: "epic";
+    }
+  | {
       /** Prevent all combat damage that would be dealt this turn (Fog). A
        * rule-614 replacement, tracked as a turn-scoped `GameState` flag. */
       readonly kind: "prevent-all-combat-damage";
@@ -6526,8 +6555,15 @@ export interface EffectApi {
   discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter, anyNumber?: boolean): void;
   /** See the `discard-chosen` {@link EffectSpec}: `target` (a player) reveals
    * their hand (or the controller looks at it), the controller chooses, and
-   * that player discards the card chosen. */
-  discardChosen(target: TargetRef, filter: CardFilter | undefined, lookOnly: boolean, optional: boolean): void;
+   * that player discards the card chosen. `upTo` is "up to that many" (0:
+   * only a look — the `look-at-hand` spec). */
+  discardChosen(
+    target: TargetRef,
+    filter: CardFilter | undefined,
+    lookOnly: boolean,
+    optional: boolean,
+    upTo?: number,
+  ): void;
   modifyPt(
     target: TargetRef,
     power: number,
@@ -7080,6 +7116,8 @@ export interface EffectApi {
     triggered?: readonly TriggeredAbility[],
     owner?: PlayerId,
   ): void;
+  /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
+  epic(): void;
   /** Prevent all combat damage this turn (Fog) — or only what sources
    * matching `by` would deal; with `toYou`, all damage they'd deal to the
    * effect's controller, combat or not (`prevent-damage-to-you`). */
@@ -9834,8 +9872,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "discard-chosen": {
       const target = ctx.targets[spec.target];
       if (target !== undefined) {
-        ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true);
+        const upTo = spec.upTo === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upTo, ctx)));
+        ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo);
       }
+      return;
+    }
+    case "look-at-hand": {
+      const target = ctx.targets[spec.target];
+      if (target !== undefined) ctx.discardChosen(target, undefined, true, true, 0);
       return;
     }
     case "discard": {
@@ -10924,6 +10968,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "epic":
+      ctx.epic();
+      return;
     case "create-emblem": {
       if (spec.to === undefined) {
         ctx.createEmblem(spec.text, spec.static, spec.triggered);

@@ -32,6 +32,7 @@ import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolAphoticWisps from "../pool/aphotic-wisps.js";
+import _poolArashiTheSkyAsunder from "../pool/arashi-the-sky-asunder.js";
 import _poolArcadesSabboth from "../pool/arcades-sabboth.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
 import _poolArmsRace from "../pool/arms-race.js";
@@ -187,6 +188,7 @@ import _poolElvishLookout from "../pool/elvish-lookout.js";
 import _poolElvishVatkeeper from "../pool/elvish-vatkeeper.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
 import _poolEmergentSequence from "../pool/emergent-sequence.js";
+import _poolEndlessSwarm from "../pool/endless-swarm.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
 import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
 import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
@@ -289,6 +291,7 @@ import _poolHuntTheHunter from "../pool/hunt-the-hunter.js";
 import _poolHuntersAmbush from "../pool/hunters-ambush.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
+import _poolIizukaTheRuthless from "../pool/iizuka-the-ruthless.js";
 import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
@@ -489,10 +492,12 @@ import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
+import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
+import _poolSanctumGuardian from "../pool/sanctum-guardian.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
@@ -545,6 +550,7 @@ import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
 import _poolSolsticeRevelations from "../pool/solstice-revelations.js";
+import _poolSomnophore from "../pool/somnophore.js";
 import _poolSoulSalvage from "../pool/soul-salvage.js";
 import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
@@ -749,6 +755,7 @@ const shard: CardShard = {
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
     _poolAphoticWisps,
+    _poolArashiTheSkyAsunder,
     _poolArcadesSabboth,
     _poolArcaneFlight,
     _poolArmsRace,
@@ -904,6 +911,7 @@ const shard: CardShard = {
     _poolElvishVatkeeper,
     _poolEmberethBlaze,
     _poolEmergentSequence,
+    _poolEndlessSwarm,
     _poolEpicProportions,
     _poolEriettesWhisper,
     _poolErrantDoomsayers,
@@ -1006,6 +1014,7 @@ const shard: CardShard = {
     _poolHuntersAmbush,
     _poolHussarPatrol,
     _poolIdyllicGrange,
+    _poolIizukaTheRuthless,
     _poolImpendingDoom,
     _poolIncrementalBlight,
     _poolInfernalPhantom,
@@ -1206,10 +1215,12 @@ const shard: CardShard = {
     _poolRotTideGargantua,
     _poolRotisserieElemental,
     _poolRuhanOfTheFomori,
+    _poolRuneOfProtectionBlue,
     _poolRunedStalactite,
     _poolRustGoliath,
     _poolSagesKnowledge,
     _poolSaguMauler,
+    _poolSanctumGuardian,
     _poolSangriteBacklash,
     _poolSavannahSage,
     _poolSavraQueenOfTheGolgari,
@@ -1262,6 +1273,7 @@ const shard: CardShard = {
     _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
     _poolSolsticeRevelations,
+    _poolSomnophore,
     _poolSoulSalvage,
     _poolSoulreaperOfMogis,
     _poolSoulsMajesty,

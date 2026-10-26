@@ -714,7 +714,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(rioter.activated[0].effect).toMatchObject({ kind: "exile", linked: true });
     expect(face("{2}: Exile target card from a graveyard.").activated[0].effect.linked).toBeUndefined();
     // A keyword the engine doesn't run leaves the line to a person.
-    expect(face("Bushido 2").complete).toBe(false);
+    expect(face("Splice onto Arcane {1}{R}").complete).toBe(false);
   });
 
   it("the intervening-ifs it knows become the ability's condition; others stay a TODO", () => {
@@ -1479,6 +1479,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseCost("{1}{W}, {Q}").cost).toEqual({ mana: "{1}{W}", tap: false, untap: true });
   });
 
+  it("look at target player's hand (Glasses of Urza, Sorcerous Sight)", () => {
+    const glasses = face("{T}: Look at target player's hand.", "Artifact");
+    expect(glasses.activated[0].targets).toEqual(["player"]);
+    expect(glasses.activated[0].effect).toEqual({ kind: "look-at-hand", target: 0 });
+    expect(glasses.complete).toBe(true);
+    const sight = face("Look at target opponent's hand.\nDraw a card.", "Sorcery");
+    expect(sight.complete).toBe(true);
+  });
+
   it("conspire (rule 702.78)", () => {
     const trail = face("Target player mills four cards.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)", "Sorcery");
     expect(trail.conspire).toBe(true);
@@ -1618,6 +1627,26 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(hellion.complete).toBe(true);
     expect(face(`Echo—Discard a card. ${reminder}`, "Creature — Goblin").triggered[0].effect).toMatchObject({ options: [{ discard: 1 }] });
     expect(face(`Echo—Sacrifice two lands. ${reminder}`, "Creature — Elemental").complete).toBe(true);
+  });
+
+  it("bushido (702.45a) and soulshift (702.46a): Kamigawa's keyword lines, their triggers", () => {
+    const samurai = face(
+      "Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)",
+      "Creature — Human Samurai",
+    );
+    expect(samurai.triggered[0].trigger).toEqual({ on: "blocks", who: "self" });
+    expect(samurai.triggered[1].trigger).toEqual({ on: "becomes-blocked", who: "self" });
+    expect(samurai.triggered[1].effect).toEqual({ kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" });
+    expect(samurai.complete).toBe(true);
+    const kami = face(
+      "Soulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)",
+      "Creature — Spirit",
+    );
+    expect(kami.triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    expect(kami.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { subtype: "Spirit", manaValue: { op: "lte", n: 3 } } },
+    ]);
+    expect(kami.complete).toBe(true);
   });
 
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {

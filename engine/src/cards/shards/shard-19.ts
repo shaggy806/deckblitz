@@ -183,6 +183,7 @@ import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDregMangler from "../pool/dreg-mangler.js";
+import _poolDromosaur from "../pool/dromosaur.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
@@ -363,6 +364,7 @@ import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
 import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
 import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
+import _poolKiyomaroFirstToStand from "../pool/kiyomaro-first-to-stand.js";
 import _poolKjeldoranEliteGuard from "../pool/kjeldoran-elite-guard.js";
 import _poolKnightOfDawnsLight from "../pool/knight-of-dawns-light.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
@@ -459,6 +461,7 @@ import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
+import _poolOppressiveWill from "../pool/oppressive-will.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
 import _poolOreScaleGuardian from "../pool/ore-scale-guardian.js";
 import _poolOrganHoarder from "../pool/organ-hoarder.js";
@@ -516,6 +519,7 @@ import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
 import _poolRelicCrush from "../pool/relic-crush.js";
+import _poolRendingVines from "../pool/rending-vines.js";
 import _poolRenegadeBull from "../pool/renegade-bull.js";
 import _poolRenegadeWarlord from "../pool/renegade-warlord.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
@@ -936,6 +940,7 @@ const shard: CardShard = {
     _poolDramaticFinale,
     _poolDreadFugue,
     _poolDregMangler,
+    _poolDromosaur,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,
@@ -1116,6 +1121,7 @@ const shard: CardShard = {
     _poolKillerWhale,
     _poolKinjallisDawnrunner,
     _poolKinsbaileAspirant,
+    _poolKiyomaroFirstToStand,
     _poolKjeldoranEliteGuard,
     _poolKnightOfDawnsLight,
     _poolKnightOfInfamy,
@@ -1212,6 +1218,7 @@ const shard: CardShard = {
     _poolObservantAlseid,
     _poolOgreBerserker,
     _poolOgreSiegebreaker,
+    _poolOppressiveWill,
     _poolOrderOfTheWhiteShield,
     _poolOreScaleGuardian,
     _poolOrganHoarder,
@@ -1269,6 +1276,7 @@ const shard: CardShard = {
     _poolRecklessBrute,
     _poolRedElementalBlast,
     _poolRelicCrush,
+    _poolRendingVines,
     _poolRenegadeBull,
     _poolRenegadeWarlord,
     _poolRepulsiveMutation,

@@ -166,6 +166,7 @@ import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDecimatorOfTheProvinces from "../pool/decimator-of-the-provinces.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
+import _poolDenseCanopy from "../pool/dense-canopy.js";
 import _poolDepalaPilotExemplar from "../pool/depala-pilot-exemplar.js";
 import _poolDepravedHarvester from "../pool/depraved-harvester.js";
 import _poolDepressurize from "../pool/depressurize.js";
@@ -246,6 +247,7 @@ import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGatstafHowler from "../pool/gatstaf-howler.js";
 import _poolGavonyDawnguard from "../pool/gavony-dawnguard.js";
+import _poolGazeOfAdamaro from "../pool/gaze-of-adamaro.js";
 import _poolGeistFueledScarecrow from "../pool/geist-fueled-scarecrow.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
@@ -321,6 +323,7 @@ import _poolIllusoryGains from "../pool/illusory-gains.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
+import _poolIngeniousThief from "../pool/ingenious-thief.js";
 import _poolInnerFlameAcolyte from "../pool/inner-flame-acolyte.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
@@ -397,6 +400,7 @@ import _poolMischievousPoltergeist from "../pool/mischievous-poltergeist.js";
 import _poolMobilizedDistrict from "../pool/mobilized-district.js";
 import _poolMoltenTributary from "../pool/molten-tributary.js";
 import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
+import _poolMoltingSkin from "../pool/molting-skin.js";
 import _poolMomentOfCraving from "../pool/moment-of-craving.js";
 import _poolMonasteryMentor from "../pool/monastery-mentor.js";
 import _poolMonomania from "../pool/monomania.js";
@@ -431,6 +435,7 @@ import _poolOfOneMind from "../pool/of-one-mind.js";
 import _poolOketrasAttendant from "../pool/oketras-attendant.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
+import _poolOneWithNothing from "../pool/one-with-nothing.js";
 import _poolOneirophage from "../pool/oneirophage.js";
 import _poolOnyxTalisman from "../pool/onyx-talisman.js";
 import _poolOpalLakeGatekeepers from "../pool/opal-lake-gatekeepers.js";
@@ -694,6 +699,7 @@ import _poolTreetopVillage from "../pool/treetop-village.js";
 import _poolTrenchWurm from "../pool/trench-wurm.js";
 import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
+import _poolTrustedAdvisor from "../pool/trusted-advisor.js";
 import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
 import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
@@ -941,6 +947,7 @@ const shard: CardShard = {
     _poolDeathsPresence,
     _poolDecimatorOfTheProvinces,
     _poolDelayedBlastFireball,
+    _poolDenseCanopy,
     _poolDepalaPilotExemplar,
     _poolDepravedHarvester,
     _poolDepressurize,
@@ -1021,6 +1028,7 @@ const shard: CardShard = {
     _poolGarrisonCat,
     _poolGatstafHowler,
     _poolGavonyDawnguard,
+    _poolGazeOfAdamaro,
     _poolGeistFueledScarecrow,
     _poolGenerousRevival,
     _poolGenestealerPatriarch,
@@ -1096,6 +1104,7 @@ const shard: CardShard = {
     _poolImmersturmSkullcairn,
     _poolImpulse,
     _poolIncorrigibleYouths,
+    _poolIngeniousThief,
     _poolInnerFlameAcolyte,
     _poolInnovativeCommons,
     _poolInvigoratingHotSpring,
@@ -1172,6 +1181,7 @@ const shard: CardShard = {
     _poolMobilizedDistrict,
     _poolMoltenTributary,
     _poolMoltensteelDragon,
+    _poolMoltingSkin,
     _poolMomentOfCraving,
     _poolMonasteryMentor,
     _poolMonomania,
@@ -1206,6 +1216,7 @@ const shard: CardShard = {
     _poolOketrasAttendant,
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
+    _poolOneWithNothing,
     _poolOneirophage,
     _poolOnyxTalisman,
     _poolOpalLakeGatekeepers,
@@ -1469,6 +1480,7 @@ const shard: CardShard = {
     _poolTrenchWurm,
     _poolTrollAscetic,
     _poolTrostaniDiscordant,
+    _poolTrustedAdvisor,
     _poolTrystanPenitentCuller,
     _poolTwiddle,
     _poolTwinbladePaladin,

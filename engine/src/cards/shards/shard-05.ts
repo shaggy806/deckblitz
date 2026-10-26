@@ -67,6 +67,7 @@ import _poolBeatAPath from "../pool/beat-a-path.js";
 import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
 import _poolBenefactorsDraught from "../pool/benefactors-draught.js";
+import _poolBereavement from "../pool/bereavement.js";
 import _poolBilbosGambit from "../pool/bilbos-gambit.js";
 import _poolBishopOfWings from "../pool/bishop-of-wings.js";
 import _poolBlackPantherClawsOfBast from "../pool/black-panther-claws-of-bast.js";
@@ -190,6 +191,7 @@ import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreamspoilerWitches from "../pool/dreamspoiler-witches.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
+import _poolDriftingDjinn from "../pool/drifting-djinn.js";
 import _poolDrillBit from "../pool/drill-bit.js";
 import _poolDryadMilitant from "../pool/dryad-militant.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
@@ -316,6 +318,8 @@ import _poolHelpfulHunter from "../pool/helpful-hunter.js";
 import _poolHerdHeirloom from "../pool/herd-heirloom.js";
 import _poolHeritageReclamation from "../pool/heritage-reclamation.js";
 import _poolHeroOfTheNyxborn from "../pool/hero-of-the-nyxborn.js";
+import _poolHiddenGuerrillas from "../pool/hidden-guerrillas.js";
+import _poolHiddenPredators from "../pool/hidden-predators.js";
 import _poolHighlandBerserker from "../pool/highland-berserker.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
@@ -488,6 +492,7 @@ import _poolRenegadeReaper from "../pool/renegade-reaper.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
 import _poolResonatingLute from "../pool/resonating-lute.js";
+import _poolRetaliation from "../pool/retaliation.js";
 import _poolReturnTriumphant from "../pool/return-triumphant.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
 import _poolRiftBolt from "../pool/rift-bolt.js";
@@ -527,6 +532,7 @@ import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
+import _poolSeekTheHorizon from "../pool/seek-the-horizon.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
 import _poolSeismicMonstrosaur from "../pool/seismic-monstrosaur.js";
 import _poolSelesnyaEvangel from "../pool/selesnya-evangel.js";
@@ -787,6 +793,7 @@ const shard: CardShard = {
     _poolBeledrosWitherbloom,
     _poolBellowingCrier,
     _poolBenefactorsDraught,
+    _poolBereavement,
     _poolBilbosGambit,
     _poolBishopOfWings,
     _poolBlackPantherClawsOfBast,
@@ -910,6 +917,7 @@ const shard: CardShard = {
     _poolDreadfulApathy,
     _poolDreamspoilerWitches,
     _poolDreyKeeper,
+    _poolDriftingDjinn,
     _poolDrillBit,
     _poolDryadMilitant,
     _poolDryadsFavor,
@@ -1036,6 +1044,8 @@ const shard: CardShard = {
     _poolHerdHeirloom,
     _poolHeritageReclamation,
     _poolHeroOfTheNyxborn,
+    _poolHiddenGuerrillas,
+    _poolHiddenPredators,
     _poolHighlandBerserker,
     _poolHinderingLight,
     _poolHireACrew,
@@ -1208,6 +1218,7 @@ const shard: CardShard = {
     _poolRepelCalamity,
     _poolReshape,
     _poolResonatingLute,
+    _poolRetaliation,
     _poolReturnTriumphant,
     _poolRhonassMonument,
     _poolRiftBolt,
@@ -1247,6 +1258,7 @@ const shard: CardShard = {
     _poolScythecatCub,
     _poolSearingTouch,
     _poolSeasonedWarrenguard,
+    _poolSeekTheHorizon,
     _poolSeekerOfSkybreak,
     _poolSeismicMonstrosaur,
     _poolSelesnyaEvangel,

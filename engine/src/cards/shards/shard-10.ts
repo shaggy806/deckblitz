@@ -113,6 +113,7 @@ import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
 import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
+import _poolChargeAcrossTheAraba from "../pool/charge-across-the-araba.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
 import _poolCinderclasm from "../pool/cinderclasm.js";
 import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
@@ -408,6 +409,7 @@ import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
+import _poolNikkoOnna from "../pool/nikko-onna.js";
 import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNivixCyclops from "../pool/nivix-cyclops.js";
@@ -641,6 +643,7 @@ import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
 import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
 import _poolToothCollector from "../pool/tooth-collector.js";
 import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
+import _poolTorchSong from "../pool/torch-song.js";
 import _poolTormentedSoul from "../pool/tormented-soul.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
 import _poolTranquilCove from "../pool/tranquil-cove.js";
@@ -686,6 +689,7 @@ import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js"
 import _poolWallOfKelp from "../pool/wall-of-kelp.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
+import _poolWarDance from "../pool/war-dance.js";
 import _poolWarWingSiren from "../pool/war-wing-siren.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
@@ -844,6 +848,7 @@ const shard: CardShard = {
     _poolChangelingWayfinder,
     _poolChaosMutation,
     _poolChapelGeist,
+    _poolChargeAcrossTheAraba,
     _poolChildOfThePack,
     _poolCinderclasm,
     _poolCinderingCutthroat,
@@ -1139,6 +1144,7 @@ const shard: CardShard = {
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
     _poolNightMarketLookout,
+    _poolNikkoOnna,
     _poolNimbleBirdsticker,
     _poolNimbusMaze,
     _poolNivixCyclops,
@@ -1372,6 +1378,7 @@ const shard: CardShard = {
     _poolTomakulScrapsmith,
     _poolToothCollector,
     _poolTorbranThaneOfRedFell,
+    _poolTorchSong,
     _poolTormentedSoul,
     _poolToxrillTheCorrosive,
     _poolTranquilCove,
@@ -1417,6 +1424,7 @@ const shard: CardShard = {
     _poolWallOfKelp,
     _poolWandOfOrcus,
     _poolWanderingMusicians,
+    _poolWarDance,
     _poolWarWingSiren,
     _poolWarhornBlast,
     _poolWarrenInstigator,

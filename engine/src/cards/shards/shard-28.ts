@@ -34,6 +34,7 @@ import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js";
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
+import _poolArabaMothrider from "../pool/araba-mothrider.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
 import _poolArcanistsOwl from "../pool/arcanists-owl.js";
@@ -54,6 +55,7 @@ import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
 import _poolBallotBroker from "../pool/ballot-broker.js";
+import _poolBarrelDownSokenzan from "../pool/barrel-down-sokenzan.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
 import _poolBattleAtTheBridge from "../pool/battle-at-the-bridge.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
@@ -153,6 +155,7 @@ import _poolDaruHealer from "../pool/daru-healer.js";
 import _poolDawningAngel from "../pool/dawning-angel.js";
 import _poolDawnsTruce from "../pool/dawns-truce.js";
 import _poolDeadlyWanderings from "../pool/deadly-wanderings.js";
+import _poolDeathDenied from "../pool/death-denied.js";
 import _poolDeathbonnetSprout from "../pool/deathbonnet-sprout.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
@@ -368,6 +371,7 @@ import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
 import _poolMaulSplicer from "../pool/maul-splicer.js";
+import _poolMeasureOfWickedness from "../pool/measure-of-wickedness.js";
 import _poolMentalAgony from "../pool/mental-agony.js";
 import _poolMercurialPretender from "../pool/mercurial-pretender.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
@@ -382,6 +386,7 @@ import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMizziumTank from "../pool/mizzium-tank.js";
+import _poolMobileFort from "../pool/mobile-fort.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
 import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
 import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
@@ -719,9 +724,11 @@ import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
+import _poolWirecat from "../pool/wirecat.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
+import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
@@ -780,6 +787,7 @@ const shard: CardShard = {
     _poolAniktheaHandOfErebos,
     _poolAnimPakalThousandthMoon,
     _poolAnnieJoinsUp,
+    _poolArabaMothrider,
     _poolArachnoid,
     _poolArbaazMir,
     _poolArcanistsOwl,
@@ -800,6 +808,7 @@ const shard: CardShard = {
     _poolAvishkarRaceway,
     _poolAxgardCavalry,
     _poolBallotBroker,
+    _poolBarrelDownSokenzan,
     _poolBartolomeDelPresidio,
     _poolBattleAtTheBridge,
     _poolBazaarOfBaghdad,
@@ -899,6 +908,7 @@ const shard: CardShard = {
     _poolDawningAngel,
     _poolDawnsTruce,
     _poolDeadlyWanderings,
+    _poolDeathDenied,
     _poolDeathbonnetSprout,
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
@@ -1114,6 +1124,7 @@ const shard: CardShard = {
     _poolMassCalcify,
     _poolMassOfGhouls,
     _poolMaulSplicer,
+    _poolMeasureOfWickedness,
     _poolMentalAgony,
     _poolMercurialPretender,
     _poolMeriaScholarOfAntiquity,
@@ -1128,6 +1139,7 @@ const shard: CardShard = {
     _poolMirrorworks,
     _poolMistfireAdept,
     _poolMizziumTank,
+    _poolMobileFort,
     _poolMoleManMoloidMaster,
     _poolMoltenManInfernoIncarnate,
     _poolMonasteryMessenger,
@@ -1465,9 +1477,11 @@ const shard: CardShard = {
     _poolWillowSatyr,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
+    _poolWirecat,
     _poolWorldChampionCelestialWeapon,
     _poolWreathOfGeists,
     _poolWritOfReturn,
+    _poolYawgmothsEdict,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,

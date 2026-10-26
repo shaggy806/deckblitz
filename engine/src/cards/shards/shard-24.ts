@@ -191,6 +191,7 @@ import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
 import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
@@ -403,6 +404,7 @@ import _poolOjutaisCommand from "../pool/ojutais-command.js";
 import _poolOkibaReckonerRaid from "../pool/okiba-reckoner-raid.js";
 import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
+import _poolOpalCaryatid from "../pool/opal-caryatid.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
@@ -552,6 +554,7 @@ import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpikeHatcher from "../pool/spike-hatcher.js";
+import _poolSpiralingEmbers from "../pool/spiraling-embers.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpoilsOfBlood from "../pool/spoils-of-blood.js";
@@ -925,6 +928,7 @@ const shard: CardShard = {
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
     _poolElvishVisionary,
+    _poolEndoskeleton,
     _poolEnergyFlux,
     _poolEntrancingMelody,
     _poolEntsFury,
@@ -1137,6 +1141,7 @@ const shard: CardShard = {
     _poolOkibaReckonerRaid,
     _poolOltecArchaeologists,
     _poolOnTheJob,
+    _poolOpalCaryatid,
     _poolOrazcaPuzzleDoor,
     _poolOrcishHellraiser,
     _poolOrderOfYawgmoth,
@@ -1286,6 +1291,7 @@ const shard: CardShard = {
     _poolSpideryGrasp,
     _poolSpikeFeeder,
     _poolSpikeHatcher,
+    _poolSpiralingEmbers,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
     _poolSpoilsOfBlood,

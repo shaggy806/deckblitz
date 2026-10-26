@@ -474,6 +474,7 @@ import _poolPrimordialOoze from "../pool/primordial-ooze.js";
 import _poolPrisonBreak from "../pool/prison-break.js";
 import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
+import _poolPromisedKannushi from "../pool/promised-kannushi.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
@@ -546,6 +547,7 @@ import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
+import _poolSekkiSeasonsGuide from "../pool/sekki-seasons-guide.js";
 import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
 import _poolSensorSplicer from "../pool/sensor-splicer.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
@@ -578,6 +580,7 @@ import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
 import _poolSoltariVisionary from "../pool/soltari-visionary.js";
 import _poolSonicBurst from "../pool/sonic-burst.js";
+import _poolSorcerousSight from "../pool/sorcerous-sight.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
@@ -1221,6 +1224,7 @@ const shard: CardShard = {
     _poolPrisonBreak,
     _poolProfessorOfZoomancy,
     _poolProfessorZeiAnthropologist,
+    _poolPromisedKannushi,
     _poolProsperousBandit,
     _poolPsychicSymbiont,
     _poolPterodonKnight,
@@ -1293,6 +1297,7 @@ const shard: CardShard = {
     _poolSeaLegs,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
+    _poolSekkiSeasonsGuide,
     _poolSelvalaExplorerReturned,
     _poolSensorSplicer,
     _poolSephirothPlanetsHeir,
@@ -1325,6 +1330,7 @@ const shard: CardShard = {
     _poolSoldeviMachinist,
     _poolSoltariVisionary,
     _poolSonicBurst,
+    _poolSorcerousSight,
     _poolSparkTrooper,
     _poolSpectralCloak,
     _poolSpiderManWebSpinner,

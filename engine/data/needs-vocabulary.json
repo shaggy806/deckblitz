@@ -3652,6 +3652,33 @@
   "keyword:sneak": {
    "example": "Splinter's Technique: sneak alt cost isn't modeled"
   },
+  "condition:more-cards-in-hand-than-each-opponent": {
+   "family": "condition:player-state-thresholds",
+   "example": "Akuta, Born of Ash: 'if you have more cards in hand than each opponent' — no condition compares your hand with every opponent's."
+  },
+  "effect:reveal-until-then-keeps-targets": {
+   "family": "effect:reveal-until",
+   "example": "Undying Flames: reveal-until's `then` has only the card found as its target, so the spell's own any-target slot is out of reach for 'deals damage to any target equal to that card's mana value'."
+  },
+  "cost:sacrifice-all-lands": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Tomb of Urami: 'Sacrifice all lands you control' as an activation cost."
+  },
+  "condition:target-player-life-total": {
+   "family": "condition:player-state-thresholds",
+   "example": "Hidetsugu's Second Rite: 'if target player has exactly 10 life' — life-total reads no target slot."
+  },
+  "effect:search-library-to-exile-linked": {
+   "family": "effect:this-way-results",
+   "example": "Kaho, Minamo Historian: search for up to three instant cards and exile them, linked to the source for a later 'cast a card with mana value X from among cards exiled with Kaho'."
+  },
+  "static:graveyard-cards-gain-chosen-type": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Ashes of the Fallen: 'Each creature card in your graveyard has the chosen creature type in addition to its other types.'"
+  },
+  "keyword:epic": {
+   "example": "Enduring Ideal: Epic — can't cast spells for the rest of the game; copy this spell at each of your upkeeps without its epic ability."
+  },
   "keyword:soulbond": {
    "example": "Deadeye Navigator: Soulbond."
   },
@@ -11147,6 +11174,30 @@
   "trigger:blocks-two-or-more": {
    "family": "static:block-additional-creature",
    "example": "Lairwatch Giant: whenever this blocks two or more creatures, it gains first strike until end of turn"
+  },
+  "duration:until-a-player-casts-creature-spell": {
+   "family": "effect:set-types-temporary",
+   "example": "Soul Sculptor: target creature becomes an enchantment and loses all abilities until a player casts a creature spell"
+  },
+  "filter:least-toughness-among-all-creatures": {
+   "family": "filter:least-among-its-controller",
+   "example": "Purging Scythe: deals 2 damage to the creature with the least toughness (you choose among ties)"
+  },
+  "trigger:state-trigger-hand-change": {
+   "family": "trigger:state-trigger",
+   "example": "Veiled Crocodile: when a player has no cards in hand \u2014 state triggers aren't checked after hand changes mid-resolution"
+  },
+  "static:cant-attack-block-unless-greater-power-joins": {
+   "family": "condition:no-other-creature-greater-power-condition",
+   "example": "Okk: can't attack unless a creature with greater power also attacks"
+  },
+  "effect:sacrifice-unless-pay-its-mana-cost": {
+   "family": "effect:lose-life-unless-pay",
+   "example": "Pendrell Flux: enchanted creature has \"at the beginning of your upkeep, sacrifice this creature unless you pay its mana cost\""
+  },
+  "effect:look-at-hand-of-target-spell-controller": {
+   "family": "effect:look-at-target-player-hand",
+   "example": "Lay Bare: counter target spell, then look at its controller's hand"
   },
   "condition:target-controller-poisoned": {
    "family": "mechanic:player-counters",

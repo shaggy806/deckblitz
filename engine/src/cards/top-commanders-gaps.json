@@ -455,7 +455,9 @@
   "mechanic:clash",
   "keyword:champion",
   "trigger:clash",
-  "keyword:echo"
+  "keyword:echo",
+  "keyword:epic",
+  "effect:look-at-target-player-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

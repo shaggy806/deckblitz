@@ -306,6 +306,7 @@ import _poolInfernoElemental from "../pool/inferno-elemental.js";
 import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
+import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
@@ -594,6 +595,7 @@ import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
+import _poolTalasExplorer from "../pool/talas-explorer.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
@@ -1016,6 +1018,7 @@ const shard: CardShard = {
     _poolIngenuityEngine,
     _poolInkwellLeviathan,
     _poolInnerDemonsGangsters,
+    _poolInnerFire,
     _poolInspiringPaladin,
     _poolJacesTriumph,
     _poolJaggedLightning,
@@ -1304,6 +1307,7 @@ const shard: CardShard = {
     _poolSweepTheSkies,
     _poolSynthInfiltrator,
     _poolTaintedPeak,
+    _poolTalasExplorer,
     _poolTameshiRealityArchitect,
     _poolTarSnare,
     _poolTatteredDrake,

@@ -23009,8 +23009,8 @@ export class Game {
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber) =>
         this.discardByEffect(target, amount, random === true, undefined, unlessOne, anyNumber === true),
-      discardChosen: (target, filter, lookOnly, optional) =>
-        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional),
+      discardChosen: (target, filter, lookOnly, optional, upTo) =>
+        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo),
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
       modifyPtAll: (filter, power, toughness, duration, exceptSource, scopeTo) =>
@@ -24240,6 +24240,7 @@ export class Game {
           controller,
         );
       },
+      epic: () => this.applyEpic(controller, source),
       preventAllCombatDamage: (by, toYou) => {
         if (by !== undefined) {
           (this.state.combatDamagePreventedBy ??= []).push({
@@ -24596,7 +24597,10 @@ export class Game {
    * (rule 701.20) — or only looked at by `chooser` — and a `choose-from-zone`
    * over it for `chooser`, whose answer `target` discards. A card the
    * chooser may pick is one matching `filter` read from the chooser's side
-   * ("a nonland card with mana value 3 or less"). */
+   * ("a nonland card with mana value 3 or less"). `upTo` is "up to that
+   * many" instead of one (Discordant Dirge); 0 is a look alone ("look at
+   * target player's hand" — Glasses of Urza), asked with nothing to pick so
+   * its viewer closes it. */
   private beginDiscardChosen(
     chooser: PlayerId,
     source: ObjectId,
@@ -24604,6 +24608,7 @@ export class Game {
     filter: CardFilter | undefined,
     lookOnly: boolean,
     optional: boolean,
+    upTo?: number,
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -24611,19 +24616,24 @@ export class Game {
     const hand = this.state.zones.perPlayer[player].hand;
     if (hand.length === 0) return;
     if (!lookOnly) this.revealCards(player, [...hand], "hand");
-    const eligible = hand.filter(
-      (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
-    );
+    const max = upTo ?? 1;
+    const eligible =
+      max === 0
+        ? []
+        : hand.filter(
+            (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
+          );
     // Nothing it could be: everyone has seen the hand, and nothing is asked.
-    if (eligible.length === 0) return;
+    // A look still shows the hand to the one looking.
+    if (eligible.length === 0 && !lookOnly) return;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player: chooser,
       ...(chooser !== player ? { forPlayer: player } : {}),
       ids: [...hand],
       eligible,
-      min: optional ? 0 : 1,
-      max: 1,
+      min: optional || upTo !== undefined || eligible.length === 0 ? 0 : 1,
+      max: Math.min(max, eligible.length),
       destination: "discard",
       leftover: "stay",
     };
@@ -26885,6 +26895,7 @@ export class Game {
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
+      ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
     };
   }
 
@@ -26972,6 +26983,7 @@ export class Game {
       timestamp: 0,
       isToken: false,
       isCopy: true,
+      ...(spell.withoutEpic === true ? { withoutEpic: true } : {}),
       attachedTo: null,
       isCommander: false,
       xValue: spell.xValue,
@@ -27827,6 +27839,10 @@ export class Game {
       if (spellHasSplitSecond(this.state, this.registry, spell)) {
         return `${printedCardName(spell)} has split second`;
       }
+    }
+    // Epic (rule 702.50b).
+    if (this.state.players[player]?.cantCastSpellsForGame === true) {
+      return `${player} can't cast spells for the rest of the game`;
     }
     for (const p of this.state.turnProhibitions?.players ?? []) {
       if (p.player !== player) continue;
@@ -34489,6 +34505,39 @@ export class Game {
       ...(createdBy !== owner ? { createdBy } : {}),
     });
     this.emit({ type: "emblem-created", player: owner, text });
+  }
+
+  /**
+   * Epic (rule 702.50a) as `sourceId`, an epic spell `controller` controls,
+   * resolves: they can't cast spells for the rest of the game (702.50b), and
+   * at the beginning of each of their upkeeps a copy of the spell as it is
+   * now — its targets, {X} and choices — goes on the stack without its epic
+   * ability, its targets open to change (707.10c). The upkeep trigger rides
+   * an emblem so it shows on the table. Nothing on a copy made by epic.
+   */
+  private applyEpic(controller: PlayerId, sourceId: ObjectId): void {
+    const spell = this.state.objects[sourceId];
+    if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card" || spell.withoutEpic === true) return;
+    const player = this.state.players[controller];
+    if (player === undefined) return;
+    player.cantCastSpellsForGame = true;
+    const name = printedCardName(spell);
+    const snapshot: SpellSnapshot = { ...this.spellSnapshot(spell), withoutEpic: true };
+    const text = `For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy ${name} except for its epic ability.`;
+    this.createEmblem(controller, text, null, name, [
+      {
+        trigger: { on: "step-begins", step: "upkeep", who: "you" },
+        targets: [],
+        effect: {
+          kind: "copy-spell",
+          target: "trigger-spell",
+          newTargets: true,
+          spell: { snapshot, original: sourceId },
+        },
+        resolve: null,
+        text: `At the beginning of your upkeep, copy ${name} except for its epic ability. You may choose new targets for the copy.`,
+      },
+    ]);
   }
 
   // --- state-based actions -----------------------------------

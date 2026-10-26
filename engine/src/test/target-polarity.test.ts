@@ -142,6 +142,12 @@ describe("slot polarity", () => {
     expect(activated("Tariel, Reckoner of Souls", 0)).toEqual(["harm"]);
   });
 
+  it("reads an Aura that hurts its permanent's controller each upkeep, and one that arms its creature", () => {
+    expect(cast("Parasitic Bond")).toEqual(["harm"]);
+    expect(cast("Power Taint")).toEqual(["harm"]);
+    expect(cast("Venomous Fangs")).toEqual(["help"]);
+  });
+
   it("reads a delayed 'when it dies, return it' as a save", () => {
     expect(cast("Graceful Reprieve")).toEqual(["help"]);
   });

@@ -174,11 +174,13 @@ import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
 import _poolEject from "../pool/eject.js";
+import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
+import _poolEnduringIdeal from "../pool/enduring-ideal.js";
 import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
 import _poolEnthusiasticStudy from "../pool/enthusiastic-study.js";
 import _poolEpharaEverSheltering from "../pool/ephara-ever-sheltering.js";
@@ -217,6 +219,7 @@ import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
 import _poolFootNinjas from "../pool/foot-ninjas.js";
+import _poolFootstepsOfTheGoryo from "../pool/footsteps-of-the-goryo.js";
 import _poolForgottenMonument from "../pool/forgotten-monument.js";
 import _poolFountainport from "../pool/fountainport.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
@@ -248,6 +251,7 @@ import _poolHackrobat from "../pool/hackrobat.js";
 import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHamletCaptain from "../pool/hamlet-captain.js";
+import _poolHaruOnna from "../pool/haru-onna.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
@@ -468,6 +472,7 @@ import _poolRealityHeist from "../pool/reality-heist.js";
 import _poolReaverDrone from "../pool/reaver-drone.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolRecklessRacer from "../pool/reckless-racer.js";
+import _poolReclusiveWight from "../pool/reclusive-wight.js";
 import _poolReduceInStature from "../pool/reduce-in-stature.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
@@ -492,6 +497,8 @@ import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
 import _poolRubblebeltRaiders from "../pool/rubblebelt-raiders.js";
 import _poolRunAwayTogether from "../pool/run-away-together.js";
+import _poolRuneOfProtectionArtifacts from "../pool/rune-of-protection-artifacts.js";
+import _poolRuneOfProtectionBlack from "../pool/rune-of-protection-black.js";
 import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
@@ -639,6 +646,7 @@ import _poolTranscendentMaster from "../pool/transcendent-master.js";
 import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
+import _poolTreetopRangers from "../pool/treetop-rangers.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
 import _poolTrugaCliffcharger from "../pool/truga-cliffcharger.js";
@@ -903,11 +911,13 @@ const shard: CardShard = {
     _poolEarthRift,
     _poolEaterOfTheDead,
     _poolEject,
+    _poolElectryte,
     _poolElementalMasterpiece,
     _poolElvishFury,
     _poolEmeriaShatteredSkyclave,
     _poolEmielTheBlessed,
     _poolEndTheFestivities,
+    _poolEnduringIdeal,
     _poolEnterTheAvatarState,
     _poolEnthusiasticStudy,
     _poolEpharaEverSheltering,
@@ -946,6 +956,7 @@ const shard: CardShard = {
     _poolFlowstoneShambler,
     _poolFontOfVigor,
     _poolFootNinjas,
+    _poolFootstepsOfTheGoryo,
     _poolForgottenMonument,
     _poolFountainport,
     _poolFrontlineSage,
@@ -977,6 +988,7 @@ const shard: CardShard = {
     _poolHailStorm,
     _poolHakodaSelflessCommander,
     _poolHamletCaptain,
+    _poolHaruOnna,
     _poolHatcherySpider,
     _poolHauntedScreen,
     _poolHavocFestival,
@@ -1197,6 +1209,7 @@ const shard: CardShard = {
     _poolReaverDrone,
     _poolRecklessLackey,
     _poolRecklessRacer,
+    _poolReclusiveWight,
     _poolReduceInStature,
     _poolRegeneration,
     _poolReinforcedRonin,
@@ -1221,6 +1234,8 @@ const shard: CardShard = {
     _poolRubblebeltMaverick,
     _poolRubblebeltRaiders,
     _poolRunAwayTogether,
+    _poolRuneOfProtectionArtifacts,
+    _poolRuneOfProtectionBlack,
     _poolRustedSentinel,
     _poolRyuseiTheFallingStar,
     _poolSacrifice,
@@ -1368,6 +1383,7 @@ const shard: CardShard = {
     _poolTraumaticRevelation,
     _poolTravelersAmulet,
     _poolTreeguardDuo,
+    _poolTreetopRangers,
     _poolTresserhornSinks,
     _poolTrinketMage,
     _poolTrugaCliffcharger,

@@ -304,6 +304,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-on-library": (n, v) => v.touch(n.target, "help", MINOR),
   discard: (n, v) => v.touch(n.target, "harm", MAJOR),
   "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
+  // Seeing a hidden hand: point it at an opponent.
+  "look-at-hand": (n, v) => v.touch(n.target, "harm", MINOR),
   "modify-pt": (n, v) => {
     const power = amountSign(n.power);
     const toughness = amountSign(n.toughness);
@@ -510,6 +512,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     n.counter === "experience" ? v.touch(n.target, "harm", MINOR) : v.touch(n.target, "help", MINOR),
   "get-energy": none,
   "create-emblem": none,
+  epic: none,
   "prevent-all-combat-damage": none,
   "prevent-damage-to-you": none,
   "prevent-damage": (n, v) => v.touch(n.target, "help", MINOR),
@@ -757,7 +760,14 @@ export function auraPolarity(def: CardDefinition): Polarity {
       // "enchanted creature's controller sacrifices it and you create a Myr".
       const steps = ability.effect?.kind === "sequence" ? ability.effect.effects : ability.effect ? [ability.effect] : [];
       if (steps.some((e) => (e.kind === "destroy" || e.kind === "sacrifice-target") && e.target === "attached")) harm = true;
+      // Each upkeep of the enchanted permanent's controller, that player is
+      // hurt — Parasitic Bond's 2 damage, Power Taint's "loses 2 life unless
+      // they pay {2}".
+      if (enchantedControllersTurn(ability.whileCondition) && hurtsActivePlayer(ability.effect)) harm = true;
       if (!("who" in ability.trigger) || ability.trigger.who !== "attached") continue;
+      // "Whenever enchanted creature deals damage to a creature, destroy
+      // that creature" (Venomous Fangs): a weapon for it.
+      if (ability.effect?.kind === "destroy" && ability.effect.target === "trigger-recipient") help = true;
       // The enchanted permanent's controller pays — Corrupted Roots' "whenever
       // enchanted land becomes tapped, its controller loses 2 life".
       if (ability.effect?.kind === "lose-life" && ability.effect.who === "trigger-controller") harm = true;
@@ -790,6 +800,21 @@ export function auraPolarity(def: CardDefinition): Polarity {
     }
   }
   return harm === help ? "either" : harm ? "harm" : "help";
+}
+
+/** A trigger condition that holds only on the turn of whoever controls what
+ * the source enchants: "the upkeep of enchanted creature's controller". */
+function enchantedControllersTurn(condition: TriggeredAbility["whileCondition"]): boolean {
+  if (condition === undefined || condition.kind !== "source") return false;
+  const host = condition.filter.attachedTo;
+  return typeof host === "object" && host !== null && "controlledBy" in host && host.controlledBy === "active-player";
+}
+
+/** Damage to, or life lost by, the active player — paid off or not. */
+function hurtsActivePlayer(effect: EffectSpec | null): boolean {
+  if (effect === null) return false;
+  if (effect.kind === "unless") return hurtsActivePlayer(effect.otherwise);
+  return (effect.kind === "damage" || effect.kind === "lose-life") && "who" in effect && effect.who === "active-player";
 }
 
 /** Which way an effect aimed at the Aura's `attached` permanent leans, or

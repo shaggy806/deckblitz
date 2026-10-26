@@ -272,6 +272,7 @@ import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
 import _poolHamletbackGoliath from "../pool/hamletback-goliath.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
+import _poolHeadlongRush from "../pool/headlong-rush.js";
 import _poolHeartWolf from "../pool/heart-wolf.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
@@ -306,11 +307,13 @@ import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
 import _poolInTheTrenches from "../pool/in-the-trenches.js";
+import _poolInameAsOne from "../pool/iname-as-one.js";
 import _poolInevitableEnd from "../pool/inevitable-end.js";
 import _poolInfernalScarring from "../pool/infernal-scarring.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
+import _poolInnerChamberGuard from "../pool/inner-chamber-guard.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
@@ -1013,6 +1016,7 @@ const shard: CardShard = {
     _poolHamletbackGoliath,
     _poolHardenedAcademic,
     _poolHavocDevils,
+    _poolHeadlongRush,
     _poolHeartWolf,
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,
@@ -1047,11 +1051,13 @@ const shard: CardShard = {
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
     _poolInTheTrenches,
+    _poolInameAsOne,
     _poolInevitableEnd,
     _poolInfernalScarring,
     _poolInfirmaryHealer,
     _poolInfuseWithVitality,
     _poolIngeniousArtillerist,
+    _poolInnerChamberGuard,
     _poolInspiredFire,
     _poolInterdisciplinaryMascot,
     _poolInundatedArchive,

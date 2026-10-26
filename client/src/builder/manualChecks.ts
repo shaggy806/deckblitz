@@ -8307,4 +8307,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Just Fate: castable only once you've been attacked",
     board({ you: { bf: ['Plains*3'], hand: ['Just Fate'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  preset(
+    "Sorcerous Sight: looking at an opponent's hand",
+    board({ you: { bf: ['Island'], hand: ['Sorcerous Sight'] }, opp: { hand: ['Grizzly Bears', 'Lightning Bolt', 'Forest'] } }),
+  ),
+  preset(
+    'Discordant Dirge: choose up to as many cards as its verse counters',
+    board({
+      you: { bf: ['Swamp', { name: 'Discordant Dirge', counters: { verse: 2 } }] },
+      opp: { hand: ['Grizzly Bears', 'Lightning Bolt', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Endless Swarm: a copy each upkeep, and no more spells',
+    board({ you: { bf: ['Forest*9'], hand: ['Endless Swarm', 'Grizzly Bears', 'Forest', 'Forest'] } }),
+  ),
 ]
