@@ -8309,10 +8309,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   ),
   preset(
     "Sorcerous Sight: looking at an opponent's hand",
-    board({ you: { bf: ['Island'], hand: ['Sorcerous Sight'] } }),
+    board({ you: { bf: ['Island'], hand: ['Sorcerous Sight'] }, opp: { hand: ['Grizzly Bears', 'Lightning Bolt', 'Forest'] } }),
   ),
   preset(
     'Discordant Dirge: choose up to as many cards as its verse counters',
-    board({ you: { bf: ['Swamp', { name: 'Discordant Dirge', counters: { verse: 2 } }] } }),
+    board({
+      you: { bf: ['Swamp', { name: 'Discordant Dirge', counters: { verse: 2 } }] },
+      opp: { hand: ['Grizzly Bears', 'Lightning Bolt', 'Forest'] },
+    }),
   ),
 ]
