@@ -126,6 +126,7 @@ import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDeftDismissal from "../pool/deft-dismissal.js";
 import _poolDejaVu from "../pool/deja-vu.js";
+import _poolDelverOfSecrets from "../pool/delver-of-secrets.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
 import _poolDevourerOfMemory from "../pool/devourer-of-memory.js";
@@ -817,6 +818,7 @@ const shard: CardShard = {
     _poolDefiantSalvager,
     _poolDeftDismissal,
     _poolDejaVu,
+    _poolDelverOfSecrets,
     _poolDerangedAssistant,
     _poolDesperateFarmer,
     _poolDevourerOfMemory,

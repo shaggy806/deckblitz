@@ -27,7 +27,8 @@ export default defineCard({
                 kind: "delayed-trigger",
                 at: "end-of-combat",
                 about: "created",
-                effect: { kind: "exile", target: 0 },
+                // Every token made, two with Doubling Season (Geist of Saint Traft's ruling).
+                effect: { kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 } },
                 text: "Exile that token.",
               },
             ],

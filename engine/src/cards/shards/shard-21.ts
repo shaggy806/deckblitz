@@ -59,6 +59,7 @@ import _poolBetrayal from "../pool/betrayal.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
+import _poolBloodFeud from "../pool/blood-feud.js";
 import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBloodlineCulling from "../pool/bloodline-culling.js";
 import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
@@ -139,6 +140,7 @@ import _poolDarajaGriffin from "../pool/daraja-griffin.js";
 import _poolDaredevilManWithoutFear from "../pool/daredevil-man-without-fear.js";
 import _poolDarkFavor from "../pool/dark-favor.js";
 import _poolDarkNourishment from "../pool/dark-nourishment.js";
+import _poolDaybreakRanger from "../pool/daybreak-ranger.js";
 import _poolDeathWard from "../pool/death-ward.js";
 import _poolDeathgreeter from "../pool/deathgreeter.js";
 import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
@@ -226,6 +228,7 @@ import _poolFurnaceHostCharger from "../pool/furnace-host-charger.js";
 import _poolGalaGreeters from "../pool/gala-greeters.js";
 import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
 import _poolGandalfWhiteRider from "../pool/gandalf-white-rider.js";
+import _poolGarrukTheVeilCursed from "../pool/garruk-the-veil-cursed.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
 import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
@@ -272,6 +275,7 @@ import _poolHardWonJitte from "../pool/hard-won-jitte.js";
 import _poolHeadwaterSentries from "../pool/headwater-sentries.js";
 import _poolHeartbeatOfSpring from "../pool/heartbeat-of-spring.js";
 import _poolHeartsDesire from "../pool/hearts-desire.js";
+import _poolHeavyMattock from "../pool/heavy-mattock.js";
 import _poolHellkitePunisher from "../pool/hellkite-punisher.js";
 import _poolHellspurPosseBoss from "../pool/hellspur-posse-boss.js";
 import _poolHelmOfTheHost from "../pool/helm-of-the-host.js";
@@ -505,6 +509,7 @@ import _poolShieldSphere from "../pool/shield-sphere.js";
 import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
 import _poolShinenOfFlightsWings from "../pool/shinen-of-flights-wings.js";
 import _poolShreddersArmor from "../pool/shredders-armor.js";
+import _poolShriekgeist from "../pool/shriekgeist.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
 import _poolSimianSling from "../pool/simian-sling.js";
 import _poolSisterOfSilence from "../pool/sister-of-silence.js";
@@ -744,6 +749,7 @@ const shard: CardShard = {
     _poolBlackMarketConnections,
     _poolBlightGrenade,
     _poolBloatedContaminator,
+    _poolBloodFeud,
     _poolBloodFountain,
     _poolBloodlineCulling,
     _poolBloodskyBerserker,
@@ -824,6 +830,7 @@ const shard: CardShard = {
     _poolDaredevilManWithoutFear,
     _poolDarkFavor,
     _poolDarkNourishment,
+    _poolDaybreakRanger,
     _poolDeathWard,
     _poolDeathgreeter,
     _poolDeceptiveFrostkite,
@@ -911,6 +918,7 @@ const shard: CardShard = {
     _poolGalaGreeters,
     _poolGalliaTragicHost,
     _poolGandalfWhiteRider,
+    _poolGarrukTheVeilCursed,
     _poolGevScaledScorch,
     _poolGhostlyKeybearer,
     _poolGiantCaterpillar,
@@ -957,6 +965,7 @@ const shard: CardShard = {
     _poolHeadwaterSentries,
     _poolHeartbeatOfSpring,
     _poolHeartsDesire,
+    _poolHeavyMattock,
     _poolHellkitePunisher,
     _poolHellspurPosseBoss,
     _poolHelmOfTheHost,
@@ -1190,6 +1199,7 @@ const shard: CardShard = {
     _poolShigekiJukaiVisionary,
     _poolShinenOfFlightsWings,
     _poolShreddersArmor,
+    _poolShriekgeist,
     _poolSilentAttendant,
     _poolSimianSling,
     _poolSisterOfSilence,

@@ -93,6 +93,7 @@ import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
 import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
 import _poolBretagardStronghold from "../pool/bretagard-stronghold.js";
 import _poolBrightReprisal from "../pool/bright-reprisal.js";
+import _poolBrimstoneVolley from "../pool/brimstone-volley.js";
 import _poolBrineShaman from "../pool/brine-shaman.js";
 import _poolBrokenConcentration from "../pool/broken-concentration.js";
 import _poolBuriedTreasure from "../pool/buried-treasure.js";
@@ -154,6 +155,7 @@ import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
 import _poolCrocodileOfTheCrossing from "../pool/crocodile-of-the-crossing.js";
 import _poolCryptCreeper from "../pool/crypt-creeper.js";
 import _poolCryptbreaker from "../pool/cryptbreaker.js";
+import _poolCurseOfObsession from "../pool/curse-of-obsession.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
@@ -375,6 +377,7 @@ import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
 import _poolLordMagnus from "../pool/lord-magnus.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
+import _poolLoyalCathar from "../pool/loyal-cathar.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
 import _poolLumaretsFavor from "../pool/lumarets-favor.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
@@ -795,6 +798,7 @@ const shard: CardShard = {
     _poolBreakerOfArmies,
     _poolBretagardStronghold,
     _poolBrightReprisal,
+    _poolBrimstoneVolley,
     _poolBrineShaman,
     _poolBrokenConcentration,
     _poolBuriedTreasure,
@@ -856,6 +860,7 @@ const shard: CardShard = {
     _poolCrocodileOfTheCrossing,
     _poolCryptCreeper,
     _poolCryptbreaker,
+    _poolCurseOfObsession,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
     _poolDangerousWager,
@@ -1077,6 +1082,7 @@ const shard: CardShard = {
     _poolLordMagnus,
     _poolLordOfAtlantis,
     _poolLoreholdArchivist,
+    _poolLoyalCathar,
     _poolLoyalGuardian,
     _poolLumaretsFavor,
     _poolLumraBellowOfTheWoods,

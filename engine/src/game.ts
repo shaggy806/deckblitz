@@ -20226,7 +20226,10 @@ export class Game {
             (spec.who === "you" && this.activePlayer === self.controller) ||
             // "Each opponent's end step" — the step belongs to an opponent,
             // so it fires once on each of their turns.
-            (spec.who === "opponent" && this.activePlayer !== self.controller))
+            (spec.who === "opponent" && this.activePlayer !== self.controller) ||
+            // "Enchanted player's upkeep" (a Curse): the step belongs to the
+            // player this Aura is attached to.
+            (spec.who === "attached" && this.matchesWhoPlayer("attached", this.activePlayer, self)))
         );
       case "cast-spell": {
         if (spec.copyOnly === true && event.type !== "spell-copied") return false;

@@ -139,6 +139,7 @@ import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrypticSerpent from "../pool/cryptic-serpent.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCrystalRod from "../pool/crystal-rod.js";
+import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
@@ -244,6 +245,7 @@ import _poolFoundationBreaker from "../pool/foundation-breaker.js";
 import _poolFoundryAssembler from "../pool/foundry-assembler.js";
 import _poolFromTheRubble from "../pool/from-the-rubble.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
+import _poolFullMoonsRise from "../pool/full-moons-rise.js";
 import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
 import _poolFuturistOperative from "../pool/futurist-operative.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
@@ -254,6 +256,7 @@ import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhostlyTouch from "../pool/ghostly-touch.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
+import _poolGhoulraiser from "../pool/ghoulraiser.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
 import _poolGitaxianAnatomist from "../pool/gitaxian-anatomist.js";
@@ -315,6 +318,7 @@ import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
 import _poolInnerSanctum from "../pool/inner-sanctum.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
+import _poolInstigatorGang from "../pool/instigator-gang.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
 import _poolInvasionOfLorwyn from "../pool/invasion-of-lorwyn.js";
@@ -886,6 +890,7 @@ const shard: CardShard = {
     _poolCrypticSerpent,
     _poolCrystalGrotto,
     _poolCrystalRod,
+    _poolCurseOfOblivion,
     _poolCursebreak,
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
@@ -991,6 +996,7 @@ const shard: CardShard = {
     _poolFoundryAssembler,
     _poolFromTheRubble,
     _poolFrostOgre,
+    _poolFullMoonsRise,
     _poolFurnaceBlessedConqueror,
     _poolFuturistOperative,
     _poolGadrakTheCrownScourge,
@@ -1001,6 +1007,7 @@ const shard: CardShard = {
     _poolGeneralLeoCristophe,
     _poolGhostlyTouch,
     _poolGhoulcallersBell,
+    _poolGhoulraiser,
     _poolGildedScuttler,
     _poolGiltgroveStalker,
     _poolGitaxianAnatomist,
@@ -1062,6 +1069,7 @@ const shard: CardShard = {
     _poolInnerDemon,
     _poolInnerSanctum,
     _poolInspirationFromBeyond,
+    _poolInstigatorGang,
     _poolIntimidationCampaign,
     _poolInvasionOfErgamon,
     _poolInvasionOfLorwyn,

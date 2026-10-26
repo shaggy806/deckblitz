@@ -71,6 +71,7 @@ import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
+import _poolBreakOfDay from "../pool/break-of-day.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
@@ -250,6 +251,7 @@ import _poolGravityNegator from "../pool/gravity-negator.js";
 import _poolGravityWell from "../pool/gravity-well.js";
 import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
+import _poolGrimFlowering from "../pool/grim-flowering.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
 import _poolGryffRider from "../pool/gryff-rider.js";
@@ -266,6 +268,7 @@ import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
 import _poolHeartwarmingRedemption from "../pool/heartwarming-redemption.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
+import _poolHecklingFiends from "../pool/heckling-fiends.js";
 import _poolHedgeWhisperer from "../pool/hedge-whisperer.js";
 import _poolHeikoYamazakiTheGeneral from "../pool/heiko-yamazaki-the-general.js";
 import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
@@ -632,6 +635,7 @@ import _poolTormentorsHelm from "../pool/tormentors-helm.js";
 import _poolTowerOfFortunes from "../pool/tower-of-fortunes.js";
 import _poolToweringGibbon from "../pool/towering-gibbon.js";
 import _poolTrainingGrounds from "../pool/training-grounds.js";
+import _poolTraitorousBlood from "../pool/traitorous-blood.js";
 import _poolTranquilThicket from "../pool/tranquil-thicket.js";
 import _poolTranscendentMessage from "../pool/transcendent-message.js";
 import _poolTrostaniSelesnyasVoice from "../pool/trostani-selesnyas-voice.js";
@@ -813,6 +817,7 @@ const shard: CardShard = {
     _poolBoonOfBoseiju,
     _poolBoulderfall,
     _poolBountyAgent,
+    _poolBreakOfDay,
     _poolBrilliantSpectrum,
     _poolBrinkOfDisaster,
     _poolBronzebeakMoa,
@@ -992,6 +997,7 @@ const shard: CardShard = {
     _poolGravityWell,
     _poolGreaterBasilisk,
     _poolGreenhouseRicketyGazebo,
+    _poolGrimFlowering,
     _poolGrindingStation,
     _poolGrizzlyBears,
     _poolGryffRider,
@@ -1008,6 +1014,7 @@ const shard: CardShard = {
     _poolHeartlessSummoning,
     _poolHeartwarmingRedemption,
     _poolHeartwoodGiant,
+    _poolHecklingFiends,
     _poolHedgeWhisperer,
     _poolHeikoYamazakiTheGeneral,
     _poolHeliodSunCrowned,
@@ -1374,6 +1381,7 @@ const shard: CardShard = {
     _poolTowerOfFortunes,
     _poolToweringGibbon,
     _poolTrainingGrounds,
+    _poolTraitorousBlood,
     _poolTranquilThicket,
     _poolTranscendentMessage,
     _poolTrostaniSelesnyasVoice,

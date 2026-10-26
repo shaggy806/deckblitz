@@ -70,6 +70,7 @@ import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolBuiltToSmash from "../pool/built-to-smash.js";
 import _poolBurnTrail from "../pool/burn-trail.js";
 import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
+import _poolButchersCleaver from "../pool/butchers-cleaver.js";
 import _poolBygoneBishop from "../pool/bygone-bishop.js";
 import _poolCachedDefenses from "../pool/cached-defenses.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
@@ -547,6 +548,7 @@ import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpikeBreeder from "../pool/spike-breeder.js";
 import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
+import _poolSpitefulShadows from "../pool/spiteful-shadows.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSplittingHeadache from "../pool/splitting-headache.js";
 import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
@@ -768,6 +770,7 @@ const shard: CardShard = {
     _poolBuiltToSmash,
     _poolBurnTrail,
     _poolBurningSunCavalry,
+    _poolButchersCleaver,
     _poolBygoneBishop,
     _poolCachedDefenses,
     _poolCaprichrome,
@@ -1245,6 +1248,7 @@ const shard: CardShard = {
     _poolSpikeBreeder,
     _poolSpiritOfTheAldergard,
     _poolSpitFlame,
+    _poolSpitefulShadows,
     _poolSplatterTechnique,
     _poolSplittingHeadache,
     _poolSpringheartNantuko,

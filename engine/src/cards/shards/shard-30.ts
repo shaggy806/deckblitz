@@ -83,6 +83,7 @@ import _poolBringBack from "../pool/bring-back.js";
 import _poolBrokersCharm from "../pool/brokers-charm.js";
 import _poolBrokersVeteran from "../pool/brokers-veteran.js";
 import _poolBurdenedAerialist from "../pool/burdened-aerialist.js";
+import _poolBurningVengeance from "../pool/burning-vengeance.js";
 import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolBuryInBooks from "../pool/bury-in-books.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
@@ -251,6 +252,7 @@ import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
+import _poolGeistOfSaintTraft from "../pool/geist-of-saint-traft.js";
 import _poolGiantbaiting from "../pool/giantbaiting.js";
 import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
@@ -802,6 +804,7 @@ const shard: CardShard = {
     _poolBrokersCharm,
     _poolBrokersVeteran,
     _poolBurdenedAerialist,
+    _poolBurningVengeance,
     _poolBurrogBanemaker,
     _poolBuryInBooks,
     _poolCacklingCounterpart,
@@ -970,6 +973,7 @@ const shard: CardShard = {
     _poolGargadon,
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
+    _poolGeistOfSaintTraft,
     _poolGiantbaiting,
     _poolGiftOfTheDeity,
     _poolGimlisRecklessMight,

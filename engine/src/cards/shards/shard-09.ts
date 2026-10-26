@@ -91,6 +91,7 @@ import _poolBroodhatchNantuko from "../pool/broodhatch-nantuko.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
 import _poolBruseTarlRovingRancher from "../pool/bruse-tarl-roving-rancher.js";
+import _poolBurdenOfGuilt from "../pool/burden-of-guilt.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
@@ -376,6 +377,7 @@ import _poolMartialLaw from "../pool/martial-law.js";
 import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
+import _poolMercilessPredator from "../pool/merciless-predator.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMind from "../pool/mind.js";
@@ -475,6 +477,7 @@ import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
 import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
+import _poolRavenousDemon from "../pool/ravenous-demon.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
 import _poolRealityHemorrhage from "../pool/reality-hemorrhage.js";
 import _poolReaperOfTheWilds from "../pool/reaper-of-the-wilds.js";
@@ -609,6 +612,7 @@ import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
 import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
 import _poolTajuruArcher from "../pool/tajuru-archer.js";
+import _poolTalonsOfFalkenrath from "../pool/talons-of-falkenrath.js";
 import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
@@ -822,6 +826,7 @@ const shard: CardShard = {
     _poolBrothersOfFire,
     _poolBrudicladTelchorEngineer,
     _poolBruseTarlRovingRancher,
+    _poolBurdenOfGuilt,
     _poolBurglarRat,
     _poolBurnBurnTreeAndFern,
     _poolBurnoutBashtronaut,
@@ -1107,6 +1112,7 @@ const shard: CardShard = {
     _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
     _poolMemoryWorm,
+    _poolMercilessPredator,
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
     _poolMind,
@@ -1206,6 +1212,7 @@ const shard: CardShard = {
     _poolRakkaMar,
     _poolRakshasasBargain,
     _poolRallyThePeasants,
+    _poolRavenousDemon,
     _poolRayOfRevelation,
     _poolRealityHemorrhage,
     _poolReaperOfTheWilds,
@@ -1340,6 +1347,7 @@ const shard: CardShard = {
     _poolSythisHarvestsHand,
     _poolTabletOfEpityr,
     _poolTajuruArcher,
+    _poolTalonsOfFalkenrath,
     _poolTangletrap,
     _poolTanukiTransplanter,
     _poolTaxiDriver,

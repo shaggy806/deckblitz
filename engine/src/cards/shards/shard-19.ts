@@ -111,6 +111,7 @@ import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolChronicFlooding from "../pool/chronic-flooding.js";
+import _poolClaustrophobia from "../pool/claustrophobia.js";
 import _poolClawsOut from "../pool/claws-out.js";
 import _poolCleansingWildfire from "../pool/cleansing-wildfire.js";
 import _poolClearTheStage from "../pool/clear-the-stage.js";
@@ -407,6 +408,7 @@ import _poolMarkovPurifier from "../pool/markov-purifier.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
+import _poolMayorOfAvabruck from "../pool/mayor-of-avabruck.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
 import _poolMelekIzzetParagon from "../pool/melek-izzet-paragon.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
@@ -622,6 +624,7 @@ import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
 import _poolStreakingOilgorger from "../pool/streaking-oilgorger.js";
 import _poolStrikingSliver from "../pool/striking-sliver.js";
+import _poolStromkirkNoble from "../pool/stromkirk-noble.js";
 import _poolSummonGfIfrit from "../pool/summon-gf-ifrit.js";
 import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
 import _poolSunCrestedPterodon from "../pool/sun-crested-pterodon.js";
@@ -857,6 +860,7 @@ const shard: CardShard = {
     _poolChromeHostHulk,
     _poolChromeMox,
     _poolChronicFlooding,
+    _poolClaustrophobia,
     _poolClawsOut,
     _poolCleansingWildfire,
     _poolClearTheStage,
@@ -1153,6 +1157,7 @@ const shard: CardShard = {
     _poolMaskedMeower,
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
+    _poolMayorOfAvabruck,
     _poolMazeSkullbomb,
     _poolMelekIzzetParagon,
     _poolMercilessExecutioner,
@@ -1368,6 +1373,7 @@ const shard: CardShard = {
     _poolStormbreathDragon,
     _poolStreakingOilgorger,
     _poolStrikingSliver,
+    _poolStromkirkNoble,
     _poolSummonGfIfrit,
     _poolSummonKnightsOfRound,
     _poolSunCrestedPterodon,

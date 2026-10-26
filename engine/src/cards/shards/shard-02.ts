@@ -125,6 +125,7 @@ import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
+import _poolCruelReality from "../pool/cruel-reality.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
 import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
 import _poolCuriousObsession from "../pool/curious-obsession.js";
@@ -227,6 +228,7 @@ import _poolFogElemental from "../pool/fog-elemental.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
+import _poolForgeDevil from "../pool/forge-devil.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
 import _poolFoundryStreetDenizen from "../pool/foundry-street-denizen.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
@@ -246,6 +248,7 @@ import _poolGalinasKnight from "../pool/galinas-knight.js";
 import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGallifreyFallsNoMore from "../pool/gallifrey-falls-no-more.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
+import _poolGeistHonoredMonk from "../pool/geist-honored-monk.js";
 import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
@@ -280,6 +283,7 @@ import _poolHateflayer from "../pool/hateflayer.js";
 import _poolHazoretsFavor from "../pool/hazorets-favor.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
+import _poolHelvault from "../pool/helvault.js";
 import _poolHeraldOfHadar from "../pool/herald-of-hadar.js";
 import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
 import _poolHeronsGraceChampion from "../pool/herons-grace-champion.js";
@@ -303,6 +307,7 @@ import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolInkfathomInfiltrator from "../pool/inkfathom-infiltrator.js";
 import _poolInquisitorGreyfax from "../pool/inquisitor-greyfax.js";
+import _poolInsectileAberration from "../pool/insectile-aberration.js";
 import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
@@ -820,6 +825,7 @@ const shard: CardShard = {
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,
+    _poolCruelReality,
     _poolCudgelTroll,
     _poolCulminationOfStudies,
     _poolCuriousObsession,
@@ -922,6 +928,7 @@ const shard: CardShard = {
     _poolForbiddenLore,
     _poolForceSpike,
     _poolForcefulDenial,
+    _poolForgeDevil,
     _poolFortressCyclops,
     _poolFoundryStreetDenizen,
     _poolFranticSearch,
@@ -941,6 +948,7 @@ const shard: CardShard = {
     _poolGallantCitizen,
     _poolGallifreyFallsNoMore,
     _poolGarruksUprising,
+    _poolGeistHonoredMonk,
     _poolGenerousSoul,
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
@@ -975,6 +983,7 @@ const shard: CardShard = {
     _poolHazoretsFavor,
     _poolHeartstringPuller,
     _poolHelionaut,
+    _poolHelvault,
     _poolHeraldOfHadar,
     _poolHeroOfTheDunes,
     _poolHeronsGraceChampion,
@@ -998,6 +1007,7 @@ const shard: CardShard = {
     _poolIngrisStingerquill,
     _poolInkfathomInfiltrator,
     _poolInquisitorGreyfax,
+    _poolInsectileAberration,
     _poolInsideSource,
     _poolIntoTheVoid,
     _poolInvasionOfKaladesh,

@@ -140,6 +140,7 @@ import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
 import _poolCunningRhetoric from "../pool/cunning-rhetoric.js";
 import _poolCuratorsWard from "../pool/curators-ward.js";
 import _poolCuriosityCrafter from "../pool/curiosity-crafter.js";
+import _poolCurseOfTheBloodyTome from "../pool/curse-of-the-bloody-tome.js";
 import _poolCursecatcher from "../pool/cursecatcher.js";
 import _poolDakmorPlague from "../pool/dakmor-plague.js";
 import _poolDaringSaboteur from "../pool/daring-saboteur.js";
@@ -415,6 +416,7 @@ import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
+import _poolNightfallPredator from "../pool/nightfall-predator.js";
 import _poolNighthaze from "../pool/nighthaze.js";
 import _poolNightskyMimic from "../pool/nightsky-mimic.js";
 import _poolNightstalkerEngine from "../pool/nightstalker-engine.js";
@@ -859,6 +861,7 @@ const shard: CardShard = {
     _poolCunningRhetoric,
     _poolCuratorsWard,
     _poolCuriosityCrafter,
+    _poolCurseOfTheBloodyTome,
     _poolCursecatcher,
     _poolDakmorPlague,
     _poolDaringSaboteur,
@@ -1134,6 +1137,7 @@ const shard: CardShard = {
     _poolNessianCourser,
     _poolNeurokStealthsuit,
     _poolNightdrinkerMoroii,
+    _poolNightfallPredator,
     _poolNighthaze,
     _poolNightskyMimic,
     _poolNightstalkerEngine,

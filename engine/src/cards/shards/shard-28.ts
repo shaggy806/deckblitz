@@ -79,6 +79,7 @@ import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
 import _poolBogardanPhoenix from "../pool/bogardan-phoenix.js";
 import _poolBondOfPassion from "../pool/bond-of-passion.js";
+import _poolBoneyardWurm from "../pool/boneyard-wurm.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBrackwaterElemental from "../pool/brackwater-elemental.js";
@@ -359,6 +360,7 @@ import _poolMarchesaTheBlackRose from "../pool/marchesa-the-black-rose.js";
 import _poolMarionetteApprentice from "../pool/marionette-apprentice.js";
 import _poolMarkOfTheVampire from "../pool/mark-of-the-vampire.js";
 import _poolMarkovDreadknight from "../pool/markov-dreadknight.js";
+import _poolMarkovWarlord from "../pool/markov-warlord.js";
 import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
@@ -645,6 +647,7 @@ import _poolTorensFistOfTheAngels from "../pool/torens-fist-of-the-angels.js";
 import _poolTouchOfDarkness from "../pool/touch-of-darkness.js";
 import _poolTouchOfVitae from "../pool/touch-of-vitae.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
+import _poolTrackersInstincts from "../pool/trackers-instincts.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
 import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
@@ -815,6 +818,7 @@ const shard: CardShard = {
     _poolBoarQPine,
     _poolBogardanPhoenix,
     _poolBondOfPassion,
+    _poolBoneyardWurm,
     _poolBoommobile,
     _poolBountyOfMight,
     _poolBrackwaterElemental,
@@ -1095,6 +1099,7 @@ const shard: CardShard = {
     _poolMarionetteApprentice,
     _poolMarkOfTheVampire,
     _poolMarkovDreadknight,
+    _poolMarkovWarlord,
     _poolMarshGoblins,
     _poolMartialGlory,
     _poolMassAppeal,
@@ -1381,6 +1386,7 @@ const shard: CardShard = {
     _poolTouchOfDarkness,
     _poolTouchOfVitae,
     _poolTraceOfAbundance,
+    _poolTrackersInstincts,
     _poolTrainedArmodon,
     _poolTramwayStation,
     _poolTransmograntsCrown,

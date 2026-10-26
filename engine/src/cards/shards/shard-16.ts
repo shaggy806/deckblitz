@@ -323,6 +323,7 @@ import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKazuulWarlord from "../pool/kazuul-warlord.js";
 import _poolKeepsakeGorgon from "../pool/keepsake-gorgon.js";
+import _poolKessigCagebreakers from "../pool/kessig-cagebreakers.js";
 import _poolKeymasterRogue from "../pool/keymaster-rogue.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
@@ -383,6 +384,7 @@ import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
 import _poolMesaLynx from "../pool/mesa-lynx.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
+import _poolMindshrieker from "../pool/mindshrieker.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
@@ -543,6 +545,7 @@ import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
 import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
+import _poolSkeletalGrimace from "../pool/skeletal-grimace.js";
 import _poolSkeletalKathari from "../pool/skeletal-kathari.js";
 import _poolSkeletonShip from "../pool/skeleton-ship.js";
 import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
@@ -611,6 +614,7 @@ import _poolTemurBanner from "../pool/temur-banner.js";
 import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
+import _poolTerrorOfKruinPass from "../pool/terror-of-kruin-pass.js";
 import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
@@ -681,6 +685,7 @@ import _poolViashinoFirstblade from "../pool/viashino-firstblade.js";
 import _poolViciousShadows from "../pool/vicious-shadows.js";
 import _poolVictorysEnvoy from "../pool/victorys-envoy.js";
 import _poolVillageRites from "../pool/village-rites.js";
+import _poolVillageSurvivors from "../pool/village-survivors.js";
 import _poolVindictiveLich from "../pool/vindictive-lich.js";
 import _poolViridianEmissary from "../pool/viridian-emissary.js";
 import _poolVisageOfBolas from "../pool/visage-of-bolas.js";
@@ -719,6 +724,7 @@ import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
 import _poolWildBeastmaster from "../pool/wild-beastmaster.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWildOnslaught from "../pool/wild-onslaught.js";
+import _poolWildbloodPack from "../pool/wildblood-pack.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
 import _poolWindsOfQalSisma from "../pool/winds-of-qal-sisma.js";
@@ -1083,6 +1089,7 @@ const shard: CardShard = {
     _poolKazanduValley,
     _poolKazuulWarlord,
     _poolKeepsakeGorgon,
+    _poolKessigCagebreakers,
     _poolKeymasterRogue,
     _poolKineticAugur,
     _poolKinjallisCaller,
@@ -1143,6 +1150,7 @@ const shard: CardShard = {
     _poolMesaLynx,
     _poolMikaeusTheUnhallowed,
     _poolMillstone,
+    _poolMindshrieker,
     _poolMirkwoodNurturer,
     _poolMirranBardiche,
     _poolMirrorpool,
@@ -1303,6 +1311,7 @@ const shard: CardShard = {
     _poolSilvosRogueElemental,
     _poolSisterhoodOfKarn,
     _poolSkarrganHellkite,
+    _poolSkeletalGrimace,
     _poolSkeletalKathari,
     _poolSkeletonShip,
     _poolSkybladeOfTheLegion,
@@ -1371,6 +1380,7 @@ const shard: CardShard = {
     _poolTemurTawnyback,
     _poolTerashisVerdict,
     _poolTerohsFaithful,
+    _poolTerrorOfKruinPass,
     _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
     _poolTheFalconSamWilson,
@@ -1441,6 +1451,7 @@ const shard: CardShard = {
     _poolViciousShadows,
     _poolVictorysEnvoy,
     _poolVillageRites,
+    _poolVillageSurvivors,
     _poolVindictiveLich,
     _poolViridianEmissary,
     _poolVisageOfBolas,
@@ -1479,6 +1490,7 @@ const shard: CardShard = {
     _poolWildBeastmaster,
     _poolWildGrowth,
     _poolWildOnslaught,
+    _poolWildbloodPack,
     _poolWillOTheWisp,
     _poolWillOfTheTemur,
     _poolWindsOfQalSisma,
