@@ -95,7 +95,7 @@ card is a draft like any other — its templates match sentences, not meaning
 
 **Parallel agents**: a batch past ~15 authorable cards goes to `card-author`
 agents in their own worktrees, the lead doing the shared work once (the
-feature and its cards first, one scaffold run, tokens made once, drafts
+feature alongside them and its cards after, one scaffold run, tokens made once, drafts
 moved into staged groups, briefs with `--analogs 2 --width 300`, the digest)
 and reading every file the agents write. **`agent-batches.md`** beside this
 file is the whole procedure — sizing, staging, the brief (`agent-brief.md`),
@@ -106,9 +106,11 @@ prefix.
 ## 2. Build a feature, if one leads
 
 If one missing feature blocks **five or more** cards of the batch — a set's
-new mechanic usually does — build it first (engine change + its own test file
-+ the AUTHORING.md vocabulary entry, following `engine/CLAUDE.md`), then
-author every card it unblocks (`cards:needs -- --feature <key>`), in the set
+new mechanic usually does — build it (engine change + its own test file
++ the AUTHORING.md vocabulary entry, following `engine/CLAUDE.md`) while the
+agents author the cards that don't need it (`agent-batches.md`, "A feature
+alongside the agents"; first, before dispatching, only when its cards are
+most of the batch), then author every card it unblocks (`cards:needs -- --feature <key>`), in the set
 or not. **Teach the scaffolder too**: a template for the mechanic's keyword
 line or sentence in `scripts/oracle-parse.mjs`, checked by `npm run
 card:parse-check -w engine` (zero disagreements) and pinned in

@@ -4,7 +4,9 @@ The procedure every authoring skill uses once a batch has more cards than the
 lead should author alone — `author-by-set`, `author-by-set-oldest`, `author-top-cards` and
 `author-top-commanders` alike. The agents author **cards only**; the lead
 builds every engine feature the batch needs (and authors the cards that test
-it), then hands out the rest.
+it). When the batch has a feature to build, the agents start first, on the
+cards that don't need it, and the lead builds the feature while they work
+("A feature alongside the agents" below).
 
 ## Sizing
 
@@ -21,14 +23,47 @@ cloud session). Each is a **`card-author`** agent (`subagent_type`;
 fixed context on every turn than the general-purpose agent's) in
 `isolation: "worktree"`, started in the background, all in one message.
 
+## A feature alongside the agents
+
+Building the feature first left five agents' worth of cards waiting on it:
+B164 spent ~22 minutes on tribute before dispatching, though only 6 of its
+104 cards needed it. So once step 1 of the skill has triaged the batch:
+
+1. **Split off the feature's cards**: those whose only blocker is the
+   feature (`cards:needs -- --feature <key>`, in the batch or not). Everything
+   else is the agents' batch, staged and dispatched from the current `HEAD`
+   exactly as below, before the feature exists — the digest and briefs don't
+   need it, since none of those cards use it.
+2. **Build the feature while they run**, in the main checkout as step 2 of
+   the skill says (engine change, its test file, the scaffolder template, the
+   AUTHORING.md entry), and commit it. The agents' worktrees read their own
+   sources, so the lead's edits and builds don't reach them. **Every build,
+   typecheck and test run of the lead's goes through
+   `node scripts/typecheck-turn.mjs <command>` while agents run** (`npm run
+   build -w engine` as much as the typecheck — either takes ~6 GB), so it
+   queues with theirs instead of running the box out of memory.
+3. **The feature's cards**: scaffold them again once the template has
+   landed, and the lead authors them (it writes the feature's tests on them
+   anyway). If there are more than ~15, they're one more group, dispatched
+   from the feature's commit once an agent has reported (keep within the five
+   at once on a cloud session).
+4. **Integrate** as below: the agents' commits touch only `cards/pool/`,
+   `cards/tokens/` and their test files, so they cherry-pick onto the
+   feature's commit cleanly; `gen:cards` regenerates the rest.
+
+Build first, as before, only when the feature's cards are most of the batch
+(more than half), or when the feature changes something the other cards'
+definitions would be written against (a shared field, a renamed shape).
+
 ## The lead's shared work, before dispatching
 
 B109's six agents spent half their ~44 minutes before their first card — a
 stale base, a refused junction, their own build, scaffold and briefs under
 six-way contention — so the lead does this once:
 
-1. **Commit** whatever the batch needs first — a feature, the lead's own
-   cards, a token several cards share. Agents fast-forward to local `main`
+1. **Commit** whatever the batch needs first — the lead's own cards, a token
+   several cards share (a feature only when it's built first — "A feature
+   alongside the agents" above). Agents fast-forward to local `main`
    (their worktree starts from `origin/main`).
 2. **Scaffold the whole batch** in one `npm run card:scaffold -w engine --
    …` run, after the feature's scaffolder templates landed (so its lines come
@@ -115,8 +150,9 @@ input, more than its 15 agents together (153M for 471 cards). So:
 ## While they run
 
 The lead's own work that doesn't touch their files: the batch record's lead
-part, the docs, and **the next set's feature** — build and commit it now, so
-the next session (or this one) can dispatch the next set straight away.
+part, the docs, and **this batch's feature** when it has one ("A feature
+alongside the agents" above) — through `typecheck-turn.mjs`, like every build
+and check while they run.
 Integrate each group as it reports rather than waiting for all of them. Don't poll them; each one's completion arrives as a
 notification.
 

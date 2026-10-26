@@ -78,9 +78,10 @@ which of them the pool already has.
 ## 2. Build a feature, if one leads
 
 As `author-by-set` step 2: a missing feature that blocks **five or more**
-cards of the batch gets built first, with its test file, its AUTHORING.md
-entry and a scaffolder template, and then every card it unblocks gets
-authored, in the set or not. The lead builds the features and the agents only
+cards of the batch gets built, with its test file, its AUTHORING.md entry and
+a scaffolder template, while the agents author the cards that don't need it
+(`agent-batches.md`, "A feature alongside the agents"), and then every card it
+unblocks gets authored, in the set or not. The lead builds the features and the agents only
 author cards (the `feedback_features_lead_agents_author` memory).
 
 ## 3. Author, test, record, ship
