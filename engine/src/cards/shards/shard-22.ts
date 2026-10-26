@@ -491,6 +491,8 @@ import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
 import _poolRubblebeltRaiders from "../pool/rubblebelt-raiders.js";
 import _poolRunAwayTogether from "../pool/run-away-together.js";
+import _poolRuneOfProtectionArtifacts from "../pool/rune-of-protection-artifacts.js";
+import _poolRuneOfProtectionBlack from "../pool/rune-of-protection-black.js";
 import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
@@ -1218,6 +1220,8 @@ const shard: CardShard = {
     _poolRubblebeltMaverick,
     _poolRubblebeltRaiders,
     _poolRunAwayTogether,
+    _poolRuneOfProtectionArtifacts,
+    _poolRuneOfProtectionBlack,
     _poolRustedSentinel,
     _poolRyuseiTheFallingStar,
     _poolSacrifice,

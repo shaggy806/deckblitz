@@ -490,6 +490,8 @@ import _poolRowanTreefolk from "../pool/rowan-treefolk.js";
 import _poolRuinLurkerBat from "../pool/ruin-lurker-bat.js";
 import _poolRuinsOfOranRief from "../pool/ruins-of-oran-rief.js";
 import _poolRunAground from "../pool/run-aground.js";
+import _poolRuneOfProtectionGreen from "../pool/rune-of-protection-green.js";
+import _poolRuneOfProtectionRed from "../pool/rune-of-protection-red.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
 import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
 import _poolSaidDone from "../pool/said-done.js";
@@ -1203,6 +1205,8 @@ const shard: CardShard = {
     _poolRuinLurkerBat,
     _poolRuinsOfOranRief,
     _poolRunAground,
+    _poolRuneOfProtectionGreen,
+    _poolRuneOfProtectionRed,
     _poolRushOfVitality,
     _poolSabertoothNishoba,
     _poolSaidDone,

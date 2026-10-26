@@ -486,6 +486,7 @@ import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
+import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
@@ -1200,6 +1201,7 @@ const shard: CardShard = {
     _poolRodOfRuin,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
+    _poolRuneOfProtectionBlue,
     _poolRunedStalactite,
     _poolRustGoliath,
     _poolSagesKnowledge,

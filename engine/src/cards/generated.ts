@@ -5916,6 +5916,7 @@ import _poolEndlessRanksOfHydra from "./pool/endless-ranks-of-hydra.js";
 import _poolEndlessRanksOfTheDead from "./pool/endless-ranks-of-the-dead.js";
 import _poolEndlessScream from "./pool/endless-scream.js";
 import _poolEndling from "./pool/endling.js";
+import _poolEndoskeleton from "./pool/endoskeleton.js";
 import _poolEndrekSahrMasterBreeder from "./pool/endrek-sahr-master-breeder.js";
 import _poolEndriderCatalyzer from "./pool/endrider-catalyzer.js";
 import _poolEndriderSpikespitter from "./pool/endrider-spikespitter.js";
@@ -15932,6 +15933,12 @@ import _poolRunawaySteamKin from "./pool/runaway-steam-kin.js";
 import _poolRunawayTrashBot from "./pool/runaway-trash-bot.js";
 import _poolRuneBrandJuggler from "./pool/rune-brand-juggler.js";
 import _poolRuneCervinRider from "./pool/rune-cervin-rider.js";
+import _poolRuneOfProtectionArtifacts from "./pool/rune-of-protection-artifacts.js";
+import _poolRuneOfProtectionBlack from "./pool/rune-of-protection-black.js";
+import _poolRuneOfProtectionBlue from "./pool/rune-of-protection-blue.js";
+import _poolRuneOfProtectionGreen from "./pool/rune-of-protection-green.js";
+import _poolRuneOfProtectionLands from "./pool/rune-of-protection-lands.js";
+import _poolRuneOfProtectionRed from "./pool/rune-of-protection-red.js";
 import _poolRuneOfProtectionWhite from "./pool/rune-of-protection-white.js";
 import _poolRuneScarredDemon from "./pool/rune-scarred-demon.js";
 import _poolRuneSealedWall from "./pool/rune-sealed-wall.js";
@@ -29110,6 +29117,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEndlessRanksOfTheDead,
   _poolEndlessScream,
   _poolEndling,
+  _poolEndoskeleton,
   _poolEndrekSahrMasterBreeder,
   _poolEndriderCatalyzer,
   _poolEndriderSpikespitter,
@@ -39126,6 +39134,12 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRunawayTrashBot,
   _poolRuneBrandJuggler,
   _poolRuneCervinRider,
+  _poolRuneOfProtectionArtifacts,
+  _poolRuneOfProtectionBlack,
+  _poolRuneOfProtectionBlue,
+  _poolRuneOfProtectionGreen,
+  _poolRuneOfProtectionLands,
+  _poolRuneOfProtectionRed,
   _poolRuneOfProtectionWhite,
   _poolRuneScarredDemon,
   _poolRuneSealedWall,
@@ -52317,6 +52331,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/endless-ranks-of-the-dead": _poolEndlessRanksOfTheDead,
   "pool/endless-scream": _poolEndlessScream,
   "pool/endling": _poolEndling,
+  "pool/endoskeleton": _poolEndoskeleton,
   "pool/endrek-sahr-master-breeder": _poolEndrekSahrMasterBreeder,
   "pool/endrider-catalyzer": _poolEndriderCatalyzer,
   "pool/endrider-spikespitter": _poolEndriderSpikespitter,
@@ -62333,6 +62348,12 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/runaway-trash-bot": _poolRunawayTrashBot,
   "pool/rune-brand-juggler": _poolRuneBrandJuggler,
   "pool/rune-cervin-rider": _poolRuneCervinRider,
+  "pool/rune-of-protection-artifacts": _poolRuneOfProtectionArtifacts,
+  "pool/rune-of-protection-black": _poolRuneOfProtectionBlack,
+  "pool/rune-of-protection-blue": _poolRuneOfProtectionBlue,
+  "pool/rune-of-protection-green": _poolRuneOfProtectionGreen,
+  "pool/rune-of-protection-lands": _poolRuneOfProtectionLands,
+  "pool/rune-of-protection-red": _poolRuneOfProtectionRed,
   "pool/rune-of-protection-white": _poolRuneOfProtectionWhite,
   "pool/rune-scarred-demon": _poolRuneScarredDemon,
   "pool/rune-sealed-wall": _poolRuneSealedWall,

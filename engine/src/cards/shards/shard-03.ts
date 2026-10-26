@@ -439,6 +439,7 @@ import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
 import _poolRunAfoul from "../pool/run-afoul.js";
 import _poolRuneCervinRider from "../pool/rune-cervin-rider.js";
+import _poolRuneOfProtectionLands from "../pool/rune-of-protection-lands.js";
 import _poolRunnersBane from "../pool/runners-bane.js";
 import _poolRushwoodElemental from "../pool/rushwood-elemental.js";
 import _poolSacredPrey from "../pool/sacred-prey.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolRumbleArena,
     _poolRunAfoul,
     _poolRuneCervinRider,
+    _poolRuneOfProtectionLands,
     _poolRunnersBane,
     _poolRushwoodElemental,
     _poolSacredPrey,
