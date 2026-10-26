@@ -33,6 +33,7 @@ import _poolAscendingAven from "../pool/ascending-aven.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
 import _poolAutonomousAssembler from "../pool/autonomous-assembler.js";
 import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
+import _poolAvalancheRiders from "../pool/avalanche-riders.js";
 import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
 import _poolAxiomEngraver from "../pool/axiom-engraver.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
@@ -260,6 +261,7 @@ import _poolHellkiteWhelp from "../pool/hellkite-whelp.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
 import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
+import _poolHiddenGibbons from "../pool/hidden-gibbons.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
@@ -327,6 +329,7 @@ import _poolLockedInTheCemetery from "../pool/locked-in-the-cemetery.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
 import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
+import _poolLuBuMasterAtArms from "../pool/lu-bu-master-at-arms.js";
 import _poolLukeCagePowerMan from "../pool/luke-cage-power-man.js";
 import _poolLurchingRotbeast from "../pool/lurching-rotbeast.js";
 import _poolLuxuriousLibation from "../pool/luxurious-libation.js";
@@ -537,6 +540,7 @@ import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSteelyResolve from "../pool/steely-resolve.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
 import _poolStinkdrinkerDaredevil from "../pool/stinkdrinker-daredevil.js";
+import _poolStirTheGrave from "../pool/stir-the-grave.js";
 import _poolStompAndHowl from "../pool/stomp-and-howl.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
@@ -704,6 +708,7 @@ const shard: CardShard = {
     _poolAtarkaWorldRender,
     _poolAutonomousAssembler,
     _poolAvacynAngelOfHope,
+    _poolAvalancheRiders,
     _poolAvatarKyoshiEarthbender,
     _poolAxiomEngraver,
     _poolBakeIntoAPie,
@@ -931,6 +936,7 @@ const shard: CardShard = {
     _poolHengeOfRamos,
     _poolHeraldOfSerra,
     _poolHeraldOfTheDreadhorde,
+    _poolHiddenGibbons,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,
     _poolHowlingFury,
@@ -998,6 +1004,7 @@ const shard: CardShard = {
     _poolLokhustHeavyDestroyer,
     _poolLoxodonMystic,
     _poolLoyalDrake,
+    _poolLuBuMasterAtArms,
     _poolLukeCagePowerMan,
     _poolLurchingRotbeast,
     _poolLuxuriousLibation,
@@ -1208,6 +1215,7 @@ const shard: CardShard = {
     _poolSteelyResolve,
     _poolSterlingHound,
     _poolStinkdrinkerDaredevil,
+    _poolStirTheGrave,
     _poolStompAndHowl,
     _poolStoneKavu,
     _poolStoneSeederHierophant,

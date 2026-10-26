@@ -223,6 +223,7 @@ import _poolFlatten from "../pool/flatten.js";
 import _poolFling from "../pool/fling.js";
 import _poolFlourish from "../pool/flourish.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
+import _poolForbiddingWatchtower from "../pool/forbidding-watchtower.js";
 import _poolForebearsBlade from "../pool/forebears-blade.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
@@ -438,6 +439,7 @@ import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOnduCleric from "../pool/ondu-cleric.js";
+import _poolOpalAvenger from "../pool/opal-avenger.js";
 import _poolOrzhovEnforcer from "../pool/orzhov-enforcer.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
 import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
@@ -447,6 +449,7 @@ import _poolParalyzingGrasp from "../pool/paralyzing-grasp.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
+import _poolPeachGardenOath from "../pool/peach-garden-oath.js";
 import _poolPeltCollector from "../pool/pelt-collector.js";
 import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
@@ -527,6 +530,7 @@ import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
+import _poolSakuraTribeSpringcaller from "../pool/sakura-tribe-springcaller.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
 import _poolSanctumSpirit from "../pool/sanctum-spirit.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
@@ -653,6 +657,7 @@ import _poolThirst from "../pool/thirst.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
 import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
+import _poolThranWarMachine from "../pool/thran-war-machine.js";
 import _poolThrashThreat from "../pool/thrash-threat.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
@@ -725,6 +730,7 @@ import _poolWoodElves from "../pool/wood-elves.js";
 import _poolWoodedFoothills from "../pool/wooded-foothills.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolWriteIntoBeing from "../pool/write-into-being.js";
+import _poolXiahouDunTheOneEyed from "../pool/xiahou-dun-the-one-eyed.js";
 import _poolYavimayaCradleOfGrowth from "../pool/yavimaya-cradle-of-growth.js";
 import _poolYellowjacketHeartlessMarauder from "../pool/yellowjacket-heartless-marauder.js";
 import _poolYidrisMaelstromWielder from "../pool/yidris-maelstrom-wielder.js";
@@ -980,6 +986,7 @@ const shard: CardShard = {
     _poolFling,
     _poolFlourish,
     _poolFoggyNelsonOnRetainer,
+    _poolForbiddingWatchtower,
     _poolForebearsBlade,
     _poolForebodingLandscape,
     _poolForgottenAncient,
@@ -1195,6 +1202,7 @@ const shard: CardShard = {
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOnduCleric,
+    _poolOpalAvenger,
     _poolOrzhovEnforcer,
     _poolOtherworldlyGaze,
     _poolOutlawStitcher,
@@ -1204,6 +1212,7 @@ const shard: CardShard = {
     _poolParapetWatchers,
     _poolParhelionPatrol,
     _poolPawnOfUlamog,
+    _poolPeachGardenOath,
     _poolPeltCollector,
     _poolPerforatingArtist,
     _poolPerplexingTest,
@@ -1284,6 +1293,7 @@ const shard: CardShard = {
     _poolSaberclawGolem,
     _poolSacredPeaks,
     _poolSakashimaTheImpostor,
+    _poolSakuraTribeSpringcaller,
     _poolSamutHazoretsChampion,
     _poolSanctumSpirit,
     _poolSandstalkerMoloch,
@@ -1410,6 +1420,7 @@ const shard: CardShard = {
     _poolThopterMechanic,
     _poolThoroughInvestigation,
     _poolThoseWhoServe,
+    _poolThranWarMachine,
     _poolThrashThreat,
     _poolThrivingIsle,
     _poolThundermaneDragon,
@@ -1482,6 +1493,7 @@ const shard: CardShard = {
     _poolWoodedFoothills,
     _poolWrigglingGrub,
     _poolWriteIntoBeing,
+    _poolXiahouDunTheOneEyed,
     _poolYavimayaCradleOfGrowth,
     _poolYellowjacketHeartlessMarauder,
     _poolYidrisMaelstromWielder,

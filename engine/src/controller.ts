@@ -1342,6 +1342,7 @@ function castExtras(
   free?: boolean;
   altCost?: boolean;
   costOption?: number;
+  splice?: ObjectId[];
   sacrifice?: ObjectId;
   convoke?: ConvokePayment[];
   delve?: ObjectId[];
@@ -1368,6 +1369,8 @@ function castExtras(
     // flags above, and for the same reason: each branch is its own variant,
     // and a cast that names none is refused outright.
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
+    // A splice variant (rule 702.47) names its spliced cards: echoed.
+    ...(legal.splice !== undefined ? { splice: legal.splice.map((s) => s.object) } : {}),
     // A harmonize variant names the creature it taps (rule 702.180a): echoed.
     ...(legal.harmonizeTap !== undefined ? { tap: [legal.harmonizeTap.object] } : {}),
     // A web-slinging variant names the creature it returns (rule 702.188a).
@@ -1688,7 +1691,7 @@ export interface LandReach {
 const NO_REACH: LandReach = { together: 0, castable: 0 };
 
 /** Keywords that get a Ring-bearer past most blockers (`bestRingBearer`). */
-const RING_BEARER_EVASION: readonly Keyword[] = ["flying", "unblockable", "menace", "shadow", "fear", "intimidate", "skulk"];
+const RING_BEARER_EVASION: readonly Keyword[] = ["flying", "unblockable", "menace", "shadow", "fear", "intimidate", "skulk", "horsemanship"];
 
 /** The look ahead's copy `from`, one step (or several) further on, keeping
  * the look's own events (`ControllerView.continueAfter`); `null` if the

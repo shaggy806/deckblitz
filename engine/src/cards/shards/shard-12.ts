@@ -18,6 +18,7 @@ import _poolAladdinsRing from "../pool/aladdins-ring.js";
 import _poolAlmsOfTheVein from "../pool/alms-of-the-vein.js";
 import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
+import _poolAngelicCurator from "../pool/angelic-curator.js";
 import _poolAnointedChorister from "../pool/anointed-chorister.js";
 import _poolAnthousaSetessanHero from "../pool/anthousa-setessan-hero.js";
 import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
@@ -187,6 +188,7 @@ import _poolEarthshakingSi from "../pool/earthshaking-si.js";
 import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
 import _poolEelUmbra from "../pool/eel-umbra.js";
 import _poolEffortlessMaster from "../pool/effortless-master.js";
+import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
@@ -201,6 +203,7 @@ import _poolEpochrasite from "../pool/epochrasite.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
+import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
@@ -252,6 +255,7 @@ import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
+import _poolGhituEncampment from "../pool/ghitu-encampment.js";
 import _poolGhituJourneymage from "../pool/ghitu-journeymage.js";
 import _poolGhorClanBloodscale from "../pool/ghor-clan-bloodscale.js";
 import _poolGhostLitDrifter from "../pool/ghost-lit-drifter.js";
@@ -269,6 +273,7 @@ import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoblinCaves from "../pool/goblin-caves.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
+import _poolGodsEyeGateToTheReikai from "../pool/gods-eye-gate-to-the-reikai.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoliathTruck from "../pool/goliath-truck.js";
 import _poolGoneFishing from "../pool/gone-fishing.js";
@@ -747,6 +752,7 @@ const shard: CardShard = {
     _poolAlmsOfTheVein,
     _poolAncestralStatue,
     _poolAncientDen,
+    _poolAngelicCurator,
     _poolAnointedChorister,
     _poolAnthousaSetessanHero,
     _poolAppliedBiomancy,
@@ -916,6 +922,7 @@ const shard: CardShard = {
     _poolEdeaPossessedSorceress,
     _poolEelUmbra,
     _poolEffortlessMaster,
+    _poolEiganjoFreeRiders,
     _poolEladamrisCall,
     _poolElectrify,
     _poolElvishGuidance,
@@ -930,6 +937,7 @@ const shard: CardShard = {
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
+    _poolEverdream,
     _poolEverflameEidolon,
     _poolEviscerate,
     _poolEvolvedSleeper,
@@ -981,6 +989,7 @@ const shard: CardShard = {
     _poolGeologicalAppraiser,
     _poolGeralfsMindcrusher,
     _poolGhirapurAetherGrid,
+    _poolGhituEncampment,
     _poolGhituJourneymage,
     _poolGhorClanBloodscale,
     _poolGhostLitDrifter,
@@ -998,6 +1007,7 @@ const shard: CardShard = {
     _poolGoShintaiOfSharedPurpose,
     _poolGoblinCaves,
     _poolGoblinCommando,
+    _poolGodsEyeGateToTheReikai,
     _poolGoldForgedThopteryx,
     _poolGoliathTruck,
     _poolGoneFishing,

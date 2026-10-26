@@ -807,6 +807,11 @@ export interface GameObject {
    * kicker cost was paid, so `resolveTopOfStack` applies the kicked `effect`.
    * Absent for an unkicked or unkickable spell; cleared on any zone change. */
   kicked?: boolean;
+  /** The cards spliced onto this spell as it was cast (rule 702.47), by
+   * name, in order: their targets follow the spell's own and their effects
+   * are followed after its own (702.47b). Copied to a copy of the spell;
+   * cleared on any zone change (702.47e). */
+  spliced?: readonly string[];
   /** How many times a multikicker cost was paid as this spell was cast
    * (rule 702.33c–d) — set with `kicked` on a multikicker spell, cleared
    * with it. */
@@ -1277,6 +1282,7 @@ export interface SpellSnapshot {
   readonly division?: readonly number[];
   readonly kicked?: boolean;
   readonly timesKicked?: number;
+  readonly spliced?: readonly string[];
   readonly overloaded?: boolean;
   readonly bestowed?: boolean;
   readonly evokePaid?: boolean;

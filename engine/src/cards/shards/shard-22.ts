@@ -162,6 +162,7 @@ import _poolDisplace from "../pool/displace.js";
 import _poolDistantMelody from "../pool/distant-melody.js";
 import _poolDisturbedBurial from "../pool/disturbed-burial.js";
 import _poolDjinniWindseer from "../pool/djinni-windseer.js";
+import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
@@ -279,6 +280,7 @@ import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
+import _poolHuntingCheetah from "../pool/hunting-cheetah.js";
 import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
@@ -292,6 +294,7 @@ import _poolIncreasingSavagery from "../pool/increasing-savagery.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
+import _poolIntoTheFray from "../pool/into-the-fray.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
@@ -356,6 +359,7 @@ import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
+import _poolMarkOfTheOni from "../pool/mark-of-the-oni.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
@@ -426,6 +430,7 @@ import _poolOust from "../pool/oust.js";
 import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolOversoulOfDusk from "../pool/oversoul-of-dusk.js";
+import _poolOyobiWhoSplitTheHeavens from "../pool/oyobi-who-split-the-heavens.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
@@ -519,6 +524,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
+import _poolScrollOfOrigins from "../pool/scroll-of-origins.js";
 import _poolScryingSheets from "../pool/scrying-sheets.js";
 import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
@@ -613,6 +619,7 @@ import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
 import _poolTemperedVeteran from "../pool/tempered-veteran.js";
+import _poolTerashisGrasp from "../pool/terashis-grasp.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
 import _poolTergridsShadow from "../pool/tergrids-shadow.js";
 import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
@@ -721,6 +728,7 @@ import _poolYargleAndMultani from "../pool/yargle-and-multani.js";
 import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
+import _poolYellowScarvesCavalry from "../pool/yellow-scarves-cavalry.js";
 import _poolYipYip from "../pool/yip-yip.js";
 import _poolYokeOfTheDamned from "../pool/yoke-of-the-damned.js";
 import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
@@ -908,6 +916,7 @@ const shard: CardShard = {
     _poolDistantMelody,
     _poolDisturbedBurial,
     _poolDjinniWindseer,
+    _poolDongZhouTheTyrant,
     _poolDoomBlade,
     _poolDraconauticsEngineer,
     _poolDraconicMuralists,
@@ -1025,6 +1034,7 @@ const shard: CardShard = {
     _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
+    _poolHuntingCheetah,
     _poolHurlIntoHistory,
     _poolHurloonBattleHymn,
     _poolHydraOmnivore,
@@ -1038,6 +1048,7 @@ const shard: CardShard = {
     _poolInexorableTide,
     _poolInfestedWerewolf,
     _poolInspireAwe,
+    _poolIntoTheFray,
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
     _poolIntrusivePackbeast,
@@ -1102,6 +1113,7 @@ const shard: CardShard = {
     _poolMalakirBloodPriest,
     _poolMarangRiverRegent,
     _poolMarhaultElsdragon,
+    _poolMarkOfTheOni,
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,
     _poolMassManipulation,
@@ -1172,6 +1184,7 @@ const shard: CardShard = {
     _poolOutcasterGreenblade,
     _poolOvergrownEstate,
     _poolOversoulOfDusk,
+    _poolOyobiWhoSplitTheHeavens,
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolParagonOfEternalWilds,
@@ -1265,6 +1278,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScornEffigy,
     _poolScreechingHarpy,
+    _poolScrollOfOrigins,
     _poolScryingSheets,
     _poolSeafloorStalker,
     _poolSealOfStrength,
@@ -1359,6 +1373,7 @@ const shard: CardShard = {
     _poolTelJiladExile,
     _poolTemmetVizierOfNaktamun,
     _poolTemperedVeteran,
+    _poolTerashisGrasp,
     _poolTergridsLantern,
     _poolTergridsShadow,
     _poolTerrorOfMountVelus,
@@ -1467,6 +1482,7 @@ const shard: CardShard = {
     _poolYargleGluttonOfUrborg,
     _poolYavimayaElder,
     _poolYawgmothThranPhysician,
+    _poolYellowScarvesCavalry,
     _poolYipYip,
     _poolYokeOfTheDamned,
     _poolYotiaDeclaresWar,

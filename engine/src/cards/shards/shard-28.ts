@@ -342,6 +342,7 @@ import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
+import _poolLifespinner from "../pool/lifespinner.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
@@ -350,6 +351,7 @@ import _poolLoamLarva from "../pool/loam-larva.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
+import _poolLurkingSkirge from "../pool/lurking-skirge.js";
 import _poolLustForWar from "../pool/lust-for-war.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
 import _poolMageHuntersOnslaught from "../pool/mage-hunters-onslaught.js";
@@ -595,6 +597,7 @@ import _poolSnareThopter from "../pool/snare-thopter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
+import _poolSoratamiMindsweeper from "../pool/soratami-mindsweeper.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
@@ -1104,6 +1107,7 @@ const shard: CardShard = {
     _poolLeoninBattlemage,
     _poolLeoninElder,
     _poolLevitatingStatue,
+    _poolLifespinner,
     _poolLightningCloud,
     _poolLivingWall,
     _poolLlanowarKnight,
@@ -1112,6 +1116,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
+    _poolLurkingSkirge,
     _poolLustForWar,
     _poolLuxurySuite,
     _poolMageHuntersOnslaught,
@@ -1357,6 +1362,7 @@ const shard: CardShard = {
     _poolSolTalisman,
     _poolSoldeviSteamBeast,
     _poolSolitaryCamel,
+    _poolSoratamiMindsweeper,
     _poolSoulsFire,
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,

@@ -46,6 +46,7 @@ import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
+import _poolAuraFlux from "../pool/aura-flux.js";
 import _poolAuroraEidolon from "../pool/aurora-eidolon.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvacynianMissionaries from "../pool/avacynian-missionaries.js";
@@ -240,6 +241,7 @@ import _poolFurnaceOfRath from "../pool/furnace-of-rath.js";
 import _poolFurnaceWhelp from "../pool/furnace-whelp.js";
 import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
+import _poolGangOfElk from "../pool/gang-of-elk.js";
 import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
 import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
 import _poolGatesOfIstfell from "../pool/gates-of-istfell.js";
@@ -271,6 +273,7 @@ import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
+import _poolHeraldOfHoofbeats from "../pool/herald-of-hoofbeats.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHivespineWolverine from "../pool/hivespine-wolverine.js";
@@ -560,6 +563,7 @@ import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
+import _poolSosukesSummons from "../pool/sosukes-summons.js";
 import _poolSoulShepherd from "../pool/soul-shepherd.js";
 import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
@@ -573,6 +577,7 @@ import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
+import _poolSpiritualVisit from "../pool/spiritual-visit.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
 import _poolSpringjawTrap from "../pool/springjaw-trap.js";
@@ -632,12 +637,14 @@ import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
+import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
 import _poolThranTurbine from "../pool/thran-turbine.js";
+import _poolTickingGnomes from "../pool/ticking-gnomes.js";
 import _poolTidalSurge from "../pool/tidal-surge.js";
 import _poolTimidDrake from "../pool/timid-drake.js";
 import _poolTitaniasChosen from "../pool/titanias-chosen.js";
@@ -788,6 +795,7 @@ const shard: CardShard = {
     _poolAstridPeth,
     _poolAttendedHealer,
     _poolAudaciousInfiltrator,
+    _poolAuraFlux,
     _poolAuroraEidolon,
     _poolAuthorityOfTheConsuls,
     _poolAvacynianMissionaries,
@@ -982,6 +990,7 @@ const shard: CardShard = {
     _poolFurnaceWhelp,
     _poolFyndhornBrownie,
     _poolGalewindMoose,
+    _poolGangOfElk,
     _poolGarnaBloodfistOfKeld,
     _poolGarrisonExcavator,
     _poolGatesOfIstfell,
@@ -1013,6 +1022,7 @@ const shard: CardShard = {
     _poolHauntedLibrary,
     _poolHellishSideswipe,
     _poolHeraldOfEternalDawn,
+    _poolHeraldOfHoofbeats,
     _poolHerosBlade,
     _poolHinataDawnCrowned,
     _poolHivespineWolverine,
@@ -1302,6 +1312,7 @@ const shard: CardShard = {
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
+    _poolSosukesSummons,
     _poolSoulShepherd,
     _poolSoulStrikeTechnique,
     _poolSoulstoneSanctuary,
@@ -1315,6 +1326,7 @@ const shard: CardShard = {
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
+    _poolSpiritualVisit,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
     _poolSpringjawTrap,
@@ -1374,12 +1386,14 @@ const shard: CardShard = {
     _poolTevalsJudgment,
     _poolThalakosMistfolk,
     _poolTheDrossPits,
+    _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,
     _poolThranTurbine,
+    _poolTickingGnomes,
     _poolTidalSurge,
     _poolTimidDrake,
     _poolTitaniasChosen,

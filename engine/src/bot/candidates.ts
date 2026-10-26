@@ -43,6 +43,7 @@ function castExtras(legal: CastSpellLegal): {
   free?: boolean;
   altCost?: boolean;
   costOption?: number;
+  splice?: ObjectId[];
   sacrifice?: ObjectId;
   convoke?: ConvokePayment[];
   prototype?: boolean;
@@ -63,6 +64,8 @@ function castExtras(legal: CastSpellLegal): {
     // Each branch of a choice of additional costs is its own variant, so the
     // chosen one has to be echoed back or the cast is refused.
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
+    // A splice variant (rule 702.47) names its spliced cards: echoed.
+    ...(legal.splice !== undefined ? { splice: legal.splice.map((s) => s.object) } : {}),
     // A harmonize variant names the creature it taps (rule 702.180a): echoed.
     ...(legal.harmonizeTap !== undefined ? { tap: [legal.harmonizeTap.object] } : {}),
     // A web-slinging variant names the creature it returns (rule 702.188a):

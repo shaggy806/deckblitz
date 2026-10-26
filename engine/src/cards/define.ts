@@ -168,6 +168,9 @@ export type Keyword =
   /** Shadow (rule 702.28) — can be blocked only by creatures with shadow,
    * and can block only creatures with shadow (Dauthi Voidwalker). */
   | "shadow"
+  /** Horsemanship (rule 702.31) — can't be blocked by creatures without
+   * horsemanship; it blocks anything (Portal Three Kingdoms' Shu Cavalry). */
+  | "horsemanship"
   /** Start your engines! (rule 702.179a) — a static ability: a player who
    * controls a permanent with it and has no speed gets a speed of 1, as a
    * state-based action (704.5aa — `Game.startEngines`; see
@@ -2501,6 +2504,20 @@ export interface CardDefinition {
     readonly options?: readonly AdditionalCostOption[];
   } | null;
   /**
+   * Splice onto [quality] [cost] (rule 702.47): while this card is in its
+   * owner's hand, as they cast a spell of that quality they may reveal it and
+   * pay `cost` as an additional cost; the spell gains this card's text — its
+   * `targets` (chosen with the spell's, after its own — 702.47d) and its
+   * `effect`, followed after the spell's own instructions (702.47b). `onto`:
+   * `"arcane"` (an Arcane spell) or `"instant-or-sorcery"`. `cost` is mana.
+   * The card's own `effect` and `targets` are what is spliced: write them as
+   * for any instant. `null` for none.
+   */
+  readonly splice: {
+    readonly onto: "arcane" | "instant-or-sorcery";
+    readonly cost: string;
+  } | null;
+  /**
    * Kicker (rule 702.33 — needed-cards P8): an **optional** additional cost
    * announced as the spell is cast (601.2b), before targets are chosen, that
    * changes what the spell does. `null` for none.
@@ -3386,6 +3403,7 @@ const PRINTED_ABILITY: {
   castModal: (def) => def.castModal !== null,
   additionalCost: (def) => def.additionalCost !== null,
   kicker: (def) => def.kicker !== null,
+  splice: (def) => def.splice !== null,
   overload: (def) => def.overload !== null,
   freeCastIf: (def) => def.freeCastIf !== null,
   alternativeCost: (def) => def.alternativeCost !== null,
@@ -3556,6 +3574,7 @@ interface CardDraft {
     readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
     readonly options?: readonly AdditionalCostOption[];
   };
+  splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string };
   kicker?: {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
@@ -3822,6 +3841,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     castModal: draft.castModal ?? null,
     additionalCost: draft.additionalCost ?? null,
     kicker: draft.kicker ?? null,
+    splice: draft.splice ?? null,
     overload:
       draft.overload ??
       (draft.cleave !== undefined

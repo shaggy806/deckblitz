@@ -106,6 +106,7 @@ import _poolBurrowing from "../pool/burrowing.js";
 import _poolCactuar from "../pool/cactuar.js";
 import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
+import _poolCaoCaoLordOfWei from "../pool/cao-cao-lord-of-wei.js";
 import _poolCapitalCity from "../pool/capital-city.js";
 import _poolCapriciousSliver from "../pool/capricious-sliver.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
@@ -232,6 +233,7 @@ import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolForceOfRage from "../pool/force-of-rage.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
+import _poolForkedBranchGarami from "../pool/forked-branch-garami.js";
 import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
@@ -252,6 +254,7 @@ import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGeistTrappers from "../pool/geist-trappers.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
+import _poolGenjuOfTheSpires from "../pool/genju-of-the-spires.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGethsVerdict from "../pool/geths-verdict.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
@@ -425,6 +428,7 @@ import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
 import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
 import _poolOpalArchangel from "../pool/opal-archangel.js";
+import _poolOpalChampion from "../pool/opal-champion.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
 import _poolOutpostSiege from "../pool/outpost-siege.js";
@@ -448,6 +452,7 @@ import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPowerWordKill from "../pool/power-word-kill.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
+import _poolPresenceOfTheWise from "../pool/presence-of-the-wise.js";
 import _poolPriceOfFame from "../pool/price-of-fame.js";
 import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
@@ -718,6 +723,7 @@ import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
 import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
 import _tokensGolemTokenGolemFoundry from "../tokens/golem-token-golem-foundry.js";
 import _tokensGreenHippoToken11 from "../tokens/green-hippo-token-1-1.js";
+import _tokensHorseTokenTheGirlInTheFireplace from "../tokens/horse-token-the-girl-in-the-fireplace.js";
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
@@ -838,6 +844,7 @@ const shard: CardShard = {
     _poolCactuar,
     _poolCallToMind,
     _poolCanopySpider,
+    _poolCaoCaoLordOfWei,
     _poolCapitalCity,
     _poolCapriciousSliver,
     _poolCaptureOfJingzhou,
@@ -964,6 +971,7 @@ const shard: CardShard = {
     _poolFoggySwampSpiritKeeper,
     _poolForceOfRage,
     _poolForgottenCreation,
+    _poolForkedBranchGarami,
     _poolFormAPosse,
     _poolFortify,
     _poolFountainOfRenewal,
@@ -984,6 +992,7 @@ const shard: CardShard = {
     _poolGeistTrappers,
     _poolGenerousEnt,
     _poolGenerousPup,
+    _poolGenjuOfTheSpires,
     _poolGeometersArthropod,
     _poolGethsVerdict,
     _poolGhaltaTheUnstoppable,
@@ -1157,6 +1166,7 @@ const shard: CardShard = {
     _poolOkibaSalvage,
     _poolOminousAsylum,
     _poolOpalArchangel,
+    _poolOpalChampion,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,
     _poolOutpostSiege,
@@ -1180,6 +1190,7 @@ const shard: CardShard = {
     _poolPollywogProdigy,
     _poolPowerWordKill,
     _poolPracticedOffense,
+    _poolPresenceOfTheWise,
     _poolPriceOfFame,
     _poolPriestOfTheBloodRite,
     _poolPrimalFrenzy,
@@ -1452,6 +1463,7 @@ const shard: CardShard = {
     _tokensElementalTokenRekindlingPhoenix,
     _tokensGolemTokenGolemFoundry,
     _tokensGreenHippoToken11,
+    _tokensHorseTokenTheGirlInTheFireplace,
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,

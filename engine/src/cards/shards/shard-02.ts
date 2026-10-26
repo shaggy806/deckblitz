@@ -255,6 +255,7 @@ import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
 import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
+import _poolGhituFireEater from "../pool/ghitu-fire-eater.js";
 import _poolGhostbladeEidolon from "../pool/ghostblade-eidolon.js";
 import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
@@ -329,6 +330,7 @@ import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
 import _poolKalitasBloodchiefOfGhet from "../pool/kalitas-bloodchief-of-ghet.js";
+import _poolKamiOfTheTendedGarden from "../pool/kami-of-the-tended-garden.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
 import _poolKarfellKennelMaster from "../pool/karfell-kennel-master.js";
 import _poolKateStewart from "../pool/kate-stewart.js";
@@ -632,6 +634,7 @@ import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
 import _poolTidespoutTyrant from "../pool/tidespout-tyrant.js";
 import _poolTimeLordRegeneration from "../pool/time-lord-regeneration.js";
+import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
@@ -648,6 +651,7 @@ import _poolTwinBolt from "../pool/twin-bolt.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
+import _poolUncheckedGrowth from "../pool/unchecked-growth.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
@@ -683,6 +687,7 @@ import _poolWallOfFaith from "../pool/wall-of-faith.js";
 import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
 import _poolWarrenScourgeElf from "../pool/warren-scourge-elf.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
+import _poolWeiScout from "../pool/wei-scout.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
 import _poolWhispersOfEmrakul from "../pool/whispers-of-emrakul.js";
@@ -971,6 +976,7 @@ const shard: CardShard = {
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
     _poolGertAndOldLaceRunaways,
+    _poolGhituFireEater,
     _poolGhostbladeEidolon,
     _poolGhoulcallersHarvest,
     _poolGiantAnkheg,
@@ -1045,6 +1051,7 @@ const shard: CardShard = {
     _poolKaaliaOfTheVast,
     _poolKaimaTheFracturedCalm,
     _poolKalitasBloodchiefOfGhet,
+    _poolKamiOfTheTendedGarden,
     _poolKaraiFutureOfTheFoot,
     _poolKarfellKennelMaster,
     _poolKateStewart,
@@ -1348,6 +1355,7 @@ const shard: CardShard = {
     _poolThrummingHivepool,
     _poolTidespoutTyrant,
     _poolTimeLordRegeneration,
+    _poolToilsOfNightAndDay,
     _poolTomikWielderOfLaw,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
@@ -1364,6 +1372,7 @@ const shard: CardShard = {
     _poolTyLeeArtfulAcrobat,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
+    _poolUncheckedGrowth,
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
     _poolUnscrupulousContractor,
@@ -1399,6 +1408,7 @@ const shard: CardShard = {
     _poolWardenOfTheChained,
     _poolWarrenScourgeElf,
     _poolWarriorsSword,
+    _poolWeiScout,
     _poolWhipOfErebos,
     _poolWhiptailWurm,
     _poolWhispersOfEmrakul,

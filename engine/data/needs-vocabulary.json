@@ -11294,7 +11294,7 @@
   },
   "trigger:state-trigger-hand-change": {
    "family": "trigger:state-trigger",
-   "example": "Veiled Crocodile: when a player has no cards in hand \u2014 state triggers aren't checked after hand changes mid-resolution"
+   "example": "Veiled Crocodile: when a player has no cards in hand — state triggers aren't checked after hand changes mid-resolution"
   },
   "static:cant-attack-block-unless-greater-power-joins": {
    "family": "condition:no-other-creature-greater-power-condition",
@@ -11347,6 +11347,62 @@
   "filter:phyrexian-mana-in-cost": {
    "family": "condition:filter-card-property-clauses",
    "example": "Rage Extractor: whenever you cast a spell with {P} in its mana cost, it deals damage equal to that spell's mana value"
+  },
+  "amount:leaves-battlefield-lki-count": {
+   "family": "bug:lki-object-reads",
+   "example": "Kodama of the Center Tree: soulshift X, X the Spirits you controlled as it left, itself included"
+  },
+  "cost:alt-cost-exile-card-sets-x": {
+   "family": "cost:alt-cost-exile-from-hand",
+   "example": "Blazing Shoal: exile a red card with mana value X from your hand rather than pay this spell's mana cost"
+  },
+  "cost:splice-non-mana": {
+   "family": "keyword:splice",
+   "example": "Horobi's Whisper: Splice onto Arcane—Exile four cards from your graveyard"
+  },
+  "decision:that-player-chooses-permanent": {
+   "family": "decision:choose-permanent",
+   "example": "Hokori, Dust Drinker: at the beginning of each player's upkeep, that player untaps a land they control"
+  },
+  "effect:each-opponent-chooses-permanent": {
+   "family": "decision:choose-permanent",
+   "example": "Fell Beast's Shriek: each opponent chooses a creature they control; tap and goad the chosen creatures"
+  },
+  "effect:gain-control-to-player-with-most-cards-in-hand": {
+   "family": "effect:gain-control-to-player-with-most-life",
+   "example": "Sokenzan Renegade: if a player has more cards in hand than each other player, that player gains control of it"
+  },
+  "effect:look-at-trigger-player-hand": {
+   "family": "effect:look-at-target-player-hand",
+   "example": "Walker of Secret Ways: whenever it deals combat damage to a player, look at that player's hand"
+  },
+  "effect:shuffle-permanents-owned-into-library": {
+   "family": "effect:shuffle-hand-and-graveyard-into-library",
+   "example": "Sway of the Stars: each player shuffles their hand, graveyard and permanents they own into their library"
+  },
+  "replacement:double-damage-from-target-this-turn": {
+   "family": "replacement:damage-multiplier-this-turn",
+   "example": "Overblaze: each time target permanent would deal damage this turn, it deals double that damage instead"
+  },
+  "replacement:redirect-chosen-source-any-recipient": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "example": "Opal-Eye, Konda's Yojimbo: the next time a source of your choice would deal damage this turn, it's dealt to Opal-Eye instead"
+  },
+  "static:grant-pt-per-cards-in-hand": {
+   "family": "static:pt-per-cards-in-hand",
+   "example": "Kagemaro's Clutch: enchanted creature gets -X/-X, X the cards in your hand"
+  },
+  "trigger:spell-countered": {
+   "family": "trigger:counters-a-spell-trigger",
+   "example": "Multani's Presence: whenever a spell you've cast is countered, draw a card"
+  },
+  "effect:put-on-top-of-library-all": {
+   "family": "decision:library-ordering",
+   "example": "Harmonic Convergence: put all enchantments on top of their owners' libraries"
+  },
+  "mechanic:special-action-sacrifice-to-ignore-effect": {
+   "family": "mechanic:special-action-sacrifice-to-ignore-effect",
+   "example": "Damping Engine: a player may sacrifice a permanent to ignore this effect until end of turn"
   },
   "effect:delayed-trigger-target-deals-damage": {
    "family": "effect:grant-triggered-to-target",

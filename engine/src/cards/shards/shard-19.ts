@@ -131,6 +131,7 @@ import _poolConsecratedByBlood from "../pool/consecrated-by-blood.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
+import _poolControlOfTheCourt from "../pool/control-of-the-court.js";
 import _poolCoralSword from "../pool/coral-sword.js";
 import _poolCorpseweft from "../pool/corpseweft.js";
 import _poolCorruptedZendikon from "../pool/corrupted-zendikon.js";
@@ -155,6 +156,7 @@ import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
+import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
@@ -267,6 +269,7 @@ import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGerrardsWisdom from "../pool/gerrards-wisdom.js";
 import _poolGeyserDrake from "../pool/geyser-drake.js";
+import _poolGhostLitRaider from "../pool/ghost-lit-raider.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantOpportunity from "../pool/giant-opportunity.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
@@ -281,6 +284,7 @@ import _poolGoblinRimerunner from "../pool/goblin-rimerunner.js";
 import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
+import _poolGraniteGrip from "../pool/granite-grip.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
 import _poolGraveRobbers from "../pool/grave-robbers.js";
@@ -546,6 +550,7 @@ import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
+import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
 import _poolRovingActuator from "../pool/roving-actuator.js";
 import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
@@ -761,6 +766,7 @@ import _poolZukosExile from "../pool/zukos-exile.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
+import _tokensHumanNobleToken from "../tokens/human-noble-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensKnightAllyToken from "../tokens/knight-ally-token.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
@@ -902,6 +908,7 @@ const shard: CardShard = {
     _poolConsumingSinkhole,
     _poolContactOtherPlane,
     _poolContractKilling,
+    _poolControlOfTheCourt,
     _poolCoralSword,
     _poolCorpseweft,
     _poolCorruptedZendikon,
@@ -926,6 +933,7 @@ const shard: CardShard = {
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
     _poolDawngladeRegent,
+    _poolDeathknellKami,
     _poolDecanterOfEndlessWater,
     _poolDeepForestHermit,
     _poolDelversTorch,
@@ -1038,6 +1046,7 @@ const shard: CardShard = {
     _poolGenesisUltimatum,
     _poolGerrardsWisdom,
     _poolGeyserDrake,
+    _poolGhostLitRaider,
     _poolGiantFly,
     _poolGiantOpportunity,
     _poolGiantSpider,
@@ -1052,6 +1061,7 @@ const shard: CardShard = {
     _poolGoldenhideOx,
     _poolGoldmeadowLookout,
     _poolGoliathMassManipulator,
+    _poolGraniteGrip,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
     _poolGraveRobbers,
@@ -1317,6 +1327,7 @@ const shard: CardShard = {
     _poolRoaringEarth,
     _poolRoaringPrimadox,
     _poolRoguesPassage,
+    _poolRoninCliffrider,
     _poolRootwaterAlligator,
     _poolRovingActuator,
     _poolRowanScionOfWar,
@@ -1534,6 +1545,7 @@ const shard: CardShard = {
     _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
     _tokensHeartwoodToken,
+    _tokensHumanNobleToken,
     _tokensJumblebones,
     _tokensKnightAllyToken,
     _tokensPhyrexianMiteToken,

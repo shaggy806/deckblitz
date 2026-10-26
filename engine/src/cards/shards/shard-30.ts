@@ -226,6 +226,7 @@ import _poolFitOfRage from "../pool/fit-of-rage.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFleshmadSteed from "../pool/fleshmad-steed.js";
+import _poolFloodbringer from "../pool/floodbringer.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
 import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
@@ -258,6 +259,7 @@ import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
 import _poolGeistOfSaintTraft from "../pool/geist-of-saint-traft.js";
+import _poolGenjuOfTheCedars from "../pool/genju-of-the-cedars.js";
 import _poolGiantbaiting from "../pool/giantbaiting.js";
 import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
@@ -326,6 +328,7 @@ import _poolIguanaParrot from "../pool/iguana-parrot.js";
 import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
 import _poolIllTemperedCyclops from "../pool/ill-tempered-cyclops.js";
 import _poolImplementOfCombustion from "../pool/implement-of-combustion.js";
+import _poolInTheWebOfWar from "../pool/in-the-web-of-war.js";
 import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
@@ -500,6 +503,7 @@ import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
+import _poolPurify from "../pool/purify.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQuicksand from "../pool/quicksand.js";
 import _poolQuietDisrepair from "../pool/quiet-disrepair.js";
@@ -600,6 +604,8 @@ import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
 import _poolSpiritBonds from "../pool/spirit-bonds.js";
 import _poolSpittingImage from "../pool/spitting-image.js";
+import _poolSplicersSkill from "../pool/splicers-skill.js";
+import _poolSpoilsOfVictory from "../pool/spoils-of-victory.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -964,6 +970,7 @@ const shard: CardShard = {
     _poolFleetFootedMonk,
     _poolFleetingReflection,
     _poolFleshmadSteed,
+    _poolFloodbringer,
     _poolFloodfarmVerge,
     _poolFlourishingFox,
     _poolFlurryOfWings,
@@ -996,6 +1003,7 @@ const shard: CardShard = {
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
     _poolGeistOfSaintTraft,
+    _poolGenjuOfTheCedars,
     _poolGiantbaiting,
     _poolGiftOfTheDeity,
     _poolGimlisRecklessMight,
@@ -1064,6 +1072,7 @@ const shard: CardShard = {
     _poolIlMhegPixie,
     _poolIllTemperedCyclops,
     _poolImplementOfCombustion,
+    _poolInTheWebOfWar,
     _poolIncriminatingImpetus,
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
@@ -1238,6 +1247,7 @@ const shard: CardShard = {
     _poolPterafractyl,
     _poolPugnaciousPugilist,
     _poolPumpkinBombardment,
+    _poolPurify,
     _poolPurpleCrystalCrab,
     _poolQuicksand,
     _poolQuietDisrepair,
@@ -1338,6 +1348,8 @@ const shard: CardShard = {
     _poolSpirePatrol,
     _poolSpiritBonds,
     _poolSpittingImage,
+    _poolSplicersSkill,
+    _poolSpoilsOfVictory,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,

@@ -170,6 +170,7 @@ import _poolDesolateMire from "../pool/desolate-mire.js";
 import _poolDestroyTheEvidence from "../pool/destroy-the-evidence.js";
 import _poolDevastatingSummons from "../pool/devastating-summons.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
+import _poolDevoutHarpist from "../pool/devout-harpist.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
 import _poolDiabolicRevelation from "../pool/diabolic-revelation.js";
@@ -678,6 +679,8 @@ import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
 import _poolThoughtReflection from "../pool/thought-reflection.js";
 import _poolThrabenStandardBearer from "../pool/thraben-standard-bearer.js";
 import _poolThranSpider from "../pool/thran-spider.js";
+import _poolThranWeaponry from "../pool/thran-weaponry.js";
+import _poolThreadsOfDisloyalty from "../pool/threads-of-disloyalty.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
@@ -757,6 +760,7 @@ import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
+import _poolWuLightCavalry from "../pool/wu-light-cavalry.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
 import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
@@ -785,6 +789,7 @@ import _tokensRedGiantToken44 from "../tokens/red-giant-token-4-4.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
+import _tokensSpiritTokenWhite33Flying from "../tokens/spirit-token-white-3-3-flying.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
 import _tokensWolfTokenSoundTheCall from "../tokens/wolf-token-sound-the-call.js";
@@ -958,6 +963,7 @@ const shard: CardShard = {
     _poolDestroyTheEvidence,
     _poolDevastatingSummons,
     _poolDevouringSugarmaw,
+    _poolDevoutHarpist,
     _poolDewdropCure,
     _poolDiabolicMachine,
     _poolDiabolicRevelation,
@@ -1466,6 +1472,8 @@ const shard: CardShard = {
     _poolThoughtReflection,
     _poolThrabenStandardBearer,
     _poolThranSpider,
+    _poolThranWeaponry,
+    _poolThreadsOfDisloyalty,
     _poolThunderingChariot,
     _poolThunderkinAwakener,
     _poolTidecallerMentor,
@@ -1545,6 +1553,7 @@ const shard: CardShard = {
     _poolWormHarvest,
     _poolWormwoodTreefolk,
     _poolWreckRemover,
+    _poolWuLightCavalry,
     _poolYavimayaSapherd,
     _poolYusriFortunesFlame,
     _poolZebraUnicorn,
@@ -1575,6 +1584,7 @@ const shard: CardShard = {
     _tokensRedWhiteSoldierHasteToken,
     _tokensSkeletonToken,
     _tokensSliverToken,
+    _tokensSpiritTokenWhite33Flying,
     _tokensVirtuousRoleToken,
     _tokensWarriorTokenValorsReachTagTeam,
     _tokensWolfTokenSoundTheCall,

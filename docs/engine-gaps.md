@@ -14,6 +14,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   only because the step runs as the choosing player. The fix carries the binding into the
   `then`'s context.
 
+- **Splice's limits.** Splice (rule 702.47, `CardDefinition.splice`, `Game.spliceFits` and
+  `castSpellActions` in game.ts) is offered only onto a spell with one plain `effect` — not a
+  modal (`castModal`), fused, divided or `resolve` spell, where the spliced text has no place to
+  go yet — and never on an overloaded cast; every set of splice cards in hand is its own
+  variant, so at most `Game.MAX_SPLICE_OFFERED` (four) are offered at once. A non-mana splice
+  cost (Horobi's Whisper's "exile four cards from your graveyard", Veil of Secrecy's "return a
+  blue creature you control") isn't paid: `cost:splice-non-mana`. Found building splice
+  (B202, 2026-10-26).
+
 - **Flashback never offers a split card's halves.** A split instant or sorcery in a graveyard
   that has or gains flashback (Snapcaster Mage, Past in Flames — rule 702.34a) may be cast as
   either half for that half's flashback cost (709.3: only the half cast is evaluated; Past in

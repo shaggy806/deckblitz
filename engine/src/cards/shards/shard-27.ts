@@ -284,6 +284,7 @@ import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
 import _poolHoodedAssassin from "../pool/hooded-assassin.js";
 import _poolHoodedKavu from "../pool/hooded-kavu.js";
+import _poolHopeAndGlory from "../pool/hope-and-glory.js";
 import _poolHormagauntHorde from "../pool/hormagaunt-horde.js";
 import _poolHornOfRamos from "../pool/horn-of-ramos.js";
 import _poolHorrorOfHorrors from "../pool/horror-of-horrors.js";
@@ -433,6 +434,7 @@ import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPitilessVizier from "../pool/pitiless-vizier.js";
+import _poolPlowThroughReito from "../pool/plow-through-reito.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
@@ -480,6 +482,7 @@ import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
+import _poolRibbonsOfTheReikai from "../pool/ribbons-of-the-reikai.js";
 import _poolRibskiff from "../pool/ribskiff.js";
 import _poolRimescaleDragon from "../pool/rimescale-dragon.js";
 import _poolRimewindCryomancer from "../pool/rimewind-cryomancer.js";
@@ -595,6 +598,7 @@ import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
 import _poolSultaiScavenger from "../pool/sultai-scavenger.js";
 import _poolSummonTheSchool from "../pool/summon-the-school.js";
+import _poolSunCeYoungConquerer from "../pool/sun-ce-young-conquerer.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
@@ -704,6 +708,7 @@ import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
+import _poolWuScout from "../pool/wu-scout.js";
 import _poolXathridSlyblade from "../pool/xathrid-slyblade.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
 import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
@@ -1014,6 +1019,7 @@ const shard: CardShard = {
     _poolHonedKhopesh,
     _poolHoodedAssassin,
     _poolHoodedKavu,
+    _poolHopeAndGlory,
     _poolHormagauntHorde,
     _poolHornOfRamos,
     _poolHorrorOfHorrors,
@@ -1163,6 +1169,7 @@ const shard: CardShard = {
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
     _poolPitilessVizier,
+    _poolPlowThroughReito,
     _poolPoisedPractitioner,
     _poolPreordain,
     _poolPreyUpon,
@@ -1210,6 +1217,7 @@ const shard: CardShard = {
     _poolRetaliatorGriffin,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
+    _poolRibbonsOfTheReikai,
     _poolRibskiff,
     _poolRimescaleDragon,
     _poolRimewindCryomancer,
@@ -1325,6 +1333,7 @@ const shard: CardShard = {
     _poolStrengthOfThePack,
     _poolSultaiScavenger,
     _poolSummonTheSchool,
+    _poolSunCeYoungConquerer,
     _poolSunderFromWithin,
     _poolSuperVillainLockup,
     _poolSwashbucklersWhip,
@@ -1434,6 +1443,7 @@ const shard: CardShard = {
     _poolWoodlandCemetery,
     _poolWorldBreaker,
     _poolWrapInVigor,
+    _poolWuScout,
     _poolXathridSlyblade,
     _poolYotianMedic,
     _poolYueTheMoonSpirit,

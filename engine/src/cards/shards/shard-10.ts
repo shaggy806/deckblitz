@@ -220,6 +220,7 @@ import _poolFestivalOfEmbers from "../pool/festival-of-embers.js";
 import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
+import _poolFirstVolley from "../pool/first-volley.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFlamerushRider from "../pool/flamerush-rider.js";
 import _poolFlashfires from "../pool/flashfires.js";
@@ -494,6 +495,7 @@ import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
+import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
 import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRootSpider from "../pool/root-spider.js";
@@ -606,6 +608,7 @@ import _poolStriderHarness from "../pool/strider-harness.js";
 import _poolStrongboxRaider from "../pool/strongbox-raider.js";
 import _poolSuddenBreakthrough from "../pool/sudden-breakthrough.js";
 import _poolSummonTitan from "../pool/summon-titan.js";
+import _poolSunQuanLordOfWu from "../pool/sun-quan-lord-of-wu.js";
 import _poolSupplantForm from "../pool/supplant-form.js";
 import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room.js";
 import _poolSurveillingSprite from "../pool/surveilling-sprite.js";
@@ -680,6 +683,7 @@ import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVernalBloom from "../pool/vernal-bloom.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
+import _poolViashinoHeretic from "../pool/viashino-heretic.js";
 import _poolVigeanHydropon from "../pool/vigean-hydropon.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
 import _poolVileRedeemer from "../pool/vile-redeemer.js";
@@ -966,6 +970,7 @@ const shard: CardShard = {
     _poolFieldTrip,
     _poolFinCladeFugitives,
     _poolFinalReward,
+    _poolFirstVolley,
     _poolFixerTechnoTerror,
     _poolFlamerushRider,
     _poolFlashfires,
@@ -1240,6 +1245,7 @@ const shard: CardShard = {
     _poolRobTheArchives,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
+    _poolRoninCavekeeper,
     _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
     _poolRootSpider,
@@ -1352,6 +1358,7 @@ const shard: CardShard = {
     _poolStrongboxRaider,
     _poolSuddenBreakthrough,
     _poolSummonTitan,
+    _poolSunQuanLordOfWu,
     _poolSupplantForm,
     _poolSurgicalSuiteHospitalRoom,
     _poolSurveillingSprite,
@@ -1426,6 +1433,7 @@ const shard: CardShard = {
     _poolVernalBloom,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
+    _poolViashinoHeretic,
     _poolVigeanHydropon,
     _poolVigorsporeWurm,
     _poolVileRedeemer,

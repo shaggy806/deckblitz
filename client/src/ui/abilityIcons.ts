@@ -56,6 +56,8 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   // No shadow icon anywhere in the font; shadow is evasion both ways, so the
   // Duels unblockable one, as desertwalk borrows it.
   shadow: '', // ms-ability-duels-unblockable
+  // Nor a horsemanship one: the same, as shadow borrows it.
+  horsemanship: '', // ms-ability-duels-unblockable
   // Start your engines! has no icon of its own; the crew one — Aetherdrift
   // races Vehicles, and speed is the race.
   'start-your-engines': '', // ms-ability-crew

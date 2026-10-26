@@ -137,6 +137,7 @@ export const KEYWORDS = {
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
   mountainwalk: "mountainwalk", forestwalk: "forestwalk", desertwalk: "desertwalk",
   changeling: "changeling", daybound: "daybound", nightbound: "nightbound", shadow: "shadow",
+  horsemanship: "horsemanship",
 };
 
 const COST = "((?:\\{[^}]+\\})+)";
@@ -2289,6 +2290,13 @@ export function parseFace(face, ctx = {}) {
       out.impending = { count: Number(m[1]), cost: m[2] };
       out.static.push(IMPENDING_STATIC);
       out.triggered.push(IMPENDING_TRIGGER);
+      continue;
+    }
+    // Splice onto Arcane / instant or sorcery [mana cost] (rule 702.47a): the
+    // card's own effect and targets are what's spliced. A non-mana splice
+    // cost ("Splice onto Arcane—Exile four cards …") stays a person's.
+    if (isSpell && (m = /^Splice onto (Arcane|instant or sorcery) ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.splice = { onto: m[1] === "Arcane" ? "arcane" : "instant-or-sorcery", cost: m[2] };
       continue;
     }
     // Teamwork N (rule 702.194): a kicker that taps creatures — what "cast using teamwork" changes is the card's own.

@@ -14,6 +14,7 @@ import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAncientHellkite from "../pool/ancient-hellkite.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
+import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -158,6 +159,7 @@ import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
+import _poolDesperateRitual from "../pool/desperate-ritual.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
@@ -255,6 +257,7 @@ import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
+import _poolGoblinMedics from "../pool/goblin-medics.js";
 import _poolGoblinShrine from "../pool/goblin-shrine.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
@@ -443,6 +446,7 @@ import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
+import _poolPetalmaneBaku from "../pool/petalmane-baku.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
 import _poolPhantasmalMount from "../pool/phantasmal-mount.js";
 import _poolPheresBandBrawler from "../pool/pheres-band-brawler.js";
@@ -489,6 +493,7 @@ import _poolRiddleform from "../pool/riddleform.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
+import _poolRoninWarclub from "../pool/ronin-warclub.js";
 import _poolRoostOfDrakes from "../pool/roost-of-drakes.js";
 import _poolRoothaMercurialArtist from "../pool/rootha-mercurial-artist.js";
 import _poolRowdyCrew from "../pool/rowdy-crew.js";
@@ -689,6 +694,7 @@ import _poolXenograft from "../pool/xenograft.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
+import _poolYukoraThePrisoner from "../pool/yukora-the-prisoner.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
@@ -726,6 +732,7 @@ const shard: CardShard = {
     _poolAmyRose,
     _poolAncientHellkite,
     _poolAngelOfSanctions,
+    _poolAngelsTrumpet,
     _poolAnointedDeacon,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -870,6 +877,7 @@ const shard: CardShard = {
     _poolDescendUponTheSinful,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
+    _poolDesperateRitual,
     _poolDiscipleOfPerdition,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
@@ -967,6 +975,7 @@ const shard: CardShard = {
     _poolGoblinChampion,
     _poolGoblinKing,
     _poolGoblinLackey,
+    _poolGoblinMedics,
     _poolGoblinShrine,
     _poolGoblinSurprise,
     _poolGoblinWarchief,
@@ -1155,6 +1164,7 @@ const shard: CardShard = {
     _poolPatientNaturalist,
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
+    _poolPetalmaneBaku,
     _poolPhantasmalImage,
     _poolPhantasmalMount,
     _poolPheresBandBrawler,
@@ -1201,6 +1211,7 @@ const shard: CardShard = {
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
+    _poolRoninWarclub,
     _poolRoostOfDrakes,
     _poolRoothaMercurialArtist,
     _poolRowdyCrew,
@@ -1401,6 +1412,7 @@ const shard: CardShard = {
     _poolYavimayaIconoclast,
     _poolYouComeToTheGnollCamp,
     _poolYuanTiFangBlade,
+    _poolYukoraThePrisoner,
     _poolZaffaiThunderConductor,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,

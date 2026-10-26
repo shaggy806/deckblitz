@@ -38,6 +38,7 @@ import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
 import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
+import _poolBakuAltar from "../pool/baku-altar.js";
 import _poolBallynockTrapper from "../pool/ballynock-trapper.js";
 import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
@@ -306,6 +307,7 @@ import _poolIntrepidHero from "../pool/intrepid-hero.js";
 import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
 import _poolIorRuinExpedition from "../pool/ior-ruin-expedition.js";
 import _poolIrascibleWolverine from "../pool/irascible-wolverine.js";
+import _poolIreOfKaminari from "../pool/ire-of-kaminari.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
@@ -387,6 +389,7 @@ import _poolMorselhoarder from "../pool/morselhoarder.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
+import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
@@ -529,6 +532,7 @@ import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
 import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
+import _poolShizukoCallerOfAutumn from "../pool/shizuko-caller-of-autumn.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
@@ -704,6 +708,7 @@ import _poolWoodlandChampion from "../pool/woodland-champion.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
+import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
@@ -764,6 +769,7 @@ const shard: CardShard = {
     _poolAysenBureaucrats,
     _poolBackOnTrack,
     _poolBaelothBarritylEntertainer,
+    _poolBakuAltar,
     _poolBallynockTrapper,
     _poolBarlsCage,
     _poolBaronyVampire,
@@ -1032,6 +1038,7 @@ const shard: CardShard = {
     _poolIntroductionToProphecy,
     _poolIorRuinExpedition,
     _poolIrascibleWolverine,
+    _poolIreOfKaminari,
     _poolIroassChampion,
     _poolIroncladKrovod,
     _poolJenovaAncientCalamity,
@@ -1113,6 +1120,7 @@ const shard: CardShard = {
     _poolMortalsResolve,
     _poolMoxJet,
     _poolMukotaiAmbusher,
+    _poolMultanisAcolyte,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
@@ -1255,6 +1263,7 @@ const shard: CardShard = {
     _poolShieldWall,
     _poolShimmeringWings,
     _poolShivanReef,
+    _poolShizukoCallerOfAutumn,
     _poolShuGrainCaravan,
     _poolSigardianPriest,
     _poolSigiledSkink,
@@ -1430,6 +1439,7 @@ const shard: CardShard = {
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
     _poolYavimayaBarbarian,
+    _poolYomijiWhoBarsTheWay,
     _poolYoungBlueDragon,
     _poolZephyrFalcon,
     _poolZofBloodbog,

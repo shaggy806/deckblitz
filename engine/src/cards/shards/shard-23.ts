@@ -252,6 +252,7 @@ import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
+import _poolGoryosVengeance from "../pool/goryos-vengeance.js";
 import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
@@ -526,6 +527,7 @@ import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
 import _poolScrollboost from "../pool/scrollboost.js";
+import _poolSecondChance from "../pool/second-chance.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
 import _poolSeeRed from "../pool/see-red.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
@@ -988,6 +990,7 @@ const shard: CardShard = {
     _poolGoblinMatron,
     _poolGoblinTraprunner,
     _poolGodtoucher,
+    _poolGoryosVengeance,
     _poolGovernTheGuildless,
     _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
@@ -1262,6 +1265,7 @@ const shard: CardShard = {
     _poolScorchedGeyser,
     _poolScourgeOfGeierReach,
     _poolScrollboost,
+    _poolSecondChance,
     _poolSeeBeyond,
     _poolSeeRed,
     _poolSeizedFromSlumber,

@@ -78,6 +78,7 @@ import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreachingLeviathan from "../pool/breaching-leviathan.js";
 import _poolBreakAsunder from "../pool/break-asunder.js";
 import _poolBriarpackAlpha from "../pool/briarpack-alpha.js";
+import _poolBrokenDam from "../pool/broken-dam.js";
 import _poolBroodingSaurian from "../pool/brooding-saurian.js";
 import _poolBrushland from "../pool/brushland.js";
 import _poolBubbleSnare from "../pool/bubble-snare.js";
@@ -309,6 +310,7 @@ import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
+import _poolGuanYuSaintedWarrior from "../pool/guan-yu-sainted-warrior.js";
 import _poolGwyllionHedgeMage from "../pool/gwyllion-hedge-mage.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
 import _poolHarshSustenance from "../pool/harsh-sustenance.js";
@@ -590,6 +592,7 @@ import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
 import _poolSoulswornSpirit from "../pool/soulsworn-spirit.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
+import _poolSpawningPool from "../pool/spawning-pool.js";
 import _poolSpellSyphon from "../pool/spell-syphon.js";
 import _poolSpellboundDragon from "../pool/spellbound-dragon.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
@@ -704,6 +707,7 @@ import _poolWargRider from "../pool/warg-rider.js";
 import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
 import _poolWeddingInvitation from "../pool/wedding-invitation.js";
+import _poolWeiNightRaiders from "../pool/wei-night-raiders.js";
 import _poolWellgabberApothecary from "../pool/wellgabber-apothecary.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
 import _poolWhisperingMadness from "../pool/whispering-madness.js";
@@ -718,6 +722,7 @@ import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
 import _poolWizardsLightning from "../pool/wizards-lightning.js";
 import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
+import _poolYavimayaScion from "../pool/yavimaya-scion.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolZealotsEnDal from "../pool/zealots-en-dal.js";
@@ -823,6 +828,7 @@ const shard: CardShard = {
     _poolBreachingLeviathan,
     _poolBreakAsunder,
     _poolBriarpackAlpha,
+    _poolBrokenDam,
     _poolBroodingSaurian,
     _poolBrushland,
     _poolBubbleSnare,
@@ -1054,6 +1060,7 @@ const shard: CardShard = {
     _poolGrislyRitual,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
+    _poolGuanYuSaintedWarrior,
     _poolGwyllionHedgeMage,
     _poolHagraCrocodile,
     _poolHarshSustenance,
@@ -1335,6 +1342,7 @@ const shard: CardShard = {
     _poolSnarlingWarg,
     _poolSoulswornSpirit,
     _poolSparringConstruct,
+    _poolSpawningPool,
     _poolSpellSyphon,
     _poolSpellboundDragon,
     _poolSphinxOfTheSteelWind,
@@ -1449,6 +1457,7 @@ const shard: CardShard = {
     _poolWarleadersHelix,
     _poolWeakness,
     _poolWeddingInvitation,
+    _poolWeiNightRaiders,
     _poolWellgabberApothecary,
     _poolWhirlerRogue,
     _poolWhisperingMadness,
@@ -1463,6 +1472,7 @@ const shard: CardShard = {
     _poolWitherbloomCharm,
     _poolWizardsLightning,
     _poolYahennisExpertise,
+    _poolYavimayaScion,
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
     _poolZealotsEnDal,
