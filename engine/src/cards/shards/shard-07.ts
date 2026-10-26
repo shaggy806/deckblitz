@@ -90,6 +90,7 @@ import _poolCatharsis from "../pool/catharsis.js";
 import _poolCavernLampad from "../pool/cavern-lampad.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
+import _poolChandrasPhoenix from "../pool/chandras-phoenix.js";
 import _poolChandrasRegulator from "../pool/chandras-regulator.js";
 import _poolChargingHooligan from "../pool/charging-hooligan.js";
 import _poolCharmingScoundrel from "../pool/charming-scoundrel.js";
@@ -374,6 +375,7 @@ import _poolMarinaVendrell from "../pool/marina-vendrell.js";
 import _poolMarshThreader from "../pool/marsh-threader.js";
 import _poolMartyrsCause from "../pool/martyrs-cause.js";
 import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
+import _poolMasterThief from "../pool/master-thief.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
 import _poolMedicineBag from "../pool/medicine-bag.js";
@@ -839,6 +841,7 @@ const shard: CardShard = {
     _poolCavernLampad,
     _poolChandrasEmberling,
     _poolChandrasFiremaw,
+    _poolChandrasPhoenix,
     _poolChandrasRegulator,
     _poolChargingHooligan,
     _poolCharmingScoundrel,
@@ -1123,6 +1126,7 @@ const shard: CardShard = {
     _poolMarshThreader,
     _poolMartyrsCause,
     _poolMaskOfGriselbrand,
+    _poolMasterThief,
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,
     _poolMedicineBag,

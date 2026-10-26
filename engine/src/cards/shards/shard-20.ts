@@ -112,6 +112,7 @@ import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
 import _poolChamberSentry from "../pool/chamber-sentry.js";
+import _poolChandraTheFirebrand from "../pool/chandra-the-firebrand.js";
 import _poolChargingRhino from "../pool/charging-rhino.js";
 import _poolChocoComet from "../pool/choco-comet.js";
 import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
@@ -239,6 +240,7 @@ import _poolFullyGrown from "../pool/fully-grown.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
+import _poolGatstafHowler from "../pool/gatstaf-howler.js";
 import _poolGavonyDawnguard from "../pool/gavony-dawnguard.js";
 import _poolGeistFueledScarecrow from "../pool/geist-fueled-scarecrow.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
@@ -271,6 +273,7 @@ import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
+import _poolGriffinRider from "../pool/griffin-rider.js";
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
@@ -388,6 +391,7 @@ import _poolMoltenTributary from "../pool/molten-tributary.js";
 import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
 import _poolMomentOfCraving from "../pool/moment-of-craving.js";
 import _poolMonasteryMentor from "../pool/monastery-mentor.js";
+import _poolMonomania from "../pool/monomania.js";
 import _poolMooglesValor from "../pool/moogles-valor.js";
 import _poolMorningApparition from "../pool/morning-apparition.js";
 import _poolMoroii from "../pool/moroii.js";
@@ -529,6 +533,7 @@ import _poolSecondHarvest from "../pool/second-harvest.js";
 import _poolSegmentedWurm from "../pool/segmented-wurm.js";
 import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
+import _poolSelhoffOccultist from "../pool/selhoff-occultist.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
 import _poolServe from "../pool/serve.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
@@ -552,6 +557,7 @@ import _poolSigilTracer from "../pool/sigil-tracer.js";
 import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
 import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
 import _poolSilvarDevourerOfTheFree from "../pool/silvar-devourer-of-the-free.js";
+import _poolSilverInlaidDagger from "../pool/silver-inlaid-dagger.js";
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
 import _poolSinuousPredator from "../pool/sinuous-predator.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
@@ -870,6 +876,7 @@ const shard: CardShard = {
     _poolChainwebAracnir,
     _poolChakramSlinger,
     _poolChamberSentry,
+    _poolChandraTheFirebrand,
     _poolChargingRhino,
     _poolChocoComet,
     _poolCircleOfProtectionWhite,
@@ -997,6 +1004,7 @@ const shard: CardShard = {
     _poolFurnaceSpirit,
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
+    _poolGatstafHowler,
     _poolGavonyDawnguard,
     _poolGeistFueledScarecrow,
     _poolGenerousRevival,
@@ -1029,6 +1037,7 @@ const shard: CardShard = {
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
+    _poolGriffinRider,
     _poolGrimCaptainsCall,
     _poolGrimDiscovery,
     _poolGrimWanderer,
@@ -1146,6 +1155,7 @@ const shard: CardShard = {
     _poolMoltensteelDragon,
     _poolMomentOfCraving,
     _poolMonasteryMentor,
+    _poolMonomania,
     _poolMooglesValor,
     _poolMorningApparition,
     _poolMoroii,
@@ -1287,6 +1297,7 @@ const shard: CardShard = {
     _poolSegmentedWurm,
     _poolSeismicShift,
     _poolSelectForInspection,
+    _poolSelhoffOccultist,
     _poolSerendibEfreet,
     _poolServe,
     _poolSevinnesReclamation,
@@ -1310,6 +1321,7 @@ const shard: CardShard = {
     _poolSigiledBehemoth,
     _poolSilenceTheEcho,
     _poolSilvarDevourerOfTheFree,
+    _poolSilverInlaidDagger,
     _poolSinisterSabotage,
     _poolSinuousPredator,
     _poolSirShandlarOfEberyn,

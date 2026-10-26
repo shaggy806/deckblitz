@@ -154,6 +154,7 @@ import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
 import _poolElectrodominance from "../pool/electrodominance.js";
 import _poolElectrostaticField from "../pool/electrostatic-field.js";
+import _poolEliteInquisitor from "../pool/elite-inquisitor.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolElvishDreadlord from "../pool/elvish-dreadlord.js";
 import _poolElvishFarmer from "../pool/elvish-farmer.js";
@@ -238,6 +239,7 @@ import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolGuyInTheChair from "../pool/guy-in-the-chair.js";
+import _poolHanweirWatchkeep from "../pool/hanweir-watchkeep.js";
 import _poolHaraldUnitesTheElves from "../pool/harald-unites-the-elves.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
 import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
@@ -848,6 +850,7 @@ const shard: CardShard = {
     _poolEldritchEvolution,
     _poolElectrodominance,
     _poolElectrostaticField,
+    _poolEliteInquisitor,
     _poolElugeTheShorelessSea,
     _poolElvishDreadlord,
     _poolElvishFarmer,
@@ -932,6 +935,7 @@ const shard: CardShard = {
     _poolGuardiansOfAkrasa,
     _poolGuttersnipe,
     _poolGuyInTheChair,
+    _poolHanweirWatchkeep,
     _poolHaraldUnitesTheElves,
     _poolHarrierGriffin,
     _poolHashatonScarabsFist,

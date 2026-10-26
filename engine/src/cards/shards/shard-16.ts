@@ -236,6 +236,7 @@ import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
+import _poolGalvanicJuggernaut from "../pool/galvanic-juggernaut.js";
 import _poolGatekeeperOfMalakir from "../pool/gatekeeper-of-malakir.js";
 import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
@@ -578,6 +579,7 @@ import _poolSteelExemplar from "../pool/steel-exemplar.js";
 import _poolSteelclawLance from "../pool/steelclaw-lance.js";
 import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
 import _poolStirringWildwood from "../pool/stirring-wildwood.js";
+import _poolStitchersApprentice from "../pool/stitchers-apprentice.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStolenVitality from "../pool/stolen-vitality.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolFurycalmSnarl,
     _poolFutureFlight,
     _poolGalestrike,
+    _poolGalvanicJuggernaut,
     _poolGatekeeperOfMalakir,
     _poolGearsmithGuardian,
     _poolGenghisFrog,
@@ -1345,6 +1348,7 @@ const shard: CardShard = {
     _poolSteelclawLance,
     _poolStiltzkinMoogleMerchant,
     _poolStirringWildwood,
+    _poolStitchersApprentice,
     _poolStoicRebuttal,
     _poolStolenVitality,
     _poolStoneHavenMedic,

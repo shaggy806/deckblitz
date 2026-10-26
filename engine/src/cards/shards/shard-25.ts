@@ -172,6 +172,7 @@ import _poolDreadmobile from "../pool/dreadmobile.js";
 import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
+import _poolDruidicSatchel from "../pool/druidic-satchel.js";
 import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolDwarvenHold from "../pool/dwarven-hold.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
@@ -421,6 +422,7 @@ import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
 import _poolOrthodoxyEnforcer from "../pool/orthodoxy-enforcer.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
 import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
+import _poolParaselene from "../pool/paraselene.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
@@ -512,6 +514,7 @@ import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScourglass from "../pool/scourglass.js";
+import _poolScreechingBat from "../pool/screeching-bat.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
 import _poolScuttlingSliver from "../pool/scuttling-sliver.js";
 import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
@@ -599,6 +602,7 @@ import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
+import _poolThroneOfEmpires from "../pool/throne-of-empires.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
@@ -870,6 +874,7 @@ const shard: CardShard = {
     _poolDreamscapeArtist,
     _poolDromarsCharm,
     _poolDrownInIchor,
+    _poolDruidicSatchel,
     _poolDugganPrivateDetective,
     _poolDwarvenHold,
     _poolEccentricPestfinder,
@@ -1119,6 +1124,7 @@ const shard: CardShard = {
     _poolOrthodoxyEnforcer,
     _poolOscorpResearchTeam,
     _poolParanoidParishBlade,
+    _poolParaselene,
     _poolParkHeightsPegasus,
     _poolPelargirSurvivor,
     _poolPersistentNightmare,
@@ -1210,6 +1216,7 @@ const shard: CardShard = {
     _poolScorchRider,
     _poolScourgeOfFleets,
     _poolScourglass,
+    _poolScreechingBat,
     _poolScuteSwarm,
     _poolScuttlingSliver,
     _poolSeaGateStormcaller,
@@ -1297,6 +1304,7 @@ const shard: CardShard = {
     _poolThopterSpyNetwork,
     _poolThoughtlace,
     _poolThreeStepsAhead,
+    _poolThroneOfEmpires,
     _poolThunderStrike,
     _poolThunderblust,
     _poolThunderousMight,

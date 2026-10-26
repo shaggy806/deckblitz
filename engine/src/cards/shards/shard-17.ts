@@ -126,6 +126,7 @@ import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCrashThrough from "../pool/crash-through.js";
 import _poolCrimsonMuckwader from "../pool/crimson-muckwader.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
+import _poolCrumblingColossus from "../pool/crumbling-colossus.js";
 import _poolCrushTheWeak from "../pool/crush-the-weak.js";
 import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
@@ -228,11 +229,13 @@ import _poolFretworkColony from "../pool/fretwork-colony.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
 import _poolFrostAugur from "../pool/frost-augur.js";
+import _poolFrostBreath from "../pool/frost-breath.js";
 import _poolFruition from "../pool/fruition.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
+import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
@@ -268,6 +271,7 @@ import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundshakerSliver from "../pool/groundshaker-sliver.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
+import _poolGuardiansPledge from "../pool/guardians-pledge.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
@@ -408,6 +412,7 @@ import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNettleDrone from "../pool/nettle-drone.js";
 import _poolNiambiFaithfulHealer from "../pool/niambi-faithful-healer.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
+import _poolNightbirdsClutches from "../pool/nightbirds-clutches.js";
 import _poolNimanaSellSword from "../pool/nimana-sell-sword.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
@@ -852,6 +857,7 @@ const shard: CardShard = {
     _poolCrashThrough,
     _poolCrimsonMuckwader,
     _poolCrosissAttendant,
+    _poolCrumblingColossus,
     _poolCrushTheWeak,
     _poolCrystalGolem,
     _poolCurioVendor,
@@ -954,11 +960,13 @@ const shard: CardShard = {
     _poolFriendlyGhost,
     _poolFromTheCatacombs,
     _poolFrostAugur,
+    _poolFrostBreath,
     _poolFruition,
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
     _poolGarenbrigPaladin,
     _poolGavonyTrapper,
+    _poolGeistcatchersRig,
     _poolGemOfBecoming,
     _poolGenesisHydra,
     _poolGhostLitWarder,
@@ -994,6 +1002,7 @@ const shard: CardShard = {
     _poolGroundshakerSliver,
     _poolGroundskeeper,
     _poolGuardianOfTazeem,
+    _poolGuardiansPledge,
     _poolGutTrueSoulZealot,
     _poolHammersOfMoradin,
     _poolHangedExecutioner,
@@ -1134,6 +1143,7 @@ const shard: CardShard = {
     _poolNettleDrone,
     _poolNiambiFaithfulHealer,
     _poolNightOfTheSweetsRevenge,
+    _poolNightbirdsClutches,
     _poolNimanaSellSword,
     _poolNimanaSkydancer,
     _poolNissaGenesisMage,

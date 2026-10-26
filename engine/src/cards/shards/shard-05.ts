@@ -110,6 +110,7 @@ import _poolCanyonWildcat from "../pool/canyon-wildcat.js";
 import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star.js";
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
 import _poolCarelessCelebrant from "../pool/careless-celebrant.js";
+import _poolCarnageWurm from "../pool/carnage-wurm.js";
 import _poolCaseOfTheGorgonsKiss from "../pool/case-of-the-gorgons-kiss.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
@@ -194,6 +195,7 @@ import _poolDuergarHedgeMage from "../pool/duergar-hedge-mage.js";
 import _poolDuergarMineCaptain from "../pool/duergar-mine-captain.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
+import _poolDuskhunterBat from "../pool/duskhunter-bat.js";
 import _poolDust from "../pool/dust.js";
 import _poolDutifulAttendant from "../pool/dutiful-attendant.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
@@ -247,6 +249,7 @@ import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
+import _poolGarruksHorde from "../pool/garruks-horde.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
@@ -817,6 +820,7 @@ const shard: CardShard = {
     _poolCaptainMarvelShootingStar,
     _poolCaravanHurda,
     _poolCarelessCelebrant,
+    _poolCarnageWurm,
     _poolCaseOfTheGorgonsKiss,
     _poolCastleArdenvale,
     _poolCatharticParting,
@@ -901,6 +905,7 @@ const shard: CardShard = {
     _poolDuergarMineCaptain,
     _poolDuskLegionSergeant,
     _poolDuskdaleWurm,
+    _poolDuskhunterBat,
     _poolDust,
     _poolDutifulAttendant,
     _poolDwarvenBlastminer,
@@ -954,6 +959,7 @@ const shard: CardShard = {
     _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaleSwooper,
+    _poolGarruksHorde,
     _poolGarruksPackleader,
     _poolGateToPhyrexia,
     _poolGatewaySneak,

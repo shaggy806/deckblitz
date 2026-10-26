@@ -447,6 +447,7 @@ import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
 import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScavengedBlade from "../pool/scavenged-blade.js";
+import _poolScepterOfEmpires from "../pool/scepter-of-empires.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
 import _poolSeaGate from "../pool/sea-gate.js";
 import _poolSeacoastDrake from "../pool/seacoast-drake.js";
@@ -1097,6 +1098,7 @@ const shard: CardShard = {
     _poolSatyrHoplite,
     _poolScamperingSurveyor,
     _poolScavengedBlade,
+    _poolScepterOfEmpires,
     _poolScrapTrawler,
     _poolSeaGate,
     _poolSeacoastDrake,

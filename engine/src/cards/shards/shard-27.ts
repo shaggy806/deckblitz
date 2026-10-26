@@ -339,8 +339,10 @@ import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLodestoneNeedle from "../pool/lodestone-needle.js";
 import _poolLongRangeSensor from "../pool/long-range-sensor.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
+import _poolLordOfTheUnreal from "../pool/lord-of-the-unreal.js";
 import _poolLoseCalm from "../pool/lose-calm.js";
 import _poolLumengridWarden from "../pool/lumengrid-warden.js";
+import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
@@ -508,6 +510,7 @@ import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
 import _poolShadowSlice from "../pool/shadow-slice.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
+import _poolSharpenedPitchfork from "../pool/sharpened-pitchfork.js";
 import _poolShieldhideDragon from "../pool/shieldhide-dragon.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
@@ -648,6 +651,7 @@ import _poolUntetheredExpress from "../pool/untethered-express.js";
 import _poolUrborgTombOfYawgmoth from "../pool/urborg-tomb-of-yawgmoth.js";
 import _poolUthrosPsionicist from "../pool/uthros-psionicist.js";
 import _poolValgavothsLair from "../pool/valgavoths-lair.js";
+import _poolVampireOutcasts from "../pool/vampire-outcasts.js";
 import _poolVanishFromSight from "../pool/vanish-from-sight.js";
 import _poolVanquishTheFoul from "../pool/vanquish-the-foul.js";
 import _poolVaporousDjinn from "../pool/vaporous-djinn.js";
@@ -698,6 +702,7 @@ import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
 import _tokensDwarfBerserkerToken from "../tokens/dwarf-berserker-token.js";
 import _tokensElementalToken71TrampleHaste from "../tokens/elemental-token-7-1-trample-haste.js";
 import _tokensFractalToken from "../tokens/fractal-token.js";
+import _tokensHomunculusToken22 from "../tokens/homunculus-token-2-2.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensOozeToken from "../tokens/ooze-token.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
@@ -1048,8 +1053,10 @@ const shard: CardShard = {
     _poolLodestoneNeedle,
     _poolLongRangeSensor,
     _poolLordOfTheForsaken,
+    _poolLordOfTheUnreal,
     _poolLoseCalm,
     _poolLumengridWarden,
+    _poolLurkingCrocodile,
     _poolLuxCannon,
     _poolMagmaw,
     _poolMagusLuceaKane,
@@ -1217,6 +1224,7 @@ const shard: CardShard = {
     _poolShadowAlleyDenizen,
     _poolShadowSlice,
     _poolShamblingRemains,
+    _poolSharpenedPitchfork,
     _poolShieldhideDragon,
     _poolShivanDevastator,
     _poolShivanOasis,
@@ -1357,6 +1365,7 @@ const shard: CardShard = {
     _poolUrborgTombOfYawgmoth,
     _poolUthrosPsionicist,
     _poolValgavothsLair,
+    _poolVampireOutcasts,
     _poolVanishFromSight,
     _poolVanquishTheFoul,
     _poolVaporousDjinn,
@@ -1409,6 +1418,7 @@ const shard: CardShard = {
     _tokensDwarfBerserkerToken,
     _tokensElementalToken71TrampleHaste,
     _tokensFractalToken,
+    _tokensHomunculusToken22,
     _tokensHumanToken,
     _tokensOozeToken,
     _tokensPhyrexianSaprolingToken,

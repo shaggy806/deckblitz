@@ -108,6 +108,7 @@ import _poolChargingTuskodon from "../pool/charging-tuskodon.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
+import _poolCircleOfFlame from "../pool/circle-of-flame.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
 import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
@@ -615,6 +616,7 @@ import _poolTortoiseFormation from "../pool/tortoise-formation.js";
 import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
 import _poolTransmograntAltar from "../pool/transmogrant-altar.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
+import _poolTravelPreparations from "../pool/travel-preparations.js";
 import _poolTritonCavalry from "../pool/triton-cavalry.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
 import _poolTruePolymorph from "../pool/true-polymorph.js";
@@ -802,6 +804,7 @@ const shard: CardShard = {
     _poolChartACourse,
     _poolChaseInspiration,
     _poolChromaticLantern,
+    _poolCircleOfFlame,
     _poolCitizenVHelmutZemo,
     _poolCityscapeLeveler,
     _poolClavilenoFirstOfTheBlessed,
@@ -1309,6 +1312,7 @@ const shard: CardShard = {
     _poolTrailblazingHistorian,
     _poolTransmograntAltar,
     _poolTrapmakersSnare,
+    _poolTravelPreparations,
     _poolTritonCavalry,
     _poolTrueLovesKiss,
     _poolTruePolymorph,

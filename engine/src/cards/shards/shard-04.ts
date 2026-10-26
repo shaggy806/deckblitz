@@ -190,6 +190,7 @@ import _poolFathomFleetCaptain from "../pool/fathom-fleet-captain.js";
 import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
 import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
+import _poolFesterhideBoar from "../pool/festerhide-boar.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
@@ -897,6 +898,7 @@ const shard: CardShard = {
     _poolFearOfLostTeeth,
     _poolFelotharTheSteadfast,
     _poolFemerefHealer,
+    _poolFesterhideBoar,
     _poolFieldSurgeon,
     _poolFierceEmpath,
     _poolFigureOfDestiny,

@@ -190,6 +190,7 @@ import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
 import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
+import _poolElderCathar from "../pool/elder-cathar.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElusiveSpellfist from "../pool/elusive-spellfist.js";
@@ -368,6 +369,7 @@ import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
+import _poolManorGargoyle from "../pool/manor-gargoyle.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMarshCasualties from "../pool/marsh-casualties.js";
 import _poolMarshFlitter from "../pool/marsh-flitter.js";
@@ -566,6 +568,7 @@ import _poolSpittingDrake from "../pool/spitting-drake.js";
 import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
 import _poolSpringjackShepherd from "../pool/springjack-shepherd.js";
 import _poolSproutbackTrudge from "../pool/sproutback-trudge.js";
+import _poolStalkingVampire from "../pool/stalking-vampire.js";
 import _poolStarksIngenuity from "../pool/starks-ingenuity.js";
 import _poolStayHiddenStaySilent from "../pool/stay-hidden-stay-silent.js";
 import _poolSteadfastUnicorn from "../pool/steadfast-unicorn.js";
@@ -685,6 +688,7 @@ import _poolWitherbloomTheBalancer from "../pool/witherbloom-the-balancer.js";
 import _poolWitheredWretch from "../pool/withered-wretch.js";
 import _poolWithoutWeakness from "../pool/without-weakness.js";
 import _poolWizardsRetort from "../pool/wizards-retort.js";
+import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
@@ -891,6 +895,7 @@ const shard: CardShard = {
     _poolEccentricApprentice,
     _poolEddytrailHawk,
     _poolEidolonOfBlossoms,
+    _poolElderCathar,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
     _poolElusiveSpellfist,
@@ -1069,6 +1074,7 @@ const shard: CardShard = {
     _poolMaestrosInitiate,
     _poolMagdaTheHoardmaster,
     _poolMalevolentWitchkite,
+    _poolManorGargoyle,
     _poolMarangRiverSkeleton,
     _poolMarshCasualties,
     _poolMarshFlitter,
@@ -1267,6 +1273,7 @@ const shard: CardShard = {
     _poolSplinterHamatoYoshi,
     _poolSpringjackShepherd,
     _poolSproutbackTrudge,
+    _poolStalkingVampire,
     _poolStarksIngenuity,
     _poolStayHiddenStaySilent,
     _poolSteadfastUnicorn,
@@ -1386,6 +1393,7 @@ const shard: CardShard = {
     _poolWitheredWretch,
     _poolWithoutWeakness,
     _poolWizardsRetort,
+    _poolWoodlandSleuth,
     _poolWoollyLoxodon,
     _poolWoollyThoctar,
     _poolZektarShrineExpedition,

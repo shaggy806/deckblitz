@@ -263,6 +263,7 @@ import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
 import _poolGhastlyHaunting from "../pool/ghastly-haunting.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
+import _poolGideonsAvenger from "../pool/gideons-avenger.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
 import _poolGideonsPhalanx from "../pool/gideons-phalanx.js";
 import _poolGiftOfFangs from "../pool/gift-of-fangs.js";
@@ -680,6 +681,7 @@ import _poolTrudgeGarden from "../pool/trudge-garden.js";
 import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
+import _poolUlvenwaldMystics from "../pool/ulvenwald-mystics.js";
 import _poolUmbralJuke from "../pool/umbral-juke.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
 import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
@@ -1021,6 +1023,7 @@ const shard: CardShard = {
     _poolGhastlyHaunting,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
+    _poolGideonsAvenger,
     _poolGideonsLawkeeper,
     _poolGideonsPhalanx,
     _poolGiftOfFangs,
@@ -1438,6 +1441,7 @@ const shard: CardShard = {
     _poolTurncoatKunoichi,
     _poolTuvasaTheSunlit,
     _poolTweeze,
+    _poolUlvenwaldMystics,
     _poolUmbralJuke,
     _poolUndercityShade,
     _poolUnexplainedAbsence,

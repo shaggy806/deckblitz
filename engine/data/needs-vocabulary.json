@@ -11079,6 +11079,26 @@
   "effect:damage-player-or-their-planeswalker-choice": {
    "family": "effect:player-scope-extensions",
    "example": "Curse of the Pierced Heart: \"deals 1 damage to that player or a planeswalker that player controls\" — untargeted, chosen as it resolves."
+  },
+  "amount:greatest-mana-value-this-way": {
+   "family": "effect:amount-aggregate",
+   "example": "Heretic's Punishment: 'mill three cards, then deals damage equal to the greatest mana value among those cards' — the milled cards' amount can only sum their mana values, not take the greatest."
+  },
+  "effect:cast-spell-gains-bloodthirst": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Bloodlord of Vaasgoth: 'Whenever you cast a Vampire creature spell, it gains bloodthirst 3' — nothing gives a spell on the stack an enters-with-counters replacement for the permanent it becomes."
+  },
+  "cost:exile-x-from-graveyard-additional": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Harvest Pyre: 'As an additional cost to cast this spell, exile X cards from your graveyard' — additionalCost.exileFromGraveyard takes a fixed count only, not an X announced with it."
+  },
+  "cost:exile-from-graveyard-pay-its-mana-cost": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Back from the Brink: 'Exile a creature card from your graveyard and pay its mana cost: create a token that's a copy of it' — a cost whose mana is the exiled card's own mana cost."
+  },
+  "effect:exile-from-graveyard-option": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Soaring Stoneglider: 'exile two cards from your graveyard or pay {1}{W}' — an additionalCost.options branch that exiles from the graveyard (exileFromGraveyard is built as a mandatory cost only)."
   }
  }
 }
