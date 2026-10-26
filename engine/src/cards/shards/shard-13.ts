@@ -545,6 +545,7 @@ import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSilverbladePaladin from "../pool/silverblade-paladin.js";
 import _poolSisterRepentia from "../pool/sister-repentia.js";
+import _poolSkullCollector from "../pool/skull-collector.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
 import _poolSlingbowTrap from "../pool/slingbow-trap.js";
@@ -1278,6 +1279,7 @@ const shard: CardShard = {
     _poolSilkenfistOrder,
     _poolSilverbladePaladin,
     _poolSisterRepentia,
+    _poolSkullCollector,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
     _poolSlingbowTrap,

@@ -276,6 +276,7 @@ import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
 import _poolGuardiansPledge from "../pool/guardians-pledge.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
+import _poolHandOfHonor from "../pool/hand-of-honor.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHapatrasMark from "../pool/hapatras-mark.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
@@ -332,7 +333,9 @@ import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKaerveksPurge from "../pool/kaerveks-purge.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
+import _poolKamiOfEmptyGraves from "../pool/kami-of-empty-graves.js";
 import _poolKangPrime from "../pool/kang-prime.js";
+import _poolKemuriOnna from "../pool/kemuri-onna.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
 import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
 import _poolKhabalGhoul from "../pool/khabal-ghoul.js";
@@ -424,6 +427,7 @@ import _poolNullRod from "../pool/null-rod.js";
 import _poolNurturerInitiate from "../pool/nurturer-initiate.js";
 import _poolNyleasColossus from "../pool/nyleas-colossus.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
+import _poolOboroEnvoy from "../pool/oboro-envoy.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
@@ -1011,6 +1015,7 @@ const shard: CardShard = {
     _poolGuardiansPledge,
     _poolGutTrueSoulZealot,
     _poolHammersOfMoradin,
+    _poolHandOfHonor,
     _poolHangedExecutioner,
     _poolHapatrasMark,
     _poolHashepOasis,
@@ -1067,7 +1072,9 @@ const shard: CardShard = {
     _poolKaerveksPurge,
     _poolKamahlPitFighter,
     _poolKambalProfiteeringMayor,
+    _poolKamiOfEmptyGraves,
     _poolKangPrime,
+    _poolKemuriOnna,
     _poolKeyToTheCity,
     _poolKeysToTheHouse,
     _poolKhabalGhoul,
@@ -1159,6 +1166,7 @@ const shard: CardShard = {
     _poolNurturerInitiate,
     _poolNyleasColossus,
     _poolNyleasIntervention,
+    _poolOboroEnvoy,
     _poolObyraDreamingDuelist,
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,

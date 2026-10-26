@@ -8318,4 +8318,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { hand: ['Grizzly Bears', 'Lightning Bolt', 'Forest'] },
     }),
   ),
+  preset(
+    'Endless Swarm: a copy each upkeep, and no more spells',
+    board({ you: { bf: ['Forest*9'], hand: ['Endless Swarm', 'Grizzly Bears', 'Forest', 'Forest'] } }),
+  ),
 ]

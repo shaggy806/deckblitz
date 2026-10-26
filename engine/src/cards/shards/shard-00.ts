@@ -102,6 +102,7 @@ import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
 import _poolCascadeSeer from "../pool/cascade-seer.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
+import _poolCelestialKirin from "../pool/celestial-kirin.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfGaea from "../pool/child-of-gaea.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
@@ -410,6 +411,7 @@ import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
 import _poolOutOfTheWay from "../pool/out-of-the-way.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
 import _poolOverwhelmedApprentice from "../pool/overwhelmed-apprentice.js";
+import _poolOverwhelmingIntellect from "../pool/overwhelming-intellect.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPainSeer from "../pool/pain-seer.js";
@@ -836,6 +838,7 @@ const shard: CardShard = {
     _poolCascadeSeer,
     _poolCastleGarenbrig,
     _poolCaveOfTemptation,
+    _poolCelestialKirin,
     _poolChiefWargsCompany,
     _poolChildOfGaea,
     _poolChildOfThorns,
@@ -1144,6 +1147,7 @@ const shard: CardShard = {
     _poolOutOfTheWay,
     _poolOutrageousRobbery,
     _poolOverwhelmedApprentice,
+    _poolOverwhelmingIntellect,
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,
     _poolPainSeer,

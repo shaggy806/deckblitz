@@ -1215,6 +1215,9 @@ export interface GameObject {
    * `copies`), which ceases to exist if it's still outside the stack and
    * the battlefield at the next state-based check (704.5e). */
   isCopy?: boolean;
+  /** A copy made by epic, "except for its epic ability" (rule 702.50a): its
+   * `epic` effect does nothing, and so does a copy of it. */
+  withoutEpic?: true;
   /** Spells (by any player) cast this turn *before* this spell — captured when
    * it's cast, read by a `storm` effect on it (rule 702.40a). ROADMAP Phase 8. */
   stormCount?: number;
@@ -1290,6 +1293,8 @@ export interface SpellSnapshot {
   readonly convokedBy?: readonly { readonly object: ObjectId; readonly stint: number }[];
   /** Its copiable modifiers (a prototyped spell's — rule 718.3c). */
   readonly modifiers: readonly PtModifier[];
+  /** A copy without its epic ability (`GameObject.withoutEpic`). */
+  readonly withoutEpic?: true;
 }
 
 /** A permanent's copiable values as a copy effect sets them (rule 707.2):
@@ -2017,6 +2022,9 @@ export interface PlayerState {
    * an additional land this turn". Reset as each turn begins; the ongoing
    * kind (Azusa) is a static, `extraLandsPerTurn`. */
   extraLandsThisTurn?: number;
+  /** "For the rest of the game, you can't cast spells" — set as an epic
+   * spell this player controls resolves (rule 702.50b). Absent until then. */
+  cantCastSpellsForGame?: true;
   hasLost: boolean;
   lossReason: string | null;
   /**

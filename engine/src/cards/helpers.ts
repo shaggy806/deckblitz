@@ -441,6 +441,43 @@ export const afterlife = (n: number): TriggeredAbility => ({
 });
 
 /**
+ * Bushido N (rule 702.45a): "Whenever this creature blocks or becomes
+ * blocked, it gets +N/+N until end of turn" — one ability over two events,
+ * so two triggers sharing its text (a creature never both blocks and becomes
+ * blocked in one combat). Spread them into `triggered`, and put "Bushido N"
+ * in `text` as well.
+ */
+export const bushido = (n: number): TriggeredAbility[] => {
+  const text = `Bushido ${n} (Whenever this creature blocks or becomes blocked, it gets +${n}/+${n} until end of turn.)`;
+  const effect = { kind: "modify-pt", target: "source", power: n, toughness: n, duration: "end-of-turn" } as const;
+  return [
+    { trigger: { on: "blocks", who: "self" }, targets: [], effect, resolve: null, text },
+    { trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect, resolve: null, text },
+  ];
+};
+
+/**
+ * Soulshift N (rule 702.46a): "When this permanent is put into a graveyard
+ * from the battlefield, you may return target Spirit card with mana value N
+ * or less from your graveyard to your hand." It's in the graveyard as the
+ * trigger is put on the stack, so it may target itself. Each instance
+ * triggers on its own (702.46b). Put "Soulshift N" in `text` as well.
+ */
+export const soulshift = (n: number): TriggeredAbility => ({
+  trigger: { on: "dies", who: "self" },
+  targets: [
+    { kind: "card-in-graveyard", whose: "you", filter: { subtype: "Spirit", manaValue: { op: "lte", n } } },
+  ],
+  effect: {
+    kind: "may",
+    prompt: "Return the target Spirit card to your hand?",
+    effect: { kind: "return-to-hand", target: 0, from: "graveyard" },
+  },
+  resolve: null,
+  text: `Soulshift ${n} (When this creature dies, you may return target Spirit card with mana value ${n} or less from your graveyard to your hand.)`,
+});
+
+/**
  * Rampage N (rule 702.23a): "Whenever this creature becomes blocked, it gets
  * +N/+N until end of turn for each creature blocking it beyond the first" —
  * counted once, as the trigger resolves (702.23b). Each instance triggers on

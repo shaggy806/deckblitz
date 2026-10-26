@@ -456,6 +456,7 @@
   "keyword:champion",
   "trigger:clash",
   "keyword:echo",
+  "keyword:epic",
   "effect:look-at-target-player-hand"
  ],
  "features": {

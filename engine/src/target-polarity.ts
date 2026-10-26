@@ -506,6 +506,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     n.counter === "experience" ? v.touch(n.target, "harm", MINOR) : v.touch(n.target, "help", MINOR),
   "get-energy": none,
   "create-emblem": none,
+  epic: none,
   "prevent-all-combat-damage": none,
   "prevent-damage-to-you": none,
   "prevent-damage": (n, v) => v.touch(n.target, "help", MINOR),

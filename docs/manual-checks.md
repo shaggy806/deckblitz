@@ -5487,3 +5487,9 @@ engine terms. A second thing to check is a second test.
 ### Discordant Dirge: choose up to as many cards as its verse counters
 - **Do:** Activate Discordant Dirge (it has 2 verse counters), targeting the opponent.
 - **Expect:** A popup shows the opponent's whole hand and lets you pick up to 2 cards (or none). The cards you pick go to their graveyard.
+
+## Epic (2026-10-26, Saviors of Kamigawa)
+
+### Endless Swarm: a copy each upkeep, and no more spells
+- **Do:** Cast Endless Swarm, then try to cast Grizzly Bears. Pass the turn and come back to your upkeep.
+- **Expect:** You get a Snake for each card in your hand, and an emblem appears. Grizzly Bears can't be cast any more. At your upkeep a copy of Endless Swarm resolves and makes more Snakes; still only one emblem.

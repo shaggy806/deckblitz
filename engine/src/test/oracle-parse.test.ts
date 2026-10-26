@@ -714,7 +714,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(rioter.activated[0].effect).toMatchObject({ kind: "exile", linked: true });
     expect(face("{2}: Exile target card from a graveyard.").activated[0].effect.linked).toBeUndefined();
     // A keyword the engine doesn't run leaves the line to a person.
-    expect(face("Bushido 2").complete).toBe(false);
+    expect(face("Splice onto Arcane {1}{R}").complete).toBe(false);
   });
 
   it("the intervening-ifs it knows become the ability's condition; others stay a TODO", () => {
@@ -1631,6 +1631,26 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const shah = face(`Echo {0} ${reminder}\nWhen this creature's echo cost is paid, each opponent may draw up to three cards.`, "Creature — Efreet");
     expect(shah.complete).toBe(false);
     expect(shah.triggered[0].__todo).toEqual(["its echo has to say when the cost is paid"]);
+  });
+
+  it("bushido (702.45a) and soulshift (702.46a): Kamigawa's keyword lines, their triggers", () => {
+    const samurai = face(
+      "Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)",
+      "Creature — Human Samurai",
+    );
+    expect(samurai.triggered[0].trigger).toEqual({ on: "blocks", who: "self" });
+    expect(samurai.triggered[1].trigger).toEqual({ on: "becomes-blocked", who: "self" });
+    expect(samurai.triggered[1].effect).toEqual({ kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" });
+    expect(samurai.complete).toBe(true);
+    const kami = face(
+      "Soulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)",
+      "Creature — Spirit",
+    );
+    expect(kami.triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    expect(kami.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { subtype: "Spirit", manaValue: { op: "lte", n: 3 } } },
+    ]);
+    expect(kami.complete).toBe(true);
   });
 
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
