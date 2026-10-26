@@ -45,6 +45,7 @@ import _poolAuramancer from "../pool/auramancer.js";
 import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
 import _poolAvenArcher from "../pool/aven-archer.js";
 import _poolAvenRedeemer from "../pool/aven-redeemer.js";
+import _poolAvenRiftwatcher from "../pool/aven-riftwatcher.js";
 import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
@@ -109,6 +110,7 @@ import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
+import _poolChronozoa from "../pool/chronozoa.js";
 import _poolCinderCrawler from "../pool/cinder-crawler.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolClotSliver from "../pool/clot-sliver.js";
@@ -137,6 +139,7 @@ import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
+import _poolDeadwoodTreefolk from "../pool/deadwood-treefolk.js";
 import _poolDeathpactAngel from "../pool/deathpact-angel.js";
 import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
@@ -249,6 +252,7 @@ import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
+import _poolGhostTactician from "../pool/ghost-tactician.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGiantLadybug from "../pool/giant-ladybug.js";
 import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
@@ -409,6 +413,7 @@ import _poolMolderhulk from "../pool/molderhulk.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
+import _poolMuckDrubb from "../pool/muck-drubb.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
@@ -831,6 +836,7 @@ const shard: CardShard = {
     _poolAutarchMammoth,
     _poolAvenArcher,
     _poolAvenRedeemer,
+    _poolAvenRiftwatcher,
     _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,
@@ -895,6 +901,7 @@ const shard: CardShard = {
     _poolChargingWarBoar,
     _poolChildOfNight,
     _poolChillingGrasp,
+    _poolChronozoa,
     _poolCinderCrawler,
     _poolCityPigeon,
     _poolClotSliver,
@@ -923,6 +930,7 @@ const shard: CardShard = {
     _poolDawnglareInvoker,
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
+    _poolDeadwoodTreefolk,
     _poolDeathpactAngel,
     _poolDeepcavernImp,
     _poolDeepmuckDesperado,
@@ -1035,6 +1043,7 @@ const shard: CardShard = {
     _poolGenghisFrog,
     _poolGeomancersGambit,
     _poolGeosurge,
+    _poolGhostTactician,
     _poolGhostlyPilferer,
     _poolGiantLadybug,
     _poolGiantManGargantuanGenius,
@@ -1195,6 +1204,7 @@ const shard: CardShard = {
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
+    _poolMuckDrubb,
     _poolMundasVanguard,
     _poolMusesEncouragement,
     _poolMyrSire,

@@ -374,6 +374,7 @@ import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMaskedAdmirers from "../pool/masked-admirers.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
+import _poolMelancholy from "../pool/melancholy.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
 import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
@@ -448,6 +449,7 @@ import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
+import _poolPouncingWurm from "../pool/pouncing-wurm.js";
 import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
 import _poolPrideSovereign from "../pool/pride-sovereign.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
@@ -663,6 +665,7 @@ import _poolVizierOfTheMenagerie from "../pool/vizier-of-the-menagerie.js";
 import _poolVojaJawsOfTheConclave from "../pool/voja-jaws-of-the-conclave.js";
 import _poolVolcanicAwakening from "../pool/volcanic-awakening.js";
 import _poolVolcanicRambler from "../pool/volcanic-rambler.js";
+import _poolVoroshTheHunter from "../pool/vorosh-the-hunter.js";
 import _poolWakeTheDragon from "../pool/wake-the-dragon.js";
 import _poolWallOfDistortion from "../pool/wall-of-distortion.js";
 import _poolWallOfTanglecord from "../pool/wall-of-tanglecord.js";
@@ -1092,6 +1095,7 @@ const shard: CardShard = {
     _poolMaskedAdmirers,
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
+    _poolMelancholy,
     _poolMeltstridersGear,
     _poolMemorialTeamLeader,
     _poolMemoryGuardian,
@@ -1166,6 +1170,7 @@ const shard: CardShard = {
     _poolPointTheWay,
     _poolPolJamaarIllusionist,
     _poolPorcelainLegionnaire,
+    _poolPouncingWurm,
     _poolPriceOfLoyalty,
     _poolPrideSovereign,
     _poolPrimevalProtector,
@@ -1381,6 +1386,7 @@ const shard: CardShard = {
     _poolVojaJawsOfTheConclave,
     _poolVolcanicAwakening,
     _poolVolcanicRambler,
+    _poolVoroshTheHunter,
     _poolWakeTheDragon,
     _poolWallOfDistortion,
     _poolWallOfTanglecord,

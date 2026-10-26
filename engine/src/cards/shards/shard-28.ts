@@ -86,6 +86,7 @@ import _poolBoneyardWurm from "../pool/boneyard-wurm.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBrackwaterElemental from "../pool/brackwater-elemental.js";
+import _poolBrainGorgers from "../pool/brain-gorgers.js";
 import _poolBramblesnap from "../pool/bramblesnap.js";
 import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
@@ -845,6 +846,7 @@ const shard: CardShard = {
     _poolBoommobile,
     _poolBountyOfMight,
     _poolBrackwaterElemental,
+    _poolBrainGorgers,
     _poolBramblesnap,
     _poolBreachingDragonstorm,
     _poolBrighthearthBanneret,

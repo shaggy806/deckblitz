@@ -233,6 +233,7 @@ import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFamiliarGround from "../pool/familiar-ground.js";
+import _poolFatalFrenzy from "../pool/fatal-frenzy.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
 import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
@@ -403,6 +404,7 @@ import _poolLupariShield from "../pool/lupari-shield.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMagmaroth from "../pool/magmaroth.js";
+import _poolMagusOfTheLibrary from "../pool/magus-of-the-library.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
 import _poolMammothGrowth from "../pool/mammoth-growth.js";
 import _poolManalith from "../pool/manalith.js";
@@ -424,6 +426,7 @@ import _poolMightOfOaks from "../pool/might-of-oaks.js";
 import _poolMightOfTheOldWays from "../pool/might-of-the-old-ways.js";
 import _poolMindPeel from "../pool/mind-peel.js";
 import _poolMiresMalice from "../pool/mires-malice.js";
+import _poolMirriTheCursed from "../pool/mirri-the-cursed.js";
 import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
 import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
@@ -502,6 +505,7 @@ import _poolReturnTriumphant from "../pool/return-triumphant.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
 import _poolRiftBolt from "../pool/rift-bolt.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
+import _poolRiptidePilferer from "../pool/riptide-pilferer.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
 import _poolRitualGuardian from "../pool/ritual-guardian.js";
 import _poolRiversRebuke from "../pool/rivers-rebuke.js";
@@ -965,6 +969,7 @@ const shard: CardShard = {
     _poolEyeblightAssassin,
     _poolFakeYourOwnDeath,
     _poolFamiliarGround,
+    _poolFatalFrenzy,
     _poolFateUnraveler,
     _poolFeastOrFamine,
     _poolFeasterOfFools,
@@ -1135,6 +1140,7 @@ const shard: CardShard = {
     _poolLyseHext,
     _poolMadameNullPowerBroker,
     _poolMagmaroth,
+    _poolMagusOfTheLibrary,
     _poolMalachiteGolem,
     _poolMammothGrowth,
     _poolManalith,
@@ -1156,6 +1162,7 @@ const shard: CardShard = {
     _poolMightOfTheOldWays,
     _poolMindPeel,
     _poolMiresMalice,
+    _poolMirriTheCursed,
     _poolMishraEminentOne,
     _poolMoltenPrimordial,
     _poolMoonwingMoth,
@@ -1234,6 +1241,7 @@ const shard: CardShard = {
     _poolRhonassMonument,
     _poolRiftBolt,
     _poolRingOfTheLucii,
+    _poolRiptidePilferer,
     _poolRisingOfTheDay,
     _poolRitualGuardian,
     _poolRiversRebuke,

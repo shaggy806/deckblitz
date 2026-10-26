@@ -513,6 +513,7 @@ import _poolSacredMesa from "../pool/sacred-mesa.js";
 import _poolSaddleOfTheCavalier from "../pool/saddle-of-the-cavalier.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
 import _poolSaintTraftAndRemKarolus from "../pool/saint-traft-and-rem-karolus.js";
+import _poolSaltblast from "../pool/saltblast.js";
 import _poolSaltskitter from "../pool/saltskitter.js";
 import _poolSamiWildcatCaptain from "../pool/sami-wildcat-captain.js";
 import _poolSanctuaryCat from "../pool/sanctuary-cat.js";
@@ -1262,6 +1263,7 @@ const shard: CardShard = {
     _poolSaddleOfTheCavalier,
     _poolSaheeliRadiantCreator,
     _poolSaintTraftAndRemKarolus,
+    _poolSaltblast,
     _poolSaltskitter,
     _poolSamiWildcatCaptain,
     _poolSanctuaryCat,

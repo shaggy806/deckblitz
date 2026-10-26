@@ -98,6 +98,7 @@ import _poolBriarbladeAdept from "../pool/briarblade-adept.js";
 import _poolBroodheartEngine from "../pool/broodheart-engine.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
+import _poolBust from "../pool/bust.js";
 import _poolButterburBreeInnkeeper from "../pool/butterbur-bree-innkeeper.js";
 import _poolCabalInitiate from "../pool/cabal-initiate.js";
 import _poolCalmingLicid from "../pool/calming-licid.js";
@@ -830,6 +831,7 @@ const shard: CardShard = {
     _poolBroodheartEngine,
     _poolBurstLightning,
     _poolBushyBodyguard,
+    _poolBust,
     _poolButterburBreeInnkeeper,
     _poolCabalInitiate,
     _poolCalmingLicid,

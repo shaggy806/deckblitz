@@ -163,6 +163,7 @@ import _poolDryadOfTheIlysianGrove from "../pool/dryad-of-the-ilysian-grove.js";
 import _poolDundoolinWeaver from "../pool/dundoolin-weaver.js";
 import _poolDuneDrifter from "../pool/dune-drifter.js";
 import _poolDuskriderPeregrine from "../pool/duskrider-peregrine.js";
+import _poolDustCorona from "../pool/dust-corona.js";
 import _poolDwarvenMiner from "../pool/dwarven-miner.js";
 import _poolDwarvenNomad from "../pool/dwarven-nomad.js";
 import _poolDynamicSoar from "../pool/dynamic-soar.js";
@@ -442,6 +443,7 @@ import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
 import _poolOverchargedAmalgam from "../pool/overcharged-amalgam.js";
 import _poolPackAPunch from "../pool/pack-a-punch.js";
+import _poolPallidMycoderm from "../pool/pallid-mycoderm.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPatagiaTiger from "../pool/patagia-tiger.js";
@@ -666,6 +668,7 @@ import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWidespreadThieving from "../pool/widespread-thieving.js";
 import _poolWingedPortent from "../pool/winged-portent.js";
+import _poolWistfulThinking from "../pool/wistful-thinking.js";
 import _poolWitchsMist from "../pool/witchs-mist.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
@@ -865,6 +868,7 @@ const shard: CardShard = {
     _poolDundoolinWeaver,
     _poolDuneDrifter,
     _poolDuskriderPeregrine,
+    _poolDustCorona,
     _poolDwarvenMiner,
     _poolDwarvenNomad,
     _poolDynamicSoar,
@@ -1144,6 +1148,7 @@ const shard: CardShard = {
     _poolOstrichHorse,
     _poolOverchargedAmalgam,
     _poolPackAPunch,
+    _poolPallidMycoderm,
     _poolPantherRobot,
     _poolPashalikMons,
     _poolPatagiaTiger,
@@ -1368,6 +1373,7 @@ const shard: CardShard = {
     _poolWebOfLifeAndDestiny,
     _poolWidespreadThieving,
     _poolWingedPortent,
+    _poolWistfulThinking,
     _poolWitchsMist,
     _poolWorthyKnight,
     _poolWurmcoilEngine,

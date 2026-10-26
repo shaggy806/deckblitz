@@ -249,6 +249,7 @@ import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
 import _poolFungusElemental from "../pool/fungus-elemental.js";
 import _poolFuriousForebear from "../pool/furious-forebear.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
+import _poolGaeasAnthem from "../pool/gaeas-anthem.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
 import _poolGalianBeast from "../pool/galian-beast.js";
 import _poolGalufsFinalAct from "../pool/galufs-final-act.js";
@@ -329,6 +330,7 @@ import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
+import _poolIntetTheDreamer from "../pool/intet-the-dreamer.js";
 import _poolIntimidation from "../pool/intimidation.js";
 import _poolInvasionOfVryn from "../pool/invasion-of-vryn.js";
 import _poolIroassBlessing from "../pool/iroass-blessing.js";
@@ -611,6 +613,7 @@ import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
 import _poolStonefury from "../pool/stonefury.js";
 import _poolStormWorld from "../pool/storm-world.js";
+import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
@@ -986,6 +989,7 @@ const shard: CardShard = {
     _poolFungusElemental,
     _poolFuriousForebear,
     _poolFurtiveAnalyst,
+    _poolGaeasAnthem,
     _poolGaladhrimGuide,
     _poolGalianBeast,
     _poolGalufsFinalAct,
@@ -1066,6 +1070,7 @@ const shard: CardShard = {
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
     _poolInspiringCall,
+    _poolIntetTheDreamer,
     _poolIntimidation,
     _poolInvasionOfVryn,
     _poolIroassBlessing,
@@ -1348,6 +1353,7 @@ const shard: CardShard = {
     _poolStockpilingCelebrant,
     _poolStonefury,
     _poolStormWorld,
+    _poolStormfrontRiders,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
     _poolSunhomeStalwart,

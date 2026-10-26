@@ -57,6 +57,7 @@ import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
 import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
 import _poolBasriKet from "../pool/basri-ket.js";
 import _poolBastionInventor from "../pool/bastion-inventor.js";
+import _poolBatteringSliver from "../pool/battering-sliver.js";
 import _poolBatterskull from "../pool/batterskull.js";
 import _poolBearerOfOverwhelmingTruths from "../pool/bearer-of-overwhelming-truths.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
@@ -502,6 +503,7 @@ import _poolRavingDead from "../pool/raving-dead.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolReady from "../pool/ready.js";
+import _poolRealityAcid from "../pool/reality-acid.js";
 import _poolRealityStrobe from "../pool/reality-strobe.js";
 import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
@@ -650,6 +652,7 @@ import _poolTauntingSliver from "../pool/taunting-sliver.js";
 import _poolTavernScoundrel from "../pool/tavern-scoundrel.js";
 import _poolTeamPennant from "../pool/team-pennant.js";
 import _poolTellahGreatSage from "../pool/tellah-great-sage.js";
+import _poolTenebTheHarvester from "../pool/teneb-the-harvester.js";
 import _poolTermagantSwarm from "../pool/termagant-swarm.js";
 import _poolTerminalVelocity from "../pool/terminal-velocity.js";
 import _poolTerritorialScythecat from "../pool/territorial-scythecat.js";
@@ -840,6 +843,7 @@ const shard: CardShard = {
     _poolBarkchannelPathway,
     _poolBasriKet,
     _poolBastionInventor,
+    _poolBatteringSliver,
     _poolBatterskull,
     _poolBearerOfOverwhelmingTruths,
     _poolBeckonApparition,
@@ -1285,6 +1289,7 @@ const shard: CardShard = {
     _poolRaybladeTrooper,
     _poolRazzleDazzler,
     _poolReady,
+    _poolRealityAcid,
     _poolRealityStrobe,
     _poolRebelSalvo,
     _poolRecklessAssault,
@@ -1433,6 +1438,7 @@ const shard: CardShard = {
     _poolTavernScoundrel,
     _poolTeamPennant,
     _poolTellahGreatSage,
+    _poolTenebTheHarvester,
     _poolTermagantSwarm,
     _poolTerminalVelocity,
     _poolTerritorialScythecat,

@@ -125,6 +125,7 @@ import _poolChimilTheInnerSun from "../pool/chimil-the-inner-sun.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolChorusOfTheTides from "../pool/chorus-of-the-tides.js";
+import _poolCitanulWoodreaders from "../pool/citanul-woodreaders.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
 import _poolClatteringSkeletons from "../pool/clattering-skeletons.js";
 import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
@@ -143,6 +144,7 @@ import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
 import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
 import _poolCrabappleCohort from "../pool/crabapple-cohort.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
+import _poolCradleToGrave from "../pool/cradle-to-grave.js";
 import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
 import _poolCrimsonWisps from "../pool/crimson-wisps.js";
 import _poolCrumbAndGetIt from "../pool/crumb-and-get-it.js";
@@ -854,6 +856,7 @@ const shard: CardShard = {
     _poolChimneyRabble,
     _poolChordOfCalling,
     _poolChorusOfTheTides,
+    _poolCitanulWoodreaders,
     _poolClanDefiance,
     _poolClatteringSkeletons,
     _poolCleopatraExiledPharaoh,
@@ -872,6 +875,7 @@ const shard: CardShard = {
     _poolCostOfBrilliance,
     _poolCrabappleCohort,
     _poolCrackTheEarth,
+    _poolCradleToGrave,
     _poolCraterclawColossus,
     _poolCrimsonWisps,
     _poolCrumbAndGetIt,

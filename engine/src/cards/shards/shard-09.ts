@@ -277,6 +277,7 @@ import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
 import _poolGroveOfTheGuardian from "../pool/grove-of-the-guardian.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
+import _poolHammerheimDeadeye from "../pool/hammerheim-deadeye.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
 import _poolHardEvidence from "../pool/hard-evidence.js";
@@ -288,6 +289,7 @@ import _poolHauntedFengraf from "../pool/haunted-fengraf.js";
 import _poolHauntedRidge from "../pool/haunted-ridge.js";
 import _poolHavocDemon from "../pool/havoc-demon.js";
 import _poolHeavyInfantry from "../pool/heavy-infantry.js";
+import _poolHedgeTroll from "../pool/hedge-troll.js";
 import _poolHellToPay from "../pool/hell-to-pay.js";
 import _poolHeraldOfTorment from "../pool/herald-of-torment.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
@@ -559,6 +561,7 @@ import _poolSerratedArrows from "../pool/serrated-arrows.js";
 import _poolSettleBeyondReality from "../pool/settle-beyond-reality.js";
 import _poolShadowRider from "../pool/shadow-rider.js";
 import _poolShadowheartDarkJusticiar from "../pool/shadowheart-dark-justiciar.js";
+import _poolShaperParasite from "../pool/shaper-parasite.js";
 import _poolShardingSphinx from "../pool/sharding-sphinx.js";
 import _poolShikoAndNarsetUnified from "../pool/shiko-and-narset-unified.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
@@ -626,6 +629,7 @@ import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSwiftWarkite from "../pool/swift-warkite.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
+import _poolSynchronousSliver from "../pool/synchronous-sliver.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
 import _poolTabletOfEpityr from "../pool/tablet-of-epityr.js";
 import _poolTajuruArcher from "../pool/tajuru-archer.js";
@@ -1031,6 +1035,7 @@ const shard: CardShard = {
     _poolGroveOfTheGuardian,
     _poolGuardianGladewalker,
     _poolGuardiansOfKoilos,
+    _poolHammerheimDeadeye,
     _poolHamperingSnare,
     _poolHarbinVanguardAviator,
     _poolHardEvidence,
@@ -1042,6 +1047,7 @@ const shard: CardShard = {
     _poolHauntedRidge,
     _poolHavocDemon,
     _poolHeavyInfantry,
+    _poolHedgeTroll,
     _poolHellToPay,
     _poolHeraldOfTorment,
     _poolHeroOfBladehold,
@@ -1313,6 +1319,7 @@ const shard: CardShard = {
     _poolSettleBeyondReality,
     _poolShadowRider,
     _poolShadowheartDarkJusticiar,
+    _poolShaperParasite,
     _poolShardingSphinx,
     _poolShikoAndNarsetUnified,
     _poolShizoDeathsStorehouse,
@@ -1380,6 +1387,7 @@ const shard: CardShard = {
     _poolSwiftWarkite,
     _poolSylvanAwakening,
     _poolSylvanScrying,
+    _poolSynchronousSliver,
     _poolSythisHarvestsHand,
     _poolTabletOfEpityr,
     _poolTajuruArcher,

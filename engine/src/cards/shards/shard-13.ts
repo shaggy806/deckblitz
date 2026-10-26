@@ -88,6 +88,7 @@ import _poolBurnishedDunestomper from "../pool/burnished-dunestomper.js";
 import _poolBusterSword from "../pool/buster-sword.js";
 import _poolCabalArchon from "../pool/cabal-archon.js";
 import _poolCactusfolkSureshot from "../pool/cactusfolk-sureshot.js";
+import _poolCalciderm from "../pool/calciderm.js";
 import _poolCallOfTheRing from "../pool/call-of-the-ring.js";
 import _poolCanopyGorger from "../pool/canopy-gorger.js";
 import _poolCanopyTactician from "../pool/canopy-tactician.js";
@@ -442,6 +443,7 @@ import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
+import _poolPoulticeSliver from "../pool/poultice-sliver.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
@@ -826,6 +828,7 @@ const shard: CardShard = {
     _poolBusterSword,
     _poolCabalArchon,
     _poolCactusfolkSureshot,
+    _poolCalciderm,
     _poolCallOfTheRing,
     _poolCanopyGorger,
     _poolCanopyTactician,
@@ -1180,6 +1183,7 @@ const shard: CardShard = {
     _poolPiranhaFly,
     _poolPlanarAlly,
     _poolPlanarVoid,
+    _poolPoulticeSliver,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolPrisonRealm,

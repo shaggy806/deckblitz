@@ -139,6 +139,7 @@ import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDogWalker from "../pool/dog-walker.js";
 import _poolDominatingVampire from "../pool/dominating-vampire.js";
 import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
+import _poolDormantSliver from "../pool/dormant-sliver.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
@@ -570,6 +571,7 @@ import _poolStructuralCollapse from "../pool/structural-collapse.js";
 import _poolStructuralDistortion from "../pool/structural-distortion.js";
 import _poolStun from "../pool/stun.js";
 import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
+import _poolSulfurElemental from "../pool/sulfur-elemental.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
@@ -646,6 +648,7 @@ import _poolUpheaval from "../pool/upheaval.js";
 import _poolUrgeToFeed from "../pool/urge-to-feed.js";
 import _poolUrzaPowerstoneProdigy from "../pool/urza-powerstone-prodigy.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
+import _poolUtopiaVow from "../pool/utopia-vow.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
@@ -709,6 +712,7 @@ import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensGoblinWarriorToken from "../tokens/goblin-warrior-token.js";
+import _tokensInsectTokenGreen61Shroud from "../tokens/insect-token-green-6-1-shroud.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensRatRogueTokenTributeToHorobi from "../tokens/rat-rogue-token-tribute-to-horobi.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
@@ -855,6 +859,7 @@ const shard: CardShard = {
     _poolDogWalker,
     _poolDominatingVampire,
     _poolDoomskarOracle,
+    _poolDormantSliver,
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
@@ -1286,6 +1291,7 @@ const shard: CardShard = {
     _poolStructuralDistortion,
     _poolStun,
     _poolSubterraneanTremors,
+    _poolSulfurElemental,
     _poolSunderflock,
     _poolSungrassPrairie,
     _poolSunscapeMaster,
@@ -1362,6 +1368,7 @@ const shard: CardShard = {
     _poolUrgeToFeed,
     _poolUrzaPowerstoneProdigy,
     _poolUrzasPowerPlant,
+    _poolUtopiaVow,
     _poolValakutTheMoltenPinnacle,
     _poolVampireInterloper,
     _poolVampiricFeast,
@@ -1427,6 +1434,7 @@ const shard: CardShard = {
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
     _tokensGoblinWarriorToken,
+    _tokensInsectTokenGreen61Shroud,
     _tokensMutavaultToken,
     _tokensRatRogueTokenTributeToHorobi,
     _tokensTheTigerGod,

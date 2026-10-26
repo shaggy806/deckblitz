@@ -213,6 +213,7 @@ import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFoundryHornet from "../pool/foundry-hornet.js";
 import _poolFreneticEfreet from "../pool/frenetic-efreet.js";
+import _poolFreneticSliver from "../pool/frenetic-sliver.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
@@ -298,6 +299,7 @@ import _poolIzzetCharm from "../pool/izzet-charm.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
+import _poolJeditOjanenOfEfrava from "../pool/jedit-ojanen-of-efrava.js";
 import _poolJhoiraAgelessInnovator from "../pool/jhoira-ageless-innovator.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJiwariTheEarthAflame from "../pool/jiwari-the-earth-aflame.js";
@@ -308,6 +310,7 @@ import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
+import _poolKeldonMarauders from "../pool/keldon-marauders.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKirdChieftain from "../pool/kird-chieftain.js";
 import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
@@ -332,6 +335,7 @@ import _poolLegionGuildmage from "../pool/legion-guildmage.js";
 import _poolLegionLeadership from "../pool/legion-leadership.js";
 import _poolLevelUp from "../pool/level-up.js";
 import _poolLevitation from "../pool/levitation.js";
+import _poolLifeAndLimb from "../pool/life-and-limb.js";
 import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
@@ -944,6 +948,7 @@ const shard: CardShard = {
     _poolFoulFamiliar,
     _poolFoundryHornet,
     _poolFreneticEfreet,
+    _poolFreneticSliver,
     _poolFromFatherToSon,
     _poolFungalPlots,
     _poolFurnaceSkullbomb,
@@ -1029,6 +1034,7 @@ const shard: CardShard = {
     _poolJagwaspSwarm,
     _poolJamieMccrimmon,
     _poolJeditOjanenMercenary,
+    _poolJeditOjanenOfEfrava,
     _poolJhoiraAgelessInnovator,
     _poolJiangYangguNeverAlone,
     _poolJiwariTheEarthAflame,
@@ -1039,6 +1045,7 @@ const shard: CardShard = {
     _poolKayaIntangibleSlayer,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
+    _poolKeldonMarauders,
     _poolKinsbaileCavalier,
     _poolKirdChieftain,
     _poolKolaghanWarmonger,
@@ -1063,6 +1070,7 @@ const shard: CardShard = {
     _poolLegionLeadership,
     _poolLevelUp,
     _poolLevitation,
+    _poolLifeAndLimb,
     _poolLightbringer,
     _poolLightlessEvangel,
     _poolLightningGreaves,

@@ -278,6 +278,7 @@ import _poolGoblinPicker from "../pool/goblin-picker.js";
 import _poolGoldenTailDisciple from "../pool/golden-tail-disciple.js";
 import _poolGolgariRotwurm from "../pool/golgari-rotwurm.js";
 import _poolGolgariThug from "../pool/golgari-thug.js";
+import _poolGossamerPhantasm from "../pool/gossamer-phantasm.js";
 import _poolGrandColiseum from "../pool/grand-coliseum.js";
 import _poolGraniticTitan from "../pool/granitic-titan.js";
 import _poolGreaterSandwurm from "../pool/greater-sandwurm.js";
@@ -1045,6 +1046,7 @@ const shard: CardShard = {
     _poolGoldenTailDisciple,
     _poolGolgariRotwurm,
     _poolGolgariThug,
+    _poolGossamerPhantasm,
     _poolGrandColiseum,
     _poolGraniticTitan,
     _poolGreaterSandwurm,

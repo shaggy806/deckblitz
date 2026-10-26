@@ -140,6 +140,7 @@ import _poolDawn from "../pool/dawn.js";
 import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
+import _poolDead from "../pool/dead.js";
 import _poolDeadlyAllure from "../pool/deadly-allure.js";
 import _poolDeadshot from "../pool/deadshot.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
@@ -417,6 +418,7 @@ import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
+import _poolMycologist from "../pool/mycologist.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
@@ -907,6 +909,7 @@ const shard: CardShard = {
     _poolDawnbringerCharioteers,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
+    _poolDead,
     _poolDeadlyAllure,
     _poolDeadshot,
     _poolDeathcultRogue,
@@ -1184,6 +1187,7 @@ const shard: CardShard = {
     _poolMultaniYavimayasAvatar,
     _poolMummyParamount,
     _poolMurderousRider,
+    _poolMycologist,
     _poolMysticSpeculation,
     _poolNaturalState,
     _poolNecroticHex,

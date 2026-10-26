@@ -517,6 +517,7 @@ import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelfAssembler from "../pool/self-assembler.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolSentinelTotem from "../pool/sentinel-totem.js";
+import _poolSerrasBoon from "../pool/serras-boon.js";
 import _poolShadowedCaravel from "../pool/shadowed-caravel.js";
 import _poolShamblingAttendants from "../pool/shambling-attendants.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolSelfAssembler,
     _poolSelflessPoliceCaptain,
     _poolSentinelTotem,
+    _poolSerrasBoon,
     _poolShadowedCaravel,
     _poolShamblingAttendants,
     _poolShantottoTacticianMagician,

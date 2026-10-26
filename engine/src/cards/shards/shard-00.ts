@@ -216,6 +216,7 @@ import _poolFormationBreaker from "../pool/formation-breaker.js";
 import _poolFormidableCommons from "../pool/formidable-commons.js";
 import _poolFreyalisesRadiance from "../pool/freyalises-radiance.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
+import _poolFrozenAether from "../pool/frozen-aether.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolFussBother from "../pool/fuss-bother.js";
@@ -424,6 +425,7 @@ import _poolPasswallAdept from "../pool/passwall-adept.js";
 import _poolPeaceStrider from "../pool/peace-strider.js";
 import _poolPettyTheft from "../pool/petty-theft.js";
 import _poolPhalanxTactics from "../pool/phalanx-tactics.js";
+import _poolPhantasmagorian from "../pool/phantasmagorian.js";
 import _poolPhotonMightyMarvel from "../pool/photon-mighty-marvel.js";
 import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
@@ -956,6 +958,7 @@ const shard: CardShard = {
     _poolFormidableCommons,
     _poolFreyalisesRadiance,
     _poolFrontlineRush,
+    _poolFrozenAether,
     _poolFuneralLongboat,
     _poolFurnaceReins,
     _poolFussBother,
@@ -1164,6 +1167,7 @@ const shard: CardShard = {
     _poolPeaceStrider,
     _poolPettyTheft,
     _poolPhalanxTactics,
+    _poolPhantasmagorian,
     _poolPhotonMightyMarvel,
     _poolPhyrexianBroodlings,
     _poolPipBoy3000,

@@ -134,6 +134,7 @@ import _poolCorneredCrook from "../pool/cornered-crook.js";
 import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
+import _poolCrovaxAscendantHero from "../pool/crovax-ascendant-hero.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
 import _poolCrystallization from "../pool/crystallization.js";
 import _poolCullingDrone from "../pool/culling-drone.js";
@@ -334,6 +335,7 @@ import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLagonnaBandElder from "../pool/lagonna-band-elder.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
+import _poolLavacoreElemental from "../pool/lavacore-elemental.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
 import _poolLeagueGuildmage from "../pool/league-guildmage.js";
 import _poolLeinoreAutumnSovereign from "../pool/leinore-autumn-sovereign.js";
@@ -556,6 +558,7 @@ import _poolStandingStones from "../pool/standing-stones.js";
 import _poolSteamCatapult from "../pool/steam-catapult.js";
 import _poolStenchOfDecay from "../pool/stench-of-decay.js";
 import _poolStoneDocent from "../pool/stone-docent.js";
+import _poolStonecloaker from "../pool/stonecloaker.js";
 import _poolStormTheVault from "../pool/storm-the-vault.js";
 import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
@@ -842,6 +845,7 @@ const shard: CardShard = {
     _poolCouriersCapsule,
     _poolCourtOfArdenvale,
     _poolCravenGiant,
+    _poolCrovaxAscendantHero,
     _poolCrystalShard,
     _poolCrystallization,
     _poolCullingDrone,
@@ -1042,6 +1046,7 @@ const shard: CardShard = {
     _poolLagonnaBandElder,
     _poolLakesideShack,
     _poolLambholtHarrier,
+    _poolLavacoreElemental,
     _poolLazotepSliver,
     _poolLeagueGuildmage,
     _poolLeinoreAutumnSovereign,
@@ -1264,6 +1269,7 @@ const shard: CardShard = {
     _poolSteamCatapult,
     _poolStenchOfDecay,
     _poolStoneDocent,
+    _poolStonecloaker,
     _poolStormTheVault,
     _poolStormbind,
     _poolStormcallerOfKeranos,

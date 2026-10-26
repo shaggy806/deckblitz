@@ -148,6 +148,7 @@ import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
 import _poolCyclopsTyrant from "../pool/cyclops-tyrant.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
+import _poolDarkheartSliver from "../pool/darkheart-sliver.js";
 import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
@@ -584,6 +585,7 @@ import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
+import _poolSpittingSliver from "../pool/spitting-sliver.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpringMind from "../pool/spring-mind.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
@@ -884,6 +886,7 @@ const shard: CardShard = {
     _poolCutIn,
     _poolCyclopsTyrant,
     _poolDargoTheShipwrecker,
+    _poolDarkheartSliver,
     _poolDarlingOfTheMasses,
     _poolDauthiJackal,
     _poolDaxosOfMeletis,
@@ -1320,6 +1323,7 @@ const shard: CardShard = {
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
     _poolSpitebellows,
+    _poolSpittingSliver,
     _poolSporeSwarm,
     _poolSpringMind,
     _poolSpringmaneCervin,

@@ -492,6 +492,7 @@ import _poolRatOut from "../pool/rat-out.js";
 import _poolRavingVisionary from "../pool/raving-visionary.js";
 import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
 import _poolRecklessHandling from "../pool/reckless-handling.js";
+import _poolRecklessWurm from "../pool/reckless-wurm.js";
 import _poolReclaim from "../pool/reclaim.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
@@ -680,6 +681,7 @@ import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
 import _poolWallOfEssence from "../pool/wall-of-essence.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
+import _poolWaningWurm from "../pool/waning-wurm.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
 import _poolWaterspoutDjinn from "../pool/waterspout-djinn.js";
@@ -1219,6 +1221,7 @@ const shard: CardShard = {
     _poolRavingVisionary,
     _poolRazorfootGriffin,
     _poolRecklessHandling,
+    _poolRecklessWurm,
     _poolReclaim,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
@@ -1407,6 +1410,7 @@ const shard: CardShard = {
     _poolWakerootElemental,
     _poolWallOfEssence,
     _poolWanderingMind,
+    _poolWaningWurm,
     _poolWarMammoth,
     _poolWasteland,
     _poolWaterspoutDjinn,

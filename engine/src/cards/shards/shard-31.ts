@@ -377,6 +377,7 @@ import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKalonianTwingrove from "../pool/kalonian-twingrove.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
+import _poolKavuPredator from "../pool/kavu-predator.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
 import _poolKazanduStomper from "../pool/kazandu-stomper.js";
 import _poolKellansLightblades from "../pool/kellans-lightblades.js";
@@ -423,6 +424,7 @@ import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
+import _poolMagusOfTheTabernacle from "../pool/magus-of-the-tabernacle.js";
 import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
 import _poolManabond from "../pool/manabond.js";
@@ -491,6 +493,7 @@ import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverbeingOfMyth from "../pool/overbeing-of-myth.js";
 import _poolOverkill from "../pool/overkill.js";
+import _poolOvinize from "../pool/ovinize.js";
 import _poolPacifism from "../pool/pacifism.js";
 import _poolPaladinsShield from "../pool/paladins-shield.js";
 import _poolPaleoloth from "../pool/paleoloth.js";
@@ -589,6 +592,7 @@ import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
 import _poolShipwreckMoray from "../pool/shipwreck-moray.js";
 import _poolShireScarecrow from "../pool/shire-scarecrow.js";
 import _poolShivanHarvest from "../pool/shivan-harvest.js";
+import _poolShivanWumpus from "../pool/shivan-wumpus.js";
 import _poolShurisFabricator from "../pool/shuris-fabricator.js";
 import _poolSicarianInfiltrator from "../pool/sicarian-infiltrator.js";
 import _poolSidisisFaithful from "../pool/sidisis-faithful.js";
@@ -1160,6 +1164,7 @@ const shard: CardShard = {
     _poolKalonianTwingrove,
     _poolKarplusanForest,
     _poolKathariScreecher,
+    _poolKavuPredator,
     _poolKazanduRefuge,
     _poolKazanduStomper,
     _poolKellansLightblades,
@@ -1206,6 +1211,7 @@ const shard: CardShard = {
     _poolLudevicNecroAlchemist,
     _poolMageDuel,
     _poolMagmaquake,
+    _poolMagusOfTheTabernacle,
     _poolMalcolmTheEyes,
     _poolMalevolentRumble,
     _poolManabond,
@@ -1274,6 +1280,7 @@ const shard: CardShard = {
     _poolOrochiSustainer,
     _poolOverbeingOfMyth,
     _poolOverkill,
+    _poolOvinize,
     _poolPacifism,
     _poolPaladinsShield,
     _poolPaleoloth,
@@ -1372,6 +1379,7 @@ const shard: CardShard = {
     _poolShipwreckMoray,
     _poolShireScarecrow,
     _poolShivanHarvest,
+    _poolShivanWumpus,
     _poolShurisFabricator,
     _poolSicarianInfiltrator,
     _poolSidisisFaithful,

@@ -52,6 +52,7 @@ import _poolBitterRevelation from "../pool/bitter-revelation.js";
 import _poolBlackSunsZenith from "../pool/black-suns-zenith.js";
 import _poolBlackWaltzNo3 from "../pool/black-waltz-no-3.js";
 import _poolBlightSickle from "../pool/blight-sickle.js";
+import _poolBlightspeaker from "../pool/blightspeaker.js";
 import _poolBlistergrub from "../pool/blistergrub.js";
 import _poolBloatedToad from "../pool/bloated-toad.js";
 import _poolBloodRites from "../pool/blood-rites.js";
@@ -158,6 +159,7 @@ import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
+import _poolDustElemental from "../pool/dust-elemental.js";
 import _poolDystopia from "../pool/dystopia.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
@@ -402,6 +404,7 @@ import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
 import _poolNobilisOfWar from "../pool/nobilis-of-war.js";
 import _poolNotionThief from "../pool/notion-thief.js";
 import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
+import _poolNumotTheDevastator from "../pool/numot-the-devastator.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
@@ -577,6 +580,7 @@ import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStartle from "../pool/startle.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
+import _poolStingscourger from "../pool/stingscourger.js";
 import _poolStitchedDrake from "../pool/stitched-drake.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
@@ -777,6 +781,7 @@ const shard: CardShard = {
     _poolBlackSunsZenith,
     _poolBlackWaltzNo3,
     _poolBlightSickle,
+    _poolBlightspeaker,
     _poolBlistergrub,
     _poolBloatedToad,
     _poolBloodRites,
@@ -883,6 +888,7 @@ const shard: CardShard = {
     _poolDrownedDiner,
     _poolDrySpell,
     _poolDungeonShade,
+    _poolDustElemental,
     _poolDystopia,
     _poolEarthRumble,
     _poolEasternPaladin,
@@ -1127,6 +1133,7 @@ const shard: CardShard = {
     _poolNobilisOfWar,
     _poolNotionThief,
     _poolNovijenHeartOfProgress,
+    _poolNumotTheDevastator,
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,
@@ -1302,6 +1309,7 @@ const shard: CardShard = {
     _poolStartle,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
+    _poolStingscourger,
     _poolStitchedDrake,
     _poolStokeGenius,
     _poolStonehands,

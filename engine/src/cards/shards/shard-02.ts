@@ -146,6 +146,7 @@ import _poolDauntlessAven from "../pool/dauntless-aven.js";
 import _poolDauntlessEscort from "../pool/dauntless-escort.js";
 import _poolDauthiMindripper from "../pool/dauthi-mindripper.js";
 import _poolDaybreakChaplain from "../pool/daybreak-chaplain.js";
+import _poolDeadGone from "../pool/dead-gone.js";
 import _poolDeadlyComplication from "../pool/deadly-complication.js";
 import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
@@ -373,6 +374,7 @@ import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
 import _poolManorGargoyle from "../pool/manor-gargoyle.js";
+import _poolMantleOfLeadership from "../pool/mantle-of-leadership.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMarshCasualties from "../pool/marsh-casualties.js";
 import _poolMarshFlitter from "../pool/marsh-flitter.js";
@@ -642,9 +644,11 @@ import _poolTriumphOfFerocity from "../pool/triumph-of-ferocity.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
 import _poolTruce from "../pool/truce.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
+import _poolTumble from "../pool/tumble.js";
 import _poolTwinBlades from "../pool/twin-blades.js";
 import _poolTwinBolt from "../pool/twin-bolt.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
+import _poolUktabiDrake from "../pool/uktabi-drake.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
@@ -859,6 +863,7 @@ const shard: CardShard = {
     _poolDauntlessEscort,
     _poolDauthiMindripper,
     _poolDaybreakChaplain,
+    _poolDeadGone,
     _poolDeadlyComplication,
     _poolDeathforgeShaman,
     _poolDeathleaperTerrorWeapon,
@@ -1086,6 +1091,7 @@ const shard: CardShard = {
     _poolMagdaTheHoardmaster,
     _poolMalevolentWitchkite,
     _poolManorGargoyle,
+    _poolMantleOfLeadership,
     _poolMarangRiverSkeleton,
     _poolMarshCasualties,
     _poolMarshFlitter,
@@ -1355,9 +1361,11 @@ const shard: CardShard = {
     _poolTropicalIsland,
     _poolTruce,
     _poolTrystanCallousCultivator,
+    _poolTumble,
     _poolTwinBlades,
     _poolTwinBolt,
     _poolTyLeeArtfulAcrobat,
+    _poolUktabiDrake,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
     _poolUndercityScavenger,

@@ -320,6 +320,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Insect Token (Canoptek Scarab Swarm)",
   "Insect Token (Flying, Deathtouch)",
   "Insect Token (Flying, Haste)",
+  "Insect Token (Green, 6/1, Shroud)",
   "Insect Token (Infestation Sage)",
   "Insect Token (Nest of Scarabs)",
   "Insect Token (Overlord of the Mistmoors)",

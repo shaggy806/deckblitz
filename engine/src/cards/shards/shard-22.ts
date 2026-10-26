@@ -477,6 +477,7 @@ import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolRecklessRacer from "../pool/reckless-racer.js";
 import _poolReclusiveWight from "../pool/reclusive-wight.js";
 import _poolReduceInStature from "../pool/reduce-in-stature.js";
+import _poolReflexSliver from "../pool/reflex-sliver.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolRecklessRacer,
     _poolReclusiveWight,
     _poolReduceInStature,
+    _poolReflexSliver,
     _poolRegeneration,
     _poolReinforcedRonin,
     _poolRelearn,

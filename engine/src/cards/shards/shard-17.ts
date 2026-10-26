@@ -554,6 +554,7 @@ import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSilklashSpider from "../pool/silklash-spider.js";
 import _poolSinisterConcoction from "../pool/sinister-concoction.js";
 import _poolSkaabRuinator from "../pool/skaab-ruinator.js";
+import _poolSkirkShaman from "../pool/skirk-shaman.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
@@ -562,6 +563,7 @@ import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
+import _poolSophicCentaur from "../pool/sophic-centaur.js";
 import _poolSoulBarrier from "../pool/soul-barrier.js";
 import _poolSoulOfTheHarvest from "../pool/soul-of-the-harvest.js";
 import _poolSoulTransfer from "../pool/soul-transfer.js";
@@ -1296,6 +1298,7 @@ const shard: CardShard = {
     _poolSilklashSpider,
     _poolSinisterConcoction,
     _poolSkaabRuinator,
+    _poolSkirkShaman,
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,
@@ -1304,6 +1307,7 @@ const shard: CardShard = {
     _poolSoaringSandwing,
     _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
+    _poolSophicCentaur,
     _poolSoulBarrier,
     _poolSoulOfTheHarvest,
     _poolSoulTransfer,

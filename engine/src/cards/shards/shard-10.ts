@@ -84,6 +84,8 @@ import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
 import _poolBondsOfFaith from "../pool/bonds-of-faith.js";
 import _poolBoneHarvest from "../pool/bone-harvest.js";
 import _poolBonecladNecromancer from "../pool/boneclad-necromancer.js";
+import _poolBoomBust from "../pool/boom-bust.js";
+import _poolBoom from "../pool/boom.js";
 import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
 import _poolBorosGuildgate from "../pool/boros-guildgate.js";
@@ -147,6 +149,7 @@ import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
+import _poolDashHopes from "../pool/dash-hopes.js";
 import _poolDauntlessRiverMarshal from "../pool/dauntless-river-marshal.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
@@ -823,6 +826,8 @@ const shard: CardShard = {
     _poolBondsOfFaith,
     _poolBoneHarvest,
     _poolBonecladNecromancer,
+    _poolBoomBust,
+    _poolBoom,
     _poolBoompile,
     _poolBorealDruid,
     _poolBorosGuildgate,
@@ -886,6 +891,7 @@ const shard: CardShard = {
     _poolDanithaSwordOfHope,
     _poolDarkness,
     _poolDarksteelSplicer,
+    _poolDashHopes,
     _poolDauntlessRiverMarshal,
     _poolDavrielsShadowfugue,
     _poolDaybreakCharger,

@@ -151,6 +151,7 @@ import _poolDawnhandEulogist from "../pool/dawnhand-eulogist.js";
 import _poolDawnstrikePaladin from "../pool/dawnstrike-paladin.js";
 import _poolDaybreakCombatants from "../pool/daybreak-combatants.js";
 import _poolDeadeyeDuelist from "../pool/deadeye-duelist.js";
+import _poolDeadlyGrub from "../pool/deadly-grub.js";
 import _poolDeathWatch from "../pool/death-watch.js";
 import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
@@ -291,6 +292,7 @@ import _poolGoldnightCastigator from "../pool/goldnight-castigator.js";
 import _poolGoldspanDragon from "../pool/goldspan-dragon.js";
 import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGoneMissing from "../pool/gone-missing.js";
+import _poolGone from "../pool/gone.js";
 import _poolGracefulCat from "../pool/graceful-cat.js";
 import _poolGracefulReprieve from "../pool/graceful-reprieve.js";
 import _poolGracefulRestoration from "../pool/graceful-restoration.js";
@@ -534,6 +536,7 @@ import _poolRoilElemental from "../pool/roil-elemental.js";
 import _poolRonomHulk from "../pool/ronom-hulk.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRottingRats from "../pool/rotting-rats.js";
+import _poolRough from "../pool/rough.js";
 import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
@@ -558,6 +561,7 @@ import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScreamsFromWithin from "../pool/screams-from-within.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
 import _poolScytheTiger from "../pool/scythe-tiger.js";
+import _poolSerendibSorcerer from "../pool/serendib-sorcerer.js";
 import _poolSerpentOfYawningDepths from "../pool/serpent-of-yawning-depths.js";
 import _poolServantOfTheScale from "../pool/servant-of-the-scale.js";
 import _poolShapeTheSands from "../pool/shape-the-sands.js";
@@ -688,6 +692,7 @@ import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
 import _poolViolentUltimatum from "../pool/violent-ultimatum.js";
+import _poolVitasporeThallid from "../pool/vitaspore-thallid.js";
 import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
 import _poolVoidGrafter from "../pool/void-grafter.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
@@ -893,6 +898,7 @@ const shard: CardShard = {
     _poolDawnstrikePaladin,
     _poolDaybreakCombatants,
     _poolDeadeyeDuelist,
+    _poolDeadlyGrub,
     _poolDeathWatch,
     _poolDeathbloomThallid,
     _poolDeathcapCultivator,
@@ -1033,6 +1039,7 @@ const shard: CardShard = {
     _poolGoldspanDragon,
     _poolGolosTirelessPilgrim,
     _poolGoneMissing,
+    _poolGone,
     _poolGracefulCat,
     _poolGracefulReprieve,
     _poolGracefulRestoration,
@@ -1276,6 +1283,7 @@ const shard: CardShard = {
     _poolRonomHulk,
     _poolRooftopSaboteurs,
     _poolRottingRats,
+    _poolRough,
     _poolRoyalHerbalist,
     _poolRuinousGremlin,
     _poolRunawayCarriage,
@@ -1300,6 +1308,7 @@ const shard: CardShard = {
     _poolScreamsFromWithin,
     _poolScurryOfSquirrels,
     _poolScytheTiger,
+    _poolSerendibSorcerer,
     _poolSerpentOfYawningDepths,
     _poolServantOfTheScale,
     _poolShapeTheSands,
@@ -1430,6 +1439,7 @@ const shard: CardShard = {
     _poolVillageBellRinger,
     _poolVinereapMentor,
     _poolViolentUltimatum,
+    _poolVitasporeThallid,
     _poolVnwxtVerboseHost,
     _poolVoidGrafter,
     _poolVoldarenEstate,
