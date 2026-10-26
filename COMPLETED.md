@@ -86,12 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
-<<<<<<< HEAD
 - **Future Sight, whole** (batch 195, the middle walk's second range, 2026-10-26): no feature
-  built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below, Narcomoeba, Storm Entity,
-  Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67 more — and 45 blocked
-  (`B195.json`), fateseal and targets in exile leading with two each.
-=======
+  built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below,
+  Narcomoeba, Storm Entity, Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67
+  more — and 45 blocked (`B195.json`), fateseal and targets in exile leading with two each.
 - **"Look at target player's hand", and the rest of Urza's Saga — Urza's Saga is whole** (batch
   198, the oldest-first walk, 2026-10-26, `effect:look-at-target-player-hand`): **built** the
   `look-at-hand` effect (the hand shown to its looker alone, a `choose-from-zone` with nothing to
@@ -101,7 +99,6 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Midsummer Revel, Torch Song, the Runes of Protection and the Hidden, Opal and Veiled enchantments
   among them — and 24 blocked (`B198.json`), "up to X targets" (`decision:x-targets`) and "becomes
   an enchantment" (`effect:set-types-temporary`) leading with three each.
->>>>>>> origin/main
 - **The rest of Lorwyn — Lorwyn is whole** (batch 192, the middle walk's second range, 2026-10-26):
   **built** a "whenever you clash" trigger (rule 701.30, `trigger:clash` — each clashing player
   clashes, a `clashed` event apiece once the cards have moved, whoever started it; `won: true` for

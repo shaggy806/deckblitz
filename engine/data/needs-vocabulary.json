@@ -11149,7 +11149,6 @@
    "family": "static:block-additional-creature",
    "example": "Lairwatch Giant: whenever this blocks two or more creatures, it gains first strike until end of turn"
   },
-<<<<<<< HEAD
   "cost:remove-counter-from-other-permanent-or-suspended-card": {
    "family": "cost:remove-counters-from-chosen",
    "example": "Rift Elemental: remove a time counter from a permanent you control or a suspended card you own"
@@ -11237,7 +11236,7 @@
   "cost:morph-discard-card": {
    "family": "cost:morph-reveal-card",
    "example": "Gathan Raiders: Morph—Discard a card"
-=======
+  },
   "duration:until-a-player-casts-creature-spell": {
    "family": "effect:set-types-temporary",
    "example": "Soul Sculptor: target creature becomes an enchantment and loses all abilities until a player casts a creature spell"
@@ -11261,7 +11260,6 @@
   "effect:look-at-hand-of-target-spell-controller": {
    "family": "effect:look-at-target-player-hand",
    "example": "Lay Bare: counter target spell, then look at its controller's hand"
->>>>>>> origin/main
   }
  }
 }
