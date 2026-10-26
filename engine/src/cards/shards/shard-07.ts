@@ -375,6 +375,7 @@ import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
+import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
@@ -1079,6 +1080,7 @@ const shard: CardShard = {
     _poolMultaniYavimayasAvatar,
     _poolMummyParamount,
     _poolMurderousRider,
+    _poolMysticSpeculation,
     _poolNaturalState,
     _poolNecroticHex,
     _poolNestOfScarabs,

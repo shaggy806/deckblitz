@@ -2178,6 +2178,9 @@ export function parseFace(face, ctx = {}) {
     // Entwine [cost] (rule 702.42a): a kicker that chooses every mode — the
     // modal spell's `kickedModes`, set once its modes are read.
     if (isSpell && (m = /^Entwine ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "entwine" }; continue; }
+    // Buyback [cost] (rule 702.27a): a kicker whose cast goes back to its
+    // owner's hand as it resolves. A mana cost only.
+    if (isSpell && (m = /^Buyback ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "buyback" }; continue; }
     if (out.kicker?.keyword === "bargain" && (m = /^~ costs \{(\d+)\} less to cast if it's bargained\.$/.exec(line))) {
       out.kicker = { ...out.kicker, reduceGeneric: Number(m[1]) };
       continue;

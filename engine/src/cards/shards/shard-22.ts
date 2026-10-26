@@ -148,6 +148,7 @@ import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
 import _poolDisplace from "../pool/displace.js";
 import _poolDistantMelody from "../pool/distant-melody.js";
+import _poolDisturbedBurial from "../pool/disturbed-burial.js";
 import _poolDjinniWindseer from "../pool/djinni-windseer.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
@@ -165,6 +166,7 @@ import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
 import _poolEject from "../pool/eject.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
+import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
@@ -828,6 +830,7 @@ const shard: CardShard = {
     _poolDispellersCapsule,
     _poolDisplace,
     _poolDistantMelody,
+    _poolDisturbedBurial,
     _poolDjinniWindseer,
     _poolDoomBlade,
     _poolDraconauticsEngineer,
@@ -845,6 +848,7 @@ const shard: CardShard = {
     _poolEaterOfTheDead,
     _poolEject,
     _poolElementalMasterpiece,
+    _poolElvishFury,
     _poolEmeriaShatteredSkyclave,
     _poolEmielTheBlessed,
     _poolEndTheFestivities,

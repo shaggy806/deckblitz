@@ -489,6 +489,7 @@ import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
 import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
+import _poolSearingTouch from "../pool/searing-touch.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
 import _poolSeismicMonstrosaur from "../pool/seismic-monstrosaur.js";
@@ -1163,6 +1164,7 @@ const shard: CardShard = {
     _poolScourgeWolf,
     _poolScrollOfTheMasters,
     _poolScythecatCub,
+    _poolSearingTouch,
     _poolSeasonedWarrenguard,
     _poolSeekerOfSkybreak,
     _poolSeismicMonstrosaur,

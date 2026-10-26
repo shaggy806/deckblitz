@@ -17443,7 +17443,8 @@ export class Game {
     if (
       mark !== undefined &&
       object.owner === mark.player &&
-      (adventure || (!def.shuffleIntoLibraryOnResolve && !def.exileOnResolve))
+      (adventure || (!def.shuffleIntoLibraryOnResolve && !def.exileOnResolve)) &&
+      !this.boughtBack(object)
     ) {
       const competing =
         adventure ||
@@ -17492,6 +17493,10 @@ export class Game {
         this.shuffleLibraryOf(object.owner);
       } else if (this.rebounds(object)) {
         this.reboundAsItResolves(id);
+      } else if (this.boughtBack(object)) {
+        // Buyback (rule 702.27a): into its owner's hand as it resolves. Cast
+        // with flashback too, it's exiled instead (`moveObject`, 702.34a).
+        this.moveObject(id, "hand");
       } else {
         this.moveObject(id, def.exileOnResolve ? "exile" : "graveyard");
       }
@@ -17524,6 +17529,16 @@ export class Game {
       "Return it to your hand at the beginning of the next end step.",
       [{ kind: "object", object: id }],
       ["exile"],
+    );
+  }
+
+  /** Whether the resolving spell `object` had its buyback cost paid (rule
+   * 702.27a) — the kicked cast of a card whose kicker is buyback. */
+  private boughtBack(object: GameObject): boolean {
+    return (
+      object.isCopy !== true &&
+      object.kicked === true &&
+      this.registry.get(printedCardName(object)).kicker?.keyword === "buyback"
     );
   }
 

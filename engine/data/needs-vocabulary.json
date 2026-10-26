@@ -3365,6 +3365,10 @@
   "keyword:buyback": {
    "example": "Constant Mists: Buyback — sacrifice a land."
   },
+  "cost:buyback-non-mana": {
+   "family": "keyword:buyback",
+   "example": "Forbid: \"Buyback—Discard two cards\" — buyback (a kicker keyword) takes a mana cost only; Constant Mists' and Walk the Aeons' sacrifices too."
+  },
   "keyword:channel": {
    "example": "Shigeki, Jukai Visionary: Returning itself to hand as a cost, and channel."
   },

@@ -556,6 +556,7 @@ import _poolSplitUp from "../pool/split-up.js";
 import _poolSpoilsOfAdventure from "../pool/spoils-of-adventure.js";
 import _poolSporeBurst from "../pool/spore-burst.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
+import _poolSproutSwarm from "../pool/sprout-swarm.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
@@ -1248,6 +1249,7 @@ const shard: CardShard = {
     _poolSpoilsOfAdventure,
     _poolSporeBurst,
     _poolSporeFrog,
+    _poolSproutSwarm,
     _poolStarWhale,
     _poolSteelburrChampion,
     _poolStickyFingers,

@@ -260,6 +260,7 @@ import _poolHapatrasMark from "../pool/hapatras-mark.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHasranOgress from "../pool/hasran-ogress.js";
 import _poolHatred from "../pool/hatred.js";
+import _poolHazeOfRage from "../pool/haze-of-rage.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeartfireHero from "../pool/heartfire-hero.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolHashepOasis,
     _poolHasranOgress,
     _poolHatred,
+    _poolHazeOfRage,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
     _poolHeartfireHero,

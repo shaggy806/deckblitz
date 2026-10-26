@@ -1550,6 +1550,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.complete).toBe(true);
   });
 
+  it("buyback (rule 702.27): a kicker whose cast returns to its owner's hand", () => {
+    const spell = face(
+      "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nDraw a card.",
+      "Instant",
+    );
+    expect(spell.kicker).toEqual({ cost: "{3}", keyword: "buyback" });
+    expect(spell.complete).toBe(true);
+  });
+
   it("madness (rule 702.35): the keyword line's cost, a mana cost only", () => {
     const imp = face(
       "Flying, haste\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)",

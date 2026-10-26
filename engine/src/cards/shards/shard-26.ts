@@ -97,6 +97,7 @@ import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCallousSellSword from "../pool/callous-sell-sword.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
+import _poolCapsize from "../pool/capsize.js";
 import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
 import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
@@ -768,6 +769,7 @@ const shard: CardShard = {
     _poolCallousSellSword,
     _poolCampusComposer,
     _poolCanyonJerboa,
+    _poolCapsize,
     _poolCarnageInterpreter,
     _poolCarrionCruiser,
     _poolCaseyJonesJuryRigJusticiar,

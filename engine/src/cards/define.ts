@@ -2473,8 +2473,14 @@ export interface CardDefinition {
      * its tokens. "If this spell was bargained" is the spell being kicked —
      * `targets` / `effect` (its targets chosen only then, 702.166d) — and
      * "if it was bargained" on a permanent is `self-kicked`.
+     *
+     * `"buyback"` (rule 702.27a) is "you may pay an additional [cost] as you
+     * cast this spell. If you do, put this card into your hand as it
+     * resolves": the kicked variant pays it, and the spell goes to its
+     * owner's hand instead of the graveyard as it resolves — not when it's
+     * countered or fizzles (it doesn't resolve). A mana cost only.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -3418,7 +3424,7 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly flash?: boolean;

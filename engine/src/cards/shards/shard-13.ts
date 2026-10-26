@@ -662,6 +662,7 @@ import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
+import _poolWorthyCause from "../pool/worthy-cause.js";
 import _poolYaroksFenlurker from "../pool/yaroks-fenlurker.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZenithFlare from "../pool/zenith-flare.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolWinotaJoinerOfForces,
     _poolWizardsRockets,
     _poolWoodlandPatrol,
+    _poolWorthyCause,
     _poolYaroksFenlurker,
     _poolYouSeeAPairOfGoblins,
     _poolZenithFlare,

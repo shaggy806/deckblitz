@@ -466,6 +466,7 @@ import _poolRebuke from "../pool/rebuke.js";
 import _poolRecklessCharge from "../pool/reckless-charge.js";
 import _poolRecklessFireweaver from "../pool/reckless-fireweaver.js";
 import _poolRecklessScholar from "../pool/reckless-scholar.js";
+import _poolRecruitTheWorthy from "../pool/recruit-the-worthy.js";
 import _poolReigningVictor from "../pool/reigning-victor.js";
 import _poolRekindlingPhoenix from "../pool/rekindling-phoenix.js";
 import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolRecklessCharge,
     _poolRecklessFireweaver,
     _poolRecklessScholar,
+    _poolRecruitTheWorthy,
     _poolReigningVictor,
     _poolRekindlingPhoenix,
     _poolRenariMerchantOfMarvels,
