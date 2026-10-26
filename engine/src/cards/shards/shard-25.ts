@@ -307,6 +307,7 @@ import _poolInfernoElemental from "../pool/inferno-elemental.js";
 import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
+import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
@@ -1018,6 +1019,7 @@ const shard: CardShard = {
     _poolIngenuityEngine,
     _poolInkwellLeviathan,
     _poolInnerDemonsGangsters,
+    _poolInnerFire,
     _poolInspiringPaladin,
     _poolJacesTriumph,
     _poolJaggedLightning,

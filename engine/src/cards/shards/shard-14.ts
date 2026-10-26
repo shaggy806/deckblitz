@@ -336,11 +336,13 @@ import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolHumble from "../pool/humble.js";
+import _poolIdeasUnbound from "../pool/ideas-unbound.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
 import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolIncendiaryCommand from "../pool/incendiary-command.js";
+import _poolInnerCalmOuterStrength from "../pool/inner-calm-outer-strength.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
 import _poolInsidiousWill from "../pool/insidious-will.js";
@@ -371,6 +373,7 @@ import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
+import _poolKitsuneDawnblade from "../pool/kitsune-dawnblade.js";
 import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
@@ -1071,11 +1074,13 @@ const shard: CardShard = {
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolHumble,
+    _poolIdeasUnbound,
     _poolIdolOfTheDeepKing,
     _poolIllunaApexOfWishes,
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolIncendiaryCommand,
+    _poolInnerCalmOuterStrength,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
     _poolInsidiousWill,
@@ -1106,6 +1111,7 @@ const shard: CardShard = {
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
     _poolKindlyStranger,
+    _poolKitsuneDawnblade,
     _poolKjeldoranJavelineer,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,

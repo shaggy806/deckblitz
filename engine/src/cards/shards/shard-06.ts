@@ -283,6 +283,7 @@ import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
+import _poolHailOfArrows from "../pool/hail-of-arrows.js";
 import _poolHalimarExcavator from "../pool/halimar-excavator.js";
 import _poolHarshJustice from "../pool/harsh-justice.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
@@ -329,6 +330,7 @@ import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
+import _poolKagemaroFirstToSuffer from "../pool/kagemaro-first-to-suffer.js";
 import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
 import _poolKapshoKitefins from "../pool/kapsho-kitefins.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
@@ -337,6 +339,7 @@ import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
 import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
+import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
@@ -1004,6 +1007,7 @@ const shard: CardShard = {
     _poolGuidelightOptimizer,
     _poolGutturalResponse,
     _poolGuulDrazAssassin,
+    _poolHailOfArrows,
     _poolHalimarExcavator,
     _poolHarshJustice,
     _poolHeroInTraining,
@@ -1050,6 +1054,7 @@ const shard: CardShard = {
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
     _poolJusticeVanceAstrovik,
+    _poolKagemaroFirstToSuffer,
     _poolKamiOfTerribleSecrets,
     _poolKapshoKitefins,
     _poolKeiTakahashi,
@@ -1058,6 +1063,7 @@ const shard: CardShard = {
     _poolKingDarienXlviii,
     _poolKinsbaileBorderguard,
     _poolKinscaerHarpoonist,
+    _poolKitsuneLoreweaver,
     _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,

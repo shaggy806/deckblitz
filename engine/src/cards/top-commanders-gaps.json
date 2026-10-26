@@ -457,6 +457,7 @@
   "trigger:clash",
   "keyword:echo",
   "keyword:ripple",
+  "keyword:epic",
   "effect:look-at-target-player-hand"
  ],
  "features": {

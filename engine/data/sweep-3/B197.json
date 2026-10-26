@@ -1,0 +1,712 @@
+{
+ "batch": "B197",
+ "status": "complete",
+ "ranks": "Saviors of Kamigawa (SOK, 2005-06-03): its 100 most-played cards left, of 134 (third middle walk); built epic (rule 702.50: the epic effect, an emblem's upkeep copy and the rest-of-game cast prohibition) with Enduring Ideal and Endless Swarm, and the bushido() and soulshift() helpers the scaffolder now reads",
+ "authored": [
+  {
+   "name": "Inner Fire",
+   "files": [
+    "engine/src/cards/pool/inner-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kataki, War's Wage",
+   "files": [
+    "engine/src/cards/pool/kataki-wars-wage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ideas Unbound",
+   "files": [
+    "engine/src/cards/pool/ideas-unbound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seek the Horizon",
+   "files": [
+    "engine/src/cards/pool/seek-the-horizon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Death Denied",
+   "files": [
+    "engine/src/cards/pool/death-denied.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Promise of Bunrei",
+   "files": [
+    "engine/src/cards/pool/promise-of-bunrei.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Locust Miser",
+   "files": [
+    "engine/src/cards/pool/locust-miser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Footsteps of the Goryo",
+   "files": [
+    "engine/src/cards/pool/footsteps-of-the-goryo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nikko-Onna",
+   "files": [
+    "engine/src/cards/pool/nikko-onna.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shinen of Life's Roar",
+   "files": [
+    "engine/src/cards/pool/shinen-of-lifes-roar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enduring Ideal",
+   "files": [
+    "engine/src/cards/pool/enduring-ideal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seed the Land",
+   "files": [
+    "engine/src/cards/pool/seed-the-land.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inner Calm, Outer Strength",
+   "files": [
+    "engine/src/cards/pool/inner-calm-outer-strength.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aether Shockwave",
+   "files": [
+    "engine/src/cards/pool/aether-shockwave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "One with Nothing",
+   "files": [
+    "engine/src/cards/pool/one-with-nothing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Overwhelming Intellect",
+   "files": [
+    "engine/src/cards/pool/overwhelming-intellect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rending Vines",
+   "files": [
+    "engine/src/cards/pool/rending-vines.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kagemaro, First to Suffer",
+   "files": [
+    "engine/src/cards/pool/kagemaro-first-to-suffer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Pine of Jukai",
+   "files": [
+    "engine/src/cards/pool/elder-pine-of-jukai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sekki, Seasons' Guide",
+   "files": [
+    "engine/src/cards/pool/sekki-seasons-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hand of Honor",
+   "files": [
+    "engine/src/cards/pool/hand-of-honor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oboro Envoy",
+   "files": [
+    "engine/src/cards/pool/oboro-envoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endless Swarm",
+   "files": [
+    "engine/src/cards/pool/endless-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arashi, the Sky Asunder",
+   "files": [
+    "engine/src/cards/pool/arashi-the-sky-asunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soramaro, First to Dream",
+   "files": [
+    "engine/src/cards/pool/soramaro-first-to-dream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bounteous Kirin",
+   "files": [
+    "engine/src/cards/pool/bounteous-kirin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haru-Onna",
+   "files": [
+    "engine/src/cards/pool/haru-onna.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Araba Mothrider",
+   "files": [
+    "engine/src/cards/pool/araba-mothrider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Maga, Traitor to Mortals",
+   "files": [
+    "engine/src/cards/pool/maga-traitor-to-mortals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaze of Adamaro",
+   "files": [
+    "engine/src/cards/pool/gaze-of-adamaro.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spiraling Embers",
+   "files": [
+    "engine/src/cards/pool/spiraling-embers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skull Collector",
+   "files": [
+    "engine/src/cards/pool/skull-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trusted Advisor",
+   "files": [
+    "engine/src/cards/pool/trusted-advisor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kuro's Taken",
+   "files": [
+    "engine/src/cards/pool/kuros-taken.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kiyomaro, First to Stand",
+   "files": [
+    "engine/src/cards/pool/kiyomaro-first-to-stand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inner-Chamber Guard",
+   "files": [
+    "engine/src/cards/pool/inner-chamber-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hand of Cruelty",
+   "files": [
+    "engine/src/cards/pool/hand-of-cruelty.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Iizuka the Ruthless",
+   "files": [
+    "engine/src/cards/pool/iizuka-the-ruthless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Kirin",
+   "files": [
+    "engine/src/cards/pool/celestial-kirin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yuki-Onna",
+   "files": [
+    "engine/src/cards/pool/yuki-onna.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kitsune Dawnblade",
+   "files": [
+    "engine/src/cards/pool/kitsune-dawnblade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Molting Skin",
+   "files": [
+    "engine/src/cards/pool/molting-skin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kiri-Onna",
+   "files": [
+    "engine/src/cards/pool/kiri-onna.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyfire Kirin",
+   "files": [
+    "engine/src/cards/pool/skyfire-kirin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iname as One",
+   "files": [
+    "engine/src/cards/pool/iname-as-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Briarknit Kami",
+   "files": [
+    "engine/src/cards/pool/briarknit-kami.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrel Down Sokenzan",
+   "files": [
+    "engine/src/cards/pool/barrel-down-sokenzan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dense Canopy",
+   "files": [
+    "engine/src/cards/pool/dense-canopy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wine of Blood and Iron",
+   "files": [
+    "engine/src/cards/pool/wine-of-blood-and-iron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Descendant of Soramaro",
+   "files": [
+    "engine/src/cards/pool/descendant-of-soramaro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hail of Arrows",
+   "files": [
+    "engine/src/cards/pool/hail-of-arrows.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Promised Kannushi",
+   "files": [
+    "engine/src/cards/pool/promised-kannushi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudhoof Kirin",
+   "files": [
+    "engine/src/cards/pool/cloudhoof-kirin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oppressive Will",
+   "files": [
+    "engine/src/cards/pool/oppressive-will.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oni of Wild Places",
+   "files": [
+    "engine/src/cards/pool/oni-of-wild-places.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ivory Crane Netsuke",
+   "files": [
+    "engine/src/cards/pool/ivory-crane-netsuke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Manriki-Gusari",
+   "files": [
+    "engine/src/cards/pool/manriki-gusari.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kiku's Shadow",
+   "files": [
+    "engine/src/cards/pool/kikus-shadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jiwari, the Earth Aflame",
+   "files": [
+    "engine/src/cards/pool/jiwari-the-earth-aflame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charge Across the Araba",
+   "files": [
+    "engine/src/cards/pool/charge-across-the-araba.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stampeding Serow",
+   "files": [
+    "engine/src/cards/pool/stampeding-serow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dreamcatcher",
+   "files": [
+    "engine/src/cards/pool/dreamcatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Measure of Wickedness",
+   "files": [
+    "engine/src/cards/pool/measure-of-wickedness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shape Stealer",
+   "files": [
+    "engine/src/cards/pool/shape-stealer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kami of Empty Graves",
+   "files": [
+    "engine/src/cards/pool/kami-of-empty-graves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kemuri-Onna",
+   "files": [
+    "engine/src/cards/pool/kemuri-onna.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitsune Loreweaver",
+   "files": [
+    "engine/src/cards/pool/kitsune-loreweaver.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Choice of Damnations",
+   "needs": [
+    "decision:choose-number",
+    "effect:sacrifice-all-but-dynamic"
+   ],
+   "why": "target opponent chooses a number; sacrifice all but that many"
+  },
+  {
+   "name": "Ebony Owl Netsuke",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "the hand-size condition can't read the active opponent's hand as an intervening if"
+  },
+  {
+   "name": "Pain's Reward",
+   "needs": [
+    "effect:life-bidding"
+   ],
+   "why": "no life-bidding"
+  },
+  {
+   "name": "Ashes of the Fallen",
+   "needs": [
+    "static:graveyard-cards-gain-chosen-type"
+   ],
+   "why": "statics affect only permanents, not graveyard cards"
+  },
+  {
+   "name": "Reverence",
+   "needs": [
+    "static:cant-attack-you-player-only"
+   ],
+   "why": "cantAttackController also covers your planeswalkers; the ruling says they can still be attacked"
+  },
+  {
+   "name": "Eternal Dominion",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search-library reads only the searcher's own library (epic is built)"
+  },
+  {
+   "name": "Blood Clock",
+   "needs": [
+    "effect:each-player-returns-own-permanent"
+   ],
+   "why": "the active player chooses a permanent of theirs to return unless they pay 2 life"
+  },
+  {
+   "name": "Infernal Kirin",
+   "needs": [
+    "effect:discard-all-matching"
+   ],
+   "why": "discard has no \"all cards matching a filter\" (here, the spell's mana value)"
+  },
+  {
+   "name": "Sasaya, Orochi Ascendant // Sasaya's Essence",
+   "needs": [
+    "mechanic:flip-cards"
+   ],
+   "why": "a Kamigawa flip card"
+  },
+  {
+   "name": "Hidetsugu's Second Rite",
+   "needs": [
+    "condition:target-player-life-total"
+   ],
+   "why": "life-total can't read a targeted player"
+  },
+  {
+   "name": "Tomb of Urami",
+   "needs": [
+    "cost:sacrifice-all-lands"
+   ],
+   "why": "a sacrifice cost can't be \"all lands you control\""
+  },
+  {
+   "name": "Thoughts of Ruin",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "the sacrifice effect's count is a fixed number, not \"a land for each card in your hand\""
+  },
+  {
+   "name": "Meishin, the Mind Cage",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "all creatures get -X/-0, X the cards in your hand"
+  },
+  {
+   "name": "Homura, Human Ascendant // Homura's Essence",
+   "needs": [
+    "mechanic:flip-cards"
+   ],
+   "why": "a Kamigawa flip card"
+  },
+  {
+   "name": "Kaho, Minamo Historian",
+   "needs": [
+    "effect:search-library-to-exile-linked"
+   ],
+   "why": "search-library can't exile the cards found, linked to the source, for the later cast"
+  },
+  {
+   "name": "Shifting Borders",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "Splice onto Arcane"
+  },
+  {
+   "name": "Kashi-Tribe Elite",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "the tap effect can't reach the creature that was dealt damage"
+  },
+  {
+   "name": "Adamaro, First to Desire",
+   "needs": [
+    "amount:most-cards-in-hand-among-players"
+   ],
+   "why": "no count of the largest opponent's hand"
+  },
+  {
+   "name": "Evermind",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "Splice onto Arcane (it has no mana cost: splice is all it does)"
+  },
+  {
+   "name": "Spiritual Visit",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "Splice onto Arcane"
+  },
+  {
+   "name": "Moonbow Illusionist",
+   "needs": [
+    "effect:become-basic-land-type",
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "a land becomes a basic land type chosen on resolution"
+  },
+  {
+   "name": "Masumaro, First to Live",
+   "needs": [
+    "bug:cda-count-multiplier"
+   ],
+   "why": "setBasePtFromCount can't say \"twice the number of cards in your hand\""
+  },
+  {
+   "name": "Murmurs from Beyond",
+   "needs": [
+    "decision:opponent-chooses-card"
+   ],
+   "why": "an opponent picks one of the cards revealed from your library"
+  },
+  {
+   "name": "Cowed by Wisdom",
+   "needs": [
+    "static:block-tax",
+    "cost:attack-tax-amount"
+   ],
+   "why": "no block tax, and attackTax is a fixed amount, not {1} per card in hand"
+  },
+  {
+   "name": "Curtain of Light",
+   "needs": [
+    "effect:becomes-blocked"
+   ],
+   "why": "no effect makes an unblocked attacker become blocked"
+  },
+  {
+   "name": "Ayumi, the Last Visitor",
+   "needs": [
+    "keyword:legendary-landwalk"
+   ],
+   "why": "no legendary landwalk"
+  },
+  {
+   "name": "Kuon, Ogre Ascendant // Kuon's Essence",
+   "needs": [
+    "mechanic:flip-cards"
+   ],
+   "why": "a Kamigawa flip card"
+  },
+  {
+   "name": "Into the Fray",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "Splice onto Arcane"
+  },
+  {
+   "name": "Neverending Torment",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search target player's library for X cards (epic is built)"
+  },
+  {
+   "name": "Akuta, Born of Ash",
+   "needs": [
+    "condition:more-cards-in-hand-than-each-opponent"
+   ],
+   "why": "no condition compares your hand size with each opponent's"
+  },
+  {
+   "name": "Undying Flames",
+   "needs": [
+    "effect:reveal-until-then-keeps-targets"
+   ],
+   "why": "reveal-until's then has only the card found as its target; the spell's any-target slot is out of reach (epic is built)"
+  },
+  {
+   "name": "Rally the Horde",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "\"exile three, repeat if the last wasn't a land\", counting nonland cards across the loops"
+  },
+  {
+   "name": "Death of a Thousand Stings",
+   "needs": [
+    "condition:more-cards-in-hand-than-each-opponent"
+   ],
+   "why": "no condition compares your hand size with each opponent's"
+  }
+ ]
+}

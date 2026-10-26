@@ -555,6 +555,7 @@ import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpikeHatcher from "../pool/spike-hatcher.js";
+import _poolSpiralingEmbers from "../pool/spiraling-embers.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpoilsOfBlood from "../pool/spoils-of-blood.js";
@@ -1292,6 +1293,7 @@ const shard: CardShard = {
     _poolSpideryGrasp,
     _poolSpikeFeeder,
     _poolSpikeHatcher,
+    _poolSpiralingEmbers,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
     _poolSpoilsOfBlood,

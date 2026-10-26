@@ -97,6 +97,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   cumulative upkeeps as a hybrid cost — by five `card-author` agents and the lead; 33 blocked
   (`B196.json`), cumulative upkeep's other costs (six) and the Martyrs' reveal cost (five)
   leading. Coldsnap is whole. `ripple-recover.test.ts`.
+- **Epic, and Saviors of Kamigawa's 100 most-played left** (batch 197, the third middle walk,
+  2026-10-26, `keyword:epic`): **built** epic (rule 702.50 — the `epic` effect, last in the
+  spell's sequence: its controller can't cast spells for the rest of the game,
+  `PlayerState.cantCastSpellsForGame`, and an emblem's upkeep trigger copies the spell as it
+  resolved, the copy marked `withoutEpic`), with Enduring Ideal and Endless Swarm; and the
+  `bushido(n)` and `soulshift(n)` helpers, read by the scaffolder for Champions and Betrayers. 67
+  authored — Sekki, Seasons' Guide, Kiyomaro, Iname as One, Skyfire Kirin, Measure of Wickedness,
+  Barrel Down Sokenzan (sweep) and 61 more — by five `card-author` agents and the lead; 33 blocked
+  (`B197.json`), splice onto Arcane leading with four. `keyword-epic.test.ts`.
 - **"Look at target player's hand", and the rest of Urza's Saga — Urza's Saga is whole** (batch
   198, the oldest-first walk, 2026-10-26, `effect:look-at-target-player-hand`): **built** the
   `look-at-hand` effect (the hand shown to its looker alone, a `choose-from-zone` with nothing to

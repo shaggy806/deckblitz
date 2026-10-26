@@ -268,6 +268,7 @@ import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
 import _poolHalfElfMonk from "../pool/half-elf-monk.js";
 import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
 import _poolHaloHopper from "../pool/halo-hopper.js";
+import _poolHandOfCruelty from "../pool/hand-of-cruelty.js";
 import _poolHandOfDeath from "../pool/hand-of-death.js";
 import _poolHandsOfBinding from "../pool/hands-of-binding.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
@@ -325,6 +326,7 @@ import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKindercatch from "../pool/kindercatch.js";
 import _poolKineticOoze from "../pool/kinetic-ooze.js";
 import _poolKingfisher from "../pool/kingfisher.js";
+import _poolKiriOnna from "../pool/kiri-onna.js";
 import _poolKnightOfTheTusk from "../pool/knight-of-the-tusk.js";
 import _poolKnightWatch from "../pool/knight-watch.js";
 import _poolKnightsPledge from "../pool/knights-pledge.js";
@@ -332,6 +334,7 @@ import _poolKorBlademaster from "../pool/kor-blademaster.js";
 import _poolKragmaWarcaller from "../pool/kragma-warcaller.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
+import _poolKurosTaken from "../pool/kuros-taken.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
@@ -1028,6 +1031,7 @@ const shard: CardShard = {
     _poolHalfElfMonk,
     _poolHaliyaAscendantCadet,
     _poolHaloHopper,
+    _poolHandOfCruelty,
     _poolHandOfDeath,
     _poolHandsOfBinding,
     _poolHapatraVizierOfPoisons,
@@ -1085,6 +1089,7 @@ const shard: CardShard = {
     _poolKindercatch,
     _poolKineticOoze,
     _poolKingfisher,
+    _poolKiriOnna,
     _poolKnightOfTheTusk,
     _poolKnightWatch,
     _poolKnightsPledge,
@@ -1092,6 +1097,7 @@ const shard: CardShard = {
     _poolKragmaWarcaller,
     _poolKrarkClanShaman,
     _poolKumenaTyrantOfOrazca,
+    _poolKurosTaken,
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
     _poolLagonnaBandTrailblazer,

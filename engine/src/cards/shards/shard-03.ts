@@ -55,6 +55,7 @@ import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBoskBanneret from "../pool/bosk-banneret.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
+import _poolBriarknitKami from "../pool/briarknit-kami.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
 import _poolBurstOfStrength from "../pool/burst-of-strength.js";
@@ -714,6 +715,7 @@ const shard: CardShard = {
     _poolBoskBanneret,
     _poolBovineIntervention,
     _poolBranchblightStalker,
+    _poolBriarknitKami,
     _poolBrotherhoodPatriarch,
     _poolBurnDownTheHouse,
     _poolBurstOfStrength,

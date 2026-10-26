@@ -34,6 +34,7 @@ import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js";
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
+import _poolArabaMothrider from "../pool/araba-mothrider.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
 import _poolArcanistsOwl from "../pool/arcanists-owl.js";
@@ -54,6 +55,7 @@ import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
 import _poolBallotBroker from "../pool/ballot-broker.js";
+import _poolBarrelDownSokenzan from "../pool/barrel-down-sokenzan.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
 import _poolBattleAtTheBridge from "../pool/battle-at-the-bridge.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
@@ -153,6 +155,7 @@ import _poolDaruHealer from "../pool/daru-healer.js";
 import _poolDawningAngel from "../pool/dawning-angel.js";
 import _poolDawnsTruce from "../pool/dawns-truce.js";
 import _poolDeadlyWanderings from "../pool/deadly-wanderings.js";
+import _poolDeathDenied from "../pool/death-denied.js";
 import _poolDeathbonnetSprout from "../pool/deathbonnet-sprout.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
@@ -368,6 +371,7 @@ import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMeasureOfWickedness from "../pool/measure-of-wickedness.js";
 import _poolMentalAgony from "../pool/mental-agony.js";
 import _poolMercurialPretender from "../pool/mercurial-pretender.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
@@ -784,6 +788,7 @@ const shard: CardShard = {
     _poolAniktheaHandOfErebos,
     _poolAnimPakalThousandthMoon,
     _poolAnnieJoinsUp,
+    _poolArabaMothrider,
     _poolArachnoid,
     _poolArbaazMir,
     _poolArcanistsOwl,
@@ -804,6 +809,7 @@ const shard: CardShard = {
     _poolAvishkarRaceway,
     _poolAxgardCavalry,
     _poolBallotBroker,
+    _poolBarrelDownSokenzan,
     _poolBartolomeDelPresidio,
     _poolBattleAtTheBridge,
     _poolBazaarOfBaghdad,
@@ -903,6 +909,7 @@ const shard: CardShard = {
     _poolDawningAngel,
     _poolDawnsTruce,
     _poolDeadlyWanderings,
+    _poolDeathDenied,
     _poolDeathbonnetSprout,
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
@@ -1118,6 +1125,7 @@ const shard: CardShard = {
     _poolMassAppeal,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMeasureOfWickedness,
     _poolMentalAgony,
     _poolMercurialPretender,
     _poolMeriaScholarOfAntiquity,

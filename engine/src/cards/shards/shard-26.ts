@@ -331,6 +331,7 @@ import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
+import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
@@ -455,6 +456,7 @@ import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolPredatorsHour from "../pool/predators-hour.js";
 import _poolPriestOfTheHauntedEdge from "../pool/priest-of-the-haunted-edge.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
+import _poolPromiseOfBunrei from "../pool/promise-of-bunrei.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPunctureBolt from "../pool/puncture-bolt.js";
@@ -700,6 +702,7 @@ import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWindingWay from "../pool/winding-way.js";
+import _poolWineOfBloodAndIron from "../pool/wine-of-blood-and-iron.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
@@ -1057,6 +1060,7 @@ const shard: CardShard = {
     _poolJunglePatrol,
     _poolKangeeSkyWarden,
     _poolKardursViciousReturn,
+    _poolKatakiWarsWage,
     _poolKataraWaterTribesHope,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
@@ -1181,6 +1185,7 @@ const shard: CardShard = {
     _poolPredatorsHour,
     _poolPriestOfTheHauntedEdge,
     _poolProdigalSorcerer,
+    _poolPromiseOfBunrei,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
     _poolPunctureBolt,
@@ -1426,6 +1431,7 @@ const shard: CardShard = {
     _poolWhispergearSneak,
     _poolWildRoads,
     _poolWindingWay,
+    _poolWineOfBloodAndIron,
     _poolWingsOfHope,
     _poolWitchEnchanter,
     _poolWolfCoveVillager,

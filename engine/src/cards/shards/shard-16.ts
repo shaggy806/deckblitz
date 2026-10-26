@@ -153,6 +153,7 @@ import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
+import _poolDreamcatcher from "../pool/dreamcatcher.js";
 import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDromokaCaptain from "../pool/dromoka-captain.js";
 import _poolDub from "../pool/dub.js";
@@ -166,6 +167,7 @@ import _poolEchoesOfTheKinTree from "../pool/echoes-of-the-kin-tree.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEfreetFlamepainter from "../pool/efreet-flamepainter.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
+import _poolElderPineOfJukai from "../pool/elder-pine-of-jukai.js";
 import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolElegantRotunda from "../pool/elegant-rotunda.js";
 import _poolElvenPalisade from "../pool/elven-palisade.js";
@@ -314,6 +316,7 @@ import _poolInvincibleHymn from "../pool/invincible-hymn.js";
 import _poolInvisibleStalker from "../pool/invisible-stalker.js";
 import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
 import _poolItThatHeraldsTheEnd from "../pool/it-that-heralds-the-end.js";
+import _poolIvoryCraneNetsuke from "../pool/ivory-crane-netsuke.js";
 import _poolJaceArcaneStrategist from "../pool/jace-arcane-strategist.js";
 import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
 import _poolJaddiLifestrider from "../pool/jaddi-lifestrider.js";
@@ -374,6 +377,7 @@ import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
+import _poolManrikiGusari from "../pool/manriki-gusari.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarkOfAsylum from "../pool/mark-of-asylum.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
@@ -931,6 +935,7 @@ const shard: CardShard = {
     _poolDragonTempest,
     _poolDragonTurtle,
     _poolDragonsEyeSentry,
+    _poolDreamcatcher,
     _poolDredgingClaw,
     _poolDromokaCaptain,
     _poolDub,
@@ -944,6 +949,7 @@ const shard: CardShard = {
     _poolEdgarMoonlitSovereign,
     _poolEfreetFlamepainter,
     _poolEiganjoCastle,
+    _poolElderPineOfJukai,
     _poolElectroduplicate,
     _poolElegantRotunda,
     _poolElvenPalisade,
@@ -1092,6 +1098,7 @@ const shard: CardShard = {
     _poolInvisibleStalker,
     _poolIpnuRivulet,
     _poolItThatHeraldsTheEnd,
+    _poolIvoryCraneNetsuke,
     _poolJaceArcaneStrategist,
     _poolJaceWielderOfMysteries,
     _poolJaddiLifestrider,
@@ -1152,6 +1159,7 @@ const shard: CardShard = {
     _poolMakeshiftBinding,
     _poolMalakirRebirth,
     _poolManaformHellkite,
+    _poolManrikiGusari,
     _poolMarchesasEmissary,
     _poolMarkOfAsylum,
     _poolMarketbackWalker,

@@ -4902,6 +4902,21 @@ export type EffectSpec =
       readonly to?: number;
     }
   | {
+      /**
+       * Epic (rule 702.50a), the last part of the spell's effect: "For the
+       * rest of the game, you can't cast spells" and "at the beginning of
+       * each of your upkeeps for the rest of the game, copy this spell except
+       * for its epic ability. If the spell has any targets, you may choose new
+       * targets for the copy." The spell is captured as it resolves — its
+       * targets, {X} and choices — and its controller gets an emblem holding
+       * the upkeep trigger, so the delayed ability shows on the table. A copy
+       * made that way has no epic ability, so this does nothing on it; a copy
+       * made otherwise (Twincast) has it, as part of the copied text (rule
+       * 707.2), and sets up its own.
+       */
+      readonly kind: "epic";
+    }
+  | {
       /** Prevent all combat damage that would be dealt this turn (Fog). A
        * rule-614 replacement, tracked as a turn-scoped `GameState` flag. */
       readonly kind: "prevent-all-combat-damage";
@@ -7109,6 +7124,8 @@ export interface EffectApi {
     triggered?: readonly TriggeredAbility[],
     owner?: PlayerId,
   ): void;
+  /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
+  epic(): void;
   /** Prevent all combat damage this turn (Fog) — or only what sources
    * matching `by` would deal; with `toYou`, all damage they'd deal to the
    * effect's controller, combat or not (`prevent-damage-to-you`). */
@@ -10974,6 +10991,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "epic":
+      ctx.epic();
+      return;
     case "create-emblem": {
       if (spec.to === undefined) {
         ctx.createEmblem(spec.text, spec.static, spec.triggered);
