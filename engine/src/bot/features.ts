@@ -407,6 +407,7 @@ function castableFromGraveyard(registry: CardRegistry, object: GameObject): bool
   const def = registry.get(object.cardName);
   return (
     def.flashback !== null ||
+    def.retrace ||
     def.escape !== null ||
     def.disturb !== null ||
     def.castFromGraveyardIf !== undefined ||

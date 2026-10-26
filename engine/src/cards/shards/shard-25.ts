@@ -467,6 +467,7 @@ import _poolRiskFactor from "../pool/risk-factor.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
 import _poolRitualOfTheMachine from "../pool/ritual-of-the-machine.js";
 import _poolRiverHoopoe from "../pool/river-hoopoe.js";
+import _poolRiverfallMimic from "../pool/riverfall-mimic.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
 import _poolRoamersRoutine from "../pool/roamers-routine.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
@@ -578,6 +579,7 @@ import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
+import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -653,6 +655,7 @@ import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
+import _tokensGoblinSoldierToken from "../tokens/goblin-soldier-token.js";
 import _tokensGreenEnchantmentCentaurToken33 from "../tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
@@ -1136,6 +1139,7 @@ const shard: CardShard = {
     _poolRiskyShortcut,
     _poolRitualOfTheMachine,
     _poolRiverHoopoe,
+    _poolRiverfallMimic,
     _poolRiveteersInitiate,
     _poolRoamersRoutine,
     _poolRockfallVale,
@@ -1247,6 +1251,7 @@ const shard: CardShard = {
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThunderStrike,
+    _poolThunderblust,
     _poolThunderousMight,
     _poolTimeElemental,
     _poolTitanHunter,
@@ -1324,6 +1329,7 @@ const shard: CardShard = {
     _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
+    _tokensGoblinSoldierToken,
     _tokensGreenEnchantmentCentaurToken33,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensKavuTokenJaredCarthalion,

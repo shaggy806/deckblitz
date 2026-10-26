@@ -67,6 +67,7 @@ function castableFromGraveyard(registry: CardRegistry, name: string): boolean {
   const def = registry.get(name);
   return (
     def.flashback !== null ||
+    def.retrace ||
     def.escape !== null ||
     def.disturb !== null ||
     (def.activated ?? []).some((a) => a.zone === "graveyard")

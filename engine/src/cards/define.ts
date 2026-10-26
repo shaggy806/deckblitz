@@ -2904,6 +2904,12 @@ export interface CardDefinition {
    * could tap is its own cast variant (`harmonizeTap`), chosen as the cost is
    * (702.180b). `null` for a card without harmonize. */
   readonly harmonize: { readonly cost: string } | null;
+  /** Retrace (rule 702.81a) — this card may be cast from its owner's
+   * graveyard by discarding a land card as an additional cost, besides its
+   * other costs (its mana cost, kicker and the rest). Unlike flashback the
+   * spell isn't exiled: it goes back to the graveyard, to be cast again.
+   * The cast's `castVia` is `"retrace"`. */
+  readonly retrace: boolean;
   /** Madness (rule 702.35a) — "If a player would discard this card, that
    * player discards it, but exiles it instead of putting it into their
    * graveyard", and "When this card is exiled this way, its owner may cast it
@@ -3295,6 +3301,7 @@ const PRINTED_ABILITY: {
   webSlinging: (def) => def.webSlinging !== null,
   emerge: (def) => def.emerge !== null,
   harmonize: (def) => def.harmonize !== null,
+  retrace: (def) => def.retrace,
   madness: (def) => def.madness !== null,
   foretell: (def) => def.foretell !== null,
   plot: (def) => def.plot !== null,
@@ -3509,6 +3516,7 @@ interface CardDraft {
   flashback?: NonNullable<CardDefinition["flashback"]>;
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };
+  retrace?: boolean;
   madness?: { readonly cost: string };
   foretell?: { readonly cost: string };
   plot?: { readonly cost: string };
@@ -3709,6 +3717,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     webSlinging: draft.webSlinging ?? null,
     emerge: draft.emerge ?? null,
     harmonize: draft.harmonize ?? null,
+    retrace: draft.retrace ?? false,
     madness: draft.madness ?? null,
     foretell: draft.foretell ?? null,
     plot: draft.plot ?? null,

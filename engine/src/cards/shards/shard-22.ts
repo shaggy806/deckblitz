@@ -348,6 +348,7 @@ import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMongrelPack from "../pool/mongrel-pack.js";
 import _poolMonsoon from "../pool/monsoon.js";
+import _poolMonstrify from "../pool/monstrify.js";
 import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
 import _poolMouthFeed from "../pool/mouth-feed.js";
@@ -470,6 +471,7 @@ import _poolSacrifice from "../pool/sacrifice.js";
 import _poolSakashimasStudent from "../pool/sakashimas-student.js";
 import _poolSamwiseGamgee from "../pool/samwise-gamgee.js";
 import _poolSanguineStatuette from "../pool/sanguine-statuette.js";
+import _poolSavageConception from "../pool/savage-conception.js";
 import _poolSavvyHunter from "../pool/savvy-hunter.js";
 import _poolSawItComing from "../pool/saw-it-coming.js";
 import _poolScaleTheHeights from "../pool/scale-the-heights.js";
@@ -611,6 +613,7 @@ import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
+import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
@@ -634,12 +637,14 @@ import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
 import _poolVoraciousVampire from "../pool/voracious-vampire.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
+import _poolWakeThrasher from "../pool/wake-thrasher.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
+import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
@@ -673,6 +678,7 @@ import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
+import _tokensElementalToken55BlueRedFlying from "../tokens/elemental-token-5-5-blue-red-flying.js";
 import _tokensGreenSheepToken from "../tokens/green-sheep-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
@@ -1031,6 +1037,7 @@ const shard: CardShard = {
     _poolMoltenVortex,
     _poolMongrelPack,
     _poolMonsoon,
+    _poolMonstrify,
     _poolMourningPatrol,
     _poolMouseTrapper,
     _poolMouthFeed,
@@ -1153,6 +1160,7 @@ const shard: CardShard = {
     _poolSakashimasStudent,
     _poolSamwiseGamgee,
     _poolSanguineStatuette,
+    _poolSavageConception,
     _poolSavvyHunter,
     _poolSawItComing,
     _poolScaleTheHeights,
@@ -1294,6 +1302,7 @@ const shard: CardShard = {
     _poolUltimaOriginOfOblivion,
     _poolUnburden,
     _poolUncannySpeed,
+    _poolUnnervingAssault,
     _poolUnravelTheAether,
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
@@ -1317,12 +1326,14 @@ const shard: CardShard = {
     _poolVoraciousVampire,
     _poolVulshokBattlegear,
     _poolVulshokRefugee,
+    _poolWakeThrasher,
     _poolWalkingDead,
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
     _poolWarehouseTabby,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
+    _poolWavesOfAggression,
     _poolWebUp,
     _poolWelkinTern,
     _poolWhisperingShade,
@@ -1358,6 +1369,7 @@ const shard: CardShard = {
     _tokensAxeToken,
     _tokensDragonEggToken,
     _tokensDwarfToken,
+    _tokensElementalToken55BlueRedFlying,
     _tokensGreenSheepToken,
     _tokensHarpyToken,
     _tokensLifelinkCatToken,

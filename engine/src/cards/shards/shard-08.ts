@@ -272,6 +272,8 @@ import _poolHagiMob from "../pool/hagi-mob.js";
 import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
 import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvesttideAssailant from "../pool/harvesttide-assailant.js";
+import _poolHatchetBully from "../pool/hatchet-bully.js";
+import _poolHeartlashCinder from "../pool/heartlash-cinder.js";
 import _poolHeatShimmer from "../pool/heat-shimmer.js";
 import _poolHeavyweightDemolisher from "../pool/heavyweight-demolisher.js";
 import _poolHexhavenBattalion from "../pool/hexhaven-battalion.js";
@@ -333,6 +335,7 @@ import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
+import _poolKithkinZealot from "../pool/kithkin-zealot.js";
 import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKnightOfTheLastBreath from "../pool/knight-of-the-last-breath.js";
 import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
@@ -406,6 +409,7 @@ import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
+import _poolNoggleBridgebreaker from "../pool/noggle-bridgebreaker.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
 import _poolNulltreadGargantuan from "../pool/nulltread-gargantuan.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
@@ -580,6 +584,7 @@ import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
+import _poolTalarasBattalion from "../pool/talaras-battalion.js";
 import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
 import _poolTamObservantSequencer from "../pool/tam-observant-sequencer.js";
@@ -981,6 +986,8 @@ const shard: CardShard = {
     _poolHarmattanEfreet,
     _poolHarshMentor,
     _poolHarvesttideAssailant,
+    _poolHatchetBully,
+    _poolHeartlashCinder,
     _poolHeatShimmer,
     _poolHeavyweightDemolisher,
     _poolHexhavenBattalion,
@@ -1042,6 +1049,7 @@ const shard: CardShard = {
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
     _poolKitchenFinks,
+    _poolKithkinZealot,
     _poolKnightOfDusksShadow,
     _poolKnightOfTheLastBreath,
     _poolKoboldDrillSergeant,
@@ -1115,6 +1123,7 @@ const shard: CardShard = {
     _poolNightmarishEnd,
     _poolNightveilPredator,
     _poolNinjasBlades,
+    _poolNoggleBridgebreaker,
     _poolNorthPolePatrol,
     _poolNulltreadGargantuan,
     _poolOakhameRanger,
@@ -1289,6 +1298,7 @@ const shard: CardShard = {
     _poolSweetGumRecluse,
     _poolSyphonFuel,
     _poolSyrCarahTheBold,
+    _poolTalarasBattalion,
     _poolTalasWarrior,
     _poolTalismanOfImpulse,
     _poolTamObservantSequencer,

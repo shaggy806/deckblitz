@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Eventide, whole** (batch 177, the middle walk's second range, 2026-10-26): **built** retrace
+  (rule 702.81a — `retrace: true`, its own `via: "retrace"` graveyard cast, a land card discarded,
+  nothing exiling it; `keyword:retrace`) and the untap symbol {Q} (rule 107.6 — `AbilityCost.untap`;
+  `cost:untap-symbol-cost`), both read by the scaffolder. 93 of its last 119 authored by five
+  `card-author` agents and the lead — Figure of Destiny, Ashling, the Extinguisher, Dominus of
+  Fealty, Nucklavee, Raven's Crime, Worm Harvest, the Hatchlings, Mimics and Hedge-Mages and 79
+  more (EVE whole) — plus six elsewhere the two features unblocked (Formless Genesis, Throes of
+  Chaos, Embrace the Unknown, Decaying Time Loop, Farmstead Gleaner, Umbral Mantle); 26 blocked
+  (`B177.json`), chroma over cards that aren't permanents leading with four.
 - **Dragon's Maze, the rest of the set** (batch 173, the newest-first walk, 2026-10-26):
   **built** fuse (rule 702.102, `keyword:fuse` — `fuse: true` on a split card's whole: from the
   hand it is cast as both halves for both costs, the left half's targets then the right's,

@@ -60,6 +60,7 @@ import _poolBaskingCapybara from "../pool/basking-capybara.js";
 import _poolBatWhisperer from "../pool/bat-whisperer.js";
 import _poolBattleDisplay from "../pool/battle-display.js";
 import _poolBattlefieldScavenger from "../pool/battlefield-scavenger.js";
+import _poolBattlegateMimic from "../pool/battlegate-mimic.js";
 import _poolBeatAPath from "../pool/beat-a-path.js";
 import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
@@ -178,6 +179,8 @@ import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDrillBit from "../pool/drill-bit.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
+import _poolDuergarHedgeMage from "../pool/duergar-hedge-mage.js";
+import _poolDuergarMineCaptain from "../pool/duergar-mine-captain.js";
 import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
 import _poolDust from "../pool/dust.js";
@@ -737,6 +740,7 @@ const shard: CardShard = {
     _poolBatWhisperer,
     _poolBattleDisplay,
     _poolBattlefieldScavenger,
+    _poolBattlegateMimic,
     _poolBeatAPath,
     _poolBeledrosWitherbloom,
     _poolBellowingCrier,
@@ -855,6 +859,8 @@ const shard: CardShard = {
     _poolDreyKeeper,
     _poolDrillBit,
     _poolDryadsFavor,
+    _poolDuergarHedgeMage,
+    _poolDuergarMineCaptain,
     _poolDuskLegionSergeant,
     _poolDuskdaleWurm,
     _poolDust,

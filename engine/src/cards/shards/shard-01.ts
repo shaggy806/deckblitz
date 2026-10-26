@@ -264,6 +264,7 @@ import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
 import _poolInspiringVeteran from "../pool/inspiring-veteran.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
+import _poolInundate from "../pool/inundate.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolInvokeDespair from "../pool/invoke-despair.js";
 import _poolIreShaman from "../pool/ire-shaman.js";
@@ -926,6 +927,7 @@ const shard: CardShard = {
     _poolInsatiableHarpy,
     _poolInspiringVeteran,
     _poolInsufferableBalladeer,
+    _poolInundate,
     _poolInvasionOfZendikar,
     _poolInvokeDespair,
     _poolIreShaman,

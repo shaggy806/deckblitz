@@ -10716,6 +10716,34 @@
   "static:cda-counters-on-self": {
    "example": "Mwonvuli Ooze: power and toughness each 1 plus twice the age counters on it — setBasePtFromCount counts no counters on itself.",
    "family": "bug:cda-all-zones"
+  },
+  "effect:put-on-bottom-of-library-all": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Hallowed Burial: 'Put all creatures on the bottom of their owners' libraries' — a mass bottom-of-library move, each owner ordering their own."
+  },
+  "amount:chroma-of-cards": {
+   "family": "effect:amount-new-variants",
+   "example": "Umbra Stalker: chroma over cards that aren't permanents you control (your graveyard, revealed cards, one card's own cost) — devotion covers only the permanents."
+  },
+  "cost:sacrifice-x-mana-ability": {
+   "family": "cost:sacrifice-multiple",
+   "example": "Springjack Pasture: '{T}, Sacrifice X Goats: Add X mana of any one color' — a mana ability sacrificing a chosen number of permanents."
+  },
+  "amount:toughness-of-chosen-card": {
+   "family": "effect:amount-new-variants",
+   "example": "Talara's Bane: 'gain life equal to that card's toughness' — the card chosen from a revealed hand, read while it's still there."
+  },
+  "static:prohibit-per-opponent-comparison": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Ward of Bones: 'Each opponent who controls more creatures than you can't cast creature spells' (and the same for artifacts, enchantments, lands)."
+  },
+  "effect:player-cant-gain-life-for-game": {
+   "family": "effect:temporary-player-effect",
+   "example": "Stigma Lasher: 'that player can't gain life for the rest of the game' — a player effect with no end."
+  },
+  "cost:untap-others": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Crackleburr: '{U/R}{U/R}, {Q}, Untap two tapped blue creatures you control' — untapping other permanents as a cost."
   }
  }
 }

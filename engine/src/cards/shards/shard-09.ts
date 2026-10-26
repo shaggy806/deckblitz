@@ -96,6 +96,7 @@ import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
 import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
+import _poolCallTheSkybreaker from "../pool/call-the-skybreaker.js";
 import _poolCall from "../pool/call.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
@@ -536,6 +537,7 @@ import _poolSkyspearCavalry from "../pool/skyspear-cavalry.js";
 import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
 import _poolSlimefootTheStowaway from "../pool/slimefoot-the-stowaway.js";
 import _poolSlithFirewalker from "../pool/slith-firewalker.js";
+import _poolSnakeform from "../pool/snakeform.js";
 import _poolSneakingGuide from "../pool/sneaking-guide.js";
 import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
@@ -799,6 +801,7 @@ const shard: CardShard = {
     _poolBushmasterCoiledHenchman,
     _poolCacophonyScamp,
     _poolCaldaiaGuardian,
+    _poolCallTheSkybreaker,
     _poolCall,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
@@ -1239,6 +1242,7 @@ const shard: CardShard = {
     _poolSlaveringBranchsnapper,
     _poolSlimefootTheStowaway,
     _poolSlithFirewalker,
+    _poolSnakeform,
     _poolSneakingGuide,
     _poolSnubhornSentry,
     _poolSoaringDrake,

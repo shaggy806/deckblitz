@@ -332,6 +332,7 @@ import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMightSliver from "../pool/might-sliver.js";
 import _poolMinionReflector from "../pool/minion-reflector.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
+import _poolMirrorSheen from "../pool/mirror-sheen.js";
 import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMistIntruder from "../pool/mist-intruder.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
@@ -356,6 +357,7 @@ import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
 import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
 import _poolNoblePanther from "../pool/noble-panther.js";
+import _poolNoggleRansacker from "../pool/noggle-ransacker.js";
 import _poolNyleasHuntmaster from "../pool/nyleas-huntmaster.js";
 import _poolNyxbloomAncient from "../pool/nyxbloom-ancient.js";
 import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
@@ -959,6 +961,7 @@ const shard: CardShard = {
     _poolMightSliver,
     _poolMinionReflector,
     _poolMinotaurAggressor,
+    _poolMirrorSheen,
     _poolMishraExcavationProdigy,
     _poolMistIntruder,
     _poolMoltenExhale,
@@ -983,6 +986,7 @@ const shard: CardShard = {
     _poolNicanzilCurrentConductor,
     _poolNimbusWings,
     _poolNoblePanther,
+    _poolNoggleRansacker,
     _poolNyleasHuntmaster,
     _poolNyxbloomAncient,
     _poolNyxbornBrute,

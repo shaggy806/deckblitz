@@ -73,6 +73,7 @@ import _poolBloodAgeGeneral from "../pool/blood-age-general.js";
 import _poolBloodGlutton from "../pool/blood-glutton.js";
 import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
+import _poolBloodiedGhost from "../pool/bloodied-ghost.js";
 import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
 import _poolBogardanPhoenix from "../pool/bogardan-phoenix.js";
@@ -162,6 +163,7 @@ import _poolDowndraft from "../pool/downdraft.js";
 import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
+import _poolDreamThief from "../pool/dream-thief.js";
 import _poolDreamstealer from "../pool/dreamstealer.js";
 import _poolDreamtailHeron from "../pool/dreamtail-heron.js";
 import _poolDregRecycler from "../pool/dreg-recycler.js";
@@ -390,6 +392,7 @@ import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
 import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
+import _poolOonasGrace from "../pool/oonas-grace.js";
 import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
 import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
@@ -423,6 +426,7 @@ import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
 import _poolPrepare from "../pool/prepare.js";
 import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
+import _poolPrimalcrux from "../pool/primalcrux.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
 import _poolPrismRing from "../pool/prism-ring.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
@@ -767,6 +771,7 @@ const shard: CardShard = {
     _poolBloodGlutton,
     _poolBloodKnight,
     _poolBloodbraidChallenger,
+    _poolBloodiedGhost,
     _poolBloodtitheCollector,
     _poolBoarQPine,
     _poolBogardanPhoenix,
@@ -856,6 +861,7 @@ const shard: CardShard = {
     _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
     _poolDreamPillager,
+    _poolDreamThief,
     _poolDreamstealer,
     _poolDreamtailHeron,
     _poolDregRecycler,
@@ -1084,6 +1090,7 @@ const shard: CardShard = {
     _poolOctopusForm,
     _poolOmnathLocusOfCreation,
     _poolOonasBlackguard,
+    _poolOonasGrace,
     _poolOozePatrol,
     _poolOrderOfTheEbonHand,
     _poolOsseousSticktwister,
@@ -1117,6 +1124,7 @@ const shard: CardShard = {
     _poolPowerDepot,
     _poolPrepare,
     _poolPresenceOfTheMaster,
+    _poolPrimalcrux,
     _poolPrimarisChaplain,
     _poolPrismRing,
     _poolProcrastinate,
