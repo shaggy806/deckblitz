@@ -12,6 +12,7 @@ import _poolAdherentOfHope from "../pool/adherent-of-hope.js";
 import _poolAegisAngel from "../pool/aegis-angel.js";
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
+import _poolAftershock from "../pool/aftershock.js";
 import _poolAgateBladeAssassin from "../pool/agate-blade-assassin.js";
 import _poolAgeOfUltron from "../pool/age-of-ultron.js";
 import _poolAinokBondKin from "../pool/ainok-bond-kin.js";
@@ -117,6 +118,7 @@ import _poolChapelShieldgeist from "../pool/chapel-shieldgeist.js";
 import _poolChargingGriffin from "../pool/charging-griffin.js";
 import _poolCharismaticVanguard from "../pool/charismatic-vanguard.js";
 import _poolChiefOfTheFoundry from "../pool/chief-of-the-foundry.js";
+import _poolChill from "../pool/chill.js";
 import _poolChitteringWitch from "../pool/chittering-witch.js";
 import _poolChorusOfWoe from "../pool/chorus-of-woe.js";
 import _poolChronicleOfVictory from "../pool/chronicle-of-victory.js";
@@ -687,6 +689,7 @@ const shard: CardShard = {
     _poolAegisAngel,
     _poolAetherworksMarvel,
     _poolAftermathAnalyst,
+    _poolAftershock,
     _poolAgateBladeAssassin,
     _poolAgeOfUltron,
     _poolAinokBondKin,
@@ -792,6 +795,7 @@ const shard: CardShard = {
     _poolChargingGriffin,
     _poolCharismaticVanguard,
     _poolChiefOfTheFoundry,
+    _poolChill,
     _poolChitteringWitch,
     _poolChorusOfWoe,
     _poolChronicleOfVictory,

@@ -62,6 +62,7 @@ import _poolBloodResearcher from "../pool/blood-researcher.js";
 import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
+import _poolBoil from "../pool/boil.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
 import _poolBoomBox from "../pool/boom-box.js";
@@ -89,6 +90,7 @@ import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
 import _poolCinderHellion from "../pool/cinder-hellion.js";
+import _poolCinderMarsh from "../pool/cinder-marsh.js";
 import _poolCityOfTraitors from "../pool/city-of-traitors.js";
 import _poolClachanFestival from "../pool/clachan-festival.js";
 import _poolClawingTorment from "../pool/clawing-torment.js";
@@ -734,6 +736,7 @@ const shard: CardShard = {
     _poolBloodchiefAscension,
     _poolBloodstoneGoblin,
     _poolBogstomper,
+    _poolBoil,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
     _poolBoomBox,
@@ -761,6 +764,7 @@ const shard: CardShard = {
     _poolChantOfTheSkifsang,
     _poolChromeCat,
     _poolCinderHellion,
+    _poolCinderMarsh,
     _poolCityOfTraitors,
     _poolClachanFestival,
     _poolClawingTorment,

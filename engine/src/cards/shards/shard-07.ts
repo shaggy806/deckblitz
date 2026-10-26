@@ -56,6 +56,7 @@ import _poolBlightedFen from "../pool/blighted-fen.js";
 import _poolBlizzardBrawl from "../pool/blizzard-brawl.js";
 import _poolBlizzard from "../pool/blizzard.js";
 import _poolBloodCelebrant from "../pool/blood-celebrant.js";
+import _poolBloodFrenzy from "../pool/blood-frenzy.js";
 import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
 import _poolBlood from "../pool/blood.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
@@ -761,6 +762,7 @@ const shard: CardShard = {
     _poolBlizzardBrawl,
     _poolBlizzard,
     _poolBloodCelebrant,
+    _poolBloodFrenzy,
     _poolBloodTollHarpy,
     _poolBlood,
     _poolBloodsoakedChampion,

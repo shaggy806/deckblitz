@@ -535,6 +535,7 @@ import _poolSplittingThePowerstone from "../pool/splitting-the-powerstone.js";
 import _poolSquiresLightblade from "../pool/squires-lightblade.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
+import _poolStalkingStones from "../pool/stalking-stones.js";
 import _poolStoicFarmer from "../pool/stoic-farmer.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
 import _poolStormFleetSwashbuckler from "../pool/storm-fleet-swashbuckler.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolSquiresLightblade,
     _poolSquirmingMass,
     _poolStadiumHeadliner,
+    _poolStalkingStones,
     _poolStoicFarmer,
     _poolStoneGiantOfHighPass,
     _poolStormFleetSwashbuckler,

@@ -299,6 +299,7 @@ import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
 import _poolJacesSentinel from "../pool/jaces-sentinel.js";
+import _poolJackalPup from "../pool/jackal-pup.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
 import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
@@ -381,6 +382,7 @@ import _poolNagaVitalist from "../pool/naga-vitalist.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNascentMetamorph from "../pool/nascent-metamorph.js";
 import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
+import _poolNaturesRevolt from "../pool/natures-revolt.js";
 import _poolNebelgastHerald from "../pool/nebelgast-herald.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
@@ -511,6 +513,7 @@ import _poolShieldedAetherThief from "../pool/shielded-aether-thief.js";
 import _poolShimmerwingChimera from "../pool/shimmerwing-chimera.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
 import _poolShivanFire from "../pool/shivan-fire.js";
+import _poolShocker from "../pool/shocker.js";
 import _poolShowerOfArrows from "../pool/shower-of-arrows.js";
 import _poolShrivel from "../pool/shrivel.js";
 import _poolSibilantSpirit from "../pool/sibilant-spirit.js";
@@ -622,6 +625,7 @@ import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
 import _poolTwiningTwins from "../pool/twining-twins.js";
+import _poolTwitch from "../pool/twitch.js";
 import _poolUltimeciaTimeSorceress from "../pool/ultimecia-time-sorceress.js";
 import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
@@ -995,6 +999,7 @@ const shard: CardShard = {
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
     _poolJacesSentinel,
+    _poolJackalPup,
     _poolJeskaiBanner,
     _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,
@@ -1077,6 +1082,7 @@ const shard: CardShard = {
     _poolNantukoShade,
     _poolNascentMetamorph,
     _poolNastyLittleRabbit,
+    _poolNaturesRevolt,
     _poolNebelgastHerald,
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
@@ -1207,6 +1213,7 @@ const shard: CardShard = {
     _poolShimmerwingChimera,
     _poolShineshadowSnarl,
     _poolShivanFire,
+    _poolShocker,
     _poolShowerOfArrows,
     _poolShrivel,
     _poolSibilantSpirit,
@@ -1318,6 +1325,7 @@ const shard: CardShard = {
     _poolTuraKennerudSkyknight,
     _poolTwinflameTyrant,
     _poolTwiningTwins,
+    _poolTwitch,
     _poolUltimeciaTimeSorceress,
     _poolUmbralExpanse,
     _poolUndeadButler,

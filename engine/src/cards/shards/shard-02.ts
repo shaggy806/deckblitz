@@ -137,6 +137,7 @@ import _poolDarksteelReactor from "../pool/darksteel-reactor.js";
 import _poolDartingMerfolk from "../pool/darting-merfolk.js";
 import _poolDauntlessAven from "../pool/dauntless-aven.js";
 import _poolDauntlessEscort from "../pool/dauntless-escort.js";
+import _poolDauthiMindripper from "../pool/dauthi-mindripper.js";
 import _poolDaybreakChaplain from "../pool/daybreak-chaplain.js";
 import _poolDeadlyComplication from "../pool/deadly-complication.js";
 import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
@@ -446,6 +447,7 @@ import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
 import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
+import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
@@ -797,6 +799,7 @@ const shard: CardShard = {
     _poolDartingMerfolk,
     _poolDauntlessAven,
     _poolDauntlessEscort,
+    _poolDauthiMindripper,
     _poolDaybreakChaplain,
     _poolDeadlyComplication,
     _poolDeathforgeShaman,
@@ -1106,6 +1109,7 @@ const shard: CardShard = {
     _poolRavenousChupacabra,
     _poolRavenousHarpy,
     _poolRecklessPyrosurfer,
+    _poolRecklessSpite,
     _poolReclaimTheWastes,
     _poolRefute,
     _poolReitoLantern,

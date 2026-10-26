@@ -19,6 +19,7 @@ import _poolAnHavvaConstable from "../pool/an-havva-constable.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
 import _poolAncientCornucopia from "../pool/ancient-cornucopia.js";
+import _poolAncientRunes from "../pool/ancient-runes.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
@@ -176,6 +177,7 @@ import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
 import _poolExplodingBorders from "../pool/exploding-borders.js";
+import _poolExtinction from "../pool/extinction.js";
 import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
@@ -697,6 +699,7 @@ const shard: CardShard = {
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
     _poolAncientCornucopia,
+    _poolAncientRunes,
     _poolAppliedGeometry,
     _poolArchaicsAgony,
     _poolArchfiendOfDespair,
@@ -854,6 +857,7 @@ const shard: CardShard = {
     _poolExpansion,
     _poolExperimentalConfectioner,
     _poolExplodingBorders,
+    _poolExtinction,
     _poolFascination,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,

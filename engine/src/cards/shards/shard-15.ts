@@ -366,6 +366,7 @@ import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMistDragon from "../pool/mist-dragon.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
+import _poolMoggFanatic from "../pool/mogg-fanatic.js";
 import _poolMoldShambler from "../pool/mold-shambler.js";
 import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
@@ -1012,6 +1013,7 @@ const shard: CardShard = {
     _poolMisshapenFiend,
     _poolMistDragon,
     _poolMoaningSpirit,
+    _poolMoggFanatic,
     _poolMoldShambler,
     _poolMoltenCoreMaestro,
     _poolMomentousFall,

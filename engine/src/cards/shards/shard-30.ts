@@ -480,6 +480,7 @@ import _poolRelease from "../pool/release.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
+import _poolRepentance from "../pool/repentance.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
 import _poolResentfulRevelation from "../pool/resentful-revelation.js";
 import _poolRestoreRelic from "../pool/restore-relic.js";
@@ -1162,6 +1163,7 @@ const shard: CardShard = {
     _poolRelentlessAdvance,
     _poolReluctantRoleModel,
     _poolRepairAndRecharge,
+    _poolRepentance,
     _poolRescuePepperPotts,
     _poolResentfulRevelation,
     _poolRestoreRelic,

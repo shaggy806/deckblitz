@@ -294,6 +294,7 @@ import _poolInfinityFormula from "../pool/infinity-formula.js";
 import _poolIngaRuneEyes from "../pool/inga-rune-eyes.js";
 import _poolInheritance from "../pool/inheritance.js";
 import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
+import _poolInsight from "../pool/insight.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
@@ -406,6 +407,7 @@ import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
 import _poolOrcishCaptain from "../pool/orcish-captain.js";
+import _poolOrimsPrayer from "../pool/orims-prayer.js";
 import _poolOrmendahlProfanePrince from "../pool/ormendahl-profane-prince.js";
 import _poolOrzhovBasilica from "../pool/orzhov-basilica.js";
 import _poolOuroboroid from "../pool/ouroboroid.js";
@@ -977,6 +979,7 @@ const shard: CardShard = {
     _poolIngaRuneEyes,
     _poolInheritance,
     _poolInquisitionOfKozilek,
+    _poolInsight,
     _poolInspiringOverseer,
     _poolIntoTheNorth,
     _poolIntrudingSoulrager,
@@ -1089,6 +1092,7 @@ const shard: CardShard = {
     _poolOneWithTheMachine,
     _poolOpalineUnicorn,
     _poolOrcishCaptain,
+    _poolOrimsPrayer,
     _poolOrmendahlProfanePrince,
     _poolOrzhovBasilica,
     _poolOuroboroid,

@@ -85,6 +85,7 @@ import _poolBoulderSalvo from "../pool/boulder-salvo.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
+import _poolBrokenFall from "../pool/broken-fall.js";
 import _poolBroodhatchNantuko from "../pool/broodhatch-nantuko.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
@@ -786,6 +787,7 @@ const shard: CardShard = {
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
+    _poolBrokenFall,
     _poolBroodhatchNantuko,
     _poolBrothersOfFire,
     _poolBrudicladTelchorEngineer,
