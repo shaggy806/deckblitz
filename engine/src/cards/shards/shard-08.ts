@@ -761,6 +761,7 @@ import _tokensMaskToken from "../tokens/mask-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensReflectionTokenWhite22 from "../tokens/reflection-token-white-2-2.js";
 import _tokensSerfToken from "../tokens/serf-token.js";
+import _tokensSnakeTokenPatagiaViper from "../tokens/snake-token-patagia-viper.js";
 import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
@@ -1530,6 +1531,7 @@ const shard: CardShard = {
     _tokensOtterToken,
     _tokensReflectionTokenWhite22,
     _tokensSerfToken,
+    _tokensSnakeTokenPatagiaViper,
     _tokensTheBlackjack,
     _tokensThopterToken,
     _tokensWarriorToken,

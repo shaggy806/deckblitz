@@ -733,6 +733,7 @@ import _tokensElementalToken44WhiteFlying from "../tokens/elemental-token-4-4-wh
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
+import _tokensGoblinTokenRakdosGuildmage from "../tokens/goblin-token-rakdos-guildmage.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
 import _tokensHorrorTokenTheFinalDays from "../tokens/horror-token-the-final-days.js";
 import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-prydwen.js";
@@ -1484,6 +1485,7 @@ const shard: CardShard = {
     _tokensElementalToken53,
     _tokensEtheriumCellToken,
     _tokensFaerieDragonToken,
+    _tokensGoblinTokenRakdosGuildmage,
     _tokensHornetToken,
     _tokensHorrorTokenTheFinalDays,
     _tokensHumanKnightTokenThePrydwen,

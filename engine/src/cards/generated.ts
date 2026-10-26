@@ -17554,6 +17554,7 @@ import _poolSimicCluestone from "./pool/simic-cluestone.js";
 import _poolSimicFluxmage from "./pool/simic-fluxmage.js";
 import _poolSimicGrowthChamber from "./pool/simic-growth-chamber.js";
 import _poolSimicGuildgate from "./pool/simic-guildgate.js";
+import _poolSimicInitiate from "./pool/simic-initiate.js";
 import _poolSimicKeyrune from "./pool/simic-keyrune.js";
 import _poolSimicLocket from "./pool/simic-locket.js";
 import _poolSimicManipulator from "./pool/simic-manipulator.js";
@@ -21556,6 +21557,7 @@ import _poolVictoriousDestruction from "./pool/victorious-destruction.js";
 import _poolVictory from "./pool/victory.js";
 import _poolVictorysEnvoy from "./pool/victorys-envoy.js";
 import _poolVictualSliver from "./pool/victual-sliver.js";
+import _poolVigeanHydropon from "./pool/vigean-hydropon.js";
 import _poolVigilance from "./pool/vigilance.js";
 import _poolVigilantBaloth from "./pool/vigilant-baloth.js";
 import _poolVigilantDrake from "./pool/vigilant-drake.js";
@@ -22994,6 +22996,7 @@ import _tokensBirdTokenGwaihirGreatestOfTheEagles from "./tokens/bird-token-gwai
 import _tokensBirdTokenHermesOverseerOfElpis from "./tokens/bird-token-hermes-overseer-of-elpis.js";
 import _tokensBirdTokenOminousRoost from "./tokens/bird-token-ominous-roost.js";
 import _tokensBirdTokenWhite34 from "./tokens/bird-token-white-3-4.js";
+import _tokensBirdTokenWhiteBlue from "./tokens/bird-token-white-blue.js";
 import _tokensBirdToken from "./tokens/bird-token.js";
 import _tokensBlackDeathtouchSnakeToken from "./tokens/black-deathtouch-snake-token.js";
 import _tokensBlackEnchantmentZombieToken22 from "./tokens/black-enchantment-zombie-token-2-2.js";
@@ -23076,6 +23079,7 @@ import _tokensDragonTokenAvatarRoku from "./tokens/dragon-token-avatar-roku.js";
 import _tokensDragonTokenDragonbackAssault from "./tokens/dragon-token-dragonback-assault.js";
 import _tokensDragonTokenFirebreathing from "./tokens/dragon-token-firebreathing.js";
 import _tokensDragonTokenWakeTheDragon from "./tokens/dragon-token-wake-the-dragon.js";
+import _tokensDrakeTokenLeafdrakeRoost from "./tokens/drake-token-leafdrake-roost.js";
 import _tokensDrakeToken from "./tokens/drake-token.js";
 import _tokensDroneToken from "./tokens/drone-token.js";
 import _tokensDwarfBerserkerToken from "./tokens/dwarf-berserker-token.js";
@@ -23101,6 +23105,7 @@ import _tokensElementalTokenDanceOfTheTumbleweeds from "./tokens/elemental-token
 import _tokensElementalTokenLagomosHandOfHatred from "./tokens/elemental-token-lagomos-hand-of-hatred.js";
 import _tokensElementalTokenPrismariPianist from "./tokens/elemental-token-prismari-pianist.js";
 import _tokensElementalTokenRekindlingPhoenix from "./tokens/elemental-token-rekindling-phoenix.js";
+import _tokensElementalTokenResearchDevelopment from "./tokens/elemental-token-research-development.js";
 import _tokensElementalTokenVernalSovereign from "./tokens/elemental-token-vernal-sovereign.js";
 import _tokensElementalTokenWildfireAwakener from "./tokens/elemental-token-wildfire-awakener.js";
 import _tokensElementalToken from "./tokens/elemental-token.js";
@@ -23148,6 +23153,7 @@ import _tokensGoblinSoldierToken from "./tokens/goblin-soldier-token.js";
 import _tokensGoblinTokenBoggartMischief from "./tokens/goblin-token-boggart-mischief.js";
 import _tokensGoblinTokenGoblinSpymaster from "./tokens/goblin-token-goblin-spymaster.js";
 import _tokensGoblinTokenHaste from "./tokens/goblin-token-haste.js";
+import _tokensGoblinTokenRakdosGuildmage from "./tokens/goblin-token-rakdos-guildmage.js";
 import _tokensGoblinToken from "./tokens/goblin-token.js";
 import _tokensGoblinWarriorToken from "./tokens/goblin-warrior-token.js";
 import _tokensGoblinWizardToken from "./tokens/goblin-wizard-token.js";
@@ -23407,6 +23413,7 @@ import _tokensSmokeBlessingToken from "./tokens/smoke-blessing-token.js";
 import _tokensSnailToken from "./tokens/snail-token.js";
 import _tokensSnakeToken54 from "./tokens/snake-token-5-4.js";
 import _tokensSnakeTokenArtifactPoison from "./tokens/snake-token-artifact-poison.js";
+import _tokensSnakeTokenPatagiaViper from "./tokens/snake-token-patagia-viper.js";
 import _tokensSnakeToken from "./tokens/snake-token.js";
 import _tokensSoldierAllyToken from "./tokens/soldier-ally-token.js";
 import _tokensSoldierArtifactToken from "./tokens/soldier-artifact-token.js";
@@ -41105,6 +41112,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSimicFluxmage,
   _poolSimicGrowthChamber,
   _poolSimicGuildgate,
+  _poolSimicInitiate,
   _poolSimicKeyrune,
   _poolSimicLocket,
   _poolSimicManipulator,
@@ -45107,6 +45115,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVictory,
   _poolVictorysEnvoy,
   _poolVictualSliver,
+  _poolVigeanHydropon,
   _poolVigilance,
   _poolVigilantBaloth,
   _poolVigilantDrake,
@@ -46551,6 +46560,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensBirdTokenHermesOverseerOfElpis,
   _tokensBirdTokenOminousRoost,
   _tokensBirdTokenWhite34,
+  _tokensBirdTokenWhiteBlue,
   _tokensBirdToken,
   _tokensBlackDeathtouchSnakeToken,
   _tokensBlackEnchantmentZombieToken22,
@@ -46633,6 +46643,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDragonTokenDragonbackAssault,
   _tokensDragonTokenFirebreathing,
   _tokensDragonTokenWakeTheDragon,
+  _tokensDrakeTokenLeafdrakeRoost,
   _tokensDrakeToken,
   _tokensDroneToken,
   _tokensDwarfBerserkerToken,
@@ -46658,6 +46669,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensElementalTokenLagomosHandOfHatred,
   _tokensElementalTokenPrismariPianist,
   _tokensElementalTokenRekindlingPhoenix,
+  _tokensElementalTokenResearchDevelopment,
   _tokensElementalTokenVernalSovereign,
   _tokensElementalTokenWildfireAwakener,
   _tokensElementalToken,
@@ -46705,6 +46717,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGoblinTokenBoggartMischief,
   _tokensGoblinTokenGoblinSpymaster,
   _tokensGoblinTokenHaste,
+  _tokensGoblinTokenRakdosGuildmage,
   _tokensGoblinToken,
   _tokensGoblinWarriorToken,
   _tokensGoblinWizardToken,
@@ -46964,6 +46977,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSnailToken,
   _tokensSnakeToken54,
   _tokensSnakeTokenArtifactPoison,
+  _tokensSnakeTokenPatagiaViper,
   _tokensSnakeToken,
   _tokensSoldierAllyToken,
   _tokensSoldierArtifactToken,
@@ -64669,6 +64683,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/simic-fluxmage": _poolSimicFluxmage,
   "pool/simic-growth-chamber": _poolSimicGrowthChamber,
   "pool/simic-guildgate": _poolSimicGuildgate,
+  "pool/simic-initiate": _poolSimicInitiate,
   "pool/simic-keyrune": _poolSimicKeyrune,
   "pool/simic-locket": _poolSimicLocket,
   "pool/simic-manipulator": _poolSimicManipulator,
@@ -68671,6 +68686,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/victory": _poolVictory,
   "pool/victorys-envoy": _poolVictorysEnvoy,
   "pool/victual-sliver": _poolVictualSliver,
+  "pool/vigean-hydropon": _poolVigeanHydropon,
   "pool/vigilance": _poolVigilance,
   "pool/vigilant-baloth": _poolVigilantBaloth,
   "pool/vigilant-drake": _poolVigilantDrake,
@@ -70109,6 +70125,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/bird-token-hermes-overseer-of-elpis": _tokensBirdTokenHermesOverseerOfElpis,
   "tokens/bird-token-ominous-roost": _tokensBirdTokenOminousRoost,
   "tokens/bird-token-white-3-4": _tokensBirdTokenWhite34,
+  "tokens/bird-token-white-blue": _tokensBirdTokenWhiteBlue,
   "tokens/bird-token": _tokensBirdToken,
   "tokens/black-deathtouch-snake-token": _tokensBlackDeathtouchSnakeToken,
   "tokens/black-enchantment-zombie-token-2-2": _tokensBlackEnchantmentZombieToken22,
@@ -70191,6 +70208,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/dragon-token-dragonback-assault": _tokensDragonTokenDragonbackAssault,
   "tokens/dragon-token-firebreathing": _tokensDragonTokenFirebreathing,
   "tokens/dragon-token-wake-the-dragon": _tokensDragonTokenWakeTheDragon,
+  "tokens/drake-token-leafdrake-roost": _tokensDrakeTokenLeafdrakeRoost,
   "tokens/drake-token": _tokensDrakeToken,
   "tokens/drone-token": _tokensDroneToken,
   "tokens/dwarf-berserker-token": _tokensDwarfBerserkerToken,
@@ -70216,6 +70234,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/elemental-token-lagomos-hand-of-hatred": _tokensElementalTokenLagomosHandOfHatred,
   "tokens/elemental-token-prismari-pianist": _tokensElementalTokenPrismariPianist,
   "tokens/elemental-token-rekindling-phoenix": _tokensElementalTokenRekindlingPhoenix,
+  "tokens/elemental-token-research-development": _tokensElementalTokenResearchDevelopment,
   "tokens/elemental-token-vernal-sovereign": _tokensElementalTokenVernalSovereign,
   "tokens/elemental-token-wildfire-awakener": _tokensElementalTokenWildfireAwakener,
   "tokens/elemental-token": _tokensElementalToken,
@@ -70263,6 +70282,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/goblin-token-boggart-mischief": _tokensGoblinTokenBoggartMischief,
   "tokens/goblin-token-goblin-spymaster": _tokensGoblinTokenGoblinSpymaster,
   "tokens/goblin-token-haste": _tokensGoblinTokenHaste,
+  "tokens/goblin-token-rakdos-guildmage": _tokensGoblinTokenRakdosGuildmage,
   "tokens/goblin-token": _tokensGoblinToken,
   "tokens/goblin-warrior-token": _tokensGoblinWarriorToken,
   "tokens/goblin-wizard-token": _tokensGoblinWizardToken,
@@ -70522,6 +70542,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/snail-token": _tokensSnailToken,
   "tokens/snake-token-5-4": _tokensSnakeToken54,
   "tokens/snake-token-artifact-poison": _tokensSnakeTokenArtifactPoison,
+  "tokens/snake-token-patagia-viper": _tokensSnakeTokenPatagiaViper,
   "tokens/snake-token": _tokensSnakeToken,
   "tokens/soldier-ally-token": _tokensSoldierAllyToken,
   "tokens/soldier-artifact-token": _tokensSoldierArtifactToken,

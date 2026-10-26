@@ -745,6 +745,7 @@ import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _poolZendikarIncarnate from "../pool/zendikar-incarnate.js";
 import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
 import _tokensClericToken from "../tokens/cleric-token.js";
+import _tokensElementalTokenResearchDevelopment from "../tokens/elemental-token-research-development.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensElkToken from "../tokens/elk-token.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
@@ -1506,6 +1507,7 @@ const shard: CardShard = {
   tokens: [
     _tokens55DjinnArtifactToken,
     _tokensClericToken,
+    _tokensElementalTokenResearchDevelopment,
     _tokensElementalTokenWildfireAwakener,
     _tokensElkToken,
     _tokensHumanMonkToken,

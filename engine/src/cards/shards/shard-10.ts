@@ -675,6 +675,7 @@ import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVernalBloom from "../pool/vernal-bloom.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
+import _poolVigeanHydropon from "../pool/vigean-hydropon.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
 import _poolVileRedeemer from "../pool/vile-redeemer.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
@@ -726,6 +727,7 @@ import _poolZealousConscripts from "../pool/zealous-conscripts.js";
 import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
+import _tokensBirdTokenWhiteBlue from "../tokens/bird-token-white-blue.js";
 import _tokensBlueThopterToken from "../tokens/blue-thopter-token.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
@@ -1414,6 +1416,7 @@ const shard: CardShard = {
     _poolVernalBloom,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
+    _poolVigeanHydropon,
     _poolVigorsporeWurm,
     _poolVileRedeemer,
     _poolVilisBrokerOfBlood,
@@ -1467,6 +1470,7 @@ const shard: CardShard = {
   tokens: [
     _tokens11BlueBirdToken,
     _tokensBeastTokenGarrukVeiledButcher,
+    _tokensBirdTokenWhiteBlue,
     _tokensBlueThopterToken,
     _tokensDinosaurToken33,
     _tokensDragonToken66,

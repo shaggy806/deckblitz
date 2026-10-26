@@ -595,6 +595,7 @@ import _poolSidisisFaithful from "../pool/sidisis-faithful.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
+import _poolSimicInitiate from "../pool/simic-initiate.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
@@ -1378,6 +1379,7 @@ const shard: CardShard = {
     _poolSilasRennSeekerAdept,
     _poolSilentClearing,
     _poolSilentHallcreeper,
+    _poolSimicInitiate,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
     _poolSkyclavePlunder,
