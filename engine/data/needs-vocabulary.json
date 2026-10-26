@@ -10684,6 +10684,18 @@
   "static:cda-counters-on-self": {
    "example": "Mwonvuli Ooze: power and toughness each 1 plus twice the age counters on it — setBasePtFromCount counts no counters on itself.",
    "family": "bug:cda-all-zones"
+  },
+  "static:can-block-any-number": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Guardian of the Gateless: 'can block any number of creatures' — no static lets a creature block more than one (rule 509.1a)."
+  },
+  "amount:graveyard-count-of-enchanted-controller": {
+   "family": "effect:amount-new-variants",
+   "example": "Death's Approach: '-X/-X, where X is the number of creature cards in its controller's graveyard' — `grantPtPerCount.inGraveyard` counts from the Aura controller's side."
+  },
+  "effect:pay-any-amount-of-life-reveal-that-many": {
+   "family": "effect:choices-by-other-players",
+   "example": "Vizkopa Confessor: 'pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it.'"
   }
  }
 }

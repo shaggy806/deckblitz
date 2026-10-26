@@ -8249,4 +8249,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Turn // Burn: cast fused, both halves resolve, left first',
     board({ you: { bf: ['Island*3', 'Mountain*2'], hand: ['Turn // Burn'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  preset(
+    'Shadow Slice: encoded on a creature, it casts again when that creature hits',
+    board({ you: { bf: ['Swamp*5', 'Grizzly Bears'], hand: ['Shadow Slice'] } }),
+  ),
 ]

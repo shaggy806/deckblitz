@@ -5403,3 +5403,10 @@ engine terms. A second thing to check is a second test.
 ### Turn // Burn: cast fused, both halves resolve, left first
 - **Do:** Click Turn // Burn in your hand and choose "Cast Turn // Burn". Target bob's Hill Giant for Turn, then the same Hill Giant for Burn.
 - **Expect:** The card offers three casts: Turn, Burn and Turn // Burn. Cast fused, it taps five lands, and the Giant becomes a 0/1 and then dies to Burn's 2 damage.
+
+## Cipher (2026-10-26, Gatecrash)
+
+### Shadow Slice: encoded on a creature, it casts again when that creature hits
+- **Do:** Cast Shadow Slice at Bob. When asked, pick your Grizzly Bears. Attack Bob with the Bears, and when asked, cast the copy at Bob.
+- **Expect:** Bob goes to 17, and your banner reads "Cipher — exile Shadow Slice encoded on a creature you control?". Shadow Slice goes to exile, not your graveyard. After the Bears' 2 damage, "Whenever this creature deals combat damage to a player, you may copy the encoded card (Shadow Slice) …" goes on the stack; casting the copy for free takes Bob to 12. Shadow Slice is still in exile.
+- **Not a bug:** Choosing no creature puts Shadow Slice in your graveyard.

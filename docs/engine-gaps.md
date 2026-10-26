@@ -6,6 +6,14 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A look-and-choose's `then` loses `"that-player"`.** Inside a `for-each-player`, a
+  `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
+  context without the enclosing loop's player binding (game.ts, where the choice's `then` is
+  applied), so `who: "that-player"` in the `then` reaches nobody and does nothing, silently.
+  Found 2026-10-26 authoring Duskmantle Seer (B176), written with `who: "you"` instead — right
+  only because the step runs as the choosing player. The fix carries the binding into the
+  `then`'s context.
+
 - **Flashback never offers a split card's halves.** A split instant or sorcery in a graveyard
   that has or gains flashback (Snapcaster Mage, Past in Flames — rule 702.34a) may be cast as
   either half for that half's flashback cost (709.3: only the half cast is evaluated; Past in
