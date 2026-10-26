@@ -5416,3 +5416,13 @@ engine terms. A second thing to check is a second test.
 ### Enraging Licid: it becomes an Aura, and you can pay to make it a creature again
 - **Do:** Click Enraging Licid and use its ability on your Grizzly Bears. Then click the Licid (now on the Bears) and choose "End the effect — pay {R}".
 - **Expect:** The Licid attaches to the Bears as an Aura and the Bears have haste. After paying {R} it's a 1/1 creature again on its own, and the Bears lose haste.
+
+## Unleash and detain (2026-10-26, Return to Ravnica)
+
+### Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking
+- **Do:** Cast Gore-House Chainwalker and pick '+1/+1 counter'. Pass to Bob's turn and let his Grizzly Bears attack.
+- **Expect:** 'Gore-House Chainwalker - choose one [+1/+1 counter] [No counter]' appears before it enters. It's a 3/2, and when Bob attacks it isn't offered as a blocker.
+
+### Azorius Arrester: a detained creature can't use its abilities until your next turn
+- **Do:** Cast Azorius Arrester and target Bob's Prodigal Sorcerer. Pass to Bob's turn, switch to Bob and try to activate the Sorcerer.
+- **Expect:** The Sorcerer's ability can't be activated and it can't attack. On your next turn, it can be activated again.

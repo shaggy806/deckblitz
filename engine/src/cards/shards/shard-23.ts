@@ -525,6 +525,7 @@ import _poolSkeletonCrew from "../pool/skeleton-crew.js";
 import _poolSkyclaveAerialist from "../pool/skyclave-aerialist.js";
 import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
 import _poolSkylineDespot from "../pool/skyline-despot.js";
+import _poolSkymarkRoc from "../pool/skymark-roc.js";
 import _poolSlashOfLight from "../pool/slash-of-light.js";
 import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
@@ -616,6 +617,7 @@ import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
 import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
+import _poolTrostanisJudgment from "../pool/trostanis-judgment.js";
 import _poolTunnel from "../pool/tunnel.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
@@ -685,6 +687,7 @@ import _tokensAssemblyWorkerToken from "../tokens/assembly-worker-token.js";
 import _tokensBlueHorror from "../tokens/blue-horror.js";
 import _tokensBlueRedElementalToken44 from "../tokens/blue-red-elemental-token-4-4.js";
 import _tokensConstructTokenMetallurgicSummonings from "../tokens/construct-token-metallurgic-summonings.js";
+import _tokensElementalToken88Vigilance from "../tokens/elemental-token-8-8-vigilance.js";
 import _tokensPlainKnightToken from "../tokens/plain-knight-token.js";
 import _tokensRedElementalToken31Haste from "../tokens/red-elemental-token-3-1-haste.js";
 import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
@@ -1215,6 +1218,7 @@ const shard: CardShard = {
     _poolSkyclaveAerialist,
     _poolSkycloudExpanse,
     _poolSkylineDespot,
+    _poolSkymarkRoc,
     _poolSlashOfLight,
     _poolSlipperyBogbonder,
     _poolSlobadGoblinTinkerer,
@@ -1306,6 +1310,7 @@ const shard: CardShard = {
     _poolTreacherousBlessing,
     _poolTreetopAmbusher,
     _poolTrokinHighGuard,
+    _poolTrostanisJudgment,
     _poolTunnel,
     _poolTwiceUponATime,
     _poolTwilightDrover,
@@ -1377,6 +1382,7 @@ const shard: CardShard = {
     _tokensBlueHorror,
     _tokensBlueRedElementalToken44,
     _tokensConstructTokenMetallurgicSummonings,
+    _tokensElementalToken88Vigilance,
     _tokensPlainKnightToken,
     _tokensRedElementalToken31Haste,
     _tokensSpellgorgerWeirdToken,

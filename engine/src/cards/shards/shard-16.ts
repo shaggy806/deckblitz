@@ -46,6 +46,7 @@ import _poolAvenRedeemer from "../pool/aven-redeemer.js";
 import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
+import _poolAzoriusJusticiar from "../pool/azorius-justiciar.js";
 import _poolBaldinCenturyHerdmaster from "../pool/baldin-century-herdmaster.js";
 import _poolBattleRageBlessing from "../pool/battle-rage-blessing.js";
 import _poolBattlegraceAngel from "../pool/battlegrace-angel.js";
@@ -63,6 +64,7 @@ import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
 import _poolBlessing from "../pool/blessing.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBlindingLight from "../pool/blinding-light.js";
+import _poolBlistercoilWeird from "../pool/blistercoil-weird.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
 import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
@@ -185,6 +187,7 @@ import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExpendableLackey from "../pool/expendable-lackey.js";
 import _poolExplosiveEntry from "../pool/explosive-entry.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
+import _poolEyesInTheSkies from "../pool/eyes-in-the-skies.js";
 import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
 import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
@@ -243,6 +246,7 @@ import _poolGlisteningSphere from "../pool/glistening-sphere.js";
 import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
+import _poolGolgariDecoy from "../pool/golgari-decoy.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
 import _poolGrafReaver from "../pool/graf-reaver.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
@@ -338,6 +342,7 @@ import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
 import _poolLivingHistory from "../pool/living-history.js";
+import _poolLobberCrew from "../pool/lobber-crew.js";
 import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
@@ -397,6 +402,7 @@ import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
+import _poolOakStreetInnkeeper from "../pool/oak-street-innkeeper.js";
 import _poolOathOfEorl from "../pool/oath-of-eorl.js";
 import _poolObNixilisTheAscended from "../pool/ob-nixilis-the-ascended.js";
 import _poolObekaSplitterOfSeconds from "../pool/obeka-splitter-of-seconds.js";
@@ -456,6 +462,8 @@ import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRagingSpirit from "../pool/raging-spirit.js";
+import _poolRakdosCackler from "../pool/rakdos-cackler.js";
+import _poolRakdosRingleader from "../pool/rakdos-ringleader.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
@@ -692,6 +700,7 @@ import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js"
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
 import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
+import _poolWildBeastmaster from "../pool/wild-beastmaster.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWildOnslaught from "../pool/wild-onslaught.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
@@ -781,6 +790,7 @@ const shard: CardShard = {
     _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,
+    _poolAzoriusJusticiar,
     _poolBaldinCenturyHerdmaster,
     _poolBattleRageBlessing,
     _poolBattlegraceAngel,
@@ -798,6 +808,7 @@ const shard: CardShard = {
     _poolBlessing,
     _poolBlindPhantasm,
     _poolBlindingLight,
+    _poolBlistercoilWeird,
     _poolBloodfellCaves,
     _poolBloodthirstyAerialist,
     _poolBlossomCladWerewolf,
@@ -920,6 +931,7 @@ const shard: CardShard = {
     _poolExpendableLackey,
     _poolExplosiveEntry,
     _poolExtravagantReplication,
+    _poolEyesInTheSkies,
     _poolEzrimAgencyChief,
     _poolFaerieSeer,
     _poolFalconJoaquinTorres,
@@ -978,6 +990,7 @@ const shard: CardShard = {
     _poolGlitterfang,
     _poolGluttonousSlug,
     _poolGoblinChirurgeon,
+    _poolGolgariDecoy,
     _poolGorionWiseMentor,
     _poolGrafReaver,
     _poolGrapeshot,
@@ -1073,6 +1086,7 @@ const shard: CardShard = {
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
     _poolLivingHistory,
+    _poolLobberCrew,
     _poolLodestoneGolem,
     _poolLokisScepter,
     _poolLongtuskCub,
@@ -1132,6 +1146,7 @@ const shard: CardShard = {
     _poolNighthawkScavenger,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
+    _poolOakStreetInnkeeper,
     _poolOathOfEorl,
     _poolObNixilisTheAscended,
     _poolObekaSplitterOfSeconds,
@@ -1191,6 +1206,8 @@ const shard: CardShard = {
     _poolRaffWeatherlightStalwart,
     _poolRagingBull,
     _poolRagingSpirit,
+    _poolRakdosCackler,
+    _poolRakdosRingleader,
     _poolRampartHunter,
     _poolRansackTheLab,
     _poolRazeToTheGround,
@@ -1427,6 +1444,7 @@ const shard: CardShard = {
     _poolWhenWeWereYoung,
     _poolWhiplashWordsmith,
     _poolWhiteMagesStaff,
+    _poolWildBeastmaster,
     _poolWildGrowth,
     _poolWildOnslaught,
     _poolWillOTheWisp,

@@ -138,6 +138,7 @@ import _poolCovetousCastaway from "../pool/covetous-castaway.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
 import _poolCreepingRenaissance from "../pool/creeping-renaissance.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
+import _poolCrosstownCourier from "../pool/crosstown-courier.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
 import _poolCrownedCeratok from "../pool/crowned-ceratok.js";
@@ -199,6 +200,7 @@ import _poolEmeriasCall from "../pool/emerias-call.js";
 import _poolEnduringTenacity from "../pool/enduring-tenacity.js";
 import _poolEnlistedWurm from "../pool/enlisted-wurm.js";
 import _poolEsperCormorants from "../pool/esper-cormorants.js";
+import _poolEssenceBacklash from "../pool/essence-backlash.js";
 import _poolEssenceHarvest from "../pool/essence-harvest.js";
 import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
@@ -328,6 +330,7 @@ import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
 import _poolKissOfTheAmesha from "../pool/kiss-of-the-amesha.js";
 import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
+import _poolKorozdaGuildmage from "../pool/korozda-guildmage.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
@@ -458,6 +461,7 @@ import _poolRagingCougar from "../pool/raging-cougar.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRaiyuuStormsEdge from "../pool/raiyuu-storms-edge.js";
+import _poolRakdosDrake from "../pool/rakdos-drake.js";
 import _poolRalsReinforcements from "../pool/rals-reinforcements.js";
 import _poolRampagingMonument from "../pool/rampaging-monument.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
@@ -876,6 +880,7 @@ const shard: CardShard = {
     _poolCrashOfRhinos,
     _poolCreepingRenaissance,
     _poolCrestedSunmare,
+    _poolCrosstownCourier,
     _poolCrosswayTroublemakers,
     _poolCrowdsFavor,
     _poolCrownedCeratok,
@@ -937,6 +942,7 @@ const shard: CardShard = {
     _poolEnduringTenacity,
     _poolEnlistedWurm,
     _poolEsperCormorants,
+    _poolEssenceBacklash,
     _poolEssenceHarvest,
     _poolEtaliPrimalStorm,
     _poolEtherealArmor,
@@ -1066,6 +1072,7 @@ const shard: CardShard = {
     _poolKingHaraldsRevenge,
     _poolKissOfTheAmesha,
     _poolKolodinTriumphCaster,
+    _poolKorozdaGuildmage,
     _poolKrangUtromWarlord,
     _poolKraulStinger,
     _poolKruinStriker,
@@ -1196,6 +1203,7 @@ const shard: CardShard = {
     _poolRainOfEmbers,
     _poolRaiseThePast,
     _poolRaiyuuStormsEdge,
+    _poolRakdosDrake,
     _poolRalsReinforcements,
     _poolRampagingMonument,
     _poolRancorousArchaic,

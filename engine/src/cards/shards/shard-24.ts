@@ -146,6 +146,7 @@ import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
 import _poolDarksteelPlate from "../pool/darksteel-plate.js";
 import _poolDauthiHorror from "../pool/dauthi-horror.js";
 import _poolDawnsLightArcher from "../pool/dawns-light-archer.js";
+import _poolDeadReveler from "../pool/dead-reveler.js";
 import _poolDeadRevels from "../pool/dead-revels.js";
 import _poolDeadeyeHarpooner from "../pool/deadeye-harpooner.js";
 import _poolDeadeyeTormentor from "../pool/deadeye-tormentor.js";
@@ -238,6 +239,7 @@ import _poolGoForth from "../pool/go-forth.js";
 import _poolGoblinAssailant from "../pool/goblin-assailant.js";
 import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGoliathPaladin from "../pool/goliath-paladin.js";
+import _poolGoreHouseChainwalker from "../pool/gore-house-chainwalker.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGravenLore from "../pool/graven-lore.js";
@@ -501,6 +503,7 @@ import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
 import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
+import _poolSlitherhead from "../pool/slitherhead.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
@@ -508,6 +511,7 @@ import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
+import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
@@ -612,6 +616,7 @@ import _poolVigilantMartyr from "../pool/vigilant-martyr.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
 import _poolVineMare from "../pool/vine-mare.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
+import _poolVituGhaziGuildmage from "../pool/vitu-ghazi-guildmage.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
 import _poolVividRevival from "../pool/vivid-revival.js";
 import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
@@ -823,6 +828,7 @@ const shard: CardShard = {
     _poolDarksteelPlate,
     _poolDauthiHorror,
     _poolDawnsLightArcher,
+    _poolDeadReveler,
     _poolDeadRevels,
     _poolDeadeyeHarpooner,
     _poolDeadeyeTormentor,
@@ -915,6 +921,7 @@ const shard: CardShard = {
     _poolGoblinAssailant,
     _poolGoldenScaleAeronaut,
     _poolGoliathPaladin,
+    _poolGoreHouseChainwalker,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
     _poolGravenLore,
@@ -1178,6 +1185,7 @@ const shard: CardShard = {
     _poolSkyscytheEngulfer,
     _poolSlaveOfBolas,
     _poolSlay,
+    _poolSlitherhead,
     _poolSmashToDust,
     _poolSoShiny,
     _poolSojournersCompanion,
@@ -1185,6 +1193,7 @@ const shard: CardShard = {
     _poolSolsticeZealot,
     _poolSoothsayerAdept,
     _poolSorinsVengeance,
+    _poolSoulTithe,
     _poolSphinxOfMagosi,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
@@ -1289,6 +1298,7 @@ const shard: CardShard = {
     _poolVildinPackOutcast,
     _poolVineMare,
     _poolViridianClaw,
+    _poolVituGhaziGuildmage,
     _poolVividMeadow,
     _poolVividRevival,
     _poolVoldarenThrillseeker,

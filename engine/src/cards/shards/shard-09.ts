@@ -263,6 +263,7 @@ import _poolGrimFeast from "../pool/grim-feast.js";
 import _poolGrimInitiate from "../pool/grim-initiate.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGrismoldTheDreadsower from "../pool/grismold-the-dreadsower.js";
+import _poolGroveOfTheGuardian from "../pool/grove-of-the-guardian.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
@@ -286,6 +287,7 @@ import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
 import _poolHopefulVigil from "../pool/hopeful-vigil.js";
 import _poolHorizonDrake from "../pool/horizon-drake.js";
+import _poolHorncallersChant from "../pool/horncallers-chant.js";
 import _poolHorriblyAwry from "../pool/horribly-awry.js";
 import _poolHoundOfTheFarbogs from "../pool/hound-of-the-farbogs.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
@@ -348,6 +350,7 @@ import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
+import _poolLyevSkyknight from "../pool/lyev-skyknight.js";
 import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
 import _poolMODOK from "../pool/m-o-d-o-k.js";
 import _poolMagebaneLizard from "../pool/magebane-lizard.js";
@@ -356,10 +359,12 @@ import _poolMagmabloodArchaic from "../pool/magmablood-archaic.js";
 import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
 import _poolMalignantGrowth from "../pool/malignant-growth.js";
 import _poolMammothBellow from "../pool/mammoth-bellow.js";
+import _poolManaBloom from "../pool/mana-bloom.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
 import _poolMaraudingMaulhorn from "../pool/marauding-maulhorn.js";
 import _poolMarduRunemark from "../pool/mardu-runemark.js";
+import _poolMartialLaw from "../pool/martial-law.js";
 import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
@@ -970,6 +975,7 @@ const shard: CardShard = {
     _poolGrimInitiate,
     _poolGriptide,
     _poolGrismoldTheDreadsower,
+    _poolGroveOfTheGuardian,
     _poolGuardianGladewalker,
     _poolGuardiansOfKoilos,
     _poolHamperingSnare,
@@ -993,6 +999,7 @@ const shard: CardShard = {
     _poolHopeEnderCoatl,
     _poolHopefulVigil,
     _poolHorizonDrake,
+    _poolHorncallersChant,
     _poolHorriblyAwry,
     _poolHoundOfTheFarbogs,
     _poolHowlingBanshee,
@@ -1055,6 +1062,7 @@ const shard: CardShard = {
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
     _poolLushPortico,
+    _poolLyevSkyknight,
     _poolLysAlanaDignitary,
     _poolMODOK,
     _poolMagebaneLizard,
@@ -1063,10 +1071,12 @@ const shard: CardShard = {
     _poolMagusOfTheWheel,
     _poolMalignantGrowth,
     _poolMammothBellow,
+    _poolManaBloom,
     _poolManaGeyser,
     _poolManaLeak,
     _poolMaraudingMaulhorn,
     _poolMarduRunemark,
+    _poolMartialLaw,
     _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
     _poolMemoryWorm,

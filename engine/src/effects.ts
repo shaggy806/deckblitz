@@ -3535,6 +3535,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * Detain (rule 701.35a): until the next turn of this effect's
+       * controller, `target` can't attack or block and its activated
+       * abilities — mana abilities included — can't be activated. Static
+       * abilities still apply and triggered ones still trigger; a creature
+       * already attacking or blocking stays in combat; a noncreature
+       * permanent that becomes a creature later still can't attack or block;
+       * an ability already on the stack is unaffected (the rulings).
+       */
+      readonly kind: "detain";
+      readonly target: EffectTargetRef;
+    }
+  | {
+      /**
        * "Can attack this turn as though it didn't have defender" (rule
        * 702.3b): `target` until end of turn, as a modifier (Assault
        * Formation); or with `filter`, a rule for the rest of the turn over
@@ -6548,6 +6561,8 @@ export interface EffectApi {
     /** A `target`'s: this turn when omitted. */
     duration?: PtDuration,
   ): void;
+  /** See the `"detain"` {@link EffectSpec}. */
+  detain(target: TargetRef): void;
   /** See the `"attack-despite-defender"` {@link EffectSpec}. */
   attackDespiteDefender(target: TargetRef | undefined, filter: CardFilter | undefined): void;
   /** See the `"damage-by-toughness"` {@link EffectSpec}. */
@@ -10045,6 +10060,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.restrict(target, undefined, spec.restrictions, spec.duration);
+      return;
+    }
+    case "detain": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.detain(target);
       return;
     }
     case "attack-despite-defender": {

@@ -165,6 +165,7 @@ import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
 import _poolDesculptingBlast from "../pool/desculpting-blast.js";
+import _poolDeviantGlee from "../pool/deviant-glee.js";
 import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
@@ -178,6 +179,7 @@ import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDrillBit from "../pool/drill-bit.js";
+import _poolDryadMilitant from "../pool/dryad-militant.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuergarHedgeMage from "../pool/duergar-hedge-mage.js";
 import _poolDuergarMineCaptain from "../pool/duergar-mine-captain.js";
@@ -850,6 +852,7 @@ const shard: CardShard = {
     _poolDemonsDisciple,
     _poolDemonsGrasp,
     _poolDesculptingBlast,
+    _poolDeviantGlee,
     _poolDigsiteEngineer,
     _poolDireStrainDemolisher,
     _poolDismember,
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolDreadfulApathy,
     _poolDreyKeeper,
     _poolDrillBit,
+    _poolDryadMilitant,
     _poolDryadsFavor,
     _poolDuergarHedgeMage,
     _poolDuergarMineCaptain,

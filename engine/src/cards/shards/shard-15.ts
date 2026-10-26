@@ -76,6 +76,7 @@ import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
 import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js";
 import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
+import _poolCentaursHerald from "../pool/centaurs-herald.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolChandrasRevolution from "../pool/chandras-revolution.js";
@@ -348,6 +349,7 @@ import _poolLostVale from "../pool/lost-vale.js";
 import _poolLothoCorruptShirriff from "../pool/lotho-corrupt-shirriff.js";
 import _poolLoyalInventor from "../pool/loyal-inventor.js";
 import _poolLunarFrenzy from "../pool/lunar-frenzy.js";
+import _poolLyevDecree from "../pool/lyev-decree.js";
 import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
@@ -735,6 +737,7 @@ const shard: CardShard = {
     _poolCarrionWall,
     _poolCaseOfTheTrampledGarden,
     _poolCaughtInTheCrossfire,
+    _poolCentaursHerald,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
     _poolChandrasRevolution,
@@ -1007,6 +1010,7 @@ const shard: CardShard = {
     _poolLothoCorruptShirriff,
     _poolLoyalInventor,
     _poolLunarFrenzy,
+    _poolLyevDecree,
     _poolMaelstromArtisan,
     _poolMaggotTherapy,
     _poolMagitekScythe,

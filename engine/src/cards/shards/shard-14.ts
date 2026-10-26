@@ -443,6 +443,7 @@ import _poolPatrolSignaler from "../pool/patrol-signaler.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
+import _poolPhantomGeneral from "../pool/phantom-general.js";
 import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
 import _poolPiaNalaar from "../pool/pia-nalaar.js";
 import _poolPiercingLight from "../pool/piercing-light.js";
@@ -541,6 +542,7 @@ import _poolSlaughterSinger from "../pool/slaughter-singer.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
+import _poolSoulswornSpirit from "../pool/soulsworn-spirit.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSpellboundDragon from "../pool/spellbound-dragon.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
@@ -552,6 +554,7 @@ import _poolSpitefulHexmage from "../pool/spiteful-hexmage.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolSplendidAgony from "../pool/splendid-agony.js";
 import _poolSpreadingFlames from "../pool/spreading-flames.js";
+import _poolStabWound from "../pool/stab-wound.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
@@ -1124,6 +1127,7 @@ const shard: CardShard = {
     _poolPearledUnicorn,
     _poolPegasusGuardian,
     _poolPerilousShadow,
+    _poolPhantomGeneral,
     _poolPhyrexianSwarmlord,
     _poolPiaNalaar,
     _poolPiercingLight,
@@ -1222,6 +1226,7 @@ const shard: CardShard = {
     _poolSlinnVodaTheRisingDeep,
     _poolSmashingSuccess,
     _poolSnarlingWarg,
+    _poolSoulswornSpirit,
     _poolSparringConstruct,
     _poolSpellboundDragon,
     _poolSphinxOfTheSteelWind,
@@ -1233,6 +1238,7 @@ const shard: CardShard = {
     _poolSpitefulMotives,
     _poolSplendidAgony,
     _poolSpreadingFlames,
+    _poolStabWound,
     _poolStingingHivemaster,
     _poolStingingShot,
     _poolStitchTogether,

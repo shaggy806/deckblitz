@@ -486,6 +486,15 @@ the permanent is about to enter (a fixed-menu `choose-creature-type` with
 stays (an effect, not its own ability: a change of control keeps it).
 Printed or copied only — see §15.
 
+**Unleash** (rule 702.98): `unleash` — the engine asks "+1/+1 counter or no
+counter" as the permanent is about to enter (a fixed-menu
+`choose-creature-type` with `unleash`), and the keyword's other half is a
+`cant-block` restriction in the layer fold while it has any +1/+1 counter
+(Rakdos Cackler, Gore-House Chainwalker). The enter choice is printed or
+copied only, as riot's: a static granting unleash to others ("other Dogs you
+control have unleash" — Tesak) isn't asked as they enter (§15).
+`unleash-detain.test.ts`.
+
 **Flanking** (rule 702.25): `flanking` in `keywords` *and* the `flanking()`
 helper in `triggered` — the keyword is what "a creature without flanking"
 asks, the helper the trigger (`blocked-by`, §9).
@@ -1711,6 +1720,14 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   "{X}"` is "you may pay **any amount of {R}**" (Leyline Tyrant): X is paid
   in that colour, each X one {R}, and the X offered goes only as high as the
   player's red mana does; a `reflexive-trigger` under it reads it as X.
+- **`detain { target }`** — detain (rule 701.35): until the effect's
+  controller's next turn, the permanent in `target` can't attack or block and
+  its activated abilities, mana abilities included, can't be activated (one
+  modifier, `abilitiesCantBeActivated`, ended as that turn begins). "Detain up
+  to two target creatures your opponents control" is two optional slots, the
+  second `other` than the first, and a `sequence` of two `detain`s (Azorius
+  Justiciar). Not yet: "detain each …" with no target (Lavinia of the Tenth).
+  `unleash-detain.test.ts`.
 - **`goad { target | who | filter, forGame? }`** — goad (rule 701.15): until
   the effect's controller's next turn, each creature goaded attacks each
   combat if able and attacks a player other than them if able. `target` is a

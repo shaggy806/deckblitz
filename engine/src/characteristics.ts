@@ -3531,6 +3531,10 @@ function computeCharacteristicsUncached(
   // Decayed's static half (rule 702.147a): "This creature can't block" — for
   // as long as it has the keyword, however it got it.
   if (keywords.has("decayed")) restrictions.add("cant-block");
+  // Unleash's static half (rule 702.98a): "This permanent can't block as
+  // long as it has a +1/+1 counter on it" — any +1/+1 counter, not only
+  // the one unleash put there (the ruling).
+  if (keywords.has("unleash") && (object.counters["+1/+1"] ?? 0) > 0) restrictions.add("cant-block");
 
   return {
     power,

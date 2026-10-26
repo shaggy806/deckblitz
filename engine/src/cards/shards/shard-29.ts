@@ -52,6 +52,7 @@ import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
+import _poolBazaarKrovod from "../pool/bazaar-krovod.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
 import _poolBindingGrasp from "../pool/binding-grasp.js";
@@ -760,6 +761,7 @@ const shard: CardShard = {
     _poolBargain,
     _poolBargeIn,
     _poolBarkKnuckleBoxer,
+    _poolBazaarKrovod,
     _poolBeatrixLoyalGeneral,
     _poolBetorKinToAll,
     _poolBindingGrasp,

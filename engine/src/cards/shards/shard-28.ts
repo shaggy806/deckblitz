@@ -95,6 +95,7 @@ import _poolBurnout from "../pool/burnout.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
+import _poolCallOfTheConclave from "../pool/call-of-the-conclave.js";
 import _poolCallOfTheNightwing from "../pool/call-of-the-nightwing.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
@@ -128,6 +129,7 @@ import _poolCoralColony from "../pool/coral-colony.js";
 import _poolCorpseAppraiser from "../pool/corpse-appraiser.js";
 import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
+import _poolCoursersAccord from "../pool/coursers-accord.js";
 import _poolCourtArchers from "../pool/court-archers.js";
 import _poolCowerInFear from "../pool/cower-in-fear.js";
 import _poolCragsmasherYeti from "../pool/cragsmasher-yeti.js";
@@ -296,6 +298,7 @@ import _poolInvulnerability from "../pool/invulnerability.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
+import _poolIsperiasSkywatch from "../pool/isperias-skywatch.js";
 import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
@@ -559,6 +562,7 @@ import _poolSolitaryCamel from "../pool/solitary-camel.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
+import _poolSpawnOfRixMaadi from "../pool/spawn-of-rix-maadi.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
@@ -604,6 +608,7 @@ import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
 import _poolThreefoldThunderhulk from "../pool/threefold-thunderhulk.js";
+import _poolThrillKillAssassin from "../pool/thrill-kill-assassin.js";
 import _poolThrivingIbex from "../pool/thriving-ibex.js";
 import _poolThrunBreakerOfSilence from "../pool/thrun-breaker-of-silence.js";
 import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
@@ -800,6 +805,7 @@ const shard: CardShard = {
     _poolCacklingCulprit,
     _poolCalamityBearer,
     _poolCalculatedDismissal,
+    _poolCallOfTheConclave,
     _poolCallOfTheNightwing,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
@@ -833,6 +839,7 @@ const shard: CardShard = {
     _poolCorpseAppraiser,
     _poolCouncilOfReeds,
     _poolCounselOfTheSoratami,
+    _poolCoursersAccord,
     _poolCourtArchers,
     _poolCowerInFear,
     _poolCragsmasherYeti,
@@ -1001,6 +1008,7 @@ const shard: CardShard = {
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,
+    _poolIsperiasSkywatch,
     _poolJabarisBanner,
     _poolJadelightSpelunker,
     _poolJewelThief,
@@ -1264,6 +1272,7 @@ const shard: CardShard = {
     _poolSoulsFire,
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,
+    _poolSpawnOfRixMaadi,
     _poolSpecimenCollector,
     _poolSpiritOfTheNight,
     _poolSpitefulSliver,
@@ -1309,6 +1318,7 @@ const shard: CardShard = {
     _poolThoughtseize,
     _poolThreeTreeCity,
     _poolThreefoldThunderhulk,
+    _poolThrillKillAssassin,
     _poolThrivingIbex,
     _poolThrunBreakerOfSilence,
     _poolThunderclapWyvern,

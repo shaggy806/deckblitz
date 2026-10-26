@@ -119,7 +119,7 @@ export const KEYWORDS = {
   flying: "flying", reach: "reach", haste: "haste", vigilance: "vigilance", defender: "defender",
   "first strike": "first-strike", "double strike": "double-strike", trample: "trample",
   deathtouch: "deathtouch", lifelink: "lifelink", menace: "menace", indestructible: "indestructible",
-  hexproof: "hexproof", shroud: "shroud", flash: "flash", fear: "fear", intimidate: "intimidate", skulk: "skulk", riot: "riot", storied: "storied", ascend: "ascend",
+  hexproof: "hexproof", shroud: "shroud", flash: "flash", fear: "fear", intimidate: "intimidate", skulk: "skulk", riot: "riot", unleash: "unleash", storied: "storied", ascend: "ascend",
   "start your engines!": "start-your-engines",
   infect: "infect", wither: "wither", "umbra armor": "umbra-armor", "totem armor": "umbra-armor",
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
@@ -1332,6 +1332,8 @@ export function parseSentence(sentence, ctx) {
   if (re("return ~ to its owner's hand").test(s)) return { kind: "return-to-hand", target: "source" };
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
   if ((m = re(`untap (${TARGET})`).exec(s))) return { kind: "untap", target: slot(m[1]) };
+  // Detain (rule 701.35a).
+  if ((m = re(`detain (${TARGET})`).exec(s))) return { kind: "detain", target: slot(m[1]) };
   if (re("untap ~").test(s)) return { kind: "untap", target: "source" };
   // Saddled (rule 702.171b) without a saddle ability: Guidelight Matrix.
   if ((m = re(`(${TARGET}) becomes saddled until end of turn`).exec(s))) {

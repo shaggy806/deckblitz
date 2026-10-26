@@ -96,6 +96,7 @@ import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
+import _poolCryptbornHorror from "../pool/cryptborn-horror.js";
 import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
@@ -109,6 +110,7 @@ import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
 import _poolDarkEndurance from "../pool/dark-endurance.js";
 import _poolDarkInquiry from "../pool/dark-inquiry.js";
+import _poolDarkRevenant from "../pool/dark-revenant.js";
 import _poolDarklightPhoenix from "../pool/darklight-phoenix.js";
 import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
@@ -134,6 +136,7 @@ import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDoubleJump from "../pool/double-jump.js";
 import _poolDragonThroneOfTarkir from "../pool/dragon-throne-of-tarkir.js";
+import _poolDrainpipeVermin from "../pool/drainpipe-vermin.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDranasSilencer from "../pool/dranas-silencer.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
@@ -330,6 +333,7 @@ import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
+import _poolLotlethTroll from "../pool/lotleth-troll.js";
 import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
@@ -766,6 +770,7 @@ const shard: CardShard = {
     _poolCrimsonCaravaneer,
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
+    _poolCryptbornHorror,
     _poolCrystallineNautilus,
     _poolCubwarden,
     _poolCultistOfTheAbsolute,
@@ -779,6 +784,7 @@ const shard: CardShard = {
     _poolDakmorScorpion,
     _poolDarkEndurance,
     _poolDarkInquiry,
+    _poolDarkRevenant,
     _poolDarklightPhoenix,
     _poolDarksteelMyr,
     _poolDauntlessSurvivor,
@@ -804,6 +810,7 @@ const shard: CardShard = {
     _poolDoubleDown,
     _poolDoubleJump,
     _poolDragonThroneOfTarkir,
+    _poolDrainpipeVermin,
     _poolDrakeHatchling,
     _poolDranasSilencer,
     _poolDreadPresence,
@@ -1000,6 +1007,7 @@ const shard: CardShard = {
     _poolLongFinnedSkywhale,
     _poolLoomingSpires,
     _poolLordWindgrace,
+    _poolLotlethTroll,
     _poolLotuslightDancers,
     _poolLoyalSubordinate,
     _poolMacabreWaltz,

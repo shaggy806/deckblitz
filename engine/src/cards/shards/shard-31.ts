@@ -108,6 +108,7 @@ import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolCharmbreakerDevils from "../pool/charmbreaker-devils.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
+import _poolChorusOfMight from "../pool/chorus-of-might.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
 import _poolCipherboundSpirit from "../pool/cipherbound-spirit.js";
 import _poolCircleOfProtectionBlue from "../pool/circle-of-protection-blue.js";
@@ -156,6 +157,7 @@ import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
 import _poolDesolateMire from "../pool/desolate-mire.js";
+import _poolDestroyTheEvidence from "../pool/destroy-the-evidence.js";
 import _poolDevastatingSummons from "../pool/devastating-summons.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
@@ -297,6 +299,7 @@ import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHeirToTheNight from "../pool/heir-to-the-night.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
+import _poolHellholeFlailer from "../pool/hellhole-flailer.js";
 import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
 import _poolHerosResolve from "../pool/heros-resolve.js";
@@ -321,6 +324,7 @@ import _poolIcewindElemental from "../pool/icewind-elemental.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
+import _poolInactionInjunction from "../pool/inaction-injunction.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
 import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
@@ -360,6 +364,7 @@ import _poolKjeldoranOutrider from "../pool/kjeldoran-outrider.js";
 import _poolKnowledgeAndPower from "../pool/knowledge-and-power.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
+import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
 import _poolKrosanGrip from "../pool/krosan-grip.js";
@@ -669,6 +674,7 @@ import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
+import _poolVolatileRig from "../pool/volatile-rig.js";
 import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
@@ -829,6 +835,7 @@ const shard: CardShard = {
     _poolCharityExtractor,
     _poolCharmbreakerDevils,
     _poolChitteringDispatcher,
+    _poolChorusOfMight,
     _poolChromaticStar,
     _poolCipherboundSpirit,
     _poolCircleOfProtectionBlue,
@@ -877,6 +884,7 @@ const shard: CardShard = {
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
     _poolDesolateMire,
+    _poolDestroyTheEvidence,
     _poolDevastatingSummons,
     _poolDevouringSugarmaw,
     _poolDewdropCure,
@@ -1018,6 +1026,7 @@ const shard: CardShard = {
     _poolHedronArchive,
     _poolHeirToTheNight,
     _poolHelicarrierStrike,
+    _poolHellholeFlailer,
     _poolHellkiteCharger,
     _poolHellkiteTyrant,
     _poolHerosResolve,
@@ -1042,6 +1051,7 @@ const shard: CardShard = {
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,
     _poolImmersturmRaider,
+    _poolInactionInjunction,
     _poolInfestationExpert,
     _poolInfuseWithTheElements,
     _poolInheritedEnvelope,
@@ -1081,6 +1091,7 @@ const shard: CardShard = {
     _poolKnowledgeAndPower,
     _poolKodamaOfTheEastTree,
     _poolKorlessaScaleSinger,
+    _poolKorozdaMonitor,
     _poolKotoriPilotProdigy,
     _poolKrarkClanIronworks,
     _poolKrosanGrip,
@@ -1390,6 +1401,7 @@ const shard: CardShard = {
     _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,
+    _poolVolatileRig,
     _poolVraskasConquistador,
     _poolWalkingAtlas,
     _poolWallOfMist,
