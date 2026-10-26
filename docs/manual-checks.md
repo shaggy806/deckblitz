@@ -5471,3 +5471,9 @@ engine terms. A second thing to check is a second test.
 ### Pegasus Stampede: buyback sacrifices a land
 - **Do:** Cast Pegasus Stampede with buyback and sacrifice a Plains when asked.
 - **Expect:** A second cast offer reads "buyback Sacrifice a land" beside the plain cast. A 1/1 flying Pegasus enters, the Plains goes to your graveyard and Pegasus Stampede comes back to your hand.
+
+## "Only if you've been attacked this step" (2026-10-26, Portal)
+
+### Just Fate: castable only once you've been attacked
+- **Do:** Pass the turn. When the opponent's Hill Giant attacks you, cast Just Fate on it in the declare attackers step.
+- **Expect:** Just Fate isn't castable in your own main phase, nor on the opponent's turn before attackers are declared. Once the Giant attacks you it is, and the Giant is destroyed before blocks.

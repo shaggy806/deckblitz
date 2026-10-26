@@ -1,0 +1,814 @@
+{
+ "batch": "B190",
+ "status": "complete",
+ "ranks": "Portal (POR, 1997-05-01) and Portal Second Age (P02, 1998-06-24): the rest of each set, 113 cards (oldest-first walk); built the attacked-this-step condition, the attackingYou filter and prevent-damage-to-you (with Scarecrow and Al-abara's Carpet from batches 133-134), BEFORE_ATTACKERS_DECLARED, and fixed a trigger's unfillable any-number group (603.3d) and shuffle-into-library on a card already gone",
+ "authored": [
+  {
+   "name": "Abyssal Nightstalker",
+   "files": [
+    "engine/src/cards/pool/abyssal-nightstalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Al-abara's Carpet",
+   "files": [
+    "engine/src/cards/pool/al-abaras-carpet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Alabaster Dragon",
+   "files": [
+    "engine/src/cards/pool/alabaster-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alaborn Veteran",
+   "files": [
+    "engine/src/cards/pool/alaborn-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alaborn Zealot",
+   "files": [
+    "engine/src/cards/pool/alaborn-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alluring Scent",
+   "files": [
+    "engine/src/cards/pool/alluring-scent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Angel of Fury",
+   "files": [
+    "engine/src/cards/pool/angel-of-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apprentice Sorcerer",
+   "files": [
+    "engine/src/cards/pool/apprentice-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assassin's Blade",
+   "files": [
+    "engine/src/cards/pool/assassins-blade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blessed Reversal",
+   "files": [
+    "engine/src/cards/pool/blessed-reversal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodcurdling Scream",
+   "files": [
+    "engine/src/cards/pool/bloodcurdling-scream.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boiling Seas",
+   "files": [
+    "engine/src/cards/pool/boiling-seas.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brutal Nightstalker",
+   "files": [
+    "engine/src/cards/pool/brutal-nightstalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Cloak",
+   "files": [
+    "engine/src/cards/pool/burning-cloak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Capricious Sorcerer",
+   "files": [
+    "engine/src/cards/pool/capricious-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charging Rhino",
+   "files": [
+    "engine/src/cards/pool/charging-rhino.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Coastal Wizard",
+   "files": [
+    "engine/src/cards/pool/coastal-wizard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Command of Unsummoning",
+   "files": [
+    "engine/src/cards/pool/command-of-unsummoning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cruel Bargain",
+   "files": [
+    "engine/src/cards/pool/cruel-bargain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dakmor Sorceress",
+   "files": [
+    "engine/src/cards/pool/dakmor-sorceress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep Wood",
+   "files": [
+    "engine/src/cards/pool/deep-wood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiant Stand",
+   "files": [
+    "engine/src/cards/pool/defiant-stand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devastation",
+   "files": [
+    "engine/src/cards/pool/devastation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ebon Dragon",
+   "files": [
+    "engine/src/cards/pool/ebon-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endless Cockroaches",
+   "files": [
+    "engine/src/cards/pool/endless-cockroaches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exhaustion",
+   "files": [
+    "engine/src/cards/pool/exhaustion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extinguish",
+   "files": [
+    "engine/src/cards/pool/extinguish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Festival of Trokin",
+   "files": [
+    "engine/src/cards/pool/festival-of-trokin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Final Strike",
+   "files": [
+    "engine/src/cards/pool/final-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Dragon",
+   "files": [
+    "engine/src/cards/pool/fire-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flux",
+   "files": [
+    "engine/src/cards/pool/flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forked Lightning",
+   "files": [
+    "engine/src/cards/pool/forked-lightning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Foul Spirit",
+   "files": [
+    "engine/src/cards/pool/foul-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fruition",
+   "files": [
+    "engine/src/cards/pool/fruition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Firestarter",
+   "files": [
+    "engine/src/cards/pool/goblin-firestarter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin General",
+   "files": [
+    "engine/src/cards/pool/goblin-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Lore",
+   "files": [
+    "engine/src/cards/pool/goblin-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harmony of Nature",
+   "files": [
+    "engine/src/cards/pool/harmony-of-nature.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harsh Justice",
+   "files": [
+    "engine/src/cards/pool/harsh-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ironhoof Ox",
+   "files": [
+    "engine/src/cards/pool/ironhoof-ox.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jagged Lightning",
+   "files": [
+    "engine/src/cards/pool/jagged-lightning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Just Fate",
+   "files": [
+    "engine/src/cards/pool/just-fate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "King's Assassin",
+   "files": [
+    "engine/src/cards/pool/kings-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magma Giant",
+   "files": [
+    "engine/src/cards/pool/magma-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Knives",
+   "files": [
+    "engine/src/cards/pool/mind-knives.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mobilize",
+   "files": [
+    "engine/src/cards/pool/mobilize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Denial",
+   "files": [
+    "engine/src/cards/pool/mystic-denial.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Natural Spring",
+   "files": [
+    "engine/src/cards/pool/natural-spring.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nature's Cloak",
+   "files": [
+    "engine/src/cards/pool/natures-cloak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nature's Ruin",
+   "files": [
+    "engine/src/cards/pool/natures-ruin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Needle Storm",
+   "files": [
+    "engine/src/cards/pool/needle-storm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nightstalker Engine",
+   "files": [
+    "engine/src/cards/pool/nightstalker-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Norwood Priestess",
+   "files": [
+    "engine/src/cards/pool/norwood-priestess.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Norwood Riders",
+   "files": [
+    "engine/src/cards/pool/norwood-riders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Omen",
+   "files": [
+    "engine/src/cards/pool/omen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pillaging Horde",
+   "files": [
+    "engine/src/cards/pool/pillaging-horde.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plant Elemental",
+   "files": [
+    "engine/src/cards/pool/plant-elemental.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Predatory Nightstalker",
+   "files": [
+    "engine/src/cards/pool/predatory-nightstalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primeval Force",
+   "files": [
+    "engine/src/cards/pool/primeval-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prowling Nightstalker",
+   "files": [
+    "engine/src/cards/pool/prowling-nightstalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rain of Salt",
+   "files": [
+    "engine/src/cards/pool/rain-of-salt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally the Troops",
+   "files": [
+    "engine/src/cards/pool/rally-the-troops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Remove",
+   "files": [
+    "engine/src/cards/pool/remove.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Renewing Dawn",
+   "files": [
+    "engine/src/cards/pool/renewing-dawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renewing Touch",
+   "files": [
+    "engine/src/cards/pool/renewing-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Return of the Nightstalkers",
+   "files": [
+    "engine/src/cards/pool/return-of-the-nightstalkers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Righteous Fury",
+   "files": [
+    "engine/src/cards/pool/righteous-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sacred Knight",
+   "files": [
+    "engine/src/cards/pool/sacred-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salvage",
+   "files": [
+    "engine/src/cards/pool/salvage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scarecrow",
+   "files": [
+    "engine/src/cards/pool/scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scorching Winds",
+   "files": [
+    "engine/src/cards/pool/scorching-winds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sea Drake",
+   "files": [
+    "engine/src/cards/pool/sea-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starlight",
+   "files": [
+    "engine/src/cards/pool/starlight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steam Catapult",
+   "files": [
+    "engine/src/cards/pool/steam-catapult.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stern Marshal",
+   "files": [
+    "engine/src/cards/pool/stern-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swarm of Rats",
+   "files": [
+    "engine/src/cards/pool/swarm-of-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Basilisk",
+   "files": [
+    "engine/src/cards/pool/sylvan-basilisk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Yeti",
+   "files": [
+    "engine/src/cards/pool/sylvan-yeti.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Talas Researcher",
+   "files": [
+    "engine/src/cards/pool/talas-researcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temple Elder",
+   "files": [
+    "engine/src/cards/pool/temple-elder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporary Truce",
+   "files": [
+    "engine/src/cards/pool/temporary-truce.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Theft of Dreams",
+   "files": [
+    "engine/src/cards/pool/theft-of-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thing from the Deep",
+   "files": [
+    "engine/src/cards/pool/thing-from-the-deep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Surge",
+   "files": [
+    "engine/src/cards/pool/tidal-surge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treetop Defense",
+   "files": [
+    "engine/src/cards/pool/treetop-defense.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Undying Beast",
+   "files": [
+    "engine/src/cards/pool/undying-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valorous Charge",
+   "files": [
+    "engine/src/cards/pool/valorous-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Virtue's Ruin",
+   "files": [
+    "engine/src/cards/pool/virtues-ruin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Warrior's Stand",
+   "files": [
+    "engine/src/cards/pool/warriors-stand.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wicked Pact",
+   "files": [
+    "engine/src/cards/pool/wicked-pact.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wind Sail",
+   "files": [
+    "engine/src/cards/pool/wind-sail.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Balance of Power",
+   "needs": [
+    "effect:cards-in-target-player-hand"
+   ],
+   "why": "draw cards equal to the difference between target opponent's hand size and yours: no amount reads a target player's hand size"
+  },
+  {
+   "name": "Lone Wolf",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "may assign its combat damage as though it weren't blocked"
+  },
+  {
+   "name": "Deathcoil Wurm",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "may assign its combat damage as though it weren't blocked"
+  },
+  {
+   "name": "Steam Frigate",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Deep-Sea Serpent",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Armored Galleon",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless defending player controls an Island"
+  },
+  {
+   "name": "Thundermare",
+   "needs": [
+    "effect:tap-all-except-source"
+   ],
+   "why": "tap all other creatures: tap-all has no exceptSource"
+  },
+  {
+   "name": "Baleful Stare",
+   "needs": [
+    "amount:cards-in-hand-matching-filter"
+   ],
+   "why": "draw a card for each Mountain and red card in the revealed hand"
+  },
+  {
+   "name": "Withering Gaze",
+   "needs": [
+    "amount:cards-in-hand-matching-filter"
+   ],
+   "why": "draw a card for each Forest and green card in the revealed hand"
+  },
+  {
+   "name": "Path of Peace",
+   "needs": [
+    "effect:owner-of-target-player-ref"
+   ],
+   "why": "its owner (not controller) gains 4 life, per the ruling"
+  },
+  {
+   "name": "Thundering Wurm",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "sacrifice it unless you discard a land card: the unless-discard takes no filter"
+  },
+  {
+   "name": "Mercenary Knight",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "sacrifice it unless you discard a creature card: the unless-discard takes no filter"
+  },
+  {
+   "name": "Piracy",
+   "needs": [
+    "static:tap-opponents-lands-for-mana"
+   ],
+   "why": "tap lands you don't control for mana, spent only on spells"
+  },
+  {
+   "name": "Talas Explorer",
+   "needs": [
+    "effect:look-at-target-player-hand"
+   ],
+   "why": "look at target opponent's hand"
+  },
+  {
+   "name": "Ingenious Thief",
+   "needs": [
+    "effect:look-at-target-player-hand"
+   ],
+   "why": "look at target player's hand"
+  },
+  {
+   "name": "Sorcerous Sight",
+   "needs": [
+    "effect:look-at-target-player-hand"
+   ],
+   "why": "look at target opponent's hand"
+  },
+  {
+   "name": "False Peace",
+   "needs": [
+    "effect:skip-next-combat-phase"
+   ],
+   "why": "target player skips all combat phases of their next turn"
+  },
+  {
+   "name": "Taunt",
+   "needs": [
+    "effect:must-attack-specific-player"
+   ],
+   "why": "during target player's next turn, their creatures attack you if able"
+  },
+  {
+   "name": "Cunning Giant",
+   "needs": [
+    "static:unblocked-assign-damage-to-creature"
+   ],
+   "why": "an unblocked attacker may assign its combat damage to a creature defending player controls"
+  },
+  {
+   "name": "Denizen of the Deep",
+   "needs": [
+    "effect:return-to-hand-all-except-source"
+   ],
+   "why": "return each other creature you control to its owner's hand"
+  },
+  {
+   "name": "Cruel Fate",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library"
+   ],
+   "why": "look at the top five of target opponent's library, one into their graveyard, the rest back in any order"
+  },
+  {
+   "name": "Eye Spy",
+   "needs": [
+    "effect:look-at-target-player-library"
+   ],
+   "why": "look at the top card of target player's library, may mill it"
+  },
+  {
+   "name": "Goblin War Cry",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "target opponent chooses a creature; their others can't block"
+  },
+  {
+   "name": "Dread Charge",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "black creatures you control can't be blocked except by black creatures this turn"
+  }
+ ]
+}

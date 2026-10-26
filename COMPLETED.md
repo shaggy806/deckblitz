@@ -154,6 +154,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **"Only if you've been attacked this step", "creatures attacking you", "prevent all damage
+  dealt to you this turn by …"** (batch 190, the oldest-first walk, 2026-10-26,
+  `effect:prevent-damage-to-you-by-filter-this-turn`): the `attacked-this-step` condition (rule
+  508.3b, per combat — Portal's eleven declare-attackers instants: Just Fate, Harsh Justice, Deep
+  Wood, Command of Unsummoning …), the `attackingYou` filter (Blessed Reversal),
+  `prevent-damage-to-you { by }` (Deep Wood, Scarecrow, Al-abara's Carpet) and
+  `BEFORE_ATTACKERS_DECLARED` (Portal's eleven "activate only during your turn, before attackers
+  are declared"). Fixed: a trigger's any-number group with fewer options than its minimum is
+  removed (603.3d — Sea Drake), and a shuffle-into-library whose card has gone still shuffles
+  (Angel of Fury). `attacked-this-step.test.ts`.
+- **Portal and Portal Second Age, whole** (batch 190, the oldest-first walk, 2026-10-26): 89 of
+  their 113 left authored — Flux, Exhaustion, Temporary Truce, Cruel Bargain, Harsh Justice, Sea
+  Drake, Magma Giant, Return of the Nightstalkers and more — by five `card-author` agents and the
+  lead; 24 blocked (`B190.json`). Both sets are whole.
 - **Random-discard costs, buyback's non-mana costs, the compared-opponent target** (batch 187,
   the oldest-first walk, 2026-10-26, `cost:discard-at-random`, `cost:buyback-non-mana`,
   `target:opponent-compared`): an activated ability's `cost.discard.random` and a spell's
