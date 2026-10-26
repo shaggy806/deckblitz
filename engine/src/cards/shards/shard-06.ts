@@ -258,6 +258,7 @@ import _poolGhostlyPrison from "../pool/ghostly-prison.js";
 import _poolGirdForBattle from "../pool/gird-for-battle.js";
 import _poolGlaiveOfTheGuildpact from "../pool/glaive-of-the-guildpact.js";
 import _poolGlamdring from "../pool/glamdring.js";
+import _poolGlassesOfUrza from "../pool/glasses-of-urza.js";
 import _poolGlimmerOfGenius from "../pool/glimmer-of-genius.js";
 import _poolGlimmervoid from "../pool/glimmervoid.js";
 import _poolGlimpseTheFuture from "../pool/glimpse-the-future.js";
@@ -973,6 +974,7 @@ const shard: CardShard = {
     _poolGirdForBattle,
     _poolGlaiveOfTheGuildpact,
     _poolGlamdring,
+    _poolGlassesOfUrza,
     _poolGlimmerOfGenius,
     _poolGlimmervoid,
     _poolGlimpseTheFuture,

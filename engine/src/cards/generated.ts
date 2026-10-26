@@ -3380,6 +3380,7 @@ import _poolClaimTheFirstborn from "./pool/claim-the-firstborn.js";
 import _poolClaimTheKingdom from "./pool/claim-the-kingdom.js";
 import _poolClaimThePrecious from "./pool/claim-the-precious.js";
 import _poolClaim from "./pool/claim.js";
+import _poolClairvoyance from "./pool/clairvoyance.js";
 import _poolClamavus from "./pool/clamavus.js";
 import _poolClammyProwler from "./pool/clammy-prowler.js";
 import _poolClamorShaman from "./pool/clamor-shaman.js";
@@ -4953,6 +4954,7 @@ import _poolDiscipleOfTheSun from "./pool/disciple-of-the-sun.js";
 import _poolDiscipleOfTheVault from "./pool/disciple-of-the-vault.js";
 import _poolDisciplesOfGix from "./pool/disciples-of-gix.js";
 import _poolDisciplinedDuelist from "./pool/disciplined-duelist.js";
+import _poolDiscordantDirge from "./pool/discordant-dirge.js";
 import _poolDiscordantPiper from "./pool/discordant-piper.js";
 import _poolDiscordantSpirit from "./pool/discordant-spirit.js";
 import _poolDiscoverTheImpossible from "./pool/discover-the-impossible.js";
@@ -7796,6 +7798,7 @@ import _poolGlassGolem from "./pool/glass-golem.js";
 import _poolGlassOfTheGuildpact from "./pool/glass-of-the-guildpact.js";
 import _poolGlassblowersPuzzleknot from "./pool/glassblowers-puzzleknot.js";
 import _poolGlassdustHulk from "./pool/glassdust-hulk.js";
+import _poolGlassesOfUrza from "./pool/glasses-of-urza.js";
 import _poolGlasspoolMimic from "./pool/glasspool-mimic.js";
 import _poolGlasspoolShore from "./pool/glasspool-shore.js";
 import _poolGlasswingGrace from "./pool/glasswing-grace.js";
@@ -9689,6 +9692,7 @@ import _poolIngeniousInfiltrator from "./pool/ingenious-infiltrator.js";
 import _poolIngeniousLeonin from "./pool/ingenious-leonin.js";
 import _poolIngeniousSkaab from "./pool/ingenious-skaab.js";
 import _poolIngeniousSmith from "./pool/ingenious-smith.js";
+import _poolIngeniousThief from "./pool/ingenious-thief.js";
 import _poolIngenuityEngine from "./pool/ingenuity-engine.js";
 import _poolIngotChewer from "./pool/ingot-chewer.js";
 import _poolIngrisStingerquill from "./pool/ingris-stingerquill.js";
@@ -17803,6 +17807,7 @@ import _poolSorcererOfTheFang from "./pool/sorcerer-of-the-fang.js";
 import _poolSorcerersBroom from "./pool/sorcerers-broom.js";
 import _poolSorcerersWand from "./pool/sorcerers-wand.js";
 import _poolSorceressQueen from "./pool/sorceress-queen.js";
+import _poolSorcerousSight from "./pool/sorcerous-sight.js";
 import _poolSorinImperiousBloodlord from "./pool/sorin-imperious-bloodlord.js";
 import _poolSorinOfHouseMarkov from "./pool/sorin-of-house-markov.js";
 import _poolSorinRavenousNeonate from "./pool/sorin-ravenous-neonate.js";
@@ -19136,6 +19141,7 @@ import _poolTakenByNightmares from "./pool/taken-by-nightmares.js";
 import _poolTakenumaAbandonedMire from "./pool/takenuma-abandoned-mire.js";
 import _poolTalarasBattalion from "./pool/talaras-battalion.js";
 import _poolTalasAirShip from "./pool/talas-air-ship.js";
+import _poolTalasExplorer from "./pool/talas-explorer.js";
 import _poolTalasLookout from "./pool/talas-lookout.js";
 import _poolTalasMerchant from "./pool/talas-merchant.js";
 import _poolTalasResearcher from "./pool/talas-researcher.js";
@@ -26581,6 +26587,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClaimTheKingdom,
   _poolClaimThePrecious,
   _poolClaim,
+  _poolClairvoyance,
   _poolClamavus,
   _poolClammyProwler,
   _poolClamorShaman,
@@ -28154,6 +28161,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiscipleOfTheVault,
   _poolDisciplesOfGix,
   _poolDisciplinedDuelist,
+  _poolDiscordantDirge,
   _poolDiscordantPiper,
   _poolDiscordantSpirit,
   _poolDiscoverTheImpossible,
@@ -30997,6 +31005,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlassOfTheGuildpact,
   _poolGlassblowersPuzzleknot,
   _poolGlassdustHulk,
+  _poolGlassesOfUrza,
   _poolGlasspoolMimic,
   _poolGlasspoolShore,
   _poolGlasswingGrace,
@@ -32890,6 +32899,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIngeniousLeonin,
   _poolIngeniousSkaab,
   _poolIngeniousSmith,
+  _poolIngeniousThief,
   _poolIngenuityEngine,
   _poolIngotChewer,
   _poolIngrisStingerquill,
@@ -41004,6 +41014,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSorcerersBroom,
   _poolSorcerersWand,
   _poolSorceressQueen,
+  _poolSorcerousSight,
   _poolSorinImperiousBloodlord,
   _poolSorinOfHouseMarkov,
   _poolSorinRavenousNeonate,
@@ -42337,6 +42348,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTakenumaAbandonedMire,
   _poolTalarasBattalion,
   _poolTalasAirShip,
+  _poolTalasExplorer,
   _poolTalasLookout,
   _poolTalasMerchant,
   _poolTalasResearcher,
@@ -49795,6 +49807,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/claim-the-kingdom": _poolClaimTheKingdom,
   "pool/claim-the-precious": _poolClaimThePrecious,
   "pool/claim": _poolClaim,
+  "pool/clairvoyance": _poolClairvoyance,
   "pool/clamavus": _poolClamavus,
   "pool/clammy-prowler": _poolClammyProwler,
   "pool/clamor-shaman": _poolClamorShaman,
@@ -51368,6 +51381,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/disciple-of-the-vault": _poolDiscipleOfTheVault,
   "pool/disciples-of-gix": _poolDisciplesOfGix,
   "pool/disciplined-duelist": _poolDisciplinedDuelist,
+  "pool/discordant-dirge": _poolDiscordantDirge,
   "pool/discordant-piper": _poolDiscordantPiper,
   "pool/discordant-spirit": _poolDiscordantSpirit,
   "pool/discover-the-impossible": _poolDiscoverTheImpossible,
@@ -54211,6 +54225,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glass-of-the-guildpact": _poolGlassOfTheGuildpact,
   "pool/glassblowers-puzzleknot": _poolGlassblowersPuzzleknot,
   "pool/glassdust-hulk": _poolGlassdustHulk,
+  "pool/glasses-of-urza": _poolGlassesOfUrza,
   "pool/glasspool-mimic": _poolGlasspoolMimic,
   "pool/glasspool-shore": _poolGlasspoolShore,
   "pool/glasswing-grace": _poolGlasswingGrace,
@@ -56104,6 +56119,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ingenious-leonin": _poolIngeniousLeonin,
   "pool/ingenious-skaab": _poolIngeniousSkaab,
   "pool/ingenious-smith": _poolIngeniousSmith,
+  "pool/ingenious-thief": _poolIngeniousThief,
   "pool/ingenuity-engine": _poolIngenuityEngine,
   "pool/ingot-chewer": _poolIngotChewer,
   "pool/ingris-stingerquill": _poolIngrisStingerquill,
@@ -64218,6 +64234,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sorcerers-broom": _poolSorcerersBroom,
   "pool/sorcerers-wand": _poolSorcerersWand,
   "pool/sorceress-queen": _poolSorceressQueen,
+  "pool/sorcerous-sight": _poolSorcerousSight,
   "pool/sorin-imperious-bloodlord": _poolSorinImperiousBloodlord,
   "pool/sorin-of-house-markov": _poolSorinOfHouseMarkov,
   "pool/sorin-ravenous-neonate": _poolSorinRavenousNeonate,
@@ -65551,6 +65568,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/takenuma-abandoned-mire": _poolTakenumaAbandonedMire,
   "pool/talaras-battalion": _poolTalarasBattalion,
   "pool/talas-air-ship": _poolTalasAirShip,
+  "pool/talas-explorer": _poolTalasExplorer,
   "pool/talas-lookout": _poolTalasLookout,
   "pool/talas-merchant": _poolTalasMerchant,
   "pool/talas-researcher": _poolTalasResearcher,

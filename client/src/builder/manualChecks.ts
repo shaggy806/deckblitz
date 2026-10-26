@@ -8307,4 +8307,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Just Fate: castable only once you've been attacked",
     board({ you: { bf: ['Plains*3'], hand: ['Just Fate'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  preset(
+    "Sorcerous Sight: looking at an opponent's hand",
+    board({ you: { bf: ['Island'], hand: ['Sorcerous Sight'] } }),
+  ),
+  preset(
+    'Discordant Dirge: choose up to as many cards as its verse counters',
+    board({ you: { bf: ['Swamp', { name: 'Discordant Dirge', counters: { verse: 2 } }] } }),
+  ),
 ]

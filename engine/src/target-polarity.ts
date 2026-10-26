@@ -298,6 +298,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-on-library": (n, v) => v.touch(n.target, "help", MINOR),
   discard: (n, v) => v.touch(n.target, "harm", MAJOR),
   "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
+  // Seeing a hidden hand: point it at an opponent.
+  "look-at-hand": (n, v) => v.touch(n.target, "harm", MINOR),
   "modify-pt": (n, v) => {
     const power = amountSign(n.power);
     const toughness = amountSign(n.toughness);

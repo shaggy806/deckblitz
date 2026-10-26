@@ -155,6 +155,7 @@ import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
 import _poolDingusStaff from "../pool/dingus-staff.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
+import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
@@ -911,6 +912,7 @@ const shard: CardShard = {
     _poolDictateOfHeliod,
     _poolDingusStaff,
     _poolDireFleetCaptain,
+    _poolDiscordantDirge,
     _poolDisfigure,
     _poolDisplacerKitten,
     _poolDivineResilience,

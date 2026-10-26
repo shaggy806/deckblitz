@@ -382,6 +382,8 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       // permanent is just pointed at.
       return `Choose ${cards} to behold — reveal it from your hand or pick a permanent you control`
     case 'discard':
+      // "Look at target player's hand" (Glasses of Urza): nothing to pick.
+      if (action.max === 0) return `Looking at ${whose} hand`
       // "You choose a card from it. That player discards that card" (Duress).
       return `Choose ${cards} from ${whose} hand for them to discard`
     case 'manifest':
@@ -6432,6 +6434,8 @@ function Table({
             // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
             ...(zoneChoiceAction.openingHand === true ? { noneLabel: 'Keep them in hand' } : {}),
+            // A look alone (Glasses of Urza): closing it is the answer.
+            ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),
             ...(zoneChoiceAction.together
               ? { fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked) }
               : {}),
