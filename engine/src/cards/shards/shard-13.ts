@@ -132,6 +132,7 @@ import _poolCrazedGoblin from "../pool/crazed-goblin.js";
 import _poolCreamOfTheCrop from "../pool/cream-of-the-crop.js";
 import _poolCrocanura from "../pool/crocanura.js";
 import _poolCrossroadsCandleguide from "../pool/crossroads-candleguide.js";
+import _poolCrowdOfCinders from "../pool/crowd-of-cinders.js";
 import _poolCruelRevival from "../pool/cruel-revival.js";
 import _poolCrushingDisappointment from "../pool/crushing-disappointment.js";
 import _poolCrypticCaves from "../pool/cryptic-caves.js";
@@ -362,6 +363,7 @@ import _poolMassacreWurm from "../pool/massacre-wurm.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
+import _poolMerrowGrimeblotter from "../pool/merrow-grimeblotter.js";
 import _poolMeteorSwarm from "../pool/meteor-swarm.js";
 import _poolMichelangeloGameMaster from "../pool/michelangelo-game-master.js";
 import _poolMidnightBanshee from "../pool/midnight-banshee.js";
@@ -831,6 +833,7 @@ const shard: CardShard = {
     _poolCreamOfTheCrop,
     _poolCrocanura,
     _poolCrossroadsCandleguide,
+    _poolCrowdOfCinders,
     _poolCruelRevival,
     _poolCrushingDisappointment,
     _poolCrypticCaves,
@@ -1061,6 +1064,7 @@ const shard: CardShard = {
     _poolMephiticVapors,
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
+    _poolMerrowGrimeblotter,
     _poolMeteorSwarm,
     _poolMichelangeloGameMaster,
     _poolMidnightBanshee,

@@ -570,6 +570,7 @@ import _poolSmokeSpiritsAid from "../pool/smoke-spirits-aid.js";
 import _poolSmokespewInvoker from "../pool/smokespew-invoker.js";
 import _poolSnarespinner from "../pool/snarespinner.js";
 import _poolSnowfieldSinkhole from "../pool/snowfield-sinkhole.js";
+import _poolSootwalkers from "../pool/sootwalkers.js";
 import _poolSoulManipulation from "../pool/soul-manipulation.js";
 import _poolSoulOfRavnica from "../pool/soul-of-ravnica.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
@@ -1303,6 +1304,7 @@ const shard: CardShard = {
     _poolSmokespewInvoker,
     _poolSnarespinner,
     _poolSnowfieldSinkhole,
+    _poolSootwalkers,
     _poolSoulManipulation,
     _poolSoulOfRavnica,
     _poolSowerOfTemptation,

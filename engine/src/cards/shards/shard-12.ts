@@ -117,6 +117,7 @@ import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
+import _poolConsignToDream from "../pool/consign-to-dream.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
@@ -377,6 +378,7 @@ import _poolMogisGodOfSlaughter from "../pool/mogis-god-of-slaughter.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
 import _poolMomoFriendlyFlier from "../pool/momo-friendly-flier.js";
 import _poolMotherBear from "../pool/mother-bear.js";
+import _poolMudbrawlerRaiders from "../pool/mudbrawler-raiders.js";
 import _poolMultiplyByZero from "../pool/multiply-by-zero.js";
 import _poolMurmuringBosk from "../pool/murmuring-bosk.js";
 import _poolMurmuringMystic from "../pool/murmuring-mystic.js";
@@ -546,6 +548,7 @@ import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
+import _poolSmolderInitiate from "../pool/smolder-initiate.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
@@ -816,6 +819,7 @@ const shard: CardShard = {
     _poolCogworkGrinder,
     _poolConciliatorsDuelist,
     _poolConflux,
+    _poolConsignToDream,
     _poolConsumingAetherborn,
     _poolCopperTablet,
     _poolCorruptedGrafstone,
@@ -1076,6 +1080,7 @@ const shard: CardShard = {
     _poolMoltenBlast,
     _poolMomoFriendlyFlier,
     _poolMotherBear,
+    _poolMudbrawlerRaiders,
     _poolMultiplyByZero,
     _poolMurmuringBosk,
     _poolMurmuringMystic,
@@ -1245,6 +1250,7 @@ const shard: CardShard = {
     _poolSkywardEyeProphets,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
+    _poolSmolderInitiate,
     _poolSmolderingWerewolf,
     _poolSnareTheSkies,
     _poolSnowHound,

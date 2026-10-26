@@ -401,6 +401,7 @@ import _poolOtterballAntics from "../pool/otterball-antics.js";
 import _poolOust from "../pool/oust.js";
 import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
+import _poolOversoulOfDusk from "../pool/oversoul-of-dusk.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
@@ -426,6 +427,7 @@ import _poolPoreOverThePages from "../pool/pore-over-the-pages.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
+import _poolPrismwakeMerrow from "../pool/prismwake-merrow.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolPteramander from "../pool/pteramander.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
@@ -512,6 +514,7 @@ import _poolSigardaHeronsGrace from "../pool/sigarda-herons-grace.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSigiledSentinel from "../pool/sigiled-sentinel.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
+import _poolSinkingFeeling from "../pool/sinking-feeling.js";
 import _poolSkarrgGuildmage from "../pool/skarrg-guildmage.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
@@ -660,6 +663,7 @@ import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
 import _poolWhoosh from "../pool/whoosh.js";
+import _poolWickerWarcrawler from "../pool/wicker-warcrawler.js";
 import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
 import _poolWillOfTheNaga from "../pool/will-of-the-naga.js";
@@ -1101,6 +1105,7 @@ const shard: CardShard = {
     _poolOust,
     _poolOutcasterGreenblade,
     _poolOvergrownEstate,
+    _poolOversoulOfDusk,
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolParagonOfEternalWilds,
@@ -1126,6 +1131,7 @@ const shard: CardShard = {
     _poolPrecisionBolt,
     _poolPredatorsStrike,
     _poolPrimordialHydra,
+    _poolPrismwakeMerrow,
     _poolProudMentor,
     _poolPteramander,
     _poolPurphorossIntervention,
@@ -1212,6 +1218,7 @@ const shard: CardShard = {
     _poolSightlessGhoul,
     _poolSigiledSentinel,
     _poolSilverFurMaster,
+    _poolSinkingFeeling,
     _poolSkarrgGuildmage,
     _poolSkimmingStrike,
     _poolSkirkProspector,
@@ -1360,6 +1367,7 @@ const shard: CardShard = {
     _poolWelkinTern,
     _poolWhisperingShade,
     _poolWhoosh,
+    _poolWickerWarcrawler,
     _poolWildGriffin,
     _poolWildslayerElves,
     _poolWillOfTheNaga,

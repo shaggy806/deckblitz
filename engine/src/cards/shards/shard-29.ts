@@ -141,6 +141,7 @@ import _poolDedicatedMartyr from "../pool/dedicated-martyr.js";
 import _poolDeepSeaTerror from "../pool/deep-sea-terror.js";
 import _poolDeepwoodWolverine from "../pool/deepwood-wolverine.js";
 import _poolDemandAnswers from "../pool/demand-answers.js";
+import _poolDemigodOfRevenge from "../pool/demigod-of-revenge.js";
 import _poolDemolitionStomper from "../pool/demolition-stomper.js";
 import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
@@ -608,6 +609,7 @@ import _poolThrottle from "../pool/throttle.js";
 import _poolThwartTheGrave from "../pool/thwart-the-grave.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimeWalk from "../pool/time-walk.js";
+import _poolToilToRenown from "../pool/toil-to-renown.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormentedHero from "../pool/tormented-hero.js";
@@ -851,6 +853,7 @@ const shard: CardShard = {
     _poolDeepSeaTerror,
     _poolDeepwoodWolverine,
     _poolDemandAnswers,
+    _poolDemigodOfRevenge,
     _poolDemolitionStomper,
     _poolDesertDrake,
     _poolDesolationTwin,
@@ -1318,6 +1321,7 @@ const shard: CardShard = {
     _poolThwartTheGrave,
     _poolTigerDillo,
     _poolTimeWalk,
+    _poolToilToRenown,
     _poolTorWauki,
     _poolTorchBreath,
     _poolTormentedHero,

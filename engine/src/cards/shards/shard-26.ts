@@ -43,6 +43,7 @@ import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
+import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
 import _poolAshioksAdept from "../pool/ashioks-adept.js";
 import _poolAsmiraHolyAvenger from "../pool/asmira-holy-avenger.js";
 import _poolAtarkaEfreet from "../pool/atarka-efreet.js";
@@ -243,6 +244,7 @@ import _poolGibberingHyenas from "../pool/gibbering-hyenas.js";
 import _poolGitaxianRaptor from "../pool/gitaxian-raptor.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
 import _poolGlimpseTheUnthinkable from "../pool/glimpse-the-unthinkable.js";
+import _poolGloomwidowsFeast from "../pool/gloomwidows-feast.js";
 import _poolGoblinBoarders from "../pool/goblin-boarders.js";
 import _poolGoblinBully from "../pool/goblin-bully.js";
 import _poolGoblinDiggingTeam from "../pool/goblin-digging-team.js";
@@ -251,6 +253,7 @@ import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
 import _poolGrandBallGuest from "../pool/grand-ball-guest.js";
 import _poolGraveVenerations from "../pool/grave-venerations.js";
+import _poolGravelgillDuo from "../pool/gravelgill-duo.js";
 import _poolGreatOakGuardian from "../pool/great-oak-guardian.js";
 import _poolGreatSableStag from "../pool/great-sable-stag.js";
 import _poolGreed from "../pool/greed.js";
@@ -431,6 +434,7 @@ import _poolPriestOfTheHauntedEdge from "../pool/priest-of-the-haunted-edge.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
+import _poolPunctureBolt from "../pool/puncture-bolt.js";
 import _poolPurpleWorm from "../pool/purple-worm.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
@@ -729,6 +733,7 @@ const shard: CardShard = {
     _poolArgivianBlacksmith,
     _poolArtificerClass,
     _poolAshcoatBear,
+    _poolAshenmoorCohort,
     _poolAshioksAdept,
     _poolAsmiraHolyAvenger,
     _poolAtarkaEfreet,
@@ -929,6 +934,7 @@ const shard: CardShard = {
     _poolGitaxianRaptor,
     _poolGleefulArsonist,
     _poolGlimpseTheUnthinkable,
+    _poolGloomwidowsFeast,
     _poolGoblinBoarders,
     _poolGoblinBully,
     _poolGoblinDiggingTeam,
@@ -937,6 +943,7 @@ const shard: CardShard = {
     _poolGoliathBeetle,
     _poolGrandBallGuest,
     _poolGraveVenerations,
+    _poolGravelgillDuo,
     _poolGreatOakGuardian,
     _poolGreatSableStag,
     _poolGreed,
@@ -1117,6 +1124,7 @@ const shard: CardShard = {
     _poolProdigalSorcerer,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
+    _poolPunctureBolt,
     _poolPurpleWorm,
     _poolPygmyRazorback,
     _poolQarsiRevenant,

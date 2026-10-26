@@ -65,6 +65,7 @@ import _poolBesmirch from "../pool/besmirch.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
 import _poolBiogenicOoze from "../pool/biogenic-ooze.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
+import _poolBitingTether from "../pool/biting-tether.js";
 import _poolBlackMarket from "../pool/black-market.js";
 import _poolBlightbeetle from "../pool/blightbeetle.js";
 import _poolBloatedProcessor from "../pool/bloated-processor.js";
@@ -608,6 +609,7 @@ import _poolTheBrute from "../pool/the-brute.js";
 import _poolTheSwarmweaver from "../pool/the-swarmweaver.js";
 import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
+import _poolThistledownDuo from "../pool/thistledown-duo.js";
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
 import _poolThreefoldThunderhulk from "../pool/threefold-thunderhulk.js";
@@ -778,6 +780,7 @@ const shard: CardShard = {
     _poolBilbosDeadlySlice,
     _poolBiogenicOoze,
     _poolBiomassMutation,
+    _poolBitingTether,
     _poolBlackMarket,
     _poolBlightbeetle,
     _poolBloatedProcessor,
@@ -1321,6 +1324,7 @@ const shard: CardShard = {
     _poolTheSwarmweaver,
     _poolTheThirdDoctor,
     _poolTheUnbeatableSquirrelGirl,
+    _poolThistledownDuo,
     _poolThoughtseize,
     _poolThreeTreeCity,
     _poolThreefoldThunderhulk,

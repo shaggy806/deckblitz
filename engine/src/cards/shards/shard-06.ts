@@ -86,6 +86,7 @@ import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
+import _poolBriarberryCohort from "../pool/briarberry-cohort.js";
 import _poolBrimstoneMage from "../pool/brimstone-mage.js";
 import _poolBrimstoneVandal from "../pool/brimstone-vandal.js";
 import _poolBroodbirthViper from "../pool/broodbirth-viper.js";
@@ -132,6 +133,7 @@ import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
 import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
+import _poolCrabappleCohort from "../pool/crabapple-cohort.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
 import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
 import _poolCrimsonWisps from "../pool/crimson-wisps.js";
@@ -187,6 +189,7 @@ import _poolDuskwatchRecruiter from "../pool/duskwatch-recruiter.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
+import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEnclaveElite from "../pool/enclave-elite.js";
@@ -316,6 +319,7 @@ import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
+import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
@@ -628,6 +632,7 @@ import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolVulpikeet from "../pool/vulpikeet.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
+import _poolWanderbrineRootcutters from "../pool/wanderbrine-rootcutters.js";
 import _poolWantedScoundrels from "../pool/wanted-scoundrels.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
@@ -770,6 +775,7 @@ const shard: CardShard = {
     _poolBottomlessPit,
     _poolBountifulPromenade,
     _poolBrazenUpstart,
+    _poolBriarberryCohort,
     _poolBrimstoneMage,
     _poolBrimstoneVandal,
     _poolBroodbirthViper,
@@ -816,6 +822,7 @@ const shard: CardShard = {
     _poolCoretapper,
     _poolCorruptCourtOfficial,
     _poolCostOfBrilliance,
+    _poolCrabappleCohort,
     _poolCrackTheEarth,
     _poolCraterclawColossus,
     _poolCrimsonWisps,
@@ -871,6 +878,7 @@ const shard: CardShard = {
     _poolDutifulServants,
     _poolDynamiteDiver,
     _poolEarthenAlly,
+    _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,
     _poolEnclaveElite,
@@ -1000,6 +1008,7 @@ const shard: CardShard = {
     _poolKelsinkoRanger,
     _poolKindredJudgment,
     _poolKingDarienXlviii,
+    _poolKinscaerHarpoonist,
     _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
@@ -1312,6 +1321,7 @@ const shard: CardShard = {
     _poolVulpikeet,
     _poolWallOfBlood,
     _poolWallOfOmens,
+    _poolWanderbrineRootcutters,
     _poolWantedScoundrels,
     _poolWarMachineLegacyOfIron,
     _poolWarlockClass,
