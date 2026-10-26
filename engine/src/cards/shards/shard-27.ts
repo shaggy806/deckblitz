@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAIMBot from "../pool/a-i-m-bot.js";
 import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brute.js";
 import _poolAbzanGuide from "../pool/abzan-guide.js";
+import _poolAcidicSliver from "../pool/acidic-sliver.js";
 import _poolAcolyteOfTheInferno from "../pool/acolyte-of-the-inferno.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAdvancedStitchwing from "../pool/advanced-stitchwing.js";
@@ -103,6 +104,7 @@ import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConnive from "../pool/connive.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
+import _poolContempt from "../pool/contempt.js";
 import _poolConvictedKiller from "../pool/convicted-killer.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCorruptingLicid from "../pool/corrupting-licid.js";
@@ -149,6 +151,7 @@ import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDoorkeeper from "../pool/doorkeeper.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
+import _poolDreamProwler from "../pool/dream-prowler.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDriven from "../pool/driven.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolAIMBot,
     _poolAbominationIrradiatedBrute,
     _poolAbzanGuide,
+    _poolAcidicSliver,
     _poolAcolyteOfTheInferno,
     _poolAdaptiveTrainingPost,
     _poolAdvancedStitchwing,
@@ -788,6 +792,7 @@ const shard: CardShard = {
     _poolConnive,
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
+    _poolContempt,
     _poolConvictedKiller,
     _poolCorruptEunuchs,
     _poolCorruptingLicid,
@@ -834,6 +839,7 @@ const shard: CardShard = {
     _poolDoorkeeper,
     _poolDragonCursedHalls,
     _poolDragonEgg,
+    _poolDreamProwler,
     _poolDrillworksMole,
     _poolDriven,
     _poolDrumhunter,

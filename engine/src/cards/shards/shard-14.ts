@@ -394,6 +394,7 @@ import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
 import _poolMerryBards from "../pool/merry-bards.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
 import _poolMimic from "../pool/mimic.js";
+import _poolMindGames from "../pool/mind-games.js";
 import _poolMindRake from "../pool/mind-rake.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
 import _poolMindwhipSliver from "../pool/mindwhip-sliver.js";
@@ -508,6 +509,7 @@ import _poolSatyrsCunning from "../pool/satyrs-cunning.js";
 import _poolSavageSilhouette from "../pool/savage-silhouette.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
 import _poolScalesOfShale from "../pool/scales-of-shale.js";
+import _poolScapegoat from "../pool/scapegoat.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
 import _poolScornBladeBerserker from "../pool/scorn-blade-berserker.js";
 import _poolScourgeOfSkolaVale from "../pool/scourge-of-skola-vale.js";
@@ -567,6 +569,7 @@ import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
 import _poolStrafe from "../pool/strafe.js";
 import _poolStrategicPlanning from "../pool/strategic-planning.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
+import _poolStrongholdTaskmaster from "../pool/stronghold-taskmaster.js";
 import _poolStudy from "../pool/study.js";
 import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSunstone from "../pool/sunstone.js";
@@ -644,6 +647,7 @@ import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
 import _poolVultureSchemingScavenger from "../pool/vulture-scheming-scavenger.js";
 import _poolWakestoneGargoyle from "../pool/wakestone-gargoyle.js";
 import _poolWalkingBallista from "../pool/walking-ballista.js";
+import _poolWallOfSouls from "../pool/wall-of-souls.js";
 import _poolWarHorn from "../pool/war-horn.js";
 import _poolWargRider from "../pool/warg-rider.js";
 import _poolWarleadersHelix from "../pool/warleaders-helix.js";
@@ -1080,6 +1084,7 @@ const shard: CardShard = {
     _poolMerryBards,
     _poolMidnightAssassin,
     _poolMimic,
+    _poolMindGames,
     _poolMindRake,
     _poolMindSpiral,
     _poolMindwhipSliver,
@@ -1194,6 +1199,7 @@ const shard: CardShard = {
     _poolSavageSilhouette,
     _poolSazacapsBrew,
     _poolScalesOfShale,
+    _poolScapegoat,
     _poolScavengerRegent,
     _poolScornBladeBerserker,
     _poolScourgeOfSkolaVale,
@@ -1253,6 +1259,7 @@ const shard: CardShard = {
     _poolStrafe,
     _poolStrategicPlanning,
     _poolStrikeItRich,
+    _poolStrongholdTaskmaster,
     _poolStudy,
     _poolSunsetSaboteur,
     _poolSunstone,
@@ -1330,6 +1337,7 @@ const shard: CardShard = {
     _poolVultureSchemingScavenger,
     _poolWakestoneGargoyle,
     _poolWalkingBallista,
+    _poolWallOfSouls,
     _poolWarHorn,
     _poolWargRider,
     _poolWarleadersHelix,

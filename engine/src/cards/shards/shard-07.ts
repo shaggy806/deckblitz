@@ -525,6 +525,7 @@ import _poolShadowKin from "../pool/shadow-kin.js";
 import _poolShadowbeastSighting from "../pool/shadowbeast-sighting.js";
 import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
+import _poolShiftingWall from "../pool/shifting-wall.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
 import _poolShorecrasherMimic from "../pool/shorecrasher-mimic.js";
@@ -541,6 +542,7 @@ import _poolSkywhalersShot from "../pool/skywhalers-shot.js";
 import _poolSlimeMolding from "../pool/slime-molding.js";
 import _poolSlimefootAndSquee from "../pool/slimefoot-and-squee.js";
 import _poolSmeltedChargebug from "../pool/smelted-chargebug.js";
+import _poolSmite from "../pool/smite.js";
 import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
@@ -1251,6 +1253,7 @@ const shard: CardShard = {
     _poolShadowbeastSighting,
     _poolSheHulkJadeDefender,
     _poolShiarSoldier,
+    _poolShiftingWall,
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
     _poolShorecrasherMimic,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolSlimeMolding,
     _poolSlimefootAndSquee,
     _poolSmeltedChargebug,
+    _poolSmite,
     _poolSnowhornRider,
     _poolSoaringLightbringer,
     _poolSokkasSwordTraining,

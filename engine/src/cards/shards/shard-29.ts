@@ -171,6 +171,7 @@ import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
+import _poolElvenRite from "../pool/elven-rite.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
@@ -882,6 +883,7 @@ const shard: CardShard = {
     _poolEleshNornMotherOfMachines,
     _poolElvenBow,
     _poolElvenFortress,
+    _poolElvenRite,
     _poolElvishPromenade,
     _poolEndriderSpikespitter,
     _poolEnduringInnocence,

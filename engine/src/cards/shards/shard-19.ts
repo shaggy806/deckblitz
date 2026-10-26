@@ -292,6 +292,7 @@ import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHeartstabberMosquito from "../pool/heartstabber-mosquito.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
+import _poolHesitation from "../pool/hesitation.js";
 import _poolHexdrinker from "../pool/hexdrinker.js";
 import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
@@ -670,6 +671,7 @@ import _poolVolcanicDragon from "../pool/volcanic-dragon.js";
 import _poolVoyagesEnd from "../pool/voyages-end.js";
 import _poolVulshokHeartstoker from "../pool/vulshok-heartstoker.js";
 import _poolWakingNightmare from "../pool/waking-nightmare.js";
+import _poolWalkingDream from "../pool/walking-dream.js";
 import _poolWallOfMulch from "../pool/wall-of-mulch.js";
 import _poolWallOfReverence from "../pool/wall-of-reverence.js";
 import _poolWanderwineFarewell from "../pool/wanderwine-farewell.js";
@@ -1013,6 +1015,7 @@ const shard: CardShard = {
     _poolHeartstabberMosquito,
     _poolHelmutZemoMastermind,
     _poolHeraldOfDromoka,
+    _poolHesitation,
     _poolHexdrinker,
     _poolHibernationSliver,
     _poolHiddenVolcano,
@@ -1391,6 +1394,7 @@ const shard: CardShard = {
     _poolVoyagesEnd,
     _poolVulshokHeartstoker,
     _poolWakingNightmare,
+    _poolWalkingDream,
     _poolWallOfMulch,
     _poolWallOfReverence,
     _poolWanderwineFarewell,

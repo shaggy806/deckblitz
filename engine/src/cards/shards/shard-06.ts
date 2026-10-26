@@ -278,6 +278,7 @@ import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
+import _poolHornetCannon from "../pool/hornet-cannon.js";
 import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
@@ -962,6 +963,7 @@ const shard: CardShard = {
     _poolHoardingOgre,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
+    _poolHornetCannon,
     _poolHostileTakeover,
     _poolHourOfReckoning,
     _poolHowlingGalefang,

@@ -557,6 +557,7 @@ import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
 import _poolSpikedPitTrap from "../pool/spiked-pit-trap.js";
+import _poolSpindriftDrake from "../pool/spindrift-drake.js";
 import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSpireTracer from "../pool/spire-tracer.js";
@@ -607,6 +608,7 @@ import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
 import _poolTerritorialKavu from "../pool/territorial-kavu.js";
 import _poolTestamentBearer from "../pool/testament-bearer.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
+import _poolThalakosDeceiver from "../pool/thalakos-deceiver.js";
 import _poolThaumatog from "../pool/thaumatog.js";
 import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
@@ -1273,6 +1275,7 @@ const shard: CardShard = {
     _poolSpectralCloak,
     _poolSpiderManWebSpinner,
     _poolSpikedPitTrap,
+    _poolSpindriftDrake,
     _poolSpinewoodsPaladin,
     _poolSpireMechcycle,
     _poolSpireTracer,
@@ -1323,6 +1326,7 @@ const shard: CardShard = {
     _poolTerritorialKavu,
     _poolTestamentBearer,
     _poolTezzeretArtificeMaster,
+    _poolThalakosDeceiver,
     _poolThaumatog,
     _poolTheBirthOfMeletis,
     _poolTheDalekEmperor,

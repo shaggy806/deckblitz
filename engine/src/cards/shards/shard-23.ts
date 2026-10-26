@@ -297,6 +297,7 @@ import _poolJaceBeleren from "../pool/jace-beleren.js";
 import _poolJamesWanderingDad from "../pool/james-wandering-dad.js";
 import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
 import _poolJinxedIdol from "../pool/jinxed-idol.js";
+import _poolJinxedRing from "../pool/jinxed-ring.js";
 import _poolJirinaKudro from "../pool/jirina-kudro.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJoyfulStormsculptor from "../pool/joyful-stormsculptor.js";
@@ -995,6 +996,7 @@ const shard: CardShard = {
     _poolJamesWanderingDad,
     _poolJetFreedomFighter,
     _poolJinxedIdol,
+    _poolJinxedRing,
     _poolJirinaKudro,
     _poolJooDeeOneOfMany,
     _poolJoyfulStormsculptor,

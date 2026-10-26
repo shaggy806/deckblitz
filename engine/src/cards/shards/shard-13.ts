@@ -482,6 +482,7 @@ import _poolSaheelisDirective from "../pool/saheelis-directive.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
+import _poolSamiteBlessing from "../pool/samite-blessing.js";
 import _poolSamutTheTested from "../pool/samut-the-tested.js";
 import _poolSandalsOfAbdallah from "../pool/sandals-of-abdallah.js";
 import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
@@ -1183,6 +1184,7 @@ const shard: CardShard = {
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
     _poolSalvationSwan,
+    _poolSamiteBlessing,
     _poolSamutTheTested,
     _poolSandalsOfAbdallah,
     _poolSandskitterOutrider,

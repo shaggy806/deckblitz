@@ -363,6 +363,7 @@ import _poolMisleadingMotes from "../pool/misleading-motes.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolModelOfUnity from "../pool/model-of-unity.js";
+import _poolMoggManiac from "../pool/mogg-maniac.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
@@ -624,6 +625,7 @@ import _poolVenomConnoisseur from "../pool/venom-connoisseur.js";
 import _poolVestigeOfEmrakul from "../pool/vestige-of-emrakul.js";
 import _poolViashinoPyromancer from "../pool/viashino-pyromancer.js";
 import _poolViashinoRunner from "../pool/viashino-runner.js";
+import _poolVictualSliver from "../pool/victual-sliver.js";
 import _poolVillainousSyndication from "../pool/villainous-syndication.js";
 import _poolVillainousWealth from "../pool/villainous-wealth.js";
 import _poolViolentImpact from "../pool/violent-impact.js";
@@ -1056,6 +1058,7 @@ const shard: CardShard = {
     _poolMistRaven,
     _poolMistmeadowCouncil,
     _poolModelOfUnity,
+    _poolMoggManiac,
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMoltenRebuke,
@@ -1317,6 +1320,7 @@ const shard: CardShard = {
     _poolVestigeOfEmrakul,
     _poolViashinoPyromancer,
     _poolViashinoRunner,
+    _poolVictualSliver,
     _poolVillainousSyndication,
     _poolVillainousWealth,
     _poolViolentImpact,

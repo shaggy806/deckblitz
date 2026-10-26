@@ -530,6 +530,7 @@ import _poolShadowGuildmage from "../pool/shadow-guildmage.js";
 import _poolShadyInformant from "../pool/shady-informant.js";
 import _poolShakeTheFoundations from "../pool/shake-the-foundations.js";
 import _poolShamblingShell from "../pool/shambling-shell.js";
+import _poolShardPhoenix from "../pool/shard-phoenix.js";
 import _poolSharpEyedRookie from "../pool/sharp-eyed-rookie.js";
 import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
 import _poolShoalKraken from "../pool/shoal-kraken.js";
@@ -1260,6 +1261,7 @@ const shard: CardShard = {
     _poolShadyInformant,
     _poolShakeTheFoundations,
     _poolShamblingShell,
+    _poolShardPhoenix,
     _poolSharpEyedRookie,
     _poolShieldmatesBlessing,
     _poolShoalKraken,

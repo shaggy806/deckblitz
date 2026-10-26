@@ -111,6 +111,7 @@ import _poolCradleOfSafety from "../pool/cradle-of-safety.js";
 import _poolCradleOfVitality from "../pool/cradle-of-vitality.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
+import _poolCrovaxTheCursed from "../pool/crovax-the-cursed.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
 import _poolCryptFeaster from "../pool/crypt-feaster.js";
 import _poolCrystalQuarry from "../pool/crystal-quarry.js";
@@ -776,6 +777,7 @@ const shard: CardShard = {
     _poolCradleOfVitality,
     _poolCrimsonOperative,
     _poolCropRotation,
+    _poolCrovaxTheCursed,
     _poolCrowdFavorites,
     _poolCryptFeaster,
     _poolCrystalQuarry,

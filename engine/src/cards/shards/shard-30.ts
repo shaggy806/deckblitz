@@ -287,6 +287,7 @@ import _poolHavenOfTheHarvest from "../pool/haven-of-the-harvest.js";
 import _poolHavoc from "../pool/havoc.js";
 import _poolHazoretsUndyingFury from "../pool/hazorets-undying-fury.js";
 import _poolHeadlessRider from "../pool/headless-rider.js";
+import _poolHeatOfBattle from "../pool/heat-of-battle.js";
 import _poolHeliodsPilgrim from "../pool/heliods-pilgrim.js";
 import _poolHeroesHangout from "../pool/heroes-hangout.js";
 import _poolHeroicStanza from "../pool/heroic-stanza.js";
@@ -995,6 +996,7 @@ const shard: CardShard = {
     _poolHavoc,
     _poolHazoretsUndyingFury,
     _poolHeadlessRider,
+    _poolHeatOfBattle,
     _poolHeliodsPilgrim,
     _poolHeroesHangout,
     _poolHeroicStanza,

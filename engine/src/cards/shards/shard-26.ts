@@ -54,6 +54,7 @@ import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
+import _poolAwakening from "../pool/awakening.js";
 import _poolAysenCrusader from "../pool/aysen-crusader.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
@@ -109,6 +110,7 @@ import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
 import _poolChandler from "../pool/chandler.js";
+import _poolChangeOfHeart from "../pool/change-of-heart.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
@@ -455,6 +457,7 @@ import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
 import _poolRenegadeFreighter from "../pool/renegade-freighter.js";
 import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
+import _poolRevenant from "../pool/revenant.js";
 import _poolRevengeOfTheDrowned from "../pool/revenge-of-the-drowned.js";
 import _poolReveredDead from "../pool/revered-dead.js";
 import _poolReverseEngineer from "../pool/reverse-engineer.js";
@@ -741,6 +744,7 @@ const shard: CardShard = {
     _poolAutonSoldier,
     _poolAvariceAmulet,
     _poolAwakenTheInferno,
+    _poolAwakening,
     _poolAysenCrusader,
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
@@ -796,6 +800,7 @@ const shard: CardShard = {
     _poolCathedralOfWar,
     _poolCaughtInTheBrights,
     _poolChandler,
+    _poolChangeOfHeart,
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
@@ -1142,6 +1147,7 @@ const shard: CardShard = {
     _poolRenegadeFreighter,
     _poolReshapeTheEarth,
     _poolRetrievalAgent,
+    _poolRevenant,
     _poolRevengeOfTheDrowned,
     _poolReveredDead,
     _poolReverseEngineer,

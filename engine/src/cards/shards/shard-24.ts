@@ -361,6 +361,7 @@ import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
 import _poolMoodmarkPainter from "../pool/moodmark-painter.js";
 import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
+import _poolMortuary from "../pool/mortuary.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMycoloth from "../pool/mycoloth.js";
@@ -442,6 +443,7 @@ import _poolRoadRage from "../pool/road-rage.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
 import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
+import _poolRollingStones from "../pool/rolling-stones.js";
 import _poolRooftopNuisance from "../pool/rooftop-nuisance.js";
 import _poolRootSnare from "../pool/root-snare.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
@@ -1047,6 +1049,7 @@ const shard: CardShard = {
     _poolMoodmarkPainter,
     _poolMoonGirlAndDevilDinosaur,
     _poolMorgueToad,
+    _poolMortuary,
     _poolMostDecrepitOldBird,
     _poolMurkfiendLiege,
     _poolMycoloth,
@@ -1128,6 +1131,7 @@ const shard: CardShard = {
     _poolRoccoCabarettiCaterer,
     _poolRocketPoweredGoblinGlider,
     _poolRockslideElemental,
+    _poolRollingStones,
     _poolRooftopNuisance,
     _poolRootSnare,
     _poolRootwaterDiver,
