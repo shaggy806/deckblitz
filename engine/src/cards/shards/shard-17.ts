@@ -187,6 +187,7 @@ import _poolElephantGraveyard from "../pool/elephant-graveyard.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnergyField from "../pool/energy-field.js";
+import _poolEngineeredPlague from "../pool/engineered-plague.js";
 import _poolEnsoulArtifact from "../pool/ensoul-artifact.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEntreatTheAngels from "../pool/entreat-the-angels.js";
@@ -359,11 +360,13 @@ import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
 import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
+import _poolLiuBeiLordOfShu from "../pool/liu-bei-lord-of-shu.js";
 import _poolLoneRider from "../pool/lone-rider.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
 import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
 import _poolLoxodonMender from "../pool/loxodon-mender.js";
 import _poolLoyalGyrfalcon from "../pool/loyal-gyrfalcon.js";
+import _poolLoyalRetainers from "../pool/loyal-retainers.js";
 import _poolLudevicsTestSubject from "../pool/ludevics-test-subject.js";
 import _poolLuminarchAscension from "../pool/luminarch-ascension.js";
 import _poolMacetailHystrodon from "../pool/macetail-hystrodon.js";
@@ -441,6 +444,7 @@ import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
 import _poolOrcishSettlers from "../pool/orcish-settlers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOriginOfThor from "../pool/origin-of-thor.js";
+import _poolOstracize from "../pool/ostracize.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
@@ -715,6 +719,7 @@ import _poolYotianTactician from "../pool/yotian-tactician.js";
 import _poolYouMeetInATavern from "../pool/you-meet-in-a-tavern.js";
 import _poolYourTempleIsUnderAttack from "../pool/your-temple-is-under-attack.js";
 import _poolZealousGuardian from "../pool/zealous-guardian.js";
+import _poolZhangFeiFierceWarrior from "../pool/zhang-fei-fierce-warrior.js";
 import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
 import _poolZodiacPig from "../pool/zodiac-pig.js";
 import _poolZombify from "../pool/zombify.js";
@@ -930,6 +935,7 @@ const shard: CardShard = {
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
     _poolEnergyField,
+    _poolEngineeredPlague,
     _poolEnsoulArtifact,
     _poolEnterTheGodEternals,
     _poolEntreatTheAngels,
@@ -1102,11 +1108,13 @@ const shard: CardShard = {
     _poolLifeblood,
     _poolLightkeeperOfEmeria,
     _poolLithoformEngine,
+    _poolLiuBeiLordOfShu,
     _poolLoneRider,
     _poolLostToLegend,
     _poolLothlorienBlade,
     _poolLoxodonMender,
     _poolLoyalGyrfalcon,
+    _poolLoyalRetainers,
     _poolLudevicsTestSubject,
     _poolLuminarchAscension,
     _poolMacetailHystrodon,
@@ -1184,6 +1192,7 @@ const shard: CardShard = {
     _poolOrcishSettlers,
     _poolOrderOfSacredDusk,
     _poolOriginOfThor,
+    _poolOstracize,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
     _poolPaladinOfPredation,
@@ -1458,6 +1467,7 @@ const shard: CardShard = {
     _poolYouMeetInATavern,
     _poolYourTempleIsUnderAttack,
     _poolZealousGuardian,
+    _poolZhangFeiFierceWarrior,
     _poolZinniaValleysVoice,
     _poolZodiacPig,
     _poolZombify,

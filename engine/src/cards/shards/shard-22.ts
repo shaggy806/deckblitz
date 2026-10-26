@@ -162,6 +162,7 @@ import _poolDisplace from "../pool/displace.js";
 import _poolDistantMelody from "../pool/distant-melody.js";
 import _poolDisturbedBurial from "../pool/disturbed-burial.js";
 import _poolDjinniWindseer from "../pool/djinni-windseer.js";
+import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
@@ -280,6 +281,7 @@ import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
+import _poolHuntingCheetah from "../pool/hunting-cheetah.js";
 import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
@@ -725,6 +727,7 @@ import _poolYargleAndMultani from "../pool/yargle-and-multani.js";
 import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
+import _poolYellowScarvesCavalry from "../pool/yellow-scarves-cavalry.js";
 import _poolYipYip from "../pool/yip-yip.js";
 import _poolYokeOfTheDamned from "../pool/yoke-of-the-damned.js";
 import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
@@ -911,6 +914,7 @@ const shard: CardShard = {
     _poolDistantMelody,
     _poolDisturbedBurial,
     _poolDjinniWindseer,
+    _poolDongZhouTheTyrant,
     _poolDoomBlade,
     _poolDraconauticsEngineer,
     _poolDraconicMuralists,
@@ -1029,6 +1033,7 @@ const shard: CardShard = {
     _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
+    _poolHuntingCheetah,
     _poolHurlIntoHistory,
     _poolHurloonBattleHymn,
     _poolHydraOmnivore,
@@ -1474,6 +1479,7 @@ const shard: CardShard = {
     _poolYargleGluttonOfUrborg,
     _poolYavimayaElder,
     _poolYawgmothThranPhysician,
+    _poolYellowScarvesCavalry,
     _poolYipYip,
     _poolYokeOfTheDamned,
     _poolYotiaDeclaresWar,

@@ -146,6 +146,7 @@ import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
 import _poolDelifsCube from "../pool/delifs-cube.js";
 import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
+import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
@@ -250,6 +251,7 @@ import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
+import _poolGhituSlinger from "../pool/ghitu-slinger.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGiantLadybug from "../pool/giant-ladybug.js";
 import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
@@ -352,6 +354,7 @@ import _poolKraulWarrior from "../pool/kraul-warrior.js";
 import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
+import _poolLastDitchEffort from "../pool/last-ditch-effort.js";
 import _poolLayBareTheHeart from "../pool/lay-bare-the-heart.js";
 import _poolLibrary from "../pool/library.js";
 import _poolLidlessGaze from "../pool/lidless-gaze.js";
@@ -502,6 +505,7 @@ import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
+import _poolRebuild from "../pool/rebuild.js";
 import _poolRecall from "../pool/recall.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
@@ -933,6 +937,7 @@ const shard: CardShard = {
     _poolDelifsCube,
     _poolDelightedHalfling,
     _poolDemonicDread,
+    _poolDerangedHermit,
     _poolDesolateLighthouse,
     _poolDiscipleOfMalice,
     _poolDivineGambit,
@@ -1037,6 +1042,7 @@ const shard: CardShard = {
     _poolGenghisFrog,
     _poolGeomancersGambit,
     _poolGeosurge,
+    _poolGhituSlinger,
     _poolGhostlyPilferer,
     _poolGiantLadybug,
     _poolGiantManGargantuanGenius,
@@ -1139,6 +1145,7 @@ const shard: CardShard = {
     _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
     _poolLashOfThorns,
+    _poolLastDitchEffort,
     _poolLayBareTheHeart,
     _poolLibrary,
     _poolLidlessGaze,
@@ -1289,6 +1296,7 @@ const shard: CardShard = {
     _poolRazeToTheGround,
     _poolRazorRings,
     _poolRazorkinNeedlehead,
+    _poolRebuild,
     _poolRecall,
     _poolRedtoothGenealogist,
     _poolReflectingPool,

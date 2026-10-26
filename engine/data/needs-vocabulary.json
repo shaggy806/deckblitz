@@ -11294,7 +11294,7 @@
   },
   "trigger:state-trigger-hand-change": {
    "family": "trigger:state-trigger",
-   "example": "Veiled Crocodile: when a player has no cards in hand \u2014 state triggers aren't checked after hand changes mid-resolution"
+   "example": "Veiled Crocodile: when a player has no cards in hand — state triggers aren't checked after hand changes mid-resolution"
   },
   "static:cant-attack-block-unless-greater-power-joins": {
    "family": "condition:no-other-creature-greater-power-condition",
@@ -11363,6 +11363,18 @@
   "effect:linked-face-down-exile-to-battlefield": {
    "family": "effect:linked-exiled-card",
    "example": "Clone Shell: when it dies, turn the exiled card face up; if it is a creature card, put it onto the battlefield"
+  },
+  "trigger:spell-countered": {
+   "family": "trigger:counters-a-spell-trigger",
+   "example": "Multani's Presence: whenever a spell you've cast is countered, draw a card"
+  },
+  "effect:put-on-top-of-library-all": {
+   "family": "decision:library-ordering",
+   "example": "Harmonic Convergence: put all enchantments on top of their owners' libraries"
+  },
+  "mechanic:special-action-sacrifice-to-ignore-effect": {
+   "family": "mechanic:special-action-sacrifice-to-ignore-effect",
+   "example": "Damping Engine: a player may sacrifice a permanent to ignore this effect until end of turn"
   }
  }
 }

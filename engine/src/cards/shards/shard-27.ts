@@ -284,6 +284,7 @@ import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
 import _poolHoodedAssassin from "../pool/hooded-assassin.js";
 import _poolHoodedKavu from "../pool/hooded-kavu.js";
+import _poolHopeAndGlory from "../pool/hope-and-glory.js";
 import _poolHormagauntHorde from "../pool/hormagaunt-horde.js";
 import _poolHornOfRamos from "../pool/horn-of-ramos.js";
 import _poolHorrorOfHorrors from "../pool/horror-of-horrors.js";
@@ -594,6 +595,7 @@ import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
 import _poolSultaiScavenger from "../pool/sultai-scavenger.js";
 import _poolSummonTheSchool from "../pool/summon-the-school.js";
+import _poolSunCeYoungConquerer from "../pool/sun-ce-young-conquerer.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
@@ -703,6 +705,7 @@ import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
+import _poolWuScout from "../pool/wu-scout.js";
 import _poolXathridSlyblade from "../pool/xathrid-slyblade.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
 import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
@@ -1013,6 +1016,7 @@ const shard: CardShard = {
     _poolHonedKhopesh,
     _poolHoodedAssassin,
     _poolHoodedKavu,
+    _poolHopeAndGlory,
     _poolHormagauntHorde,
     _poolHornOfRamos,
     _poolHorrorOfHorrors,
@@ -1323,6 +1327,7 @@ const shard: CardShard = {
     _poolStrengthOfThePack,
     _poolSultaiScavenger,
     _poolSummonTheSchool,
+    _poolSunCeYoungConquerer,
     _poolSunderFromWithin,
     _poolSuperVillainLockup,
     _poolSwashbucklersWhip,
@@ -1432,6 +1437,7 @@ const shard: CardShard = {
     _poolWoodlandCemetery,
     _poolWorldBreaker,
     _poolWrapInVigor,
+    _poolWuScout,
     _poolXathridSlyblade,
     _poolYotianMedic,
     _poolYueTheMoonSpirit,

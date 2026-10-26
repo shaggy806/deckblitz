@@ -106,6 +106,7 @@ import _poolBurrowing from "../pool/burrowing.js";
 import _poolCactuar from "../pool/cactuar.js";
 import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
+import _poolCaoCaoLordOfWei from "../pool/cao-cao-lord-of-wei.js";
 import _poolCapitalCity from "../pool/capital-city.js";
 import _poolCapriciousSliver from "../pool/capricious-sliver.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
@@ -425,6 +426,7 @@ import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
 import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
 import _poolOpalArchangel from "../pool/opal-archangel.js";
+import _poolOpalChampion from "../pool/opal-champion.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
 import _poolOutpostSiege from "../pool/outpost-siege.js";
@@ -718,6 +720,7 @@ import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
 import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
 import _tokensGolemTokenGolemFoundry from "../tokens/golem-token-golem-foundry.js";
 import _tokensGreenHippoToken11 from "../tokens/green-hippo-token-1-1.js";
+import _tokensHorseTokenTheGirlInTheFireplace from "../tokens/horse-token-the-girl-in-the-fireplace.js";
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
@@ -838,6 +841,7 @@ const shard: CardShard = {
     _poolCactuar,
     _poolCallToMind,
     _poolCanopySpider,
+    _poolCaoCaoLordOfWei,
     _poolCapitalCity,
     _poolCapriciousSliver,
     _poolCaptureOfJingzhou,
@@ -1157,6 +1161,7 @@ const shard: CardShard = {
     _poolOkibaSalvage,
     _poolOminousAsylum,
     _poolOpalArchangel,
+    _poolOpalChampion,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,
     _poolOutpostSiege,
@@ -1452,6 +1457,7 @@ const shard: CardShard = {
     _tokensElementalTokenRekindlingPhoenix,
     _tokensGolemTokenGolemFoundry,
     _tokensGreenHippoToken11,
+    _tokensHorseTokenTheGirlInTheFireplace,
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,

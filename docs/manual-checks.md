@@ -5499,3 +5499,9 @@ engine terms. A second thing to check is a second test.
 ### Endless Swarm: a copy each upkeep, and no more spells
 - **Do:** Cast Endless Swarm, then try to cast Grizzly Bears. Pass the turn and come back to your upkeep.
 - **Expect:** You get a Snake for each card in your hand, and an emblem appears. Grizzly Bears can't be cast any more. At your upkeep a copy of Endless Swarm resolves and makes more Snakes; still only one emblem.
+
+## Horsemanship (2026-10-26, Portal Three Kingdoms)
+
+### Shu Cavalry: only horsemanship blocks it
+- **Do:** Attack with Shu Cavalry and Grizzly Bears. Switch to Bob and declare blockers.
+- **Expect:** Serra Angel can block only the Bears (flying doesn't count). Wei Scout can block either attacker.

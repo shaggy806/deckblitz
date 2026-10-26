@@ -351,6 +351,7 @@ import _poolLoamLarva from "../pool/loam-larva.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
+import _poolLurkingSkirge from "../pool/lurking-skirge.js";
 import _poolLustForWar from "../pool/lust-for-war.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
 import _poolMageHuntersOnslaught from "../pool/mage-hunters-onslaught.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
+    _poolLurkingSkirge,
     _poolLustForWar,
     _poolLuxurySuite,
     _poolMageHuntersOnslaught,

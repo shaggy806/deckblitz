@@ -169,6 +169,7 @@ import _poolDesolateMire from "../pool/desolate-mire.js";
 import _poolDestroyTheEvidence from "../pool/destroy-the-evidence.js";
 import _poolDevastatingSummons from "../pool/devastating-summons.js";
 import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
+import _poolDevoutHarpist from "../pool/devout-harpist.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
 import _poolDiabolicRevelation from "../pool/diabolic-revelation.js";
@@ -675,6 +676,7 @@ import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
 import _poolThoughtReflection from "../pool/thought-reflection.js";
 import _poolThrabenStandardBearer from "../pool/thraben-standard-bearer.js";
 import _poolThranSpider from "../pool/thran-spider.js";
+import _poolThranWeaponry from "../pool/thran-weaponry.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
@@ -753,6 +755,7 @@ import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
+import _poolWuLightCavalry from "../pool/wu-light-cavalry.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
 import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
@@ -953,6 +956,7 @@ const shard: CardShard = {
     _poolDestroyTheEvidence,
     _poolDevastatingSummons,
     _poolDevouringSugarmaw,
+    _poolDevoutHarpist,
     _poolDewdropCure,
     _poolDiabolicMachine,
     _poolDiabolicRevelation,
@@ -1459,6 +1463,7 @@ const shard: CardShard = {
     _poolThoughtReflection,
     _poolThrabenStandardBearer,
     _poolThranSpider,
+    _poolThranWeaponry,
     _poolThunderingChariot,
     _poolThunderkinAwakener,
     _poolTidecallerMentor,
@@ -1537,6 +1542,7 @@ const shard: CardShard = {
     _poolWormHarvest,
     _poolWormwoodTreefolk,
     _poolWreckRemover,
+    _poolWuLightCavalry,
     _poolYavimayaSapherd,
     _poolYusriFortunesFlame,
     _poolZebraUnicorn,

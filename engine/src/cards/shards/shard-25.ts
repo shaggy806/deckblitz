@@ -93,6 +93,7 @@ import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
+import _poolBrinkOfMadness from "../pool/brink-of-madness.js";
 import _poolBristlingBoar from "../pool/bristling-boar.js";
 import _poolBrokenVisage from "../pool/broken-visage.js";
 import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
@@ -361,6 +362,7 @@ import _poolLoreholdCommand from "../pool/lorehold-command.js";
 import _poolLotusBlossom from "../pool/lotus-blossom.js";
 import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
+import _poolLuXunScholarGeneral from "../pool/lu-xun-scholar-general.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
 import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
@@ -462,12 +464,14 @@ import _poolPyroclasm from "../pool/pyroclasm.js";
 import _poolQuakebringer from "../pool/quakebringer.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
 import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
+import _poolRadiantArchangel from "../pool/radiant-archangel.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
 import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
+import _poolRavagesOfWar from "../pool/ravages-of-war.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
@@ -812,6 +816,7 @@ const shard: CardShard = {
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
+    _poolBrinkOfMadness,
     _poolBristlingBoar,
     _poolBrokenVisage,
     _poolBrotherhoodSpy,
@@ -1080,6 +1085,7 @@ const shard: CardShard = {
     _poolLotusBlossom,
     _poolLotusCobra,
     _poolLoyalApprentice,
+    _poolLuXunScholarGeneral,
     _poolMachinistsArsenal,
     _poolMaiJadedEdge,
     _poolMaladyInvoker,
@@ -1181,12 +1187,14 @@ const shard: CardShard = {
     _poolQuakebringer,
     _poolQuilledWolf,
     _poolRadagastWizardOfWilds,
+    _poolRadiantArchangel,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
     _poolRampartArchitect,
     _poolRankOfficer,
     _poolRaphaelToughTurtle,
     _poolRaucousAudience,
+    _poolRavagesOfWar,
     _poolReachForTheSky,
     _poolReason,
     _poolRebelliousStrike,

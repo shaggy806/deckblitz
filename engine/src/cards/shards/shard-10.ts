@@ -603,6 +603,7 @@ import _poolStriderHarness from "../pool/strider-harness.js";
 import _poolStrongboxRaider from "../pool/strongbox-raider.js";
 import _poolSuddenBreakthrough from "../pool/sudden-breakthrough.js";
 import _poolSummonTitan from "../pool/summon-titan.js";
+import _poolSunQuanLordOfWu from "../pool/sun-quan-lord-of-wu.js";
 import _poolSupplantForm from "../pool/supplant-form.js";
 import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room.js";
 import _poolSurveillingSprite from "../pool/surveilling-sprite.js";
@@ -677,6 +678,7 @@ import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVernalBloom from "../pool/vernal-bloom.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
+import _poolViashinoHeretic from "../pool/viashino-heretic.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
 import _poolVileRedeemer from "../pool/vile-redeemer.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
@@ -1344,6 +1346,7 @@ const shard: CardShard = {
     _poolStrongboxRaider,
     _poolSuddenBreakthrough,
     _poolSummonTitan,
+    _poolSunQuanLordOfWu,
     _poolSupplantForm,
     _poolSurgicalSuiteHospitalRoom,
     _poolSurveillingSprite,
@@ -1418,6 +1421,7 @@ const shard: CardShard = {
     _poolVernalBloom,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
+    _poolViashinoHeretic,
     _poolVigorsporeWurm,
     _poolVileRedeemer,
     _poolVilisBrokerOfBlood,
