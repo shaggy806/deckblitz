@@ -1,0 +1,590 @@
+{
+ "batch": "B192",
+ "status": "complete",
+ "ranks": "Lorwyn (LRW, 2007-10-12): the rest of the set, its 80 cards left (the middle walk) — with Gilt-Leaf Palace and Secluded Glen rechecked (their changeling blocker was stale); a \"whenever you clash\" trigger built (rule 701.30, the clashes trigger and a trigger-value condition)",
+ "authored": [
+  {
+   "name": "Adder-Staff Boggart",
+   "files": [
+    "engine/src/cards/pool/adder-staff-boggart.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Benthicore",
+   "files": [
+    "engine/src/cards/pool/benthicore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blind-Spot Giant",
+   "files": [
+    "engine/src/cards/pool/blind-spot-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bog Hoodlums",
+   "files": [
+    "engine/src/cards/pool/bog-hoodlums.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bog-Strider Ash",
+   "files": [
+    "engine/src/cards/pool/bog-strider-ash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boggart Loggers",
+   "files": [
+    "engine/src/cards/pool/boggart-loggers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boggart Sprite-Chaser",
+   "files": [
+    "engine/src/cards/pool/boggart-sprite-chaser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cenn's Heir",
+   "files": [
+    "engine/src/cards/pool/cenns-heir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consuming Bonfire",
+   "files": [
+    "engine/src/cards/pool/consuming-bonfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawnfluke",
+   "files": [
+    "engine/src/cards/pool/dawnfluke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dreamspoiler Witches",
+   "files": [
+    "engine/src/cards/pool/dreamspoiler-witches.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elvish Branchbender",
+   "files": [
+    "engine/src/cards/pool/elvish-branchbender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Eulogist",
+   "files": [
+    "engine/src/cards/pool/elvish-eulogist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Entangling Trap",
+   "files": [
+    "engine/src/cards/pool/entangling-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eyes of the Wisent",
+   "files": [
+    "engine/src/cards/pool/eyes-of-the-wisent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Faultgrinder",
+   "files": [
+    "engine/src/cards/pool/faultgrinder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fistful of Force",
+   "files": [
+    "engine/src/cards/pool/fistful-of-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fodder Launch",
+   "files": [
+    "engine/src/cards/pool/fodder-launch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant's Ire",
+   "files": [
+    "engine/src/cards/pool/giants-ire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilt-Leaf Ambush",
+   "files": [
+    "engine/src/cards/pool/gilt-leaf-ambush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilt-Leaf Palace",
+   "files": [
+    "engine/src/cards/pool/gilt-leaf-palace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gilt-Leaf Seer",
+   "files": [
+    "engine/src/cards/pool/gilt-leaf-seer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glarewielder",
+   "files": [
+    "engine/src/cards/pool/glarewielder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glimmerdust Nap",
+   "files": [
+    "engine/src/cards/pool/glimmerdust-nap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goatnapper",
+   "files": [
+    "engine/src/cards/pool/goatnapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian of Cloverdell",
+   "files": [
+    "engine/src/cards/pool/guardian-of-cloverdell.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Harpoon Sniper",
+   "files": [
+    "engine/src/cards/pool/harpoon-sniper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heal the Scars",
+   "files": [
+    "engine/src/cards/pool/heal-the-scars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hearthcage Giant",
+   "files": [
+    "engine/src/cards/pool/hearthcage-giant.ts",
+    "engine/src/cards/tokens/elemental-shaman-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hostility",
+   "files": [
+    "engine/src/cards/pool/hostility.ts",
+    "engine/src/cards/tokens/elemental-shaman-token-haste.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunter of Eyeblights",
+   "files": [
+    "engine/src/cards/pool/hunter-of-eyeblights.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hurly-Burly",
+   "files": [
+    "engine/src/cards/pool/hurly-burly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inkfathom Divers",
+   "files": [
+    "engine/src/cards/pool/inkfathom-divers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inner-Flame Acolyte",
+   "files": [
+    "engine/src/cards/pool/inner-flame-acolyte.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inner-Flame Igniter",
+   "files": [
+    "engine/src/cards/pool/inner-flame-igniter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kinsbaile Balloonist",
+   "files": [
+    "engine/src/cards/pool/kinsbaile-balloonist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kithkin Greatheart",
+   "files": [
+    "engine/src/cards/pool/kithkin-greatheart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lash Out",
+   "files": [
+    "engine/src/cards/pool/lash-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lowland Oaf",
+   "files": [
+    "engine/src/cards/pool/lowland-oaf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonglove Extract",
+   "files": [
+    "engine/src/cards/pool/moonglove-extract.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mournwhelk",
+   "files": [
+    "engine/src/cards/pool/mournwhelk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nath's Buffoon",
+   "files": [
+    "engine/src/cards/pool/naths-buffoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nath's Elite",
+   "files": [
+    "engine/src/cards/pool/naths-elite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nectar Faerie",
+   "files": [
+    "engine/src/cards/pool/nectar-faerie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oaken Brawler",
+   "files": [
+    "engine/src/cards/pool/oaken-brawler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quill-Slinger Boggart",
+   "files": [
+    "engine/src/cards/pool/quill-slinger-boggart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rebellion of the Flamekin",
+   "files": [
+    "engine/src/cards/pool/rebellion-of-the-flamekin.ts",
+    "engine/src/cards/tokens/elemental-shaman-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarred Vinebreeder",
+   "files": [
+    "engine/src/cards/pool/scarred-vinebreeder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Secluded Glen",
+   "files": [
+    "engine/src/cards/pool/secluded-glen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sentry Oak",
+   "files": [
+    "engine/src/cards/pool/sentry-oak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silvergill Douser",
+   "files": [
+    "engine/src/cards/pool/silvergill-douser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soaring Hope",
+   "files": [
+    "engine/src/cards/pool/soaring-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Springjack Knight",
+   "files": [
+    "engine/src/cards/pool/springjack-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stonybrook Angler",
+   "files": [
+    "engine/src/cards/pool/stonybrook-angler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surge of Thoughtweft",
+   "files": [
+    "engine/src/cards/pool/surge-of-thoughtweft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Echoes",
+   "files": [
+    "engine/src/cards/pool/sylvan-echoes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thorntooth Witch",
+   "files": [
+    "engine/src/cards/pool/thorntooth-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran of the Depths",
+   "files": [
+    "engine/src/cards/pool/veteran-of-the-depths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warren Pilferers",
+   "files": [
+    "engine/src/cards/pool/warren-pilferers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warren-Scourge Elf",
+   "files": [
+    "engine/src/cards/pool/warren-scourge-elf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wellgabber Apothecary",
+   "files": [
+    "engine/src/cards/pool/wellgabber-apothecary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woodland Guidance",
+   "files": [
+    "engine/src/cards/pool/woodland-guidance.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Oona's Prowler",
+   "needs": [
+    "cost:any-player-may-activate"
+   ],
+   "why": "\"Discard a card: … Any player may activate this ability\" — only the controller can activate an ability"
+  },
+  {
+   "name": "Turtleshell Changeling",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "no effect switches a creature's power and toughness (layer 7d)"
+  },
+  {
+   "name": "Ego Erasure",
+   "needs": [
+    "effect:gain-lose-all-creature-types"
+   ],
+   "why": "nothing makes a group of creatures lose all creature types until end of turn"
+  },
+  {
+   "name": "Fathom Trawl",
+   "needs": [
+    "effect:reveal-until-count-to-hand",
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "reveal-until-count puts the found cards only onto the battlefield, and its rest goes only shuffled or in a random order, not the order you choose"
+  },
+  {
+   "name": "Squeaking Pie Sneak",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "\"reveal a Goblin card from your hand\" as an additional cost: behold also offers a Goblin you control, and behold.fromHand skips the reveal"
+  },
+  {
+   "name": "Ceaseless Searblades",
+   "needs": [
+    "trigger:activates-mana-ability"
+   ],
+   "why": "the activates-ability trigger never fires on mana abilities (605.3b), but \"an ability of an Elemental\" includes them"
+  },
+  {
+   "name": "Tideshaper Mystic",
+   "needs": [
+    "decision:choose-land-type-on-resolution",
+    "effect:become-basic-land-type"
+   ],
+   "why": "no effect makes a land become a basic land type chosen as it resolves, replacing its old land types, until end of turn"
+  },
+  {
+   "name": "Wren's Run Vanquisher",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "\"reveal an Elf card from your hand\" as an additional cost: behold also offers an Elf you control, and behold.fromHand is a pitch-cost form that never reveals"
+  },
+  {
+   "name": "Favor of the Mighty",
+   "needs": [
+    "filter:greatest-mana-value-among-all-creatures"
+   ],
+   "why": "greatestAmongItsController compares each controller's creatures apart; this needs one comparison over every creature on the battlefield, ties sharing it"
+  },
+  {
+   "name": "Thieving Sprite",
+   "needs": [
+    "effect:reveal-n-from-hand-you-choose-discard"
+   ],
+   "why": "the target player reveals X cards from their hand of their choice and you choose one to discard; discard-chosen has no count of revealed cards"
+  },
+  {
+   "name": "Nettlevine Blight",
+   "needs": [
+    "static:aura-grants-ability-referencing-aura",
+    "effect:attach-granting-aura"
+   ],
+   "why": "the granted ability sacrifices its permanent and then attaches the Aura that granted it; a granted ability can't refer to that Aura"
+  },
+  {
+   "name": "Burrenton Forge-Tender",
+   "needs": [
+    "replacement:prevent-all-damage-from-chosen-source-this-turn"
+   ],
+   "why": "prevent-damage-from-chosen-source takes only to: you or a slot and the next time or an amount; nothing prevents all of a chosen red source's damage to everything this turn"
+  },
+  {
+   "name": "Twinning Glass",
+   "needs": [
+    "filter:same-name-as-spell-cast-this-turn"
+   ],
+   "why": "cast-now's spell filter can't match a name against the spells cast this turn"
+  },
+  {
+   "name": "Hunt Down",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "restrict has no \"blocks that creature this turn if able\" requirement"
+  },
+  {
+   "name": "Flamekin Bladewhirl",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "\"reveal an Elemental card from your hand\" as an additional cost: behold also offers a permanent, and the from-hand form exiles"
+  },
+  {
+   "name": "Ethereal Whiskergill",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "\"can't attack unless defending player controls an Island\": an attack restriction on what the defending player controls isn't expressible"
+  },
+  {
+   "name": "Boggart Forager",
+   "needs": [
+    "effect:target-player-shuffles-library"
+   ],
+   "why": "shuffle-library takes no player: only the controller's own library can be shuffled, not target player's"
+  },
+  {
+   "name": "Goldmeadow Stalwart",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "\"reveal a Kithkin card from your hand\" as an additional cost: behold also offers a permanent, and the from-hand form exiles"
+  },
+  {
+   "name": "Lairwatch Giant",
+   "needs": [
+    "static:block-additional-creature",
+    "trigger:blocks-two-or-more"
+   ],
+   "why": "nothing lets a creature block an additional creature, and there's no \"blocks two or more creatures\" trigger"
+  },
+  {
+   "name": "Lammastide Weave",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "no \"choose a card name\" decision"
+  }
+ ]
+}

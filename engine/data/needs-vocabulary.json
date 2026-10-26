@@ -11083,6 +11083,26 @@
   "trigger:clash": {
    "family": "mechanic:clash",
    "example": "Sylvan Echoes: \"whenever you clash and win\" — no trigger on a player clashing"
+  },
+  "effect:reveal-until-count-to-hand": {
+   "family": "effect:reveal-until-count",
+   "example": "Fathom Trawl: reveal until three nonland cards, put them into your hand — reveal-until-count only puts the found cards onto the battlefield"
+  },
+  "effect:become-basic-land-type": {
+   "family": "decision:choose-land-type-on-resolution",
+   "example": "Tideshaper Mystic: target land becomes the basic land type of your choice until end of turn, replacing its land types"
+  },
+  "filter:greatest-mana-value-among-all-creatures": {
+   "family": "condition:greatest-power-condition",
+   "example": "Favor of the Mighty: each creature with the greatest mana value has protection from each color — one comparison over every creature on the battlefield"
+  },
+  "filter:same-name-as-spell-cast-this-turn": {
+   "family": "stat:spells-cast-this-turn-record",
+   "example": "Twinning Glass: cast a nonland card from your hand with the same name as a spell cast this turn without paying its mana cost"
+  },
+  "trigger:blocks-two-or-more": {
+   "family": "static:block-additional-creature",
+   "example": "Lairwatch Giant: whenever this blocks two or more creatures, it gains first strike until end of turn"
   }
  }
 }

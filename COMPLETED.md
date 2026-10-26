@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Lorwyn — Lorwyn is whole** (batch 192, the middle walk's second range, 2026-10-26):
+  **built** a "whenever you clash" trigger (rule 701.30, `trigger:clash` — each clashing player
+  clashes, a `clashed` event apiece once the cards have moved, whoever started it; `won: true` for
+  "clash and win"; "if you won" is the new `trigger-value` condition). 62 authored — Hostility,
+  Gilt-Leaf Palace and Secluded Glen (their changeling blocker stale), Sylvan Echoes, Rebellion of
+  the Flamekin, Entangling Trap, Hearthcage Giant, Gilt-Leaf Ambush and 54 more — and 20 blocked
+  (`B192.json`), "reveal a card from your hand" as an additional cost leading with four.
 - **Lorwyn's 90 most-played left** (batch 189, the middle walk's second range, 2026-10-26):
   **built** clash (rule 701.30, `mechanic:clash` — the `clash` effect: the opponent chosen, both
   top cards revealed, each player's top-or-bottom choice in APNAP order, `won` / `lost` with
