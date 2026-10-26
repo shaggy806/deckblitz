@@ -562,6 +562,7 @@ import _poolSeshiroTheAnointed from "../pool/seshiro-the-anointed.js";
 import _poolShadowKin from "../pool/shadow-kin.js";
 import _poolShadowbeastSighting from "../pool/shadowbeast-sighting.js";
 import _poolShatteringPulse from "../pool/shattering-pulse.js";
+import _poolShatteringSpree from "../pool/shattering-spree.js";
 import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShiftingWall from "../pool/shifting-wall.js";
@@ -1343,6 +1344,7 @@ const shard: CardShard = {
     _poolShadowKin,
     _poolShadowbeastSighting,
     _poolShatteringPulse,
+    _poolShatteringSpree,
     _poolSheHulkJadeDefender,
     _poolShiarSoldier,
     _poolShiftingWall,

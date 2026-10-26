@@ -11751,6 +11751,7 @@ import _poolLorienRevealed from "./pool/lorien-revealed.js";
 import _poolLorthosTheTidemaker from "./pool/lorthos-the-tidemaker.js";
 import _poolLosDiablosMissileBase from "./pool/los-diablos-missile-base.js";
 import _poolLoseCalm from "./pool/lose-calm.js";
+import _poolLoseFocus from "./pool/lose-focus.js";
 import _poolLoseHope from "./pool/lose-hope.js";
 import _poolLoss from "./pool/loss.js";
 import _poolLossarnachCaptain from "./pool/lossarnach-captain.js";
@@ -17563,6 +17564,7 @@ import _poolShatteredYard from "./pool/shattered-yard.js";
 import _poolShattergangBrothers from "./pool/shattergang-brothers.js";
 import _poolShatteringBlow from "./pool/shattering-blow.js";
 import _poolShatteringPulse from "./pool/shattering-pulse.js";
+import _poolShatteringSpree from "./pool/shattering-spree.js";
 import _poolShatterskullCharger from "./pool/shatterskull-charger.js";
 import _poolShatterskullGiant from "./pool/shatterskull-giant.js";
 import _poolShatterskullMinotaur from "./pool/shatterskull-minotaur.js";
@@ -35817,6 +35819,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLorthosTheTidemaker,
   _poolLosDiablosMissileBase,
   _poolLoseCalm,
+  _poolLoseFocus,
   _poolLoseHope,
   _poolLoss,
   _poolLossarnachCaptain,
@@ -41629,6 +41632,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShattergangBrothers,
   _poolShatteringBlow,
   _poolShatteringPulse,
+  _poolShatteringSpree,
   _poolShatterskullCharger,
   _poolShatterskullGiant,
   _poolShatterskullMinotaur,
@@ -59896,6 +59900,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lorthos-the-tidemaker": _poolLorthosTheTidemaker,
   "pool/los-diablos-missile-base": _poolLosDiablosMissileBase,
   "pool/lose-calm": _poolLoseCalm,
+  "pool/lose-focus": _poolLoseFocus,
   "pool/lose-hope": _poolLoseHope,
   "pool/loss": _poolLoss,
   "pool/lossarnach-captain": _poolLossarnachCaptain,
@@ -65708,6 +65713,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shattergang-brothers": _poolShattergangBrothers,
   "pool/shattering-blow": _poolShatteringBlow,
   "pool/shattering-pulse": _poolShatteringPulse,
+  "pool/shattering-spree": _poolShatteringSpree,
   "pool/shatterskull-charger": _poolShatterskullCharger,
   "pool/shatterskull-giant": _poolShatterskullGiant,
   "pool/shatterskull-minotaur": _poolShatterskullMinotaur,

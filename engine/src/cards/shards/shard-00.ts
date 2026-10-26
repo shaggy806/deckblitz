@@ -348,6 +348,7 @@ import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
 import _poolLlanowarEmpath from "../pool/llanowar-empath.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
+import _poolLoseFocus from "../pool/lose-focus.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
 import _poolLysAlanaBowmaster from "../pool/lys-alana-bowmaster.js";
 import _poolMaelstromDjinn from "../pool/maelstrom-djinn.js";
@@ -1107,6 +1108,7 @@ const shard: CardShard = {
     _poolLightningMare,
     _poolLlanowarEmpath,
     _poolLluwenExchangeStudent,
+    _poolLoseFocus,
     _poolLostInSpace,
     _poolLysAlanaBowmaster,
     _poolMaelstromDjinn,

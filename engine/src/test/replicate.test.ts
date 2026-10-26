@@ -75,3 +75,16 @@ describe("replicate", () => {
     expect(graveyard(game).length).toBe(1);
   });
 });
+
+describe("replicate — cards it unblocked", () => {
+  it("Shattering Spree paid once destroys two artifacts", () => {
+    const { game, a } = table();
+    lands(game, "Mountain", 2);
+    const one = spawn(game, "Ornithopter", B);
+    const two = spawn(game, "Ornithopter", B);
+    a.chooseTargetsFn = () => [ref(two)];
+    cast(game, toHand(game, "Shattering Spree"), { targets: [ref(one)], kicked: true, kickCount: 1 });
+    expect(zone(game, one)).toBe("graveyard");
+    expect(zone(game, two)).toBe("graveyard");
+  });
+});
