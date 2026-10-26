@@ -130,6 +130,7 @@ import _poolCouncilsJudgment from "../pool/councils-judgment.js";
 import _poolCountervailingWinds from "../pool/countervailing-winds.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
+import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
 import _poolCrushContraband from "../pool/crush-contraband.js";
@@ -412,6 +413,7 @@ import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNivixCyclops from "../pool/nivix-cyclops.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
 import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
+import _poolNumbingDose from "../pool/numbing-dose.js";
 import _poolOashraCultivator from "../pool/oashra-cultivator.js";
 import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
@@ -859,6 +861,7 @@ const shard: CardShard = {
     _poolCountervailingWinds,
     _poolCovertTechnician,
     _poolCrawlingChorus,
+    _poolCrescendoOfWar,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
     _poolCrushContraband,
@@ -1141,6 +1144,7 @@ const shard: CardShard = {
     _poolNivixCyclops,
     _poolNorthPoleGates,
     _poolNullpriestOfOblivion,
+    _poolNumbingDose,
     _poolOashraCultivator,
     _poolOdricsOutrider,
     _poolOgreBattledriver,

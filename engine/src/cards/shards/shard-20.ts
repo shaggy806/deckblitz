@@ -356,6 +356,7 @@ import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.j
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
 import _poolLearnFromThePast from "../pool/learn-from-the-past.js";
+import _poolLeechingBite from "../pool/leeching-bite.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
@@ -1130,6 +1131,7 @@ const shard: CardShard = {
     _poolLagorinSoulOfAlacria,
     _poolLavakinBrawler,
     _poolLearnFromThePast,
+    _poolLeechingBite,
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,

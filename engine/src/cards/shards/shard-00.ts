@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbominationWorldRavager from "../pool/abomination-world-ravager.js";
 import _poolAbzanCharm from "../pool/abzan-charm.js";
 import _poolAccursedMarauder from "../pool/accursed-marauder.js";
+import _poolActOfAggression from "../pool/act-of-aggression.js";
 import _poolAdelbertSteiner from "../pool/adelbert-steiner.js";
 import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
 import _poolAerialFormation from "../pool/aerial-formation.js";
@@ -587,6 +588,7 @@ import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
 import _poolTajuruParagon from "../pool/tajuru-paragon.js";
 import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
+import _poolTarielReckonerOfSouls from "../pool/tariel-reckoner-of-souls.js";
 import _poolTavernSmasher from "../pool/tavern-smasher.js";
 import _poolTectonicHazard from "../pool/tectonic-hazard.js";
 import _poolTeferisSentinel from "../pool/teferis-sentinel.js";
@@ -668,6 +670,7 @@ import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
 import _poolVillageMessenger from "../pool/village-messenger.js";
 import _poolVineSnare from "../pool/vine-snare.js";
+import _poolViridianHarvest from "../pool/viridian-harvest.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
@@ -734,6 +737,7 @@ const shard: CardShard = {
     _poolAbominationWorldRavager,
     _poolAbzanCharm,
     _poolAccursedMarauder,
+    _poolActOfAggression,
     _poolAdelbertSteiner,
     _poolAdornedCrocodile,
     _poolAerialFormation,
@@ -1315,6 +1319,7 @@ const shard: CardShard = {
     _poolTajuruParagon,
     _poolTalonTrooper,
     _poolTaoistHermit,
+    _poolTarielReckonerOfSouls,
     _poolTavernSmasher,
     _poolTectonicHazard,
     _poolTeferisSentinel,
@@ -1396,6 +1401,7 @@ const shard: CardShard = {
     _poolVihaanGoldwaker,
     _poolVillageMessenger,
     _poolVineSnare,
+    _poolViridianHarvest,
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
     _poolVizierOfTheTrue,

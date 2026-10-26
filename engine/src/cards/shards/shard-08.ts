@@ -131,6 +131,7 @@ import _poolCoralhelmCommander from "../pool/coralhelm-commander.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
 import _poolCorpseTraders from "../pool/corpse-traders.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
+import _poolCorrosiveGale from "../pool/corrosive-gale.js";
 import _poolCourageousOutrider from "../pool/courageous-outrider.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCourtStreetDenizen from "../pool/court-street-denizen.js";
@@ -893,6 +894,7 @@ const shard: CardShard = {
     _poolCorpseBlockade,
     _poolCorpseTraders,
     _poolCorrodingDragonstorm,
+    _poolCorrosiveGale,
     _poolCourageousOutrider,
     _poolCourtOfBounty,
     _poolCourtStreetDenizen,

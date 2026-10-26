@@ -367,6 +367,7 @@ import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMaulSplicer from "../pool/maul-splicer.js";
 import _poolMentalAgony from "../pool/mental-agony.js";
 import _poolMercurialPretender from "../pool/mercurial-pretender.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolMassAppeal,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMaulSplicer,
     _poolMentalAgony,
     _poolMercurialPretender,
     _poolMeriaScholarOfAntiquity,

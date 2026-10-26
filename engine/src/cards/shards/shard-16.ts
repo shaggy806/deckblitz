@@ -460,6 +460,7 @@ import _poolPillagingHorde from "../pool/pillaging-horde.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPistonFistCyclops from "../pool/piston-fist-cyclops.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
+import _poolPithDriller from "../pool/pith-driller.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
 import _poolPlumecreedMentor from "../pool/plumecreed-mentor.js";
@@ -540,6 +541,7 @@ import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
 import _poolShaukusMinion from "../pool/shaukus-minion.js";
 import _poolShipwreckMarsh from "../pool/shipwreck-marsh.js";
 import _poolShriekingDrake from "../pool/shrieking-drake.js";
+import _poolShrineOfLimitlessPower from "../pool/shrine-of-limitless-power.js";
 import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
 import _poolSigilBlessing from "../pool/sigil-blessing.js";
@@ -1234,6 +1236,7 @@ const shard: CardShard = {
     _poolPiratesPillage,
     _poolPistonFistCyclops,
     _poolPitOfOfferings,
+    _poolPithDriller,
     _poolPizzaFaceGastromancer,
     _poolPlatinumAngel,
     _poolPlumecreedMentor,
@@ -1314,6 +1317,7 @@ const shard: CardShard = {
     _poolShaukusMinion,
     _poolShipwreckMarsh,
     _poolShriekingDrake,
+    _poolShrineOfLimitlessPower,
     _poolShrink,
     _poolShroudedShepherd,
     _poolSigilBlessing,

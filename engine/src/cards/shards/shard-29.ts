@@ -298,6 +298,7 @@ import _poolHyperionBlacksmith from "../pool/hyperion-blacksmith.js";
 import _poolIceFlan from "../pool/ice-flan.js";
 import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
 import _poolIchTekikSalvageSplicer from "../pool/ich-tekik-salvage-splicer.js";
+import _poolIchorExplosion from "../pool/ichor-explosion.js";
 import _poolIdolized from "../pool/idolized.js";
 import _poolIllicitMasquerade from "../pool/illicit-masquerade.js";
 import _poolImmobilizerEldrazi from "../pool/immobilizer-eldrazi.js";
@@ -362,6 +363,7 @@ import _poolManaplasm from "../pool/manaplasm.js";
 import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
+import _poolMartyrsBond from "../pool/martyrs-bond.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
@@ -1037,6 +1039,7 @@ const shard: CardShard = {
     _poolIceFlan,
     _poolIcecaveCrasher,
     _poolIchTekikSalvageSplicer,
+    _poolIchorExplosion,
     _poolIdolized,
     _poolIllicitMasquerade,
     _poolImmobilizerEldrazi,
@@ -1101,6 +1104,7 @@ const shard: CardShard = {
     _poolManholeMissile,
     _poolManorGate,
     _poolMantisEngine,
+    _poolMartyrsBond,
     _poolMechanAssembler,
     _poolMeldwebCurator,
     _poolMemorialToGenius,

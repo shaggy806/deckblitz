@@ -211,6 +211,7 @@ import _poolEnergyRefractor from "../pool/energy-refractor.js";
 import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolEntDraughtBasin from "../pool/ent-draught-basin.js";
 import _poolEntanglingVines from "../pool/entangling-vines.js";
+import _poolEtchedMonstrosity from "../pool/etched-monstrosity.js";
 import _poolExperimentalOverload from "../pool/experimental-overload.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
@@ -341,6 +342,7 @@ import _poolIcewindElemental from "../pool/icewind-elemental.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
+import _poolImpalerShrike from "../pool/impaler-shrike.js";
 import _poolInactionInjunction from "../pool/inaction-injunction.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
 import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
@@ -712,6 +714,7 @@ import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
 import _poolVolatileRig from "../pool/volatile-rig.js";
+import _poolVowOfWildness from "../pool/vow-of-wildness.js";
 import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolEnlightenedManiac,
     _poolEntDraughtBasin,
     _poolEntanglingVines,
+    _poolEtchedMonstrosity,
     _poolExperimentalOverload,
     _poolFacevaulter,
     _poolFaithfulPikemaster,
@@ -1106,6 +1110,7 @@ const shard: CardShard = {
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,
     _poolImmersturmRaider,
+    _poolImpalerShrike,
     _poolInactionInjunction,
     _poolInfestationExpert,
     _poolInfuseWithTheElements,
@@ -1477,6 +1482,7 @@ const shard: CardShard = {
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,
     _poolVolatileRig,
+    _poolVowOfWildness,
     _poolVraskasConquistador,
     _poolWalkingAtlas,
     _poolWallOfMist,

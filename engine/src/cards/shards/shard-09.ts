@@ -330,6 +330,7 @@ import _poolJennyGeneratedAnomaly from "../pool/jenny-generated-anomaly.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
 import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
+import _poolJorKadeenThePrevailer from "../pool/jor-kadeen-the-prevailer.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
@@ -507,6 +508,7 @@ import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRhysTheExiled from "../pool/rhys-the-exiled.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
+import _poolRikuOfTwoReflections from "../pool/riku-of-two-reflections.js";
 import _poolRiptideChimera from "../pool/riptide-chimera.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
@@ -545,6 +547,7 @@ import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
 import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
+import _poolSensorSplicer from "../pool/sensor-splicer.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
 import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
@@ -1074,6 +1077,7 @@ const shard: CardShard = {
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
     _poolJolraelVoiceOfZhalfir,
+    _poolJorKadeenThePrevailer,
     _poolJunglebornPioneer,
     _poolKamisFlare,
     _poolKayasWrath,
@@ -1251,6 +1255,7 @@ const shard: CardShard = {
     _poolRetrofittedTransmogrant,
     _poolRhysTheExiled,
     _poolRidgetopRaptor,
+    _poolRikuOfTwoReflections,
     _poolRiptideChimera,
     _poolRiteOfTheDragoncaller,
     _poolRiveteersRequisitioner,
@@ -1289,6 +1294,7 @@ const shard: CardShard = {
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
     _poolSelvalaExplorerReturned,
+    _poolSensorSplicer,
     _poolSephirothPlanetsHeir,
     _poolSeraphOfDawn,
     _poolSerrasSanctum,

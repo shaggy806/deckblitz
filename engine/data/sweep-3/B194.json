@@ -1,0 +1,704 @@
+{
+ "batch": "B194",
+ "status": "complete",
+ "ranks": "Commander 2011 (CMD, 2011-06-17): the rest of the set, 23; New Phyrexia (NPH, 2011-05-13): whole set, 76 (newest-first walk); no feature built",
+ "authored": [
+  {
+   "name": "Acorn Catapult",
+   "files": [
+    "engine/src/cards/pool/acorn-catapult.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Act of Aggression",
+   "files": [
+    "engine/src/cards/pool/act-of-aggression.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Argent Mutation",
+   "files": [
+    "engine/src/cards/pool/argent-mutation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arm with Aether",
+   "files": [
+    "engine/src/cards/pool/arm-with-aether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artillerize",
+   "files": [
+    "engine/src/cards/pool/artillerize.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Auriok Survivors",
+   "files": [
+    "engine/src/cards/pool/auriok-survivors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basandra, Battle Seraph",
+   "files": [
+    "engine/src/cards/pool/basandra-battle-seraph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blind Zealot",
+   "files": [
+    "engine/src/cards/pool/blind-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brutalizer Exarch",
+   "files": [
+    "engine/src/cards/pool/brutalizer-exarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caress of Phyrexia",
+   "files": [
+    "engine/src/cards/pool/caress-of-phyrexia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conversion Chamber",
+   "files": [
+    "engine/src/cards/pool/conversion-chamber.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Corrosive Gale",
+   "files": [
+    "engine/src/cards/pool/corrosive-gale.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crescendo of War",
+   "files": [
+    "engine/src/cards/pool/crescendo-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deceiver Exarch",
+   "files": [
+    "engine/src/cards/pool/deceiver-exarch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Despise",
+   "files": [
+    "engine/src/cards/pool/despise.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Entomber Exarch",
+   "files": [
+    "engine/src/cards/pool/entomber-exarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Etched Monstrosity",
+   "files": [
+    "engine/src/cards/pool/etched-monstrosity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Forced Worship",
+   "files": [
+    "engine/src/cards/pool/forced-worship.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fresh Meat",
+   "files": [
+    "engine/src/cards/pool/fresh-meat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furnace Scamp",
+   "files": [
+    "engine/src/cards/pool/furnace-scamp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geth's Verdict",
+   "files": [
+    "engine/src/cards/pool/geths-verdict.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Greenhilt Trainee",
+   "files": [
+    "engine/src/cards/pool/greenhilt-trainee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ichor Explosion",
+   "files": [
+    "engine/src/cards/pool/ichor-explosion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impaler Shrike",
+   "files": [
+    "engine/src/cards/pool/impaler-shrike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inquisitor Exarch",
+   "files": [
+    "engine/src/cards/pool/inquisitor-exarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Isolation Cell",
+   "files": [
+    "engine/src/cards/pool/isolation-cell.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jor Kadeen, the Prevailer",
+   "files": [
+    "engine/src/cards/pool/jor-kadeen-the-prevailer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leeching Bite",
+   "files": [
+    "engine/src/cards/pool/leeching-bite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Marrow Shards",
+   "files": [
+    "engine/src/cards/pool/marrow-shards.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Martyr's Bond",
+   "files": [
+    "engine/src/cards/pool/martyrs-bond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maul Splicer",
+   "files": [
+    "engine/src/cards/pool/maul-splicer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mindculling",
+   "files": [
+    "engine/src/cards/pool/mindculling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mortis Dogs",
+   "files": [
+    "engine/src/cards/pool/mortis-dogs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Numbing Dose",
+   "files": [
+    "engine/src/cards/pool/numbing-dose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parasitic Implant",
+   "files": [
+    "engine/src/cards/pool/parasitic-implant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pith Driller",
+   "files": [
+    "engine/src/cards/pool/pith-driller.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Postmortem Lunge",
+   "files": [
+    "engine/src/cards/pool/postmortem-lunge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reaper of Sheoldred",
+   "files": [
+    "engine/src/cards/pool/reaper-of-sheoldred.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riddlekeeper",
+   "files": [
+    "engine/src/cards/pool/riddlekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riku of Two Reflections",
+   "files": [
+    "engine/src/cards/pool/riku-of-two-reflections.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruhan of the Fomori",
+   "files": [
+    "engine/src/cards/pool/ruhan-of-the-fomori.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ruthless Invasion",
+   "files": [
+    "engine/src/cards/pool/ruthless-invasion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrapyard Salvo",
+   "files": [
+    "engine/src/cards/pool/scrapyard-salvo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sensor Splicer",
+   "files": [
+    "engine/src/cards/pool/sensor-splicer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrine of Boundless Growth",
+   "files": [
+    "engine/src/cards/pool/shrine-of-boundless-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrine of Burning Rage",
+   "files": [
+    "engine/src/cards/pool/shrine-of-burning-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrine of Limitless Power",
+   "files": [
+    "engine/src/cards/pool/shrine-of-limitless-power.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrine of Loyal Legions",
+   "files": [
+    "engine/src/cards/pool/shrine-of-loyal-legions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrine of Piercing Vision",
+   "files": [
+    "engine/src/cards/pool/shrine-of-piercing-vision.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slag Fiend",
+   "files": [
+    "engine/src/cards/pool/slag-fiend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surge Node",
+   "files": [
+    "engine/src/cards/pool/surge-node.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tariel, Reckoner of Souls",
+   "files": [
+    "engine/src/cards/pool/tariel-reckoner-of-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tormentor Exarch",
+   "files": [
+    "engine/src/cards/pool/tormentor-exarch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Viridian Betrayers",
+   "files": [
+    "engine/src/cards/pool/viridian-betrayers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viridian Harvest",
+   "files": [
+    "engine/src/cards/pool/viridian-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vital Splicer",
+   "files": [
+    "engine/src/cards/pool/vital-splicer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vow of Flight",
+   "files": [
+    "engine/src/cards/pool/vow-of-flight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vow of Malice",
+   "files": [
+    "engine/src/cards/pool/vow-of-malice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vow of Wildness",
+   "files": [
+    "engine/src/cards/pool/vow-of-wildness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "War Report",
+   "files": [
+    "engine/src/cards/pool/war-report.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whipflare",
+   "files": [
+    "engine/src/cards/pool/whipflare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Whispering Specter",
+   "files": [
+    "engine/src/cards/pool/whispering-specter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wing Splicer",
+   "files": [
+    "engine/src/cards/pool/wing-splicer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xenograft",
+   "files": [
+    "engine/src/cards/pool/xenograft.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Alliance of Arms",
+   "needs": [
+    "new:join-forces"
+   ],
+   "why": "join forces: each player may pay any amount of mana"
+  },
+  {
+   "name": "Archangel of Strife",
+   "needs": [
+    "effect:each-player-chooses-in-turn-order"
+   ],
+   "why": "each player chooses war or peace as it enters"
+  },
+  {
+   "name": "Bludgeon Brawl",
+   "needs": [
+    "static:artifacts-become-equipment"
+   ],
+   "why": "noncreature non-Equipment artifacts are Equipment with equip {X}"
+  },
+  {
+   "name": "Cathedral Membrane",
+   "needs": [
+    "filter:blocked-by-source-this-combat"
+   ],
+   "why": "each creature it blocked this combat, as it dies"
+  },
+  {
+   "name": "Chained Throatseeker",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "can't attack unless the defending player is poisoned"
+  },
+  {
+   "name": "Chancellor of the Annex",
+   "needs": [
+    "new:opening-hand-actions"
+   ],
+   "why": "reveal from the opening hand: the first spell each opponent casts is countered unless they pay {1}"
+  },
+  {
+   "name": "Chancellor of the Dross",
+   "needs": [
+    "new:opening-hand-actions"
+   ],
+   "why": "reveal from the opening hand for a first-upkeep trigger"
+  },
+  {
+   "name": "Chancellor of the Forge",
+   "needs": [
+    "new:opening-hand-actions"
+   ],
+   "why": "reveal from the opening hand for a first-upkeep trigger"
+  },
+  {
+   "name": "Chancellor of the Spires",
+   "needs": [
+    "new:opening-hand-actions"
+   ],
+   "why": "reveal from the opening hand: each opponent mills seven at the first upkeep"
+  },
+  {
+   "name": "Chancellor of the Tangle",
+   "needs": [
+    "new:opening-hand-actions"
+   ],
+   "why": "reveal from the opening hand for a delayed first-main-phase mana"
+  },
+  {
+   "name": "Corrupted Resolve",
+   "needs": [
+    "condition:target-controller-poisoned"
+   ],
+   "why": "the targeted spell's controller being poisoned"
+  },
+  {
+   "name": "Damia, Sage of Stone",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "\"skip your draw step\""
+  },
+  {
+   "name": "Death by Dragons",
+   "needs": [
+    "effect:for-each-player-except-target"
+   ],
+   "why": "each player other than target player creates a Dragon"
+  },
+  {
+   "name": "Dread Cacodemon",
+   "needs": [
+    "effect:tap-all-except-source"
+   ],
+   "why": "tap all other creatures you control"
+  },
+  {
+   "name": "Due Respect",
+   "needs": [
+    "effect:temporary-permanents-enter-tapped"
+   ],
+   "why": "permanents enter tapped this turn"
+  },
+  {
+   "name": "Exclusion Ritual",
+   "needs": [
+    "filter:same-name-as-exiled-with-source"
+   ],
+   "why": "spells with the same name as the exiled card can't be cast"
+  },
+  {
+   "name": "Gremlin Mine",
+   "needs": [
+    "effect:remove-counters-up-to"
+   ],
+   "why": "remove up to four charge counters (the player chooses how many)"
+  },
+  {
+   "name": "Invader Parasite",
+   "needs": [
+    "keyword:imprint-same-name"
+   ],
+   "why": "a land with the same name as the exiled card enters"
+  },
+  {
+   "name": "Life's Finale",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "you search target opponent's library and choose"
+  },
+  {
+   "name": "Mana-Charged Dragon",
+   "needs": [
+    "new:join-forces"
+   ],
+   "why": "join forces: each player may pay any amount of mana"
+  },
+  {
+   "name": "Mycosynth Fiend",
+   "needs": [
+    "static:pt-per-opponents-player-counters"
+   ],
+   "why": "+1/+1 for each poison counter your opponents have"
+  },
+  {
+   "name": "Myr Superion",
+   "needs": [
+    "cost:spend-only-creature-mana"
+   ],
+   "why": "spend only mana produced by creatures to cast it"
+  },
+  {
+   "name": "Nin, the Pain Artist",
+   "needs": [
+    "effect:draw-controller-of-target"
+   ],
+   "why": "that creature's controller draws X"
+  },
+  {
+   "name": "Omen Machine",
+   "needs": [
+    "static:players-cant-draw",
+    "effect:must-cast-if-able"
+   ],
+   "why": "players can't draw; the draw-step trigger's cast is mandatory if able"
+  },
+  {
+   "name": "Phyrexian Ingester",
+   "needs": [
+    "static:pt-from-linked-exiled-card"
+   ],
+   "why": "+X/+Y from the exiled creature's power and toughness"
+  },
+  {
+   "name": "Psychic Surgery",
+   "needs": [
+    "trigger:opponent-shuffles-library"
+   ],
+   "why": "whenever an opponent shuffles their library"
+  },
+  {
+   "name": "Rage Extractor",
+   "needs": [
+    "filter:phyrexian-mana-in-cost"
+   ],
+   "why": "a spell with {P} in its mana cost"
+  },
+  {
+   "name": "Shared Trauma",
+   "needs": [
+    "new:join-forces"
+   ],
+   "why": "join forces: each player may pay any amount of mana"
+  },
+  {
+   "name": "Soul Conduit",
+   "needs": [
+    "effect:exchange-life-totals"
+   ],
+   "why": "two target players exchange life totals"
+  },
+  {
+   "name": "Spell Crumple",
+   "needs": [
+    "effect:counter-into-library-bottom"
+   ],
+   "why": "counter a spell onto the bottom of its owner's library, then this spell too"
+  },
+  {
+   "name": "Spinebiter",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "assign its combat damage as though it weren't blocked"
+  },
+  {
+   "name": "Surgical Extraction",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "search graveyard, hand and library for cards with the same name"
+  },
+  {
+   "name": "The Mimeoplasm",
+   "needs": [
+    "replacement:copy-on-enter-options",
+    "decision:choose-from-zone-extensions"
+   ],
+   "why": "exile two graveyard creature cards as it enters, copy one, counters equal to the other's power"
+  },
+  {
+   "name": "Trench Gorger",
+   "needs": [
+    "effect:search-library-to-exile"
+   ],
+   "why": "search for any number of lands and exile them, its base P/T set from the count"
+  },
+  {
+   "name": "Vish Kal, Blood Arbiter",
+   "needs": [
+    "cost:remove-all-counters"
+   ],
+   "why": "remove all +1/+1 counters as a cost, counted for the -X/-X"
+  }
+ ]
+}

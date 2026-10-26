@@ -233,6 +233,7 @@ import _poolForkedLightning from "../pool/forked-lightning.js";
 import _poolFoundingTheThirdPath from "../pool/founding-the-third-path.js";
 import _poolFoundryHelix from "../pool/foundry-helix.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
+import _poolFreshMeat from "../pool/fresh-meat.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
 import _poolGaladhrimBow from "../pool/galadhrim-bow.js";
@@ -376,6 +377,7 @@ import _poolMantleOfWebs from "../pool/mantle-of-webs.js";
 import _poolMaraudersAxe from "../pool/marauders-axe.js";
 import _poolMarisisTwinclaws from "../pool/marisis-twinclaws.js";
 import _poolMarrowGnawer from "../pool/marrow-gnawer.js";
+import _poolMarrowShards from "../pool/marrow-shards.js";
 import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterOfWaves from "../pool/master-of-waves.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
@@ -434,6 +436,7 @@ import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
+import _poolParasiticImplant from "../pool/parasitic-implant.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPeppersmoke from "../pool/peppersmoke.js";
@@ -953,6 +956,7 @@ const shard: CardShard = {
     _poolFoundingTheThirdPath,
     _poolFoundryHelix,
     _poolFracturedRealm,
+    _poolFreshMeat,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
     _poolGaladhrimBow,
@@ -1096,6 +1100,7 @@ const shard: CardShard = {
     _poolMaraudersAxe,
     _poolMarisisTwinclaws,
     _poolMarrowGnawer,
+    _poolMarrowShards,
     _poolMassiveMight,
     _poolMasterOfWaves,
     _poolMasterTransmuter,
@@ -1154,6 +1159,7 @@ const shard: CardShard = {
     _poolOvergrownArch,
     _poolOverwhelmingVictory,
     _poolPacksBetrayal,
+    _poolParasiticImplant,
     _poolPeaceOfMind,
     _poolPearlMedallion,
     _poolPeppersmoke,

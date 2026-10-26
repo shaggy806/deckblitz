@@ -535,6 +535,7 @@ import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
 import _poolShivanRaptor from "../pool/shivan-raptor.js";
 import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
+import _poolShrineOfPiercingVision from "../pool/shrine-of-piercing-vision.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
@@ -1245,6 +1246,7 @@ const shard: CardShard = {
     _poolShiftingCeratops,
     _poolShivanRaptor,
     _poolShoulderToShoulder,
+    _poolShrineOfPiercingVision,
     _poolSickleRipper,
     _poolSilhanaWayfinder,
     _poolSilkWebWeaver,

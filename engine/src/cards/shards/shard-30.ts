@@ -232,6 +232,7 @@ import _poolFoolsTome from "../pool/fools-tome.js";
 import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
 import _poolForceVoid from "../pool/force-void.js";
+import _poolForcedWorship from "../pool/forced-worship.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
 import _poolFormOfTheDinosaur from "../pool/form-of-the-dinosaur.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
@@ -427,6 +428,7 @@ import _poolMoonragersSlash from "../pool/moonragers-slash.js";
 import _poolMoonshakerCavalry from "../pool/moonshaker-cavalry.js";
 import _poolMoorishCavalry from "../pool/moorish-cavalry.js";
 import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
+import _poolMortisDogs from "../pool/mortis-dogs.js";
 import _poolMurasaBrute from "../pool/murasa-brute.js";
 import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
@@ -677,6 +679,7 @@ import _poolVialOfPoison from "../pool/vial-of-poison.js";
 import _poolVibrantCityscape from "../pool/vibrant-cityscape.js";
 import _poolViciousBattlerager from "../pool/vicious-battlerager.js";
 import _poolVineglimmerSnarl from "../pool/vineglimmer-snarl.js";
+import _poolViridianBetrayers from "../pool/viridian-betrayers.js";
 import _poolVisceridDrone from "../pool/viscerid-drone.js";
 import _poolVitoFanaticOfAclazotz from "../pool/vito-fanatic-of-aclazotz.js";
 import _poolVituGhaziTheCityTree from "../pool/vitu-ghazi-the-city-tree.js";
@@ -962,6 +965,7 @@ const shard: CardShard = {
     _poolForceAway,
     _poolForceOfVirtue,
     _poolForceVoid,
+    _poolForcedWorship,
     _poolForensicResearcher,
     _poolFormOfTheDinosaur,
     _poolFortuitousFind,
@@ -1157,6 +1161,7 @@ const shard: CardShard = {
     _poolMoonshakerCavalry,
     _poolMoorishCavalry,
     _poolMoriokScavenger,
+    _poolMortisDogs,
     _poolMurasaBrute,
     _poolMuseSeeker,
     _poolMyrMoonvessel,
@@ -1407,6 +1412,7 @@ const shard: CardShard = {
     _poolVibrantCityscape,
     _poolViciousBattlerager,
     _poolVineglimmerSnarl,
+    _poolViridianBetrayers,
     _poolVisceridDrone,
     _poolVitoFanaticOfAclazotz,
     _poolVituGhaziTheCityTree,

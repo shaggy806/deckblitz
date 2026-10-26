@@ -7,6 +7,7 @@ import _poolAbandonReason from "../pool/abandon-reason.js";
 import _poolAbjure from "../pool/abjure.js";
 import _poolAbzanSkycaptain from "../pool/abzan-skycaptain.js";
 import _poolAcidRain from "../pool/acid-rain.js";
+import _poolAcornCatapult from "../pool/acorn-catapult.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
 import _poolAdmonitionAngel from "../pool/admonition-angel.js";
 import _poolAdventurousImpulse from "../pool/adventurous-impulse.js";
@@ -249,6 +250,7 @@ import _poolGeistTrappers from "../pool/geist-trappers.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
+import _poolGethsVerdict from "../pool/geths-verdict.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
 import _poolGhiredMirrorOfTheWilds from "../pool/ghired-mirror-of-the-wilds.js";
 import _poolGhituLavarunner from "../pool/ghitu-lavarunner.js";
@@ -720,6 +722,7 @@ const shard: CardShard = {
     _poolAbjure,
     _poolAbzanSkycaptain,
     _poolAcidRain,
+    _poolAcornCatapult,
     _poolAdelineResplendentCathar,
     _poolAdmonitionAngel,
     _poolAdventurousImpulse,
@@ -962,6 +965,7 @@ const shard: CardShard = {
     _poolGenerousEnt,
     _poolGenerousPup,
     _poolGeometersArthropod,
+    _poolGethsVerdict,
     _poolGhaltaTheUnstoppable,
     _poolGhiredMirrorOfTheWilds,
     _poolGhituLavarunner,

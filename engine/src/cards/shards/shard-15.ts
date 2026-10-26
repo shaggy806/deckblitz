@@ -389,6 +389,7 @@ import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
 import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
 import _poolMindbreakTrap from "../pool/mindbreak-trap.js";
+import _poolMindculling from "../pool/mindculling.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
@@ -1084,6 +1085,7 @@ const shard: CardShard = {
     _poolMetropolisReformer,
     _poolMidnightPathlighter,
     _poolMindbreakTrap,
+    _poolMindculling,
     _poolMineBearer,
     _poolMirrormade,
     _poolMischievousChimera,

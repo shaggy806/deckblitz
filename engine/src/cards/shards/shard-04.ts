@@ -21,6 +21,7 @@ import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
 import _poolAnimateWall from "../pool/animate-wall.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
 import _poolAnoint from "../pool/anoint.js";
+import _poolArmWithAether from "../pool/arm-with-aether.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
@@ -132,6 +133,7 @@ import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
 import _poolDemonicLore from "../pool/demonic-lore.js";
 import _poolDesertNomads from "../pool/desert-nomads.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
+import _poolDespise from "../pool/despise.js";
 import _poolDetectiveOfTheMonth from "../pool/detective-of-the-month.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
@@ -173,6 +175,7 @@ import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEnragedGiant from "../pool/enraged-giant.js";
 import _poolEnthrallingVictor from "../pool/enthralling-victor.js";
+import _poolEntomberExarch from "../pool/entomber-exarch.js";
 import _poolEphemeron from "../pool/ephemeron.js";
 import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
@@ -682,6 +685,7 @@ import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
 import _poolWickedVisitor from "../pool/wicked-visitor.js";
 import _poolWildGuess from "../pool/wild-guess.js";
 import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
+import _poolWingSplicer from "../pool/wing-splicer.js";
 import _poolWingsOfVelisVel from "../pool/wings-of-velis-vel.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
@@ -733,6 +737,7 @@ const shard: CardShard = {
     _poolAnimateWall,
     _poolAnkleBiter,
     _poolAnoint,
+    _poolArmWithAether,
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
@@ -844,6 +849,7 @@ const shard: CardShard = {
     _poolDemonicLore,
     _poolDesertNomads,
     _poolDesperateParry,
+    _poolDespise,
     _poolDetectiveOfTheMonth,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,
@@ -885,6 +891,7 @@ const shard: CardShard = {
     _poolEngineRat,
     _poolEnragedGiant,
     _poolEnthrallingVictor,
+    _poolEntomberExarch,
     _poolEphemeron,
     _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
@@ -1394,6 +1401,7 @@ const shard: CardShard = {
     _poolWickedVisitor,
     _poolWildGuess,
     _poolWildwoodTracker,
+    _poolWingSplicer,
     _poolWingsOfVelisVel,
     _poolWistfulSelkie,
     _poolWitherAndBloom,

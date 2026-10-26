@@ -25,6 +25,7 @@ import _poolArcaneProxy from "../pool/arcane-proxy.js";
 import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArchonsGlory from "../pool/archons-glory.js";
+import _poolArgentMutation from "../pool/argent-mutation.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
 import _poolArtificersDragon from "../pool/artificers-dragon.js";
 import _poolAscendingAven from "../pool/ascending-aven.js";
@@ -109,6 +110,7 @@ import _poolDeathBegetsLife from "../pool/death-begets-life.js";
 import _poolDeathGreetersChampion from "../pool/death-greeters-champion.js";
 import _poolDeathbonnetHulk from "../pool/deathbonnet-hulk.js";
 import _poolDeathsDuet from "../pool/deaths-duet.js";
+import _poolDeceiverExarch from "../pool/deceiver-exarch.js";
 import _poolDecimate from "../pool/decimate.js";
 import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
 import _poolDefendTheCampus from "../pool/defend-the-campus.js";
@@ -229,6 +231,7 @@ import _poolGorgonsHead from "../pool/gorgons-head.js";
 import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGraftedSkullcap from "../pool/grafted-skullcap.js";
 import _poolGravkill from "../pool/gravkill.js";
+import _poolGreenhiltTrainee from "../pool/greenhilt-trainee.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
@@ -680,6 +683,7 @@ const shard: CardShard = {
     _poolArcboundSlith,
     _poolArchonOfCruelty,
     _poolArchonsGlory,
+    _poolArgentMutation,
     _poolArmyOfTheDamned,
     _poolArtificersDragon,
     _poolAscendingAven,
@@ -764,6 +768,7 @@ const shard: CardShard = {
     _poolDeathGreetersChampion,
     _poolDeathbonnetHulk,
     _poolDeathsDuet,
+    _poolDeceiverExarch,
     _poolDecimate,
     _poolDeeptreadMerrow,
     _poolDefendTheCampus,
@@ -884,6 +889,7 @@ const shard: CardShard = {
     _poolGraftedGrowth,
     _poolGraftedSkullcap,
     _poolGravkill,
+    _poolGreenhiltTrainee,
     _poolGridMonitor,
     _poolGrimServant,
     _poolGrislySurvivor,

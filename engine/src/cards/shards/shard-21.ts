@@ -300,6 +300,7 @@ import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
 import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
 import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
+import _poolInquisitorExarch from "../pool/inquisitor-exarch.js";
 import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
@@ -673,6 +674,7 @@ import _poolWoodlandGuidance from "../pool/woodland-guidance.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
+import _poolXenograft from "../pool/xenograft.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
@@ -999,6 +1001,7 @@ const shard: CardShard = {
     _poolImperialRecruiter,
     _poolInSearchOfGreatness,
     _poolIngeniousLeonin,
+    _poolInquisitorExarch,
     _poolInvasionOfKylem,
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
@@ -1372,6 +1375,7 @@ const shard: CardShard = {
     _poolWoodworkProdigy,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
+    _poolXenograft,
     _poolYavimayaIconoclast,
     _poolYouComeToTheGnollCamp,
     _poolYuanTiFangBlade,

@@ -104,6 +104,7 @@ import _poolCacophodon from "../pool/cacophodon.js";
 import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
+import _poolCaressOfPhyrexia from "../pool/caress-of-phyrexia.js";
 import _poolCastle from "../pool/castle.js";
 import _poolCaterwaulingBoggart from "../pool/caterwauling-boggart.js";
 import _poolCavalryPegasus from "../pool/cavalry-pegasus.js";
@@ -485,6 +486,7 @@ import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
 import _poolRictusRobber from "../pool/rictus-robber.js";
+import _poolRiddlekeeper from "../pool/riddlekeeper.js";
 import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
 import _poolRiskFactor from "../pool/risk-factor.js";
@@ -538,6 +540,7 @@ import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
 import _poolShipwreckSinger from "../pool/shipwreck-singer.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
+import _poolShrineOfBoundlessGrowth from "../pool/shrine-of-boundless-growth.js";
 import _poolSidarJabari from "../pool/sidar-jabari.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
@@ -663,6 +666,7 @@ import _poolWarrenWeirding from "../pool/warren-weirding.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWaywardDisciple from "../pool/wayward-disciple.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
+import _poolWhipflare from "../pool/whipflare.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
 import _poolWildfireHowl from "../pool/wildfire-howl.js";
 import _poolWildsearScouringMaw from "../pool/wildsear-scouring-maw.js";
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolCanyonCrab,
     _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
+    _poolCaressOfPhyrexia,
     _poolCastle,
     _poolCaterwaulingBoggart,
     _poolCavalryPegasus,
@@ -1191,6 +1196,7 @@ const shard: CardShard = {
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
     _poolRictusRobber,
+    _poolRiddlekeeper,
     _poolRiptideLaboratory,
     _poolRiseOfTheEldrazi,
     _poolRiskFactor,
@@ -1244,6 +1250,7 @@ const shard: CardShard = {
     _poolShipwreckSinger,
     _poolShireShirriff,
     _poolShivanDragon,
+    _poolShrineOfBoundlessGrowth,
     _poolSidarJabari,
     _poolSilundiVision,
     _poolSimicRagworm,
@@ -1369,6 +1376,7 @@ const shard: CardShard = {
     _poolWastefulHarvest,
     _poolWaywardDisciple,
     _poolWeaveFate,
+    _poolWhipflare,
     _poolWickedReward,
     _poolWildfireHowl,
     _poolWildsearScouringMaw,

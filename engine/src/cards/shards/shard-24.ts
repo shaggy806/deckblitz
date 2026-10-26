@@ -535,6 +535,7 @@ import _poolSkullFracture from "../pool/skull-fracture.js";
 import _poolSkullSkaab from "../pool/skull-skaab.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
+import _poolSlagFiend from "../pool/slag-fiend.js";
 import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSlitherhead from "../pool/slitherhead.js";
@@ -622,6 +623,7 @@ import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonyStark from "../pool/tony-stark.js";
+import _poolTormentorExarch from "../pool/tormentor-exarch.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
 import _poolTotallyLost from "../pool/totally-lost.js";
 import _poolTrainedArynx from "../pool/trained-arynx.js";
@@ -1267,6 +1269,7 @@ const shard: CardShard = {
     _poolSkullSkaab,
     _poolSkullsnapNuisance,
     _poolSkyscytheEngulfer,
+    _poolSlagFiend,
     _poolSlaveOfBolas,
     _poolSlay,
     _poolSlitherhead,
@@ -1354,6 +1357,7 @@ const shard: CardShard = {
     _poolTidalForce,
     _poolTolariaWest,
     _poolTonyStark,
+    _poolTormentorExarch,
     _poolToskiBearerOfSecrets,
     _poolTotallyLost,
     _poolTrainedArynx,

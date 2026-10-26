@@ -451,6 +451,7 @@ import _poolRavenousRotbelly from "../pool/ravenous-rotbelly.js";
 import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
 import _poolRealmCloakedGiant from "../pool/realm-cloaked-giant.js";
 import _poolReaperKing from "../pool/reaper-king.js";
+import _poolReaperOfSheoldred from "../pool/reaper-of-sheoldred.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
 import _poolRecruitmentDrive from "../pool/recruitment-drive.js";
@@ -515,6 +516,7 @@ import _poolShardOfBrokenGlass from "../pool/shard-of-broken-glass.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
+import _poolShrineOfBurningRage from "../pool/shrine-of-burning-rage.js";
 import _poolSigardasImprisonment from "../pool/sigardas-imprisonment.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
 import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
@@ -657,6 +659,7 @@ import _poolWanderInDeath from "../pool/wander-in-death.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWantedGriffin from "../pool/wanted-griffin.js";
+import _poolWarReport from "../pool/war-report.js";
 import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWarTrainedSlasher from "../pool/war-trained-slasher.js";
 import _poolWardenOfTheBeyond from "../pool/warden-of-the-beyond.js";
@@ -1152,6 +1155,7 @@ const shard: CardShard = {
     _poolRazorgrassInvoker,
     _poolRealmCloakedGiant,
     _poolReaperKing,
+    _poolReaperOfSheoldred,
     _poolRecklessStormseeker,
     _poolReconstructHistory,
     _poolRecruitmentDrive,
@@ -1216,6 +1220,7 @@ const shard: CardShard = {
     _poolShatteredYard,
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
+    _poolShrineOfBurningRage,
     _poolSigardasImprisonment,
     _poolSignpostScarecrow,
     _poolSigridGodFavored,
@@ -1358,6 +1363,7 @@ const shard: CardShard = {
     _poolWanderOff,
     _poolWandertaleMentor,
     _poolWantedGriffin,
+    _poolWarReport,
     _poolWarSqueak,
     _poolWarTrainedSlasher,
     _poolWardenOfTheBeyond,

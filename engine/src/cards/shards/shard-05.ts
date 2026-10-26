@@ -349,6 +349,7 @@ import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
+import _poolIsolationCell from "../pool/isolation-cell.js";
 import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
@@ -521,6 +522,7 @@ import _poolScarscaleRitual from "../pool/scarscale-ritual.js";
 import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
+import _poolScrapyardSalvo from "../pool/scrapyard-salvo.js";
 import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
@@ -546,6 +548,7 @@ import _poolShelteredAerie from "../pool/sheltered-aerie.js";
 import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShorelineRanger from "../pool/shoreline-ranger.js";
 import _poolShriekdiver from "../pool/shriekdiver.js";
+import _poolShrineOfLoyalLegions from "../pool/shrine-of-loyal-legions.js";
 import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
 import _poolSilvergillMentor from "../pool/silvergill-mentor.js";
 import _poolSipOfHemlock from "../pool/sip-of-hemlock.js";
@@ -1066,6 +1069,7 @@ const shard: CardShard = {
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
+    _poolIsolationCell,
     _poolIzzetChemister,
     _poolJacesSanctum,
     _poolJasmineBoreal,
@@ -1238,6 +1242,7 @@ const shard: CardShard = {
     _poolScarwoodHag,
     _poolScoriaElemental,
     _poolScourgeWolf,
+    _poolScrapyardSalvo,
     _poolScrollOfTheMasters,
     _poolScythecatCub,
     _poolSearingTouch,
@@ -1263,6 +1268,7 @@ const shard: CardShard = {
     _poolShivaWardenOfIce,
     _poolShorelineRanger,
     _poolShriekdiver,
+    _poolShrineOfLoyalLegions,
     _poolSifterOfSkulls,
     _poolSilvergillMentor,
     _poolSipOfHemlock,

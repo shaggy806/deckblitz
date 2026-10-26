@@ -221,6 +221,7 @@ import _poolFortitude from "../pool/fortitude.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
+import _poolFurnaceScamp from "../pool/furnace-scamp.js";
 import _poolFutureSight from "../pool/future-sight.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
 import _poolGargoyleSentinel from "../pool/gargoyle-sentinel.js";
@@ -977,6 +978,7 @@ const shard: CardShard = {
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
     _poolFuriousStrength,
+    _poolFurnaceScamp,
     _poolFutureSight,
     _poolGalecasterColossus,
     _poolGargoyleSentinel,

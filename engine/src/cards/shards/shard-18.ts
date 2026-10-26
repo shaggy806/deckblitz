@@ -41,6 +41,7 @@ import _poolBaneOfHanweir from "../pool/bane-of-hanweir.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBanishingStroke from "../pool/banishing-stroke.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
+import _poolBasandraBattleSeraph from "../pool/basandra-battle-seraph.js";
 import _poolBattlefieldButcher from "../pool/battlefield-butcher.js";
 import _poolBaxterFlyInTheOintment from "../pool/baxter-fly-in-the-ointment.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
@@ -763,6 +764,7 @@ const shard: CardShard = {
     _poolBanishingBetrayal,
     _poolBanishingStroke,
     _poolBarbedBattlegear,
+    _poolBasandraBattleSeraph,
     _poolBattlefieldButcher,
     _poolBaxterFlyInTheOintment,
     _poolBebopRocksteady,

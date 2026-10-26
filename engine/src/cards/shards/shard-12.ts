@@ -30,6 +30,7 @@ import _poolArmoredTransport from "../pool/armored-transport.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArrogantBloodlord from "../pool/arrogant-bloodlord.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
+import _poolArtillerize from "../pool/artillerize.js";
 import _poolArwensGift from "../pool/arwens-gift.js";
 import _poolAshmouthBlade from "../pool/ashmouth-blade.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
@@ -459,6 +460,7 @@ import _poolPlatedKilnbeast from "../pool/plated-kilnbeast.js";
 import _poolPolukranosEngineOfRuin from "../pool/polukranos-engine-of-ruin.js";
 import _poolPortableHole from "../pool/portable-hole.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
+import _poolPostmortemLunge from "../pool/postmortem-lunge.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
 import _poolPrimalEmpathy from "../pool/primal-empathy.js";
@@ -510,6 +512,7 @@ import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
 import _poolRuthlessInstincts from "../pool/ruthless-instincts.js";
+import _poolRuthlessInvasion from "../pool/ruthless-invasion.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
 import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
@@ -748,6 +751,7 @@ const shard: CardShard = {
     _poolArmoryPaladin,
     _poolArrogantBloodlord,
     _poolArtifistAcumen,
+    _poolArtillerize,
     _poolArwensGift,
     _poolAshmouthBlade,
     _poolAspectOfLamprey,
@@ -1177,6 +1181,7 @@ const shard: CardShard = {
     _poolPolukranosEngineOfRuin,
     _poolPortableHole,
     _poolPortalToPhyrexia,
+    _poolPostmortemLunge,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,
     _poolPrimalEmpathy,
@@ -1228,6 +1233,7 @@ const shard: CardShard = {
     _poolRuricTharBiomagus,
     _poolRuricThar,
     _poolRuthlessInstincts,
+    _poolRuthlessInvasion,
     _poolRydiaSummonerOfMist,
     _poolSailorOfMeans,
     _poolSanctifierOfSouls,

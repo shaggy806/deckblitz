@@ -43,6 +43,7 @@ import _poolAtmosphericGreenhouse from "../pool/atmospheric-greenhouse.js";
 import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
+import _poolAuriokSurvivors from "../pool/auriok-survivors.js";
 import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
@@ -602,6 +603,7 @@ import _poolSunbathingRootwalla from "../pool/sunbathing-rootwalla.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
+import _poolSurgeNode from "../pool/surge-node.js";
 import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
@@ -674,6 +676,7 @@ import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
+import _poolVitalSplicer from "../pool/vital-splicer.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVoiceOfResurgence from "../pool/voice-of-resurgence.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
@@ -775,6 +778,7 @@ const shard: CardShard = {
     _poolAttrition,
     _poolAudacity,
     _poolAuraExtraction,
+    _poolAuriokSurvivors,
     _poolAvacynsMemorial,
     _poolAvenTrailblazer,
     _poolBadgermoleCub,
@@ -1334,6 +1338,7 @@ const shard: CardShard = {
     _poolSunderingGrowth,
     _poolSunfrillImitator,
     _poolSungoldBarrage,
+    _poolSurgeNode,
     _poolSwampsnareTrap,
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,
@@ -1406,6 +1411,7 @@ const shard: CardShard = {
     _poolVengeantEarth,
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,
+    _poolVitalSplicer,
     _poolVodalianHypnotist,
     _poolVoiceOfResurgence,
     _poolVolcanicFallout,

@@ -83,6 +83,7 @@ import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodButcher from "../pool/brood-butcher.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBroodspinner from "../pool/broodspinner.js";
+import _poolBrutalizerExarch from "../pool/brutalizer-exarch.js";
 import _poolBullwhip from "../pool/bullwhip.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
 import _poolBurningHands from "../pool/burning-hands.js";
@@ -671,6 +672,7 @@ import _poolViviensTalent from "../pool/viviens-talent.js";
 import _poolVoidShatter from "../pool/void-shatter.js";
 import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
 import _poolVoraciousVampire from "../pool/voracious-vampire.js";
+import _poolVowOfFlight from "../pool/vow-of-flight.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
 import _poolWakeThrasher from "../pool/wake-thrasher.js";
@@ -810,6 +812,7 @@ const shard: CardShard = {
     _poolBroodButcher,
     _poolBroodcallerScourge,
     _poolBroodspinner,
+    _poolBrutalizerExarch,
     _poolBullwhip,
     _poolBuriedRuin,
     _poolBurningHands,
@@ -1398,6 +1401,7 @@ const shard: CardShard = {
     _poolVoidShatter,
     _poolVolcanicTorrent,
     _poolVoraciousVampire,
+    _poolVowOfFlight,
     _poolVulshokBattlegear,
     _poolVulshokRefugee,
     _poolWakeThrasher,

@@ -688,6 +688,7 @@ import _poolWaveOfTerror from "../pool/wave-of-terror.js";
 import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
 import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWestvaleCultLeader from "../pool/westvale-cult-leader.js";
+import _poolWhisperingSpecter from "../pool/whispering-specter.js";
 import _poolWhitewaterNaiads from "../pool/whitewater-naiads.js";
 import _poolWildAesthir from "../pool/wild-aesthir.js";
 import _poolWildLeotau from "../pool/wild-leotau.js";
@@ -1420,6 +1421,7 @@ const shard: CardShard = {
     _poolWeftstalkerArdent,
     _poolWestCoastExpansion,
     _poolWestvaleCultLeader,
+    _poolWhisperingSpecter,
     _poolWhitewaterNaiads,
     _poolWildAesthir,
     _poolWildLeotau,

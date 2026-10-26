@@ -60,6 +60,7 @@ import _poolBladedPinions from "../pool/bladed-pinions.js";
 import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js";
 import _poolBlightMamba from "../pool/blight-mamba.js";
 import _poolBlightwidow from "../pool/blightwidow.js";
+import _poolBlindZealot from "../pool/blind-zealot.js";
 import _poolBloodBairn from "../pool/blood-bairn.js";
 import _poolBloodChinRager from "../pool/blood-chin-rager.js";
 import _poolBloodPetalCelebrant from "../pool/blood-petal-celebrant.js";
@@ -112,6 +113,7 @@ import _poolConstantMists from "../pool/constant-mists.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolContempt from "../pool/contempt.js";
+import _poolConversionChamber from "../pool/conversion-chamber.js";
 import _poolConvictedKiller from "../pool/convicted-killer.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCorruptingLicid from "../pool/corrupting-licid.js";
@@ -486,6 +488,7 @@ import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
+import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
@@ -774,6 +777,7 @@ const shard: CardShard = {
     _poolBladewingDeathlessTyrant,
     _poolBlightMamba,
     _poolBlightwidow,
+    _poolBlindZealot,
     _poolBloodBairn,
     _poolBloodChinRager,
     _poolBloodPetalCelebrant,
@@ -826,6 +830,7 @@ const shard: CardShard = {
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
     _poolContempt,
+    _poolConversionChamber,
     _poolConvictedKiller,
     _poolCorruptEunuchs,
     _poolCorruptingLicid,
@@ -1200,6 +1205,7 @@ const shard: CardShard = {
     _poolRodOfRuin,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
+    _poolRuhanOfTheFomori,
     _poolRunedStalactite,
     _poolRustGoliath,
     _poolSagesKnowledge,
