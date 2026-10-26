@@ -313,6 +313,7 @@ import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
 import _poolJhessianThief from "../pool/jhessian-thief.js";
+import _poolJotunOwlKeeper from "../pool/jotun-owl-keeper.js";
 import _poolJudithTheScourgeDiva from "../pool/judith-the-scourge-diva.js";
 import _poolJuneBountyHunter from "../pool/june-bounty-hunter.js";
 import _poolJusticeStrike from "../pool/justice-strike.js";
@@ -713,6 +714,7 @@ import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWildInstincts from "../pool/wild-instincts.js";
+import _poolWildernessElemental from "../pool/wilderness-elemental.js";
 import _poolWildwoodGeist from "../pool/wildwood-geist.js";
 import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWillowSatyr from "../pool/willow-satyr.js";
@@ -1058,6 +1060,7 @@ const shard: CardShard = {
     _poolJadelightSpelunker,
     _poolJewelThief,
     _poolJhessianThief,
+    _poolJotunOwlKeeper,
     _poolJudithTheScourgeDiva,
     _poolJuneBountyHunter,
     _poolJusticeStrike,
@@ -1458,6 +1461,7 @@ const shard: CardShard = {
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
     _poolWildInstincts,
+    _poolWildernessElemental,
     _poolWildwoodGeist,
     _poolWillScholarOfFrost,
     _poolWillowSatyr,

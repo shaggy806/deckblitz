@@ -43,6 +43,7 @@ import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
 import _poolAvengingDruid from "../pool/avenging-druid.js";
 import _poolBackToBasics from "../pool/back-to-basics.js";
 import _poolBackfire from "../pool/backfire.js";
+import _poolBalduvianRage from "../pool/balduvian-rage.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
 import _poolBarrageOgre from "../pool/barrage-ogre.js";
 import _poolBarrierOfBones from "../pool/barrier-of-bones.js";
@@ -129,6 +130,7 @@ import _poolCreepyDoll from "../pool/creepy-doll.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
 import _poolCruelFeeding from "../pool/cruel-feeding.js";
+import _poolCryoclasm from "../pool/cryoclasm.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
 import _poolCrypticCoat from "../pool/cryptic-coat.js";
 import _poolCrystalInhumanPrincess from "../pool/crystal-inhuman-princess.js";
@@ -212,6 +214,7 @@ import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFireforgersPuzzleknot from "../pool/fireforgers-puzzleknot.js";
 import _poolFirestormHellkite from "../pool/firestorm-hellkite.js";
+import _poolFlashfreeze from "../pool/flashfreeze.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
@@ -491,6 +494,7 @@ import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
 import _poolRubblebeltRaiders from "../pool/rubblebelt-raiders.js";
 import _poolRunAwayTogether from "../pool/run-away-together.js";
+import _poolRuneSnag from "../pool/rune-snag.js";
 import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
@@ -506,6 +510,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
+import _poolScryingSheets from "../pool/scrying-sheets.js";
 import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSearchThePremises from "../pool/search-the-premises.js";
@@ -770,6 +775,7 @@ const shard: CardShard = {
     _poolAvengingDruid,
     _poolBackToBasics,
     _poolBackfire,
+    _poolBalduvianRage,
     _poolBaronAirshipKingdom,
     _poolBarrageOgre,
     _poolBarrierOfBones,
@@ -856,6 +862,7 @@ const shard: CardShard = {
     _poolCrimsonManticore,
     _poolCrookedCustodian,
     _poolCruelFeeding,
+    _poolCryoclasm,
     _poolCryptSliver,
     _poolCrypticCoat,
     _poolCrystalInhumanPrincess,
@@ -939,6 +946,7 @@ const shard: CardShard = {
     _poolFirebirdBlazingRanger,
     _poolFireforgersPuzzleknot,
     _poolFirestormHellkite,
+    _poolFlashfreeze,
     _poolFlickerOfFate,
     _poolFlowstoneShambler,
     _poolFontOfVigor,
@@ -1218,6 +1226,7 @@ const shard: CardShard = {
     _poolRubblebeltMaverick,
     _poolRubblebeltRaiders,
     _poolRunAwayTogether,
+    _poolRuneSnag,
     _poolRustedSentinel,
     _poolRyuseiTheFallingStar,
     _poolSacrifice,
@@ -1233,6 +1242,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScornEffigy,
     _poolScreechingHarpy,
+    _poolScryingSheets,
     _poolSeafloorStalker,
     _poolSealOfStrength,
     _poolSearchThePremises,

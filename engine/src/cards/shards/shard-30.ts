@@ -148,6 +148,7 @@ import _poolDeathlessPilot from "../pool/deathless-pilot.js";
 import _poolDeathsOasis from "../pool/deaths-oasis.js";
 import _poolDebrisFieldCrusher from "../pool/debris-field-crusher.js";
 import _poolDecisiveDenial from "../pool/decisive-denial.js";
+import _poolDeepfireElemental from "../pool/deepfire-elemental.js";
 import _poolDefeat from "../pool/defeat.js";
 import _poolDefendTheRider from "../pool/defend-the-rider.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
@@ -427,6 +428,7 @@ import _poolMoonragersSlash from "../pool/moonragers-slash.js";
 import _poolMoonshakerCavalry from "../pool/moonshaker-cavalry.js";
 import _poolMoorishCavalry from "../pool/moorish-cavalry.js";
 import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
+import _poolMouthOfRonom from "../pool/mouth-of-ronom.js";
 import _poolMurasaBrute from "../pool/murasa-brute.js";
 import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
@@ -878,6 +880,7 @@ const shard: CardShard = {
     _poolDeathsOasis,
     _poolDebrisFieldCrusher,
     _poolDecisiveDenial,
+    _poolDeepfireElemental,
     _poolDefeat,
     _poolDefendTheRider,
     _poolDeftDuelist,
@@ -1157,6 +1160,7 @@ const shard: CardShard = {
     _poolMoonshakerCavalry,
     _poolMoorishCavalry,
     _poolMoriokScavenger,
+    _poolMouthOfRonom,
     _poolMurasaBrute,
     _poolMuseSeeker,
     _poolMyrMoonvessel,

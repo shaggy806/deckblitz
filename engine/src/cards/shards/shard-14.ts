@@ -78,6 +78,7 @@ import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreachingLeviathan from "../pool/breaching-leviathan.js";
 import _poolBreakAsunder from "../pool/break-asunder.js";
 import _poolBriarpackAlpha from "../pool/briarpack-alpha.js";
+import _poolBroodingSaurian from "../pool/brooding-saurian.js";
 import _poolBrushland from "../pool/brushland.js";
 import _poolBubbleSnare from "../pool/bubble-snare.js";
 import _poolBurnishedHart from "../pool/burnished-hart.js";
@@ -99,6 +100,7 @@ import _poolChandrasOutburst from "../pool/chandras-outburst.js";
 import _poolChannelTheSuns from "../pool/channel-the-suns.js";
 import _poolCharforger from "../pool/charforger.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
+import _poolChillingShade from "../pool/chilling-shade.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
 import _poolChupacabraEcho from "../pool/chupacabra-echo.js";
@@ -369,6 +371,7 @@ import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
+import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
@@ -380,6 +383,7 @@ import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
 import _poolLeylinePhantom from "../pool/leyline-phantom.js";
 import _poolLightningCoreExcavator from "../pool/lightning-core-excavator.js";
+import _poolLightningSerpent from "../pool/lightning-serpent.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
 import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
@@ -522,6 +526,7 @@ import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
+import _poolRonomHulk from "../pool/ronom-hulk.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRottingRats from "../pool/rotting-rats.js";
 import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
@@ -648,6 +653,7 @@ import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
 import _poolTreasureKeeper from "../pool/treasure-keeper.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTreefolkUmbra from "../pool/treefolk-umbra.js";
+import _poolTresserhornSkyknight from "../pool/tresserhorn-skyknight.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
 import _poolTroveWarden from "../pool/trove-warden.js";
@@ -807,6 +813,7 @@ const shard: CardShard = {
     _poolBreachingLeviathan,
     _poolBreakAsunder,
     _poolBriarpackAlpha,
+    _poolBroodingSaurian,
     _poolBrushland,
     _poolBubbleSnare,
     _poolBurnishedHart,
@@ -828,6 +835,7 @@ const shard: CardShard = {
     _poolChannelTheSuns,
     _poolCharforger,
     _poolChiefOfTheScale,
+    _poolChillingShade,
     _poolChocoboRacetrack,
     _poolChromeDome,
     _poolChupacabraEcho,
@@ -1098,6 +1106,7 @@ const shard: CardShard = {
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
     _poolKindlyStranger,
+    _poolKjeldoranJavelineer,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
@@ -1109,6 +1118,7 @@ const shard: CardShard = {
     _poolLeveler,
     _poolLeylinePhantom,
     _poolLightningCoreExcavator,
+    _poolLightningSerpent,
     _poolLimDulsHighGuard,
     _poolLingeringSouls,
     _poolLlanowarElves,
@@ -1251,6 +1261,7 @@ const shard: CardShard = {
     _poolRoccoStreetChef,
     _poolRocketVolley,
     _poolRoilElemental,
+    _poolRonomHulk,
     _poolRooftopSaboteurs,
     _poolRottingRats,
     _poolRoyalHerbalist,
@@ -1377,6 +1388,7 @@ const shard: CardShard = {
     _poolTreasureKeeper,
     _poolTreasureTrove,
     _poolTreefolkUmbra,
+    _poolTresserhornSkyknight,
     _poolTributaryVaulter,
     _poolTributeMage,
     _poolTroveWarden,

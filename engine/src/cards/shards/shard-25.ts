@@ -257,6 +257,7 @@ import _poolGloryheathLynx from "../pool/gloryheath-lynx.js";
 import _poolGloryscaleViashino from "../pool/gloryscale-viashino.js";
 import _poolGoShintaiOfHiddenCruelty from "../pool/go-shintai-of-hidden-cruelty.js";
 import _poolGoblinFirestarter from "../pool/goblin-firestarter.js";
+import _poolGoblinFurrier from "../pool/goblin-furrier.js";
 import _poolGoblinMotivator from "../pool/goblin-motivator.js";
 import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
 import _poolGoldenEgg from "../pool/golden-egg.js";
@@ -272,6 +273,7 @@ import _poolGravenAbomination from "../pool/graven-abomination.js";
 import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
 import _poolGraypeltHunter from "../pool/graypelt-hunter.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
+import _poolGreaterStoneSpirit from "../pool/greater-stone-spirit.js";
 import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
@@ -315,6 +317,7 @@ import _poolJujuBubble from "../pool/juju-bubble.js";
 import _poolJununEfreet from "../pool/junun-efreet.js";
 import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
+import _poolKarplusanWolverine from "../pool/karplusan-wolverine.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
 import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
@@ -964,6 +967,7 @@ const shard: CardShard = {
     _poolGloryscaleViashino,
     _poolGoShintaiOfHiddenCruelty,
     _poolGoblinFirestarter,
+    _poolGoblinFurrier,
     _poolGoblinMotivator,
     _poolGoldForgedSentinel,
     _poolGoldenEgg,
@@ -979,6 +983,7 @@ const shard: CardShard = {
     _poolGravitonFundamentalForce,
     _poolGraypeltHunter,
     _poolGreatHallOfTheBiblioplex,
+    _poolGreaterStoneSpirit,
     _poolGrimFlayer,
     _poolGuardiansOfOboro,
     _poolHallOfHeliodsGenerosity,
@@ -1022,6 +1027,7 @@ const shard: CardShard = {
     _poolJununEfreet,
     _poolKaleidostone,
     _poolKarametrasFavor,
+    _poolKarplusanWolverine,
     _poolKataraTheFearless,
     _poolKazanduTuskcaller,
     _poolKazuulsFury,

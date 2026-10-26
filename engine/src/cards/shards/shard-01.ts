@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbigaleEloquentFirstYear from "../pool/abigale-eloquent-first-year.js";
 import _poolAbundantHarvest from "../pool/abundant-harvest.js";
 import _poolAdarkarSentinel from "../pool/adarkar-sentinel.js";
+import _poolAdarkarWindform from "../pool/adarkar-windform.js";
 import _poolAdvocateOfTheBeast from "../pool/advocate-of-the-beast.js";
 import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
@@ -62,6 +63,7 @@ import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBoilingEarth from "../pool/boiling-earth.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
+import _poolBorealGriffin from "../pool/boreal-griffin.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
@@ -250,6 +252,7 @@ import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHazoretTheFervent from "../pool/hazoret-the-fervent.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
+import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
 import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
 import _poolHeraldOfAnguish from "../pool/herald-of-anguish.js";
 import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
@@ -538,6 +541,7 @@ import _poolSoulFeast from "../pool/soul-feast.js";
 import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
 import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
 import _poolSoulsurgeElemental from "../pool/soulsurge-elemental.js";
+import _poolSoundTheCall from "../pool/sound-the-call.js";
 import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
@@ -590,6 +594,7 @@ import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
 import _poolTheftOfDreams from "../pool/theft-of-dreams.js";
+import _poolThermopod from "../pool/thermopod.js";
 import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
@@ -708,6 +713,7 @@ const shard: CardShard = {
     _poolAbigaleEloquentFirstYear,
     _poolAbundantHarvest,
     _poolAdarkarSentinel,
+    _poolAdarkarWindform,
     _poolAdvocateOfTheBeast,
     _poolAegisOfTheGods,
     _poolAetherfluxConduit,
@@ -764,6 +770,7 @@ const shard: CardShard = {
     _poolBloomwielderDryads,
     _poolBoilingEarth,
     _poolBontusLastReckoning,
+    _poolBorealGriffin,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
     _poolBoundInSilence,
@@ -952,6 +959,7 @@ const shard: CardShard = {
     _poolHazoretTheFervent,
     _poolHedronCrab,
     _poolHedronDetonator,
+    _poolHeidarRimewindMaster,
     _poolHeirOfTheAncientFang,
     _poolHeraldOfAnguish,
     _poolHeroesOfTheRevel,
@@ -1240,6 +1248,7 @@ const shard: CardShard = {
     _poolSoulOfWindgrace,
     _poolSoulOfZendikar,
     _poolSoulsurgeElemental,
+    _poolSoundTheCall,
     _poolSparktongueDragon,
     _poolSpectralRider,
     _poolSpellSwindle,
@@ -1292,6 +1301,7 @@ const shard: CardShard = {
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,
     _poolTheftOfDreams,
+    _poolThermopod,
     _poolThicketBasilisk,
     _poolThievesGuildEnforcer,
     _poolThoughtShucker,

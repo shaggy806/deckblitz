@@ -210,6 +210,7 @@ import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
+import _poolFeastOfFlesh from "../pool/feast-of-flesh.js";
 import _poolFeedThePack from "../pool/feed-the-pack.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
@@ -336,6 +337,7 @@ import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
+import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
@@ -933,6 +935,7 @@ const shard: CardShard = {
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
     _poolFearOfImmobility,
+    _poolFeastOfFlesh,
     _poolFeedThePack,
     _poolFiendishDuo,
     _poolFightToTheDeath,
@@ -1059,6 +1062,7 @@ const shard: CardShard = {
     _poolKongmingSleepingDragon,
     _poolKorCelebrant,
     _poolKorSkyfisher,
+    _poolKrovikanMist,
     _poolKukemssaPirates,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,

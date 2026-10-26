@@ -76,6 +76,7 @@ import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
 import _poolBoonSatyr from "../pool/boon-satyr.js";
 import _poolBorborygmos from "../pool/borborygmos.js";
+import _poolBorealCentaur from "../pool/boreal-centaur.js";
 import _poolBountyOfTheLuxa from "../pool/bounty-of-the-luxa.js";
 import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
 import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
@@ -415,6 +416,7 @@ import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPhantasmalForces from "../pool/phantasmal-forces.js";
+import _poolPhyrexianEtchings from "../pool/phyrexian-etchings.js";
 import _poolPillarOfWar from "../pool/pillar-of-war.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPlagueEngineer from "../pool/plague-engineer.js";
@@ -698,6 +700,7 @@ import _poolWindstorm from "../pool/windstorm.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
+import _poolWoollyRazorback from "../pool/woolly-razorback.js";
 import _poolWoollySpider from "../pool/woolly-spider.js";
 import _poolWorldShaper from "../pool/world-shaper.js";
 import _poolWorldgorgerDragon from "../pool/worldgorger-dragon.js";
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolBonesplitter,
     _poolBoonSatyr,
     _poolBorborygmos,
+    _poolBorealCentaur,
     _poolBountyOfTheLuxa,
     _poolBrambleweftBehemoth,
     _poolBranchsnapLorian,
@@ -1147,6 +1151,7 @@ const shard: CardShard = {
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
     _poolPhantasmalForces,
+    _poolPhyrexianEtchings,
     _poolPillarOfWar,
     _poolPitilessGorgon,
     _poolPlagueEngineer,
@@ -1430,6 +1435,7 @@ const shard: CardShard = {
     _poolWirewoodElf,
     _poolWitchsOven,
     _poolWitherbloomPledgemage,
+    _poolWoollyRazorback,
     _poolWoollySpider,
     _poolWorldShaper,
     _poolWorldgorgerDragon,

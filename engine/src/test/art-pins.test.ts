@@ -55,6 +55,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Nymph Token",
   // Diamond Kaleidoscope (VIS)'s 0/1 Prisms were never printed as a token.
   "Prism Token",
+  // Sound the Call (CSP)'s Wolf, which counts the card, was never printed as a token.
+  "Wolf Token (Sound the Call)",
   // The only Robot Hero printing is a 2/1 flier.
   "1/1 Robot Hero Token",
   // The only Spawn printings are 3/3 red.

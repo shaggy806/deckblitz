@@ -313,6 +313,7 @@ import _poolKheruDreadmaw from "../pool/kheru-dreadmaw.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
 import _poolKillShot from "../pool/kill-shot.js";
 import _poolKindledHeroism from "../pool/kindled-heroism.js";
+import _poolKjeldoranWarCry from "../pool/kjeldoran-war-cry.js";
 import _poolKnightCaptainOfEos from "../pool/knight-captain-of-eos.js";
 import _poolKnightOfSursi from "../pool/knight-of-sursi.js";
 import _poolKnollspineDragon from "../pool/knollspine-dragon.js";
@@ -417,6 +418,7 @@ import _poolPartWater from "../pool/part-water.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
+import _poolPerilousResearch from "../pool/perilous-research.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
 import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
@@ -471,6 +473,8 @@ import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
 import _poolRibskiff from "../pool/ribskiff.js";
+import _poolRimescaleDragon from "../pool/rimescale-dragon.js";
+import _poolRimewindCryomancer from "../pool/rimewind-cryomancer.js";
 import _poolRingOfThreeWishes from "../pool/ring-of-three-wishes.js";
 import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
 import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
@@ -1027,6 +1031,7 @@ const shard: CardShard = {
     _poolKillMaimBurn,
     _poolKillShot,
     _poolKindledHeroism,
+    _poolKjeldoranWarCry,
     _poolKnightCaptainOfEos,
     _poolKnightOfSursi,
     _poolKnollspineDragon,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolPartingGust,
     _poolPathfindingAxejaw,
     _poolPatrollingPeacemaker,
+    _poolPerilousResearch,
     _poolPerimeterSergeant,
     _poolPestilence,
     _poolPheresBandTromper,
@@ -1185,6 +1191,8 @@ const shard: CardShard = {
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
     _poolRibskiff,
+    _poolRimescaleDragon,
+    _poolRimewindCryomancer,
     _poolRingOfThreeWishes,
     _poolRipclawWrangler,
     _poolRiseOfTheDeathbringer,

@@ -612,6 +612,7 @@ import _poolTalasMerchant from "../pool/talas-merchant.js";
 import _poolTaleOfMomo from "../pool/tale-of-momo.js";
 import _poolTalonsOfWildwood from "../pool/talons-of-wildwood.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
+import _poolTamanoa from "../pool/tamanoa.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
 import _poolTemurWarShaman from "../pool/temur-war-shaman.js";
@@ -1341,6 +1342,7 @@ const shard: CardShard = {
     _poolTaleOfMomo,
     _poolTalonsOfWildwood,
     _poolTalruumMinotaur,
+    _poolTamanoa,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
     _poolTemurWarShaman,

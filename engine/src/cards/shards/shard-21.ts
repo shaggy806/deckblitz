@@ -108,6 +108,7 @@ import _poolChargingPaladin from "../pool/charging-paladin.js";
 import _poolChargingTuskodon from "../pool/charging-tuskodon.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
+import _poolChillToTheBone from "../pool/chill-to-the-bone.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
@@ -807,6 +808,7 @@ const shard: CardShard = {
     _poolChargingTuskodon,
     _poolChartACourse,
     _poolChaseInspiration,
+    _poolChillToTheBone,
     _poolChromaticLantern,
     _poolCircleOfFlame,
     _poolCitizenVHelmutZemo,

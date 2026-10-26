@@ -554,6 +554,7 @@ import _poolSilvergillDouser from "../pool/silvergill-douser.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
+import _poolSkred from "../pool/skred.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSlickImitator from "../pool/slick-imitator.js";
 import _poolSnowCoveredPlains from "../pool/snow-covered-plains.js";
@@ -1275,6 +1276,7 @@ const shard: CardShard = {
     _poolSilverstrike,
     _poolSimicLocket,
     _poolSkeletalChangeling,
+    _poolSkred,
     _poolSkyclaveRelic,
     _poolSlickImitator,
     _poolSnowCoveredPlains,
