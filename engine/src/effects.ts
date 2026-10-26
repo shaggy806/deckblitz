@@ -2687,6 +2687,11 @@ export type EffectSpec =
        * the stack, and becomes a token as a permanent spell resolves, 608.3f).
        */
       readonly copies?: EffectAmount;
+      /** The encoded card (rule 702.99a — cipher), in the exile stint it was
+       * encoded in: the card offered, while it's still that card in exile.
+       * Set by the engine on the trigger an encoded card gives its creature
+       * (`Game.effectiveTriggeredEntries`), never by a card definition. */
+      readonly encoded?: { readonly card: ObjectId; readonly zoneChangeCount: number };
       /** "If you do, …" — a spell was cast this way (Conduit of Worlds: "you
        * can't cast additional spells this turn"). */
       readonly then?: EffectSpec;
@@ -6168,6 +6173,9 @@ export interface EffectApi {
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
   cardsExiledThisWay(): readonly ObjectId[];
+  /** `card`, if it's still in exile in the stint `zoneChangeCount` names —
+   * a `cast-now`'s `encoded` card (rule 702.99c). */
+  stillExiled(card: ObjectId, zoneChangeCount: number): readonly ObjectId[];
   /** The cards this resolution has had the effect's controller draw, still
    * in their hand — a `cast-now`'s `"drawn-this-way"`. */
   cardsDrawnThisWay(): readonly ObjectId[];
@@ -7729,7 +7737,9 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
         ? ctx.libraryTop(ctx.controller, Math.max(0, Math.floor(amountValue(from.libraryTop, ctx))), from.reveal === true)
         : [];
     let cards: readonly ObjectId[];
-    if (from === undefined) {
+    if (spec.encoded !== undefined) {
+      cards = ctx.stillExiled(spec.encoded.card, spec.encoded.zoneChangeCount);
+    } else if (from === undefined) {
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       cards = target?.kind === "object" ? [target.object] : [];
     } else if (from === "exiled-with-source") {

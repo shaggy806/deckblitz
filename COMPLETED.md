@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Gatecrash, the rest of the set** (batch 176, the newest-first walk, 2026-10-26):
+  **built** cipher (rule 702.99, `keyword:cipher` — `cipher: true`: as the spell's last step its
+  controller may exile it encoded on a creature they control, which then casts a free copy
+  whenever it deals combat damage to a player, for as long as the card stays exiled and the
+  creature on the battlefield), with the set's nine cipher cards — Shadow Slice, Hands of Binding,
+  Undercity Plague, Voidwalk and five more — and five triaged earlier on cipher alone (Hidden
+  Strings, Stolen Identity, Whispering Madness, Writ of Return, Arcane Heist). 91 of its 116 left
+  authored — Domri Rade, Gideon, Champion of Justice, Biovisionary, Luminate Primordial, Deathpact
+  Angel and 86 more — and 25 blocked, one or two cards a need (`B176.json`). Gatecrash is whole.
 - **Eventide, whole** (batch 177, the middle walk's second range, 2026-10-26): **built** retrace
   (rule 702.81a — `retrace: true`, its own `via: "retrace"` graveyard cast, a land card discarded,
   nothing exiling it; `keyword:retrace`) and the untap symbol {Q} (rule 107.6 — `AbilityCost.untap`;

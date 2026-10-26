@@ -2145,6 +2145,8 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
+    // Cipher (rule 702.99a) — Gatecrash's encoded instants and sorceries.
+    if (isSpell && line === "Cipher") { out.cipher = true; continue; }
     // Retrace (rule 702.81a): cast from the graveyard, discarding a land card.
     if (isSpell && line === "Retrace") { out.retrace = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.

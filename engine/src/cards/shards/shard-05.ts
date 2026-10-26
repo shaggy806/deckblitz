@@ -281,6 +281,8 @@ import _poolGrimAffliction from "../pool/grim-affliction.js";
 import _poolGrimBackwoods from "../pool/grim-backwoods.js";
 import _poolGrimclimbPathway from "../pool/grimclimb-pathway.js";
 import _poolGrowFromTheAshes from "../pool/grow-from-the-ashes.js";
+import _poolGruulCharm from "../pool/gruul-charm.js";
+import _poolGruulKeyrune from "../pool/gruul-keyrune.js";
 import _poolGuardedHeir from "../pool/guarded-heir.js";
 import _poolGuardianLions from "../pool/guardian-lions.js";
 import _poolHaazdaSnareSquad from "../pool/haazda-snare-squad.js";
@@ -450,6 +452,7 @@ import _poolRakdosShredFreak from "../pool/rakdos-shred-freak.js";
 import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
+import _poolRealmwright from "../pool/realmwright.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
@@ -668,6 +671,7 @@ import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
 import _tokensElementalToken10Blue from "../tokens/elemental-token-1-0-blue.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
+import _tokensHorrorTokenBlueBlackFlying from "../tokens/horror-token-blue-black-flying.js";
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
 import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.js";
 import _tokensJaceToken from "../tokens/jace-token.js";
@@ -961,6 +965,8 @@ const shard: CardShard = {
     _poolGrimBackwoods,
     _poolGrimclimbPathway,
     _poolGrowFromTheAshes,
+    _poolGruulCharm,
+    _poolGruulKeyrune,
     _poolGuardedHeir,
     _poolGuardianLions,
     _poolHaazdaSnareSquad,
@@ -1130,6 +1136,7 @@ const shard: CardShard = {
     _poolRampartSmasher,
     _poolRapidAugmenter,
     _poolRavenousIntruder,
+    _poolRealmwright,
     _poolRecklessPangolin,
     _poolReclaimingVines,
     _poolRefurbishedFamiliar,
@@ -1350,6 +1357,7 @@ const shard: CardShard = {
     _tokensElementalToken10Blue,
     _tokensGalactus,
     _tokensHalflingToken,
+    _tokensHorrorTokenBlueBlackFlying,
     _tokensHumanSoldierToken,
     _tokensInsectTokenFlyingHaste,
     _tokensJaceToken,

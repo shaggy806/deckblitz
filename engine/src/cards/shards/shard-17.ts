@@ -61,6 +61,7 @@ import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
 import _poolBelligerentBrontodon from "../pool/belligerent-brontodon.js";
 import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
 import _poolBigPlay from "../pool/big-play.js";
+import _poolBiovisionary from "../pool/biovisionary.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
 import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodAspirant from "../pool/blood-aspirant.js";
@@ -212,6 +213,7 @@ import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
+import _poolFoundryChampion from "../pool/foundry-champion.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
 import _poolFretworkColony from "../pool/fretwork-colony.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
@@ -758,6 +760,7 @@ const shard: CardShard = {
     _poolBelligerentBrontodon,
     _poolBeyondTheQuiet,
     _poolBigPlay,
+    _poolBiovisionary,
     _poolBirdsOfParadise,
     _poolBlastZone,
     _poolBloodAspirant,
@@ -909,6 +912,7 @@ const shard: CardShard = {
     _poolForgeBoss,
     _poolForlornFlats,
     _poolFoulmireKnight,
+    _poolFoundryChampion,
     _poolFowlStrike,
     _poolFretworkColony,
     _poolFriendlyGhost,

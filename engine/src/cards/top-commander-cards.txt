@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3802 already implemented / 1198 missing (marks refreshed 2026-10-26)
+3805 already implemented / 1195 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3166,7 +3166,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3173  Hallowed Haunting                        {2}{W}{W}        Enchantment
 [x]  3174  Goblin Trashmaster                       {2}{R}{R}        Creature — Goblin Warrior
 [x]  3175  Gríma, Saruman's Footman                 {2}{U}{B}        Legendary Creature — Human Advisor
-[ ]  3176  Whispering Madness                       {2}{U}{B}        Sorcery
+[x]  3176  Whispering Madness                       {2}{U}{B}        Sorcery
 [x]  3177  Firebending Student                      {1}{R}           Creature — Human Monk
 [x]  3178  Flaming Tyrannosaurus                    {5}{R}{R}        Creature — Dinosaur
 [x]  3179  Merciless Eviction                       {4}{W}{B}        Sorcery
@@ -4132,7 +4132,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4139  Barrowgoyf                               {2}{B}           Creature — Lhurgoyf
 [x]  4140  Tavern Scoundrel                         {1}{R}           Creature — Human Rogue
 [ ]  4141  Alms Collector                           {3}{W}           Creature — Cat Cleric
-[ ]  4142  Hidden Strings                           {1}{U}           Sorcery
+[x]  4142  Hidden Strings                           {1}{U}           Sorcery
 [x]  4143  Merfolk Sovereign                        {1}{U}{U}        Creature — Merfolk Noble
 [x]  4144  Kor Cartographer                         {3}{W}           Creature — Kor Scout
 [ ]  4145  Mirelurk Queen                           {4}{U}           Creature — Crab Mutant
@@ -4789,7 +4789,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4796  Stensian Sanguinist // Exsanguinate      {1}{B} // {X}{B}{B} Creature — Vampire Cleric // Sorcery
 [ ]  4797  Surge to Victory                         {4}{R}{R}        Sorcery
 [x]  4798  Star Athlete                             {1}{R}{R}        Creature — Human Warrior
-[ ]  4799  Stolen Identity                          {4}{U}{U}        Sorcery
+[x]  4799  Stolen Identity                          {4}{U}{U}        Sorcery
 [x]  4800  Spiteful Sliver                          {2}{R}           Creature — Sliver
 [x]  4801  Wand of Orcus                            {2}{B}           Legendary Artifact — Equipment
 [x]  4802  Into the North                           {1}{G}           Sorcery

@@ -93,7 +93,7 @@ function canon(v) {
   return out;
 }
 /** The card-level fields the parser may set. */
-const CARD_FIELDS = ["convoke", "improvise", "morph", "disturb", "suspend", "selfCostReduction", "cycling", "flashback", "plot", "madness", "evoke", "alternativeCost", "mayhem", "rebound", "retrace", "becomesDayAsEnters", "sneak", "webSlinging", "additionalCost", "cantBeCountered", "flashThenSacrifice", "chooseCreatureTypeOnEnter", "emerge", "dash"];
+const CARD_FIELDS = ["convoke", "improvise", "morph", "disturb", "suspend", "selfCostReduction", "cycling", "flashback", "plot", "madness", "evoke", "alternativeCost", "mayhem", "rebound", "retrace", "cipher", "becomesDayAsEnters", "sneak", "webSlinging", "additionalCost", "cantBeCountered", "flashThenSacrifice", "chooseCreatureTypeOnEnter", "emerge", "dash"];
 
 /** A trigger written two equivalent ways: `who: "you"` plus a
  * `controlledBy: "you"` filter is `who: "you-control"`. */

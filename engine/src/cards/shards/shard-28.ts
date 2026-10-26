@@ -95,6 +95,7 @@ import _poolBurnout from "../pool/burnout.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
+import _poolCallOfTheNightwing from "../pool/call-of-the-nightwing.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
@@ -227,6 +228,7 @@ import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
+import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
 import _poolGigantiform from "../pool/gigantiform.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
 import _poolGlassblowersPuzzleknot from "../pool/glassblowers-puzzleknot.js";
@@ -262,6 +264,7 @@ import _poolHewedStoneRetainers from "../pool/hewed-stone-retainers.js";
 import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
 import _poolHighbornVampire from "../pool/highborn-vampire.js";
 import _poolHighwayRobber from "../pool/highway-robber.js";
+import _poolHindervines from "../pool/hindervines.js";
 import _poolHiredPoisoner from "../pool/hired-poisoner.js";
 import _poolHivisOfTheScale from "../pool/hivis-of-the-scale.js";
 import _poolHolyArmor from "../pool/holy-armor.js";
@@ -370,6 +373,7 @@ import _poolMortalsArdor from "../pool/mortals-ardor.js";
 import _poolMotivatedPony from "../pool/motivated-pony.js";
 import _poolMouth from "../pool/mouth.js";
 import _poolMurasaBehemoth from "../pool/murasa-behemoth.js";
+import _poolMurderInvestigation from "../pool/murder-investigation.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
@@ -424,6 +428,7 @@ import _poolPolygraphOrb from "../pool/polygraph-orb.js";
 import _poolPondProphet from "../pool/pond-prophet.js";
 import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
+import _poolPredatorsRapport from "../pool/predators-rapport.js";
 import _poolPrepare from "../pool/prepare.js";
 import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
 import _poolPrimalcrux from "../pool/primalcrux.js";
@@ -674,6 +679,7 @@ import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
+import _poolWritOfReturn from "../pool/writ-of-return.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
@@ -793,6 +799,7 @@ const shard: CardShard = {
     _poolCacklingCulprit,
     _poolCalamityBearer,
     _poolCalculatedDismissal,
+    _poolCallOfTheNightwing,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
@@ -925,6 +932,7 @@ const shard: CardShard = {
     _poolGenesisStorm,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
+    _poolGideonChampionOfJustice,
     _poolGigantiform,
     _poolGildedPinions,
     _poolGlassblowersPuzzleknot,
@@ -960,6 +968,7 @@ const shard: CardShard = {
     _poolHighSocietyHunter,
     _poolHighbornVampire,
     _poolHighwayRobber,
+    _poolHindervines,
     _poolHiredPoisoner,
     _poolHivisOfTheScale,
     _poolHolyArmor,
@@ -1068,6 +1077,7 @@ const shard: CardShard = {
     _poolMotivatedPony,
     _poolMouth,
     _poolMurasaBehemoth,
+    _poolMurderInvestigation,
     _poolMurderousRedcap,
     _poolMutableExplorer,
     _poolMutantTownMusicians,
@@ -1122,6 +1132,7 @@ const shard: CardShard = {
     _poolPondProphet,
     _poolPortOfKarfell,
     _poolPowerDepot,
+    _poolPredatorsRapport,
     _poolPrepare,
     _poolPresenceOfTheMaster,
     _poolPrimalcrux,
@@ -1372,6 +1383,7 @@ const shard: CardShard = {
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWorldChampionCelestialWeapon,
+    _poolWritOfReturn,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,

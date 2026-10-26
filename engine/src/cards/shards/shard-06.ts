@@ -517,6 +517,7 @@ import _poolSkylineScout from "../pool/skyline-scout.js";
 import _poolSlaughterCry from "../pool/slaughter-cry.js";
 import _poolSlaughterPriestOfMogis from "../pool/slaughter-priest-of-mogis.js";
 import _poolSleekSchooner from "../pool/sleek-schooner.js";
+import _poolSmogElemental from "../pool/smog-elemental.js";
 import _poolSmokeBomb from "../pool/smoke-bomb.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
@@ -626,6 +627,7 @@ import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWantedScoundrels from "../pool/wanted-scoundrels.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
+import _poolWarmindInfantry from "../pool/warmind-infantry.js";
 import _poolWarrant from "../pool/warrant.js";
 import _poolWaterknot from "../pool/waterknot.js";
 import _poolWeakstone from "../pool/weakstone.js";
@@ -1194,6 +1196,7 @@ const shard: CardShard = {
     _poolSlaughterCry,
     _poolSlaughterPriestOfMogis,
     _poolSleekSchooner,
+    _poolSmogElemental,
     _poolSmokeBomb,
     _poolSmolderingCrater,
     _poolSnappingGnarlid,
@@ -1303,6 +1306,7 @@ const shard: CardShard = {
     _poolWantedScoundrels,
     _poolWarMachineLegacyOfIron,
     _poolWarlockClass,
+    _poolWarmindInfantry,
     _poolWarrant,
     _poolWaterknot,
     _poolWeakstone,

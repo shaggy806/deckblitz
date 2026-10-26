@@ -2812,6 +2812,15 @@ export interface CardDefinition {
    */
   readonly rebound: boolean;
   /**
+   * Cipher (rule 702.99) — an instant or sorcery represented by a card: as
+   * the last step of its resolution its controller may exile it encoded on a
+   * creature they control, which then has "Whenever this creature deals
+   * combat damage to a player, you may copy the encoded card and you may cast
+   * the copy without paying its mana cost" for as long as the card stays
+   * exiled and the creature on the battlefield (702.99c). Never for a copy.
+   */
+  readonly cipher: boolean;
+  /**
    * Aftermath (rule 702.127a), on one half of a split card (`split`, the
    * half's own definition): that half may be cast from its owner's graveyard
    * (`via: "aftermath"`), can't be cast from any other zone, and a spell cast
@@ -3295,6 +3304,7 @@ const PRINTED_ABILITY: {
   flashback: (def) => def.flashback !== null,
   mayhem: (def) => def.mayhem !== null,
   rebound: (def) => def.rebound,
+  cipher: (def) => def.cipher,
   aftermath: (def) => def.aftermath,
   fuse: (def) => def.fuse,
   sneak: (def) => def.sneak !== null,
@@ -3508,6 +3518,7 @@ interface CardDraft {
   defense?: number;
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
+  cipher?: boolean;
   aftermath?: boolean;
   fuse?: boolean;
   sneak?: { readonly cost: string };
@@ -3711,6 +3722,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     flashback: draft.flashback ?? null,
     mayhem: draft.mayhem ?? null,
     rebound: draft.rebound ?? false,
+    cipher: draft.cipher ?? false,
     aftermath: draft.aftermath ?? false,
     fuse: draft.fuse ?? false,
     sneak: draft.sneak ?? null,

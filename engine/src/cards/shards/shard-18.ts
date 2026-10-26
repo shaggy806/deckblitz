@@ -259,6 +259,7 @@ import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
 import _poolImperialSubduer from "../pool/imperial-subduer.js";
+import _poolIncursionSpecialist from "../pool/incursion-specialist.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
@@ -349,6 +350,7 @@ import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
+import _poolMimingSlime from "../pool/miming-slime.js";
 import _poolMindOverMatter from "../pool/mind-over-matter.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMindstabThrull from "../pool/mindstab-thrull.js";
@@ -944,6 +946,7 @@ const shard: CardShard = {
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
     _poolImperialSubduer,
+    _poolIncursionSpecialist,
     _poolIndependentTroops,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
@@ -1034,6 +1037,7 @@ const shard: CardShard = {
     _poolMichikosReignOfTruth,
     _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
+    _poolMimingSlime,
     _poolMindOverMatter,
     _poolMindspringMerfolk,
     _poolMindstabThrull,

@@ -358,6 +358,7 @@ import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
+import _poolLeylinePhantom from "../pool/leyline-phantom.js";
 import _poolLightningCoreExcavator from "../pool/lightning-core-excavator.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
 import _poolLingeringSouls from "../pool/lingering-souls.js";
@@ -642,6 +643,7 @@ import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
 import _poolWeddingInvitation from "../pool/wedding-invitation.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
+import _poolWhisperingMadness from "../pool/whispering-madness.js";
 import _poolWhisperingWizard from "../pool/whispering-wizard.js";
 import _poolWhitesunsPassage from "../pool/whitesuns-passage.js";
 import _poolWickersmithsTools from "../pool/wickersmiths-tools.js";
@@ -1035,6 +1037,7 @@ const shard: CardShard = {
     _poolLawbringer,
     _poolLeoninVanguard,
     _poolLeveler,
+    _poolLeylinePhantom,
     _poolLightningCoreExcavator,
     _poolLimDulsHighGuard,
     _poolLingeringSouls,
@@ -1319,6 +1322,7 @@ const shard: CardShard = {
     _poolWeakness,
     _poolWeddingInvitation,
     _poolWhirlerRogue,
+    _poolWhisperingMadness,
     _poolWhisperingWizard,
     _poolWhitesunsPassage,
     _poolWickersmithsTools,

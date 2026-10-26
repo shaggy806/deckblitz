@@ -298,6 +298,7 @@ import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
+import _poolKillingGlare from "../pool/killing-glare.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
@@ -339,6 +340,7 @@ import _poolMemnarch from "../pool/memnarch.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
 import _poolMeteorSword from "../pool/meteor-sword.js";
+import _poolMidnightRecovery from "../pool/midnight-recovery.js";
 import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
 import _poolMindRot from "../pool/mind-rot.js";
@@ -584,6 +586,7 @@ import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
 import _poolUmaraMystic from "../pool/umara-mystic.js";
 import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
+import _poolUndercityPlague from "../pool/undercity-plague.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnexplainedVision from "../pool/unexplained-vision.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
@@ -970,6 +973,7 @@ const shard: CardShard = {
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
     _poolKhenraScrapper,
+    _poolKillingGlare,
     _poolKingSuleiman,
     _poolKinnanBonderProdigy,
     _poolKitesailCorsair,
@@ -1011,6 +1015,7 @@ const shard: CardShard = {
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
     _poolMeteorSword,
+    _poolMidnightRecovery,
     _poolMijaeDjinn,
     _poolMillennialGargoyle,
     _poolMindRot,
@@ -1256,6 +1261,7 @@ const shard: CardShard = {
     _poolTwoHandedAxe,
     _poolUmaraMystic,
     _poolUnchartedVoyage,
+    _poolUndercityPlague,
     _poolUnderdarkRift,
     _poolUnexplainedVision,
     _poolUnnaturalSpeed,

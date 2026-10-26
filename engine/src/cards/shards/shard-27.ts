@@ -63,6 +63,7 @@ import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBoil from "../pool/boil.js";
+import _poolBomberCorps from "../pool/bomber-corps.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
 import _poolBoomBox from "../pool/boom-box.js";
@@ -193,6 +194,8 @@ import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
+import _poolFirefistStriker from "../pool/firefist-striker.js";
+import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
@@ -481,6 +484,7 @@ import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
+import _poolShadowSlice from "../pool/shadow-slice.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShieldhideDragon from "../pool/shieldhide-dragon.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
@@ -738,6 +742,7 @@ const shard: CardShard = {
     _poolBloodstoneGoblin,
     _poolBogstomper,
     _poolBoil,
+    _poolBomberCorps,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
     _poolBoomBox,
@@ -868,6 +873,8 @@ const shard: CardShard = {
     _poolFieryJustice,
     _poolFieryTemper,
     _poolFiliThePathfinder,
+    _poolFirefistStriker,
+    _poolFiveAlarmFire,
     _poolFlood,
     _poolFloodwaters,
     _poolFlowstoneWyvern,
@@ -1156,6 +1163,7 @@ const shard: CardShard = {
     _poolSergeantJohnBenton,
     _poolSerraAscendant,
     _poolShadowAlleyDenizen,
+    _poolShadowSlice,
     _poolShamblingRemains,
     _poolShieldhideDragon,
     _poolShivanDevastator,

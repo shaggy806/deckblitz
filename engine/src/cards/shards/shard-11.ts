@@ -140,6 +140,7 @@ import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnhartMentor from "../pool/dawnhart-mentor.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
 import _poolDeadeyeBrawler from "../pool/deadeye-brawler.js";
+import _poolDebtorsPulpit from "../pool/debtors-pulpit.js";
 import _poolDecommission from "../pool/decommission.js";
 import _poolDeemWorthy from "../pool/deem-worthy.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
@@ -285,6 +286,7 @@ import _poolHullBreach from "../pool/hull-breach.js";
 import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
 import _poolHuntersBlowgun from "../pool/hunters-blowgun.js";
+import _poolImmortalServitude from "../pool/immortal-servitude.js";
 import _poolImperialRecoveryUnit from "../pool/imperial-recovery-unit.js";
 import _poolImplementOfImprovement from "../pool/implement-of-improvement.js";
 import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
@@ -383,6 +385,7 @@ import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
 import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
+import _poolMugging from "../pool/mugging.js";
 import _poolMurasaRootgrazer from "../pool/murasa-rootgrazer.js";
 import _poolMurderersAxe from "../pool/murderers-axe.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
@@ -420,6 +423,7 @@ import _poolPacesetterParagon from "../pool/pacesetter-paragon.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
+import _poolParanoidDelusions from "../pool/paranoid-delusions.js";
 import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
 import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js";
 import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
@@ -830,6 +834,7 @@ const shard: CardShard = {
     _poolDawnhartMentor,
     _poolDawnsireSunstarDreadnought,
     _poolDeadeyeBrawler,
+    _poolDebtorsPulpit,
     _poolDecommission,
     _poolDeemWorthy,
     _poolDefacingDuskmage,
@@ -975,6 +980,7 @@ const shard: CardShard = {
     _poolHungeringPuppetbeast,
     _poolHuntedBonebrute,
     _poolHuntersBlowgun,
+    _poolImmortalServitude,
     _poolImperialRecoveryUnit,
     _poolImplementOfImprovement,
     _poolImprovisedArsenal,
@@ -1073,6 +1079,7 @@ const shard: CardShard = {
     _poolMossdog,
     _poolMoxSapphire,
     _poolMoxTantalite,
+    _poolMugging,
     _poolMurasaRootgrazer,
     _poolMurderersAxe,
     _poolMusterTheDeparted,
@@ -1110,6 +1117,7 @@ const shard: CardShard = {
     _poolParadiseMantle,
     _poolParadoxShaper,
     _poolParameciaColoniex,
+    _poolParanoidDelusions,
     _poolPathOfTheAnimist,
     _poolPearlEarImperialAdvisor,
     _poolPelakkaWurm,

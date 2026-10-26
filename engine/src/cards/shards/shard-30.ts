@@ -191,6 +191,7 @@ import _poolEtherwroughtPage from "../pool/etherwrought-page.js";
 import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
+import _poolExperimentOne from "../pool/experiment-one.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
 import _poolExuberantFuseling from "../pool/exuberant-fuseling.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
@@ -259,6 +260,7 @@ import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGreenWard from "../pool/green-ward.js";
 import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
+import _poolGridlock from "../pool/gridlock.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
@@ -280,6 +282,7 @@ import _poolHexgoldHalberd from "../pool/hexgold-halberd.js";
 import _poolHexplateGolem from "../pool/hexplate-golem.js";
 import _poolHiredHexblade from "../pool/hired-hexblade.js";
 import _poolHoardersOverflow from "../pool/hoarders-overflow.js";
+import _poolHolyMantle from "../pool/holy-mantle.js";
 import _poolHopToIt from "../pool/hop-to-it.js";
 import _poolHopeAgainstHope from "../pool/hope-against-hope.js";
 import _poolHorizonScholar from "../pool/horizon-scholar.js";
@@ -536,6 +539,7 @@ import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
 import _poolSkywiseTeachings from "../pool/skywise-teachings.js";
+import _poolSlateStreetRuffian from "../pool/slate-street-ruffian.js";
 import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
@@ -880,6 +884,7 @@ const shard: CardShard = {
     _poolEvaporate,
     _poolEverythingPizza,
     _poolExecutionersHood,
+    _poolExperimentOne,
     _poolExplorersCache,
     _poolExuberantFuseling,
     _poolFallowEarth,
@@ -948,6 +953,7 @@ const shard: CardShard = {
     _poolGreaterForgeling,
     _poolGreenWard,
     _poolGrenzosRuffians,
+    _poolGridlock,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
     _poolGruesomeRealization,
@@ -969,6 +975,7 @@ const shard: CardShard = {
     _poolHexplateGolem,
     _poolHiredHexblade,
     _poolHoardersOverflow,
+    _poolHolyMantle,
     _poolHopToIt,
     _poolHopeAgainstHope,
     _poolHorizonScholar,
@@ -1225,6 +1232,7 @@ const shard: CardShard = {
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,
     _poolSkywiseTeachings,
+    _poolSlateStreetRuffian,
     _poolSleepParalysis,
     _poolSmaugTheMagnificent,
     _poolSmolderingEfreet,

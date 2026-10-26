@@ -78,6 +78,8 @@ import _poolBloodmadVampire from "../pool/bloodmad-vampire.js";
 import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
 import _poolBodyLaunderer from "../pool/body-launderer.js";
 import _poolBoilingBlood from "../pool/boiling-blood.js";
+import _poolBorosElite from "../pool/boros-elite.js";
+import _poolBorosKeyrune from "../pool/boros-keyrune.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
 import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
@@ -507,6 +509,7 @@ import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
 import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
+import _poolShieldedPassage from "../pool/shielded-passage.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
 import _poolShipwreckSinger from "../pool/shipwreck-singer.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
@@ -582,6 +585,7 @@ import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
+import _poolTinStreetMarket from "../pool/tin-street-market.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
 import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
 import _poolTopiaryStomper from "../pool/topiary-stomper.js";
@@ -750,6 +754,8 @@ const shard: CardShard = {
     _poolBloodtitheHarvester,
     _poolBodyLaunderer,
     _poolBoilingBlood,
+    _poolBorosElite,
+    _poolBorosKeyrune,
     _poolBrambleWurm,
     _poolBrambleguardCaptain,
     _poolBranchOfBoseiju,
@@ -1179,6 +1185,7 @@ const shard: CardShard = {
     _poolShaperGuildmage,
     _poolSharktocrab,
     _poolShepherdOfTheFlock,
+    _poolShieldedPassage,
     _poolShipwreckDowser,
     _poolShipwreckSinger,
     _poolShireShirriff,
@@ -1254,6 +1261,7 @@ const shard: CardShard = {
     _poolThunderblust,
     _poolThunderousMight,
     _poolTimeElemental,
+    _poolTinStreetMarket,
     _poolTitanHunter,
     _poolTophEarthbendingMaster,
     _poolTopiaryStomper,

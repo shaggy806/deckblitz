@@ -1,0 +1,860 @@
+{
+ "batch": "B176",
+ "status": "complete",
+ "ranks": "Gatecrash (GTC, 2013-02-01): the rest of the set — its 116 cards left (newest-first walk); with cipher built, also the five cards triaged earlier on cipher alone (Hidden Strings, Stolen Identity, Whispering Madness, Writ of Return, Arcane Heist)",
+ "authored": [
+  {
+   "name": "Arcane Heist",
+   "files": [
+    "engine/src/cards/pool/arcane-heist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armored Transport",
+   "files": [
+    "engine/src/cards/pool/armored-transport.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balustrade Spy",
+   "files": [
+    "engine/src/cards/pool/balustrade-spy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biovisionary",
+   "files": [
+    "engine/src/cards/pool/biovisionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bomber Corps",
+   "files": [
+    "engine/src/cards/pool/bomber-corps.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Borborygmos Enraged",
+   "files": [
+    "engine/src/cards/pool/borborygmos-enraged.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boros Elite",
+   "files": [
+    "engine/src/cards/pool/boros-elite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boros Keyrune",
+   "files": [
+    "engine/src/cards/pool/boros-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Burst of Strength",
+   "files": [
+    "engine/src/cards/pool/burst-of-strength.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Call of the Nightwing",
+   "files": [
+    "engine/src/cards/pool/call-of-the-nightwing.ts",
+    "engine/src/cards/tokens/horror-token-blue-black-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coerced Confession",
+   "files": [
+    "engine/src/cards/pool/coerced-confession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crowned Ceratok",
+   "files": [
+    "engine/src/cards/pool/crowned-ceratok.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Daring Skyjek",
+   "files": [
+    "engine/src/cards/pool/daring-skyjek.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deathcult Rogue",
+   "files": [
+    "engine/src/cards/pool/deathcult-rogue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deathpact Angel",
+   "files": [
+    "engine/src/cards/pool/deathpact-angel.ts",
+    "engine/src/cards/tokens/cleric-token-deathpact-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Debtor's Pulpit",
+   "files": [
+    "engine/src/cards/pool/debtors-pulpit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Devour Flesh",
+   "files": [
+    "engine/src/cards/pool/devour-flesh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Domri Rade",
+   "files": [
+    "engine/src/cards/pool/domri-rade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskmantle Seer",
+   "files": [
+    "engine/src/cards/pool/duskmantle-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dying Wish",
+   "files": [
+    "engine/src/cards/pool/dying-wish.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Experiment One",
+   "files": [
+    "engine/src/cards/pool/experiment-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firefist Striker",
+   "files": [
+    "engine/src/cards/pool/firefist-striker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firemane Avenger",
+   "files": [
+    "engine/src/cards/pool/firemane-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Five-Alarm Fire",
+   "files": [
+    "engine/src/cards/pool/five-alarm-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forced Adaptation",
+   "files": [
+    "engine/src/cards/pool/forced-adaptation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Foundry Champion",
+   "files": [
+    "engine/src/cards/pool/foundry-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foundry Street Denizen",
+   "files": [
+    "engine/src/cards/pool/foundry-street-denizen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gideon, Champion of Justice",
+   "files": [
+    "engine/src/cards/pool/gideon-champion-of-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greenside Watcher",
+   "files": [
+    "engine/src/cards/pool/greenside-watcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gridlock",
+   "files": [
+    "engine/src/cards/pool/gridlock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ground Assault",
+   "files": [
+    "engine/src/cards/pool/ground-assault.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gruul Charm",
+   "files": [
+    "engine/src/cards/pool/gruul-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruul Keyrune",
+   "files": [
+    "engine/src/cards/pool/gruul-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guildscorn Ward",
+   "files": [
+    "engine/src/cards/pool/guildscorn-ward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hands of Binding",
+   "files": [
+    "engine/src/cards/pool/hands-of-binding.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hellraiser Goblin",
+   "files": [
+    "engine/src/cards/pool/hellraiser-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Strings",
+   "files": [
+    "engine/src/cards/pool/hidden-strings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hindervines",
+   "files": [
+    "engine/src/cards/pool/hindervines.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hold the Gates",
+   "files": [
+    "engine/src/cards/pool/hold-the-gates.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Holy Mantle",
+   "files": [
+    "engine/src/cards/pool/holy-mantle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hydroform",
+   "files": [
+    "engine/src/cards/pool/hydroform.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illness in the Ranks",
+   "files": [
+    "engine/src/cards/pool/illness-in-the-ranks.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Immortal Servitude",
+   "files": [
+    "engine/src/cards/pool/immortal-servitude.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incursion Specialist",
+   "files": [
+    "engine/src/cards/pool/incursion-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keymaster Rogue",
+   "files": [
+    "engine/src/cards/pool/keymaster-rogue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Killing Glare",
+   "files": [
+    "engine/src/cards/pool/killing-glare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Last Thoughts",
+   "files": [
+    "engine/src/cards/pool/last-thoughts.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leyline Phantom",
+   "files": [
+    "engine/src/cards/pool/leyline-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luminate Primordial",
+   "files": [
+    "engine/src/cards/pool/luminate-primordial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mental Vapors",
+   "files": [
+    "engine/src/cards/pool/mental-vapors.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Midnight Recovery",
+   "files": [
+    "engine/src/cards/pool/midnight-recovery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Miming Slime",
+   "files": [
+    "engine/src/cards/pool/miming-slime.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mortus Strider",
+   "files": [
+    "engine/src/cards/pool/mortus-strider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mugging",
+   "files": [
+    "engine/src/cards/pool/mugging.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Murder Investigation",
+   "files": [
+    "engine/src/cards/pool/murder-investigation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Genesis",
+   "files": [
+    "engine/src/cards/pool/mystic-genesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nav Squad Commandos",
+   "files": [
+    "engine/src/cards/pool/nav-squad-commandos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimbus Swimmer",
+   "files": [
+    "engine/src/cards/pool/nimbus-swimmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ordruun Veteran",
+   "files": [
+    "engine/src/cards/pool/ordruun-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orzhov Keyrune",
+   "files": [
+    "engine/src/cards/pool/orzhov-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Paranoid Delusions",
+   "files": [
+    "engine/src/cards/pool/paranoid-delusions.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pit Fight",
+   "files": [
+    "engine/src/cards/pool/pit-fight.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Predator's Rapport",
+   "files": [
+    "engine/src/cards/pool/predators-rapport.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purge the Profane",
+   "files": [
+    "engine/src/cards/pool/purge-the-profane.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Realmwright",
+   "files": [
+    "engine/src/cards/pool/realmwright.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rubblebelt Raiders",
+   "files": [
+    "engine/src/cards/pool/rubblebelt-raiders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rubblehulk",
+   "files": [
+    "engine/src/cards/pool/rubblehulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rust Scarab",
+   "files": [
+    "engine/src/cards/pool/rust-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage's Row Denizen",
+   "files": [
+    "engine/src/cards/pool/sages-row-denizen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sapphire Drake",
+   "files": [
+    "engine/src/cards/pool/sapphire-drake.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shadow Slice",
+   "files": [
+    "engine/src/cards/pool/shadow-slice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shielded Passage",
+   "files": [
+    "engine/src/cards/pool/shielded-passage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Simic Fluxmage",
+   "files": [
+    "engine/src/cards/pool/simic-fluxmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Simic Keyrune",
+   "files": [
+    "engine/src/cards/pool/simic-keyrune.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Simic Manipulator",
+   "files": [
+    "engine/src/cards/pool/simic-manipulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skarrg Guildmage",
+   "files": [
+    "engine/src/cards/pool/skarrg-guildmage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skyblinder Staff",
+   "files": [
+    "engine/src/cards/pool/skyblinder-staff.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skygames",
+   "files": [
+    "engine/src/cards/pool/skygames.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slate Street Ruffian",
+   "files": [
+    "engine/src/cards/pool/slate-street-ruffian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smog Elemental",
+   "files": [
+    "engine/src/cards/pool/smog-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spell Rupture",
+   "files": [
+    "engine/src/cards/pool/spell-rupture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spire Tracer",
+   "files": [
+    "engine/src/cards/pool/spire-tracer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stolen Identity",
+   "files": [
+    "engine/src/cards/pool/stolen-identity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Structural Collapse",
+   "files": [
+    "engine/src/cards/pool/structural-collapse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tin Street Market",
+   "files": [
+    "engine/src/cards/pool/tin-street-market.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treasury Thrull",
+   "files": [
+    "engine/src/cards/pool/treasury-thrull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercity Informer",
+   "files": [
+    "engine/src/cards/pool/undercity-informer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercity Plague",
+   "files": [
+    "engine/src/cards/pool/undercity-plague.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verdant Haven",
+   "files": [
+    "engine/src/cards/pool/verdant-haven.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Voidwalk",
+   "files": [
+    "engine/src/cards/pool/voidwalk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warmind Infantry",
+   "files": [
+    "engine/src/cards/pool/warmind-infantry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Way of the Thief",
+   "files": [
+    "engine/src/cards/pool/way-of-the-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whispering Madness",
+   "files": [
+    "engine/src/cards/pool/whispering-madness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wight of Precinct Six",
+   "files": [
+    "engine/src/cards/pool/wight-of-precinct-six.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wojek Halberdiers",
+   "files": [
+    "engine/src/cards/pool/wojek-halberdiers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Writ of Return",
+   "files": [
+    "engine/src/cards/pool/writ-of-return.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Zameck Guildmage",
+   "needs": [
+    "effect:creatures-enter-with-counter-this-turn"
+   ],
+   "why": "'this turn, each creature you control enters with an additional +1/+1 counter' has no effect"
+  },
+  {
+   "name": "Signal the Clans",
+   "needs": [
+    "effect:random-choice-among-chosen"
+   ],
+   "why": "search for three differently named creature cards, then one chosen at random goes to hand"
+  },
+  {
+   "name": "Guardian of the Gateless",
+   "needs": [
+    "static:can-block-any-number",
+    "amount:creatures-blocking-it"
+   ],
+   "why": "'can block any number of creatures', and +1/+1 for each creature it's blocking"
+  },
+  {
+   "name": "Homing Lightning",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "'and each other creature with the same name as that creature'"
+  },
+  {
+   "name": "Death's Approach",
+   "needs": [
+    "amount:graveyard-count-of-enchanted-controller"
+   ],
+   "why": "X counts the enchanted creature's controller's graveyard, not the Aura controller's"
+  },
+  {
+   "name": "Vizkopa Confessor",
+   "needs": [
+    "effect:pay-any-amount-of-life-reveal-that-many"
+   ],
+   "why": "pay any amount of life as it resolves; the opponent reveals that many cards"
+  },
+  {
+   "name": "Mark for Death",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "'blocks this turn if able' for the opponent's creatures"
+  },
+  {
+   "name": "Skullcrack",
+   "needs": [
+    "effect:damage-cant-be-prevented"
+   ],
+   "why": "'damage can't be prevented this turn' (and no until-end-of-turn 'players can't gain life')"
+  },
+  {
+   "name": "Orzhov Charm",
+   "needs": [
+    "condition:attached-to-target"
+   ],
+   "why": "'return all Auras you control attached to it' — a filter's attachedTo can't name a target slot"
+  },
+  {
+   "name": "Ooze Flux",
+   "needs": [
+    "cost:remove-counters-among"
+   ],
+   "why": "remove one or more +1/+1 counters from among creatures you control, X read from the count"
+  },
+  {
+   "name": "Dinrova Horror",
+   "needs": [
+    "effect:discard-controller-of-target"
+   ],
+   "why": "'its owner discards a card' — discard can't name a target permanent's owner"
+  },
+  {
+   "name": "Executioner's Swing",
+   "needs": [
+    "condition:filter-dealt-damage-this-turn"
+   ],
+   "why": "'a creature that dealt damage this turn' (to anything, the ruling)"
+  },
+  {
+   "name": "Nightveil Specter",
+   "needs": [
+    "zone:exiled-with-source-play"
+   ],
+   "why": "play lands and cast spells from among cards exiled with this creature"
+  },
+  {
+   "name": "Bane Alley Broker",
+   "needs": [
+    "effect:exile-from-hand-face-down-linked",
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "linked face-down exile from hand; return one chosen linked card"
+  },
+  {
+   "name": "Unexpected Results",
+   "needs": [
+    "effect:spell-returns-itself-to-hand"
+   ],
+   "why": "'return Unexpected Results to its owner's hand' as it resolves"
+  },
+  {
+   "name": "Dimir Charm",
+   "needs": [
+    "effect:look-at-target-player-library"
+   ],
+   "why": "look at the top three of target player's library, put one back"
+  },
+  {
+   "name": "Bioshift",
+   "needs": [
+    "effect:targets-same-controller"
+   ],
+   "why": "'another target creature with the same controller'"
+  },
+  {
+   "name": "Grisly Spectacle",
+   "needs": [
+    "effect:mill-controller-of-target"
+   ],
+   "why": "'its controller mills cards equal to that creature's power'"
+  },
+  {
+   "name": "One Thousand Lashes",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "'its activated abilities can't be activated' for the enchanted creature"
+  },
+  {
+   "name": "Soul Ransom",
+   "needs": [
+    "effect:opponents-may-activate"
+   ],
+   "why": "'any opponent may activate this ability' (only opponents)"
+  },
+  {
+   "name": "Serene Remembrance",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "'up to three target cards from a single graveyard'"
+  },
+  {
+   "name": "Psychic Strike",
+   "needs": [
+    "effect:mill-controller-of-target"
+   ],
+   "why": "'its controller mills two cards' for the countered spell"
+  },
+  {
+   "name": "Obzedat, Ghost Council",
+   "needs": [
+    "effect:flicker-return-then"
+   ],
+   "why": "the returned permanent 'gains haste' for good"
+  },
+  {
+   "name": "Cartel Aristocrat",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "protection from the color of your choice until end of turn"
+  },
+  {
+   "name": "Alms Beast",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "'creatures blocking or blocked by this creature have lifelink'"
+  }
+ ]
+}

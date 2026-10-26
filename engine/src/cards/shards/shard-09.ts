@@ -549,6 +549,7 @@ import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
 import _poolSpikedPitTrap from "../pool/spiked-pit-trap.js";
 import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
+import _poolSpireTracer from "../pool/spire-tracer.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
 import _poolSpontaneousMutation from "../pool/spontaneous-mutation.js";
@@ -1254,6 +1255,7 @@ const shard: CardShard = {
     _poolSpikedPitTrap,
     _poolSpinewoodsPaladin,
     _poolSpireMechcycle,
+    _poolSpireTracer,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,
     _poolSpontaneousMutation,

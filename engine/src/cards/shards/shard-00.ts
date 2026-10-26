@@ -396,6 +396,7 @@ import _poolPhotonMightyMarvel from "../pool/photon-mighty-marvel.js";
 import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPippinsBravery from "../pool/pippins-bravery.js";
+import _poolPitFight from "../pool/pit-fight.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
@@ -410,6 +411,7 @@ import _poolProsperityTycoon from "../pool/prosperity-tycoon.js";
 import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolPunishingPunch from "../pool/punishing-punch.js";
+import _poolPurgeTheProfane from "../pool/purge-the-profane.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
 import _poolRadiantFountain from "../pool/radiant-fountain.js";
@@ -1081,6 +1083,7 @@ const shard: CardShard = {
     _poolPhyrexianBroodlings,
     _poolPipBoy3000,
     _poolPippinsBravery,
+    _poolPitFight,
     _poolPlatedOnslaught,
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
@@ -1095,6 +1098,7 @@ const shard: CardShard = {
     _poolPrudentFateseer,
     _poolPryingEyes,
     _poolPunishingPunch,
+    _poolPurgeTheProfane,
     _poolQuakestriderCeratops,
     _poolQuietPurity,
     _poolRadiantFountain,

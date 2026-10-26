@@ -131,6 +131,7 @@ import _poolDawn from "../pool/dawn.js";
 import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
+import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDefilerOfSouls from "../pool/defiler-of-souls.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
@@ -249,6 +250,7 @@ import _poolHalfElfMonk from "../pool/half-elf-monk.js";
 import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
 import _poolHaloHopper from "../pool/halo-hopper.js";
 import _poolHandOfDeath from "../pool/hand-of-death.js";
+import _poolHandsOfBinding from "../pool/hands-of-binding.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
 import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
@@ -266,6 +268,7 @@ import _poolHighlandLake from "../pool/highland-lake.js";
 import _poolHolyLight from "../pool/holy-light.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
+import _poolHydroform from "../pool/hydroform.js";
 import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
@@ -661,6 +664,7 @@ import _poolWernogRidersChaplain from "../pool/wernog-riders-chaplain.js";
 import _poolWhiptongueFrog from "../pool/whiptongue-frog.js";
 import _poolWhitePlumeAdventurer from "../pool/white-plume-adventurer.js";
 import _poolWickerfolkThresher from "../pool/wickerfolk-thresher.js";
+import _poolWightOfPrecinctSix from "../pool/wight-of-precinct-six.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
 import _poolWoebearer from "../pool/woebearer.js";
@@ -686,6 +690,7 @@ import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
 import _tokensAstartesWarriorToken from "../tokens/astartes-warrior-token.js";
 import _tokensBlackWarriorToken from "../tokens/black-warrior-token.js";
+import _tokensClericTokenDeathpactReturn from "../tokens/cleric-token-deathpact-return.js";
 import _tokensConstructTokenDefender from "../tokens/construct-token-defender.js";
 import _tokensCragflame from "../tokens/cragflame.js";
 import _tokensDrakeToken from "../tokens/drake-token.js";
@@ -842,6 +847,7 @@ const shard: CardShard = {
     _poolDawnbringerCharioteers,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
+    _poolDeathcultRogue,
     _poolDefenderOfChaos,
     _poolDefilerOfSouls,
     _poolDeflectingSwat,
@@ -960,6 +966,7 @@ const shard: CardShard = {
     _poolHaliyaAscendantCadet,
     _poolHaloHopper,
     _poolHandOfDeath,
+    _poolHandsOfBinding,
     _poolHapatraVizierOfPoisons,
     _poolHavocEater,
     _poolHeartlessSummoning,
@@ -977,6 +984,7 @@ const shard: CardShard = {
     _poolHolyLight,
     _poolHookhandMariner,
     _poolHydraBroodmaster,
+    _poolHydroform,
     _poolHystericalBlindness,
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
@@ -1372,6 +1380,7 @@ const shard: CardShard = {
     _poolWhiptongueFrog,
     _poolWhitePlumeAdventurer,
     _poolWickerfolkThresher,
+    _poolWightOfPrecinctSix,
     _poolWildfireAwakener,
     _poolWillowDryad,
     _poolWoebearer,
@@ -1399,6 +1408,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAstartesWarriorToken,
     _tokensBlackWarriorToken,
+    _tokensClericTokenDeathpactReturn,
     _tokensConstructTokenDefender,
     _tokensCragflame,
     _tokensDrakeToken,

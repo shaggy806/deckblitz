@@ -55,6 +55,7 @@ import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
+import _poolBurstOfStrength from "../pool/burst-of-strength.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolByInvitationOnly from "../pool/by-invitation-only.js";
 import _poolBygoneMarvels from "../pool/bygone-marvels.js";
@@ -227,6 +228,7 @@ import _poolGrizzledAngler from "../pool/grizzled-angler.js";
 import _poolGruesomeSlaughter from "../pool/gruesome-slaughter.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
+import _poolGuildscornWard from "../pool/guildscorn-ward.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
@@ -325,6 +327,7 @@ import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMedicsKitesail from "../pool/medics-kitesail.js";
+import _poolMentalVapors from "../pool/mental-vapors.js";
 import _poolMercilessEternal from "../pool/merciless-eternal.js";
 import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
@@ -684,6 +687,7 @@ const shard: CardShard = {
     _poolBranchblightStalker,
     _poolBrotherhoodPatriarch,
     _poolBurnDownTheHouse,
+    _poolBurstOfStrength,
     _poolBuzzardWaspColony,
     _poolByInvitationOnly,
     _poolBygoneMarvels,
@@ -856,6 +860,7 @@ const shard: CardShard = {
     _poolGruesomeSlaughter,
     _poolGuardianKirin,
     _poolGuardianSunmare,
+    _poolGuildscornWard,
     _poolGutsplitterGang,
     _poolHalimarDepths,
     _poolHammerDropper,
@@ -954,6 +959,7 @@ const shard: CardShard = {
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
     _poolMedicsKitesail,
+    _poolMentalVapors,
     _poolMercilessEternal,
     _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,

@@ -80,6 +80,7 @@ import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
+import _poolBorborygmosEnraged from "../pool/borborygmos-enraged.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBorosMastiff from "../pool/boros-mastiff.js";
 import _poolBranchingBolt from "../pool/branching-bolt.js";
@@ -636,6 +637,7 @@ import _poolVodaSeaScavenger from "../pool/voda-sea-scavenger.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
 import _poolVoiceOfLaw from "../pool/voice-of-law.js";
 import _poolVoidMirror from "../pool/void-mirror.js";
+import _poolVoidwalk from "../pool/voidwalk.js";
 import _poolVolatileFjord from "../pool/volatile-fjord.js";
 import _poolVolcanicRush from "../pool/volcanic-rush.js";
 import _poolVoltaicKey from "../pool/voltaic-key.js";
@@ -759,6 +761,7 @@ const shard: CardShard = {
     _poolBoldImpaler,
     _poolBondOfRevival,
     _poolBoneyardLurker,
+    _poolBorborygmosEnraged,
     _poolBorealShelf,
     _poolBorosMastiff,
     _poolBranchingBolt,
@@ -1315,6 +1318,7 @@ const shard: CardShard = {
     _poolVoiceOfGrace,
     _poolVoiceOfLaw,
     _poolVoidMirror,
+    _poolVoidwalk,
     _poolVolatileFjord,
     _poolVolcanicRush,
     _poolVoltaicKey,

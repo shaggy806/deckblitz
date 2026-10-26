@@ -436,6 +436,7 @@
   "effect:flash-cast-sacrifice",
   "effect:delayed-trigger-next-cleanup",
   "mechanic:begin-game-on-battlefield",
+  "keyword:cipher",
   "keyword:retrace",
   "cost:untap-symbol-cost",
   "keyword:buyback"

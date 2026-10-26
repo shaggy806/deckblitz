@@ -260,6 +260,7 @@ import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
+import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
 import _poolIncongruity from "../pool/incongruity.js";
@@ -464,6 +465,7 @@ import _poolRootsOfWisdom from "../pool/roots-of-wisdom.js";
 import _poolRosethornAcolyte from "../pool/rosethorn-acolyte.js";
 import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
+import _poolRubblebeltRaiders from "../pool/rubblebelt-raiders.js";
 import _poolRunAwayTogether from "../pool/run-away-together.js";
 import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
@@ -504,6 +506,7 @@ import _poolSigardaHeronsGrace from "../pool/sigarda-herons-grace.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSigiledSentinel from "../pool/sigiled-sentinel.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
+import _poolSkarrgGuildmage from "../pool/skarrg-guildmage.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
@@ -645,6 +648,7 @@ import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
 import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
+import _poolWayOfTheThief from "../pool/way-of-the-thief.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
@@ -949,6 +953,7 @@ const shard: CardShard = {
     _poolHydraOmnivore,
     _poolHydraulicHelper,
     _poolIconOfAncestry,
+    _poolIllnessInTheRanks,
     _poolIllvoiLightJammer,
     _poolImpulsivePilferer,
     _poolIncongruity,
@@ -1153,6 +1158,7 @@ const shard: CardShard = {
     _poolRosethornAcolyte,
     _poolRubblebackRhino,
     _poolRubblebeltMaverick,
+    _poolRubblebeltRaiders,
     _poolRunAwayTogether,
     _poolRustedSentinel,
     _poolRyuseiTheFallingStar,
@@ -1193,6 +1199,7 @@ const shard: CardShard = {
     _poolSightlessGhoul,
     _poolSigiledSentinel,
     _poolSilverFurMaster,
+    _poolSkarrgGuildmage,
     _poolSkimmingStrike,
     _poolSkirkProspector,
     _poolSkitteringSurveyor,
@@ -1334,6 +1341,7 @@ const shard: CardShard = {
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
     _poolWavesOfAggression,
+    _poolWayOfTheThief,
     _poolWebUp,
     _poolWelkinTern,
     _poolWhisperingShade,
