@@ -19,7 +19,7 @@ From the worktree root:
 
 ## Working rules (each cost past agents minutes)
 
-- **Batch your tool calls.** Every turn re-reads your whole context (~200K tokens), so the number of turns is most of what your work costs. Put independent calls in one message: the setup's reads together; one `card:find`/`card:vocab`/Grep per open question, all at once; **write three or four finished card files in one message**; run gen:cards and the typecheck in one Bash call (`npm run gen:cards -w engine && npm run typecheck -w engine`). Past agents batched one turn in ten.
+- **Batch your tool calls.** Every turn re-reads your whole context (~200K tokens), so the number of turns is most of what your work costs. Put independent calls in one message: the setup's reads together; one `card:find`/`card:vocab`/Grep per open question, all at once; **write three or four finished card files in one message**; run gen:cards and the typecheck in one Bash call (`npm run gen:cards -w engine && node scripts/typecheck-turn.mjs npm run typecheck -w engine`). Past agents batched one turn in ten.
 
 - **Read files with the Read tool and search with Grep/Glob** — not `cat | grep | sed | awk` pipelines or `cd … && …` chains, which the worktree guard refuses. Keep shell commands to single npm/npx/git commands run from the worktree root.
 - Keep tool output small: pipe test output through `| tail -40`, and grep the parts you need from long files rather than printing them whole.
@@ -41,7 +41,7 @@ From the worktree root:
 ## Checks (all must pass before you commit)
 
 From the worktree root:
-1. `npm run gen:cards -w engine && npm run typecheck -w engine` — one call (the typecheck covers your test file too). Exit 137 with no type error printed is the out-of-memory killer (the other agents' typechecks run at the same time): just run it again, and don't count it as a failure of yours.
+1. `npm run gen:cards -w engine && node scripts/typecheck-turn.mjs npm run typecheck -w engine` — one call (the typecheck covers your test file too), with a Bash timeout of 600000. **Always typecheck through `typecheck-turn.mjs`, never `npm run typecheck` or `tsc` bare**: it queues you behind the other agents' typechecks (one at a time on a cloud session, since one takes ~6 GB), so "waiting for a turn" for a few minutes is normal. Don't kill it, retry around it or start another typecheck meanwhile; use the wait to review your card files. Exit 137 with no type error printed is still the out-of-memory killer: run it again once, the same way.
 2. `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/`
 
 The lead runs `oracle-parse` (it reads the engine build, which your worktree doesn't have), `card:verify`, the fuzzer and the full suites after integrating — don't.

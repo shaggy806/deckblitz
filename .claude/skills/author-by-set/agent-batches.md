@@ -74,10 +74,15 @@ six-way contention — so the lead does this once:
    `CARD_LIST`). Agent prompt: just the brief's path and its letter.
 
 **On a cloud session** (4 cores, ~15 GB) five agents' typechecks at once
-run the machine out of memory: in batch 156 every agent had one killed (exit
-137) once or twice before it passed. The brief tells them it's that and to
-re-run; it costs them a minute each, so five agents is the cloud session's
-comfortable ceiling, not six.
+run the machine out of memory: the engine's tests typecheck peaks at ~6.3 GB
+(measured 2026-10-26). In batch 156 every agent had one killed (exit 137);
+in batch 164 the agents had their cards written by 22:25 and spent until 22:59
+in OOM kills, heap tweaks and retry loops. So agents typecheck through
+`scripts/typecheck-turn.mjs`, a queue shared by every worktree on the machine
+(one slot per ~7 GB of RAM beyond 3 GB: one on a cloud session, more on a
+bigger machine; `TYPECHECK_SLOTS` overrides it), and wait their turn instead
+of fighting. Five agents stay the cloud session's ceiling: a typecheck is
+~55 s, so the queue costs an agent a few minutes at worst.
 
 Agents run gen:cards, the typecheck and their own test file with `pool.test`
 only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
