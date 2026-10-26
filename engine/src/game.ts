@@ -24867,11 +24867,13 @@ export class Game {
   /**
    * How many genuinely different permanents `ids` holds, for a choice of one
    * of them: two that differ only in their timestamps (tokens made by one
-   * instruction get one each) are interchangeable — nothing a choice of one
-   * leads to can tell them apart.
+   * instruction get one each, and a `controlSinceSeq` with it) are
+   * interchangeable — nothing a choice of one leads to can tell them apart.
    */
   private interchangeableKinds(ids: readonly ObjectId[]): number {
-    return new Set(ids.map((id) => exactTokenShape({ ...this.state.objects[id], timestamp: 0 }))).size;
+    return new Set(
+      ids.map((id) => exactTokenShape({ ...this.state.objects[id], timestamp: 0, controlSinceSeq: 0 })),
+    ).size;
   }
 
   /**
