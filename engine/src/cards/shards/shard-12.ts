@@ -18,6 +18,7 @@ import _poolAladdinsRing from "../pool/aladdins-ring.js";
 import _poolAlmsOfTheVein from "../pool/alms-of-the-vein.js";
 import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
+import _poolAngelicCurator from "../pool/angelic-curator.js";
 import _poolAnointedChorister from "../pool/anointed-chorister.js";
 import _poolAnthousaSetessanHero from "../pool/anthousa-setessan-hero.js";
 import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
@@ -252,6 +253,7 @@ import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
+import _poolGhituEncampment from "../pool/ghitu-encampment.js";
 import _poolGhituJourneymage from "../pool/ghitu-journeymage.js";
 import _poolGhorClanBloodscale from "../pool/ghor-clan-bloodscale.js";
 import _poolGhostLitDrifter from "../pool/ghost-lit-drifter.js";
@@ -747,6 +749,7 @@ const shard: CardShard = {
     _poolAlmsOfTheVein,
     _poolAncestralStatue,
     _poolAncientDen,
+    _poolAngelicCurator,
     _poolAnointedChorister,
     _poolAnthousaSetessanHero,
     _poolAppliedBiomancy,
@@ -981,6 +984,7 @@ const shard: CardShard = {
     _poolGeologicalAppraiser,
     _poolGeralfsMindcrusher,
     _poolGhirapurAetherGrid,
+    _poolGhituEncampment,
     _poolGhituJourneymage,
     _poolGhorClanBloodscale,
     _poolGhostLitDrifter,

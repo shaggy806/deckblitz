@@ -470,7 +470,9 @@ sharing a colour with it; a colourless attacker with intimidate is blockable
 only by artifact creatures), and `skulk` (702.118 — can't be blocked by a
 creature with greater power, compared as blockers are declared; grant it with
 a static's `grantKeywords`, as Behind the Scenes does), and `shadow` (702.28 —
-blocks and is blocked only by creatures with shadow: Dauthi Voidwalker).
+blocks and is blocked only by creatures with shadow: Dauthi Voidwalker), and
+`horsemanship` (702.31 — blocked only by creatures with horsemanship, and blocks
+anything: Portal Three Kingdoms' Shu Cavalry).
 
 **Phasing** (rule 702.26a): `phasing` — as each of its controller's untap
 steps begins, before anything untaps, it phases out, or back in

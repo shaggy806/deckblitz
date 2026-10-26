@@ -480,6 +480,7 @@ import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
 import _poolQuestForTheGoblinLord from "../pool/quest-for-the-goblin-lord.js";
+import _poolRackAndRuin from "../pool/rack-and-ruin.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
 import _poolRakshasaGravecaller from "../pool/rakshasa-gravecaller.js";
 import _poolRalStormConduit from "../pool/ral-storm-conduit.js";
@@ -566,6 +567,7 @@ import _poolShorecrasherMimic from "../pool/shorecrasher-mimic.js";
 import _poolShrikeHarpy from "../pool/shrike-harpy.js";
 import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
 import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
+import _poolSimianGrunts from "../pool/simian-grunts.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
 import _poolSkitterOfLizards from "../pool/skitter-of-lizards.js";
 import _poolSkullStorm from "../pool/skull-storm.js";
@@ -603,6 +605,7 @@ import _poolStrikingPalette from "../pool/striking-palette.js";
 import _poolStromgaldCabal from "../pool/stromgald-cabal.js";
 import _poolSubiraTulzidiCaravanner from "../pool/subira-tulzidi-caravanner.js";
 import _poolSubtlety from "../pool/subtlety.js";
+import _poolSubversion from "../pool/subversion.js";
 import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
@@ -672,6 +675,7 @@ import _poolUnchartedHaven from "../pool/uncharted-haven.js";
 import _poolUndyingEvil from "../pool/undying-evil.js";
 import _poolUnlikelyAlliance from "../pool/unlikely-alliance.js";
 import _poolUnyieldingKrumar from "../pool/unyielding-krumar.js";
+import _poolUrzasBlueprints from "../pool/urzas-blueprints.js";
 import _poolUrzasRebuff from "../pool/urzas-rebuff.js";
 import _poolUthrosResearchCraft from "../pool/uthros-research-craft.js";
 import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
@@ -733,6 +737,7 @@ import _poolYavimayaAncients from "../pool/yavimaya-ancients.js";
 import _poolYavimayaGnats from "../pool/yavimaya-gnats.js";
 import _poolYotianSoldier from "../pool/yotian-soldier.js";
 import _poolYsgardsCall from "../pool/ysgards-call.js";
+import _poolYuanShaoTheIndecisive from "../pool/yuan-shao-the-indecisive.js";
 import _poolZacamaPrimalCalamity from "../pool/zacama-primal-calamity.js";
 import _poolZephyrScribe from "../pool/zephyr-scribe.js";
 import _poolZhurTaaAncient from "../pool/zhur-taa-ancient.js";
@@ -1249,6 +1254,7 @@ const shard: CardShard = {
     _poolPyromanticPilgrim,
     _poolQuestForAncientSecrets,
     _poolQuestForTheGoblinLord,
+    _poolRackAndRuin,
     _poolRakdosTheMuscle,
     _poolRakshasaGravecaller,
     _poolRalStormConduit,
@@ -1335,6 +1341,7 @@ const shard: CardShard = {
     _poolShrikeHarpy,
     _poolShuYunTheSilentTempest,
     _poolSibsigMuckdraggers,
+    _poolSimianGrunts,
     _poolSimicCharm,
     _poolSkitterOfLizards,
     _poolSkullStorm,
@@ -1372,6 +1379,7 @@ const shard: CardShard = {
     _poolStromgaldCabal,
     _poolSubiraTulzidiCaravanner,
     _poolSubtlety,
+    _poolSubversion,
     _poolSuddenStorm,
     _poolSuddenStrength,
     _poolSunSentinel,
@@ -1441,6 +1449,7 @@ const shard: CardShard = {
     _poolUndyingEvil,
     _poolUnlikelyAlliance,
     _poolUnyieldingKrumar,
+    _poolUrzasBlueprints,
     _poolUrzasRebuff,
     _poolUthrosResearchCraft,
     _poolValkyriorSkyrider,
@@ -1502,6 +1511,7 @@ const shard: CardShard = {
     _poolYavimayaGnats,
     _poolYotianSoldier,
     _poolYsgardsCall,
+    _poolYuanShaoTheIndecisive,
     _poolZacamaPrimalCalamity,
     _poolZephyrScribe,
     _poolZhurTaaAncient,

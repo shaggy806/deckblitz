@@ -470,6 +470,7 @@ import _poolQuestForUlasTemple from "../pool/quest-for-ulas-temple.js";
 import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
 import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRadiantSolar from "../pool/radiant-solar.js";
+import _poolRadiantsDragoons from "../pool/radiants-dragoons.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagavanNimblePilferer from "../pool/ragavan-nimble-pilferer.js";
 import _poolRagingGorilla from "../pool/raging-gorilla.js";
@@ -545,6 +546,7 @@ import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
+import _poolShivanPhoenix from "../pool/shivan-phoenix.js";
 import _poolShoalSerpent from "../pool/shoal-serpent.js";
 import _poolShockingSharpshooter from "../pool/shocking-sharpshooter.js";
 import _poolShorelineLooter from "../pool/shoreline-looter.js";
@@ -1220,6 +1222,7 @@ const shard: CardShard = {
     _poolQuickDrawKatana,
     _poolQuietusSpike,
     _poolRadiantSolar,
+    _poolRadiantsDragoons,
     _poolRaffinesTower,
     _poolRagavanNimblePilferer,
     _poolRagingGorilla,
@@ -1295,6 +1298,7 @@ const shard: CardShard = {
     _poolSerpentSpecialist,
     _poolShadowcloakVampire,
     _poolShimmercreep,
+    _poolShivanPhoenix,
     _poolShoalSerpent,
     _poolShockingSharpshooter,
     _poolShorelineLooter,

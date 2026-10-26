@@ -34,6 +34,7 @@ import _poolAngelOfTheDireHour from "../pool/angel-of-the-dire-hour.js";
 import _poolAngelicDestiny from "../pool/angelic-destiny.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
+import _poolAnthroplasm from "../pool/anthroplasm.js";
 import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
 import _poolArchangelsLight from "../pool/archangels-light.js";
@@ -492,6 +493,7 @@ import _poolRakdosDrake from "../pool/rakdos-drake.js";
 import _poolRalsReinforcements from "../pool/rals-reinforcements.js";
 import _poolRampagingMonument from "../pool/rampaging-monument.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
+import _poolRankAndFile from "../pool/rank-and-file.js";
 import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRattlebackApothecary from "../pool/rattleback-apothecary.js";
@@ -820,6 +822,7 @@ const shard: CardShard = {
     _poolAngelicDestiny,
     _poolAnnihilate,
     _poolAntQueen,
+    _poolAnthroplasm,
     _poolAphettoAlchemist,
     _poolArborbackStomper,
     _poolArchangelsLight,
@@ -1278,6 +1281,7 @@ const shard: CardShard = {
     _poolRalsReinforcements,
     _poolRampagingMonument,
     _poolRancorousArchaic,
+    _poolRankAndFile,
     _poolRatcatcherTrainee,
     _poolRatcatcher,
     _poolRattlebackApothecary,

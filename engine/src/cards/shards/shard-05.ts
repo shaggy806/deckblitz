@@ -349,6 +349,7 @@ import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
 import _poolInspiredUltimatum from "../pool/inspired-ultimatum.js";
+import _poolIntervene from "../pool/intervene.js";
 import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
 import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
 import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
@@ -1085,6 +1086,7 @@ const shard: CardShard = {
     _poolInsectoidExterminator,
     _poolInspiredCharge,
     _poolInspiredUltimatum,
+    _poolIntervene,
     _poolIntrepidStablemaster,
     _poolIntrepidTrufflesnout,
     _poolInvasionOfMoag,
