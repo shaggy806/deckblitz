@@ -93,6 +93,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Gilt-Leaf Palace and Secluded Glen (their changeling blocker stale), Sylvan Echoes, Rebellion of
   the Flamekin, Entangling Trap, Hearthcage Giant, Gilt-Leaf Ambush and 54 more — and 20 blocked
   (`B192.json`), "reveal a card from your hand" as an additional cost leading with four.
+- **The rest of Commander 2011 and New Phyrexia whole** (batch 194, the newest-first walk,
+  2026-10-26): no feature built. 64 of 99 authored — Riku of Two Reflections, Tariel, Basandra,
+  Jor Kadeen, Martyr's Bond, the Vows, the Splicers, Shrines and Exarchs, Whispering Specter,
+  Reaper of Sheoldred, Auriok Survivors — four finished by the scaffolder, the rest by five
+  `card-author` agents; 35 blocked (`B194.json`), the Chancellors' opening-hand reveal
+  (`new:opening-hand-actions` — 5) and join forces (`new:join-forces` — 3) leading. Commander 2011
+  and New Phyrexia are whole.
 - **Echo, and Urza's Saga's 90 most-played left** (batch 193, the oldest-first walk, 2026-10-26,
   `keyword:echo`): **built** echo (rule 702.30 — the `echo(cost)` helper, a mana cost or any
   `UnlessOption`; its intervening if the `source-came-under-control-since-last-upkeep` condition,
