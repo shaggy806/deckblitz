@@ -455,6 +455,7 @@ import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
 import _poolRunOver from "../pool/run-over.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
+import _poolSagesRowDenizen from "../pool/sages-row-denizen.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
 import _poolSaibaTrespassers from "../pool/saiba-trespassers.js";
 import _poolSanctify from "../pool/sanctify.js";
@@ -486,10 +487,12 @@ import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigardianPriest from "../pool/sigardian-priest.js";
 import _poolSigiledSkink from "../pool/sigiled-skink.js";
+import _poolSimicManipulator from "../pool/simic-manipulator.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkilledAnimator from "../pool/skilled-animator.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
 import _poolSkybladesBoon from "../pool/skyblades-boon.js";
+import _poolSkyblinderStaff from "../pool/skyblinder-staff.js";
 import _poolSlashOfTalons from "../pool/slash-of-talons.js";
 import _poolSlaughterTheStrong from "../pool/slaughter-the-strong.js";
 import _poolSlimebind from "../pool/slimebind.js";
@@ -505,6 +508,7 @@ import _poolSorinSolemnVisitor from "../pool/sorin-solemn-visitor.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralBinding from "../pool/spectral-binding.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
+import _poolSpellRupture from "../pool/spell-rupture.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSpicyOatmealPizza from "../pool/spicy-oatmeal-pizza.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
@@ -1110,6 +1114,7 @@ const shard: CardShard = {
     _poolRunOver,
     _poolRuneSealedWall,
     _poolSHIELDSpyKit,
+    _poolSagesRowDenizen,
     _poolSaiMasterThopterist,
     _poolSaibaTrespassers,
     _poolSanctify,
@@ -1141,10 +1146,12 @@ const shard: CardShard = {
     _poolShuGrainCaravan,
     _poolSigardianPriest,
     _poolSigiledSkink,
+    _poolSimicManipulator,
     _poolSisterHospitaller,
     _poolSkilledAnimator,
     _poolSkyTerror,
     _poolSkybladesBoon,
+    _poolSkyblinderStaff,
     _poolSlashOfTalons,
     _poolSlaughterTheStrong,
     _poolSlimebind,
@@ -1160,6 +1167,7 @@ const shard: CardShard = {
     _poolSparringMummy,
     _poolSpectralBinding,
     _poolSpectralDenial,
+    _poolSpellRupture,
     _poolSpellweaverEternal,
     _poolSpicyOatmealPizza,
     _poolSpiderBot,

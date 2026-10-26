@@ -247,6 +247,7 @@ import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
+import _poolGreensideWatcher from "../pool/greenside-watcher.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
 import _poolGruulBeastmaster from "../pool/gruul-beastmaster.js";
 import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
@@ -264,6 +265,7 @@ import _poolHeartfire from "../pool/heartfire.js";
 import _poolHeavensGate from "../pool/heavens-gate.js";
 import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHeliodsEmissary from "../pool/heliods-emissary.js";
+import _poolHellraiserGoblin from "../pool/hellraiser-goblin.js";
 import _poolHerdchaserDragon from "../pool/herdchaser-dragon.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
@@ -460,6 +462,7 @@ import _poolRootsOfLife from "../pool/roots-of-life.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
+import _poolRustScarab from "../pool/rust-scarab.js";
 import _poolRuthlessCullblade from "../pool/ruthless-cullblade.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
@@ -893,6 +896,7 @@ const shard: CardShard = {
     _poolGraniteGargoyle,
     _poolGrapplerSpider,
     _poolGratuitousViolence,
+    _poolGreensideWatcher,
     _poolGrimoireOfTheDead,
     _poolGruulBeastmaster,
     _poolGruulGuildmage,
@@ -910,6 +914,7 @@ const shard: CardShard = {
     _poolHeavensGate,
     _poolHeirloomMirror,
     _poolHeliodsEmissary,
+    _poolHellraiserGoblin,
     _poolHerdchaserDragon,
     _poolHiddenFootblade,
     _poolHighlandWeald,
@@ -1106,6 +1111,7 @@ const shard: CardShard = {
     _poolRuneboggle,
     _poolRuneforgeChampion,
     _poolRushOfAdrenaline,
+    _poolRustScarab,
     _poolRuthlessCullblade,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,

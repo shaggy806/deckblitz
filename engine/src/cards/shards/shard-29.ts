@@ -122,6 +122,7 @@ import _poolCuriousCadaver from "../pool/curious-cadaver.js";
 import _poolCuriousForager from "../pool/curious-forager.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
+import _poolDaringSkyjek from "../pool/daring-skyjek.js";
 import _poolDarkDeed from "../pool/dark-deed.js";
 import _poolDarkFortress from "../pool/dark-fortress.js";
 import _poolDarkOffering from "../pool/dark-offering.js";
@@ -158,6 +159,7 @@ import _poolDrownyardBehemoth from "../pool/drownyard-behemoth.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDualShot from "../pool/dual-shot.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
+import _poolDyingWish from "../pool/dying-wish.js";
 import _poolDynavoltTower from "../pool/dynavolt-tower.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
@@ -216,6 +218,7 @@ import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
+import _poolForcedAdaptation from "../pool/forced-adaptation.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
@@ -328,6 +331,7 @@ import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLongshotSquad from "../pool/longshot-squad.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
+import _poolLuminatePrimordial from "../pool/luminate-primordial.js";
 import _poolLurkingRoper from "../pool/lurking-roper.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
 import _poolMabelsMettle from "../pool/mabels-mettle.js";
@@ -463,6 +467,7 @@ import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRoguesGallery from "../pool/rogues-gallery.js";
 import _poolRomanaIi from "../pool/romana-ii.js";
 import _poolRotwidowPack from "../pool/rotwidow-pack.js";
+import _poolRubblehulk from "../pool/rubblehulk.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
@@ -507,12 +512,14 @@ import _poolShorelineLooter from "../pool/shoreline-looter.js";
 import _poolSiegebreakerGiant from "../pool/siegebreaker-giant.js";
 import _poolSigiledSwordOfValeron from "../pool/sigiled-sword-of-valeron.js";
 import _poolSilverKnight from "../pool/silver-knight.js";
+import _poolSimicFluxmage from "../pool/simic-fluxmage.js";
 import _poolSimicGrowthChamber from "../pool/simic-growth-chamber.js";
 import _poolSimicSkySwallower from "../pool/simic-sky-swallower.js";
 import _poolSimulacrumSynthesizer from "../pool/simulacrum-synthesizer.js";
 import _poolSingularityRupture from "../pool/singularity-rupture.js";
 import _poolSkaabWrangler from "../pool/skaab-wrangler.js";
 import _poolSkybeastTracker from "../pool/skybeast-tracker.js";
+import _poolSkygames from "../pool/skygames.js";
 import _poolSlagstoneRefinery from "../pool/slagstone-refinery.js";
 import _poolSlagwoodsBridge from "../pool/slagwoods-bridge.js";
 import _poolSlayersPlate from "../pool/slayers-plate.js";
@@ -601,6 +608,7 @@ import _poolTorturePit from "../pool/torture-pit.js";
 import _poolToweringWaveMystic from "../pool/towering-wave-mystic.js";
 import _poolTrainedCondor from "../pool/trained-condor.js";
 import _poolTraitorousInstinct from "../pool/traitorous-instinct.js";
+import _poolTreasuryThrull from "../pool/treasury-thrull.js";
 import _poolTrialOfStrength from "../pool/trial-of-strength.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTroveTracker from "../pool/trove-tracker.js";
@@ -815,6 +823,7 @@ const shard: CardShard = {
     _poolCuriousForager,
     _poolDailyBugleReporters,
     _poolDamn,
+    _poolDaringSkyjek,
     _poolDarkDeed,
     _poolDarkFortress,
     _poolDarkOffering,
@@ -851,6 +860,7 @@ const shard: CardShard = {
     _poolDrownyardExplorers,
     _poolDualShot,
     _poolDwarvenBloodboiler,
+    _poolDyingWish,
     _poolDynavoltTower,
     _poolEarthKingdomProtectors,
     _poolEchoInspector,
@@ -909,6 +919,7 @@ const shard: CardShard = {
     _poolFoeRazerRegent,
     _poolForTheFamily,
     _poolForbiddenAlchemy,
+    _poolForcedAdaptation,
     _poolFoulRebirth,
     _poolFracturedSanity,
     _poolFrogTongue,
@@ -1021,6 +1032,7 @@ const shard: CardShard = {
     _poolLonelySandbar,
     _poolLongshotSquad,
     _poolLoxodonAnchorite,
+    _poolLuminatePrimordial,
     _poolLurkingRoper,
     _poolLyraArchangelOfDawn,
     _poolMabelsMettle,
@@ -1156,6 +1168,7 @@ const shard: CardShard = {
     _poolRoguesGallery,
     _poolRomanaIi,
     _poolRotwidowPack,
+    _poolRubblehulk,
     _poolRuinsOfTrokair,
     _poolRunedServitor,
     _poolRustlerRampage,
@@ -1200,12 +1213,14 @@ const shard: CardShard = {
     _poolSiegebreakerGiant,
     _poolSigiledSwordOfValeron,
     _poolSilverKnight,
+    _poolSimicFluxmage,
     _poolSimicGrowthChamber,
     _poolSimicSkySwallower,
     _poolSimulacrumSynthesizer,
     _poolSingularityRupture,
     _poolSkaabWrangler,
     _poolSkybeastTracker,
+    _poolSkygames,
     _poolSlagstoneRefinery,
     _poolSlagwoodsBridge,
     _poolSlayersPlate,
@@ -1294,6 +1309,7 @@ const shard: CardShard = {
     _poolToweringWaveMystic,
     _poolTrainedCondor,
     _poolTraitorousInstinct,
+    _poolTreasuryThrull,
     _poolTrialOfStrength,
     _poolTriumphantAdventurer,
     _poolTroveTracker,

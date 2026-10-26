@@ -413,6 +413,7 @@ import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
 import _poolNarsetOfTheAncientWay from "../pool/narset-of-the-ancient-way.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
 import _poolNaturesWay from "../pool/natures-way.js";
+import _poolNavSquadCommandos from "../pool/nav-squad-commandos.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
 import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
@@ -547,6 +548,7 @@ import _poolSignInBlood from "../pool/sign-in-blood.js";
 import _poolSilvanReveler from "../pool/silvan-reveler.js";
 import _poolSilverDeputy from "../pool/silver-deputy.js";
 import _poolSilverquillLecturer from "../pool/silverquill-lecturer.js";
+import _poolSimicKeyrune from "../pool/simic-keyrune.js";
 import _poolSinkholeSurveyor from "../pool/sinkhole-surveyor.js";
 import _poolSkarrgGoliath from "../pool/skarrg-goliath.js";
 import _poolSkeletalWurm from "../pool/skeletal-wurm.js";
@@ -643,6 +645,7 @@ import _poolVectorImperialCapital from "../pool/vector-imperial-capital.js";
 import _poolVengefulDevil from "../pool/vengeful-devil.js";
 import _poolVengefulVampire from "../pool/vengeful-vampire.js";
 import _poolVerdantCrescendo from "../pool/verdant-crescendo.js";
+import _poolVerdantHaven from "../pool/verdant-haven.js";
 import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
 import _poolVigilance from "../pool/vigilance.js";
 import _poolVildinPackAlpha from "../pool/vildin-pack-alpha.js";
@@ -1116,6 +1119,7 @@ const shard: CardShard = {
     _poolNarsetOfTheAncientWay,
     _poolNaturalReclamation,
     _poolNaturesWay,
+    _poolNavSquadCommandos,
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
     _poolNekusarTheMindrazer,
@@ -1250,6 +1254,7 @@ const shard: CardShard = {
     _poolSilvanReveler,
     _poolSilverDeputy,
     _poolSilverquillLecturer,
+    _poolSimicKeyrune,
     _poolSinkholeSurveyor,
     _poolSkarrgGoliath,
     _poolSkeletalWurm,
@@ -1346,6 +1351,7 @@ const shard: CardShard = {
     _poolVengefulDevil,
     _poolVengefulVampire,
     _poolVerdantCrescendo,
+    _poolVerdantHaven,
     _poolViashinoLashclaw,
     _poolVigilance,
     _poolVildinPackAlpha,

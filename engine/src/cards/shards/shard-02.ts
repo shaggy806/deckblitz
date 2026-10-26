@@ -175,6 +175,7 @@ import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
+import _poolDuskmantleSeer from "../pool/duskmantle-seer.js";
 import _poolDutifulReturn from "../pool/dutiful-return.js";
 import _poolEarthServant from "../pool/earth-servant.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
@@ -220,6 +221,7 @@ import _poolForbiddenLore from "../pool/forbidden-lore.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
+import _poolFoundryStreetDenizen from "../pool/foundry-street-denizen.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
 import _poolFreewindFalcon from "../pool/freewind-falcon.js";
 import _poolFreezeInPlace from "../pool/freeze-in-place.js";
@@ -375,10 +377,12 @@ import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-rich
 import _poolMistfolk from "../pool/mistfolk.js";
 import _poolMolderingKarok from "../pool/moldering-karok.js";
 import _poolMoleWorms from "../pool/mole-worms.js";
+import _poolMortusStrider from "../pool/mortus-strider.js";
 import _poolMountain from "../pool/mountain.js";
 import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
+import _poolMysticGenesis from "../pool/mystic-genesis.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
@@ -836,6 +840,7 @@ const shard: CardShard = {
     _poolDuneBeetle,
     _poolDurableHandicraft,
     _poolDuskmantleHouseOfShadow,
+    _poolDuskmantleSeer,
     _poolDutifulReturn,
     _poolEarthServant,
     _poolEarthblighter,
@@ -881,6 +886,7 @@ const shard: CardShard = {
     _poolForceSpike,
     _poolForcefulDenial,
     _poolFortressCyclops,
+    _poolFoundryStreetDenizen,
     _poolFranticSearch,
     _poolFreewindFalcon,
     _poolFreezeInPlace,
@@ -1036,10 +1042,12 @@ const shard: CardShard = {
     _poolMistfolk,
     _poolMolderingKarok,
     _poolMoleWorms,
+    _poolMortusStrider,
     _poolMountain,
     _poolMutalithVortexBeast,
     _poolMycosynthWellspring,
     _poolMyojinOfToweringMight,
+    _poolMysticGenesis,
     _poolNarsetsReversal,
     _poolNavigatorsRuin,
     _poolNeckSnap,

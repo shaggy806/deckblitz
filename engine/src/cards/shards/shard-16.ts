@@ -128,6 +128,7 @@ import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
+import _poolDeathpactAngel from "../pool/deathpact-angel.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
 import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
@@ -137,6 +138,7 @@ import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
+import _poolDomriRade from "../pool/domri-rade.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
@@ -196,6 +198,7 @@ import _poolFerozsBan from "../pool/ferozs-ban.js";
 import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
 import _poolFireSages from "../pool/fire-sages.js";
+import _poolFiremaneAvenger from "../pool/firemane-avenger.js";
 import _poolFiremantleMage from "../pool/firemantle-mage.js";
 import _poolFirespitterWhelp from "../pool/firespitter-whelp.js";
 import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
@@ -305,6 +308,7 @@ import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKazuulWarlord from "../pool/kazuul-warlord.js";
 import _poolKeepsakeGorgon from "../pool/keepsake-gorgon.js";
+import _poolKeymasterRogue from "../pool/keymaster-rogue.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
@@ -853,6 +857,7 @@ const shard: CardShard = {
     _poolDawnglareInvoker,
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
+    _poolDeathpactAngel,
     _poolDeepmuckDesperado,
     _poolDeeprootElite,
     _poolDeepwoodTantiv,
@@ -862,6 +867,7 @@ const shard: CardShard = {
     _poolDesolateLighthouse,
     _poolDiscipleOfMalice,
     _poolDivineGambit,
+    _poolDomriRade,
     _poolDoorOfDestinies,
     _poolDragonTempest,
     _poolDragonTurtle,
@@ -921,6 +927,7 @@ const shard: CardShard = {
     _poolFertilidsFavor,
     _poolFerventCathar,
     _poolFireSages,
+    _poolFiremaneAvenger,
     _poolFiremantleMage,
     _poolFirespitterWhelp,
     _poolFistsOfTheAnvil,
@@ -1030,6 +1037,7 @@ const shard: CardShard = {
     _poolKazanduValley,
     _poolKazuulWarlord,
     _poolKeepsakeGorgon,
+    _poolKeymasterRogue,
     _poolKineticAugur,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,

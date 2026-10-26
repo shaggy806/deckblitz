@@ -140,6 +140,7 @@ import _poolCreepingRenaissance from "../pool/creeping-renaissance.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
+import _poolCrownedCeratok from "../pool/crowned-ceratok.js";
 import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolCrush from "../pool/crush.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
@@ -417,6 +418,7 @@ import _poolOrcishVeteran from "../pool/orcish-veteran.js";
 import _poolOrderOfTheAlabasterHost from "../pool/order-of-the-alabaster-host.js";
 import _poolOrneryDilophosaur from "../pool/ornery-dilophosaur.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
+import _poolOrzhovKeyrune from "../pool/orzhov-keyrune.js";
 import _poolOssification from "../pool/ossification.js";
 import _poolOutOfAir from "../pool/out-of-air.js";
 import _poolOvergrownArmasaur from "../pool/overgrown-armasaur.js";
@@ -872,6 +874,7 @@ const shard: CardShard = {
     _poolCrestedSunmare,
     _poolCrosswayTroublemakers,
     _poolCrowdsFavor,
+    _poolCrownedCeratok,
     _poolCrumblingAshes,
     _poolCrush,
     _poolCrystalDragon,
@@ -1149,6 +1152,7 @@ const shard: CardShard = {
     _poolOrderOfTheAlabasterHost,
     _poolOrneryDilophosaur,
     _poolOrochiLeafcaller,
+    _poolOrzhovKeyrune,
     _poolOssification,
     _poolOutOfAir,
     _poolOvergrownArmasaur,

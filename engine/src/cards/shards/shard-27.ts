@@ -62,6 +62,7 @@ import _poolBloodResearcher from "../pool/blood-researcher.js";
 import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
+import _poolBomberCorps from "../pool/bomber-corps.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
 import _poolBoomBox from "../pool/boom-box.js";
@@ -191,6 +192,8 @@ import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
+import _poolFirefistStriker from "../pool/firefist-striker.js";
+import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
@@ -735,6 +738,7 @@ const shard: CardShard = {
     _poolBloodchiefAscension,
     _poolBloodstoneGoblin,
     _poolBogstomper,
+    _poolBomberCorps,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
     _poolBoomBox,
@@ -864,6 +868,8 @@ const shard: CardShard = {
     _poolFieryJustice,
     _poolFieryTemper,
     _poolFiliThePathfinder,
+    _poolFirefistStriker,
+    _poolFiveAlarmFire,
     _poolFlood,
     _poolFloodwaters,
     _poolFlowstoneWyvern,

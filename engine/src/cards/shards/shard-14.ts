@@ -353,6 +353,7 @@ import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
+import _poolLeylinePhantom from "../pool/leyline-phantom.js";
 import _poolLightningCoreExcavator from "../pool/lightning-core-excavator.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
 import _poolLingeringSouls from "../pool/lingering-souls.js";
@@ -1025,6 +1026,7 @@ const shard: CardShard = {
     _poolLawbringer,
     _poolLeoninVanguard,
     _poolLeveler,
+    _poolLeylinePhantom,
     _poolLightningCoreExcavator,
     _poolLimDulsHighGuard,
     _poolLingeringSouls,

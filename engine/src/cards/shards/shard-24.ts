@@ -297,6 +297,7 @@ import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
+import _poolKillingGlare from "../pool/killing-glare.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
@@ -970,6 +971,7 @@ const shard: CardShard = {
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
     _poolKhenraScrapper,
+    _poolKillingGlare,
     _poolKingSuleiman,
     _poolKinnanBonderProdigy,
     _poolKitesailCorsair,

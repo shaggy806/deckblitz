@@ -483,6 +483,7 @@ import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
 import _poolSandcrafterMage from "../pool/sandcrafter-mage.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
+import _poolSapphireDrake from "../pool/sapphire-drake.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
 import _poolScaleBlessing from "../pool/scale-blessing.js";
@@ -1178,6 +1179,7 @@ const shard: CardShard = {
     _poolSandcrafterMage,
     _poolSandstoneOracle,
     _poolSanguineBond,
+    _poolSapphireDrake,
     _poolSarkhansDragonfire,
     _poolSavageVentmaw,
     _poolScaleBlessing,

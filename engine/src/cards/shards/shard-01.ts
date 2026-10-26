@@ -384,6 +384,7 @@ import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
 import _poolOphidian from "../pool/ophidian.js";
+import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -525,6 +526,7 @@ import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
+import _poolStructuralCollapse from "../pool/structural-collapse.js";
 import _poolStructuralDistortion from "../pool/structural-distortion.js";
 import _poolStun from "../pool/stun.js";
 import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
@@ -1046,6 +1048,7 @@ const shard: CardShard = {
     _poolOgreTaskmaster,
     _poolOminousCemetery,
     _poolOphidian,
+    _poolOrdruunVeteran,
     _poolOssuaryRats,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
@@ -1187,6 +1190,7 @@ const shard: CardShard = {
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
     _poolStormTheSeedcore,
+    _poolStructuralCollapse,
     _poolStructuralDistortion,
     _poolStun,
     _poolSubterraneanTremors,

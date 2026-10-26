@@ -142,6 +142,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Chocobo Bird Token",
   "Citizen Token",
   "Cleric Token",
+  "Cleric Token (Deathpact Return)",
   "Clown Robot Token",
   "Clue Token",
   "Construct Token",

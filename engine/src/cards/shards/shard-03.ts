@@ -55,6 +55,7 @@ import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
+import _poolBurstOfStrength from "../pool/burst-of-strength.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolByInvitationOnly from "../pool/by-invitation-only.js";
 import _poolBygoneMarvels from "../pool/bygone-marvels.js";
@@ -227,6 +228,7 @@ import _poolGrizzledAngler from "../pool/grizzled-angler.js";
 import _poolGruesomeSlaughter from "../pool/gruesome-slaughter.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
+import _poolGuildscornWard from "../pool/guildscorn-ward.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
@@ -682,6 +684,7 @@ const shard: CardShard = {
     _poolBranchblightStalker,
     _poolBrotherhoodPatriarch,
     _poolBurnDownTheHouse,
+    _poolBurstOfStrength,
     _poolBuzzardWaspColony,
     _poolByInvitationOnly,
     _poolBygoneMarvels,
@@ -854,6 +857,7 @@ const shard: CardShard = {
     _poolGruesomeSlaughter,
     _poolGuardianKirin,
     _poolGuardianSunmare,
+    _poolGuildscornWard,
     _poolGutsplitterGang,
     _poolHalimarDepths,
     _poolHammerDropper,

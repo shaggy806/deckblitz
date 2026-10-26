@@ -26,6 +26,7 @@ import _poolArchonOfJustice from "../pool/archon-of-justice.js";
 import _poolArdenvalePaladin from "../pool/ardenvale-paladin.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolArmadilloCloak from "../pool/armadillo-cloak.js";
+import _poolArmoredTransport from "../pool/armored-transport.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArrogantBloodlord from "../pool/arrogant-bloodlord.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
@@ -44,6 +45,7 @@ import _poolAvoidFate from "../pool/avoid-fate.js";
 import _poolAysenHighway from "../pool/aysen-highway.js";
 import _poolAzoriusSkyguard from "../pool/azorius-skyguard.js";
 import _poolBalaGedScorpion from "../pool/bala-ged-scorpion.js";
+import _poolBalustradeSpy from "../pool/balustrade-spy.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
 import _poolBarbedSextant from "../pool/barbed-sextant.js";
 import _poolBarterInBlood from "../pool/barter-in-blood.js";
@@ -705,6 +707,7 @@ const shard: CardShard = {
     _poolArdenvalePaladin,
     _poolArgivianRestoration,
     _poolArmadilloCloak,
+    _poolArmoredTransport,
     _poolArmoryPaladin,
     _poolArrogantBloodlord,
     _poolArtifistAcumen,
@@ -723,6 +726,7 @@ const shard: CardShard = {
     _poolAysenHighway,
     _poolAzoriusSkyguard,
     _poolBalaGedScorpion,
+    _poolBalustradeSpy,
     _poolBanishingKnack,
     _poolBarbedSextant,
     _poolBarterInBlood,

@@ -115,6 +115,7 @@ import _poolClearwaterPathway from "../pool/clearwater-pathway.js";
 import _poolClinquantSkymage from "../pool/clinquant-skymage.js";
 import _poolCloudElemental from "../pool/cloud-elemental.js";
 import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
+import _poolCoercedConfession from "../pool/coerced-confession.js";
 import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
@@ -422,6 +423,7 @@ import _poolNeutralizingBlast from "../pool/neutralizing-blast.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
+import _poolNimbusSwimmer from "../pool/nimbus-swimmer.js";
 import _poolNinthBridgePatrol from "../pool/ninth-bridge-patrol.js";
 import _poolNissaWorldwaker from "../pool/nissa-worldwaker.js";
 import _poolNissasZendikon from "../pool/nissas-zendikon.js";
@@ -826,6 +828,7 @@ const shard: CardShard = {
     _poolClinquantSkymage,
     _poolCloudElemental,
     _poolCloudkinSeer,
+    _poolCoercedConfession,
     _poolCoercedToKill,
     _poolColossodonYearling,
     _poolCombatMedic,
@@ -1133,6 +1136,7 @@ const shard: CardShard = {
     _poolNewHorizons,
     _poolNezumiBladeblesser,
     _poolNimReplica,
+    _poolNimbusSwimmer,
     _poolNinthBridgePatrol,
     _poolNissaWorldwaker,
     _poolNissasZendikon,

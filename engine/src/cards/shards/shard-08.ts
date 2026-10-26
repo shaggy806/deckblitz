@@ -153,6 +153,7 @@ import _poolDetectivesSatchel from "../pool/detectives-satchel.js";
 import _poolDevastate from "../pool/devastate.js";
 import _poolDevilsPlayground from "../pool/devils-playground.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
+import _poolDevourFlesh from "../pool/devour-flesh.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
 import _poolDevoutLightcaster from "../pool/devout-lightcaster.js";
 import _poolDisciplesOfGix from "../pool/disciples-of-gix.js";
@@ -621,6 +622,7 @@ import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
+import _poolUndercityInformer from "../pool/undercity-informer.js";
 import _poolUnderdarkExplorer from "../pool/underdark-explorer.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
@@ -675,6 +677,7 @@ import _poolWindSpirit from "../pool/wind-spirit.js";
 import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
 import _poolWitchOfTheMoors from "../pool/witch-of-the-moors.js";
 import _poolWitherbloomApprentice from "../pool/witherbloom-apprentice.js";
+import _poolWojekHalberdiers from "../pool/wojek-halberdiers.js";
 import _poolWorldlyTutor from "../pool/worldly-tutor.js";
 import _poolWreckingCrew from "../pool/wrecking-crew.js";
 import _poolXerexStrobeKnight from "../pool/xerex-strobe-knight.js";
@@ -861,6 +864,7 @@ const shard: CardShard = {
     _poolDevastate,
     _poolDevilsPlayground,
     _poolDevkarinDissident,
+    _poolDevourFlesh,
     _poolDevouringDeep,
     _poolDevoutLightcaster,
     _poolDisciplesOfGix,
@@ -1329,6 +1333,7 @@ const shard: CardShard = {
     _poolTurbulentWilderness,
     _poolTwistReality,
     _poolUltimateGreenGoblin,
+    _poolUndercityInformer,
     _poolUnderdarkExplorer,
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
@@ -1383,6 +1388,7 @@ const shard: CardShard = {
     _poolWingnutBatOnTheBelfry,
     _poolWitchOfTheMoors,
     _poolWitherbloomApprentice,
+    _poolWojekHalberdiers,
     _poolWorldlyTutor,
     _poolWreckingCrew,
     _poolXerexStrobeKnight,
