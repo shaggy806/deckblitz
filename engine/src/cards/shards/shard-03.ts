@@ -626,6 +626,7 @@ import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWingcrafter from "../pool/wingcrafter.js";
 import _poolWingspanMentor from "../pool/wingspan-mentor.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
+import _poolWizardMentor from "../pool/wizard-mentor.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
 import _poolWoodlandChasm from "../pool/woodland-chasm.js";
@@ -1282,6 +1283,7 @@ const shard: CardShard = {
     _poolWingcrafter,
     _poolWingspanMentor,
     _poolWittyRoastmaster,
+    _poolWizardMentor,
     _poolWoeStrider,
     _poolWondrousCrucible,
     _poolWoodlandChasm,

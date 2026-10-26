@@ -404,6 +404,7 @@ import _poolOjutaisCommand from "../pool/ojutais-command.js";
 import _poolOkibaReckonerRaid from "../pool/okiba-reckoner-raid.js";
 import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
+import _poolOpalCaryatid from "../pool/opal-caryatid.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
@@ -1137,6 +1138,7 @@ const shard: CardShard = {
     _poolOkibaReckonerRaid,
     _poolOltecArchaeologists,
     _poolOnTheJob,
+    _poolOpalCaryatid,
     _poolOrazcaPuzzleDoor,
     _poolOrcishHellraiser,
     _poolOrderOfYawgmoth,

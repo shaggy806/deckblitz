@@ -175,6 +175,7 @@ import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
 import _poolEncroachingDragonstorm from "../pool/encroaching-dragonstorm.js";
 import _poolEndRazeForerunners from "../pool/end-raze-forerunners.js";
 import _poolEndlessScream from "../pool/endless-scream.js";
+import _poolEndlessWurm from "../pool/endless-wurm.js";
 import _poolEnergyStorm from "../pool/energy-storm.js";
 import _poolEnergyTap from "../pool/energy-tap.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
@@ -387,6 +388,7 @@ import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
 import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
 import _poolMesaLynx from "../pool/mesa-lynx.js";
+import _poolMidsummerRevel from "../pool/midsummer-revel.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
 import _poolMindshrieker from "../pool/mindshrieker.js";
@@ -949,6 +951,7 @@ const shard: CardShard = {
     _poolEncroachingDragonstorm,
     _poolEndRazeForerunners,
     _poolEndlessScream,
+    _poolEndlessWurm,
     _poolEnergyStorm,
     _poolEnergyTap,
     _poolEnlightenedConfidant,
@@ -1161,6 +1164,7 @@ const shard: CardShard = {
     _poolMemoryPlunder,
     _poolMerfolkSkydiver,
     _poolMesaLynx,
+    _poolMidsummerRevel,
     _poolMikaeusTheUnhallowed,
     _poolMillstone,
     _poolMindshrieker,

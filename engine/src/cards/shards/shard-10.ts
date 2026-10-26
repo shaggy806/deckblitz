@@ -639,6 +639,7 @@ import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
 import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
 import _poolToothCollector from "../pool/tooth-collector.js";
 import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
+import _poolTorchSong from "../pool/torch-song.js";
 import _poolTormentedSoul from "../pool/tormented-soul.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
 import _poolTranquilCove from "../pool/tranquil-cove.js";
@@ -684,6 +685,7 @@ import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js"
 import _poolWallOfKelp from "../pool/wall-of-kelp.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
+import _poolWarDance from "../pool/war-dance.js";
 import _poolWarWingSiren from "../pool/war-wing-siren.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
@@ -1368,6 +1370,7 @@ const shard: CardShard = {
     _poolTomakulScrapsmith,
     _poolToothCollector,
     _poolTorbranThaneOfRedFell,
+    _poolTorchSong,
     _poolTormentedSoul,
     _poolToxrillTheCorrosive,
     _poolTranquilCove,
@@ -1413,6 +1416,7 @@ const shard: CardShard = {
     _poolWallOfKelp,
     _poolWandOfOrcus,
     _poolWanderingMusicians,
+    _poolWarDance,
     _poolWarWingSiren,
     _poolWarhornBlast,
     _poolWarrenInstigator,

@@ -392,6 +392,7 @@ import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
+import _poolMishrasHelix from "../pool/mishras-helix.js";
 import _poolMoggWarMarshal from "../pool/mogg-war-marshal.js";
 import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
@@ -1149,6 +1150,7 @@ const shard: CardShard = {
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMirrodinAvenged,
+    _poolMishrasHelix,
     _poolMoggWarMarshal,
     _poolMoldgrafScavenger,
     _poolMoltenFrame,

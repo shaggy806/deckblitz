@@ -381,6 +381,7 @@ import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMizziumTank from "../pool/mizzium-tank.js";
+import _poolMobileFort from "../pool/mobile-fort.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
 import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
 import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
@@ -718,9 +719,11 @@ import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
+import _poolWirecat from "../pool/wirecat.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
+import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
@@ -1126,6 +1129,7 @@ const shard: CardShard = {
     _poolMirrorworks,
     _poolMistfireAdept,
     _poolMizziumTank,
+    _poolMobileFort,
     _poolMoleManMoloidMaster,
     _poolMoltenManInfernoIncarnate,
     _poolMonasteryMessenger,
@@ -1463,9 +1467,11 @@ const shard: CardShard = {
     _poolWillowSatyr,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
+    _poolWirecat,
     _poolWorldChampionCelestialWeapon,
     _poolWreathOfGeists,
     _poolWritOfReturn,
+    _poolYawgmothsEdict,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,

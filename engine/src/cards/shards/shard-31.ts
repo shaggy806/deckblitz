@@ -87,6 +87,7 @@ import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBristlingHydra from "../pool/bristling-hydra.js";
 import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
+import _poolBulwark from "../pool/bulwark.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
 import _poolCallOfTheFullMoon from "../pool/call-of-the-full-moon.js";
 import _poolCallOfTheWild from "../pool/call-of-the-wild.js";
@@ -634,6 +635,7 @@ import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSwirlingSpriggan from "../pool/swirling-spriggan.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
+import _poolSymbiosis from "../pool/symbiosis.js";
 import _poolSyrFarenTheHengehammer from "../pool/syr-faren-the-hengehammer.js";
 import _poolT45PowerArmor from "../pool/t-45-power-armor.js";
 import _poolTaintedAether from "../pool/tainted-aether.js";
@@ -707,6 +709,7 @@ import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
+import _poolViashinoWeaponsmith from "../pool/viashino-weaponsmith.js";
 import _poolViolentUrge from "../pool/violent-urge.js";
 import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
@@ -853,6 +856,7 @@ const shard: CardShard = {
     _poolBristlingHydra,
     _poolBroodMonitor,
     _poolBrotherhoodAmbushers,
+    _poolBulwark,
     _poolBurnFromWithin,
     _poolCallOfTheFullMoon,
     _poolCallOfTheWild,
@@ -1400,6 +1404,7 @@ const shard: CardShard = {
     _poolSwarmyard,
     _poolSwirlingSpriggan,
     _poolSylvanSafekeeper,
+    _poolSymbiosis,
     _poolSyrFarenTheHengehammer,
     _poolT45PowerArmor,
     _poolTaintedAether,
@@ -1473,6 +1478,7 @@ const shard: CardShard = {
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,
+    _poolViashinoWeaponsmith,
     _poolViolentUrge,
     _poolVirulentSilencer,
     _poolVisionsOfVillainy,

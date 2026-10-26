@@ -103,6 +103,7 @@ import _poolCascadeSeer from "../pool/cascade-seer.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
+import _poolChildOfGaea from "../pool/child-of-gaea.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
 import _poolChocoboKnights from "../pool/chocobo-knights.js";
 import _poolChokingMiasma from "../pool/choking-miasma.js";
@@ -831,6 +832,7 @@ const shard: CardShard = {
     _poolCastleGarenbrig,
     _poolCaveOfTemptation,
     _poolChiefWargsCompany,
+    _poolChildOfGaea,
     _poolChildOfThorns,
     _poolChocoboKnights,
     _poolChokingMiasma,

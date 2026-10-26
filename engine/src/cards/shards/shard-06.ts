@@ -414,6 +414,7 @@ import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
 import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
 import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
+import _poolOpalArchangel from "../pool/opal-archangel.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
 import _poolOutpostSiege from "../pool/outpost-siege.js";
@@ -643,6 +644,7 @@ import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
 import _poolUrgorosTheEmptyOne from "../pool/urgoros-the-empty-one.js";
 import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
+import _poolVebulid from "../pool/vebulid.js";
 import _poolVecTownships from "../pool/vec-townships.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
@@ -664,6 +666,7 @@ import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWarmindInfantry from "../pool/warmind-infantry.js";
 import _poolWarrant from "../pool/warrant.js";
 import _poolWaterknot from "../pool/waterknot.js";
+import _poolWaylay from "../pool/waylay.js";
 import _poolWeakstone from "../pool/weakstone.js";
 import _poolWeedStrangle from "../pool/weed-strangle.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
@@ -1130,6 +1133,7 @@ const shard: CardShard = {
     _poolObsessiveStitcher,
     _poolOkibaSalvage,
     _poolOminousAsylum,
+    _poolOpalArchangel,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,
     _poolOutpostSiege,
@@ -1359,6 +1363,7 @@ const shard: CardShard = {
     _poolUpdraftElemental,
     _poolUrgorosTheEmptyOne,
     _poolVault11VotersDilemma,
+    _poolVebulid,
     _poolVecTownships,
     _poolVenomLethalProtector,
     _poolVenomcrawler,
@@ -1380,6 +1385,7 @@ const shard: CardShard = {
     _poolWarmindInfantry,
     _poolWarrant,
     _poolWaterknot,
+    _poolWaylay,
     _poolWeakstone,
     _poolWeedStrangle,
     _poolWelcomeTheDead,

@@ -272,6 +272,7 @@ import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
 import _poolHamletbackGoliath from "../pool/hamletback-goliath.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
+import _poolHeadlongRush from "../pool/headlong-rush.js";
 import _poolHeartWolf from "../pool/heart-wolf.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
@@ -1011,6 +1012,7 @@ const shard: CardShard = {
     _poolHamletbackGoliath,
     _poolHardenedAcademic,
     _poolHavocDevils,
+    _poolHeadlongRush,
     _poolHeartWolf,
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,

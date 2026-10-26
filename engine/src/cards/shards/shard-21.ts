@@ -108,6 +108,7 @@ import _poolChargingPaladin from "../pool/charging-paladin.js";
 import _poolChargingTuskodon from "../pool/charging-tuskodon.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
+import _poolChimericStaff from "../pool/chimeric-staff.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
@@ -469,6 +470,7 @@ import _poolRaze from "../pool/raze.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
+import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
@@ -538,6 +540,7 @@ import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
 import _poolSpiderClimb from "../pool/spider-climb.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
 import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
+import _poolSpinedFluke from "../pool/spined-fluke.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
 import _poolStabbingPain from "../pool/stabbing-pain.js";
 import _poolStalkingAssassin from "../pool/stalking-assassin.js";
@@ -807,6 +810,7 @@ const shard: CardShard = {
     _poolChargingTuskodon,
     _poolChartACourse,
     _poolChaseInspiration,
+    _poolChimericStaff,
     _poolChromaticLantern,
     _poolCircleOfFlame,
     _poolCitizenVHelmutZemo,
@@ -1168,6 +1172,7 @@ const shard: CardShard = {
     _poolRazortoothRats,
     _poolReaveSoul,
     _poolRedHerring,
+    _poolRedeem,
     _poolRefuse,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
@@ -1237,6 +1242,7 @@ const shard: CardShard = {
     _poolSpiderClimb,
     _poolSpikedBaloth,
     _poolSpikedRipsaw,
+    _poolSpinedFluke,
     _poolSpringleafParade,
     _poolStabbingPain,
     _poolStalkingAssassin,
