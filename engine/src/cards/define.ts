@@ -810,7 +810,8 @@ export type StaticCondition =
    * Wizard among the creatures you control, each a different creature (a
    * changeling fills any one role). `characteristics.ts`'s `partySizeOf`. */
   | { readonly kind: "full-party" }
-  /** Metalcraft (rule 702.44) — you control three or more artifacts. */
+  /** Metalcraft — you control three or more artifacts, the source among
+   * them when it is one (a static counts its own permanent here). */
   | { readonly kind: "metalcraft" }
   /**
    * A per-turn running total reached `atLeast` (Y'shtola: "if a player lost

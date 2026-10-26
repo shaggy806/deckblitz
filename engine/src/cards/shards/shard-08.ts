@@ -686,6 +686,7 @@ import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
 import _poolTsunami from "../pool/tsunami.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
+import _poolTumbleMagnet from "../pool/tumble-magnet.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
@@ -1470,6 +1471,7 @@ const shard: CardShard = {
     _poolTrustworthyScout,
     _poolTsunami,
     _poolTuktukRubblefort,
+    _poolTumbleMagnet,
     _poolTurbulentWilderness,
     _poolTwistReality,
     _poolUltimateGreenGoblin,

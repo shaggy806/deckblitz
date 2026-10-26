@@ -498,6 +498,7 @@ import _poolRallyTheTroops from "../pool/rally-the-troops.js";
 import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
+import _poolRazorHippogriff from "../pool/razor-hippogriff.js";
 import _poolRealmwright from "../pool/realmwright.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
@@ -1243,6 +1244,7 @@ const shard: CardShard = {
     _poolRampartSmasher,
     _poolRapidAugmenter,
     _poolRavenousIntruder,
+    _poolRazorHippogriff,
     _poolRealmwright,
     _poolRecklessPangolin,
     _poolReclaimingVines,

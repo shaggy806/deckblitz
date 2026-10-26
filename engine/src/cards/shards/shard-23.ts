@@ -196,6 +196,7 @@ import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolElementalMastery from "../pool/elemental-mastery.js";
+import _poolEmbersmith from "../pool/embersmith.js";
 import _poolEmperorCrocodile from "../pool/emperor-crocodile.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
@@ -943,6 +944,7 @@ const shard: CardShard = {
     _poolElderAuntie,
     _poolEldraziConscription,
     _poolElementalMastery,
+    _poolEmbersmith,
     _poolEmperorCrocodile,
     _poolEncampmentKeeper,
     _poolEncouragingAviator,

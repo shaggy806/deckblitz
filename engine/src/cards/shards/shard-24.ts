@@ -649,6 +649,7 @@ import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTrepanationBlade from "../pool/trepanation-blade.js";
 import _poolTributeToHunger from "../pool/tribute-to-hunger.js";
+import _poolTrigonOfCorruption from "../pool/trigon-of-corruption.js";
 import _poolTrollbredGuardian from "../pool/trollbred-guardian.js";
 import _poolTrouble from "../pool/trouble.js";
 import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
@@ -1401,6 +1402,7 @@ const shard: CardShard = {
     _poolTreetopFreedomFighters,
     _poolTrepanationBlade,
     _poolTributeToHunger,
+    _poolTrigonOfCorruption,
     _poolTrollbredGuardian,
     _poolTrouble,
     _poolTvaBureaucrat,

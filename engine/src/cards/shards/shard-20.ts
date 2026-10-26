@@ -83,6 +83,7 @@ import _poolBoggartTrawler from "../pool/boggart-trawler.js";
 import _poolBoldwyrHeavyweights from "../pool/boldwyr-heavyweights.js";
 import _poolBolgOfTheNorth from "../pool/bolg-of-the-north.js";
 import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
+import _poolBondsOfQuicksilver from "../pool/bonds-of-quicksilver.js";
 import _poolBoonReflection from "../pool/boon-reflection.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
 import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
@@ -259,6 +260,7 @@ import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
+import _poolGhalmasWarden from "../pool/ghalmas-warden.js";
 import _poolGhostfire from "../pool/ghostfire.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGiltLeafAmbush from "../pool/gilt-leaf-ambush.js";
@@ -764,6 +766,7 @@ import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWindSail from "../pool/wind-sail.js";
+import _poolWingPuncture from "../pool/wing-puncture.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchesEye from "../pool/witches-eye.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
@@ -883,6 +886,7 @@ const shard: CardShard = {
     _poolBoldwyrHeavyweights,
     _poolBolgOfTheNorth,
     _poolBoltOfKeranos,
+    _poolBondsOfQuicksilver,
     _poolBoonReflection,
     _poolBorosLocket,
     _poolBothersomeQuasit,
@@ -1059,6 +1063,7 @@ const shard: CardShard = {
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
     _poolGerminateRecruits,
+    _poolGhalmasWarden,
     _poolGhostfire,
     _poolGildedSentinel,
     _poolGiltLeafAmbush,
@@ -1564,6 +1569,7 @@ const shard: CardShard = {
     _poolWildCantor,
     _poolWillowrushVerge,
     _poolWindSail,
+    _poolWingPuncture,
     _poolWirewoodGuardian,
     _poolWitchesEye,
     _poolWitchsVengeance,

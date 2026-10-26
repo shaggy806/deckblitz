@@ -1,0 +1,345 @@
+{
+ "batch": "B204",
+ "status": "complete",
+ "ranks": "Scars of Mirrodin (SOM, 2010-10-01): the rest of the set, its 48 left (newest-first walk); engine fix: a static's metalcraft condition counts its own artifact",
+ "authored": [
+  {
+   "name": "Shape Anew",
+   "files": [
+    "engine/src/cards/pool/shape-anew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heavy Arbalest",
+   "files": [
+    "engine/src/cards/pool/heavy-arbalest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tel-Jilad Fallen",
+   "files": [
+    "engine/src/cards/pool/tel-jilad-fallen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sylvok Lifestaff",
+   "files": [
+    "engine/src/cards/pool/sylvok-lifestaff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trigon of Infestation",
+   "files": [
+    "engine/src/cards/pool/trigon-of-infestation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Melt Terrain",
+   "files": [
+    "engine/src/cards/pool/melt-terrain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Instill Infection",
+   "files": [
+    "engine/src/cards/pool/instill-infection.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trigon of Corruption",
+   "files": [
+    "engine/src/cards/pool/trigon-of-corruption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rusted Relic",
+   "files": [
+    "engine/src/cards/pool/rusted-relic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Auriok Edgewright",
+   "files": [
+    "engine/src/cards/pool/auriok-edgewright.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rust Tick",
+   "files": [
+    "engine/src/cards/pool/rust-tick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tumble Magnet",
+   "files": [
+    "engine/src/cards/pool/tumble-magnet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Psychic Miasma",
+   "files": [
+    "engine/src/cards/pool/psychic-miasma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molder Beast",
+   "files": [
+    "engine/src/cards/pool/molder-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezuri's Brigade",
+   "files": [
+    "engine/src/cards/pool/ezuris-brigade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razor Hippogriff",
+   "files": [
+    "engine/src/cards/pool/razor-hippogriff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Auriok Sunchaser",
+   "files": [
+    "engine/src/cards/pool/auriok-sunchaser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vedalken Certarch",
+   "files": [
+    "engine/src/cards/pool/vedalken-certarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bonds of Quicksilver",
+   "files": [
+    "engine/src/cards/pool/bonds-of-quicksilver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flesh Allergy",
+   "files": [
+    "engine/src/cards/pool/flesh-allergy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bleak Coven Vampires",
+   "files": [
+    "engine/src/cards/pool/bleak-coven-vampires.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Painsmith",
+   "files": [
+    "engine/src/cards/pool/painsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wing Puncture",
+   "files": [
+    "engine/src/cards/pool/wing-puncture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vigil for the Lost",
+   "files": [
+    "engine/src/cards/pool/vigil-for-the-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snapsail Glider",
+   "files": [
+    "engine/src/cards/pool/snapsail-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Halt Order",
+   "files": [
+    "engine/src/cards/pool/halt-order.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screeching Silcaw",
+   "files": [
+    "engine/src/cards/pool/screeching-silcaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trigon of Thought",
+   "files": [
+    "engine/src/cards/pool/trigon-of-thought.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embersmith",
+   "files": [
+    "engine/src/cards/pool/embersmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glint Hawk Idol",
+   "files": [
+    "engine/src/cards/pool/glint-hawk-idol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten-Tail Masticore",
+   "files": [
+    "engine/src/cards/pool/molten-tail-masticore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghalma's Warden",
+   "files": [
+    "engine/src/cards/pool/ghalmas-warden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Necrogen Censer",
+   "files": [
+    "engine/src/cards/pool/necrogen-censer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trigon of Mending",
+   "files": [
+    "engine/src/cards/pool/trigon-of-mending.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifesmith",
+   "files": [
+    "engine/src/cards/pool/lifesmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carapace Forger",
+   "files": [
+    "engine/src/cards/pool/carapace-forger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blade-Tribe Berserkers",
+   "files": [
+    "engine/src/cards/pool/blade-tribe-berserkers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lumengrid Drake",
+   "files": [
+    "engine/src/cards/pool/lumengrid-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trigon of Rage",
+   "files": [
+    "engine/src/cards/pool/trigon-of-rage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vulshok Replica",
+   "files": [
+    "engine/src/cards/pool/vulshok-replica.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Tel-Jilad Defiance",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "target creature gains protection from artifacts until end of turn: protection is only a static field, no effect grants it"
+  },
+  {
+   "name": "Soul Parry",
+   "needs": [
+    "replacement:prevent-damage-by-target-this-turn"
+   ],
+   "why": "prevent all damage one or two target creatures would deal this turn"
+  },
+  {
+   "name": "Auriok Replica",
+   "needs": [
+    "replacement:prevent-all-damage-from-chosen-source-this-turn"
+   ],
+   "why": "prevent all damage a source of your choice would deal to you this turn, not just the next time"
+  },
+  {
+   "name": "Ogre Geargrabber",
+   "needs": [
+    "trigger:lose-control-trigger"
+   ],
+   "why": "\"when you lose control of that Equipment, unattach it\" fires on any loss of control"
+  },
+  {
+   "name": "Turn to Slag",
+   "needs": [
+    "filter:attached-to-target"
+   ],
+   "why": "destroy all Equipment attached to the damaged target creature"
+  },
+  {
+   "name": "Fulgent Distraction",
+   "needs": [
+    "filter:attached-to-target"
+   ],
+   "why": "unattach all Equipment attached to the two target creatures"
+  },
+  {
+   "name": "Cerebral Eruption",
+   "needs": [
+    "effect:reveal-top-any-library"
+   ],
+   "why": "reveals the top card of target opponent's library"
+  },
+  {
+   "name": "Memoricide",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a nonland card; search graveyard, hand and library for it"
+  }
+ ]
+}

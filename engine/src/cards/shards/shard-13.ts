@@ -223,6 +223,7 @@ import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
 import _poolFlashCounter from "../pool/flash-counter.js";
 import _poolFlensingRaptor from "../pool/flensing-raptor.js";
+import _poolFleshAllergy from "../pool/flesh-allergy.js";
 import _poolFlesh from "../pool/flesh.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
@@ -637,6 +638,7 @@ import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
 import _poolTeferisHonorGuard from "../pool/teferis-honor-guard.js";
+import _poolTelJiladFallen from "../pool/tel-jilad-fallen.js";
 import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
@@ -699,6 +701,7 @@ import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
+import _poolVulshokReplica from "../pool/vulshok-replica.js";
 import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
 import _poolWarOracle from "../pool/war-oracle.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
@@ -978,6 +981,7 @@ const shard: CardShard = {
     _poolFlaringCinder,
     _poolFlashCounter,
     _poolFlensingRaptor,
+    _poolFleshAllergy,
     _poolFlesh,
     _poolFlexibleWaterbender,
     _poolFlightDeckCoordinator,
@@ -1392,6 +1396,7 @@ const shard: CardShard = {
     _poolTeamAvatar,
     _poolTectonicGiant,
     _poolTeferisHonorGuard,
+    _poolTelJiladFallen,
     _poolTeleminPerformance,
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
@@ -1454,6 +1459,7 @@ const shard: CardShard = {
     _poolVoltaicWhip,
     _poolVowToErebor,
     _poolVulshokMorningstar,
+    _poolVulshokReplica,
     _poolWarMachineAvengingArsenal,
     _poolWarOracle,
     _poolWardenOfEvosIsle,
