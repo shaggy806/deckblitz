@@ -173,6 +173,7 @@ import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
 import _poolEject from "../pool/eject.js";
+import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
@@ -467,6 +468,7 @@ import _poolRealityHeist from "../pool/reality-heist.js";
 import _poolReaverDrone from "../pool/reaver-drone.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolRecklessRacer from "../pool/reckless-racer.js";
+import _poolReclusiveWight from "../pool/reclusive-wight.js";
 import _poolReduceInStature from "../pool/reduce-in-stature.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
@@ -491,6 +493,8 @@ import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
 import _poolRubblebeltRaiders from "../pool/rubblebelt-raiders.js";
 import _poolRunAwayTogether from "../pool/run-away-together.js";
+import _poolRuneOfProtectionArtifacts from "../pool/rune-of-protection-artifacts.js";
+import _poolRuneOfProtectionBlack from "../pool/rune-of-protection-black.js";
 import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
@@ -638,6 +642,7 @@ import _poolTranscendentMaster from "../pool/transcendent-master.js";
 import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
+import _poolTreetopRangers from "../pool/treetop-rangers.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
 import _poolTrugaCliffcharger from "../pool/truga-cliffcharger.js";
@@ -902,6 +907,7 @@ const shard: CardShard = {
     _poolEarthRift,
     _poolEaterOfTheDead,
     _poolEject,
+    _poolElectryte,
     _poolElementalMasterpiece,
     _poolElvishFury,
     _poolEmeriaShatteredSkyclave,
@@ -1196,6 +1202,7 @@ const shard: CardShard = {
     _poolReaverDrone,
     _poolRecklessLackey,
     _poolRecklessRacer,
+    _poolReclusiveWight,
     _poolReduceInStature,
     _poolRegeneration,
     _poolReinforcedRonin,
@@ -1220,6 +1227,8 @@ const shard: CardShard = {
     _poolRubblebeltMaverick,
     _poolRubblebeltRaiders,
     _poolRunAwayTogether,
+    _poolRuneOfProtectionArtifacts,
+    _poolRuneOfProtectionBlack,
     _poolRustedSentinel,
     _poolRyuseiTheFallingStar,
     _poolSacrifice,
@@ -1367,6 +1376,7 @@ const shard: CardShard = {
     _poolTraumaticRevelation,
     _poolTravelersAmulet,
     _poolTreeguardDuo,
+    _poolTreetopRangers,
     _poolTresserhornSinks,
     _poolTrinketMage,
     _poolTrugaCliffcharger,

@@ -532,6 +532,7 @@ import _poolSimicManipulator from "../pool/simic-manipulator.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkilledAnimator from "../pool/skilled-animator.js";
 import _poolSkirkRidgeExhumer from "../pool/skirk-ridge-exhumer.js";
+import _poolSkitteringSkirge from "../pool/skittering-skirge.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
 import _poolSkybladesBoon from "../pool/skyblades-boon.js";
 import _poolSkyblinderStaff from "../pool/skyblinder-staff.js";
@@ -651,6 +652,7 @@ import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
+import _poolVenomousFangs from "../pool/venomous-fangs.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
 import _poolVeteranOfTheDepths from "../pool/veteran-of-the-depths.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
@@ -1248,6 +1250,7 @@ const shard: CardShard = {
     _poolSisterHospitaller,
     _poolSkilledAnimator,
     _poolSkirkRidgeExhumer,
+    _poolSkitteringSkirge,
     _poolSkyTerror,
     _poolSkybladesBoon,
     _poolSkyblinderStaff,
@@ -1367,6 +1370,7 @@ const shard: CardShard = {
     _poolVampireChampion,
     _poolVaultSkirge,
     _poolVenomizedCat,
+    _poolVenomousFangs,
     _poolVergeRangers,
     _poolVeteranOfTheDepths,
     _poolVexingGull,

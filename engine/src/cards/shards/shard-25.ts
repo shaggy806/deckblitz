@@ -593,6 +593,7 @@ import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
+import _poolTalasExplorer from "../pool/talas-explorer.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
@@ -1301,6 +1302,7 @@ const shard: CardShard = {
     _poolSweepTheSkies,
     _poolSynthInfiltrator,
     _poolTaintedPeak,
+    _poolTalasExplorer,
     _poolTameshiRealityArchitect,
     _poolTarSnare,
     _poolTatteredDrake,

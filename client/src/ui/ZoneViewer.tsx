@@ -157,13 +157,16 @@ export function ZoneViewer({
           </h2>
           {selection ? (
             <span className="zone-viewer-head-actions">
-              <span className="muted">
-                choose {selection.min === selection.max
-                  ? selection.min
-                  : `${selection.min}-${selection.max}`}
-                {' '}
-                ({picked.length} picked)
-              </span>
+              {/* Nothing to pick (a look at a hand): no count to show. */}
+              {selection.max > 0 ? (
+                <span className="muted">
+                  choose {selection.min === selection.max
+                    ? selection.min
+                    : `${selection.min}-${selection.max}`}
+                  {' '}
+                  ({picked.length} picked)
+                </span>
+              ) : null}
               {onCollapse ? (
                 <button type="button" onClick={onCollapse}>
                   View board

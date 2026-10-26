@@ -11149,6 +11149,7 @@
    "family": "static:block-additional-creature",
    "example": "Lairwatch Giant: whenever this blocks two or more creatures, it gains first strike until end of turn"
   },
+<<<<<<< HEAD
   "cost:remove-counter-from-other-permanent-or-suspended-card": {
    "family": "cost:remove-counters-from-chosen",
    "example": "Rift Elemental: remove a time counter from a permanent you control or a suspended card you own"
@@ -11236,6 +11237,31 @@
   "cost:morph-discard-card": {
    "family": "cost:morph-reveal-card",
    "example": "Gathan Raiders: Morph—Discard a card"
+=======
+  "duration:until-a-player-casts-creature-spell": {
+   "family": "effect:set-types-temporary",
+   "example": "Soul Sculptor: target creature becomes an enchantment and loses all abilities until a player casts a creature spell"
+  },
+  "filter:least-toughness-among-all-creatures": {
+   "family": "filter:least-among-its-controller",
+   "example": "Purging Scythe: deals 2 damage to the creature with the least toughness (you choose among ties)"
+  },
+  "trigger:state-trigger-hand-change": {
+   "family": "trigger:state-trigger",
+   "example": "Veiled Crocodile: when a player has no cards in hand \u2014 state triggers aren't checked after hand changes mid-resolution"
+  },
+  "static:cant-attack-block-unless-greater-power-joins": {
+   "family": "condition:no-other-creature-greater-power-condition",
+   "example": "Okk: can't attack unless a creature with greater power also attacks"
+  },
+  "effect:sacrifice-unless-pay-its-mana-cost": {
+   "family": "effect:lose-life-unless-pay",
+   "example": "Pendrell Flux: enchanted creature has \"at the beginning of your upkeep, sacrifice this creature unless you pay its mana cost\""
+  },
+  "effect:look-at-hand-of-target-spell-controller": {
+   "family": "effect:look-at-target-player-hand",
+   "example": "Lay Bare: counter target spell, then look at its controller's hand"
+>>>>>>> origin/main
   }
  }
 }

@@ -576,6 +576,7 @@ import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
 import _poolSoltariVisionary from "../pool/soltari-visionary.js";
 import _poolSonicBurst from "../pool/sonic-burst.js";
+import _poolSorcerousSight from "../pool/sorcerous-sight.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
@@ -1322,6 +1323,7 @@ const shard: CardShard = {
     _poolSoldeviMachinist,
     _poolSoltariVisionary,
     _poolSonicBurst,
+    _poolSorcerousSight,
     _poolSparkTrooper,
     _poolSpectralCloak,
     _poolSpiderManWebSpinner,
